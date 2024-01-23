@@ -4,8 +4,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { IonRadio } from '@ionic/angular/standalone';
-import { IonRadioGroup } from '@ionic/angular';
+import { IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
 import { RadioComponent } from './radio.component';
 
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
