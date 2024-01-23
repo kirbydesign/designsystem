@@ -615,8 +615,8 @@ export class PageComponent
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate
       : typeof this.toolbarTitle === 'string'
-          ? this.simpleToolbarTitleTemplate
-          : defaultTitleTemplate;
+        ? this.simpleToolbarTitleTemplate
+        : defaultTitleTemplate;
 
     if (this.toolbarTitleClick.observed && this.hasInteractiveTitle === undefined) {
       this.hasInteractiveTitle = true;
