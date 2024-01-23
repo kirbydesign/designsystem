@@ -103,11 +103,9 @@
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "7.6.4",
-    "@ionic/angular-standalone-codemods": "^0.1.0",
     "@nrwl/angular": "15.3.0",
     "@nx/angular": "16.8.1",
     "@types/prismjs": "1.9.0",
-    "@types/shelljs": "^0.8.15",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
@@ -117,7 +115,6 @@
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
     "rxjs": "7.8.1",
-    "shelljs": "^0.8.5",
     "swiper": "^9.3.2",
     "tslib": "^2.0.3",
     "zone.js": "0.13.3"
@@ -202,6 +199,8 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run sync-node-version && lint-staged",
+      "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
   }
