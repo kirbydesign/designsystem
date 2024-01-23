@@ -1,1 +1,1 @@
-export * from './ionic-config';
+export * from './kirby-ionic.module';
