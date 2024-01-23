@@ -1,4 +1,11 @@
-import { componentOnReady, IonicConfig } from '@ionic/core';
+import { NgModule } from '@angular/core';
+import { provideIonicAngular } from '@ionic/angular/standalone';
+import { componentOnReady } from '@ionic/core';
+
+@NgModule({
+  providers: [provideIonicAngular({ mode: 'ios', _testing: true })],
+})
+class IonicTestingModule {}
 
 export class TestHelper {
   public static readonly _init = TestHelper.muteIonicReInitializeWarning();
@@ -21,11 +28,7 @@ export class TestHelper {
     console.warn = patchedWarn;
   }
 
-  public static ionicModuleForTest = IonicModule.forRoot({
-    mode: 'ios',
-    _testing: true,
-    get: () => {}, // Prevents Ionic "config.get is not a function" errors
-  } as IonicConfig);
+  public static ionicModuleForTest = IonicTestingModule;
 
   /*
    * Checks for the Web Component(s) being ready,

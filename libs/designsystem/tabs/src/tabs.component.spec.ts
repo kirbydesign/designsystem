@@ -1,8 +1,8 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 import { TabsComponent } from './tabs.component';
 
 const { size } = DesignTokenHelper;
@@ -12,7 +12,7 @@ describe('TabsComponent', () => {
   const isNonTouchDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const createHost = createComponentFactory({
-    imports: [MockModule(IonicModule)],
+    providers: [provideIonicAngular({ mode: 'ios', _testing: true })],
     component: TabsComponent,
     declarations: [],
   });

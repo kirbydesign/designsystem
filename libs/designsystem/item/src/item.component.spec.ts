@@ -1,11 +1,11 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 import { ItemComponent, ItemSize } from './item.component';
 
 const { itemHeight, size } = DesignTokenHelper;
@@ -16,7 +16,8 @@ describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
 
   const createHost = createHostFactory({
-    imports: [MockModule(IonicModule), IconModule],
+    imports: [IconModule],
+    providers: [provideIonicAngular({ mode: 'ios', _testing: true })],
     component: ItemComponent,
   });
 
