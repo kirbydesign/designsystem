@@ -1,4 +1,4 @@
-import { IonItem, IonRadio } from '@ionic/angular/standalone';
+import { IonItem, IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
@@ -18,7 +18,7 @@ describe('RadioComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: RadioComponent,
-    declarations: MockComponents(ItemComponent, IonItem, IonRadio),
+    declarations: MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup),
   });
 
   describe('by default', () => {

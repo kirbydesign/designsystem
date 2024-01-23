@@ -5,6 +5,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { IonRadio } from '@ionic/angular/standalone';
+import { IonRadioGroup } from '@ionic/angular';
 import { RadioComponent } from './radio.component';
 
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
@@ -15,7 +16,7 @@ const size = DesignTokenHelper.size;
 describe('RadioComponent', () => {
   const createComponent = createComponentFactory({
     component: RadioComponent,
-    imports: [TestHelper.ionicModuleForTest, IonRadio],
+    imports: [TestHelper.ionicModuleForTest, IonRadio, IonRadioGroup],
   });
 
   let spectator: Spectator<RadioComponent>;
