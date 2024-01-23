@@ -111,8 +111,9 @@
 </cookbook-example-viewer>
 
 <p>
-  By default (i.e. when not using the native datepicker) the value supplied to the input should be formatted according to the current
-  locale. When opting into the native datepicker, the value should be in the
+  By default (i.e. when not using the native datepicker) the value supplied to the input should be
+  formatted according to the current locale. When opting into the native datepicker, the value
+  should be in the
   <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Date_and_time_formats#date_strings">
     Date strings format
   </a>
@@ -129,6 +130,32 @@
     the placeholder will be
     <code>dd.mm.åååå</code>
   </em>
+</p>
+
+<h4>🧪 Experimental: Standard HTML date input (native date picker)</h4>
+<cookbook-example-viewer [html]="inputDateNativeExample.template">
+  <cookbook-form-field-input-date-native-example
+    [size]="size"
+    #inputDateNativeExample
+  ></cookbook-form-field-input-date-native-example>
+</cookbook-example-viewer>
+
+<p>
+  Please note: The input UI generally varies from browser to browser (
+  <cite>
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date"
+      target="_blank"
+      rel="noopener"
+    >
+      MDN
+    </a>
+  </cite>
+  ). This may not adhere to the visual preferences for your project.
+</p>
+<p>
+  However, a platform native date picker has several advantages out of the box, such as being
+  accessible and having built-in localization.
 </p>
 
 <h3>Disabled</h3>
