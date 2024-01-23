@@ -111,9 +111,9 @@ export class ModalWrapperComponent
 
   get contentTitleElement(): ElementRef<HTMLElement> {
     /* 
-      contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
-      Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
-    */
+        contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
+        Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
+      */
     if (!this._contentTitleElement && this._hasCollapsibleTitle) {
       this.changeDetector.detectChanges();
     }
