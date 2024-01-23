@@ -41,7 +41,7 @@ import {
   IonToolbar,
   NavController,
 } from '@ionic/angular/standalone';
-import { ScrollDetail } from '@ionic/core';
+import { componentOnReady, ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
@@ -758,7 +758,7 @@ export class PageComponent
     // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
     customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
       // Ensure toolbar and buttons have been rendered and has dimensions:
-      this.ionToolbarElement.nativeElement.componentOnReady().then((toolbar) => {
+      componentOnReady(this.ionToolbarElement.nativeElement, (toolbar) => {
         let startButtonsWidth = 0;
         let endButtonsWidth = 0;
 

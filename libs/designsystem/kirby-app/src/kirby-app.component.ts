@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonApp } from '@ionic/angular/standalone';
+import { componentOnReady } from '@ionic/core';
 
 @Component({
   selector: 'kirby-app',
@@ -18,7 +19,9 @@ export class AppComponent implements AfterContentInit {
   private ionAppElement: ElementRef<HTMLIonAppElement>;
 
   ngAfterContentInit(): void {
-    this.ionAppElement.nativeElement.componentOnReady().then(() => this.registerInputs());
+    componentOnReady(this.ionAppElement.nativeElement, () => {
+      this.registerInputs();
+    });
   }
 
   registerInputs() {

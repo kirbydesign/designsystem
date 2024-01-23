@@ -1,4 +1,5 @@
 import { ElementRef, Injectable, Renderer2 } from '@angular/core';
+import { componentOnReady } from '@ionic/core';
 
 @Injectable()
 export class IonicElementPartHelper {
@@ -7,7 +8,9 @@ export class IonicElementPartHelper {
   public async setPart(partName: string, ionicElementRef: ElementRef, selector: string) {
     // Ensure custom element has been defined and rendered
     await customElements.whenDefined(ionicElementRef.nativeElement.localName);
-    const customElement = await ionicElementRef.nativeElement.componentOnReady();
+    const customElement = await new Promise<HTMLElement>((resolve) => {
+      componentOnReady(ionicElementRef.nativeElement, (element) => resolve(element));
+    });
 
     const partElement: HTMLElement = customElement.shadowRoot.querySelector(selector);
     if (!partElement) return;

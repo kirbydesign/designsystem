@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IonApp } from '@ionic/angular/standalone';
@@ -17,11 +17,7 @@ import { AppComponent } from './kirby-app.component';
     },
   ],
 })
-export class IonAppMockComponent {
-  constructor(private elementRef: ElementRef) {
-    this.elementRef.nativeElement.componentOnReady = () => Promise.resolve();
-  }
-}
+export class IonAppMockComponent {}
 
 describe('AppComponent', () => {
   let component: AppComponent;

@@ -1,4 +1,4 @@
-import { IonicConfig } from '@ionic/core';
+import { componentOnReady, IonicConfig } from '@ionic/core';
 
 export class TestHelper {
   public static readonly _init = TestHelper.muteIonicReInitializeWarning();
@@ -54,10 +54,9 @@ export class TestHelper {
 
   /* Checks for the Ionic Web Component being ready, ie. the component is hydrated and styles applied */
   public static async ionComponentOnReady(element: Element): Promise<void> {
-    const componentOnReady = (element as any).componentOnReady as () => Promise<void>;
-    if (typeof componentOnReady === 'function') {
-      await componentOnReady.bind(element)();
-    }
+    await new Promise<void>((resolve) => {
+      componentOnReady(element, () => resolve());
+    });
   }
 
   public static async whenTrue(
