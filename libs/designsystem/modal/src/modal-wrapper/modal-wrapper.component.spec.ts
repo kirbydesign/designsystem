@@ -63,12 +63,12 @@ describe('ModalWrapperComponent', () => {
 
   describe("when 'collapseTitle' is enabled", () => {
     /* 
-          Whether the title is displayed & truncated is not tested. 
-          This is the responsibility of the ionic components; we assume
-          they're working as intended. 
-    
-          If needed, it should be implemented as an integration test. 
-        */
+      Whether the title is displayed & truncated is not tested. 
+      This is the responsibility of the ionic components; we assume
+      they're working as intended. 
+
+      If needed, it should be implemented as an integration test. 
+    */
 
     let ionContentElement: HTMLIonContentElement;
     let ionTitleElement: HTMLIonTitleElement;

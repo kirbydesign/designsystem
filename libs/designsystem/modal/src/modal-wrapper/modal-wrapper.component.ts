@@ -17,7 +17,6 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import { ScrollDetail } from '@ionic/angular/standalone';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
@@ -31,7 +30,14 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
-import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  ScrollDetail,
+} from '@ionic/angular/standalone';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalConfig, ShowAlertCallback } from './config/modal-config';
@@ -105,9 +111,9 @@ export class ModalWrapperComponent
 
   get contentTitleElement(): ElementRef<HTMLElement> {
     /* 
-            contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
-            Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
-          */
+      contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
+      Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
+    */
     if (!this._contentTitleElement && this._hasCollapsibleTitle) {
       this.changeDetector.detectChanges();
     }
