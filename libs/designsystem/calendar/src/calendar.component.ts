@@ -15,9 +15,7 @@ import {
 } from '@angular/core';
 import {
   add,
-  differenceInDays,
   eachDayOfInterval,
-  endOfMonth,
   endOfWeek,
   format,
   getYear,

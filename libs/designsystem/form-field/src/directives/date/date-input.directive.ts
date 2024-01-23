@@ -14,7 +14,6 @@ import Inputmask from 'inputmask/lib/inputmask';
 
 @Directive({
   standalone: true,
-  selector: '[kirby-input][type="date"]',
 })
 export class DateInputDirective implements AfterViewInit {
   @HostListener('input')

@@ -7,7 +7,6 @@ import { ThemeColor } from '@kirbydesign/core';
   standalone: true,
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: `kirby-avatar[themeColor],
-             kirby-badge[themeColor],
              kirby-card[themeColor],
              kirby-icon[themeColor],
              kirby-progress-circle-ring[themeColor],
