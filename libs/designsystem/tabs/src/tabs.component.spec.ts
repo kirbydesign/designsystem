@@ -2,7 +2,7 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
-import { provideIonicAngular } from '@ionic/angular/standalone';
+import { IonTabs, provideIonicAngular } from '@ionic/angular/standalone';
 import { TabsComponent } from './tabs.component';
 
 const { size } = DesignTokenHelper;
@@ -12,6 +12,7 @@ describe('TabsComponent', () => {
   const isNonTouchDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const createHost = createComponentFactory({
+    imports: [IonTabs],
     providers: [provideIonicAngular({ mode: 'ios', _testing: true })],
     component: TabsComponent,
     declarations: [],

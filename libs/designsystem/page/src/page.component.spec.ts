@@ -26,6 +26,7 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import {
   PageActionsComponent,
   PageActionsDirective,
@@ -97,6 +98,7 @@ describe('PageComponent', () => {
       IonRefresher,
       IonTitle,
       IonToolbar,
+      SpinnerModule,
     ],
     declarations: [
       PageContentComponent,

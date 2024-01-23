@@ -35,7 +35,7 @@ describe('DropdownComponent (popover version)', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [TestHelper.ionicModuleForTest, ItemModule],
+      imports: [TestHelper.ionicModuleForTest, IonItem, ItemModule],
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
