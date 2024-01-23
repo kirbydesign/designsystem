@@ -1,7 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { provideIonicAngular } from '@ionic/angular/standalone';
 import { MenuComponent } from '../menu';
 import { ItemModule } from './src';
 
@@ -10,7 +9,6 @@ describe('ItemComponent in a MenuComponent', () => {
 
   const createHost = createHostFactory({
     imports: [MockModule(IconModule), ItemModule],
-    providers: [provideIonicAngular()],
     component: MenuComponent,
   });
 
