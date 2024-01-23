@@ -22,6 +22,7 @@ describe('Modal Component', () => {
       </kirby-modal>
     `
     );
+    TestHelper.disableAnimationsInTest();
   });
 
   afterEach(() => {
@@ -34,7 +35,7 @@ describe('Modal Component', () => {
     });
 
     it('should be dismissable', () => {
-      expect(spectator.component.canDismiss()).toBeTrue();
+      expect(spectator.component.canDismiss).toBeTrue();
     });
 
     it('should have a collapsible title', () => {
@@ -49,6 +50,20 @@ describe('Modal Component', () => {
       expect(spectator.component.flavor).toBe('modal');
     });
   });
+
+  // it('should have correct height when customHeight is set', () => {
+  //   spectator.setInput('customHeight', '200px');
+  //   spectator.setInput('open', true);
+  //   spectator.detectChanges();
+  //   const modalElement = spectator.query('ion-modal') as HTMLIonModalElement;
+  //   const modalWrapper = modalElement.shadowRoot.querySelector(
+  //     'kirby-modal-wrapper'
+  //   ) as HTMLElement;
+
+  //   const modalElementHeight = modalWrapper.style.height;
+
+  //   expect(modalElementHeight).toBe('200px');
+  // });
 
   describe('events', () => {
     it('should emit the willPresent event, when ion-modal emit its own willPresent event', () => {
