@@ -5,7 +5,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { IonRadioGroup } from '@ionic/angular/standalone';
+import { IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { Observable, of } from 'rxjs';
 
@@ -24,7 +24,14 @@ describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
     declarations: [RadioComponent, ListItemTemplateDirective],
-    imports: [TestHelper.ionicModuleForTest, FormsModule, ReactiveFormsModule, FlagComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      IonRadioGroup,
+      IonRadio,
+      FormsModule,
+      ReactiveFormsModule,
+      FlagComponent,
+    ],
   });
 
   describe('with plain binding', () => {
