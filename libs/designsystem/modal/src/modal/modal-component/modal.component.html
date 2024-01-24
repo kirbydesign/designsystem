@@ -1,8 +1,8 @@
 <ion-modal
-  class="kirby-modal kirby-overlay"
+  class="kirby-modal kirby-overlay kirby-modal-{{ size }}"
+  [ngClass]="flavor === 'compact' ? 'kirby-modal-compact' : 'kirby-' + flavor"
   [isOpen]="open"
   [trigger]="trigger"
-  [ngClass]="'kirby-modal-' + size"
   [canDismiss]="_canDismiss"
   [style.--kirby-modal-height]="customHeight"
   (willPresent)="_onWillPresent($event)"
@@ -12,9 +12,16 @@
 >
   <ng-template>
     <kirby-modal-wrapper
+      *ngIf="flavor !== 'compact'"
       [config]="_config"
       [content]="template"
       [scrollDisabled]="scrollDisabled"
     ></kirby-modal-wrapper>
+
+    <kirby-modal-compact-wrapper
+      *ngIf="flavor === 'compact'"
+      [config]="_config"
+      [content]="template"
+    ></kirby-modal-compact-wrapper>
   </ng-template>
 </ion-modal>

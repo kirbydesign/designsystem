@@ -1,3 +1,7 @@
+<!-- Outlet for ModalController -->
 <ng-container
   *ngComponentOutlet="config.component; injector: componentPropsInjector"
 ></ng-container>
+
+<!-- Outlet for projected content -->
+<ng-container *ngTemplateOutlet="content"></ng-container>
