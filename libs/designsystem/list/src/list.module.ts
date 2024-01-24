@@ -4,7 +4,13 @@ import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
-import { IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
+import {
+  IonItemDivider,
+  IonItemOptions,
+  IonItemSliding,
+  IonLabel,
+  IonListHeader,
+} from '@ionic/angular/standalone';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListExperimentalComponent } from './list-experimental/list-experimental.component';
@@ -40,7 +46,16 @@ const declarations = [
 
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, IconModule, SpinnerModule, IonItemSliding, IonLabel, IonItemOptions],
+  imports: [
+    CommonModule,
+    IconModule,
+    SpinnerModule,
+    IonItemSliding,
+    IonLabel,
+    IonItemOptions,
+    IonItemDivider,
+    IonListHeader,
+  ],
   exports: exportedDeclarations,
   providers: [],
 })
