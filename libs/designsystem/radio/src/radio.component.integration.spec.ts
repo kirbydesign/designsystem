@@ -66,7 +66,7 @@ describe('RadioComponent in RadioGroup', () => {
 
   const createHost = createHostFactory({
     component: RadioGroupComponent,
-    declarations: [RadioComponent],
+    declarations: [RadioComponent, MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup)],
     imports: [TestHelper.ionicModuleForTest],
   });
 
