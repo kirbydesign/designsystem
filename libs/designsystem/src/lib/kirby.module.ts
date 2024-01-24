@@ -34,7 +34,6 @@ import { ListModule } from '@kirbydesign/designsystem/list';
 import { RadioModule } from '@kirbydesign/designsystem/radio';
 import {
   AffixDirective,
-  DateInputDirective,
   FormFieldModule,
   InputComponent,
   TextareaComponent,
@@ -93,7 +92,6 @@ const standaloneComponents = [
   TextareaComponent,
   InputComponent,
   AffixDirective,
-  DateInputDirective,
   DividerComponent,
   ThemeColorDirective,
   SegmentedControlComponent,

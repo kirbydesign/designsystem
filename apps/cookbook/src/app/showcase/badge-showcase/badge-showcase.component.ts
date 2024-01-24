@@ -58,7 +58,7 @@ export class BadgeShowcaseComponent {
     {
       name: '--kirby-badge-elevation',
       description: 'Sets the box-shadow property of the badge.',
-      defaultValue: 'none',
+      defaultValue: 'none | [custom elevation on white badge]',
     },
     {
       name: '--kirby-badge-color',

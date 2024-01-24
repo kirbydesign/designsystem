@@ -31,7 +31,7 @@ export class StockChartJSService extends ChartJSService {
     highlightedElements?: ChartHighlightedElements;
   }): void {
     const { dataLabelOptions, ...superArgs } = args;
-    this.dataLabelOptions = args.dataLabelOptions || null;
+    this.dataLabelOptions = dataLabelOptions || null;
     super.renderChart(superArgs);
   }
 

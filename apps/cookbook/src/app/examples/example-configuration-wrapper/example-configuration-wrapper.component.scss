@@ -53,9 +53,6 @@ $button-z-index: $card-z-index + 1;
       position: fixed;
       margin-top: utils.$border-radius;
       opacity: 0.5;
-      transition-property: transform, border-radius;
-      transition-duration: utils.get-transition-duration('short');
-      transition-timing-function: utils.get-transition-easing('enter-exit');
       transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
       transform-origin: top right;
       overflow: initial;
@@ -68,13 +65,21 @@ $button-z-index: $card-z-index + 1;
       }
 
       &:hover,
-      &:active {
+      &:active,
+      &:focus-within {
         opacity: unset;
         transform: none;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
 
         --kirby-border-color: initial;
+      }
+
+      &:hover,
+      &:active {
+        transition-duration: utils.get-transition-duration('short');
+        transition-property: transform, border-radius;
+        transition-timing-function: utils.get-transition-easing('enter-exit');
       }
     }
   }

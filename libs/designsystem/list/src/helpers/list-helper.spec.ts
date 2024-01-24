@@ -26,14 +26,14 @@ describe('list helper', () => {
         loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
       } as ListComponent;
       loadMoreEmitSpy = spyOn(component.loadOnDemand, 'emit').and.callThrough();
-      component.loadOnDemand.subscribe((_loadMoreEvent: LoadOnDemandEvent) => {});
+      component.loadOnDemand.subscribe(() => {});
     });
 
     it('should emit load more event, if load on demand is enabled and is not loading', () => {
       component.isLoadOnDemandEnabled = true;
       component._isLoading = false;
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component.loadOnDemand.emit).toHaveBeenCalledTimes(1);
     });
@@ -41,7 +41,7 @@ describe('list helper', () => {
     it('should not emit load more event, if load more is not enabled', () => {
       component.isLoadOnDemandEnabled = false;
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
@@ -49,7 +49,7 @@ describe('list helper', () => {
     it('should not emit load more event, if is loading', () => {
       component._isLoading = true;
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
@@ -58,7 +58,7 @@ describe('list helper', () => {
       component._isLoading = true;
       component.isLoadOnDemandEnabled = false;
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
@@ -66,7 +66,7 @@ describe('list helper', () => {
     it('should not emit load more event, if load on demand is disabled', () => {
       component.isLoadOnDemandEnabled = false;
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
@@ -75,7 +75,7 @@ describe('list helper', () => {
       component._isLoading = false;
       component.isLoadOnDemandEnabled = true;
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component._isLoading).toBeTruthy();
     });
@@ -86,7 +86,7 @@ describe('list helper', () => {
         event.complete();
       });
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component._isLoading).toBeFalsy();
     });
@@ -96,7 +96,7 @@ describe('list helper', () => {
         event.complete(true);
       });
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
     });
@@ -107,7 +107,7 @@ describe('list helper', () => {
       });
       component.isLoadOnDemandEnabled = true;
 
-      listHelper.onLoadOnDemand(component, null);
+      listHelper.onLoadOnDemand(component);
 
       expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });

@@ -73,6 +73,14 @@ h3,
   line-height: functions.line-height('m');
 }
 
+h4,
+.h4,
+.kirby-text-normal-bold {
+  font-size: functions.font-size('n');
+  font-weight: functions.font-weight('bold');
+  line-height: functions.line-height('n');
+}
+
 p,
 .p,
 .kirby-text-normal {

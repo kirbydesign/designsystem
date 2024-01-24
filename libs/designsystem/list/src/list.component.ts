@@ -24,7 +24,7 @@ import {
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
-import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
+import { LoadOnDemandEvent } from './list.event';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -194,8 +194,8 @@ export class ListComponent implements OnInit, OnChanges {
     }
   }
 
-  _onLoadOnDemand(event?: LoadOnDemandEventData) {
-    this.listHelper.onLoadOnDemand(this, event);
+  _onLoadOnDemand() {
+    this.listHelper.onLoadOnDemand(this);
   }
 
   defaultTrackBy(index: number): any {

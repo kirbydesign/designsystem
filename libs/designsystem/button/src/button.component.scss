@@ -275,7 +275,7 @@ $button-margin: utils.size('xxxs');
     min-width: unset;
 
     &:not(:disabled) {
-      box-shadow: utils.get-elevation(4);
+      box-shadow: utils.get-elevation(8);
     }
   }
 }

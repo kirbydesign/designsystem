@@ -14,7 +14,7 @@
   <code>NgModule</code>
   's constructor to add custom icons.
   <!-- prettier-ignore -->
-  <cookbook-code-viewer language="ts">import {{ '{' }} IconRegistryService {{ '}' }} from '@kirbydesign/designsystem';
+  <cookbook-code-viewer language="ts">import {{ '{' }} IconRegistryService {{ '}' }} from '&#64;kirbydesign/designsystem';
 
 const customIcons = [
     {{ '{' }} 
@@ -24,7 +24,7 @@ const customIcons = [
     ...
 ];
 
-@NgModule({{ '{' }} ... {{ '}' }} )
+&#64;NgModule({{ '{' }} ... {{ '}' }} )
 export class MyModule {{ '{' }} 
   constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
     iconRegistryService.addIcons(customIcons);

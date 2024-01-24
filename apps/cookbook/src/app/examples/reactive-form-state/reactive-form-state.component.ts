@@ -8,16 +8,4 @@ import { FormGroup } from '@angular/forms';
 })
 export class ReactiveFormStateComponent {
   @Input() form: FormGroup;
-
-  isRequired(controlId: string): boolean {
-    const control = this.form.get(controlId);
-
-    if (!control) {
-      return false;
-    }
-
-    const errors = control.errors;
-
-    return !!errors && !!errors.required;
-  }
 }
