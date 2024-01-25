@@ -253,6 +253,8 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
+    this.autoUpdatePosition();
+
     this.attachDocumentClickEventHandler();
     this.attachHostClickEventHandler();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
@@ -265,6 +267,8 @@ export class FloatingDirective implements OnInit, OnDestroy {
     if (this.isDisabled || !this.isShown) {
       return;
     }
+
+    this.removeAutoUpdaterRef();
 
     this.tearDownDocumentClickEventHandling();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
@@ -302,7 +306,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private updateHostElementPosition(): void {
-    if (!this.reference) {
+    if (!this.reference || !this.isShown) {
       return;
     }
 
