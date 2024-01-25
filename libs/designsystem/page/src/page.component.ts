@@ -41,7 +41,8 @@ import {
   IonToolbar,
   NavController,
 } from '@ionic/angular/standalone';
-import { componentOnReady, ScrollDetail } from '@ionic/core';
+import { componentOnReady } from '@ionic/core';
+import type { ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
