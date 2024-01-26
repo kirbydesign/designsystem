@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { KirbyModule } from '@kirbydesign/designsystem';
+import { IonIcon } from '@ionic/angular/standalone';
 import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 
 import { IphoneModule } from '../iphone/iphone.module';
@@ -25,6 +26,7 @@ import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './
     IphoneModule,
     RouterModule,
     CodeViewerModule,
+    IonIcon,
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
