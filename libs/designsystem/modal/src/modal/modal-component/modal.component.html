@@ -11,17 +11,18 @@
   (didDismiss)="_onDidDismiss($event)"
 >
   <ng-template>
-    <kirby-modal-wrapper
-      *ngIf="flavor !== 'compact'"
-      [config]="_config"
-      [content]="template"
-      [scrollDisabled]="scrollDisabled"
-    ></kirby-modal-wrapper>
-
     <kirby-modal-compact-wrapper
-      *ngIf="flavor === 'compact'"
+      *ngIf="flavor === 'compact'; else modalWrapper"
       [config]="_config"
       [content]="template"
     ></kirby-modal-compact-wrapper>
   </ng-template>
 </ion-modal>
+
+<ng-template #modalWrapper>
+  <kirby-modal-wrapper
+    [config]="_config"
+    [content]="template"
+    [scrollDisabled]="scrollDisabled"
+  ></kirby-modal-wrapper>
+</ng-template>
