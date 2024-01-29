@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -18,6 +19,8 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { first, fromEvent, takeUntil } from 'rxjs';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 import {
   DrawerSupplementaryAction,
   ModalCompactWrapperComponent,
@@ -43,7 +46,7 @@ import { CanDismissHelper } from '../services';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent implements OnChanges {
+export class ModalComponent implements OnChanges, AfterContentInit {
   @ViewChild(IonModal, { static: true, read: ElementRef })
   modalElement: ElementRef<HTMLIonModalElement>;
   @ViewChild(IonContent) ionContent: IonContent;
@@ -87,7 +90,11 @@ export class ModalComponent implements OnChanges {
 
   _canDismiss: ShowAlertCallback | boolean = true;
 
-  constructor(private canDismissHelper: CanDismissHelper) {}
+  constructor(private canDismissHelper: CanDismissHelper, private windowRef: WindowRef) {}
+
+  ngAfterContentInit(): void {
+    this.handleBrowserBackButton(this.modalElement.nativeElement);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updateModalConfigOnChange(changes);
@@ -116,6 +123,15 @@ export class ModalComponent implements OnChanges {
   public _onDidDismiss(event: CustomEvent<OverlayEventDetail>) {
     this.open = false;
     this.didDismiss.emit(event);
+  }
+
+  private handleBrowserBackButton(modal: HTMLIonModalElement) {
+    const popStateEvent$ = fromEvent(this.windowRef.nativeWindow, 'popstate').pipe(first());
+    const modalClose$ = fromEvent(modal, 'ionModalDidDismiss');
+
+    popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
+      modal.dismiss();
+    });
   }
 
   private updateModalConfigOnChange(changes: SimpleChanges) {
