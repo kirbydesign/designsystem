@@ -1,7 +1,7 @@
 <ion-modal
   class="kirby-modal kirby-overlay kirby-modal-{{ size }}"
   [ngClass]="flavor === 'compact' ? 'kirby-modal-compact' : 'kirby-' + flavor"
-  [isOpen]="open"
+  [isOpen]="isOpen"
   [trigger]="trigger"
   [canDismiss]="_canDismiss"
   [style.--kirby-modal-height]="customHeight"

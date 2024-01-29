@@ -52,7 +52,7 @@ export class ModalComponent implements OnChanges, AfterContentInit {
   @ViewChild(IonContent) ionContent: IonContent;
   @ContentChild(TemplateRef, { static: true }) template: TemplateRef<unknown>;
 
-  @Input() open = false;
+  @Input() isOpen = false;
   @Input() trigger: string;
   @Input() size: ModalSize = 'medium';
   @Input() scrollDisabled = false;
@@ -121,7 +121,7 @@ export class ModalComponent implements OnChanges, AfterContentInit {
   }
 
   public _onDidDismiss(event: CustomEvent<OverlayEventDetail>) {
-    this.open = false;
+    this.isOpen = false;
     this.didDismiss.emit(event);
   }
 
