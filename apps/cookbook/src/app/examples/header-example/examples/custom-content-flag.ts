@@ -7,11 +7,19 @@ const config = {
   <kirby-badge size="sm" themeColor="success"></kirby-badge> Custom content in flag section
 </div>
 </kirby-header>`,
+  styles: [
+    `.custom-section {
+display: flex;
+align-items: center;
+gap: 6px;
+}`,
+  ],
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
+  styles: config.styles,
 })
 export class HeaderExampleCustomContentFlagComponent {
   template: string = config.template;
