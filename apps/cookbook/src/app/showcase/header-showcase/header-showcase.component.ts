@@ -100,7 +100,7 @@ export class HeaderShowcaseComponent {
     {
       name: '*kirbyHeaderCustomFlagSection',
       description:
-        'For custom content to be shown in the flag section the `*kirbyHeaderCustomFlagSection` directive can be applied to any `div` element.\n\n**Please note: You should not have Custom Content in the flag section and Kirby-flag present at the same time.',
+        'For custom content to be shown in the flag section the `*kirbyHeaderCustomFlagSection` directive can be applied to any host or container element.\n\n**Please note: You should not have Custom Content in the flag section and Kirby-flag present at the same time.',
     },
   ];
 
