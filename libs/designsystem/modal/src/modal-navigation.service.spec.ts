@@ -188,7 +188,7 @@ describe('ModalNavigationService', () => {
           let modalRouteActivated = false;
           const subscription = (
             await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-          ).activated$.subscribe((_) => (modalRouteActivated = true));
+          ).activated$.subscribe(() => (modalRouteActivated = true));
 
           expect(modalRouteActivated).toBeTrue();
           subscription.unsubscribe();
@@ -224,7 +224,7 @@ describe('ModalNavigationService', () => {
                 let modalRouteActivated = false;
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).activated$.subscribe((_) => (modalRouteActivated = true));
+                ).activated$.subscribe(() => (modalRouteActivated = true));
 
                 await zone.run(() =>
                   router.navigate([
@@ -244,7 +244,7 @@ describe('ModalNavigationService', () => {
                 await zone.run(() => router.navigate(['home', 'modal-lazy', ...backdropSegments]));
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).activated$.subscribe((_) => (modalRouteActivated = true));
+                ).activated$.subscribe(() => (modalRouteActivated = true));
 
                 await zone.run(() =>
                   router.navigate([
@@ -271,7 +271,7 @@ describe('ModalNavigationService', () => {
                 );
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).activated$.subscribe((_) => (modalRouteActivated = true));
+                ).activated$.subscribe(() => (modalRouteActivated = true));
 
                 await zone.run(() =>
                   router.navigate([
@@ -320,7 +320,7 @@ describe('ModalNavigationService', () => {
                 let modalRouteActivated = false;
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).activated$.subscribe((_) => (modalRouteActivated = true));
+                ).activated$.subscribe(() => (modalRouteActivated = true));
 
                 await zone.run(() =>
                   router.navigate([
@@ -345,7 +345,7 @@ describe('ModalNavigationService', () => {
                 );
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).activated$.subscribe((_) => (modalRouteActivated = true));
+                ).activated$.subscribe(() => (modalRouteActivated = true));
 
                 await zone.run(() =>
                   router.navigate([
@@ -370,7 +370,7 @@ describe('ModalNavigationService', () => {
                 let modalRouteDeactivated = false;
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+                ).deactivated$.subscribe(() => (modalRouteDeactivated = true));
                 await zone.run(() =>
                   router.navigate([
                     'home',
@@ -390,7 +390,7 @@ describe('ModalNavigationService', () => {
                 let modalRouteDeactivated = false;
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+                ).deactivated$.subscribe(() => (modalRouteDeactivated = true));
 
                 await zone.run(() => router.navigate(['home', 'modal-lazy', ...backdropSegments]));
                 await zone.run(() => router.navigate(['']));
@@ -403,7 +403,7 @@ describe('ModalNavigationService', () => {
                 let modalRouteDeactivated = false;
                 const subscription = (
                   await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-                ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+                ).deactivated$.subscribe(() => (modalRouteDeactivated = true));
 
                 await zone.run(() =>
                   router.navigate([

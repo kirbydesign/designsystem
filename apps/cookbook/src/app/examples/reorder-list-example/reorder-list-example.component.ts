@@ -62,8 +62,6 @@ export class ReorderListExampleComponent {
   ];
   headerTexts = ['skjul/vis', 'flyt'];
 
-  constructor() {}
-
   doReorderItem(ev: ReorderEvent) {
     ev.complete(this.items);
   }

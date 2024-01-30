@@ -25,14 +25,13 @@ SOFTWARE.
  */
 export function deepCopy<Tp>(tgt: Tp): Tp {
   let cp: Tp;
-  const ptn: number = 0;
   if (tgt === null) {
     cp = tgt;
   } else if (tgt instanceof Date) {
     cp = new Date((tgt as any).getTime()) as any;
   } else if (Array.isArray(tgt)) {
     cp = [] as any;
-    (tgt as any[]).forEach((v, i, arr) => {
+    (tgt as any[]).forEach((v) => {
       (cp as any).push(v);
     });
     cp = (cp as any).map((n: any) => deepCopy<any>(n));

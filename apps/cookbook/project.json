@@ -74,18 +74,18 @@
     "serve": {
       "executor": "@angular-builders/custom-webpack:dev-server",
       "options": {
-        "browserTarget": "cookbook:build:development"
+        "buildTarget": "cookbook:build:development"
       },
       "configurations": {
         "production": {
-          "browserTarget": "cookbook:build:production"
+          "buildTarget": "cookbook:build:production"
         }
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "cookbook:build"
+        "buildTarget": "cookbook:build"
       }
     },
     "test": {

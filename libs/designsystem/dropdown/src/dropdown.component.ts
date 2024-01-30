@@ -532,12 +532,12 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this._onTouched();
   }
 
-  _onPopoverClick(event: PointerEvent) {
+  _onPopoverClick() {
     this.close();
   }
 
   @HostListener('blur', ['$event'])
-  _onBlur(event?: FocusEvent) {
+  _onBlur() {
     if (this.usePopover) return;
     this.close();
     this._onTouched();

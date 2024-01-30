@@ -124,6 +124,7 @@ describe('ChartComponent', () => {
         it(`should not update properties that are not ${property}`, () => {
           const updateFnSpies = Object.entries(scenarios)
             .filter(([key]) => key !== property)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             .map(([_, { updateFn }]) => spyOn<any>(component, updateFn));
           expect(updateFnSpies.length).not.toBe(0);
 

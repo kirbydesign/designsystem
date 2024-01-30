@@ -62,10 +62,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "flows:build:production"
+          "buildTarget": "flows:build:production"
         },
         "development": {
-          "browserTarget": "flows:build:development"
+          "buildTarget": "flows:build:development"
         }
       },
       "defaultConfiguration": "development"
