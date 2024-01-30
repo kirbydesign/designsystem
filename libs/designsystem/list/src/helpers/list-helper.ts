@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { ListComponent } from '../list.component';
-import { LoadOnDemandEventData } from '../list.event';
 
 type Section<T> = {
   name: string;
@@ -15,7 +14,7 @@ type SectionWithStandAloneItems<T> = {
 
 @Injectable()
 export class ListHelper {
-  public onLoadOnDemand(component: ListComponent, _event: LoadOnDemandEventData) {
+  public onLoadOnDemand(component: ListComponent) {
     if (component.isLoadOnDemandEnabled && !component._isLoading) {
       component._isLoading = true;
       component.loadOnDemand.emit({

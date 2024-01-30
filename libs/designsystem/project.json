@@ -9,8 +9,7 @@
       "executor": "@nx/angular:package",
       "options": {
         "tsConfig": "libs/designsystem/tsconfig.lib.json",
-        "project": "libs/designsystem/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
+        "project": "libs/designsystem/ng-package.json"
       }
     },
     "test": {
@@ -24,10 +23,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/designsystem/**/*.ts", "libs/designsystem/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "generators": {
