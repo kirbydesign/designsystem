@@ -14,7 +14,7 @@ const config = {
       <p detail>Telephone</p>
     </kirby-label>
     <kirby-label slot="end">
-      <p detail>contact@mail.com</p>
+      <p detail>contact&#64;mail.com</p>
     </kirby-label>
   </kirby-item>
 </kirby-card>`,

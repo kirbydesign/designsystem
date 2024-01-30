@@ -917,7 +917,7 @@ describe('ChartJSService', () => {
 
       chartAnnotations.forEach((chartAnnotation) => {
         const annotationDefaults = TEST_CHART_ANNOTATIONS_CONFIG[chartAnnotation.type];
-        Object.entries(annotationDefaults).forEach(([key, _]) => {
+        Object.entries(annotationDefaults).forEach(([key]) => {
           expect(chartAnnotation[key]).toEqual(annotationDefaults[key]);
         });
       });

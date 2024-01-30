@@ -7,7 +7,6 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { IconModule } from '@kirbydesign/designsystem/icon';
 
 // Counter for generating unique element ids
 let uniqueId = 0;

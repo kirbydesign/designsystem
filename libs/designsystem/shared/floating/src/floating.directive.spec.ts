@@ -276,12 +276,6 @@ describe('FloatingDirective', () => {
 
     describe('onMouseClick', () => {
       describe('click inside host', () => {
-        let event: Event;
-
-        beforeEach(() => {
-          event = { target: component.hostElementRef.nativeElement } as Event;
-        });
-
         it('should change isShown when closeOnSelect true', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;

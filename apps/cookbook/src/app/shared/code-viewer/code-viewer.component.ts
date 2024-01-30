@@ -5,7 +5,6 @@ import {
   ElementRef,
   Input,
   OnChanges,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { highlightElement } from 'prismjs';
@@ -76,7 +75,7 @@ export class CodeViewerComponent implements AfterViewInit, OnChanges {
     highlightElement(this.codeElement.nativeElement);
   }
 
-  ngOnChanges(_: SimpleChanges): void {
+  ngOnChanges(): void {
     this.languageTitle = this.language.toUpperCase();
     const supportedLanguage = this.supportedLanguages[this.language];
     this.codeViewerLanguage = `language-${supportedLanguage}`;

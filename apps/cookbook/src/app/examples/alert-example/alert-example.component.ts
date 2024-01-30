@@ -28,7 +28,7 @@ this.modalController.showAlert(config);`;
 
   private static stringify(value: any): string {
     return JSON.stringify(value, null, '\t')
-      .replace(/"(\w+)\":/g, '$1:')
+      .replace(/"(\w+)":/g, '$1:')
       .replace(/"/g, "'");
   }
 
