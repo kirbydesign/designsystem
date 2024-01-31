@@ -1,9 +1,13 @@
 <ion-modal
   class="kirby-modal kirby-overlay kirby-modal-{{ size }}"
-  [ngClass]="flavor === 'compact' ? 'kirby-modal-compact' : 'kirby-' + flavor"
+  [ngClass]="[
+    flavor === 'compact' ? 'kirby-modal-compact' : 'kirby-' + flavor,
+    interactWithBackground ? 'interact-with-background' : ''
+  ]"
   [isOpen]="isOpen"
   [trigger]="trigger"
   [canDismiss]="_canDismiss"
+  [showBackdrop]="!interactWithBackground"
   [style.--kirby-modal-height]="customHeight"
   (willPresent)="_onWillPresent($event)"
   (didPresent)="_onDidPresent($event)"

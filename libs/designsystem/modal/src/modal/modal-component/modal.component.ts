@@ -110,6 +110,10 @@ export class ModalComponent implements OnChanges, AfterContentInit {
 
   public _onWillPresent(event: CustomEvent<OverlayEventDetail>) {
     this.willPresent.emit(event);
+
+    if (this.interactWithBackground) {
+      this.windowRef.nativeWindow.document.body.classList.add('allow-background-scroll');
+    }
   }
 
   public _onDidPresent(event: CustomEvent<OverlayEventDetail>) {
@@ -117,6 +121,10 @@ export class ModalComponent implements OnChanges, AfterContentInit {
   }
 
   public _onWillDismiss(event: CustomEvent<OverlayEventDetail>) {
+    if (this.interactWithBackground) {
+      this.windowRef.nativeWindow.document.body.classList.remove('allow-background-scroll');
+    }
+
     this.willDismiss.emit(event);
   }
 
