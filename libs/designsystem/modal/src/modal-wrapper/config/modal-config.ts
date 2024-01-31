@@ -26,16 +26,12 @@ export interface ModalConfig {
   cssClass?: string | string[];
 }
 
-export type ModalControllerConfig = ModalConfig & {
-  component: any;
-};
-
 /**
  * Here we extend Data and Route from Angular to create a covariant type ModalEnabledRoutes.
  * This can be used in place of the Routes type when configuring route-based modals in the array
  * of routes passed to RouterModule in applications.
  */
-export type RoutedModalConfig = ModalConfig;
+export type RoutedModalConfig = Omit<ModalConfig, 'component'>;
 
 interface ModalConfigRouteData extends Data {
   modalConfig?: RoutedModalConfig;
