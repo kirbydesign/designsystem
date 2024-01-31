@@ -22,11 +22,6 @@ describe('Modal Component', () => {
       </kirby-modal>
     `
     );
-    TestHelper.disableAnimationsInTest();
-  });
-
-  afterEach(() => {
-    TestHelper.disableAnimationsInTest();
   });
 
   describe('by default', () => {
@@ -35,14 +30,14 @@ describe('Modal Component', () => {
     });
 
     it('should be dismissable', () => {
-      expect(spectator.component.canDismiss).toBeTrue();
+      expect(spectator.component._canDismiss).toBeTrue();
     });
 
     it('should have a collapsible title', () => {
       expect(spectator.component.collapseTitle).toBeTrue();
     });
 
-    it('should enable scroll', () => {
+    it('should not have scroll disabled', () => {
       expect(spectator.component.scrollDisabled).toBeFalse();
     });
 
@@ -51,22 +46,8 @@ describe('Modal Component', () => {
     });
   });
 
-  // it('should have correct height when customHeight is set', () => {
-  //   spectator.setInput('customHeight', '200px');
-  //   spectator.setInput('open', true);
-  //   spectator.detectChanges();
-  //   const modalElement = spectator.query('ion-modal') as HTMLIonModalElement;
-  //   const modalWrapper = modalElement.shadowRoot.querySelector(
-  //     'kirby-modal-wrapper'
-  //   ) as HTMLElement;
-
-  //   const modalElementHeight = modalWrapper.style.height;
-
-  //   expect(modalElementHeight).toBe('200px');
-  // });
-
   describe('events', () => {
-    it('should emit the willPresent event, when ion-modal emit its own willPresent event', () => {
+    it('should emit the willPresent event, when ion-modal emits its own willPresent event', () => {
       const willPresentSpy = spyOn(spectator.component.willPresent, 'emit');
 
       spectator.triggerEventHandler(IonModal, 'willPresent', new CustomEvent('willPresent'));
@@ -74,7 +55,7 @@ describe('Modal Component', () => {
       expect(willPresentSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should emit the didPresent event, when ion-modal emit its own didPresent event', () => {
+    it('should emit the didPresent event, when ion-modal emits its own didPresent event', () => {
       const didPresentSpy = spyOn(spectator.component.didPresent, 'emit');
 
       spectator.triggerEventHandler(IonModal, 'didPresent', new CustomEvent('didPresent'));
@@ -82,7 +63,7 @@ describe('Modal Component', () => {
       expect(didPresentSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should emit the willDismiss event, when ion-modal emit its own willDismiss event', () => {
+    it('should emit the willDismiss event, when ion-modal emits its own willDismiss event', () => {
       const willDismissSpy = spyOn(spectator.component.willDismiss, 'emit');
 
       spectator.triggerEventHandler(IonModal, 'willDismiss', new CustomEvent('willDismiss'));
@@ -90,7 +71,7 @@ describe('Modal Component', () => {
       expect(willDismissSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should emit the didDismiss event, when ion-modal emit its own didDismiss event', () => {
+    it('should emit the didDismiss event, when ion-modal emits its own didDismiss event', () => {
       const didDismissSpy = spyOn(spectator.component.didDismiss, 'emit');
 
       spectator.triggerEventHandler(IonModal, 'didDismiss', new CustomEvent('didDismiss'));
