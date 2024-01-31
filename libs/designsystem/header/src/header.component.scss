@@ -141,6 +141,12 @@ $margin-inline: utils.size('s');
   margin-bottom: utils.size('xxxs');
 }
 
+.flag .custom-flag-section {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+}
+
 .title {
   margin-bottom: utils.size('xxxxs');
 
