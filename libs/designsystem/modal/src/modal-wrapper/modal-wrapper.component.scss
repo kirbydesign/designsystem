@@ -75,8 +75,6 @@ ion-header {
   --header-height: 0px;
   --footer-height: 0px;
 
-  height: var(--height);
-
   &.drawer ion-header ion-toolbar {
     @include utils.media('<medium') {
       --padding-top: #{utils.size('s')};
@@ -155,6 +153,7 @@ ion-content {
   display: flex;
   flex-direction: column;
   height: calc(var(--height) - var(--header-height) - var(--footer-height));
+  max-height: calc(var(--max-height) - var(--header-height) - var(--footer-height));
 }
 
 // Ensure padding-rules are not merged with other media query,
