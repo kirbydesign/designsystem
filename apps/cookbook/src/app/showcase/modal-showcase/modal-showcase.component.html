@@ -53,6 +53,12 @@
   , each with its own advantages and drawbacks as outlined in the following sections.
 </p>
 
+<p>
+  All types of modals support a shared set of config properties such as size and flavor. See the
+  <a href="#" (click)="scrollTo(sharedProperties)">full list of shared properties</a>
+  for more info.
+</p>
+
 <h3 #componentBased>Using the Modal Component</h3>
 <p>
   The simplest way to show content in a modal dialog is to place it within a
@@ -155,7 +161,7 @@
 </p>
 <p>
   The outlet-based modal accepts a
-  <code>ModalConfig</code>
+  <code>RoutedModalConfig</code>
   provided via the
   <code>modalConfig</code>
   object passed as additional route data.
@@ -543,14 +549,28 @@
   stay at the bottom and the keyboard will slide in on top of it.
 </p>
 
-<h2>Modal properties</h2>
+<h2 #sharedProperties>Shared properties</h2>
+<p class="comment">
+  The following properties are shared between all types of modals, and is either set via the
+  <code>ModalConfig</code>
+  (controller),
+  <code>RoutedModalConfig</code>
+  (outlet) or as individual input properties on the Modal Component.
+</p>
 <cookbook-api-description-properties
   [properties]="configProperties"
 ></cookbook-api-description-properties>
 
 <h2 #modalConfig>ModalConfig</h2>
+<p class="comment">
+  The
+  <code>ModalConfig</code>
+  supplied to
+  <code>ModalController.showModal()</code>
+  supports all of the above mentioned modal properties, along with the following:
+</p>
 <cookbook-api-description-properties
-  [properties]="properties"
+  [properties]="modalConfigProperties"
 ></cookbook-api-description-properties>
 
 <h2>Modal footer properties</h2>

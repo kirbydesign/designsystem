@@ -79,12 +79,6 @@ export class ModalShowcaseComponent {
       type: ['boolean'],
     },
     {
-      name: 'cssClass',
-      description: `(Optional) Adds custom css classes to the modal. This allows for custom styling of the modal (see 'CSS Custom Properties' section).`,
-      defaultValue: '',
-      type: ['string | string[]'],
-    },
-    {
       name: 'canDismiss',
       description: `(Optional) Determines whether or not a modal can be dismissed.
  
@@ -92,9 +86,15 @@ export class ModalShowcaseComponent {
       defaultValue: 'true',
       type: ['boolean | AlertConfig | Promise<boolean | AlertConfig>'],
     },
+    {
+      name: 'scrollDisabled',
+      description: 'Disable scrolling of the modal',
+      type: ['true', 'false'],
+      defaultValue: 'false',
+    },
   ];
 
-  modalControllerConfigProperties: ApiDescriptionProperty[] = [
+  modalConfigProperties: ApiDescriptionProperty[] = [
     {
       name: 'component',
       description: '(Required) The component which will be rendered inside the modal.',
@@ -107,23 +107,11 @@ export class ModalShowcaseComponent {
       defaultValue: '',
       type: ['undefined | { [key: string]: any; }'],
     },
-  ];
-
-  modalComponentConfigProperties: ApiDescriptionProperty[] = [
     {
-      name: 'open',
-      description: 'Text goes here',
-      defaultValue: 'false',
-      type: ['boolean'],
-    },
-  ];
-
-  properties: ApiDescriptionProperty[] = [
-    {
-      name: 'scrollDisabled',
-      description: 'Disable scrolling of the modal',
-      type: ['true', 'false'],
-      defaultValue: 'false',
+      name: 'cssClass',
+      description: `(Optional) Adds custom css classes to the modal. This allows for custom styling of the modal (see 'CSS Custom Properties' section).`,
+      defaultValue: '',
+      type: ['string | string[]'],
     },
   ];
 
