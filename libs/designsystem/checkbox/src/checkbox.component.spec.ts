@@ -4,7 +4,6 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { provideIonicAngular } from '@ionic/angular/standalone';
 import { CheckboxComponent } from './checkbox.component';
 
 const size = DesignTokenHelper.size;
@@ -19,7 +18,7 @@ const checkboxSizeMd = size('xxxl');
 describe('CheckboxComponent', () => {
   const createComponent = createComponentFactory({
     component: CheckboxComponent,
-    providers: [provideIonicAngular({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   let spectator: Spectator<CheckboxComponent>;

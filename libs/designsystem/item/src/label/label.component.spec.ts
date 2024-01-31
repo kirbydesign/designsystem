@@ -1,12 +1,12 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { provideIonicAngular } from '@ionic/angular/standalone';
+import { TestHelper } from 'testing/src';
 import { LabelComponent } from './label.component';
 
 describe('LabelComponent', () => {
   let spectator: Spectator<LabelComponent>;
 
   const createHost = createComponentFactory({
-    providers: [provideIonicAngular({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
     component: LabelComponent,
     declarations: [],
   });
