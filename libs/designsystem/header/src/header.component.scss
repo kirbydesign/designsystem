@@ -144,7 +144,7 @@ $margin-inline: utils.size('s');
 .flag .custom-flag-section {
   display: flex;
   align-items: center;
-  min-height: 28px;
+  min-height: utils.line-height('l');
 }
 
 .title {
