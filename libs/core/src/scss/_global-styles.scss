@@ -32,8 +32,10 @@ $modal-heights: (
 $modal-border-radius: utils.size('l');
 $modal-gutter: #{utils.size('xxl')};
 $modal-header-height: 88px;
+$modal-expected-footer-height: 88px;
 $modal-min-content-height: 88px;
-$modal-large-screen-min-height: $modal-header-height + $modal-min-content-height;
+$modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-height +
+  $modal-min-content-height;
 
 @mixin bottom-drawer() {
   --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
