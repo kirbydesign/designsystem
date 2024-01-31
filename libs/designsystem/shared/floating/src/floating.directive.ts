@@ -74,7 +74,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownReferenceElementEventHandling();
     this._reference = ref;
     this.setupEventHandling();
-    this.autoUpdatePosition();
   }
 
   public get reference(): ElementRef<HTMLElement> | undefined {
@@ -86,7 +85,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * */
   @Input() public set placement(placement: Placement) {
     this._placement = placement;
-    this.updateHostElementPosition();
+    if (this.isShown) {
+      this.updateHostElementPosition();
+    }
   }
 
   public get placement() {
@@ -98,7 +99,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * */
   @Input() public set strategy(strategy: Strategy) {
     this._strategy = strategy;
-    this.updateHostElementPosition();
+    if (this.isShown) {
+      this.updateHostElementPosition();
+    }
   }
 
   public get strategy(): Strategy {
@@ -244,7 +247,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.addFloatStylingToHostElement();
-    this.updateHostElementPosition();
   }
 
   /* Should be accessible for programmatically setting display */
@@ -253,12 +255,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
-    this.autoUpdatePosition();
-
     this.attachDocumentClickEventHandler();
     this.attachHostClickEventHandler();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.isShown = true;
+    this.autoUpdatePosition();
     this.displayChanged.emit(this.isShown);
   }
 
@@ -269,7 +270,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
 
     this.removeAutoUpdaterRef();
-
     this.tearDownDocumentClickEventHandling();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
     this.isShown = false;
@@ -306,7 +306,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private updateHostElementPosition(): void {
-    if (!this.reference || !this.isShown) {
+    if (!this.reference) {
       return;
     }
 
