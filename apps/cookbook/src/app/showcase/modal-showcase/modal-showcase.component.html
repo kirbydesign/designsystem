@@ -75,6 +75,15 @@
   open/closed state based on some application-state.
 </p>
 
+<cookbook-iphone
+  class="large-example"
+  src="/examples/modal-component"
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  showExternalLink="true"
+></cookbook-iphone>
+<cookbook-example-viewer [html]="componentConfigExample.template"></cookbook-example-viewer>
+
 <p>
   Make sure to nest all content inside an
   <code>ng-template</code>
@@ -87,16 +96,6 @@
   for creating and destroying the child view when the dialog is opened and closed, preserving
   functionality of e.g. lifecycle hooks of any components shown inside.
 </p>
-
-<cookbook-iphone
-  class="large-example"
-  src="/examples/modal-component"
-  viewMode="full-size"
-  [showViewModeToggle]="true"
-  showExternalLink="true"
-></cookbook-iphone>
-
-<cookbook-example-viewer [html]="componentConfigExample.template"></cookbook-example-viewer>
 
 <h3 #controllerBased>Using the ModalController</h3>
 <p>
