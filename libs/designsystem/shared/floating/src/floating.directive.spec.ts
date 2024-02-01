@@ -92,7 +92,7 @@ describe('FloatingDirective', () => {
         const spy = spyOn(directive, <never>'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         spectator.detectChanges();
-        directive.show(); // Spy must be injected before show is called since show enables autoUpdate
+        directive.show(); // Spy must be injected before show is called
         spy.calls.reset();
 
         spectator.dispatchFakeEvent(window, 'scroll');
@@ -187,7 +187,7 @@ describe('FloatingDirective', () => {
         directive.reference = component.floatingElementRef;
         directive['isShown'] = false;
         spectator.detectChanges();
-        spy.calls.reset(); // Not actually needed, but may limit error scope
+        spy.calls.reset();
 
         directive.strategy = 'absolute';
         spectator.detectChanges();
