@@ -97,9 +97,7 @@ describe('FloatingDirective', () => {
 
         spectator.dispatchFakeEvent(window, 'scroll');
 
-        spectator.fixture.whenStable().then(() => {
-          expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
-        });
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
       }));
 
       it('should update host element position on window resize', fakeAsync(() => {
