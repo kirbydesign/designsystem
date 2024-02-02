@@ -74,6 +74,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownReferenceElementEventHandling();
     this._reference = ref;
     this.setupEventHandling();
+    if (this.isShown) {
+      this.autoUpdatePosition();
+    }
   }
 
   public get reference(): ElementRef<HTMLElement> | undefined {
