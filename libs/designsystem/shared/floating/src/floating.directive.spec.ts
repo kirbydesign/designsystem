@@ -431,7 +431,7 @@ describe('FloatingDirective', () => {
     });
 
     describe('show', () => {
-      it('should set isShown to false by default', () => {
+      it('should set isShown to true by default', () => {
         directive['isShown'] = false;
         spectator.setInput('isDisabled', false);
         directive.show();
