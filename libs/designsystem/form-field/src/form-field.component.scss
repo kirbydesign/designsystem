@@ -69,28 +69,30 @@ label {
   }
 }
 
+// TODO: Consider an enhancement on top of this solution that uses input[type="date"]::-webkit-calendar-picker-indicator
+
 // Solution for custom icon for date inputs requires support for :has()
 // See https://www.bram.us/2023/01/04/css-has-feature-detection-with-supportsselector-you-want-has-not-has/
 @supports selector(:has(+ *)) {
-  .affix-container {
-    // Only use custom property for background color when <input type="date">
+  // `background-color` has to be declared both here AND in input.component
+  // Here we declare background color for the affix container (suffix)
+  // which contains the calendar icon.
+  // input.component takes care of the background color of the <input> element.
+  // TODO: Handle different theme colors, e.g. @include themes.apply-dark-theme
+  .affix-container:has(input[type='date']) {
+    --date-input-background-color: var(--kirby-inputs-background-color);
 
-    // TODO: Must be fully opaque color to cover browser's icon! Multiple levels of transparency will accumulate
-    // TODO: Handle different colors (themes?)
-    &:has(input[type='date']) {
-      --date-input-background-color: var(--kirby-inputs-background-color);
-
-      @include utils.hover {
-        --date-input-background-color: #e0e0e0;
-      }
+    // Must use fully opaque colors to cover platform native icon
+    @include interaction-state.apply-hover {
+      --date-input-background-color: #e0e0e0;
     }
 
-    &:has(input[type='date']:active) {
+    @include interaction-state.apply-active {
       --date-input-background-color: #cbcbcb;
     }
 
-    &:has(input[type='date']) .suffix:not(:empty) {
-      // Only apply when type="date" AND there is something inside `.suffix`
+    // Only apply when type="date" AND there is something inside `.suffix`
+    & .suffix:not(:empty) {
       top: utils.size('xxs');
       bottom: utils.size('xxs');
 
@@ -101,7 +103,7 @@ label {
       // Clicks etc. must hit the native button/icon
       pointer-events: none;
 
-      // Only use custom property for background color when <input type="date">
+      // Only (re-)declare background color when inside <input type="date">
       background-color: var(--date-input-background-color);
       transition: interaction-state.transition();
       transition-property: background-color;
