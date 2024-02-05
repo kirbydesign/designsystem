@@ -21,6 +21,6 @@ gap: 6px;
   template: config.template,
   styles: config.styles,
 })
-export class HeaderExampleCustomContentFlagComponent {
+export class HeaderExampleCustomFlagComponent {
   template: string = config.template;
 }
