@@ -307,23 +307,23 @@ describe('HeaderComponent', () => {
     });
   });
 
-  describe('with custom content in flag section', () => {
+  describe('with custom flag', () => {
     let spectator: Spectator<HeaderComponent>;
-    const customSectionFlagContent = 'Custom flag section content';
+    const customFlagContent = 'Custom flag content';
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
-      <div class="custom-flag-section" *kirbyHeaderCustomFlagSection>
-      ${customSectionFlagContent}
+      <div class="custom-flag" *kirbyHeaderCustomFlag>
+      ${customFlagContent}
     </div>
       </kirby-header>
       `);
     });
 
-    it(`should render the custom content in flag section`, () => {
-      const CustomflagElement = spectator.query('div.custom-flag-section');
+    it(`should render the custom flag content`, () => {
+      const CustomflagElement = spectator.query('div.custom-flag');
       expect(CustomflagElement).toBeTruthy();
-      expect(CustomflagElement).toHaveExactTrimmedText(customSectionFlagContent);
+      expect(CustomflagElement).toHaveExactTrimmedText(customFlagContent);
     });
   });
 

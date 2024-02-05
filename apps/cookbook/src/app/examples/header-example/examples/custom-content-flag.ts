@@ -23,4 +23,5 @@ gap: 6px;
 })
 export class HeaderExampleCustomFlagComponent {
   template: string = config.template;
+  styles: string = config.styles.join('\n\n');
 }

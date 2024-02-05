@@ -98,7 +98,7 @@ export class HeaderShowcaseComponent {
         'For an interactive title (i.e. handling the `titleClick` event) the `*kirbyHeaderTitleActionIcon` directive can be applied to a `kirby-icon` element which will then be shown next to the title element for affordance.\n\n**Please note: this only applies in key value scenarios.',
     },
     {
-      name: '*kirbyHeaderCustomFlagSection',
+      name: '*kirbyHeaderCustomFlag',
       description:
         'For a custom flag to be shown in the flag section the `*kirbyHeaderCustomFlag` directive can be applied to any host or container element.\n\n**Please note: You should not have both a custom flag and kirby-flag present at the same time.',
     },

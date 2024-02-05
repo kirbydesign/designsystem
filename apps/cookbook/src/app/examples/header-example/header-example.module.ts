@@ -14,7 +14,7 @@ import { HeaderExampleValueComponent } from './examples/value';
 import { HeaderExampleCombinedComponent } from './examples/combined';
 import { HeaderExampleCustomSectionComponent } from './examples/custom-section';
 import { HeaderExampleTitleScalingComponent } from './examples/title-scaling';
-import { HeaderExampleCustomContentFlagComponent } from './examples/custom-content-flag';
+import { HeaderExampleCustomFlagComponent } from './examples/custom-content-flag';
 
 const COMPONENT_DECLARATIONS = [
   HeaderExampleComponent,
@@ -26,7 +26,7 @@ const COMPONENT_DECLARATIONS = [
   HeaderExampleValueComponent,
   HeaderExampleCombinedComponent,
   HeaderExampleCustomSectionComponent,
-  HeaderExampleCustomContentFlagComponent,
+  HeaderExampleCustomFlagComponent,
   HeaderExampleTitleScalingComponent,
 ];
 

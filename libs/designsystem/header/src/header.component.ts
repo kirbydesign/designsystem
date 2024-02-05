@@ -37,7 +37,7 @@ export class HeaderCustomSectionDirective {}
 export class HeaderTitleActionIconDirective {}
 
 @Directive({
-  selector: '[kirbyHeaderCustomFlagSection]',
+  selector: '[kirbyHeaderCustomFlag]',
 })
 export class HeaderCustomFlagSectionDirective {}
 
