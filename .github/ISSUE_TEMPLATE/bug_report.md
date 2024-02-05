@@ -52,7 +52,7 @@ The following tasks should be carried out in sequence in order to follow [the pr
 ### Verification
 To make sure the bug is not intended behaviour; it should be verified by a member of team Kirby before moving on to implementation. 
 
-- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](https://github.com/kirbydesign/designsystem/blob/d4cf30c680e0eca4fed82205ffe4343996663380/.github/SUPPORT.md#team-kirby); do not proceed until this is done
+- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](https://github.com/kirbydesign/designsystem/blob/develop/.github/SUPPORT.md#team-kirby); do not proceed until this is done.
 
 ### Implementation 
 The contributor who wants to implement this issue should: 
