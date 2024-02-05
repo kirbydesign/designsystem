@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectableObservable } from 'rxjs';
 import { OwnAccount } from '../own-account.model';
 import { OwnAccountService } from '../own-account.service';
 @Component({

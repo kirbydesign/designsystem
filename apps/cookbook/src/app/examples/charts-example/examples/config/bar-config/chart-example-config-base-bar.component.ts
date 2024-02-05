@@ -74,7 +74,7 @@ export class ChartExampleConfigBaseBarComponent implements AfterViewInit, OnDest
             data: this.demoData,
           },
         ],
-        labels: this.demoData.map((_) => ''),
+        labels: this.demoData.map(() => ''),
       },
     };
     this._chart = new Chart(this.canvasId, config);
