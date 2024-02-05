@@ -73,8 +73,8 @@ describe('FloatingDirective', () => {
 
   describe('automatic host position update behaviour', () => {
     describe('floating element is not shown', () => {
-      it('should NOT peform position updates', fakeAsync(() => {
-        spyOn(directive, <never>'updateHostElementPosition');
+      it('should NOT perform position updates', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         directive['isShown'] = false;
 
@@ -84,12 +84,13 @@ describe('FloatingDirective', () => {
         spectator.dispatchFakeEvent(window, 'resize');
 
         expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+        expect(updateHostElementPositionSpy.calls.count()).toEqual(0);
       }));
     });
 
     describe('floating element is shown', () => {
       it('should update host element position on scroll', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const spy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         spectator.detectChanges();
         directive.show(); // Spy must be injected before show is called
@@ -101,11 +102,11 @@ describe('FloatingDirective', () => {
       }));
 
       it('should update host element position on window resize', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         spectator.detectChanges();
         directive.show();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         spectator.dispatchFakeEvent(window, 'resize');
 
@@ -136,11 +137,11 @@ describe('FloatingDirective', () => {
       });
 
       it('should update host position if shown', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         directive['isShown'] = true;
         spectator.detectChanges();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         directive.placement = 'top-start';
         spectator.detectChanges();
@@ -149,11 +150,11 @@ describe('FloatingDirective', () => {
       }));
 
       it('should NOT update host position if hidden', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         directive['isShown'] = false;
         spectator.detectChanges();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         directive.placement = 'top-start';
         spectator.detectChanges();
@@ -170,11 +171,11 @@ describe('FloatingDirective', () => {
       });
 
       it('should update host position if shown', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         directive['isShown'] = true;
         spectator.detectChanges();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         directive.strategy = 'absolute';
         spectator.detectChanges();
@@ -183,11 +184,11 @@ describe('FloatingDirective', () => {
       }));
 
       it('should NOT update host position if hidden', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         directive['isShown'] = false;
         spectator.detectChanges();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         directive.strategy = 'absolute';
         spectator.detectChanges();
@@ -466,10 +467,10 @@ describe('FloatingDirective', () => {
       });
 
       it('should update host position when shown', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         spectator.detectChanges();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         directive.show();
         spectator.detectChanges();
@@ -478,10 +479,10 @@ describe('FloatingDirective', () => {
       }));
 
       it('should update host position when shown and scrolled', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         spectator.detectChanges();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         directive.show();
         spectator.dispatchFakeEvent(window, 'scroll');
@@ -490,10 +491,10 @@ describe('FloatingDirective', () => {
       }));
 
       it('should update host position when shown, scrolled, and resized', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         spectator.detectChanges();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         directive.show();
         spectator.dispatchFakeEvent(window, 'scroll');
@@ -548,12 +549,12 @@ describe('FloatingDirective', () => {
       });
 
       it('should NOT auto updating positions after hiding', fakeAsync(() => {
-        const spy = spyOn(directive, <never>'updateHostElementPosition');
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
         directive.reference = component.floatingElementRef;
         spectator.detectChanges();
         directive.show();
         directive.hide();
-        spy.calls.reset();
+        updateHostElementPositionSpy.calls.reset();
 
         spectator.dispatchFakeEvent(window, 'scroll');
         spectator.dispatchFakeEvent(window, 'resize');
