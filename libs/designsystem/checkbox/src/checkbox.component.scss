@@ -142,18 +142,12 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
       ion-checkbox {
         --size: #{$checkbox-icon-size-xs};
-        --border-radius: utils.size('xxxs');
+        --border-radius: 4px;
 
         &::part(container) {
           padding: utils.size('xxxxs'); // Spacing between checkmark and container box
         }
       }
-    }
-
-    ion-checkbox {
-      position: static;
-      flex-shrink: 0;
-      flex-grow: 0;
     }
   }
 
