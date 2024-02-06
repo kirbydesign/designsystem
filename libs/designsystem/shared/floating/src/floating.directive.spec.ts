@@ -5,6 +5,7 @@ import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shar
 
 import { Placement, Strategy } from '@floating-ui/dom';
 import { DesignTokenHelper } from '@kirbydesign/core';
+import { fakeAsync } from '@angular/core/testing';
 import { FloatingDirective, OutletSelector } from './floating.directive';
 
 @Component({
@@ -70,6 +71,50 @@ describe('FloatingDirective', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  describe('automatic host position update behaviour', () => {
+    describe('floating element is not shown', () => {
+      it('should NOT perform position updates', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = false;
+
+        spectator.detectChanges();
+        spectator.tick(1000);
+        spectator.dispatchFakeEvent(window, 'scroll');
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+        expect(updateHostElementPositionSpy.calls.count()).toEqual(0);
+      }));
+    });
+
+    describe('floating element is shown', () => {
+      it('should update host element position on scroll', fakeAsync(() => {
+        const spy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        directive.show(); // Spy must be injected before show is called
+        spy.calls.reset();
+
+        spectator.dispatchFakeEvent(window, 'scroll');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should update host element position on window resize', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        directive.show();
+        updateHostElementPositionSpy.calls.reset();
+
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+    });
+  });
+
   describe('input', () => {
     describe('reference', () => {
       it('should set', () => {
@@ -90,6 +135,32 @@ describe('FloatingDirective', () => {
         directive.placement = placement;
         expect(directive['_placement']).toEqual(placement);
       });
+
+      it('should update host position if shown', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = true;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.placement = 'top-start';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should NOT update host position if hidden', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = false;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.placement = 'top-start';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+      }));
     });
 
     describe('strategy', () => {
@@ -98,6 +169,32 @@ describe('FloatingDirective', () => {
         directive.strategy = strategy;
         expect(directive['_strategy']).toEqual(strategy);
       });
+
+      it('should update host position if shown', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = true;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.strategy = 'absolute';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should NOT update host position if hidden', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = false;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.strategy = 'absolute';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+      }));
     });
 
     describe('triggers', () => {
@@ -368,6 +465,43 @@ describe('FloatingDirective', () => {
         directive.show();
         expect(directive.displayChanged.emit).toHaveBeenCalledWith(true);
       });
+
+      it('should update host position when shown', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.show();
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should update host position when shown and scrolled', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.show();
+        spectator.dispatchFakeEvent(window, 'scroll');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(2);
+      }));
+
+      it('should update host position when shown, scrolled, and resized', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.show();
+        spectator.dispatchFakeEvent(window, 'scroll');
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(3);
+      }));
     });
 
     describe('hide', () => {
@@ -413,6 +547,20 @@ describe('FloatingDirective', () => {
         directive.hide();
         expect(directive.displayChanged.emit).not.toHaveBeenCalled();
       });
+
+      it('should NOT auto updating positions after hiding', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        directive.show();
+        directive.hide();
+        updateHostElementPositionSpy.calls.reset();
+
+        spectator.dispatchFakeEvent(window, 'scroll');
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+      }));
     });
 
     describe('toggleShow', () => {
