@@ -314,9 +314,9 @@ describe('HeaderComponent', () => {
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
-      <div class="custom-flag" *kirbyHeaderCustomFlag>
-      ${customFlagContent}
-    </div>
+       <div class="custom-flag" *kirbyHeaderCustomFlag>
+          ${customFlagContent}
+        </div>
       </kirby-header>
       `);
     });
