@@ -38,7 +38,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
   @Input() step = 1;
   @Input() ticks: boolean;
   @Input() disabled = false;
-  @Input() pinFormatter: (value: number) => string | number;
+  @Input() pinFormatter: (value: number) => string | number = this.defaultPinFormatter;
   @Input()
   set value(value: number) {
     if (value !== this.currentValue) {
@@ -97,6 +97,10 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
         this._onRangeKnobMove(rangeEvent);
       });
     }
+  }
+
+  private defaultPinFormatter(value: number): number {
+    return value;
   }
 
   public setDisabledState?(isDisabled: boolean): void {
