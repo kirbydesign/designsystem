@@ -16,10 +16,7 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   transition: interaction-state.transition();
   transition-property: background-color;
 
-  // `background-color` has to be declared both in form-field.component AND here
-  //  Here the <input> background color is declared.
-  // form-field.component takes care of the background color of the affix
-  // container (suffix) which contains the calendar icon
+  // Background color needs to be synchronized with form-field.component
   @supports selector(:has(+ *)) {
     &[type='date'] {
       background-color: var(--date-input-background-color);

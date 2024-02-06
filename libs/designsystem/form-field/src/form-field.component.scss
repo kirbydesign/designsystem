@@ -69,20 +69,12 @@ label {
   }
 }
 
-// TODO: Consider an enhancement on top of this solution that uses input[type="date"]::-webkit-calendar-picker-indicator
-
-// Solution for custom icon for date inputs requires support for :has()
-// See https://www.bram.us/2023/01/04/css-has-feature-detection-with-supportsselector-you-want-has-not-has/
+// Background color needs to be synchronized with input.component
+// Background color must be fully opaque to cover native icon
 @supports selector(:has(+ *)) {
-  // `background-color` has to be declared both here AND in input.component
-  // Here we declare background color for the affix container (suffix)
-  // which contains the calendar icon.
-  // input.component takes care of the background color of the <input> element.
-  // TODO: Handle different theme colors, e.g. @include themes.apply-dark-theme
   .affix-container:has(input[type='date']) {
     --date-input-background-color: var(--kirby-inputs-background-color);
 
-    // Must use fully opaque colors to cover platform native icon
     @include interaction-state.apply-hover {
       --date-input-background-color: #e0e0e0;
     }
@@ -91,19 +83,17 @@ label {
       --date-input-background-color: #cbcbcb;
     }
 
-    // Only apply when type="date" AND there is something inside `.suffix`
+    // Take care of custom icon if it's present
     & .suffix:not(:empty) {
       top: utils.size('xxs');
       bottom: utils.size('xxs');
 
-      // Padding helps covering native icon (not completely bulletproof)
-      // Padding also provides space between icon and text
+      // Part of covering native icon (not bulletproof)
+      // and add space between icon and text
       padding-inline-start: utils.size('xs');
 
-      // Clicks etc. must hit the native button/icon
+      // Clicks etc. hit native icon/button instead of suffixed element
       pointer-events: none;
-
-      // Only (re-)declare background color when inside <input type="date">
       background-color: var(--date-input-background-color);
       transition: interaction-state.transition();
       transition-property: background-color;
@@ -113,19 +103,11 @@ label {
 
 // E.g. Firefox < v121 (2023-12-19) does not support :has()
 @supports not (selector(:has(+ *))) {
-  .affix-container {
+  // TODO: Is this correct? Doesn't this hide *all* suffixed <kirby-icon>s regardless of <input type="date"> or not?
+  .affix-container .suffix {
     // Hide kirby-icon
-    // FIXME: Try to make this work without using utils.slotted() (::ng-deep)
-    .suffix .kirby-icon {
-      display: none !important;
-    }
-
-    .suffix {
-      @include utils.slotted(kirby-icon) {
-        display: none;
-      }
+    @include utils.slotted(kirby-icon) {
+      display: none;
     }
   }
 }
-
-// TODO: Make sure solution works with [useNativeDatePicker]="false" (show or don't show custom icon?)
