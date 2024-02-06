@@ -9,9 +9,9 @@ const config = {
 </kirby-header>`,
   styles: [
     `.custom-flag {
-display: flex;
-align-items: center;
-gap: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }`,
   ],
 };
