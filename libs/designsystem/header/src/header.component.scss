@@ -142,7 +142,7 @@ $margin-inline: utils.size('s');
 }
 
 .flag .custom-flag {
-  margin-block: 4px; // use size variable here
+  margin-block: utils.size('xxxs');
 }
 
 .title {
