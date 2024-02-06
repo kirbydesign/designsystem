@@ -19,7 +19,7 @@ This PR closes # (insert issue number here)
 
 ## Checklist:
 
-The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
+The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#the-process-of-contributing) correctly.
 
 ### Reminders
 - [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
@@ -29,7 +29,7 @@ The following tasks should be carried out in sequence in order to follow [the pr
 - [ ] Determine if your changes are a fix, feature or breaking-change, and add the matching label to your PR. If it is tooling, dependency updates or similar, add ignore-for-release.
 - [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review).
 - [ ] Request that the changes are code-reviewed 
-- [ ] Request that the changes are [UX reviewed](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
+- [ ] Request that the changes are [UX reviewed](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#ux-review) (only necessary if your PR introduces visual changes)
 
 When the pull request has been approved it will be merged to `develop` by Team Kirby.
 
