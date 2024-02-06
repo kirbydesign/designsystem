@@ -39,7 +39,7 @@ export class HeaderTitleActionIconDirective {}
 @Directive({
   selector: '[kirbyHeaderCustomFlag]',
 })
-export class HeaderCustomFlagSectionDirective {}
+export class HeaderCustomFlagDirective {}
 
 @Component({
   selector: 'kirby-header',
