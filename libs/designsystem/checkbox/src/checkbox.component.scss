@@ -128,8 +128,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
         ion-checkbox::part(label) {
           $vertical-padding: map.get($properties, vertical-padding);
 
-          padding-top: $vertical-padding;
-          padding-bottom: $vertical-padding;
+          padding-block: $vertical-padding;
         }
       }
     }
