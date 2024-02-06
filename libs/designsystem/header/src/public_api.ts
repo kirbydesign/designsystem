@@ -1,7 +1,7 @@
 export {
   HeaderComponent,
   HeaderActionsDirective,
-  HeaderCustomFlagSectionDirective,
+  HeaderCustomFlagDirective,
   HeaderCustomSectionDirective,
   HeaderTitleActionIconDirective,
 } from './header.component';

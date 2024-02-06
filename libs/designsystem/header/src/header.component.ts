@@ -78,10 +78,10 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @ContentChild(HeaderCustomSectionDirective, { read: TemplateRef<HeaderCustomSectionDirective> })
   customSectionTemplate?: TemplateRef<HeaderCustomSectionDirective>;
 
-  @ContentChild(HeaderCustomFlagSectionDirective, {
-    read: TemplateRef<HeaderCustomFlagSectionDirective>,
+  @ContentChild(HeaderCustomFlagDirective, {
+    read: TemplateRef<HeaderCustomFlagDirective>,
   })
-  customFlagTemplate?: TemplateRef<HeaderCustomFlagSectionDirective>;
+  customFlagTemplate?: TemplateRef<HeaderCustomFlagDirective>;
 
   @ContentChild(HeaderTitleActionIconDirective, { read: TemplateRef })
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
