@@ -310,6 +310,7 @@ describe('HeaderComponent', () => {
   describe('with custom flag', () => {
     let spectator: Spectator<HeaderComponent>;
     const customFlagContent = 'Custom flag content';
+
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
