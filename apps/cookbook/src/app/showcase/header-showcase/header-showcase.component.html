@@ -56,14 +56,11 @@
       <code>*kirbyHeaderCustomFlag</code>
       to your custom flag markup.
     </p>
-    <cookbook-example-viewer
-      [html]="customContentFlagExample.template"
-      [css]="customContentFlagExample.styles"
-    >
+    <cookbook-example-viewer [html]="customFlagExample.template" [css]="customFlagExample.styles">
       <div class="header-example">
-        <cookbook-header-example-custom-content-flag
-          #customContentFlagExample
-        ></cookbook-header-example-custom-content-flag>
+        <cookbook-header-example-custom-flag
+          #customFlagExample
+        ></cookbook-header-example-custom-flag>
       </div>
     </cookbook-example-viewer>
   </div>
