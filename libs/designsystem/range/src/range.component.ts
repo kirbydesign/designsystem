@@ -99,7 +99,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
     }
   }
 
-  private defaultPinFormatter(value: number): string | number {
+  private defaultPinFormatter(value: number): number {
     return value;
   }
 
