@@ -135,7 +135,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     &.xs {
       ion-checkbox::part(label) {
         line-height: utils.line-height('xs');
-        font-size: #{utils.font-size('s')};
+        font-size: utils.font-size('s');
       }
 
       ion-checkbox {
