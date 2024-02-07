@@ -83,7 +83,7 @@ label {
       --date-input-background-color: #cbcbcb;
     }
 
-    // Take care of custom icon if it's present
+    // Cover native calendar icon if custom icon is present
     & .suffix:not(:empty) {
       top: utils.size('xxs');
       bottom: utils.size('xxs');
