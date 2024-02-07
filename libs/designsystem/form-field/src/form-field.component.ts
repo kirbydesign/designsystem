@@ -42,7 +42,7 @@ export class FormFieldComponent
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
 
-  showDefaultIcon = false;
+  showDefaultCalendarIcon = false;
 
   _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
 
@@ -136,7 +136,6 @@ export class FormFieldComponent
         this.resizeObserverService.observe(affix.el, (entry) => {
           const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
           const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
-          // TODO: Solve without using hardcoded size for token
           const existingPadding = parseInt(DesignTokenHelper.size('s'));
 
           this.renderer.setStyle(
@@ -169,10 +168,10 @@ export class FormFieldComponent
 
     // TODO: Is ngAfterContentChecked the right lifecycle method to hook into?
     // Decide if default calendar icon for date input should be shown
-    this.showDefaultIcon = this.shouldShowDefaultIcon();
+    this.showDefaultCalendarIcon = this.shouldShowDefaultCalendarIcon();
   }
 
-  private shouldShowDefaultIcon() {
+  private shouldShowDefaultCalendarIcon() {
     return (
       this.dateInput?.useNativeDatePicker &&
       !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
