@@ -1,3 +1,4 @@
+@use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -65,5 +66,35 @@ label {
     @include utils.slotted(span, h1, h2, h3, h4, h5, h6, p, data) {
       color: utils.get-text-color('semi-dark');
     }
+  }
+}
+
+// Background color needs to be synchronized with input.component
+// Background color must be fully opaque to cover native icon
+.affix-container:has(input[type='date']) {
+  --date-input-background-color: var(--kirby-inputs-background-color);
+
+  @include interaction-state.apply-hover {
+    --date-input-background-color: #e0e0e0;
+  }
+
+  @include interaction-state.apply-active {
+    --date-input-background-color: #cbcbcb;
+  }
+
+  // Cover native calendar icon if custom icon is present
+  & .suffix:not(:empty) {
+    top: utils.size('xxs');
+    bottom: utils.size('xxs');
+
+    // Part of covering native icon (not bulletproof)
+    // and add space between icon and text
+    padding-inline-start: utils.size('xs');
+
+    // Clicks etc. hit native icon/button instead of suffixed element
+    pointer-events: none;
+    background-color: var(--date-input-background-color);
+    transition: interaction-state.transition();
+    transition-property: background-color;
   }
 }
