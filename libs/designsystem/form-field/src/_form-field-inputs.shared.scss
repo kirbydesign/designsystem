@@ -76,7 +76,7 @@ $form-field-label-height: 24px;
   }
 }
 
-// Safari on iOS only (apparently)
+// Safari on iOS
 @supports not (selector(::-webkit-date-and-time-value)) {
   // ::-webkit-date-and-time-value seems to match regardless of feature query
   :host(input[type='date']::-webkit-date-and-time-value) {
