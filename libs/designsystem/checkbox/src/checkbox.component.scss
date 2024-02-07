@@ -3,13 +3,10 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $border-radius: 6px;
-$checkbox-icon-size: utils.size('m');
+$checkbox-icon-size-xs: map.get(utils.$checkbox-sizes, 'xs', 'icon-size');
+$checkbox-icon-size: map.get(utils.$checkbox-sizes, 'sm', 'icon-size');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
-
-@function get-vertical-padding($target-height) {
-  @return ($target-height - $checkbox-icon-size) * 0.5;
-}
 
 :host {
   display: inline-block;
@@ -125,27 +122,42 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   &.has-label {
     display: block;
 
-    @each $size, $height in utils.$checkbox-radio-sizes {
+    @each $size, $properties in utils.$checkbox-sizes {
       &.#{$size} {
         ion-checkbox::part(label) {
-          $vertical-padding: get-vertical-padding($height);
+          $vertical-padding: map.get($properties, vertical-padding);
 
-          padding-top: $vertical-padding;
-          padding-bottom: $vertical-padding;
+          padding-block: $vertical-padding;
+        }
+      }
+    }
+
+    &.xs {
+      ion-checkbox::part(label) {
+        line-height: utils.line-height('xs');
+        font-size: utils.font-size('s');
+      }
+
+      ion-checkbox {
+        --size: #{$checkbox-icon-size-xs};
+        --border-radius: #{utils.size('xxxs')};
+
+        &::part(container) {
+          padding: utils.size('xxxxs'); // Spacing between checkmark and container box
         }
       }
     }
   }
-}
 
-:host-context(kirby-item) {
-  z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+  :host-context(kirby-item) {
+    z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
 
-  ion-checkbox {
-    margin: 0;
-  }
+    ion-checkbox {
+      margin: 0;
+    }
 
-  &[slot='start'] {
-    margin-inline-end: $spacing-to-label;
+    &[slot='start'] {
+      margin-inline-end: $spacing-to-label;
+    }
   }
 }
