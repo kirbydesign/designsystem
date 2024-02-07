@@ -17,10 +17,8 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   transition-property: background-color;
 
   // Background color needs to be synchronized with form-field.component
-  @supports selector(:has(+ *)) {
-    &[type='date'] {
-      background-color: var(--date-input-background-color);
-    }
+  &[type='date'] {
+    background-color: var(--date-input-background-color);
   }
 
   &[type='number'] {

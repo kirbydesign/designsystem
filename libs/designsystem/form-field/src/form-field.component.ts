@@ -166,7 +166,6 @@ export class FormFieldComponent
       this.dispatchLoadEvent();
     }
 
-    // TODO: Is ngAfterContentChecked the right lifecycle method to hook into?
     // Decide if default calendar icon for date input should be shown
     this.showDefaultCalendarIcon = this.shouldShowDefaultCalendarIcon();
   }

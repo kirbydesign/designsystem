@@ -71,43 +71,30 @@ label {
 
 // Background color needs to be synchronized with input.component
 // Background color must be fully opaque to cover native icon
-@supports selector(:has(+ *)) {
-  .affix-container:has(input[type='date']) {
-    --date-input-background-color: var(--kirby-inputs-background-color);
+.affix-container:has(input[type='date']) {
+  --date-input-background-color: var(--kirby-inputs-background-color);
 
-    @include interaction-state.apply-hover {
-      --date-input-background-color: #e0e0e0;
-    }
-
-    @include interaction-state.apply-active {
-      --date-input-background-color: #cbcbcb;
-    }
-
-    // Cover native calendar icon if custom icon is present
-    & .suffix:not(:empty) {
-      top: utils.size('xxs');
-      bottom: utils.size('xxs');
-
-      // Part of covering native icon (not bulletproof)
-      // and add space between icon and text
-      padding-inline-start: utils.size('xs');
-
-      // Clicks etc. hit native icon/button instead of suffixed element
-      pointer-events: none;
-      background-color: var(--date-input-background-color);
-      transition: interaction-state.transition();
-      transition-property: background-color;
-    }
+  @include interaction-state.apply-hover {
+    --date-input-background-color: #e0e0e0;
   }
-}
 
-// E.g. Firefox < v121 (2023-12-19) does not support :has()
-@supports not (selector(:has(+ *))) {
-  // TODO: Is this correct? Doesn't this hide *all* suffixed <kirby-icon>s regardless of <input type="date"> or not?
-  .affix-container .suffix {
-    // Hide kirby-icon
-    @include utils.slotted(kirby-icon) {
-      display: none;
-    }
+  @include interaction-state.apply-active {
+    --date-input-background-color: #cbcbcb;
+  }
+
+  // Cover native calendar icon if custom icon is present
+  & .suffix:not(:empty) {
+    top: utils.size('xxs');
+    bottom: utils.size('xxs');
+
+    // Part of covering native icon (not bulletproof)
+    // and add space between icon and text
+    padding-inline-start: utils.size('xs');
+
+    // Clicks etc. hit native icon/button instead of suffixed element
+    pointer-events: none;
+    background-color: var(--date-input-background-color);
+    transition: interaction-state.transition();
+    transition-property: background-color;
   }
 }
