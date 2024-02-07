@@ -10,7 +10,7 @@ const config = {
 
 <kirby-form-field label="Native (platform) date input with custom icon">
   <input kirby-input type="date" [size]="size" [useNativeDatePicker]="true" />
-  <kirby-icon kirby-affix="suffix" name="dot"/>
+  <kirby-icon kirby-affix="suffix" name="overview-outline"/>
 </kirby-form-field>`,
 };
 
