@@ -15,6 +15,7 @@ import { AccordionItemComponent } from './accordion-item.component';
 
 const meta: Meta<AccordionItemComponent> = {
   component: AccordionItemComponent,
+  title: 'AccordionItemComponent',
   decorators: [
     moduleMetadata({
       declarations: [IconComponent, AccordionDirective],
@@ -40,7 +41,6 @@ const meta: Meta<AccordionItemComponent> = {
     </kirby-accordion-item>
   </kirby-accordion>`,
   }),
-  title: 'AccordionItemComponent',
 };
 export default meta;
 type Story = StoryObj<AccordionItemComponent>;

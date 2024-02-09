@@ -4,7 +4,7 @@ import { Preview } from '@storybook/angular';
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'white',
+      default: 'gray',
       values: [
         {
           name: 'white',
@@ -16,7 +16,7 @@ const preview: Preview = {
         },
         {
           name: 'dark',
-          value: '#f6f6f6',
+          value: '#353535',
         },
       ],
     },
