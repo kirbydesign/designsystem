@@ -51,7 +51,7 @@ export class ColorHelper {
     return colorArray;
   }
 
-  private static mapToKirbyColorRampArray(colors: KirbyColorRamp): any[] {
+  private static mapToKirbyColorRampArray(colors: KirbyColorRamp): KirbyDecorationColor[] {
     const colorArray = Object.entries(colors).map(([name, value]) => ({
       name: camelToKebabCase(name),
       ramp: Object.entries(value).map(([step, rampValue]) => ({
@@ -191,6 +191,11 @@ export interface KirbyColor extends Color {
   tint: Color;
   shade: Color;
   contrast: Color;
+}
+
+export interface KirbyDecorationColor {
+  name: string;
+  ramp: KirbyColorRamp[];
 }
 
 export type NotificationColor = keyof typeof styles.notificationColors;
