@@ -150,7 +150,10 @@ export class ColorHelper {
   private static getColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyColors[camelCaseKey];
-    return found || null;
+    const runTimeColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(`--kirby-${name}`);
+    return runTimeColor || found || null;
   }
 
   private static getDecorationColor(name: string, step: number): string {
