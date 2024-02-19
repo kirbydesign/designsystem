@@ -20,4 +20,18 @@ export class ColorsShowcaseComponent {
     this.selectedColor = color.name;
     this.selectedOnColor = color.name + '-contrast';
   }
+
+  async onDecorationColorClick(event: UIEvent, name: string, step: number) {
+    const colorVariable = this.getDecorationColorVariable(name, step);
+    await navigator.clipboard.writeText(colorVariable);
+    const stepElement = event.target as HTMLElement;
+    stepElement.classList.add('copied');
+    window.setTimeout(() => {
+      stepElement.classList.remove('copied');
+    }, 1500);
+  }
+
+  getDecorationColorVariable(name: string, step: number) {
+    return `var(--kirby-decoration-color-${name}-${step})`;
+  }
 }
