@@ -51,7 +51,7 @@ export class ColorHelper {
     return colorArray;
   }
 
-  private static mapToKirbyColorRampArray(colors: KirbyColorRamp): any[] {
+  private static mapToKirbyColorRampArray(colors: KirbyColorRamp): KirbyDecorationColor[] {
     const colorArray = Object.entries(colors).map(([name, value]) => ({
       name: camelToKebabCase(name),
       ramp: Object.entries(value).map(([step, rampValue]) => ({
@@ -150,7 +150,10 @@ export class ColorHelper {
   private static getColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyColors[camelCaseKey];
-    return found || null;
+    const runTimeColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(`--kirby-${name}`);
+    return runTimeColor || found || null;
   }
 
   private static getDecorationColor(name: string, step: number): string {
@@ -188,6 +191,11 @@ export interface KirbyColor extends Color {
   tint: Color;
   shade: Color;
   contrast: Color;
+}
+
+export interface KirbyDecorationColor {
+  name: string;
+  ramp: KirbyColorRamp[];
 }
 
 export type NotificationColor = keyof typeof styles.notificationColors;
