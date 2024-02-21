@@ -12,11 +12,14 @@ describe('Anchor tag', () => {
     beforeEach(() => {
       const fixture = `<a href="/test/" id="fixture">Text</a>`;
       document.body.insertAdjacentHTML('afterbegin', fixture);
+      console.log('document.body.style.color - BEFORE:', document.body.style.color);
       document.body.style.color = getColor('black').value;
+      console.log('document.body.style.color - AFTER:', document.body.style.color);
       element = document.body.querySelector('#fixture');
     });
 
     it(`should inherit its color`, () => {
+      expect(document.body).toHaveComputedStyle({ color: getColor('black') });
       expect(element).toHaveComputedStyle({ color: getColor('black') });
     });
 
