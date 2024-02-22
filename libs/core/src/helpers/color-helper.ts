@@ -159,13 +159,19 @@ export class ColorHelper {
   private static getDecorationColor(name: string, step: number): string {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.decorationColors[camelCaseKey][step];
-    return found || null;
+    const runTimeColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(`--kirby-decoration-color-${name}-${step}`);
+    return runTimeColor || found || null;
   }
 
   private static getTextColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyTextColors[camelCaseKey];
-    return found || null;
+    const runTimeColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(`--kirby-text-color-${name}`);
+    return runTimeColor || found || null;
   }
 
   private static opacityThreshold(opacity: number): number {
