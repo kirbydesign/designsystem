@@ -11,7 +11,7 @@ const meta: Meta<TabButtonComponent> = {
 export default meta;
 type Story = StoryObj<TabButtonComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     routerLink: '',
     tab: '',

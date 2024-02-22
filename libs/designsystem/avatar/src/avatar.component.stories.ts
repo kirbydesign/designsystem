@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import {
-  applicationConfig,
-  argsToTemplate,
-  componentWrapperDecorator,
-  moduleMetadata,
-} from '@storybook/angular';
+import { applicationConfig, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
 import { importProvidersFrom } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
@@ -22,23 +17,12 @@ const meta: Meta<AvatarComponent> = {
     applicationConfig({
       providers: [importProvidersFrom([IonicModule.forRoot()])],
     }),
-    componentWrapperDecorator((story) => `<div style="padding: 1em;">${story}</div>`),
   ],
-  render: (args: AvatarComponent) => ({
-    props: {
-      ...args,
-    },
-    template: `<kirby-avatar ${argsToTemplate(args)}>
-  </kirby-avatar>
-  <kirby-avatar>
-    <kirby-icon name="kirby"></kirby-icon>
-  </kirby-avatar>`,
-  }),
 };
 export default meta;
 type Story = StoryObj<AvatarComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     text: 'A',
     imageSrc: '',
@@ -47,4 +31,12 @@ export const Primary: Story = {
     overlay: false,
     size: AvatarSize.SM,
   },
+  render: (args: AvatarComponent) => ({
+    props: args,
+    template: `<kirby-avatar ${argsToTemplate(args)}>
+  </kirby-avatar>
+  <kirby-avatar>
+    <kirby-icon name="kirby"></kirby-icon>
+  </kirby-avatar>`,
+  }),
 };

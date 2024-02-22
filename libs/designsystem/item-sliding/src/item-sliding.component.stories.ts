@@ -9,7 +9,7 @@ const meta: Meta<ItemSlidingComponent> = {
 export default meta;
 type Story = StoryObj<ItemSlidingComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     // side: '',
   },

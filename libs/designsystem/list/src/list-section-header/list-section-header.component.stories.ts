@@ -11,7 +11,7 @@ const meta: Meta<ListSectionHeaderComponent> = {
 export default meta;
 type Story = StoryObj<ListSectionHeaderComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     title: '',
   },

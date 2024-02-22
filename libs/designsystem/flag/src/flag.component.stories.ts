@@ -11,7 +11,7 @@ const meta: Meta<FlagComponent> = {
 export default meta;
 type Story = StoryObj<FlagComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     size: 'md',
     themeColor: 'transparent',

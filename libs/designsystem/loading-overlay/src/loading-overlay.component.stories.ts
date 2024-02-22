@@ -11,7 +11,7 @@ const meta: Meta<LoadingOverlayComponent> = {
 export default meta;
 type Story = StoryObj<LoadingOverlayComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     isLoading: true,
     showBackdrop: true,

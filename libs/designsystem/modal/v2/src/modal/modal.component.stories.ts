@@ -11,7 +11,7 @@ const meta: Meta<ModalV2Component> = {
 export default meta;
 type Story = StoryObj<ModalV2Component>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     flavor: 'modal',
     open: false,

@@ -1,24 +1,68 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { argsToTemplate } from '@storybook/angular';
+
+import { ChartDataLabelOptions } from '@kirbydesign/designsystem/chart';
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
+import { ChartConfigService } from '../shared/chart-config-service/chart-config.service';
 import { StockChartComponent } from './stock-chart.component';
+
+const { getThemeColorHexString } = ColorHelper;
+
+const chartDataLabelOptions: ChartDataLabelOptions = {
+  locale: 'da-DK',
+  valueSuffix: '%',
+};
+
+const _datasets = [
+  {
+    data: [
+      { x: 1628294399000, y: 49.8 },
+      { x: 1628553599000, y: 49.6 },
+      { x: 1628639999000, y: 49.6 },
+      { x: 1628726399000, y: 49.6 },
+    ],
+    borderColor: getThemeColorHexString('secondary'),
+  },
+  {
+    data: [
+      { x: 1628294399000, y: 49.8 },
+      { x: 1628553599000, y: 69.6 },
+      { x: 1628639999000, y: 39.6 },
+      { x: 1628726399000, y: 69.6 },
+    ],
+    borderColor: getThemeColorHexString('primary'),
+  },
+  {
+    data: [
+      { x: 1628294399000, y: 49.8 },
+      { x: 1628553599000, y: 59.6 },
+      { x: 1628639999000, y: 69.6 },
+      { x: 1628726399000, y: -49.6 },
+    ],
+    borderColor: getThemeColorHexString('semi-dark'),
+  },
+];
 
 const meta: Meta<StockChartComponent> = {
   component: StockChartComponent,
   title: 'StockChartComponent',
+  decorators: [
+    moduleMetadata({
+      providers: [ChartConfigService],
+    }),
+  ],
+  render: (args: StockChartComponent) => ({
+    props: args,
+    template: `<kirby-stock-chart ${argsToTemplate(args)}></kirby-stock-chart>`,
+  }),
 };
 export default meta;
 type Story = StoryObj<StockChartComponent>;
 
-export const Primary: Story = {
-  args: {},
-};
-
-export const Heading: Story = {
-  args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/stock-chart works!/gi)).toBeTruthy();
+export const TestGrid: Story = {
+  args: {
+    data: _datasets,
+    dataLabelOptions: chartDataLabelOptions,
   },
 };

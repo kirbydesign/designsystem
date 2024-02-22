@@ -11,7 +11,7 @@ const meta: Meta<ReorderListComponent> = {
 export default meta;
 type Story = StoryObj<ReorderListComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     subItemsName: '',
   },

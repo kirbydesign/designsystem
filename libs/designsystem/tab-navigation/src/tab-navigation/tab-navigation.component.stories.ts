@@ -11,7 +11,7 @@ const meta: Meta<TabNavigationComponent> = {
 export default meta;
 type Story = StoryObj<TabNavigationComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     selectedIndex: 0,
   },

@@ -11,7 +11,7 @@ const meta: Meta<RadioComponent> = {
 export default meta;
 type Story = StoryObj<RadioComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     text: '',
     size: 'md',

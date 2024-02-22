@@ -1,34 +1,32 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { EmptyStateComponent } from './empty-state.component';
+import { EmptyStateModule } from './empty-state.module';
 
 const meta: Meta<EmptyStateComponent> = {
   component: EmptyStateComponent,
   title: 'EmptyStateComponent',
+  decorators: [
+    moduleMetadata({
+      imports: [EmptyStateModule],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<EmptyStateComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
+  argTypes: {
+    customIconName: {
+      control: 'text',
+    },
+  },
   args: {
-    iconName: '',
-    customIconName: '',
-    title: '',
-    subtitle: '',
+    iconName: 'kirby',
+    title: 'No items',
+    subtitle: `You don't have any items. Call support to add some items to your account.`,
   },
-};
-
-export const Heading: Story = {
-  args: {
-    iconName: '',
-    customIconName: '',
-    title: '',
-    subtitle: '',
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/empty-state works!/gi)).toBeTruthy();
-  },
+  render: (args: EmptyStateComponent) => ({
+    props: args,
+    template: `<kirby-empty-state ${argsToTemplate(args)}></kirby-empty-state>`,
+  }),
 };

@@ -9,7 +9,7 @@ const meta: Meta<SegmentedControlComponent> = {
 export default meta;
 type Story = StoryObj<SegmentedControlComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     mode: SegmentedControlMode.default,
     // items: '',

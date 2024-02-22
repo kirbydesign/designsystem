@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import {
-  applicationConfig,
-  argsToTemplate,
-  componentWrapperDecorator,
-  moduleMetadata,
-} from '@storybook/angular';
+import { applicationConfig, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicModule } from '@ionic/angular';
@@ -23,12 +18,20 @@ const meta: Meta<AccordionItemComponent> = {
     applicationConfig({
       providers: [importProvidersFrom([IonicModule.forRoot(), BrowserAnimationsModule])],
     }),
-    componentWrapperDecorator((story) => `<div style="padding: 1em;">${story}</div>`),
   ],
+};
+export default meta;
+type Story = StoryObj<AccordionItemComponent>;
+
+export const TestGrid: Story = {
+  args: {
+    title: 'Default',
+    isExpanded: false,
+    isDisabled: false,
+    disabledTitle: '',
+  },
   render: (args: AccordionItemComponent) => ({
-    props: {
-      ...args,
-    },
+    props: args,
     template: `<kirby-accordion>
     <kirby-accordion-item ${argsToTemplate(args)}>
       Accordion Content
@@ -42,27 +45,3 @@ const meta: Meta<AccordionItemComponent> = {
   </kirby-accordion>`,
   }),
 };
-export default meta;
-type Story = StoryObj<AccordionItemComponent>;
-
-export const TestGrid: Story = {
-  args: {
-    title: 'Default',
-    isExpanded: false,
-    isDisabled: false,
-    disabledTitle: '',
-  },
-};
-
-// export const Heading: Story = {
-//   args: {
-//     title: 'Accordion-item works!',
-//     isExpanded: false,
-//     isDisabled: false,
-//     disabledTitle: '',
-//   },
-//   play: async ({ canvasElement }) => {
-//     const canvas = within(canvasElement);
-//     expect(canvas.getByText(/accordion-item works!/gi)).toBeTruthy();
-//   },
-// };

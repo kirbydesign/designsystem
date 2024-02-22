@@ -11,7 +11,7 @@ const meta: Meta<TabsComponent> = {
 export default meta;
 type Story = StoryObj<TabsComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {},
 };
 

@@ -1,38 +1,43 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  applicationConfig,
+  argsToTemplate,
+  type Meta,
+  moduleMetadata,
+  type StoryObj,
+} from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { IonicModule } from '@ionic/angular';
+import { importProvidersFrom } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
 
 const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,
   title: 'CheckboxComponent',
+  decorators: [
+    moduleMetadata({
+      imports: [IonicModule],
+    }),
+    applicationConfig({
+      providers: [importProvidersFrom([IonicModule.forRoot()])],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<CheckboxComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     checked: false,
     attentionLevel: '2',
-    text: '',
+    text: 'label',
     size: 'md',
     hasError: false,
     disabled: false,
   },
-};
-
-export const Heading: Story = {
-  args: {
-    checked: false,
-    attentionLevel: '2',
-    text: '',
-    size: 'md',
-    hasError: false,
-    disabled: false,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/checkbox works!/gi)).toBeTruthy();
-  },
+  render: (args: CheckboxComponent) => ({
+    props: args,
+    template: `
+      <kirby-checkbox ${argsToTemplate(args)} text="Chekcbox">
+      </kirby-checkbox>`,
+  }),
 };

@@ -9,7 +9,7 @@ const meta: Meta<AlertComponent> = {
 export default meta;
 type Story = StoryObj<AlertComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     title: '',
     // message: '',

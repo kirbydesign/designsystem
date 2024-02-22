@@ -9,7 +9,7 @@ const meta: Meta<ItemComponent> = {
 export default meta;
 type Story = StoryObj<ItemComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     disabled: false,
     selected: false,

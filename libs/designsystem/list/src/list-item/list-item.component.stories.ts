@@ -11,7 +11,7 @@ const meta: Meta<ListItemComponent> = {
 export default meta;
 type Story = StoryObj<ListItemComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     swipeActions: [],
     isSelected: false,

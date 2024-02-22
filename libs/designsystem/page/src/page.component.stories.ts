@@ -9,7 +9,7 @@ const meta: Meta<PageComponent> = {
 export default meta;
 type Story = StoryObj<PageComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     title: '',
     subtitle: '',

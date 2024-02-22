@@ -11,7 +11,7 @@ const meta: Meta<RangeComponent> = {
 export default meta;
 type Story = StoryObj<RangeComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     minLabel: '',
     maxLabel: '',

@@ -11,7 +11,7 @@ const meta: Meta<InputCounterComponent> = {
 export default meta;
 type Story = StoryObj<InputCounterComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {},
 };
 

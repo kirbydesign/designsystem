@@ -11,7 +11,7 @@ const meta: Meta<ToggleComponent> = {
 export default meta;
 type Story = StoryObj<ToggleComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     checked: false,
     disabled: false,

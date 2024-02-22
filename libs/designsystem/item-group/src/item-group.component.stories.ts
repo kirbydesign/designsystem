@@ -11,7 +11,7 @@ const meta: Meta<ItemGroupComponent> = {
 export default meta;
 type Story = StoryObj<ItemGroupComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {},
 };
 

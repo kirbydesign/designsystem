@@ -11,7 +11,7 @@ const meta: Meta<PageFooterComponent> = {
 export default meta;
 type Story = StoryObj<PageFooterComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     hasPadding: true,
   },

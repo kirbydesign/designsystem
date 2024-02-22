@@ -11,7 +11,7 @@ const meta: Meta<ModalWrapperComponent> = {
 export default meta;
 type Story = StoryObj<ModalWrapperComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {},
 };
 

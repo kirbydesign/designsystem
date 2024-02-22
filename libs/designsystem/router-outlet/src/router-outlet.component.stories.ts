@@ -11,7 +11,7 @@ const meta: Meta<RouterOutletComponent> = {
 export default meta;
 type Story = StoryObj<RouterOutletComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     main: false,
   },

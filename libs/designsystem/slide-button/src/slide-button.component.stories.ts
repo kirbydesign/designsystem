@@ -11,7 +11,7 @@ const meta: Meta<SlideButtonComponent> = {
 export default meta;
 type Story = StoryObj<SlideButtonComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     text: '',
   },

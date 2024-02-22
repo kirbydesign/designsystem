@@ -11,7 +11,7 @@ const meta: Meta<ListComponent> = {
 export default meta;
 type Story = StoryObj<ListComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     items: [],
     getStandAloneByProperty: '',

@@ -11,7 +11,7 @@ const meta: Meta<ModalFooterComponent> = {
 export default meta;
 type Story = StoryObj<ModalFooterComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     snapToKeyboard: false,
     type: 'fixed',

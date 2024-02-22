@@ -11,7 +11,7 @@ const meta: Meta<ProgressCircleRingComponent> = {
 export default meta;
 type Story = StoryObj<ProgressCircleRingComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     radius: 0,
     value: 0,

@@ -9,7 +9,7 @@ const meta: Meta<RadioGroupComponent> = {
 export default meta;
 type Story = StoryObj<RadioGroupComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     // disabled: '',
     hasError: false,

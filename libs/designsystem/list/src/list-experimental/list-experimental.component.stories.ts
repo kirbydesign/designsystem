@@ -11,7 +11,7 @@ const meta: Meta<ListExperimentalComponent> = {
 export default meta;
 type Story = StoryObj<ListExperimentalComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {},
 };
 

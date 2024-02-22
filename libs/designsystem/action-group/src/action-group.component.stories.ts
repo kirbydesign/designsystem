@@ -1,7 +1,6 @@
 import {
   applicationConfig,
   argsToTemplate,
-  componentWrapperDecorator,
   type Meta,
   moduleMetadata,
   type StoryObj,
@@ -23,12 +22,18 @@ const meta: Meta<ActionGroupComponent> = {
     applicationConfig({
       providers: [importProvidersFrom([IonicModule.forRoot()])],
     }),
-    componentWrapperDecorator((story) => `<div style="padding: 1em;">${story}</div>`),
   ],
+};
+export default meta;
+type Story = StoryObj<ActionGroupComponent>;
+
+export const TestGrid: Story = {
+  args: {
+    visibleActions: 2,
+    align: 'end',
+  },
   render: (args: ActionGroupComponent) => ({
-    props: {
-      ...args,
-    },
+    props: args,
     template: `<kirby-action-group ${argsToTemplate(args)}>
     <button kirby-button attentionLevel="3">
       <kirby-icon name="edit"></kirby-icon>
@@ -42,13 +47,4 @@ const meta: Meta<ActionGroupComponent> = {
     </button>
   </kirby-action-group>`,
   }),
-};
-export default meta;
-type Story = StoryObj<ActionGroupComponent>;
-
-export const Primary: Story = {
-  args: {
-    visibleActions: 2,
-    align: 'end',
-  },
 };

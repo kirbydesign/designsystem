@@ -11,7 +11,7 @@ const meta: Meta<TextareaComponent> = {
 export default meta;
 type Story = StoryObj<TextareaComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     value: '',
     borderless: false,

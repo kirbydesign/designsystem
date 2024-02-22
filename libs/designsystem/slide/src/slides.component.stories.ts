@@ -11,7 +11,7 @@ const meta: Meta<SlidesComponent> = {
 export default meta;
 type Story = StoryObj<SlidesComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     title: '',
     showNavigation: true,

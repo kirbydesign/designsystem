@@ -10,7 +10,7 @@ const meta: Meta<MenuComponent> = {
 export default meta;
 type Story = StoryObj<MenuComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     isDisabled: false,
     buttonSize: ButtonSize.MD,

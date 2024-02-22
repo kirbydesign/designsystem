@@ -11,7 +11,7 @@ const meta: Meta<FormFieldComponent> = {
 export default meta;
 type Story = StoryObj<FormFieldComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     label: '',
   },

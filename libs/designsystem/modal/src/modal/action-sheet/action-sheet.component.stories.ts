@@ -11,7 +11,7 @@ const meta: Meta<ActionSheetComponent> = {
 export default meta;
 type Story = StoryObj<ActionSheetComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     cancelButtonText: 'Cancel',
     hideCancel: false,

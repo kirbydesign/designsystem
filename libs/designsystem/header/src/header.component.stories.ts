@@ -11,7 +11,7 @@ const meta: Meta<HeaderComponent> = {
 export default meta;
 type Story = StoryObj<HeaderComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     centered: false,
     titleMaxLines: 0,

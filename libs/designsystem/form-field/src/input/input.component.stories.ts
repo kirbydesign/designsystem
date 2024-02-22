@@ -9,7 +9,12 @@ const meta: Meta<InputComponent> = {
 export default meta;
 type Story = StoryObj<InputComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
+  argTypes: {
+    maxlength: {
+      control: { type: 'number' },
+    },
+  },
   args: {
     type: '',
     size: InputSize.large,
@@ -18,7 +23,6 @@ export const Primary: Story = {
     autocomplete: 'off',
     autocorrect: 'off',
     value: '',
-    maxlength: 0,
     inputmode: '',
   },
 };

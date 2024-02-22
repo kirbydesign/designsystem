@@ -11,7 +11,7 @@ const meta: Meta<PageLocalNavigationComponent> = {
 export default meta;
 type Story = StoryObj<PageLocalNavigationComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     items: [],
     selectedIndex: 0,

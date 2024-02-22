@@ -11,7 +11,7 @@ const meta: Meta<ModalV2RoutingComponent> = {
 export default meta;
 type Story = StoryObj<ModalV2RoutingComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {},
 };
 

@@ -11,7 +11,7 @@ const meta: Meta<ToggleButtonComponent> = {
 export default meta;
 type Story = StoryObj<ToggleButtonComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     checked: false,
   },

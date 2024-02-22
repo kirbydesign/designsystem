@@ -11,7 +11,7 @@ const meta: Meta<SpinnerComponent> = {
 export default meta;
 type Story = StoryObj<SpinnerComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {},
 };
 

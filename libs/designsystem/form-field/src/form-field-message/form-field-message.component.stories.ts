@@ -11,7 +11,7 @@ const meta: Meta<FormFieldMessageComponent> = {
 export default meta;
 type Story = StoryObj<FormFieldMessageComponent>;
 
-export const Primary: Story = {
+export const TestGrid: Story = {
   args: {
     text: '',
     position: 'left',
