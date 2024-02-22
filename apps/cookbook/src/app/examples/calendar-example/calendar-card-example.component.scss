@@ -10,4 +10,9 @@ kirby-card {
     display: flex;
     justify-content: space-around;
   }
+
+  p {
+    margin: 0;
+    margin-top: utils.size(xs);
+  }
 }

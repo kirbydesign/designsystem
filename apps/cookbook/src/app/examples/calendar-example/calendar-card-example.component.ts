@@ -20,9 +20,11 @@ const config = {
   ></kirby-calendar>
 </kirby-card>
 
-<kirby-card class="calendar-navigation" [hasPadding]="true">
-  <kirby-card-header flagged="info">
-    Selected Date: {{ selectedDate ? (selectedDate | date: 'MMM d, y z':(useTimezoneUTC ? 'UTC' : undefined)) : 'none' }}   
+<kirby-card [hasPadding]="true">
+  <kirby-card-header [hasPadding]="false">
+    <p>
+      Selected Date: {{ selectedDate ? (selectedDate | date: 'MMM d, y z':(useTimezoneUTC ? 'UTC' : undefined)) : 'none' }}   
+    </p>
   </kirby-card-header>
   <div class="buttons">
     <button kirby-button (click)="selectNextMonth()" attentionLevel="3" size="sm">
