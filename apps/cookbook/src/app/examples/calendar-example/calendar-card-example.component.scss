@@ -5,15 +5,9 @@ kirby-card {
   overflow: visible; // Ensure dropdown isn't cut off
   width: 320px;
   margin-bottom: utils.size(xxs);
-}
-
-kirby-card.calendar-navigation {
-  margin-bottom: utils.size(s);
 
   .buttons {
     display: flex;
-    width: 100%;
-    height: 100%;
     justify-content: space-around;
   }
 }
