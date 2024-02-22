@@ -31,7 +31,10 @@
         "configDir": "libs/designsystem/.storybook",
         "browserTarget": "designsystem:build",
         "port": 6006,
-        "styles": ["libs/core/src/scss/_global-styles.scss"],
+        "styles": [
+          "libs/core/src/scss/_global-styles.scss",
+          "libs/designsystem/.storybook/styles.css"
+        ],
         "assets": [
           {
             "glob": "**/*",
@@ -56,7 +59,11 @@
       "options": {
         "configDir": "libs/designsystem/",
         "browserTarget": "designsystem:build",
-        "outputDir": "dist/storybook/designsystem"
+        "outputDir": "dist/storybook/designsystem",
+        "styles": [
+          "libs/core/src/scss/_global-styles.scss",
+          "libs/designsystem/.storybook/styles.css"
+        ]
       }
     }
   },

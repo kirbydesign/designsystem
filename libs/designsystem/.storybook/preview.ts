@@ -1,5 +1,6 @@
 // Replace your-framework with the framework you are using (e.g., react, vue3)
-import { Preview } from '@storybook/angular';
+import { ColorHelper } from '@kirbydesign/core';
+import { componentWrapperDecorator, Preview } from '@storybook/angular';
 
 const preview: Preview = {
   parameters: {
@@ -12,7 +13,7 @@ const preview: Preview = {
         },
         {
           name: 'gray',
-          value: '#f6f6f6',
+          value: ColorHelper.getBackgroundColor(),
         },
         {
           name: 'dark',
@@ -21,6 +22,11 @@ const preview: Preview = {
       ],
     },
   },
+  decorators: [
+    componentWrapperDecorator(
+      (story) => `<div style="display: flex; flex-direction: column; gap: 10px">${story}</div>`
+    ),
+  ],
 };
 
 export default preview;
