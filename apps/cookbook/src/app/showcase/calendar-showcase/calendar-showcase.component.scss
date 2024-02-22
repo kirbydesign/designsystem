@@ -1,13 +1,10 @@
-.calendar-example {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-}
+@use '@kirbydesign/core/src/scss/utils';
 
-cookbook-calendar-example,
-.example-wrapper {
-  margin-right: 20px;
+.calendar-example {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: utils.size('m');
 }
 
 h2.custom-example {

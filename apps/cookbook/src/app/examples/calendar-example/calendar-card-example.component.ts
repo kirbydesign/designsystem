@@ -2,12 +2,74 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
+const config = {
+  template: `<kirby-card>
+  <kirby-calendar
+    [timezone]="useTimezoneUTC ? 'UTC' : 'local'"
+    [disableWeekends]="disableWeekends"
+    [disablePastDates]="disablePastDates"
+    [disableFutureDates]="disableFutureDates"
+    [disabledDates]="setDisabledDates ? disabledDates : null"
+    [enabledDates]="setEnabledDates ? enabledDates : null"
+    [minDate]="setMinDate ? minDate : null"
+    [maxDate]="setMaxDate ? maxDate : null"
+    [todayDate]="setTodayDate ? todayDate : null"
+    [selectedDate]="selectedDate"
+    (dateChange)="onDateChange($event)"
+    [yearNavigatorOptions]="showYearNavigator ? yearNavigatorOptions : null"
+  ></kirby-calendar>
+</kirby-card>
+
+<kirby-card class="calendar-navigation" [hasPadding]="true">
+  <kirby-card-header flagged="info">
+    Selected Date: {{ selectedDate ? (selectedDate | date: 'MMM d, y z':(useTimezoneUTC ? 'UTC' : undefined)) : 'none' }}   
+  </kirby-card-header>
+  <div class="buttons">
+    <button kirby-button (click)="selectNextMonth()" attentionLevel="3" size="sm">
+      Next month
+    </button>
+    <button kirby-button (click)="selectToday()" attentionLevel="3" size="sm">Now</button>
+    <button kirby-button (click)="deselectDate()" attentionLevel="3" size="sm">Deselect</button>
+  </div>
+</kirby-card>
+    `,
+  codeSnippet: `this.minDate = subDays(today, 60);
+this.maxDate = addDays(today, 60);
+this.todayDate = addDays(today, 3);
+
+this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
+  addDays(today, daysFromToday)
+);
+
+this.enabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
+  addDays(today, daysFromToday)
+);
+
+selectNextMonth() {
+  const today = new Date();
+  const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+  this.selectedDate = nextMonth;
+}
+
+selectToday() {
+  this.selectedDate = new Date();
+}
+
+deselectDate() {
+  this.selectedDate = null;
+}
+  `,
+};
+
 @Component({
   selector: 'cookbook-calendar-card-example',
-  templateUrl: './calendar-card-example.component.html',
+  template: config.template,
   styleUrls: ['./calendar-card-example.component.scss'],
 })
 export class CalendarCardExampleComponent implements OnChanges {
+  static template: string = config.template;
+  static codeSnippet: string = config.codeSnippet;
+
   selectedDate: Date;
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
@@ -27,6 +89,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   enabledDates: Date[];
   yearNavigatorOptions = { from: -6, to: 3 };
   timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   constructor() {
     this.updateInputDates();
   }
@@ -64,6 +127,10 @@ export class CalendarCardExampleComponent implements OnChanges {
 
   selectToday() {
     this.selectedDate = new Date();
+  }
+
+  deselectDate() {
+    this.selectedDate = null;
   }
 
   private updateInputDates() {
