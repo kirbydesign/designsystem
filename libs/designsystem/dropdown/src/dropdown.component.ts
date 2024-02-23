@@ -26,8 +26,9 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
+import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
@@ -245,7 +246,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     private renderer: Renderer2,
     private elementRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
-    private keyboardHandlerService: KeyboardHandlerService
+    private keyboardHandlerService: KeyboardHandlerService,
+    private resizeObserverService: ResizeObserverService
   ) {}
 
   onToggle(event: MouseEvent) {
@@ -290,6 +292,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.setPopoverCardStyle('--kirby-card-width', `${width}px`);
       this.setPopoverCardStyle('max-width', 'initial');
       this.setPopoverCardStyle('min-width', 'initial');
+      this.resizeObserverService.observe(this.elementRef, (entry) => {
+        if (entry.contentRect.width > 0) {
+          this.setPopoverCardStyle('--kirby-card-width', `${entry.contentRect.width}px`);
+        }
+      });
     }
     this.initializeAlignment();
   }
@@ -629,6 +636,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   ngOnDestroy(): void {
     this.unlistenAllSlottedItems();
+    this.resizeObserverService.unobserve(this.elementRef);
     if (this.intersectionObserverRef) {
       this.intersectionObserverRef.disconnect();
     }
