@@ -291,12 +291,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       const { width: initialWidth } = this.elementRef.nativeElement.getBoundingClientRect();
       this.setPopoverCardStyle('max-width', 'initial');
       this.setPopoverCardStyle('min-width', 'initial');
-      console.log('initial width:', initialWidth);
       // Ensure initial width is set even if the resize observer callback also fires initially:
       this.setPopoverCardStyle('--kirby-card-width', `${initialWidth}px`);
+
       this.resizeObserverService.observe(this.elementRef, (entry) => {
         const newWidth = entry.contentRect.width;
-        console.log('resizeObserverService callback... width:', newWidth);
         if (newWidth > 0) {
           this.setPopoverCardStyle('--kirby-card-width', `${newWidth}px`);
         }
