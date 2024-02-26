@@ -1177,9 +1177,7 @@ describe('DropdownComponent', () => {
       (spectator.hostElement as HTMLElement).style.width = newWidth;
       await TestHelper.waitForResizeObserver();
       // Resize observe callback can be flaky in test, so ensure width has changed before asserting:
-      await TestHelper.whenTrue(
-        () => popoverCard.style.getPropertyValue('--kirby-card-width') !== `${initWidth}px`
-      );
+      await TestHelper.whenTrue(() => spectator.element.clientWidth !== initWidth);
 
       const cardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
       expect(cardWidth).toEqual(newWidth);
