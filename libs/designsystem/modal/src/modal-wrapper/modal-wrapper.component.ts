@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ElementRef,
   HostBinding,
   HostListener,
@@ -13,6 +14,7 @@ import {
   QueryList,
   Renderer2,
   RendererStyleFlags2,
+  TemplateRef,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -71,7 +73,7 @@ export class ModalWrapperComponent
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
 
-  set scrollDisabled(disabled: boolean) {
+  @Input() set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
 
@@ -80,7 +82,12 @@ export class ModalWrapperComponent
   }
 
   @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
+
   componentPropsInjector: Injector;
+  modalWrapperInjector: Injector;
+
+  @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
 
   @ViewChildren(ButtonComponent, { read: ElementRef }) private toolbarButtonsQuery: QueryList<
     ElementRef<HTMLButtonElement>
@@ -172,6 +179,11 @@ export class ModalWrapperComponent
     this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
+      parent: this.injector,
+    });
+
+    this.modalWrapperInjector = Injector.create({
+      providers: [{ provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent }],
       parent: this.injector,
     });
   }

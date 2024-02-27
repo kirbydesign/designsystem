@@ -34,9 +34,16 @@
       <span class="kirby-text-xlarge" #contentTitle></span>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Outlet for ModalController -->
   <ng-container
     *ngComponentOutlet="config.component; injector: componentPropsInjector"
   ></ng-container>
+
+  <!-- Outlet for projected content -->
+  <ng-container *ngTemplateOutlet="content; injector: modalWrapperInjector"></ng-container>
+
+  <!-- Outlet for route-based modal -->
   <router-outlet
     name="kirbyModalWrapperOutlet"
     [style.visibility]="config.modalRoute ? 'visible' : 'hidden'"

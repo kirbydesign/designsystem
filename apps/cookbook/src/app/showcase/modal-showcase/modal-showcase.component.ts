@@ -9,6 +9,7 @@ import {
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
+import { ModalComponentExampleComponent } from '~/app/examples/modal-example/modal-component-example.component';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -19,9 +20,12 @@ import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example
 export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;
   basicConfigExample = ModalExampleSimpleComponent;
+  componentExample = ModalComponentExampleComponent;
   outletExample = ModalExampleOutletComponent;
   alertEmbeddedExample = ModalEmbeddedAlertExampleComponent;
   alertModalConfigExample = ModalExampleAlertComponent;
+  isOpenExampleHtml = ModalComponentExampleComponent.isOpenExampleHtml;
+  isOpenCodeSnippet = ModalComponentExampleComponent.isOpenCodeSnippet;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
@@ -63,18 +67,6 @@ export class ModalShowcaseComponent {
       type: ['undefined | string'],
     },
     {
-      name: 'component',
-      description: 'The component which will be rendered inside the modal.',
-      defaultValue: '',
-      type: ['Component'],
-    },
-    {
-      name: 'componentProps',
-      description: '(Optional) The data to pass to the modal component.',
-      defaultValue: '',
-      type: ['undefined | { [key: string]: any; }'],
-    },
-    {
       name: 'drawerSupplementaryAction',
       description: `(Optional) Allows placing a supplementary button in the top right corner of drawers.
       Please note: Only available on modals with a \`drawer\` flavor.`,
@@ -89,12 +81,6 @@ export class ModalShowcaseComponent {
       type: ['boolean'],
     },
     {
-      name: 'cssClass',
-      description: `(Optional) Adds custom css classes to the modal. This allows for custom styling of the modal (see 'CSS Custom Properties' section).`,
-      defaultValue: '',
-      type: ['string | string[]'],
-    },
-    {
       name: 'canDismiss',
       description: `(Optional) Determines whether or not a modal can be dismissed.
  
@@ -102,14 +88,32 @@ export class ModalShowcaseComponent {
       defaultValue: 'true',
       type: ['boolean | AlertConfig | Promise<boolean | AlertConfig>'],
     },
-  ];
-
-  properties: ApiDescriptionProperty[] = [
     {
       name: 'scrollDisabled',
       description: 'Disable scrolling of the modal',
       type: ['true', 'false'],
       defaultValue: 'false',
+    },
+  ];
+
+  modalConfigProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'component',
+      description: '(Required) The component which will be rendered inside the modal.',
+      defaultValue: '',
+      type: ['Component'],
+    },
+    {
+      name: 'componentProps',
+      description: '(Optional) The data to pass to the modal component.',
+      defaultValue: '',
+      type: ['undefined | { [key: string]: any; }'],
+    },
+    {
+      name: 'cssClass',
+      description: `(Optional) Adds custom css classes to the modal. This allows for custom styling of the modal (see 'CSS Custom Properties' section).`,
+      defaultValue: '',
+      type: ['string | string[]'],
     },
   ];
 

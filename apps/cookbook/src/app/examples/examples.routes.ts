@@ -90,6 +90,7 @@ import { ModalExampleSimpleComponent } from './modal-example/modal-example-simpl
 import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { ModalExampleAlertComponent } from './modal-example/modal-example-alert.component';
+import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 
 export const routes: ModalEnabledRoutes = [
   {
@@ -269,6 +270,10 @@ export const routes: ModalEnabledRoutes = [
       {
         path: 'modal-simple',
         component: ModalExampleSimpleComponent,
+      },
+      {
+        path: 'modal-component',
+        component: ModalComponentExampleComponent,
       },
       {
         path: 'modal-alert',

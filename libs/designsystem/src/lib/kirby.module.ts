@@ -60,6 +60,7 @@ import {
   ModalHelper,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
+import { ModalComponent } from '@kirbydesign/designsystem/modal';
 import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { HeaderModule } from '@kirbydesign/designsystem/header';
@@ -118,6 +119,7 @@ const standaloneComponents = [
   ComponentLoaderDirective,
   FlagComponent,
   BadgeComponent,
+  ModalComponent,
 ];
 const exportedModules = [
   KirbyAppModule,
