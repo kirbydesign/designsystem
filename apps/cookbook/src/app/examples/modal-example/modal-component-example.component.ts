@@ -83,12 +83,4 @@ export class ModalComponentExampleComponent {
   sizeChange(size: ModalSizeOption) {
     this.size = size.value;
   }
-
-  openModal() {
-    this.isOpen = true;
-  }
-
-  didDismiss() {
-    this.isOpen = false;
-  }
 }
