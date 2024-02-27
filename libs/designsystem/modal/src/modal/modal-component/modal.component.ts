@@ -63,7 +63,7 @@ export class ModalComponent implements OnChanges, AfterContentInit {
   }
 
   // NOTE: input properties forwarded to modal-wrapper ModalConfig
-  @Input() collapseTitle = true;
+  @Input() collapseTitle = false;
   @Input() customHeight: string = undefined;
   @Input() flavor: ModalFlavor = 'modal';
   @Input() drawerSupplementaryAction?: DrawerSupplementaryAction = undefined;
