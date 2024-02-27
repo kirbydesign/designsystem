@@ -129,7 +129,6 @@ export class ModalComponent implements OnChanges, AfterContentInit {
   }
 
   public _onDidDismiss(event: CustomEvent<OverlayEventDetail>) {
-    this.isOpen = false;
     this.didDismiss.emit(event);
   }
 
