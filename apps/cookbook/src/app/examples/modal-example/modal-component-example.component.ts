@@ -1,36 +1,47 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ModalFlavor, ModalSize } from '@kirbydesign/designsystem';
+import { ModalSize } from '@kirbydesign/designsystem';
 import { ModalSizeOption } from './modal-example-configuration/modal-example-size-selector.component';
 
-const config = {
-  selector: 'cookbook-modal-component-example',
-  template: `<button kirby-button size="lg" id="open-modal">Show modal</button>
-
-<kirby-modal trigger="open-modal" [size]="size">
-  <ng-template>
-    <kirby-page-title>Modal</kirby-page-title>
+const modalAndDrawerContent = `<ng-template>
+    <kirby-page-title>Modal Component</kirby-page-title>
 
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-    </p>
-
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+      Lorem ipsum. 
     </p>
 
     <kirby-modal-footer>
       <button kirby-button>Button in footer</button>
     </kirby-modal-footer>
-  </ng-template>
+  </ng-template>`;
+
+const compactContent = `<ng-template>
+    <kirby-empty-state
+      iconName="close"
+      title="Out of service"
+      subtitle="The system is currently down. Please contact customer support."
+      themeColor="danger"
+      ></kirby-empty-state>
+  </ng-template>`;
+
+const config = {
+  selector: 'cookbook-modal-component-example',
+  template: `<button kirby-button size="lg" id="open-modal">Show modal</button>
+<button kirby-button size="lg" id="open-drawer">Show drawer</button>
+<button kirby-button size="lg" id="open-compact">Show compact</button>
+
+<kirby-modal [size]="size" flavor="modal" trigger="open-modal">
+  ${modalAndDrawerContent}
 </kirby-modal>
+
+<!-- Additional flavor examples omitted from example for brevity -->
+<kirby-modal trigger="open-drawer" flavor="drawer" [size]="size">
+  ${modalAndDrawerContent}
+</kirby-modal>
+
+<kirby-modal trigger="open-compact" flavor="compact">
+  ${compactContent}
+</kirby-modal>
+
 <kirby-card>
   <kirby-card-header>
     <strong>Size of modal</strong><br />
@@ -39,6 +50,21 @@ const config = {
   <cookbook-modal-example-size-selector (sizeChange)="sizeChange($event)"></cookbook-modal-example-size-selector>
 </kirby-card>
 `,
+  isOpenExampleHtml: `<button kirby-button size="lg" (click)="openModal()">Show modal</button>
+
+<kirby-modal [isOpen]="isOpen" (didDismiss)="didDismiss()">
+  <ng-template>
+    Modal content
+  </ng-template>
+</kirby-modal>
+`,
+  isOpenCodeSnippet: `openModal() {
+  this.isOpen = true;
+}
+
+didDismiss() {
+  this.isOpen = false;
+}`,
 };
 @Component({
   selector: config.selector,
@@ -47,15 +73,22 @@ const config = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponentExampleComponent {
-  static readonly template = config.template.split('<kirby-card')[0];
+  static readonly template = config.template.split('<kirby-modal trigger="open-drawer"')[0];
+  static readonly isOpenExampleHtml = config.isOpenExampleHtml;
+  static readonly isOpenCodeSnippet = config.isOpenCodeSnippet;
+
   size: ModalSize = 'medium';
-  flavor: ModalFlavor;
+  isOpen: boolean = false;
 
   sizeChange(size: ModalSizeOption) {
     this.size = size.value;
   }
 
-  changeFlavor(flavor: ModalFlavor) {
-    this.flavor = flavor;
+  openModal() {
+    this.isOpen = true;
+  }
+
+  didDismiss() {
+    this.isOpen = false;
   }
 }

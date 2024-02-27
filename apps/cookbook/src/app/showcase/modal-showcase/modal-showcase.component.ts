@@ -20,10 +20,12 @@ import { ModalComponentExampleComponent } from '~/app/examples/modal-example/mod
 export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;
   basicConfigExample = ModalExampleSimpleComponent;
-  componentConfigExample = ModalComponentExampleComponent;
+  componentExample = ModalComponentExampleComponent;
   outletExample = ModalExampleOutletComponent;
   alertEmbeddedExample = ModalEmbeddedAlertExampleComponent;
   alertModalConfigExample = ModalExampleAlertComponent;
+  isOpenExampleHtml = ModalComponentExampleComponent.isOpenExampleHtml;
+  isOpenCodeSnippet = ModalComponentExampleComponent.isOpenCodeSnippet;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });

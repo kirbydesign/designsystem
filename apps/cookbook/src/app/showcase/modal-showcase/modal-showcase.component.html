@@ -74,12 +74,13 @@
   with the close button, backdrop or escape key.
 </p>
 
-<p>
+<cookbook-example-viewer [html]="isOpenExampleHtml" [ts]="isOpenCodeSnippet">
   The
   <code>isOpen</code>
   property can be used as an alternative to the trigger if you need direct control over the dialogs
-  open/closed state based on some application-state.
-</p>
+  open/closed state based on some application-state. In this case, remember to listen for dismissal
+  of the modal to set isOpen to false:
+</cookbook-example-viewer>
 
 <cookbook-iphone
   class="large-example"
@@ -88,7 +89,7 @@
   [showViewModeToggle]="true"
   showExternalLink="true"
 ></cookbook-iphone>
-<cookbook-example-viewer [html]="componentConfigExample.template"></cookbook-example-viewer>
+<cookbook-example-viewer [html]="componentExample.template"></cookbook-example-viewer>
 
 <p>
   Make sure to nest all content inside an
