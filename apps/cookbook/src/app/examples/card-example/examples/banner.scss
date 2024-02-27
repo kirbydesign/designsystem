@@ -8,12 +8,11 @@
 kirby-card {
   --kirby-card-background-image: url('https://images.unsplash.com/photo-1515876305430-f06edab8282a');
 
-  height: 288px;
+  height: 200px;
   width: 500px;
-  padding-bottom: var(--kirby-card-padding-bottom, 0);
 
-  footer {
+  // Add styling within card component to content layer to position card-footer correctly.
+  .content-layer {
     height: 100%;
-    background-color: aqua;
   }
 }

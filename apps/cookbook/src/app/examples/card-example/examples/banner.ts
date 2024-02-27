@@ -18,8 +18,17 @@ const config = {
     </kirby-item>
   </kirby-card-footer>
 </kirby-card>`,
-  style: `@use '@kirbydesign/designsystem/scss/utils';
- 
+  style: `@use '@kirbydesign/designsystem/src/scss/utils';
+
+  kirby-card {
+    --kirby-card-background-image: url('https://images.unsplash.com/photo-1515876305430-f06edab8282a');
+    height: 200px;
+    width: 500px;
+  }
+  // Add styling within card component to content layer to position card-footer correctly.
+  .content-layer {
+    height: 100%;
+  }
   `,
 };
 
