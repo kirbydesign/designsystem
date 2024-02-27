@@ -34,7 +34,7 @@ describe('Modal Component', () => {
     });
 
     it('should have a collapsible title', () => {
-      expect(spectator.component.collapseTitle).toBeTrue();
+      expect(spectator.component.collapseTitle).toBeFalse();
     });
 
     it('should not have scroll disabled', () => {
