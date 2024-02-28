@@ -1,8 +1,17 @@
 <kirby-slides [slides]="slides" [title]="'Title'" [showNavigation]="true">
-  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
+  <kirby-card
+    [class.stretch-vertically]="stretch"
+    *kirbySlide="let slide; let i = index"
+    [hasPadding]="true"
+  >
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
     <div class="card-content">
       {{ slide.cardContent }}
     </div>
   </kirby-card>
 </kirby-slides>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<button kirby-button (click)="toggleStretch()">Toggle Stretch</button>
+Enabled: {{ stretch }}

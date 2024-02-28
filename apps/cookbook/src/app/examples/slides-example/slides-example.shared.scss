@@ -8,3 +8,8 @@
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
 }
+
+.stretch-vertically {
+  height: 100%;
+  justify-content: start;
+}
