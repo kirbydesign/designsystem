@@ -43,6 +43,7 @@ npm i @kirbydesign/designsystem
 ```
 
 ### Include KirbyModule
+#### NgModule based application
 
 Import the `KirbyModule` in your `AppModule` :
 
@@ -59,6 +60,23 @@ import { KirbyModule } from '@kirbydesign/designsystem';
     ...
 })
 export class AppModule {}
+```
+
+#### Standalone application
+Import providers from `KirbyModule` when bootstrapping your application:
+
+```ts
+import { importProvidersFrom } from '@angular/core';
+import { KirbyModule } from '@kirbydesign/designsystem';
+
+...
+
+await bootstrapApplication(RootComponent, {
+  providers: [
+    ...,
+    importProvidersFrom(KirbyModule)
+  ]
+});
 ```
 
 ### Sass
