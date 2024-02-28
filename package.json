@@ -133,8 +133,10 @@
     "@capacitor/cli": "^4.8.0",
     "@capacitor/core": "^4.4.0",
     "@capacitor/ios": "^4.4.0",
+    "@faker-js/faker": "^8.4.1",
     "@kirbydesign/core": "file:libs/core",
     "@ngneat/spectator": "^15.0.1",
+    "@nx/eslint": "17.2.8",
     "@nx/eslint-plugin": "17.2.8",
     "@nx/workspace": "17.2.8",
     "@push-based/user-flow": "^0.8.0",
@@ -193,8 +195,7 @@
     "typescript": "5.2.2",
     "webpack": "^5.76.0",
     "webpack-bundle-analyzer": "^4.6.1",
-    "webpack-cli": "^4.9.0",
-    "@nx/eslint": "17.2.8"
+    "webpack-cli": "^4.9.0"
   },
   "husky": {
     "hooks": {
