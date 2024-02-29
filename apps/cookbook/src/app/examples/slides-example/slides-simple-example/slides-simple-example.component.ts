@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SelectedSlide } from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 import { faker } from '@faker-js/faker';
@@ -8,7 +8,7 @@ import { faker } from '@faker-js/faker';
   templateUrl: './slides-simple-example.component.html',
 })
 export class SlidesSimpleExampleComponent {
-  constructor(private toastController: ToastController) {}
+  private toastController = inject(ToastController);
 
   stretch = false;
 
@@ -25,8 +25,5 @@ export class SlidesSimpleExampleComponent {
       durationInMs: 1000,
     };
     this.toastController.showToast(config);
-  }
-  toggleStretch() {
-    this.stretch = !this.stretch;
   }
 }
