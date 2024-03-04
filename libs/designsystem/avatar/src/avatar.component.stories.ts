@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { applicationConfig, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 
-import { importProvidersFrom } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { AvatarComponent, AvatarSize } from './avatar.component';
 
@@ -14,15 +12,12 @@ const meta: Meta<AvatarComponent> = {
     moduleMetadata({
       declarations: [IconComponent],
     }),
-    applicationConfig({
-      providers: [importProvidersFrom([IonicModule.forRoot()])],
-    }),
   ],
 };
 export default meta;
 type Story = StoryObj<AvatarComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     text: 'A',
     imageSrc: '',
@@ -31,12 +26,26 @@ export const TestGrid: Story = {
     overlay: false,
     size: AvatarSize.SM,
   },
-  render: (args: AvatarComponent) => ({
-    props: args,
-    template: `<kirby-avatar ${argsToTemplate(args)}>
-  </kirby-avatar>
-  <kirby-avatar>
-    <kirby-icon name="kirby"></kirby-icon>
-  </kirby-avatar>`,
+};
+
+export const Size: Story = {
+  render: () => ({
+    template: `
+      <kirby-avatar size="xs" text="A"></kirby-avatar>
+      <kirby-avatar size="sm" text="A"></kirby-avatar>
+      <kirby-avatar size="md" text="A"></kirby-avatar>
+      <kirby-avatar size="lg" text="A"></kirby-avatar>
+    `,
+  }),
+};
+
+export const ThemeColor: Story = {
+  render: () => ({
+    template: `
+    <kirby-avatar themeColor="success" text="A"></kirby-avatar>
+    <kirby-avatar themeColor="warning" text="A"></kirby-avatar>
+    <kirby-avatar themeColor="danger" text="A"></kirby-avatar>
+    <kirby-avatar themeColor="white" text="A"></kirby-avatar>
+    `,
   }),
 };

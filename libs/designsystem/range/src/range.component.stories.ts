@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
 import { RangeComponent } from './range.component';
 
 const meta: Meta<RangeComponent> = {
@@ -11,38 +9,23 @@ const meta: Meta<RangeComponent> = {
 export default meta;
 type Story = StoryObj<RangeComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
+    value: 0,
+    step: 1,
     minLabel: '',
     maxLabel: '',
     debounce: 0,
-    max: 0,
-    min: 0,
     pin: false,
-    step: 1,
     ticks: false,
     disabled: false,
-    // pinFormatter: this.defaultPinFormatter,
-    // value: '',
   },
-};
-
-export const Heading: Story = {
-  args: {
-    minLabel: '',
-    maxLabel: '',
-    debounce: 0,
-    max: 0,
-    min: 0,
-    pin: false,
-    step: 1,
-    ticks: false,
-    disabled: false,
-    // pinFormatter: this.defaultPinFormatter,
-    // value: '',
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/range works!/gi)).toBeTruthy();
+  argTypes: {
+    min: {
+      type: 'number',
+    },
+    max: {
+      type: 'number',
+    },
   },
 };

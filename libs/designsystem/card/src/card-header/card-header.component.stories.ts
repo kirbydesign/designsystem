@@ -1,13 +1,4 @@
-import {
-  applicationConfig,
-  argsToTemplate,
-  Meta,
-  moduleMetadata,
-  StoryObj,
-} from '@storybook/angular';
-
-import { importProvidersFrom } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { CardComponent } from '../card.component';
 import { CardHeaderComponent } from './card-header.component';
@@ -25,54 +16,12 @@ const meta: Meta<CardHeaderComponent> = {
       imports: [IconModule],
       declarations: [CardComponent],
     }),
-    applicationConfig({
-      providers: [importProvidersFrom([IonicModule.forRoot()])],
-    }),
   ],
-  render: (args: CardHeaderComponent) => ({
-    props: args,
-    template: `
-      <div class="test-row" title="Default (interactive)">  
-        <kirby-card>
-          <kirby-card-header ${argsToTemplate(args)}></kirby-card-header>
-          ${cardContent}
-        </kirby-card>
-      </div>
-
-      <div class="test-row" title="ThemeColor ">
-        <kirby-card>
-          <kirby-card-header [title]="'Flagged card header'" flagged="success"></kirby-card-header>
-          ${cardContent}
-        </kirby-card>
-
-        <kirby-card>
-          <kirby-card-header [title]="'Flagged card header'" flagged="warning"></kirby-card-header>
-          ${cardContent}
-        </kirby-card>
-
-        <kirby-card>
-          <kirby-card-header [title]="'Flagged card header'" flagged="danger"></kirby-card-header>
-          ${cardContent}
-        </kirby-card>
-
-        <kirby-card>
-          <kirby-card-header [title]="'Flagged card header'" flagged="info"></kirby-card-header>
-          ${cardContent}
-        </kirby-card>
-      </div>  
-    `,
-  }),
 };
 export default meta;
 type Story = StoryObj<CardHeaderComponent>;
 
-export const TestGrid: Story = {
-  argTypes: {
-    flagged: {
-      options: ['success', 'warning', 'danger', 'info'],
-      control: { type: 'radio' },
-    },
-  },
+export const Default: Story = {
   args: {
     title: 'Title',
     subtitle: '',
@@ -80,4 +29,36 @@ export const TestGrid: Story = {
     flagged: null,
     hasPadding: true,
   },
+  argTypes: {
+    flagged: {
+      options: ['success', 'warning', 'danger', 'info'],
+      control: { type: 'radio' },
+    },
+  },
+};
+
+export const FlaggedInCard: Story = {
+  render: () => ({
+    template: ` 
+      <kirby-card>
+        <kirby-card-header [title]="'Flagged - Success'" flagged="success"></kirby-card-header>
+        ${cardContent}
+      </kirby-card>
+
+      <kirby-card>
+        <kirby-card-header [title]="'Flagged - Warning'" flagged="warning"></kirby-card-header>
+        ${cardContent}
+      </kirby-card>
+
+      <kirby-card>
+        <kirby-card-header [title]="'Flagged - Danger'" flagged="danger"></kirby-card-header>
+        ${cardContent}
+      </kirby-card>
+
+      <kirby-card>
+        <kirby-card-header [title]="'Flagged - Info'" flagged="info"></kirby-card-header>
+        ${cardContent}
+      </kirby-card>
+    `,
+  }),
 };

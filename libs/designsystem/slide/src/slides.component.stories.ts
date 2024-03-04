@@ -1,30 +1,38 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { CardModule } from '@kirbydesign/designsystem/card';
 import { SlidesComponent } from './slides.component';
+import { SlideModule } from './slide.module';
 
 const meta: Meta<SlidesComponent> = {
   component: SlidesComponent,
   title: 'SlidesComponent',
+  decorators: [
+    moduleMetadata({
+      imports: [SlideModule, CardModule],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<SlidesComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
-    title: '',
+    title: 'Title',
     showNavigation: true,
+    slides: [...Array(9).keys()].map((number) => ({
+      title: `Slide ${number + 1}`,
+      subtitle: `Subtitle ${number + 1}`,
+      cardContent: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
+    })),
   },
-};
-
-export const Heading: Story = {
-  args: {
-    title: '',
-    showNavigation: true,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/slides works!/gi)).toBeTruthy();
-  },
+  render: (args: SlidesComponent) => ({
+    props: args,
+    template: `<kirby-slides ${argsToTemplate(args)}>
+    <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
+      <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
+      <div>{{ slide.cardContent }}</div>
+    </kirby-card>
+  </kirby-slides>`,
+  }),
 };

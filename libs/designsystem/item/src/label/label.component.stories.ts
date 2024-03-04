@@ -1,7 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
 import { LabelComponent } from './label.component';
 
 const meta: Meta<LabelComponent> = {
@@ -11,18 +9,12 @@ const meta: Meta<LabelComponent> = {
 export default meta;
 type Story = StoryObj<LabelComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     direction: 'vertical',
   },
-};
-
-export const Heading: Story = {
-  args: {
-    direction: 'vertical',
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/label works!/gi)).toBeTruthy();
-  },
+  render: (args: LabelComponent) => ({
+    props: args,
+    template: `<kirby-label ${argsToTemplate(args)}>Label</kirby-label>`,
+  }),
 };

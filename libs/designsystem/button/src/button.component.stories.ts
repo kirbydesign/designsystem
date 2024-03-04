@@ -16,7 +16,7 @@ const meta: Meta<ButtonComponent> = {
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     noDecoration: false,
     isFloating: false,
@@ -26,11 +26,8 @@ export const TestGrid: Story = {
   },
   render: (args: ButtonComponent) => ({
     props: args,
-    template: `<button kirby-button ${argsToTemplate(args)}>
-    Default
-  </button>
-  <button kirby-button>
-    <kirby-icon></kirby-icon>
-  </button>`,
+    template: `
+      <button kirby-button ${argsToTemplate(args)}>Default</button>
+    `,
   }),
 };

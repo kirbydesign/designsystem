@@ -1,19 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { argsToTemplate } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { ThemeColor } from '@kirbydesign/core';
+
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from './badge.component';
 
-type BadgeProps = BadgeComponent & { themeColor?: ThemeColor };
+type BadgeProps = BadgeComponent & {
+  themeColor?: ThemeColor;
+};
 
-const meta: Meta<BadgeComponent> = {
+const meta: Meta<BadgeProps> = {
   component: BadgeComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [IconModule],
+    }),
+  ],
   title: 'BadgeComponent',
 };
 export default meta;
 type Story = StoryObj<BadgeProps>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
+  args: {
+    text: 'Badge',
+  },
   argTypes: {
     themeColor: {
       options: ['white', 'success', 'warning', 'danger'],
@@ -24,27 +35,19 @@ export const TestGrid: Story = {
       control: { type: 'radio' },
     },
   },
-  args: {
-    text: '',
-    size: 'md',
-  },
-  render: ({ themeColor, ...args }) => ({
+  render: (args: BadgeProps) => ({
     props: args,
     template: `
-    <div class="test-row" title="Defaults (interactive)">
-      <kirby-badge ${argsToTemplate(args)} themeColor="${themeColor}">1</kirby-badge>
-    </div>
+    <kirby-badge ${argsToTemplate(args)}></kirby-badge>`,
+  }),
+};
 
-    <div class="test-row" title="ThemeColor">
-      <kirby-badge themeColor="white">1</kirby-badge>
-      <kirby-badge themeColor="success">7</kirby-badge>
-      <kirby-badge themeColor="warning">99</kirby-badge>
-      <kirby-badge themeColor="danger">123</kirby-badge>
-    </div>
-    
-    <div class="test-row" title="Size">
-      <kirby-badge size="sm">99</kirby-badge>
-      <kirby-badge size="md">99</kirby-badge>
-    </div>`,
+export const ThemeColors: Story = {
+  render: () => ({
+    template: `
+    <kirby-badge themeColor="white">1</kirby-badge>
+    <kirby-badge themeColor="success">7</kirby-badge>
+    <kirby-badge themeColor="warning">99</kirby-badge>
+    <kirby-badge themeColor="danger">123</kirby-badge>`,
   }),
 };

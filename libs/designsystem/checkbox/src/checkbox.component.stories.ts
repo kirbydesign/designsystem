@@ -1,10 +1,4 @@
-import {
-  applicationConfig,
-  argsToTemplate,
-  type Meta,
-  moduleMetadata,
-  type StoryObj,
-} from '@storybook/angular';
+import { applicationConfig, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { IonicModule } from '@ionic/angular';
 import { importProvidersFrom } from '@angular/core';
@@ -25,19 +19,13 @@ const meta: Meta<CheckboxComponent> = {
 export default meta;
 type Story = StoryObj<CheckboxComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     checked: false,
     attentionLevel: '2',
-    text: 'label',
+    text: 'Label',
     size: 'md',
     hasError: false,
     disabled: false,
   },
-  render: (args: CheckboxComponent) => ({
-    props: args,
-    template: `
-      <kirby-checkbox ${argsToTemplate(args)} text="Chekcbox">
-      </kirby-checkbox>`,
-  }),
 };

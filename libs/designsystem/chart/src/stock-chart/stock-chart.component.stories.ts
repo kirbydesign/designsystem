@@ -60,7 +60,7 @@ const meta: Meta<StockChartComponent> = {
 export default meta;
 type Story = StoryObj<StockChartComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     data: _datasets,
     dataLabelOptions: chartDataLabelOptions,

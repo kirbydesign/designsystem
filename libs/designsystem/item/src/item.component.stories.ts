@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 
 import { ItemComponent, ItemSize } from './item.component';
 
@@ -9,7 +9,7 @@ const meta: Meta<ItemComponent> = {
 export default meta;
 type Story = StoryObj<ItemComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     disabled: false,
     selected: false,
@@ -18,4 +18,8 @@ export const TestGrid: Story = {
     size: ItemSize.MD,
     rotateIcon: false,
   },
+  render: (args: ItemComponent) => ({
+    props: args,
+    template: `<kirby-item ${argsToTemplate(args)}>Item</kirby-item>`,
+  }),
 };

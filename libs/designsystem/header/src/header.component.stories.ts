@@ -1,34 +1,31 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { HeaderComponent } from './header.component';
+import { HeaderModule } from './header.module';
 
 const meta: Meta<HeaderComponent> = {
   component: HeaderComponent,
   title: 'HeaderComponent',
+  decorators: [
+    moduleMetadata({
+      imports: [HeaderModule, IconModule],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<HeaderComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
+    title: 'Title',
+    value: '',
+    valueUnit: '',
+    subtitle1: 'Subtitle',
+    subtitle2: '',
+    hasInteractiveTitle: false,
     centered: false,
     titleMaxLines: 0,
     emphasizeActions: false,
-    hasInteractiveTitle: false,
-  },
-};
-
-export const Heading: Story = {
-  args: {
-    centered: false,
-    titleMaxLines: 0,
-    emphasizeActions: false,
-    hasInteractiveTitle: false,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/header works!/gi)).toBeTruthy();
   },
 };

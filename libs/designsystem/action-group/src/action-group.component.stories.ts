@@ -27,7 +27,7 @@ const meta: Meta<ActionGroupComponent> = {
 export default meta;
 type Story = StoryObj<ActionGroupComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     visibleActions: 2,
     align: 'end',

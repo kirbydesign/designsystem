@@ -15,7 +15,11 @@ const meta: Meta<TableSortableComponent> = {
 export default meta;
 type Story = StoryObj<TableSortableComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
+  args: {
+    sortable: false,
+    active: false,
+  },
   argTypes: {
     sortDirection: {
       options: ['asc', 'desc'],
@@ -29,10 +33,6 @@ export const TestGrid: Story = {
       options: ['start', 'center', 'end'],
       control: { type: 'radio' },
     },
-  },
-  args: {
-    sortable: false,
-    active: false,
   },
   render: (args: TableSortableComponent) => ({
     props: args,

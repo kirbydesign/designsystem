@@ -21,7 +21,7 @@ const meta: Meta<ChartComponent> = {
 export default meta;
 type Story = StoryObj<ChartComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     type: 'column',
     data: [50, 200, 83, 102],

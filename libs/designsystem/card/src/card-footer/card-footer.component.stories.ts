@@ -20,7 +20,7 @@ const meta: Meta<CardFooterComponent> = {
 export default meta;
 type Story = StoryObj<CardFooterComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     hasPadding: true,
   },

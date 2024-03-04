@@ -1,8 +1,7 @@
-// Replace your-framework with the framework you are using (e.g., react, vue3)
 import { importProvidersFrom } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ColorHelper } from '@kirbydesign/core';
-import { applicationConfig, componentWrapperDecorator, Preview } from '@storybook/angular';
+import { applicationConfig, Preview } from '@storybook/angular';
 
 const preview: Preview = {
   parameters: {
@@ -25,11 +24,8 @@ const preview: Preview = {
     },
   },
   decorators: [
-    componentWrapperDecorator(
-      (story) => `<div style="display: flex; flex-direction: column; gap: 10px">${story}</div>`
-    ),
     applicationConfig({
-      providers: [importProvidersFrom([IonicModule.forRoot()])],
+      providers: [importProvidersFrom([IonicModule.forRoot({ mode: 'ios' })])],
     }),
   ],
 };

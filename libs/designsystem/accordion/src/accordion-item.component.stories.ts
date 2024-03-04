@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { applicationConfig, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IonicModule } from '@ionic/angular';
 import { importProvidersFrom } from '@angular/core';
-import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
+
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { AccordionItemComponent } from './accordion-item.component';
 
 const meta: Meta<AccordionItemComponent> = {
@@ -13,35 +12,32 @@ const meta: Meta<AccordionItemComponent> = {
   title: 'AccordionItemComponent',
   decorators: [
     moduleMetadata({
-      declarations: [IconComponent, AccordionDirective],
+      imports: [AccordionModule],
     }),
     applicationConfig({
-      providers: [importProvidersFrom([IonicModule.forRoot(), BrowserAnimationsModule])],
+      providers: [importProvidersFrom([BrowserAnimationsModule])],
     }),
+    componentWrapperDecorator((story) => `<kirby-accordion>${story}</kirby-accordion>`),
   ],
 };
 export default meta;
 type Story = StoryObj<AccordionItemComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     title: 'Default',
     isExpanded: false,
     isDisabled: false,
     disabledTitle: '',
   },
-  render: (args: AccordionItemComponent) => ({
-    props: args,
-    template: `<kirby-accordion>
-    <kirby-accordion-item ${argsToTemplate(args)}>
-      Accordion Content
-    </kirby-accordion-item>
-    <kirby-accordion-item title="Expanded" [isExpanded]="true">
-      Accordion Content
-    </kirby-accordion-item>
-    <kirby-accordion-item [isDisabled]="true" disabledTitle="Disabled">
-      Accordion Content
-    </kirby-accordion-item>
-  </kirby-accordion>`,
+};
+
+export const Disabled: Story = {
+  render: () => ({
+    template: `
+    <kirby-accordion-item [isDisabled]="true" title="Accordion item">Content</kirby-accordion-item>
+    <kirby-accordion-item [isDisabled]="true" title="Accordion item" disabledTitle="Alternative Disabled Title (disabledTitle)">Content</kirby-accordion-item>
+    <kirby-accordion-item [isDisabled]="true" [isExpanded]="true" title="Disabled with isExpanded">Content</kirby-accordion-item>
+    `,
   }),
 };

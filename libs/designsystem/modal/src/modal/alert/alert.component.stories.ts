@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
+import { Observable } from 'rxjs';
 import { AlertComponent } from './alert.component';
 
 const meta: Meta<AlertComponent> = {
@@ -9,13 +10,13 @@ const meta: Meta<AlertComponent> = {
 export default meta;
 type Story = StoryObj<AlertComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
-    title: '',
-    // message: '',
-    iconName: '',
-    okBtn: '',
+    title: 'Alert Title',
+    message: 'Alert message.' as string & Observable<string>,
+    iconName: 'warning',
+    okBtn: 'Okay',
     okBtnIsDestructive: false,
-    cancelBtn: '',
+    cancelBtn: 'Cancel',
   },
 };

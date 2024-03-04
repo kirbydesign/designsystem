@@ -8,7 +8,7 @@ const meta: Meta<DividerComponent> = {
 export default meta;
 type Story = StoryObj<DividerComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     hasMargin: false,
   },

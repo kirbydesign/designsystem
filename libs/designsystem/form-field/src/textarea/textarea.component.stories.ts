@@ -1,7 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
 import { TextareaComponent } from './textarea.component';
 
 const meta: Meta<TextareaComponent> = {
@@ -11,28 +8,19 @@ const meta: Meta<TextareaComponent> = {
 export default meta;
 type Story = StoryObj<TextareaComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     value: '',
     borderless: false,
     hasError: false,
     autocomplete: 'off',
     autocorrect: 'off',
-    maxlength: 0,
   },
-};
-
-export const Heading: Story = {
-  args: {
-    value: '',
-    borderless: false,
-    hasError: false,
-    autocomplete: 'off',
-    autocorrect: 'off',
-    maxlength: 0,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/textarea works!/gi)).toBeTruthy();
+  argTypes: {
+    maxlength: {
+      control: {
+        type: 'number',
+      },
+    },
   },
 };

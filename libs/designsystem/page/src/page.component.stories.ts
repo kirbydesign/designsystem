@@ -1,25 +1,33 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { PageComponent } from './page.component';
+import { PageModule } from './page.module';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,
   title: 'PageComponent',
+  decorators: [
+    moduleMetadata({
+      providers: [ModalNavigationService],
+      imports: [RouterTestingModule, PageModule],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<PageComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
-    title: '',
-    subtitle: '',
-    toolbarTitle: '',
-    titleAlignment: 'left',
-    defaultBackHref: '',
-    hideBackButton: false,
-    titleMaxLines: 0,
-    hasInteractiveTitle: false,
-    // maxWidth: '',
-    // tabBarBottomHidden: '',
+    title: 'Title',
   },
+  render: (args: PageComponent) => ({
+    template: `<kirby-page ${argsToTemplate(args)}>
+      <kirby-page-content>
+        Page Content
+      </kirby-page-content>
+    </kirby-page>`,
+  }),
 };

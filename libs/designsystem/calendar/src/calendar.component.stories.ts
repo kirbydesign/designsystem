@@ -1,4 +1,4 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj } from '@storybook/angular';
 
 import { CalendarComponent } from './calendar.component';
 
@@ -9,7 +9,7 @@ const meta: Meta<CalendarComponent> = {
 export default meta;
 type Story = StoryObj<CalendarComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     timezone: 'local',
     disableWeekends: false,
@@ -17,13 +17,9 @@ export const TestGrid: Story = {
     disableFutureDates: false,
     alwaysEnableToday: false,
     customLocales: {},
-    usePopover: true,
+    usePopover: false,
     selectedDate: null,
     disabledDates: [],
     enabledDates: [],
   },
-  render: (args: CalendarComponent) => ({
-    props: args,
-    template: `<kirby-calendar ${argsToTemplate(args)}></kirby-calendar>`,
-  }),
 };

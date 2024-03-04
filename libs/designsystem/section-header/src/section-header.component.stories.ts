@@ -1,24 +1,28 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { LabelComponent } from '@kirbydesign/designsystem/item';
 import { SectionHeaderComponent } from './section-header.component';
 
 const meta: Meta<SectionHeaderComponent> = {
   component: SectionHeaderComponent,
   title: 'SectionHeaderComponent',
+  decorators: [
+    moduleMetadata({
+      declarations: [LabelComponent],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<SectionHeaderComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {},
-};
-
-export const Heading: Story = {
-  args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/section-header works!/gi)).toBeTruthy();
-  },
+  render: () => ({
+    template: `<kirby-section-header>
+    <kirby-label>
+      <h3 heading>Section Header</h3>
+      <p label>With a label</p>
+    </kirby-label>
+  </kirby-section-header>`,
+  }),
 };

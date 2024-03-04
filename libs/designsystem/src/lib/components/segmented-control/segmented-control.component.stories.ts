@@ -9,13 +9,25 @@ const meta: Meta<SegmentedControlComponent> = {
 export default meta;
 type Story = StoryObj<SegmentedControlComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     mode: SegmentedControlMode.default,
-    // items: '',
-    // selectedIndex: '',
-    // value: '',
-    // size: '',
-    // disableChangeOnSwipe: '',
+    items: [
+      {
+        text: 'First item',
+        id: 'first',
+      },
+      {
+        text: 'Second item',
+        id: 'second',
+        badge: {
+          icon: 'attach',
+          description: 'Item with attachment',
+          themeColor: 'success',
+        },
+      },
+    ],
+    selectedIndex: 0,
+    size: 'md',
   },
 };

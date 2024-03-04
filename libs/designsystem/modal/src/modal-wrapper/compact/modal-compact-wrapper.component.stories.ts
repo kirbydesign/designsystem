@@ -1,24 +1,36 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { Component } from '@angular/core';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { AlertHelper, CanDismissHelper } from '../../public_api';
 import { ModalCompactWrapperComponent } from './modal-compact-wrapper.component';
+
+@Component({
+  selector: 'kirby-embedded-modal-example',
+  template: `
+    <kirby-page-title>title</kirby-page-title>
+  `,
+  standalone: true,
+  imports: [PageModule],
+})
+export class VrtEmbeddedModalExampleComponent {}
 
 const meta: Meta<ModalCompactWrapperComponent> = {
   component: ModalCompactWrapperComponent,
   title: 'ModalCompactWrapperComponent',
+  decorators: [
+    moduleMetadata({
+      providers: [CanDismissHelper, AlertHelper],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<ModalCompactWrapperComponent>;
 
-export const TestGrid: Story = {
-  args: {},
-};
-
-export const Heading: Story = {
-  args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/modal-compact-wrapper works!/gi)).toBeTruthy();
+export const Default: Story = {
+  args: {
+    config: {
+      component: VrtEmbeddedModalExampleComponent,
+    },
   },
 };

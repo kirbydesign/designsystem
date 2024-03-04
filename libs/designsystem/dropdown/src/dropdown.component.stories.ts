@@ -1,4 +1,4 @@
-import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { DropdownComponent } from './dropdown.component';
 import { DropdownModule } from './dropdown.module';
@@ -11,11 +11,6 @@ const meta: Meta<DropdownComponent> = {
       imports: [DropdownModule],
     }),
   ],
-};
-export default meta;
-type Story = StoryObj<DropdownComponent>;
-
-export const TestGrid: Story = {
   argTypes: {
     selectedIndex: {
       options: ['asc', 'desc'],
@@ -28,6 +23,11 @@ export const TestGrid: Story = {
       control: { type: 'text' },
     },
   },
+};
+export default meta;
+type Story = StoryObj<DropdownComponent>;
+
+export const Default: Story = {
   args: {
     items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
     placeholder: 'Please select:',
@@ -39,8 +39,4 @@ export const TestGrid: Story = {
     tabindex: 0,
     usePopover: false,
   },
-  render: (args: DropdownComponent) => ({
-    props: args,
-    template: `<kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>`,
-  }),
 };

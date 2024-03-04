@@ -1,7 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { FlagComponent } from './flag.component';
 
 const meta: Meta<FlagComponent> = {
@@ -11,20 +8,20 @@ const meta: Meta<FlagComponent> = {
 export default meta;
 type Story = StoryObj<FlagComponent>;
 
-export const TestGrid: Story = {
+export const Default: Story = {
   args: {
     size: 'md',
     themeColor: 'transparent',
   },
-};
-
-export const Heading: Story = {
-  args: {
-    size: 'md',
-    themeColor: 'transparent',
+  argTypes: {
+    themeColor: {
+      options: ['white', 'success', 'warning', 'danger'],
+      control: { type: 'radio' },
+    },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/flag works!/gi)).toBeTruthy();
-  },
+  render: (args: FlagComponent) => ({
+    props: args,
+    template: `<kirby-flag ${argsToTemplate(args)}>Flag</kirby-flag>
+  `,
+  }),
 };
