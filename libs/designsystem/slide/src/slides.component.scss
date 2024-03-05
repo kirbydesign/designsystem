@@ -77,11 +77,6 @@ $bullet-inactive-opacity: 0.2;
     margin-block: -(utils.size('m'));
   }
 
-  // Allow for swiper content to have equal height.
-  swiper-slide {
-    height: auto;
-  }
-
   @include utils.media('<medium') {
     swiper-container {
       padding-inline: utils.size('s');
@@ -97,5 +92,9 @@ $bullet-inactive-opacity: 0.2;
   .swiper-button-next.swiper-button-disabled,
   .swiper-button-prev.swiper-button-disabled {
     opacity: 1;
+  }
+
+  .stretch-height swiper-slide {
+    height: auto;
   }
 }

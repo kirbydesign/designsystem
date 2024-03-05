@@ -1,21 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { SelectedSlide } from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
-import { faker } from '@faker-js/faker';
 
 @Component({
   styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-simple-example.component.html',
 })
 export class SlidesSimpleExampleComponent {
-  private toastController = inject(ToastController);
-
-  stretch = false;
+  constructor(private toastController: ToastController) {}
 
   slides = [...Array(9).keys()].map((number) => ({
     title: `Slide ${number + 1}`,
     subtitle: `Subtitle ${number + 1}`,
-    cardContent: faker.lorem.lines({ min: 1, max: 4 }),
+    cardContent: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
   }));
 
   getDataFromActiveSlide(selectedSlide: SelectedSlide) {

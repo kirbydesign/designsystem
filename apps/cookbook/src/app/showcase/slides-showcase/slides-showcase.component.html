@@ -28,14 +28,6 @@
 
 <cookbook-code-viewer [html]="defaultExampleComponentHTML"></cookbook-code-viewer>
 
-<p>
-  <em>
-    <strong>*Please note:</strong>
-    In order to allow for vertical stretch, you need to render the content of the swiper slide with
-    a height of 100%
-  </em>
-</p>
-
 <h2>Advanced usage</h2>
 
 <cookbook-iphone
@@ -107,6 +99,33 @@
 <p>
   The component has a default slot which can be used to place a button in the top right corner next
   to the navigation controls (large screens only).
+</p>
+
+<h2>Inherit height</h2>
+
+<p>
+  If the swiper-slides has variable height, you can add the property
+  <code>stretchHeight</code>
+  to
+  <code>kirby-slides</code>
+  . This will allow for extending the child components height to 100% as seen in the example below
+</p>
+
+<cookbook-iphone
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  src="/examples/slides-height/"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-code-viewer [html]="heightExampleComponentHTML"></cookbook-code-viewer>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    In order to allow for vertical stretch, you need to render the content of the swiper slide with
+    a height of 100%
+  </em>
 </p>
 
 <h2>Properties:</h2>

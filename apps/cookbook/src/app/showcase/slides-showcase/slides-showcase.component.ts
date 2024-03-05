@@ -3,6 +3,7 @@ import {
   advancedExampleComponentHTML,
   customConfigExample,
   defaultExampleComponentHTML,
+  heightExampleComponentHTML,
   slidesDefaultConfig,
 } from '../../examples/slides-example/slides-code-snippets';
 import {
@@ -19,6 +20,7 @@ import { ApiDescriptionMethod } from '../../shared/api-description/api-descripti
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;
   defaultExampleComponentHTML: string = defaultExampleComponentHTML;
+  heightExampleComponentHTML: string = heightExampleComponentHTML;
   advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
 
@@ -45,6 +47,13 @@ export class SlidesShowcaseComponent {
       name: 'showNavigation',
       description: 'Whether to show navigation and pagination controls for the slider.',
       defaultValue: 'true',
+      type: ['boolean'],
+    },
+    {
+      name: 'stretchHeight',
+      description:
+        'If kirby slides have variable height you can add this property in order to align height of swiper-slides in DOM',
+      defaultValue: 'false',
       type: ['boolean'],
     },
   ];
