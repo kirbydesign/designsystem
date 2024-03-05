@@ -8,6 +8,7 @@ import { FormFieldInputBorderlessExampleComponent } from './examples/input/borde
 import { FormFieldInputColorExampleComponent } from './examples/input/color';
 import { FormFieldInputCounterExampleComponent } from './examples/input/counter';
 import { FormFieldInputDateExampleComponent } from './examples/input/date';
+import { FormFieldInputDateNativeExampleComponent } from './examples/input/date-native';
 import { FormFieldInputDecimalMaskExampleComponent } from './examples/input/decimal-mask';
 import { FormFieldInputDefaultExampleComponent } from './examples/input/default';
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
@@ -30,6 +31,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputNumericExampleComponent,
   FormFieldInputDecimalMaskExampleComponent,
   FormFieldInputDateExampleComponent,
+  FormFieldInputDateNativeExampleComponent,
   FormFieldInputDisabledExampleComponent,
   FormFieldInputAffixExampleComponent,
   FormFieldInputErrorExampleComponent,

@@ -26,8 +26,9 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
+import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
@@ -245,7 +246,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     private renderer: Renderer2,
     private elementRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
-    private keyboardHandlerService: KeyboardHandlerService
+    private keyboardHandlerService: KeyboardHandlerService,
+    private resizeObserverService: ResizeObserverService
   ) {}
 
   onToggle(event: MouseEvent) {
@@ -286,10 +288,18 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   ngAfterViewInit() {
     if (this.usePopover && this.expand === 'block') {
-      const { width } = this.elementRef.nativeElement.getBoundingClientRect();
-      this.setPopoverCardStyle('--kirby-card-width', `${width}px`);
+      const { width: initialWidth } = this.elementRef.nativeElement.getBoundingClientRect();
       this.setPopoverCardStyle('max-width', 'initial');
       this.setPopoverCardStyle('min-width', 'initial');
+      // Ensure initial width is set even if the resize observer callback also fires initially:
+      this.setPopoverCardStyle('--kirby-card-width', `${initialWidth}px`);
+
+      this.resizeObserverService.observe(this.elementRef, (entry) => {
+        const newWidth = entry.contentRect.width;
+        if (newWidth > 0) {
+          this.setPopoverCardStyle('--kirby-card-width', `${newWidth}px`);
+        }
+      });
     }
     this.initializeAlignment();
   }
@@ -532,12 +542,12 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this._onTouched();
   }
 
-  _onPopoverClick(event: PointerEvent) {
+  _onPopoverClick() {
     this.close();
   }
 
   @HostListener('blur', ['$event'])
-  _onBlur(event?: FocusEvent) {
+  _onBlur() {
     if (this.usePopover) return;
     this.close();
     this._onTouched();
@@ -629,6 +639,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   ngOnDestroy(): void {
     this.unlistenAllSlottedItems();
+    this.resizeObserverService.unobserve(this.elementRef);
     if (this.intersectionObserverRef) {
       this.intersectionObserverRef.disconnect();
     }

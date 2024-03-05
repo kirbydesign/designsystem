@@ -55,8 +55,7 @@
       "@kirbydesign/designsystem/menu": ["menu/index.ts"],
       "@kirbydesign/designsystem/bagde": ["badge/index.ts"]
     },
-    "esModuleInterop": true,
-    "target": "es2020"
+    "esModuleInterop": true
   },
   "include": [],
   "files": [],

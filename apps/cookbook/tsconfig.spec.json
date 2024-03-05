@@ -2,9 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": ["jasmine", "node"],
-    "target": "ES2022",
-    "useDefineForClassFields": false
+    "types": ["jasmine", "node"]
   },
   "files": ["src/test.ts", "src/polyfills.ts"],
   "include": ["**/*.spec.ts", "**/*.d.ts"]

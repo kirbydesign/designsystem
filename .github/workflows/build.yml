@@ -47,7 +47,7 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Run linting
-        run: npm run lint
+        run: npx nx run lint
       - name: Run tests
         run: npm run test:ci
       - name: Generate coverage report

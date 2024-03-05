@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-example.component.html?raw';
 import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
 import { moduleProviderExample } from '../../examples/calendar-example/calendar-locales-examples';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { CalendarCardExampleComponent } from '~/app/examples/calendar-example/calendar-card-example.component';
 
 @Component({
   selector: 'cookbook-calendar-showcase',
@@ -11,6 +11,10 @@ import { ApiDescriptionProperty } from '../../shared/api-description/api-descrip
   styleUrls: ['./calendar-showcase.component.scss'],
 })
 export class CalendarShowcaseComponent {
+  exampleHtml = exampleHtml;
+  moduleProviderExample = moduleProviderExample;
+  calendarCardExample = CalendarCardExampleComponent;
+
   disableWeekends = false;
   alwaysEnableToday = false;
   disablePastDates = false;
@@ -37,17 +41,13 @@ export class CalendarShowcaseComponent {
     this.todayDate.setDate(today.getDate() + 3);
   }
 
-  exampleHtml = exampleHtml;
-  exampleWithCardHtml = exampleWithCardHtml;
-
-  moduleProviderExample = moduleProviderExample;
-
   properties: ApiDescriptionProperty[] = [
     {
       name: 'selectedDate',
-      description: '(Optional) Returns/sets the selected date.',
-      defaultValue: 'null',
-      type: ['Date'],
+      description:
+        '(Optional) Returns/sets the selected date. Any currently selected date can be deselected by passing null',
+      defaultValue: 'undefined',
+      type: ['Date', 'null'],
     },
     {
       name: 'disableWeekends',

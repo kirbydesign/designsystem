@@ -16,6 +16,7 @@ import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { FormFieldInputDateExampleComponent } from './form-field-example/examples/input/date';
+import { FormFieldInputDateNativeExampleComponent } from './form-field-example/examples/input/date-native';
 import { FormFieldInputDecimalMaskExampleComponent } from './form-field-example/examples/input/decimal-mask';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
@@ -89,6 +90,7 @@ import { ModalExampleSimpleComponent } from './modal-example/modal-example-simpl
 import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { ModalExampleAlertComponent } from './modal-example/modal-example-alert.component';
+import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 
 export const routes: ModalEnabledRoutes = [
   {
@@ -270,6 +272,10 @@ export const routes: ModalEnabledRoutes = [
         component: ModalExampleSimpleComponent,
       },
       {
+        path: 'modal-component',
+        component: ModalComponentExampleComponent,
+      },
+      {
         path: 'modal-alert',
         component: ModalExampleAlertComponent,
       },
@@ -338,6 +344,10 @@ export const routes: ModalEnabledRoutes = [
           {
             path: 'date',
             component: FormFieldInputDateExampleComponent,
+          },
+          {
+            path: 'date-native',
+            component: FormFieldInputDateNativeExampleComponent,
           },
           {
             path: 'decimal-mask',

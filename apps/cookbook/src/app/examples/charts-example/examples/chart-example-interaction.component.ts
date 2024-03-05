@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ChartHighlightedElements } from '@kirbydesign/designsystem';
-import { ActiveElement, Chart, ChartEvent, ChartOptions } from 'chart.js';
+import { ActiveElement, ChartEvent, ChartOptions } from 'chart.js';
 
 const config = {
   selector: 'cookbook-chart-example-interaction',
@@ -49,7 +49,7 @@ export class ChartExampleInteractionComponent {
   _highlighted: ChartHighlightedElements;
 
   _customOptions: ChartOptions = {
-    onClick: (_event: ChartEvent, activeElements: ActiveElement[], _chart: Chart) => {
+    onClick: (_event: ChartEvent, activeElements: ActiveElement[]) => {
       const activeElement = activeElements[0];
       if (activeElement) {
         // Highlight clicked element
