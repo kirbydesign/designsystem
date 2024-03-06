@@ -297,6 +297,7 @@ export class ModalNavigationService {
         return { activated$, deactivated$ };
       }
     }
+
     return { activated$: EMPTY, deactivated$: EMPTY };
   }
 
