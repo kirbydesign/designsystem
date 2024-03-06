@@ -3,6 +3,7 @@ import {
   advancedExampleComponentHTML,
   customConfigExample,
   defaultExampleComponentHTML,
+  heightExampleComponentCSS,
   heightExampleComponentHTML,
   slidesDefaultConfig,
 } from '../../examples/slides-example/slides-code-snippets';
@@ -21,6 +22,7 @@ export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;
   defaultExampleComponentHTML: string = defaultExampleComponentHTML;
   heightExampleComponentHTML: string = heightExampleComponentHTML;
+  heightExampleComponentCSS: string = heightExampleComponentCSS;
   advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
 
