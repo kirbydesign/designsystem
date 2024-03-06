@@ -83,7 +83,7 @@ export class SlidesShowcaseComponent {
     {
       name: 'slideStretchHeight',
       description:
-        'If kirby slides have variable height you can add this property in order to align height of swiper-slides in DOM',
+        'If individual slides have variable height you can add this attribute directive in order to make slides equal height.',
     },
   ];
 }
