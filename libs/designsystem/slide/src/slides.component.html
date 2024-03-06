@@ -46,7 +46,7 @@
 
 <!-- We need to prevent Swiper from initialization by setting init="false" until we pass all required parameters
      https://swiperjs.com/element#parameters-as-props -->
-<swiper-container [class.stretch-height]="stretchHeight" init="false" #swiperContainer>
+<swiper-container init="false" #swiperContainer>
   <swiper-slide *ngFor="let slide of slides; let i = index">
     <ng-container
       *ngTemplateOutlet="slideTemplate; context: { $implicit: slide, index: i }"

@@ -54,7 +54,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() slides: unknown[];
 
   @Input() showNavigation: boolean = true;
-  @Input() stretchHeight: boolean = false;
 
   @Output() slideChange = new EventEmitter<SelectedSlide>();
 
