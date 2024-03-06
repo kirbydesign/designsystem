@@ -4,7 +4,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  // Ignore the tab-button element's box and replace with its content
+  // Ignore the tab-button elements box and replace with its content
   display: contents;
 }
 
