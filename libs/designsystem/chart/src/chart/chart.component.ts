@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { BaseChartComponent, ChartDataLabelOptions, ChartJSService, ChartType } from '../shared';
+import { BaseChartComponent, ChartJSService, ChartType } from '../shared';
 
 @Component({
   selector: 'kirby-chart',
@@ -10,10 +10,4 @@ import { BaseChartComponent, ChartDataLabelOptions, ChartJSService, ChartType } 
 })
 export class ChartComponent extends BaseChartComponent {
   @Input() type: Exclude<ChartType, 'stock'> = 'column';
-
-  @Input() dataLabelOptions?: ChartDataLabelOptions;
-
-  protected renderChart() {
-    super.renderChart({ dataLabelOptions: this.dataLabelOptions });
-  }
 }
