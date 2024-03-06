@@ -11,7 +11,7 @@ export type ShowAlertCallback = () => boolean | AlertConfig | Promise<boolean | 
 
 export interface ModalConfig {
   collapseTitle?: boolean;
-  component: any;
+  component?: any;
   size?: ModalSize;
   customHeight?: string;
   modalRoute?: ActivatedRoute;
@@ -31,7 +31,6 @@ export interface ModalConfig {
  * This can be used in place of the Routes type when configuring route-based modals in the array
  * of routes passed to RouterModule in applications.
  */
-
 export type RoutedModalConfig = Omit<ModalConfig, 'component'>;
 
 interface ModalConfigRouteData extends Data {

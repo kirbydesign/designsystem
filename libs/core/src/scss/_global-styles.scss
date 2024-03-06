@@ -142,16 +142,17 @@ ion-modal.kirby-overlay {
     }
 
     &:not(.kirby-modal-compact) {
-      &.kirby-modal-full-height {
-        --width: #{map.get($modal-widths, 'm')};
-        --height: 100%;
-      }
-
       @include utils.media('>=medium') {
+        --modal-gutter: #{$modal-gutter};
         --border-radius: #{$modal-border-radius};
         --min-height: #{$modal-large-screen-min-height};
-        --max-height: calc(100vh - #{$modal-gutter} * 2);
-        --max-width: calc(100vw - #{$modal-gutter} * 2);
+        --max-height: calc(100vh - var(--modal-gutter) * 2);
+        --max-width: calc(100vw - var(--modal-gutter) * 2);
+
+        &.kirby-modal-full-height {
+          --width: #{map.get($modal-widths, 'm')};
+          --height: var(--max-height);
+        }
 
         &.kirby-modal-small {
           --width: #{map.get($modal-widths, 's')};

@@ -4,21 +4,15 @@ kirby-card {
   z-index: 3; // Ensure dropdown opens over configuration checkboxes
   overflow: visible; // Ensure dropdown isn't cut off
   width: 320px;
-  margin-bottom: 20px;
+  margin-bottom: utils.size(xxs);
 
-  kirby-card-footer {
-    height: utils.size('xxl');
+  .buttons {
     display: flex;
-    flex-grow: 1;
-    align-items: stretch;
-    padding: 0;
-    border-top: 1px solid utils.get-color('medium');
+    justify-content: space-around;
+  }
 
-    button {
-      flex: 1;
-      height: auto;
-      border-radius: 0;
-      margin: 0;
-    }
+  p {
+    margin: 0;
+    margin-top: utils.size(xs);
   }
 }
