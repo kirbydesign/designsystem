@@ -49,13 +49,6 @@ export class SlidesShowcaseComponent {
       defaultValue: 'true',
       type: ['boolean'],
     },
-    {
-      name: 'stretchHeight',
-      description:
-        'If kirby slides have variable height you can add this property in order to align height of swiper-slides in DOM',
-      defaultValue: 'false',
-      type: ['boolean'],
-    },
   ];
 
   events: ApiDescriptionEvent[] = [
@@ -86,6 +79,11 @@ export class SlidesShowcaseComponent {
       name: '*kirbySlide',
       description:
         'The `*kirbySlide` directive should be applied to a `kirby-card` which will then be used as the template for each slide.',
+    },
+    {
+      name: 'slideStretchHeight',
+      description:
+        'If kirby slides have variable height you can add this property in order to align height of swiper-slides in DOM',
     },
   ];
 }

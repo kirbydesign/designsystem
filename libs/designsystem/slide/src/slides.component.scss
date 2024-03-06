@@ -94,7 +94,7 @@ $bullet-inactive-opacity: 0.2;
     opacity: 1;
   }
 
-  .stretch-height swiper-slide {
+  swiper-slide:has([slideStretchHeight]) {
     height: auto;
   }
 }
