@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   standalone: true,
   imports: [CommonModule],
   selector: 'kirby-progress-circle-ring',
-  templateUrl: './progress-circle-ring.component.svg',
+  templateUrl: './progress-circle-ring.component.html',
   styleUrls: ['./progress-circle-ring.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

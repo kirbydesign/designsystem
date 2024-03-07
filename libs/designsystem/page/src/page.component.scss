@@ -275,6 +275,10 @@ ion-content {
     --page-content-max-width: #{utils.get-page-content-max-width('full')};
   }
 
+  &::part(scroll) {
+    scrollbar-gutter: stable;
+  }
+
   .content-inner {
     max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
