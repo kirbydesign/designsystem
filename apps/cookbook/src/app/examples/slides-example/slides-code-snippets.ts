@@ -43,6 +43,19 @@ export const defaultExampleComponentHTML = `<kirby-slides [slides]="slides" [tit
   </kirby-card>
 </kirby-slides>`;
 
+export const heightExampleComponentHTML = `<kirby-slides [slides]="slides" [title]="'Title'" [showNavigation]="true">
+<kirby-card *kirbySlide="let slide; let i = index" slideStretchHeight [hasPadding]="true">
+  <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
+  <div class="card-content">
+    {{ slide.cardContent }}
+  </div>
+</kirby-card>
+</kirby-slides>`;
+
+export const heightExampleComponentCSS = `kirby-card {
+  justify-content: start;
+}`;
+
 export const advancedExampleComponentHTML = `<kirby-slides
   [slides]="slides"
   (slideChange)="getDataFromActiveSlide($event)"
