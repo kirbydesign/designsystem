@@ -6,7 +6,7 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { KirbySwiperOptions, SlidesComponent } from './slides.component';
 import { SlideDirective } from './slide.directive';
-import { slideStretchHeightDirective } from './slide-stretch-height.directive';
+import { SlideStretchHeightDirective } from './slide-stretch-height.directive';
 
 const { getColor } = DesignTokenHelper;
 
@@ -29,7 +29,7 @@ describe('SlidesComponent', () => {
   const createHost = createHostFactory({
     component: SlidesComponent,
     imports: [TestHelper.ionicModuleForTest, ButtonComponent, IconModule, CardModule],
-    declarations: [SlideDirective, slideStretchHeightDirective],
+    declarations: [SlideDirective, SlideStretchHeightDirective],
   });
 
   const hostTemplate = `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions" [title]="'Title'" [showNavigation]="true">
@@ -231,8 +231,8 @@ describe('SlidesComponent', () => {
     },
   };
 
-  describe('with slideStretchHeight directive', () => {
-    it('slides should have equal height', () => {
+  describe('slides with slideStretchHeight directive', () => {
+    it('should have equal height', () => {
       spectator = createHost(
         `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions" [title]="'Title'" [showNavigation]="true">
         <kirby-card *kirbySlide="let slide" slideStretchHeight>
@@ -253,8 +253,8 @@ describe('SlidesComponent', () => {
       ).toBeTruthy();
     });
   });
-  describe('without slideStretchHeight directive', () => {
-    it('slides should not have equal height', () => {
+  describe('slides without slideStretchHeight directive', () => {
+    it('should not have equal height', () => {
       spectator = createHost(
         `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions" [title]="'Title'" [showNavigation]="true">
           <kirby-card *kirbySlide="let slide">

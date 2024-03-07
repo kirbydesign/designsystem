@@ -6,9 +6,9 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { SlidesComponent } from './slides.component';
 import { SlideDirective } from './slide.directive';
-import { slideStretchHeightDirective } from './slide-stretch-height.directive';
+import { SlideStretchHeightDirective } from './slide-stretch-height.directive';
 
-const declarations = [SlidesComponent, SlideDirective, slideStretchHeightDirective];
+const declarations = [SlidesComponent, SlideDirective, SlideStretchHeightDirective];
 
 @NgModule({
   declarations: [...declarations],
