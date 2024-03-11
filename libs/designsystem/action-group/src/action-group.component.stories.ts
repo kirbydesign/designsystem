@@ -7,9 +7,9 @@ import {
 } from '@storybook/angular';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { importProvidersFrom } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { IconModule } from '@kirbydesign/designsystem/icon';
+import { importProvidersFrom } from '@angular/core';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { ActionGroupComponent } from './action-group.component';
 
 const meta: Meta<ActionGroupComponent> = {
@@ -20,7 +20,7 @@ const meta: Meta<ActionGroupComponent> = {
       imports: [ButtonComponent, IconModule],
     }),
     applicationConfig({
-      providers: [importProvidersFrom([IonicModule.forRoot()])],
+      providers: [importProvidersFrom(KirbyIonicModule)],
     }),
   ],
 };

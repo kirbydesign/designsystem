@@ -1,18 +1,15 @@
-import { applicationConfig, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { applicationConfig, type Meta, type StoryObj } from '@storybook/angular';
 
-import { IonicModule } from '@ionic/angular';
 import { importProvidersFrom } from '@angular/core';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { CheckboxComponent } from './checkbox.component';
 
 const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,
   title: 'CheckboxComponent',
   decorators: [
-    moduleMetadata({
-      imports: [IonicModule],
-    }),
     applicationConfig({
-      providers: [importProvidersFrom([IonicModule.forRoot()])],
+      providers: [importProvidersFrom(KirbyIonicModule)],
     }),
   ],
 };
