@@ -1,4 +1,12 @@
-import { Component, ElementRef, HostListener, Injector, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Injector,
+  Input,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
 import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
@@ -19,9 +27,11 @@ import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
+  @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
+
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   scrollDisabled = false;
-  @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
   private ionModalElement: HTMLIonModalElement;

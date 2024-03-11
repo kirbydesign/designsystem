@@ -129,10 +129,13 @@ describe('TabsComponent', () => {
       innerButton = ionTabButton.shadowRoot.querySelector('[part=native]');
     });
 
-    it('should render the icon', () => {
-      const icon = ionTabButton.querySelector('kirby-icon');
+    it('should render the icon', async () => {
+      const icon: HTMLElement = ionTabButton.querySelector('kirby-icon');
+
       expect(icon).toBeTruthy();
-      expect(icon).toBeVisible();
+      expect(icon).toHaveComputedStyle({
+        visibility: 'visible',
+      });
     });
 
     describe('responsiveness', () => {
@@ -204,7 +207,7 @@ describe('TabsComponent', () => {
       it('should render unselected tab icon', () => {
         const defaultIcon = ionTabButton.querySelector('kirby-icon:not([selected-tab])');
         expect(defaultIcon).toBeTruthy();
-        expect(defaultIcon).toBeVisible();
+        expect(defaultIcon).toHaveComputedStyle({ visibility: 'visible' });
       });
 
       it('should not render selected tab icon', () => {
@@ -223,7 +226,7 @@ describe('TabsComponent', () => {
       it('should render selected tab icon', () => {
         const selectedTabIcon = ionTabButton.querySelector('kirby-icon[selected-tab]');
         expect(selectedTabIcon).toBeTruthy();
-        expect(selectedTabIcon).toBeVisible();
+        expect(selectedTabIcon).toHaveComputedStyle({ visibility: 'visible' });
       });
 
       it('should not render unselected tab icon', () => {

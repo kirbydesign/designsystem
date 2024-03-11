@@ -47,10 +47,17 @@ kirby-radio::after {
 }
 
 @each $size, $height in utils.$checkbox-radio-sizes {
-  kirby-checkbox.#{$size}::after,
   kirby-radio.#{$size}::after {
     content: '#{$size}: #{$height}';
     line-height: $height;
+  }
+}
+
+@each $size, $properties in utils.$checkbox-sizes {
+  $line-height: map.get($properties, line-height);
+  kirby-checkbox.#{$size}::after {
+    content: '#{$size}: #{$line-height}';
+    line-height: $line-height;
   }
 }
 

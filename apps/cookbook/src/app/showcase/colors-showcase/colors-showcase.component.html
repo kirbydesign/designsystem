@@ -37,7 +37,7 @@
   *ngTemplateOutlet="colorPalette; context: { $implicit: notificationColors }"
 ></ng-container>
 
-<h2>Decoration colors</h2>
+<h2>Decoration colors (click to copy)</h2>
 <ng-container
   *ngTemplateOutlet="decorationColorPalette; context: { $implicit: decorationColors }"
 ></ng-container>
@@ -92,7 +92,8 @@
           <dd>{{ ramp.step }}</dd>
           <dt
             class="color-ramp-sample {{ color.name }}-{{ ramp.step }}"
-            title="var(--kirby-decoration-color-{{ color.name }}-{{ ramp.step }})"
+            title="{{ getDecorationColorVariable(color.name, ramp.step) }}"
+            (click)="onDecorationColorClick($event, color.name, ramp.step)"
           ></dt>
         </ng-container>
       </dl>

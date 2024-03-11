@@ -8,3 +8,7 @@
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
 }
+
+kirby-card {
+  justify-content: start;
+}

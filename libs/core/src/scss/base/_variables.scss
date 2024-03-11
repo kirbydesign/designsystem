@@ -189,6 +189,26 @@ $checkbox-radio-spacing: (
   'to-label': map.get($sizes, 'xs'),
 );
 
+/* Checkbox - size
+****************************************************************************/
+$checkbox-sizes: (
+  'xs': (
+    icon-size: map.get($sizes, 's'),
+    line-height: map.get($sizes, 'm'),
+    vertical-padding: 4px,
+  ),
+  'sm': (
+    icon-size: map.get($sizes, 'm'),
+    line-height: map.get($checkbox-radio-sizes, 'sm'),
+    vertical-padding: 10px,
+  ),
+  'md': (
+    icon-size: map.get($sizes, 'm'),
+    line-height: map.get($checkbox-radio-sizes, 'md'),
+    vertical-padding: 16px,
+  ),
+);
+
 /* Transitions
 ****************************************************************************/
 $soft-keyboard-transition-enter: 250ms ease-out 1ms; // Adding a 1ms delay seems to improve the smoothness on iPhone
