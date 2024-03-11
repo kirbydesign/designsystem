@@ -40,6 +40,7 @@ import { CanDismissHelper } from '../services';
     CommonModule,
     KirbyIonicModule,
     IconModule,
+    IonModal,
     ButtonComponent,
     ModalWrapperComponent,
     ModalCompactWrapperComponent,
