@@ -108,6 +108,13 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'history', svg: 'assets/kirby/icons/svg/history.svg' },
     { name: 'dot', svg: 'assets/kirby/icons/svg/dot.svg' },
     { name: 'agreement', svg: 'assets/kirby/icons/svg/agreement.svg' },
+    { name: 'sunshine', svg: 'assets/kirby/icons/svg/sunshine.svg' },
+    { name: 'revert', svg: 'assets/kirby/icons/svg/revert.svg' },
+    { name: 'fees', svg: 'assets/kirby/icons/svg/fees.svg' },
+    { name: 'crossedeye', svg: 'assets/kirby/icons/svg/crossedeye.svg' },
+    { name: 'common', svg: 'assets/kirby/icons/svg/common.svg' },
+    { name: 'calendar-start', svg: 'assets/kirby/icons/svg/calendar-start.svg' },
+    { name: 'calendar-end', svg: 'assets/kirby/icons/svg/calendar-end.svg' },
   ],
 };
 
