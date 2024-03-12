@@ -1,17 +1,11 @@
-import { applicationConfig, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj } from '@storybook/angular';
 
-import { importProvidersFrom } from '@angular/core';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { RangeComponent } from './range.component';
 
 const meta: Meta<RangeComponent> = {
   component: RangeComponent,
   title: 'RangeComponent',
-  decorators: [
-    applicationConfig({
-      providers: [importProvidersFrom(KirbyIonicModule)],
-    }),
-  ],
+  decorators: [],
 };
 export default meta;
 type Story = StoryObj<RangeComponent>;

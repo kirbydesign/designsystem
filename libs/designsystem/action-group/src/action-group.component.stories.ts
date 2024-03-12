@@ -1,15 +1,8 @@
-import {
-  applicationConfig,
-  argsToTemplate,
-  type Meta,
-  moduleMetadata,
-  type StoryObj,
-} from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { importProvidersFrom } from '@angular/core';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+
 import { ActionGroupComponent } from './action-group.component';
 
 const meta: Meta<ActionGroupComponent> = {
@@ -18,9 +11,6 @@ const meta: Meta<ActionGroupComponent> = {
   decorators: [
     moduleMetadata({
       imports: [ButtonComponent, IconModule],
-    }),
-    applicationConfig({
-      providers: [importProvidersFrom(KirbyIonicModule)],
     }),
   ],
 };
