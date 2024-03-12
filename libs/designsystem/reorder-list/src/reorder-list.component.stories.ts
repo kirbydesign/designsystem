@@ -1,10 +1,18 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { applicationConfig, argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 
+import { importProvidersFrom } from '@angular/core';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { ReorderListComponent } from './reorder-list.component';
 
 const meta: Meta<ReorderListComponent> = {
   component: ReorderListComponent,
   title: 'ReorderListComponent',
+
+  decorators: [
+    applicationConfig({
+      providers: [importProvidersFrom(KirbyIonicModule)],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<ReorderListComponent>;
