@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-
+import { IonRouterOutlet } from '@ionic/angular/standalone';
 import { RouterOutletComponent } from './router-outlet.component';
 
 @NgModule({
   declarations: [RouterOutletComponent],
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonRouterOutlet],
   exports: [RouterOutletComponent],
 })
 export class RouterOutletModule {}

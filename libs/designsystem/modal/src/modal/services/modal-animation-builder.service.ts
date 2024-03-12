@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Animation, AnimationBuilder, createAnimation } from '@ionic/angular';
+import { Animation, AnimationBuilder, createAnimation } from '@ionic/angular/standalone';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';

@@ -6,7 +6,7 @@ import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
+import { RadioGroupComponent, RadioModule } from '@kirbydesign/designsystem/radio';
 
 import { fakeAsync, tick } from '@angular/core/testing';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
@@ -23,14 +23,14 @@ describe('FormFieldComponent', () => {
 
   const createHost = createHostFactory({
     component: FormFieldComponent,
-    declarations: [
-      RadioGroupComponent,
-      RadioComponent,
-      InputCounterComponent,
-      ItemComponent,
-      FormFieldMessageComponent,
+    declarations: [InputCounterComponent, ItemComponent, FormFieldMessageComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      AffixDirective,
+      InputComponent,
+      TextareaComponent,
+      RadioModule,
     ],
-    imports: [TestHelper.ionicModuleForTest, AffixDirective, InputComponent, TextareaComponent],
     mocks: [PlatformService],
     providers: [
       {

@@ -43,6 +43,7 @@ npm i @kirbydesign/designsystem
 ```
 
 ### Include KirbyModule
+
 #### NgModule based application
 
 Import the `KirbyModule` in your `AppModule` :
@@ -63,6 +64,7 @@ export class AppModule {}
 ```
 
 #### Standalone application
+
 Import providers from `KirbyModule` when bootstrapping your application:
 
 ```ts

@@ -1,5 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { IonModal } from '@ionic/angular';
+import { IonModal } from '@ionic/angular/standalone';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CanDismissHelper } from '../services/can-dismiss.helper';
 import { AlertHelper } from '../services/alert.helper';

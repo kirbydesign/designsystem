@@ -5,7 +5,7 @@
   to deprecate it. 
 */
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular';
+import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
@@ -35,7 +35,7 @@ describe('DropdownComponent (popover version)', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [TestHelper.ionicModuleForTest, ItemModule],
+      imports: [TestHelper.ionicModuleForTest, IonItem, ItemModule],
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),

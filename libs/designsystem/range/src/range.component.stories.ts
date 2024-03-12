@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj } from '@storybook/angular';
 
 import { RangeComponent } from './range.component';
 
@@ -13,6 +13,8 @@ export const Default: Story = {
   args: {
     value: 0,
     step: 1,
+    min: 0,
+    max: 100,
     minLabel: '',
     maxLabel: '',
     debounce: 0,

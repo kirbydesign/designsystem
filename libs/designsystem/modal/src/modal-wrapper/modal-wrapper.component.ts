@@ -19,14 +19,6 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import {
-  IonContent,
-  IonHeader,
-  IonicModule,
-  IonTitle,
-  IonToolbar,
-  ScrollDetail,
-} from '@ionic/angular';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
@@ -40,6 +32,14 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  ScrollDetail,
+} from '@ionic/angular/standalone';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalConfig, ShowAlertCallback } from './config/modal-config';
@@ -51,7 +51,17 @@ const contentScrolledOffsetInPixels = 4;
 
 @Component({
   standalone: true,
-  imports: [IonicModule, RouterModule, ButtonComponent, IconModule, CommonModule],
+  imports: [
+    RouterModule,
+    ButtonComponent,
+    IconModule,
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonContent,
+  ],
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],

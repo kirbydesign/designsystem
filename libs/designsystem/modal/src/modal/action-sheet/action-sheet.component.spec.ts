@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import * as ionic from '@ionic/angular';
+import * as ionic from '@ionic/angular/standalone';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IonItem, IonLabel, IonReorder } from '@ionic/angular/standalone';
 import { ItemComponent } from './item.component';
 import { LabelComponent } from './label/label.component';
 
 const declarations = [ItemComponent, LabelComponent];
 @NgModule({
-  imports: [IonicModule, IconModule, CommonModule],
+  imports: [IconModule, CommonModule, IonItem, IonReorder, IonLabel],
   declarations: [...declarations],
   exports: [...declarations],
 })

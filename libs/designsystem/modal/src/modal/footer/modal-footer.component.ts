@@ -7,8 +7,7 @@ import {
   Input,
   Optional,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-
+import { IonFooter } from '@ionic/angular/standalone';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -17,7 +16,7 @@ import {
 
 @Component({
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [CommonModule, IonFooter],
   selector: 'kirby-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],

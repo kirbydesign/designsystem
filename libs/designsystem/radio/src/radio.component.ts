@@ -7,7 +7,7 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { IonRadio } from '@ionic/angular';
+import { IonRadio } from '@ionic/angular/standalone';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({

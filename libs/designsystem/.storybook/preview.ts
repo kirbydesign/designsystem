@@ -1,7 +1,7 @@
 import { importProvidersFrom } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { ColorHelper } from '@kirbydesign/core';
 import { applicationConfig, Preview } from '@storybook/angular';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 
 const preview: Preview = {
   parameters: {
@@ -25,7 +25,7 @@ const preview: Preview = {
   },
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom([IonicModule.forRoot({ mode: 'ios' })])],
+      providers: [importProvidersFrom([KirbyIonicModule])],
     }),
   ],
 };
