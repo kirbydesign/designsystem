@@ -1,12 +1,12 @@
 {
   "name": "@kirbydesign/designsystem",
-  "version": "0.0.0",
+  "version": "9.3.2",
   "dependencies": {
-    "@floating-ui/dom": "^1.1.0",
     "@angular/cdk": "^17.0.0",
+    "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "7.3.3",
-    "@kirbydesign/core": "0.0.58",
+    "@kirbydesign/core": "*",
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
