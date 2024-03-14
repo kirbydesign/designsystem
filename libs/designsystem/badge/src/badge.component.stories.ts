@@ -48,6 +48,6 @@ export const ThemeColors: Story = {
     <kirby-badge themeColor="white">1</kirby-badge>
     <kirby-badge themeColor="success">7</kirby-badge>
     <kirby-badge themeColor="warning">99</kirby-badge>
-    <kirby-badge themeColor="danger">123</kirby-badge>`,
+    <kirby-badge themeColor="danger">42</kirby-badge>`,
   }),
 };
