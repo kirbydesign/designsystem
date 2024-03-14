@@ -1,0 +1,19 @@
+{
+  "name": "cookbook",
+  "version": "1.0.0",
+  "description": "The documentation page for Kirby Design System components.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirbydesign/designsystem.git"
+  },
+  "keywords": [
+    "Docs",
+    "Cookbook",
+    "Kirby"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirbydesign/designsystem/issues"
+  },
+  "homepage": "https://github.com/kirbydesign/designsystem#readme"
+}

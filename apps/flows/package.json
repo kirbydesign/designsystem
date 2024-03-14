@@ -1,0 +1,19 @@
+{
+  "name": "flows",
+  "version": "1.0.0",
+  "description": "A set of common showcases and user flows using Kirby Design components.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirbydesign/designsystem.git"
+  },
+  "keywords": [
+    "Flows",
+    "Kirby"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirbydesign/designsystem/issues"
+  },
+  "homepage": "https://github.com/kirbydesign/designsystem#readme"
+}
