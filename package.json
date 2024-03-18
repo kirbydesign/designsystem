@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kirbydesign/designsystem.git"
+    "url": "git+https://github.com/kirbydesign/designsystem.git"
   },
   "keywords": [
     "Angular",
@@ -16,7 +16,9 @@
     "Library",
     "Kirby"
   ],
-  "author": "bdyjeo@bankdata.dk",
+  "author": {
+    "name": "bdyjeo@bankdata.dk"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kirbydesign/designsystem/issues"
@@ -87,7 +89,9 @@
     "analyze:flows:bundle": "npx webpack-bundle-analyzer ./measures/stats.json",
     "copy-bundle-stats": "copyfiles -f ./dist/apps/user-flows/stats.json measures",
     "nx": "nx",
-    "storybook": "nx run designsystem:storybook"
+    "storybook": "nx run designsystem:storybook",
+    "build-storybook": "nx run designsystem:build-storybook",
+    "chromatic": "chromatic"
   },
   "private": true,
   "dependencies": {
@@ -164,6 +168,7 @@
     "@typescript-eslint/eslint-plugin": "6.19.0",
     "@typescript-eslint/parser": "6.19.0",
     "chokidar": "^3.3.1",
+    "chromatic": "^11.0.8",
     "copy-webpack-plugin": "^11.0.0",
     "copyfiles": "^2.4.1",
     "core-js": "^2.6.11",

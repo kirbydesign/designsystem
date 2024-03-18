@@ -21,5 +21,6 @@ export const Default: Story = {
     selectedDate: null,
     disabledDates: [],
     enabledDates: [],
+    todayDate: new Date(2024, 0, 1),
   },
 };
