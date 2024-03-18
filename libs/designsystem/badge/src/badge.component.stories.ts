@@ -45,7 +45,7 @@ export const Default: Story = {
 export const ThemeColors: Story = {
   render: () => ({
     template: `
-    <kirby-badge themeColor="white">1</kirby-badge>
+    <kirby-badge themeColor="white">42</kirby-badge>
     <kirby-badge themeColor="success">7</kirby-badge>
     <kirby-badge themeColor="warning">99</kirby-badge>
     <kirby-badge themeColor="danger">123</kirby-badge>`,
