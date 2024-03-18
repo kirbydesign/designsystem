@@ -95,7 +95,8 @@ td {
 
 .day.disabled,
 .day:not(.selectable) {
-  --color: #{utils.get-text-color('semi-dark')};
+  --color: #{utils.get-color('semi-dark')};
+
   pointer-events: none;
 }
 
