@@ -73,16 +73,8 @@ export class TabNavigationComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.tabBarElement = this.tabBar.nativeElement;
-    this.tabs.forEach((tab) => this.tabElements.push(tab.nativeElement));
-    this.tabElements.forEach((tabElement) =>
-      this.tabButtonElements.push(tabElement.querySelector('[role="tab"]'))
-    );
-
-    setTimeout(() => {
-      this.selectTab(this.selectedIndex);
-      this.scrollToTab(this.focusIndex);
-      this.focusTab(this.focusIndex);
-    }, this.DEBOUNCE_TIME_MS);
+    this.setTabElements();
+    this.updateTabElementsOnChanges();
   }
 
   @HostListener('click', ['$event'])
@@ -141,5 +133,27 @@ export class TabNavigationComponent implements AfterViewInit {
         });
       });
     }
+  }
+
+  private setTabElements() {
+    this.tabs.forEach((tab) => {
+      this.tabElements.push(tab.nativeElement);
+    });
+
+    this.tabElements.forEach((tabElement) =>
+      this.tabButtonElements.push(tabElement.querySelector('[role="tab"]'))
+    );
+
+    this.selectTab(this.selectedIndex);
+    this.scrollToTab(this.focusIndex);
+    this.focusTab(this.focusIndex);
+  }
+
+  private updateTabElementsOnChanges() {
+    this.tabs.changes.subscribe(() => {
+      this.tabElements = [];
+      this.tabButtonElements = [];
+      this.setTabElements();
+    });
   }
 }
