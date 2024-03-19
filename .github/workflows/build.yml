@@ -50,8 +50,6 @@ jobs:
         run: npx nx run lint
       - name: Run tests
         run: npm run test:ci
-      - name: Generate coverage report
-        run: npm run coverage-report || true
 
   build_kirby:
     name: Build Kirby lib
