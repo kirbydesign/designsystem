@@ -145,8 +145,11 @@ export class TabNavigationComponent implements AfterViewInit {
     );
 
     this.selectTab(this.selectedIndex);
-    this.scrollToTab(this.focusIndex);
     this.focusTab(this.focusIndex);
+
+    setTimeout(() => {
+      this.scrollToTab(this.focusIndex);
+    }, this.DEBOUNCE_TIME_MS);
   }
 
   private updateTabElementsOnChanges() {
