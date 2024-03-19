@@ -23,8 +23,6 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "~/app/*": ["apps/user-flows/src/app/*"],
-      "~/environments/*": ["apps/user-flows/src/environments/*"],
       "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
       "@kirbydesign/designsystem/card": ["libs/designsystem/card/index.ts"],
