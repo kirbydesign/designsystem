@@ -1,0 +1,18 @@
+/* 
+  In order to use sass functionality the styles for this example 
+  has to be stored in a seperate scss file. Otherwise the preprocessor
+  won't kick in.
+ */
+@use '@kirbydesign/core/src/scss/utils';
+
+kirby-card {
+  --kirby-card-background-image: url('https://images.unsplash.com/photo-1515876305430-f06edab8282a');
+
+  height: 200px;
+  width: 500px;
+
+  // Add styling within card component to content layer to position card-footer correctly.
+  .content-layer {
+    height: 100%;
+  }
+}
