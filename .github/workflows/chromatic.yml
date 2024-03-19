@@ -1,0 +1,23 @@
+name: "Visual Regression Tests - Chromatic"
+
+on:
+    pull_request:
+        types: [labeled, synchronize]
+
+jobs:
+  chromatic:
+    if: ${{ github.event.label.name == 'chromatic' || contains(github.event.pull_request.labels.*.name, 'chromatic') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
