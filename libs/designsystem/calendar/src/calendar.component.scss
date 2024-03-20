@@ -95,7 +95,8 @@ td {
 
 .day.disabled,
 .day:not(.selectable) {
-  --color: #{utils.get-color('semi-dark')};
+  // Hardcoded color because we don't want it to be part of a shared color palette
+  --color: #b4b4b4;
 
   pointer-events: none;
 }
