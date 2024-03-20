@@ -1,6 +1,22 @@
 {
   "name": "@kirbydesign/designsystem",
   "version": "9.3.2",
+  "description": "The Kirby Design Angular Components.",
+  "author": "kirby@bankdata.dk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kirbydesign/designsystem.git"
+  },
+  "keywords": [
+    "Angular",
+    "Angular2",
+    "Library",
+    "Kirby"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirbydesign/designsystem/issues"
+  },
   "dependencies": {
     "@angular/cdk": "^17.0.0",
     "@floating-ui/dom": "^1.1.0",
@@ -25,11 +41,11 @@
     "zone.js": "0.14.3"
   },
   "devDependencies": {
-    "@angular/cli": "17.0.9",
-    "@angular/compiler-cli": "17.0.9",
-    "@angular-devkit/build-angular": "17.0.10",
-    "@angular-devkit/core": "17.0.10",
-    "@angular-devkit/schematics": "17.0.10",
+    "@angular/cli": "^17.0.9",
+    "@angular/compiler-cli": "^17.0.9",
+    "@angular-devkit/build-angular": "^17.0.10",
+    "@angular-devkit/core": "^17.0.10",
+    "@angular-devkit/schematics": "^17.0.10",
     "@ngneat/spectator": "^15.0.1",
     "@swc-node/register": "~1.6.7",
     "@swc/core": "~1.3.85",
@@ -47,8 +63,9 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "^2.0.1",
-    "karma-spec-reporter": "0.0.32"
-    
+    "karma-spec-reporter": "0.0.32",
+    "ng-mocks": "^14.11.0",
+    "ng-packagr": "^17.0.3"
   },
   "exports": {
     "./scss/global-styles": "./scss/_global-styles.scss",
