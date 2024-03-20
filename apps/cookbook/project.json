@@ -14,7 +14,7 @@
       "executor": "@angular-builders/custom-webpack:browser",
       "options": {
         "customWebpackConfig": {
-          "path": "./webpack.sass-to-ts.config.ts",
+          "path": "./tools/sass-to-ts/webpack.sass-to-ts.config.ts",
           "sassToTs": {
             "watchGlob": ["libs/core/src/helpers/**/*.scss", "libs/core/src/scss/**/*.scss"],
             "transform": [

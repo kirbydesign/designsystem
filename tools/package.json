@@ -1,0 +1,21 @@
+{
+  "name": "@repo/tools",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Common tooling and config.",
+  "devDependencies": {
+    "@angular-eslint/eslint-plugin": "^17.2.1",
+    "@angular-eslint/eslint-plugin-template": "^17.2.1",
+    "@angular-eslint/template-parser": "^17.2.1",
+    "@nx/eslint": "17.2.8",
+    "@nx/eslint-plugin": "17.2.8",
+    "@typescript-eslint/eslint-plugin": "6.19.0",
+    "@typescript-eslint/parser": "6.19.0",
+    "eslint": "8.48.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jasmine": "^4.1.3",
+    "eslint-plugin-prettier": "^4.2.1",
+    "sass": "^1.55.0"
+  }
+}
