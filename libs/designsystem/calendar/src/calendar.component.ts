@@ -382,7 +382,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return (
       (this.alwaysEnableToday && day.isToday) ||
       (!day.isDisabled &&
-        day.isCurrentMonth &&
+        // TODO: Remove or change isCurrentMonth condition
+        // day.isCurrentMonth &&
         !(this.disableWeekends && day.isWeekend) &&
         !(this.disablePastDates && day.isPast) &&
         !(this.disableFutureDates && day.isFuture) &&
@@ -434,6 +435,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  // TODO: Allow selecting day that is not in current/active month
   _onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
       let newDate = new Date(this.activeMonth);
