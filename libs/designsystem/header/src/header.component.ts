@@ -94,7 +94,7 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
     return Array.isArray(this.subtitle2) ? this.subtitle2 : [this.subtitle2];
   }
 
-  public onTitleClick(event: PointerEvent) {
+  onTitleClick(event: PointerEvent) {
     this.titleClick.emit(event);
   }
 
@@ -104,7 +104,7 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
 
   constructor(private injector: Injector) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.initActionGroupInjector();
 
     if (this.titleMaxLines > 0) {
@@ -114,11 +114,11 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
     }
   }
 
-  public ngAfterContentChecked(): void {
+  ngAfterContentChecked(): void {
     this.onPotentialAvatarRendered();
   }
 
-  private initActionGroupInjector(): void {
+  initActionGroupInjector(): void {
     this.actionGroupConfig = {
       defaultVisibleActions: this.emphasizeActions ? undefined : 1,
     };
@@ -134,7 +134,7 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
     });
   }
 
-  private onPotentialAvatarRendered(): void {
+  onPotentialAvatarRendered(): void {
     // If an avatar is present we default to centered layout - unless configured otherwise:
     const avatarPresent: boolean = this.avatarContainerElement?.nativeElement.children.length > 0;
     if (avatarPresent && this.centered === undefined) {
