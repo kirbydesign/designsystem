@@ -1,7 +1,16 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IonRefresher } from '@ionic/angular';
+import {
+  IonBackButton,
+  IonButtons,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonRefresher,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
 import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -17,6 +26,7 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import {
   PageActionsComponent,
   PageActionsDirective,
@@ -80,6 +90,15 @@ describe('PageComponent', () => {
       ActionGroupComponent,
       ButtonComponent,
       FitHeadingDirective,
+      IonBackButton,
+      IonButtons,
+      IonContent,
+      IonFooter,
+      IonHeader,
+      IonRefresher,
+      IonTitle,
+      IonToolbar,
+      SpinnerModule,
     ],
     declarations: [
       PageContentComponent,

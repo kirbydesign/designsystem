@@ -1,4 +1,3 @@
-import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -12,14 +11,14 @@ const getColor = DesignTokenHelper.getColor;
 const getTextColor = DesignTokenHelper.getTextColor;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
 const checkboxIconSize = size('m');
-const checkboxSizeXs = size('l');
+const checkboxSizeXs = size('m');
 const checkboxSizeSm = fatFingerSize;
 const checkboxSizeMd = size('xxxl');
 
 describe('CheckboxComponent', () => {
   const createComponent = createComponentFactory({
     component: CheckboxComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   let spectator: Spectator<CheckboxComponent>;

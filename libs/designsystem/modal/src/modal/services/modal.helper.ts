@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { first, fromEvent, takeUntil } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';

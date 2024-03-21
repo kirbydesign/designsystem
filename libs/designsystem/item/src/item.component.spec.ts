@@ -1,6 +1,4 @@
-import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -17,7 +15,7 @@ describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
 
   const createHost = createHostFactory({
-    imports: [MockModule(IonicModule), IconModule],
+    imports: [TestHelper.ionicModuleForTest, IconModule],
     component: ItemComponent,
   });
 

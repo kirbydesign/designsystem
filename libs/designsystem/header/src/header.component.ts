@@ -33,6 +33,11 @@ export class HeaderCustomSectionDirective {}
 })
 export class HeaderTitleActionIconDirective {}
 
+@Directive({
+  selector: '[kirbyHeaderCustomFlag]',
+})
+export class HeaderCustomFlagDirective {}
+
 @Component({
   selector: 'kirby-header',
   templateUrl: './header.component.html',
@@ -63,6 +68,11 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
 
   @ContentChild(HeaderCustomSectionDirective, { read: TemplateRef<HeaderCustomSectionDirective> })
   customSectionTemplate?: TemplateRef<HeaderCustomSectionDirective>;
+
+  @ContentChild(HeaderCustomFlagDirective, {
+    read: TemplateRef<HeaderCustomFlagDirective>,
+  })
+  customFlagTemplate?: TemplateRef<HeaderCustomFlagDirective>;
 
   @ContentChild(HeaderTitleActionIconDirective, { read: TemplateRef })
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;

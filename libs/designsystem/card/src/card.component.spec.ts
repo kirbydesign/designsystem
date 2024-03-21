@@ -74,7 +74,7 @@ describe('CardComponent', () => {
       const ionBadgeElement = spectator.query<HTMLElement>('ion-badge');
       expect(ionBadgeElement).toBeTruthy();
       await TestHelper.whenReady(ionBadgeElement);
-      expect(ionBadgeElement).toHaveClass('hydrated', ionicGlobalMode);
+      expect(ionBadgeElement).toHaveClass('ios', ionicGlobalMode);
     });
   });
 });

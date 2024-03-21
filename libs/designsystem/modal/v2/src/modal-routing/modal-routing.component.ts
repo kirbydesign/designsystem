@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonModal } from '@ionic/angular';
+import { IonModal } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'kirby-modal-v2-routing-wrapper',

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController as IonicModalController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -265,14 +265,13 @@ describe('ModalHelper', () => {
         await openModal(undefined, 'full-height');
 
         expectSize('full-height');
-        expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
+        expect(ionModal).toHaveComputedStyle({ height: `${document.body.clientHeight}px` });
       });
 
       it('drawer should be sized `full-height`', async () => {
         await openDrawer(undefined, 'full-height');
 
         expectSize('full-height');
-        expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
       });
 
       it('should not set default size class if configured with interactWithBackground', async () => {

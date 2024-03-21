@@ -2,8 +2,8 @@
   display: grid;
   place-content: center;
   overflow-y: auto;
-}
 
-button {
-  min-width: 15rem;
+  > button {
+    min-width: 15rem;
+  }
 }

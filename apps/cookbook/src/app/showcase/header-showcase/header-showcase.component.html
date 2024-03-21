@@ -49,6 +49,23 @@
   </div>
 
   <div class="header-example-container">
+    <h2>Custom Flag</h2>
+    <p>
+      Custom markup can also be added to the header as a flag. This can be achieved by applying the
+      directive
+      <code>*kirbyHeaderCustomFlag</code>
+      to your custom flag markup.
+    </p>
+    <cookbook-example-viewer [html]="customFlagExample.template" [css]="customFlagExample.styles">
+      <div class="header-example">
+        <cookbook-header-example-custom-flag
+          #customFlagExample
+        ></cookbook-header-example-custom-flag>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Key value</h2>
     <p>
       In some cases a number is the primary information on a page. When that's the case you should

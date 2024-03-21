@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
 
@@ -35,7 +35,7 @@ export class ActionSheetHelper {
       ionModal.dismiss(item)
     );
     const onDidDismiss = ionModal.onDidDismiss();
-    onDidDismiss.then((_) => {
+    onDidDismiss.then(() => {
       cancelSubscription.unsubscribe();
       itemSelectSubscription.unsubscribe();
     });

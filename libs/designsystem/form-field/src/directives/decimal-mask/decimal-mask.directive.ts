@@ -26,6 +26,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   @Input() max: number;
   @Input() precision = 2;
   @Input() setMaxOnOverflow = false;
+  @Input() alignment: 'left' | 'right' = 'right';
 
   @Input() set allowMinus(allowMinus: boolean) {
     this._allowMinus = allowMinus || (this.min || 0) < 0;
@@ -51,6 +52,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   _maxlength: number;
   _groupSeperatorDisabled: boolean;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onChange = (_: string) => {};
 
   constructor(private elementRef: ElementRef, @Inject(LOCALE_ID) private locale: string) {}
@@ -75,6 +77,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     this.onChange = onChange;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   registerOnTouched(_: any): void {}
 
   setDisabledState?(isDisabled: boolean): void {
@@ -97,6 +100,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
       showMaskOnFocus: false,
       showMaskOnHover: false,
       placeholder: '',
+      rightAlign: this.alignment === 'right',
       onBeforeWrite: () => {
         if (!this.inputmask) return;
         const unmaskedValue = this.inputmask.unmaskedvalue();

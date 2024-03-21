@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/standalone';
 import { from, map, Observable, switchMap, take, tap } from 'rxjs';
-import { OverlayEventDetail } from '@ionic/core/components';
+import type { OverlayEventDetail } from '@ionic/core/components';
 
 export type ModalFlavor = 'modal' | 'drawer';
-type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
 type SizeTemp = 'md';
 
 export type ModalV2Config = {

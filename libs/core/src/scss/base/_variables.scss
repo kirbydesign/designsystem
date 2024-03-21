@@ -102,8 +102,8 @@ $elevations: (
     0 1px 24px 0 rgb(28 28 28 / 4%),
   ),
   4: (
-    0 0 5px 0 rgb(28 28 28 / 4%),
-    0 10px 24px -10px rgb(28 28 28 / 15%),
+    0 0 5px 0 rgba(28 28 28 / 4%),
+    0 10px 15px -10px rgba(28 28 28 / 15%),
   ),
   8: (
     0 20px 30px -15px rgb(28 28 28 / 30%),
@@ -187,6 +187,26 @@ $checkbox-radio-sizes: (
 $checkbox-radio-spacing: (
   'to-edge': map.get($sizes, 's'),
   'to-label': map.get($sizes, 'xs'),
+);
+
+/* Checkbox - size
+****************************************************************************/
+$checkbox-sizes: (
+  'xs': (
+    icon-size: map.get($sizes, 's'),
+    line-height: map.get($sizes, 'm'),
+    vertical-padding: 4px,
+  ),
+  'sm': (
+    icon-size: map.get($sizes, 'm'),
+    line-height: map.get($checkbox-radio-sizes, 'sm'),
+    vertical-padding: 10px,
+  ),
+  'md': (
+    icon-size: map.get($sizes, 'm'),
+    line-height: map.get($checkbox-radio-sizes, 'md'),
+    vertical-padding: 16px,
+  ),
 );
 
 /* Transitions

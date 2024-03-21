@@ -1,0 +1,17 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
+@use 'modal-playground.shared';
+
+kirby-card {
+  margin-top: utils.size('l');
+
+  kirby-card-header {
+    em {
+      font-size: smaller;
+    }
+  }
+}
+
+cookbook-modal-example-size-selector {
+  margin-bottom: utils.size('m');
+}

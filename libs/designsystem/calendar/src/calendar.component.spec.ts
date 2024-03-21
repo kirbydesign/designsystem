@@ -74,6 +74,17 @@ describe('CalendarComponent', () => {
       expect(dayTexts.slice(0, 5)).toEqual(['1', '2', '3', '4', '5']);
       expect(dayTexts.length).toEqual(31);
     });
+
+    it('should deselect date if selectedDate is set to null', () => {
+      const initialDate = localMidnightDate('1997-08-29');
+      spectator.setInput('selectedDate', initialDate);
+
+      expect(spectator.query('.day.selected')).toHaveText(format(initialDate, 'd'));
+
+      spectator.setInput('selectedDate', null);
+
+      expect(spectator.query('.day.selected')).toBeUndefined;
+    });
   });
 
   describe('todayDate', () => {

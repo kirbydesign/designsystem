@@ -15,9 +15,7 @@ import {
 } from '@angular/core';
 import {
   add,
-  differenceInDays,
   eachDayOfInterval,
-  endOfMonth,
   endOfWeek,
   format,
   getYear,
@@ -130,9 +128,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return this._selectedDate;
   }
 
-  @Input() set selectedDate(valueLocalOrUTC: Date) {
+  @Input() set selectedDate(valueLocalOrUTC: Date | null) {
     const value = this.normalizeDate(valueLocalOrUTC);
-    this.setActiveMonth(value);
+
+    if (valueLocalOrUTC) {
+      this.setActiveMonth(value);
+    }
 
     if (this.hasDateChanged(value, this._selectedDate)) {
       this.onSelectedDateChange(value);
@@ -427,7 +428,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       newDay.isSelected = true;
       this.selectedDay = newDay;
     }
-    this.calendarHelper.setSelectedDay(newDate.getDate());
+
+    if (newDate) {
+      this.calendarHelper.setSelectedDay(newDate.getDate());
+    }
   }
 
   _onDateSelected(newDay: CalendarCell) {

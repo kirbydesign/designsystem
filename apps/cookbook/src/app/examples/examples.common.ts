@@ -47,7 +47,6 @@ import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabExampleMenuComponent } from './tabs-example/tab/tab-example-menu.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
-import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
@@ -57,6 +56,7 @@ import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-exampl
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
+import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -107,6 +107,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesSimpleExampleComponent,
+  SlidesHeightExampleComponent,
   SlidesAdvancedExampleComponent,
   AccordionExampleComponent,
   LinkExampleComponent,

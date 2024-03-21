@@ -10,11 +10,11 @@ import {
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonToggle } from '@ionic/angular/standalone';
 
 @Component({
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [CommonModule, IonToggle],
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.scss'],

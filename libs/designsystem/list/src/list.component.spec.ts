@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as ionic from '@ionic/angular';
+import * as ionic from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
@@ -10,7 +10,6 @@ import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListHelper } from './helpers/list-helper';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
-import { LoadOnDemandEvent } from './list.event';
 
 type Transaction = {
   id: number;
@@ -175,7 +174,7 @@ describe('ListComponent', () => {
   describe('function: ngOnInit', () => {
     describe('when there is a subscriber to the loadMore event', () => {
       beforeEach(() => {
-        component.loadOnDemand.subscribe((_: LoadOnDemandEvent) => {});
+        component.loadOnDemand.subscribe(() => {});
       });
 
       it('should enable load more, if isLoadOnDemandEnabled is not set', () => {

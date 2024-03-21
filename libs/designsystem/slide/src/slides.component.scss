@@ -93,4 +93,8 @@ $bullet-inactive-opacity: 0.2;
   .swiper-button-prev.swiper-button-disabled {
     opacity: 1;
   }
+
+  swiper-slide:has([slideStretchHeight]) {
+    height: auto;
+  }
 }

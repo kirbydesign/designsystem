@@ -1,10 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { IonContent, IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
+import { IonContent, IonModal } from '@ionic/angular/standalone';
+import type { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 type Flavor = 'modal' | 'drawer';
-type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
 type SizeTemp = 'md';
 
 @Component({

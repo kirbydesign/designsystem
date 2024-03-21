@@ -2,8 +2,16 @@
   <ng-content select="kirby-avatar,kirby-progress-circle"></ng-content>
 </div>
 
-<div class="flag">
-  <ng-content select="kirby-flag"></ng-content>
+<div [ngSwitch]="!customFlagTemplate" class="flag">
+  <ng-container *ngSwitchCase="true">
+    <ng-content select="kirby-flag"></ng-content>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="false">
+    <div class="custom-flag">
+      <ng-container *ngTemplateOutlet="customFlagTemplate"></ng-container>
+    </div>
+  </ng-container>
 </div>
 
 <div class="container">
@@ -17,10 +25,10 @@
     <h1 *ngIf="!!title && !value" #titleElement class="title" [kirbyFitHeading]="fitHeadingConfig">
       {{ title }}
     </h1>
-  
+
     <!-- Title and value - value: -->
     <h3 *ngIf="!!value" class="value kirby-text-display-3" [kirbyFitHeading]="fitHeadingConfig">{{ value }}<span class="value-unit semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
-  
+
     <!-- Subtitles: -->
     <ng-container
         *ngTemplateOutlet="subTitleTemplate; context: { $implicit: _subtitles1 }"
@@ -37,7 +45,7 @@
       <ng-container *ngTemplateOutlet="customSectionTemplate"></ng-container>
     </div>
   </div>
-  
+
   <!-- Actions: -->
   <div
       *ngIf="!!actionsTemplate"

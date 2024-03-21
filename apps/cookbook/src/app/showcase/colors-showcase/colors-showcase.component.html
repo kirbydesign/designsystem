@@ -13,7 +13,7 @@
       <div class="color-sample {{ selectedColor }}-shade">Shade</div>
     </div>
     <pre class="language-css">
-@use '@kirbydesign/designsystem/scss/utils';
+&#64;use '&#64;kirbydesign/designsystem/scss/utils';
 
 .color-sample-example {{ '{' }}
   background-color: utils.get-color('{{ selectedColor }}');
@@ -37,7 +37,7 @@
   *ngTemplateOutlet="colorPalette; context: { $implicit: notificationColors }"
 ></ng-container>
 
-<h2>Decoration colors</h2>
+<h2>Decoration colors (click to copy)</h2>
 <ng-container
   *ngTemplateOutlet="decorationColorPalette; context: { $implicit: decorationColors }"
 ></ng-container>
@@ -92,7 +92,8 @@
           <dd>{{ ramp.step }}</dd>
           <dt
             class="color-ramp-sample {{ color.name }}-{{ ramp.step }}"
-            title="var(--kirby-decoration-color-{{ color.name }}-{{ ramp.step }})"
+            title="{{ getDecorationColorVariable(color.name, ramp.step) }}"
+            (click)="onDecorationColorClick($event, color.name, ramp.step)"
           ></dt>
         </ng-container>
       </dl>

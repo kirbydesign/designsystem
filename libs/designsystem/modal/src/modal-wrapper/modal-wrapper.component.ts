@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ElementRef,
   HostBinding,
   HostListener,
@@ -13,18 +14,11 @@ import {
   QueryList,
   Renderer2,
   RendererStyleFlags2,
+  TemplateRef,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import {
-  IonContent,
-  IonHeader,
-  IonicModule,
-  IonTitle,
-  IonToolbar,
-  ScrollDetail,
-} from '@ionic/angular';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
@@ -38,6 +32,14 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  ScrollDetail,
+} from '@ionic/angular/standalone';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalConfig, ShowAlertCallback } from './config/modal-config';
@@ -49,7 +51,17 @@ const contentScrolledOffsetInPixels = 4;
 
 @Component({
   standalone: true,
-  imports: [IonicModule, RouterModule, ButtonComponent, IconModule, CommonModule],
+  imports: [
+    RouterModule,
+    ButtonComponent,
+    IconModule,
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonContent,
+  ],
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
@@ -71,7 +83,7 @@ export class ModalWrapperComponent
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
 
-  set scrollDisabled(disabled: boolean) {
+  @Input() set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
 
@@ -80,7 +92,12 @@ export class ModalWrapperComponent
   }
 
   @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
+
   componentPropsInjector: Injector;
+  modalWrapperInjector: Injector;
+
+  @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
 
   @ViewChildren(ButtonComponent, { read: ElementRef }) private toolbarButtonsQuery: QueryList<
     ElementRef<HTMLButtonElement>
@@ -172,6 +189,11 @@ export class ModalWrapperComponent
     this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
+      parent: this.injector,
+    });
+
+    this.modalWrapperInjector = Injector.create({
+      providers: [{ provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent }],
       parent: this.injector,
     });
   }

@@ -149,6 +149,10 @@ $margin-inline: utils.size('s');
   }
 }
 
+.flag .custom-flag {
+  margin-block: utils.size('xxxs');
+}
+
 .title {
   margin-bottom: utils.size('xxxxs');
 

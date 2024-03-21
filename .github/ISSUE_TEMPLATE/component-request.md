@@ -28,12 +28,12 @@ The good issue: contains only one issue, is self-contained, is specific & unambi
 
 ## Checklist:
 
-The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
+The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#the-process-of-contributing) correctly.
 
 ### Refinement
 
-- [ ] Request that the issue is [UX refined](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
-- [ ] Request that the issue is [tech refined](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [UX refined](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#ux-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [tech refined](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#tech-refinement); do not proceed until this is done.
 
 ### Implementation 
 The contributor who wants to implement this issue should: 

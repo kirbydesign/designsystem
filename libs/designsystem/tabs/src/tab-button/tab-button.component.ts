@@ -1,14 +1,4 @@
-import {
-  Component,
-  ContentChildren,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  QueryList,
-  Renderer2,
-} from '@angular/core';
+import { Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { selectedTabClickEvent } from './tab-button.events';
@@ -18,7 +8,7 @@ import { selectedTabClickEvent } from './tab-button.events';
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss'],
 })
-export class TabButtonComponent implements OnInit {
+export class TabButtonComponent {
   /**
    * @deprecated Using routerLink for defining routes for kirby-tab-button is deprecated,
    * as it clashes with Angulars builtin routerLink directive and causes unexpected behavior in Angular 16
@@ -29,12 +19,6 @@ export class TabButtonComponent implements OnInit {
   @Output() click = new EventEmitter<Event>();
   @ContentChildren(IconComponent) icons: QueryList<IconComponent>;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
-
-  ngOnInit(): void {
-    this.removeWrapper();
-  }
-
   onClick(event: Event, isSelected: boolean) {
     this.click.emit(event);
 
@@ -42,12 +26,5 @@ export class TabButtonComponent implements OnInit {
       const clickEvent = new CustomEvent(selectedTabClickEvent);
       dispatchEvent(clickEvent);
     }
-  }
-
-  private removeWrapper() {
-    const parent = this.elementRef.nativeElement.parentNode;
-    const button = this.elementRef.nativeElement.childNodes[0];
-    this.renderer.removeChild(parent, this.elementRef.nativeElement);
-    this.renderer.appendChild(parent, button);
   }
 }

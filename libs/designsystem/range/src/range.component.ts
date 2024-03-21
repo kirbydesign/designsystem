@@ -8,15 +8,14 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IonicModule, IonRange } from '@ionic/angular';
+import { IonRange } from '@ionic/angular/standalone';
 
 @Component({
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [CommonModule, IonRange],
   selector: 'kirby-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],
@@ -39,7 +38,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
   @Input() step = 1;
   @Input() ticks: boolean;
   @Input() disabled = false;
-  @Input() pinFormatter: (value: number) => string | number;
+  @Input() pinFormatter: (value: number) => string | number = this.defaultPinFormatter;
   @Input()
   set value(value: number) {
     if (value !== this.currentValue) {
@@ -63,7 +62,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
     this.initializeMoveEventEmitter();
   }
 
-  ngOnChanges(_: SimpleChanges) {
+  ngOnChanges() {
     if (!this.ticks) return;
 
     /*
@@ -100,6 +99,10 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
     }
   }
 
+  private defaultPinFormatter(value: number): number {
+    return value;
+  }
+
   public setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
@@ -116,6 +119,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
 
   public onTouched = () => {};
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public propagateChange = (_: any) => {};
 
   public writeValue(value: any): void {

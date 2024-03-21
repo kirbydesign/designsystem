@@ -234,9 +234,11 @@ export class ModalNavigationService {
   ): Observable<boolean> {
     return navigationEnd$.pipe(
       pairwise(),
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       filter(([prevNavigation, _]) =>
         this.modalRouteSetContainsPath(modalRouteSet, prevNavigation, modalRoutesContainsUrlParams)
       ), // Only emit if previous route was modal
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       map(([_, currentNavigation]) => {
         const isNewModalRoute = this.isModalRoute(currentNavigation.urlAfterRedirects);
         // Deactivate modal route if new route is NOT modal OR is outside current parent route:
@@ -295,6 +297,7 @@ export class ModalNavigationService {
         return { activated$, deactivated$ };
       }
     }
+
     return { activated$: EMPTY, deactivated$: EMPTY };
   }
 

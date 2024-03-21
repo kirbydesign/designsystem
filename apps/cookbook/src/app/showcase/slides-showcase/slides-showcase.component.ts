@@ -3,6 +3,8 @@ import {
   advancedExampleComponentHTML,
   customConfigExample,
   defaultExampleComponentHTML,
+  heightExampleComponentCSS,
+  heightExampleComponentHTML,
   slidesDefaultConfig,
 } from '../../examples/slides-example/slides-code-snippets';
 import {
@@ -19,6 +21,8 @@ import { ApiDescriptionMethod } from '../../shared/api-description/api-descripti
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;
   defaultExampleComponentHTML: string = defaultExampleComponentHTML;
+  heightExampleComponentHTML: string = heightExampleComponentHTML;
+  heightExampleComponentCSS: string = heightExampleComponentCSS;
   advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
 
@@ -77,6 +81,11 @@ export class SlidesShowcaseComponent {
       name: '*kirbySlide',
       description:
         'The `*kirbySlide` directive should be applied to a `kirby-card` which will then be used as the template for each slide.',
+    },
+    {
+      name: 'slideStretchHeight',
+      description:
+        'If individual slides have variable height you can add this attribute directive in order to make slides equal height.',
     },
   ];
 }

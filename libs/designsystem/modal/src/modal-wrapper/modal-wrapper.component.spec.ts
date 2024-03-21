@@ -1,5 +1,5 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonContent } from '@ionic/angular';
+import { IonContent } from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
@@ -71,7 +71,6 @@ describe('ModalWrapperComponent', () => {
     */
 
     let ionContentElement: HTMLIonContentElement;
-    let ionTitleElement: HTMLIonTitleElement;
     const testTitle = 'This is a long test title';
 
     beforeEach(() => {
@@ -83,7 +82,6 @@ describe('ModalWrapperComponent', () => {
         .build();
 
       ionContentElement = spectator.query('ion-content');
-      ionTitleElement = spectator.query('ion-title');
     });
 
     afterEach(() => {

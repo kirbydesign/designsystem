@@ -1,7 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import { Flavor, ModalV2Component, SizeTemp } from '@kirbydesign/designsystem/modal/v2';
-import { OverlayEventDetail } from '@ionic/core/components';
+import type { OverlayEventDetail } from '@ionic/core/components';
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-modal-v2',
