@@ -1,5 +1,5 @@
 import {
-  AfterContentChecked,
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -44,7 +44,7 @@ export class HeaderCustomFlagDirective {}
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements AfterContentChecked, OnInit {
+export class HeaderComponent implements AfterContentInit, OnInit {
   @HostBinding('class.centered')
   @Input()
   centered?: boolean;
@@ -114,7 +114,7 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
     }
   }
 
-  ngAfterContentChecked(): void {
+  ngAfterContentInit(): void {
     this.onPotentialAvatarRendered();
   }
 
