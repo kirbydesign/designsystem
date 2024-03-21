@@ -14,7 +14,7 @@
       i.e. to `.avatar`.
     */
     /* stylelint-disable selector-pseudo-element-no-unknown */
-    &:has(> .avatar::ng-deep) {
+    &:has(> .avatar::ng-deep:not(:empty)) {
       margin-top: utils.size('xxs');
     }
   }
@@ -135,10 +135,18 @@ $margin-inline: utils.size('s');
 
 .avatar {
   margin-bottom: utils.size('s');
+
+  &:empty {
+    display: none;
+  }
 }
 
 .flag {
   margin-bottom: utils.size('xxxs');
+
+  &:empty {
+    display: none;
+  }
 }
 
 .flag .custom-flag {

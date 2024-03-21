@@ -16,9 +16,6 @@ import {
 } from '@angular/core';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
-import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { FlagComponent } from '@kirbydesign/designsystem/flag';
-import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Directive({
@@ -57,14 +54,8 @@ export class HeaderComponent implements AfterContentInit, OnInit {
 
   fitHeadingConfig: FitHeadingConfig;
 
-  @ContentChild(AvatarComponent)
-  avatar: AvatarComponent;
-
-  @ContentChild(ProgressCircleComponent)
-  progressCircle: ProgressCircleComponent;
-
-  @ContentChild(FlagComponent)
-  flag: FlagComponent;
+  @ViewChild('avatarContainerElement', { read: ElementRef })
+  avatarContainerElement: ElementRef<HTMLDivElement>;
 
   @ViewChild('titleElement', { read: ElementRef })
   titleElement?: ElementRef<HTMLHeadingElement>;
@@ -114,6 +105,20 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   constructor(private injector: Injector) {}
 
   ngOnInit(): void {
+    this.initActionGroupInjector();
+
+    if (this.titleMaxLines > 0) {
+      this.fitHeadingConfig = {
+        maxLines: this.titleMaxLines,
+      };
+    }
+  }
+
+  ngAfterContentInit(): void {
+    this.onPotentialAvatarRendered();
+  }
+
+  initActionGroupInjector(): void {
     this.actionGroupConfig = {
       defaultVisibleActions: this.emphasizeActions ? undefined : 1,
     };
@@ -127,17 +132,12 @@ export class HeaderComponent implements AfterContentInit, OnInit {
       ],
       parent: this.injector,
     });
-
-    if (this.titleMaxLines > 0) {
-      this.fitHeadingConfig = {
-        maxLines: this.titleMaxLines,
-      };
-    }
   }
 
-  ngAfterContentInit(): void {
+  onPotentialAvatarRendered(): void {
     // If an avatar is present we default to centered layout - unless configured otherwise:
-    if (this.avatar && this.centered === undefined) {
+    const avatarPresent: boolean = this.avatarContainerElement?.nativeElement.children.length > 0;
+    if (avatarPresent && this.centered === undefined) {
       this.centered = true;
     }
 
