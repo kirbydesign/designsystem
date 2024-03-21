@@ -98,7 +98,7 @@ export class HeaderComponent implements AfterContentInit, OnInit {
     this.titleClick.emit(event);
   }
 
-  public _actionGroupInjector: Injector;
+  _actionGroupInjector: Injector;
 
   private actionGroupConfig: ActionGroupConfig;
 
