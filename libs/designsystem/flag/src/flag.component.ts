@@ -1,3 +1,4 @@
+import { FlagThemeColor } from '@kirbydesign/core';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
@@ -13,8 +14,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 })
 export class FlagComponent {
   @Input() size: 'xs' | 'sm' | 'md' = 'md';
-  @Input() themeColor: 'success' | 'warning' | 'danger' | 'semi-light' | 'transparent' =
-    'transparent';
+  @Input() themeColor: FlagThemeColor = 'transparent';
 
   @HostBinding('class')
   get _cssClass() {
