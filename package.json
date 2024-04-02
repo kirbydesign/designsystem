@@ -7,7 +7,7 @@
   "workspaces": [
     "libs/*",
     "apps/*",
-    "tools"
+    "tools/eslint-config"
   ],
   "homepage": "https://cookbook.kirby.design",
   "scripts": {
@@ -90,7 +90,6 @@
     "@types/estree": "^0.0.47",
     "@types/node": "18.7.1",
     "@types/webpack": "^4.41.7",
-    "chokidar": "^3.3.1",
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^2.6.11",
     "fs-extra": "^8.1.0",

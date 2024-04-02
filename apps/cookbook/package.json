@@ -20,6 +20,7 @@
     "@angular-builders/custom-webpack": "^17.0.0",
     "@angular/cli": "^17.0.9",
     "@angular/compiler-cli": "^17.0.9",
+    "@repo/eslint-config": "*",
     "@types/prismjs": "1.9.0"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "extends": ["../../.eslintrc.json"],
+  "extends": ["@repo/eslint-config/angular.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
