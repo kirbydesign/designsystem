@@ -32,6 +32,7 @@ describe('ModalFooterComponent', () => {
   const createHost = createHostFactory({
     component: ModalFooterComponent,
     host: TestHostComponent,
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {});
@@ -43,7 +44,6 @@ describe('ModalFooterComponent', () => {
 
   it('should set correct padding', () => {
     spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
-    expect(spectator.component).toBeTruthy();
     ionFooterElement = spectator.query('ion-footer');
     expect(ionFooterElement).toHaveComputedStyle({
       'padding-left': BASE_PADDING_PX,
@@ -51,6 +51,12 @@ describe('ModalFooterComponent', () => {
       'padding-top': BASE_PADDING_PX,
       'padding-bottom': BASE_PADDING_PX,
     });
+  });
+
+  it('should ensure ion-footer width is same as kirby-modal-footer width', () => {
+    spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+    ionFooterElement = spectator.query('ion-footer');
+    expect(ionFooterElement.offsetWidth).toEqual(spectator.element.offsetWidth);
   });
 
   describe('Set bottom padding', () => {
