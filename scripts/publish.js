@@ -40,16 +40,7 @@ const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`
 const distCoreTarget = `${dist}/${coreLibDir}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
 
-const {
-  version,
-  description,
-  repository,
-  keywords,
-  author,
-  license,
-  bugs,
-  homepage,
-} = require('../package.json');
+const { version: coreVersion } = require('../libs/core/package.json');
 
 function npm(args, options) {
   return new Promise((resolve, reject) => {
@@ -90,22 +81,14 @@ function buildPackage(npmBuildScript) {
   });
 }
 
-function enhancePackageJson(distPackageJsonPath) {
+function writeCoreVersionToPackageJson(distPackageJsonPath) {
   return fs.readJson(distPackageJsonPath, 'utf-8').then((packageJson) => {
-    // Modify contents
-    packageJson.version = version;
-    packageJson.description = description;
-    packageJson.repository = repository;
-    packageJson.keywords = keywords;
-    packageJson.author = author;
-    packageJson.license = license;
-    packageJson.bugs = bugs;
-    packageJson.homepage = homepage;
+    packageJson.dependencies['@kirbydesign/core'] = coreVersion;
 
     // (over-)write destination package.json file
     const json = JSON.stringify(packageJson, null, 2);
-    console.log(`Writing new package.json (to: ${distPackageJsonPath}):\n\n${json}`);
-    return fs.writeJson(distPackageJsonPath, packageJson, { spaces: 2 });
+    console.log(`Writing new package.json (to: ${distDesignsystemPackageJsonPath}):\n\n${json}`);
+    return fs.writeJson(distDesignsystemPackageJsonPath, packageJson, { spaces: 2 });
   });
 }
 
@@ -212,7 +195,7 @@ if (doPublishDesignsystem) {
   console.log('--- Publishing designsystem ---');
   cleanDistribution(distDesignsystemTarget)
     .then(() => buildPackage('dist:designsystem'))
-    .then(() => enhancePackageJson(distDesignsystemPackageJsonPath))
+    .then(() => writeCoreVersionToPackageJson(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
