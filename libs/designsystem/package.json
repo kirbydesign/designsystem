@@ -4,7 +4,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
-    "@kirbydesign/core": "0.0.58",
+    "@kirbydesign/core": "0.0.59",
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
