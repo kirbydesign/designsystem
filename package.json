@@ -71,23 +71,12 @@
     "help": "nx help",
     "workspace-generator": "nx workspace-generator",
     "sync-node-version": "node ./scripts/sync-node-version.js",
-    "analyze:flows:bundle": "npx webpack-bundle-analyzer ./measures/stats.json",
     "nx": "nx"
   },
-  "dependencies": {
-    "date-fns": "^2.21.1",
-    "date-fns-tz": "^1.1.4",
-    "inputmask": "^5.0.5",
-    "swiper": "^9.3.2",
-    "tslib": "^2.0.3"
-  },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^17.0.0",
     "@nx/angular": "17.2.8",
     "@nx/js": "17.2.8",
     "@nx/workspace": "17.2.8",
-    "@schematics/angular": "17.0.10",
-    "@types/estree": "^0.0.47",
     "@types/node": "18.7.1",
     "@types/webpack": "^4.41.7",
     "copy-webpack-plugin": "^11.0.0",
@@ -106,8 +95,7 @@
     "stylelint-config-prettier-scss": "0.0.1",
     "stylelint-config-standard-scss": "^3.0.0",
     "ts-node": "10.9.1",
-    "typescript": "5.2.2",
-    "webpack-bundle-analyzer": "^4.6.1"
+    "typescript": "5.2.2"
   },
   "husky": {
     "hooks": {

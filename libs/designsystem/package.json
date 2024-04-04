@@ -17,6 +17,8 @@
   "bugs": {
     "url": "https://github.com/kirbydesign/designsystem/issues"
   },
+  "homepage": "https://cookbook.kirby.design",
+  "scripts": {},
   "dependencies": {
     "@angular/cdk": "^17.0.0",
     "@floating-ui/dom": "^1.1.0",
