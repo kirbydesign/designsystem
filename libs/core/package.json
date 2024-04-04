@@ -8,14 +8,14 @@
   "types": "dist/types/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build:core:watch": "npm run dist:core -- --watch",
-    "dist:core": "tsc --project libs/core"
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "eslint './**/*.ts' && stylelint './**/*.scss'"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "*"
-  },
-  "typings": "./src/index.d.ts"
+  }
 }

@@ -7,8 +7,9 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
+      "dependsOn": ["^build"],
       "options": {
-        "tsConfig": "libs/designsystem/tsconfig.lib.json",
+        "tsConfig": "tsconfig.lib.json",
         "project": "libs/designsystem/ng-package.json"
       }
     },
@@ -16,7 +17,7 @@
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
         "main": "libs/designsystem/test.ts",
-        "tsConfig": "libs/designsystem/tsconfig.spec.json",
+        "tsConfig": "tsconfig.spec.json",
         "karmaConfig": "libs/designsystem/karma.conf.js",
         "styles": ["libs/designsystem/testing/src/styles.scss"]
       },
