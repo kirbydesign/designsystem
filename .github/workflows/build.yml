@@ -64,7 +64,7 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby lib
-        run: npm run dist:designsystem
+        run: npm run build --workspace=libs/designsystem
 
   build_kirby_cookbook:
     name: Build Kirby Cookbook
@@ -79,7 +79,7 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby Cookbook
-        run: npm run dist:cookbook
+        run: npm run dist --workspace=apps/cookbook
       - name: Upload Kirby Cookbook dist files
         uses: actions/cache@v2
         with:
