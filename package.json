@@ -27,16 +27,7 @@
     "transpile:generate-mocks": "tsc -b tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
-    "affected": "nx affected",
-    "format": "nx format:write",
-    "format:write": "nx format:write",
-    "format:check": "nx format:check",
-    "update": "nx migrate latest",
-    "dep-graph": "nx dep-graph",
-    "help": "nx help",
-    "workspace-generator": "nx workspace-generator",
-    "sync-node-version": "node ./scripts/sync-node-version.js",
-    "nx": "nx"
+    "sync-node-version": "node ./scripts/sync-node-version.js"
   },
   "devDependencies": {
     "@nx/angular": "17.2.8",
