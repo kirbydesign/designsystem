@@ -12,9 +12,6 @@
     "build:watch": "tsc --watch",
     "lint": "eslint './**/*.ts' && stylelint './**/*.scss'"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
   "devDependencies": {
     "@repo/eslint-config": "*"
   }
