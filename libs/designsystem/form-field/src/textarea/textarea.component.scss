@@ -3,21 +3,23 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  position: relative;
-  @include interaction-state.apply-hover {
-    background-color: interaction-state.get-state-color('white', 'xxxs');
-    cursor: text;
-  }
-  @include interaction-state.apply-active {
-    background-color: interaction-state.get-state-color('white');
-  }
+  &:not(:disabled) {
+    @include interaction-state.apply-hover {
+      background-color: interaction-state.get-state-color('white', 'xxxs');
+      cursor: text;
+    }
+    @include interaction-state.apply-active {
+      background-color: interaction-state.get-state-color('white');
+    }
 
-  transition: interaction-state.transition();
-  transition-property: background-color;
-  font-family: var(--kirby-font-family);
-  resize: none;
-
+    transition: interaction-state.transition();
+    transition-property: background-color;
+  }
   @include utils.media('>=medium') {
     resize: vertical;
   }
+
+  position: relative;
+  font-family: var(--kirby-font-family);
+  resize: none;
 }

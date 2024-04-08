@@ -32,7 +32,7 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import {
-  IonBackButtonDelegate,
+  IonBackButton,
   IonButtons,
   IonContent,
   IonFooter,
@@ -40,8 +40,9 @@ import {
   IonRouterOutlet,
   IonToolbar,
   NavController,
-} from '@ionic/angular';
-import { ScrollDetail } from '@ionic/core';
+} from '@ionic/angular/standalone';
+import { componentOnReady } from '@ionic/core';
+import type { ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
@@ -283,8 +284,8 @@ export class PageComponent
   private ionToolbarElement: ElementRef<HTMLIonToolbarElement>;
   @ViewChildren(IonButtons, { read: ElementRef })
   private ionToolbarButtonsElement: QueryList<ElementRef<HTMLIonButtonsElement>>;
-  @ViewChild(IonBackButtonDelegate, { static: false })
-  private backButtonDelegate: IonBackButtonDelegate;
+  @ViewChild(IonBackButton, { static: false })
+  private backButton: IonBackButton;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyContentContainer', { static: false, read: ElementRef })
@@ -541,7 +542,7 @@ export class PageComponent
 
   private interceptBackButtonClicksSetup() {
     if (this.backButtonOverride) {
-      this.backButtonDelegate.onClick = (event: Event) => {
+      this.backButton.onClick = (event: Event) => {
         event.preventDefault();
         this.backButtonOverride.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
       };
@@ -551,9 +552,9 @@ export class PageComponent
     if (this.backButtonClick.observers.length === 0) {
       this.backButtonClick
         .pipe(takeUntil(this.ngOnDestroy$))
-        .subscribe(this.backButtonDelegate.onClick.bind(this.backButtonDelegate));
+        .subscribe(this.backButton.onClick.bind(this.backButton));
     }
-    this.backButtonDelegate.onClick = (event: Event) => {
+    this.backButton.onClick = (event: Event) => {
       this.backButtonClick.emit(event);
     };
   }
@@ -758,7 +759,7 @@ export class PageComponent
     // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
     customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
       // Ensure toolbar and buttons have been rendered and has dimensions:
-      this.ionToolbarElement.nativeElement.componentOnReady().then((toolbar) => {
+      componentOnReady(this.ionToolbarElement.nativeElement, (toolbar) => {
         let startButtonsWidth = 0;
         let endButtonsWidth = 0;
 

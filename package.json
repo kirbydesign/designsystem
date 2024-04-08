@@ -27,7 +27,11 @@
     "transpile:generate-mocks": "tsc -b tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
-    "sync-node-version": "node ./scripts/sync-node-version.js"
+    "sync-node-version": "node ./scripts/sync-node-version.js",
+    "storybook": "nx run designsystem:storybook",
+    "build-storybook": "nx run designsystem:build-storybook",
+    "chromatic": "chromatic",
+    "nx": "nx"
   },
   "devDependencies": {
     "@nx/angular": "17.2.8",
@@ -47,6 +51,7 @@
     "post-npm-install": "^2.0.0",
     "prettier": "2.7.1",
     "sass": "^1.55.0",
+    "storybook": "7.6.13",
     "stylelint": "^14.6.1",
     "stylelint-config-prettier-scss": "0.0.1",
     "stylelint-config-standard-scss": "^3.0.0",

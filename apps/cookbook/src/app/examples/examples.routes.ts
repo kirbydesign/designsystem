@@ -91,6 +91,7 @@ import { ModalExampleAdvancedComponent } from './modal-example/modal-example-adv
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { ModalExampleAlertComponent } from './modal-example/modal-example-alert.component';
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
+import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
 
 export const routes: ModalEnabledRoutes = [
   {
@@ -562,6 +563,10 @@ export const routes: ModalEnabledRoutes = [
   {
     path: 'slides',
     component: SlidesSimpleExampleComponent,
+  },
+  {
+    path: 'slides-height',
+    component: SlidesHeightExampleComponent,
   },
   {
     path: 'slides-advanced',

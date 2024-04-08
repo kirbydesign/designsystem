@@ -24,7 +24,6 @@
     "lint": "eslint './**/*.ts' && stylelint './**/*.scss'"
   },
   "dependencies": {
-    "@angular/cdk": "^17.0.0",
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "7.3.3",
@@ -32,6 +31,8 @@
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
+    "@ionic/angular": "7.6.6",
+    "@angular/cdk": "^17.0.0",
     "@angular/common": "^17.0.0",
     "@angular/core": "^17.0.0",
     "@angular/forms": "^17.0.0",

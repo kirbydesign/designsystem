@@ -10,7 +10,10 @@
         "@repo/eslint-config/eslintrc-custom-overrides.json"
       ],
       "parserOptions": {
-        "project": ["libs/designsystem/tsconfig.*?.json"]
+        "project": [
+          "libs/designsystem/tsconfig.*?.json",
+          "libs/designsystem/.storybook/tsconfig.json"
+        ]
       },
       "rules": {
         "@angular-eslint/directive-selector": [

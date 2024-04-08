@@ -11,11 +11,15 @@ article {
 
 .buttongroup {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  column-gap: utils.size('xxs');
 
   button {
-    width: 50%;
-    margin-left: 6px;
-    margin-right: 6px;
+    flex: 1 1 50%;
+    margin-inline: 0;
+
+    &:only-child {
+      flex-grow: 0;
+    }
   }
 }

@@ -13,7 +13,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonContent, IonModal } from '@ionic/angular';
+import { IonContent, IonModal } from '@ionic/angular/standalone';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
@@ -40,6 +40,7 @@ import { CanDismissHelper } from '../services';
     CommonModule,
     KirbyIonicModule,
     IconModule,
+    IonModal,
     ButtonComponent,
     ModalWrapperComponent,
     ModalCompactWrapperComponent,
