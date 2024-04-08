@@ -16,7 +16,7 @@
     "start": "npm-run-all --parallel \"nx serve cookbook\" \"build:core:watch\"",
     "test": "npm run test --workspaces --if-present",
     "test:headless-browser": "npm run test --workspaces --if-present -- --browsers=ChromeCustom",
-    "test:headless-browser:single": "npm run test --workspaces --if-present -- --browsers=ChromeCustom",
+    "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "test:ci": "npm run test --workspaces --if-present -- --progress false --watch false --code-coverage",
     "lint": "npm run lint --workspaces --if-present",
     "publish": "node ./scripts/publish.js",
