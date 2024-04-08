@@ -4,11 +4,11 @@
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
-    "@kirbydesign/core": "0.0.59",
+    "@kirbydesign/core": "0.0.60",
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
-    "@ionic/angular": "7.6.6",
+    "@ionic/angular": "7.8.3",
     "@angular/cdk": "^17.0.0",
     "@angular/common": "^17.0.0",
     "@angular/core": "^17.0.0",

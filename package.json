@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "9.4.0",
+  "version": "9.4.1",
   "description": "The Kirby Design Angular Components.",
   "engines": {
     "node": "20",
