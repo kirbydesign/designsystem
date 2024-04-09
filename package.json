@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "9.4.0",
+  "version": "9.4.1",
   "description": "The Kirby Design Angular Components.",
   "engines": {
     "node": "20",
@@ -107,7 +107,7 @@
     "@capacitor/status-bar": "^4.1.1",
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
-    "@ionic/angular": "7.6.6",
+    "@ionic/angular": "7.8.3",
     "@nx/angular": "17.2.8",
     "@types/prismjs": "1.9.0",
     "chart.js": "^3.9.1",
