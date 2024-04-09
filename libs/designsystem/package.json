@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/designsystem",
-  "version": "9.3.2",
+  "version": "9.4.1",
   "description": "The Kirby Design Angular Components.",
   "author": "kirby@bankdata.dk",
   "repository": {
@@ -31,7 +31,7 @@
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
-    "@ionic/angular": "7.6.6",
+    "@ionic/angular": "7.8.3",
     "@angular/cdk": "^17.0.0",
     "@angular/common": "^17.0.0",
     "@angular/core": "^17.0.0",
