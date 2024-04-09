@@ -1,6 +1,6 @@
 {
   "extends": ["@repo/eslint-config/angular.json"],
-  "ignorePatterns": ["!**/*", "web-component-proxies.component.ts", "utils.ts"],
+  "ignorePatterns": ["web-component-proxies.component.ts", "utils.ts"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -9,12 +9,6 @@
         "plugin:@angular-eslint/template/process-inline-templates",
         "@repo/eslint-config/eslintrc-custom-overrides.json"
       ],
-      "parserOptions": {
-        "project": [
-          "libs/designsystem/tsconfig.*?.json",
-          "libs/designsystem/.storybook/tsconfig.json"
-        ]
-      },
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",

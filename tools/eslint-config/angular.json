@@ -1,7 +1,6 @@
 {
   "root": true,
   "extends": ["prettier"],
-  "ignorePatterns": ["**/*"],
   "plugins": ["@nx", "prettier", "jasmine"],
   "overrides": [
     {

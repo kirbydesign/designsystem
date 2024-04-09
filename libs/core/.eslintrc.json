@@ -1,4 +1,4 @@
 {
   "extends": ["@repo/eslint-config/angular.json"],
-  "ignorePatterns": ["!**/*", "dist/"]
+  "ignorePatterns": ["dist/"]
 }
