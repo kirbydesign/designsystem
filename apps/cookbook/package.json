@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nx build cookbook",
     "lint": "eslint './**/*.ts' && stylelint './**/*.scss'",
-    "dist": "npm run build --configuration production"
+    "dist": "npm run build -- --configuration production"
   },
   "dependencies": {
     "@angular-builders/custom-webpack": "^17.0.0",
