@@ -8,16 +8,10 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/core",
+        "outputPath": "libs/core/dist",
         "main": "libs/core/src/index.ts",
-        "tsConfig": "libs/core/tsconfig.json",
-        "assets": ["libs/core/*.md"]
+        "tsConfig": "libs/core/tsconfig.json"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
-  },
-  "tags": []
+  }
 }
