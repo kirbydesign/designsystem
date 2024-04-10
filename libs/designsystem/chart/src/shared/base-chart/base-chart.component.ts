@@ -5,6 +5,7 @@ import {
   HostBinding,
   Input,
   OnChanges,
+  OnDestroy,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -20,7 +21,7 @@ import { ChartJSService } from '../chart-js-service/';
   templateUrl: './base-chart.component.html',
   styleUrls: ['./base-chart.component.scss'],
 })
-export class BaseChartComponent implements AfterViewInit, OnChanges {
+export class BaseChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() type: ChartType;
   @Input() data: ChartDataset[] | number[];
 

@@ -69,6 +69,9 @@
         }
       },
       "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
     }
   }
 }

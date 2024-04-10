@@ -8,7 +8,7 @@
     "start": "nx serve flows",
     "start:ios": "npm run build && npx cap run ios",
     "start:android": "npm run build && npx cap run android",
-    "lint": "eslint './**/*.ts' && stylelint './**/*.scss'"
+    "lint": "nx run lint && stylelint './**/*.scss'"
   },
   "dependencies": {
     "@angular/animations": "^17.0.9",

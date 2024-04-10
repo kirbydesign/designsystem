@@ -12,6 +12,10 @@
         "main": "libs/core/src/index.ts",
         "tsConfig": "libs/core/tsconfig.json"
       }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     }
   }
 }

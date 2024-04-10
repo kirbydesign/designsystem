@@ -21,7 +21,7 @@
   "scripts": {
     "build": "nx build designsystem",
     "test": "nx test designsystem",
-    "lint": "eslint './**/*.ts' && stylelint './**/*.scss'"
+    "lint": "nx run lint && stylelint './**/*.scss'"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",

@@ -1,13 +1,9 @@
 {
   "extends": ["@repo/eslint-config/angular.json"],
+  "ignorePatterns": ["android/", "ios/"],
   "overrides": [
     {
       "files": ["*.ts"],
-      "extends": [
-        "plugin:@nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates",
-        "@repo/eslint-config/eslintrc-custom-overrides.json"
-      ],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -17,13 +13,7 @@
             "style": "camelCase"
           }
         ]
-      },
-      "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
-    },
-    {
-      "files": ["*.html"],
-      "extends": ["plugin:@nx/angular-template"],
-      "rules": {}
+      }
     }
   ]
 }

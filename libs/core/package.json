@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "lint": "eslint './**/*.ts' && stylelint './**/*.scss'"
+    "lint": "nx run lint && stylelint './**/*.scss'"
   },
   "devDependencies": {
     "@repo/eslint-config": "*"
