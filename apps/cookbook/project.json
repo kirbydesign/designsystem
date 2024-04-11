@@ -100,9 +100,6 @@
         "assets": []
       },
       "outputs": ["{workspaceRoot}/coverage/apps/cookbook"]
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }

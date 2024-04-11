@@ -23,9 +23,6 @@
       },
       "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "storybook": {
       "builder": "@storybook/angular:start-storybook",
       "options": {
