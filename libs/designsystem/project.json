@@ -9,7 +9,7 @@
       "executor": "@nx/angular:package",
       "dependsOn": ["^build"],
       "options": {
-        "tsConfig": "tsconfig.lib.json",
+        "tsConfig": "libs/designsystem/tsconfig.lib.json",
         "project": "libs/designsystem/ng-package.json"
       }
     },

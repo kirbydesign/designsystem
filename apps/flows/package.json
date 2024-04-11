@@ -14,7 +14,6 @@
     "@angular/animations": "^17.0.9",
     "@angular/cdk": "^17.0.6",
     "@angular/common": "^17.0.9",
-    "@angular/compiler": "^17.0.9",
     "@angular/core": "^17.0.9",
     "@angular/forms": "^17.0.9",
     "@angular/platform-browser": "^17.0.9",
@@ -23,6 +22,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^17.0.9",
+    "@angular/compiler": "^17.0.9",
     "@angular/compiler-cli": "^17.0.9",
     "@capacitor/android": "^4.4.0",
     "@capacitor/cli": "^4.8.0",
