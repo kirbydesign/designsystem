@@ -17,7 +17,6 @@
     [attr.r]="_centerRadius"
     [attr.cx]="radius"
     [attr.cy]="radius"
-    [attr.stroke-dashoffset]="_offset"
-    [attr.stroke-dasharray]="_centerCircumference"
+    [attr.stroke-dasharray]="[_progress, _remainder]"
   />
 </svg>
