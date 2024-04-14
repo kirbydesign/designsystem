@@ -40,4 +40,8 @@ export class ProgressCircleRingComponent {
   get _remainder(): number {
     return this._centerCircumference - this._progress;
   }
+
+  get _progressStrokeWidth(): number {
+    return this.value == 0 ? 0 : this.strokeWidth;
+  }
 }
