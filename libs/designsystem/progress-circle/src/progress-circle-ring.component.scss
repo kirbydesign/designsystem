@@ -9,7 +9,7 @@ svg {
 }
 
 .progress {
-  transition-property: stroke-dasharray;
+  transition-property: stroke-dasharray, stroke;
   transition-duration: utils.get-transition-duration('extra-long');
   transition-timing-function: utils.get-transition-easing('enter-exit');
   transform-origin: 50% 50%;
