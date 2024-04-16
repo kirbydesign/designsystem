@@ -8,18 +8,20 @@ svg {
   stroke: utils.get-color('semi-light');
 }
 
-.progress {
-  transition-property: stroke-dashoffset, stroke;
-  transition-duration: utils.get-transition-duration('extra-long');
-  transition-timing-function: utils.get-transition-easing('enter-exit');
-  transform-origin: 50% 50%;
-  stroke: var(--kirby-progress-circle-stroke-color, #{utils.get-color('success')});
-}
-
 :host {
   @each $color-name, $color-value in utils.$notification-colors {
     &.#{$color-name} {
       --kirby-progress-circle-stroke-color: #{utils.get-color($color-name)};
+    }
+  }
+
+  &.view-initialized {
+    .progress {
+      transition-property: stroke-dasharray, stroke;
+      transition-duration: utils.get-transition-duration('extra-long');
+      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transform-origin: 50% 50%;
+      stroke: var(--kirby-progress-circle-stroke-color, #{utils.get-color('success')});
     }
   }
 }
