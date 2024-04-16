@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 
 @Component({
   standalone: true,
@@ -9,7 +15,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   styleUrls: ['./progress-circle-ring.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressCircleRingComponent {
+export class ProgressCircleRingComponent implements AfterViewInit {
   @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
@@ -33,7 +39,6 @@ export class ProgressCircleRingComponent {
   get _progress(): number {
     const valueWithinBounds = this.value < this.upperBound || this.value > 99;
     const _value = valueWithinBounds ? this.value : this.upperBound;
-
     const progressPercentage = _value / 100;
     return this._centerCircumference * progressPercentage;
   }
@@ -43,8 +48,9 @@ export class ProgressCircleRingComponent {
   }
 
   get _progressStrokeWidth(): number {
-    // Don't render stroke if value is 0, otherwise it will show as a dot:
-    if (this.value === 0) return 0;
+    // Do not render stroke if progress is 0, otherwise it will show as a dot
+    if (this._progress === 0) return 0;
+
     return this.strokeWidth;
   }
 }
