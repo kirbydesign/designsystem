@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 
 @Component({
   standalone: true,
@@ -9,20 +15,18 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   styleUrls: ['./progress-circle-ring.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressCircleRingComponent {
+export class ProgressCircleRingComponent implements AfterViewInit {
   @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
   @Input() strokeWidth: number;
   @Input() upperBound: number;
 
-  get _offset(): number {
-    const valueWithinBounds = this.value < this.upperBound || this.value > 99;
-    if (valueWithinBounds) {
-      return this.calculateOffset(this.value);
-    } else {
-      return this.calculateOffset(this.upperBound);
-    }
+  @HostBinding('class.view-initialized')
+  viewInitialized;
+
+  ngAfterViewInit(): void {
+    this.viewInitialized = true;
   }
 
   @HostBinding('style.width.px')
@@ -39,7 +43,21 @@ export class ProgressCircleRingComponent {
     return this._centerRadius * 2 * Math.PI;
   }
 
-  private calculateOffset(value: number): number {
-    return this._centerCircumference - this._centerCircumference * (value / 100);
+  get _progress(): number {
+    const valueWithinBounds = this.value < this.upperBound || this.value > 99;
+    const _value = valueWithinBounds ? this.value : this.upperBound;
+    const progressPercentage = _value / 100;
+    return this._centerCircumference * progressPercentage;
+  }
+
+  get _remainder(): number {
+    return this._centerCircumference - this._progress;
+  }
+
+  get _progressStrokeWidth(): number {
+    // Do not render stroke if progress is 0, otherwise it will show as a dot
+    if (this._progress === 0) return 0;
+
+    return this.strokeWidth;
   }
 }

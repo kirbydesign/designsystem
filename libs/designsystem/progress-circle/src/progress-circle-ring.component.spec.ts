@@ -44,8 +44,8 @@ describe('ProgressCircleRingComponent', () => {
     });
   });
 
-  describe('offset (progress) within upperBound', () => {
-    it('should return the non-progress circumference (1 - progress) as offset', () => {
+  describe('progress within upperBound', () => {
+    it('should return the non-progress circumference (1 - progress) as remainder', () => {
       const value = 33;
       const upperBound = 96;
       spectator.setInput({
@@ -53,15 +53,15 @@ describe('ProgressCircleRingComponent', () => {
         upperBound,
       });
 
-      expect(spectator.component._offset).toBe(
+      expect(spectator.component._remainder).toBe(
         spectator.component._centerCircumference -
           spectator.component._centerCircumference * (value / 100)
       );
     });
   });
 
-  describe('offset (progress) larger than upperBound', () => {
-    it('should return the non-progress circumference (1 - upperBound) as offset', () => {
+  describe('progress larger than upperBound', () => {
+    it('should return the non-progress circumference (1 - upperBound) as remainder', () => {
       const value = 99;
       const upperBound = 96;
       spectator.setInput({
@@ -69,7 +69,7 @@ describe('ProgressCircleRingComponent', () => {
         upperBound,
       });
 
-      expect(spectator.component._offset).toBe(
+      expect(spectator.component._remainder).toBe(
         spectator.component._centerCircumference -
           spectator.component._centerCircumference * (upperBound / 100)
       );
