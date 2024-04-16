@@ -22,6 +22,13 @@ export class ProgressCircleRingComponent implements AfterViewInit {
   @Input() strokeWidth: number;
   @Input() upperBound: number;
 
+  @HostBinding('class.view-initialized')
+  viewInitialized;
+
+  ngAfterViewInit(): void {
+    this.viewInitialized = true;
+  }
+
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
   get _diameter(): number {
