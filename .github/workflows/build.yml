@@ -79,7 +79,7 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby Cookbook
-        run: npx nx dist cookbook
+        run: npx nx build cookbook --configuration=production
       - name: Upload Kirby Cookbook dist files
         uses: actions/cache@v2
         with:
