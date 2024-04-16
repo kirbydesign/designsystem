@@ -19,6 +19,7 @@ export enum ButtonSize {
   SM = 'sm',
   MD = 'md',
   LG = 'lg',
+  lc = 'cl',
 }
 
 export type AttentionLevel = '1' | '2' | '3';

@@ -18,11 +18,6 @@
     "url": "https://github.com/kirbydesign/designsystem/issues"
   },
   "homepage": "https://cookbook.kirby.design",
-  "scripts": {
-    "build": "nx build designsystem",
-    "test": "nx test designsystem",
-    "lint": "nx run lint && stylelint './**/*.scss'"
-  },
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",

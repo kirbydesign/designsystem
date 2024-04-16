@@ -47,9 +47,9 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Run linting
-        run: npm run lint
+        run: npx nx run-many -t lint && npx stylelint '**/*.scss'
       - name: Run tests
-        run: npm run test:ci
+        run: npx nx run-many -t test --output-style=stream -- --browsers=ChromeCustom --progress false --watch false --code-coverage
 
   build_kirby:
     name: Build Kirby lib

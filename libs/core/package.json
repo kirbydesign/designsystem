@@ -9,8 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "tsc --watch",
-    "lint": "nx run lint && stylelint './**/*.scss'"
+    "serve": "tsc --watch"
   },
   "devDependencies": {
     "@repo/eslint-config": "*"
