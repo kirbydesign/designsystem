@@ -34,7 +34,8 @@ export class ProgressCircleRingComponent {
     const valueWithinBounds = this.value < this.upperBound || this.value > 99;
     const _value = valueWithinBounds ? this.value : this.upperBound;
 
-    return (_value * this._centerCircumference) / 100;
+    const progressPercentage = _value / 100;
+    return this._centerCircumference * progressPercentage;
   }
 
   get _remainder(): number {
@@ -42,6 +43,8 @@ export class ProgressCircleRingComponent {
   }
 
   get _progressStrokeWidth(): number {
-    return this.value == 0 ? 0 : this.strokeWidth;
+    // Don't render stroke if value is 0, otherwise it will show as a dot:
+    if (this.value === 0) return 0;
+    return this.strokeWidth;
   }
 }

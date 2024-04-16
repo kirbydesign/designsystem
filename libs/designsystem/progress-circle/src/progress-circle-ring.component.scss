@@ -14,13 +14,11 @@ svg {
   transition-timing-function: utils.get-transition-easing('enter-exit');
   transform-origin: 50% 50%;
   stroke: var(--kirby-progress-circle-stroke-color, #{utils.get-color('success')});
+  // Avoid flash of full progress circle if attribute binding in template has not yet been evaluated.
+  &:not([stroke-dasharray]) {
+    stroke-dasharray: 0 999;
+  }
 }
-
-// Avoid flash of full progress circle if attribute binding in template has not yet been evaluated.
-.progress:not([stroke-dasharray]) {
-  stroke-dasharray: 0 999;
-}
-
 :host {
   @each $color-name, $color-value in utils.$notification-colors {
     &.#{$color-name} {
