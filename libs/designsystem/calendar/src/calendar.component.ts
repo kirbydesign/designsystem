@@ -435,7 +435,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   _onDateSelected(newDay: CalendarCell) {
-    if (newDay.isSelectable && newDay.date && newDay.month) {
+    const isValidDay = newDay.date >= 1 && newDay.date <= 31;
+    const isValidMonth = newDay.month >= 0 && newDay.month <= 11;
+
+    if (newDay.isSelectable && isValidDay && isValidMonth) {
       let newDate = new Date(this.activeMonth);
       newDate.setMonth(newDay.month, newDay.date);
 
