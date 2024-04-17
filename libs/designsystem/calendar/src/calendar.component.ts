@@ -438,11 +438,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   _onDateSelected({ year, monthIndex, date, isSelectable }: CalendarCell) {
     if (!isSelectable) return;
 
-    const isValidDay = date >= 1 && date <= 31;
+    const isValidDate = date >= 1 && date <= 31;
     const isValidMonth = monthIndex >= 0 && monthIndex <= 11;
     const isValidYear = Number.isInteger(year);
 
-    if (isValidDay && isValidMonth && isValidYear) {
+    if (isValidDate && isValidMonth && isValidYear) {
       let newDate = new Date(year, monthIndex, date);
 
       if (this.timezone === 'UTC') {
