@@ -132,7 +132,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     const value = this.normalizeDate(valueLocalOrUTC);
 
     if (valueLocalOrUTC) {
-      console.table({ value: value, valueLocalOrUTC: valueLocalOrUTC });
       this.setActiveMonth(value);
     }
 
@@ -355,6 +354,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       const isSelected = isSameDay(this.selectedDate, cellDate);
       const cell = {
         date: cellDate.getDate(),
+        month: cellDate.getMonth(),
         isCurrentMonth: day.isCurrentMonth,
         isSelectable,
         isSelected,
@@ -383,8 +383,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return (
       (this.alwaysEnableToday && day.isToday) ||
       (!day.isDisabled &&
-        // TODO: Remove or change isCurrentMonth condition
-        // day.isCurrentMonth &&
         !(this.disableWeekends && day.isWeekend) &&
         !(this.disablePastDates && day.isPast) &&
         !(this.disableFutureDates && day.isFuture) &&
@@ -436,16 +434,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  // TODO: Allow selecting day that is not in current/active month
   _onDateSelected(newDay: CalendarCell) {
-    console.log(`_onDateSelected()`);
-    console.log(newDay);
-    if (newDay.isSelectable && newDay.date) {
-      // TODO: Probably also change month if date in future/past month was clicked
+    if (newDay.isSelectable && newDay.date && newDay.month) {
       let newDate = new Date(this.activeMonth);
-      newDate.setDate(newDay.date);
-      // TODO: Also set the month value on newDate
-      newDate.setMonth(4, newDay.date);
+      newDate.setMonth(newDay.month, newDay.date);
 
       if (this.timezone === 'UTC') {
         newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
@@ -521,8 +513,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }
     }
-    console.log(`foundDay`);
-    console.log(foundDay);
     return foundDay;
   }
 
