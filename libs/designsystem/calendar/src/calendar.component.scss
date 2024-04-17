@@ -101,9 +101,7 @@ td {
   pointer-events: none;
 }
 
-// TODO: Target selectable but not in current month
 .day.selectable:not(.current-month) {
-  // --color: hotpink;
   --color: #{utils.get-text-color('semi-dark')};
 }
 
@@ -122,11 +120,6 @@ td {
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
 }
-
-// TODO: Remove or make dependant on boolean flag, e.g. allowOnlyCurrentMonth
-// .day:not(.current-month) {
-//   pointer-events: none;
-// }
 
 .contain-state-layer {
   @include interaction-state.initialize-layer;
