@@ -341,6 +341,24 @@ describe('CalendarComponent', () => {
       expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
     });
 
+    it('should emit dateSelect event when clicking date in previous month', () => {
+      const captured = captureDateSelectEvents();
+      spectator.setInput('selectedDate', localMidnightDate('2025-01-01'));
+
+      spectator.click(spectator.queryAll('.day:not(.current-month)')[0]);
+
+      expect(captured.event).toEqual(localMidnightDate('2024-12-30'));
+    });
+
+    it('should emit dateSelect event when clicking date in next month', () => {
+      const captured = captureDateSelectEvents();
+      spectator.setInput('selectedDate', localMidnightDate('2024-12-01'));
+
+      spectator.click(spectator.queryLast('.day:not(.current-month)'));
+
+      expect(captured.event).toEqual(localMidnightDate('2025-01-05'));
+    });
+
     it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {
       const captured = captureDateSelectEvents();
       spectator.setInput('timezone', 'UTC');
