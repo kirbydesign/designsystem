@@ -193,15 +193,15 @@ A basic walkthrough is outlined in the structure below:
 Below is an overview of most widely used scripts, available for this project.  
 Use them in your terminal like: `npm run <script>` :
 
-| Command       | Description                                                                                                                  |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| start         | Starts the development server, providing a means of running (and developing on the Cookbook)                                 |
-| start:ios     | Builds the flows app and deploys it to an iOS device (real or simulated) using Capacitor                                     |
-| start:android | Builds the flows app and deploys it to an Android device (real or simulated) using Capacitor                                 |
-| publish       | When run locally it produces a set of npm packages in dist/ that can be installed locally with npm install <path to tarball> |
-| storybook     | Opens up Storybook where component states are set up for snapshot testing with Chromatic                                     |
+| Command       | Description                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| start         | Starts the development server, providing a means of running the cookbook while developing                                      |
+| start:ios     | Builds the flows app and deploys it to an iOS device (real or simulated) using Capacitor                                       |
+| start:android | Builds the flows app and deploys it to an Android device (real or simulated) using Capacitor                                   |
+| publish       | When run locally it produces a set of npm packages in `dist/` that can be installed locally with npm install <path to tarball> |
+| storybook     | Opens up Storybook where component states are set up for snapshot testing with Chromatic                                       |
 
-We use [nx][nx] to Common tasks like building, linting and testing projects.
+We use [nx][nx] to run common tasks like building, linting and testing projects.
 This is done with `npx nx <target name> <project name>`, e.g. `npx nx lint designsystem` preferrably _from the root of the workspace_ to ensure config paths are resolved correctly.
 
 ## Contributing
