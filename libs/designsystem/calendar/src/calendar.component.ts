@@ -435,29 +435,23 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  _onDateSelected({ year, monthIndex, date, isSelectable }: CalendarCell) {
-    if (!isSelectable) return;
+  _onDateSelected(newDay: CalendarCell) {
+    if (!newDay.isSelectable) return;
 
-    const isValidDate = date >= 1 && date <= 31;
-    const isValidMonth = monthIndex >= 0 && monthIndex <= 11;
-    const isValidYear = Number.isInteger(year);
+    let newDate = new Date(newDay.year, newDay.monthIndex, newDay.date);
 
-    if (isValidDate && isValidMonth && isValidYear) {
-      let newDate = new Date(year, monthIndex, date);
-
-      if (this.timezone === 'UTC') {
-        newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
-      }
-
-      const dateToEmit = newDate;
-
-      if (this.hasDateChanged(newDate, this._selectedDate)) {
-        this.onSelectedDateChange(newDate);
-        this._selectedDate = newDate;
-        this.dateChange.emit(dateToEmit);
-      }
-      this.dateSelect.emit(dateToEmit);
+    if (this.timezone === 'UTC') {
+      newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }
+
+    const dateToEmit = newDate;
+
+    if (this.hasDateChanged(newDate, this._selectedDate)) {
+      this.onSelectedDateChange(newDate);
+      this._selectedDate = newDate;
+      this.dateChange.emit(dateToEmit);
+    }
+    this.dateSelect.emit(dateToEmit);
   }
 
   private onChangeMonth(direction: number) {
