@@ -175,6 +175,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 MIT
 
 @kirbydesign/designsystem
+MIT
+
+@repo/cookbook
 
 @stencil/core/internal
 
