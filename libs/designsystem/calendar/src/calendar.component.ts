@@ -352,8 +352,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
       const isSelectable = this.isSelectable(day, cellDate);
       const isSelected = isSameDay(this.selectedDate, cellDate);
-      const cell = {
+      const cell: CalendarCell = {
         date: cellDate.getDate(),
+        monthIndex: cellDate.getMonth(),
+        year: cellDate.getFullYear(),
         isCurrentMonth: day.isCurrentMonth,
         isSelectable,
         isSelected,
@@ -382,7 +384,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return (
       (this.alwaysEnableToday && day.isToday) ||
       (!day.isDisabled &&
-        day.isCurrentMonth &&
         !(this.disableWeekends && day.isWeekend) &&
         !(this.disablePastDates && day.isPast) &&
         !(this.disableFutureDates && day.isFuture) &&
@@ -435,23 +436,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   _onDateSelected(newDay: CalendarCell) {
-    if (newDay.isSelectable && newDay.date) {
-      let newDate = new Date(this.activeMonth);
-      newDate.setDate(newDay.date);
+    if (!newDay.isSelectable) return;
 
-      if (this.timezone === 'UTC') {
-        newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
-      }
+    let newDate = new Date(newDay.year, newDay.monthIndex, newDay.date);
 
-      const dateToEmit = newDate;
-
-      if (this.hasDateChanged(newDate, this._selectedDate)) {
-        this.onSelectedDateChange(newDate);
-        this._selectedDate = newDate;
-        this.dateChange.emit(dateToEmit);
-      }
-      this.dateSelect.emit(dateToEmit);
+    if (this.timezone === 'UTC') {
+      newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }
+
+    const dateToEmit = newDate;
+
+    if (this.hasDateChanged(newDate, this._selectedDate)) {
+      this.onSelectedDateChange(newDate);
+      this._selectedDate = newDate;
+      this.dateChange.emit(dateToEmit);
+    }
+    this.dateSelect.emit(dateToEmit);
   }
 
   private onChangeMonth(direction: number) {
@@ -502,7 +502,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private getCell(date: Date) {
-    let foundDay = null;
+    let foundDay: CalendarCell = null;
     if (date) {
       for (const week of this._month) {
         foundDay = week.find((day) => {

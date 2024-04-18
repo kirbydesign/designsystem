@@ -101,6 +101,10 @@ td {
   pointer-events: none;
 }
 
+.day.selectable:not(.current-month) {
+  --color: #{utils.get-text-color('semi-dark')};
+}
+
 .day.today {
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
@@ -115,10 +119,6 @@ td {
 
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
-}
-
-.day:not(.current-month) {
-  pointer-events: none;
 }
 
 .contain-state-layer {
