@@ -352,7 +352,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
       const isSelectable = this.isSelectable(day, cellDate);
       const isSelected = isSameDay(this.selectedDate, cellDate);
-      const cell = {
+      const cell: CalendarCell = {
         date: cellDate.getDate(),
         monthIndex: cellDate.getMonth(),
         year: cellDate.getFullYear(),
