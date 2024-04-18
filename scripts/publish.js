@@ -75,8 +75,8 @@ function cleanDistribution(distTarget) {
   }
 }
 
-function buildPackage(options) {
-  return npm(['run', 'build', options], {
+function buildPackage(project) {
+  return npm(['run', 'build', '--', '-p', project], {
     onFailMessage: 'Unable to build package (with ng-packagr)',
   });
 }
@@ -194,7 +194,7 @@ if (doPublishDesignsystem) {
   // Publish designsystem
   console.log('--- Publishing designsystem ---');
   cleanDistribution(distDesignsystemTarget)
-    .then(() => buildPackage('--workspace=libs/designsystem'))
+    .then(() => buildPackage('designsystem'))
     .then(() => writeCoreVersionToPackageJson(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
@@ -207,7 +207,7 @@ if (doPublishCore) {
   // Publish core
   console.log('--- Publishing core ---');
   cleanDistribution(distCoreTarget)
-    .then(() => buildPackage('--workspace=libs/core'))
+    .then(() => buildPackage('core'))
     .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
     .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
     .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
