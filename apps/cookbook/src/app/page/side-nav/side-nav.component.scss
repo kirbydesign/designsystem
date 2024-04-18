@@ -92,10 +92,8 @@ hr {
   margin: utils.size('xxxs'), 0;
   border: solid 1px utils.get-color('light');
   border-bottom: none;
-  margin-block-start: $divider-spacing;
-  margin-block-end: $divider-spacing;
-  margin-inline-start: $divider-inset;
-  margin-inline-end: $divider-inset;
+  margin-block: $divider-spacing;
+  margin-inline: $divider-inset;
 
   &:last-child {
     border-color: transparent;

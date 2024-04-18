@@ -19,7 +19,7 @@
   padding: 10px;
   text-align: center;
 
-  @media screen and (max-width: 769px) {
+  @media screen and (width <= 769px) {
     font-size: 2rem;
   }
 }
@@ -34,7 +34,7 @@
   margin: auto;
   width: 40rem;
   height: 40rem;
-  @media screen and (max-width: 769px) {
+  @media screen and (width <= 769px) {
     width: 20rem;
     height: 20rem;
   }
@@ -51,7 +51,7 @@
   bottom: 0;
   z-index: 3;
 
-  @media screen and (max-width: 769px) {
+  @media screen and (width <= 769px) {
     width: 30%;
     height: 15%;
   }
@@ -79,10 +79,7 @@ ellipse {
 .snow::before {
   content: '';
   position: absolute;
-  top: -650px;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: -650px 0 0;
   background-image: radial-gradient(4px 4px at 100px 50px, #f6f6fc, transparent),
     radial-gradient(6px 4px at 200px 150px, #f6f6fc, transparent),
     radial-gradient(3px 4px at 300px 250px, #f6f6fc, transparent),

@@ -14,8 +14,7 @@ $divider-max-width-breakpoint: utils.$page-content-max-width-default + (utils.si
   align-items: center;
   justify-content: left;
   flex-wrap: nowrap;
-  overflow-y: hidden;
-  overflow-x: scroll;
+  overflow: scroll hidden;
 
   // Ensures that the .container divider pseudo-element does not overlap the .selected divider pseudo-element.
   // There seems be a weird bug with the iOS browser where z-index of scrollable elements are not respected with momentum scrolling active - so we disable it for now.

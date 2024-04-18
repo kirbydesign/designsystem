@@ -7,6 +7,7 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
+      "dependsOn": ["^build"],
       "options": {
         "tsConfig": "libs/designsystem/tsconfig.lib.json",
         "project": "libs/designsystem/ng-package.json"
@@ -21,9 +22,6 @@
         "styles": ["libs/designsystem/testing/src/styles.scss"]
       },
       "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     },
     "storybook": {
       "builder": "@storybook/angular:start-storybook",
@@ -69,6 +67,5 @@
   },
   "generators": {
     "@nx/angular:component": {}
-  },
-  "tags": []
+  }
 }

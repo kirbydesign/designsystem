@@ -14,7 +14,7 @@
       "executor": "@angular-builders/custom-webpack:browser",
       "options": {
         "customWebpackConfig": {
-          "path": "./webpack.sass-to-ts.config.ts",
+          "path": "./tools/sass-to-ts/webpack.sass-to-ts.config.ts",
           "sassToTs": {
             "watchGlob": ["libs/core/src/helpers/**/*.scss", "libs/core/src/scss/**/*.scss"],
             "transform": [
@@ -81,26 +81,6 @@
           "buildTarget": "cookbook:build:production"
         }
       }
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "cookbook:build"
-      }
-    },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "apps/cookbook/src/test.ts",
-        "tsConfig": "apps/cookbook/tsconfig.spec.json",
-        "karmaConfig": "apps/cookbook/karma.conf.js",
-        "polyfills": "apps/cookbook/src/polyfills.ts",
-        "styles": [],
-        "scripts": [],
-        "assets": []
-      },
-      "outputs": ["{workspaceRoot}/coverage/apps/cookbook"]
     }
-  },
-  "tags": []
+  }
 }

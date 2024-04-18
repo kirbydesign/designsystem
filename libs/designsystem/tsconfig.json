@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
     "paths": {
       "@kirbydesign/designsystem/*": ["*"],
       "@kirbydesign/designsystem/card": ["card/index.ts"],
@@ -54,8 +56,7 @@
       "@kirbydesign/designsystem/action-group": ["action-group/index.ts"],
       "@kirbydesign/designsystem/menu": ["menu/index.ts"],
       "@kirbydesign/designsystem/bagde": ["badge/index.ts"]
-    },
-    "esModuleInterop": true
+    }
   },
   "include": [],
   "files": [],

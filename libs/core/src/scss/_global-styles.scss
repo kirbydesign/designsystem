@@ -130,7 +130,7 @@ ion-modal.kirby-overlay {
     }
 
     @include utils.media('<medium') {
-      &:not(.kirby-drawer):not(.kirby-modal-compact) {
+      &:not(.kirby-drawer, .kirby-modal-compact) {
         --height: 100%;
       }
     }
@@ -227,7 +227,7 @@ ion-loading.kirby-loading-overlay {
 
   // Set default colors
 
-  --background: #{utils.get-decoration-color(map.get($_toast-notification-colors-map, 'success') ...)};
+  --background: #{utils.get-decoration-color(map.get($_toast-notification-colors-map, 'success')...)};
   --color: #{utils.get-color('black')};
   --button-color: var(--color);
 

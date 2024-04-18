@@ -15,14 +15,14 @@ kirby-card {
 }
 
 /* Tablet size and above */
-@media (min-width: 721px) {
+@media (width >= 721px) {
   .half-at-tablet-up {
     grid-column: span 6;
   }
 }
 
 /* Desktop size and above */
-@media (min-width: 1025px) {
+@media (width >= 1025px) {
   .half-at-desktop-up {
     grid-column: span 6;
   }

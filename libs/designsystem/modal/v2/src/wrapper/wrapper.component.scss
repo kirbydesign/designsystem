@@ -53,8 +53,7 @@ ion-header {
 
 ion-title {
   box-sizing: border-box;
-  padding-inline-start: calc(48px + var(--padding-start));
-  padding-inline-end: calc(48px + var(--padding-end));
+  padding-inline: calc(48px + var(--padding-start)) calc(48px + var(--padding-end));
 }
 
 ion-content {

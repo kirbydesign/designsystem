@@ -41,8 +41,7 @@
     }
 
     @include utils.slotted('[slot="end"]') {
-      margin-inline-start: 0;
-      margin-inline-end: 0;
+      margin-inline: 0;
       text-align: right;
     }
 

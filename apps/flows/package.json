@@ -1,0 +1,27 @@
+{
+  "name": "@repo/flows",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A set of common showcases and user flows using Kirby Design System components.",
+  "dependencies": {
+    "@angular/animations": "^17.0.9",
+    "@angular/cdk": "^17.0.6",
+    "@angular/common": "^17.0.9",
+    "@angular/core": "^17.0.9",
+    "@angular/forms": "^17.0.9",
+    "@angular/platform-browser": "^17.0.9",
+    "@angular/platform-browser-dynamic": "^17.0.9",
+    "@angular/router": "^17.0.9"
+  },
+  "devDependencies": {
+    "@angular/cli": "^17.0.9",
+    "@angular/compiler": "^17.0.9",
+    "@angular/compiler-cli": "^17.0.9",
+    "@capacitor/android": "^4.4.0",
+    "@capacitor/cli": "^4.8.0",
+    "@capacitor/core": "^4.4.0",
+    "@capacitor/ios": "^4.4.0",
+    "@capacitor/status-bar": "^4.1.1",
+    "webpack-bundle-analyzer": "^4.6.1"
+  }
+}
