@@ -187,8 +187,8 @@ function publish(distTarget, tarballNamePrefix) {
 // Actual execution of script!
 
 const args = process.argv.slice(2).map((value) => value.toLowerCase());
-const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
 const doPublishCore = args.length === 0 || args.includes('core');
+const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
 
 if (doPublishCore) {
   // Publish core
