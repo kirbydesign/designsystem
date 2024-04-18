@@ -190,6 +190,18 @@ const args = process.argv.slice(2).map((value) => value.toLowerCase());
 const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
 const doPublishCore = args.length === 0 || args.includes('core');
 
+if (doPublishCore) {
+  // Publish core
+  console.log('--- Publishing core ---');
+  cleanDistribution(distCoreTarget)
+    .then(() => buildPackage('core'))
+    .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
+    .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
+    .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
+    .then(() => publish(distCoreTarget, 'kirbydesign-core'))
+    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING CORE PACKAGE ***', err));
+}
+
 if (doPublishDesignsystem) {
   // Publish designsystem
   console.log('--- Publishing designsystem ---');
@@ -201,16 +213,4 @@ if (doPublishDesignsystem) {
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
     .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'))
     .catch((err) => console.warn('*** ERROR WHEN PUBLISHING DESIGNSYSTEM ***', err));
-}
-
-if (doPublishCore) {
-  // Publish core
-  console.log('--- Publishing core ---');
-  cleanDistribution(distCoreTarget)
-    .then(() => buildPackage('core'))
-    .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
-    .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
-    .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
-    .then(() => publish(distCoreTarget, 'kirbydesign-core'))
-    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING CORE PACKAGE ***', err));
 }
