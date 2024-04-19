@@ -26,9 +26,11 @@
   [closeOnEscapeKey]="closeOnEscapeKey"
   [closeOnSelect]="closeOnSelect"
   [autoPlacement]="autoPlacement"
+  [shift]="shift"
   [ngStyle]="{
     minWidth: minWidth ? minWidth + 'px' : null
   }"
+  class="menu-popover"
 >
   <ng-content select="kirby-item"></ng-content>
 </kirby-card>

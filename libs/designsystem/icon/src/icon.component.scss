@@ -45,3 +45,10 @@
     margin-inline-start: utils.size('xxs');
   }
 }
+
+// Clicking a kirby-icon inside ion-tab-button on Android in Chrome WebView (Capacitor)
+// sometimes causes the tab-button to persist its :active pseudo-class
+// until clicked again. Therefore, disable pointer-events when inside tab button.
+:host-context(ion-tab-button) {
+  pointer-events: none;
+}

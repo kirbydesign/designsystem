@@ -10,14 +10,24 @@ $button-width: (
   md: 88px,
   lg: 220px,
 ) !default;
+$button-margin: utils.size('xxxs');
 
 @function button-width($key) {
   @return map.get($button-width, $key);
 }
 
 @mixin button-xs {
+  /*
+  * Extra small button needs a smaller click area to e.g. not overlap with other 
+  * interactive elements. The maximum target size we can safely do is the button's 
+  * minimum width plus its margin on each side
+  */
+  $button-xs-icon-only-size: utils.size('m');
+  $button-xs-click-area-size: $button-xs-icon-only-size + $button-margin * 2;
+  @include utils.accessible-target-size($width: $button-xs-click-area-size);
+
   font-size: utils.font-size('xs');
-  height: utils.size('m');
+  height: $button-xs-icon-only-size;
   min-width: button-width('xs');
 
   &:not(.icon-only) {
@@ -28,7 +38,7 @@ $button-width: (
   &.icon-only {
     --kirby-icon-font-size: #{utils.size('s')};
 
-    width: utils.size('m');
+    width: $button-xs-icon-only-size;
     min-width: unset;
   }
 
@@ -168,7 +178,7 @@ $button-width: (
   height: utils.size('xl');
   min-width: button-width('md');
   padding: 0;
-  margin: utils.size('xxxs');
+  margin: $button-margin;
   line-height: utils.line-height('s');
 
   // Outline is applied on button border instead,
@@ -197,6 +207,9 @@ $button-width: (
   }
 
   &.icon-only {
+    --kirby-button-padding-left: 0;
+    --kirby-button-padding-right: 0;
+
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
@@ -245,7 +258,10 @@ $button-width: (
   }
 
   &:disabled {
-    background-color: utils.get-color('semi-light');
+    &:not(.no-decoration) {
+      background-color: utils.get-color('semi-light');
+    }
+
     color: utils.get-color('semi-dark-shade');
     border-color: transparent;
     pointer-events: none;
@@ -259,7 +275,7 @@ $button-width: (
     min-width: unset;
 
     &:not(:disabled) {
-      box-shadow: utils.get-elevation(4);
+      box-shadow: utils.get-elevation(8);
     }
   }
 }
@@ -290,8 +306,7 @@ $button-width: (
   margin-inline-start: utils.size('s');
 }
 
-:host-context(kirby-alert).ok-btn,
-:host-context(kirby-alert-experimental).ok-btn {
+:host-context(kirby-alert).ok-btn {
   --kirby-button-background-color: #{utils.get-color('success')};
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }
@@ -357,11 +372,21 @@ $button-width: (
   }
 }
 
-/*
-* TEMPORARY MORE-MENU
-* Button content should not be space-between when only an icon is slotted 
-* inside the dropdown
-*/
-:host-context(kirby-dropdown.more-menu) {
-  justify-content: center;
+:host-context(kirby-page-actions),
+:host-context(kirby-action-group),
+:host-context(.kirby-modal ion-header ion-toolbar ion-buttons) {
+  margin: 0;
+}
+
+:host-context(kirby-modal-footer) {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
 }

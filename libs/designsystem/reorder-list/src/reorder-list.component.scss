@@ -57,8 +57,12 @@ ion-backdrop {
   }
 }
 
-.outer-group {
+:host > ion-reorder-group > div {
   border-bottom: 20px transparent solid;
+
+  &:last-child {
+    border-bottom-width: 0;
+  }
 }
 
 kirby-card {

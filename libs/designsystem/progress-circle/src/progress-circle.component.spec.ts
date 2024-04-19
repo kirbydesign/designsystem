@@ -347,6 +347,9 @@ describe('ProgressCircleComponent', () => {
       spectator = createHost({
         props: { value: 50 },
       });
+      //Ensure css transitions run immediately:
+      spectator.query<SVGCircleElement>('circle.progress').style.transitionDuration = '0ms';
+      spectator.detectComponentChanges();
     });
 
     it('should render progress stroke with themeColor `success`, when themeColor is not set', () => {

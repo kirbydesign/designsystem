@@ -1,4 +1,4 @@
-@use 'sass:map';
+@use 'sass:meta';
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -34,30 +34,36 @@ h4 {
 
 // Flagged card headers
 
-// key = level, value = color-name
-$notification-levels: (
+// key = level, value = decoration color name + shade
+$_card-header-notification-colors-map: (
+  'success': (
+    'green',
+    30,
+  ),
+  'warning': (
+    'yellow',
+    30,
+  ),
+  'danger': (
+    'red',
+    30,
+  ),
   'info': 'semi-light',
 );
 
-@each $color-name, $color-value in utils.$notification-colors {
-  $notification-levels: map.merge(
-    (
-      $color-name: $color-name,
-    ),
-    $notification-levels
-  );
-}
+@each $name, $variant_shade in $_card-header-notification-colors-map {
+  :host(.#{$name}) {
+    @if meta.type_of($variant_shade) == list {
+      --kirby-card-header-background-color: #{utils.get-decoration-color($variant_shade...)};
+    } @else {
+      --kirby-card-header-background-color: #{utils.get-color($variant_shade)};
+    }
 
-@each $level, $color-name in $notification-levels {
-  :host(.#{$level}) {
-    --kirby-card-header-background-color: #{utils.get-color($color-name)};
-    --kirby-card-header-color: #{utils.get-color($color-name + '-contrast')};
+    --kirby-card-header-color: #{utils.get-color('black')};
   }
 }
 
-$notification-levels-class-selectors: utils.keys-to-classes($notification-levels);
-
-:host(#{$notification-levels-class-selectors}) {
+:host(.flagged) {
   --kirby-internal-card-header-padding: #{utils.size('xxxxs')} #{utils.size('xxs')};
 
   h2 {

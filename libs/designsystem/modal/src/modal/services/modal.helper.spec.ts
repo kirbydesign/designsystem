@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController as IonicModalController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -11,11 +11,16 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { Modal, Overlay } from '../../modal.interfaces';
-import { AlertConfig } from '../alert/config/alert-config';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
-import { ModalCompactWrapperComponent, ModalConfig, ModalSize } from '../../modal-wrapper';
+import {
+  ModalCompactWrapperComponent,
+  ModalConfig,
+  ModalSize,
+  ShowAlertCallback,
+} from '../../modal-wrapper';
 import { ModalNavigationService } from '../../modal-navigation.service';
 import { ModalHelper } from './modal.helper';
+import { CanDismissHelper } from './can-dismiss.helper';
 import { AlertHelper } from './alert.helper';
 
 @Component({
@@ -78,9 +83,6 @@ describe('ModalHelper', () => {
   let dummyPresentingElement: HTMLElement;
 
   const size = DesignTokenHelper.size;
-  const modalPaddingTopPx = size('xl');
-  const modalPaddingTop = parseInt(modalPaddingTopPx);
-  const modalHeaderHeight = 46;
 
   const createService = createServiceFactory({
     service: ModalHelper,
@@ -103,7 +105,7 @@ describe('ModalHelper', () => {
       ContentOverflowsWithFooterEmbeddedComponent,
       ContentWithNoOverflowEmbeddedComponent,
     ],
-    mocks: [ModalNavigationService, AlertHelper],
+    mocks: [ModalNavigationService, AlertHelper, CanDismissHelper],
   });
 
   beforeAll(() => {
@@ -123,23 +125,26 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
     spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
   });
 
   afterEach(async () => {
+    ionModal.canDismiss = true;
     await overlay.dismiss();
   });
 
-  const openOverlay = async (config: ModalConfig, alertConfig?: AlertConfig) => {
-    overlay = await modalHelper.showModalWindow(config, alertConfig);
+  const openOverlay = async (config: ModalConfig) => {
+    overlay = await modalHelper.showModalWindow(config);
     ionModal = await ionModalController.getTop();
+
     expect(ionModal).toBeTruthy();
   };
 
-  const openModal = async (component?: any, size?: ModalSize, alertConfig?: AlertConfig) => {
-    await openOverlay({ flavor: 'modal', component, size }, alertConfig);
+  const openModal = async (component?: any, size?: ModalSize, canDismiss?: ShowAlertCallback) => {
+    await openOverlay({ flavor: 'modal', component, size, canDismiss });
   };
 
   const openDrawer = async (
@@ -164,25 +169,20 @@ describe('ModalHelper', () => {
     });
 
     describe('canDismiss', () => {
-      it('should pass "true" to "canDismiss", if no alertConfig is provided', async () => {
+      it('should pass "true" to "canDismiss", if no config.canDismiss callback is provided', async () => {
         await openModal();
 
         expect(ionModal.canDismiss).toEqual(true);
       });
 
-      it('should pass a function to "canDismiss", if an alertConfig is provided', async () => {
-        const alertConfig: AlertConfig = {
-          title: 'Do you want to close the modal?',
-          okBtn: 'Yes',
-          cancelBtn: 'No',
-        };
-        // Mock 'showAlert' to prevent the test from timing out
-        // due to nested async that is not resolved
-        spectator.service.showAlert = async () => true;
+      it('should call the getCanDismissCallback method, if a config.canDismiss callback is provided', async () => {
+        const canDismissHelper = spectator.inject(CanDismissHelper);
+        const showAlertCallback = () => true;
 
-        await openModal(null, null, alertConfig);
+        await openModal(null, null, showAlertCallback);
 
-        expect(typeof ionModal?.canDismiss).toEqual('function');
+        expect(canDismissHelper.getCanDismissCallback).toHaveBeenCalledTimes(1);
+        expect(canDismissHelper.getCanDismissCallback).toHaveBeenCalledWith(showAlertCallback);
       });
     });
 
@@ -226,16 +226,14 @@ describe('ModalHelper', () => {
       it('modal should have min-height', async () => {
         await openModal();
 
-        expect(ionModal).toHaveComputedStyle({
-          '--min-height': DesignTokenHelper.modalDefaultHeight,
-        });
-      });
+        const headerHeight = 88;
+        const footerHeight = 88;
+        const contentHeight = 88;
 
-      it('drawer should have min-height', async () => {
-        await openDrawer();
+        const expectedHeight = headerHeight + footerHeight + contentHeight;
 
         expect(ionModal).toHaveComputedStyle({
-          '--min-height': DesignTokenHelper.drawerDefaultHeight,
+          '--min-height': `${expectedHeight}px`,
         });
       });
 
@@ -267,27 +265,19 @@ describe('ModalHelper', () => {
         await openModal(undefined, 'full-height');
 
         expectSize('full-height');
-        expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
+        expect(ionModal).toHaveComputedStyle({ height: `${document.body.clientHeight}px` });
       });
 
       it('drawer should be sized `full-height`', async () => {
         await openDrawer(undefined, 'full-height');
 
         expectSize('full-height');
-        expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
       });
 
-      it('should not set default size class if flavor is `drawer`', async () => {
-        await openDrawer();
+      it('should not set default size class if configured with interactWithBackground', async () => {
+        await openDrawer(undefined, undefined, true);
 
         expectSize(undefined);
-      });
-
-      it('should add class `full-height`, if content can not fit in viewport', async () => {
-        await openDrawer(ContentOverflowsWithFooterEmbeddedComponent);
-        await TestHelper.waitForResizeObserver();
-
-        expect(ionModal.classList.contains('full-height')).toBeTrue();
       });
 
       /**
@@ -315,19 +305,19 @@ describe('ModalHelper', () => {
       });
     });
 
-    describe(`padding top`, () => {
-      it('should have correct value for modal flavor (default)', async () => {
-        await openModal();
-
-        expect(ionModal).toHaveComputedStyle({ 'padding-top': modalPaddingTopPx });
-      });
-
-      it('should have correct value for drawer flavor', async () => {
+    describe('padding top', () => {
+      it('should have correct value for drawer flavor on desktop', async () => {
         await openDrawer();
 
         expect(ionModal).toHaveComputedStyle({
-          'padding-top': `${modalPaddingTop + modalHeaderHeight / 2}px`,
+          'padding-top': '0px',
         });
+      });
+
+      it('should have correct value for modal flavor (default)', async () => {
+        await openModal();
+
+        expect(ionModal).toHaveComputedStyle({ 'padding-top': '0px' });
       });
 
       it('should have correct value for compact flavor', async () => {
@@ -368,26 +358,33 @@ describe('ModalHelper', () => {
 
       it('should have correct padding on tablet/desktop', () => {
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
-        const expectedInlinePadding = size('s');
-        const expectedBlockPadding = size('xs');
-        const expectedAdditionalTopPadding = size('xxs');
+
+        //subtract border thickness from expected bottom padding
+        const expectedToolbarContainerPaddingBottom = parseInt(size('m')) - 1 + 'px';
 
         expect(toolbarContainer).toHaveComputedStyle({
-          padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
+          'padding-top': size('m'),
+          'padding-right': size('m'),
+          'padding-bottom': expectedToolbarContainerPaddingBottom,
+          'padding-left': size('m'),
         });
         expect(ionToolbarElement).toHaveComputedStyle({
-          'padding-top': `${expectedAdditionalTopPadding}`,
+          'padding-top': '0px',
         });
       });
 
       it('should have correct padding on phone', async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
-        const expectedInlinePadding = size('s');
-        const expectedBlockPadding = size('xs');
+
+        //subtract border thickness from expected bottom padding
+        const expectedToolbarContainerPaddingBottom = parseInt(size('xxs')) - 1 + 'px';
 
         expect(toolbarContainer).toHaveComputedStyle({
-          padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
+          'padding-top': size('xxs'),
+          'padding-right': size('xxs'),
+          'padding-bottom': expectedToolbarContainerPaddingBottom,
+          'padding-left': size('xxs'),
         });
         expect(ionToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',
@@ -405,6 +402,31 @@ describe('ModalHelper', () => {
 
     afterAll(() => {
       TestHelper.resetTestWindow();
+    });
+
+    describe('drawer', () => {
+      it('should have correct value for padding top', async () => {
+        await openDrawer();
+
+        expect(ionModal).toHaveComputedStyle({
+          'padding-top': size('m'),
+        });
+      });
+
+      it('drawer should add class `full-height`, if content can not fit in viewport', async () => {
+        await openDrawer(ContentOverflowsWithFooterEmbeddedComponent);
+        await TestHelper.waitForResizeObserver();
+
+        expect(ionModal.classList.contains('full-height')).toBeTrue();
+      });
+
+      it('should have min-height', async () => {
+        await openDrawer();
+
+        expect(ionModal).toHaveComputedStyle({
+          '--min-height': DesignTokenHelper.drawerDefaultHeight,
+        });
+      });
     });
 
     describe('when iOS safe-area is present', () => {

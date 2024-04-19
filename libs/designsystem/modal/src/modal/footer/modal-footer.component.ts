@@ -7,9 +7,7 @@ import {
   Input,
   Optional,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { IonFooter } from '@ionic/angular/standalone';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -18,7 +16,7 @@ import {
 
 @Component({
   standalone: true,
-  imports: [IonicModule, ThemeColorDirective, CommonModule],
+  imports: [CommonModule, IonFooter],
   selector: 'kirby-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],
@@ -29,9 +27,16 @@ export class ModalFooterComponent extends ModalElementComponent {
   @Input()
   snapToKeyboard = false;
 
-  @HostBinding('class')
   @Input()
   type: 'inline' | 'fixed' = 'fixed';
+
+  @Input()
+  themeColor: 'white' | 'light' = 'white';
+
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.themeColor, this.type].filter((cssClass) => !!cssClass);
+  }
 
   constructor(
     elementRef: ElementRef<HTMLElement>,

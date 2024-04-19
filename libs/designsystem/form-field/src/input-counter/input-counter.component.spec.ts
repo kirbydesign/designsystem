@@ -82,7 +82,7 @@ describe('InputCounterComponent', () => {
 
   describe('when configured with listenTo = input', () => {
     describe('and input does not have initial value and maxlength', () => {
-      const input = new InputComponent();
+      const input = new InputComponent(null);
       beforeEach(() => {
         component.listenTo = input;
         component.ngOnInit();
@@ -107,7 +107,7 @@ describe('InputCounterComponent', () => {
       const initialValue = 'Test 123';
       const updatedValue = 'Test 123456';
       const maxlength = 99;
-      const input = new InputComponent();
+      const input = new InputComponent(null);
       input.value = initialValue;
       input.maxlength = maxlength;
       beforeEach(() => {

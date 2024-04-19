@@ -1,18 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, Input, ViewChild } from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
+import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
 @Component({
   standalone: true,
-  imports: [IconModule, IonicModule, CommonModule],
+  imports: [IconModule, CommonModule, IonItemSliding, IonItemOptions, IonItemOption, IonLabel],
   selector: 'kirby-item-sliding',
   templateUrl: './item-sliding.component.html',
   styleUrls: ['./item-sliding.component.scss'],
 })
 export class ItemSlidingComponent {
+  @ViewChild(IonItemSliding, { static: true }) itemSliding: IonItemSliding;
   @Input() swipeActions: ItemSwipeAction[];
 
   _side: 'start' | 'end' = 'start';
@@ -24,5 +25,10 @@ export class ItemSlidingComponent {
     // Using '>' instead of '!==';
     // will only return true when swipeActions is an array
     return this.swipeActions?.length > 0;
+  }
+
+  onSwipeActionClick(swipeAction: ItemSwipeAction): void {
+    swipeAction.onSelected();
+    this.itemSliding.close();
   }
 }

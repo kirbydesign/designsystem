@@ -5,6 +5,7 @@ import {
   ElementRef,
   HostListener,
   Inject,
+  Input,
   LOCALE_ID,
   Renderer2,
 } from '@angular/core';
@@ -13,27 +14,73 @@ import Inputmask from 'inputmask/lib/inputmask';
 
 @Directive({
   standalone: true,
-  selector: '[kirby-input][type="date"]',
 })
 export class DateInputDirective implements AfterViewInit {
   @HostListener('input')
   onInput() {
-    this.updateMask(this.elementRef.nativeElement.value);
+    if (!this.isDateInput) return;
+
+    if (this.enableInputMask) {
+      this.updateMask(this.elementRef.nativeElement.value);
+    }
   }
 
+  @Input() prefillYear = false;
+  @Input() useNativeDatePicker = false;
+
   private maskingElement: HTMLElement;
+
+  /**
+   * `isDateInput` is used to avoid removing the type attribute on the input element and calling updateMask()
+   * when the directive is not used on a date input.
+   * This is needed for the standalone component 'InputComponent', which includes the directive
+   * using the `hostDirectives` component decorator prop. Angular ignores the selector of directives
+   * applied in the `hostDirectives` property which effectively applies the directive to all kirby-inputs, not only date inputs.
+   * This check prevents the directive from executing it's masking on non-date inputs.
+   * See: https://angular.io/guide/directive-composition-api
+   */
+  private isDateInput = false;
+
+  /**
+   * Inputmask should be enabled exclusively when _not_ using the platform
+   * native date picker.
+   *
+   * `enableInputMask` should be ignored if the type attribute of the `<input>`
+   * element is different from 'date' and/or the platform native date picker is
+   * explicitly enabled.
+   *
+   * @private
+   * @memberof DateInputDirective
+   */
+  private enableInputMask = false;
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
     @Inject(LOCALE_ID) private locale: string
   ) {
-    // Remove type to avoid user-agent specific behaviour for [type="date"]
-    this.elementRef.nativeElement.removeAttribute('type');
+    this.isDateInput = this.elementRef.nativeElement.type === 'date';
+    if (this.isDateInput) {
+      // Remove type to avoid user-agent specific behaviour for [type="date"]
+      // Has to be done in constructor to avoid browser behavior kicking in
+      this.elementRef.nativeElement.removeAttribute('type');
+    }
   }
 
   ngAfterViewInit(): void {
-    this.initMask();
+    if (!this.isDateInput) return;
+
+    this.enableInputMask = !this.useNativeDatePicker;
+
+    // This case is identical to date input fields _before_ native date picker
+    // option was introduced
+    if (this.enableInputMask) {
+      this.initMask();
+    }
+
+    if (this.useNativeDatePicker) {
+      this.elementRef.nativeElement.setAttribute('type', 'date');
+    }
   }
 
   private initMask(): void {
@@ -47,6 +94,7 @@ export class DateInputDirective implements AfterViewInit {
     new Inputmask('datetime', {
       inputFormat,
       placeholder,
+      prefillYear: this.prefillYear,
     }).mask(this.elementRef.nativeElement);
 
     // Append input overlay, so it's possible to style typed date differntly than the date-mask

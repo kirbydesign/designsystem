@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-menu-advanced-example',
-  template: `<kirby-menu>
+  template: `<kirby-menu [closeOnSelect]="false">
   <kirby-item (click)="actionClicked()">
     <kirby-icon name="notification" slot="start"></kirby-icon>
     <h3>Title</h3>

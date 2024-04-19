@@ -3,40 +3,40 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $border-radius: 6px;
-$checkbox-icon-size: utils.size('m');
+$checkbox-icon-size-xs: map.get(utils.$checkbox-sizes, 'xs', 'icon-size');
+$checkbox-icon-size: map.get(utils.$checkbox-sizes, 'sm', 'icon-size');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
-$default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
-
-@function get-vertical-padding($target-height) {
-  @return ($target-height - $checkbox-icon-size) * 0.5;
-}
 
 :host {
   display: inline-block;
 
   &.attention-level1 ion-checkbox {
     --checkmark-color: #{utils.get-color('black')};
-    --background-checked: #{utils.get-color('success')};
+    --checkbox-background-checked: #{utils.get-color('success')};
     --border-color-checked: #{utils.get-color('success')};
 
     @include interaction-state.apply-hover {
-      --background-checked: #{interaction-state.get-state-color('success', 's')};
+      --checkbox-background-checked: #{interaction-state.get-state-color('success', 's')};
       --border-color-checked: #{interaction-state.get-state-color('success', 's')};
     }
     @include interaction-state.apply-active {
-      --background-checked: #{interaction-state.get-state-color('success', 'l')};
+      --checkbox-background-checked: #{interaction-state.get-state-color('success', 'l')};
       --border-color-checked: #{interaction-state.get-state-color('success', 'l')};
     }
   }
 
   &.attention-level2 ion-checkbox {
     --checkmark-color: #{utils.get-color('white')};
-    --background-checked: #{utils.get-color('black')};
+    --checkbox-background-checked: #{utils.get-color('black')};
     --border-color-checked: #{utils.get-color('black')};
 
     @include interaction-state.apply-hover {
-      --background-checked: #{interaction-state.get-state-color('black', 'xl', $make-lighter: true)};
+      --checkbox-background-checked: #{interaction-state.get-state-color(
+          'black',
+          'xl',
+          $make-lighter: true
+        )};
       --border-color-checked: #{interaction-state.get-state-color(
           'black',
           'xl',
@@ -45,7 +45,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     }
     @include interaction-state.apply-active {
       --checkmark-color: #{interaction-state.get-state-color('white')};
-      --background-checked: #{interaction-state.get-state-color(
+      --checkbox-background-checked: #{interaction-state.get-state-color(
           'black',
           'xxxl',
           $make-lighter: true
@@ -66,83 +66,98 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     color: #{utils.get-text-color('semi-dark')};
 
     ion-checkbox {
-      opacity: 1;
-
       --checkmark-color: #{utils.get-color('semi-dark')};
-      --background: #{utils.get-color('semi-light')};
-      --background-checked: #{utils.get-color('semi-light')};
+      --checkbox-background: #{utils.get-color('semi-light')};
+      --checkbox-background-checked: #{utils.get-color('semi-light')};
       --border-color: #{utils.get-color('medium')};
       --border-color-checked: #{utils.get-color('semi-light')};
+
+      &::part(label-text-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
+      }
+
+      &::part(native-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
+      }
     }
   }
 
   ion-checkbox {
     @include interaction-state.apply-focus-part($part: 'container');
     @include interaction-state.apply-hover {
-      --background: #{interaction-state.get-state-color('white')};
+      --checkbox-background: #{interaction-state.get-state-color('white')};
     }
     @include interaction-state.apply-active {
-      --background: #{interaction-state.get-state-color('white', 'xs')};
+      --checkbox-background: #{interaction-state.get-state-color('white', 'xs')};
     }
 
     --transition: #{interaction-state.$default-transition-duration};
     --size: #{$checkbox-icon-size};
     --checkmark-width: #{utils.size('xxxs')};
-    --background: #{utils.get-color('white')};
+    --checkbox-background: #{utils.get-color('white')};
     --border-width: 1px;
     --border-color: #{utils.get-color('semi-dark')};
     --border-radius: #{$border-radius};
 
-    margin-left: $spacing-to-edge;
-    margin-right: $spacing-to-label;
-
     &::part(container) {
       padding: utils.size('xxxs'); // Spacing between checkmark and container box
+    }
+
+    &::part(label) {
+      align-items: start;
+      padding-left: $spacing-to-edge;
+      padding-right: $spacing-to-label;
+      line-height: utils.line-height('n');
+    }
+
+    &::part(label-text-wrapper) {
+      margin-inline: $spacing-to-label 0;
+    }
+
+    span {
+      white-space: pre-line;
     }
   }
 
   &.has-label {
     display: block;
-    line-height: utils.line-height('n');
-    white-space: pre-line;
 
-    .wrapper {
-      position: relative;
-      display: inline-flex;
-      align-items: flex-start;
-      vertical-align: top;
-      padding: get-vertical-padding($default-checkbox-radio-size) 0;
-      padding-right: $spacing-to-label; // Ensure same padding on right side of label
-    }
-
-    @each $size, $height in utils.$checkbox-radio-sizes {
-      :host-context(.checkbox-#{$size}),
+    @each $size, $properties in utils.$checkbox-sizes {
       &.#{$size} {
-        .wrapper {
-          $vertical-padding: get-vertical-padding($height);
+        ion-checkbox::part(label) {
+          $vertical-padding: map.get($properties, vertical-padding);
 
-          padding-top: $vertical-padding;
-          padding-bottom: $vertical-padding;
+          padding-block: $vertical-padding;
         }
       }
     }
 
-    ion-checkbox {
-      position: static;
-      flex-shrink: 0;
-      flex-grow: 0;
+    &.xs {
+      ion-checkbox::part(label) {
+        line-height: utils.line-height('xs');
+        font-size: utils.font-size('s');
+      }
+
+      ion-checkbox {
+        --size: #{$checkbox-icon-size-xs};
+        --border-radius: #{utils.size('xxxs')};
+
+        &::part(container) {
+          padding: utils.size('xxxxs'); // Spacing between checkmark and container box
+        }
+      }
     }
   }
-}
 
-:host-context(kirby-item) {
-  z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+  :host-context(kirby-item) {
+    z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
 
-  ion-checkbox {
-    margin: 0;
-  }
+    ion-checkbox {
+      margin: 0;
+    }
 
-  &[slot='start'] {
-    margin-inline-end: $spacing-to-label;
+    &[slot='start'] {
+      margin-inline-end: $spacing-to-label;
+    }
   }
 }

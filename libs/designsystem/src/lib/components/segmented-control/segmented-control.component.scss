@@ -5,10 +5,9 @@
   display: block;
   user-select: none;
 
-  --kirby-badge-elevation: #{utils.get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-top: -#{utils.size('xxs')};
-  --kirby-badge-right: #{utils.size('xxs')};
+  --kirby-badge-right: -#{utils.size('s')};
   --kirby-badge-z-index: #{utils.z('segment-badge')};
 
   &.sm {
@@ -18,6 +17,7 @@
 
       --padding-start: #{utils.size('s')};
       --padding-end: #{utils.size('s')};
+      --kirby-badge-right: -#{utils.size('xxs')};
 
       @include interaction-state.apply-focus-visible {
         outline: none;
@@ -31,9 +31,9 @@
       --background: var(--kirby-inputs-background-color);
 
       box-shadow: var(--kirby-inputs-elevation);
-      width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
       overflow: visible; // Ensures the badge is not cut off
       contain: none; // Ensures the badge is not cut off
+      width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
     }
   }
 
@@ -57,8 +57,6 @@
       --background: var(--kirby-inputs-background-color);
       --indicator-transition: none;
 
-      flex: initial;
-
       &::part(indicator) {
         // Remove padding as the selected segment will otherwise have additional space to its neighbors
         padding-inline: 0;
@@ -81,6 +79,8 @@
 
 ion-segment {
   border-radius: utils.$border-radius-round;
+  grid-auto-columns: max-content;
+  box-sizing: border-box;
 }
 
 ion-segment-button {
@@ -114,7 +114,8 @@ ion-segment-button {
 
   &::part(native) {
     border-radius: #{utils.$border-radius-round};
-    overflow: hidden; // not strictly required but declared to be consistent
+    contain: none;
+    overflow: visible;
   }
 
   &::part(native)::after {
@@ -126,8 +127,4 @@ ion-segment-button {
   &::part(indicator) {
     padding-inline: 0;
   }
-}
-
-.badge-container {
-  position: relative;
 }

@@ -1,0 +1,24 @@
+<section class="form-state">
+  <h4>Form state:</h4>
+  <p>
+    <strong>form.value:</strong>
+    {{ form.value | json }}
+    <br />
+  </p>
+
+  <ng-container *ngFor="let control of form.controls | keyvalue">
+    <p>
+      <!-- prettier-ignore -->
+      <strong>form.{{ control.key }}: </strong>
+      <span [class.state-true]="control.value.valid">valid: {{ control.value.valid }}</span>
+      <span [class.state-true]="control.value.enabled">enabled: {{ control.value.enabled }}</span>
+      <span [class.state-true]="control.value.touched">touched: {{ control.value.touched }}</span>
+    </p>
+
+    <p *ngIf="!!control.value.validator">
+      <!-- prettier-ignore -->
+      <strong>form.{{ control.key }}.errors: </strong>
+      <span [class.state-true]="!control.value.errors">{{ control.value.errors | json }}</span>
+    </p>
+  </ng-container>
+</section>

@@ -1,15 +1,17 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-kirby-page-content > * {
+kirby-page-content > *:not(cookbook-example-configuration-wrapper) {
   display: block;
 }
 
-kirby-page-content > * + * {
+kirby-page-content > * + *:not(cookbook-example-configuration-wrapper) {
   margin-top: utils.size('m');
 }
 
 kirby-card {
-  min-width: 500px;
+  --kirby-card-width: min(500px, 100%);
+
+  margin: 1rem auto;
 }
 
 .card-option-button-group {

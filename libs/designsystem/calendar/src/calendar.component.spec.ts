@@ -1,7 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { format, Locale, startOfDay, startOfMonth } from 'date-fns';
-import { es } from 'date-fns/locale';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -75,22 +74,16 @@ describe('CalendarComponent', () => {
       expect(dayTexts.slice(0, 5)).toEqual(['1', '2', '3', '4', '5']);
       expect(dayTexts.length).toEqual(31);
     });
-  });
 
-  describe('selectedDate', () => {
-    beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
-    });
+    it('should deselect date if selectedDate is set to null', () => {
+      const initialDate = localMidnightDate('1997-08-29');
+      spectator.setInput('selectedDate', initialDate);
 
-    it('should initially render the month of selectedDate if specified', () => {
-      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+      expect(spectator.query('.day.selected')).toHaveText(format(initialDate, 'd'));
 
-      const headerTexts = trimmedTexts('th');
-      const dayTexts = trimmedTexts('.day.current-month');
-      verifyMonthAndYear('August 1997');
-      expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
-      expect(dayTexts.slice(0, 5)).toEqual(['1', '2', '3', '4', '5']);
-      expect(dayTexts.length).toEqual(31);
+      spectator.setInput('selectedDate', null);
+
+      expect(spectator.query('.day.selected')).toBeUndefined;
     });
   });
 
@@ -163,6 +156,18 @@ describe('CalendarComponent', () => {
       spectator.click(SEL_NAV_FORWARD);
 
       verifyMonthAndYear('October 1997');
+    });
+  });
+
+  describe('weeks', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
+    it('should always render 6 weeks no matter the amount of days in month', () => {
+      const weeks = spectator.queryAll('tbody > tr');
+
+      expect(weeks.length).toBe(6);
     });
   });
 
@@ -334,6 +339,24 @@ describe('CalendarComponent', () => {
       clickDayOfMonth(29);
 
       expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
+    });
+
+    it('should emit dateSelect event when clicking date in previous month', () => {
+      const captured = captureDateSelectEvents();
+      spectator.setInput('selectedDate', localMidnightDate('2025-01-01'));
+
+      spectator.click(spectator.queryAll('.day:not(.current-month)')[0]);
+
+      expect(captured.event).toEqual(localMidnightDate('2024-12-30'));
+    });
+
+    it('should emit dateSelect event when clicking date in next month', () => {
+      const captured = captureDateSelectEvents();
+      spectator.setInput('selectedDate', localMidnightDate('2024-12-01'));
+
+      spectator.click(spectator.queryLast('.day:not(.current-month)'));
+
+      expect(captured.event).toEqual(localMidnightDate('2025-01-05'));
     });
 
     it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {

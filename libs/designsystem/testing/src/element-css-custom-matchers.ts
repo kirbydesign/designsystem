@@ -14,7 +14,8 @@ function cssPropertyMatcher(util: MatchersUtil) {
   return {
     compare: (
       element: Element,
-      expectedStyles: { [cssProperty: string]: string | ThemeColorDefinition }
+      expectedStyles: { [cssProperty: string]: string | ThemeColorDefinition },
+      pseudoElt?: string
     ) => {
       let allPassed = Object.keys(expectedStyles).length !== 0;
       const messages = [];
@@ -29,7 +30,8 @@ function cssPropertyMatcher(util: MatchersUtil) {
           element,
           cssProperty,
           expectedStringValue,
-          expectedValueAlias
+          expectedValueAlias,
+          pseudoElt
         );
         allPassed = allPassed && pass;
         if (message) {
@@ -85,13 +87,21 @@ function compareCssProperty(
   element: Element,
   cssProperty: string,
   expectedValue: string,
-  expectedValueAlias?: string
+  expectedValueAlias?: string,
+  pseudoElt?: string
 ): CustomMatcherResult {
-  const actualValue = TestHelper.getCssProperty(element, cssProperty);
+  const actualValue = TestHelper.getCssProperty(element, cssProperty, pseudoElt);
   const pass = util.equals(actualValue, expectedValue) || !!compareSize(actualValue, expectedValue);
   const message = pass
     ? null
-    : getErrorMessage(element, cssProperty, actualValue, expectedValue, expectedValueAlias);
+    : getErrorMessage(
+        element,
+        cssProperty,
+        actualValue,
+        expectedValue,
+        expectedValueAlias,
+        pseudoElt
+      );
   const result = {
     pass: pass,
     message: message,
@@ -127,8 +137,11 @@ function getErrorMessage(
   cssProperty: string,
   actualValue: string,
   expectedValue: string,
-  expectedValueAlias?: string
+  expectedValueAlias?: string,
+  pseudoElt?: string
 ) {
   const expectedColorNameSuffix = expectedValueAlias ? ` (${expectedValueAlias})` : '';
-  return `Expected [${cssProperty}] of ${element.tagName} '${actualValue}' to be '${expectedValue}'${expectedColorNameSuffix}`;
+  return `Expected [${cssProperty}] of ${element.tagName}${
+    pseudoElt ?? ''
+  } '${actualValue}' to be '${expectedValue}'${expectedColorNameSuffix}`;
 }

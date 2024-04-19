@@ -5,10 +5,18 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import {
   HeaderActionsDirective,
   HeaderComponent,
+  HeaderCustomFlagDirective,
   HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
 } from './header.component';
 
-const declarations = [HeaderComponent, HeaderActionsDirective, HeaderCustomSectionDirective];
+const declarations = [
+  HeaderComponent,
+  HeaderActionsDirective,
+  HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
+  HeaderCustomFlagDirective,
+];
 
 @NgModule({
   declarations: declarations,

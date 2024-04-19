@@ -2,9 +2,7 @@
 
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
-$border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
-$divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') * 2);
 
 @mixin button-reset {
   background: transparent;
@@ -33,10 +31,9 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
   button[role='tab'] {
     @include button-reset;
 
-    background-color: utils.get-color('background-color');
     color: utils.get-color('black');
     box-sizing: border-box; // Ensure border is not added to button height
-    padding: utils.size('s');
+    padding: utils.size('s') utils.size('m');
     font-size: utils.font-size('n');
     line-height: utils.line-height('m');
     gap: utils.size('xxxs');

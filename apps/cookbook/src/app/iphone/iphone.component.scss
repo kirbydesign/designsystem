@@ -8,7 +8,7 @@
   .docs-demo-device {
     display: flex;
     position: relative;
-    min-height: 500px;
+    min-height: var(--docs-demo-device-height, 500px);
     border: 1px solid #ddd;
     border-radius: utils.size('xs');
     margin-bottom: utils.size('xs');

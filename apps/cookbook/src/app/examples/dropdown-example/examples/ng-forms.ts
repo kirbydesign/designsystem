@@ -12,17 +12,19 @@ const config = {
     itemTextProperty="title"
   ></kirby-dropdown>
 </form>
-<fieldset class="checkbox-xs">
+<fieldset>
   <legend>Configuration</legend>
   <kirby-checkbox
     [checked]="canSelectFavorite"
     (checkedChange)="toggleEnabled($event)"
-    text="Form field enabled">
+    text="Form field enabled"
+    size="xs">
   </kirby-checkbox>
   <kirby-checkbox
     [checked]="favoriteRequired"
     (checkedChange)="toggleRequired($event)"
-    text="Form field required">
+    text="Form field required"
+    size="xs">
   </kirby-checkbox>
   <p class="selection">
     form.value: {{ form.value | json }}<br />

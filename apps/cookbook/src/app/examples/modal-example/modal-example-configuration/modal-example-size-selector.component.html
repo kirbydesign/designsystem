@@ -1,0 +1,6 @@
+<kirby-radio-group [value]="size" (valueChange)="onValueChange($event)">
+  <kirby-item size="xs" *ngFor="let option of modalSizeOptions">
+    <kirby-radio [value]="option" slot="start"></kirby-radio>
+    <kirby-label>{{ option.text }}</kirby-label>
+  </kirby-item>
+</kirby-radio-group>

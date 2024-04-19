@@ -1,8 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import * as ionic from '@ionic/angular';
+import * as ionic from '@ionic/angular/standalone';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -27,7 +26,6 @@ describe('ActionSheetComponent', () => {
       declarations: [
         ActionSheetComponent,
         ListComponent,
-
         InfiniteScrollDirective,
         ButtonComponent,
         ListItemColorDirective,
@@ -43,11 +41,6 @@ describe('ActionSheetComponent', () => {
       imports: [CardModule, SpinnerModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-    TestBed.overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [ActionSheetComponent],
-      },
-    });
   }));
 
   beforeEach(() => {

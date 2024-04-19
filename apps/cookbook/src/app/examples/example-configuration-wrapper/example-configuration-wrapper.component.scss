@@ -1,7 +1,88 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+$card-z-index: utils.z('default') + 1;
+$button-z-index: $card-z-index + 1;
+
 :host {
-  display: inline-block;
+  display: block;
+
+  &.toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    right: utils.size('s');
+    top: calc(utils.size('s') + var(--ion-safe-area-top));
+
+    &.align-end {
+      align-items: flex-end;
+
+      kirby-card {
+        rotate: -45deg;
+        transform-origin: top right;
+      }
+    }
+
+    button {
+      z-index: $button-z-index;
+    }
+
+    kirby-card {
+      opacity: 0;
+      visibility: hidden;
+      rotate: 45deg;
+      transition-property: opacity, rotate, scale;
+      transition-duration: utils.get-transition-duration('quick');
+      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transform-origin: top left;
+      scale: 0.5;
+    }
+
+    &.show-config {
+      kirby-card {
+        opacity: 1;
+        visibility: visible;
+        rotate: 0deg;
+        scale: 1;
+      }
+    }
+  }
+
+  &.snap-to-viewport {
+    kirby-card {
+      position: fixed;
+      margin-top: utils.$border-radius;
+      opacity: 0.5;
+      transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
+      transform-origin: top right;
+      overflow: initial;
+
+      // expand hit-area:
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -20px;
+      }
+
+      &:hover,
+      &:active,
+      &:focus-within {
+        opacity: unset;
+        transform: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        --kirby-border-color: initial;
+      }
+
+      &:hover,
+      &:active {
+        transition-duration: utils.get-transition-duration('short');
+        transition-property: transform, border-radius;
+        transition-timing-function: utils.get-transition-easing('enter-exit');
+      }
+    }
+  }
 }
 
 :host-context(.ion-page) {
@@ -13,52 +94,28 @@
 :host-context(.ion-page.drawer) {
   kirby-card {
     top: 0;
+
+    @include utils.media('>=medium') {
+      top: var(--header-height, 0);
+    }
   }
 }
 
 fieldset {
   border: 1px solid var(--kirby-border-color, utils.get-color('medium'));
+  padding: utils.size('xs');
 
   legend {
     color: utils.get-text-color('semi-dark');
     text-align: var(--text-align, initial);
+    font-size: utils.font-size('s');
   }
 }
 
 kirby-card {
-  position: fixed;
-  z-index: utils.z('default') + 1;
+  z-index: $card-z-index;
+  font-size: utils.font-size('xs');
+  padding: utils.size('xxs');
   top: 0;
   right: 0;
-  margin-top: utils.$border-radius;
-  font-size: utils.font-size('xs');
-  opacity: 0.5;
-  transition-property: transform, border-radius;
-  transition-duration: utils.get-transition-duration('short');
-  transition-timing-function: utils.get-transition-easing('enter-exit');
-  transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
-  transform-origin: top right;
-  padding: utils.size('xxs');
-
-  --kirby-border-color: transparent;
-  --text-align: center;
-
-  @include utils.media('>=medium') {
-    top: 0;
-    transform: translateX(40%);
-    padding: utils.size('s');
-
-    --text-align: initial;
-    --kirby-border-color: initial;
-  }
-
-  &:hover,
-  &:active {
-    opacity: unset;
-    transform: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-
-    --kirby-border-color: initial;
-  }
 }

@@ -8,3 +8,7 @@
     margin-right: utils.size('s');
   }
 }
+
+.trailing-icon-example {
+  @include utils.trailing-icon('navigation');
+}

@@ -19,22 +19,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
   &.has-label {
     display: block;
-    line-height: utils.line-height('n');
-    white-space: pre-line;
-
-    div.wrapper {
-      position: relative;
-      display: inline-flex;
-      align-items: flex-start;
-      vertical-align: top;
-      padding: get-vertical-padding($default-checkbox-radio-size) 0;
-      padding-right: $spacing-to-label; // Ensure same padding on right side of label
-    }
 
     @each $size, $height in utils.$checkbox-radio-sizes {
-      :host-context(.radio-#{$size}),
       &.#{$size} {
-        .wrapper {
+        ion-radio::part(label) {
           $vertical-padding: get-vertical-padding($height);
 
           padding-top: $vertical-padding;
@@ -42,25 +30,25 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
         }
       }
     }
-
-    ion-radio {
-      position: static;
-      margin-left: $spacing-to-edge;
-      margin-right: $spacing-to-label;
-    }
   }
 
   &[disabled] {
     color: #{utils.get-text-color('semi-dark')};
 
     ion-radio {
-      opacity: 1; // Reset Ionic disabled style
-
       --color: #{utils.get-color('medium')};
       --color-checked: #{utils.get-color('medium')};
 
       &::part(container) {
         background-color: utils.get-color('semi-light');
+      }
+
+      &::part(label-text-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
+      }
+
+      &::part(native-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
       }
     }
   }
@@ -69,20 +57,11 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 ion-radio {
   @include interaction-state.apply-focus-part($part: 'container');
 
-  min-height: $radio-icon-size;
-  min-width: $radio-icon-size;
-  padding: $radio-icon-padding;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
 
   --border-width: 1px;
   --color: #{utils.get-color('semi-dark')};
   --color-checked: #{utils.get-color('success')};
-
-  &::part(container) {
-    transition: interaction-state.transition();
-    transition-property: background-color;
-    background-color: utils.get-color('white');
-  }
 
   @include interaction-state.apply-hover {
     &::part(container) {
@@ -98,9 +77,27 @@ ion-radio {
     }
   }
 
+  &::part(container) {
+    transition: interaction-state.transition();
+    transition-property: background-color;
+    background-color: utils.get-color('white');
+    margin: utils.size('xxxxs');
+  }
+
   &::part(mark) {
     width: $radio-icon-mark-size;
     height: $radio-icon-mark-size;
+  }
+
+  &::part(label) {
+    align-items: start;
+    padding-left: $spacing-to-edge;
+    padding-right: $spacing-to-label;
+    line-height: utils.line-height('n');
+  }
+
+  &::part(label-text-wrapper) {
+    margin-inline: $spacing-to-label 0;
   }
 
   :host-context(kirby-radio-group.error),
@@ -114,11 +111,15 @@ ion-radio {
   &.radio-checked {
     --border-width: 0px;
 
-    &:not(:focus):not(.radio-disabled) {
+    &:not(:focus, .radio-disabled) {
       &::part(container) {
-        box-shadow: utils.get-elevation(2);
+        box-shadow: utils.get-elevation(4);
       }
     }
+  }
+
+  span {
+    white-space: pre-line;
   }
 }
 

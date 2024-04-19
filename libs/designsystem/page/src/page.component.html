@@ -1,5 +1,8 @@
 <ion-header>
-  <ion-toolbar [class.content-scrolled]="!stickyContentTemplate && isContentScrolled">
+  <ion-toolbar
+    [class.content-scrolled]="isContentScrolled"
+    [class.content-pinned]="isStickyContentPinned"
+  >
     <ion-buttons slot="start">
       <ion-back-button
         text=""
@@ -10,17 +13,30 @@
     </ion-buttons>
     <ion-title [class.slide-and-fade-in]="toolbarTitleVisible">
       <div class="toolbar-title">
-        <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+        <ng-container *ngIf="!titleActionIconTemplate && !hasInteractiveTitle">
+          <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+        </ng-container>
+        <span
+          *ngIf="!!titleActionIconTemplate || hasInteractiveTitle"
+          [class.clickable]="hasInteractiveTitle"
+          [class.has-icon]="!!titleActionIconTemplate"
+          (click)="onTitleClick($event)"
+        >
+          <span>
+            <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+          </span>
+          <ng-container *ngTemplateOutlet="titleActionIconTemplate"></ng-container>
+        </span>
       </div>
     </ion-title>
     <ion-buttons
-      *ngIf="!!header?.actionsTemplate"
+      *ngIf="!!headerActionsTemplate"
       class="hide"
       slot="primary"
       [class.fade-in]="toolbarActionsVisible"
     >
       <ng-container
-        *ngTemplateOutlet="header?.actionsTemplate; injector: toolbarActionGroupInjector"
+        *ngTemplateOutlet="headerActionsTemplate; injector: toolbarActionGroupInjector"
       ></ng-container>
     </ion-buttons>
     <ion-buttons *ngIf="!!stickyActionsTemplate" class="legacy-actions" slot="primary">
@@ -32,7 +48,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollEvents="true" forceOverscroll="false" [class]="getMaxWidthClasses()">
+<ion-content
+  scrollEvents="true"
+  forceOverscroll="false"
+  [class]="getMaxWidthClasses()"
+  [class.has-header]="hasHeader"
+>
   <ion-refresher
     *ngIf="refresh.observers.length > 0"
     (ionRefresh)="delegateRefreshEvent($event)"
@@ -42,7 +63,7 @@
   </ion-refresher>
 
   <!-- Page header -->
-  <div class="page-header-container" *ngIf="hasPageTitle && !header">
+  <div class="page-header-container" *ngIf="hasPageTitle && !hasHeader">
     <div
       class="page-header"
       [ngClass]="{
@@ -67,7 +88,7 @@
   </div>
 
   <!-- Header -->
-  <div class="page-header-container" *ngIf="header">
+  <div class="page-header-container" *ngIf="hasHeader">
     <ng-content select="kirby-header"></ng-content>
   </div>
 

@@ -6,7 +6,6 @@ const fieldsetHtml = `
   <fieldset>
     <legend>Max Width</legend>
     <select (change)="onMaxWidthChange($event.target.value)">
-      <option value="">-</option>
       <option
         *ngFor="let option of maxWidthOptions"
         value="{{ option.value }}"
@@ -41,10 +40,6 @@ export class PageContentWidthExampleComponent extends BasePageExampleComponent {
     {
       text: 'default',
       value: 'default',
-    },
-    {
-      text: 'standard',
-      value: 'standard',
     },
     {
       text: 'optimized',

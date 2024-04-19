@@ -4,18 +4,22 @@ article {
   overflow: hidden;
   padding: utils.size('s');
   padding-top: utils.size('m');
-  @include utils.media('<small') {
+  @include utils.media('<=xsmall') {
     padding: utils.size('xxs');
   }
 }
 
 .buttongroup {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  column-gap: utils.size('xxs');
 
   button {
-    width: 50%;
-    margin-left: 6px;
-    margin-right: 6px;
+    flex: 1 1 50%;
+    margin-inline: 0;
+
+    &:only-child {
+      flex-grow: 0;
+    }
   }
 }

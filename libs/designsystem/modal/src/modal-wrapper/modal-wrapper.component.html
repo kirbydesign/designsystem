@@ -1,43 +1,51 @@
-<ion-header (touchstart)="onHeaderTouchStart($event)">
+<ion-header [class.content-scrolled]="isContentScrolled" (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
     <ion-title></ion-title>
-    <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
-      <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
+    <ion-buttons
+      slot="secondary"
+      *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction"
+    >
+      <button
+        kirby-button
+        attentionLevel="3"
+        size="md"
+        (click)="config.drawerSupplementaryAction.action($event)"
+      >
+        <kirby-icon [name]="config.drawerSupplementaryAction.iconName"></kirby-icon>
+      </button>
     </ion-buttons>
-    <ion-buttons slot="end" *ngIf="config.flavor === 'modal'">
-      <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'close' }"></ng-container>
-    </ion-buttons>
-    <ion-buttons slot="end" *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction">
-      <ng-container
-        *ngTemplateOutlet="supplementaryButton; context: { btn: config.drawerSupplementaryAction }"
-      ></ng-container>
+    <ion-buttons slot="primary">
+      <button
+        kirby-button
+        attentionLevel="3"
+        size="md"
+        [noDecoration]="config.interactWithBackground"
+        (click)="close()"
+      >
+        <kirby-icon name="close"></kirby-icon>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true">
+<ion-content [scrollEvents]="scrollEventsEnabled">
   <ion-header *ngIf="_hasCollapsibleTitle" collapse="condense">
     <ion-toolbar>
-      <span class="kirby-text-large" #contentTitle></span>
+      <span class="kirby-text-xlarge" #contentTitle></span>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Outlet for ModalController -->
   <ng-container
     *ngComponentOutlet="config.component; injector: componentPropsInjector"
   ></ng-container>
+
+  <!-- Outlet for projected content -->
+  <ng-container *ngTemplateOutlet="content; injector: modalWrapperInjector"></ng-container>
+
+  <!-- Outlet for route-based modal -->
   <router-outlet
     name="kirbyModalWrapperOutlet"
     [style.visibility]="config.modalRoute ? 'visible' : 'hidden'"
   ></router-outlet>
 </ion-content>
-
-<ng-template #closeButton let-icon="icon">
-  <button kirby-button [noDecoration]="true" size="md" (click)="close()">
-    <kirby-icon [name]="icon"></kirby-icon>
-  </button>
-</ng-template>
-
-<ng-template #supplementaryButton let-btn="btn">
-  <button kirby-button [noDecoration]="true" size="md" (click)="btn.action($event)">
-    <kirby-icon [name]="btn.iconName"></kirby-icon>
-  </button>
-</ng-template>

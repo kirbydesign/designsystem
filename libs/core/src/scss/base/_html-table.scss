@@ -1,0 +1,132 @@
+@use '../interaction-state';
+@use '../utils';
+
+// Height variables
+$row-height: 44px;
+
+// Color variables
+$default-divider-color: utils.get-color('medium');
+$border-bottom: 1px solid var(--kirby-divider-color, #{$default-divider-color});
+
+table.kirby-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  &.layout-fixed {
+    table-layout: fixed;
+  }
+
+  tr {
+    &:not(:last-child) {
+      border-bottom: $border-bottom;
+    }
+  }
+
+  thead tr {
+    border-bottom: $border-bottom;
+  }
+
+  th {
+    kirby-icon {
+      visibility: hidden;
+    }
+
+    &.active {
+      color: utils.get-text-color('black');
+      font-weight: utils.font-weight('bold');
+
+      & kirby-icon {
+        visibility: visible;
+      }
+    }
+
+    text-align: left;
+    font-weight: utils.font-weight('normal');
+    font-size: utils.font-size('xs');
+    color: utils.get-text-color('semi-dark');
+    padding: utils.size('xxs') utils.size('s');
+
+    button {
+      padding: 0;
+      border: none;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background-color: inherit;
+      font-weight: inherit;
+      font-size: inherit;
+      color: inherit;
+      cursor: inherit;
+
+      &.align {
+        &-start {
+          justify-content: flex-start;
+        }
+
+        &-center {
+          justify-content: center;
+        }
+
+        &-end {
+          justify-content: flex-end;
+        }
+      }
+
+      &.row-reverse {
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+      }
+
+      span {
+        display: inline-flex;
+        flex-direction: column;
+
+        // Using the before selector to insert a hidden pseudo-element with the same text content in bold,
+        // ensures no horizontal layout shifts when changing the visible span's text content from bold to normal font-weight.
+        // See lines 53-56
+
+        &::before {
+          display: block;
+          content: attr(data-text);
+          font-weight: utils.font-weight('bold');
+          height: 0;
+          overflow: hidden;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  th.sortable,
+  tr.kirby-selectable-row {
+    @include interaction-state.apply-hover {
+      background-color: interaction-state.get-state-color('white', 'xxxs');
+    }
+
+    @include interaction-state.apply-active {
+      background-color: interaction-state.get-state-color('white', 'xxs');
+    }
+  }
+
+  td {
+    height: $row-height;
+    padding: utils.size('xxxs') utils.size('s');
+    font-weight: utils.font-weight('normal');
+    font-size: utils.font-size('s');
+    color: utils.get-text-color('black');
+    vertical-align: middle;
+
+    &.text-align-left {
+      text-align: left;
+    }
+
+    &.text-align-center {
+      text-align: center;
+    }
+
+    &.text-align-right {
+      text-align: right;
+    }
+  }
+}

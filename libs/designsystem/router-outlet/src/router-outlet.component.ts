@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { isPlatform } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'kirby-router-outlet',
@@ -8,4 +9,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class RouterOutletComponent {
   @Input() main: boolean;
+
+  _animated = isPlatform('hybrid');
 }

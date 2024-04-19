@@ -1,39 +1,149 @@
-<div class="example">
-  <p>
-    <em>
-      <strong>Please note:</strong>
-      The slides do not like beeing switched between chrome-devtools mobileview and standard
-      webview. Please refresh your browser after changing from web to mobile and visa versa
-    </em>
-  </p>
-  <cookbook-example-viewer [html]="slidesExample.template" [ts]="slidesExample.codeSnippet">
-    <cookbook-slides-example #slidesExample></cookbook-slides-example>
-  </cookbook-example-viewer>
+<p>
+  Slides are a collection of cards you can navigate horizontally in, swipe on touch devices and
+  click navigation on desktop.
+</p>
 
-  <h4>Slides properties:</h4>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
-  <br />
-  <h4>Slides Events:</h4>
-  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
-  <p>
-    <em>
-      <strong>Note:</strong>
-      Loading lots of data in many cards can result in an unwanted pause while the slides content
-      are beeing rendered. (The data is recieved, spinner dissapears but seconds passes before the
-      cards are rendered) The notations:
-      <br />
-      <code>
-        *kirbySlide="let slide; let i = index"
-        <br />
-        [slideIndex]="i"
-        <br />
-        [activeSlideIndex]="selectedSlideIndex
-        <br />
-      </code>
-      gives you means to pass info to each slide´s content about what index it has and compare that
-      to the activeSlideIndex, and thereby a strategy to render only a few cards in advance.
-    </em>
-  </p>
-</div>
+<h2>Usage</h2>
+<p>
+  Slides are great to gather and contain content without using a lot of space, but the content has
+  to be closely related.
+</p>
+<p>
+  Only use slides if you have 3 or more cards. If you have a lot of content, or if it takes more
+  than 4 interactions (swipe or clicks), consider using a list format instead.
+</p>
+<p>
+  Slides are best suited for inspirationel content where users are expected to be in an explorative
+  mode.
+</p>
+
+<h2>Basic usage</h2>
+
+<cookbook-iphone
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  src="/examples/slides/"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-code-viewer [html]="defaultExampleComponentHTML"></cookbook-code-viewer>
+
+<h2>Inherit height</h2>
+
+<p>
+  If the slides have variable height, you can add the directive
+  <code>slideStretchHeight</code>
+  to each slide to make them equal height as seen in the example below.
+</p>
+
+<cookbook-iphone
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  src="/examples/slides-height/"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-code-viewer [html]="heightExampleComponentHTML"></cookbook-code-viewer>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    If you use
+    <code>kirbySlide</code>
+    directive on a
+    <code>kirby-card</code>
+    , it can be necessary to apply the following styling.
+  </em>
+</p>
+
+<cookbook-code-viewer [css]="heightExampleComponentCSS"></cookbook-code-viewer>
+
+<h2>Advanced usage</h2>
+
+<cookbook-iphone
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  src="/examples/slides-advanced/"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-example-viewer [html]="advancedExampleComponentHTML"></cookbook-example-viewer>
+
+<h3>Custom configuration</h3>
+
+<p>
+  The
+  <code>kirby-slides</code>
+  uses
+  <code>swiper.js</code>
+  under the hood and accepts the same
+  <a href="https://swiperjs.com/swiper-api#parameters" class="kirby-external-icon" target="_blank">
+    configuration
+  </a>
+  as
+  <code>swiper.js</code>
+  . The component comes with this default config:
+</p>
+
+<cookbook-code-viewer [ts]="slidesDefaultConfig"></cookbook-code-viewer>
+
+<br />
+
+<p>
+  This config can be extended by passing in
+  <code>slidesOptions</code>
+  as shown in the example above, which uses this config:
+</p>
+
+<cookbook-code-viewer [ts]="customConfigExample"></cookbook-code-viewer>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    If you specify any
+    <code>swiper.js</code>
+    events through the
+    <code>on</code>
+    config parameter , the component's
+    <code>slideChange</code>
+    output event will not emit.
+  </em>
+</p>
+
+<p>
+  <em>
+    <strong>**Please note:</strong>
+    If you overwrite
+    <code>slidesPerView</code>
+    on small screens please ensure visual affordance by including a fraction of the next slide, e.g.
+    <code>1.1</code>
+    , as the navigation controls are hidden on small screens. We recommend using the default value
+    of
+    <code>1.2</code>
+    .
+  </em>
+</p>
+
+<h2>Slots</h2>
+
+<p>
+  The component has a default slot which can be used to place a button in the top right corner next
+  to the navigation controls (large screens only).
+</p>
+
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+
+<h2>Events:</h2>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+
+<h2>Methods:</h2>
+<cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
+
+<h2>Directives:</h2>
+<cookbook-api-description-properties
+  [columns]="directiveColumns"
+  [properties]="directives"
+></cookbook-api-description-properties>

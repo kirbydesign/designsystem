@@ -8,9 +8,9 @@
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
 </ng-container>
 
-<div *ngIf="message || counter" class="texts">
+<div *ngIf="message !== undefined || counter" class="texts">
   <kirby-form-field-message
-    *ngIf="message"
+    *ngIf="message !== undefined"
     class="message"
     [text]="message"
   ></kirby-form-field-message>
@@ -30,6 +30,9 @@
     <ng-content select="kirby-radio-group"></ng-content>
     <div class="suffix vertical-align semi-dark-text">
       <ng-content select="[kirby-affix='suffix']"></ng-content>
+      <ng-container *ngIf="showDefaultCalendarIcon">
+        <kirby-icon name="calendar"></kirby-icon>
+      </ng-container>
     </div>
   </div>
 </ng-template>

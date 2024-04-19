@@ -28,6 +28,10 @@ ion-tabs {
 
   @include utils.media('>=medium') {
     --kirby-tab-bar-height: 70px;
+
+    ion-tab-bar {
+      column-gap: utils.size('m');
+    }
   }
 
   // move tabs to top of screen if not touch and large device
@@ -41,6 +45,7 @@ ion-tabs {
       ion-tab-bar {
         margin: 0 auto;
         justify-content: flex-end;
+        column-gap: initial;
 
         // Ensure tabs are not hidden when displayed at top of screen
         &.bottom-hidden {

@@ -9,7 +9,6 @@ import {
 } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 
-import { AlertExperimentalModule } from '@kirbydesign/designsystem/alert-experimental';
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
@@ -40,6 +39,7 @@ import { RangeExampleModule } from './range-example/range-example.module';
 import { SectionHeaderExampleModule } from './section-header-example/section-header-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
+import { ToggleExampleModule } from './toggle-example/toggle-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 import { MenuExampleModule } from './menu-example/menu-example.module';
 
@@ -59,6 +59,7 @@ const IMPORTS = [
   AvatarExampleModule,
   FlagExampleModule,
   ToggleButtonExampleModule,
+  ToggleExampleModule,
   AccordionExampleModule,
   RadioExampleModule,
   CheckboxExampleModule,
@@ -76,7 +77,6 @@ const IMPORTS = [
   MenuExampleModule,
   SlideModule,
   HeaderExampleModule,
-  AlertExperimentalModule,
 ];
 
 @NgModule({

@@ -1,0 +1,12 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
+@use 'modal-playground.shared';
+
+kirby-card {
+  --kirby-card-width: fit-content;
+}
+
+.dummy-text-section {
+  position: absolute;
+  top: 90vh;
+}

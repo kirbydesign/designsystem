@@ -141,40 +141,6 @@ describe('ButtonComponent', () => {
         });
       });
     });
-
-    describe('when configured with attentionlevel 4', () => {
-      beforeEach(() => {
-        spectator.component.attentionLevel = '4';
-        spectator.detectChanges();
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('black'),
-        });
-      });
-    });
-
-    describe('when configured with no decoration', () => {
-      beforeEach(() => {
-        spectator.component.noDecoration = true;
-        spectator.detectChanges();
-      });
-
-      it('should render with no background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('black'),
-        });
-      });
-    });
   });
 
   const sizeTestScenarios: { size: ButtonSize; expected: any }[] = [
@@ -266,7 +232,7 @@ describe('ButtonComponent', () => {
     rightXS: { paddingInline: '12px 8px' },
     left: { paddingInline: '12px 16px' },
     right: { paddingInline: '16px 12px' },
-    iconOnly: { paddingInline: '24px' },
+    iconOnly: { paddingInline: '0px' },
   };
 
   const iconTestScenarios: {

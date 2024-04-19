@@ -3,8 +3,6 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["jasmine", "node"],
-    "target": "ES2022",
-    "useDefineForClassFields": false,
     "paths": {
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
       "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
@@ -18,7 +16,6 @@
       "@kirbydesign/designsystem/kirby-ionic-module": ["kirby-ionic-module/index.ts"],
       "@kirbydesign/designsystem/flag": ["flag/index.ts"],
       "@kirbydesign/designsystem/form-field": ["form-field/index.ts"],
-      "@kirbydesign/designsystem/grid": ["grid/index.ts"],
       "@kirbydesign/designsystem/spinner": ["spinner/index.ts"],
       "@kirbydesign/designsystem/toggle": ["toggle/index.ts"],
       "@kirbydesign/designsystem/item": ["item/index.ts"],
@@ -56,9 +53,9 @@
       "@kirbydesign/designsystem/data-table": ["data-table/index.ts"],
       "@kirbydesign/designsystem/reorder-list": ["reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["toast/index.ts"],
-      "@kirbydesign/designsystem/alert-experimental": ["alert-experimental/index.ts"],
       "@kirbydesign/designsystem/action-group": ["action-group/index.ts"],
-      "@kirbydesign/designsystem/menu": ["menu/index.ts"]
+      "@kirbydesign/designsystem/menu": ["menu/index.ts"],
+      "@kirbydesign/designsystem/badge": ["badge/index.ts"]
     }
   },
   "files": ["test.ts"],

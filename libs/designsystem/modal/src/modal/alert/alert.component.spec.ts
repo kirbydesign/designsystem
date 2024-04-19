@@ -2,8 +2,8 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { AlertComponent } from './alert.component';
-
 const getColor = DesignTokenHelper.getColor;
 
 describe('AlertComponent', () => {
@@ -11,6 +11,7 @@ describe('AlertComponent', () => {
 
   const createHost = createHostFactory({
     component: AlertComponent,
+    imports: [IconModule],
   });
 
   beforeEach(() => {

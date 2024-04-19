@@ -54,3 +54,22 @@
   In a non-web context, i.e. an app, any link will most likely launch the device's browser and
   effectively open a new tab outside the app context.
 </p>
+
+<h2>Custom trailing-icon</h2>
+<p>
+  If you want to use a custom icon after the link instead of the external link icon then include the
+  Kirby SCSS &#64;mixin
+  <code>utils.trailing-icon</code>
+  and the icon name of your choosing:
+  <code>&#64;include trailing-icon(iconName)</code>
+</p>
+<p>
+  The example below is using
+  <code>"navigation"</code>
+  as iconName. If you want to use an external svg, then you can input a URL instead of iconName.
+  View code to see examples.
+</p>
+
+<cookbook-example-viewer [html]="trailingTab.template" [css]="trailingTab.style">
+  <cookbook-link-example-trailing-icon #trailingTab></cookbook-link-example-trailing-icon>
+</cookbook-example-viewer>

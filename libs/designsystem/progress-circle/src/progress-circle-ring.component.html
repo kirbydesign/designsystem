@@ -1,0 +1,22 @@
+<svg [attr.width]="_diameter" [attr.height]="_diameter">
+  <circle
+    shape-rendering="geometricPrecision"
+    class="circle"
+    fill="transparent"
+    [attr.stroke-width]="strokeWidth"
+    [attr.r]="_centerRadius"
+    [attr.cx]="radius"
+    [attr.cy]="radius"
+  />
+  <circle
+    shape-rendering="geometricPrecision"
+    class="progress"
+    fill="transparent"
+    stroke-linecap="round"
+    [attr.stroke-width]="_progressStrokeWidth"
+    [attr.r]="_centerRadius"
+    [attr.cx]="radius"
+    [attr.cy]="radius"
+    [attr.stroke-dasharray]="[_progress, _remainder]"
+  />
+</svg>

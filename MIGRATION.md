@@ -2,11 +2,77 @@
 
 This document provides information about breaking changes and their migrations for major versions of Kirby Design System.
 
+## Version 9.0.0
+
+- [Components](#components-v9)
+  - [Avatar](#avatar-v9)
+  - [Button](#button-v9)
+  - [Badge](#badge-v9)
+  - [Experimental Alert](#experimental-alert-v9)
+  - [Grid](#grid-v9)
+  - [Modal](#modal-v9)
+  - [Range](#range-v9)
+  - [Slides](#slides-v9)
+- [Styles](#styles-v9)
+- [Dependencies](#dependencies-v9)
+
+<h3 id="components-v9">Components</h3>
+
+<h4 id="avatar-v9">Avatar</h4>
+
+The `shadow` input binding has been removed and `stroke` should be used instead for a similar effect.
+
+<h4 id="button-v9">Button</h4>
+
+The deprecated attention level 4 has been removed. This has no visual significance as level 4 was mapped to level 3 internally in the button, but any references to attention level 4 should be removed from code.
+
+<h4 id="badge-v9">Badge</h4>
+
+`KirbyBadgeModule` has been removed. `BadgeComponent` is now standalone and can be imported directly.
+
+<h4 id="experimental-alert-v9">Experimental Alert</h4>
+
+The Experimental Alert has been fully removed and we recommend to use the normal alert instead.
+
+<h4 id="grid-v9">Grid</h4>
+
+The grid **component** has been removed in favor of using the much more flexible [Grid HTML classes](https://cookbook.kirby.design/#/home/showcase/grid).
+
+<h4 id="modal-v9">Modal</h4>
+
+The following methods have been removed from the `modalController` and all usages of these methods should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+
+<h4 id="range-v9">Range</h4>
+
+The `change` event no longer emits for each value change, but instead only when the user releases the knob after dragging or when the user moves the knob with keyboard arrows.
+This prevents excessively emitting _a lot_ of events especially for large ranges, and removes the need for debouncing measures in applications.
+
+If the previous functionality of reacting to each value change is needed consider binding to the `move` event instead.
+
+<h4 id="slides-v9">Slides</h4>
+
+Navigation arrows (desktop only) and selected slide indicators are now shown by default. It is possible to opt-out of this by setting `showNavigation` to `false`.
+
+The `selectedSlide` event emitter has been removed and `slideChange` should be used as a direct replacement.
+
+<h3 id="styles-v9">Styles</h3>
+
+A new `xsmall` breakpoint (`320px`) has been introduced in the `$breakpoints` map exposed by Kirby. The `xsmall` breakpoint replaces the old `small` breakpoint, which is now `632px`.
+
+A `$page-content-max-widths` map has been introduced to support `default`, `optimized` and `full`-width content on Kirby Page. This means that the standalone variable `$page-content-max-width` is deprecated in v9 and `$page-content-max-width-default` should be used in its place.
+For backwards compatability both variables return the `default` value until v10 where `$page-content-max-width` is removed entirely in favor of `$page-content-max-width-default`.
+<br>
+
+Values from the new content-width map can be retrieved with the `get-page-content-max-width()` convenience function, e.g. `get-page-content-max-width('full')`.
+
+<h3 id="dependencies-v9">Dependencies</h3>
+
+The `@kirbydesign/core` package that contain helpers for the designsystem package is now an ES Module, and no longer exports a CommonJS javascript bundle. If e.g. your Jest tests are otherwise configured to use CommonJS you might need to ignore transformation of the `@kirbydesign/core` files.
+
 ## Version 8.3.0
 
 - [Components](#components-v8-3)
   - [Menu](#menu-v8-3)
-  - [Modal](#modal-v8-3)
   - [Page](#page-v8-3)
   - [Tab Navigation](#tab-nav-v8-3)
 
@@ -21,18 +87,6 @@ To gain the benefit of the improvements we strongly encourage consumers to migra
 
 <h4 id="menu-v8-3">Menu</h4>
 Menu replaces Action Sheet to provide a better experience across platforms and screen sizes. Menu is a new component that renders a button that acts as a trigger for showing / hiding a popover menu. The menu is used declaratively in markup to simplify usage and is no longer instantiated through the modalController like the Action Sheet.
-
-<br>
-
-<h4 id="modal-v8-3">Modal</h4>
-A new modal component, ModalV2, is added with enhanced look and feel on larger screen sizes. It also makes it much easier to add modals for simpler use-cases, by providing a way to instantiate modals declaratively in markup, without having to wire up a modal controller. It is still possible to create modals with the Modal V2 controller. The modal supports 2 flavors: modal & drawer.
-
-<br>
-
-The routing functionality for modals has been revamped and requires a slightly different setup. This is described in the “Routing” section of the [Modal V2 docs](https://cookbook.kirby.design/#/home/showcase/modal-v2).
-
-<br>
-<em>Please note:</em> We are still working on support for the feature hint flavor of modals, and we recommend to still use the old modal for this specific use case until an alternative is provided through Kirby.
 
 <br>
 

@@ -2,6 +2,8 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
+$toolbar-bottom-border-width: 1px;
+
 @mixin contain-content() {
   padding-top: 0;
   position: relative;
@@ -34,13 +36,14 @@
   }
 }
 
-$toolbar-padding-inline: utils.size('s');
-$toolbar-padding-block: utils.size('xs');
-
-@mixin phablet-toolbar-padding() {
-  $toolbar-padding-top: utils.size('xxs');
+@mixin toolbar-phablet-or-bigger() {
   @include utils.media('>=medium') {
-    padding-top: $toolbar-padding-top;
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
+    --padding-bottom: #{utils.size('m') - $toolbar-bottom-border-width};
+    --padding-top: #{utils.size('m')};
+
+    padding-inline: 0;
   }
 }
 
@@ -48,10 +51,12 @@ ion-header {
   box-sizing: border-box;
 
   ion-toolbar {
-    --padding-start: #{$toolbar-padding-inline};
-    --padding-end: #{$toolbar-padding-inline};
-    --padding-bottom: #{$toolbar-padding-block};
-    --padding-top: #{$toolbar-padding-block};
+    @include toolbar-phablet-or-bigger;
+
+    --padding-start: #{utils.size('xxs')};
+    --padding-end: #{utils.size('xxs')};
+    --padding-bottom: #{utils.size('xxs') - $toolbar-bottom-border-width};
+    --padding-top: #{utils.size('xxs')};
     --border-width: 0;
     --background: transparent;
     --color: var(--kirby-modal-color, #{utils.get-color('black')});
@@ -60,7 +65,8 @@ ion-header {
       color: var(--color);
     }
 
-    @include phablet-toolbar-padding;
+    border-bottom: $toolbar-bottom-border-width solid transparent;
+    transition: border-color utils.get-transition-duration('quick') linear;
   }
 }
 
@@ -69,23 +75,47 @@ ion-header {
   --header-height: 0px;
   --footer-height: 0px;
 
-  &.drawer {
-    // Prevent iOS safe-area padding-top on drawer flavor
-    // as this is already applied on the top-level modal itself
-    // in /scss/_global-styles.scss:
-    ion-header ion-toolbar:first-of-type {
-      padding-top: 0;
+  &.drawer ion-header ion-toolbar {
+    @include utils.media('<medium') {
+      --padding-top: #{utils.size('s')};
+
+      // Prevent iOS safe-area padding-top on drawer flavor
+      // as this is already applied on the top-level modal itself
+      // in /scss/_global-styles.scss:
+      &:first-of-type {
+        padding-top: 0;
+      }
     }
   }
 }
 
-:host-context(ion-modal:not(.kirby-modal-full-height)) {
-  @include utils.media('>=medium') {
+@include utils.media('>=medium') {
+  ion-header ion-toolbar {
+    border-bottom-color: utils.get-color('medium');
+  }
+}
+
+ion-header.content-scrolled ion-toolbar {
+  border-bottom-color: utils.get-color('medium');
+}
+
+:host-context(ion-modal.no-header-area-border) {
+  ion-header ion-toolbar {
+    border-bottom-color: transparent;
+  }
+}
+
+:host-context(ion-modal.kirby-drawer:not(.kirby-modal-full-height)) {
+  @include utils.media('<medium') {
     @include contain-content;
   }
+}
 
-  &.drawer {
-    @include contain-content;
+:host-context(ion-modal.kirby-drawer.interact-with-background) {
+  @include contain-content;
+
+  ion-header ion-toolbar {
+    border-bottom-color: transparent;
   }
 }
 
@@ -95,38 +125,34 @@ ion-header {
   ion-header ion-toolbar:first-of-type {
     padding-top: var(--kirby-safe-area-top, 0);
 
-    @include phablet-toolbar-padding;
+    @include toolbar-phablet-or-bigger;
   }
 }
 
 ion-title {
   box-sizing: border-box;
-  padding-inline-start: calc(48px + var(--padding-start));
-  padding-inline-end: calc(48px + var(--padding-end));
-  font-size: utils.font-size('l');
+  padding-inline: calc(48px + var(--padding-start)) calc(48px + var(--padding-end));
+  font-size: utils.font-size('n');
   font-weight: utils.font-weight('bold');
 }
 
-:host(.drawer) ion-title {
-  font-size: utils.font-size('m');
-}
-
 ion-content {
-  --background: transparent;
-  --color: var(--kirby-modal-color, #{utils.get-color('black')});
-
-  display: flex;
-  flex-direction: column;
-
   @include utils.slotted('*') {
     box-sizing: border-box;
     display: block;
   }
 
+  --background: transparent;
+  --color: var(--kirby-modal-color, #{utils.get-color('black')});
   --padding-top: #{utils.size('m')};
   --padding-bottom: #{utils.size('m')};
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
+
+  display: flex;
+  flex-direction: column;
+  height: calc(var(--height) - var(--header-height) - var(--footer-height));
+  max-height: calc(var(--max-height) - var(--header-height) - var(--footer-height));
 }
 
 // Ensure padding-rules are not merged with other media query,
@@ -135,28 +161,25 @@ ion-content {
 /* clean-css ignore:start */
 @include utils.media('>=medium') {
   ion-content {
-    --padding-start: #{utils.size('xxxl')};
-    --padding-end: #{utils.size('xxxl')};
+    --padding-start: #{utils.size('xxl')};
+    --padding-end: #{utils.size('xxl')};
   }
 }
 
 :host(.collapsible-title) {
-  ion-content {
+  ion-content ion-toolbar:first-of-type {
     --padding-top: 0px;
+    --padding-bottom: #{utils.size('l')};
+    --padding-start: #{utils.size('xxs')};
+    --padding-end: #{utils.size('xxs')};
 
-    ion-header ion-toolbar:first-of-type {
-      padding-top: 0;
-
-      --padding-top: 0px;
-      --padding-bottom: 0px;
-      --padding-start: 0px;
-      --padding-end: 0px;
+    @include utils.media('>=medium') {
+      --padding-start: #{utils.size('s')};
+      --padding-end: #{utils.size('s')};
     }
-  }
 
-  ion-title {
-    font-size: utils.font-size('n');
-    font-weight: utils.font-weight('bold');
+    // no border for header element when collapsible title is in the content area
+    border: none;
   }
 }
 

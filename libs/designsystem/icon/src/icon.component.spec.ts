@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { IonIcon } from '@ionic/angular';
-import { mockProvider, SpyObject } from '@ngneat/spectator';
+import { IonIcon } from '@ionic/angular/standalone';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -23,7 +22,7 @@ describe('IconComponent', () => {
         TestWrapperComponent,
         MockComponent(IonIcon),
       ],
-      providers: [mockProvider(IconRegistryService)],
+      providers: [IconRegistryService],
     });
   }));
 
@@ -117,11 +116,13 @@ describe('IconComponent', () => {
       const fixture = createTestComponent(
         `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
       );
-      const iconRegistrySpy = TestBed.inject(IconRegistryService) as SpyObject<IconRegistryService>;
-      iconRegistrySpy.getIcon.and.returnValue({
-        name: 'customIconNameFromIconRegistry',
-        svg: 'customIconSvgFromIconRegistry',
-      });
+
+      const iconRegistryService = TestBed.get(IconRegistryService);
+      iconRegistryService.addIcon(
+        'customIconNameFromIconRegistry',
+        'customIconSvgFromIconRegistry'
+      );
+
       fixture.detectChanges();
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
 

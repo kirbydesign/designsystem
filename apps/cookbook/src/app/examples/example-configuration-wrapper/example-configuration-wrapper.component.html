@@ -1,4 +1,15 @@
-<ng-container *ngIf="snapToViewport; else fieldset">
+<button
+  *ngIf="configAppearance === 'toggle'"
+  kirby-button
+  attentionLevel="3"
+  (click)="toggleConfig()"
+>
+  Configure
+  <kirby-icon name="menu-outline" *ngIf="!showConfig"></kirby-icon>
+  <kirby-icon name="menu" *ngIf="showConfig"></kirby-icon>
+</button>
+
+<ng-container *ngIf="configAppearance !== 'block'; else fieldset">
   <kirby-card>
     <ng-container *ngTemplateOutlet="fieldset"></ng-container>
   </kirby-card>
@@ -6,7 +17,7 @@
 
 <ng-template #fieldset>
   <fieldset>
-    <legend>Configuration</legend>
+    <legend>{{ title }}</legend>
     <ng-content></ng-content>
   </fieldset>
 </ng-template>

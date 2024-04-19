@@ -1,0 +1,73 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  position: var(--kirby-badge-position, relative);
+  left: var(--kirby-badge-left, auto);
+  right: var(--kirby-badge-right, auto);
+  top: var(--kirby-badge-top, auto);
+  z-index: var(--kirby-badge-z-index, auto);
+  font-size: utils.font-size('xxs');
+  line-height: 1;
+
+  ion-badge {
+    --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
+    --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
+
+    box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
+    border-radius: utils.size('xxs');
+    font-size: inherit;
+    position: relative;
+    box-shadow: var(--kirby-badge-elevation, none);
+
+    @include utils.slotted(kirby-icon) {
+      --kirby-icon-font-size: #{utils.font-size('n')};
+
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+:host(.sm) {
+  ion-badge {
+    padding: initial;
+    min-height: initial;
+    min-width: initial;
+    height: utils.size('xxs');
+    width: utils.size('xxs');
+  }
+}
+
+:host(.md) {
+  ion-badge {
+    --padding-top: 3px;
+    --padding-end: 5px;
+    --padding-bottom: 3px;
+    --padding-start: 5px;
+
+    min-width: utils.size('s');
+    min-height: utils.size('s');
+  }
+}
+
+@each $color-name, $color-value in utils.$notification-colors {
+  $text-color: utils.get-color($color-name + '-contrast');
+  @if $color-name == 'danger' {
+    $text-color: utils.get-text-color('white');
+  }
+  :host(.#{$color-name}) {
+    ion-badge {
+      --background: #{utils.get-color($color-name)};
+      --color: #{var(--kirby-badge-color, #{$text-color})};
+    }
+  }
+}
+
+// Apply custom elevation to badge when white (explicitly set or default white)
+:host(.default),
+:host(.white) {
+  ion-badge {
+    --kirby-badge-elevation: 0 20px 30px -15px rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 12%);
+  }
+}

@@ -1,15 +1,19 @@
-import { IonicModule } from '@ionic/angular';
-import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
 
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
+import { IonTabs } from '@ionic/angular/standalone';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TabsComponent } from './tabs.component';
+
+const { size } = DesignTokenHelper;
 
 describe('TabsComponent', () => {
   let spectator: Spectator<TabsComponent>;
+  const isNonTouchDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const createHost = createComponentFactory({
-    imports: [MockModule(IonicModule)],
+    imports: [TestHelper.ionicModuleForTest, IonTabs, RouterTestingModule],
     component: TabsComponent,
     declarations: [],
   });
@@ -68,7 +72,7 @@ describe('TabsComponent', () => {
     });
 
     // Only run test on non-touch devices
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    if (isNonTouchDevice) {
       describe('on screensize large', () => {
         beforeEach(async () => {
           await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
@@ -117,6 +121,32 @@ describe('TabsComponent', () => {
         const ionTabBarElm = spectator.query('ion-tab-bar');
         expect(ionTabBarElm).toHaveComputedStyle({
           height: expectedHeight,
+        });
+      });
+    });
+  });
+
+  describe('tab-bar spacing', () => {
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    const scenarios: { [key in ScreenSize]?: string } = {
+      phone: 'normal',
+      tablet: size('m'),
+      desktop: 'normal',
+    };
+
+    Object.entries(scenarios).forEach(([screenSize, expectedGap]) => {
+      // Only run desktop test on non-touch devices
+      if (screenSize === 'desktop' && !isNonTouchDevice) return;
+
+      it(`should have correct spacing on screensize ${screenSize}`, async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
+
+        const ionTabBarElm = spectator.query('ion-tab-bar');
+        expect(ionTabBarElm).toHaveComputedStyle({
+          'column-gap': expectedGap,
         });
       });
     });

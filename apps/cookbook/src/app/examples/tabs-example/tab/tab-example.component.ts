@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-import { ActionSheetItem } from '@kirbydesign/designsystem';
+import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 @Component({
   template: `
@@ -51,7 +51,9 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
           officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
           obcaecati odit quia soluta!
         </p>
-        <button kirby-button (click)="navigateToAccountSub()">Go to account sub</button>
+        <button *ngIf="showSubNavigation" kirby-button (click)="navigateToTransferSub()">
+          Go to transfer sub
+        </button>
       </kirby-page-content>
 
       <kirby-fab-sheet *kirbyPageContent="{ fixed: true }" horizontalAlignment="right">
@@ -65,7 +67,6 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
       </kirby-fab-sheet>
     </kirby-page>
   `,
-  styleUrls: [],
 })
 export class TabExampleComponent implements OnInit {
   title: Observable<string>;
@@ -74,28 +75,51 @@ export class TabExampleComponent implements OnInit {
     { id: '2', text: 'Option 2' },
     { id: '3', text: 'Option 3' },
   ];
+  showSubNavigation = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private toastController: ToastController
+  ) {}
 
   ngOnInit(): void {
+    this.showSubNavigation = this.route.snapshot.parent.routeConfig.path === 'transfer';
     setTimeout(() => {
       this.title = of(this.route.snapshot.data.title);
+      this.cdr.detectChanges();
     }, 300);
   }
 
-  onItemSelect() {
-    alert('item selected');
+  onItemSelect(item: ActionSheetItem) {
+    const config: ToastConfig = {
+      message: `Item selected: ${item.text}`,
+      messageType: 'success',
+      durationInMs: 1500,
+    };
+    this.toastController.showToast(config);
   }
 
-  navigateToAccountSub() {
+  navigateToTransferSub() {
     this.router.navigate(['sub'], { relativeTo: this.route });
   }
 
   onCogSelect() {
-    alert('On cog select');
+    const config: ToastConfig = {
+      message: `Cog clicked...`,
+      messageType: 'success',
+      durationInMs: 1500,
+    };
+    this.toastController.showToast(config);
   }
 
   onMoreSelect() {
-    alert('On more select');
+    const config: ToastConfig = {
+      message: `More menu clicked...`,
+      messageType: 'success',
+      durationInMs: 1500,
+    };
+    this.toastController.showToast(config);
   }
 }

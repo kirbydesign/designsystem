@@ -1,13 +1,14 @@
-<ion-tab-button #ionTabButton [tab]="routerLink" (click)="onClick($event, ionTabButton.selected)">
-  <div class="icon-container" *ngIf="icons.length">
-    <ng-content
-      *ngIf="icons.length === 1 || !ionTabButton.selected"
-      select="kirby-icon[:not([selected-tab])]"
-    ></ng-content>
-    <ng-content *ngIf="ionTabButton.selected" select="kirby-icon[selected-tab]"></ng-content>
-  </div>
-  <ion-label>
-    <ng-content></ng-content>
-  </ion-label>
+<ion-tab-button
+  #ionTabButton
+  [tab]="routerLink || tab"
+  (click)="onClick($event, ionTabButton.selected)"
+  tabindex="0"
+>
+  <ng-content
+    *ngIf="icons.length === 1 || !ionTabButton.selected"
+    select="kirby-icon:not([selected-tab])"
+  ></ng-content>
+  <ng-content *ngIf="ionTabButton.selected" select="kirby-icon[selected-tab]"></ng-content>
+  <ng-content></ng-content>
   <ng-content select="kirby-badge"></ng-content>
 </ion-tab-button>

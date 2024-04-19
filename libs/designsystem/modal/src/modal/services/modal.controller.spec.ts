@@ -7,6 +7,7 @@ import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
 import { ModalController } from './modal.controller';
 import { ModalHelper } from './modal.helper';
+
 describe('ModalController', () => {
   let spectator: SpectatorService<ModalController>;
   let modalController: ModalController;

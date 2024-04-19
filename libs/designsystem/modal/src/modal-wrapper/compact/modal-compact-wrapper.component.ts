@@ -1,11 +1,20 @@
-import { Component, ElementRef, HostListener, Injector, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Injector,
+  Input,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
 import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { CommonModule } from '@angular/common';
-import { ModalConfig } from '../config/modal-config';
+import { ModalConfig, ShowAlertCallback } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
+import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
 
 @Component({
   standalone: true,
@@ -18,9 +27,11 @@ import { Modal } from '../../modal.interfaces';
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
+  @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
+
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   scrollDisabled = false;
-  @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
   private ionModalElement: HTMLIonModalElement;
@@ -32,7 +43,8 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   constructor(
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private canDismissHelper: CanDismissHelper
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +80,10 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     if (ionModalElement) {
       await ionModalElement.dismiss(data);
     }
+  }
+
+  set canDismiss(callback: ShowAlertCallback) {
+    this.ionModalElement.canDismiss = this.canDismissHelper.getCanDismissCallback(callback);
   }
 
   scrollToTop: (_?: any) => void;

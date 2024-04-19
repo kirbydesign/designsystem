@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController as IonicModalController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -34,6 +34,7 @@ describe('AlertHelper', () => {
   });
 
   beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
     spectator = createService();
     alertHelper = spectator.service;
   });

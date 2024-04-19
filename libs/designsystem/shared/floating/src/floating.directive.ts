@@ -13,11 +13,14 @@ import {
   autoPlacement,
   autoUpdate,
   computePosition,
+  ComputePositionConfig,
+  flip,
+  Middleware,
   offset,
+  Placement,
   shift,
   Strategy,
 } from '@floating-ui/dom';
-import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { from } from 'rxjs';
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
@@ -71,7 +74,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownReferenceElementEventHandling();
     this._reference = ref;
     this.setupEventHandling();
-    this.autoUpdatePosition();
+    if (this.isShown) {
+      this.autoUpdatePosition();
+    }
   }
 
   public get reference(): ElementRef<HTMLElement> | undefined {
@@ -83,7 +88,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * */
   @Input() public set placement(placement: Placement) {
     this._placement = placement;
-    this.updateHostElementPosition();
+    if (this.isShown) {
+      this.updateHostElementPosition();
+    }
   }
 
   public get placement() {
@@ -95,7 +102,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * */
   @Input() public set strategy(strategy: Strategy) {
     this._strategy = strategy;
-    this.updateHostElementPosition();
+    if (this.isShown) {
+      this.updateHostElementPosition();
+    }
   }
 
   public get strategy(): Strategy {
@@ -204,6 +213,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private isShown: boolean = false;
   private referenceEventListenerDisposeFns: EventListenerDisposeFn[] = [];
   private documentClickEventListenerDisposeFn: EventListenerDisposeFn;
+  private hostClickEventListenerDisposeFn: EventListenerDisposeFn;
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -233,14 +243,13 @@ export class FloatingDirective implements OnInit, OnDestroy {
   };
 
   public constructor(
-    private elementRef: ElementRef,
+    private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private portalDirective: PortalDirective
   ) {}
 
   public ngOnInit(): void {
     this.addFloatStylingToHostElement();
-    this.updateHostElementPosition();
   }
 
   /* Should be accessible for programmatically setting display */
@@ -249,18 +258,21 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
-    this.attachDocumentClickEvent();
+    this.attachDocumentClickEventHandler();
+    this.attachHostClickEventHandler();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.isShown = true;
+    this.autoUpdatePosition();
     this.displayChanged.emit(this.isShown);
   }
 
   /* Should be accessible for programmatically setting display */
   public hide(): void {
-    if (this.isDisabled) {
+    if (this.isDisabled || !this.isShown) {
       return;
     }
 
+    this.removeAutoUpdaterRef();
     this.tearDownDocumentClickEventHandling();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
     this.isShown = false;
@@ -273,15 +285,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
       this.hide();
     } else {
       this.show();
-    }
-  }
-
-  private onDocumentClickWhileHostShown(event: Event): void {
-    const clickedOnHost: boolean = this.elementRef.nativeElement.contains(event.target);
-    if (clickedOnHost) {
-      this.handleClickInsideHostElement();
-    } else {
-      this.handleClickOutsideHostElement(event);
     }
   }
 
@@ -324,9 +327,10 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private getMiddlewareConfig(): Array<Middleware | null | undefined | false> {
     const middleware: Array<Middleware | null | undefined | false> = [];
     middleware.push(offset(this.offset));
+    middleware.push(flip());
 
     if (this.shift) {
-      middleware.push(shift());
+      middleware.push(shift({ padding: parseInt(DesignTokenHelper.size('s')) }));
     }
 
     if (this.autoPlacement) {
@@ -366,7 +370,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     );
   }
 
-  private attachDocumentClickEvent(): void {
+  private attachDocumentClickEventHandler(): void {
     if (this.documentClickEventListenerDisposeFn) {
       return;
     }
@@ -374,7 +378,19 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.documentClickEventListenerDisposeFn = this.renderer.listen(
       'document',
       'mousedown',
-      (event) => this.onDocumentClickWhileHostShown(event)
+      (event) => this.handleClickOutsideHostElement(event)
+    );
+  }
+
+  private attachHostClickEventHandler(): void {
+    if (this.hostClickEventListenerDisposeFn || !this.closeOnSelect) {
+      return;
+    }
+
+    this.hostClickEventListenerDisposeFn = this.renderer.listen(
+      this.elementRef.nativeElement,
+      'click',
+      () => this.handleClickInsideHostElement()
     );
   }
 
@@ -403,6 +419,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private handleClickOutsideHostElement(event: Event): void {
     if (event.target instanceof Node) {
+      const clickedOnHost: boolean = this.elementRef.nativeElement.contains(event.target);
+      if (clickedOnHost) return;
+
       const clickedOnReferenceWithClickTriggerEnabled: boolean =
         this.reference?.nativeElement.contains(event.target) && this.triggers.includes('click');
 
@@ -454,6 +473,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
     if (this.documentClickEventListenerDisposeFn) {
       this.documentClickEventListenerDisposeFn();
       this.documentClickEventListenerDisposeFn = null;
+    }
+
+    if (this.hostClickEventListenerDisposeFn) {
+      this.hostClickEventListenerDisposeFn();
+      this.hostClickEventListenerDisposeFn = null;
     }
   }
 

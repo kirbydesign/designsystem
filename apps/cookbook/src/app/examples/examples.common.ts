@@ -1,7 +1,6 @@
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
-import { AlertExperimentalExampleComponent } from './alert-experimental-example/alert-experimental-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
@@ -40,19 +39,24 @@ import { ReorderListExampleComponent } from './reorder-list-example/reorder-list
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
-import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
+import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
+import { TabExampleMenuComponent } from './tabs-example/tab/tab-example-menu.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
-import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
+import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
+import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
+import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -73,9 +77,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ActionSheetExampleComponent,
   CheckboxExampleComponent,
   AlertExampleComponent,
-  AlertExperimentalExampleComponent,
   ToastExampleComponent,
-  ToggleExampleComponent,
   EmptyStateExampleComponent,
   LoadingOverlayExampleComponent,
   LoadingOverlayServiceExampleComponent,
@@ -89,19 +91,24 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageFitHeadingExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
   HeaderWithActionGroupExampleComponent,
+  HeaderWithEmphasizedActionGroupExampleComponent,
+  HeaderWithCustomActionsExampleComponent,
+  HeaderWithInteractiveTitleExampleComponent,
   PageTabNavExampleComponent,
-  TabExampleComponent,
   PageFixedFooterTabsExampleComponent,
   PageFixedFooterTabExampleComponent,
   TabsExampleComponent,
   TabExampleComponent,
+  TabExampleMenuComponent,
   ItemExampleComponent,
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
   ProgressCircleExampleComponent,
   FlagExampleComponent,
-  SlidesExampleComponent,
+  SlidesSimpleExampleComponent,
+  SlidesHeightExampleComponent,
+  SlidesAdvancedExampleComponent,
   AccordionExampleComponent,
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,

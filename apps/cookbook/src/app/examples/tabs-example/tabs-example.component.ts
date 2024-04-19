@@ -5,10 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './tabs-example.component.html',
   styleUrls: ['./tabs-example.component.scss'],
 })
-export class TabsExampleComponent {
-  constructor() {}
-
-  openMenu() {
-    alert('Open menu');
-  }
-}
+export class TabsExampleComponent {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController as IonicModalController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -25,6 +25,7 @@ describe('ActionSheetHelper', () => {
   });
 
   beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
     spectator = createService();
     actionSheetHelper = spectator.service;
   });

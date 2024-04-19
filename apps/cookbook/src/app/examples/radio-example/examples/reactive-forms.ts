@@ -15,6 +15,7 @@ const config = {
     [checked]="canSelectFavorite"
     (checkedChange)="toggleEnabled($event)"
     text="Form field enabled"
+    size="xs"
   >
   </kirby-checkbox>
 
@@ -22,6 +23,7 @@ const config = {
     [checked]="favoriteRequired"
     (checkedChange)="toggleRequired($event)"
     text="Form field required"
+    size="xs"
   >
   </kirby-checkbox>
 
@@ -35,22 +37,7 @@ const config = {
     Clear form
   </button>
 
-  <section class="form-state">
-    <h4>Form state:</h4>
-    <p>
-      <strong>form.value:</strong> {{ form.value | json }}
-    </p>
-    <p>
-      <strong>form.favoriteFood: </strong>
-      <span [class.state-true]="favoriteFoodControl.valid">valid: {{ favoriteFoodControl.valid }}</span>
-      <span [class.state-true]="favoriteFoodControl.enabled">enabled: {{ favoriteFoodControl.enabled }}</span>
-      <span [class.state-true]="favoriteFoodControl.touched">touched: {{ favoriteFoodControl.touched }}</span>
-    </p>
-    <p>
-      <strong>form.favoriteFood.errors: </strong>
-      <span [class.state-true]="!favoriteFoodControl.errors">{{ favoriteFoodControl.errors | json }}</span>
-    </p>
-  </section>
+  <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
 </cookbook-example-configuration-wrapper>
     `,
   codeSnippet: `items = ${stringifyPretty(items)};
@@ -78,9 +65,8 @@ toggleRequired(required: boolean) {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./ng-forms.shared.scss'],
+  styleUrls: ['../../ng-forms.shared.scss'],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })
 export class RadioReactiveFormsExampleComponent implements OnInit {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];

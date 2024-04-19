@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -32,6 +33,13 @@ export class AccordionShowcaseComponent {
         'Optional title shown when isDisabled is true - if null then the title property will be used ',
       defaultValue: 'null',
       type: ['string'],
+    },
+  ];
+  events: ApiDescriptionEvent[] = [
+    {
+      name: 'toggle',
+      description: 'Emitted when the state of the accordion item has changed',
+      signature: 'EventEmitter<boolean>',
     },
   ];
 }

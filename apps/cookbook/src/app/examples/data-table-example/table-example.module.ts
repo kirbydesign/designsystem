@@ -5,8 +5,13 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { DataTableCardExampleComponent } from './examples/card';
 import { DataTableDefaultExampleComponent } from './examples/default';
+import { DataTableSortableExampleComponent } from './examples/sortable';
 
-const COMPONENT_DECLARATIONS = [DataTableCardExampleComponent, DataTableDefaultExampleComponent];
+const COMPONENT_DECLARATIONS = [
+  DataTableCardExampleComponent,
+  DataTableDefaultExampleComponent,
+  DataTableSortableExampleComponent,
+];
 
 @NgModule({
   imports: [CommonModule, KirbyModule],

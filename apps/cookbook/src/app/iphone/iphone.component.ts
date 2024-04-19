@@ -22,7 +22,7 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
   @HostBinding('class')
   @Input()
-  viewMode: 'phone' | 'full-size';
+  viewMode: 'device' | 'full-size';
 
   @Input() showViewModeToggle: boolean = false;
 
@@ -60,8 +60,8 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(src);
   }
 
-  onViewModeToggleChange(fullSize: boolean) {
-    this.viewMode = fullSize ? 'full-size' : 'phone';
+  onViewModeToggleChange(deviceMode: boolean) {
+    this.viewMode = deviceMode ? 'device' : 'full-size';
     this.onIframeLoaded();
   }
 }

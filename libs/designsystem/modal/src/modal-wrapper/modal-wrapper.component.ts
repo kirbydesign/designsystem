@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
+  ContentChild,
   ElementRef,
   HostBinding,
   HostListener,
@@ -14,13 +14,13 @@ import {
   QueryList,
   Renderer2,
   RendererStyleFlags2,
+  TemplateRef,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import { IonContent, IonHeader, IonicModule, IonTitle, IonToolbar } from '@ionic/angular';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, first, takeUntil } from 'rxjs/operators';
+import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -32,14 +32,36 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  ScrollDetail,
+} from '@ionic/angular/standalone';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
-import { ModalConfig } from './config/modal-config';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
+import { ModalConfig, ShowAlertCallback } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
 
+const contentScrollDebounceTimeInMS = 10;
+const contentScrolledOffsetInPixels = 4;
+
 @Component({
   standalone: true,
-  imports: [IonicModule, RouterModule, ButtonComponent, IconModule, CommonModule],
+  imports: [
+    RouterModule,
+    ButtonComponent,
+    IconModule,
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonContent,
+  ],
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
@@ -61,12 +83,21 @@ export class ModalWrapperComponent
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
 
-  set scrollDisabled(disabled: boolean) {
+  @Input() set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
 
+  set canDismiss(callback: ShowAlertCallback) {
+    this.ionModalElement.canDismiss = this.canDismissHelper.getCanDismissCallback(callback);
+  }
+
   @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
+
   componentPropsInjector: Injector;
+  modalWrapperInjector: Injector;
+
+  @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
 
   @ViewChildren(ButtonComponent, { read: ElementRef }) private toolbarButtonsQuery: QueryList<
     ElementRef<HTMLButtonElement>
@@ -119,8 +150,10 @@ export class ModalWrapperComponent
     }
     return this._intersectionObserver;
   }
-  private destroy$: Subject<void> = new Subject<void>();
+  scrollEventsEnabled: boolean;
+  isContentScrolled: boolean;
 
+  private destroy$: Subject<void> = new Subject<void>();
   @HostBinding('class.drawer')
   get _isDrawer() {
     return this.config.flavor === 'drawer';
@@ -137,9 +170,9 @@ export class ModalWrapperComponent
     private renderer: Renderer2,
     private zone: NgZone,
     private resizeObserverService: ResizeObserverService,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef,
-    private platform: PlatformService
+    private platform: PlatformService,
+    private canDismissHelper: CanDismissHelper
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
@@ -152,11 +185,23 @@ export class ModalWrapperComponent
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
+    this.listenForScroll();
     this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+
+    this.modalWrapperInjector = Injector.create({
+      providers: [{ provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent }],
+      parent: this.injector,
+    });
+  }
+
+  ngAfterViewInit(): void {
+    if (this.toolbarButtonsQuery) {
+      this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
+    }
   }
 
   private _currentFooter: HTMLElement | null = null;
@@ -247,7 +292,7 @@ export class ModalWrapperComponent
     if (this.config.modalRoute) {
       this.onSiblingModalRouteActivated(this.config.siblingModalRouteActivated$);
       // Load component from modal-route inside router-outlet:
-      this.routerOutlet.activateWith(this.config.modalRoute, this.componentFactoryResolver);
+      this.routerOutlet.activateWith(this.config.modalRoute);
     }
   }
 
@@ -257,7 +302,7 @@ export class ModalWrapperComponent
       if (this.routerOutlet.isActivated) {
         this.routerOutlet.deactivate();
       }
-      this.routerOutlet.activateWith(route, this.componentFactoryResolver);
+      this.routerOutlet.activateWith(route);
     });
   }
 
@@ -292,12 +337,6 @@ export class ModalWrapperComponent
     return this.ionModalElement.shadowRoot.querySelector('.modal-wrapper');
   }
 
-  ngAfterViewInit(): void {
-    if (this.toolbarButtonsQuery) {
-      this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
-    }
-  }
-
   private observeHeaderResize() {
     this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
@@ -321,6 +360,38 @@ export class ModalWrapperComponent
         this.ionModalWillDismiss.complete();
       });
     }
+  }
+
+  private listenForScroll() {
+    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
+    const mediaQuery = this.windowRef.nativeWindow.matchMedia(query);
+    const enableScrollEvents = (listOrEvent: MediaQueryList | MediaQueryListEvent) => {
+      const isDesktop = listOrEvent.matches;
+      this.scrollEventsEnabled = !isDesktop;
+    };
+
+    enableScrollEvents(mediaQuery);
+    mediaQuery.onchange = enableScrollEvents;
+
+    // Runs scroll subscription outside zone to avoid excessive amount of CD cycles
+    // when ionScroll emits.
+    this.zone.runOutsideAngular(() => {
+      // Always subscribe as ionScroll only emits when scrollEventsEnabled is true
+      this.ionContent.ionScroll
+        .pipe(
+          debounceTime(contentScrollDebounceTimeInMS),
+          map((event) => event.detail),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((scrollInfo: ScrollDetail) => {
+          const contentScrolledPastOffset = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
+
+          if (contentScrolledPastOffset !== this.isContentScrolled) {
+            this.isContentScrolled = contentScrolledPastOffset;
+            this.changeDetector.detectChanges();
+          }
+        });
+    });
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
@@ -500,7 +571,6 @@ export class ModalWrapperComponent
       }
     }
   }
-
   private createModalWrapperIntersectionObserver(): IntersectionObserver {
     const callback: IntersectionObserverCallback = (entries) => {
       const entry = entries[0];

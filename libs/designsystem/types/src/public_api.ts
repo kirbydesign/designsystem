@@ -1,1 +1,2 @@
-export { WindowRef } from './window-ref';
+export * from './window-ref';
+export * from './event-listener-dispose-fn';

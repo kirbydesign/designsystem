@@ -25,6 +25,15 @@
     <cookbook-range-pin-example #pinExample></cookbook-range-pin-example>
   </cookbook-example-viewer>
 
+  <p>
+    Additionally, the
+    <code>pinFormatter</code>
+    function can be supplied to customize the formatting of the range value shown to the user in the
+    pin. It defaults to the range slider's integer-value.
+  </p>
+  <cookbook-code-viewer [html]="pinExample.pinFormatterTemplate"></cookbook-code-viewer>
+  <cookbook-code-viewer [ts]="pinExample.pinFormatterFunction"></cookbook-code-viewer>
+
   <h2>Disabled</h2>
   <cookbook-example-viewer [html]="disabledFormExample.template">
     <cookbook-range-disabled-form-example

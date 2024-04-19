@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   portalOutletConfigExampleHTML,
   portalOutletConfigExampleTS,
@@ -33,7 +33,8 @@ export class MenuShowcaseComponent {
     },
     {
       name: 'triggers',
-      description: `Defines how the button should interact with the content. A value of 'click' will make the content appear/hide on click of the button`,
+      description:
+        'Defines how the button should interact with the content. A value of `click` will make the content appear/hide on click of the button',
       defaultValue: 'click',
       type: ['Array<TriggerEvent>'],
     },
@@ -53,8 +54,8 @@ export class MenuShowcaseComponent {
     {
       name: 'DOMPortalOutlet',
       description:
-        'HTMLElement for which the menu content should be placed under as a child. If no element is provided, the content will appear at its normal place in the DOM',
-      defaultValue: 'N/A',
+        "HTMLElement for which the menu content should be placed under as a child. By default the menu content is appended to `document.body`. If set to `null`, the content will appear at it's normal place in the DOM",
+      defaultValue: 'document.body',
       type: ['HTMLElement'],
     },
     {
@@ -66,8 +67,8 @@ export class MenuShowcaseComponent {
     },
     {
       name: 'closeOnSelect',
-      description: '"Toggle whether the menu should hide the content after selecting the content"',
-      defaultValue: 'false',
+      description: 'Toggle whether the menu should hide the content after selecting the content',
+      defaultValue: 'true',
       type: ['boolean'],
     },
     {

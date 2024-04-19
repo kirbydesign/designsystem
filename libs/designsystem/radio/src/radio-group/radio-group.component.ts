@@ -71,7 +71,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   @Input() set selectedIndex(value: number) {
     if (typeof value === 'string') value = parseInt(value); // Ensure data type number, e.g. when used with template syntax without binding: <... selectedIndex="1"
     // eslint-disable-next-line use-isnan
-    if (value === undefined || value === null || value === NaN) value = -1;
+    if (value === undefined || value === null || Number.isNaN(value)) value = -1;
     if (value === this.selectedIndex) return;
     this._selectedIndex = value;
     this._value = this.getValueFromSelectedIndex() || null;

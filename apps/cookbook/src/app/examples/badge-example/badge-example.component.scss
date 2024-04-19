@@ -21,6 +21,6 @@
 
   kirby-card {
     width: 100%;
-    max-width: map.get(utils.$breakpoints, 'small');
+    max-width: map.get(utils.$breakpoints, 'xsmall');
   }
 }

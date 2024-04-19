@@ -6,8 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./component-display.component.scss'],
 })
 export class ComponentDisplayComponent {
-  constructor() {}
-
   @Input() title: string;
   @Input() paragraph: string;
   @Input() svgPath: string;

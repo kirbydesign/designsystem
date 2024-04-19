@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular';
+import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -34,6 +35,7 @@ describe('DropdownComponent', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
+      imports: [ItemModule],
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
@@ -1140,6 +1142,45 @@ describe('DropdownComponent', () => {
         expect(spectator.component['itemClickUnlisten']).toHaveLength(0);
         expect(unlistenCounter).toEqual(unlistenMockArrayLength);
       });
+    });
+  });
+
+  describe('when configured with expand=block and usePopover=true', () => {
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      imports: [ItemModule],
+      declarations: [
+        ItemComponent,
+        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
+      ],
+    });
+
+    let spectator: SpectatorHost<DropdownComponent>;
+
+    beforeEach(() => {
+      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
+        props: {
+          items: items,
+          expand: 'block',
+          usePopover: true,
+        },
+      });
+    });
+
+    it('should update popover card size when resized', async () => {
+      const initWidth = spectator.element.clientWidth;
+      const popoverCard = spectator.element.querySelector<HTMLElement>('kirby-card');
+      const initCardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
+      expect(initCardWidth).toEqual(`${initWidth}px`);
+
+      const newWidth = '200px';
+      (spectator.hostElement as HTMLElement).style.width = newWidth;
+      await TestHelper.waitForResizeObserver();
+      // Resize observe callback can be flaky in test, so ensure width has changed before asserting:
+      await TestHelper.whenTrue(() => spectator.element.clientWidth !== initWidth);
+
+      const cardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
+      expect(cardWidth).toEqual(newWidth);
     });
   });
 });

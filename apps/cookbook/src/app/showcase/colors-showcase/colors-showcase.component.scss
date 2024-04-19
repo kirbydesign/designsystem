@@ -1,14 +1,14 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 @each $color-name, $color-value in utils.get-all-colors() {
-  .#{$color-name} {
+  .color-sample.#{$color-name} {
     background-color: utils.get-color($color-name);
     color: utils.get-color($color-name + '-contrast');
   }
-  .#{$color-name}-tint {
+  .color-sample.#{$color-name}-tint {
     background-color: utils.get-color($color-name + '-tint');
   }
-  .#{$color-name}-shade {
+  .color-sample.#{$color-name}-shade {
     background-color: utils.get-color($color-name + '-shade');
   }
 }
@@ -24,6 +24,26 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+
+  @each $color-name, $color-value in utils.$text-colors {
+    &.#{$color-name} {
+      background-color: utils.get-text-color(
+        $color-name + '-contrast',
+        true,
+        utils.$kirby-text-colors
+      );
+      color: utils.get-text-color($color-name);
+
+      .color-values {
+        color: inherit;
+
+        dt:first-of-type,
+        dd:first-of-type {
+          color: inherit;
+        }
+      }
+    }
+  }
 }
 
 .color-samples {
@@ -34,39 +54,32 @@
   margin-right: utils.size('xl');
   margin-bottom: utils.size('xl');
   flex: 1 0 auto;
-}
 
-.text-color-samples {
-  @extend .color-samples;
+  .color-sample {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+    height: 100%;
+    width: 100%;
+    margin-top: auto;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
 
-  margin-right: utils.size('s');
-  margin-bottom: 0;
-}
+    &:nth-child(2) {
+      top: utils.size('xxs');
+      left: utils.size('xxs');
+      z-index: 2;
+    }
 
-.color-sample {
-  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-  height: 100%;
-  width: 100%;
-  margin-top: auto;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 3;
-
-  &:nth-child(2) {
-    top: utils.size('xxs');
-    left: utils.size('xxs');
-    z-index: 2;
-  }
-
-  &:nth-child(3) {
-    top: utils.size('s');
-    left: utils.size('s');
-    z-index: 1;
+    &:nth-child(3) {
+      top: utils.size('s');
+      left: utils.size('s');
+      z-index: 1;
+    }
   }
 }
 
@@ -163,4 +176,92 @@
   padding: utils.size('s');
   overflow-x: auto;
   margin-bottom: utils.size('s');
+}
+
+@each $color, $color-ramp in utils.$decoration-colors {
+  @each $shade, $color-value in $color-ramp {
+    .#{$color}-#{$shade} {
+      background-color: var(--kirby-decoration-color-#{$color}-#{$shade});
+    }
+  }
+}
+
+.color-palette-ramps {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: utils.size('m');
+  margin-bottom: utils.size('xl');
+
+  .color-box {
+    padding: utils.size('s');
+    grid-column-start: 1;
+  }
+
+  dl {
+    display: grid;
+    justify-items: center;
+    gap: utils.size('xxs');
+
+    dd {
+      grid-row: 1;
+      text-wrap: nowrap;
+      margin-inline-start: 0;
+      font-size: utils.font-size('xs');
+    }
+
+    dt {
+      min-height: 2.5rem;
+      min-width: 2.5rem;
+      border-radius: utils.size('xxxs');
+      position: relative;
+      transition: transform utils.get-transition-duration('quick');
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(120%);
+      }
+
+      &::before {
+        display: block;
+        position: absolute;
+        content: 'Copied!';
+        background-color: utils.get-color('semi-light');
+        color: utils.get-color('semi-dark-contrast');
+        font-size: utils.font-size('xxs');
+        padding: utils.size('xxxxs') utils.size('xxxs');
+        border-radius: utils.size('xxxs');
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+
+      &.copied::before {
+        opacity: 1;
+        animation-name: slide-in-out;
+        animation-duration: 1.5s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+@keyframes slide-in-out {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(-125%);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translateY(-125%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
 }

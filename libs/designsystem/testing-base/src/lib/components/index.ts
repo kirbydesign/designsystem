@@ -2,9 +2,9 @@
 
 export { MockAccordionItemComponent } from './mock.accordion-item.component';
 export { MockActionGroupComponent } from './mock.action-group.component';
-export { MockAlertExperimentalComponent } from './mock.alert-experimental.component';
 export { MockAvatarComponent } from './mock.avatar.component';
 export { MockButtonComponent } from './mock.button.component';
+export { MockBadgeComponent } from './mock.badge.component';
 export { MockCalendarComponent } from './mock.calendar.component';
 export { MockCardFooterComponent } from './mock.card-footer.component';
 export { MockCardHeaderComponent } from './mock.card-header.component';
@@ -25,7 +25,6 @@ export { MockFormFieldComponent } from './mock.form-field.component';
 export { MockInputComponent } from './mock.input.component';
 export { MockInputCounterComponent } from './mock.input-counter.component';
 export { MockTextareaComponent } from './mock.textarea.component';
-export { MockGridComponent } from './mock.grid.component';
 export {
   MockHeaderActionsDirective,
   MockHeaderCustomSectionDirective,
@@ -81,7 +80,6 @@ export { MockSlideButtonComponent } from './mock.slide-button.component';
 export { MockSpinnerComponent } from './mock.spinner.component';
 export { MockPageLocalNavigationComponent } from './mock.page-local-navigation.component';
 export { MockSegmentedControlComponent } from './mock.segmented-control.component';
-export { MockBadgeComponent } from './mock.web-component-proxies.component';
 export { MockTabNavigationComponent } from './mock.tab-navigation.component';
 export { MockTabNavigationItemComponent } from './mock.tab-navigation-item.component';
 export { MockTabButtonComponent } from './mock.tab-button.component';

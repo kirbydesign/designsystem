@@ -1,0 +1,5 @@
+<ion-badge>
+  <span *ngIf="size === 'sm'"></span>
+  <ng-content *ngIf="!text && size === 'md'"></ng-content>
+  <ng-container *ngIf="text && size === 'md'">{{ text }}</ng-container>
+</ion-badge>

@@ -6,15 +6,16 @@
 */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular';
+import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
 
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { TestHelper } from 'testing/src';
 import { DropdownComponent } from './dropdown.component';
 
 @Component({
@@ -44,6 +45,7 @@ describe('DropdownComponent + PopoverComponent', () => {
   describe('with default change detection strategy', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
+      imports: [TestHelper.ionicModuleForTest, ItemModule],
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem),
@@ -141,6 +143,8 @@ describe('DropdownComponent + PopoverComponent', () => {
   describe("with 'OnPush' change detection strategy", () => {
     const createOnPushHost = createHostFactory({
       component: DropdownComponent,
+      imports: [TestHelper.ionicModuleForTest, ItemModule],
+
       declarations: [
         PopoverComponent,
         MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),

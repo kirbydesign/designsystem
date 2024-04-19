@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
+import exampleHtml from '../../examples/reorder-list-example/reorder-list-example.component.html?raw';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import exampleHtml from '../../examples/reorder-list-example/reorder-list-example.component.html?raw';
 
 @Component({
   selector: 'cookbook-reorder-showcase',

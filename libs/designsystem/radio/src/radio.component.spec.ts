@@ -4,6 +4,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
+import { IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
 import { RadioComponent } from './radio.component';
 
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
@@ -14,7 +15,7 @@ const size = DesignTokenHelper.size;
 describe('RadioComponent', () => {
   const createComponent = createComponentFactory({
     component: RadioComponent,
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, IonRadio, IonRadioGroup],
   });
 
   let spectator: Spectator<RadioComponent>;
@@ -149,7 +150,7 @@ describe('RadioComponent', () => {
           expect(radioIcon).toHaveComputedStyle({
             'background-color': getColor('white'),
             'border-width': '0px',
-            'box-shadow': getElevation(2),
+            'box-shadow': getElevation(4),
           });
         });
 
@@ -231,11 +232,6 @@ describe('RadioComponent', () => {
     const radioPadding = size('xxxxs');
     const radioIconInnerSize = `${parseInt(radioIconOuterSize) - parseInt(radioPadding) * 2}px`;
 
-    expect(ionRadioElement).toHaveComputedStyle({
-      width: radioIconOuterSize,
-      height: radioIconOuterSize,
-      padding: radioPadding,
-    });
     expect(radioIcon).toHaveComputedStyle({
       width: radioIconInnerSize,
       height: radioIconInnerSize,

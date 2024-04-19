@@ -3,7 +3,7 @@ import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { KirbyBadge } from 'src/lib/components/web-component-proxies.component';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { TabNavigationItemComponent } from './tab-navigation-item.component';
 
 describe('TabNavigationItemComponent', () => {
@@ -12,7 +12,7 @@ describe('TabNavigationItemComponent', () => {
 
   const createHost = createHostFactory({
     component: TabNavigationItemComponent,
-    declarations: [TabNavigationItemComponent, MockComponents(KirbyBadge, IconComponent)],
+    declarations: [TabNavigationItemComponent, MockComponents(BadgeComponent, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 

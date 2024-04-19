@@ -1,0 +1,100 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+$bullet-width: 10px;
+$bullet-height: 6px;
+$bullet-border-radius: 3px;
+$bullet-inactive-opacity: 0.2;
+
+:host {
+  --swiper-navigation-sides-offset: 0;
+  --swiper-pagination-bullet-width: #{$bullet-width};
+  --swiper-pagination-bullet-height: #{$bullet-height};
+  --swiper-pagination-bullet-border-radius: #{$bullet-border-radius};
+  --swiper-pagination-bullet-horizontal-gap: #{utils.size('xxxs')};
+  --swiper-pagination-color: #{utils.get-color('black')};
+  --swiper-pagination-bullet-inactive-color: #{utils.get-color('black')};
+  --swiper-pagination-bullet-inactive-opacity: #{$bullet-inactive-opacity};
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block: 0 utils.size('s');
+    margin-inline: utils.size('s');
+
+    &-inner {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    width: auto;
+    margin-inline-end: utils.size('s');
+
+    // we need to use ::ng-deep as the pagination bullet spans are added to the dom by swiperjs:
+    /* stylelint-disable selector-pseudo-element-no-unknown */
+    ::ng-deep .swiper-pagination-bullet:last-of-type {
+      margin-inline-end: 0;
+    }
+  }
+
+  .buttons {
+    display: none;
+
+    // Adding one to default to make buttons clickable through box shadow.
+    z-index: utils.z('default') + 1;
+
+    @include utils.media('>=medium') {
+      display: block;
+    }
+
+    .swiper-button-prev {
+      margin-block: 0;
+      margin-inline-start: 0;
+    }
+
+    .swiper-button-next {
+      margin-block: 0;
+      margin-inline-end: 0;
+    }
+
+    @include utils.slotted('button[kirby-button]') {
+      margin-inline: utils.size('xxs') 0;
+    }
+  }
+
+  // Hides the navigation buttons if the Slider
+  // doesn't contain enough slides for swiping.
+  .swiper-button-lock {
+    display: none;
+  }
+
+  swiper-container {
+    padding-block: utils.size('m');
+    margin-block: -(utils.size('m'));
+  }
+
+  @include utils.media('<medium') {
+    swiper-container {
+      padding-inline: utils.size('s');
+      margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+    }
+
+    .navigation,
+    .pagination {
+      margin-inline-end: 0;
+    }
+  }
+
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    opacity: 1;
+  }
+
+  swiper-slide:has([slideStretchHeight]) {
+    height: auto;
+  }
+}

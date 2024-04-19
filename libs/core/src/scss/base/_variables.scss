@@ -5,6 +5,7 @@
   SPACINGS
 ****************************************************************************/
 $sizes: (
+  xxxxxl: 72px,
   xxxxl: 64px,
   xxxl: 56px,
   xxl: 48px,
@@ -74,7 +75,7 @@ $z-layers: (
   default: 1,
   segment-badge: 2,
   avatar-badge: 2,
-  sticky-content: 2,
+  sticky-content: 10,
   dropdown: 800,
   popover: 850,
   modal-overlay: 900,
@@ -87,19 +88,12 @@ $border-radius-round: 999px !default;
 /* Breakpoints
 ****************************************************************************/
 $breakpoints: (
-  small: 321px,
-  medium: 721px,
-  large: 1025px,
-  xlarge: 60em,
-  xxlarge: 80em,
+  xsmall: 320px,
+  small: 632px,
+  medium: 768px,
+  large: 992px,
+  xlarge: 1440px,
 ) !default;
-$breakpoint-map: (
-  'xs': 0,
-  'sm': 632px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-);
 
 /* Elevation
 ****************************************************************************/
@@ -108,6 +102,10 @@ $elevations: (
     0 1px 24px 0 rgb(28 28 28 / 4%),
   ),
   4: (
+    0 0 5px 0 rgba(28 28 28 / 4%),
+    0 10px 15px -10px rgba(28 28 28 / 15%),
+  ),
+  8: (
     0 20px 30px -15px rgb(28 28 28 / 30%),
     0 0 5px 0 rgb(28 28 28 / 8%),
   ),
@@ -125,7 +123,13 @@ $avatar-badge-size: 16px;
 
 /* Page
 ****************************************************************************/
-$page-content-max-width: 720px;
+$page-content-max-widths: (
+  default: 792px,
+  optimized: 1092px,
+  full: 100%,
+);
+$page-content-max-width-default: map.get($page-content-max-widths, 'default');
+$page-content-max-width: $page-content-max-width-default;
 
 /* Modal
 ****************************************************************************/
@@ -183,6 +187,26 @@ $checkbox-radio-sizes: (
 $checkbox-radio-spacing: (
   'to-edge': map.get($sizes, 's'),
   'to-label': map.get($sizes, 'xs'),
+);
+
+/* Checkbox - size
+****************************************************************************/
+$checkbox-sizes: (
+  'xs': (
+    icon-size: map.get($sizes, 's'),
+    line-height: map.get($sizes, 'm'),
+    vertical-padding: 4px,
+  ),
+  'sm': (
+    icon-size: map.get($sizes, 'm'),
+    line-height: map.get($checkbox-radio-sizes, 'sm'),
+    vertical-padding: 10px,
+  ),
+  'md': (
+    icon-size: map.get($sizes, 'm'),
+    line-height: map.get($checkbox-radio-sizes, 'md'),
+    vertical-padding: 16px,
+  ),
 );
 
 /* Transitions

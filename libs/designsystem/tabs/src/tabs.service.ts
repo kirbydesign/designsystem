@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IonRouterOutlet } from '@ionic/angular';
+import { IonRouterOutlet } from '@ionic/angular/standalone';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({

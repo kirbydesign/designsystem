@@ -22,6 +22,9 @@
       [size]="size"
     ></cookbook-form-field-input-numeric-example>
     <cookbook-form-field-input-date-example [size]="size"></cookbook-form-field-input-date-example>
+    <cookbook-form-field-input-date-native-example
+      [size]="size"
+    ></cookbook-form-field-input-date-native-example>
     <cookbook-form-field-input-disabled-example
       [size]="size"
     ></cookbook-form-field-input-disabled-example>
@@ -38,11 +41,12 @@
     <cookbook-form-field-textarea-label-example></cookbook-form-field-textarea-label-example>
     <cookbook-form-field-textarea-counter-example></cookbook-form-field-textarea-counter-example>
 
-    <cookbook-example-configuration-wrapper [snapToViewport]="true" style="--header-height: 44px">
+    <cookbook-example-configuration-wrapper configAppearance="toggle">
       <kirby-checkbox
         [checked]="showDummyKeyboard"
         (checkedChange)="toggleDummyKeyboard($event)"
         text="Show dummy keyboard"
+        size="xs"
       ></kirby-checkbox>
     </cookbook-example-configuration-wrapper>
   </kirby-page-content>

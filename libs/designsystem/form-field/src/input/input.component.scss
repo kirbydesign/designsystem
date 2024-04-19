@@ -5,16 +5,24 @@
 $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 
 :host {
-  @include interaction-state.apply-hover {
-    background-color: var(--kirby-inputs-background-color-hover);
-    cursor: text;
-  }
-  @include interaction-state.apply-active {
-    background-color: var(--kirby-inputs-background-color-active);
+  &:not(:disabled) {
+    @include interaction-state.apply-hover {
+      background-color: var(--kirby-inputs-background-color-hover);
+      cursor: text;
+    }
+
+    @include interaction-state.apply-active {
+      background-color: var(--kirby-inputs-background-color-active);
+    }
+
+    transition: interaction-state.transition();
+    transition-property: background-color;
   }
 
-  transition: interaction-state.transition();
-  transition-property: background-color;
+  // Background color needs to be synchronized with form-field.component
+  &[type='date'] {
+    background-color: var(--date-input-background-color);
+  }
 
   &[type='number'] {
     // fallback
@@ -32,6 +40,12 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 :host(.md) {
   border-radius: utils.size('m');
   padding-block: $padding-block-size-md;
+
+  &.error {
+    padding-block: calc(
+      #{$padding-block-size-md} - 1px
+    ); // subtract border width from padding to maintain overall height
+  }
 }
 
 /* clean-css ignore:start */

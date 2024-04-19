@@ -47,11 +47,9 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Run linting
-        run: npm run lint
+        run: npx nx run-many -t lint && npx stylelint '**/*.scss'
       - name: Run tests
-        run: npm run test:ci
-      - name: Generate coverage report
-        run: npm run coverage-report || true
+        run: npx nx run-many -t test --output-style=stream -- --browsers=ChromeCustom --progress false --watch false --code-coverage
 
   build_kirby:
     name: Build Kirby lib
@@ -66,7 +64,7 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby lib
-        run: npm run dist:designsystem
+        run: npx nx build designsystem
 
   build_kirby_cookbook:
     name: Build Kirby Cookbook
@@ -81,7 +79,7 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby Cookbook
-        run: npm run dist:cookbook
+        run: npx nx build cookbook --configuration=production
       - name: Upload Kirby Cookbook dist files
         uses: actions/cache@v2
         with:
@@ -126,8 +124,8 @@ jobs:
       - name: Get hostname for default or feature branch
         if: "github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/v')"
         run: |
-          chmod +x ./.scripts/dns.pl
-          hostname=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
+          chmod +x ./scripts/dns.pl
+          hostname=$(perl ./scripts/dns.pl $DOMAIN "${RELEASENAME}")
           echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
       - name: Get hostname for release branch
         if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"

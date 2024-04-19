@@ -22,6 +22,7 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { AffixDirective } from './directives/affix/affix.directive';
+import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 
@@ -40,10 +41,13 @@ export class FormFieldComponent
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
+
+  showDefaultCalendarIcon = false;
+
   _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
 
   @Input() label: string;
-  @Input() message: string;
+  @Input() message: string | null;
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
@@ -53,6 +57,8 @@ export class FormFieldComponent
 
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
+
+  @ContentChild(DateInputDirective) dateInput: DateInputDirective;
 
   constructor(
     elementRef: ElementRef<HTMLElement>,
@@ -91,16 +97,22 @@ export class FormFieldComponent
   public focus() {
     if (!this.inputElement) return;
 
-    if (this.isTouch) {
-      // Trigger Ionic's input shims to ensure input is scrolled into view.
-      // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
-      const touchStart = new TouchEvent('touchstart');
-      const touchEnd = new TouchEvent('touchend');
-      this.inputElement.dispatchEvent(touchStart);
-      this.inputElement.dispatchEvent(touchEnd);
-    } else {
-      this.inputElement.focus();
-    }
+    /*
+     * This timeout ensures that any previous manipulation of inputElement
+     * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
+     */
+    setTimeout(() => {
+      if (this.isTouch) {
+        // Trigger Ionic's input shims to ensure input is scrolled into view.
+        // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
+        const touchStart = new TouchEvent('touchstart');
+        const touchEnd = new TouchEvent('touchend');
+        this.inputElement.dispatchEvent(touchStart);
+        this.inputElement.dispatchEvent(touchEnd);
+      } else {
+        this.inputElement.focus();
+      }
+    });
   }
 
   ngOnInit() {
@@ -123,7 +135,7 @@ export class FormFieldComponent
       this.affixElements.forEach((affix) => {
         this.resizeObserverService.observe(affix.el, (entry) => {
           const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
-          const affixWidth = entry.contentRect.width;
+          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
           const existingPadding = parseInt(DesignTokenHelper.size('s'));
 
           this.renderer.setStyle(
@@ -153,6 +165,16 @@ export class FormFieldComponent
       this.isRegistered = true;
       this.dispatchLoadEvent();
     }
+
+    // Decide if default calendar icon for date input should be shown
+    this.showDefaultCalendarIcon = this.shouldShowDefaultCalendarIcon();
+  }
+
+  private shouldShowDefaultCalendarIcon() {
+    return (
+      this.dateInput?.useNativeDatePicker &&
+      !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
+    );
   }
 
   ngOnDestroy(): void {

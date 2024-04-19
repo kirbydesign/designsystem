@@ -4,6 +4,7 @@
   (checkedChange)="toggleDummyKeyboard($event)"
   [disabled]="interactWithBackground || disabled"
   text="Show dummy keyboard"
+  size="xs"
 ></kirby-checkbox>
 
 <kirby-checkbox
@@ -12,6 +13,7 @@
   (checkedChange)="toggleShowPageProgress($event)"
   [disabled]="interactWithBackground || disabled"
   text="Show page progress"
+  size="xs"
 ></kirby-checkbox>
 
 <kirby-checkbox
@@ -20,6 +22,7 @@
   (checkedChange)="toggleShowFooter($event)"
   [disabled]="interactWithBackground || disabled"
   text="Show footer"
+  size="xs"
 ></kirby-checkbox>
 
 <kirby-checkbox
@@ -28,6 +31,17 @@
   (checkedChange)="toggleDisplayFooterAsInline($event)"
   [disabled]="disabled || !showFooter"
   text="Display footer as inline"
+  size="xs"
+  class="indent"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="snapFooterToKeyboard !== undefined"
+  [checked]="snapFooterToKeyboard"
+  (checkedChange)="toggleSnapFooterToKeyboard($event)"
+  [disabled]="disabled || !showFooter"
+  text="Snap footer to keyboard"
+  size="xs"
   class="indent"
 ></kirby-checkbox>
 
@@ -37,6 +51,7 @@
   (checkedChange)="toggleDisableScroll($event)"
   [disabled]="disabled"
   text="Disable scroll"
+  size="xs"
 ></kirby-checkbox>
 
 <kirby-checkbox
@@ -45,6 +60,7 @@
   (checkedChange)="toggleShowDummyContent($event)"
   [disabled]="interactWithBackground || disabled"
   text="Show dummy content"
+  size="xs"
 ></kirby-checkbox>
 
 <kirby-checkbox
@@ -52,8 +68,9 @@
   [checked]="delayLoadDummyContent && !interactWithBackground"
   (checkedChange)="toggleDelayLoadDummyContent($event)"
   [disabled]="!showDummyContent || interactWithBackground || disabled"
-  class="indent"
   text="Delay load modal"
+  size="xs"
+  class="indent"
 ></kirby-checkbox>
 
 <kirby-checkbox
@@ -61,36 +78,28 @@
   [checked]="loadAdditionalContent && !interactWithBackground"
   (checkedChange)="toggleLoadAdditionalContent($event)"
   [disabled]="!showDummyContent || interactWithBackground || disabled"
-  class="indent"
   text="Delay load additional"
+  size="xs"
+  class="indent"
 ></kirby-checkbox>
 
 <kirby-checkbox
-  *ngIf="openFullHeight !== undefined"
-  [checked]="openFullHeight && !interactWithBackground"
-  (checkedChange)="toggleOpenFullHeight($event)"
-  [disabled]="interactWithBackground || disabled"
-  text="Open in full height"
-></kirby-checkbox>
-
-<kirby-checkbox
+  *ngIf="collapseTitle !== undefined"
   [checked]="collapseTitle"
   (checkedChange)="toggleCollapseTitle($event)"
   [disabled]="disabled"
   text="Collapse title"
+  size="xs"
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="alertBeforeClose !== undefined"
   [checked]="alertBeforeClose"
   (checkedChange)="toggleAlertBeforeClose($event)"
   [disabled]="disabled"
   text="Alert before closing"
+  size="xs"
 ></kirby-checkbox>
-<small>
-  (Collapse title is unavailable for routed modals. See
-  <a href="https://github.com/kirbydesign/designsystem/issues/2192" target="_blank">issue #2192</a>
-  .)
-</small>
 
 <ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
   <kirby-divider [hasMargin]="true"></kirby-divider>
@@ -101,6 +110,7 @@
     (checkedChange)="toggleInteractWithBackground($event)"
     [disabled]="disabled"
     text="Interact with background (drawer only)"
+    size="xs"
   ></kirby-checkbox>
 
   <kirby-checkbox
@@ -109,5 +119,6 @@
     (checkedChange)="toggleCustomCssClass($event)"
     [disabled]="disabled"
     text="Add custom CSS class"
+    size="xs"
   ></kirby-checkbox>
 </ng-container>

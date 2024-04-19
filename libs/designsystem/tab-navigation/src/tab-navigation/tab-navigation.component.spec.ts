@@ -3,7 +3,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { KirbyBadge } from 'src/lib/components/web-component-proxies.component';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
 import { TabNavigationComponent } from './tab-navigation.component';
@@ -15,7 +15,7 @@ describe('TabNavigationComponent', () => {
 
   const createHost = createHostFactory({
     component: TabNavigationComponent,
-    declarations: [TabNavigationItemComponent, MockComponents(KirbyBadge, IconComponent)],
+    declarations: [TabNavigationItemComponent, MockComponents(BadgeComponent, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 
@@ -90,6 +90,14 @@ describe('TabNavigationComponent', () => {
 
     expect(component.selectedIndexChange.emit).toHaveBeenCalledWith(selectIndex);
   }));
+
+  it('should not emit selectedIndexChange if index is -1', () => {
+    spyOn(component.selectedIndexChange, 'emit');
+
+    component.selectedIndex = -1;
+
+    expect(component.selectedIndexChange.emit).not.toHaveBeenCalled();
+  });
 
   it('should set tabindex correctly on pressing arrow-right', fakeAsync(() => {
     const selectIndex = 1;

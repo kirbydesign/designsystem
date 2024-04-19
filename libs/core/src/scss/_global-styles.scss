@@ -6,9 +6,43 @@
 @use 'base/line-clamp';
 @use 'base/link';
 @use 'base/html-list';
+@use 'base/html-table';
 
 @use 'components/grid';
 @use 'themes/component-themes';
+
+/*
+ * Modal variables
+ *
+ * height & width variables are kept local here until we have determined the exact values  
+ * and can migrate them to heights/widths in _variables.scss, as a breaking change 
+ * to either the existing modal heights or the modal-v2 maps.
+ */
+
+$modal-widths: (
+  s: 480px,
+  m: 636px,
+  l: 888px,
+);
+$modal-heights: (
+  s: 540px,
+  m: 565px,
+  l: 754px,
+);
+$modal-border-radius: utils.size('l');
+$modal-gutter: #{utils.size('xxl')};
+$modal-header-height: 88px;
+$modal-expected-footer-height: 88px;
+$modal-min-content-height: 88px;
+$modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-height +
+  $modal-min-content-height;
+
+@mixin bottom-drawer() {
+  --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
+  --min-height: #{utils.$drawer-default-height};
+
+  align-items: flex-end;
+}
 
 :root,
 :host {
@@ -22,6 +56,11 @@
   }
   @each $color, $color-name in utils.$text-colors {
     --kirby-text-color-#{$color}: #{$color-name};
+  }
+  @each $color, $color-ramp in utils.$decoration-colors {
+    @each $shade, $color-value in $color-ramp {
+      --kirby-decoration-color-#{$color}-#{$shade}: #{$color-value};
+    }
   }
 
   --kirby-page-max-width: 1366px;
@@ -58,43 +97,42 @@ ion-modal.kirby-overlay {
   position: fixed;
 
   &.kirby-modal {
+    --border-radius: 0;
+    --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+    --height: auto;
+    --box-shadow: #{utils.get-elevation(8)};
+
     box-sizing: border-box;
 
-    --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
-    --border-radius: 0;
-    --height: auto;
-    --box-shadow: #{utils.get-elevation(4)};
-
     &.kirby-modal-compact {
-      --border-radius: #{utils.$border-radius};
       --max-width: #{utils.$compact-modal-max-width};
+      --border-radius: #{$modal-border-radius};
 
       text-align: center;
     }
 
     &.kirby-drawer {
-      --min-height: #{utils.$drawer-default-height};
-      --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
-      --border-radius: #{utils.$border-radius} #{utils.$border-radius} 0px 0px;
+      @include utils.media('<medium') {
+        @include bottom-drawer;
 
-      padding-top: var(--kirby-modal-padding-top);
-      align-items: flex-end;
+        --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
+      }
 
       &.interact-with-background {
         &.kirby-modal.kirby-drawer {
+          @include bottom-drawer;
+
           --kirby-modal-padding-top: 0;
         }
       }
+
+      padding-top: var(--kirby-modal-padding-top);
     }
 
     @include utils.media('<medium') {
-      &:not(.kirby-drawer):not(.kirby-modal-compact) {
+      &:not(.kirby-drawer, .kirby-modal-compact) {
         --height: 100%;
       }
-    }
-
-    &:not(.kirby-modal-compact).kirby-modal-full-height {
-      --height: 100%;
     }
 
     &.modal-card:not(.kirby-drawer) {
@@ -103,46 +141,33 @@ ion-modal.kirby-overlay {
       }
     }
 
-    @include utils.media('>=medium') {
-      --width: #{utils.$modal-max-width};
-      --border-radius: #{utils.$border-radius};
+    &:not(.kirby-modal-compact) {
+      @include utils.media('>=medium') {
+        --modal-gutter: #{$modal-gutter};
+        --border-radius: #{$modal-border-radius};
+        --min-height: #{$modal-large-screen-min-height};
+        --max-height: calc(100vh - var(--modal-gutter) * 2);
+        --max-width: calc(100vw - var(--modal-gutter) * 2);
 
-      &:not(.kirby-modal-compact) {
-        --max-height: 100%;
-        --kirby-modal-padding-top-base: #{utils.size('xl')};
-        --kirby-modal-padding-top: var(--kirby-modal-padding-top-base);
-
-        padding-top: var(--kirby-modal-padding-top);
-
-        &:not(.kirby-drawer) {
-          --min-height: #{utils.$modal-default-height};
-
-          align-items: flex-start;
-
-          &.kirby-modal-small {
-            --min-height: #{map.get(utils.$modal-heights, 's')};
-          }
-
-          &.kirby-modal-medium {
-            --min-height: #{map.get(utils.$modal-heights, 'm')};
-          }
-
-          &.kirby-modal-large {
-            --min-height: #{map.get(utils.$modal-heights, 'l')};
-          }
-
-          &.kirby-modal-full-height::part(content),
-          &.full-height::part(content) {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-          }
+        &.kirby-modal-full-height {
+          --width: #{map.get($modal-widths, 'm')};
+          --height: var(--max-height);
         }
-      }
 
-      &.kirby-drawer {
-        --kirby-modal-padding-top: calc(
-          var(--kirby-modal-padding-top-base) + #{get-drawer-additional-padding-top()}
-        );
+        &.kirby-modal-small {
+          --width: #{map.get($modal-widths, 's')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 's')});
+        }
+
+        &.kirby-modal-medium {
+          --width: #{map.get($modal-widths, 'm')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 'm')});
+        }
+
+        &.kirby-modal-large {
+          --width: #{map.get($modal-widths, 'l')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 'l')});
+        }
       }
     }
   }
@@ -161,7 +186,7 @@ ion-modal.kirby-overlay {
   &.kirby-alert {
     --background: #{utils.get-color('background-color')};
     --border-radius: #{utils.$border-radius};
-    --box-shadow: #{utils.get-elevation(4)};
+    --box-shadow: #{utils.get-elevation(8)};
     --max-width: #{utils.$alert-max-width};
     --height: auto;
   }
@@ -189,16 +214,26 @@ ion-loading.kirby-loading-overlay {
   user-select: none;
   text-align: center;
 
-  // Set default colors
-  --background: #{utils.get-color('success')};
-  --color: #{utils.get-color('success-contrast')};
-  --button-color: #{utils.get-color('success-contrast')};
+  $_toast-notification-colors-map: (
+    'success': (
+      'green',
+      40,
+    ),
+    'warning': (
+      'yellow',
+      40,
+    ),
+  );
 
-  @each $color-name, $color-value in utils.$notification-colors {
-    &.#{$color-name} {
-      --background: #{utils.get-color($color-name)};
-      --color: #{utils.get-color($color-name + '-contrast')};
-      --button-color: #{utils.get-color($color-name + '-contrast')};
+  // Set default colors
+
+  --background: #{utils.get-decoration-color(map.get($_toast-notification-colors-map, 'success') ...)};
+  --color: #{utils.get-color('black')};
+  --button-color: var(--color);
+
+  @each $name, $variant_shade in $_toast-notification-colors-map {
+    &.#{$name} {
+      --background: #{utils.get-decoration-color($variant_shade...)};
     }
   }
 }
@@ -220,27 +255,10 @@ ion-loading.kirby-loading-overlay {
 }
 
 /*
- * Class to add link-icon to the right of e.g. anchor tag.
- */
-.kirby-external-icon {
-  $icon-scaling-factor: 1.5em;
-
-  white-space: nowrap;
-  background-image: url('/assets/kirby/icons/svg/link.svg');
-  background-repeat: no-repeat;
-  background-position: right 50%;
-  background-size: $icon-scaling-factor;
-
-  // Place icon to the right of text, with icons own width + the actual spacing
-  padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
-}
-
-/*
  * Modal V2.
  */
 $modal-max-height-desktop: 928px;
 $modal-max-width-desktop: 594px;
-$modal-border-radius: 32px;
 
 html.ios ion-modal.kirby-modal-v2 {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
@@ -309,4 +327,11 @@ html.ios ion-modal.kirby-modal-v2 {
   .kirby-grid {
     display: flex;
   }
+}
+
+/* 
+  * Class to add link-icon to the right of e.g. anchor tag.
+  */
+.kirby-external-icon {
+  @include utils.trailing-icon;
 }

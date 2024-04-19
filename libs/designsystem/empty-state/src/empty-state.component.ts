@@ -8,6 +8,9 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+const CUSTOM_ICON_NAME_DEPRECATION_WARNING =
+  'Deprecation warning: The customIconName input property of "kirby-empty-state" is deprecated and will be removed in v10. The iconName input property already supports custom icons registered via the iconRegistryService.';
+
 @Component({
   selector: 'kirby-empty-state',
   templateUrl: './empty-state.component.html',
@@ -16,7 +19,10 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 })
 export class EmptyStateComponent implements AfterContentInit {
   @Input() iconName: string;
-  @Input() customIconName: string;
+  @Input() set customIconName(customName: string) {
+    this.iconName = customName;
+    console.warn(CUSTOM_ICON_NAME_DEPRECATION_WARNING);
+  }
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -39,9 +45,11 @@ export class EmptyStateComponent implements AfterContentInit {
    */
   private enforceAttentionLevelRules() {
     this.slottedButtons.forEach((button, index) => {
-      if (index === 0 && button.isAttentionLevel1) return;
+      if (index === 0 && (button.attentionLevel === undefined || button.attentionLevel === '1')) {
+        return;
+      }
 
-      if (!button.isAttentionLevel3) {
+      if (button.attentionLevel !== '3') {
         button.attentionLevel = '3';
       }
     });

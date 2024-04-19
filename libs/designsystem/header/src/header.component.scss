@@ -7,6 +7,18 @@
   margin-top: utils.size('s');
   margin-bottom: utils.size('l');
 
+  @include utils.media('<medium') {
+    /*
+      Angular's view encapsulation wrongly appends an `_ngcontent-xxx` selector after the `:has()` pseudo class.
+      Using ::ng-deep in this context fixes this and ensures the selector is applied inside the pseudo class,
+      i.e. to `.avatar`.
+    */
+    /* stylelint-disable selector-pseudo-element-no-unknown */
+    &:has(> .avatar::ng-deep) {
+      margin-top: utils.size('xxs');
+    }
+  }
+
   @include utils.media('>=medium') {
     margin-top: utils.size('m');
   }
@@ -17,42 +29,75 @@
   flex-direction: column;
   align-items: flex-start;
   max-width: 100%;
-  overflow: hidden;
 
-  @include utils.media('>=medium') {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: utils.size('s');
+  // title in key value scenario should't have bottom margin:
+  & > h1.title {
+    margin-bottom: 0;
+  }
+}
+
+// In rare scenarios consumers need to enforce a 1-column layout on larger screens.
+// Please note: We are NOT promoting this in our cookbook:
+@include utils.media('>=medium') {
+  :host(:not(.single-column)) {
+    .container {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .title-container {
+      grid-column-start: 1;
+    }
   }
 }
 
 :host(.centered) {
   align-items: center;
 
+  .container {
+    align-items: center;
+
+    & > h1.title {
+      text-align: center;
+
+      &.has-icon {
+        justify-content: center;
+      }
+    }
+  }
+
   .title-container {
     align-items: center;
     text-align: center;
   }
 
+  // In rare scenarios consumers need to enforce a 1-column layout on larger screens.
+  // Please note: We are NOT promoting this in our cookbook:
   @include utils.media('>=medium') {
-    .container {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
-      align-self: stretch;
-    }
+    &:not(.single-column) {
+      .container {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+        align-self: stretch;
+      }
 
-    .title-container {
-      grid-column-start: 2;
+      .actions {
+        align-self: flex-start;
+      }
+
+      .container > h1.title,
+      .title-container {
+        grid-column-start: 2;
+      }
     }
   }
 }
 
 .actions {
-  // kirby-button already has 4px horizontal margin, so add additional 4px to get 8px in total:
-  margin: 0 utils.size('xxxs');
+  margin-top: utils.size('m');
+  margin-left: utils.size('xxs');
+  margin-right: utils.size('xxs');
 
   @include utils.media('<medium') {
-    margin-top: utils.size('m');
-
     // Hide actions on small screens when not emphasized:
     &:not(.emphasize) {
       display: none;
@@ -60,16 +105,32 @@
   }
 }
 
+// In rare scenarios consumers need to enforce a 1-column layout on larger screens.
+// Please note: We are NOT promoting this in our cookbook:
+@include utils.media('>=medium') {
+  :host(:not(.single-column)) {
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0;
+    }
+  }
+}
+
+$margin-inline: utils.size('s');
+
 .avatar,
 .flag,
-.title-container {
-  padding: 0 utils.size('s');
+.title-container,
+.container > h1.title {
+  margin-inline: $margin-inline;
 }
 
 .title-container {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  max-width: calc(100% - 2 * $margin-inline);
 }
 
 .avatar {
@@ -80,18 +141,21 @@
   margin-bottom: utils.size('xxxs');
 }
 
+.flag .custom-flag {
+  margin-block: utils.size('xxxs');
+}
+
 .title {
   margin-bottom: utils.size('xxxxs');
 
-  &.hidden {
-    visibility: hidden;
-    white-space: nowrap;
-    max-width: 100%;
-    overflow: hidden;
+  &.clickable {
+    cursor: pointer;
+  }
 
-    @include utils.media('<medium') {
-      display: none;
-    }
+  &.has-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 }
 
@@ -107,12 +171,16 @@
   font-size: 50%;
 }
 
-.subtitle1,
-.subtitle2 {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
+.subtitle {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 0.25em; // width of space character in a font, mimics spaces between spans
+
+  span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
 .custom-section {

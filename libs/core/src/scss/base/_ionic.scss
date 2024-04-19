@@ -2,7 +2,7 @@
 @use '../themes/colors';
 
 /* Core CSS required for Ionic components to work properly */
-@import '~@ionic/angular/css/core.css';
+@import '@ionic/angular/css/core';
 
 @mixin ionic-color-map($ionic-variant, $kirby-variant: $ionic-variant) {
   --ion-color-#{$ionic-variant}: var(--kirby-#{$kirby-variant});

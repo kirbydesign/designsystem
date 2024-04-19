@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
@@ -7,6 +8,18 @@ $ion-content-padding-top: utils.size('xs');
 /*
  * Page Header
  */
+
+$toolbar-transition-duration-in: utils.get-transition-duration('quick');
+$toolbar-transition-duration-out: 50ms;
+$toolbar-transition: background-color $toolbar-transition-duration-out linear;
+$toolbar-shaded-background: color.mix(
+  #000,
+  utils.get-color('background-color', $getValueOnly: true),
+  1.1%
+);
+$toolbar-button-size: utils.size('xl');
+$toolbar-button-spacing: utils.size('xxs');
+
 ion-header,
 ion-toolbar {
   --background: #{utils.get-color('background-color')};
@@ -16,68 +29,77 @@ ion-toolbar {
 
 ion-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{utils.size('xxxs')};
-  --padding-end: #{utils.size('xxxs')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
   --padding-top: 0;
   --padding-bottom: 0;
   --ion-toolbar-color: #{utils.get-color('black')};
-
-  // The toolbar height for iPhone's with a notched display.
-  $toolbar-height-notch: utils.size('xxl');
-
-  // The toolbar height for other displays.
-  $toolbar-height-default: utils.size('xxxl');
-
-  // An iPhone with a ios-safe-area-top exceeding 32px is considered to have notched display.
-  $notch-safe-area-top-trigger: 32px;
-
-  // Notch indicator:
-  // 0px represents FALSE
-  // 1px represents TRUE
-  // IF `--kirby-safe-area-top` is defined _and_ has a value strictly larger than `$notch-safe-area-top-trigger`
-  // THEN `--notch-present` = 1px (a notch _is_ present)
-  // ELSE `--notch-present` = 0px (no notch)
-  --notch-present: clamp(
-    0px,
-    var(--kirby-safe-area-top, 0px) - #{$notch-safe-area-top-trigger},
-    1px
-  );
-
-  // Equivalent to:
-  // IF --notch-present == 1px (i.e. the display _does_ have a notch)
-  // THEN --min-height = $toolbar-height-notch
-  // ELSE --min-height = $toolbar-height-default
-  --min-height: clamp(
-    #{$toolbar-height-notch},
-    (1px - var(--notch-present)) * #{utils.strip-unit($toolbar-height-default)},
-    #{$toolbar-height-default}
-  );
+  --min-height: #{utils.size('xxxl')};
 
   @include utils.media('>=medium') {
-    --min-height: #{utils.size('xxxxl')};
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
+    --min-height: #{utils.size('xxxxxl')};
   }
 
-  box-sizing: border-box;
-  padding-inline: utils.size('xxxs');
+  /*
+  * Toolbar Divider & Shaded background
+  */
 
-  &.content-scrolled::before {
-    // Divider
+  // Divider:
+  &::before {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     height: 1px;
-    z-index: 1;
-    background-color: utils.get-color('medium');
   }
 
-  /*
-  * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
-  * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
-  */
-  ion-buttons[slot='secondary'] {
-    order: 6;
+  &::before,
+  &::part(background) {
+    transition: $toolbar-transition;
+  }
+
+  // Only show toolbar divider + shaded bg when content is scrolled:
+  &.content-scrolled {
+    --background: #{$toolbar-shaded-background};
+
+    &::before,
+    &::part(background) {
+      transition-duration: $toolbar-transition-duration-in;
+    }
+
+    &:not(.content-pinned)::before {
+      background-color: utils.get-color('medium');
+    }
+  }
+
+  &.content-pinned {
+    &::before {
+      transition: none;
+    }
+  }
+
+  ion-buttons {
+    // Back button:
+    &[slot='start'] {
+      margin-right: $toolbar-button-spacing;
+    }
+
+    // Action buttons:
+    &[slot='primary'],
+    &[slot='secondary'] {
+      margin-left: $toolbar-button-spacing;
+    }
+
+    /*
+    * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
+    * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
+    */
+    &[slot='secondary'] {
+      order: 6;
+    }
   }
 
   ion-title {
@@ -87,6 +109,10 @@ ion-toolbar {
     transition-property: opacity, transform;
     transition-duration: 150ms;
     transition-timing-function: utils.get-transition-easing('enter-exit');
+    padding-inline: calc(
+      var(--action-buttons-width, $toolbar-button-size + $toolbar-button-spacing) +
+        var(--padding-start)
+    );
 
     &.slide-and-fade-in {
       visibility: visible;
@@ -94,12 +120,28 @@ ion-toolbar {
       transform: translateY(0);
     }
 
-    .toolbar-title {
+    .toolbar-title,
+    .toolbar-title > span.has-icon > span {
       text-overflow: ellipsis;
       white-space: nowrap;
       pointer-events: auto;
       overflow: hidden;
+    }
+
+    .toolbar-title {
       font-weight: utils.font-weight('bold');
+
+      span.clickable {
+        cursor: pointer;
+      }
+
+      span.has-icon {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+      }
 
       @include utils.slotted('*') {
         text-overflow: ellipsis;
@@ -136,10 +178,8 @@ ion-back-button {
   --background: #{utils.get-color('white')};
   --icon-font-size: 24px;
 
-  $button-size: utils.size('xl');
-
-  height: $button-size;
-  width: $button-size;
+  height: $toolbar-button-size;
+  width: $toolbar-button-size;
 
   // Properly center back-icon
   &::part(icon) {
@@ -168,7 +208,7 @@ ion-back-button {
  * Page Header
  */
 .page-header-container {
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+  max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
   margin: 0 auto;
 }
 
@@ -218,25 +258,29 @@ ion-content {
   --background: #{utils.get-color('background-color')};
   --color: #{utils.get-color('black')};
 
-  @media (min-width: map.get(utils.$breakpoint-map, 'sm')) {
+  @include utils.media('>=medium') {
     --padding-start: var(--page-content-padding-start, #{utils.size('xxl')});
     --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
   }
 
-  &.max-width-standard {
-    --page-content-max-width: 792px;
+  &.has-header {
+    --padding-top: 0;
   }
 
   &.max-width-optimized {
-    --page-content-max-width: 1092px;
+    --page-content-max-width: #{utils.get-page-content-max-width('optimized')};
   }
 
   &.max-width-full {
-    --page-content-max-width: 100%;
+    --page-content-max-width: #{utils.get-page-content-max-width('full')};
+  }
+
+  &::part(scroll) {
+    scrollbar-gutter: stable;
   }
 
   .content-inner {
-    max-width: var(--page-content-max-width, utils.$page-content-max-width);
+    max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
     padding-bottom: utils.size('xl');
   }
@@ -248,6 +292,7 @@ ion-content {
     width: 100%;
     position: absolute;
     bottom: 0;
+    transform: initial;
 
     .content-inner {
       position: relative;
@@ -271,35 +316,45 @@ ion-content {
   z-index: utils.z('sticky-content');
 
   div {
-    max-width: var(--page-content-max-width, utils.$page-content-max-width);
+    max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
   }
 
-  &.content-pinned::before {
-    // Background
+  &::before,
+  &::after {
+    /* Background + Divider */
     content: '';
     position: absolute;
 
-    // Adjust for padding of ion-content to stretch divider to full width.
+    // Adjust for padding of ion-content to stretch divider to full width:
     left: calc(-1 * var(--padding-start));
     right: calc(-1 * var(--padding-end));
     bottom: 0;
-    top: 0;
-    z-index: 0;
-    background-color: var(--kirby-background-color);
   }
 
-  &.content-pinned::after {
-    // Divider
-    content: '';
-    position: absolute;
+  &::before {
+    /* Background */
+    top: 0;
 
-    // Adjust for padding of ion-content to stretch divider to full width.
-    left: calc(-1 * var(--padding-start));
-    right: calc(-1 * var(--padding-end));
-    bottom: 0;
+    // Same bg color as ion-content to prevent see-through
+    // when scrolling the page behind the sticky content:
+    background-color: var(--background);
+  }
+
+  &::after {
+    /* Divider */
     height: 1px;
-    z-index: 1;
-    background-color: utils.get-color('medium');
+  }
+
+  &.content-pinned {
+    &::before {
+      /* Background - pinned */
+      background-color: $toolbar-shaded-background;
+    }
+
+    &::after {
+      /* Divider - pinned */
+      background-color: utils.get-color('medium');
+    }
   }
 }

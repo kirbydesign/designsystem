@@ -31,17 +31,17 @@ The good issue: contains only one issue, is self-contained, is specific & unambi
 
 ## Checklist:
 
-The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
+The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#the-process-of-contributing) correctly.
 
 ### Refinement
 
-- [ ] Request that the issue is [UX refined](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
-- [ ] Request that the issue is [tech refined](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [UX refined](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#ux-refinement)
+- [ ] Request that the issue is [tech refined](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#tech-refinement); do not proceed until this is done.
 
 ### Implementation 
 The contributor who wants to implement this issue should: 
 
-- [ ] Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#before-you-get-coding)".
+- [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
 - [ ] Signal to others you are working on the issue by assigning yourself.
 - [ ] Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/develop) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
 - [ ] Publish a WIP implementation to Github as a draft PR and ask for feedback. 

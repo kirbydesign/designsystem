@@ -40,7 +40,7 @@ export class TabNavigationComponent implements AfterViewInit {
   }
 
   set selectedIndex(index: number) {
-    if (index !== this._selectedIndex) {
+    if (index !== this._selectedIndex && index !== -1) {
       this._selectedIndex = index;
 
       this.focusIndex = index;
@@ -73,23 +73,17 @@ export class TabNavigationComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.tabBarElement = this.tabBar.nativeElement;
-    this.tabs.forEach((tab) => this.tabElements.push(tab.nativeElement));
-    this.tabElements.forEach((tabElement) =>
-      this.tabButtonElements.push(tabElement.querySelector('[role="tab"]'))
-    );
-
-    setTimeout(() => {
-      this.selectTab(this.selectedIndex);
-      this.scrollToTab(this.focusIndex);
-      this.focusTab(this.focusIndex);
-    }, this.DEBOUNCE_TIME_MS);
+    this.setTabElements();
+    this.updateTabElementsOnChanges();
   }
 
   @HostListener('click', ['$event'])
   @HostListener('keydown.enter', ['$event'])
   onItemSelect(event: PointerEvent) {
-    const targetTabNavItem: HTMLElement = (event.target as HTMLElement).closest('button');
-    this.selectedIndex = this.tabButtonElements.indexOf(targetTabNavItem);
+    if (event.target !== this.tabBarElement) {
+      const targetTabNavItem = (event.target as HTMLElement).closest('button');
+      this.selectedIndex = this.tabButtonElements.indexOf(targetTabNavItem);
+    }
   }
 
   @HostListener('keydown.home', ['$event'])
@@ -139,5 +133,30 @@ export class TabNavigationComponent implements AfterViewInit {
         });
       });
     }
+  }
+
+  private setTabElements() {
+    this.tabs.forEach((tab) => {
+      this.tabElements.push(tab.nativeElement);
+    });
+
+    this.tabElements.forEach((tabElement) =>
+      this.tabButtonElements.push(tabElement.querySelector('[role="tab"]'))
+    );
+
+    this.selectTab(this.selectedIndex);
+    this.focusTab(this.focusIndex);
+
+    setTimeout(() => {
+      this.scrollToTab(this.focusIndex);
+    }, this.DEBOUNCE_TIME_MS);
+  }
+
+  private updateTabElementsOnChanges() {
+    this.tabs.changes.subscribe(() => {
+      this.tabElements = [];
+      this.tabButtonElements = [];
+      this.setTabElements();
+    });
   }
 }

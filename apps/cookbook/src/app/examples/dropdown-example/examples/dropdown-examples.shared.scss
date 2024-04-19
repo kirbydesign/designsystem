@@ -5,7 +5,7 @@ kirby-card {
   margin-block: utils.size('m');
 
   &.attention-levels {
-    max-width: map.get(utils.$breakpoints, 'small');
+    max-width: map.get(utils.$breakpoints, 'xsmall');
   }
 
   kirby-dropdown + kirby-dropdown {
@@ -15,13 +15,4 @@ kirby-card {
 
 p {
   margin-top: utils.size('s');
-}
-
-.comment {
-  font-style: italic;
-  color: utils.get-text-color('semi-dark');
-
-  &.small {
-    font-size: smaller;
-  }
 }

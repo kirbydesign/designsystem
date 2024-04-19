@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { IonIcon } from '@ionic/angular';
+import { IonIcon } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
@@ -16,6 +16,7 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import {
   PageActionsDirective,
   PageComponent,
+  PageModule,
   PageTitleDirective,
 } from '@kirbydesign/designsystem/page';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
@@ -35,6 +36,7 @@ describe('ButtonComponent in Kirby Page', () => {
       RouterTestingModule,
       ButtonComponent,
       FitHeadingDirective,
+      PageModule,
     ],
     declarations: [PageActionsDirective, PageTitleDirective],
     providers: [

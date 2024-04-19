@@ -1,20 +1,17 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-:host {
-  kirby-checkbox {
-    &:not(:first-of-type) {
-      margin-top: utils.size('xxxs');
-    }
-
-    &.indent {
-      margin-left: utils.size('l');
-      margin-top: utils.size('xxxs');
-      font-size: utils.font-size('s');
-    }
+kirby-checkbox {
+  &:not(:first-of-type) {
+    margin-top: utils.size('xxxs');
   }
 
-  p {
-    margin: 0;
-    font-style: italic;
+  &.indent {
+    margin-left: utils.size('l');
+    margin-top: utils.size('xxxs');
   }
+}
+
+p {
+  margin: 0;
+  font-size: utils.font-size('s');
 }

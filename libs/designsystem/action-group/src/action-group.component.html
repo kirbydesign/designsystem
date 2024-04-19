@@ -1,11 +1,13 @@
 <ng-content select="button[kirby-button]"></ng-content>
 
-<kirby-dropdown
-  [items]="_collapsedActions"
-  [usePopover]="true"
-  [_isMoreMenu]="true"
-  popout="left"
-  (change)="onActionSelect($event)"
-></kirby-dropdown>
+<kirby-menu [placement]="'bottom-end'">
+  <kirby-item
+    *ngFor="let action of _collapsedActions"
+    [selectable]="true"
+    (click)="onActionSelect(action)"
+  >
+    {{ action.text }}
+  </kirby-item>
+</kirby-menu>
 
 <div class="hidden-layer" #hiddenLayer></div>

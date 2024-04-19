@@ -159,3 +159,49 @@ export class TitleEmbeddedComponent {
     this._title = title;
   }
 }
+
+@Component({
+  template: `
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt
+      dolore error esse laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt
+      totam voluptatem! Dicta, quaerat!
+    </p>
+    <p>
+      Aut, dignissimos dolorum ducimus et rem reprehenderit rerum sunt ut! Ad aliquid beatae cum
+      esse et eveniet facere natus numquam obcaecati qui quia quisquam quo repellat repudiandae sit,
+      soluta voluptatibus!
+    </p>
+    <p>
+      Aspernatur dolore enim incidunt libero molestiae nostrum quasi? Accusamus aut culpa dolores
+      doloribus laborum nesciunt voluptates! Consectetur cumque doloremque eius esse et excepturi
+      hic, inventore mollitia nisi, reiciendis, tempora unde!
+    </p>
+    <p>
+      Blanditiis, cupiditate distinctio earum illo impedit laborum velit veritatis. Accusamus
+      adipisci alias aperiam, assumenda corporis culpa cum debitis exercitationem impedit laborum
+      possimus quam qui repellat, saepe similique sint soluta. Unde.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt
+      dolore error esse laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt
+      totam voluptatem! Dicta, quaerat!
+    </p>
+    <p>
+      Aut, dignissimos dolorum ducimus et rem reprehenderit rerum sunt ut! Ad aliquid beatae cum
+      esse et eveniet facere natus numquam obcaecati qui quia quisquam quo repellat repudiandae sit,
+      soluta voluptatibus!
+    </p>
+    <p>
+      Aspernatur dolore enim incidunt libero molestiae nostrum quasi? Accusamus aut culpa dolores
+      doloribus laborum nesciunt voluptates! Consectetur cumque doloremque eius esse et excepturi
+      hic, inventore mollitia nisi, reiciendis, tempora unde!
+    </p>
+    <p>
+      Blanditiis, cupiditate distinctio earum illo impedit laborum velit veritatis. Accusamus
+      adipisci alias aperiam, assumenda corporis culpa cum debitis exercitationem impedit laborum
+      possimus quam qui repellat, saepe similique sint soluta. Unde.
+    </p>
+  `,
+})
+export class DummyContentEmbeddedComponent {}

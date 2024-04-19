@@ -1,16 +1,40 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
-$border-color-selected: utils.get-color('dark');
-$divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') * 2);
+$divider-max-width-breakpoint: utils.$page-content-max-width-default + (utils.size('s') * 2);
+
+:host {
+  display: block;
+  position: relative;
+
+  @include utils.media('<medium') {
+    width: 100%;
+    margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+  }
+
+  // Divider
+  &::before {
+    content: '';
+    background-color: $border-color-standard;
+    position: absolute;
+    height: $bottom-border-height;
+    bottom: 0;
+    z-index: utils.z('default');
+    left: 0;
+    width: 100%;
+
+    @include utils.media('<=#{$divider-max-width-breakpoint}') {
+      left: calc(-1 * var(--padding-start, #{utils.size('s')}));
+      width: calc(100% + (var(--padding-start, #{utils.size('s')}) * 2));
+    }
+  }
+}
 
 div[role='tablist'] {
   position: relative;
   margin: 0 auto;
   display: flex;
-  gap: utils.size('xs');
   align-items: center;
   justify-content: left;
   flex-wrap: nowrap;
@@ -30,32 +54,5 @@ div[role='tablist'] {
   // Hide scrollbar for Chrome, Edge, Safari and Opera
   &::-webkit-scrollbar {
     display: none;
-  }
-}
-
-.container {
-  position: relative;
-  background-color: utils.get-color('background-color');
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
-
-  @include utils.media('<medium') {
-    margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
-  }
-
-  // Divider
-  &::before {
-    content: '';
-    background-color: $border-color-standard;
-    position: absolute;
-    height: $bottom-border-height;
-    bottom: 0;
-    z-index: 1;
-    left: 0;
-    width: 100%;
-
-    @include utils.media('<=#{$divider-max-width-breakpoint}') {
-      left: calc(-1 * var(--padding-start, #{utils.size('s')}));
-      width: calc(100% + (var(--padding-start, #{utils.size('s')}) * 2));
-    }
   }
 }

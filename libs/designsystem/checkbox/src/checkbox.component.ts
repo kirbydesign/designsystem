@@ -1,24 +1,41 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
+  forwardRef,
   HostBinding,
   Input,
   Output,
+  ViewChild,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
+import { IonCheckbox } from '@ionic/angular/standalone';
 
 @Component({
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [CommonModule, IonCheckbox],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    IonicElementPartHelper,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CheckboxComponent),
+      multi: true,
+    },
+  ],
 })
-export class CheckboxComponent {
+export class CheckboxComponent implements AfterViewInit, ControlValueAccessor {
+  @ViewChild(IonCheckbox, { read: ElementRef, static: true })
+  private ionCheckboxElement?: ElementRef<HTMLIonCheckboxElement>;
+
   @Input() checked: boolean = false;
   @Input() attentionLevel: '1' | '2' = '2';
 
@@ -28,7 +45,7 @@ export class CheckboxComponent {
 
   @HostBinding('class')
   @Input()
-  size?: 'xs' | 'sm' | 'md';
+  size: 'xs' | 'sm' | 'md' = 'md';
 
   @HostBinding('class.error')
   @Input()
@@ -49,11 +66,77 @@ export class CheckboxComponent {
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
+  constructor(private ionicElementPartHelper: IonicElementPartHelper) {}
+
+  ngAfterViewInit(): void {
+    this.ionicElementPartHelper.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');
+    this.ionicElementPartHelper.setPart(
+      'label-text-wrapper',
+      this.ionCheckboxElement,
+      '.label-text-wrapper'
+    );
+    this.ionicElementPartHelper.setPart(
+      'native-wrapper',
+      this.ionCheckboxElement,
+      '.native-wrapper'
+    );
+  }
+
   onChecked(checked: boolean): void {
     this.checked = checked;
+    this._onChange(this.checked);
     this.checkedChange.emit(this.checked);
   }
 
-  // IDs used for a11y labelling
-  _labelId = UniqueIdGenerator.scopedTo('kirby-checkbox-label').next();
+  onBlur() {
+    this._onTouched();
+  }
+
+  // Initialize default ControlValueAccessor callback functions (noop)
+  // eslint-disable-next-line no-empty-function
+  private _onChange: (value: boolean) => void = () => {};
+  // eslint-disable-next-line no-empty-function
+  private _onTouched = () => {};
+
+  /**
+   * Sets the checkbox's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
+  writeValue(value: boolean): void {
+    this.checked = value;
+  }
+
+  /**
+   * Saves a callback function to be invoked when the checkbox's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
+  registerOnChange(fn: any): void {
+    this._onChange = fn;
+  }
+
+  /**
+   * Saves a callback function to be invoked when the checkbox is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
+  }
+
+  /**
+   * Disables the checkbox. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

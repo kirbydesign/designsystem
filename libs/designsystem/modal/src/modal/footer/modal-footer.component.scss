@@ -1,20 +1,22 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$padding-horizontal: utils.size('s');
-$padding-vertical: utils.size('xxs');
-
 ion-footer {
   @include themes.apply-white-theme;
 
-  box-shadow: utils.get-elevation(4);
+  box-shadow: utils.get-elevation(8);
+  box-sizing: inherit;
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
   background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
   color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
-  padding: $padding-vertical $padding-horizontal;
-  padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
+  padding: utils.size('s');
+  padding-bottom: calc(#{utils.size('xs')} + var(--kirby-modal-footer-safe-area-bottom, 0px));
+
+  @include utils.media('>=medium') {
+    padding: utils.size('m');
+  }
 }
 
 @include utils.media('<medium') {
@@ -25,6 +27,7 @@ ion-footer {
 
 :host {
   box-sizing: border-box;
+  display: block;
 }
 
 :host(.snap-to-keyboard) {

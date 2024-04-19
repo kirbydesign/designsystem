@@ -48,6 +48,11 @@ export class RangeShowcaseComponent {
       defaultValue: 'false',
     },
     {
+      name: 'pinFormatter',
+      description: '(Optional) A callback used to format the pin text.',
+      type: ['(value: number) => string | number'],
+    },
+    {
       name: 'debounce',
       description: '(Optional) How long, in milliseconds, to wait to trigger the change event',
       type: ['number'],
@@ -65,7 +70,14 @@ export class RangeShowcaseComponent {
   rangeEvents: ApiDescriptionMethod[] = [
     {
       name: 'change',
-      description: 'Emits events when the value changes.',
+      description:
+        'Emitted when the user modifies the value by releasing the knob or moving the knob with the keyboard',
+      signature: '() => EventEmitter<number>',
+    },
+    {
+      name: 'move',
+      description:
+        'Emitted for each distinct change whenever the knob is moved by the user. Unlike the `change` event it fires continuously while the user is dragging the knob.',
       signature: '() => EventEmitter<number>',
     },
   ];

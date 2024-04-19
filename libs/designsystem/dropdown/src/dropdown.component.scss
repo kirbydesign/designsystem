@@ -42,6 +42,7 @@ $min-screen-width: 375px;
     margin: 0;
     outline: none;
     width: 100%;
+    min-width: 0;
 
     // Temporary fix for button-width as attention level 3 has border,
     // and attention level 2 does not:
@@ -114,7 +115,7 @@ kirby-card {
   overflow-y: auto;
   box-shadow: utils.get-elevation(4);
   min-width: $min-screen-width-small - $margin-horizontal-total;
-  @include utils.media('>=small') {
+  @include utils.media('>xsmall') {
     min-width: $min-screen-width - $margin-horizontal-total;
   }
 
@@ -135,15 +136,5 @@ kirby-card {
     & > button {
       box-shadow: none;
     }
-  }
-}
-
-/*
-* TEMPORARY MORE-MENU
-* Button should be round when more menu, as it is icon only
-*/
-:host(.more-menu) {
-  > button {
-    width: utils.size('xl');
   }
 }

@@ -5,7 +5,7 @@
   to deprecate it. 
 */
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular';
+import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
@@ -13,11 +13,12 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { TestHelper } from 'testing/src';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 
@@ -34,6 +35,7 @@ describe('DropdownComponent (popover version)', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
+      imports: [TestHelper.ionicModuleForTest, IonItem, ItemModule],
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
@@ -939,11 +941,10 @@ describe('DropdownComponent (popover version)', () => {
 
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-dropdown>
+        `<kirby-dropdown [usePopover]="true">
            <kirby-item
              *kirbyListItemTemplate="let item; let selected = selected"
              selectable="true"
-             [usePopover]="true"
              [selected]="selected">
              <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
              <h3>{{ item.title }}</h3>

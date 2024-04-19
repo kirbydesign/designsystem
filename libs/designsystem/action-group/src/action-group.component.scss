@@ -3,7 +3,7 @@
 :host {
   display: flex;
   position: relative;
-  overflow: hidden;
+  gap: utils.size('xxs');
 }
 
 :host(.align-end) {
@@ -19,23 +19,13 @@
   visibility: hidden;
 }
 
-/* Hidden layer should only take up space when the action group is resizable */
-:host(.is-resizeable) {
-  .hidden-layer {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-}
-
-kirby-dropdown {
-  margin: 4px;
+kirby-menu {
   display: none;
   z-index: 1;
 }
 
 :host(.is-collapsed) {
-  kirby-dropdown {
+  kirby-menu {
     display: inline-block;
   }
 }

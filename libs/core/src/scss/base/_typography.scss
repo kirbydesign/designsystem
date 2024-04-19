@@ -1,10 +1,10 @@
 @use 'functions';
 
-@import '~@fontsource/roboto/300.css';
-@import '~@fontsource/roboto/400.css';
-@import '~@fontsource/roboto/500.css';
-@import '~@fontsource/roboto/700.css';
-@import '~@fontsource/roboto/900.css';
+@import '@fontsource/roboto/300';
+@import '@fontsource/roboto/400';
+@import '@fontsource/roboto/500';
+@import '@fontsource/roboto/700';
+@import '@fontsource/roboto/900';
 
 h1,
 .h1,
@@ -71,6 +71,14 @@ h3,
   font-size: functions.font-size('m');
   font-weight: functions.font-weight('bold');
   line-height: functions.line-height('m');
+}
+
+h4,
+.h4,
+.kirby-text-normal-bold {
+  font-size: functions.font-size('n');
+  font-weight: functions.font-weight('bold');
+  line-height: functions.line-height('n');
 }
 
 p,

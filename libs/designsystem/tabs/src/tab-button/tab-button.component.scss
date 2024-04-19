@@ -3,6 +3,11 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+:host {
+  // Ignore the tab-button elements box and replace with its content
+  display: contents;
+}
+
 ion-tab-button {
   &.ion-focused {
     @include interaction-state.apply-focus-visible-background {
@@ -19,13 +24,18 @@ ion-tab-button {
     --background: #{interaction-state.get-state-color('white', 'xxs')};
   }
 
-  transition: interaction-state.transition();
+  transition: interaction-state.transition(background-color);
   height: 100%;
   flex: 1 1 0%;
   max-width: 168px;
-  font-size: utils.font-size('xxs');
+  font-weight: utils.font-weight('medium');
+  font-size: utils.font-size('xs');
+  line-height: utils.line-height('xs');
 
-  --color-selected: utils.get-color('black');
+  --color: #{utils.get-text-color('semi-dark')};
+  --color-selected: #{utils.get-color('black')};
+  --padding-start: 0;
+  --padding-end: 0;
 
   // Magic values here as we have no tokens that gives
   // badge the correct position in relation to the tab icon
@@ -42,18 +52,14 @@ ion-tab-button {
     }
   }
 
-  .icon-container {
-    position: relative;
-  }
-
   @include utils.media('>=medium') {
     flex: none;
     flex-direction: row;
-    padding: 0 utils.size('m');
-    margin-right: utils.size('m');
     font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
 
-    --color-selected: #{utils.get-color('black')};
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
 
     // Magic values here as we have no tokens that gives
     // badge the correct position in relation to the tab icon
@@ -68,23 +74,23 @@ ion-tab-button {
         --kirby-badge-left: 0;
 
         margin-left: utils.size('xxxxs');
+
+        // Using / for division outside of calc() is deprecated
+        // and will be removed in Dart Sass 2.0.0. Use math.div() instead.
+        // See: https://sass-lang.com/documentation/breaking-changes/slash-div/
         margin-bottom: math.div(utils.size('xxxxs'), 2);
       }
     }
 
-    &:last-child {
-      margin-right: 0;
-    }
-
-    .icon-container {
-      margin-right: utils.size('xxs');
+    @include utils.slotted(kirby-icon) {
+      --kirby-icon-margin-right: #{utils.size('xxs')};
     }
   }
 
   @include utils.media('>=large') {
     @include utils.not-touch {
-      padding: 0 utils.size('xs');
-      margin-right: 0;
+      --padding-start: #{utils.size('xs')};
+      --padding-end: #{utils.size('xs')};
     }
   }
 }

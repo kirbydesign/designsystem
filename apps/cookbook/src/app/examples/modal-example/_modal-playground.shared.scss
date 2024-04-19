@@ -1,0 +1,9 @@
+:host {
+  display: grid;
+  place-content: center;
+  overflow-y: auto;
+
+  > button {
+    min-width: 15rem;
+  }
+}

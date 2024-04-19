@@ -2,11 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "target": "ES2022",
     "declaration": true,
-    "types": [],
-    "lib": ["dom", "es2018"],
-    "useDefineForClassFields": false
+    "types": []
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
@@ -19,6 +16,6 @@
     "inlineSourceMap": true,
     "compilationMode": "partial"
   },
-  "exclude": ["src/test.ts", "**/*.spec.ts"],
+  "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.stories.ts", "**/*.stories.js"],
   "include": ["**/*.ts"]
 }

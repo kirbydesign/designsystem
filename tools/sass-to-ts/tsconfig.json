@@ -3,6 +3,7 @@
     "outDir": "./dist",
     "types": ["node"],
     "lib": ["es2017", "dom"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   }
 }

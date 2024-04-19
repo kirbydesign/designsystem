@@ -57,9 +57,18 @@
   }
 }
 
-@function get-text-color($variant) {
-  $value: _get-map-prop(colors.$text-colors, $variant);
-  @return string.unquote('var(--kirby-text-color-' + $variant + ')');
+@function get-text-color($variant, $getValueOnly: false, $map: colors.$text-colors) {
+  $value: _get-map-prop($map, $variant);
+  @if $getValueOnly == true {
+    @return $value;
+  } @else {
+    @return string.unquote('var(--kirby-text-color-' + $variant + ')');
+  }
+}
+
+@function get-decoration-color($variant, $shade) {
+  $value: map.get(colors.$decoration-colors, $variant, $shade);
+  @return string.unquote('var(--kirby-decoration-color-' + $variant + '-' + $shade + ')');
 }
 
 @function get-elevation($value) {
@@ -88,6 +97,10 @@
   @return $shadow-size;
 }
 
+@function get-page-content-max-width($value) {
+  @return map.get(variables.$page-content-max-widths, $value);
+}
+
 @function _get-shadow-value($shadow, $valuekey) {
   $shadow-value-map: (
     'offset-x': 1,
@@ -108,17 +121,6 @@
     $classes: list.append($classes, '.#{$key}', $separator: comma);
   }
   @return $classes;
-}
-
-/// Remove the unit of a length
-/// @param {Number} $number - Number to remove unit from
-/// @return {Number} - Unitless number
-/// Source: https://css-tricks.com/snippets/sass/strip-unit-function/
-@function strip-unit($number) {
-  @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
-    @return math.div($number, $number * 0 + 1);
-  }
-  @return $number;
 }
 
 @mixin slotted($selectors...) {
@@ -215,4 +217,30 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  @include slotted('[wrap]') {
+    white-space: normal;
+  }
+}
+
+@mixin trailing-icon($svg: 'link') {
+  $icon-scaling-factor: 1.5em;
+
+  @if str-index($svg, 'http') {
+    // External icon
+    background-image: url('#{$svg}');
+  } @else {
+    // Icon from library
+    $icon-url: '/assets/kirby/icons/svg/#{$svg}.svg';
+
+    background-image: url('#{$icon-url}');
+  }
+
+  white-space: nowrap;
+  background-repeat: no-repeat;
+  background-position: right 50%;
+  background-size: $icon-scaling-factor;
+
+  // Place icon to the right of text, with icons own width + the actual spacing
+  padding-right: calc(#{$icon-scaling-factor} + #{size('xxxs')});
 }

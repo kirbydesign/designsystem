@@ -3,12 +3,10 @@ import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectat
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
 import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
 
-import * as floatingUi from '@floating-ui/dom';
-import { Strategy } from '@floating-ui/dom';
-import { Placement } from '@floating-ui/core/src/types';
+import { Placement, Strategy } from '@floating-ui/dom';
 import { DesignTokenHelper } from '@kirbydesign/core';
+import { fakeAsync } from '@angular/core/testing';
 import { FloatingDirective, OutletSelector } from './floating.directive';
-import any = jasmine.any;
 
 @Component({
   template: `
@@ -73,6 +71,50 @@ describe('FloatingDirective', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  describe('automatic host position update behaviour', () => {
+    describe('floating element is not shown', () => {
+      it('should NOT perform position updates', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = false;
+
+        spectator.detectChanges();
+        spectator.tick(1000);
+        spectator.dispatchFakeEvent(window, 'scroll');
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+        expect(updateHostElementPositionSpy.calls.count()).toEqual(0);
+      }));
+    });
+
+    describe('floating element is shown', () => {
+      it('should update host element position on scroll', fakeAsync(() => {
+        const spy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        directive.show(); // Spy must be injected before show is called
+        spy.calls.reset();
+
+        spectator.dispatchFakeEvent(window, 'scroll');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should update host element position on window resize', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        directive.show();
+        updateHostElementPositionSpy.calls.reset();
+
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+    });
+  });
+
   describe('input', () => {
     describe('reference', () => {
       it('should set', () => {
@@ -93,6 +135,32 @@ describe('FloatingDirective', () => {
         directive.placement = placement;
         expect(directive['_placement']).toEqual(placement);
       });
+
+      it('should update host position if shown', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = true;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.placement = 'top-start';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should NOT update host position if hidden', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = false;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.placement = 'top-start';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+      }));
     });
 
     describe('strategy', () => {
@@ -101,6 +169,32 @@ describe('FloatingDirective', () => {
         directive.strategy = strategy;
         expect(directive['_strategy']).toEqual(strategy);
       });
+
+      it('should update host position if shown', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = true;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.strategy = 'absolute';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should NOT update host position if hidden', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        directive['isShown'] = false;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.strategy = 'absolute';
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+      }));
     });
 
     describe('triggers', () => {
@@ -192,19 +286,6 @@ describe('FloatingDirective', () => {
 
   describe('methods', () => {
     describe('ngOnInit', () => {
-      let autoUpdateFuncSpy;
-      let computePositionFuncSpy;
-
-      beforeEach(() => {
-        autoUpdateFuncSpy = jasmine.createSpy('autoUpdate').and.returnValue(null);
-        spyOnProperty(floatingUi, 'autoUpdate', 'get').and.returnValue(autoUpdateFuncSpy);
-
-        computePositionFuncSpy = jasmine
-          .createSpy('computePosition')
-          .and.returnValue(new Promise(null));
-        spyOnProperty(floatingUi, 'computePosition', 'get').and.returnValue(computePositionFuncSpy);
-      });
-
       describe('add styling', () => {
         it('should add style left to host element', () => {
           directive.ngOnInit();
@@ -239,36 +320,6 @@ describe('FloatingDirective', () => {
           expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
             'z-index': DesignTokenHelper.zLayer('popover'),
           });
-        });
-      });
-      describe('autoUpdatePosition', () => {
-        it('should call floating-ui autoUpdate', () => {
-          spectator.detectChanges();
-          directive.ngOnInit();
-
-          expect(autoUpdateFuncSpy).toHaveBeenCalledWith(
-            component.floatingElementRef.nativeElement,
-            component.hostElementRef.nativeElement,
-            any(Function)
-          );
-        });
-      });
-      describe('updateHostElementPosition', () => {
-        it('should call computePosition with correct config', () => {
-          const placement: Placement = 'top-end';
-          spectator.setInput('placement', placement);
-
-          const strategy: Strategy = 'fixed';
-          spectator.setInput('strategy', strategy);
-
-          spectator.detectChanges();
-          directive.ngOnInit();
-
-          expect(computePositionFuncSpy).toHaveBeenCalledWith(
-            component.floatingElementRef.nativeElement,
-            component.hostElementRef.nativeElement,
-            any(Object)
-          );
         });
       });
     });
@@ -322,17 +373,11 @@ describe('FloatingDirective', () => {
 
     describe('onMouseClick', () => {
       describe('click inside host', () => {
-        let event: Event;
-
-        beforeEach(() => {
-          event = { target: component.hostElementRef.nativeElement } as Event;
-        });
-
         it('should change isShown when closeOnSelect true', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', true);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickInsideHostElement']();
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -340,7 +385,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickInsideHostElement']();
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -348,7 +393,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickInsideHostElement']();
           expect(directive['isShown']).toEqual(isShown);
         });
       });
@@ -364,7 +409,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', true);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickOutsideHostElement'](event);
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -372,7 +417,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickOutsideHostElement'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -380,7 +425,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickOutsideHostElement'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
       });
@@ -415,12 +460,48 @@ describe('FloatingDirective', () => {
         expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ display: 'block' });
       });
 
-      it('Should emit displayChanged', () => {
-        let output: boolean;
-        directive.displayChanged.subscribe((value) => (output = value));
+      it('should emit displayChanged', () => {
+        spyOn(directive.displayChanged, 'emit');
         directive.show();
-        expect(output).toEqual(true);
+        expect(directive.displayChanged.emit).toHaveBeenCalledWith(true);
       });
+
+      it('should update host position when shown', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.show();
+        spectator.detectChanges();
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should update host position when shown and scrolled', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.show();
+        spectator.dispatchFakeEvent(window, 'scroll');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(2);
+      }));
+
+      it('should update host position when shown, scrolled, and resized', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        updateHostElementPositionSpy.calls.reset();
+
+        directive.show();
+        spectator.dispatchFakeEvent(window, 'scroll');
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(3);
+      }));
     });
 
     describe('hide', () => {
@@ -448,16 +529,38 @@ describe('FloatingDirective', () => {
       });
 
       it('should set display to none', () => {
+        directive['isShown'] = true;
         directive.hide();
         expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ display: 'none' });
       });
 
-      it('Should emit displayChanged', () => {
-        let output: boolean;
-        directive.displayChanged.subscribe((value) => (output = value));
+      it('should emit displayChanged when shown', () => {
+        directive['isShown'] = true;
+        spyOn(directive.displayChanged, 'emit');
         directive.hide();
-        expect(output).toEqual(false);
+        expect(directive.displayChanged.emit).toHaveBeenCalledWith(false);
       });
+
+      it('should NOT emit displayChanged when not shown', () => {
+        directive['isShown'] = false;
+        spyOn(directive.displayChanged, 'emit');
+        directive.hide();
+        expect(directive.displayChanged.emit).not.toHaveBeenCalled();
+      });
+
+      it('should NOT auto updating positions after hiding', fakeAsync(() => {
+        const updateHostElementPositionSpy = spyOn<any>(directive, 'updateHostElementPosition');
+        directive.reference = component.floatingElementRef;
+        spectator.detectChanges();
+        directive.show();
+        directive.hide();
+        updateHostElementPositionSpy.calls.reset();
+
+        spectator.dispatchFakeEvent(window, 'scroll');
+        spectator.dispatchFakeEvent(window, 'resize');
+
+        expect(directive['updateHostElementPosition']).toHaveBeenCalledTimes(0);
+      }));
     });
 
     describe('toggleShow', () => {

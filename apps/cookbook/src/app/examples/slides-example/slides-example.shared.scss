@@ -1,0 +1,14 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
+
+:host {
+  // We need to set these in the examples to ensure Slides on small screens
+  // stretch to viewport edges, i.e. they are used to create negative margins
+  // to counteract page padding (when used within kirby-page these vars are already set):
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
+}
+
+kirby-card {
+  justify-content: start;
+}

@@ -6,7 +6,7 @@
       <ion-item-option
         *ngIf="!swipeAction.isDisabled"
         [ngClass]="swipeAction.type"
-        (click)="swipeAction.onSelected()"
+        (click)="onSwipeActionClick(swipeAction)"
       >
         <kirby-icon
           *ngIf="swipeAction.icon !== undefined"

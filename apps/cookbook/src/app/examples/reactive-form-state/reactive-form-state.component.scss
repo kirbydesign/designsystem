@@ -1,0 +1,35 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: flex;
+}
+
+.form-state {
+  margin-top: utils.size('xs');
+  border-top: 1px solid utils.get-color('medium');
+  padding: utils.size('xxs');
+
+  h4 {
+    margin-bottom: utils.size('xxxs');
+    font-weight: utils.font-weight('normal');
+  }
+
+  p {
+    margin: 0;
+    font-size: utils.font-size('xs');
+    line-height: utils.line-height('xs');
+  }
+
+  span {
+    background-color: utils.get-color('danger');
+    color: utils.get-color('white');
+    margin-right: utils.size('xxxs');
+    padding: 0 utils.size('xxxxs');
+    border-radius: utils.size('xxxs');
+  }
+
+  span.state-true {
+    background-color: utils.get-color('success');
+    color: utils.get-color('success-contrast');
+  }
+}

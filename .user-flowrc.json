@@ -1,4 +1,0 @@
-{
-  "collect": { "url": "http://localhost:4200", "ufPath": "./user-flows" },
-  "persist": { "outPath": "./measures", "format": ["html"] }
-}

@@ -68,6 +68,15 @@ describe('SegmentedControlComponent', () => {
     expect(component.value).toBe(items[1]);
   });
 
+  describe('in chip mode', () => {
+    it('should have ion-segment with same width as segmented control', () => {
+      spectator.setInput('mode', SegmentedControlMode.chip);
+      const ionSegment = spectator.queryHost('ion-segment') as HTMLElement;
+
+      expect(spectator.element.offsetWidth).toEqual(ionSegment.offsetWidth);
+    });
+  });
+
   const testModes = [
     SegmentedControlMode.default,
     SegmentedControlMode.chip,
@@ -143,9 +152,7 @@ describe('SegmentedControlComponent', () => {
       });
 
       it('should set the correct value when changing the selected-index in segment-select call-back', fakeAsync(() => {
-        spectator
-          .output('segmentSelect')
-          .subscribe((value) => spectator.setInput('selectedIndex', 2));
+        spectator.output('segmentSelect').subscribe(() => spectator.setInput('selectedIndex', 2));
 
         spectator.dispatchMouseEvent('ion-segment-button:first-of-type', 'click');
         tick();

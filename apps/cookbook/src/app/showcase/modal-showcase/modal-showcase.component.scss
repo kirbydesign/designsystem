@@ -1,20 +1,6 @@
 @use '../showcase.shared';
 @use '@kirbydesign/core/src/scss/utils';
 
-cookbook-iphone {
-  float: right;
-}
-
-.desktop {
-  display: none;
-}
-
-@include utils.media('>medium') {
-  .mobile {
-    display: none;
-  }
-
-  .desktop {
-    display: initial;
-  }
+.large-example {
+  --docs-demo-device-height: 750px;
 }

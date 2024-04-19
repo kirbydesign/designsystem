@@ -3,22 +3,6 @@
     Data Tables allow the consumer to show large amounts of complex data in tabular form, with rows
     and columns. Columns can be named through the use of headers.
   </p>
-  <p>
-    <i>
-      <strong>Please note:</strong>
-      Kirby Data Table is not a finished component, and it is very modular. This means that it lacks
-      a number of features and all uses should be thoroughly aligned with a designer before use (use
-      the corresponding design guidelines).
-    </i>
-  </p>
-  Prominent features that are missing include:
-  <ul>
-    <li>EventEmitters on headers</li>
-    <li>Selectable headers</li>
-    <li>Asc/desc sorting arrows in headers</li>
-    <li>EventEmitters on rows</li>
-    <li>Responsivity (i.e., no scroll/collapsible columns/etc.)</li>
-  </ul>
 
   <h2>Data table with minimal data</h2>
   <cookbook-example-viewer [html]="dataTableDefaultExample.template">
@@ -27,11 +11,46 @@
     ></cookbook-data-table-default-example>
   </cookbook-example-viewer>
 
-  <h2>Data table wrapped with Kirby Card</h2>
-  <p>Data table wrapped with card and with selectable rows.</p>
+  <h2>Data table wrapped in a Kirby Card</h2>
+  <p>Data table wrapped in a card with selectable rows.</p>
   <cookbook-example-viewer [html]="dataTableCardExample.template">
     <cookbook-data-table-card-example #dataTableCardExample></cookbook-data-table-card-example>
   </cookbook-example-viewer>
+
+  <h2>Sortable table</h2>
+  <p>
+    Data table wrapped in a card with sorting. In this example the
+    <code>Name</code>
+    ,
+    <code>Height</code>
+    &
+    <code>Weight</code>
+    headings are sortable. We recommend to visit the
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#sorting_array_of_objects"
+      class="kirby-external-icon"
+      target="_blank"
+    >
+      MDN docs
+    </a>
+    on sorting, if you're performing client side sorting.
+  </p>
+  <cookbook-example-viewer [html]="dataTableSortableExample.template">
+    <cookbook-data-table-sortable-example
+      #dataTableSortableExample
+    ></cookbook-data-table-sortable-example>
+  </cookbook-example-viewer>
+
+  <p>
+    Please note that the Kirby data table does not do any sorting. The sorting logic must be
+    implemented manually and can be triggered by adding the Angular
+    <code>(click)</code>
+    event listener as shown in the code example above. By adding
+    <code>[sortable]="true"</code>
+    to a
+    <code>th</code>
+    element, it will render the sorting icon (up/down arrow) when the element is clicked.
+  </p>
 </div>
 
 <h2>API Description</h2>

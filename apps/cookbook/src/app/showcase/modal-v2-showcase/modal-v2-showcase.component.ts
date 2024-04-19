@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular/standalone';
 import { ModalV2Config, ModalV2Controller } from '@kirbydesign/designsystem/modal/v2';
 import {
   ModalControllerV2ExampleComponent,

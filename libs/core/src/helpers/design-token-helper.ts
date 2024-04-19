@@ -24,6 +24,16 @@ export class DesignTokenHelper {
     };
   }
 
+  public static getDecorationColor(name: string, step: number) {
+    return {
+      name: name,
+      step: step,
+      fullname: `${name}-${step}`,
+      value: ColorHelper.getThemeDecorationColorRgbString(name, step),
+      hex: ColorHelper.getThemeDecorationColorHexString(name, step),
+    };
+  }
+
   public static getTextColor(
     name: ThemeColorExtended,
     variant?: ThemeColorVariant
@@ -108,6 +118,10 @@ export class DesignTokenHelper {
   }
   public static zLayer(key: keyof typeof styles.zLayers): string {
     return styles.zLayers[key];
+  }
+
+  public static pageContentMaxWidth(key: keyof typeof styles.pageContentMaxWidths): string {
+    return styles.pageContentMaxWidths[key];
   }
 }
 

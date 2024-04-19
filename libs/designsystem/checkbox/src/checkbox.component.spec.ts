@@ -1,4 +1,3 @@
-import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -12,25 +11,25 @@ const getColor = DesignTokenHelper.getColor;
 const getTextColor = DesignTokenHelper.getTextColor;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
 const checkboxIconSize = size('m');
-const checkboxSizeXs = size('l');
+const checkboxSizeXs = size('m');
 const checkboxSizeSm = fatFingerSize;
 const checkboxSizeMd = size('xxxl');
 
 describe('CheckboxComponent', () => {
   const createComponent = createComponentFactory({
     component: CheckboxComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   let spectator: Spectator<CheckboxComponent>;
   let ionCheckbox: HTMLIonCheckboxElement;
-  let label: HTMLSpanElement;
+  let label: HTMLLabelElement;
 
   beforeEach(async () => {
     spectator = createComponent({ props: { text: 'test' } });
     ionCheckbox = spectator.query('ion-checkbox');
     await TestHelper.whenReady(ionCheckbox);
-    label = spectator.query('span');
+    label = ionCheckbox.shadowRoot.querySelector('label');
   });
 
   it('should create', () => {
@@ -47,15 +46,15 @@ describe('CheckboxComponent', () => {
       expect(ionCheckbox).toHaveComputedStyle({
         '--size': checkboxIconSize,
         '--checkmark-color': getColor('white'),
-        '--background-checked': getColor('black'),
+        '--checkbox-background-checked': getColor('black'),
         '--border-color-checked': getColor('black'),
       });
     });
 
     it('should have correct vertical spacing', () => {
-      expect(ionCheckbox).toHaveComputedStyle({
-        'margin-left': size('s'),
-        'margin-right': size('xs'),
+      expect(label).toHaveComputedStyle({
+        'padding-left': size('s'),
+        'padding-right': size('xs'),
       });
     });
 
@@ -93,7 +92,7 @@ describe('CheckboxComponent', () => {
       spectator.detectChanges();
       expect(ionCheckbox).toHaveComputedStyle({
         '--checkmark-color': getColor('black'),
-        '--background-checked': getColor('success'),
+        '--checkbox-background-checked': getColor('success'),
         '--border-color-checked': getColor('success'),
       });
     });
@@ -163,8 +162,8 @@ describe('CheckboxComponent', () => {
         spectator.detectChanges();
         expect(ionCheckbox).toHaveComputedStyle({
           '--checkmark-color': getColor('semi-dark'),
-          '--background': getColor('semi-light'),
-          '--background-checked': getColor('semi-light'),
+          '--checkbox-background': getColor('semi-light'),
+          '--checkbox-background-checked': getColor('semi-light'),
           '--border-color': getColor('medium'),
           '--border-color-checked': getColor('semi-light'),
         });
@@ -200,6 +199,34 @@ describe('CheckboxComponent', () => {
 
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(false);
+    });
+  });
+  describe('implementing ControlValueAccessor interface', () => {
+    it('should update the value when writeValue is called', () => {
+      const newValue = true;
+      spectator.component.writeValue(newValue);
+      expect(spectator.component.checked).toBe(newValue);
+    });
+
+    it('should call the registered onChange function when onChecked is called', () => {
+      const onChangeSpy = jasmine.createSpy('onChange');
+      const newValue = true;
+      spectator.component.registerOnChange(onChangeSpy);
+      spectator.component.onChecked(newValue);
+      expect(onChangeSpy).toHaveBeenCalledOnceWith(newValue);
+    });
+
+    it('should call the registered onTouched function when onBlur is called', () => {
+      const onTouchedSpy = jasmine.createSpy('onTouched');
+      spectator.component.registerOnTouched(onTouchedSpy);
+      spectator.component.onBlur();
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update the disabled state when setDisabledState is called', () => {
+      const isDisabled = true;
+      spectator.component.setDisabledState(isDisabled);
+      expect(spectator.component.disabled).toBe(isDisabled);
     });
   });
 });

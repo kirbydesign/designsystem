@@ -44,6 +44,8 @@ npm i @kirbydesign/designsystem
 
 ### Include KirbyModule
 
+#### NgModule based application
+
 Import the `KirbyModule` in your `AppModule` :
 
 ```ts
@@ -59,6 +61,24 @@ import { KirbyModule } from '@kirbydesign/designsystem';
     ...
 })
 export class AppModule {}
+```
+
+#### Standalone application
+
+Import providers from `KirbyModule` when bootstrapping your application:
+
+```ts
+import { importProvidersFrom } from '@angular/core';
+import { KirbyModule } from '@kirbydesign/designsystem';
+
+...
+
+await bootstrapApplication(RootComponent, {
+  providers: [
+    ...,
+    importProvidersFrom(KirbyModule)
+  ]
+});
 ```
 
 ### Sass
@@ -173,15 +193,16 @@ A basic walkthrough is outlined in the structure below:
 Below is an overview of most widely used scripts, available for this project.  
 Use them in your terminal like: `npm run <script>` :
 
-| Command           | Description                                                                                                                                            |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| start             | Starts the development server, providing a means of running (and developing on the Cookbook)                                                           |
-| lint              | Lints the entire project (both TypeScript and SCSS source code)                                                                                        |
-| lint:cookbook     | Lints the Cookbook application (both TypeScript and SCSS source code)                                                                                  |
-| lint:designsystem | Lints the Designsystem library (both TypeScript and SCSS source code)                                                                                  |
-| dist:cookbook     | Builds a distribution folder of the Cookbook application                                                                                               |
-| dist:designsystem | Builds a distribution folder of the Designsystem library                                                                                               |
-| transpile:tools   | Transpiles tools, required to produce library distribution (this is done as a `post-install` hook, but may have value if altering tool implementation) |
+| Command       | Description                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| start         | Starts the development server, providing a means of running the cookbook while developing                                      |
+| start:ios     | Builds the flows app and deploys it to an iOS device (real or simulated) using Capacitor                                       |
+| start:android | Builds the flows app and deploys it to an Android device (real or simulated) using Capacitor                                   |
+| publish       | When run locally it produces a set of npm packages in `dist/` that can be installed locally with npm install <path to tarball> |
+| storybook     | Opens up Storybook where component states are set up for snapshot testing with Chromatic                                       |
+
+We use [nx][nx] to run common tasks like building, linting and testing projects.
+This is done with `npx nx <target name> <project name>`, e.g. `npx nx lint designsystem` preferrably _from the root of the workspace_ to ensure config paths are resolved correctly.
 
 ## Contributing
 
@@ -191,7 +212,7 @@ If you wish to contribute new features, bug fixes or something third to the proj
 [jasmine]: https://jasmine.github.io/
 [jest]: https://jestjs.io/
 [nrwl]: https://nrwl.io/
-[nx]: https://nx.dev/angular
+[nx]: https://nx.dev/getting-started/intro
 [kirby.design]: https://kirby.design/
 [kirby.cookbook]: https://cookbook.kirby.design
 [kirby.cookbook.fonts]: https://cookbook.kirby.design/home/showcase/fonts

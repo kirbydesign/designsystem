@@ -4,6 +4,15 @@
 <button kirby-button>Medium Button (default)</button>
 <button kirby-button size="lg">Large Button</button>
 
+<p class="comment">
+  <strong>Please note:</strong>
+  The extra small button does not meet the
+  <a href="https://www.w3.org/TR/WCAG22/#target-size-enhanced">
+    WCAG recommendations on target size
+  </a>
+  (44px), and should therefore be used with caution.
+</p>
+
 <fieldset>
   <legend>
     Button size for examples below
@@ -29,6 +38,12 @@
     <kirby-icon name="close"></kirby-icon>
   </button>
   <label>Undecorated</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button [size]="buttonSize" disabled [noDecoration]="true">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Undecorated & disabled</label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize">

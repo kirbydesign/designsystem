@@ -4,6 +4,7 @@
     "types": ["jasmine"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "paths": {
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"],
@@ -58,14 +59,10 @@
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
-      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"],
-      "@kirbydesign/designsystem/alert-experimental": [
-        "libs/designsystem/alert-experimental/index.ts"
-      ],
       "@kirbydesign/designsystem/action-group": ["libs/designsystem/action-group/index.ts"],
-      "@kirbydesign/designsystem/menu": ["libs/designsystem/menu/index.ts"]
-    },
-    "target": "es2020"
+      "@kirbydesign/designsystem/menu": ["libs/designsystem/menu/index.ts"],
+      "@kirbydesign/designsystem/badge": ["libs/designsystem/badge/index.ts"]
+    }
   },
   "include": [],
   "files": [],

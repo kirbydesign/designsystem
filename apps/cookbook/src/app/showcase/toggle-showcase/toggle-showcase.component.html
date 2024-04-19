@@ -1,6 +1,30 @@
 <div class="example">
-  <cookbook-toggle-example></cookbook-toggle-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <cookbook-toggle-default-example #toggleDefaultExample></cookbook-toggle-default-example>
+  <cookbook-code-viewer [html]="toggleDefaultExample.template"></cookbook-code-viewer>
+
+  <h2>Angular Forms</h2>
+  <p>
+    The toggle can be used directly in
+    <a href="https://angular.io/guide/forms" target="_blank">template driven</a>
+    and
+    <a href="https://angular.io/guide/reactive-forms" target="_blank">reactive forms</a>
+    . To use toggle in a reactive form, bind your form control to
+    <code>&lt;kirby-toggle&gt;</code>
+    with simple data binding:
+  </p>
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-toggle [formControl]="yourFormControl"&gt;
+// or simply:
+&lt;kirby-toggle formControlName="yourFormControlName"&gt;
+  </cookbook-code-viewer>
+  <cookbook-example-viewer
+    [html]="toggleReactiveFormsExample.template"
+    [ts]="toggleReactiveFormsExample.codeSnippet"
+  >
+    <cookbook-toggle-reactive-forms-example
+      #toggleReactiveFormsExample
+    ></cookbook-toggle-reactive-forms-example>
+  </cookbook-example-viewer>
   <h4>Toggle properties:</h4>
   <cookbook-api-description-properties
     [properties]="properties"

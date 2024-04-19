@@ -1,8 +1,12 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { ItemSwipeActionType } from './item-sliding.types';
-import { ItemSlidingComponent, ItemSwipeAction } from './';
+import { ItemModule } from 'item/src';
+import {
+  ItemSlidingComponent,
+  ItemSwipeAction,
+  ItemSwipeActionType,
+} from '@kirbydesign/designsystem/item-sliding';
 
 const { getColor } = DesignTokenHelper;
 
@@ -11,6 +15,7 @@ describe('ItemSlidingComponent', () => {
 
   const createHost = createHostFactory({
     component: ItemSlidingComponent,
+    imports: [ItemModule],
   });
 
   let ionItemOptionsElement: HTMLIonItemOptionsElement;
@@ -139,6 +144,14 @@ describe('ItemSlidingComponent', () => {
         const onSelectedSpy = spyOn(spectator.component.swipeActions[idx], 'onSelected');
         ionItemOptionElements[idx].click();
         expect(onSelectedSpy).toHaveBeenCalled();
+      });
+
+      it('should call close', () => {
+        const idx = 0;
+        const closeSpy = spyOn(spectator.component.itemSliding, 'close');
+        ionItemOptionElements[idx].click();
+        expect(closeSpy).toHaveBeenCalled();
+        expect(closeSpy).toHaveBeenCalledTimes(1);
       });
     });
 

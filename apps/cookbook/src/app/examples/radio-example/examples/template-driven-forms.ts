@@ -13,6 +13,7 @@ const config = {
     [checked]="canSelectFavorite"
     (checkedChange)="canSelectFavorite = !canSelectFavorite"
     text="Form field enabled"
+    size="xs"
   >
   </kirby-checkbox>
 
@@ -20,6 +21,7 @@ const config = {
     [checked]="favoriteRequired"
     (checkedChange)="favoriteRequired = !favoriteRequired"
     text="Form field required"
+    size="xs"
   >
   </kirby-checkbox>
 
@@ -55,7 +57,7 @@ favoriteRequired = true;`,
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./ng-forms.shared.scss'],
+  styleUrls: ['../../ng-forms.shared.scss'],
 })
 export class RadioTemplateDrivenFormsExampleComponent {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];

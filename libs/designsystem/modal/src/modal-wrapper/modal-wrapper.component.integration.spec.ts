@@ -4,8 +4,13 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
-import { ModalFooterComponent } from '../modal/footer/modal-footer.component';
-import { ModalWrapperComponent } from './modal-wrapper.component';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import {
+  CanDismissHelper,
+  ModalFooterComponent,
+  ModalWrapperComponent,
+} from '@kirbydesign/designsystem/modal';
+
 import {
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,
@@ -18,8 +23,9 @@ import {
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule, ModalFooterComponent],
+    imports: [RouterTestingModule, ModalFooterComponent, IconModule],
     entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -223,6 +229,7 @@ describe('ModalWrapperComponent + PageTitleComponent', () => {
     imports: [RouterTestingModule],
     entryComponents: [TitleEmbeddedComponent],
     declarations: [PageTitleComponent],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -281,6 +288,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
     imports: [RouterTestingModule],
     entryComponents: [StaticPageProgressEmbeddedComponent, DynamicPageProgressEmbeddedComponent],
     declarations: [PageProgressComponent],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;

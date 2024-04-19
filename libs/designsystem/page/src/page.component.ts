@@ -23,36 +23,44 @@ import {
   Output,
   QueryList,
   Renderer2,
+  RendererStyleFlags2,
   SimpleChanges,
   SkipSelf,
   TemplateRef,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import {
-  IonBackButtonDelegate,
+  IonBackButton,
+  IonButtons,
   IonContent,
   IonFooter,
   IonHeader,
   IonRouterOutlet,
+  IonToolbar,
   NavController,
-} from '@ionic/angular';
-import { ScrollDetail } from '@ionic/core';
+} from '@ionic/angular/standalone';
+import { componentOnReady } from '@ionic/core';
+import type { ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
-import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
+import {
+  HeaderActionsDirective,
+  HeaderComponent,
+  HeaderTitleActionIconDirective,
+} from '@kirbydesign/designsystem/header';
+import { IonicElementPartHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
   ModalElementType,
   ModalNavigationService,
-  ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { HeaderComponent } from '@kirbydesign/designsystem/header';
-import { ACTIONGROUP_CONFIG } from '@kirbydesign/designsystem/action-group';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -62,6 +70,10 @@ const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+type MaxWidth = 'default' | 'standard' | 'optimized' | 'full';
+
+const PAGE_WIDTH_STANDARD_DEPRECATION_WARNING =
+  'Deprecation warning: The support for "standard" as a maxWidth option will be removed in Kirby version 10. After that the "standard" width will be the default width and does not need to be specified.';
 
 export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverride>(
   'page-back-button-override'
@@ -108,7 +120,11 @@ export class PageActionsDirective {
   private readonly stickyDefault = true;
   private readonly fixedDefault = false;
 
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public template: TemplateRef<any>) {
+    console.warn(
+      'Defining Page Actions via *kirbyPageActions is deprecated and will be removed in Kirby v10. A Kirby Header with Actions should be used instead, as it has an improved API with better support for responsive layouts.'
+    );
+  }
 
   get isSticky(): boolean {
     return this.config ? (this.config as stickyConfig).sticky : this.stickyDefault;
@@ -142,25 +158,25 @@ export class PageStickyContentDirective {}
   template: `
     <ng-content></ng-content>
   `,
-  styles: [':host {display: flex}'],
+  styles: [
+    `
+      :host {
+        display: flex;
+        margin-inline-end: 4px; /* Add spacing to potential supplementary action button */
+      }
+    `,
+  ],
 })
-export class PageProgressComponent extends ModalElementComponent implements OnInit {
+export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
   @HostBinding('attr.slot') slot = 'start';
 
   constructor(
-    @Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent,
     @Optional() modalElementsAdvertiser: ModalElementsAdvertiser,
     elementRef: ElementRef<HTMLElement>
   ) {
     super(ModalElementType.PAGE_PROGRESS, elementRef, modalElementsAdvertiser);
-  }
-
-  ngOnInit(): void {
-    if (this.modalWrapper && this.modalWrapper.config.flavor === 'drawer') {
-      this.slot = 'end';
-    }
   }
 }
 @Component({
@@ -191,6 +207,14 @@ export class PageContentComponent {}
   template: `
     <ng-content select="button[kirby-button]"></ng-content>
   `,
+  styles: [
+    `
+      :host {
+        display: inline-flex;
+        column-gap: 8px;
+      }
+    `,
+  ],
 })
 export class PageActionsComponent {}
 
@@ -199,6 +223,7 @@ export class PageActionsComponent {}
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [IonicElementPartHelper],
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
@@ -210,7 +235,21 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
-  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full' = 'default';
+  @Input() hasInteractiveTitle: boolean;
+
+  @Input() set maxWidth(width: MaxWidth) {
+    if (width === 'standard') {
+      console.warn(PAGE_WIDTH_STANDARD_DEPRECATION_WARNING);
+    }
+
+    this._maxWidth = width;
+  }
+
+  get maxWidth(): MaxWidth {
+    return this._maxWidth;
+  }
+
+  private _maxWidth: MaxWidth = 'default';
 
   private _tabBarBottomHidden: boolean;
   public get tabBarBottomHidden(): boolean {
@@ -220,7 +259,10 @@ export class PageComponent
   public set tabBarBottomHidden(value: boolean) {
     if (this.tabsComponent) {
       // as we are setting a class on tabs, we need this to happen in a separate cd cycle
-      setTimeout(() => (this.tabsComponent.tabBarBottomHidden = value));
+      setTimeout(() => {
+        this.tabsComponent.tabBarBottomHidden = value;
+        this.changeDetectorRef.markForCheck();
+      });
     }
     this._tabBarBottomHidden = value;
   }
@@ -229,6 +271,7 @@ export class PageComponent
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
+  @Output() toolbarTitleClick = new EventEmitter<PointerEvent>();
 
   @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
@@ -237,9 +280,12 @@ export class PageComponent
   ionHeaderElement: ElementRef<HTMLIonHeaderElement>;
   @ViewChild(IonFooter, { static: true, read: ElementRef })
   private ionFooterElement: ElementRef<HTMLIonFooterElement>;
-
-  @ViewChild(IonBackButtonDelegate, { static: false })
-  private backButtonDelegate: IonBackButtonDelegate;
+  @ViewChild(IonToolbar, { static: true, read: ElementRef })
+  private ionToolbarElement: ElementRef<HTMLIonToolbarElement>;
+  @ViewChildren(IonButtons, { read: ElementRef })
+  private ionToolbarButtonsElement: QueryList<ElementRef<HTMLIonButtonsElement>>;
+  @ViewChild(IonBackButton, { static: false })
+  private backButton: IonBackButton;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyContentContainer', { static: false, read: ElementRef })
@@ -264,6 +310,7 @@ export class PageComponent
   @ContentChild(HeaderComponent)
   header?: HeaderComponent;
 
+  hasHeader: boolean;
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
   toolbarTitleVisible: boolean;
@@ -280,6 +327,8 @@ export class PageComponent
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
   stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
+  headerActionsTemplate: TemplateRef<HeaderActionsDirective>;
+  titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
 
   private titleIntersectionObserver?: IntersectionObserver;
   private stickyActionsIntersectionObserver?: IntersectionObserver;
@@ -293,13 +342,13 @@ export class PageComponent
   private ngOnDestroy$: Subject<void> = new Subject<void>();
   private contentScrolled$: Observable<ScrollDetail>;
 
-  private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
-    filter((event: RouterEvent) => event instanceof NavigationStart),
+  private navigationStart$: Observable<NavigationStart> = this.router.events.pipe(
+    filter((event): event is NavigationStart => event instanceof NavigationStart),
     takeUntil(this.ngOnDestroy$)
   );
 
-  private navigationEnd$: Observable<RouterEvent> = this.router.events.pipe(
-    filter((event: RouterEvent) => event instanceof NavigationEnd),
+  private navigationEnd$: Observable<NavigationEnd> = this.router.events.pipe(
+    filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     takeUntil(this.ngOnDestroy$)
   );
 
@@ -321,7 +370,8 @@ export class PageComponent
     @Optional()
     private routerOutlet: IonRouterOutlet,
     @Optional()
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private ionicElementPartHelper: IonicElementPartHelper
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -341,12 +391,21 @@ export class PageComponent
 
   ngOnInit(): void {
     this.removeWrapper();
+    this.ionicElementPartHelper.setPart(
+      'background',
+      this.ionToolbarElement,
+      '.toolbar-background'
+    );
 
+    const actionGroupConfig: ActionGroupConfig = {
+      isCondensed: true,
+      maxVisibleActions: 1,
+    };
     this.toolbarActionGroupInjector = Injector.create({
       providers: [
         {
           provide: ACTIONGROUP_CONFIG,
-          useValue: { isResizable: false, isCondensed: true, visibleActions: 1 },
+          useValue: actionGroupConfig,
         },
       ],
       parent: this.injector,
@@ -404,9 +463,11 @@ export class PageComponent
 
     this.interceptBackButtonClicksSetup();
     this.initializeStickyIntersectionObserver();
+    this.setActionButtonsWidth();
   }
 
   ngAfterContentChecked(): void {
+    this.initializeHeader();
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
@@ -437,6 +498,14 @@ export class PageComponent
       return '';
     }
     return `max-width-${this.maxWidth}`;
+  }
+
+  onTitleClick(event: PointerEvent) {
+    if (this.toolbarTitleClick.observed) {
+      this.toolbarTitleClick.emit(event);
+    } else {
+      this.header?.titleClick.emit(event);
+    }
   }
 
   private removeWrapper() {
@@ -473,7 +542,7 @@ export class PageComponent
 
   private interceptBackButtonClicksSetup() {
     if (this.backButtonOverride) {
-      this.backButtonDelegate.onClick = (event: Event) => {
+      this.backButton.onClick = (event: Event) => {
         event.preventDefault();
         this.backButtonOverride.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
       };
@@ -483,9 +552,9 @@ export class PageComponent
     if (this.backButtonClick.observers.length === 0) {
       this.backButtonClick
         .pipe(takeUntil(this.ngOnDestroy$))
-        .subscribe(this.backButtonDelegate.onClick.bind(this.backButtonDelegate));
+        .subscribe(this.backButton.onClick.bind(this.backButton));
     }
-    this.backButtonDelegate.onClick = (event: Event) => {
+    this.backButton.onClick = (event: Event) => {
       this.backButtonClick.emit(event);
     };
   }
@@ -502,9 +571,34 @@ export class PageComponent
     }
   }
 
+  private initializeHeader() {
+    if (this.hasHeader === undefined && !!this.header) {
+      this.hasHeader = true;
+      // Header could later be removed from DOM (e.g. in virtual scrolling scenarios),
+      // so store a reference to `header.titleActionIconTemplate` and `header.titleClick`:
+      this.titleActionIconTemplate = this.header.titleActionIconTemplate;
+      if (this.header.titleClick.observed && this.hasInteractiveTitle === undefined) {
+        this.hasInteractiveTitle = true;
+      }
+    }
+  }
+
   private initializeTitle() {
-    // Ensures initializeTitle() won't run, if already initialized
-    if (this.hasPageTitle) return;
+    if (this.hasHeader && this.isObservingTitle && !this.header?.titleElement) {
+      // If we're already observing the header's title element, but it's no longer present,
+      // it means it has been removed from DOM (e.g. in virtual scrolling scenarios).
+      // Flip observing flag:
+      this.isObservingTitle = false;
+    }
+    if (this.hasPageTitle) {
+      if (!this.isObservingTitle && !!this.header?.titleElement) {
+        // Header and title element re-attached to DOM - observe title:
+        this.observeTitle();
+      }
+
+      // Ensures rest of initializeTitle() won't run, if already initialized
+      return;
+    }
 
     this.hasPageTitle =
       this.title !== undefined || !!this.customTitleTemplate || !!this.header?.title;
@@ -524,6 +618,10 @@ export class PageComponent
       : typeof this.toolbarTitle === 'string'
         ? this.simpleToolbarTitleTemplate
         : defaultTitleTemplate;
+
+    if (this.toolbarTitleClick.observed && this.hasInteractiveTitle === undefined) {
+      this.hasInteractiveTitle = true;
+    }
   }
 
   private observeTitle() {
@@ -544,8 +642,16 @@ export class PageComponent
     if (!this.titleIntersectionObserver) {
       this.titleIntersectionObserver = new IntersectionObserver(
         (entries) => {
-          this.toolbarTitleVisible = !entries[0].isIntersecting;
-          this.changeDetectorRef.detectChanges();
+          // In rare scenarios we get more than 1 entry - use the last one:
+          const lastEntry = entries[entries.length - 1];
+          if (lastEntry) {
+            const showToolbarTitle = !lastEntry.isIntersecting;
+            // Only flip the flag and run Change Detection when changed:
+            if (showToolbarTitle !== this.toolbarTitleVisible) {
+              this.toolbarTitleVisible = showToolbarTitle;
+              this.changeDetectorRef.detectChanges();
+            }
+          }
         },
         { root: this.ionContentElement.nativeElement }
       );
@@ -572,6 +678,16 @@ export class PageComponent
   }
 
   private initializeActions() {
+    if (this.headerActionsTemplate === undefined && !!this.header) {
+      this.headerActionsTemplate = this.header.actionsTemplate;
+    }
+    if (this.hasHeader && this.isObservingActions && !this.header?.actionsElement) {
+      // If we're already observing the header's actions element, but it's no longer present,
+      // it means it has been removed from DOM (e.g. in virtual scrolling scenarios).
+      // Flip observing flag:
+      this.isObservingActions = false;
+    }
+
     this.observeActions();
 
     this.customActions.forEach((pageAction) => {
@@ -604,8 +720,16 @@ export class PageComponent
     if (!this.stickyActionsIntersectionObserver) {
       this.stickyActionsIntersectionObserver = new IntersectionObserver(
         (entries) => {
-          this.toolbarActionsVisible = !entries[0].isIntersecting;
-          this.changeDetectorRef.detectChanges();
+          // In rare scenarios we get more than 1 entry - use the last one:
+          const lastEntry = entries[entries.length - 1];
+          if (lastEntry) {
+            const showToolbarActions = !lastEntry.isIntersecting;
+            // Only flip the flag and run Change Detection when changed:
+            if (showToolbarActions !== this.toolbarActionsVisible) {
+              this.toolbarActionsVisible = showToolbarActions;
+              this.changeDetectorRef.detectChanges();
+            }
+          }
         },
         { root: this.ionContentElement.nativeElement }
       );
@@ -629,6 +753,39 @@ export class PageComponent
     this.isObservingActions = false;
   }
 
+  private setActionButtonsWidth() {
+    if (!this.ionToolbarButtonsElement) return;
+
+    // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
+    customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
+      // Ensure toolbar and buttons have been rendered and has dimensions:
+      componentOnReady(this.ionToolbarElement.nativeElement, (toolbar) => {
+        let startButtonsWidth = 0;
+        let endButtonsWidth = 0;
+
+        this.ionToolbarButtonsElement
+          .map((ionButtonsElementRef) => ionButtonsElementRef.nativeElement)
+          .forEach((ionButtonsElement) => {
+            const style = getComputedStyle(ionButtonsElement);
+            const margin = parseInt(style.marginLeft) + parseInt(style.marginRight);
+            if (ionButtonsElement.getAttribute('slot') === 'start') {
+              startButtonsWidth += ionButtonsElement.offsetWidth + margin;
+            } else {
+              endButtonsWidth += ionButtonsElement.offsetWidth + margin;
+            }
+          });
+
+        const actionButtonsMaxWidth = Math.max(startButtonsWidth, endButtonsWidth);
+        this.renderer.setStyle(
+          toolbar,
+          '--action-buttons-width',
+          `${actionButtonsMaxWidth}px`,
+          RendererStyleFlags2.DashCase
+        );
+      });
+    });
+  }
+
   private initializeContent() {
     this.customContent.forEach((content) => {
       if (content.isFixed) {
@@ -645,8 +802,7 @@ export class PageComponent
 
   private createStickyContentIntersectionObserver() {
     const options: IntersectionObserverInit = {
-      // TODO: Should sticky content also use ion-content as root?
-      // root: this.ionContentElement.nativeElement,
+      root: this.ionContentElement.nativeElement,
       threshold: 1,
     };
 

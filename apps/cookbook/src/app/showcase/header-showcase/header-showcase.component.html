@@ -17,6 +17,24 @@
   </div>
 
   <div class="header-example-container">
+    <h2>Subtitle list</h2>
+
+    <p>
+      If you have a list of subtitles—e.g. full names as in the example below—where each string
+      shouldn't wrap in itself, but the string as a whole can wrap to a new line, you can specify
+      them as a string array.
+    </p>
+    <p>Try rezising the header below and watch how the subtitles wrap and truncate:</p>
+    <cookbook-example-viewer [html]="subtitleListExample.template">
+      <div class="header-example">
+        <cookbook-header-example-subtitle-list
+          #subtitleListExample
+        ></cookbook-header-example-subtitle-list>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Flag</h2>
     <p>
       A flag can be used to indicate a status. To use a flag you simply add a
@@ -26,6 +44,23 @@
     <cookbook-example-viewer [html]="flagExample.template">
       <div class="header-example">
         <cookbook-header-example-flag #flagExample></cookbook-header-example-flag>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Custom Flag</h2>
+    <p>
+      Custom markup can also be added to the header as a flag. This can be achieved by applying the
+      directive
+      <code>*kirbyHeaderCustomFlag</code>
+      to your custom flag markup.
+    </p>
+    <cookbook-example-viewer [html]="customFlagExample.template" [css]="customFlagExample.styles">
+      <div class="header-example">
+        <cookbook-header-example-custom-flag
+          #customFlagExample
+        ></cookbook-header-example-custom-flag>
       </div>
     </cookbook-example-viewer>
   </div>
@@ -48,6 +83,14 @@
         <cookbook-header-example-value #valueExample></cookbook-header-example-value>
       </div>
     </cookbook-example-viewer>
+    <p>
+      <em>
+        See also:
+        <a href="#" (click)="scrollTo(interactiveTitle)">
+          Interactive Title (in key value scenarios)
+        </a>
+      </em>
+    </p>
   </div>
 
   <div class="header-example-container">
@@ -66,6 +109,21 @@
     <cookbook-example-viewer [html]="avatarExample.template">
       <div class="header-example">
         <cookbook-header-example-avatar #avatarExample></cookbook-header-example-avatar>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+  <div class="header-example-container">
+    <h3>Progress Circle with Avatar</h3>
+    <p>
+      The avatar can also be nested within a
+      <code>kirby-progress-circle</code>
+      to show progress:
+    </p>
+    <cookbook-example-viewer [html]="progressCircleExample.template">
+      <div class="header-example">
+        <cookbook-header-example-progress-circle-with-avatar
+          #progressCircleExample
+        ></cookbook-header-example-progress-circle-with-avatar>
       </div>
     </cookbook-example-viewer>
   </div>
@@ -102,28 +160,59 @@
   </div>
 
   <div class="header-example-container">
-    <h2>Action Group</h2>
+    <h2>Actions</h2>
     <p>
-      An action group can be included in the header area and will by default always be shown in the
-      toolbar on small screens. The actions place themselves in the toolbar to the right. It is
-      designed to optimize the screen real estate for the content area on mobile phones.
+      Actions can be included in the header area and will by default always be shown in the toolbar
+      on small screens. The actions place themselves in the toolbar to the right. It is designed to
+      optimize the screen real estate for the content area on mobile phones.
     </p>
 
     <p>
-      On larger screen sizes the action group starts out in the header area, before moving to the
-      toolbar when the page is scrolled past the action group.
+      On larger screen sizes the actions starts out in the header area, before moving to the toolbar
+      when the page is scrolled past the actions.
+    </p>
+
+    <p>Actions can be suppplied through:</p>
+    <ul>
+      <li>
+        <a href="#" (click)="scrollTo(actionGroup)">Action Group component - common use case</a>
+      </li>
+      <li>
+        <a href="#" (click)="scrollTo(customActions)">Custom Actions - complex scenarios</a>
+      </li>
+    </ul>
+
+    <p>
+      <em>
+        <strong>Please note:</strong>
+        In both cases the element containing the actions (e.g.
+        <code>kirby-action-group</code>
+        or an
+        <code>ng-container</code>
+        ) needs to be decorated with the
+        <code>*kirbyHeaderActions</code>
+        directive for the page and header components to render the actions in both locations.
+      </em>
+    </p>
+
+    <h3 #actionGroup>Action Group</h3>
+    <p>
+      In most use cases actions should be suppplied using the
+      <code>kirby-action-group</code>
+      component as shown below. This component has sensible defaults for showing the primary
+      action(s) as button(s) and collapsing the rest of the actions into a "more" menu.
     </p>
 
     <p>
       Actions are supplied to the Action Group via slotted buttons. Only two actions are shown in
-      the toolbar, and if more that two actions are supplied, one action and a more menu button will
-      be shown, while the remaining actions are collapsed into the more menu.
+      the toolbar, and if more that two actions are supplied, one action and a "more" menu button
+      will be shown, while the remaining actions are collapsed into the "more" menu.
     </p>
     <p>
       All button interactions are expected to happen via a click-listener of type
       <code>(click)="someFunction()"</code>
       so the Action Group can make sure to fire the corresponding function for collapsed actions
-      inside the more menu.
+      inside the "more" menu.
     </p>
 
     <cookbook-iphone
@@ -137,16 +226,69 @@
   </div>
 
   <div class="header-example-container">
-    <h2>Header Action Group</h2>
-
+    <h3 #emphasizeActions>Emphasize Actions</h3>
+    <p>
+      When actions are closely related to the content of the page you can configure the header with
+      <code>[emphasizeActions]="true"</code>
+      .
+    </p>
+    <p>
+      With this setting enabled all buttons will be shown and not automatically collapse into a
+      "more" menu. The buttons will also be visible under the title area on small screens. Use this
+      option to further emphasize the action buttons, but keep in mind that it uses more screen real
+      estate than the default option.
+    </p>
     <p>
       <em>
         <strong>Please note:</strong>
-        A follow-up release will soon allow the action group to be placed in the header area on
-        small screens and expand beyond two options when space permits for all screen sizes. This
-        additional feature can simply be enabled on examples such as the one above once it lands.
+        With this setting enabled you should ensure the action buttons can fit on the screen—or
+        collapse secondary actions into a "more" menu using the
+        <code>visibleActions</code>
+        property of
+        <code>kirby-action-group</code>
+        .
       </em>
     </p>
+
+    <cookbook-iphone
+      viewMode="device"
+      [showViewModeToggle]="true"
+      src="/examples/page/header-and-emphasized-action-group"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer [html]="emphasizedActionGroupTemplate"></cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h3 #customActions>Custom Actions</h3>
+    <p>
+      When more control is needed over how actions are shown the
+      <code>*kirbyHeaderActions</code>
+      directive can be applied to the custom actions element itself - e.g. a
+      <code>kirby-menu</code>
+      when only secondary actions are needed.
+    </p>
+    <p>
+      When several action elements needs to be combined they can be grouped in an
+      <code>ng-container</code>
+      which is then decorated with the
+      <code>*kirbyHeaderActions</code>
+      directive.
+    </p>
+    <p>
+      In the example below a primary action button that displays a menu is combined with a "more"
+      menu for secondary actions.
+    </p>
+
+    <cookbook-iphone
+      viewMode="full-size"
+      [showViewModeToggle]="true"
+      src="/examples/page/header-and-custom-actions"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer [html]="customActionsTemplate"></cookbook-example-viewer>
   </div>
 
   <div class="header-example-container">
@@ -174,6 +316,47 @@
   </div>
 
   <div class="header-example-container">
+    <h2 #interactiveTitle>Interactive Title (in key value scenarios)</h2>
+    <p>
+      If you need the user to interact with the title (when having a
+      <code>value</code>
+      prop
+      <em>in addition to</em>
+      the
+      <code>title</code>
+      prop) you can register a handler for the header's
+      <code>titleClick</code>
+      event.
+    </p>
+    <p>
+      Within your event handler you can access the DOM event object with the
+      <code>event</code>
+      argument passed to the output event handler - e.g. to access the event's
+      <code>currentTarget</code>
+      as shown in the example below.
+    </p>
+    <p>
+      You should also add affordance to your interactive title (in key value scenarios) by slotting
+      a
+      <code>kirby-icon</code>
+      into the header and decorate it with the
+      <code>*kirbyHeaderTitleActionIcon</code>
+      directive as shown in the example below:
+    </p>
+    <cookbook-iphone
+      viewMode="full-size"
+      [showViewModeToggle]="true"
+      src="/examples/page/header-and-interactive-title"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer
+      [html]="interactiveTitleTemplate"
+      [ts]="interactiveTitleSnippet"
+    ></cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Combined</h2>
     <p>This example shows all the above options combined:</p>
     <cookbook-example-viewer [html]="combinedExample.template" [css]="combinedExample.styles">
@@ -183,9 +366,24 @@
     </cookbook-example-viewer>
   </div>
 
-  <h1>API</h1>
-  <h2>Header Properties:</h2>
+  <h2>API</h2>
+  <h3>Header Properties</h3>
   <cookbook-api-description-properties
     [properties]="properties"
+  ></cookbook-api-description-properties>
+
+  <h3>Header Directives:</h3>
+  <cookbook-api-description-properties
+    [columns]="directiveColumns"
+    [properties]="directives"
+  ></cookbook-api-description-properties>
+
+  <h3>Header Events</h3>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+
+  <h3>Action Group Properties</h3>
+  <cookbook-api-description-properties
+    #actionGroupAPI
+    [properties]="actionGroupProperties"
   ></cookbook-api-description-properties>
 </div>

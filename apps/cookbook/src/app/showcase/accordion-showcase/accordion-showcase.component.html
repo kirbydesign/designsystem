@@ -9,7 +9,7 @@
       <strong>Note:</strong>
       For now, Accordion uses Angular animations. As no other components use the package it is not
       bundled with Kirby for performance reasons. As a result it is necessary to have
-      <code>@angular/platform-browser</code>
+      <code>&#64;angular/platform-browser</code>
       installed and import
       <code>BrowserAnimationsModule</code>
       yourself when using the accordion.
@@ -33,8 +33,19 @@
     <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
   </cookbook-example-viewer>
 
+  <h2>Accordion toggle event</h2>
+  <cookbook-example-viewer
+    [html]="accordionEventExample.template"
+    [ts]="accordionEventExample.codeSnippet"
+  >
+    <cookbook-accordion-events-example #accordionEventExample></cookbook-accordion-events-example>
+  </cookbook-example-viewer>
+
   <h2>Properties:</h2>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
+
+  <h2>Events</h2>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
 </div>

@@ -87,6 +87,12 @@
   <code>[disableGroupSeperator]</code>
   .
 </p>
+<p>
+  By default the inputted numbers are right-aligned, but can be left-aligned by setting
+  <code>alignment="left"</code>
+  .
+</p>
+
 <cookbook-example-viewer [html]="inputDecimalMaskExample.template">
   <cookbook-form-field-input-decimal-mask-example
     [size]="size"
@@ -109,18 +115,51 @@
     #inputDateExample
   ></cookbook-form-field-input-date-example>
 </cookbook-example-viewer>
+
+<p>The value supplied to the input should be formatted according to the current locale.</p>
+
 <p>
   <em>
     <strong>*Please note:</strong>
-    Date-mask is based on
+    The placeholder is based on
     <code>LOCALE_ID</code>
-    . When
+    . E.g. when
     <code>DA</code>
-    the date-mask will be
+    the placeholder will be
     <code>dd.mm.åååå</code>
   </em>
 </p>
 
+<h4>🧪 Experimental: Standard HTML date input (native date picker)</h4>
+<p>
+  <strong>Please note:</strong>
+  The input UI generally varies between browsers and between devices (
+  <a
+    href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date"
+    target="_blank"
+    rel="noopener"
+  >
+    MDN
+  </a>
+  ). This may not adhere to the visual preferences for your project.
+</p>
+<p>
+  However, a platform native date picker has several advantages out of the box, such as being
+  accessible and having built-in localization.
+</p>
+<cookbook-example-viewer [html]="inputDateNativeExample.template">
+  <cookbook-form-field-input-date-native-example
+    [size]="size"
+    #inputDateNativeExample
+  ></cookbook-form-field-input-date-native-example>
+</cookbook-example-viewer>
+<p>
+  When opting into the native datepicker, the value should be in the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Date_and_time_formats#date_strings">
+    Date strings format
+  </a>
+  .
+</p>
 <h3>Disabled</h3>
 <cookbook-example-viewer [html]="inputDisabledExample.template">
   <cookbook-form-field-input-disabled-example
@@ -202,6 +241,12 @@
 <h4>Properties:</h4>
 <cookbook-api-description-properties
   [properties]="decimalMaskProperties"
+></cookbook-api-description-properties>
+
+<h2>Date mask</h2>
+<h4>Properties:</h4>
+<cookbook-api-description-properties
+  [properties]="dateMaskProperties"
 ></cookbook-api-description-properties>
 
 <h2>Textarea: Specific properties</h2>

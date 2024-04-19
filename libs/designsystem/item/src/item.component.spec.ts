@@ -1,20 +1,21 @@
-import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent, ItemSize } from './item.component';
 
 const { itemHeight, size } = DesignTokenHelper;
+
+const rotationMatrix = 'matrix(-1, 0, 0, -1, 0, 0)';
 
 describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
 
   const createHost = createHostFactory({
-    imports: [MockModule(IonicModule), MockModule(IconModule)],
+    imports: [TestHelper.ionicModuleForTest, IconModule],
     component: ItemComponent,
   });
 
@@ -90,6 +91,88 @@ describe('ItemComponent', () => {
 
       expect(spectator.query('ion-item')).toHaveComputedStyle({
         '--inner-padding-end': size('xxs'),
+      });
+    });
+
+    it('should make the disclosure wrapper element get the same height as its child (kirby-icon)', async () => {
+      spectator.setInput('disclosure', 'arrow-down');
+      spectator.detectChanges();
+
+      const disclosureWrapper = spectator.query<HTMLElement>('.disclosure');
+      const icon = spectator.query<HTMLElement>('kirby-icon');
+
+      expect(disclosureWrapper).toHaveComputedStyle({
+        height: getComputedStyle(icon).height,
+      });
+    });
+
+    describe('when rotateIcon is set to true', () => {
+      beforeEach(() => {
+        spectator.setInput('rotateIcon', true);
+      });
+
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-down"', async () => {
+        spectator.setInput('disclosure', 'arrow-down');
+        spectator.detectChanges();
+
+        const icon = spectator.query<HTMLElement>('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
+
+        expect(icon).toHaveComputedStyle({
+          transform: rotationMatrix,
+        });
+      });
+
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-up"', async () => {
+        spectator.setInput('disclosure', 'arrow-up');
+        spectator.detectChanges();
+
+        const icon = spectator.query<HTMLElement>('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
+
+        expect(icon).toHaveComputedStyle({
+          transform: rotationMatrix,
+        });
+      });
+
+      it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more"', async () => {
+        spectator.setInput('disclosure', 'arrow-more');
+        spectator.detectChanges();
+
+        const icon = spectator.query('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'none',
+        });
+      });
+
+      it('should NOT rotate the icon 180deg if the disclosure icon is "link"', async () => {
+        spectator.setInput('disclosure', 'link');
+        spectator.detectChanges();
+
+        const icon = spectator.query('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'none',
+        });
       });
     });
   });

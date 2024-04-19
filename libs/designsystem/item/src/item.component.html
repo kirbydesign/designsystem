@@ -14,5 +14,10 @@
     <kirby-icon name="reorder"></kirby-icon>
   </ion-reorder>
 
-  <kirby-icon *ngIf="disclosure" class="disclosure" slot="end" name="{{ disclosure }}"></kirby-icon>
+  <span class="disclosure" slot="end" *ngIf="disclosure">
+    <kirby-icon
+      [class.rotate]="rotateIcon && (disclosure === 'arrow-down' || disclosure === 'arrow-up')"
+      name="{{ disclosure }}"
+    ></kirby-icon>
+  </span>
 </ion-item>

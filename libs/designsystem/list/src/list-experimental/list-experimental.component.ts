@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, ViewChild } from '@angular/core';
-import { IonList } from '@ionic/angular';
+import { IonList } from '@ionic/angular/standalone';
 import { elementHasAncestor } from '@kirbydesign/designsystem/helpers';
 
 @Component({

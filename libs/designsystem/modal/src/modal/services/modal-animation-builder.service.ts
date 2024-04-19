@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Animation, AnimationBuilder, createAnimation } from '@ionic/angular';
-import { ModalAnimationOptions } from '@ionic/core';
+import { Animation, AnimationBuilder, createAnimation } from '@ionic/angular/standalone';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
@@ -17,7 +16,7 @@ export class ModalAnimationBuilderService {
   };
 
   public enterAnimation(currentBackdrop?: HTMLIonBackdropElement): AnimationBuilder {
-    return (baseEl: HTMLElement, opts: ModalAnimationOptions): Animation => {
+    return (baseEl: HTMLElement, opts: { presentingEl?: HTMLElement }): Animation => {
       const { presentingEl } = opts;
       const root = this.getElementRoot(baseEl);
       const { wrapperAnimation, backdropAnimation } = this.createEnterAnimation();
@@ -143,7 +142,7 @@ export class ModalAnimationBuilderService {
   public leaveAnimation(currentBackdrop?: HTMLIonBackdropElement): AnimationBuilder {
     return (
       baseEl: HTMLElement,
-      opts: ModalAnimationOptions,
+      opts: { presentingEl?: HTMLElement },
       duration = this.duration
     ): Animation => {
       const { presentingEl } = opts;

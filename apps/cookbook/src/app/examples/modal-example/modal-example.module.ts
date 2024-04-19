@@ -10,21 +10,31 @@ import { ExamplesSharedModule } from '../examples.shared.module';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalExampleConfigurationComponent } from './modal-example-configuration/modal-example-configuration.component';
-import { ModalExampleDefaultComponent } from './modal-example-default.component';
+import { ModalExampleSizeSelectorComponent } from './modal-example-configuration/modal-example-size-selector.component';
+import { ModalExampleAdvancedComponent } from './modal-example-advanced.component';
+import { ModalExampleSimpleComponent } from './modal-example-simple.component';
 import { ModalExampleOutletComponent } from './modal-example-outlet.component';
 import { ModalExampleComponent } from './modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-route-example/modal-route-page2-example.component';
+import { ModalExampleAlertComponent } from './modal-example-alert.component';
+import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-example-embedded-alert.component';
+import { ModalComponentExampleComponent } from './modal-component-example.component';
 
 const COMPONENT_DECLARATIONS = [
   ModalExampleComponent,
-  ModalExampleDefaultComponent,
+  ModalExampleAdvancedComponent,
+  ModalExampleSimpleComponent,
+  ModalComponentExampleComponent,
   ModalExampleConfigurationComponent,
+  ModalExampleSizeSelectorComponent,
   ModalExampleOutletComponent,
   EmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
   ModalRoutePage1ExampleComponent,
   ModalRoutePage2ExampleComponent,
+  ModalExampleAlertComponent,
+  ModalEmbeddedAlertExampleComponent,
 ];
 
 @NgModule({

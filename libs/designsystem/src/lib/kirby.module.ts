@@ -34,7 +34,6 @@ import { ListModule } from '@kirbydesign/designsystem/list';
 import { RadioModule } from '@kirbydesign/designsystem/radio';
 import {
   AffixDirective,
-  DateInputDirective,
   FormFieldModule,
   InputComponent,
   TextareaComponent,
@@ -54,12 +53,14 @@ import {
   ActionSheetHelper,
   AlertComponent,
   AlertHelper,
+  CanDismissHelper,
   ModalCompactWrapperComponent,
   ModalController,
   ModalFooterComponent,
   ModalHelper,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
+import { ModalComponent } from '@kirbydesign/designsystem/modal';
 import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { HeaderModule } from '@kirbydesign/designsystem/header';
@@ -72,15 +73,13 @@ import { DataTableModule } from '@kirbydesign/designsystem/data-table';
 import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
-import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
-import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { KirbyBadgeModule } from './components/kirby-badge.module';
 
 const exportedDeclarations = [ModalRouterLinkDirective];
 
@@ -88,13 +87,11 @@ const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
   ActionGroupComponent,
-  GridComponent,
   ItemGroupComponent,
   ModalCompactWrapperComponent,
   TextareaComponent,
   InputComponent,
   AffixDirective,
-  DateInputDirective,
   DividerComponent,
   ThemeColorDirective,
   SegmentedControlComponent,
@@ -105,7 +102,6 @@ const standaloneComponents = [
   SectionHeaderComponent,
   RangeComponent,
   ItemSlidingComponent,
-
   ProgressCircleComponent,
   ReorderListComponent,
   LoadingOverlayComponent,
@@ -122,6 +118,8 @@ const standaloneComponents = [
   ButtonComponent,
   ComponentLoaderDirective,
   FlagComponent,
+  BadgeComponent,
+  ModalComponent,
 ];
 const exportedModules = [
   KirbyAppModule,
@@ -141,7 +139,6 @@ const exportedModules = [
   RadioModule,
   EmptyStateModule,
   DropdownModule,
-  KirbyBadgeModule,
   FormFieldModule,
   SlideModule,
   AccordionModule,
@@ -161,11 +158,10 @@ const providers = [
   AlertHelper,
   ToastHelper,
   ToastController,
-  BreakpointHelperService,
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
-  customElementsInitializer(),
+  CanDismissHelper,
 ];
 
 const ConfigToken = new InjectionToken<unknown>('USERCONFIG');

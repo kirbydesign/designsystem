@@ -1,4 +1,4 @@
-import { IonItem, IonList } from '@ionic/angular';
+import { IonItem, IonList } from '@ionic/angular/standalone';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';

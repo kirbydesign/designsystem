@@ -14,7 +14,6 @@ export * from '@kirbydesign/designsystem/empty-state';
 export * from '@kirbydesign/designsystem/fab-sheet';
 export * from '@kirbydesign/designsystem/flag';
 export * from '@kirbydesign/designsystem/form-field';
-export * from '@kirbydesign/designsystem/grid';
 export * from '@kirbydesign/designsystem/helpers';
 export * from '@kirbydesign/designsystem/helpers/scss';
 export * from '@kirbydesign/designsystem/icon';
@@ -46,7 +45,6 @@ export * from '@kirbydesign/designsystem/toggle';
 export * from '@kirbydesign/designsystem/toggle-button';
 export * from '@kirbydesign/designsystem/types';
 export * from '@kirbydesign/designsystem/chart';
-export * from '@kirbydesign/designsystem/alert-experimental';
 export * from '@kirbydesign/designsystem/action-group';
 export * from '@kirbydesign/designsystem/header';
 

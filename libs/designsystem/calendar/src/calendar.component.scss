@@ -95,6 +95,13 @@ td {
 
 .day.disabled,
 .day:not(.selectable) {
+  // Hardcoded color because we don't want it to be part of a shared color palette
+  --color: #b4b4b4;
+
+  pointer-events: none;
+}
+
+.day.selectable:not(.current-month) {
   --color: #{utils.get-text-color('semi-dark')};
 }
 
@@ -112,11 +119,6 @@ td {
 
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
-}
-
-.day:not(.current-month) {
-  visibility: hidden;
-  pointer-events: none;
 }
 
 .contain-state-layer {

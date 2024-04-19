@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 
 import { Icon } from './icon-settings';
+import { kirbyIconSettings } from './kirby-icon-settings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
+
+  constructor() {
+    this.addDefaultIcons();
+  }
 
   public addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
@@ -24,6 +29,10 @@ export class IconRegistryService {
     icons.forEach((icon) => {
       this.addIcon(icon.name, icon.svg);
     });
+  }
+
+  private addDefaultIcons(): void {
+    this.addIcons(kirbyIconSettings.icons);
   }
 
   getIcons(): Icon[] {

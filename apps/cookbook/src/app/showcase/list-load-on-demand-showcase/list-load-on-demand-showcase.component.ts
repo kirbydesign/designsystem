@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
+import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
 
 @Component({
   selector: 'cookbook-list-load-on-demand-showcase',

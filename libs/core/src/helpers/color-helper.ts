@@ -2,10 +2,12 @@ import { styles } from './color-helper.styles';
 import { camelToKebabCase, kebabToCamelCase } from './string-helper';
 
 type KirbyColorGroup = { [key: string]: string };
+type KirbyColorRamp = { [key: string]: { [key: number]: string } };
 
 export class ColorHelper {
   static readonly brandColors = ColorHelper.mapToKirbyColorArray(styles.brandColors);
   static readonly notificationColors = ColorHelper.mapToKirbyColorArray(styles.notificationColors);
+  static readonly decorationColors = ColorHelper.mapToKirbyColorRampArray(styles.decorationColors);
   static readonly systemColors = ColorHelper.mapToKirbyColorArray(styles.systemColors);
   static readonly textColors = ColorHelper.mapToKirbyColorArray(
     styles.textColors,
@@ -49,6 +51,19 @@ export class ColorHelper {
     return colorArray;
   }
 
+  private static mapToKirbyColorRampArray(colors: KirbyColorRamp): KirbyDecorationColor[] {
+    const colorArray = Object.entries(colors).map(([name, value]) => ({
+      name: camelToKebabCase(name),
+      ramp: Object.entries(value).map(([step, rampValue]) => ({
+        step,
+        value: rampValue,
+      })),
+    }));
+    // Do not remove the `colorArray` const, since it'll break the ngpackagr build, for more info see:
+    // https://github.com/ng-packagr/ng-packagr/issues/696
+    return colorArray;
+  }
+
   public static getBackgroundColor() {
     return ColorHelper.getColor('background-color');
   }
@@ -64,6 +79,13 @@ export class ColorHelper {
       : `rgb(${rgbValue})`;
   }
 
+  public static getThemeDecorationColorRgbString(name: string, step: number, opacity?: number) {
+    const rgb = ColorHelper.hexToRGB(ColorHelper.getDecorationColor(name, step));
+    return opacity
+      ? rgb.replace('rgb', 'rgba').replace(')', `, ${ColorHelper.opacityThreshold(opacity)})`)
+      : rgb;
+  }
+
   public static getThemeTextColorRgbString(name: string) {
     const rgbValue = ColorHelper.getTextColor(name + '-rgb');
     return `rgb(${rgbValue})`;
@@ -71,6 +93,10 @@ export class ColorHelper {
 
   public static getThemeColorHexString(name: string) {
     return ColorHelper.getColor(name);
+  }
+
+  public static getThemeDecorationColorHexString(name: string, step: number) {
+    return ColorHelper.getDecorationColor(name, step);
   }
 
   public static getThemeTextColorHexString(name: string) {
@@ -124,13 +150,28 @@ export class ColorHelper {
   private static getColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyColors[camelCaseKey];
-    return found || null;
+    const runTimeColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(`--kirby-${name}`);
+    return runTimeColor || found || null;
+  }
+
+  private static getDecorationColor(name: string, step: number): string {
+    const camelCaseKey = kebabToCamelCase(name);
+    const found = styles.decorationColors[camelCaseKey][step];
+    const runTimeColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(`--kirby-decoration-color-${name}-${step}`);
+    return runTimeColor || found || null;
   }
 
   private static getTextColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyTextColors[camelCaseKey];
-    return found || null;
+    const runTimeColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(`--kirby-text-color-${name}`);
+    return runTimeColor || found || null;
   }
 
   private static opacityThreshold(opacity: number): number {
@@ -156,6 +197,11 @@ export interface KirbyColor extends Color {
   tint: Color;
   shade: Color;
   contrast: Color;
+}
+
+export interface KirbyDecorationColor {
+  name: string;
+  ramp: KirbyColorRamp[];
 }
 
 export type NotificationColor = keyof typeof styles.notificationColors;

@@ -1,5 +1,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+:host {
+  display: block;
+}
+
 h4 {
   margin: utils.size('s') 0;
 }

@@ -1,8 +1,23 @@
-import { IonicModule } from '@ionic/angular';
-import { IonicConfig } from '@ionic/core';
+import { NgModule } from '@angular/core';
+import { provideIonicAngular } from '@ionic/angular/standalone';
+import { componentOnReady } from '@ionic/core';
+
+@NgModule({
+  providers: [provideIonicAngular({ mode: 'ios', _testing: true })],
+})
+class IonicTestingModule {}
 
 export class TestHelper {
   public static readonly _init = TestHelper.muteIonicReInitializeWarning();
+
+  public static disableAnimationsInTest() {
+    //@ts-ignore
+    window.Ionic = {
+      config: {
+        _testing: true,
+      },
+    };
+  }
 
   public static muteIonicReInitializeWarning() {
     const originalWarn = console.warn;
@@ -13,11 +28,7 @@ export class TestHelper {
     console.warn = patchedWarn;
   }
 
-  public static ionicModuleForTest = IonicModule.forRoot({
-    mode: 'ios',
-    _testing: true,
-    get: () => {}, // Prevents Ionic "config.get is not a function" errors
-  } as IonicConfig);
+  public static ionicModuleForTest = IonicTestingModule;
 
   /*
    * Checks for the Web Component(s) being ready,
@@ -46,10 +57,9 @@ export class TestHelper {
 
   /* Checks for the Ionic Web Component being ready, ie. the component is hydrated and styles applied */
   public static async ionComponentOnReady(element: Element): Promise<void> {
-    const componentOnReady = (element as any).componentOnReady as () => Promise<void>;
-    if (typeof componentOnReady === 'function') {
-      await componentOnReady.bind(element)();
-    }
+    await new Promise<void>((resolve) => {
+      componentOnReady(element, () => resolve());
+    });
   }
 
   public static async whenTrue(
@@ -78,8 +88,8 @@ export class TestHelper {
     });
   }
 
-  public static getCssProperty(element: Element, propertyName: string) {
-    return window.getComputedStyle(element).getPropertyValue(propertyName).trim();
+  public static getCssProperty(element: Element, propertyName: string, pseudoElt?: string) {
+    return window.getComputedStyle(element, pseudoElt).getPropertyValue(propertyName).trim();
   }
 
   public static screensize = {
