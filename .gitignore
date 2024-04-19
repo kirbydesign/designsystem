@@ -60,3 +60,4 @@ scripts/install-ipa.html
 /tools/generate-mocks/dist
 
 .angular
+.nx
