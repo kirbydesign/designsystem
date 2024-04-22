@@ -33,7 +33,7 @@ $border-color-selected: utils.get-color('dark');
 
     color: utils.get-color('black');
     box-sizing: border-box; // Ensure border is not added to button height
-    padding: utils.size('s') utils.size('m');
+    padding: utils.size('s');
     font-size: utils.font-size('n');
     line-height: utils.line-height('m');
     gap: utils.size('xxxs');
