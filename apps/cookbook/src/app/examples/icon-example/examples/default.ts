@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { defaultIcons } from '@kirbydesign/designsystem';
 import { Color, ColorHelper } from '@kirbydesign/designsystem';
-import { IconSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-icon-default-example',
@@ -30,9 +29,7 @@ const config = {
 })
 export class IconDefaultExampleComponent {
   static htmlSnippet: string = config.htmlSnippet;
-
   icons = defaultIcons;
-  sizes = IconSize;
   color: Color;
   colors: Color[] = [...ColorHelper.brandColors, ...ColorHelper.notificationColors];
 

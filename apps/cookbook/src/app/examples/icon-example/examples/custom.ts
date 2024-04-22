@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { IconSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-icon-custom-example',
-  template: `
-  <div class="icon-item-container">
+  template: `<div class="icon-item-container">
   <div class="icon-item-inner-container">
     <kirby-icon name="football" title="football"></kirby-icon>
     <span class="icon-item-title">football</span>
@@ -45,5 +43,4 @@ export class MyModule {
 export class IconCustomExampleComponent {
   static codeSnippet: string = config.codeSnippet;
   static htmlSnippet: string = config.htmlSnippet;
-  sizes = IconSize;
 }
