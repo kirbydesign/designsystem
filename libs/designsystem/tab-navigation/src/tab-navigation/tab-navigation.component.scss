@@ -39,6 +39,7 @@ div[role='tablist'] {
   justify-content: left;
   flex-wrap: nowrap;
   overflow-x: scroll;
+  column-gap: utils.size('xs');
 
   @include utils.media('<medium') {
     padding-inline: var(--padding-start) var(--padding-end);
