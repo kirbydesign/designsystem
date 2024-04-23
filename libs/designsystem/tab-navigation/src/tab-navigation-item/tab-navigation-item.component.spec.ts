@@ -51,4 +51,23 @@ describe('TabNavigationItemComponent', () => {
 
     expect(badges.length).toBe(1);
   });
+
+  it('should truncate label text', () => {
+    spectator.setInput('label', 'Long label text that should get truncated');
+
+    const textElement = spectator.query('span[data-text]');
+
+    expect(textElement.clientWidth).toBe(100);
+  });
+
+  it('should not truncate label text when explicitly disabled', () => {
+    spectator.setInput({
+      label: 'Long label text that should not get truncated',
+      truncate: false,
+    });
+
+    const textElement = spectator.query('span[data-text]');
+
+    expect(textElement.clientWidth).toBeGreaterThan(100);
+  });
 });
