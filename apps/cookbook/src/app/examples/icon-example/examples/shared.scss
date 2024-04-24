@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../../../shared/mini-toast';
 
 :host {
   display: block;
@@ -33,6 +34,10 @@ p {
 
 kirby-icon {
   width: 100%;
+
+  &.copy-to-clipboard {
+    @include mini-toast.copied;
+  }
 }
 
 .color-options {

@@ -7,7 +7,7 @@ const config = {
   template: `<div>
   <div class="icon-item-container" *ngFor="let icon of icons">
     <div class="icon-item-inner-container">
-      <kirby-icon [name]="icon" [title]="icon" [themeColor]="color?.name"></kirby-icon>
+      <kirby-icon class="copy-to-clipboard" [name]="icon" [title]="icon" [themeColor]="color?.name" (click)="onIconClick($event, icon)"></kirby-icon>
       <span class="icon-item-title">{{ icon }}</span>
     </div>
   </div>
@@ -35,5 +35,15 @@ export class IconDefaultExampleComponent {
 
   changeColor(color: Color) {
     this.color = color;
+  }
+
+  async onIconClick(event: UIEvent, name: string) {
+    const iconMarkup = `<kirby-icon name="${name}"></kirby-icon>`;
+    await navigator.clipboard.writeText(iconMarkup);
+    const iconElement = (event.target as HTMLElement).closest('kirby-icon');
+    iconElement.classList.add('copied');
+    window.setTimeout(() => {
+      iconElement.classList.remove('copied');
+    }, 1500);
   }
 }
