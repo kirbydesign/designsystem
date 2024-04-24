@@ -1,16 +1,21 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconModule, IconRegistryService } from '@kirbydesign/designsystem/icon';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 import { IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
-import { SegmentItem, SegmentItemInternal } from './segment-item';
+import { SegmentItem } from './segment-item';
 
 export enum SegmentedControlMode {
   chip = 'chip',
   compactChip = 'compactChip',
   default = 'default',
 }
+
+// Workaround until TS 5.4 official NoInfer
+// https://github.com/millsp/ts-toolbelt/blob/master/sources/Function/NoInfer.ts
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type NoInfer<T> = [T][T extends any ? 0 : never];
 
 @Component({
   standalone: true,
@@ -21,9 +26,7 @@ export enum SegmentedControlMode {
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { role: 'group' },
 })
-export class SegmentedControlComponent {
-  constructor(private iconRegistryService: IconRegistryService) {}
-
+export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
   /**
    * Ensure that the click actually did originate from within the segment-button.
    * We do not want to react to clicks on e.g. segment-btn-wrapper or badge.
@@ -48,20 +51,13 @@ export class SegmentedControlComponent {
     }[this.mode];
   }
 
-  private _items: SegmentItemInternal[] = [];
-  get items(): SegmentItemInternal[] {
+  private _items: TItem[] = [];
+  get items(): TItem[] {
     return this._items;
   }
 
-  @Input() set items(value: SegmentItem[]) {
+  @Input() set items(value: TItem[]) {
     this._items = value || [];
-    this._items.forEach((item) => {
-      if (!item.badge) return;
-      // We need to verify whether badges icon is custom or default, so we can check for it in the template
-      item.badge.isCustomIcon =
-        item.badge.icon !== undefined &&
-        this.iconRegistryService.getIcon(item.badge.icon) !== undefined;
-    });
     this._value = this.items[this.selectedIndex];
   }
 
@@ -80,12 +76,12 @@ export class SegmentedControlComponent {
 
   @Output() selectedIndexChange = new EventEmitter<number>();
 
-  private _value: SegmentItem;
-  get value(): SegmentItem {
+  private _value: NoInfer<TItem>;
+  get value(): NoInfer<TItem> {
     return this._value;
   }
 
-  @Input() set value(value: SegmentItem) {
+  @Input() set value(value: NoInfer<TItem>) {
     this.selectedIndex = this.items.indexOf(value);
   }
 
@@ -105,7 +101,7 @@ export class SegmentedControlComponent {
     this._disableChangeOnSwipe = value;
   }
 
-  @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
+  @Output() segmentSelect = new EventEmitter<TItem>();
 
   onSegmentSelect(selectedId: string) {
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
