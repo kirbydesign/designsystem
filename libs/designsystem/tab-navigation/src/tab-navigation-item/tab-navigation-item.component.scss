@@ -62,9 +62,11 @@ $border-color-selected: utils.get-color('dark');
 }
 
 span[data-text] {
-  max-width: $tab-item-text-max-width;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  &.truncate {
+    max-width: $tab-item-text-max-width;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   // Using the before selector to insert a hidden pseudo-element with the same text content in bold,
   // ensures no horizontal layout shifts when changing the visible span's text content from bold to normal font-weight.

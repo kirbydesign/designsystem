@@ -1,4 +1,4 @@
 <button role="tab" #tabButton>
-  <span attr.data-text="{{ label }}">{{ label }}</span>
+  <span attr.data-text="{{ label }}" [class.truncate]="truncate">{{ label }}</span>
   <ng-content></ng-content>
 </button>
