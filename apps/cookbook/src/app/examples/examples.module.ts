@@ -42,6 +42,7 @@ import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button
 import { ToggleExampleModule } from './toggle-example/toggle-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 import { MenuExampleModule } from './menu-example/menu-example.module';
+import { IconExampleModule } from './icon-example/icon-example.module';
 
 const IMPORTS = [
   CodeViewerModule,
@@ -77,6 +78,7 @@ const IMPORTS = [
   MenuExampleModule,
   SlideModule,
   HeaderExampleModule,
+  IconExampleModule,
 ];
 
 @NgModule({
