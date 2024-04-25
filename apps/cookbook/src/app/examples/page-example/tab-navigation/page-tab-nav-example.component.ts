@@ -57,19 +57,12 @@ const config = {
 })
 export class PageTabNavExampleComponent extends BasePageExampleComponent {
   selectedIndex = 0;
-  labels = [
-    'Item 1',
-    'Item 2 label text gets truncated',
-    'Item 3 label contains more text and it does not get truncated',
-    'Item 4',
-    'Item 5',
-    'Item6 longer',
-  ];
+  labels = ['Item 1', 'Item 2 truncated', 'Item 3 not truncated', 'Item 4', 'Item 5', 'Item 6'];
 
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
     .replace('<div [innerHTML]="content"></div>', '...');
   static readonly codeSnippet = `selectedIndex = 0;
-labels = ['Item 1','Item 2 label text gets truncated','Item 3 label contains more text and it does not get truncated','Item 4','Item 5','Item6 longer']];
+labels = ['Item 1', 'Item 2 truncated', 'Item 3 not truncated', 'Item 4', 'Item 5', 'Item 6']];
 `;
 }
