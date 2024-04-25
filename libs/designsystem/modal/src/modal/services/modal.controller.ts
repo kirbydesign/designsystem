@@ -19,6 +19,8 @@ export class ModalController implements OnDestroy {
   private readonly noOverlayRegisteredErrorMessage = 'No modal overlays are currently registered';
   private destroy$ = new Subject<void>();
 
+  private isCreatingOverlay = false;
+
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
@@ -135,8 +137,23 @@ export class ModalController implements OnDestroy {
     onCloseOverlay?: (data?: any) => void,
     onWillCloseOverlay?: (data?: any) => void
   ) {
-    const overlay = await showOverlay();
-    if (!overlay) return;
+    /* 
+    isCreatingOverlay is used to prevent additional instantiations
+    of modals, while a modal is already being instatiated, but not completed.
+    This is the recommended approach by one of the maintainers of Ionic:
+    https://github.com/ionic-team/ionic-framework/issues/23327#issuecomment-847028058
+   */
+    if (this.isCreatingOverlay) {
+      return;
+    }
+    let overlay: Overlay;
+    this.isCreatingOverlay = true;
+    try {
+      overlay = await showOverlay();
+      if (!overlay) return;
+    } finally {
+      this.isCreatingOverlay = false;
+    }
 
     this.overlays.push(overlay);
 

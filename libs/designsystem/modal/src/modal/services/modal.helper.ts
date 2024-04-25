@@ -26,17 +26,7 @@ export class ModalHelper {
     private alertHelper: AlertHelper
   ) {}
 
-  /* 
-    isModalOpening is used to prevent additional instantiations
-    of modals, while a modal is already being instatiated, but not completed.
-    This is the recommended approach by one of the maintainers of Ionic:
-    https://github.com/ionic-team/ionic-framework/issues/23327#issuecomment-847028058
-  */
-  private isModalOpening = false;
-
   public async showModalWindow(config: ModalConfig, alertConfig?: AlertConfig): Promise<Overlay> {
-    if (this.isModalOpening) return;
-
     config.flavor = config.flavor || 'modal';
 
     let currentBackdrop: HTMLIonBackdropElement;
@@ -88,8 +78,6 @@ export class ModalHelper {
       };
     }
 
-    this.isModalOpening = true;
-
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
@@ -137,8 +125,6 @@ export class ModalHelper {
     if (!config.modalRoute && !config.canDismiss && !alertConfig) {
       this.handleBrowserBackButton(ionModal);
     }
-
-    this.isModalOpening = false;
 
     return {
       dismiss: ionModal.dismiss.bind(ionModal),
