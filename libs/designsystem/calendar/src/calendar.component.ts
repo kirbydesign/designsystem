@@ -447,6 +447,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     const dateToEmit = newDate;
 
     if (this.hasDateChanged(newDate, this._selectedDate)) {
+      this.setActiveMonth(newDate);
       this.onSelectedDateChange(newDate);
       this._selectedDate = newDate;
       this.dateChange.emit(dateToEmit);
