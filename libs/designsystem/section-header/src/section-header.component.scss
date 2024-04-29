@@ -11,5 +11,8 @@
 
     font-weight: inherit;
     min-height: 0;
+
+    // Fixes https://github.com/kirbydesign/designsystem/issues/3457
+    z-index: initial;
   }
 }
