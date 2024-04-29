@@ -142,7 +142,6 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   }
 
   setMode(mode: SegmentedControlMode) {
-    console.log('setMode - mode:', mode);
     this.mode = mode;
     this.selectedSegment = this.items[0];
   }
