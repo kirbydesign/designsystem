@@ -1,0 +1,26 @@
+{
+  "name": "composed-ui-angular",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/composed-ui/angular/src",
+  "prefix": "kirby",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/composed-ui/angular/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/composed-ui/angular/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/composed-ui/angular/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  }
+}

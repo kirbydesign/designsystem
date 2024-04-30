@@ -8,7 +8,8 @@
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/tsconfig.storybook.json",
-      "!{projectRoot}/.stylelintrc(.(json|yml|yaml|js))?"
+      "!{projectRoot}/.stylelintrc(.(json|yml|yaml|js))?",
+      "!{projectRoot}/.eslintrc.json"
     ]
   },
   "parallel": 5,
@@ -20,9 +21,11 @@
   },
   "generators": {
     "@nx/angular:application": {
-      "style": "scss"
+      "style": "scss",
+      "linter": "eslint"
     },
     "@nx/angular:library": {
+      "style": "scss",
       "linter": "eslint"
     },
     "@nx/angular:component": {
