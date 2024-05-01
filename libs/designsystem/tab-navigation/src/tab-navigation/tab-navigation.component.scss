@@ -2,7 +2,6 @@
 
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
-$divider-max-width-breakpoint: utils.$page-content-max-width-default + (utils.size('s') * 2);
 
 :host {
   display: block;
@@ -24,11 +23,6 @@ $divider-max-width-breakpoint: utils.$page-content-max-width-default + (utils.si
     z-index: utils.z('default');
     left: 0;
     width: 100%;
-
-    @include utils.media('<=#{$divider-max-width-breakpoint}') {
-      left: calc(-1 * var(--padding-start, #{utils.size('s')}));
-      width: calc(100% + (var(--padding-start, #{utils.size('s')}) * 2));
-    }
   }
 }
 
