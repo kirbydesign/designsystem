@@ -481,9 +481,21 @@
       only impact the content areas as the top bar will continue to use the available space.
     </p>
     <cookbook-code-viewer [html]="contentWidthExampleHtml"></cookbook-code-viewer>
+    <p>
+      <em>
+        <strong>Please note:</strong>
+        For this setting to take effect
+        <a class="kirby-external-icon" [href]="contentWidthExample.trustedSrc">
+          the example below should be viewed in a full browser window
+        </a>
+      </em>
+    </p>
+    <cookbook-iphone
+      viewMode="full-size"
+      src="/examples/page/content-width"
+      #contentWidthExample
+    ></cookbook-iphone>
   </div>
-
-  <cookbook-iphone src="/examples/page/content-width" showExternalLink="true"></cookbook-iphone>
 </div>
 
 <h2>Page Properties:</h2>

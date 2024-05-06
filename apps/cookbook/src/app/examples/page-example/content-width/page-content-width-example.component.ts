@@ -1,25 +1,38 @@
 import { Component } from '@angular/core';
 
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+const getMaxWidth = DesignTokenHelper.pageContentMaxWidth;
+
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const fieldsetHtml = `
   <fieldset>
     <legend>Max Width</legend>
-    <select (change)="onMaxWidthChange($event.target.value)">
-      <option
-        *ngFor="let option of maxWidthOptions"
-        value="{{ option.value }}"
-        [attr.selected]="maxWidthOptions === option.value ? true : null"
+    <kirby-dropdown
+      [items]="maxWidthOptions"
+      [selectedIndex]="0"
+      size="sm"
+      (change)="onMaxWidthChange($event.value)">
+      <kirby-item
+        *kirbyListItemTemplate="let item; let selected = selected; let focused = focused"
+        selectable="true"
+        [selected]="selected"
+        [class.focused]="focused"
       >
-        {{ option.text }}
-      </option>
-    </select>
+        <kirby-label>
+          <h3>{{ item.text }}</h3>
+          <code detail *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
+        </kirby-label>
+        <kirby-label slot="end">
+          <data detail>{{ item.width }}</data>
+        </kirby-label>
+      </kirby-item>
+    </kirby-dropdown>
   </fieldset>
-  <br />
 `;
 
 const config = {
-  template: `<kirby-page title="Content Width" defaultBackHref="/" [maxWidth]="maxWidth">
+  template: `<kirby-page title="Content Width" [maxWidth]="maxWidth">
   <kirby-page-content>${fieldsetHtml}
     <div [innerHTML]="content"></div>
   </kirby-page-content>
@@ -27,31 +40,45 @@ const config = {
 };
 @Component({
   template: config.template,
+  styles: [
+    `
+      fieldset {
+        margin-bottom: 16px;
+      }
+    `,
+  ],
 })
 export class PageContentWidthExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
-    .replace(' defaultBackHref="/"', '')
     .replace(fieldsetHtml, '')
     .replace('<div [innerHTML]="content"></div>', '...');
 
-  maxWidth: string = '';
-
   maxWidthOptions = [
     {
-      text: 'default',
+      text: 'Default',
       value: 'default',
+      width: getMaxWidth('default'),
     },
     {
-      text: 'optimized',
-      value: 'optimized',
+      text: 'Large',
+      value: 'lg',
+      width: getMaxWidth('lg'),
     },
     {
-      text: 'full',
+      text: 'X-Large',
+      value: 'xl',
+      width: getMaxWidth('xl'),
+    },
+    {
+      text: 'Full',
       value: 'full',
+      width: getMaxWidth('full'),
     },
   ];
 
-  onMaxWidthChange(value) {
+  maxWidth: string = this.maxWidthOptions[0].value;
+
+  onMaxWidthChange(value: string) {
     this.maxWidth = value;
   }
 }

@@ -125,7 +125,8 @@ $avatar-badge-size: 16px;
 ****************************************************************************/
 $page-content-max-widths: (
   default: 792px,
-  optimized: 1092px,
+  lg: 1092px,
+  xl: 1392px,
   full: 100%,
 );
 $page-content-max-width-default: map.get($page-content-max-widths, 'default');
