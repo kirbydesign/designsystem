@@ -32,7 +32,7 @@ const fieldsetHtml = `
 `;
 
 const config = {
-  template: `<kirby-page title="Content Width" defaultBackHref="/" [maxWidth]="maxWidth">
+  template: `<kirby-page title="Content Width" [maxWidth]="maxWidth">
   <kirby-page-content>${fieldsetHtml}
     <div [innerHTML]="content"></div>
   </kirby-page-content>
@@ -50,7 +50,6 @@ const config = {
 })
 export class PageContentWidthExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
-    .replace(' defaultBackHref="/"', '')
     .replace(fieldsetHtml, '')
     .replace('<div [innerHTML]="content"></div>', '...');
 
