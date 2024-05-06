@@ -841,7 +841,37 @@ describe('PageComponent', () => {
           await TestHelper.whenReady(ionContent);
           const contentInner = ionContent.querySelector('.content-inner');
           expect(contentInner).toHaveComputedStyle({
-            'max-width': DesignTokenHelper.pageContentMaxWidth('optimized'),
+            'max-width': DesignTokenHelper.pageContentMaxWidth('lg'),
+          });
+        });
+      });
+
+      describe('and is set to lg', () => {
+        beforeEach(() => {
+          spectator.component.maxWidth = 'lg';
+          spectator.detectChanges();
+        });
+
+        it('should apply correct content width', async () => {
+          await TestHelper.whenReady(ionContent);
+          const contentInner = ionContent.querySelector('.content-inner');
+          expect(contentInner).toHaveComputedStyle({
+            'max-width': DesignTokenHelper.pageContentMaxWidth('lg'),
+          });
+        });
+      });
+
+      describe('and is set to xl', () => {
+        beforeEach(() => {
+          spectator.component.maxWidth = 'xl';
+          spectator.detectChanges();
+        });
+
+        it('should apply correct content width', async () => {
+          await TestHelper.whenReady(ionContent);
+          const contentInner = ionContent.querySelector('.content-inner');
+          expect(contentInner).toHaveComputedStyle({
+            'max-width': DesignTokenHelper.pageContentMaxWidth('xl'),
           });
         });
       });

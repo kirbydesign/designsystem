@@ -267,8 +267,13 @@ ion-content {
     --padding-top: 0;
   }
 
-  &.max-width-optimized {
-    --page-content-max-width: #{utils.get-page-content-max-width('optimized')};
+  &.max-width-optimized, // TODO: Remove deprecated option 'optimized' in Kirby v10
+  &.max-width-lg {
+    --page-content-max-width: #{utils.get-page-content-max-width('lg')};
+  }
+
+  &.max-width-xl {
+    --page-content-max-width: #{utils.get-page-content-max-width('xl')};
   }
 
   &.max-width-full {
