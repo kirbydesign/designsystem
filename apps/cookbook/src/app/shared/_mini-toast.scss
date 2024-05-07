@@ -1,0 +1,52 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+@mixin copied {
+  transition: transform utils.get-transition-duration('quick');
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(120%);
+  }
+
+  &::before {
+    display: block;
+    position: absolute;
+    content: 'Copied!';
+    background-color: utils.get-color('semi-light');
+    color: utils.get-color('semi-dark-contrast');
+    font-size: utils.font-size('xxs');
+    padding: utils.size('xxxxs') utils.size('xxxs');
+    border-radius: utils.size('xxxs');
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  &.copied::before {
+    opacity: 1;
+    animation-name: slide-in-out;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes slide-in-out {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(-125%);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translateY(-125%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
+}

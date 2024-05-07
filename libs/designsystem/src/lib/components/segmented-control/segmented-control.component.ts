@@ -1,10 +1,18 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 import { IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
 import { SegmentItem } from './segment-item';
+import { CommonModule } from '@angular/common';
 
 export enum SegmentedControlMode {
   chip = 'chip',
@@ -27,6 +35,9 @@ type NoInfer<T> = [T][T extends any ? 0 : never];
   host: { role: 'group' },
 })
 export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
+  @ViewChild(IonSegment, { static: true, read: ElementRef })
+  private ionSegmentElement: ElementRef<HTMLIonSegmentElement>;
+
   /**
    * Ensure that the click actually did originate from within the segment-button.
    * We do not want to react to clicks on e.g. segment-btn-wrapper or badge.
@@ -59,6 +70,32 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
   @Input() set items(value: TItem[]) {
     this._items = value || [];
     this._value = this.items[this.selectedIndex];
+    this.ensureIonSegmentSelected();
+  }
+
+  /**
+   * After upgrading to Ionic standalone components (Ionic v.7.6.6)
+   * there is a lifecycle bug between Angular/Ionic/Stencil that prevents
+   * the value of the segment component to be reflected in the checked state
+   * of it's slotted segment buttons.
+   * This has been patched here: https://github.com/ionic-team/ionic-framework/pull/28837
+   * However the patch doesn't fix the problem if `items` are updated after first initialization
+   * and the ion-segment-button(s) are re-rerendered.
+   */
+  private ensureIonSegmentSelected() {
+    const ionSegment = this.ionSegmentElement.nativeElement;
+    const ionSelectEvent = ionSegment['ionSelect'];
+    if (this._value && typeof ionSelectEvent?.emit === 'function') {
+      // Ensure changes has been reflected to the DOM:
+      setTimeout(() => {
+        const selectedSegmentButton = ionSegment.querySelector(
+          'ion-segment-button.segment-button-checked'
+        );
+        if (selectedSegmentButton) return; // Nothing to patch
+
+        ionSelectEvent.emit({ value: this._value.id });
+      });
+    }
   }
 
   private _selectedIndex: number = -1;

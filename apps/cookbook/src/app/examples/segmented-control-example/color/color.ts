@@ -24,7 +24,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="mode"
+        name="example-color-mode"
         value="default"
         [checked]="mode === 'default'"
         (change)="setMode($event.target.value)"
@@ -34,7 +34,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="mode"
+        name="example-color-mode"
         value="chip"
         [checked]="mode === 'chip'"
         (change)="setMode($event.target.value)"
@@ -44,7 +44,7 @@ const config = {
     <label> 
       <input
         type="radio"
-        name="mode"
+        name="example-color-mode"
         value="compactChip"
         [checked]="mode === 'compactChip'"
         (change)="setMode($event.target.value)"

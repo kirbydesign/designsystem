@@ -1,54 +1,52 @@
 <div class="example">
-  <cookbook-icon-example></cookbook-icon-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h4>Properties:</h4>
+  <p>
+    Kirby comes pre-packaged with a set of icons hand-crafted to be round and friendly. They are
+    used together with other components to explain actions and functions of the UI.
+  </p>
+
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+  <p>
+    The icon component only request icons visible to the the user (icons above the fold). The
+    component will dynamically load an SVG for each icon, so your app is only requesting the icons
+    that you need.
+  </p>
+
+  <h2>Default Icons (click to copy)</h2>
+  <cookbook-example-viewer [html]="defaultHtmlSnippet">
+    <cookbook-icon-default-example></cookbook-icon-default-example>
+  </cookbook-example-viewer>
+
+  <h2>Sizes</h2>
+  <cookbook-example-viewer [html]="sizesHtmlSnippet">
+    <cookbook-icon-sizes-example></cookbook-icon-sizes-example>
+  </cookbook-example-viewer>
+
+  <h2>Custom Icons</h2>
+  <p>
+    For adding custom icons, use
+    <code>IconRegistryService</code>
+    in your
+    <code>NgModule</code>
+    . We recommend registering icons that are reused across an application in a top-level module. If
+    icons are registered in modules that are not shared across the application consider namespacing
+    them, e.g.
+    <code>my-feature-customIconName</code>
+    to avoid collisions.
+  </p>
+
+  <p>
+    Once registered custom icons can be used via the
+    <code>name</code>
+    property similar to default icons.
+  </p>
+
+  <!-- prettier-ignore -->
+  <cookbook-example-viewer [ts]="iconRegistrationCodeSnippet" [html]="">
+    <cookbook-icon-custom-example></cookbook-icon-custom-example>
+  </cookbook-example-viewer>
+
+  <h2>Properties:</h2>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
-  <br />
-  Use
-  <code>'customName'</code>
-  if you want to use custom icons. For adding custom icons, use
-  <code>IconRegistryService</code>
-  in your
-  <code>NgModule</code>
-  's constructor to add custom icons.
-  <!-- prettier-ignore -->
-  <cookbook-code-viewer language="ts">import {{ '{' }} IconRegistryService {{ '}' }} from '&#64;kirbydesign/designsystem';
-
-const customIcons = [
-    {{ '{' }} 
-      name: 'customIconName',
-      svg: '[PATH_TO_SVG_FILE]',
-    {{ '},' }}
-    ...
-];
-
-&#64;NgModule({{ '{' }} ... {{ '}' }} )
-export class MyModule {{ '{' }} 
-  constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
-    iconRegistryService.addIcons(customIcons);
-  {{ '}' }} 
-{{ '}' }}</cookbook-code-viewer>
-
-  <div class="performance">
-    <div class="title">
-      <ion-icon name="information-circle"></ion-icon>
-      <h4>Performance:</h4>
-    </div>
-
-    <div class="info">
-      <p>
-        A bonus with the web component is that it uses Intersection Observer to only request icons
-        which are viewable by the users (icons above the fold). The component will dynamically load
-        an SVG for each icon, so your app is only requesting the icons that you need.
-      </p>
-      <p>
-        Also note that only visible icons are loaded, and icons which are "below the fold" and
-        hidden from the user's view do not make fetch requests for the svg resource.
-        <a href="https://ionicons.com/usage">Read more</a>
-      </p>
-    </div>
-    <div></div>
-  </div>
 </div>

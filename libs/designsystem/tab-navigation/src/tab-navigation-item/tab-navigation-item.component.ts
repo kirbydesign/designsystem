@@ -10,6 +10,9 @@ export class TabNavigationItemComponent {
   @Input()
   label = '';
 
+  @Input()
+  truncate = true;
+
   constructor() {
     /* */
   }
