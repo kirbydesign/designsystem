@@ -134,6 +134,43 @@ describe('SegmentedControlComponent', () => {
           spectator.setHostInput({ items: clonedItems });
           expect(onSegmentSelectSpy).not.toHaveBeenCalled();
         });
+
+        it("should keep it's checked item when updating items with same value", async () => {
+          const clonedItems = JSON.parse(JSON.stringify(items));
+          spectator.setHostInput({ items: clonedItems });
+          await TestHelper.whenReady(spectator.queryHostAll('ion-segment-button'));
+
+          const expectedItem = clonedItems[1];
+          const selectedSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
+            'ion-segment-button.segment-button-checked'
+          );
+          expect(selectedSegmentButton).not.toBeNull();
+          expect(selectedSegmentButton.value).toBe(expectedItem.id);
+          expect(selectedSegmentButton).toHaveExactTrimmedText(expectedItem.text);
+        });
+
+        it("should keep it's checked item when updating items with same value but new badge", async () => {
+          const clonedItems = JSON.parse(JSON.stringify(items));
+          clonedItems[0].badge = {
+            content: '1',
+            themeColor: 'success',
+          };
+          spectator.setHostInput({ items: clonedItems });
+          await TestHelper.whenReady(spectator.queryHostAll('ion-segment-button'));
+
+          const expectedItem = clonedItems[1];
+          const selectedSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
+            'ion-segment-button.segment-button-checked'
+          );
+          expect(selectedSegmentButton).not.toBeNull();
+          expect(selectedSegmentButton.value).toBe(expectedItem.id);
+          expect(selectedSegmentButton).toHaveExactTrimmedText(expectedItem.text);
+          const badge = spectator.queryHost<HTMLIonSegmentButtonElement>(
+            'ion-segment-button:first-child > kirby-badge'
+          );
+          expect(badge).toHaveExactTrimmedText('1');
+          expect(badge).toHaveClass('success');
+        });
       });
 
       it('should set the correct value when changing the selected-index', () => {
