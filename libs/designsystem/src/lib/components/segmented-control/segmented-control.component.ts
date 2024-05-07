@@ -11,8 +11,8 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 import { IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
-import { SegmentItem } from './segment-item';
 import { CommonModule } from '@angular/common';
+import { SegmentItem } from './segment-item';
 
 export enum SegmentedControlMode {
   chip = 'chip',
