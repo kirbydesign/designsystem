@@ -134,11 +134,11 @@ ion-segment-button {
     contain: none; // Ensures the badge is not cut off
     overflow: visible; // Ensures the badge is not cut off
     opacity: 1; // Ensure color, background and badge is not transparent on hover
-  }
 
-  &::part(native)::after {
-    transition: interaction-state.transition();
-    border-radius: var(--border-radius); // Ensure background of ion-button hover state is rounded
+    &::after {
+      transition: interaction-state.transition();
+      border-radius: var(--border-radius); // Ensure background of ion-button hover state is rounded
+    }
   }
 
   // end NOTE
