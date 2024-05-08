@@ -37,7 +37,7 @@
     }
 
     ion-segment-button {
-      --color-hover: rgba(#{utils.get-color('black-rgb')}, 0.6);
+      --color-hover: rgba(#{utils.get-color('black-rgb')}, 0.4);
     }
   }
 
