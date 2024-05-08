@@ -130,7 +130,7 @@ ion-segment-button {
   // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
 
   &::part(native) {
-    border-radius: #{utils.$border-radius-round};
+    border-radius: var(--border-radius);
     contain: none; // Ensures the badge is not cut off
     overflow: visible; // Ensures the badge is not cut off
     opacity: 1; // Ensure color, background and badge is not transparent on hover
