@@ -52,4 +52,13 @@ describe('SectionHeaderComponent', () => {
       });
     });
   });
+
+  describe('ion-item-divider inside section header', () => {
+    it('should have correct z-index', () => {
+      const divider = spectator.queryHost('ion-item-divider');
+      expect(divider).toHaveComputedStyle({
+        'z-index': 'auto',
+      });
+    });
+  });
 });

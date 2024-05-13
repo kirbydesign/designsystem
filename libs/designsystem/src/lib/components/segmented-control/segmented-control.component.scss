@@ -35,6 +35,10 @@
       contain: none; // Ensures the badge is not cut off
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
     }
+
+    ion-segment-button {
+      --color-hover: rgba(#{utils.get-color('black-rgb')}, 0.4);
+    }
   }
 
   &.chip-mode {
@@ -75,6 +79,19 @@
       --padding-end: #{utils.size('xs')};
     }
   }
+
+  &.chip-mode,
+  &.compact {
+    ion-segment-button {
+      // Use same hover state as Button AttentionLevel3 (white):
+      @include interaction-state.apply-hover-ionic('xs');
+
+      // Use same hover state as Button AttentionLevel2 (black):
+      &.segment-button-checked {
+        @include interaction-state.apply-hover-ionic('s', $make-lighter: true);
+      }
+    }
+  }
 }
 
 ion-segment {
@@ -113,13 +130,15 @@ ion-segment-button {
   // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
 
   &::part(native) {
-    border-radius: #{utils.$border-radius-round};
-    contain: none;
-    overflow: visible;
-  }
+    border-radius: var(--border-radius);
+    contain: none; // Ensures the badge is not cut off
+    overflow: visible; // Ensures the badge is not cut off
+    opacity: 1; // Ensure color, background and badge is not transparent on hover
 
-  &::part(native)::after {
-    transition: interaction-state.transition();
+    &::after {
+      transition: interaction-state.transition();
+      border-radius: var(--border-radius); // Ensure background of ion-button hover state is rounded
+    }
   }
 
   // end NOTE
