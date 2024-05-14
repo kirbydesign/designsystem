@@ -1,7 +1,7 @@
 {
   "name": "composed-ui-angular",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/composed-ui/angular/src",
+  "sourceRoot": "libs/composed-ui/angular",
   "prefix": "kirby",
   "tags": [],
   "projectType": "library",
