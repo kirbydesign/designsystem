@@ -1,6 +1,9 @@
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 
+$margin-inline: utils.size('s');
+$column-gap: utils.size('xxl') - $margin-inline;
+
 :host {
   display: flex;
   flex-direction: column;
@@ -40,13 +43,14 @@
 // Please note: We are NOT promoting this in our cookbook:
 @include utils.media('>=medium') {
   :host(:not(.single-column)) {
-    .container {
+    .container:has(> .actions) {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    }
+      grid-template-columns: auto max-content;
+      column-gap: $column-gap;
 
-    .title-container {
-      grid-column-start: 1;
+      .title-container {
+        grid-column-start: 1;
+      }
     }
   }
 }
@@ -75,18 +79,18 @@
   // Please note: We are NOT promoting this in our cookbook:
   @include utils.media('>=medium') {
     &:not(.single-column) {
-      .container {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+      .container:has(> .actions) {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 1fr);
         align-self: stretch;
-      }
 
-      .actions {
-        align-self: flex-start;
-      }
+        .actions {
+          align-self: flex-start;
+        }
 
-      .container > h1.title,
-      .title-container {
-        grid-column-start: 2;
+        & > h1.title,
+        .title-container {
+          grid-column-start: 2;
+        }
       }
     }
   }
@@ -116,8 +120,6 @@
     }
   }
 }
-
-$margin-inline: utils.size('s');
 
 .avatar,
 .flag,
