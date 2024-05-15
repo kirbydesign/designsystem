@@ -2,7 +2,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $margin-inline: utils.size('s');
-$column-gap: utils.size('xxl') - $margin-inline;
+$actions-margin-inline: utils.size('xxs');
+$column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 
 :host {
   display: flex;
@@ -98,8 +99,7 @@ $column-gap: utils.size('xxl') - $margin-inline;
 
 .actions {
   margin-top: utils.size('m');
-  margin-left: utils.size('xxs');
-  margin-right: utils.size('xxs');
+  margin-inline: $actions-margin-inline;
 
   @include utils.media('<medium') {
     // Hide actions on small screens when not emphasized:
