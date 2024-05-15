@@ -15,10 +15,6 @@
     "resolveJsonModule": true,
     "useDefineForClassFields": false,
     "paths": {
-      "@kirbydesign/composed-ui-angular/campaign-banner": [
-        "libs/composed-ui/angular/campaign-banner/src/index.ts"
-      ],
-      "@kirbydesign/composed-ui-angular/test-comp": ["libs/composed-ui/angular/dist/test-comp"],
       "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/accordion/index.ts"],
