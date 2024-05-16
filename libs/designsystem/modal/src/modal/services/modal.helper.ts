@@ -152,6 +152,9 @@ export class ModalHelper {
     const modalClose$ = fromEvent(modal, 'ionModalDidDismiss');
 
     popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
+      modal.canDismiss = async () => {
+        return true;
+      };
       modal.dismiss();
     });
   }
