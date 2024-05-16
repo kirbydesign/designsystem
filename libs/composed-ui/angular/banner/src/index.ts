@@ -1,1 +1,1 @@
-export const greeting = 'Hello World!';
+export { BannerComponent } from './banner.component';

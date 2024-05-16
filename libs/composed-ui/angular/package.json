@@ -1,9 +1,6 @@
 {
   "name": "@kirbydesign/composed-ui-angular",
   "version": "0.0.1",
-  "files": [
-    "dist/**/*.{js,ts}"
-  ],
   "peerDependencies": {
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
