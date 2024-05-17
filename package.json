@@ -31,9 +31,9 @@
     "nx": "nx"
   },
   "devDependencies": {
-    "@angular/forms": "*",
     "@nx/angular": "17.2.8",
-    "@nx/js": "17",
+    "@nx/jest": "17.2.8",
+    "@nx/js": "17.2.8",
     "@nx/storybook": "17",
     "@nx/web": "17",
     "@nx/workspace": "17.2.8",
@@ -75,9 +75,5 @@
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
   }
 }

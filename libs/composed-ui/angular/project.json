@@ -2,7 +2,7 @@
   "name": "composed-ui-angular",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/composed-ui/angular",
-  "prefix": "kirby",
+  "prefix": "kirby-x",
   "tags": [],
   "projectType": "library",
   "targets": {
@@ -21,6 +21,13 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/composed-ui/angular/jest.config.ts"
+      }
     }
   }
 }
