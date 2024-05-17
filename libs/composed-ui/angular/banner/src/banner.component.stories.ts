@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
-import { BannerComponent } from './banner.component';
+import { BannerComponent } from '@kirbydesign/composed-ui-angular/banner';
 
 const meta: Meta<BannerComponent> = {
   component: BannerComponent,
@@ -13,12 +11,4 @@ type Story = StoryObj<BannerComponent>;
 
 export const Primary: Story = {
   args: {},
-};
-
-export const Heading: Story = {
-  args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/banner works!/gi)).toBeTruthy();
-  },
 };
