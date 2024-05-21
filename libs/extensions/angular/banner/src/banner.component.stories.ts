@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { BannerComponent } from '@kirbydesign/composed-ui-angular/banner';
+import { BannerComponent } from '@kirbydesign/extensions-angular/banner';
 
 const meta: Meta<BannerComponent> = {
   component: BannerComponent,

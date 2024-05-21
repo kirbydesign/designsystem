@@ -6,7 +6,7 @@
   },
   "workspaces": [
     "libs/*",
-    "libs/composed-ui/angular",
+    "libs/extensions/angular",
     "apps/*",
     "tools/*"
   ],

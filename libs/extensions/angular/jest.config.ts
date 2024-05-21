@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'composed-ui-angular',
+  displayName: 'extensions-angular',
   preset: './jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
   transform: {

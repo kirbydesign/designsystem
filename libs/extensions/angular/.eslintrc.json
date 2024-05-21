@@ -10,7 +10,7 @@
             "patterns": [
               {
                 "group": ["./*"],
-                "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/composed-ui-angular/ENTRY-POINT"
+                "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/extensions-angular/ENTRY-POINT"
               }
             ]
           }
