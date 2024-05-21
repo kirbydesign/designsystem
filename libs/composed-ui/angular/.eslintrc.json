@@ -1,4 +1,21 @@
 {
   "extends": ["@repo/eslint-config/angular.json"],
-  "ignorePatterns": ["!**/*", "storybook-static"]
+  "overrides": [
+    {
+      "files": ["*.stories.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["./*"],
+                "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/composed-ui-angular/ENTRY-POINT"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }
