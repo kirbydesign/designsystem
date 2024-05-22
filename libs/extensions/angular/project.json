@@ -28,6 +28,19 @@
       "options": {
         "jestConfig": "libs/extensions/angular/jest.config.ts"
       }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
+      "options": {
+        "commands": [
+          "nx serve core",
+          "nx build designsystem --watch",
+          "nx build extensions-angular --watch",
+          "nx storybook extensions-angular"
+        ],
+        "parallel": true
+      }
     }
   }
 }
