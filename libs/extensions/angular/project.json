@@ -8,7 +8,9 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "inputs": ["{projectRoot}/**", "!{projectRoot}/dist/**"],
+      "outputs": ["{projectRoot}/dist/**"],
+      "dependsOn": ["^build"],
       "options": {
         "project": "libs/extensions/angular/ng-package.json"
       },
@@ -29,15 +31,15 @@
         "jestConfig": "libs/extensions/angular/jest.config.ts"
       }
     },
-    "serve": {
+    "dev": {
       "executor": "nx:run-commands",
-      "dependsOn": ["^build"],
       "options": {
         "commands": [
-          "nx serve core",
-          "nx build designsystem --watch",
-          "nx build extensions-angular --watch",
-          "nx storybook extensions-angular"
+          "rm -rf libs/core/dist libs/designsystem/dist libs/extensions/angular/dist",
+          "nx build core --watch",
+          "wait-on libs/core/dist/index.js && nx build designsystem --watch",
+          "wait-on libs/designsystem/dist/package.json && nx build extensions-angular --watch",
+          "wait-on libs/extensions/angular/dist/package.json && nx storybook extensions-angular"
         ],
         "parallel": true
       }

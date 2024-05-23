@@ -13,7 +13,8 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
-      "!{projectRoot}/test-setup.[jt]s"
+      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/dist/**"
     ]
   },
   "parallel": 5,
@@ -48,6 +49,7 @@
     },
     "build": {
       "inputs": ["production", "^production"],
+      "outputs": ["{projectRoot}/dist/"],
       "options": {
         "tsConfig": "{projectRoot}/tsconfig.lib.json"
       },
@@ -65,9 +67,6 @@
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "options": {
-        "passWithNoTests": true
-      },
       "configurations": {
         "ci": {
           "ci": true

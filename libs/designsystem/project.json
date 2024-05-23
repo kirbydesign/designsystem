@@ -7,6 +7,8 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
+      "inputs": ["{projectRoot}/**", "!{projectRoot}/dist/**"],
+      "outputs": ["{projectRoot}/dist/"],
       "dependsOn": ["^build"],
       "options": {
         "tsConfig": "libs/designsystem/tsconfig.lib.json",
