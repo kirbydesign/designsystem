@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardModule } from '@kirbydesign/designsystem';
+import { CardModule } from '@kirbydesign/designsystem/card';
 
 @Component({
   selector: 'kirby-x-banner',
