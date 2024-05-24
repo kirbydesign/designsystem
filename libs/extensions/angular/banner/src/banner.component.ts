@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardModule } from '@kirbydesign/designsystem/card';
 
@@ -9,4 +9,6 @@ import { CardModule } from '@kirbydesign/designsystem/card';
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.scss',
 })
-export class BannerComponent {}
+export class BannerComponent {
+  @Input() title: string | undefined;
+}

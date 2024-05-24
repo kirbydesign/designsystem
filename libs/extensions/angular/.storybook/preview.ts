@@ -22,6 +22,14 @@ const preview: Preview = {
         },
       ],
     },
+    docs: {
+      canvas: { className: 'canvas' },
+    },
+    options: {
+      storySort: {
+        order: ['Fundamentals', 'Components'],
+      },
+    },
   },
   decorators: [
     applicationConfig({

@@ -4,11 +4,15 @@ import { BannerComponent } from '@kirbydesign/extensions-angular/banner';
 
 const meta: Meta<BannerComponent> = {
   component: BannerComponent,
-  title: 'BannerComponent',
+  title: 'Components/Banner',
 };
 export default meta;
 type Story = StoryObj<BannerComponent>;
 
-export const Primary: Story = {
-  args: {},
+export const Primary: Story = {};
+
+export const Title: Story = {
+  args: {
+    title: 'Example title',
+  },
 };

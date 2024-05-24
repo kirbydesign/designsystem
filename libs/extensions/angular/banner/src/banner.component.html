@@ -1,1 +1,4 @@
-<kirby-card [hasPadding]="true"><p>Kirby Banner scaffold.</p></kirby-card>
+<kirby-card [hasPadding]="true">
+  <kirby-card-header *ngIf="title">{{ title }}</kirby-card-header>
+  Kirby Banner Scaffold
+</kirby-card>
