@@ -42,6 +42,7 @@
     "zone.js": "^0.14.3"
   },
   "devDependencies": {
+    "@angular/animations": "^17.0.10",
     "@angular-devkit/build-angular": "^17.0.10",
     "@angular-devkit/core": "^17.0.10",
     "@angular-devkit/schematics": "^17.0.10",

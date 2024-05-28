@@ -13,7 +13,7 @@
   "homepage": "https://cookbook.kirby.design",
   "scripts": {
     "build": "nx run-many -t build",
-    "start": "nx dev cookbook",
+    "start": "nx dev designsystem",
     "start:ios": "nx build flows && npx cap run ios --workspace=apps/flows",
     "start:android": "nx build flows && npx cap run android --workspace=apps/flows",
     "test:headless-browser": "nx run-many -t test --output-style=stream -- --browsers=ChromeCustom",

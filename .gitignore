@@ -64,6 +64,7 @@ scripts/install-ipa.html
 
 # Storybook
 storybook-static
+**/documentation.json
 
 # Chromatic
 # See https://www.chromatic.com/docs/storybook/setup/#setup-gitignore-to-ignore-certain-files-in-your-git-repository

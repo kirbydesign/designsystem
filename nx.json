@@ -49,7 +49,8 @@
     },
     "build": {
       "inputs": ["production", "^production"],
-      "outputs": ["{projectRoot}/dist/"],
+      "outputs": ["{projectRoot}/dist"],
+      "dependsOn": ["^build"],
       "options": {
         "tsConfig": "{projectRoot}/tsconfig.lib.json"
       },
