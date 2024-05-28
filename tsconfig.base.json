@@ -14,6 +14,7 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "useDefineForClassFields": false,
+    "skipLibCheck": true,
     "paths": {
       "@kirbydesign/extensions-angular/banner": ["libs/extensions/angular/dist/banner"],
       "@kirbydesign/designsystem": ["libs/designsystem/dist"],
@@ -70,8 +71,7 @@
       "@kirbydesign/designsystem/types": ["libs/designsystem/dist/types"],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]
-    },
-    "skipLibCheck": true
+    }
   },
   "files": []
 }
