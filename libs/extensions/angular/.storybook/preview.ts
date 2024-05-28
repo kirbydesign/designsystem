@@ -1,7 +1,12 @@
 import { importProvidersFrom } from '@angular/core';
-import { ColorHelper } from '@kirbydesign/core';
 import { applicationConfig, Preview } from '@storybook/angular';
+import { setCompodocJson } from '@storybook/addon-docs/angular';
+
+import { ColorHelper } from '@kirbydesign/core';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+
+import docJson from '../docs/documentation.json';
+setCompodocJson(docJson);
 
 const preview: Preview = {
   parameters: {
@@ -24,10 +29,8 @@ const preview: Preview = {
     },
     docs: {
       canvas: { className: 'canvas' },
-    },
-    options: {
-      storySort: {
-        order: ['Fundamentals', 'Components'],
+      toc: {
+        headingSelector: 'h2, h3',
       },
     },
   },

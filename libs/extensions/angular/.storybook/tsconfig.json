@@ -1,16 +1,9 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["../**/*.spec.ts"],
-  "include": [
-    "../**/*.stories.ts",
-    "../**/*.stories.js",
-    "../**/*.stories.jsx",
-    "../**/*.stories.tsx",
-    "../**/*.mdx",
-    "*.js",
-    "*.ts"
-  ]
+  "include": ["../**/*.stories.ts", "../**/*.component.ts", "../**/*.mdx", "*.js", "*.ts"]
 }
