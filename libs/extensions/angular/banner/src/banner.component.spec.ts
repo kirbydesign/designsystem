@@ -1,21 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
 import { BannerComponent } from './banner.component';
 
 describe('BannerComponent', () => {
-  let component: BannerComponent;
-  let fixture: ComponentFixture<BannerComponent>;
+  let spectator: SpectatorHost<BannerComponent>;
+  const createHost = createHostFactory({
+    component: BannerComponent,
+  });
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [BannerComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(BannerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost(`<kirby-x-banner></kirby-x-banner>`);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

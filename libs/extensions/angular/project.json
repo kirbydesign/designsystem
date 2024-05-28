@@ -27,6 +27,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "dependsOn": ["^build"],
       "options": {
         "jestConfig": "libs/extensions/angular/jest.config.ts"
       }
@@ -70,7 +71,9 @@
             "input": "node_modules/ionicons/dist/ionicons/svg",
             "output": "./svg"
           }
-        ]
+        ],
+        "compodoc": true,
+        "compodocArgs": ["-e", "json", "-d", "{projectRoot}/docs"]
       }
     },
     "build-storybook": {
