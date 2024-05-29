@@ -6,7 +6,7 @@ If you wish to contribute a fix or a feature the preferred process is as follows
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose)** (See: "[The good: Issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue)") if one is not already added to the issue tracker.
 2. **Implementation:**
-   - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
+   - Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#before-you-get-coding)".
    - Signal to others you are working on the issue by assigning yourself.
    - Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/develop) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch).
    - Consider creating test that reproduces the bug or validates the feature, following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
@@ -61,7 +61,7 @@ To see any changes you make in action, start storybook and library compilation i
 npx nx dev extensions-angular
 ```
 
-You can also start the storybook development server without compiling libraries in parallel if you only need to edit documentations.
+You can also start the storybook development server without compiling libraries in parallel if you only need to edit documentation.
 
 ```shell
 npx nx storybook extensions-angular
@@ -69,19 +69,19 @@ npx nx storybook extensions-angular
 
 ## Documenting Components
 
-The recommended way to document extensions is to create [Storybook stories](https://Storybook.js.org/docs/get-started/whats-a-story) and showcase those on the components docs page. We recommend to add the autodocs tag to the `meta` default export of the component defined in the `.stories.ts` file, as this will auto-generate a docs page with all stories, alongside a property table that showcases the components API.
+The recommended way to document extensions is to create [Storybook stories](https://Storybook.js.org/docs/get-started/whats-a-story). Documentation pages are automatially created with Storybooks autodocs feature that collects all stories and shows it alongside a property table with the components API.
 
 Consider:
 
-- Documenting properties with a story, so others can explore options via the 'controls' panel
-- Describe input and output properties with `jsdoc` (/\*\*) comments so they show up in the property table
-- Add `jsdoc` (/\*\*) comments for each story with a short description of the functionality that is showcased
+- Documenting each component property with a story, so others can explore options via the 'controls' panel
+- Describe inputs, outputs and methods with `jsdoc` (/\*\*) comments. This shows up as a description in the property table on the docs page
+- Add `jsdoc` (/\*\*) comments for each story. This shows up on the docs page and can act as a short intro to what the story showcases.
 
 For any custom documentation needs consider consulting the comprehensive [Storybook](https://Storybook.js.org/docs/get-started) documentation.
 
 ## Testing Components
 
-As there is an increased focus on speed of development and experimentation focus on light unit testing where needed.
+As there is an increased focus on speed of development and experimentation we focus on light unit testing where needed.
 
 It is recommended to add a `.spec.ts` file per component/service/directive. The unit tests should test core functionality such as:
 
