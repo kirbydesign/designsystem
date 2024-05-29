@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "paths": {
       "@kirbydesign/extensions-angular/banner": ["libs/extensions/angular/dist/banner"],
-      "@kirbydesign/designsystem": ["libs/designsystem/dist/src"],
+      "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/dist/*"],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/dist/accordion"],
       "@kirbydesign/designsystem/action-group": ["libs/designsystem/dist/action-group"],
