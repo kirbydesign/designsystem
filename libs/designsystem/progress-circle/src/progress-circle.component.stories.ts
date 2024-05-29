@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { ProgressCircleComponent } from './progress-circle.component';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 
 const meta: Meta<ProgressCircleComponent> = {
   component: ProgressCircleComponent,

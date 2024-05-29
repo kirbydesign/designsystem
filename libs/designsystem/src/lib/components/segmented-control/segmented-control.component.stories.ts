@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
+import { SegmentedControlComponent, SegmentedControlMode } from '@kirbydesign/designsystem/src/lib';
 
 const meta: Meta<SegmentedControlComponent> = {
   component: SegmentedControlComponent,

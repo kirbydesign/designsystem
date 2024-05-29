@@ -63,7 +63,7 @@
           {
             "patterns": [
               {
-                "group": ["./*"],
+                "group": ["./*", "../*"],
                 "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/PACKAGE-NAME/ENTRY-POINT"
               }
             ]

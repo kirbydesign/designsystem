@@ -1,6 +1,5 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
-
-import { ReorderListComponent } from './reorder-list.component';
+import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 const meta: Meta<ReorderListComponent> = {
   component: ReorderListComponent,
