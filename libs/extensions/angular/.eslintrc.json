@@ -1,21 +1,3 @@
 {
-  "extends": ["@repo/eslint-config/angular.json"],
-  "overrides": [
-    {
-      "files": ["*.stories.ts"],
-      "rules": {
-        "no-restricted-imports": [
-          "error",
-          {
-            "patterns": [
-              {
-                "group": ["./*"],
-                "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/extensions-angular/ENTRY-POINT"
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
+  "extends": ["@repo/eslint-config/angular.json"]
 }
