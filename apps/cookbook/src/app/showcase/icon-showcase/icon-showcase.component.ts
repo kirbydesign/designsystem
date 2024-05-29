@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { defaultIcons, IconSize } from '@kirbydesign/designsystem';
+import { IconCustomExampleComponent } from '~/app/examples/icon-example/examples/custom';
+import { IconDefaultExampleComponent } from '~/app/examples/icon-example/examples/default';
+import { IconSizesExampleComponent } from '~/app/examples/icon-example/examples/sizes';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -9,17 +12,17 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   preserveWhitespaces: true,
 })
 export class IconShowcaseComponent {
-  exampleHtml: string = `<!-- Default icons -->
-<kirby-icon name="NAME"></kirby-icon>
-<!-- Custom icons -->
-<kirby-icon customName="NAME"></kirby-icon>
-<!-- Size -->
-<kirby-icon size="SIZE"></kirby-icon>`;
+  defaultHtmlSnippet = IconDefaultExampleComponent.htmlSnippet;
+  sizesHtmlSnippet = IconSizesExampleComponent.htmlSnippet;
+  customHtmlSnippet = IconCustomExampleComponent.htmlSnippet;
+
+  iconRegistrationCodeSnippet = IconCustomExampleComponent.codeSnippet;
 
   properties: ApiDescriptionProperty[] = [
     {
       name: 'name',
-      description: 'Name of the icon that you want to show.',
+      description:
+        'Name of the icon that you want to show. If a matching icon is not found, the default is used.',
       defaultValue: 'cog',
       type: defaultIcons,
     },
@@ -47,7 +50,7 @@ export class IconShowcaseComponent {
     },
     {
       name: 'customName',
-      description: 'Used for custom icons.',
+      description: 'Deprecated: Use IconRegistryService and the name input property instead.',
       defaultValue: 'null',
       type: ['string'],
     },

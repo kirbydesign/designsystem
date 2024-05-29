@@ -341,22 +341,78 @@ describe('CalendarComponent', () => {
       expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
     });
 
-    it('should emit dateSelect event when clicking date in previous month', () => {
-      const captured = captureDateSelectEvents();
-      spectator.setInput('selectedDate', localMidnightDate('2025-01-01'));
+    describe('when clicking date in previous month', () => {
+      let captured: { event?: Date };
 
-      spectator.click(spectator.queryAll('.day:not(.current-month)')[0]);
+      beforeEach(() => {
+        captured = captureDateSelectEvents();
+        spectator.setInput('selectedDate', localMidnightDate('2025-01-01'));
 
-      expect(captured.event).toEqual(localMidnightDate('2024-12-30'));
+        const firstRenderedDayPreviousMonth = spectator.query('.day:not(.current-month)'); // 2024-12-30
+        spectator.click(firstRenderedDayPreviousMonth);
+      });
+
+      it('should emit dateSelect event', () => {
+        expect(captured.event).toEqual(localMidnightDate('2024-12-30'));
+      });
+
+      it('should set activeMonth from dateSelect event', () => {
+        expect(spectator.component.activeMonthName).toEqual('December');
+        expect(spectator.component.activeYear).toEqual('2024');
+      });
+
+      it('should render month and year from dateSelect event', () => {
+        expect(spectator.query('.month-and-year .month')).toHaveExactText('December');
+        expect(spectator.query('.month-and-year .year')).toHaveExactText('2024');
+      });
+
+      it('should render selected day from dateSelect event', () => {
+        const selectedDay = spectator.query('.day.selected');
+        const tableCell = selectedDay.closest('td');
+        const tableRow = selectedDay.closest('tr');
+        // 2024-12-30 should be rendered as the first cell in the last row:
+        const expectedCellIndex = 0;
+        const expectedRowIndex = 6;
+        expect(tableCell.cellIndex).toEqual(expectedCellIndex);
+        expect(tableRow.rowIndex).toEqual(expectedRowIndex);
+      });
     });
 
-    it('should emit dateSelect event when clicking date in next month', () => {
-      const captured = captureDateSelectEvents();
-      spectator.setInput('selectedDate', localMidnightDate('2024-12-01'));
+    describe('when clicking date in next month', () => {
+      let captured: { event?: Date };
 
-      spectator.click(spectator.queryLast('.day:not(.current-month)'));
+      beforeEach(() => {
+        captured = captureDateSelectEvents();
+        spectator.setInput('selectedDate', localMidnightDate('2024-12-01'));
 
-      expect(captured.event).toEqual(localMidnightDate('2025-01-05'));
+        const lastRenderedDayNextMonth = spectator.queryLast('.day:not(.current-month)'); // 2025-01-05
+        spectator.click(lastRenderedDayNextMonth);
+      });
+
+      it('should emit dateSelect event', () => {
+        expect(captured.event).toEqual(localMidnightDate('2025-01-05'));
+      });
+
+      it('should set activeMonth from dateSelect event', () => {
+        expect(spectator.component.activeMonthName).toEqual('January');
+        expect(spectator.component.activeYear).toEqual('2025');
+      });
+
+      it('should render month and year from dateSelect event', () => {
+        expect(spectator.query('.month-and-year .month')).toHaveExactText('January');
+        expect(spectator.query('.month-and-year .year')).toHaveExactText('2025');
+      });
+
+      it('should render selected day from dateSelect event', () => {
+        const selectedDay = spectator.query('.day.selected');
+        const tableCell = selectedDay.closest('td');
+        const tableRow = selectedDay.closest('tr');
+        // 2025-01-05 should be rendered as the last cell in the first row:
+        const expectedCellIndex = 6;
+        const expectedRowIndex = 1;
+        expect(tableCell.cellIndex).toEqual(expectedCellIndex);
+        expect(tableRow.rowIndex).toEqual(expectedRowIndex);
+      });
     });
 
     it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {

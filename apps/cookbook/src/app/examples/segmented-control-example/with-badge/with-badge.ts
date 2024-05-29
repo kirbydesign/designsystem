@@ -15,7 +15,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="size"
+        name="example-with-badge-size"
         value="sm"
         [checked]="size === 'sm'"
         (change)="setSize($event.target.value)"
@@ -26,7 +26,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="size"
+        name="example-with-badge-size"
         value="md"
         [checked]="size === 'md'"
         (change)="setSize($event.target.value)"

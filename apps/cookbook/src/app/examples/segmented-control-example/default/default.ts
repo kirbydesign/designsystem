@@ -23,7 +23,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="mode"
+        name="example-default-mode"
         value="default"
         [checked]="mode === 'default'"
         (change)="setMode($event.target.value)"
@@ -33,7 +33,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="mode"
+        name="example-default-mode"
         value="chip"
         [checked]="mode === 'chip'"
         (change)="setMode($event.target.value)"
@@ -43,7 +43,7 @@ const config = {
     <label> 
       <input
         type="radio"
-        name="mode"
+        name="example-default-mode"
         value="compactChip"
         [checked]="mode === 'compactChip'"
         (change)="setMode($event.target.value)"
@@ -56,7 +56,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="size"
+        name="example-default-size"
         value="sm"
         [checked]="size === 'sm'"
         (change)="setSize($event.target.value)"
@@ -67,7 +67,7 @@ const config = {
     <label>
       <input
         type="radio"
-        name="size"
+        name="example-default-size"
         value="md"
         [checked]="size === 'md'"
         (change)="setSize($event.target.value)"

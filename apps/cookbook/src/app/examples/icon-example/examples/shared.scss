@@ -1,0 +1,74 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '../../../shared/mini-toast';
+
+:host {
+  display: block;
+}
+
+p {
+  margin-top: utils.size('s');
+}
+
+.icon-item-container {
+  width: 112px;
+  padding: 8px;
+  display: inline-block;
+  text-align: center;
+}
+
+.icon-item-inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.icon-item-title {
+  display: block;
+  max-width: 112px;
+  font-size: 12px;
+  color: rgb(0 0 0 / 60%);
+  white-space: nowrap;
+}
+
+kirby-icon {
+  width: 100%;
+
+  &.copy-to-clipboard {
+    @include mini-toast.copied;
+  }
+}
+
+.color-options {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+}
+
+$_icon-color-examples: 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger';
+
+button {
+  height: utils.$fat-finger-size;
+  width: utils.$fat-finger-size;
+  border: none;
+  border-radius: 999px;
+  margin: 0;
+  color: utils.get-color('black');
+  cursor: pointer;
+
+  @each $color in $_icon-color-examples {
+    &.#{$color} {
+      background-color: utils.get-color($color);
+
+      &:hover {
+        background-color: var(--kirby-#{$color}-shade);
+      }
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

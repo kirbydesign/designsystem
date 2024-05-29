@@ -1,46 +1,9 @@
+<h1>Icon Examples</h1>
 <h2>Default Icons</h2>
-<p class="note">
-  *If icon is
-  <strong>NOT</strong>
-  found, 'cog' will be used as default icon
-</p>
-
-<div class="options">
-  <p>Change color:</p>
-  <div class="colors">
-    <button class="color-button" (click)="changeColor(color)" *ngFor="let color of colors">
-      <span class="color" [style.backgroundColor]="color.value"></span>
-      <span class="color-button__txt">{{ color.name }}</span>
-    </button>
-  </div>
-</div>
-
-<div class="icon-item-container" *ngFor="let icon of icons">
-  <div class="icon-item-inner-container">
-    <kirby-icon [name]="icon" [title]="icon" [themeColor]="color?.name"></kirby-icon>
-    <span class="icon-item-title">{{ icon }}</span>
-  </div>
-</div>
-
-<h2>Custom Icons</h2>
-
-<div class="icon-item-container">
-  <div class="icon-item-inner-container">
-    <kirby-icon customName="football" title="football"></kirby-icon>
-    <span class="icon-item-title">football</span>
-  </div>
-</div>
-<div class="icon-item-container">
-  <div class="icon-item-inner-container">
-    <kirby-icon customName="umbrella" title="umbrella"></kirby-icon>
-    <span class="icon-item-title">umbrella</span>
-  </div>
-</div>
+<cookbook-icon-default-example></cookbook-icon-default-example>
 
 <h2>Sizes</h2>
-<div class="icon-item-container" *ngFor="let size of sizes | keyvalue">
-  <div class="icon-item-inner-container">
-    <kirby-icon name="person" [size]="size.value" [title]="size.value"></kirby-icon>
-    <span class="icon-item-title">{{ size.value }}</span>
-  </div>
-</div>
+<cookbook-icon-sizes-example></cookbook-icon-sizes-example>
+
+<h2>Custom Icons</h2>
+<cookbook-icon-custom-example></cookbook-icon-custom-example>

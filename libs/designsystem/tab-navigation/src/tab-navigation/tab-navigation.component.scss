@@ -2,14 +2,14 @@
 
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
-$divider-max-width-breakpoint: utils.$page-content-max-width-default + (utils.size('s') * 2);
 
 :host {
   display: block;
   position: relative;
 
   @include utils.media('<medium') {
-    width: 100%;
+    // dynamic viewport width is used here to account for different scrollbar behaviors in browsers
+    inline-size: 100dvi;
     margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
   }
 
@@ -23,11 +23,6 @@ $divider-max-width-breakpoint: utils.$page-content-max-width-default + (utils.si
     z-index: utils.z('default');
     left: 0;
     width: 100%;
-
-    @include utils.media('<=#{$divider-max-width-breakpoint}') {
-      left: calc(-1 * var(--padding-start, #{utils.size('s')}));
-      width: calc(100% + (var(--padding-start, #{utils.size('s')}) * 2));
-    }
   }
 }
 
@@ -39,6 +34,7 @@ div[role='tablist'] {
   justify-content: left;
   flex-wrap: nowrap;
   overflow-x: scroll;
+  column-gap: utils.size('xs');
 
   @include utils.media('<medium') {
     padding-inline: var(--padding-start) var(--padding-end);

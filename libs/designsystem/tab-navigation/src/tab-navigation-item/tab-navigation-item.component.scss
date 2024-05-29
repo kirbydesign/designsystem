@@ -33,7 +33,7 @@ $border-color-selected: utils.get-color('dark');
 
     color: utils.get-color('black');
     box-sizing: border-box; // Ensure border is not added to button height
-    padding: utils.size('s') utils.size('m');
+    padding: utils.size('s');
     font-size: utils.font-size('n');
     line-height: utils.line-height('m');
     gap: utils.size('xxxs');
@@ -62,9 +62,11 @@ $border-color-selected: utils.get-color('dark');
 }
 
 span[data-text] {
-  max-width: $tab-item-text-max-width;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  &.truncate {
+    max-width: $tab-item-text-max-width;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   // Using the before selector to insert a hidden pseudo-element with the same text content in bold,
   // ensures no horizontal layout shifts when changing the visible span's text content from bold to normal font-weight.
