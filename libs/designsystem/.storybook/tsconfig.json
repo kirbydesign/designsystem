@@ -5,11 +5,5 @@
     "skipLibCheck": true
   },
   "exclude": ["../**/*.spec.ts", "../testing*/**"],
-  "include": [
-    "../**/*.stories.ts",
-    "../**/*.mdx",
-    "*.js",
-    "*.ts",
-    "../src/lib/components/segmented-control/segmented-control.component.stories.ts"
-  ]
+  "include": ["../**/*.stories.ts", "../**/*.mdx", "*.js", "*.ts"]
 }
