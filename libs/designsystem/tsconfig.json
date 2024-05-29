@@ -1,13 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": ".",
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "include": [],
-  "files": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

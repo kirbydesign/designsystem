@@ -4,15 +4,12 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true
   },
-  "exclude": ["../**/*.spec.ts"],
+  "exclude": ["../**/*.spec.ts", "../testing*/**"],
   "include": [
     "../**/*.stories.ts",
-    "../**/*.stories.js",
-    "../**/*.stories.jsx",
-    "../**/*.stories.tsx",
-    "../**/*.stories.mdx",
+    "../**/*.mdx",
     "*.js",
     "*.ts",
-    "../**/*.mdx"
+    "../src/lib/components/segmented-control/segmented-control.component.stories.ts"
   ]
 }

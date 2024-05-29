@@ -5,5 +5,5 @@
     "allowSyntheticDefaultImports": true
   },
   "exclude": ["../**/*.spec.ts"],
-  "include": ["../**/*.stories.ts", "../**/*.component.ts", "../**/*.mdx", "*.js", "*.ts"]
+  "include": ["../**/*.stories.ts", "../**/*.mdx", "*.js", "*.ts"]
 }
