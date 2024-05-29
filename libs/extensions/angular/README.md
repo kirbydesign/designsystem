@@ -4,7 +4,7 @@ The components follow the Kirby Design guidelines, but they differ from the core
 This means that components in this library are shared across one or more products, and might not be universally useful to the whole ecosystem.
 Though some components can also become core-candidates and graduate once they are battle-tested and initial experimenation is over.
 
-In turn this allows for quicker iteration and less focus on generalising behavior, while the test and especially documentation burden is also significantly lower.
+Extensions allow for quicker iteration and less focus on generalising behavior, while the test and especially documentation burden is also significantly lower.
 
 Components in this library are developed and maintained by product teams, with support from [team Kirby](https://github.com/kirbydesign/designsystem/blob/develop/.github/SUPPORT.md#team-kirby).
 
