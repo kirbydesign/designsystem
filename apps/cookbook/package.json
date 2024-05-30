@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "The documentation for Kirby Design System components.",
-  "dependencies": {
+  "peerDependencies": {
     "@angular/animations": "^17.0.9",
     "@angular/cdk": "^17.0.6",
     "@angular/common": "^17.0.9",
