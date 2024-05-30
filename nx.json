@@ -57,17 +57,20 @@
       "cache": true
     },
     "test": {
-      "cache": true
+      "cache": true,
+      "dependsOn": ["build", "^build"]
     },
     "e2e": {
       "cache": true
     },
     "build-storybook": {
-      "cache": true
+      "cache": true,
+      "dependsOn": ["build", "^build"]
     },
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "dependsOn": ["build", "^build"],
       "configurations": {
         "ci": {
           "ci": true
