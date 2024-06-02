@@ -88,6 +88,7 @@
         "configDir": "libs/extensions/angular/.storybook",
         "browserTarget": "extensions-angular:build",
         "outputDir": "dist/storybook/extensions/angular",
+        "enableProdMode": false,
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
           "libs/extensions/angular/.storybook/styles.css"
