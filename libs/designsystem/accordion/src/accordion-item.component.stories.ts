@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import {
-  applicationConfig,
-  argsToTemplate,
-  componentWrapperDecorator,
-  moduleMetadata,
-} from '@storybook/angular';
+import { applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
@@ -30,19 +25,11 @@ type Story = StoryObj<AccordionItemComponent>;
 
 export const Default: Story = {
   args: {
-    title: 'Accordion Item 1',
+    title: 'Default',
     isExpanded: false,
     isDisabled: false,
     disabledTitle: '',
   },
-  render: (args: AccordionItemComponent) => ({
-    props: args,
-    template: `
-    <kirby-accordion-item ${argsToTemplate(args)}>Content</kirby-accordion-item>
-    <kirby-accordion-item title="Accordion item 2">Content</kirby-accordion-item>
-    <kirby-accordion-item title="Accordion item 3">Content</kirby-accordion-item>
-    `,
-  }),
 };
 
 export const Disabled: Story = {
