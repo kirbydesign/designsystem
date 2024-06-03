@@ -53,7 +53,7 @@ Stories files can be generated with nx, and should then be picked up by Storyboo
 npx nx g @nx/angular:stories extensions-angular
 ```
 
-It is important to note that to use the compiled component output, we need Storybook to import components from their package aliases. This means that any relative import of components should be changed from `import { NewComponentNameComponent } from './new-component-name.component';` to `import { NewComponentName } from '@kirbydesign/extensions-angular/new-component-name';`.
+It is important to note that to use the compiled component output, we need Storybook to import components from their package aliases. This means that any relative import of components should be changed to `import { NewComponentName } from '@kirbydesign/extensions-angular/new-component-name';`.
 
 To see any changes you make in action, start storybook and library compilation in watch mode with
 

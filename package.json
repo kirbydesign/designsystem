@@ -31,12 +31,12 @@
     "nx": "nx"
   },
   "devDependencies": {
-    "@nx/angular": "17.2.8",
-    "@nx/jest": "17.2.8",
-    "@nx/js": "17.2.8",
-    "@nx/storybook": "17",
-    "@nx/web": "17",
-    "@nx/workspace": "17.2.8",
+    "@nx/angular": "17.3.2",
+    "@nx/jest": "17.3.2",
+    "@nx/js": "17.3.2",
+    "@nx/storybook": "17.3.2",
+    "@nx/web": "17.3.2",
+    "@nx/workspace": "17.3.2",
     "@storybook/addon-essentials": "7.6.13",
     "@storybook/addon-interactions": "^7.5.3",
     "@storybook/angular": "7.6.13",
