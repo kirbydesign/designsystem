@@ -4,7 +4,7 @@
 
 If you wish to contribute a feature or a bug fix the preferred process is as follows:
 
-1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose)** if a similar issue is not already added to the issue tracker (See guidelines on how to write  "[The good: Issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue)").
+1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose)** if a similar issue is not already added to the issue tracker (See guidelines on how to write "[The good: Issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue)").
 2. **Implementation:**
    - Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#before-you-get-coding)".
    - Signal to others you are working on the issue by assigning yourself.
@@ -25,6 +25,8 @@ npx nx g library-secondary-entry-point --name=new-component-name --library=exten
 ```
 
 The `skip-module` flag is added here as we want to create a self-contained standalone UI component for others to consume. If a module is needed for your specific use-case, omit the flag.
+
+The `README.md`-file created by the generator can be removed. In one of the following steps we will instead add Storybook stories to document our component.
 
 With the secondary entry point in place a new component with the same name can be added:
 
@@ -48,7 +50,7 @@ For components in the extensions workspace, we use [Storybook](https://Storybook
 
 All components should have a story file as a starting point to debug and interact with the component during development.
 Story files can be generated with nx and will be picked up by Storybook automatically.  
-_Please note: This command will generate a story file for every component that doesn't already have one. Feel free to delete any generated story file(s) unrelated to your new component/extension. _
+_Please note: This command will generate a story file for every component that does not already have one. Feel free to delete any generated story file(s) unrelated to your new component/extension._
 
 ```shell
 npx nx g @nx/angular:stories extensions-angular
