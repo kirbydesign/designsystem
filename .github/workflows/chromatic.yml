@@ -1,15 +1,12 @@
-name: "Visual Regression Tests - Chromatic"
+name: "Visual Regression Tests"
 
 on:
     pull_request:
         types: [labeled, synchronize]
-    push:
-        branches:
-          - develop
 
 jobs:
   chromatic:
-    if: ${{ github.event.label.name == 'chromatic' || contains(github.event.pull_request.labels.*.name, 'chromatic') || github.event_name == 'push'}}
+    if: ${{ github.event.label.name == 'chromatic' || contains(github.event.pull_request.labels.*.name, 'chromatic')}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,8 +17,39 @@ jobs:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
 
-      - name: Publish to Chromatic
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v4
+        with: 
+          main-branch-name: develop
+
+      - name: Build storybook
+        run: npx nx affected -t build-storybook
+
+      - name: Check if storybook dist folders exist
+        id: check_storybook_folders
+        run: |
+          if [ -d ${{ github.workspace }}/dist/storybook/designsystem ]; then
+            echo "designsystem=true" >> $GITHUB_OUTPUT
+          fi
+          if [ -d ${{ github.workspace }}/dist/storybook/extensions/angular ]; then
+            echo "extensions_angular=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish Designsystem  to Chromatic
+        uses: chromaui/action@latest  
+        # If designsystem storybook dist has been built, it means project might have been affected and should be tested
+        if: steps.check_storybook_folders.outputs.designsystem == 'true'
+        with:
+          projectToken: ${{ secrets.DESIGNSYSTEM_CHROMATIC_PROJECT_TOKEN }}
+          workingDir: libs/designsystem
+          storybookBuildDir: ${{ github.workspace }}/dist/storybook/designsystem
+
+      - name: Publish Extensions to Chromatic
+      # If extensions storybook dist has been built, it means project might have been affected and should be tested
+        if: steps.check_storybook_folders.outputs.extensions_angular == 'true'
         uses: chromaui/action@latest
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          autoAcceptChanges: "develop" # https://www.chromatic.com/docs/github-actions/#github-squashrebase-merge-and-the-main-branch
+          projectToken: ${{ secrets.EXTENSIONS_CHROMATIC_PROJECT_TOKEN }}
+          workingDir: libs/extensions/angular
+          storybookBuildDir: ${{ github.workspace }}/dist/storybook/extensions/angular 
+

@@ -86,7 +86,6 @@
       "builder": "@storybook/angular:build-storybook",
       "options": {
         "configDir": "libs/extensions/angular/.storybook",
-        "browserTarget": "extensions-angular:build",
         "outputDir": "dist/storybook/extensions/angular",
         "enableProdMode": false,
         "styles": [

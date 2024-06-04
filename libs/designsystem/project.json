@@ -69,7 +69,6 @@
       "builder": "@storybook/angular:build-storybook",
       "options": {
         "configDir": "libs/designsystem/.storybook",
-        "browserTarget": "designsystem:build",
         "outputDir": "dist/storybook/designsystem",
         "enableProdMode": false,
         "styles": [
