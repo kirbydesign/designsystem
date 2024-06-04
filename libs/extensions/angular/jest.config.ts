@@ -1,64 +1,22 @@
 import { pathsToModuleNameMapper } from 'ts-jest';
 
-// @nx/jest will not automatically pick up the tsconfig paths https://github.com/nrwl/nx/issues/14888
-// so defining paths here is a workaround to avoid setting in tsconfig.spec.ts and going through hoops to import here
-const pathAliases = {
-  '@kirbydesign/extensions-angular/banner': ['../../extensions/angular/banner/index.ts'],
-  '@kirbydesign/designsystem': ['../../designsystem/index.ts'],
-  '@kirbydesign/designsystem/*': ['../../designsystem/*/index.ts'],
-  '@kirbydesign/designsystem/accordion': ['../../designsystem/accordion/index.ts'],
-  '@kirbydesign/designsystem/action-group': ['../../designsystem/action-group/index.ts'],
-  '@kirbydesign/designsystem/avatar': ['../../designsystem/avatar/index.ts'],
-  '@kirbydesign/designsystem/badge': ['../../designsystem/badge/index.ts'],
-  '@kirbydesign/designsystem/button': ['../../designsystem/button/index.ts'],
-  '@kirbydesign/designsystem/calendar': ['../../designsystem/calendar/index.ts'],
-  '@kirbydesign/designsystem/card': ['../../designsystem/card/index.ts'],
-  '@kirbydesign/designsystem/chart': ['../../designsystem/chart/index.ts'],
-  '@kirbydesign/designsystem/checkbox': ['../../designsystem/checkbox/index.ts'],
-  '@kirbydesign/designsystem/data-table': ['../../designsystem/data-table/index.ts'],
-  '@kirbydesign/designsystem/divider': ['../../designsystem/divider/index.ts'],
-  '@kirbydesign/designsystem/dropdown': ['../../designsystem/dropdown/index.ts'],
-  '@kirbydesign/designsystem/empty-state': ['../../designsystem/empty-state/index.ts'],
-  '@kirbydesign/designsystem/fab-sheet': ['../../designsystem/fab-sheet/index.ts'],
-  '@kirbydesign/designsystem/flag': ['../../designsystem/flag/index.ts'],
-  '@kirbydesign/designsystem/form-field': ['../../designsystem/form-field/index.ts'],
-  '@kirbydesign/designsystem/header': ['../../designsystem/header/index.ts'],
-  '@kirbydesign/designsystem/helpers': ['../../designsystem/helpers/index.ts'],
-  '@kirbydesign/designsystem/helpers/scss': ['../../designsystem/helpers/scss/index.ts'],
-  '@kirbydesign/designsystem/icon': ['../../designsystem/icon/index.ts'],
-  '@kirbydesign/designsystem/item': ['../../designsystem/item/index.ts'],
-  '@kirbydesign/designsystem/item-group': ['../../designsystem/item-group/index.ts'],
-  '@kirbydesign/designsystem/item-sliding': ['../../designsystem/item-sliding/index.ts'],
-  '@kirbydesign/designsystem/kirby-app': ['../../designsystem/kirby-app/index.ts'],
-  '@kirbydesign/designsystem/kirby-ionic-module': [
-    '../../designsystem/kirby-ionic-module/index.ts',
-  ],
-  '@kirbydesign/designsystem/list': ['../../designsystem/list/index.ts'],
-  '@kirbydesign/designsystem/loading-overlay': ['../../designsystem/loading-overlay/index.ts'],
-  '@kirbydesign/designsystem/menu': ['../../designsystem/menu/index.ts'],
-  '@kirbydesign/designsystem/modal': ['../../designsystem/modal/index.ts'],
-  '@kirbydesign/designsystem/modal/v2': ['../../designsystem/modal/v2/index.ts'],
-  '@kirbydesign/designsystem/page': ['../../designsystem/page/index.ts'],
-  '@kirbydesign/designsystem/popover': ['../../designsystem/popover/index.ts'],
-  '@kirbydesign/designsystem/progress-circle': ['../../designsystem/progress-circle/index.ts'],
-  '@kirbydesign/designsystem/radio': ['../../designsystem/radio/index.ts'],
-  '@kirbydesign/designsystem/range': ['../../designsystem/range/index.ts'],
-  '@kirbydesign/designsystem/reorder-list': ['../../designsystem/reorder-list/index.ts'],
-  '@kirbydesign/designsystem/router-outlet': ['../../designsystem/router-outlet/index.ts'],
-  '@kirbydesign/designsystem/section-header': ['../../designsystem/section-header/index.ts'],
-  '@kirbydesign/designsystem/shared': ['../../designsystem/shared/index.ts'],
-  '@kirbydesign/designsystem/shared/floating': ['../../designsystem/shared/floating/index.ts'],
-  '@kirbydesign/designsystem/shared/portal': ['../../designsystem/shared/portal/index.ts'],
-  '@kirbydesign/designsystem/slide': ['../../designsystem/slide/index.ts'],
-  '@kirbydesign/designsystem/slide-button': ['../../designsystem/slide-button/index.ts'],
-  '@kirbydesign/designsystem/spinner': ['../../designsystem/spinner/index.ts'],
-  '@kirbydesign/designsystem/tab-navigation': ['../../designsystem/tab-navigation/index.ts'],
-  '@kirbydesign/designsystem/tabs': ['../../designsystem/tabs/index.ts'],
-  '@kirbydesign/designsystem/toast': ['../../designsystem/toast/index.ts'],
-  '@kirbydesign/designsystem/toggle': ['../../designsystem/toggle/index.ts'],
-  '@kirbydesign/designsystem/toggle-button': ['../../designsystem/toggle-button/index.ts'],
-  '@kirbydesign/designsystem/types': ['../../designsystem/types/index.ts'],
+// nx doesn't allow importing tsconfig.json: https://github.com/nrwl/nx/issues/14888
+// Use require instead:
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const json = require('../../../tsconfig.base.json');
+
+const mapDistToBarrelFile = (distFolderArray: string[]) => {
+  return distFolderArray.map((distFolder) => {
+    return distFolder.replace('libs/', '../../').replace('/dist', '') + '/index.ts';
+  });
 };
+
+const pathAliases = Object.fromEntries(
+  Object.entries<string[]>(json.compilerOptions.paths).map(([key, value]) => [
+    key,
+    mapDistToBarrelFile(value),
+  ])
+);
 
 module.exports = {
   preset: 'jest-preset-angular',
