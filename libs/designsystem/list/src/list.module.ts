@@ -6,9 +6,11 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import {
   IonItemDivider,
+  IonItemGroup,
   IonItemOptions,
   IonItemSliding,
   IonLabel,
+  IonList,
   IonListHeader,
 } from '@ionic/angular/standalone';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
@@ -50,10 +52,12 @@ const declarations = [
     CommonModule,
     IconModule,
     SpinnerModule,
+    IonItemDivider,
+    IonItemGroup,
+    IonItemOptions,
     IonItemSliding,
     IonLabel,
-    IonItemOptions,
-    IonItemDivider,
+    IonList,
     IonListHeader,
   ],
   exports: exportedDeclarations,
