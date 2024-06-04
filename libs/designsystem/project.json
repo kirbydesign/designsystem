@@ -41,7 +41,6 @@
       "builder": "@storybook/angular:start-storybook",
       "options": {
         "configDir": "libs/designsystem/.storybook",
-        "browserTarget": "designsystem:build",
         "port": 6006,
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
