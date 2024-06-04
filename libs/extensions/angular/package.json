@@ -1,6 +1,9 @@
 {
   "name": "@kirbydesign/extensions-angular",
   "version": "0.0.1",
+  "scripts": {
+    "chromatic": "chromatic"
+  },
   "peerDependencies": {
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
