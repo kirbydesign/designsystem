@@ -1,1 +1,162 @@
-@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils' as *;
+
+kirby-card {
+  height: 240px;
+
+  @media (min-width: 632px) {
+    height: 164px;
+  }
+}
+
+.blur-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.blur-image {
+  width: 200%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+
+  &.dark {
+    filter: blur(98px) brightness(0.8);
+  }
+  &.white {
+    filter: blur(98px) brightness(1.4);
+  }
+}
+
+.main-content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: size('xxs');
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 632px) {
+    display: flex;
+    gap: size('s');
+    height: 100%;
+    justify-content: space-between;
+    flex-direction: initial;
+  }
+}
+
+.main-content-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  overflow: hidden;
+  border-radius: size('xxs');
+  height: 140px;
+  @media (min-width: 632px) {
+    flex: 1;
+    height: 100%;
+  }
+}
+
+.main-content {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-items: flex-start;
+  padding: size('xxs') 0 size('xxs') size('xxs');
+
+  @media (min-width: 632px) {
+    flex: 1;
+    height: 100%;
+    justify-content: space-between;
+    padding: size('xxs') size('xxs') size('xxs') 0;
+  }
+}
+
+.main-content-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.main-content-body {
+  display: flex;
+  justify-content: space-between;
+
+  @media (min-width: 632px) {
+    flex-direction: column;
+  }
+}
+
+.main-content-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content-body-text {
+  display: block;
+  overflow: hidden;
+
+  @media (min-width: 632px) {
+    height: 60px;
+    padding-inline-end: size('xxl');
+  }
+}
+
+.main-content-dismiss {
+  display: none;
+
+  @media (min-width: 632px) {
+    display: flex;
+    top: - size('xxxs');
+    right: - size('xxxs');
+  }
+}
+
+.floating-dismiss {
+  position: absolute;
+  top: size('xs');
+  right: size('xs');
+
+  @media (min-width: 632px) {
+    display: none;
+  }
+}
+
+.floating-dismiss-background {
+  position: absolute;
+  top: size('xxxs');
+  left: size('xxxs');
+  height: size('m');
+  width: size('m');
+  border-radius: size('s');
+
+  &.dark {
+    background-color: get-color('black');
+  }
+}
+
+.main-content-body-actions-mobile {
+  display: flex;
+
+  @media (min-width: 632px) {
+    display: none;
+  }
+}
+
+.main-content-body-actions-desktop {
+  display: none;
+
+  @media (min-width: 632px) {
+    display: flex;
+  }
+}
