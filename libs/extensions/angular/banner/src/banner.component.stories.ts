@@ -19,7 +19,7 @@ export const Default: Story = {
     title: 'My amazing title',
     bodyText: 'This is a really good body text for use with a banner',
     actionButtonText: 'Go somewhere!',
-    imagePath: 'https://placehold.co/2000x1000/333/EEEEEE',
+    imagePath: 'https://images.unsplash.com/photo-1515876305430-f06edab8282a',
   },
 };
 
@@ -30,7 +30,7 @@ export const DarkImageFilter: Story = {
   args: {
     title: 'Another amazing title',
     bodyText: 'This is a really good body text for use with a banner',
-    imagePath: 'https://placehold.co/2000x1000/333/EEEEEE',
+    imagePath: 'https://images.unsplash.com/photo-1515876305430-f06edab8282a',
     actionButtonText: 'Go!',
     imageFilter: 'dark',
   },
