@@ -57,7 +57,7 @@
     box-shadow: none;
   }
 
-  &.outline {
+  &.outlined {
     background-color: transparent;
     outline: 1px solid utils.get-color('medium');
     box-shadow: none;
@@ -86,7 +86,7 @@
 }
 
 @each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}):not(.outline) {
+  :host(.#{$color-name}):not(.outlined) {
     --kirby-card-main-background-color: #{utils.get-color($color-name)};
     --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
   }

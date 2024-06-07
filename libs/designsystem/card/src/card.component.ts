@@ -9,12 +9,17 @@ import {
 } from '@angular/core';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
+type Variant = 'elevated' | 'flat' | 'outlined';
+
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit, OnDestroy {
+  _flat: boolean = false;
+  _variant: Variant = 'elevated';
+
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -47,11 +52,25 @@ export class CardComponent implements OnInit, OnDestroy {
 
   @HostBinding('class.flat')
   @Input()
-  flat: boolean = false;
+  set flat(value: boolean) {
+    this._flat = value;
+    console.warn('The flat attribute has been deprecated! use variant="flat" instead');
+  }
 
-  @HostBinding('class.outline')
+  get flat(): boolean {
+    return this._flat || this._variant === 'flat';
+  }
+
   @Input()
-  outline: boolean = false;
+  set variant(variant: Variant) {
+    this._variant = variant;
+  }
+
+  @HostBinding('class.outlined')
+  @Input()
+  get outlined(): boolean {
+    return !this._flat && this._variant === 'outlined';
+  }
 
   constructor(
     private elementRef: ElementRef,

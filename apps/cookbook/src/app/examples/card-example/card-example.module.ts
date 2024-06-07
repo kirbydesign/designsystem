@@ -11,6 +11,7 @@ import { CardExampleColorComponent } from './examples/color';
 import { CardExampleDefaultComponent } from './examples/default';
 import { CardExampleFlagComponent } from './examples/flag';
 import { CardExampleFlatComponent } from './examples/flat';
+import { CardExampleOutlineComponent } from './examples/outline';
 
 const COMPONENT_DECLARATIONS = [
   CardExampleComponent,
@@ -20,6 +21,7 @@ const COMPONENT_DECLARATIONS = [
   CardExampleDisclosureComponent,
   CardExampleBackgroundImageComponent,
   CardExampleFlatComponent,
+  CardExampleOutlineComponent,
 ];
 
 @NgModule({
