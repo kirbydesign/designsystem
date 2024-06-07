@@ -49,6 +49,10 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input()
   flat: boolean = false;
 
+  @HostBinding('class.outline')
+  @Input()
+  outline: boolean = false;
+
   constructor(
     private elementRef: ElementRef,
     private resizeObserverService: ResizeObserverService,

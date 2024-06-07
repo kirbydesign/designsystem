@@ -57,6 +57,24 @@
     box-shadow: none;
   }
 
+  &.outline {
+    background-color: transparent;
+    outline: 1px solid utils.get-color('medium');
+    box-shadow: none;
+
+    &:has(kirby-card-header.flagged) {
+      outline: none;
+
+      .content-wrapper {
+        border-block-end: 1px solid utils.get-color('medium');
+        border-inline-start: 1px solid utils.get-color('medium');
+        border-inline-end: 1px solid utils.get-color('medium');
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+      }
+    }
+  }
+
   &[role='button'] {
     @include interaction-state.initialize-layer;
     @include interaction-state.apply-hover('xxxs');
@@ -68,7 +86,7 @@
 }
 
 @each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}) {
+  :host(.#{$color-name}):not(.outline) {
     --kirby-card-main-background-color: #{utils.get-color($color-name)};
     --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
   }
