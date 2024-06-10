@@ -8,12 +8,18 @@ import {
   Renderer2,
 } from '@angular/core';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+
+const KIRBY_CARD_FLAT_PROPERTY_DEPRECATION_WARNING =
+  'Deprecation warning: flat property will be removed from version 10.0. Use variant="flat" instead';
+
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit, OnDestroy {
+  private _flat: boolean = false;
+
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -48,7 +54,14 @@ export class CardComponent implements OnInit, OnDestroy {
    * @deprecated Using flat is no longer recomended as it is now part of the "variant" option. Will be removed in version 10.0.
    */
   @Input()
-  flat: boolean = false;
+  set flat(isFlat: boolean) {
+    this._flat = isFlat;
+    console.warn(KIRBY_CARD_FLAT_PROPERTY_DEPRECATION_WARNING);
+  }
+
+  get flat(): boolean {
+    return this._flat;
+  }
 
   @Input()
   variant: 'elevated' | 'flat' | 'outlined' = 'elevated';
