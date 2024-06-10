@@ -8,18 +8,12 @@ import {
   Renderer2,
 } from '@angular/core';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
-
-type Variant = 'elevated' | 'flat' | 'outlined';
-
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit, OnDestroy {
-  _flat: boolean = false;
-  _variant: Variant = 'elevated';
-
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -50,26 +44,19 @@ export class CardComponent implements OnInit, OnDestroy {
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
 
-  @HostBinding('class.flat')
+  /**
+   * @deprecated Using flat is no longer recomended as it is now part of the "variant" option. Will be removed in version 10.0.
+   */
   @Input()
-  set flat(value: boolean) {
-    this._flat = value;
-    console.warn('The flat attribute has been deprecated! use variant="flat" instead');
-  }
-
-  get flat(): boolean {
-    return this._flat || this._variant === 'flat';
-  }
+  flat: boolean = false;
 
   @Input()
-  set variant(variant: Variant) {
-    this._variant = variant;
-  }
+  variant: 'elevated' | 'flat' | 'outlined' = 'elevated';
 
-  @HostBinding('class.outlined')
-  @Input()
-  get outlined(): boolean {
-    return !this._flat && this._variant === 'outlined';
+  //TODO: remove "flat"-logic from below function in version 10.0
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.variant, this.flat ? 'flat' : ''].filter((cssClass) => !!cssClass);
   }
 
   constructor(

@@ -32,8 +32,16 @@ export class CardShowcaseComponent {
       type: ['string'],
     },
     {
+      name: 'variant',
+      description:
+        'Sets the variant of a card. The recommended is "elevated" which is also the default',
+      defaultValue: 'elevated',
+      type: ['elevated', 'flat', 'outlined'],
+    },
+    {
       name: 'flat',
-      description: '(Optional) Remove elevation on the card. Default elevation = 2, flat = 0.',
+      description:
+        'Deprecation warning! use "variant" instead. \n(Optional) Remove elevation on the card. Default elevation = 2, flat = 0.',
       defaultValue: '',
       type: ['boolean'],
     },
