@@ -48,7 +48,7 @@ import { CanDismissHelper } from '../services';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent implements OnChanges, AfterContentInit {
+export class ModalComponent implements OnChanges {
   @ViewChild(IonModal, { static: true, read: ElementRef })
   modalElement: ElementRef<HTMLIonModalElement>;
   @ViewChild(IonContent) ionContent: IonContent;
@@ -98,10 +98,6 @@ export class ModalComponent implements OnChanges, AfterContentInit {
     private router: Router
   ) {}
 
-  ngAfterContentInit(): void {
-    this.handleBrowserBackButton(this.modalElement.nativeElement);
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     this.updateModalConfigOnChange(changes);
   }
@@ -123,6 +119,7 @@ export class ModalComponent implements OnChanges, AfterContentInit {
   }
 
   public _onDidPresent(event: CustomEvent<OverlayEventDetail>) {
+    this.handleBrowserBackButton(this.modalElement.nativeElement);
     this.didPresent.emit(event);
   }
 
