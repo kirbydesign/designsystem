@@ -325,15 +325,20 @@ export class ModalNavigationService {
   }
 
   async navigateOutOfModalOutlet(): Promise<boolean> {
-    let result = Promise.resolve(true);
     const currentActivatedRoute = this.getCurrentActivatedRoute();
-    if (currentActivatedRoute.outlet === 'modal') {
-      const parentRoute = this.getBackdropRoute(currentActivatedRoute);
-      result = this.router.navigate(['./'], {
-        relativeTo: parentRoute,
-      });
+    const currentNavigationFinalUrl = this.router.getCurrentNavigation()?.finalUrl?.toString();
+    const isCurrentlyNavigatingOutOfModalOutlet =
+      currentNavigationFinalUrl && !this.isModalRoute(currentNavigationFinalUrl);
+
+    if (currentActivatedRoute.outlet !== 'modal' || isCurrentlyNavigatingOutOfModalOutlet) {
+      // Nothing to do here, bail out:
+      return Promise.resolve(true);
     }
-    return result;
+
+    const parentRoute = this.getBackdropRoute(currentActivatedRoute);
+    return this.router.navigate(['./'], {
+      relativeTo: parentRoute,
+    });
   }
 
   private getBackdropRoute(currentActivatedRoute: ActivatedRoute) {
