@@ -2,13 +2,19 @@ name: "Visual Regression Tests"
 
 on:
     pull_request:
-        types: [labeled, synchronize]
+        types: [labeled, unlabeled, synchronize]
 
 jobs:
   chromatic:
-    if: ${{ github.event.label.name == 'chromatic' || contains(github.event.pull_request.labels.*.name, 'chromatic') }}
     runs-on: ubuntu-latest
     steps:
+      - name: Check for label
+        run: |
+          if ${{ github.event.label.name != 'chromatic' && !contains(github.event.pull_request.labels.*.name, 'chromatic') }}; then
+            echo "Please add label."
+            exit 1
+          fi
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
