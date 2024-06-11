@@ -69,8 +69,8 @@
         border-block-end: 1px solid utils.get-color('medium');
         border-inline-start: 1px solid utils.get-color('medium');
         border-inline-end: 1px solid utils.get-color('medium');
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: utils.$border-radius;
+        border-bottom-right-radius: utils.$border-radius;
       }
     }
   }

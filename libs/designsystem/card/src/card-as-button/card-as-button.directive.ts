@@ -15,7 +15,6 @@ export class CardAsButtonDirective implements OnInit {
 
   ngOnInit(): void {
     if (this.card) {
-      this.card.variant = 'elevated';
     }
   }
 
