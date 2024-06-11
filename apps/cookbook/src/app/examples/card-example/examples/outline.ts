@@ -8,14 +8,6 @@ const config = {
     <p>In general the look and feel of the default card is preferred in most use cases as it elevates the card a bit from the background,
     but if you need an outlined look, here it is!</p>
     <a class="kirby-external-icon" target="_blank" href="https://github.com/kirbydesign/designsystem">Kirby on Github</a>
-</kirby-card>
-<kirby-divider [hasMargin]="true"></kirby-divider>
-<kirby-card [hasPadding]="true" variant="outlined">
-    <kirby-card-header flagged="success">Success flag header</kirby-card-header>
-    <p>This card has no background and does not react on theming</p>
-    <p>In general the look and feel of the default card is preferred in most use cases as it elevates the card a bit from the background,
-    but if you need an outlined look, here it is!</p>
-    <a class="kirby-external-icon" target="_blank" href="https://github.com/kirbydesign/designsystem">Kirby on Github</a>
 </kirby-card>`,
 };
 
