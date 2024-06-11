@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { first, fromEvent, takeUntil } from 'rxjs';
-import { Overlay } from '../../modal.interfaces';
+import { filter, skipUntil, takeUntil } from 'rxjs';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
+import { Overlay } from '../../modal.interfaces';
 import {
   ModalCompactWrapperComponent,
   ModalConfig,
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
-
 import { AlertConfig } from '../alert/config/alert-config';
+
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 import { CanDismissHelper } from './can-dismiss.helper';
-import { AlertHelper } from './alert.helper';
 
 @Injectable()
 export class ModalHelper {
@@ -23,7 +23,7 @@ export class ModalHelper {
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private windowRef: WindowRef,
     private canDismissHelper: CanDismissHelper,
-    private alertHelper: AlertHelper
+    private router: Router
   ) {}
 
   /* 
@@ -147,25 +147,29 @@ export class ModalHelper {
 
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
-    if (!config.modalRoute && !config.canDismiss && !alertConfig) {
-      this.handleBrowserBackButton(ionModal);
+    if (!config.modalRoute) {
+      this.handleBrowserBackButton(overlay);
     }
 
     this.isModalOpening = false;
 
-    return {
-      dismiss: ionModal.dismiss.bind(ionModal),
-      onWillDismiss: ionModal.onWillDismiss(),
-      onDidDismiss: ionModal.onDidDismiss(),
-    };
+    return overlay;
   }
 
-  private handleBrowserBackButton(modal: HTMLIonModalElement) {
-    const popStateEvent$ = fromEvent(this.windowRef.nativeWindow, 'popstate').pipe(first());
-    const modalClose$ = fromEvent(modal, 'ionModalDidDismiss');
-
-    popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
-      modal.dismiss();
-    });
+  private handleBrowserBackButton(overlay: Overlay) {
+    const popstateNavigationStart$ = this.router.events.pipe(
+      filter(
+        (event): event is NavigationStart =>
+          event instanceof NavigationStart && event.navigationTrigger === 'popstate'
+      )
+    );
+    const navigationEnd$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    );
+    navigationEnd$
+      .pipe(skipUntil(popstateNavigationStart$), takeUntil(overlay.onWillDismiss))
+      .subscribe(() => {
+        overlay.dismiss();
+      });
   }
 }
