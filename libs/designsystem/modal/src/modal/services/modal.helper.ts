@@ -120,6 +120,19 @@ export class ModalHelper {
       ionModal.style.setProperty('--kirby-modal-height', config.customHeight);
     }
 
+    const onWillDismiss = ionModal.onWillDismiss();
+
+    const overlay: Overlay = {
+      dismiss: ionModal.dismiss.bind(ionModal),
+      onWillDismiss,
+      onDidDismiss: ionModal.onDidDismiss(),
+      isDismissing: false,
+    };
+
+    onWillDismiss.then(() => {
+      overlay.isDismissing = true;
+    });
+
     await ionModal.present();
 
     /**
