@@ -18,9 +18,6 @@
     "url": "https://github.com/kirbydesign/designsystem/issues"
   },
   "homepage": "https://cookbook.kirby.design",
-  "scripts": {
-    "chromatic": "chromatic"
-  },
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
