@@ -2,7 +2,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { CardComponent } from './card.component';
-import { CardHeaderComponent } from './public_api';
+import { CardHeaderComponent } from './card-header/card-header.component';
 
 const OUTLINE_COLOR = 'rgb(209, 209, 209)';
 
