@@ -306,7 +306,7 @@ export class ModalNavigationService {
     queryParams?: Params,
     alertConfig?: AlertConfig
   ): Promise<boolean> {
-    const commands = Array.isArray(path) ? path : path.split('/');
+    const commands = Array.isArray(path) ? [...path] : path.split('/');
     const childPath = commands.pop();
     const navigationData: NavigationData = { navigationData: { alertConfig } };
     const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
