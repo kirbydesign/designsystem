@@ -166,6 +166,15 @@
   provided via the
   <code>modalConfig</code>
   object passed as additional route data.
+  <br />
+
+  <em>
+    This configuration also accepts a
+    <code>canDismiss</code>
+    property to
+    <a href="#" (click)="scrollTo(alertBeforeClose)">show an alert before closing the modal</a>
+    .
+  </em>
 </p>
 
 <p>
@@ -427,12 +436,42 @@
   <code>AlertConfig</code>
   . If an
   <code>AlertConfig</code>
-  is being returned, an alert will appear, when the user tries to dismiss the modal. This callback
-  can be set on the parent modal from your own embedded component, or be provided to the
-  <code>ModalConfig</code>
-  . When using the modal component in you template the callback can be set directly via the
-  canDismiss input property. The callback can be both synchronous and asynchronous.
+  is being returned, an alert will appear, when the user tries to dismiss the modal.
 </p>
+<p>
+  This callback can be set on the parent modal from your own embedded component or provided in the
+  <code>ModalConfig</code>
+  . When using the modal component in your template the callback can be set directly via the
+  <code>canDismiss</code>
+  input property.
+</p>
+<p>
+  <em>
+    <strong>Please note:</strong>
+    to avoid
+    <code>this</code>
+    being
+    <code>undefined</code>
+    in the function callback be sure to either
+    <code>bind()</code>
+    the function or use an arrow function. This can be done when defining the callback:
+    <code>validate = () => {{ '{...}' }}</code>
+    or when configuring the
+    <code>ModalConfig</code>
+    :
+    <code>canDismiss: () => this.validate()</code>
+    .
+    <br />
+    <a
+      class="kirby-external-icon"
+      target="_blank"
+      href="https://ionicframework.com/docs/troubleshooting/runtime#accessing-this"
+    >
+      Read more in the Ionic Documentation
+    </a>
+  </em>
+</p>
+<p>The callback can be both synchronous and asynchronous.</p>
 
 <cookbook-iphone
   class="large-example"
@@ -463,6 +502,62 @@
 </p>
 
 <cookbook-example-viewer [ts]="alertModalConfigExample.codeSnippet"></cookbook-example-viewer>
+
+<h4>Prevent browser navigation</h4>
+<p>
+  To prevent the user from navigating while the modal is open — i.e. via the browser back button —
+  the
+  <code>canDismiss</code>
+  property can be set in combination with the
+  <code>CanDismissModalGuard</code>
+  provided by Kirby in the
+  <code>
+    <a href="https://angular.io/api/router/CanDeactivateFn" target="_blank">canDeactivate</a>
+  </code>
+  property in your route config. The guard can be set on either:
+</p>
+<ul>
+  <li>
+    the route with the component that opens the modal, when using a
+    <a href="#" (click)="scrollTo(componentBased)">component</a>
+    or
+    <a href="#" (click)="scrollTo(controllerBased)">controller</a>
+    to open the modal
+  </li>
+  <li>
+    the child route(s) with the component(s) that are shown inside the modal, when using
+    <a href="#" (click)="scrollTo(routeBased)">route based modals</a>
+    .
+    <br />
+    <em>
+      Note: The alert will only be shown when closing the modal, not when navigating within the
+      child routes of the modal flow.
+    </em>
+  </li>
+</ul>
+<p>
+  <em>
+    <strong>Please note:</strong>
+    To ensure correct browser history Angular's RouterModule should be configured with
+    <code>canceledNavigationResolution: 'computed'</code>
+    .
+  </em>
+</p>
+<cookbook-example-viewer
+  [ts]="outletExample.modalRouteWithGuardCodeSnippet"
+></cookbook-example-viewer>
+
+<p>
+  To see how the
+  <code>canDismiss</code>
+  property and the
+  <code>CanDismissModalGuard</code>
+  can prevent navigating back using the browser back button you should follow these steps:
+</p>
+
+<cookbook-modal-example-alert-with-guard-stepper
+  [currentStep]="1"
+></cookbook-modal-example-alert-with-guard-stepper>
 
 <h2 #modalEvents>Modal events</h2>
 <h3>Modal presented</h3>
