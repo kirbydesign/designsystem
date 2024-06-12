@@ -37,6 +37,7 @@
   background-repeat: var(--kirby-card-background-repeat, no-repeat);
   background-position: var(--kirby-card-background-position, center);
   background-size: var(--kirby-card-background-size, cover);
+  border: var(--kirby-card-border, none);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,11 +60,11 @@
 
   &.outlined {
     background-color: transparent;
-    outline: 1px solid utils.get-color('medium');
+    border: 1px solid utils.get-color('medium');
     box-shadow: none;
 
     &:has(kirby-card-header.flagged) {
-      outline: none;
+      border: none;
 
       .content-wrapper {
         border-block-end: 1px solid utils.get-color('medium');
