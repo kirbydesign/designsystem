@@ -1,7 +1,7 @@
 name: "Visual Regression Tests"
 
 on:
-    pull_request:
+  pull_request:
 
 jobs:
   chromatic:
@@ -41,7 +41,6 @@ jobs:
           projectToken: ${{ secrets.DESIGNSYSTEM_CHROMATIC_PROJECT_TOKEN }}
           workingDir: libs/designsystem
           storybookBuildDir: ${{ github.workspace }}/dist/storybook/designsystem
-          onlyChanged: true
 
       - name: Publish Extensions to Chromatic
       # If extensions storybook dist has been built, it means project might have been affected and should be tested
@@ -51,4 +50,3 @@ jobs:
           projectToken: ${{ secrets.EXTENSIONS_CHROMATIC_PROJECT_TOKEN }}
           workingDir: libs/extensions/angular
           storybookBuildDir: ${{ github.workspace }}/dist/storybook/extensions/angular
-          onlyChanged: true
