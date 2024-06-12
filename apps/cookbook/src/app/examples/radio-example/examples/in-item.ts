@@ -13,8 +13,7 @@ const config = {
   template: `<kirby-card>
   <kirby-radio-group [value]="selected">
     <kirby-item *ngFor="let item of items">
-      <kirby-radio [value]="item" slot="start" [disabled]="item.disabled"></kirby-radio>
-      <kirby-label>{{item.title}}</kirby-label>
+      <kirby-radio [value]="item" slot="start" [disabled]="item.disabled" [text]="item.title"></kirby-radio>
     </kirby-item> 
   </kirby-radio-group>
 </kirby-card>`,
