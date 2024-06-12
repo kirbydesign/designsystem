@@ -2,19 +2,11 @@ name: "Visual Regression Tests"
 
 on:
     pull_request:
-        types: [labeled, unlabeled, synchronize]
 
 jobs:
   chromatic:
     runs-on: ubuntu-latest
     steps:
-      - name: Check for label
-        run: |
-          if ${{ github.event.label.name != 'chromatic' && !contains(github.event.pull_request.labels.*.name, 'chromatic') }}; then
-            echo "Please add label."
-            exit 1
-          fi
-
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -49,8 +41,7 @@ jobs:
           projectToken: ${{ secrets.DESIGNSYSTEM_CHROMATIC_PROJECT_TOKEN }}
           workingDir: libs/designsystem
           storybookBuildDir: ${{ github.workspace }}/dist/storybook/designsystem
-          exitZeroOnChanges: true
-          exitOnceUploaded: true
+          onlyChanged: true
 
       - name: Publish Extensions to Chromatic
       # If extensions storybook dist has been built, it means project might have been affected and should be tested
@@ -59,6 +50,5 @@ jobs:
         with:
           projectToken: ${{ secrets.EXTENSIONS_CHROMATIC_PROJECT_TOKEN }}
           workingDir: libs/extensions/angular
-          storybookBuildDir: ${{ github.workspace }}/dist/storybook/extensions/angular 
-          exitZeroOnChanges: true
-          exitOnceUploaded: true
+          storybookBuildDir: ${{ github.workspace }}/dist/storybook/extensions/angular
+          onlyChanged: true
