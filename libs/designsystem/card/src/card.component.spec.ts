@@ -1,13 +1,15 @@
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 
-const OUTLINE_COLOR = 'rgb(209, 209, 209)';
-
+const getColor = DesignTokenHelper.getColor;
+const size = DesignTokenHelper.size;
 describe('CardComponent', () => {
   let spectator: SpectatorHost<CardComponent>;
+  let cardElement: HTMLElement;
 
   const createHost = createHostFactory({
     component: CardComponent,
@@ -27,11 +29,10 @@ describe('CardComponent', () => {
 
   describe("with 'backgroundImageUrl' set", () => {
     const testUrl = 'https://notarealurl/';
-    let cardElement: HTMLElement;
 
     beforeEach(() => {
       spectator = createHost(`<kirby-card backgroundImageUrl='${testUrl}'></kirby-card>`);
-      cardElement = spectator.queryHost('kirby-card');
+      cardElement = spectator.element;
     });
 
     it("should use the url for the 'background-image' property", () => {
@@ -50,11 +51,9 @@ describe('CardComponent', () => {
   });
 
   describe('with flat variant attribute', () => {
-    let cardElement: HTMLElement;
-
     beforeEach(() => {
       spectator = createHost('<kirby-card variant="flat"></kirby-card>');
-      cardElement = spectator.queryHost('kirby-card');
+      cardElement = spectator.element;
     });
 
     it('should have no box-shadow', () => {
@@ -65,18 +64,16 @@ describe('CardComponent', () => {
   });
 
   describe('with outlined variant attribute', () => {
-    let cardElement: HTMLElement;
-
     beforeEach(() => {
       spectator = createHost('<kirby-card variant="outlined"></kirby-card>');
-      cardElement = spectator.queryHost('kirby-card');
+      cardElement = spectator.element;
     });
 
     it('should have default styles', () => {
       expect(cardElement).toHaveComputedStyle({
         'box-shadow': 'none',
         'background-color': 'transparent',
-        'outline-color': OUTLINE_COLOR,
+        'outline-color': getColor('medium'),
         'outline-style': 'solid',
         'outline-width': '1px',
       });
@@ -84,33 +81,31 @@ describe('CardComponent', () => {
   });
 
   describe('with outlined variant attribute and flagged header', () => {
-    let cardElement: HTMLElement;
-
     beforeEach(() => {
       spectator = createHost(
         '<kirby-card variant="outlined"><kirby-card-header flagged="warning"></kirby-card-header></kirby-card>'
       );
-      cardElement = spectator.queryHost('kirby-card');
+      cardElement = spectator.element;
     });
 
     it('should have default styles', () => {
       const contentWrapperElement = spectator.queryHost('.content-wrapper');
 
       expect(contentWrapperElement).toHaveComputedStyle({
-        'border-block-end-color': OUTLINE_COLOR,
+        'border-block-end-color': getColor('medium'),
         'border-block-end-style': 'solid',
         'border-block-end-width': '1px',
 
-        'border-inline-start-color': OUTLINE_COLOR,
+        'border-inline-start-color': getColor('medium'),
         'border-inline-start-style': 'solid',
         'border-inline-start-width': '1px',
 
-        'border-inline-end-color': OUTLINE_COLOR,
+        'border-inline-end-color': getColor('medium'),
         'border-inline-end-style': 'solid',
         'border-inline-end-width': '1px',
 
-        'border-bottom-left-radius': '16px',
-        'border-bottom-right-radius': '16px',
+        'border-bottom-left-radius': size('s'),
+        'border-bottom-right-radius': size('s'),
       });
 
       expect(cardElement).toHaveComputedStyle({
