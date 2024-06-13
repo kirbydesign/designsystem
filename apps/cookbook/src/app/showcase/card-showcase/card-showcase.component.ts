@@ -39,15 +39,9 @@ export class CardShowcaseComponent {
       type: ['elevated', 'flat', 'outlined'],
     },
     {
-      name: 'flat',
-      description:
-        'Deprecation warning: use "variant" instead. \n(Optional) Remove elevation on the card. Default elevation = 2, flat = 0.',
-      defaultValue: 'false',
-      type: ['boolean'],
-    },
-    {
       name: 'hasPadding',
-      description: '',
+      description:
+        'If set, the card will appear with a white space between the border and the content',
       defaultValue: 'false',
       type: ['boolean'],
     },
@@ -113,6 +107,11 @@ export class CardShowcaseComponent {
       name: '--kirby-card-padding-bottom',
       description: "Sets the 'padding-bottom' property of the card",
       defaultValue: "size('s')",
+    },
+    {
+      name: '--kirby-card-border',
+      description: "Sets the 'border' property of the card",
+      defaultValue: 'none',
     },
   ];
 }
