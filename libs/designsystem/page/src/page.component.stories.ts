@@ -3,8 +3,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
-import { PageComponent } from './page.component';
-import { PageModule } from './page.module';
+import { PageComponent, PageModule } from '@kirbydesign/designsystem/page';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,

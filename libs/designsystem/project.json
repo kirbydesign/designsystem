@@ -7,6 +7,8 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
+      "inputs": ["{projectRoot}/**", "!{projectRoot}/dist/**"],
+      "outputs": ["{projectRoot}/dist/"],
       "dependsOn": ["^build"],
       "options": {
         "tsConfig": "libs/designsystem/tsconfig.lib.json",
@@ -23,11 +25,22 @@
       },
       "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]
     },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf libs/core/dist libs/designsystem/dist",
+          "nx build core --watch",
+          "wait-on libs/core/dist/index.js && nx build designsystem --watch",
+          "wait-on libs/designsystem/dist/package.json && nx serve cookbook"
+        ],
+        "parallel": true
+      }
+    },
     "storybook": {
       "builder": "@storybook/angular:start-storybook",
       "options": {
         "configDir": "libs/designsystem/.storybook",
-        "browserTarget": "designsystem:build",
         "port": 6006,
         "styles": [
           "libs/core/src/scss/_global-styles.scss",

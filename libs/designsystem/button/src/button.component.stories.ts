@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 
 import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent, ButtonSize } from './button.component';
+import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,

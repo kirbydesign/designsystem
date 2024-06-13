@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { TextareaComponent } from './textarea.component';
+import { TextareaComponent } from '@kirbydesign/designsystem/form-field';
 
 const meta: Meta<TextareaComponent> = {
   component: TextareaComponent,

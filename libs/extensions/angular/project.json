@@ -1,0 +1,124 @@
+{
+  "name": "extensions-angular",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/extensions/angular",
+  "prefix": "kirby-x",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "inputs": ["{projectRoot}/**", "!{projectRoot}/dist/**"],
+      "outputs": ["{projectRoot}/dist/**"],
+      "dependsOn": ["^build"],
+      "options": {
+        "project": "libs/extensions/angular/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/extensions/angular/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/extensions/angular/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "dependsOn": ["^build"],
+      "options": {
+        "jestConfig": "libs/extensions/angular/jest.config.ts"
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf libs/core/dist libs/designsystem/dist libs/extensions/angular/dist",
+          "nx build core --watch",
+          "wait-on libs/core/dist/index.js && nx build designsystem --watch",
+          "wait-on libs/designsystem/dist/package.json && nx build extensions-angular --watch",
+          "wait-on libs/extensions/angular/dist/package.json && nx storybook extensions-angular"
+        ],
+        "parallel": true
+      }
+    },
+    "storybook": {
+      "builder": "@storybook/angular:start-storybook",
+      "options": {
+        "configDir": "libs/extensions/angular/.storybook",
+        "port": 6006,
+        "styles": [
+          "libs/core/src/scss/_global-styles.scss",
+          "libs/extensions/angular/.storybook/styles.css"
+        ],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "libs/designsystem/icon/src/icons/svg",
+            "output": "./assets/kirby/icons/svg"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "node_modules/ionicons/dist/ionicons/svg",
+            "output": "./svg"
+          }
+        ],
+        "compodoc": true,
+        "compodocArgs": [
+          "-e",
+          "json",
+          "-d",
+          "{projectRoot}/docs",
+          "-p",
+          "{projectRoot}/.storybook/tsconfig.compodoc.json"
+        ]
+      }
+    },
+    "build-storybook": {
+      "builder": "@storybook/angular:build-storybook",
+      "options": {
+        "configDir": "libs/extensions/angular/.storybook",
+        "browserTarget": "extensions-angular:build",
+        "outputDir": "dist/storybook/extensions/angular",
+        "styles": [
+          "libs/core/src/scss/_global-styles.scss",
+          "libs/extensions/angular/.storybook/styles.css"
+        ],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "libs/designsystem/icon/src/icons/svg",
+            "output": "./assets/kirby/icons/svg"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "node_modules/ionicons/dist/ionicons/svg",
+            "output": "./svg"
+          }
+        ],
+        "compodoc": true,
+        "compodocArgs": [
+          "-e",
+          "json",
+          "-d",
+          "{projectRoot}/docs",
+          "-p",
+          "{projectRoot}/.storybook/tsconfig.compodoc.json"
+        ]
+      }
+    }
+  }
+}

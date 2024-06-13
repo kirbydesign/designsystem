@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { ActionSheetComponent } from './action-sheet.component';
+import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 
 const meta: Meta<ActionSheetComponent> = {
   component: ActionSheetComponent,

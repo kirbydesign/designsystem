@@ -1,6 +1,6 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 
-import { LabelComponent } from './label.component';
+import { LabelComponent } from '@kirbydesign/designsystem/item';
 
 const meta: Meta<LabelComponent> = {
   component: LabelComponent,

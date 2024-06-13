@@ -3,7 +3,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
-import { ActionGroupComponent } from './action-group.component';
+import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 
 const meta: Meta<ActionGroupComponent> = {
   component: ActionGroupComponent,

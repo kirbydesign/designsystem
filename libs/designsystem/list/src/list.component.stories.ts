@@ -1,8 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { ListComponent } from './list.component';
-import { ListModule } from './list.module';
+import { ListComponent, ListModule } from '@kirbydesign/designsystem/list';
 
 const meta: Meta<ListComponent> = {
   component: ListComponent,
