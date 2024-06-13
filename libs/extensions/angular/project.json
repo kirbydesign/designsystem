@@ -79,11 +79,6 @@
             "output": "./svg"
           },
           {
-            "glob": "roboto-latin-400-normal.woff2",
-            "input": "node_modules/@fontsource/roboto/files/",
-            "output": "./assets/fonts/"
-          },
-          {
             "glob": "**/*.woff2",
             "input": "node_modules/@fontsource/roboto/files",
             "output": "./assets/fonts"
