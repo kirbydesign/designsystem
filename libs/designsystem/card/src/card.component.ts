@@ -51,7 +51,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * @deprecated Using flat is no longer recomended as it is now part of the "variant" option. Will be removed in version 10.0.
+   * @deprecated Setting the flat property is no longer recommended, and can now be set with variant="flat" instead. The 'flat' property will be removed in Kirby v10.
    */
   @Input()
   set flat(isFlat: boolean) {
