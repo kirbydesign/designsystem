@@ -10,7 +10,7 @@ import {
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
 const KIRBY_CARD_FLAT_PROPERTY_DEPRECATION_WARNING =
-  'Deprecation warning: Setting the 'flat' property of kirby-card is deprecated and will be removed from Kirby v10. Use variant="flat" instead for identical behavior.';
+  'Deprecation warning: Setting the "flat" property of kirby-card is deprecated and will be removed from Kirby v10. Use variant="flat" instead for identical behavior.';
 
 @Component({
   selector: 'kirby-card',

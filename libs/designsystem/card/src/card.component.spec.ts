@@ -73,9 +73,9 @@ describe('CardComponent', () => {
       expect(cardElement).toHaveComputedStyle({
         'box-shadow': 'none',
         'background-color': 'transparent',
-        'outline-color': getColor('medium'),
-        'outline-style': 'solid',
-        'outline-width': '1px',
+        'border-color': getColor('medium'),
+        'border-style': 'solid',
+        'border-width': '1px',
       });
     });
   });
@@ -111,7 +111,6 @@ describe('CardComponent', () => {
       expect(cardElement).toHaveComputedStyle({
         'box-shadow': 'none',
         'background-color': 'transparent',
-        'outline-style': 'none',
       });
     });
   });
