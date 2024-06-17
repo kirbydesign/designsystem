@@ -18,9 +18,9 @@ export const Default: Story = {
     alwaysEnableToday: false,
     customLocales: {},
     usePopover: false,
-    selectedDate: null,
+    selectedDate: new Date(2024, 0, 1),
     disabledDates: [],
     enabledDates: [],
-    todayDate: new Date(2024, 0, 1),
+    todayDate: new Date(2024, 0, 2),
   },
 };

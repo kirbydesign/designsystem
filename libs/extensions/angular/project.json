@@ -49,45 +49,15 @@
       "builder": "@storybook/angular:start-storybook",
       "options": {
         "configDir": "libs/extensions/angular/.storybook",
-        "port": 6006,
-        "styles": [
-          "libs/core/src/scss/_global-styles.scss",
-          "libs/extensions/angular/.storybook/styles.css"
-        ],
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "src/assets",
-            "output": "assets"
-          },
-          {
-            "glob": "**/*.svg",
-            "input": "libs/designsystem/icon/src/icons/svg",
-            "output": "./assets/kirby/icons/svg"
-          },
-          {
-            "glob": "**/*.svg",
-            "input": "node_modules/ionicons/dist/ionicons/svg",
-            "output": "./svg"
-          }
-        ],
-        "compodoc": true,
-        "compodocArgs": [
-          "-e",
-          "json",
-          "-d",
-          "{projectRoot}/docs",
-          "-p",
-          "{projectRoot}/.storybook/tsconfig.compodoc.json"
-        ]
+        "port": 6006
       }
     },
     "build-storybook": {
       "builder": "@storybook/angular:build-storybook",
       "options": {
         "configDir": "libs/extensions/angular/.storybook",
-        "browserTarget": "extensions-angular:build",
         "outputDir": "dist/storybook/extensions/angular",
+        "enableProdMode": false,
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
           "libs/extensions/angular/.storybook/styles.css"
@@ -107,6 +77,11 @@
             "glob": "**/*.svg",
             "input": "node_modules/ionicons/dist/ionicons/svg",
             "output": "./svg"
+          },
+          {
+            "glob": "**/*.woff2",
+            "input": "node_modules/@fontsource/roboto/files",
+            "output": "./assets/fonts"
           }
         ],
         "compodoc": true,
