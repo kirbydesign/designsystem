@@ -1,5 +1,5 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
-import { FlagComponent } from './flag.component';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const meta: Meta<FlagComponent> = {
   component: FlagComponent,

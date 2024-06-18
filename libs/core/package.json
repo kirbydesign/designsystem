@@ -8,8 +8,7 @@
   "types": "dist/types/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "serve": "tsc --watch"
+    "build": "tsc"
   },
   "devDependencies": {
     "@repo/eslint-config": "*"

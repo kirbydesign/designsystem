@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { SlideButtonComponent } from './slide-button.component';
+import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 
 const meta: Meta<SlideButtonComponent> = {
   component: SlideButtonComponent,

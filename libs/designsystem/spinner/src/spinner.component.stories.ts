@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { SpinnerComponent } from './spinner.component';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 const meta: Meta<SpinnerComponent> = {
   component: SpinnerComponent,

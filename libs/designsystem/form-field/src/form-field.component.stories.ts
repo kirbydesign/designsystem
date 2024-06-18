@@ -1,8 +1,11 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { FormFieldComponent } from './form-field.component';
-import { FormFieldModule } from './form-field.module';
-import { InputComponent, TextareaComponent } from './public_api';
+import {
+  FormFieldComponent,
+  FormFieldModule,
+  InputComponent,
+  TextareaComponent,
+} from '@kirbydesign/designsystem/form-field';
 
 const meta: Meta<FormFieldComponent> = {
   component: FormFieldComponent,
