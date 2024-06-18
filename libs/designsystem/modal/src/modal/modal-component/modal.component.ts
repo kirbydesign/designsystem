@@ -12,15 +12,15 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { IonContent, IonModal } from '@ionic/angular/standalone';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
-import { filter, skipUntil, takeUntil } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
+
+import { ModalNavigationService } from '../../modal-navigation.service';
 import {
   DrawerSupplementaryAction,
   ModalCompactWrapperComponent,
@@ -93,8 +93,8 @@ export class ModalComponent implements OnChanges {
 
   constructor(
     private canDismissHelper: CanDismissHelper,
-    private windowRef: WindowRef,
-    private router: Router
+    private modalNavigationService: ModalNavigationService,
+    private windowRef: WindowRef
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -118,7 +118,7 @@ export class ModalComponent implements OnChanges {
   }
 
   public _onDidPresent(event: CustomEvent<OverlayEventDetail>) {
-    this.handleBrowserBackButton(this.modalElement.nativeElement);
+    this.modalNavigationService.handleBrowserBackButton(this.modalElement.nativeElement);
     this.didPresent.emit(event);
   }
 
@@ -132,23 +132,6 @@ export class ModalComponent implements OnChanges {
 
   public _onDidDismiss(event: CustomEvent<OverlayEventDetail>) {
     this.didDismiss.emit(event);
-  }
-
-  private handleBrowserBackButton(modal: HTMLIonModalElement) {
-    const popstateNavigationStart$ = this.router.events.pipe(
-      filter(
-        (event): event is NavigationStart =>
-          event instanceof NavigationStart && event.navigationTrigger === 'popstate'
-      )
-    );
-    const navigationEnd$ = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd)
-    );
-    navigationEnd$
-      .pipe(skipUntil(popstateNavigationStart$), takeUntil(modal.onWillDismiss()))
-      .subscribe(() => {
-        modal.dismiss();
-      });
   }
 
   private updateModalConfigOnChange(changes: SimpleChanges) {

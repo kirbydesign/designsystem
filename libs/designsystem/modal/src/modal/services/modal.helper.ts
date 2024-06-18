@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { filter, skipUntil, takeUntil } from 'rxjs';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 import { Overlay } from '../../modal.interfaces';
+import { ModalNavigationService } from '../../modal-navigation.service';
 import {
   ModalCompactWrapperComponent,
   ModalConfig,
@@ -21,9 +20,9 @@ export class ModalHelper {
   constructor(
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
+    private modalNavigationService: ModalNavigationService,
     private windowRef: WindowRef,
-    private canDismissHelper: CanDismissHelper,
-    private router: Router
+    private canDismissHelper: CanDismissHelper
   ) {}
 
   /* 
@@ -148,28 +147,11 @@ export class ModalHelper {
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
     if (!config.modalRoute) {
-      this.handleBrowserBackButton(overlay);
+      this.modalNavigationService.handleBrowserBackButton(ionModal);
     }
 
     this.isModalOpening = false;
 
     return overlay;
-  }
-
-  private handleBrowserBackButton(overlay: Overlay) {
-    const popstateNavigationStart$ = this.router.events.pipe(
-      filter(
-        (event): event is NavigationStart =>
-          event instanceof NavigationStart && event.navigationTrigger === 'popstate'
-      )
-    );
-    const navigationEnd$ = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd)
-    );
-    navigationEnd$
-      .pipe(skipUntil(popstateNavigationStart$), takeUntil(overlay.onWillDismiss))
-      .subscribe(() => {
-        overlay.dismiss();
-      });
   }
 }

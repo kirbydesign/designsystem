@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Params,
+  Route,
+  Router,
+  Routes,
+} from '@angular/router';
 import { EMPTY, firstValueFrom, Observable } from 'rxjs';
-import { filter, map, pairwise, startWith } from 'rxjs/operators';
+import { filter, map, pairwise, skipUntil, startWith, takeUntil } from 'rxjs/operators';
 
 import { Location } from '@angular/common';
 import { ModalRouteActivation, NavigationData } from './modal.interfaces';
@@ -347,5 +355,22 @@ export class ModalNavigationService {
       parentRoute = parentRoute.parent;
     }
     return parentRoute;
+  }
+
+  handleBrowserBackButton(modal: HTMLIonModalElement) {
+    const popstateNavigationStart$ = this.router.events.pipe(
+      filter(
+        (event): event is NavigationStart =>
+          event instanceof NavigationStart && event.navigationTrigger === 'popstate'
+      )
+    );
+    const navigationEnd$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    );
+    navigationEnd$
+      .pipe(skipUntil(popstateNavigationStart$), takeUntil(modal.onWillDismiss()))
+      .subscribe(() => {
+        modal.dismiss();
+      });
   }
 }
