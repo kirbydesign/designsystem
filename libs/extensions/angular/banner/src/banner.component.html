@@ -1,4 +1,57 @@
-<kirby-card [hasPadding]="true">
-  <kirby-card-header *ngIf="title">{{ title }}</kirby-card-header>
-  Kirby Banner Scaffold
+<kirby-card [themeColor]="'dark'">
+  <div class="blur-image-wrapper">
+    <img class="blur-image" [ngClass]="imageFilter" [src]="imagePath" alt="Background" />
+  </div>
+
+  <div class="main-content-wrapper">
+    <div class="main-content-image-wrapper">
+      <img class="main-content-image" [src]="imagePath" alt="Main" />
+    </div>
+
+    <div class="main-content">
+      <div class="main-content-header">
+        <span class="kirby-text-normal-bold">
+          {{ title }}
+        </span>
+
+        <button
+          kirby-button
+          attentionLevel="2"
+          [showIconOnly]="true"
+          class="main-content-dismiss"
+          size="xs"
+        >
+          <kirby-icon name="close"></kirby-icon>
+        </button>
+      </div>
+
+      <div class="main-content-body">
+        <div class="main-content-body-text">
+          <span class="kirby-text-small">
+            {{ bodyText }}
+          </span>
+        </div>
+
+        <div class="main-content-body-actions">
+          <kirby-icon class="main-content-body-actions-mobile" name="link"></kirby-icon>
+
+          <button
+            class="main-content-body-actions-desktop"
+            kirby-button
+            attentionLevel="2"
+            size="sm"
+          >
+            {{ actionButtonText }}
+            <kirby-icon name="link"></kirby-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-dismiss">
+      <button kirby-button attentionLevel="2" [showIconOnly]="true" size="xs">
+        <kirby-icon name="close"></kirby-icon>
+      </button>
+    </div>
+  </div>
 </kirby-card>
