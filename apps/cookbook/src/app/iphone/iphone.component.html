@@ -29,5 +29,7 @@
       <iframe loading="lazy" importance="low" [src]="trustedSrc" #iframe></iframe>
     </figure>
   </div>
-  <a *ngIf="showExternalLink" class="kirby-external-icon" [href]="trustedSrc">Pop out</a>
+  <a *ngIf="showExternalLink" class="kirby-external-icon" [href]="trustedSrc" target="_blank">
+    Pop out
+  </a>
 </div>

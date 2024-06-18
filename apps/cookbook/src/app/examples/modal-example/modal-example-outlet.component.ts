@@ -7,13 +7,14 @@ const config = {
   selector: 'cookbook-modal-example-outlet',
   template: `<button kirby-button (click)="navigateToModalRoute('page1', {awesomeQueryParam: 'awesome value'})">Open modal by route</button>
 <button kirby-button kirbyModalRouterLink="page1" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Open modal by router link</button>`,
-  defaultCodeSnippet: `
-  constructor(private modalController: ModalController) {}
+  defaultCodeSnippet: `constructor(private modalController: ModalController) {}
 
-  navigateToModalRoute(path: string | string[], queryParams?: Params) {
-    this.modalController.navigateToModal(path,  queryParams);
-  }`,
-  modalRouteCodeSnippet: `export const routes: ModalEnabledRoutes = [
+navigateToModalRoute(path: string | string[], queryParams?: Params) {
+  this.modalController.navigateToModal(path,  queryParams);
+}`,
+  modalRouteCodeSnippet: `import { ModalEnabledRoutes } from '@kirbydesign/designsystem/modal';
+
+export const routes: ModalEnabledRoutes = [
   {
     path: 'main-route-presented-behind-the-modal',
     component: SomeComponent,
@@ -38,8 +39,50 @@ const config = {
       },
     ],
   }
-]`,
+];`,
+  modalRouteWithGuardCodeSnippet: `import { CanDismissModalGuard } from '@kirbydesign/designsystem/modal';
 
+// When using component or controller based modals,
+// set a 'canDeactivate' guard on the route, that opens the modal:
+export const routes = [
+  {
+    path: 'main-route-that-opens-a-modal',
+    component: SomeComponent,
+    canDeactivate: [CanDismissModalGuard],
+  }
+];
+  
+// When using route based modals, set the guard on the child route(s):
+export const routes = [
+  {
+    path: 'main-route-presented-behind-the-modal',
+    component: SomeComponent,
+    children: [
+      {
+        path: 'child-route-presented-in-modal',
+        outlet: 'modal',
+        component: FirstChildComponent,
+        canDeactivate: [CanDismissModalGuard]
+      },
+      {
+        path: 'second-child-route-presented-in-modal',
+        outlet: 'modal',
+        component: SecondChildComponent,
+        canDeactivate: [CanDismissModalGuard]
+      },
+    ],
+  }
+];
+
+// Configure RouterModule:
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes, {
+      canceledNavigationResolution: 'computed',
+    }),
+  ],
+})
+export class AppRoutingModule {}`,
   deeplinkedRouterLinkWithUrlParamCodeSnippet: `<a
   [kirbyModalRouterLink]="['/home', 'main-route-presented-behind-the-modal', 'urlParam', 'page1']"
   [kirbyModalQueryParams]="{ awesomeQueryParam: 'awesome value' }"
@@ -118,6 +161,7 @@ export class ModalExampleOutletComponent {
   static readonly template = config.template;
   static readonly defaultCodeSnippet = config.defaultCodeSnippet;
   static readonly modalRouteCodeSnippet = config.modalRouteCodeSnippet;
+  static readonly modalRouteWithGuardCodeSnippet = config.modalRouteWithGuardCodeSnippet;
   static readonly deeplinkedRouterLinkWithUrlParamCodeSnippet =
     config.deeplinkedRouterLinkWithUrlParamCodeSnippet;
   static readonly routerLinkForModalOutletCodeSnippet = config.routerLinkForModalOutletCodeSnippet;

@@ -155,7 +155,7 @@
 <p>
   Showing a component on its associated route inside a modal is achieved by configuring the route
   with a
-  <a href="https://angular.io/api/router/Route#outlet" target="_blank">secondary outlet</a>
+  <a href="https://angular.dev/api/router/Route#outlet" target="_blank">secondary outlet</a>
   named
   <strong><code>modal</code></strong>
   .
@@ -166,6 +166,15 @@
   provided via the
   <code>modalConfig</code>
   object passed as additional route data.
+  <br />
+
+  <em>
+    This configuration also accepts a
+    <code>canDismiss</code>
+    property to
+    <a href="#" (click)="scrollTo(alertBeforeClose)">show an alert before closing the modal</a>
+    .
+  </em>
 </p>
 
 <p>
@@ -248,18 +257,18 @@
   <code>navigateWithinModal</code>
   method for convenience, which also support passing query params, or you can inject and navigate
   through the regular Angular
-  <code><a href="https://angular.io/api/router/Router" target="_blank">Router</a></code>
+  <code><a href="https://angular.dev/api/router/Router" target="_blank">Router</a></code>
   . The latter is useful if you need to pass
   <code>
-    <a href="https://angular.io/api/router/NavigationExtras" target="_blank">NavigationExtras</a>
+    <a href="https://angular.dev/api/router/NavigationExtras" target="_blank">NavigationExtras</a>
   </code>
   other than query params. Notice that when using the Angular Router you need to provide the current
   <code>
-    <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>
+    <a href="https://angular.dev/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>
   </code>
   as the root URI using the
   <code>
-    <a href="https://angular.io/api/router/UrlCreationOptions#relativeTo" target="_blank">
+    <a href="https://angular.dev/api/router/UrlCreationOptions#relativeTo" target="_blank">
       relativeTo
     </a>
   </code>
@@ -427,12 +436,49 @@
   <code>AlertConfig</code>
   . If an
   <code>AlertConfig</code>
-  is being returned, an alert will appear, when the user tries to dismiss the modal. This callback
-  can be set on the parent modal from your own embedded component, or be provided to the
-  <code>ModalConfig</code>
-  . When using the modal component in you template the callback can be set directly via the
-  canDismiss input property. The callback can be both synchronous and asynchronous.
+  is being returned, an alert will appear when the user tries to dismiss the modal.
 </p>
+<p>
+  When configuring the modal to show an alert before closing, you should also
+  <a href="#" (click)="scrollTo(handleBrowserNavigation)">
+    guard for browser back navigation (see below)
+  </a>
+  . Otherwise the browser will navigate behind the active modal—and the alert—when the user
+  navigates back in history.
+</p>
+<p>
+  The callback can be set on the parent modal from your own embedded component or provided in the
+  <code>ModalConfig</code>
+  . When using the modal component in your template the callback can be set directly via the
+  <code>canDismiss</code>
+  input property.
+</p>
+<p>
+  <em>
+    <strong>Please note:</strong>
+    to avoid
+    <code>this</code>
+    being
+    <code>undefined</code>
+    in the function callback be sure to either
+    <code>bind()</code>
+    the function or use an arrow function. This can be done when defining the callback:
+    <code>validate = () => {{ '{...}' }}</code>
+    or when configuring the
+    <code>ModalConfig</code>
+    :
+    <code>canDismiss: () => this.validate()</code>
+    .
+    <a
+      class="kirby-external-icon"
+      target="_blank"
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"
+    >
+      Read more on MDN
+    </a>
+  </em>
+</p>
+<p>The callback can be both synchronous and asynchronous.</p>
 
 <cookbook-iphone
   class="large-example"
@@ -463,6 +509,70 @@
 </p>
 
 <cookbook-example-viewer [ts]="alertModalConfigExample.codeSnippet"></cookbook-example-viewer>
+
+<h4 #handleBrowserNavigation>Handle browser back navigation</h4>
+<p>
+  When configuring the
+  <code>canDimiss</code>
+  callback to prompt the user before closing the modal, it is important to also handle if the user
+  tries to navigate away from the page via the browser back button while the modal is open.
+  Otherwise the browser will navigate behind the active modal—and the alert—when the user navigates
+  back in history.
+</p>
+<p>
+  This is achieved by setting a
+  <code>CanDismissModalGuard</code>
+  provided by Kirby in the
+  <code>
+    <a href="https://angular.dev/api/router/CanDeactivateFn" target="_blank">canDeactivate</a>
+  </code>
+  property in your route config. The guard will ensure the user gets prompted about the modal being
+  closed and either allow or cancel the back navigation based on the user's response to the prompt.
+  The guard can be set on either:
+</p>
+<ul>
+  <li>
+    the route with the component that opens the modal, when using a
+    <a href="#" (click)="scrollTo(componentBased)">component</a>
+    or
+    <a href="#" (click)="scrollTo(controllerBased)">controller</a>
+    to open the modal
+  </li>
+  <li>
+    the child route(s) with the component(s) that are shown inside the modal, when using
+    <a href="#" (click)="scrollTo(routeBased)">route based modals</a>
+    .
+    <br />
+    <em>
+      Note: The alert will only be shown when closing the modal, not when navigating within the
+      child routes of the modal flow.
+    </em>
+  </li>
+</ul>
+<p>
+  <em>
+    <strong>Please note:</strong>
+    To ensure correct browser history Angular's RouterModule should be configured with
+    <code>canceledNavigationResolution: 'computed'</code>
+    .
+  </em>
+</p>
+<cookbook-example-viewer
+  [ts]="outletExample.modalRouteWithGuardCodeSnippet"
+></cookbook-example-viewer>
+
+<p>
+  To see how the
+  <code>canDismiss</code>
+  property and the
+  <code>CanDismissModalGuard</code>
+  can prompt the user before navigating back using the browser back button you should follow these
+  steps:
+</p>
+
+<cookbook-modal-example-alert-with-guard-stepper
+  [currentStep]="1"
+></cookbook-modal-example-alert-with-guard-stepper>
 
 <h2 #modalEvents>Modal events</h2>
 <h3>Modal presented</h3>

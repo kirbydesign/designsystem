@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Params,
+  Route,
+  Router,
+  Routes,
+} from '@angular/router';
 import { EMPTY, firstValueFrom, Observable } from 'rxjs';
-import { filter, map, pairwise, startWith } from 'rxjs/operators';
+import { filter, map, pairwise, skipUntil, startWith, takeUntil } from 'rxjs/operators';
 
 import { Location } from '@angular/common';
 import { ModalRouteActivation, NavigationData } from './modal.interfaces';
@@ -306,7 +314,7 @@ export class ModalNavigationService {
     queryParams?: Params,
     alertConfig?: AlertConfig
   ): Promise<boolean> {
-    const commands = Array.isArray(path) ? path : path.split('/');
+    const commands = Array.isArray(path) ? [...path] : path.split('/');
     const childPath = commands.pop();
     const navigationData: NavigationData = { navigationData: { alertConfig } };
     const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
@@ -325,15 +333,20 @@ export class ModalNavigationService {
   }
 
   async navigateOutOfModalOutlet(): Promise<boolean> {
-    let result = Promise.resolve(true);
     const currentActivatedRoute = this.getCurrentActivatedRoute();
-    if (currentActivatedRoute.outlet === 'modal') {
-      const parentRoute = this.getBackdropRoute(currentActivatedRoute);
-      result = this.router.navigate(['./'], {
-        relativeTo: parentRoute,
-      });
+    const currentNavigationFinalUrl = this.router.getCurrentNavigation()?.finalUrl?.toString();
+    const isCurrentlyNavigatingOutOfModalOutlet =
+      currentNavigationFinalUrl && !this.isModalRoute(currentNavigationFinalUrl);
+
+    if (currentActivatedRoute.outlet !== 'modal' || isCurrentlyNavigatingOutOfModalOutlet) {
+      // Nothing to do here, bail out:
+      return Promise.resolve(true);
     }
-    return result;
+
+    const parentRoute = this.getBackdropRoute(currentActivatedRoute);
+    return this.router.navigate(['./'], {
+      relativeTo: parentRoute,
+    });
   }
 
   private getBackdropRoute(currentActivatedRoute: ActivatedRoute) {
@@ -342,5 +355,22 @@ export class ModalNavigationService {
       parentRoute = parentRoute.parent;
     }
     return parentRoute;
+  }
+
+  handleBrowserBackButton(modal: HTMLIonModalElement) {
+    const popstateNavigationStart$ = this.router.events.pipe(
+      filter(
+        (event): event is NavigationStart =>
+          event instanceof NavigationStart && event.navigationTrigger === 'popstate'
+      )
+    );
+    const navigationEnd$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    );
+    navigationEnd$
+      .pipe(skipUntil(popstateNavigationStart$), takeUntil(modal.onWillDismiss()))
+      .subscribe(() => {
+        modal.dismiss();
+      });
   }
 }
