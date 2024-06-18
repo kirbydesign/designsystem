@@ -436,10 +436,18 @@
   <code>AlertConfig</code>
   . If an
   <code>AlertConfig</code>
-  is being returned, an alert will appear, when the user tries to dismiss the modal.
+  is being returned, an alert will appear when the user tries to dismiss the modal.
 </p>
 <p>
-  This callback can be set on the parent modal from your own embedded component or provided in the
+  When configuring the modal to show an alert before closing, you should also
+  <a href="#" (click)="scrollTo(preventBrowserNavigation)">
+    guard for browser back navigation (see below)
+  </a>
+  . Otherwise the browser will navigate behind the active modal—and the alert—when the user
+  navigates back in history.
+</p>
+<p>
+  The callback can be set on the parent modal from your own embedded component or provided in the
   <code>ModalConfig</code>
   . When using the modal component in your template the callback can be set directly via the
   <code>canDismiss</code>
@@ -461,13 +469,12 @@
     :
     <code>canDismiss: () => this.validate()</code>
     .
-    <br />
     <a
       class="kirby-external-icon"
       target="_blank"
-      href="https://ionicframework.com/docs/troubleshooting/runtime#accessing-this"
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"
     >
-      Read more in the Ionic Documentation
+      Read more on MDN
     </a>
   </em>
 </p>
@@ -503,7 +510,7 @@
 
 <cookbook-example-viewer [ts]="alertModalConfigExample.codeSnippet"></cookbook-example-viewer>
 
-<h4>Prevent browser navigation</h4>
+<h4 #preventBrowserNavigation>Prevent browser navigation</h4>
 <p>
   To prevent the user from navigating while the modal is open — i.e. via the browser back button —
   the
