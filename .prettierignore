@@ -11,3 +11,4 @@ libs/designsystem/header/src/header.component.html
 /node_modules/
 
 /.nx/cache
+.angular

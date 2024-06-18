@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { InputComponent, InputSize } from './input.component';
+import { InputComponent, InputSize } from '@kirbydesign/designsystem/form-field';
 
 type InputProps = InputComponent & { placeholder?: string };
 

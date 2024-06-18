@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 
 import { AccordionModule } from '@kirbydesign/designsystem/accordion';
-import { AccordionItemComponent } from './accordion-item.component';
+import { AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 
 const meta: Meta<AccordionItemComponent> = {
   component: AccordionItemComponent,

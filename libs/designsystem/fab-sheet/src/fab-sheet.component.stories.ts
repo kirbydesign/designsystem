@@ -2,7 +2,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 
 import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { FabSheetComponent } from './fab-sheet.component';
+import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 
 const meta: Meta<FabSheetComponent> = {
   component: FabSheetComponent,
