@@ -34,8 +34,7 @@ const config = {
 <kirby-modal-footer>
   <em>
     <strong>Please note:</strong>
-    This modal will ask the user if they are sure they want to close the modal if they have
-    entered data in any of the form fields.
+    If any data has been entered in the form fields, this modal will prompt the user to confirm before closing.
   </em>
 </kirby-modal-footer>`,
   canDismissCodeSnippet: `// Inside the embedded component
