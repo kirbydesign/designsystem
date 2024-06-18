@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-
-import { ToggleComponent } from './toggle.component';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const meta: Meta<ToggleComponent> = {
   component: ToggleComponent,

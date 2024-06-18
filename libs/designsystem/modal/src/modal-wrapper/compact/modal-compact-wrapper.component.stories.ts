@@ -2,8 +2,11 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { Component } from '@angular/core';
 import { PageModule } from '@kirbydesign/designsystem/page';
-import { AlertHelper, CanDismissHelper } from '../../public_api';
-import { ModalCompactWrapperComponent } from './modal-compact-wrapper.component';
+import {
+  AlertHelper,
+  CanDismissHelper,
+  ModalCompactWrapperComponent,
+} from '@kirbydesign/designsystem/modal';
 
 @Component({
   selector: 'kirby-embedded-modal-example',

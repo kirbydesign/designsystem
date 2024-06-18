@@ -1,7 +1,6 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { RadioModule } from '../radio-module';
-import { RadioGroupComponent } from './radio-group.component';
+import { RadioGroupComponent, RadioModule } from '@kirbydesign/designsystem/radio';
 
 const meta: Meta<RadioGroupComponent> = {
   component: RadioGroupComponent,

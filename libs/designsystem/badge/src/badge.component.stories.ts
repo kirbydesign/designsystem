@@ -3,7 +3,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ThemeColor } from '@kirbydesign/core';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { BadgeComponent } from './badge.component';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 type BadgeProps = BadgeComponent & {
   themeColor?: ThemeColor;

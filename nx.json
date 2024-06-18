@@ -8,7 +8,13 @@
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/tsconfig.storybook.json",
-      "!{projectRoot}/.stylelintrc(.(json|yml|yaml|js))?"
+      "!{projectRoot}/.stylelintrc(.(json|yml|yaml|js))?",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/dist/**"
     ]
   },
   "parallel": 5,
@@ -20,10 +26,15 @@
   },
   "generators": {
     "@nx/angular:application": {
-      "style": "scss"
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "none"
     },
     "@nx/angular:library": {
-      "linter": "eslint"
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "style": "scss"
     },
     "@nx/angular:component": {
       "style": "scss"
@@ -38,19 +49,33 @@
     },
     "build": {
       "inputs": ["production", "^production"],
+      "outputs": ["{projectRoot}/dist"],
+      "dependsOn": ["^build"],
       "options": {
         "tsConfig": "{projectRoot}/tsconfig.lib.json"
       },
       "cache": true
     },
     "test": {
-      "cache": true
+      "cache": true,
+      "dependsOn": ["build", "^build"]
     },
     "e2e": {
       "cache": true
     },
     "build-storybook": {
-      "cache": true
+      "cache": true,
+      "dependsOn": ["build", "^build"]
+    },
+    "@nx/jest:jest": {
+      "cache": true,
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "dependsOn": ["build", "^build"],
+      "configurations": {
+        "ci": {
+          "ci": true
+        }
+      }
     }
   },
   "plugins": [
@@ -73,7 +98,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": ["build-storybook"]
+        "cacheableOperations": ["build-storybook", "build-storybook"]
       }
     }
   }

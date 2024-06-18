@@ -1,7 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { TableSortableComponent } from '../sortable/sortable.component';
+import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 
 const meta: Meta<TableSortableComponent> = {
   component: TableSortableComponent,

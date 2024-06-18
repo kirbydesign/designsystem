@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
-
-import { IconComponent } from './icon.component';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const meta: Meta<IconComponent> = {
   component: IconComponent,

@@ -2,8 +2,10 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
-import { TabNavigationModule } from '../tab-navigation.module';
-import { TabNavigationComponent } from './tab-navigation.component';
+import {
+  TabNavigationComponent,
+  TabNavigationModule,
+} from '@kirbydesign/designsystem/tab-navigation';
 
 const meta: Meta<TabNavigationComponent> = {
   component: TabNavigationComponent,

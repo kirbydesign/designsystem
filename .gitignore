@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled designsystem library output
-/dist
+**/dist
 /tmp
 /out-tsc
 /dist-lib
@@ -64,6 +64,7 @@ scripts/install-ipa.html
 
 # Storybook
 storybook-static
+**/documentation.json
 
 # Chromatic
 # See https://www.chromatic.com/docs/storybook/setup/#setup-gitignore-to-ignore-certain-files-in-your-git-repository
