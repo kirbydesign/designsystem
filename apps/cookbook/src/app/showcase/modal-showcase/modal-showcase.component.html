@@ -440,7 +440,7 @@
 </p>
 <p>
   When configuring the modal to show an alert before closing, you should also
-  <a href="#" (click)="scrollTo(preventBrowserNavigation)">
+  <a href="#" (click)="scrollTo(handleBrowserNavigation)">
     guard for browser back navigation (see below)
   </a>
   . Otherwise the browser will navigate behind the active modal—and the alert—when the user
@@ -510,7 +510,7 @@
 
 <cookbook-example-viewer [ts]="alertModalConfigExample.codeSnippet"></cookbook-example-viewer>
 
-<h4 #preventBrowserNavigation>Prevent browser back navigation</h4>
+<h4 #handleBrowserNavigation>Handle browser back navigation</h4>
 <p>
   When configuring the
   <code>canDimiss</code>
