@@ -512,18 +512,23 @@
 
 <h4 #preventBrowserNavigation>Prevent browser back navigation</h4>
 <p>
-  To activate the alert provided in the
+  When configuring the
   <code>canDimiss</code>
-  callback when the user tries to navigate back via the browser back button while the modal is open,
-  the
-  <code>canDismiss</code>
-  property should be set in combination with the
+  callback to prompt the user before closing the modal, it is important to also handle if the user
+  tries to navigate away from the page via the browser back button while the modal is open.
+  Otherwise the browser will navigate behind the active modal—and the alert—when the user navigates
+  back in history.
+</p>
+<p>
+  This is achieved by setting a
   <code>CanDismissModalGuard</code>
   provided by Kirby in the
   <code>
     <a href="https://angular.dev/api/router/CanDeactivateFn" target="_blank">canDeactivate</a>
   </code>
-  property in your route config. The guard can be set on either:
+  property in your route config. The guard will ensure the user gets prompted about the modal being
+  closed and either allow or cancel the back navigation based on the user's response to the prompt.
+  The guard can be set on either:
 </p>
 <ul>
   <li>
@@ -557,11 +562,8 @@
 ></cookbook-example-viewer>
 
 <p>
-  To see how the
-  <code>canDismiss</code>
-  property and the
-  <code>CanDismissModalGuard</code>
-  can prevent navigating back using the browser back button you should follow these steps:
+  To see how the guard can prompt the user before navigating back while the modal is open, you
+  should follow these steps:
 </p>
 
 <cookbook-modal-example-alert-with-guard-stepper
