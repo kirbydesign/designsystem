@@ -96,8 +96,34 @@ ion-radio {
     line-height: utils.line-height('n');
   }
 
+  // Override styles for Radio in Item
+  // FIXME: Increase specificity without reaching for `!important`
+  // by duplicating `.in-item` in selector
+  &.in-item.in-item:not(.legacy-radio)::part(label) {
+    padding-inline-start: 0;
+
+    // FIXME: If using slotted content
+    // margin-block-start: utils.size('xxxs');
+
+    // FIXME: If using text-property
+    // margin-block: -1px -3px;
+
+    // FIXME: alternative: override padding-block (declared in line ~28)
+    // This requires increased specifity
+    // TODO: Make sure sizes still work
+    padding-block: 15px 13px; // avoid !important
+
+    // TODO: Consider moving this solution up to the loop in line ~23-33
+  }
+
   &::part(label-text-wrapper) {
     margin-inline: $spacing-to-label 0;
+  }
+
+  // Override Ionic styles for Radio in Item
+  &.in-item:not(.legacy-radio)::part(label-text-wrapper) {
+    margin-block: 0;
+    margin-inline-start: utils.size('xxs');
   }
 
   :host-context(kirby-radio-group.error),
