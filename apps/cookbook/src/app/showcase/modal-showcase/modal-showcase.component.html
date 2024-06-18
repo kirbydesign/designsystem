@@ -510,16 +510,18 @@
 
 <cookbook-example-viewer [ts]="alertModalConfigExample.codeSnippet"></cookbook-example-viewer>
 
-<h4 #preventBrowserNavigation>Prevent browser navigation</h4>
+<h4 #preventBrowserNavigation>Prevent browser back navigation</h4>
 <p>
-  To prevent the user from navigating while the modal is open — i.e. via the browser back button —
+  To activate the alert provided in the
+  <code>canDimiss</code>
+  callback when the user tries to navigate back via the browser back button while the modal is open,
   the
   <code>canDismiss</code>
-  property can be set in combination with the
+  property should be set in combination with the
   <code>CanDismissModalGuard</code>
   provided by Kirby in the
   <code>
-    <a href="https://angular.io/api/router/CanDeactivateFn" target="_blank">canDeactivate</a>
+    <a href="https://angular.dev/api/router/CanDeactivateFn" target="_blank">canDeactivate</a>
   </code>
   property in your route config. The guard can be set on either:
 </p>
