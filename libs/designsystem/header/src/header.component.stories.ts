@@ -5,7 +5,7 @@ import { HeaderComponent, HeaderModule } from '@kirbydesign/designsystem/header'
 
 const meta: Meta<HeaderComponent> = {
   component: HeaderComponent,
-  title: 'HeaderComponent',
+  title: 'Components / Header',
   decorators: [
     moduleMetadata({
       imports: [HeaderModule, IconModule],

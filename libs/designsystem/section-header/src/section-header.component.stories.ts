@@ -5,7 +5,7 @@ import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header
 
 const meta: Meta<SectionHeaderComponent> = {
   component: SectionHeaderComponent,
-  title: 'SectionHeaderComponent',
+  title: 'Components / Section Header',
   decorators: [
     moduleMetadata({
       declarations: [LabelComponent],
@@ -15,7 +15,7 @@ const meta: Meta<SectionHeaderComponent> = {
 export default meta;
 type Story = StoryObj<SectionHeaderComponent>;
 
-export const Default: Story = {
+export const SectionHeader: Story = {
   args: {},
   render: () => ({
     template: `<kirby-section-header>

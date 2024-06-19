@@ -4,12 +4,12 @@ import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,
-  title: 'CheckboxComponent',
+  title: 'Components / Checkbox',
 };
 export default meta;
 type Story = StoryObj<CheckboxComponent>;
 
-export const Default: Story = {
+export const Checkbox: Story = {
   args: {
     checked: false,
     attentionLevel: '2',

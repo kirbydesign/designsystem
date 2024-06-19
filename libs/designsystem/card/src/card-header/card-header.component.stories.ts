@@ -9,7 +9,7 @@ const cardContent = `<p>
 
 const meta: Meta<CardHeaderComponent> = {
   component: CardHeaderComponent,
-  title: 'CardHeaderComponent',
+  title: 'Components / Card / Card Header',
   decorators: [
     moduleMetadata({
       imports: [IconModule],

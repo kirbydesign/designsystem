@@ -16,7 +16,7 @@ const meta: Meta<BadgeProps> = {
       imports: [IconModule],
     }),
   ],
-  title: 'BadgeComponent',
+  title: 'Components / Badge',
 };
 export default meta;
 type Story = StoryObj<BadgeProps>;

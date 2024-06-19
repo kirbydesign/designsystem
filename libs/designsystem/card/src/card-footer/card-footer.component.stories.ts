@@ -9,7 +9,7 @@ const cardContent = `<p>
 
 const meta: Meta<CardFooterComponent> = {
   component: CardFooterComponent,
-  title: 'CardFooterComponent',
+  title: 'Components / Card / Card Footer',
   decorators: [
     moduleMetadata({
       declarations: [CardComponent],
@@ -19,7 +19,7 @@ const meta: Meta<CardFooterComponent> = {
 export default meta;
 type Story = StoryObj<CardFooterComponent>;
 
-export const Default: Story = {
+export const CardFooter: Story = {
   args: {
     hasPadding: true,
   },

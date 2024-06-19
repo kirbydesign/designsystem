@@ -6,7 +6,7 @@ import { ChartComponent, ChartConfigService } from '@kirbydesign/designsystem/ch
 
 const meta: Meta<ChartComponent> = {
   component: ChartComponent,
-  title: 'ChartComponent',
+  title: 'Components / Chart',
   decorators: [
     moduleMetadata({
       providers: [ChartConfigService],

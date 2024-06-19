@@ -3,7 +3,7 @@ import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
 
 const meta: Meta<ItemComponent> = {
   component: ItemComponent,
-  title: 'ItemComponent',
+  title: 'Components / Item',
 };
 export default meta;
 type Story = StoryObj<ItemComponent>;

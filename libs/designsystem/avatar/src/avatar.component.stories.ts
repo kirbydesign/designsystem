@@ -7,7 +7,7 @@ import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 
 const meta: Meta<AvatarComponent> = {
   component: AvatarComponent,
-  title: 'AvatarComponent',
+  title: 'Components / Avatar',
   decorators: [
     moduleMetadata({
       declarations: [IconComponent],

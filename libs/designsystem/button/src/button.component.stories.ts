@@ -6,7 +6,7 @@ import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
-  title: 'ButtonComponent',
+  title: 'Components / Button',
   decorators: [
     moduleMetadata({
       imports: [IconModule],
@@ -16,7 +16,7 @@ const meta: Meta<ButtonComponent> = {
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 
-export const Default: Story = {
+export const Button: Story = {
   args: {
     noDecoration: false,
     isFloating: false,
