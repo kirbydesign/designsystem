@@ -1,5 +1,7 @@
 import { pathsToModuleNameMapper } from 'ts-jest';
 
+const esModules = ['@stencil/core', '@ionic/core', 'ionicons'].join('|');
+
 // nx doesn't allow importing tsconfig.json: https://github.com/nrwl/nx/issues/14888
 // Use require instead:
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -31,5 +33,6 @@ module.exports = {
       },
     ],
   },
+  transformIgnorePatterns: [`/node_modules/(?!${esModules}|.*\\.mjs$)`],
   moduleNameMapper: pathsToModuleNameMapper(pathAliases, { prefix: '<rootDir>/' }),
 };
