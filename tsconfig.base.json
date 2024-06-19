@@ -16,6 +16,7 @@
     "useDefineForClassFields": false,
     "skipLibCheck": true,
     "paths": {
+      "@kirbydesign/core": ["libs/core/dist/"],
       "@kirbydesign/extensions-angular/banner": ["libs/extensions/angular/dist/banner"],
       "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/dist/*"],
