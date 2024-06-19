@@ -35,9 +35,9 @@ const coreLibDir = `${libsRootDir}/core`;
 const coreLibSrcDir = `${coreLibDir}/src`;
 
 const dist = `dist`;
-const distDesignsystemTarget = `${dist}/${designsystemLibDir}`;
+const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
 const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
-const distCoreTarget = `${dist}/${coreLibDir}`;
+const distCoreTarget = `${coreLibDir}/${dist}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
 
 const { version: coreVersion } = require('../libs/core/package.json');
@@ -138,14 +138,6 @@ function copyIcons(libSrcDir, distTarget) {
   });
 }
 
-function copyCoreDistributionFiles(coreLibDir, distTarget) {
-  console.log('Copying core distribution files...');
-
-  const copyDistFiles = () => fs.copy(`${coreLibDir}/dist`, `${distTarget}/dist`);
-
-  return copyDistFiles();
-}
-
 function copyScssFiles(libSrcDir, distTarget) {
   console.log('Copying SCSS files...');
   return fs.copy(`${libSrcDir}/scss`, `${distTarget}/scss`);
@@ -195,7 +187,6 @@ if (doPublishCore) {
   console.log('--- Publishing core ---');
   cleanDistribution(distCoreTarget)
     .then(() => buildPackage('core'))
-    .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
     .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
     .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
     .then(() => publish(distCoreTarget, 'kirbydesign-core'))
