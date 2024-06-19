@@ -188,7 +188,6 @@ if (doPublishCore) {
   cleanDistribution(distCoreTarget)
     .then(() => buildPackage('core'))
     .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
-    .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
     .then(() => publish(distCoreTarget, 'kirbydesign-core'))
     .catch((err) => console.warn('*** ERROR WHEN PUBLISHING CORE PACKAGE ***', err));
 }
