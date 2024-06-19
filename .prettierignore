@@ -12,3 +12,5 @@ libs/designsystem/header/src/header.component.html
 
 /.nx/cache
 .angular
+
+/.nx/workspace-data

@@ -1,5 +1,5 @@
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import localeData from '@angular/common/locales/en-DK';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,33 +22,26 @@ import { ComponentDisplayComponent } from './component-overview/component-displa
 
 registerLocaleData(localeData);
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SideNavComponent,
-    HeaderComponent,
-    IntroComponent,
-    FooterComponent,
-    ComponentOverviewComponent,
-    ComponentDisplayComponent,
-    KirbyChristmasComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    KirbyModule,
-    KirbyExperimentalModule,
-    KirbyModalModule,
-  ],
-
-  providers: [
-    { provide: LOCALE_ID, useValue: 'en-DK' },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        SideNavComponent,
+        HeaderComponent,
+        IntroComponent,
+        FooterComponent,
+        ComponentOverviewComponent,
+        ComponentDisplayComponent,
+        KirbyChristmasComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        KirbyModule,
+        KirbyExperimentalModule,
+        KirbyModalModule], providers: [
+        { provide: LOCALE_ID, useValue: 'en-DK' },
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}

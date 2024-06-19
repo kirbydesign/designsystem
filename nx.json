@@ -18,9 +18,6 @@
     ]
   },
   "parallel": 5,
-  "affected": {
-    "defaultBase": "stable"
-  },
   "cli": {
     "analytics": false
   },
@@ -101,5 +98,7 @@
         "cacheableOperations": ["build-storybook", "build-storybook"]
       }
     }
-  }
+  },
+  "useInferencePlugins": false,
+  "defaultBase": "stable"
 }
