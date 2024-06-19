@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/designsystem",
   "prefix": "kirby",
+  "implicitDependencies": ["!cookbook"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",

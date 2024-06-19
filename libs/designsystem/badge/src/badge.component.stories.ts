@@ -5,6 +5,8 @@ import { ThemeColor } from '@kirbydesign/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
+import { BadgeExampleModule } from '~/app/examples/badge-example/badge-example.module';
+
 type BadgeProps = BadgeComponent & {
   themeColor?: ThemeColor;
 };
@@ -13,7 +15,7 @@ const meta: Meta<BadgeProps> = {
   component: BadgeComponent,
   decorators: [
     moduleMetadata({
-      imports: [IconModule],
+      imports: [IconModule, BadgeExampleModule],
     }),
   ],
   title: 'Components / Badge',
@@ -49,5 +51,11 @@ export const ThemeColors: Story = {
     <kirby-badge themeColor="success">7</kirby-badge>
     <kirby-badge themeColor="warning">99</kirby-badge>
     <kirby-badge themeColor="danger">123</kirby-badge>`,
+  }),
+};
+
+export const CookbookExamples: Story = {
+  render: () => ({
+    template: `<cookbook-badge-example></cookbook-badge-example>`,
   }),
 };
