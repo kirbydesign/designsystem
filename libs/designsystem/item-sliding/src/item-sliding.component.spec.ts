@@ -1,7 +1,7 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { ItemModule } from 'item/src';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import {
   ItemSlidingComponent,
   ItemSwipeAction,

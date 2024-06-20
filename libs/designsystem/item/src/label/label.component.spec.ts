@@ -1,5 +1,5 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { TestHelper } from 'testing/src';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { LabelComponent } from './label.component';
 
 describe('LabelComponent', () => {
