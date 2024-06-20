@@ -31,7 +31,7 @@
         "commands": [
           "rm -rf libs/core/dist libs/designsystem/dist",
           "nx build core --watch",
-          "wait-on libs/core/dist/package.json && nx build designsystem --watch",
+          "wait-on libs/core/dist/index.js && nx build designsystem --watch",
           "wait-on libs/designsystem/dist/package.json && nx serve cookbook"
         ],
         "parallel": true
