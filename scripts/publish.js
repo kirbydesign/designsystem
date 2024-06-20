@@ -143,11 +143,6 @@ function copyScssFiles(libSrcDir, distTarget) {
   return fs.copy(`${libSrcDir}/scss`, `${distTarget}/scss`);
 }
 
-function copyPackageJson(libDir, distJsonPath) {
-  console.log('Copying package.json file...');
-  return fs.copy(`${libDir}/package.json`, distJsonPath);
-}
-
 function createTarballPackage(distTarget) {
   return npm(['pack', distTarget], {
     onFailMessage: 'Unable to create gzipped tar-ball package',
