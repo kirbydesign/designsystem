@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { CardModule } from '@kirbydesign/designsystem/card';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { BadgeExampleComponent } from './badge-example.component';
 import { BadgeExampleIconComponent } from './examples/badge-example-icon.component';
@@ -20,7 +21,7 @@ const COMPONENT_DECLARATIONS = [
 
 @NgModule({
   declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, IconModule, CardModule],
+  imports: [CommonModule, BadgeComponent, CardModule, IconModule],
   exports: COMPONENT_DECLARATIONS,
 })
 export class BadgeExampleModule {}
