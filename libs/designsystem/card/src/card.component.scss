@@ -46,14 +46,6 @@
   z-index: utils.z('default');
   width: var(--kirby-card-width, auto);
 
-  .content-wrapper {
-    &.padding {
-      padding-top: var(--kirby-card-padding-top, utils.size('s'));
-      padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
-      padding-inline: utils.size('s');
-    }
-  }
-
   &.flat {
     box-shadow: none;
   }
@@ -84,6 +76,18 @@
 
     outline: none;
   }
+}
+
+.content-wrapper {
+  &.padding {
+    padding-top: var(--kirby-card-padding-top, utils.size('s'));
+    padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
+    padding-inline: utils.size('s');
+  }
+}
+
+.content-layer {
+  height: 100%;
 }
 
 @each $color-name, $color-value in utils.$main-colors {

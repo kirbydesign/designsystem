@@ -3,6 +3,10 @@
 :host {
   display: grid;
   place-content: center;
+
+  &:has(.variant-card-container) {
+    display: flex;
+  }
 }
 
 kirby-card {
@@ -77,5 +81,19 @@ button {
 
   &:active {
     transform: scale(0.95);
+  }
+}
+
+.variant-card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  kirby-card {
+    margin: 6px;
+    min-width: 250px;
+    max-width: 350px;
+    flex: 1;
   }
 }

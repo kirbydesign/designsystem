@@ -7,20 +7,39 @@
   images, buttons, avatars etc.
 </p>
 
-<p>The card supports two major use-cases:</p>
+<h2>Variants</h2>
+<p>The card comes in three variants:</p>
 <ul>
-  <li>The default mode is useful when a card is used purely for layout and grouping purposes.</li>
   <li>
-    Whenever a card is used for navigation, for example to a new page, drawer or modal the
-    disclosure-variant should be used.
+    <strong>Elevated (default)</strong>
+    - The card is slightly elevated from the background with a drop shadow
+  </li>
+  <li>
+    <strong>Flat</strong>
+    - Has no shadow and appears lower in the visual hierarchy
+  </li>
+  <li>
+    <strong>Outlined</strong>
+    - Has a border and no background. Appear lowest in the visual hierarchy
   </li>
 </ul>
 
-<h2>Elevated (default)</h2>
-
 <cookbook-example-viewer [html]="defaultExample.template">
-  <cookbook-card-example-default #defaultExample></cookbook-card-example-default>
+  <cookbook-card-example-variant #defaultExample></cookbook-card-example-variant>
 </cookbook-example-viewer>
+
+<p>The card and its variants supports different use cases:</p>
+<ul>
+  <li>
+    <strong>Layout and grouping</strong>
+    - In this case, use one of the three variants - Elevated, Flat or Outlined
+  </li>
+  <li>
+    <strong>Navigation</strong>
+    - Use the Elevated (default) variant whenever the entire card is clickable. Consider adding a
+    disclosure indicator to the card.
+  </li>
+</ul>
 
 <h2>State & Disclosure</h2>
 
@@ -102,27 +121,6 @@
   <code>&#64;kirbydesign/designsystem/scss/utils</code>
   Sass module.
 </p>
-
-<h2>Flat</h2>
-<p>
-  The default card has a slightly elevated look with a shadow around its edges. This can be removed
-  by setting the variant to "flat", but be aware that this option should not be used with a card
-  that can be interacted with (clickable, disclosure) as it lacks proper affordance.
-</p>
-<cookbook-example-viewer [html]="flatExample.template">
-  <cookbook-card-example-flat #flatExample></cookbook-card-example-flat>
-</cookbook-example-viewer>
-
-<h2>Outlined</h2>
-<p>
-  The outlined card variant is shown with a border around its edges and have no background. Like the
-  flat card, it is without any shadow around its edges and the card itself is not intended to be
-  used for interactions (clickable, disclosure). If an interaction is needed, then put the action as
-  a button or link within the card.
-</p>
-<cookbook-example-viewer [html]="outlineExample.template">
-  <cookbook-card-example-outline #outlineExample></cookbook-card-example-outline>
-</cookbook-example-viewer>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
