@@ -37,7 +37,7 @@ const coreLibSrcDir = `${coreLibDir}/src`;
 const dist = `dist`;
 const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
 const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
-const distCoreTarget = `${coreLibDir}/${dist}`;
+const distCoreTarget = `${dist}/${coreLibDir}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
 
 const { version: coreVersion } = require('../libs/core/package.json');
@@ -138,9 +138,22 @@ function copyIcons(libSrcDir, distTarget) {
   });
 }
 
+function copyCoreDistributionFiles(coreLibDir, distTarget) {
+  console.log('Copying core distribution files...');
+
+  const copyDistFiles = () => fs.copy(`${coreLibDir}/dist`, `${distTarget}/dist`);
+
+  return copyDistFiles();
+}
+
 function copyScssFiles(libSrcDir, distTarget) {
   console.log('Copying SCSS files...');
   return fs.copy(`${libSrcDir}/scss`, `${distTarget}/scss`);
+}
+
+function copyPackageJson(libDir, distJsonPath) {
+  console.log('Copying package.json file...');
+  return fs.copy(`${libDir}/package.json`, distJsonPath);
 }
 
 function createTarballPackage(distTarget) {
@@ -182,7 +195,9 @@ if (doPublishCore) {
   console.log('--- Publishing core ---');
   cleanDistribution(distCoreTarget)
     .then(() => buildPackage('core'))
+    .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
     .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
+    .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
     .then(() => publish(distCoreTarget, 'kirbydesign-core'))
     .catch((err) => console.warn('*** ERROR WHEN PUBLISHING CORE PACKAGE ***', err));
 }
