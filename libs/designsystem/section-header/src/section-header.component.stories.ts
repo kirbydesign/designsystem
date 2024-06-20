@@ -1,6 +1,6 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { LabelComponent } from '@kirbydesign/designsystem/item';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 
 const meta: Meta<SectionHeaderComponent> = {
@@ -8,7 +8,7 @@ const meta: Meta<SectionHeaderComponent> = {
   title: 'Components / Section Header',
   decorators: [
     moduleMetadata({
-      declarations: [LabelComponent],
+      imports: [ItemModule],
     }),
   ],
 };
