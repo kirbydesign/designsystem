@@ -37,7 +37,6 @@ import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-t
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
-import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
 import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
@@ -70,7 +69,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AvatarExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
-  SegmentedControlExampleComponent,
   IconExampleComponent,
   CalendarExampleComponent,
   CalendarCardExampleComponent,
