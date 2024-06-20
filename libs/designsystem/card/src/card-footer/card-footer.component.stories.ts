@@ -1,6 +1,6 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { CardComponent, CardFooterComponent } from '@kirbydesign/designsystem/card';
+import { CardFooterComponent, CardModule } from '@kirbydesign/designsystem/card';
 
 const cardContent = `<p>
   Card content.
@@ -12,7 +12,7 @@ const meta: Meta<CardFooterComponent> = {
   title: 'Components / Card / Card Footer',
   decorators: [
     moduleMetadata({
-      declarations: [CardComponent],
+      imports: [CardModule],
     }),
   ],
 };

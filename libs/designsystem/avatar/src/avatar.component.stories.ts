@@ -1,18 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { moduleMetadata } from '@storybook/angular';
-
-import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 
 const meta: Meta<AvatarComponent> = {
   component: AvatarComponent,
   title: 'Components / Avatar',
-  decorators: [
-    moduleMetadata({
-      declarations: [IconComponent],
-    }),
-  ],
 };
 export default meta;
 type Story = StoryObj<AvatarComponent>;
