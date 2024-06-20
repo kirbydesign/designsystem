@@ -40,8 +40,7 @@ export class CardShowcaseComponent {
     },
     {
       name: 'hasPadding',
-      description:
-        'If set, the card will have spacing between the border and the content',
+      description: 'If set, the card will have spacing between the border and the content',
       defaultValue: 'false',
       type: ['boolean'],
     },
