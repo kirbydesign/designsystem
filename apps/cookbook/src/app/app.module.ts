@@ -22,26 +22,32 @@ import { ComponentDisplayComponent } from './component-overview/component-displa
 
 registerLocaleData(localeData);
 
-@NgModule({ declarations: [
-        AppComponent,
-        HomeComponent,
-        SideNavComponent,
-        HeaderComponent,
-        IntroComponent,
-        FooterComponent,
-        ComponentOverviewComponent,
-        ComponentDisplayComponent,
-        KirbyChristmasComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        FormsModule,
-        KirbyModule,
-        KirbyExperimentalModule,
-        KirbyModalModule], providers: [
-        { provide: LOCALE_ID, useValue: 'en-DK' },
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    SideNavComponent,
+    HeaderComponent,
+    IntroComponent,
+    FooterComponent,
+    ComponentOverviewComponent,
+    ComponentDisplayComponent,
+    KirbyChristmasComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FormsModule,
+    KirbyModule,
+    KirbyExperimentalModule,
+    KirbyModalModule,
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'en-DK' },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class AppModule {}
