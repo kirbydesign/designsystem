@@ -4,6 +4,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EnvironmentInjector,
   HostBinding,
   HostListener,
   Injector,
@@ -166,6 +167,7 @@ export class ModalWrapperComponent
   constructor(
     private changeDetector: ChangeDetectorRef,
     private injector: Injector,
+    private environmentInjector: EnvironmentInjector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private zone: NgZone,
@@ -292,7 +294,7 @@ export class ModalWrapperComponent
     if (this.config.modalRoute) {
       this.onSiblingModalRouteActivated(this.config.siblingModalRouteActivated$);
       // Load component from modal-route inside router-outlet:
-      this.routerOutlet.activateWith(this.config.modalRoute);
+      this.routerOutlet.activateWith(this.config.modalRoute, this.environmentInjector);
     }
   }
 
@@ -302,7 +304,7 @@ export class ModalWrapperComponent
       if (this.routerOutlet.isActivated) {
         this.routerOutlet.deactivate();
       }
-      this.routerOutlet.activateWith(route);
+      this.routerOutlet.activateWith(route, this.environmentInjector);
     });
   }
 
