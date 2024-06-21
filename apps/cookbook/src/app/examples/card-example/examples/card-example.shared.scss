@@ -6,6 +6,7 @@
 
   &:has(.variant-card-container) {
     display: flex;
+    container-type: inline-size;
   }
 }
 
@@ -86,14 +87,24 @@ button {
 
 .variant-card-container {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 16px;
+  @container (width < 616px) {
+    flex-direction: column;
+    align-items: center;
+
+    kirby-card {
+      max-width: none !important;
+      width: 100%;
+    }
+  }
 
   kirby-card {
-    margin: 6px;
+    max-width: 50%;
     min-width: 250px;
-    max-width: 350px;
     flex: 1;
   }
 }

@@ -5,17 +5,16 @@ const config = {
   template: `
   <div class="variant-card-container">
     <kirby-card hasPadding="true">
-      <strong>Elevated card</strong>
-      <p>The elevated card is the default card as it looks right out of the box.</p>
+      <strong>Elevated (default)</strong>
+      <p>The card is slightly elevated from the background with a drop shadow.</p>
     </kirby-card>
     <kirby-card hasPadding="true" variant="flat">
-      <strong>Flat card</strong>
-      <p>The flat card has no shadow around its edges</p>
+      <strong>Flat</strong>
+      <p>Has no shadow and appears lower in the visual hierarchy.</p>
     </kirby-card>
     <kirby-card [hasPadding]="true" variant="outlined">
       <strong>Outlined card</strong>
-      <p>The outlined card is an alternative to the flat card</p>
-      <a class="kirby-external-icon" target="_blank" href="https://github.com/kirbydesign/designsystem">Kirby on Github</a>
+      <p>Has a border and no background. Appear lowest in the visual hierarchy.</p>
     </kirby-card>
   </div>
   `,
