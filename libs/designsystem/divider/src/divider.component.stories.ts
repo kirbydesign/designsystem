@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { DividerComponent } from './divider.component';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 
 const meta: Meta<DividerComponent> = {
   component: DividerComponent,

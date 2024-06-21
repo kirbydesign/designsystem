@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
 
-import { RangeComponent } from './range.component';
+import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const meta: Meta<RangeComponent> = {
   component: RangeComponent,

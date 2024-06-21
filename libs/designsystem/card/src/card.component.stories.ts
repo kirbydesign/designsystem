@@ -1,6 +1,6 @@
 import { argsToTemplate, Meta, StoryObj } from '@storybook/angular';
 
-import { CardComponent } from './card.component';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
 const meta: Meta<CardComponent> = {
   component: CardComponent,

@@ -1,6 +1,5 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { EmptyStateComponent } from './empty-state.component';
-import { EmptyStateModule } from './empty-state.module';
+import { EmptyStateComponent, EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 
 const meta: Meta<EmptyStateComponent> = {
   component: EmptyStateComponent,

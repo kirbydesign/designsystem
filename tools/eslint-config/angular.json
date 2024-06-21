@@ -1,6 +1,7 @@
 {
   "root": true,
   "extends": ["prettier"],
+  "ignorePatterns": ["!**/*", "storybook-static", "dist", "node_modules"],
   "plugins": ["@nx", "prettier", "jasmine"],
   "overrides": [
     {
@@ -53,6 +54,22 @@
         "jasmine/no-focused-tests": 2
       },
       "plugins": ["eslint-plugin-import", "@angular-eslint/eslint-plugin", "@typescript-eslint"]
+    },
+    {
+      "files": ["*.stories.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["./*", "../*"],
+                "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/PACKAGE-NAME/ENTRY-POINT"
+              }
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": {

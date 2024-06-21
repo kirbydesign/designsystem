@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 
+import { FormsModule } from '@angular/forms';
 import { ExamplesSharedModule } from '../examples.shared.module';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
@@ -18,6 +19,8 @@ import { ModalExampleComponent } from './modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-route-example/modal-route-page2-example.component';
 import { ModalExampleAlertComponent } from './modal-example-alert.component';
+import { ModalExampleAlertWithGuardComponent } from './modal-example-alert-with-guard.component';
+import { ModalExampleAlertWithGuardStepperComponent } from './alert-example/modal-example-alert-with-guard-stepper.component';
 import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from './modal-component-example.component';
 
@@ -34,11 +37,20 @@ const COMPONENT_DECLARATIONS = [
   ModalRoutePage1ExampleComponent,
   ModalRoutePage2ExampleComponent,
   ModalExampleAlertComponent,
+  ModalExampleAlertWithGuardComponent,
   ModalEmbeddedAlertExampleComponent,
+  ModalExampleAlertWithGuardStepperComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, KirbyModalModule, ExamplesSharedModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    KirbyModule,
+    KirbyModalModule,
+    ExamplesSharedModule,
+  ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })

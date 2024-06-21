@@ -1,8 +1,7 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { HeaderComponent } from './header.component';
-import { HeaderModule } from './header.module';
+import { HeaderComponent, HeaderModule } from '@kirbydesign/designsystem/header';
 
 const meta: Meta<HeaderComponent> = {
   component: HeaderComponent,

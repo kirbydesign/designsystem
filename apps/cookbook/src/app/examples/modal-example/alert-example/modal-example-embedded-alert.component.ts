@@ -1,36 +1,42 @@
-import { Component, OnInit, Optional, SkipSelf } from '@angular/core';
-import { AlertConfig, Modal } from '@kirbydesign/designsystem';
+import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
+import { AlertConfig, COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem';
 
 const config = {
-  selector: 'cookbook-modal-embedded-alert-example',
-  template: `
-    <kirby-page-title>Modal with alert</kirby-page-title>
-    <p>
+  template: `<kirby-page-title>Modal with alert</kirby-page-title>
+
+<ng-container *ngIf="showStepper">
+  <cookbook-modal-example-alert-with-guard-stepper
+    [currentStep]="3"
+  ></cookbook-modal-example-alert-with-guard-stepper>
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+</ng-container>
+
+<div class="form-wrapper">
+  <kirby-form-field>
+    <input
+      kirby-input
+      placeholder="First name"
+      [(ngModel)]="firstName"
+    />
+  </kirby-form-field>
+
+  <kirby-form-field>
+    <input
+      kirby-input
+      placeholder="Last name"
+      [(ngModel)]="lastName"
+    />
+  </kirby-form-field>
+
+  <button kirby-button (click)="clearForm()">Clear form</button>
+</div>
+
+<kirby-modal-footer>
+  <em>
     <strong>Please note:</strong>
-
-      <em>
-        This modal will ask the user if they are sure they want to close the modal if they have
-        entered data in any of the form fields.
-      </em>
-    </p>
-
-    <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
-      <p>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      </p>
-      
-    <kirby-form-field>
-      <input kirby-input placeholder="First name" (input)="firstName =$event.target.value" />
-    </kirby-form-field>
-
-    <kirby-form-field>
-      <input kirby-input placeholder="Last name" (input)="lastName = $event.target.value" />
-    </kirby-form-field>
-  `,
+    If any data has been entered in the form fields, this modal will prompt the user to confirm before closing.
+  </em>
+</kirby-modal-footer>`,
   canDismissCodeSnippet: `// Inside the embedded component
 constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
@@ -38,6 +44,7 @@ firstName: string;
 lastName: string;
 
 ngOnInit() {
+  // Use an arrow function to avoid 'this' being undefined in the function callback: 
   this.modal.canDismiss = () => this.validate();
 }
 
@@ -61,22 +68,47 @@ validate(): boolean | AlertConfig {
 };
 
 @Component({
-  selector: config.selector,
   template: config.template,
+  styles: [
+    `
+      .form-wrapper {
+        margin-block-start: 1em;
+        display: flex;
+        flex-direction: column;
+      }
+
+      button {
+        align-self: flex-end;
+      }
+    `,
+  ],
 })
 export class ModalEmbeddedAlertExampleComponent implements OnInit {
-  constructor(@Optional() @SkipSelf() private modal: Modal) {}
+  constructor(
+    @Optional() @SkipSelf() private modal: Modal,
+    @Optional() @Inject(COMPONENT_PROPS) private componentProps
+  ) {}
 
   static readonly canDismissCodeSnippet = config.canDismissCodeSnippet;
 
-  firstName: string;
-  lastName: string;
+  showStepper = true;
+  @Input()
+  firstName: string = 'Jane';
+  lastName: string = '';
 
   ngOnInit() {
+    if (this.componentProps?.showStepper !== undefined) {
+      this.showStepper = this.componentProps.showStepper;
+    }
     this.modal.canDismiss = () => this.validate();
   }
 
-  validate() {
+  clearForm() {
+    this.firstName = '';
+    this.lastName = '';
+  }
+
+  validate(): boolean | AlertConfig {
     if (!this.firstName && !this.lastName) return true;
 
     const config: AlertConfig = {

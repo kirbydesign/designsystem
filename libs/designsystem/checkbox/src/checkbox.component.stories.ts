@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
 
-import { CheckboxComponent } from './checkbox.component';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,

@@ -1,4 +1,6 @@
 import { ModalEnabledRoutes } from '@kirbydesign/designsystem';
+import { CanDismissModalGuard } from '@kirbydesign/designsystem/modal';
+
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -90,6 +92,8 @@ import { ModalExampleSimpleComponent } from './modal-example/modal-example-simpl
 import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { ModalExampleAlertComponent } from './modal-example/modal-example-alert.component';
+import { ModalExampleAlertWithGuardComponent } from './modal-example/modal-example-alert-with-guard.component';
+import { ModalEmbeddedAlertExampleComponent } from './modal-example/alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
 
@@ -279,6 +283,38 @@ export const routes: ModalEnabledRoutes = [
       {
         path: 'modal-alert',
         component: ModalExampleAlertComponent,
+      },
+      {
+        path: 'modal-with-guard',
+        component: ModalExampleAlertWithGuardComponent,
+        data: {
+          step: 2,
+          nextRoute: '../modal-with-guard-open',
+        },
+      },
+      {
+        path: 'modal-with-guard-open',
+        component: ModalExampleAlertWithGuardComponent,
+        canDeactivate: [CanDismissModalGuard],
+        data: {
+          step: 3,
+        },
+      },
+      {
+        path: 'modal-route-with-guard',
+        component: ModalExampleAlertWithGuardComponent,
+        data: {
+          step: 2,
+          nextRoute: ['./', { outlets: { modal: ['page1'] } }],
+        },
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalEmbeddedAlertExampleComponent,
+            canDeactivate: [CanDismissModalGuard],
+          },
+        ],
       },
       {
         path: 'modal-route',

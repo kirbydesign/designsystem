@@ -1,7 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { ToggleButtonComponent } from './toggle-button.component';
+import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
 
 const meta: Meta<ToggleButtonComponent> = {
   component: ToggleButtonComponent,

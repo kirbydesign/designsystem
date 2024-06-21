@@ -1,7 +1,6 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { CardComponent } from '../card.component';
-import { CardFooterComponent } from './card-footer.component';
+import { CardComponent, CardFooterComponent } from '@kirbydesign/designsystem/card';
 
 const cardContent = `<p>
   Card content.

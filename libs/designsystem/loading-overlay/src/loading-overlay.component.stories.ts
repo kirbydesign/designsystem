@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-
-import { LoadingOverlayComponent } from './loading-overlay.component';
+import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 
 const meta: Meta<LoadingOverlayComponent> = {
   component: LoadingOverlayComponent,
