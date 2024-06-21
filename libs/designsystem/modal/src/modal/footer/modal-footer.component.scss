@@ -43,6 +43,7 @@ ion-footer {
 :host(.inline) ion-footer {
   background: transparent;
   box-shadow: none;
+  @include themes.apply-light-theme;
 }
 
 :host-context(.keyboard-visible) {
