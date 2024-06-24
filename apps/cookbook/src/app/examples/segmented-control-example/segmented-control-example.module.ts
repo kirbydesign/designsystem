@@ -8,16 +8,20 @@ import {
   SegmentedControlComponent,
 } from '@kirbydesign/designsystem';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { SegmentedControlExampleColorComponent } from './color/color';
 
 import { SegmentedControlExampleComponent } from './segmented-control-example.component';
 import { SegmentedControlExampleDefaultComponent } from './default/default';
+import { SegmentedControlExampleSizesComponent } from './sizes/sizes';
+import { SegmentedControlExampleModesComponent } from './modes/modes';
 import { SegmentedControlExampleGroupedComponent } from './grouped/grouped';
 import { SegmentedControlExampleWithBadgeComponent } from './with-badge/with-badge';
+import { SegmentedControlExampleColorComponent } from './color/color';
 
 const COMPONENT_DECLARATIONS = [
   SegmentedControlExampleComponent,
   SegmentedControlExampleDefaultComponent,
+  SegmentedControlExampleSizesComponent,
+  SegmentedControlExampleModesComponent,
   SegmentedControlExampleGroupedComponent,
   SegmentedControlExampleWithBadgeComponent,
   SegmentedControlExampleColorComponent,

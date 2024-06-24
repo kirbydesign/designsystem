@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { SegmentItem } from '@kirbydesign/designsystem';
 
 const config = {
   template: `<div class="wrapper">
   <kirby-segmented-control
-    size="sm"
     [items]="segmentItems"
-    [selectedIndex]="selectedIndex"
+    [value]="selectedSegment"
+    [size]="size"
     (segmentSelect)="onSegmentSelect($event)"
   ></kirby-segmented-control>
   <button
     kirby-button
-    size="sm"
+    [size]="size"
     [attentionLevel]="selectedSegment === separateSegment ? '2' : '3'"
     (click)="onSegmentSelect(separateSegment)"
   >
@@ -43,18 +43,22 @@ kirby-segmented-control {
 }
 `,
     `:host {
-  display: block
+  display: block;
+  margin-bottom: 16px;
 }`,
   ],
 
-  codeSnippet: `selectedIndex = 0;
-selectedSegment: SegmentItem;
-  
+  codeSnippet: `size = 'md';
+
 segmentItems: SegmentItem[] = [
   { text: 'Stone', id: 'Stone' },
   { text: 'Rick', id: 'Rick' },
   { text: 'Gooey', id: 'Gooey' },
 ];
+
+selectedSegment: this.segmentItems[0];
+
+separateSegment: SegmentItem = { text: 'Show all', id: 'all' };
 
 listItems = [...];
 
@@ -67,7 +71,6 @@ get filteredListItems() {
 
 onSegmentSelect(segment: SegmentItem) {
   this.selectedSegment = segment;
-  this.selectedIndex = this.segmentItems.indexOf(selectedSegment);
 }`,
 };
 @Component({
@@ -75,13 +78,14 @@ onSegmentSelect(segment: SegmentItem) {
   template: config.template,
   styles: config.styles,
 })
-export class SegmentedControlExampleGroupedComponent implements OnInit {
+export class SegmentedControlExampleGroupedComponent {
   template: string = config.template;
-  styles: string = config.styles[0];
+  styles: string =
+    "@use '@kirbydesign/core/src/scss/utils';\n\n" +
+    config.styles[0].replace('8px;', "utils.size('xxs');").replace('24px;', "utils.size('m');");
   codeSnippet: string = config.codeSnippet;
 
-  selectedSegment: SegmentItem;
-  selectedIndex = 0;
+  size = 'md';
 
   segmentItems: SegmentItem[] = [
     { text: 'Stone', id: 'Stone' },
@@ -89,7 +93,13 @@ export class SegmentedControlExampleGroupedComponent implements OnInit {
     { text: 'Gooey', id: 'Gooey' },
   ];
 
+  selectedSegment: SegmentItem = this.segmentItems[0];
+
   separateSegment: SegmentItem = { text: 'Show all', id: 'all' };
+
+  onSegmentSelect(selectedSegment: SegmentItem) {
+    this.selectedSegment = selectedSegment;
+  }
 
   listItems = [
     {
@@ -124,14 +134,5 @@ export class SegmentedControlExampleGroupedComponent implements OnInit {
     return filter === 'all'
       ? this.listItems
       : this.listItems.filter((item) => item.mix.indexOf(filter) > -1);
-  }
-
-  ngOnInit() {
-    this.selectedSegment = this.segmentItems[this.selectedIndex];
-  }
-
-  onSegmentSelect(selectedSegment: SegmentItem) {
-    this.selectedSegment = selectedSegment;
-    this.selectedIndex = this.segmentItems.indexOf(selectedSegment);
   }
 }

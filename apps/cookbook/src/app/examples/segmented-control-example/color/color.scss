@@ -4,7 +4,7 @@
   display: block;
 }
 
-irby-card {
+kirby-card {
   margin-bottom: utils.size('s');
 }
 
@@ -13,10 +13,6 @@ irby-card {
   justify-content: center;
   gap: utils.size('xxs');
   padding: utils.size('xxs');
-}
-
-fieldset {
-  display: inline-block;
 }
 
 button {

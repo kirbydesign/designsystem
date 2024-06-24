@@ -4,18 +4,7 @@
   display: block;
 }
 
-kirby-segmented-control {
-  margin-bottom: utils.size('l');
-}
-
+kirby-segmented-control,
 kirby-card {
   margin-bottom: utils.size('s');
-}
-
-fieldset {
-  display: inline-block;
-
-  .disabled {
-    color: utils.get-text-color('semi-dark');
-  }
 }
