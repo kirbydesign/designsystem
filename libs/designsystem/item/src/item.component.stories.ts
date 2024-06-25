@@ -1,8 +1,15 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
+
+import { ItemExampleModule } from '~/app/examples/item-example/item-example.module';
 
 const meta: Meta<ItemComponent> = {
   component: ItemComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [ItemExampleModule],
+    }),
+  ],
   title: 'Components / Item',
 };
 export default meta;
@@ -20,5 +27,11 @@ export const Default: Story = {
   render: (args: ItemComponent) => ({
     props: args,
     template: `<kirby-item ${argsToTemplate(args)}>Item</kirby-item>`,
+  }),
+};
+
+export const CookbookExamples: Story = {
+  render: () => ({
+    template: `<cookbook-item-example></cookbook-item-example>`,
   }),
 };

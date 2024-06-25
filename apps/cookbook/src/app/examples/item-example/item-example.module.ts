@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
-
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemExampleComponent } from './item-example.component';
 import { ItemExampleSimpleComponent } from './examples/simple/default';
 import { ItemExampleLongTitleComponent } from './examples/simple/long-title';
 import { ItemExampleSimpleTwoLinesComponent } from './examples/simple/two-lines';
@@ -34,6 +41,7 @@ import { ItemExampleDisclosureComponent } from './examples/disclosure';
 import { ItemExampleDisclosureAnimationComponent } from './examples/disclosure-animation';
 
 const COMPONENT_DECLARATIONS = [
+  ItemExampleComponent,
   ItemExampleSimpleComponent,
   ItemExampleSimpleMediumComponent,
   ItemExampleSimpleSmallComponent,
@@ -66,7 +74,17 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
+  imports: [
+    CommonModule,
+    AvatarComponent,
+    BadgeComponent,
+    CheckboxComponent,
+    CardModule,
+    FlagComponent,
+    IconModule,
+    ItemModule,
+    ToggleComponent,
+  ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
