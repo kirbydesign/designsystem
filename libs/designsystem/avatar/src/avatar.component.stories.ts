@@ -1,9 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 
+import { AvatarExampleModule } from '~/app/examples/avatar-example/avatar-example.module';
+
 const meta: Meta<AvatarComponent> = {
   component: AvatarComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [AvatarExampleModule],
+    }),
+  ],
   title: 'Components / Avatar',
 };
 export default meta;
@@ -39,5 +46,11 @@ export const ThemeColor: Story = {
     <kirby-avatar themeColor="danger" text="A"></kirby-avatar>
     <kirby-avatar themeColor="white" text="A"></kirby-avatar>
     `,
+  }),
+};
+
+export const CookbookExamples: Story = {
+  render: () => ({
+    template: `<cookbook-avatar-example></cookbook-avatar-example>`,
   }),
 };
