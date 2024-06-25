@@ -54,28 +54,6 @@
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
           "libs/designsystem/.storybook/styles.css"
-        ],
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "src/assets",
-            "output": "assets"
-          },
-          {
-            "glob": "**/*.svg",
-            "input": "libs/designsystem/icon/src/icons/svg",
-            "output": "./assets/kirby/icons/svg"
-          },
-          {
-            "glob": "**/*.svg",
-            "input": "node_modules/ionicons/dist/ionicons/svg",
-            "output": "./svg"
-          },
-          {
-            "glob": "**/*.woff2",
-            "input": "node_modules/@fontsource/roboto/files",
-            "output": "./assets/fonts"
-          }
         ]
       }
     }
