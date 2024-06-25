@@ -9,6 +9,8 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { CardModule } from '@kirbydesign/designsystem/card';
+import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
+
 import { ItemExampleComponent } from './item-example.component';
 import { ItemExampleSimpleComponent } from './examples/simple/default';
 import { ItemExampleLongTitleComponent } from './examples/simple/long-title';
@@ -81,6 +83,7 @@ const COMPONENT_DECLARATIONS = [
     CheckboxComponent,
     CardModule,
     FlagComponent,
+    FormFieldModule,
     IconModule,
     ItemModule,
     ToggleComponent,
