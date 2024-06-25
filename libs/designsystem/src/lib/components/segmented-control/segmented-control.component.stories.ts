@@ -41,6 +41,6 @@ export const SegmentedControl: Story = {
 
 export const CookbookExamples: Story = {
   render: () => ({
-    template: `<h1>Cookbook examples</h1><cookbook-segmented-control-example></cookbook-segmented-control-example>`,
+    template: `<cookbook-segmented-control-example></cookbook-segmented-control-example>`,
   }),
 };
