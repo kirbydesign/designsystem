@@ -37,10 +37,14 @@ ion-footer {
 }
 
 :host(.light) ion-footer {
+  @include themes.apply-light-theme;
+
   background-color: utils.get-color('background-color');
 }
 
 :host(.inline) ion-footer {
+  @include themes.apply-light-theme;
+
   background: transparent;
   box-shadow: none;
 }
