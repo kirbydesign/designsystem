@@ -1,7 +1,5 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-
-import { DropdownComponent } from './dropdown.component';
-import { DropdownModule } from './dropdown.module';
+import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,

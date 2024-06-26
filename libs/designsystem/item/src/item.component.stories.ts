@@ -1,6 +1,5 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
-
-import { ItemComponent, ItemSize } from './item.component';
+import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
 
 const meta: Meta<ItemComponent> = {
   component: ItemComponent,

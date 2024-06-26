@@ -35,7 +35,7 @@ const coreLibDir = `${libsRootDir}/core`;
 const coreLibSrcDir = `${coreLibDir}/src`;
 
 const dist = `dist`;
-const distDesignsystemTarget = `${dist}/${designsystemLibDir}`;
+const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
 const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
 const distCoreTarget = `${dist}/${coreLibDir}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;

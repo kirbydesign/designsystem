@@ -1,7 +1,6 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-
-import { ItemModule } from '@kirbydesign/designsystem/item/src';
-import { ItemSlidingComponent } from './item-sliding.component';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
 
 const meta: Meta<ItemSlidingComponent> = {
   component: ItemSlidingComponent,

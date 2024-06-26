@@ -33,7 +33,7 @@ export class ModalController implements OnDestroy {
       moduleRootRoutePath
     );
     this.onModalRouteActivated(modalNavigation.activated$);
-    this.onModalRouteDeactivated(modalNavigation.deactivated$); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
+    this.onModalRouteDeactivated(modalNavigation.deactivated$);
   }
 
   private onModalRouteActivated(modalRouteActivated$: Observable<ModalRouteActivation>) {
@@ -67,7 +67,7 @@ export class ModalController implements OnDestroy {
     modalRouteDeactivated$
       .pipe(
         takeUntil(this.destroy$),
-        filter(() => this.overlays.length > 0) // TODO: This also fires when closing overlay - should we check for isClosing??
+        filter(() => this.overlays.some((overlay) => overlay.isDismissing !== true))
       )
       .subscribe(async () => {
         await this.hideAll();
@@ -162,10 +162,16 @@ export class ModalController implements OnDestroy {
 
   public async hideAll(): Promise<void> {
     await Promise.all(
-      this.overlays.map(async (overlay) => {
-        await overlay.dismiss();
-      })
+      this.overlays
+        .filter((overlay) => overlay.isDismissing !== true)
+        .map(async (overlay) => {
+          await overlay.dismiss();
+        })
     );
+  }
+
+  public getTopMost(): Overlay | null {
+    return this.overlays[this.overlays.length - 1];
   }
 
   ngOnDestroy(): void {
