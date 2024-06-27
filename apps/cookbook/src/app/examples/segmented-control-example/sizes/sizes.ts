@@ -18,7 +18,7 @@ const config = {
 @Component({
   selector: 'cookbook-segmented-control-example-sizes',
   template: config.template,
-  styleUrls: ['./sizes.scss'],
+  styleUrls: ['../segmented-control-examples.shared.scss'],
 })
 export class SegmentedControlExampleSizesComponent extends SegmentedControlExampleBaseComponent {
   template = config.template;

@@ -1,9 +1,0 @@
-@use '@kirbydesign/core/src/scss/utils';
-
-:host {
-  display: block;
-}
-
-kirby-segmented-control {
-  margin-bottom: utils.size('s');
-}

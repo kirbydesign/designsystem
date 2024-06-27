@@ -1,11 +1,8 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../segmented-control-examples.shared.scss';
 
-:host {
-  display: block;
-}
-
-kirby-card {
-  margin-bottom: utils.size('s');
+kirby-segmented-control {
+  margin-bottom: initial;
 }
 
 .card-option-button-group {

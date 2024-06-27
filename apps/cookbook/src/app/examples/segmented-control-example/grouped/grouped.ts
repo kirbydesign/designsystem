@@ -35,7 +35,7 @@ const config = {
     `.wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 kirby-segmented-control {
@@ -82,7 +82,7 @@ export class SegmentedControlExampleGroupedComponent {
   template: string = config.template;
   styles: string =
     "@use '@kirbydesign/core/src/scss/utils';\n\n" +
-    config.styles[0].replace('8px;', "utils.size('xxs');").replace('24px;', "utils.size('m');");
+    config.styles[0].replace('8px;', "utils.size('xxs');").replace('16px;', "utils.size('s');");
   codeSnippet: string = config.codeSnippet;
 
   size = 'md';
