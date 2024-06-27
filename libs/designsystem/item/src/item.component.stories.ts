@@ -1,5 +1,5 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
+import { ItemComponent, ItemModule, ItemSize } from '@kirbydesign/designsystem/item';
 
 import { ItemExampleModule } from '~/app/examples/item-example/item-example.module';
 
@@ -7,7 +7,7 @@ const meta: Meta<ItemComponent> = {
   component: ItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [ItemExampleModule],
+      imports: [ItemModule, ItemExampleModule],
     }),
   ],
   title: 'Components / Item',
