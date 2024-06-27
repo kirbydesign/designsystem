@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ItemModule } from '@kirbydesign/designsystem/item';
-import { BadgeComponent } from '@kirbydesign/designsystem/badge';
-import { FlagComponent } from '@kirbydesign/designsystem/flag';
-import { IconModule } from '@kirbydesign/designsystem/icon';
-import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { FormFieldModule, InputComponent } from '@kirbydesign/designsystem/form-field';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 import { ItemExampleComponent } from './item-example.component';
 import { ItemExampleSimpleComponent } from './examples/simple/default';
@@ -80,11 +81,13 @@ const COMPONENT_DECLARATIONS = [
     CommonModule,
     AvatarComponent,
     BadgeComponent,
+    ButtonComponent,
     CheckboxComponent,
     CardModule,
     FlagComponent,
     FormFieldModule,
     IconModule,
+    InputComponent,
     ItemModule,
     ToggleComponent,
   ],
