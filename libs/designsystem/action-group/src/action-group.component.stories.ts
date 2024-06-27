@@ -22,6 +22,12 @@ export const ActionGroup: Story = {
     visibleActions: 2,
     align: 'end',
   },
+  argTypes: {
+    align: {
+      options: ['start', 'end'],
+      control: { type: 'radio' },
+    },
+  },
   render: (args: ActionGroupComponent) => ({
     props: args,
     template: `<kirby-action-group ${argsToTemplate(args)}>

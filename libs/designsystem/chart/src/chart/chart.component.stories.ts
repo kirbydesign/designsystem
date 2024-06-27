@@ -25,4 +25,10 @@ export const Default: Story = {
     type: 'column',
     data: [50, 200, 83, 102],
   },
+  argTypes: {
+    type: {
+      options: ['line', 'column', 'bar'],
+      control: { type: 'radio' },
+    },
+  },
 };

@@ -34,7 +34,30 @@ export const Dropdown: Story = {
     disabled: false,
     hasError: false,
     size: 'md',
+    selectedIndex: -1,
     tabindex: 0,
     usePopover: false,
+  },
+  argTypes: {
+    attentionLevel: {
+      options: ['1', '2', '3'],
+      control: { type: 'radio' },
+    },
+    size: {
+      options: ['sm', 'md'],
+      control: { type: 'radio' },
+    },
+    expand: {
+      options: [undefined, 'block'],
+      control: { type: 'radio' },
+    },
+    focusedIndex: {
+      table: {
+        disable: true,
+      },
+    },
+    selectedIndex: {
+      control: { type: 'number' },
+    },
   },
 };

@@ -24,6 +24,16 @@ export const Button: Story = {
     showIconOnly: false,
     attentionLevel: '1',
   },
+  argTypes: {
+    attentionLevel: {
+      options: ['1', '2', '3'],
+      control: { type: 'radio' },
+    },
+    size: {
+      options: Object.values(ButtonSize),
+      control: { type: 'radio' },
+    },
+  },
   render: (args: ButtonComponent) => ({
     props: args,
     template: `

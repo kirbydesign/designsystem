@@ -18,4 +18,14 @@ export const Checkbox: Story = {
     hasError: false,
     disabled: false,
   },
+  argTypes: {
+    attentionLevel: {
+      options: ['1', '2'],
+      control: { type: 'radio' },
+    },
+    size: {
+      options: ['xs', 'sm', 'md'],
+      control: { type: 'radio' },
+    },
+  },
 };

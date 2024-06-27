@@ -24,6 +24,12 @@ export const Default: Story = {
     size: ItemSize.MD,
     rotateIcon: false,
   },
+  argTypes: {
+    size: {
+      options: Object.values(ItemSize),
+      control: { type: 'radio' },
+    },
+  },
   render: (args: ItemComponent) => ({
     props: args,
     template: `<kirby-item ${argsToTemplate(args)}>Item</kirby-item>`,

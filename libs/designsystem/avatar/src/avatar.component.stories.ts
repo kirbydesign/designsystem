@@ -25,6 +25,28 @@ export const Default: Story = {
     overlay: false,
     size: AvatarSize.SM,
   },
+  argTypes: {
+    themeColor: {
+      options: [
+        'success',
+        'warning',
+        'danger',
+        'primary',
+        'secondary',
+        'tertiary',
+        'medium',
+        'white',
+        'dark',
+        'light',
+        'semi-light',
+      ],
+      control: { type: 'radio' },
+    },
+    size: {
+      options: Object.values(AvatarSize),
+      control: { type: 'radio' },
+    },
+  },
 };
 
 export const CookbookExamples: Story = {
