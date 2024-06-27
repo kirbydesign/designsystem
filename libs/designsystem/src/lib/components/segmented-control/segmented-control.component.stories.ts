@@ -16,7 +16,7 @@ const meta: Meta<SegmentedControlComponent> = {
 export default meta;
 type Story = StoryObj<SegmentedControlComponent>;
 
-export const SegmentedControl: Story = {
+export const Default: Story = {
   args: {
     mode: SegmentedControlMode.default,
     items: [
