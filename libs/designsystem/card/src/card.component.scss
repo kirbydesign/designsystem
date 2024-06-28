@@ -2,6 +2,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
+$default-border-outline: 1px solid utils.get-color('medium');
+
 :host {
   --kirby-card-main-background-color: #{utils.get-color('white')};
   --kirby-card-main-color: #{utils.get-color('white-contrast')};
@@ -52,16 +54,16 @@
 
   &.outlined {
     background-color: transparent;
-    border: var(--kirby-card-border, 1px solid utils.get-color('medium'));
+    border: var(--kirby-card-border, $default-border-outline);
     box-shadow: none;
 
     &:has(kirby-card-header.flagged) {
       border: none;
 
       .content-wrapper {
-        border-block-end: var(--kirby-card-border, 1px solid utils.get-color('medium'));
-        border-inline-start: var(--kirby-card-border, 1px solid utils.get-color('medium'));
-        border-inline-end: var(--kirby-card-border, 1px solid utils.get-color('medium'));
+        border-block-end: var(--kirby-card-border, $default-border-outline);
+        border-inline-start: var(--kirby-card-border, $default-border-outline);
+        border-inline-end: var(--kirby-card-border, $default-border-outline);
         border-bottom-left-radius: utils.$border-radius;
         border-bottom-right-radius: utils.$border-radius;
       }

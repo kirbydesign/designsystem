@@ -1,0 +1,29 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use './card-example.shared.scss';
+
+:host {
+  container-type: inline-size;
+  display: flex;
+}
+
+.variant-card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: utils.size('s');
+
+  kirby-card {
+    max-width: 50%;
+    min-width: 250px;
+    flex: 1;
+  }
+
+  @container (width < 616px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    kirby-card {
+      max-width: initial;
+    }
+  }
+}

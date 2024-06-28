@@ -23,7 +23,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./card-example.shared.scss'],
+  styleUrls: ['./card-example-variant.scss'],
 })
 export class CardExampleVariantComponent {
   template: string = config.template;
