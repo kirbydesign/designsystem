@@ -231,7 +231,7 @@
     background-image: url('#{$svg}');
   } @else {
     // Icon from library
-    $icon-url: '/assets/kirby/icons/svg/#{$svg}.svg';
+    $icon-url: 'assets/kirby/icons/svg/#{$svg}.svg';
 
     background-image: url('#{$icon-url}');
   }
