@@ -22,12 +22,26 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     @each $size, $height in utils.$checkbox-radio-sizes {
       &.#{$size} {
+        // TODO: Refactor: Move $vertical-padding declaration here
+        // $vertical-padding: get-vertical-padding($height);
+
         ion-radio::part(label) {
+          // TODO: Refactor: Move $vertical-padding declaration out of scope of this selector => reuse
           $vertical-padding: get-vertical-padding($height);
 
           padding-top: $vertical-padding;
           padding-bottom: $vertical-padding;
         }
+
+        // TODO: Enable this block to handle sizes - note: may depend on kirby-item (ion-item --min-height)
+        // FIXME: Try to explain what is going on here
+        // ion-radio.in-item:not(.legacy-radio)::part(label) {
+        //   // TODO: Refactor: Move $vertical-padding declaration out of scope of this selector => reuse
+        //   $vertical-padding: get-vertical-padding($height);
+
+        //   padding-block-start: calc(#{$vertical-padding} - 1px);
+        //   padding-block-end: calc(#{$vertical-padding} - 3px);
+        // }
       }
     }
   }
@@ -97,8 +111,7 @@ ion-radio {
   }
 
   // Override styles for Radio in Item
-  // FIXME: Increase specificity without reaching for `!important`
-  // by duplicating `.in-item` in selector
+  // FIXME: Increase specificity without reaching for `!important` by duplicating `.in-item` in selector
   &.in-item.in-item:not(.legacy-radio)::part(label) {
     padding-inline-start: 0;
 
@@ -108,12 +121,10 @@ ion-radio {
     // FIXME: If using text-property
     // margin-block: -1px -3px;
 
-    // FIXME: alternative: override padding-block (declared in line ~28)
-    // This requires increased specifity
+    // FIXME: alternative: override padding-block (declared in line ~28) - This requires increased specifity!
     // TODO: Make sure sizes still work
-    padding-block: 15px 13px; // avoid !important
-
     // TODO: Consider moving this solution up to the loop in line ~23-33
+    padding-block: 15px 13px; // avoid !important
   }
 
   &::part(label-text-wrapper) {
