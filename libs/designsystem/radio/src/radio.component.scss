@@ -23,26 +23,12 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     @each $size, $height in utils.$checkbox-radio-sizes {
       &.#{$size} {
-        // TODO: Refactor: Move $vertical-padding declaration here
-        // $vertical-padding: get-vertical-padding($height);
-
         ion-radio::part(label) {
-          // TODO: Refactor: Move $vertical-padding declaration out of scope of this selector => reuse
           $vertical-padding: get-vertical-padding($height);
 
           padding-top: $vertical-padding;
           padding-bottom: $vertical-padding;
         }
-
-        // TODO: Enable this block to handle sizes - note: may depend on kirby-item (ion-item --min-height)
-        // FIXME: Try to explain what is going on here
-        // ion-radio.in-item:not(.legacy-radio)::part(label) {
-        //   // TODO: Refactor: Move $vertical-padding declaration out of scope of this selector => reuse
-        // $vertical-padding: get-vertical-padding($height);
-
-        // padding-block-start: calc(#{$vertical-padding} - 1px);
-        // padding-block-end: calc(#{$vertical-padding} - 3px);
-        // }
       }
     }
   }
@@ -115,11 +101,10 @@ ion-radio {
     margin-inline: $spacing-to-label 0;
   }
 
-  // Override (both Kirby and Ionic) styles for Radio in Item to keep same visual appearance as before
+  // Override (both Kirby and Ionic) styles for Radio in Item to keep same
+  // visual appearance as before
   // Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
-  // FIXME: Increase specificity without using `!important` by duplicating `.in-item` in selector
-  // TODO: Consider moving this solution (or parts of it) up to the loop in line ~23-33
-  &.in-item.in-item:not(.legacy-radio) {
+  &.in-item:not(.legacy-radio) {
     &::part(label) {
       padding-inline-start: 0;
 
@@ -129,22 +114,7 @@ ion-radio {
       // FIXME: If using text-property
       // margin-block: -1px -3px;
 
-      // FIXME: alternative to using negative margins:
-      //        Override padding-block (declared in line ~28) - This requires increased specifity!
-
-      // BEGIN temporary fix
-      // Preserve visual appearance using magic numbers and sorcery.
-      // This fix is a temporary solution. When we stop using Ionic it is no
-      // longer necessary.
-
-      $vertical-padding: get-vertical-padding($default-checkbox-radio-size);
-
-      // TODO: Make sure other sizes than default still work
-
-      padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
-
-      // Corresponds to: padding-block: 15px 13px;
-      // END temporary fix
+      // FIXME: Current solution: Override padding-block as alternative to using negative margins (see end of file)
     }
 
     &::part(label-text-wrapper) {
@@ -187,3 +157,23 @@ ion-radio {
     margin-inline-end: $spacing-to-label;
   }
 }
+
+// BEGIN "Migrating from Ionic legacy radio" fix
+// Preserve visual appearance using magic numbers and sorcery.
+// This fix is a temporary solution. When we stop using Ionic it is no
+// longer necessary.
+// When in a kirby-item the vertical padding needs to be different.
+// Because the containing kirby-item declares min-height it must have matching
+// value in its size attribute.
+// Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
+@each $size, $height in utils.$checkbox-radio-sizes {
+  :host(.has-label.#{$size}) {
+    ion-radio.in-item:not(.legacy-radio)::part(label) {
+      $vertical-padding: get-vertical-padding($height);
+
+      padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
+    }
+  }
+}
+
+// END "Migrating from Ionic legacy radio" fix
