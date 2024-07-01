@@ -3,6 +3,7 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+// TODO: Clean up - not all of these vars are used anymore
 $radio-icon-padding: utils.size('xxxxs');
 $radio-icon-size: utils.size('m');
 $radio-icon-mark-size: 60%;
@@ -37,10 +38,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
         // FIXME: Try to explain what is going on here
         // ion-radio.in-item:not(.legacy-radio)::part(label) {
         //   // TODO: Refactor: Move $vertical-padding declaration out of scope of this selector => reuse
-        //   $vertical-padding: get-vertical-padding($height);
+        // $vertical-padding: get-vertical-padding($height);
 
-        //   padding-block-start: calc(#{$vertical-padding} - 1px);
-        //   padding-block-end: calc(#{$vertical-padding} - 3px);
+        // padding-block-start: calc(#{$vertical-padding} - 1px);
+        // padding-block-end: calc(#{$vertical-padding} - 3px);
         // }
       }
     }
@@ -114,8 +115,10 @@ ion-radio {
     margin-inline: $spacing-to-label 0;
   }
 
-  // Override (both Kirby and Ionic) styles for Radio in Item
-  // FIXME: Increase specificity without reaching for `!important` by duplicating `.in-item` in selector
+  // Override (both Kirby and Ionic) styles for Radio in Item to keep same visual appearance as before
+  // Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
+  // FIXME: Increase specificity without using `!important` by duplicating `.in-item` in selector
+  // TODO: Consider moving this solution (or parts of it) up to the loop in line ~23-33
   &.in-item.in-item:not(.legacy-radio) {
     &::part(label) {
       padding-inline-start: 0;
@@ -126,11 +129,22 @@ ion-radio {
       // FIXME: If using text-property
       // margin-block: -1px -3px;
 
-      // FIXME: alternative: override padding-block (declared in line ~28) - This requires increased specifity!
-      // TODO: Make sure sizes still work
-      // TODO: Consider moving this solution up to the loop in line ~23-33
-      // TODO: Explain or fix using magic numbers
-      padding-block: 15px 13px; // avoid !important
+      // FIXME: alternative to using negative margins:
+      //        Override padding-block (declared in line ~28) - This requires increased specifity!
+
+      // BEGIN temporary fix
+      // Preserve visual appearance using magic numbers and sorcery.
+      // This fix is a temporary solution. When we stop using Ionic it is no
+      // longer necessary.
+
+      $vertical-padding: get-vertical-padding($default-checkbox-radio-size);
+
+      // TODO: Make sure other sizes than default still work
+
+      padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
+
+      // Corresponds to: padding-block: 15px 13px;
+      // END temporary fix
     }
 
     &::part(label-text-wrapper) {
