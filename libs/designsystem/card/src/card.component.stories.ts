@@ -15,7 +15,7 @@ export const Default: Story = {
     subtitle: '',
     backgroundImageUrl: '',
     hasPadding: false,
-    flat: false,
+    variant: 'elevated',
   },
   render: (args: CardComponent) => ({
     props: args,

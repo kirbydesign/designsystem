@@ -9,12 +9,17 @@ import {
 } from '@angular/core';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
+const KIRBY_CARD_FLAT_PROPERTY_DEPRECATION_WARNING =
+  'Deprecation warning: Setting the "flat" property of kirby-card is deprecated and will be removed from Kirby v10. Use variant="flat" instead for identical behavior.';
+
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit, OnDestroy {
+  private _flat: boolean = false;
+
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -45,9 +50,27 @@ export class CardComponent implements OnInit, OnDestroy {
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
 
-  @HostBinding('class.flat')
+  /**
+   * @deprecated Setting the flat property is no longer recommended, and can now be set with variant="flat" instead. The 'flat' property will be removed in Kirby v10.
+   */
   @Input()
-  flat: boolean = false;
+  set flat(isFlat: boolean) {
+    this._flat = isFlat;
+    console.warn(KIRBY_CARD_FLAT_PROPERTY_DEPRECATION_WARNING);
+  }
+
+  get flat(): boolean {
+    return this._flat;
+  }
+
+  @Input()
+  variant: 'elevated' | 'flat' | 'outlined' = 'elevated';
+
+  //TODO: remove "flat"-logic from below function in version 10.0
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.variant, this.flat ? 'flat' : ''].filter((cssClass) => !!cssClass);
+  }
 
   constructor(
     private elementRef: ElementRef,

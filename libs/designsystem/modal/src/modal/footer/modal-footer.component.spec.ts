@@ -4,6 +4,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 const { getColor, size } = DesignTokenHelper;
@@ -32,7 +33,7 @@ describe('ModalFooterComponent', () => {
   const createHost = createHostFactory({
     component: ModalFooterComponent,
     host: TestHostComponent,
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, ButtonComponent],
   });
 
   beforeEach(() => {});
@@ -192,6 +193,15 @@ describe('ModalFooterComponent', () => {
       spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'box-shadow': 'none',
+      });
+    });
+
+    it('should apply theming to buttons within the modal footer', () => {
+      spectator = createHost(
+        `<kirby-modal-footer type="inline"><button kirby-button attentionLevel="3">Click Me</button></kirby-modal-footer>`
+      );
+      expect(spectator.query('button')).toHaveComputedStyle({
+        'background-color': getColor('white'),
       });
     });
   });
