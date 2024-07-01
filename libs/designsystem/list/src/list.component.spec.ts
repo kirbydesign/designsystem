@@ -1,9 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as ionic from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-import { SpinnerModule } from 'spinner/src';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
