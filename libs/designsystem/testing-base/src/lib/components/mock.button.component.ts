@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { NotificationColor } from '@kirbydesign/core/dist/types/helpers';
+import { NotificationColor } from '@kirbydesign/core';
 
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 

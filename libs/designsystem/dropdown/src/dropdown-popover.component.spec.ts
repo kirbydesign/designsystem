@@ -18,7 +18,7 @@ import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem
 
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { TestHelper } from 'testing/src';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 
