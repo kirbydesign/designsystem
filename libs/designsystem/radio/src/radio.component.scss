@@ -3,13 +3,10 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-// TODO: Clean up - not all of these vars are used anymore
-$radio-icon-padding: utils.size('xxxxs');
 $radio-icon-size: utils.size('m');
 $radio-icon-mark-size: 60%;
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
-$default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 @function get-vertical-padding($target-height) {
   @return ($target-height - $radio-icon-size) * 0.5;
