@@ -4,7 +4,7 @@ import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
 
 const meta: Meta<ItemSlidingComponent> = {
   component: ItemSlidingComponent,
-  title: 'ItemSlidingComponent',
+  title: 'Components / Item / ItemSliding',
   decorators: [
     moduleMetadata({
       imports: [ItemModule],
@@ -14,7 +14,7 @@ const meta: Meta<ItemSlidingComponent> = {
 export default meta;
 type Story = StoryObj<ItemSlidingComponent>;
 
-export const Default: Story = {
+export const ItemSliding: Story = {
   args: {
     side: 'left',
     swipeActions: [

@@ -5,7 +5,7 @@ import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
 
 const meta: Meta<ToggleButtonComponent> = {
   component: ToggleButtonComponent,
-  title: 'ToggleButtonComponent',
+  title: 'Components / ToggleButton',
   decorators: [
     moduleMetadata({
       imports: [ButtonComponent],
@@ -15,7 +15,7 @@ const meta: Meta<ToggleButtonComponent> = {
 export default meta;
 type Story = StoryObj<ToggleButtonComponent>;
 
-export const Default: Story = {
+export const ToggleButton: Story = {
   args: {
     checked: false,
   },

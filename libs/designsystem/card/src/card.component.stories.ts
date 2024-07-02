@@ -4,7 +4,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 
 const meta: Meta<CardComponent> = {
   component: CardComponent,
-  title: 'CardComponent',
+  title: 'Components / Card',
 };
 export default meta;
 type Story = StoryObj<CardComponent>;

@@ -3,12 +3,12 @@ import { TextareaComponent } from '@kirbydesign/designsystem/form-field';
 
 const meta: Meta<TextareaComponent> = {
   component: TextareaComponent,
-  title: 'TextareaComponent',
+  title: 'Components / FormField / Standalone / Textarea',
 };
 export default meta;
 type Story = StoryObj<TextareaComponent>;
 
-export const Default: Story = {
+export const Textarea: Story = {
   args: {
     value: '',
     borderless: false,
