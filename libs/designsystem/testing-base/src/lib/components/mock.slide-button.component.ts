@@ -6,6 +6,8 @@ import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 @Component({
   selector: 'kirby-slide-button',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: SlideButtonComponent,

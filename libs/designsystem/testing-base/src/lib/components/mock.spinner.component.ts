@@ -6,6 +6,8 @@ import { SpinnerComponent } from '@kirbydesign/designsystem';
 @Component({
   selector: 'kirby-spinner',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: SpinnerComponent,

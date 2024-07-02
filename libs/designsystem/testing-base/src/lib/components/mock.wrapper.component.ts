@@ -6,6 +6,8 @@ import { Flavor, ModalV2WrapperComponent } from '@kirbydesign/designsystem/modal
 @Component({
   selector: 'kirby-modal-v2-wrapper',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: ModalV2WrapperComponent,

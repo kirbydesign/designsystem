@@ -32,6 +32,8 @@ export class MockHeaderCustomSectionDirective {}
 @Component({
   selector: 'kirby-header',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: HeaderComponent,

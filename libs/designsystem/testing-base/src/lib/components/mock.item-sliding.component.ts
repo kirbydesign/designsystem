@@ -6,6 +6,8 @@ import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from '@kirbyde
 @Component({
   selector: 'kirby-item-sliding',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: ItemSlidingComponent,
