@@ -101,20 +101,13 @@ ion-radio {
     margin-inline: $spacing-to-label 0;
   }
 
-  // Override (both Kirby and Ionic) styles for Radio in Item to keep same
-  // visual appearance as before
+  // BEGIN "Migrating from Ionic legacy radio" fix
   // Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
+  // Preserve visual appearance by overriding styles (both Kirby and Ionic) for
+  // Radio inside Item
   &.in-item:not(.legacy-radio) {
     &::part(label) {
       padding-inline-start: 0;
-
-      // FIXME: If using slotted content
-      // margin-block-start: utils.size('xxxs');
-
-      // FIXME: If using text-property
-      // margin-block: -1px -3px;
-
-      // FIXME: Current solution: Override padding-block as alternative to using negative margins (see end of file)
     }
 
     &::part(label-text-wrapper) {
@@ -122,6 +115,8 @@ ion-radio {
       margin-inline-start: utils.size('xxs');
     }
   }
+
+  // END "Migrating from Ionic legacy radio" fix
 
   :host-context(kirby-radio-group.error),
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
@@ -159,13 +154,13 @@ ion-radio {
 }
 
 // BEGIN "Migrating from Ionic legacy radio" fix
+// Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
 // Preserve visual appearance using magic numbers and sorcery.
 // This fix is a temporary solution. When we stop using Ionic it is no
 // longer necessary.
 // When in a kirby-item the vertical padding needs to be different.
 // Because the containing kirby-item declares min-height it must have matching
 // value in its size attribute.
-// Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
 @each $size, $height in utils.$checkbox-radio-sizes {
   :host(.has-label.#{$size}) {
     ion-radio.in-item:not(.legacy-radio)::part(label) {
