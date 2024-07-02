@@ -1,0 +1,40 @@
+{
+  "name": "angular",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/angular",
+  "prefix": "kirby",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "inputs": ["{projectRoot}/**", "!{projectRoot}/dist/**"],
+      "outputs": ["{projectRoot}/dist/**"],
+      "dependsOn": ["^build"],
+      "options": {
+        "project": "libs/angular/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/angular/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/angular/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf libs/core/dist libs/designsystem/dist libs/angular/dist",
+          "nx build core --watch",
+          "wait-on libs/core/dist/index.js && nx build designsystem --watch",
+          "wait-on libs/designsystem/dist/package.json && nx build angular --watch"
+        ],
+        "parallel": true
+      }
+    }
+  }
+}
