@@ -4,12 +4,12 @@ import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 
 const meta: Meta<CalendarComponent> = {
   component: CalendarComponent,
-  title: 'CalendarComponent',
+  title: 'Components / Calendar',
 };
 export default meta;
 type Story = StoryObj<CalendarComponent>;
 
-export const Default: Story = {
+export const Calendar: Story = {
   args: {
     timezone: 'local',
     disableWeekends: false,

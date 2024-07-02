@@ -3,12 +3,12 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const meta: Meta<ToggleComponent> = {
   component: ToggleComponent,
-  title: 'ToggleComponent',
+  title: 'Components / Toggle',
 };
 export default meta;
 type Story = StoryObj<ToggleComponent>;
 
-export const Default: Story = {
+export const Toggle: Story = {
   args: {
     checked: false,
     disabled: false,

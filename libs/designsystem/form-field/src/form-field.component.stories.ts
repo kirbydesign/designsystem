@@ -9,7 +9,7 @@ import {
 
 const meta: Meta<FormFieldComponent> = {
   component: FormFieldComponent,
-  title: 'FormFieldComponent',
+  title: 'Components / FormField',
   decorators: [
     moduleMetadata({
       imports: [FormFieldModule, InputComponent, TextareaComponent],

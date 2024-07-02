@@ -5,7 +5,7 @@ import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 
 const meta: Meta<TableSortableComponent> = {
   component: TableSortableComponent,
-  title: 'Data Table',
+  title: 'Components / Data Table',
   decorators: [
     moduleMetadata({
       imports: [IconModule],
@@ -15,7 +15,7 @@ const meta: Meta<TableSortableComponent> = {
 export default meta;
 type Story = StoryObj<TableSortableComponent>;
 
-export const Default: Story = {
+export const DataTable: Story = {
   args: {
     sortable: false,
     active: false,

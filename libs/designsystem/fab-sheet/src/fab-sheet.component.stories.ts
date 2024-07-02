@@ -6,7 +6,7 @@ import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 
 const meta: Meta<FabSheetComponent> = {
   component: FabSheetComponent,
-  title: 'FabSheetComponent',
+  title: 'Components / Fab Sheet',
   decorators: [
     moduleMetadata({
       imports: [ActionSheetComponent, IconModule],
@@ -16,7 +16,7 @@ const meta: Meta<FabSheetComponent> = {
 export default meta;
 type Story = StoryObj<FabSheetComponent>;
 
-export const Default: Story = {
+export const FabSheet: Story = {
   args: {
     disabled: false,
     horizontalAlignment: 'right',

@@ -9,7 +9,7 @@ import {
 
 const meta: Meta<TabNavigationComponent> = {
   component: TabNavigationComponent,
-  title: 'TabNavigationComponent',
+  title: 'Components / Page / Tab Navigation',
   decorators: [
     moduleMetadata({
       imports: [TabNavigationModule, IconModule, BadgeComponent],
@@ -19,7 +19,7 @@ const meta: Meta<TabNavigationComponent> = {
 export default meta;
 type Story = StoryObj<TabNavigationComponent>;
 
-export const Default: Story = {
+export const TabNavigation: Story = {
   args: {
     selectedIndex: 0,
   },

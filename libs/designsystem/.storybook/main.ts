@@ -7,6 +7,12 @@ const config: StorybookConfig = {
     name: '@storybook/angular',
     options: {},
   },
+  staticDirs: [
+    { from: '../icon/src/icons/svg', to: '/assets/kirby/icons/svg' },
+    { from: '../../../node_modules/ionicons/dist/ionicons/svg', to: '/svg' },
+    { from: '../../../apps/cookbook/src/assets/icons', to: '/assets/icons' },
+    { from: '../../../apps/cookbook/src/assets/images', to: '/assets/images' },
+  ],
 };
 
 export default config;

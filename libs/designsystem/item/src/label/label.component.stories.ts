@@ -4,12 +4,12 @@ import { LabelComponent } from '@kirbydesign/designsystem/item';
 
 const meta: Meta<LabelComponent> = {
   component: LabelComponent,
-  title: 'LabelComponent',
+  title: 'Components / Label',
 };
 export default meta;
 type Story = StoryObj<LabelComponent>;
 
-export const Default: Story = {
+export const Label: Story = {
   args: {
     direction: 'vertical',
   },
