@@ -4,11 +4,11 @@ import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 const meta: Meta<SpinnerComponent> = {
   component: SpinnerComponent,
-  title: 'SpinnerComponent',
+  title: 'Components / Spinner',
 };
 export default meta;
 type Story = StoryObj<SpinnerComponent>;
 
-export const Default: Story = {
+export const Spinner: Story = {
   args: {},
 };

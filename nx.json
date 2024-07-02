@@ -57,8 +57,7 @@
       "cache": true
     },
     "test": {
-      "cache": true,
-      "dependsOn": ["build", "^build"]
+      "cache": true
     },
     "e2e": {
       "cache": true

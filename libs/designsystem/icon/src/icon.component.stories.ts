@@ -3,7 +3,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const meta: Meta<IconComponent> = {
   component: IconComponent,
-  title: 'IconComponent',
+  title: 'Components / Icon',
   argTypes: {
     customName: {
       control: 'text',
@@ -13,7 +13,7 @@ const meta: Meta<IconComponent> = {
 export default meta;
 type Story = StoryObj<IconComponent>;
 
-export const Default: Story = {
+export const Icon: Story = {
   args: {
     name: '',
   },

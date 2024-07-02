@@ -5,7 +5,7 @@ import { MenuComponent } from '@kirbydesign/designsystem/menu';
 
 const meta: Meta<MenuComponent> = {
   component: MenuComponent,
-  title: 'MenuComponent',
+  title: 'Components / Menu',
   decorators: [
     moduleMetadata({
       imports: [ItemModule],
@@ -15,7 +15,7 @@ const meta: Meta<MenuComponent> = {
 export default meta;
 type Story = StoryObj<MenuComponent>;
 
-export const Default: Story = {
+export const Menu: Story = {
   args: {
     isDisabled: false,
     buttonSize: ButtonSize.MD,
