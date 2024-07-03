@@ -1,5 +1,5 @@
 <div class="avatar" [ngClass]="{ overlay: overlay, stroke: stroke }">
-  <img *ngIf="imageSrc" [src]="imageSrc" [attr.alt]="altText" />
+  <img *ngIf="imageSrc" [src]="imageSrc" [attr.alt]="altText" (error)="onImgError($event)" />
   <ng-content *ngIf="!text" select="kirby-icon"></ng-content>
   <span class="avatar-text" *ngIf="text">{{ text }}</span>
 </div>
