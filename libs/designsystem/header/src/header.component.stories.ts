@@ -1,15 +1,15 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { IconModule } from '@kirbydesign/designsystem/icon';
-import { HeaderComponent } from './header.component';
-import { HeaderModule } from './header.module';
+import { HeaderComponent, HeaderModule } from '@kirbydesign/designsystem/header';
+
+import { HeaderExampleModule } from '~/app/examples/header-example/header-example.module';
 
 const meta: Meta<HeaderComponent> = {
   component: HeaderComponent,
-  title: 'HeaderComponent',
+  title: 'Components / Header',
   decorators: [
     moduleMetadata({
-      imports: [HeaderModule, IconModule],
+      imports: [HeaderModule, HeaderExampleModule],
     }),
   ],
 };
@@ -28,4 +28,10 @@ export const Default: Story = {
     titleMaxLines: 0,
     emphasizeActions: false,
   },
+};
+
+export const CookbookExamples: Story = {
+  render: () => ({
+    template: `<cookbook-header-example></cookbook-header-example>`,
+  }),
 };

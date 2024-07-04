@@ -404,6 +404,20 @@ describe('ModalHelper', () => {
       TestHelper.resetTestWindow();
     });
 
+    describe('modal', () => {
+      it('should be full height', async () => {
+        await openModal(undefined, 'full-height');
+
+        const viewportHeight = `${document.body.clientHeight}px`;
+        const modalWrapper = ionModal.querySelector('kirby-modal-wrapper');
+
+        expect(ionModal).toHaveComputedStyle({ height: `${document.body.clientHeight}px` });
+        expect(modalWrapper).toHaveComputedStyle({
+          height: viewportHeight,
+        });
+      });
+    });
+
     describe('drawer', () => {
       it('should have correct value for padding top', async () => {
         await openDrawer();
@@ -413,7 +427,7 @@ describe('ModalHelper', () => {
         });
       });
 
-      it('drawer should add class `full-height`, if content can not fit in viewport', async () => {
+      it('should add class `full-height`, if content can not fit in viewport', async () => {
         await openDrawer(ContentOverflowsWithFooterEmbeddedComponent);
         await TestHelper.waitForResizeObserver();
 
@@ -425,6 +439,19 @@ describe('ModalHelper', () => {
 
         expect(ionModal).toHaveComputedStyle({
           '--min-height': DesignTokenHelper.drawerDefaultHeight,
+        });
+      });
+
+      describe('with size "full-height"', () => {
+        it('should grow to fill screen minus padding top', async () => {
+          const expectedPaddingTop = parseInt(size('m'));
+          const expectedHeight = `${document.body.clientHeight - expectedPaddingTop}px`;
+          await openDrawer(ContentOverflowsWithFooterEmbeddedComponent);
+          await TestHelper.waitForResizeObserver();
+
+          expect(ionModal.querySelector('kirby-modal-wrapper')).toHaveComputedStyle({
+            height: expectedHeight,
+          });
         });
       });
     });

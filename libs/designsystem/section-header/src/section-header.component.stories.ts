@@ -1,21 +1,21 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { LabelComponent } from '@kirbydesign/designsystem/item';
-import { SectionHeaderComponent } from './section-header.component';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 
 const meta: Meta<SectionHeaderComponent> = {
   component: SectionHeaderComponent,
-  title: 'SectionHeaderComponent',
+  title: 'Components / Section Header',
   decorators: [
     moduleMetadata({
-      declarations: [LabelComponent],
+      imports: [ItemModule],
     }),
   ],
 };
 export default meta;
 type Story = StoryObj<SectionHeaderComponent>;
 
-export const Default: Story = {
+export const SectionHeader: Story = {
   args: {},
   render: () => ({
     template: `<kirby-section-header>

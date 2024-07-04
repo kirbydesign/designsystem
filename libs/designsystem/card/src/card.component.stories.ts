@@ -1,10 +1,10 @@
 import { argsToTemplate, Meta, StoryObj } from '@storybook/angular';
 
-import { CardComponent } from './card.component';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
 const meta: Meta<CardComponent> = {
   component: CardComponent,
-  title: 'CardComponent',
+  title: 'Components / Card',
 };
 export default meta;
 type Story = StoryObj<CardComponent>;
@@ -15,7 +15,7 @@ export const Default: Story = {
     subtitle: '',
     backgroundImageUrl: '',
     hasPadding: false,
-    flat: false,
+    variant: 'elevated',
   },
   render: (args: CardComponent) => ({
     props: args,

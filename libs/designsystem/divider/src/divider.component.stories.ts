@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { DividerComponent } from './divider.component';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 
 const meta: Meta<DividerComponent> = {
   component: DividerComponent,
-  title: 'DividerComponent',
+  title: 'Components / Divider',
 };
 export default meta;
 type Story = StoryObj<DividerComponent>;
 
-export const Default: Story = {
+export const Divider: Story = {
   args: {
     hasMargin: false,
   },

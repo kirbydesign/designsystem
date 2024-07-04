@@ -1,8 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { FormFieldModule, InputComponent } from '@kirbydesign/designsystem/form-field';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
+import { ItemExampleComponent } from './item-example.component';
 import { ItemExampleSimpleComponent } from './examples/simple/default';
 import { ItemExampleLongTitleComponent } from './examples/simple/long-title';
 import { ItemExampleSimpleTwoLinesComponent } from './examples/simple/two-lines';
@@ -34,6 +44,7 @@ import { ItemExampleDisclosureComponent } from './examples/disclosure';
 import { ItemExampleDisclosureAnimationComponent } from './examples/disclosure-animation';
 
 const COMPONENT_DECLARATIONS = [
+  ItemExampleComponent,
   ItemExampleSimpleComponent,
   ItemExampleSimpleMediumComponent,
   ItemExampleSimpleSmallComponent,
@@ -66,7 +77,20 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
+  imports: [
+    CommonModule,
+    AvatarComponent,
+    BadgeComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    CardModule,
+    FlagComponent,
+    FormFieldModule,
+    IconModule,
+    InputComponent,
+    ItemModule,
+    ToggleComponent,
+  ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })

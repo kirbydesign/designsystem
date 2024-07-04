@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -19,8 +18,9 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
-import { first, fromEvent, takeUntil } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
+
+import { ModalNavigationService } from '../../modal-navigation.service';
 import {
   DrawerSupplementaryAction,
   ModalCompactWrapperComponent,
@@ -47,7 +47,7 @@ import { CanDismissHelper } from '../services';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent implements OnChanges, AfterContentInit {
+export class ModalComponent implements OnChanges {
   @ViewChild(IonModal, { static: true, read: ElementRef })
   modalElement: ElementRef<HTMLIonModalElement>;
   @ViewChild(IonContent) ionContent: IonContent;
@@ -91,11 +91,11 @@ export class ModalComponent implements OnChanges, AfterContentInit {
 
   _canDismiss: ShowAlertCallback | boolean = true;
 
-  constructor(private canDismissHelper: CanDismissHelper, private windowRef: WindowRef) {}
-
-  ngAfterContentInit(): void {
-    this.handleBrowserBackButton(this.modalElement.nativeElement);
-  }
+  constructor(
+    private canDismissHelper: CanDismissHelper,
+    private modalNavigationService: ModalNavigationService,
+    private windowRef: WindowRef
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updateModalConfigOnChange(changes);
@@ -118,6 +118,7 @@ export class ModalComponent implements OnChanges, AfterContentInit {
   }
 
   public _onDidPresent(event: CustomEvent<OverlayEventDetail>) {
+    this.modalNavigationService.handleBrowserBackButton(this.modalElement.nativeElement);
     this.didPresent.emit(event);
   }
 
@@ -131,15 +132,6 @@ export class ModalComponent implements OnChanges, AfterContentInit {
 
   public _onDidDismiss(event: CustomEvent<OverlayEventDetail>) {
     this.didDismiss.emit(event);
-  }
-
-  private handleBrowserBackButton(modal: HTMLIonModalElement) {
-    const popStateEvent$ = fromEvent(this.windowRef.nativeWindow, 'popstate').pipe(first());
-    const modalClose$ = fromEvent(modal, 'ionModalDidDismiss');
-
-    popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
-      modal.dismiss();
-    });
   }
 
   private updateModalConfigOnChange(changes: SimpleChanges) {

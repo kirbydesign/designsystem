@@ -1,15 +1,15 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
 
-import { CheckboxComponent } from './checkbox.component';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,
-  title: 'CheckboxComponent',
+  title: 'Components / Checkbox',
 };
 export default meta;
 type Story = StoryObj<CheckboxComponent>;
 
-export const Default: Story = {
+export const Checkbox: Story = {
   args: {
     checked: false,
     attentionLevel: '2',
@@ -17,5 +17,15 @@ export const Default: Story = {
     size: 'md',
     hasError: false,
     disabled: false,
+  },
+  argTypes: {
+    attentionLevel: {
+      options: ['1', '2'],
+      control: { type: 'radio' },
+    },
+    size: {
+      options: ['xs', 'sm', 'md'],
+      control: { type: 'radio' },
+    },
   },
 };

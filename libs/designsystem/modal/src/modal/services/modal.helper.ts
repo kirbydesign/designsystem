@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { first, fromEvent, takeUntil } from 'rxjs';
-import { Overlay } from '../../modal.interfaces';
 
+import { Overlay } from '../../modal.interfaces';
+import { ModalNavigationService } from '../../modal-navigation.service';
 import {
   ModalCompactWrapperComponent,
   ModalConfig,
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
-
 import { AlertConfig } from '../alert/config/alert-config';
+
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 import { CanDismissHelper } from './can-dismiss.helper';
-import { AlertHelper } from './alert.helper';
 
 @Injectable()
 export class ModalHelper {
   constructor(
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
+    private modalNavigationService: ModalNavigationService,
     private windowRef: WindowRef,
-    private canDismissHelper: CanDismissHelper,
-    private alertHelper: AlertHelper
+    private canDismissHelper: CanDismissHelper
   ) {}
 
   /* 
@@ -120,6 +119,19 @@ export class ModalHelper {
       ionModal.style.setProperty('--kirby-modal-height', config.customHeight);
     }
 
+    const onWillDismiss = ionModal.onWillDismiss();
+
+    const overlay: Overlay = {
+      dismiss: ionModal.dismiss.bind(ionModal),
+      onWillDismiss,
+      onDidDismiss: ionModal.onDidDismiss(),
+      isDismissing: false,
+    };
+
+    onWillDismiss.then(() => {
+      overlay.isDismissing = true;
+    });
+
     await ionModal.present();
 
     /**
@@ -134,25 +146,12 @@ export class ModalHelper {
 
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
-    if (!config.modalRoute && !config.canDismiss && !alertConfig) {
-      this.handleBrowserBackButton(ionModal);
+    if (!config.modalRoute) {
+      this.modalNavigationService.handleBrowserBackButton(ionModal);
     }
 
     this.isModalOpening = false;
 
-    return {
-      dismiss: ionModal.dismiss.bind(ionModal),
-      onWillDismiss: ionModal.onWillDismiss(),
-      onDidDismiss: ionModal.onDidDismiss(),
-    };
-  }
-
-  private handleBrowserBackButton(modal: HTMLIonModalElement) {
-    const popStateEvent$ = fromEvent(this.windowRef.nativeWindow, 'popstate').pipe(first());
-    const modalClose$ = fromEvent(modal, 'ionModalDidDismiss');
-
-    popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
-      modal.dismiss();
-    });
+    return overlay;
   }
 }

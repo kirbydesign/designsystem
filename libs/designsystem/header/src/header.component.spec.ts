@@ -3,11 +3,11 @@ import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { FlagComponent } from 'flag/src';
-import { AvatarComponent } from 'avatar/src';
-import { IconModule } from 'icon/src';
-import { ProgressCircleComponent } from 'progress-circle/src';
-import { ActionGroupComponent } from 'action-group/src';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
+import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { HeaderModule } from './header.module';
 import { HeaderComponent } from './header.component';
 

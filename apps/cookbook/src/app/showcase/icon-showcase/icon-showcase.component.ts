@@ -50,7 +50,7 @@ export class IconShowcaseComponent {
     },
     {
       name: 'customName',
-      description: 'Used for custom icons.',
+      description: 'Deprecated: Use IconRegistryService and the name input property instead.',
       defaultValue: 'null',
       type: ['string'],
     },

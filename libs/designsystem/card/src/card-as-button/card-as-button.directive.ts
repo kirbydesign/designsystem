@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, HostListener, OnInit, Optional } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Optional } from '@angular/core';
 
 import { CardComponent } from '../card.component';
 
@@ -6,18 +6,12 @@ import { CardComponent } from '../card.component';
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'kirby-card[click]',
 })
-export class CardAsButtonDirective implements OnInit {
+export class CardAsButtonDirective {
   @HostBinding('attr.role') role: string = 'button';
   @HostBinding('attr.tabindex') tabindex: number = 0;
 
   @HostBinding('class.interaction-state-active') _pressed = false;
   constructor(@Optional() private card: CardComponent, private clickableElement: ElementRef) {}
-
-  ngOnInit(): void {
-    if (this.card) {
-      this.card.flat = false;
-    }
-  }
 
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])

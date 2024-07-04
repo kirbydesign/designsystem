@@ -1,15 +1,15 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
 
-import { RangeComponent } from './range.component';
+import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const meta: Meta<RangeComponent> = {
   component: RangeComponent,
-  title: 'RangeComponent',
+  title: 'Components / Range',
 };
 export default meta;
 type Story = StoryObj<RangeComponent>;
 
-export const Default: Story = {
+export const Range: Story = {
   args: {
     value: 0,
     step: 1,

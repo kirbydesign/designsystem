@@ -1,15 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-
-import { LoadingOverlayComponent } from './loading-overlay.component';
+import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 
 const meta: Meta<LoadingOverlayComponent> = {
   component: LoadingOverlayComponent,
-  title: 'LoadingOverlayComponent',
+  title: 'Components / Loading Overlay',
 };
 export default meta;
 type Story = StoryObj<LoadingOverlayComponent>;
 
-export const Default: Story = {
+export const LoadingOverlay: Story = {
   args: {
     isLoading: true,
     showBackdrop: true,

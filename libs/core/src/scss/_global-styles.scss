@@ -116,6 +116,10 @@ ion-modal.kirby-overlay {
         @include bottom-drawer;
 
         --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
+
+        &.kirby-modal-full-height {
+          --height: 100%;
+        }
       }
 
       &.interact-with-background {

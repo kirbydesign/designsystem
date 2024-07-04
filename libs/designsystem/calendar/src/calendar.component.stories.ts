@@ -1,15 +1,15 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
 
-import { CalendarComponent } from './calendar.component';
+import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 
 const meta: Meta<CalendarComponent> = {
   component: CalendarComponent,
-  title: 'CalendarComponent',
+  title: 'Components / Calendar',
 };
 export default meta;
 type Story = StoryObj<CalendarComponent>;
 
-export const Default: Story = {
+export const Calendar: Story = {
   args: {
     timezone: 'local',
     disableWeekends: false,
@@ -18,9 +18,9 @@ export const Default: Story = {
     alwaysEnableToday: false,
     customLocales: {},
     usePopover: false,
-    selectedDate: null,
+    selectedDate: new Date(2024, 0, 1),
     disabledDates: [],
     enabledDates: [],
-    todayDate: new Date(2024, 0, 1),
+    todayDate: new Date(2024, 0, 2),
   },
 };

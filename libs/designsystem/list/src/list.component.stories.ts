@@ -1,12 +1,11 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { ListComponent } from './list.component';
-import { ListModule } from './list.module';
+import { ListComponent, ListModule } from '@kirbydesign/designsystem/list';
 
 const meta: Meta<ListComponent> = {
   component: ListComponent,
-  title: 'ListComponent',
+  title: 'Components / List',
   decorators: [
     moduleMetadata({
       imports: [ItemModule, ListModule],
@@ -16,7 +15,7 @@ const meta: Meta<ListComponent> = {
 export default meta;
 type Story = StoryObj<ListComponent>;
 
-export const Default: Story = {
+export const List: Story = {
   args: {
     items: [
       {

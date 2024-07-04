@@ -226,7 +226,7 @@
 @mixin trailing-icon($svg: 'link') {
   $icon-scaling-factor: 1.5em;
 
-  @if str-index($svg, 'http') {
+  @if string.index($svg, 'http') {
     // External icon
     background-image: url('#{$svg}');
   } @else {

@@ -1,10 +1,9 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
-
-import { ReorderListComponent } from './reorder-list.component';
+import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 const meta: Meta<ReorderListComponent> = {
   component: ReorderListComponent,
-  title: 'ReorderListComponent',
+  title: 'Components / Reorder List',
 };
 export default meta;
 type Story = StoryObj<ReorderListComponent>;
@@ -66,7 +65,7 @@ const items = [
   },
 ];
 
-export const Default: Story = {
+export const ReorderList: Story = {
   args: {
     subItemsName: 'shadowAccounts',
     items,

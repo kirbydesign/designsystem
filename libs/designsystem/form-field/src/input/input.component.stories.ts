@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { InputComponent, InputSize } from './input.component';
+import { InputComponent, InputSize } from '@kirbydesign/designsystem/form-field';
 
 type InputProps = InputComponent & { placeholder?: string };
 
 const meta: Meta<InputComponent> = {
   component: InputComponent,
-  title: 'InputComponent',
+  title: 'Components / FormField / Standalone /Input',
   argTypes: {
     maxlength: {
       control: {
@@ -18,7 +18,7 @@ const meta: Meta<InputComponent> = {
 export default meta;
 type Story = StoryObj<InputProps>;
 
-export const Default: Story = {
+export const Input: Story = {
   args: {
     type: '',
     size: InputSize.large,

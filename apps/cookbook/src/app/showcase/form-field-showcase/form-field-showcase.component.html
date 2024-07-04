@@ -56,6 +56,12 @@
 </cookbook-example-viewer>
 
 <h3>Numeric</h3>
+<p>
+  The numeric input includes built in validation for rejecting non-numerical user input. As an example, Chrome completely restricts the
+  user to only enter numbers while Safari og Firefox allows the user to enter any character, but
+  will validate before the form is submitted.
+</p>
+<p>When using a numeric field from a device, it will show the numeric keyboard to the user.</p>
 <cookbook-example-viewer [html]="inputNumericExample.template">
   <cookbook-form-field-input-numeric-example
     [size]="size"

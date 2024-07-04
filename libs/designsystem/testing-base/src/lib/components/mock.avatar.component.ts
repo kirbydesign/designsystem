@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { BrandColor, NotificationColor } from '@kirbydesign/core/dist/types/helpers';
+import { BrandColor, NotificationColor } from '@kirbydesign/core';
 
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 

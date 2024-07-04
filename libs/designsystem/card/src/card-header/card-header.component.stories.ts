@@ -1,7 +1,6 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { IconModule } from '@kirbydesign/designsystem/icon';
-import { CardComponent } from '../card.component';
-import { CardHeaderComponent } from './card-header.component';
+
+import { CardHeaderComponent, CardModule } from '@kirbydesign/designsystem/card';
 
 const cardContent = `<p>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -10,11 +9,10 @@ const cardContent = `<p>
 
 const meta: Meta<CardHeaderComponent> = {
   component: CardHeaderComponent,
-  title: 'CardHeaderComponent',
+  title: 'Components / Card / Card Header',
   decorators: [
     moduleMetadata({
-      imports: [IconModule],
-      declarations: [CardComponent],
+      imports: [CardModule],
     }),
   ],
 };

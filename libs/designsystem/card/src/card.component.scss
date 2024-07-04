@@ -2,6 +2,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
+$default-border-outline: 1px solid utils.get-color('medium');
+
 :host {
   --kirby-card-main-background-color: #{utils.get-color('white')};
   --kirby-card-main-color: #{utils.get-color('white-contrast')};
@@ -37,6 +39,7 @@
   background-repeat: var(--kirby-card-background-repeat, no-repeat);
   background-position: var(--kirby-card-background-position, center);
   background-size: var(--kirby-card-background-size, cover);
+  border: var(--kirby-card-border, none);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -45,16 +48,26 @@
   z-index: utils.z('default');
   width: var(--kirby-card-width, auto);
 
-  .content-wrapper {
-    &.padding {
-      padding-top: var(--kirby-card-padding-top, utils.size('s'));
-      padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
-      padding-inline: utils.size('s');
-    }
-  }
-
   &.flat {
     box-shadow: none;
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border: var(--kirby-card-border, $default-border-outline);
+    box-shadow: none;
+
+    &:has(kirby-card-header.flagged) {
+      border: none;
+
+      .content-wrapper {
+        border-block-end: var(--kirby-card-border, $default-border-outline);
+        border-inline-start: var(--kirby-card-border, $default-border-outline);
+        border-inline-end: var(--kirby-card-border, $default-border-outline);
+        border-bottom-left-radius: utils.$border-radius;
+        border-bottom-right-radius: utils.$border-radius;
+      }
+    }
   }
 
   &[role='button'] {
@@ -67,8 +80,20 @@
   }
 }
 
+.content-wrapper {
+  &.padding {
+    padding-top: var(--kirby-card-padding-top, utils.size('s'));
+    padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
+    padding-inline: utils.size('s');
+  }
+}
+
+.content-layer {
+  height: 100%;
+}
+
 @each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}) {
+  :host(.#{$color-name}):not(.outlined) {
     --kirby-card-main-background-color: #{utils.get-color($color-name)};
     --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
   }

@@ -2,10 +2,12 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { argsToTemplate } from '@storybook/angular';
 
-import { ChartDataLabelOptions } from '@kirbydesign/designsystem/chart';
+import {
+  ChartConfigService,
+  ChartDataLabelOptions,
+  StockChartComponent,
+} from '@kirbydesign/designsystem/chart';
 import { ColorHelper } from '@kirbydesign/designsystem/helpers';
-import { ChartConfigService } from '../shared/chart-config-service/chart-config.service';
-import { StockChartComponent } from './stock-chart.component';
 
 const { getThemeColorHexString } = ColorHelper;
 
@@ -46,7 +48,7 @@ const _datasets = [
 
 const meta: Meta<StockChartComponent> = {
   component: StockChartComponent,
-  title: 'StockChartComponent',
+  title: 'Components / Chart / Stock Chart',
   decorators: [
     moduleMetadata({
       providers: [ChartConfigService],
@@ -60,7 +62,7 @@ const meta: Meta<StockChartComponent> = {
 export default meta;
 type Story = StoryObj<StockChartComponent>;
 
-export const Default: Story = {
+export const StockChart: Story = {
   args: {
     data: _datasets,
     dataLabelOptions: chartDataLabelOptions,

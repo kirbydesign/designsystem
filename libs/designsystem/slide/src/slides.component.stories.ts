@@ -1,12 +1,11 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { SlidesComponent } from './slides.component';
-import { SlideModule } from './slide.module';
+import { SlideModule, SlidesComponent } from '@kirbydesign/designsystem/slide';
 
 const meta: Meta<SlidesComponent> = {
   component: SlidesComponent,
-  title: 'SlidesComponent',
+  title: 'Components / Slides',
   decorators: [
     moduleMetadata({
       imports: [SlideModule, CardModule],
@@ -16,7 +15,7 @@ const meta: Meta<SlidesComponent> = {
 export default meta;
 type Story = StoryObj<SlidesComponent>;
 
-export const Default: Story = {
+export const Slides: Story = {
   args: {
     title: 'Title',
     showNavigation: true,

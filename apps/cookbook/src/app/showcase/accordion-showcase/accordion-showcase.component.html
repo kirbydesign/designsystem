@@ -7,12 +7,13 @@
   <p>
     <em>
       <strong>Note:</strong>
-      For now, Accordion uses Angular animations. As no other components use the package it is not
-      bundled with Kirby for performance reasons. As a result it is necessary to have
-      <code>&#64;angular/platform-browser</code>
-      installed and import
-      <code>BrowserAnimationsModule</code>
-      yourself when using the accordion.
+      Accordion uses Angular animations for animating between its collapsed and expanded state. As
+      no other components depend on the package it is not bundled with Kirby for performance reasons
+      and should instead be provided in the application as detailed in the Angular docs for
+      <a href="https://angular.dev/guide/animations#enabling-the-animations-module">
+        enabling the animations module
+      </a>
+      .
     </em>
   </p>
   <cookbook-example-viewer [html]="accordionDefaultExample.template">

@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/core",
-  "version": "0.0.60",
+  "version": "0.0.61",
   "description": "Core styles and helpers for the Kirby Design System.",
   "type": "module",
   "main": "dist/index.js",
@@ -8,8 +8,7 @@
   "types": "dist/types/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "serve": "tsc --watch"
+    "build": "tsc"
   },
   "devDependencies": {
     "@repo/eslint-config": "*"

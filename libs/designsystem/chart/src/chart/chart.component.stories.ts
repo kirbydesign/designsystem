@@ -2,12 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/angular';
 
 import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 
-import { ChartConfigService } from '../shared/chart-config-service/chart-config.service';
-import { ChartComponent } from './chart.component';
+import { ChartComponent, ChartConfigService } from '@kirbydesign/designsystem/chart';
 
 const meta: Meta<ChartComponent> = {
   component: ChartComponent,
-  title: 'ChartComponent',
+  title: 'Components / Chart',
   decorators: [
     moduleMetadata({
       providers: [ChartConfigService],
@@ -25,5 +24,11 @@ export const Default: Story = {
   args: {
     type: 'column',
     data: [50, 200, 83, 102],
+  },
+  argTypes: {
+    type: {
+      options: ['line', 'column', 'bar'],
+      control: { type: 'radio' },
+    },
   },
 };
