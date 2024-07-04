@@ -1,4 +1,5 @@
 {
+  "name": "kirbydesign",
   "private": true,
   "engines": {
     "node": "20",
