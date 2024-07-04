@@ -7,6 +7,8 @@ import { TableComponent } from '@kirbydesign/designsystem/data-table';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'table[kirby-table]',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: TableComponent,
