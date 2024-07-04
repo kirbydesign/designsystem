@@ -98,8 +98,8 @@ ion-radio {
     margin-inline: $spacing-to-label 0;
   }
 
-  // BEGIN "Migrating from Ionic legacy radio" fix
-  // Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
+  // BEGIN "Refactor `Radio` to comply with `ion-radio`" fix
+  // https://github.com/kirbydesign/designsystem/issues/3479
   // Preserve visual appearance by overriding styles (both Kirby and Ionic) for
   // Radio inside Item
   &.in-item:not(.legacy-radio) {
@@ -113,7 +113,7 @@ ion-radio {
     }
   }
 
-  // END "Migrating from Ionic legacy radio" fix
+  // END "Refactor `Radio` to comply with `ion-radio`" fix
 
   :host-context(kirby-radio-group.error),
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
@@ -150,8 +150,8 @@ ion-radio {
   }
 }
 
-// BEGIN "Migrating from Ionic legacy radio" fix
-// Also see https://ionicframework.com/docs/api/radio#migrating-from-legacy-radio-syntax
+// BEGIN "Refactor `Radio` to comply with `ion-radio`" fix
+// https://github.com/kirbydesign/designsystem/issues/3479
 // Preserve visual appearance using magic numbers and sorcery.
 // This fix is a temporary solution. When we stop using Ionic it is no
 // longer necessary.
@@ -168,4 +168,4 @@ ion-radio {
   }
 }
 
-// END "Migrating from Ionic legacy radio" fix
+// END "Refactor `Radio` to comply with `ion-radio`" fix
