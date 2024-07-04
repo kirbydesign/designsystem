@@ -6,6 +6,8 @@ import { CardFooterComponent } from '@kirbydesign/designsystem/card';
 @Component({
   selector: 'kirby-card-footer',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: CardFooterComponent,

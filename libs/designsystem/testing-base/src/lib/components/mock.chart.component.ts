@@ -10,6 +10,8 @@ import { MockBaseChartComponent } from './mock.base-chart.component';
 @Component({
   selector: 'kirby-chart',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: ChartComponent,

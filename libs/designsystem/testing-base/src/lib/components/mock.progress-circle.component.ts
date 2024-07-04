@@ -6,6 +6,8 @@ import { ProgressCircleComponent } from '@kirbydesign/designsystem';
 @Component({
   selector: 'kirby-progress-circle',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: ProgressCircleComponent,
