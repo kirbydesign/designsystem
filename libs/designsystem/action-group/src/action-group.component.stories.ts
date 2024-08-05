@@ -7,7 +7,7 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 
 const meta: Meta<ActionGroupComponent> = {
   component: ActionGroupComponent,
-  title: 'ActionGroupComponent',
+  title: 'Components / Header / ActionGroup',
   decorators: [
     moduleMetadata({
       imports: [ButtonComponent, IconModule],
@@ -17,10 +17,16 @@ const meta: Meta<ActionGroupComponent> = {
 export default meta;
 type Story = StoryObj<ActionGroupComponent>;
 
-export const Default: Story = {
+export const ActionGroup: Story = {
   args: {
     visibleActions: 2,
     align: 'end',
+  },
+  argTypes: {
+    align: {
+      options: ['start', 'end'],
+      control: { type: 'radio' },
+    },
   },
   render: (args: ActionGroupComponent) => ({
     props: args,

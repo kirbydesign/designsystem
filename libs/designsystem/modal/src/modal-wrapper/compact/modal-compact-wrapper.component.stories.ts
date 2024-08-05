@@ -20,7 +20,7 @@ export class VrtEmbeddedModalExampleComponent {}
 
 const meta: Meta<ModalCompactWrapperComponent> = {
   component: ModalCompactWrapperComponent,
-  title: 'ModalCompactWrapperComponent',
+  title: 'Components / Modal / ModalCompactWrapper',
   decorators: [
     moduleMetadata({
       providers: [CanDismissHelper, AlertHelper],
@@ -30,7 +30,7 @@ const meta: Meta<ModalCompactWrapperComponent> = {
 export default meta;
 type Story = StoryObj<ModalCompactWrapperComponent>;
 
-export const Default: Story = {
+export const ModalCompactWrapper: Story = {
   args: {
     config: {
       component: VrtEmbeddedModalExampleComponent,

@@ -6,6 +6,8 @@ import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 @Component({
   selector: 'kirby-modal-footer',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: ModalFooterComponent,

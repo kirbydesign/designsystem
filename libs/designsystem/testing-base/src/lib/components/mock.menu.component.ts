@@ -9,6 +9,8 @@ import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shar
 @Component({
   selector: 'kirby-menu',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: MenuComponent,

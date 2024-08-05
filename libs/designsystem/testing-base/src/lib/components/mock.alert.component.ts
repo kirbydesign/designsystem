@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/internal/Observable';
 @Component({
   selector: 'kirby-alert',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: AlertComponent,
