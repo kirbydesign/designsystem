@@ -614,6 +614,9 @@ export class PageComponent
     this.hasPageSubtitle = this.subtitle !== undefined || !!this.customSubtitleTemplate;
     if (this.header?.title && !this.toolbarTitle) {
       this.toolbarTitle = this.header.title;
+      this.header.title$.pipe(takeUntil(this.ngOnDestroy$)).subscribe((title) => {
+        this.toolbarTitle = title;
+      });
     }
 
     this.observeTitle();
