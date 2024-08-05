@@ -110,6 +110,7 @@ ion-radio {
     &::part(label-text-wrapper) {
       margin-block: 0;
       margin-inline-start: utils.size('xxs');
+      line-height: 1.4;
     }
   }
 
