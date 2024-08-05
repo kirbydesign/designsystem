@@ -14,6 +14,8 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 @Component({
   selector: 'kirby-base-chart',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: BaseChartComponent,

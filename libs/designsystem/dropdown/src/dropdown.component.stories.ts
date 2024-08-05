@@ -3,7 +3,7 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
-  title: 'DropdownComponent',
+  title: 'Components / Dropdown',
   decorators: [
     moduleMetadata({
       imports: [DropdownModule],
@@ -25,7 +25,7 @@ const meta: Meta<DropdownComponent> = {
 export default meta;
 type Story = StoryObj<DropdownComponent>;
 
-export const Default: Story = {
+export const Dropdown: Story = {
   args: {
     items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
     placeholder: 'Please select:',
@@ -34,7 +34,30 @@ export const Default: Story = {
     disabled: false,
     hasError: false,
     size: 'md',
+    selectedIndex: -1,
     tabindex: 0,
     usePopover: false,
+  },
+  argTypes: {
+    attentionLevel: {
+      options: ['1', '2', '3'],
+      control: { type: 'radio' },
+    },
+    size: {
+      options: ['sm', 'md'],
+      control: { type: 'radio' },
+    },
+    expand: {
+      options: [undefined, 'block'],
+      control: { type: 'radio' },
+    },
+    focusedIndex: {
+      table: {
+        disable: true,
+      },
+    },
+    selectedIndex: {
+      control: { type: 'number' },
+    },
   },
 };

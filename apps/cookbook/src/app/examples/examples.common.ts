@@ -1,7 +1,6 @@
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
-import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
@@ -15,7 +14,6 @@ import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
-import { ItemExampleComponent } from './item-example/item-example.component';
 import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
@@ -37,7 +35,6 @@ import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-t
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
-import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
 import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
@@ -67,10 +64,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListSwipeExampleComponent,
   ListNoShapeExampleComponent,
   GridExampleComponent,
-  AvatarExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
-  SegmentedControlExampleComponent,
   IconExampleComponent,
   CalendarExampleComponent,
   CalendarCardExampleComponent,
@@ -100,7 +95,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   TabsExampleComponent,
   TabExampleComponent,
   TabExampleMenuComponent,
-  ItemExampleComponent,
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,

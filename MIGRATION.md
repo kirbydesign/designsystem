@@ -2,6 +2,17 @@
 
 This document provides information about breaking changes and their migrations for major versions of Kirby Design System.
 
+## Version 10.0.0
+
+- [Components](#components-v10)
+  - [Card](#card-v10)
+
+<h3 id="components-v10">Components</h3>
+
+<h4 id="card-v10">Card</h4>
+
+The `flat` property has been removed and all usages of this property must be replaced with the new `variant` property for identical behavior by inserting `variant="flat"` instead.
+
 ## Version 9.0.0
 
 - [Components](#components-v9)

@@ -6,6 +6,8 @@ import { CheckboxComponent } from '@kirbydesign/designsystem';
 @Component({
   selector: 'kirby-checkbox',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: CheckboxComponent,

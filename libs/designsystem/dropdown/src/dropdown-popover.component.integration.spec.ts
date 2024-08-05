@@ -15,7 +15,7 @@ import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
 
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { TestHelper } from 'testing/src';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DropdownComponent } from './dropdown.component';
 
 @Component({
