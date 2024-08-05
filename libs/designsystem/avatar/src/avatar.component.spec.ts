@@ -51,7 +51,7 @@ describe('AvatarComponent', () => {
     spectator = createHost(`
       <kirby-avatar imageSrc="failingSrc.png"></kirby-avatar>
     `);
-    spyOn(spectator.component.imgError, 'emit');
+    spyOn(spectator.component.imageError, 'emit');
 
     let errorEvent: ErrorEvent;
     const img = spectator.query<HTMLImageElement>('img');
@@ -63,7 +63,7 @@ describe('AvatarComponent', () => {
     });
     await waitForImageError;
 
-    expect(spectator.component.imgError.emit).toHaveBeenCalledOnceWith(errorEvent);
+    expect(spectator.component.imageError.emit).toHaveBeenCalledOnceWith(errorEvent);
   });
 
   describe('when rendering Avatar within Progress Circle', () => {

@@ -35,14 +35,14 @@ export class AvatarComponent {
   @Input()
   themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
   @Output()
-  imgError: EventEmitter<ErrorEvent> = new EventEmitter();
+  imageError: EventEmitter<ErrorEvent> = new EventEmitter();
 
   @HostBinding('class')
   get _cssClass() {
     return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
   }
 
-  onImgError($event: ErrorEvent) {
-    this.imgError.emit($event);
+  onImageError($event: ErrorEvent) {
+    this.imageError.emit($event);
   }
 }
