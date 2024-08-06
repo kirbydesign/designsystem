@@ -17,12 +17,26 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
   @each $size, $height in utils.$checkbox-radio-sizes {
     &.#{$size} {
-      ion-radio::part(label) {
-        $vertical-padding: get-vertical-padding($height);
+      $vertical-padding: get-vertical-padding($height);
 
+      ion-radio::part(label) {
         padding-top: $vertical-padding;
         padding-bottom: $vertical-padding;
       }
+
+      // BEGIN "Refactor `Radio` to comply with `ion-radio`" fix
+      // https://github.com/kirbydesign/designsystem/issues/3479
+      // Preserve visual appearance using magic numbers and sorcery.
+      // This fix is a temporary solution.
+      // When we stop using Ionic it is no longer necessary.
+      // <kirby-radio> inside <kirby-item> needs different vertical padding.
+      // The containing <kirby-item> declares min-height
+      // so <kirby-radio> must use the same value in its size attribute.
+      ion-radio.in-item:not(.legacy-radio)::part(label) {
+        padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
+      }
+
+      // END "Refactor `Radio` to comply with `ion-radio`" fix
     }
   }
 
@@ -97,7 +111,7 @@ ion-radio {
   // BEGIN "Refactor `Radio` to comply with `ion-radio`" fix
   // https://github.com/kirbydesign/designsystem/issues/3479
   // Preserve visual appearance by overriding styles (both Kirby and Ionic) for
-  // Radio inside Item
+  // <kirby-radio> inside <kirby-item>
   &.in-item:not(.legacy-radio) {
     &::part(label) {
       padding-inline-start: 0;
@@ -139,7 +153,7 @@ ion-radio {
 
 :host-context(kirby-item) {
   z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
-  width: 100%; // Gain focus on click
+  width: 100%;
 
   ion-radio {
     margin: 0; // Reset Ionic in-item margins
@@ -149,23 +163,3 @@ ion-radio {
     margin-inline-end: $spacing-to-label;
   }
 }
-
-// BEGIN "Refactor `Radio` to comply with `ion-radio`" fix
-// https://github.com/kirbydesign/designsystem/issues/3479
-// Preserve visual appearance using magic numbers and sorcery.
-// This fix is a temporary solution. When we stop using Ionic it is no
-// longer necessary.
-// When in a kirby-item the vertical padding needs to be different.
-// Because the containing kirby-item declares min-height it must have matching
-// value in its size attribute.
-@each $size, $height in utils.$checkbox-radio-sizes {
-  :host(.#{$size}) {
-    ion-radio.in-item:not(.legacy-radio)::part(label) {
-      $vertical-padding: get-vertical-padding($height);
-
-      padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
-    }
-  }
-}
-
-// END "Refactor `Radio` to comply with `ion-radio`" fix
