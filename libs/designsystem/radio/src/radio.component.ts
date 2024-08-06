@@ -24,7 +24,6 @@ export class RadioComponent implements AfterViewInit {
   @Input()
   value: any;
 
-  @HostBinding('class.has-label')
   @Input()
   text: string;
 
