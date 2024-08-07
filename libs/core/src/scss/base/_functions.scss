@@ -234,7 +234,7 @@
     $icon-url: 'assets/kirby/icons/svg/#{$svg}.svg';
 
     background-image: url('/#{$icon-url}'); // setting this as a fallback for older browsers that don't support "image-set()"
-    background-image: image-set('#{icon-url}');
+    background-image: image-set('#{$icon-url}');
   }
 
   white-space: nowrap;
