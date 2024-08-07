@@ -26,12 +26,3 @@ export class KirbyBadge extends LitElement {
     `;
   }
 }
-
-// TODO: When/where should we define customElements?
-// customElements.define('kirby-badge', KirbyBadge);
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'kirby-badge': KirbyBadge;
-  }
-}

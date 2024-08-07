@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, NgZone } from '@angular/core';
-import { BadgeSize, BadgeVariant, KirbyBadge } from '@kirbydesign/core'; //TODO Should be '@kirbydesign/core/badge'
+import { BadgeSize, BadgeVariant, KirbyBadge } from '@kirbydesign/core/badge';
+import '@kirbydesign/core/kirby-badge'; // TODO: Is this how we want to import the web comp registration??
 
 @Component({
   selector: 'kirby-badge',

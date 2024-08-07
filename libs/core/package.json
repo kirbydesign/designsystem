@@ -15,5 +15,15 @@
   },
   "dependencies": {
     "lit": "^3.1.4"
+  },
+  "exports": {
+    "./badge": {
+      "types": "./dist/types/badge/index.d.ts",
+      "default": "./dist/badge/index.js"
+    },
+    "./kirby-badge": {
+      "types": "./dist/types/badge/kirby-badge.d.ts",
+      "default": "./dist/badge/kirby-badge.js"
+    }
   }
 }
