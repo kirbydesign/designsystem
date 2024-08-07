@@ -30,6 +30,6 @@ export class AvatarExampleImageErrorComponent {
   showFallbackImageOnError(event: ErrorEvent) {
     const fallbackImageSrc = 'assets/images/avatar-not-found.png';
     this.avatarSrc = fallbackImageSrc;
-    // Possibly do something with the ErrorEvent...
+    // Possibly do something with the ErrorEvent parameter...
   }
 }
