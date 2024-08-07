@@ -1,6 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$blur-radius: 25px;
+$blur-radius: 98px;
 
 kirby-card {
   height: 240px;
@@ -16,17 +16,24 @@ kirby-card {
 }
 
 .blur-image {
-  display: none;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   z-index: -1;
-  filter: blur($blur-radius) brightness(0.9);
 }
 
-:host(.background-blur) .blur-image {
-  display: block;
+:host(.none) .blur-image {
+  display: none;
+}
+
+:host(.dark) .blur-image {
+  filter: blur($blur-radius) brightness(0.8);
+}
+
+:host(.light) .blur-image {
+  filter: blur($blur-radius) brightness(1.2);
 }
 
 .main-content-wrapper {
@@ -108,32 +115,24 @@ kirby-card {
   right: utils.size('xs');
 }
 
-.floating-dismiss-background {
-  position: absolute;
-  top: utils.size('xxxs');
-  left: utils.size('xxxs');
-  height: utils.size('m');
-  width: utils.size('m');
-  border-radius: utils.size('s');
-
-  &.dark {
-    background-color: utils.get-color('black');
+.main-content-body-action-link {
+  a {
+    position: absolute;
+    inset: 0;
   }
-}
 
-.main-content-body-actions-mobile {
-  display: flex;
-
-  @media (width >= 632px) {
-    display: none;
-  }
-}
-
-.main-content-body-actions-desktop {
-  display: none;
-
-  @media (width >= 632px) {
+  // TODO: Determine if icon should be shown on desktop
+  kirby-icon {
     display: flex;
-    margin-bottom: -1 * utils.size('xxxs'); // buttons have xxxs margin so subtract that
+
+    @media (width >= 632px) {
+      display: none;
+    }
   }
+}
+
+.main-content-body-action-text {
+  align-self: start;
+  display: inline-flex;
+  margin-bottom: 0; // buttons have xxxs margin so reset that
 }

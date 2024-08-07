@@ -1,5 +1,5 @@
-import { NgClass } from '@angular/common';
-import { Component, HostBinding, Input } from '@angular/core';
+import { CommonModule, NgClass } from '@angular/common';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
@@ -7,7 +7,7 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 @Component({
   selector: 'kirby-x-banner',
   standalone: true,
-  imports: [CardModule, ButtonComponent, IconModule, NgClass],
+  imports: [CardModule, ButtonComponent, IconModule, NgClass, CommonModule],
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.scss',
 })
@@ -28,19 +28,25 @@ export class BannerComponent {
   @Input() bodyText: string | undefined;
 
   /**
-   * The text used for the CTA button.
+   * When an action text is supplied, a button-like call to action will be shown on the card.
    */
-  @Input() actionButtonText: string | undefined;
+  @Input() actionText: string | undefined;
 
   /**
-   * The link used on the CTA button.
+   * If an external link is...
    */
-  @Input() actionButtonLink: string | undefined;
+  @Input() externalLink: string | undefined;
 
   /**
    * When set, a blurred version of the image will be used as a background for the banner.
    */
-  @HostBinding('class.background-blur')
+  @HostBinding('class')
   @Input()
-  backgroundBlur: boolean = false;
+  backgroundBlur: 'dark' | 'light' | 'none' = 'dark';
+
+  @Output() actionClick = new EventEmitter<Event>();
+
+  bannerClicked(event: Event) {
+    this.actionClick.emit(event);
+  }
 }
