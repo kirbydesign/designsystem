@@ -1,4 +1,6 @@
-@use '@kirbydesign/core/src/scss/utils' as *;
+@use '@kirbydesign/core/src/scss/utils';
+
+$blur-radius: 25px;
 
 kirby-card {
   height: 240px;
@@ -10,27 +12,21 @@ kirby-card {
 
 .blur-image-wrapper {
   position: absolute;
-  top: 0;
-  left: -50%;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  place-items: center center;
+  inset: -2 * $blur-radius;
 }
 
 .blur-image {
-  width: 200%;
+  display: none;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   z-index: -1;
+  filter: blur($blur-radius) brightness(0.9);
+}
 
-  &.dark {
-    filter: blur(98px) brightness(0.8);
-  }
-
-  &.white {
-    filter: blur(98px) brightness(1.4);
-  }
+:host(.background-blur) .blur-image {
+  display: block;
 }
 
 .main-content-wrapper {
@@ -38,14 +34,14 @@ kirby-card {
   top: 0;
   left: 0;
   width: 100%;
-  padding: size('xxs');
+  padding: utils.size('xxs');
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 
   @media (width >= 632px) {
     display: flex;
-    gap: size('s');
+    gap: utils.size('s');
     height: 100%;
     justify-content: space-between;
     flex-direction: initial;
@@ -56,8 +52,9 @@ kirby-card {
   display: flex;
   place-items: center center;
   overflow: hidden;
-  border-radius: size('xxs');
+  border-radius: utils.size('xxs');
   height: 140px;
+
   @media (width >= 632px) {
     flex: 1;
     height: 100%;
@@ -70,13 +67,12 @@ kirby-card {
   box-sizing: border-box;
   flex-direction: column;
   justify-items: flex-start;
-  padding: size('xxs') 0 size('xxs') size('xxs');
+  padding: utils.size('xxs') 0 utils.size('xxs') utils.size('xxs');
 
   @media (width >= 632px) {
     flex: 1;
     height: 100%;
-    justify-content: space-between;
-    padding: size('xxs') size('xxs') size('xxs') 0;
+    padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
   }
 }
 
@@ -90,15 +86,11 @@ kirby-card {
 .main-content-body {
   display: flex;
   justify-content: space-between;
+  height: 100%;
 
   @media (width >= 632px) {
     flex-direction: column;
   }
-}
-
-.main-content-header {
-  display: flex;
-  justify-content: space-between;
 }
 
 .main-content-body-text {
@@ -106,41 +98,26 @@ kirby-card {
   overflow: hidden;
 
   @media (width >= 632px) {
-    height: 60px;
-    padding-inline-end: size('xxl');
-  }
-}
-
-.main-content-dismiss {
-  display: none;
-
-  @media (width >= 632px) {
-    display: flex;
-    top: -size('xxxs');
-    right: -size('xxxs');
+    padding-inline-end: utils.size('xxl');
   }
 }
 
 .floating-dismiss {
   position: absolute;
-  top: size('xs');
-  right: size('xs');
-
-  @media (width >= 632px) {
-    display: none;
-  }
+  top: utils.size('xs');
+  right: utils.size('xs');
 }
 
 .floating-dismiss-background {
   position: absolute;
-  top: size('xxxs');
-  left: size('xxxs');
-  height: size('m');
-  width: size('m');
-  border-radius: size('s');
+  top: utils.size('xxxs');
+  left: utils.size('xxxs');
+  height: utils.size('m');
+  width: utils.size('m');
+  border-radius: utils.size('s');
 
   &.dark {
-    background-color: get-color('black');
+    background-color: utils.get-color('black');
   }
 }
 
@@ -157,5 +134,6 @@ kirby-card {
 
   @media (width >= 632px) {
     display: flex;
+    margin-bottom: -1 * utils.size('xxxs'); // buttons have xxxs margin so subtract that
   }
 }

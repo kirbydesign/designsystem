@@ -1,11 +1,11 @@
-<kirby-card [themeColor]="'dark'">
+<kirby-card [themeColor]="backgroundBlur ? 'dark' : 'white'">
   <div class="blur-image-wrapper">
-    <img class="blur-image" [ngClass]="imageFilter" [src]="imagePath" alt="Background" />
+    <img class="blur-image" [src]="imagePath" alt="" />
   </div>
 
   <div class="main-content-wrapper">
     <div class="main-content-image-wrapper">
-      <img class="main-content-image" [src]="imagePath" alt="Main" />
+      <img class="main-content-image" [src]="imagePath" alt="" />
     </div>
 
     <div class="main-content">
@@ -13,16 +13,6 @@
         <span class="kirby-text-normal-bold">
           {{ title }}
         </span>
-
-        <button
-          kirby-button
-          attentionLevel="2"
-          [showIconOnly]="true"
-          class="main-content-dismiss"
-          size="xs"
-        >
-          <kirby-icon name="close"></kirby-icon>
-        </button>
       </div>
 
       <div class="main-content-body">
@@ -38,7 +28,7 @@
           <button
             class="main-content-body-actions-desktop"
             kirby-button
-            attentionLevel="2"
+            [attentionLevel]="backgroundBlur ? '2' : '3'"
             size="sm"
           >
             {{ actionButtonText }}
@@ -49,7 +39,12 @@
     </div>
 
     <div class="floating-dismiss">
-      <button kirby-button attentionLevel="2" [showIconOnly]="true" size="xs">
+      <button
+        kirby-button
+        [attentionLevel]="backgroundBlur ? '2' : '3'"
+        [showIconOnly]="true"
+        size="xs"
+      >
         <kirby-icon name="close"></kirby-icon>
       </button>
     </div>

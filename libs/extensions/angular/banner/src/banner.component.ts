@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
@@ -38,7 +38,9 @@ export class BannerComponent {
   @Input() actionButtonLink: string | undefined;
 
   /**
-   * The filter used for the blurred background image.
+   * When set, a blurred version of the image will be used as a background for the banner.
    */
-  @Input() imageFilter: 'dark' | 'white' = 'white';
+  @HostBinding('class.background-blur')
+  @Input()
+  backgroundBlur: boolean = false;
 }
