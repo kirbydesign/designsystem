@@ -1,6 +1,7 @@
 <kirby-card
   [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
   (click)="bannerClicked($event)"
+  [interactionStatesOnly]="externalLink ? true : false"
 >
   <div class="blur-image-wrapper">
     <img class="blur-image" [src]="imagePath" alt="" />
