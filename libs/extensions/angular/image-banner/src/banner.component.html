@@ -1,5 +1,5 @@
 <kirby-card
-  [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur"
+  [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
   (click)="bannerClicked($event)"
 >
   <div class="blur-image-wrapper">
@@ -29,18 +29,18 @@
           <div class="main-content-body-action-link">
             <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
             <a href="{{ externalLink }}"></a>
-            <kirby-icon *ngIf="!actionText" name="link"></kirby-icon>
+            <kirby-icon name="link"></kirby-icon>
           </div>
-          <!-- If an action text is supplied in addition to the external link we also show a button-like anchor tag in addition to the banner anchor -->
+          <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
           <a
-            *ngIf="externalLink && actionText"
             kirby-button
             class="main-content-body-action-text"
-            attentionLevel="2"
+            [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+            [showIconOnly]="!actionButtonText"
             size="sm"
             href="{{ externalLink }}"
           >
-            {{ actionText }}
+            {{ actionButtonText }}
             <kirby-icon name="link"></kirby-icon>
           </a>
         </ng-container>
@@ -48,17 +48,22 @@
         <button
           class="main-content-body-action-text"
           kirby-button
-          *ngIf="actionText && !externalLink"
-          attentionLevel="2"
+          *ngIf="actionButtonText && !externalLink"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           size="sm"
         >
-          {{ actionText }}
+          {{ actionButtonText }}
         </button>
       </div>
     </div>
 
     <div class="floating-dismiss">
-      <button kirby-button attentionLevel="2" [showIconOnly]="true" size="xs">
+      <button
+        kirby-button
+        [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+        [showIconOnly]="true"
+        size="xs"
+      >
         <kirby-icon name="close"></kirby-icon>
       </button>
     </div>

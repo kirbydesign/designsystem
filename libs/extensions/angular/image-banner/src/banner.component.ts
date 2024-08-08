@@ -5,20 +5,20 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
 @Component({
-  selector: 'kirby-x-banner',
+  selector: 'kirby-x-image-banner',
   standalone: true,
   imports: [CardModule, ButtonComponent, IconModule, NgClass, CommonModule],
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.scss',
 })
-export class BannerComponent {
+export class ImageBannerComponent {
   /**
    * The title placed inside the banners header.
    */
   @Input() title: string | undefined;
 
   /**
-   * The image shown on the banner, also used for background blur effect.
+   * The image shown on the banner, and used for the banners background blur effect.
    */
   @Input() imagePath: string | undefined;
 
@@ -28,12 +28,12 @@ export class BannerComponent {
   @Input() bodyText: string | undefined;
 
   /**
-   * When an action text is supplied, a button-like call to action will be shown on the card.
+   * Show a button with the action text in the banner.
    */
-  @Input() actionText: string | undefined;
+  @Input() actionButtonText: string | undefined;
 
   /**
-   * If an external link is...
+   * When an internal link is supplied the whole banner will act like an anchor-tag and navigate when activated.
    */
   @Input() externalLink: string | undefined;
 
@@ -44,9 +44,12 @@ export class BannerComponent {
   @Input()
   backgroundBlur: 'dark' | 'light' | 'none' = 'dark';
 
-  @Output() actionClick = new EventEmitter<Event>();
+  /**
+   * Emitted every time the banner is clicked.
+   */
+  @Output() bannerClick = new EventEmitter<Event>();
 
-  bannerClicked(event: Event) {
-    this.actionClick.emit(event);
+  public bannerClicked(event: Event) {
+    this.bannerClick.emit(event);
   }
 }

@@ -57,8 +57,8 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "src/assets",
-            "output": "assets"
+            "input": "libs/extensions/angular/docs/assets",
+            "output": "./assets"
           },
           {
             "glob": "**/*.svg",
@@ -101,8 +101,8 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "src/assets",
-            "output": "assets"
+            "input": "libs/extensions/angular/docs/assets",
+            "output": "./assets"
           },
           {
             "glob": "**/*.svg",
