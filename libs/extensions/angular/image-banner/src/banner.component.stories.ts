@@ -16,6 +16,9 @@ const meta: Meta<ImageBannerComponent> = {
     bannerClick: {
       control: false,
     },
+    externalLink: {
+      control: 'text',
+    },
   },
 };
 export default meta;
@@ -28,7 +31,8 @@ export const Default: Story = {
   args: {
     title: 'An Image Banner',
     bodyText: 'This is the body text.',
-    imagePath: 'assets/autocamper.jpg',
+    actionButtonText: 'Read more',
+    imagePath: 'assets/autocamper.png',
     backgroundBlur: 'dark',
   },
 };
@@ -40,19 +44,20 @@ export const Default: Story = {
  */
 export const LightBackgroundBlur: Story = {
   args: {
-    title: 'Another amazing title',
-    bodyText: 'This is a really good body text for use with a banner',
-    imagePath: 'assets/couple.jpg',
+    title: 'Light Background Blur',
+    bodyText: 'This is the body text.',
+    imagePath: 'assets/mountains.png',
     backgroundBlur: 'light',
-    actionButtonText: 'Go somewhere!',
+    actionButtonText: 'Read more',
   },
 };
 
 export const NoBackgroundBlur: Story = {
   args: {
-    title: 'Another amazing title',
-    bodyText: 'This is a really good body text for use with a banner',
-    imagePath: 'assets/autocamper.jpg',
+    title: 'No Background Blur',
+    bodyText: 'This is the body text.',
+    actionButtonText: 'Read more',
+    imagePath: 'assets/autocamper.png',
     backgroundBlur: 'none',
   },
 };
@@ -62,10 +67,10 @@ export const NoBackgroundBlur: Story = {
  */
 export const ExternalLink: Story = {
   args: {
-    title: 'Another amazing title',
-    bodyText: 'This is a really good body text for use with a banner',
-    imagePath: 'https://images.unsplash.com/photo-1515876305430-f06edab8282a',
-    actionButtonText: 'Go anywhere!',
+    title: 'Image Banner with External Link',
+    bodyText: 'Activating this banner will take you to www.kirby.design 👋',
+    actionButtonText: 'Go to Kirby Design',
     externalLink: 'http://www.kirby.design',
+    imagePath: 'assets/autocamper.png',
   },
 };
