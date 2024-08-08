@@ -121,10 +121,11 @@ kirby-card {
   }
 }
 
-.floating-dismiss {
+.dismiss {
   position: absolute;
   top: utils.size('s');
   right: utils.size('s');
+  height: fit-content;
 
   button {
     margin: 0;

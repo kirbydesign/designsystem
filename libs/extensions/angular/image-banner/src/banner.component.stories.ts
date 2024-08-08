@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
 
 /**
@@ -8,12 +8,18 @@ const meta: Meta<ImageBannerComponent> = {
   component: ImageBannerComponent,
   title: 'Components/Banner/Image Banner',
   parameters: {
+    actions: {
+      handles: ['bannerDismiss'],
+    },
     controls: {
-      exclude: ['bannerClicked'],
+      exclude: ['bannerClicked', 'bannerDismissed'],
     },
   },
   argTypes: {
     bannerClick: {
+      control: false,
+    },
+    bannerDismiss: {
       control: false,
     },
     externalLink: {
@@ -25,7 +31,8 @@ export default meta;
 type Story = StoryObj<ImageBannerComponent>;
 
 /**
- * This is a default image banner with a header, image and body text. The whole banner is interactive, and will emit the bannerClick event when activated by click, keyboard etc.
+ * This is a default image banner with a header, image and body text.
+ * The whole banner is interactive, and will emit the bannerClick event when activated by click, keyboard etc.
  */
 export const Default: Story = {
   args: {
@@ -73,4 +80,24 @@ export const ExternalLink: Story = {
     externalLink: 'http://www.kirby.design',
     imagePath: 'assets/autocamper.png',
   },
+};
+
+/**
+ * A dismiss-button is shown whenever an event-binding is added for the `bannerDismiss` event.
+ * If no dismiss-button is needed, simply avoid binding to the event.
+ */
+export const NoDismiss: Story = {
+  args: {
+    title: 'No Dismiss in Banner',
+    bodyText: 'This is the body text.',
+    actionButtonText: 'Read more',
+    imagePath: 'assets/autocamper.png',
+    backgroundBlur: 'dark',
+    bannerDismiss: undefined,
+  },
+  // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
+  render: (args: ImageBannerComponent) => ({
+    props: args,
+    template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
+  }),
 };

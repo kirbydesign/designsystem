@@ -1,6 +1,6 @@
 <kirby-card
-  [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
   (click)="bannerClicked($event)"
+  [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
   [interactionStatesOnly]="externalLink ? true : false"
 >
   <div class="blur-image-wrapper">
@@ -58,9 +58,10 @@
       </div>
     </div>
 
-    <div class="floating-dismiss">
+    <div class="dismiss" *ngIf="bannerDismiss.observed">
       <button
         kirby-button
+        (click)="bannerDismissed($event)"
         [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
         [showIconOnly]="true"
         size="xs"

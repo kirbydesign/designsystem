@@ -49,7 +49,19 @@ export class ImageBannerComponent {
    */
   @Output() bannerClick = new EventEmitter<Event>();
 
+  /**
+   * If subscribed to, a dismiss button will be shown. Emitted every time the dismiss button is clicked.
+   */
+  @Output() bannerDismiss = new EventEmitter<Event>();
+
   public bannerClicked(event: Event) {
+    const eventTarget = event.target as HTMLElement;
+    const dismissButtonClicked = eventTarget.closest('.dismiss');
+    if (dismissButtonClicked) return;
     this.bannerClick.emit(event);
+  }
+
+  public bannerDismissed(event: Event) {
+    this.bannerDismiss.emit(event);
   }
 }
