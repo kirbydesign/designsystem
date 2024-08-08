@@ -1,14 +1,14 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
-import { BannerComponent } from './banner.component';
+import { ImageBannerComponent } from './banner.component';
 
 describe('BannerComponent', () => {
-  let spectator: SpectatorHost<BannerComponent>;
+  let spectator: SpectatorHost<ImageBannerComponent>;
   const createHost = createHostFactory({
-    component: BannerComponent,
+    component: ImageBannerComponent,
   });
 
   beforeEach(async () => {
-    spectator = createHost(`<kirby-x-banner></kirby-x-banner>`);
+    spectator = createHost(`<kirby-x-image-banner></kirby-x-image-banner>`);
   });
 
   it('should create', () => {
