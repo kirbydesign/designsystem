@@ -2,29 +2,6 @@
 
 $blur-radius: 60px;
 
-kirby-card {
-  height: 240px;
-
-  @include utils.media('>=small') {
-    height: 164px;
-  }
-}
-
-.blur-image-wrapper {
-  // We scale the image here with inset to avoid halo-bleed when using blur.
-  position: absolute;
-  inset: -3 * $blur-radius;
-}
-
-.blur-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: -1;
-}
-
 :host(.none) {
   .blur-image {
     display: none;
@@ -47,6 +24,28 @@ kirby-card {
 
 :host(.light) .blur-image {
   filter: blur($blur-radius) brightness(1.3);
+}
+
+kirby-card {
+  height: 240px;
+
+  @include utils.media('>=small') {
+    height: 164px;
+  }
+}
+
+.blur-image-wrapper {
+  // We scale the image here with inset to avoid halo-bleed when using blur.
+  position: absolute;
+  inset: -3 * $blur-radius;
+}
+
+.blur-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .main-content-wrapper {
