@@ -4,10 +4,8 @@ const config = {
   selector: 'cookbook-item-example-flagged',
   template: `<kirby-item>
   <div slot="outside">
-    <kirby-badge themeColor="success" size="sm">
-    </kirby-badge>
-    <kirby-badge themeColor="warning" size="sm">
-    </kirby-badge>
+    <div class="flag success"></div>
+    <div class="flag warning"></div>
   </div>
   <kirby-label>
     <h3 class="kirby-text-bold">Title</h3>
@@ -18,9 +16,19 @@ const config = {
   </kirby-flag>
 </kirby-item>`,
   styles: [
-    `div[slot="outside"] {
-      display: flex;
-      flex-direction: column;
+    `.flag {
+      width: 8px;
+      height: 8px;
+      border-radius:50%;
+    }`,
+    `.flag.success {
+      background: var(--kirby-success);
+    }`,
+    `.flag.warning {
+      background: var(--kirby-warning);
+    }`,
+    `.flag:not(:last-child) {
+      margin-bottom: 2px;
     }`,
   ],
 };
