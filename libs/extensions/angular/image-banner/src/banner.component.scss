@@ -130,10 +130,16 @@ kirby-card {
   button {
     margin: 0;
   }
+
+  @include utils.media('>=small') {
+    position: relative;
+    top: utils.size('xxs');
+    right: utils.size('xxs');
+  }
 }
 
 .main-content-body-action-link {
-  a {
+  .expanded-anchor {
     position: absolute;
     inset: 0;
   }

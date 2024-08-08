@@ -29,7 +29,7 @@
         <ng-container *ngIf="externalLink">
           <div class="main-content-body-action-link">
             <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
-            <a href="{{ externalLink }}"></a>
+            <a class="expanded-anchor" href="{{ externalLink }}"></a>
             <kirby-icon name="link"></kirby-icon>
           </div>
           <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
