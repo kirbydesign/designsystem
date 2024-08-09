@@ -1,8 +1,16 @@
+<kirby-card *ngIf="externalLink" [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'">
+  <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
+</kirby-card>
+
 <kirby-card
-  (click)="bannerClicked($event)"
+  *ngIf="!externalLink"
   [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
-  [interactionStatesOnly]="externalLink ? true : false"
+  (click)="bannerClicked($event)"
 >
+  <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
+</kirby-card>
+
+<ng-template #sharedCardContent>
   <div class="blur-image-wrapper">
     <img class="blur-image" [src]="imagePath" alt="" />
   </div>
@@ -40,6 +48,7 @@
             [showIconOnly]="!actionButtonText"
             size="sm"
             href="{{ externalLink }}"
+            target="_blank"
           >
             {{ actionButtonText }}
             <kirby-icon name="link"></kirby-icon>
@@ -70,4 +79,4 @@
       </button>
     </div>
   </div>
-</kirby-card>
+</ng-template>
