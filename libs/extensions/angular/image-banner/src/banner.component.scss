@@ -1,13 +1,15 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
 
 $blur-radius: 60px;
+$max-content-width: 324px;
 
 :host(.none) {
   .blur-image {
     display: none;
   }
 
-  .floating-dismiss {
+  .dismiss {
     // on mobile we also need the button to be white when there is no background-image
     @media (width < 632px) {
       --kirby-inputs-background-color: var(--kirby-white);
@@ -27,10 +29,10 @@ $blur-radius: 60px;
 }
 
 kirby-card {
-  height: 240px;
+  height: 232px;
 
   @include utils.media('>=small') {
-    height: 164px;
+    height: 180px;
   }
 }
 
@@ -62,17 +64,15 @@ kirby-card {
     display: flex;
     gap: utils.size('s');
     height: 100%;
-    justify-content: space-between;
     flex-direction: initial;
   }
 }
 
 .main-content-image-wrapper {
   display: flex;
-  place-items: center center;
   overflow: hidden;
   border-radius: utils.size('xxs');
-  height: 140px;
+  height: 132px;
 
   @include utils.media('>=small') {
     flex: 1;
@@ -85,13 +85,31 @@ kirby-card {
   height: 100%;
   box-sizing: border-box;
   flex-direction: column;
-  justify-items: flex-start;
-  padding: utils.size('xxs') 0 utils.size('xxs') utils.size('xxs');
+  padding: utils.size('xs') 0 utils.size('xs') utils.size('xs');
+  overflow: hidden;
 
   @include utils.media('>=small') {
     flex: 1;
+    gap: utils.size('xs');
     height: 100%;
     padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
+  }
+}
+
+.main-content-anchor {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.main-content-header {
+  margin-right: utils.size('xl');
+
+  p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 0;
   }
 }
 
@@ -105,19 +123,39 @@ kirby-card {
 .main-content-body {
   display: flex;
   justify-content: space-between;
+  gap: utils.size('s');
   height: 100%;
 
   @include utils.media('>=small') {
     flex-direction: column;
+    max-width: $max-content-width;
+  }
+
+  .main-content-body-action-link {
+    @include utils.media('>=small') {
+      display: none;
+    }
   }
 }
 
 .main-content-body-text {
   display: block;
   overflow: hidden;
+  max-height: utils.size('xl');
 
   @include utils.media('>=small') {
     padding-inline-end: utils.size('xxl');
+    max-height: utils.size('xxxxl');
+  }
+}
+
+.main-content-body-action-text {
+  display: none;
+
+  @include utils.media('>=small') {
+    align-self: start;
+    display: inline-flex;
+    margin: 0; // buttons have xxxs margin so reset that
   }
 }
 
@@ -129,36 +167,5 @@ kirby-card {
 
   button {
     margin: 0;
-  }
-
-  @include utils.media('>=small') {
-    position: relative;
-    top: utils.size('xxs');
-    right: utils.size('xxs');
-  }
-}
-
-.main-content-body-action-link {
-  .expanded-anchor {
-    position: absolute;
-    inset: 0;
-  }
-
-  kirby-icon {
-    display: flex;
-
-    @include utils.media('>=small') {
-      display: none;
-    }
-  }
-}
-
-.main-content-body-action-text {
-  display: none;
-
-  @include utils.media('>=small') {
-    align-self: start;
-    display: inline-flex;
-    margin-bottom: 0; // buttons have xxxs margin so reset that
   }
 }

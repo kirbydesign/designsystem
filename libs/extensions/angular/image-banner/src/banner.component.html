@@ -15,6 +15,9 @@
     <img class="blur-image" [src]="imagePath" alt="" />
   </div>
 
+  <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
+  <a *ngIf="externalLink" class="main-content-anchor" href="{{ externalLink }}" target="_blank"></a>
+
   <div class="main-content-wrapper">
     <div class="main-content-image-wrapper">
       <img class="main-content-image" [src]="imagePath" alt="" />
@@ -22,9 +25,9 @@
 
     <div class="main-content">
       <div class="main-content-header">
-        <span class="kirby-text-normal-bold">
+        <p class="kirby-text-normal-bold">
           {{ title }}
-        </span>
+        </p>
       </div>
 
       <div class="main-content-body">
@@ -35,11 +38,6 @@
         </div>
 
         <ng-container *ngIf="externalLink">
-          <div class="main-content-body-action-link">
-            <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
-            <a class="expanded-anchor" href="{{ externalLink }}"></a>
-            <kirby-icon name="link"></kirby-icon>
-          </div>
           <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
           <a
             kirby-button
@@ -53,6 +51,10 @@
             {{ actionButtonText }}
             <kirby-icon name="link"></kirby-icon>
           </a>
+
+          <div class="main-content-body-action-link">
+            <kirby-icon name="link"></kirby-icon>
+          </div>
         </ng-container>
 
         <button
@@ -66,17 +68,17 @@
         </button>
       </div>
     </div>
+  </div>
 
-    <div class="dismiss" *ngIf="bannerDismiss.observed">
-      <button
-        kirby-button
-        (click)="bannerDismissed($event)"
-        [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
-        [showIconOnly]="true"
-        size="xs"
-      >
-        <kirby-icon name="close"></kirby-icon>
-      </button>
-    </div>
+  <div class="dismiss" *ngIf="bannerDismiss.observed">
+    <button
+      kirby-button
+      (click)="bannerDismissed($event)"
+      [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+      [showIconOnly]="true"
+      size="xs"
+    >
+      <kirby-icon name="close"></kirby-icon>
+    </button>
   </div>
 </ng-template>
