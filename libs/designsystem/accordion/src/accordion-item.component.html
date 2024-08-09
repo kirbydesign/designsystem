@@ -24,7 +24,7 @@
     [id]="_contentId"
     [@isExpanded]="!!isExpanded"
   >
-    <div class="content-body">
+    <div class="content-body" [class.padding]="hasPadding">
       <ng-content></ng-content>
     </div>
   </div>
