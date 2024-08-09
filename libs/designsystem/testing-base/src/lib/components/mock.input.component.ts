@@ -7,6 +7,8 @@ import { InputComponent, InputSize } from '@kirbydesign/designsystem';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'input[kirby-input]',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: InputComponent,

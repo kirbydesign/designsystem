@@ -1,6 +1,6 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { CardComponent, CardFooterComponent } from '@kirbydesign/designsystem/card';
+import { CardFooterComponent, CardModule } from '@kirbydesign/designsystem/card';
 
 const cardContent = `<p>
   Card content.
@@ -9,17 +9,17 @@ const cardContent = `<p>
 
 const meta: Meta<CardFooterComponent> = {
   component: CardFooterComponent,
-  title: 'CardFooterComponent',
+  title: 'Components / Card / Card Footer',
   decorators: [
     moduleMetadata({
-      declarations: [CardComponent],
+      imports: [CardModule],
     }),
   ],
 };
 export default meta;
 type Story = StoryObj<CardFooterComponent>;
 
-export const Default: Story = {
+export const CardFooter: Story = {
   args: {
     hasPadding: true,
   },

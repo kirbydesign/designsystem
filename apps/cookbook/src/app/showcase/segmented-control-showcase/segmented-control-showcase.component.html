@@ -1,3 +1,7 @@
+<p>
+  Segmented Control is a horizontal row of buttons used for toggling between related choices within
+  content.
+</p>
 <div class="example">
   <h3>Default</h3>
   <cookbook-example-viewer [html]="example.template" [ts]="example.codeSnippet">
@@ -6,7 +10,53 @@
     ></cookbook-segmented-control-example-default>
   </cookbook-example-viewer>
 
+  <h3>Size</h3>
+  <p>
+    Segmented Control can be rendered in two different sizes when in default mode:
+    <code>sm</code>
+    and
+    <code>md</code>
+    .
+  </p>
+  <cookbook-example-viewer [html]="sizeExample.template">
+    <cookbook-segmented-control-example-sizes
+      #sizeExample
+    ></cookbook-segmented-control-example-sizes>
+  </cookbook-example-viewer>
+
+  <h3>Mode</h3>
+  <p>
+    Use the
+    <code>mode</code>
+    property to control the rendering of each segment. In addiditon to the
+    <code>default</code>
+    mode, Segmented Control supports
+    <code>chip</code>
+    and
+    <code>compactChip</code>
+    mode.
+  </p>
+  <cookbook-example-viewer [html]="modeExample.template" [ts]="modeExample.codeSnippet">
+    <cookbook-segmented-control-example-modes
+      #modeExample
+    ></cookbook-segmented-control-example-modes>
+  </cookbook-example-viewer>
+
   <h3>Grouped</h3>
+  <p>
+    Segmented Control can be combined with a Button to create a related group of choices with one
+    option separate from the others—all mutually exclusive. Use this pattern to create a filter as
+    in the example below.
+  </p>
+  <p>
+    <em>
+      Note: If changing the
+      <code>size</code>
+      of the Segmented Control be sure to set the same
+      <code>size</code>
+      for the Button.
+    </em>
+  </p>
   <cookbook-example-viewer
     [html]="groupedExample.template"
     [ts]="groupedExample.codeSnippet"
@@ -17,10 +67,15 @@
     ></cookbook-segmented-control-example-grouped>
   </cookbook-example-viewer>
 
-  <h3>Default - with Badge</h3>
+  <h3>Badge</h3>
   <p>
-    Badges can be applied to a Segmented Control when the mode is 'default'. A badge can be added to
-    any SegmentItem, using the badge property.
+    Badges can be applied to Segmented Control in
+    <code>default</code>
+    mode. A badge can be added to any
+    <code>SegmentItem</code>
+    using the
+    <code>badge</code>
+    property.
   </p>
   <p>
     <a
@@ -32,18 +87,36 @@
     </a>
   </p>
   <p>
-    The badge can contain either a plain text string through 'content', or an icon provided as
-    either the name of any default icon, or customName of any registered icon, in its 'icon'
-    property. The description of the badge is used as aria-label.
+    The badge can contain either a plain text string through
+    <code>badge.content</code>
+    or an icon provided as the name of an icon in the
+    <code>badge.icon</code>
+    property.
+    <br />
+    When using an icon the
+    <code>badge.description</code>
+    property should be set which will be used as the
+    <code>aria-label</code>
+    of the badge for accessibility.
+    <br />
+    The background color of the badge can be controlled through
+    <code>badge.themeColor</code>
+    .
   </p>
 
-  <cookbook-example-viewer [html]="badgeExample.template" [ts]="badgeExample.codeSnippet">
+  <cookbook-example-viewer [ts]="badgeExample.codeSnippet">
     <cookbook-segmented-control-example-with-badge
       #badgeExample
     ></cookbook-segmented-control-example-with-badge>
   </cookbook-example-viewer>
 
-  <h3>Color</h3>
+  <h3>Colors</h3>
+  <p>Segmented Control has support for theme colors when used within a Card.</p>
+  <p>
+    Simply set the Card's
+    <code>themeColor</code>
+    property and Segmented Control will render in a light or dark variant accordingly.
+  </p>
   <cookbook-example-viewer [html]="colorExample.template">
     <cookbook-segmented-control-example-color
       #colorExample

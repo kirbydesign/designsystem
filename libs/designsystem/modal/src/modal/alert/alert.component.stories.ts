@@ -5,12 +5,12 @@ import { AlertComponent } from '@kirbydesign/designsystem/modal';
 
 const meta: Meta<AlertComponent> = {
   component: AlertComponent,
-  title: 'AlertComponent',
+  title: 'Components / Alert',
 };
 export default meta;
 type Story = StoryObj<AlertComponent>;
 
-export const Default: Story = {
+export const Alert: Story = {
   args: {
     title: 'Alert Title',
     message: 'Alert message.' as string & Observable<string>,

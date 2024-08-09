@@ -4,10 +4,7 @@
   display: block;
 }
 
+kirby-card,
 kirby-segmented-control {
-  margin-bottom: utils.size('l');
-}
-
-fieldset {
-  display: inline-block;
+  margin-bottom: utils.size('s');
 }

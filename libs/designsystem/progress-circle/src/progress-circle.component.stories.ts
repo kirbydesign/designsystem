@@ -4,12 +4,12 @@ import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circ
 
 const meta: Meta<ProgressCircleComponent> = {
   component: ProgressCircleComponent,
-  title: 'ProgressCircleComponent',
+  title: 'Components / Progress Circle',
 };
 export default meta;
 type Story = StoryObj<ProgressCircleComponent>;
 
-export const Default: Story = {
+export const ProgressCircle: Story = {
   args: {
     value: 0,
     size: 'md',

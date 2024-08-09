@@ -6,6 +6,8 @@ import { LocalNavigationItem, PageLocalNavigationComponent } from '@kirbydesign/
 @Component({
   selector: 'kirby-page-local-navigation',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: PageLocalNavigationComponent,
