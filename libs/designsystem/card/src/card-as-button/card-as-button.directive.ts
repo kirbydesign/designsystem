@@ -9,13 +9,15 @@ import { CardComponent } from '../card.component';
 export class CardAsButtonDirective {
   @HostBinding('attr.role') role: string = 'button';
   @HostBinding('attr.tabindex') tabindex: number = 0;
-
   @HostBinding('class.interaction-state-active') _pressed = false;
+
   constructor(@Optional() private card: CardComponent, private clickableElement: ElementRef) {}
 
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
   _onKeydownHandler(event: KeyboardEvent) {
+    if (event.currentTarget !== event.target) return; // Do not handle events for nested elements - event bubbling will take care of this
+
     this._pressed = true;
     this.clickableElement.nativeElement.click(event);
     /*
