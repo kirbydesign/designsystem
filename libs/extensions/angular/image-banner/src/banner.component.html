@@ -70,10 +70,10 @@
     </div>
   </div>
 
-  <div class="dismiss" *ngIf="bannerDismiss.observed">
+  <div class="dismiss" *ngIf="dismissClick.observed">
     <button
       kirby-button
-      (click)="bannerDismissed($event)"
+      (click)="dismissClicked($event)"
       [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
       [showIconOnly]="true"
       size="xs"

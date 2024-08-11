@@ -33,7 +33,7 @@ export class ImageBannerComponent {
   @Input() actionButtonText: string | undefined;
 
   /**
-   * When an internal link is supplied the whole banner will act like an anchor-tag and navigate when activated.
+   * When an internal link is supplied the whole banner will be an anchor-tag and navigate when activated.
    */
   @Input() externalLink: string | undefined;
 
@@ -45,14 +45,14 @@ export class ImageBannerComponent {
   backgroundBlur: 'dark' | 'light' | 'none' = 'dark';
 
   /**
-   * Emitted every time the banner is clicked.
+   * Emitted every time the banner is activated, e.g. by click or keyboard event.
    */
   @Output() bannerClick = new EventEmitter<Event>();
 
   /**
-   * If subscribed to, a dismiss button will be shown. Emitted every time the dismiss button is clicked.
+   * If subscribed to, a dismiss button will be shown. Emitted every time the dismiss button is , e.g. by click or keyboard event.
    */
-  @Output() bannerDismiss = new EventEmitter<Event>();
+  @Output() dismissClick = new EventEmitter<Event>();
 
   public bannerClicked(event: Event) {
     const eventTarget = event.target as HTMLElement;
@@ -61,7 +61,7 @@ export class ImageBannerComponent {
     this.bannerClick.emit(event);
   }
 
-  public bannerDismissed(event: Event) {
-    this.bannerDismiss.emit(event);
+  public dismissClicked(event: Event) {
+    this.dismissClick.emit(event);
   }
 }

@@ -9,17 +9,17 @@ const meta: Meta<ImageBannerComponent> = {
   title: 'Components/Banner/Image Banner',
   parameters: {
     actions: {
-      handles: ['bannerDismiss'],
+      handles: ['dismissClick'],
     },
     controls: {
-      exclude: ['bannerClicked', 'bannerDismissed'],
+      exclude: ['bannerClicked', 'dismissClicked'],
     },
   },
   argTypes: {
     bannerClick: {
       control: false,
     },
-    bannerDismiss: {
+    dismissClick: {
       control: false,
     },
     externalLink: {
@@ -93,7 +93,7 @@ export const NoDismiss: Story = {
     actionButtonText: 'Read more',
     imagePath: 'assets/autocamper.png',
     backgroundBlur: 'dark',
-    bannerDismiss: undefined,
+    dismissClick: undefined,
   },
   // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
   render: (args: ImageBannerComponent) => ({
