@@ -13,22 +13,22 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 })
 export class ImageBannerComponent {
   /**
-   * The title placed inside the banners header.
+   * The title placed inside the image banners header.
    */
   @Input() title: string | undefined;
 
   /**
-   * The image shown on the banner, and used for the banners background blur effect.
+   * The image shown on the banner, and used for the background blur effect.
    */
   @Input() imagePath: string | undefined;
 
   /**
-   * The body text placed inside the banners main area.
+   * The body text placed below the title.
    */
   @Input() bodyText: string | undefined;
 
   /**
-   * Show a button with the action text in the banner.
+   * The text shown inside a button in the content area of the image banner.
    */
   @Input() actionButtonText: string | undefined;
 
@@ -38,19 +38,19 @@ export class ImageBannerComponent {
   @Input() externalLink: string | undefined;
 
   /**
-   * When set, a blurred version of the image will be used as a background for the banner.
+   * The blur-effect used for the background.
    */
   @HostBinding('class')
   @Input()
   backgroundBlur: 'dark' | 'light' | 'none' = 'dark';
 
   /**
-   * Emitted every time the banner is activated, e.g. by click or keyboard event.
+   * Emitted every time the banner is activated. The entire banner is interactive, and will be activated by click and keyboard interaction.
    */
   @Output() bannerClick = new EventEmitter<Event>();
 
   /**
-   * If subscribed to, a dismiss button will be shown. Emitted every time the dismiss button is , e.g. by click or keyboard event.
+   * If subscribed to, a dismiss button will be shown. Emitted every time the dismiss button is activated by click and keyboard interaction.
    */
   @Output() dismissClick = new EventEmitter<Event>();
 

@@ -32,7 +32,6 @@ type Story = StoryObj<ImageBannerComponent>;
 
 /**
  * This is a default image banner with a header, image and body text.
- * The whole banner is interactive, and will emit the bannerClick event when activated by click, keyboard etc.
  */
 export const Default: Story = {
   args: {
@@ -45,7 +44,7 @@ export const Default: Story = {
 };
 
 /**
- * By default the background is a darkened and blurred version of the banners image.
+ * By default the background is a darkened and blurred version of the provided image.
  * If needed, the background blur property can be set to `light` to make the background brigther, or `none` to make the background white.
  * You can test out different background images by inserting your own link for the `imagePath` in the API table above.
  */
@@ -83,8 +82,8 @@ export const ExternalLink: Story = {
 };
 
 /**
- * A dismiss-button is shown whenever an event-binding is added for the `bannerDismiss` event.
- * If no dismiss-button is needed, simply avoid binding to the event.
+ * A dismiss button is shown whenever an event-binding is added for the `bannerDismiss` event.
+ * If no dismiss button is needed, simply avoid binding to the event.
  */
 export const NoDismiss: Story = {
   args: {
