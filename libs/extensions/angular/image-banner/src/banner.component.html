@@ -6,6 +6,7 @@
   *ngIf="!externalLink"
   [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
   (click)="bannerClicked($event)"
+  [disableKeydownHandler]="true"
 >
   <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
 </kirby-card>

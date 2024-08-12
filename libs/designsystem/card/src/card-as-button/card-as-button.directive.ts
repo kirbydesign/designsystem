@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, HostListener, Optional } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, Optional } from '@angular/core';
 
 import { CardComponent } from '../card.component';
 
@@ -7,6 +7,8 @@ import { CardComponent } from '../card.component';
   selector: 'kirby-card[click]',
 })
 export class CardAsButtonDirective {
+  @Input() disableKeydownHandler = false;
+
   @HostBinding('attr.role') role: string = 'button';
   @HostBinding('attr.tabindex') tabindex: number = 0;
   @HostBinding('class.interaction-state-active') _pressed = false;
@@ -16,7 +18,7 @@ export class CardAsButtonDirective {
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
   _onKeydownHandler(event: KeyboardEvent) {
-    if (event.currentTarget !== event.target) return; // Do not handle events for nested elements - event bubbling will take care of this
+    if (this.disableKeydownHandler && event.currentTarget !== event.target) return; // Do not handle events for nested elements - let event bubbling take place as normal
 
     this._pressed = true;
     this.clickableElement.nativeElement.click(event);
