@@ -10,7 +10,7 @@ $max-content-width: 324px;
   }
 
   .dismiss {
-    // on mobile we also need the button to be white when there is no background-image
+    // on mobile we always want the button to be white as it sits on top of the image
     @media (width < 632px) {
       --kirby-inputs-background-color: var(--kirby-white);
       --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
