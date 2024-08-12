@@ -19,9 +19,9 @@ const config = {
 </kirby-item>`,
   styles: [
     `div[slot="outside"] {
-      display: flex;
-      flex-direction: column;
-    }`,
+  display: flex;
+  flex-direction: column;
+}`,
   ],
 };
 
@@ -32,4 +32,5 @@ const config = {
 })
 export class ItemExampleAvatarFlaggedThreeLinesComponent {
   template: string = config.template;
+  styles: string = config.styles[0];
 }
