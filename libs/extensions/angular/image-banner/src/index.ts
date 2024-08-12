@@ -1,1 +1,1 @@
-export { ImageBannerComponent } from './banner.component';
+export { ImageBannerComponent } from './image-banner.component';

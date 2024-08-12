@@ -1,5 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
-import { ImageBannerComponent } from './banner.component';
+import { ImageBannerComponent } from './image-banner.component';
 
 describe('BannerComponent', () => {
   let spectator: SpectatorHost<ImageBannerComponent>;

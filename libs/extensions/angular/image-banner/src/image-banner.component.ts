@@ -8,8 +8,8 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
   selector: 'kirby-x-image-banner',
   standalone: true,
   imports: [CardModule, ButtonComponent, IconModule, NgClass, CommonModule],
-  templateUrl: './banner.component.html',
-  styleUrl: './banner.component.scss',
+  templateUrl: './image-banner.component.html',
+  styleUrl: './image-banner.component.scss',
 })
 export class ImageBannerComponent {
   /**
