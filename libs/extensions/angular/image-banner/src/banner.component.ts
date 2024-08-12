@@ -28,12 +28,12 @@ export class ImageBannerComponent {
   @Input() bodyText: string | undefined;
 
   /**
-   * The text shown inside a button in the content area of the image banner.
+   * The text of the button in the content area of the image banner.
    */
   @Input() actionButtonText: string | undefined;
 
   /**
-   * When an internal link is supplied the whole banner will be an anchor-tag and navigate when activated.
+   * When an external link is supplied the entire banner will be an anchor-tag and navigate when activated.
    */
   @Input() externalLink: string | undefined;
 
