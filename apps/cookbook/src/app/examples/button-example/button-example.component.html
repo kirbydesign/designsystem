@@ -197,6 +197,19 @@
   </label>
 </div>
 
+<h2>Link Button</h2>
+<p>
+  The kirby-button directive can also be applied to anchor-tags. This will allow use of attributes
+  such as
+  <code>href</code>
+  and
+  <code>target</code>
+  , but the link will look like a button.
+</p>
+
+<a kirby-button href="/">Link</a>
+<a kirby-button href="/" target="_blank">Link (new tab/window)</a>
+
 <h2>Button with attention level</h2>
 <kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
   <button kirby-button [size]="buttonSize" attentionLevel="1" expand="block">
