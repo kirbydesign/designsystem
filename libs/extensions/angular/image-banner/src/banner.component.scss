@@ -85,7 +85,7 @@ kirby-card {
   height: 100%;
   box-sizing: border-box;
   flex-direction: column;
-  padding: utils.size('xs') 0 utils.size('xs') utils.size('xs');
+  padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
   overflow: hidden;
 
   @include utils.media('>=small') {
