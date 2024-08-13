@@ -18,6 +18,10 @@ $max-content-width: 324px;
       --kirby-inputs-color: var(--kirby-black);
     }
   }
+
+  .main-content-body-action-link {
+    color: var(--kirby-semi-dark);
+  }
 }
 
 :host(.dark) .blur-image {
