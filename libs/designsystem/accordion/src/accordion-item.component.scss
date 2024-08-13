@@ -41,8 +41,6 @@ $padding: utils.size('s');
 }
 
 .content-body {
-  padding: 0;
-
   &.padding {
     padding: 0 $padding $padding;
   }

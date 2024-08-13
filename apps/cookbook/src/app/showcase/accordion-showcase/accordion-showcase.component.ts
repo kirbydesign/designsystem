@@ -36,7 +36,7 @@ export class AccordionShowcaseComponent {
     },
     {
       name: 'hasPadding',
-      description: 'If set, the accordion will have spacing between the border and the content',
+      description: 'If set, the accordion item will have spacing between the border and the content',
       defaultValue: 'true',
       type: ['boolean'],
     },
