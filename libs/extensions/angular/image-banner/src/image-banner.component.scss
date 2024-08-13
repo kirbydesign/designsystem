@@ -11,7 +11,7 @@ $max-content-width: 324px;
 
   .dismiss {
     // on mobile we always want the button to be white as it sits on top of the image
-    @media (width < 632px) {
+    @include utils.media('<small') {
       --kirby-inputs-background-color: var(--kirby-white);
       --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
       --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
@@ -61,7 +61,6 @@ kirby-card {
   flex-direction: column;
 
   @include utils.media('>=small') {
-    display: flex;
     gap: utils.size('s');
     height: 100%;
     flex-direction: initial;

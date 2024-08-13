@@ -16,7 +16,7 @@
   </div>
 
   <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
-  <a *ngIf="externalLink" class="main-content-anchor" href="{{ externalLink }}" target="_blank"></a>
+  <a *ngIf="externalLink" class="main-content-anchor" [href]="externalLink" target="_blank"></a>
 
   <div class="main-content-wrapper">
     <div class="main-content-image-wrapper">
@@ -44,9 +44,9 @@
             class="main-content-body-action-text"
             [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
             [showIconOnly]="!actionButtonText"
-            size="sm"
-            href="{{ externalLink }}"
+            [href]="externalLink"
             target="_blank"
+            size="sm"
           >
             {{ actionButtonText }}
             <kirby-icon name="link"></kirby-icon>
