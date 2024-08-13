@@ -218,7 +218,7 @@
 </p>
 
 <h2 #flagged>Flagged</h2>
-<cookbook-example-viewer [html]="flaggedExample.template">
+<cookbook-example-viewer [html]="flaggedExample.template" [css]="flaggedExample.styles">
   <cookbook-item-example-flagged #flaggedExample></cookbook-item-example-flagged>
 </cookbook-example-viewer>
 
@@ -232,13 +232,16 @@
   <cookbook-item-example-avatar-date #avatarDateExample></cookbook-item-example-avatar-date>
 </cookbook-example-viewer>
 <h3>Avatar flagged</h3>
-<cookbook-example-viewer [html]="avatarFlaggedExample.template">
+<cookbook-example-viewer [html]="avatarFlaggedExample.template" [css]="avatarFlaggedExample.styles">
   <cookbook-item-example-avatar-flagged
     #avatarFlaggedExample
   ></cookbook-item-example-avatar-flagged>
 </cookbook-example-viewer>
 <h3>Avatar flagged, three lines</h3>
-<cookbook-example-viewer [html]="avatarFlaggedThreeLinesExample.template">
+<cookbook-example-viewer
+  [html]="avatarFlaggedThreeLinesExample.template"
+  [css]="avatarFlaggedThreeLinesExample.styles"
+>
   <cookbook-item-example-avatar-flagged-three-lines
     #avatarFlaggedThreeLinesExample
   ></cookbook-item-example-avatar-flagged-three-lines>
