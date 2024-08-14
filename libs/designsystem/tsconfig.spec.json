@@ -5,7 +5,9 @@
     "types": ["jasmine", "node"],
     "paths": {
       "@kirbydesign/core": ["libs/core/src/index.ts"],
-      "@kirbydesign/extensions-angular/banner": ["libs/extensions/angular/banner/index.ts"],
+      "@kirbydesign/extensions-angular/image-banner": [
+        "libs/extensions/angular/image-banner/index.ts"
+      ],
       "@kirbydesign/designsystem/*": ["libs/designsystem/*"],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/accordion/index.ts"],
       "@kirbydesign/designsystem/action-group": ["libs/designsystem/action-group/index.ts"],

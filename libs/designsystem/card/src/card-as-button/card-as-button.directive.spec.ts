@@ -36,7 +36,7 @@ describe('CardAsButtonDirective', () => {
     describe(`when keydown is activated for ${key}`, () => {
       beforeEach(() => {
         expect(cardElement).not.toHaveClass('interaction-state-active');
-        spectator.dispatchKeyboardEvent('kirby-card', 'keydown', key);
+        spectator.dispatchKeyboardEvent('kirby-card', 'keydown', key, cardElement);
       });
 
       it('should add class "interaction-state-active" to host', () => {
@@ -46,7 +46,7 @@ describe('CardAsButtonDirective', () => {
       describe(`and keyup is then activated for ${key}`, () => {
         beforeEach(() => {
           expect(cardElement).toHaveClass('interaction-state-active');
-          spectator.dispatchKeyboardEvent('kirby-card', 'keyup', key);
+          spectator.dispatchKeyboardEvent('kirby-card', 'keyup', key, cardElement);
         });
 
         it('should remove class "interaction-state-active" from host', () => {
