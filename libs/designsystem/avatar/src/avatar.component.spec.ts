@@ -47,6 +47,25 @@ describe('AvatarComponent', () => {
     });
   });
 
+  it('should emit error when rendering avatar with invalid image source', async () => {
+    spectator = createHost(`
+      <kirby-avatar imageSrc="failingSrc.png"></kirby-avatar>
+    `);
+    spyOn(spectator.component.imageError, 'emit');
+
+    let errorEvent: ErrorEvent;
+    const img = spectator.query<HTMLImageElement>('img');
+    const waitForImageError = new Promise<HTMLImageElement>((resolve) => {
+      img.addEventListener('error', (ev) => {
+        errorEvent = ev;
+        resolve(img);
+      });
+    });
+    await waitForImageError;
+
+    expect(spectator.component.imageError.emit).toHaveBeenCalledOnceWith(errorEvent);
+  });
+
   describe('when rendering Avatar within Progress Circle', () => {
     it(`should have correct size when Progress Circle size = 'sm'`, async () => {
       spectator = createHost(`

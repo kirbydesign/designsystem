@@ -8,11 +8,11 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
-  *ngIf="showPageProgress !== undefined"
+  *ngIf="showPageProgress !== undefined && (flavor === undefined || flavor === 'modal')"
   [checked]="showPageProgress && !interactWithBackground"
   (checkedChange)="toggleShowPageProgress($event)"
   [disabled]="interactWithBackground || disabled"
-  text="Show page progress"
+  text="Show page progress (modal only)"
   size="xs"
 ></kirby-checkbox>
 

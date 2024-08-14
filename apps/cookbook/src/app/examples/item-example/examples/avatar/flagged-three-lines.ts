@@ -4,8 +4,8 @@ const config = {
   selector: 'cookbook-item-example-avatar-flagged-three-lines',
   template: `<kirby-item>
   <div slot="outside">
-    <div class="flag success"></div>
-    <div class="flag warning"></div>
+    <kirby-badge themeColor="success" size="sm"></kirby-badge>
+    <kirby-badge themeColor="warning" size="sm"></kirby-badge>
   </div>
   <kirby-avatar overlay="true" slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
@@ -18,20 +18,10 @@ const config = {
   <data slot="end" class="kirby-text-bold" value="value">Value</data>
 </kirby-item>`,
   styles: [
-    `.flag {
-      width: 8px;
-      height: 8px;
-      border-radius:50%;
-    }`,
-    `.flag.success {
-      background: var(--kirby-success);
-    }`,
-    `.flag.warning {
-      background: var(--kirby-warning);
-    }`,
-    `.flag:not(:last-child) {
-      margin-bottom: 2px;
-    }`,
+    `div[slot="outside"] {
+  display: flex;
+  flex-direction: column;
+}`,
   ],
 };
 
@@ -42,4 +32,5 @@ const config = {
 })
 export class ItemExampleAvatarFlaggedThreeLinesComponent {
   template: string = config.template;
+  styles: string = config.styles[0];
 }
