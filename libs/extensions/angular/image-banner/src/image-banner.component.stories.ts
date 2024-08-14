@@ -2,7 +2,8 @@ import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
 
 /**
- * TODO: Awaiting banner description from UX guidelines.
+ * The image banner is a dynamic UI component designed to grab attention and convey key messages.
+ * It can combine a delightful visual background and text to highlight promotional content or other important information.
  */
 const meta: Meta<ImageBannerComponent> = {
   component: ImageBannerComponent,
@@ -38,7 +39,7 @@ export const Default: Story = {
     title: 'An Image Banner',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
-    imagePath: 'assets/autocamper.png',
+    imagePath: 'assets/leaves.jpg',
     backgroundBlur: 'dark',
   },
 };
@@ -52,7 +53,7 @@ export const LightBackgroundBlur: Story = {
   args: {
     title: 'Light Background Blur',
     bodyText: 'This is the body text.',
-    imagePath: 'assets/mountains.png',
+    imagePath: 'assets/leaves.jpg',
     backgroundBlur: 'light',
     actionButtonText: 'Read more',
   },
@@ -63,7 +64,7 @@ export const NoBackgroundBlur: Story = {
     title: 'No Background Blur',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
-    imagePath: 'assets/autocamper.png',
+    imagePath: 'assets/leaves.jpg',
     backgroundBlur: 'none',
   },
 };
@@ -77,7 +78,7 @@ export const ExternalLink: Story = {
     bodyText: 'Activating this banner will take you to www.kirby.design 👋',
     actionButtonText: 'Go to Kirby Design',
     externalLink: 'http://www.kirby.design',
-    imagePath: 'assets/autocamper.png',
+    imagePath: 'assets/leaves.jpg',
   },
 };
 
@@ -90,8 +91,7 @@ export const NoDismiss: Story = {
     title: 'No Dismiss in Banner',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
-    imagePath: 'assets/autocamper.png',
-    backgroundBlur: 'dark',
+    imagePath: 'assets/leaves.jpg',
     dismissClick: undefined,
   },
   // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
