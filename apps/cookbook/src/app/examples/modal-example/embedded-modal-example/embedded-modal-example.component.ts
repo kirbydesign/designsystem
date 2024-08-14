@@ -4,6 +4,7 @@ import {
   ActionSheetConfig,
   AlertConfig,
   ModalController,
+  ModalFlavor,
   ModalSize,
 } from '@kirbydesign/designsystem';
 import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
@@ -19,6 +20,8 @@ import { ModalSizeOption } from '../modal-example-configuration/modal-example-si
 export class EmbeddedModalExampleComponent implements OnInit {
   title: string;
   subtitle: string;
+
+  flavor: ModalFlavor;
 
   exampleProperties: {
     stringProperty: string;
@@ -112,6 +115,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
       componentProps: {
         title,
         subtitle: 'Hello from second embedded example component!',
+        flavor,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
         showPageProgress: this.showNestedPageProgress,

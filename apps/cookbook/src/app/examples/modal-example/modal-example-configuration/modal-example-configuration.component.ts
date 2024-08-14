@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { ModalFlavor } from '@kirbydesign/designsystem/modal';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
@@ -9,6 +10,8 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 })
 export class ModalExampleConfigurationComponent {
   @Input() disabled: boolean;
+
+  @Input() flavor: ModalFlavor;
 
   @Input() showDummyKeyboard: boolean;
   @Output() showDummyKeyboardChange = new EventEmitter<boolean>();
