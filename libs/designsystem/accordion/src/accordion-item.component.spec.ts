@@ -59,11 +59,13 @@ describe('AccordionItemComponent', () => {
 
       expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(true);
     });
+
     it('should have padding by default', () => {
       expect(spectator.query('.content-body')).toHaveComputedStyle({
         padding: `0px ${padding} ${padding}`,
       });
     });
+
     it('should have no padding if hasPadding is false', () => {
       spectator.setInput('hasPadding', false);
       spectator.detectChanges();

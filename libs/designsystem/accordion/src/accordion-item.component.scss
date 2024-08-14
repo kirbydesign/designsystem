@@ -40,10 +40,8 @@ $padding: utils.size('s');
   cursor: default;
 }
 
-.content-body {
-  &.padding {
-    padding: 0 $padding $padding;
-  }
+.content-body.padding {
+  padding: 0 $padding $padding;
 }
 
 .disabled {
