@@ -1,4 +1,4 @@
-<kirby-page-progress *ngIf="showPageProgress">
+<kirby-page-progress *ngIf="showPageProgress && flavor === 'modal'">
   <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
     2/4
   </kirby-progress-circle>
@@ -13,6 +13,7 @@
   configAppearance="snap-to-viewport"
 >
   <cookbook-modal-example-configuration
+    [flavor]="flavor"
     [(showDummyContent)]="showDummyContent"
     [(showPageProgress)]="showPageProgress"
     [(showFooter)]="showFooter"
