@@ -7,6 +7,7 @@ import { AccordionItemComponent } from './accordion-item.component';
 
 const getColor = DesignTokenHelper.getColor;
 const getTextColor = DesignTokenHelper.getTextColor;
+const padding = DesignTokenHelper.size('s');
 
 describe('AccordionItemComponent', () => {
   let spectator: SpectatorHost<AccordionItemComponent>;
@@ -57,6 +58,21 @@ describe('AccordionItemComponent', () => {
       spectator.click('.header');
 
       expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(true);
+    });
+
+    it('should have padding by default', () => {
+      expect(spectator.query('.content-body')).toHaveComputedStyle({
+        padding: `0px ${padding} ${padding}`,
+      });
+    });
+
+    it('should have no padding if hasPadding is false', () => {
+      spectator.setInput('hasPadding', false);
+      spectator.detectChanges();
+
+      expect(spectator.query('.content-body')).toHaveComputedStyle({
+        padding: '0px',
+      });
     });
   });
 
