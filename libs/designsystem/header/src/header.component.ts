@@ -9,11 +9,14 @@ import {
   HostBinding,
   Injector,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
@@ -47,7 +50,7 @@ export class HeaderCustomFlagDirective {}
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements AfterContentInit, OnInit {
+export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
   @HostBinding('class.centered')
   @Input()
   centered?: boolean;
@@ -94,6 +97,8 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @Input() hasInteractiveTitle?: boolean;
 
   @Output() titleClick = new EventEmitter<PointerEvent>();
+
+  title$: Subject<string> = new Subject<string>();
 
   get _subtitles1() {
     return Array.isArray(this.subtitle1) ? this.subtitle1 : [this.subtitle1];
@@ -143,6 +148,12 @@ export class HeaderComponent implements AfterContentInit, OnInit {
 
     if (this.centered) {
       this.actionGroupConfig.isCondensed = true;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.title) {
+      this.title$.next(changes.title.currentValue);
     }
   }
 }

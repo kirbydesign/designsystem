@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { BrandColor, NotificationColor } from '@kirbydesign/core';
 
@@ -27,9 +34,15 @@ export class AvatarComponent {
   @Input() size: AvatarSize | `${AvatarSize}` = AvatarSize.SM;
   @Input()
   themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
+  @Output()
+  imageError: EventEmitter<ErrorEvent> = new EventEmitter();
 
   @HostBinding('class')
   get _cssClass() {
     return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
+  }
+
+  onImageError($event: ErrorEvent) {
+    this.imageError.emit($event);
   }
 }

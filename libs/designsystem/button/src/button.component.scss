@@ -280,6 +280,10 @@ $button-margin: utils.size('xxxs');
   }
 }
 
+:host(a) {
+  text-decoration: none;
+}
+
 :host-context(.kirby-color-brightness-dark) {
   &.no-decoration {
     --kirby-button-color: #{utils.get-color('white')};

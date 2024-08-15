@@ -1,0 +1,84 @@
+<kirby-card *ngIf="externalLink" [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'">
+  <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
+</kirby-card>
+
+<kirby-card
+  *ngIf="!externalLink"
+  [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
+  (click)="bannerClicked($event)"
+>
+  <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
+</kirby-card>
+
+<ng-template #sharedCardContent>
+  <div class="blur-image-wrapper">
+    <img class="blur-image" [src]="imagePath" alt="" />
+  </div>
+
+  <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
+  <a *ngIf="externalLink" class="main-content-anchor" [href]="externalLink" target="_blank"></a>
+
+  <div class="main-content-wrapper">
+    <div class="main-content-image-wrapper">
+      <img class="main-content-image" [src]="imagePath" alt="" />
+    </div>
+
+    <div class="main-content">
+      <div class="main-content-header">
+        <p class="kirby-text-normal-bold">
+          {{ title }}
+        </p>
+      </div>
+
+      <div class="main-content-body">
+        <div class="main-content-body-text">
+          <span class="kirby-text-small">
+            {{ bodyText }}
+          </span>
+        </div>
+
+        <ng-container *ngIf="externalLink">
+          <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
+          <a
+            kirby-button
+            class="main-content-body-action-text"
+            [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+            [showIconOnly]="!actionButtonText"
+            [href]="externalLink"
+            target="_blank"
+            size="sm"
+          >
+            {{ actionButtonText }}
+            <kirby-icon name="link"></kirby-icon>
+          </a>
+
+          <div class="main-content-body-action-link">
+            <kirby-icon name="link"></kirby-icon>
+          </div>
+        </ng-container>
+
+        <button
+          class="main-content-body-action-text"
+          kirby-button
+          *ngIf="actionButtonText && !externalLink"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          size="sm"
+        >
+          {{ actionButtonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dismiss" *ngIf="dismissClick.observed">
+    <button
+      kirby-button
+      (click)="dismissClicked($event)"
+      [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+      [showIconOnly]="true"
+      size="xs"
+    >
+      <kirby-icon name="close"></kirby-icon>
+    </button>
+  </div>
+</ng-template>

@@ -34,6 +34,13 @@ export class AccordionShowcaseComponent {
       defaultValue: 'null',
       type: ['string'],
     },
+    {
+      name: 'hasPadding',
+      description:
+        'If set, the accordion item will have spacing between the border and the content',
+      defaultValue: 'true',
+      type: ['boolean'],
+    },
   ];
   events: ApiDescriptionEvent[] = [
     {

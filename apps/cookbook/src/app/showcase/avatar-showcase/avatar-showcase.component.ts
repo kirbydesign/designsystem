@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AvatarSize } from '@kirbydesign/designsystem';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -46,6 +47,15 @@ export class AvatarShowcaseComponent {
       description: 'Adds an outline to the avatar.',
       defaultValue: 'false',
       type: ['true', 'false'],
+    },
+  ];
+
+  events: ApiDescriptionEvent[] = [
+    {
+      name: 'imageError',
+      description:
+        'Emitted when the loading of an avatar image results in an error - usually due to the specified imageSrc not being found.',
+      signature: '(ErrorEvent) => void',
     },
   ];
 }

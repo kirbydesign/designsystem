@@ -1,5 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
-@use './card-example.shared.scss';
+@use './card-example.shared';
 
 $card-gap: utils.size('s');
 $card-min-width: 250px;

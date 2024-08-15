@@ -32,8 +32,22 @@
     <cookbook-avatar-example-image-size #imageSizeExample></cookbook-avatar-example-image-size>
   </cookbook-example-viewer>
 
+  <h2>Avatar with fallback image</h2>
+  <p>
+    The image avatar will emit an
+    <code>ErrorEvent</code>
+    if the image fails to load. This allows for falling back to a default avatar image or do some
+    other handling when the image cannot be loaded.
+  </p>
+
+  <cookbook-example-viewer [html]="imageErrorExample.template" [ts]="imageErrorExample.ts">
+    <cookbook-avatar-example-image-error #imageErrorExample></cookbook-avatar-example-image-error>
+  </cookbook-example-viewer>
+
   <h2>Properties:</h2>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
+  <h2>Events:</h2>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
 </div>
