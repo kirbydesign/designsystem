@@ -8,6 +8,18 @@ export type BadgeVariant = 'white' | 'success' | 'warning' | 'danger';
 export type BadgeSize = 'sm' | 'md';
 
 export class KirbyBadge extends LitElement {
+  // TODO: Move to base class
+  static define(whosCalling: string) {
+    const name = 'kirby-badge';
+    const currentlyRegisteredConstructor = customElements.get(name) as CustomElementConstructor;
+    if (!currentlyRegisteredConstructor) {
+      // console.warn(`Registering ${name}... Called by: ${whosCalling}`);
+      window.customElements.define(name, KirbyBadge);
+      // } else {
+      //   console.warn(`${name} already defined... Called by: ${whosCalling}`);
+    }
+  }
+
   static styles: CSSResultGroup = [componentStyles, styles];
 
   /** The badge's theme variant. */

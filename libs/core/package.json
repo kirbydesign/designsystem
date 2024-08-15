@@ -7,6 +7,9 @@
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
+  "sideeffects": [
+    "./dist/badge/index.js"
+  ],
   "scripts": {
     "build": "tsc"
   },
@@ -17,13 +20,20 @@
     "lit": "^3.1.4"
   },
   "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./src/scss/*": {
+      "style": "./src/scss/*"
+    },
     "./badge": {
       "types": "./dist/types/badge/index.d.ts",
       "default": "./dist/badge/index.js"
     },
-    "./kirby-badge": {
-      "types": "./dist/types/badge/kirby-badge.d.ts",
-      "default": "./dist/badge/kirby-badge.js"
+    "./badge.component": {
+      "types": "./dist/types/badge/badge.component.d.ts",
+      "default": "./dist/badge/badge.component.js"
     }
   }
 }
