@@ -1,9 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, HostBinding, Input } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 @Component({
   selector: 'cookbook-example-configuration-wrapper',
+  imports: [CommonModule, ButtonComponent, CardModule, IconModule],
   templateUrl: './example-configuration-wrapper.component.html',
   styleUrls: ['./example-configuration-wrapper.component.scss'],
+  standalone: true,
 })
 export class ExampleConfigurationWrapperComponent {
   @Input()

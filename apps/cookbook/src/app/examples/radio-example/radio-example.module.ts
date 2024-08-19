@@ -10,9 +10,9 @@ import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
-import { ExamplesSharedModule } from '../examples.shared.module';
 import { ReactiveFormStateExampleModule } from '../reactive-form-state/reactive-form.module';
 
+import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { RadioExampleBindingComponent } from './examples/binding';
 import { RadioCustomContentExampleComponent } from './examples/custom';
 import { RadioDefaultExampleComponent } from './examples/default';
@@ -42,7 +42,7 @@ const COMPONENT_DECLARATIONS = [
 @NgModule({
   imports: [
     CommonModule,
-    ExamplesSharedModule,
+    ExampleConfigurationWrapperComponent,
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormStateExampleModule,

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ReactiveFormStateExampleModule } from '../reactive-form-state/reactive-form.module';
-import { ExamplesSharedModule } from '../examples.shared.module';
+import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { CheckboxConfirmExampleComponent } from './examples/confirm';
 import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxEventsExampleComponent } from './examples/events';
@@ -31,7 +31,7 @@ const COMPONENT_DECLARATIONS = [
     CommonModule,
     KirbyModule,
     FormsModule,
-    ExamplesSharedModule,
+    ExampleConfigurationWrapperComponent,
     ReactiveFormsModule,
     ReactiveFormStateExampleModule,
   ],
