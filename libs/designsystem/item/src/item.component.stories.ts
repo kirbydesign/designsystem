@@ -1,13 +1,14 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { ItemComponent, ItemModule, ItemSize } from '@kirbydesign/designsystem/item';
 
+import { RadioModule } from '@kirbydesign/designsystem/radio';
 import { ItemExampleModule } from '~/app/examples/item-example/item-example.module';
 
 const meta: Meta<ItemComponent> = {
   component: ItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [ItemModule, ItemExampleModule],
+      imports: [ItemModule, ItemExampleModule, RadioModule],
     }),
   ],
   title: 'Components / Item',
@@ -33,6 +34,43 @@ export const Default: Story = {
   render: (args: ItemComponent) => ({
     props: args,
     template: `<kirby-item ${argsToTemplate(args)}>Item</kirby-item>`,
+  }),
+};
+
+export const ItemWithRadio: Story = {
+  render: () => ({
+    template: `<kirby-radio-group value="1">
+    <kirby-item size="xs">
+      <kirby-radio value="1" slot="start"></kirby-radio>
+      <kirby-label>Extra Small</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-radio value="2" slot="start"></kirby-radio>
+      <kirby-label>Extra Small</kirby-label>
+    </kirby-item> 
+  </kirby-radio-group>
+  <br>
+  <kirby-radio-group value="1">
+    <kirby-item size="sm">
+      <kirby-radio value="1" slot="start"></kirby-radio>
+      <kirby-label>Small</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-radio value="2" slot="start"></kirby-radio>
+      <kirby-label>Small</kirby-label>
+    </kirby-item> 
+  </kirby-radio-group>
+  <br>
+  <kirby-radio-group value="1">
+    <kirby-item size="md">
+      <kirby-radio value="1" slot="start"></kirby-radio>
+      <kirby-label>Medium</kirby-label>
+    </kirby-item> 
+    <kirby-item size="md">
+      <kirby-radio value="2" slot="start"></kirby-radio>
+      <kirby-label>Medium</kirby-label>
+    </kirby-item> 
+  </kirby-radio-group>`,
   }),
 };
 

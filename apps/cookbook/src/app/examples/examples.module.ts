@@ -19,7 +19,6 @@ import { CheckboxExampleModule } from './checkbox-example/checkbox-example.modul
 import { DataTableExampleModule } from './data-table-example/table-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
-import { ExamplesSharedModule } from './examples.shared.module';
 import { ExperimentalExamplesModule } from './experimental-examples/experimental-examples.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
@@ -43,10 +42,11 @@ import { ToggleExampleModule } from './toggle-example/toggle-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 import { MenuExampleModule } from './menu-example/menu-example.module';
 import { IconExampleModule } from './icon-example/icon-example.module';
+import { ExampleConfigurationWrapperComponent } from './example-configuration-wrapper/example-configuration-wrapper.component';
 
 const IMPORTS = [
   CodeViewerModule,
-  ExamplesSharedModule,
+  ExampleConfigurationWrapperComponent,
   FormFieldExamplesModule,
   ItemExampleModule,
   ListExamplesModule,

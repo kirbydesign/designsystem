@@ -2,12 +2,14 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { RadioGroupComponent, RadioModule } from '@kirbydesign/designsystem/radio';
 
+import { RadioExampleModule } from '~/app/examples/radio-example/radio-example.module';
+
 const meta: Meta<RadioGroupComponent> = {
   component: RadioGroupComponent,
   title: 'Components / Radio',
   decorators: [
     moduleMetadata({
-      imports: [RadioModule],
+      imports: [RadioModule, RadioExampleModule],
     }),
   ],
 };
@@ -24,4 +26,10 @@ export const Radio: Story = {
     selectedIndex: -1,
     value: '',
   },
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-radio-example></cookbook-radio-example>`,
+  }),
 };
