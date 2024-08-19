@@ -36,6 +36,7 @@ const config = {
       <kirby-item size="sm">
         <h3>Subitem 6</h3>
       </kirby-item>
+      <kirby-divider></kirby-divider>
       <kirby-item size="sm">
         <h3>Subitem 7</h3>
       </kirby-item>
