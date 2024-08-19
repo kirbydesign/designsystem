@@ -8,6 +8,8 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { ExamplesSharedModule } from '../examples.shared.module';
 import { ReactiveFormStateExampleModule } from '../reactive-form-state/reactive-form.module';
 
@@ -48,9 +50,11 @@ const COMPONENT_DECLARATIONS = [
     ItemModule,
     CardModule,
     FormFieldModule,
+    ListModule,
     CheckboxComponent,
     ButtonComponent,
   ],
+  providers: [ToastController, ToastHelper],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
