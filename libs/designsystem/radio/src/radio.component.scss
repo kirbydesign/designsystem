@@ -24,19 +24,10 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
         padding-bottom: $vertical-padding;
       }
 
-      // BEGIN "Refactor `Radio` to comply with `ion-radio`" fix
-      // https://github.com/kirbydesign/designsystem/issues/3479
       // Preserve visual appearance using magic numbers and sorcery.
-      // This fix is a temporary solution.
-      // When we stop using Ionic it is no longer necessary.
-      // <kirby-radio> inside <kirby-item> needs different vertical padding.
-      // The containing <kirby-item> declares min-height
-      // so <kirby-radio> must use the same value in its size attribute.
       ion-radio.in-item:not(.legacy-radio)::part(label) {
         padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
       }
-
-      // END "Refactor `Radio` to comply with `ion-radio`" fix
     }
   }
 
@@ -108,8 +99,6 @@ ion-radio {
     margin-inline: $spacing-to-label 0;
   }
 
-  // BEGIN "Refactor `Radio` to comply with `ion-radio`" fix
-  // https://github.com/kirbydesign/designsystem/issues/3479
   // Preserve visual appearance by overriding styles (both Kirby and Ionic) for
   // <kirby-radio> inside <kirby-item>
   &.in-item:not(.legacy-radio) {
@@ -125,8 +114,6 @@ ion-radio {
       line-height: 1.4;
     }
   }
-
-  // END "Refactor `Radio` to comply with `ion-radio`" fix
 
   :host-context(kirby-radio-group.error),
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
