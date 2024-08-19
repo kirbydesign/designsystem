@@ -10,6 +10,8 @@ export type BadgeVariant = 'white' | 'success' | 'warning' | 'danger';
 export type BadgeSize = 'sm' | 'md';
 
 export class KirbyBadge extends KirbyElement {
+  static override tagName = 'kirby-badge';
+
   static styles: CSSResultGroup = [componentStyles, styles];
 
   /** The badge's theme variant. */

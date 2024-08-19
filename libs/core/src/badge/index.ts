@@ -2,7 +2,7 @@ import { KirbyBadge } from './badge.component';
 
 export * from './badge.component';
 
-KirbyBadge.define('Core Badge barrel');
+KirbyBadge.define();
 
 declare global {
   interface HTMLElementTagNameMap {
