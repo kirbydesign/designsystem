@@ -15,22 +15,6 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 :host {
   display: block;
 
-  @each $size, $height in utils.$checkbox-radio-sizes {
-    &.#{$size} {
-      $vertical-padding: get-vertical-padding($height);
-
-      ion-radio::part(label) {
-        padding-top: $vertical-padding;
-        padding-bottom: $vertical-padding;
-      }
-
-      // Preserve visual appearance using magic numbers and sorcery.
-      ion-radio.in-item:not(.legacy-radio)::part(label) {
-        padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
-      }
-    }
-  }
-
   &[disabled] {
     color: #{utils.get-text-color('semi-dark')};
 
@@ -49,6 +33,23 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       &::part(native-wrapper) {
         opacity: 1; // Reset Ionic disabled style
       }
+    }
+  }
+}
+
+@each $size, $height in utils.$checkbox-radio-sizes {
+  :host.#{$size},
+  :host-context(kirby-item.#{$size}) {
+    $vertical-padding: get-vertical-padding($height);
+
+    ion-radio::part(label) {
+      padding-top: $vertical-padding;
+      padding-bottom: $vertical-padding;
+    }
+
+    // Preserve visual appearance using magic numbers and sorcery.
+    ion-radio.in-item:not(.legacy-radio)::part(label) {
+      padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
     }
   }
 }
