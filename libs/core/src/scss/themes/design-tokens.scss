@@ -1,0 +1,6 @@
+@use '../utils';
+
+:root,
+:host {
+  @include utils.tokens-all;
+}

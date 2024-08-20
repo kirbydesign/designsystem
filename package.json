@@ -23,12 +23,13 @@
     "build-storybook": "nx build-storybook designsystem",
     "chromatic": "chromatic",
     "publish": "node ./scripts/publish.js",
-    "postinstall": "npm run transpile:tools && npm run extract-scss-variables && npx nx build core && npm run transpile:generate-mocks",
+    "postinstall": "npm run transpile:tools && npm run extract-scss-variables && npm run generate-design-tokens && npx nx build core && npm run transpile:generate-mocks",
     "transpile:tools": "tsc -b tools/sass-to-ts",
     "transpile:generate-mocks": "tsc -b tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
     "sync-node-version": "node ./scripts/sync-node-version.js",
+    "generate-design-tokens": "sass libs/core/src/scss/themes/design-tokens.scss libs/core/src/scss/themes/design-tokens.css --no-source-map",
     "nx": "nx"
   },
   "devDependencies": {
