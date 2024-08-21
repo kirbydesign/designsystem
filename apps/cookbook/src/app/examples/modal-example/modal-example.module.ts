@@ -6,8 +6,8 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 
 import { FormsModule } from '@angular/forms';
-import { ExamplesSharedModule } from '../examples.shared.module';
 
+import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalExampleConfigurationComponent } from './modal-example-configuration/modal-example-configuration.component';
@@ -49,7 +49,7 @@ const COMPONENT_DECLARATIONS = [
     RouterModule,
     KirbyModule,
     KirbyModalModule,
-    ExamplesSharedModule,
+    ExampleConfigurationWrapperComponent,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,

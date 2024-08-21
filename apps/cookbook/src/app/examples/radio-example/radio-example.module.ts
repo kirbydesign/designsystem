@@ -2,11 +2,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
-
-import { ExamplesSharedModule } from '../examples.shared.module';
+import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { ReactiveFormStateExampleModule } from '../reactive-form-state/reactive-form.module';
 
+import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { RadioExampleBindingComponent } from './examples/binding';
 import { RadioCustomContentExampleComponent } from './examples/custom';
 import { RadioDefaultExampleComponent } from './examples/default';
@@ -36,12 +42,19 @@ const COMPONENT_DECLARATIONS = [
 @NgModule({
   imports: [
     CommonModule,
-    KirbyModule,
-    ExamplesSharedModule,
+    ExampleConfigurationWrapperComponent,
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormStateExampleModule,
+    RadioModule,
+    ItemModule,
+    CardModule,
+    FormFieldModule,
+    ListModule,
+    CheckboxComponent,
+    ButtonComponent,
   ],
+  providers: [ToastController, ToastHelper],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
