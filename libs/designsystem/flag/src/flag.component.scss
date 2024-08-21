@@ -24,16 +24,16 @@
   font-size: utils.font-size('n');
   padding: utils.size('xxxxs') utils.size('xxs');
   font-weight: utils.font-weight('medium');
-  line-height: _calculate-line-height($targetHeight: 28px, $fontSize: utils.font-size('n'));
+  line-height: _calculate-line-height($targetHeight: 28px, $fontSize: 16px);
 
   &.sm {
     font-size: utils.font-size('s');
-    line-height: _calculate-line-height($targetHeight: 24px, $fontSize: utils.font-size('s'));
+    line-height: _calculate-line-height($targetHeight: 24px, $fontSize: 14px);
   }
 
   &.xs {
     font-size: utils.font-size('xs');
-    line-height: _calculate-line-height($targetHeight: 20px, $fontSize: utils.font-size('xs'));
+    line-height: _calculate-line-height($targetHeight: 20px, $fontSize: 12px);
     padding-left: utils.size('xxxs');
     padding-right: utils.size('xxxs');
   }
