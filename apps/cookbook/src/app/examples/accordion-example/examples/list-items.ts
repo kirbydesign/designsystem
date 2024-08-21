@@ -3,7 +3,7 @@ import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 
 const config = {
   selector: 'cookbook-accordion-with-items-example',
-  template: `
+  template: `<kirby-card>
   <kirby-accordion>
     <kirby-accordion-item title="Burgers">
       <kirby-list [items]="burgers">
@@ -21,7 +21,8 @@ const config = {
         </kirby-item>
       </kirby-list>
     </kirby-accordion-item>
-  </kirby-accordion>`,
+  </kirby-accordion>
+</kirby-card>`,
 };
 
 @Component({

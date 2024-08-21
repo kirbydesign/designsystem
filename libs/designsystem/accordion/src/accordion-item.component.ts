@@ -1,11 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
-  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -45,11 +43,11 @@ export class AccordionItemComponent implements OnChanges, AfterContentInit {
 
   ngAfterContentInit(): void {
     if (this.kirbyListChildren.length > 0) {
-      // this.hasPadding = false;
-      // this.kirbyListChildren.forEach((child) => {
-      //   child.shape = 'none';
-      //   this.renderer.addClass(child.elem.nativeElement, 'transparent');
-      // });
+      this.hasPadding = false;
+      this.kirbyListChildren.forEach((child) => {
+        child.shape = 'none';
+        this.renderer.addClass(child.elem.nativeElement, 'transparent');
+      });
     }
   }
 
