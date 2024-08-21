@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 
 const config = {
-  selector: 'cookbook-accordion-with-items-example',
-  template: `<kirby-card>
+  selector: 'cookbook-accordion-with-list-example',
+  template: `
   <kirby-accordion>
     <kirby-accordion-item title="Burgers">
       <kirby-list [items]="burgers">
@@ -21,15 +20,14 @@ const config = {
         </kirby-item>
       </kirby-list>
     </kirby-accordion-item>
-  </kirby-accordion>
-</kirby-card>`,
+  </kirby-accordion>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
 })
-export class AccordionWithItemsExampleComponent {
+export class AccordionWithListExampleComponent {
   template: string = config.template;
 
   burgers: { title: string; price: string }[] = [

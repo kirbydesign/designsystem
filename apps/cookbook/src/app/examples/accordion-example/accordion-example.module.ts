@@ -7,14 +7,16 @@ import { AccordionCardExampleComponent } from './examples/card';
 import { AccordionDefaultExampleComponent } from './examples/default';
 import { AccordionExpandedExampleComponent } from './examples/expanded';
 import { AccordionEventsExampleComponent } from './examples/events';
-import { AccordionWithItemsExampleComponent } from './examples/list-items';
+import { AccordionWithListExampleComponent } from './examples/list';
+import { AccordionWithItemsInCardExampleComponent } from './examples/card-list';
 
 const COMPONENT_DECLARATIONS = [
   AccordionCardExampleComponent,
   AccordionDefaultExampleComponent,
   AccordionExpandedExampleComponent,
   AccordionEventsExampleComponent,
-  AccordionWithItemsExampleComponent,
+  AccordionWithListExampleComponent,
+  AccordionWithItemsInCardExampleComponent,
 ];
 
 @NgModule({
