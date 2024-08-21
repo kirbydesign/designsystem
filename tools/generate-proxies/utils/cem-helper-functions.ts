@@ -29,25 +29,11 @@ SOFTWARE.
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ClassField, CustomElement, Package } from 'custom-elements-manifest/schema';
-
-interface CustomElementWithPath extends CustomElement {
-  path: string;
-}
-
-export type ReactiveProperty = ClassField & {
-  attribute?: string;
-  deprecated?: string;
-};
-
-export type LitCustomElement = CustomElementWithPath & {
-  properties?: ReactiveProperty[];
-  elementImport: string;
-  typeImport: string;
-};
+import { CustomElement, Package } from 'custom-elements-manifest/schema';
+import { CustomElementWithPath, LitCustomElement, ReactiveProperty } from './types';
 
 export function getElementMetadata(libPath: string, packageAlias: string): LitCustomElement[] {
-  execSync(`cem analyze --litelement --globs "${libPath}" --outdir "${libPath}"`);
+  execSync(`cem analyze`);
   const customElementManifest: Package = JSON.parse(
     fs.readFileSync(path.resolve(`${libPath}/custom-elements.json`), 'utf8')
   );
@@ -77,10 +63,10 @@ export function createLitElementMetadata(
   return litCustomElements;
 }
 
-function getCustomElements(manifest: any) {
+function getCustomElements(manifest: Package) {
   const elementsWithPaths: CustomElementWithPath[] = [];
 
-  manifest.modules.forEach((module: any) => {
+  manifest.modules.forEach((module) => {
     module.declarations?.map((declaration: any) => {
       if (declaration.customElement) {
         const element: CustomElement = declaration;
@@ -124,7 +110,7 @@ function getTypeImport(
   libPath: string
 ): string {
   const elementEntryPoint = replaceTsExtentions(`${element.path.replace(libPath, packageAlias)}`);
-  const typeImport = `import type { ${element.name} as ${element.name}Element } from '${elementEntryPoint}'`;
+  const typeImport = `import type { ${element.name} } from '${elementEntryPoint}'`;
 
   return typeImport;
 }
@@ -138,18 +124,24 @@ function changeExt(filePath: string, ext: string) {
   return `${filePath.substr(0, pos)}.${ext}`;
 }
 
-function isReactiveProperty(obj: any): obj is ReactiveProperty {
+function isReactiveProperty(obj: unknown): obj is ReactiveProperty {
   return (
-    obj.kind === 'field' &&
-    obj.attribute !== undefined &&
-    obj.privacy !== 'private' &&
-    obj.privacy !== 'protected' &&
-    typeof obj.attribute === 'string'
+    typeof obj === 'object' &&
+    (obj as ReactiveProperty).kind === 'field' &&
+    (obj as ReactiveProperty).privacy !== 'private' &&
+    (obj as ReactiveProperty).privacy !== 'protected' &&
+    (obj as ReactiveProperty).attribute !== undefined &&
+    typeof (obj as ReactiveProperty).attribute === 'string'
   );
 }
 
-export const eventToPropertyName = (eventName: string) =>
-  eventName.replace(/-+([a-zA-Z])/g, (_, c) => c.toUpperCase());
+export function getElementSummary(element: LitCustomElement) {
+  if (!element.summary) return;
+
+  return `/**
+     * ${element.summary}
+     */`;
+}
 
 export function getInputProperties(element: LitCustomElement) {
   return element.properties
@@ -175,14 +167,14 @@ export function getOutputProperties(element: LitCustomElement) {
   );
 }
 
-export function getDescription(property: ReactiveProperty) {
+function getDescription(property: ReactiveProperty) {
   if (!property.description) return;
   return `/**
    * ${property.description}
    */`;
 }
 
-export function getDescriptionDeprecated(property: ReactiveProperty) {
+function getDescriptionDeprecated(property: ReactiveProperty) {
   if (!property.deprecated) return;
   return `/**
    * @deprecated ${property.deprecated}
@@ -197,3 +189,6 @@ export function getEventListeners(element: LitCustomElement) {
     });`
   );
 }
+
+export const eventToPropertyName = (eventName: string) =>
+  eventName.replace(/-+([a-zA-Z])/g, (_, c) => c.toUpperCase());
