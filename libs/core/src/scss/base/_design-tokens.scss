@@ -1,0 +1,112 @@
+@use 'sass:color';
+@use 'sass:map';
+@use '../themes/colors';
+@use 'variables';
+
+@mixin font-family() {
+  --kirby-font-family: 'Roboto';
+}
+
+@mixin colors() {
+  @each $name, $value in colors.$kirby-colors {
+    --kirby-#{$name}: #{$value};
+  }
+}
+
+@mixin text-colors() {
+  @each $name, $value in colors.$text-colors {
+    --kirby-text-color-#{$name}: #{$value};
+  }
+}
+
+@mixin decoration-colors() {
+  @each $name, $ramp in colors.$decoration-colors {
+    @each $shade, $value in $ramp {
+      --kirby-decoration-color-#{$name}-#{$shade}: #{$value};
+    }
+  }
+}
+
+@mixin white-overlay-colors() {
+  @each $shade, $value in colors.$white-overlay-colors {
+    --kirby-white-overlay-#{$shade}: #{$value};
+  }
+}
+
+@mixin dark-overlay-colors() {
+  @each $shade, $value in colors.$dark-overlay-colors {
+    --kirby-dark-overlay-#{$shade}: #{$value};
+  }
+}
+
+@mixin elevations() {
+  @each $name, $value in variables.$elevations {
+    --kirby-elevation-#{$name}: #{$value};
+  }
+}
+
+@mixin font-sizes() {
+  @each $name, $value in variables.$font-sizes {
+    --kirby-font-size-#{$name}: #{$value};
+  }
+}
+
+@mixin font-weights() {
+  @each $name, $value in variables.$font-weight {
+    --kirby-font-weight-#{$name}: #{$value};
+  }
+}
+
+@mixin line-heights() {
+  @each $name, $value in variables.$line-height {
+    --kirby-line-height-#{$name}: #{$value};
+  }
+}
+
+@mixin spacings() {
+  @each $name, $value in variables.$sizes {
+    --kirby-spacing-#{$name}: #{$value};
+  }
+}
+
+@mixin z-layers() {
+  @each $name, $value in variables.$z-layers {
+    --kirby-z-index-#{$name}: #{$value};
+  }
+}
+
+@mixin all() {
+  /* FONT-FAMILY */
+  @include font-family;
+
+  /* COLORS */
+  @include colors;
+
+  /* TEXT-COLORS */
+  @include text-colors;
+
+  /* DECORATION-COLORS */
+  @include decoration-colors;
+
+  /* OVERLAY-COLORS */
+  @include white-overlay-colors;
+  @include dark-overlay-colors;
+
+  /* ELEVATIONS */
+  @include elevations;
+
+  /* FONT-SIZES */
+  @include font-sizes;
+
+  /* FONT-WEIGHT */
+  @include font-weights;
+
+  /* LINE-HEIGHT */
+  @include line-heights;
+
+  /* SPACINGS */
+  @include spacings;
+
+  /* Z-INDEXES */
+  @include z-layers;
+}

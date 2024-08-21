@@ -6,6 +6,7 @@
 @forward 'base/include-media' with (
   $breakpoints: variables.$breakpoints
 );
+@forward 'base/design-tokens' as tokens-*;
 @forward 'base/functions';
 @forward 'base/variables' hide $breakpoints;
 @forward 'themes/colors';

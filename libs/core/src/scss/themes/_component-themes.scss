@@ -38,24 +38,3 @@
   // Only set elevation on input components for light theme
   --kirby-inputs-elevation: var(--kirby-elevation-2);
 }
-
-:host,
-:root {
-  --kirby-white-overlay: hsl(0deg 0% 100% / 15%);
-  --kirby-white-overlay-10: hsl(0deg 0% 100% / 10%);
-  --kirby-white-overlay-20: hsl(0deg 0% 100% / 20%);
-  --kirby-white-overlay-30: hsl(0deg 0% 100% / 30%);
-  --kirby-white-overlay-40: hsl(0deg 0% 100% / 40%);
-  --kirby-white-overlay-50: hsl(0deg 0% 100% / 50%);
-  --kirby-dark-overlay: hsl(0deg 0% 11% / 6%);
-  --kirby-dark-overlay-10: hsl(0deg 0% 11% / 10%);
-  --kirby-dark-overlay-20: hsl(0deg 0% 11% / 20%);
-  --kirby-dark-overlay-30: hsl(0deg 0% 11% / 30%);
-  --kirby-dark-overlay-40: hsl(0deg 0% 11% / 40%);
-  --kirby-dark-overlay-50: hsl(0deg 0% 11% / 50%);
-  --kirby-white: hsl(0deg 0% 100%);
-  --kirby-black: hsl(0deg 0% 11%);
-  --kirby-semi-dark: hsl(0deg 0% 56%);
-  --kirby-elevation-2: 0 1px 24px 0 rgb(28 28 28 / 4%);
-  --kirby-elevation-4: 0 20px 30px -15px hsla(0deg 0% 11% 30%), 0 0 5px 0 hsla(0deg 0% 11% 8%);
-}

@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:math';
 @use 'utils';
+@use 'base/design-tokens';
 @use 'base/ionic';
 @use 'base/typography';
 @use 'base/line-clamp';
@@ -46,22 +47,9 @@ $modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-he
 
 :root,
 :host {
-  @include component-themes.apply-light-theme;
-
-  --kirby-font-family: 'Roboto';
-
   font-family: var(--kirby-font-family);
-  @each $color, $color-name in utils.$kirby-colors {
-    --kirby-#{$color}: #{$color-name};
-  }
-  @each $color, $color-name in utils.$text-colors {
-    --kirby-text-color-#{$color}: #{$color-name};
-  }
-  @each $color, $color-ramp in utils.$decoration-colors {
-    @each $shade, $color-value in $color-ramp {
-      --kirby-decoration-color-#{$color}-#{$shade}: #{$color-value};
-    }
-  }
+  @include design-tokens.all;
+  @include component-themes.apply-light-theme;
 
   --kirby-page-max-width: 1366px;
   --kirby-statusbar-padding: var(--ion-statusbar-padding);
