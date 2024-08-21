@@ -19,36 +19,53 @@ $sizes: (
   xxxxs: 2px,
 ) !default;
 
+// $base-size-unitless: 16;
+// $sizes: (
+//   xxxxxl: calc(1rem * 72 / $base-size-unitless),
+//   xxxxl: calc(1rem * 64 / $base-size-unitless),
+//   xxxl: calc(1rem * 56 / $base-size-unitless),
+//   xxl: calc(1rem * 48 / $base-size-unitless),
+//   xl: calc(1rem * 40 / $base-size-unitless),
+//   l: calc(1rem * 32 / $base-size-unitless),
+//   m: calc(1rem * 24 / $base-size-unitless),
+//   s: calc(1rem * 16 / $base-size-unitless),
+//   xs: calc(1rem * 12 / $base-size-unitless),
+//   xxs: calc(1rem * 8 / $base-size-unitless),
+//   xxxs: calc(1rem * 4 / $base-size-unitless),
+//   xxxxs: calc(1rem * 2 / $base-size-unitless),
+// ) !default;
+
 /*
   FONT SETTINGS 
 ****************************************************************************/
+$base-font-size-unitless: 16;
 $font-sizes: (
-  xxxxl: 72px,
-  xxxl: 56px,
-  xxl: 40px,
-  xl: 32px,
-  l: 22px,
-  m: 18px,
-  n: 16px,
-  s: 14px,
-  xs: 12px,
-  xxs: 10px,
+  xxxxl: calc((1rem * 72) / $base-font-size-unitless),
+  xxxl: calc((1rem * 56) / $base-font-size-unitless),
+  xxl: calc((1rem * 40) / $base-font-size-unitless),
+  xl: calc((1rem * 32) / $base-font-size-unitless),
+  l: calc((1rem * 22) / $base-font-size-unitless),
+  m: calc((1rem * 18) / $base-font-size-unitless),
+  n: calc((1rem * 16) / $base-font-size-unitless),
+  s: calc(1rem * 14 / $base-font-size-unitless),
+  xs: calc(1rem * 12 / $base-font-size-unitless),
+  xxs: calc(1rem * 10 / $base-font-size-unitless),
 ) !default;
 $line-height: (
   // h1:
-  xl: 38px,
+  xl: 2.375,
   // h2:
-  l: 28px,
+  l: 1.75,
   // h3:
-  m: 24px,
+  m: 1.5,
   // p - please note: p and h3 share the same line-height, added the sizes to "match" with font-size:
-  n: 24px,
+  n: 1.5,
   // text-small:
-  s: 20px,
+  s: 1.25,
   // text-xsmall:
-  xs: 16px,
+  xs: 1,
   // text-xxsmall:
-  xxs: 11px
+  xxs: 0.9167
 ) !default;
 $font-weight: (
   light: 300,
