@@ -11,3 +11,9 @@ $divider-color: utils.get-color('background-color');
     border-bottom: 1px solid $divider-color;
   }
 }
+
+:host-context(kirby-list.transparent) {
+  ion-item-sliding {
+    --kirby-item-background: transparent;
+  }
+}

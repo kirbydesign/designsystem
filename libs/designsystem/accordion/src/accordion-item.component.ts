@@ -1,12 +1,19 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
+  AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ContentChildren,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   Output,
+  QueryList,
+  Renderer2,
 } from '@angular/core';
+import { ListComponent } from '@kirbydesign/designsystem/list';
 
 // Counter for generating unique element ids
 let uniqueId = 0;
@@ -24,13 +31,27 @@ let uniqueId = 0;
     ]),
   ],
 })
-export class AccordionItemComponent implements OnChanges {
+export class AccordionItemComponent implements OnChanges, AfterContentInit {
   @Input() title: string;
   @Input() isExpanded: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() disabledTitle: string;
   @Input() hasPadding: boolean = true;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @ContentChildren(ListComponent) kirbyListChildren: QueryList<ListComponent>;
+
+  constructor(private renderer: Renderer2) {}
+
+  ngAfterContentInit(): void {
+    if (this.kirbyListChildren.length > 0) {
+      // this.hasPadding = false;
+      // this.kirbyListChildren.forEach((child) => {
+      //   child.shape = 'none';
+      //   this.renderer.addClass(child.elem.nativeElement, 'transparent');
+      // });
+    }
+  }
 
   ngOnChanges(): void {
     if (this.isDisabled) {

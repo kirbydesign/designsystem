@@ -1,6 +1,7 @@
 import {
   Component,
   ContentChild,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Input,
@@ -164,7 +165,7 @@ export class ListComponent implements OnInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper) {}
+  constructor(private listHelper: ListHelper, public elem: ElementRef) {}
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;
