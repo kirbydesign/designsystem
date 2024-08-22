@@ -1,43 +1,14 @@
 {
-  "root": true,
-  "extends": ["prettier"],
-  "ignorePatterns": ["!**/*", "storybook-static", "dist", "node_modules"],
-  "plugins": ["@nx", "prettier", "jasmine"],
+  "extends": ["@repo/eslint-config/default.json"],
+  "plugins": ["jasmine"],
   "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "prettier/prettier": [
-          "error",
-          {
-            "arrowParens": "always",
-            "bracketSpacing": true,
-            "printWidth": 100,
-            "semi": true,
-            "singleQuote": true,
-            "trailingComma": "es5",
-            "jsxSingleQuote": true,
-            "htmlWhitespaceSensitivity": "ignore"
-          }
-        ]
-      }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nx/javascript"],
-      "rules": {}
-    },
     {
       "files": ["*.ts"],
       "extends": [
         "plugin:@nx/angular",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "@repo/eslint-config/eslintrc-custom-overrides.json"
+        "@repo/eslint-config/eslintrc-custom-overrides.json",
+        "@repo/eslint-config/default.json"
       ],
       "rules": {
         "@angular-eslint/component-class-suffix": "error",
@@ -50,26 +21,11 @@
         "@angular-eslint/no-outputs-metadata-property": "error",
         "@angular-eslint/use-lifecycle-interface": "error",
         "@angular-eslint/use-pipe-transform-interface": "error",
-        "import/order": "warn",
+        "@angular-eslint/no-empty-lifecycle-method": "error",
+        "@angular-eslint/no-output-native": "warn",
         "jasmine/no-focused-tests": 2
       },
       "plugins": ["eslint-plugin-import", "@angular-eslint/eslint-plugin", "@typescript-eslint"]
-    },
-    {
-      "files": ["*.stories.ts"],
-      "rules": {
-        "no-restricted-imports": [
-          "error",
-          {
-            "patterns": [
-              {
-                "group": ["./*", "../*"],
-                "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/PACKAGE-NAME/ENTRY-POINT"
-              }
-            ]
-          }
-        ]
-      }
     }
   ],
   "rules": {
