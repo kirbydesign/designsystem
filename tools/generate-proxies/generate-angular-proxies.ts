@@ -60,7 +60,7 @@ elementMetadata.forEach(async (element) => {
   `);
 
   if (!angularComponentSource || !publicApiSouce) return;
-  const angularComponentDir = `${angularLibPath}/${tagNameWithoutPrefix}`;
+  const angularComponentDir = `${angularLibPath}/${tagNameWithoutPrefix}/src`;
   const angularComponentFile = `${angularComponentDir}/${tagNameWithoutPrefix}.component.ts`;
   const angularComponentPublicApi = `${angularComponentDir}/public_api.ts`;
 
