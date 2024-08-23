@@ -12,16 +12,19 @@ import {
 import { LitCustomElement } from './utils';
 
 const libPath = 'libs/core';
-const angularLibPath = 'libs/core';
+const angularLibPath = 'libs/angular'; //TODO: Should this be 'libs/angular/components'?
 
 const packageJson = JSON.parse(fs.readFileSync(path.resolve(`${libPath}/package.json`), 'utf8'));
 const elementMetadata: LitCustomElement[] = getElementMetadata(libPath, packageJson.name);
-const webComponentToAngularClassNameMap = new Map([['KirbyBadge', 'BadgeComponent']]);
+
+//TODO: Handle that class should be BadgeComponent not KirbyBadge in Angular component proxy
+//TODO: How do we correctly import any custom types, e.g. BadgeSize, BadgeVariant in our proxies?
 
 elementMetadata.forEach(async (element) => {
-  const { name, tagName, elementImport, tagNameWithoutPrefix } = element; //TODO: Name should be BadgeComponent not KirbyBadge in Angular component proxy
+  const { name, tagName, tagNameWithoutPrefix } = element;
   const angularComponentSource = await formatWithPrettier(
-    `import { Component, Input, Output, EventEmitter, ElementRef, NgZone } from '@angular/core';
+    `// AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY. See generate-angular-proxies.ts.
+    import { Component, Input, Output, EventEmitter, ElementRef, NgZone } from '@angular/core';
     ${getTypeImport(element)}
 
     ${getJsdocElementSummary(element)}
@@ -50,21 +53,20 @@ elementMetadata.forEach(async (element) => {
   );
 
   const publicApiSouce = await formatWithPrettier(`
+    // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY. See generate-angular-proxies.ts.
     import { ${name} } from '${packageJson.name}/${tagNameWithoutPrefix}.component';
     export * from './${tagNameWithoutPrefix}.component'
     ${name}.define();
   `);
 
   if (!angularComponentSource || !publicApiSouce) return;
-  const angularComponentDir = `libs/angular/${tagNameWithoutPrefix}`;
+  const angularComponentDir = `${angularLibPath}/${tagNameWithoutPrefix}`;
   const angularComponentFile = `${angularComponentDir}/${tagNameWithoutPrefix}.component.ts`;
   const angularComponentPublicApi = `${angularComponentDir}/public_api.ts`;
 
   fs.mkdirSync(angularComponentDir, { recursive: true });
   fs.writeFileSync(angularComponentFile, angularComponentSource, 'utf8');
   fs.writeFileSync(angularComponentPublicApi, publicApiSouce, 'utf8');
-
-  // write elementImport to public_api.ts file for each component, alongside SomeElement.define
 });
 
 function getTypeImport(element: LitCustomElement) {
@@ -79,8 +81,7 @@ function getInputProperties(element: LitCustomElement) {
   return element.properties
     ?.map(
       (property) => ` 
-        ${getJsdocDescription(property)}
-        ${getJsdocDescriptionDeprecated(property)}
+        ${getJsdocDescription(property)} ${getJsdocDescriptionDeprecated(property)}
         @Input()
         set ${property.name}(v: ${property.type?.text}) {
         this._ngZone.runOutsideAngular(() => (this._el.${property.name} = v));
