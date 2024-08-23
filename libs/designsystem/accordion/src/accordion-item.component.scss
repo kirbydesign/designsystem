@@ -12,6 +12,10 @@ $padding: utils.size('s');
   border-bottom: 1px solid $divider-color;
 }
 
+:host(.has-list) {
+  --kirby-item-background: transparent;
+}
+
 .header {
   @include interaction-state.apply-focus-visible-background('xxxs') {
     outline: 0;

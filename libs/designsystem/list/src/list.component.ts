@@ -165,7 +165,7 @@ export class ListComponent implements OnInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper, public elem: ElementRef) {}
+  constructor(private listHelper: ListHelper) {}
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;

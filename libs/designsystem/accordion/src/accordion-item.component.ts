@@ -5,6 +5,7 @@ import {
   Component,
   ContentChildren,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   Output,
@@ -30,6 +31,7 @@ let uniqueId = 0;
   ],
 })
 export class AccordionItemComponent implements OnChanges, AfterContentInit {
+  @HostBinding('class.has-list') private hasList: boolean = false;
   @Input() title: string;
   @Input() isExpanded: boolean = false;
   @Input() isDisabled: boolean = false;
@@ -39,14 +41,12 @@ export class AccordionItemComponent implements OnChanges, AfterContentInit {
 
   @ContentChildren(ListComponent) kirbyListChildren: QueryList<ListComponent>;
 
-  constructor(private renderer: Renderer2) {}
-
   ngAfterContentInit(): void {
     if (this.kirbyListChildren.length > 0) {
       this.hasPadding = false;
+      this.hasList = true;
       this.kirbyListChildren.forEach((child) => {
         child.shape = 'none';
-        this.renderer.addClass(child.elem.nativeElement, 'transparent');
       });
     }
   }
