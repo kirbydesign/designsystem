@@ -1,5 +1,5 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY. See generate-angular-proxies.ts.
-import { Component, Input, Output, EventEmitter, ElementRef, NgZone } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import type { KirbyBadge as KirbyBadgeElement } from '@kirbydesign/core/badge';
 
 @Component({
