@@ -38,18 +38,19 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 @each $size, $height in utils.$checkbox-radio-sizes {
-  :host.#{$size},
-  :host-context(kirby-item.#{$size}) {
+  :host.#{$size} {
     $vertical-padding: get-vertical-padding($height);
 
     ion-radio::part(label) {
-      padding-top: $vertical-padding;
-      padding-bottom: $vertical-padding;
+      padding-block: $vertical-padding;
     }
 
     // Preserve visual appearance using magic numbers and sorcery.
     ion-radio.in-item:not(.legacy-radio)::part(label) {
-      padding-block: calc(#{$vertical-padding} - 1px) calc(#{$vertical-padding} - 3px);
+      $padding-block-start-magic-number: $vertical-padding - 1px;
+      $padding-block-end-magic-number: $vertical-padding - 3px;
+
+      padding-block: $padding-block-start-magic-number $padding-block-end-magic-number;
     }
   }
 }
