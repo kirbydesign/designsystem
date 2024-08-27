@@ -59,7 +59,7 @@ export const ItemWithRadio: Story = {
   <br>
   <kirby-radio-group value="1">
     <kirby-item size="md">
-      <kirby-radio value="1" slot="end">Medium</kirby-radio>
+      <kirby-radio value="1" slot="start">Medium</kirby-radio>
     </kirby-item> 
     <kirby-item size="md">
       <kirby-radio value="2">Medium</kirby-radio>
