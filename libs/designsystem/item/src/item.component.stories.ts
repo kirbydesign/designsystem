@@ -41,34 +41,28 @@ export const ItemWithRadio: Story = {
   render: () => ({
     template: `<kirby-radio-group value="1">
     <kirby-item size="xs">
-      <kirby-radio value="1" slot="start"></kirby-radio>
-      <kirby-label>Extra Small</kirby-label>
+      <kirby-radio value="1" slot="start">Extra Small</kirby-radio>
     </kirby-item> 
     <kirby-item size="xs">
-      <kirby-radio value="2" slot="start"></kirby-radio>
-      <kirby-label>Extra Small</kirby-label>
+      <kirby-radio value="2" slot="start">Extra Small</kirby-radio>
     </kirby-item> 
   </kirby-radio-group>
   <br>
   <kirby-radio-group value="1">
     <kirby-item size="sm">
-      <kirby-radio value="1" slot="start"></kirby-radio>
-      <kirby-label>Small</kirby-label>
+      <kirby-radio value="1" slot="start">Small</kirby-radio>
     </kirby-item> 
     <kirby-item size="sm">
-      <kirby-radio value="2" slot="start"></kirby-radio>
-      <kirby-label>Small</kirby-label>
+      <kirby-radio value="2" slot="start">Small</kirby-radio>
     </kirby-item> 
   </kirby-radio-group>
   <br>
   <kirby-radio-group value="1">
     <kirby-item size="md">
-      <kirby-radio value="1" slot="start"></kirby-radio>
-      <kirby-label>Medium</kirby-label>
+      <kirby-radio value="1" slot="end">Medium</kirby-radio>
     </kirby-item> 
     <kirby-item size="md">
-      <kirby-radio value="2" slot="start"></kirby-radio>
-      <kirby-label>Medium</kirby-label>
+      <kirby-radio value="2">Medium</kirby-radio>
     </kirby-item> 
   </kirby-radio-group>`,
   }),
