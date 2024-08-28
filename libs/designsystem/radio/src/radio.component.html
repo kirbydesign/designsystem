@@ -1,4 +1,10 @@
-<ion-radio [value]="value" [disabled]="disabled" mode="md" labelPlacement="end">
+<ion-radio
+  [value]="value"
+  [disabled]="disabled"
+  mode="md"
+  [labelPlacement]="_labelPlacement"
+  [justify]="_justify"
+>
   <span *ngIf="text">{{ text }}</span>
   <ng-content></ng-content>
 </ion-radio>

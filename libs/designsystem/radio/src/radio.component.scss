@@ -35,22 +35,18 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       }
     }
   }
+
+  &:has(ion-radio.in-item.radio-justify-space-between) {
+    width: 100%;
+  }
 }
 
 @each $size, $height in utils.$checkbox-radio-sizes {
   :host.#{$size} {
     $vertical-padding: get-vertical-padding($height);
 
-    ion-radio::part(label) {
+    ion-radio:not(.in-item)::part(label) {
       padding-block: $vertical-padding;
-    }
-
-    // Preserve visual appearance using magic numbers and sorcery.
-    ion-radio.in-item:not(.legacy-radio)::part(label) {
-      $padding-block-start-magic-number: $vertical-padding - 1px;
-      $padding-block-end-magic-number: $vertical-padding - 3px;
-
-      padding-block: $padding-block-start-magic-number $padding-block-end-magic-number;
     }
   }
 }
@@ -92,8 +88,7 @@ ion-radio {
 
   &::part(label) {
     align-items: start;
-    padding-left: $spacing-to-edge;
-    padding-right: $spacing-to-label;
+    padding-inline: $spacing-to-edge $spacing-to-label;
     line-height: utils.line-height('n');
   }
 
@@ -101,19 +96,26 @@ ion-radio {
     margin-inline: $spacing-to-label 0;
   }
 
-  // Preserve visual appearance by overriding styles (both Kirby and Ionic) for
-  // <kirby-radio> inside <kirby-item>
+  // Overrides for kirby-radio inside kirby-item
   &.in-item:not(.legacy-radio) {
     &::part(label) {
-      padding-inline-start: 0;
-      width: 100%;
-      justify-content: start;
+      padding-inline: 0;
     }
 
     &::part(label-text-wrapper) {
       margin-block: 0;
-      margin-inline-start: utils.size('xxs');
-      line-height: 1.4;
+    }
+
+    &.radio-label-placement-start {
+      &::part(label-text-wrapper) {
+        margin-inline: 0 utils.size('xxs');
+      }
+    }
+
+    &.radio-label-placement-end {
+      &::part(label-text-wrapper) {
+        margin-inline: utils.size('xxs') 0;
+      }
     }
   }
 
@@ -142,7 +144,6 @@ ion-radio {
 
 :host-context(kirby-item) {
   z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
-  width: 100%;
 
   ion-radio {
     margin: 0; // Reset Ionic in-item margins
