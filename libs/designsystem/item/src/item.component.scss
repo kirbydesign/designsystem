@@ -88,8 +88,11 @@
 
   &.xs ion-item {
     --min-height: #{map.get(utils.$item-heights, 'xs')};
-    --inner-padding-top: #{utils.size('xxxs')};
-    --inner-padding-bottom: #{utils.size('xxxs')};
+
+    &:not(:has(kirby-radio)) {
+      --inner-padding-top: #{utils.size('xxxs')};
+      --inner-padding-bottom: #{utils.size('xxxs')};
+    }
   }
 
   .outside {
