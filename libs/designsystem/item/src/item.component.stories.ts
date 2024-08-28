@@ -37,40 +37,123 @@ export const Default: Story = {
   }),
 };
 
-export const ItemWithRadio: Story = {
+export const ItemWithRadioLegacySyntax: Story = {
+  name: 'Item With Radio - Legacy Syntax',
   render: () => ({
-    template: `<kirby-radio-group value="1">
-    <kirby-item size="xs">
-      <kirby-radio value="1" slot="start"></kirby-radio>
-      <kirby-label>Extra Small</kirby-label>
-    </kirby-item> 
-    <kirby-item size="xs">
-      <kirby-radio value="2" slot="start"></kirby-radio>
-      <kirby-label>Extra Small</kirby-label>
-    </kirby-item> 
-  </kirby-radio-group>
-  <br>
-  <kirby-radio-group value="1">
-    <kirby-item size="sm">
-      <kirby-radio value="1" slot="start"></kirby-radio>
-      <kirby-label>Small</kirby-label>
-    </kirby-item> 
-    <kirby-item size="sm">
-      <kirby-radio value="2" slot="start"></kirby-radio>
-      <kirby-label>Small</kirby-label>
-    </kirby-item> 
-  </kirby-radio-group>
-  <br>
-  <kirby-radio-group value="1">
-    <kirby-item size="md">
-      <kirby-radio value="1" slot="start"></kirby-radio>
-      <kirby-label>Medium</kirby-label>
-    </kirby-item> 
-    <kirby-item size="md">
-      <kirby-radio value="2" slot="start"></kirby-radio>
-      <kirby-label>Medium</kirby-label>
-    </kirby-item> 
-  </kirby-radio-group>`,
+    styles: [`h2 { margin-top: 32px; }`],
+    template: `<h2>Extra small</h2>
+<kirby-radio-group value="1">
+  <kirby-item size="xs">
+    <kirby-radio value="1" slot="start"></kirby-radio>
+    <kirby-label>Slot start, selected</kirby-label>
+  </kirby-item> 
+  <kirby-item size="xs">
+    <kirby-radio value="2" slot="start"></kirby-radio>
+    <kirby-label>Slot start</kirby-label>
+  </kirby-item> 
+  <kirby-item size="xs">
+    <kirby-radio value="3" slot="end"></kirby-radio>
+    <kirby-label>Slot end</kirby-label>
+  </kirby-item> 
+</kirby-radio-group>
+
+<h2>Small</h2>
+<kirby-radio-group value="1">
+  <kirby-item size="sm">
+    <kirby-radio value="1" slot="start"></kirby-radio>
+    <kirby-label>Slot start, selected</kirby-label>
+  </kirby-item> 
+  <kirby-item size="sm">
+    <kirby-radio value="2" slot="start"></kirby-radio>
+    <kirby-label>Slot start</kirby-label>
+  </kirby-item> 
+  <kirby-item size="sm">
+    <kirby-radio value="3" slot="end"></kirby-radio>
+    <kirby-label>Slot end</kirby-label>
+  </kirby-item> 
+</kirby-radio-group>
+
+<h2>Medium</h2>
+<kirby-radio-group value="1">
+  <kirby-item size="md">
+    <kirby-radio value="1" slot="start"></kirby-radio>
+    <kirby-label>Slot start, selected</kirby-label>
+  </kirby-item> 
+  <kirby-item size="md">
+    <kirby-radio value="2" slot="start"></kirby-radio>
+    <kirby-label>Slot start</kirby-label>
+  </kirby-item> 
+  <kirby-item size="md">
+    <kirby-radio value="3" slot="end"></kirby-radio>
+    <kirby-label>Slot end</kirby-label>
+  </kirby-item>  
+</kirby-radio-group>`,
+  }),
+};
+
+export const ItemWithRadioModernSyntax: Story = {
+  name: 'Item With Radio - Modern Syntax',
+  render: () => ({
+    styles: [`h2 { margin-top: 32px; }`],
+    template: `<h2>Extra small</h2>
+<kirby-radio-group value="1">
+  <kirby-item size="xs">
+    <kirby-radio value="1" slot="start"></kirby-radio>
+    <kirby-label>Slot start, selected</kirby-label>
+  </kirby-item>
+  <kirby-item size="xs">
+    <kirby-radio value="2" slot="start"></kirby-radio>
+    <kirby-label>Slot start</kirby-label>
+  </kirby-item>
+  <kirby-item size="xs">
+    <kirby-radio value="3" slot="end"></kirby-radio>
+    <kirby-label>Slot end</kirby-label>
+  </kirby-item>
+  <kirby-item size="xs">
+    <kirby-radio value="4" slot="start"></kirby-radio>
+    <kirby-label>No slot</kirby-label>
+  </kirby-item>
+</kirby-radio-group>
+
+<h2>Small</h2>
+<kirby-radio-group value="1">
+  <kirby-item size="sm">
+    <kirby-radio value="1" slot="start"></kirby-radio>
+    <kirby-label>Slot start, selected</kirby-label>
+  </kirby-item>
+  <kirby-item size="sm">
+    <kirby-radio value="2" slot="start"></kirby-radio>
+    <kirby-label>Slot start</kirby-label>
+  </kirby-item>
+  <kirby-item size="sm">
+    <kirby-radio value="3" slot="end"></kirby-radio>
+    <kirby-label>Slot end</kirby-label>
+  </kirby-item>
+  <kirby-item size="sm">
+    <kirby-radio value="4" slot="start"></kirby-radio>
+    <kirby-label>No slot</kirby-label>
+  </kirby-item>
+</kirby-radio-group>
+
+<h2>Medium</h2>
+<kirby-radio-group value="1">
+  <kirby-item size="md">
+    <kirby-radio value="1" slot="start"></kirby-radio>
+    <kirby-label>Slot start, selected</kirby-label>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-radio value="2" slot="start"></kirby-radio>
+    <kirby-label>Slot start</kirby-label>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-radio value="3" slot="end"></kirby-radio>
+    <kirby-label>Slot end</kirby-label>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-radio value="4" slot="start"></kirby-radio>
+    <kirby-label>No slot</kirby-label>
+  </kirby-item>
+</kirby-radio-group>`,
   }),
 };
 
