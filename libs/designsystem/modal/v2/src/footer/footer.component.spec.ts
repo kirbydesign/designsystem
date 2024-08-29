@@ -67,14 +67,28 @@ describe('ModalFooterComponent', () => {
       ionFooterElement = spectator.query('ion-footer');
     });
 
-    it('when --kirby-safe-area-bottom is not set', () => {
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': BASE_PADDING_VERTICAL_PX });
-    });
+    describe('on desktop', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      });
 
-    it('when --kirby-safe-area-bottom is set', () => {
-      setSafeAreaBottom();
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
 
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': BASE_PADDING_VERTICAL_PX });
+      it('when --kirby-safe-area-bottom is not set', () => {
+        expect(ionFooterElement).toHaveComputedStyle({
+          'padding-bottom': BASE_PADDING_VERTICAL_PX,
+        });
+      });
+
+      it('when --kirby-safe-area-bottom is set', () => {
+        setSafeAreaBottom();
+
+        expect(ionFooterElement).toHaveComputedStyle({
+          'padding-bottom': BASE_PADDING_VERTICAL_PX,
+        });
+      });
     });
 
     describe('on small screens', () => {
