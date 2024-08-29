@@ -2,13 +2,14 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ItemComponent, ItemModule, ItemSize } from '@kirbydesign/designsystem/item';
 
 import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ItemExampleModule } from '~/app/examples/item-example/item-example.module';
 
 const meta: Meta<ItemComponent> = {
   component: ItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [ItemModule, ItemExampleModule, RadioModule],
+      imports: [CheckboxComponent, ItemModule, ItemExampleModule, RadioModule],
     }),
   ],
   title: 'Components / Item',
@@ -139,9 +140,118 @@ export const ItemWithRadioModernSyntax: Story = {
   <kirby-radio value="3" slot="end">Slot end</kirby-radio>
   </kirby-item>
   <kirby-item size="md">
-    <kirby-radio value="4" slot="start">No slot</kirby-radio>
+    <kirby-radio value="4">No slot</kirby-radio>
   </kirby-item>
 </kirby-radio-group>`,
+  }),
+};
+
+export const ItemWithCheckboxLegacySyntax: Story = {
+  name: 'Item With Checkbox - Legacy Syntax',
+  render: () => ({
+    styles: [`h2 { margin-top: 32px; }`],
+    template: `<h2>Extra small</h2>
+<kirby-item size="xs">
+  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
+  <kirby-label>Slot start, selected</kirby-label>
+</kirby-item> 
+<kirby-item size="xs">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>Slot start</kirby-label>
+</kirby-item> 
+<kirby-item size="xs">
+  <kirby-checkbox slot="end"></kirby-checkbox>
+  <kirby-label>Slot end</kirby-label>
+</kirby-item> 
+
+<h2>Small</h2>
+<kirby-item size="sm">
+  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
+  <kirby-label>Slot start, selected</kirby-label>
+</kirby-item> 
+<kirby-item size="sm">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>Slot start</kirby-label>
+</kirby-item> 
+<kirby-item size="sm">
+  <kirby-checkbox slot="end"></kirby-checkbox>
+  <kirby-label>Slot end</kirby-label>
+</kirby-item> 
+
+<h2>Medium</h2>
+<kirby-item size="md">
+  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
+  <kirby-label>Slot start, selected</kirby-label>
+</kirby-item> 
+<kirby-item size="md">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>Slot start</kirby-label>
+</kirby-item> 
+<kirby-item size="md">
+  <kirby-checkbox slot="end"></kirby-checkbox>
+  <kirby-label>Slot end</kirby-label>
+</kirby-item>`,
+  }),
+};
+
+export const ItemWithCheckboxModernSyntax: Story = {
+  name: 'Item With Checkbox - Modern Syntax',
+  render: () => ({
+    styles: [`h2 { margin-top: 32px; }`],
+    template: `<h2>Extra small</h2>
+<kirby-item size="xs">
+  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
+  <kirby-label>Slot start, selected</kirby-label>
+</kirby-item> 
+<kirby-item size="xs">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>Slot start</kirby-label>
+</kirby-item> 
+<kirby-item size="xs">
+  <kirby-checkbox slot="end"></kirby-checkbox>
+  <kirby-label>Slot end</kirby-label>
+</kirby-item> 
+<kirby-item size="xs">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>No slot</kirby-label>
+</kirby-item> 
+
+<h2>Small</h2>
+<kirby-item size="sm">
+  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
+  <kirby-label>Slot start, selected</kirby-label>
+</kirby-item> 
+<kirby-item size="sm">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>Slot start</kirby-label>
+</kirby-item> 
+<kirby-item size="sm">
+  <kirby-checkbox slot="end"></kirby-checkbox>
+  <kirby-label>Slot end</kirby-label>
+</kirby-item> 
+<kirby-item size="sm">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>No slot</kirby-label>
+</kirby-item> 
+
+
+<h2>Medium</h2>
+<kirby-item size="md">
+  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
+  <kirby-label>Slot start, selected</kirby-label>
+</kirby-item> 
+<kirby-item size="md">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>Slot start</kirby-label>
+</kirby-item> 
+<kirby-item size="md">
+  <kirby-checkbox slot="end"></kirby-checkbox>
+  <kirby-label>Slot end</kirby-label>
+</kirby-item>
+<kirby-item size="md">
+  <kirby-checkbox slot="start"></kirby-checkbox>
+  <kirby-label>No slot</kirby-label>
+</kirby-item>`,
   }),
 };
 

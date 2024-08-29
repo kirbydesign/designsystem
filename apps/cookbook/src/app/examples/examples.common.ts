@@ -4,7 +4,6 @@ import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
-import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
@@ -70,7 +69,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CalendarExampleComponent,
   CalendarCardExampleComponent,
   ActionSheetExampleComponent,
-  CheckboxExampleComponent,
   AlertExampleComponent,
   ToastExampleComponent,
   EmptyStateExampleComponent,
