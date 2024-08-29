@@ -416,6 +416,12 @@ describe('HeaderComponent', () => {
     it(`should have correct margins`, () => {
       const actionsWrapper: HTMLElement = spectator.query('.actions');
 
+      console.warn('--- HEADER ACTIONS TEST --- ');
+      console.warn('--- Window innerWidth:', window.innerWidth);
+      console.warn('--- Window outerWidth:', window.outerWidth);
+      console.warn('--- document clientWidth:', document.documentElement.clientWidth);
+      console.warn('--- HEADER ACTIONS TEST --- ');
+
       expect(actionsWrapper).toHaveComputedStyle({
         'margin-bottom': '0px',
         'margin-top': '0px',
