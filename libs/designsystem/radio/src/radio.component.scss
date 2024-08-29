@@ -13,7 +13,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 :host {
-  display: block;
+  display: flex;
 
   &[disabled] {
     color: #{utils.get-text-color('semi-dark')};
