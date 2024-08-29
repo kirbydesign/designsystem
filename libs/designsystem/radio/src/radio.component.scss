@@ -15,6 +15,10 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 :host {
   display: flex;
 
+  &:has(ion-radio.in-item.legacy-radio) {
+    display: block;
+  }
+
   &[disabled] {
     color: #{utils.get-text-color('semi-dark')};
 
