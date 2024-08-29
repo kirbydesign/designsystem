@@ -98,60 +98,48 @@ export const ItemWithRadioModernSyntax: Story = {
     template: `<h2>Extra small</h2>
 <kirby-radio-group value="1">
   <kirby-item size="xs">
-    <kirby-radio value="1" slot="start"></kirby-radio>
-    <kirby-label>Slot start, selected</kirby-label>
+    <kirby-radio value="1" slot="start">Slot start, selected</kirby-radio>
   </kirby-item>
   <kirby-item size="xs">
-    <kirby-radio value="2" slot="start"></kirby-radio>
-    <kirby-label>Slot start</kirby-label>
+    <kirby-radio value="2" slot="start">Slot start</kirby-radio>
   </kirby-item>
   <kirby-item size="xs">
-    <kirby-radio value="3" slot="end"></kirby-radio>
-    <kirby-label>Slot end</kirby-label>
+    <kirby-radio value="3" slot="end">Slot end</kirby-radio>
   </kirby-item>
   <kirby-item size="xs">
-    <kirby-radio value="4" slot="start"></kirby-radio>
-    <kirby-label>No slot</kirby-label>
+    <kirby-radio value="4">No slot</kirby-radio>
   </kirby-item>
 </kirby-radio-group>
 
 <h2>Small</h2>
 <kirby-radio-group value="1">
   <kirby-item size="sm">
-    <kirby-radio value="1" slot="start"></kirby-radio>
-    <kirby-label>Slot start, selected</kirby-label>
+    <kirby-radio value="1" slot="start">Slot start, selected</kirby-radio>
   </kirby-item>
   <kirby-item size="sm">
-    <kirby-radio value="2" slot="start"></kirby-radio>
-    <kirby-label>Slot start</kirby-label>
+    <kirby-radio value="2" slot="start">Slot start</kirby-radio>
   </kirby-item>
   <kirby-item size="sm">
-    <kirby-radio value="3" slot="end"></kirby-radio>
-    <kirby-label>Slot end</kirby-label>
+    <kirby-radio value="3" slot="end">Slot end</kirby-radio>
   </kirby-item>
   <kirby-item size="sm">
-    <kirby-radio value="4" slot="start"></kirby-radio>
-    <kirby-label>No slot</kirby-label>
+    <kirby-radio value="4">No slot</kirby-radio>
   </kirby-item>
 </kirby-radio-group>
 
 <h2>Medium</h2>
 <kirby-radio-group value="1">
   <kirby-item size="md">
-    <kirby-radio value="1" slot="start"></kirby-radio>
-    <kirby-label>Slot start, selected</kirby-label>
+    <kirby-radio value="1" slot="start">Slot start, selected</kirby-radio>
   </kirby-item>
   <kirby-item size="md">
-    <kirby-radio value="2" slot="start"></kirby-radio>
-    <kirby-label>Slot start</kirby-label>
+    <kirby-radio value="2" slot="start">Slot start</kirby-radio>
   </kirby-item>
   <kirby-item size="md">
-    <kirby-radio value="3" slot="end"></kirby-radio>
-    <kirby-label>Slot end</kirby-label>
+  <kirby-radio value="3" slot="end">Slot end</kirby-radio>
   </kirby-item>
   <kirby-item size="md">
-    <kirby-radio value="4" slot="start"></kirby-radio>
-    <kirby-label>No slot</kirby-label>
+    <kirby-radio value="4" slot="start">No slot</kirby-radio>
   </kirby-item>
 </kirby-radio-group>`,
   }),
