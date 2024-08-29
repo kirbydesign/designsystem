@@ -223,95 +223,108 @@ describe('ModalHelper', () => {
         expect(ionModal.classList.contains('kirby-modal-large')).toBe(size === 'large');
       };
 
-      it('modal should have min-height', async () => {
-        await openModal();
-
-        const headerHeight = 88;
-        const footerHeight = 88;
-        const contentHeight = 88;
-
-        const expectedHeight = headerHeight + footerHeight + contentHeight;
-
-        expect(ionModal).toHaveComputedStyle({
-          '--min-height': `${expectedHeight}px`,
+      describe('on desktop', () => {
+        beforeAll(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
         });
-      });
 
-      it('modal should be default sized (medium), if size is not provided', async () => {
-        await openModal();
+        afterAll(() => {
+          TestHelper.resetTestWindow();
+        });
 
-        expectSize('medium');
-      });
+        it('modal should have min-height', async () => {
+          await openModal();
 
-      it('modal should be sized `small`', async () => {
-        await openModal(undefined, 'small');
+          const headerHeight = 88;
+          const footerHeight = 88;
+          const contentHeight = 88;
 
-        expectSize('small');
-      });
+          const expectedHeight = headerHeight + footerHeight + contentHeight;
 
-      it('modal should be sized `medium`', async () => {
-        await openModal(undefined, 'medium');
+          expect(ionModal).toHaveComputedStyle({
+            '--min-height': `${expectedHeight}px`,
+          });
+        });
 
-        expectSize('medium');
-      });
+        it('modal should be default sized (medium), if size is not provided', async () => {
+          await openModal();
 
-      it('modal should be sized `large`', async () => {
-        await openModal(undefined, 'large');
+          expectSize('medium');
+        });
 
-        expectSize('large');
-      });
+        it('modal should be sized `small`', async () => {
+          await openModal(undefined, 'small');
 
-      it('modal should be sized `full-height`', async () => {
-        await openModal(undefined, 'full-height');
+          expectSize('small');
+        });
 
-        expectSize('full-height');
-        expect(ionModal).toHaveComputedStyle({ height: `${document.body.clientHeight}px` });
-      });
+        it('modal should be sized `medium`', async () => {
+          await openModal(undefined, 'medium');
 
-      it('drawer should be sized `full-height`', async () => {
-        await openDrawer(undefined, 'full-height');
+          expectSize('medium');
+        });
 
-        expectSize('full-height');
-      });
+        it('modal should be sized `large`', async () => {
+          await openModal(undefined, 'large');
 
-      it('should not set default size class if configured with interactWithBackground', async () => {
-        await openDrawer(undefined, undefined, true);
+          expectSize('large');
+        });
 
-        expectSize(undefined);
-      });
+        it('modal should be sized `full-height`', async () => {
+          await openModal(undefined, 'full-height');
 
-      /**
-       * Temporaly removed, see #2736
-       */
-      xit('should NOT add class `full-height`, if content can fit in viewport', async () => {
-        await openModal(ContentWithNoOverflowEmbeddedComponent);
-        await TestHelper.waitForResizeObserver();
+          expectSize('full-height');
+          expect(ionModal).toHaveComputedStyle({ height: `${document.body.clientHeight}px` });
+        });
 
-        expect(ionModal.classList.contains('full-height')).toBeFalse();
-      });
+        it('drawer should be sized `full-height`', async () => {
+          await openDrawer(undefined, 'full-height');
 
-      /**
-       * Temporaly removed, see #2736
-       */
-      xit('should have footer visible at the bottom of viewport, when full-height', async () => {
-        await openModal(ContentOverflowsWithFooterEmbeddedComponent);
-        const footer = ionModal.querySelector('kirby-modal-footer');
-        expect(footer).toBeTruthy();
+          expectSize('full-height');
+        });
 
-        await TestHelper.waitForResizeObserver();
+        it('should not set default size class if configured with interactWithBackground', async () => {
+          await openDrawer(undefined, undefined, true);
 
-        expect(ionModal.classList.contains('full-height')).toBeTrue();
-        expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
+          expectSize(undefined);
+        });
+
+        /**
+         * Temporaly removed, see #2736
+         */
+        xit('should NOT add class `full-height`, if content can fit in viewport', async () => {
+          await openModal(ContentWithNoOverflowEmbeddedComponent);
+          await TestHelper.waitForResizeObserver();
+
+          expect(ionModal.classList.contains('full-height')).toBeFalse();
+        });
+
+        /**
+         * Temporaly removed, see #2736
+         */
+        xit('should have footer visible at the bottom of viewport, when full-height', async () => {
+          await openModal(ContentOverflowsWithFooterEmbeddedComponent);
+          const footer = ionModal.querySelector('kirby-modal-footer');
+          expect(footer).toBeTruthy();
+
+          await TestHelper.waitForResizeObserver();
+
+          expect(ionModal.classList.contains('full-height')).toBeTrue();
+          expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
+        });
       });
     });
 
     describe('padding top', () => {
       it('should have correct value for drawer flavor on desktop', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
         await openDrawer();
 
         expect(ionModal).toHaveComputedStyle({
           'padding-top': '0px',
         });
+
+        TestHelper.resetTestWindow();
       });
 
       it('should have correct value for modal flavor (default)', async () => {
@@ -356,7 +369,9 @@ describe('ModalHelper', () => {
         expect(pageTitleVerticalCenter).toEqual(pageProgressVerticalCenter);
       });
 
-      it('should have correct padding on tablet/desktop', () => {
+      it('should have correct padding on tablet/desktop', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
 
         //subtract border thickness from expected bottom padding
@@ -371,6 +386,8 @@ describe('ModalHelper', () => {
         expect(ionToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',
         });
+
+        TestHelper.resetTestWindow();
       });
 
       it('should have correct padding on phone', async () => {
