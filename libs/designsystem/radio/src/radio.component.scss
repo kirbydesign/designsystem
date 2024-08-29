@@ -3,33 +3,20 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$radio-icon-padding: utils.size('xxxxs');
 $radio-icon-size: utils.size('m');
 $radio-icon-mark-size: 60%;
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
-$default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 @function get-vertical-padding($target-height) {
   @return ($target-height - $radio-icon-size) * 0.5;
 }
 
 :host {
-  display: inline-block;
+  display: flex;
 
-  &.has-label {
+  &:has(ion-radio.in-item.legacy-radio) {
     display: block;
-
-    @each $size, $height in utils.$checkbox-radio-sizes {
-      &.#{$size} {
-        ion-radio::part(label) {
-          $vertical-padding: get-vertical-padding($height);
-
-          padding-top: $vertical-padding;
-          padding-bottom: $vertical-padding;
-        }
-      }
-    }
   }
 
   &[disabled] {
@@ -50,6 +37,20 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       &::part(native-wrapper) {
         opacity: 1; // Reset Ionic disabled style
       }
+    }
+  }
+
+  &:has(ion-radio.in-item.radio-justify-space-between) {
+    width: 100%;
+  }
+}
+
+@each $size, $height in utils.$checkbox-radio-sizes {
+  :host.#{$size} {
+    $vertical-padding: get-vertical-padding($height);
+
+    ion-radio:not(.in-item)::part(label) {
+      padding-block: $vertical-padding;
     }
   }
 }
@@ -91,13 +92,35 @@ ion-radio {
 
   &::part(label) {
     align-items: start;
-    padding-left: $spacing-to-edge;
-    padding-right: $spacing-to-label;
+    padding-inline: $spacing-to-edge $spacing-to-label;
     line-height: utils.line-height('n');
   }
 
   &::part(label-text-wrapper) {
     margin-inline: $spacing-to-label 0;
+  }
+
+  // Overrides for kirby-radio inside kirby-item
+  &.in-item:not(.legacy-radio) {
+    &::part(label) {
+      padding-inline: 0;
+    }
+
+    &::part(label-text-wrapper) {
+      margin-block: 0;
+    }
+
+    &.radio-label-placement-start {
+      &::part(label-text-wrapper) {
+        margin-inline: 0 utils.size('xxs');
+      }
+    }
+
+    &.radio-label-placement-end {
+      &::part(label-text-wrapper) {
+        margin-inline: utils.size('xxs') 0;
+      }
+    }
   }
 
   :host-context(kirby-radio-group.error),
