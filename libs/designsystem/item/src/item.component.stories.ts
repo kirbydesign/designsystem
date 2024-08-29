@@ -140,7 +140,7 @@ export const ItemWithRadioModernSyntax: Story = {
   <kirby-radio value="3" slot="end">Slot end</kirby-radio>
   </kirby-item>
   <kirby-item size="md">
-    <kirby-radio value="4" slot="start">No slot</kirby-radio>
+    <kirby-radio value="4">No slot</kirby-radio>
   </kirby-item>
 </kirby-radio-group>`,
   }),
