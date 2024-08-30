@@ -9,7 +9,7 @@ $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
 :host {
-  display: inline-block;
+  display: flex;
 
   &.attention-level1 ion-checkbox {
     --checkmark-color: #{utils.get-color('black')};
@@ -82,6 +82,36 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     }
   }
 
+  &:has(ion-checkbox.in-item.checkbox-justify-space-between) {
+    width: 100%;
+  }
+
+  @each $size, $properties in utils.$checkbox-sizes {
+    &.#{$size} {
+      $vertical-padding: map.get($properties, vertical-padding);
+
+      ion-checkbox:not(.in-item)::part(label) {
+        padding-block: $vertical-padding;
+      }
+    }
+  }
+
+  &.xs {
+    ion-checkbox::part(label) {
+      line-height: utils.line-height('xs');
+      font-size: utils.font-size('s');
+    }
+
+    ion-checkbox {
+      --size: #{$checkbox-icon-size-xs};
+      --border-radius: #{utils.size('xxxs')};
+
+      &::part(container) {
+        padding: utils.size('xxxxs'); // Spacing between checkmark and container box
+      }
+    }
+  }
+
   ion-checkbox {
     @include interaction-state.apply-focus-part($part: 'container');
     @include interaction-state.apply-hover {
@@ -105,8 +135,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
     &::part(label) {
       align-items: start;
-      padding-left: $spacing-to-edge;
-      padding-right: $spacing-to-label;
+      padding-inline: $spacing-to-edge $spacing-to-label;
       line-height: utils.line-height('n');
     }
 
@@ -114,38 +143,31 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       margin-inline: $spacing-to-label 0;
     }
 
+    // Overrides for kirby-checkbox inside kirby-item
+    &.in-item:not(.legacy-checkbox) {
+      &::part(label) {
+        padding-inline: 0;
+      }
+
+      &::part(label-text-wrapper) {
+        margin-block: 0;
+      }
+
+      &.checkbox-label-placement-start {
+        &::part(label-text-wrapper) {
+          margin-inline: 0 $spacing-to-label;
+        }
+      }
+
+      &.checkbox-label-placement-end {
+        &::part(label-text-wrapper) {
+          margin-inline: $spacing-to-label 0;
+        }
+      }
+    }
+
     span {
       white-space: pre-line;
-    }
-  }
-
-  &.has-label {
-    display: block;
-
-    @each $size, $properties in utils.$checkbox-sizes {
-      &.#{$size} {
-        ion-checkbox::part(label) {
-          $vertical-padding: map.get($properties, vertical-padding);
-
-          padding-block: $vertical-padding;
-        }
-      }
-    }
-
-    &.xs {
-      ion-checkbox::part(label) {
-        line-height: utils.line-height('xs');
-        font-size: utils.font-size('s');
-      }
-
-      ion-checkbox {
-        --size: #{$checkbox-icon-size-xs};
-        --border-radius: #{utils.size('xxxs')};
-
-        &::part(container) {
-          padding: utils.size('xxxxs'); // Spacing between checkmark and container box
-        }
-      }
     }
   }
 

@@ -67,14 +67,14 @@
 
     --transition: #{interaction-state.transition('background-color')};
 
-    // Consistent height on items containing radios regardless of slot placement
-    &:has(kirby-radio) {
+    // Consistent height on items containing checkbox or radio regardless of slot placement
+    &:has(kirby-checkbox, kirby-radio) {
       --inner-padding-top: 0;
       --inner-padding-bottom: 0;
     }
 
     // Avoid cutting off focus ring when radio is placed in default slot
-    &:has(kirby-radio:not([slot])) {
+    &:has(kirby-checkbox:not([slot]), kirby-radio:not([slot])) {
       overflow: inherit;
     }
   }
@@ -89,7 +89,7 @@
   &.xs ion-item {
     --min-height: #{map.get(utils.$item-heights, 'xs')};
 
-    &:not(:has(kirby-radio)) {
+    &:not(:has(kirby-checkbox, kirby-radio)) {
       --inner-padding-top: #{utils.size('xxxs')};
       --inner-padding-bottom: #{utils.size('xxxs')};
     }
