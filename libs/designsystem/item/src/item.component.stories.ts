@@ -200,57 +200,44 @@ export const ItemWithCheckboxModernSyntax: Story = {
     styles: [`h2 { margin-top: 32px; }`],
     template: `<h2>Extra small</h2>
 <kirby-item size="xs">
-  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
-  <kirby-label>Slot start, selected</kirby-label>
-</kirby-item> 
+  <kirby-checkbox [checked]="true" slot="start">Slot start, selected</kirby-checkbox>
+</kirby-item>
 <kirby-item size="xs">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>Slot start</kirby-label>
-</kirby-item> 
+  <kirby-checkbox slot="start">Slot start</kirby-checkbox>
+</kirby-item>
 <kirby-item size="xs">
-  <kirby-checkbox slot="end"></kirby-checkbox>
-  <kirby-label>Slot end</kirby-label>
-</kirby-item> 
+  <kirby-checkbox slot="end">Slot end</kirby-checkbox>
+</kirby-item>
 <kirby-item size="xs">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>No slot</kirby-label>
-</kirby-item> 
+  <kirby-checkbox>No slot</kirby-checkbox>
+</kirby-item>
 
 <h2>Small</h2>
 <kirby-item size="sm">
-  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
-  <kirby-label>Slot start, selected</kirby-label>
-</kirby-item> 
+  <kirby-checkbox [checked]="true" slot="start">Slot start, selected</kirby-checkbox>
+</kirby-item>
 <kirby-item size="sm">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>Slot start</kirby-label>
-</kirby-item> 
+  <kirby-checkbox slot="start">Slot start</kirby-checkbox>
+</kirby-item>
 <kirby-item size="sm">
-  <kirby-checkbox slot="end"></kirby-checkbox>
-  <kirby-label>Slot end</kirby-label>
-</kirby-item> 
+  <kirby-checkbox slot="end">Slot end</kirby-checkbox>
+</kirby-item>
 <kirby-item size="sm">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>No slot</kirby-label>
-</kirby-item> 
-
+  <kirby-checkbox>No slot</kirby-checkbox>
+</kirby-item>
 
 <h2>Medium</h2>
 <kirby-item size="md">
-  <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
-  <kirby-label>Slot start, selected</kirby-label>
-</kirby-item> 
-<kirby-item size="md">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>Slot start</kirby-label>
-</kirby-item> 
-<kirby-item size="md">
-  <kirby-checkbox slot="end"></kirby-checkbox>
-  <kirby-label>Slot end</kirby-label>
+  <kirby-checkbox [checked]="true" slot="start">Slot start, selected</kirby-checkbox>
 </kirby-item>
 <kirby-item size="md">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>No slot</kirby-label>
+  <kirby-checkbox slot="start">Slot start</kirby-checkbox>
+</kirby-item>
+<kirby-item size="md">
+  <kirby-checkbox slot="end">Slot end</kirby-checkbox>
+</kirby-item>
+<kirby-item size="md">
+  <kirby-checkbox>No slot</kirby-checkbox>
 </kirby-item>`,
   }),
 };
