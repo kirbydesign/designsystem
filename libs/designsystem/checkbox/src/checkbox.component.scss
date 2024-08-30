@@ -146,6 +146,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     // Overrides for kirby-checkbox inside kirby-item
     &.in-item:not(.legacy-checkbox) {
       &::part(label) {
+        align-items: center;
         padding-inline: 0;
       }
 

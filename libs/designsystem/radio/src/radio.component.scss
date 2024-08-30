@@ -103,6 +103,7 @@ ion-radio {
   // Overrides for kirby-radio inside kirby-item
   &.in-item:not(.legacy-radio) {
     &::part(label) {
+      align-items: center;
       padding-inline: 0;
     }
 
