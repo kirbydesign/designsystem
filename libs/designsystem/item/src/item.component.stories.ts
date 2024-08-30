@@ -132,11 +132,12 @@ export const ItemWithRadioModernSyntax: Story = {
     <kirby-radio value="4">No slot</kirby-radio>
   </kirby-item>
   <kirby-item size="xs">
-    <kirby-radio value="5" slot="start"></kirby-radio>
-    <kirby-label>
-      <h3>Complex</h3>
-      <p detail>Label</p>
-    </kirby-label>
+    <kirby-radio value="5" slot="start">
+      <kirby-label>
+        <h3>Complex</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-radio>
   </kirby-item> 
 </kirby-radio-group>
 
@@ -155,11 +156,12 @@ export const ItemWithRadioModernSyntax: Story = {
     <kirby-radio value="4">No slot</kirby-radio>
   </kirby-item>
   <kirby-item size="sm">
-    <kirby-radio value="5" slot="start"></kirby-radio>
-    <kirby-label>
-      <h3>Complex</h3>
-      <p detail>Label</p>
-    </kirby-label>
+    <kirby-radio value="5" slot="start">
+      <kirby-label>
+        <h3>Complex</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-radio>
   </kirby-item> 
 </kirby-radio-group>
 
@@ -178,11 +180,12 @@ export const ItemWithRadioModernSyntax: Story = {
     <kirby-radio value="4">No slot</kirby-radio>
   </kirby-item>
   <kirby-item size="md">
-    <kirby-radio value="5" slot="start"></kirby-radio>
-    <kirby-label>
-      <h3>Complex</h3>
-      <p detail>Label</p>
-    </kirby-label>
+    <kirby-radio value="5" slot="start">
+      <kirby-label>
+        <h3>Complex</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-radio>
   </kirby-item> 
 </kirby-radio-group>`,
   }),
@@ -275,11 +278,12 @@ export const ItemWithCheckboxModernSyntax: Story = {
   <kirby-checkbox>No slot</kirby-checkbox>
 </kirby-item>
 <kirby-item size="xs">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>
-    <h3>Complex</h3>
-    <p detail>Label</p>
-  </kirby-label>
+  <kirby-checkbox slot="start">
+    <kirby-label>
+      <h3>Complex</h3>
+      <p detail>Label</p>
+    </kirby-label>
+  </kirby-checkbox>
 </kirby-item>
 
 <h2>Small</h2>
@@ -296,11 +300,12 @@ export const ItemWithCheckboxModernSyntax: Story = {
   <kirby-checkbox>No slot</kirby-checkbox>
 </kirby-item>
 <kirby-item size="sm">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>
-    <h3>Complex</h3>
-    <p detail>Label</p>
-  </kirby-label>
+  <kirby-checkbox slot="start">
+    <kirby-label>
+      <h3>Complex</h3>
+      <p detail>Label</p>
+    </kirby-label>
+  </kirby-checkbox>
 </kirby-item>
 
 <h2>Medium</h2>
@@ -317,11 +322,12 @@ export const ItemWithCheckboxModernSyntax: Story = {
   <kirby-checkbox>No slot</kirby-checkbox>
 </kirby-item>
 <kirby-item size="md">
-  <kirby-checkbox slot="start"></kirby-checkbox>
-  <kirby-label>
-    <h3>Complex</h3>
-    <p detail>Label</p>
-  </kirby-label>
+  <kirby-checkbox slot="start">
+    <kirby-label>
+      <h3>Complex</h3>
+      <p detail>Label</p>
+    </kirby-label>
+  </kirby-checkbox>
 </kirby-item>`,
   }),
 };
