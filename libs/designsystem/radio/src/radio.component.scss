@@ -155,6 +155,7 @@ ion-radio {
   }
 
   &[slot='start'] {
+    margin-block: 0; // Reset Ionic Item margin applided to slot=start
     margin-inline-end: $spacing-to-label;
   }
 }

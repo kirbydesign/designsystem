@@ -180,6 +180,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     }
 
     &[slot='start'] {
+      margin-block: 0; // Reset Ionic Item margin applided to slot=start
       margin-inline-end: $spacing-to-label;
     }
   }
