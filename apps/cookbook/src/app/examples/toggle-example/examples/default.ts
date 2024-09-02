@@ -9,7 +9,7 @@ const config = {
 
 @Component({
   selector: config.selector,
-  styleUrls: ['../toggle-example.component.scss'],
+  styleUrls: ['./toggle-examples.shared.scss'],
   template: config.template,
 })
 export class ToggleDefaultExampleComponent {

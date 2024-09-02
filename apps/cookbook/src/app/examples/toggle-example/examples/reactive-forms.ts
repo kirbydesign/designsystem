@@ -38,21 +38,8 @@ toggleEnabled(checked: boolean) {
 
 @Component({
   selector: config.selector,
-  styleUrls: ['../toggle-example.component.scss'],
+  styleUrls: ['./toggle-examples.shared.scss'],
   template: config.template,
-  styles: [
-    `
-      :host {
-        display: flex;
-        align-items: center;
-        gap: 40px;
-      }
-
-      kirby-item h3 {
-        padding-inline-end: 40px;
-      }
-    `,
-  ],
 })
 export class ToggleReactiveFormsExampleComponent implements OnInit {
   template = config.template.split('<cookbook-example-configuration-wrapper>')[0];
