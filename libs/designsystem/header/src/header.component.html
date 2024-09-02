@@ -31,12 +31,18 @@
     <h3 *ngIf="!!value" class="value kirby-text-display-3" [kirbyFitHeading]="fitHeadingConfig">{{ value }}<span class="value-unit semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
   
     <!-- Subtitles: -->
-    <ng-container
+    <ng-container *ngIf="!!subtitleTemplate;else subTitleAsProperty">
+        <div *ngTemplateOutlet="subtitleTemplate"></div>
+    </ng-container>
+    <ng-template #subTitleAsProperty>
+      <!-- Fallback to subtitle properties -->
+      <ng-container
         *ngTemplateOutlet="subTitleTemplate; context: { $implicit: _subtitles1 }"
       ></ng-container>
-    <ng-container
-      *ngTemplateOutlet="subTitleTemplate; context: { $implicit: _subtitles2 }"
-    ></ng-container>
+      <ng-container
+        *ngTemplateOutlet="subTitleTemplate; context: { $implicit: _subtitles2 }"
+      ></ng-container>
+    </ng-template>
 
     <!-- Custom section -->
     <div

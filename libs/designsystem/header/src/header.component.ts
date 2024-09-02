@@ -44,6 +44,11 @@ export class HeaderTitleActionIconDirective {}
 })
 export class HeaderCustomFlagDirective {}
 
+@Directive({
+  selector: '[kirbyHeaderSubtitle]',
+})
+export class HeaderSubtitleDirective {}
+
 @Component({
   selector: 'kirby-header',
   templateUrl: './header.component.html',
@@ -88,6 +93,11 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
 
   @ContentChild(HeaderTitleActionIconDirective, { read: TemplateRef })
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
+
+  @ContentChild(HeaderSubtitleDirective, {
+    read: TemplateRef<HeaderSubtitleDirective>,
+  })
+  subtitleTemplate?: TemplateRef<HeaderSubtitleDirective>;
 
   @Input() title?: string | null;
   @Input() value?: string | null;

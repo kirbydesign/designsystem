@@ -4,6 +4,7 @@ export {
   HeaderCustomFlagDirective,
   HeaderCustomSectionDirective,
   HeaderTitleActionIconDirective,
+  HeaderSubtitleDirective,
 } from './header.component';
 
 export { HeaderModule } from './header.module';

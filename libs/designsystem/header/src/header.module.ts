@@ -7,6 +7,7 @@ import {
   HeaderComponent,
   HeaderCustomFlagDirective,
   HeaderCustomSectionDirective,
+  HeaderSubtitleDirective,
   HeaderTitleActionIconDirective,
 } from './header.component';
 
@@ -16,6 +17,7 @@ const declarations = [
   HeaderCustomSectionDirective,
   HeaderTitleActionIconDirective,
   HeaderCustomFlagDirective,
+  HeaderSubtitleDirective,
 ];
 
 @NgModule({
