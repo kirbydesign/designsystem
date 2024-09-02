@@ -1,7 +1,1 @@
-@use '@kirbydesign/core/src/scss/utils';
-
-:host {
-  kirby-toggle {
-    margin-right: utils.size('s');
-  }
-}
+@use '../examples.shared';
