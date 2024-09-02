@@ -8,6 +8,7 @@ import {
   forwardRef,
   HostBinding,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -32,14 +33,13 @@ import { IonCheckbox } from '@ionic/angular/standalone';
     },
   ],
 })
-export class CheckboxComponent implements AfterViewInit, ControlValueAccessor {
+export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, OnInit {
   @ViewChild(IonCheckbox, { read: ElementRef, static: true })
   private ionCheckboxElement?: ElementRef<HTMLIonCheckboxElement>;
 
   @Input() checked: boolean = false;
   @Input() attentionLevel: '1' | '2' = '2';
 
-  @HostBinding('class.has-label')
   @Input()
   text: string;
 
@@ -66,7 +66,21 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor {
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  constructor(private ionicElementPartHelper: IonicElementPartHelper) {}
+  _justify: 'start' | 'end' | 'space-between' = 'start';
+  _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
+
+  constructor(
+    private element: ElementRef<HTMLElement>,
+    private ionicElementPartHelper: IonicElementPartHelper
+  ) {}
+
+  ngOnInit(): void {
+    const slot = this.element.nativeElement.getAttribute('slot');
+    if (slot === 'end') {
+      this._justify = 'space-between';
+      this._labelPlacement = 'start';
+    }
+  }
 
   ngAfterViewInit(): void {
     this.ionicElementPartHelper.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');

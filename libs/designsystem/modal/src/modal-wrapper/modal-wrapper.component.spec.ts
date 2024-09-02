@@ -88,20 +88,30 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
-    it('should have correct padding between content & toolbar', () => {
-      const ionContentToolbarElement: HTMLIonToolbarElement =
-        ionContentElement.querySelector('ion-toolbar');
-      expect(ionContentToolbarElement).not.toBeUndefined();
-
-      expect(ionContentToolbarElement).toHaveComputedStyle({
-        'padding-top': '0px',
-        '--padding-top': '0px',
-        '--padding-bottom': DesignTokenHelper.size('l'),
-        '--padding-start': DesignTokenHelper.size('s'),
-        '--padding-end': DesignTokenHelper.size('s'),
+    describe('on desktop', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
       });
-      expect(ionContentElement).toHaveComputedStyle({
-        '--padding-top': DesignTokenHelper.size('m'),
+
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it('should have correct padding between content & toolbar', () => {
+        const ionContentToolbarElement: HTMLIonToolbarElement =
+          ionContentElement.querySelector('ion-toolbar');
+        expect(ionContentToolbarElement).not.toBeUndefined();
+
+        expect(ionContentToolbarElement).toHaveComputedStyle({
+          'padding-top': '0px',
+          '--padding-top': '0px',
+          '--padding-bottom': DesignTokenHelper.size('l'),
+          '--padding-start': DesignTokenHelper.size('s'),
+          '--padding-end': DesignTokenHelper.size('s'),
+        });
+        expect(ionContentElement).toHaveComputedStyle({
+          '--padding-top': DesignTokenHelper.size('m'),
+        });
       });
     });
   });

@@ -1,10 +1,17 @@
-import { type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+
+import { CheckboxExampleModule } from '~/app/examples/checkbox-example/checkbox-example.module';
 
 const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,
   title: 'Components / Checkbox',
+  decorators: [
+    moduleMetadata({
+      imports: [CheckboxExampleModule],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<CheckboxComponent>;
@@ -28,4 +35,10 @@ export const Checkbox: Story = {
       control: { type: 'radio' },
     },
   },
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-checkbox-example></cookbook-checkbox-example>`,
+  }),
 };
