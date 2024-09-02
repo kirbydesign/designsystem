@@ -26,6 +26,7 @@ import { HeaderExampleCombinedComponent } from './examples/combined';
 import { HeaderExampleCustomSectionComponent } from './examples/custom-section';
 import { HeaderExampleTitleScalingComponent } from './examples/title-scaling';
 import { HeaderExampleCustomFlagComponent } from './examples/custom-flag';
+import { HeaderExampleSubtitleDirectiveComponent } from '~/app/examples/header-example/examples/subtitle-directive';
 
 const COMPONENT_DECLARATIONS = [
   HeaderExampleComponent,
@@ -39,6 +40,7 @@ const COMPONENT_DECLARATIONS = [
   HeaderExampleCustomSectionComponent,
   HeaderExampleCustomFlagComponent,
   HeaderExampleTitleScalingComponent,
+  HeaderExampleSubtitleDirectiveComponent,
 ];
 
 @NgModule({

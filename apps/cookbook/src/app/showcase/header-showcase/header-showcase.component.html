@@ -66,6 +66,23 @@
   </div>
 
   <div class="header-example-container">
+    <h2>SubtitleDirective</h2>
+    <p>
+      Custom markup can also be added to the subtitles section. This can be achieved by applying the
+      directive
+      <code>*kirbyHeaderSubtitle</code>
+      to your custom subtitle markup.
+    </p>
+    <cookbook-example-viewer [html]="customFlagExample.template" [css]="customFlagExample.styles">
+      <div class="header-example">
+        <cookbook-header-example-subtitle-directive
+          #customFlagExample
+        ></cookbook-header-example-subtitle-directive>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Key value</h2>
     <p>
       In some cases a number is the primary information on a page. When that's the case you should
