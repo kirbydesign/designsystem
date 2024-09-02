@@ -3,10 +3,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
   HostBinding,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -27,8 +29,24 @@ import { IonToggle } from '@ionic/angular/standalone';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToggleComponent implements ControlValueAccessor {
-  constructor(private cdr: ChangeDetectorRef) {}
+export class ToggleComponent implements ControlValueAccessor, OnInit {
+  constructor(private cdr: ChangeDetectorRef, private elementRef: ElementRef<HTMLElement>) {}
+
+  ngOnInit(): void {
+    this.inheritAriaAttributes();
+  }
+
+  _ariaLabel: string;
+
+  private inheritAriaAttributes() {
+    const el = this.elementRef.nativeElement;
+    const attribute = 'aria-label';
+    if (el.hasAttribute(attribute)) {
+      const value = el.getAttribute(attribute);
+      el.removeAttribute(attribute);
+      this._ariaLabel = value;
+    }
+  }
 
   @Input() checked: boolean = false;
   @Input() disabled: boolean = false;
