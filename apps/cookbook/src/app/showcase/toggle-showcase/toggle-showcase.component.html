@@ -1,4 +1,12 @@
 <div class="example">
+  <p>
+    Toggle is an input control for binary options, commonly used for managing choices and switches.
+  </p>
+
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+
+  <h2>Examples</h2>
+
   <cookbook-toggle-default-example #toggleDefaultExample></cookbook-toggle-default-example>
   <cookbook-code-viewer [html]="toggleDefaultExample.template"></cookbook-code-viewer>
 
@@ -25,7 +33,20 @@
       #toggleReactiveFormsExample
     ></cookbook-toggle-reactive-forms-example>
   </cookbook-example-viewer>
-  <h4>Toggle properties:</h4>
+
+  <h2>Accessibility</h2>
+  <p>
+    Always provide a label for the toggle to inform screen reader users what the toggle is
+    controlling.
+  </p>
+  <p>
+    When using the toggle without a visible label remember to set the
+    <code>aria-label</code>
+    property instead.
+  </p>
+
+  <h2>API</h2>
+  <h3>Properties:</h3>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>

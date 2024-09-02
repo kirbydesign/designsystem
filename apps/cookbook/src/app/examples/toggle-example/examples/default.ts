@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-toggle-default-example',
-  template: `<kirby-toggle></kirby-toggle>
-<kirby-toggle checked="true" (checkedChange)="onCheckedChange($event)"></kirby-toggle>
-<kirby-toggle disabled="true"></kirby-toggle>`,
+  template: `<kirby-toggle>Default</kirby-toggle>
+<kirby-toggle checked="true" (checkedChange)="onCheckedChange($event)">Checked</kirby-toggle>
+<kirby-toggle disabled="true">Disabled</kirby-toggle>`,
 };
 
 @Component({

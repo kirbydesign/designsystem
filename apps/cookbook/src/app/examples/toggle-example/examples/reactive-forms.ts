@@ -5,12 +5,11 @@ const config = {
   selector: 'cookbook-toggle-reactive-forms-example',
   template: `<form [formGroup]="form">
   <kirby-item>
-    <h3>Toggle in form</h3>
     <kirby-toggle
       slot="end"
       formControlName="myToggle"
       (checkedChange)="onCheckedChange()"
-    ></kirby-toggle>
+    >Toggle in form</kirby-toggle>
   </kirby-item>
       
 </form>
