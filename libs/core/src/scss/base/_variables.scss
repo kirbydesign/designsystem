@@ -19,37 +19,22 @@ $sizes: (
   xxxxs: 2px,
 ) !default;
 
-// $base-size-unitless: 16;
-// $sizes: (
-//   xxxxxl: calc(1rem * 72 / $base-size-unitless),
-//   xxxxl: calc(1rem * 64 / $base-size-unitless),
-//   xxxl: calc(1rem * 56 / $base-size-unitless),
-//   xxl: calc(1rem * 48 / $base-size-unitless),
-//   xl: calc(1rem * 40 / $base-size-unitless),
-//   l: calc(1rem * 32 / $base-size-unitless),
-//   m: calc(1rem * 24 / $base-size-unitless),
-//   s: calc(1rem * 16 / $base-size-unitless),
-//   xs: calc(1rem * 12 / $base-size-unitless),
-//   xxs: calc(1rem * 8 / $base-size-unitless),
-//   xxxs: calc(1rem * 4 / $base-size-unitless),
-//   xxxxs: calc(1rem * 2 / $base-size-unitless),
-// ) !default;
-
 /*
   FONT SETTINGS 
 ****************************************************************************/
-$base-font-size-unitless: 16;
+// TODO: To avoid Sass calculation use a custom property, Sass interpolation
+// or string.unquote()
 $font-sizes: (
-  xxxxl: calc((1rem * 72) / $base-font-size-unitless),
-  xxxl: calc((1rem * 56) / $base-font-size-unitless),
-  xxl: calc((1rem * 40) / $base-font-size-unitless),
-  xl: calc((1rem * 32) / $base-font-size-unitless),
-  l: calc((1rem * 22) / $base-font-size-unitless),
-  m: calc((1rem * 18) / $base-font-size-unitless),
-  n: calc((1rem * 16) / $base-font-size-unitless),
-  s: calc(1rem * 14 / $base-font-size-unitless),
-  xs: calc(1rem * 12 / $base-font-size-unitless),
-  xxs: calc(1rem * 10 / $base-font-size-unitless),
+  xxxxl: calc(72 / var(--undefined-property, 16) * 1rem),
+  xxxl: calc(56 / var(--undefined-property, 16) * 1rem),
+  xxl: calc(40 / var(--undefined-property, 16) * 1rem),
+  xl: calc(32 / var(--undefined-property, 16) * 1rem),
+  l: calc(22 / var(--undefined-property, 16) * 1rem),
+  m: calc(18 / var(--undefined-property, 16) * 1rem),
+  n: calc(16 / var(--undefined-property, 16) * 1rem),
+  s: calc(14 / var(--undefined-property, 16) * 1rem),
+  xs: calc(12 / var(--undefined-property, 16) * 1rem),
+  xxs: calc(10 / var(--undefined-property, 16) * 1rem),
 ) !default;
 $line-height: (
   // h1:
