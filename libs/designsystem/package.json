@@ -30,7 +30,7 @@
     "@angular/core": "^17.0.0",
     "@angular/forms": "^17.0.0",
     "@angular/router": "^17.0.0",
-    "@ionic/angular": "7.8.3",
+    "@ionic/angular": "8.2.7",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
@@ -42,10 +42,10 @@
     "zone.js": "^0.14.3"
   },
   "devDependencies": {
-    "@angular/animations": "^17.0.10",
     "@angular-devkit/build-angular": "^17.0.10",
     "@angular-devkit/core": "^17.0.10",
     "@angular-devkit/schematics": "^17.0.10",
+    "@angular/animations": "^17.0.10",
     "@angular/cli": "^17.0.9",
     "@angular/compiler-cli": "^17.0.9",
     "@ngneat/spectator": "^15.0.1",
