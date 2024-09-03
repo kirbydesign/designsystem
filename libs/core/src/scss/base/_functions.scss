@@ -199,7 +199,10 @@
   @include slotted('[heading]') {
     font-weight: font-weight('bold');
     font-size: font-size('m');
-    line-height: line-height('m');
+
+    --line-height: calc(24 / 18); // calculated from old px values
+
+    line-height: var(--line-height);
     color: var(--kirby-section-header-color);
     margin: 0;
     white-space: nowrap;
@@ -210,7 +213,10 @@
   @include slotted('[detail]', '[label]') {
     font-weight: font-weight('light');
     font-size: font-size('s');
-    line-height: line-height('s');
+
+    --line-height: calc(20 / 14); // calculated from old px values
+
+    line-height: var(--line-height);
     color: var(--kirby-section-header-color);
     margin: size('xxxs') 0 size('xxs');
     white-space: nowrap;

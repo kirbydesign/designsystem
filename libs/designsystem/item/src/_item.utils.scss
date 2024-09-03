@@ -3,7 +3,10 @@
 @mixin item-typography() {
   @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
     font-size: utils.font-size('n');
-    line-height: utils.line-height('n');
+
+    --line-height: calc(24 / 16); // calculated from old px values
+
+    line-height: var(--line-height);
     color: utils.get-text-color('black');
     display: block;
     margin: 0;
@@ -23,7 +26,10 @@
 
   @include utils.slotted('[subtitle]', '[detail]') {
     font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
+
+    --line-height: calc(16 / 12); // calculated from old px values
+
+    line-height: var(--line-height);
   }
 
   @include utils.slotted('[subtitle]:not(:last-child)') {
