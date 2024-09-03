@@ -15,10 +15,7 @@
   @include utils.slotted('[heading]') {
     font-weight: utils.font-weight('bold');
     font-size: utils.font-size('m');
-
-    --line-height: calc(24 / 18); // calculated from old px values
-
-    line-height: var(--line-height);
+    line-height: #{'calc(24 / 18)'}; // calculated from old px values
     color: var(--kirby-section-header-color);
     margin: 0;
     white-space: nowrap;
@@ -29,10 +26,7 @@
   @include utils.slotted('[detail]', '[label]') {
     font-weight: utils.font-weight('light');
     font-size: utils.font-size('s');
-
-    --line-height: calc(20 / 14); // calculated from old px values
-
-    line-height: var(--line-height);
+    line-height: #{'calc(20 / 14)'}; // calculated from old px values
     color: var(--kirby-section-header-color);
     margin: utils.size('xxxs') 0 utils.size('xxs');
     white-space: nowrap;
