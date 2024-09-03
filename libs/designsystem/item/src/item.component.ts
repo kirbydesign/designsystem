@@ -82,4 +82,10 @@ export class ItemComponent implements AfterContentInit {
     this.renderer.removeChild(labelElement.parentElement, labelElement);
     this.renderer.appendChild(newParent, labelElement);
   }
+
+  get _isIonicButton() {
+    // Ionic checks for slotted checkbox and radio
+    // and we shouldn't set the `button` prop in that scenario:
+    return this.selectable && !(this.checkbox || this.radio);
+  }
 }
