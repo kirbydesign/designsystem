@@ -54,10 +54,7 @@ h1,
 .kirby-text-xlarge {
   font-size: functions.font-size('xl');
   font-weight: functions.font-weight('black');
-
-  --line-height: calc(38 / 32); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(38 / 32)'}; // calculated from old px values
 }
 
 h2,
@@ -65,10 +62,7 @@ h2,
 .kirby-text-large {
   font-size: functions.font-size('l');
   font-weight: functions.font-weight('bold');
-
-  --line-height: calc(28 / 22); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(28 / 22)'}; // calculated from old px values
 }
 
 h3,
@@ -76,10 +70,7 @@ h3,
 .kirby-text-medium {
   font-size: functions.font-size('m');
   font-weight: functions.font-weight('bold');
-
-  --line-height: calc(24 / 18); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(24 / 18)'}; // calculated from old px values
 }
 
 h4,
@@ -87,53 +78,35 @@ h4,
 .kirby-text-normal-bold {
   font-size: functions.font-size('n');
   font-weight: functions.font-weight('bold');
-
-  --line-height: calc(24 / 16); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(24 / 16)'}; // calculated from old px values
 }
 
 p,
 .p,
 .kirby-text-normal {
   font-size: functions.font-size('n');
-
-  --line-height: calc(24 / 16); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(24 / 16)'}; // calculated from old px values
 }
 
 .kirby-text-small {
   font-size: functions.font-size('s');
-
-  --line-height: calc(20 / 14); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(20 / 14)'}; // calculated from old px values
 }
 
 .kirby-text-small-light {
   font-size: functions.font-size('s');
   font-weight: functions.font-weight('light');
-
-  --line-height: calc(20 / 14); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(20 / 14)'}; // calculated from old px values
 }
 
 .kirby-text-xsmall {
   font-size: functions.font-size('xs');
-
-  --line-height: calc(16 / 12); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(16 / 12)'}; // calculated from old px values
 }
 
 .kirby-text-xxsmall {
   font-size: functions.font-size('xxs');
-
-  --line-height: calc(11 / 10); // calculated from old px values
-
-  line-height: var(--line-height);
+  line-height: #{'calc(11 / 10)'}; // calculated from old px values
 }
 
 .kirby-text-bold {
