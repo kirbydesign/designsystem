@@ -200,6 +200,8 @@
 * wrapping them in a kirby-label within a section-header. 
 */
 
+// FIXME: This mixin is identical to section-header-typography() mixin
+// in libs/designsystem/section-header/src/_section-header.utils.scss
 @mixin section-header-typography() {
   --padding-end: #{size('s')};
   --padding-start: #{size('s')};
@@ -207,10 +209,7 @@
   @include slotted('[heading]') {
     font-weight: font-weight('bold');
     font-size: font-size('m');
-
-    --line-height: calc(24 / 18); // calculated from old px values
-
-    line-height: var(--line-height);
+    line-height: #{'calc(24 / 18)'}; // calculated from old px values
     color: var(--kirby-section-header-color);
     margin: 0;
     white-space: nowrap;
@@ -221,10 +220,7 @@
   @include slotted('[detail]', '[label]') {
     font-weight: font-weight('light');
     font-size: font-size('s');
-
-    --line-height: calc(20 / 14); // calculated from old px values
-
-    line-height: var(--line-height);
+    line-height: #{'calc(20 / 14)'}; // calculated from old px values
     color: var(--kirby-section-header-color);
     margin: size('xxxs') 0 size('xxs');
     white-space: nowrap;
