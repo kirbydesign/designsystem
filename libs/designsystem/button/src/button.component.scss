@@ -187,7 +187,7 @@ $button-margin: utils.size('xxxs');
     min-width: button-width('md');
     padding: 0;
     margin: $button-margin;
-    line-height: utils.line-height('s');
+    line-height: #{'calc(20 / 14)'}; // calculated from old px values
 
     // Outline is applied on button border instead,
     // to keep the rounded shape:
