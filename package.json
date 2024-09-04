@@ -33,12 +33,12 @@
     "nx": "nx"
   },
   "devDependencies": {
-    "@nx/angular": "19.6.4",
-    "@nx/jest": "19.6.4",
-    "@nx/js": "19.6.4",
-    "@nx/storybook": "19.6.4",
-    "@nx/web": "19.6.4",
-    "@nx/workspace": "19.6.4",
+    "@nx/angular": "19.6.5",
+    "@nx/jest": "19.6.5",
+    "@nx/js": "19.6.5",
+    "@nx/storybook": "19.6.5",
+    "@nx/web": "19.6.5",
+    "@nx/workspace": "19.6.5",
     "@storybook/addon-essentials": "8.2.9",
     "@storybook/addon-interactions": "8.2.9",
     "@storybook/angular": "8.2.9",
