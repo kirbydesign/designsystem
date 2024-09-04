@@ -1,9 +1,6 @@
-@use '../showcase.shared';
 @use '@kirbydesign/core/src/scss/utils';
 
-cookbook-toggle-default-example {
-  padding: 0;
-  margin-bottom: utils.size('s');
+:host {
   display: flex;
   flex-direction: column;
   gap: utils.size('s');
@@ -12,9 +9,4 @@ cookbook-toggle-default-example {
     flex-direction: row;
     gap: utils.size('xl');
   }
-}
-
-cookbook-reative-forms-example {
-  padding: 0;
-  margin-bottom: utils.size('s');
 }

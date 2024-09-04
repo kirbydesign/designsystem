@@ -1,4 +1,18 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  ElementRef,
+  HostBinding,
+  Input,
+  Renderer2,
+} from '@angular/core';
+
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { RadioComponent } from '@kirbydesign/designsystem/radio';
+
+import { LabelComponent } from './label/label.component';
 
 export enum ItemSize {
   XS = 'xs',
@@ -12,7 +26,9 @@ export enum ItemSize {
   styleUrls: ['./item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ItemComponent {
+export class ItemComponent implements AfterContentInit {
+  constructor(private renderer: Renderer2) {}
+
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean;
@@ -32,6 +48,14 @@ export class ItemComponent {
 
   @Input() rotateIcon: boolean = false;
 
+  // Only query for label as direct child of item:
+  @ContentChild(LabelComponent, { static: false, read: ElementRef, descendants: false })
+  private label: ElementRef<HTMLElement>;
+  @ContentChild(CheckboxComponent, { static: false, read: ElementRef })
+  private checkbox: ElementRef<HTMLElement>;
+  @ContentChild(RadioComponent, { static: false, read: ElementRef })
+  private radio: ElementRef<HTMLElement>;
+
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
     if (
@@ -40,5 +64,28 @@ export class ItemComponent {
     ) {
       event.preventDefault();
     }
+  }
+
+  ngAfterContentInit(): void {
+    if (this.label) {
+      if (this.checkbox) {
+        this.moveLabel(this.checkbox.nativeElement.querySelector('ion-checkbox'));
+      }
+      if (this.radio) {
+        this.moveLabel(this.radio.nativeElement.querySelector('ion-radio'));
+      }
+    }
+  }
+
+  private moveLabel(newParent: HTMLElement) {
+    const labelElement = this.label.nativeElement;
+    this.renderer.removeChild(labelElement.parentElement, labelElement);
+    this.renderer.appendChild(newParent, labelElement);
+  }
+
+  get _isIonicButton() {
+    // Ionic checks for slotted checkbox and radio
+    // and we shouldn't set the `button` prop in that scenario:
+    return this.selectable && !(this.checkbox || this.radio);
   }
 }
