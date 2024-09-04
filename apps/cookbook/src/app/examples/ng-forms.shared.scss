@@ -25,7 +25,7 @@ cookbook-example-configuration-wrapper {
   p {
     margin: 0;
     font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
+    line-height: #{'calc(16 / 12)'}; // calculated from old px values
   }
 
   span {
