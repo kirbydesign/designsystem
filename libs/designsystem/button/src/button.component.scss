@@ -95,6 +95,7 @@ $button-margin: utils.size('xxxs');
 
 @mixin button-lg {
   font-size: utils.font-size('n');
+  line-height: #{'calc(20 / 16)'}; // calculated from old px values
   height: utils.size('xxl');
   min-width: button-width('lg');
 
