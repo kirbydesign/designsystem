@@ -28,6 +28,7 @@ h2 {
 
 h4 {
   font-size: utils.font-size('s');
+  line-height: #{'calc(24 / 14)'}; // calculated from old px values
   margin: 0;
   font-weight: utils.font-weight('normal');
 }
