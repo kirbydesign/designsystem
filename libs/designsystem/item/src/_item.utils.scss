@@ -19,6 +19,7 @@
 
   @include utils.slotted(p) {
     font-size: utils.font-size('s');
+    line-height: #{'calc(24 / 14)'}; // calculated from old px values
   }
 
   @include utils.slotted('[subtitle]', '[detail]') {
