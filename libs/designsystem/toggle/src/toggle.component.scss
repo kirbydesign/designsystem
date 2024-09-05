@@ -52,6 +52,7 @@ ion-toggle {
 
   --handle-height: calc(#{$toggle-size} - (2px * 2));
   --handle-width: calc(#{$toggle-size} - (2px * 2));
+  --border-radius: calc(#{$toggle-size} / 2);
 
   &::part(track) {
     height: $toggle-size;
