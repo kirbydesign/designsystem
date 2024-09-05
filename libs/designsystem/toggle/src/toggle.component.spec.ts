@@ -22,6 +22,14 @@ describe('ToggleComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  it('should have correct size', async () => {
+    await TestHelper.whenReady(ionToggle);
+    expect(ionToggle).toHaveComputedStyle({
+      width: '51px',
+      height: '32px',
+    });
+  });
+
   describe('checked', () => {
     it('should not be checked by default', () => {
       expect(spectator.component.checked).toBeFalse();
