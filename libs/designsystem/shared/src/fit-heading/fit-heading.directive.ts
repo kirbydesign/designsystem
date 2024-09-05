@@ -5,7 +5,7 @@ import { LineClampHelper } from '@kirbydesign/designsystem/helpers';
 import { ResizeObserverService } from '../resize-observer/resize-observer.service';
 
 const fontSize = DesignTokenHelper.fontSize;
-const lineHeight = DesignTokenHelper.lineHeight;
+// const lineHeight = DesignTokenHelper.lineHeight;
 
 interface HeadingSize {
   name: string;
@@ -34,17 +34,20 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     {
       name: 'h1',
       fontSize: fontSize('xl'),
-      lineHeight: lineHeight('xl'),
+      // lineHeight: lineHeight('xl'),
+      lineHeight: 'calc(38 / 32)', // calculated from old px values
     },
     {
       name: 'h2',
       fontSize: fontSize('l'),
-      lineHeight: lineHeight('l'),
+      // lineHeight: lineHeight('l'),
+      lineHeight: 'calc(28 / 22)', // calculated from old px values
     },
     {
       name: 'h3',
       fontSize: fontSize('m'),
-      lineHeight: lineHeight('m'),
+      // lineHeight: lineHeight('m'),
+      lineHeight: 'calc(24 / 18)', // calculated from old px values
     },
   ];
 
