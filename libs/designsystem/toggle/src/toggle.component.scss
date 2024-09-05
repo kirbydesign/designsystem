@@ -48,8 +48,13 @@ ion-toggle {
   --handle-box-shadow: #{utils.get-elevation(2)};
 
   // Ion v8 changed height on toggles to 31px. To make toggles still follow our 8,16,24,32 pixel-size pattern, we force the toggle back to 32px
+  $toggle-size: utils.size('l');
+
+  --handle-height: calc(#{$toggle-size} - (2px * 2));
+  --handle-width: calc(#{$toggle-size} - (2px * 2));
+
   &::part(track) {
-    height: utils.size('l');
+    height: $toggle-size;
   }
 }
 
