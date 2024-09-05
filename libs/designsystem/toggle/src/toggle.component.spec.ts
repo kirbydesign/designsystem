@@ -1,8 +1,9 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ToggleComponent } from './toggle.component';
+
+const size = DesignTokenHelper.size;
 
 describe('ToggleComponent', () => {
   let spectator: Spectator<ToggleComponent>;
@@ -26,7 +27,7 @@ describe('ToggleComponent', () => {
     await TestHelper.whenReady(ionToggle);
     expect(ionToggle).toHaveComputedStyle({
       width: '51px',
-      height: '32px',
+      height: size('l'),
     });
   });
 
