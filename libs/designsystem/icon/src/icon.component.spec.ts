@@ -71,36 +71,9 @@ describe('IconComponent', () => {
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Built-in icon with name "${noExistingIconName}" was not found. 
-        Do you have a typo in 'name' or
-        did you mean to use a custom icon? If so, please use: 
-        <kirby-icon customName="${noExistingIconName}"></kirby-icon>`
-      );
-    });
-
-    it('should set default icon if custom icon name not found', () => {
-      const noExistingIconName = 'no-existing-custom-icon-name';
-      const fixture = createTestComponent(
-        `<kirby-icon customName="${noExistingIconName}"></kirby-icon>`
-      );
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-
-      expect(component.customName).toBe(noExistingIconName);
-      expect(component.icon.name).toBe(component.defaultIcon.name);
-    });
-
-    it('should warn if custom icon name not found', () => {
-      spyOn(console, 'warn');
-      const noExistingIconName = 'no-existing-custom-icon-name';
-      const fixture = createTestComponent(
-        `<kirby-icon customName="${noExistingIconName}"></kirby-icon>`
-      );
-      fixture.detectChanges();
-
-      expect(console.warn).toHaveBeenCalledWith(
-        `Custom icon with name "${noExistingIconName}" was not found. 
-        Do you have a typo in 'customName' or
-        forgot to configure the custom icon through the 'IconRegistryService'?`
+        `Icon with name "${noExistingIconName}" was not found. 
+Do you have a typo in 'name' for a built-in icon or
+forgot to configure the custom icon through the 'IconRegistryService'?`
       );
     });
 
@@ -110,24 +83,6 @@ describe('IconComponent', () => {
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
 
       expect(component.icon.name).toBe('verify');
-    });
-
-    it('should use custom icon from IconRegistryService', () => {
-      const fixture = createTestComponent(
-        `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
-      );
-
-      const iconRegistryService = TestBed.get(IconRegistryService);
-      iconRegistryService.addIcon(
-        'customIconNameFromIconRegistry',
-        'customIconSvgFromIconRegistry'
-      );
-
-      fixture.detectChanges();
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-
-      expect(component.icon.name).toBe('customIconNameFromIconRegistry');
-      expect(component.icon.svg).toBe('customIconSvgFromIconRegistry');
     });
   });
 
