@@ -179,7 +179,6 @@ Additionally, multiple components and directives are now standalone components, 
 - ComponentLoaderDirective
 - ThemeColorDirective
 - SlideButtonComponent
-- PageLocalNavigationComponent
 - SegmentedControlComponent
 - ToggleComponent
 
