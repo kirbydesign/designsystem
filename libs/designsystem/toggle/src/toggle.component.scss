@@ -51,15 +51,15 @@ ion-toggle {
 
   $toggle-size: utils.size('l');
   $toggle-border-size: utils.size('xxxxs');
-  $toggle-handle-size: calc(#{$toggle-size} - (#{$toggle-border-size} * 2));
+  $toggle-handle-size: $toggle-size - ($toggle-border-size * 2);
 
   &::part(track) {
     height: $toggle-size;
   }
 
-  --handle-height: $toggle-handle-size;
-  --handle-width: $toggle-handle-size;
-  --border-radius: calc(#{$toggle-size} / 2);
+  --handle-height: #{$toggle-handle-size};
+  --handle-width: #{$toggle-handle-size};
+  --border-radius: #{$toggle-size / 2};
 }
 
 /*
