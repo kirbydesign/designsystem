@@ -70,13 +70,7 @@ const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
-type MaxWidth = 'default' | 'standard' | 'optimized' | 'lg' | 'xl' | 'full'; // TODO: Remove deprecated options 'standard' and 'optimized' in Kirby v10
-
-const PAGE_WIDTH_STANDARD_DEPRECATION_WARNING =
-  'Deprecation warning: The support for "standard" as a maxWidth option will be removed in Kirby version 10. After that the "standard" width will be the default width and does not need to be specified.';
-
-const PAGE_WIDTH_OPTIMIZED_DEPRECATION_WARNING =
-  'Deprecation warning: The "optimized" maxWidth option is deprecated, please use "lg" instead. The support for "optimized" as a maxWidth option will be removed in Kirby version 10.';
+type MaxWidth = 'default' | 'lg' | 'xl' | 'full';
 
 export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverride>(
   'page-back-button-override'
@@ -241,15 +235,6 @@ export class PageComponent
   @Input() hasInteractiveTitle: boolean;
 
   @Input() set maxWidth(width: MaxWidth) {
-    // TODO: Remove deprecation warning in Kirby v10
-    if (width === 'standard') {
-      console.warn(PAGE_WIDTH_STANDARD_DEPRECATION_WARNING);
-    }
-    // TODO: Remove deprecation warning in Kirby v10
-    if (width === 'optimized') {
-      console.warn(PAGE_WIDTH_OPTIMIZED_DEPRECATION_WARNING);
-    }
-
     this._maxWidth = width;
   }
 
