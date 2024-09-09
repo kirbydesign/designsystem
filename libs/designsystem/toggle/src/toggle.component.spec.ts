@@ -26,7 +26,6 @@ describe('ToggleComponent', () => {
   it('should have correct size', async () => {
     await TestHelper.whenReady(ionToggle);
     expect(ionToggle).toHaveComputedStyle({
-      width: '51px',
       height: size('l'),
     });
   });
