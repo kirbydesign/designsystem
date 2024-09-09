@@ -19,13 +19,7 @@
             [themeColor]="badge.themeColor"
           >
             <ng-container *ngIf="badge.content.name; else badgeTextContent">
-              <kirby-icon
-                *ngIf="badge.content.isCustom; else defaultIconName"
-                [customName]="badge.content.name"
-              ></kirby-icon>
-              <ng-template #defaultIconName>
-                <kirby-icon [name]="badge.content.name"></kirby-icon>
-              </ng-template>
+              <kirby-icon [name]="badge.content.name"></kirby-icon>
             </ng-container>
             <ng-template #badgeTextContent>
               {{ badge.content.text }}
