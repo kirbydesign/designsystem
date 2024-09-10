@@ -167,7 +167,7 @@ export class MockPageComponent {
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
-  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full';
+  @Input() maxWidth: 'default' | 'lg' | 'xl' | 'full';
   @Input() tabBarBottomHidden: boolean;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();

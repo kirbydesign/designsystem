@@ -30,7 +30,7 @@
     "@angular/core": "^18.0.0",
     "@angular/forms": "^18.0.0",
     "@angular/router": "^18.0.0",
-    "@ionic/angular": "7.8.3",
+    "@ionic/angular": "8.2.7",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
