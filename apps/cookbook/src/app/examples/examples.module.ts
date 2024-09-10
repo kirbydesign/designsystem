@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import {
-  IconRegistryService,
-  KirbyExperimentalModule,
-  KirbyModule,
-} from '@kirbydesign/designsystem';
+import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
@@ -80,7 +76,7 @@ const IMPORTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, KirbyExperimentalModule, ...IMPORTS],
+  imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
 })
