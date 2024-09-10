@@ -157,6 +157,14 @@ describe('PageComponent', () => {
       ionScrollElement = await ionContent.getScrollElement();
     });
 
+    it('should apply the correct content width', async () => {
+      await TestHelper.whenReady(ionContent);
+      const contentInner = ionContent.querySelector('.content-inner');
+      expect(contentInner).toHaveComputedStyle({
+        'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
+      });
+    });
+
     describe('on phone', () => {
       beforeAll(async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
@@ -808,17 +816,9 @@ describe('PageComponent', () => {
     });
 
     describe('with maxWidth is defined', () => {
-      it('should apply the correct content width', async () => {
-        await TestHelper.whenReady(ionContent);
-        const contentInner = ionContent.querySelector('.content-inner');
-        expect(contentInner).toHaveComputedStyle({
-          'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
-        });
-      });
-
-      describe('and is set to standard', () => {
+      describe('and is set to default', () => {
         beforeEach(() => {
-          spectator.component.maxWidth = 'standard';
+          spectator.component.maxWidth = 'default';
           spectator.detectChanges();
         });
 
@@ -827,21 +827,6 @@ describe('PageComponent', () => {
           const contentInner = ionContent.querySelector('.content-inner');
           expect(contentInner).toHaveComputedStyle({
             'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
-          });
-        });
-      });
-
-      describe('and is set to optimized', () => {
-        beforeEach(() => {
-          spectator.component.maxWidth = 'optimized';
-          spectator.detectChanges();
-        });
-
-        it('should apply correct content width', async () => {
-          await TestHelper.whenReady(ionContent);
-          const contentInner = ionContent.querySelector('.content-inner');
-          expect(contentInner).toHaveComputedStyle({
-            'max-width': DesignTokenHelper.pageContentMaxWidth('lg'),
           });
         });
       });
