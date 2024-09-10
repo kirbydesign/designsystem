@@ -76,7 +76,6 @@ import { MockSectionHeaderComponent } from './components/mock.section-header.com
 import { MockSlidesComponent } from './components/mock.slides.component';
 import { MockSlideButtonComponent } from './components/mock.slide-button.component';
 import { MockSpinnerComponent } from './components/mock.spinner.component';
-import { MockPageLocalNavigationComponent } from './components/mock.page-local-navigation.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
 import { MockTabNavigationComponent } from './components/mock.tab-navigation.component';
 import { MockTabNavigationItemComponent } from './components/mock.tab-navigation-item.component';
@@ -157,7 +156,6 @@ export const MOCK_COMPONENTS = [
   MockSlidesComponent,
   MockSlideButtonComponent,
   MockSpinnerComponent,
-  MockPageLocalNavigationComponent,
   MockSegmentedControlComponent,
   MockBadgeComponent,
   MockTabNavigationComponent,

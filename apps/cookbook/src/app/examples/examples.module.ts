@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import {
-  IconRegistryService,
-  KirbyExperimentalModule,
-  KirbyModule,
-} from '@kirbydesign/designsystem';
+import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
@@ -19,7 +15,6 @@ import { CheckboxExampleModule } from './checkbox-example/checkbox-example.modul
 import { DataTableExampleModule } from './data-table-example/table-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
-import { ExperimentalExamplesModule } from './experimental-examples/experimental-examples.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
@@ -73,7 +68,6 @@ const IMPORTS = [
   ItemGroupExampleModule,
   ListExperimentalExampleModule,
   VirtualScrollExampleModule,
-  ExperimentalExamplesModule,
   DataTableExampleModule,
   MenuExampleModule,
   SlideModule,
@@ -82,7 +76,7 @@ const IMPORTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, KirbyExperimentalModule, ...IMPORTS],
+  imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
 })
