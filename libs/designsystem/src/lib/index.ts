@@ -49,4 +49,3 @@ export * from '@kirbydesign/designsystem/action-group';
 export * from '@kirbydesign/designsystem/header';
 
 export { KirbyModule } from './kirby.module';
-export { KirbyExperimentalModule } from './kirby-experimental.module';
