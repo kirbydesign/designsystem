@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 import { Heading, Person, tableExampleData, tableExampleHeadingData } from '../example-data';
 
 const config = {
@@ -34,16 +35,43 @@ const config = {
     </tbody>
   </table>
 </kirby-card>`,
+  importSnippet: `import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
+
+@Component({
+  selector: 'my-component'
+  standalone: true
+  imports: [TableSortableComponent],
+})
+export class MyComponent {}
+
+// OR
+
+@NgModule({
+  imports: [TableSortableComponent],
+})
+export class MyModule {}`,
+  sortingSnippet: `headings = [
+  { title: 'Name', sortable: true, sortDirection: 'asc', active: true },
+  { title: 'Eyes' },
+  ...
+]`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
 })
-export class DataTableSortableExampleComponent {
+export class DataTableSortableExampleComponent implements OnInit {
   tableData: Person[] = tableExampleData;
   headings: Heading[] = tableExampleHeadingData;
   template: string = config.template;
+  importSnippet: string = config.importSnippet;
+  sortingSnippet = config.sortingSnippet;
+
+  ngOnInit(): void {
+    this.headings[0].sortDirection = 'desc';
+    this.sortData(0, 'Name');
+  }
 
   sortData(index: number, headingTitle: string) {
     this.headings[index].active = this._activeHelper(index);

@@ -4,28 +4,87 @@
     and columns. Columns can be named through the use of headers.
   </p>
 
+  <h2>Setup</h2>
+  The Kirby data table is a set of CSS classes that styles the native HTML
+  <code>table</code>
+  element.
+  <br />
+  Ensure your application includes the global Kirby styles as
+  <a
+    href="https://github.com/kirbydesign/designsystem?tab=readme-ov-file#sass"
+    class="kirby-external-icon"
+    target="_blank"
+  >
+    explained in our readme file
+  </a>
+  .
+
   <h2>Data table with minimal data</h2>
-  <cookbook-example-viewer [html]="dataTableDefaultExample.template">
+  <cookbook-example-viewer
+    [html]="dataTableDefaultExample.template"
+    [ts]="dataTableDefaultExample.dataSnippet"
+  >
     <cookbook-data-table-default-example
       #dataTableDefaultExample
     ></cookbook-data-table-default-example>
   </cookbook-example-viewer>
 
-  <h2>Data table wrapped in a Kirby Card</h2>
-  <p>Data table wrapped in a card with selectable rows.</p>
+  <h2>Styled data table</h2>
+  <p>The data table can be wrapped in a Kirby Card to make it stand out from the canvas.</p>
+  <p>
+    The rows can be made selectable by applying the
+    <code>kirby-selectable-row</code>
+    CSS class and handling the
+    <code>click()</code>
+    event.
+  </p>
   <cookbook-example-viewer [html]="dataTableCardExample.template">
     <cookbook-data-table-card-example #dataTableCardExample></cookbook-data-table-card-example>
   </cookbook-example-viewer>
 
   <h2>Sortable table</h2>
+  <p>The data table exposes styling and hooks for making the table sortable.</p>
   <p>
-    Data table wrapped in a card with sorting. In this example the
+    To enable sorting you must import the
+    <code>TableSortableComponent</code>
+    into your Angular module or standalone component.
+  </p>
+  <cookbook-example-viewer [ts]="dataTableSortableExample.importSnippet"></cookbook-example-viewer>
+  <p>
+    In this example the
     <code>Name</code>
     ,
     <code>Height</code>
     &
     <code>Weight</code>
-    headings are sortable. We recommend to visit the
+    columns are sortable:
+  </p>
+  <cookbook-example-viewer
+    [html]="dataTableSortableExample.template"
+    [ts]="dataTableSortableExample.sortingSnippet"
+  >
+    <cookbook-data-table-sortable-example
+      #dataTableSortableExample
+    ></cookbook-data-table-sortable-example>
+  </cookbook-example-viewer>
+
+  <p>
+    <em>
+      <strong>Please note:</strong>
+      the Kirby data table does not do any sorting on it's own.
+    </em>
+  </p>
+  <p>
+    The sorting logic must be implemented manually and can be triggered by handling the
+    <code>click()</code>
+    event on the table header as shown in the code example above. By adding
+    <code>[sortable]="true"</code>
+    to the
+    <code>th</code>
+    element, it will render the sorting icon (up/down arrow) when the element is clicked.
+  </p>
+  <p>
+    We recommend visitting the
     <a
       href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#sorting_array_of_objects"
       class="kirby-external-icon"
@@ -33,23 +92,16 @@
     >
       MDN docs
     </a>
-    on sorting, if you're performing client side sorting.
+    on sorting, if you are performing client side sorting.
   </p>
-  <cookbook-example-viewer [html]="dataTableSortableExample.template">
-    <cookbook-data-table-sortable-example
-      #dataTableSortableExample
-    ></cookbook-data-table-sortable-example>
-  </cookbook-example-viewer>
-
   <p>
-    Please note that the Kirby data table does not do any sorting. The sorting logic must be
-    implemented manually and can be triggered by adding the Angular
-    <code>(click)</code>
-    event listener as shown in the code example above. By adding
-    <code>[sortable]="true"</code>
-    to a
+    To render a column as initially sorted you can set the
+    <code>active</code>
+    and
+    <code>sortDirection</code>
+    properties on the corresponding
     <code>th</code>
-    element, it will render the sorting icon (up/down arrow) when the element is clicked.
+    element as shown in the code example above. Ensure your data is initially sorted accordingly.
   </p>
 </div>
 
