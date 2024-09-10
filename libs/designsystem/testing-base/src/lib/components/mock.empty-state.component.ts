@@ -17,7 +17,6 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 })
 export class MockEmptyStateComponent {
   @Input() iconName: string;
-  @Input() customIconName: string;
   @Input() title: string;
   @Input() subtitle: string;
 }
