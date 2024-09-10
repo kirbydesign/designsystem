@@ -10,7 +10,6 @@ import {
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
-import { AlertConfig } from '../alert/config/alert-config';
 
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 import { CanDismissHelper } from './can-dismiss.helper';
@@ -33,7 +32,7 @@ export class ModalHelper {
   */
   private isModalOpening = false;
 
-  public async showModalWindow(config: ModalConfig, alertConfig?: AlertConfig): Promise<Overlay> {
+  public async showModalWindow(config: ModalConfig): Promise<Overlay> {
     if (this.isModalOpening) return;
 
     config.flavor = config.flavor || 'modal';
@@ -66,25 +65,6 @@ export class ModalHelper {
 
     if (config.canDismiss) {
       canDismiss = this.canDismissHelper.getCanDismissCallback(config.canDismiss);
-    }
-
-    // This functionality is kept to prevent breaking changes, but should be depracated in the next major.
-    // It will be replaced by the new 'config.canDismiss' callback
-    if (alertConfig) {
-      console.warn(
-        "This way of passing an alertConfig to the modal will be deprecated in the next major version. We recommend using the 'config.canDismiss' callback instead."
-      );
-
-      // Remembers the modal dismissal response from user to prevent multiple alerts on
-      // approval since the callback is invoked more than once when closing.
-      let canBeDismissed = false;
-      canDismiss = async () => {
-        if (!canBeDismissed) {
-          canBeDismissed = await this.canDismissHelper.showAlert(alertConfig);
-        }
-
-        return canBeDismissed;
-      };
     }
 
     this.isModalOpening = true;
