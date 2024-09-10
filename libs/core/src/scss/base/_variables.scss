@@ -130,7 +130,6 @@ $page-content-max-widths: (
   full: 100%,
 );
 $page-content-max-width-default: map.get($page-content-max-widths, 'default');
-$page-content-max-width: $page-content-max-width-default;
 
 /* Modal
 ****************************************************************************/
