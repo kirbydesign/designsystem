@@ -13,8 +13,6 @@ export { MockChartComponent } from './mock.chart.component';
 export { MockBaseChartComponent } from './mock.base-chart.component';
 export { MockStockChartComponent } from './mock.stock-chart.component';
 export { MockCheckboxComponent } from './mock.checkbox.component';
-export { MockTableComponent } from './mock.table.component';
-export { MockTableRowComponent } from './mock.table-row.component';
 export { MockDividerComponent } from './mock.divider.component';
 export { MockDropdownComponent } from './mock.dropdown.component';
 export { MockEmptyStateComponent } from './mock.empty-state.component';
