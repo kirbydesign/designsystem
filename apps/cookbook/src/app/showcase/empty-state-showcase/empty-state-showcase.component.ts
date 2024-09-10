@@ -17,12 +17,6 @@ export class EmptyStateShowcaseComponent {
       type: ['string'],
     },
     {
-      name: 'customIconName',
-      description: 'Deprecated: Use iconName input property instead.',
-      defaultValue: 'null',
-      type: ['string'],
-    },
-    {
       name: 'title',
       description: 'The title.',
       defaultValue: 'null',

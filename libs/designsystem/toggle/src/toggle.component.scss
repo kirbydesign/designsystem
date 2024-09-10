@@ -46,6 +46,20 @@ ion-toggle {
   --handle-background-checked: #{utils.get-color($handle-background)};
   --handle-transition: #{utils.get-transition-duration('quick')};
   --handle-box-shadow: #{utils.get-elevation(2)};
+
+  // Ion v8 changed height on toggles to 31px. To make toggles still follow our 8,16,24,32 pixel-size pattern, we force the toggle back to 32px
+
+  $toggle-size: utils.size('l');
+  $toggle-border-size: utils.size('xxxxs');
+  $toggle-handle-size: $toggle-size - ($toggle-border-size * 2);
+
+  &::part(track) {
+    height: $toggle-size;
+  }
+
+  --handle-height: #{$toggle-handle-size};
+  --handle-width: #{$toggle-handle-size};
+  --border-radius: #{$toggle-size / 2};
 }
 
 /*

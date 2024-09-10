@@ -78,7 +78,6 @@ export { MockSectionHeaderComponent } from './mock.section-header.component';
 export { MockSlidesComponent } from './mock.slides.component';
 export { MockSlideButtonComponent } from './mock.slide-button.component';
 export { MockSpinnerComponent } from './mock.spinner.component';
-export { MockPageLocalNavigationComponent } from './mock.page-local-navigation.component';
 export { MockSegmentedControlComponent } from './mock.segmented-control.component';
 export { MockTabNavigationComponent } from './mock.tab-navigation.component';
 export { MockTabNavigationItemComponent } from './mock.tab-navigation-item.component';
