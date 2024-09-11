@@ -33,7 +33,7 @@
       to display an icon.
     </p>
 
-    <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
+    <kirby-card variant="flat" [hasPadding]="_cardHasPadding">
       <cookbook-example-viewer [html]="simpleExample.template" [ts]="simpleExample.codeSnippet">
         <cookbook-item-sliding-simple-example #simpleExample></cookbook-item-sliding-simple-example>
       </cookbook-example-viewer>
@@ -46,7 +46,7 @@
       'delete' swipe action is conditionally disabled on a per item basis, based on whether it is
       deleteable.
     </p>
-    <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
+    <kirby-card variant="flat" [hasPadding]="_cardHasPadding">
       <cookbook-example-viewer
         [html]="conditionalExample.template"
         [ts]="conditionalExample.codeSnippet"
