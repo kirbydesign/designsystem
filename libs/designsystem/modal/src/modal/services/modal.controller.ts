@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Routes, ROUTES } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
-import { ModalData, ModalRouteActivation, Overlay } from '../../modal.interfaces';
+import { ModalRouteActivation, Overlay } from '../../modal.interfaces';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
 
@@ -56,7 +56,6 @@ export class ModalController implements OnDestroy {
           await this.showModalRoute(
             modalRouteActivation.route,
             siblingModalRouteActivated$,
-            modalRouteActivation.modalData,
             navigateOnWillClose
           );
         }
@@ -74,23 +73,12 @@ export class ModalController implements OnDestroy {
       });
   }
 
-  public async showModal(
-    config: ModalConfig,
-    onClose?: (data?: any) => void,
-    alertConfig?: AlertConfig
-  ): Promise<void> {
-    await this.showAndRegisterOverlay(
-      () => this.modalHelper.showModalWindow(config, alertConfig),
-      onClose
-    );
+  public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {
+    await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 
-  public async navigateToModal(
-    path: string | string[],
-    queryParams?: Params,
-    alertConfig?: AlertConfig
-  ): Promise<boolean> {
-    return this.modalNavigationService.navigateToModal(path, queryParams, alertConfig);
+  public async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
+    return this.modalNavigationService.navigateToModal(path, queryParams);
   }
 
   public async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
@@ -100,7 +88,6 @@ export class ModalController implements OnDestroy {
   private async showModalRoute(
     modalRoute: ActivatedRoute,
     siblingModalRouteActivated$: Observable<ActivatedRoute>,
-    modalData: ModalData,
     onWillClose: (data?: any) => void
   ): Promise<void> {
     const config: ModalConfig = {
@@ -110,7 +97,7 @@ export class ModalController implements OnDestroy {
       siblingModalRouteActivated$: siblingModalRouteActivated$,
     };
     await this.showAndRegisterOverlay(
-      () => this.modalHelper.showModalWindow(config, modalData?.alertConfig),
+      () => this.modalHelper.showModalWindow(config),
       null,
       onWillClose
     );
