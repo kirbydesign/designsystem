@@ -33,16 +33,11 @@ export const sharedParameters: Parameters = {
   },
 };
 
-export const allModes = {
+export const sharedChromaticModes = {
   mobile: {
     viewport: 'small',
   },
   desktop: {
     viewport: 'large',
   },
-};
-
-export const sharedChromaticModes = {
-  mobile: allModes['mobile'],
-  desktop: allModes['desktop'],
 };
