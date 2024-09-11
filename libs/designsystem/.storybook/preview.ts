@@ -1,27 +1,12 @@
 import { importProvidersFrom } from '@angular/core';
-import { ColorHelper } from '@kirbydesign/core';
 import { applicationConfig, Preview } from '@storybook/angular';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 
+import { sharedParameters } from '../../../tools/storybook-config/shared-parameters';
+
 const preview: Preview = {
   parameters: {
-    backgrounds: {
-      default: 'gray',
-      values: [
-        {
-          name: 'white',
-          value: '#fff',
-        },
-        {
-          name: 'gray',
-          value: ColorHelper.getBackgroundColor(),
-        },
-        {
-          name: 'dark',
-          value: '#353535',
-        },
-      ],
-    },
+    ...sharedParameters,
     options: {
       storySort: {
         method: 'alphabetical',
