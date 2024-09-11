@@ -46,10 +46,6 @@ import { MockAlertComponent } from './components/mock.alert.component';
 import { MockModalFooterComponent } from './components/mock.modal-footer.component';
 import { MockModalCompactWrapperComponent } from './components/mock.modal-compact-wrapper.component';
 import { MockModalWrapperComponent } from './components/mock.modal-wrapper.component';
-import { MockModalV2FooterComponent } from './components/mock.footer.component';
-import { MockModalV2Component } from './components/mock.modal.component';
-import { MockModalV2RoutingComponent } from './components/mock.modal-routing.component';
-import { MockModalV2WrapperComponent } from './components/mock.wrapper.component';
 import { MockPageFooterComponent } from './components/mock.page-footer.component';
 import {
   MockPageActionsComponent,
@@ -128,10 +124,6 @@ export const MOCK_COMPONENTS = [
   MockModalFooterComponent,
   MockModalCompactWrapperComponent,
   MockModalWrapperComponent,
-  MockModalV2FooterComponent,
-  MockModalV2Component,
-  MockModalV2RoutingComponent,
-  MockModalV2WrapperComponent,
   MockPageFooterComponent,
   MockPageTitleDirective,
   MockPageSubtitleDirective,

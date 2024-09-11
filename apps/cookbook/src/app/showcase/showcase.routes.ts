@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { ModalV2RoutingComponent } from '@kirbydesign/designsystem/modal/v2';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
