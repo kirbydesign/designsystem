@@ -3,8 +3,8 @@
 
 $blur-radius: 60px;
 $max-content-width: 324px;
-$image-height-small: 132px;
-$image-height-above-small: 164px;
+$main-image-height-small: 132px;
+$main-image-height-large: 164px;
 
 :host(.none) {
   .blur-image {
@@ -108,12 +108,12 @@ $image-height-above-small: 164px;
 
 .main-content-image {
   width: 100%;
-  height: $image-height-small;
+  height: $main-image-height-small;
   object-fit: cover;
   object-position: center;
 
   @include utils.media('>=small') {
-    height: $image-height-above-small;
+    height: $main-image-height-large;
   }
 }
 
