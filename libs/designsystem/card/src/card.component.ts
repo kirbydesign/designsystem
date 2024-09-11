@@ -45,13 +45,9 @@ export class CardComponent implements OnInit, OnDestroy {
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
 
+  @HostBinding('class')
   @Input()
   variant: 'elevated' | 'flat' | 'outlined' = 'elevated';
-
-  @HostBinding('class')
-  get _cssClass() {
-    return [this.variant].filter((cssClass) => !!cssClass);
-  }
 
   constructor(
     private elementRef: ElementRef,
