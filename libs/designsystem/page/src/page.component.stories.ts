@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { PageComponent, PageModule } from '@kirbydesign/designsystem/page';
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
+import { sharedChromaticModes } from 'tools/storybook-config/shared-parameters';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,
@@ -15,6 +16,13 @@ const meta: Meta<PageComponent> = {
       imports: [RouterTestingModule, KirbyAppModule, PageModule],
     }),
   ],
+  parameters: {
+    chromatic: {
+      modes: {
+        ...sharedChromaticModes,
+      },
+    },
+  },
 };
 export default meta;
 type Story = StoryObj<PageComponent>;
