@@ -19,7 +19,11 @@
   </a>
   .
 
-  <h2>Data table with minimal data</h2>
+  <h2>Simple data table</h2>
+  <p>
+    By default the data table has minimal styling - only the headers are styled and divider lines
+    are added between the rows.
+  </p>
   <cookbook-example-viewer
     [html]="dataTableDefaultExample.template"
     [ts]="dataTableDefaultExample.dataSnippet"
@@ -29,7 +33,7 @@
     ></cookbook-data-table-default-example>
   </cookbook-example-viewer>
 
-  <h2>Styled data table</h2>
+  <h2>Additional styling and interactions</h2>
   <p>The data table can be wrapped in a Kirby Card to make it stand out from the canvas.</p>
   <p>
     The rows can be made selectable by applying the
