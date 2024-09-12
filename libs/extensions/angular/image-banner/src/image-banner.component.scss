@@ -118,6 +118,7 @@ $main-image-height-large: 164px;
   display: flex;
   justify-content: space-between;
   gap: utils.size('s');
+  height: 100%;
 
   @include utils.media('>=small') {
     flex-direction: column;
