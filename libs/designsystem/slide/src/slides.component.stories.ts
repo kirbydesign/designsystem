@@ -33,7 +33,7 @@ export const Slides: Story = {
       cardContent: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
     })),
   },
-  render: (args: SlidesComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-slides ${argsToTemplate(args)}>
     <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
