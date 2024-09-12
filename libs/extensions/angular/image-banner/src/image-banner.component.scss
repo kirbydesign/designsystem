@@ -58,7 +58,6 @@ $main-image-height-large: 164px;
 
   @include utils.media('>=small') {
     gap: utils.size('s');
-    height: 100%;
     flex-direction: initial;
   }
 }
@@ -67,11 +66,9 @@ $main-image-height-large: 164px;
   display: flex;
   overflow: hidden;
   border-radius: utils.size('xxs');
-  height: 132px;
 
   @include utils.media('>=small') {
     flex: 1;
-    height: 100%;
   }
 }
 
@@ -121,7 +118,6 @@ $main-image-height-large: 164px;
   display: flex;
   justify-content: space-between;
   gap: utils.size('s');
-  height: 100%;
 
   @include utils.media('>=small') {
     flex-direction: column;
