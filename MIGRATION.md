@@ -42,8 +42,14 @@ The deprecated `customName` property has been removed and `name` should be used 
 
 <h4 id="modal-v10">Modal</h4>
 
+<h5>API</h5>
+
 The deprecated `alertConfig` parameter in `modalController.showModal` and `modalController.navigateToModal` has been removed and the `canDismiss` callback should be used as a direct replacement.  
-The callback can be set on the parent modal from your own embedded component,be provided to the `ModalConfig` or set directly via the `canDismiss` input property when using the modal component in your template.
+The callback can be set on the parent modal from your own embedded component, be provided to the `ModalConfig` or set directly via the `canDismiss` input property when using the modal component in your template.
+
+<h5>Experimental ModalV2 removed</h5>
+
+The experimental `ModalV2` module including the `ModalV2Controller` and `<kirby-modal-v2>` component have been removed. All features have been ported back to the existing `Modal` module and should be used instead.
 
 <h4 id="page-v10">Page</h4>
 
