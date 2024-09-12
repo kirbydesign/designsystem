@@ -1,7 +1,7 @@
 import { ColorHelper, DesignTokenHelper } from '@kirbydesign/core';
 import { Parameters } from '@storybook/angular';
 
-export const sharedParameters: Parameters = {
+export const defaultParameters: Parameters = {
   backgrounds: {
     default: 'gray',
     values: [
@@ -33,7 +33,7 @@ export const sharedParameters: Parameters = {
   },
 };
 
-export const sharedChromaticModes = {
+export const responsiveModes = {
   mobile: {
     viewport: 'small',
   },
