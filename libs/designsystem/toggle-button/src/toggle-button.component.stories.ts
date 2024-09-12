@@ -19,7 +19,7 @@ export const ToggleButton: Story = {
   args: {
     checked: false,
   },
-  render: (args) => ({
+  render: (args: ToggleButtonComponent) => ({
     props: args,
     template: `<kirby-toggle-button ${argsToTemplate(args)}>
     <button kirby-button unchecked attentionLevel="3">Deactivated</button>

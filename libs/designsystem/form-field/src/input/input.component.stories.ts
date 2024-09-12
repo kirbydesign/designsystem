@@ -30,7 +30,7 @@ export const Input: Story = {
     inputmode: '',
     placeholder: '',
   },
-  render: (args) => ({
+  render: (args: InputComponent) => ({
     props: args,
     template: `<input kirby-input />`,
   }),

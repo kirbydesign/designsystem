@@ -70,7 +70,7 @@ export const ReorderList: Story = {
     subItemsName: 'shadowAccounts',
     items,
   },
-  render: (args) => ({
+  render: (args: ReorderListComponent) => ({
     props: { getItemTextDefault, ...args },
     template: `
     <kirby-reorder-list ${argsToTemplate(args)} [getItemTextDefault]="getItemTextDefault">
