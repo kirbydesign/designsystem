@@ -119,7 +119,7 @@ export class PageActionsDirective {
 
   constructor(public template: TemplateRef<any>) {
     console.warn(
-      'Defining Page Actions via *kirbyPageActions is deprecated and will be removed in Kirby v10. A Kirby Header with Actions should be used instead, as it has an improved API with better support for responsive layouts.'
+      'Defining Page Actions via *kirbyPageActions is deprecated and will be removed in Kirby v11. A Kirby Header with Actions should be used instead, as it has an improved API with better support for responsive layouts.'
     );
   }
 
