@@ -1,5 +1,5 @@
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import localeData from '@angular/common/locales/en-DK';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -33,13 +33,7 @@ registerLocaleData(localeData);
     ComponentDisplayComponent,
     KirbyChristmasComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
-    KirbyModule,
-  ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, FormsModule, KirbyModule],
 
   providers: [
     { provide: LOCALE_ID, useValue: 'en-DK' },
