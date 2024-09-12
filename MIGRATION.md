@@ -10,6 +10,7 @@ This document provides information about breaking changes and their migrations f
   - [Data Table](#data-table-v10)
   - [Empty State](#empty-state-v10)
   - [Icon](#icon-v10)
+  - [Modal](#modal-v10)
   - [Page](#page-v10)
   - [Tabs](#tabs-v10)
 
@@ -38,6 +39,11 @@ The deprecated `customIconName` property has been removed and `iconName` should 
 <h4 id="icon-v10">Icon</h4>
 
 The deprecated `customName` property has been removed and `name` should be used as a direct replacement.
+
+<h4 id="modal-v10">Icon</h4>
+
+The deprecated `alertConfig` parameter in `modalController.showModal` and `modalController.navigateToModal` has been removed and the `canDismiss` callback should be used as a direct replacement.  
+The callback can be set on the parent modal from your own embedded component,be provided to the `ModalConfig` or set directly via the `canDismiss` input property when using the modal component in your template.
 
 <h4 id="page-v10">Page</h4>
 
