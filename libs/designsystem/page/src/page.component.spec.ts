@@ -246,7 +246,7 @@ describe('PageComponent', () => {
               );
               console.warn(' *** TOOLBAR PHONE ***');
               console.warn(
-                'ionToolbar.classList.contains(content-scrolled):',
+                'ionToolbar.content-scrolled:',
                 ionToolbar.classList.contains('content-scrolled')
               );
             });
@@ -368,7 +368,7 @@ describe('PageComponent', () => {
               );
               console.warn(' *** TOOLBAR DESKTOP ***');
               console.warn(
-                'ionToolbar.classList.contains(content-scrolled):',
+                'ionToolbar.content-scrolled:',
                 ionToolbar.classList.contains('content-scrolled')
               );
             });
