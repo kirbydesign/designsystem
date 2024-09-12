@@ -46,10 +46,6 @@ export { MockAlertComponent } from './mock.alert.component';
 export { MockModalFooterComponent } from './mock.modal-footer.component';
 export { MockModalCompactWrapperComponent } from './mock.modal-compact-wrapper.component';
 export { MockModalWrapperComponent } from './mock.modal-wrapper.component';
-export { MockModalV2FooterComponent } from './mock.footer.component';
-export { MockModalV2Component } from './mock.modal.component';
-export { MockModalV2RoutingComponent } from './mock.modal-routing.component';
-export { MockModalV2WrapperComponent } from './mock.wrapper.component';
 export { MockPageFooterComponent } from './mock.page-footer.component';
 export {
   MockPageTitleDirective,

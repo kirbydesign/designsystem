@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -41,7 +40,6 @@ registerLocaleData(localeData);
     HttpClientModule,
     FormsModule,
     KirbyModule,
-    KirbyModalModule,
   ],
 
   providers: [

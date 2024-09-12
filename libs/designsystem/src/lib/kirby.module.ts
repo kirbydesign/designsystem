@@ -61,7 +61,6 @@ import {
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { ModalComponent } from '@kirbydesign/designsystem/modal';
-import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
@@ -143,7 +142,6 @@ const exportedModules = [
   SlideModule,
   AccordionModule,
   HeaderModule,
-  KirbyModalModule,
   ...standaloneComponents,
 ];
 
