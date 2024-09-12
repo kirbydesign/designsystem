@@ -46,8 +46,6 @@ import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-sha
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { FullscreenModalV2ExampleComponent } from './modal-v2-example/modal/fullscreen/fullscreen-v2-example.component';
-import { DrawerModalV2ExampleComponent } from './modal-v2-example/modal/drawer/drawer-v2-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
@@ -82,7 +80,6 @@ import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refres
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { HeaderExampleComponent } from './header-example/header-example.component';
-import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
@@ -351,23 +348,6 @@ export const routes: ModalEnabledRoutes = [
             path: 'page2',
             outlet: 'modal',
             component: ModalRoutePage2ExampleComponent,
-          },
-        ],
-      },
-      {
-        path: 'modal-v2',
-        children: [
-          {
-            path: 'fullscreen',
-            component: FullscreenModalV2ExampleComponent,
-          },
-          {
-            path: 'drawer',
-            component: DrawerModalV2ExampleComponent,
-          },
-          {
-            path: 'nested',
-            component: NestedModalsV2ExampleComponent,
           },
         ],
       },
