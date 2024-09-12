@@ -23,7 +23,7 @@ export const TabNavigation: Story = {
   args: {
     selectedIndex: 0,
   },
-  render: (args: TabNavigationComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-tab-navigation ${argsToTemplate(args)}>
     <kirby-tab-navigation-item 

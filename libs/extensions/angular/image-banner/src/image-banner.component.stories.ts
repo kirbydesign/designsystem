@@ -101,7 +101,7 @@ export const NoDismiss: Story = {
     dismissClick: undefined,
   },
   // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
-  render: (args: ImageBannerComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
   }),
