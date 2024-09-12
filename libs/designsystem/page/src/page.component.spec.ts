@@ -241,11 +241,11 @@ describe('PageComponent', () => {
               );
               console.warn(
                 'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, 'before').getPropertyValue('--background')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
               );
               console.warn(
                 'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('background-color')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
               );
 
               await TestHelper.whenTrue(
@@ -263,11 +263,11 @@ describe('PageComponent', () => {
               );
               console.warn(
                 'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, 'before').getPropertyValue('--background')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
               );
               console.warn(
                 'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('background-color')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
               );
             });
 
@@ -398,11 +398,11 @@ describe('PageComponent', () => {
               );
               console.warn(
                 'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, 'before').getPropertyValue('--background')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
               );
               console.warn(
                 'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('background-color')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
               );
 
               await TestHelper.whenTrue(
@@ -420,11 +420,11 @@ describe('PageComponent', () => {
               );
               console.warn(
                 'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, 'before').getPropertyValue('--background')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
               );
               console.warn(
                 'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('background-color')
+                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
               );
             });
 
