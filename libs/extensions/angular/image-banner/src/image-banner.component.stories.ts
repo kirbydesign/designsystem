@@ -1,6 +1,6 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
-import { sharedChromaticModes } from 'tools/storybook-config/shared-parameters';
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 
 /**
  * The image banner is a dynamic UI component designed to grab attention and convey key messages.
@@ -18,7 +18,7 @@ const meta: Meta<ImageBannerComponent> = {
     },
     chromatic: {
       modes: {
-        ...sharedChromaticModes,
+        ...responsiveModes,
       },
     },
   },

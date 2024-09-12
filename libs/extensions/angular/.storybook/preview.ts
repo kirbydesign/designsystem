@@ -3,14 +3,14 @@ import { applicationConfig, Preview } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
-import { sharedParameters } from 'tools/storybook-config/shared-parameters';
+import { defaultParameters } from 'tools/storybook-config/shared-config';
 
 import docJson from '../docs/documentation.json';
 setCompodocJson(docJson);
 
 const preview: Preview = {
   parameters: {
-    ...sharedParameters,
+    ...defaultParameters,
     docs: {
       canvas: { className: 'canvas' },
       toc: {

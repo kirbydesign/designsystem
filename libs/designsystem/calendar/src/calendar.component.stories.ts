@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
 
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
-import { sharedChromaticModes } from 'tools/storybook-config/shared-parameters';
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 
 const meta: Meta<CalendarComponent> = {
   component: CalendarComponent,
@@ -9,7 +9,7 @@ const meta: Meta<CalendarComponent> = {
   parameters: {
     chromatic: {
       modes: {
-        ...sharedChromaticModes,
+        ...responsiveModes,
       },
     },
   },

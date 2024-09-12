@@ -2,7 +2,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { SlideModule, SlidesComponent } from '@kirbydesign/designsystem/slide';
-import { sharedChromaticModes } from 'tools/storybook-config/shared-parameters';
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 
 const meta: Meta<SlidesComponent> = {
   component: SlidesComponent,
@@ -15,7 +15,7 @@ const meta: Meta<SlidesComponent> = {
   parameters: {
     chromatic: {
       modes: {
-        ...sharedChromaticModes,
+        ...responsiveModes,
       },
     },
   },

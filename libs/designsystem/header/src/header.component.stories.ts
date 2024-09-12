@@ -2,7 +2,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { HeaderComponent, HeaderModule } from '@kirbydesign/designsystem/header';
 
-import { sharedChromaticModes } from 'tools/storybook-config/shared-parameters';
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { HeaderExampleModule } from '~/app/examples/header-example/header-example.module';
 
 const meta: Meta<HeaderComponent> = {
@@ -16,7 +16,7 @@ const meta: Meta<HeaderComponent> = {
   parameters: {
     chromatic: {
       modes: {
-        ...sharedChromaticModes,
+        ...responsiveModes,
       },
     },
   },
