@@ -234,18 +234,9 @@ describe('PageComponent', () => {
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
               console.warn(' *** TOOLBAR PHONE ***');
               console.warn(' *** TOOLBAR BEFORE WAIT ***');
-              console.warn('ionToolbar.classList:', ionToolbar.classList);
               console.warn(
                 'ionToolbar.classList.contains(content-scrolled):',
                 ionToolbar.classList.contains('content-scrolled')
-              );
-              console.warn(
-                'ionToolbar => --background:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('--background')
-              );
-              console.warn(
-                'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
               );
               console.warn(
                 'ionToolbar::before => background-color:',
@@ -260,19 +251,6 @@ describe('PageComponent', () => {
 
               console.warn(' *** TOOLBAR PHONE ***');
               console.warn(' *** TOOLBAR AFTER WAIT ***');
-              console.warn('ionToolbar.classList:', ionToolbar.classList);
-              console.warn(
-                'ionToolbar.classList.contains(content-scrolled):',
-                ionToolbar.classList.contains('content-scrolled')
-              );
-              console.warn(
-                'ionToolbar => --background:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('--background')
-              );
-              console.warn(
-                'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
-              );
               console.warn(
                 'ionToolbar::before => background-color:',
                 window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
@@ -399,18 +377,9 @@ describe('PageComponent', () => {
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
               console.warn(' *** TOOLBAR DESKTOP ***');
               console.warn(' *** TOOLBAR BEFORE WAIT ***');
-              console.warn('ionToolbar.classList:', ionToolbar.classList);
               console.warn(
                 'ionToolbar.classList.contains(content-scrolled):',
                 ionToolbar.classList.contains('content-scrolled')
-              );
-              console.warn(
-                'ionToolbar => --background:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('--background')
-              );
-              console.warn(
-                'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
               );
               console.warn(
                 'ionToolbar::before => background-color:',
@@ -425,19 +394,6 @@ describe('PageComponent', () => {
 
               console.warn(' *** TOOLBAR DESKTOP ***');
               console.warn(' *** TOOLBAR AFTER WAIT ***');
-              console.warn('ionToolbar.classList:', ionToolbar.classList);
-              console.warn(
-                'ionToolbar.classList.contains(content-scrolled):',
-                ionToolbar.classList.contains('content-scrolled')
-              );
-              console.warn(
-                'ionToolbar => --background:',
-                window.getComputedStyle(ionToolbar).getPropertyValue('--background')
-              );
-              console.warn(
-                'ionToolbar::before => --background:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('--background')
-              );
               console.warn(
                 'ionToolbar::before => background-color:',
                 window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
