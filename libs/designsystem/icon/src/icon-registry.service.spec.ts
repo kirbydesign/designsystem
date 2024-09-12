@@ -1,4 +1,10 @@
-import { IconRegistryService } from './icon-registry.service';
+import { TestBed } from '@angular/core/testing';
+import { Injector } from '@angular/core';
+import {
+  BUILT_IN_ICONS_URL_TOKEN,
+  DEFAULT_BUILT_IN_ICONS_URL,
+  IconRegistryService,
+} from './icon-registry.service';
 import { Icon } from './icon-settings';
 import { kirbyIconSettings } from './kirby-icon-settings';
 
@@ -9,9 +15,14 @@ describe('KirbyIconRegistryService', () => {
   const icon3 = { name: 'name3', svg: 'svg3' };
   const icon4 = { name: 'name2', svg: 'svg2' };
 
-  const defaultIcons: Icon[] = kirbyIconSettings.icons;
+  const defaultIcons: Icon[] = kirbyIconSettings.icons.map(({ name, svg }) => ({
+    name,
+    svg: `${DEFAULT_BUILT_IN_ICONS_URL}/${svg}`,
+  }));
+
   beforeEach(() => {
-    service = new IconRegistryService();
+    const injector = Injector.create({ providers: [IconRegistryService] });
+    service = injector.get(IconRegistryService);
   });
 
   it('should create service', () => {
@@ -99,6 +110,32 @@ describe('KirbyIconRegistryService', () => {
     it('should warn when overwriting existing icon name', () => {
       service.addIcons([icon1, icon2, icon3]);
       expect(consoleWarnSpy).toHaveBeenCalledWith('Icon with name: "name1" already exists');
+    });
+  });
+
+  describe('Customized icon url', () => {
+    it('Should use the customized icon url when registering service', () => {
+      const injector = Injector.create({
+        providers: [
+          IconRegistryService,
+          { provide: BUILT_IN_ICONS_URL_TOKEN, useValue: 'https://example.org/foo' },
+        ],
+      });
+      const service = injector.get(IconRegistryService);
+      const kirbyIcon = service.getIcon('kirby');
+      expect(kirbyIcon.svg).toBe('https://example.org/foo/kirby.svg');
+    });
+
+    it('Does not add extra slash when custom URL has trailing slash', () => {
+      const injector = Injector.create({
+        providers: [
+          IconRegistryService,
+          { provide: BUILT_IN_ICONS_URL_TOKEN, useValue: 'https://example.org/foo/' },
+        ],
+      });
+      const service = injector.get(IconRegistryService);
+      const kirbyIcon = service.getIcon('kirby');
+      expect(kirbyIcon.svg).toBe('https://example.org/foo/kirby.svg');
     });
   });
 });
