@@ -1,7 +1,9 @@
-import { MockComponent } from 'ng-mocks';
+import { MockModule } from 'ng-mocks';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
-import { IconComponent } from '@kirbydesign/designsystem/icon';
+
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+
 import { TableSortableComponent } from './sortable.component';
 
 const getFontWeight = DesignTokenHelper.fontWeight;
@@ -11,7 +13,15 @@ describe('TableSortableComponent', () => {
 
   const createHost = createHostFactory({
     component: TableSortableComponent,
-    declarations: [MockComponent(IconComponent)],
+    overrideComponents: [
+      [
+        TableSortableComponent,
+        {
+          remove: { imports: [IconModule] },
+          add: { imports: [[MockModule(IconModule)]] },
+        },
+      ],
+    ],
   });
 
   beforeEach(() => {
