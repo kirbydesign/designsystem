@@ -232,29 +232,6 @@ describe('PageComponent', () => {
 
               await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
-              console.warn(' *** TOOLBAR PHONE ***');
-              console.warn(' *** TOOLBAR BEFORE WAIT ***');
-              console.warn(
-                'ionToolbar.classList.contains(content-scrolled):',
-                ionToolbar.classList.contains('content-scrolled')
-              );
-              console.warn(
-                'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
-              );
-
-              await TestHelper.whenTrue(
-                () =>
-                  spectator.component.isContentScrolled &&
-                  ionToolbar.classList.contains('content-scrolled')
-              );
-
-              console.warn(' *** TOOLBAR PHONE ***');
-              console.warn(' *** TOOLBAR AFTER WAIT ***');
-              console.warn(
-                'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
-              );
             });
 
             it('should render toolbar divider', () => {
@@ -266,6 +243,11 @@ describe('PageComponent', () => {
                   width: `${ionToolbar.offsetWidth}px`,
                 },
                 ':before'
+              );
+              console.warn(' *** TOOLBAR PHONE ***');
+              console.warn(
+                'ionToolbar.classList.contains(content-scrolled):',
+                ionToolbar.classList.contains('content-scrolled')
               );
             });
 
@@ -375,29 +357,6 @@ describe('PageComponent', () => {
 
               await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
-              console.warn(' *** TOOLBAR DESKTOP ***');
-              console.warn(' *** TOOLBAR BEFORE WAIT ***');
-              console.warn(
-                'ionToolbar.classList.contains(content-scrolled):',
-                ionToolbar.classList.contains('content-scrolled')
-              );
-              console.warn(
-                'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
-              );
-
-              await TestHelper.whenTrue(
-                () =>
-                  spectator.component.isContentScrolled &&
-                  ionToolbar.classList.contains('content-scrolled')
-              );
-
-              console.warn(' *** TOOLBAR DESKTOP ***');
-              console.warn(' *** TOOLBAR AFTER WAIT ***');
-              console.warn(
-                'ionToolbar::before => background-color:',
-                window.getComputedStyle(ionToolbar, ':before').getPropertyValue('background-color')
-              );
             });
 
             it('should render toolbar divider', () => {
@@ -406,6 +365,11 @@ describe('PageComponent', () => {
                   'background-color': getColor('medium'),
                 },
                 ':before'
+              );
+              console.warn(' *** TOOLBAR DESKTOP ***');
+              console.warn(
+                'ionToolbar.classList.contains(content-scrolled):',
+                ionToolbar.classList.contains('content-scrolled')
               );
             });
 
