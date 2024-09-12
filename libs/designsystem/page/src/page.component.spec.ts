@@ -232,6 +232,7 @@ describe('PageComponent', () => {
 
               await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+              console.warn(' *** TOOLBAR PHONE ***');
               console.warn(' *** TOOLBAR BEFORE WAIT ***');
               console.warn('ionToolbar.classList:', ionToolbar.classList);
               console.warn(
@@ -253,6 +254,7 @@ describe('PageComponent', () => {
                   ionToolbar.classList.contains('content-scrolled')
               );
 
+              console.warn(' *** TOOLBAR PHONE ***');
               console.warn(' *** TOOLBAR AFTER WAIT ***');
               console.warn('ionToolbar.classList:', ionToolbar.classList);
               console.warn(
@@ -387,6 +389,43 @@ describe('PageComponent', () => {
 
               await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+              console.warn(' *** TOOLBAR DESKTOP ***');
+              console.warn(' *** TOOLBAR BEFORE WAIT ***');
+              console.warn('ionToolbar.classList:', ionToolbar.classList);
+              console.warn(
+                'ionToolbar => --background:',
+                window.getComputedStyle(ionToolbar).getPropertyValue('--background')
+              );
+              console.warn(
+                'ionToolbar::before => --background:',
+                window.getComputedStyle(ionToolbar, 'before').getPropertyValue('--background')
+              );
+              console.warn(
+                'ionToolbar::before => background-color:',
+                window.getComputedStyle(ionToolbar).getPropertyValue('background-color')
+              );
+
+              await TestHelper.whenTrue(
+                () =>
+                  spectator.component.isContentScrolled &&
+                  ionToolbar.classList.contains('content-scrolled')
+              );
+
+              console.warn(' *** TOOLBAR DESKTOP ***');
+              console.warn(' *** TOOLBAR AFTER WAIT ***');
+              console.warn('ionToolbar.classList:', ionToolbar.classList);
+              console.warn(
+                'ionToolbar => --background:',
+                window.getComputedStyle(ionToolbar).getPropertyValue('--background')
+              );
+              console.warn(
+                'ionToolbar::before => --background:',
+                window.getComputedStyle(ionToolbar, 'before').getPropertyValue('--background')
+              );
+              console.warn(
+                'ionToolbar::before => background-color:',
+                window.getComputedStyle(ionToolbar).getPropertyValue('background-color')
+              );
             });
 
             it('should render toolbar divider', () => {
