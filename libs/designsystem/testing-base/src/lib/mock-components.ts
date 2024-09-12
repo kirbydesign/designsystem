@@ -13,8 +13,6 @@ import { MockChartComponent } from './components/mock.chart.component';
 import { MockBaseChartComponent } from './components/mock.base-chart.component';
 import { MockStockChartComponent } from './components/mock.stock-chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
-import { MockTableComponent } from './components/mock.table.component';
-import { MockTableRowComponent } from './components/mock.table-row.component';
 import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
@@ -48,10 +46,6 @@ import { MockAlertComponent } from './components/mock.alert.component';
 import { MockModalFooterComponent } from './components/mock.modal-footer.component';
 import { MockModalCompactWrapperComponent } from './components/mock.modal-compact-wrapper.component';
 import { MockModalWrapperComponent } from './components/mock.modal-wrapper.component';
-import { MockModalV2FooterComponent } from './components/mock.footer.component';
-import { MockModalV2Component } from './components/mock.modal.component';
-import { MockModalV2RoutingComponent } from './components/mock.modal-routing.component';
-import { MockModalV2WrapperComponent } from './components/mock.wrapper.component';
 import { MockPageFooterComponent } from './components/mock.page-footer.component';
 import {
   MockPageActionsComponent,
@@ -99,8 +93,6 @@ export const MOCK_COMPONENTS = [
   MockBaseChartComponent,
   MockStockChartComponent,
   MockCheckboxComponent,
-  MockTableComponent,
-  MockTableRowComponent,
   MockDividerComponent,
   MockDropdownComponent,
   MockEmptyStateComponent,
@@ -132,10 +124,6 @@ export const MOCK_COMPONENTS = [
   MockModalFooterComponent,
   MockModalCompactWrapperComponent,
   MockModalWrapperComponent,
-  MockModalV2FooterComponent,
-  MockModalV2Component,
-  MockModalV2RoutingComponent,
-  MockModalV2WrapperComponent,
   MockPageFooterComponent,
   MockPageTitleDirective,
   MockPageSubtitleDirective,

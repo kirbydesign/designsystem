@@ -12,7 +12,7 @@ const meta: Meta<ChartComponent> = {
       providers: [ChartConfigService],
     }),
   ],
-  render: (args: ChartComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-chart ${argsToTemplate(args)}></kirby-chart>`,
   }),

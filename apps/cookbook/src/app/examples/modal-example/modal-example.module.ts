@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
-import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 
 import { FormsModule } from '@angular/forms';
 
@@ -48,7 +47,6 @@ const COMPONENT_DECLARATIONS = [
     FormsModule,
     RouterModule,
     KirbyModule,
-    KirbyModalModule,
     ExampleConfigurationWrapperComponent,
   ],
   declarations: COMPONENT_DECLARATIONS,
