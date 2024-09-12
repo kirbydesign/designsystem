@@ -3,7 +3,10 @@ import { inject, Injectable, InjectionToken } from '@angular/core';
 import { Icon } from './icon-settings';
 import { kirbyIconSettings } from './kirby-icon-settings';
 
-export const BUILT_IN_ICONS_URL_TOKEN = new InjectionToken<string>('BUILT_IN_ICONS_URL');
+/**
+ * Token used to configure base URL for path to built-in icons. Default is 'assets/kirby/icons/svg'.
+ */
+export const BUILT_IN_ICONS_URL = new InjectionToken<string>('BUILT_IN_ICONS_URL');
 
 export const DEFAULT_BUILT_IN_ICONS_URL = 'assets/kirby/icons/svg';
 
@@ -12,7 +15,7 @@ export const DEFAULT_BUILT_IN_ICONS_URL = 'assets/kirby/icons/svg';
 })
 export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
-  private builtInIconsUrl = inject(BUILT_IN_ICONS_URL_TOKEN, { optional: true });
+  private builtInIconsUrl = inject(BUILT_IN_ICONS_URL, { optional: true });
 
   constructor() {
     this.addDefaultIcons();
