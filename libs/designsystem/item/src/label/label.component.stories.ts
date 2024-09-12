@@ -13,7 +13,7 @@ export const Label: Story = {
   args: {
     direction: 'vertical',
   },
-  render: (args: LabelComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-label ${argsToTemplate(args)}>Label</kirby-label>`,
   }),

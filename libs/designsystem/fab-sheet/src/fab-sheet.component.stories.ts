@@ -29,7 +29,7 @@ export const FabSheet: Story = {
       },
     },
   },
-  render: (args: FabSheetComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-fab-sheet ${argsToTemplate(args)}>
     <kirby-icon name="write-message"></kirby-icon>
