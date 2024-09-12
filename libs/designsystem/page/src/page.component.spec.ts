@@ -236,6 +236,10 @@ describe('PageComponent', () => {
               console.warn(' *** TOOLBAR BEFORE WAIT ***');
               console.warn('ionToolbar.classList:', ionToolbar.classList);
               console.warn(
+                'ionToolbar.classList.contains(content-scrolled):',
+                ionToolbar.classList.contains('content-scrolled')
+              );
+              console.warn(
                 'ionToolbar => --background:',
                 window.getComputedStyle(ionToolbar).getPropertyValue('--background')
               );
@@ -257,6 +261,10 @@ describe('PageComponent', () => {
               console.warn(' *** TOOLBAR PHONE ***');
               console.warn(' *** TOOLBAR AFTER WAIT ***');
               console.warn('ionToolbar.classList:', ionToolbar.classList);
+              console.warn(
+                'ionToolbar.classList.contains(content-scrolled):',
+                ionToolbar.classList.contains('content-scrolled')
+              );
               console.warn(
                 'ionToolbar => --background:',
                 window.getComputedStyle(ionToolbar).getPropertyValue('--background')
@@ -393,6 +401,10 @@ describe('PageComponent', () => {
               console.warn(' *** TOOLBAR BEFORE WAIT ***');
               console.warn('ionToolbar.classList:', ionToolbar.classList);
               console.warn(
+                'ionToolbar.classList.contains(content-scrolled):',
+                ionToolbar.classList.contains('content-scrolled')
+              );
+              console.warn(
                 'ionToolbar => --background:',
                 window.getComputedStyle(ionToolbar).getPropertyValue('--background')
               );
@@ -414,6 +426,10 @@ describe('PageComponent', () => {
               console.warn(' *** TOOLBAR DESKTOP ***');
               console.warn(' *** TOOLBAR AFTER WAIT ***');
               console.warn('ionToolbar.classList:', ionToolbar.classList);
+              console.warn(
+                'ionToolbar.classList.contains(content-scrolled):',
+                ionToolbar.classList.contains('content-scrolled')
+              );
               console.warn(
                 'ionToolbar => --background:',
                 window.getComputedStyle(ionToolbar).getPropertyValue('--background')
