@@ -4,6 +4,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EnvironmentInjector,
   HostBinding,
   HostListener,
   Injector,
@@ -172,7 +173,8 @@ export class ModalWrapperComponent
     private resizeObserverService: ResizeObserverService,
     private windowRef: WindowRef,
     private platform: PlatformService,
-    private canDismissHelper: CanDismissHelper
+    private canDismissHelper: CanDismissHelper,
+    private environmentInjector: EnvironmentInjector
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
@@ -292,7 +294,7 @@ export class ModalWrapperComponent
     if (this.config.modalRoute) {
       this.onSiblingModalRouteActivated(this.config.siblingModalRouteActivated$);
       // Load component from modal-route inside router-outlet:
-      this.routerOutlet.activateWith(this.config.modalRoute);
+      this.routerOutlet.activateWith(this.config.modalRoute, this.environmentInjector);
     }
   }
 
@@ -302,7 +304,7 @@ export class ModalWrapperComponent
       if (this.routerOutlet.isActivated) {
         this.routerOutlet.deactivate();
       }
-      this.routerOutlet.activateWith(route);
+      this.routerOutlet.activateWith(route, this.environmentInjector);
     });
   }
 
