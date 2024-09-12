@@ -40,7 +40,7 @@ The deprecated `customIconName` property has been removed and `iconName` should 
 
 The deprecated `customName` property has been removed and `name` should be used as a direct replacement.
 
-<h4 id="modal-v10">Icon</h4>
+<h4 id="modal-v10">Modal</h4>
 
 The deprecated `alertConfig` parameter in `modalController.showModal` and `modalController.navigateToModal` has been removed and the `canDismiss` callback should be used as a direct replacement.  
 The callback can be set on the parent modal from your own embedded component,be provided to the `ModalConfig` or set directly via the `canDismiss` input property when using the modal component in your template.
