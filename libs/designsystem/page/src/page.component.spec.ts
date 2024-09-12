@@ -235,6 +235,11 @@ describe('PageComponent', () => {
             });
 
             it('should render toolbar divider', () => {
+              console.warn(' *** TOOLBAR PHONE BEFORE ***');
+              console.warn(
+                'ionToolbar.content-scrolled:',
+                ionToolbar.classList.contains('content-scrolled')
+              );
               expect(ionToolbar).toHaveComputedStyle(
                 {
                   'background-color': getColor('medium'),
@@ -244,7 +249,7 @@ describe('PageComponent', () => {
                 },
                 ':before'
               );
-              console.warn(' *** TOOLBAR PHONE ***');
+              console.warn(' *** TOOLBAR PHONE AFTER ***');
               console.warn(
                 'ionToolbar.content-scrolled:',
                 ionToolbar.classList.contains('content-scrolled')
@@ -360,13 +365,18 @@ describe('PageComponent', () => {
             });
 
             it('should render toolbar divider', () => {
+              console.warn(' *** TOOLBAR DESKTOP BEFORE ***');
+              console.warn(
+                'ionToolbar.content-scrolled:',
+                ionToolbar.classList.contains('content-scrolled')
+              );
               expect(ionToolbar).toHaveComputedStyle(
                 {
                   'background-color': getColor('medium'),
                 },
                 ':before'
               );
-              console.warn(' *** TOOLBAR DESKTOP ***');
+              console.warn(' *** TOOLBAR DESKTOP AFTER ***');
               console.warn(
                 'ionToolbar.content-scrolled:',
                 ionToolbar.classList.contains('content-scrolled')
