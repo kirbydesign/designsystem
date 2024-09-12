@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/core",
-  "version": "0.0.62",
+  "version": "0.0.63-rc.1",
   "description": "Core styles and helpers for the Kirby Design System.",
   "type": "module",
   "main": "dist/index.js",
