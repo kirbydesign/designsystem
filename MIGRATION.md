@@ -4,14 +4,73 @@ This document provides information about breaking changes and their migrations f
 
 ## Version 10.0.0
 
+- [Platform Support](#platform-support-v10)
 - [Components](#components-v10)
   - [Card](#card-v10)
+  - [Data Table](#data-table-v10)
+  - [Empty State](#empty-state-v10)
+  - [Icon](#icon-v10)
+  - [Modal](#modal-v10)
+  - [Page](#page-v10)
+  - [Tabs](#tabs-v10)
+
+<h3 id="platform-support-v10">Platform Support</h3>
+
+- As of version 10 Kirby expects Angular 18.0.0 or later.
 
 <h3 id="components-v10">Components</h3>
 
 <h4 id="card-v10">Card</h4>
 
 The `flat` property has been removed and all usages of this property must be replaced with the new `variant` property for identical behavior by inserting `variant="flat"` instead.
+
+<h4 id="data-table-v10">Data Table</h4>
+
+The `TableComponent` and `TableRowComponent` have been been removed and should be replaced by the `kirby-table` CSS class.
+
+The `DataTableModule` has been deprecated in favor of the standalone `TableSortableComponent`.
+All imports of `DataTableModule` should be replaced with `TableSortableComponent`.  
+`DataTableModule` will be removed in Kirby v11.
+
+<h4 id="empty-state-v10">Empty State</h4>
+
+The deprecated `customIconName` property has been removed and `iconName` should be used as a direct replacement.
+
+<h4 id="icon-v10">Icon</h4>
+
+The deprecated `customName` property has been removed and `name` should be used as a direct replacement.
+
+<h4 id="modal-v10">Modal</h4>
+
+<h5>API</h5>
+
+The deprecated `alertConfig` parameter in `modalController.showModal` and `modalController.navigateToModal` has been removed and the `canDismiss` callback should be used as a direct replacement.  
+The callback can be set on the parent modal from your own embedded component, be provided to the `ModalConfig` or set directly via the `canDismiss` input property when using the modal component in your template.
+
+<h5>Experimental ModalV2 removed</h5>
+
+The experimental `ModalV2` module including the `ModalV2Controller` and `<kirby-modal-v2>` component have been removed. All features have been ported back to the existing `Modal` module and should be used instead.
+
+<h4 id="page-v10">Page</h4>
+
+<h5>Properties</h5>
+
+The following options for the `maxWidth` property have been removed and usages should be updated accordingly:
+
+- `standard`: remove all usages (same as default width of page)
+- `optimized`: should be replaced with `lg`
+
+<h5>Page Local Navigation</h5>
+
+The deprecated `page-local-navigation` component has been fully removed and should be replaced by `kirby-tab-navigation`.
+
+<h5>Sass</h5>
+
+The deprecated `$page-content-max-width` Sass variable has been removed and `$page-content-max-width-default` should be used as a direct replacement.
+
+<h4 id="tabs-v10">Tabs</h4>
+
+The deprecated `routerLink` property in `kirby-tab-button` component has been removed and `tab` should be used as a direct replacement.
 
 ## Version 9.0.0
 
