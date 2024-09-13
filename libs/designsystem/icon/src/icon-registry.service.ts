@@ -1,4 +1,4 @@
-import { Inject, inject, Injectable, InjectionToken } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 
 import { Icon } from './icon-settings';
 import { kirbyIconSettings } from './kirby-icon-settings';
@@ -43,10 +43,10 @@ export class IconRegistryService {
   private addDefaultIcons(): void {
     const baseUrl = this.builtInIconsUrl ?? DEFAULT_BUILT_IN_ICONS_URL;
     const baseUrlWithSlash = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
-    for (const { name, svg } of kirbyIconSettings.icons) {
+    kirbyIconSettings.icons.forEach(({ name, svg }) => {
       const url = baseUrlWithSlash + svg;
       this.addIcon(name, url);
-    }
+    });
   }
 
   getIcons(): Icon[] {
