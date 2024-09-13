@@ -1,8 +1,4 @@
-import { css, unsafeCSS } from 'lit';
-
-import { DesignTokenHelper } from '../helpers';
-
-const { size, fontSize } = DesignTokenHelper;
+import { css } from 'lit';
 
 export default css`
   :host {
@@ -23,11 +19,11 @@ export default css`
     background-color: var(--kirby-badge-background-color);
     box-sizing: border-box;
     color: var(--kirby-badge-color);
-    border-radius: ${unsafeCSS(size('xxs'))};
+    border-radius: var(--kirby-spacing-xxs);
     display: inline-block;
     padding: 3px 5px;
-    min-height: ${unsafeCSS(size('s'))};
-    min-width: ${unsafeCSS(size('s'))};
+    min-height: var(--kirby-spacing-s);
+    min-width: var(--kirby-spacing-s);
   }
 
   :host([themecolor='white']) {
@@ -63,12 +59,12 @@ export default css`
     padding: initial;
     min-height: initial;
     min-width: initial;
-    height: ${unsafeCSS(size('xxs'))};
-    width: ${unsafeCSS(size('xxs'))};
+    height: var(--kirby-spacing-xxs);
+    width: var(--kirby-spacing-xxs);
   }
 
   ::slotted(kirby-icon) {
-    --kirby-icon-font-size: ${unsafeCSS(fontSize('n'))};
+    --kirby-icon-font-size: var(--kirby-font-size-n);
 
     position: absolute;
     top: 0;
