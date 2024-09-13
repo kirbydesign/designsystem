@@ -32,7 +32,7 @@ export const Default: Story = {
       control: { type: 'radio' },
     },
   },
-  render: (args: ItemComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-item ${argsToTemplate(args)}>Item</kirby-item>`,
   }),

@@ -19,7 +19,7 @@ export const Flag: Story = {
       control: { type: 'radio' },
     },
   },
-  render: (args: FlagComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-flag ${argsToTemplate(args)}>Flag</kirby-flag>
   `,
