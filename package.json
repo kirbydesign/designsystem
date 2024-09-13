@@ -30,7 +30,8 @@
     "generate-mocks": "node ./scripts/generate-mocks.js",
     "sync-node-version": "node ./scripts/sync-node-version.js",
     "generate-design-tokens": "sass libs/core/src/scss/themes/design-tokens.scss libs/core/src/scss/themes/design-tokens.css --no-source-map",
-    "nx": "nx"
+    "nx": "nx",
+    "clearcache": "whatever"
   },
   "devDependencies": {
     "@nx/angular": "^19.6.5",
