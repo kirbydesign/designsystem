@@ -28,7 +28,7 @@ export const ActionGroup: Story = {
       control: { type: 'radio' },
     },
   },
-  render: (args: ActionGroupComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-action-group ${argsToTemplate(args)}>
     <button kirby-button attentionLevel="3">

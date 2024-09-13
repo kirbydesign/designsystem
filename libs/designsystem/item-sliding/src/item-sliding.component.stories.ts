@@ -36,7 +36,7 @@ export const ItemSliding: Story = {
       },
     ],
   },
-  render: (args: ItemSlidingComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-item-sliding ${argsToTemplate(args)}>
       <kirby-item>Item Sliding</kirby-item>

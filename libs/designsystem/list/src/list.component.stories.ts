@@ -38,7 +38,7 @@ export const List: Story = {
     swipeActions: [],
     disableSelectionHighlight: false,
   },
-  render: (args: ListComponent) => ({
+  render: (args) => ({
     props: args,
     template: `
     <kirby-list ${argsToTemplate(args)}>
