@@ -15,7 +15,7 @@ describe('KirbyIconRegistryService', () => {
 
   const expectedDefaultIcons: Icon[] = kirbyIconSettings.icons.map(({ name, svg }) => ({
     name,
-    svg: `${DEFAULT_BUILT_IN_ICONS_URL}/${svg}`,
+    svg: `${DEFAULT_BUILT_IN_ICONS_URL}${svg}`,
   }));
 
   beforeEach(() => {
