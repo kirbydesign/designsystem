@@ -29,7 +29,7 @@ export const Menu: Story = {
     shift: true,
     minWidth: 0,
   },
-  render: (args: MenuComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-menu ${argsToTemplate(args)}>
     <kirby-item>

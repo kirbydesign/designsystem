@@ -37,7 +37,7 @@ export const Default: Story = {
       control: { type: 'radio' },
     },
   },
-  render: (args: BadgeProps) => ({
+  render: (args) => ({
     props: args,
     template: `
     <kirby-badge ${argsToTemplate(args)}></kirby-badge>`,

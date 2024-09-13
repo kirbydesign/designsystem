@@ -23,7 +23,7 @@ export const CardFooter: Story = {
   args: {
     hasPadding: true,
   },
-  render: (args: CardFooterComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-card>
       ${cardContent}
