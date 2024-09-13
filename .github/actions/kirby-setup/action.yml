@@ -28,6 +28,14 @@ runs:
       # Alternative way to clean install due to this bug https://github.com/npm/cli/issues/4828
       run: rm package-lock.json && npm i
       shell: bash
+    - name: Log jest-preset-angular version
+      if: steps.cache.outputs.cache-hit == 'true'
+      run: |
+        if test -f ./node_modules/jest-preset-angular/package.json; then
+          echo "jest-preset-angular exists."
+          echo "$(jq -r .version ./node_modules/jest-preset-angular/package.json)"
+        fi
+      shell: bash
     - name: Run Postinstall Script
       if: steps.cache.outputs.cache-hit == 'true'
       run: npm run postinstall
