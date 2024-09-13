@@ -14,6 +14,7 @@
 /libs/core/custom-elements.d.ts
 /libs/core/custom-elements.json
 /libs/core/src/components.d.ts
+/libs/core/src/scss/themes/design-tokens.css
 
 # dependencies
 **/node_modules/

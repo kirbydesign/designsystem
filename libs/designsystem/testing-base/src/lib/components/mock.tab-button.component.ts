@@ -16,7 +16,7 @@ import { TabButtonComponent } from '@kirbydesign/designsystem/tabs';
   ],
 })
 export class MockTabButtonComponent {
-  @Input() routerLink: string;
+  @Input() tab: string;
   @Output() click = new EventEmitter<Event>();
 }
 

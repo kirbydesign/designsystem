@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, Optional } from '@angu
 import { ActivatedRoute } from '@angular/router';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
-import { AlertConfig, ShowAlertCallback } from './public_api';
+import { ShowAlertCallback } from './public_api';
 export interface OverlayEventDetail<T = any> {
   data?: T;
   role?: string;
@@ -15,17 +15,8 @@ export interface Overlay {
   isDismissing?: boolean;
 }
 
-export interface ModalData {
-  alertConfig: AlertConfig;
-}
-
-export interface NavigationData {
-  navigationData: ModalData;
-}
-
 export interface ModalRouteActivation {
   route: ActivatedRoute;
-  modalData: ModalData;
   isNewModal: boolean;
 }
 

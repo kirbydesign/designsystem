@@ -2,10 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 
 import { ReactiveFormStateExampleModule } from '../reactive-form-state/reactive-form.module';
-import { ExamplesSharedModule } from '../examples.shared.module';
+import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { CheckboxConfirmExampleComponent } from './examples/confirm';
 import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxEventsExampleComponent } from './examples/events';
@@ -14,8 +18,10 @@ import { CheckboxMultilineExampleComponent } from './examples/multiline';
 import { CheckboxSizesExampleComponent } from './examples/sizes';
 import { CheckboxStatesExampleComponent } from './examples/states';
 import { CheckboxReactiveFormsExampleComponent } from './examples/reactive-forms';
+import { CheckboxExampleComponent } from './checkbox-example.component';
 
 const COMPONENT_DECLARATIONS = [
+  CheckboxExampleComponent,
   CheckboxDefaultExampleComponent,
   CheckboxListExampleComponent,
   CheckboxConfirmExampleComponent,
@@ -29,12 +35,16 @@ const COMPONENT_DECLARATIONS = [
 @NgModule({
   imports: [
     CommonModule,
-    KirbyModule,
     FormsModule,
-    ExamplesSharedModule,
+    ExampleConfigurationWrapperComponent,
     ReactiveFormsModule,
     ReactiveFormStateExampleModule,
+    CheckboxComponent,
+    ItemModule,
+    ListModule,
+    DividerComponent,
   ],
+  providers: [ToastController, ToastHelper],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })

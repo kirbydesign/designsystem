@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+
 import { Person, tableExampleData } from '../example-data';
+import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const config = {
   selector: 'cookbook-data-table-default-example',
@@ -28,4 +30,10 @@ const config = {
 export class DataTableDefaultExampleComponent {
   template: string = config.template;
   tableData: Person[] = tableExampleData.slice(0, 3);
+  dataSnippet = `tableData = ${stringifyPretty(
+    this.tableData.map((data) => {
+      const { name, height, mass } = data;
+      return { name, height, mass };
+    })
+  )};`;
 }

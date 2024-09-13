@@ -97,7 +97,7 @@ describe('ItemSlidingComponent', () => {
       // QuerySelectorAll returns elements in document order
       ionItemOptionElements.forEach((ionItemOptionElement, index) => {
         const optionLabel = ionItemOptionElement.querySelector('ion-label');
-        expect(optionLabel.innerHTML).toEqual(swipeActions[index].title);
+        expect(optionLabel).toHaveExactTrimmedText(swipeActions[index].title);
       });
     });
 
@@ -174,7 +174,7 @@ describe('ItemSlidingComponent', () => {
 
       it('should render the title', () => {
         const optionLabel = ionItemOptionElements[0].querySelector('ion-label');
-        expect(optionLabel.innerHTML).toEqual(swipeActions[0].title);
+        expect(optionLabel).toHaveExactTrimmedText(swipeActions[0].title);
       });
     });
   });

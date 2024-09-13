@@ -2,6 +2,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { HeaderComponent, HeaderModule } from '@kirbydesign/designsystem/header';
 
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { HeaderExampleModule } from '~/app/examples/header-example/header-example.module';
 
 const meta: Meta<HeaderComponent> = {
@@ -12,6 +13,13 @@ const meta: Meta<HeaderComponent> = {
       imports: [HeaderModule, HeaderExampleModule],
     }),
   ],
+  parameters: {
+    chromatic: {
+      modes: {
+        ...responsiveModes,
+      },
+    },
+  },
 };
 export default meta;
 type Story = StoryObj<HeaderComponent>;

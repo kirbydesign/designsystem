@@ -25,7 +25,6 @@ export * from '@kirbydesign/designsystem/kirby-ionic-module';
 export * from '@kirbydesign/designsystem/list';
 export * from '@kirbydesign/designsystem/loading-overlay';
 export * from '@kirbydesign/designsystem/modal';
-export * from '@kirbydesign/designsystem/modal/v2';
 export * from '@kirbydesign/designsystem/page';
 export * from '@kirbydesign/designsystem/popover';
 export * from '@kirbydesign/designsystem/progress-circle';
@@ -49,4 +48,3 @@ export * from '@kirbydesign/designsystem/action-group';
 export * from '@kirbydesign/designsystem/header';
 
 export { KirbyModule } from './kirby.module';
-export { KirbyExperimentalModule } from './kirby-experimental.module';

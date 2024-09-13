@@ -93,6 +93,20 @@ $text-colors: (
   'positive': map.get($decoration-colors, 'green', 80),
   'negative': map.get($decoration-colors, 'red', 70),
 ) !default;
+$white-overlay-colors: (
+  10: rgb(255 255 255 / 10%),
+  20: rgb(255 255 255 / 20%),
+  30: rgb(255 255 255 / 30%),
+  40: rgb(255 255 255 / 40%),
+  50: rgb(255 255 255 / 50%),
+) !default;
+$dark-overlay-colors: (
+  10: rgb(28 28 28 / 10%),
+  20: rgb(28 28 28 / 20%),
+  30: rgb(28 28 28 / 30%),
+  40: rgb(28 28 28 / 40%),
+  50: rgb(28 28 28 / 50%),
+) !default;
 $focus-ring-color: rgb(77 144 254);
 
 @function get-all-colors() {

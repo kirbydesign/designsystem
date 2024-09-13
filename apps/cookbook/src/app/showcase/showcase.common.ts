@@ -32,7 +32,6 @@ import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-s
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
-import { ModalV2ShowcaseComponent } from './modal-v2-showcase/modal-v2-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
@@ -76,7 +75,6 @@ export const COMPONENT_EXPORTS: any[] = [
   StockChartShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
-  ModalV2ShowcaseComponent,
   ModalShowcaseComponent,
   SegmentedControlShowcaseComponent,
   BadgeShowcaseComponent,

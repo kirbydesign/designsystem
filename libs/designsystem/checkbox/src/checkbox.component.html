@@ -3,8 +3,10 @@
   [checked]="checked"
   [disabled]="disabled"
   (ionChange)="onChecked($event.detail.checked)"
-  labelPlacement="end"
   (ionBlur)="onBlur()"
+  [labelPlacement]="_labelPlacement"
+  [justify]="_justify"
 >
   <span *ngIf="text">{{ text }}</span>
+  <ng-content></ng-content>
 </ion-checkbox>

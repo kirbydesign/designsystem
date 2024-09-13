@@ -19,9 +19,4 @@ export const EmptyState: Story = {
     title: 'No items',
     subtitle: `You don't have any items. Call support to add some items to your account.`,
   },
-  argTypes: {
-    customIconName: {
-      control: 'text',
-    },
-  },
 };

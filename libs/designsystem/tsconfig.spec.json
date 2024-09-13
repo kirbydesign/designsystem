@@ -40,7 +40,6 @@
       "@kirbydesign/designsystem/loading-overlay": ["libs/designsystem/loading-overlay/index.ts"],
       "@kirbydesign/designsystem/menu": ["libs/designsystem/menu/index.ts"],
       "@kirbydesign/designsystem/modal": ["libs/designsystem/modal/index.ts"],
-      "@kirbydesign/designsystem/modal/v2": ["libs/designsystem/modal/v2/index.ts"],
       "@kirbydesign/designsystem/page": ["libs/designsystem/page/index.ts"],
       "@kirbydesign/designsystem/popover": ["libs/designsystem/popover/index.ts"],
       "@kirbydesign/designsystem/progress-circle": ["libs/designsystem/progress-circle/index.ts"],
