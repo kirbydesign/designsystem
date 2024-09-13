@@ -17,7 +17,7 @@ export const Default: Story = {
     hasPadding: false,
     variant: 'elevated',
   },
-  render: (args: CardComponent) => ({
+  render: (args) => ({
     props: args,
     template: `
       <kirby-card ${argsToTemplate(args)}>

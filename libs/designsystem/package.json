@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/designsystem",
-  "version": "9.6.0",
+  "version": "10.0.0",
   "description": "The Kirby Design Angular Components.",
   "author": "kirby@bankdata.dk",
   "repository": {
@@ -25,11 +25,11 @@
     "inputmask": "5.0.8"
   },
   "peerDependencies": {
-    "@angular/cdk": "^17.0.0",
-    "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
-    "@angular/forms": "^17.0.0",
-    "@angular/router": "^17.0.0",
+    "@angular/cdk": "^18.0.0",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/forms": "^18.0.0",
+    "@angular/router": "^18.0.0",
     "@ionic/angular": "8.2.7",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
@@ -42,12 +42,12 @@
     "zone.js": "^0.14.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.10",
-    "@angular-devkit/core": "^17.0.10",
-    "@angular-devkit/schematics": "^17.0.10",
-    "@angular/animations": "^17.0.10",
-    "@angular/cli": "^17.0.9",
-    "@angular/compiler-cli": "^17.0.9",
+    "@angular/animations": "^18.2.2",
+    "@angular-devkit/build-angular": "^18.2.2",
+    "@angular-devkit/core": "^18.2.2",
+    "@angular-devkit/schematics": "^18.2.2",
+    "@angular/cli": "^18.2.2",
+    "@angular/compiler-cli": "^18.2.2",
     "@ngneat/spectator": "^15.0.1",
     "@types/jasmine": "4.0.3",
     "@types/jest": "^29.5.5",
@@ -65,7 +65,7 @@
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.32",
     "ng-mocks": "^14.11.0",
-    "ng-packagr": "^17.0.3",
+    "ng-packagr": "^18.2.1",
     "postcss": "^8.4.31",
     "postcss-import": "14.1.0",
     "postcss-preset-env": "7.5.0",

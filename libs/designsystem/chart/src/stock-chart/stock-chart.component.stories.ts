@@ -54,7 +54,7 @@ const meta: Meta<StockChartComponent> = {
       providers: [ChartConfigService],
     }),
   ],
-  render: (args: StockChartComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-stock-chart ${argsToTemplate(args)}></kirby-stock-chart>`,
   }),
