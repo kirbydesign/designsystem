@@ -13,6 +13,7 @@ import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 
@@ -1168,6 +1169,8 @@ describe('DropdownComponent', () => {
     });
 
     it('should update popover card size when resized', async () => {
+      const resizeObserverService = spectator.inject(ResizeObserverService);
+      const handleResizeSpy = spyOn(resizeObserverService as any, 'handleResize').and.callThrough();
       const initWidth = spectator.element.clientWidth;
       const popoverCard = spectator.element.querySelector<HTMLElement>('kirby-card');
       const initCardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
@@ -1175,11 +1178,31 @@ describe('DropdownComponent', () => {
 
       const newWidth = '200px';
       (spectator.hostElement as HTMLElement).style.width = newWidth;
-      await TestHelper.waitForResizeObserver();
+      // await TestHelper.waitForResizeObserver();
       // Resize observe callback can be flaky in test, so ensure width has changed before asserting:
       await TestHelper.whenTrue(() => spectator.element.clientWidth !== initWidth);
 
       const cardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
+      if (cardWidth !== newWidth) {
+        console.warn('*** Card width not changed yet ***');
+        console.warn(
+          '*** After 1st wait - handleResizeSpy.calls.count:',
+          handleResizeSpy.calls.count()
+        );
+        console.warn('*** After 1st wait - cardWidth:', cardWidth);
+        // ResizeObserver has fired yet, let's wait one more time:
+        await TestHelper.waitForResizeObserver();
+        // Commented out for now as we want the test to fail and see the logs...
+        // cardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
+        console.warn(
+          '*** After 2nd wait - handleResizeSpy.calls.count:',
+          handleResizeSpy.calls.count()
+        );
+        console.warn(
+          '*** After 2nd wait - cardWidth:',
+          popoverCard.style.getPropertyValue('--kirby-card-width')
+        );
+      }
       expect(cardWidth).toEqual(newWidth);
     });
   });
