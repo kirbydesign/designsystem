@@ -235,11 +235,6 @@ describe('PageComponent', () => {
             });
 
             it('should render toolbar divider', () => {
-              console.warn(' *** TOOLBAR PHONE BEFORE ***');
-              console.warn(
-                'ionToolbar.content-scrolled:',
-                ionToolbar.classList.contains('content-scrolled')
-              );
               expect(ionToolbar).toHaveComputedStyle(
                 {
                   'background-color': getColor('medium'),
@@ -365,11 +360,6 @@ describe('PageComponent', () => {
             });
 
             it('should render toolbar divider', () => {
-              console.warn(' *** TOOLBAR DESKTOP BEFORE ***');
-              console.warn(
-                'ionToolbar.content-scrolled:',
-                ionToolbar.classList.contains('content-scrolled')
-              );
               expect(ionToolbar).toHaveComputedStyle(
                 {
                   'background-color': getColor('medium'),
