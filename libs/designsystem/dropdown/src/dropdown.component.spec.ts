@@ -1178,7 +1178,7 @@ describe('DropdownComponent', () => {
 
       const newWidth = '200px';
       (spectator.hostElement as HTMLElement).style.width = newWidth;
-      // await TestHelper.waitForResizeObserver();
+      await TestHelper.waitForResizeObserver();
       // Resize observe callback can be flaky in test, so ensure width has changed before asserting:
       await TestHelper.whenTrue(() => spectator.element.clientWidth !== initWidth);
 
