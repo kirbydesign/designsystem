@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Injector } from '@angular/core';
 import {
-  BUILT_IN_ICONS_URL_TOKEN,
+  BUILT_IN_ICONS_URL,
   DEFAULT_BUILT_IN_ICONS_URL,
   IconRegistryService,
 } from './icon-registry.service';
@@ -15,7 +15,7 @@ describe('KirbyIconRegistryService', () => {
   const icon3 = { name: 'name3', svg: 'svg3' };
   const icon4 = { name: 'name2', svg: 'svg2' };
 
-  const defaultIcons: Icon[] = kirbyIconSettings.icons.map(({ name, svg }) => ({
+  const expectedDefaultIcons: Icon[] = kirbyIconSettings.icons.map(({ name, svg }) => ({
     name,
     svg: `${DEFAULT_BUILT_IN_ICONS_URL}/${svg}`,
   }));
@@ -50,12 +50,12 @@ describe('KirbyIconRegistryService', () => {
 
   describe('getIcons', () => {
     it('should return defaultIcons by default', () => {
-      expect(service.getIcons()).toEqual(defaultIcons);
+      expect(service.getIcons()).toEqual(expectedDefaultIcons);
     });
 
     it('should return registed icons', () => {
       const customIcons = [icon1, icon4];
-      const expectedIcons = [...defaultIcons, ...customIcons];
+      const expectedIcons = [...expectedDefaultIcons, ...customIcons];
       service.addIcons(customIcons);
 
       expect(service.getIcons()).toEqual(expectedIcons);
@@ -77,7 +77,7 @@ describe('KirbyIconRegistryService', () => {
     it('should only add distinct icon names', () => {
       service.addIcon('name1', 'svg1');
       service.addIcon('name1', 'svg2');
-      const expectedIcons = [...defaultIcons, icon1];
+      const expectedIcons = [...expectedDefaultIcons, icon1];
       expect(service.getIcons()).toEqual(expectedIcons);
     });
 
@@ -91,7 +91,7 @@ describe('KirbyIconRegistryService', () => {
   describe('addIcons', () => {
     let consoleWarnSpy: jasmine.Spy;
 
-    const expectedIcons = [...defaultIcons, icon1, icon3];
+    const expectedIcons = [...expectedDefaultIcons, icon1, icon3];
     beforeAll(() => {
       consoleWarnSpy = spyOn(console, 'warn');
     });
@@ -118,7 +118,7 @@ describe('KirbyIconRegistryService', () => {
       const injector = Injector.create({
         providers: [
           IconRegistryService,
-          { provide: BUILT_IN_ICONS_URL_TOKEN, useValue: 'https://example.org/foo' },
+          { provide: BUILT_IN_ICONS_URL, useValue: 'https://example.org/foo' },
         ],
       });
       const service = injector.get(IconRegistryService);
@@ -130,7 +130,7 @@ describe('KirbyIconRegistryService', () => {
       const injector = Injector.create({
         providers: [
           IconRegistryService,
-          { provide: BUILT_IN_ICONS_URL_TOKEN, useValue: 'https://example.org/foo/' },
+          { provide: BUILT_IN_ICONS_URL, useValue: 'https://example.org/foo/' },
         ],
       });
       const service = injector.get(IconRegistryService);
