@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/designsystem",
-  "version": "10.0.0-rc.1",
+  "version": "10.0.0",
   "description": "The Kirby Design Angular Components.",
   "author": "kirby@bankdata.dk",
   "repository": {
