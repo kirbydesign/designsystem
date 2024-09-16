@@ -2,7 +2,6 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 
 import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 
-import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { CardExampleModule } from '~/app/examples/card-example/card-example.module';
 
 const meta: Meta<CardComponent> = {
@@ -13,13 +12,6 @@ const meta: Meta<CardComponent> = {
       imports: [CardModule, CardExampleModule],
     }),
   ],
-  parameters: {
-    chromatic: {
-      modes: {
-        ...responsiveModes,
-      },
-    },
-  },
 };
 export default meta;
 type Story = StoryObj<CardComponent>;
