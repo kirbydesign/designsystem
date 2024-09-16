@@ -1190,7 +1190,7 @@ describe('DropdownComponent', () => {
           handleResizeSpy.calls.count()
         );
         console.warn('*** After 1st wait - cardWidth:', cardWidth);
-        // ResizeObserver has fired yet, let's wait one more time:
+        // ResizeObserver has not fired yet, let's wait one more time:
         await TestHelper.waitForResizeObserver();
         // Commented out for now as we want the test to fail and see the logs...
         // cardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
