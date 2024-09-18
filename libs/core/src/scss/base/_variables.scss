@@ -82,8 +82,25 @@ $z-layers: (
   modal: 901,
   loading-overlay: 1001,
 ) !default;
-$border-radius: 16px !default;
-$border-radius-round: 999px !default;
+
+/* Border Radius
+****************************************************************************/
+$border-radii: (
+  xxs: 2px /* 0.125rem */,
+  xs: 4px /* 0.25rem */,
+  s: 8px /* 0.5rem */,
+  n: 16px /* 1rem */,
+  l: 24px /* 1.5rem */,
+  xl: 32px /* 2rem */,
+  circle: 50%,
+  pill: 999px,
+) !default;
+
+/// @deprecated Please use utils.border-radius('n') instead;
+$border-radius: map.get($border-radii, 'n') !default;
+
+/// @deprecated Please use utils.border-radius('pill') instead;
+$border-radius-round: map.get($border-radii, 'pill') !default;
 
 /* Breakpoints
 ****************************************************************************/
