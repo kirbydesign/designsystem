@@ -160,7 +160,7 @@
 // Fixes https://github.com/kirbydesign/designsystem/issues/1711
 :host-context(.shape-rounded .is-single) {
   ion-item {
-    --border-radius: #{utils.$border-radius};
+    --border-radius: #{utils.border-radius('n')};
   }
 }
 
@@ -183,7 +183,7 @@
 // Fixes https://github.com/kirbydesign/designsystem/issues/1711
 :host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
   ion-item::part(native) {
-    border-top-left-radius: utils.$border-radius;
-    border-top-right-radius: utils.$border-radius;
+    border-top-left-radius: utils.border-radius('n');
+    border-top-right-radius: utils.border-radius('n');
   }
 }

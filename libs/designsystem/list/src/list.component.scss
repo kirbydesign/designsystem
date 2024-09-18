@@ -147,7 +147,7 @@ ion-item-options[side='end'] {
 
   .list-items {
     box-shadow: $shadow;
-    border-radius: utils.$border-radius;
+    border-radius: utils.border-radius('n');
   }
 
   .footer {
@@ -164,14 +164,14 @@ ion-item-options[side='end'] {
 :host-context(.shape-rounded) {
   .list,
   .list-items {
-    border-radius: utils.$border-radius;
+    border-radius: utils.border-radius('n');
   }
 
   ion-item.first,
   ion-item-sliding.first,
   ion-list-header {
-    border-top-left-radius: utils.$border-radius;
-    border-top-right-radius: utils.$border-radius;
+    border-top-left-radius: utils.border-radius('n');
+    border-top-right-radius: utils.border-radius('n');
     mask-image: radial-gradient(
       white,
       black
@@ -188,8 +188,8 @@ ion-item-options[side='end'] {
   ion-item.last,
   ion-item-sliding.last,
   .footer {
-    border-bottom-left-radius: utils.$border-radius;
-    border-bottom-right-radius: utils.$border-radius;
+    border-bottom-left-radius: utils.border-radius('n');
+    border-bottom-right-radius: utils.border-radius('n');
     mask-image: radial-gradient(
       white,
       black
