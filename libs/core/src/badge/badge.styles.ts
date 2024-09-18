@@ -2,23 +2,27 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    contain: content;
-    display: inline-block;
+    display: inline-flex;
     position: var(--kirby-badge-position, relative);
     left: var(--kirby-badge-left, auto);
     right: var(--kirby-badge-right, auto);
     top: var(--kirby-badge-top, auto);
     z-index: var(--kirby-badge-z-index, auto);
+  }
+
+  [part='base'] {
     font-family: var(--kirby-font-family, inherit);
     font-size: 0.625rem;
     font-weight: bold;
     line-height: 1;
-  }
-
-  [part='base'] {
+    contain: content;
     background-color: var(--kirby-badge-background-color);
-    box-sizing: border-box;
     color: var(--kirby-badge-color);
+    border-radius: var(--kirby-border-radius-pill);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
     border-radius: var(--kirby-spacing-xxs);
     display: inline-block;
     padding: 3px 5px;
