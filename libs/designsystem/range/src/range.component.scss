@@ -76,7 +76,7 @@ ion-range {
 
   &::part(tick),
   &::part(tick-active) {
-    border-radius: 50%;
+    border-radius: utils.border-radius('circle');
     width: $tick-width;
     height: $tick-height;
     margin-top: 1px; // compensate for different height of ionic tick (8px)
