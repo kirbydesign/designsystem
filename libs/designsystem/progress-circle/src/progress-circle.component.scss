@@ -23,6 +23,6 @@ kirby-progress-circle-ring {
   justify-content: center;
   align-items: center;
   z-index: utils.z('default');
-  border-radius: 50%;
+  border-radius: utils.border-radius('circle');
   overflow: hidden;
 }

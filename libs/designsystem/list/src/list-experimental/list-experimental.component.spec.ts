@@ -6,7 +6,7 @@ import { MockComponent } from 'ng-mocks';
 
 import { ListExperimentalComponent } from './list-experimental.component';
 
-const borderRadius = DesignTokenHelper.borderRadius();
+const borderRadius = DesignTokenHelper.borderRadius('n');
 const { getElevation } = DesignTokenHelper;
 
 describe('ListExperimental', () => {

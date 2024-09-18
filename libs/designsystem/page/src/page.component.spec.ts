@@ -244,6 +244,11 @@ describe('PageComponent', () => {
                 },
                 ':before'
               );
+              console.warn(' *** TOOLBAR PHONE AFTER ***');
+              console.warn(
+                'ionToolbar.content-scrolled:',
+                ionToolbar.classList.contains('content-scrolled')
+              );
             });
 
             it('should render shaded toolbar background', () => {
@@ -360,6 +365,11 @@ describe('PageComponent', () => {
                   'background-color': getColor('medium'),
                 },
                 ':before'
+              );
+              console.warn(' *** TOOLBAR DESKTOP AFTER ***');
+              console.warn(
+                'ionToolbar.content-scrolled:',
+                ionToolbar.classList.contains('content-scrolled')
               );
             });
 

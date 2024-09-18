@@ -22,7 +22,7 @@ ion-backdrop {
   @include utils.slotted('kirby-item') {
     box-shadow: 0 0 10px rgb(0 0 0 / 40%);
     transform: scale(1.05, 1.05);
-    border-radius: utils.$border-radius;
+    border-radius: utils.border-radius('n');
     overflow: hidden;
   }
 }
@@ -42,8 +42,8 @@ ion-backdrop {
   }
 
   @include utils.slotted('div:last-child kirby-item') {
-    border-bottom-left-radius: utils.$border-radius;
-    border-bottom-right-radius: utils.$border-radius;
+    border-bottom-left-radius: utils.border-radius('n');
+    border-bottom-right-radius: utils.border-radius('n');
     overflow: hidden;
   }
 
@@ -51,7 +51,7 @@ ion-backdrop {
     @include utils.slotted('kirby-item') {
       box-shadow: 0 0 10px rgb(0 0 0 / 40%);
       transform: scale(1.05, 1.05);
-      border-radius: utils.$border-radius;
+      border-radius: utils.border-radius('n');
       overflow: hidden;
     }
   }
@@ -70,8 +70,8 @@ kirby-card {
   z-index: auto;
 
   @include utils.slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
-    border-bottom-left-radius: utils.$border-radius;
-    border-bottom-right-radius: utils.$border-radius;
+    border-bottom-left-radius: utils.border-radius('n');
+    border-bottom-right-radius: utils.border-radius('n');
     overflow: hidden;
   }
 
@@ -80,7 +80,7 @@ kirby-card {
   }
 
   @include utils.slotted('.content-layer > div:first-child > kirby-item') {
-    border-radius: utils.$border-radius;
+    border-radius: utils.border-radius('n');
     overflow: hidden;
   }
 

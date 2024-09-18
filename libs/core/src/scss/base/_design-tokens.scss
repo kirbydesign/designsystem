@@ -39,7 +39,7 @@
   }
 }
 
-@mixin border-radius() {
+@mixin border-radii() {
   @each $name, $value in variables.$border-radii {
     --kirby-border-radius-#{$name}: #{$value};
   }
@@ -99,7 +99,7 @@
   @include dark-overlay-colors;
 
   /* BORDER RADIUS */
-  @include border-radius;
+  @include border-radii;
 
   /* ELEVATIONS */
   @include elevations;
