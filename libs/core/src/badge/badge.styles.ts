@@ -23,11 +23,9 @@ export default css`
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    border-radius: var(--kirby-spacing-xxs);
-    display: inline-block;
-    padding: 3px 5px;
-    min-height: var(--kirby-spacing-s);
-    min-width: var(--kirby-spacing-s);
+    padding: 0.3em 0.5em;
+    min-height: 1rem;
+    min-width: 1rem;
   }
 
   :host([themecolor='white']) {
@@ -68,7 +66,7 @@ export default css`
   }
 
   ::slotted(kirby-icon) {
-    --kirby-icon-font-size: var(--kirby-font-size-n);
+    --kirby-icon-font-size: 1rem; /* TODO: var(--kirby-font-size-n) ?? */
 
     position: absolute;
     top: 0;
