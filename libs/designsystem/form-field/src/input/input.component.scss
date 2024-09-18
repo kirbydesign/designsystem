@@ -38,7 +38,7 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 }
 
 :host(.md) {
-  border-radius: utils.size('m');
+  border-radius: utils.border-radius('l');
   padding-block: $padding-block-size-md;
 
   &.error {

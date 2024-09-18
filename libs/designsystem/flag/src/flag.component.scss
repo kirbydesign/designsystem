@@ -20,7 +20,7 @@
   background-color: var(--kirby-flag-background-color, transparent);
   color: var(--kirby-flag-color, utils.get-color('white-contrast'));
   border: 1px solid var(--kirby-flag-border-color, utils.get-color('medium'));
-  border-radius: utils.size('xxxs');
+  border-radius: utils.border-radius('xs');
   font-size: utils.font-size('n');
   padding: utils.size('xxxxs') utils.size('xxs');
   font-weight: utils.font-weight('medium');
