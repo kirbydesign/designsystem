@@ -53,10 +53,6 @@ export default css`
     --kirby-badge-color: var(--kirby-white);
   }
 
-  :host([size='sm']) {
-    font-size: 0;
-  }
-
   :host([size='sm']) [part='base'] {
     padding: initial;
     min-height: initial;
