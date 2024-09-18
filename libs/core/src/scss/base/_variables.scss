@@ -82,8 +82,16 @@ $z-layers: (
   modal: 901,
   loading-overlay: 1001,
 ) !default;
-$border-radius: 16px !default;
-$border-radius-round: 999px !default;
+
+/* Border Radius
+****************************************************************************/
+$border-radii: (
+  base: 16px,
+  circle: 50%,
+  pill: 999px,
+) !default;
+$border-radius: map.get($border-radii, 'base') !default;
+$border-radius-round: map.get($border-radii, 'pill') !default;
 
 /* Breakpoints
 ****************************************************************************/
