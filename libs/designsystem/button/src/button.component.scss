@@ -163,7 +163,7 @@ $button-margin: utils.size('xxxs');
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
-  border-radius: utils.$border-radius-round;
+  border-radius: utils.border-radius('pill');
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;
   flex-direction: row;

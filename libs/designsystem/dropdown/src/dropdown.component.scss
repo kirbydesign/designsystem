@@ -9,7 +9,7 @@ $min-screen-width: 375px;
 :host {
   @include interaction-state.apply-focus-visible {
     outline: none;
-    border-radius: utils.$border-radius-round;
+    border-radius: utils.border-radius('pill');
   }
 
   display: inline-block;

@@ -39,6 +39,12 @@
   }
 }
 
+@mixin border-radii() {
+  @each $name, $value in variables.$border-radii {
+    --kirby-border-radius-#{$name}: #{$value};
+  }
+}
+
 @mixin elevations() {
   @each $name, $value in variables.$elevations {
     --kirby-elevation-#{$name}: #{$value};
@@ -91,6 +97,9 @@
   /* OVERLAY-COLORS */
   @include white-overlay-colors;
   @include dark-overlay-colors;
+
+  /* BORDER RADIUS */
+  @include border-radii;
 
   /* ELEVATIONS */
   @include elevations;

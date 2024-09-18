@@ -73,12 +73,24 @@ export class DesignTokenHelper {
     return ColorHelper.getBackgroundColor();
   }
 
-  public static borderRadius(): string {
-    return styles.borderRadius;
+  public static borderRadius(key: keyof typeof styles.borderRadii = undefined): string {
+    if (key === undefined) {
+      console.warn(
+        "Calling the borderRadius function without a parameter is deprecated. Please use `borderRadius('n')` instead."
+      );
+    }
+    return styles.borderRadii[key];
   }
 
+  /**
+   * @deprecated The borderRadiusRound function is deprecated.
+   * Please use `borderRadius('pill')` instead.
+   */
   public static borderRadiusRound(): string {
-    return styles.borderRadiusRound;
+    console.warn(
+      "The borderRadiusRound function is deprecated. Please use `borderRadius('pill')` instead."
+    );
+    return DesignTokenHelper.borderRadius('pill');
   }
 
   public static alertMaxWidth(): string {
