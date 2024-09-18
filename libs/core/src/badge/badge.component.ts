@@ -24,7 +24,7 @@ export class KirbyBadge extends KirbyElement {
 
   render() {
     return html`
-      <span part="base">
+      <span part="base" role="status">
         <slot ?hidden=${this.size === 'sm'}></slot>
       </span>
     `;
