@@ -4,6 +4,23 @@
     used together with other components to explain actions and functions of the UI.
   </p>
 
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+  <p>
+    The icon component only request icons visible to the the user (icons above the fold). The
+    component will dynamically load an SVG for each icon, so your app is only requesting the icons
+    that you need.
+  </p>
+
+  <h2>Default Icons (click to copy)</h2>
+  <cookbook-example-viewer [html]="defaultHtmlSnippet">
+    <cookbook-icon-default-example></cookbook-icon-default-example>
+  </cookbook-example-viewer>
+
+  <h2>Sizes</h2>
+  <cookbook-example-viewer [html]="sizesHtmlSnippet">
+    <cookbook-icon-sizes-example></cookbook-icon-sizes-example>
+  </cookbook-example-viewer>
+
   <h2>Setup</h2>
   <p>
     To setup the Kirby icons ensure that the
@@ -23,23 +40,6 @@
     <code>BUILT_IN_ICONS_URL</code>
     injection token.
   </p>
-
-  <kirby-divider [hasMargin]="true"></kirby-divider>
-  <p>
-    The icon component only request icons visible to the the user (icons above the fold). The
-    component will dynamically load an SVG for each icon, so your app is only requesting the icons
-    that you need.
-  </p>
-
-  <h2>Default Icons (click to copy)</h2>
-  <cookbook-example-viewer [html]="defaultHtmlSnippet">
-    <cookbook-icon-default-example></cookbook-icon-default-example>
-  </cookbook-example-viewer>
-
-  <h2>Sizes</h2>
-  <cookbook-example-viewer [html]="sizesHtmlSnippet">
-    <cookbook-icon-sizes-example></cookbook-icon-sizes-example>
-  </cookbook-example-viewer>
 
   <h2>Custom Icons</h2>
   <p>
