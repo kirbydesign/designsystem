@@ -4,6 +4,26 @@
     used together with other components to explain actions and functions of the UI.
   </p>
 
+  <h2>Setup</h2>
+  <p>
+    To setup the Kirby icons ensure that the
+    <code>.svg</code>
+    files used by Kirby are copied to your output folder as
+    <a
+      href="https://github.com/kirbydesign/designsystem?tab=readme-ov-file#icons"
+      class="kirby-external-icon"
+      target="_blank"
+    >
+      explained in our readme file
+    </a>
+  </p>
+  <p>
+    If the icons exists at another location, it is possible to configure the path that the icons are
+    loaded from by providing the
+    <code>BUILT_IN_ICONS_URL</code>
+    injection token.
+  </p>
+
   <kirby-divider [hasMargin]="true"></kirby-divider>
   <p>
     The icon component only request icons visible to the the user (icons above the fold). The
