@@ -14,7 +14,7 @@ $dot-margin: utils.size('xxxs');
 .flag {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: utils.border-radius('circle');
 
   &.success {
     background: var(--kirby-success);

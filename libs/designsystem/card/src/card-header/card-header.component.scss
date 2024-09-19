@@ -3,8 +3,8 @@
 
 :host {
   display: block;
-  border-top-left-radius: utils.$border-radius;
-  border-top-right-radius: utils.$border-radius;
+  border-top-left-radius: utils.border-radius('n');
+  border-top-right-radius: utils.border-radius('n');
   text-align: center;
   padding: 0;
   color: var(--kirby-card-header-color);

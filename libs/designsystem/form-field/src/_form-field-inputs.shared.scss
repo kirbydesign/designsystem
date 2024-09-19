@@ -52,7 +52,7 @@ $form-field-label-height: 24px;
   outline: none;
   margin: 0;
   appearance: none;
-  border-radius: utils.size('s');
+  border-radius: utils.border-radius('n');
   box-shadow: var(--kirby-inputs-elevation);
   padding: $form-field-input-padding;
   width: 100%;

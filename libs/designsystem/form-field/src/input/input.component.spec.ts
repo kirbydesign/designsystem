@@ -57,7 +57,7 @@ describe('InputComponent', () => {
   });
 
   it('should render with correct border-radius', () => {
-    const expected = DesignTokenHelper.borderRadius();
+    const expected = DesignTokenHelper.borderRadius('n');
     expect(element).toHaveComputedStyle({ 'border-radius': expected });
   });
 

@@ -21,7 +21,7 @@
 
       @include interaction-state.apply-focus-visible {
         outline: none;
-        border-radius: utils.$border-radius-round;
+        border-radius: utils.border-radius('pill');
       }
     }
   }
@@ -95,7 +95,7 @@
 }
 
 ion-segment {
-  border-radius: utils.$border-radius-round;
+  border-radius: utils.border-radius('pill');
   grid-auto-columns: max-content;
   box-sizing: border-box;
 }
@@ -104,7 +104,7 @@ ion-segment-button {
   @include interaction-state.apply-focus-part($part: 'native');
   @include utils.accessible-target-size;
 
-  --border-radius: #{utils.$border-radius-round};
+  --border-radius: #{utils.border-radius('pill')};
   --border-style: none;
   --background: none;
   --color: var(--kirby-inputs-color);

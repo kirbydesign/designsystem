@@ -71,6 +71,10 @@
   @return string.unquote('var(--kirby-decoration-color-' + $variant + '-' + $shade + ')');
 }
 
+@function border-radius($value) {
+  @return map.get(variables.$border-radii, $value);
+}
+
 @function get-elevation($value) {
   @return map.get(variables.$elevations, $value);
 }

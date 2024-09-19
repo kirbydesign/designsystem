@@ -65,7 +65,7 @@ $main-image-height-large: 164px;
 .main-content-image-wrapper {
   display: flex;
   overflow: hidden;
-  border-radius: utils.size('xxs');
+  border-radius: utils.border-radius('s');
 
   @include utils.media('>=small') {
     flex: 1;

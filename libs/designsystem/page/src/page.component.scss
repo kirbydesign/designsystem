@@ -193,7 +193,7 @@ ion-back-button {
 
   &::part(native) {
     opacity: 1; // required for interaction states to work
-    border-radius: utils.$border-radius-round;
+    border-radius: utils.border-radius('pill');
     overflow: hidden; // required for border radius to work
   }
 
