@@ -161,6 +161,16 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
 }
 ```
 
+It is possible to configure the path that the built-in icons are loaded from by providing the `BUILT_IN_ICONS_URL` injection token:
+
+```typescript
+// In app providers:
+{
+  provide: BUILT_IN_ICONS_URL,
+  useValue: 'https://example.org/1.0.1/kirby/icons/svg/'
+}
+```
+
 ### Migration Guides
 
 For details on migrating from earlier versions of Kirby see our [Migration Guides](./MIGRATION.md).

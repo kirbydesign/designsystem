@@ -21,6 +21,27 @@
     <cookbook-icon-sizes-example></cookbook-icon-sizes-example>
   </cookbook-example-viewer>
 
+  <h2>Setup</h2>
+  <p>
+    To setup the Kirby icons ensure that the
+    <code>.svg</code>
+    files used by Kirby are copied to your output folder as
+    <a
+      href="https://github.com/kirbydesign/designsystem?tab=readme-ov-file#icons"
+      class="kirby-external-icon"
+      target="_blank"
+    >
+      explained in our readme file
+    </a>
+  </p>
+  <p>
+    If the icons exists at another location, it is possible to configure the path (can be both
+    relative or absolute) that the icons are loaded from by providing the
+    <code>BUILT_IN_ICONS_URL</code>
+    injection token:
+  </p>
+  <cookbook-code-viewer [ts]="provideNewIconUrlCodeSnippet"></cookbook-code-viewer>
+
   <h2>Custom Icons</h2>
   <p>
     For adding custom icons, use
