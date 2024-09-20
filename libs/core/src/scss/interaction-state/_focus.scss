@@ -14,6 +14,8 @@
 // ---------------------------------------------------------------------------
 @mixin apply-focus-visible($shadow: null, $gap: utils.size('xxxxs')) {
   @include utils.not-touch {
+    @content;
+
     $reset-focus-ring: 0 0 0 0 transparent;
 
     &:focus {
@@ -32,8 +34,6 @@
     &:focus-visible {
       @include _focus-ring($shadow, $gap);
     }
-
-    @content;
   }
 }
 
@@ -47,6 +47,8 @@
   $make-lighter: false
 ) {
   @include utils.not-touch {
+    @content;
+
     &:focus-visible {
       // Remove the focus ring
       box-shadow: none;
@@ -54,8 +56,6 @@
       // Change "background color" (state layer opacity) instead
       @include layer.apply-state($loudness, $make-lighter);
     }
-
-    @content;
   }
 }
 
@@ -75,10 +75,11 @@
 // ---------------------------------------------------------------------------
 @mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
   @include utils.not-touch {
+    @content;
+
     &:focus-within::part(#{$part}) {
       @include _focus-ring($shadow, $gap);
     }
-    @content;
   }
 }
 
