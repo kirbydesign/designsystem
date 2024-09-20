@@ -137,9 +137,9 @@ $main-colors: map.remove(
 }
 
 @function _get-color-brightness($color) {
-  $red: color.red($color);
-  $green: color.green($color);
-  $blue: color.blue($color);
+  $red: color.channel($color, 'red', $space: rgb);
+  $green: color.channel($color, 'green', $space: rgb);
+  $blue: color.channel($color, 'blue', $space: rgb);
 
   /*
     Color brightness is determined by the following formula:
@@ -168,7 +168,8 @@ $main-colors: map.remove(
 }
 
 @function _get-rgb-values($color) {
-  @return color.red($color), color.green($color), color.blue($color);
+  @return color.channel($color, 'red', $space: rgb), color.channel($color, 'green', $space: rgb),
+    color.channel($color, 'blue', $space: rgb);
 }
 
 @function generate-colors($colors: $_color-palette) {
