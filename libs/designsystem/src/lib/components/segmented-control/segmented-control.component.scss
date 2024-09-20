@@ -43,18 +43,18 @@
 
   &.chip-mode {
     ion-segment {
+      --background: none;
+
+      border-radius: 0;
+      padding: #{utils.size('xxxs')};
+      gap: #{utils.size('xxs')};
+
       @include utils.touch {
         scrollbar-width: none; /* Firefox */
         &::-webkit-scrollbar {
           display: none;
         }
       }
-
-      --background: none;
-
-      border-radius: 0;
-      padding: #{utils.size('xxxs')};
-      gap: #{utils.size('xxs')};
     }
 
     ion-segment-button {
@@ -104,27 +104,33 @@ ion-segment-button {
   @include interaction-state.apply-focus-part($part: 'native');
   @include utils.accessible-target-size;
 
-  --border-radius: #{utils.border-radius('pill')};
-  --border-style: none;
-  --background: none;
-  --color: var(--kirby-inputs-color);
-  --indicator-color: var(--kirby-inputs-indicator-background-color);
-  --color-checked: var(--kirby-inputs-indicator-color);
-  --indicator-box-shadow: none;
-  --indicator-transform: none;
-  --padding-start: #{utils.size('m')};
-  --padding-end: #{utils.size('m')};
-  --margin-bottom: 0;
-  --margin-end: 0;
-  --margin-start: 0;
-  --margin-top: 0;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --border-radius: #{utils.border-radius('pill')};
+    --border-style: none;
+    --background: none;
+    --color: var(--kirby-inputs-color);
+    --indicator-color: var(--kirby-inputs-indicator-background-color);
+    --color-checked: var(--kirby-inputs-indicator-color);
+    --indicator-box-shadow: none;
+    --indicator-transform: none;
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
+    --margin-bottom: 0;
+    --margin-end: 0;
+    --margin-start: 0;
+    --margin-top: 0;
 
-  min-height: utils.size('xl');
-  min-width: fit-content;
-  font-weight: utils.font-weight('normal');
-  font-size: utils.font-size('s');
-  text-transform: none;
-  margin: 0;
+    min-height: utils.size('xl');
+    min-width: fit-content;
+    font-weight: utils.font-weight('normal');
+    font-size: utils.font-size('s');
+    text-transform: none;
+    margin: 0;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   // NOTE: This is a custom implementation of the hover interaction state;
   // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.

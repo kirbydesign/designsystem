@@ -26,9 +26,13 @@ $button-margin: utils.size('xxxs');
   $button-xs-click-area-size: $button-xs-icon-only-size + $button-margin * 2;
   @include utils.accessible-target-size($width: $button-xs-click-area-size);
 
-  font-size: utils.font-size('xs');
-  height: $button-xs-icon-only-size;
-  min-width: button-width('xs');
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  & {
+    font-size: utils.font-size('xs');
+    height: $button-xs-icon-only-size;
+    min-width: button-width('xs');
+  }
 
   &:not(.icon-only) {
     --kirby-button-padding-left: #{utils.size('xs')};
@@ -160,31 +164,37 @@ $button-margin: utils.size('xxxs');
     padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
   }
 
-  font-family: var(--kirby-font-family);
-  background-color: var(--kirby-button-background-color, initial);
-  color: var(--kirby-button-color, inherit);
-  border-radius: utils.border-radius('pill');
-  box-sizing: border-box; // Ensure border is not added to button height
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    font-family: var(--kirby-font-family);
+    background-color: var(--kirby-button-background-color, initial);
+    color: var(--kirby-button-color, inherit);
+    border-radius: utils.border-radius('pill');
+    box-sizing: border-box; // Ensure border is not added to button height
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
 
-  // we default to 'md' size.
-  font-size: utils.font-size('s');
-  height: utils.size('xl');
-  min-width: button-width('md');
-  padding: 0;
-  margin: $button-margin;
-  line-height: utils.line-height('s');
+    // we default to 'md' size.
+    font-size: utils.font-size('s');
+    height: utils.size('xl');
+    min-width: button-width('md');
+    padding: 0;
+    margin: $button-margin;
+    line-height: utils.line-height('s');
 
-  // Outline is applied on button border instead,
-  // to keep the rounded shape:
-  outline: none;
-  border: none;
+    // Outline is applied on button border instead,
+    // to keep the rounded shape:
+    outline: none;
+    border: none;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   &.no-margin {
     margin: 0;
@@ -258,13 +268,13 @@ $button-margin: utils.size('xxxs');
   }
 
   &:disabled {
-    &:not(.no-decoration) {
-      background-color: utils.get-color('semi-light');
-    }
-
     color: utils.get-color('semi-dark-shade');
     border-color: transparent;
     pointer-events: none;
+
+    &:not(.no-decoration) {
+      background-color: utils.get-color('semi-light');
+    }
   }
 
   &.floating {

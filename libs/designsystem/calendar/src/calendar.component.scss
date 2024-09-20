@@ -109,16 +109,28 @@ td {
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
 
-  color: utils.get-color('medium-contrast');
-  background-color: utils.get-color('medium');
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    color: utils.get-color('medium-contrast');
+    background-color: utils.get-color('medium');
+  }
+  /* stylelint-enable no-duplicate-selectors */
 }
 
 .day.selected {
   @include interaction-state.apply-hover('l', $make-lighter: true);
   @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
-  color: utils.get-color('black-contrast');
-  background-color: utils.get-color('black');
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    color: utils.get-color('black-contrast');
+    background-color: utils.get-color('black');
+  }
+  /* stylelint-enable no-duplicate-selectors */
 }
 
 .contain-state-layer {

@@ -7,10 +7,11 @@
   ion-item-divider {
     --inner-padding-end: 0;
     --background: transparent;
-    @include section-header.typography;
 
     font-weight: inherit;
     min-height: 0;
     z-index: initial;
+
+    @include section-header.typography;
   }
 }
