@@ -2,37 +2,36 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-accordion-with-list-example',
-  template: `
-  <kirby-accordion>
-    <kirby-accordion-item title="Transactions">
-      <kirby-list [items]="transactions.slice(0,4)">
-        <kirby-item *kirbyListItemTemplate="let item">
-          <kirby-label>
-            <h3>{{item.title}}</h3>
-            <p subtitle>{{item.subTitle}}</p>
-          </kirby-label>
-          <kirby-label slot="end">
-            <data [value]="item.amount">{{item.amount}}</data>
-            <data [value]="item.detail" detail>{{item.detail}}</data>
-          </kirby-label>
-        </kirby-item>
-      </kirby-list>
-    </kirby-accordion-item>
-    <kirby-accordion-item title="More Transactions">
-      <kirby-list [items]="transactions.slice(4)">
-        <kirby-item *kirbyListItemTemplate="let item">
-          <kirby-label>
-            <h3>{{item.title}}</h3>
-            <p subtitle>{{item.subTitle}}</p>
-          </kirby-label>
-          <kirby-label slot="end">
-            <data [value]="item.amount">{{item.amount}}</data>
-            <data [value]="item.detail" detail>{{item.detail}}</data>
-          </kirby-label>
-        </kirby-item>
-      </kirby-list>
-    </kirby-accordion-item>
-  </kirby-accordion>`,
+  template: `<kirby-accordion>
+  <kirby-accordion-item title="Transactions">
+    <kirby-list [items]="transactions.slice(0,4)">
+      <kirby-item *kirbyListItemTemplate="let item">
+        <kirby-label>
+          <h3>{{item.title}}</h3>
+          <p subtitle>{{item.subTitle}}</p>
+        </kirby-label>
+        <kirby-label slot="end">
+          <data [value]="item.amount">{{item.amount}}</data>
+          <data [value]="item.detail" detail>{{item.detail}}</data>
+        </kirby-label>
+      </kirby-item>
+    </kirby-list>
+  </kirby-accordion-item>
+  <kirby-accordion-item title="More Transactions">
+    <kirby-list [items]="transactions.slice(4)">
+      <kirby-item *kirbyListItemTemplate="let item">
+        <kirby-label>
+          <h3>{{item.title}}</h3>
+          <p subtitle>{{item.subTitle}}</p>
+        </kirby-label>
+        <kirby-label slot="end">
+          <data [value]="item.amount">{{item.amount}}</data>
+          <data [value]="item.detail" detail>{{item.detail}}</data>
+        </kirby-label>
+      </kirby-item>
+    </kirby-list>
+  </kirby-accordion-item>
+</kirby-accordion>`,
 };
 
 @Component({
