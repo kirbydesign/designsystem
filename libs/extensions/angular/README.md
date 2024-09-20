@@ -11,7 +11,7 @@ Components in this library are developed and maintained by product teams, with s
 ## Using Kirby Extensions
 
 > [!IMPORTANT]  
-> Kirby Extensions uses core designsystem components from the `@kirbydesign/designsystem` package.
+> Kirby Extensions uses designsystem components from the `@kirbydesign/designsystem` package.
 > See [guidelines for installing @kirbydesign/designsystem](https://github.com/kirbydesign/designsystem/?tab=readme-ov-file#installation) before continuing below.
 
 1. install the package through npm: `npm i @kirbydesign/extensions-angular`
