@@ -15,7 +15,7 @@ Components in this library are developed and maintained by product teams, with s
 > See [guidelines for installing @kirbydesign/designsystem](https://github.com/kirbydesign/designsystem/?tab=readme-ov-file#installation) before continuing below.
 
 1. install the package through npm: `npm i @kirbydesign/extensions-angular`
-2. import components directly from their specific entry points, and import them  into your Angular module or standalone component:
+2. import components directly from their specific entry points, and import them into your Angular module or standalone component:
 
 ```ts
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
