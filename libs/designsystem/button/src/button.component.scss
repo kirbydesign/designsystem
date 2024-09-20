@@ -310,11 +310,6 @@ $button-margin: utils.size('xxxs');
   margin-inline-start: utils.size('s');
 }
 
-:host-context(kirby-alert).ok-btn {
-  --kirby-button-background-color: #{utils.get-color('success')};
-  --kirby-button-color: #{utils.get-color('success-contrast')};
-}
-
 :host-context(kirby-dropdown) {
   // place arrow-icon in dropdown correctly
   justify-content: space-between;
