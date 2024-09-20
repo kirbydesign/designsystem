@@ -10,7 +10,6 @@ import {
   OnChanges,
   Output,
   QueryList,
-  Renderer2,
 } from '@angular/core';
 import { ListComponent } from '@kirbydesign/designsystem/list';
 
