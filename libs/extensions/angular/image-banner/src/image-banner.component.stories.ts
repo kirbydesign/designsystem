@@ -1,5 +1,6 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 
 /**
  * The image banner is a dynamic UI component designed to grab attention and convey key messages.
@@ -14,6 +15,11 @@ const meta: Meta<ImageBannerComponent> = {
     },
     controls: {
       exclude: ['bannerClicked', 'dismissClicked'],
+    },
+    chromatic: {
+      modes: {
+        ...responsiveModes,
+      },
     },
   },
   argTypes: {
@@ -95,7 +101,7 @@ export const NoDismiss: Story = {
     dismissClick: undefined,
   },
   // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
-  render: (args: ImageBannerComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
   }),

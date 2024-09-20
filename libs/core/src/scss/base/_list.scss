@@ -1,17 +1,17 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-@mixin rounded($border-radius: utils.$border-radius) {
+@mixin rounded($border-radius: utils.border-radius('n')) {
   @include rounded-top($border-radius);
   @include rounded-bottom($border-radius);
 }
 
-@mixin rounded-top($border-radius: utils.$border-radius) {
+@mixin rounded-top($border-radius: utils.border-radius('n')) {
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   overflow: hidden;
 }
 
-@mixin rounded-bottom($border-radius: utils.$border-radius) {
+@mixin rounded-bottom($border-radius: utils.border-radius('n')) {
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
   overflow: hidden;

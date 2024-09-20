@@ -14,7 +14,7 @@
     --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: utils.size('xxs');
+    border-radius: utils.border-radius('s');
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);

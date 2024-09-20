@@ -95,10 +95,20 @@ describe('HeaderComponent', () => {
     });
 
     describe('spacing', () => {
-      it(`should have correct margins`, () => {
-        expect(spectator.element).toHaveComputedStyle({
-          'margin-top': size('m'),
-          'margin-bottom': size('l'),
+      describe('on desktop', () => {
+        beforeAll(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+        });
+
+        afterAll(() => {
+          TestHelper.resetTestWindow();
+        });
+
+        it(`should have correct margins`, () => {
+          expect(spectator.element).toHaveComputedStyle({
+            'margin-top': size('m'),
+            'margin-bottom': size('l'),
+          });
         });
       });
 
@@ -407,20 +417,30 @@ describe('HeaderComponent', () => {
       `);
     });
 
-    it('should render and show the action group', () => {
-      const actionGroup: HTMLElement = spectator.query('.actions kirby-action-group');
-      expect(actionGroup).toBeTruthy();
-      expect(actionGroup).toBeVisible();
-    });
+    describe('on desktop', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      });
 
-    it(`should have correct margins`, () => {
-      const actionsWrapper: HTMLElement = spectator.query('.actions');
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
 
-      expect(actionsWrapper).toHaveComputedStyle({
-        'margin-bottom': '0px',
-        'margin-top': '0px',
-        'margin-left': size('xxs'),
-        'margin-right': size('xxs'),
+      it('should render and show the action group', () => {
+        const actionGroup: HTMLElement = spectator.query('.actions kirby-action-group');
+        expect(actionGroup).toBeTruthy();
+        expect(actionGroup).toBeVisible();
+      });
+
+      it(`should have correct margins`, () => {
+        const actionsWrapper: HTMLElement = spectator.query('.actions');
+
+        expect(actionsWrapper).toHaveComputedStyle({
+          'margin-bottom': '0px',
+          'margin-top': '0px',
+          'margin-left': size('xxs'),
+          'margin-right': size('xxs'),
+        });
       });
     });
 

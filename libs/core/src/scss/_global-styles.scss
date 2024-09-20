@@ -16,8 +16,8 @@
  * Modal variables
  *
  * height & width variables are kept local here until we have determined the exact values  
- * and can migrate them to heights/widths in _variables.scss, as a breaking change 
- * to either the existing modal heights or the modal-v2 maps.
+ * and can migrate them to heights/widths in _variables.scss as a breaking change 
+ * to the existing modal heights.
  */
 
 $modal-widths: (
@@ -30,7 +30,7 @@ $modal-heights: (
   m: 565px,
   l: 754px,
 );
-$modal-border-radius: utils.size('l');
+$modal-border-radius: utils.border-radius('xl');
 $modal-gutter: #{utils.size('xxl')};
 $modal-header-height: 88px;
 $modal-expected-footer-height: 88px;
@@ -177,7 +177,7 @@ ion-modal.kirby-overlay {
 
   &.kirby-alert {
     --background: #{utils.get-color('background-color')};
-    --border-radius: #{utils.$border-radius};
+    --border-radius: #{utils.border-radius('n')};
     --box-shadow: #{utils.get-elevation(8)};
     --max-width: #{utils.$alert-max-width};
     --height: auto;
@@ -243,81 +243,6 @@ ion-loading.kirby-loading-overlay {
 
   ion-tab-bar {
     z-index: -1;
-  }
-}
-
-/*
- * Modal V2.
- */
-$modal-max-height-desktop: 928px;
-$modal-max-width-desktop: 594px;
-
-html.ios ion-modal.kirby-modal-v2 {
-  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
-
-  &.modal-sheet {
-    --border-radius: #{$modal-border-radius};
-
-    ion-header {
-      &.modal-header {
-        border-bottom: none;
-      }
-    }
-
-    ion-toolbar {
-      button {
-        background-color: transparent;
-      }
-    }
-  }
-
-  @include utils.media('>=medium') {
-    --border-radius: #{$modal-border-radius};
-    --max-height: #{$modal-max-height-desktop};
-    --min-height: #{$modal-max-width-desktop};
-
-    &::part(content) {
-      margin: 15px;
-    }
-
-    &.xxs {
-      --width: #{map.get(utils.$modal-v2-widths, 'xxs')};
-      --height: #{map.get(utils.$modal-v2-heights, 'xxs')};
-    }
-
-    &.xs {
-      --width: #{map.get(utils.$modal-v2-widths, 'xs')};
-      --height: #{map.get(utils.$modal-v2-heights, 'xs')};
-    }
-
-    &.sm {
-      --width: #{map.get(utils.$modal-v2-widths, 's')};
-      --height: #{map.get(utils.$modal-v2-heights, 's')};
-    }
-
-    &.md {
-      --width: #{map.get(utils.$modal-v2-widths, 'm')};
-      --height: #{map.get(utils.$modal-v2-heights, 'm')};
-    }
-
-    &.lg {
-      --width: #{map.get(utils.$modal-v2-widths, 'l')};
-      --height: #{map.get(utils.$modal-v2-heights, 'l')};
-    }
-  }
-
-  ion-toolbar {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  ion-title {
-    font-size: utils.font-size('n');
-    font-weight: utils.font-weight('bold');
-  }
-
-  .kirby-grid {
-    display: flex;
   }
 }
 

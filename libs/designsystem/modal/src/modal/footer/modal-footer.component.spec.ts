@@ -36,21 +36,29 @@ describe('ModalFooterComponent', () => {
     imports: [TestHelper.ionicModuleForTest, ButtonComponent],
   });
 
-  beforeEach(() => {});
-
   it('should create', () => {
     spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should set correct padding', () => {
-    spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
-    ionFooterElement = spectator.query('ion-footer');
-    expect(ionFooterElement).toHaveComputedStyle({
-      'padding-left': BASE_PADDING_PX,
-      'padding-right': BASE_PADDING_PX,
-      'padding-top': BASE_PADDING_PX,
-      'padding-bottom': BASE_PADDING_PX,
+  describe('on desktop', () => {
+    beforeAll(async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    it('should set correct padding', () => {
+      spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+      ionFooterElement = spectator.query('ion-footer');
+      expect(ionFooterElement).toHaveComputedStyle({
+        'padding-left': BASE_PADDING_PX,
+        'padding-right': BASE_PADDING_PX,
+        'padding-top': BASE_PADDING_PX,
+        'padding-bottom': BASE_PADDING_PX,
+      });
     });
   });
 
@@ -67,16 +75,26 @@ describe('ModalFooterComponent', () => {
       ionFooterElement = spectator.query('ion-footer');
     });
 
-    it('when --kirby-safe-area-bottom is not set', () => {
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
-    });
+    describe('on desktop', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      });
 
-    /**
-     * Temporaly removed, see #2736
-     */
-    xit('when --kirby-safe-area-bottom is set', () => {
-      setSafeAreaBottom();
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it('when --kirby-safe-area-bottom is not set', () => {
+        expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
+      });
+
+      /**
+       * Temporaly removed, see #2736
+       */
+      xit('when --kirby-safe-area-bottom is set', () => {
+        setSafeAreaBottom();
+        expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
+      });
     });
 
     describe('on small screens', () => {

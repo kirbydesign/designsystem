@@ -51,9 +51,9 @@ $button-z-index: $card-z-index + 1;
   &.snap-to-viewport {
     kirby-card {
       position: fixed;
-      margin-top: utils.$border-radius;
+      margin-top: utils.border-radius('n');
       opacity: 0.5;
-      transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
+      transform: rotate(-90deg) translateY(-#{utils.border-radius('n') + utils.size('xs')});
       transform-origin: top right;
       overflow: initial;
 

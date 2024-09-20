@@ -21,7 +21,7 @@ const config = {
 
 const customIcons = [
     { 
-        name: 'customIconName',
+        name: 'custom-icon-name',
         svg: '[PATH_TO_SVG_FILE]',
     },
     ...

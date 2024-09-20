@@ -19,7 +19,11 @@
           <h3 [ngClass]="{ 'kirby-text-bold': !isSubItem }">{{ reorderItem.title }}</h3>
           <p *ngIf="!reorderItem.isOwnAccount" detail>{{ reorderItem.ownerName }}</p>
         </kirby-label>
-        <kirby-toggle slot="end" checked="true"></kirby-toggle>
+        <kirby-toggle
+          slot="end"
+          [checked]="true"
+          [attr.aria-label]="'hide or show account ' + reorderItem.title"
+        ></kirby-toggle>
       </kirby-item>
     </kirby-reorder-list>
   </kirby-page-content>

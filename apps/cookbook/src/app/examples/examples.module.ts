@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import {
-  IconRegistryService,
-  KirbyExperimentalModule,
-  KirbyModule,
-} from '@kirbydesign/designsystem';
+import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
@@ -19,7 +15,6 @@ import { CheckboxExampleModule } from './checkbox-example/checkbox-example.modul
 import { DataTableExampleModule } from './data-table-example/table-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
-import { ExperimentalExamplesModule } from './experimental-examples/experimental-examples.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
@@ -31,7 +26,6 @@ import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
 import { ListExperimentalExampleModule } from './list-experimental-example/list-experimental-example.module';
 import { ModalExampleModule } from './modal-example/modal-example.module';
-import { ModalV2ExampleModule } from './modal-v2-example/modal-v2-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { RangeExampleModule } from './range-example/range-example.module';
@@ -67,13 +61,11 @@ const IMPORTS = [
   RangeExampleModule,
   LinkExampleModule,
   ModalExampleModule,
-  ModalV2ExampleModule,
   GridLayoutExamplesModule,
   SectionHeaderExampleModule,
   ItemGroupExampleModule,
   ListExperimentalExampleModule,
   VirtualScrollExampleModule,
-  ExperimentalExamplesModule,
   DataTableExampleModule,
   MenuExampleModule,
   SlideModule,
@@ -82,7 +74,7 @@ const IMPORTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, KirbyExperimentalModule, ...IMPORTS],
+  imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
 })

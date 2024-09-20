@@ -61,7 +61,6 @@ import {
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { ModalComponent } from '@kirbydesign/designsystem/modal';
-import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
@@ -69,7 +68,7 @@ import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
 import { ChartsModule } from '@kirbydesign/designsystem/chart';
 import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
-import { DataTableModule } from '@kirbydesign/designsystem/data-table';
+import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
@@ -120,6 +119,7 @@ const standaloneComponents = [
   FlagComponent,
   BadgeComponent,
   ModalComponent,
+  TableSortableComponent,
 ];
 const exportedModules = [
   KirbyAppModule,
@@ -134,7 +134,6 @@ const exportedModules = [
   ListModule,
   ChartsModule,
   SpinnerModule,
-  DataTableModule,
   CardModule,
   RadioModule,
   EmptyStateModule,
@@ -143,7 +142,6 @@ const exportedModules = [
   SlideModule,
   AccordionModule,
   HeaderModule,
-  KirbyModalModule,
   ...standaloneComponents,
 ];
 

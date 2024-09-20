@@ -193,7 +193,7 @@ ion-back-button {
 
   &::part(native) {
     opacity: 1; // required for interaction states to work
-    border-radius: utils.$border-radius-round;
+    border-radius: utils.border-radius('pill');
     overflow: hidden; // required for border radius to work
   }
 
@@ -267,7 +267,6 @@ ion-content {
     --padding-top: 0;
   }
 
-  &.max-width-optimized, // TODO: Remove deprecated option 'optimized' in Kirby v10
   &.max-width-lg {
     --page-content-max-width: #{utils.get-page-content-max-width('lg')};
   }

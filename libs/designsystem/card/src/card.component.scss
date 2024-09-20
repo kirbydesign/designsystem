@@ -31,7 +31,7 @@ $default-border-outline: 1px solid utils.get-color('medium');
     justify-content: inherit;
   }
 
-  border-radius: utils.$border-radius;
+  border-radius: utils.border-radius('n');
   box-shadow: utils.get-elevation(2);
   color: var(--kirby-card-main-color);
   background-color: var(--kirby-card-main-background-color);
@@ -64,8 +64,8 @@ $default-border-outline: 1px solid utils.get-color('medium');
         border-block-end: var(--kirby-card-border, $default-border-outline);
         border-inline-start: var(--kirby-card-border, $default-border-outline);
         border-inline-end: var(--kirby-card-border, $default-border-outline);
-        border-bottom-left-radius: utils.$border-radius;
-        border-bottom-right-radius: utils.$border-radius;
+        border-bottom-left-radius: utils.border-radius('n');
+        border-bottom-right-radius: utils.border-radius('n');
       }
     }
   }

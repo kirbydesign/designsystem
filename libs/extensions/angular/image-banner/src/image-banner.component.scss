@@ -3,6 +3,8 @@
 
 $blur-radius: 60px;
 $max-content-width: 324px;
+$main-image-height-small: 132px;
+$main-image-height-large: 164px;
 
 :host(.none) {
   .blur-image {
@@ -32,18 +34,11 @@ $max-content-width: 324px;
   filter: blur($blur-radius) brightness(1.3);
 }
 
-kirby-card {
-  height: 232px;
-
-  @include utils.media('>=small') {
-    height: 180px;
-  }
-}
-
 .blur-image-wrapper {
   // We scale the image here with inset to avoid halo-bleed when using blur.
   position: absolute;
   inset: -3 * $blur-radius;
+  z-index: -1;
 }
 
 .blur-image {
@@ -55,9 +50,6 @@ kirby-card {
 }
 
 .main-content-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   padding: utils.size('xxs');
   box-sizing: border-box;
@@ -66,7 +58,6 @@ kirby-card {
 
   @include utils.media('>=small') {
     gap: utils.size('s');
-    height: 100%;
     flex-direction: initial;
   }
 }
@@ -74,18 +65,16 @@ kirby-card {
 .main-content-image-wrapper {
   display: flex;
   overflow: hidden;
-  border-radius: utils.size('xxs');
-  height: 132px;
+  border-radius: utils.border-radius('s');
 
   @include utils.media('>=small') {
     flex: 1;
-    height: 100%;
   }
 }
 
 .main-content {
   display: flex;
-  height: 100%;
+  min-height: utils.line-height('l') * 3; // text content height should always be minimum 3 lines
   box-sizing: border-box;
   flex-direction: column;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
@@ -94,7 +83,6 @@ kirby-card {
   @include utils.media('>=small') {
     flex: 1;
     gap: utils.size('xs');
-    height: 100%;
     padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
   }
 }
@@ -102,7 +90,6 @@ kirby-card {
 .main-content-anchor {
   position: absolute;
   inset: 0;
-  z-index: 1;
 }
 
 .main-content-header {
@@ -118,9 +105,13 @@ kirby-card {
 
 .main-content-image {
   width: 100%;
-  height: 100%;
+  height: $main-image-height-small;
   object-fit: cover;
   object-position: center;
+
+  @include utils.media('>=small') {
+    height: $main-image-height-large;
+  }
 }
 
 .main-content-body {

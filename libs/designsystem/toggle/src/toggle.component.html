@@ -6,4 +6,7 @@
   (keyup.space)="_onInactive()"
   (blur)="_onInactive()"
   (ionChange)="onCheckedChange($event.detail.checked)"
-></ion-toggle>
+  [attr.aria-label]="_ariaLabel"
+>
+  <ng-content></ng-content>
+</ion-toggle>

@@ -34,7 +34,7 @@ export const Button: Story = {
       control: { type: 'radio' },
     },
   },
-  render: (args: ButtonComponent) => ({
+  render: (args) => ({
     props: args,
     template: `
       <button kirby-button ${argsToTemplate(args)}>Default</button>

@@ -4,7 +4,6 @@ import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
-import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
@@ -46,7 +45,6 @@ import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
-import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
@@ -70,7 +68,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CalendarExampleComponent,
   CalendarCardExampleComponent,
   ActionSheetExampleComponent,
-  CheckboxExampleComponent,
   AlertExampleComponent,
   ToastExampleComponent,
   EmptyStateExampleComponent,
@@ -110,6 +107,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ItemGroupExampleComponent,
   SectionHeaderExampleComponent,
   ListExperimentalExampleComponent,
-  DataTableExampleComponent,
   MenuExampleComponent,
 ];

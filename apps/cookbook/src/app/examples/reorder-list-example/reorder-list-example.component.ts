@@ -60,7 +60,7 @@ export class ReorderListExampleComponent {
       ],
     },
   ];
-  headerTexts = ['skjul/vis', 'flyt'];
+  headerTexts = ['hide/show', 'move'];
 
   doReorderItem(ev: ReorderEvent) {
     ev.complete(this.items);

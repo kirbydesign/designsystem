@@ -22,7 +22,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
 
   transition: interaction-state.transition();
   appearance: none;
-  border-radius: 50%;
+  border-radius: utils.border-radius('circle');
   background-color: $slider-thumb-bg-color;
   background-image: url('/assets/kirby/icons/svg/arrow-more.svg');
   background-repeat: no-repeat;

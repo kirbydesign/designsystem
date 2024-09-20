@@ -2,7 +2,7 @@
 @use '../utils';
 
 $_focus-ring-gap: 3px;
-$_focus-ring-border-radius: utils.size('xxxxs');
+$_focus-ring-border-radius: utils.border-radius('xxs');
 
 /*
  * Link-styles (anchor tag with href or kirbyModalRouterLink directive)

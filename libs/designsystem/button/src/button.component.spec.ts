@@ -45,7 +45,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct border-radius', () => {
-      const expected = DesignTokenHelper.borderRadiusRound();
+      const expected = DesignTokenHelper.borderRadius('pill');
 
       expect(element).toHaveComputedStyle({ 'border-radius': expected });
     });
