@@ -1,7 +1,6 @@
 import {
   Component,
   ContentChild,
-  ElementRef,
   EventEmitter,
   HostBinding,
   Input,
