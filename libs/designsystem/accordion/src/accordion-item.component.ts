@@ -30,7 +30,7 @@ let uniqueId = 0;
   ],
 })
 export class AccordionItemComponent implements OnChanges, AfterContentInit {
-  @HostBinding('class.has-list') private hasList: boolean = false;
+  @HostBinding('class.has-list') hasList: boolean = false;
   @Input() title: string;
   @Input() isExpanded: boolean = false;
   @Input() isDisabled: boolean = false;

@@ -3,6 +3,8 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
+import { ListComponent } from '@kirbydesign/designsystem/list';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { AccordionItemComponent } from './accordion-item.component';
 
 const getColor = DesignTokenHelper.getColor;
@@ -14,16 +16,16 @@ describe('AccordionItemComponent', () => {
 
   const createHost = createHostFactory({
     component: AccordionItemComponent,
-    imports: [IconModule],
-  });
-
-  beforeEach(() => {
-    spectator = createHost(`<kirby-accordion-item>content</kirby-accordion-item>`, {
-      props: { title: 'Title' },
-    });
+    declarations: [ListComponent],
+    imports: [IconModule, TestHelper.ionicModuleForTest],
   });
 
   describe('by default', () => {
+    beforeEach(() => {
+      spectator = createHost(`<kirby-accordion-item>content</kirby-accordion-item>`, {
+        props: { title: 'Title' },
+      });
+    });
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
     });
@@ -78,8 +80,9 @@ describe('AccordionItemComponent', () => {
 
   describe('when expanded', () => {
     beforeEach(() => {
-      spectator.setInput('isExpanded', true);
-      spectator.detectChanges();
+      spectator = createHost(
+        `<kirby-accordion-item [isExpanded]="true">content</kirby-accordion-item>`
+      );
     });
 
     it('should show the content', () => {
@@ -101,8 +104,9 @@ describe('AccordionItemComponent', () => {
 
   describe('Disabled', () => {
     beforeEach(() => {
-      spectator.setInput('isDisabled', true);
-      spectator.detectChanges();
+      spectator = createHost(
+        `<kirby-accordion-item [isDisabled]="true">content</kirby-accordion-item>`
+      );
     });
 
     it('should not show content', () => {
@@ -132,6 +136,21 @@ describe('AccordionItemComponent', () => {
       spectator.click('.header');
 
       expect(spectator.component.toggle.emit).not.toHaveBeenCalled();
+    });
+  });
+  describe('With list', () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-accordion-item><kirby-list></kirby-list></kirby-accordion-item>`
+      );
+    });
+
+    it('should have no padding and set containing lists to have no shape', () => {
+      spectator.component.kirbyListChildren.forEach((child) =>
+        expect(child.shape === 'none').toBeTrue()
+      );
+      expect(spectator.component.hasPadding).toBeFalse();
+      expect(spectator.component.hasList).toBeTrue();
     });
   });
 });
