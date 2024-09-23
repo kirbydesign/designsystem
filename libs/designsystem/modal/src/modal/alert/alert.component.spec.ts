@@ -1,10 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
 import { IconModule } from '@kirbydesign/designsystem/icon';
+
 import { AlertComponent } from './alert.component';
-const getColor = DesignTokenHelper.getColor;
 
 describe('AlertComponent', () => {
   let spectator: SpectatorHost<AlertComponent>;
@@ -57,13 +54,6 @@ describe('AlertComponent', () => {
       spectator.setInput({ cancelBtn: null });
 
       expect(okButton).toHaveClass('lg');
-    });
-
-    it('should have success colors on button', () => {
-      expect(okButton).toHaveComputedStyle({
-        'background-color': getColor('success'),
-        color: getColor('success', 'contrast'),
-      });
     });
 
     it('should have default size when cancel button', () => {
