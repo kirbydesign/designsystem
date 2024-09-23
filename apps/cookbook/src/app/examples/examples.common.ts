@@ -1,4 +1,3 @@
-import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
@@ -100,7 +99,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SlidesSimpleExampleComponent,
   SlidesHeightExampleComponent,
   SlidesAdvancedExampleComponent,
-  AccordionExampleComponent,
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,
   StylingHtmlListsExampleComponent,
