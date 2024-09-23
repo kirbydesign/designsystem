@@ -74,7 +74,9 @@ $main-image-height-large: 164px;
 
 .main-content {
   display: flex;
-  min-height: utils.line-height('l') * 3; // text content height should always be minimum 3 lines
+
+  // min-height: utils.line-height('l') * 3; // text content height should always be minimum 3 lines
+  min-height: 3lh;
   box-sizing: border-box;
   flex-direction: column;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');

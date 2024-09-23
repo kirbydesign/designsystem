@@ -6,6 +6,8 @@
 * wrapping them in a kirby-label within a section-header. 
 */
 
+// FIXME: This mixin is identical to section-header-typography() mixin
+// in libs/core/src/scss/base/_functions.scss
 @mixin typography() {
   --padding-end: #{utils.size('s')};
   --padding-start: #{utils.size('s')};
@@ -13,7 +15,7 @@
   @include utils.slotted('[heading]') {
     font-weight: utils.font-weight('bold');
     font-size: utils.font-size('m');
-    line-height: utils.line-height('m');
+    line-height: #{'calc(24 / 18)'}; // calculated from old px values
     color: var(--kirby-section-header-color);
     margin: 0;
     white-space: nowrap;
@@ -24,7 +26,7 @@
   @include utils.slotted('[detail]', '[label]') {
     font-weight: utils.font-weight('light');
     font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
+    line-height: #{'calc(20 / 14)'}; // calculated from old px values
     color: var(--kirby-section-header-color);
     margin: utils.size('xxxs') 0 utils.size('xxs');
     white-space: nowrap;

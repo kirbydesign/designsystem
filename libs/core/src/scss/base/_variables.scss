@@ -22,33 +22,35 @@ $sizes: (
 /*
   FONT SETTINGS 
 ****************************************************************************/
+// TODO: To avoid Sass calculation use a custom property, Sass interpolation
+// or string.unquote()
 $font-sizes: (
-  xxxxl: 72px,
-  xxxl: 56px,
-  xxl: 40px,
-  xl: 32px,
-  l: 22px,
-  m: 18px,
-  n: 16px,
-  s: 14px,
-  xs: 12px,
-  xxs: 10px,
+  xxxxl: #{'calc(72 / 16 * 1rem)'},
+  xxxl: #{'calc(56 / 16 * 1rem)'},
+  xxl: #{'calc(40 / 16 * 1rem)'},
+  xl: #{'calc(32 / 16 * 1rem)'},
+  l: #{'calc(22 / 16 * 1rem)'},
+  m: #{'calc(18 / 16 * 1rem)'},
+  n: #{'calc(16 / 16 * 1rem)'},
+  s: #{'calc(14 / 16 * 1rem)'},
+  xs: #{'calc(12 / 16 * 1rem)'},
+  xxs: #{'calc(10 / 16 * 1rem)'},
 ) !default;
 $line-height: (
   // h1:
-  xl: 38px,
+  xl: #{'calc(38 / 16)'},
   // h2:
-  l: 28px,
+  l: #{'calc(28 / 16)'},
   // h3:
-  m: 24px,
+  m: #{'calc(24 / 16)'},
   // p - please note: p and h3 share the same line-height, added the sizes to "match" with font-size:
-  n: 24px,
+  n: #{'calc(24 / 16)'},
   // text-small:
-  s: 20px,
+  s: #{'calc(20 / 16)'},
   // text-xsmall:
-  xs: 16px,
+  xs: #{'calc(16 / 16)'},
   // text-xxsmall:
-  xxs: 11px
+  xxs: #{'calc(11 / 16)'}
 ) !default;
 $font-weight: (
   light: 300,
