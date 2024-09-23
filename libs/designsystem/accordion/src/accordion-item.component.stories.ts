@@ -7,12 +7,14 @@ import { importProvidersFrom } from '@angular/core';
 import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 
+import { AccordionExampleModule } from '~/app/examples/accordion-example/accordion-example.module';
+
 const meta: Meta<AccordionItemComponent> = {
   component: AccordionItemComponent,
   title: 'Components / Accordion',
   decorators: [
     moduleMetadata({
-      imports: [AccordionModule],
+      imports: [AccordionModule, AccordionExampleModule],
     }),
     applicationConfig({
       providers: [importProvidersFrom([BrowserAnimationsModule])],
@@ -32,12 +34,8 @@ export const Default: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const CookbookExamples: Story = {
   render: () => ({
-    template: `
-    <kirby-accordion-item [isDisabled]="true" title="Accordion item">Content</kirby-accordion-item>
-    <kirby-accordion-item [isDisabled]="true" title="Accordion item" disabledTitle="Alternative Disabled Title (disabledTitle)">Content</kirby-accordion-item>
-    <kirby-accordion-item [isDisabled]="true" [isExpanded]="true" title="Disabled with isExpanded">Content</kirby-accordion-item>
-    `,
+    template: `<cookbook-accordion-example></cookbook-accordion-example>`,
   }),
 };
