@@ -1,5 +1,0 @@
-diff a/apps/cookbook/src/app/showcase/accordion-showcase/accordion-showcase.component.html b/apps/cookbook/src/app/showcase/accordion-showcase/accordion-showcase.component.html	(rejected hunks)
-@@ -39 +39,2 @@
--    Placing a list within an accordion item will automatically set the correct styling such that the list looks correct without having to adjust the components.
-+    Placing a list within an accordion item will automatically set the correct styling such that the
-+    list looks correct without having to adjust the components.

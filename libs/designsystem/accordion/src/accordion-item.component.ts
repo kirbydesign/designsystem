@@ -38,13 +38,13 @@ export class AccordionItemComponent implements OnChanges, AfterContentInit {
   @Input() hasPadding: boolean = true;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @ContentChildren(ListComponent) kirbyListChildren: QueryList<ListComponent>;
+  @ContentChildren(ListComponent) listChildren: QueryList<ListComponent>;
 
   ngAfterContentInit(): void {
-    if (this.kirbyListChildren.length > 0) {
+    if (this.listChildren.length > 0) {
       this.hasPadding = false;
       this.hasList = true;
-      this.kirbyListChildren.forEach((child) => {
+      this.listChildren.forEach((child) => {
         child.shape = 'none';
       });
     }

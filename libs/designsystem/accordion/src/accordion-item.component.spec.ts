@@ -146,7 +146,7 @@ describe('AccordionItemComponent', () => {
     });
 
     it('should have no padding and set containing lists to have no shape', () => {
-      spectator.component.kirbyListChildren.forEach((child) =>
+      spectator.component.listChildren.forEach((child) =>
         expect(child.shape === 'none').toBeTrue()
       );
       expect(spectator.component.hasPadding).toBeFalse();
