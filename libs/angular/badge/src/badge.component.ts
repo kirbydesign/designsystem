@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, NgZone } from '@angular/core';
 import { BadgeSize, BadgeVariant, KirbyBadgeElement } from '@kirbydesign/core/badge';
 
+const KIRBY_BADGE_TEXT_PROPERTY_DEPRECATION_WARNING =
+  '[Kirby Badge] The `text` property has been deprecated. Please set the text of the Badge between the opening and closing tag.';
+
 @Component({
   selector: 'kirby-badge',
   template: '<ng-content></ng-content>',
@@ -20,12 +23,21 @@ export class KirbyBadgeComponent {
 
   private el: KirbyBadgeElement;
 
-  //TODO: Should we deprecate `text` prop?
+  /**
+   * @deprecated The 'text' property has been deprecated.
+   * Please set the text of the Badge between the opening and closing tag.
+   */
   get text(): string {
-    return this.el.innerText;
+    console.warn(KIRBY_BADGE_TEXT_PROPERTY_DEPRECATION_WARNING);
+    return this.el.text;
   }
+  /**
+   * @deprecated The 'text' property has been deprecated.
+   * Please set the text of the Badge between the opening and closing tag.
+   */
   @Input() set text(value: string) {
-    this.zone.runOutsideAngular(() => (this.el.innerText = value));
+    console.warn(KIRBY_BADGE_TEXT_PROPERTY_DEPRECATION_WARNING);
+    this.zone.runOutsideAngular(() => (this.el.text = value));
   }
 
   get size(): BadgeSize {

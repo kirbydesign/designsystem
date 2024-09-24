@@ -22,11 +22,24 @@ export class KirbyBadgeElement extends KirbyElement {
   @property({ reflect: true })
   size: BadgeSize = 'md';
 
+  /**
+   * @deprecated The 'text' property has been deprecated.
+   * Please set the text of the Badge between the opening and closing tag.
+   */
+  @property()
+  text: string;
+
   render() {
+    const content =
+      this.text && this.size === 'md'
+        ? html`
+            ${this.text}
+          `
+        : html`
+            <slot ?hidden=${this.size === 'sm'}></slot>
+          `;
     return html`
-      <span part="base" role="status">
-        <slot ?hidden=${this.size === 'sm'}></slot>
-      </span>
+      <span part="base" role="status">${content}</span>
     `;
   }
 }
