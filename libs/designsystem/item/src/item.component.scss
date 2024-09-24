@@ -12,25 +12,31 @@
     @include interaction-state.apply-hover-ionic('xxxs');
     @include interaction-state.apply-active-ionic('xxs');
 
-    --padding-top: var(--item-padding-top, 0px);
-    --padding-bottom: var(--item-padding-bottom, 0px);
-    --min-height: #{map.get(utils.$item-heights, 'm')};
-    --padding-start: #{utils.size('s')};
-    --inner-padding-top: #{utils.size('xxs')};
-    --inner-padding-bottom: #{utils.size('xxs')};
-    --inner-padding-end: #{utils.size('s')};
-    --background: var(--kirby-item-background, #{utils.get-color('white')});
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      --padding-top: var(--item-padding-top, 0px);
+      --padding-bottom: var(--item-padding-bottom, 0px);
+      --min-height: #{map.get(utils.$item-heights, 'm')};
+      --padding-start: #{utils.size('s')};
+      --inner-padding-top: #{utils.size('xxs')};
+      --inner-padding-bottom: #{utils.size('xxs')};
+      --inner-padding-end: #{utils.size('s')};
+      --background: var(--kirby-item-background, #{utils.get-color('white')});
 
-    // WORKAROUND: Needed to fix ignored click on scrollend
-    // https://github.com/ionic-team/ionic-framework/issues/21871
-    --background-activated-opacity: 0.99;
-    --background-focused: var(
-      --kirby-item-background-focused,
-      #{utils.get-color('background-color')}
-    );
-    --background-focused-opacity: 1;
+      // WORKAROUND: Needed to fix ignored click on scrollend
+      // https://github.com/ionic-team/ionic-framework/issues/21871
+      --background-activated-opacity: 0.99;
+      --background-focused: var(
+        --kirby-item-background-focused,
+        #{utils.get-color('background-color')}
+      );
+      --background-focused-opacity: 1;
 
-    font-size: utils.font-size('n');
+      font-size: utils.font-size('n');
+    }
+    /* stylelint-enable no-duplicate-selectors */
 
     // Prevent additional padding in iOS Safari on devices with "screen notch"
     // by removing horizontal safe area when rotated to landscape orientation.
@@ -65,7 +71,13 @@
       text-align: right;
     }
 
-    --transition: #{interaction-state.transition('background-color')};
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      --transition: #{interaction-state.transition('background-color')};
+    }
+    /* stylelint-enable no-duplicate-selectors */
 
     // Consistent height on items containing checkbox or radio regardless of slot placement
     &:has(kirby-checkbox, kirby-radio) {
