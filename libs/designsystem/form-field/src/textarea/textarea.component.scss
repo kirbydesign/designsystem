@@ -12,14 +12,26 @@
       background-color: interaction-state.get-state-color('white');
     }
 
-    transition: interaction-state.transition();
-    transition-property: background-color;
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      transition: interaction-state.transition();
+      transition-property: background-color;
+    }
+    /* stylelint-enable no-duplicate-selectors */
   }
   @include utils.media('>=medium') {
     resize: vertical;
   }
 
-  position: relative;
-  font-family: var(--kirby-font-family);
-  resize: none;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    position: relative;
+    font-family: var(--kirby-font-family);
+    resize: none;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 }

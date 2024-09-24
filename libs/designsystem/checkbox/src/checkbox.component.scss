@@ -121,13 +121,19 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       --checkbox-background: #{interaction-state.get-state-color('white', 'xs')};
     }
 
-    --transition: #{interaction-state.$default-transition-duration};
-    --size: #{$checkbox-icon-size};
-    --checkmark-width: #{utils.size('xxxs')};
-    --checkbox-background: #{utils.get-color('white')};
-    --border-width: 1px;
-    --border-color: #{utils.get-color('semi-dark')};
-    --border-radius: #{$border-radius};
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      --transition: #{interaction-state.$default-transition-duration};
+      --size: #{$checkbox-icon-size};
+      --checkmark-width: #{utils.size('xxxs')};
+      --checkbox-background: #{utils.get-color('white')};
+      --border-width: 1px;
+      --border-color: #{utils.get-color('semi-dark')};
+      --border-radius: #{$border-radius};
+    }
+    /* stylelint-enable no-duplicate-selectors */
 
     &::part(container) {
       padding: utils.size('xxxs'); // Spacing between checkmark and container box

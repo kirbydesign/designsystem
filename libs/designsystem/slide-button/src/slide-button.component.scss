@@ -20,18 +20,24 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     background-color: interaction-state.get-state-color('white', 'xs');
   }
 
-  transition: interaction-state.transition();
-  appearance: none;
-  border-radius: utils.border-radius('circle');
-  background-color: $slider-thumb-bg-color;
-  background-image: url('/assets/kirby/icons/svg/arrow-more.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: utils.size('m');
-  width: $slide-button-width;
-  height: $slide-button-width;
-  border: none;
-  pointer-events: all;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    transition: interaction-state.transition();
+    appearance: none;
+    border-radius: utils.border-radius('circle');
+    background-color: $slider-thumb-bg-color;
+    background-image: url('/assets/kirby/icons/svg/arrow-more.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: utils.size('m');
+    width: $slide-button-width;
+    height: $slide-button-width;
+    border: none;
+    pointer-events: all;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 }
 
 :host {

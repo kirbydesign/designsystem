@@ -15,8 +15,14 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
       background-color: var(--kirby-inputs-background-color-active);
     }
 
-    transition: interaction-state.transition();
-    transition-property: background-color;
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      transition: interaction-state.transition();
+      transition-property: background-color;
+    }
+    /* stylelint-enable no-duplicate-selectors */
   }
 
   // Background color needs to be synchronized with form-field.component

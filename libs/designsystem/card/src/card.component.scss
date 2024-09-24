@@ -31,22 +31,28 @@ $default-border-outline: 1px solid utils.get-color('medium');
     justify-content: inherit;
   }
 
-  border-radius: utils.border-radius('n');
-  box-shadow: utils.get-elevation(2);
-  color: var(--kirby-card-main-color);
-  background-color: var(--kirby-card-main-background-color);
-  background-image: var(--kirby-card-background-image);
-  background-repeat: var(--kirby-card-background-repeat, no-repeat);
-  background-position: var(--kirby-card-background-position, center);
-  background-size: var(--kirby-card-background-size, cover);
-  border: var(--kirby-card-border, none);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  position: relative;
-  z-index: utils.z('default');
-  width: var(--kirby-card-width, auto);
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    border-radius: utils.border-radius('n');
+    box-shadow: utils.get-elevation(2);
+    color: var(--kirby-card-main-color);
+    background-color: var(--kirby-card-main-background-color);
+    background-image: var(--kirby-card-background-image);
+    background-repeat: var(--kirby-card-background-repeat, no-repeat);
+    background-position: var(--kirby-card-background-position, center);
+    background-size: var(--kirby-card-background-size, cover);
+    border: var(--kirby-card-border, none);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    z-index: utils.z('default');
+    width: var(--kirby-card-width, auto);
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   &.flat {
     box-shadow: none;
@@ -76,7 +82,13 @@ $default-border-outline: 1px solid utils.get-color('medium');
     @include interaction-state.apply-active('xxs');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
 
-    outline: none;
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      outline: none;
+    }
+    /* stylelint-enable no-duplicate-selectors */
   }
 }
 
