@@ -16,7 +16,11 @@
         "customWebpackConfig": {
           "path": "./tools/sass-to-ts/webpack.sass-to-ts.config.ts",
           "sassToTs": {
-            "watchGlob": ["libs/core/src/helpers/**/*.scss", "libs/core/src/scss/**/*.scss"],
+            "watchGlob": [
+              "libs/core/src/helpers/*.scss",
+              "libs/core/src/scss/base/*.scss",
+              "libs/core/src/scss/themes/*.scss"
+            ],
             "transform": [
               "libs/core/src/helpers/color-helper.scss",
               "libs/core/src/helpers/design-token-helper.scss"
