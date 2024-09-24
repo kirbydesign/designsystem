@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'sass:map';
+@use 'sass:meta';
 
 $brand-colors: (
   'primary': #00e89a,
@@ -136,10 +137,21 @@ $main-colors: map.remove(
   }
 }
 
+@function _get-color-channel($color, $channel) {
+  // sass-loader uses older version of sass, so use feature
+  // detection to avoid transpile errors when running tests:
+  @if meta.function-exists('channel', 'color') {
+    @return color.channel($color, $channel, $space: rgb);
+  } @else {
+    $color-channel-function: meta.get-function($channel, false, 'color');
+    @return meta.call($color-channel-function, $color);
+  }
+}
+
 @function _get-color-brightness($color) {
-  $red: color.channel($color, 'red', $space: rgb);
-  $green: color.channel($color, 'green', $space: rgb);
-  $blue: color.channel($color, 'blue', $space: rgb);
+  $red: _get-color-channel($color, 'red');
+  $green: _get-color-channel($color, 'green');
+  $blue: _get-color-channel($color, 'blue');
 
   /*
     Color brightness is determined by the following formula:
@@ -168,8 +180,8 @@ $main-colors: map.remove(
 }
 
 @function _get-rgb-values($color) {
-  @return color.channel($color, 'red', $space: rgb), color.channel($color, 'green', $space: rgb),
-    color.channel($color, 'blue', $space: rgb);
+  @return _get-color-channel($color, 'red'), _get-color-channel($color, 'green'),
+    _get-color-channel($color, 'blue');
 }
 
 @function generate-colors($colors: $_color-palette) {
