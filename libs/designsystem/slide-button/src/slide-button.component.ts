@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  HostListener,
   Input,
   OnDestroy,
   Output,
@@ -52,10 +53,19 @@ export class SlideButtonComponent implements OnDestroy {
     }
   }
 
+  @HostListener('keyup.arrowup', ['$event'])
+  @HostListener('keyup.arrowdown', ['$event'])
+  @HostListener('keyup.arrowleft', ['$event'])
+  @HostListener('keyup.arrowright', ['$event'])
+  @HostListener('keyup.pageup', ['$event'])
+  @HostListener('keyup.pagedown', ['$event'])
+  @HostListener('keyup.home', ['$event'])
+  @HostListener('keyup.end', ['$event'])
   onSliderMouseup() {
     if (this.value == 100) {
       this.handleSlideDone();
     } else {
+      // Return slider thumb to beginning of slider button in increments of 2
       this.resetSliderIntervalTimer = setInterval(() => {
         if (this.value > 0) {
           this.value -= 2;
@@ -73,6 +83,14 @@ export class SlideButtonComponent implements OnDestroy {
     this.slidingPercentageChanged.emit(this.value);
   }
 
+  @HostListener('keydown.arrowup', ['$event'])
+  @HostListener('keydown.arrowdown', ['$event'])
+  @HostListener('keydown.arrowleft', ['$event'])
+  @HostListener('keydown.arrowright', ['$event'])
+  @HostListener('keydown.pageup', ['$event'])
+  @HostListener('keydown.pagedown', ['$event'])
+  @HostListener('keydown.home', ['$event'])
+  @HostListener('keydown.end', ['$event'])
   onSliderMousedown() {
     clearInterval(this.resetSliderIntervalTimer);
   }
