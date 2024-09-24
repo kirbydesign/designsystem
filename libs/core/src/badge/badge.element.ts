@@ -4,12 +4,12 @@ import { property } from 'lit/decorators.js';
 import KirbyElement from '../internal/kirby-element';
 import componentStyles from '../styles/component.styles';
 
-import styles from './badge.styles';
+import styles from './badge.element.styles';
 
 export type BadgeVariant = 'white' | 'success' | 'warning' | 'danger';
 export type BadgeSize = 'sm' | 'md';
 
-export class KirbyBadge extends KirbyElement {
+export class KirbyBadgeElement extends KirbyElement {
   static override tagName = 'kirby-badge';
 
   static styles: CSSResultGroup = [componentStyles, styles];

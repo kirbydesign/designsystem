@@ -1,11 +1,11 @@
-import { KirbyBadge } from './badge.component';
+import { KirbyBadgeElement } from './badge.element';
 
-export * from './badge.component';
+export * from './badge.element';
 
-KirbyBadge.define();
+KirbyBadgeElement.define();
 
 declare global {
   interface HTMLElementTagNameMap {
-    'kirby-badge': KirbyBadge;
+    'kirby-badge': KirbyBadgeElement;
   }
 }

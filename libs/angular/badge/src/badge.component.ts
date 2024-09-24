@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, NgZone } from '@angular/core';
-import { BadgeSize, BadgeVariant, KirbyBadge } from '@kirbydesign/core/badge';
+import { BadgeSize, BadgeVariant, KirbyBadgeElement } from '@kirbydesign/core/badge';
 
 @Component({
   selector: 'kirby-badge',
@@ -8,13 +8,17 @@ import { BadgeSize, BadgeVariant, KirbyBadge } from '@kirbydesign/core/badge';
   standalone: true,
   imports: [CommonModule],
 })
-export class BadgeComponent {
-  constructor(elementRef: ElementRef<KirbyBadge>, cdr: ChangeDetectorRef, private zone: NgZone) {
+export class KirbyBadgeComponent {
+  constructor(
+    elementRef: ElementRef<KirbyBadgeElement>,
+    cdr: ChangeDetectorRef,
+    private zone: NgZone
+  ) {
     this.el = elementRef.nativeElement;
     cdr.detach();
   }
 
-  private el: KirbyBadge;
+  private el: KirbyBadgeElement;
 
   //TODO: Should we deprecate `text` prop?
   get text(): string {
