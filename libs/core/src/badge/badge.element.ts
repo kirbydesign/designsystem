@@ -2,7 +2,7 @@ import { CSSResultGroup, html } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import KirbyElement from '../internal/kirby-element';
-import componentStyles from '../styles/component.styles';
+import baseStyles from '../styles/element.base.styles';
 
 import styles from './badge.element.styles';
 
@@ -12,7 +12,7 @@ export type BadgeSize = 'sm' | 'md';
 export class KirbyBadgeElement extends KirbyElement {
   static override tagName = 'kirby-badge';
 
-  static styles: CSSResultGroup = [componentStyles, styles];
+  static styles: CSSResultGroup = [baseStyles, styles];
 
   /** The badge's theme variant. */
   @property({ reflect: true })
