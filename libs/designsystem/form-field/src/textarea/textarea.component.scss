@@ -21,9 +21,6 @@
     }
     /* stylelint-enable no-duplicate-selectors */
   }
-  @include utils.media('>=medium') {
-    resize: vertical;
-  }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
@@ -34,4 +31,8 @@
     resize: none;
   }
   /* stylelint-enable no-duplicate-selectors */
+
+  @include utils.media('>=medium') {
+    resize: vertical;
+  }
 }
