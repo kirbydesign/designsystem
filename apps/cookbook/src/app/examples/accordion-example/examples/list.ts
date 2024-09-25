@@ -19,7 +19,7 @@ const config = {
     </kirby-list>
   </kirby-accordion-item>
   <kirby-accordion-item title="More Transactions">
-    <kirby-list [items]="itemsFullList.slice(4)">
+    <kirby-list [items]="itemsFullList.slice(4,7)">
       <kirby-item *kirbyListItemTemplate="let item">
         <kirby-label>
           <p class="kirby-text-medium">{{item.title}}</p>
