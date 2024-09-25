@@ -19,9 +19,9 @@ export class ToggleButtonComponent {
   @HostListener('click', ['$event'])
   onClick(event: PointerEvent) {
     const targetElement = event.target as HTMLElement;
-    const buttonDisabled = targetElement.closest('button[kirby-button]:not(:disabled)');
+    const buttonEnabled = targetElement.closest('button[kirby-button]:not(:disabled)');
 
-    if (!buttonDisabled) return;
+    if (!buttonEnabled) return;
 
     this.checked = !this.checked;
     this.checkChanged.emit(this.checked);
