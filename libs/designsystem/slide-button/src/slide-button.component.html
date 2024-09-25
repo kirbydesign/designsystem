@@ -1,4 +1,4 @@
-<div class="slide-button-container" [ngClass]="{ 'slide-done': isSlideDone }">
+<div class="slide-button-container" [ngClass]="{ 'slide-done': isSlideDone }" [inert]="isSlideDone">
   <input
     type="range"
     (mouseup)="onSliderMouseup()"
