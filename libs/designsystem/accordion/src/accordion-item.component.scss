@@ -7,9 +7,14 @@ $padding: utils.size('s');
 :host {
   @include interaction-state.initialize-layer;
 
-  display: block;
-  border-top: 1px solid $divider-color;
-  border-bottom: 1px solid $divider-color;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    display: block;
+    border-top: 1px solid $divider-color;
+    border-bottom: 1px solid $divider-color;
+  }
 }
 
 :host(.has-list) {
@@ -23,12 +28,14 @@ $padding: utils.size('s');
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active('xxs');
 
-  display: flex;
-  align-items: center;
-  height: utils.size('xxxl');
-  padding-left: $padding;
-  padding-right: $padding;
-  user-select: none;
+  & {
+    display: flex;
+    align-items: center;
+    height: utils.size('xxxl');
+    padding-left: $padding;
+    padding-right: $padding;
+    user-select: none;
+  }
 }
 
 .title {

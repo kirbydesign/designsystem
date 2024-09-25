@@ -175,7 +175,11 @@
 // Ensure minimum click area (default 44 x 44 px)
 // Ignore rounded corners to ensure square click area
 @mixin accessible-target-size($width: variables.$fat-finger-size, $height: $width) {
-  position: relative;
+  // Wrap declarations to avoid clashes with other mixins that have nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  & {
+    position: relative;
+  }
 
   &::after {
     content: '';

@@ -11,17 +11,24 @@ $max-width: 375px;
     --kirby-internal-margin-horizontal-default: #{$margin-horizontal-narrow};
   }
 
-  --kirby-internal-margin-horizontal-total: calc(
-    2 * var(--kirby-action-sheet-margin-horizontal, var(--kirby-internal-margin-horizontal-default))
-  );
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --kirby-internal-margin-horizontal-total: calc(
+      2 *
+        var(--kirby-action-sheet-margin-horizontal, var(--kirby-internal-margin-horizontal-default))
+    );
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0 auto;
-  width: calc(100vw - var(--kirby-internal-margin-horizontal-total));
-  max-width: calc(#{$max-width} - var(--kirby-internal-margin-horizontal-total));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 auto;
+    width: calc(100vw - var(--kirby-internal-margin-horizontal-total));
+    max-width: calc(#{$max-width} - var(--kirby-internal-margin-horizontal-total));
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   button[kirby-button].no-decoration {
     @include interaction-state.apply-focus-visible-background;
@@ -46,8 +53,14 @@ kirby-card {
 .cancel-btn {
   @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(8));
 
-  font-weight: utils.font-weight('bold');
-  margin-top: utils.size('s');
-  margin-bottom: utils.size('m');
-  pointer-events: auto;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    font-weight: utils.font-weight('bold');
+    margin-top: utils.size('s');
+    margin-bottom: utils.size('m');
+    pointer-events: auto;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 }
