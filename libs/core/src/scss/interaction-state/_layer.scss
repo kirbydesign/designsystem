@@ -16,10 +16,14 @@ $_light: utils.get-color('black-contrast');
 /// Should be initialized before applying hover.
 /// @param {*} $border-width [0] - Necessary for making the state layer cover border (if any) on parent element
 @mixin initialize-layer($border-width: 0) {
-  --state-layer-opacity: 0;
-  --state-layer-background-color: #{$_dark};
+  // Wrap declarations to avoid clashes with other mixins that have nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  & {
+    --state-layer-opacity: 0;
+    --state-layer-background-color: #{$_dark};
 
-  position: relative;
+    position: relative;
+  }
 
   .content-layer {
     position: relative;

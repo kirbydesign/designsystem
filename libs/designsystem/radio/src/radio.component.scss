@@ -54,11 +54,17 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 ion-radio {
   @include interaction-state.apply-focus-part($part: 'container');
 
-  box-sizing: border-box; // Ensure padding is not added to radio width/height
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    box-sizing: border-box; // Ensure padding is not added to radio width/height
 
-  --border-width: 1px;
-  --color: #{utils.get-color('semi-dark')};
-  --color-checked: #{utils.get-color('success')};
+    --border-width: 1px;
+    --color: #{utils.get-color('semi-dark')};
+    --color-checked: #{utils.get-color('success')};
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   @include interaction-state.apply-hover {
     &::part(container) {
