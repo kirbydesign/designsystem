@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/button-example/button-example.component.html?raw';
+
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -8,16 +8,32 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./button-showcase.component.scss'],
 })
 export class ButtonShowcaseComponent {
-  themeColors = ['light', 'white', 'dark'];
-  themeColor = 'light';
-  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
+    {
+      name: 'attentionLevel',
+      description:
+        'Sets the attention level for the button. Button color will be updated automatically depending on host color.',
+      defaultValue: '1',
+      type: ['1', '2', '3'],
+    },
+    {
+      name: 'disabled',
+      description: 'Disables the button.',
+      defaultValue: '',
+      type: ['boolean attribute'],
+    },
     {
       name: 'expand',
       description:
-        'If the button needs to expand to full width of its parent container, then use expand.',
-      defaultValue: 'null',
+        "When set to `block` the button will expand to full width of it's parent container.",
+      defaultValue: 'undefined',
       type: ['block'],
+    },
+    {
+      name: 'noDecoration',
+      description: 'Renders the button without a background.',
+      defaultValue: 'false',
+      type: ['true', 'false'],
     },
     {
       name: 'size',
@@ -27,22 +43,16 @@ export class ButtonShowcaseComponent {
       type: ['xs', 'sm', 'md', 'lg'],
     },
     {
-      name: 'attentionLevel',
+      name: 'showIconOnly',
       description:
-        'Sets the attention level for the button. Button color will be updated automatically depending on host color.',
-      defaultValue: '1',
-      type: ['1', '2', '3'],
-    },
-    {
-      name: 'isFloating',
-      description:
-        '(Optional) Determine if the button is going to be a Floating Action Button (FAB). Please note: FABs have an elevation of z8 by default. FABs have only an icon and no text. FABs always have a size of 64x64.',
+        'Set to `true` if you need to include a text for the button in the markup but still want to render the button as icon only.',
       defaultValue: 'false',
       type: ['boolean'],
     },
   ];
 
-  onChange(value) {
-    this.themeColor = value;
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
   }
 }

@@ -1,15 +1,1 @@
-@use '@kirbydesign/core/src/scss/utils';
-
-h2 {
-  margin-top: utils.size('xl');
-}
-
-cookbook-toggle-button-example {
-  padding: 0;
-  margin-bottom: utils.size('s');
-}
-
-cookbook-code-viewer {
-  display: block;
-  margin-top: utils.size('xl');
-}
+@use '../showcase.shared';
