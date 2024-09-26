@@ -40,7 +40,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrl: './_grid-layout.scss',
+  styleUrl: './_responsive-grid-layout.scss',
 })
 export class ButtonExampleIconsComponent {
   template: string = config.template;
