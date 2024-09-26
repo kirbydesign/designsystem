@@ -36,8 +36,8 @@
 
   <h2>Accordion with list</h2>
   <p>
-    Placing a list within an accordion item will automatically set the correct styling such that the
-    list looks correct without having to adjust the components.
+    Placing a list within an accordion item will automatically adapt spacing and strip the necessary
+    list-styling to ensure that the list looks correct without further adjustments.
   </p>
   <cookbook-example-viewer [html]="accordionWithListExample.template">
     <cookbook-accordion-with-list-example
@@ -46,7 +46,10 @@
   </cookbook-example-viewer>
 
   <h3>Additional styling</h3>
-  <p>Similarly to the simple accordion, the accordion with a list can also be wrapped in a Kirby Card to make it stand out from the canvas.</p>
+  <p>
+    Similarly to the simple accordion, the accordion with a list can also be wrapped in a Kirby Card
+    to make it stand out from the canvas.
+  </p>
   <cookbook-example-viewer [html]="accordionWithListInCardExample.template">
     <cookbook-accordion-with-list-in-card-example
       #accordionWithListInCardExample
