@@ -6,7 +6,7 @@
 /out-tsc
 /dist-lib
 /test-reports
-*.styles.ts
+**/helpers/**/*.styles.ts
 
 # compiled core library output
 /libs/core/loader

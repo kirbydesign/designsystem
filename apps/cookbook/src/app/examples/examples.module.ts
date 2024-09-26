@@ -36,6 +36,7 @@ import { ToggleExampleModule } from './toggle-example/toggle-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 import { MenuExampleModule } from './menu-example/menu-example.module';
 import { IconExampleModule } from './icon-example/icon-example.module';
+import { ButtonExampleModule } from './button-example/button-example.module';
 import { ExampleConfigurationWrapperComponent } from './example-configuration-wrapper/example-configuration-wrapper.component';
 
 const IMPORTS = [
@@ -71,6 +72,7 @@ const IMPORTS = [
   SlideModule,
   HeaderExampleModule,
   IconExampleModule,
+  ButtonExampleModule,
 ];
 
 @NgModule({
