@@ -4,7 +4,7 @@
 
 :host {
   @include utils.media('<medium') {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
   }

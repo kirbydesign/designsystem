@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: utils.size('s');
