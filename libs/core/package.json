@@ -7,7 +7,7 @@
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
-  "sideeffects": [
+  "sideEffects": [
     "./dist/badge/index.js"
   ],
   "scripts": {
