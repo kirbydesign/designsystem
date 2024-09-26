@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, NgZone } from '@angular/core';
-import { BadgeSize, BadgeVariant, KirbyBadgeElement } from '@kirbydesign/core/badge';
+import { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign/core/badge';
 
 @Component({
   selector: 'kirby-badge',
@@ -38,10 +38,10 @@ export class KirbyBadgeComponent {
     this.zone.runOutsideAngular(() => (this.el.size = value));
   }
 
-  get themeColor(): BadgeVariant {
+  get themeColor(): BadgeThemeColor {
     return this.el.themeColor;
   }
-  @Input() set themeColor(value: BadgeVariant) {
+  @Input() set themeColor(value: BadgeThemeColor) {
     this.zone.runOutsideAngular(() => (this.el.themeColor = value));
   }
 }

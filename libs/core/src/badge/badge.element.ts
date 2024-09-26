@@ -6,7 +6,7 @@ import baseStyles from '../styles/element.base.styles';
 
 import styles from './badge.element.styles';
 
-export type BadgeVariant = 'white' | 'success' | 'warning' | 'danger';
+export type BadgeThemeColor = 'white' | 'success' | 'warning' | 'danger';
 export type BadgeSize = 'sm' | 'md';
 
 export class KirbyBadgeElement extends KirbyElement {
@@ -16,7 +16,7 @@ export class KirbyBadgeElement extends KirbyElement {
 
   /** The badge's theme variant. */
   @property({ reflect: true })
-  themeColor: BadgeVariant = 'white';
+  themeColor: BadgeThemeColor = 'white';
 
   /** The badge's size. */
   @property({ reflect: true })
