@@ -17,6 +17,11 @@ const config: StorybookConfig = {
   docs: {
     autodocs: true,
   },
+  staticDirs: [
+    { from: '../../../designsystem/icon/src/icons/svg', to: '/assets/kirby/icons/svg' },
+    { from: '../../../../node_modules/ionicons/dist/ionicons/svg', to: '/svg' },
+    { from: '../docs/assets', to: '/assets/images' },
+  ],
 };
 
 export default config;
