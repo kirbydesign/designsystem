@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/button-example/button-example.component.html?raw';
+
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -8,7 +8,6 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./button-showcase.component.scss'],
 })
 export class ButtonShowcaseComponent {
-  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'expand',
