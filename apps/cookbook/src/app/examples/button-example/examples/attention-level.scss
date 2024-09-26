@@ -1,0 +1,23 @@
+@use 'sass:map';
+@use '@kirbydesign/core/src/scss/utils';
+
+@use './shared';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  gap: utils.size('m');
+}
+
+kirby-card {
+  max-width: map.get(utils.$breakpoints, 'xsmall');
+
+  &:not(.outlined) {
+    // avoid content jumping when no outline:
+    border: 1px solid transparent;
+  }
+}
+
+fieldset {
+  align-self: flex-start;
+}
