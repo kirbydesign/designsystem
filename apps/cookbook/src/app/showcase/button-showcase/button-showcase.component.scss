@@ -1,7 +1,11 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-h2 {
+h2:not(:first-child) {
   margin-top: utils.size('xl');
+}
+
+h3 {
+  margin-top: utils.size('l');
 }
 
 cookbook-toggle-button-example {
@@ -10,6 +14,6 @@ cookbook-toggle-button-example {
 }
 
 cookbook-code-viewer {
-  display: block;
+  // display: block;
   margin-top: utils.size('xl');
 }

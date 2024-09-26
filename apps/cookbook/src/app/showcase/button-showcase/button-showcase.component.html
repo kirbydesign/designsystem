@@ -1,16 +1,162 @@
 <div class="example">
-  <cookbook-button-example [themeColor]="themeColor"></cookbook-button-example>
-  <div>
-    <select (change)="onChange($event.target.value)">
-      <option
-        *ngFor="let color of themeColors"
-        value="{{ color }}"
-        [attr.selected]="themeColor === color ? true : null"
-      >
-        Card color: {{ color }}
-      </option>
-    </select>
-  </div>
+  <p>
+    Button allows users to perform actions and make choices with a single tap, such as submitting
+    forms and triggering actions.
+  </p>
+
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+
+  <h2>Default</h2>
+  <p>
+    By default the button is medium in
+    <a href="#" (click)="scrollTo(sizes)">size</a>
+    , has the highest
+    <a href="#" (click)="scrollTo(attentionLevels)">attention level</a>
+    and renders inline.
+  </p>
+  <cookbook-example-viewer [html]="defaultExample.template">
+    <cookbook-button-example-default #defaultExample></cookbook-button-example-default>
+  </cookbook-example-viewer>
+
+  <h2 #attentionLevels>Attention Levels</h2>
+  <p>
+    The button can be configured with different levels of grabbing the user's attention, depending
+    on the action of the button and it's relation to adjacent buttons.
+  </p>
+  <p>
+    The background color of the button will take into account the brightness of the surrounding
+    context.
+    <br />
+    Try changing the theme color of the surrounding card in the example below to see this in action.
+  </p>
+  <ol>
+    <li>
+      <strong>Highest attention level.</strong>
+      <br />
+      Primary button used for call-to-action. This is the default attention level.
+    </li>
+    <li>
+      <strong>Medium attention level.</strong>
+      <br />
+      The button will stand out with a high contrast to the background of the surrounding context.
+    </li>
+    <li>
+      <strong>Lowest attention level.</strong>
+      <br />
+      The button will differ slightly from the background of the surrounding context.
+    </li>
+  </ol>
+  <cookbook-example-viewer [html]="attentionLevelExample.template">
+    <cookbook-button-example-attention-level
+      #attentionLevelExample
+    ></cookbook-button-example-attention-level>
+  </cookbook-example-viewer>
+
+  <h2 #sizes>Sizes</h2>
+  <p>
+    The button comes in 4 different sizes:
+    <code>xs | sm | md | lg</code>
+    .
+    <br />
+    Setting this property will change the font-size, height and padding of the button. The default
+    size is
+    <code>md</code>
+    .
+  </p>
+  <cookbook-example-viewer [html]="sizeExample.template">
+    <cookbook-button-example-sizes #sizeExample></cookbook-button-example-sizes>
+  </cookbook-example-viewer>
+  <p class="comment">
+    <strong>Please note:</strong>
+    The extra small button does not meet the
+    <a href="https://www.w3.org/TR/WCAG22/#target-size-enhanced">
+      WCAG recommendations on target size
+    </a>
+    (44px), and should therefore be used with caution.
+  </p>
+
+  <h2>Block button</h2>
+  <p>
+    The button renders inline by default. To change the button to a full-width element, set
+    <code>expand="block"</code>
+    .
+  </p>
+  <cookbook-example-viewer [html]="blockExample.template">
+    <cookbook-button-example-block #blockExample></cookbook-button-example-block>
+  </cookbook-example-viewer>
+
+  <h2>Icons</h2>
+  <p>
+    An icon can be added to the button for extra visual affordance. The icon can be added to either
+    the left or right side of the button, i.e. before or after the text.
+  </p>
+  <cookbook-example-viewer [html]="iconsExample.template">
+    <cookbook-button-example-icons #iconsExample></cookbook-button-example-icons>
+  </cookbook-example-viewer>
+
+  <h2>Icon only</h2>
+  <p>
+    The button can be rendered with an icon only and no text. This is useful for "close" buttons and
+    menu buttons.
+  </p>
+  <p>To render a button with an icon only, include an icon within the button and omit any text.</p>
+  <p>
+    <em>
+      Note: If you do need to include a text for the button in the markup but still want to render
+      the button as icon only, set
+      <code>[showIconOnly]="true"</code>
+      . This is also useful in scenarios where the button needs to toggle between the default state
+      and a "collapsed" state, e.g. when used in an
+      <a routerLink="../header">action group</a>
+      .
+    </em>
+  </p>
+
+  <cookbook-example-viewer [html]="iconOnlyExample.template">
+    <cookbook-button-example-icon-only #iconOnlyExample></cookbook-button-example-icon-only>
+  </cookbook-example-viewer>
+
+  <h3>Undecorated</h3>
+  <p>
+    To render the button without a background set
+    <code>[noDecoration]="true"</code>
+  </p>
+  <p class="comment">
+    <em>
+      <strong>Please note:</strong>
+      The undecorated button is solely intended for use with icon only.
+    </em>
+  </p>
+
+  <cookbook-example-viewer [html]="undecoratedExample.template">
+    <cookbook-button-example-undecorated #undecoratedExample></cookbook-button-example-undecorated>
+  </cookbook-example-viewer>
+
+  <h2>Disabled</h2>
+  <p>
+    Use the
+    <code>disabled</code>
+    attribute to disable the button.
+  </p>
+  <cookbook-example-viewer [html]="disabledExample.template">
+    <cookbook-button-example-disabled #disabledExample></cookbook-button-example-disabled>
+  </cookbook-example-viewer>
+
+  <h2>Link Button</h2>
+  <p>
+    The kirby-button directive can also be applied to anchor-tags. This will allow use of attributes
+    such as
+    <code>href</code>
+    and
+    <code>target</code>
+    , but the link will look like a button.
+  </p>
+
+  <cookbook-example-viewer [html]="linkExample.template">
+    <cookbook-button-example-link #linkExample></cookbook-button-example-link>
+  </cookbook-example-viewer>
+
+  <cookbook-button-example></cookbook-button-example>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <cookbook-api-description-properties
     [properties]="properties"

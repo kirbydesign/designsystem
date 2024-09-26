@@ -8,8 +8,6 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./button-showcase.component.scss'],
 })
 export class ButtonShowcaseComponent {
-  themeColors = ['light', 'white', 'dark'];
-  themeColor = 'light';
   exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
@@ -42,7 +40,8 @@ export class ButtonShowcaseComponent {
     },
   ];
 
-  onChange(value) {
-    this.themeColor = value;
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
   }
 }
