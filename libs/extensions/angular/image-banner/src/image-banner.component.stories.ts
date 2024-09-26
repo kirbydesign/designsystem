@@ -45,7 +45,7 @@ export const Default: Story = {
     title: 'An Image Banner',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
-    imagePath: 'assets/leaves.jpg',
+    imagePath: 'assets/images/leaves.jpg',
     backgroundBlur: 'dark',
   },
 };
@@ -59,7 +59,7 @@ export const LightBackgroundBlur: Story = {
   args: {
     title: 'Light Background Blur',
     bodyText: 'This is the body text.',
-    imagePath: 'assets/leaves.jpg',
+    imagePath: 'assets/images/leaves.jpg',
     backgroundBlur: 'light',
     actionButtonText: 'Read more',
   },
@@ -70,7 +70,7 @@ export const NoBackgroundBlur: Story = {
     title: 'No Background Blur',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
-    imagePath: 'assets/leaves.jpg',
+    imagePath: 'assets/images/leaves.jpg',
     backgroundBlur: 'none',
   },
 };
@@ -84,7 +84,7 @@ export const ExternalLink: Story = {
     bodyText: 'Activating this banner will take you to www.kirby.design 👋',
     actionButtonText: 'Go to Kirby Design',
     externalLink: 'http://www.kirby.design',
-    imagePath: 'assets/leaves.jpg',
+    imagePath: 'assets/images/leaves.jpg',
   },
 };
 
@@ -97,7 +97,7 @@ export const NoDismiss: Story = {
     title: 'No Dismiss in Banner',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
-    imagePath: 'assets/leaves.jpg',
+    imagePath: 'assets/images/leaves.jpg',
     dismissClick: undefined,
   },
   // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
