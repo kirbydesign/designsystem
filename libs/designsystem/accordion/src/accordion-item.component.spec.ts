@@ -138,7 +138,7 @@ describe('AccordionItemComponent', () => {
       expect(spectator.component.toggle.emit).not.toHaveBeenCalled();
     });
   });
-  describe('With list', () => {
+  describe('with list', () => {
     beforeEach(() => {
       spectator = createHost(
         `<kirby-accordion-item><kirby-list></kirby-list></kirby-accordion-item>`
