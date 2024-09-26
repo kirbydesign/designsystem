@@ -17,11 +17,23 @@ export class ButtonShowcaseComponent {
       type: ['1', '2', '3'],
     },
     {
+      name: 'disabled',
+      description: 'Disables the button.',
+      defaultValue: '',
+      type: ['boolean attribute'],
+    },
+    {
       name: 'expand',
       description:
-        'If the button needs to expand to full width of its parent container, then use expand.',
-      defaultValue: 'null',
+        "When set to `block` the button will expand to full width of it's parent container.",
+      defaultValue: 'undefined',
       type: ['block'],
+    },
+    {
+      name: 'noDecoration',
+      description: 'Renders the button without a background.',
+      defaultValue: 'false',
+      type: ['true', 'false'],
     },
     {
       name: 'size',
@@ -29,6 +41,13 @@ export class ButtonShowcaseComponent {
         'Sets the size of the button. The touch area will always be a minimum of 44px by 44px. If buttons are smaller than this, the surrounding area will still be clickable, to preserve accessibility.',
       defaultValue: 'md',
       type: ['xs', 'sm', 'md', 'lg'],
+    },
+    {
+      name: 'showIconOnly',
+      description:
+        'Set to `true` if you need to include a text for the button in the markup but still want to render the button as icon only.',
+      defaultValue: 'false',
+      type: ['boolean'],
     },
   ];
 
