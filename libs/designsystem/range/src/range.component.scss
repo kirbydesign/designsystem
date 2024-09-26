@@ -20,15 +20,24 @@ ion-range {
     --knob-background: #{interaction-state.get-state-color('white', 's')};
   }
 
-  --knob-background: #{utils.get-color('white')};
-  --knob-box-shadow: #{$knob-shadow};
-  --knob-size: 24px;
-  --pin-color: #{utils.get-text-color('black')};
-  --pin-background: #{utils.get-color('semi-light')};
-  --bar-background: #{utils.get-color('medium')};
-  --bar-background-active: #{utils.get-color('dark')};
-  --bar-border-radius: #{utils.size('xxxs')};
-  --bar-height: #{utils.size('xxxxs')};
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --knob-background: #{utils.get-color('white')};
+    --knob-box-shadow: #{$knob-shadow};
+    --knob-size: 24px;
+    --pin-color: #{utils.get-text-color('black')};
+    --pin-background: #{utils.get-color('semi-light')};
+    --bar-background: #{utils.get-color('medium')};
+    --bar-background-active: #{utils.get-color('dark')};
+    --bar-border-radius: #{utils.size('xxxs')};
+    --bar-height: #{utils.size('xxxxs')};
+
+    flex: 1 1 100%;
+    padding: 0;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   &.range-disabled {
     --knob-background: #{utils.get-color('medium')};
@@ -40,9 +49,6 @@ ion-range {
       background: utils.get-color('semi-light');
     }
   }
-
-  flex: 1 1 100%;
-  padding: 0;
 
   &.range-has-pin {
     padding: 0 $tick-width * 0.5;
@@ -76,7 +82,7 @@ ion-range {
 
   &::part(tick),
   &::part(tick-active) {
-    border-radius: 50%;
+    border-radius: utils.border-radius('circle');
     width: $tick-width;
     height: $tick-height;
     margin-top: 1px; // compensate for different height of ionic tick (8px)

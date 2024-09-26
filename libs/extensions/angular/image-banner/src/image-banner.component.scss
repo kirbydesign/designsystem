@@ -1,0 +1,165 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+
+$blur-radius: 60px;
+$max-content-width: 324px;
+$main-image-height-small: 132px;
+$main-image-height-large: 164px;
+
+:host(.none) {
+  .blur-image {
+    display: none;
+  }
+
+  .dismiss {
+    // on mobile we always want the button to be white as it sits on top of the image
+    @include utils.media('<small') {
+      --kirby-inputs-background-color: var(--kirby-white);
+      --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
+      --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
+      --kirby-inputs-color: var(--kirby-black);
+    }
+  }
+
+  .main-content-body-action-link {
+    color: var(--kirby-semi-dark);
+  }
+}
+
+:host(.dark) .blur-image {
+  filter: blur($blur-radius) brightness(0.8);
+}
+
+:host(.light) .blur-image {
+  filter: blur($blur-radius) brightness(1.3);
+}
+
+.blur-image-wrapper {
+  // We scale the image here with inset to avoid halo-bleed when using blur.
+  position: absolute;
+  inset: -3 * $blur-radius;
+  z-index: -1;
+}
+
+.blur-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.main-content-wrapper {
+  width: 100%;
+  padding: utils.size('xxs');
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  @include utils.media('>=small') {
+    gap: utils.size('s');
+    flex-direction: initial;
+  }
+}
+
+.main-content-image-wrapper {
+  display: flex;
+  overflow: hidden;
+  border-radius: utils.border-radius('s');
+
+  @include utils.media('>=small') {
+    flex: 1;
+  }
+}
+
+.main-content {
+  display: flex;
+  min-height: utils.line-height('l') * 3; // text content height should always be minimum 3 lines
+  box-sizing: border-box;
+  flex-direction: column;
+  padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
+  overflow: hidden;
+
+  @include utils.media('>=small') {
+    flex: 1;
+    gap: utils.size('xs');
+    padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
+  }
+}
+
+.main-content-anchor {
+  position: absolute;
+  inset: 0;
+}
+
+.main-content-header {
+  margin-right: utils.size('xl');
+
+  p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+}
+
+.main-content-image {
+  width: 100%;
+  height: $main-image-height-small;
+  object-fit: cover;
+  object-position: center;
+
+  @include utils.media('>=small') {
+    height: $main-image-height-large;
+  }
+}
+
+.main-content-body {
+  display: flex;
+  justify-content: space-between;
+  gap: utils.size('s');
+  height: 100%;
+
+  @include utils.media('>=small') {
+    flex-direction: column;
+    max-width: $max-content-width;
+  }
+
+  .main-content-body-action-link {
+    @include utils.media('>=small') {
+      display: none;
+    }
+  }
+}
+
+.main-content-body-text {
+  display: block;
+  overflow: hidden;
+  max-height: utils.size('xl');
+
+  @include utils.media('>=small') {
+    padding-inline-end: utils.size('xxl');
+    max-height: utils.size('xxxxl');
+  }
+}
+
+.main-content-body-action-text {
+  display: none;
+
+  @include utils.media('>=small') {
+    align-self: start;
+    display: inline-flex;
+    margin: 0; // buttons have xxxs margin so reset that
+  }
+}
+
+.dismiss {
+  position: absolute;
+  top: utils.size('s');
+  right: utils.size('s');
+  height: fit-content;
+
+  button {
+    margin: 0;
+  }
+}

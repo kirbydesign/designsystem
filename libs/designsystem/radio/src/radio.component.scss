@@ -3,34 +3,17 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$radio-icon-padding: utils.size('xxxxs');
 $radio-icon-size: utils.size('m');
 $radio-icon-mark-size: 60%;
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
-$default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 @function get-vertical-padding($target-height) {
   @return ($target-height - $radio-icon-size) * 0.5;
 }
 
 :host {
-  display: inline-block;
-
-  &.has-label {
-    display: block;
-
-    @each $size, $height in utils.$checkbox-radio-sizes {
-      &.#{$size} {
-        ion-radio::part(label) {
-          $vertical-padding: get-vertical-padding($height);
-
-          padding-top: $vertical-padding;
-          padding-bottom: $vertical-padding;
-        }
-      }
-    }
-  }
+  display: flex;
 
   &[disabled] {
     color: #{utils.get-text-color('semi-dark')};
@@ -52,16 +35,36 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       }
     }
   }
+
+  &:has(ion-radio.in-item.radio-justify-space-between) {
+    width: 100%;
+  }
+}
+
+@each $size, $height in utils.$checkbox-radio-sizes {
+  :host.#{$size} {
+    $vertical-padding: get-vertical-padding($height);
+
+    ion-radio:not(.in-item)::part(label) {
+      padding-block: $vertical-padding;
+    }
+  }
 }
 
 ion-radio {
   @include interaction-state.apply-focus-part($part: 'container');
 
-  box-sizing: border-box; // Ensure padding is not added to radio width/height
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    box-sizing: border-box; // Ensure padding is not added to radio width/height
 
-  --border-width: 1px;
-  --color: #{utils.get-color('semi-dark')};
-  --color-checked: #{utils.get-color('success')};
+    --border-width: 1px;
+    --color: #{utils.get-color('semi-dark')};
+    --color-checked: #{utils.get-color('success')};
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   @include interaction-state.apply-hover {
     &::part(container) {
@@ -91,13 +94,36 @@ ion-radio {
 
   &::part(label) {
     align-items: start;
-    padding-left: $spacing-to-edge;
-    padding-right: $spacing-to-label;
+    padding-inline: $spacing-to-edge $spacing-to-label;
     line-height: utils.line-height('n');
   }
 
   &::part(label-text-wrapper) {
     margin-inline: $spacing-to-label 0;
+  }
+
+  // Overrides for kirby-radio inside kirby-item
+  &.in-item {
+    &::part(label) {
+      align-items: center;
+      padding-inline: 0;
+    }
+
+    &::part(label-text-wrapper) {
+      margin-block: 0;
+    }
+
+    &.radio-label-placement-start {
+      &::part(label-text-wrapper) {
+        margin-inline: 0 utils.size('xxs');
+      }
+    }
+
+    &.radio-label-placement-end {
+      &::part(label-text-wrapper) {
+        margin-inline: utils.size('xxs') 0;
+      }
+    }
   }
 
   :host-context(kirby-radio-group.error),
@@ -131,6 +157,7 @@ ion-radio {
   }
 
   &[slot='start'] {
+    margin-block: 0; // Reset Ionic Item margin applided to slot=start
     margin-inline-end: $spacing-to-label;
   }
 }

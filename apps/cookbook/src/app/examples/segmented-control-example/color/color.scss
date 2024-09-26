@@ -1,11 +1,8 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../segmented-control-examples.shared';
 
-:host {
-  display: block;
-}
-
-irby-card {
-  margin-bottom: utils.size('s');
+kirby-segmented-control {
+  margin-bottom: initial;
 }
 
 .card-option-button-group {
@@ -15,15 +12,11 @@ irby-card {
   padding: utils.size('xxs');
 }
 
-fieldset {
-  display: inline-block;
-}
-
 button {
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
   border: none;
-  border-radius: 999px;
+  border-radius: utils.border-radius('circle');
   margin: 0;
   color: #fff;
   cursor: pointer;

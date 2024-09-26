@@ -31,7 +31,7 @@ $badge-diameter: utils.$avatar-badge-size;
   // default to size 'sm'
   width: $diameter-small;
   height: $diameter-small;
-  border-radius: 50%;
+  border-radius: utils.border-radius('circle');
   overflow: hidden;
   position: relative;
   z-index: 1;

@@ -34,6 +34,20 @@
     <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
   </cookbook-example-viewer>
 
+  <h2>Accordion inside card with items</h2>
+  <p>
+    Since kirby-items come with their own built-in padding the accordions below have
+    <code>hasPadding</code>
+    set to
+    <code>false</code>
+    to avoid double padding. This allows for content inside items to be aligned with the accordion header.
+  </p>
+  <cookbook-example-viewer [html]="accordionWithListItemsExample.template">
+    <cookbook-accordion-with-items-example
+      #accordionWithListItemsExample
+    ></cookbook-accordion-with-items-example>
+  </cookbook-example-viewer>
+
   <h2>Accordion toggle event</h2>
   <cookbook-example-viewer
     [html]="accordionEventExample.template"

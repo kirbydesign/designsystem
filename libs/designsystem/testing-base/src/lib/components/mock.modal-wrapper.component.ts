@@ -6,6 +6,8 @@ import { ModalConfig, ModalWrapperComponent } from '@kirbydesign/designsystem/mo
 @Component({
   selector: 'kirby-modal-wrapper',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: ModalWrapperComponent,

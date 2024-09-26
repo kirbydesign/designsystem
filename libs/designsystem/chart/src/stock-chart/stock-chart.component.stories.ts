@@ -48,13 +48,13 @@ const _datasets = [
 
 const meta: Meta<StockChartComponent> = {
   component: StockChartComponent,
-  title: 'StockChartComponent',
+  title: 'Components / Chart / Stock Chart',
   decorators: [
     moduleMetadata({
       providers: [ChartConfigService],
     }),
   ],
-  render: (args: StockChartComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-stock-chart ${argsToTemplate(args)}></kirby-stock-chart>`,
   }),
@@ -62,7 +62,7 @@ const meta: Meta<StockChartComponent> = {
 export default meta;
 type Story = StoryObj<StockChartComponent>;
 
-export const Default: Story = {
+export const StockChart: Story = {
   args: {
     data: _datasets,
     dataLabelOptions: chartDataLabelOptions,

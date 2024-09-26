@@ -82,8 +82,25 @@ $z-layers: (
   modal: 901,
   loading-overlay: 1001,
 ) !default;
-$border-radius: 16px !default;
-$border-radius-round: 999px !default;
+
+/* Border Radius
+****************************************************************************/
+$border-radii: (
+  xxs: 2px /* 0.125rem */,
+  xs: 4px /* 0.25rem */,
+  s: 8px /* 0.5rem */,
+  n: 16px /* 1rem */,
+  l: 24px /* 1.5rem */,
+  xl: 32px /* 2rem */,
+  circle: 50%,
+  pill: 999px,
+) !default;
+
+/// @deprecated Please use utils.border-radius('n') instead;
+$border-radius: map.get($border-radii, 'n') !default;
+
+/// @deprecated Please use utils.border-radius('pill') instead;
+$border-radius-round: map.get($border-radii, 'pill') !default;
 
 /* Breakpoints
 ****************************************************************************/
@@ -130,7 +147,6 @@ $page-content-max-widths: (
   full: 100%,
 );
 $page-content-max-width-default: map.get($page-content-max-widths, 'default');
-$page-content-max-width: $page-content-max-width-default;
 
 /* Modal
 ****************************************************************************/
@@ -144,23 +160,6 @@ $modal-heights: (
 ) !default;
 $modal-default-height: map.get($modal-heights, 'm');
 $drawer-default-height: map.get($modal-heights, 's');
-
-/* Modal V2
-****************************************************************************/
-$modal-v2-widths: (
-  l: 960px,
-  m: 800px,
-  s: 720px,
-  xs: 600px,
-  xxs: 343px,
-) !default;
-$modal-v2-heights: (
-  l: math.floor(map.get($modal-v2-widths, 'l') * 0.75),
-  m: math.floor(map.get($modal-v2-widths, 'm') * 0.75),
-  s: math.floor(map.get($modal-v2-widths, 's') * 0.75),
-  xs: math.floor(map.get($modal-v2-widths, 'xs') * 0.75),
-  xxs: math.floor(map.get($modal-v2-widths, 'xxs') * 0.75),
-) !default;
 
 /* Item
 ****************************************************************************/

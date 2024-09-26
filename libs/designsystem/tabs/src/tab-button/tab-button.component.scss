@@ -24,24 +24,30 @@ ion-tab-button {
     --background: #{interaction-state.get-state-color('white', 'xxs')};
   }
 
-  transition: interaction-state.transition(background-color);
-  height: 100%;
-  flex: 1 1 0%;
-  max-width: 168px;
-  font-weight: utils.font-weight('medium');
-  font-size: utils.font-size('xs');
-  line-height: utils.line-height('xs');
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    transition: interaction-state.transition(background-color);
+    height: 100%;
+    flex: 1 1 0%;
+    max-width: 168px;
+    font-weight: utils.font-weight('medium');
+    font-size: utils.font-size('xs');
+    line-height: utils.line-height('xs');
 
-  --color: #{utils.get-text-color('semi-dark')};
-  --color-selected: #{utils.get-color('black')};
-  --padding-start: 0;
-  --padding-end: 0;
+    --color: #{utils.get-text-color('semi-dark')};
+    --color-selected: #{utils.get-color('black')};
+    --padding-start: 0;
+    --padding-end: 0;
 
-  // Magic values here as we have no tokens that gives
-  // badge the correct position in relation to the tab icon
-  --kirby-badge-position: absolute;
-  --kirby-badge-top: 0.55em;
-  --kirby-badge-left: calc(50% + 0.4em);
+    // Magic values here as we have no tokens that gives
+    // badge the correct position in relation to the tab icon
+    --kirby-badge-position: absolute;
+    --kirby-badge-top: 0.55em;
+    --kirby-badge-left: calc(50% + 0.4em);
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   @include utils.slotted(kirby-badge) {
     &.md {

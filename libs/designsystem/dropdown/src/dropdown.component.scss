@@ -9,12 +9,18 @@ $min-screen-width: 375px;
 :host {
   @include interaction-state.apply-focus-visible {
     outline: none;
-    border-radius: utils.$border-radius-round;
+    border-radius: utils.border-radius('pill');
   }
 
-  display: inline-block;
-  position: relative;
-  max-width: calc(100vw - #{$margin-horizontal-total});
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    display: inline-block;
+    position: relative;
+    max-width: calc(100vw - #{$margin-horizontal-total});
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   &.clicked {
     box-shadow: none;
@@ -114,12 +120,11 @@ kirby-card {
   margin-block: utils.size('xxxs');
   overflow-y: auto;
   box-shadow: utils.get-elevation(4);
+  max-width: calc(100vw - #{$margin-horizontal-total});
   min-width: $min-screen-width-small - $margin-horizontal-total;
   @include utils.media('>xsmall') {
     min-width: $min-screen-width - $margin-horizontal-total;
   }
-
-  max-width: calc(100vw - #{$margin-horizontal-total});
 }
 
 :host-context(kirby-calendar) {
@@ -127,9 +132,15 @@ kirby-card {
     @include interaction-state.apply-hover;
     @include interaction-state.apply-active('s');
 
-    border-color: transparent;
-    font-weight: utils.font-weight('bold');
-    font-size: initial;
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      border-color: transparent;
+      font-weight: utils.font-weight('bold');
+      font-size: initial;
+    }
+    /* stylelint-enable no-duplicate-selectors */
   }
 
   &.is-open {

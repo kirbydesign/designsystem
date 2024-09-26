@@ -29,6 +29,7 @@ export class AccordionItemComponent implements OnChanges {
   @Input() isExpanded: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() disabledTitle: string;
+  @Input() hasPadding: boolean = true;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnChanges(): void {

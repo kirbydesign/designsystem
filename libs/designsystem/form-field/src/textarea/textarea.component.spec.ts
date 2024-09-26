@@ -2,6 +2,7 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { TextareaComponent } from './textarea.component';
 
@@ -47,7 +48,7 @@ describe('TextareaComponent', () => {
   });
 
   it('should render with correct border-radius', () => {
-    const expected = DesignTokenHelper.borderRadius();
+    const expected = DesignTokenHelper.borderRadius('n');
     expect(element).toHaveComputedStyle({ 'border-radius': expected });
   });
 
@@ -94,6 +95,22 @@ describe('TextareaComponent', () => {
     it('should render with correct background-color', () => {
       expect(element).toHaveComputedStyle({
         'background-color': getColor('light', 'tint'),
+      });
+    });
+  });
+
+  describe('on desktop', () => {
+    beforeAll(async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    it('should render a resize handle', () => {
+      expect(element).toHaveComputedStyle({
+        resize: 'vertical',
       });
     });
   });

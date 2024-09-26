@@ -18,6 +18,12 @@ export class IconShowcaseComponent {
 
   iconRegistrationCodeSnippet = IconCustomExampleComponent.codeSnippet;
 
+  provideNewIconUrlCodeSnippet = `// In app providers:
+{
+  provide: BUILT_IN_ICONS_URL,
+  useValue: 'https://example.org/1.0.1/kirby/icons/svg/'
+}`;
+
   properties: ApiDescriptionProperty[] = [
     {
       name: 'name',
@@ -47,12 +53,6 @@ export class IconShowcaseComponent {
         'medium',
         'dark',
       ],
-    },
-    {
-      name: 'customName',
-      description: 'Deprecated: Use IconRegistryService and the name input property instead.',
-      defaultValue: 'null',
-      type: ['string'],
     },
   ];
 }

@@ -4,6 +4,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 const { getColor, size } = DesignTokenHelper;
@@ -32,24 +33,32 @@ describe('ModalFooterComponent', () => {
   const createHost = createHostFactory({
     component: ModalFooterComponent,
     host: TestHostComponent,
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, ButtonComponent],
   });
-
-  beforeEach(() => {});
 
   it('should create', () => {
     spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should set correct padding', () => {
-    spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
-    ionFooterElement = spectator.query('ion-footer');
-    expect(ionFooterElement).toHaveComputedStyle({
-      'padding-left': BASE_PADDING_PX,
-      'padding-right': BASE_PADDING_PX,
-      'padding-top': BASE_PADDING_PX,
-      'padding-bottom': BASE_PADDING_PX,
+  describe('on desktop', () => {
+    beforeAll(async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    it('should set correct padding', () => {
+      spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+      ionFooterElement = spectator.query('ion-footer');
+      expect(ionFooterElement).toHaveComputedStyle({
+        'padding-left': BASE_PADDING_PX,
+        'padding-right': BASE_PADDING_PX,
+        'padding-top': BASE_PADDING_PX,
+        'padding-bottom': BASE_PADDING_PX,
+      });
     });
   });
 
@@ -66,16 +75,26 @@ describe('ModalFooterComponent', () => {
       ionFooterElement = spectator.query('ion-footer');
     });
 
-    it('when --kirby-safe-area-bottom is not set', () => {
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
-    });
+    describe('on desktop', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      });
 
-    /**
-     * Temporaly removed, see #2736
-     */
-    xit('when --kirby-safe-area-bottom is set', () => {
-      setSafeAreaBottom();
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it('when --kirby-safe-area-bottom is not set', () => {
+        expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
+      });
+
+      /**
+       * Temporaly removed, see #2736
+       */
+      xit('when --kirby-safe-area-bottom is set', () => {
+        setSafeAreaBottom();
+        expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
+      });
     });
 
     describe('on small screens', () => {
@@ -192,6 +211,15 @@ describe('ModalFooterComponent', () => {
       spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'box-shadow': 'none',
+      });
+    });
+
+    it('should apply theming to buttons within the modal footer', () => {
+      spectator = createHost(
+        `<kirby-modal-footer type="inline"><button kirby-button attentionLevel="3">Click Me</button></kirby-modal-footer>`
+      );
+      expect(spectator.query('button')).toHaveComputedStyle({
+        'background-color': getColor('white'),
       });
     });
   });

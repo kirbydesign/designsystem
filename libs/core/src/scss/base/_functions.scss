@@ -71,6 +71,10 @@
   @return string.unquote('var(--kirby-decoration-color-' + $variant + '-' + $shade + ')');
 }
 
+@function border-radius($value) {
+  @return map.get(variables.$border-radii, $value);
+}
+
 @function get-elevation($value) {
   @return map.get(variables.$elevations, $value);
 }
@@ -171,7 +175,11 @@
 // Ensure minimum click area (default 44 x 44 px)
 // Ignore rounded corners to ensure square click area
 @mixin accessible-target-size($width: variables.$fat-finger-size, $height: $width) {
-  position: relative;
+  // Wrap declarations to avoid clashes with other mixins that have nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  & {
+    position: relative;
+  }
 
   &::after {
     content: '';
@@ -231,9 +239,10 @@
     background-image: url('#{$svg}');
   } @else {
     // Icon from library
-    $icon-url: '/assets/kirby/icons/svg/#{$svg}.svg';
+    $icon-url: 'assets/kirby/icons/svg/#{$svg}.svg';
 
-    background-image: url('#{$icon-url}');
+    background-image: url('/#{$icon-url}'); // fallback for older browsers that don't support "image-set()"
+    background-image: image-set('#{$icon-url}');
   }
 
   white-space: nowrap;

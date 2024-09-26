@@ -31,31 +31,37 @@ $form-field-label-height: 24px;
 :host {
   @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
 
-  background-color: var(--kirby-inputs-background-color);
-  color: var(--kirby-inputs-color);
-  border: none;
-  box-sizing: border-box;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    background-color: var(--kirby-inputs-background-color);
+    color: var(--kirby-inputs-color);
+    border: none;
+    box-sizing: border-box;
 
-  // Do not use `display: block`.
-  // In Safari the input's height will be too large and the date text is not
-  // properly vertically aligned.
-  // The initial value is `display: inline-block` which seems to look fine, so
-  // it's not necessary to declare the display property.
+    // Do not use `display: block`.
+    // In Safari the input's height will be too large and the date text is not
+    // properly vertically aligned.
+    // The initial value is `display: inline-block` which seems to look fine, so
+    // it's not necessary to declare the display property.
 
-  font-family: $form-field-input-font-family;
+    font-family: $form-field-input-font-family;
 
-  // `font-size` should be declared in `em` units but to simplify the solution
-  // to https://github.com/kirbydesign/designsystem/issues/2301 we're using `rem`.
-  // Must be fixed by https://github.com/kirbydesign/designsystem/issues/2313
-  font-size: 1rem;
-  line-height: $form-field-input-line-height;
-  outline: none;
-  margin: 0;
-  appearance: none;
-  border-radius: utils.size('s');
-  box-shadow: var(--kirby-inputs-elevation);
-  padding: $form-field-input-padding;
-  width: 100%;
+    // `font-size` should be declared in `em` units but to simplify the solution
+    // to https://github.com/kirbydesign/designsystem/issues/2301 we're using `rem`.
+    // Must be fixed by https://github.com/kirbydesign/designsystem/issues/2313
+    font-size: 1rem;
+    line-height: $form-field-input-line-height;
+    outline: none;
+    margin: 0;
+    appearance: none;
+    border-radius: utils.border-radius('n');
+    box-shadow: var(--kirby-inputs-elevation);
+    padding: $form-field-input-padding;
+    width: 100%;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   &:host-context(kirby-item),
   &.borderless {

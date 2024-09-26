@@ -13,8 +13,6 @@ export { MockChartComponent } from './mock.chart.component';
 export { MockBaseChartComponent } from './mock.base-chart.component';
 export { MockStockChartComponent } from './mock.stock-chart.component';
 export { MockCheckboxComponent } from './mock.checkbox.component';
-export { MockTableComponent } from './mock.table.component';
-export { MockTableRowComponent } from './mock.table-row.component';
 export { MockDividerComponent } from './mock.divider.component';
 export { MockDropdownComponent } from './mock.dropdown.component';
 export { MockEmptyStateComponent } from './mock.empty-state.component';
@@ -48,10 +46,6 @@ export { MockAlertComponent } from './mock.alert.component';
 export { MockModalFooterComponent } from './mock.modal-footer.component';
 export { MockModalCompactWrapperComponent } from './mock.modal-compact-wrapper.component';
 export { MockModalWrapperComponent } from './mock.modal-wrapper.component';
-export { MockModalV2FooterComponent } from './mock.footer.component';
-export { MockModalV2Component } from './mock.modal.component';
-export { MockModalV2RoutingComponent } from './mock.modal-routing.component';
-export { MockModalV2WrapperComponent } from './mock.wrapper.component';
 export { MockPageFooterComponent } from './mock.page-footer.component';
 export {
   MockPageTitleDirective,
@@ -78,7 +72,6 @@ export { MockSectionHeaderComponent } from './mock.section-header.component';
 export { MockSlidesComponent } from './mock.slides.component';
 export { MockSlideButtonComponent } from './mock.slide-button.component';
 export { MockSpinnerComponent } from './mock.spinner.component';
-export { MockPageLocalNavigationComponent } from './mock.page-local-navigation.component';
 export { MockSegmentedControlComponent } from './mock.segmented-control.component';
 export { MockTabNavigationComponent } from './mock.tab-navigation.component';
 export { MockTabNavigationItemComponent } from './mock.tab-navigation-item.component';

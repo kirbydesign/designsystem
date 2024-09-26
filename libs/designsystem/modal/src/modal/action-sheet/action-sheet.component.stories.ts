@@ -4,12 +4,12 @@ import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 
 const meta: Meta<ActionSheetComponent> = {
   component: ActionSheetComponent,
-  title: 'ActionSheetComponent',
+  title: 'Components / Action Sheet',
 };
 export default meta;
 type Story = StoryObj<ActionSheetComponent>;
 
-export const Default: Story = {
+export const ActionSheet: Story = {
   args: {
     header: 'Action Sheet header',
     subheader: 'Action Sheet sub-header',

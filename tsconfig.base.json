@@ -16,7 +16,9 @@
     "useDefineForClassFields": false,
     "skipLibCheck": true,
     "paths": {
-      "@kirbydesign/extensions-angular/banner": ["libs/extensions/angular/dist/banner"],
+      "@kirbydesign/angular/badge": ["libs/angular/dist/badge"],
+      "@kirbydesign/core": ["libs/core/dist/"],
+      "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
       "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/dist/*"],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/dist/accordion"],
@@ -48,7 +50,6 @@
       "@kirbydesign/designsystem/loading-overlay": ["libs/designsystem/dist/loading-overlay"],
       "@kirbydesign/designsystem/menu": ["libs/designsystem/dist/menu"],
       "@kirbydesign/designsystem/modal": ["libs/designsystem/dist/modal"],
-      "@kirbydesign/designsystem/modal/v2": ["libs/designsystem/dist/modal/v2"],
       "@kirbydesign/designsystem/page": ["libs/designsystem/dist/page"],
       "@kirbydesign/designsystem/popover": ["libs/designsystem/dist/popover"],
       "@kirbydesign/designsystem/progress-circle": ["libs/designsystem/dist/progress-circle"],

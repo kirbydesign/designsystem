@@ -6,6 +6,8 @@ import { IconComponent, IconSize } from '@kirbydesign/designsystem';
 @Component({
   selector: 'kirby-icon',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: IconComponent,
@@ -16,7 +18,6 @@ import { IconComponent, IconSize } from '@kirbydesign/designsystem';
 export class MockIconComponent {
   @Input() size: IconSize | `${IconSize}`;
   @Input() name: string;
-  @Input() customName: string;
 }
 
 // #endregion

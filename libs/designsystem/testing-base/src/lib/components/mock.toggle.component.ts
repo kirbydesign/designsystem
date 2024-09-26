@@ -6,6 +6,8 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 @Component({
   selector: 'kirby-toggle',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: ToggleComponent,

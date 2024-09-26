@@ -7,6 +7,8 @@ import { TextareaComponent } from '@kirbydesign/designsystem';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'textarea[kirby-textarea]',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: TextareaComponent,

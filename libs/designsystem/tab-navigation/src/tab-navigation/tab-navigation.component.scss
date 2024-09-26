@@ -36,10 +36,6 @@ div[role='tablist'] {
   overflow-x: scroll;
   column-gap: utils.size('xs');
 
-  @include utils.media('<medium') {
-    padding-inline: var(--padding-start) var(--padding-end);
-  }
-
   // Ensures that the .container divider pseudo-element does not overlap the .selected divider pseudo-element.
   // There seems be a weird bug with the iOS browser where z-index of scrollable elements are not respected with momentum scrolling active - so we disable it for now.
   -webkit-overflow-scrolling: auto;
@@ -50,5 +46,9 @@ div[role='tablist'] {
   // Hide scrollbar for Chrome, Edge, Safari and Opera
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @include utils.media('<medium') {
+    padding-inline: var(--padding-start) var(--padding-end);
   }
 }

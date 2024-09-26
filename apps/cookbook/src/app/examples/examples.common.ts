@@ -1,11 +1,7 @@
-import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
-import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
-import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
-import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
@@ -15,7 +11,6 @@ import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
-import { ItemExampleComponent } from './item-example/item-example.component';
 import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
@@ -37,7 +32,6 @@ import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-t
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
-import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
 import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
@@ -49,7 +43,6 @@ import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
-import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
@@ -60,22 +53,18 @@ import { SlidesHeightExampleComponent } from './slides-example/slides-height-exa
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
-  ButtonExampleComponent,
   SlideButtonExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
   ListSwipeExampleComponent,
   ListNoShapeExampleComponent,
   GridExampleComponent,
-  AvatarExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
-  SegmentedControlExampleComponent,
   IconExampleComponent,
   CalendarExampleComponent,
   CalendarCardExampleComponent,
   ActionSheetExampleComponent,
-  CheckboxExampleComponent,
   AlertExampleComponent,
   ToastExampleComponent,
   EmptyStateExampleComponent,
@@ -100,7 +89,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   TabsExampleComponent,
   TabExampleComponent,
   TabExampleMenuComponent,
-  ItemExampleComponent,
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
@@ -109,13 +97,11 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SlidesSimpleExampleComponent,
   SlidesHeightExampleComponent,
   SlidesAdvancedExampleComponent,
-  AccordionExampleComponent,
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,
   StylingHtmlListsExampleComponent,
   ItemGroupExampleComponent,
   SectionHeaderExampleComponent,
   ListExperimentalExampleComponent,
-  DataTableExampleComponent,
   MenuExampleComponent,
 ];

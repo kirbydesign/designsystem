@@ -6,13 +6,13 @@ import { ChartComponent, ChartConfigService } from '@kirbydesign/designsystem/ch
 
 const meta: Meta<ChartComponent> = {
   component: ChartComponent,
-  title: 'ChartComponent',
+  title: 'Components / Chart',
   decorators: [
     moduleMetadata({
       providers: [ChartConfigService],
     }),
   ],
-  render: (args: ChartComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-chart ${argsToTemplate(args)}></kirby-chart>`,
   }),
@@ -24,5 +24,11 @@ export const Default: Story = {
   args: {
     type: 'column',
     data: [50, 200, 83, 102],
+  },
+  argTypes: {
+    type: {
+      options: ['line', 'column', 'bar'],
+      control: { type: 'radio' },
+    },
   },
 };

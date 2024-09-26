@@ -22,16 +22,22 @@ ion-fab-button {
 
   // end NOTE
 
-  --box-shadow: #{utils.get-elevation(4)};
-
   @include interaction-state.apply-focus-visible {
     outline: none;
-    border-radius: utils.$border-radius-round;
+    border-radius: utils.border-radius('pill');
   }
 
-  width: 64px;
-  height: 64px;
-  user-select: none;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --box-shadow: #{utils.get-elevation(4)};
+
+    width: 64px;
+    height: 64px;
+    user-select: none;
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   &[disabled] {
     --background: #{utils.get-color('semi-light')};

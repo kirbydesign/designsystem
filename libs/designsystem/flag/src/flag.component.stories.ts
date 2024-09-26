@@ -3,12 +3,12 @@ import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const meta: Meta<FlagComponent> = {
   component: FlagComponent,
-  title: 'FlagComponent',
+  title: 'Components / Flag',
 };
 export default meta;
 type Story = StoryObj<FlagComponent>;
 
-export const Default: Story = {
+export const Flag: Story = {
   args: {
     size: 'md',
     themeColor: 'transparent',
@@ -19,7 +19,7 @@ export const Default: Story = {
       control: { type: 'radio' },
     },
   },
-  render: (args: FlagComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-flag ${argsToTemplate(args)}>Flag</kirby-flag>
   `,

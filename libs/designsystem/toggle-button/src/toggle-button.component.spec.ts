@@ -1,23 +1,63 @@
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { first } from 'rxjs/operators';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ToggleButtonComponent } from './toggle-button.component';
 
 describe('ToggleButtonComponent', () => {
-  let spectator: Spectator<ToggleButtonComponent>;
-  const createComponent = createComponentFactory(ToggleButtonComponent);
+  let spectator: SpectatorHost<ToggleButtonComponent>;
+  const createHost = createHostFactory({
+    component: ToggleButtonComponent,
+    imports: [ButtonComponent],
+  });
 
-  beforeEach(() => (spectator = createComponent()));
+  describe('by default', () => {
+    beforeEach(() => {
+      spectator = createHost(`<kirby-toggle-button>
+        <button kirby-button unchecked>Unchecked</button>
+        <button kirby-button checked>Checked</button>
+      </kirby-toggle-button>`);
+    });
+    it('should toggle checked state on click', () => {
+      spectator.component.checked = false;
 
-  it('should toggle checked state on click', (done) => {
-    spectator.component.checked = true;
-    spectator.component.checkChanged.pipe(first()).subscribe((check) => {
-      expect(check).toBe(false);
-      done();
+      spectator.click('button');
+
+      expect(spectator.component.checked).toBe(true);
     });
 
-    spectator.component.onClick();
+    it('should emit checkChanged event on click', () => {
+      let checkChangedCalled;
+      spectator.output('checkChanged').subscribe((result) => (checkChangedCalled = result));
 
-    expect(spectator.component.checked).toBe(false);
+      spectator.click('button');
+
+      expect(checkChangedCalled).toBe(true);
+    });
+  });
+
+  describe('when nested button is disabled', () => {
+    beforeEach(() => {
+      spectator = createHost(`<kirby-toggle-button>
+        <button kirby-button unchecked [disabled]="true">Unchecked</button>
+        <button kirby-button checked [disabled]="true">Checked</button>
+      </kirby-toggle-button>`);
+    });
+
+    it('should not emit change-event on click', () => {
+      let checkChangedCalled;
+      spectator.output('checkChanged').subscribe((result) => (checkChangedCalled = result));
+
+      spectator.click('button');
+
+      expect(checkChangedCalled).toBe(undefined);
+    });
+
+    it('should not toggle checked state on click', () => {
+      spectator.component.checked = true;
+
+      spectator.click('button');
+
+      expect(spectator.component.checked).toBe(true);
+    });
   });
 });

@@ -1,30 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { CardModule, FlagComponent, IconModule, ItemModule } from '@kirbydesign/designsystem';
 
 import { CardExampleComponent } from './card-example.component';
 import { CardExampleBackgroundImageComponent } from './examples/background-image';
 
 import { CardExampleDisclosureComponent } from './examples/disclosure';
 import { CardExampleColorComponent } from './examples/color';
-import { CardExampleDefaultComponent } from './examples/default';
+import { CardExampleVariantComponent } from './examples/variant';
 import { CardExampleFlagComponent } from './examples/flag';
-import { CardExampleFlatComponent } from './examples/flat';
 
 const COMPONENT_DECLARATIONS = [
   CardExampleComponent,
-  CardExampleDefaultComponent,
+  CardExampleVariantComponent,
   CardExampleFlagComponent,
   CardExampleColorComponent,
   CardExampleDisclosureComponent,
   CardExampleBackgroundImageComponent,
-  CardExampleFlatComponent,
 ];
 
 @NgModule({
   declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, KirbyModule],
+  imports: [CommonModule, CardModule, FlagComponent, IconModule, ItemModule],
   exports: COMPONENT_DECLARATIONS,
 })
 export class CardExampleModule {}

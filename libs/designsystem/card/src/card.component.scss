@@ -2,6 +2,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
+$default-border-outline: 1px solid utils.get-color('medium');
+
 :host {
   --kirby-card-main-background-color: #{utils.get-color('white')};
   --kirby-card-main-color: #{utils.get-color('white-contrast')};
@@ -29,32 +31,49 @@
     justify-content: inherit;
   }
 
-  border-radius: utils.$border-radius;
-  box-shadow: utils.get-elevation(2);
-  color: var(--kirby-card-main-color);
-  background-color: var(--kirby-card-main-background-color);
-  background-image: var(--kirby-card-background-image);
-  background-repeat: var(--kirby-card-background-repeat, no-repeat);
-  background-position: var(--kirby-card-background-position, center);
-  background-size: var(--kirby-card-background-size, cover);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  position: relative;
-  z-index: utils.z('default');
-  width: var(--kirby-card-width, auto);
-
-  .content-wrapper {
-    &.padding {
-      padding-top: var(--kirby-card-padding-top, utils.size('s'));
-      padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
-      padding-inline: utils.size('s');
-    }
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    border-radius: utils.border-radius('n');
+    box-shadow: utils.get-elevation(2);
+    color: var(--kirby-card-main-color);
+    background-color: var(--kirby-card-main-background-color);
+    background-image: var(--kirby-card-background-image);
+    background-repeat: var(--kirby-card-background-repeat, no-repeat);
+    background-position: var(--kirby-card-background-position, center);
+    background-size: var(--kirby-card-background-size, cover);
+    border: var(--kirby-card-border, none);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    z-index: utils.z('default');
+    width: var(--kirby-card-width, auto);
   }
+  /* stylelint-enable no-duplicate-selectors */
 
   &.flat {
     box-shadow: none;
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border: var(--kirby-card-border, $default-border-outline);
+    box-shadow: none;
+
+    &:has(kirby-card-header.flagged) {
+      border: none;
+
+      .content-wrapper {
+        border-block-end: var(--kirby-card-border, $default-border-outline);
+        border-inline-start: var(--kirby-card-border, $default-border-outline);
+        border-inline-end: var(--kirby-card-border, $default-border-outline);
+        border-bottom-left-radius: utils.border-radius('n');
+        border-bottom-right-radius: utils.border-radius('n');
+      }
+    }
   }
 
   &[role='button'] {
@@ -63,12 +82,30 @@
     @include interaction-state.apply-active('xxs');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
 
-    outline: none;
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      outline: none;
+    }
+    /* stylelint-enable no-duplicate-selectors */
   }
 }
 
+.content-wrapper {
+  &.padding {
+    padding-top: var(--kirby-card-padding-top, utils.size('s'));
+    padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
+    padding-inline: utils.size('s');
+  }
+}
+
+.content-layer {
+  height: 100%;
+}
+
 @each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}) {
+  :host(.#{$color-name}):not(.outlined) {
     --kirby-card-main-background-color: #{utils.get-color($color-name)};
     --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
   }

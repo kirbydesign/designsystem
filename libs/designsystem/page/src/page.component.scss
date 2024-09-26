@@ -174,26 +174,32 @@ ion-back-button {
   @include interaction-state.apply-hover-ionic;
   @include interaction-state.apply-active-ionic('s');
 
-  --color: #{utils.get-color('black')};
-  --background: #{utils.get-color('white')};
-  --icon-font-size: 24px;
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --color: #{utils.get-color('black')};
+    --background: #{utils.get-color('white')};
+    --icon-font-size: 24px;
 
-  height: $toolbar-button-size;
-  width: $toolbar-button-size;
+    height: $toolbar-button-size;
+    width: $toolbar-button-size;
+
+    // NOTE: This is a custom implementation of the hover interaction state;
+    // identical to FabSheet's ion-fab-button & SegmentedControlComponent's
+    // ion-segment-button.
+    opacity: 1; // required for interaction states to work
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   // Properly center back-icon
   &::part(icon) {
     margin-inline: 0;
   }
 
-  // NOTE: This is a custom implementation of the hover interaction state;
-  // identical to FabSheet's ion-fab-button & SegmentedControlComponent's
-  // ion-segment-button.
-  opacity: 1; // required for interaction states to work
-
   &::part(native) {
     opacity: 1; // required for interaction states to work
-    border-radius: utils.$border-radius-round;
+    border-radius: utils.border-radius('pill');
     overflow: hidden; // required for border radius to work
   }
 
@@ -267,7 +273,6 @@ ion-content {
     --padding-top: 0;
   }
 
-  &.max-width-optimized, // TODO: Remove deprecated option 'optimized' in Kirby v10
   &.max-width-lg {
     --page-content-max-width: #{utils.get-page-content-max-width('lg')};
   }

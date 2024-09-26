@@ -1,0 +1,12 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: utils.size('s');
+
+  @include utils.media('>=medium') {
+    flex-direction: row;
+    gap: utils.size('xl');
+  }
+}

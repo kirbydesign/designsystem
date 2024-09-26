@@ -1,0 +1,8 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: inline-grid;
+  grid-template-columns: repeat(4, auto);
+  place-items: center center;
+  gap: utils.size('s');
+}

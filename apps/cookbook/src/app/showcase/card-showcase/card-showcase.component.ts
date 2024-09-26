@@ -16,13 +16,13 @@ export class CardShowcaseComponent {
     {
       name: 'title',
       description: 'Sets the larger title in kirby-card-header',
-      defaultValue: 'null',
+      defaultValue: '',
       type: ['string'],
     },
     {
       name: 'subtitle',
       description: 'Smaller title in kirby-card-header',
-      defaultValue: 'null',
+      defaultValue: '',
       type: ['string'],
     },
     {
@@ -32,21 +32,22 @@ export class CardShowcaseComponent {
       type: ['string'],
     },
     {
-      name: 'flat',
-      description: '(Optional) Remove elevation on the card. Default elevation = 2, flat = 0.',
-      defaultValue: '',
-      type: ['boolean'],
+      name: 'variant',
+      description:
+        'Sets the variant of a card. The recommended is "elevated" which is also the default',
+      defaultValue: 'elevated',
+      type: ['elevated', 'flat', 'outlined'],
     },
     {
       name: 'hasPadding',
-      description: '',
+      description: 'If set, the card will have spacing between the border and the content',
       defaultValue: 'false',
       type: ['boolean'],
     },
     {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
-      defaultValue: 'null',
+      defaultValue: '',
       type: [
         'primary',
         'secondary',
@@ -105,6 +106,11 @@ export class CardShowcaseComponent {
       name: '--kirby-card-padding-bottom',
       description: "Sets the 'padding-bottom' property of the card",
       defaultValue: "size('s')",
+    },
+    {
+      name: '--kirby-card-border',
+      description: "Sets the 'border' property of the card",
+      defaultValue: 'none',
     },
   ];
 }

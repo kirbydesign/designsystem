@@ -5,7 +5,7 @@ import { ListComponent, ListModule } from '@kirbydesign/designsystem/list';
 
 const meta: Meta<ListComponent> = {
   component: ListComponent,
-  title: 'ListComponent',
+  title: 'Components / List',
   decorators: [
     moduleMetadata({
       imports: [ItemModule, ListModule],
@@ -15,7 +15,7 @@ const meta: Meta<ListComponent> = {
 export default meta;
 type Story = StoryObj<ListComponent>;
 
-export const Default: Story = {
+export const List: Story = {
   args: {
     items: [
       {
@@ -38,7 +38,7 @@ export const Default: Story = {
     swipeActions: [],
     disableSelectionHighlight: false,
   },
-  render: (args: ListComponent) => ({
+  render: (args) => ({
     props: args,
     template: `
     <kirby-list ${argsToTemplate(args)}>

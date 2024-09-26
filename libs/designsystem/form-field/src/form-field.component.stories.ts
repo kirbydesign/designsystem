@@ -9,7 +9,7 @@ import {
 
 const meta: Meta<FormFieldComponent> = {
   component: FormFieldComponent,
-  title: 'FormFieldComponent',
+  title: 'Components / FormField',
   decorators: [
     moduleMetadata({
       imports: [FormFieldModule, InputComponent, TextareaComponent],
@@ -24,7 +24,7 @@ export const Default: Story = {
     label: 'Input with label and message',
     message: 'This is additional info that will be shown below the input',
   },
-  render: (args: FormFieldComponent) => ({
+  render: (args) => ({
     props: args,
     template: `<kirby-form-field ${argsToTemplate(args)}>
     <input kirby-input />

@@ -157,6 +157,14 @@ describe('PageComponent', () => {
       ionScrollElement = await ionContent.getScrollElement();
     });
 
+    it('should apply the correct content width', async () => {
+      await TestHelper.whenReady(ionContent);
+      const contentInner = ionContent.querySelector('.content-inner');
+      expect(contentInner).toHaveComputedStyle({
+        'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
+      });
+    });
+
     describe('on phone', () => {
       beforeAll(async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
@@ -235,6 +243,11 @@ describe('PageComponent', () => {
                   width: `${ionToolbar.offsetWidth}px`,
                 },
                 ':before'
+              );
+              console.warn(' *** TOOLBAR PHONE AFTER ***');
+              console.warn(
+                'ionToolbar.content-scrolled:',
+                ionToolbar.classList.contains('content-scrolled')
               );
             });
 
@@ -352,6 +365,11 @@ describe('PageComponent', () => {
                   'background-color': getColor('medium'),
                 },
                 ':before'
+              );
+              console.warn(' *** TOOLBAR DESKTOP AFTER ***');
+              console.warn(
+                'ionToolbar.content-scrolled:',
+                ionToolbar.classList.contains('content-scrolled')
               );
             });
 
@@ -808,17 +826,9 @@ describe('PageComponent', () => {
     });
 
     describe('with maxWidth is defined', () => {
-      it('should apply the correct content width', async () => {
-        await TestHelper.whenReady(ionContent);
-        const contentInner = ionContent.querySelector('.content-inner');
-        expect(contentInner).toHaveComputedStyle({
-          'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
-        });
-      });
-
-      describe('and is set to standard', () => {
+      describe('and is set to default', () => {
         beforeEach(() => {
-          spectator.component.maxWidth = 'standard';
+          spectator.component.maxWidth = 'default';
           spectator.detectChanges();
         });
 
@@ -827,21 +837,6 @@ describe('PageComponent', () => {
           const contentInner = ionContent.querySelector('.content-inner');
           expect(contentInner).toHaveComputedStyle({
             'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
-          });
-        });
-      });
-
-      describe('and is set to optimized', () => {
-        beforeEach(() => {
-          spectator.component.maxWidth = 'optimized';
-          spectator.detectChanges();
-        });
-
-        it('should apply correct content width', async () => {
-          await TestHelper.whenReady(ionContent);
-          const contentInner = ionContent.querySelector('.content-inner');
-          expect(contentInner).toHaveComputedStyle({
-            'max-width': DesignTokenHelper.pageContentMaxWidth('lg'),
           });
         });
       });

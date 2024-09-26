@@ -6,6 +6,8 @@ import { TabButtonComponent } from '@kirbydesign/designsystem/tabs';
 @Component({
   selector: 'kirby-tab-button',
   template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { mock: 'mock' },
   providers: [
     {
       provide: TabButtonComponent,
@@ -14,7 +16,7 @@ import { TabButtonComponent } from '@kirbydesign/designsystem/tabs';
   ],
 })
 export class MockTabButtonComponent {
-  @Input() routerLink: string;
+  @Input() tab: string;
   @Output() click = new EventEmitter<Event>();
 }
 

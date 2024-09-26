@@ -46,7 +46,7 @@ export class DataTableCardExampleComponent {
 
   onClickRow(index: number) {
     this.toastController.showToast({
-      message: `You pressed row number ${index}`,
+      message: `You pressed row with index: ${index}`,
       messageType: 'success',
       durationInMs: 2000,
     });

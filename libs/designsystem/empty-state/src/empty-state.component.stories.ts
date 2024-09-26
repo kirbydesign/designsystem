@@ -3,7 +3,7 @@ import { EmptyStateComponent, EmptyStateModule } from '@kirbydesign/designsystem
 
 const meta: Meta<EmptyStateComponent> = {
   component: EmptyStateComponent,
-  title: 'EmptyStateComponent',
+  title: 'Components / Empty State',
   decorators: [
     moduleMetadata({
       imports: [EmptyStateModule],
@@ -13,15 +13,10 @@ const meta: Meta<EmptyStateComponent> = {
 export default meta;
 type Story = StoryObj<EmptyStateComponent>;
 
-export const Default: Story = {
+export const EmptyState: Story = {
   args: {
     iconName: 'kirby',
     title: 'No items',
     subtitle: `You don't have any items. Call support to add some items to your account.`,
-  },
-  argTypes: {
-    customIconName: {
-      control: 'text',
-    },
   },
 };
