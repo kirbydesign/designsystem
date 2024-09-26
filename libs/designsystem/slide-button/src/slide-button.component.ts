@@ -45,6 +45,17 @@ export class SlideButtonComponent implements OnDestroy {
     this.pctInTens = Math.ceil(this.value / 10) * 10;
   }
 
+  private _step = 1;
+  private resetStep() {
+    this.step = 1;
+  }
+  public get step() {
+    return this._step;
+  }
+  public set step(value) {
+    this._step = value;
+  }
+
   constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {
@@ -62,6 +73,7 @@ export class SlideButtonComponent implements OnDestroy {
   @HostListener('keyup.home', ['$event'])
   @HostListener('keyup.end', ['$event'])
   onSliderMouseup() {
+    this.resetStep();
     if (this.value == 100) {
       this.handleSlideDone();
     } else {
@@ -87,6 +99,11 @@ export class SlideButtonComponent implements OnDestroy {
   @HostListener('keydown.arrowdown', ['$event'])
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
+  onKeyDownEvents() {
+    clearInterval(this.resetSliderIntervalTimer);
+    this.step = 10;
+  }
+
   @HostListener('keydown.pageup', ['$event'])
   @HostListener('keydown.pagedown', ['$event'])
   @HostListener('keydown.home', ['$event'])
