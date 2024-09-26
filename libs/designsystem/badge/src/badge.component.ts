@@ -19,7 +19,6 @@ const KIRBY_BADGE_TEXT_PROPERTY_DEPRECATION_WARNING =
 export class BadgeComponent {
   private _text: string;
   get text(): string {
-    console.warn(KIRBY_BADGE_TEXT_PROPERTY_DEPRECATION_WARNING);
     return this._text;
   }
   /**
