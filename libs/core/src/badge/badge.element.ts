@@ -22,12 +22,20 @@ export class KirbyBadgeElement extends KirbyElement {
   @property({ reflect: true })
   size: BadgeSize = 'md';
 
+  private _text: string;
+  get text(): string {
+    return this._text;
+  }
   /**
    * @deprecated The 'text' property has been deprecated.
    * Please set the text of the Badge between the opening and closing tag.
    */
-  @property()
-  text: string;
+  @property() set text(value: string) {
+    console.warn(
+      '[Kirby Badge] The `text` property has been deprecated. Please set the text of the Badge between the opening and closing tag.'
+    );
+    this._text = value;
+  }
 
   render() {
     const content =
