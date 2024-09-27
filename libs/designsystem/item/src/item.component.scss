@@ -49,6 +49,10 @@
     @include utils.slotted('[slot="end"]') {
       margin-inline: 0;
       text-align: right;
+
+      kirby-label {
+        text-align: left;
+      }
     }
 
     @include utils.slotted('time[slot="end"]') {
