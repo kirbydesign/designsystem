@@ -99,6 +99,10 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     @include _slider-thumb;
   }
 
+  .slide-button:focus-visible::-webkit-slider-thumb {
+    @include interaction-state.apply-focus-ring;
+  }
+
   .slide-done {
     transition: all 0.3s ease-in-out;
     opacity: 0;
