@@ -1,224 +1,26 @@
+<h2>Default</h2>
+<cookbook-button-example-default></cookbook-button-example-default>
+
+<h2>Attention Levels</h2>
+<cookbook-button-example-attention-level></cookbook-button-example-attention-level>
+
 <h2>Sizes</h2>
-<button kirby-button size="xs">Extra Small Button</button>
-<button kirby-button size="sm">Small Button</button>
-<button kirby-button>Medium Button (default)</button>
-<button kirby-button size="lg">Large Button</button>
-
-<p class="comment">
-  <strong>Please note:</strong>
-  The extra small button does not meet the
-  <a href="https://www.w3.org/TR/WCAG22/#target-size-enhanced">
-    WCAG recommendations on target size
-  </a>
-  (44px), and should therefore be used with caution.
-</p>
-
-<fieldset>
-  <legend>
-    Button size for examples below
-    <kirby-icon name="arrow-down"></kirby-icon>
-  </legend>
-  <select (change)="onButtonSizeChange($event.target.value)">
-    <option
-      *ngFor="let size of buttonSizes"
-      value="{{ size.value }}"
-      [attr.selected]="buttonSize === size.value ? true : null"
-    >
-      {{ size.text }}
-    </option>
-  </select>
-</fieldset>
+<cookbook-button-example-sizes></cookbook-button-example-sizes>
 
 <h2>Block button</h2>
-<button kirby-button [size]="buttonSize" expand="block">Block Button</button>
+<cookbook-button-example-block></cookbook-button-example-block>
 
-<h2>Button with icon only</h2>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" [noDecoration]="true">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>Undecorated</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" disabled [noDecoration]="true">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>Undecorated & disabled</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>
-    Attention Level 1
-    <br />
-    <em>(Default)</em>
-  </label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" attentionLevel="2">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>Attention Level 2</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" attentionLevel="3">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>Attention Level 3</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" disabled>
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>Disabled</label>
-</div>
+<h2>Icons</h2>
+<cookbook-button-example-icons></cookbook-button-example-icons>
 
-<p class="kirby-text-small">
-  <em>
-    <strong>Please note:</strong>
-    The undecorated button is solely intended for use with icon only.
-  </em>
-</p>
+<h2>Icon only</h2>
+<cookbook-button-example-icon-only></cookbook-button-example-icon-only>
 
-<h3>
-  Button with hidden text (
-  <code>showIconOnly="true"</code>
-  )
-</h3>
+<h3>Undecorated</h3>
+<cookbook-button-example-undecorated></cookbook-button-example-undecorated>
 
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" showIconOnly="true">
-    Hidden text left
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>
-    Hide text
-    <br />
-    <em>(Left)</em>
-  </label>
-</div>
-
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" showIconOnly="true">
-    <kirby-icon name="close"></kirby-icon>
-    Hidden text right
-  </button>
-  <label>
-    Hide text
-    <br />
-    <em>(Right)</em>
-  </label>
-</div>
-
-<h3>Custom Icon</h3>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize">
-    <kirby-icon name="football"></kirby-icon>
-  </button>
-  <label>
-    Attention Level 1
-    <br />
-    <em>(Default)</em>
-  </label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" attentionLevel="2">
-    <kirby-icon name="football"></kirby-icon>
-  </button>
-  <label>Attention Level 2</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" attentionLevel="3">
-    <kirby-icon name="football"></kirby-icon>
-  </button>
-  <label>Attention Level 3</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" disabled>
-    <kirby-icon name="football"></kirby-icon>
-  </button>
-  <label>Disabled</label>
-</div>
-
-<h2>Button with icon and text</h2>
-<button kirby-button [size]="buttonSize">
-  <kirby-icon name="edit"></kirby-icon>
-  Icon Left
-</button>
-<button kirby-button [size]="buttonSize">
-  Icon Right
-  <kirby-icon name="arrow-down"></kirby-icon>
-</button>
-<button kirby-button [size]="buttonSize">
-  <span>Text Left</span>
-  <kirby-icon name="arrow-down"></kirby-icon>
-</button>
-<button kirby-button [size]="buttonSize">
-  <kirby-icon name="edit"></kirby-icon>
-  <span>Text Right</span>
-</button>
-<button kirby-button [size]="buttonSize">
-  <kirby-icon name="football"></kirby-icon>
-  Custom Icon
-</button>
-<button kirby-button [size]="buttonSize" disabled>
-  <kirby-icon name="close"></kirby-icon>
-  <span>Disabled</span>
-</button>
-
-<h2>Floating Action Button (FAB)</h2>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" [isFloating]="true">
-    <kirby-icon name="add"></kirby-icon>
-  </button>
-  <label>Default</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" [isFloating]="true" disabled>
-    <kirby-icon name="add"></kirby-icon>
-  </button>
-  <label>Disabled</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" [isFloating]="true">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>Close</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" [isFloating]="true" disabled>
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>
-    Close
-    <br />
-    Disabled
-  </label>
-</div>
+<h2>Disabled</h2>
+<cookbook-button-example-disabled></cookbook-button-example-disabled>
 
 <h2>Link Button</h2>
-<p>
-  The kirby-button directive can also be applied to anchor-tags. This will allow use of attributes
-  such as
-  <code>href</code>
-  and
-  <code>target</code>
-  , but the link will look like a button.
-</p>
-
-<a kirby-button href="/">Link</a>
-<a kirby-button href="/" target="_blank">Link (new tab/window)</a>
-
-<h2>Button with attention level</h2>
-<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
-  <button kirby-button [size]="buttonSize" attentionLevel="1" expand="block">
-    Attention Level 1
-  </button>
-  <button kirby-button [size]="buttonSize" attentionLevel="2" expand="block">
-    Attention Level 2
-  </button>
-  <button kirby-button [size]="buttonSize" attentionLevel="3" expand="block">
-    Attention Level 3
-  </button>
-</kirby-card>
+<cookbook-button-example-link></cookbook-button-example-link>

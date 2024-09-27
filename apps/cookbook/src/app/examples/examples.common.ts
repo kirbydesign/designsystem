@@ -1,6 +1,5 @@
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
-import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
@@ -54,7 +53,6 @@ import { SlidesHeightExampleComponent } from './slides-example/slides-height-exa
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
-  ButtonExampleComponent,
   SlideButtonExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,

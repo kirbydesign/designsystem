@@ -4,12 +4,14 @@ import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 
+import { ButtonExampleModule } from '~/app/examples/button-example/button-example.module';
+
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
   title: 'Components / Button',
   decorators: [
     moduleMetadata({
-      imports: [IconModule],
+      imports: [IconModule, ButtonExampleModule],
     }),
   ],
 };
@@ -39,5 +41,11 @@ export const Button: Story = {
     template: `
       <button kirby-button ${argsToTemplate(args)}>Default</button>
     `,
+  }),
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-button-example></cookbook-button-example>`,
   }),
 };

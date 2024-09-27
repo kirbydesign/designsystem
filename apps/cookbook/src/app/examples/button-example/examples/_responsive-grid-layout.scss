@@ -1,0 +1,11 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+@use './grid-layout';
+
+:host {
+  @include utils.media('<medium') {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
