@@ -1,4 +1,4 @@
-<div class="slide-button-container" [ngClass]="{ 'slide-done': isSlideDone }">
+<div class="slide-button-container" [ngClass]="{ 'slide-done': isSlideDone }" [inert]="isSlideDone">
   <input
     type="range"
     (mouseup)="onSliderMouseup()"
@@ -9,6 +9,7 @@
     class="slide-button"
     [value]="value"
     max="100"
+    [step]="step"
   />
   <p class="slide-button-text slide-{{ pctInTens }}-pct">{{ text }}</p>
 </div>
