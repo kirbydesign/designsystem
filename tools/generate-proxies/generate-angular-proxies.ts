@@ -49,7 +49,7 @@ elementMetadata.forEach(async (element) => {
 
     ${getInputProperties(element)} 
     ${getOutputProperties(element)}
-    }`
+    }`,
   );
 
   const publicApiSouce = await formatWithPrettier(`
@@ -89,7 +89,7 @@ function getInputProperties(element: LitCustomElement) {
 
         get ${property.name}(): ${property.type?.text} {
         return this._el.${property.name};
-        }`
+        }`,
     )
     .join('\n');
 }
@@ -97,7 +97,7 @@ function getInputProperties(element: LitCustomElement) {
 function getOutputProperties(element: LitCustomElement) {
   if (!element.events) return '';
   return element.events?.map(
-    (event) => `@Output() ${eventToPropertyName(event.name)} = new EventEmitter<unknown>();`
+    (event) => `@Output() ${eventToPropertyName(event.name)} = new EventEmitter<unknown>();`,
   );
 }
 // TODO: any reason to not use host-listener instead?
@@ -106,7 +106,7 @@ function getEventListeners(element: LitCustomElement) {
   return element.events?.map(
     (event) => ` this._el.addEventListener('${event.name}', (e: Event) => {
       this.${eventToPropertyName(event.name)}.emit(e);
-    });`
+    });`,
   );
 }
 
