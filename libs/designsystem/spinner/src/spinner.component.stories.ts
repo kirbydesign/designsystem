@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-// TODO: Revert to @kirbydesign/designsystem/spinner before merging
-import { KirbySpinnerComponent } from '@kirbydesign/angular/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
-const meta: Meta<KirbySpinnerComponent> = {
-  component: KirbySpinnerComponent,
+const meta: Meta<SpinnerComponent> = {
+  component: SpinnerComponent,
   title: 'Components / Spinner',
 };
 export default meta;
-type Story = StoryObj<KirbySpinnerComponent>;
+type Story = StoryObj<SpinnerComponent>;
 
 export const Spinner: Story = {
   args: {},
