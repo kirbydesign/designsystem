@@ -115,6 +115,12 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'common', svg: 'common.svg' },
     { name: 'calendar-start', svg: 'calendar-start.svg' },
     { name: 'calendar-end', svg: 'calendar-end.svg' },
+    { name: 'expand', svg: 'expand.svg' },
+    { name: 'contract', svg: 'contract.svg' },
+    { name: 'house', svg: 'house.svg' },
+    { name: 'tractor', svg: 'tractor.svg' },
+    { name: 'flower', svg: 'flower.svg' },
+    { name: 'basket', svg: 'basket.svg' },
   ],
 };
 
