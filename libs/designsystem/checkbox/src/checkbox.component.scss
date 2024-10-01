@@ -141,6 +141,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
     &::part(label-text-wrapper) {
       margin-inline: $spacing-to-label 0;
+      white-space: pre-line;
     }
 
     // Overrides for kirby-checkbox inside kirby-item
@@ -165,10 +166,6 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
           margin-inline: $spacing-to-label 0;
         }
       }
-    }
-
-    span {
-      white-space: pre-line;
     }
   }
 

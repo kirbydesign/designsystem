@@ -94,6 +94,7 @@ ion-radio {
 
   &::part(label-text-wrapper) {
     margin-inline: $spacing-to-label 0;
+    white-space: pre-line;
   }
 
   // Overrides for kirby-radio inside kirby-item
@@ -136,10 +137,6 @@ ion-radio {
         box-shadow: utils.get-elevation(4);
       }
     }
-  }
-
-  span {
-    white-space: pre-line;
   }
 }
 
