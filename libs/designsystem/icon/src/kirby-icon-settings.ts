@@ -1,7 +1,7 @@
 import { Icon, IconSettings } from './icon-settings';
 
 const sortIconsByName = (icons: Icon[]) => {
-  const collator = new Intl.Collator();
+  const collator = new Intl.Collator('en');
   return icons.sort((a, b) => collator.compare(a.name, b.name));
 };
 
