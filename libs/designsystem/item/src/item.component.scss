@@ -48,10 +48,10 @@
 
     @include utils.slotted('[slot="end"]') {
       margin-inline: 0;
-      text-align: right;
+      text-align: end;
 
       kirby-label {
-        text-align: left;
+        text-align: start;
       }
     }
 
@@ -72,7 +72,7 @@
     @include utils.slotted('input[slot="end"], kirby-form-field[slot="end"] input') {
       margin-inline-start: utils.size('s');
       width: auto;
-      text-align: right;
+      text-align: end;
     }
 
     // Wrap declarations to avoid mixing with nested rules.
