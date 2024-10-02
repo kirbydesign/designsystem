@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "paths": {
       "@kirbydesign/angular/badge": ["libs/angular/dist/badge"],
+      "@kirbydesign/angular/spinner": ["libs/angular/dist/spinner"],
       "@kirbydesign/core": ["libs/core/dist/"],
       "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
       "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
