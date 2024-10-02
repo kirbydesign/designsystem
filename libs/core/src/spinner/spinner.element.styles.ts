@@ -17,8 +17,6 @@ export default css`
     background-color: var(--kirby-primary);
     opacity: 0.6;
     position: absolute;
-    top: 0;
-    left: 0;
     animation: bounce 2s infinite ease-in-out;
   }
 
