@@ -9,7 +9,7 @@ const config = {
       <kirby-list [items]="itemsFullList.slice(0,4)">
         <kirby-item *kirbyListItemTemplate="let item">
           <kirby-label>
-            <p class="kirby-text-medium">{{item.title}}</p>
+            <h3>{{item.title}}</h3>
             <p subtitle>{{item.subTitle}}</p>
           </kirby-label>
           <kirby-label slot="end">
@@ -23,7 +23,7 @@ const config = {
       <kirby-list [items]="itemsFullList.slice(4,7)">
         <kirby-item *kirbyListItemTemplate="let item">
           <kirby-label>
-            <p class="kirby-text-medium">{{item.title}}</p>
+            <h3>{{item.title}}</h3>
             <p subtitle>{{item.subTitle}}</p>
           </kirby-label>
           <kirby-label slot="end">
