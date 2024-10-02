@@ -5,7 +5,7 @@
   </p>
   <h2>Setup</h2>
   <p>
-    Accordions uses Angular animations for animating between its collapsed and expanded state. As no
+    Accordions use Angular animations for animating between its collapsed and expanded state. As no
     other components depend on the package it is not bundled with Kirby for performance reasons and
     should instead be provided in the application as detailed in the Angular docs for
     <a href="https://angular.dev/guide/animations#enabling-the-animations-module">
@@ -22,7 +22,7 @@
 
   <h3>With initially expanded item</h3>
   <p>
-    It is possible to have an accordion expanded initially to set focus on a specific information.
+    It is possible to have an accordion expanded initially to draw attention to specific information.
   </p>
   <cookbook-example-viewer [html]="accordionExpandedExample.template">
     <cookbook-accordion-expanded-example
@@ -32,8 +32,7 @@
 
   <h2>Accordion inside a card</h2>
   <p>
-    Accordions may be placed within a card without further adjustments needed to make it stand out
-    from the canvas.
+    The accordion can be wrapped in a Kirby Card to make it stand out from the canvas.
   </p>
   <cookbook-example-viewer [html]="accordionCardExample.template">
     <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
@@ -52,7 +51,7 @@
 
   <h3>Additional styling</h3>
   <p>
-    Similarly to the simple accordion, the accordion with a list can also be wrapped in a card to
+    Similarly to the simple accordion, the accordion with a list can also be wrapped in a Kirby Card to
     make it stand out from the canvas.
   </p>
   <cookbook-example-viewer [html]="accordionWithListInCardExample.template">
@@ -63,8 +62,7 @@
 
   <h2>Accordion toggle event</h2>
   <p>
-    A toggle event is emitted whenever an accordion is expanded or collapsed allowing for further
-    interactions.
+    A toggle event is emitted whenever an accordion is expanded or collapsed.
   </p>
   <cookbook-example-viewer
     [html]="accordionEventExample.template"
