@@ -105,11 +105,11 @@ export class SideNavComponent implements OnInit {
 
   onComponentLinkClick(path: string) {
     this.setRouteActive(path);
-    this.onToggleMenu();
+    this.closeMenu();
   }
 
-  onToggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+  private closeMenu() {
+    this.isMenuOpen = false;
     this.menuToggle.emit(this.isMenuOpen);
   }
 
