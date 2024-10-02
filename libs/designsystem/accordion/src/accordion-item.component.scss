@@ -17,6 +17,10 @@ $padding: utils.size('s');
   }
 }
 
+:host(.has-list) {
+  --kirby-item-background: transparent;
+}
+
 .header {
   @include interaction-state.apply-focus-visible-background('xxxs') {
     outline: 0;
