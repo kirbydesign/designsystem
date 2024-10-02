@@ -83,6 +83,10 @@
   }
 }
 
+@mixin apply-focus-ring($shadow: null, $gap: utils.size('xxxxs')) {
+  @include _focus-ring($shadow, $gap);
+}
+
 @mixin _focus-ring($shadow, $gap) {
   $stroke-width: utils.size('xxxxs');
 

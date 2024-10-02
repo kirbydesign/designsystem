@@ -1,8 +1,13 @@
-import { IconSettings } from './icon-settings';
+import { Icon, IconSettings } from './icon-settings';
+
+const sortIconsByName = (icons: Icon[]) => {
+  const collator = new Intl.Collator('en');
+  return icons.sort((a, b) => collator.compare(a.name, b.name));
+};
 
 /* eslint-disable */
 export const kirbyIconSettings: IconSettings = {
-  icons: [
+  icons: sortIconsByName([
     { name: 'accounts-outline', svg: 'accounts-outline.svg' },
     { name: 'accounts', svg: 'accounts.svg' },
     { name: 'add', svg: 'add.svg' },
@@ -115,7 +120,13 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'common', svg: 'common.svg' },
     { name: 'calendar-start', svg: 'calendar-start.svg' },
     { name: 'calendar-end', svg: 'calendar-end.svg' },
-  ],
+    { name: 'expand', svg: 'expand.svg' },
+    { name: 'contract', svg: 'contract.svg' },
+    { name: 'house', svg: 'house.svg' },
+    { name: 'tractor', svg: 'tractor.svg' },
+    { name: 'flower', svg: 'flower.svg' },
+    { name: 'basket', svg: 'basket.svg' },
+  ]),
 };
 
 export const defaultIcons = kirbyIconSettings.icons.map((icon) => icon.name);
