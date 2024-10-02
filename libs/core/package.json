@@ -34,6 +34,14 @@
     "./badge.element": {
       "types": "./dist/types/badge/badge.element.d.ts",
       "default": "./dist/badge/badge.element.js"
+    },
+    "./spinner": {
+      "types": "./dist/types/spinner/index.d.ts",
+      "default": "./dist/spinner/index.js"
+    },
+    "./spinner.element": {
+      "types": "./dist/types/spinner/spinner.element.d.ts",
+      "default": "./dist/spinner/spinner.element.js"
     }
   }
 }
