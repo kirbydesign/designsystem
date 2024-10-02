@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { KirbySpinnerElement } from '@kirbydesign/core/spinner';
 
 @Component({
   selector: 'kirby-spinner',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
 })
-export class KirbySpinnerComponent {}
+export class KirbySpinnerComponent {
+  constructor(elementRef: ElementRef<KirbySpinnerElement>, cdr: ChangeDetectorRef) {
+    this.el = elementRef.nativeElement;
+    cdr.detach();
+  }
+
+  private el: KirbySpinnerElement;
+}
