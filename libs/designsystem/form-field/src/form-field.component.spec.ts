@@ -475,7 +475,7 @@ describe('FormFieldComponent', () => {
       it('should render the input with correct text alignment', () => {
         const formFieldElement = spectator.queryHost('input[kirby-input]');
         expect(formFieldElement).toHaveComputedStyle({
-          'text-align': 'right',
+          'text-align': 'end',
         });
       });
 

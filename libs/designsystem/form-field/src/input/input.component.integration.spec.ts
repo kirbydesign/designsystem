@@ -74,9 +74,9 @@ describe('InputComponent in Item', () => {
       });
     });
 
-    it('should render with text alignment right', () => {
+    it('should render with text alignment end', () => {
       expect(element).toHaveComputedStyle({
-        'text-align': 'right',
+        'text-align': 'end',
       });
     });
   });
