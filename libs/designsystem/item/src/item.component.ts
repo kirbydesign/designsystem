@@ -57,6 +57,8 @@ export class ItemComponent implements AfterContentInit {
   private checkboxComponent: CheckboxComponent;
   @ContentChild(RadioComponent, { static: false, read: ElementRef })
   private radio: ElementRef<HTMLElement>;
+  @ContentChild(RadioComponent, { static: false })
+  private radioComponent: RadioComponent;
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
@@ -73,7 +75,7 @@ export class ItemComponent implements AfterContentInit {
       if (this.checkbox && !this.checkboxComponent._ariaLabel) {
         this.moveLabel(this.checkbox.nativeElement.querySelector('ion-checkbox'));
       }
-      if (this.radio) {
+      if (this.radio && !this.radioComponent._ariaLabel) {
         this.moveLabel(this.radio.nativeElement.querySelector('ion-radio'));
       }
     }
