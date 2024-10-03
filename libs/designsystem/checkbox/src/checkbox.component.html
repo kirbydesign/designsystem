@@ -7,6 +7,9 @@
   [labelPlacement]="_labelPlacement"
   [justify]="_justify"
 >
+  <span class="hidden-label" *ngIf="_ariaLabel">
+    {{ _ariaLabel }}
+  </span>
   <span *ngIf="text">{{ text }}</span>
   <ng-content></ng-content>
 </ion-checkbox>

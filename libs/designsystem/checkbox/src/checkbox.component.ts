@@ -68,6 +68,7 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
 
   _justify: 'start' | 'end' | 'space-between' = 'start';
   _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
+  _ariaLabel: string;
 
   constructor(
     private element: ElementRef<HTMLElement>,
@@ -80,6 +81,8 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
       this._justify = 'space-between';
       this._labelPlacement = 'start';
     }
+
+    this.inheritAriaAttributes();
   }
 
   ngAfterViewInit(): void {
@@ -104,6 +107,16 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
 
   onBlur() {
     this._onTouched();
+  }
+
+  private inheritAriaAttributes() {
+    const el = this.element.nativeElement;
+    const attribute = 'aria-label';
+    if (el.hasAttribute(attribute)) {
+      const value = el.getAttribute(attribute);
+      el.removeAttribute(attribute);
+      this._ariaLabel = value;
+    }
   }
 
   // Initialize default ControlValueAccessor callback functions (noop)
