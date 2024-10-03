@@ -38,6 +38,24 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
   &:has(ion-radio.in-item.radio-justify-space-between) {
     width: 100%;
+
+    &:has(.hidden-label) {
+      width: initial;
+    }
+  }
+
+  &:has(.hidden-label) ion-radio {
+    position: initial;
+
+    &::part('label') {
+      position: initial;
+    }
+
+    .hidden-label {
+      position: absolute;
+      inset: 0;
+      inset-inline-end: -9999px;
+    }
   }
 }
 

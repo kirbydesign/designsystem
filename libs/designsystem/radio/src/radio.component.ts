@@ -45,6 +45,7 @@ export class RadioComponent implements AfterViewInit, OnInit {
 
   _justify: 'start' | 'end' | 'space-between' = 'start';
   _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
+  _ariaLabel: string;
 
   constructor(
     private element: ElementRef<HTMLElement>,
@@ -57,6 +58,7 @@ export class RadioComponent implements AfterViewInit, OnInit {
       this._justify = 'space-between';
       this._labelPlacement = 'start';
     }
+    this.inheritAriaAttributes();
   }
 
   ngAfterViewInit(): void {
@@ -71,5 +73,15 @@ export class RadioComponent implements AfterViewInit, OnInit {
 
   focus() {
     this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
+  }
+
+  private inheritAriaAttributes() {
+    const el = this.element.nativeElement;
+    const attribute = 'aria-label';
+    if (el.hasAttribute(attribute)) {
+      const value = el.getAttribute(attribute);
+      el.removeAttribute(attribute);
+      this._ariaLabel = value;
+    }
   }
 }
