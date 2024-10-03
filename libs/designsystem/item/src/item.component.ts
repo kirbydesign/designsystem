@@ -53,6 +53,8 @@ export class ItemComponent implements AfterContentInit {
   private label: ElementRef<HTMLElement>;
   @ContentChild(CheckboxComponent, { static: false, read: ElementRef })
   private checkbox: ElementRef<HTMLElement>;
+  @ContentChild(CheckboxComponent, { static: false })
+  private checkboxComponent: CheckboxComponent;
   @ContentChild(RadioComponent, { static: false, read: ElementRef })
   private radio: ElementRef<HTMLElement>;
 
@@ -68,7 +70,7 @@ export class ItemComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     if (this.label) {
-      if (this.checkbox) {
+      if (this.checkbox && !this.checkboxComponent._ariaLabel) {
         this.moveLabel(this.checkbox.nativeElement.querySelector('ion-checkbox'));
       }
       if (this.radio) {
