@@ -47,7 +47,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   &:has(.hidden-label) ion-radio {
     position: initial;
 
-    &::part('label') {
+    &::part(label) {
       position: initial;
     }
 
@@ -55,6 +55,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       position: absolute;
       inset: 0;
       inset-inline-end: -9999px;
+      text-align: end;
     }
   }
 }
