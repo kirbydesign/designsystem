@@ -108,6 +108,14 @@ export const ItemWithRadioLegacySyntax: Story = {
       <p detail>Label</p>
     </kirby-label>
   </kirby-item> 
+  <kirby-item size="sm">
+    <data slot="end" class="kirby-text-bold">1234</data>
+    <kirby-radio aria-label="Alternative radio label" value="6" slot="end"></kirby-radio>
+    <kirby-label>
+      <h3>Slot end, aria-label</h3>
+      <p detail>Label</p>
+    </kirby-label>
+  </kirby-item>
 </kirby-radio-group>
 
 <h2>Medium</h2>
@@ -138,6 +146,14 @@ export const ItemWithRadioLegacySyntax: Story = {
       <p detail>Label</p>
     </kirby-label>
   </kirby-item>  
+  <kirby-item size="md">
+    <data slot="end" class="kirby-text-bold">1234</data>
+    <kirby-radio aria-label="Alternative radio label" value="6" slot="end"></kirby-radio>
+    <kirby-label>
+      <h3>Slot end, aria-label</h3>
+      <p detail>Label</p>
+    </kirby-label>
+  </kirby-item>
 </kirby-radio-group>`,
   }),
 };
@@ -276,8 +292,8 @@ export const ItemWithCheckboxLegacySyntax: Story = {
   </kirby-label>
 </kirby-item>
 <kirby-item size="xs">
-<data slot="end" class="kirby-text-bold">1234</data>
-<kirby-checkbox aria-label="Alternative checkbox label" slot="end"></kirby-checkbox>
+  <data slot="end" class="kirby-text-bold">1234</data>
+  <kirby-checkbox aria-label="Alternative checkbox label" slot="end"></kirby-checkbox>
   <kirby-label>
     <h3>Slot end, aria-label</h3>
   </kirby-label>
@@ -310,6 +326,14 @@ export const ItemWithCheckboxLegacySyntax: Story = {
     <p detail>Label</p>
   </kirby-label>
 </kirby-item> 
+<kirby-item size="sm">
+  <data slot="end" class="kirby-text-bold">1234</data>
+  <kirby-checkbox aria-label="Alternative checkbox label" slot="end"></kirby-checkbox>
+  <kirby-label>
+    <h3>Slot end, aria-label</h3>
+  </kirby-label>
+</kirby-item> 
+
 
 <h2>Medium</h2>
 <kirby-item size="md">
@@ -337,7 +361,15 @@ export const ItemWithCheckboxLegacySyntax: Story = {
     <h3>Slot end, complex label</h3>
     <p detail>Label</p>
   </kirby-label>
-</kirby-item>`,
+</kirby-item>
+<kirby-item size="md">
+  <data slot="end" class="kirby-text-bold">1234</data>
+  <kirby-checkbox aria-label="Alternative checkbox label" slot="end"></kirby-checkbox>
+  <kirby-label>
+    <h3>Slot end, aria-label</h3>
+  </kirby-label>
+</kirby-item> 
+`,
   }),
 };
 
