@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { IconModule, IconRegistryService } from '@kirbydesign/designsystem';
 
+import { IconExampleComponent } from './icon-example.component';
 import { IconDefaultExampleComponent } from './examples/default';
 import { IconCustomExampleComponent } from './examples/custom';
 import { IconSizesExampleComponent } from './examples/sizes';
 
 const COMPONENT_DECLARATIONS = [
+  IconExampleComponent,
   IconDefaultExampleComponent,
   IconCustomExampleComponent,
   IconSizesExampleComponent,
@@ -15,7 +17,20 @@ const COMPONENT_DECLARATIONS = [
 
 @NgModule({
   declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, KirbyModule],
+  imports: [CommonModule, IconModule],
   exports: COMPONENT_DECLARATIONS,
 })
-export class IconExampleModule {}
+export class IconExampleModule {
+  constructor(iconRegistryService: IconRegistryService) {
+    iconRegistryService.addIcons([
+      {
+        name: 'football',
+        svg: 'assets/icons/football.svg',
+      },
+      {
+        name: 'umbrella',
+        svg: 'assets/icons/umbrella.svg',
+      },
+    ]);
+  }
+}
