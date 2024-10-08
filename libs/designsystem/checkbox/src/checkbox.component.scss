@@ -84,20 +84,20 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
   &:has(ion-checkbox.in-item.checkbox-justify-space-between) {
     width: 100%;
-
-    &:has(.hidden-label) {
-      width: initial;
-    }
   }
 
-  &:has(.hidden-label) ion-checkbox {
-    position: initial;
+  &:has(ion-checkbox.in-item):has(.hidden-label) {
+    width: initial !important; // TODO: Fix specificity
 
-    .hidden-label {
-      position: absolute;
-      inset: 0;
-      inset-inline-end: -9999px;
-      text-align: end;
+    ion-checkbox {
+      position: initial;
+
+      .hidden-label {
+        position: absolute;
+        inset: 0;
+        inset-inline-end: -9999px;
+        text-align: end;
+      }
     }
   }
 
@@ -191,7 +191,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   :host-context(kirby-item) {
-    z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+    // z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
 
     ion-checkbox {
       margin: 0;

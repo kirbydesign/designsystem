@@ -51,8 +51,6 @@ export class ItemComponent implements AfterContentInit {
   // Only query for label as direct child of item:
   @ContentChild(LabelComponent, { static: false, read: ElementRef, descendants: false })
   private label: ElementRef<HTMLElement>;
-  @ContentChild(CheckboxComponent, { static: false, read: ElementRef })
-  private checkbox: ElementRef<HTMLElement>;
   @ContentChild(CheckboxComponent, { static: false })
   private checkboxComponent: CheckboxComponent;
   @ContentChild(RadioComponent, { static: false, read: ElementRef })
@@ -72,8 +70,10 @@ export class ItemComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     if (this.label) {
-      if (this.checkbox && !this.checkboxComponent._ariaLabel) {
-        this.moveLabel(this.checkbox.nativeElement.querySelector('ion-checkbox'));
+      //TODO: Add checks for existing content via text property aornd slotted content
+      if (this.checkboxComponent) {
+        this.checkboxComponent._ariaLabel = this.label.nativeElement.textContent;
+        //TODO: Possibly add console warn about auto-migrated label, and suggesting migration path?
       }
       if (this.radio && !this.radioComponent._ariaLabel) {
         this.moveLabel(this.radio.nativeElement.querySelector('ion-radio'));
@@ -90,6 +90,6 @@ export class ItemComponent implements AfterContentInit {
   get _isIonicButton() {
     // Ionic checks for slotted checkbox and radio
     // and we shouldn't set the `button` prop in that scenario:
-    return this.selectable && !(this.checkbox || this.radio);
+    return this.selectable && !(this.checkboxComponent || this.radio);
   }
 }
