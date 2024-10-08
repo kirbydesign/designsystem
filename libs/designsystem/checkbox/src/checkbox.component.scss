@@ -191,7 +191,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   :host-context(kirby-item) {
-    // z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+    z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
 
     ion-checkbox {
       margin: 0;
