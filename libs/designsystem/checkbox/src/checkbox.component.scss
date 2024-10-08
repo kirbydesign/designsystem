@@ -96,8 +96,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       .hidden-label {
         position: absolute;
         inset: 0;
-        inset-inline-end: -9999px;
-        text-align: end;
+        opacity: 0;
       }
     }
   }
