@@ -88,6 +88,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
   &:has(ion-checkbox.in-item):has(.hidden-label) {
     width: initial !important; // TODO: Fix specificity
+    margin-inline-end: 0;
 
     ion-checkbox {
       position: initial;
