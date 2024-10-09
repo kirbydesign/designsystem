@@ -22,6 +22,7 @@ const COMPONENT_DECLARATIONS = [
 })
 export class IconExampleModule {
   constructor(iconRegistryService: IconRegistryService) {
+    // Example of "custom" icons:
     iconRegistryService.addIcons([
       {
         name: 'football',

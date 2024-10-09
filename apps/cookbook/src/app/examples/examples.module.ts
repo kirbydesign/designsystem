@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModule } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
@@ -80,18 +80,4 @@ const IMPORTS = [
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
 })
-export class ExamplesModule {
-  constructor(iconRegistryService: IconRegistryService) {
-    // Example of "custom" icons:
-    iconRegistryService.addIcons([
-      {
-        name: 'football',
-        svg: 'assets/icons/football.svg',
-      },
-      {
-        name: 'umbrella',
-        svg: 'assets/icons/umbrella.svg',
-      },
-    ]);
-  }
-}
+export class ExamplesModule {}
