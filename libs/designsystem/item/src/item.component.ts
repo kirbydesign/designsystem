@@ -70,11 +70,6 @@ export class ItemComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     if (this.label) {
-      //TODO: Add checks for existing content via text property aornd slotted content
-      if (this.checkboxComponent) {
-        this.checkboxComponent._ariaLabel = this.label.nativeElement.textContent;
-        //TODO: Possibly add console warn about auto-migrated label, and suggesting migration path?
-      }
       if (this.radio && !this.radioComponent._ariaLabel) {
         this.moveLabel(this.radio.nativeElement.querySelector('ion-radio'));
       }
