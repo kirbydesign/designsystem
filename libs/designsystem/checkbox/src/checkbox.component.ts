@@ -79,6 +79,11 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
   ) {}
 
   ngOnInit(): void {
+    /**
+     * We cannot query ion-checkbox for slotted content at this point as the slot has not been rendered.
+     * But we need to know if content is slotted to set justify and labelPlacement BEFORE ion-checkbox is rendered.
+     * So it has to be done by querying an additional wrapper around the default content slot like this.
+     */
     this._hasSlottedContent = this.element.nativeElement
       .querySelector('.default-content')
       .hasChildNodes();
