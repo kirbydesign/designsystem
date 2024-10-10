@@ -38,6 +38,18 @@
         "parallel": true
       }
     },
+    "dev-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf libs/core/dist libs/designsystem/dist",
+          "nx build core --watch",
+          "wait-on libs/core/dist/index.js && nx build designsystem --watch",
+          "wait-on libs/designsystem/dist/package.json && nx storybook designsystem"
+        ],
+        "parallel": true
+      }
+    },
     "storybook": {
       "builder": "@storybook/angular:start-storybook",
       "options": {

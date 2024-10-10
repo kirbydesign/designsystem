@@ -187,10 +187,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     ion-checkbox {
       position: initial;
 
-      &.in-item.checkbox-label-placement-start::part(label-text-wrapper) {
-        margin-inline: 0;
-      }
-
+      &.in-item.checkbox-label-placement-start::part(label-text-wrapper),
       &.in-item.checkbox-label-placement-end::part(label-text-wrapper) {
         margin-inline: 0;
       }

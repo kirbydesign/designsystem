@@ -56,10 +56,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
         position: initial;
       }
 
-      &.in-item.radio-label-placement-start::part(label-text-wrapper) {
-        margin-inline: 0;
-      }
-
+      &.in-item.radio-label-placement-start::part(label-text-wrapper),
       &.in-item.radio-label-placement-end::part(label-text-wrapper) {
         margin-inline: 0;
       }

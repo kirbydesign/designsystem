@@ -42,8 +42,8 @@ export class ItemComponent {
 
   @Input() rotateIcon: boolean = false;
 
-  @ContentChild(CheckboxComponent, { static: false })
-  private checkboxComponent: CheckboxComponent;
+  @ContentChild(CheckboxComponent, { static: false, read: ElementRef })
+  private checkbox: ElementRef<HTMLElement>;
   @ContentChild(RadioComponent, { static: false, read: ElementRef })
   private radio: ElementRef<HTMLElement>;
 
@@ -60,6 +60,6 @@ export class ItemComponent {
   get _isIonicButton() {
     // Ionic checks for slotted checkbox and radio
     // and we shouldn't set the `button` prop in that scenario:
-    return this.selectable && !(this.checkboxComponent || this.radio);
+    return this.selectable && !(this.checkbox || this.radio);
   }
 }
