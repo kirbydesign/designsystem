@@ -39,13 +39,15 @@ export class RadioComponent implements AfterViewInit, OnInit {
     return this.disabled ? 'disabled' : null;
   }
 
+  @HostBinding('class.has-hidden-label') _labelText: string;
+
   get buttonTabIndex(): number {
     return this.ionRadioElement ? this.ionRadioElement.nativeElement.tabIndex : -1;
   }
 
   _justify: 'start' | 'end' | 'space-between' = 'start';
   _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
-  _ariaLabel: string;
+  _hasSlottedContent: boolean;
 
   constructor(
     private element: ElementRef<HTMLElement>,
@@ -53,12 +55,25 @@ export class RadioComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this._hasSlottedContent = this.element.nativeElement
+      .querySelector('.default-content')
+      .hasChildNodes();
+
     const slot = this.element.nativeElement.getAttribute('slot');
-    if (slot === 'end') {
+    if (slot === 'end' && this._hasSlottedContent) {
       this._justify = 'space-between';
       this._labelPlacement = 'start';
     }
-    this.inheritAriaAttributes();
+
+    this.inheritAriaLabelText();
+
+    if (this.text || this._labelText || this._hasSlottedContent) return;
+
+    const label = this.findItemLabel(this.element.nativeElement);
+    if (label) {
+      this._labelText = label.textContent;
+      label.setAttribute('aria-hidden', 'true');
+    }
   }
 
   ngAfterViewInit(): void {
@@ -75,13 +90,22 @@ export class RadioComponent implements AfterViewInit, OnInit {
     this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
   }
 
-  private inheritAriaAttributes() {
+  private inheritAriaLabelText() {
     const el = this.element.nativeElement;
     const attribute = 'aria-label';
     if (el.hasAttribute(attribute)) {
       const value = el.getAttribute(attribute);
       el.removeAttribute(attribute);
-      this._ariaLabel = value;
+      this._labelText = value;
     }
+  }
+
+  private findItemLabel(element: HTMLElement): HTMLIonLabelElement {
+    const itemEl = element.closest('kirby-item');
+    if (itemEl) {
+      return itemEl.querySelector('kirby-label');
+    }
+
+    return null;
   }
 }

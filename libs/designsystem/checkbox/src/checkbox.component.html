@@ -7,9 +7,7 @@
   [labelPlacement]="_labelPlacement"
   [justify]="_justify"
 >
-  <span class="hidden-label" *ngIf="_labelText">
-    {{ _labelText }}
-  </span>
+  <span class="hidden-label" *ngIf="_labelText">{{ _labelText }}</span>
   <span *ngIf="text">{{ text }}</span>
   <span class="default-content">
     <ng-content></ng-content>

@@ -38,24 +38,37 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
   &:has(ion-radio.in-item.radio-justify-space-between) {
     width: 100%;
-
-    &:has(.hidden-label) {
-      width: initial;
-    }
   }
 
-  &:has(.hidden-label) ion-radio {
+  &.has-hidden-label {
     position: initial;
 
-    &::part(label) {
+    &[slot='end'] {
+      ion-radio {
+        margin-inline-start: $spacing-to-label;
+      }
+    }
+
+    ion-radio {
       position: initial;
+
+      &::part(label) {
+        position: initial;
+      }
+
+      &.in-item.radio-label-placement-start::part(label-text-wrapper) {
+        margin-inline: 0;
+      }
+
+      &.in-item.radio-label-placement-end::part(label-text-wrapper) {
+        margin-inline: 0;
+      }
     }
 
     .hidden-label {
       position: absolute;
       inset: 0;
-      inset-inline-end: -9999px;
-      text-align: end;
+      opacity: 0;
     }
   }
 }
