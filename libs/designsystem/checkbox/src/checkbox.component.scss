@@ -86,21 +86,6 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     width: 100%;
   }
 
-  &:has(ion-checkbox.in-item):has(.hidden-label) {
-    width: initial !important; // TODO: Fix specificity
-    margin-inline-end: 0;
-
-    ion-checkbox {
-      position: initial;
-
-      .hidden-label {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-      }
-    }
-  }
-
   @each $size, $properties in utils.$checkbox-sizes {
     &.#{$size} {
       $vertical-padding: map.get($properties, vertical-padding);
@@ -187,6 +172,34 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
           margin-inline: $spacing-to-label 0;
         }
       }
+    }
+  }
+
+  &.has-hidden-label {
+    position: initial;
+
+    &[slot='end'] {
+      ion-checkbox {
+        margin-inline-start: $spacing-to-label;
+      }
+    }
+
+    ion-checkbox {
+      position: initial;
+
+      &.in-item.checkbox-label-placement-start::part(label-text-wrapper) {
+        margin-inline: 0;
+      }
+
+      &.in-item.checkbox-label-placement-end::part(label-text-wrapper) {
+        margin-inline: 0;
+      }
+    }
+
+    .hidden-label {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
     }
   }
 
