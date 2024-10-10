@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
@@ -34,7 +35,9 @@ import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsys
     },
   ],
 })
-export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, OnInit {
+export class CheckboxComponent
+  implements AfterViewInit, ControlValueAccessor, OnInit, AfterContentInit
+{
   @ViewChild(IonCheckbox, { read: ElementRef, static: true })
   private ionCheckboxElement?: ElementRef<HTMLIonCheckboxElement>;
 
@@ -93,13 +96,6 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
       this._justify = 'space-between';
       this._labelPlacement = 'start';
     }
-
-    this._labelText = inheritAriaLabelText(this.element.nativeElement);
-
-    if (!this.text && !this._labelText && !this._hasSlottedContent) {
-      // if no label has been set try to find a label in an item and use its text content
-      this._labelText = setAccessibleLabel(this.element.nativeElement);
-    }
   }
 
   ngAfterViewInit(): void {
@@ -114,6 +110,15 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
       this.ionCheckboxElement,
       '.native-wrapper'
     );
+  }
+
+  ngAfterContentInit(): void {
+    this._labelText = inheritAriaLabelText(this.element.nativeElement);
+
+    if (!this.text && !this._labelText && !this._hasSlottedContent) {
+      // if no label has been set try to find a label in an item and use its text content
+      this._labelText = setAccessibleLabel(this.element.nativeElement);
+    }
   }
 
   onChecked(checked: boolean): void {

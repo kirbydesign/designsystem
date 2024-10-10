@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
@@ -19,7 +20,7 @@ import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsys
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [IonicElementPartHelper],
 })
-export class RadioComponent implements AfterViewInit, OnInit {
+export class RadioComponent implements AfterViewInit, OnInit, AfterContentInit {
   @ViewChild(IonRadio, { read: ElementRef, static: true })
   private ionRadioElement?: ElementRef<HTMLIonRadioElement>;
 
@@ -70,13 +71,6 @@ export class RadioComponent implements AfterViewInit, OnInit {
       this._justify = 'space-between';
       this._labelPlacement = 'start';
     }
-
-    this._labelText = inheritAriaLabelText(this.element.nativeElement);
-
-    if (!this.text && !this._labelText && !this._hasSlottedContent) {
-      // if no label has been set try to find a label in an item and use its text content
-      this._labelText = setAccessibleLabel(this.element.nativeElement);
-    }
   }
 
   ngAfterViewInit(): void {
@@ -87,6 +81,15 @@ export class RadioComponent implements AfterViewInit, OnInit {
       '.label-text-wrapper'
     );
     this.ionicElementPartHelper.setPart('native-wrapper', this.ionRadioElement, '.native-wrapper');
+  }
+
+  ngAfterContentInit(): void {
+    this._labelText = inheritAriaLabelText(this.element.nativeElement);
+
+    if (!this.text && !this._labelText && !this._hasSlottedContent) {
+      // if no label has been set try to find a label in an item and use its text content
+      this._labelText = setAccessibleLabel(this.element.nativeElement);
+    }
   }
 
   focus() {
