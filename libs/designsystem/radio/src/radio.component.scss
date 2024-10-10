@@ -39,6 +39,35 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   &:has(ion-radio.in-item.radio-justify-space-between) {
     width: 100%;
   }
+
+  &.has-hidden-label {
+    position: initial;
+
+    &[slot='end'] {
+      ion-radio {
+        margin-inline-start: $spacing-to-label;
+      }
+    }
+
+    ion-radio {
+      position: initial;
+
+      &::part(label) {
+        position: initial;
+      }
+
+      &.in-item.radio-label-placement-start::part(label-text-wrapper),
+      &.in-item.radio-label-placement-end::part(label-text-wrapper) {
+        margin-inline: 0;
+      }
+    }
+
+    .hidden-label {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+  }
 }
 
 @each $size, $height in utils.$checkbox-radio-sizes {

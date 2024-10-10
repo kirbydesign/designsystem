@@ -5,6 +5,9 @@
   [labelPlacement]="_labelPlacement"
   [justify]="_justify"
 >
+  <span class="hidden-label" *ngIf="_labelText">{{ _labelText }}</span>
   <span *ngIf="text">{{ text }}</span>
-  <ng-content></ng-content>
+  <span class="default-content">
+    <ng-content></ng-content>
+  </span>
 </ion-radio>

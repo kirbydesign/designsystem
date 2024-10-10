@@ -169,6 +169,31 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     }
   }
 
+  &.has-hidden-label {
+    position: initial;
+
+    &[slot='end'] {
+      ion-checkbox {
+        margin-inline-start: $spacing-to-label;
+      }
+    }
+
+    ion-checkbox {
+      position: initial;
+
+      &.in-item.checkbox-label-placement-start::part(label-text-wrapper),
+      &.in-item.checkbox-label-placement-end::part(label-text-wrapper) {
+        margin-inline: 0;
+      }
+    }
+
+    .hidden-label {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+  }
+
   :host-context(kirby-item) {
     z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
 
