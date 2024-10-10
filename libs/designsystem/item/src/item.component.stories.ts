@@ -300,6 +300,7 @@ export const ItemWithCheckboxLegacySyntax: Story = {
   <kirby-checkbox aria-label="Alternative checkbox label" slot="end"></kirby-checkbox>
   <kirby-label>
     <h3>Slot end, aria-label</h3>
+    <p detail>Label</p>
   </kirby-label>
 </kirby-item> 
 
@@ -336,6 +337,7 @@ export const ItemWithCheckboxLegacySyntax: Story = {
   <kirby-checkbox aria-label="Alternative checkbox label" slot="end"></kirby-checkbox>
   <kirby-label>
     <h3>Slot end, aria-label</h3>
+    <p detail>Label</p>
   </kirby-label>
 </kirby-item> 
 
@@ -373,6 +375,7 @@ export const ItemWithCheckboxLegacySyntax: Story = {
   <kirby-checkbox aria-label="Alternative checkbox label" slot="end"></kirby-checkbox>
   <kirby-label>
     <h3>Slot end, aria-label</h3>
+    <p detail>Label</p>
   </kirby-label>
 </kirby-item> 
 `,
