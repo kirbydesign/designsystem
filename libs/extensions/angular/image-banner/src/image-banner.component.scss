@@ -5,6 +5,25 @@ $blur-radius: 60px;
 $max-content-width: 324px;
 $main-image-height-small: 132px;
 $main-image-height-large: 164px;
+$cq-width: 515px;
+
+@mixin cq-min() {
+  @container banner (width < #{$cq-width}) {
+    @content;
+  }
+}
+
+@mixin cq-max() {
+  @container banner (width >= #{$cq-width}) {
+    @content;
+  }
+}
+
+:host {
+  display: block;
+  container-name: banner;
+  container-type: inline-size;
+}
 
 :host(.none) {
   .blur-image {
@@ -13,7 +32,7 @@ $main-image-height-large: 164px;
 
   .dismiss {
     // on mobile we always want the button to be white as it sits on top of the image
-    @include utils.media('<small') {
+    @include cq-min {
       --kirby-inputs-background-color: var(--kirby-white);
       --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
       --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
@@ -56,7 +75,7 @@ $main-image-height-large: 164px;
   display: flex;
   flex-direction: column;
 
-  @include utils.media('>=small') {
+  @include cq-max {
     gap: utils.size('s');
     flex-direction: initial;
   }
@@ -67,7 +86,7 @@ $main-image-height-large: 164px;
   overflow: hidden;
   border-radius: utils.border-radius('s');
 
-  @include utils.media('>=small') {
+  @include cq-max {
     flex: 1;
   }
 }
@@ -80,7 +99,7 @@ $main-image-height-large: 164px;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
   overflow: hidden;
 
-  @include utils.media('>=small') {
+  @include cq-max {
     flex: 1;
     gap: utils.size('xs');
     padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
@@ -109,7 +128,7 @@ $main-image-height-large: 164px;
   object-fit: cover;
   object-position: center;
 
-  @include utils.media('>=small') {
+  @include cq-max {
     height: $main-image-height-large;
   }
 }
@@ -120,13 +139,13 @@ $main-image-height-large: 164px;
   gap: utils.size('s');
   height: 100%;
 
-  @include utils.media('>=small') {
+  @include cq-max {
     flex-direction: column;
     max-width: $max-content-width;
   }
 
   .main-content-body-action-link {
-    @include utils.media('>=small') {
+    @include cq-max {
       display: none;
     }
   }
@@ -137,7 +156,7 @@ $main-image-height-large: 164px;
   overflow: hidden;
   max-height: utils.size('xl');
 
-  @include utils.media('>=small') {
+  @include cq-max {
     padding-inline-end: utils.size('xxl');
     max-height: utils.size('xxxxl');
   }
@@ -146,7 +165,7 @@ $main-image-height-large: 164px;
 .main-content-body-action-text {
   display: none;
 
-  @include utils.media('>=small') {
+  @include cq-max {
     align-self: start;
     display: inline-flex;
     margin: 0; // buttons have xxxs margin so reset that

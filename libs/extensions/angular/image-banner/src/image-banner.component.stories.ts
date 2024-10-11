@@ -106,3 +106,43 @@ export const NoDismiss: Story = {
     template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
   }),
 };
+
+export const containerQueries: Story = {
+  args: {
+    title: 'A title of',
+    bodyText: 'Some body text.',
+    actionButtonText: 'Read more',
+    imagePath: 'assets/images/leaves.jpg',
+    dismissClick: undefined,
+  },
+  // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
+  render: (args) => ({
+    props: args,
+    template: `
+      <div class="kirby-grid">
+        <div class="kirby-grid-item" xs="12">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="6">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="6">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="3">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="3">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="3">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="3">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+      </div>
+
+`,
+  }),
+};
