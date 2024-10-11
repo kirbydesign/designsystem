@@ -24,6 +24,8 @@
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./scss/global-styles": "./scss/_global-styles.scss",
+    "./scss/utils": "./scss/_utils.scss",
     "./src/scss/*": {
       "style": "./src/scss/*"
     },
