@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 export default {
-  globs: ['libs/core/**/*.component.ts'],
+  globs: ['libs/core/**/*.element.ts'],
   outdir: 'libs/core',
   litelement: true,
   plugins: [
@@ -16,11 +16,11 @@ export default {
 
             const importPath = moduleDoc.path;
 
-            if (!importPath.endsWith('.component.ts')) {
+            if (!importPath.endsWith('.element.ts')) {
               return;
             }
 
-            const tagNameWithoutPrefix = path.basename(importPath, '.component.ts');
+            const tagNameWithoutPrefix = path.basename(importPath, '.element.ts');
             const tagName = 'kirby-' + tagNameWithoutPrefix;
 
             classDoc.tagName = tagName.replace("\'\g", '');
@@ -31,4 +31,4 @@ export default {
       }
     },
   ]
-};
+};  
