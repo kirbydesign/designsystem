@@ -7,7 +7,7 @@ $main-image-height-small: 132px;
 $main-image-height-large: 164px;
 
 // The breakpoint where container should switch from "narrow" to "wide"
-$container-query-breakpoint: 515px;
+$container-query-breakpoint: 600px;
 
 @mixin container-less-than-width() {
   @container banner (width < #{$container-query-breakpoint}) {
