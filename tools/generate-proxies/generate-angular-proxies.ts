@@ -11,11 +11,12 @@ import {
 } from './utils/cem-helper-functions';
 import { LitCustomElement } from './utils';
 
-const libPath = 'libs/core';
-const angularLibPath = 'libs/angular'; //TODO: Should this be 'libs/angular/components'?
+const LIB_PATH = 'libs/core';
+const ANGULAR_LIB_PATH = 'libs/angular';
+const GENERATED_COMPONENT_START_REGION = '// START_OF_AUTO_GENERATED_COMPONENT';
 
-const packageJson = JSON.parse(readFileSync(path.resolve(`${libPath}/package.json`), 'utf8'));
-const elementMetadata: LitCustomElement[] = getElementMetadata(libPath, packageJson.name);
+const packageJson = JSON.parse(readFileSync(path.resolve(`${LIB_PATH}/package.json`), 'utf8'));
+const elementMetadata: LitCustomElement[] = getElementMetadata(LIB_PATH, packageJson.name);
 
 elementMetadata.forEach(async (element) => {
   const { name, tagNameWithoutPrefix } = element;
@@ -25,23 +26,14 @@ elementMetadata.forEach(async (element) => {
 
   if (!componentSource || !publicApiSource) return;
 
-  const componentDir = `${angularLibPath}/${tagNameWithoutPrefix}/src`;
+  const componentDir = `${ANGULAR_LIB_PATH}/${tagNameWithoutPrefix}/src`;
   const componentFile = `${componentDir}/${tagNameWithoutPrefix}.component.ts`;
   const componentPublicApi = `${componentDir}/public_api.ts`;
 
   let proxySource = `${getTypeImports(element)}\n${componentSource}`;
 
   if (existsSync(componentFile)) {
-    const existingContent = readFileSync(componentFile, 'utf8');
-    const regionStartIndex = existingContent.indexOf('// START_OF_AUTO_GENERATED_COMPONENT');
-
-    if (regionStartIndex !== -1) {
-      const imports = existingContent.substring(
-        0,
-        regionStartIndex + '// START_OF_AUTO_GENERATED_COMPONENT'.length,
-      );
-      proxySource = `${imports}\n${componentSource}`;
-    }
+    proxySource = mergeExistingProxyImports(componentFile, proxySource, componentSource);
   }
 
   mkdirSync(componentDir, { recursive: true });
@@ -49,17 +41,32 @@ elementMetadata.forEach(async (element) => {
   writeFileSync(componentFile, proxySource, 'utf8');
 });
 
+/***** Angular proxy helper functions *****/
+
+function mergeExistingProxyImports(
+  componentFile: string,
+  proxySource: string,
+  componentSource: string,
+) {
+  const existingContent = readFileSync(componentFile, 'utf8');
+  const regionStartIndex = existingContent.indexOf(GENERATED_COMPONENT_START_REGION);
+
+  if (regionStartIndex !== -1) {
+    const imports = existingContent.substring(
+      0,
+      regionStartIndex + GENERATED_COMPONENT_START_REGION.length,
+    );
+    proxySource = `${imports}\n${componentSource}`;
+  }
+  return proxySource;
+}
+
 function getTypeImports(element: LitCustomElement) {
   const elementEntryPoint = `'${packageJson.name}/${element.tagNameWithoutPrefix}'`;
 
-  const needsOutput = element.events && element.events.length > 0;
-  const needsInput = element.properties && element.properties.length > 0;
-
-  const conditionalImports = `${needsInput ? 'Input' : ''} ${needsOutput ? 'Output, EventEmitter' : ''}`;
-
-  return `import { Component, ElementRef, ${conditionalImports}, NgZone } from '@angular/core';
+  return `import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import type { ${element.name} } from ${elementEntryPoint};
-// START_OF_AUTO_GENERATED_COMPONENT
+${GENERATED_COMPONENT_START_REGION}
 `;
 }
 
@@ -68,7 +75,7 @@ function getInputProperties(element: LitCustomElement) {
   return element.properties
     .map(
       (property) => `
-        ${getJsdocDescription(property)} ${getJsdocDescriptionDeprecated(property)}
+        ${getJsdocDescription(property) ?? getJsdocDescriptionDeprecated(property) ?? ''}
         @Input()
         set ${property.name}(v: ${property.type?.text}) {
           this._ngZone.runOutsideAngular(() => (this._el.${property.name} = v));
@@ -112,19 +119,21 @@ async function generateComponentSource(element: LitCustomElement) {
   const angularComponentName = name.replace('Element', 'Component');
 
   return formatWithPrettier(
-    `${getJsdocElementSummary(element)}
+    `${getJsdocElementSummary(element) ?? ''}
     @Component({
       selector: '${tagName}',
       template: '<ng-content></ng-content>',
       standalone: true,
+      changeDetection: ChangeDetectionStrategy.OnPush,
     })
     export class ${angularComponentName} {
       private _el: ${name};
       private _ngZone: NgZone;
 
-      constructor(e: ElementRef<${name}>, ngZone: NgZone) {
+      constructor(e: ElementRef<${name}>, ngZone: NgZone, cdr: ChangeDetectorRef) {
         this._el = e.nativeElement;
         this._ngZone = ngZone;
+        cdr.detach();
 
         ${getEventListeners(element)}
       }
@@ -137,7 +146,7 @@ async function generateComponentSource(element: LitCustomElement) {
 
 async function generatePublicApiSource(name: string, tagNameWithoutPrefix: string) {
   return formatWithPrettier(`
-    // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY. See generate-angular-proxies.ts.
+    // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY.
     import { ${name} } from '${packageJson.name}/${tagNameWithoutPrefix}.element';
     export * from './${tagNameWithoutPrefix}.component';
     ${name}.define();

@@ -7,17 +7,16 @@ import { ExtendedCustomElement, LitCustomElement, ReactiveProperty } from './typ
 export function getElementMetadata(libPath: string, packageAlias: string): LitCustomElement[] {
   execSync(`cem analyze`);
   const customElementManifest: Package = JSON.parse(
-    fs.readFileSync(path.resolve(`${libPath}/custom-elements.json`), 'utf8')
+    fs.readFileSync(path.resolve(`${libPath}/custom-elements.json`), 'utf8'),
   );
   const elementMetadata = createLitElementMetadata(customElementManifest, packageAlias, libPath);
-
   return elementMetadata;
 }
 
 export function createLitElementMetadata(
   customElementsManifest: Package,
   packageAlias: string,
-  libPath: string
+  libPath: string,
 ): LitCustomElement[] {
   const customElements = getCustomElements(customElementsManifest);
 
@@ -67,7 +66,7 @@ function getReactiveProperties(element: ExtendedCustomElement) {
 function getElementImport(
   element: ExtendedCustomElement,
   packageAlias: string,
-  libPath: string
+  libPath: string,
 ): string {
   const elementEntryPoint = replaceTsExtentions(`${element.path.replace(libPath, packageAlias)}`);
   const elementImport = `import '${elementEntryPoint}'`;
@@ -95,21 +94,21 @@ function isReactiveProperty(obj: ClassMember): obj is ReactiveProperty {
 }
 
 export function getJsdocDescription(property: ReactiveProperty) {
-  if (!property.description) return '';
+  if (!property.description) return null;
   return `/**
    * ${property.description}
    */`;
 }
 
 export function getJsdocDescriptionDeprecated(property: ReactiveProperty) {
-  if (!property.deprecated) return '';
+  if (!property.deprecated) return null;
   return `/**
    * @deprecated ${property.deprecated}
    */`;
 }
 
 export function getJsdocElementSummary(element: LitCustomElement) {
-  if (!element.summary) return '';
+  if (!element.summary) return null;
   return `/**
      * ${element.summary}
      */`;
