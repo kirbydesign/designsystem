@@ -1,47 +1,54 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, Input, NgZone } from '@angular/core';
-import { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign/core/badge';
-
+import { Component, ElementRef, Input, NgZone } from '@angular/core';
+import type { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign/core/badge';
+// START_OF_AUTO_GENERATED_COMPONENT
 @Component({
   selector: 'kirby-badge',
   template: '<ng-content></ng-content>',
   standalone: true,
-  imports: [CommonModule],
 })
 export class KirbyBadgeComponent {
-  constructor(
-    elementRef: ElementRef<KirbyBadgeElement>,
-    cdr: ChangeDetectorRef,
-    private zone: NgZone
-  ) {
-    this.el = elementRef.nativeElement;
-    cdr.detach();
+  private _el: KirbyBadgeElement;
+  private _ngZone: NgZone;
+
+  constructor(e: ElementRef<KirbyBadgeElement>, ngZone: NgZone) {
+    this._el = e.nativeElement;
+    this._ngZone = ngZone;
   }
 
-  private el: KirbyBadgeElement;
-
-  get text(): string {
-    return this.el.text;
-  }
   /**
-   * @deprecated The 'text' property has been deprecated.
-   * Please set the text of the Badge between the opening and closing tag.
+   * The badge's theme variant.
    */
-  @Input() set text(value: string) {
-    this.zone.runOutsideAngular(() => (this.el.text = value));
-  }
-
-  get size(): BadgeSize {
-    return this.el.size;
-  }
-  @Input() set size(value: BadgeSize) {
-    this.zone.runOutsideAngular(() => (this.el.size = value));
+  @Input()
+  set themeColor(v: BadgeThemeColor) {
+    this._ngZone.runOutsideAngular(() => (this._el.themeColor = v));
   }
 
   get themeColor(): BadgeThemeColor {
-    return this.el.themeColor;
+    return this._el.themeColor;
   }
-  @Input() set themeColor(value: BadgeThemeColor) {
-    this.zone.runOutsideAngular(() => (this.el.themeColor = value));
+
+  /**
+   * The badge's size.
+   */
+  @Input()
+  set size(v: BadgeSize) {
+    this._ngZone.runOutsideAngular(() => (this._el.size = v));
+  }
+
+  get size(): BadgeSize {
+    return this._el.size;
+  }
+
+  /**
+   * @deprecated The 'text' property has been deprecated.
+Please set the text of the Badge between the opening and closing tag.
+   */
+  @Input()
+  set text(v: string) {
+    this._ngZone.runOutsideAngular(() => (this._el.text = v));
+  }
+
+  get text(): string {
+    return this._el.text;
   }
 }

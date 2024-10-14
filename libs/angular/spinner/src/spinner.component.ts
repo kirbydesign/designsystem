@@ -1,18 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
-import { KirbySpinnerElement } from '@kirbydesign/core/spinner';
-
+import { Component, ElementRef, EventEmitter, Input, NgZone, Output } from '@angular/core';
+import type { KirbySpinnerElement } from '@kirbydesign/core/spinner';
+// START_OF_AUTO_GENERATED_COMPONENT
 @Component({
   selector: 'kirby-spinner',
   template: '<ng-content></ng-content>',
   standalone: true,
-  imports: [CommonModule],
 })
 export class KirbySpinnerComponent {
-  constructor(elementRef: ElementRef<KirbySpinnerElement>, cdr: ChangeDetectorRef) {
-    this.el = elementRef.nativeElement;
-    cdr.detach();
-  }
+  private _el: KirbySpinnerElement;
+  private _ngZone: NgZone;
 
-  private el: KirbySpinnerElement;
+  constructor(e: ElementRef<KirbySpinnerElement>, ngZone: NgZone) {
+    this._el = e.nativeElement;
+    this._ngZone = ngZone;
+  }
 }
