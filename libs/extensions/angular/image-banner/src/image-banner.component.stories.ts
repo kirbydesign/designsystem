@@ -118,7 +118,7 @@ export const UsageInGrid: Story = {
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
-    dismissClick: undefined,
+    externalLink: 'http://www.kirby.design',
   },
   render: (args) => ({
     props: args,
