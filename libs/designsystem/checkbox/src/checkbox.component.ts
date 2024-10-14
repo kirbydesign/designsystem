@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
@@ -16,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 import { IonCheckbox } from '@ionic/angular/standalone';
+import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 
 @Component({
   standalone: true,
@@ -33,7 +35,9 @@ import { IonCheckbox } from '@ionic/angular/standalone';
     },
   ],
 })
-export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, OnInit {
+export class CheckboxComponent
+  implements AfterViewInit, ControlValueAccessor, OnInit, AfterContentInit
+{
   @ViewChild(IonCheckbox, { read: ElementRef, static: true })
   private ionCheckboxElement?: ElementRef<HTMLIonCheckboxElement>;
 
@@ -64,10 +68,13 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
     return this.attentionLevel === '2';
   }
 
+  @HostBinding('class.has-hidden-label') _labelText: string;
+
   @Output() checkedChange = new EventEmitter<boolean>();
 
   _justify: 'start' | 'end' | 'space-between' = 'start';
   _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
+  _hasSlottedContent: boolean;
 
   constructor(
     private element: ElementRef<HTMLElement>,
@@ -75,8 +82,17 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
   ) {}
 
   ngOnInit(): void {
+    /**
+     * We cannot query ion-checkbox for slotted content at this point as the slot has not been rendered.
+     * But we need to know if content is slotted to set justify and labelPlacement BEFORE ion-checkbox is rendered.
+     * So it has to be done by querying an additional wrapper around the default content slot like this.
+     */
+    this._hasSlottedContent = this.element.nativeElement
+      .querySelector('.default-content')
+      .hasChildNodes();
+
     const slot = this.element.nativeElement.getAttribute('slot');
-    if (slot === 'end') {
+    if (slot === 'end' && this._hasSlottedContent) {
       this._justify = 'space-between';
       this._labelPlacement = 'start';
     }
@@ -94,6 +110,15 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor, O
       this.ionCheckboxElement,
       '.native-wrapper'
     );
+  }
+
+  ngAfterContentInit(): void {
+    this._labelText = inheritAriaLabelText(this.element.nativeElement);
+
+    if (!this.text && !this._labelText && !this._hasSlottedContent) {
+      // if no label has been set try to find a label in an item and use its text content
+      this._labelText = setAccessibleLabel(this.element.nativeElement);
+    }
   }
 
   onChecked(checked: boolean): void {

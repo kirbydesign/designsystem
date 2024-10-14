@@ -106,3 +106,35 @@ export const NoDismiss: Story = {
     template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
   }),
 };
+
+/**
+ * The component adapts to the containers width, and thus should be plug and
+ * play with the kirby css grid and slider utilities.
+ * It switches between a narrow and wide view.
+ */
+export const UsageInGrid: Story = {
+  args: {
+    title: 'Banners that adapt in grid',
+    bodyText: 'This is the body text.',
+    actionButtonText: 'Read more',
+    imagePath: 'assets/images/leaves.jpg',
+    externalLink: 'http://www.kirby.design',
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <div class="kirby-grid">
+        <div class="kirby-grid-item" xs="12">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="6">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+        <div class="kirby-grid-item" xs="6">
+          <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+        </div>
+      </div>
+
+`,
+  }),
+};
