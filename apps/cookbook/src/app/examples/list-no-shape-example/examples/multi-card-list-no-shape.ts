@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseListNoShape } from '../base-list-no-shape';
 
-export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="none" hasItemSpacing="true">
+export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="none" hasItemSpacing="true" [showDivider]="false">
   <kirby-card *kirbyListItemTemplate="let item">
     <kirby-card-header *ngIf="item.amount < 0" title="Account is overdraft" [flagged]="'warning'"></kirby-card-header>
     <kirby-item>
