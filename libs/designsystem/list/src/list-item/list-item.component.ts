@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -30,6 +31,8 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
+  @ViewChild(IonItemSliding, { read: ElementRef })
+  ionItemSlidingTemplate: ElementRef<HTMLIonItemSlidingElement>;
 
   @Input() item: any;
 
@@ -48,6 +51,10 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   @Output() itemSelect = new EventEmitter<any>();
 
   _onItemSelect(item: any) {
+    const nestedItem = this.ionItemSlidingTemplate.nativeElement.querySelector('kirby-item');
+    const isNestedItemDisabled: boolean =
+      nestedItem?.hasAttribute('disabled') || nestedItem?.classList.contains('disabled');
+    if (isNestedItemDisabled) return;
     if (!this.isSelectable) return;
     this.itemSelect.emit(item);
   }
