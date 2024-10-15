@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/core",
-  "version": "0.0.63",
+  "version": "0.0.64",
   "description": "Core styles and helpers for the Kirby Design System.",
   "type": "module",
   "main": "dist/index.js",
@@ -24,6 +24,8 @@
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./scss/global-styles": "./scss/_global-styles.scss",
+    "./scss/utils": "./scss/_utils.scss",
     "./src/scss/*": {
       "style": "./src/scss/*"
     },

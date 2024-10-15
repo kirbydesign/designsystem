@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
@@ -10,6 +11,7 @@ import {
 } from '@angular/core';
 import { IonRadio } from '@ionic/angular/standalone';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
+import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-radio',
@@ -18,7 +20,7 @@ import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [IonicElementPartHelper],
 })
-export class RadioComponent implements AfterViewInit, OnInit {
+export class RadioComponent implements AfterViewInit, OnInit, AfterContentInit {
   @ViewChild(IonRadio, { read: ElementRef, static: true })
   private ionRadioElement?: ElementRef<HTMLIonRadioElement>;
 
@@ -39,12 +41,15 @@ export class RadioComponent implements AfterViewInit, OnInit {
     return this.disabled ? 'disabled' : null;
   }
 
+  @HostBinding('class.has-hidden-label') _labelText: string;
+
   get buttonTabIndex(): number {
     return this.ionRadioElement ? this.ionRadioElement.nativeElement.tabIndex : -1;
   }
 
   _justify: 'start' | 'end' | 'space-between' = 'start';
   _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
+  _hasSlottedContent: boolean;
 
   constructor(
     private element: ElementRef<HTMLElement>,
@@ -52,8 +57,17 @@ export class RadioComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    /**
+     * We cannot query ion-checkbox for slotted content at this point as the slot has not been rendered.
+     * But we need to know if content is slotted to set justify and labelPlacement BEFORE ion-checkbox is rendered.
+     * So it has to be done by querying an additional wrapper around the default content slot like this.
+     */
+    this._hasSlottedContent = this.element.nativeElement
+      .querySelector('.default-content')
+      .hasChildNodes();
+
     const slot = this.element.nativeElement.getAttribute('slot');
-    if (slot === 'end') {
+    if (slot === 'end' && this._hasSlottedContent) {
       this._justify = 'space-between';
       this._labelPlacement = 'start';
     }
@@ -67,6 +81,15 @@ export class RadioComponent implements AfterViewInit, OnInit {
       '.label-text-wrapper'
     );
     this.ionicElementPartHelper.setPart('native-wrapper', this.ionRadioElement, '.native-wrapper');
+  }
+
+  ngAfterContentInit(): void {
+    this._labelText = inheritAriaLabelText(this.element.nativeElement);
+
+    if (!this.text && !this._labelText && !this._hasSlottedContent) {
+      // if no label has been set try to find a label in an item and use its text content
+      this._labelText = setAccessibleLabel(this.element.nativeElement);
+    }
   }
 
   focus() {
