@@ -1,4 +1,39 @@
 <div class="example">
-  <cookbook-list-no-shape-example></cookbook-list-no-shape-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <h2>List with no background shape:</h2>
+  <p>
+    Setting
+    <code>shape="none"</code>
+    on a Kirby List removes the background, border and shadow from the list and the list item
+    containers to provide flexibility
+  </p>
+
+  <h2>Simple list with no shape</h2>
+  <cookbook-example-viewer [html]="simpleListNoShapeExample.template">
+    <cookbook-simple-list-no-shape-example
+      #simpleListNoShapeExample
+    ></cookbook-simple-list-no-shape-example>
+  </cookbook-example-viewer>
+
+  <h2>Detailed card with list no shape</h2>
+  <p>
+    The no shape list should be used when the list is within a card that also has other content.
+    This is removing the otherwise shown shadow around the list.
+  </p>
+  <cookbook-example-viewer [html]="detailedCardWithListNoShapeExample.template">
+    <cookbook-detailed-card-with-list-no-shape-example
+      #detailedCardWithListNoShapeExample
+    ></cookbook-detailed-card-with-list-no-shape-example>
+  </cookbook-example-viewer>
+
+  <h2>Multi card list (having no shape)</h2>
+  <p>
+    The no shape list can also be used when the list logic is needed but with a custom template.
+    Shown below is an example where the list item each are a card instead of the traditional Kirby
+    List Item
+  </p>
+  <cookbook-example-viewer [html]="multiCardListNoShapeExample.template">
+    <cookbook-multi-card-list-no-shape-example
+      #multiCardListNoShapeExample
+    ></cookbook-multi-card-list-no-shape-example>
+  </cookbook-example-viewer>
 </div>

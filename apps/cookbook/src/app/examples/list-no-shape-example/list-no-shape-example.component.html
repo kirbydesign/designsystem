@@ -1,20 +1,9 @@
-<h2>List with no background shape:</h2>
-<h3>
-  Removes background, border, shadow and padding from the list and the list item containers to
-  provide flexibility
-</h3>
-<kirby-list [items]="items" shape="none" hasItemSpacing="true">
-  <kirby-card *kirbyListItemTemplate="let item">
-    <kirby-card-header *ngIf="item.amount < 0" title="Account is overdraft"></kirby-card-header>
-    <kirby-item>
-      <h4 class="kirby-text-bold">{{ item.title }}</h4>
-      <data [value]="item.amount" class="kirby-text-bold" slot="end">
-        {{ item.amount | currency }}
-      </data>
-    </kirby-item>
-    <kirby-item *ngFor="let shadowAccount of item.shadowAccounts">
-      <h4>{{ shadowAccount.title }}</h4>
-      <data [value]="shadowAccount.amount" slot="end">{{ shadowAccount.amount | currency }}</data>
-    </kirby-item>
-  </kirby-card>
-</kirby-list>
+<h1>List no shape</h1>
+<h2>Simple list no shape</h2>
+<cookbook-simple-list-no-shape-example></cookbook-simple-list-no-shape-example>
+
+<h2>Detailed card with list</h2>
+<cookbook-detailed-card-with-list-no-shape-example></cookbook-detailed-card-with-list-no-shape-example>
+
+<h2>Multi card list example</h2>
+<cookbook-multi-card-list-example></cookbook-multi-card-list-example>
