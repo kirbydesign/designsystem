@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/core",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "Core styles and helpers for the Kirby Design System.",
   "type": "module",
   "main": "dist/index.js",
@@ -29,6 +29,7 @@
     "./scss/interaction-state": "./scss/interaction-state/_index.scss",
     "./scss/themes/colors": "./scss/themes/_colors.scss",
     "./scss/utils": "./scss/_utils.scss",
+    "./scss/print": "./scss/print/_index.scss",
     "./src/scss/*": {
       "style": "./src/scss/*"
     },
