@@ -11,6 +11,7 @@ import {
 import type { KirbySpinnerElement } from '@kirbydesign/core/spinner';
 // START_OF_AUTO_GENERATED_COMPONENT
 
+// AUTO-GENERATED - Any missing type imports can be added manually above, but do not change component source
 @Component({
   selector: 'kirby-spinner',
   template: '<ng-content></ng-content>',
@@ -18,12 +19,14 @@ import type { KirbySpinnerElement } from '@kirbydesign/core/spinner';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KirbySpinnerComponent {
-  private _el: KirbySpinnerElement;
-  private _ngZone: NgZone;
+  private el: KirbySpinnerElement;
 
-  constructor(e: ElementRef<KirbySpinnerElement>, ngZone: NgZone, cdr: ChangeDetectorRef) {
-    this._el = e.nativeElement;
-    this._ngZone = ngZone;
-    cdr.detach();
+  constructor(
+    private e: ElementRef<KirbySpinnerElement>,
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+  ) {
+    this.el = this.e.nativeElement;
+    this.cdr.detach();
   }
 }

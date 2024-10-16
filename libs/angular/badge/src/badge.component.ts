@@ -11,6 +11,7 @@ import {
 import type { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign/core/badge';
 // START_OF_AUTO_GENERATED_COMPONENT
 
+// AUTO-GENERATED - Any missing type imports can be added manually above, but do not change component source
 @Component({
   selector: 'kirby-badge',
   template: '<ng-content></ng-content>',
@@ -18,13 +19,15 @@ import type { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KirbyBadgeComponent {
-  private _el: KirbyBadgeElement;
-  private _ngZone: NgZone;
+  private el: KirbyBadgeElement;
 
-  constructor(e: ElementRef<KirbyBadgeElement>, ngZone: NgZone, cdr: ChangeDetectorRef) {
-    this._el = e.nativeElement;
-    this._ngZone = ngZone;
-    cdr.detach();
+  constructor(
+    private e: ElementRef<KirbyBadgeElement>,
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+  ) {
+    this.el = this.e.nativeElement;
+    this.cdr.detach();
   }
 
   /**
@@ -32,11 +35,11 @@ export class KirbyBadgeComponent {
    */
   @Input()
   set themeColor(v: BadgeThemeColor) {
-    this._ngZone.runOutsideAngular(() => (this._el.themeColor = v));
+    this.ngZone.runOutsideAngular(() => (this.el.themeColor = v));
   }
 
   get themeColor(): BadgeThemeColor {
-    return this._el.themeColor;
+    return this.el.themeColor;
   }
 
   /**
@@ -44,11 +47,11 @@ export class KirbyBadgeComponent {
    */
   @Input()
   set size(v: BadgeSize) {
-    this._ngZone.runOutsideAngular(() => (this._el.size = v));
+    this.ngZone.runOutsideAngular(() => (this.el.size = v));
   }
 
   get size(): BadgeSize {
-    return this._el.size;
+    return this.el.size;
   }
 
   /**
@@ -57,10 +60,10 @@ Please set the text of the Badge between the opening and closing tag.
    */
   @Input()
   set text(v: string) {
-    this._ngZone.runOutsideAngular(() => (this._el.text = v));
+    this.ngZone.runOutsideAngular(() => (this.el.text = v));
   }
 
   get text(): string {
-    return this._el.text;
+    return this.el.text;
   }
 }
