@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, writeFile, writeFileSync } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
 import { ESLint } from 'eslint';
@@ -24,15 +24,15 @@ const CORE_PACKAGE_JSON = JSON.parse(
 const elementMetadata: LitCustomElement[] = getElementMetadata(LIB_PATH);
 
 elementMetadata.forEach(async (element) => {
-  await generateProxyComponent(element).catch((error) => {
+  await writeComponentFiles(element).catch((error) => {
     console.error(error);
   });
 });
 
 /********** Helper functions **********/
 
-async function generateProxyComponent(element: LitCustomElement) {
-  const { tagNameWithoutPrefix } = element;
+async function writeComponentFiles(element: LitCustomElement) {
+  const { tagName, tagNameWithoutPrefix } = element;
   const componentDir = `${ANGULAR_LIB_PATH}/${tagNameWithoutPrefix}/src`;
   const componentFile = `${componentDir}/${tagNameWithoutPrefix}.component.ts`;
   const componentPublicApi = `${componentDir}/public_api.ts`;
@@ -40,31 +40,36 @@ async function generateProxyComponent(element: LitCustomElement) {
   const componentSource = await generateComponentSource(element);
   const publicApiSource = await generatePublicApiSource(element);
 
-  if (!componentSource) {
-    throw new Error(`Failed to generate proxy component for ${tagNameWithoutPrefix}.`);
-  }
-  if (!publicApiSource) {
-    throw new Error(`Failed to generate public_api.ts for ${tagNameWithoutPrefix}.`);
-  }
+  let componentSourceWithGeneratedImports = getTypeImports(element) + componentSource;
 
-  let componentSourceWithImports = getTypeImports(element) + componentSource;
+  const existingComponent = existsSync(componentFile);
 
-  if (existsSync(componentFile)) {
-    componentSourceWithImports = mergeExistingImports(
+  if (existingComponent) {
+    componentSourceWithGeneratedImports = mergeExistingImports(
       componentFile,
-      componentSourceWithImports,
+      componentSourceWithGeneratedImports,
       componentSource,
     );
   }
 
-  const formattedComponentSource = await formatWithEslint(
-    componentSourceWithImports,
-    tagNameWithoutPrefix,
+  const lintedComponentSource = await formatWithEslint(
+    componentSourceWithGeneratedImports,
+    tagName,
   );
 
+  const formattedPublicApiSource = await formatWithPrettier(publicApiSource);
+
   mkdirSync(componentDir, { recursive: true });
-  writeFileSync(componentPublicApi, publicApiSource, 'utf8');
-  writeFileSync(componentFile, formattedComponentSource, 'utf8');
+
+  writeFile(componentFile, lintedComponentSource, 'utf8', (err) => {
+    if (err) throw err;
+    console.log(`Angular component file for ${tagName} has been created.`);
+  });
+
+  writeFile(componentPublicApi, formattedPublicApiSource, 'utf8', (err) => {
+    if (err) throw err;
+    console.log(`Public API file for ${tagName} has been created.`);
+  });
 }
 
 function mergeExistingImports(
@@ -170,15 +175,13 @@ async function generateComponentSource(element: LitCustomElement) {
 
 async function generatePublicApiSource(element: LitCustomElement) {
   const { name, tagNameWithoutPrefix } = element;
-  return formatWithPrettier(`
-    // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY.
+  return `// AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY.
     import { ${name} } from '${CORE_PACKAGE_JSON.name}/${tagNameWithoutPrefix}.element';
     export * from './${tagNameWithoutPrefix}.component';
-    ${name}.define();
-  `);
+    ${name}.define();`;
 }
 
-async function formatWithEslint(unformattedSource: string, tagNameWithoutPrefix: string) {
+async function formatWithEslint(unformattedSource: string, tagName: string) {
   const eslint = new ESLint({
     fix: true,
     cache: true,
@@ -190,7 +193,6 @@ async function formatWithEslint(unformattedSource: string, tagNameWithoutPrefix:
     return lintingResults[0].output;
   }
 
-  console.warn(`${tagNameWithoutPrefix} component source was not formatted by ESLint.`);
-
+  console.warn(`${tagName} Angular component source could not be formatted by ESLint.`);
   return unformattedSource;
 }
