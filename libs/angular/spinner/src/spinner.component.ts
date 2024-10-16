@@ -24,7 +24,7 @@ export class KirbySpinnerComponent {
   constructor(
     private e: ElementRef<KirbySpinnerElement>,
     private ngZone: NgZone,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {
     this.el = this.e.nativeElement;
     this.cdr.detach();

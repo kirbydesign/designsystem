@@ -24,7 +24,7 @@ export class KirbyBadgeComponent {
   constructor(
     private e: ElementRef<KirbyBadgeElement>,
     private ngZone: NgZone,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {
     this.el = this.e.nativeElement;
     this.cdr.detach();
