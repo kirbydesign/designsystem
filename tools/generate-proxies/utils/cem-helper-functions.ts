@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import { ClassMember, Package } from 'custom-elements-manifest/schema';
-import { ExtendedCustomElement, LitCustomElement, ReactiveProperty } from './types';
+import { LitCustomElement, ReactiveProperty } from './types';
 
 export function getElementMetadata(libPath: string): LitCustomElement[] {
   execSync(`cem analyze`);
@@ -29,12 +29,12 @@ export function createLitElementMetadata(customElementsManifest: Package): LitCu
 }
 
 function getCustomElements(manifest: Package) {
-  const elementsWithPaths: ExtendedCustomElement[] = [];
+  const elementsWithPaths: LitCustomElement[] = [];
 
   manifest.modules.forEach((module) => {
     module.declarations?.map((declaration: any) => {
       if (declaration.customElement) {
-        const element: ExtendedCustomElement = declaration;
+        const element: LitCustomElement = declaration;
         const path = module.path;
 
         if (element) {
@@ -47,7 +47,7 @@ function getCustomElements(manifest: Package) {
   return elementsWithPaths;
 }
 
-function getReactiveProperties(element: ExtendedCustomElement) {
+function getReactiveProperties(element: LitCustomElement) {
   const properties: ReactiveProperty[] = [];
 
   element.members?.forEach((member) => {

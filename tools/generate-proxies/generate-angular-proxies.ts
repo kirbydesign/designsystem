@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFile, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, writeFile } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
 import { ESLint } from 'eslint';
