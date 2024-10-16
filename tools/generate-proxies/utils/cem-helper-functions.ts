@@ -7,7 +7,7 @@ import { ExtendedCustomElement, LitCustomElement, ReactiveProperty } from './typ
 export function getElementMetadata(libPath: string): LitCustomElement[] {
   execSync(`cem analyze`);
   const customElementManifest: Package = JSON.parse(
-    fs.readFileSync(path.resolve(`${libPath}/custom-elements.json`), 'utf8'),
+    fs.readFileSync(path.resolve(`${libPath}/custom-elements.json`), 'utf8')
   );
   const elementMetadata = createLitElementMetadata(customElementManifest);
   return elementMetadata;
