@@ -181,6 +181,7 @@ async function generatePublicApiSource(element: LitCustomElement) {
 async function formatWithEslint(unformattedSource: string, tagNameWithoutPrefix: string) {
   const eslint = new ESLint({
     fix: true,
+    cache: true,
     overrideConfigFile: path.resolve('tools/eslint-config/angular.json'),
   });
   const lintingResults = await eslint.lintText(unformattedSource, { filePath: 'component.ts' });
