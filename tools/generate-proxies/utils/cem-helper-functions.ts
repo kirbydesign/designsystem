@@ -4,26 +4,21 @@ import * as path from 'path';
 import { ClassMember, Package } from 'custom-elements-manifest/schema';
 import { ExtendedCustomElement, LitCustomElement, ReactiveProperty } from './types';
 
-export function getElementMetadata(libPath: string, packageAlias: string): LitCustomElement[] {
+export function getElementMetadata(libPath: string): LitCustomElement[] {
   execSync(`cem analyze`);
   const customElementManifest: Package = JSON.parse(
     fs.readFileSync(path.resolve(`${libPath}/custom-elements.json`), 'utf8'),
   );
-  const elementMetadata = createLitElementMetadata(customElementManifest, packageAlias, libPath);
+  const elementMetadata = createLitElementMetadata(customElementManifest);
   return elementMetadata;
 }
 
-export function createLitElementMetadata(
-  customElementsManifest: Package,
-  packageAlias: string,
-  libPath: string,
-): LitCustomElement[] {
+export function createLitElementMetadata(customElementsManifest: Package): LitCustomElement[] {
   const customElements = getCustomElements(customElementsManifest);
 
   const litCustomElements = customElements.map((elm) => {
     const element: LitCustomElement = {
       ...elm,
-      elementImport: getElementImport(elm, packageAlias, libPath),
       properties: getReactiveProperties(elm),
     };
 
@@ -63,26 +58,6 @@ function getReactiveProperties(element: ExtendedCustomElement) {
   return properties;
 }
 
-function getElementImport(
-  element: ExtendedCustomElement,
-  packageAlias: string,
-  libPath: string,
-): string {
-  const elementEntryPoint = replaceTsExtentions(`${element.path.replace(libPath, packageAlias)}`);
-  const elementImport = `import '${elementEntryPoint}'`;
-
-  return elementImport;
-}
-
-function replaceTsExtentions(filePath: string) {
-  return filePath.endsWith('.ts') ? changeExt(filePath, 'js') : filePath;
-}
-
-function changeExt(filePath: string, ext: string) {
-  const pos = filePath.includes('.') ? filePath.lastIndexOf('.') : filePath.length;
-  return `${filePath.substr(0, pos)}.${ext}`;
-}
-
 function isReactiveProperty(obj: ClassMember): obj is ReactiveProperty {
   return (
     typeof obj === 'object' &&
@@ -94,21 +69,21 @@ function isReactiveProperty(obj: ClassMember): obj is ReactiveProperty {
 }
 
 export function getJsdocDescription(property: ReactiveProperty) {
-  if (!property.description) return null;
+  if (!property.description) return '';
   return `/**
    * ${property.description}
    */`;
 }
 
 export function getJsdocDescriptionDeprecated(property: ReactiveProperty) {
-  if (!property.deprecated) return null;
+  if (!property.deprecated) return '';
   return `/**
    * @deprecated ${property.deprecated}
    */`;
 }
 
 export function getJsdocElementSummary(element: LitCustomElement) {
-  if (!element.summary) return null;
+  if (!element.summary) return '';
   return `/**
      * ${element.summary}
      */`;

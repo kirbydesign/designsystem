@@ -13,5 +13,4 @@ export type ReactiveProperty = ClassField & {
 
 export type LitCustomElement = ExtendedCustomElement & {
   properties?: ReactiveProperty[];
-  elementImport: string;
 };
