@@ -16,7 +16,6 @@ const COMPONENT_DECLARATIONS = [
 
 @NgModule({
   imports: [CommonModule, KirbyModule],
-  providers: [],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })

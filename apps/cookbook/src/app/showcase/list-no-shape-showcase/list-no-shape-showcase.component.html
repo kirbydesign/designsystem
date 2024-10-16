@@ -3,8 +3,9 @@
   <p>
     Setting
     <code>shape="none"</code>
-    on a Kirby List removes the background, border and shadow from the list and the list item
-    containers to provide flexibility
+    on a Kirby List removes the background and shadow from the list and the list item
+    containers to provide flexibility when combined with other layout containers. <br />
+    Dividers will still be shown between list items, these can be removed by setting <code>[showDividers]="false"</code>.
   </p>
 
   <h2>Simple list with no shape</h2>
@@ -16,8 +17,7 @@
 
   <h2>Detailed card with list no shape</h2>
   <p>
-    The no shape list should be used when the list is within a card that also has other content.
-    This is removing the otherwise shown shadow around the list.
+    The list with no shape can be used when the list is inside another layout component, that comes with it's own shape or background, e.g. within a card.
   </p>
   <cookbook-example-viewer [html]="detailedCardWithListNoShapeExample.template">
     <cookbook-detailed-card-with-list-no-shape-example
@@ -27,12 +27,10 @@
 
   <h2>Multi card list (having no shape)</h2>
   <p>
-    The
+    When using the list with a custom item template where each item comes with it's own shape or background, e.g. using a card for each item, set both 
     <code>shape="none"</code>
-    may, in combination with
-    <code>[showDivider]="false"</code>
-    , be used when the list logic is needed but with a custom template. Shown below is an example
-    where the list item each are a card instead of the traditional Kirby List Item
+    and
+    <code>[showDivider]="false"</code> to omit any background, shadow and dividers from the list.
   </p>
   <cookbook-example-viewer [html]="multiCardListNoShapeExample.template">
     <cookbook-multi-card-list-no-shape-example
