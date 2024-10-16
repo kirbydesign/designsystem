@@ -29,10 +29,12 @@
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
     "sync-node-version": "node ./scripts/sync-node-version.js",
+    "generate-angular-proxies": "ts-node tools/generate-proxies/generate-angular-proxies.ts",
     "generate-design-tokens": "sass libs/core/src/scss/themes/design-tokens.scss libs/core/src/scss/themes/design-tokens.css --no-source-map",
     "nx": "nx"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.10.3",
     "@nx/angular": "^19.6.5",
     "@nx/jest": "^19.6.5",
     "@nx/js": "^19.6.5",
@@ -62,7 +64,7 @@
     "nx": "^19.6.4",
     "nx-stylelint": "^17.1.4",
     "post-npm-install": "^2.0.0",
-    "prettier": "2.7.1",
+    "prettier": "^3.3.3",
     "sass": "^1.79.2",
     "storybook": "^8.3.0",
     "stylelint": "^16.3.1",
