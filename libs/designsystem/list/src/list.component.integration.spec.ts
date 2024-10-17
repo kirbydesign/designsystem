@@ -17,7 +17,7 @@ import {
 
 import { ListItemComponent } from './list-item/list-item.component';
 
-const { fontWeight, size } = DesignTokenHelper;
+const { fontWeight, size, getColor } = DesignTokenHelper;
 
 describe('ListComponent', () => {
   let ionList: HTMLElement;
@@ -127,6 +127,62 @@ describe('ListComponent', () => {
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
         });
+      });
+    });
+
+    describe('with shape="none"', () => {
+      beforeEach(() => {
+        spectator.setInput('shape', 'none');
+        spectator.detectChanges();
+      });
+      it('should apply transparent background to kirby-list-items', () => {
+        const ionItem = spectator.queryAll('ion-item');
+        expect(ionItem.length).toBeGreaterThan(0);
+        ionItem.forEach((item) => {
+          const itemNative = item.shadowRoot.querySelector('.item-native');
+          expect(itemNative).toHaveComputedStyle({ 'background-color': 'rgba(0, 0, 0, 0)' });
+        });
+      });
+      it('should apply "medium" border color to all but last item when not in card', () => {
+        const ionItemSlidingList = spectator.queryAll('ion-item-sliding');
+        const lastIonItemSliding = ionItemSlidingList[ionItemSlidingList.length - 1];
+
+        expect(ionItemSlidingList.length).toBeGreaterThan(0);
+        ionItemSlidingList.forEach((item) => {
+          if (item !== lastIonItemSliding) {
+            expect(item).toHaveComputedStyle({ 'border-bottom-color': getColor('medium') });
+          }
+        });
+      });
+    });
+  });
+
+  describe('with list inside card and shape="none"', () => {
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+        <kirby-card>
+          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)" shape="none">
+            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          </kirby-list>
+        </kirby-card>
+        `
+      );
+      ionList = spectator.queryHost('ion-list');
+      await TestHelper.whenReady(ionList);
+      itemsInList = spectator.queryAll('ion-list ion-item');
+    });
+
+    it('should apply "background" border color to all but last item when inside card and list has shape "none"', () => {
+      const ionItemSlidingList = spectator.queryAll('ion-item-sliding');
+      expect(ionItemSlidingList.length).toBeGreaterThan(0);
+      const lastIonItemSliding = ionItemSlidingList[ionItemSlidingList.length - 1];
+      ionItemSlidingList.forEach((item) => {
+        if (item !== lastIonItemSliding) {
+          expect(item).toHaveComputedStyle({
+            'border-bottom-color': getColor('background-color'),
+          });
+        }
       });
     });
   });
