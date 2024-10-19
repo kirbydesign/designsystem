@@ -20,7 +20,7 @@ export class ImageBannerComponent {
   /**
    * If true, the title will be truncated with an ellipsis when it exceeds the width of the banner.
    */
-  @Input() truncateTitle: boolean = false;
+  @Input() truncateTitle: boolean = true;
 
   /**
    * The image shown on the banner, and used for the background blur effect.
