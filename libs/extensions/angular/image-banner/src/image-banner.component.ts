@@ -18,6 +18,11 @@ export class ImageBannerComponent {
   @Input() title: string | undefined;
 
   /**
+   * If true, the title will be truncated with an ellipsis when it exceeds the width of the banner.
+   */
+  @Input() truncateTitle: boolean = false;
+
+  /**
    * The image shown on the banner, and used for the background blur effect.
    */
   @Input() imagePath: string | undefined;
@@ -27,6 +32,15 @@ export class ImageBannerComponent {
    */
   @Input() bodyText: string | undefined;
 
+  /**
+   * If true, the body text will be truncated with an ellipsis when it exceeds the width of the banner.
+   */
+  @Input() truncateBodyText: boolean = false;
+
+  /**
+   * If true, the banner will have a minimum height to prevent it from shrinking too much.
+   */
+  @Input() hasMinimumHeight: boolean = true;
   /**
    * The text of the button in the content area of the image banner.
    */
