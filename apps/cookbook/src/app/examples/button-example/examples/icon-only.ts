@@ -16,16 +16,16 @@ const config = {
 </button>
 
 <button kirby-button size="xs" attentionLevel="2">
-  <kirby-icon name="menu"></kirby-icon>
+  <kirby-icon name="search"></kirby-icon>
 </button>
 <button kirby-button size="sm" attentionLevel="2">
-  <kirby-icon name="menu"></kirby-icon>
+  <kirby-icon name="search"></kirby-icon>
 </button>
 <button kirby-button attentionLevel="2">
-  <kirby-icon name="menu"></kirby-icon>
+  <kirby-icon name="search"></kirby-icon>
 </button>
 <button kirby-button size="lg" attentionLevel="2">
-  <kirby-icon name="menu"></kirby-icon>
+  <kirby-icon name="search"></kirby-icon>
 </button>
 
 <button kirby-button size="xs" attentionLevel="3" [showIconOnly]="true">
