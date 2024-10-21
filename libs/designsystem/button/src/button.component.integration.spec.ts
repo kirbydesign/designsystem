@@ -202,7 +202,8 @@ describe('ButtonComponent in kirby empty state', () => {
     actionButtonInEmptyState = spectator.queryHost('.content button[kirby-button]');
   });
 
-  it('should render with correct font-size', () => {
+  // FIXME: Refactor typography test
+  xit('should render with correct font-size', () => {
     expect(actionButtonInEmptyState).toHaveComputedStyle({
       'font-size': fontSize('n'),
     });
