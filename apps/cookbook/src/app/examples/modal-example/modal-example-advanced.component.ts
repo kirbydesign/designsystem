@@ -226,7 +226,10 @@ export class ModalExampleAdvancedComponent {
   snapNestedFooterToKeyboard = false;
   displayNestedFooterAsInline = false;
 
-  constructor(private modalController: ModalController, private windowRef: WindowRef) {}
+  constructor(
+    private modalController: ModalController,
+    private windowRef: WindowRef
+  ) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
     let title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';

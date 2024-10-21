@@ -55,7 +55,10 @@ export class AlertComponent implements AfterViewInit {
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtn: string;
 
-  constructor(private elementRef: ElementRef<HTMLElement>, private windowRef: WindowRef) {}
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private windowRef: WindowRef
+  ) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {

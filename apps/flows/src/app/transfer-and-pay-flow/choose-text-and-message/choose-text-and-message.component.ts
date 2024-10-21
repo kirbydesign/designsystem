@@ -11,7 +11,10 @@ export class ChooseTextAndMessageComponent {
   public text: string;
   public message: string;
 
-  constructor(private textAndDateService: TextAndDateService, private modal: Modal) {}
+  constructor(
+    private textAndDateService: TextAndDateService,
+    private modal: Modal
+  ) {}
 
   setTextAndMessage() {
     this.textAndDateService.setText(this.text);
