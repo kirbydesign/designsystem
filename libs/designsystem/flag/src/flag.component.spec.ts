@@ -115,7 +115,7 @@ describe('FlagComponent', () => {
 
   describe(`when configured with themeColor`, () => {
     const allowedThemeColors = ['success', 'warning', 'danger', 'semi-light'] as const;
-    type FlagThemeColor = typeof allowedThemeColors[number];
+    type FlagThemeColor = (typeof allowedThemeColors)[number];
     type ColorStep = [string, number];
 
     const themeColorMap = new Map<FlagThemeColor, ColorStep | 'semi-light'>([

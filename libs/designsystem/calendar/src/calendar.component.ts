@@ -217,7 +217,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return !!this.yearNavigatorOptions;
   }
 
-  constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) locale: string) {
+  constructor(
+    private calendarHelper: CalendarHelper,
+    @Inject(LOCALE_ID) locale: string
+  ) {
     this.locale = this.mapLocale(locale);
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
