@@ -65,7 +65,10 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     this.hide();
   }
 
-  constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {
     this.document = elementRef.nativeElement.ownerDocument;
   }
 

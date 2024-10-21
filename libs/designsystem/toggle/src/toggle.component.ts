@@ -30,7 +30,10 @@ import { IonToggle } from '@ionic/angular/standalone';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleComponent implements ControlValueAccessor, OnInit {
-  constructor(private cdr: ChangeDetectorRef, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private elementRef: ElementRef<HTMLElement>
+  ) {}
 
   ngOnInit(): void {
     this.inheritAriaAttributes();
