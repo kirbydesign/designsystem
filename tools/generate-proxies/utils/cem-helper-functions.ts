@@ -9,27 +9,12 @@ export function getElementMetadata(libPath: string): LitCustomElement[] {
   const customElementManifest: Package = JSON.parse(
     fs.readFileSync(path.resolve(`${libPath}/custom-elements.json`), 'utf8')
   );
-  const elementMetadata = createLitElementMetadata(customElementManifest);
+  const elementMetadata = generateElementMetadataFromManifest(customElementManifest);
   return elementMetadata;
 }
 
-export function createLitElementMetadata(customElementsManifest: Package): LitCustomElement[] {
-  const customElements = getCustomElements(customElementsManifest);
-
-  const litCustomElements = customElements.map((elm) => {
-    const element: LitCustomElement = {
-      ...elm,
-      properties: getReactiveProperties(elm),
-    };
-
-    return element;
-  });
-
-  return litCustomElements;
-}
-
-function getCustomElements(manifest: Package) {
-  const elementsWithPaths: LitCustomElement[] = [];
+function generateElementMetadataFromManifest(manifest: Package) {
+  const litCustomElements: LitCustomElement[] = [];
 
   manifest.modules.forEach((module) => {
     module.declarations?.map((declaration: any) => {
@@ -38,13 +23,13 @@ function getCustomElements(manifest: Package) {
         const path = module.path;
 
         if (element) {
-          elementsWithPaths.push({ ...element, path });
+          litCustomElements.push({ ...element, path, properties: getReactiveProperties(element) });
         }
       }
     });
   });
 
-  return elementsWithPaths;
+  return litCustomElements;
 }
 
 function getReactiveProperties(element: LitCustomElement) {
