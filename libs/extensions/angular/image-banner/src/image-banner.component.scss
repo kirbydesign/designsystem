@@ -95,11 +95,14 @@ $container-query-breakpoint: 600px;
 
 .main-content {
   display: flex;
-  min-height: utils.line-height('l') * 3; // text content height should always be minimum 3 lines
   box-sizing: border-box;
   flex-direction: column;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
   overflow: hidden;
+
+  &.has-minimum-height {
+    min-height: utils.line-height('l') * 3; // text content height should always be minimum 3 lines
+  }
 
   @include container-more-than-width {
     flex: 1;
@@ -117,9 +120,6 @@ $container-query-breakpoint: 600px;
   margin-right: utils.size('xl');
 
   p {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     margin-bottom: 0;
   }
 }
@@ -183,4 +183,10 @@ $container-query-breakpoint: 600px;
   button {
     margin: 0;
   }
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

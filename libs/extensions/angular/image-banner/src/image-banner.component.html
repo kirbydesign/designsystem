@@ -23,15 +23,15 @@
       <img class="main-content-image" [src]="imagePath" alt="" />
     </div>
 
-    <div class="main-content">
+    <div class="main-content" [class.has-minimum-height]="hasMinimumHeight">
       <div class="main-content-header">
-        <p class="kirby-text-normal-bold">
+        <p class="kirby-text-normal-bold" [class.ellipsis]="truncateTitle">
           {{ title }}
         </p>
       </div>
 
       <div class="main-content-body">
-        <div class="main-content-body-text">
+        <div class="main-content-body-text" [class.ellipsis]="truncateBodyText">
           <span class="kirby-text-small">
             {{ bodyText }}
           </span>

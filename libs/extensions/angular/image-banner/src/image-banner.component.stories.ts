@@ -23,6 +23,18 @@ const meta: Meta<ImageBannerComponent> = {
     },
   },
   argTypes: {
+    title: {
+      control: 'text',
+    },
+    bodyText: {
+      control: 'text',
+    },
+    actionButtonText: {
+      control: 'text',
+    },
+    imagePath: {
+      control: 'text',
+    },
     bannerClick: {
       control: false,
     },
@@ -31,6 +43,15 @@ const meta: Meta<ImageBannerComponent> = {
     },
     externalLink: {
       control: 'text',
+    },
+    truncateTitle: {
+      control: 'boolean',
+    },
+    truncateBodyText: {
+      control: 'boolean',
+    },
+    hasMinimumHeight: {
+      control: 'boolean',
     },
   },
 };
@@ -99,6 +120,30 @@ export const NoDismiss: Story = {
     actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
     dismissClick: undefined,
+  },
+  // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
+  render: (args) => ({
+    props: args,
+    template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
+  }),
+};
+
+/**
+ * The title and body text can be truncated with an ellipsis when they exceed the width of the banner.
+ * The banner can be set to have a minimum height to prevent it from shrinking too much.
+ */
+export const truncateText: Story = {
+  args: {
+    title:
+      'The title is very long and will be truncated with an ellipsis when it exceeds the width of the banner.',
+    bodyText:
+      'A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.',
+    actionButtonText: 'Read more',
+    imagePath: 'assets/images/leaves.jpg',
+    dismissClick: undefined,
+    truncateTitle: true,
+    truncateBodyText: true,
+    hasMinimumHeight: false,
   },
   // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
   render: (args) => ({
