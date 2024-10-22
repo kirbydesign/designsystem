@@ -209,27 +209,14 @@ ion-item-options[side='end'] {
   .list-items {
     box-shadow: none;
     border-radius: unset;
-  }
 
-  .list {
-    ion-item,
-    ion-item-sliding {
-      --padding-start: 0;
-      --padding-end: 0;
-      --padding-top: 0;
-      --padding-bottom: 0;
-      --inner-padding-start: 0;
-      --inner-padding-end: 0;
-      --inner-padding-top: 0;
-      --inner-padding-bottom: 0;
-      --background: none;
-      --background-activated: none;
-      --background-hover: none;
-      --background-focused: none;
-
-      overflow: visible;
-    }
+    --kirby-item-background: transparent;
+    --kirby-list-item-border-color: #{utils.get-color('medium')};
   }
+}
+
+:host-context(kirby-card) {
+  --kirby-list-item-border-color: #{utils.get-color('background-color')};
 }
 
 :host-context(.item-spacing) {

@@ -1,0 +1,12 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+h2:not(:first-child) {
+  margin-top: utils.size('l');
+}
+
+cookbook-example-viewer > *:first-child {
+  display: block;
+  margin-bottom: utils.size('s');
+  max-width: 550px;
+}
+
