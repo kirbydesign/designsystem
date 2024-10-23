@@ -4,6 +4,7 @@ import { AccessibilityGuidelinesComponent } from './accessibility/accessibility-
 import { ComponentOverviewComponent } from './component-overview/component-overview.component';
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
+import { ExtensionsLandingPageComponent } from './extensions/extensions-landing-page.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
       {
         path: 'component-overview',
         component: ComponentOverviewComponent,
+      },
+      {
+        path: 'extensions',
+        component: ExtensionsLandingPageComponent,
       },
     ],
   },
