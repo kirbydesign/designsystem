@@ -47,48 +47,56 @@ code {
   &-header-1 {
     &::after {
       content: '(#{utils.font-size('xl')})';
+      line-height: #{'calc(38 / 12)'}; // calculated from old px values
     }
   }
 
   &-header-2 {
     &::after {
       content: '(#{utils.font-size('l')})';
+      line-height: #{'calc(28 / 12)'}; // calculated from old px values
     }
   }
 
   &-header-3 {
     &::after {
       content: '(#{utils.font-size('m')})';
+      line-height: #{'calc(24 / 12)'}; // calculated from old px values
     }
   }
 
   &-header-4 {
     &::after {
       content: '(#{utils.font-size('n')})';
+      line-height: #{'calc(24 / 12)'}; // calculated from old px values
     }
   }
 
   &-body {
     &::after {
       content: '(#{utils.font-size('n')})';
+      line-height: #{'calc(24 / 12)'}; // calculated from old px values
     }    
   }
 
   &-body-small {
     &::after {
       content: '(#{utils.font-size('s')})';
+      line-height: #{'calc(20 / 12)'}; // calculated from old px values
     }    
   }
 
   &-body-xsmall {
     &::after {
       content: '(#{utils.font-size('xs')})';
+      line-height: #{'calc(16 / 12)'}; // calculated from old px values
     }    
   }
 
   &-body-xxsmall {
     &::after {
       content: '(#{utils.font-size('xxs')})';
+      line-height: #{'calc(11 / 12)'}; // calculated from old px values
     }    
   }
 }

@@ -5,8 +5,9 @@
   font-size: utils.font-size('xs');
   font-weight: utils.font-weight('normal');
   font-stretch: normal;
-  line-height: utils.line-height('xs');
-  min-height: utils.line-height('xs');
+  line-height: #{'calc(16 / 12)'}; // calculated from old px values
+  // min-height: utils.line-height('xs');
+  min-height: 1rem;
   letter-spacing: normal;
   color: utils.get-text-color('black');
 }

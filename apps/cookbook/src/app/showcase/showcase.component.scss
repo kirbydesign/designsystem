@@ -8,6 +8,7 @@ $icon-size: utils.size('s');
   h1 {
     text-transform: uppercase;
     font-size: utils.font-size('xxl');
+    line-height: #{'calc(38 / 40)'}; // calculated from old px values
     color: utils.get-color('dark');
     font-weight: utils.font-weight('light');
     position: relative;

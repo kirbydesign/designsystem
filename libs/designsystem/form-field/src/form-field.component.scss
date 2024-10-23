@@ -38,7 +38,7 @@ label {
   display: block;
   font-size: utils.font-size('s');
   font-weight: utils.font-weight('light');
-  line-height: utils.line-height('s');
+  line-height: #{'calc(20 / 14)'}; // calculated from old px values
   margin-bottom: utils.size('xxxs');
   padding: 0 utils.size('s');
 }

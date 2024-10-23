@@ -7,6 +7,7 @@
 
   > h2 {
     font-size: utils.font-size('xs');
+    line-height: #{'calc(28 / 12)'}; // calculated from old px values
     color: utils.get-text-color('semi-dark');
     text-transform: uppercase;
     margin-top: utils.size('m');
