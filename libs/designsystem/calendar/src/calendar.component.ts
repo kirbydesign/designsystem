@@ -72,7 +72,6 @@ enum TimeUnit {
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit, OnChanges {
-  @ViewChild('calendarContainer', { static: false }) calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
   @Output() dateSelect = new EventEmitter<Date>();
   @Output() yearSelect = new EventEmitter<number>();
@@ -138,23 +137,6 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (this.hasDateChanged(value, this._selectedDate)) {
       this.onSelectedDateChange(value);
       this._selectedDate = value;
-    }
-  }
-
-  get focussedDate(): Date {
-    return this._focussedDate;
-  }
-
-  set focussedDate(valueLocalOrUTC: Date | null) {
-    const value = this.normalizeDate(valueLocalOrUTC);
-
-    if (valueLocalOrUTC) {
-      this.setActiveMonth(value);
-    }
-
-    if (this.hasDateChanged(value, this._focussedDate)) {
-      this.onFocussedDateChange(value);
-      this._focussedDate = value;
     }
   }
 
@@ -234,7 +216,10 @@ export class CalendarComponent implements OnInit, OnChanges {
     return !!this.yearNavigatorOptions;
   }
 
-  constructor(@Inject(LOCALE_ID) locale: string) {
+  constructor(
+    @Inject(LOCALE_ID) locale: string,
+    private elementRef: ElementRef
+  ) {
     this.locale = this.mapLocale(locale);
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
@@ -352,13 +337,17 @@ export class CalendarComponent implements OnInit, OnChanges {
     const totalNumberOfDays = 42; // Always show 42 days (6 weeks) in calendar
     const daysArray = Array.from(Array(totalNumberOfDays).keys());
 
+    if (!this._focussedDate) {
+      this._focussedDate = today;
+    }
+
     const days: CalendarCell[] = daysArray.map((number) => {
       const cellDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
       const day = this.getCalendarDay(cellDate, today, monthStart);
 
       const isSelectable = this.isSelectable(day, cellDate);
       const isSelected = isSameDay(this.selectedDate, cellDate);
-      const isFocussed = isSameDay(this.focussedDate, cellDate);
+      const isFocussed = isSameDay(this._focussedDate, cellDate);
       const cell: CalendarCell = {
         date: cellDate.getDate(),
         monthIndex: cellDate.getMonth(),
@@ -371,6 +360,9 @@ export class CalendarComponent implements OnInit, OnChanges {
       };
       if (isSelected) {
         this.selectedDay = cell;
+      }
+      if (isFocussed) {
+        this.focussedDay = cell;
       }
       return cell;
     });
@@ -491,6 +483,10 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.setActiveMonth(newDate);
       this.onFocussedDateChange(newDate);
       this._focussedDate = newDate;
+
+      setTimeout(() => {
+        this.elementRef.nativeElement.querySelector('.focussed').focus();
+      }, 0);
     }
   }
 
@@ -576,38 +572,36 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     switch (key) {
       case 'ArrowUp':
-        newDate = add(this.focussedDate, { days: -7 });
+        newDate = add(this._focussedDate, { days: -7 });
         break;
       case 'ArrowDown':
-        newDate = add(this.focussedDate, { days: 7 });
+        newDate = add(this._focussedDate, { days: 7 });
         break;
       case 'ArrowRight':
-        newDate = add(this.focussedDate, { days: 1 });
+        newDate = add(this._focussedDate, { days: 1 });
         break;
       case 'ArrowLeft':
-        newDate = add(this.focussedDate, { days: -1 });
+        newDate = add(this._focussedDate, { days: -1 });
         break;
       case 'Home':
-        newDate = startOfWeek(this.focussedDate, { locale: this.locale });
+        newDate = startOfWeek(this._focussedDate, { locale: this.locale });
         break;
       case 'End':
-        newDate = endOfWeek(this.focussedDate, { locale: this.locale });
+        newDate = endOfWeek(this._focussedDate, { locale: this.locale });
         break;
       case 'PageUp':
         newDate = shiftKey
-          ? add(this.focussedDate, { years: -1 })
-          : add(this.focussedDate, { months: -1 });
+          ? add(this._focussedDate, { years: -1 })
+          : add(this._focussedDate, { months: -1 });
         break;
       case 'PageDown':
         newDate = shiftKey
-          ? add(this.focussedDate, { years: 1 })
-          : add(this.focussedDate, { months: 1 });
+          ? add(this._focussedDate, { years: 1 })
+          : add(this._focussedDate, { months: 1 });
         break;
       default:
         return;
     }
-
-    console.log('newDate', newDate);
 
     event.preventDefault();
     this._onDateFocussed({

@@ -115,7 +115,7 @@ td {
   background-color: utils.get-color('black');
 }
 
-.day.focussed {
-  color: utils.get-color('medium-contrast');
-  background-color: utils.get-color('medium');
+.day.focussed:not(.selected) {
+  color: utils.get-color('light-contrast');
+  background-color: utils.get-color('light');
 }
