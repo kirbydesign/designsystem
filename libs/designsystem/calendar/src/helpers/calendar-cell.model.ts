@@ -5,5 +5,6 @@ export interface CalendarCell {
   isCurrentMonth: boolean;
   isSelectable: boolean;
   isSelected: boolean;
+  isFocussed: boolean;
   cssClasses: string;
 }
