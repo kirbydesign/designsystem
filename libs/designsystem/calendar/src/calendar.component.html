@@ -8,10 +8,10 @@
       [noDecoration]="true"
       class="no-margin"
     >
-      <kirby-icon name="arrow-back"></kirby-icon>
+      <kirby-icon name="arrow-back" aria-label="Previous month"></kirby-icon>
     </button>
 
-    <div class="month-and-year" id="month-and-year">
+    <div class="month-and-year" id="month-and-year" aria-live="polite" aria-atomic="true">
       <span class="month">{{ activeMonthName }}</span>
       <span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
     </div>
@@ -24,7 +24,7 @@
       [noDecoration]="true"
       class="no-margin"
     >
-      <kirby-icon name="arrow-more"></kirby-icon>
+      <kirby-icon name="arrow-more" aria-label="Next month"></kirby-icon>
     </button>
   </div>
   <kirby-dropdown
@@ -40,7 +40,10 @@
 <table aria-labelledby="month-and-year">
   <thead>
     <tr>
-      <th *ngFor="let weekDay of _weekDays">{{ weekDay }}</th>
+      <th *ngFor="let weekDay of _weekDays" scope="col">
+        <span aria-hidden="true">{{ weekDay.short }}</span>
+        <!-- <span class="visually-hidden">{{ weekDay.full }}</span> -->
+      </th>
     </tr>
   </thead>
 
@@ -51,6 +54,7 @@
           kirby-button
           (click)="_onDateSelected(day)"
           [tabIndex]="day.isFocussed ? 0 : -1"
+          [attr.aria-label]="day.ariaLabel"
           class="{{ day.cssClasses }}"
           [class.selected]="day.isSelected"
           [class.focussed]="day.isFocussed"

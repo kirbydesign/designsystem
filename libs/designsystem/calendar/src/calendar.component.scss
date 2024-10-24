@@ -115,7 +115,12 @@ td {
   background-color: utils.get-color('black');
 }
 
-.day.focussed:not(.selected) {
+.day:focus-visible:not(.selected, .today) {
   color: utils.get-color('light-contrast');
   background-color: utils.get-color('light');
+}
+
+.visually-hidden {
+  position: absolute;
+  scale: 0;
 }

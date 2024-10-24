@@ -11,7 +11,6 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild,
 } from '@angular/core';
 import {
   add,
@@ -105,7 +104,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
 
   _month: CalendarCell[][];
-  _weekDays: string[];
+  _weekDays: { short: string; full: string }[];
   private selectedDay: CalendarCell;
   private focussedDay: CalendarCell;
   // NOTE: Internally, all Dates
@@ -292,14 +291,17 @@ export class CalendarComponent implements OnInit, OnChanges {
     return startOfDay(dateLocalOrUTC);
   }
 
-  private getWeekDays(): string[] {
+  private getWeekDays(): { short: string; full: string }[] {
     const now = new Date();
     const week = eachDayOfInterval({
       start: startOfWeek(now, { locale: this.locale }),
       end: endOfWeek(now, { locale: this.locale }),
     });
 
-    return week.map((date) => this.getFirstLetterOfWeekDayCapitalized(date));
+    return week.map((date) => ({
+      short: this.getFirstLetterOfWeekDayCapitalized(date),
+      full: this.formatWithLocale(date, 'EEEE'),
+    }));
   }
 
   private getFirstLetterOfWeekDayCapitalized(date: Date) {
@@ -356,6 +358,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         isSelectable,
         isFocussed,
         isSelected,
+        ariaLabel: this.formatWithLocale(cellDate, 'd MMMM'), // OR this.formatWithLocale(cellDate, 'EEEE, d MMMM'), and another solution for table header?
         cssClasses: this.getCssClasses(day, isSelectable, isSelected, isFocussed),
       };
       if (isSelected) {
@@ -470,11 +473,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  _onDateFocussed(newDay: CalendarCell) {
-    if (!newDay.isSelectable) return;
-
-    let newDate = new Date(newDay.year, newDay.monthIndex, newDay.date);
-
+  _focusDate(newDate: Date) {
     if (this.timezone === 'UTC') {
       newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }
@@ -486,7 +485,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
       setTimeout(() => {
         this.elementRef.nativeElement.querySelector('.focussed').focus();
-      }, 0);
+      });
     }
   }
 
@@ -506,6 +505,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   private changeActiveView(index: number, unit: TimeUnit) {
     if (index === 0) return;
     this.activeMonth = add(this.activeMonth, { [unit]: index });
+    this._focussedDate = add(this._focussedDate, { [unit]: index });
 
     this.refreshActiveMonth();
   }
@@ -604,15 +604,6 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
 
     event.preventDefault();
-    this._onDateFocussed({
-      date: newDate.getDate(),
-      monthIndex: newDate.getMonth(),
-      year: newDate.getFullYear(),
-      isCurrentMonth: isSameMonth(newDate, this.activeMonth),
-      isSelectable: true,
-      isSelected: true,
-      isFocussed: true,
-      cssClasses: '',
-    });
+    this._focusDate(newDate);
   }
 }
