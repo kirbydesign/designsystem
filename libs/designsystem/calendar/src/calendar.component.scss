@@ -115,7 +115,7 @@ td {
   background-color: utils.get-color('black');
 }
 
-.day:focus-visible:not(.selected, .today) {
+.day:focus:not(.selected, .today) {
   color: utils.get-color('light-contrast');
   background-color: utils.get-color('light');
 }

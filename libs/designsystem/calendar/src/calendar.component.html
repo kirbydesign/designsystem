@@ -52,13 +52,14 @@
       <td *ngFor="let day of week">
         <button
           kirby-button
-          (click)="_onDateSelected(day)"
-          [tabIndex]="day.isFocussed ? 0 : -1"
-          [attr.aria-label]="day.ariaLabel"
           class="{{ day.cssClasses }}"
           [class.selected]="day.isSelected"
           [class.focussed]="day.isFocussed"
           [noDecoration]="true"
+          [tabIndex]="day.isFocussed ? 0 : -1"
+          [attr.aria-label]="day.ariaLabel"
+          [attr.aria-disabled]="day.isSelectable ? null : 'true'"
+          (click)="_onDateSelected(day)"
         >
           {{ day.date }}
         </button>

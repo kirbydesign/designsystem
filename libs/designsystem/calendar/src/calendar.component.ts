@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -217,7 +218,8 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   constructor(
     @Inject(LOCALE_ID) locale: string,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private cdr: ChangeDetectorRef
   ) {
     this.locale = this.mapLocale(locale);
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -483,9 +485,8 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.onFocussedDateChange(newDate);
       this._focussedDate = newDate;
 
-      setTimeout(() => {
-        this.elementRef.nativeElement.querySelector('.focussed').focus();
-      });
+      this.cdr.detectChanges(); //sync focussed class to template before setting focus
+      this.elementRef.nativeElement.querySelector('.focussed').focus();
     }
   }
 
