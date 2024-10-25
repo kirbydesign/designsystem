@@ -41,8 +41,8 @@
   <thead>
     <tr>
       <th *ngFor="let weekDay of _weekDays" scope="col">
-        <span aria-hidden="true">{{ weekDay.short }}</span>
-        <!-- <span class="visually-hidden">{{ weekDay.full }}</span> -->
+        <span aria-hidden="true">{{ weekDay.firstLetterCapitalized }}</span>
+        <span class="visually-hidden">{{ weekDay.fullName }}</span>
       </th>
     </tr>
   </thead>

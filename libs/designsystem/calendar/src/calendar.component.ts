@@ -53,6 +53,11 @@ interface CalendarDay {
   isDisabled: boolean;
 }
 
+interface WeekDay {
+  firstLetterCapitalized: string;
+  fullName: string;
+}
+
 enum TimeUnit {
   years = 'years',
   months = 'months',
@@ -105,7 +110,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
 
   _month: CalendarCell[][];
-  _weekDays: { short: string; full: string }[];
+  _weekDays: WeekDay[];
   private selectedDay: CalendarCell;
   private focussedDay: CalendarCell;
   // NOTE: Internally, all Dates
@@ -293,7 +298,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     return startOfDay(dateLocalOrUTC);
   }
 
-  private getWeekDays(): { short: string; full: string }[] {
+  private getWeekDays(): WeekDay[] {
     const now = new Date();
     const week = eachDayOfInterval({
       start: startOfWeek(now, { locale: this.locale }),
@@ -301,13 +306,9 @@ export class CalendarComponent implements OnInit, OnChanges {
     });
 
     return week.map((date) => ({
-      short: this.getFirstLetterOfWeekDayCapitalized(date),
-      full: this.formatWithLocale(date, 'EEEE'),
+      firstLetterCapitalized: this.formatWithLocale(date, 'EEEEE'), // EEEEE returns the first letter of the day capitalized
+      fullName: this.formatWithLocale(date, 'EEEE'), // EEEE returns the full name of the day
     }));
-  }
-
-  private getFirstLetterOfWeekDayCapitalized(date: Date) {
-    return this.formatWithLocale(date, 'EEEEE');
   }
 
   private hasDateChanged(newDate: Date, previousDate: Date): boolean {
@@ -360,7 +361,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         isSelectable,
         isFocussed,
         isSelected,
-        ariaLabel: this.formatWithLocale(cellDate, 'd MMMM'), // OR this.formatWithLocale(cellDate, 'EEEE, d MMMM'), and another solution for table header?
+        ariaLabel: this.formatWithLocale(cellDate, 'd MMMM'),
         cssClasses: this.getCssClasses(day, isSelectable, isSelected, isFocussed),
       };
       if (isSelected) {
