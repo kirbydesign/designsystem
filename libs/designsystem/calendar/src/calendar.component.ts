@@ -569,7 +569,11 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
-    const { key, shiftKey } = event;
+    const { key, shiftKey, target } = event;
+
+    const eventTargetInsideTable = target instanceof HTMLElement && target.closest('table');
+    if (!eventTargetInsideTable) return;
+
     let newDate: Date;
 
     switch (key) {
