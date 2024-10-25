@@ -1,11 +1,15 @@
 <div class="example">
-  <h2>List with no background shape:</h2>
+  <h2>List with no background shape</h2>
   <p>
     Setting
     <code>shape="none"</code>
-    on a Kirby List removes the background and shadow from the list and the list item
-    containers to provide flexibility when combined with other layout containers. <br />
-    Dividers will still be shown between list items, these can be removed by setting <code>[showDividers]="false"</code>.
+    on a Kirby List removes the background and shadow from the list and the list item containers to
+    provide flexibility when combined with other layout containers.
+  </p>
+  <p>
+    Dividers will still be shown between list items, these can be removed by setting
+    <code>[showDivider]="false"</code>
+    .
   </p>
 
   <h2>Simple list with no shape</h2>
@@ -15,9 +19,10 @@
     ></cookbook-simple-list-no-shape-example>
   </cookbook-example-viewer>
 
-  <h2>Detailed card with list no shape</h2>
+  <h2>List wrapped in card</h2>
   <p>
-    The list with no shape can be used when the list is inside another layout component, that comes with it's own shape or background, e.g. within a card.
+    The list with no shape can be used when the list is inside another layout component, that comes
+    with it's own shape or background, e.g. within a card.
   </p>
   <cookbook-example-viewer [html]="detailedCardWithListNoShapeExample.template">
     <cookbook-detailed-card-with-list-no-shape-example
@@ -25,12 +30,14 @@
     ></cookbook-detailed-card-with-list-no-shape-example>
   </cookbook-example-viewer>
 
-  <h2>Multi card list (having no shape)</h2>
+  <h2>List item wrapped in card</h2>
   <p>
-    When using the list with a custom item template where each item comes with it's own shape or background, e.g. using a card for each item, set both 
+    When using the list with a custom item template where each item comes with it's own shape or
+    background, e.g. using a card for each item, set both
     <code>shape="none"</code>
     and
-    <code>[showDivider]="false"</code> to omit any background, shadow and dividers from the list.
+    <code>[showDivider]="false"</code>
+    to omit any background, shadow and dividers from the list.
   </p>
   <cookbook-example-viewer [html]="multiCardListNoShapeExample.template">
     <cookbook-multi-card-list-no-shape-example

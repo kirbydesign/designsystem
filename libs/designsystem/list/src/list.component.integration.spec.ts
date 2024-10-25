@@ -135,34 +135,33 @@ describe('ListComponent', () => {
         spectator.setInput('shape', 'none');
         spectator.detectChanges();
       });
+
       it('should apply transparent background to kirby-list-items', () => {
-        const ionItem = spectator.queryAll('ion-item');
-        expect(ionItem.length).toBeGreaterThan(0);
-        ionItem.forEach((item) => {
+        const ionItemList = spectator.queryAll('ion-item');
+        expect(ionItemList.length).toBeGreaterThan(0);
+        ionItemList.forEach((item) => {
           const itemNative = item.shadowRoot.querySelector('.item-native');
           expect(itemNative).toHaveComputedStyle({ 'background-color': 'rgba(0, 0, 0, 0)' });
         });
       });
-      it('should apply "medium" border color to all but last item when not in card', () => {
-        const ionItemSlidingList = spectator.queryAll('ion-item-sliding');
-        const lastIonItemSliding = ionItemSlidingList[ionItemSlidingList.length - 1];
+
+      it('should apply "medium" border color to all but last item', () => {
+        const ionItemSlidingList = spectator.queryAll('ion-item-sliding:not(.last)'); // last item doesn't have border
 
         expect(ionItemSlidingList.length).toBeGreaterThan(0);
         ionItemSlidingList.forEach((item) => {
-          if (item !== lastIonItemSliding) {
-            expect(item).toHaveComputedStyle({ 'border-bottom-color': getColor('medium') });
-          }
+          expect(item).toHaveComputedStyle({ 'border-bottom-color': getColor('medium') });
         });
       });
     });
   });
 
-  describe('with list inside card and shape="none"', () => {
+  describe('with shape="none" inside card', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
         <kirby-card>
-          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)" shape="none">
+          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" shape="none">
             <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
           </kirby-list>
         </kirby-card>
@@ -174,15 +173,12 @@ describe('ListComponent', () => {
     });
 
     it('should apply "background" border color to all but last item when inside card and list has shape "none"', () => {
-      const ionItemSlidingList = spectator.queryAll('ion-item-sliding');
+      const ionItemSlidingList = spectator.queryAll('ion-item-sliding:not(.last)'); // last item doesn't have border
       expect(ionItemSlidingList.length).toBeGreaterThan(0);
-      const lastIonItemSliding = ionItemSlidingList[ionItemSlidingList.length - 1];
       ionItemSlidingList.forEach((item) => {
-        if (item !== lastIonItemSliding) {
-          expect(item).toHaveComputedStyle({
-            'border-bottom-color': getColor('background-color'),
-          });
-        }
+        expect(item).toHaveComputedStyle({
+          'border-bottom-color': getColor('background-color'),
+        });
       });
     });
   });
