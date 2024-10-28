@@ -1,12 +1,11 @@
 # Kirby Extensions Angular
 The Kirby Extensions library is a collection of design guidelines and components that build on top of the core Kirby Design library.
-The components follow the Kirby Design guidelines, but they differ from the core components by being more product-specific. 
-This means that components in this library are shared across one or more products, and might not be universally useful to the whole ecosystem.
-Though some components can also become core-candidates and graduate once they are battle-tested and initial experimentation is over.
+The components follow the Kirby Design guidelines, but they differ from the core components by being built by the community, often with specific product-needs or requirements in mind. 
+This means that components in this library might not be universally useful to everyone, though some components can also become core-candidates and graduate once they are battle-tested and initial experimentation is over.
 
 Extensions allow for quicker iteration and less focus on generalising behavior, while the test and especially documentation burden is also significantly lower.
 
-Components in this library are developed and maintained by product teams, with support from [Team Kirby](https://github.com/kirbydesign/designsystem/blob/develop/.github/SUPPORT.md#team-kirby).
+Components in this library are developed and maintained by the community, with support from [Team Kirby](https://github.com/kirbydesign/designsystem/blob/develop/.github/SUPPORT.md#team-kirby).
 
 ## Using Kirby Extensions
 

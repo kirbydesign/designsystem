@@ -8,10 +8,11 @@ interface HeaderLink {
 }
 
 export const navigationItems: HeaderLink[] = [
-  { text: 'Components', route: '/home/component-overview' },
   { text: 'Introduction', route: '/home/intro' },
+  { text: 'Components', route: '/home/component-overview' },
   { text: 'Guides', route: '/home/guides' },
   { text: 'Accessibility', route: '/home/accessibility-in-kirby' },
+  { text: 'Extensions', route: '/home/extensions' },
   {
     text: 'Changelog',
     externalUrl: 'https://github.com/kirbydesign/designsystem/releases',
