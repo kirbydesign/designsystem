@@ -37,7 +37,7 @@
   ></kirby-dropdown>
 </div>
 
-<table aria-labelledby="month-and-year">
+<table aria-labelledby="month-and-year" role="grid">
   <thead>
     <tr>
       <th *ngFor="let weekDay of _weekDays" scope="col">
@@ -58,7 +58,8 @@
           [noDecoration]="true"
           [tabIndex]="day.isFocussed ? 0 : -1"
           [attr.aria-label]="day.ariaLabel"
-          [attr.aria-disabled]="day.isSelectable ? null : 'true'"
+          [attr.aria-disabled]="day.isSelectable ? null : true"
+          [attr.aria-selected]="day.isSelected ? true : null"
           (click)="_onDateSelected(day)"
         >
           {{ day.date }}
