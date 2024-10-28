@@ -6,6 +6,7 @@ export interface CalendarCell {
   isSelectable: boolean;
   isSelected: boolean;
   isFocussed: boolean;
+  isDisabled: boolean;
   ariaLabel: string;
   cssClasses: string;
 }
