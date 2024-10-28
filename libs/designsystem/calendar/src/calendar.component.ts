@@ -39,6 +39,7 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { CalendarCell } from './helpers/calendar-cell.model';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
@@ -109,6 +110,7 @@ export class CalendarComponent implements OnInit, OnChanges {
    */
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
 
+  _tableMonthId = UniqueIdGenerator.scopedTo('kirby-calendar-month').next();
   _month: CalendarCell[][];
   _weekDays: WeekDay[];
   private selectedDay: CalendarCell;
@@ -362,7 +364,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         isFocussed,
         isSelected,
         ariaLabel: this.formatWithLocale(cellDate, 'd MMMM'),
-        cssClasses: this.getCssClasses(day, isSelectable, isSelected, isFocussed),
+        cssClasses: this.getCssClasses(day, isSelectable, isSelected),
       };
       if (isSelected) {
         this.selectedDay = cell;
@@ -398,12 +400,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     );
   }
 
-  private getCssClasses(
-    day: CalendarDay,
-    isSelectable: boolean,
-    isSelected: boolean,
-    isFocussed: boolean
-  ) {
+  private getCssClasses(day: CalendarDay, isSelectable: boolean, isSelected: boolean) {
     const cssClasses = {
       'current-month': day.isCurrentMonth,
       weekend: day.isWeekend,
@@ -412,7 +409,6 @@ export class CalendarComponent implements OnInit, OnChanges {
       selected: isSelected,
       past: day.isPast,
       disabled: day.isDisabled,
-      focussed: isFocussed,
     };
     let cssClassString = 'day';
     for (const key in cssClasses) {

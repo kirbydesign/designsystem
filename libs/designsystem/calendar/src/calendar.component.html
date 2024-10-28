@@ -11,7 +11,7 @@
       <kirby-icon name="arrow-back" aria-label="Previous month"></kirby-icon>
     </button>
 
-    <div class="month-and-year" id="month-and-year" aria-live="polite" aria-atomic="true">
+    <div class="month-and-year" [id]="_tableMonthId" aria-live="polite" aria-atomic="true">
       <span class="month">{{ activeMonthName }}</span>
       <span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
     </div>
@@ -37,7 +37,7 @@
   ></kirby-dropdown>
 </div>
 
-<table aria-labelledby="month-and-year" role="grid">
+<table [attr.aria-labelledby]="_tableMonthId" role="grid">
   <thead>
     <tr>
       <th *ngFor="let weekDay of _weekDays" scope="col">
@@ -52,6 +52,7 @@
       <td *ngFor="let day of week">
         <button
           kirby-button
+          (click)="_onDateSelected(day)"
           class="{{ day.cssClasses }}"
           [class.selected]="day.isSelected"
           [class.focussed]="day.isFocussed"
@@ -59,8 +60,7 @@
           [tabIndex]="day.isFocussed ? 0 : -1"
           [attr.aria-label]="day.ariaLabel"
           [attr.aria-disabled]="day.isSelectable ? null : true"
-          [attr.aria-selected]="day.isSelected ? true : null"
-          (click)="_onDateSelected(day)"
+          [attr.aria-pressed]="day.isSelected ? true : false"
         >
           {{ day.date }}
         </button>
