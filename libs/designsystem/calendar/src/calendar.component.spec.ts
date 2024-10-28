@@ -50,12 +50,8 @@ describe('CalendarComponent', () => {
     });
 
     it('should render days from Monday to Sunday', () => {
-      expect(
-        spectator
-          .queryAll('th')
-          .map((_) => _.textContent)
-          .join(' ')
-      ).toEqual('M T W T F S S');
+      const headerTexts = trimmedTexts('th :not(.visually-hidden)');
+      expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
     });
   });
 
@@ -67,7 +63,7 @@ describe('CalendarComponent', () => {
     it('should initially render the month of selectedDate if specified', () => {
       spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
-      const headerTexts = trimmedTexts('th');
+      const headerTexts = trimmedTexts('th :not(.visually-hidden)');
       const dayTexts = trimmedTexts('.day.current-month');
       verifyMonthAndYear('August 1997');
       expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
@@ -483,12 +479,8 @@ describe('CalendarComponent', () => {
 
         spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
 
-        expect(
-          spectator
-            .queryAll('th')
-            .map((_) => _.textContent)
-            .join(' ')
-        ).toEqual('M T W T F S S');
+        const headerTexts = trimmedTexts('th :not(.visually-hidden)');
+        expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
         expect(spectator.component.activeMonthName).toBe('July');
       });
 
@@ -497,12 +489,8 @@ describe('CalendarComponent', () => {
 
         spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
 
-        expect(
-          spectator
-            .queryAll('th')
-            .map((_) => _.textContent)
-            .join(' ')
-        ).toEqual('M T O T F L S');
+        const headerTexts = trimmedTexts('th :not(.visually-hidden)');
+        expect(headerTexts).toEqual(['M', 'T', 'O', 'T', 'F', 'L', 'S']);
         expect(spectator.component.activeMonthName).toBe('Juli');
       });
     });
