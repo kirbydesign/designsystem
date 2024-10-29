@@ -61,7 +61,7 @@
           [attr.aria-label]="day.ariaLabel"
           [attr.aria-disabled]="day.isSelectable ? null : true"
           [attr.aria-pressed]="day.isSelected ? true : false"
-          [disabled]="day.isDisabled ? true : null"
+          [disabled]="day.isFocusable ? null : true"
         >
           {{ day.date }}
         </button>

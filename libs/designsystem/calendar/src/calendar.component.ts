@@ -352,6 +352,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       const day = this.getCalendarDay(cellDate, this.todayDate, monthStart);
 
       const isSelectable = this.isSelectable(day, cellDate);
+      const isFocusable = this.isFocussable(day, cellDate);
       const isSelected = isSameDay(this.selectedDate, cellDate);
       const isFocussed = isSameDay(this._focussedDate, cellDate);
       const cell: CalendarCell = {
@@ -362,11 +363,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         isSelectable,
         isFocussed,
         isSelected,
-        isDisabled:
-          (this.disablePastDates && day.isPast) ||
-          (this.disableFutureDates && day.isFuture) ||
-          (this.minDate && isBefore(cellDate, this.minDate)) ||
-          (this.maxDate && isAfter(cellDate, this.maxDate)),
+        isFocusable,
         ariaLabel: this.formatWithLocale(cellDate, 'd MMMM'),
         cssClasses: this.getCssClasses(day, isSelectable, isSelected),
       };
@@ -401,6 +398,15 @@ export class CalendarComponent implements OnInit, OnChanges {
         !(this.disableFutureDates && day.isFuture) &&
         !(this.minDate && isBefore(date, this.minDate)) &&
         !(this.maxDate && isAfter(date, this.maxDate)))
+    );
+  }
+
+  private isFocussable(day: CalendarDay, date: Date) {
+    return (
+      !(this.disablePastDates && day.isPast) &&
+      !(this.disableFutureDates && day.isFuture) &&
+      !(this.minDate && isBefore(date, this.minDate)) &&
+      !(this.maxDate && isAfter(date, this.maxDate))
     );
   }
 
@@ -465,7 +471,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   private setFocussedDay(newDate: Date): boolean {
     const newDay = this.getCell(newDate);
-    if (newDay && !newDay.isDisabled) {
+    if (newDay && newDay.isFocusable) {
       if (this.focussedDay) {
         this.focussedDay.isFocussed = false;
       }
