@@ -640,6 +640,140 @@ describe('CalendarComponent', () => {
     });
   });
 
+  describe('focussed date', () => {
+    let tableElement;
+
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      tableElement = spectator.query('table');
+    });
+
+    it('should initially set focussed date to today when no selectedDate is set', () => {
+      const today = startOfDay(new Date());
+      expect(spectator.component['_focussedDate']).toEqual(today);
+    });
+
+    it('should set focussed date to equal selectedDate when selectedDate is set', () => {
+      const selectedDate = localMidnightDate('1997-08-29');
+      spectator.setInput('selectedDate', selectedDate);
+      expect(spectator.component['_focussedDate']).toEqual(selectedDate);
+    });
+
+    it('should set focussed date to previously selectedDate when selectedDate is set to null (deselected)', () => {
+      const selectedDate = localMidnightDate('1997-08-29');
+      spectator.setInput('selectedDate', selectedDate);
+      expect(spectator.component['_focussedDate']).toEqual(selectedDate);
+
+      spectator.setInput('selectedDate', null);
+      expect(spectator.component['_focussedDate']).toEqual(selectedDate);
+    });
+
+    it('should set focussed date to the last day of the month when month is changed to one with fewer days', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-31')); // August has 31 days
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'PageDown', tableElement); // Navigate to September
+
+      expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-30')); // September has 30 days
+    });
+
+    it('should change month when focussed date is changed to a day in another month', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-31'));
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowRight', tableElement); // Navigate to next day
+
+      expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-01'));
+      expect(spectator.component.activeMonthName).toEqual('September');
+      expect(spectator.component.activeYear).toEqual('1997');
+    });
+
+    it('should change year when focussed date is changed to a day in another year', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-12-31'));
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowRight', tableElement); // Navigate to next day
+
+      expect(spectator.component.activeMonthName).toEqual('January');
+      expect(spectator.component.activeYear).toEqual('1998');
+    });
+
+    // TODO: Test that focussed day is not changed when focussed date is changed to a day that is disabled
+
+    describe('when navigating with keyboard', () => {
+      it('should focus same weekday in previous week when ArrowUp is pressed', () => {
+        console.log('Spectator query for table', spectator.query('table'));
+
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-22'));
+      });
+
+      it('should focus same weekday in next week when ArrowDown is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-05'));
+      });
+
+      it('should focus next day when ArrowRight is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowRight', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-30'));
+      });
+
+      it('should focus previous day when ArrowLeft is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowLeft', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-28'));
+      });
+
+      it('should go to the start of the week when Home is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Home', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-25'));
+      });
+
+      it('should go to the end of the week when End is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'End', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-31'));
+      });
+
+      it('should navigate to the previous month when PageUp is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'PageUp', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-07-29'));
+      });
+
+      it('should navigate to the previous year when Shift + PageUp is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'shift.PageUp', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1996-08-29'));
+      });
+
+      it('should navigate to the next month when PageDown is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'PageDown', tableElement);
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-29'));
+      });
+
+      it('should navigate to the next year when Shift + PageDown is pressed', () => {
+        spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        spectator.dispatchKeyboardEvent(
+          spectator.element,
+          'keydown',
+          'shift.PageDown',
+          tableElement
+        );
+
+        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1998-08-29'));
+      });
+    });
+  });
+
   // constants and utility functions
 
   const SEL_NAV_BACK = '.header button:first-of-type';
