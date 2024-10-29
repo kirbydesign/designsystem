@@ -121,12 +121,12 @@ export class CalendarComponent implements OnInit, OnChanges {
   // setting.
   private activeMonth: Date;
   private _selectedDate: Date;
-  private _focussedDate: Date;
   private _disabledDates: Date[] = [];
   private _enabledDates: Date[] = [];
   private _todayDate: Date;
   private _minDate: Date;
   private _maxDate: Date;
+  private focussedDate: Date;
   private locale: Locale;
   private timeZoneName: string;
   private includedLocales = { da, enGB, enUS };
@@ -251,7 +251,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.todayDate = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date()); // TODO: Necessary?
-    this._focussedDate = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+    this.focussedDate = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
     this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
@@ -354,7 +354,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       const isSelectable = this.isSelectable(day, cellDate);
       const isFocusable = this.isFocusable(cellDate, this.todayDate);
       const isSelected = isSameDay(this.selectedDate, cellDate);
-      const isFocussed = isSameDay(this._focussedDate, cellDate);
+      const isFocussed = isSameDay(this.focussedDate, cellDate);
       const cell: CalendarCell = {
         date: cellDate.getDate(),
         monthIndex: cellDate.getMonth(),
@@ -491,7 +491,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   private changeActiveView(index: number, unit: TimeUnit) {
     if (index === 0) return;
     this.activeMonth = add(this.activeMonth, { [unit]: index });
-    this._focussedDate = add(this._focussedDate, { [unit]: index });
+    this.focussedDate = add(this.focussedDate, { [unit]: index });
 
     this.refreshActiveMonth();
   }
@@ -568,11 +568,11 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
     if (!this.isFocusable(newDate, this.todayDate)) return;
 
-    if (!this.hasDateChanged(newDate, this._focussedDate)) return;
+    if (!this.hasDateChanged(newDate, this.focussedDate)) return;
 
     this.setActiveMonth(newDate);
     this.setFocussedCell(newDate);
-    this._focussedDate = newDate;
+    this.focussedDate = newDate;
 
     this.cdr.detectChanges(); //sync focussed class to template before setting focus
     const elementMarkedForFocus = this.elementRef.nativeElement.querySelector('.focussed');
@@ -585,32 +585,32 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     switch (key) {
       case 'ArrowUp':
-        newDate = add(this._focussedDate, { days: -7 });
+        newDate = add(this.focussedDate, { days: -7 });
         break;
       case 'ArrowDown':
-        newDate = add(this._focussedDate, { days: 7 });
+        newDate = add(this.focussedDate, { days: 7 });
         break;
       case 'ArrowRight':
-        newDate = add(this._focussedDate, { days: 1 });
+        newDate = add(this.focussedDate, { days: 1 });
         break;
       case 'ArrowLeft':
-        newDate = add(this._focussedDate, { days: -1 });
+        newDate = add(this.focussedDate, { days: -1 });
         break;
       case 'Home':
-        newDate = startOfWeek(this._focussedDate, { locale: this.locale });
+        newDate = startOfWeek(this.focussedDate, { locale: this.locale });
         break;
       case 'End':
-        newDate = lastDayOfWeek(this._focussedDate, { locale: this.locale });
+        newDate = lastDayOfWeek(this.focussedDate, { locale: this.locale });
         break;
       case 'PageUp':
         newDate = shiftKey
-          ? add(this._focussedDate, { years: -1 })
-          : add(this._focussedDate, { months: -1 });
+          ? add(this.focussedDate, { years: -1 })
+          : add(this.focussedDate, { months: -1 });
         break;
       case 'PageDown':
         newDate = shiftKey
-          ? add(this._focussedDate, { years: 1 })
-          : add(this._focussedDate, { months: 1 });
+          ? add(this.focussedDate, { years: 1 })
+          : add(this.focussedDate, { months: 1 });
         break;
       default:
         return;

@@ -647,24 +647,24 @@ describe('CalendarComponent', () => {
 
     it('should initially set focussed date to today when no selectedDate is set', () => {
       const today = startOfDay(new Date());
-      expect(spectator.component['_focussedDate']).toEqual(today);
+      expect(spectator.component['focussedDate']).toEqual(today);
     });
 
     it('should set focussed date to equal selectedDate when selectedDate is set', () => {
       const selectedDate = localMidnightDate('1997-08-29');
 
       spectator.setInput('selectedDate', selectedDate);
-      expect(spectator.component['_focussedDate']).toEqual(selectedDate);
+      expect(spectator.component['focussedDate']).toEqual(selectedDate);
     });
 
     it('should set focussed date to previously selectedDate when selectedDate is set to null (deselected)', () => {
       const selectedDate = localMidnightDate('1997-08-29');
 
       spectator.setInput('selectedDate', selectedDate);
-      expect(spectator.component['_focussedDate']).toEqual(selectedDate);
+      expect(spectator.component['focussedDate']).toEqual(selectedDate);
 
       spectator.setInput('selectedDate', null);
-      expect(spectator.component['_focussedDate']).toEqual(selectedDate);
+      expect(spectator.component['focussedDate']).toEqual(selectedDate);
     });
 
     describe('when navigating with keyboard', () => {
@@ -674,7 +674,7 @@ describe('CalendarComponent', () => {
         const focussedDay = spectator.query('.focussed');
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowUp');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-22'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-22'));
       });
 
       it('should focus same weekday in next week when ArrowDown is pressed', () => {
@@ -683,7 +683,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowDown');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-05'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-09-05'));
       });
 
       it('should focus next day when ArrowRight is pressed', () => {
@@ -692,7 +692,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowRight');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-30'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-30'));
       });
 
       it('should focus previous day when ArrowLeft is pressed', () => {
@@ -701,7 +701,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowLeft');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-28'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-28'));
       });
 
       it('should focus first day of current week when Home is pressed', () => {
@@ -710,7 +710,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'Home');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-25'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-25'));
       });
 
       it('should focus last day of current week when End is pressed', () => {
@@ -719,7 +719,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'End');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-31'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-31'));
       });
 
       it('should focus same day in previous month when PageUp is pressed', () => {
@@ -728,7 +728,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'PageUp');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-07-29'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-07-29'));
       });
 
       it('should focus same day in previous year when Shift + PageUp is pressed', () => {
@@ -737,7 +737,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'shift.PageUp');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1996-08-29'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1996-08-29'));
       });
 
       it('should navigate to the next month when PageDown is pressed', () => {
@@ -746,7 +746,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'PageDown');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-29'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-09-29'));
       });
 
       it('should navigate to the next year when Shift + PageDown is pressed', () => {
@@ -755,7 +755,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'shift.PageDown');
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1998-08-29'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1998-08-29'));
       });
 
       it('should set focussed date to the last day of the month when month is changed to one with fewer days', () => {
@@ -764,7 +764,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'PageDown'); // Navigate to September
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-30')); // September has 30 days
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-09-30')); // September has 30 days
       });
 
       it('should change month when focussed date is changed to a day in another month', () => {
@@ -773,7 +773,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowRight'); // Navigate to next day
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-09-01'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-09-01'));
         expect(spectator.component.activeMonthName).toEqual('September');
         expect(spectator.component.activeYear).toEqual('1997');
       });
@@ -784,7 +784,7 @@ describe('CalendarComponent', () => {
 
         spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowRight'); // Navigate to next day
 
-        expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1998-01-01'));
+        expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1998-01-01'));
         expect(spectator.component.activeMonthName).toEqual('January');
         expect(spectator.component.activeYear).toEqual('1998');
       });
@@ -800,7 +800,7 @@ describe('CalendarComponent', () => {
       spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowDown');
 
       // The focussed date should remain the same as the selected date
-      expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-31'));
+      expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-31'));
       // The active month should remain the same
       expect(spectator.component.activeMonthName).toEqual('August');
       expect(spectator.component.activeYear).toEqual('1997');
@@ -816,7 +816,7 @@ describe('CalendarComponent', () => {
       spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowUp');
 
       // The focussed date should remain the same as the selected date
-      expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-01'));
+      expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-01'));
       // The active month should remain the same
       expect(spectator.component.activeMonthName).toEqual('August');
       expect(spectator.component.activeYear).toEqual('1997');
@@ -829,7 +829,7 @@ describe('CalendarComponent', () => {
 
       spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowRight');
 
-      expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-15'));
+      expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-15'));
     });
 
     it('should not allow selecting a focus date when it is disabled', () => {
@@ -839,7 +839,7 @@ describe('CalendarComponent', () => {
 
       spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowRight');
 
-      expect(spectator.component['_focussedDate']).toEqual(localMidnightDate('1997-08-15'));
+      expect(spectator.component['focussedDate']).toEqual(localMidnightDate('1997-08-15'));
 
       spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'Enter');
 
