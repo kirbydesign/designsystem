@@ -49,7 +49,7 @@
 
   <tbody>
     <tr *ngFor="let week of _month">
-      <td *ngFor="let day of week">
+      <td *ngFor="let day of week" [attr.aria-selected]="day.isSelected ? true : false">
         <button
           kirby-button
           (click)="_onDateSelected(day)"
@@ -61,7 +61,6 @@
           [tabIndex]="day.isFocussed ? 0 : -1"
           [attr.aria-label]="day.ariaLabel"
           [attr.aria-disabled]="day.isSelectable ? null : true"
-          [attr.aria-pressed]="day.isSelected ? true : false"
           [disabled]="day.isFocusable ? null : true"
         >
           {{ day.date }}
