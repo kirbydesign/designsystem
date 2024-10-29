@@ -53,6 +53,7 @@
         <button
           kirby-button
           (click)="_onDateSelected(day)"
+          (keydown)="_onDateKeydown($event)"
           class="{{ day.cssClasses }}"
           [class.selected]="day.isSelected"
           [class.focussed]="day.isFocussed"
