@@ -11,7 +11,10 @@ import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-exampl
   styleUrls: ['./modal-example-simple.component.scss'],
 })
 export class ModalExampleAlertWithGuardComponent implements OnInit {
-  constructor(private modalController: ModalController, private router: Router) {}
+  constructor(
+    private modalController: ModalController,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     if (this.router.url.endsWith('/modal-with-guard-open')) {

@@ -11,12 +11,14 @@ import {
 import { EMPTY, firstValueFrom, Observable } from 'rxjs';
 import { filter, map, pairwise, skipUntil, startWith, takeUntil } from 'rxjs/operators';
 
-import { Location } from '@angular/common';
 import { ModalRouteActivation } from './modal.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ModalNavigationService {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   isModalRoute(url: string): boolean {
     return url.includes('(modal:');

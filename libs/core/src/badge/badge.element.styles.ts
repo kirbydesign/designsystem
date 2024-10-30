@@ -35,7 +35,9 @@ export default css`
 
   /* Apply custom elevation to badge when white */
   :host([themecolor='white']) [part='base'] {
-    box-shadow: 0 20px 30px -15px rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 12%);
+    box-shadow:
+      0 20px 30px -15px rgb(28 28 28 / 30%),
+      0 0 5px 0 rgb(28 28 28 / 12%);
   }
 
   :host([themecolor='success']) {

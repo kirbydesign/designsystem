@@ -51,7 +51,10 @@ this.modalController.showAlert(config);`;
   };
   
   this.modalController.showAlert(config);`;
-  constructor(private modalController: ModalController, private toastController: ToastController) {}
+  constructor(
+    private modalController: ModalController,
+    private toastController: ToastController
+  ) {}
 
   showAlert() {
     const config: AlertConfig = {

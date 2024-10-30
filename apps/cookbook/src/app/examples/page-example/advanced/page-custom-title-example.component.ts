@@ -64,7 +64,10 @@ export class PageCustomTitleExampleComponent extends BasePageExampleComponent {
     { id: '3', text: 'Option 3' },
   ];
 
-  constructor(private toastController: ToastController, private modalController: ModalController) {
+  constructor(
+    private toastController: ToastController,
+    private modalController: ModalController
+  ) {
     super();
   }
 

@@ -11,7 +11,10 @@ export class ChooseDateComponent {
   todayDate: Date = new Date();
   date: string;
 
-  constructor(private textAndDateService: TextAndDateService, private modal: Modal) {}
+  constructor(
+    private textAndDateService: TextAndDateService,
+    private modal: Modal
+  ) {}
 
   newDateSelectedSetNewDate(date: Date) {
     this.date = date.toDateString();

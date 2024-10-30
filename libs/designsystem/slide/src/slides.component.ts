@@ -43,7 +43,10 @@ type SwiperContainer = HTMLElement & { initialize: () => void; swiper: Swiper };
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
-  constructor(private platform: PlatformService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private platform: PlatformService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   @ViewChild('swiperContainer') swiperContainer: ElementRef<SwiperContainer>;
   @ContentChild(SlideDirective, { static: true, read: TemplateRef })

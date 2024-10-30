@@ -31,7 +31,10 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
   trustedSrc: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer, private locationStrategy: LocationStrategy) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private locationStrategy: LocationStrategy
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.src) {

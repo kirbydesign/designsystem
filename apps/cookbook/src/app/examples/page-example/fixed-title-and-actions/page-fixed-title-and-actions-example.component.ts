@@ -52,7 +52,10 @@ export class PageFixedTitleAndActionsExampleComponent extends BasePageExampleCom
     { id: '3', text: 'Option 3' },
   ];
 
-  constructor(private toastController: ToastController, private modalController: ModalController) {
+  constructor(
+    private toastController: ToastController,
+    private modalController: ModalController
+  ) {
     super();
   }
 

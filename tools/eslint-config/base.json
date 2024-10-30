@@ -1,0 +1,91 @@
+{
+  "root": true,
+  "extends": ["prettier"],
+  "ignorePatterns": ["!**/*", "storybook-static", "dist", "node_modules"],
+  "plugins": ["@nx", "prettier"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "arrowParens": "always",
+            "bracketSpacing": true,
+            "printWidth": 100,
+            "semi": true,
+            "singleQuote": true,
+            "trailingComma": "es5",
+            "jsxSingleQuote": true,
+            "htmlWhitespaceSensitivity": "ignore"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "prefer-const": "warn",
+        "prefer-rest-params": "error",
+        "prefer-spread": "error",
+        "no-empty-function": [
+          "warn",
+          {
+            "allow": ["constructors"]
+          }
+        ],
+        "no-extra-boolean-cast": "warn",
+        "no-nested-ternary": "warn",
+        "no-useless-escape": "warn",
+        "no-var": "error",
+        "sort-imports": [
+          "error",
+          {
+            "ignoreCase": true,
+            "ignoreDeclarationSort": true
+          }
+        ],
+        "import/order": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "@typescript-eslint/ban-types": "error",
+        "@typescript-eslint/no-empty-function": "warn",
+        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-non-null-assertion": "warn",
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/triple-slash-reference": "error",
+        "@typescript-eslint/no-explicit-any": "warn"
+      },
+      "plugins": ["eslint-plugin-import", "@typescript-eslint"]
+    },
+    {
+      "files": ["*.stories.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["./*", "../*"],
+                "message": "Please import the correctly packaged version of this code via its alias: @kirbydesign/PACKAGE-NAME/ENTRY-POINT"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "rules": {
+    "prettier/prettier": ["error"]
+  }
+}

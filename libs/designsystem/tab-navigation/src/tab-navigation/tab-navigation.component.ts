@@ -67,7 +67,10 @@ export class TabNavigationComponent implements AfterViewInit {
   @Output()
   selectedIndexChange = new EventEmitter<number>();
 
-  constructor(private window: WindowRef, private keyboardHandlerService: KeyboardHandlerService) {
+  constructor(
+    private window: WindowRef,
+    private keyboardHandlerService: KeyboardHandlerService
+  ) {
     /**/
   }
 

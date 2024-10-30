@@ -55,7 +55,10 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onChange = (_: string) => {};
 
-  constructor(private elementRef: ElementRef, @Inject(LOCALE_ID) private locale: string) {}
+  constructor(
+    private elementRef: ElementRef,
+    @Inject(LOCALE_ID) private locale: string
+  ) {}
 
   ngOnInit(): void {
     // Set type="text", because functionality like 'setSelectionRange' are not supported on type="number"

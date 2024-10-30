@@ -11,7 +11,10 @@ export class CardAsButtonDirective {
   @HostBinding('attr.tabindex') tabindex: number = 0;
   @HostBinding('class.interaction-state-active') _pressed = false;
 
-  constructor(@Optional() private card: CardComponent, private clickableElement: ElementRef) {}
+  constructor(
+    @Optional() private card: CardComponent,
+    private clickableElement: ElementRef
+  ) {}
 
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])

@@ -51,7 +51,7 @@ export class IconRegistryService {
 
   getIcons(): Icon[] {
     return [...this.iconRegistry].map(
-      (keyValPair) => ({ name: keyValPair[0], svg: keyValPair[1] } as Icon)
+      (keyValPair) => ({ name: keyValPair[0], svg: keyValPair[1] }) as Icon
     );
   }
 

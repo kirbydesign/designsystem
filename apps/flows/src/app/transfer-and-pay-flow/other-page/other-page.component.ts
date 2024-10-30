@@ -15,7 +15,10 @@ export class OtherPageComponent implements OnInit {
   public selectedId: number;
   public receiverInputSelected = false;
 
-  constructor(private otherService: OtherService, private modal: Modal) {}
+  constructor(
+    private otherService: OtherService,
+    private modal: Modal
+  ) {}
 
   public Others: Other[] = [];
 

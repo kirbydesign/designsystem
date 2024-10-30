@@ -94,7 +94,10 @@ export class ButtonComponent implements AfterContentInit {
   @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef?: ElementRef<HTMLElement>;
 
-  constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
 
   private wrapTextNode(iconElement?: HTMLElement) {
     if (!iconElement) {
