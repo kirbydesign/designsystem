@@ -250,7 +250,6 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.todayDate = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date()); // TODO: Necessary?
     this.focussedDate = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
     this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
@@ -343,16 +342,17 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     const monthStart = startOfMonth(this.activeMonth);
     const startOfFirstWeek = startOfWeek(monthStart, { locale: this.locale });
+    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
 
     const totalNumberOfDays = 42; // Always show 42 days (6 weeks) in calendar
     const daysArray = Array.from(Array(totalNumberOfDays).keys());
 
     const days: CalendarCell[] = daysArray.map((number) => {
       const cellDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
-      const day = this.getCalendarDay(cellDate, this.todayDate, monthStart);
+      const day = this.getCalendarDay(cellDate, today, monthStart);
 
       const isSelectable = this.isSelectable(day, cellDate);
-      const isFocusable = this.isFocusable(cellDate, this.todayDate);
+      const isFocusable = this.isFocusable(cellDate, today);
       const isSelected = isSameDay(this.selectedDate, cellDate);
       const isFocussed = isSameDay(this.focussedDate, cellDate);
       const cell: CalendarCell = {
@@ -497,8 +497,8 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   get _canNavigateBack(): boolean {
-    const reachedPastDatesLimit =
-      this.disablePastDates && isSameMonth(this.activeMonth, this.todayDate);
+    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+    const reachedPastDatesLimit = this.disablePastDates && isSameMonth(this.activeMonth, today);
 
     const reachedOrExceededMinDate =
       this.minDate &&
@@ -508,8 +508,8 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   get _canNavigateForward(): boolean {
-    const reachedFutureDatesLimit =
-      this.disableFutureDates && isSameMonth(this.activeMonth, this.todayDate);
+    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+    const reachedFutureDatesLimit = this.disableFutureDates && isSameMonth(this.activeMonth, today);
 
     const reachedOrExceededMaxDate =
       this.maxDate &&
@@ -540,7 +540,8 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   private getDateFromNavigableYear(navigableYear: number | Date): Date {
     if (navigableYear instanceof Date) return navigableYear;
-    return new Date(this.todayDate.getFullYear() + navigableYear, 0, 1);
+    const today = this.todayDate || new Date();
+    return new Date(today.getFullYear() + navigableYear, 0, 1);
   }
 
   private getYearsBetweenDates(startDate: Date, endDate: Date): string[] {
@@ -566,7 +567,9 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (this.timezone === 'UTC') {
       newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }
-    if (!this.isFocusable(newDate, this.todayDate)) return;
+
+    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+    if (!this.isFocusable(newDate, today)) return;
 
     if (!this.hasDateChanged(newDate, this.focussedDate)) return;
 
