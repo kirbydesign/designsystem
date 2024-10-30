@@ -120,6 +120,9 @@ $container-query-breakpoint: 600px;
   margin-right: utils.size('xl');
 
   p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     margin-bottom: 0;
   }
 }
@@ -183,10 +186,4 @@ $container-query-breakpoint: 600px;
   button {
     margin: 0;
   }
-}
-
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

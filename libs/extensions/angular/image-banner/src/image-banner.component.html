@@ -25,15 +25,23 @@
 
     <div class="main-content" [class.has-minimum-height]="hasMinimumHeight">
       <div class="main-content-header">
-        <p class="kirby-text-normal-bold" [class.ellipsis]="truncateTitle">
+        <p class="kirby-text-normal-bold">
+          @if (title) {
           {{ title }}
+          } @else {
+          <ng-content select="[title]"></ng-content>
+          }
         </p>
       </div>
 
       <div class="main-content-body">
-        <div class="main-content-body-text" [class.ellipsis]="truncateBodyText">
+        <div class="main-content-body-text">
           <span class="kirby-text-small">
+            @if (bodyText) {
             {{ bodyText }}
+            } @else {
+            <ng-content select="[bodyText]"></ng-content>
+            }
           </span>
         </div>
 

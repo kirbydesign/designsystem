@@ -1,4 +1,4 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { Args, argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
@@ -43,12 +43,6 @@ const meta: Meta<ImageBannerComponent> = {
     },
     externalLink: {
       control: 'text',
-    },
-    truncateTitle: {
-      control: 'boolean',
-    },
-    truncateBodyText: {
-      control: 'boolean',
     },
     hasMinimumHeight: {
       control: 'boolean',
@@ -128,27 +122,46 @@ export const NoDismiss: Story = {
   }),
 };
 
+const setCustomContent = (args: any) => {
+  return {
+    ...args,
+    customTitle: args.title,
+    title: null,
+    customBodyText: args.bodyText,
+    bodyText: null,
+  };
+};
+
 /**
  * The title and body text can be truncated with an ellipsis when they exceed the width of the banner.
  * The banner can be set to have a minimum height to prevent it from shrinking too much.
  */
-export const truncateText: Story = {
+export const customContent: Story = {
   args: {
     title:
-      'The title is very long and will be truncated with an ellipsis when it exceeds the width of the banner.',
+      'The title is very long and will NOT be truncated with an ellipsis when it exceeds the width of the banner.',
     bodyText:
       'A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.',
     actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
     dismissClick: undefined,
-    truncateTitle: true,
-    truncateBodyText: true,
     hasMinimumHeight: false,
   },
-  // The render method with argsToTemplate() is needed for bannerDismiss to not be automatically inferred by storybook.
+
   render: (args) => ({
-    props: args,
-    template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
+    props: setCustomContent(args),
+    styles: [
+      ' .elipsis{ white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}',
+      ' .no-elipsis {white-space:wrap}',
+    ],
+    template: `
+    <kirby-x-image-banner ${argsToTemplate(args)}>
+      <div class="no-elipsis" title>{{ customTitle }}</div>
+      <div class="elipsis" bodyText>{{ customBodyText}}</div>
+    </kirby-x-image-banner>
+   
+   
+    `,
   }),
 };
 
