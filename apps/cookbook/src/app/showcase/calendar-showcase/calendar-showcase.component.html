@@ -1,12 +1,10 @@
-<h2>Default (transparent background)</h2>
+<p>
+  The calendar is a picker interface that displays a date grid with month navigation, for users to
+  select a single date. By default any date is accepted but various configurations can be applied to
+  restrict what dates users can select.
+</p>
 
-<cookbook-example-viewer [html]="exampleHtml">
-  <div class="example-frame">
-    <cookbook-calendar-example class="calendar-example"></cookbook-calendar-example>
-  </div>
-</cookbook-example-viewer>
-
-<h2 class="custom-example">Wrapped in card + custom buttons integration</h2>
+<h2 class="custom-example">Calendar in card</h2>
 
 <cookbook-example-viewer
   [html]="calendarCardExample.template"
@@ -14,6 +12,7 @@
 >
   <div class="example-frame">
     <cookbook-calendar-card-example
+      #calendarCardExample
       class="calendar-example"
       [disableWeekends]="disableWeekends"
       [disablePastDates]="disablePastDates"
@@ -26,28 +25,102 @@
       [useTimezoneUTC]="useTimezoneUTC"
       [showYearNavigator]="showYearNavigator"
     ></cookbook-calendar-card-example>
+    <cookbook-example-configuration-wrapper configAppearance="toggle">
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="disableWeekends"
+        text="Disable weekends"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="alwaysEnableToday"
+        text="Always enable current date"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="disablePastDates"
+        text="Disable past dates"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="disableFutureDates"
+        text="Disable future dates"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="setDisabledDates"
+        text="Set disabled dates"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="setEnabledDates"
+        text="Set enabled dates"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="setMinDate"
+        text="Set min date ({{
+          minDate | date: 'dd-MM-yyyy' : (useTimezoneUTC ? 'UTC' : undefined)
+        }})"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="setMaxDate"
+        text="Set max date ({{
+          maxDate | date: 'dd-MM-yyyy' : (useTimezoneUTC ? 'UTC' : undefined)
+        }})"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="setTodayDate"
+        text="Set today date ({{
+          todayDate | date: 'dd-MM-yyyy' : (useTimezoneUTC ? 'UTC' : undefined)
+        }})"
+      ></kirby-checkbox>
+      <kirby-checkbox
+        size="xs"
+        [(checked)]="useTimezoneUTC"
+        text="Use UTC instead of local time"
+      ></kirby-checkbox>
+    </cookbook-example-configuration-wrapper>
   </div>
 </cookbook-example-viewer>
 
-<div>
-  <!-- prettier-ignore -->
-  <fieldset>  
-        <legend>Configuration</legend>
-        <kirby-checkbox size="xs" [(checked)]="disableWeekends" text="Disable weekends"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="alwaysEnableToday" text="Always enable current date"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="disablePastDates" text="Disable past dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="disableFutureDates" text="Disable future dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setDisabledDates" text="Set disabled dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setEnabledDates" text="Set enabled dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setMinDate" text="Set min date ({{minDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setMaxDate" text="Set max date ({{maxDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setTodayDate" text="Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="useTimezoneUTC" text="Use UTC instead of local time"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="showYearNavigator" text="Show year navigator"></kirby-checkbox>
-      </fieldset>
-</div>
+<h2>Calendar with year navigator</h2>
+<p>
+  A year-navigator can be shown in the calendars header for users to easily jump back and forward by
+  one year.
+</p>
 
-<h3>Specifying locale</h3>
+<cookbook-example-viewer [html]="yearNavigatorExample.template">
+  <div class="example-frame">
+    <cookbook-calendar-year-navigator-example
+      #yearNavigatorExample
+    ></cookbook-calendar-year-navigator-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Calendar without background</h2>
+<p>
+  The calendar comes with minimal styling out of the box and we recommend to place it in a
+  <code>kirby-card</code>
+  .
+</p>
+
+<p>
+  In some rare use-cases it can be necessary to place the calendar on a different background or
+  directly on canvas, in which case the calendar can be used without any surrounding card.
+</p>
+
+<cookbook-example-viewer [html]="noBackgroundExample.template">
+  <div class="example-frame">
+    <cookbook-calendar-no-background-example
+      #noBackgroundExample
+    ></cookbook-calendar-no-background-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Specifying locale</h2>
 
 <p>
   The locale of the calendar (i.e. day and month names) can be set by providing a
