@@ -1,29 +1,37 @@
-<div class="example">
-  <h2>Default (transparent background)</h2>
-  <div class="calendar-example">
-    <cookbook-calendar-example></cookbook-calendar-example>
-    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  </div>
-  <h2 class="custom-example">Wrapped in card + custom buttons integration</h2>
-  <div class="calendar-example">
-    <div>
-      <cookbook-calendar-card-example
-        [disableWeekends]="disableWeekends"
-        [disablePastDates]="disablePastDates"
-        [disableFutureDates]="disableFutureDates"
-        [setDisabledDates]="setDisabledDates"
-        [setEnabledDates]="setEnabledDates"
-        [setMinDate]="setMinDate"
-        [setMaxDate]="setMaxDate"
-        [setTodayDate]="setTodayDate"
-        [useTimezoneUTC]="useTimezoneUTC"
-        [showYearNavigator]="showYearNavigator"
-      ></cookbook-calendar-card-example>
-    </div>
+<h2>Default (transparent background)</h2>
 
-    <div>
-      <!-- prettier-ignore -->
-      <fieldset>  
+<cookbook-example-viewer [html]="exampleHtml">
+  <div class="example-frame">
+    <cookbook-calendar-example class="calendar-example"></cookbook-calendar-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2 class="custom-example">Wrapped in card + custom buttons integration</h2>
+
+<cookbook-example-viewer
+  [html]="calendarCardExample.template"
+  [ts]="calendarCardExample.codeSnippet"
+>
+  <div class="example-frame">
+    <cookbook-calendar-card-example
+      class="calendar-example"
+      [disableWeekends]="disableWeekends"
+      [disablePastDates]="disablePastDates"
+      [disableFutureDates]="disableFutureDates"
+      [setDisabledDates]="setDisabledDates"
+      [setEnabledDates]="setEnabledDates"
+      [setMinDate]="setMinDate"
+      [setMaxDate]="setMaxDate"
+      [setTodayDate]="setTodayDate"
+      [useTimezoneUTC]="useTimezoneUTC"
+      [showYearNavigator]="showYearNavigator"
+    ></cookbook-calendar-card-example>
+  </div>
+</cookbook-example-viewer>
+
+<div>
+  <!-- prettier-ignore -->
+  <fieldset>  
         <legend>Configuration</legend>
         <kirby-checkbox size="xs" [(checked)]="disableWeekends" text="Disable weekends"></kirby-checkbox>
         <kirby-checkbox size="xs" [(checked)]="alwaysEnableToday" text="Always enable current date"></kirby-checkbox>
@@ -37,42 +45,35 @@
         <kirby-checkbox size="xs" [(checked)]="useTimezoneUTC" text="Use UTC instead of local time"></kirby-checkbox>
         <kirby-checkbox size="xs" [(checked)]="showYearNavigator" text="Show year navigator"></kirby-checkbox>
       </fieldset>
-    </div>
-  </div>
-
-  <cookbook-example-viewer
-    [html]="calendarCardExample.template"
-    [ts]="calendarCardExample.codeSnippet"
-  ></cookbook-example-viewer>
-
-  <h4>Properties</h4>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
-
-  <h4>Events</h4>
-  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
-
-  <h4>Locales</h4>
-
-  <p>
-    The locale of the calendar (i.e. day and month names) can be set by providing a
-    <code>LOCALE_ID</code>
-    . The calendar currently supports LOCALE_IDs
-    <code>da</code>
-    ,
-    <code>en-GB</code>
-    and
-    <code>en-US</code>
-    and it defaults to
-    <code>en-GB</code>
-    if none is provided.
-  </p>
-  <p>
-    Usually the locale should be configured for the entire app, typically in
-    <code>AppModule</code>
-    like this:
-  </p>
-
-  <cookbook-code-viewer [ts]="moduleProviderExample"></cookbook-code-viewer>
 </div>
+
+<h3>Specifying locale</h3>
+
+<p>
+  The locale of the calendar (i.e. day and month names) can be set by providing a
+  <code>LOCALE_ID</code>
+  . The calendar currently supports LOCALE_IDs
+  <code>da</code>
+  ,
+  <code>en-GB</code>
+  and
+  <code>en-US</code>
+  and it defaults to
+  <code>en-GB</code>
+  if none is provided.
+</p>
+<p>
+  Usually the locale should be configured for the entire app, typically in
+  <code>AppModule</code>
+  like this:
+</p>
+
+<cookbook-code-viewer [ts]="moduleProviderExample"></cookbook-code-viewer>
+
+<h2>Properties</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+
+<h2>Events</h2>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>
