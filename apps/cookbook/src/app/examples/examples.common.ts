@@ -1,7 +1,5 @@
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
-import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
-import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
@@ -60,8 +58,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   GridExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
-  CalendarExampleComponent,
-  CalendarCardExampleComponent,
   ActionSheetExampleComponent,
   AlertExampleComponent,
   ToastExampleComponent,

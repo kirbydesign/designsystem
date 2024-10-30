@@ -67,11 +67,11 @@ deselectDate() {
 @Component({
   selector: 'cookbook-calendar-card-example',
   template: config.template,
-  styleUrls: ['./calendar-card-example.component.scss'],
+  styleUrls: ['./in-card.scss'],
 })
 export class CalendarCardExampleComponent implements OnChanges {
-  static template: string = config.template;
-  static codeSnippet: string = config.codeSnippet;
+  template: string = config.template;
+  codeSnippet: string = config.codeSnippet;
 
   selectedDate: Date;
   @Input() disableWeekends = false;
