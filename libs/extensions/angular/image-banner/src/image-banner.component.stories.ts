@@ -44,9 +44,6 @@ const meta: Meta<ImageBannerComponent> = {
     externalLink: {
       control: 'text',
     },
-    hasMinimumHeight: {
-      control: 'boolean',
-    },
   },
 };
 export default meta;
