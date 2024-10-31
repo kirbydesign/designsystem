@@ -133,8 +133,8 @@ const setCustomContent = (args: any) => {
 };
 
 /**
- * The title and body text can be truncated with an ellipsis when they exceed the width of the banner.
- * The banner can be set to have a minimum height to prevent it from shrinking too much.
+ * By default the title is truncated with an ellipsis when it exceeds the width of the banner, and body text can be a maximum of three lines.
+ * If these defaults are unwanted custom `title` and `bodyText` markup can instead be provided to the image banner which can be styled as needed.
  */
 export const customContent: Story = {
   args: {
