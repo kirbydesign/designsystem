@@ -19,7 +19,7 @@ const config = {
   ></kirby-calendar>
 </kirby-card>
 
-<kirby-card [hasPadding]="true">
+<kirby-card [hasPadding]="true" variant="outlined">
   <kirby-card-header [hasPadding]="false">
     <p>
       Selected Date: {{ selectedDate ? (selectedDate | date: 'MMM d, y z':(useTimezoneUTC ? 'UTC' : undefined)) : 'none' }}   

@@ -1,11 +1,22 @@
 <p>
   The calendar is a picker interface that displays a date grid with month navigation, for users to
-  select a single date. By default any date is accepted but various configurations can be applied to
-  restrict what dates users can select.
+  select a single date.
 </p>
 
 <h2 class="custom-example">Calendar in card</h2>
+<p>The calendar should in most use-cases be placed inside a card to stand out from the canvas.</p>
+<p>
+  By default any date is selectable for the user but various configurations can be applied to
+  restrict what dates users can select. For instance, the calendar can be configured with min and
+  max dates, disable weekends, disable specific dates and much more.
+</p>
 
+<p>
+  This example showcases the many different options, and will also allow you to play around with
+  setting the
+  <code>selectedDate</code>
+  programmatically.
+</p>
 <cookbook-example-viewer
   [html]="calendarCardExample.template"
   [ts]="calendarCardExample.codeSnippet"
