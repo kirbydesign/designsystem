@@ -4,7 +4,6 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
-  HostListener,
   Inject,
   Input,
   LOCALE_ID,
