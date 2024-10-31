@@ -151,8 +151,8 @@ export const customContent: Story = {
   render: (args) => ({
     props: setCustomContent(args),
     styles: [
-      ' .elipsis{ white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}',
-      ' .no-elipsis {white-space:wrap}',
+      ' .ellipsis{ white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}',
+      ' .no-ellipsis {white-space:wrap}',
     ],
     template: `
     <kirby-x-image-banner ${argsToTemplate(args)}>
