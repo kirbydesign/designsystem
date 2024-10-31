@@ -156,8 +156,8 @@ export const customContent: Story = {
     ],
     template: `
     <kirby-x-image-banner ${argsToTemplate(args)}>
-      <div class="no-elipsis" title>{{ customTitle }}</div>
-      <div class="elipsis" bodyText>{{ customBodyText}}</div>
+      <div class="no-ellipsis" title>{{ customTitle }}</div>
+      <div class="ellipsis" bodyText>{{ customBodyText}}</div>
     </kirby-x-image-banner>
     `,
   }),
