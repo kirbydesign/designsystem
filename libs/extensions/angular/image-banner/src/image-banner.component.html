@@ -25,22 +25,22 @@
 
     <div class="main-content" [class.has-minimum-height]="hasMinimumHeight">
       <div class="main-content-header">
-        <p class="kirby-text-normal-bold">
+        <p class="kirby-text-normal-bold header-text">
           @if (title) {
-          {{ title }}
+            {{ title }}
           } @else {
-          <ng-content select="[title]"></ng-content>
+            <ng-content select="[title]"></ng-content>
           }
         </p>
       </div>
 
       <div class="main-content-body">
         <div class="main-content-body-text">
-          <span class="kirby-text-small">
+          <span class="kirby-text-small body-text">
             @if (bodyText) {
-            {{ bodyText }}
+              {{ bodyText }}
             } @else {
-            <ng-content select="[bodyText]"></ng-content>
+              <ng-content select="[bodyText]"></ng-content>
             }
           </span>
         </div>
