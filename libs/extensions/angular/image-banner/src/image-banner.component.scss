@@ -95,6 +95,11 @@ $container-query-breakpoint: 600px;
 
 .main-content {
   display: flex;
+  min-height: var(
+    --kirby-image-banner-min-height,
+    #{utils.line-height('l') * 3}
+  ); // text content height should be minimum 3 lines by default
+
   box-sizing: border-box;
   flex-direction: column;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
@@ -106,13 +111,6 @@ $container-query-breakpoint: 600px;
 
   &:has(.body-text:empty) {
     padding-block-end: 0;
-  }
-
-  &.has-minimum-height {
-    min-height: var(
-      --kirby-image-banner-min-height,
-      #{utils.line-height('l') * 3}
-    ); // text content height should be minimum 3 lines by default
   }
 
   @include container-more-than-width {

@@ -28,10 +28,6 @@ export class ImageBannerComponent {
   @Input() bodyText: string | undefined;
 
   /**
-   * If true, the banner will have a minimum height to prevent it from shrinking too much.
-   */
-  @Input() hasMinimumHeight: boolean = true;
-  /**
    * The text of the button in the content area of the image banner.
    */
   @Input() actionButtonText: string | undefined;
