@@ -38,7 +38,7 @@
     },
     {
       "title": "Calendar",
-      "paragraph": "Calendar is a picker interface that simplifies date selection, featuring paginated columns for years, months, and days.",
+      "paragraph": "The calendar is a picker interface that displays a date grid with month navigation, for users to select a single date.",
       "svgPath": "./assets/component-svg/Calendar-Kirby-Component-Overview.svg",
       "route": "/home/showcase/calendar"
     },
