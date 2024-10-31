@@ -1,4 +1,4 @@
-import { Args, argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
@@ -122,42 +122,27 @@ export const NoDismiss: Story = {
   }),
 };
 
-const setCustomContent = (args: any) => {
-  return {
-    ...args,
-    customTitle: args.title,
-    title: null,
-    customBodyText: args.bodyText,
-    bodyText: null,
-  };
-};
-
 /**
  * By default the title is truncated with an ellipsis when it exceeds the width of the banner, and body text can be a maximum of three lines.
  * If these defaults are unwanted custom `title` and `bodyText` markup can instead be provided to the image banner which can be styled as needed.
  */
 export const customContent: Story = {
   args: {
-    title:
-      'The title is very long and will NOT be truncated with an ellipsis when it exceeds the width of the banner.',
-    bodyText:
-      'A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.',
     actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
     dismissClick: undefined,
-    hasMinimumHeight: false,
   },
 
   render: (args) => ({
-    props: setCustomContent(args),
+    props: args,
     styles: [
       ' .ellipsis{ white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}',
       ' .no-ellipsis {white-space:wrap}',
     ],
     template: `
     <kirby-x-image-banner ${argsToTemplate(args)}>
-      <div class="no-ellipsis" title>{{ customTitle }}</div>
-      <div class="ellipsis" bodyText>{{ customBodyText}}</div>
+      <div class="no-ellipsis" title>The title is very long and will NOT be truncated with an ellipsis when it exceeds the width of the banner</div>
+      <div class="ellipsis" bodyText>A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.</div>
     </kirby-x-image-banner>
     `,
   }),
