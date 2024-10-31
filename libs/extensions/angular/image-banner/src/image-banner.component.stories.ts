@@ -10,6 +10,9 @@ const meta: Meta<ImageBannerComponent> = {
   component: ImageBannerComponent,
   title: 'Components/Banner/Image Banner',
   parameters: {
+    cssprops: {
+      disable: true,
+    },
     actions: {
       handles: ['dismissClick'],
     },
@@ -142,6 +145,32 @@ export const customContent: Story = {
       <div class="ellipsis" bodyText>A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.</div>
     </kirby-x-image-banner>
     `,
+  }),
+};
+
+/**
+ * The components min-height can be overriden with the custom css property --kirby-image-banner-min-height
+ */
+export const customCSS: Story = {
+  parameters: {
+    cssprops: {
+      disable: false,
+      'kirby-x-image-banner-min-height': {
+        value: 'auto',
+        default: '83px',
+        control: 'text',
+        description: 'You can override the min height of image banner',
+      },
+    },
+  },
+  args: {
+    title: 'This card only has a title',
+    imagePath: 'assets/images/leaves.jpg',
+  },
+
+  render: (args) => ({
+    props: args,
+    template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
   }),
 };
 
