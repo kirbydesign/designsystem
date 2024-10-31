@@ -12,3 +12,18 @@ cookbook-example-viewer,
 cookbook-code-viewer {
   margin-bottom: utils.size('l');
 }
+
+// Style the Keyboard Input element. Borrowed from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd
+kbd {
+  border-radius: 3px;
+  border: 1px solid var(--kirby-semi-dark);
+  box-shadow:
+    0 2px 1px var(--kirby-dark-overlay-20),
+    0 2px 1px 0 var(--kirby-white) inset;
+  color: var(--kirby-black);
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
