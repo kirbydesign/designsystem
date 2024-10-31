@@ -159,8 +159,6 @@ export const customContent: Story = {
       <div class="no-elipsis" title>{{ customTitle }}</div>
       <div class="elipsis" bodyText>{{ customBodyText}}</div>
     </kirby-x-image-banner>
-   
-   
     `,
   }),
 };
