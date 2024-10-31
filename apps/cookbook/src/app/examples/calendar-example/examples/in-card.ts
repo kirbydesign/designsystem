@@ -16,8 +16,6 @@ const config = {
     [todayDate]="setTodayDate ? todayDate : null"
     [selectedDate]="selectedDate"
     (dateChange)="onDateChange($event)"
-    [yearNavigatorOptions]="showYearNavigator ? yearNavigatorOptions : null"
-    [usePopover]="true"
   ></kirby-calendar>
 </kirby-card>
 
