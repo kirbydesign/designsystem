@@ -151,7 +151,7 @@ export const customContent: Story = {
 /**
  * The components min-height can be overriden with the custom css property --kirby-x-image-banner-min-height
  */
-export const customCSS: Story = {
+export const CustomMinimumHeight: Story = {
   parameters: {
     cssprops: {
       disable: false,
