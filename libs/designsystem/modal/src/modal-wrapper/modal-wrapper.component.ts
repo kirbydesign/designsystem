@@ -23,7 +23,7 @@ import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
@@ -153,6 +153,7 @@ export class ModalWrapperComponent
   }
   scrollEventsEnabled: boolean;
   isContentScrolled: boolean;
+  _titleId = UniqueIdGenerator.scopedTo('kirby-modal-title').next();
 
   private destroy$: Subject<void> = new Subject<void>();
   @HostBinding('class.drawer')
@@ -204,6 +205,7 @@ export class ModalWrapperComponent
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
+    this.ionModalElement?.setAttribute('aria-labelledby', this._titleId);
   }
 
   private _currentFooter: HTMLElement | null = null;
