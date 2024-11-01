@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
-import { moduleProviderExample } from '../../examples/calendar-example/calendar-locales-examples';
+import { moduleProviderExample } from '../../examples/calendar-example/examples/locales';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { CalendarCardExampleComponent } from '~/app/examples/calendar-example/calendar-card-example.component';
 
 @Component({
   selector: 'cookbook-calendar-showcase',
@@ -11,9 +9,7 @@ import { CalendarCardExampleComponent } from '~/app/examples/calendar-example/ca
   styleUrls: ['./calendar-showcase.component.scss'],
 })
 export class CalendarShowcaseComponent {
-  exampleHtml = exampleHtml;
   moduleProviderExample = moduleProviderExample;
-  calendarCardExample = CalendarCardExampleComponent;
 
   disableWeekends = false;
   alwaysEnableToday = false;

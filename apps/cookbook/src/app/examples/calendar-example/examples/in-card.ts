@@ -16,11 +16,10 @@ const config = {
     [todayDate]="setTodayDate ? todayDate : null"
     [selectedDate]="selectedDate"
     (dateChange)="onDateChange($event)"
-    [yearNavigatorOptions]="showYearNavigator ? yearNavigatorOptions : null"
   ></kirby-calendar>
 </kirby-card>
 
-<kirby-card [hasPadding]="true">
+<kirby-card [hasPadding]="true" variant="outlined">
   <kirby-card-header [hasPadding]="false">
     <p>
       Selected Date: {{ selectedDate ? (selectedDate | date: 'MMM d, y z':(useTimezoneUTC ? 'UTC' : undefined)) : 'none' }}   
@@ -66,11 +65,11 @@ deselectDate() {
 @Component({
   selector: 'cookbook-calendar-card-example',
   template: config.template,
-  styleUrls: ['./calendar-card-example.component.scss'],
+  styleUrls: ['./in-card.scss'],
 })
 export class CalendarCardExampleComponent implements OnChanges {
-  static template: string = config.template;
-  static codeSnippet: string = config.codeSnippet;
+  template: string = config.template;
+  codeSnippet: string = config.codeSnippet;
 
   selectedDate: Date;
   @Input() disableWeekends = false;
