@@ -126,7 +126,7 @@ export const NoDismiss: Story = {
  * By default the title is truncated with an ellipsis when it exceeds the width of the banner, and body text can be a maximum of three lines.
  * If these defaults are unwanted custom `title` and `bodyText` markup can instead be provided to the image banner which can be styled as needed.
  */
-export const customContent: Story = {
+export const CustomContent: Story = {
   args: {
     actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
