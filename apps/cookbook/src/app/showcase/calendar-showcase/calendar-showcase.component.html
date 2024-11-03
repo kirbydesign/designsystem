@@ -86,6 +86,51 @@
   </div>
 </cookbook-example-viewer>
 
+<h2>Accessibility</h2>
+<p>
+  The calendar uses a table to provide an easily navigable grid of dates. Screen-reader users can
+  navigate using standard table navigation commands.
+</p>
+
+<p>
+  When using the calendar on another background than a white
+  <code>kirby-card</code>
+  , additional care should be taken by implementers to ensure proper contrast and readability of the
+  date grid and controls.
+</p>
+
+<h2>Keyboard support</h2>
+<p>The calendar has full keyboard support to make it easier to navigate and select dates.</p>
+<p>The following keys can be used to move the currently focussed date:</p>
+<!-- prettier-ignore -->
+<ul>
+  <li>
+    <b>Arrow keys</b>
+    <ul>
+      <li>
+        <kbd>&#8592;</kbd> and <kbd>&#8594;</kbd> moves focus to previous and next day
+      </li>
+      <li>
+        <kbd>&#8593;</kbd> and <kbd>&#8595;</kbd> moves focus to same weekday of previous and next week
+      </li>
+    </ul>
+  </li>
+  <li>
+    <kbd>Home</kbd> and <kbd>End</kbd> moves focus to first day (Monday) and last day (Sunday) of the current week
+  </li>
+  <li>
+    <kbd>PageUp</kbd> and <kbd>PageDown</kbd> moves focus to same day of previous and next month
+  </li>
+  <li>
+    <kbd>Shift</kbd> + <kbd>PageUp</kbd> and <kbd>Shift</kbd> + <kbd>PageDown</kbd> moves focus to same day and month of previous and next year
+  </li>
+</ul>
+
+<!-- prettier-ignore -->
+<p>
+  When focussed, a date can be selected with <kbd>Enter &#8629;</kbd> and <kbd>Space</kbd>.
+</p>
+
 <h2>Specifying locale</h2>
 
 <p>
