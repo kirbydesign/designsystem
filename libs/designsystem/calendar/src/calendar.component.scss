@@ -3,6 +3,10 @@
 
 $month-navigator-width: 80px;
 
+:host {
+  font-size: utils.font-size('n');
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -92,7 +96,6 @@ td {
   height: $day-width;
   margin: utils.size('xxxs') 0;
   color: var(--color, #{utils.get-color('black')});
-  font-size: utils.font-size('n');
 }
 
 .day.disabled,
