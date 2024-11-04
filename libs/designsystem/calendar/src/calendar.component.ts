@@ -310,8 +310,10 @@ export class CalendarComponent implements OnInit, OnChanges {
     });
 
     return week.map((date) => ({
-      firstLetterCapitalized: this.formatWithLocale(date, 'EEEEE'), // EEEEE returns the first letter of the day capitalized
-      fullName: this.formatWithLocale(date, 'EEEE'), // EEEE returns the full name of the day
+      const weekdayNarrowFormat = 'EEEEE';
+      const weekdayWideFormat = 'EEEE';
+      firstLetterCapitalized: this.formatWithLocale(date, weekdayNarrowFormat),
+      fullName: this.formatWithLocale(date, weekdayWideFormat),
     }));
   }
 
