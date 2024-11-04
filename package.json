@@ -33,7 +33,6 @@
     "nx": "nx"
   },
   "devDependencies": {
-    "@ljcl/storybook-addon-cssprops": "^4.0.0",
     "@nx/angular": "^19.6.5",
     "@nx/jest": "^19.6.5",
     "@nx/js": "^19.6.5",

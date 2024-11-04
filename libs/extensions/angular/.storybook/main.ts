@@ -5,7 +5,6 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
-    '@ljcl/storybook-addon-cssprops',
     {
       name: '@storybook/addon-docs',
       options: { transcludeMarkdown: true },

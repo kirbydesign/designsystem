@@ -10,9 +10,6 @@ const meta: Meta<ImageBannerComponent> = {
   component: ImageBannerComponent,
   title: 'Components/Banner/Image Banner',
   parameters: {
-    cssprops: {
-      disable: true,
-    },
     actions: {
       handles: ['dismissClick'],
     },
@@ -140,10 +137,10 @@ export const CustomContent: Story = {
       ' .no-ellipsis {white-space:wrap}',
     ],
     template: `
-    <kirby-x-image-banner ${argsToTemplate(args)}>
-      <div class="no-ellipsis" title>The title is very long and will NOT be truncated with an ellipsis when it exceeds the width of the banner</div>
-      <div class="ellipsis" bodyText>A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.</div>
-    </kirby-x-image-banner>
+      <kirby-x-image-banner ${argsToTemplate(args)}>
+        <div class="no-ellipsis" title>The title is very long and will NOT be truncated with an ellipsis when it exceeds the width of the banner</div>
+        <div class="ellipsis" bodyText>A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.</div>
+      </kirby-x-image-banner>
     `,
   }),
 };
@@ -152,24 +149,19 @@ export const CustomContent: Story = {
  * The components min-height can be overridden with the custom css property `--kirby-x-image-banner-min-height`. In this case it is set to `auto` to allow the image banners height to adjust automatically when only a title is set.
  */
 export const CustomMinimumHeight: Story = {
-  parameters: {
-    cssprops: {
-      disable: false,
-      'kirby-x-image-banner-min-height': {
-        control: 'text',
-        default: 'auto',
-        description: 'You can override the min-height of the image banner',
-      },
-    },
-  },
   args: {
-    title: 'This card only has a title',
+    title: 'This card is narrow and only has a title',
     imagePath: 'assets/images/leaves.jpg',
   },
 
   render: (args) => ({
     props: args,
-    template: `<kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>`,
+    styles: ['.narrow-wrapper { max-width: 500px; margin; auto}'],
+    template: `
+      <div class="narrow-wrapper">
+        <kirby-x-image-banner style="--kirby-x-image-banner-min-height: auto;" ${argsToTemplate(args)}></kirby-x-image-banner>
+      </div>
+    `,
   }),
 };
 
@@ -200,7 +192,6 @@ export const UsageInGrid: Story = {
           <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
         </div>
       </div>
-
-`,
+    `,
   }),
 };
