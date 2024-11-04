@@ -309,9 +309,10 @@ export class CalendarComponent implements OnInit, OnChanges {
       end: endOfWeek(now, { locale: this.locale }),
     });
 
+    const weekdayNarrowFormat = 'EEEEE';
+    const weekdayWideFormat = 'EEEE';
+
     return week.map((date) => ({
-      const weekdayNarrowFormat = 'EEEEE';
-      const weekdayWideFormat = 'EEEE';
       firstLetterCapitalized: this.formatWithLocale(date, weekdayNarrowFormat),
       fullName: this.formatWithLocale(date, weekdayWideFormat),
     }));
