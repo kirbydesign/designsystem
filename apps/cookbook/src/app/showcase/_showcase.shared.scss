@@ -22,7 +22,7 @@ kbd {
     0 2px 1px 0 var(--kirby-white) inset;
   color: var(--kirby-black);
   font-size: 0.85em;
-  font-weight: 700;
+  font-weight: var(--kirby-font-weight-bold);
   line-height: 1;
   padding: 2px 4px;
   white-space: nowrap;
