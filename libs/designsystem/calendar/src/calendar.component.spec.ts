@@ -657,14 +657,14 @@ describe('CalendarComponent', () => {
       expect(spectator.component['focussedDate']).toEqual(selectedDate);
     });
 
-    it('should set focussed date to previously selectedDate when selectedDate is set to null (deselected)', () => {
-      const selectedDate = localMidnightDate('1997-08-29');
+    it('should still have focus on previously selected date when selectedDate is set to null (deselected)', () => {
+      const initiallySelectedDay = localMidnightDate('1997-08-29');
 
-      spectator.setInput('selectedDate', selectedDate);
-      expect(spectator.component['focussedDate']).toEqual(selectedDate);
+      spectator.setInput('selectedDate', initiallySelectedDay);
+      expect(spectator.component['focussedDate']).toEqual(initiallySelectedDay);
 
       spectator.setInput('selectedDate', null);
-      expect(spectator.component['focussedDate']).toEqual(selectedDate);
+      expect(spectator.component['focussedDate']).toEqual(initiallySelectedDay);
     });
 
     describe('when navigating with keyboard', () => {
