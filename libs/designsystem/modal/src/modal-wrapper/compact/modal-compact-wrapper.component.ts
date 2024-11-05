@@ -29,6 +29,11 @@ import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
 export class ModalCompactWrapperComponent implements Modal, OnInit {
   @Input() config: ModalConfig;
   @Input() content: TemplateRef<any>;
+  @Input() set titleId(value: string) {
+    // local titleId variable to be used in ngAfterViewInit if setter is called before OnInit
+    this._titleId = value;
+    this.ionModalElement?.setAttribute('aria-labelledby', value);
+  }
 
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   scrollDisabled = false;
@@ -39,6 +44,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly didPresent = firstValueFrom(this.ionModalDidPresent);
   readonly willClose = firstValueFrom(this.ionModalWillDismiss);
+  private _titleId;
 
   constructor(
     private injector: Injector,
@@ -49,12 +55,19 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+
+    this.addAriaLabelledByToIonModal();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+  addAriaLabelledByToIonModal() {
+    if (this.ionModalElement && this._titleId) {
+      this.ionModalElement?.setAttribute('aria-labelledby', this._titleId);
+    }
   }
 
   private listenForIonModalDidPresent() {
