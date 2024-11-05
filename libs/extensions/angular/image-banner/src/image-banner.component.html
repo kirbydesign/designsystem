@@ -25,15 +25,23 @@
 
     <div class="main-content">
       <div class="main-content-header">
-        <p class="kirby-text-normal-bold">
-          {{ title }}
+        <p class="kirby-text-normal-bold header-text">
+          @if (title) {
+            {{ title }}
+          } @else {
+            <ng-content select="[title]"></ng-content>
+          }
         </p>
       </div>
 
       <div class="main-content-body">
         <div class="main-content-body-text">
-          <span class="kirby-text-small">
-            {{ bodyText }}
+          <span class="kirby-text-small body-text">
+            @if (bodyText) {
+              {{ bodyText }}
+            } @else {
+              <ng-content select="[bodyText]"></ng-content>
+            }
           </span>
         </div>
 
