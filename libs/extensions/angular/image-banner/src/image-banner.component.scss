@@ -126,13 +126,19 @@ $container-query-breakpoint: 600px;
 }
 
 .main-content-header {
-  margin-right: utils.size('xl');
+  padding-inline-end: utils.size('xxs');
 
   p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     margin-bottom: 0;
+  }
+}
+
+.main-content:has(.main-content-body-action-link) {
+  .main-content-header {
+    padding-inline-end: utils.size('xl');
   }
 }
 
@@ -169,6 +175,7 @@ $container-query-breakpoint: 600px;
   display: block;
   overflow: hidden;
   max-height: utils.size('xl');
+  padding-inline-end: utils.size('xxs');
 
   @include container-more-than-width {
     padding-inline-end: utils.size('xxl');
