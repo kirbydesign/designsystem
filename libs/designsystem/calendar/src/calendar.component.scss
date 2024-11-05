@@ -52,7 +52,7 @@ td {
   align-items: center;
   justify-content: space-between;
 
-  button:disabled {
+  button[aria-disabled] {
     opacity: 0.5;
     pointer-events: none;
   }

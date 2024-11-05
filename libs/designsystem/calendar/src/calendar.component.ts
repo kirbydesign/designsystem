@@ -491,6 +491,9 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   _changeMonth(index: number) {
+    if (index > 0 && !this._canNavigateForward) return;
+    if (index < 0 && !this._canNavigateBack) return;
+
     this.changeActiveView(index, TimeUnit.months);
     index > 0
       ? this.nextMonthClicked.emit(this.activeMonth)

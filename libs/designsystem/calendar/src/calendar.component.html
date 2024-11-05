@@ -1,14 +1,15 @@
 <div class="header">
   <div class="month-navigator">
     <button
-      type="button"
-      [disabled]="!_canNavigateBack"
-      (click)="_changeMonth(-1)"
       kirby-button
-      [noDecoration]="true"
+      type="button"
       class="no-margin"
+      aria-label="Previous month"
+      [attr.aria-disabled]="_canNavigateBack ? null : true"
+      [noDecoration]="true"
+      (click)="_changeMonth(-1)"
     >
-      <kirby-icon name="arrow-back" aria-label="Previous month"></kirby-icon>
+      <kirby-icon name="arrow-back" aria-hidden="true"></kirby-icon>
     </button>
 
     <div class="month-and-year" [id]="_tableMonthId" aria-live="polite" aria-atomic="true">
@@ -17,14 +18,15 @@
     </div>
 
     <button
-      type="button"
-      [disabled]="!_canNavigateForward"
-      (click)="_changeMonth(1)"
       kirby-button
-      [noDecoration]="true"
+      type="button"
       class="no-margin"
+      aria-label="Next month"
+      [attr.aria-disabled]="_canNavigateForward ? null : true"
+      [noDecoration]="true"
+      (click)="_changeMonth(1)"
     >
-      <kirby-icon name="arrow-more" aria-label="Next month"></kirby-icon>
+      <kirby-icon name="arrow-more" aria-hidden="true"></kirby-icon>
     </button>
   </div>
   <kirby-dropdown
