@@ -248,6 +248,19 @@ export class CalendarComponent implements OnInit, OnChanges {
     return availableLocales[locale] || this.includedLocales.enGB; // Default to enGB if injected locale doesnt exist
   }
 
+  private formatDateLabel(): string {
+    const localeDateFormats = {
+      da: 'd. MMMM',
+      enGB: 'd MMMM',
+      enUS: 'MMMM d',
+    };
+
+    const localeCode = this.locale.code.replace('-', '');
+
+    const dateFormat = localeDateFormats[localeCode] || 'MMMM d';
+    return dateFormat;
+  }
+
   ngOnInit() {
     this.focussedDate = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
     this._weekDays = this.getWeekDays();
@@ -366,7 +379,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         isFocussed,
         isSelected,
         isFocusable,
-        ariaLabel: this.formatWithLocale(cellDate, 'd MMMM'),
+        ariaLabel: this.formatWithLocale(cellDate, this.formatDateLabel()),
         cssClasses: this.getCssClasses(day, isSelectable, isSelected, isFocussed),
       };
       if (isSelected) {
