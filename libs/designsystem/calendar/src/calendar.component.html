@@ -52,6 +52,7 @@
       <td *ngFor="let day of week" [attr.aria-selected]="day.isSelected ? true : false">
         <button
           kirby-button
+          type="button"
           (click)="_onDateSelected(day)"
           (keydown)="_onDateKeydown($event)"
           class="{{ day.cssClasses }}"
