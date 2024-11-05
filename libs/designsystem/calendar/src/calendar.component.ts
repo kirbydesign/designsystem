@@ -251,13 +251,11 @@ export class CalendarComponent implements OnInit, OnChanges {
   private formatDateLabel(): string {
     const localeDateFormats = {
       da: 'd. MMMM',
-      enGB: 'd MMMM',
-      enUS: 'MMMM d',
+      'en-GB': 'd MMMM',
+      'en-US': 'MMMM d',
     };
 
-    const localeCode = this.locale.code.replace('-', '');
-
-    const dateFormat = localeDateFormats[localeCode] || 'MMMM d';
+    const dateFormat = localeDateFormats[this.locale.code] || 'MMMM d';
     return dateFormat;
   }
 
