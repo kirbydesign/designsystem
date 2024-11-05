@@ -205,7 +205,7 @@ export class ModalWrapperComponent
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-    this.ionModalElement?.setAttribute('aria-labelledby', this._titleId);
+    this.ionModalElement.setAttribute('aria-labelledby', this._titleId);
   }
 
   private _currentFooter: HTMLElement | null = null;
