@@ -132,7 +132,7 @@ describe('CalendarComponent', () => {
       spectator.click(SEL_NAV_BACK);
 
       verifyMonthAndYear('June 1997');
-      expect(spectator.query(SEL_NAV_BACK)).toBeDisabled();
+      expect(spectator.query(SEL_NAV_BACK)).toHaveAttribute('aria-disabled');
 
       spectator.click(SEL_NAV_BACK);
 
@@ -147,7 +147,7 @@ describe('CalendarComponent', () => {
       spectator.click(SEL_NAV_FORWARD);
 
       verifyMonthAndYear('October 1997');
-      expect(spectator.query(SEL_NAV_FORWARD)).toBeDisabled();
+      expect(spectator.query(SEL_NAV_FORWARD)).toHaveAttribute('aria-disabled');
 
       spectator.click(SEL_NAV_FORWARD);
 
