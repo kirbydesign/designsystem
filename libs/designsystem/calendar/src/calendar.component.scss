@@ -60,9 +60,9 @@ td {
 
 .month-and-year {
   user-select: none;
+  font-weight: utils.font-weight('bold');
 
   .month {
-    font-weight: utils.font-weight('bold');
     margin-right: utils.size('xxs');
   }
 }
@@ -96,6 +96,7 @@ td {
   height: $day-width;
   margin: utils.size('xxxs') 0;
   color: var(--color, #{utils.get-color('black')});
+  font-size: utils.font-size('n');
 }
 
 .day.disabled,
