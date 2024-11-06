@@ -51,11 +51,6 @@ td {
   flex-grow: 1;
   align-items: center;
   justify-content: space-between;
-
-  button[aria-disabled] {
-    opacity: 0.5;
-    pointer-events: none;
-  }
 }
 
 .month-and-year {
@@ -95,18 +90,16 @@ td {
   width: $day-width;
   height: $day-width;
   margin: utils.size('xxxs') 0;
-  color: var(--color, #{utils.get-color('black')});
   font-size: utils.font-size('n');
 }
 
-.day.disabled,
-.day:not(.selectable) {
+button[aria-disabled='true'] {
   // Hardcoded color because we don't want it to be part of a shared color palette
-  --color: #b4b4b4;
+  color: #b4b4b4;
 }
 
 .day.selectable:not(.current-month) {
-  --color: #{utils.get-text-color('semi-dark')};
+  color: #{utils.get-text-color('semi-dark')};
 }
 
 .day.today {
@@ -117,11 +110,6 @@ td {
 .day.selected {
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
-}
-
-.day:focus:not(.selected, .today) {
-  color: utils.get-color('light-contrast');
-  background-color: utils.get-color('light');
 }
 
 .visually-hidden {
