@@ -105,6 +105,20 @@ $container-query-breakpoint: 600px;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
   overflow: hidden;
 
+  .main-content-header {
+    padding-inline-end: utils.size('xxs');
+
+    @include container-more-than-width {
+      padding-inline-end: utils.size('xl');
+    }
+  }
+
+  &:has(.main-content-body-action-link) {
+    .main-content-header {
+      padding-inline-end: utils.size('xl');
+    }
+  }
+
   &:has(.header-text:empty):has(.body-text:empty) {
     padding-block-start: 0;
   }
@@ -126,19 +140,11 @@ $container-query-breakpoint: 600px;
 }
 
 .main-content-header {
-  padding-inline-end: utils.size('xxs');
-
   p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     margin-bottom: 0;
-  }
-}
-
-.main-content:has(.main-content-body-action-link) {
-  .main-content-header {
-    padding-inline-end: utils.size('xl');
   }
 }
 
