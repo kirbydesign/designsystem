@@ -12,3 +12,14 @@ cookbook-example-viewer,
 cookbook-code-viewer {
   margin-bottom: utils.size('l');
 }
+
+.example-frame {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding-block: utils.size('m');
+
+  &.no-vertical-padding {
+    padding-block: 0;
+  }
+}

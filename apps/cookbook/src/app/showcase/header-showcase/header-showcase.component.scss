@@ -1,11 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../showcase.shared';
 
 .header-example-container {
   margin-bottom: utils.size('l');
-}
-
-.header-example {
-  margin-bottom: utils.size('xxs');
-  border: 1px solid #ddd;
-  border-radius: 12px;
 }
