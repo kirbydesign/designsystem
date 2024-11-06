@@ -14,7 +14,7 @@ const config = {
   subtitle="Additional messaging via subtitle"
 ></kirby-empty-state>
 <kirby-empty-state
-  iconName="kirby"
+  iconName="overview-outline"
   title="Empty"
   subtitle="Additional messaging via subtitle"
 ></kirby-empty-state>`,
