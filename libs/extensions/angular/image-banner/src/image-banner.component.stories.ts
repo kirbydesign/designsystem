@@ -127,7 +127,6 @@ export const CustomContent: Story = {
   args: {
     actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
-    dismissClick: undefined,
   },
 
   render: (args) => ({
