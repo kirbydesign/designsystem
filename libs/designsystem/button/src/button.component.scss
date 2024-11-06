@@ -267,7 +267,8 @@ $button-margin: utils.size('xxxs');
     width: 100%;
   }
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled='true'] {
     color: utils.get-color('semi-dark-shade');
     border-color: transparent;
     pointer-events: none;
