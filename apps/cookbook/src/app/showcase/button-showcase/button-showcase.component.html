@@ -142,6 +142,47 @@
     <cookbook-button-example-disabled #disabledExample></cookbook-button-example-disabled>
   </cookbook-example-viewer>
 
+  <h3>Accessible Disabled Buttons</h3>
+  <p>
+    The
+    <code>disabled</code>
+    attribute effectively hides the button from assistive technologies, such as screen readers, by
+    removing the button from the focus order of the web page.
+  </p>
+  <p>
+    In many scenarios it's good practice to expose the button as disabled, but still available for
+    users to find when navigating via the
+    <kbd>Tab</kbd>
+    key.
+    <br />
+    An example of this could be a button that submits a form, but cannot be activated until the form
+    is complete. Using
+    <code>aria-disabled="true"</code>
+    instead of
+    <code>disabled</code>
+    will render the button perceivable but disabled.
+  </p>
+  <p>
+    <a
+      class="kirby-external-icon"
+      target="_blank"
+      href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled"
+    >
+      Read more on aria-disabled on MDN
+    </a>
+  </p>
+  <p>
+    Set the
+    <code>aria-disabled="true"</code>
+    attribute to render the button as disabled and prevent activation (mouse, touch and keyboard),
+    but allow it to be focused:
+  </p>
+  <cookbook-example-viewer [html]="ariaDisabledExample.template">
+    <cookbook-button-example-aria-disabled
+      #ariaDisabledExample
+    ></cookbook-button-example-aria-disabled>
+  </cookbook-example-viewer>
+
   <h2>Link Button</h2>
   <p>
     The kirby-button directive can also be applied to anchor-tags. This will allow use of attributes

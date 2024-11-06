@@ -14,6 +14,7 @@ import { ButtonExampleAttentionLevelComponent } from './examples/attention-level
 import { ButtonExampleIconsComponent } from './examples/icons';
 import { ButtonExampleIconOnlyComponent } from './examples/icon-only';
 import { ButtonExampleDisabledComponent } from './examples/disabled';
+import { ButtonExampleAriaDisabledComponent } from './examples/aria-disabled';
 import { ButtonExampleUndecoratedComponent } from './examples/undecorated';
 import { ButtonExampleLinkComponent } from './examples/link';
 
@@ -26,6 +27,7 @@ const COMPONENT_DECLARATIONS = [
   ButtonExampleIconsComponent,
   ButtonExampleIconOnlyComponent,
   ButtonExampleDisabledComponent,
+  ButtonExampleAriaDisabledComponent,
   ButtonExampleUndecoratedComponent,
   ButtonExampleLinkComponent,
 ];
