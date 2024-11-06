@@ -1,8 +1,34 @@
-<div class="example">
-  <cookbook-empty-state-example></cookbook-empty-state-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h4>Properties:</h4>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
-</div>
+<p>
+  The Empty State provides feedback to the user while, if possible, giving constructive guidance
+  about next steps.
+</p>
+<h2>Message Types</h2>
+<p>
+  The empty state supports different types of messages via the
+  <code>themeColor</code>
+  input.
+</p>
+<cookbook-example-viewer [html]="themeColorExample.template">
+  <div class="example-frame">
+    <cookbook-empty-state-message-types-example
+      #themeColorExample
+    ></cookbook-empty-state-message-types-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Buttons</h2>
+<p>If the empty state acts as a call to action, one or more buttons can be added.</p>
+<p>
+  If the first button has attention-level 1, that level will be preserved. Any additional buttons
+  will be adjusted to attention-level 3 regardless of their initial attention-level.
+</p>
+<cookbook-example-viewer [html]="buttonsExample.template">
+  <div class="example-frame">
+    <cookbook-empty-state-buttons-example #buttonsExample></cookbook-empty-state-buttons-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
