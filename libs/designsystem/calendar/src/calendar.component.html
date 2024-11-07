@@ -57,14 +57,19 @@
           type="button"
           (click)="_onDateSelected(day)"
           (keydown)="_onDateKeydown($event)"
-          class="{{ day.cssClasses }}"
+          class="day"
+          [class.current-month]="day.isCurrentMonth"
+          [class.weekend]="day.isWeekend"
+          [class.today]="day.isToday"
+          [class.selectable]="day.isSelectable"
           [class.selected]="day.isSelected"
           [class.focussed]="day.isFocussed"
-          [noDecoration]="true"
-          [tabIndex]="day.isFocussed ? 0 : -1"
+          [class.past]="day.isPast"
           [attr.aria-label]="day.ariaLabel"
           [attr.aria-disabled]="day.isSelectable ? null : true"
+          [noDecoration]="true"
           [disabled]="day.isFocusable ? null : true"
+          [tabIndex]="day.isFocussed ? 0 : -1"
         >
           {{ day.date }}
         </button>

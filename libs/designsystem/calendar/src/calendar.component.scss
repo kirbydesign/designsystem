@@ -98,7 +98,7 @@ button[aria-disabled='true'] {
   color: #b4b4b4;
 }
 
-.day.selectable:not(.current-month) {
+.day.selectable:not(.current-month, .selected) {
   color: #{utils.get-text-color('semi-dark')};
 }
 

@@ -373,12 +373,14 @@ export class CalendarComponent implements OnInit, OnChanges {
         monthIndex: cellDate.getMonth(),
         year: cellDate.getFullYear(),
         isCurrentMonth: day.isCurrentMonth,
+        isPast: day.isPast,
+        isToday: day.isToday,
+        isWeekend: day.isWeekend,
         isSelectable,
         isFocussed,
         isSelected,
         isFocusable,
         ariaLabel: this.formatWithLocale(cellDate, this.formatDateLabel()),
-        cssClasses: this.getCssClasses(day, isSelectable, isSelected, isFocussed),
       };
       if (isSelected) {
         this.selectedDay = cell;
@@ -421,31 +423,6 @@ export class CalendarComponent implements OnInit, OnChanges {
       !(this.minDate && isBefore(date, this.minDate)) &&
       !(this.maxDate && isAfter(date, this.maxDate))
     );
-  }
-
-  private getCssClasses(
-    day: CalendarDay,
-    isSelectable: boolean,
-    isSelected: boolean,
-    isFocussed: boolean
-  ) {
-    const cssClasses = {
-      'current-month': day.isCurrentMonth,
-      weekend: day.isWeekend,
-      today: day.isToday,
-      selectable: isSelectable,
-      selected: isSelected,
-      focussed: isFocussed,
-      past: day.isPast,
-      disabled: day.isDisabled,
-    };
-    let cssClassString = 'day';
-    for (const key in cssClasses) {
-      if (cssClasses[key]) {
-        cssClassString += ' ' + key;
-      }
-    }
-    return cssClassString;
   }
 
   private chunk(array: any[], size: number) {
