@@ -1,11 +1,23 @@
 <p>
-  The Messaging State component provides feedback about application, content or workflow state to
-  the user while, if possible, giving constructive guidance about next steps.
+  Message State provides feedback about the application, content or workflow state to the user
+  while, if possible, giving constructive guidance about next steps.
+</p>
+
+<kirby-flag themeColor="warning">Notice</kirby-flag>
+<p class="comment">
+  <em>
+    <strong>Empty State</strong>
+    redirects here as the concept has been renamed
+    <strong>Message State</strong>
+    . The component itself, when used in the template, is still called
+    <code>kirby-empty-state</code>
+    and awaits renaming.
+  </em>
 </p>
 
 <h2>Message Types</h2>
 <p>
-  The messaging state supports three different types of messaging with the
+  The message state supports three different types of messaging with the
   <code>themeColor</code>
   input. For each of these, an icon that supports the message should be set with
   <code>iconName</code>
@@ -45,12 +57,12 @@
 <p class="comment">
   <em>
     <strong>Please note:</strong>
-    The messaging state expands horizontally to fill its container, and the title and subtitle area
+    The message state expands horizontally to fill its container, and the title and subtitle area
     grows with it. If text needs to break differently a newline can be added with
   </em>
   <code>\n</code>
   <em>
-    if the text comes from an expression and
+    if the text comes from an expression or
     <code>&amp;#10;</code>
     in case it is written directly in the template.
   </em>
