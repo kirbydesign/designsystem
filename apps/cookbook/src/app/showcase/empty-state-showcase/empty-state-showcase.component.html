@@ -74,15 +74,20 @@
   </div>
 </cookbook-example-viewer>
 
-<h2>Multiple Buttons</h2>
+<h2>Buttons</h2>
+
+<p>If you add buttons, the following guidelines apply:</p>
+<ul>
+  <li>A primary button should resolve the state for the user</li>
+  <li>
+    Any secondary buttons should present the user with further guidance or alternative options for
+    resolving the state
+  </li>
+</ul>
 <p>
-  Alternative options for resolving the state or providing further guidance can be added with
-  additional buttons.
-</p>
-<p>
-  If the first button has attention level 1, that level will be preserved. This button should aim to
-  resolve the state for the user. Any additional buttons will be adjusted to attention level 3
-  regardless of their initial level.
+  If the first button has attention level 1, that level will be preserved. This is the button that
+  should aim to resolve the state for the user. Any additional buttons will be adjusted to attention
+  level 3 regardless of their initial level.
 </p>
 <cookbook-example-viewer [html]="buttonsExample.template">
   <div class="example-frame">
