@@ -388,25 +388,23 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   private isSelectable(date: Date, today: Date): boolean {
-    return (
-      (this.alwaysEnableToday && isSameDay(today, date)) ||
-      this.isDisabledDate(date) ||
-      !this.isEnabledDate(date) ||
-      (!(this.disableWeekends && isWeekend(date)) &&
-        !(this.disablePastDates && isBefore(date, today)) &&
-        !(this.disableFutureDates && isAfter(date, today)) &&
-        !(this.minDate && isBefore(date, this.minDate)) &&
-        !(this.maxDate && isAfter(date, this.maxDate)))
-    );
+    if (this.alwaysEnableToday && isSameDay(today, date)) return true;
+
+    if (this.isDisabledDate(date)) return false;
+    if (!this.isEnabledDate(date)) return false;
+    if (this.disableWeekends && isWeekend(date)) return false;
+    if (!this.isFocusable(date, today)) return false;
+
+    return true;
   }
 
   private isFocusable(date: Date, today: Date) {
-    return (
-      !(this.disablePastDates && isBefore(date, today)) &&
-      !(this.disableFutureDates && isAfter(date, today)) &&
-      !(this.minDate && isBefore(date, this.minDate)) &&
-      !(this.maxDate && isAfter(date, this.maxDate))
-    );
+    if (this.disablePastDates && isBefore(date, today)) return false;
+    if (this.disableFutureDates && isAfter(date, today)) return false;
+    if (this.minDate && isBefore(date, this.minDate)) return false;
+    if (this.maxDate && isAfter(date, this.maxDate)) return false;
+
+    return true;
   }
 
   private chunk(array: any[], size: number) {
