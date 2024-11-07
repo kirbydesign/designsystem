@@ -8,11 +8,13 @@ import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { EmptyStateMessageTypesExampleComponent } from './examples/message-types';
 import { EmptyStateButtonsExampleComponent } from './examples/buttons';
 import { EmptyStateExampleComponent } from './empty-state-example.component';
+import { EmptyStateSimpleExampleComponent } from './examples/simple';
 
 const COMPONENT_DECLARATIONS = [
   EmptyStateExampleComponent,
   EmptyStateButtonsExampleComponent,
   EmptyStateMessageTypesExampleComponent,
+  EmptyStateSimpleExampleComponent,
 ];
 
 @NgModule({

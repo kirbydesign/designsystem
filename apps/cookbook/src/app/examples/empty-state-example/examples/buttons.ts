@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 const config = {
   template: `<kirby-empty-state
   iconName="kirby"
-  title="Empty"
   title="Button attention levels"
   subtitle="Additional messaging via subtitle"
 >

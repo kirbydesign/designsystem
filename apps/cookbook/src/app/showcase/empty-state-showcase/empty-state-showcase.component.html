@@ -1,13 +1,32 @@
 <p>
-  The Empty State provides feedback to the user while, if possible, giving constructive guidance
-  about next steps.
+  The Messaging State component provides feedback about application, content or workflow state to
+  the user while, if possible, giving constructive guidance about next steps.
 </p>
+
 <h2>Message Types</h2>
 <p>
-  The empty state supports different types of messages via the
+  The messaging state supports three different types of messaging with the
   <code>themeColor</code>
-  input.
+  input. For each of these, an icon that supports the message should be set with
+  <code>iconName</code>
+  .
 </p>
+<ul>
+  <li>
+    <strong>Success</strong>
+    - for positive messages like confirmations or receipts on longer flows
+  </li>
+  <li>
+    <strong>Warning</strong>
+    - for warnings, errors or something the user should be particularly aware of
+  </li>
+  <li>
+    <strong>Empty</strong>
+    - for communicating something that is empty, not configured or not used yet—like an inbox
+    without any messages
+  </li>
+</ul>
+
 <cookbook-example-viewer [html]="themeColorExample.template">
   <div class="example-frame">
     <cookbook-empty-state-message-types-example
@@ -16,11 +35,42 @@
   </div>
 </cookbook-example-viewer>
 
-<h2>Buttons</h2>
-<p>If the empty state acts as a call to action, one or more buttons can be added.</p>
+<h2>Simple</h2>
 <p>
-  If the first button has attention-level 1, that level will be preserved. Any additional buttons
-  will be adjusted to attention-level 3 regardless of their initial attention-level.
+  If setting a decorative icon does not add any value to the message, or if space is constrained, a
+  simple variant can be used. It has a title and subtitle, and should be supported by a call to
+  action button.
+</p>
+
+<p class="comment">
+  <em>
+    <strong>Please note:</strong>
+    The messaging state expands horizontally to fill its container, and the title and subtitle area
+    grows with it. If text needs to break differently a newline can be added with
+  </em>
+  <code>\n</code>
+  <em>
+    if the text comes from an expression and
+    <code>&amp;#10;</code>
+    in case it is written directly in the template.
+  </em>
+</p>
+
+<cookbook-example-viewer [html]="simpleExample.template">
+  <div class="example-frame">
+    <cookbook-empty-state-simple-example #simpleExample></cookbook-empty-state-simple-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Multiple Buttons</h2>
+<p>
+  Alternative options for resolving the state or providing further guidance can be added with
+  additional buttons.
+</p>
+<p>
+  If the first button has attention level 1, that level will be preserved. This button should aim to
+  resolve the state for the user. Any additional buttons will be adjusted to attention level 3
+  regardless of their initial level.
 </p>
 <cookbook-example-viewer [html]="buttonsExample.template">
   <div class="example-frame">
