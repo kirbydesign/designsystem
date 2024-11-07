@@ -1,4 +1,4 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, createKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -84,6 +84,46 @@ describe('ButtonComponent', () => {
         expect(element).toHaveComputedStyle({
           color: getColor('semi-dark', 'shade'),
         });
+      });
+    });
+
+    describe('when aria-disabled=true', () => {
+      beforeEach(() => {
+        element.ariaDisabled = 'true';
+      });
+
+      it('should render with correct background-color', () => {
+        expect(element).toHaveComputedStyle({
+          'background-color': getColor('semi-light'),
+        });
+      });
+
+      it('should render with correct color', () => {
+        expect(element).toHaveComputedStyle({
+          color: getColor('semi-dark', 'shade'),
+        });
+      });
+
+      it('should prevent activation on Enter', () => {
+        const keyDownEvent = createKeyboardEvent('keydown', 'Enter', element);
+        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
+        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+
+        element.dispatchEvent(keyDownEvent);
+
+        expect(preventDefaultSpy).toHaveBeenCalled();
+        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
+      });
+
+      it('should prevent activation on Space', () => {
+        const keyDownEvent = createKeyboardEvent('keydown', 'Space', element);
+        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
+        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+
+        element.dispatchEvent(keyDownEvent);
+
+        expect(preventDefaultSpy).toHaveBeenCalled();
+        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
       });
     });
 
