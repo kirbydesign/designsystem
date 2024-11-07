@@ -40,19 +40,11 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
-import { CalendarCell } from './helpers/calendar-cell.model';
+import { CalendarCell, CalendarCellMetadata } from './helpers/calendar-cell.model';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 export type Locale = LocaleDateFns;
-interface CalendarDay {
-  isCurrentMonth: boolean;
-  isToday: boolean;
-  isWeekend: boolean;
-  isPast: boolean;
-  isFuture: boolean;
-  isDisabled: boolean;
-}
 
 interface WeekDay {
   firstLetterCapitalized: string;
@@ -362,30 +354,18 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     const days: CalendarCell[] = daysArray.map((number) => {
       const cellDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
-      const day = this.getCalendarDay(cellDate, today, monthStart);
 
-      const isSelectable = this.isSelectable(day, cellDate);
-      const isFocusable = this.isFocusable(cellDate, today);
-      const isSelected = isSameDay(this.selectedDate, cellDate);
-      const isFocussed = isSameDay(this.focussedDate, cellDate);
       const cell: CalendarCell = {
         date: cellDate.getDate(),
         monthIndex: cellDate.getMonth(),
         year: cellDate.getFullYear(),
-        isCurrentMonth: day.isCurrentMonth,
-        isPast: day.isPast,
-        isToday: day.isToday,
-        isWeekend: day.isWeekend,
-        isSelectable,
-        isFocussed,
-        isSelected,
-        isFocusable,
         ariaLabel: this.formatWithLocale(cellDate, this.formatDateLabel()),
+        ...this.getCalendarCellMetadata(cellDate, today, monthStart),
       };
-      if (isSelected) {
+      if (cell.isSelected) {
         this.selectedDay = cell;
       }
-      if (isFocussed) {
+      if (cell.isFocussed) {
         this.focussedDay = cell;
       }
       return cell;
@@ -393,24 +373,28 @@ export class CalendarComponent implements OnInit, OnChanges {
     this._month = this.chunk(days, 7);
   }
 
-  private getCalendarDay(date: Date, today: Date, monthStart: Date): CalendarDay {
+  private getCalendarCellMetadata(date: Date, today: Date, monthStart: Date): CalendarCellMetadata {
     return {
       isToday: isSameDay(today, date),
       isPast: isBefore(date, today),
       isFuture: isAfter(date, today),
       isWeekend: isWeekend(date),
       isCurrentMonth: isSameMonth(date, monthStart),
-      isDisabled: this.isDisabledDate(date) || !this.isEnabledDate(date),
+      isSelectable: this.isSelectable(date, today),
+      isFocusable: this.isFocusable(date, today),
+      isSelected: isSameDay(this.selectedDate, date),
+      isFocussed: isSameDay(this.focussedDate, date),
     };
   }
 
-  private isSelectable(day: CalendarDay, date: Date) {
+  private isSelectable(date: Date, today: Date): boolean {
     return (
-      (this.alwaysEnableToday && day.isToday) ||
-      (!day.isDisabled &&
-        !(this.disableWeekends && day.isWeekend) &&
-        !(this.disablePastDates && day.isPast) &&
-        !(this.disableFutureDates && day.isFuture) &&
+      (this.alwaysEnableToday && isSameDay(today, date)) ||
+      this.isDisabledDate(date) ||
+      !this.isEnabledDate(date) ||
+      (!(this.disableWeekends && isWeekend(date)) &&
+        !(this.disablePastDates && isBefore(date, today)) &&
+        !(this.disableFutureDates && isAfter(date, today)) &&
         !(this.minDate && isBefore(date, this.minDate)) &&
         !(this.maxDate && isAfter(date, this.maxDate)))
     );
