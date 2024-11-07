@@ -227,8 +227,13 @@ export const routes: Routes = [
         component: SegmentedControlShowcaseComponent,
       },
       {
-        path: 'empty-state',
+        path: 'message-state',
         component: EmptyStateShowcaseComponent,
+      },
+      {
+        path: 'empty-state',
+        redirectTo: 'message-state',
+        pathMatch: 'full',
       },
       {
         path: 'toolbar',
