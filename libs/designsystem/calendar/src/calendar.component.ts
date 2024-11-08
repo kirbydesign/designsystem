@@ -247,7 +247,8 @@ export class CalendarComponent implements OnInit, OnChanges {
       'en-US': 'MMMM d',
     };
 
-    const dateFormat = localeDateFormats[this.locale.code] || 'MMMM d';
+    const defaultDateFormat = localeDateFormats['en-US'];
+    const dateFormat = localeDateFormats[this.locale.code] || defaultDateFormat;
     return dateFormat;
   }
 
