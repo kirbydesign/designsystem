@@ -38,7 +38,9 @@ import { MenuExampleModule } from './menu-example/menu-example.module';
 import { IconExampleModule } from './icon-example/icon-example.module';
 import { ButtonExampleModule } from './button-example/button-example.module';
 import { ExampleConfigurationWrapperComponent } from './example-configuration-wrapper/example-configuration-wrapper.component';
+import { CalendarExampleModule } from './calendar-example/calendar-example.module';
 import { ListNoShapeExampleModule } from './list-no-shape-example/list-no-shape-example.module';
+import { EmptyStateExampleModule } from './empty-state-example/empty-state-example.module';
 
 const IMPORTS = [
   CodeViewerModule,
@@ -48,6 +50,7 @@ const IMPORTS = [
   ListExamplesModule,
   DropdownExampleModule,
   SegmentedControlExampleModule,
+  CalendarExampleModule,
   ChartsExampleModule,
   CardExampleModule,
   ItemSlidingExampleModule,
@@ -75,6 +78,7 @@ const IMPORTS = [
   IconExampleModule,
   ButtonExampleModule,
   ListNoShapeExampleModule,
+  EmptyStateExampleModule,
 ];
 
 @NgModule({

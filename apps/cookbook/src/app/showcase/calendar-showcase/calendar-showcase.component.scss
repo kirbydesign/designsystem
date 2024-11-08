@@ -1,16 +1,1 @@
-@use '@kirbydesign/core/src/scss/utils';
-
-.calendar-example {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  gap: utils.size('m');
-}
-
-h2.custom-example {
-  margin-top: 40px;
-}
-
-cookbook-example-viewer {
-  margin-bottom: utils.size(s);
-}
+@use '../showcase.shared';

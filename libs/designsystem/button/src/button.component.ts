@@ -6,6 +6,7 @@ import {
   ContentChild,
   ElementRef,
   HostBinding,
+  HostListener,
   Input,
   Renderer2,
 } from '@angular/core';
@@ -152,6 +153,15 @@ export class ButtonComponent implements AfterContentInit {
       this._isIconLeft =
         this.elementRef.nativeElement.querySelector('.content-layer').firstChild === iconElement;
       this._isIconRight = !this._isIconLeft;
+    }
+  }
+
+  @HostListener('keydown.enter', ['$event'])
+  @HostListener('keydown.space', ['$event'])
+  _onEnterOrSpace(event: KeyboardEvent) {
+    if (this.elementRef.nativeElement.ariaDisabled === 'true') {
+      event.preventDefault();
+      event.stopImmediatePropagation();
     }
   }
 }

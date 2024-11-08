@@ -23,6 +23,18 @@ const meta: Meta<ImageBannerComponent> = {
     },
   },
   argTypes: {
+    title: {
+      control: 'text',
+    },
+    bodyText: {
+      control: 'text',
+    },
+    actionButtonText: {
+      control: 'text',
+    },
+    imagePath: {
+      control: 'text',
+    },
     bannerClick: {
       control: false,
     },
@@ -108,6 +120,51 @@ export const NoDismiss: Story = {
 };
 
 /**
+ * By default the title is truncated with an ellipsis when it exceeds the width of the banner, and body text can be a maximum of three lines.
+ * If these defaults are unwanted custom `title` and `bodyText` markup can instead be provided to the image banner which can be styled as needed.
+ */
+export const CustomContent: Story = {
+  args: {
+    actionButtonText: 'Read more',
+    imagePath: 'assets/images/leaves.jpg',
+  },
+
+  render: (args) => ({
+    props: args,
+    styles: [
+      ' .ellipsis{ white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}',
+      ' .no-ellipsis {white-space:wrap}',
+    ],
+    template: `
+      <kirby-x-image-banner ${argsToTemplate(args)}>
+        <div class="no-ellipsis" title>The title is very long and will NOT be truncated with an ellipsis when it exceeds the width of the banner</div>
+        <div class="ellipsis" bodyText>A lot of text that should be truncated with an ellipsis when it exceeds the width of the banner.</div>
+      </kirby-x-image-banner>
+    `,
+  }),
+};
+
+/**
+ * The components min-height can be overridden with the custom css property `--kirby-x-image-banner-min-height`. In this case it is set to `auto` to allow the image banners height to adjust automatically when only a title is set.
+ */
+export const CustomMinimumHeight: Story = {
+  args: {
+    title: 'This card is narrow and only has a title',
+    imagePath: 'assets/images/leaves.jpg',
+  },
+
+  render: (args) => ({
+    props: args,
+    styles: ['.narrow-wrapper { max-width: 500px; margin; auto}'],
+    template: `
+      <div class="narrow-wrapper">
+        <kirby-x-image-banner style="--kirby-x-image-banner-min-height: auto;" ${argsToTemplate(args)}></kirby-x-image-banner>
+      </div>
+    `,
+  }),
+};
+
+/**
  * The component adapts to the containers width, and thus should be plug and
  * play with the kirby css grid and slider utilities.
  * It switches between a narrow and wide view.
@@ -134,7 +191,6 @@ export const UsageInGrid: Story = {
           <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
         </div>
       </div>
-
-`,
+    `,
   }),
 };

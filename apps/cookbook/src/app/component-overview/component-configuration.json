@@ -38,7 +38,7 @@
     },
     {
       "title": "Calendar",
-      "paragraph": "Calendar is a picker interface that simplifies date selection, featuring paginated columns for years, months, and days.",
+      "paragraph": "The calendar is a picker interface that displays a date grid with month navigation, for users to select a single date.",
       "svgPath": "./assets/component-svg/Calendar-Kirby-Component-Overview.svg",
       "route": "/home/showcase/calendar"
     },
@@ -91,10 +91,10 @@
       "route": "/home/showcase/dropdown"
     },
     {
-      "title": "Empty State",
-      "paragraph": "Empty State is presented when no content is available, offering user-friendly guidance and clear messaging to assist users in such situations.",
+      "title": "Message State",
+      "paragraph": "Message State provides feedback about the application, content or workflow state to the user while, if possible, giving constructive guidance about next steps.",
       "svgPath": "./assets/component-svg/Empty-State-Kirby-Component-Overview.svg",
-      "route": "/home/showcase/empty-state"
+      "route": "/home/showcase/message-state"
     },
     {
       "title": "FAB",

@@ -1,8 +1,101 @@
-<div class="example">
-  <cookbook-empty-state-example></cookbook-empty-state-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h4>Properties:</h4>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
-</div>
+<p>
+  Message State provides feedback about the application, content or workflow state to the user
+  while, if possible, giving constructive guidance about next steps.
+</p>
+
+<kirby-flag themeColor="warning">Notice</kirby-flag>
+<p class="comment">
+  <em>
+    <strong>Empty State</strong>
+    redirects here as the concept has been renamed
+    <strong>Message State</strong>
+    . The component itself, when used in the template, is still called
+    <code>kirby-empty-state</code>
+    and awaits renaming.
+  </em>
+</p>
+
+<h2>Message Types</h2>
+<p>
+  The message state supports three different types of messaging with the
+  <code>themeColor</code>
+  input. For each of these, an icon that supports the message should be set with
+  <code>iconName</code>
+  .
+</p>
+<ul>
+  <li>
+    <strong>Success</strong>
+    - for positive messages like confirmations or receipts on longer flows
+  </li>
+  <li>
+    <strong>Warning</strong>
+    - for warnings, errors or something the user should be particularly aware of
+  </li>
+  <li>
+    <strong>Empty</strong>
+    - for communicating something that is empty, not configured or not used yet—like an inbox
+    without any messages
+  </li>
+</ul>
+
+<cookbook-example-viewer [html]="themeColorExample.template">
+  <div class="example-frame">
+    <cookbook-empty-state-message-types-example
+      #themeColorExample
+    ></cookbook-empty-state-message-types-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Simple</h2>
+<p>
+  If setting a decorative icon does not add any value to the message, or if space is constrained, a
+  simple variant can be used. It has a title and subtitle, and should be supported by a call to
+  action button.
+</p>
+
+<p class="comment">
+  <em>
+    <strong>Please note:</strong>
+    The message state expands horizontally to fill its container, and the title and subtitle area
+    grows with it. If text needs to break differently a newline can be added with
+  </em>
+  <code>\n</code>
+  <em>
+    if the text comes from an expression or
+    <code>&amp;#10;</code>
+    in case it is written directly in the template.
+  </em>
+</p>
+
+<cookbook-example-viewer [html]="simpleExample.template">
+  <div class="example-frame">
+    <cookbook-empty-state-simple-example #simpleExample></cookbook-empty-state-simple-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Buttons</h2>
+
+<p>If you add buttons, the following guidelines apply:</p>
+<ul>
+  <li>A primary button should resolve the state for the user</li>
+  <li>
+    Any secondary buttons should present the user with further guidance or alternative options for
+    resolving the state
+  </li>
+</ul>
+<p>
+  If the first button has attention level 1, that level will be preserved. This is the button that
+  should aim to resolve the state for the user. Any additional buttons will be adjusted to attention
+  level 3 regardless of their initial level.
+</p>
+<cookbook-example-viewer [html]="buttonsExample.template">
+  <div class="example-frame">
+    <cookbook-empty-state-buttons-example #buttonsExample></cookbook-empty-state-buttons-example>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
