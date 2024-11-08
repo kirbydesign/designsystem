@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -33,16 +35,13 @@ import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 import { da, enGB, enUS } from 'date-fns/locale';
 
 import { capitalizeFirstLetter } from '@kirbydesign/core';
-
-import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
-import { CalendarCell, CalendarCellMetadata } from './helpers/calendar-cell.model';
-
-import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
+import { CalendarDay, CalendarDayMetadata } from './interfaces/calendar-day';
+import { CalendarYearNavigatorConfig } from './interfaces/calendar-year-navigator-config';
 
 export type Locale = LocaleDateFns;
 
@@ -68,6 +67,7 @@ enum TimeUnit {
   selector: 'kirby-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit, OnChanges {
   @Output() dateChange = new EventEmitter<Date>();
@@ -103,10 +103,10 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
 
   _tableMonthId = UniqueIdGenerator.scopedTo('kirby-calendar-month').next();
-  _month: CalendarCell[][];
+  _month: CalendarDay[][];
   _weekDays: WeekDay[];
-  private selectedDay: CalendarCell;
-  private focussedDay: CalendarCell;
+  private selectedDay: CalendarDay;
+  private focussedDay: CalendarDay;
   // NOTE: Internally, all Dates
   // are normalized to point to local timezone midnight, regardless of the timezone
   // setting.
@@ -252,8 +252,12 @@ export class CalendarComponent implements OnInit, OnChanges {
     return dateFormat;
   }
 
+  private getTodayDate() {
+    return startOfDay(this.todayDate ?? new Date());
+  }
+
   ngOnInit() {
-    this.focussedDate = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+    this.focussedDate = startOfDay(this.todayDate ?? new Date());
     this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
@@ -348,20 +352,19 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     const monthStart = startOfMonth(this.activeMonth);
     const startOfFirstWeek = startOfWeek(monthStart, { locale: this.locale });
-    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
 
     const totalNumberOfDays = 42; // Always show 42 days (6 weeks) in calendar
     const daysArray = Array.from(Array(totalNumberOfDays).keys());
 
-    const days: CalendarCell[] = daysArray.map((number) => {
+    const days: CalendarDay[] = daysArray.map((number) => {
       const cellDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
 
-      const cell: CalendarCell = {
+      const cell: CalendarDay = {
         date: cellDate.getDate(),
         monthIndex: cellDate.getMonth(),
         year: cellDate.getFullYear(),
         ariaLabel: this.formatWithLocale(cellDate, this.formatDateLabel()),
-        ...this.getCalendarCellMetadata(cellDate, today, monthStart),
+        ...this.getCalendarCellMetadata(cellDate, monthStart),
       };
       if (cell.isSelected) {
         this.selectedDay = cell;
@@ -374,7 +377,8 @@ export class CalendarComponent implements OnInit, OnChanges {
     this._month = this.chunk(days, 7);
   }
 
-  private getCalendarCellMetadata(date: Date, today: Date, monthStart: Date): CalendarCellMetadata {
+  private getCalendarCellMetadata(date: Date, monthStart: Date): CalendarDayMetadata {
+    const today = this.getTodayDate();
     return {
       isToday: isSameDay(today, date),
       isPast: isBefore(date, today),
@@ -382,7 +386,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       isWeekend: isWeekend(date),
       isCurrentMonth: isSameMonth(date, monthStart),
       isSelectable: this.isSelectable(date, today),
-      isFocusable: this.isFocusable(date, today),
+      isFocusable: this.isWithinAllowedRange(date, today),
       isSelected: isSameDay(this.selectedDate, date),
       isFocussed: isSameDay(this.focussedDate, date),
     };
@@ -391,15 +395,15 @@ export class CalendarComponent implements OnInit, OnChanges {
   private isSelectable(date: Date, today: Date): boolean {
     if (this.alwaysEnableToday && isSameDay(today, date)) return true;
 
+    if (!this.isWithinAllowedRange(date, today)) return false;
     if (this.isDisabledDate(date)) return false;
     if (!this.isEnabledDate(date)) return false;
     if (this.disableWeekends && isWeekend(date)) return false;
-    if (!this.isFocusable(date, today)) return false;
 
     return true;
   }
 
-  private isFocusable(date: Date, today: Date) {
+  private isWithinAllowedRange(date: Date, today: Date): boolean {
     if (this.disablePastDates && isBefore(date, today)) return false;
     if (this.disableFutureDates && isAfter(date, today)) return false;
     if (this.minDate && isBefore(date, this.minDate)) return false;
@@ -428,7 +432,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  _onDateSelected(newDay: CalendarCell) {
+  _onDateSelected(newDay: CalendarDay) {
     if (!newDay.isSelectable) return;
 
     let newDate = new Date(newDay.year, newDay.monthIndex, newDay.date);
@@ -473,7 +477,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   get _canNavigateBack(): boolean {
-    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+    const today = this.getTodayDate();
     const reachedPastDatesLimit = this.disablePastDates && isSameMonth(this.activeMonth, today);
 
     const reachedOrExceededMinDate =
@@ -484,7 +488,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   get _canNavigateForward(): boolean {
-    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+    const today = this.getTodayDate();
     const reachedFutureDatesLimit = this.disableFutureDates && isSameMonth(this.activeMonth, today);
 
     const reachedOrExceededMaxDate =
@@ -495,7 +499,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   private getCell(date: Date) {
-    let foundDay: CalendarCell = null;
+    let foundDay: CalendarDay = null;
     if (date) {
       for (const week of this._month) {
         foundDay = week.find((day) => {
@@ -529,23 +533,24 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   private setFocussedCell(newDate: Date) {
     const newDay = this.getCell(newDate);
-    if (newDay) {
-      if (this.focussedDay) {
-        this.focussedDay.isFocussed = false;
-      }
-      newDay.isFocussed = true;
-      this.focussedDay = newDay;
+    if (!newDay) return;
+
+    if (this.focussedDay) {
+      this.focussedDay.isFocussed = false;
     }
+    newDay.isFocussed = true;
+    this.focussedDay = newDay;
   }
 
   private focusDate(newDate: Date | null) {
     if (!newDate) return;
+
     if (this.timezone === 'UTC') {
       newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }
 
-    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
-    if (!this.isFocusable(newDate, today)) return;
+    const today = this.getTodayDate();
+    if (!this.isWithinAllowedRange(newDate, today)) return;
 
     if (!this.hasDateChanged(newDate, this.focussedDate)) return;
 

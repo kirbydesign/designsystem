@@ -8,7 +8,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { CalendarComponent } from './calendar.component';
 
-import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
+import { CalendarYearNavigatorConfig } from './interfaces/calendar-year-navigator-config';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to

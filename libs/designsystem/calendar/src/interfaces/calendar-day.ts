@@ -1,11 +1,11 @@
-export interface CalendarCell extends CalendarCellMetadata {
+export interface CalendarDay extends CalendarDayMetadata {
   date: number;
   monthIndex: number;
   year: number;
   ariaLabel: string;
 }
 
-export interface CalendarCellMetadata {
+export interface CalendarDayMetadata {
   isToday: boolean;
   isPast: boolean;
   isFuture: boolean;
