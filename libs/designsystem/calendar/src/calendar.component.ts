@@ -216,6 +216,10 @@ export class CalendarComponent implements OnInit, OnChanges {
     return !!this.yearNavigatorOptions;
   }
 
+  private getTodayDate() {
+    return startOfDay(this.todayDate ?? new Date());
+  }
+
   constructor(
     @Inject(LOCALE_ID) locale: string,
     private elementRef: ElementRef,
@@ -252,12 +256,8 @@ export class CalendarComponent implements OnInit, OnChanges {
     return dateFormat;
   }
 
-  private getTodayDate() {
-    return startOfDay(this.todayDate ?? new Date());
-  }
-
   ngOnInit() {
-    this.focussedDate = startOfDay(this.todayDate ?? new Date());
+    this.focussedDate = this.getTodayDate();
     this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
