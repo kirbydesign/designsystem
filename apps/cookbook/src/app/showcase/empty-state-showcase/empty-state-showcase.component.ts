@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/empty-state-example/empty-state-example.component.html?raw';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-empty-state-showcase',
   templateUrl: './empty-state-showcase.component.html',
+  styleUrl: './empty-state-showcase.component.scss',
 })
 export class EmptyStateShowcaseComponent {
-  exampleHtml = exampleHtml;
-
   properties: ApiDescriptionProperty[] = [
     {
       name: 'iconName',
