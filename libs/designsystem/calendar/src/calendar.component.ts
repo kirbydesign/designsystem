@@ -425,7 +425,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.selectedDay.isSelected = false;
     }
 
-    const newDay = this.getCell(newDate);
+    const newDay = this.getDay(newDate);
     if (newDay) {
       newDay.isSelected = true;
       this.selectedDay = newDay;
@@ -498,7 +498,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     return !reachedFutureDatesLimit && !reachedOrExceededMaxDate;
   }
 
-  private getCell(date: Date) {
+  private getDay(date: Date) {
     let foundDay: CalendarDay = null;
     if (date) {
       for (const week of this._month) {
@@ -531,8 +531,8 @@ export class CalendarComponent implements OnInit, OnChanges {
     return Array.from({ length: numberOfYears + 1 }, (_, i) => (startYear + i).toString());
   }
 
-  private setFocussedCell(newDate: Date) {
-    const newDay = this.getCell(newDate);
+  private setFocussedDay(newDate: Date) {
+    const newDay = this.getDay(newDate);
     if (!newDay) return;
 
     if (this.focussedDay) {
@@ -555,7 +555,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (!this.hasDateChanged(newDate, this.focussedDate)) return;
 
     this.setActiveMonth(newDate);
-    this.setFocussedCell(newDate);
+    this.setFocussedDay(newDate);
     this.focussedDate = newDate;
 
     this.cdr.detectChanges(); //sync focussed class to template before setting focus
