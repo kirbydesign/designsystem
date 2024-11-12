@@ -357,25 +357,25 @@ export class CalendarComponent implements OnInit, OnChanges {
     const daysArray = Array.from(Array(totalNumberOfDays).keys());
     const today = this.getTodayDate();
 
-    const days: CalendarDay[] = daysArray.map((number) => {
-      const currentDayDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
+    const calendarDays: CalendarDay[] = daysArray.map((number) => {
+      const dateOfCalendarDay = add(startOfFirstWeek, { [TimeUnit.days]: number });
 
-      const day: CalendarDay = {
-        date: currentDayDate.getDate(),
-        monthIndex: currentDayDate.getMonth(),
-        year: currentDayDate.getFullYear(),
-        ariaLabel: this.formatWithLocale(currentDayDate, this.formatDateLabel()),
-        ...this.getCalendarDayMetadata(currentDayDate, today, monthStart),
+      const calendarDay: CalendarDay = {
+        date: dateOfCalendarDay.getDate(),
+        monthIndex: dateOfCalendarDay.getMonth(),
+        year: dateOfCalendarDay.getFullYear(),
+        ariaLabel: this.formatWithLocale(dateOfCalendarDay, this.formatDateLabel()),
+        ...this.getCalendarDayMetadata(dateOfCalendarDay, today, monthStart),
       };
-      if (day.isSelected) {
-        this.selectedDay = day;
+      if (calendarDay.isSelected) {
+        this.selectedDay = calendarDay;
       }
-      if (day.isFocussed) {
-        this.focussedDay = day;
+      if (calendarDay.isFocussed) {
+        this.focussedDay = calendarDay;
       }
-      return day;
+      return calendarDay;
     });
-    this._month = this.chunk(days, 7);
+    this._month = this.chunk(calendarDays, 7);
   }
 
   private getCalendarDayMetadata(date: Date, today: Date, monthStart: Date): CalendarDayMetadata {
