@@ -355,30 +355,30 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     const totalNumberOfDays = 42; // Always show 42 days (6 weeks) in calendar
     const daysArray = Array.from(Array(totalNumberOfDays).keys());
+    const today = this.getTodayDate();
 
     const days: CalendarDay[] = daysArray.map((number) => {
-      const cellDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
+      const currentDayDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
 
-      const cell: CalendarDay = {
-        date: cellDate.getDate(),
-        monthIndex: cellDate.getMonth(),
-        year: cellDate.getFullYear(),
-        ariaLabel: this.formatWithLocale(cellDate, this.formatDateLabel()),
-        ...this.getCalendarCellMetadata(cellDate, monthStart),
+      const day: CalendarDay = {
+        date: currentDayDate.getDate(),
+        monthIndex: currentDayDate.getMonth(),
+        year: currentDayDate.getFullYear(),
+        ariaLabel: this.formatWithLocale(currentDayDate, this.formatDateLabel()),
+        ...this.getCalendarDayMetadata(currentDayDate, today, monthStart),
       };
-      if (cell.isSelected) {
-        this.selectedDay = cell;
+      if (day.isSelected) {
+        this.selectedDay = day;
       }
-      if (cell.isFocussed) {
-        this.focussedDay = cell;
+      if (day.isFocussed) {
+        this.focussedDay = day;
       }
-      return cell;
+      return day;
     });
     this._month = this.chunk(days, 7);
   }
 
-  private getCalendarCellMetadata(date: Date, monthStart: Date): CalendarDayMetadata {
-    const today = this.getTodayDate();
+  private getCalendarDayMetadata(date: Date, today: Date, monthStart: Date): CalendarDayMetadata {
     return {
       isToday: isSameDay(today, date),
       isPast: isBefore(date, today),
