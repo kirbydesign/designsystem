@@ -57,7 +57,6 @@ export class ModalComponent implements OnChanges {
   @Input() trigger: string;
   @Input() size: ModalSize = 'medium';
   @Input() scrollDisabled = false;
-  @Input() titleId: string; // only exists to allow custom titles with titleId in modal-compact-wrapper
   @Input() set canDismiss(canDismiss: ShowAlertCallback | boolean) {
     typeof canDismiss === 'boolean'
       ? (this._canDismiss = canDismiss)

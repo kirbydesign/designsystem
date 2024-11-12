@@ -28,7 +28,7 @@ export abstract class Modal {
   scrollToBottom: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollDisabled: boolean;
   canDismiss: ShowAlertCallback;
-  titleId?: string;
+  ariaLabel?: string;
 }
 /**
  * WARNING: This is for internal use only and should not be used outside of Kirby.
