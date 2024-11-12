@@ -95,4 +95,5 @@
     #{$shadow},
     0 0 0 $gap #{utils.get-color('background-color')},
     0 0 0 $gap + $stroke-width utils.$focus-ring-color;
+  z-index: utils.z('default');
 }
