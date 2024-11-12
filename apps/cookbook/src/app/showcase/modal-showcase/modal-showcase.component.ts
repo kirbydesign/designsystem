@@ -10,6 +10,7 @@ import {
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from '~/app/examples/modal-example/modal-component-example.component';
+import { ModalCompactExampleComponent } from '~/app/examples/modal-example/compact-example/modal-compact-example.component';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -24,6 +25,7 @@ export class ModalShowcaseComponent {
   outletExample = ModalExampleOutletComponent;
   alertEmbeddedExample = ModalEmbeddedAlertExampleComponent;
   alertModalConfigExample = ModalExampleAlertComponent;
+  compactExample = ModalCompactExampleComponent;
   isOpenExampleHtml = ModalComponentExampleComponent.isOpenExampleHtml;
   isOpenCodeSnippet = ModalComponentExampleComponent.isOpenCodeSnippet;
 

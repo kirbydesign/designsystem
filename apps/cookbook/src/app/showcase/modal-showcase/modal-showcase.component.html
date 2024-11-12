@@ -39,6 +39,9 @@
       Support for
       <a href="#" (click)="scrollTo(modalContent)">fixed footer</a>
     </li>
+    <li>
+      <a href="#" (click)="scrollTo(accessibility)">Accessibility</a>
+    </li>
   </ul>
 </section>
 
@@ -658,6 +661,53 @@
   attribute is set to true, the modal footer will slide upwards with the soft keyboard on mobile
   devices to make it stay visible. If omitted, or if explicitly set to false, the modal footer will
   stay at the bottom and the keyboard will slide in on top of it.
+</p>
+
+<h2 #accessibility>Accessibility</h2>
+<p>
+  It is important to provide a meaningful title as it will be announced by screen readers when the
+  modal is opened.
+</p>
+<!-- TODO: fix structure, needs rewrite -->
+<p>
+  Modals have a
+  <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role">
+    dialog
+  </a>
+  role, which means they need to be labelled for screen readers to announce when the modal dialog
+  appears, and to give proper context when interacting with the content within.
+</p>
+
+<p>
+  The modal automatically takes care of setting majority of cases by using the title in the modal
+  header as its label. This is not, however, the case for compact modals.
+</p>
+
+<h3>Compact Modals</h3>
+<p>
+  A label is not automatically inferred for compact modals as they do not have a header with a
+  title, except when a
+  <a [routerLink]="'../message-state'">Message State</a>
+  is shown inside a compact modal - see below. For all other compact modals, developers must add an
+  <code>aria-label</code>
+  that will be announced as the modal title.
+</p>
+
+<p>
+  This can be achieved by injecting the modal into the embedded component displayed within your
+  modal and seting the
+  <code>ariaLabel</code>
+  property.
+</p>
+<cookbook-example-viewer
+  [ts]="compactExample.ariaLabelPropertyCodeSnippet"
+></cookbook-example-viewer>
+
+<h4>Message State</h4>
+<p>
+  If you are creating custom alerts by showing a Message State inside a compact
+  <a routerLink="../modal">modal</a>
+  its title will automatically be used as a label for the modal dialog.
 </p>
 
 <h2 #sharedProperties>Shared properties</h2>
