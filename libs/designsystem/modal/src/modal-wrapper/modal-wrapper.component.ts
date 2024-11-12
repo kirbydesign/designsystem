@@ -201,11 +201,77 @@ export class ModalWrapperComponent
     });
   }
 
+  observeElementContentChanges() {
+    this._mutationObserver = new MutationObserver((mutations) =>
+      this.elementContentChangedCallback(mutations)
+    );
+
+    this.willClose$.subscribe(() => {
+      this._mutationObserver.disconnect();
+    });
+
+    this._mutationObserver.observe(this.ionTitleElement.nativeElement, {
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  elementContentChangedCallback(mutationRecords: MutationRecord[]) {
+    if (!this.ionTitleElement) return;
+
+    mutationRecords.forEach((record) => {
+      if (this.shouldIgnoreRecord(record)) return;
+
+      this.setElementTextAsAriaLabel(this.ionTitleElement.nativeElement, this.ionModalElement);
+    });
+  }
+
+  setElementTextAsAriaLabel(
+    ionTitleElement: HTMLIonTitleElement,
+    modalElement: HTMLIonModalElement
+  ) {
+    const modalElementDialog = modalElement.shadowRoot.querySelector('[role="dialog"]');
+    const titleText = ionTitleElement.textContent;
+    modalElementDialog.setAttribute('aria-label', titleText);
+    console.log('Setting aria-label for modal title: ', ionTitleElement);
+  }
+
+  /* Angular may add, remove, or edit comment nodes during change detection. We don't care about
+   * these changes because they don't affect the user-preceived content, and worse it can cause
+   * infinite change detection cycles where the change detection updates a comment, triggering the
+   * MutationObserver, triggering another change detection and kicking the cycle off again. */
+  shouldIgnoreRecord(record: MutationRecord) {
+    // Ignore changes to comment text.
+    if (record.type === 'characterData' && record.target instanceof Comment) {
+      console.log('ignoring characterData, because target is a comment: ', record);
+
+      return true;
+    }
+    // Ignore addition / removal of comments.
+    if (record.type === 'childList') {
+      for (let i = 0; i < record.addedNodes.length; i++) {
+        if (!(record.addedNodes[i] instanceof Comment)) {
+          return false;
+        }
+      }
+      for (let i = 0; i < record.removedNodes.length; i++) {
+        if (!(record.removedNodes[i] instanceof Comment)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    // Observe everything else.
+    return false;
+  }
+
   ngAfterViewInit(): void {
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-    this.ionModalElement.setAttribute('aria-labelledby', this._titleId);
+
+    this.observeElementContentChanges();
   }
 
   private _currentFooter: HTMLElement | null = null;

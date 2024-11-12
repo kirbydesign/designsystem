@@ -1,6 +1,5 @@
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
@@ -9,7 +8,6 @@ import {
   QueryList,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-empty-state',
@@ -17,15 +15,24 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
   styleUrls: ['./empty-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmptyStateComponent implements AfterContentInit, AfterViewInit {
+export class EmptyStateComponent implements AfterContentInit {
+  _title: string;
+
   @Input() iconName: string;
-  @Input() title: string;
+
+  @Input() set title(value: string) {
+    this._title = value;
+    this.setAccessibleModalLabel();
+  }
+
+  get title(): string {
+    return this._title;
+  }
+
   @Input() subtitle: string;
 
   @ContentChildren(ButtonComponent)
   private slottedButtons: QueryList<ButtonComponent>;
-
-  _titleId = UniqueIdGenerator.scopedTo('kirby-modal-title').next();
 
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 
@@ -39,14 +46,14 @@ export class EmptyStateComponent implements AfterContentInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    /* If we are inside a modal that is not labelled by e.g. a title, we want to set 
-    aria-labelledby attribute on ion-modal to point to the title of empty state */
-    const ionModal = this.elementRef.nativeElement.closest('ion-modal');
-    const ionModalNotLabelled = !ionModal?.getAttribute('aria-labelledby');
-    if (ionModal && ionModalNotLabelled) {
-      ionModal.setAttribute('aria-labelledby', this._titleId);
-    }
+  setAccessibleModalLabel() {
+    /* If we are inside a modal that is not labelled, we want to set 
+    the aria-label attribute on ion-modal to point to the title of empty state */
+    const ionModalDialog = this.elementRef.nativeElement
+      .closest('ion-modal')
+      .shadowRoot.querySelector('[role="dialog"]');
+
+    ionModalDialog.ariaLabel ?? (ionModalDialog.ariaLabel = this.title);
   }
 
   /** Enforces that all slotted buttons will have their attention
