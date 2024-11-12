@@ -5,6 +5,7 @@ import {
   ContentChildren,
   ElementRef,
   Input,
+  OnInit,
   QueryList,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -15,14 +16,14 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
   styleUrls: ['./empty-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmptyStateComponent implements AfterContentInit {
-  _title: string;
+export class EmptyStateComponent implements AfterContentInit, OnInit {
+  private _title: string;
 
   @Input() iconName: string;
 
   @Input() set title(value: string) {
     this._title = value;
-    this.setAccessibleModalLabel();
+    this.setAriaLabelOnModal();
   }
 
   get title(): string {
@@ -33,8 +34,20 @@ export class EmptyStateComponent implements AfterContentInit {
 
   @ContentChildren(ButtonComponent)
   private slottedButtons: QueryList<ButtonComponent>;
+  private ionModalElement: HTMLIonModalElement;
+  private modalElementDialog: HTMLElement;
 
   constructor(private elementRef: ElementRef<HTMLElement>) {}
+
+  ngOnInit(): void {
+    /* If initialized inside a modal that is not labelled, we want to set
+     * the aria-label attribute on ion-modal to the title of empty state.
+     * Further updates are handled by title setter.
+     */
+    this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.modalElementDialog = this.ionModalElement?.shadowRoot.querySelector('[role="dialog"]');
+    this.setAriaLabelOnModal();
+  }
 
   ngAfterContentInit() {
     this.enforceAttentionLevelRules();
@@ -46,16 +59,11 @@ export class EmptyStateComponent implements AfterContentInit {
     });
   }
 
-  setAccessibleModalLabel() {
-    /* If we are inside a modal that is not labelled, we want to set 
-    the aria-label attribute on ion-modal to point to the title of empty state */
-    const ionModalDialog = this.elementRef.nativeElement
-      .closest('ion-modal')
-      .shadowRoot.querySelector('[role="dialog"]');
-
-    ionModalDialog.ariaLabel ?? (ionModalDialog.ariaLabel = this.title);
+  private setAriaLabelOnModal() {
+    if (this.modalElementDialog && this._title) {
+      this.modalElementDialog.ariaLabel = this._title;
+    }
   }
-
   /** Enforces that all slotted buttons will have their attention
    * level set to 3, except the first button if it has
    * level 1.
