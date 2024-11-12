@@ -1,32 +1,30 @@
 <div class="header">
   <div class="month-navigator">
     <button
-      kirby-button
       type="button"
-      class="no-margin"
-      aria-label="Previous month"
-      [attr.aria-disabled]="_canNavigateBack ? null : true"
-      [noDecoration]="true"
+      [disabled]="!_canNavigateBack"
       (click)="_changeMonth(-1)"
+      kirby-button
+      [noDecoration]="true"
+      class="no-margin"
     >
-      <kirby-icon name="arrow-back" aria-hidden="true"></kirby-icon>
+      <kirby-icon name="arrow-back"></kirby-icon>
     </button>
 
-    <div class="month-and-year" [id]="_tableMonthId" aria-live="polite" aria-atomic="true">
+    <div class="month-and-year">
       <span class="month">{{ activeMonthName }}</span>
       <span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
     </div>
 
     <button
-      kirby-button
       type="button"
-      class="no-margin"
-      aria-label="Next month"
-      [attr.aria-disabled]="_canNavigateForward ? null : true"
-      [noDecoration]="true"
+      [disabled]="!_canNavigateForward"
       (click)="_changeMonth(1)"
+      kirby-button
+      [noDecoration]="true"
+      class="no-margin"
     >
-      <kirby-icon name="arrow-more" aria-hidden="true"></kirby-icon>
+      <kirby-icon name="arrow-more"></kirby-icon>
     </button>
   </div>
   <kirby-dropdown
@@ -39,41 +37,27 @@
   ></kirby-dropdown>
 </div>
 
-<table [attr.aria-labelledby]="_tableMonthId" role="grid">
+<table>
   <thead>
     <tr>
-      <th *ngFor="let weekDay of _weekDays" scope="col">
-        <span aria-hidden="true">{{ weekDay.firstLetterCapitalized }}</span>
-        <span class="visually-hidden">{{ weekDay.fullName }}</span>
-      </th>
+      <th *ngFor="let weekDay of _weekDays">{{ weekDay }}</th>
     </tr>
   </thead>
 
   <tbody>
     <tr *ngFor="let week of _month">
-      <td *ngFor="let day of week" [attr.aria-selected]="day.isSelected ? true : false">
-        <button
-          kirby-button
-          type="button"
+      <td *ngFor="let day of week">
+        <div
           (click)="_onDateSelected(day)"
-          (keydown)="_onDateKeydown($event)"
-          class="day"
-          [class.current-month]="day.isCurrentMonth"
-          [class.weekend]="day.isWeekend"
-          [class.today]="day.isToday"
-          [class.selectable]="day.isSelectable"
+          class="{{ day.cssClasses }} contain-state-layer"
           [class.selected]="day.isSelected"
-          [class.focussed]="day.isFocussed"
-          [class.past]="day.isPast"
-          [attr.aria-label]="day.ariaLabel"
-          [attr.aria-disabled]="day.isSelectable ? null : true"
-          [noDecoration]="true"
-          [disabled]="day.isFocusable ? null : true"
-          [tabIndex]="day.isFocussed ? 0 : -1"
         >
-          {{ day.date }}
-        </button>
+          <span class="state-layer" aria-hidden="true"></span>
+          <span class="content-layer">{{ day.date }}</span>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+
+<!-- <iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 320px; height: 304px; border: 0"> -->

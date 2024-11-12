@@ -1,4 +1,4 @@
-import { CalendarDay } from './calendar-day';
+import { CalendarCell } from './calendar-cell.model';
 
 export interface CalendarOptions {
   canNavigateBack: boolean;
@@ -6,5 +6,5 @@ export interface CalendarOptions {
   year: string;
   monthName: string;
   weekDays: string[];
-  month: CalendarDay[][];
+  month: CalendarCell[][];
 }
