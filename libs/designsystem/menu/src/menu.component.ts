@@ -1,20 +1,24 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
+  ContentChildren,
   ElementRef,
+  HostListener,
   Input,
   NgZone,
   OnDestroy,
+  QueryList,
   Renderer2,
   ViewChild,
 } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
 
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
@@ -34,9 +38,9 @@ import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuComponent implements AfterViewInit, OnDestroy {
+export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
   constructor(
-    private cdf: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
     private elementRef: ElementRef<HTMLElement>,
     private zone: NgZone,
     private renderer: Renderer2
@@ -82,14 +86,107 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     | undefined;
 
   @ViewChild(FloatingDirective)
-  private floatingDirective: FloatingDirective;
+  _floatingMenu: FloatingDirective;
 
+  @ContentChildren(ItemComponent, { read: ElementRef }) public kirbyItems: QueryList<
+    ElementRef<HTMLElement>
+  >;
+
+  public floatingMenuIsShown: boolean = false;
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
-
   private scrollListenerDisposeFn: EventListenerDisposeFn;
+  private focusedIndex = -1;
+
+  @HostListener('keydown', ['$event'])
+  _onKeydown(event: KeyboardEvent) {
+    if (this.floatingMenuIsShown) {
+      this.handleOnKeyForOpenedMenu(event);
+    } else {
+      this.handleOnKeyForClosedMenu(event);
+    }
+  }
+
+  private preventFurtherPropagation(event: KeyboardEvent) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+  }
+
+  private handleOnKeyForClosedMenu(event: KeyboardEvent) {
+    const key = event.key;
+    switch (key) {
+      case ' ':
+      case 'Enter':
+      case 'ArrowDown':
+      case 'Down':
+        this.focusedIndex = 0;
+        this._floatingMenu.show();
+        this.focusItem();
+        this.preventFurtherPropagation(event);
+        break;
+      case 'Up':
+      case 'ArrowUp':
+        this.focusedIndex = this.kirbyItems.length - 1;
+        this._floatingMenu.show();
+        this.focusItem();
+        this.preventFurtherPropagation(event);
+        break;
+    }
+  }
+
+  private handleOnKeyForOpenedMenu(event: KeyboardEvent) {
+    const key = event.key;
+    switch (key) {
+      case 'ArrowDown':
+        if (this.focusedIndex < this.kirbyItems.length - 1) {
+          this.focusedIndex++;
+          this.focusItem();
+          this.preventFurtherPropagation(event);
+        }
+        break;
+      case 'ArrowUp':
+        if (this.focusedIndex > 0) {
+          this.focusedIndex--;
+          this.focusItem();
+          this.preventFurtherPropagation(event);
+        }
+        break;
+      case 'Escape':
+        if (this.closeOnEscapeKey) {
+          this.closeMenu();
+        }
+        this.preventFurtherPropagation(event);
+        break;
+      case 'Tab':
+        this.closeMenu();
+        break;
+    }
+  }
+
+  private focusTriggerButton() {
+    this.getTriggerButton().nativeElement.focus();
+  }
+
+  private closeMenu() {
+    this.resetFocus();
+    this._floatingMenu.hide();
+    this.focusTriggerButton();
+  }
+
+  resetFocus() {
+    this.focusedIndex = -1;
+  }
+
+  focusItem() {
+    const itemToBeFocused = this.kirbyItems.get(this.focusedIndex);
+    itemToBeFocused.nativeElement.focus();
+  }
+
+  getTriggerButton(): ElementRef<HTMLElement> {
+    return this.userProvidedButton ?? this.defaultButtonElement;
+  }
 
   public ngAfterViewInit(): void {
-    this.cdf.detectChanges(); // Sets the updated reference for kirby-floating
+    this.cdr.detectChanges(); // Sets the updated reference for kirby-floating
 
     this.zone.runOutsideAngular(() => {
       /*
@@ -97,9 +194,13 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
        * avoid a change detection cycle for every scroll-event fired
        */
       this.scrollListenerDisposeFn = this.renderer.listen(document, 'ionScroll', () => {
-        this.floatingDirective.hide();
+        this._floatingMenu.hide();
       });
     });
+  }
+
+  ngAfterContentInit(): void {
+    this.kirbyItems.forEach((item) => item.nativeElement.setAttribute('tabindex', '-1'));
   }
 
   ngOnDestroy(): void {

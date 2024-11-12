@@ -1,10 +1,9 @@
 <ion-item
   lines="none"
-  [attr.disabled]="disabled"
-  [attr.button]="_isIonicButton ? true : null"
-  [attr.tabindex]="selectable ? null : 0"
   detail="false"
   (mousedown)="onMouseDown($event)"
+  [button]="_isIonicButton"
+  [disabled]="disabled"
 >
   <div class="outside" slot="start">
     <ng-content select="[slot='outside']"></ng-content>

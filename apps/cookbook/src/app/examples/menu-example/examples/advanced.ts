@@ -3,10 +3,15 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-menu-advanced-example',
   template: `<kirby-menu [closeOnSelect]="false">
-  <kirby-item (click)="actionClicked()">
+  <kirby-item>
     <kirby-icon name="notification" slot="start"></kirby-icon>
-    <h3>Title</h3>
-    <kirby-toggle slot="end" checked="true" (checkedChange)="toggled()"></kirby-toggle>
+    <h3>Notifications</h3>
+    <kirby-toggle slot="end"></kirby-toggle>
+  </kirby-item>
+  <kirby-item>
+    <kirby-icon name="person" slot="start"></kirby-icon>
+    <h3>Use face id</h3>
+    <kirby-checkbox slot="end"></kirby-checkbox>
   </kirby-item>
 </kirby-menu>`,
 };
@@ -17,12 +22,4 @@ const config = {
 })
 export class MenuAdvancedExampleComponent {
   template: string = config.template;
-
-  public actionClicked(): void {
-    console.log('Action clicked');
-  }
-
-  public toggled(): void {
-    console.log('Toggle changed');
-  }
 }

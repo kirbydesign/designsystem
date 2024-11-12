@@ -7,6 +7,8 @@
       [disabled]="isDisabled"
       type="button"
       [attentionLevel]="attentionLevel"
+      aria-haspopup="true"
+      [attr.aria-expanded]="floatingMenuIsShown"
       #defaultButton
     >
       <kirby-icon [name]="'more'"></kirby-icon>
@@ -28,9 +30,11 @@
   [autoPlacement]="autoPlacement"
   [shift]="shift"
   [ngStyle]="{
-    minWidth: minWidth ? minWidth + 'px' : null
+    minWidth: minWidth ? minWidth + 'px' : null,
   }"
   class="menu-popover"
+  (keydown)="_onKeydown($event)"
+  (displayChanged)="floatingMenuIsShown = $event"
 >
   <ng-content select="kirby-item"></ng-content>
 </kirby-card>
