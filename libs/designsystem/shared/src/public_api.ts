@@ -9,3 +9,5 @@ export * from './dynamic-component';
 export * from './fit-heading/index';
 
 export * from './controls/label-helpers';
+
+export * from './content-mutation-observer';

@@ -23,9 +23,9 @@ import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { observeContent, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
@@ -41,6 +41,7 @@ import {
   IonToolbar,
   ScrollDetail,
 } from '@ionic/angular/standalone';
+import { shouldIgnoreMutationRecord } from '@kirbydesign/designsystem/shared';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalConfig, ShowAlertCallback } from './config/modal-config';
@@ -200,77 +201,12 @@ export class ModalWrapperComponent
     });
   }
 
-  observeElementContentChanges() {
-    this._mutationObserver = new MutationObserver((mutations) =>
-      this.elementContentChangedCallback(mutations)
-    );
-
-    this.willClose$.subscribe(() => {
-      this._mutationObserver.disconnect();
-    });
-
-    this._mutationObserver.observe(this.ionTitleElement.nativeElement, {
-      characterData: true,
-      childList: true,
-      subtree: true,
-    });
-  }
-
-  elementContentChangedCallback(mutationRecords: MutationRecord[]) {
-    if (!this.ionTitleElement) return;
-
-    mutationRecords.forEach((record) => {
-      if (this.shouldIgnoreRecord(record)) return;
-
-      this.setElementTextAsAriaLabel(this.ionTitleElement.nativeElement, this.ionModalElement);
-    });
-  }
-
-  setElementTextAsAriaLabel(
-    ionTitleElement: HTMLIonTitleElement,
-    modalElement: HTMLIonModalElement
-  ) {
-    const modalElementDialog = modalElement.shadowRoot.querySelector('[role="dialog"]');
-    const titleText = ionTitleElement.textContent;
-    modalElementDialog.setAttribute('aria-label', titleText);
-    console.log('Setting aria-label for modal title: ', ionTitleElement);
-  }
-
-  /* Angular may add, remove, or edit comment nodes during change detection. We don't care about
-   * these changes because they don't affect the user-preceived content, and worse it can cause
-   * infinite change detection cycles where the change detection updates a comment, triggering the
-   * MutationObserver, triggering another change detection and kicking the cycle off again. */
-  shouldIgnoreRecord(record: MutationRecord) {
-    // Ignore changes to comment text.
-    if (record.type === 'characterData' && record.target instanceof Comment) {
-      console.log('ignoring characterData, because target is a comment: ', record);
-
-      return true;
-    }
-    // Ignore addition / removal of comments.
-    if (record.type === 'childList') {
-      for (let i = 0; i < record.addedNodes.length; i++) {
-        if (!(record.addedNodes[i] instanceof Comment)) {
-          return false;
-        }
-      }
-      for (let i = 0; i < record.removedNodes.length; i++) {
-        if (!(record.removedNodes[i] instanceof Comment)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    // Observe everything else.
-    return false;
-  }
-
   ngAfterViewInit(): void {
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-
-    this.observeElementContentChanges();
+    this.observeTitleContentChanges();
+    this.setTitleAsAriaLabel();
   }
 
   private _currentFooter: HTMLElement | null = null;
@@ -461,6 +397,32 @@ export class ModalWrapperComponent
           }
         });
     });
+  }
+
+  private observeTitleContentChanges() {
+    this._mutationObserver = observeContent(this.ionTitleElement.nativeElement, (mutations) =>
+      this.elementContentChangedCallback(mutations)
+    );
+
+    this.willClose$.subscribe(() => {
+      this._mutationObserver.disconnect();
+    });
+  }
+
+  private elementContentChangedCallback(mutationRecords: MutationRecord[]) {
+    if (!this.ionTitleElement) return;
+
+    mutationRecords.forEach((record) => {
+      if (shouldIgnoreMutationRecord(record)) return;
+
+      this.setTitleAsAriaLabel();
+    });
+  }
+
+  private setTitleAsAriaLabel() {
+    const titleTextContent = this.ionTitleElement.nativeElement.textContent;
+    const modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
+    modalDialog?.setAttribute('aria-label', titleTextContent);
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {

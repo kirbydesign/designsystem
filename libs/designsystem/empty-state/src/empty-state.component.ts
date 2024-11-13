@@ -9,6 +9,7 @@ import {
   QueryList,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-empty-state',
@@ -18,12 +19,13 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 })
 export class EmptyStateComponent implements AfterContentInit, OnInit {
   private _title: string;
+  private modalDialog: HTMLElement;
 
   @Input() iconName: string;
 
   @Input() set title(value: string) {
     this._title = value;
-    this.setAriaLabelOnModal();
+    this.modalDialog?.setAttribute('aria-label', value);
   }
 
   get title(): string {
@@ -34,19 +36,16 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
 
   @ContentChildren(ButtonComponent)
   private slottedButtons: QueryList<ButtonComponent>;
-  private ionModalElement: HTMLIonModalElement;
-  private modalElementDialog: HTMLElement;
 
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {
-    /* If initialized inside a modal that is not labelled, we want to set
+    /* If initialized inside a modal we want to set
      * the aria-label attribute on ion-modal to the title of empty state.
      * Further updates are handled by title setter.
      */
-    this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    this.modalElementDialog = this.ionModalElement?.shadowRoot.querySelector('[role="dialog"]');
-    this.setAriaLabelOnModal();
+    this.modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
+    this.modalDialog?.setAttribute('aria-label', this.title);
   }
 
   ngAfterContentInit() {
@@ -59,11 +58,6 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
     });
   }
 
-  private setAriaLabelOnModal() {
-    if (this.modalElementDialog && this._title) {
-      this.modalElementDialog.ariaLabel = this._title;
-    }
-  }
   /** Enforces that all slotted buttons will have their attention
    * level set to 3, except the first button if it has
    * level 1.
