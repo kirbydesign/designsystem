@@ -33,8 +33,6 @@ type NoInfer<T> = [T][T extends any ? 0 : never];
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: { role: 'group' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
