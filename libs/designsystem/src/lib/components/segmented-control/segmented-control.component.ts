@@ -157,8 +157,9 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
   }
 
   getTabIndex(item: TItem, index: number) {
+    const segmentElementHasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
     // When focused prevent tab stop from inner native button to outer ion-segment-button:
-    if (this.ionSegmentElement.nativeElement.matches(':focus-within')) return -1;
+    if (segmentElementHasFocus) return -1;
     // Allow tab stop on selected item:
     if (item.id === this.value?.id) return null;
     // Allow tab stop on first item if no value is set:
