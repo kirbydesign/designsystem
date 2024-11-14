@@ -4,26 +4,25 @@
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventOutsideClick($event)"
 >
-  <ng-container *ngFor="let item of items; let i = index">
-    <ion-segment-button
-      [value]="item.id"
-      [attr.tabindex]="getTabIndex(item, i)"
-      (click)="focusNativeButton($event)"
+  <ion-segment-button
+    *ngFor="let item of items; let i = index"
+    [value]="item.id"
+    [attr.tabindex]="getTabIndex(item, i)"
+    (click)="focusNativeButton($event)"
+  >
+    {{ item.text }}
+    <kirby-badge
+      *ngIf="item.badge"
+      role="text"
+      [attr.aria-label]="item.badge.description"
+      [themeColor]="item.badge.themeColor"
     >
-      {{ item.text }}
-      <kirby-badge
-        *ngIf="item.badge"
-        role="text"
-        [attr.aria-label]="item.badge.description"
-        [themeColor]="item.badge.themeColor"
-      >
-        <ng-container *ngIf="item.badge.icon; else badgeContent">
-          <kirby-icon [name]="item.badge.icon"></kirby-icon>
-        </ng-container>
-        <ng-template #badgeContent>
-          {{ item.badge.content }}
-        </ng-template>
-      </kirby-badge>
-    </ion-segment-button>
-  </ng-container>
+      <ng-container *ngIf="item.badge.icon; else badgeContent">
+        <kirby-icon [name]="item.badge.icon"></kirby-icon>
+      </ng-container>
+      <ng-template #badgeContent>
+        {{ item.badge.content }}
+      </ng-template>
+    </kirby-badge>
+  </ion-segment-button>
 </ion-segment>
