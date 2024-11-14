@@ -4,8 +4,12 @@
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventOutsideClick($event)"
 >
-  <ng-container *ngFor="let item of items">
-    <ion-segment-button [value]="item.id">
+  <ng-container *ngFor="let item of items; let i = index">
+    <ion-segment-button
+      [value]="item.id"
+      [attr.tabindex]="getTabIndex(item, i)"
+      (click)="focusNativeButton($event)"
+    >
       {{ item.text }}
       <kirby-badge
         *ngIf="item.badge"
