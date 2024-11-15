@@ -26,6 +26,7 @@ describe('InputComponent in Item', () => {
         <input kirby-input/>
       </kirby-item>`);
       element = spectator.element as HTMLInputElement;
+      // Ensure ion-item is ready and styles are applied:
       await TestHelper.whenReady(spectator.queryHost('ion-item'));
     });
 
