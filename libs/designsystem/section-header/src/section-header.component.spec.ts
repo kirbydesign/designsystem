@@ -1,6 +1,7 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { SectionHeaderComponent } from './section-header.component';
 
 const { fontSize, fontWeight, lineHeight } = DesignTokenHelper;
@@ -12,12 +13,14 @@ describe('SectionHeaderComponent', () => {
     component: SectionHeaderComponent,
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
       <p heading>Section Header</p>
-      <p label>Section Header</p>
+      <p label>Section Header</p>sec
       <p detail>Section Header</p>
     </kirby-section-header>`);
+    // Ensure ion-item-divider is ready and styles are applied:
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
   });
 
   it('should create', () => {

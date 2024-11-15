@@ -443,7 +443,7 @@ describe('FormFieldComponent', () => {
 
   describe('When nested inside a kirby-item', () => {
     describe('by default', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         spectator = createHost(
           `<kirby-item>
             <kirby-form-field>
@@ -451,6 +451,8 @@ describe('FormFieldComponent', () => {
             </kirby-form-field>
           </kirby-item>`
         );
+        // Ensure ion-item is ready and styles are applied:
+        await TestHelper.whenReady(spectator.queryHost('ion-item'));
       });
 
       it('should render with no bottom margin', () => {
@@ -462,7 +464,7 @@ describe('FormFieldComponent', () => {
     });
 
     describe('and slotted end', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         spectator = createHost(
           `<kirby-item>
             <kirby-form-field slot="end">
@@ -470,6 +472,8 @@ describe('FormFieldComponent', () => {
             </kirby-form-field>
           </kirby-item>`
         );
+        // Ensure ion-item is ready and styles are applied:
+        await TestHelper.whenReady(spectator.queryHost('ion-item'));
       });
 
       it('should render the input with correct text alignment', () => {
