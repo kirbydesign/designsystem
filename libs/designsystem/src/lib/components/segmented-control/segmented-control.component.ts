@@ -94,7 +94,7 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
         );
         if (selectedSegmentButton) return; // Nothing to patch
 
-        ionSelectEvent.emit({ value: this._value.id });
+        ionSelectEvent.emit({ value: this._value?.id });
       });
     }
   }
