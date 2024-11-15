@@ -157,6 +157,13 @@ describe('SegmentedControlComponent', () => {
         expect(segmentButtonsWithoutTabStop).toHaveLength(segmentButtons.length - 1);
       });
 
+      it('should set selected segment button as tab stop', async () => {
+        const selectedSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
+          'ion-segment-button.segment-button-checked'
+        );
+        expect(selectedSegmentButton).not.toHaveAttribute('tabindex');
+      });
+
       it('should remove tab stop when focused', async () => {
         const selectedSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
           'ion-segment-button.segment-button-checked'
@@ -201,6 +208,13 @@ describe('SegmentedControlComponent', () => {
         );
         expect(segmentButtonsWithTabStop).toHaveLength(1);
         expect(segmentButtonsWithoutTabStop).toHaveLength(segmentButtons.length - 1);
+      });
+
+      it('should set first segment button as tab stop', async () => {
+        const firstSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
+          'ion-segment-button:first-of-type'
+        );
+        expect(firstSegmentButton).not.toHaveAttribute('tabindex');
       });
 
       it('should remove tab stop when focused', async () => {
