@@ -20,12 +20,14 @@ describe('InputComponent in Item', () => {
   });
 
   describe('by default', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost(`
       <kirby-item>
         <input kirby-input/>
       </kirby-item>`);
       element = spectator.element as HTMLInputElement;
+      // Ensure ion-item is ready and styles are applied:
+      await TestHelper.whenReady(spectator.queryHost('ion-item'));
     });
 
     it('should render with correct padding', () => {
@@ -54,12 +56,14 @@ describe('InputComponent in Item', () => {
   });
 
   describe('slotted end', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost(`
       <kirby-item>
         <input slot="end" kirby-input/>
       </kirby-item>`);
       element = spectator.element as HTMLInputElement;
+      // Ensure ion-item is ready and styles are applied:
+      await TestHelper.whenReady(spectator.queryHost('ion-item'));
     });
 
     it('should render with default width', () => {
