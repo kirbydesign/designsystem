@@ -2,7 +2,11 @@
   Segmented Control is a horizontal row of buttons used for toggling between related choices within
   content.
 </p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
 <div class="example">
+  <h2>Examples</h2>
   <h3>Default</h3>
   <cookbook-example-viewer [html]="example.template" [ts]="example.codeSnippet">
     <cookbook-segmented-control-example-default
@@ -123,7 +127,56 @@
     ></cookbook-segmented-control-example-color>
   </cookbook-example-viewer>
 
-  <h2>Properties:</h2>
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+
+  <h2>Accessibility</h2>
+  <p>
+    The Segmented Control implements the
+    <a
+      class="kirby-external-icon"
+      target="_blank"
+      href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/"
+    >
+      Tabs Pattern from ARIA Authoring Practices Guide
+    </a>
+  </p>
+  <h3>Keyboard support</h3>
+  <p>
+    The component has full keyboard support for navigating between and selecting segment buttons .
+    Keyboard navigation will only focus segment buttons, use
+    <kbd>Enter &#8629;</kbd>
+    or
+    <kbd>Space</kbd>
+    to select the element that is currently focused.
+  </p>
+  <p>The following keys can be used to navigate within the control:</p>
+  <!-- prettier-ignore -->
+  <ul>
+    <li>
+      <kbd>Tab</kbd>:
+      <ul>
+        <li>When focus moves into the segmented control, places focus on the selected segment button. If there is no selected segment button moves to the first segment button</li>
+        <li>When the segmented control contains the focus, moves focus to the next element in the page tab sequence outside the control</li>
+      </ul>
+    </li>
+    <li>
+      <kbd>&#8592;</kbd> moves focus to the previous segment button. If focus is on the first segment button, moves focus to the last segment button
+    </li>
+    <li>
+      <kbd>&#8594;</kbd> moves focus to the next segment button. If focus is on the last segment button, moves focus to the first segment button
+    </li>
+    <li>
+      <kbd>Home</kbd> moves focus to the first segment button
+    </li>
+    <li>
+      <kbd>End</kbd> moves focus to the last segment button
+    </li>
+  </ul>
+
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+
+  <h2>API</h2>
+  <h3>Properties</h3>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
