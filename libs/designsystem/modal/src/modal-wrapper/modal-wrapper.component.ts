@@ -25,9 +25,9 @@ import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper, getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
-import { observeContent, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { PlatformService } from '@kirbydesign/designsystem/helpers';
+import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
@@ -41,7 +41,6 @@ import {
   IonToolbar,
   ScrollDetail,
 } from '@ionic/angular/standalone';
-import { shouldIgnoreMutationRecord } from '@kirbydesign/designsystem/shared';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalConfig, ShowAlertCallback } from './config/modal-config';
@@ -400,30 +399,23 @@ export class ModalWrapperComponent
   }
 
   private observeTitleContentChanges() {
-    this._mutationObserver = observeContent(this.ionTitleElement.nativeElement, (mutations) =>
-      this.elementContentChangedCallback(mutations)
+    this._mutationObserver = observeContent(
+      this.ionTitleElement.nativeElement,
+      this.setTitleAsAriaLabel
     );
 
+    // TODO: Should this be handled by observe content instead?
     this.willClose$.subscribe(() => {
       this._mutationObserver.disconnect();
     });
   }
 
-  private elementContentChangedCallback(mutationRecords: MutationRecord[]) {
+  private setTitleAsAriaLabel = () => {
     if (!this.ionTitleElement) return;
-
-    mutationRecords.forEach((record) => {
-      if (shouldIgnoreMutationRecord(record)) return;
-
-      this.setTitleAsAriaLabel();
-    });
-  }
-
-  private setTitleAsAriaLabel() {
     const titleTextContent = this.ionTitleElement.nativeElement.textContent;
     const modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
     modalDialog?.setAttribute('aria-label', titleTextContent);
-  }
+  };
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToTop(scrollDuration || 0);

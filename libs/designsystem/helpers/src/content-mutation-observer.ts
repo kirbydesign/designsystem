@@ -3,7 +3,7 @@
  * these changes because they don't affect the user-preceived content, and worse it can cause
  * infinite change detection cycles where the change detection updates a comment, triggering the
  * MutationObserver, triggering another change detection and kicking the cycle off again. */
-export function shouldIgnoreMutationRecord(record: MutationRecord) {
+function shouldIgnoreMutationRecord(record: MutationRecord) {
   // Ignore changes to comment text.
   if (record.type === 'characterData' && record.target instanceof Comment) {
     return true;
@@ -28,11 +28,14 @@ export function shouldIgnoreMutationRecord(record: MutationRecord) {
 
 export function observeContent(
   observedElement: HTMLElement,
-  callback: MutationCallback
+  contentChangedCallback: () => void
 ): MutationObserver {
-  const mutationObserver = new MutationObserver((mutations) =>
-    callback(mutations, mutationObserver)
-  );
+  const mutationObserver = new MutationObserver((mutations) => {
+    const filteredMutations = mutations.filter((mutation) => !shouldIgnoreMutationRecord(mutation));
+    if (filteredMutations.length > 0) {
+      contentChangedCallback();
+    }
+  });
 
   mutationObserver.observe(observedElement, {
     characterData: true,

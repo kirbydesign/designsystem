@@ -2,6 +2,7 @@
 // of 'designsystem' library
 export * from './element-has-ancestor';
 export * from './color-helper';
+export * from './content-mutation-observer';
 export * from './design-token-helper';
 export * from './string-helper';
 export * from './theme-color.type';
