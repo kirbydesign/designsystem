@@ -156,10 +156,11 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
     (event.target as HTMLIonSegmentButtonElement)?.setFocus();
   }
 
+  private _segmentElementHasFocus = false;
+
   getTabIndex(item: TItem, index: number) {
-    const segmentElementHasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
     // When focused prevent tab stop from inner native button to outer ion-segment-button:
-    if (segmentElementHasFocus) return -1;
+    if (this._segmentElementHasFocus) return -1;
     // Allow tab stop on selected item:
     if (item.id === this.value?.id) return null;
     // Allow tab stop on first item if no value is set:
@@ -168,9 +169,10 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
     return -1;
   }
 
-  @HostListener('focusin', ['$event'])
-  @HostListener('focusout', ['$event'])
-  _noop() {
-    // This triggers Change Detection and updates attr.tabindex on each ion-segment-button
+  @HostListener('focusin')
+  @HostListener('focusout')
+  _onFocusInOut() {
+    // @HostListener(focusin|focusout) triggers Change Detection and updates attr.tabindex on each ion-segment-button
+    this._segmentElementHasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
   }
 }
