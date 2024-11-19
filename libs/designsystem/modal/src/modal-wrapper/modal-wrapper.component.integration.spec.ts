@@ -1,13 +1,21 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import {
+  createComponentFactory,
+  createHostFactory,
+  Spectator,
+  SpectatorHost,
+} from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import {
+  AlertHelper,
   CanDismissHelper,
+  ModalComponent,
   ModalFooterComponent,
+  ModalNavigationService,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 
@@ -368,5 +376,68 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
         expect(pageProgressAsIonToolbarChild).toBeNull();
       });
     });
+  });
+});
+
+describe('ModalWrapperComponent + ModalComponent', () => {
+  let spectator: SpectatorHost<ModalComponent>;
+  let ionModal: HTMLIonModalElement;
+  const modalTitle = 'My Modal Title';
+
+  const createHost = createHostFactory({
+    component: ModalComponent,
+    imports: [TestHelper.ionicModuleForTest],
+    declarations: [PageTitleComponent],
+    providers: [CanDismissHelper, AlertHelper],
+    mocks: [ModalNavigationService],
+  });
+
+  beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
+    spectator = createHost(
+      `
+      <kirby-modal>
+        <ng-template>
+          <kirby-page-title>{{modalTitle}}</kirby-page-title>
+        </ng-template>
+      </kirby-modal>
+    `,
+      {
+        hostProps: {
+          modalTitle: modalTitle,
+        },
+      }
+    );
+    spectator.setInput('isOpen', true);
+    ionModal = spectator.queryHost('ion-modal');
+  });
+
+  afterEach(() => {
+    spectator.setInput('isOpen', false);
+  });
+
+  it('should set modal title text content as modal label', async () => {
+    await TestHelper.whenReady(ionModal);
+    const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+    await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+
+    expect(dialogElement.getAttribute('aria-label')).toBe(modalTitle);
+  });
+
+  it('should update modal label when kirby-page-title content changes', async () => {
+    await TestHelper.whenReady(ionModal);
+    const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+    await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+
+    expect(dialogElement).toHaveAttribute('aria-label', modalTitle);
+
+    const newTitle = 'Updated Modal Title';
+    const pageTitleComponent = spectator.query(PageTitleComponent);
+    pageTitleComponent['elementRef'].nativeElement.textContent = newTitle;
+
+    // Wait for aria-label to be updated
+    await TestHelper.whenTrue(() => dialogElement.getAttribute('aria-label') !== modalTitle);
+
+    expect(dialogElement.getAttribute('aria-label')).toBe(newTitle);
   });
 });
