@@ -31,7 +31,7 @@ function shouldIgnoreMutationRecord(record: MutationRecord) {
 export function observeContent(
   observedElement: HTMLElement,
   contentChangedCallback: () => void,
-  disconnect$: Observable<void>
+  unobserve$?: Observable<void>
 ): MutationObserver {
   const mutationObserver = new MutationObserver((mutations) => {
     const filteredMutations = mutations.filter((mutation) => !shouldIgnoreMutationRecord(mutation));
@@ -46,7 +46,7 @@ export function observeContent(
     subtree: true,
   });
 
-  disconnect$.subscribe(() => {
+  unobserve$?.subscribe(() => {
     mutationObserver.disconnect();
   });
 

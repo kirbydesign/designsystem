@@ -25,7 +25,7 @@ class ContentObserverHostComponent implements OnDestroy {
   }
 }
 
-describe('Content Mutation Observer', () => {
+describe('observeContent', () => {
   let spectator: Spectator<ContentObserverHostComponent>;
 
   const createComponent = createComponentFactory({

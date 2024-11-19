@@ -28,7 +28,7 @@ export const elementHasAncestor = (
 };
 
 /*
- * Utility function to get the closest ancestor modal and
+ * Utility function to find the closest ancestor modal and
  * get the element with a dialog role from within its shadow root.
  */
 export function getModalDialogAncestor(currentElement: HTMLElement): HTMLElement | undefined {
