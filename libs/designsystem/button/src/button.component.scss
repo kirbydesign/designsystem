@@ -226,7 +226,8 @@ $button-margin: utils.size('xxxs');
 
     .content-layer {
       @include utils.slotted(':not(kirby-icon)') {
-        display: none;
+        position: absolute;
+        scale: 0;
       }
     }
   }

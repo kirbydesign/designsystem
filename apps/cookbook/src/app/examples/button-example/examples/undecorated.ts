@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-button-example-undecorated',
-  template: `<button kirby-button [noDecoration]="true">
+  template: `<button kirby-button [noDecoration]="true" aria-label="Close">
   <kirby-icon name="close"></kirby-icon>
 </button>`,
 };

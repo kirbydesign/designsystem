@@ -8,10 +8,10 @@ import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/desi
   template: `
     <kirby-page [title]="title | async">
       <kirby-page-actions *kirbyPageActions>
-        <button kirby-button (click)="onCogSelect()">
+        <button kirby-button (click)="onCogSelect()" aria-label="Settings">
           <kirby-icon name="cog"></kirby-icon>
         </button>
-        <button kirby-button (click)="onMoreSelect()">
+        <button kirby-button (click)="onMoreSelect()" aria-label="More">
           <kirby-icon name="more"></kirby-icon>
         </button>
       </kirby-page-actions>
