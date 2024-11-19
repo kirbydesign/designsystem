@@ -506,8 +506,11 @@ describe('ButtonComponent', () => {
         expect(contentLayer.lastChild).toBe(contentLayer.querySelector('kirby-icon'));
       });
 
-      it('should hide the plain text', () => {
-        expect(contentLayer.firstChild).toBeHidden();
+      it('should visually hide the plain text', () => {
+        expect(contentLayer.firstChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.firstChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {
@@ -540,8 +543,11 @@ describe('ButtonComponent', () => {
         expect(contentLayer.firstChild).toBe(contentLayer.querySelector('kirby-icon'));
       });
 
-      it('should hide the plain text', () => {
-        expect(contentLayer.lastChild).toBeHidden();
+      it('should visually hide the plain text', () => {
+        expect(contentLayer.lastChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.lastChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {
@@ -568,8 +574,11 @@ describe('ButtonComponent', () => {
         expect(firstChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
       });
 
-      it('should hide the text element', () => {
-        expect(contentLayer.firstChild).toBeHidden();
+      it('should visually hide the text element', () => {
+        expect(contentLayer.firstChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.firstChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {
@@ -596,8 +605,11 @@ describe('ButtonComponent', () => {
         expect(lastChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
       });
 
-      it('should hide the text element', () => {
-        expect(contentLayer.lastChild).toBeHidden();
+      it('should visually hide the text element', () => {
+        expect(contentLayer.lastChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.lastChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {

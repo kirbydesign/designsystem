@@ -33,14 +33,14 @@ const config = {
 
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
-    <button kirby-button (click)="onMoreSelect()">
+    <button kirby-button (click)="onMoreSelect()" aria-label="More">
       <kirby-icon name="more"></kirby-icon>
     </button>
   </kirby-page-actions>
 
   <!-- Sticky Page Actions -->
   <kirby-page-actions *kirbyPageActions>
-    <button kirby-button (click)="onCogSelect()">
+    <button kirby-button (click)="onCogSelect()" aria-label="Settings">
       <kirby-icon name="cog"></kirby-icon>
     </button>
   </kirby-page-actions>
