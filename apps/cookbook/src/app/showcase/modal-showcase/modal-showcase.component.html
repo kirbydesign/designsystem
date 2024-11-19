@@ -665,50 +665,50 @@
 
 <h2 #accessibility>Accessibility</h2>
 <p>
-  It is important to provide a meaningful title as it will be announced by screen readers when the
-  modal is opened.
-</p>
-<!-- TODO: fix structure, needs rewrite -->
-<p>
   Modals have a
   <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role">
     dialog
   </a>
-  role, which means they need to be labelled for screen readers to announce when the modal dialog
-  appears, and to give proper context when interacting with the content within.
+  role and implement focus management and keyboard support accordingly.
+</p>
+<p>
+  When opened, focus is moved into the modal. Focus is trapped within the modal while it is open,
+  preventing users from navigating to elements outside the modal. Upon closing, focus is moved back
+  to where it was before showing the modal. Pressing
+  <kbd>Esc</kbd>
+  dismisses the modal.
 </p>
 
+<h3>Labeling modals</h3>
 <p>
-  The modal automatically takes care of setting majority of cases by using the title in the modal
-  header as its label. This is not, however, the case for compact modals.
+  The provided
+  <code>kirby-page-title</code>
+  is automatically used as a label to add context for assistive technologies. For example, screen
+  readers use the label to announce when the modal dialog appears and to give proper context when
+  interacting with the content within.
 </p>
+<p>This emphasizes the importance of providing a meaningful title for all alerts.</p>
 
-<h3>Compact Modals</h3>
+<h4>Compact Modals</h4>
 <p>
-  A label is not automatically inferred for compact modals as they do not have a header with a
-  title, except when a
+  A label
+  <strong>cannot</strong>
+  automatically be inferred for compact modals as they do not always have a title, except when a
   <a [routerLink]="'../message-state'">Message State</a>
-  is shown inside a compact modal - see below. For all other compact modals, developers must add an
+  is used. Therefore, developers must add an
   <code>aria-label</code>
-  that will be announced as the modal title.
+  that will be announced as the modal label.
 </p>
 
 <p>
   This can be achieved by injecting the modal into the embedded component displayed within your
-  modal and seting the
+  modal and setting the
   <code>ariaLabel</code>
   property.
 </p>
 <cookbook-example-viewer
   [ts]="compactExample.ariaLabelPropertyCodeSnippet"
 ></cookbook-example-viewer>
-
-<h4>Message State</h4>
-<p>
-  If you are creating custom alerts by showing a Message State inside a compact
-  <a routerLink="../modal">modal</a>
-  its title will automatically be used as a label for the modal dialog.
-</p>
 
 <h2 #sharedProperties>Shared properties</h2>
 <p class="comment">
