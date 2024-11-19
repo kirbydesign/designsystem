@@ -399,15 +399,7 @@ export class ModalWrapperComponent
   }
 
   private observeTitleContentChanges() {
-    this._mutationObserver = observeContent(
-      this.ionTitleElement.nativeElement,
-      this.setTitleAsAriaLabel
-    );
-
-    // TODO: Should this be handled by observe content instead?
-    this.willClose$.subscribe(() => {
-      this._mutationObserver.disconnect();
-    });
+    observeContent(this.ionTitleElement.nativeElement, this.setTitleAsAriaLabel, this.willClose$);
   }
 
   private setTitleAsAriaLabel = () => {

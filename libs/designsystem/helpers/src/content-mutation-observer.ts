@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 /* Function based on https://github.com/angular/components/blob/main/src/cdk/observers/observe-content.ts
  * Angular may add, remove, or edit comment nodes during change detection. We don't care about
  * these changes because they don't affect the user-preceived content, and worse it can cause
@@ -28,7 +30,8 @@ function shouldIgnoreMutationRecord(record: MutationRecord) {
 
 export function observeContent(
   observedElement: HTMLElement,
-  contentChangedCallback: () => void
+  contentChangedCallback: () => void,
+  disconnect$: Observable<void>
 ): MutationObserver {
   const mutationObserver = new MutationObserver((mutations) => {
     const filteredMutations = mutations.filter((mutation) => !shouldIgnoreMutationRecord(mutation));
@@ -41,6 +44,10 @@ export function observeContent(
     characterData: true,
     childList: true,
     subtree: true,
+  });
+
+  disconnect$.subscribe(() => {
+    mutationObserver.disconnect();
   });
 
   return mutationObserver;

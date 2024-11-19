@@ -66,7 +66,6 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
      * Further updates are handled by title setter.
      */
     this.setAriaLabelOnModal();
-    console.log('ModalCompactWrapperComponent ngOnInit ariaLabel:', this._ariaLabel);
 
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
