@@ -96,20 +96,44 @@
 
   <h2>Icon only</h2>
   <p>
-    The button can be rendered with an icon only and no text. This is useful for "close" buttons and
-    menu buttons.
+    The button can be rendered with an icon only and no visible text. This is useful for "close"
+    buttons and menu buttons.
   </p>
-  <p>To render a button with an icon only, include an icon within the button and omit any text.</p>
+  <p>
+    To render a button with an icon only you can either include an accessible name inside the button
+    next to the icon and hide it visually by setting
+    <code>[showIconOnly]="true"</code>
+    or you can omit any text and set an
+    <code>aria-label</code>
+    instead. Please refer to the section on
+    <a href="#" (click)="scrollTo(accessibleIconButtons)">Accessible Icon Buttons</a>
+    below.
+  </p>
   <p>
     <em>
-      Note: If you do need to include a text for the button in the markup but still want to render
-      the button as icon only, set
-      <code>[showIconOnly]="true"</code>
-      . This is also useful in scenarios where the button needs to toggle between the default state
-      and a "collapsed" state, e.g. when used in an
+      Note: including a—visually hidden—label in the markup is also useful in scenarios where the
+      button needs to toggle between the default state and a "collapsed" state, e.g. when used in an
       <a routerLink="../header">action group</a>
       .
     </em>
+  </p>
+  <h3 #accessibleIconButtons>Accessible Icon Buttons</h3>
+  <p>
+    When rendering a button with no visible text it's important to make the button accessible to
+    assistive technologies, such as screen readers.
+  </p>
+  <p>
+    By including a—visually hidden—label in the markup as mentioned above, assistive technologies
+    will automatically infer the name of the button from it's content.
+  </p>
+  <p>
+    If you choose to omit the text inside the button you must set a meaningful
+    <code>aria-label</code>
+    instead.
+  </p>
+  <p>
+    In both cases the label should describe the action of the button, such as "Close", "Search",
+    "Settings" etc.
   </p>
 
   <cookbook-example-viewer [html]="iconOnlyExample.template">
@@ -142,7 +166,7 @@
     <cookbook-button-example-disabled #disabledExample></cookbook-button-example-disabled>
   </cookbook-example-viewer>
 
-  <h3>Accessible Disabled Buttons</h3>
+  <h3 #accessibleDisabledButtons>Accessible Disabled Buttons</h3>
   <p>
     The
     <code>disabled</code>
@@ -150,8 +174,8 @@
     removing the button from the focus order of the web page.
   </p>
   <p>
-    In many scenarios it's good practice to expose the button as disabled, but still make it available for
-    users to find when navigating via the
+    In many scenarios it's good practice to expose the button as disabled, but still make it
+    available for users to find when navigating via the
     <kbd>Tab</kbd>
     key.
     <br />
@@ -196,6 +220,17 @@
   <cookbook-example-viewer [html]="linkExample.template">
     <cookbook-button-example-link #linkExample></cookbook-button-example-link>
   </cookbook-example-viewer>
+
+  <h2>Accessibility</h2>
+  <p>Please refer to:</p>
+  <ul>
+    <li>
+      <a href="#" (click)="scrollTo(accessibleIconButtons)">Accessible Icon Buttons</a>
+    </li>
+    <li>
+      <a href="#" (click)="scrollTo(accessibleDisabledButtons)">Accessible Disabled Buttons</a>
+    </li>
+  </ul>
 
   <h2>API</h2>
   <h3>Properties</h3>

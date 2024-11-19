@@ -9,10 +9,10 @@ const config = {
   <kirby-icon name="edit"></kirby-icon>  
   Disabled with icon
 </button>
-<button kirby-button disabled>
+<button kirby-button disabled aria-label="Close">
   <kirby-icon name="close"></kirby-icon>  
 </button>
-<button kirby-button disabled [noDecoration]="true">
+<button kirby-button disabled [noDecoration]="true" aria-label="Close">
   <kirby-icon name="close"></kirby-icon>
 </button>`,
 };
