@@ -11,6 +11,7 @@ import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { CommonModule } from '@angular/common';
+import { getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 import { ModalConfig, ShowAlertCallback } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
@@ -45,7 +46,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   componentPropsInjector: Injector;
 
   private ionModalElement: HTMLIonModalElement;
-  private modalElementDialog: HTMLElement;
+  private ionModalElementDialog: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly didPresent = firstValueFrom(this.ionModalDidPresent);
@@ -60,7 +61,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    this.modalElementDialog = this.ionModalElement.shadowRoot.querySelector('[role="dialog"]');
+    this.ionModalElementDialog = getModalDialogAncestor(this.elementRef.nativeElement);
 
     /* If initialized with ariaLabel, we want to set the aria-label attribute immediately.
      * Further updates are handled by title setter.
@@ -94,8 +95,8 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   }
 
   private setAriaLabelOnModal() {
-    if (this.modalElementDialog && this.ariaLabel) {
-      this.modalElementDialog.ariaLabel = this.ariaLabel;
+    if (this.ionModalElementDialog && this.ariaLabel) {
+      this.ionModalElementDialog.ariaLabel = this.ariaLabel;
     }
   }
 
