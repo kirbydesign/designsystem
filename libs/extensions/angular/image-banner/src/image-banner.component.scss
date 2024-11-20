@@ -70,6 +70,10 @@ $container-query-breakpoint: 600px;
   object-position: center;
 }
 
+kirby-card {
+  height: 100%;
+}
+
 .main-content-wrapper {
   width: 100%;
   padding: utils.size('xxs');
