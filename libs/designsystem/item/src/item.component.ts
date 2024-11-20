@@ -47,8 +47,6 @@ export class ItemComponent {
   @ContentChild(RadioComponent, { static: false, read: ElementRef })
   private radio: ElementRef<HTMLElement>;
 
-  constructor(public el: ElementRef) {}
-
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
     if (
@@ -62,6 +60,6 @@ export class ItemComponent {
   get _isIonicButton() {
     // Ionic checks for slotted checkbox and radio
     // and we shouldn't set the `button` prop in that scenario:
-    return this.selectable && !(this.checkbox || this.radio); //Add toggle
+    return this.selectable && !(this.checkbox || this.radio);
   }
 }
