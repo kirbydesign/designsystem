@@ -4,12 +4,8 @@ import {
   ContentChild,
   ElementRef,
   HostBinding,
-  HostListener,
   Input,
-  ViewChild,
 } from '@angular/core';
-
-import { IonItem } from '@ionic/angular/standalone';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { RadioComponent } from '@kirbydesign/designsystem/radio';
@@ -50,15 +46,8 @@ export class ItemComponent {
   private checkbox: ElementRef<HTMLElement>;
   @ContentChild(RadioComponent, { static: false, read: ElementRef })
   private radio: ElementRef<HTMLElement>;
-  @ViewChild(IonItem, { static: true })
-  ionItem;
 
-  @HostListener('focus')
-  onFocus() {
-    this.focusItem(this.ionItem.el);
-  }
-
-  constructor(public element: ElementRef) {}
+  constructor(public el: ElementRef) {}
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
@@ -70,18 +59,9 @@ export class ItemComponent {
     }
   }
 
-  /** Focus the internal button of the ion-item */
-  focusItem(item: HTMLIonItemElement) {
-    const root = item.shadowRoot;
-    const button = root.querySelector('button');
-    if (button) {
-      button.focus();
-    }
-  }
-
   get _isIonicButton() {
     // Ionic checks for slotted checkbox and radio
     // and we shouldn't set the `button` prop in that scenario:
-    return this.selectable; // && !(this.checkbox || this.radio);
+    return this.selectable && !(this.checkbox || this.radio); //Add toggle
   }
 }

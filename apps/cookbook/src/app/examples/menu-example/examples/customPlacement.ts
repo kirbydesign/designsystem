@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-menu-custom-placement-example',
   template: `<kirby-menu [placement]="'bottom-end'">
-  <kirby-item>
+  <kirby-item [selectable]="true">
     <h3>Action 1</h3>
   </kirby-item>
   ...

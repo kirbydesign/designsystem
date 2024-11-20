@@ -2,20 +2,23 @@
   <ng-content select="button[kirby-button]"></ng-content>
   <ng-container *ngIf="!userProvidedButton">
     <button
+      #defaultButton
+      id="defaultButton"
       kirby-button
       [size]="buttonSize"
       [disabled]="isDisabled"
       type="button"
       [attentionLevel]="attentionLevel"
       aria-haspopup="true"
-      [attr.aria-expanded]="floatingMenuIsShown"
-      #defaultButton
+      [attr.aria-controls]="MENU_ID"
+      aria-expanded="false"
     >
       <kirby-icon [name]="'more'"></kirby-icon>
     </button>
   </ng-container>
 </div>
 <kirby-card
+  [id]="MENU_ID"
   kirbyFloating
   [strategy]="'fixed'"
   [reference]="buttonContainerElement"
@@ -34,7 +37,9 @@
   }"
   class="menu-popover"
   (keydown)="_onKeydown($event)"
-  (displayChanged)="floatingMenuIsShown = $event"
+  (displayChanged)="menuVisibilityChanged($event)"
+  role="menu"
+  [attr.aria-labelledby]="triggerButtonId"
 >
   <ng-content select="kirby-item"></ng-content>
 </kirby-card>

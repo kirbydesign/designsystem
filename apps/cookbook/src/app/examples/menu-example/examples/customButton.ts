@@ -10,8 +10,14 @@ const config = {
   >
     <kirby-icon [name]="'menu-outline'"></kirby-icon>
   </button>
-  <kirby-item>
+  <kirby-item [selectable]="true">
     <h3>Action 1</h3>
+  </kirby-item>
+  <kirby-item [selectable]="true">
+    <h3>Action 2</h3>
+  </kirby-item>
+  <kirby-item [selectable]="true">
+    <h3>Action 3</h3>
   </kirby-item>
 </kirby-menu>`,
 };

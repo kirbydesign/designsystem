@@ -39,6 +39,9 @@ import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
+  readonly MENU_ID: string = 'MENU_ID';
+  triggerButtonId: string = 'DEFAULT_BUTTON';
+
   constructor(
     private cdr: ChangeDetectorRef,
     private elementRef: ElementRef<HTMLElement>,
@@ -79,10 +82,10 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   public buttonContainerElement: ElementRef<HTMLElement> | undefined;
 
   @ViewChild('defaultButton', { read: ElementRef })
-  public defaultButtonElement: ElementRef<HTMLElement> | undefined;
+  public defaultButtonElement: ElementRef<HTMLButtonElement> | undefined;
 
   @ContentChild(ButtonComponent, { read: ElementRef }) public userProvidedButton:
-    | ElementRef<HTMLElement>
+    | ElementRef<HTMLButtonElement>
     | undefined;
 
   @ViewChild(FloatingDirective)
@@ -109,6 +112,14 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   private preventFurtherPropagation(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
+  }
+
+  private getFirstInteractiveElement(el: HTMLIonItemElement) {
+    const controls = el.querySelectorAll<
+      HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement
+    >('ion-toggle:not([disabled]), ion-checkbox:not([disabled]), ion-radio:not([disabled])');
+
+    return controls[0] || undefined;
   }
 
   private handleOnKeyForClosedMenu(event: KeyboardEvent) {
@@ -152,12 +163,12 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         break;
       case 'Escape':
         if (this.closeOnEscapeKey) {
-          this.closeMenu();
+          this._floatingMenu.hide();
         }
         this.preventFurtherPropagation(event);
         break;
       case 'Tab':
-        this.closeMenu();
+        this._floatingMenu.hide();
         break;
     }
   }
@@ -166,22 +177,32 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     this.getTriggerButton().nativeElement.focus();
   }
 
-  private closeMenu() {
-    this.resetFocus();
-    this._floatingMenu.hide();
-    this.focusTriggerButton();
-  }
-
   resetFocus() {
     this.focusedIndex = -1;
   }
 
   focusItem() {
     const itemToBeFocused = this.kirbyItems.get(this.focusedIndex);
-    itemToBeFocused.nativeElement.focus();
+    const ionItem = itemToBeFocused.nativeElement.querySelector('ion-item');
+
+    // Look for interactive element within ion-item like toggle or checkbox and set focus if found
+    const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
+    if (firstInteractiveElementWithinItem) {
+      firstInteractiveElementWithinItem['setFocus']();
+    } else {
+      this.focusSelectableItem(ionItem);
+    }
   }
 
-  getTriggerButton(): ElementRef<HTMLElement> {
+  private focusSelectableItem(ionItem: HTMLIonItemElement) {
+    const selectableItem: HTMLButtonElement =
+      ionItem.shadowRoot.querySelector('button:not([disabled])');
+    if (selectableItem) {
+      selectableItem.focus();
+    }
+  }
+
+  getTriggerButton(): ElementRef<HTMLButtonElement> {
     return this.userProvidedButton ?? this.defaultButtonElement;
   }
 
@@ -200,7 +221,52 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   ngAfterContentInit(): void {
-    this.kirbyItems.forEach((item) => item.nativeElement.setAttribute('tabindex', '-1'));
+    this.setupAccessibilityForItems();
+    this.setupAccesibilityForUserProvidedButton();
+  }
+
+  private setupAccessibilityForItems() {
+    this.kirbyItems.forEach((item) => {
+      item.nativeElement.setAttribute('role', 'menuitem');
+    });
+  }
+
+  menuVisibilityChanged(menuIsShown: boolean) {
+    this.floatingMenuIsShown = menuIsShown;
+    this.getTriggerButton().nativeElement.setAttribute('aria-expanded', menuIsShown + '');
+    if (!menuIsShown) {
+      this.resetFocus();
+      this.focusTriggerButton();
+    }
+  }
+
+  private setupAccesibilityForUserProvidedButton() {
+    if (this.userProvidedButton) {
+      const element = this.userProvidedButton.nativeElement;
+
+      this.setupAriaHasPopup(element);
+      this.setupAriaControls(element);
+      this.setupId(element);
+    }
+  }
+
+  private setupId(button: HTMLButtonElement) {
+    if (!button.id) {
+      button.id = 'userProvidedButton';
+    }
+    this.triggerButtonId = button.id;
+  }
+
+  private setupAriaControls(button: HTMLButtonElement) {
+    if (!button.getAttribute('aria-controls')) {
+      button.setAttribute('aria-controls', this.MENU_ID);
+    }
+  }
+
+  private setupAriaHasPopup(button: HTMLButtonElement) {
+    if (!button.getAttribute('aria-haspopup')) {
+      button.setAttribute('aria-haspopup', 'true');
+    }
   }
 
   ngOnDestroy(): void {
