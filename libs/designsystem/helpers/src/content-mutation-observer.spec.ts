@@ -11,17 +11,17 @@ import { observeContent } from './content-mutation-observer';
 class ContentObserverHostComponent implements OnDestroy {
   @Input() content: string = 'Initial content';
 
-  private mutationObserver: MutationObserver;
+  private mutationObserverDisconnectFn: () => void;
 
   constructor(private elementRef: ElementRef) {
     const contentHost = this.elementRef.nativeElement;
-    this.mutationObserver = observeContent(contentHost, () => this.onContentChange());
+    this.mutationObserverDisconnectFn = observeContent(contentHost, () => this.onContentChange());
   }
 
   public onContentChange() {}
 
   ngOnDestroy(): void {
-    this.mutationObserver.disconnect();
+    this.mutationObserverDisconnectFn();
   }
 }
 

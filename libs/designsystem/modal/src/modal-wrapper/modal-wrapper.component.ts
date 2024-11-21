@@ -145,6 +145,7 @@ export class ModalWrapperComponent
     .asObservable()
     .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
   private _mutationObserver: MutationObserver;
+  private mutationObserverDisconnectFn: () => void;
   private _intersectionObserver: IntersectionObserver;
   private get intersectionObserver(): IntersectionObserver {
     if (!this._intersectionObserver) {
@@ -401,7 +402,10 @@ export class ModalWrapperComponent
   }
 
   private observeTitleContentChanges() {
-    observeContent(this.ionTitleElement.nativeElement, this.setTitleAsAriaLabel, this.willClose$);
+    this.mutationObserverDisconnectFn = observeContent(
+      this.ionTitleElement.nativeElement,
+      this.setTitleAsAriaLabel
+    );
   }
 
   private setTitleAsAriaLabel = () => {
@@ -617,6 +621,7 @@ export class ModalWrapperComponent
       this.routerOutlet.deactivate();
     }
     //clean up the observer
+    this.mutationObserverDisconnectFn();
     delete this._mutationObserver;
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
