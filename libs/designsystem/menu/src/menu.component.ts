@@ -39,7 +39,7 @@ import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
-  readonly MENU_ID: string = 'MENU_ID';
+  readonly menuId: string = 'MENU_ID';
   triggerButtonId: string = 'DEFAULT_BUTTON';
 
   constructor(

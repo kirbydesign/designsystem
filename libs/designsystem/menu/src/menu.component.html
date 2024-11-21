@@ -10,7 +10,7 @@
       type="button"
       [attentionLevel]="attentionLevel"
       aria-haspopup="true"
-      [attr.aria-controls]="MENU_ID"
+      [attr.aria-controls]="menuId"
       aria-expanded="false"
     >
       <kirby-icon [name]="'more'"></kirby-icon>
@@ -18,7 +18,7 @@
   </ng-container>
 </div>
 <kirby-card
-  [id]="MENU_ID"
+  [id]="menuId"
   kirbyFloating
   [strategy]="'fixed'"
   [reference]="buttonContainerElement"
