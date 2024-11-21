@@ -52,7 +52,7 @@ describe('observeContent', () => {
 
     spectator.setInput('content', 'Updated content');
     await TestHelper.waitForMutationObserver();
-    
+
     expect(onContentChangeSpy).toHaveBeenCalledTimes(1);
   });
 
