@@ -40,6 +40,7 @@ import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
+import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { CalendarDay, CalendarDayMetadata } from './interfaces/calendar-day';
 import { CalendarYearNavigatorConfig } from './interfaces/calendar-year-navigator-config';
 
@@ -223,7 +224,8 @@ export class CalendarComponent implements OnInit, OnChanges {
   constructor(
     @Inject(LOCALE_ID) locale: string,
     private elementRef: ElementRef,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public translationService: TranslationService
   ) {
     this.locale = this.mapLocale(locale);
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;

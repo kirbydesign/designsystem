@@ -1,0 +1,11 @@
+import { Translation } from '../translation.interface';
+
+export const da: Translation = {
+  back: 'Tilbage',
+  close: 'Luk',
+  nextMonth: 'Næste måned',
+  nextSlide: 'Næste slide',
+  previousMonth: 'Forrige måned',
+  previousSlide: 'Forrige slide',
+  selectYear: 'Vælg år',
+};
