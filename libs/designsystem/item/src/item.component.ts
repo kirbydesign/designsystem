@@ -9,6 +9,7 @@ import {
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { RadioComponent } from '@kirbydesign/designsystem/radio';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 export enum ItemSize {
   XS = 'xs',
@@ -46,6 +47,8 @@ export class ItemComponent {
   private checkbox: ElementRef<HTMLElement>;
   @ContentChild(RadioComponent, { static: false, read: ElementRef })
   private radio: ElementRef<HTMLElement>;
+  @ContentChild(ToggleComponent, { static: false, read: ElementRef })
+  private toggle: ElementRef<HTMLElement>;
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
@@ -58,8 +61,8 @@ export class ItemComponent {
   }
 
   get _isIonicButton() {
-    // Ionic checks for slotted checkbox and radio
-    // and we shouldn't set the `button` prop in that scenario:
-    return this.selectable && !(this.checkbox || this.radio);
+    // We shouldn't render item as a button if the item contains
+    // nested interactive, i.e. checkbox, radio or toggle:
+    return this.selectable && !(this.checkbox || this.radio || this.toggle);
   }
 }
