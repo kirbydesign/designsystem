@@ -7,6 +7,7 @@ import {
   Input,
   OnInit,
   QueryList,
+  Renderer2,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
@@ -25,7 +26,10 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
 
   @Input() set title(value: string) {
     this._title = value;
-    this.modalDialog?.setAttribute('aria-label', value);
+
+    if (this.modalDialog) {
+      this.renderer.setAttribute(this.modalDialog, 'aria-label', value);
+    }
   }
 
   get title(): string {
@@ -37,7 +41,10 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
   @ContentChildren(ButtonComponent)
   private slottedButtons: QueryList<ButtonComponent>;
 
-  constructor(private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit(): void {
     /* If initialized inside a modal we want to set
@@ -45,7 +52,9 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
      * Further updates are handled by title setter.
      */
     this.modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
-    this.modalDialog?.setAttribute('aria-label', this.title);
+    if (this.modalDialog) {
+      this.renderer.setAttribute(this.modalDialog, 'aria-label', this.title);
+    }
   }
 
   ngAfterContentInit() {

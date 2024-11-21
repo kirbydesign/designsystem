@@ -406,7 +406,9 @@ export class ModalWrapperComponent
     if (!this.ionTitleElement) return;
     const titleTextContent = this.ionTitleElement.nativeElement.textContent;
     const modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
-    modalDialog?.setAttribute('aria-label', titleTextContent);
+    if (modalDialog) {
+      this.renderer.setAttribute(modalDialog, 'aria-label', titleTextContent);
+    }
   };
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
