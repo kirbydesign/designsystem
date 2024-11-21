@@ -1,7 +1,6 @@
-// TODO: Duplicate translation to anticipate differences between en-gb and en-us, or point to the same?
 import { Translation } from '../translation.interface';
 
-export const enGB: Translation = {
+export const en: Translation = {
   back: 'Back',
   close: 'Close',
   nextMonth: 'Next month',
