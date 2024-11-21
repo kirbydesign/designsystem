@@ -65,7 +65,7 @@ describe('ItemComponent', () => {
     });
   });
 
-  describe('when configured with selectable="true" and nested interactive element', () => {
+  describe('when configured with selectable="true"', () => {
     const nestedInteractiveElements = ['kirby-checkbox', 'kirby-radio', 'kirby-toggle'];
     nestedInteractiveElements.forEach((element) => {
       it(`should not render native button when there is a nested ${element}`, async () => {
