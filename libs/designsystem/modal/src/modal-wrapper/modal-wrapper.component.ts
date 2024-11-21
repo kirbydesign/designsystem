@@ -404,6 +404,7 @@ export class ModalWrapperComponent
 
   private setTitleAsAriaLabel = () => {
     if (!this.ionTitleElement) return;
+    
     const titleTextContent = this.ionTitleElement.nativeElement.textContent;
     const modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
     if (modalDialog) {

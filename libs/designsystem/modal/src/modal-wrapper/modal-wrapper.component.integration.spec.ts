@@ -428,7 +428,6 @@ describe('ModalWrapperComponent + ModalComponent', () => {
     await TestHelper.whenReady(ionModal);
     const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
     await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
-
     expect(dialogElement).toHaveAttribute('aria-label', modalTitle);
 
     const newTitle = 'Updated Modal Title';

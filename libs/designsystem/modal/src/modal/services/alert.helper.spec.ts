@@ -91,7 +91,6 @@ describe('AlertHelper', () => {
     it('should set alert title text content as modal label', async () => {
       await TestHelper.whenReady(ionModal);
       const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
-
       await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
 
       expect(dialogElement.getAttribute('aria-label')).toBe(title);
