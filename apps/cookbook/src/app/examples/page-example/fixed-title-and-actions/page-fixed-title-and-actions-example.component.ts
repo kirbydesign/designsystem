@@ -26,7 +26,7 @@ const config = {
   template: `<kirby-page toolbarTitle="A Fixed Title" defaultBackHref="/">
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
-    <button kirby-button (click)="onMoreSelect()">
+    <button kirby-button (click)="onMoreSelect()" aria-label="More">
       <kirby-icon name="more"></kirby-icon>
     </button>
   </kirby-page-actions>

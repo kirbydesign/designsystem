@@ -14,7 +14,7 @@ const pageTemplate = `<kirby-page [title]="title" [tabBarBottomHidden]="!showTab
   <kirby-page-footer *ngIf="showFooter">
     <h3>0 selected</h3>
     This is a fixed footer
-    <button kirby-button attentionLevel="2" class="close-footer-btn" (click)="onCloseClick()">
+    <button kirby-button attentionLevel="2" class="close-footer-btn" (click)="onCloseClick()" aria-label="Close">
       <kirby-icon name="close"></kirby-icon>
     </button>
   </kirby-page-footer>

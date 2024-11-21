@@ -18,7 +18,7 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
     <kirby-modal-footer *ngIf="showFooter">
-      <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
+      <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()" aria-label="Back">
         <kirby-icon name="arrow-back"></kirby-icon>
       </button>
       <button kirby-button (click)="close()">Finish</button>
