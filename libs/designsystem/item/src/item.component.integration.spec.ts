@@ -68,7 +68,7 @@ describe('ItemComponent', () => {
   describe('when configured with selectable="true" and nested interactive element', () => {
     const nestedInteractiveElements = ['kirby-checkbox', 'kirby-radio', 'kirby-toggle'];
     nestedInteractiveElements.forEach((element) => {
-      it(`should not render native button when has nested ${element}`, async () => {
+      it(`should not render native button when there is a nested ${element}`, async () => {
         spectator = createHost(`<kirby-item selectable="true">
           <${element}></${element}>
         </kirby-item>
