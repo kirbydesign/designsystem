@@ -11,7 +11,7 @@ import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { CommonModule } from '@angular/common';
-import { getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
+import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 import { ModalConfig, ShowAlertCallback } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
@@ -61,7 +61,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    this.ionModalElementDialog = getModalDialogAncestor(this.elementRef.nativeElement);
+    this.ionModalElementDialog = getIonModalDialogAncestor(this.elementRef.nativeElement);
 
     /* If initialized with ariaLabel, we want to set the aria-label attribute immediately.
      * Further updates are handled by title setter.

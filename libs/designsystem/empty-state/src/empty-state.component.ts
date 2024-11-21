@@ -10,7 +10,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
+import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-empty-state',
@@ -20,15 +20,15 @@ import { getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 })
 export class EmptyStateComponent implements AfterContentInit, OnInit {
   private _title: string;
-  private modalDialog: HTMLElement;
+  private ionModalDialog: HTMLElement;
 
   @Input() iconName: string;
 
   @Input() set title(value: string) {
     this._title = value;
 
-    if (this.modalDialog) {
-      this.renderer.setAttribute(this.modalDialog, 'aria-label', value);
+    if (this.ionModalDialog) {
+      this.renderer.setAttribute(this.ionModalDialog, 'aria-label', value);
     }
   }
 
@@ -51,9 +51,9 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
      * the aria-label attribute on ion-modal to the title of empty state.
      * Further updates are handled by title setter.
      */
-    this.modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
-    if (this.modalDialog) {
-      this.renderer.setAttribute(this.modalDialog, 'aria-label', this.title);
+    this.ionModalDialog = getIonModalDialogAncestor(this.elementRef.nativeElement);
+    if (this.ionModalDialog) {
+      this.renderer.setAttribute(this.ionModalDialog, 'aria-label', this.title);
     }
   }
 

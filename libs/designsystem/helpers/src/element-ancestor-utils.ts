@@ -31,7 +31,7 @@ export const elementHasAncestor = (
  * Utility function to find the closest ancestor modal and
  * get the element with a dialog role from within its shadow root.
  */
-export function getModalDialogAncestor(currentElement: HTMLElement): HTMLElement | undefined {
+export function getIonModalDialogAncestor(currentElement: HTMLElement): HTMLElement | undefined {
   const ionModalElement = currentElement.closest('ion-modal');
   const modalElementDialog = ionModalElement?.shadowRoot?.querySelector(
     '[role="dialog"]'

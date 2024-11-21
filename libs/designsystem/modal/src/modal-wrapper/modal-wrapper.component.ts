@@ -23,7 +23,7 @@ import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
-import { DesignTokenHelper, getModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
@@ -135,6 +135,7 @@ export class ModalWrapperComponent
   private initialViewportHeight: number;
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
+  private ionModalDialog?: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = firstValueFrom(this.ionModalDidPresent);
   private readonly ionModalWillDismiss = new Subject<void>();
@@ -183,6 +184,7 @@ export class ModalWrapperComponent
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.ionModalDialog = getIonModalDialogAncestor(this.elementRef.nativeElement);
     this.initializeSizing();
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
@@ -403,12 +405,9 @@ export class ModalWrapperComponent
   }
 
   private setTitleAsAriaLabel = () => {
-    if (!this.ionTitleElement) return;
-    
-    const titleTextContent = this.ionTitleElement.nativeElement.textContent;
-    const modalDialog = getModalDialogAncestor(this.elementRef.nativeElement);
-    if (modalDialog) {
-      this.renderer.setAttribute(modalDialog, 'aria-label', titleTextContent);
+    const titleTextContent = this.ionTitleElement?.nativeElement.textContent;
+    if (this.ionModalDialog && titleTextContent) {
+      this.renderer.setAttribute(this.ionModalDialog, 'aria-label', titleTextContent);
     }
   };
 
