@@ -29,6 +29,7 @@ import {
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
+import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-menu',
@@ -39,8 +40,8 @@ import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
-  readonly menuId: string = 'MENU_ID';
-  triggerButtonId: string = 'DEFAULT_BUTTON';
+  readonly menuId: string = UniqueIdGenerator.scopedTo('kirby-menu').next();
+  triggerButtonId: string = UniqueIdGenerator.scopedTo('kirby-menu-trigger-button').next();
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -89,7 +90,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     | undefined;
 
   @ViewChild(FloatingDirective)
-  _floatingMenu: FloatingDirective;
+  private floatingMenu: FloatingDirective;
 
   @ContentChildren(ItemComponent, { read: ElementRef }) public kirbyItems: QueryList<
     ElementRef<HTMLElement>
@@ -103,9 +104,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   @HostListener('keydown', ['$event'])
   _onKeydown(event: KeyboardEvent) {
     if (this.floatingMenuIsShown) {
-      this.handleOnKeyForOpenedMenu(event);
+      this.handleKeyDownForOpenedMenu(event);
     } else {
-      this.handleOnKeyForClosedMenu(event);
+      this.handleKeyDownForClosedMenu(event);
     }
   }
 
@@ -119,32 +120,30 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement
     >('ion-toggle:not([disabled]), ion-checkbox:not([disabled]), ion-radio:not([disabled])');
 
-    return controls[0] || undefined;
+    return controls[0];
   }
 
-  private handleOnKeyForClosedMenu(event: KeyboardEvent) {
+  private handleKeyDownForClosedMenu(event: KeyboardEvent) {
     const key = event.key;
     switch (key) {
       case ' ':
       case 'Enter':
       case 'ArrowDown':
-      case 'Down':
         this.focusedIndex = 0;
-        this._floatingMenu.show();
+        this.floatingMenu.show();
         this.focusItem();
         this.preventFurtherPropagation(event);
         break;
-      case 'Up':
       case 'ArrowUp':
         this.focusedIndex = this.kirbyItems.length - 1;
-        this._floatingMenu.show();
+        this.floatingMenu.show();
         this.focusItem();
         this.preventFurtherPropagation(event);
         break;
     }
   }
 
-  private handleOnKeyForOpenedMenu(event: KeyboardEvent) {
+  private handleKeyDownForOpenedMenu(event: KeyboardEvent) {
     const key = event.key;
     switch (key) {
       case 'ArrowDown':
@@ -163,22 +162,14 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         break;
       case 'Escape':
         if (this.closeOnEscapeKey) {
-          this._floatingMenu.hide();
+          this.floatingMenu.hide();
         }
         this.preventFurtherPropagation(event);
         break;
       case 'Tab':
-        this._floatingMenu.hide();
+        this.floatingMenu.hide();
         break;
     }
-  }
-
-  private focusTriggerButton() {
-    this.getTriggerButton().nativeElement.focus();
-  }
-
-  resetFocus() {
-    this.focusedIndex = -1;
   }
 
   focusItem() {
@@ -187,7 +178,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
-    if (firstInteractiveElementWithinItem) {
+    if (typeof firstInteractiveElementWithinItem?.['setFocus'] === 'function') {
       firstInteractiveElementWithinItem['setFocus']();
     } else {
       this.focusSelectableItem(ionItem);
@@ -195,15 +186,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private focusSelectableItem(ionItem: HTMLIonItemElement) {
-    const selectableItem: HTMLButtonElement =
+    const nativeButton: HTMLButtonElement =
       ionItem.shadowRoot.querySelector('button:not([disabled])');
-    if (selectableItem) {
-      selectableItem.focus();
-    }
+    nativeButton?.focus();
   }
 
-  getTriggerButton(): ElementRef<HTMLButtonElement> {
-    return this.userProvidedButton ?? this.defaultButtonElement;
+  getTriggerButton(): HTMLButtonElement {
+    return (this.userProvidedButton ?? this.defaultButtonElement).nativeElement;
   }
 
   public ngAfterViewInit(): void {
@@ -215,7 +204,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
        * avoid a change detection cycle for every scroll-event fired
        */
       this.scrollListenerDisposeFn = this.renderer.listen(document, 'ionScroll', () => {
-        this._floatingMenu.hide();
+        this.floatingMenu.hide();
       });
     });
   }
@@ -227,45 +216,33 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   private setupAccessibilityForItems() {
     this.kirbyItems.forEach((item) => {
-      item.nativeElement.setAttribute('role', 'menuitem');
+      this.renderer.setAttribute(item.nativeElement, 'role', 'menuitem');
     });
   }
 
   menuVisibilityChanged(menuIsShown: boolean) {
     this.floatingMenuIsShown = menuIsShown;
-    this.getTriggerButton().nativeElement.setAttribute('aria-expanded', menuIsShown + '');
+    this.renderer.setAttribute(this.getTriggerButton(), 'aria-expanded', menuIsShown.toString());
     if (!menuIsShown) {
-      this.resetFocus();
-      this.focusTriggerButton();
+      this.focusedIndex = -1;
+      this.getTriggerButton().focus();
     }
   }
 
   private setupAccesibilityForUserProvidedButton() {
     if (this.userProvidedButton) {
-      const element = this.userProvidedButton.nativeElement;
-
-      this.setupAriaHasPopup(element);
-      this.setupAriaControls(element);
-      this.setupId(element);
-    }
-  }
-
-  private setupId(button: HTMLButtonElement) {
-    if (!button.id) {
-      button.id = 'userProvidedButton';
-    }
-    this.triggerButtonId = button.id;
-  }
-
-  private setupAriaControls(button: HTMLButtonElement) {
-    if (!button.getAttribute('aria-controls')) {
-      button.setAttribute('aria-controls', this.MENU_ID);
-    }
-  }
-
-  private setupAriaHasPopup(button: HTMLButtonElement) {
-    if (!button.getAttribute('aria-haspopup')) {
-      button.setAttribute('aria-haspopup', 'true');
+      const button = this.userProvidedButton.nativeElement;
+      if (button.id) {
+        this.triggerButtonId = button.id;
+      } else {
+        this.renderer.setAttribute(button, 'id', this.triggerButtonId);
+      }
+      if (!button.getAttribute('aria-controls')) {
+        this.renderer.setAttribute(button, 'aria-controls', this.menuId);
+      }
+      if (!button.getAttribute('aria-haspopup')) {
+        this.renderer.setAttribute(button, 'aria-haspopup', 'true');
+      }
     }
   }
 

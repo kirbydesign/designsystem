@@ -3,7 +3,7 @@
   <ng-container *ngIf="!userProvidedButton">
     <button
       #defaultButton
-      id="defaultButton"
+      [id]="triggerButtonId"
       kirby-button
       [size]="buttonSize"
       [disabled]="isDisabled"
@@ -32,9 +32,7 @@
   [closeOnSelect]="closeOnSelect"
   [autoPlacement]="autoPlacement"
   [shift]="shift"
-  [ngStyle]="{
-    minWidth: minWidth ? minWidth + 'px' : null,
-  }"
+  [style.minWidth]="minWidth ? minWidth + 'px' : null"
   class="menu-popover"
   (keydown)="_onKeydown($event)"
   (displayChanged)="menuVisibilityChanged($event)"
