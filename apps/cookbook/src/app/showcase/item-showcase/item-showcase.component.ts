@@ -12,8 +12,9 @@ import {
 export class ItemShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
-      name: 'Selectable',
-      description: 'Make item selectable',
+      name: 'selectable',
+      description:
+        'If `true`, a native button tag will be rendered under the hood and the item will become interactive.',
       defaultValue: 'false',
       type: ['boolean'],
     },
