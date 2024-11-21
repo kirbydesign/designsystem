@@ -2,7 +2,7 @@
   lines="none"
   [attr.disabled]="disabled"
   [attr.button]="_renderAsButton ? true : null"
-  detail="false"
+  [detail]="false"
   (mousedown)="onMouseDown($event)"
 >
   <div class="outside" slot="start">
