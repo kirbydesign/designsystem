@@ -1,7 +1,7 @@
 <ion-item
   lines="none"
   [attr.disabled]="disabled"
-  [attr.button]="_isIonicButton ? true : null"
+  [attr.button]="_renderAsButton ? true : null"
   detail="false"
   (mousedown)="onMouseDown($event)"
 >

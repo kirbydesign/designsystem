@@ -60,7 +60,7 @@ export class ItemComponent {
     }
   }
 
-  get _isIonicButton() {
+  get _renderAsButton() {
     // We shouldn't render item as a button if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
     return this.selectable && !(this.checkbox || this.radio || this.toggle);
