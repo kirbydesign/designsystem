@@ -33,6 +33,14 @@ describe('ItemComponent', () => {
     });
   });
 
+  it('should not render a native button by default', async () => {
+    const ionItem = spectator.queryHost('ion-item');
+    await TestHelper.whenReady(ionItem);
+
+    const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+    expect(nativePart.tagName).not.toEqual('BUTTON');
+  });
+
   describe('when configured with size', () => {
     describe('and size = xs', () => {
       it('should have correct item height and padding', () => {
@@ -226,6 +234,26 @@ describe('ItemComponent', () => {
       spectator.detectChanges();
 
       expect(spectator.element).toHaveComputedStyle({ 'pointer-events': 'none' });
+    });
+  });
+
+  describe('when configured with selectable', () => {
+    it('should not render a native button when selectable="false"', async () => {
+      spectator.setInput('selectable', false);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
+
+      const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+      expect(nativePart.tagName).not.toEqual('BUTTON');
+    });
+
+    it('should render a native button when selectable="true"', async () => {
+      spectator.setInput('selectable', true);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
+
+      const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+      expect(nativePart.tagName).toEqual('BUTTON');
     });
   });
 });
