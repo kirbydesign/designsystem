@@ -421,7 +421,7 @@ describe('ModalWrapperComponent + ModalComponent', () => {
     const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
     await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
 
-    expect(dialogElement.getAttribute('aria-label')).toBe(modalTitle);
+    expect(dialogElement).toHaveAttribute('aria-label', modalTitle);
   });
 
   it('should update modal label when kirby-page-title content changes', async () => {
@@ -437,6 +437,6 @@ describe('ModalWrapperComponent + ModalComponent', () => {
     // Wait for aria-label to be updated
     await TestHelper.whenTrue(() => dialogElement.getAttribute('aria-label') !== modalTitle);
 
-    expect(dialogElement.getAttribute('aria-label')).toBe(newTitle);
+    expect(dialogElement).toHaveAttribute('aria-label', newTitle);
   });
 });
