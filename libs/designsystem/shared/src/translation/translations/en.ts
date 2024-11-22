@@ -1,6 +1,7 @@
 import { Translation } from '../translation.interface';
 
 export const en: Translation = {
+  $code: 'en',
   back: 'Back',
   close: 'Close',
   nextMonth: 'Next month',

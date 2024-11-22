@@ -1,4 +1,5 @@
 export interface Translation {
+  $code: string;
   back: string;
   close: string;
   nextMonth: string;

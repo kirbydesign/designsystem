@@ -13,21 +13,23 @@ export class TranslationService {
     en,
   };
 
-  public currentTranslation: Translation = en;
+  public activeTranslation: Translation = en;
 
   constructor(@Inject(LOCALE_ID) private localeId: string) {
-    this.setCurrentTranslation(localeId);
+    this.setTranslation(localeId);
   }
 
-  setCurrentTranslation(localeId: string): string {
+  setTranslation(localeId: string): string {
     const baseLocaleId = localeId.split('-')[0];
     const translation = this.translations[baseLocaleId];
 
     if (!translation) {
-      console.warn(`Translation not found for locale "${this.localeId}", falling back to "en"`);
+      console.warn(
+        `Translation not found for locale "${this.localeId}", falling back to ${this.activeTranslation.$code}`
+      );
       return;
     }
 
-    this.currentTranslation = translation;
+    this.activeTranslation = translation;
   }
 }

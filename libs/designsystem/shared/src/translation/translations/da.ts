@@ -1,6 +1,7 @@
 import { Translation } from '../translation.interface';
 
 export const da: Translation = {
+  $code: 'da',
   back: 'Tilbage',
   close: 'Luk',
   nextMonth: 'Næste måned',
