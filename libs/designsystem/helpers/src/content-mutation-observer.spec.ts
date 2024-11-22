@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { UnobserveFn } from '@kirbydesign/designsystem/types';
 import { observeContent } from './content-mutation-observer';
 
 @Component({
@@ -11,17 +12,17 @@ import { observeContent } from './content-mutation-observer';
 class ContentObserverHostComponent implements OnDestroy {
   @Input() content: string = 'Initial content';
 
-  private mutationObserverDisconnectFn: () => void;
+  private unobserveFn: UnobserveFn;
 
   constructor(private elementRef: ElementRef) {
     const contentHost = this.elementRef.nativeElement;
-    this.mutationObserverDisconnectFn = observeContent(contentHost, () => this.onContentChange());
+    this.unobserveFn = observeContent(contentHost, () => this.onContentChange());
   }
 
   public onContentChange() {}
 
   ngOnDestroy(): void {
-    this.mutationObserverDisconnectFn();
+    this.unobserveFn();
   }
 }
 

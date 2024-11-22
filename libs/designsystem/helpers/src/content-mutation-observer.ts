@@ -1,3 +1,5 @@
+import { UnobserveFn } from '@kirbydesign/designsystem/types';
+
 /* Function based on https://github.com/angular/components/blob/main/src/cdk/observers/observe-content.ts
  * Angular may add, remove, or edit comment nodes during change detection. We don't care about
  * these changes because they don't affect the user-preceived content, and worse it can cause
@@ -30,12 +32,12 @@ function shouldIgnoreMutationRecord(record: MutationRecord) {
  * Creates a MutationObserver and observes content changes in a given element.
  * The provided callback is called when changes are detected.
  *
- * @returns function - a disconnect function that can be called to disconnect the created observer.
+ * @returns function - an unobserve function that can be called to disconnect the created observer.
  */
 export function observeContent(
   observedElement: HTMLElement,
   contentChangedCallback: () => void
-): () => void {
+): UnobserveFn {
   const mutationObserver = new MutationObserver((mutations) => {
     const filteredMutations = mutations.filter((mutation) => !shouldIgnoreMutationRecord(mutation));
     if (filteredMutations.length > 0) {

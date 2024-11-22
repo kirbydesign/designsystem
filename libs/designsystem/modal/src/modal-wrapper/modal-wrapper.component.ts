@@ -26,7 +26,7 @@ import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 import { DesignTokenHelper, getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { WindowRef } from '@kirbydesign/designsystem/types';
+import { UnobserveFn, WindowRef } from '@kirbydesign/designsystem/types';
 import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
@@ -144,8 +144,7 @@ export class ModalWrapperComponent
   private viewportResize$ = this.viewportResize
     .asObservable()
     .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
-  private _mutationObserver: MutationObserver;
-  private mutationObserverDisconnectFn: () => void;
+  private mutationObserverUnobserveFn: UnobserveFn;
   private _intersectionObserver: IntersectionObserver;
   private get intersectionObserver(): IntersectionObserver {
     if (!this._intersectionObserver) {
@@ -402,7 +401,7 @@ export class ModalWrapperComponent
   }
 
   private observeTitleContentChanges() {
-    this.mutationObserverDisconnectFn = observeContent(
+    this.mutationObserverUnobserveFn = observeContent(
       this.ionTitleElement.nativeElement,
       this.setTitleAsAriaLabel
     );
@@ -621,8 +620,7 @@ export class ModalWrapperComponent
       this.routerOutlet.deactivate();
     }
     //clean up the observer
-    this.mutationObserverDisconnectFn();
-    delete this._mutationObserver;
+    this.mutationObserverUnobserveFn();
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
     if (this.resizeObserverService) {
