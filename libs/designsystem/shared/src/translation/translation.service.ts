@@ -13,7 +13,7 @@ export class TranslationService {
     en,
   };
 
-  public activeTranslation: Translation = en;
+  private activeTranslation: Translation = en;
 
   constructor(@Inject(LOCALE_ID) private localeId: string) {
     this.setTranslation(localeId);
@@ -25,11 +25,15 @@ export class TranslationService {
 
     if (!translation) {
       console.warn(
-        `Translation not found for locale "${this.localeId}", falling back to ${this.activeTranslation.$code}`
+        `Translation not found for locale "${this.localeId}", falling back to ${this.get('$code')}`
       );
       return;
     }
 
     this.activeTranslation = translation;
+  }
+
+  get(key: keyof Translation): string {
+    return this.activeTranslation[key];
   }
 }

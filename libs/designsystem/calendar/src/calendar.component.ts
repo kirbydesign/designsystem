@@ -225,7 +225,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     @Inject(LOCALE_ID) locale: string,
     private elementRef: ElementRef,
     private cdr: ChangeDetectorRef,
-    public translationService: TranslationService
+    public translations: TranslationService
   ) {
     this.locale = this.mapLocale(locale);
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;

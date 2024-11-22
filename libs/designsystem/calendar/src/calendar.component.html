@@ -4,7 +4,7 @@
       kirby-button
       type="button"
       class="no-margin"
-      [attr.aria-label]="translationService.activeTranslation.previousMonth"
+      [attr.aria-label]="translations.get('previousMonth')"
       [attr.aria-disabled]="_canNavigateBack ? null : true"
       [noDecoration]="true"
       (click)="_changeMonth(-1)"
@@ -21,7 +21,7 @@
       kirby-button
       type="button"
       class="no-margin"
-      [attr.aria-label]="translationService.activeTranslation.nextMonth"
+      [attr.aria-label]="translations.get('nextMonth')"
       [attr.aria-disabled]="_canNavigateForward ? null : true"
       [noDecoration]="true"
       (click)="_changeMonth(1)"
@@ -34,7 +34,7 @@
     [usePopover]="usePopover"
     [selectedIndex]="navigatedYear"
     [items]="navigableYears"
-    [attr.aria-label]="translationService.activeTranslation.selectYear"
+    [attr.aria-label]="translations.get('selectYear')"
     popout="left"
     (change)="_changeYear($event)"
   ></kirby-dropdown>
