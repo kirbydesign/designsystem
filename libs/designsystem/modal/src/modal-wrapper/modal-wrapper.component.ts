@@ -620,7 +620,7 @@ export class ModalWrapperComponent
       this.routerOutlet.deactivate();
     }
     //clean up the observer
-    this.mutationObserverUnobserveFn();
+    this.mutationObserverUnobserveFn?.();
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
     if (this.resizeObserverService) {
