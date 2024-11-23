@@ -60,7 +60,11 @@ import {
   ModalElementType,
   ModalNavigationService,
 } from '@kirbydesign/designsystem/modal';
-import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import {
+  FitHeadingConfig,
+  ResizeObserverService,
+  TranslationService,
+} from '@kirbydesign/designsystem/shared';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -364,7 +368,8 @@ export class PageComponent
     private routerOutlet: IonRouterOutlet,
     @Optional()
     private navCtrl: NavController,
-    private ionicElementPartHelper: IonicElementPartHelper
+    private ionicElementPartHelper: IonicElementPartHelper,
+    public translations: TranslationService
   ) {}
 
   private contentReadyPromise: Promise<void>;
