@@ -15,50 +15,31 @@ $small-rect-delay: $medium-rect-delay + 200ms;
 
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   flex-grow: 1;
-}
 
-.menu-button {
-  @include utils.media('>=large') {
-    display: none;
-  }
-}
-
-nav {
-  display: none;
-
-  @include utils.media('>=large') {
-    display: block;
-  }
-
-  ul {
+  .logo,
+  .external-links {
     display: flex;
-    column-gap: utils.size('xxxl');
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    line-height: normal;
+    flex-direction: column;
+    align-items: end;
+    flex: 1;
+    justify-content: center;
+  }
 
-    li {
-      margin-block-start: 0;
+  @include utils.media('>=large') {
+    .logo {
+      align-items: start;
     }
   }
 }
 
-.logo {
+.logo-anchor {
   width: $logo-size-mobile;
   height: $logo-size-mobile;
 
   @include utils.media('>=large') {
     width: $logo-size-desktop;
     height: $logo-size-desktop;
-  }
-
-  svg {
-    height: 100%;
-    width: 100%;
   }
 
   .text {

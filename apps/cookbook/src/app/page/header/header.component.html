@@ -1,6 +1,6 @@
 <header>
-  <a routerLink="/" aria-label="Home">
-    <div class="logo">
+  <div class="logo">
+    <a class="logo-anchor" routerLink="/" aria-label="Home">
       <svg
         version="1.1"
         id="Layer_1"
@@ -85,36 +85,25 @@
           </g>
         </g>
       </svg>
-    </div>
-  </a>
+    </a>
+  </div>
 
-  <nav>
-    <ul>
-      <li *ngFor="let item of navigationItems">
-        <a
-          *ngIf="item.externalUrl"
-          [href]="item.externalUrl"
-          class="kirby-external-icon kirby-text-small"
-          target="blank"
-        >
-          {{ item.text }}
-        </a>
-        <a
-          *ngIf="item.route"
-          href="#"
-          class="kirby-text-small"
-          [routerLink]="item.route"
-          routerLinkActive
-          [routerLinkActiveOptions]="{ exact: false }"
-          #routerLinkActive="routerLinkActive"
-        >
-          {{ item.text }}
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-  <button kirby-button attentionLevel="3" class="menu-button" (click)="onToggleMenu()">
-    <kirby-icon [name]="menuIcon"></kirby-icon>
-  </button>
+  <div class="external-links">
+    <a
+      class="kirby-external-icon kirby-text-small"
+      target="blank"
+      title="View Kirby on Github"
+      href="https://github.com/kirbydesign/designsystem"
+    >
+      Github
+    </a>
+    <a
+      class="kirby-external-icon kirby-text-small"
+      target="blank"
+      title="View Changelog"
+      href="https://github.com/kirbydesign/designsystem/releases"
+    >
+      Changelog
+    </a>
+  </div>
 </header>
