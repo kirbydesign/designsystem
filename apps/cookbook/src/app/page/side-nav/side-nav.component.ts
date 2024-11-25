@@ -1,10 +1,9 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
+  HostBinding,
   Input,
   OnInit,
-  Output,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -14,14 +13,12 @@ import { filter } from 'rxjs/operators';
 import { kebabToTitleCase } from '@kirbydesign/designsystem';
 
 import { routes } from '../../showcase/showcase.routes';
-import { navigationItems } from '../header/header.component';
 
 const KEY_DOWN = 'ArrowDown';
 
 interface SideNavLink {
   path: string;
   name: string;
-  active: boolean;
 }
 
 @Component({
@@ -34,13 +31,28 @@ export class SideNavComponent implements OnInit {
   filteredShowcaseRoutes: SideNavLink[][];
   filter: string = '';
 
-  @Output() menuToggle = new EventEmitter<boolean>();
-  @Input() isMenuOpen = false;
+  @HostBinding('class.is-open')
+  @Input()
+  isMenuOpen = false;
 
   constructor(private router: Router) {}
 
-  navigationLinks = navigationItems;
-
+  navigationItems: SideNavLink[] = [
+    { name: 'Introduction', path: '/home/intro' },
+    {
+      name: 'Components',
+      path: '/home/component-overview',
+    },
+    { name: 'Guides', path: '/home/guides' },
+    {
+      name: 'Accessibility',
+      path: '/home/accessibility-in-kirby',
+    },
+    {
+      name: 'Extensions',
+      path: '/home/extensions',
+    },
+  ];
   ngOnInit() {
     this.mapRoutes();
 
@@ -103,14 +115,16 @@ export class SideNavComponent implements OnInit {
     linkToFocus.focus();
   }
 
-  onComponentLinkClick(path: string) {
-    this.setRouteActive(path);
-    this.closeMenu();
+  closeMenu() {
+    this.isMenuOpen = false;
   }
 
-  private closeMenu() {
-    this.isMenuOpen = false;
-    this.menuToggle.emit(this.isMenuOpen);
+  onToggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  get menuIcon(): string {
+    return this.isMenuOpen ? 'close' : 'more';
   }
 
   private applyComponentFilter(stringToMatch: string): void {
@@ -133,20 +147,11 @@ export class SideNavComponent implements OnInit {
   private distributeSideNavLinksAlphabetically(links: SideNavLink[]): SideNavLink[][] {
     const distributed: { [key: string]: SideNavLink[] } = links.reduce((accumulator, link) => {
       const firstLetter = link.name[0];
-      link.active = this.router.url.endsWith(link.path);
       accumulator[firstLetter] =
         accumulator[firstLetter] === undefined ? [link] : [...accumulator[firstLetter], link];
       return accumulator;
     }, {});
 
     return Object.keys(distributed).map((groupKey) => distributed[groupKey]);
-  }
-
-  private setRouteActive(path) {
-    this.filteredShowcaseRoutes = this.filteredShowcaseRoutes.map((group) => {
-      return group.map((link) => {
-        return { ...link, active: link.path === path };
-      });
-    });
   }
 }
