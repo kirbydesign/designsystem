@@ -5,6 +5,7 @@ import { ComponentOverviewComponent } from './component-overview/component-overv
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
 import { ExtensionsLandingPageComponent } from './extensions/extensions-landing-page.component';
+import { LocalizationComponent } from './localization/localization.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,10 @@ export const routes: Routes = [
       {
         path: 'extensions',
         component: ExtensionsLandingPageComponent,
+      },
+      {
+        path: 'localization',
+        component: LocalizationComponent,
       },
     ],
   },
