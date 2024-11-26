@@ -1,0 +1,73 @@
+<article>
+  <h1>Localization</h1>
+  <p>
+    The Kirby components supports two locales out of the box: English (
+    <code>en</code>
+    ) and Danish (
+    <code>da</code>
+    ).
+  </p>
+  <p>
+    If you need support for other locales, or want to add additional translations, please report an
+    issue to us on Github, and consider contributing the code to make it happen. Existing
+    translation files can be found here (link), and registered by adding the translation here
+    (link).
+  </p>
+
+  <p>
+    Apart from number and date formatting, the main use-case for specifying locale in Kirby is to
+    provide translations of component internals such as labels.
+  </p>
+
+  <cookbook-example-viewer>
+    <div class="example-frame">
+      <div class="locale-examples">
+        <cookbook-da-locale-provider style="position: relative">
+          <kirby-card>
+            <kirby-calendar [selectedDate]="selectedDate"></kirby-calendar>
+          </kirby-card>
+          <kirby-avatar
+            class="locale-avatar"
+            size="sm"
+            imageSrc="/assets/images/dk.svg"
+            altText="Danish locale"
+          ></kirby-avatar>
+        </cookbook-da-locale-provider>
+        <cookbook-en-locale-provider style="position: relative">
+          <kirby-card>
+            <kirby-calendar [selectedDate]="selectedDate"></kirby-calendar>
+          </kirby-card>
+          <kirby-avatar
+            class="locale-avatar"
+            size="sm"
+            imageSrc="/assets/images/gb.svg"
+            altText="English locale"
+          ></kirby-avatar>
+        </cookbook-en-locale-provider>
+      </div>
+    </div>
+  </cookbook-example-viewer>
+
+  <p>Calendar example here.</p>
+
+  <h2>Setting Up Translations</h2>
+  <p>Define locale in app module.</p>
+
+  <h2>Using Translations in Templates</h2>
+  Translations are intended for use
+  <p>
+    Use the
+    <code>TranslationService</code>
+    to fetch and display translated strings in your templates.
+  </p>
+
+  <h2>Switching Component Language</h2>
+  <p>
+    Components are initialized with any locale defined in e.g. the app.module.ts of your projects.
+    If you want to switch locale at runtime, you can do so by calling
+    <code>TranslationService.setTranslation('da')</code>
+    for Danish, or
+    <code>TranslationService.setTranslation('en')</code>
+    for English.
+  </p>
+</article>

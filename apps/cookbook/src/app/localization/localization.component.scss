@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../showcase/showcase.shared';
+@use '@kirbydesign/core/src/scss/utils';
+
+$avatar-offset-block-start: -20px;
+$avatar-offset-inline-end: -18px;
+
+:host {
+  display: block;
+  container-type: inline-size;
+}
+
+.locale-examples {
+  display: flex;
+  justify-content: center;
+  gap: var(--kirby-spacing-xxxl);
+
+  @container (width < #{map.get(utils.$breakpoints, small)}) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.locale-avatar {
+  position: absolute;
+  inset-block-start: $avatar-offset-block-start;
+  inset-inline-end: $avatar-offset-inline-end;
+}
