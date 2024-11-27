@@ -1,7 +1,3 @@
-<button kirby-button attentionLevel="3" class="menu-button" (click)="onToggleMenu()">
-  <kirby-icon [name]="menuIcon"></kirby-icon>
-</button>
-
 <section [class.is-open]="isMenuOpen">
   <kirby-card
     [hasPadding]="true"
@@ -13,9 +9,18 @@
     <nav>
       <ul>
         <li *ngFor="let item of navigationItems">
-          <a [routerLink]="item.path" routerLinkActive="is-selected">
+          <a
+            [routerLink]="item.path"
+            *ngIf="item.path; else externalUrl"
+            routerLinkActive="is-selected"
+          >
             {{ item.name }}
           </a>
+          <ng-template #externalUrl>
+            <a #externalUrl [href]="item.externalUrl" target="_blank">
+              <span class="kirby-external-icon">{{ item.name }}</span>
+            </a>
+          </ng-template>
         </li>
       </ul>
     </nav>

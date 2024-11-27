@@ -1,6 +1,9 @@
-<cookbook-header></cookbook-header>
+<cookbook-header (menuToggle)="onMenuToggle($event)" [isMenuOpen]="isMenuOpen"></cookbook-header>
 
-<cookbook-side-nav></cookbook-side-nav>
+<cookbook-side-nav
+  (menuToggle)="onMenuToggle($event)"
+  [isMenuOpen]="isMenuOpen"
+></cookbook-side-nav>
 <section class="main">
   <router-outlet></router-outlet>
 </section>

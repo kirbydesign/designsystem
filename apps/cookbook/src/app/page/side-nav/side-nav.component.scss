@@ -1,24 +1,27 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/opt-out';
 
-$link-padding: 5px;
+$link-padding-block: utils.size('xxs');
+$link-padding-inline: utils.size('s');
 $link-border-radius: 3px;
 $menu-padding-mobile: utils.size('m');
 $divider-inset: utils.size('xxxxs');
 $divider-spacing: utils.size('xxs');
+$logo-size-mobile: utils.size('xl');
 
 :host {
-  box-sizing: border-box;
-  position: absolute;
-  background-color: transparent;
-  z-index: utils.z('modal');
-  padding: 0 $menu-padding-mobile;
+  display: none;
+  z-index: utils.z('sticky-content');
+  padding: $menu-padding-mobile;
 
   @include utils.media('<large') {
-    height: 100vh;
+    position: absolute;
+    top: var(--kirby-spacing-xxxxl);
+    bottom: 0;
     overflow: auto;
 
-    &:has(.is-open) {
+    &.is-open {
+      display: block;
       background-color: utils.get-color('light');
       box-shadow: utils.get-elevation(8);
     }
@@ -61,7 +64,7 @@ section {
   }
 }
 
-kirby-card {
+kirby-card:first-child {
   margin-bottom: utils.size('s');
 }
 
@@ -69,16 +72,14 @@ a {
   @include opt-out.link;
 
   text-decoration: none;
-  color: utils.get-text-color('semi-dark');
   display: block;
-  padding: $link-padding;
+  padding: $link-padding-block $link-padding-inline;
   margin: 0 utils.size('xxxxs');
   border-radius: $link-border-radius;
 
   &:hover,
   &:focus {
-    color: utils.get-text-color('black');
-    background-color: utils.get-color('light');
+    color: utils.get-text-color('semi-dark');
   }
 
   &.is-selected {
@@ -96,7 +97,7 @@ a {
 }
 
 h2 {
-  margin-inline-start: $link-padding;
+  margin-inline-start: $link-padding-inline;
   margin-bottom: 0;
 }
 
@@ -122,7 +123,6 @@ h2 {
 }
 
 hr {
-  margin: utils.size('xxxs'), 0;
   border: solid 1px utils.get-color('light');
   border-bottom: none;
   margin-block: $divider-spacing;

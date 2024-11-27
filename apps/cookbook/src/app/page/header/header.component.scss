@@ -10,25 +10,34 @@ $small-rect-delay: $medium-rect-delay + 200ms;
 :host {
   display: flex;
   grid-area: header;
-  align-items: flex-end;
+
+  @include utils.media('<large') {
+    position: sticky;
+    top: 0;
+    z-index: utils.z('sticky-content') + 1; // above side-nav
+    background-color: utils.get-color('light');
+    border-bottom: 1px solid utils.get-color('medium');
+  }
 }
 
 header {
   display: flex;
-  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: var(--kirby-spacing-xxs);
+  padding-block: var(--kirby-spacing-xxs);
 
-  .logo,
   .external-links {
     display: flex;
+    gap: var(--kirby-spacing-xxxs);
     flex-direction: column;
     align-items: end;
-    flex: 1;
-    justify-content: center;
   }
 
   @include utils.media('>=large') {
-    .logo {
-      align-items: start;
+    .menu-button {
+      display: none;
     }
   }
 }

@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   title = 'Kirby Design System';
+  isMenuOpen = false;
+
+  onMenuClick() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
 }

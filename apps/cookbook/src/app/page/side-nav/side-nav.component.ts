@@ -1,9 +1,11 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   HostBinding,
   Input,
   OnInit,
+  Output,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -17,7 +19,8 @@ import { routes } from '../../showcase/showcase.routes';
 const KEY_DOWN = 'ArrowDown';
 
 interface SideNavLink {
-  path: string;
+  path?: string;
+  externalUrl?: string;
   name: string;
 }
 
@@ -31,6 +34,7 @@ export class SideNavComponent implements OnInit {
   filteredShowcaseRoutes: SideNavLink[][];
   filter: string = '';
 
+  @Output() menuToggle = new EventEmitter<boolean>();
   @HostBinding('class.is-open')
   @Input()
   isMenuOpen = false;
@@ -52,6 +56,11 @@ export class SideNavComponent implements OnInit {
       name: 'Extensions',
       path: '/home/extensions',
     },
+    {
+      name: 'Changelog',
+      externalUrl: 'https://github.com/kirbydesign/designsystem/releases',
+    },
+    { name: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
   ];
   ngOnInit() {
     this.mapRoutes();
@@ -117,6 +126,7 @@ export class SideNavComponent implements OnInit {
 
   closeMenu() {
     this.isMenuOpen = false;
+    this.menuToggle.emit(this.isMenuOpen);
   }
 
   onToggleMenu() {
