@@ -419,6 +419,24 @@ describe('MenuComponent', () => {
         expect(document.activeElement).toEqual(items[0]);
       });
 
+      it('should set focus to first item when focus is on the last item and navigating by arrow down', async () => {
+        spectator.keyboard.pressKey('ArrowUp', buttonElement, 'keydown');
+        expect(document.activeElement).toEqual(items[items.length - 1]);
+
+        spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[0]);
+      });
+
+      it('should set focus to last item when focus is on the first item and navigating by arrow up', async () => {
+        spectator.keyboard.pressKey('ArrowDown', buttonElement, 'keydown');
+        expect(document.activeElement).toEqual(items[0]);
+
+        spectator.keyboard.pressKey('ArrowUp', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[items.length - 1]);
+      });
+
       it('should set focus to last item when navigating by end', async () => {
         spectator.keyboard.pressKey('ArrowDown', buttonElement, 'keydown');
         spectator.keyboard.pressKey('End', card, 'keydown');
