@@ -28,13 +28,6 @@ header {
   padding-inline: var(--kirby-spacing-xxs);
   padding-block: var(--kirby-spacing-xxs);
 
-  .external-links {
-    display: flex;
-    gap: var(--kirby-spacing-xxxs);
-    flex-direction: column;
-    align-items: end;
-  }
-
   @include utils.media('>=large') {
     .menu-button {
       display: none;
