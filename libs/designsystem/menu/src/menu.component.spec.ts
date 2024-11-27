@@ -1,3 +1,4 @@
+import exp from 'constants';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 import { IconComponent, IconModule } from '@kirbydesign/designsystem/icon';
@@ -6,6 +7,8 @@ import { FloatingDirective } from '@kirbydesign/designsystem/shared/floating';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { ItemModule } from '@kirbydesign/designsystem/item';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { MenuComponent } from './menu.component';
 
 describe('MenuComponent', () => {
@@ -13,17 +16,20 @@ describe('MenuComponent', () => {
   let buttonElement: HTMLButtonElement;
   let card: Element;
   let buttonIcon: IconComponent;
+  let items: NodeListOf<Element>;
 
   const createHost = createHostFactory({
     component: MenuComponent,
-    imports: [IconModule, CardModule, ItemModule],
-    declarations: [
-      FloatingDirective,
-      MockComponent(ButtonComponent),
-      MockComponent(ToggleComponent),
+    imports: [
+      IconModule,
+      CardModule,
+      ItemModule,
+      TestHelper.ionicModuleForTest,
+      ToggleComponent,
+      CheckboxComponent,
     ],
+    declarations: [FloatingDirective, MockComponent(ButtonComponent)],
   });
-
   describe('by default', () => {
     beforeEach(() => {
       spectator = createHost<MenuComponent>(`<kirby-menu></kirby-menu>`, {});
@@ -82,6 +88,15 @@ describe('MenuComponent', () => {
       it('should have type="button" attribute', () => {
         expect(buttonElement).toHaveAttribute('type', 'button');
       });
+
+      it('should add aria attributes to default button', () => {
+        expect(buttonElement.getAttribute('aria-controls')).toEqual(card.id);
+        expect(buttonElement.getAttribute('aria-haspopup')).toEqual('true');
+      });
+
+      it('should add aria attributes to menu for default button', () => {
+        expect(card.getAttribute('aria-labelledby')).toEqual(buttonElement.id);
+      });
     });
 
     describe('button-icon', () => {
@@ -129,6 +144,28 @@ describe('MenuComponent', () => {
         spectator.setInput('minWidth', 300);
         expect(card).toHaveComputedStyle({ 'min-width': '300px' });
       });
+    });
+  });
+
+  describe('menu card', () => {
+    beforeEach(async () => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu>
+          <kirby-item [selectable]="true">
+            <h3>Action 1</h3>
+          </kirby-item>
+        </kirby-menu>`,
+        {}
+      );
+      card = spectator.query('kirby-card');
+    });
+
+    it('should have role=menu', () => {
+      expect(card.getAttribute('role')).toEqual('menu');
+    });
+
+    it('should have items with role=menuitem', () => {
+      expect(card.querySelector('kirby-item').getAttribute('role')).toEqual('menuitem');
     });
   });
 
@@ -220,10 +257,21 @@ describe('MenuComponent', () => {
         {}
       );
       buttonIcon = spectator.query(IconComponent);
+      buttonElement = spectator.query('button');
+      card = spectator.query('kirby-card');
     });
 
     it('should render a custom button if provided', () => {
       expect(buttonIcon).toHaveAttribute('name', 'menu-outline');
+    });
+
+    it('should add aria attributes to custom button', () => {
+      expect(buttonElement.getAttribute('aria-controls')).toEqual(card.id);
+      expect(buttonElement.getAttribute('aria-haspopup')).toEqual('true');
+    });
+
+    it('should add aria attributes to menu for custom button', () => {
+      expect(card.getAttribute('aria-labelledby')).toEqual(buttonElement.id);
     });
   });
 
@@ -277,10 +325,10 @@ describe('MenuComponent', () => {
     beforeEach(() => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu [triggers]="['hover']">
-          <kirby-item [selectable]="true">
-            <h3>Action 1</h3>
-              </kirby-item>
-          </kirby-menu>`,
+        <kirby-item [selectable]="true">
+          <h3>Action 1</h3>
+            </kirby-item>
+        </kirby-menu>`,
         {}
       );
 
@@ -295,6 +343,180 @@ describe('MenuComponent', () => {
       spectator.dispatchMouseEvent(buttonElement, 'mouseenter');
 
       expect(card).toHaveComputedStyle({ display: 'block' });
+    });
+  });
+
+  describe('keyboard interaction', () => {
+    describe('with selectable items', () => {
+      beforeEach(async () => {
+        spectator = createHost<MenuComponent>(
+          `<kirby-menu>
+            <kirby-item [selectable]="true">
+              <h3>First Action</h3>
+            </kirby-item>
+            <kirby-item [selectable]="true">
+              <h3>Second Action</h3>
+            </kirby-item>
+            <kirby-item [selectable]="true">
+              <h3>Second Action 2</h3>
+            </kirby-item>
+            <kirby-item [selectable]="true">
+              <h3>Third Action</h3>
+            </kirby-item>
+          </kirby-menu>`,
+          {}
+        );
+        buttonElement = spectator.query('button');
+        card = spectator.query('kirby-card');
+        items = card.querySelectorAll('ion-item');
+        await TestHelper.whenReady(items);
+      });
+
+      it('should set focus on first item when opened by enter', async () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+
+        expect(document.activeElement).toEqual(items[0]);
+      });
+
+      it('should set focus to native button within item', () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+
+        expect(document.activeElement.shadowRoot.activeElement).toEqual(
+          items[0].shadowRoot.querySelector('button')
+        );
+      });
+
+      it('should set focus on first item when opened by arrow down', () => {
+        spectator.keyboard.pressKey('ArrowDown', buttonElement, 'keydown');
+
+        expect(document.activeElement).toEqual(items[0]);
+      });
+
+      it('should set focus on first item when opened by space', async () => {
+        spectator.keyboard.pressKey(' ', buttonElement, 'keydown');
+
+        expect(document.activeElement).toEqual(items[0]);
+      });
+
+      it('should set focus on last item when opened by arrow up', async () => {
+        spectator.keyboard.pressKey('ArrowUp', buttonElement, 'keydown');
+
+        expect(document.activeElement).toEqual(items[items.length - 1]);
+      });
+
+      it('should set focus to next item when navigating by arrow down', async () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[1]);
+      });
+
+      it('should set focus to previous item when navigating by arrow up', async () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
+        spectator.keyboard.pressKey('ArrowUp', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[0]);
+      });
+
+      it('should set focus to last item when navigating by end', async () => {
+        spectator.keyboard.pressKey('ArrowDown', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('End', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[items.length - 1]);
+      });
+
+      it('should set focus to first item when navigating by home', async () => {
+        spectator.keyboard.pressKey('ArrowUp', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('Home', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[0]);
+      });
+
+      it('should set focus to trigger button when selecting item', async () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+
+        const focusedNativeButton = document.activeElement.shadowRoot.activeElement;
+
+        spectator.click(focusedNativeButton); //Using click instead of enter here since browsers natively interprete enter as a click event
+        expect(document.activeElement).toEqual(buttonElement);
+      });
+
+      it('should set focus to trigger button when pressing escape', async () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+
+        spectator.keyboard.pressKey('Escape', card, 'keydown'); //Using click instead of enter here since browsers natively interprete enter as a click event
+        expect(document.activeElement).toEqual(buttonElement);
+      });
+
+      it('should set focus to "third action" when pressing "t"', () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('t', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[3]);
+      });
+
+      it('should set focus to "second action" when pressing "s"', () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('s', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[1]);
+      });
+
+      it('should set focus to "second action 2" when pressing "s" twice', () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('s', card, 'keydown');
+        spectator.keyboard.pressKey('s', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[2]);
+      });
+
+      it('should return focus to "second action" when pressing "s" three times', () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('s', card, 'keydown');
+        spectator.keyboard.pressKey('s', card, 'keydown');
+        spectator.keyboard.pressKey('s', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[1]);
+      });
+    });
+    describe('with interactive element inside items', () => {
+      beforeEach(async () => {
+        spectator = createHost<MenuComponent>(
+          `<kirby-menu>
+            <kirby-item>
+              <kirby-checkbox></kirby-checkbox>
+            </kirby-item>
+            <kirby-item>
+              <kirby-toggle></kirby-toggle>
+            </kirby-item>
+          </kirby-menu>`,
+          {}
+        );
+        buttonElement = spectator.query('button');
+        card = spectator.query('kirby-card');
+        items = card.querySelectorAll('ion-item');
+        await TestHelper.whenReady(items);
+      });
+
+      it('should set focus on first interactive element inside item when opened by enter', async () => {
+        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+
+        expect(document.activeElement).toEqual(items[0].querySelector('ion-checkbox'));
+      });
+
+      it('should set focus on last interactive element inside item when opened by arrow up', async () => {
+        spectator.keyboard.pressKey('ArrowUp', buttonElement, 'keydown');
+
+        expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
+      });
+
+      it('should set focus on next interactive element inside item when navigating by arrow down', async () => {
+        spectator.keyboard.pressKey('ArrowDown', buttonElement, 'keydown');
+        spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
+
+        expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
+      });
     });
   });
 });
