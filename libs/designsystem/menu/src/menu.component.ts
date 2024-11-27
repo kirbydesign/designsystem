@@ -152,17 +152,21 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
     switch (key) {
       case 'ArrowDown':
-        if (this.focusedIndex < this.kirbyItems.length - 1) {
+        if (this.focusedIndex === this.kirbyItems.length - 1) {
+          this.focusedIndex = 0;
+        } else {
           this.focusedIndex++;
-          this.focusItem();
         }
+        this.focusItem();
         this.preventFurtherPropagation(event);
         break;
       case 'ArrowUp':
-        if (this.focusedIndex > 0) {
+        if (this.focusedIndex === 0) {
+          this.focusedIndex = this.kirbyItems.length - 1;
+        } else {
           this.focusedIndex--;
-          this.focusItem();
         }
+        this.focusItem();
         this.preventFurtherPropagation(event);
         break;
       case 'Home': {
