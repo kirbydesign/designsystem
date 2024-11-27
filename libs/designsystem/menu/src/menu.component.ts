@@ -143,23 +143,44 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
+  private isPrintableCharacter(key: string) {
+    return key.length === 1 && key.match(/\S/);
+  }
+
   private handleKeyDownForOpenedMenu(event: KeyboardEvent) {
     const key = event.key;
+
     switch (key) {
       case 'ArrowDown':
         if (this.focusedIndex < this.kirbyItems.length - 1) {
           this.focusedIndex++;
           this.focusItem();
-          this.preventFurtherPropagation(event);
         }
+        this.preventFurtherPropagation(event);
         break;
       case 'ArrowUp':
         if (this.focusedIndex > 0) {
           this.focusedIndex--;
           this.focusItem();
-          this.preventFurtherPropagation(event);
         }
+        this.preventFurtherPropagation(event);
         break;
+      case 'Home': {
+        if (this.focusedIndex > 0) {
+          this.focusedIndex = 0;
+          this.focusItem();
+        }
+        this.preventFurtherPropagation(event);
+        break;
+      }
+      case 'End': {
+        if (this.focusedIndex < this.kirbyItems.length - 1) {
+          this.focusedIndex = this.kirbyItems.length - 1;
+          this.focusItem();
+        }
+        this.preventFurtherPropagation(event);
+        break;
+      }
       case 'Escape':
         if (this.closeOnEscapeKey) {
           this.floatingMenu.hide();
@@ -169,7 +190,41 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       case 'Tab':
         this.floatingMenu.hide();
         break;
+      default: {
+        if (this.isPrintableCharacter(key)) {
+          const foundItemIndex = this.getIndexByFirstCharacter(
+            key,
+            this.kirbyItems.map((item) => item.nativeElement.innerText)
+          );
+          if (foundItemIndex > -1) {
+            this.focusedIndex = foundItemIndex;
+            this.focusItem();
+          }
+          this.preventFurtherPropagation(event);
+        }
+      }
     }
+  }
+
+  private getIndexByFirstCharacter(char: string, words: string[]): number {
+    if (char.length > 1) {
+      return;
+    }
+
+    char = char.toLowerCase();
+    let foundItemIndex = -1;
+    let startIndex = this.focusedIndex + 1;
+
+    if (startIndex !== words.length) {
+      const spliced = words.splice(startIndex);
+      foundItemIndex = spliced.findIndex((word) => word.toLowerCase().startsWith(char));
+    }
+
+    if (foundItemIndex === -1) {
+      startIndex = 0;
+      foundItemIndex = words.findIndex((word) => word.toLowerCase().startsWith(char));
+    }
+    return startIndex + foundItemIndex;
   }
 
   focusItem() {
