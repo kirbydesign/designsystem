@@ -1,13 +1,13 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/opt-out';
 
-$link-padding-block: utils.size('xxs');
-$link-padding-inline: utils.size('s');
+$link-padding-block: var(--kirby-spacing-xxxs);
+$link-padding-inline: var(--kirby-spacing-s);
 $link-border-radius: 3px;
-$menu-padding-mobile: utils.size('m');
-$divider-inset: utils.size('xxxxs');
-$divider-spacing: utils.size('xxs');
-$logo-size-mobile: utils.size('xl');
+$menu-padding-mobile: var(--kirby-spacing-m);
+$divider-inset: var(--kirby-spacing-xxxxs);
+$divider-spacing: var(--kirby-spacing-xxs);
+$logo-size-mobile: var(--kirby-spacing-xl);
 
 :host {
   display: none;
@@ -65,7 +65,7 @@ section {
 }
 
 kirby-card:first-child {
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 }
 
 a {
@@ -74,7 +74,7 @@ a {
   text-decoration: none;
   display: block;
   padding: $link-padding-block $link-padding-inline;
-  margin: 0 utils.size('xxxxs');
+  margin-block: var(--kirby-spacing-xxs);
   border-radius: $link-border-radius;
 
   &:hover,
@@ -105,7 +105,7 @@ h2 {
   position: relative;
 
   kirby-form-field {
-    margin-bottom: $divider-spacing;
+    margin-bottom: var(--kirby-spacing-s);
   }
 }
 
@@ -116,7 +116,7 @@ h2 {
 }
 
 .menu-button {
-  margin-top: utils.size('xs');
+  margin-top: var(--kirby-spacing-xs);
   @include utils.media('>=large') {
     display: none;
   }
