@@ -1,4 +1,6 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { userEvent, within } from '@storybook/test';
+
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 import { DropdownExampleModule } from '~/app/examples/dropdown-example/dropdown-example.module';
@@ -68,4 +70,26 @@ export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-dropdown-example></cookbook-dropdown-example>`,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const dropdown = canvas.getByRole('button', {
+      name: 'Dropdown with plain text',
+    });
+
+    await userEvent.click(dropdown);
+  },
+};
+
+export const CookbookExampleWithActions: Story = {
+  ...CookbookExample,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const dropdownBtn = canvas.getByRole('button', {
+      name: 'Dropdown with plain text',
+    });
+
+    await userEvent.click(dropdownBtn);
+  },
 };
