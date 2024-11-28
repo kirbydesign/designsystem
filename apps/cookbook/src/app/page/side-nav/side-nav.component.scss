@@ -13,30 +13,29 @@ $logo-size-mobile: var(--kirby-spacing-xl);
   display: none;
   z-index: utils.z('sticky-content');
   padding: $menu-padding-mobile;
+  position: absolute;
+  top: var(--kirby-spacing-xxxxl);
+  bottom: 0;
+  overflow: auto;
 
-  @include utils.media('<large') {
-    position: absolute;
-    top: var(--kirby-spacing-xxxxl);
-    bottom: 0;
-    overflow: auto;
-
-    &.is-open {
-      display: block;
-      background-color: utils.get-color('light');
-      box-shadow: utils.get-elevation(8);
-    }
+  &.is-open {
+    display: block;
+    background-color: utils.get-color('light');
+    box-shadow: utils.get-elevation(8);
   }
 
   @include utils.media('>=large') {
+    position: static;
     grid-area: sidebar;
-  }
-
-  @include utils.media('>=large') {
     box-shadow: none;
     display: block;
-    position: static;
     padding: 0;
     min-height: unset;
+
+    &.is-open {
+      background-color: transparent;
+      box-shadow: none;
+    }
   }
 }
 
@@ -53,18 +52,7 @@ nav {
   }
 }
 
-section {
-  overflow: auto;
-  @include utils.media('<large') {
-    display: none;
-
-    &.is-open {
-      display: block;
-    }
-  }
-}
-
-kirby-card:first-child {
+kirby-card:not(:last-child) {
   margin-bottom: var(--kirby-spacing-s);
 }
 

@@ -8,15 +8,17 @@ $medium-rect-delay: $large-rect-delay + 300ms;
 $small-rect-delay: $medium-rect-delay + 200ms;
 
 :host {
-  display: flex;
   grid-area: header;
+  z-index: utils.z('sticky-content') + 1; // above side-nav
+  position: sticky;
+  top: 0;
+  background-color: utils.get-color('light');
+  border-bottom: 1px solid utils.get-color('medium');
 
-  @include utils.media('<large') {
-    position: sticky;
-    top: 0;
-    z-index: utils.z('sticky-content') + 1; // above side-nav
-    background-color: utils.get-color('light');
-    border-bottom: 1px solid utils.get-color('medium');
+  @include utils.media('>=large') {
+    position: static;
+    background-color: transparent;
+    border-bottom: none;
   }
 }
 
@@ -24,8 +26,7 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
-  padding-inline: var(--kirby-spacing-xxs);
-  padding-block: var(--kirby-spacing-xxs);
+  padding: var(--kirby-spacing-xxs);
 
   @include utils.media('>=large') {
     padding-block-start: var(--kirby-spacing-m);

@@ -2,7 +2,7 @@
 
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
 
-$header-height-mobile: utils.size('xxxl') + 20px;
+$header-height-mobile: auto;
 $header-height-desktop: 2 * utils.size('xxl');
 $footer-height: 3 * utils.size('xxl');
 $sidebar-width: 5 * utils.size('xxl');
@@ -14,7 +14,7 @@ $desktop-gutter: minmax(utils.size('m'), 1fr);
   background-color: utils.get-color('background-color');
   display: grid;
   grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
-  grid-template-rows: auto minmax(0, 1fr) $footer-height;
+  grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
   grid-template-areas:
     'header header header'
     '. main .'
