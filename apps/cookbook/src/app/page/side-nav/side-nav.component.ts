@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -29,7 +30,7 @@ interface SideNavLink {
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, AfterViewInit {
   private allShowcaseRoutes: SideNavLink[];
   filteredShowcaseRoutes: SideNavLink[][];
   filter: string = '';
@@ -39,7 +40,16 @@ export class SideNavComponent implements OnInit {
   @Input()
   isMenuOpen = false;
 
+  sideNavGroups: { [key: string]: QueryList<ElementRef<HTMLAnchorElement>> };
+
   constructor(private router: Router) {}
+
+  ngAfterViewInit(): void {
+    this.sideNavGroups = {
+      resources: this.resourceLinks,
+      components: this.componentLinks,
+    };
+  }
 
   navigationItems: SideNavLink[] = [
     { name: 'Introduction', path: '/home/intro' },
@@ -62,6 +72,7 @@ export class SideNavComponent implements OnInit {
     },
     { name: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
   ];
+
   ngOnInit() {
     this.mapRoutes();
 
@@ -95,6 +106,7 @@ export class SideNavComponent implements OnInit {
   }
 
   @ViewChildren('componentLink') componentLinks: QueryList<ElementRef<HTMLAnchorElement>>;
+  @ViewChildren('resourceLink') resourceLinks: QueryList<ElementRef<HTMLAnchorElement>>;
 
   onFilterChange(value: string) {
     this.applyComponentFilter(value);
@@ -108,9 +120,11 @@ export class SideNavComponent implements OnInit {
     }
   }
 
-  onLinksArrowUpDown(event: KeyboardEvent) {
+  onLinksArrowUpDown(event: KeyboardEvent, sideNavGroupKey: string) {
     event.preventDefault();
-    const listElements: HTMLAnchorElement[] = this.componentLinks.map((link) => link.nativeElement);
+    const listElements: HTMLAnchorElement[] = this.sideNavGroups[sideNavGroupKey].map(
+      (link) => link.nativeElement
+    );
     const currentlyFocused = listElements.findIndex((link) => link === document.activeElement);
 
     if (currentlyFocused === -1) {

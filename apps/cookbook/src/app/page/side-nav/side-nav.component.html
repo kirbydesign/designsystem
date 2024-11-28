@@ -1,8 +1,8 @@
 <section [class.is-open]="isMenuOpen">
   <kirby-card
     [hasPadding]="true"
-    (keydown.ArrowUp)="onLinksArrowUpDown($event)"
-    (keydown.ArrowDown)="onLinksArrowUpDown($event)"
+    (keydown.ArrowUp)="onLinksArrowUpDown($event, 'resources')"
+    (keydown.ArrowDown)="onLinksArrowUpDown($event, 'resources')"
   >
     <h2 class="kirby-text-normal">Resources</h2>
     <hr />
@@ -13,11 +13,12 @@
             [routerLink]="item.path"
             *ngIf="item.path; else externalUrl"
             routerLinkActive="is-selected"
+            #resourceLink
           >
             {{ item.name }}
           </a>
           <ng-template #externalUrl>
-            <a #externalUrl [href]="item.externalUrl" target="_blank">
+            <a #externalUrl #resourceLink [href]="item.externalUrl" target="_blank">
               <span class="kirby-external-icon">{{ item.name }}</span>
             </a>
           </ng-template>
@@ -27,8 +28,8 @@
   </kirby-card>
 
   <kirby-card
-    (keydown.ArrowUp)="onLinksArrowUpDown($event)"
-    (keydown.ArrowDown)="onLinksArrowUpDown($event)"
+    (keydown.ArrowUp)="onLinksArrowUpDown($event, 'components')"
+    (keydown.ArrowDown)="onLinksArrowUpDown($event, 'components')"
     [hasPadding]="true"
   >
     <h2 class="kirby-text-normal">Components</h2>
