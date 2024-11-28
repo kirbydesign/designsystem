@@ -21,14 +21,16 @@ $small-rect-delay: $medium-rect-delay + 200ms;
 }
 
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   padding-inline: var(--kirby-spacing-xxs);
   padding-block: var(--kirby-spacing-xxs);
 
   @include utils.media('>=large') {
+    padding-block-start: var(--kirby-spacing-m);
+    align-items: start;
+
     .menu-button {
       display: none;
     }
@@ -38,10 +40,13 @@ header {
 .logo-anchor {
   width: $logo-size-mobile;
   height: $logo-size-mobile;
+  justify-self: center;
 
   @include utils.media('>=large') {
     width: $logo-size-desktop;
     height: $logo-size-desktop;
+    margin-inline-start: var(--kirby-spacing-l);
+    justify-self: start;
   }
 
   .text {
