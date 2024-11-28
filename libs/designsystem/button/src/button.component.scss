@@ -319,7 +319,7 @@ $button-margin: utils.size('xxxs');
 }
 
 :host-context(kirby-item)[slot='end'] {
-  margin-inline-start: utils.size('s');
+  margin-inline: utils.size('s') 0;
 }
 
 :host-context(kirby-dropdown) {
