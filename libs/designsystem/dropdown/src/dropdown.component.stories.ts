@@ -70,15 +70,6 @@ export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-dropdown-example></cookbook-dropdown-example>`,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const dropdown = canvas.getByRole('button', {
-      name: 'Dropdown with plain text',
-    });
-
-    await userEvent.click(dropdown);
-  },
 };
 
 export const CookbookExampleWithActions: Story = {
