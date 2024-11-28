@@ -1,12 +1,14 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
+import { DropdownExampleModule } from '~/app/examples/dropdown-example/dropdown-example.module';
+
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
   title: 'Components / Dropdown',
   decorators: [
     moduleMetadata({
-      imports: [DropdownModule],
+      imports: [DropdownModule, DropdownExampleModule],
     }),
   ],
   argTypes: {
@@ -60,4 +62,10 @@ export const Dropdown: Story = {
       control: { type: 'number' },
     },
   },
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-dropdown-example></cookbook-dropdown-example>`,
+  }),
 };
