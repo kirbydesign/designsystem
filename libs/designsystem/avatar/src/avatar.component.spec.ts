@@ -33,7 +33,7 @@ describe('AvatarComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should render with correct default colors', async () => {
+  it('should render with correct default colors', () => {
     spectator = createHost(`
     <kirby-avatar>
       <kirby-icon name="qr"></kirby-icon>
@@ -47,23 +47,70 @@ describe('AvatarComponent', () => {
     });
   });
 
-  it('should emit error when rendering avatar with invalid image source', async () => {
-    spectator = createHost(`
-      <kirby-avatar imageSrc="failingSrc.png"></kirby-avatar>
-    `);
-    spyOn(spectator.component.imageError, 'emit');
+  describe('when rendering Avatar with imageSrc set', () => {
+    describe('by default', () => {
+      beforeEach(() => {
+        spectator = createHost(`
+        <kirby-avatar imageSrc="/assets/images/woman.png"></kirby-avatar>`);
+      });
 
-    let errorEvent: ErrorEvent;
-    const img = spectator.query<HTMLImageElement>('img');
-    const waitForImageError = new Promise<HTMLImageElement>((resolve) => {
-      img.addEventListener('error', (ev) => {
-        errorEvent = ev;
-        resolve(img);
+      it('should render image', () => {
+        const img = spectator.query<HTMLImageElement>('img');
+        expect(img).toExist();
+      });
+
+      it('should render image with configured imageSrc', () => {
+        const img = spectator.query<HTMLImageElement>('img');
+        expect(img.src.endsWith('/assets/images/woman.png')).toBeTrue();
+      });
+
+      it('should not set alt attribute on img when altText is not set', () => {
+        const img = spectator.query<HTMLImageElement>('img');
+        expect(img).not.toHaveAttribute('alt');
+      });
+
+      it('should not set loading attribute on img when imageLoading is not set', () => {
+        const img = spectator.query<HTMLImageElement>('img');
+        expect(img).not.toHaveAttribute('loading');
       });
     });
-    await waitForImageError;
 
-    expect(spectator.component.imageError.emit).toHaveBeenCalledOnceWith(errorEvent);
+    it('should set alt attribute on image when altText is set', () => {
+      spectator = createHost(`
+        <kirby-avatar imageSrc="/assets/images/woman.png" altText="Test"></kirby-avatar>
+      `);
+
+      const img = spectator.query<HTMLImageElement>('img');
+      expect(img).toHaveAttribute('alt', 'Test');
+    });
+
+    it('should defer loading of image when imageLoading="lazy"', () => {
+      spectator = createHost(`
+        <kirby-avatar imageSrc="/assets/images/woman.png" imageLoading="lazy"></kirby-avatar>
+      `);
+
+      const img = spectator.query<HTMLImageElement>('img');
+      expect(img).toHaveAttribute('loading', 'lazy');
+    });
+
+    it('should emit error when rendering avatar with invalid image source', async () => {
+      spectator = createHost(`
+        <kirby-avatar imageSrc="failingSrc.png"></kirby-avatar>
+      `);
+      spyOn(spectator.component.imageError, 'emit');
+
+      let errorEvent: ErrorEvent;
+      const img = spectator.query<HTMLImageElement>('img');
+      const waitForImageError = new Promise<HTMLImageElement>((resolve) => {
+        img.addEventListener('error', (ev) => {
+          errorEvent = ev;
+          resolve(img);
+        });
+      });
+      await waitForImageError;
+
+      expect(spectator.component.imageError.emit).toHaveBeenCalledOnceWith(errorEvent);
+    });
   });
 
   describe('when rendering Avatar within Progress Circle', () => {
