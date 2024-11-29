@@ -25,11 +25,12 @@ $small-rect-delay: $medium-rect-delay + 200ms;
 header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
   width: 100%;
   padding: var(--kirby-spacing-xxs);
 
   @include utils.media('>=large') {
-    padding-block-start: var(--kirby-spacing-m);
+    padding-block: var(--kirby-spacing-m) 0;
     align-items: start;
 
     .menu-button {
@@ -46,7 +47,7 @@ header {
   @include utils.media('>=large') {
     width: $logo-size-desktop;
     height: $logo-size-desktop;
-    margin-inline-start: var(--kirby-spacing-l);
+    margin-inline-start: var(--kirby-spacing-m);
     justify-self: start;
   }
 
@@ -72,6 +73,10 @@ header {
     transform-origin: center;
     animation: enter-pop utils.get-transition-duration('short') ease-in-out $small-rect-delay
       forwards;
+  }
+
+  svg {
+    height: 100%;
   }
 }
 

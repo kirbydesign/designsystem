@@ -13,12 +13,13 @@
             [routerLink]="item.path"
             *ngIf="item.path; else externalUrl"
             routerLinkActive="is-selected"
+            class="list-item-link"
             #resourceLink
           >
             {{ item.name }}
           </a>
           <ng-template #externalUrl>
-            <a #externalUrl #resourceLink [href]="item.externalUrl" target="_blank">
+            <a [href]="item.externalUrl" class="list-item-link" target="_blank" #resourceLink>
               <span class="kirby-external-icon">{{ item.name }}</span>
             </a>
           </ng-template>
@@ -32,7 +33,10 @@
     (keydown.ArrowUp)="onLinksArrowUpDown($event, 'components')"
     (keydown.ArrowDown)="onLinksArrowUpDown($event, 'components')"
   >
-    <h2 class="kirby-text-normal">Components</h2>
+    <div class="components-heading-container">
+      <h2 class="kirby-text-normal">Components</h2>
+      <a routerLink="component-overview">All</a>
+    </div>
     <hr />
     <div class="filter">
       <kirby-form-field>
@@ -56,17 +60,20 @@
         <kirby-icon name="close"></kirby-icon>
       </button>
     </div>
-    <ng-container *ngFor="let item of filteredShowcaseRoutes; let isLast = last">
-      <a
-        *ngFor="let link of item"
-        [routerLink]="link.path"
-        routerLinkActive="is-selected"
-        (click)="closeMenu()"
-        #componentLink
-      >
-        {{ link.name }}
-      </a>
-      <hr *ngIf="!isLast" />
-    </ng-container>
+    <ul>
+      <li *ngFor="let item of filteredShowcaseRoutes; let isLast = last">
+        <a
+          *ngFor="let link of item"
+          [routerLink]="link.path"
+          routerLinkActive="is-selected"
+          (click)="closeMenu()"
+          class="list-item-link"
+          #componentLink
+        >
+          {{ link.name }}
+        </a>
+        <hr *ngIf="!isLast" />
+      </li>
+    </ul>
   </kirby-card>
 </section>

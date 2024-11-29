@@ -53,10 +53,6 @@ export class SideNavComponent implements OnInit, AfterViewInit {
 
   navigationItems: SideNavLink[] = [
     { name: 'Introduction', path: '/home/intro' },
-    {
-      name: 'Components',
-      path: '/home/component-overview',
-    },
     { name: 'Guides', path: '/home/guides' },
     {
       name: 'Accessibility',

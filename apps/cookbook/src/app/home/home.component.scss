@@ -29,7 +29,8 @@ $desktop-gutter: minmax(utils.size('m'), 1fr);
       '. header header .'
       '. sidebar main .'
       'footer footer footer footer';
-    gap: utils.size('xl');
+    column-gap: utils.size('xl');
+    row-gap: utils.size('m');
   }
 }
 

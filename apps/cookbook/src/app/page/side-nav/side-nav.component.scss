@@ -39,16 +39,14 @@ $logo-size-mobile: var(--kirby-spacing-xl);
   }
 }
 
-nav {
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    line-height: normal;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: normal;
 
-    li {
-      margin-block-start: 0;
-    }
+  li {
+    margin-block-start: 0;
   }
 }
 
@@ -57,17 +55,20 @@ kirby-card:not(:last-child) {
 }
 
 a {
-  @include opt-out.link;
+  &.list-item-link {
+    text-decoration: none;
+  }
 
-  text-decoration: none;
+  position: relative;
   display: block;
   padding: $link-padding-block $link-padding-inline;
-  margin-block: var(--kirby-spacing-xxs);
   border-radius: $link-border-radius;
+  line-height: 1.5rem;
 
   &:hover,
   &:focus {
     color: utils.get-text-color('semi-dark');
+    z-index: utils.z('default');
   }
 
   &.is-selected {
@@ -110,13 +111,15 @@ h2 {
   }
 }
 
+.components-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 hr {
   border: solid 1px utils.get-color('light');
   border-bottom: none;
   margin-block: $divider-spacing;
   margin-inline: $divider-inset;
-
-  &:last-child {
-    border-color: transparent;
-  }
 }
