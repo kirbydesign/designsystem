@@ -51,6 +51,11 @@ header {
     justify-self: start;
   }
 
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+
   .text {
     opacity: 0;
     animation: enter utils.get-transition-duration('long') ease-in-out $text-delay forwards;

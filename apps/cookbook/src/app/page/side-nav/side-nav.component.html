@@ -61,19 +61,20 @@
       </button>
     </div>
     <ul>
-      <li *ngFor="let item of filteredShowcaseRoutes; let isLast = last">
-        <a
-          *ngFor="let link of item"
-          [routerLink]="link.path"
-          routerLinkActive="is-selected"
-          (click)="closeMenu()"
-          class="list-item-link"
-          #componentLink
-        >
-          {{ link.name }}
-        </a>
-        <hr *ngIf="!isLast" />
-      </li>
+      <ng-container *ngFor="let item of filteredShowcaseRoutes; let isLast = last">
+        <li *ngFor="let link of item">
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="is-selected"
+            (click)="closeMenu()"
+            class="list-item-link"
+            #componentLink
+          >
+            {{ link.name }}
+          </a>
+        </li>
+        <hr aria-hidden="true" *ngIf="!isLast" />
+      </ng-container>
     </ul>
   </kirby-card>
 </section>
