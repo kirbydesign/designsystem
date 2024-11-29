@@ -1,16 +1,19 @@
-import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { userEvent, within } from '@storybook/test';
 
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownExampleModule } from '~/app/examples/dropdown-example/dropdown-example.module';
+
+const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
   title: 'Components / Dropdown',
   decorators: [
     moduleMetadata({
-      imports: [DropdownModule, DropdownExampleModule],
+      imports: [DropdownModule, ButtonComponent, DropdownExampleModule],
     }),
   ],
   argTypes: {
@@ -31,7 +34,7 @@ type Story = StoryObj<DropdownComponent>;
 
 export const Dropdown: Story = {
   args: {
-    items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
+    items: items,
     placeholder: 'Please select:',
     itemTextProperty: 'text',
     attentionLevel: '3',
@@ -66,21 +69,32 @@ export const Dropdown: Story = {
   },
 };
 
+export const DropdownOpened: Story = {
+  args: {
+    items: items,
+    selectedIndex: 0,
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>
+      <br />
+      <button kirby-button>Button - below</button>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const dropdownToOpen = canvas.getByRole('button', {
+      name: 'Item 1',
+    });
+
+    await userEvent.click(dropdownToOpen);
+  },
+};
+
 export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-dropdown-example></cookbook-dropdown-example>`,
   }),
-};
-
-export const CookbookExampleWithActions: Story = {
-  ...CookbookExample,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const dropdownBtn = canvas.getByRole('button', {
-      name: 'Dropdown with plain text',
-    });
-
-    await userEvent.click(dropdownBtn);
-  },
 };
