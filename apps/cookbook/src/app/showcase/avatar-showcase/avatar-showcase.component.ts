@@ -11,23 +11,30 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class AvatarShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
-      name: 'imageSrc',
-      description: 'Points to the src of the image location',
-      defaultValue: 'null',
-      type: ['string'],
-    },
-    {
       name: 'size',
       description: 'Sets the size of the avatar.',
       defaultValue: AvatarSize.SM,
       type: Object.values(AvatarSize),
     },
     {
+      name: 'imageSrc',
+      description: 'The path to the image you want to embed in the avatar.',
+      defaultValue: 'undefined',
+      type: ['string'],
+    },
+    {
       name: 'altText',
       description:
-        'Must be filled out - its the alt text attribute that screenreaders use when "viewing" the image.',
-      defaultValue: 'null',
+        'The alt text attribute that screenreaders use when "viewing" the image. Mandatory when using the avatar with an image.',
+      defaultValue: 'undefined',
       type: ['string'],
+    },
+    {
+      name: 'imageLoading',
+      description:
+        'Sets the loading attribute of the image.\n\nSee: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading',
+      defaultValue: 'undefined',
+      type: ['eager', 'lazy'],
     },
     {
       name: 'overlay',
