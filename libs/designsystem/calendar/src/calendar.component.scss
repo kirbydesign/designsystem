@@ -91,6 +91,11 @@ td {
   height: $day-width;
   margin: utils.size('xxxs') 0;
   font-size: utils.font-size('n');
+
+  &:focus {
+    // In narrow viewports where buttons sit side-by-side, ensure focus ring is on top of adjacent buttons.
+    z-index: utils.z('default');
+  }
 }
 
 button[aria-disabled='true'] {

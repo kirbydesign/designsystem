@@ -27,6 +27,7 @@ export enum AvatarSize {
 })
 export class AvatarComponent {
   @Input() imageSrc: string;
+  @Input() imageLoading: 'eager' | 'lazy' | undefined;
   @Input() altText: string;
   @Input() stroke: boolean;
   @Input() text: string;

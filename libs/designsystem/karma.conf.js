@@ -18,16 +18,23 @@ module.exports = function (config) {
     reporters: ['kjhtml', 'junit', 'spec'],
     files: [
       {
-        pattern: './src/lib/icons/svg/*.svg',
-        type: 'dom',
+        pattern: './icon/src/icons/svg/*.svg',
         watched: false,
-        include: false,
+        included: false,
+        served: true,
+        nocache: false,
+      },
+      {
+        pattern: './testing/images/*.png',
+        watched: false,
+        included: false,
         served: true,
         nocache: false,
       },
     ],
     proxies: {
-      '/assets/kirby/icons/svg/': '/base/src/lib/icons/svg/',
+      '/assets/images/': '/base/testing/images/',
+      '/assets/kirby/icons/svg/': '/base/icon/src/icons/svg/',
       '/svg/': '/base/src/lib/icons/svg/',
     },
   });

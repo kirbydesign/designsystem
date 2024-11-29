@@ -37,7 +37,6 @@ import { TabExampleMenuComponent } from './tabs-example/tab/tab-example-menu.com
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
-import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
@@ -81,7 +80,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   TabExampleMenuComponent,
   DividerExampleComponent,
   ReorderListExampleComponent,
-  DropdownExampleComponent,
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesSimpleExampleComponent,
