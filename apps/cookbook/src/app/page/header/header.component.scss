@@ -79,10 +79,6 @@ header {
     animation: enter-pop utils.get-transition-duration('short') ease-in-out $small-rect-delay
       forwards;
   }
-
-  svg {
-    height: 100%;
-  }
 }
 
 @keyframes enter {
