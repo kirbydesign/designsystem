@@ -392,51 +392,73 @@ describe('ModalWrapperComponent + ModalComponent', () => {
     mocks: [ModalNavigationService],
   });
 
-  beforeEach(() => {
-    TestHelper.disableAnimationsInTest();
-    spectator = createHost(
-      `
+  describe('with no aria label attribute', () => {
+    beforeEach(() => {
+      TestHelper.disableAnimationsInTest();
+      spectator = createHost(
+        `
       <kirby-modal>
         <ng-template>
           <kirby-page-title>{{modalTitle}}</kirby-page-title>
         </ng-template>
       </kirby-modal>
     `,
-      {
+        {
+          hostProps: {
+            modalTitle,
+          },
+        }
+      );
+      spectator.setInput('isOpen', true);
+      ionModal = spectator.queryHost('ion-modal');
+    });
+
+    afterEach(() => {
+      spectator.setInput('isOpen', false);
+    });
+
+    it('should set modal title text content as modal label', async () => {
+      await TestHelper.whenReady(ionModal);
+      const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+      await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+
+      expect(dialogElement).toHaveAttribute('aria-label', modalTitle);
+    });
+
+    it('should update modal label when kirby-page-title content changes', async () => {
+      await TestHelper.whenReady(ionModal);
+      const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+      await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+      expect(dialogElement).toHaveAttribute('aria-label', modalTitle);
+
+      const newTitle = 'Updated Modal Title';
+      const pageTitleComponent = spectator.query(PageTitleComponent);
+      pageTitleComponent['elementRef'].nativeElement.textContent = newTitle;
+      await TestHelper.whenTrue(() => dialogElement.getAttribute('aria-label') !== modalTitle);
+
+      expect(dialogElement).toHaveAttribute('aria-label', newTitle);
+    });
+  });
+
+  describe('with aria label attribute', () => {
+    const ariaLabel: string = 'Custom Modal Label';
+
+    beforeEach(() => {
+      TestHelper.disableAnimationsInTest();
+      spectator = createHost(`<kirby-modal [attr.aria-label]="ariaLabel"></kirby-modal>`, {
         hostProps: {
-          modalTitle: modalTitle,
+          ariaLabel,
         },
-      }
-    );
-    spectator.setInput('isOpen', true);
-    ionModal = spectator.queryHost('ion-modal');
-  });
+      });
+      ionModal = spectator.queryHost('ion-modal');
+    });
 
-  afterEach(() => {
-    spectator.setInput('isOpen', false);
-  });
+    it('should allow setting custom aria-label', async () => {
+      await TestHelper.whenReady(ionModal);
+      const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+      await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
 
-  it('should set modal title text content as modal label', async () => {
-    await TestHelper.whenReady(ionModal);
-    const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
-    await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
-
-    expect(dialogElement).toHaveAttribute('aria-label', modalTitle);
-  });
-
-  it('should update modal label when kirby-page-title content changes', async () => {
-    await TestHelper.whenReady(ionModal);
-    const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
-    await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
-    expect(dialogElement).toHaveAttribute('aria-label', modalTitle);
-
-    const newTitle = 'Updated Modal Title';
-    const pageTitleComponent = spectator.query(PageTitleComponent);
-    pageTitleComponent['elementRef'].nativeElement.textContent = newTitle;
-
-    // Wait for aria-label to be updated
-    await TestHelper.whenTrue(() => dialogElement.getAttribute('aria-label') !== modalTitle);
-
-    expect(dialogElement).toHaveAttribute('aria-label', newTitle);
+      expect(dialogElement).toHaveAttribute('aria-label', ariaLabel);
+    });
   });
 });
