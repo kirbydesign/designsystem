@@ -206,8 +206,12 @@ export class ModalWrapperComponent
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-    this.observeTitleContentChanges();
-    this.setTitleAsAriaLabel();
+
+    const noAriaLabel = !this.config.htmlAttributes?.['aria-label'];
+    if (noAriaLabel) {
+      this.observeTitleContentChanges();
+      this.setTitleAsAriaLabel();
+    }
   }
 
   private _currentFooter: HTMLElement | null = null;

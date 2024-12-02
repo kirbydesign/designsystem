@@ -5,6 +5,7 @@ import {
   Injector,
   Input,
   OnInit,
+  Renderer2,
   TemplateRef,
 } from '@angular/core';
 import { firstValueFrom, Subject } from 'rxjs';
@@ -28,25 +29,14 @@ import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
-  private _ariaLabel: string;
-
   @Input() config: ModalConfig;
   @Input() content: TemplateRef<any>;
-  @Input() set ariaLabel(value: string) {
-    this._ariaLabel = value;
-    this.setAriaLabelOnModal();
-  }
-
-  get ariaLabel(): string {
-    return this._ariaLabel;
-  }
 
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   scrollDisabled = false;
   componentPropsInjector: Injector;
 
   private ionModalElement: HTMLIonModalElement;
-  private ionModalElementDialog: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly didPresent = firstValueFrom(this.ionModalDidPresent);
@@ -56,17 +46,13 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private windowRef: WindowRef,
-    private canDismissHelper: CanDismissHelper
+    private canDismissHelper: CanDismissHelper,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    this.ionModalElementDialog = getIonModalDialogAncestor(this.elementRef.nativeElement);
-
-    /* If initialized with ariaLabel, we want to set the aria-label attribute immediately.
-     * Further updates are handled by title setter.
-     */
-    this.setAriaLabelOnModal();
+    this.setAriaLabel();
 
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
@@ -94,16 +80,17 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     }
   }
 
-  private setAriaLabelOnModal() {
-    if (this.ionModalElementDialog && this.ariaLabel) {
-      this.ionModalElementDialog.ariaLabel = this.ariaLabel;
+  private setAriaLabel() {
+    const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
+    const ariaLabel = this.config.htmlAttributes?.['aria-label'];
+    if (ionModalElementDialog && ariaLabel) {
+      this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
     }
   }
 
   async close(data?: any): Promise<void> {
-    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    if (ionModalElement) {
-      await ionModalElement.dismiss(data);
+    if (this.ionModalElement) {
+      await this.ionModalElement.dismiss(data);
     }
   }
 
