@@ -8,22 +8,30 @@
     <hr />
     <nav>
       <ul>
-        <li *ngFor="let item of navigationItems">
+        <li *ngFor="let item of filteredResourceRoutes">
+          <a class="list-item-link" routerLink="{{ item.path }}" #resourceLink>
+            {{ item.data['resourceLink'] }}
+          </a>
+        </li>
+        <li>
           <a
-            *ngIf="item.path; else externalUrl"
-            [routerLink]="item.path"
-            routerLinkActive="is-selected"
-            (click)="closeMenu()"
+            href="https://github.com/kirbydesign/designsystem"
             class="list-item-link"
+            target="_blank"
             #resourceLink
           >
-            {{ item.name }}
+            <span class="kirby-external-icon">Github</span>
           </a>
-          <ng-template #externalUrl>
-            <a [href]="item.externalUrl" class="list-item-link" target="_blank" #resourceLink>
-              <span class="kirby-external-icon">{{ item.name }}</span>
-            </a>
-          </ng-template>
+        </li>
+        <li>
+          <a
+            href="https://github.com/kirbydesign/designsystem/releases"
+            class="list-item-link"
+            target="_blank"
+            #resourceLink
+          >
+            <span class="kirby-external-icon">Changelog</span>
+          </a>
         </li>
       </ul>
     </nav>

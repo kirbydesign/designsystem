@@ -20,8 +20,7 @@ import { routes } from '../../showcase/showcase.routes';
 const KEY_DOWN = 'ArrowDown';
 
 interface SideNavLink {
-  path?: string;
-  externalUrl?: string;
+  path: string;
   name: string;
 }
 
@@ -33,7 +32,11 @@ interface SideNavLink {
 export class SideNavComponent implements OnInit, AfterViewInit {
   private allShowcaseRoutes: SideNavLink[];
   filteredShowcaseRoutes: SideNavLink[][];
+  filteredResourceRoutes: Route[];
   filter: string = '';
+
+  @ViewChildren('componentLink') componentLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
+  @ViewChildren('resourceLink') resourceLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
 
   @Output() menuToggle = new EventEmitter<boolean>();
   @HostBinding('class.is-open')
@@ -51,26 +54,9 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     };
   }
 
-  navigationItems: SideNavLink[] = [
-    { name: 'Introduction', path: '/home/intro' },
-    { name: 'Guides', path: '/home/guides' },
-    {
-      name: 'Accessibility',
-      path: '/home/accessibility-in-kirby',
-    },
-    {
-      name: 'Extensions',
-      path: '/home/extensions',
-    },
-    {
-      name: 'Changelog',
-      externalUrl: 'https://github.com/kirbydesign/designsystem/releases',
-    },
-    { name: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
-  ];
-
   ngOnInit() {
-    this.mapRoutes();
+    this.mapShowcaseRoutes();
+    this.mapResourcesRoutes();
 
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -81,7 +67,7 @@ export class SideNavComponent implements OnInit, AfterViewInit {
       });
   }
 
-  private mapRoutes() {
+  private mapShowcaseRoutes() {
     const routesWithPath = routes[0].children.filter((r) => r.path);
     const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
     navigableRoutes.sort(this.sortByPath);
@@ -97,12 +83,15 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     this.applyComponentFilter('');
   }
 
+  private mapResourcesRoutes() {
+    this.filteredResourceRoutes = this.router.config
+      .flatMap((route) => [...(route.children || [])])
+      .filter((route) => route.data?.['resourceLink']);
+  }
+
   private sortByPath(a: Route, b: Route): number {
     return a.path < b.path ? -1 : a.path > b.path ? 1 : 0;
   }
-
-  @ViewChildren('componentLink') componentLinks: QueryList<ElementRef<HTMLAnchorElement>>;
-  @ViewChildren('resourceLink') resourceLinks: QueryList<ElementRef<HTMLAnchorElement>>;
 
   onFilterChange(value: string) {
     this.applyComponentFilter(value);

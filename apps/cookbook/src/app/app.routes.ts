@@ -24,6 +24,9 @@ export const routes: Routes = [
       {
         path: 'intro',
         component: IntroComponent,
+        data: {
+          resourceLink: 'Introduction',
+        },
       },
       {
         path: 'showcase',
@@ -32,10 +35,16 @@ export const routes: Routes = [
       {
         path: 'guides',
         loadChildren: () => import('./guides/guides.module').then((m) => m.GuideModule),
+        data: {
+          resourceLink: 'Guides',
+        },
       },
       {
         path: 'accessibility-in-kirby',
         component: AccessibilityGuidelinesComponent,
+        data: {
+          resourceLink: 'Accessibility',
+        },
       },
       {
         path: 'component-overview',
@@ -44,6 +53,9 @@ export const routes: Routes = [
       {
         path: 'extensions',
         component: ExtensionsLandingPageComponent,
+        data: {
+          resourceLink: 'Extensions',
+        },
       },
     ],
   },
