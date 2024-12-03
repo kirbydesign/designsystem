@@ -99,9 +99,9 @@ export class SideNavComponent implements OnInit {
 
   onLinksArrowUpDown(event: KeyboardEvent, sideNavGroupKey: string) {
     event.preventDefault();
-    const listElements: HTMLAnchorElement[] = this.sideNavGroups[sideNavGroupKey].map(
-      (link) => link.nativeElement
-    );
+    const listElements: HTMLAnchorElement[] = (
+      sideNavGroupKey === 'resources' ? this.resourceLinks : this.componentLinks
+    ).map((link) => link.nativeElement);
     const currentlyFocused = listElements.findIndex((link) => link === document.activeElement);
 
     if (currentlyFocused === -1) {
@@ -146,12 +146,5 @@ export class SideNavComponent implements OnInit {
     }, {});
 
     return Object.keys(distributed).map((groupKey) => distributed[groupKey]);
-  }
-
-  private get sideNavGroups(): { [key: string]: QueryList<ElementRef<HTMLAnchorElement>> } {
-    return {
-      resources: this.resourceLinks,
-      components: this.componentLinks,
-    };
   }
 }
