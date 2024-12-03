@@ -207,8 +207,16 @@ export class ModalWrapperComponent
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
 
+    this.setAriaLabel();
+  }
+
+  private setAriaLabel() {
     const ariaLabel = this.config.htmlAttributes?.['aria-label'];
-    if (!ariaLabel) {
+    const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
+
+    if (ariaLabel) {
+      this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
+    } else {
       this.observeTitleContentChanges();
       this.setTitleAsAriaLabel();
     }

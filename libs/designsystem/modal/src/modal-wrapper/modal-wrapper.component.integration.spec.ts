@@ -445,12 +445,23 @@ describe('ModalWrapperComponent + ModalComponent', () => {
 
     beforeEach(() => {
       TestHelper.disableAnimationsInTest();
-      spectator = createHost(`<kirby-modal [attr.aria-label]="ariaLabel"></kirby-modal>`, {
-        hostProps: {
-          ariaLabel,
-        },
-      });
+      spectator = createHost(
+        `<kirby-modal [attr.aria-label]="ariaLabel">
+          <ng-template>Modal Content</ng-template>
+        </kirby-modal>`,
+        {
+          hostProps: {
+            ariaLabel,
+          },
+        }
+      );
+      spectator.setInput('isOpen', true);
+      spectator.setHostInput(ariaLabel);
       ionModal = spectator.queryHost('ion-modal');
+    });
+
+    afterEach(() => {
+      spectator.setInput('isOpen', false);
     });
 
     it('should allow setting custom aria-label', async () => {

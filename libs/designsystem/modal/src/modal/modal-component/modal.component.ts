@@ -89,7 +89,6 @@ export class ModalComponent implements OnChanges, OnInit {
     interactWithBackground: this.interactWithBackground,
   };
   _canDismiss: ShowAlertCallback | boolean = true;
-  _ariaLabel: string;
 
   constructor(
     private canDismissHelper: CanDismissHelper,
@@ -97,9 +96,16 @@ export class ModalComponent implements OnChanges, OnInit {
     private windowRef: WindowRef,
     private elementRef: ElementRef
   ) {}
-
   ngOnInit(): void {
-    this.inheritAriaLabel();
+    this.forwardAriaLabel();
+  }
+
+  private forwardAriaLabel() {
+    // Instead of setting aria label on ion-modal in the template we forward it to modal-wrapper for consistency
+    // and so we do not start listening for title changes in the modal-wrapper.
+    this._config.htmlAttributes = {
+      'aria-label': inheritAriaLabelText(this.elementRef.nativeElement),
+    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -146,15 +152,5 @@ export class ModalComponent implements OnChanges, OnInit {
         this._config[key] = changes[key].currentValue;
       }
     });
-  }
-
-  private inheritAriaLabel() {
-    this._ariaLabel = inheritAriaLabelText(this.elementRef.nativeElement);
-
-    if (this._ariaLabel) {
-      // The aria-label is set in the component template, but we still forward it to the modal-wrapper
-      // so we do not start listening for title changes in the modal-wrapper.
-      this._config.htmlAttributes = { 'aria-label': this._ariaLabel };
-    }
   }
 }
