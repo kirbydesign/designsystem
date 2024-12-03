@@ -688,26 +688,35 @@
 </p>
 <p>This emphasizes the importance of providing a meaningful title for all modals.</p>
 
+<p>
+  While it is recommended to let the label be inferred from the title, in rare cases where a custom
+  accessible name for the modal is needed, it is possible to instead supply an
+  <code>aria-label</code>
+  key-value pair. This is set with the
+  <code>htmlAttributes</code>
+  property of the
+  <code>ModalConfig</code>
+  when working with controller-based modals, or directly as an attribute on the element when using
+  the modal component.
+</p>
+
+<cookbook-example-viewer
+  [ts]="modalConfigAriaLabelCodeSnippet"
+  [html]="modalComponentAriaLabelCodeSnippet"
+></cookbook-example-viewer>
+
 <h4>Compact Modals</h4>
 <p>
   A label
-  <strong>cannot</strong>
-  automatically be inferred for compact modals as they do not always have a title, except when a
+  <strong>is not</strong>
+  automatically set on compact modals except when used with a
   <a [routerLink]="'../message-state'">Message State</a>
-  is used. Therefore, developers must add an
+  , as other types of compact modal do not have an explicit title to infer. Therefore, developers
+  must add an
   <code>aria-label</code>
-  that will be announced as the modal label.
+  that will be announced as the modal label. This label should match any visual heading or title of
+  the compact modal.
 </p>
-
-<p>
-  This can be achieved by injecting the modal into the embedded component displayed within your
-  modal and setting the
-  <code>ariaLabel</code>
-  property.
-</p>
-<cookbook-example-viewer
-  [ts]="compactExample.ariaLabelPropertyCodeSnippet"
-></cookbook-example-viewer>
 
 <h2 #sharedProperties>Shared properties</h2>
 <p class="comment">

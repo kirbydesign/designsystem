@@ -10,7 +10,6 @@ import {
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from '~/app/examples/modal-example/modal-component-example.component';
-import { ModalCompactExampleComponent } from '~/app/examples/modal-example/compact-example/modal-compact-example.component';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -25,9 +24,19 @@ export class ModalShowcaseComponent {
   outletExample = ModalExampleOutletComponent;
   alertEmbeddedExample = ModalEmbeddedAlertExampleComponent;
   alertModalConfigExample = ModalExampleAlertComponent;
-  compactExample = ModalCompactExampleComponent;
   isOpenExampleHtml = ModalComponentExampleComponent.isOpenExampleHtml;
   isOpenCodeSnippet = ModalComponentExampleComponent.isOpenCodeSnippet;
+  modalComponentAriaLabelCodeSnippet = `<!-- Setting a label when using the component-based modal -->
+<kirby-modal aria-label="This is my own custom label" trigger="open-modal">
+  <ng-template>
+    <!-- Modal content here -->
+  </ng-template>
+</kirby-modal>`;
+  modalConfigAriaLabelCodeSnippet = `// Setting a label when using the modal controller
+const config: ModalConfig = {
+  component: YourEmbeddedModalComponent,
+  htmlAttributes: { 'aria-label': 'Accessible label for modal' },
+};`;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
@@ -72,7 +81,7 @@ export class ModalShowcaseComponent {
       name: 'drawerSupplementaryAction',
       description: `(Optional) Allows placing a supplementary button in the top right corner of drawers.
       Please note: Only available on modals with a \`drawer\` flavor.`,
-      defaultValue: '',
+      defaultValue: 'undefined',
       type: ['{iconName: string, action: Function}'],
     },
     {
@@ -95,6 +104,12 @@ export class ModalShowcaseComponent {
       description: 'Disable scrolling of the modal',
       type: ['true', 'false'],
       defaultValue: 'false',
+    },
+    {
+      name: 'htmlAttributes',
+      description: '(Optional) Adds custom attributes to the modal.',
+      type: ['{ [key: string]: any; }'],
+      defaultValue: 'undefined',
     },
   ];
 
