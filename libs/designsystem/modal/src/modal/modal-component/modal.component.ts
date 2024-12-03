@@ -96,16 +96,9 @@ export class ModalComponent implements OnChanges, OnInit {
     private windowRef: WindowRef,
     private elementRef: ElementRef
   ) {}
+
   ngOnInit(): void {
     this.forwardAriaLabel();
-  }
-
-  private forwardAriaLabel() {
-    // Instead of setting aria label on ion-modal in the template we forward it to modal-wrapper for consistency
-    // and so we do not start listening for title changes in the modal-wrapper.
-    this._config.htmlAttributes = {
-      'aria-label': inheritAriaLabelText(this.elementRef.nativeElement),
-    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -152,5 +145,13 @@ export class ModalComponent implements OnChanges, OnInit {
         this._config[key] = changes[key].currentValue;
       }
     });
+  }
+
+  private forwardAriaLabel() {
+    // Instead of setting aria label on ion-modal in the template we forward it to modal-wrapper for consistency
+    // and so we do not start listening for title changes in the modal-wrapper.
+    this._config.htmlAttributes = {
+      'aria-label': inheritAriaLabelText(this.elementRef.nativeElement),
+    };
   }
 }

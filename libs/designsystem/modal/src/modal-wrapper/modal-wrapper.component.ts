@@ -214,7 +214,7 @@ export class ModalWrapperComponent
     const ariaLabel = this.config.htmlAttributes?.['aria-label'];
     const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
 
-    if (ariaLabel) {
+    if (ionModalElementDialog && ariaLabel) {
       this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
     } else {
       this.observeTitleContentChanges();
