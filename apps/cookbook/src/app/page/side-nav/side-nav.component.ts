@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -29,7 +28,7 @@ interface SideNavLink {
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements OnInit, AfterViewInit {
+export class SideNavComponent implements OnInit {
   private allShowcaseRoutes: SideNavLink[];
   filteredShowcaseRoutes: SideNavLink[][];
   filteredResourceRoutes: Route[];
@@ -43,16 +42,7 @@ export class SideNavComponent implements OnInit, AfterViewInit {
   @Input()
   isMenuOpen = false;
 
-  sideNavGroups: { [key: string]: QueryList<ElementRef<HTMLAnchorElement>> };
-
   constructor(private router: Router) {}
-
-  ngAfterViewInit(): void {
-    this.sideNavGroups = {
-      resources: this.resourceLinks,
-      components: this.componentLinks,
-    };
-  }
 
   ngOnInit() {
     this.mapShowcaseRoutes();
@@ -154,5 +144,12 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     }, {});
 
     return Object.keys(distributed).map((groupKey) => distributed[groupKey]);
+  }
+
+  private get sideNavGroups(): { [key: string]: QueryList<ElementRef<HTMLAnchorElement>> } {
+    return {
+      resources: this.resourceLinks,
+      components: this.componentLinks,
+    };
   }
 }
