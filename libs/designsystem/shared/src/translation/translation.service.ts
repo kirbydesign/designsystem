@@ -8,24 +8,20 @@ import { Translation } from './translation.interface';
   providedIn: 'root',
 })
 export class TranslationService {
-  private translations: { [key: string]: Translation } = {
-    da,
-    en,
-  };
-
   private activeTranslation: Translation = en;
+  private translations: { [key: string]: Translation } = { da, en };
 
   constructor(@Inject(LOCALE_ID) private localeId: string) {
-    this.setTranslation(localeId);
+    this.setActiveTranslation(localeId);
   }
 
-  setTranslation(localeId: string): string {
+  private setActiveTranslation(localeId: string): string {
     const baseLocaleId = localeId.split('-')[0];
     const translation = this.translations[baseLocaleId];
 
     if (!translation) {
       console.warn(
-        `Translation not found for locale "${this.localeId}", falling back to ${this.get('$code')}`
+        `[Kirby] Internal component translations were not found for locale "${this.localeId}", falling back to ${this.get('$code')}`
       );
       return;
     }
