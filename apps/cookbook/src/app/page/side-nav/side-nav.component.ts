@@ -139,14 +139,6 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     this.menuToggle.emit(this.isMenuOpen);
   }
 
-  onToggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  get menuIcon(): string {
-    return this.isMenuOpen ? 'close' : 'more';
-  }
-
   private applyComponentFilter(stringToMatch: string): void {
     this.filter = stringToMatch;
     let filteredLinks: SideNavLink[] = this.allShowcaseRoutes;
