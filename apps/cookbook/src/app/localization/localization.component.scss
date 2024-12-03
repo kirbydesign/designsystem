@@ -2,8 +2,7 @@
 @use '../showcase/showcase.shared';
 @use '@kirbydesign/core/src/scss/utils';
 
-$avatar-offset-block-start: -1 * utils.size('s');
-$avatar-offset-inline-end: -1 * utils.size('s');
+$avatar-offset: -1 * utils.size('s');
 
 :host {
   display: block;
@@ -23,6 +22,5 @@ $avatar-offset-inline-end: -1 * utils.size('s');
 
 .locale-avatar {
   position: absolute;
-  inset-block-start: $avatar-offset-block-start;
-  inset-inline-end: $avatar-offset-inline-end;
+  inset: $avatar-offset $avatar-offset auto auto;
 }
