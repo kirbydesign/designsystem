@@ -10,9 +10,10 @@
       <ul>
         <li *ngFor="let item of navigationItems">
           <a
-            [routerLink]="item.path"
             *ngIf="item.path; else externalUrl"
+            [routerLink]="item.path"
             routerLinkActive="is-selected"
+            (click)="closeMenu()"
             class="list-item-link"
             #resourceLink
           >
