@@ -27,6 +27,25 @@ import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.
   ],
 })
 export class LocalizationComponent {
+  localeConfigCodeSnippet = `import { registerLocaleData } from '@angular/common';
+import localeData from '@angular/common/locales/da';
+import { LOCALE_ID, NgModule } from '@angular/core';
+
+registerLocaleData(localeData);
+
+@NgModule({
+  ...,
+  providers: [
+    { provide: LOCALE_ID, useValue: 'da' },
+  ],
+})
+export class AppModule {}`;
+  translationGetterCodeSnippet = `constructor(private translationService: TranslationService) {}
+
+get previousMonthLabel(): string {
+  return this.translationService.get('previousMonth');
+}`;
+
   constructor(public translations: TranslationService) {}
   selectedDate: Date = new Date(2025, 0, 1);
 }

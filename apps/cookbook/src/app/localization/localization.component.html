@@ -1,22 +1,30 @@
 <article>
   <h1>Localization</h1>
   <p>
-    The Kirby components supports two locales out of the box: English (
-    <code>en</code>
+    Locale information is used by components such as
+    <code>kirby-calendar</code>
+    and
+    <code>input type="date"</code>
+    to automatically format values according to locale. Support has been added for three locales out
+    of the box: American English (
+    <code>en-US</code>
+    ), British English (
+    <code>en-GB</code>
     ) and Danish (
     <code>da</code>
     ).
   </p>
   <p>
-    If you need support for other locales, or want to add additional translations, please report an
-    issue to us on Github, and consider contributing the code to make it happen. Existing
-    translation files can be found here (link), and registered by adding the translation here
-    (link).
+    Specifying the locale will also ensure translation of
+    <em>internal</em>
+    component labels and texts that are not configurable. This allows assistive technology such as
+    screen readers to announce labels in the correct language.
   </p>
 
   <p>
-    Apart from number and date formatting, the main use-case for specifying locale in Kirby is to
-    provide translations of component internals such as labels.
+    In this example visible information such as the month and weekday headers, and accessible names
+    for headers, calendar cells and interactive buttons have been automatically translated by
+    specifying the locale.
   </p>
 
   <cookbook-example-viewer>
@@ -48,26 +56,41 @@
     </div>
   </cookbook-example-viewer>
 
-  <p>Calendar example here.</p>
-
-  <h2>Setting Up Translations</h2>
-  <p>Define locale in app module.</p>
-
-  <h2>Using Translations in Templates</h2>
-  Translations are intended for use
+  <h2>Additional locales</h2>
   <p>
-    Use the
+    If support for other locales or additional translations are needed please
+    <!-- prettier-ignore -->
+    <a class="kirby-external-icon" href="https://github.com/kirbydesign/designsystem/issues/new/choose">create an enhancement issue on Github</a>
+    and consider contributing the code to make it happen. Please refer to the
+    <a
+      href="https://github.com/kirbydesign/designsystem/tree/develop/libs/designsystem/shared/src/translation/translations"
+    >
+      existing translation files
+    </a>
+    and how
+    <a
+      href="https://github.com/kirbydesign/designsystem/tree/develop/libs/designsystem/shared/src/translation/translation.service.ts"
+    >
+      translation registering
+    </a>
+    is done in the
     <code>TranslationService</code>
-    to fetch and display translated strings in your templates.
+    .
   </p>
-
-  <h2>Switching Component Language</h2>
+  <h2>Using translated values directly</h2>
   <p>
-    Components are initialized with any locale defined in e.g. the app.module.ts of your projects.
-    If you want to switch locale at runtime, you can do so by calling
-    <code>TranslationService.setTranslation('da')</code>
-    for Danish, or
-    <code>TranslationService.setTranslation('en')</code>
-    for English.
+    If custom components are closely coupled to Kirby and need to use identical translations the
+    <code>TranslationService</code>
+    can be used to fetch and display translated strings.
   </p>
+  <p>
+    This can be done by injecting the service and getting any key defined in the
+    <a
+      href="https://github.com/kirbydesign/designsystem/tree/develop/libs/designsystem/shared/src/translation/translation.interface.ts"
+    >
+      Translation
+    </a>
+    interface.
+  </p>
+  <cookbook-code-viewer [ts]="translationGetterCodeSnippet"></cookbook-code-viewer>
 </article>

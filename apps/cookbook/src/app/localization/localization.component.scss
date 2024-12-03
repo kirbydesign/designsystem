@@ -2,8 +2,8 @@
 @use '../showcase/showcase.shared';
 @use '@kirbydesign/core/src/scss/utils';
 
-$avatar-offset-block-start: -20px;
-$avatar-offset-inline-end: -18px;
+$avatar-offset-block-start: -1 * utils.size('s');
+$avatar-offset-inline-end: -1 * utils.size('s');
 
 :host {
   display: block;
