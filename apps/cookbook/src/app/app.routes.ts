@@ -61,6 +61,9 @@ export const routes: Routes = [
       {
         path: 'localization',
         component: LocalizationComponent,
+        data: {
+          resourceLink: 'Localization',
+        },
       },
     ],
   },
