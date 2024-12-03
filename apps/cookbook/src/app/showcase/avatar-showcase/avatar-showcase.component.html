@@ -28,11 +28,33 @@
   <cookbook-example-viewer [html]="imageExample.template">
     <cookbook-avatar-example-image #imageExample></cookbook-avatar-example-image>
   </cookbook-example-viewer>
+  <h3>Sizes</h3>
   <cookbook-example-viewer [html]="imageSizeExample.template">
     <cookbook-avatar-example-image-size #imageSizeExample></cookbook-avatar-example-image-size>
   </cookbook-example-viewer>
 
-  <h2>Avatar with fallback image</h2>
+  <h3>Lazy loaded image</h3>
+  <p>
+    If you want to defer the loading of the avatar image set
+    <code>imageLoading="lazy"</code>
+    .
+  </p>
+  <p>
+    <a
+      class="kirby-external-icon"
+      target="_blank"
+      href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading"
+    >
+      Read more about lazy loading images on MDN
+    </a>
+  </p>
+  <cookbook-example-viewer [html]="imageLazyLoadingExample.template">
+    <cookbook-avatar-example-image-loazy-loading
+      #imageLazyLoadingExample
+    ></cookbook-avatar-example-image-loazy-loading>
+  </cookbook-example-viewer>
+
+  <h3>Fallback image</h3>
   <p>
     The image avatar will emit an
     <code>ErrorEvent</code>

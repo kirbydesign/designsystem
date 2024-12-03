@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Input,
   OnInit,
   Output,
@@ -13,15 +14,14 @@ import { filter } from 'rxjs/operators';
 
 import { kebabToTitleCase } from '@kirbydesign/designsystem';
 
-import { routes } from '../../showcase/showcase.routes';
-import { navigationItems } from '../header/header.component';
+import { routes as showcaseRoutes } from '../../showcase/showcase.routes';
+import { routes as appRoutes } from '../../app.routes';
 
 const KEY_DOWN = 'ArrowDown';
 
 interface SideNavLink {
   path: string;
   name: string;
-  active: boolean;
 }
 
 @Component({
@@ -32,17 +32,22 @@ interface SideNavLink {
 export class SideNavComponent implements OnInit {
   private allShowcaseRoutes: SideNavLink[];
   filteredShowcaseRoutes: SideNavLink[][];
+  filteredResourceRoutes: Route[];
   filter: string = '';
 
+  @ViewChildren('componentLink') componentLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
+  @ViewChildren('resourceLink') resourceLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
+
   @Output() menuToggle = new EventEmitter<boolean>();
-  @Input() isMenuOpen = false;
+  @HostBinding('class.is-open')
+  @Input()
+  isMenuOpen = false;
 
   constructor(private router: Router) {}
 
-  navigationLinks = navigationItems;
-
   ngOnInit() {
-    this.mapRoutes();
+    this.mapShowcaseRoutes();
+    this.mapResourcesRoutes();
 
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -53,8 +58,8 @@ export class SideNavComponent implements OnInit {
       });
   }
 
-  private mapRoutes() {
-    const routesWithPath = routes[0].children.filter((r) => r.path);
+  private mapShowcaseRoutes() {
+    const routesWithPath = showcaseRoutes[0].children.filter((r) => r.path);
     const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
     navigableRoutes.sort(this.sortByPath);
 
@@ -69,11 +74,16 @@ export class SideNavComponent implements OnInit {
     this.applyComponentFilter('');
   }
 
+  private mapResourcesRoutes() {
+    const routesWithPath = appRoutes.find((r) => r.path === 'home')?.children || [];
+    const resourceLinks = routesWithPath.filter((r) => r.data?.['resourceLink']);
+
+    this.filteredResourceRoutes = resourceLinks;
+  }
+
   private sortByPath(a: Route, b: Route): number {
     return a.path < b.path ? -1 : a.path > b.path ? 1 : 0;
   }
-
-  @ViewChildren('componentLink') componentLinks: QueryList<ElementRef<HTMLAnchorElement>>;
 
   onFilterChange(value: string) {
     this.applyComponentFilter(value);
@@ -87,9 +97,11 @@ export class SideNavComponent implements OnInit {
     }
   }
 
-  onLinksArrowUpDown(event: KeyboardEvent) {
+  onLinksArrowUpDown(event: KeyboardEvent, sideNavGroupKey: string) {
     event.preventDefault();
-    const listElements: HTMLAnchorElement[] = this.componentLinks.map((link) => link.nativeElement);
+    const listElements: HTMLAnchorElement[] = (
+      sideNavGroupKey === 'resources' ? this.resourceLinks : this.componentLinks
+    ).map((link) => link.nativeElement);
     const currentlyFocused = listElements.findIndex((link) => link === document.activeElement);
 
     if (currentlyFocused === -1) {
@@ -103,12 +115,7 @@ export class SideNavComponent implements OnInit {
     linkToFocus.focus();
   }
 
-  onComponentLinkClick(path: string) {
-    this.setRouteActive(path);
-    this.closeMenu();
-  }
-
-  private closeMenu() {
+  closeMenu() {
     this.isMenuOpen = false;
     this.menuToggle.emit(this.isMenuOpen);
   }
@@ -133,20 +140,11 @@ export class SideNavComponent implements OnInit {
   private distributeSideNavLinksAlphabetically(links: SideNavLink[]): SideNavLink[][] {
     const distributed: { [key: string]: SideNavLink[] } = links.reduce((accumulator, link) => {
       const firstLetter = link.name[0];
-      link.active = this.router.url.endsWith(link.path);
       accumulator[firstLetter] =
         accumulator[firstLetter] === undefined ? [link] : [...accumulator[firstLetter], link];
       return accumulator;
     }, {});
 
     return Object.keys(distributed).map((groupKey) => distributed[groupKey]);
-  }
-
-  private setRouteActive(path) {
-    this.filteredShowcaseRoutes = this.filteredShowcaseRoutes.map((group) => {
-      return group.map((link) => {
-        return { ...link, active: link.path === path };
-      });
-    });
   }
 }

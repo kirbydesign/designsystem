@@ -14,6 +14,7 @@ import { AvatarExampleBadgeComponent } from './examples/badge';
 import { AvatarExampleImageComponent } from './examples/image';
 import { AvatarExampleImageSizeComponent } from './examples/image-sizes';
 import { AvatarExampleImageErrorComponent } from './examples/image-error';
+import { AvatarExampleImageLazyLoadingComponent } from './examples/image-lazy-loading';
 
 const COMPONENT_DECLARATIONS = [
   AvatarExampleComponent,
@@ -25,6 +26,7 @@ const COMPONENT_DECLARATIONS = [
   AvatarExampleImageComponent,
   AvatarExampleImageSizeComponent,
   AvatarExampleImageErrorComponent,
+  AvatarExampleImageLazyLoadingComponent,
 ];
 
 @NgModule({

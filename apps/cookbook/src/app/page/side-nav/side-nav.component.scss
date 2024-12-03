@@ -1,85 +1,101 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/opt-out';
 
-$link-padding: 5px;
+$link-padding-block: var(--kirby-spacing-xxxs);
+$link-padding-inline: var(--kirby-spacing-s);
 $link-border-radius: 3px;
-$menu-padding-mobile: utils.size('m');
-$divider-inset: utils.size('xxxxs');
-$divider-spacing: utils.size('xxs');
+$menu-padding-mobile: var(--kirby-spacing-m);
+$divider-inset: var(--kirby-spacing-xxxxs);
+$divider-spacing: var(--kirby-spacing-xxs);
+$logo-size-mobile: var(--kirby-spacing-xl);
 
 :host {
-  @include utils.media('>=large') {
-    grid-area: sidebar;
-  }
-}
-
-nav {
-  @include utils.media('>=large') {
-    display: none;
-  }
-}
-
-section {
   display: none;
+  z-index: utils.z('sticky-content');
+  padding: $menu-padding-mobile;
   position: absolute;
-  min-height: 100vh;
-  top: 0;
-  z-index: utils.z('modal');
-  background-color: utils.get-color('white');
-  padding: 0 $menu-padding-mobile;
-  box-shadow: utils.get-elevation(4);
-
-  @include utils.media('<large') {
-    height: 100vh;
-    overflow: auto;
-  }
-
-  @include utils.media('>=large') {
-    box-shadow: none;
-    display: block;
-    position: static;
-    background-color: transparent;
-    padding: 0;
-    min-height: unset;
-  }
+  top: var(--kirby-spacing-xxxxl);
+  bottom: 0;
+  overflow: auto;
 
   &.is-open {
     display: block;
+    background-color: utils.get-color('light');
+    box-shadow: utils.get-elevation(8);
   }
 
-  a {
-    @include opt-out.link;
-
-    text-decoration: none;
-    color: utils.get-text-color('semi-dark');
+  @include utils.media('>=large') {
+    position: static;
+    grid-area: sidebar;
+    box-shadow: none;
     display: block;
-    padding: $link-padding;
-    margin: 0 utils.size('xxxxs');
-    border-radius: $link-border-radius;
+    padding: 0;
+    min-height: unset;
 
-    &:hover,
-    &:focus {
-      color: utils.get-text-color('black');
-      background-color: utils.get-color('light');
-    }
-
-    &.is-selected {
-      color: utils.get-text-color('black');
-      font-weight: bold;
-      background-color: utils.get-color('semi-light');
-    }
-
-    &.is-hidden {
-      opacity: 0;
-      max-height: 0;
-      padding: 0;
-      pointer-events: none;
+    &.is-open {
+      background-color: transparent;
+      box-shadow: none;
     }
   }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+
+  li {
+    margin-block-start: 0;
+  }
+}
+
+kirby-card:not(:last-child) {
+  margin-bottom: var(--kirby-spacing-s);
+}
+
+a {
+  &.list-item-link {
+    text-decoration: none;
+  }
+
+  position: relative;
+  display: block;
+  padding: $link-padding-block $link-padding-inline;
+  border-radius: $link-border-radius;
+  line-height: 1.5rem;
+
+  &:hover,
+  &:focus {
+    color: utils.get-text-color('semi-dark');
+    z-index: utils.z('default');
+  }
+
+  &.is-selected {
+    color: utils.get-text-color('black');
+    font-weight: bold;
+    background-color: utils.get-color('semi-light');
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+}
+
+h2 {
+  margin-inline-start: $link-padding-inline;
+  margin-bottom: 0;
 }
 
 .filter {
   position: relative;
+
+  kirby-form-field {
+    margin-bottom: var(--kirby-spacing-s);
+  }
 }
 
 .clear-button {
@@ -88,14 +104,22 @@ section {
   top: 0;
 }
 
+.menu-button {
+  margin-top: var(--kirby-spacing-xs);
+  @include utils.media('>=large') {
+    display: none;
+  }
+}
+
+.components-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 hr {
-  margin: utils.size('xxxs'), 0;
   border: solid 1px utils.get-color('light');
   border-bottom: none;
   margin-block: $divider-spacing;
   margin-inline: $divider-inset;
-
-  &:last-child {
-    border-color: transparent;
-  }
 }
