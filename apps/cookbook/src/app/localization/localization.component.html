@@ -14,6 +14,16 @@
     <code>da</code>
     ).
   </p>
+
+  <p>
+    Locale is usually configured for the entire app in the
+    <code>AppModule</code>
+    .
+  </p>
+  <cookbook-example-viewer
+    class="code-only-example"
+    [ts]="localeConfigCodeSnippet"
+  ></cookbook-example-viewer>
   <p>
     Specifying the locale will also ensure translation of
     <em>internal</em>
@@ -58,7 +68,8 @@
 
   <h2>Using the service directly</h2>
   <p>
-    When developing custom components closely coupled to Kirby that need to use identical translations,
+    When developing custom components closely coupled to Kirby that need to use identical
+    translations,
     <code>TranslationService</code>
     can be used to fetch and display translated strings.
   </p>

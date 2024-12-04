@@ -28,3 +28,7 @@ $avatar-offset: -1 * utils.size('s');
   position: absolute;
   inset: $avatar-offset $avatar-offset auto auto;
 }
+
+.code-only-example {
+  margin-block-end: utils.size('s');
+}
