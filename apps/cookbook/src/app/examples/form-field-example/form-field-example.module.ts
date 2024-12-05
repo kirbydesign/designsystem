@@ -66,7 +66,6 @@ const COMPONENT_DECLARATIONS = [
     CardModule,
     IconModule,
     SpinnerModule,
-    PageModule,
     ExampleConfigurationWrapperComponent,
   ],
   declarations: COMPONENT_DECLARATIONS,
