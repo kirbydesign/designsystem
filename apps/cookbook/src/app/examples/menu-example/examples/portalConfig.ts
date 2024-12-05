@@ -4,11 +4,14 @@ import { OutletSelector, PortalOutletConfig } from '@kirbydesign/designsystem/sh
 const config = {
   selector: 'cookbook-menu-portal-config-example',
   template: `<kirby-menu [portalOutletConfig]="outletConfig">
-  <kirby-item [selectable]="true">
-    <h3>Action 1</h3>
+  <kirby-item>
+    Stone
   </kirby-item>
-  <kirby-item [selectable]="true">
-    <h3>Action 2</h3>
+  <kirby-item>
+    Rick
+  </kirby-item>
+  <kirby-item>
+    Gooey
   </kirby-item>
 </kirby-menu>`,
   codeSnippet: `public outletConfig: PortalOutletConfig = {

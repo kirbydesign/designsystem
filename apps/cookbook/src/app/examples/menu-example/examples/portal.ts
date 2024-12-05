@@ -5,11 +5,14 @@ const config = {
   template: `<kirby-menu 
   [DOMPortalOutlet]="_outlet"
   >
-  <kirby-item [selectable]="true">
-    <h3>Action 1</h3>
+  <kirby-item>
+    Stone
   </kirby-item>
-  <kirby-item [selectable]="true">
-    <h3>Action 2</h3>
+  <kirby-item>
+    Rick
+  </kirby-item>
+  <kirby-item>
+    Gooey
   </kirby-item>
 </kirby-menu>
 `,

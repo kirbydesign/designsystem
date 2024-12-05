@@ -10,14 +10,14 @@ const config = {
   >
     <kirby-icon [name]="'menu-outline'"></kirby-icon>
   </button>
-  <kirby-item [selectable]="true">
-    <h3>Action 1</h3>
+  <kirby-item>
+    Stone
   </kirby-item>
-  <kirby-item [selectable]="true">
-    <h3>Action 2</h3>
+  <kirby-item>
+    Rick
   </kirby-item>
-  <kirby-item [selectable]="true">
-    <h3>Action 3</h3>
+  <kirby-item>
+    Gooey
   </kirby-item>
 </kirby-menu>`,
 };
@@ -28,12 +28,4 @@ const config = {
 })
 export class MenuCustomButtonExampleComponent {
   template: string = config.template;
-
-  public actionClicked(): void {
-    console.log('Action clicked');
-  }
-
-  public toggled(): void {
-    console.log('Toggle changed');
-  }
 }

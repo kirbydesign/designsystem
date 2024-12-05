@@ -96,6 +96,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     ElementRef<HTMLElement>
   >;
 
+  @ContentChildren(ItemComponent) public kirbyItemComponents: QueryList<ItemComponent>;
+
   public floatingMenuIsShown: boolean = false;
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
   private scrollListenerDisposeFn: EventListenerDisposeFn;
@@ -116,11 +118,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private getFirstInteractiveElement(el: HTMLIonItemElement) {
-    const controls = el.querySelectorAll<
-      HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement
-    >('ion-toggle:not([disabled]), ion-checkbox:not([disabled]), ion-radio:not([disabled])');
-
-    return controls[0];
+    return el.querySelectorAll<HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement>(
+      'ion-toggle:not([disabled]), ion-checkbox:not([disabled]), ion-radio:not([disabled])'
+    )[0];
   }
 
   private handleKeyDownForClosedMenu(event: KeyboardEvent) {
@@ -131,13 +131,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       case 'ArrowDown':
         this.focusedIndex = 0;
         this.floatingMenu.show();
-        this.focusItem();
+        this.focusItem(event);
         this.preventFurtherPropagation(event);
         break;
       case 'ArrowUp':
         this.focusedIndex = this.kirbyItems.length - 1;
         this.floatingMenu.show();
-        this.focusItem();
+        this.focusItem(event);
         this.preventFurtherPropagation(event);
         break;
     }
@@ -157,7 +157,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         } else {
           this.focusedIndex++;
         }
-        this.focusItem();
+        this.focusItem(event);
         this.preventFurtherPropagation(event);
         break;
       case 'ArrowUp':
@@ -166,13 +166,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         } else {
           this.focusedIndex--;
         }
-        this.focusItem();
+        this.focusItem(event);
         this.preventFurtherPropagation(event);
         break;
       case 'Home': {
         if (this.focusedIndex > 0) {
           this.focusedIndex = 0;
-          this.focusItem();
+          this.focusItem(event);
         }
         this.preventFurtherPropagation(event);
         break;
@@ -180,7 +180,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       case 'End': {
         if (this.focusedIndex < this.kirbyItems.length - 1) {
           this.focusedIndex = this.kirbyItems.length - 1;
-          this.focusItem();
+          this.focusItem(event);
         }
         this.preventFurtherPropagation(event);
         break;
@@ -196,13 +196,10 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         break;
       default: {
         if (this.isPrintableCharacter(key)) {
-          const foundItemIndex = this.getIndexByFirstCharacter(
-            key,
-            this.kirbyItems.map((item) => item.nativeElement.innerText)
-          );
+          const foundItemIndex = this.getIndexOfItemsByFirstCharacterFromItems(key);
           if (foundItemIndex > -1) {
             this.focusedIndex = foundItemIndex;
-            this.focusItem();
+            this.focusItem(event);
           }
           this.preventFurtherPropagation(event);
         }
@@ -210,35 +207,45 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
+  private getIndexOfItemsByFirstCharacterFromItems(char: string) {
+    return this.getIndexByFirstCharacter(
+      char,
+      this.kirbyItems.map((item) => item.nativeElement.innerText)
+    );
+  }
+
   private getIndexByFirstCharacter(char: string, words: string[]): number {
     if (char.length > 1) {
       return;
     }
 
-    char = char.toLowerCase();
-    let foundItemIndex = -1;
-    let startIndex = this.focusedIndex + 1;
+    const wordsStartingWithChar = words
+      .map((word, index) => {
+        return { word: word.toLowerCase(), index };
+      })
+      .filter((match) => match.word.startsWith(char));
 
-    if (startIndex !== words.length) {
-      const spliced = words.splice(startIndex);
-      foundItemIndex = spliced.findIndex((word) => word.toLowerCase().startsWith(char));
+    if (wordsStartingWithChar.length === 0) {
+      return -1;
     }
 
-    if (foundItemIndex === -1) {
-      startIndex = 0;
-      foundItemIndex = words.findIndex((word) => word.toLowerCase().startsWith(char));
-    }
-    return startIndex + foundItemIndex;
+    const startIndex = this.focusedIndex + 1;
+    const firstWordStartingWithChar = wordsStartingWithChar[0];
+    const nextWordStartingWithChar = wordsStartingWithChar.filter(
+      (wordAndIndex) => wordAndIndex.index >= startIndex
+    )[0];
+
+    return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
   }
 
-  focusItem() {
+  focusItem(event: KeyboardEvent) {
     const itemToBeFocused = this.kirbyItems.get(this.focusedIndex);
     const ionItem = itemToBeFocused.nativeElement.querySelector('ion-item');
 
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
     if (typeof firstInteractiveElementWithinItem?.['setFocus'] === 'function') {
-      firstInteractiveElementWithinItem['setFocus']();
+      firstInteractiveElementWithinItem['setFocus'](event);
     } else {
       this.focusSelectableItem(ionItem);
     }
@@ -271,12 +278,31 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   ngAfterContentInit(): void {
     this.setupAccessibilityForItems();
     this.setupAccesibilityForUserProvidedButton();
+    this.setSelectableOnItems();
+  }
+
+  setSelectableOnItems() {
+    this.kirbyItemComponents.forEach((itemComponent) => {
+      if (itemComponent.selectable === undefined) {
+        itemComponent.selectable = true;
+      }
+    });
   }
 
   private setupAccessibilityForItems() {
     this.kirbyItems.forEach((item) => {
-      this.renderer.setAttribute(item.nativeElement, 'role', 'menuitem');
+      this.setRoleAttributeForItem(item.nativeElement);
     });
+  }
+
+  private setRoleAttributeForItem(item: HTMLElement) {
+    let menuItemRole = 'menuitem';
+    if (item.matches(':has(kirby-toggle, kirby-checkbox)')) {
+      menuItemRole = 'menuitemcheckbox';
+    } else if (item.matches(':has(kirby-radio)')) {
+      menuItemRole = 'menuitemradio';
+    }
+    this.renderer.setAttribute(item, 'role', menuItemRole);
   }
 
   menuVisibilityChanged(menuIsShown: boolean) {

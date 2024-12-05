@@ -4,11 +4,14 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 const config = {
   selector: 'cookbook-menu-selectable-example',
   template: `<kirby-menu>
-  <kirby-item [selectable]="true" (click)="actionClicked('Action 1')">
-    <h3>Action 1</h3>
+  <kirby-item (click)="actionClicked('Stone')">
+    Stone
   </kirby-item>
-  <kirby-item [selectable]="true" (click)="actionClicked('Action 2')">
-    <h3>Action 2</h3>
+  <kirby-item (click)="actionClicked('Rick')">
+    Rick
+  </kirby-item>
+  <kirby-item (click)="actionClicked('Gooey')">
+    Gooey
   </kirby-item>
 </kirby-menu>`,
 };
@@ -22,9 +25,9 @@ export class MenuSelectableExampleComponent {
 
   constructor(private toastController: ToastController) {}
 
-  actionClicked(action: string) {
+  actionClicked(hero: string) {
     const config: ToastConfig = {
-      message: `${action} was selected.`,
+      message: `${hero} was selected as your Hero.`,
       messageType: 'success',
       durationInMs: 1500,
     };

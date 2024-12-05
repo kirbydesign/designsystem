@@ -3,21 +3,29 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-menu-advanced-example',
   template: `<kirby-menu [closeOnSelect]="false">
-  <kirby-item selectable="true">
+  <kirby-item>
     <kirby-icon name="person" slot="start"></kirby-icon>
     <kirby-checkbox slot="end">
       <kirby-label>      
-        <h3>Face-id</h3>
+        Friend Throw
       </kirby-label>
     </kirby-checkbox>
   </kirby-item>
-  <kirby-item selectable="true">
+  <kirby-item>
     <kirby-icon name="notification" slot="start"></kirby-icon>
     <kirby-checkbox slot="end">
       <kirby-label>      
-        <h3>Notifications</h3>
+        Ice Curling
       </kirby-label>
     </kirby-checkbox>
+  </kirby-item>
+  <kirby-item>
+    <kirby-icon name="default" slot="start"></kirby-icon>
+    <kirby-toggle slot="end">
+      <kirby-label>      
+        Allow Cheats
+      </kirby-label>
+    </kirby-toggle>
   </kirby-item>
 </kirby-menu>`,
 };

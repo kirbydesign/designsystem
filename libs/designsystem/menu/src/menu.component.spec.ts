@@ -151,7 +151,7 @@ describe('MenuComponent', () => {
     beforeEach(async () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
-          <kirby-item [selectable]="true">
+          <kirby-item>
             <h3>Action 1</h3>
           </kirby-item>
         </kirby-menu>`,
@@ -173,7 +173,7 @@ describe('MenuComponent', () => {
     beforeEach(() => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
-          <kirby-item [selectable]="true">
+          <kirby-item>
             <h3>Action 1</h3>
               </kirby-item>
           </kirby-menu>`,
@@ -275,33 +275,11 @@ describe('MenuComponent', () => {
     });
   });
 
-  describe('advanced items', () => {
-    let toggle: ToggleComponent;
-    beforeEach(() => {
-      spectator = createHost<MenuComponent>(
-        `<kirby-menu [closeOnSelect]="false">
-        <kirby-item>
-          <kirby-icon name="notification" slot="start"></kirby-icon>
-          <h3>Title</h3>
-          <kirby-toggle slot="end" checked="true" (checkedChange)="toggled()"></kirby-toggle>
-        </kirby-item>
-      </kirby-menu>`,
-        {}
-      );
-      buttonElement = spectator.query('button');
-      toggle = spectator.query(ToggleComponent);
-    });
-
-    it('should render an advanced kirby item, with interactive elements inside', () => {
-      expect(toggle).toBeTruthy();
-    });
-  });
-
   describe('trigger: default(click)', () => {
     beforeEach(() => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
-          <kirby-item [selectable]="true">
+          <kirby-item>
             <h3>Action 1</h3>
               </kirby-item>
           </kirby-menu>`,
@@ -325,7 +303,7 @@ describe('MenuComponent', () => {
     beforeEach(() => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu [triggers]="['hover']">
-        <kirby-item [selectable]="true">
+        <kirby-item>
           <h3>Action 1</h3>
             </kirby-item>
         </kirby-menu>`,
@@ -351,16 +329,16 @@ describe('MenuComponent', () => {
       beforeEach(async () => {
         spectator = createHost<MenuComponent>(
           `<kirby-menu>
-            <kirby-item [selectable]="true">
+            <kirby-item>
               <h3>First Action</h3>
             </kirby-item>
-            <kirby-item [selectable]="true">
+            <kirby-item>
               <h3>Second Action</h3>
             </kirby-item>
-            <kirby-item [selectable]="true">
+            <kirby-item>
               <h3>Second Action 2</h3>
             </kirby-item>
-            <kirby-item [selectable]="true">
+            <kirby-item>
               <h3>Third Action</h3>
             </kirby-item>
           </kirby-menu>`,
@@ -370,6 +348,10 @@ describe('MenuComponent', () => {
         card = spectator.query('kirby-card');
         items = card.querySelectorAll('ion-item');
         await TestHelper.whenReady(items);
+      });
+
+      it('should add wrapping button to ion-item by default', () => {
+        items.forEach((item) => expect(item.shadowRoot.querySelector('button')).toExist());
       });
 
       it('should set focus on first item when opened by enter', async () => {
@@ -499,41 +481,75 @@ describe('MenuComponent', () => {
       });
     });
     describe('with interactive element inside items', () => {
-      beforeEach(async () => {
-        spectator = createHost<MenuComponent>(
-          `<kirby-menu>
-            <kirby-item>
-              <kirby-checkbox></kirby-checkbox>
-            </kirby-item>
-            <kirby-item>
-              <kirby-toggle></kirby-toggle>
-            </kirby-item>
-          </kirby-menu>`,
-          {}
-        );
-        buttonElement = spectator.query('button');
-        card = spectator.query('kirby-card');
-        items = card.querySelectorAll('ion-item');
-        await TestHelper.whenReady(items);
+      describe('keyboard interaction', () => {
+        beforeEach(async () => {
+          spectator = createHost<MenuComponent>(
+            `<kirby-menu>
+              <kirby-item>
+                <kirby-checkbox></kirby-checkbox>
+              </kirby-item>
+              <kirby-item>
+                <kirby-toggle></kirby-toggle>
+              </kirby-item>
+            </kirby-menu>`,
+            {}
+          );
+          buttonElement = spectator.query('button');
+          card = spectator.query('kirby-card');
+          items = card.querySelectorAll('ion-item');
+          await TestHelper.whenReady(items);
+        });
+
+        it('should set focus on first interactive element inside item when opened by enter', async () => {
+          spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+
+          expect(document.activeElement).toEqual(items[0].querySelector('ion-checkbox'));
+        });
+
+        it('should set focus on last interactive element inside item when opened by arrow up', async () => {
+          spectator.keyboard.pressKey('ArrowUp', buttonElement, 'keydown');
+
+          expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
+        });
+
+        it('should set focus on next interactive element inside item when navigating by arrow down', async () => {
+          spectator.keyboard.pressKey('ArrowDown', buttonElement, 'keydown');
+          spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
+
+          expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
+        });
       });
 
-      it('should set focus on first interactive element inside item when opened by enter', async () => {
-        spectator.keyboard.pressKey('Enter', buttonElement, 'keydown');
+      describe('accessibility', () => {
+        beforeEach(async () => {
+          spectator = createHost<MenuComponent>(
+            `<kirby-menu>
+              <kirby-item>
+                <kirby-checkbox></kirby-checkbox>
+              </kirby-item>
+              <kirby-item>
+                <kirby-toggle></kirby-toggle>
+              </kirby-item>
+              <kirby-item>
+                <kirby-radio></kirby-radio>
+              </kirby-item>
+            </kirby-menu>`,
+            {}
+          );
+          card = spectator.query('kirby-card');
+          items = card.querySelectorAll('kirby-item');
+        });
 
-        expect(document.activeElement).toEqual(items[0].querySelector('ion-checkbox'));
-      });
+        it('should add menuitemcheckbox to items with toggle or checkbox', () => {
+          console.log(items);
+          expect(items[0].getAttribute('role')).toEqual('menuitemcheckbox');
+          expect(items[1].getAttribute('role')).toEqual('menuitemcheckbox');
+        });
 
-      it('should set focus on last interactive element inside item when opened by arrow up', async () => {
-        spectator.keyboard.pressKey('ArrowUp', buttonElement, 'keydown');
-
-        expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
-      });
-
-      it('should set focus on next interactive element inside item when navigating by arrow down', async () => {
-        spectator.keyboard.pressKey('ArrowDown', buttonElement, 'keydown');
-        spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
-
-        expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
+        it('should add menuitemradio to items with toggle or checkbox', () => {
+          console.log(items);
+          expect(items[2].getAttribute('role')).toEqual('menuitemradio');
+        });
       });
     });
   });
