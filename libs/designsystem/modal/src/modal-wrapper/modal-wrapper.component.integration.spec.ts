@@ -456,7 +456,6 @@ describe('ModalWrapperComponent + ModalComponent', () => {
         }
       );
       spectator.setInput('isOpen', true);
-      spectator.setHostInput(ariaLabel);
       ionModal = spectator.queryHost('ion-modal');
     });
 
@@ -464,7 +463,7 @@ describe('ModalWrapperComponent + ModalComponent', () => {
       spectator.setInput('isOpen', false);
     });
 
-    it('should allow setting custom aria-label', async () => {
+    it('should inherit custom aria-label in dialog', async () => {
       await TestHelper.whenReady(ionModal);
       const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
       await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
