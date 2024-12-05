@@ -1,8 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
-
+import { RadioModule } from '@kirbydesign/designsystem/radio';
+import {
+  FormFieldModule,
+  InputComponent,
+  TextareaComponent,
+} from '@kirbydesign/designsystem/form-field';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { FormFieldInputAffixExampleComponent } from './examples/input/affix';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
 import { FormFieldInputColorExampleComponent } from './examples/input/color';
@@ -21,6 +31,7 @@ import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/co
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 import { FormFieldExampleConfigurationComponent } from './form-field-example-configuration-component/form-field-example-configuration.component';
+import { FormFieldExampleComponent } from './form-field-example.component';
 
 const COMPONENT_DECLARATIONS = [
   FormFieldExampleConfigurationComponent,
@@ -41,10 +52,23 @@ const COMPONENT_DECLARATIONS = [
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
+  FormFieldExampleComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
+  imports: [
+    CommonModule,
+    FormFieldModule,
+    InputComponent,
+    TextareaComponent,
+    RadioModule,
+    CheckboxComponent,
+    CardModule,
+    IconModule,
+    SpinnerModule,
+    PageModule,
+    ExampleConfigurationWrapperComponent,
+  ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
