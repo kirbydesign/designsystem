@@ -25,7 +25,7 @@ import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper, getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { ResizeObserverService, TranslationService } from '@kirbydesign/designsystem/shared';
 import { UnobserveFn, WindowRef } from '@kirbydesign/designsystem/types';
 import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
@@ -175,7 +175,8 @@ export class ModalWrapperComponent
     private windowRef: WindowRef,
     private platform: PlatformService,
     private canDismissHelper: CanDismissHelper,
-    private environmentInjector: EnvironmentInjector
+    private environmentInjector: EnvironmentInjector,
+    public translations: TranslationService
   ) {
     this.setViewportHeight();
     this.observeViewportResize();

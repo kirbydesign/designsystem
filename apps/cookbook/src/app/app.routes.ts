@@ -5,6 +5,7 @@ import { ComponentOverviewComponent } from './component-overview/component-overv
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
 import { ExtensionsLandingPageComponent } from './extensions/extensions-landing-page.component';
+import { LocalizationComponent } from './localization/localization.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,9 @@ export const routes: Routes = [
       {
         path: 'intro',
         component: IntroComponent,
+        data: {
+          resourceLink: 'Introduction',
+        },
       },
       {
         path: 'showcase',
@@ -32,10 +36,16 @@ export const routes: Routes = [
       {
         path: 'guides',
         loadChildren: () => import('./guides/guides.module').then((m) => m.GuideModule),
+        data: {
+          resourceLink: 'Guides',
+        },
       },
       {
         path: 'accessibility-in-kirby',
         component: AccessibilityGuidelinesComponent,
+        data: {
+          resourceLink: 'Accessibility',
+        },
       },
       {
         path: 'component-overview',
@@ -44,6 +54,16 @@ export const routes: Routes = [
       {
         path: 'extensions',
         component: ExtensionsLandingPageComponent,
+        data: {
+          resourceLink: 'Extensions',
+        },
+      },
+      {
+        path: 'localization',
+        component: LocalizationComponent,
+        data: {
+          resourceLink: 'Localization',
+        },
       },
     ],
   },

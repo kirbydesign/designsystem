@@ -9,6 +9,7 @@
         [defaultHref]="defaultBackHref"
         icon="assets/kirby/icons/svg/arrow-back.svg"
         [style.visibility]="hideBackButton ? 'hidden' : null"
+        [attr.aria-label]="translations.get('back')"
       ></ion-back-button>
     </ion-buttons>
     <ion-title [class.slide-and-fade-in]="toolbarTitleVisible">
@@ -68,7 +69,7 @@
       class="page-header"
       [ngClass]="{
         'text-center': titleAlignment === 'center',
-        'text-right': titleAlignment === 'right'
+        'text-right': titleAlignment === 'right',
       }"
     >
       <div #pageTitle class="page-title" [class.has-actions]="!!pageActionsTemplate">

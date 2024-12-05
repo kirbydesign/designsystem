@@ -1,57 +1,89 @@
 <section [class.is-open]="isMenuOpen">
-  <nav>
-    <ng-container *ngFor="let item of navigationLinks">
-      <a
-        *ngIf="item.route"
-        [routerLink]="item.route"
-        routerLinkActive="is-selected"
-        [routerLinkActiveOptions]="{ exact: false }"
-        (click)="onToggleMenu()"
-      >
-        {{ item.text }}
-      </a>
-      <a *ngIf="item.externalUrl" [href]="item.externalUrl" target="blank">{{ item.text }}</a>
-    </ng-container>
-  </nav>
-  <div class="filter">
-    <kirby-form-field>
-      <input
-        kirby-input
-        size="md"
-        placeholder="Filter components..."
-        (input)="onFilterChange($event.target.value)"
-        (keydown.ArrowDown)="onFilterArrowDown($event)"
-        [ngModel]="filter"
-      />
-    </kirby-form-field>
-    <button
-      *ngIf="filter.length > 0"
-      kirby-button
-      size="sm"
-      [noDecoration]="true"
-      class="clear-button"
-      (click)="onFilterChange('')"
-    >
-      <kirby-icon name="close"></kirby-icon>
-    </button>
-  </div>
+  <kirby-card
+    [hasPadding]="true"
+    (keydown.ArrowUp)="onLinksArrowUpDown($event, 'resources')"
+    (keydown.ArrowDown)="onLinksArrowUpDown($event, 'resources')"
+  >
+    <h2 class="kirby-text-normal">Resources</h2>
+    <hr />
+    <nav>
+      <ul>
+        <li *ngFor="let item of filteredResourceRoutes">
+          <a class="list-item-link" routerLink="{{ item.path }}" #resourceLink>
+            {{ item.data['resourceLink'] }}
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/kirbydesign/designsystem"
+            class="list-item-link"
+            target="_blank"
+            #resourceLink
+          >
+            <span class="kirby-external-icon">Github</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/kirbydesign/designsystem/releases"
+            class="list-item-link"
+            target="_blank"
+            #resourceLink
+          >
+            <span class="kirby-external-icon">Changelog</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </kirby-card>
 
   <kirby-card
-    (keydown.ArrowUp)="onLinksArrowUpDown($event)"
-    (keydown.ArrowDown)="onLinksArrowUpDown($event)"
     [hasPadding]="true"
+    (keydown.ArrowUp)="onLinksArrowUpDown($event, 'components')"
+    (keydown.ArrowDown)="onLinksArrowUpDown($event, 'components')"
   >
-    <ng-container *ngFor="let item of filteredShowcaseRoutes">
-      <a
-        *ngFor="let link of item"
-        [routerLink]="link.path"
-        [class]="{ 'is-selected': link.active }"
-        (click)="onComponentLinkClick(link.path)"
-        #componentLink
+    <div class="components-heading-container">
+      <h2 class="kirby-text-normal">Components</h2>
+      <a routerLink="component-overview">All</a>
+    </div>
+    <hr />
+    <div class="filter">
+      <kirby-form-field>
+        <input
+          kirby-input
+          size="md"
+          placeholder="Filter components..."
+          (input)="onFilterChange($event.target.value)"
+          (keydown.ArrowDown)="onFilterArrowDown($event)"
+          [ngModel]="filter"
+        />
+      </kirby-form-field>
+      <button
+        *ngIf="filter.length > 0"
+        kirby-button
+        size="sm"
+        [noDecoration]="true"
+        class="clear-button"
+        (click)="onFilterChange('')"
       >
-        {{ link.name }}
-      </a>
-      <hr />
-    </ng-container>
+        <kirby-icon name="close"></kirby-icon>
+      </button>
+    </div>
+    <ul>
+      <ng-container *ngFor="let item of filteredShowcaseRoutes; let isLast = last">
+        <li *ngFor="let link of item">
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="is-selected"
+            (click)="closeMenu()"
+            class="list-item-link"
+            #componentLink
+          >
+            {{ link.name }}
+          </a>
+        </li>
+        <hr aria-hidden="true" *ngIf="!isLast" />
+      </ng-container>
+    </ul>
   </kirby-card>
 </section>

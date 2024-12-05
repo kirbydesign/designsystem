@@ -47,7 +47,6 @@
     }
 
     @include utils.slotted('[slot="end"]') {
-      margin-inline: 0;
       text-align: end;
 
       kirby-label {
