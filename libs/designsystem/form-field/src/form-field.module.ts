@@ -5,12 +5,13 @@ import { FormFieldMessageComponent } from './form-field-message/form-field-messa
 import { FormFieldComponent } from './form-field.component';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { DecimalMaskDirective } from './directives/decimal-mask/decimal-mask.directive';
+import { AffixDirective } from './directives/affix/affix.directive';
 
 const declarations = [FormFieldComponent, FormFieldMessageComponent, InputCounterComponent];
 
 @NgModule({
-  imports: [CommonModule, DecimalMaskDirective, IconModule],
+  imports: [CommonModule, DecimalMaskDirective, IconModule, AffixDirective],
   declarations: [...declarations],
-  exports: [...declarations, DecimalMaskDirective],
+  exports: [...declarations, DecimalMaskDirective, AffixDirective],
 })
 export class FormFieldModule {}
