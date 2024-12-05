@@ -211,18 +211,6 @@ export class ModalWrapperComponent
     this.setAriaLabel();
   }
 
-  private setAriaLabel() {
-    const ariaLabel = this.config.htmlAttributes?.['aria-label'];
-    const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
-
-    if (ionModalElementDialog && ariaLabel) {
-      this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
-    } else {
-      this.observeTitleContentChanges();
-      this.setTitleAsAriaLabel();
-    }
-  }
-
   private _currentFooter: HTMLElement | null = null;
 
   private set currentFooter(footer: HTMLElement | null) {
@@ -416,16 +404,28 @@ export class ModalWrapperComponent
   private observeTitleContentChanges() {
     this.mutationObserverUnobserveFn = observeContent(
       this.ionTitleElement.nativeElement,
-      this.setTitleAsAriaLabel
+      this.setAriaLabelFromTitleContent
     );
   }
 
-  private setTitleAsAriaLabel = () => {
+  private setAriaLabelFromTitleContent = () => {
     const titleTextContent = this.ionTitleElement?.nativeElement.textContent;
     if (this.ionModalDialog && titleTextContent) {
       this.renderer.setAttribute(this.ionModalDialog, 'aria-label', titleTextContent);
     }
   };
+
+  private setAriaLabel() {
+    const ariaLabel = this.config.htmlAttributes?.['aria-label'];
+    const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
+
+    if (ionModalElementDialog && ariaLabel) {
+      this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
+    } else {
+      this.observeTitleContentChanges();
+      this.setAriaLabelFromTitleContent();
+    }
+  }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToTop(scrollDuration || 0);
