@@ -27,6 +27,14 @@ const config = {
       </kirby-label>
     </kirby-toggle>
   </kirby-item>
+  <kirby-item>
+    <kirby-icon name="default" slot="start"></kirby-icon>
+    <kirby-radio slot="end">
+      <kirby-label>      
+        Multiplayer mode
+      </kirby-label>
+    </kirby-radio>
+  </kirby-item>
 </kirby-menu>`,
 };
 
