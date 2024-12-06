@@ -76,6 +76,7 @@ export class InputComponent implements OnChanges, OnInit {
   @Input()
   borderless: boolean;
 
+  @HostBinding('attr.aria-invalid')
   @HostBinding('class.error')
   @Input()
   hasError: boolean;
