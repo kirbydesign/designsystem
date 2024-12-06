@@ -1,40 +1,53 @@
+@use 'sass:list';
+
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/base/item-typography';
+
+// Angular's view encapsulation wrongly appends an `_ngcontent-xxx` selector
+// after the `:where()` pseudo class when it contains more than 1 selector.
+// The workaround is to create a separate `:where` selector for each slotted text-element type.
+$where-selector-list: ();
+@each $text-element in item-typography.$slotted-text-elements-base {
+  $where-selector-list: list.append($where-selector-list, ':where(#{$text-element})', comma);
+}
 
 @mixin item-typography() {
-  @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
-    font-size: utils.font-size('n');
-    line-height: utils.line-height('n');
+  @include utils.slotted(item-typography.$slotted-text-elements) {
     color: utils.get-text-color('black');
     display: block;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  // Using :where() has lower specifity than :is() and allows global typography classes
+  // to be applied to slotted elements
+  @include utils.slotted($where-selector-list) {
+    font-size: utils.font-size('n');
+    line-height: utils.line-height('n');
     font-weight: normal;
-
-    &.kirby-text-bold {
-      font-weight: utils.font-weight('bold');
-    }
   }
 
-  @include utils.slotted(p) {
+  @include utils.slotted(':where(p)') {
     font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
   }
 
-  @include utils.slotted('[subtitle]', '[detail]') {
+  @include utils.slotted('[subtitle]', '[detail]', '.kirby-item-subtitle', '.kirby-item-detail') {
     font-size: utils.font-size('xs');
     line-height: utils.line-height('xs');
   }
 
-  @include utils.slotted('[subtitle]:not(:last-child)') {
+  @include utils.slotted('[subtitle]:not(:last-child)', '.kirby-item-subtitle:not(:last-child)') {
     margin-bottom: utils.size('xxxs');
   }
 
-  @include utils.slotted('[detail]') {
+  @include utils.slotted('[detail]', '.kirby-item-detail') {
     color: utils.get-text-color('semi-dark');
   }
 
-  @include utils.slotted('[wrap]') {
+  @include utils.slotted('[wrap]', '.kirby-item-wrap') {
     white-space: normal;
   }
 }

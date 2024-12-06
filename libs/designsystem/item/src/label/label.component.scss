@@ -14,7 +14,8 @@
   }
 }
 
-:host-context(kirby-item) ion-label {
+/* stylelint-disable selector-pseudo-element-no-unknown */
+:host-context(kirby-item) ::ng-deep ion-label {
   @include item.item-typography;
 }
 
