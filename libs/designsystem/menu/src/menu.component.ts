@@ -106,7 +106,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   @HostListener('keydown', ['$event'])
   _onKeydown(event: KeyboardEvent) {
     if (this.kirbyItems.length === 0) {
-      console.warn('No items found within menu');
+      console.warn('[Kirby] No items found within menu');
       return;
     }
     if (this.floatingMenuIsShown) {
@@ -122,9 +122,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private getFirstInteractiveElement(el: HTMLIonItemElement) {
-    return el.querySelectorAll<HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement>(
+    return el.querySelector<HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement>(
       'ion-toggle:not([disabled]), ion-checkbox:not([disabled]), ion-radio:not([disabled])'
-    )[0];
+    );
   }
 
   private handleKeyDownForClosedMenu(event: KeyboardEvent) {
@@ -200,7 +200,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         break;
       default: {
         if (this.isPrintableCharacter(key)) {
-          const foundItemIndex = this.getIndexOfItemsByFirstCharacterFromItems(key);
+          const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
           if (foundItemIndex > -1) {
             this.focusedIndex = foundItemIndex;
             this.focusItem();
@@ -211,31 +211,33 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
-  private getIndexOfItemsByFirstCharacterFromItems(char: string) {
-    return this.getIndexByFirstCharacter(
+  private getIndexOfItemByFirstCharacter(char: string) {
+    return this.getIndexByFirstMatchingStartString(
       char,
-      this.kirbyItems.map((item) => item.nativeElement.innerText)
+      this.kirbyItems.map((item) => item.nativeElement.innerText),
+      this.focusedIndex + 1
     );
   }
 
-  private getIndexByFirstCharacter(char: string, words: string[]): number {
-    if (char.length > 1) {
-      return;
-    }
+  private getIndexByFirstMatchingStartString(
+    matchString: string,
+    words: string[],
+    startIndex: number
+  ): number {
+    matchString = matchString.toLowerCase();
 
-    const wordsStartingWithChar = words
+    const wordsStartingWithMatchString = words
       .map((word, index) => {
         return { word: word.toLowerCase(), index };
       })
-      .filter((match) => match.word.startsWith(char));
+      .filter((match) => match.word.startsWith(matchString));
 
-    if (wordsStartingWithChar.length === 0) {
+    if (wordsStartingWithMatchString.length === 0) {
       return -1;
     }
 
-    const startIndex = this.focusedIndex + 1;
-    const firstWordStartingWithChar = wordsStartingWithChar[0];
-    const nextWordStartingWithChar = wordsStartingWithChar.filter(
+    const firstWordStartingWithChar = wordsStartingWithMatchString[0];
+    const nextWordStartingWithChar = wordsStartingWithMatchString.filter(
       (wordAndIndex) => wordAndIndex.index >= startIndex
     )[0];
 
@@ -280,12 +282,12 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   ngAfterContentInit(): void {
-    this.setupAccessibilityForItems();
-    this.setupAccesibilityForUserProvidedButton();
-    this.setSelectableOnItems();
+    this.setRoleAttributeForAllItems();
+    this.setUserProvidedButtonAriaAttributes();
+    this.ensureSelectableOnItems();
   }
 
-  setSelectableOnItems() {
+  ensureSelectableOnItems() {
     this.kirbyItemComponents.forEach((itemComponent) => {
       if (itemComponent.selectable === undefined) {
         itemComponent.selectable = true;
@@ -293,7 +295,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     });
   }
 
-  private setupAccessibilityForItems() {
+  private setRoleAttributeForAllItems() {
     this.kirbyItems.forEach((item) => {
       this.setRoleAttributeForItem(item.nativeElement);
     });
@@ -318,20 +320,21 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
-  private setupAccesibilityForUserProvidedButton() {
-    if (this.userProvidedButton) {
-      const button = this.userProvidedButton.nativeElement;
-      if (button.id) {
-        this.triggerButtonId = button.id;
-      } else {
-        this.renderer.setAttribute(button, 'id', this.triggerButtonId);
-      }
-      if (!button.getAttribute('aria-controls')) {
-        this.renderer.setAttribute(button, 'aria-controls', this.menuId);
-      }
-      if (!button.getAttribute('aria-haspopup')) {
-        this.renderer.setAttribute(button, 'aria-haspopup', 'true');
-      }
+  private setUserProvidedButtonAriaAttributes() {
+    if (!this.userProvidedButton) {
+      return;
+    }
+    const button = this.userProvidedButton.nativeElement;
+    if (button.id) {
+      this.triggerButtonId = button.id;
+    } else {
+      this.renderer.setAttribute(button, 'id', this.triggerButtonId);
+    }
+    if (!button.getAttribute('aria-controls')) {
+      this.renderer.setAttribute(button, 'aria-controls', this.menuId);
+    }
+    if (!button.getAttribute('aria-haspopup')) {
+      this.renderer.setAttribute(button, 'aria-haspopup', 'true');
     }
   }
 

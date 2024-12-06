@@ -536,7 +536,7 @@ describe('MenuComponent', () => {
           items = card.querySelectorAll('kirby-item');
         });
 
-        it('should add menuitemcheckbox to items with toggle or checkbox', () => {
+        it('should add role="menuitemcheckbox" to items with toggle or checkbox', () => {
           expect(items[0].getAttribute('role')).toEqual('menuitemcheckbox');
           expect(items[1].getAttribute('role')).toEqual('menuitemcheckbox');
         });
