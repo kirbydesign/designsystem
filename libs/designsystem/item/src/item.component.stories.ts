@@ -478,6 +478,88 @@ export const ItemWithCheckboxModernSyntax: Story = {
   }),
 };
 
+export const Typography: Story = {
+  render: () => ({
+    template: `<kirby-item><h1>Heading H1<br />Second line</h1></kirby-item>
+<kirby-item><h2>Heading H2<br />Second line</h2></kirby-item>
+<kirby-item><h3>Heading H3<br />Second line</h3></kirby-item>
+<kirby-item><h4>Heading H4<br />Second line</h4></kirby-item>
+<kirby-item><h5>Heading H5<br />Second line</h5></kirby-item>
+<kirby-item><h6>Heading H6<br />Second line</h6></kirby-item>
+<kirby-item><data>Data<br />Second line</data></kirby-item>
+<kirby-item><p>Paragraph<br />Second line</p></kirby-item>
+<kirby-item><data subtitle>Data subtitle<br />Second line</data></kirby-item>
+<kirby-item><p subtitle>Paragraph subtitle<br />Second line</p></kirby-item>
+<kirby-item><data detail>Data detail<br />Second line</data></kirby-item>
+<kirby-item><p detail>Paragraph detail<br />Second line</p></kirby-item>`,
+  }),
+};
+
+export const LabelTypography: Story = {
+  render: () => ({
+    template: `<kirby-item><kirby-label><h1>Heading H1<br />Second line</h1></kirby-label></kirby-item>
+<kirby-item><kirby-label><h2>Heading H2<br />Second line</h2></kirby-label></kirby-item>
+<kirby-item><kirby-label><h3>Heading H3<br />Second line</h3></kirby-label></kirby-item>
+<kirby-item><kirby-label><h4>Heading H4<br />Second line</h4></kirby-label></kirby-item>
+<kirby-item><kirby-label><h5>Heading H5<br />Second line</h5></kirby-label></kirby-item>
+<kirby-item><kirby-label><h6>Heading H6<br />Second line</h6></kirby-label></kirby-item>
+<kirby-item><kirby-label><data>Data<br />Second line</data></kirby-label></kirby-item>
+<kirby-item><kirby-label><p>Paragraph<br />Second line</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><data subtitle>Data subtitle<br />Second line</data></kirby-label></kirby-item>
+<kirby-item><kirby-label><p subtitle>Paragraph subtitle<br />Second line</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><data detail>Data detail<br />Second line</data></kirby-label></kirby-item>
+<kirby-item><kirby-label><p detail>Paragraph detail<br />Second line</p></kirby-label></kirby-item>`,
+  }),
+};
+
+export const TypographyOverride: Story = {
+  render: () => ({
+    template: `<kirby-item><h1 class="kirby-text-bold">Heading H1</h1></kirby-item>
+<kirby-item><h2 class="kirby-text-bold">Heading H2</h2></kirby-item>
+<kirby-item><h3 class="kirby-text-bold">Heading H3</h3></kirby-item>
+<kirby-item><h4 class="kirby-text-bold">Heading H4</h4></kirby-item>
+<kirby-item><h5 class="kirby-text-bold">Heading H5</h5></kirby-item>
+<kirby-item><h6 class="kirby-text-bold">Heading H6</h6></kirby-item>
+<kirby-item><p class="kirby-text-display-1">Display 1</p></kirby-item>
+<kirby-item><p class="kirby-text-display-2">Display 2</p></kirby-item>
+<kirby-item><p class="kirby-text-display-3">Display 3</p></kirby-item>
+<kirby-item><p class="kirby-text-xlarge">kirby-text-xlarge</p></kirby-item>
+<kirby-item><p class="kirby-text-large">kirby-text-large</p></kirby-item>
+<kirby-item><p class="kirby-text-medium">kirby-text-medium</p></kirby-item>
+<kirby-item><p class="kirby-text-normal-bold">kirby-text-normal-bold</p></kirby-item>
+<kirby-item><h1 class="kirby-text-normal">kirby-text-normal</h1></kirby-item>
+<kirby-item><p class="kirby-text-small">kirby-text-small</p></kirby-item>
+<kirby-item><p class="kirby-text-small-light">kirby-text-small-light</p></kirby-item>
+<kirby-item><p class="kirby-text-xsmall">kirby-text-xsmall</p></kirby-item>
+<kirby-item><p class="kirby-text-xxsmall">kirby-text-xxsmall</p></kirby-item>
+`,
+  }),
+};
+
+export const LabelTypographyOverride: Story = {
+  render: () => ({
+    template: `<kirby-item><kirby-label><h1 class="kirby-text-bold">Heading H1</h1></kirby-label></kirby-item>
+<kirby-item><kirby-label><h2 class="kirby-text-bold">Heading H2</h2></kirby-label></kirby-item>
+<kirby-item><kirby-label><h3 class="kirby-text-bold">Heading H3</h3></kirby-label></kirby-item>
+<kirby-item><kirby-label><h4 class="kirby-text-bold">Heading H4</h4></kirby-label></kirby-item>
+<kirby-item><kirby-label><h5 class="kirby-text-bold">Heading H5</h5></kirby-label></kirby-item>
+<kirby-item><kirby-label><h6 class="kirby-text-bold">Heading H6</h6></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-display-1">Display 1</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-display-2">Display 2</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-display-3">Display 3</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-xlarge">kirby-text-xlarge</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-large">kirby-text-large</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-medium">kirby-text-medium</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-normal-bold">kirby-text-normal-bold</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><h1 class="kirby-text-normal">kirby-text-normal</h1></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-small">kirby-text-small</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-small-light">kirby-text-small-light</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-xsmall">kirby-text-xsmall</p></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-text-xxsmall">kirby-text-xxsmall</p></kirby-label></kirby-item>
+`,
+  }),
+};
+
 export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-item-example></cookbook-item-example>`,
