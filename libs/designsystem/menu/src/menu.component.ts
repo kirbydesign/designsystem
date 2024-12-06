@@ -105,6 +105,10 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   @HostListener('keydown', ['$event'])
   _onKeydown(event: KeyboardEvent) {
+    if (this.kirbyItems.length === 0) {
+      console.warn('No items found within menu');
+      return;
+    }
     if (this.floatingMenuIsShown) {
       this.handleKeyDownForOpenedMenu(event);
     } else {
