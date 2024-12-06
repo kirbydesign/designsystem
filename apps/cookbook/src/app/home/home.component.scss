@@ -2,7 +2,7 @@
 
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
 
-$header-height-mobile: utils.size('xxxl');
+$header-height-mobile: auto;
 $header-height-desktop: 2 * utils.size('xxl');
 $footer-height: 3 * utils.size('xxl');
 $sidebar-width: 5 * utils.size('xxl');
@@ -16,7 +16,7 @@ $desktop-gutter: minmax(utils.size('m'), 1fr);
   grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
   grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
   grid-template-areas:
-    '. header .'
+    'header header header'
     '. main .'
     'footer footer footer';
   gap: utils.size('m');
@@ -29,7 +29,8 @@ $desktop-gutter: minmax(utils.size('m'), 1fr);
       '. header header .'
       '. sidebar main .'
       'footer footer footer footer';
-    gap: utils.size('xl');
+    column-gap: utils.size('xl');
+    row-gap: utils.size('m');
   }
 }
 

@@ -1,0 +1,108 @@
+<article>
+  <h1>Localization</h1>
+  <p>
+    Locale information is used by components such as
+    <code>kirby-calendar</code>
+    and
+    <code>input type="date"</code>
+    to automatically format values according to locale. Support has been added for three locales out
+    of the box: American English (
+    <code>en-US</code>
+    ), British English (
+    <code>en-GB</code>
+    ) and Danish (
+    <code>da</code>
+    ).
+  </p>
+
+  <p>
+    Locale is usually configured for the entire app in the
+    <code>AppModule</code>
+    .
+  </p>
+  <cookbook-example-viewer
+    class="code-only-example"
+    [ts]="localeConfigCodeSnippet"
+  ></cookbook-example-viewer>
+  <p>
+    Specifying the locale will also ensure translation of
+    <em>internal</em>
+    component labels and texts that are not configurable. This allows assistive technology such as
+    screen readers to announce labels in the correct language.
+  </p>
+
+  <p>
+    In this example visible information such as the month and weekday headers, and accessible names
+    for headers, calendar cells and interactive buttons have been automatically translated by
+    specifying the locale.
+  </p>
+
+  <cookbook-example-viewer>
+    <div class="example-frame">
+      <div class="locale-examples">
+        <cookbook-da-locale-provider>
+          <kirby-card>
+            <kirby-calendar [selectedDate]="selectedDate"></kirby-calendar>
+          </kirby-card>
+          <kirby-avatar
+            class="locale-avatar"
+            size="sm"
+            imageSrc="assets/images/dk.svg"
+            altText="Danish locale"
+          ></kirby-avatar>
+        </cookbook-da-locale-provider>
+        <cookbook-en-locale-provider>
+          <kirby-card>
+            <kirby-calendar [selectedDate]="selectedDate"></kirby-calendar>
+          </kirby-card>
+          <kirby-avatar
+            class="locale-avatar"
+            size="sm"
+            imageSrc="assets/images/gb.svg"
+            altText="English locale"
+          ></kirby-avatar>
+        </cookbook-en-locale-provider>
+      </div>
+    </div>
+  </cookbook-example-viewer>
+
+  <h2>Using the service directly</h2>
+  <p>
+    When developing custom components closely coupled to Kirby that need to use identical
+    translations,
+    <code>TranslationService</code>
+    can be used to fetch and display translated strings.
+  </p>
+  <p>
+    This can be done by injecting the service into the component and get any key defined in the
+    <a
+      href="https://github.com/kirbydesign/designsystem/tree/develop/libs/designsystem/shared/src/translation/translation.interface.ts"
+    >
+      Translation
+    </a>
+    interface.
+  </p>
+  <cookbook-code-viewer [ts]="translationGetterCodeSnippet"></cookbook-code-viewer>
+
+  <h2>Additional locales</h2>
+  <p>
+    If support for other locales or additional translations are needed please
+    <!-- prettier-ignore -->
+    <a class="kirby-external-icon" href="https://github.com/kirbydesign/designsystem/issues/new/choose">create an enhancement issue on Github</a>
+    and consider contributing the code to make it happen. Please refer to the
+    <a
+      href="https://github.com/kirbydesign/designsystem/tree/develop/libs/designsystem/shared/src/translation/translations"
+    >
+      existing translation files
+    </a>
+    and how
+    <a
+      href="https://github.com/kirbydesign/designsystem/tree/develop/libs/designsystem/shared/src/translation/translation.service.ts"
+    >
+      translation registering
+    </a>
+    is done in the
+    <code>TranslationService</code>
+    .
+  </p>
+</article>

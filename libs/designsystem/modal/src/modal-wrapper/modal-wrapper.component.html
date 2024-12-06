@@ -20,6 +20,7 @@
         attentionLevel="3"
         size="md"
         [noDecoration]="config.interactWithBackground"
+        [attr.aria-label]="translations.get('close')"
         (click)="close()"
       >
         <kirby-icon name="close"></kirby-icon>
