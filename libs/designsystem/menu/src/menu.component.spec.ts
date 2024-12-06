@@ -1,4 +1,3 @@
-import exp from 'constants';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 import { IconComponent, IconModule } from '@kirbydesign/designsystem/icon';
