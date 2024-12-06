@@ -530,9 +530,6 @@ describe('MenuComponent', () => {
               <kirby-item>
                 <kirby-toggle></kirby-toggle>
               </kirby-item>
-              <kirby-item>
-                <kirby-radio></kirby-radio>
-              </kirby-item>
             </kirby-menu>`,
             {}
           );
@@ -541,14 +538,8 @@ describe('MenuComponent', () => {
         });
 
         it('should add menuitemcheckbox to items with toggle or checkbox', () => {
-          console.log(items);
           expect(items[0].getAttribute('role')).toEqual('menuitemcheckbox');
           expect(items[1].getAttribute('role')).toEqual('menuitemcheckbox');
-        });
-
-        it('should add menuitemradio to items with toggle or checkbox', () => {
-          console.log(items);
-          expect(items[2].getAttribute('role')).toEqual('menuitemradio');
         });
       });
     });

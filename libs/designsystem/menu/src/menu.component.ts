@@ -112,7 +112,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
-  private preventFurtherPropagation(event: KeyboardEvent) {
+  private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
   }
@@ -131,14 +131,14 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       case 'ArrowDown':
         this.focusedIndex = 0;
         this.floatingMenu.show();
-        this.focusItem(event);
-        this.preventFurtherPropagation(event);
+        this.focusItem();
+        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'ArrowUp':
         this.focusedIndex = this.kirbyItems.length - 1;
         this.floatingMenu.show();
-        this.focusItem(event);
-        this.preventFurtherPropagation(event);
+        this.focusItem();
+        this.preventDefaultAndStopImmediatePropagation(event);
         break;
     }
   }
@@ -157,8 +157,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         } else {
           this.focusedIndex++;
         }
-        this.focusItem(event);
-        this.preventFurtherPropagation(event);
+        this.focusItem();
+        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'ArrowUp':
         if (this.focusedIndex === 0) {
@@ -166,30 +166,30 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         } else {
           this.focusedIndex--;
         }
-        this.focusItem(event);
-        this.preventFurtherPropagation(event);
+        this.focusItem();
+        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'Home': {
         if (this.focusedIndex > 0) {
           this.focusedIndex = 0;
-          this.focusItem(event);
+          this.focusItem();
         }
-        this.preventFurtherPropagation(event);
+        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       }
       case 'End': {
         if (this.focusedIndex < this.kirbyItems.length - 1) {
           this.focusedIndex = this.kirbyItems.length - 1;
-          this.focusItem(event);
+          this.focusItem();
         }
-        this.preventFurtherPropagation(event);
+        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       }
       case 'Escape':
         if (this.closeOnEscapeKey) {
           this.floatingMenu.hide();
         }
-        this.preventFurtherPropagation(event);
+        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'Tab':
         this.floatingMenu.hide();
@@ -199,9 +199,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
           const foundItemIndex = this.getIndexOfItemsByFirstCharacterFromItems(key);
           if (foundItemIndex > -1) {
             this.focusedIndex = foundItemIndex;
-            this.focusItem(event);
+            this.focusItem();
           }
-          this.preventFurtherPropagation(event);
+          this.preventDefaultAndStopImmediatePropagation(event);
         }
       }
     }
@@ -238,14 +238,14 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
   }
 
-  focusItem(event: KeyboardEvent) {
+  focusItem() {
     const itemToBeFocused = this.kirbyItems.get(this.focusedIndex);
     const ionItem = itemToBeFocused.nativeElement.querySelector('ion-item');
 
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
     if (typeof firstInteractiveElementWithinItem?.['setFocus'] === 'function') {
-      firstInteractiveElementWithinItem['setFocus'](event);
+      firstInteractiveElementWithinItem['setFocus']();
     } else {
       this.focusSelectableItem(ionItem);
     }
