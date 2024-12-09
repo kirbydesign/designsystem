@@ -18,15 +18,15 @@ import { DateFormats } from '../date-formats';
 })
 export class TimeOrDatePipe extends AbstractTimezoneCompensatingPipe implements PipeTransform {
   transform(
-    timestamp: number | Date,
+    time: number | Date,
     showSeconds = false,
     formatMonth: 'month-as-digits' | 'month-as-letters' = 'month-as-digits'
   ): string {
-    if (!timestamp) {
+    if (!time) {
       return '';
     }
 
-    const date = typeof timestamp === 'number' ? new Date(timestamp) : timestamp;
+    const date = typeof time === 'number' ? new Date(time) : time;
 
     const today = new Date();
     const sameDay =

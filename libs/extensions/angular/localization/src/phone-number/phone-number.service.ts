@@ -18,16 +18,9 @@ export class PhoneNumberService {
     chunk = 2,
     showCountryCode?: boolean
   ): string | undefined {
-    let countryCode: string;
-    let number: string;
-
-    if (typeof phoneNumber === 'string') {
-      countryCode = this.config.countryCode || '';
-      number = phoneNumber;
-    } else {
-      countryCode = phoneNumber.countryCode;
-      number = phoneNumber.number;
-    }
+    const countryCode =
+      typeof phoneNumber === 'string' ? this.config.countryCode : phoneNumber.countryCode;
+    const number = typeof phoneNumber === 'string' ? phoneNumber : phoneNumber.number;
 
     if (!/^\d+$/.test(number)) {
       return;
