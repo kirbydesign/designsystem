@@ -11,7 +11,7 @@ const config = {
   <kirby-label>
     <kirby-label direction="horizontal">
       <p class="kirby-item-title">Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</p>
-      <time detail>20.12.2017</time>
+      <time class="kirby-item-detail"20.12.2017</time>
     </kirby-label>
     <p>Die Marvin, your papers have arrived and you should be able to sign these within 1 week from today if you follow the instructions below.</p>
   </kirby-label>

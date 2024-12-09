@@ -24,7 +24,7 @@ const fieldsetHtml = `
           <code detail *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
         </kirby-label>
         <kirby-label slot="end">
-          <data detail>{{ item.width }}</data>
+          <data class="kirby-item-detail"{{ item.width }}</data>
         </kirby-label>
       </kirby-item>
     </kirby-dropdown>

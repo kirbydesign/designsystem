@@ -13,7 +13,7 @@ export const ListLoadOnDemandExampleTemplate = `
     </kirby-label>
     <kirby-label slot="end">
       <data [value]="item.amount">{{ item.amount }}</data>
-      <data [value]="item.detail" detail>{{ item.detail }}</data>
+      <data [value]="item.detail" class="kirby-item-detail"{{ item.detail }}</data>
     </kirby-label>
   </kirby-item>
 </kirby-list>`;

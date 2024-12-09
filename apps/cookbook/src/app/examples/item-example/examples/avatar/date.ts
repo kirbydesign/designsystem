@@ -8,7 +8,7 @@ const config = {
   </kirby-avatar>
   <kirby-label>
     <p class="kirby-item-title">Title</p>
-    <time detail>10.04.2020</time>
+    <time class="kirby-item-detail"10.04.2020</time>
   </kirby-label>
   <data slot="end" value="-849.00">-849,00</data>
 </kirby-item>`,

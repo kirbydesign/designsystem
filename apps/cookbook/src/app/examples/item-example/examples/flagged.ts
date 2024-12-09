@@ -9,7 +9,7 @@ const config = {
   </div>
   <kirby-label>
     <p class="kirby-text-normal-bold">Title</p>
-    <p detail>Detail</p>
+    <p class="kirby-item-detail"Detail</p>
   </kirby-label>
   <kirby-flag slot="end" themeColor="success">
     <data value="60.0">60</data>
