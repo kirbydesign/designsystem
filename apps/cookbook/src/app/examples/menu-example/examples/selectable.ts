@@ -5,10 +5,10 @@ const config = {
   selector: 'cookbook-menu-selectable-example',
   template: `<kirby-menu>
   <kirby-item [selectable]="true" (click)="actionClicked('Action 1')">
-    <h3>Action 1</h3>
+    <p class="kirby-item-title">Action 1</p>
   </kirby-item>
   <kirby-item [selectable]="true" (click)="actionClicked('Action 2')">
-    <h3>Action 2</h3>
+    <p class="kirby-item-title">Action 2</p>
   </kirby-item>
 </kirby-menu>`,
 };

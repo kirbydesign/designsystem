@@ -20,7 +20,7 @@ const fieldsetHtml = `
         [class.focused]="focused"
       >
         <kirby-label>
-          <h3>{{ item.text }}</h3>
+          <p class="kirby-item-title">{{ item.text }}</p>
           <code detail *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
         </kirby-label>
         <kirby-label slot="end">

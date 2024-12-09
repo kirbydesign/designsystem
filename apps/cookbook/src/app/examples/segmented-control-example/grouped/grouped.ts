@@ -22,7 +22,7 @@ const config = {
 <kirby-list [items]="filteredListItems">
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-label>
-      <h3>{{ item.title }}</h3>
+      <p class="kirby-item-title">{{ item.title }}</p>
       <p detail>{{ item.mix.join(', ') }}</p>
     </kirby-label>
     <kirby-label slot="end">

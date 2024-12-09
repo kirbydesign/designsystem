@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-item>
   <kirby-label>
     <p class="kirby-item-title">Title</p>
-    <p subtitle>Subtitle</p>
+    <p class="kirby-item-subtitle">Subtitle</p>
     <p detail>Detail</p>
   </kirby-label>
   <data slot="end" class="kirby-text-bold" value="value">Value</data>

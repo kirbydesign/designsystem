@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-item-example-simple-md',
   template: `<kirby-item>
-  <h3>Medium (default)</h3>
+  <p class="kirby-item-title">Medium (default)</p>
 </kirby-item>`,
 };
 

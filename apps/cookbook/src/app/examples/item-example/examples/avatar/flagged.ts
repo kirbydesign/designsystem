@@ -14,7 +14,7 @@ const config = {
     </kirby-badge>
   </kirby-avatar>
   <kirby-label>
-    <h3>Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</h3>
+    <p class="kirby-item-title">Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</p>
     <p detail>Phone, Internet, Streaming services og other</p>
   </kirby-label>
   <kirby-flag slot="end" themeColor="success">

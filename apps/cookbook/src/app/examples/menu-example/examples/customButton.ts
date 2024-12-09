@@ -11,7 +11,7 @@ const config = {
     <kirby-icon [name]="'menu-outline'"></kirby-icon>
   </button>
   <kirby-item>
-    <h3>Action 1</h3>
+    <p class="kirby-item-title">Action 1</p>
   </kirby-item>
 </kirby-menu>`,
 };
