@@ -21,7 +21,7 @@ const fieldsetHtml = `
       >
         <kirby-label>
           <p class="kirby-item-title">{{ item.text }}</p>
-          <code detail *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
+          <code class="kirby-item-detail" *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
         </kirby-label>
         <kirby-label slot="end">
           <data class="kirby-item-detail"{{ item.width }}</data>
