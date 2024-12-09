@@ -486,6 +486,7 @@ export const Typography: Story = {
 <kirby-item><h4>Heading H4<br />Second line</h4></kirby-item>
 <kirby-item><h5>Heading H5<br />Second line</h5></kirby-item>
 <kirby-item><h6>Heading H6<br />Second line</h6></kirby-item>
+<kirby-item><p class="kirby-item-title">Paragraph Title<br />Second line</p></kirby-item>
 <kirby-item><data>Data<br />Second line</data></kirby-item>
 <kirby-item><p>Paragraph<br />Second line</p></kirby-item>
 <kirby-item><data subtitle>Data subtitle<br />Second line</data></kirby-item>
@@ -503,6 +504,7 @@ export const LabelTypography: Story = {
 <kirby-item><kirby-label><h4>Heading H4<br />Second line</h4></kirby-label></kirby-item>
 <kirby-item><kirby-label><h5>Heading H5<br />Second line</h5></kirby-label></kirby-item>
 <kirby-item><kirby-label><h6>Heading H6<br />Second line</h6></kirby-label></kirby-item>
+<kirby-item><kirby-label><p class="kirby-item-title">Paragraph Title<br />Second line</p></kirby-label></kirby-item>
 <kirby-item><kirby-label><data>Data<br />Second line</data></kirby-label></kirby-item>
 <kirby-item><kirby-label><p>Paragraph<br />Second line</p></kirby-label></kirby-item>
 <kirby-item><kirby-label><data subtitle>Data subtitle<br />Second line</data></kirby-label></kirby-item>

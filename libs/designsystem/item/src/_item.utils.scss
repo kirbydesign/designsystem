@@ -6,7 +6,7 @@
 // Angular's view encapsulation wrongly appends an `_ngcontent-xxx` selector
 // after the `:where()` pseudo class when it contains more than 1 selector.
 // The workaround is to create a separate `:where` selector for each slotted text-element type.
-$where-selector-list: ();
+$where-selector-list: (':where(.kirby-item-title)');
 @each $text-element in item-typography.$slotted-text-elements-base {
   $where-selector-list: list.append($where-selector-list, ':where(#{$text-element})', comma);
 }
@@ -21,17 +21,19 @@ $where-selector-list: ();
     text-overflow: ellipsis;
   }
 
+  // Needs to come before the base typography styles to allow for p.kirby-item-title to be applied
+  // as the selectors have the same specifity
+  @include utils.slotted(':where(p)') {
+    font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
+  }
+
   // Using :where() has lower specifity than :is() and allows global typography classes
   // to be applied to slotted elements
   @include utils.slotted($where-selector-list) {
     font-size: utils.font-size('n');
     line-height: utils.line-height('n');
     font-weight: normal;
-  }
-
-  @include utils.slotted(':where(p)') {
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
   }
 
   @include utils.slotted('[subtitle]', '[detail]', '.kirby-item-subtitle', '.kirby-item-detail') {
