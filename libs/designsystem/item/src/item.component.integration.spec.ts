@@ -31,11 +31,11 @@ describe('ItemComponent', () => {
         <kirby-item selectable="true" selected="true">
           <kirby-label>
             <p>Title</p>
-            <p detail>Detail</p>
+            <p class="kirby-item-detail">Detail</p>
           </kirby-label>
           <kirby-label slot="end">
             <data>Value</data>
-            <data detail>Detail</data>
+            <data class="kirby-item-detail">Detail</data>
           </kirby-label>
         </kirby-item>
         `
