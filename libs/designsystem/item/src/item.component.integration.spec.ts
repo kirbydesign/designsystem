@@ -30,7 +30,7 @@ describe('ItemComponent', () => {
           `
         <kirby-item selectable="true" selected="true">
           <kirby-label>
-            <h3>Title</h3>
+            <p>Title</p>
             <p detail>Detail</p>
           </kirby-label>
           <kirby-label slot="end">

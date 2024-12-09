@@ -50,14 +50,14 @@ describe('ListComponent', () => {
       spectator = createHost<ListComponent>(
         `
         <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
-          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
         </kirby-list>
         `
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
-      itemTexts = spectator.queryAll('ion-list ion-item h3');
+      itemTexts = spectator.queryAll('ion-list ion-item p');
     });
 
     it('should create list wrapper', () => {
@@ -162,7 +162,7 @@ describe('ListComponent', () => {
         `
         <kirby-card>
           <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" shape="none">
-            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
           </kirby-list>
         </kirby-card>
         `
@@ -223,7 +223,7 @@ describe('ListComponent', () => {
       spectator = createHost<ListComponent>(
         `
         <kirby-list [items]="[{ name: 'Item1' }]" (itemSelect)="($event)">
-          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
         </kirby-list>
         `
       );
@@ -243,7 +243,7 @@ describe('ListComponent', () => {
       spectator = createHost<ListComponent>(
         `
           <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }]" (itemSelect)="($event)">
-            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
           </kirby-list>
           `
       );
@@ -274,7 +274,7 @@ describe('ListComponent', () => {
       spectator = createHost<ListComponent>(
         `
           <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
-            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
           </kirby-list>
           `
       );
