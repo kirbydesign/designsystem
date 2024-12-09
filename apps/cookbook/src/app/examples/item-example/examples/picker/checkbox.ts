@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-item selectable="true">
   <kirby-checkbox slot="start"></kirby-checkbox>
   <kirby-label>
-    <h3>Title</h3>
+    <p class="kirby-item-title">Title</p>
     <p detail>Detail</p>
   </kirby-label>
   <kirby-label slot="end">
