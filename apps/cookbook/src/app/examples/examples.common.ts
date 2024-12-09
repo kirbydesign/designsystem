@@ -5,7 +5,6 @@ import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
-import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
@@ -60,7 +59,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   LoadingOverlayExampleComponent,
   LoadingOverlayServiceExampleComponent,
   FabSheetExampleComponent,
-  FormFieldExampleComponent,
   PageSimpleExampleComponent,
   PageContentWidthExampleComponent,
   PageAlignmentAndToolbarTitleExampleComponent,
