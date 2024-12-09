@@ -16,7 +16,7 @@ export const ListWithSectionsAndStandAloneExampleTemplate = `<kirby-list
   <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
     <kirby-label>
       <p class="kirby-item-title">{{ item.title }}</p>
-      <data [value]="item.detail" class="kirby-item-detail"{{ item.detail }}</data>
+      <data [value]="item.detail" class="kirby-item-detail">{{ item.detail }}</data>
     </kirby-label>
     <kirby-label slot="end">
       <data [value]="item.amount">{{ item.amount }}</data>

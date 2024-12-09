@@ -6,7 +6,7 @@ const config = {
   <p class="kirby-text-normal-bold">Inventory with a long name</p>
   <kirby-label slot="end">
     <data value="50">50 pcs.</data>
-    <p class="kirby-item-detail"2 currently in stock</p>
+    <p class="kirby-item-detail">2 currently in stock</p>
   </kirby-label>
 </kirby-item>`,
 };

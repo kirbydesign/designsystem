@@ -15,7 +15,7 @@ const config = {
   </kirby-avatar>
   <kirby-label>
     <p class="kirby-item-title">Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</p>
-    <p class="kirby-item-detail"Phone, Internet, Streaming services og other</p>
+    <p class="kirby-item-detail">Phone, Internet, Streaming services og other</p>
   </kirby-label>
   <kirby-flag slot="end" themeColor="success">
     <data value="300.00">EUR 300,00</data>

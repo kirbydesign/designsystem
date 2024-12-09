@@ -11,10 +11,10 @@ const config = {
     </kirby-avatar>
     <kirby-label>
       <p class="kirby-text-normal-bold">Name</p>
-      <p class="kirby-item-detail"Telephone</p>
+      <p class="kirby-item-detail">Telephone</p>
     </kirby-label>
     <kirby-label slot="end">
-      <p class="kirby-item-detail"contact&#64;mail.com</p>
+      <p class="kirby-item-detail">contact&#64;mail.com</p>
     </kirby-label>
   </kirby-item>
 </kirby-card>`,

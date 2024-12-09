@@ -6,11 +6,11 @@ const config = {
   <kirby-icon name="checkmark-selected" slot="start"></kirby-icon>
   <kirby-label>
     <p class="kirby-item-title">Title</p>
-    <p class="kirby-item-detail"Detail</p>
+    <p class="kirby-item-detail">Detail</p>
   </kirby-label>
   <kirby-label slot="end">
     <data>Value</data>
-    <data class="kirby-item-detail"Detail</data>
+    <data class="kirby-item-detail">Detail</data>
   </kirby-label>
 </kirby-item>`,
 };
