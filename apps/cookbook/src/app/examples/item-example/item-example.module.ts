@@ -37,6 +37,7 @@ import { ItemExampleSimpleMediumComponent } from './examples/simple/default-md';
 import { ItemExampleSimpleSmallComponent } from './examples/simple/default-sm';
 import { ItemExampleSimpleExtraSmallComponent } from './examples/simple/default-xs';
 import { ItemExampleSimpleMultilineComponent } from './examples/simple/multiline';
+import { ItemExampleSimpleMultilineSubtitleComponent } from './examples/simple/multiline-subtitle';
 import { ItemExampleInputDefaultComponent } from './examples/input/default';
 import { ItemExampleInputNumericComponent } from './examples/input/numeric';
 import { ItemExampleCardComponent } from './examples/card';
@@ -54,6 +55,7 @@ const COMPONENT_DECLARATIONS = [
   ItemExampleSimpleThreeLinesComponent,
   ItemExampleSimpleTwoValueLinesComponent,
   ItemExampleSimpleMultilineComponent,
+  ItemExampleSimpleMultilineSubtitleComponent,
   ItemExamplePickerDefaultComponent,
   ItemExamplePickerDefaultSelectedComponent,
   ItemExamplePickerAvatarSelectedComponent,
