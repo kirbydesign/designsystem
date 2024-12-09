@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-item-example-picker-default',
   template: `<kirby-item selectable="true">
   <kirby-label>
-    <h3 class="kirby-text-bold">Title</h3>
+    <p class="kirby-text-normal-bold">Title</p>
     <p detail>Detail</p>
   </kirby-label>
   <kirby-label slot="end">

@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-item-group>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
+      <p class="kirby-text-normal-bold">Title</p>
       <p detail>Detail</p>
     </kirby-label>
     <kirby-label slot="end">
@@ -14,7 +14,7 @@ const config = {
   </kirby-item>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
+      <p class="kirby-text-normal-bold">Title</p>
       <p detail>Detail</p>
     </kirby-label>
     <kirby-label slot="end">
@@ -25,7 +25,7 @@ const config = {
 <kirby-item-group>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
+      <p class="kirby-text-normal-bold">Title</p>
       <p detail>Detail</p>
     </kirby-label>
     <kirby-label slot="end">
@@ -34,7 +34,7 @@ const config = {
   </kirby-item>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
+      <p class="kirby-text-normal-bold">Title</p>
       <p detail>Detail</p>
     </kirby-label>
     <kirby-label slot="end">
