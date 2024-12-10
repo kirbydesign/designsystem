@@ -6,10 +6,10 @@ const config = {
   [DOMPortalOutlet]="_outlet"
   >
   <kirby-item [selectable]="true">
-    <h3>Action 1</h3>
+    <p class="kirby-item-title">Action 1</p>
   </kirby-item>
   <kirby-item [selectable]="true">
-    <h3>Action 2</h3>
+    <p class="kirby-item-title">Action 2</p>
   </kirby-item>
 </kirby-menu>
 `,

@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-menu-default-example',
   template: `<kirby-menu>
   <kirby-item>
-    <h3>Action 1</h3>
+    <p class="kirby-item-title">Action 1</p>
   </kirby-item>
 </kirby-menu>
 `,

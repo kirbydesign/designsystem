@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-item-example-fab-menu',
   template: `<kirby-item>
   <kirby-avatar slot="start" imageSrc="/assets/images/woman.png"></kirby-avatar>
-  <h3>Line Maria Sørensen</h3>
+  <p class="kirby-item-title">Line Maria Sørensen</p>
 </kirby-item>`,
 };
 
