@@ -422,8 +422,8 @@ export class ModalWrapperComponent
     if (ionModalElementDialog && ariaLabel) {
       this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
     } else {
-      this.observeTitleContentChanges();
       this.setAriaLabelFromTitleContent();
+      this.observeTitleContentChanges();
     }
   }
 
