@@ -49,7 +49,7 @@ describe('ItemComponent', () => {
 
       it('should render heading, data and paragraph elements with correct font-weight', () => {
         labelElements
-          .filter((e) => !e.attributes.getNamedItem('detail'))
+          .filter((e) => !e.classList.contains('kirby-item-detail'))
           .forEach((e) => {
             expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('bold') });
           });
