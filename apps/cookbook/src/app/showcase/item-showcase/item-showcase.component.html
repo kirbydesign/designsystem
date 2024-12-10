@@ -22,6 +22,13 @@
   <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code>.
 </p>
 
+<!-- prettier-ignore -->
+<p>
+  <a href="#" (click)="scrollTo(threeLines)">Text elements within an item can be given
+  different visual weight</a> by assigning the <code>kirby-item-title</code>,
+  <code>kirby-item-subtitle</code> and <code>kirby-item-detail</code> CSS classes.
+</p>
+
 <div class="item-illustration">
   <svg
     width="100%"
@@ -118,7 +125,7 @@
 <cookbook-example-viewer [html]="twoLinesExample.template">
   <cookbook-item-example-simple-two-lines #twoLinesExample></cookbook-item-example-simple-two-lines>
 </cookbook-example-viewer>
-<h3>Three lines</h3>
+<h3 #threeLines>Three lines</h3>
 <cookbook-example-viewer [html]="threeLinesExample.template">
   <cookbook-item-example-simple-three-lines
     #threeLinesExample
