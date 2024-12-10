@@ -22,7 +22,7 @@ $where-selector-list: (':where(.kirby-item-title)');
   }
 
   // Needs to come before the base typography styles to allow for p.kirby-item-title to be applied
-  // as the selectors have the same specifity
+  // as the selectors have the same specificity
   @include utils.slotted(':where(p)') {
     font-size: utils.font-size('s');
     line-height: utils.line-height('s');
