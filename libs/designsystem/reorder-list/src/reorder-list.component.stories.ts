@@ -1,8 +1,16 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const meta: Meta<ReorderListComponent> = {
   component: ReorderListComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [ListModule, ItemModule, ToggleComponent],
+    }),
+  ],
   title: 'Components / Reorder List',
 };
 export default meta;
