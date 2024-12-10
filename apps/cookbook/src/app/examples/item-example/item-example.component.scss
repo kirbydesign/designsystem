@@ -1,20 +1,8 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
 
-:host {
+cookbook-item-example-simple-sm,
+cookbook-item-example-simple-xs {
   display: block;
-  background: utils.get-color('background-color');
-  padding: utils.size('m');
-
-  > h2 {
-    font-size: utils.font-size('xs');
-    color: utils.get-text-color('semi-dark');
-    text-transform: uppercase;
-    margin-top: utils.size('m');
-    margin-bottom: utils.size('xs');
-  }
-
-  > * {
-    display: block;
-    margin: 10px 0;
-  }
+  margin-block-start: utils.size('xs');
 }

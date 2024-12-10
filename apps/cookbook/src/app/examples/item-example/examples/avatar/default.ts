@@ -6,7 +6,7 @@ const config = {
   <kirby-avatar overlay="true" slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
-  <h3>Title</h3>
+  <p class="kirby-item-title">Title</p>
   <data slot="end" value="-849.00">-849,00</data>
 </kirby-item>`,
 };

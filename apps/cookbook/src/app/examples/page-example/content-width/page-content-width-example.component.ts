@@ -20,11 +20,11 @@ const fieldsetHtml = `
         [class.focused]="focused"
       >
         <kirby-label>
-          <h3>{{ item.text }}</h3>
-          <code detail *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
+          <p class="kirby-item-title">{{ item.text }}</p>
+          <code class="kirby-item-detail" *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
         </kirby-label>
         <kirby-label slot="end">
-          <data detail>{{ item.width }}</data>
+          <data class="kirby-item-detail">{{ item.width }}</data>
         </kirby-label>
       </kirby-item>
     </kirby-dropdown>

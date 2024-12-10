@@ -137,7 +137,7 @@ describe('MenuComponent', () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item [selectable]="true">
-            <h3>Action 1</h3>
+            <p>Action 1</p>
               </kirby-item>
           </kirby-menu>`,
         {}
@@ -234,7 +234,7 @@ describe('MenuComponent', () => {
         `<kirby-menu [closeOnSelect]="false">
         <kirby-item>
           <kirby-icon name="notification" slot="start"></kirby-icon>
-          <h3>Title</h3>
+          <p>Title</p>
           <kirby-toggle slot="end" checked="true" (checkedChange)="toggled()"></kirby-toggle>
         </kirby-item>
       </kirby-menu>`,
@@ -254,7 +254,7 @@ describe('MenuComponent', () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item [selectable]="true">
-            <h3>Action 1</h3>
+            <p>Action 1</p>
               </kirby-item>
           </kirby-menu>`,
         {}
@@ -278,7 +278,7 @@ describe('MenuComponent', () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu [triggers]="['hover']">
           <kirby-item [selectable]="true">
-            <h3>Action 1</h3>
+            <p>Action 1</p>
               </kirby-item>
           </kirby-menu>`,
         {}
