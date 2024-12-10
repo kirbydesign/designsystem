@@ -14,9 +14,8 @@
 
 <!-- prettier-ignore -->
 <p>
-  If there are <a href="#" (click)="scrollTo(multiLine)"> more than one line of content</a> it can be contained within a
-  <code>kirby-label</code>
-  that by default stacks content vertically.
+  If there are <a href="#" (click)="scrollTo(multiLine)"> more than one line of content</a>
+  it can be contained within a <code>kirby-label</code> that by default stacks content vertically.
   <br />
   Optionally it can be configured to stack horizontally:
   <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code>.
@@ -60,41 +59,29 @@
   <a href="#" (click)="scrollTo(message)">wrap the title and value</a> in another<code>kirby-label</code>.
   
 </p>
+
+<!-- prettier-ignore -->
 <p>
-  The
-  <em>start column</em>
-  is usually only used with avatars, icons and such. To place content in the start column specify
-  the
-  <code>slot="start"</code>
-  attribute on your content. If no content is placed into the 'start' slot, the first column will
-  not be shown.
+  The <em>start column</em> is usually only used with avatars, icons and such. To place content in the
+  start column specify the <code>slot="start"</code> attribute on your content. If no content is placed
+  into the 'start' slot, the first column will not be shown.
 </p>
+
+<!-- prettier-ignore -->
 <p>
-  The
-  <em>end column</em>
-  is usually used for values such as number, currency, date etc. To place content in the end column
-  specify the
-  <code>slot="end"</code>
+  The <em>end column</em> is usually used for values such as number, currency, date etc.
+  To place content in the end column specify the <code>slot="end"</code>
   attribute on your content. If multiple lines are needed the values can be wrapped in a
-  <code>kirby-label</code>
-  as in
-  <a href="#" (click)="scrollTo(twoValueLines)">this example</a>
-  .
+  <code>kirby-label</code> as in <a href="#" (click)="scrollTo(twoValueLines)">this example</a>.
   <br />
-  Values can optionally be contained in a
-  <code>time</code>
-  or
-  <code>data</code>
-  tag as in
+  Values can optionally be contained in a <code>time</code> or <code>data</code> tag as in
   <a href="#" (click)="scrollTo(avatarWithDate)">this example</a>
   .
 </p>
+
+<!-- prettier-ignore -->
 <p>
-  The
-  <em>outside</em>
-  slot can be used for flags as in
-  <a href="#" (click)="scrollTo(flagged)">this example</a>
-  .
+  The <em>outside</em> slot can be used for flags as in <a href="#" (click)="scrollTo(flagged)">this example</a>.
 </p>
 
 <section class="sizes">
