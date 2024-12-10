@@ -1,35 +1,25 @@
+<!-- prettier-ignore -->
 <p>
-  The
-  <code>kirby-item</code>
-  component consists of three possible columns:
-  <em>the default</em>
-  , which spans the entire item, and optionally the
-  <code>'start'</code>
-  and
-  <code>'end'</code>
-  columns (aka
-  <code>'slots'</code>
-  )
-  <br />
-  In addition to this there is a special slot for flags named
-  <code>'outside'</code>
-  .
+  The <code>kirby-item</code> component consists of three possible columns:
+  <em>the default</em>, which spans the entire item, and optionally the
+  <code>'start'</code> and <code>'end'</code> columns (aka <code>'slots'</code>).
+  In addition to this there is a special slot for flags named <code>'outside'</code>.
 </p>
+
+<!-- prettier-ignore -->
 <p>
-  The
-  <em>default column</em>
-  is the content that isn't slotted into either
-  <code>'start'</code>
-  or
-  <code>'end'</code>
-  .
-  <br />
-  If there are more than one line of content it can be contained within a
+  The <em>default column</em> is the content that isn't slotted into either
+  <code>'start'</code> or <code>'end'</code>.
+</p>
+
+<!-- prettier-ignore -->
+<p>
+  If there are <a href="#" (click)="scrollTo(multiLine)"> more than one line of content</a> it can be contained within a
   <code>kirby-label</code>
-  that by default stacks content vertically (multi lines).
+  that by default stacks content vertically.
   <br />
   Optionally it can be configured to stack horizontally:
-  <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code>
+  <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code>.
 </p>
 
 <div class="item-illustration">
@@ -64,12 +54,11 @@
   </svg>
 </div>
 
+<!-- prettier-ignore -->
 <p class="comment">
-  <strong>Please note</strong>
-  , if you need a label to span a title and a value, you can wrap the title and value in another
-  <code>kirby-label</code>
-  as in
-  <a href="#" (click)="scrollTo(message)">this example</a>
+  <strong>Please note</strong>, if you need a label to span a title and a value, you can
+  <a href="#" (click)="scrollTo(message)">wrap the title and value</a> in another<code>kirby-label</code>.
+  
 </p>
 <p>
   The
