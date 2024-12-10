@@ -160,6 +160,10 @@ export class TestHelper {
     return TestHelper.waitForTimeout(1);
   }
 
+  public static waitForMutationObserver(): Promise<void> {
+    return TestHelper.waitForTimeout(1);
+  }
+
   public static waitForTimeout(timeoutInMs?: number): Promise<void> {
     return new Promise<void>((resolve) => setTimeout(resolve, timeoutInMs));
   }
