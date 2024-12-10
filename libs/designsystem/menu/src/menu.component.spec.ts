@@ -151,7 +151,7 @@ describe('MenuComponent', () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item>
-            <h3>Action 1</h3>
+            <p>Action 1</p>
           </kirby-item>
         </kirby-menu>`,
         {}
@@ -173,7 +173,7 @@ describe('MenuComponent', () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item>
-            <h3>Action 1</h3>
+            <p>Action 1</p>
               </kirby-item>
           </kirby-menu>`,
         {}
@@ -279,7 +279,7 @@ describe('MenuComponent', () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item>
-            <h3>Action 1</h3>
+            <p>Action 1</p>
               </kirby-item>
           </kirby-menu>`,
         {}
@@ -303,7 +303,7 @@ describe('MenuComponent', () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu [triggers]="['hover']">
         <kirby-item>
-          <h3>Action 1</h3>
+          <p>Action 1</p>
             </kirby-item>
         </kirby-menu>`,
         {}
@@ -329,16 +329,16 @@ describe('MenuComponent', () => {
         spectator = createHost<MenuComponent>(
           `<kirby-menu>
             <kirby-item>
-              <h3>First Action</h3>
+              <p>First Action</p>
             </kirby-item>
             <kirby-item>
-              <h3>Second Action</h3>
+              <p>Second Action</p>
             </kirby-item>
             <kirby-item>
-              <h3>Second Action 2</h3>
+              <p>Second Action 2</p>
             </kirby-item>
             <kirby-item>
-              <h3>Third Action</h3>
+              <p>Third Action</p>
             </kirby-item>
           </kirby-menu>`,
           {}

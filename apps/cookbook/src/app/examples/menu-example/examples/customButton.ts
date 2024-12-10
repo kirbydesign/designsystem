@@ -11,13 +11,13 @@ const config = {
     <kirby-icon [name]="'menu-outline'"></kirby-icon>
   </button>
   <kirby-item>
-    Stone
+    <p class="kirby-item-title">Stone</p>
   </kirby-item>
   <kirby-item>
-    Rick
+    <p class="kirby-item-title">Rick</p>
   </kirby-item>
   <kirby-item>
-    Gooey
+    <p class="kirby-item-title">Gooey</p>
   </kirby-item>
 </kirby-menu>`,
 };

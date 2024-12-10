@@ -5,13 +5,13 @@ const config = {
   selector: 'cookbook-menu-portal-config-example',
   template: `<kirby-menu [portalOutletConfig]="outletConfig">
   <kirby-item>
-    Stone
+    <p class="kirby-item-title">Stone</p>
   </kirby-item>
   <kirby-item>
-    Rick
+    <p class="kirby-item-title">Rick</p>
   </kirby-item>
   <kirby-item>
-    Gooey
+    <p class="kirby-item-title">Gooey</p>
   </kirby-item>
 </kirby-menu>`,
   codeSnippet: `public outletConfig: PortalOutletConfig = {

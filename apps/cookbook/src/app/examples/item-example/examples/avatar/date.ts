@@ -7,8 +7,8 @@ const config = {
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
   <kirby-label>
-    <h3>Title</h3>
-    <time detail>10.04.2020</time>
+    <p class="kirby-item-title">Title</p>
+    <time class="kirby-item-detail">10.04.2020</time>
   </kirby-label>
   <data slot="end" value="-849.00">-849,00</data>
 </kirby-item>`,

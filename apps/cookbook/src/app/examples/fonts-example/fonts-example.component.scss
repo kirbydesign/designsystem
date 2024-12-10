@@ -1,0 +1,14 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: block;
+  height: 100%;
+  overflow-x: hidden;
+  background: utils.get-color('background-color');
+  padding: utils.size('s');
+  box-sizing: border-box;
+
+  @include utils.media('>=medium') {
+    padding: utils.size('l');
+  }
+}

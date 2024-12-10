@@ -6,7 +6,7 @@ const config = {
   template: `<kirby-card [hasPadding]="true" (click)="noop()">
   <kirby-card-header [hasPadding]="false">
     <kirby-item [disclosure]="'arrow-more'">
-      <h3 class="kirby-text-bold">Item disclosure in header</h3>
+      <p class="kirby-text-normal-bold">Item disclosure in header</p>
     </kirby-item>
   </kirby-card-header>
 

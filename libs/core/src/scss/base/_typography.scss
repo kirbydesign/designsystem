@@ -1,4 +1,5 @@
 @use 'functions';
+@use 'item-typography';
 
 @import '@fontsource/roboto/300';
 @import '@fontsource/roboto/400';
@@ -31,19 +32,28 @@ kirby-app .page-title {
   }
 }
 
-.kirby-text-display-1 {
+$in-item-selector: 'ion-item > :is(#{item-typography.$slotted-text-elements})';
+$in-label-selector: 'ion-item kirby-label ion-label > :is(#{item-typography.$slotted-text-elements})';
+
+.kirby-text-display-1,
+#{$in-item-selector}.kirby-text-display-1,
+#{$in-label-selector}.kirby-text-display-1 {
   font-size: functions.font-size('xxxxl');
   font-weight: functions.font-weight('black');
   line-height: normal;
 }
 
-.kirby-text-display-2 {
+.kirby-text-display-2,
+#{$in-item-selector}.kirby-text-display-2,
+#{$in-label-selector}.kirby-text-display-2 {
   font-size: functions.font-size('xxxl');
   font-weight: functions.font-weight('black');
   line-height: normal;
 }
 
-.kirby-text-display-3 {
+.kirby-text-display-3,
+#{$in-item-selector}.kirby-text-display-3,
+#{$in-label-selector}.kirby-text-display-3 {
   font-size: functions.font-size('xxl');
   font-weight: functions.font-weight('black');
   line-height: normal;
@@ -51,7 +61,9 @@ kirby-app .page-title {
 
 h1,
 .h1,
-.kirby-text-xlarge {
+.kirby-text-xlarge,
+#{$in-item-selector}.kirby-text-xlarge,
+#{$in-label-selector}.kirby-text-xlarge {
   font-size: functions.font-size('xl');
   font-weight: functions.font-weight('black');
   line-height: functions.line-height('xl');
@@ -59,7 +71,9 @@ h1,
 
 h2,
 .h2,
-.kirby-text-large {
+.kirby-text-large,
+#{$in-item-selector}.kirby-text-large,
+#{$in-label-selector}.kirby-text-large {
   font-size: functions.font-size('l');
   font-weight: functions.font-weight('bold');
   line-height: functions.line-height('l');
@@ -67,7 +81,9 @@ h2,
 
 h3,
 .h3,
-.kirby-text-medium {
+.kirby-text-medium,
+#{$in-item-selector}.kirby-text-medium,
+#{$in-label-selector}.kirby-text-medium {
   font-size: functions.font-size('m');
   font-weight: functions.font-weight('bold');
   line-height: functions.line-height('m');
@@ -75,7 +91,9 @@ h3,
 
 h4,
 .h4,
-.kirby-text-normal-bold {
+.kirby-text-normal-bold,
+#{$in-item-selector}.kirby-text-normal-bold,
+#{$in-label-selector}.kirby-text-normal-bold {
   font-size: functions.font-size('n');
   font-weight: functions.font-weight('bold');
   line-height: functions.line-height('n');
@@ -83,32 +101,44 @@ h4,
 
 p,
 .p,
-.kirby-text-normal {
+.kirby-text-normal,
+#{$in-item-selector}.kirby-text-normal,
+#{$in-label-selector}.kirby-text-normal {
   font-size: functions.font-size('n');
   line-height: functions.line-height('n');
 }
 
-.kirby-text-small {
+.kirby-text-small,
+#{$in-item-selector}.kirby-text-small,
+#{$in-label-selector}.kirby-text-small {
   font-size: functions.font-size('s');
   line-height: functions.line-height('s');
 }
 
-.kirby-text-small-light {
+.kirby-text-small-light,
+#{$in-item-selector}.kirby-text-small-light,
+#{$in-label-selector}.kirby-text-small-light {
   font-size: functions.font-size('s');
   font-weight: functions.font-weight('light');
   line-height: functions.line-height('s');
 }
 
-.kirby-text-xsmall {
+.kirby-text-xsmall,
+#{$in-item-selector}.kirby-text-xsmall,
+#{$in-label-selector}.kirby-text-xsmall {
   font-size: functions.font-size('xs');
   line-height: functions.line-height('xs');
 }
 
-.kirby-text-xxsmall {
+.kirby-text-xxsmall,
+#{$in-item-selector}.kirby-text-xxsmall,
+#{$in-label-selector}.kirby-text-xxsmall {
   font-size: functions.font-size('xxs');
   line-height: functions.line-height('xxs');
 }
 
-.kirby-text-bold {
+.kirby-text-bold,
+#{$in-item-selector}.kirby-text-bold,
+#{$in-label-selector}.kirby-text-bold {
   font-weight: functions.font-weight('bold');
 }

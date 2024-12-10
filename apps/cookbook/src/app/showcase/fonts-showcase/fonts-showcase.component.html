@@ -1,96 +1,139 @@
+<!-- prettier-ignore -->
 <p>
-  The font sizes can be set by either using the font classes, e.g.
-  <code>kirby-text-large</code>
-  , or by using the right tags like
-  <code>h1, h2 & h3</code>
+  Out of the box Kirby will style text with a set of predefined font sizes and line heights. These
+  styles are globally applied to Paragraph elements (<code>&lt;p&gt;</code>) and HTML Section Headings
+  (<code>&lt;h1&gt;</code> to <code>&lt;h4&gt;</code>) when
+  <a class="kirby-external-icon" target="_blank" href="https://github.com/kirbydesign/designsystem?tab=readme-ov-file#sass">
+    including Kirby global styles as described in our readme
+  </a>
 </p>
-<p>Font can also be set with the font-size function directly on your own classes, e.g:</p>
-<pre>
-  .my-own-class {{ '{' }}
-    font-size: font-size("l");
-    ...
-  {{ '}' }}
-</pre>
+<!-- prettier-ignore -->
+<p>
+  Font size and corresponding line height can also be set by applying the font CSS classes, e.g.
+  <code>kirby-text-large</code>.
+</p>
+<p>
+  Finally the
+  <code>font-size</code>
+  and
+  <code>line-height</code>
+  SCSS utility functions can be used when writing your own CSS rules.
+  <br />
+  <em>
+    <strong>Note:</strong>
+    When setting the font size this way ensure the corresponding line height is set as well (and
+    optionally the font weight).
+  </em>
+</p>
+<cookbook-code-viewer language="css">
+  <pre>
+&#64;use '&#64;kirbydesign/designsystem/scss/utils' as *;
+
+.my-own-class {{ '{' }}
+  font-size: font-size("l");
+  line-height: line-height("l");
+  ...
+{{ '}' }}
+  </pre>
+</cookbook-code-viewer>
 <div class="fonts">
   <div>
-    <p class="kirby-text-display-1">Display 1</p>
+    <p class="sample-display-1 kirby-text-display-1">Display 1</p>
     <div class="info-box">
       <code>font-size: font-size("xxxxl");</code>
       <code>font-weight: font-weight("black");</code>
-      <code class="highlight">CLASS: kirby-text-display-1</code>
+      <code>line-height: normal;</code>
+      <code class="highlight">class="kirby-text-display-1"</code>
     </div>
 
-    <p class="kirby-text-display-2">Display 2</p>
+    <p class="sample-display-2 kirby-text-display-2">Display 2</p>
     <div class="info-box">
       <code>font-size: font-size("xxxl");</code>
       <code>font-weight: font-weight("black");</code>
-      <code class="highlight">CLASS: kirby-text-display-2</code>
+      <code>line-height: normal;</code>
+      <code class="highlight">class="kirby-text-display-2"</code>
     </div>
 
-    <p class="kirby-text-display-3">Display 3</p>
+    <p class="sample-display-3 kirby-text-display-3">Display 3</p>
     <div class="info-box">
       <code>font-size: font-size("xxl");</code>
       <code>font-weight: font-weight("black");</code>
-      <code class="highlight">CLASS: kirby-text-display-3</code>
+      <code>line-height: normal;</code>
+      <code class="highlight">class="kirby-text-display-3"</code>
     </div>
 
     <h1 class="sample-header-1 kirby-text-xlarge">h1 - Heading 1</h1>
     <div class="info-box">
       <code>font-size: font-size("xl");</code>
       <code>font-weight: font-weight("black");</code>
-      <code class="highlight">CLASS: kirby-text-xlarge</code>
+      <code>line-height: line-height('xl');</code>
+      <code class="highlight">class="kirby-text-xlarge"</code>
     </div>
 
     <h2 class="sample-header-2 kirby-text-large">h2 - Heading 2</h2>
     <div class="info-box">
       <code>font-size: font-size("l");</code>
       <code>font-weight: font-weight("bold");</code>
-      <code class="highlight">CLASS: kirby-text-large</code>
+      <code>line-height: line-height('l');</code>
+      <code class="highlight">class="kirby-text-large"</code>
     </div>
 
     <h3 class="sample-header-3 kirby-text-medium">h3 - Heading 3</h3>
     <div class="info-box">
       <code>font-size: font-size("m");</code>
       <code>font-weight: font-weight("bold");</code>
-      <code class="highlight">CLASS: kirby-text-medium</code>
+      <code>line-height: line-height('m');</code>
+      <code class="highlight">class="kirby-text-medium"</code>
     </div>
 
     <h4 class="sample-header-4 kirby-text-normal-bold">h4 - Section header</h4>
     <div class="info-box">
       <code>font-size: font-size("n");</code>
       <code>font-weight: font-weight("bold");</code>
-      <code class="highlight">CLASS: kirby-text-normal-bold</code>
+      <code>line-height: line-height('n');</code>
+      <code class="highlight">class="kirby-text-normal-bold"</code>
     </div>
 
-    <p class="sample-body kirby-text-normal">p - Paragraph (Default body font)</p>
+    <p class="sample-text-bold kirby-text-bold">Bold text</p>
+    <div class="info-box">
+      <code>font-weight: font-weight("bold");</code>
+      <code class="highlight">class="kirby-text-bold"</code>
+    </div>
+
+    <p class="sample-body kirby-text-normal">p - Paragraph (default body font)</p>
     <div class="info-box">
       <code>font-size: font-size("n");</code>
-      <code class="highlight">CLASS: kirby-text-normal</code>
+      <code>line-height: line-height('n');</code>
+      <code class="highlight">class="kirby-text-normal"</code>
     </div>
 
     <p class="sample-body-small kirby-text-small">Small text</p>
     <div class="info-box">
       <code>font-size: font-size("s");</code>
-      <code class="highlight">CLASS: kirby-text-small</code>
+      <code>line-height: line-height('s');</code>
+      <code class="highlight">class="kirby-text-small"</code>
     </div>
 
     <p class="sample-body-small-light kirby-text-small-light">Small text - light</p>
     <div class="info-box">
       <code>font-size: font-size("s");</code>
       <code>font-weight: font-weight("light");</code>
-      <code class="highlight">CLASS: kirby-text-small-light</code>
+      <code>line-height: line-height('s');</code>
+      <code class="highlight">class="kirby-text-small-light"</code>
     </div>
 
     <p class="sample-body-xsmall kirby-text-xsmall">x-small text</p>
     <div class="info-box">
       <code>font-size: font-size("xs");</code>
-      <code class="highlight">CLASS: kirby-text-xsmall</code>
+      <code>line-height: line-height('xs');</code>
+      <code class="highlight">class="kirby-text-xsmall"</code>
     </div>
 
     <p class="sample-body-xxsmall kirby-text-xxsmall">xx-small text</p>
     <div class="info-box">
       <code>font-size: font-size("xxs");</code>
-      <code class="highlight">CLASS: kirby-text-xxsmall</code>
+      <code>line-height: line-height('xxs');</code>
+      <code class="highlight">class="kirby-text-xxsmall"</code>
     </div>
   </div>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
