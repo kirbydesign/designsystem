@@ -16,6 +16,7 @@ import {
   ModalCompactWrapperComponent,
   ModalConfig,
   ModalSize,
+  ModalWrapperComponent,
   ShowAlertCallback,
 } from '../../modal-wrapper';
 import { ModalNavigationService } from '../../modal-navigation.service';
@@ -69,6 +70,13 @@ class ContentWithNoOverflowEmbeddedComponent {}
 })
 class PageProgressEmbeddedComponent {}
 
+@Component({
+  template: `
+    <kirby-page-title>Modal With Page Title</kirby-page-title>
+  `,
+})
+class PageTitleEmbeddedComponent {}
+
 function getElementVerticalCenter(element: Element): number {
   const elementDOMRect = element.getBoundingClientRect();
   return elementDOMRect.top + elementDOMRect.height / 2;
@@ -99,11 +107,13 @@ describe('ModalHelper', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [PageTitleComponent, PageProgressComponent, PageProgressEmbeddedComponent],
+    declarations: [PageTitleComponent, PageProgressComponent],
     entryComponents: [
       InputEmbeddedComponent,
       ContentOverflowsWithFooterEmbeddedComponent,
       ContentWithNoOverflowEmbeddedComponent,
+      PageTitleEmbeddedComponent,
+      PageProgressEmbeddedComponent,
     ],
     mocks: [ModalNavigationService, AlertHelper, CanDismissHelper],
   });
@@ -143,8 +153,13 @@ describe('ModalHelper', () => {
     expect(ionModal).toBeTruthy();
   };
 
-  const openModal = async (component?: any, size?: ModalSize, canDismiss?: ShowAlertCallback) => {
-    await openOverlay({ flavor: 'modal', component, size, canDismiss });
+  const openModal = async (
+    component?: any,
+    size?: ModalSize,
+    canDismiss?: ShowAlertCallback,
+    htmlAttributes?: { [key: string]: any }
+  ) => {
+    await openOverlay({ flavor: 'modal', component, size, canDismiss, htmlAttributes });
   };
 
   const openDrawer = async (
@@ -408,6 +423,44 @@ describe('ModalHelper', () => {
         });
 
         TestHelper.resetTestWindow();
+      });
+    });
+
+    describe('modal dialog element', () => {
+      const modalTitle = 'Modal With Page Title';
+
+      it('should have modal title text content as modal label', async () => {
+        await openModal(PageTitleEmbeddedComponent);
+        const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+        await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+
+        expect(dialogElement.getAttribute('aria-label')).toBe(modalTitle);
+      });
+
+      it('should have updated modal label when kirby-page-title content changes', async () => {
+        await openModal(PageTitleEmbeddedComponent);
+        const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+        await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+        expect(dialogElement.getAttribute('aria-label')).toBe(modalTitle);
+
+        const newTitle = 'Updated Modal Title';
+        const pageTitleComponent = ionModal.querySelector('kirby-page-title');
+        pageTitleComponent.textContent = newTitle;
+        await TestHelper.whenTrue(() => dialogElement.getAttribute('aria-label') !== modalTitle);
+
+        expect(dialogElement.getAttribute('aria-label')).toBe(newTitle);
+      });
+
+      it('should have custom aria-label if aria-label is specified with htmlAttributes', async () => {
+        const ariaLabel = 'Custom aria-label';
+        await openModal(PageTitleEmbeddedComponent, undefined, undefined, {
+          'aria-label': ariaLabel,
+        });
+        await TestHelper.whenReady(ionModal);
+        const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+        await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+
+        expect(dialogElement.getAttribute('aria-label')).toBe(ariaLabel);
       });
     });
   });

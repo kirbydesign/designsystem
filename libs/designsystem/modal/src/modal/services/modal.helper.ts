@@ -83,6 +83,7 @@ export class ModalHelper {
       backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
       showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
+      htmlAttributes: { ...config.htmlAttributes },
       keyboardClose: false,
       canDismiss,
       enterAnimation,
