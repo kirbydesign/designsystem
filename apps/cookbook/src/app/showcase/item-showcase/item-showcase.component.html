@@ -3,7 +3,8 @@
   The <code>kirby-item</code> component consists of three possible columns:
   <em>the default</em>, which spans the entire item, and optionally the
   <code>'start'</code> and <code>'end'</code> columns (aka <code>'slots'</code>).
-  In addition to this there is a special slot for flags named <code>'outside'</code>.
+  In addition to this there is a special slot named <code>'outside'</code> for 
+  marking an item as flagged.
 </p>
 
 <!-- prettier-ignore -->
@@ -15,7 +16,7 @@
 <!-- prettier-ignore -->
 <p>
   If there are <a href="#" (click)="scrollTo(multiLine)"> more than one line of content</a>
-  it can be contained within a <code>kirby-label</code> that by default stacks content vertically.
+  it can be contained within a <code>kirby-label</code> which stacks content vertically.
   <br />
   Optionally it can be configured to stack horizontally:
   <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code>.
@@ -71,17 +72,18 @@
 <p>
   The <em>end column</em> is usually used for values such as number, currency, date etc.
   To place content in the end column specify the <code>slot="end"</code>
-  attribute on your content. If multiple lines are needed the values can be wrapped in a
-  <code>kirby-label</code> as in <a href="#" (click)="scrollTo(twoValueLines)">this example</a>.
+  attribute on your content. <a href="#" (click)="scrollTo(avatarWithDate)">Values can
+  optionally be contained in a <code>time</code> or <code>data</code> tag</a>.
   <br />
-  Values can optionally be contained in a <code>time</code> or <code>data</code> tag as in
-  <a href="#" (click)="scrollTo(avatarWithDate)">this example</a>
-  .
+  If <a href="#" (click)="scrollTo(twoValueLines)">multiple lines are needed the values can be wrapped</a>
+  in a <code>kirby-label</code>.
 </p>
 
 <!-- prettier-ignore -->
 <p>
-  The <em>outside</em> slot can be used for flags as in <a href="#" (click)="scrollTo(flagged)">this example</a>.
+  The <em>outside</em> slot can be used for
+  <a href="#" (click)="scrollTo(flagged)">marking an item as flagged</a>
+  using a small <code>kirby-badge</code>.
 </p>
 
 <section class="sizes">
