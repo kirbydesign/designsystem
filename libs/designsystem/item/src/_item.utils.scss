@@ -3,12 +3,21 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/base/item-typography';
 
-// Angular's view encapsulation wrongly appends an `_ngcontent-xxx` selector
-// after the `:where()` pseudo class when it contains more than 1 selector.
-// The workaround is to create a separate `:where` selector for each slotted text-element type.
-$where-selector-list: (':where(.kirby-item-title)');
+/*
+Angular's view encapsulation wrongly appends an `_ngcontent-xxx` selector
+after the `:where()` pseudo class when it contains more than 1 selector.
+The workaround is to create a separate `:where` selector for each slotted text-element type.
+
+Using :where() has lower specifity than :is() and allows global typography classes
+to be applied to slotted elements
+*/
+$base-typography-selectors: (':where(.kirby-item-title)');
 @each $text-element in item-typography.$slotted-text-elements-base {
-  $where-selector-list: list.append($where-selector-list, ':where(#{$text-element})', comma);
+  $base-typography-selectors: list.append(
+    $base-typography-selectors,
+    ':where(#{$text-element})',
+    comma
+  );
 }
 
 @mixin item-typography() {
@@ -21,16 +30,14 @@ $where-selector-list: (':where(.kirby-item-title)');
     text-overflow: ellipsis;
   }
 
-  // Needs to come before the base typography styles to allow for p.kirby-item-title to be applied
-  // as the selectors have the same specificity
+  /* Needs to come before the base typography styles to allow for p.kirby-item-title to be applied
+     as the selectors have the same specificity */
   @include utils.slotted(':where(p)') {
     font-size: utils.font-size('s');
     line-height: utils.line-height('s');
   }
 
-  // Using :where() has lower specifity than :is() and allows global typography classes
-  // to be applied to slotted elements
-  @include utils.slotted($where-selector-list) {
+  @include utils.slotted($base-typography-selectors) {
     font-size: utils.font-size('n');
     line-height: utils.line-height('n');
     font-weight: normal;
