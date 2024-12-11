@@ -15,12 +15,12 @@ const config = {
   >
     <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
     <kirby-label>
-      <h3>{{ item.title }}</h3>
-      <p detail>{{ item.subtitle }}</p>
+      <p class="kirby-item-title">{{ item.title }}</p>
+      <p class="kirby-item-detail">{{ item.subtitle }}</p>
     </kirby-label>
     <kirby-label slot="end">
       <data>Value</data>
-      <data detail>{{ item.value }}</data>
+      <data class="kirby-item-detail">{{ item.value }}</data>
     </kirby-label>
   </kirby-item>
 </kirby-dropdown>

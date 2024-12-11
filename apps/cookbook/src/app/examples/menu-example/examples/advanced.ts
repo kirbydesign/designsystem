@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-menu [closeOnSelect]="false">
   <kirby-item (click)="actionClicked()">
     <kirby-icon name="notification" slot="start"></kirby-icon>
-    <h3>Title</h3>
+    <p class="kirby-item-title">Title</p>
     <kirby-toggle slot="end" checked="true" (checkedChange)="toggled()"></kirby-toggle>
   </kirby-item>
 </kirby-menu>`,

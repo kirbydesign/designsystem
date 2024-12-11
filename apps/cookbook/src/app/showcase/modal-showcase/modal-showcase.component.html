@@ -39,6 +39,9 @@
       Support for
       <a href="#" (click)="scrollTo(modalContent)">fixed footer</a>
     </li>
+    <li>
+      <a href="#" (click)="scrollTo(accessibility)">Accessibility and keyboard support</a>
+    </li>
   </ul>
 </section>
 
@@ -658,6 +661,61 @@
   attribute is set to true, the modal footer will slide upwards with the soft keyboard on mobile
   devices to make it stay visible. If omitted, or if explicitly set to false, the modal footer will
   stay at the bottom and the keyboard will slide in on top of it.
+</p>
+
+<h2 #accessibility>Accessibility</h2>
+<p>
+  Modals have a
+  <!-- prettier-ignore -->
+  <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role">dialog</a>
+  role and implement focus management and keyboard support accordingly.
+</p>
+<p>
+  When opened, focus is moved into the modal. Focus is trapped within the modal while it is open,
+  preventing users from navigating to elements outside the modal. Upon closing, focus is moved back
+  to where it was before showing the modal. Pressing
+  <kbd>Esc</kbd>
+  dismisses the modal.
+</p>
+
+<h3>Labeling</h3>
+<p>
+  The provided
+  <code>kirby-page-title</code>
+  is automatically used as a label to add context for assistive technologies. For example, screen
+  readers use the label to announce when the modal dialog appears and to give proper context when
+  interacting with the content within.
+</p>
+<p>This emphasizes the importance of providing a meaningful title for all modals.</p>
+
+<p>
+  While it is recommended to let the label be inferred from the title, in rare cases where a custom
+  accessible name for the modal is needed, it is possible to instead supply an
+  <code>aria-label</code>
+  key-value pair. This is set with the
+  <code>htmlAttributes</code>
+  property of the
+  <code>ModalConfig</code>
+  when working with controller-based modals, or directly as an attribute on the element when using
+  the modal component.
+</p>
+
+<cookbook-example-viewer
+  [ts]="modalConfigAriaLabelCodeSnippet"
+  [html]="modalComponentAriaLabelCodeSnippet"
+></cookbook-example-viewer>
+
+<h4>Compact Modals</h4>
+<p>
+  A label
+  <strong>is not</strong>
+  automatically set on compact modals except when used with a
+  <a [routerLink]="'../message-state'">Message State</a>
+  , as other types of compact modal do not have an explicit title to infer. Therefore, developers
+  must add an
+  <code>aria-label</code>
+  that will be announced as the modal label. This label should match any visual heading or title of
+  the compact modal.
 </p>
 
 <h2 #sharedProperties>Shared properties</h2>

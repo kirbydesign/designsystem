@@ -43,7 +43,7 @@ export const List: Story = {
     template: `
     <kirby-list ${argsToTemplate(args)}>
     '<kirby-item *kirbyListItemTemplate="let item">
-    <h3>{{item.title}}</h3>
+    <p class="kirby-item-title">{{item.title}}</p>
     <data slot="end">{{item.amount}}</data>
   </kirby-item>
   </kirby-list>`,

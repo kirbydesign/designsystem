@@ -5,12 +5,14 @@ import {
   Injector,
   Input,
   OnInit,
+  Renderer2,
   TemplateRef,
 } from '@angular/core';
 import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { CommonModule } from '@angular/common';
+import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 import { ModalConfig, ShowAlertCallback } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
@@ -44,11 +46,14 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private windowRef: WindowRef,
-    private canDismissHelper: CanDismissHelper
+    private canDismissHelper: CanDismissHelper,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.setAriaLabel();
+
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
@@ -75,10 +80,17 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     }
   }
 
+  private setAriaLabel() {
+    const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
+    const ariaLabel = this.config.htmlAttributes?.['aria-label'];
+    if (ionModalElementDialog && ariaLabel) {
+      this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
+    }
+  }
+
   async close(data?: any): Promise<void> {
-    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    if (ionModalElement) {
-      await ionModalElement.dismiss(data);
+    if (this.ionModalElement) {
+      await this.ionModalElement.dismiss(data);
     }
   }
 

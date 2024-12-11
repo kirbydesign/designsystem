@@ -30,12 +30,12 @@ describe('ItemComponent', () => {
           `
         <kirby-item selectable="true" selected="true">
           <kirby-label>
-            <h3>Title</h3>
-            <p detail>Detail</p>
+            <p>Title</p>
+            <p class="kirby-item-detail">Detail</p>
           </kirby-label>
           <kirby-label slot="end">
             <data>Value</data>
-            <data detail>Detail</data>
+            <data class="kirby-item-detail">Detail</data>
           </kirby-label>
         </kirby-item>
         `
@@ -49,7 +49,7 @@ describe('ItemComponent', () => {
 
       it('should render heading, data and paragraph elements with correct font-weight', () => {
         labelElements
-          .filter((e) => !e.attributes.getNamedItem('detail'))
+          .filter((e) => !e.classList.contains('kirby-item-detail'))
           .forEach((e) => {
             expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('bold') });
           });
@@ -57,7 +57,7 @@ describe('ItemComponent', () => {
 
       it('should render detail data and paragraph elements with correct font-weight', () => {
         labelElements
-          .filter((e) => !!e.attributes.getNamedItem('detail'))
+          .filter((e) => !!e.classList.contains('kirby-item-detail'))
           .forEach((e) => {
             expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
           });

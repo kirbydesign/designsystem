@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
       <kirby-page-content>
         <kirby-list [items]="menuItems">
           <kirby-item *kirbyListItemTemplate="let item" [disclosure]="'arrow-more'">
-            <h3>{{ item }}</h3>
+            <p class="kirby-item-title">{{ item }}</p>
           </kirby-item>
         </kirby-list>
       </kirby-page-content>

@@ -8,8 +8,8 @@ const config = {
     <kirby-badge themeColor="warning" size="sm"></kirby-badge>
   </div>
   <kirby-label>
-    <h3 class="kirby-text-bold">Title</h3>
-    <p detail>Detail</p>
+    <p class="kirby-text-normal-bold">Title</p>
+    <p class="kirby-item-detail">Detail</p>
   </kirby-label>
   <kirby-flag slot="end" themeColor="success">
     <data value="60.0">60</data>
