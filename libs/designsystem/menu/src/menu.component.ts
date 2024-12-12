@@ -237,9 +237,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
 
     const firstWordStartingWithChar = wordsStartingWithMatchString[0];
-    const nextWordStartingWithChar = wordsStartingWithMatchString.filter(
+    const nextWordStartingWithChar = wordsStartingWithMatchString.find(
       (wordAndIndex) => wordAndIndex.index >= startIndex
-    )[0];
+    );
 
     return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
   }
