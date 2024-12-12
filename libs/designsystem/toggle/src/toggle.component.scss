@@ -1,24 +1,9 @@
 @use 'sass:math';
-@use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
   display: inline-flex;
-
-  &:has(ion-toggle.in-item.toggle-justify-space-between) {
-    width: 100%;
-  }
-
-  // @each $size, $properties in utils.$checkbox-sizes {
-  //   &.#{$size} {
-  //     $vertical-padding: map.get($properties, vertical-padding);
-
-  //     ion-toggle:not(.in-item)::part(label) {
-  //       padding-block: $vertical-padding;
-  //     }
-  //   }
-  // }
 }
 
 ion-toggle {

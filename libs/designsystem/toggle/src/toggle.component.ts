@@ -36,21 +36,6 @@ export class ToggleComponent implements ControlValueAccessor, OnInit {
   ) {}
 
   ngOnInit(): void {
-    /**
-     * We cannot query ion-toggle for slotted content at this point as the slot has not been rendered.
-     * But we need to know if content is slotted to set justify and labelPlacement BEFORE ion-toggle is rendered.
-     * So it has to be done by querying an additional wrapper around the default content slot like this.
-     */
-    this._hasSlottedContent = this.elementRef.nativeElement
-      .querySelector('.default-content')
-      .hasChildNodes();
-
-    const slot = this.elementRef.nativeElement.getAttribute('slot');
-    if (slot === 'end' && this._hasSlottedContent) {
-      this._justify = 'space-between';
-      this._labelPlacement = 'start';
-    }
-
     this.inheritAriaAttributes();
   }
 
@@ -74,10 +59,6 @@ export class ToggleComponent implements ControlValueAccessor, OnInit {
   }
 
   @Output() checkedChange = new EventEmitter<boolean>();
-
-  _justify: 'start' | 'end' | 'space-between' = 'start';
-  _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
-  _hasSlottedContent: boolean;
 
   _pressed = false;
 
