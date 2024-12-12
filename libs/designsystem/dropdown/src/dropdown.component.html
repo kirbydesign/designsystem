@@ -35,7 +35,7 @@
             $implicit: item,
             selected: i === selectedIndex,
             focused: i === focusedIndex,
-            index: i
+            index: i,
           }
         "
       ></ng-container>
@@ -58,7 +58,7 @@
     role="option"
   >
     <!-- Tabindex fixes issue with popover dropdown not working in safari -->
-    <h3 tabindex="0">{{ getTextFromItem(item) }}</h3>
+    <p class="kirby-item-title" tabindex="0">{{ getTextFromItem(item) }}</p>
     <kirby-icon *ngIf="selected" name="checkmark-selected" slot="end"></kirby-icon>
   </kirby-item>
 </ng-template>

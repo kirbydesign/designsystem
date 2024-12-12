@@ -22,8 +22,8 @@ const config = {
 <kirby-list [items]="filteredListItems">
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-label>
-      <h3>{{ item.title }}</h3>
-      <p detail>{{ item.mix.join(', ') }}</p>
+      <p class="kirby-item-title">{{ item.title }}</p>
+      <p class="kirby-item-detail">{{ item.mix.join(', ') }}</p>
     </kirby-label>
     <kirby-label slot="end">
       <data [value]="item.count">{{ item.count }}</data>

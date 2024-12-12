@@ -11,9 +11,9 @@ const config = {
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
   <kirby-label>
-    <h3>Jake The Snake Insurance</h3>
-    <p subtitle>Basic Insurance</p>
-    <p detail>Account - Budget Account</p>
+    <p class="kirby-item-title">Jake The Snake Insurance</p>
+    <p class="kirby-item-subtitle">Basic Insurance</p>
+    <p class="kirby-item-detail">Account - Budget Account</p>
   </kirby-label>
   <data slot="end" class="kirby-text-bold" value="value">Value</data>
 </kirby-item>`,

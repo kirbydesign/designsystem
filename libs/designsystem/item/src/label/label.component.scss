@@ -14,7 +14,8 @@
   }
 }
 
-:host-context(kirby-item) ion-label {
+/* stylelint-disable selector-pseudo-element-no-unknown */
+:host-context(kirby-item) ::ng-deep ion-label {
   @include item.item-typography;
 }
 
@@ -29,7 +30,16 @@
 }
 
 :host-context(kirby-item.selected) ion-label {
-  @include utils.slotted(h1, h2, h3, h4, h5, h6, 'p:not([detail])', 'data:not([detail])') {
+  @include utils.slotted(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    'p:not([detail]):not(.kirby-item-detail)',
+    'data:not([detail]):not(.kirby-item-detail)'
+  ) {
     font-weight: utils.font-weight('bold');
   }
 }
