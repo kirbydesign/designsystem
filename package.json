@@ -41,7 +41,6 @@
     "@nx/workspace": "^19.6.5",
     "@storybook/addon-essentials": "8.4.4",
     "@storybook/addon-interactions": "8.4.4",
-    "@storybook/angular": "8.4.4",
     "@storybook/core-server": "8.4.4",
     "@storybook/jest": "^0.2.3",
     "@storybook/test-runner": "^0.19.1",
