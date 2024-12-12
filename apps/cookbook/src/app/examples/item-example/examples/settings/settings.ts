@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-item-example-settings',
   template: `<kirby-item>
-  <h3>Title</h3>
+  <p class="kirby-item-title">Title</p>
   <kirby-toggle slot="end" checked="true"></kirby-toggle>
 </kirby-item>`,
 };

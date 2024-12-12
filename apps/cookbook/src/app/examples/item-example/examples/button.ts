@@ -4,8 +4,8 @@ const config = {
   selector: 'cookbook-item-example-button',
   template: `<kirby-item>
   <kirby-label>
-    <h3>Title</h3>
-    <p detail>Detail</p>
+    <p class="kirby-item-title">Title</p>
+    <p class="kirby-item-detail">Detail</p>
   </kirby-label>
   <button slot="end" kirby-button size="sm">Small Button</button>
 </kirby-item>`,

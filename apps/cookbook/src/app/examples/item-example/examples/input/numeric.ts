@@ -6,7 +6,7 @@ const config = {
   <kirby-avatar slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
-  <h3>Title</h3>
+  <p class="kirby-item-title">Title</p>
   <kirby-form-field slot="end">
     <input type="number" kirby-input value="100.00" borderless="true"/>
   </kirby-form-field>

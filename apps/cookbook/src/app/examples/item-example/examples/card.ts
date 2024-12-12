@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-item-example-card',
   template: `<kirby-card>
   <kirby-item selectable="true">
-    <h3>Title</h3>
+    <p class="kirby-item-title">Title</p>
     <kirby-toggle slot="end"></kirby-toggle>
   </kirby-item>
 </kirby-card>`,
