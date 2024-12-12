@@ -133,16 +133,16 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       case ' ':
       case 'Enter':
       case 'ArrowDown':
+        this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = 0;
         this.floatingMenu.show();
         this.focusItem();
-        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'ArrowUp':
+        this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = this.kirbyItems.length - 1;
         this.floatingMenu.show();
         this.focusItem();
-        this.preventDefaultAndStopImmediatePropagation(event);
         break;
     }
   }
@@ -156,56 +156,56 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
     switch (key) {
       case 'ArrowDown':
+        this.preventDefaultAndStopImmediatePropagation(event);
         if (this.focusedIndex === this.kirbyItems.length - 1) {
           this.focusedIndex = 0;
         } else {
           this.focusedIndex++;
         }
         this.focusItem();
-        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'ArrowUp':
+        this.preventDefaultAndStopImmediatePropagation(event);
         if (this.focusedIndex === 0) {
           this.focusedIndex = this.kirbyItems.length - 1;
         } else {
           this.focusedIndex--;
         }
         this.focusItem();
-        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'Home': {
+        this.preventDefaultAndStopImmediatePropagation(event);
         if (this.focusedIndex > 0) {
           this.focusedIndex = 0;
           this.focusItem();
         }
-        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       }
       case 'End': {
+        this.preventDefaultAndStopImmediatePropagation(event);
         if (this.focusedIndex < this.kirbyItems.length - 1) {
           this.focusedIndex = this.kirbyItems.length - 1;
           this.focusItem();
         }
-        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       }
       case 'Escape':
+        this.preventDefaultAndStopImmediatePropagation(event);
         if (this.closeOnEscapeKey) {
           this.floatingMenu.hide();
         }
-        this.preventDefaultAndStopImmediatePropagation(event);
         break;
       case 'Tab':
         this.floatingMenu.hide();
         break;
       default: {
         if (this.isPrintableCharacter(key)) {
+          this.preventDefaultAndStopImmediatePropagation(event);
           const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
           if (foundItemIndex > -1) {
             this.focusedIndex = foundItemIndex;
             this.focusItem();
           }
-          this.preventDefaultAndStopImmediatePropagation(event);
         }
       }
     }
