@@ -3,13 +3,14 @@ import { ItemComponent, ItemModule, ItemSize } from '@kirbydesign/designsystem/i
 
 import { RadioModule } from '@kirbydesign/designsystem/radio';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { ItemExampleModule } from '~/app/examples/item-example/item-example.module';
 
 const meta: Meta<ItemComponent> = {
   component: ItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [CheckboxComponent, ItemModule, ItemExampleModule, RadioModule],
+      imports: [CheckboxComponent, ItemModule, ItemExampleModule, RadioModule, ToggleComponent],
     }),
   ],
   title: 'Components / Item',
@@ -475,6 +476,227 @@ export const ItemWithCheckboxModernSyntax: Story = {
     </kirby-label>
   </kirby-checkbox>
 </kirby-item>`,
+  }),
+};
+
+export const ItemWithToggleLegacySyntax: Story = {
+  name: 'Item With Toggle - Legacy Syntax',
+  render: () => ({
+    styles: [`h2 { margin-top: 32px; }`],
+    template: `<h2>Extra small</h2>
+    <kirby-item size="xs">
+      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
+      <kirby-label>Slot start, selected</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>Slot start</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>Slot end</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot start, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <data slot="end" class="kirby-text-bold">1234</data>
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item>
+    <kirby-item size="xs">
+      <data slot="end" class="kirby-text-bold">1234</data>
+      <kirby-toggle aria-label="Alternative toggle label" slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, aria-label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    
+    <h2>Small</h2>
+    <kirby-item size="sm">
+      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
+      <kirby-label>Slot start, selected</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>Slot start</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>Slot end</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot start, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <data slot="end" class="kirby-text-bold">1234</data>
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <data slot="end" class="kirby-text-bold">1234</data>
+      <kirby-toggle aria-label="Alternative toggle label" slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, aria-label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    
+    
+    <h2>Medium</h2>
+    <kirby-item size="md">
+      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
+      <kirby-label>Slot start, selected</kirby-label>
+    </kirby-item> 
+    <kirby-item size="md">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>Slot start</kirby-label>
+    </kirby-item> 
+    <kirby-item size="md">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>Slot end</kirby-label>
+    </kirby-item>
+    <kirby-item size="md">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot start, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item>
+    <kirby-item size="md">
+      <data slot="end" class="kirby-text-bold">1234</data>  
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item>
+    <kirby-item size="md">
+      <data slot="end" class="kirby-text-bold">1234</data>
+      <kirby-toggle aria-label="Alternative toggle label" slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, aria-label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    `,
+  }),
+};
+
+export const ItemWithToggleModernSyntax: Story = {
+  name: 'Item With Toggle - Modern Syntax',
+  render: () => ({
+    styles: [`h2 { margin-top: 32px; }`],
+    template: `<h2>Extra small</h2>
+    <kirby-item size="xs">
+      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
+      <kirby-label>Slot start, selected</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>Slot start</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>Slot end</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>No slot</kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot start, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    <kirby-item size="xs">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item>
+    
+    <h2>Small</h2>
+    <kirby-item size="sm">
+      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
+      <kirby-label>Slot start, selected</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>Slot start</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>Slot end</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>No slot</kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot start, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item> 
+    <kirby-item size="sm">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item>
+    
+    <h2>Medium</h2>
+    <kirby-item size="md">
+      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
+      <kirby-label>Slot start, selected</kirby-label>
+    </kirby-item> 
+    <kirby-item size="md">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>Slot start</kirby-label>
+    </kirby-item> 
+    <kirby-item size="md">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>Slot end</kirby-label>
+    </kirby-item>
+    <kirby-item size="md">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>No slot</kirby-label>
+    </kirby-item>
+    <kirby-item size="md">
+      <kirby-toggle slot="start"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot start, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item>
+    <kirby-item size="md">
+      <kirby-toggle slot="end"></kirby-toggle>
+      <kirby-label>
+        <h3>Slot end, complex label</h3>
+        <p detail>Label</p>
+      </kirby-label>
+    </kirby-item>`,
   }),
 };
 
