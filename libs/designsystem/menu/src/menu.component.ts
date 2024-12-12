@@ -321,9 +321,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private setUserProvidedButtonAriaAttributes() {
-    if (!this.userProvidedButton) {
-      return;
-    }
+    if (!this.userProvidedButton) return;
+    
     const button = this.userProvidedButton.nativeElement;
     if (button.id) {
       this.triggerButtonId = button.id;
