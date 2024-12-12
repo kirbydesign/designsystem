@@ -220,17 +220,17 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private getIndexByFirstMatchingStartString(
-    matchString: string,
+    searchString: string,
     words: string[],
     startIndex: number
   ): number {
-    matchString = matchString.toLowerCase();
+    searchString = searchString.toLowerCase();
 
     const wordsStartingWithMatchString = words
       .map((word, index) => {
         return { word: word.toLowerCase(), index };
       })
-      .filter((match) => match.word.startsWith(matchString));
+      .filter((match) => match.word.startsWith(searchString));
 
     if (wordsStartingWithMatchString.length === 0) {
       return -1;
