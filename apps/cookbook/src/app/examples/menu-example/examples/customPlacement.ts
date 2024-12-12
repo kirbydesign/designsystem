@@ -4,9 +4,14 @@ const config = {
   selector: 'cookbook-menu-custom-placement-example',
   template: `<kirby-menu [placement]="'bottom-end'">
   <kirby-item>
-    <p class="kirby-item-title">Action 1</p>
+    <p class="kirby-item-title">Stone</p>
   </kirby-item>
-  ...
+  <kirby-item>
+    <p class="kirby-item-title">Rick</p>
+  </kirby-item>
+  <kirby-item>
+    <p class="kirby-item-title">Gooey</p>
+  </kirby-item>
 </kirby-menu>`,
 };
 

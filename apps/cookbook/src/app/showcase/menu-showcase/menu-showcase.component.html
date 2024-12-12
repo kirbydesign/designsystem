@@ -26,15 +26,6 @@
   </p>
 </div>
 <h2>Examples</h2>
-<h3>Basic</h3>
-<div class="page-example">
-  <div>
-    <cookbook-example-viewer [html]="menuDefaultExample.template">
-      <cookbook-menu-default-example #menuDefaultExample></cookbook-menu-default-example>
-    </cookbook-example-viewer>
-  </div>
-</div>
-
 <h3>Selectable items</h3>
 <p>This example demonstrates how to set custom actions on the elements in the menu.</p>
 <div class="page-example">
@@ -48,7 +39,7 @@
 <h3>Advanced items</h3>
 <p>
   Since the Menu accepts Items, it is possible to customize these. The example below demonstrates
-  how to add a toggle to an Item in the list.
+  how to add a checkbox and a toggle to an Item in the list.
 </p>
 <p>
   <em>
@@ -274,6 +265,72 @@
     </cookbook-example-viewer>
   </div>
 </div>
+
+<h2>Accessibility</h2>
+<p>
+  The Menu implements the
+  <a
+    class="kirby-external-icon"
+    target="_blank"
+    href="https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/"
+  >
+    Menu Button Pattern
+  </a>
+  and the
+  <a
+    class="kirby-external-icon"
+    target="_blank"
+    href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/"
+  >
+    Menu and Menubar Pattern
+  </a>
+  from ARIA Authoring Practices Guide.
+</p>
+<h3>Keyboard support</h3>
+<p>
+  The component has full keyboard support for opening the menu and navigating between and selecting
+  items in the menu.
+</p>
+<p>The following keys can be used to open the menu when the menu button has focus:</p>
+<!-- prettier-ignore -->
+<ul>
+  <li>
+    <kbd>Enter</kbd>, <kbd>Space</kbd> and <kbd>&#8595;</kbd> opens menu and moves focus to first menu item.
+  </li>
+  <li>
+    <kbd>&#8593;</kbd> opens menu and moves focus to last menu item.
+  </li>
+</ul>
+<p>The following keys can be used to navigate and select within the menu:</p>
+<!-- prettier-ignore -->
+<ul>
+  <li>
+    <kbd>Enter</kbd> and <kbd>Space</kbd> activates the menu item and closes the menu.
+  </li>
+  <li>
+    <kbd>Escape</kbd> closes the menu.
+  </li>
+  <li>
+    <kbd>&#8593;</kbd> moves focus to the previous menu item. If focus is on the first menu item, moves focus to the last menu item.
+  </li>
+  <li>
+    <kbd>&#8595;</kbd> moves focus to the next menu item. If focus is on the last menu item, moves focus to the first menu item.
+  </li>
+  <li>
+    <kbd>Home</kbd> moves focus to the first menu item.
+  </li>
+  <li>
+    <kbd>End</kbd> moves focus to the last menu item.
+  </li>
+  <li>
+    <kbd>A</kbd>-<kbd>Z</kbd> moves focus to the next menu item whose label starts with the typed character.
+  </li>
+  <li>
+    <kbd>Tab</kbd> closes the menu and moves focus to the next element in the tab sequence outside the control.
+  </li>
+</ul>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
 
 <h2>Properties:</h2>
 <cookbook-api-description-properties
