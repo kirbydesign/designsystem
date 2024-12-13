@@ -604,98 +604,92 @@ export const ItemWithToggleModernSyntax: Story = {
     styles: [`h2 { margin-top: 32px; }`],
     template: `<h2>Extra small</h2>
     <kirby-item size="xs">
-      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
-      <kirby-label>Slot start, selected</kirby-label>
-    </kirby-item> 
+      <kirby-toggle [checked]="true" slot="start">Slot start, selected</kirby-toggle>
+    </kirby-item>
     <kirby-item size="xs">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>Slot start</kirby-label>
-    </kirby-item> 
+      <kirby-toggle slot="start">Slot start</kirby-toggle>
+    </kirby-item>
     <kirby-item size="xs">
-      <kirby-toggle slot="end"></kirby-toggle>
-      <kirby-label>Slot end</kirby-label>
-    </kirby-item> 
+      <kirby-toggle slot="end">Slot end</kirby-toggle>
+    </kirby-item>
     <kirby-item size="xs">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>No slot</kirby-label>
-    </kirby-item> 
+      <kirby-toggle>No slot</kirby-toggle>
+    </kirby-item>
     <kirby-item size="xs">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>
-        <h3>Slot start, complex label</h3>
-        <p detail>Label</p>
-      </kirby-label>
-    </kirby-item> 
+      <kirby-toggle slot="start">
+        <kirby-label>
+          <p class="kirby-item-title">Slot start, complex label</p>
+          <p class="kirby-item-detail">Label</p>
+        </kirby-label>
+      </kirby-toggle>
+    </kirby-item>
     <kirby-item size="xs">
-      <kirby-toggle slot="end"></kirby-toggle>
-      <kirby-label>
-        <h3>Slot end, complex label</h3>
-        <p detail>Label</p>
-      </kirby-label>
+      <kirby-toggle slot="end">
+        <kirby-label>
+          <p class="kirby-item-title">Slot end, complex label</p>
+          <p class="kirby-item-detail">Label</p>
+        </kirby-label>
+      </kirby-toggle>
     </kirby-item>
     
     <h2>Small</h2>
     <kirby-item size="sm">
-      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
-      <kirby-label>Slot start, selected</kirby-label>
-    </kirby-item> 
+      <kirby-toggle [checked]="true" slot="start">Slot start, selected</kirby-toggle>
+    </kirby-item>
     <kirby-item size="sm">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>Slot start</kirby-label>
-    </kirby-item> 
+      <kirby-toggle slot="start">Slot start</kirby-toggle>
+    </kirby-item>
     <kirby-item size="sm">
-      <kirby-toggle slot="end"></kirby-toggle>
-      <kirby-label>Slot end</kirby-label>
-    </kirby-item> 
+      <kirby-toggle slot="end">Slot end</kirby-toggle>
+    </kirby-item>
     <kirby-item size="sm">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>No slot</kirby-label>
-    </kirby-item> 
+      <kirby-toggle>No slot</kirby-toggle>
+    </kirby-item>
     <kirby-item size="sm">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>
-        <h3>Slot start, complex label</h3>
-        <p detail>Label</p>
-      </kirby-label>
-    </kirby-item> 
+      <kirby-toggle slot="start">
+        <kirby-label>
+          <p class="kirby-item-title">Slot start, complex label</p>
+          <p class="kirby-item-detail">Label</p>
+        </kirby-label>
+      </kirby-toggle>
+    </kirby-item>
     <kirby-item size="sm">
-      <kirby-toggle slot="end"></kirby-toggle>
-      <kirby-label>
-        <h3>Slot end, complex label</h3>
-        <p detail>Label</p>
-      </kirby-label>
+      <kirby-toggle slot="end">
+        <kirby-label>
+          <p class="kirby-item-title">Slot end, complex label</p>
+          <p class="kirby-item-detail">Label</p>
+        </kirby-label>
+      </kirby-toggle>
     </kirby-item>
     
     <h2>Medium</h2>
     <kirby-item size="md">
-      <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
-      <kirby-label>Slot start, selected</kirby-label>
-    </kirby-item> 
-    <kirby-item size="md">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>Slot start</kirby-label>
-    </kirby-item> 
-    <kirby-item size="md">
-      <kirby-toggle slot="end"></kirby-toggle>
-      <kirby-label>Slot end</kirby-label>
+      <kirby-toggle [checked]="true" slot="start">Slot start, selected</kirby-toggle>
     </kirby-item>
     <kirby-item size="md">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>No slot</kirby-label>
+      <kirby-toggle slot="start">Slot start</kirby-toggle>
     </kirby-item>
     <kirby-item size="md">
-      <kirby-toggle slot="start"></kirby-toggle>
-      <kirby-label>
-        <h3>Slot start, complex label</h3>
-        <p detail>Label</p>
-      </kirby-label>
+      <kirby-toggle slot="end">Slot end</kirby-toggle>
     </kirby-item>
     <kirby-item size="md">
-      <kirby-toggle slot="end"></kirby-toggle>
-      <kirby-label>
-        <h3>Slot end, complex label</h3>
-        <p detail>Label</p>
-      </kirby-label>
+      <kirby-toggle>No slot</kirby-toggle>
+    </kirby-item>
+    <kirby-item size="md">
+      <kirby-toggle slot="start">
+        <kirby-label>
+          <p class="kirby-item-title">Slot start, complex label</p>
+          <p class="kirby-item-detail">Label</p>
+        </kirby-label>
+      </kirby-toggle>
+    </kirby-item>
+    <kirby-item size="md">
+      <kirby-toggle slot="end">
+        <kirby-label>
+          <p class="kirby-item-title">Slot end, complex label</p>
+          <p class="kirby-item-detail">Label</p>
+        </kirby-label>
+      </kirby-toggle>
     </kirby-item>`,
   }),
 };
