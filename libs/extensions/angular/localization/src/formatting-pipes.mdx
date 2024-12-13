@@ -1,0 +1,25 @@
+import { Canvas, Controls, Description, Meta } from '@storybook/blocks';
+
+import * as AccountNumberStories from './account-number/account-number.stories';
+import * as AmountStories from './amount/amount.stories';
+
+<Meta title="Pipes/Localization/Formatting Pipes" />
+# Formatting Pipes
+<Description of={AccountNumberStories.default} />
+
+## Account Number 
+<Description of={AccountNumberStories.AccountNum} />
+<Canvas of={AccountNumberStories.AccountNum} />
+
+## Amount 
+<Description of={AmountStories.AmountDKK} />
+<Canvas of={AmountStories.AmountDKK} />
+
+<Description of={AmountStories.AmountUSD} />
+<Canvas of={AmountStories.AmountUSD} />
+
+## API
+### Account Number
+<Controls of={AccountNumberStories.AccountNum} />
+### Amount
+<Controls of={AmountStories.AmountDKK} />

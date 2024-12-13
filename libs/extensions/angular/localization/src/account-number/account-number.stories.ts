@@ -1,32 +1,51 @@
-import { Component } from '@angular/core';
-import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
-import { AccountNumberPipe } from '@kirbydesign/extensions-angular/localization';
+import { Component, Input } from '@angular/core';
+import { AccountNumber, AccountNumberPipe } from '@kirbydesign/extensions-angular/localization';
 import { type Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
   template: `
-    hello world
+    {{ accountNumber | accountNumber }}
   `,
-  selector: 'dummy-pipe-account-number',
+  selector: 'extensions-account-number-example',
+  standalone: true,
+  imports: [AccountNumberPipe],
 })
-class DummyPipeAccountNumberComponent {}
+class AccountNumberExampleComponent {
+  @Input() accountNumber!: AccountNumber;
+}
 
-const meta: Meta<DummyPipeAccountNumberComponent> = {
-  component: DummyPipeAccountNumberComponent,
-  title: 'Pipes/Localization/Account Number',
+/**
+ * Pipe that formats an `AccountNumber` to a common format.
+ */
+const meta: Meta<AccountNumberExampleComponent> = {
+  component: AccountNumberExampleComponent,
+  title: 'Pipes/Localization',
   decorators: [
     moduleMetadata({
       imports: [AccountNumberPipe],
     }),
   ],
+  tags: ['!autodocs', 'dev'],
 };
 
 export default meta;
-type Story = StoryObj<ImageBannerComponent>;
+type Story = StoryObj<AccountNumberExampleComponent>;
 
 /**
- * This is a default image banner with a header, image and body text.
+ * TODO: Account Number docs goes here.
  */
-export const Default: Story = {
-  args: {},
+export const AccountNum: Story = {
+  args: {
+    accountNumber: { regNo: '9876', accountNo: '1234567890' },
+  },
+  parameters: {
+    docs: {
+      source: {
+        language: 'tsx', // Using tsx here to get better syntax highlighting
+        code: `<p>
+          {{ { regNo: '9876', accountNo: '1234567890' } | accountNumber }}
+        </p> `,
+      },
+    },
+  },
 };
