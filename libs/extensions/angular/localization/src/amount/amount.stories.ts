@@ -5,11 +5,11 @@ import {
   Amount,
   AmountPipe,
   AmountService,
+  AmountServiceConfiguration,
   KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
 } from '@kirbydesign/extensions-angular/localization';
 
 import { type Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { type AmountServiceConfiguration } from 'libs/extensions/angular/dist/localization/amount';
 
 registerLocaleData(localeData);
 
@@ -54,7 +54,7 @@ export default meta;
 type Story = StoryObj<AmountExampleComponent>;
 
 /**
- * TODO: Amount DKK docs goes here.
+ * TODO: Specific Amount DKK story docs goes here.
  */
 export const AmountDKK: Story = {
   args: {
@@ -76,7 +76,7 @@ export const AmountDKK: Story = {
 };
 
 /**
- * TODO: Amount USD docs goes here.
+ * TODO: Specific Amount USD story docs goes here.
  */
 export const AmountUSD: Story = {
   args: {

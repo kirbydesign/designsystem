@@ -32,11 +32,11 @@ export default meta;
 type Story = StoryObj<AccountNumberExampleComponent>;
 
 /**
- * TODO: Account Number docs goes here.
+ * TODO: Specific Account Number story docs goes here.
  */
 export const AccountNum: Story = {
   args: {
-    accountNumber: { regNo: '9876', accountNo: '1234567890' },
+    accountNumber: { regNo: '987', accountNo: '1234567890' },
   },
   parameters: {
     docs: {
