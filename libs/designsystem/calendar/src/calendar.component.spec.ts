@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { format, Locale, startOfDay, startOfMonth } from 'date-fns';
-import { fromZonedTime } from 'date-fns-tz';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
@@ -891,7 +891,7 @@ describe('CalendarComponent', () => {
   }
 
   function utcMidnightDate(yyyyMMdd) {
-    return fromZonedTime(yyyyMMdd, 'UTC');
+    return zonedTimeToUtc(yyyyMMdd, 'UTC');
   }
 
   function clickDayOfMonth(dateOneIndexed: number) {
