@@ -20,6 +20,9 @@
       "@kirbydesign/angular/spinner": ["libs/angular/dist/spinner"],
       "@kirbydesign/core": ["libs/core/dist/"],
       "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
+      "@kirbydesign/extensions-angular/skeleton-loader": [
+        "libs/extensions/angular/dist/skeleton-loader"
+      ],
       "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/dist/*"],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/dist/accordion"],
