@@ -547,6 +547,8 @@ export class CalendarComponent implements OnInit, OnChanges {
   private focusDate(newDate: Date | null) {
     if (!newDate) return;
 
+    newDate = this.normalizeDate(newDate);
+
     if (this.timezone === 'UTC') {
       newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }

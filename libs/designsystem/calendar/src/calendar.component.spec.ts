@@ -879,6 +879,16 @@ describe('CalendarComponent', () => {
 
       expect(spectator.component.selectedDate).toEqual(localMidnightDate('1997-08-14'));
     });
+
+    it('should set focussedDate to midnight of focussed date when using UTC', () => {
+      spectator.setInput('timezone', 'UTC');
+      spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
+      const focussedDay = spectator.query('.focussed');
+      spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowRight');
+
+      expect(spectator.component['focussedDate']).toEqual(utcMidnightDate('1997-08-30'));
+    });
   });
 
   // constants and utility functions
