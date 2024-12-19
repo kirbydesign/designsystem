@@ -101,6 +101,12 @@ export class InputComponent implements OnChanges, OnInit {
   @Input()
   inputmode: string;
 
+  @HostBinding('attr.aria-describedby')
+  _messageId;
+
+  @HostBinding('attr.aria-errormessage')
+  _errorMessageId;
+
   @HostListener('keyup', ['$event.target.value'])
   _onKeyUp(value: string) {
     this.kirbyChange.emit(value);

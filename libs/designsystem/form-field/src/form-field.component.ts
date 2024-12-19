@@ -41,7 +41,6 @@ export class FormFieldComponent
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
-  private _message: string | null;
 
   showDefaultCalendarIcon = false;
 
@@ -50,14 +49,7 @@ export class FormFieldComponent
   _messageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
 
   @Input() label: string;
-  @Input()
-  public get message(): string | null {
-    return this._message;
-  }
-  public set message(value: string | null) {
-    this._message = value;
-    this.setErrorMessageId();
-  }
+  @Input() message: string | null;
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
@@ -67,6 +59,9 @@ export class FormFieldComponent
 
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
+
+  @ContentChild(InputComponent) inputComponent: InputComponent;
+  @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
 
   @ContentChild(DateInputDirective) dateInput: DateInputDirective;
 
@@ -166,9 +161,8 @@ export class FormFieldComponent
   ngAfterContentChecked(): void {
     if (!this.inputElement) {
       this.inputElement = this.element.querySelector('input, textarea');
+      this.setMessageIds();
     }
-
-    this.setErrorMessageId();
 
     // TODO: remove "!this.inputElement.readOnly" when ionic has fixed input click issue
     // https://github.com/ionic-team/ionic-framework/issues/22740
@@ -194,17 +188,16 @@ export class FormFieldComponent
     );
   }
 
-  private setErrorMessageId() {
-    console.log('setErrorMessageId - inputElement', this.inputElement);
-    /*
-     * We always set the `aria-errormessage` attribute to the id of the error-message element.
-     * We then make sure to only show the element when there is an error.
-     */
-    if (!this.inputElement) return;
-    this.renderer.setAttribute(this.inputElement, 'aria-errormessage', this._errorMessageId);
+  private setMessageIds() {
+    const currentInput = this.inputComponent || this.textareaComponent;
 
-    if (!this.message) return;
-    this.renderer.setAttribute(this.inputElement, 'aria-describedby', this._messageId);
+    if (this.message) {
+      currentInput._messageId = this._messageId;
+    }
+
+    // We always pass on the id of the error-message element.
+    // But it is only shown in the template when there is an error.
+    currentInput._errorMessageId = this._errorMessageId;
   }
 
   ngOnDestroy(): void {
