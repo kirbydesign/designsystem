@@ -3,6 +3,9 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+$spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
+$spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
+
 :host {
   display: inline-flex;
 
@@ -10,15 +13,30 @@
     width: 100%;
   }
 
-  // @each $size, $properties in utils.$checkbox-sizes {
-  //   &.#{$size} {
-  //     $vertical-padding: map.get($properties, vertical-padding);
+  &.has-hidden-label {
+    position: initial;
 
-  //     ion-toggle:not(.in-item)::part(label) {
-  //       padding-block: $vertical-padding;
-  //     }
-  //   }
-  // }
+    &[slot='end'] {
+      ion-toggle {
+        margin-inline-start: $spacing-to-label;
+      }
+    }
+
+    ion-toggle {
+      position: initial;
+
+      &.in-item.toggle-label-placement-start::part(label),
+      &.in-item.toggle-label-placement-end::part(label) {
+        margin-inline: 0;
+      }
+    }
+
+    .hidden-label {
+      position: absolute;
+      inset: 0;
+      opacity: 100;
+    }
+  }
 }
 
 ion-toggle {
@@ -79,6 +97,30 @@ ion-toggle {
 
     &::part(track) {
       height: $toggle-size;
+    }
+  }
+
+  // Overrides for kirby-checkbox inside kirby-item
+  &.in-item {
+    &::part(label) {
+      align-items: center;
+      padding-inline: 0;
+    }
+
+    &::part(label) {
+      margin-block: 0;
+    }
+
+    &.toggle-label-placement-start {
+      &::part(label) {
+        margin-inline: 0 $spacing-to-label;
+      }
+    }
+
+    &.toggle-label-placement-end {
+      &::part(label) {
+        margin-inline: $spacing-to-label 0;
+      }
     }
   }
   /* stylelint-enable no-duplicate-selectors */

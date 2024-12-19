@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonToggle } from '@ionic/angular/standalone';
+import { setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 
 @Component({
   standalone: true,
@@ -52,6 +53,8 @@ export class ToggleComponent implements ControlValueAccessor, OnInit {
     }
 
     this.inheritAriaAttributes();
+
+    this._labelText = setAccessibleLabel(this.elementRef.nativeElement);
   }
 
   _ariaLabel: string;
@@ -72,6 +75,8 @@ export class ToggleComponent implements ControlValueAccessor, OnInit {
   get _isDisabled() {
     return this.disabled ? 'disabled' : null;
   }
+
+  @HostBinding('class.has-hidden-label') _labelText: string;
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
