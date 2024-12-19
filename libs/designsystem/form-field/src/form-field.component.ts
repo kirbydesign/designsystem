@@ -41,13 +41,23 @@ export class FormFieldComponent
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
+  private _message: string | null;
 
   showDefaultCalendarIcon = false;
 
   _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
+  _errorMessageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
+  _messageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
 
   @Input() label: string;
-  @Input() message: string | null;
+  @Input()
+  public get message(): string | null {
+    return this._message;
+  }
+  public set message(value: string | null) {
+    this._message = value;
+    this.setErrorMessageId();
+  }
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
@@ -72,6 +82,11 @@ export class FormFieldComponent
 
   get _wrapContentInLabel(): boolean {
     return !!this.label && (!!this.input || !!this.textarea);
+  }
+
+  get _inputElementError(): boolean {
+    if (!this.inputElement) return false;
+    return this.inputElement.getAttribute('aria-invalid') === 'true';
   }
 
   private dispatchLoadEvent() {
@@ -153,6 +168,8 @@ export class FormFieldComponent
       this.inputElement = this.element.querySelector('input, textarea');
     }
 
+    this.setErrorMessageId();
+
     // TODO: remove "!this.inputElement.readOnly" when ionic has fixed input click issue
     // https://github.com/ionic-team/ionic-framework/issues/22740
     if (
@@ -175,6 +192,19 @@ export class FormFieldComponent
       this.dateInput?.useNativeDatePicker &&
       !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
     );
+  }
+
+  private setErrorMessageId() {
+    console.log('setErrorMessageId - inputElement', this.inputElement);
+    /*
+     * We always set the `aria-errormessage` attribute to the id of the error-message element.
+     * We then make sure to only show the element when there is an error.
+     */
+    if (!this.inputElement) return;
+    this.renderer.setAttribute(this.inputElement, 'aria-errormessage', this._errorMessageId);
+
+    if (!this.message) return;
+    this.renderer.setAttribute(this.inputElement, 'aria-describedby', this._messageId);
   }
 
   ngOnDestroy(): void {

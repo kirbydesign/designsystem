@@ -1,18 +1,34 @@
 <label *ngIf="_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+  <ng-container *ngIf="_inputElementError">
+    <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
+  </ng-container>
 </label>
 
 <ng-container *ngIf="!_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+  <ng-container *ngIf="_inputElementError">
+    <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
+  </ng-container>
 </ng-container>
+
+<ng-template #errorMessageTemplate>
+  <kirby-form-field-message
+    *ngIf="_inputElementError && message !== undefined"
+    [text]="message"
+    aria-live="polite"
+    [id]="_errorMessageId"
+  ></kirby-form-field-message>
+</ng-template>
 
 <div *ngIf="message !== undefined || counter" class="texts">
   <kirby-form-field-message
-    *ngIf="message !== undefined"
+    *ngIf="!_inputElementError && message !== undefined"
     class="message"
     [text]="message"
+    [id]="_messageId"
   ></kirby-form-field-message>
 
   <div *ngIf="counter" class="counter">
