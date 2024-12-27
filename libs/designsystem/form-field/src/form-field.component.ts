@@ -60,9 +60,6 @@ export class FormFieldComponent
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
-  @ContentChild(InputComponent) inputComponent: InputComponent;
-  @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
-
   @ContentChild(DateInputDirective) dateInput: DateInputDirective;
 
   constructor(
@@ -189,15 +186,11 @@ export class FormFieldComponent
   }
 
   private setMessageIds() {
-    const currentInput = this.inputComponent || this.textareaComponent;
-
+    if (!this.inputElement) return;
     if (this.message) {
-      currentInput._messageId = this._messageId;
+      this.renderer.setAttribute(this.inputElement, 'aria-describedby', this._messageId);
     }
-
-    // We always pass on the id of the error-message element.
-    // But it is only shown in the template when there is an error.
-    currentInput._errorMessageId = this._errorMessageId;
+    this.renderer.setAttribute(this.inputElement, 'aria-errormessage', this._errorMessageId);
   }
 
   ngOnDestroy(): void {

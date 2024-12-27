@@ -47,12 +47,6 @@ export class TextareaComponent implements OnChanges {
   @Input()
   maxlength: number;
 
-  @HostBinding('attr.aria-describedby')
-  _messageId: string;
-
-  @HostBinding('attr.aria-errormessage')
-  _errorMessageId: string;
-
   @HostListener('keyup', ['$event.target.value'])
   _onKeyUp(value: string) {
     this.kirbyChange.emit(value);
