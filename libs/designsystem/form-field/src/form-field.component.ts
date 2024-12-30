@@ -2,6 +2,7 @@ import {
   AfterContentChecked,
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ContentChildren,
@@ -54,6 +55,9 @@ export class FormFieldComponent
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
+  @ContentChild(InputComponent) inputComponent: InputComponent;
+  @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
+
   @ContentChild(RadioGroupComponent, { read: ElementRef })
   private radioGroupElement: ElementRef<HTMLElement>;
 
@@ -67,7 +71,8 @@ export class FormFieldComponent
     private platform: PlatformService,
     private renderer: Renderer2,
     private windowRef: WindowRef,
-    private resizeObserverService: ResizeObserverService
+    private resizeObserverService: ResizeObserverService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.element = elementRef.nativeElement;
   }
@@ -77,8 +82,12 @@ export class FormFieldComponent
   }
 
   get _inputElementError(): boolean {
-    if (!this.inputElement) return false;
-    return this.inputElement.getAttribute('aria-invalid') === 'true';
+    const nestedInteractive =
+      this.inputComponent || this.textareaComponent || this.radioGroupComponent;
+
+    if (!nestedInteractive) return false;
+
+    return nestedInteractive?.hasError;
   }
 
   private dispatchLoadEvent() {
@@ -127,14 +136,6 @@ export class FormFieldComponent
   }
 
   ngAfterContentInit(): void {
-    if (this.label && this.radioGroupElement) {
-      this.renderer.setAttribute(
-        this.radioGroupElement.nativeElement,
-        'aria-labelledby',
-        this._labelId
-      );
-    }
-
     // Measure the width of all slotted affix elements,
     // and apply their width + standard padding to the input elements
     // padding, so the start/end of the input is correctly indented.
@@ -158,8 +159,15 @@ export class FormFieldComponent
   ngAfterContentChecked(): void {
     if (!this.inputElement) {
       this.inputElement = this.element.querySelector('input, textarea');
-      this.setMessageIds();
     }
+
+    const nestedInteractive =
+      this.radioGroupElement?.nativeElement.querySelector('[role="radiogroup"]');
+    if (this.label && nestedInteractive) {
+      this.renderer.setAttribute(nestedInteractive, 'aria-labelledby', this._labelId);
+    }
+
+    this.setMessageIds();
 
     // TODO: remove "!this.inputElement.readOnly" when ionic has fixed input click issue
     // https://github.com/ionic-team/ionic-framework/issues/22740
@@ -186,11 +194,20 @@ export class FormFieldComponent
   }
 
   private setMessageIds() {
-    if (!this.inputElement) return;
+    const nestedInteractive =
+      this.input?.nativeElement ||
+      this.textarea?.nativeElement ||
+      this.radioGroupElement?.nativeElement.querySelector('[role="radiogroup"]');
+    if (!nestedInteractive) return false;
+
     if (this.message) {
-      this.renderer.setAttribute(this.inputElement, 'aria-describedby', this._messageId);
+      this.renderer.setAttribute(
+        nestedInteractive,
+        'aria-describedby',
+        this._messageId || this._labelId
+      );
     }
-    this.renderer.setAttribute(this.inputElement, 'aria-errormessage', this._errorMessageId);
+    this.renderer.setAttribute(nestedInteractive, 'aria-errormessage', this._errorMessageId);
   }
 
   ngOnDestroy(): void {

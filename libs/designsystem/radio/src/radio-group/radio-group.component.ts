@@ -44,6 +44,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     this.setProjectedRadiosDisabledState(value);
   }
 
+  @HostBinding('attr.aria-invalid')
   @HostBinding('class.error') // Used to style radios with error state
   @Input()
   hasError: boolean = false;

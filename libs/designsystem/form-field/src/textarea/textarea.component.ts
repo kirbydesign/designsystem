@@ -31,6 +31,7 @@ export class TextareaComponent implements OnChanges {
   @Input()
   borderless: boolean;
 
+  @HostBinding('attr.aria-invalid')
   @HostBinding('class.error')
   @Input()
   hasError: boolean;

@@ -2,18 +2,20 @@
   <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
 
-  <!-- If the nested input has an error, include the message in the label -->
+  <!-- add error message inside label if nested interative is in error state -->
   <ng-container *ngIf="_inputElementError">
     <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
   </ng-container>
 </label>
 
+<!-- add message outside label if nested interative is in valid state -->
+<ng-container *ngIf="!_inputElementError && _wrapContentInLabel">
+  <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
+</ng-container>
+
 <ng-container *ngIf="!_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
-</ng-container>
-
-<ng-container *ngIf="!_inputElementError || !_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
 </ng-container>
 
