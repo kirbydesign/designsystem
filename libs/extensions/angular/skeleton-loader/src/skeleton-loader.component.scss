@@ -14,10 +14,10 @@
   animation-timing-function: linear;
 }
 
-:host.light {
+:host .light .skeleton-text-animated {
   background-image: linear-gradient(to right, rgb(40 40 40 / 6%) 0%, rgb(40 40 40 / 22%) 0%);
 }
 
-:host.dark {
+:host.dark .skeleton-text-animated {
   background-image: linear-gradient(to right, rgb(255 255 255 / 16%) 0%, rgb(255 255 255 / 42%) 0%);
 }

@@ -1,10 +1,24 @@
-import { type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleton-loader';
 
 /**
- * A skeleton loader is a dynamic UI component designed to enhance user experience by visually indicating content loading.
- * It typically mimics the layout of the content being loaded, using placeholder shapes and animations to reassure users
- * and reduce perceived wait times.
+ * A Skeleton is a visual indicator that is used to render placeholder content and mimic the full content shown when loaded.
+ * Themes
+ * There are two types of themes:
+ * 1. OnLight - A darker version to be used on white and light grey backgrounds.
+ * 2. OnDark - A lighter version used on dark colors and brand background.
+ *
+ * ###Best practices
+ * - The Skeleton is used as an indicator to load content on an entire page, content on a card.
+ * - Only use skeleton states on container-based components. Fx cards and lists or data-based components like data tables. In most cases, buttons, input fields, checkboxes, toggles should not have a skeleton state.
+ * - Aim for simple low contrast skeleton screens that does not attract too much attention. Avoid designing high contrast skeleton views, where dark skeletons are placed on white backgrounds. Go for white skeletons on white background even though the final rendering is fx a dark card on white background.
+ * - Use af skeleton or spinner if load time is between 750ms and 10 seconds.
+ * - If a load is faster than 750ms don’t use af skeleton or spinner, as this most likely won’t make a positive difference for the user experience. Most likely it will just show an annoying flash of spinner og skeleton that wil be distracting.
+ * - If page load is slower than 10 seconds consider using a progress bar instead.
+ *
+ * ###Loading
+ *  - A skeleton is placed inside a loading component to load content from the backend (E.g. loading a Cards content or a sites Content)
+ *  - We try to show the data that is available and only load the content that has to be loaded by the backend (E.g. if we load a sites content we show the page-title and the content that we know of)
  */
 const meta: Meta<SkeletonLoaderComponent> = {
   component: SkeletonLoaderComponent,
@@ -16,19 +30,66 @@ const meta: Meta<SkeletonLoaderComponent> = {
       modes: {},
     },
   },
-  argTypes: {},
+  argTypes: {
+    height: {
+      control: 'number',
+    },
+    width: {
+      control: 'number',
+    },
+    borderRadius: {
+      control: {
+        type: 'select',
+        options: ['xxs', 'xs', 's', 'n', 'l', 'xl', 'circle', 'pill'],
+      },
+    },
+    theme: {
+      control: {
+        type: 'select',
+        options: ['light', 'dark'],
+      },
+    },
+  },
 };
 export default meta;
 type Story = StoryObj<SkeletonLoaderComponent>;
 
 /**
- * This is a default skeleton loader.
+ * Example.
  */
 export const Default: Story = {
   args: {
     height: 16,
     width: 100,
     borderRadius: 'xxs',
-    theme: 'dark',
+    theme: 'light',
   },
+};
+
+/**
+ * Example using circle.
+ */
+export const Card: Story = {
+  args: {},
+  render: (args) => ({
+    props: args,
+    styles: [
+      ' .skeleton-example { display: flex; align-items: center; justify-content: space-between; width: 300px; }',
+      ' .text1 { display: flex; flex-direction: column; height: 40px; justify-content: space-evenly }',
+      ' .text2 { display: flex; flex-direction: column; height: 40px; justify-content: space-evenly; align-items: flex-end }',
+    ],
+    template: `
+      <div class="skeleton-example">
+        <kirby-x-skeleton-loader [height]="60" [width]="60" borderRadius="circle"></kirby-x-skeleton-loader>
+        <div class="text1">
+          <kirby-x-skeleton-loader [height]="18" [width]="100" borderRadius="xs"></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader [height]="14" [width]="50" borderRadius="xs"></kirby-x-skeleton-loader>
+        </div>
+        <div class="text2">
+          <kirby-x-skeleton-loader [height]="18" [width]="100" borderRadius="xs"></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader [height]="14" [width]="50" borderRadius="xs"></kirby-x-skeleton-loader>
+        </div>
+      </div>
+    `,
+  }),
 };
