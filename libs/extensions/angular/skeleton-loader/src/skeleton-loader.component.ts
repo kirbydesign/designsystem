@@ -65,7 +65,7 @@ export class SkeletonLoaderComponent {
    * The width.
    */
   @HostBinding('style.width')
-  _width: string = '100px';
+  private _width: string = '100px';
   @Input()
   set width(value: string | number) {
     this._width = typeof value === 'number' ? `${value}px` : value;

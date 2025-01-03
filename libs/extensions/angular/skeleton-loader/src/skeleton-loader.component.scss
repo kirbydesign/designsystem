@@ -6,18 +6,39 @@
 
 :host .skeleton-text-animated {
   position: relative;
-  background-size: 800px 104px;
-  animation-duration: 1s;
+  background-size: 1000px 1000px;
+  animation-duration: 1.5s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-name: shimmer;
   animation-timing-function: linear;
+
+  // Default:
+  // background-image: linear-gradient(to right, rgba(0, 0, 0, 0.067) 8%, rgba(0, 0, 0, 0.133) 18%, rgba(0, 0, 0, 0.067) 33%);
 }
 
-:host .light .skeleton-text-animated {
-  background-image: linear-gradient(to right, rgb(40 40 40 / 6%) 0%, rgb(40 40 40 / 22%) 0%);
+:host.light .skeleton-text-animated {
+  --color: 40;
+  --from-opacity: 0.06;
+  --to-opacity: 0.22;
+
+  background-image: linear-gradient(
+    to right,
+    rgb(var(--color) var(--color) var(--color) / var(--from-opacity)) 8%,
+    rgb(var(--color) var(--color) var(--color) / var(--to-opacity)) 18%,
+    rgb(var(--color) var(--color) var(--color) / var(--from-opacity)) 8%
+  );
 }
 
 :host.dark .skeleton-text-animated {
-  background-image: linear-gradient(to right, rgb(255 255 255 / 16%) 0%, rgb(255 255 255 / 42%) 0%);
+  --color: 255;
+  --from-opacity: 0.16;
+  --to-opacity: 0.42;
+
+  background-image: linear-gradient(
+    to right,
+    rgb(var(--color) var(--color) var(--color) / var(--from-opacity)) 8%,
+    rgb(var(--color) var(--color) var(--color) / var(--to-opacity)) 18%,
+    rgb(var(--color) var(--color) var(--color) / var(--from-opacity)) 8%
+  );
 }
