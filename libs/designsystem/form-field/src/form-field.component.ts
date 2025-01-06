@@ -2,7 +2,6 @@ import {
   AfterContentChecked,
   AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   ContentChildren,
@@ -71,8 +70,7 @@ export class FormFieldComponent
     private platform: PlatformService,
     private renderer: Renderer2,
     private windowRef: WindowRef,
-    private resizeObserverService: ResizeObserverService,
-    private changeDetectorRef: ChangeDetectorRef
+    private resizeObserverService: ResizeObserverService
   ) {
     this.element = elementRef.nativeElement;
   }
