@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { format, Locale, startOfDay, startOfMonth } from 'date-fns';
-import { fromZonedTime } from 'date-fns-tz';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
@@ -879,6 +879,16 @@ describe('CalendarComponent', () => {
 
       expect(spectator.component.selectedDate).toEqual(localMidnightDate('1997-08-14'));
     });
+
+    it('should set focussedDate to midnight of focussed date when using UTC', () => {
+      spectator.setInput('timezone', 'UTC');
+      spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
+      const focussedDay = spectator.query('.focussed');
+      spectator.dispatchKeyboardEvent(focussedDay, 'keydown', 'ArrowRight');
+
+      expect(spectator.component['focussedDate']).toEqual(utcMidnightDate('1997-08-30'));
+    });
   });
 
   // constants and utility functions
@@ -891,7 +901,7 @@ describe('CalendarComponent', () => {
   }
 
   function utcMidnightDate(yyyyMMdd) {
-    return fromZonedTime(yyyyMMdd, 'UTC');
+    return zonedTimeToUtc(yyyyMMdd, 'UTC');
   }
 
   function clickDayOfMonth(dateOneIndexed: number) {
