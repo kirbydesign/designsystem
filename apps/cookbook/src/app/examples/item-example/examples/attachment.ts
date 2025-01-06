@@ -6,7 +6,7 @@ const config = {
   <kirby-avatar slot="start" size="xs">
     <kirby-icon name="camera"></kirby-icon>
   </kirby-avatar>
-  <h3>Attach image</h3>
+  <p class="kirby-item-title">Attach image</p>
 </kirby-item>`,
 };
 

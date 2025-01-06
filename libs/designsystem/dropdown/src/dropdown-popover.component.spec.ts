@@ -947,7 +947,7 @@ describe('DropdownComponent (popover version)', () => {
              selectable="true"
              [selected]="selected">
              <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
-             <h3>{{ item.title }}</h3>
+             <p>{{ item.title }}</p>
            </kirby-item>
          </kirby-dropdown>`,
         {

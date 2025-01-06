@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-item-example-settings-disabled',
   template: `<kirby-item disabled>
-  <h3>Disabled</h3>
+  <p class="kirby-item-title">Disabled</p>
   <kirby-toggle slot="end"></kirby-toggle>
 </kirby-item>`,
 };

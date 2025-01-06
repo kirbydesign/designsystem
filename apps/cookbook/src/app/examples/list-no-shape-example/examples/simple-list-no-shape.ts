@@ -3,7 +3,7 @@ import { BaseListNoShape } from '../base-list-no-shape';
 
 export const simpleListNoShapeExampleTemplate = `<kirby-list [items]="items" shape="none">
   <kirby-item *kirbyListItemTemplate="let item">
-    <h3 class="kirby-text-bold">{{ item.title }}</h3>
+    <p class="kirby-text-normal-bold">{{ item.title }}</p>
     <data [value]="item.amount" slot="end">
       {{ item.amount | currency }}
     </data>
