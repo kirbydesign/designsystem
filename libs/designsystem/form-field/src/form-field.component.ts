@@ -160,7 +160,7 @@ export class FormFieldComponent
     }
 
     const nestedInteractive =
-      this.radioGroupElement?.nativeElement.querySelector('[role="radiogroup"]');
+      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group');
     if (this.label && nestedInteractive) {
       this.renderer.setAttribute(nestedInteractive, 'aria-labelledby', this._labelId);
     }

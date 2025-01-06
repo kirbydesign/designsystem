@@ -108,7 +108,7 @@ describe('FormFieldComponent', () => {
 
     it('should render the label with correct margin', () => {
       expect(labelTextElement).toHaveComputedStyle({
-        'margin-bottom': size('xxxs'),
+        'margin-bottom': size('xxs'),
       });
     });
   });
@@ -426,8 +426,11 @@ describe('FormFieldComponent', () => {
         expect(label).toBeTruthy();
       });
 
-      it('should associate the label with the radio group', () => {
-        expect(radioGroupElement.getAttribute('aria-labelledby')).toEqual(label.id);
+      it('should associate the label with the radio group', async () => {
+        const ionRadioGroupElement = radioGroupElement.querySelector('ion-radio-group');
+        spectator.detectChanges();
+
+        expect(ionRadioGroupElement.getAttribute('aria-labelledby')).toEqual(label.id);
       });
 
       it('should focus the the radio group when clicking the label ', () => {

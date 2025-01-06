@@ -23,6 +23,7 @@
   <div *ngIf="message !== undefined || counter" class="texts">
     <kirby-form-field-message
       *ngIf="message !== undefined"
+      class="message"
       [text]="message"
       [attr.aria-live]="_inputElementError ? 'polite' : null"
       [attr.id]="_inputElementError ? _errorMessageId : _messageId"
