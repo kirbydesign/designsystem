@@ -1,0 +1,88 @@
+@if (label()) {
+  <label>
+    <span>{{ label() }}</span>
+  </label>
+}
+
+<div class="container" [attr.disabled]="isDisabled ? '' : null" [attr.size]="size()" tabindex="0">
+  @if (this.multiple()) {
+    @for (item of values(); track item) {
+      <app-chip
+        tabindex="-1"
+        [deletable]="!isDisabled"
+        (delete)="delete(item)"
+        [attr.size]="size()"
+      >
+        @if (chipTemplate() || optionTemplate()) {
+          <ng-container
+            [ngTemplateOutlet]="chipTemplate() ?? optionTemplate()!"
+            [ngTemplateOutletContext]="{ $implicit: item }"
+          ></ng-container>
+        } @else if (displayWith()) {
+          {{ displayWith()(item) }}
+        } @else {
+          {{ item }}
+        }
+      </app-chip>
+    }
+  }
+
+  <input
+    #input
+    size="10"
+    [formControl]="formControl"
+    [placeholder]="placeholder()"
+    (keydown)="onKeyDown($event)"
+    (click)="toggle()"
+  />
+
+  <div class="buttons">
+    @if (values().length > 0 && !isDisabled) {
+      <button
+        kirby-button
+        [size]="buttonSize()"
+        tabindex="-1"
+        [noDecoration]="true"
+        (click)="clear()"
+      >
+        <kirby-icon name="close"></kirby-icon>
+      </button>
+    }
+
+    <button
+      kirby-button
+      [size]="buttonSize()"
+      tabindex="-1"
+      [disabled]="isDisabled"
+      [noDecoration]="true"
+      (click)="toggle()"
+    >
+      <kirby-icon [name]="opened ? 'arrow-up' : 'arrow-down'"></kirby-icon>
+    </button>
+  </div>
+</div>
+
+@if (opened) {
+  <kirby-card
+    class="presentation"
+    [class.up]="direction() === 'up'"
+    [class.down]="direction() === 'down'"
+  >
+    @for (item of filteredItems(); track item) {
+      <kirby-item [selectable]="true" (click)="select(item)">
+        @if (optionTemplate()) {
+          <ng-container
+            [ngTemplateOutlet]="optionTemplate()!"
+            [ngTemplateOutletContext]="{ $implicit: item }"
+          ></ng-container>
+        } @else if (displayWith()) {
+          {{ displayWith()(item) }}
+        } @else {
+          {{ item }}
+        }
+      </kirby-item>
+    } @empty {
+      <kirby-item class="empty">No options</kirby-item>
+    }
+  </kirby-card>
+}

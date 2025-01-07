@@ -1,0 +1,120 @@
+@use '@kirbydesign/designsystem/scss/utils';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+label > span {
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  margin-bottom: 4px;
+  padding: 0 16px;
+}
+
+.container {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 6px;
+  transition: all 80ms linear 0ms;
+  transition-property: background-color;
+  box-sizing: border-box;
+  background-color: var(--kirby-inputs-background-color);
+  font-size: 1em;
+  line-height: 1.5;
+
+  &:not([disabled]) {
+    cursor: text;
+
+    &:focus-within {
+      outline: unset;
+      box-shadow:
+        0 1px 24px #1c1c1c0a,
+        0 0 0 2px var(--kirby-background-color),
+        0 0 0 4px #4d90fe;
+    }
+
+    &:hover {
+      background-color: var(--kirby-inputs-background-color-hover);
+    }
+  }
+
+  &[disabled] {
+    background-color: utils.get-color('light-tint');
+    color: utils.get-color('semi-dark');
+  }
+
+  &[size='lg'] {
+    padding: 12px 86px 12px 12px;
+    border-radius: 16px;
+    min-height: 56px;
+  }
+
+  &[size='md'] {
+    padding: 6px 72px 6px 16px;
+    border-radius: 24px;
+    min-height: 40px;
+
+    button {
+      margin: 0;
+    }
+  }
+
+  &[size='sm'] {
+    padding: 6px 60px 6px 16px;
+    border-radius: 24px;
+    min-height: 40px;
+
+    button {
+      margin: 0;
+    }
+  }
+
+  &[size='xs'] {
+    padding: 6px 60px 6px 16px;
+    border-radius: 24px;
+    height: 34px;
+
+    button {
+      margin: 0;
+      height: 24px;
+      width: 24px;
+    }
+  }
+}
+
+input {
+  all: unset;
+  flex-grow: 1;
+}
+
+.buttons {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translate(0, -50%);
+}
+
+.presentation {
+  position: absolute;
+  box-sizing: border-box;
+  max-height: 40vh;
+  width: 100%;
+  overflow: auto;
+  z-index: 10;
+
+  &.down {
+    inset: calc(100% + 6px) auto auto 0;
+  }
+
+  &.up {
+    inset: auto auto calc(100% + 6px) 0;
+  }
+}
+
+.empty ::ng-deep ion-item {
+  color: utils.get-color('semi-dark-shade');
+}

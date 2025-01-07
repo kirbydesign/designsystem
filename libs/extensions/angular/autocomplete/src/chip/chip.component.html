@@ -1,0 +1,9 @@
+<span [class.p-right]="!deletable()">
+  <ng-content></ng-content>
+</span>
+
+@if (deletable()) {
+  <button kirby-button size="xs" [noDecoration]="true" (click)="delete.emit()" tabindex="-1">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+}
