@@ -1,7 +1,10 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  display: block;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 :host .skeleton-text-animated {

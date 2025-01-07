@@ -2,6 +2,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleton-loader';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 /**
  * A Skeleton is a visual indicator that is used to render placeholder content and mimic the full content shown when loaded.
@@ -27,7 +28,7 @@ const meta: Meta<SkeletonLoaderComponent> = {
   title: 'Components/Loaders/Skeleton Loader',
   decorators: [
     moduleMetadata({
-      imports: [ButtonComponent, CardModule],
+      imports: [ButtonComponent, CardModule, ItemModule],
     }),
   ],
   parameters: {
@@ -83,24 +84,26 @@ export const DarkCard: Story = {
   render: (args) => ({
     props: args,
     styles: [
-      ' .skeleton-card { padding: 10px 10px 15px 10px; width: 350px; background-color: #0b7683; }',
-      ' .skeleton-example { display: flex; align-items: center; justify-content: space-between; }',
-      ' .text1 { display: flex; flex-direction: column; height: 40px; justify-content: space-evenly }',
-      ' .text2 { display: flex; flex-direction: column; height: 40px; justify-content: space-evenly; align-items: flex-end }',
+      ' .skeleton-card { width: 350px; background-color: var(--kirby-decoration-color-blue-80); padding: 6px 0 }',
+      ' :host kirby-item { --kirby-item-background: transparent; }',
+      ' .text { display: flex; flex-direction: column; justify-content: space-evenly; height: 50px; }',
+      ' .end { align-items: flex-end }',
     ],
     template: `
      <kirby-card class="skeleton-card">
-      <div class="skeleton-example">
-        <kirby-x-skeleton-loader [height]="60" [width]="60" borderRadius="circle" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
-        <div class="text1">
+      <kirby-item class="skeleton-example">
+        <div slot="start">
+          <kirby-x-skeleton-loader [height]="60" [width]="60" borderRadius="circle" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+        </div>
+        <div class="text text1">
           <kirby-x-skeleton-loader [height]="18" [width]="100" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
           <kirby-x-skeleton-loader [height]="14" [width]="50" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
         </div>
-        <div class="text2">
+        <div class="text end" slot="end">
           <kirby-x-skeleton-loader [height]="18" [width]="100" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
           <kirby-x-skeleton-loader [height]="14" [width]="50" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
         </div>
-      </div>
+      </kirby-item>
       </kirby-card>
     `,
   }),
@@ -116,23 +119,26 @@ export const LightCard: Story = {
   render: (args) => ({
     props: args,
     styles: [
-      ' .skeleton-card { padding: 10px 10px 15px 10px; width: 350px; }',
-      ' .skeleton-example { display: flex; align-items: center; justify-content: space-between; }',
-      ' .text1 { display: flex; flex-direction: column; height: 40px; justify-content: flex-end }',
-      ' .text2 { display: flex; flex-direction: column; height: 40px; justify-content: space-evenly; align-items: flex-end }',
+      ' .skeleton-card { width: 350px; background-color: var(--kirby-white); padding: 6px 0 }',
+      ' :host kirby-item { --kirby-item-background: transparent; }',
+      ' .text { display: flex; flex-direction: column; justify-content: space-evenly; height: 50px; }',
+      ' .end { align-items: flex-end }',
     ],
     template: `
      <kirby-card class="skeleton-card">
-      <div class="skeleton-example">
-        <kirby-x-skeleton-loader [height]="35" [width]="60" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
-        <div class="text1">
-          <kirby-x-skeleton-loader [height]="14" [width]="50" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+      <kirby-item class="skeleton-example">
+        <div slot="start">
+          <kirby-x-skeleton-loader [height]="60" [width]="60" borderRadius="circle" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
         </div>
-        <div class="text2">
+        <div class="text text1">
           <kirby-x-skeleton-loader [height]="18" [width]="100" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
           <kirby-x-skeleton-loader [height]="14" [width]="50" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
         </div>
-      </div>
+        <div class="text end" slot="end">
+          <kirby-x-skeleton-loader [height]="18" [width]="100" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader [height]="14" [width]="50" borderRadius="xs" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+        </div>
+      </kirby-item>
       </kirby-card>
     `,
   }),
