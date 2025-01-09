@@ -9,24 +9,14 @@
 
 :host .skeleton-text-animated {
   position: relative;
-  background-size: 800px 104px;
   animation-duration: 1.5s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: shimmer;
-  animation-timing-function: linear;
-
-  // Default:
-  // background-image: linear-gradient(
-  //  to right,
-  //  rgb(0 0 0 / 6.7%) 8%,
-  //  rgb(0 0 0 / 13.3%) 18%,
-  //  rgb(0 0 0 / 6.7%) 33%
-  // );
+  will-change: background;
+  background-clip: border-box;
 }
 
 :host.light .skeleton-text-animated {
-  background: linear-gradient(
+  background-color: rgb(40 40 40 / 6%);
+  background-image: linear-gradient(
     to right,
     rgb(40 40 40 / 6%) 0%,
     rgb(40 40 40 / 22%) 25%,
@@ -36,7 +26,7 @@
 }
 
 :host.dark .skeleton-text-animated {
-  background: linear-gradient(
+  background-image: linear-gradient(
     to right,
     rgb(255 255 255 / 16%) 0%,
     rgb(255 255 255 / 42%) 25%,
