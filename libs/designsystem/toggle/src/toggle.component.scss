@@ -29,12 +29,16 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       &.in-item.toggle-label-placement-end::part(label) {
         margin-inline: 0;
       }
+
+      &::part(toggle-wrapper) {
+        position: initial;
+      }
     }
 
     .hidden-label {
       position: absolute;
       inset: 0;
-      opacity: 100;
+      opacity: 0;
     }
   }
 }

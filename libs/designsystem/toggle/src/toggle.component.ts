@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -10,10 +11,12 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonToggle } from '@ionic/angular/standalone';
 import { setAccessibleLabel } from '@kirbydesign/designsystem/shared';
+import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
@@ -22,6 +25,7 @@ import { setAccessibleLabel } from '@kirbydesign/designsystem/shared';
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.scss'],
   providers: [
+    IonicElementPartHelper,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ToggleComponent),
@@ -30,10 +34,14 @@ import { setAccessibleLabel } from '@kirbydesign/designsystem/shared';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToggleComponent implements ControlValueAccessor, OnInit {
+export class ToggleComponent implements ControlValueAccessor, OnInit, AfterViewInit {
+  @ViewChild(IonToggle, { read: ElementRef, static: true })
+  private ionToggleElement?: ElementRef<HTMLIonToggleElement>;
+
   constructor(
     private cdr: ChangeDetectorRef,
-    private elementRef: ElementRef<HTMLElement>
+    private elementRef: ElementRef<HTMLElement>,
+    private ionicElementPartHelper: IonicElementPartHelper
   ) {}
 
   ngOnInit(): void {
@@ -53,8 +61,10 @@ export class ToggleComponent implements ControlValueAccessor, OnInit {
     }
 
     this.inheritAriaAttributes();
-
-    this._labelText = setAccessibleLabel(this.elementRef.nativeElement);
+    if (!this._labelText && !this._hasSlottedContent) {
+      // if no label has been set try to find a label in an item and use its text content
+      this._labelText = setAccessibleLabel(this.elementRef.nativeElement);
+    }
   }
 
   _ariaLabel: string;
@@ -85,6 +95,10 @@ export class ToggleComponent implements ControlValueAccessor, OnInit {
   _hasSlottedContent: boolean;
 
   _pressed = false;
+
+  ngAfterViewInit(): void {
+    this.ionicElementPartHelper.setPart('toggle-wrapper', this.ionToggleElement, '.toggle-wrapper');
+  }
 
   onCheckedChange(checked: boolean): void {
     this.checked = checked;
