@@ -17,26 +17,26 @@
   animation-timing-function: linear;
 
   // Default:
-  background-image: linear-gradient(
-    to right,
-    rgb(0 0 0 / 6.7%) 8%,
-    rgb(0 0 0 / 13.3%) 18%,
-    rgb(0 0 0 / 6.7%) 33%
-  );
+  // background-image: linear-gradient(
+  //  to right,
+  //  rgb(0 0 0 / 6.7%) 8%,
+  //  rgb(0 0 0 / 13.3%) 18%,
+  //  rgb(0 0 0 / 6.7%) 33%
+  // );
 }
 
 :host.light .skeleton-text-animated {
   background-image: linear-gradient(
-    to right,
+    90deg,
     rgb(40 40 40 / 6%) 0%,
     rgb(40 40 40 / 22%) 25%,
-    rgb(40 40 40 / 0.06%) 50%
+    rgb(40 40 40 / 6%) 50%
   );
 }
 
 :host.dark .skeleton-text-animated {
   background-image: linear-gradient(
-    to right,
+    90deg,
     rgb(255 255 255 / 16%) 0%,
     rgb(255 255 255 / 42%) 25%,
     rgb(255 255 255 / 16%) 50%
