@@ -3,13 +3,13 @@
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
 
   <!-- add error message inside label if nested interative is in error state -->
-  <ng-container *ngIf="_inputElementError">
+  <ng-container *ngIf="_nestedInteractiveHasError">
     <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
   </ng-container>
 </label>
 
 <!-- add message outside label if nested interative is in valid state -->
-<ng-container *ngIf="!_inputElementError && _wrapContentInLabel">
+<ng-container *ngIf="!_nestedInteractiveHasError && _wrapContentInLabel">
   <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
 </ng-container>
 
@@ -25,8 +25,8 @@
       *ngIf="message !== undefined"
       class="message"
       [text]="message"
-      [attr.aria-live]="_inputElementError ? 'polite' : null"
-      [attr.id]="_inputElementError ? _errorMessageId : _messageId"
+      [attr.aria-live]="_nestedInteractiveHasError ? 'polite' : null"
+      [attr.id]="_nestedInteractiveHasError ? _errorMessageId : _messageId"
     ></kirby-form-field-message>
 
     <div *ngIf="counter" class="counter" aria-hidden="true">

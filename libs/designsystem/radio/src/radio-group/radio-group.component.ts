@@ -44,9 +44,22 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     this.setProjectedRadiosDisabledState(value);
   }
 
-  @HostBinding('class.error') // Used to style radios with error state
+  private _hasError: boolean = false;
+
+  @HostBinding('class.error')
   @Input()
-  hasError: boolean = false;
+  get hasError(): boolean {
+    return this._hasError;
+  }
+
+  set hasError(value: boolean) {
+    if (this._hasError !== value) {
+      this._hasError = value;
+      this.hasErrorChange.emit(this._hasError);
+    }
+  }
+
+  @Output() hasErrorChange = new EventEmitter<boolean>();
 
   get items(): string[] | any[] {
     return this._items || []; // Ensure items return empty array even if set to null/undefined
