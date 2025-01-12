@@ -114,7 +114,6 @@ export class FormFieldComponent
 
   public focus() {
     if (!this.nestedInteractiveElement) return;
-    if (!this.input || !this.textarea) return;
 
     /*
      * This timeout ensures that any previous manipulation of inputElement
@@ -169,7 +168,6 @@ export class FormFieldComponent
     }
 
     if (!this.isRegistered && this.element.isConnected && !!this.nestedInteractiveElement) {
-      if (!this.input || !this.textarea) return;
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
