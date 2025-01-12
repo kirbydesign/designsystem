@@ -10,6 +10,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   templateUrl: './icon-showcase.component.html',
   styleUrls: ['./icon-showcase.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class IconShowcaseComponent {
   defaultHtmlSnippet = IconDefaultExampleComponent.htmlSnippet;

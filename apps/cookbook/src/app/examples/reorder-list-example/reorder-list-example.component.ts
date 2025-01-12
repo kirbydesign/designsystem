@@ -6,6 +6,7 @@ import { ReorderEvent } from '@kirbydesign/designsystem/reorder-list';
   selector: 'cookbook-reorder-list-example',
   templateUrl: './reorder-list-example.component.html',
   styleUrls: ['./reorder-list-example.component.scss'],
+  standalone: false,
 })
 export class ReorderListExampleComponent {
   items: any[] = [

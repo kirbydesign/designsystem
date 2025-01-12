@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-data-table-showcase',
   templateUrl: './data-table-showcase.component.html',
   styleUrls: ['./data-table-showcase.component.scss'],
+  standalone: false,
 })
 export class DataTableShowcaseComponent {
   _apiDescriptionPropertiesTable: ApiDescriptionProperty[] = [...dataTableApi];

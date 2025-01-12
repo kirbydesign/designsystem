@@ -5,6 +5,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 @Component({
   styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-advanced-example.component.html',
+  standalone: false,
 })
 export class SlidesAdvancedExampleComponent {
   constructor(private toastController: ToastController) {}

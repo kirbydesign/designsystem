@@ -7,6 +7,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
   selector: 'cookbook-form-field-example',
   templateUrl: './form-field-example.component.html',
   styleUrls: ['./form-field-example.component.scss'],
+  standalone: false,
 })
 export class FormFieldExampleComponent {
   constructor(private windowRef: WindowRef) {}

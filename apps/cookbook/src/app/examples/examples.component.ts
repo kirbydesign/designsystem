@@ -7,6 +7,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
   selector: 'cookbook-examples',
   templateUrl: './examples.component.html',
   styleUrls: ['./examples.component.scss'],
+  standalone: false,
 })
 export class ExamplesComponent {
   showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(

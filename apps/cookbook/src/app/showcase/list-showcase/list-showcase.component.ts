@@ -15,6 +15,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-list-showcase',
   templateUrl: './list-showcase.component.html',
   styleUrls: ['./list-showcase.component.scss'],
+  standalone: false,
 })
 export class ListShowcaseComponent {
   items: string = ListItemsExampleTemplate;

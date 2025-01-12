@@ -40,6 +40,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class AccordionWithItemsInCardExampleComponent extends BaseListComponent {
   template: string = config.template;

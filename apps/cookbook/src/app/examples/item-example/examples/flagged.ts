@@ -27,6 +27,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  standalone: false,
 })
 export class ItemExampleFlaggedComponent {
   template: string = config.template;

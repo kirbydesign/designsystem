@@ -16,6 +16,7 @@ export interface ApiDescriptionEventColumns {
   selector: 'cookbook-api-description-events',
   templateUrl: './api-description-events.component.html',
   styleUrls: ['../api-description.shared.scss'],
+  standalone: false,
 })
 export class ApiDescriptionEventsComponent {
   @Input() events: ApiDescriptionEvent[];

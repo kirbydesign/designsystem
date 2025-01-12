@@ -15,6 +15,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   selector: 'cookbook-iphone',
   templateUrl: './iphone.component.html',
   styleUrls: ['./iphone.component.scss'],
+  standalone: false,
 })
 export class IphoneComponent implements OnChanges, AfterViewInit {
   @Input() src: string;

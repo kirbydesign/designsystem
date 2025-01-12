@@ -16,6 +16,7 @@ const template = `<kirby-list-experimental>
   // tslint:disable-next-line
   selector: 'cookbook-list-experimental-items-example',
   template: template,
+  standalone: false,
 })
 export class ListExperimentalItemsExampleComponent extends BaseListComponent {
   template: string = template;

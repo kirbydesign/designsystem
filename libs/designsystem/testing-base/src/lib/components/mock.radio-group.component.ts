@@ -14,6 +14,7 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockRadioGroupComponent),
     },
   ],
+  standalone: false,
 })
 export class MockRadioGroupComponent {
   @Input() disabled: boolean;

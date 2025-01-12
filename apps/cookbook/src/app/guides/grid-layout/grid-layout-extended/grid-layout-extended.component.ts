@@ -5,6 +5,7 @@ import exampleCss from '../../../examples/grid-layout-example/grid-layout-extend
 @Component({
   selector: 'cookbook-grid-layout-extended',
   templateUrl: './grid-layout-extended.component.html',
+  standalone: false,
 })
 export class GridLayoutExtendedComponent {
   exampleHtml = exampleHtml;

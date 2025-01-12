@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-flag-showcase',
   templateUrl: './flag-showcase.component.html',
   styleUrls: ['./flag-showcase.component.scss'],
+  standalone: false,
 })
 export class FlagShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

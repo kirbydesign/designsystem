@@ -5,6 +5,7 @@ import { AlertConfig, ModalController } from '@kirbydesign/designsystem';
 @Component({
   selector: 'cookbook-slide-button-example',
   templateUrl: './slide-button-example.component.html',
+  standalone: false,
 })
 export class SlideButtonExampleComponent {
   constructor(private modalController: ModalController) {}

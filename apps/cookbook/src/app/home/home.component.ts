@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'cookbook-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: false,
 })
 export class HomeComponent {
   title = 'Kirby Design System';

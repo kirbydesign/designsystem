@@ -12,6 +12,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class FormFieldInputDefaultExampleComponent {
   template: string = config.template;

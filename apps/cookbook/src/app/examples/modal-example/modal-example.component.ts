@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
     <cookbook-modal-example-simple></cookbook-modal-example-simple>
   `,
   styleUrls: ['../_examples.shared.scss'],
+  standalone: false,
 })
 export class ModalExampleComponent {}

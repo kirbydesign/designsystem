@@ -17,6 +17,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ItemExamplePickerDefaultComponent {
   template: string = config.template;

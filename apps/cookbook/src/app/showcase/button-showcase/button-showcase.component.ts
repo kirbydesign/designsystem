@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-button-showcase',
   templateUrl: './button-showcase.component.html',
   styleUrls: ['./button-showcase.component.scss'],
+  standalone: false,
 })
 export class ButtonShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

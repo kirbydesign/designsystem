@@ -7,6 +7,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-avatar-showcase',
   templateUrl: './avatar-showcase.component.html',
   styleUrls: ['./avatar-showcase.component.scss'],
+  standalone: false,
 })
 export class AvatarShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

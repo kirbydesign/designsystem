@@ -19,6 +19,7 @@ export const detailedCardWithListNoShapeTemplate = `<kirby-card>
   selector: 'cookbook-detailed-card-with-list-no-shape-example',
   template: detailedCardWithListNoShapeTemplate,
   styles: ['.margin { margin-top: 16px; margin-inline: 16px; }', 'kirby-card {min-height: 224px;}'],
+  standalone: false,
 })
 export class DetailedCardWithListNoShapeComponent extends BaseListNoShape {
   template: string = detailedCardWithListNoShapeTemplate;

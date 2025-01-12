@@ -13,6 +13,7 @@ export type ModalSizeOption = { text: string; value: ModalSize };
       }
     `,
   ],
+  standalone: false,
 })
 export class ModalExampleSizeSelectorComponent {
   modalSizeOptions: ModalSizeOption[] = [

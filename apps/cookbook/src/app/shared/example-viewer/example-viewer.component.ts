@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'cookbook-example-viewer',
   templateUrl: './example-viewer.component.html',
   styleUrls: ['./example-viewer.component.scss'],
+  standalone: false,
 })
 export class ExampleViewerComponent {
   @Input() html: string;

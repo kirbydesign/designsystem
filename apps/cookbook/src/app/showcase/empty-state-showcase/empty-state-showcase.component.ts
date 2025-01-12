@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-empty-state-showcase',
   templateUrl: './empty-state-showcase.component.html',
   styleUrl: './empty-state-showcase.component.scss',
+  standalone: false,
 })
 export class EmptyStateShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

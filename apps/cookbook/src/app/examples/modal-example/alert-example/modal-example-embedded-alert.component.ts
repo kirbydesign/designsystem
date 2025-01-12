@@ -82,6 +82,7 @@ validate(): boolean | AlertConfig {
       }
     `,
   ],
+  standalone: false,
 })
 export class ModalEmbeddedAlertExampleComponent implements OnInit {
   constructor(

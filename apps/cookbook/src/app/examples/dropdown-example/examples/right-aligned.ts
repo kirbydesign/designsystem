@@ -22,9 +22,9 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.right-align]': 'true' },
+  standalone: false,
 })
 export class DropdownExampleRightAlignedComponent {
   template: string = config.template;

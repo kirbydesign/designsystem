@@ -14,6 +14,7 @@ import { DividerComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockDividerComponent),
     },
   ],
+  standalone: false,
 })
 export class MockDividerComponent {
   @Input() hasMargin: boolean;

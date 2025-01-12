@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-grid-layout-extended-example',
   templateUrl: './grid-layout-extended-example.component.html',
   styleUrls: ['./grid-layout-extended-example.component.scss'],
+  standalone: false,
 })
 export class GridLayoutExtendedExampleComponent {}

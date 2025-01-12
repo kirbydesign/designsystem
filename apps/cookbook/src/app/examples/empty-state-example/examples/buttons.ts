@@ -15,6 +15,7 @@ const config = {
 @Component({
   selector: 'cookbook-empty-state-buttons-example',
   template: config.template,
+  standalone: false,
 })
 export class EmptyStateButtonsExampleComponent {
   template: string = config.template;

@@ -40,6 +40,7 @@ import { ActivatedRoute } from '@angular/router';
       }
     `,
   ],
+  standalone: false,
 })
 export class ModalExampleAlertWithGuardStepperComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}

@@ -15,6 +15,7 @@ const config = {
 };
 @Component({
   template: config.template,
+  standalone: false,
 })
 export class PageAlignmentAndToolbarTitleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

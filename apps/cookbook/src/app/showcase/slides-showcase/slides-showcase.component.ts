@@ -17,6 +17,7 @@ import { ApiDescriptionMethod } from '../../shared/api-description/api-descripti
   selector: 'cookbook-slides-showcase',
   templateUrl: './slides-showcase.component.html',
   styleUrls: ['../_showcase.shared.scss'],
+  standalone: false,
 })
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;

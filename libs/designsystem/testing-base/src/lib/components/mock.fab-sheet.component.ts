@@ -14,6 +14,7 @@ import { FabSheetComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockFabSheetComponent),
     },
   ],
+  standalone: false,
 })
 export class MockFabSheetComponent {
   @Input() disabled: boolean;

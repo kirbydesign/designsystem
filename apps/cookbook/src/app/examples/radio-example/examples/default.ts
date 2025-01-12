@@ -8,6 +8,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class RadioDefaultExampleComponent {
   template: string = config.template;

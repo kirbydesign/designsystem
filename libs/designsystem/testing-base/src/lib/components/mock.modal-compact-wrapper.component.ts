@@ -14,6 +14,7 @@ import { ModalCompactWrapperComponent, ModalConfig } from '@kirbydesign/designsy
       useExisting: forwardRef(() => MockModalCompactWrapperComponent),
     },
   ],
+  standalone: false,
 })
 export class MockModalCompactWrapperComponent {
   @Input() config: ModalConfig;

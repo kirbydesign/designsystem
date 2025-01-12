@@ -6,6 +6,7 @@ import exampleCss from '../../../examples/grid-layout-example/grid-layout-single
 @Component({
   selector: 'cookbook-grid-layout-single-container',
   templateUrl: './grid-layout-single-container.component.html',
+  standalone: false,
 })
 export class GridLayoutSingleContainerComponent {
   exampleHtml = exampleHtml;

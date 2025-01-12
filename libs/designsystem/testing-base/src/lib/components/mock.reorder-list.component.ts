@@ -15,6 +15,7 @@ import { ReorderEvent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockReorderListComponent),
     },
   ],
+  standalone: false,
 })
 export class MockReorderListComponent {
   @Input() items: any[];

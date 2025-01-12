@@ -16,6 +16,7 @@ import { ModalSizeOption } from '../modal-example-configuration/modal-example-si
   selector: 'cookbook-embedded-modal-example',
   templateUrl: './embedded-modal-example.component.html',
   styleUrls: ['./embedded-modal-example.component.scss'],
+  standalone: false,
 })
 export class EmbeddedModalExampleComponent implements OnInit {
   title: string;

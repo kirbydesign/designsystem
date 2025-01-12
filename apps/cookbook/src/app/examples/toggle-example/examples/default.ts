@@ -11,6 +11,7 @@ const config = {
   selector: config.selector,
   styleUrls: ['./toggle-examples.shared.scss'],
   template: config.template,
+  standalone: false,
 })
 export class ToggleDefaultExampleComponent {
   template = config.template;

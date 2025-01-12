@@ -16,6 +16,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ItemExampleInputDefaultComponent {
   template: string = config.template;

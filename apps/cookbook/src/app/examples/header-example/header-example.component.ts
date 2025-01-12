@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-header-example',
   templateUrl: './header-example.component.html',
   styleUrls: ['./header-example.component.scss'],
+  standalone: false,
 })
 export class HeaderExampleComponent {}

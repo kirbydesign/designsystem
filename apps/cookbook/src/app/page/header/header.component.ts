@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'cookbook-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: false,
 })
 export class HeaderComponent {
   @Input() isMenuOpen = false;

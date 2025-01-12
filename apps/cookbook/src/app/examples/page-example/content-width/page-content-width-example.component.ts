@@ -47,6 +47,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class PageContentWidthExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

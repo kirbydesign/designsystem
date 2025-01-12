@@ -53,6 +53,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ItemGroupWithSectionHeaderExampleComponent {
   template: string = config.template;

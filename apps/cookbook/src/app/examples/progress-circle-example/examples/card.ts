@@ -42,6 +42,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class ProgressCircleExampleCardComponent {
   template: string = config.template;

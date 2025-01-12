@@ -102,6 +102,7 @@ export class ModalWrapperTestBuilder {
       <button kirby-button>Test</button>
     </kirby-modal-footer>
   `,
+  standalone: false,
 })
 export class StaticFooterEmbeddedComponent {}
 
@@ -113,6 +114,7 @@ export class StaticFooterEmbeddedComponent {}
       <button kirby-button>Test</button>
     </kirby-modal-footer>
   `,
+  standalone: false,
 })
 export class DynamicFooterEmbeddedComponent {
   showFooter = false;
@@ -129,6 +131,7 @@ export class DynamicFooterEmbeddedComponent {
 
     <button>Test Button</button>
   `,
+  standalone: false,
 })
 export class InputEmbeddedComponent {}
 
@@ -136,6 +139,7 @@ export class InputEmbeddedComponent {}
   template: `
     <kirby-page-progress></kirby-page-progress>
   `,
+  standalone: false,
 })
 export class StaticPageProgressEmbeddedComponent {}
 
@@ -143,6 +147,7 @@ export class StaticPageProgressEmbeddedComponent {}
   template: `
     <kirby-page-progress *ngIf="showPageProgress"></kirby-page-progress>
   `,
+  standalone: false,
 })
 export class DynamicPageProgressEmbeddedComponent {
   showPageProgress = false;
@@ -152,6 +157,7 @@ export class DynamicPageProgressEmbeddedComponent {
   template: `
     <kirby-page-title>{{ _title }}</kirby-page-title>
   `,
+  standalone: false,
 })
 export class TitleEmbeddedComponent {
   _title: string;
@@ -203,5 +209,6 @@ export class TitleEmbeddedComponent {
       possimus quam qui repellat, saepe similique sint soluta. Unde.
     </p>
   `,
+  standalone: false,
 })
 export class DummyContentEmbeddedComponent {}

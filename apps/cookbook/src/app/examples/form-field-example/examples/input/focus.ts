@@ -38,6 +38,7 @@ export class MyComponent {
       }
     `,
   ],
+  standalone: false,
 })
 export class FormFieldFocusExampleComponent {
   @Input() size: InputSize;

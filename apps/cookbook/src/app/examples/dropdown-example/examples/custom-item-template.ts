@@ -38,6 +38,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  standalone: false,
 })
 export class DropdownExampleCustomItemTemplateComponent {
   template: string = config.template;

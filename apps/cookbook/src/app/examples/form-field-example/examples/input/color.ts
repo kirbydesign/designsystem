@@ -20,6 +20,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['../../form-field-example.component.scss'],
+  standalone: false,
 })
 export class FormFieldInputColorExampleComponent {
   get template(): string {

@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-list-example',
   templateUrl: './list-experimental-example.component.html',
   styleUrls: ['./list-experimental-example.component.scss'],
+  standalone: false,
 })
 export class ListExperimentalExampleComponent {}

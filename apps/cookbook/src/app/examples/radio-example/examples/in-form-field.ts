@@ -25,6 +25,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class RadioInFormFieldExampleComponent {
   template: string = config.template;

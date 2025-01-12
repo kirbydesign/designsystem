@@ -14,6 +14,7 @@ import { ProgressCircleRingComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockProgressCircleRingComponent),
     },
   ],
+  standalone: false,
 })
 export class MockProgressCircleRingComponent {
   @Input() radius: number;

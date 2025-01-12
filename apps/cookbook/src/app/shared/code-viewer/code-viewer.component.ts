@@ -22,6 +22,7 @@ export function stringifyPretty(value: any) {
   templateUrl: './code-viewer.component.html',
   styleUrls: ['./code-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CodeViewerComponent implements AfterViewInit, OnChanges {
   @Input() language: 'html' | 'css' | 'scss' | 'js' | 'ts' | 'typescript';

@@ -12,6 +12,7 @@ import { CardAsButtonDirective } from '@kirbydesign/designsystem/card';
       useExisting: forwardRef(() => MockCardAsButtonDirective),
     },
   ],
+  standalone: false,
 })
 export class MockCardAsButtonDirective {}
 

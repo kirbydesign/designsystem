@@ -5,6 +5,7 @@ import exampleHtml from '../../examples/divider-example/divider-example.componen
 @Component({
   selector: 'cookbook-divider-showcase',
   templateUrl: './divider-showcase.component.html',
+  standalone: false,
 })
 export class DividerShowcaseComponent {
   themeColors = ['white', 'light'];

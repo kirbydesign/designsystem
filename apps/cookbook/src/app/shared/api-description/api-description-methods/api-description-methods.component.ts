@@ -16,6 +16,7 @@ export interface ApiDescriptionMethodColumns {
   selector: 'cookbook-api-description-methods',
   templateUrl: './api-description-methods.component.html',
   styleUrls: ['../api-description.shared.scss'],
+  standalone: false,
 })
 export class ApiDescriptionMethodsComponent {
   @Input() methods: ApiDescriptionMethod[];

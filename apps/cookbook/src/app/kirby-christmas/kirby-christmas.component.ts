@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'cookbook-kirby-christmas',
   templateUrl: './kirby-christmas.component.html',
   styleUrls: ['./kirby-christmas.component.scss'],
+  standalone: false,
 })
 export class KirbyChristmasComponent {
   kirbyChristmas: boolean = true;

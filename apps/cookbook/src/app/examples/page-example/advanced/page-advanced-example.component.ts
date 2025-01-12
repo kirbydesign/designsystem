@@ -65,6 +65,7 @@ const config = {
 @Component({
   template: config.template,
   styles: ['.custom-page-title { display: inline-flex; }'],
+  standalone: false,
 })
 export class PageAdvancedExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

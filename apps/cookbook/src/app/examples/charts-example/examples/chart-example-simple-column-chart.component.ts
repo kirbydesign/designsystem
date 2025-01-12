@@ -8,6 +8,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ChartExampleSimpleColumnComponent {
   template: string = config.template;

@@ -26,6 +26,7 @@ const config = {
   selector: 'cookbook-empty-state-message-types-example',
   template: config.template,
   styleUrls: ['./empty-state-example.shared.scss'],
+  standalone: false,
 })
 export class EmptyStateMessageTypesExampleComponent {
   template: string = config.template;

@@ -7,6 +7,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class RangeStepExampleComponent {
   template: string = config.template;

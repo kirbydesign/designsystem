@@ -5,6 +5,7 @@ import { ThemeColor } from '@kirbydesign/designsystem';
 @Component({
   selector: 'cookbook-divider-example',
   templateUrl: './divider-example.component.html',
+  standalone: false,
 })
 export class DividerExampleComponent {
   @Input() themeColor: ThemeColor = 'white';

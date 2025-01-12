@@ -15,6 +15,7 @@ import { TextareaComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockTextareaComponent),
     },
   ],
+  standalone: false,
 })
 export class MockTextareaComponent {
   @Input() value: string;

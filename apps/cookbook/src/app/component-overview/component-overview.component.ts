@@ -7,6 +7,7 @@ import { Display } from './display';
   selector: 'cookbook-component-overview',
   templateUrl: './component-overview.component.html',
   styleUrls: ['./component-overview.component.scss'],
+  standalone: false,
 })
 export class ComponentOverviewComponent implements OnInit {
   constructor(private _router: Router) {}

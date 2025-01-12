@@ -60,6 +60,7 @@ export class MyModule {}`,
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class DataTableSortableExampleComponent implements OnInit {
   tableData: Person[] = tableExampleData;

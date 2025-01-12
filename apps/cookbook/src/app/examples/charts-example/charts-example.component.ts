@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-charts-example',
   templateUrl: './charts-example.component.html',
   styleUrls: ['./charts-example.component.scss'],
+  standalone: false,
 })
 export class ChartsExampleComponent {}

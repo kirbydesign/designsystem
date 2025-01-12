@@ -49,6 +49,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ChartExampleConfigDatalabelsStockComponent implements AfterViewInit, OnDestroy {
   public template: string = config.template;

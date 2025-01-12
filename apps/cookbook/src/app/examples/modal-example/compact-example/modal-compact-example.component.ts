@@ -4,6 +4,7 @@ import { Modal } from '@kirbydesign/designsystem';
 
 @Component({
   templateUrl: './modal-compact-example.component.html',
+  standalone: false,
 })
 export class ModalCompactExampleComponent {
   constructor(@Optional() @SkipSelf() private modal: Modal) {}

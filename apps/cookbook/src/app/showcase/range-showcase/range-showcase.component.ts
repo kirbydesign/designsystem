@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-range-showcase',
   templateUrl: './range-showcase.component.html',
   styleUrls: ['./range-showcase.component.scss'],
+  standalone: false,
 })
 export class RangeShowcaseComponent {
   rangeProperties: ApiDescriptionProperty[] = [

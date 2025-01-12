@@ -20,6 +20,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class CheckboxStatesExampleComponent {
   template: string = config.template;

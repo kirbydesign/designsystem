@@ -8,6 +8,7 @@ import {
   selector: 'cookbook-section-header-showcase',
   templateUrl: './section-header-showcase.component.html',
   styleUrls: ['./section-header-showcase.component.scss'],
+  standalone: false,
 })
 export class SectionHeaderShowcaseComponent {
   _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {

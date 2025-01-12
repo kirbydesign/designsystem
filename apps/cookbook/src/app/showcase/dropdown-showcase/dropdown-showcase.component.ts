@@ -7,6 +7,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-dropdown-showcase',
   templateUrl: './dropdown-showcase.component.html',
   styleUrls: ['./dropdown-showcase.component.scss'],
+  standalone: false,
 })
 export class DropdownShowcaseComponent {
   size: string = 'md';

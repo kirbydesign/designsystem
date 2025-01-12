@@ -12,6 +12,7 @@ import { ListItemColorDirective } from '@kirbydesign/designsystem/list';
       useExisting: forwardRef(() => MockListItemColorDirective),
     },
   ],
+  standalone: false,
 })
 export class MockListItemColorDirective {
   @Input() kirbyListItemColor: (item: any) => ThemeColor;

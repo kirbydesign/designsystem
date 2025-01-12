@@ -40,6 +40,7 @@ toggleEnabled(checked: boolean) {
   selector: config.selector,
   styleUrls: ['./toggle-examples.shared.scss'],
   template: config.template,
+  standalone: false,
 })
 export class ToggleReactiveFormsExampleComponent implements OnInit {
   template = config.template.split('<cookbook-example-configuration-wrapper>')[0];

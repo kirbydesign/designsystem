@@ -38,6 +38,7 @@ const config = {
 };
 @Component({
   template: config.template,
+  standalone: false,
 })
 export class HeaderWithCustomActionsExampleComponent extends BasePageExampleComponent {
   document = window.document.body;

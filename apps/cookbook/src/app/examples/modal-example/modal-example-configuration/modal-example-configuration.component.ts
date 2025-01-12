@@ -7,6 +7,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
   selector: 'cookbook-modal-example-configuration',
   templateUrl: './modal-example-configuration.component.html',
   styleUrls: ['./modal-example-configuration.component.scss'],
+  standalone: false,
 })
 export class ModalExampleConfigurationComponent {
   @Input() disabled: boolean;

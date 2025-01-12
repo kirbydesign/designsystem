@@ -9,6 +9,7 @@ import {
   selector: 'cookbook-card-showcase',
   templateUrl: './card-showcase.component.html',
   styleUrls: ['./card-showcase.component.scss'],
+  standalone: false,
 })
 export class CardShowcaseComponent {
   exampleHtml = exampleHtml;

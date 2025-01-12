@@ -7,6 +7,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-list-load-on-demand-showcase',
   templateUrl: './list-load-on-demand-showcase.component.html',
   styleUrls: ['./list-load-on-demand-showcase.component.scss'],
+  standalone: false,
 })
 export class ListLoadOnDemandShowcaseComponent {
   exampleHtml: string = ListLoadOnDemandExampleTemplate;

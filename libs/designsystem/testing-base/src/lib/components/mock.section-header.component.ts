@@ -14,6 +14,7 @@ import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header
       useExisting: forwardRef(() => MockSectionHeaderComponent),
     },
   ],
+  standalone: false,
 })
 export class MockSectionHeaderComponent {}
 

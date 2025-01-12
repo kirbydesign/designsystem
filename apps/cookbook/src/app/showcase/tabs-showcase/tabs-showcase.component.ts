@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-tabs-showcase',
   templateUrl: './tabs-showcase.component.html',
   styleUrls: ['./tabs-showcase.component.scss'],
+  standalone: false,
 })
 export class TabsShowcaseComponent {
   exampleHtml = exampleHtml;

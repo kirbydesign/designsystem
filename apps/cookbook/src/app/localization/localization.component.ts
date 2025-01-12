@@ -14,7 +14,6 @@ import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.
   selector: 'cookbook-localization',
   templateUrl: './localization.component.html',
   styleUrls: ['./localization.component.scss'],
-  standalone: true,
   imports: [
     CodeViewerModule,
     ShowcaseModule,

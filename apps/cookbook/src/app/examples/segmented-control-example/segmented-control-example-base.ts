@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 
 import { SegmentItem } from '@kirbydesign/designsystem';
 
-@Component({ template: '' })
+@Component({
+  template: '',
+  standalone: false,
+})
 export abstract class SegmentedControlExampleBaseComponent {
   items: SegmentItem[] = [
     {

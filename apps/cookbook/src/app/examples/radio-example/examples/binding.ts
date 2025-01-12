@@ -32,6 +32,7 @@ onChange(value: string | YourDataType) {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class RadioExampleBindingComponent {
   template: string = config.template;

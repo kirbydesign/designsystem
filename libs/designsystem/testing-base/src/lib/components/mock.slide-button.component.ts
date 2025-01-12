@@ -14,6 +14,7 @@ import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
       useExisting: forwardRef(() => MockSlideButtonComponent),
     },
   ],
+  standalone: false,
 })
 export class MockSlideButtonComponent {
   @Input() text: string;

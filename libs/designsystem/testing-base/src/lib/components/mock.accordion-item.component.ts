@@ -14,6 +14,7 @@ import { AccordionItemComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockAccordionItemComponent),
     },
   ],
+  standalone: false,
 })
 export class MockAccordionItemComponent {
   @Input() title: string;

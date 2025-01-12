@@ -63,6 +63,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ItemSlidingSimpleExampleComponent {
   template = config.template;

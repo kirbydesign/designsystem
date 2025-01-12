@@ -22,6 +22,7 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
       useExisting: forwardRef(() => MockBaseChartComponent),
     },
   ],
+  standalone: false,
 })
 export class MockBaseChartComponent {
   @Input() type: ChartType;

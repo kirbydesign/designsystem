@@ -11,6 +11,7 @@ import { ComponentConfiguration, ComponentLoaderDirective } from '@kirbydesign/d
       useExisting: forwardRef(() => MockComponentLoaderDirective),
     },
   ],
+  standalone: false,
 })
 export class MockComponentLoaderDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename

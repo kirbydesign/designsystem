@@ -15,6 +15,7 @@ import {
   templateUrl: './header-showcase.component.html',
   styleUrls: ['./header-showcase.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class HeaderShowcaseComponent {
   actionGroupTemplate: string = HeaderWithActionGroupExampleComponent.template;

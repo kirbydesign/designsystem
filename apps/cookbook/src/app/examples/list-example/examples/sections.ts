@@ -30,6 +30,7 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
       <kirby-page-content>${ListWithSectionsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class ListWithSectionsExampleComponent extends BaseListComponent {
   getSectionName(item: any): string {

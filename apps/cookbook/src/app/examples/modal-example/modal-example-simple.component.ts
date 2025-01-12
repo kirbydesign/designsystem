@@ -38,6 +38,7 @@ showModal(flavor: ModalFlavor, size?: ModalSize) {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-simple.component.scss'],
+  standalone: false,
 })
 export class ModalExampleSimpleComponent implements OnInit {
   static readonly template = config.template.split('<kirby-card')[0]; // Remove config part of the template

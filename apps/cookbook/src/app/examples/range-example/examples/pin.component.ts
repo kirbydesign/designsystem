@@ -15,6 +15,7 @@ const pinFormatterExample = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class RangePinExampleComponent {
   template: string = config.template;

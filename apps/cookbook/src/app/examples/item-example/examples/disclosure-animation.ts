@@ -43,6 +43,7 @@ export class MyComponent {
       transition('true <=> false', animate('0.2s')),
     ]),
   ],
+  standalone: false,
 })
 export class ItemExampleDisclosureAnimationComponent {
   template: string = config.template;

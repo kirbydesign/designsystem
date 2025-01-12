@@ -13,6 +13,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ChartExampleLineComponent {
   template: string = config.template;

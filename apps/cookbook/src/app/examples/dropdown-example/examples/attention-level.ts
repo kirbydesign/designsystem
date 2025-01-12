@@ -55,6 +55,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./dropdown-examples.shared.scss'],
+  standalone: false,
 })
 export class DropdownExampleAttentionLevelComponent {
   template: string = config.template;

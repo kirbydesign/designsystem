@@ -38,6 +38,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class RadioStatesExampleComponent {
   template: string = config.template;

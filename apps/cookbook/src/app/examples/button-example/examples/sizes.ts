@@ -12,6 +12,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './sizes.scss',
+  standalone: false,
 })
 export class ButtonExampleSizesComponent {
   template: string = config.template;

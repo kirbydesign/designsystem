@@ -14,6 +14,7 @@ import { ListHeaderComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockListHeaderComponent),
     },
   ],
+  standalone: false,
 })
 export class MockListHeaderComponent {}
 

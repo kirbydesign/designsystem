@@ -33,6 +33,7 @@ const config = {
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
   styles: [config.style],
+  standalone: false,
 })
 export class CardExampleDisclosureComponent {
   template: string = config.template;

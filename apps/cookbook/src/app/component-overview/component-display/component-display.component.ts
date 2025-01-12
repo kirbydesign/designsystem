@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'cookbook-component-display',
   templateUrl: './component-display.component.html',
   styleUrls: ['./component-display.component.scss'],
+  standalone: false,
 })
 export class ComponentDisplayComponent {
   @Input() title: string;

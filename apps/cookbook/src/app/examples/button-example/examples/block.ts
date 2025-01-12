@@ -9,6 +9,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
+  standalone: false,
 })
 export class ButtonExampleBlockComponent {
   template: string = config.template;

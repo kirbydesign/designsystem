@@ -7,6 +7,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
   selector: 'cookbook-list-swipe-example',
   templateUrl: './list-swipe-example.component.html',
   styleUrls: ['./list-swipe-example.component.scss'],
+  standalone: false,
 })
 export class ListSwipeExampleComponent {
   items: any[] = [

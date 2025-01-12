@@ -27,6 +27,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
+  standalone: false,
 })
 export class CardExampleColorComponent {
   template: string = config.template;

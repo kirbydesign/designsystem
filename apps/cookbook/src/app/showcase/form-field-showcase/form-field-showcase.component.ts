@@ -8,6 +8,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-form-field-showcase',
   templateUrl: './form-field-showcase.component.html',
   styleUrls: ['./form-field-showcase.component.scss'],
+  standalone: false,
 })
 export class FormFieldShowcaseComponent {
   size: InputSize;

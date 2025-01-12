@@ -7,6 +7,7 @@ import { filter } from 'rxjs/operators';
   selector: 'cookbook-showcase',
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss'],
+  standalone: false,
 })
 export class ShowcaseComponent implements OnDestroy {
   exampleComponentName: string;

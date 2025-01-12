@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-segmented-control-showcase',
   templateUrl: './segmented-control-showcase.component.html',
   styleUrls: ['./segmented-control-showcase.component.scss'],
+  standalone: false,
 })
 export class SegmentedControlShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

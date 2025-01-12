@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-accordion-example',
   templateUrl: './accordion-example.component.html',
   styleUrls: ['./accordion-example.component.scss'],
+  standalone: false,
 })
 export class AccordionExampleComponent {}

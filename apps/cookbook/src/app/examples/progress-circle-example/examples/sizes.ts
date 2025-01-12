@@ -39,6 +39,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class ProgressCircleExampleSizesComponent {
   template: string = config.template;

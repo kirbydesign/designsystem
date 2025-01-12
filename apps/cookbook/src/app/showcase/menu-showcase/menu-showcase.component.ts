@@ -9,6 +9,7 @@ import { ApiDescriptionProperty } from './../../shared/api-description/api-descr
   selector: 'cookbook-menu-showcase',
   templateUrl: './menu-showcase.component.html',
   styleUrls: ['./menu-showcase.component.scss'],
+  standalone: false,
 })
 export class MenuShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

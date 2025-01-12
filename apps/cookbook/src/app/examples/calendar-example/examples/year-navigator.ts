@@ -10,6 +10,7 @@ const config = {
   selector: 'cookbook-calendar-year-navigator-example',
   template: config.template,
   styleUrl: './_shared.scss',
+  standalone: false,
 })
 export class CalendarYearNavigatorExampleComponent {
   template: string = config.template;

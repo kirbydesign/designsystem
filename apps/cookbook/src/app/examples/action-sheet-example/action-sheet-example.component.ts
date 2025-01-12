@@ -7,6 +7,7 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
 @Component({
   selector: 'cookbook-action-sheet-example',
   templateUrl: './action-sheet-example.component.html',
+  standalone: false,
 })
 export class ActionSheetExampleComponent {
   constructor(private modalController: ModalController) {}

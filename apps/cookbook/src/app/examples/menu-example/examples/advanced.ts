@@ -33,6 +33,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class MenuAdvancedExampleComponent {
   template: string = config.template;

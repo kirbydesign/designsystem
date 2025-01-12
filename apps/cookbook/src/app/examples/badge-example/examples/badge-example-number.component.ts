@@ -12,6 +12,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./badge-example-shared.scss'],
+  standalone: false,
 })
 export class BadgeExampleNumberComponent {
   template: string = config.template;

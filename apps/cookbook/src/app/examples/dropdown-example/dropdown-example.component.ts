@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'cookbook-dropdown-example',
   templateUrl: './dropdown-example.component.html',
   styleUrls: ['./dropdown-example.component.scss'],
+  standalone: false,
 })
 export class DropdownExampleComponent {
   size: string = 'md';

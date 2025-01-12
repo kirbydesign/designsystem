@@ -8,6 +8,7 @@ import transactionsData from '../../transactions-data.json';
   selector: 'kirbydesign-transaction-details',
   templateUrl: './transaction-details.component.html',
   styleUrls: ['./transaction-details.component.scss'],
+  standalone: false,
 })
 export class TransactionDetailsComponent implements OnInit, OnDestroy {
   transactions: Transaction;

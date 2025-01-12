@@ -30,6 +30,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './attention-level.scss',
+  standalone: false,
 })
 export class ButtonExampleAttentionLevelComponent {
   template: string = config.template.split('<fieldset')[0];

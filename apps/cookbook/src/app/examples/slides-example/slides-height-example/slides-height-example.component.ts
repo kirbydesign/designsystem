@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-height-example.component.html',
+  standalone: false,
 })
 export class SlidesHeightExampleComponent {
   lorem =

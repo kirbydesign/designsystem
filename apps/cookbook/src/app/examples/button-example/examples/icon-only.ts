@@ -50,6 +50,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_grid-layout.scss',
+  standalone: false,
 })
 export class ButtonExampleIconOnlyComponent {
   template: string = config.template;

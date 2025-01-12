@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   styleUrls: ['./toggle-button-showcase.component.scss'],
   templateUrl: './toggle-button-showcase.component.html',
+  standalone: false,
 })
 export class ToggleButtonShowcaseComponent {
   notificationColors = ColorHelper.notificationColors.map((color) => color.name);

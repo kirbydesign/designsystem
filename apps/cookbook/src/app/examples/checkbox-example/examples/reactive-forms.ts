@@ -70,6 +70,7 @@ toggleCanSelectFavorite() {
       }
     `,
   ],
+  standalone: false,
 })
 export class CheckboxReactiveFormsExampleComponent {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template;

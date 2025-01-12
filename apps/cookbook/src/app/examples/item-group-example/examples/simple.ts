@@ -48,6 +48,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ItemGroupSimpleExampleComponent {
   template: string = config.template;

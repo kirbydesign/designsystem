@@ -21,6 +21,7 @@ export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="
 @Component({
   selector: 'cookbook-multi-card-list-no-shape-example',
   template: multiCardListExampleTemplate,
+  standalone: false,
 })
 export class MultiCardListNoShapeExampleComponent extends BaseListNoShape {
   template: string = multiCardListExampleTemplate;

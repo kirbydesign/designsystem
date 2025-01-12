@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-fonts-example',
   styleUrls: ['./fonts-example.component.scss'],
   templateUrl: './fonts-example.component.html',
+  standalone: false,
 })
 export class FontsExampleComponent {}

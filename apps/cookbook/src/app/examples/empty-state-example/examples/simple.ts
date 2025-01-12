@@ -13,6 +13,7 @@ const config = {
 @Component({
   selector: 'cookbook-empty-state-simple-example',
   template: config.template,
+  standalone: false,
 })
 export class EmptyStateSimpleExampleComponent {
   template: string = config.template;

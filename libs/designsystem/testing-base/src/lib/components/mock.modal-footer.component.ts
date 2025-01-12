@@ -14,6 +14,7 @@ import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
       useExisting: forwardRef(() => MockModalFooterComponent),
     },
   ],
+  standalone: false,
 })
 export class MockModalFooterComponent {
   @Input() snapToKeyboard: boolean;

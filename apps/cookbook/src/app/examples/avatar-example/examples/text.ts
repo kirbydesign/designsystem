@@ -12,6 +12,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  standalone: false,
 })
 export class AvatarExampleTextComponent {
   template: string = config.template;

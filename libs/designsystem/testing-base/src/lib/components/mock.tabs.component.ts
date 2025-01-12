@@ -14,6 +14,7 @@ import { TabsComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockTabsComponent),
     },
   ],
+  standalone: false,
 })
 export class MockTabsComponent {}
 

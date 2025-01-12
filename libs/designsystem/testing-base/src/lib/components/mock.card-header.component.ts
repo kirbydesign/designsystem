@@ -14,6 +14,7 @@ import { CardFlagLevel, CardHeaderComponent } from '@kirbydesign/designsystem/ca
       useExisting: forwardRef(() => MockCardHeaderComponent),
     },
   ],
+  standalone: false,
 })
 export class MockCardHeaderComponent {
   @Input() title: string;

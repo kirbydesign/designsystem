@@ -14,6 +14,7 @@ import { FormFieldComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockFormFieldComponent),
     },
   ],
+  standalone: false,
 })
 export class MockFormFieldComponent {
   @Input() label: string;

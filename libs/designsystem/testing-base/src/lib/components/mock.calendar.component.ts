@@ -15,6 +15,7 @@ import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/des
       useExisting: forwardRef(() => MockCalendarComponent),
     },
   ],
+  standalone: false,
 })
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();

@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-link-showcase',
   templateUrl: './link-showcase.component.html',
   styleUrls: ['../_showcase.shared.scss'],
+  standalone: false,
 })
 export class LinkShowcaseComponent {}

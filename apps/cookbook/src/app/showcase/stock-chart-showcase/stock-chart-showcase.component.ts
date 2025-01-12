@@ -8,6 +8,7 @@ import {
 @Component({
   selector: 'cookbook-stock-chart-showcase',
   templateUrl: './stock-chart-showcase.component.html',
+  standalone: false,
 })
 export class StockChartShowcaseComponent {
   _cardHasPadding = true;

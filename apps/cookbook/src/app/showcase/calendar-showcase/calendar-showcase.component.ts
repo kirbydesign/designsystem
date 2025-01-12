@@ -7,6 +7,7 @@ import { ApiDescriptionProperty } from '../../shared/api-description/api-descrip
   selector: 'cookbook-calendar-showcase',
   templateUrl: './calendar-showcase.component.html',
   styleUrls: ['./calendar-showcase.component.scss'],
+  standalone: false,
 })
 export class CalendarShowcaseComponent {
   moduleProviderExample = moduleProviderExample;

@@ -71,6 +71,7 @@ didDismiss() {
   template: config.template,
   styleUrls: ['./modal-component-example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ModalComponentExampleComponent {
   static readonly template = config.template.split('<kirby-modal trigger="open-drawer"')[0];

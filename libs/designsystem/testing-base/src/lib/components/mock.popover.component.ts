@@ -14,6 +14,7 @@ import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem
       useExisting: forwardRef(() => MockPopoverComponent),
     },
   ],
+  standalone: false,
 })
 export class MockPopoverComponent {
   @Input() popout: HorizontalDirection | `${HorizontalDirection}`;

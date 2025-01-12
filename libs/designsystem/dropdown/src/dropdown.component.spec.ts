@@ -20,6 +20,7 @@ import { OpenState } from './dropdown.types';
 @Component({
   template: '<ng-content></ng-content>',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 class OnPushHostComponent {}
 

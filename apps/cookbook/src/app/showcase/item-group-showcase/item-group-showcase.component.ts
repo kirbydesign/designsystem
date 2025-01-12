@@ -4,6 +4,7 @@ import exampleHtml from '../../examples/item-group-example/item-group-example.co
 @Component({
   selector: 'cookbook-item-group-showcase',
   templateUrl: './item-group-showcase.component.html',
+  standalone: false,
 })
 export class ItemGroupShowcaseComponent {
   exampleHtml = exampleHtml;

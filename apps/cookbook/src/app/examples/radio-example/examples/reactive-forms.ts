@@ -66,7 +66,7 @@ toggleRequired(required: boolean) {
   selector: config.selector,
   template: config.template,
   styleUrls: ['../../ng-forms.shared.scss'],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  standalone: false,
 })
 export class RadioReactiveFormsExampleComponent implements OnInit {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];

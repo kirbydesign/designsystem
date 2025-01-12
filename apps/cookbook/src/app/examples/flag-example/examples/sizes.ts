@@ -11,6 +11,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./flag-examples.shared.scss'],
+  standalone: false,
 })
 export class FlagExampleSizesComponent {
   template: string = config.template;

@@ -7,6 +7,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-reorder-showcase',
   templateUrl: './reorder-list-showcase.component.html',
   styleUrls: ['./reorder-list-showcase.component.scss'],
+  standalone: false,
 })
 export class ReorderListShowcaseComponent {
   exampleHtml = exampleHtml;

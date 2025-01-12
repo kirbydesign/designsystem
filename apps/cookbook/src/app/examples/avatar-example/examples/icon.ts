@@ -23,6 +23,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  standalone: false,
 })
 export class AvatarExampleIconComponent {
   template: string = config.template;

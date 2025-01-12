@@ -8,6 +8,7 @@ import {
 @Component({
   selector: 'cookbook-badge-showcase',
   templateUrl: './badge-showcase.component.html',
+  standalone: false,
 })
 export class BadgeShowcaseComponent {
   exampleHtml = exampleHtml;

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 @Component({
   styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-simple-example.component.html',
+  standalone: false,
 })
 export class SlidesSimpleExampleComponent {
   slides = [...Array(9).keys()].map((number) => ({

@@ -5,6 +5,7 @@ import { OtherService } from '../other.service';
   selector: 'flows-choose-receiver',
   templateUrl: './choose-receiver.component.html',
   styleUrls: ['./choose-receiver.component.scss'],
+  standalone: false,
 })
 export class ChooseReceiverComponent implements OnInit {
   readonly items: SegmentItem[] = [

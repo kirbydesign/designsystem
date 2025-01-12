@@ -13,6 +13,7 @@ export const simpleListNoShapeExampleTemplate = `<kirby-list [items]="items" sha
 @Component({
   selector: 'cookbook-simple-list-no-shape-example',
   template: simpleListNoShapeExampleTemplate,
+  standalone: false,
 })
 export class SimpleListNoShapeExampleComponent extends BaseListNoShape {
   template = simpleListNoShapeExampleTemplate;

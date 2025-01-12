@@ -39,6 +39,7 @@ export class MyModule {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
+  standalone: false,
 })
 export class IconCustomExampleComponent {
   static codeSnippet: string = config.codeSnippet;

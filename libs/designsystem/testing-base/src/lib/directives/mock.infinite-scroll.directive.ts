@@ -11,6 +11,7 @@ import { InfiniteScrollDirective } from '@kirbydesign/designsystem/list';
       useExisting: forwardRef(() => MockInfiniteScrollDirective),
     },
   ],
+  standalone: false,
 })
 export class MockInfiniteScrollDirective {
   @Output() scrollEnd = new EventEmitter<void>();

@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   template: `
     <cookbook-item-sliding-conditional-example></cookbook-item-sliding-conditional-example>
   `,
+  standalone: false,
 })
 export class ItemSlidingExampleComponent {}

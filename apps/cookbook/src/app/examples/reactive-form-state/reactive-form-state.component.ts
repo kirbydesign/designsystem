@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'cookbook-reactive-form-state',
   templateUrl: './reactive-form-state.component.html',
   styleUrls: ['./reactive-form-state.component.scss'],
+  standalone: false,
 })
 export class ReactiveFormStateComponent {
   @Input() form: FormGroup;

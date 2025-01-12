@@ -15,7 +15,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonToggle } from '@ionic/angular/standalone';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonToggle],
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',

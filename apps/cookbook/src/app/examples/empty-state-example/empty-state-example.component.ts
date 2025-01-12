@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-empty-state-example',
   templateUrl: './empty-state-example.component.html',
   styleUrls: ['./empty-state-example.component.scss'],
+  standalone: false,
 })
 export class EmptyStateExampleComponent {}

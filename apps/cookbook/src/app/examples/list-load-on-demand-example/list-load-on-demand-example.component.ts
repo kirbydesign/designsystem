@@ -25,6 +25,7 @@ export const ListLoadOnDemandExampleTemplate = `
       <kirby-page-content>${ListLoadOnDemandExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class ListLoadOnDemandExampleComponent extends BaseListComponent {
   private itemCount: number = 0;

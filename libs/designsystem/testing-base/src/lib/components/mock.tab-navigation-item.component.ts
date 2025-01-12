@@ -14,6 +14,7 @@ import { TabNavigationItemComponent } from '@kirbydesign/designsystem/tab-naviga
       useExisting: forwardRef(() => MockTabNavigationItemComponent),
     },
   ],
+  standalone: false,
 })
 export class MockTabNavigationItemComponent {
   @Input() label: string;

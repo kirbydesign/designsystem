@@ -13,6 +13,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['../../checkbox-radio-sizes-example.scss'],
+  standalone: false,
 })
 export class RadioSizesExampleComponent {
   template: string = config.template;

@@ -12,6 +12,7 @@ import { KeyHandlerDirective } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockKeyHandlerDirective),
     },
   ],
+  standalone: false,
 })
 export class MockKeyHandlerDirective {}
 

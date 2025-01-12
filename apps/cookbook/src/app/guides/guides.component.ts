@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-guides',
   templateUrl: './guides.component.html',
   styleUrls: ['./guides.component.scss'],
+  standalone: false,
 })
 export class GuidesComponent {}

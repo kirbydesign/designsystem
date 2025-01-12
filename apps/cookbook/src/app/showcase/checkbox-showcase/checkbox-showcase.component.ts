@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-checkbox-showcase',
   templateUrl: './checkbox-showcase.component.html',
   styleUrls: ['./checkbox-showcase.component.scss'],
+  standalone: false,
 })
 export class CheckboxShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

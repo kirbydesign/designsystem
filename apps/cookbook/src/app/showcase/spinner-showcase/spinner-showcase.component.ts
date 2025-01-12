@@ -5,6 +5,7 @@ import exampleHtml from '../../examples/spinner-example/spinner-example.componen
 @Component({
   selector: 'cookbook-spinner-showcase',
   templateUrl: './spinner-showcase.component.html',
+  standalone: false,
 })
 export class SpinnerShowcaseComponent {
   exampleHtml = exampleHtml;

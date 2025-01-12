@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'cookbook-card-designer',
   templateUrl: './card-designer.component.html',
   styleUrls: ['./card-designer.component.scss'],
+  standalone: false,
 })
 export class CardDesignerComponent {
   public showCardBackground = true;

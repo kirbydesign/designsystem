@@ -19,6 +19,7 @@ import {
   selector: 'cookbook-page-showcase',
   templateUrl: './page-showcase.component.html',
   styleUrls: ['./page-showcase.component.scss'],
+  standalone: false,
 })
 export class PageShowcaseComponent {
   simpleExampleHtml: string = PageSimpleExampleComponent.template;

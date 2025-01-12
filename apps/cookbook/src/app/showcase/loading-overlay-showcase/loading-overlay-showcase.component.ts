@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '../../shared/api-description/api-descrip
   selector: 'cookbook-loading-overlay-showcase',
   templateUrl: './loading-overlay-showcase.component.html',
   styleUrls: ['./loading-overlay-showcase.component.scss'],
+  standalone: false,
 })
 export class LoadingOverlayShowcaseComponent {
   exampleHtml = exampleHtml;

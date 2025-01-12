@@ -5,6 +5,7 @@ import { loadingOverlayServiceExample } from './loading-overlay-service-example'
 @Component({
   selector: 'cookbook-loading-overlay-service-example',
   templateUrl: './loading-overlay-service-example.component.html',
+  standalone: false,
 })
 export class LoadingOverlayServiceExampleComponent {
   constructor(private loadingOverlayService: LoadingOverlayService) {}

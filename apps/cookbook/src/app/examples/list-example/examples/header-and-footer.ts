@@ -36,5 +36,6 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
     </kirby-page>
   `,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
+  standalone: false,
 })
 export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {}

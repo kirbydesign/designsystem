@@ -77,6 +77,7 @@ onSegmentSelect(segment: SegmentItem) {
   selector: 'cookbook-segmented-control-example-grouped',
   template: config.template,
   styles: config.styles,
+  standalone: false,
 })
 export class SegmentedControlExampleGroupedComponent {
   template: string = config.template;

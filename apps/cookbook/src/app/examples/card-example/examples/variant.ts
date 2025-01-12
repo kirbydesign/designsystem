@@ -24,6 +24,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example-variant.scss'],
+  standalone: false,
 })
 export class CardExampleVariantComponent {
   template: string = config.template;

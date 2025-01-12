@@ -9,6 +9,7 @@ import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-exampl
     <cookbook-modal-example-alert-with-guard-stepper></cookbook-modal-example-alert-with-guard-stepper>
   `,
   styleUrls: ['./modal-example-simple.component.scss'],
+  standalone: false,
 })
 export class ModalExampleAlertWithGuardComponent implements OnInit {
   constructor(

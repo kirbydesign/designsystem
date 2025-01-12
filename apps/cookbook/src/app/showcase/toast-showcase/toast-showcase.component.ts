@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   selector: 'cookbook-toast-showcase',
   templateUrl: './toast-showcase.component.html',
+  standalone: false,
 })
 export class ToastShowcaseComponent {
   exampleHtml = exampleHtml;

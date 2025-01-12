@@ -39,6 +39,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
+  standalone: false,
 })
 export class CardExampleFlagComponent {
   template: string = config.template;

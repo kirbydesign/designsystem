@@ -6,6 +6,7 @@ import { ToastController } from '@kirbydesign/designsystem';
 @Component({
   selector: 'cookbook-toast-example',
   templateUrl: './toast-example.component.html',
+  standalone: false,
 })
 export class ToastExampleComponent {
   constructor(public toastController: ToastController) {}

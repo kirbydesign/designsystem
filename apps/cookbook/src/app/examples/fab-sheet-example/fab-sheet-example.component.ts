@@ -6,6 +6,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 @Component({
   selector: 'cookbook-fab-sheet-example',
   templateUrl: './fab-sheet-example.component.html',
+  standalone: false,
 })
 export class FabSheetExampleComponent {
   @Input() disableFabSheet = false;

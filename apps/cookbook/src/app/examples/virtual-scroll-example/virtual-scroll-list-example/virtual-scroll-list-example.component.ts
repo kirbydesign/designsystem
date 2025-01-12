@@ -6,5 +6,6 @@ import { BaseListComponent } from '../../list-shared/base-list.component';
   selector: 'cookbook-virtual-scroll-list-example',
   templateUrl: './virtual-scroll-list-example.component.html',
   styleUrls: ['./virtual-scroll-list-example.component.scss'],
+  standalone: false,
 })
 export class VirtualScrollListExampleComponent extends BaseListComponent {}

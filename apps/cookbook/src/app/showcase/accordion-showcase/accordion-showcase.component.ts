@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-accordion-showcase',
   templateUrl: './accordion-showcase.component.html',
   styleUrls: ['./accordion-showcase.component.scss'],
+  standalone: false,
 })
 export class AccordionShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

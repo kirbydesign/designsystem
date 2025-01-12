@@ -6,6 +6,7 @@ import { AvatarSize, Color, ColorHelper } from '@kirbydesign/designsystem';
   selector: 'cookbook-avatar-example',
   templateUrl: './avatar-example.component.html',
   styleUrls: ['./avatar-example.component.scss'],
+  standalone: false,
 })
 export class AvatarExampleComponent {
   imageSrc = '/assets/images/woman.png';

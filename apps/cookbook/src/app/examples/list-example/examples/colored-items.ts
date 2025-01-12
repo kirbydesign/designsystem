@@ -26,6 +26,7 @@ export const ListColoredItemsExampleTemplate = `<kirby-list
       <kirby-page-content>${ListColoredItemsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class ListColoredItemsExampleComponent extends BaseListComponent {
   getItemColor = (item) => item.color;

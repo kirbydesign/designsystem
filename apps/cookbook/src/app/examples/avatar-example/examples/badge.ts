@@ -35,6 +35,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./badge.scss'],
+  standalone: false,
 })
 export class AvatarExampleBadgeComponent {
   template: string = config.template;

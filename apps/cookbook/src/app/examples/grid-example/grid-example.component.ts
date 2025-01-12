@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'cookbook-grid-example',
   templateUrl: './grid-example.component.html',
   styleUrls: ['./grid-example.component.scss'],
+  standalone: false,
 })
 export class GridExampleComponent {
   spacing = '';

@@ -11,6 +11,7 @@ import { ActionSheetHelper } from './action-sheet.helper';
   template: `
     <h2>Dummy Component</h2>
   `,
+  standalone: false,
 })
 class EmbeddedDummyComponent {}
 

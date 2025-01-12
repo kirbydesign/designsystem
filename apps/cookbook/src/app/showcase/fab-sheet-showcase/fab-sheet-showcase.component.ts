@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-fab-sheet-showcase',
   templateUrl: './fab-sheet-showcase.component.html',
   styleUrls: ['./fab-sheet-showcase.component.scss'],
+  standalone: false,
 })
 export class FabSheetShowcaseComponent {
   disableFabSheet = false;

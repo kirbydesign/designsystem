@@ -42,6 +42,7 @@ validate(): boolean | AlertConfig {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-simple.component.scss'],
+  standalone: false,
 })
 export class ModalExampleAlertComponent {
   static readonly template = config.template;

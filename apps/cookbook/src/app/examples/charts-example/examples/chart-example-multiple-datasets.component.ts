@@ -34,6 +34,7 @@ _datasets = [
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ChartExampleMultipleDatasetsComponent {
   template: string = config.template;

@@ -17,5 +17,6 @@ export const ListSelectableItemsExampleTemplate = `<kirby-list [items]="items" (
       <kirby-page-content>${ListSelectableItemsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class ListSelectableItemsExampleComponent extends BaseListComponent {}

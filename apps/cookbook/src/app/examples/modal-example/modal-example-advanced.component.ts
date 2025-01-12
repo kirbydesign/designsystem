@@ -181,6 +181,7 @@ export class EmbeddedComponent() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-advanced.component.scss'],
+  standalone: false,
 })
 export class ModalExampleAdvancedComponent {
   static readonly template = config.template.split('<cookbook-example-configuration-wrapper')[0]; // Remove config part of the template

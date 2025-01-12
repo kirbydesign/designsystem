@@ -5,6 +5,7 @@ import exampleHtml from '../../examples/list-swipe-example/list-swipe-example.co
 @Component({
   selector: 'cookbook-list-swipe-showcase',
   templateUrl: './list-swipe-showcase.component.html',
+  standalone: false,
 })
 export class ListSwipeShowcaseComponent {
   exampleHtml = exampleHtml;

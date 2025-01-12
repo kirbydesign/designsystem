@@ -33,6 +33,7 @@ const config = {
   selector: 'cookbook-segmented-control-example-with-badge',
   template: config.template,
   styleUrls: ['../segmented-control-examples.shared.scss'],
+  standalone: false,
 })
 export class SegmentedControlExampleWithBadgeComponent {
   codeSnippet = config.codeSnippet;

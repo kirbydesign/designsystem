@@ -12,6 +12,7 @@ labels=['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'D
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ChartExampleColumnComponent {
   template: string = config.template;

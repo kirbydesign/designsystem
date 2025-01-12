@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-radio-showcase',
   templateUrl: './radio-showcase.component.html',
   styleUrls: ['./radio-showcase.component.scss'],
+  standalone: false,
 })
 export class RadioShowcaseComponent {
   radioProperties: ApiDescriptionProperty[] = [

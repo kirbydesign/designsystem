@@ -48,7 +48,11 @@ const config = {
   ],
 };
 
-@Component({ template: config.template, styles: config.styles })
+@Component({
+  template: config.template,
+  styles: config.styles,
+  standalone: false,
+})
 export class PageFixedFooterTabExampleComponent extends BasePageExampleComponent implements OnInit {
   static readonly template = pageTemplate.replace(
     /<kirby-page-content[^>]*>(.|\s)*?<\/kirby-page-content>/,

@@ -18,6 +18,7 @@ const alertConfigWithIcon = {
   selector: 'cookbook-alert-example',
   templateUrl: './alert-example.component.html',
   styles: [':host { display: block; }'],
+  standalone: false,
 })
 export class AlertExampleComponent {
   static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExampleComponent.stringify(

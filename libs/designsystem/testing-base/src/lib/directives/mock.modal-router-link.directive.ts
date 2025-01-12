@@ -13,6 +13,7 @@ import { ModalRouterLinkDirective } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockModalRouterLinkDirective),
     },
   ],
+  standalone: false,
 })
 export class MockModalRouterLinkDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename

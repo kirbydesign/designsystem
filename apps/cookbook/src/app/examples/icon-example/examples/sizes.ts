@@ -19,6 +19,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
+  standalone: false,
 })
 export class IconSizesExampleComponent {
   static htmlSnippet: string = config.htmlSnippet;

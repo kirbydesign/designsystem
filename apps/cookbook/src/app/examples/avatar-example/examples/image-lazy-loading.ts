@@ -9,6 +9,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  standalone: false,
 })
 export class AvatarExampleImageLazyLoadingComponent {
   template: string = config.template;

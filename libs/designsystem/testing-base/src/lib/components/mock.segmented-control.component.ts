@@ -18,6 +18,7 @@ import {
       useExisting: forwardRef(() => MockSegmentedControlComponent),
     },
   ],
+  standalone: false,
 })
 export class MockSegmentedControlComponent {
   @Input() mode: SegmentedControlMode | `${SegmentedControlMode}`;

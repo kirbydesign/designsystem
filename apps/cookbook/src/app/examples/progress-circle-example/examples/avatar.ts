@@ -36,6 +36,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class ProgressCircleExampleContentAvatarComponent {
   template: string = config.template;

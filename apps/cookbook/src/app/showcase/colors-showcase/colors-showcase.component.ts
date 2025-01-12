@@ -6,6 +6,7 @@ import { ColorHelper, KirbyColor } from '@kirbydesign/designsystem';
   selector: 'cookbook-colors-showcase',
   templateUrl: './colors-showcase.component.html',
   styleUrls: ['./colors-showcase.component.scss'],
+  standalone: false,
 })
 export class ColorsShowcaseComponent {
   selectedColor = 'primary';

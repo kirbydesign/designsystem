@@ -15,6 +15,7 @@ import {
       useExisting: forwardRef(() => MockHeaderActionsDirective),
     },
   ],
+  standalone: false,
 })
 export class MockHeaderActionsDirective {}
 
@@ -26,6 +27,7 @@ export class MockHeaderActionsDirective {}
       useExisting: forwardRef(() => MockHeaderCustomSectionDirective),
     },
   ],
+  standalone: false,
 })
 export class MockHeaderCustomSectionDirective {}
 
@@ -40,6 +42,7 @@ export class MockHeaderCustomSectionDirective {}
       useExisting: forwardRef(() => MockHeaderComponent),
     },
   ],
+  standalone: false,
 })
 export class MockHeaderComponent {
   @Input() centered?: boolean;

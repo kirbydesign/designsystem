@@ -14,6 +14,7 @@ import { FlagComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockFlagComponent),
     },
   ],
+  standalone: false,
 })
 export class MockFlagComponent {
   @Input() size: 'xs' | 'sm' | 'md';

@@ -8,6 +8,7 @@ import { observeContent } from './content-mutation-observer';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'content-observer-host',
   template: '<div [innerHtml]="content"></div>',
+  standalone: false,
 })
 class ContentObserverHostComponent implements OnDestroy {
   @Input() content: string = 'Initial content';

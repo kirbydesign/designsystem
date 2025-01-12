@@ -12,6 +12,7 @@ import { FitHeadingConfig, FitHeadingDirective } from '@kirbydesign/designsystem
       useExisting: forwardRef(() => MockFitHeadingDirective),
     },
   ],
+  standalone: false,
 })
 export class MockFitHeadingDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename

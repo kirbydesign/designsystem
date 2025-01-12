@@ -14,6 +14,7 @@ import { RangeComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockRangeComponent),
     },
   ],
+  standalone: false,
 })
 export class MockRangeComponent {
   @Input() minLabel: string;

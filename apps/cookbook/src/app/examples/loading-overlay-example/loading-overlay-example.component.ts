@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'cookbook-loading-overlay-example',
   templateUrl: './loading-overlay-example.component.html',
   styleUrls: ['./loading-overlay-example.component.scss'],
+  standalone: false,
 })
 export class LoadingOverlayExampleComponent {
   public isLoading = false;

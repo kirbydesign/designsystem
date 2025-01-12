@@ -16,6 +16,7 @@ import {
       useExisting: forwardRef(() => MockListItemTemplateDirective),
     },
   ],
+  standalone: false,
 })
 export class MockListItemTemplateDirective {}
 
@@ -27,6 +28,7 @@ export class MockListItemTemplateDirective {}
       useExisting: forwardRef(() => MockListHeaderDirective),
     },
   ],
+  standalone: false,
 })
 export class MockListHeaderDirective {}
 
@@ -38,6 +40,7 @@ export class MockListHeaderDirective {}
       useExisting: forwardRef(() => MockListSectionHeaderDirective),
     },
   ],
+  standalone: false,
 })
 export class MockListSectionHeaderDirective {}
 
@@ -49,6 +52,7 @@ export class MockListSectionHeaderDirective {}
       useExisting: forwardRef(() => MockListFooterDirective),
     },
   ],
+  standalone: false,
 })
 export class MockListFooterDirective {}
 

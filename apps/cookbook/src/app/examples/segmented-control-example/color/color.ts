@@ -20,6 +20,7 @@ const config = {
   selector: 'cookbook-segmented-control-example-color',
   template: config.template,
   styleUrls: ['./color.scss'],
+  standalone: false,
 })
 export class SegmentedControlExampleColorComponent extends SegmentedControlExampleBaseComponent {
   template = config.template.split('<div class="card-option-button-group">')[0]; // Remove config part of the template

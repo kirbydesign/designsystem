@@ -20,6 +20,7 @@ showFallbackImageOnError(event: ErrorEvent) {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  standalone: false,
 })
 export class AvatarExampleImageErrorComponent {
   template: string = config.template;

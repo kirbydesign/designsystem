@@ -14,6 +14,7 @@ import { FormFieldMessageComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockFormFieldMessageComponent),
     },
   ],
+  standalone: false,
 })
 export class MockFormFieldMessageComponent {
   @Input() text: string;

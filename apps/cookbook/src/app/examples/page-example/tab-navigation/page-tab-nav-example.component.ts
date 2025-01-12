@@ -54,6 +54,7 @@ const config = {
 };
 @Component({
   template: config.template,
+  standalone: false,
 })
 export class PageTabNavExampleComponent extends BasePageExampleComponent {
   selectedIndex = 0;

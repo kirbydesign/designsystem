@@ -24,6 +24,7 @@ const config = {
       }
     `,
   ],
+  standalone: false,
 })
 export class HeaderExampleSubtitleListComponent {
   template: string = config.template;

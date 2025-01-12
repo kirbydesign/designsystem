@@ -3,5 +3,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-styling-html-lists-example',
   templateUrl: './styling-html-lists-example.component.html',
   styleUrls: ['./styling-html-lists-example.component.scss'],
+  standalone: false,
 })
 export class StylingHtmlListsExampleComponent {}

@@ -13,6 +13,7 @@ import { SlidesComponent } from '@kirbydesign/designsystem/slide';
       useExisting: forwardRef(() => MockSlidesComponent),
     },
   ],
+  standalone: false,
 })
 export class MockSlidesComponent {
   @Input() slidesOptions: any;

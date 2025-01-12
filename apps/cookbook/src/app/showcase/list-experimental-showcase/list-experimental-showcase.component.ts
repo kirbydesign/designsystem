@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'cookbook-list-experimental-showcase',
   templateUrl: './list-experimental-showcase.component.html',
   styleUrls: ['./list-experimental-showcase.component.scss'],
+  standalone: false,
 })
 export class ListExperimentalShowcaseComponent {
   multipleListsExample: string = `<kirby-list-experimental>

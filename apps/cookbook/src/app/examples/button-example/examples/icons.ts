@@ -41,6 +41,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_responsive-grid-layout.scss',
+  standalone: false,
 })
 export class ButtonExampleIconsComponent {
   template: string = config.template;

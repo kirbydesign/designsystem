@@ -20,7 +20,6 @@ import { IonCheckbox } from '@ionic/angular/standalone';
 import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonCheckbox],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',

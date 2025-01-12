@@ -8,6 +8,7 @@ const { breakpoints } = DesignTokenHelper;
 @Component({
   selector: 'cookbook-grid-showcase',
   templateUrl: './grid-showcase.component.html',
+  standalone: false,
 })
 export class GridShowcaseComponent {
   shorthandToBreakpointMap = {

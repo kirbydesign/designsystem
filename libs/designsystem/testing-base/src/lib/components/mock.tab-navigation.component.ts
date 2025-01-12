@@ -14,6 +14,7 @@ import { TabNavigationComponent } from '@kirbydesign/designsystem/tab-navigation
       useExisting: forwardRef(() => MockTabNavigationComponent),
     },
   ],
+  standalone: false,
 })
 export class MockTabNavigationComponent {
   @Output() selectedIndexChange = new EventEmitter<number>();

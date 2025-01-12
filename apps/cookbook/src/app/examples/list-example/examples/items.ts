@@ -17,5 +17,6 @@ export const ListItemsExampleTemplate = `<kirby-list [items]="items">
       <kirby-page-content>${ListItemsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class ListItemsExampleComponent extends BaseListComponent {}

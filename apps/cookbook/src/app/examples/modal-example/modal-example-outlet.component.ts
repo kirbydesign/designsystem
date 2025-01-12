@@ -156,6 +156,7 @@ navigate() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-outlet.component.scss'],
+  standalone: false,
 })
 export class ModalExampleOutletComponent {
   static readonly template = config.template;

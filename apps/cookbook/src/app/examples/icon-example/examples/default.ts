@@ -26,6 +26,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
+  standalone: false,
 })
 export class IconDefaultExampleComponent {
   static htmlSnippet: string = config.htmlSnippet;

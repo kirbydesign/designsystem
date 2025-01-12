@@ -10,6 +10,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ProgressCircleExampleContentStepsComponent {
   template: string = config.template;

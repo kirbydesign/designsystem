@@ -17,5 +17,6 @@ export const ListItemsNoDividersExampleTemplate = `<kirby-list [items]="items" [
       <kirby-page-content>${ListItemsNoDividersExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class ListItemsNoDividersExampleComponent extends BaseListComponent {}

@@ -51,6 +51,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  standalone: false,
 })
 export class AvatarExampleColorsComponent {
   template: string = config.template;

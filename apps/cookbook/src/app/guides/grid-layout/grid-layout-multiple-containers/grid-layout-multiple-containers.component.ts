@@ -6,6 +6,7 @@ import exampleCss from '../../../examples/grid-layout-example/grid-layout-multip
 @Component({
   selector: 'cookbook-grid-layout-multiple-containers',
   templateUrl: './grid-layout-multiple-containers.component.html',
+  standalone: false,
 })
 export class GridLayoutMultipleContainersComponent {
   exampleHtml = exampleHtml;

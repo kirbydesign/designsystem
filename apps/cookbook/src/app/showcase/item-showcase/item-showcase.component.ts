@@ -8,6 +8,7 @@ import {
   selector: 'cookbook-item-showcase',
   templateUrl: './item-showcase.component.html',
   styleUrls: ['./item-showcase.component.scss'],
+  standalone: false,
 })
 export class ItemShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

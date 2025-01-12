@@ -27,6 +27,7 @@ const config = {
   selector: config.selector,
   styleUrls: ['./toggle-button-example.component.scss'],
   template: config.template,
+  standalone: false,
 })
 export class ToggleButtonExampleComponent {
   template = config.template;

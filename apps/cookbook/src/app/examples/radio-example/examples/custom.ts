@@ -55,6 +55,7 @@ selected = this.items[1];`,
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  standalone: false,
 })
 export class RadioCustomContentExampleComponent {
   template: string = `<!-- 1. Using slotted <kirby-radio> -->

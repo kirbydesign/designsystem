@@ -11,6 +11,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ItemExampleSimpleComponent {
   template: string = config.template;

@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-alert-showcase',
   templateUrl: './alert-showcase.component.html',
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class AlertShowcaseComponent {
   alertConfigWithIcon: string = AlertExampleComponent.alertConfigWithIcon;

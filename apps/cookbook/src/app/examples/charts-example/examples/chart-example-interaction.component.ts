@@ -39,6 +39,7 @@ _customOptions: ChartOptions = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ChartExampleInteractionComponent {
   template: string = config.template;

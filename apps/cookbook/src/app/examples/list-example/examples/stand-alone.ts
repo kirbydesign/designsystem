@@ -26,5 +26,6 @@ export const ListWithStandAloneExampleTemplate = `<kirby-list
       <kirby-page-content>${ListWithStandAloneExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class ListWithStandAloneExampleComponent extends BaseListComponent {}

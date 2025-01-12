@@ -19,6 +19,7 @@ import {
       useExisting: forwardRef(() => MockListItemComponent),
     },
   ],
+  standalone: false,
 })
 export class MockListItemComponent {
   @Input() item: any;

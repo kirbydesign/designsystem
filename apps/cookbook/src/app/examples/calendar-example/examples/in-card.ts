@@ -66,6 +66,7 @@ deselectDate() {
   selector: 'cookbook-calendar-card-example',
   template: config.template,
   styleUrls: ['./in-card.scss'],
+  standalone: false,
 })
 export class CalendarCardExampleComponent implements OnChanges {
   template: string = config.template;

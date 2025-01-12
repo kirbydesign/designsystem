@@ -16,6 +16,7 @@ import { ModalComponentExampleComponent } from '~/app/examples/modal-example/mod
   templateUrl: './modal-showcase.component.html',
   styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;

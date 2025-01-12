@@ -14,6 +14,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
       useExisting: forwardRef(() => MockBadgeComponent),
     },
   ],
+  standalone: false,
 })
 export class MockBadgeComponent {
   @Input() text: string;

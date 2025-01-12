@@ -29,6 +29,7 @@ import { ActivatedRoute } from '@angular/router';
     'kirby-modal-footer { --kirby-modal-footer-justify-content: flex-end; }',
     'h4 { margin-top: 24px; } ',
   ],
+  standalone: false,
 })
 export class ModalRoutePage1ExampleComponent {
   showFooter: boolean = true;

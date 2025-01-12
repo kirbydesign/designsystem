@@ -21,6 +21,7 @@ import { DropdownComponent } from './dropdown.component';
 @Component({
   template: '<ng-content></ng-content>',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 class OnPushHostComponent {}
 

@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-toggle-showcase',
   templateUrl: './toggle-showcase.component.html',
   styleUrls: ['./toggle-showcase.component.scss'],
+  standalone: false,
 })
 export class ToggleShowcaseComponent {
   exampleHtml = exampleHtml;

@@ -4,6 +4,7 @@ import { ChartConfigExample } from '../../examples/charts-example/examples/confi
 @Component({
   selector: 'cookbook-chart-config-guide',
   templateUrl: 'chart-config-guide.component.html',
+  standalone: false,
 })
 export class ChartConfigGuideComponent {
   public guideChartHtml = `<div style="position: relative; height: 300px;">

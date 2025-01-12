@@ -6,6 +6,7 @@ import exampleHtml from '../../examples/fonts-example/fonts-example.component.ht
   selector: 'cookbook-fonts-showcase',
   templateUrl: './fonts-showcase.component.html',
   styleUrls: ['./fonts-showcase.component.scss'],
+  standalone: false,
 })
 export class FontsShowcaseComponent {
   exampleHtml = exampleHtml;

@@ -4,6 +4,7 @@ import { ChartConfigExample } from '~/app/examples/charts-example/examples/confi
 @Component({
   selector: 'cookbook-chart-stock-config-showcase',
   templateUrl: './chart-config-bar-showcase.component.html',
+  standalone: false,
 })
 export class CookbookChartBarConfigShowcaseComponent {
   public data = ChartConfigExample.barDemoDataString;

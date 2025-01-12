@@ -21,6 +21,7 @@ import {
       useExisting: forwardRef(() => MockListComponent),
     },
   ],
+  standalone: false,
 })
 export class MockListComponent {
   @Input() items: any[];

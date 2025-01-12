@@ -10,6 +10,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class CheckboxMultilineExampleComponent {
   template: string = config.template;

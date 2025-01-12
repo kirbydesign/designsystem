@@ -9,7 +9,6 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
   imports: [CommonModule, ButtonComponent, CardModule, IconModule],
   templateUrl: './example-configuration-wrapper.component.html',
   styleUrls: ['./example-configuration-wrapper.component.scss'],
-  standalone: true,
 })
 export class ExampleConfigurationWrapperComponent {
   @Input()

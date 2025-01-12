@@ -12,6 +12,7 @@ import { DateInputDirective } from '@kirbydesign/designsystem/form-field';
       useExisting: forwardRef(() => MockDateInputDirective),
     },
   ],
+  standalone: false,
 })
 export class MockDateInputDirective {}
 

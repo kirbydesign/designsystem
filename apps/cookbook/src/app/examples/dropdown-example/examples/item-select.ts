@@ -15,6 +15,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class DropdownExampleItemSelectComponent {
   template: string = config.template;

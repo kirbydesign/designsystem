@@ -41,6 +41,7 @@ kirby-card {
   selector: config.selector,
   template: config.template,
   styleUrls: ['card-example.shared.scss', './background-image.scss'],
+  standalone: false,
 })
 export class CardExampleBackgroundImageComponent {
   template: string = config.template;

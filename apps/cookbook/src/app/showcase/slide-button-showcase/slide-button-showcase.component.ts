@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   selector: 'cookbook-slide-button-showcase',
   templateUrl: './slide-button-showcase.component.html',
+  standalone: false,
 })
 export class SlideButtonShowcaseComponent {
   exampleHtml = exampleHtml;

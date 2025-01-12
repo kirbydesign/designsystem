@@ -14,6 +14,7 @@ import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
       useExisting: forwardRef(() => MockToggleButtonComponent),
     },
   ],
+  standalone: false,
 })
 export class MockToggleButtonComponent {
   @Input() checked: boolean;

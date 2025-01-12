@@ -28,7 +28,6 @@ export enum SegmentedControlMode {
 type NoInfer<T> = [T][T extends any ? 0 : never];
 
 @Component({
-  standalone: true,
   imports: [IconModule, BadgeComponent, CommonModule, IonSegment, IonSegmentButton],
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',

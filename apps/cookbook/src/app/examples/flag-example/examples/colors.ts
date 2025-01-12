@@ -13,6 +13,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./flag-examples.shared.scss'],
+  standalone: false,
 })
 export class FlagExampleColorsComponent {
   template: string = config.template;

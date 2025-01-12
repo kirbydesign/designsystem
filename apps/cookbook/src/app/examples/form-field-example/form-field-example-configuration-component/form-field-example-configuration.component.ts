@@ -6,6 +6,7 @@ import { InputSize } from '@kirbydesign/designsystem';
   selector: 'cookbook-form-field-example-configuration',
   templateUrl: './form-field-example-configuration.component.html',
   styleUrls: ['./form-field-example-configuration.component.scss'],
+  standalone: false,
 })
 export class FormFieldExampleConfigurationComponent {
   items = [

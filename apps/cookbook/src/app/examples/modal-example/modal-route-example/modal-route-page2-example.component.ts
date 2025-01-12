@@ -28,6 +28,7 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
     'h4 { margin-top: 24px; } ',
     'kirby-modal-footer { --kirby-modal-footer-justify-content: space-between; }',
   ],
+  standalone: false,
 })
 export class ModalRoutePage2ExampleComponent {
   constructor(

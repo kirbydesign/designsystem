@@ -14,6 +14,7 @@ import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from '@kirbyde
       useExisting: forwardRef(() => MockItemSlidingComponent),
     },
   ],
+  standalone: false,
 })
 export class MockItemSlidingComponent {
   @Input() swipeActions: ItemSwipeAction[];

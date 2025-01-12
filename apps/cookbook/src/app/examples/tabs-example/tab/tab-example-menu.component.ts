@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
       </kirby-page-content>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class TabExampleMenuComponent {
   public menuItems = ['Overview', 'Transfer', 'Inbox', 'Settings', 'About'];

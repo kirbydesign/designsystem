@@ -14,6 +14,7 @@ import { TabButtonComponent } from '@kirbydesign/designsystem/tabs';
       useExisting: forwardRef(() => MockTabButtonComponent),
     },
   ],
+  standalone: false,
 })
 export class MockTabButtonComponent {
   @Input() tab: string;

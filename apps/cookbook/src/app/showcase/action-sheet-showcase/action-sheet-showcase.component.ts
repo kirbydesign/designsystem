@@ -6,6 +6,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-action-sheet-showcase',
   templateUrl: './action-sheet-showcase.component.html',
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ActionSheetShowcaseComponent {
   exampleHtml = exampleHtml;

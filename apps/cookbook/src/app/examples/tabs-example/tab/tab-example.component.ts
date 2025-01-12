@@ -67,6 +67,7 @@ import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/desi
       </kirby-fab-sheet>
     </kirby-page>
   `,
+  standalone: false,
 })
 export class TabExampleComponent implements OnInit {
   title: Observable<string>;

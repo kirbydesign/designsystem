@@ -14,6 +14,7 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
       useExisting: forwardRef(() => MockEmptyStateComponent),
     },
   ],
+  standalone: false,
 })
 export class MockEmptyStateComponent {
   @Input() iconName: string;

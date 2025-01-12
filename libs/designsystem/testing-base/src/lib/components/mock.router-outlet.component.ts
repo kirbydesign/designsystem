@@ -14,6 +14,7 @@ import { RouterOutletComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockRouterOutletComponent),
     },
   ],
+  standalone: false,
 })
 export class MockRouterOutletComponent {
   @Input() main: boolean;

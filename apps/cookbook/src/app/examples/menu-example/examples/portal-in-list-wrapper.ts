@@ -14,5 +14,6 @@ import { Component } from '@angular/core';
       </kirby-list-item>
     </kirby-list>
   `,
+  standalone: false,
 })
 export class PortalInListWrapperComponent {}

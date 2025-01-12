@@ -15,6 +15,7 @@ import { Observable } from 'rxjs/internal/Observable';
       useExisting: forwardRef(() => MockAlertComponent),
     },
   ],
+  standalone: false,
 })
 export class MockAlertComponent {
   @Input() title: string | Observable<string>;

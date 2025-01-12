@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'cookbook-tabs-example',
   templateUrl: './tabs-example.component.html',
   styleUrls: ['./tabs-example.component.scss'],
+  standalone: false,
 })
 export class TabsExampleComponent {}

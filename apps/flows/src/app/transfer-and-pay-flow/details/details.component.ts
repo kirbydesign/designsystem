@@ -7,6 +7,7 @@ import { VerifyService } from '../verify.service';
   selector: 'flows-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
+  standalone: false,
 })
 export class DetailsComponent {
   verified: boolean = false;

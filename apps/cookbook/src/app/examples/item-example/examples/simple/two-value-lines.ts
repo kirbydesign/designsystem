@@ -14,6 +14,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class ItemExampleSimpleTwoValueLinesComponent {
   template: string = config.template;

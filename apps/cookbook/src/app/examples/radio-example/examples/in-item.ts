@@ -26,6 +26,7 @@ selected = this.items[2];`,
 @Component({
   selector: config.selector,
   template: config.template,
+  standalone: false,
 })
 export class RadioInItemExampleComponent {
   template: string = config.template;

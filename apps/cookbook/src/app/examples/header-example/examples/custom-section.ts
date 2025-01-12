@@ -21,6 +21,7 @@ export const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  standalone: false,
 })
 export class HeaderExampleCustomSectionComponent {
   template = config.template;

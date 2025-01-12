@@ -5,6 +5,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-progress-circle-showcase',
   templateUrl: './progress-circle-showcase.component.html',
   styleUrls: ['./progress-circle-showcase.component.scss'],
+  standalone: false,
 })
 export class ProgressCircleShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

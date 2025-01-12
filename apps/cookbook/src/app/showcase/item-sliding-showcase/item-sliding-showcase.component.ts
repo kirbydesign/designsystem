@@ -4,6 +4,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   selector: 'cookbook-item-sliding-showcase',
   templateUrl: './item-sliding-showcase.component.html',
+  standalone: false,
 })
 export class ItemSlidingShowcaseComponent {
   _cardHasPadding = true;

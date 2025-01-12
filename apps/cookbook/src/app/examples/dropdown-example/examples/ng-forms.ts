@@ -75,6 +75,7 @@ toggleRequired(required: boolean) {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  standalone: false,
 })
 export class DropdownExampleNgFormsComponent implements OnInit {
   template: string = config.template.split('<fieldset>')[0]; // Remove config part of the template
