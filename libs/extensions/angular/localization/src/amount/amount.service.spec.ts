@@ -2,6 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
 
+import { LOCALE_ID } from '@angular/core';
 import { KIRBY_EXTENSIONS_LOCALIZATION_TOKEN } from '../di-tokens';
 import { AmountService } from './amount.service';
 import { Amount } from './amount.model';
@@ -14,11 +15,11 @@ describe('AmountService', () => {
   const createService = createServiceFactory({
     service: AmountService,
     providers: [
+      { provide: LOCALE_ID, useValue: 'da' },
       {
         provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
         useValue: {
           nativeCurrency: 'DKK',
-          locale: 'da',
         },
       },
     ],

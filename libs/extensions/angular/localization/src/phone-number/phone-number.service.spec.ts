@@ -1,5 +1,6 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
 
+import { LOCALE_ID } from '@angular/core';
 import { KIRBY_EXTENSIONS_LOCALIZATION_TOKEN } from '../di-tokens';
 import { PhoneNumber } from './phone-number';
 import { PhoneNumberService } from './phone-number.service';
@@ -9,11 +10,11 @@ describe('PhoneNumberService', () => {
   const createService = createServiceFactory({
     service: PhoneNumberService,
     providers: [
+      { provide: LOCALE_ID, useValue: 'da' },
       {
         provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
         useValue: {
           countryCode: '+45',
-          locale: 'da',
           defaultLang: 'da',
         },
       },
@@ -76,10 +77,10 @@ describe('PhoneNumberService foreign', () => {
   const createService = createServiceFactory({
     service: PhoneNumberService,
     providers: [
+      { provide: LOCALE_ID, useValue: 'us' },
       {
         provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
         useValue: {
-          locale: 'us',
           countryCode: '+45',
         },
       },

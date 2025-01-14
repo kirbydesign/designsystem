@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, LOCALE_ID } from '@angular/core';
 
 import { KIRBY_EXTENSIONS_LOCALIZATION_TOKEN } from '../di-tokens';
 import { PhoneNumber } from './phone-number';
@@ -8,6 +8,7 @@ import { PhoneNumber } from './phone-number';
 })
 export class PhoneNumberService {
   private config = inject(KIRBY_EXTENSIONS_LOCALIZATION_TOKEN);
+  private locale = inject(LOCALE_ID);
 
   private static chunkUpPhoneNumber(str: string, chunk: number): string {
     return str.match(new RegExp(`.{1,${chunk}}`, 'g'))?.join(' ') ?? '';
@@ -27,7 +28,7 @@ export class PhoneNumberService {
     }
 
     if (showCountryCode === undefined) {
-      showCountryCode = !this.config.locale.match(`${this.config.defaultLang}.*`);
+      showCountryCode = !this.locale.match(`${this.config.defaultLang}.*`);
     }
 
     const formattedNumber = PhoneNumberService.chunkUpPhoneNumber(number, chunk);

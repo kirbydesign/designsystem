@@ -1,4 +1,4 @@
-import { inject, PipeTransform } from '@angular/core';
+import { inject, LOCALE_ID, PipeTransform } from '@angular/core';
 import { KIRBY_EXTENSIONS_LOCALIZATION_TOKEN } from '../di-tokens';
 import { DateFormats } from './date-formats';
 
@@ -9,6 +9,7 @@ import { DateFormats } from './date-formats';
  */
 export abstract class AbstractTimezoneCompensatingPipe implements PipeTransform {
   private config = inject(KIRBY_EXTENSIONS_LOCALIZATION_TOKEN);
+  private locale = inject(LOCALE_ID);
 
   abstract transform(value: unknown, ...args: unknown[]): unknown;
 
@@ -22,7 +23,7 @@ export abstract class AbstractTimezoneCompensatingPipe implements PipeTransform 
     const timeZone = this.config.timeZone;
     const options = this.getIntlOptions(formatPattern);
 
-    const formatter = new Intl.DateTimeFormat(this.config.locale, { ...options, timeZone });
+    const formatter = new Intl.DateTimeFormat(this.locale, { ...options, timeZone });
     let formattedDate = formatter.format(date);
 
     // Capitalize month abbreviation and remove trailing period for `MEDIUM_LETTER_DATE_FORMAT`

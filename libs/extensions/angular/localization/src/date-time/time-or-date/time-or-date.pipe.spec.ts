@@ -1,21 +1,21 @@
 import { createPipeFactory } from '@ngneat/spectator/jest';
 import { format, toZonedTime } from 'date-fns-tz';
 
+import { LOCALE_ID } from '@angular/core';
 import { KIRBY_EXTENSIONS_LOCALIZATION_TOKEN } from '../../di-tokens';
 import { TimeOrDatePipe } from './time-or-date.pipe';
 
 const timeZone = 'Europe/Copenhagen';
-const locale = 'da';
 
 describe('TimeOrDatePipe', () => {
   const createPipe = createPipeFactory({
     pipe: TimeOrDatePipe,
     providers: [
+      { provide: LOCALE_ID, useValue: 'da' },
       {
         provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
         useValue: {
           timeZone,
-          locale,
         },
       },
     ],
@@ -85,8 +85,7 @@ describe('TimeOrDatePipe', () => {
         date,
       },
     });
-    expect(spectator.element).toHaveExactText('24. Jan 1981'); // January
-    // If locale('da'), then the expected is: '24. jan. 1981' (januar)
+    expect(spectator.element).toHaveExactText('24. Jan 1981');
   });
 
   [null, undefined].forEach((absent) => {

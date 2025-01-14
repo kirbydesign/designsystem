@@ -42,7 +42,6 @@ const meta: Meta<AmountExampleComponent> = {
           provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
           useValue: {
             nativeCurrency: 'DKK',
-            locale: 'da',
           },
         },
       ],
@@ -104,7 +103,6 @@ export const AmountUSD: Story = {
           provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
           useValue: {
             nativeCurrency: 'USD',
-            locale: 'en',
           },
         },
       ],

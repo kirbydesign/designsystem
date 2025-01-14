@@ -31,9 +31,4 @@ interface KirbyExtensionsToken {
    * @example 'Europe/Copenhagen'
    */
   timeZone: string;
-  /**
-   * Locale for the application
-   * @example 'da'
-   */
-  locale: string;
 }

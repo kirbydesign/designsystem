@@ -1,5 +1,6 @@
 import { createPipeFactory, SpectatorPipe } from '@ngneat/spectator/jest';
 
+import { LOCALE_ID } from '@angular/core';
 import { KIRBY_EXTENSIONS_LOCALIZATION_TOKEN } from '../../di-tokens';
 import { TimeOnlyPipe } from './time-only.pipe';
 
@@ -9,11 +10,11 @@ describe('TimeOnlyPipe', () => {
   const createPipe = createPipeFactory({
     pipe: TimeOnlyPipe,
     providers: [
+      { provide: LOCALE_ID, useValue: 'da' },
       {
         provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
         useValue: {
           timeZone: 'Europe/Copenhagen',
-          locale: 'da',
         },
       },
     ],
