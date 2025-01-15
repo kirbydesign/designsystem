@@ -25,13 +25,12 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     ion-toggle {
       position: initial;
 
-      &.in-item.toggle-label-placement-start::part(label),
-      &.in-item.toggle-label-placement-end::part(label) {
-        margin-inline: 0;
+      &::part(label) {
+        position: initial;
       }
 
-      &::part(toggle-wrapper) {
-        position: initial;
+      &.in-item::part(label-text-wrapper) {
+        margin-inline: 0;
       }
     }
 
@@ -104,6 +103,11 @@ ion-toggle {
     }
   }
 
+  ::part(label-text-wrapper) {
+    line-height: utils.line-height('n');
+    white-space: pre-line;
+  }
+
   // Overrides for kirby-checkbox inside kirby-item
   &.in-item {
     &::part(label) {
@@ -111,18 +115,19 @@ ion-toggle {
       padding-inline: 0;
     }
 
-    &::part(label) {
+    &::part(label),
+    &::part(label-text-wrapper) {
       margin-block: 0;
     }
 
     &.toggle-label-placement-start {
-      &::part(label) {
+      &::part(label-text-wrapper) {
         margin-inline: 0 $spacing-to-label;
       }
     }
 
     &.toggle-label-placement-end {
-      &::part(label) {
+      &::part(label-text-wrapper) {
         margin-inline: $spacing-to-label 0;
       }
     }
@@ -137,4 +142,16 @@ ion-toggle {
 */
 ion-toggle.in-item.legacy-toggle {
   padding: 0;
+}
+
+:host-context(kirby-item) {
+  z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+
+  ion-toggle {
+    margin: 0;
+  }
+
+  &[slot='start'] {
+    margin-inline-end: $spacing-to-label;
+  }
 }

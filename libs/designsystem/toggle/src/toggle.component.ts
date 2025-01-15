@@ -57,7 +57,10 @@ export class ToggleComponent implements ControlValueAccessor, OnInit, AfterViewI
     const slot = this.elementRef.nativeElement.getAttribute('slot');
     if (slot === 'end' && this._hasSlottedContent) {
       this._justify = 'space-between';
-      this._labelPlacement = 'start';
+    }
+
+    if (slot === 'start' && this._hasSlottedContent) {
+      this._labelPlacement = 'end';
     }
 
     this.inheritAriaAttributes();
@@ -91,13 +94,18 @@ export class ToggleComponent implements ControlValueAccessor, OnInit, AfterViewI
   @Output() checkedChange = new EventEmitter<boolean>();
 
   _justify: 'start' | 'end' | 'space-between' = 'start';
-  _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'end';
+  _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'start';
   _hasSlottedContent: boolean;
 
   _pressed = false;
 
   ngAfterViewInit(): void {
-    this.ionicElementPartHelper.setPart('toggle-wrapper', this.ionToggleElement, '.toggle-wrapper');
+    this.ionicElementPartHelper.setPart('label', this.ionToggleElement, '.toggle-wrapper');
+    this.ionicElementPartHelper.setPart(
+      'label-text-wrapper',
+      this.ionToggleElement,
+      '.label-text-wrapper'
+    );
   }
 
   onCheckedChange(checked: boolean): void {
