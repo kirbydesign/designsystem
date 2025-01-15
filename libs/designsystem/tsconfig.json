@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "declarationMap": true
+    "esModuleInterop": true
   },
   "references": [
     {
