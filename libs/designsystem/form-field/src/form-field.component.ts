@@ -138,7 +138,8 @@ export class FormFieldComponent
   }
 
   ngAfterContentInit(): void {
-    this.initializeNestedInteractive();
+    this.initializeNestedInteractiveElement();
+    this.setNestedInteractiveElementAttributes();
     this.subscribeToNestedInteractiveError();
 
     // Measure the width of all slotted affix elements,
@@ -163,7 +164,8 @@ export class FormFieldComponent
 
   ngAfterContentChecked(): void {
     if (!this.nestedInteractiveElement) {
-      this.initializeNestedInteractive();
+      this.initializeNestedInteractiveElement();
+      this.setNestedInteractiveElementAttributes();
       this.subscribeToNestedInteractiveError();
     }
 
@@ -194,12 +196,14 @@ export class FormFieldComponent
     this.nestedInteractiveErrorSubscription.unsubscribe();
   }
 
-  private initializeNestedInteractive() {
+  private initializeNestedInteractiveElement() {
     this.nestedInteractiveElement =
       this.input?.nativeElement ||
       this.textarea?.nativeElement ||
       this.radioGroupElement?.nativeElement.querySelector('ion-radio-group');
+  }
 
+  private setNestedInteractiveElementAttributes() {
     if (!this.nestedInteractiveElement) return;
 
     if (this.message) {
