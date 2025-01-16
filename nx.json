@@ -101,5 +101,6 @@
         "cacheableOperations": ["build-storybook", "build-storybook"]
       }
     }
-  }
+  },
+  "useLegacyCache": true
 }
