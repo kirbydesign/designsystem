@@ -167,7 +167,7 @@ export class FormFieldComponent
       this.subscribeToNestedInteractiveError();
     }
 
-    if (!this.isRegistered && this.element.isConnected && !!this.nestedInteractiveElement) {
+    if (!this.isRegistered && this.element.isConnected && (this.input || this.textarea)) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
