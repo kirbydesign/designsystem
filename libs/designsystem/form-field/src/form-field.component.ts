@@ -114,6 +114,7 @@ export class FormFieldComponent
 
   public focus() {
     if (!this.nestedInteractiveElement) return;
+    if (!(this.input || this.textarea)) return;
 
     /*
      * This timeout ensures that any previous manipulation of inputElement
