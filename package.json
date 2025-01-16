@@ -78,7 +78,5 @@
       "post-merge": "post-npm-install"
     }
   },
-  "dependencies": {
-    "@angular/core": "19.0.6"
-  }
+  "dependencies": {}
 }
