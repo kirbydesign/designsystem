@@ -350,32 +350,15 @@ export const routes: ModalEnabledRoutes = [
           },
         ],
       },
-      {
-        path: 'form-field',
-        children: [
-          {
-            path: '',
-            component: FormFieldExampleComponent,
-          },
-          {
-            path: 'date',
-            component: FormFieldInputDateExampleComponent,
-          },
-          {
-            path: 'date-native',
-            component: FormFieldInputDateNativeExampleComponent,
-          },
-          {
-            path: 'decimal-mask',
-            component: FormFieldInputDecimalMaskExampleComponent,
-          },
-        ],
-      },
     ],
   },
   {
     path: 'item',
     component: ItemExampleComponent,
+  },
+  {
+    path: 'form-field',
+    component: FormFieldExampleComponent,
   },
   {
     path: 'item-sliding',
