@@ -35,6 +35,7 @@ const template = `<!-- This container is only needed due to layout of larger scr
   selector: 'cookbook-fixed-footer-tabs-example',
   template,
   styleUrls: ['./fixed-footer-tabs-example.component.scss'],
+  standalone: false,
 })
 export class PageFixedFooterTabsExampleComponent {
   static template = template;
