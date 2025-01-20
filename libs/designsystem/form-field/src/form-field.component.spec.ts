@@ -108,7 +108,7 @@ describe('FormFieldComponent', () => {
 
     it('should render the label with correct margin', () => {
       expect(labelTextElement).toHaveComputedStyle({
-        'margin-bottom': size('xxxs'),
+        'margin-bottom': size('xxs'),
       });
     });
   });
