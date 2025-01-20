@@ -11,7 +11,6 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
-import { PageModule } from '@kirbydesign/designsystem/page';
 import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { FormFieldInputAffixExampleComponent } from './examples/input/affix';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';

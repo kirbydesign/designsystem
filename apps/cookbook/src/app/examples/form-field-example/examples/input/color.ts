@@ -19,7 +19,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['../../form-field-example.component.scss'],
+  styleUrl: 'color.scss',
   standalone: false,
 })
 export class FormFieldInputColorExampleComponent {
