@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { HeaderExampleDefaultComponent } from './examples/default';
 import { HeaderExampleSubtitleListComponent } from './examples/subtitles';
 import { HeaderExampleFlagComponent } from './examples/flag';
@@ -26,5 +27,6 @@ import { HeaderExampleCombinedComponent } from './examples/combined';
     HeaderExampleCustomSectionComponent,
     HeaderExampleCombinedComponent,
   ],
+  providers: [ToastHelper, ToastController],
 })
 export class HeaderExampleComponent {}

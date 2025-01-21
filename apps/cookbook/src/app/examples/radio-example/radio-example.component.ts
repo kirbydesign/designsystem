@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { RadioExampleBindingComponent } from './examples/binding';
 import { RadioStatesExampleComponent } from './examples/states';
 import { RadioSizesExampleComponent } from './examples/sizes';
@@ -24,5 +25,6 @@ import { RadioTemplateDrivenFormsExampleComponent } from './examples/template-dr
     RadioReactiveFormsExampleComponent,
     RadioTemplateDrivenFormsExampleComponent,
   ],
+  providers: [ToastHelper, ToastController],
 })
 export class RadioExampleComponent {}

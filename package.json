@@ -62,6 +62,7 @@
     "nx-stylelint": "^17.1.4",
     "post-npm-install": "^2.0.0",
     "prettier": "^3.3.3",
+    "sass": "^1.83.4",
     "storybook": "^8.4.4",
     "stylelint": "^16.3.1",
     "stylelint-config-prettier-scss": "^1.0.0",
@@ -76,6 +77,5 @@
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
-  },
-  "dependencies": {}
+  }
 }

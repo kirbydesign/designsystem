@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { CheckboxConfirmExampleComponent } from './examples/confirm';
 import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxListExampleComponent } from './examples/list';
@@ -20,5 +21,6 @@ import { CheckboxEventsExampleComponent } from './examples/events';
     CheckboxMultilineExampleComponent,
     CheckboxEventsExampleComponent,
   ],
+  providers: [ToastHelper, ToastController],
 })
 export class CheckboxExampleComponent {}

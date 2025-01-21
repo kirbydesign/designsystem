@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { AccordionDefaultExampleComponent } from './examples/default';
 import { AccordionExpandedExampleComponent } from './examples/expanded';
 import { AccordionCardExampleComponent } from './examples/card';
@@ -18,5 +19,6 @@ import { AccordionEventsExampleComponent } from './examples/events';
     AccordionWithItemsInCardExampleComponent,
     AccordionEventsExampleComponent,
   ],
+  providers: [ToastHelper, ToastController],
 })
 export class AccordionExampleComponent {}

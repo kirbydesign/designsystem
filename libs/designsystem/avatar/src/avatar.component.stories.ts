@@ -2,13 +2,13 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 
-import { AvatarExampleModule } from '~/app/examples/avatar-example/avatar-example.module';
+import { AvatarExampleComponent } from '~/app/examples/avatar-example/avatar-example.component';
 
 const meta: Meta<AvatarComponent> = {
   component: AvatarComponent,
   decorators: [
     moduleMetadata({
-      imports: [AvatarExampleModule],
+      imports: [AvatarExampleComponent],
     }),
   ],
   title: 'Components / Avatar',

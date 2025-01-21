@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { DataTableDefaultExampleComponent } from './examples/default';
 import { DataTableCardExampleComponent } from './examples/card';
 import { DataTableSortableExampleComponent } from './examples/sortable';
@@ -12,5 +13,6 @@ import { DataTableSortableExampleComponent } from './examples/sortable';
     DataTableCardExampleComponent,
     DataTableSortableExampleComponent,
   ],
+  providers: [ToastHelper, ToastController],
 })
 export class DataTableExampleComponent {}
