@@ -24,8 +24,8 @@ const DECLARATIONS = [
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormStateExampleModule,
+    ...DECLARATIONS,
   ],
-  declarations: DECLARATIONS,
   exports: DECLARATIONS,
 })
 export class ToggleExampleModule {}

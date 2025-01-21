@@ -1,5 +1,17 @@
 import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
 import { AlertConfig, COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { NgIf } from '@angular/common';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import {
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
+import { ModalExampleAlertWithGuardStepperComponent } from './modal-example-alert-with-guard-stepper.component';
 
 const config = {
   template: `<kirby-page-title>Modal with alert</kirby-page-title>
@@ -82,7 +94,18 @@ validate(): boolean | AlertConfig {
       }
     `,
   ],
-  standalone: false,
+  imports: [
+    PageModule,
+    NgIf,
+    ModalExampleAlertWithGuardStepperComponent,
+    DividerComponent,
+    FormFieldModule,
+    DateInputDirective,
+    InputComponent,
+    FormsModule,
+    ButtonComponent,
+    ModalFooterComponent,
+  ],
 })
 export class ModalEmbeddedAlertExampleComponent implements OnInit {
   constructor(

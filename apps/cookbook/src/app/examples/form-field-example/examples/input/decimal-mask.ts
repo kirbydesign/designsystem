@@ -1,6 +1,12 @@
 import { Component, Input } from '@angular/core';
 
 import { InputSize } from '@kirbydesign/designsystem';
+import {
+  DateInputDirective,
+  DecimalMaskDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
 
 const config = {
   selector: 'cookbook-form-field-input-decimal-mask-example',
@@ -13,7 +19,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [FormFieldModule, DateInputDirective, InputComponent, DecimalMaskDirective],
 })
 export class FormFieldInputDecimalMaskExampleComponent {
   template: string = config.template;

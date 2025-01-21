@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
@@ -36,6 +40,6 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
     </kirby-page>
   `,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
-  standalone: false,
+  imports: [PageModule, ListModule, ItemModule, ButtonComponent],
 })
 export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {}

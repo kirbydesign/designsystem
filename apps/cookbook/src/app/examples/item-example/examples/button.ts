@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
   selector: 'cookbook-item-example-button',
@@ -14,7 +16,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ItemModule, ButtonComponent],
 })
 export class ItemExampleButtonComponent {
   template: string = config.template;

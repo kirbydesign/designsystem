@@ -5,6 +5,7 @@ import { map, takeUntil, takeWhile } from 'rxjs/operators';
 import { ModalController } from '@kirbydesign/designsystem';
 import { AlertConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const alertConfigWithIcon = {
   title: 'Alert With Icon',
@@ -18,7 +19,7 @@ const alertConfigWithIcon = {
   selector: 'cookbook-alert-example',
   templateUrl: './alert-example.component.html',
   styles: [':host { display: block; }'],
-  standalone: false,
+  imports: [ButtonComponent],
 })
 export class AlertExampleComponent {
   static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExampleComponent.stringify(

@@ -9,8 +9,7 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-list-example
 const virtualScrollExampleComponents = [VirtualScrollListExampleComponent];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ScrollingModule],
-  declarations: [...virtualScrollExampleComponents],
+  imports: [CommonModule, KirbyModule, ScrollingModule, ...virtualScrollExampleComponents],
   exports: [...virtualScrollExampleComponents],
 })
 export class VirtualScrollExampleModule {}

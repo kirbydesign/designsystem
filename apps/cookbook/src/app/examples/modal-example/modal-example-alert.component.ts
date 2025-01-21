@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { ModalConfig, ModalController, ModalFlavor } from '@kirbydesign/designsystem';
 
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-example-embedded-alert.component';
 
 const config = {
@@ -42,7 +43,7 @@ validate(): boolean | AlertConfig {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-simple.component.scss'],
-  standalone: false,
+  imports: [ButtonComponent],
 })
 export class ModalExampleAlertComponent {
   static readonly template = config.template;

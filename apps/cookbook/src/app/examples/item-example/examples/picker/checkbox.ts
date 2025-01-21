@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const config = {
   selector: 'cookbook-item-example-picker-checkbox',
@@ -18,7 +20,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ItemModule, CheckboxComponent],
 })
 export class ItemExamplePickerCheckboxComponent {
   template: string = config.template;

@@ -1,13 +1,42 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { DropdownExampleConfigurationComponent } from '../../examples/dropdown-example/dropdown-example-configuration-component/dropdown-example-configuration.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { DropdownExampleDefaultComponent } from '../../examples/dropdown-example/examples/default';
+import { DropdownExampleScrollComponent } from '../../examples/dropdown-example/examples/scroll';
+import { DropdownExamplePreSelectedComponent } from '../../examples/dropdown-example/examples/pre-selected';
+import { DropdownExampleExpandComponent } from '../../examples/dropdown-example/examples/expand';
+import { DropdownExampleRightAlignedComponent } from '../../examples/dropdown-example/examples/right-aligned';
+import { DropdownExampleAttentionLevelComponent } from '../../examples/dropdown-example/examples/attention-level';
+import { DropdownExampleItemSelectComponent } from '../../examples/dropdown-example/examples/item-select';
+import { DropdownExampleCustomItemTemplateComponent } from '../../examples/dropdown-example/examples/custom-item-template';
+import { DropdownExampleNgFormsComponent } from '../../examples/dropdown-example/examples/ng-forms';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
   templateUrl: './dropdown-showcase.component.html',
   styleUrls: ['./dropdown-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    DropdownExampleConfigurationComponent,
+    ExampleViewerComponent,
+    DropdownExampleDefaultComponent,
+    DropdownExampleScrollComponent,
+    DropdownExamplePreSelectedComponent,
+    DropdownExampleExpandComponent,
+    DropdownExampleRightAlignedComponent,
+    DropdownExampleAttentionLevelComponent,
+    DropdownExampleItemSelectComponent,
+    DropdownExampleCustomItemTemplateComponent,
+    DropdownExampleNgFormsComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+    ApiDescriptionMethodsComponent,
+  ],
 })
 export class DropdownShowcaseComponent {
   size: string = 'md';

@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { CardModule } from '@kirbydesign/designsystem/card';
 import exampleHtml from '../../examples/badge-example/badge-example.component.html?raw';
+import { BadgeExampleNumberComponent } from '../../examples/badge-example/examples/badge-example-number.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { BadgeExampleTextComponent } from '../../examples/badge-example/examples/badge-example-text.component';
+import { BadgeExampleIconComponent } from '../../examples/badge-example/examples/badge-example-icon.component';
+import { BadgeExampleSmallComponent } from '../../examples/badge-example/examples/badge-example-small.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -8,7 +16,16 @@ import {
 @Component({
   selector: 'cookbook-badge-showcase',
   templateUrl: './badge-showcase.component.html',
-  standalone: false,
+  imports: [
+    DividerComponent,
+    CardModule,
+    BadgeExampleNumberComponent,
+    ExampleViewerComponent,
+    BadgeExampleTextComponent,
+    BadgeExampleIconComponent,
+    BadgeExampleSmallComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class BadgeShowcaseComponent {
   exampleHtml = exampleHtml;

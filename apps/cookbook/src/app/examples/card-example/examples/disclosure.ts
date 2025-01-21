@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { noop } from 'rxjs';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-card-example-disclosure',
@@ -33,7 +36,7 @@ const config = {
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
   styles: [config.style],
-  standalone: false,
+  imports: [CardModule, ItemModule, FlagComponent],
 })
 export class CardExampleDisclosureComponent {
   template: string = config.template;

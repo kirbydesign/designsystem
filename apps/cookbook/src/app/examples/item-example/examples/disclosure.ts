@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-item-example-disclosure',
@@ -16,7 +20,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ItemModule, AvatarComponent, IconModule, FlagComponent],
 })
 export class ItemExampleDisclosureComponent {
   template: string = config.template;

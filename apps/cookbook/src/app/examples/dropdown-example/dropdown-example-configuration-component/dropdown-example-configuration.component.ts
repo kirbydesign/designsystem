@@ -4,7 +4,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'cookbook-dropdown-example-configuration',
   templateUrl: './dropdown-example-configuration.component.html',
   styleUrls: ['./dropdown-example-configuration.component.scss'],
-  standalone: false,
 })
 export class DropdownExampleConfigurationComponent {
   @Input() size: 'sm' | 'md';

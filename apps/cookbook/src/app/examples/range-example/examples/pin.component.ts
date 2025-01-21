@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const config = {
   selector: 'cookbook-range-pin-example',
@@ -15,7 +16,7 @@ const pinFormatterExample = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [RangeComponent],
 })
 export class RangePinExampleComponent {
   template: string = config.template;

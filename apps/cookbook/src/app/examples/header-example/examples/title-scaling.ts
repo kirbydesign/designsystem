@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
 
 const config = {
   selector: 'cookbook-header-example-title-scaling',
@@ -9,7 +10,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [HeaderModule],
 })
 export class HeaderExampleTitleScalingComponent {
   template: string = config.template;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RadioModule } from '@kirbydesign/designsystem/radio';
 
 const config = {
   selector: 'cookbook-radio-multiline-example',
@@ -10,7 +11,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [RadioModule],
 })
 export class RadioMultilineExampleComponent {
   template: string = config.template;

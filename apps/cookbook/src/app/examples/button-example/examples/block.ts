@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
   selector: 'cookbook-button-example-block',
@@ -9,7 +10,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  standalone: false,
+  imports: [ButtonComponent],
 })
 export class ButtonExampleBlockComponent {
   template: string = config.template;

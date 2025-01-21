@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-selectable-example',
@@ -19,7 +21,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [MenuComponent, ItemModule],
 })
 export class MenuSelectableExampleComponent {
   template: string = config.template;

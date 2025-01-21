@@ -42,7 +42,6 @@ private createChart() {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
 })
 export class ChartExampleConfigBaseBarComponent implements AfterViewInit, OnDestroy {
   public template: string = config.template;

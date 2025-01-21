@@ -1,14 +1,59 @@
 import { Component } from '@angular/core';
 import { InputSize } from '@kirbydesign/designsystem';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { FormFieldExampleConfigurationComponent } from '../../examples/form-field-example/form-field-example-configuration-component/form-field-example-configuration.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { FormFieldInputDefaultExampleComponent } from '../../examples/form-field-example/examples/input/default';
+import { FormFieldInputColorExampleComponent } from '../../examples/form-field-example/examples/input/color';
+import { FormFieldInputLabelExampleComponent } from '../../examples/form-field-example/examples/input/label';
+import { FormFieldInputLabelMessageExampleComponent } from '../../examples/form-field-example/examples/input/label-message';
+import { FormFieldInputAffixExampleComponent } from '../../examples/form-field-example/examples/input/affix';
+import { FormFieldInputCounterExampleComponent } from '../../examples/form-field-example/examples/input/counter';
+import { FormFieldInputNumericExampleComponent } from '../../examples/form-field-example/examples/input/numeric';
+import { FormFieldInputDecimalMaskExampleComponent } from '../../examples/form-field-example/examples/input/decimal-mask';
+import { FormFieldInputDateExampleComponent } from '../../examples/form-field-example/examples/input/date';
+import { FormFieldInputDateNativeExampleComponent } from '../../examples/form-field-example/examples/input/date-native';
+import { FormFieldInputDisabledExampleComponent } from '../../examples/form-field-example/examples/input/disabled';
+import { FormFieldInputErrorExampleComponent } from '../../examples/form-field-example/examples/input/error';
+import { FormFieldInputBorderlessExampleComponent } from '../../examples/form-field-example/examples/input/borderless';
+import { FormFieldFocusExampleComponent } from '../../examples/form-field-example/examples/input/focus';
+import { FormFieldTextareaDefaultExampleComponent } from '../../examples/form-field-example/examples/textarea/default';
+import { FormFieldTextareaLabelExampleComponent } from '../../examples/form-field-example/examples/textarea/label';
+import { FormFieldTextareaCounterExampleComponent } from '../../examples/form-field-example/examples/textarea/counter';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
 @Component({
   selector: 'cookbook-form-field-showcase',
   templateUrl: './form-field-showcase.component.html',
   styleUrls: ['./form-field-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    FormFieldExampleConfigurationComponent,
+    ExampleViewerComponent,
+    FormFieldInputDefaultExampleComponent,
+    FormFieldInputColorExampleComponent,
+    FormFieldInputLabelExampleComponent,
+    FormFieldInputLabelMessageExampleComponent,
+    FormFieldInputAffixExampleComponent,
+    FormFieldInputCounterExampleComponent,
+    FormFieldInputNumericExampleComponent,
+    FormFieldInputDecimalMaskExampleComponent,
+    FormFieldInputDateExampleComponent,
+    FormFieldInputDateNativeExampleComponent,
+    FormFieldInputDisabledExampleComponent,
+    FormFieldInputErrorExampleComponent,
+    FormFieldInputBorderlessExampleComponent,
+    FormFieldFocusExampleComponent,
+    FormFieldTextareaDefaultExampleComponent,
+    FormFieldTextareaLabelExampleComponent,
+    FormFieldTextareaCounterExampleComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionMethodsComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class FormFieldShowcaseComponent {
   size: InputSize;

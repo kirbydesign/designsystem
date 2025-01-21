@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const config = {
   selector: 'cookbook-checkbox-events-example',
@@ -16,7 +17,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [CheckboxComponent],
 })
 export class CheckboxEventsExampleComponent {
   template: string = config.template;

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-item-example-settings-disabled',
@@ -11,7 +13,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ItemModule, ToggleComponent],
 })
 export class ItemExampleSettingsDisabledComponent {
   template: string = config.template;

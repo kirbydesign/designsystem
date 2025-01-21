@@ -1,10 +1,21 @@
 import { Component } from '@angular/core';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { ItemSlidingSimpleExampleComponent } from '../../examples/item-sliding-example/examples/item-sliding-simple-example.component';
+import { ItemSlidingConditionalExampleComponent } from '../../examples/item-sliding-example/examples/item-sliding-conditional-example.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-item-sliding-showcase',
   templateUrl: './item-sliding-showcase.component.html',
-  standalone: false,
+  imports: [
+    CardModule,
+    ExampleViewerComponent,
+    ItemSlidingSimpleExampleComponent,
+    ItemSlidingConditionalExampleComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class ItemSlidingShowcaseComponent {
   _cardHasPadding = true;

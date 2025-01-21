@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-progress-circle-example-content-avatar',
@@ -36,7 +40,7 @@ const config = {
       }
     `,
   ],
-  standalone: false,
+  imports: [ProgressCircleComponent, AvatarComponent, ThemeColorDirective, IconModule],
 })
 export class ProgressCircleExampleContentAvatarComponent {
   template: string = config.template;

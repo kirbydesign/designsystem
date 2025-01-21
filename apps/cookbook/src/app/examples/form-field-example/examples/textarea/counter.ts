@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormFieldModule, TextareaComponent } from '@kirbydesign/designsystem/form-field';
 
 const config = {
   selector: 'cookbook-form-field-textarea-counter-example',
@@ -21,7 +22,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [FormFieldModule, TextareaComponent],
 })
 export class FormFieldTextareaCounterExampleComponent {
   template: string = config.template;

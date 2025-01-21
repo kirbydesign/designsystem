@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
 import { ItemSwipeAction } from '@kirbydesign/designsystem';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-sliding-simple-example',
@@ -63,7 +66,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ListModule, ItemSlidingComponent, ItemModule],
 })
 export class ItemSlidingSimpleExampleComponent {
   template = config.template;

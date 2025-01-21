@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 
 const config = {
   selector: 'cookbook-progress-circle-example-sizes',
@@ -39,7 +40,7 @@ const config = {
       }
     `,
   ],
-  standalone: false,
+  imports: [ProgressCircleComponent],
 })
 export class ProgressCircleExampleSizesComponent {
   template: string = config.template;

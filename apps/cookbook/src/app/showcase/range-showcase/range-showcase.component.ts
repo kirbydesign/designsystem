@@ -1,11 +1,28 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { RangeDefaultExampleComponent } from '../../examples/range-example/examples/default.component';
+import { RangeStepExampleComponent } from '../../examples/range-example/examples/step.component';
+import { RangePinExampleComponent } from '../../examples/range-example/examples/pin.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { RangeDisabledFormExampleComponent } from '../../examples/range-example/examples/disabled.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 @Component({
   selector: 'cookbook-range-showcase',
   templateUrl: './range-showcase.component.html',
   styleUrls: ['./range-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    ExampleViewerComponent,
+    RangeDefaultExampleComponent,
+    RangeStepExampleComponent,
+    RangePinExampleComponent,
+    CodeViewerComponent,
+    RangeDisabledFormExampleComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class RangeShowcaseComponent {
   rangeProperties: ApiDescriptionProperty[] = [

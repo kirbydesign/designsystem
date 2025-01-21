@@ -43,9 +43,9 @@ const COMPONENT_DECLARATIONS = [
     ItemModule,
     ListModule,
     DividerComponent,
+    ...COMPONENT_DECLARATIONS,
   ],
   providers: [ToastController, ToastHelper],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class CheckboxExampleModule {}

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-custom-button-example',
@@ -25,7 +29,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [MenuComponent, ButtonComponent, IconModule, ItemModule],
 })
 export class MenuCustomButtonExampleComponent {
   template: string = config.template;

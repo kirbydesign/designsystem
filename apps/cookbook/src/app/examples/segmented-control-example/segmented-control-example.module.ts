@@ -35,8 +35,8 @@ const COMPONENT_DECLARATIONS = [
     CardModule,
     ItemModule,
     ListModule,
+    ...COMPONENT_DECLARATIONS,
   ],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class SegmentedControlExampleModule {}

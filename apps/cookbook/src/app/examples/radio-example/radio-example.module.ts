@@ -53,9 +53,9 @@ const COMPONENT_DECLARATIONS = [
     ListModule,
     CheckboxComponent,
     ButtonComponent,
+    ...COMPONENT_DECLARATIONS,
   ],
   providers: [ToastController, ToastHelper],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class RadioExampleModule {}

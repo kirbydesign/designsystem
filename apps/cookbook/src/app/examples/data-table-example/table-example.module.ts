@@ -18,9 +18,8 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, CardModule, TableSortableComponent],
+  imports: [CommonModule, CardModule, TableSortableComponent, ...COMPONENT_DECLARATIONS],
   providers: [ToastController, ToastHelper],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class DataTableExampleModule {}

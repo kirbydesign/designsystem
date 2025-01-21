@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const config = {
   selector: 'cookbook-range-disabled-form-example',
@@ -8,7 +9,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [RangeComponent],
 })
 export class RangeDisabledFormExampleComponent {
   template: string = config.template;

@@ -27,8 +27,7 @@ const listExamples = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ScrollingModule],
-  declarations: [...listExamples],
+  imports: [CommonModule, KirbyModule, ScrollingModule, ...listExamples],
   exports: [...listExamples],
 })
 export class ListExamplesModule {}

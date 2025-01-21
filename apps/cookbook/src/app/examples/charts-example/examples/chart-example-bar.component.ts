@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartsModule } from '@kirbydesign/designsystem/chart';
 
 const config = {
   selector: 'cookbook-chart-example-bar',
@@ -8,7 +9,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ChartsModule],
 })
 export class ChartExampleBarComponent {
   template: string = config.template;

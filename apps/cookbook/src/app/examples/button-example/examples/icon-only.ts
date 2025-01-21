@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-button-example-icon-only',
@@ -50,7 +52,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_grid-layout.scss',
-  standalone: false,
+  imports: [ButtonComponent, IconModule],
 })
 export class ButtonExampleIconOnlyComponent {
   template: string = config.template;

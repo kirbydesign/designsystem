@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-item-example-card',
@@ -13,7 +16,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [CardModule, ItemModule, ToggleComponent],
 })
 export class ItemExampleCardComponent {
   template: string = config.template;

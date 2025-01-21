@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 
 const config = {
   selector: 'cookbook-accordion-expanded-example',
@@ -15,7 +16,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [AccordionModule],
 })
 export class AccordionExpandedExampleComponent {
   template: string = config.template;

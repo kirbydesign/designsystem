@@ -1,12 +1,31 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { AccordionDefaultExampleComponent } from '../../examples/accordion-example/examples/default';
+import { AccordionExpandedExampleComponent } from '../../examples/accordion-example/examples/expanded';
+import { AccordionCardExampleComponent } from '../../examples/accordion-example/examples/card';
+import { AccordionWithListExampleComponent } from '../../examples/accordion-example/examples/list';
+import { AccordionWithItemsInCardExampleComponent } from '../../examples/accordion-example/examples/card-list';
+import { AccordionEventsExampleComponent } from '../../examples/accordion-example/examples/events';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
 @Component({
   selector: 'cookbook-accordion-showcase',
   templateUrl: './accordion-showcase.component.html',
   styleUrls: ['./accordion-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    ExampleViewerComponent,
+    AccordionDefaultExampleComponent,
+    AccordionExpandedExampleComponent,
+    AccordionCardExampleComponent,
+    AccordionWithListExampleComponent,
+    AccordionWithItemsInCardExampleComponent,
+    AccordionEventsExampleComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class AccordionShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

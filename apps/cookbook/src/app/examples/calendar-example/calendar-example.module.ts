@@ -18,8 +18,13 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, CalendarComponent, CardModule, ButtonComponent],
+  imports: [
+    CommonModule,
+    CalendarComponent,
+    CardModule,
+    ButtonComponent,
+    ...COMPONENT_DECLARATIONS,
+  ],
   exports: COMPONENT_DECLARATIONS,
 })
 export class CalendarExampleModule {}

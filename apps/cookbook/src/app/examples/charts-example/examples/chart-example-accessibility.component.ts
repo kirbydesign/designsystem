@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartsModule } from '@kirbydesign/designsystem/chart';
 
 const config = {
   selector: 'cookbook-chart-example-accessibility',
@@ -39,7 +40,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ChartsModule],
 })
 export class ChartExampleAccessibilityComponent {
   template: string = config.template;

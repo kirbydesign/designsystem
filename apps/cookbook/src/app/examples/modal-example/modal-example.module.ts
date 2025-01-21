@@ -48,8 +48,8 @@ const COMPONENT_DECLARATIONS = [
     RouterModule,
     KirbyModule,
     ExampleConfigurationWrapperComponent,
+    ...COMPONENT_DECLARATIONS,
   ],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class ModalExampleModule {}

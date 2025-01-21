@@ -33,8 +33,14 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, ButtonComponent, CardModule, DropdownModule, IconModule],
+  imports: [
+    CommonModule,
+    ButtonComponent,
+    CardModule,
+    DropdownModule,
+    IconModule,
+    ...COMPONENT_DECLARATIONS,
+  ],
   exports: COMPONENT_DECLARATIONS,
 })
 export class ButtonExampleModule {}

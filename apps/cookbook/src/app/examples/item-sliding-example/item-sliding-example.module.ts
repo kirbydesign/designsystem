@@ -14,8 +14,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, KirbyModule],
+  imports: [CommonModule, KirbyModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class ItemSlidingExampleModule {}

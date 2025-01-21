@@ -15,8 +15,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, RouterModule],
-  declarations: COMPONENT_DECLARATIONS,
+  imports: [CommonModule, KirbyModule, RouterModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class LinkExampleModule {}

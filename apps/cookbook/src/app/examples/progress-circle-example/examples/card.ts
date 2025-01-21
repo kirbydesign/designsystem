@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { CurrencyPipe } from '@angular/common';
 
 const config = {
   selector: 'cookbook-progress-circle-example-card',
@@ -42,7 +47,7 @@ const config = {
       }
     `,
   ],
-  standalone: false,
+  imports: [CardModule, ItemModule, ProgressCircleComponent, IconModule, CurrencyPipe],
 })
 export class ProgressCircleExampleCardComponent {
   template: string = config.template;

@@ -30,8 +30,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, AvatarComponent, BadgeComponent, IconModule],
-  declarations: COMPONENT_DECLARATIONS,
+  imports: [CommonModule, AvatarComponent, BadgeComponent, IconModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class AvatarExampleModule {}

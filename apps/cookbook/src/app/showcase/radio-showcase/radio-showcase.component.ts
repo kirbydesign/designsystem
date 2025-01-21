@@ -1,12 +1,41 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { RadioDefaultExampleComponent } from '../../examples/radio-example/examples/default';
+import { RadioStatesExampleComponent } from '../../examples/radio-example/examples/states';
+import { RadioSizesExampleComponent } from '../../examples/radio-example/examples/sizes';
+import { RadioMultilineExampleComponent } from '../../examples/radio-example/examples/multiline';
+import { RadioExampleBindingComponent } from '../../examples/radio-example/examples/binding';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { RadioCustomContentExampleComponent } from '../../examples/radio-example/examples/custom';
+import { RadioInFormFieldExampleComponent } from '../../examples/radio-example/examples/in-form-field';
+import { RadioInItemExampleComponent } from '../../examples/radio-example/examples/in-item';
+import { RadioReactiveFormsExampleComponent } from '../../examples/radio-example/examples/reactive-forms';
+import { RadioTemplateDrivenFormsExampleComponent } from '../../examples/radio-example/examples/template-driven-forms';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
 @Component({
   selector: 'cookbook-radio-showcase',
   templateUrl: './radio-showcase.component.html',
   styleUrls: ['./radio-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    ExampleViewerComponent,
+    RadioDefaultExampleComponent,
+    RadioStatesExampleComponent,
+    RadioSizesExampleComponent,
+    RadioMultilineExampleComponent,
+    RadioExampleBindingComponent,
+    CodeViewerComponent,
+    RadioCustomContentExampleComponent,
+    RadioInFormFieldExampleComponent,
+    RadioInItemExampleComponent,
+    RadioReactiveFormsExampleComponent,
+    RadioTemplateDrivenFormsExampleComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class RadioShowcaseComponent {
   radioProperties: ApiDescriptionProperty[] = [

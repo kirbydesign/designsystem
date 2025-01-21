@@ -16,8 +16,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, IconModule],
+  imports: [CommonModule, IconModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class IconExampleModule {

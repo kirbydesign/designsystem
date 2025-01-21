@@ -2,12 +2,15 @@ import { Component, HostListener } from '@angular/core';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { NgFor, NgIf } from '@angular/common';
+import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
+import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
 
 @Component({
   selector: 'cookbook-examples',
   templateUrl: './examples.component.html',
   styleUrls: ['./examples.component.scss'],
-  standalone: false,
+  imports: [NgIf, NgFor, KirbyAppModule, RouterOutletModule],
 })
 export class ExamplesComponent {
   showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(

@@ -9,8 +9,7 @@ import { FlagExampleSizesComponent } from './examples/sizes';
 const COMPONENT_DECLARATIONS = [FlagExampleColorsComponent, FlagExampleSizesComponent];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
-  declarations: COMPONENT_DECLARATIONS,
+  imports: [CommonModule, KirbyModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class FlagExampleModule {}

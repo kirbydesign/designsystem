@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { FormsModule } from '@angular/forms';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { JsonPipe } from '@angular/common';
+import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
@@ -58,7 +64,14 @@ favoriteRequired = true;`,
   selector: config.selector,
   template: config.template,
   styleUrls: ['../../ng-forms.shared.scss'],
-  standalone: false,
+  imports: [
+    RadioModule,
+    FormsModule,
+    ExampleConfigurationWrapperComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    JsonPipe,
+  ],
 })
 export class RadioTemplateDrivenFormsExampleComponent {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];

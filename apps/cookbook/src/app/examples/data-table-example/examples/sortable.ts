@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { NgFor } from '@angular/common';
+import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 import { Heading, Person, tableExampleData, tableExampleHeadingData } from '../example-data';
 
 const config = {
@@ -60,7 +63,7 @@ export class MyModule {}`,
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [CardModule, NgFor, TableSortableComponent],
 })
 export class DataTableSortableExampleComponent implements OnInit {
   tableData: Person[] = tableExampleData;

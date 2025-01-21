@@ -21,8 +21,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
-  declarations: COMPONENT_DECLARATIONS,
+  imports: [CommonModule, KirbyModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class MenuExampleModule {}

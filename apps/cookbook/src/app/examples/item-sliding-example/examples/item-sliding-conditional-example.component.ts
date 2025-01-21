@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
 import { ItemSwipeAction } from '@kirbydesign/designsystem';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { NgFor } from '@angular/common';
+import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-sliding-conditional-example',
@@ -69,7 +73,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ListModule, NgFor, ItemSlidingComponent, ItemModule],
 })
 export class ItemSlidingConditionalExampleComponent {
   public template = config.template;

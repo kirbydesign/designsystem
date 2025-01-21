@@ -1,6 +1,12 @@
 import { Component, Input, ViewChild } from '@angular/core';
 
 import { FormFieldComponent, InputSize } from '@kirbydesign/designsystem';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import {
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
 
 const config = {
   selector: 'cookbook-form-field-focus-example',
@@ -38,7 +44,7 @@ export class MyComponent {
       }
     `,
   ],
-  standalone: false,
+  imports: [CheckboxComponent, FormFieldModule, DateInputDirective, InputComponent],
 })
 export class FormFieldFocusExampleComponent {
   @Input() size: InputSize;

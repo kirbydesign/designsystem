@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-toggle-default-example',
@@ -11,7 +12,7 @@ const config = {
   selector: config.selector,
   styleUrls: ['./toggle-examples.shared.scss'],
   template: config.template,
-  standalone: false,
+  imports: [ToggleComponent],
 })
 export class ToggleDefaultExampleComponent {
   template = config.template;

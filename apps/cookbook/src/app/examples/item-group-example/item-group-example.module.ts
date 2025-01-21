@@ -9,8 +9,7 @@ import { ItemGroupWithSectionHeaderExampleComponent } from './examples/with-head
 const DECLARATIONS = [ItemGroupSimpleExampleComponent, ItemGroupWithSectionHeaderExampleComponent];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
-  declarations: DECLARATIONS,
+  imports: [CommonModule, KirbyModule, ...DECLARATIONS],
   exports: DECLARATIONS,
 })
 export class ItemGroupExampleModule {}

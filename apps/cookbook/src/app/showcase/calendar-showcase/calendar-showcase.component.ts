@@ -1,13 +1,38 @@
 import { Component } from '@angular/core';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { DatePipe } from '@angular/common';
 import { moduleProviderExample } from '../../examples/calendar-example/examples/locales';
-import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  ApiDescriptionEvent,
+  ApiDescriptionEventsComponent,
+} from '../../shared/api-description/api-description-events/api-description-events.component';
+import {
+  ApiDescriptionPropertiesComponent,
+  ApiDescriptionProperty,
+} from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { CalendarCardExampleComponent } from '../../examples/calendar-example/examples/in-card';
+import { ExampleConfigurationWrapperComponent } from '../../examples/example-configuration-wrapper/example-configuration-wrapper.component';
+import { CalendarYearNavigatorExampleComponent } from '../../examples/calendar-example/examples/year-navigator';
+import { CalendarNoBackgroundExampleComponent } from '../../examples/calendar-example/examples/no-background';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'cookbook-calendar-showcase',
   templateUrl: './calendar-showcase.component.html',
   styleUrls: ['./calendar-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    ExampleViewerComponent,
+    CalendarCardExampleComponent,
+    ExampleConfigurationWrapperComponent,
+    CheckboxComponent,
+    CalendarYearNavigatorExampleComponent,
+    CalendarNoBackgroundExampleComponent,
+    CodeViewerComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+    DatePipe,
+  ],
 })
 export class CalendarShowcaseComponent {
   moduleProviderExample = moduleProviderExample;

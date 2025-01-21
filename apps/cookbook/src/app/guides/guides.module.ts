@@ -5,8 +5,7 @@ import { RouterModule } from '@angular/router';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ExamplesModule } from '../examples/examples.module';
-import { IphoneModule } from '../iphone/iphone.module';
-import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
+
 import { ShowcaseModule } from '../showcase/showcase.module';
 import { ChartConfigGuideComponent } from './chart-config-guide/chart-config-guide.component';
 
@@ -32,12 +31,10 @@ const guidesComponents = [
     GuidesRouterModule,
     RouterModule,
     KirbyModule,
-    IphoneModule,
-    CodeViewerModule,
     ExamplesModule,
     ShowcaseModule,
+    ...guidesComponents,
   ],
-  declarations: [...guidesComponents],
   exports: [...guidesComponents],
 })
 export class GuideModule {}

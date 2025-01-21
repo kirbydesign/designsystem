@@ -19,8 +19,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ReactiveFormsModule],
-  declarations: COMPONENT_DECLARATIONS,
+  imports: [CommonModule, KirbyModule, ReactiveFormsModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class RangeExampleModule {}

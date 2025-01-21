@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import exampleHtml from '../../examples/card-example/card-example.component.html?raw';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { CardExampleVariantComponent } from '../../examples/card-example/examples/variant';
+import { CardExampleDisclosureComponent } from '../../examples/card-example/examples/disclosure';
+import { CardExampleFlagComponent } from '../../examples/card-example/examples/flag';
+import { CardExampleColorComponent } from '../../examples/card-example/examples/color';
+import { CardExampleBackgroundImageComponent } from '../../examples/card-example/examples/background-image';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -9,7 +17,16 @@ import {
   selector: 'cookbook-card-showcase',
   templateUrl: './card-showcase.component.html',
   styleUrls: ['./card-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    ExampleViewerComponent,
+    CardExampleVariantComponent,
+    CardExampleDisclosureComponent,
+    CardExampleFlagComponent,
+    CardExampleColorComponent,
+    CardExampleBackgroundImageComponent,
+    DividerComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class CardShowcaseComponent {
   exampleHtml = exampleHtml;

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 
 const config = {
   selector: 'cookbook-item-example-fab-menu',
@@ -11,7 +13,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [ItemModule, AvatarComponent],
 })
 export class ItemExampleFabMenuComponent {
   template: string = config.template;

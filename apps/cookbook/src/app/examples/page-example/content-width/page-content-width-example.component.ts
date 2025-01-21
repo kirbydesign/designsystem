@@ -3,6 +3,11 @@ import { Component } from '@angular/core';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 const getMaxWidth = DesignTokenHelper.pageContentMaxWidth;
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { NgIf } from '@angular/common';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const fieldsetHtml = `
@@ -47,7 +52,7 @@ const config = {
       }
     `,
   ],
-  standalone: false,
+  imports: [PageModule, DropdownModule, ListModule, ItemModule, NgIf],
 })
 export class PageContentWidthExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

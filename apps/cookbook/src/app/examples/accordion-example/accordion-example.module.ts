@@ -26,9 +26,16 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, CardModule, AccordionModule, ItemModule, DividerComponent, ListModule],
+  imports: [
+    CommonModule,
+    CardModule,
+    AccordionModule,
+    ItemModule,
+    DividerComponent,
+    ListModule,
+    ...COMPONENT_DECLARATIONS,
+  ],
   providers: [ToastHelper, ToastController],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class AccordionExampleModule {}

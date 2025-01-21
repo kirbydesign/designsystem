@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-flag-example-sizes',
@@ -11,7 +12,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./flag-examples.shared.scss'],
-  standalone: false,
+  imports: [FlagComponent],
 })
 export class FlagExampleSizesComponent {
   template: string = config.template;

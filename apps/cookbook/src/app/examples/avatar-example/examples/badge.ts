@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 const config = {
   selector: 'cookbook-avatar-example-badge',
@@ -35,7 +39,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./badge.scss'],
-  standalone: false,
+  imports: [AvatarComponent, IconModule, ThemeColorDirective, BadgeComponent],
 })
 export class AvatarExampleBadgeComponent {
   template: string = config.template;

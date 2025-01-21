@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import exampleHtml from '../../examples/tabs-example/tabs-example.component.html?raw';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-tabs-showcase',
   templateUrl: './tabs-showcase.component.html',
   styleUrls: ['./tabs-showcase.component.scss'],
-  standalone: false,
+  imports: [CodeViewerComponent, IphoneComponent, ApiDescriptionPropertiesComponent],
 })
 export class TabsShowcaseComponent {
   exampleHtml = exampleHtml;

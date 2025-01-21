@@ -1,15 +1,40 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { MenuSelectableExampleComponent } from '../../examples/menu-example/examples/selectable';
+import { MenuAdvancedExampleComponent } from '../../examples/menu-example/examples/advanced';
+import { MenuCustomPlacementExampleComponent } from '../../examples/menu-example/examples/customPlacement';
+import { MenuCustomButtonExampleComponent } from '../../examples/menu-example/examples/customButton';
+import { PortalInListWrapperComponent } from '../../examples/menu-example/examples/portal-in-list-wrapper';
+import { MenuPortalExampleComponent } from '../../examples/menu-example/examples/portal';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { MenuPortalConfigExampleComponent } from '../../examples/menu-example/examples/portalConfig';
 import {
   portalOutletConfigExampleHTML,
   portalOutletConfigExampleTS,
 } from '../../examples/menu-example/examples/portalOutletConfig';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from './../../shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-menu-showcase',
   templateUrl: './menu-showcase.component.html',
   styleUrls: ['./menu-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    RouterLink,
+    ExampleViewerComponent,
+    MenuSelectableExampleComponent,
+    MenuAdvancedExampleComponent,
+    MenuCustomPlacementExampleComponent,
+    MenuCustomButtonExampleComponent,
+    PortalInListWrapperComponent,
+    MenuPortalExampleComponent,
+    CodeViewerComponent,
+    MenuPortalConfigExampleComponent,
+    DividerComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class MenuShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

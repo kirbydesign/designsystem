@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const config = {
   selector: 'cookbook-range-step-example',
@@ -7,7 +8,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [RangeComponent],
 })
 export class RangeStepExampleComponent {
   template: string = config.template;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
   selector: 'cookbook-button-example-aria-disabled',
@@ -10,7 +11,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  standalone: false,
+  imports: [ButtonComponent],
 })
 export class ButtonExampleAriaDisabledComponent {
   template: string = config.template;

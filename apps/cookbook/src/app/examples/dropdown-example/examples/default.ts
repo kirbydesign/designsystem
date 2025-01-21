@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-default',
@@ -12,7 +13,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [DropdownModule],
 })
 export class DropdownExampleDefaultComponent {
   template: string = config.template;

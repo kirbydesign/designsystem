@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
@@ -15,7 +16,7 @@ const config = {
 };
 @Component({
   template: config.template,
-  standalone: false,
+  imports: [PageModule],
 })
 export class PageAlignmentAndToolbarTitleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

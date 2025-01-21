@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListSelectableItemsExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
@@ -17,6 +20,6 @@ export const ListSelectableItemsExampleTemplate = `<kirby-list [items]="items" (
       <kirby-page-content>${ListSelectableItemsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
-  standalone: false,
+  imports: [PageModule, ListModule, ItemModule],
 })
 export class ListSelectableItemsExampleComponent extends BaseListComponent {}

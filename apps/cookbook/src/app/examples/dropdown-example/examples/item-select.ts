@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-item-select',
@@ -15,7 +16,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [DropdownModule],
 })
 export class DropdownExampleItemSelectComponent {
   template: string = config.template;

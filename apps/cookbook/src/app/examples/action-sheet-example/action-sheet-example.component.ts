@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { ModalController } from '@kirbydesign/designsystem';
 import { ActionSheetConfig } from '@kirbydesign/designsystem';
 import { ActionSheetItem } from '@kirbydesign/designsystem';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({
   selector: 'cookbook-action-sheet-example',
   templateUrl: './action-sheet-example.component.html',
-  standalone: false,
+  imports: [ButtonComponent],
 })
 export class ActionSheetExampleComponent {
   constructor(private modalController: ModalController) {}

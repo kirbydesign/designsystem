@@ -21,8 +21,14 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, CardModule, FlagComponent, IconModule, ItemModule],
+  imports: [
+    CommonModule,
+    CardModule,
+    FlagComponent,
+    IconModule,
+    ItemModule,
+    ...COMPONENT_DECLARATIONS,
+  ],
   exports: COMPONENT_DECLARATIONS,
 })
 export class CardExampleModule {}

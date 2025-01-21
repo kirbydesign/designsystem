@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-header-example-flag',
@@ -10,7 +12,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [HeaderModule, FlagComponent],
 })
 export class HeaderExampleFlagComponent {
   template: string = config.template;

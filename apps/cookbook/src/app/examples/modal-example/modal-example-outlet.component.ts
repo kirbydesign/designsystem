@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Params } from '@angular/router';
 
-import { ModalController } from '@kirbydesign/designsystem';
+import { KirbyModule, ModalController } from '@kirbydesign/designsystem';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
   selector: 'cookbook-modal-example-outlet',
@@ -156,7 +157,7 @@ navigate() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-outlet.component.scss'],
-  standalone: false,
+  imports: [ButtonComponent, KirbyModule],
 })
 export class ModalExampleOutletComponent {
   static readonly template = config.template;

@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 
 import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-example-embedded-alert.component';
+import { ModalExampleAlertWithGuardStepperComponent } from './alert-example/modal-example-alert-with-guard-stepper.component';
 
 @Component({
   template: `
     <cookbook-modal-example-alert-with-guard-stepper></cookbook-modal-example-alert-with-guard-stepper>
   `,
   styleUrls: ['./modal-example-simple.component.scss'],
-  standalone: false,
+  imports: [ModalExampleAlertWithGuardStepperComponent],
 })
 export class ModalExampleAlertWithGuardComponent implements OnInit {
   constructor(

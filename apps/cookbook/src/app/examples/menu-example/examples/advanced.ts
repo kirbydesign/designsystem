@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-menu-advanced-example',
@@ -33,7 +38,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [MenuComponent, ItemModule, IconModule, CheckboxComponent, ToggleComponent],
 })
 export class MenuAdvancedExampleComponent {
   template: string = config.template;

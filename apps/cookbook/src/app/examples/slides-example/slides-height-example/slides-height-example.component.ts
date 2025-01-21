@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { SlideModule } from '@kirbydesign/designsystem/slide';
+import { CardModule } from '@kirbydesign/designsystem/card';
 
 @Component({
   styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-height-example.component.html',
-  standalone: false,
+  imports: [SlideModule, CardModule],
 })
 export class SlidesHeightExampleComponent {
   lorem =

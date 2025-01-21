@@ -92,8 +92,8 @@ const COMPONENT_DECLARATIONS = [
     InputComponent,
     ItemModule,
     ToggleComponent,
+    ...COMPONENT_DECLARATIONS,
   ],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class ItemExampleModule {}

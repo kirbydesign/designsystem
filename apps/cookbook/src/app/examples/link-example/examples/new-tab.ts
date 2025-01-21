@@ -9,7 +9,6 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./link-examples.shared.scss'],
-  standalone: false,
 })
 export class LinkExampleNewTabComponent {
   template: string = config.template;

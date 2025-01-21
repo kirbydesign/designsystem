@@ -42,7 +42,6 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
   imports: [
     CommonModule,
     AvatarComponent,
@@ -53,6 +52,7 @@ const COMPONENT_DECLARATIONS = [
     HeaderModule,
     ProgressCircleComponent,
     IconModule,
+    ...COMPONENT_DECLARATIONS,
   ],
   providers: [ToastController, ToastHelper],
   exports: COMPONENT_DECLARATIONS,

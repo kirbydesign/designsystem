@@ -43,9 +43,9 @@ const COMPONENT_DECLARATIONS = [
     DropdownModule,
     IconModule,
     CheckboxComponent,
+    ...COMPONENT_DECLARATIONS,
   ],
   providers: [ToastHelper, ToastController],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class DropdownExampleModule {}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SegmentedControlComponent } from '@kirbydesign/designsystem';
 
 const config = {
   template: `<kirby-segmented-control
@@ -22,7 +23,7 @@ const config = {
   selector: 'cookbook-segmented-control-example-modes',
   template: config.template,
   styleUrls: ['../segmented-control-examples.shared.scss'],
-  standalone: false,
+  imports: [SegmentedControlComponent],
 })
 export class SegmentedControlExampleModesComponent {
   template = config.template;

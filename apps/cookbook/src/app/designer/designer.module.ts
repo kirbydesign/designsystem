@@ -7,7 +7,6 @@ import { DesignerRoutingModule } from './designer-routing.module';
 import { CardDesignerComponent } from './card-designer/card-designer.component';
 
 @NgModule({
-  imports: [CommonModule, ExamplesModule, DesignerRoutingModule],
-  declarations: [CardDesignerComponent],
+  imports: [CommonModule, ExamplesModule, DesignerRoutingModule, CardDesignerComponent],
 })
 export class DesignerModule {}

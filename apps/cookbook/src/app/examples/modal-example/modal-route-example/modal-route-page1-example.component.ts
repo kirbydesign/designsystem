@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 @Component({
   selector: 'cookbook-modal-route-page-1-example',
@@ -29,7 +34,16 @@ import { ActivatedRoute } from '@angular/router';
     'kirby-modal-footer { --kirby-modal-footer-justify-content: flex-end; }',
     'h4 { margin-top: 24px; } ',
   ],
-  standalone: false,
+  imports: [
+    PageModule,
+    ButtonComponent,
+    NgIf,
+    ModalFooterComponent,
+    RouterLink,
+    IconModule,
+    AsyncPipe,
+    JsonPipe,
+  ],
 })
 export class ModalRoutePage1ExampleComponent {
   showFooter: boolean = true;

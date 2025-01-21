@@ -66,8 +66,8 @@ const COMPONENT_DECLARATIONS = [
     IconModule,
     SpinnerModule,
     ExampleConfigurationWrapperComponent,
+    ...COMPONENT_DECLARATIONS,
   ],
-  declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
 export class FormFieldExamplesModule {}

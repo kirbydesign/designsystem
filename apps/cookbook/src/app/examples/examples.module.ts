@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 
-import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { BadgeExampleModule } from './badge-example/badge-example.module';
@@ -43,7 +42,6 @@ import { ListNoShapeExampleModule } from './list-no-shape-example/list-no-shape-
 import { EmptyStateExampleModule } from './empty-state-example/empty-state-example.module';
 
 const IMPORTS = [
-  CodeViewerModule,
   ExampleConfigurationWrapperComponent,
   FormFieldExamplesModule,
   ItemExampleModule,
@@ -82,8 +80,7 @@ const IMPORTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
-  declarations: COMPONENT_DECLARATIONS,
+  imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS, ...COMPONENT_DECLARATIONS],
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
 })
 export class ExamplesModule {}

@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
+import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
@@ -66,7 +77,15 @@ toggleRequired(required: boolean) {
   selector: config.selector,
   template: config.template,
   styleUrls: ['../../ng-forms.shared.scss'],
-  standalone: false,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    RadioModule,
+    ExampleConfigurationWrapperComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    ReactiveFormStateComponent,
+  ],
 })
 export class RadioReactiveFormsExampleComponent implements OnInit {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];

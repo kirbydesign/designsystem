@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { KirbySwiperOptions, SelectedSlide } from '@kirbydesign/designsystem/slide';
+import { KirbySwiperOptions, SelectedSlide, SlideModule } from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({
   styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-advanced-example.component.html',
-  standalone: false,
+  imports: [SlideModule, CardModule, ButtonComponent],
 })
 export class SlidesAdvancedExampleComponent {
   constructor(private toastController: ToastController) {}

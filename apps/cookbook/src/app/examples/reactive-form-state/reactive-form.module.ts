@@ -7,8 +7,7 @@ import { ReactiveFormStateComponent } from './reactive-form-state.component';
 const COMPONENT_DECLARATIONS = [ReactiveFormStateComponent];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  declarations: COMPONENT_DECLARATIONS,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class ReactiveFormStateExampleModule {}

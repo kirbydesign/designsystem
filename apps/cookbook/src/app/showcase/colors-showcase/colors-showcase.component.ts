@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 
 import { ColorHelper, KirbyColor } from '@kirbydesign/designsystem';
+import { NgFor, NgTemplateOutlet, SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'cookbook-colors-showcase',
   templateUrl: './colors-showcase.component.html',
   styleUrls: ['./colors-showcase.component.scss'],
-  standalone: false,
+  imports: [NgTemplateOutlet, NgFor, SlicePipe],
 })
 export class ColorsShowcaseComponent {
   selectedColor = 'primary';

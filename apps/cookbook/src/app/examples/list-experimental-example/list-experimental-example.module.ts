@@ -13,8 +13,7 @@ const listExperimentalExamples = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ScrollingModule],
-  declarations: [...listExperimentalExamples],
+  imports: [CommonModule, KirbyModule, ScrollingModule, ...listExperimentalExamples],
   exports: [...listExperimentalExamples],
 })
 export class ListExperimentalExampleModule {}

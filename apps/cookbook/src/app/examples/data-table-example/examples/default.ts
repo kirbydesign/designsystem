@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { NgFor } from '@angular/common';
 import { Person, tableExampleData } from '../example-data';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
@@ -26,7 +27,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [NgFor],
 })
 export class DataTableDefaultExampleComponent {
   template: string = config.template;

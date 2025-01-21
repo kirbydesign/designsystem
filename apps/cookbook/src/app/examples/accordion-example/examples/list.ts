@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const config = {
@@ -38,7 +41,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  standalone: false,
+  imports: [AccordionModule, ListModule, ItemModule],
 })
 export class AccordionWithListExampleComponent extends BaseListComponent {
   template: string = config.template;

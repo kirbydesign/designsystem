@@ -8,16 +8,33 @@ import {
   slidesDefaultConfig,
 } from '../../examples/slides-example/slides-code-snippets';
 import {
+  ApiDescriptionPropertiesComponent,
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
+import {
+  ApiDescriptionEvent,
+  ApiDescriptionEventsComponent,
+} from '../../shared/api-description/api-description-events/api-description-events.component';
+import {
+  ApiDescriptionMethod,
+  ApiDescriptionMethodsComponent,
+} from '../../shared/api-description/api-description-methods/api-description-methods.component';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 @Component({
   selector: 'cookbook-slides-showcase',
   templateUrl: './slides-showcase.component.html',
   styleUrls: ['../_showcase.shared.scss'],
-  standalone: false,
+  imports: [
+    IphoneComponent,
+    CodeViewerComponent,
+    ExampleViewerComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+    ApiDescriptionMethodsComponent,
+  ],
 })
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;

@@ -1,11 +1,30 @@
 import { Component } from '@angular/core';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { SegmentedControlExampleDefaultComponent } from '../../examples/segmented-control-example/default/default';
+import { SegmentedControlExampleSizesComponent } from '../../examples/segmented-control-example/sizes/sizes';
+import { SegmentedControlExampleModesComponent } from '../../examples/segmented-control-example/modes/modes';
+import { SegmentedControlExampleGroupedComponent } from '../../examples/segmented-control-example/grouped/grouped';
+import { SegmentedControlExampleWithBadgeComponent } from '../../examples/segmented-control-example/with-badge/with-badge';
+import { SegmentedControlExampleColorComponent } from '../../examples/segmented-control-example/color/color';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-segmented-control-showcase',
   templateUrl: './segmented-control-showcase.component.html',
   styleUrls: ['./segmented-control-showcase.component.scss'],
-  standalone: false,
+  imports: [
+    DividerComponent,
+    ExampleViewerComponent,
+    SegmentedControlExampleDefaultComponent,
+    SegmentedControlExampleSizesComponent,
+    SegmentedControlExampleModesComponent,
+    SegmentedControlExampleGroupedComponent,
+    SegmentedControlExampleWithBadgeComponent,
+    SegmentedControlExampleColorComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class SegmentedControlShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

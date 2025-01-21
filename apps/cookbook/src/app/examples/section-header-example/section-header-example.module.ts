@@ -16,8 +16,7 @@ const DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
-  declarations: DECLARATIONS,
+  imports: [CommonModule, KirbyModule, ...DECLARATIONS],
   exports: DECLARATIONS,
 })
 export class SectionHeaderExampleModule {}

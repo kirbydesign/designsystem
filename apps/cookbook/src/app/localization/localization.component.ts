@@ -4,9 +4,10 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
+
 import { ExamplesModule } from '../examples/examples.module';
 import { ShowcaseModule } from '../showcase/showcase.module';
+import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
 import { DaLocaleProviderComponent } from './locale-provider/da-locale-provider.component';
 import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.component';
 
@@ -15,7 +16,7 @@ import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.
   templateUrl: './localization.component.html',
   styleUrls: ['./localization.component.scss'],
   imports: [
-    CodeViewerModule,
+    CodeViewerComponent,
     ShowcaseModule,
     ExamplesModule,
     DaLocaleProviderComponent,

@@ -14,8 +14,7 @@ const gridLayoutExamples = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
-  declarations: [...gridLayoutExamples],
+  imports: [CommonModule, KirbyModule, ...gridLayoutExamples],
   exports: [...gridLayoutExamples],
 })
 export class GridLayoutExamplesModule {}

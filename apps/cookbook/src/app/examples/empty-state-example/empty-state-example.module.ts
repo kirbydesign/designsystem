@@ -18,8 +18,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, EmptyStateModule, ButtonComponent, IconModule],
+  imports: [CommonModule, EmptyStateModule, ButtonComponent, IconModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class EmptyStateExampleModule {}

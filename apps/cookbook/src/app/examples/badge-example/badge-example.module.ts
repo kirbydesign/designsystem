@@ -20,8 +20,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, BadgeComponent, CardModule, IconModule],
+  imports: [CommonModule, BadgeComponent, CardModule, IconModule, ...COMPONENT_DECLARATIONS],
   exports: COMPONENT_DECLARATIONS,
 })
 export class BadgeExampleModule {}
