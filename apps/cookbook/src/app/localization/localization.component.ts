@@ -6,6 +6,7 @@ import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 
 import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
+import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
 import { DaLocaleProviderComponent } from './locale-provider/da-locale-provider.component';
 import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.component';
 
@@ -14,6 +15,7 @@ import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.
   templateUrl: './localization.component.html',
   styleUrls: ['./localization.component.scss'],
   imports: [
+    ExampleViewerComponent,
     CodeViewerComponent,
     DaLocaleProviderComponent,
     EnLocaleProviderComponent,
