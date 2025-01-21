@@ -14,7 +14,6 @@ import { IconComponent, IconSize } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockIconComponent),
     },
   ],
-  standalone: false,
 })
 export class MockIconComponent {
   @Input() size: IconSize | `${IconSize}`;

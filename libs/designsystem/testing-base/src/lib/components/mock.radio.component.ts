@@ -14,7 +14,6 @@ import { RadioComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockRadioComponent),
     },
   ],
-  standalone: false,
 })
 export class MockRadioComponent {
   @Input() value: any;

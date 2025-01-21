@@ -17,7 +17,6 @@ import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shar
       useExisting: forwardRef(() => MockMenuComponent),
     },
   ],
-  standalone: false,
 })
 export class MockMenuComponent {
   @Input() isDisabled: boolean;

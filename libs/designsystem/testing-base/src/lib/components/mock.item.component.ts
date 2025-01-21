@@ -14,7 +14,6 @@ import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
       useExisting: forwardRef(() => MockItemComponent),
     },
   ],
-  standalone: false,
 })
 export class MockItemComponent {
   @Input() disabled: boolean;

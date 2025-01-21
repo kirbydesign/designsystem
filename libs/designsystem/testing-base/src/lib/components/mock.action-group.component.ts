@@ -14,7 +14,6 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
       useExisting: forwardRef(() => MockActionGroupComponent),
     },
   ],
-  standalone: false,
 })
 export class MockActionGroupComponent {
   @Input() visibleActions?: number;

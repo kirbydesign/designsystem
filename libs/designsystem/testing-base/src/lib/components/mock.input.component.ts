@@ -15,7 +15,6 @@ import { InputComponent, InputSize } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockInputComponent),
     },
   ],
-  standalone: false,
 })
 export class MockInputComponent {
   @Input() type: string;

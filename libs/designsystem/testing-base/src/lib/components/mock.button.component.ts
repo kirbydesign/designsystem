@@ -16,7 +16,6 @@ import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/design
       useExisting: forwardRef(() => MockButtonComponent),
     },
   ],
-  standalone: false,
 })
 export class MockButtonComponent {
   @Input() attentionLevel: AttentionLevel;

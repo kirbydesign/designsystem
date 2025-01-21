@@ -14,7 +14,6 @@ import { ItemGroupComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockItemGroupComponent),
     },
   ],
-  standalone: false,
 })
 export class MockItemGroupComponent {}
 

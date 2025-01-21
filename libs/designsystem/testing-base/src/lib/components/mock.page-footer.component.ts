@@ -14,7 +14,6 @@ import { PageFooterComponent } from '@kirbydesign/designsystem/page';
       useExisting: forwardRef(() => MockPageFooterComponent),
     },
   ],
-  standalone: false,
 })
 export class MockPageFooterComponent {
   @Input() hasPadding: boolean;

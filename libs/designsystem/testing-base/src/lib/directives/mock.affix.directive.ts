@@ -12,7 +12,6 @@ import { AffixDirective } from '@kirbydesign/designsystem/form-field';
       useExisting: forwardRef(() => MockAffixDirective),
     },
   ],
-  standalone: false,
 })
 export class MockAffixDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename

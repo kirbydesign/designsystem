@@ -12,7 +12,6 @@ import { DecimalMaskDirective } from '@kirbydesign/designsystem/form-field';
       useExisting: forwardRef(() => MockDecimalMaskDirective),
     },
   ],
-  standalone: false,
 })
 export class MockDecimalMaskDirective {
   @Input() min: number;

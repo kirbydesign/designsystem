@@ -14,7 +14,6 @@ import { ListSectionHeaderComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockListSectionHeaderComponent),
     },
   ],
-  standalone: false,
 })
 export class MockListSectionHeaderComponent {
   @Input() title: string;

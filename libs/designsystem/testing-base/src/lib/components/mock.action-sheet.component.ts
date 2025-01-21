@@ -14,7 +14,6 @@ import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem
       useExisting: forwardRef(() => MockActionSheetComponent),
     },
   ],
-  standalone: false,
 })
 export class MockActionSheetComponent {
   @Input() cancelButtonText: string;

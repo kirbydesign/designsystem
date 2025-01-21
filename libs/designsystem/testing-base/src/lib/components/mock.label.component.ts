@@ -14,7 +14,6 @@ import { LabelComponent } from '@kirbydesign/designsystem/item';
       useExisting: forwardRef(() => MockLabelComponent),
     },
   ],
-  standalone: false,
 })
 export class MockLabelComponent {
   @Input() direction: 'vertical' | 'horizontal';

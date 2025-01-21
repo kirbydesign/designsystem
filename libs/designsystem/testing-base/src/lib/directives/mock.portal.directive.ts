@@ -11,7 +11,6 @@ import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
       useExisting: forwardRef(() => MockPortalDirective),
     },
   ],
-  standalone: false,
 })
 export class MockPortalDirective {
   @Input() outlet: HTMLElement | undefined;

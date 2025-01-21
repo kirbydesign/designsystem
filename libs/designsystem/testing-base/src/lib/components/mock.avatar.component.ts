@@ -15,7 +15,6 @@ import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
       useExisting: forwardRef(() => MockAvatarComponent),
     },
   ],
-  standalone: false,
 })
 export class MockAvatarComponent {
   @Input() imageSrc: string;

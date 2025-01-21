@@ -15,7 +15,6 @@ import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
       useExisting: forwardRef(() => MockDropdownComponent),
     },
   ],
-  standalone: false,
 })
 export class MockDropdownComponent {
   @Input() items: string[] | any[];

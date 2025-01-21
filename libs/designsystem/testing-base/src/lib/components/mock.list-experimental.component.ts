@@ -14,7 +14,6 @@ import { ListExperimentalComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockListExperimentalComponent),
     },
   ],
-  standalone: false,
 })
 export class MockListExperimentalComponent {}
 

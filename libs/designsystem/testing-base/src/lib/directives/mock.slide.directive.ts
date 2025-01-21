@@ -11,7 +11,6 @@ import { SlideDirective } from '@kirbydesign/designsystem/slide';
       useExisting: forwardRef(() => MockSlideDirective),
     },
   ],
-  standalone: false,
 })
 export class MockSlideDirective {}
 

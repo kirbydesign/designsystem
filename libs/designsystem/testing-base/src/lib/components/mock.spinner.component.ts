@@ -14,7 +14,6 @@ import { SpinnerComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockSpinnerComponent),
     },
   ],
-  standalone: false,
 })
 export class MockSpinnerComponent {}
 

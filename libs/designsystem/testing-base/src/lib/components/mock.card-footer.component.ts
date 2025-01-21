@@ -14,7 +14,6 @@ import { CardFooterComponent } from '@kirbydesign/designsystem/card';
       useExisting: forwardRef(() => MockCardFooterComponent),
     },
   ],
-  standalone: false,
 })
 export class MockCardFooterComponent {
   @Input() hasPadding: boolean;

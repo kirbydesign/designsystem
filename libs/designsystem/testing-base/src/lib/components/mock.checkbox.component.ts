@@ -14,7 +14,6 @@ import { CheckboxComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockCheckboxComponent),
     },
   ],
-  standalone: false,
 })
 export class MockCheckboxComponent {
   @Input() checked: boolean;

@@ -19,7 +19,6 @@ import { MockBaseChartComponent } from './mock.base-chart.component';
       useExisting: forwardRef(() => MockStockChartComponent),
     },
   ],
-  standalone: false,
 })
 export class MockStockChartComponent extends MockBaseChartComponent {
   @Input() dataLabelOptions?: ChartDataLabelOptions;

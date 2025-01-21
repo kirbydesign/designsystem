@@ -14,7 +14,6 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
       useExisting: forwardRef(() => MockCardComponent),
     },
   ],
-  standalone: false,
 })
 export class MockCardComponent {
   @Input() title: string;

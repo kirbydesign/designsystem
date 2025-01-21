@@ -18,7 +18,6 @@ import {
       useExisting: forwardRef(() => MockInputCounterComponent),
     },
   ],
-  standalone: false,
 })
 export class MockInputCounterComponent {
   @Input() listenTo: InputComponent | TextareaComponent;

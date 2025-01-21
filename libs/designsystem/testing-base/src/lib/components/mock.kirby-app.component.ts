@@ -14,7 +14,6 @@ import { AppComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockAppComponent),
     },
   ],
-  standalone: false,
 })
 export class MockAppComponent {}
 

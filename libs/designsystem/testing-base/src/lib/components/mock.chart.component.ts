@@ -18,7 +18,6 @@ import { MockBaseChartComponent } from './mock.base-chart.component';
       useExisting: forwardRef(() => MockChartComponent),
     },
   ],
-  standalone: false,
 })
 export class MockChartComponent extends MockBaseChartComponent {
   @Input() type: Exclude<ChartType, 'stock'>;

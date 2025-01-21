@@ -12,7 +12,6 @@ import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
       useExisting: forwardRef(() => MockAccordionDirective),
     },
   ],
-  standalone: false,
 })
 export class MockAccordionDirective {}
 

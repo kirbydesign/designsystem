@@ -17,7 +17,6 @@ import {
       useExisting: forwardRef(() => MockFloatingDirective),
     },
   ],
-  standalone: false,
 })
 export class MockFloatingDirective {
   @Input() reference: ElementRef<HTMLElement> | undefined;

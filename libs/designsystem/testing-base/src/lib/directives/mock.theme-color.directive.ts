@@ -18,7 +18,6 @@ import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
       useExisting: forwardRef(() => MockThemeColorDirective),
     },
   ],
-  standalone: false,
 })
 export class MockThemeColorDirective {
   @Input() themeColor: ThemeColor;

@@ -14,7 +14,6 @@ import { LoadingOverlayComponent } from '@kirbydesign/designsystem';
       useExisting: forwardRef(() => MockLoadingOverlayComponent),
     },
   ],
-  standalone: false,
 })
 export class MockLoadingOverlayComponent {
   @Input() isLoading: boolean;

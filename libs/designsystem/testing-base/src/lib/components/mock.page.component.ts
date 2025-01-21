@@ -27,7 +27,6 @@ type fixedConfig = { fixed: boolean };
       useExisting: forwardRef(() => MockPageTitleDirective),
     },
   ],
-  standalone: false,
 })
 export class MockPageTitleDirective {}
 
@@ -39,7 +38,6 @@ export class MockPageTitleDirective {}
       useExisting: forwardRef(() => MockPageSubtitleDirective),
     },
   ],
-  standalone: false,
 })
 export class MockPageSubtitleDirective {}
 
@@ -51,7 +49,6 @@ export class MockPageSubtitleDirective {}
       useExisting: forwardRef(() => MockPageToolbarTitleDirective),
     },
   ],
-  standalone: false,
 })
 export class MockPageToolbarTitleDirective {}
 
@@ -63,7 +60,6 @@ export class MockPageToolbarTitleDirective {}
       useExisting: forwardRef(() => MockPageActionsDirective),
     },
   ],
-  standalone: false,
 })
 export class MockPageActionsDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename
@@ -78,7 +74,6 @@ export class MockPageActionsDirective {
       useExisting: forwardRef(() => MockPageContentDirective),
     },
   ],
-  standalone: false,
 })
 export class MockPageContentDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename
@@ -93,7 +88,6 @@ export class MockPageContentDirective {
       useExisting: forwardRef(() => MockPageStickyContentDirective),
     },
   ],
-  standalone: false,
 })
 export class MockPageStickyContentDirective {}
 
@@ -108,7 +102,6 @@ export class MockPageStickyContentDirective {}
       useExisting: forwardRef(() => MockPageProgressComponent),
     },
   ],
-  standalone: false,
 })
 export class MockPageProgressComponent {}
 
@@ -123,7 +116,6 @@ export class MockPageProgressComponent {}
       useExisting: forwardRef(() => MockPageTitleComponent),
     },
   ],
-  standalone: false,
 })
 export class MockPageTitleComponent {}
 
@@ -138,7 +130,6 @@ export class MockPageTitleComponent {}
       useExisting: forwardRef(() => MockPageContentComponent),
     },
   ],
-  standalone: false,
 })
 export class MockPageContentComponent {}
 
@@ -153,7 +144,6 @@ export class MockPageContentComponent {}
       useExisting: forwardRef(() => MockPageActionsComponent),
     },
   ],
-  standalone: false,
 })
 export class MockPageActionsComponent {}
 
@@ -168,7 +158,6 @@ export class MockPageActionsComponent {}
       useExisting: forwardRef(() => MockPageComponent),
     },
   ],
-  standalone: false,
 })
 export class MockPageComponent {
   @Input() title: string;
