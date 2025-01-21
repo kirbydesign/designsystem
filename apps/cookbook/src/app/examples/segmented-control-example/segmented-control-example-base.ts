@@ -4,7 +4,6 @@ import { SegmentItem } from '@kirbydesign/designsystem';
 
 @Component({
   template: '',
-  standalone: false,
 })
 export abstract class SegmentedControlExampleBaseComponent {
   items: SegmentItem[] = [
