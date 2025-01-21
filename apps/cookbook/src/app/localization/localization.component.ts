@@ -5,8 +5,6 @@ import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 
-import { ExamplesModule } from '../examples/examples.module';
-import { ShowcaseModule } from '../showcase/showcase.module';
 import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
 import { DaLocaleProviderComponent } from './locale-provider/da-locale-provider.component';
 import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.component';
@@ -17,8 +15,6 @@ import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.
   styleUrls: ['./localization.component.scss'],
   imports: [
     CodeViewerComponent,
-    ShowcaseModule,
-    ExamplesModule,
     DaLocaleProviderComponent,
     EnLocaleProviderComponent,
     CalendarComponent,

@@ -31,11 +31,11 @@ export const routes: Routes = [
       },
       {
         path: 'showcase',
-        loadChildren: () => import('./showcase/showcase.module').then((m) => m.ShowcaseModule),
+        loadChildren: () => import('./showcase/showcase.routes').then((m) => m.SHOWCASE_ROUTES),
       },
       {
         path: 'guides',
-        loadChildren: () => import('./guides/guides.module').then((m) => m.GuideModule),
+        loadChildren: () => import('./guides/guides.routes').then((m) => m.GUIDES_ROUTES),
         data: {
           resourceLink: 'Guides',
         },
@@ -69,11 +69,6 @@ export const routes: Routes = [
   },
   {
     path: 'examples',
-    loadChildren: () =>
-      import('./examples/examples-routing.module').then((m) => m.ExamplesRoutingModule),
-  },
-  {
-    path: 'designer',
-    loadChildren: () => import('./designer/designer.module').then((m) => m.DesignerModule),
+    loadChildren: () => import('./examples/examples.routes').then((m) => m.EXAMPLE_ROUTES),
   },
 ];

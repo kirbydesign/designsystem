@@ -25,7 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { routes as appRoutes } from '../../app.routes';
-import { routes as showcaseRoutes } from '../../showcase/showcase.routes';
+import { SHOWCASE_ROUTES as showcaseRoutes } from '../../showcase/showcase.routes';
 
 const KEY_DOWN = 'ArrowDown';
 
