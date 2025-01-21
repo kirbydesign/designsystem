@@ -1,3 +1,4 @@
+import { truncate } from 'fs';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -19,12 +20,13 @@ describe('TabNavigationItemComponent', () => {
   beforeEach(() => {
     spectator = createHost(
       `
-      <kirby-tab-navigation-item label="Tab1">
+      <kirby-tab-navigation-item [label]="label" [truncate]="truncate">
         <kirby-badge themeColor="warning">
           <kirby-icon name="attach"></kirby-icon>
         </kirby-badge>
       </kirby-tab-navigation-item> 
-      `
+      `,
+      { hostProps: { label: 'Tab1', truncate: true } }
     );
 
     component = spectator.component;
@@ -53,7 +55,7 @@ describe('TabNavigationItemComponent', () => {
   });
 
   it('should truncate label text', () => {
-    spectator.setInput('label', 'Long label text that should get truncated');
+    spectator.setHostInput('label', 'Long label text that should get truncated');
 
     const textElement = spectator.query('span[data-text]');
 
@@ -61,7 +63,7 @@ describe('TabNavigationItemComponent', () => {
   });
 
   it('should not truncate label text when explicitly disabled', () => {
-    spectator.setInput({
+    spectator.setHostInput({
       label: 'Long label text that should not get truncated',
       truncate: false,
     });

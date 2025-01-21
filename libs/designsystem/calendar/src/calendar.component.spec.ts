@@ -1,5 +1,5 @@
 import { LOCALE_ID } from '@angular/core';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { format, Locale, startOfDay, startOfMonth } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
@@ -15,9 +15,9 @@ import { CalendarYearNavigatorConfig } from './interfaces/calendar-year-navigato
 // explicitly call spectator.component.ngOnChanges()
 
 describe('CalendarComponent', () => {
-  let spectator: SpectatorHost<CalendarComponent>;
+  let spectator: Spectator<CalendarComponent>;
 
-  const createHost = createHostFactory({
+  const createComponent = createComponentFactory({
     component: CalendarComponent,
     providers: [
       {
@@ -35,7 +35,7 @@ describe('CalendarComponent', () => {
 
   describe('by default', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should create', () => {
@@ -57,7 +57,7 @@ describe('CalendarComponent', () => {
 
   describe('selectedDate', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should initially render the month of selectedDate if specified', () => {
@@ -85,7 +85,7 @@ describe('CalendarComponent', () => {
 
   describe('todayDate', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should be possible to specify which day is today by passing todayDate', () => {
@@ -98,7 +98,7 @@ describe('CalendarComponent', () => {
 
   describe('months', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should make it possible to navigate past and future months', () => {
@@ -157,7 +157,7 @@ describe('CalendarComponent', () => {
 
   describe('weeks', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should always render 6 weeks no matter the amount of days in month', () => {
@@ -169,7 +169,7 @@ describe('CalendarComponent', () => {
 
   describe('monthChange', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should change from August to July when previous month is clicked', () => {
@@ -199,7 +199,7 @@ describe('CalendarComponent', () => {
 
   describe('dateChange', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should emit a dateChange event when a valid date is clicked', () => {
@@ -316,7 +316,7 @@ describe('CalendarComponent', () => {
 
   describe('dateSelect', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should emit dateSelect event when clicking a date that is not already selected', () => {
@@ -424,7 +424,7 @@ describe('CalendarComponent', () => {
 
   describe('UTC / local time', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should be tolerant of date input (selectedDate, todayDate, minDate, maxDate, disabledDates and enabledDates) as both UTC midnight and local time midnight', () => {
@@ -534,7 +534,7 @@ describe('CalendarComponent', () => {
     let todayDate: Date;
 
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
 
       todayDate = new Date(2021, 0, 1);
       spectator.setInput('todayDate', todayDate);
@@ -598,7 +598,7 @@ describe('CalendarComponent', () => {
 
   describe('year navigator', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     describe('by default', () => {
@@ -676,7 +676,7 @@ describe('CalendarComponent', () => {
 
   describe('focussed date', () => {
     beforeEach(() => {
-      spectator = createHost('<kirby-calendar></kirby-calendar>');
+      spectator = createComponent();
     });
 
     it('should initially set focussed date to today when no selectedDate is set', () => {
@@ -957,6 +957,6 @@ describe('CalendarComponent', () => {
       };
     }
 
-    return createHost(`<kirby-calendar></kirby-calendar>`, overrides);
+    return createComponent(overrides);
   }
 });

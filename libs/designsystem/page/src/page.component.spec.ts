@@ -132,7 +132,7 @@ describe('PageComponent', () => {
   describe('by default', () => {
     beforeEach(async () => {
       spectator = createHost(
-        `<kirby-page title="${titleText}" subtitle="${subtitleText}">
+        `<kirby-page [title]="title" [subtitle]="subtitle" [tabBarBottomHidden]="tabBarBottomHidden">
            <kirby-page-actions *kirbyPageActions="{sticky: true}">>
              <button kirby-button>Sticky</button>
            </kirby-page-actions>
@@ -142,7 +142,14 @@ describe('PageComponent', () => {
            <kirby-page-content>
             ${dummyContent}
            </kirby-page-content>
-         </kirby-page>`
+         </kirby-page>`,
+        {
+          hostProps: {
+            title: titleText,
+            subtitle: subtitleText,
+            tabBarBottomHidden: false,
+          },
+        }
       );
       modalNavigationService = spectator.inject(ModalNavigationService);
       modalNavigationService.isModalRoute.and.returnValue(false);
@@ -690,7 +697,7 @@ describe('PageComponent', () => {
     it('should hide tab bar when tabBarBottomHidden is true', fakeAsync(() => {
       expect(tabBar.tabBarBottomHidden).toBe(false);
 
-      spectator.setInput('tabBarBottomHidden', true);
+      spectator.setHostInput('tabBarBottomHidden', true);
       spectator.detectChanges();
       tick();
 
@@ -699,13 +706,13 @@ describe('PageComponent', () => {
 
     it('should show tab bar when tabBarBottomHidden is false', fakeAsync(() => {
       // hide tab bar
-      spectator.setInput('tabBarBottomHidden', true);
+      spectator.setHostInput('tabBarBottomHidden', true);
       spectator.detectChanges();
       tick();
       expect(tabBar.tabBarBottomHidden).toBe(true);
 
       // show tab bar
-      spectator.setInput('tabBarBottomHidden', false);
+      spectator.setHostInput('tabBarBottomHidden', false);
       spectator.detectChanges();
       tick();
 
@@ -713,7 +720,7 @@ describe('PageComponent', () => {
     }));
 
     it('should show tab bar when tabBarBottomHidden is true on leave', () => {
-      spectator.setInput('tabBarBottomHidden', true);
+      spectator.setHostInput('tabBarBottomHidden', true);
 
       navigateToUrl(firstOtherUrl);
 

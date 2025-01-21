@@ -68,7 +68,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @Input() set selectedIndex(value: number) {
-    if (this._selectedIndex != value) {
+    if (value !== undefined && this._selectedIndex != value) {
       this._selectedIndex = value;
       this.focusedIndex = this._selectedIndex;
       this._value = this.items[this.selectedIndex] || null;
