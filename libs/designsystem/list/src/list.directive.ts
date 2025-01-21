@@ -2,6 +2,7 @@ import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[kirbyListItemTemplate]',
+  standalone: true,
 })
 export class ListItemTemplateDirective {}
 

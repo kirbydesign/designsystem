@@ -23,14 +23,12 @@ import { ListComponent } from './list.component';
 import {
   ListFooterDirective,
   ListHeaderDirective,
-  ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
 
 const exportedDeclarations = [
   ListComponent,
   ListItemComponent,
-  ListItemTemplateDirective,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
   ListHeaderDirective,
@@ -39,12 +37,7 @@ const exportedDeclarations = [
   ListExperimentalComponent,
 ];
 
-const declarations = [
-  ...exportedDeclarations,
-  ListItemColorDirective,
-  InfiniteScrollDirective,
-  ListItemComponent,
-];
+const declarations = [...exportedDeclarations, ListItemColorDirective, InfiniteScrollDirective];
 
 @NgModule({
   declarations: declarations,

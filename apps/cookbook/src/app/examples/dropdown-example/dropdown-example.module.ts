@@ -8,6 +8,7 @@ import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { DropdownExampleConfigurationComponent } from './dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { DropdownExampleAttentionLevelComponent } from './examples/attention-level';
 import { DropdownExampleCustomItemTemplateComponent } from './examples/custom-item-template';
@@ -43,6 +44,7 @@ const COMPONENT_DECLARATIONS = [
     DropdownModule,
     IconModule,
     CheckboxComponent,
+    ItemModule,
   ],
   providers: [ToastHelper, ToastController],
   declarations: COMPONENT_DECLARATIONS,
