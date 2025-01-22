@@ -1,4 +1,0 @@
-{
-  "extends": ["@repo/eslint-config/base.json"],
-  "ignorePatterns": ["dist/"]
-}
