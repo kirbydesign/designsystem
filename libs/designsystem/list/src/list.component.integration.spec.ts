@@ -26,7 +26,7 @@ describe('ListComponent', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule],
+    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule, ListItemTemplateDirective],
     providers: [
       {
         provide: WindowRef,
@@ -38,7 +38,6 @@ describe('ListComponent', () => {
       IconComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
-      ListItemTemplateDirective,
       ListItemComponent,
     ],
   });
