@@ -127,6 +127,10 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'flower', svg: 'flower.svg' },
     { name: 'basket', svg: 'basket.svg' },
     { name: 'drag-drop', svg: 'drag-drop.svg' },
+    { name: 'notification-fill', svg: 'notification-fill.svg' },
+    { name: 'expense', svg: 'expense.svg' },
+    { name: 'income', svg: 'income.svg' },
+    { name: 'signed-document', svg: 'signed-document.svg' },
   ]),
 };
 
