@@ -23,6 +23,7 @@ import { ListComponent } from './list.component';
 import {
   ListFooterDirective,
   ListHeaderDirective,
+  ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
 
@@ -52,8 +53,9 @@ const declarations = [...exportedDeclarations, ListItemColorDirective, InfiniteS
     IonLabel,
     IonList,
     IonListHeader,
+    ListItemTemplateDirective,
   ],
-  exports: exportedDeclarations,
+  exports: [exportedDeclarations, ListItemTemplateDirective],
   providers: [],
 })
 export class ListModule {}
