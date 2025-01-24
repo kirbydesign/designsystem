@@ -1,12 +1,10 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
   EventEmitter,
-  HostBinding,
   HostListener,
   Input,
   Output,
