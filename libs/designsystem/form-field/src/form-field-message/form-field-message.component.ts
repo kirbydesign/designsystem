@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'kirby-form-field-message',
   styleUrls: ['./form-field-message.component.scss'],
   templateUrl: './form-field-message.component.html',
+  standalone: false,
 })
 export class FormFieldMessageComponent {
   @Input() text: string;

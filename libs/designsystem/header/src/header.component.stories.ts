@@ -3,14 +3,14 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { HeaderComponent, HeaderModule } from '@kirbydesign/designsystem/header';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
-import { HeaderExampleModule } from '~/app/examples/header-example/header-example.module';
+import { HeaderExampleComponent } from '~/app/examples/header-example/header-example.component';
 
 const meta: Meta<HeaderComponent> = {
   component: HeaderComponent,
   title: 'Components / Header',
   decorators: [
     moduleMetadata({
-      imports: [HeaderModule, HeaderExampleModule],
+      imports: [HeaderModule, HeaderExampleComponent],
     }),
   ],
   parameters: {

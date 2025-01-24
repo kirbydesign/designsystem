@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalExampleSimpleComponent } from './modal-example-simple.component';
 
 @Component({
   template: `
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
     <cookbook-modal-example-simple></cookbook-modal-example-simple>
   `,
   styleUrls: ['../_examples.shared.scss'],
+  imports: [ModalExampleSimpleComponent],
 })
 export class ModalExampleComponent {}

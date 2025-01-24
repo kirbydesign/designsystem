@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
   selector: 'kirbydesign-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: false,
 })
 export class HomeComponent {
   constructor(private _router: Router) {}

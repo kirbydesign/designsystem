@@ -1,6 +1,10 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { DatePipe } from '@angular/common';
 
 const config = {
   template: `<kirby-card>
@@ -66,6 +70,7 @@ deselectDate() {
   selector: 'cookbook-calendar-card-example',
   template: config.template,
   styleUrls: ['./in-card.scss'],
+  imports: [CardModule, CalendarComponent, ButtonComponent, DatePipe],
 })
 export class CalendarCardExampleComponent implements OnChanges {
   template: string = config.template;

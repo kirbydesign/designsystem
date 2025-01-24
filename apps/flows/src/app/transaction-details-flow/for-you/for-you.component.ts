@@ -5,6 +5,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
   selector: 'kirbydesign-transactions-details-foryou',
   templateUrl: './for-you.component.html',
   styleUrls: ['./for-you.component.scss'],
+  standalone: false,
 })
 export class ForYouComponent {
   constructor(private toastController: ToastController) {}

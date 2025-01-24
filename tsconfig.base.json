@@ -20,7 +20,6 @@
       "@kirbydesign/angular/badge": ["libs/angular/dist/badge"],
       "@kirbydesign/angular/spinner": ["libs/angular/dist/spinner"],
       "@kirbydesign/core": ["libs/core/dist/"],
-      "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
       "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/dist/*"],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/dist/accordion"],
@@ -72,6 +71,7 @@
       "@kirbydesign/designsystem/toggle": ["libs/designsystem/dist/toggle"],
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/dist/toggle-button"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/dist/types"],
+      "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]
     }

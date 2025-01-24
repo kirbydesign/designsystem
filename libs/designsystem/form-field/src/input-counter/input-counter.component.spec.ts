@@ -36,7 +36,8 @@ describe('InputCounterComponent', () => {
   describe('when configured with length and no maxlength', () => {
     const expectedText = '10';
     beforeEach(() => {
-      spectator.setInput('length', 10);
+      spectator.component.length = 10;
+      spectator.detectChanges();
     });
 
     it('should have correct text', () => {
@@ -51,8 +52,9 @@ describe('InputCounterComponent', () => {
   describe('when configured with length and maxlength = 0', () => {
     const expectedText = '10';
     beforeEach(() => {
-      spectator.setInput('length', 10);
-      spectator.setInput('maxlength', 0);
+      spectator.component.length = 10;
+      spectator.component.maxlength = 0;
+      spectator.detectChanges();
     });
 
     it('should have correct text', () => {
@@ -67,8 +69,9 @@ describe('InputCounterComponent', () => {
   describe('when configured with length and maxlength', () => {
     const expectedText = '10/20';
     beforeEach(() => {
-      spectator.setInput('length', 10);
-      spectator.setInput('maxlength', 20);
+      spectator.component.length = 10;
+      spectator.component.maxlength = 20;
+      spectator.detectChanges();
     });
 
     it('should have correct text', () => {

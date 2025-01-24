@@ -4,14 +4,14 @@ import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 
-import { ButtonExampleModule } from '~/app/examples/button-example/button-example.module';
+import { ButtonExampleComponent } from '~/app/examples/button-example/button-example.component';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
   title: 'Components / Button',
   decorators: [
     moduleMetadata({
-      imports: [IconModule, ButtonExampleModule],
+      imports: [IconModule, ButtonExampleComponent],
     }),
   ],
 };

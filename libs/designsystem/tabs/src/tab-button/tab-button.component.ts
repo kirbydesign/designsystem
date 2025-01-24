@@ -7,6 +7,7 @@ import { selectedTabClickEvent } from './tab-button.events';
   selector: 'kirby-tab-button',
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss'],
+  standalone: false,
 })
 export class TabButtonComponent {
   @Input() tab: string;

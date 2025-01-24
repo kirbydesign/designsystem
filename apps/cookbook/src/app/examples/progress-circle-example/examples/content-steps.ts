@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 
 const config = {
   selector: 'cookbook-progress-circle-example-content-steps',
@@ -10,6 +11,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ProgressCircleComponent],
 })
 export class ProgressCircleExampleContentStepsComponent {
   template: string = config.template;

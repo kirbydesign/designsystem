@@ -6,6 +6,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 @Component({
   selector: 'kirbydesign-account',
   templateUrl: './account.component.html',
+  standalone: false,
 })
 export class AccountComponent {
   constructor(

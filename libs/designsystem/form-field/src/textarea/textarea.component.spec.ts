@@ -17,7 +17,9 @@ describe('TextareaComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost('<textarea kirby-textarea></textarea>');
+    spectator = createHost(
+      '<textarea kirby-textarea [hasError]="hasError" [disabled]="disabled"></textarea>'
+    );
     element = spectator.element as HTMLTextAreaElement;
   });
 
@@ -74,7 +76,7 @@ describe('TextareaComponent', () => {
 
   describe('when hasError', () => {
     beforeEach(() => {
-      spectator.component.hasError = true;
+      spectator.setHostInput('hasError', true);
       spectator.detectChanges();
     });
 
@@ -89,7 +91,7 @@ describe('TextareaComponent', () => {
 
   describe('when disabled', () => {
     beforeEach(() => {
-      element.disabled = true;
+      spectator.setHostInput('disabled', true);
     });
 
     it('should render with correct background-color', () => {

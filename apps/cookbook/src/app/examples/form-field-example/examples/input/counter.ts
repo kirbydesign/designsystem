@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 import { InputSize } from '@kirbydesign/designsystem';
+import {
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
 
 const config = {
   selector: 'cookbook-form-field-input-counter-example',
@@ -23,6 +28,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [FormFieldModule, DateInputDirective, InputComponent],
 })
 export class FormFieldInputCounterExampleComponent {
   template: string = config.template;

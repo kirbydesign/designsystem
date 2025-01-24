@@ -22,13 +22,7 @@ export enum SegmentedControlMode {
   default = 'default',
 }
 
-// Workaround until TS 5.4 official NoInfer
-// https://github.com/millsp/ts-toolbelt/blob/master/sources/Function/NoInfer.ts
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type NoInfer<T> = [T][T extends any ? 0 : never];
-
 @Component({
-  standalone: true,
   imports: [IconModule, BadgeComponent, CommonModule, IonSegment, IonSegmentButton],
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',

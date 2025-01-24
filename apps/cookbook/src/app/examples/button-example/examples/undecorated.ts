@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-button-example-undecorated',
@@ -11,6 +13,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
+  imports: [ButtonComponent, IconModule],
 })
 export class ButtonExampleUndecoratedComponent {
   template: string = config.template;

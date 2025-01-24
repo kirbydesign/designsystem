@@ -193,6 +193,7 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
 @Component({
   selector: 'kirby-test-component',
   template: '<span>PlaceHolder HTML to be Replaced</span>',
+  standalone: false,
 })
 export class TestWrapperComponent {}
 
