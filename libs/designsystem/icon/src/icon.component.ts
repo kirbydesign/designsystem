@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
   Input,
   OnChanges,
+  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 
@@ -28,6 +30,8 @@ export enum IconSize {
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
   private _icon = (this.icon = this.defaultIcon);
+  private element: HTMLElement;
+
   @HostBinding('class')
   @Input()
   size: IconSize | `${IconSize}`;
@@ -64,11 +68,25 @@ Do you have a typo in 'name' for a built-in icon or
 forgot to configure the custom icon through the 'IconRegistryService'?`);
   }
 
-  constructor(private iconRegistryService: IconRegistryService) {}
+  constructor(
+    private iconRegistryService: IconRegistryService,
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {
+    this.element = this.elementRef.nativeElement;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.iconRegistryService.getIcon(changes.name.currentValue);
+      // If the icon is changed, a new aria-label might have been added as well
+      this.setAriaHiddenIfNoLabel();
+    }
+  }
+
+  private setAriaHiddenIfNoLabel() {
+    if (!this.element.hasAttribute('aria-label')) {
+      this.renderer.setAttribute(this.element, 'aria-hidden', 'true');
     }
   }
 }
