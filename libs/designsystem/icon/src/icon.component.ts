@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
   Input,
   OnChanges,
+  OnInit,
+  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 
@@ -25,7 +28,7 @@ export enum IconSize {
   host: { '[class.kirby-icon]': 'true' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconComponent implements OnChanges {
+export class IconComponent implements OnChanges, OnInit {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
   private _icon = (this.icon = this.defaultIcon);
   @HostBinding('class')
@@ -64,7 +67,18 @@ Do you have a typo in 'name' for a built-in icon or
 forgot to configure the custom icon through the 'IconRegistryService'?`);
   }
 
-  constructor(private iconRegistryService: IconRegistryService) {}
+  constructor(
+    private iconRegistryService: IconRegistryService,
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
+
+  ngOnInit(): void {
+    const element = this.elementRef.nativeElement;
+    if (!element.hasAttribute('aria-label')) {
+      this.renderer.setAttribute(element, 'aria-hidden', 'true');
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {

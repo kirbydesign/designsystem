@@ -20,6 +20,11 @@ const config = {
 <kirby-toggle-button (checkChanged)="onCheckChanged($event)">
   <button kirby-button unchecked disabled attentionLevel="3">Disabled</button>
   <button kirby-button checked >Activated</button>
+</kirby-toggle-button>
+
+<kirby-toggle-button>
+  <button kirby-button unchecked attentionLevel="3" [showIconOnly]="true">Notifications disabled<kirby-icon name="notification"></kirby-icon></button>
+  <button kirby-button checked attentionLevel="3" [showIconOnly]="true">Notifications enabled<kirby-icon name="notification-fill"></kirby-icon></button>
 </kirby-toggle-button>`,
 };
 
