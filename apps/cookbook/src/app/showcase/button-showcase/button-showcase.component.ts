@@ -1,11 +1,41 @@
 import { Component } from '@angular/core';
 
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { RouterLink } from '@angular/router';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { ButtonExampleDefaultComponent } from '../../examples/button-example/examples/default';
+import { ButtonExampleAttentionLevelComponent } from '../../examples/button-example/examples/attention-level';
+import { ButtonExampleSizesComponent } from '../../examples/button-example/examples/sizes';
+import { ButtonExampleBlockComponent } from '../../examples/button-example/examples/block';
+import { ButtonExampleIconsComponent } from '../../examples/button-example/examples/icons';
+import { ButtonExampleIconOnlyComponent } from '../../examples/button-example/examples/icon-only';
+import { ButtonExampleUndecoratedComponent } from '../../examples/button-example/examples/undecorated';
+import { ButtonExampleDisabledComponent } from '../../examples/button-example/examples/disabled';
+import { ButtonExampleAriaDisabledComponent } from '../../examples/button-example/examples/aria-disabled';
+import { ButtonExampleLinkComponent } from '../../examples/button-example/examples/link';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-button-showcase',
   templateUrl: './button-showcase.component.html',
   styleUrls: ['./button-showcase.component.scss'],
+  imports: [
+    DividerComponent,
+    ExampleViewerComponent,
+    ButtonExampleDefaultComponent,
+    ButtonExampleAttentionLevelComponent,
+    ButtonExampleSizesComponent,
+    ButtonExampleBlockComponent,
+    ButtonExampleIconsComponent,
+    RouterLink,
+    ButtonExampleIconOnlyComponent,
+    ButtonExampleUndecoratedComponent,
+    ButtonExampleDisabledComponent,
+    ButtonExampleAriaDisabledComponent,
+    ButtonExampleLinkComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class ButtonShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

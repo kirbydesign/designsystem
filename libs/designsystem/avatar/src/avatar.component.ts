@@ -18,7 +18,6 @@ export enum AvatarSize {
 }
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   selector: 'kirby-avatar',
   templateUrl: './avatar.component.html',

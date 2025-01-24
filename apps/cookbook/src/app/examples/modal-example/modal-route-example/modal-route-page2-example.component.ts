@@ -1,6 +1,11 @@
 import { Component, Optional, SkipSelf } from '@angular/core';
 
 import { Modal, ModalController } from '@kirbydesign/designsystem';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { NgIf } from '@angular/common';
+import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 @Component({
   selector: 'cookbook-modal-route-page-2-example',
@@ -28,6 +33,7 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
     'h4 { margin-top: 24px; } ',
     'kirby-modal-footer { --kirby-modal-footer-justify-content: space-between; }',
   ],
+  imports: [PageModule, ButtonComponent, NgIf, ModalFooterComponent, IconModule],
 })
 export class ModalRoutePage2ExampleComponent {
   constructor(

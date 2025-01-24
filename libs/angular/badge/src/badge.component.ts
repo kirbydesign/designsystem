@@ -5,7 +5,6 @@ import { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign/core
 @Component({
   selector: 'kirby-badge',
   template: '<ng-content></ng-content>',
-  standalone: true,
   imports: [CommonModule],
 })
 export class KirbyBadgeComponent {

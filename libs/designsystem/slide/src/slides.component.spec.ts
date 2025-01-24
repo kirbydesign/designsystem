@@ -107,7 +107,7 @@ describe('SlidesComponent', () => {
 
   it('should hide the navigation buttons, if the Slider doesn´t contain enough slides for sliding', () => {
     spectator = createHost(hostTemplate, props);
-    spectator.setInput('slides', [0]);
+    spectator.setHostInput('slides', [0]);
 
     // It is necessary to update the Slides container, because it does not updated automatically when the "slides" input changes
     spectator.component.swiperContainer.nativeElement.swiper.update();

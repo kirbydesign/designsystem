@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const config = {
   selector: 'cookbook-checkbox-multiline-example',
@@ -10,6 +11,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [CheckboxComponent],
 })
 export class CheckboxMultilineExampleComponent {
   template: string = config.template;

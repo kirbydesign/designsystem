@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-icon-custom-example',
@@ -39,6 +40,7 @@ export class MyModule {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
+  imports: [IconModule],
 })
 export class IconCustomExampleComponent {
   static codeSnippet: string = config.codeSnippet;

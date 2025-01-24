@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 
 const config = {
   selector: 'cookbook-avatar-example-image-error',
@@ -20,6 +21,7 @@ showFallbackImageOnError(event: ErrorEvent) {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  imports: [AvatarComponent],
 })
 export class AvatarExampleImageErrorComponent {
   template: string = config.template;

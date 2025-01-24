@@ -12,13 +12,24 @@ describe('AlertComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost(`
+    spectator = createHost(
+      `
       <kirby-alert 
-        okBtn="Test OK Button Text"
-        cancelBtn="Test Cancel Button Text"
+        [okBtn]="okBtn"
+        [cancelBtn]="cancelBtn"
+        [okBtnIsDestructive]="okBtnIsDestructive"
+        [iconName]="iconName"
       >
       </kirby-alert>
-    `);
+    `,
+      {
+        hostProps: {
+          icon: { name: 'warning' },
+          cancelBtn: 'Test Cancel Button Text',
+          okBtn: 'Test OK Button Text',
+        },
+      }
+    );
   });
 
   it('should create', () => {
@@ -39,7 +50,7 @@ describe('AlertComponent', () => {
     });
 
     it('should support isDestructive', () => {
-      spectator.setInput({ okBtnIsDestructive: true });
+      spectator.setHostInput({ okBtnIsDestructive: true });
 
       expect(okButton).toBeDefined();
       expect(okButton).toHaveClass('destructive');
@@ -51,7 +62,8 @@ describe('AlertComponent', () => {
     });
 
     it('should have large ok button when no cancel button', () => {
-      spectator.setInput({ cancelBtn: null });
+      spectator.setHostInput({ cancelBtn: undefined });
+      spectator.detectChanges();
 
       expect(okButton).toHaveClass('lg');
     });
@@ -75,14 +87,14 @@ describe('AlertComponent', () => {
     });
 
     it('should not render when cancelBtn not set', () => {
-      spectator.setInput({ cancelBtn: null });
+      spectator.setHostInput({ cancelBtn: null });
 
       expect(spectator.query('.cancel-btn')).toBeNull();
     });
   });
   describe('icon', () => {
     it('should render', () => {
-      spectator.setInput({ iconName: 'warning' });
+      spectator.setHostInput({ iconName: 'warning' });
       const icon: HTMLElement = spectator.query('.icon-outline');
 
       expect(icon).not.toBeNull();

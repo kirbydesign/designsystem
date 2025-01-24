@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
   selector: 'cookbook-button-example-sizes',
@@ -12,6 +13,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './sizes.scss',
+  imports: [ButtonComponent],
 })
 export class ButtonExampleSizesComponent {
   template: string = config.template;

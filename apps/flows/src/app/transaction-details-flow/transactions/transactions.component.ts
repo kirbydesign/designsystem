@@ -9,6 +9,7 @@ import transactionsData from '../../transactions-data.json';
   selector: 'kirbydesign-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss'],
+  standalone: false,
 })
 export class TransactionsComponent implements OnInit {
   constructor() {}

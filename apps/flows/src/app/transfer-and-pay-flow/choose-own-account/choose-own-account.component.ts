@@ -4,6 +4,7 @@ import { OwnAccountService } from '../own-account.service';
 @Component({
   selector: 'flows-choose-own-account',
   templateUrl: './choose-own-account.component.html',
+  standalone: false,
 })
 export class ChooseOwnAccountComponent implements OnInit {
   constructor(private ownAccountService: OwnAccountService) {}

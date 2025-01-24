@@ -29,6 +29,7 @@ import { RadioComponent } from '../radio.component';
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class RadioGroupComponent implements AfterContentInit, ControlValueAccessor {
   constructor(private changeDetectionRef: ChangeDetectorRef) {}

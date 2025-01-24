@@ -6,7 +6,6 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 
 @Component({
   selector: 'kirby-x-image-banner',
-  standalone: true,
   imports: [CardModule, ButtonComponent, IconModule, NgClass, CommonModule],
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',

@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   selector: 'kirby-progress-circle-ring',
   templateUrl: './progress-circle-ring.component.html',

@@ -6,6 +6,7 @@ import { OtherService } from '../other.service';
 @Component({
   selector: 'flows-own-account-page',
   templateUrl: './own-account-page.component.html',
+  standalone: false,
 })
 export class OwnAccountPageComponent implements OnInit {
   public receiverId: number;

@@ -14,7 +14,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonRange } from '@ionic/angular/standalone';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonRange],
   selector: 'kirby-range',
   templateUrl: './range.component.html',

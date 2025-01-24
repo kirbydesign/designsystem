@@ -26,21 +26,25 @@ import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Directive({
   selector: '[kirbyHeaderActions]',
+  standalone: false,
 })
 export class HeaderActionsDirective {}
 
 @Directive({
   selector: '[kirbyHeaderCustomSection]',
+  standalone: false,
 })
 export class HeaderCustomSectionDirective {}
 
 @Directive({
   selector: '[kirbyHeaderTitleActionIcon]',
+  standalone: false,
 })
 export class HeaderTitleActionIconDirective {}
 
 @Directive({
   selector: '[kirbyHeaderCustomFlag]',
+  standalone: false,
 })
 export class HeaderCustomFlagDirective {}
 
@@ -49,6 +53,7 @@ export class HeaderCustomFlagDirective {}
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
   @HostBinding('class.centered')

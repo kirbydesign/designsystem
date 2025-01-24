@@ -16,6 +16,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
   selector: 'kirby-toggle-button',
   templateUrl: './toggle-button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ToggleButtonComponent {
   @Input() checked: boolean;

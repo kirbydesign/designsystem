@@ -3,6 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/designsystem';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
+import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 
 @Component({
   template: `
@@ -67,6 +73,15 @@ import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/desi
       </kirby-fab-sheet>
     </kirby-page>
   `,
+  imports: [
+    PageModule,
+    ButtonComponent,
+    IconModule,
+    NgIf,
+    FabSheetComponent,
+    ActionSheetComponent,
+    AsyncPipe,
+  ],
 })
 export class TabExampleComponent implements OnInit {
   title: Observable<string>;

@@ -4,6 +4,7 @@ import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 
 @Directive({
   selector: `[kirbyModalRouterLink]`,
+  standalone: false,
 })
 export class ModalRouterLinkDirective implements OnInit {
   constructor(

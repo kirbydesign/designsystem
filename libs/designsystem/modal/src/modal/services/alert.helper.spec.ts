@@ -14,6 +14,7 @@ import { AlertHelper } from './alert.helper';
   template: `
     <h2>Dummy Component</h2>
   `,
+  standalone: false,
 })
 class EmbeddedDummyComponent {}
 

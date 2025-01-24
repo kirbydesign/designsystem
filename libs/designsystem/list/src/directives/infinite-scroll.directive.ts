@@ -22,6 +22,7 @@ export const INFINITE_SCROLL_DEBOUNCE = 100;
 
 @Directive({
   selector: '[kirbyInfiniteScroll]',
+  standalone: false,
 })
 export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   /**

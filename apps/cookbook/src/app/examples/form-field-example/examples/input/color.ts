@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import {
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
 
 const config = {
   selector: 'cookbook-form-field-input-color-example',
@@ -20,6 +27,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: 'color.scss',
+  imports: [CardModule, ThemeColorDirective, FormFieldModule, DateInputDirective, InputComponent],
 })
 export class FormFieldInputColorExampleComponent {
   get template(): string {
