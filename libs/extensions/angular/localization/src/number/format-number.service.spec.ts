@@ -1,4 +1,4 @@
-import { getLocaleNumberSymbol, NumberSymbol, registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
 import { LOCALE_ID } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
@@ -28,8 +28,8 @@ registerLocaleData(localeDa);
 
         const formattedNumber = spectator.service.formatNumber(number, '1.2-2');
 
-        const thousandSeparator = getLocaleNumberSymbol(locale, NumberSymbol.CurrencyGroup);
-        const decimalSeparator = getLocaleNumberSymbol(locale, NumberSymbol.Decimal);
+        const thousandSeparator = new Intl.NumberFormat(locale).format(1000).charAt(1);
+        const decimalSeparator = new Intl.NumberFormat(locale).format(0.1).charAt(1);
 
         const expected = `1${thousandSeparator}234${thousandSeparator}567${decimalSeparator}12`;
         expect(formattedNumber).toBe(expected);
@@ -59,8 +59,8 @@ registerLocaleData(localeDa);
 
         const formattedNumber = spectator.service.formatNumber(number, '1.2-2');
 
-        const thousandSeparator = getLocaleNumberSymbol('da', NumberSymbol.CurrencyGroup);
-        const decimalSeparator = getLocaleNumberSymbol('da', NumberSymbol.Decimal);
+        const thousandSeparator = new Intl.NumberFormat('da').format(1000).charAt(1);
+        const decimalSeparator = new Intl.NumberFormat('da').format(0.1).charAt(1);
 
         const expected = `1${thousandSeparator}234${thousandSeparator}567${decimalSeparator}12`;
         expect(formattedNumber).toBe(expected);
