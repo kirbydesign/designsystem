@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const config = {
   selector: 'cookbook-checkbox-states-example',
@@ -20,6 +21,7 @@ const config = {
       }
     `,
   ],
+  imports: [CheckboxComponent],
 })
 export class CheckboxStatesExampleComponent {
   template: string = config.template;

@@ -19,7 +19,6 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, IconModule],
-  standalone: true,
 })
 export class TableSortableComponent implements AfterViewInit {
   constructor(private renderer: Renderer2) {}

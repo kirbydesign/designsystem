@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const config = {
   selector: 'cookbook-checkbox-list-example',
@@ -21,6 +24,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ListModule, ItemModule, CheckboxComponent],
 })
 export class CheckboxListExampleComponent {
   template: string = config.template;

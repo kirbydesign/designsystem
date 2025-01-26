@@ -3,6 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PageFooterComponent } from '@kirbydesign/designsystem';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { BasePageExampleComponent } from '../../base-page-example.component';
 
 const pageTemplate = `<kirby-page [title]="title" [tabBarBottomHidden]="!showTabs">
@@ -48,7 +55,20 @@ const config = {
   ],
 };
 
-@Component({ template: config.template, styles: config.styles })
+@Component({
+  template: config.template,
+  styles: config.styles,
+  imports: [
+    PageModule,
+    NgTemplateOutlet,
+    NgIf,
+    ButtonComponent,
+    IconModule,
+    CardModule,
+    ItemModule,
+    ToggleComponent,
+  ],
+})
 export class PageFixedFooterTabExampleComponent extends BasePageExampleComponent implements OnInit {
   static readonly template = pageTemplate.replace(
     /<kirby-page-content[^>]*>(.|\s)*?<\/kirby-page-content>/,

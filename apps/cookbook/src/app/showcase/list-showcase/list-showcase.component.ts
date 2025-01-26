@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ListItemsNoDividersExampleTemplate } from '../../examples/list-example/examples/items-no-dividers';
 import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ListColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/colored-items';
 import { ListItemsExampleTemplate } from '~/app/examples/list-example/examples/items';
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list-example/examples/header-and-footer';
@@ -15,6 +18,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   selector: 'cookbook-list-showcase',
   templateUrl: './list-showcase.component.html',
   styleUrls: ['./list-showcase.component.scss'],
+  imports: [CodeViewerComponent, IphoneComponent, ApiDescriptionPropertiesComponent],
 })
 export class ListShowcaseComponent {
   items: string = ListItemsExampleTemplate;

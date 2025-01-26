@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   templateUrl: './tab-navigation-item.component.html',
   styleUrls: ['./tab-navigation-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TabNavigationItemComponent {
   @Input()

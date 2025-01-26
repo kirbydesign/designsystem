@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { RouterLink } from '@angular/router';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
@@ -19,6 +26,15 @@ import {
   selector: 'cookbook-page-showcase',
   templateUrl: './page-showcase.component.html',
   styleUrls: ['./page-showcase.component.scss'],
+  imports: [
+    FlagComponent,
+    RouterLink,
+    CodeViewerComponent,
+    ExampleViewerComponent,
+    IphoneComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class PageShowcaseComponent {
   simpleExampleHtml: string = PageSimpleExampleComponent.template;

@@ -42,11 +42,14 @@ describe('CalendarComponent', () => {
     describe(`when configured with ${scenario.property}`, () => {
       describe('through input properties', () => {
         beforeEach(() => {
-          spectator = createHost(`<kirby-calendar></kirby-calendar>`, {
-            props: {
-              [scenario.property]: scenario.value,
-            },
-          });
+          spectator = createHost(
+            `<kirby-calendar [${scenario.property}]="${scenario.property}"></kirby-calendar>`,
+            {
+              hostProps: {
+                [scenario.property]: scenario.value,
+              },
+            }
+          );
         });
 
         it(`should create component with '${scenario.property}' set`, () => {

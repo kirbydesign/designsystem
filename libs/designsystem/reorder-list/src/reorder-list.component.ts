@@ -21,7 +21,6 @@ import { IonBackdrop, IonReorderGroup } from '@ionic/angular/standalone';
 import { ReorderEvent } from './reorder-event';
 
 @Component({
-  standalone: true,
   imports: [CardModule, ItemModule, CommonModule, IonBackdrop, IonReorderGroup],
   selector: 'kirby-reorder-list',
   templateUrl: './reorder-list.component.html',

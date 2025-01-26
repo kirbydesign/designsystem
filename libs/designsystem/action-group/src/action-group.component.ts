@@ -31,7 +31,6 @@ type CollapsedAction = { button: HTMLButtonElement; text: string };
 
 @Component({
   selector: 'kirby-action-group',
-  standalone: true,
   imports: [CommonModule, ButtonComponent, ItemModule, MenuComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-group.component.html',

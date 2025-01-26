@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-simple-sm',
@@ -10,6 +11,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemModule],
 })
 export class ItemExampleSimpleSmallComponent {
   template: string = config.template;

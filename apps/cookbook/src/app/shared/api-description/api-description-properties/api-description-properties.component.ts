@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
 
 export interface ApiDescriptionProperty {
   name: string;
@@ -19,6 +20,7 @@ export interface ApiDescriptionPropertyColumns {
   selector: 'cookbook-api-description-properties',
   templateUrl: './api-description-properties.component.html',
   styleUrls: ['../api-description.shared.scss'],
+  imports: [NgIf, NgFor],
 })
 export class ApiDescriptionPropertiesComponent {
   @Input() properties: ApiDescriptionProperty[];

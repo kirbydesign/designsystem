@@ -16,6 +16,7 @@ import { AppComponent } from './kirby-app.component';
       useExisting: forwardRef(() => IonAppMockComponent),
     },
   ],
+  standalone: false,
 })
 export class IonAppMockComponent {}
 

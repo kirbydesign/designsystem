@@ -13,6 +13,7 @@ import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  standalone: false,
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;

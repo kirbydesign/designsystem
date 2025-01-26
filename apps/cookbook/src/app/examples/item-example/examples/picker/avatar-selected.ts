@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-item-example-picker-avatar-selected',
@@ -14,6 +17,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemModule, AvatarComponent, IconModule],
 })
 export class ItemExamplePickerAvatarSelectedComponent {
   template: string = config.template;

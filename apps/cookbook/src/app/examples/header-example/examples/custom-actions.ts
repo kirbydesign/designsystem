@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { BasePageExampleComponent } from '../../page-example/base-page-example.component';
 
 const config = {
@@ -38,6 +44,7 @@ const config = {
 };
 @Component({
   template: config.template,
+  imports: [PageModule, HeaderModule, MenuComponent, ButtonComponent, IconModule, ItemModule],
 })
 export class HeaderWithCustomActionsExampleComponent extends BasePageExampleComponent {
   document = window.document.body;

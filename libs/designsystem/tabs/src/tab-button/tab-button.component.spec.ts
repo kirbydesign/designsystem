@@ -1,4 +1,4 @@
-import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -9,7 +9,7 @@ import { TabButtonComponent } from './tab-button.component';
 const { getTextColor, fontSize, fontWeight, lineHeight, size } = DesignTokenHelper;
 
 describe('TabsComponent', () => {
-  let spectator: Spectator<TabButtonComponent>;
+  let spectator: SpectatorHost<TabButtonComponent>;
   let ionTabButton: HTMLIonTabButtonElement;
   let innerButton: HTMLAnchorElement;
   const isNonTouchDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;

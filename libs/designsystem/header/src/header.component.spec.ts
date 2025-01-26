@@ -1,4 +1,4 @@
-import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -14,6 +14,8 @@ import { HeaderComponent } from './header.component';
 const { fontSize, size } = DesignTokenHelper;
 
 describe('HeaderComponent', () => {
+  let spectator: SpectatorHost<HeaderComponent>;
+
   const createHost = createHostFactory({
     component: HeaderComponent,
     imports: [
@@ -33,7 +35,6 @@ describe('HeaderComponent', () => {
     const subtitle1 = 'Subtitle one';
     const subtitle2 = 'Subtitle two';
 
-    let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
@@ -138,7 +139,6 @@ describe('HeaderComponent', () => {
     ];
     const subtitlesAsString = `['${subtitles.join("','")}']`;
 
-    let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" [subtitle1]="${subtitlesAsString}">
@@ -181,7 +181,7 @@ describe('HeaderComponent', () => {
     const value = '12.345,67';
     const valueUnit = 'USD';
 
-    let spectator: Spectator<HeaderComponent>;
+    let spectator: SpectatorHost<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="${title}" value="${value}" valueUnit="${valueUnit}">
@@ -228,7 +228,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('with avatar', () => {
-    let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
@@ -261,7 +260,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('with progress circle', () => {
-    let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
@@ -302,7 +300,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('with flag', () => {
-    let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
@@ -318,7 +315,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('with custom flag', () => {
-    let spectator: Spectator<HeaderComponent>;
     const customFlagContent = 'Custom flag content';
 
     beforeEach(() => {
@@ -339,7 +335,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('with custom section', () => {
-    let spectator: Spectator<HeaderComponent>;
     const customSectionContent = 'Custom section content';
     beforeEach(() => {
       spectator = createHost(`
@@ -359,7 +354,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('with interactive title', () => {
-    let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
@@ -405,7 +399,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('with actions', () => {
-    let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
