@@ -44,6 +44,6 @@ export class ToggleButtonComponent {
       'button[kirby-button]'
     ) as HTMLButtonElement;
 
-    buttonToFocus.focus();
+    buttonToFocus?.focus();
   }
 }
