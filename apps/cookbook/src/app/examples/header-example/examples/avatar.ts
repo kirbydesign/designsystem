@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-header-example-avatar',
@@ -12,6 +15,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [HeaderModule, AvatarComponent, IconModule],
 })
 export class HeaderExampleAvatarComponent {
   template: string = config.template;

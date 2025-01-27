@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const config = {
   selector: 'cookbook-range-default-example',
@@ -8,6 +9,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [RangeComponent],
 })
 export class RangeDefaultExampleComponent {
   template: string = config.template;

@@ -7,13 +7,19 @@ import { filter, first } from 'rxjs/operators';
 
 import { ModalNavigationService } from './modal-navigation.service';
 
-@Component({})
+@Component({
+  standalone: false,
+})
 class DummyHomeComponent {}
 
-@Component({})
+@Component({
+  standalone: false,
+})
 class BackdropComponent {}
 
-@Component({})
+@Component({
+  standalone: false,
+})
 class ModalPageComponent {}
 
 const lazyLoadedRoutes: Routes = [

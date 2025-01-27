@@ -1,5 +1,5 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
 import { ChartJSService } from '../shared';
@@ -7,7 +7,7 @@ import { ChartJSService } from '../shared';
 import { ChartComponent } from './chart.component';
 
 describe('ChartComponent', () => {
-  let spectator: Spectator<ChartComponent>;
+  let spectator: SpectatorHost<ChartComponent>;
   let component: ChartComponent;
   const createHost = createHostFactory({
     component: ChartComponent,
@@ -16,7 +16,18 @@ describe('ChartComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost('<kirby-chart></kirby-chart>');
+    spectator = createHost(
+      `<kirby-chart 
+        [height]="height" 
+        [labels]="labels" 
+        [type]="type" 
+        [data]="data" 
+        [customOptions]="customOptions" 
+        [annotations]="annotations" 
+        [highlightedElements]="highlightedElements">
+      </kirby-chart>`,
+      { hostProps: { type: 'column' } }
+    );
     component = spectator.component;
   });
 
@@ -35,7 +46,7 @@ describe('ChartComponent', () => {
 
     beforeEach(() => {
       updateFnSpy = spyOn<any>(component, 'updateLabels');
-      spectator.setInput('labels', ['1', '2']);
+      spectator.setHostInput('labels', ['1', '2']);
     });
 
     it('should not call the corresponding update function', () => {
@@ -74,7 +85,7 @@ describe('ChartComponent', () => {
       const element = spectator.query('.chart-container') as HTMLElement;
       expect(element).not.toHaveComputedStyle({ height: `${customHeight}px` });
 
-      spectator.setInput('height', customHeight);
+      spectator.setHostInput('height', customHeight);
       spectator.detectChanges();
 
       expect(element).toHaveComputedStyle({ height: `${customHeight}px` });
@@ -85,7 +96,7 @@ describe('ChartComponent', () => {
       const element = spectator.query('.chart-container') as HTMLElement;
       expect(element).not.toHaveComputedStyle({ height: customHeight });
 
-      spectator.setInput('height', customHeight);
+      spectator.setHostInput('height', customHeight);
       spectator.detectChanges();
 
       expect(element).toHaveComputedStyle({ height: customHeight });
@@ -115,7 +126,7 @@ describe('ChartComponent', () => {
         it(`should update ${property}`, () => {
           const updateFnSpy = spyOn<any>(component, updateFn);
 
-          spectator.setInput(property as any, newValue);
+          spectator.setHostInput(property as any, newValue);
 
           expect(spectator.component['chartHasBeenRendered']).toBeTrue();
           expect(updateFnSpy).toHaveBeenCalledTimes(1);
@@ -128,7 +139,7 @@ describe('ChartComponent', () => {
             .map(([_, { updateFn }]) => spyOn<any>(component, updateFn));
           expect(updateFnSpies.length).not.toBe(0);
 
-          spectator.setInput(property as any, newValue);
+          spectator.setHostInput(property as any, newValue);
 
           updateFnSpies.forEach((updateFnSpy) => expect(updateFnSpy).toHaveBeenCalledTimes(0));
         });
@@ -136,7 +147,7 @@ describe('ChartComponent', () => {
         it('should redraw once', () => {
           const redrawChartSpy = spyOn<any>(component, 'redrawChart');
 
-          spectator.setInput(property as any, newValue);
+          spectator.setHostInput(property as any, newValue);
 
           expect(redrawChartSpy).toHaveBeenCalledTimes(1);
         });
@@ -159,7 +170,7 @@ describe('ChartComponent', () => {
           spyOn<any>(component, 'updateHighlightedElements'),
         ];
 
-        spectator.setInput({
+        spectator.setHostInput({
           data: [1, 2, 3],
           labels: ['one', 'two', 'three'],
           type: 'bar',
@@ -176,7 +187,7 @@ describe('ChartComponent', () => {
       it('should redraw chart once', () => {
         const redrawChartSpy = spyOn<any>(component, 'redrawChart');
 
-        spectator.setInput({
+        spectator.setHostInput({
           data: [1, 2, 3],
           labels: ['one', 'two', 'three'],
           type: 'bar',

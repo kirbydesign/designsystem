@@ -5,7 +5,7 @@ import { ThemeColor } from '@kirbydesign/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
-import { BadgeExampleModule } from '~/app/examples/badge-example/badge-example.module';
+import { BadgeExampleComponent } from '~/app/examples/badge-example/badge-example.component';
 
 type BadgeProps = BadgeComponent & {
   themeColor?: ThemeColor;
@@ -15,7 +15,7 @@ const meta: Meta<BadgeProps> = {
   component: BadgeComponent,
   decorators: [
     moduleMetadata({
-      imports: [IconModule, BadgeExampleModule],
+      imports: [IconModule, BadgeExampleComponent],
     }),
   ],
   title: 'Components / Badge',

@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-item-example-horizontal',
@@ -21,6 +26,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemModule, AvatarComponent, ThemeColorDirective, BadgeComponent, IconModule],
 })
 export class ItemExampleHorizontalComponent {
   template: string = config.template;

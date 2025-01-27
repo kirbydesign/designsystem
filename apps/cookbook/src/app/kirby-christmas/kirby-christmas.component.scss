@@ -34,12 +34,12 @@
   margin: auto;
   width: 40rem;
   height: 40rem;
+  z-index: 4;
+
   @media screen and (width <= 769px) {
     width: 20rem;
     height: 20rem;
   }
-
-  z-index: 4;
 }
 
 .tree {

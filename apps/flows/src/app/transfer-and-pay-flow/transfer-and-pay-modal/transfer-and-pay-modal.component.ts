@@ -17,6 +17,7 @@ import { Detail } from '../detail.model';
   selector: 'flows-transfer-and-pay-modal',
   templateUrl: './transfer-and-pay-modal.component.html',
   styleUrls: ['./transfer-and-pay-modal.component.scss'],
+  standalone: false,
 })
 export class TransferAndPayModalComponent implements OnInit {
   constructor(

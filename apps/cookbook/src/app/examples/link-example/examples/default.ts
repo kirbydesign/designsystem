@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 const config = {
   selector: 'cookbook-link-example-default',
@@ -11,6 +12,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./link-examples.shared.scss'],
+  imports: [RouterLink],
 })
 export class LinkExampleDefaultComponent {
   template: string = config.template;

@@ -12,7 +12,6 @@ const KIRBY_BADGE_TEXT_PROPERTY_DEPRECATION_WARNING =
   selector: 'kirby-badge',
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],
-  standalone: true,
   imports: [CommonModule, IonBadge],
   hostDirectives: [{ directive: ThemeColorDirective, inputs: ['themeColor'] }],
 })

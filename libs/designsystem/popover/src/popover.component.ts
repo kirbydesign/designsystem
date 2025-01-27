@@ -19,7 +19,6 @@ export enum HorizontalDirection {
 }
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   selector: 'kirby-popover',
   template: `

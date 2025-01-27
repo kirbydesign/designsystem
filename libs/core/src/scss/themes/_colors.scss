@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'sass:map';
 @use 'sass:meta';
+@use 'sass:math';
 
 $brand-colors: (
   'primary': #00e89a,
@@ -138,14 +139,7 @@ $main-colors: map.remove(
 }
 
 @function _get-color-channel($color, $channel) {
-  // sass-loader uses older version of sass, so use feature
-  // detection to avoid transpile errors when running tests:
-  @if meta.function-exists('channel', 'color') {
-    @return color.channel($color, $channel, $space: rgb);
-  } @else {
-    $color-channel-function: meta.get-function($channel, false, 'color');
-    @return meta.call($color-channel-function, $color);
-  }
+  @return math.round(color.channel($color, $channel, $space: rgb));
 }
 
 @function _get-color-brightness($color) {

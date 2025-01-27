@@ -20,6 +20,7 @@ import { ChartJSService } from '../chart-js-service/';
   selector: 'kirby-base-chart',
   templateUrl: './base-chart.component.html',
   styleUrls: ['./base-chart.component.scss'],
+  standalone: false,
 })
 export class BaseChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() type: ChartType;

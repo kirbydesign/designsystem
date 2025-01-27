@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-long-title',
@@ -11,6 +12,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemModule],
 })
 export class ItemExampleLongTitleComponent {
   template: string = config.template;

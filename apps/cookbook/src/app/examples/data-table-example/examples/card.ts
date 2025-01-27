@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@kirbydesign/designsystem';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { NgFor } from '@angular/common';
 import { Person, tableExampleData } from '../example-data';
 
 const config = {
@@ -37,6 +39,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [CardModule, NgFor],
 })
 export class DataTableCardExampleComponent {
   tableData: Person[] = [...tableExampleData];

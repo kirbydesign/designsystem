@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
+import { RadioModule } from '@kirbydesign/designsystem/radio';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = [
@@ -32,6 +33,7 @@ onChange(value: string | YourDataType) {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [RadioModule],
 })
 export class RadioExampleBindingComponent {
   template: string = config.template;

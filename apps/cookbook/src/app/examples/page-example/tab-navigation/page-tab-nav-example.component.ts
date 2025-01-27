@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { NgIf } from '@angular/common';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
@@ -54,6 +60,7 @@ const config = {
 };
 @Component({
   template: config.template,
+  imports: [PageModule, TabNavigationModule, ThemeColorDirective, BadgeComponent, IconModule, NgIf],
 })
 export class PageTabNavExampleComponent extends BasePageExampleComponent {
   selectedIndex = 0;

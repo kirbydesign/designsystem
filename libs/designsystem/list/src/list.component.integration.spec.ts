@@ -48,7 +48,7 @@ describe('ListComponent', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
+        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" [hasItemSpacing]="hasItemSpacing" [disableSelectionHighlight]="disableSelectionHighlight" [shape]="shape" (itemSelect)="($event)">
           <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
         </kirby-list>
         `
@@ -81,7 +81,7 @@ describe('ListComponent', () => {
     });
 
     it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
-      spectator.setInput('disableSelectionHighlight', true);
+      spectator.setHostInput('disableSelectionHighlight', true);
       spectator.detectChanges();
 
       const selectItem = itemsInList[1];
@@ -94,7 +94,7 @@ describe('ListComponent', () => {
 
     describe('with hasItemSpacing set to true', () => {
       it('should apply spacing to all but the last item', () => {
-        spectator.setInput('hasItemSpacing', true);
+        spectator.setHostInput('hasItemSpacing', true);
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:not(:last-child)');
 
@@ -105,7 +105,7 @@ describe('ListComponent', () => {
       });
 
       it('should not apply spacing to the last item', () => {
-        spectator.setInput('hasItemSpacing', true);
+        spectator.setHostInput('hasItemSpacing', true);
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:last-child');
 
@@ -118,7 +118,7 @@ describe('ListComponent', () => {
 
     describe('with hasItemSpacing set to false', () => {
       it('should not apply spacing to items', () => {
-        spectator.setInput('hasItemSpacing', false);
+        spectator.setHostInput('hasItemSpacing', false);
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item');
 
@@ -131,7 +131,7 @@ describe('ListComponent', () => {
 
     describe('with shape="none"', () => {
       beforeEach(() => {
-        spectator.setInput('shape', 'none');
+        spectator.setHostInput('shape', 'none');
         spectator.detectChanges();
       });
 

@@ -1,5 +1,5 @@
 import { MockModule } from 'ng-mocks';
-import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -9,7 +9,7 @@ import { TableSortableComponent } from './sortable.component';
 const getFontWeight = DesignTokenHelper.fontWeight;
 
 describe('TableSortableComponent', () => {
-  let spectator: Spectator<TableSortableComponent>;
+  let spectator: SpectatorHost<TableSortableComponent>;
 
   const createHost = createHostFactory({
     component: TableSortableComponent,
@@ -25,11 +25,14 @@ describe('TableSortableComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost(`
+    spectator = createHost(
+      `
     <table class="kirby-table">
-      <th [sortable]="true">Data1</th>
+      <th [sortable]="sortable" [sortDirection]="sortDirection" [active]="active" [alignment]="alignment">Data1</th>
     </table>
-    `);
+    `,
+      { hostProps: { sortable: true } }
+    );
   });
 
   describe('by default', () => {
@@ -54,7 +57,7 @@ describe('TableSortableComponent', () => {
     });
 
     it('should render a text, when sortable is false', () => {
-      spectator.setInput('sortable', false);
+      spectator.setHostInput('sortable', false);
 
       expect(spectator.element.firstChild.nodeType).toBe(Node.TEXT_NODE);
     });
@@ -62,7 +65,7 @@ describe('TableSortableComponent', () => {
 
   describe('sortDirection', () => {
     it('should render an "arrow-up" icon, when sortDirection is "asc"', () => {
-      spectator.setInput('sortDirection', 'asc');
+      spectator.setHostInput('sortDirection', 'asc');
 
       const icon = spectator.query('kirby-icon');
 
@@ -70,7 +73,7 @@ describe('TableSortableComponent', () => {
     });
 
     it('should render an "arrow-down" icon, when sortDirection is "desc"', () => {
-      spectator.setInput('sortDirection', 'desc');
+      spectator.setHostInput('sortDirection', 'desc');
 
       const icon = spectator.query('kirby-icon');
 
@@ -80,13 +83,13 @@ describe('TableSortableComponent', () => {
 
   describe('when active', () => {
     it('should get the "active" class when the active input is set to true', () => {
-      spectator.setInput('active', true);
+      spectator.setHostInput('active', true);
 
       expect(spectator.element).toHaveClass('active');
     });
 
     it('should make the text bold', () => {
-      spectator.setInput('active', true);
+      spectator.setHostInput('active', true);
 
       expect(spectator.element).toHaveComputedStyle({
         'font-weight': getFontWeight('bold'),
@@ -96,7 +99,7 @@ describe('TableSortableComponent', () => {
 
   describe('align', () => {
     it('should left-align content when align is set to "start"', () => {
-      spectator.setInput('alignment', 'start');
+      spectator.setHostInput('alignment', 'start');
 
       const button = spectator.query('button');
 
@@ -106,7 +109,7 @@ describe('TableSortableComponent', () => {
     });
 
     it('should center-align content when align is set to "center"', () => {
-      spectator.setInput('alignment', 'center');
+      spectator.setHostInput('alignment', 'center');
 
       const button = spectator.query('button');
 
@@ -116,7 +119,7 @@ describe('TableSortableComponent', () => {
     });
 
     it('should right-align content when align is set to "end"', () => {
-      spectator.setInput('alignment', 'end');
+      spectator.setHostInput('alignment', 'end');
 
       const button = spectator.query('button');
 

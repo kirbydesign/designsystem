@@ -8,6 +8,7 @@ import { Detail } from '../detail.model';
   selector: 'flows-transfer-registered',
   templateUrl: './transfer-registered.component.html',
   styleUrls: ['./transfer-registered.component.scss'],
+  standalone: false,
 })
 export class TransferRegisteredComponent {
   @Input() verifiedDetails: Detail;

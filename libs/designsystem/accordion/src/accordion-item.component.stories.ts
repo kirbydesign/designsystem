@@ -7,14 +7,14 @@ import { importProvidersFrom } from '@angular/core';
 import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 
-import { AccordionExampleModule } from '~/app/examples/accordion-example/accordion-example.module';
+import { AccordionExampleComponent } from '~/app/examples/accordion-example/accordion-example.component';
 
 const meta: Meta<AccordionItemComponent> = {
   component: AccordionItemComponent,
   title: 'Components / Accordion',
   decorators: [
     moduleMetadata({
-      imports: [AccordionModule, AccordionExampleModule],
+      imports: [AccordionModule, AccordionExampleComponent],
     }),
     applicationConfig({
       providers: [importProvidersFrom([BrowserAnimationsModule])],

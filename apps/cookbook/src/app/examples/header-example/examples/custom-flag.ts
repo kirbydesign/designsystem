@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 const config = {
   selector: 'cookbook-header-example-custom-flag',
@@ -20,6 +23,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  imports: [HeaderModule, ThemeColorDirective, BadgeComponent],
 })
 export class HeaderExampleCustomFlagComponent {
   template: string = config.template;

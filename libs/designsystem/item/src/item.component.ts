@@ -22,6 +22,7 @@ export enum ItemSize {
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ItemComponent {
   @HostBinding('class.disabled')

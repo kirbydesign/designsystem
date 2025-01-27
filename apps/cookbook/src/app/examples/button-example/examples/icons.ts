@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-button-example-icons',
@@ -41,6 +43,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_responsive-grid-layout.scss',
+  imports: [ButtonComponent, IconModule],
 })
 export class ButtonExampleIconsComponent {
   template: string = config.template;

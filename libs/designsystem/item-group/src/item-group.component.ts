@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, HostBinding } from '@angular/core';
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   selector: 'kirby-item-group',
   templateUrl: './item-group.component.html',

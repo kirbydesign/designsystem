@@ -5,7 +5,6 @@ import { KirbySpinnerElement } from '@kirbydesign/core/spinner';
 @Component({
   selector: 'kirby-spinner',
   template: '<ng-content></ng-content>',
-  standalone: true,
   imports: [CommonModule],
 })
 export class KirbySpinnerComponent {

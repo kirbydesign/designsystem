@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { SegmentItem } from '@kirbydesign/designsystem';
+import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   template: `<div class="wrapper">
@@ -77,6 +80,7 @@ onSegmentSelect(segment: SegmentItem) {
   selector: 'cookbook-segmented-control-example-grouped',
   template: config.template,
   styles: config.styles,
+  imports: [SegmentedControlComponent, ButtonComponent, ListModule, ItemModule],
 })
 export class SegmentedControlExampleGroupedComponent {
   template: string = config.template;
