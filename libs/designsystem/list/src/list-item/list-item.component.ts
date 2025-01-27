@@ -21,6 +21,7 @@ export type BoundaryClass = 'first' | 'last';
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
   styleUrls: ['../list.component.scss', './list-item.component.scss'],
+  standalone: false,
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
   _isSwipingEnabled = false;

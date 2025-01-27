@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-item-example-avatar-flagged-three-lines',
@@ -29,6 +34,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  imports: [ItemModule, ThemeColorDirective, BadgeComponent, AvatarComponent, IconModule],
 })
 export class ItemExampleAvatarFlaggedThreeLinesComponent {
   template: string = config.template;

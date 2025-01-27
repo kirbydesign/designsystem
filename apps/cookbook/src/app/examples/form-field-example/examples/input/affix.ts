@@ -1,6 +1,14 @@
 import { Component, Input } from '@angular/core';
 
 import { InputSize } from '@kirbydesign/designsystem';
+import {
+  AffixDirective,
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
 const config = {
   selector: 'cookbook-form-field-input-affix-example',
@@ -24,6 +32,14 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [
+    FormFieldModule,
+    IconModule,
+    AffixDirective,
+    DateInputDirective,
+    InputComponent,
+    SpinnerModule,
+  ],
 })
 export class FormFieldInputAffixExampleComponent {
   template: string = config.template;

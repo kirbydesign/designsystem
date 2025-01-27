@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 import { ColorHelper } from '@kirbydesign/designsystem/helpers';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { ToggleButtonExampleComponent } from '../../examples/toggle-button-example/toggle-button-example.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   styleUrls: ['./toggle-button-showcase.component.scss'],
   templateUrl: './toggle-button-showcase.component.html',
+  imports: [
+    ExampleViewerComponent,
+    ToggleButtonExampleComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class ToggleButtonShowcaseComponent {
   notificationColors = ColorHelper.notificationColors.map((color) => color.name);

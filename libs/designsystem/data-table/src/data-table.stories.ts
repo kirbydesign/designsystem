@@ -2,14 +2,14 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 
-import { DataTableExampleModule } from '~/app/examples/data-table-example/table-example.module';
+import { DataTableExampleComponent } from '~/app/examples/data-table-example/data-table-example.component';
 
 const meta: Meta<TableSortableComponent> = {
   component: TableSortableComponent,
   title: 'Components / Data Table',
   decorators: [
     moduleMetadata({
-      imports: [DataTableExampleModule],
+      imports: [DataTableExampleComponent],
     }),
   ],
 };

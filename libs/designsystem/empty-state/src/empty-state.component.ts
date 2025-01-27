@@ -17,6 +17,7 @@ import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
   templateUrl: './empty-state.component.html',
   styleUrls: ['./empty-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class EmptyStateComponent implements AfterContentInit, OnInit {
   private _title: string;

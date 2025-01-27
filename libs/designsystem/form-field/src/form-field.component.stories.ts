@@ -7,14 +7,14 @@ import {
   TextareaComponent,
 } from '@kirbydesign/designsystem/form-field';
 
-import { FormFieldExamplesModule } from '~/app/examples/form-field-example/form-field-example.module';
+import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {
   component: FormFieldComponent,
   title: 'Components / FormField',
   decorators: [
     moduleMetadata({
-      imports: [FormFieldModule, InputComponent, TextareaComponent, FormFieldExamplesModule],
+      imports: [FormFieldModule, InputComponent, TextareaComponent, FormFieldExampleComponent],
     }),
   ],
 };

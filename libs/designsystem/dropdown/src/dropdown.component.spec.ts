@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular/standalone';
-import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -20,6 +20,7 @@ import { OpenState } from './dropdown.types';
 @Component({
   template: '<ng-content></ng-content>',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 class OnPushHostComponent {}
 
@@ -43,15 +44,18 @@ describe('DropdownComponent', () => {
       ],
     });
 
-    let spectator: Spectator<DropdownComponent>;
+    let spectator: SpectatorHost<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
 
     beforeEach(() => {
-      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
-        props: {
-          items: items,
-        },
-      });
+      spectator = createHost(
+        `<kirby-dropdown [selectedIndex]="selectedIndex" [items]="items" [size]="size"></kirby-dropdown>`,
+        {
+          hostProps: {
+            items: items,
+          },
+        }
+      );
       buttonElement = spectator.query('button[kirby-button]');
     });
 
@@ -145,7 +149,7 @@ describe('DropdownComponent', () => {
 
       beforeEach(() => {
         onChangeSpy = spyOn(spectator.component.change, 'emit');
-        spectator.setInput('selectedIndex', newSelectedIndex);
+        spectator.setHostInput('selectedIndex', newSelectedIndex);
       });
 
       it('should have correct selected item', () => {
@@ -202,7 +206,7 @@ describe('DropdownComponent', () => {
         let onChangeSpy: jasmine.Spy;
 
         beforeEach(() => {
-          spectator.setInput('selectedIndex', 2);
+          spectator.setHostInput('selectedIndex', 2);
           onChangeSpy = spyOn(spectator.component.change, 'emit');
         });
 
@@ -372,7 +376,7 @@ describe('DropdownComponent', () => {
 
       describe('and first item is selected', () => {
         beforeEach(() => {
-          spectator.setInput('selectedIndex', 0);
+          spectator.setHostInput('selectedIndex', 0);
           spectator.detectChanges();
         });
         describe('and ArrowLeft key is pressed', () => {
@@ -403,7 +407,7 @@ describe('DropdownComponent', () => {
       describe('and last item is selected', () => {
         const lastIndex = 4;
         beforeEach(() => {
-          spectator.setInput('selectedIndex', lastIndex);
+          spectator.setHostInput('selectedIndex', lastIndex);
           spectator.detectChanges();
         });
         describe('and ArrowRight key is pressed', () => {
@@ -450,7 +454,7 @@ describe('DropdownComponent', () => {
           }));
 
           it('should highlight the first item in the list, if no item is selected and ArrowDown key is pressed', () => {
-            spectator.setInput('selectedIndex', -1);
+            spectator.setHostInput('selectedIndex', -1);
 
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
 
@@ -458,7 +462,7 @@ describe('DropdownComponent', () => {
           });
 
           it('should highlight the last item in the list, if no item is selected and ArrowUp key is pressed', () => {
-            spectator.setInput('selectedIndex', -1);
+            spectator.setHostInput('selectedIndex', -1);
 
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
 
@@ -466,7 +470,7 @@ describe('DropdownComponent', () => {
           });
 
           it('should highlight the selected item, when the ArrowUp key is pressed', () => {
-            spectator.setInput('selectedIndex', 2);
+            spectator.setHostInput('selectedIndex', 2);
 
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
 
@@ -474,7 +478,7 @@ describe('DropdownComponent', () => {
           });
 
           it('should highlight the selected item, when the ArrowDown key is pressed', () => {
-            spectator.setInput('selectedIndex', 3);
+            spectator.setHostInput('selectedIndex', 3);
 
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
 
@@ -542,14 +546,14 @@ describe('DropdownComponent', () => {
 
       describe('and ArrowLeft key is pressed', () => {
         it('should not change selected item', () => {
-          spectator.setInput('selectedIndex', 2);
+          spectator.setHostInput('selectedIndex', 2);
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowLeft');
           expect(spectator.component.selectedIndex).toEqual(2);
         });
       });
       describe('and ArrowRight key is pressed', () => {
         it('should not change selected item', () => {
-          spectator.setInput('selectedIndex', 2);
+          spectator.setHostInput('selectedIndex', 2);
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowRight');
           expect(spectator.component.selectedIndex).toEqual(2);
         });
@@ -557,7 +561,7 @@ describe('DropdownComponent', () => {
 
       describe('and first item is selected', () => {
         beforeEach(() => {
-          spectator.setInput('selectedIndex', 0);
+          spectator.setHostInput('selectedIndex', 0);
           spectator.detectChanges();
         });
         describe('and ArrowLeft key is pressed', () => {
@@ -661,7 +665,7 @@ describe('DropdownComponent', () => {
         keyEvent.scenario.forEach((scenario) => {
           describe(`and selected item = ${scenario.selectedIndex} and focused item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
             it(`should set selected item = ${scenario.expectedIndex}`, () => {
-              spectator.setInput('selectedIndex', scenario.selectedIndex);
+              spectator.setHostInput('selectedIndex', scenario.selectedIndex);
               for (let counter = 0; counter < scenario.keypressCount; counter++) {
                 spectator.dispatchKeyboardEvent(spectator.element, 'keydown', keyEvent.key);
               }
@@ -738,7 +742,7 @@ describe('DropdownComponent', () => {
 
         beforeEach(() => {
           onChangeSpy = spyOn(spectator.component.change, 'emit');
-          spectator.setInput('selectedIndex', selectedIndex);
+          spectator.setHostInput('selectedIndex', selectedIndex);
           spectator.detectChanges();
         });
 
@@ -833,8 +837,8 @@ describe('DropdownComponent', () => {
 
     describe('through template one-time string initialization', () => {
       function getSpectatorWithStringSize(size: string) {
-        return createHost(`<kirby-dropdown size="${size}"></kirby-dropdown>`, {
-          props: { items: items },
+        return createHost(`<kirby-dropdown [items]="items" size="${size}"></kirby-dropdown>`, {
+          hostProps: { items },
         });
       }
 
@@ -858,7 +862,7 @@ describe('DropdownComponent', () => {
     describe('through template property binding', () => {
       function getSpectatorWithStringSize(size: string) {
         return createHost(`<kirby-dropdown [size]="'${size}'"></kirby-dropdown>`, {
-          props: { items: items },
+          hostProps: { items: items },
         });
       }
 
@@ -876,41 +880,6 @@ describe('DropdownComponent', () => {
         const button: ButtonComponent = spectator.query(ButtonComponent);
 
         expect(button.size).toBe(size);
-      });
-    });
-
-    describe('through input properties', () => {
-      function getSpectatorWithSize(size: 'sm' | 'md') {
-        return createHost(`<kirby-dropdown></kirby-dropdown>`, {
-          props: { items: items, size: size },
-        });
-      }
-
-      it('should have small size on button', () => {
-        const size = 'sm';
-        spectator = getSpectatorWithSize(size);
-        const button: ButtonComponent = spectator.query(ButtonComponent);
-
-        expect(button.size).toBe(size);
-      });
-
-      it('should have medium size on button', () => {
-        const size = 'md';
-        spectator = getSpectatorWithSize(size);
-        const button: ButtonComponent = spectator.query(ButtonComponent);
-
-        expect(button.size).toBe(size);
-      });
-
-      describe('when changing size', () => {
-        it('should have correct size', () => {
-          const newSize = 'sm';
-          spectator = getSpectatorWithSize('md');
-          spectator.setInput('size', newSize);
-          const button: ButtonComponent = spectator.query(ButtonComponent);
-
-          expect(button.size).toBe(newSize);
-        });
       });
     });
   });
@@ -939,9 +908,9 @@ describe('DropdownComponent', () => {
     describe('through template one-time string initialization', () => {
       beforeEach(() => {
         spectator = createHost(
-          `<kirby-dropdown selectedIndex="${defaultSelectedIndex}"></kirby-dropdown>`,
+          `<kirby-dropdown [items]="items" selectedIndex="${defaultSelectedIndex}"></kirby-dropdown>`,
           {
-            props: {
+            hostProps: {
               items: items,
             },
           }
@@ -962,10 +931,11 @@ describe('DropdownComponent', () => {
     describe('through template property binding', () => {
       beforeEach(() => {
         spectator = createHost(
-          `<kirby-dropdown [selectedIndex]="${defaultSelectedIndex}"></kirby-dropdown>`,
+          `<kirby-dropdown [items]="items" [selectedIndex]="selectedIndex"></kirby-dropdown>`,
           {
-            props: {
+            hostProps: {
               items: items,
+              selectedIndex: defaultSelectedIndex,
             },
           }
         );
@@ -979,54 +949,6 @@ describe('DropdownComponent', () => {
       it('should have selected text from selected item', () => {
         expect(spectator.component.selectedText).toEqual(expectedText);
         expect(buttonElement).toHaveText(expectedText, true);
-      });
-    });
-
-    describe('through input properties', () => {
-      beforeEach(() => {
-        spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
-          props: {
-            items: items,
-            selectedIndex: defaultSelectedIndex,
-          },
-        });
-        buttonElement = spectator.query('button[kirby-button]');
-      });
-
-      it('should have selected item', () => {
-        expect(spectator.component.value).toEqual(expectedItem);
-      });
-
-      it('should have selected text from selected item', () => {
-        expect(spectator.component.selectedText).toEqual(expectedText);
-        expect(buttonElement).toHaveText(expectedText, true);
-      });
-
-      describe('when changing selected index', () => {
-        it('should have correct new selected item', () => {
-          const newSelectedIndex = 0;
-          const expectedItem = items[newSelectedIndex];
-          spectator.setInput('selectedIndex', newSelectedIndex);
-          spectator.detectChanges();
-          expect(spectator.component.value).toEqual(expectedItem);
-        });
-
-        it('should have selected text from new selected item', () => {
-          const newSelectedIndex = 0;
-          const expectedText = items[newSelectedIndex].text;
-          spectator.setInput('selectedIndex', newSelectedIndex);
-          spectator.detectChanges();
-          expect(spectator.component.selectedText).toEqual(expectedText);
-          expect(buttonElement).toHaveText(expectedText, true);
-        });
-
-        it('should not emit change event', () => {
-          const newSelectedIndex = 0;
-          const onChangeSpy = spyOn(spectator.component.change, 'emit');
-          spectator.setInput('selectedIndex', newSelectedIndex);
-          spectator.detectChanges();
-          expect(onChangeSpy).not.toHaveBeenCalled();
-        });
       });
     });
   });
@@ -1050,8 +972,8 @@ describe('DropdownComponent', () => {
     });
 
     beforeEach(() => {
-      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
-        props: {
+      spectator = createHost(`<kirby-dropdown [items]="items"></kirby-dropdown>`, {
+        hostProps: {
           items: items,
         },
       });
@@ -1096,7 +1018,7 @@ describe('DropdownComponent', () => {
 
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-dropdown>
+        `<kirby-dropdown [items]="items">
            <kirby-item
              *kirbyListItemTemplate="let item; let selected = selected"
              selectable="true"
@@ -1106,7 +1028,7 @@ describe('DropdownComponent', () => {
            </kirby-item>
          </kirby-dropdown>`,
         {
-          props: {
+          hostProps: {
             items: items,
           },
         }
@@ -1159,13 +1081,16 @@ describe('DropdownComponent', () => {
     let spectator: SpectatorHost<DropdownComponent>;
 
     beforeEach(() => {
-      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
-        props: {
-          items: items,
-          expand: 'block',
-          usePopover: true,
-        },
-      });
+      spectator = createHost(
+        `<kirby-dropdown [items]="items" [usePopover]="usePopover" [expand]="expand"></kirby-dropdown>`,
+        {
+          hostProps: {
+            items: items,
+            expand: 'block',
+            usePopover: true,
+          },
+        }
+      );
     });
 
     it('should update popover card size when resized', async () => {

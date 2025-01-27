@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-item-example-flagged',
@@ -27,6 +31,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  imports: [ItemModule, ThemeColorDirective, BadgeComponent, FlagComponent],
 })
 export class ItemExampleFlaggedComponent {
   template: string = config.template;

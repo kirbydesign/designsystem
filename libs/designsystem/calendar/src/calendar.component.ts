@@ -63,7 +63,6 @@ enum TimeUnit {
 }
 
 @Component({
-  standalone: true,
   imports: [DropdownModule, ButtonComponent, IconModule, CommonModule],
   selector: 'kirby-calendar',
   templateUrl: './calendar.component.html',

@@ -1,12 +1,26 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import exampleHtml from '../../examples/reorder-list-example/reorder-list-example.component.html?raw';
-import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 
 @Component({
   selector: 'cookbook-reorder-showcase',
   templateUrl: './reorder-list-showcase.component.html',
   styleUrls: ['./reorder-list-showcase.component.scss'],
+  imports: [
+    RouterLink,
+    CodeViewerComponent,
+    IphoneComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+    ApiDescriptionMethodsComponent,
+  ],
 })
 export class ReorderListShowcaseComponent {
   exampleHtml = exampleHtml;

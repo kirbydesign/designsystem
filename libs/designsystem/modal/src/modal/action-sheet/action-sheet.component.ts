@@ -6,7 +6,6 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { ActionSheetItem } from './config/action-sheet-item';
 
 @Component({
-  standalone: true,
   imports: [CardModule, ButtonComponent, CommonModule],
   selector: 'kirby-action-sheet',
   templateUrl: './action-sheet.component.html',

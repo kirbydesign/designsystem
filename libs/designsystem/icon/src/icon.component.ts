@@ -26,6 +26,7 @@ export enum IconSize {
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.kirby-icon]': 'true' },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');

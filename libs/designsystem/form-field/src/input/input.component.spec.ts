@@ -16,7 +16,7 @@ describe('InputComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost('<input kirby-input/>');
+    spectator = createHost('<input kirby-input [size]="size" />');
     element = spectator.element as HTMLInputElement;
   });
 
@@ -145,7 +145,7 @@ describe('InputComponent', () => {
 
   describe('when configured with size medium', () => {
     beforeEach(() => {
-      spectator.setInput('size', 'md');
+      spectator.setHostInput('size', 'md');
     });
 
     it('should render with correct height', () => {
@@ -155,7 +155,7 @@ describe('InputComponent', () => {
     });
 
     it('should render with correct height when hasError is true', () => {
-      spectator.setInput('hasError', true);
+      spectator.setHostInput('hasError', true);
 
       expect(spectator.element).toHaveComputedStyle({ height: size('xl') });
     });

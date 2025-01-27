@@ -20,6 +20,7 @@ import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigatio
   templateUrl: './tab-navigation.component.html',
   styleUrls: ['./tab-navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TabNavigationComponent implements AfterViewInit {
   public readonly DEBOUNCE_TIME_MS = 250;

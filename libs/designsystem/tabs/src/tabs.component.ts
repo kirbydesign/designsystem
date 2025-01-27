@@ -7,6 +7,7 @@ import { TabsService } from './tabs.service';
   selector: 'kirby-tab-bar',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
+  standalone: false,
 })
 export class TabsComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.tab-bar-bottom-hidden')

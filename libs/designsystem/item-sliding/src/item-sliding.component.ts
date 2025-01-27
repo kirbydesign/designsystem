@@ -6,7 +6,6 @@ import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
 @Component({
-  standalone: true,
   imports: [IconModule, CommonModule, IonItemSliding, IonItemOptions, IonItemOption, IonLabel],
   selector: 'kirby-item-sliding',
   templateUrl: './item-sliding.component.html',

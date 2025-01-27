@@ -51,7 +51,6 @@ const contentScrollDebounceTimeInMS = 10;
 const contentScrolledOffsetInPixels = 4;
 
 @Component({
-  standalone: true,
   imports: [
     RouterModule,
     ButtonComponent,

@@ -6,6 +6,7 @@ import { TextAndDateService } from '../text-and-date.service';
   selector: 'flows-choose-text-and-message',
   templateUrl: './choose-text-and-message.component.html',
   styleUrls: ['./choose-text-and-message.component.scss'],
+  standalone: false,
 })
 export class ChooseTextAndMessageComponent {
   public text: string;

@@ -1,4 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-avatar-example-colors',
@@ -51,6 +54,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  imports: [AvatarComponent, ThemeColorDirective, IconModule],
 })
 export class AvatarExampleColorsComponent {
   template: string = config.template;

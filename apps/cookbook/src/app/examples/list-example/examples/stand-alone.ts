@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListWithStandAloneExampleTemplate = `<kirby-list
@@ -26,5 +29,6 @@ export const ListWithStandAloneExampleTemplate = `<kirby-list
       <kirby-page-content>${ListWithStandAloneExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
+  imports: [PageModule, ListModule, ItemModule],
 })
 export class ListWithStandAloneExampleComponent extends BaseListComponent {}

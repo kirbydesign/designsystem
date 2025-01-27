@@ -1,6 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ModalSize } from '@kirbydesign/designsystem';
-import { ModalSizeOption } from './modal-example-configuration/modal-example-size-selector.component';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ModalComponent, ModalFooterComponent } from '@kirbydesign/designsystem/modal';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import {
+  ModalExampleSizeSelectorComponent,
+  ModalSizeOption,
+} from './modal-example-configuration/modal-example-size-selector.component';
 
 const modalAndDrawerContent = `<ng-template>
     <kirby-page-title>Modal Component</kirby-page-title>
@@ -71,6 +80,16 @@ didDismiss() {
   template: config.template,
   styleUrls: ['./modal-component-example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    ButtonComponent,
+    ModalComponent,
+    PageModule,
+    ModalFooterComponent,
+    EmptyStateModule,
+    ThemeColorDirective,
+    CardModule,
+    ModalExampleSizeSelectorComponent,
+  ],
 })
 export class ModalComponentExampleComponent {
   static readonly template = config.template.split('<kirby-modal trigger="open-drawer"')[0];

@@ -10,7 +10,6 @@ import { PortalDirective } from './portal.directive';
     <ng-template #templateRef></ng-template>
   `,
   imports: [PortalDirective],
-  standalone: true,
 })
 class PortalTestComponent {
   @ViewChild('outletElement') public outletElement: ElementRef;

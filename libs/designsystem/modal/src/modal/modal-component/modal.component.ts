@@ -34,7 +34,6 @@ import {
 import { CanDismissHelper } from '../services';
 
 @Component({
-  standalone: true,
   selector: 'kirby-modal',
   templateUrl: './modal.component.html',
   imports: [
