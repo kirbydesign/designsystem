@@ -80,8 +80,9 @@ forgot to configure the custom icon through the 'IconRegistryService'?`);
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.iconRegistryService.getIcon(changes.name.currentValue);
-      // This should always run on first init.
-      // If the icon is later changed, a new aria-label might have been added as well, so we need to check again.
+
+      // This will run on first init and again later if name is changed
+      // If name changes a new aria-label might have been added as well so we need to check again.
       this.setAriaHiddenIfNoLabel();
     }
   }
