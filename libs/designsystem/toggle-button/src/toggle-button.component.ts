@@ -2,15 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChildren,
   ElementRef,
   EventEmitter,
   HostListener,
   Input,
   Output,
-  QueryList,
 } from '@angular/core';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({
   selector: 'kirby-toggle-button',
@@ -22,10 +19,6 @@ export class ToggleButtonComponent {
   @Input() checked: boolean;
   @Output() checkChanged = new EventEmitter<boolean>();
 
-  @ContentChildren(ButtonComponent, { read: ElementRef<HTMLButtonElement> }) buttons: QueryList<
-    ElementRef<HTMLButtonElement>
-  >;
-
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     private cdr: ChangeDetectorRef
@@ -34,7 +27,7 @@ export class ToggleButtonComponent {
   @HostListener('click', ['$event'])
   onClick(event: PointerEvent) {
     const targetElement = event.target as HTMLElement;
-    const buttonEnabled: HTMLElement = targetElement.closest('button[kirby-button]:not(:disabled)');
+    const buttonEnabled = targetElement.closest('button[kirby-button]:not(:disabled)');
 
     if (!buttonEnabled) return;
 
