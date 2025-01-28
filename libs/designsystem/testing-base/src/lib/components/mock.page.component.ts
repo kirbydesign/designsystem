@@ -62,7 +62,6 @@ export class MockPageToolbarTitleDirective {}
   ],
 })
 export class MockPageActionsDirective {
-  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
 }
 
@@ -76,7 +75,6 @@ export class MockPageActionsDirective {
   ],
 })
 export class MockPageContentDirective {
-  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyPageContent') config: fixedConfig;
 }
 
@@ -94,7 +92,6 @@ export class MockPageStickyContentDirective {}
 @Component({
   selector: 'kirby-page-progress',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {
@@ -108,7 +105,6 @@ export class MockPageProgressComponent {}
 @Component({
   selector: 'kirby-page-title',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {
@@ -122,7 +118,6 @@ export class MockPageTitleComponent {}
 @Component({
   selector: 'kirby-page-content',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {
@@ -136,7 +131,6 @@ export class MockPageContentComponent {}
 @Component({
   selector: 'kirby-page-actions',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {
@@ -150,7 +144,6 @@ export class MockPageActionsComponent {}
 @Component({
   selector: 'kirby-page',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {

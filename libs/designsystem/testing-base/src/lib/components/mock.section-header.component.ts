@@ -6,7 +6,6 @@ import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header
 @Component({
   selector: 'kirby-section-header',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {
