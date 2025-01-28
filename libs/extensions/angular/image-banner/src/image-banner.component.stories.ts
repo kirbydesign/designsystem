@@ -35,6 +35,9 @@ const meta: Meta<ImageBannerComponent> = {
     imagePath: {
       control: 'text',
     },
+    dismissButtonText: {
+      control: 'text',
+    },
     bannerClick: {
       control: false,
     },

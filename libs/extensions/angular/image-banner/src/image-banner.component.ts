@@ -37,6 +37,11 @@ export class ImageBannerComponent {
   @Input() externalLink: string | undefined;
 
   /**
+   * The text of the dismiss button. Will be used as title for sighted users and aria-label for accessibility.
+   */
+  @Input() dismissButtonText: string | undefined;
+
+  /**
    * The blur-effect used for the background.
    */
   @HostBinding('class')

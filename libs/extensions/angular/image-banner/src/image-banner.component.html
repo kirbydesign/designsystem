@@ -85,6 +85,8 @@
       [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
       [showIconOnly]="true"
       size="xs"
+      [attr.aria-label]="dismissButtonText"
+      [title]="dismissButtonText"
     >
       <kirby-icon name="close"></kirby-icon>
     </button>
