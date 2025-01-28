@@ -479,7 +479,7 @@ describe('RadioGroupComponent', () => {
 
               describe('hasError', () => {
                 it('should not have error state by default', () => {
-                  expect(spectator.component.hasError).toBeFalse();
+                  expect(spectator.component.hasError).toBeUndefined();
                   expect(spectator.element.classList).not.toContain('error');
                 });
 
