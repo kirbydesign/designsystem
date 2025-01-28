@@ -24,7 +24,6 @@ import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
   styleUrls: ['./modal-compact-wrapper.component.scss'],
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
   imports: [CommonModule],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ion-page]': 'false' },
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {

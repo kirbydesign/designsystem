@@ -94,6 +94,6 @@ export class RadioComponent implements AfterViewInit, OnInit, AfterContentInit {
   }
 
   focus() {
-    this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
+    this.ionRadioElement?.nativeElement.focus();
   }
 }
