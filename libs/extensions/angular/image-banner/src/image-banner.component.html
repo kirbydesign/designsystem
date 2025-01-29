@@ -80,7 +80,6 @@
 
   <div class="dismiss" *ngIf="dismissClick.observed">
     <button
-      class="dismiss-button"
       kirby-button
       (click)="dismissClicked($event)"
       [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"

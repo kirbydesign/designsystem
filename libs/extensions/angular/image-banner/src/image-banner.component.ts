@@ -1,4 +1,4 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -7,7 +7,7 @@ import { TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-x-image-banner',
-  imports: [CardModule, ButtonComponent, IconModule, NgClass, CommonModule],
+  imports: [CardModule, ButtonComponent, IconModule, CommonModule],
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',
 })
