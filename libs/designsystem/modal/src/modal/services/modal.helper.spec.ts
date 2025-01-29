@@ -16,7 +16,6 @@ import {
   ModalCompactWrapperComponent,
   ModalConfig,
   ModalSize,
-  ModalWrapperComponent,
   ShowAlertCallback,
 } from '../../modal-wrapper';
 import { ModalNavigationService } from '../../modal-navigation.service';
@@ -38,7 +37,7 @@ class InputEmbeddedComponent implements OnInit {
   constructor(@Optional() private modal?: Modal) {}
 
   ngOnInit() {
-    this.modal && this.modal.didPresent.then(() => this.input.nativeElement.focus());
+    this.modal?.didPresent.then(() => this.input.nativeElement.focus());
   }
 }
 
