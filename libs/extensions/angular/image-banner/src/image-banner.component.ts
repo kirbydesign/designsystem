@@ -1,12 +1,13 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
+import { TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-x-image-banner',
-  imports: [CardModule, ButtonComponent, IconModule, NgClass, CommonModule],
+  imports: [CardModule, ButtonComponent, IconModule, CommonModule],
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',
 })
@@ -52,6 +53,8 @@ export class ImageBannerComponent {
    * If subscribed to, a dismiss button will be shown. Emitted every time the dismiss button is activated by click and keyboard interaction.
    */
   @Output() dismissClick = new EventEmitter<Event>();
+
+  constructor(public translations: TranslationService) {}
 
   public bannerClicked(event: Event) {
     const eventTarget = event.target as HTMLElement;
