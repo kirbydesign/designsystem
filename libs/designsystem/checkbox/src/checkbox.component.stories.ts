@@ -2,14 +2,14 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
-import { CheckboxExampleModule } from '~/app/examples/checkbox-example/checkbox-example.module';
+import { CheckboxExampleComponent } from '~/app/examples/checkbox-example/checkbox-example.component';
 
 const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,
   title: 'Components / Checkbox',
   decorators: [
     moduleMetadata({
-      imports: [CheckboxExampleModule],
+      imports: [CheckboxExampleComponent],
     }),
   ],
 };

@@ -4,6 +4,7 @@ import { ThemeColor } from '@kirbydesign/core';
 
 @Directive({
   selector: '[kirbyListItemColor]',
+  standalone: false,
 })
 export class ListItemColorDirective implements OnChanges {
   @Input()

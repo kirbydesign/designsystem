@@ -19,7 +19,7 @@ describe('RangeComponent', () => {
   });
 
   it('should always have a pinFormatter function when pin is set', () => {
-    spectator.setInput('pin', true);
+    spectator.setHostInput('pin', true);
     expect(spectator.component.pinFormatter).toBeDefined();
   });
 });

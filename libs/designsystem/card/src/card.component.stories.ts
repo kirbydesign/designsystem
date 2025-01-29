@@ -2,14 +2,14 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 
 import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 
-import { CardExampleModule } from '~/app/examples/card-example/card-example.module';
+import { CardExampleComponent } from '~/app/examples/card-example/card-example.component';
 
 const meta: Meta<CardComponent> = {
   component: CardComponent,
   title: 'Components / Card',
   decorators: [
     moduleMetadata({
-      imports: [CardModule, CardExampleModule],
+      imports: [CardModule, CardExampleComponent],
     }),
   ],
 };

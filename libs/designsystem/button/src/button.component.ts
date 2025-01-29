@@ -25,7 +25,6 @@ export enum ButtonSize {
 export type AttentionLevel = '1' | '2' | '3';
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button],a[kirby-button]',

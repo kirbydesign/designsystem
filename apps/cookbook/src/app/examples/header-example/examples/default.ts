@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
 
 const config = {
   selector: 'cookbook-header-example-default',
@@ -9,6 +10,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [HeaderModule],
 })
 export class HeaderExampleDefaultComponent {
   template: string = config.template;

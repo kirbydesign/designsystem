@@ -16,7 +16,6 @@ import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({
-  standalone: true,
   imports: [
     IconModule,
     EmptyStateModule,
@@ -28,7 +27,6 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -74,11 +72,11 @@ export class AlertComponent implements AfterViewInit {
 
   onCancel() {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    ionModalElement && ionModalElement.dismiss(false);
+    ionModalElement?.dismiss(false);
   }
 
   onOk() {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    ionModalElement && ionModalElement.dismiss(true);
+    ionModalElement?.dismiss(true);
   }
 }

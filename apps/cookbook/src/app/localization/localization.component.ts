@@ -4,9 +4,9 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
-import { ExamplesModule } from '../examples/examples.module';
-import { ShowcaseModule } from '../showcase/showcase.module';
+
+import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
+import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
 import { DaLocaleProviderComponent } from './locale-provider/da-locale-provider.component';
 import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.component';
 
@@ -14,11 +14,9 @@ import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.
   selector: 'cookbook-localization',
   templateUrl: './localization.component.html',
   styleUrls: ['./localization.component.scss'],
-  standalone: true,
   imports: [
-    CodeViewerModule,
-    ShowcaseModule,
-    ExamplesModule,
+    ExampleViewerComponent,
+    CodeViewerComponent,
     DaLocaleProviderComponent,
     EnLocaleProviderComponent,
     CalendarComponent,

@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import {
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
 
 const config = {
   selector: 'cookbook-item-example-input-default',
@@ -16,6 +24,14 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [
+    ItemModule,
+    AvatarComponent,
+    IconModule,
+    FormFieldModule,
+    DateInputDirective,
+    InputComponent,
+  ],
 })
 export class ItemExampleInputDefaultComponent {
   template: string = config.template;

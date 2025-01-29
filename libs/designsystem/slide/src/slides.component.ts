@@ -42,6 +42,7 @@ type SwiperContainer = HTMLElement & { initialize: () => void; swiper: Swiper };
   templateUrl: './slides.component.html',
   styleUrls: ['./slides.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(

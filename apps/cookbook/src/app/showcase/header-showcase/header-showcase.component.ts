@@ -1,20 +1,50 @@
 import { Component } from '@angular/core';
 
-import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-example/examples/action-group';
-import { HeaderWithEmphasizedActionGroupExampleComponent } from '~/app/examples/header-example/examples/emphasize-actions';
-import { HeaderWithCustomActionsExampleComponent } from '~/app/examples/header-example/examples/custom-actions';
-import { HeaderWithInteractiveTitleExampleComponent } from '~/app/examples/header-example/examples/interactive-title';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { HeaderExampleDefaultComponent } from '../../examples/header-example/examples/default';
+import { HeaderExampleSubtitleListComponent } from '../../examples/header-example/examples/subtitles';
+import { HeaderExampleFlagComponent } from '../../examples/header-example/examples/flag';
+import { HeaderExampleCustomFlagComponent } from '../../examples/header-example/examples/custom-flag';
+import { HeaderExampleValueComponent } from '../../examples/header-example/examples/value';
+import { HeaderExampleAvatarComponent } from '../../examples/header-example/examples/avatar';
+import { HeaderExampleProgressCircleWithAvatarComponent } from '../../examples/header-example/examples/progress-circle-with-avatar';
+import { HeaderExampleTitleScalingComponent } from '../../examples/header-example/examples/title-scaling';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { HeaderExampleCustomSectionComponent } from '../../examples/header-example/examples/custom-section';
+import { HeaderExampleCombinedComponent } from '../../examples/header-example/examples/combined';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { HeaderWithInteractiveTitleExampleComponent } from '~/app/examples/header-example/examples/interactive-title';
+import { HeaderWithCustomActionsExampleComponent } from '~/app/examples/header-example/examples/custom-actions';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from '~/app/examples/header-example/examples/emphasize-actions';
+import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-example/examples/action-group';
 
 @Component({
   selector: 'cookbook-header-showcase',
   templateUrl: './header-showcase.component.html',
   styleUrls: ['./header-showcase.component.scss'],
   preserveWhitespaces: true,
+  imports: [
+    ExampleViewerComponent,
+    HeaderExampleDefaultComponent,
+    HeaderExampleSubtitleListComponent,
+    HeaderExampleFlagComponent,
+    HeaderExampleCustomFlagComponent,
+    HeaderExampleValueComponent,
+    HeaderExampleAvatarComponent,
+    HeaderExampleProgressCircleWithAvatarComponent,
+    HeaderExampleTitleScalingComponent,
+    IphoneComponent,
+    HeaderExampleCustomSectionComponent,
+    HeaderExampleCombinedComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class HeaderShowcaseComponent {
   actionGroupTemplate: string = HeaderWithActionGroupExampleComponent.template;

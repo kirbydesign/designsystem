@@ -3,12 +3,14 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
 
+import { ToggleButtonExampleComponent } from '~/app/examples/toggle-button-example/toggle-button-example.component';
+
 const meta: Meta<ToggleButtonComponent> = {
   component: ToggleButtonComponent,
   title: 'Components / ToggleButton',
   decorators: [
     moduleMetadata({
-      imports: [ButtonComponent],
+      imports: [ButtonComponent, ToggleButtonExampleComponent],
     }),
   ],
 };
@@ -25,5 +27,11 @@ export const ToggleButton: Story = {
     <button kirby-button unchecked attentionLevel="3">Deactivated</button>
     <button kirby-button checked>Activated</button>
   </kirby-toggle-button>`,
+  }),
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-toggle-button-example></cookbook-toggle-button-example>`,
   }),
 };

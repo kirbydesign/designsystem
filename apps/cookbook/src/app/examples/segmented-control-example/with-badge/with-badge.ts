@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SegmentItem } from '@kirbydesign/designsystem';
+import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
 
 const config = {
   template: `<kirby-segmented-control
@@ -33,6 +33,7 @@ const config = {
   selector: 'cookbook-segmented-control-example-with-badge',
   template: config.template,
   styleUrls: ['../segmented-control-examples.shared.scss'],
+  imports: [SegmentedControlComponent],
 })
 export class SegmentedControlExampleWithBadgeComponent {
   codeSnippet = config.codeSnippet;

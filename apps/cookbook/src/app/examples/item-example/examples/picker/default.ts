@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-picker-default',
@@ -17,6 +18,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemModule],
 })
 export class ItemExamplePickerDefaultComponent {
   template: string = config.template;

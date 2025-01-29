@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 
 const config = {
   selector: 'cookbook-avatar-example-image-size',
@@ -12,6 +13,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
+  imports: [AvatarComponent],
 })
 export class AvatarExampleImageSizeComponent {
   template: string = config.template;

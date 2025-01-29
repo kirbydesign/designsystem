@@ -7,6 +7,7 @@ import { elementHasAncestor } from '@kirbydesign/designsystem/helpers';
   templateUrl: './list-experimental.component.html',
   styleUrls: ['./list-experimental.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ListExperimentalComponent {
   @ViewChild(IonList, { static: true }) list: IonList;

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
+import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
 
 const config = {
   selector: 'cookbook-toggle-reactive-forms-example',
@@ -40,6 +45,15 @@ toggleEnabled(checked: boolean) {
   selector: config.selector,
   styleUrls: ['./toggle-examples.shared.scss'],
   template: config.template,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    ItemModule,
+    ToggleComponent,
+    ExampleConfigurationWrapperComponent,
+    CheckboxComponent,
+    ReactiveFormStateComponent,
+  ],
 })
 export class ToggleReactiveFormsExampleComponent implements OnInit {
   template = config.template.split('<cookbook-example-configuration-wrapper>')[0];

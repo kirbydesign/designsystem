@@ -3,6 +3,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: `[keyHandler]`,
+  standalone: false,
 })
 export class KeyHandlerDirective {
   constructor(private element: ElementRef) {}

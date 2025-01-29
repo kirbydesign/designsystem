@@ -33,7 +33,6 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-menu',
-  standalone: true,
   imports: [ButtonComponent, CommonModule, FloatingDirective, IconModule, CardModule, ItemModule],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
