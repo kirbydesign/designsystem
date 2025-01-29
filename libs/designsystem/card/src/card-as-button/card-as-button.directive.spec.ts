@@ -9,6 +9,7 @@ import { CardAsButtonDirective } from './card-as-button.directive';
   standalone: false,
 })
 class KirbyCardClickHostComponent {
+  showButton = false;
   someMethod() {
     //noop
   }
@@ -25,13 +26,25 @@ describe('CardAsButtonDirective', () => {
     host: KirbyCardClickHostComponent,
   });
   beforeEach(() => {
-    spectator = createDirective(`<kirby-card (click)="someMethod()"> </kirby-card>`);
+    spectator = createDirective(
+      `<kirby-card (click)="someMethod()"><button *ngIf="showButton"></button></kirby-card>`
+    );
     cardElement = spectator.query('kirby-card');
   });
 
   it('should get the instance', () => {
     const instance = spectator.directive;
     expect(instance).toBeDefined();
+  });
+
+  it('should have tabindex="0" by default', () => {
+    expect(cardElement.getAttribute('tabindex')).toBe('0');
+  });
+
+  it('should have tabindex="-1" when it has a nested interactive element', () => {
+    spectator.setHostInput({ showButton: true });
+
+    expect(cardElement.getAttribute('tabindex')).toBe('-1');
   });
 
   const keyScenarios = ['space', 'enter'];
