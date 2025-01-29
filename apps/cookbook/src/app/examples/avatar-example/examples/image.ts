@@ -13,7 +13,6 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.align-top]': 'true' },
   imports: [AvatarComponent],
 })

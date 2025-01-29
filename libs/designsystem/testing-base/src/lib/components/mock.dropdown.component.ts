@@ -7,7 +7,6 @@ import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
 @Component({
   selector: 'kirby-dropdown',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {

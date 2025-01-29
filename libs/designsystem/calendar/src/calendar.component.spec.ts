@@ -79,7 +79,7 @@ describe('CalendarComponent', () => {
 
       spectator.setInput('selectedDate', null);
 
-      expect(spectator.query('.day.selected')).toBeUndefined;
+      expect(spectator.query('.day.selected')).toBeNull();
     });
   });
 

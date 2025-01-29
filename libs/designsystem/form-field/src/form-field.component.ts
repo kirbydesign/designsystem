@@ -92,7 +92,7 @@ export class FormFieldComponent
   }
 
   onLabelClick() {
-    this.radioGroupComponent && this.radioGroupComponent.focus();
+    this.radioGroupComponent?.focus();
   }
 
   public focus() {
