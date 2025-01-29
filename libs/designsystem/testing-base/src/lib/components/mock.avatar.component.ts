@@ -7,7 +7,6 @@ import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 @Component({
   selector: 'kirby-avatar',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {

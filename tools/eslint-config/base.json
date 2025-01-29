@@ -66,7 +66,13 @@
         "@typescript-eslint/no-non-null-assertion": "warn",
         "@typescript-eslint/member-ordering": "off",
         "@typescript-eslint/triple-slash-reference": "error",
-        "@typescript-eslint/no-explicit-any": "warn"
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-expressions": [
+          "error",
+          {
+            "allowTernary": true
+          }
+        ]
       },
       "plugins": ["eslint-plugin-import", "@typescript-eslint"]
     },
