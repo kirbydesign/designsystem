@@ -80,14 +80,15 @@ forgot to configure the custom icon through the 'IconRegistryService'?`);
     if (changes.name && changes.name.currentValue) {
       this.icon = this.iconRegistryService.getIcon(changes.name.currentValue);
 
-      // This will run on first init and again later if name is changed
-      // If name changes a new aria-label might have been added as well so we need to check again.
+      // This will always run on first init - and again later if name is changed
+      // If name changes a new aria-label might have been added, so we need to check again.
       this.setAriaHiddenIfNoLabel();
     }
   }
 
   private setAriaHiddenIfNoLabel() {
-    if (!this.element.hasAttribute('aria-label')) {
+    const existingAriaLabel = this.element.hasAttribute('aria-label');
+    if (!existingAriaLabel) {
       this.renderer.setAttribute(this.element, 'aria-hidden', 'true');
     }
   }
