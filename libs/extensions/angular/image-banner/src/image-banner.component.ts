@@ -3,6 +3,7 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
+import { TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-x-image-banner',
@@ -37,11 +38,6 @@ export class ImageBannerComponent {
   @Input() externalLink: string | undefined;
 
   /**
-   * The text of the dismiss button. Will be used as title for sighted users and aria-label for accessibility.
-   */
-  @Input() dismissButtonText: string | undefined;
-
-  /**
    * The blur-effect used for the background.
    */
   @HostBinding('class')
@@ -57,6 +53,8 @@ export class ImageBannerComponent {
    * If subscribed to, a dismiss button will be shown. Emitted every time the dismiss button is activated by click and keyboard interaction.
    */
   @Output() dismissClick = new EventEmitter<Event>();
+
+  constructor(public translations: TranslationService) {}
 
   public bannerClicked(event: Event) {
     const eventTarget = event.target as HTMLElement;
