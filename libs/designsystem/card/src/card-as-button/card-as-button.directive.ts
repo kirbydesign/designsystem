@@ -9,13 +9,22 @@ import { CardComponent } from '../card.component';
 })
 export class CardAsButtonDirective {
   @HostBinding('attr.role') role: string = 'button';
-  @HostBinding('attr.tabindex') tabindex: number = 0;
+  @HostBinding('attr.tabindex') get tabindex(): number {
+    return this.hasNestedInteractive() ? -1 : 0;
+  }
   @HostBinding('class.interaction-state-active') _pressed = false;
 
   constructor(
     @Optional() private card: CardComponent,
     private clickableElement: ElementRef
   ) {}
+
+  private hasNestedInteractive() {
+    const nestedInteractive = this.clickableElement.nativeElement.querySelector(
+      'a, button, kirby-radio, kirby-checkbox, kirby-toggle'
+    );
+    return !!nestedInteractive;
+  }
 
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
