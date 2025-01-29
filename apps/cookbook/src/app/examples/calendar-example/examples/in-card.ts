@@ -1,6 +1,10 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { DatePipe } from '@angular/common';
 
 const config = {
   template: `<kirby-card>
