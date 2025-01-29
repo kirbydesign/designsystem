@@ -13,6 +13,7 @@ import { componentOnReady } from '@ionic/core';
   templateUrl: './kirby-app.component.html',
   styleUrls: ['./kirby-app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AppComponent implements AfterContentInit {
   @ViewChild(IonApp, { static: true, read: ElementRef })

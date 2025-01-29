@@ -31,7 +31,7 @@ describe('ItemSlidingComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      '<kirby-item-sliding><kirby-item>Item</kirby-item></kirby-item-sliding>'
+      '<kirby-item-sliding [swipeActions]="swipeActions"><kirby-item>Item</kirby-item></kirby-item-sliding>'
     );
 
     queryItemOptionsElement();
@@ -75,7 +75,7 @@ describe('ItemSlidingComponent', () => {
     ];
 
     beforeEach(() => {
-      spectator.setInput('swipeActions', swipeActions);
+      spectator.setHostInput('swipeActions', swipeActions);
       queryItemOptionElements();
       queryItemOptionsElement();
 
@@ -108,7 +108,7 @@ describe('ItemSlidingComponent', () => {
 
         expect(swipeActionsWithDisabled.length).toBe(swipeActions.length);
 
-        spectator.setInput('swipeActions', swipeActionsWithDisabled);
+        spectator.setHostInput('swipeActions', swipeActionsWithDisabled);
         queryItemOptionElements();
       });
 
@@ -163,7 +163,7 @@ describe('ItemSlidingComponent', () => {
           ...swipeAction,
           icon: 'flash',
         }));
-        spectator.setInput('swipeActions', swipeActionsWithIcons);
+        spectator.setHostInput('swipeActions', swipeActionsWithIcons);
         queryItemOptionElements();
         kirbyIconElement = ionItemOptionElements[0].querySelector('kirby-icon');
       });

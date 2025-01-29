@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'cookbook-modal-example-alert-with-guard-stepper',
@@ -40,6 +41,7 @@ import { ActivatedRoute } from '@angular/router';
       }
     `,
   ],
+  imports: [NgFor, NgIf, RouterLink],
 })
 export class ModalExampleAlertWithGuardStepperComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}

@@ -1,4 +1,4 @@
-import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -13,7 +13,7 @@ import {
 const { size } = DesignTokenHelper;
 
 describe('ActionGroupComponent', () => {
-  let spectator: Spectator<ActionGroupComponent>;
+  let spectator: SpectatorHost<ActionGroupComponent>;
   let config: ActionGroupConfig;
 
   const createHost = createHostFactory({
@@ -75,14 +75,14 @@ describe('ActionGroupComponent', () => {
 
     describe('when setting visibleActions', () => {
       it('should only show buttons as configured in visibleActions', () => {
-        spectator.setInput('visibleActions', 3);
+        spectator.setHostInput('visibleActions', 3);
 
         const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
         expect(buttons).toHaveLength(3);
       });
 
       it('should hide buttons as configured in visibleActions', () => {
-        spectator.setInput('visibleActions', 3);
+        spectator.setHostInput('visibleActions', 3);
 
         const buttons = spectator.element.querySelectorAll('.hidden-layer> button[kirby-button]');
         expect(buttons).toHaveLength(2);
@@ -130,14 +130,14 @@ describe('ActionGroupComponent', () => {
 
     describe('when updating visibleActions', () => {
       it('should show buttons as configured in visibleActions', () => {
-        spectator.setInput('visibleActions', 4);
+        spectator.setHostInput('visibleActions', 4);
 
         const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
         expect(buttons).toHaveLength(4);
       });
 
       it('should hide buttons as configured in visibleActions', () => {
-        spectator.setInput('visibleActions', 2);
+        spectator.setHostInput('visibleActions', 2);
 
         const buttons = spectator.element.querySelectorAll('.hidden-layer> button[kirby-button]');
         expect(buttons).toHaveLength(3);
@@ -221,7 +221,7 @@ describe('ActionGroupComponent', () => {
           spectator = createHost();
           expect(spectator.component.visibleActions).toEqual(3);
 
-          spectator.setInput('visibleActions', 2);
+          spectator.setHostInput('visibleActions', 2);
 
           const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
           expect(buttons).toHaveLength(2);
@@ -234,7 +234,7 @@ describe('ActionGroupComponent', () => {
           spectator = createHost();
           expect(spectator.component.visibleActions).toEqual(3);
 
-          spectator.setInput('visibleActions', 4);
+          spectator.setHostInput('visibleActions', 4);
 
           const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
           expect(buttons).toHaveLength(3);

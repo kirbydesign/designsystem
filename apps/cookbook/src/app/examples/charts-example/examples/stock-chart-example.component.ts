@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ChartDataLabelOptions, ColorHelper } from '@kirbydesign/designsystem';
+import { ChartsModule } from '@kirbydesign/designsystem/chart';
 const { getThemeColorHexString } = ColorHelper;
 
 const config = {
@@ -40,6 +41,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ChartsModule],
 })
 export class StockChartExampleComponent {
   template: string = config.template;

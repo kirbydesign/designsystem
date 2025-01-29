@@ -20,7 +20,6 @@ export enum InputSize {
 }
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   hostDirectives: [
     {

@@ -6,7 +6,6 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 @Component({
   selector: 'kirby-card',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {

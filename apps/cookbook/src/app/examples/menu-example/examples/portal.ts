@@ -1,4 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-portal-example',
@@ -21,6 +23,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [MenuComponent, ItemModule],
 })
 export class MenuPortalExampleComponent {
   template: string = config.template;

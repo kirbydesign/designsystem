@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartsModule } from '@kirbydesign/designsystem/chart';
 
 const config = {
   selector: 'cookbook-chart-example-column',
@@ -12,6 +13,7 @@ labels=['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'D
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ChartsModule],
 })
 export class ChartExampleColumnComponent {
   template: string = config.template;

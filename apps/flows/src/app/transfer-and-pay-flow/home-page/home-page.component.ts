@@ -6,6 +6,7 @@ import { TransferAndPayModalComponent } from '../transfer-and-pay-modal/transfer
   selector: 'flows-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
+  standalone: false,
 })
 export class HomePageComponent {
   constructor(private modalController: ModalController) {}

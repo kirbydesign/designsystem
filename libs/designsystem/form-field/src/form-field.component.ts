@@ -35,6 +35,7 @@ import { TextareaComponent } from './textarea/textarea.component';
   selector: 'kirby-form-field',
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
+  standalone: false,
 })
 export class FormFieldComponent
   implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy
@@ -109,7 +110,7 @@ export class FormFieldComponent
   }
 
   onLabelClick() {
-    this.radioGroupComponent && this.radioGroupComponent.focus();
+    this.radioGroupComponent?.focus();
   }
 
   public focus() {

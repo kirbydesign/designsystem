@@ -4,13 +4,13 @@ import { ItemComponent, ItemModule, ItemSize } from '@kirbydesign/designsystem/i
 import { RadioModule } from '@kirbydesign/designsystem/radio';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
-import { ItemExampleModule } from '~/app/examples/item-example/item-example.module';
+import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
   component: ItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [CheckboxComponent, ItemModule, ItemExampleModule, RadioModule, ToggleComponent],
+      imports: [CheckboxComponent, ItemModule, RadioModule, ToggleComponent, ItemExampleComponent],
     }),
   ],
   title: 'Components / Item',

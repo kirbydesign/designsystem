@@ -6,6 +6,7 @@ import { TextAndDateService } from '../text-and-date.service';
   selector: 'flows-choose-date',
   templateUrl: './choose-date.component.html',
   styleUrls: ['./choose-date.component.scss'],
+  standalone: false,
 })
 export class ChooseDateComponent {
   todayDate: Date = new Date();

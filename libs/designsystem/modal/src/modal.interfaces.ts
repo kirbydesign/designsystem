@@ -49,7 +49,10 @@ export abstract class ModalElementsAdvertiser {
 /**
  * WARNING: This is for internal use only and should not be used outside of Kirby.
  */
-@Component({ template: '' })
+@Component({
+  template: '',
+  standalone: false,
+})
 export abstract class ModalElementComponent implements AfterViewInit, OnDestroy {
   private get isContainedInModal() {
     return this.modalElementsAdvertiser !== null;

@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { StockChartExampleComponent } from '../../examples/charts-example/examples/stock-chart-example.component';
+import { StockChartExampleComparisonComponent } from '../../examples/charts-example/examples/stock-chart-example-comparison.component';
 import { baseChartApi, baseChartCssCustomProperties } from '../chart-showcase/base-chart-api';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -8,6 +15,15 @@ import {
 @Component({
   selector: 'cookbook-stock-chart-showcase',
   templateUrl: './stock-chart-showcase.component.html',
+  imports: [
+    RouterLink,
+    CardModule,
+    ExampleViewerComponent,
+    StockChartExampleComponent,
+    StockChartExampleComparisonComponent,
+    DividerComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class StockChartShowcaseComponent {
   _cardHasPadding = true;

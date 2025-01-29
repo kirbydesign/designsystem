@@ -85,6 +85,7 @@
       [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
       [showIconOnly]="true"
       size="xs"
+      [attr.aria-label]="translations.get('close') + ' ' + title"
     >
       <kirby-icon name="close"></kirby-icon>
     </button>

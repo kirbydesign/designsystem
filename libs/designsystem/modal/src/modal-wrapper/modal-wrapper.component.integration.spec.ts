@@ -397,7 +397,7 @@ describe('ModalWrapperComponent + ModalComponent', () => {
       TestHelper.disableAnimationsInTest();
       spectator = createHost(
         `
-      <kirby-modal>
+      <kirby-modal [isOpen]="isOpen">
         <ng-template>
           <kirby-page-title>{{modalTitle}}</kirby-page-title>
         </ng-template>
@@ -409,12 +409,12 @@ describe('ModalWrapperComponent + ModalComponent', () => {
           },
         }
       );
-      spectator.setInput('isOpen', true);
+      spectator.setHostInput('isOpen', true);
       ionModal = spectator.queryHost('ion-modal');
     });
 
     afterEach(() => {
-      spectator.setInput('isOpen', false);
+      spectator.setHostInput('isOpen', false);
     });
 
     it('should set modal title text content as modal label', async () => {
@@ -446,7 +446,7 @@ describe('ModalWrapperComponent + ModalComponent', () => {
     beforeEach(() => {
       TestHelper.disableAnimationsInTest();
       spectator = createHost(
-        `<kirby-modal [attr.aria-label]="ariaLabel">
+        `<kirby-modal [attr.aria-label]="ariaLabel" [isOpen]="isOpen">
           <ng-template>Modal Content</ng-template>
         </kirby-modal>`,
         {
@@ -455,12 +455,12 @@ describe('ModalWrapperComponent + ModalComponent', () => {
           },
         }
       );
-      spectator.setInput('isOpen', true);
+      spectator.setHostInput('isOpen', true);
       ionModal = spectator.queryHost('ion-modal');
     });
 
     afterEach(() => {
-      spectator.setInput('isOpen', false);
+      spectator.setHostInput('isOpen', false);
     });
 
     it('should inherit custom aria-label in dialog', async () => {

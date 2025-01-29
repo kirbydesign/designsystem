@@ -1,4 +1,4 @@
-import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 import { IconComponent, IconModule } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -11,7 +11,7 @@ import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { MenuComponent } from './menu.component';
 
 describe('MenuComponent', () => {
-  let spectator: Spectator<MenuComponent>;
+  let spectator: SpectatorHost<MenuComponent>;
   let buttonElement: HTMLButtonElement;
   let card: Element;
   let buttonIcon: IconComponent;
@@ -31,7 +31,10 @@ describe('MenuComponent', () => {
   });
   describe('by default', () => {
     beforeEach(() => {
-      spectator = createHost<MenuComponent>(`<kirby-menu></kirby-menu>`, {});
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu [isDisabled]="isDisabled" [minWidth]="minWidth"></kirby-menu>`,
+        {}
+      );
       buttonElement = spectator.query('button');
       card = spectator.query('kirby-card');
       buttonIcon = spectator.query(IconComponent);
@@ -121,7 +124,7 @@ describe('MenuComponent', () => {
     describe('when', () => {
       describe('component configured with isDisabled set to true', () => {
         beforeEach(() => {
-          spectator.setInput('isDisabled', true);
+          spectator.setHostInput('isDisabled', true);
         });
 
         it('should render button as disabled ', () => {
@@ -140,7 +143,7 @@ describe('MenuComponent', () => {
       });
 
       it('should have min-width set to 300px', () => {
-        spectator.setInput('minWidth', 300);
+        spectator.setHostInput('minWidth', 300);
         expect(card).toHaveComputedStyle({ 'min-width': '300px' });
       });
     });
@@ -170,13 +173,13 @@ describe('MenuComponent', () => {
 
   describe('interaction', () => {
     beforeEach(() => {
-      spectator = createHost<MenuComponent>(
-        `<kirby-menu>
+      spectator = createHost(
+        `<kirby-menu [closeOnEscapeKey]="closeOnEscapeKey" [closeOnSelect]="closeOnSelect" [isDisabled]="isDisabled">
           <kirby-item>
             <p>Action 1</p>
               </kirby-item>
           </kirby-menu>`,
-        {}
+        { hostProps: { closeOnEscapeKey: true, closeOnSelect: true, isDisabled: false } }
       );
       buttonElement = spectator.query('button');
       card = spectator.query('kirby-card');
@@ -203,7 +206,7 @@ describe('MenuComponent', () => {
     });
 
     it('should not open when the menu is disabled', async () => {
-      spectator.setInput('isDisabled', true);
+      spectator.setHostInput('isDisabled', true);
 
       await spectator.click(buttonElement);
 
@@ -211,6 +214,7 @@ describe('MenuComponent', () => {
     });
 
     it('should close the menu when pressing escape', async () => {
+      spectator.setHostInput('closeOnEscapeKey', true);
       await spectator.click(buttonElement);
 
       expect(card).toHaveComputedStyle({ display: 'block' });
@@ -221,7 +225,7 @@ describe('MenuComponent', () => {
     });
 
     it('should not close the menu when pressing escape and closeOnEscapeKey is false', async () => {
-      spectator.setInput('closeOnEscapeKey', false);
+      spectator.setHostInput('closeOnEscapeKey', false);
 
       await spectator.click(buttonElement);
 
@@ -233,7 +237,7 @@ describe('MenuComponent', () => {
     });
 
     it('should not close when selecting an item and closeOnSelect is false', async () => {
-      spectator.setInput('closeOnSelect', false);
+      spectator.setHostInput('closeOnSelect', false);
       expect(card).toHaveComputedStyle({ display: 'none' });
 
       await spectator.click(buttonElement);

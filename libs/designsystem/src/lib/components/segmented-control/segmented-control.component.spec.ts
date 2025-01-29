@@ -46,11 +46,12 @@ describe('SegmentedControlComponent', () => {
 
   beforeEach(async () => {
     spectator = createHost(
-      `<kirby-segmented-control [items]="items" selectedIndex="1">
+      `<kirby-segmented-control [items]="items" [selectedIndex]="selectedIndex" [mode]="mode">
        </kirby-segmented-control>`,
       {
         hostProps: {
           items: items,
+          selectedIndex: 1,
         },
       }
     );
@@ -193,7 +194,7 @@ describe('SegmentedControlComponent', () => {
 
     describe('with no checked item', () => {
       beforeEach(() => {
-        spectator.setInput('selectedIndex', -1);
+        spectator.setHostInput('selectedIndex', -1);
       });
 
       it('should have only 1 tab stop', async () => {
@@ -246,7 +247,7 @@ describe('SegmentedControlComponent', () => {
 
   describe('in chip mode', () => {
     it('should have ion-segment with same width as segmented control', () => {
-      spectator.setInput('mode', SegmentedControlMode.chip);
+      spectator.setHostInput('mode', SegmentedControlMode.chip);
       const ionSegment = spectator.queryHost('ion-segment') as HTMLElement;
 
       expect(spectator.element.offsetWidth).toEqual(ionSegment.offsetWidth);
@@ -262,7 +263,7 @@ describe('SegmentedControlComponent', () => {
   testModes.forEach((testMode) => {
     describe(`in '${testMode}' mode`, () => {
       beforeEach(() => {
-        spectator.setInput('mode', testMode);
+        spectator.setHostInput('mode', testMode);
       });
 
       it(`should have a '${testMode}' mode when created`, () => {
@@ -350,7 +351,7 @@ describe('SegmentedControlComponent', () => {
       });
 
       it('should set the correct value when changing the selected-index', () => {
-        spectator.setInput('selectedIndex', 2);
+        spectator.setHostInput('selectedIndex', 2);
 
         expect(component.value).toBe(items[2]);
       });
@@ -359,13 +360,15 @@ describe('SegmentedControlComponent', () => {
         const subscriber = jasmine.createSpy('subcriber');
         spectator.output('selectedIndexChange').subscribe(subscriber);
 
-        spectator.setInput('selectedIndex', 2);
+        spectator.setHostInput('selectedIndex', 2);
 
         expect(subscriber).toHaveBeenCalledTimes(1);
       });
 
       it('should set the correct value when changing the selected-index in segment-select call-back', fakeAsync(() => {
-        spectator.output('segmentSelect').subscribe(() => spectator.setInput('selectedIndex', 2));
+        spectator
+          .output('segmentSelect')
+          .subscribe(() => spectator.setHostInput('selectedIndex', 2));
 
         spectator.dispatchMouseEvent('ion-segment-button:first-of-type', 'click');
         tick();
@@ -414,20 +417,21 @@ describe('SegmentedControl with Badge', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-segmented-control>
-       </kirby-segmented-control>`
+      `<kirby-segmented-control [items]="items">
+       </kirby-segmented-control>`,
+      { hostProps: { items: itemsWithBadge } }
     );
   });
 
   it('should render a badge per item with badge property defined', () => {
-    spectator.setInput({ items: itemsWithBadge });
+    spectator.setHostInput({ items: itemsWithBadge });
 
     expect(spectator.queryHostAll('kirby-badge').length).toBe(itemsWithBadge.length);
   });
 
   it('should render badge with content (text-string)', () => {
     const item: SegmentItem = itemsWithBadge[0];
-    spectator.setInput({ items: [item] });
+
     const badgeElement: HTMLElement = spectator.query('kirby-badge');
 
     expect(badgeElement.innerText.trim).toContainText(item.badge.content);
@@ -435,7 +439,7 @@ describe('SegmentedControl with Badge', () => {
 
   it('should render icon in badge with correct name', () => {
     const item: SegmentItem = itemsWithBadge[1];
-    spectator.setInput({ items: [item] });
+
     const iconComponent = spectator.debugElement.query(
       By.directive(IconComponent)
     ).componentInstance;
@@ -444,7 +448,7 @@ describe('SegmentedControl with Badge', () => {
   });
 
   it('should render badge with icon if both icon and content is provided', () => {
-    spectator.setInput({ items: [itemsWithBadge[2]] });
+    spectator.setHostInput({ items: [itemsWithBadge[2]] });
     const iconComponent = spectator.debugElement.query(
       By.directive(IconComponent)
     ).componentInstance;

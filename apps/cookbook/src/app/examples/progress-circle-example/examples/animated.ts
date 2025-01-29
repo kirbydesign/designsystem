@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/designsystem';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
+import { DecimalPipe } from '@angular/common';
 
 const config = {
   selector: 'cookbook-progress-circle-example-animated',
@@ -32,6 +34,7 @@ private updateProgress = () => {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ProgressCircleComponent, DecimalPipe],
 })
 export class ProgressCircleExampleAnimatedComponent implements OnInit {
   template: string = config.template;

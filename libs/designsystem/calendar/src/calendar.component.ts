@@ -31,7 +31,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
+import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import { da, enGB, enUS } from 'date-fns/locale';
 
 import { capitalizeFirstLetter } from '@kirbydesign/core';
@@ -63,7 +63,6 @@ enum TimeUnit {
 }
 
 @Component({
-  standalone: true,
   imports: [DropdownModule, ButtonComponent, IconModule, CommonModule],
   selector: 'kirby-calendar',
   templateUrl: './calendar.component.html',
@@ -301,11 +300,11 @@ export class CalendarComponent implements OnInit, OnChanges {
       return dateLocalOrUTC;
     }
     if (
-      startOfDay(utcToZonedTime(dateLocalOrUTC, this.timeZoneName)).getTime() ===
-      utcToZonedTime(dateLocalOrUTC, this.timeZoneName).getTime()
+      startOfDay(toZonedTime(dateLocalOrUTC, this.timeZoneName)).getTime() ===
+      toZonedTime(dateLocalOrUTC, this.timeZoneName).getTime()
     ) {
       // the date is a UTC midnight; create the equivalent local timezone midnight date
-      const normalizedUTCdate = utcToZonedTime(dateLocalOrUTC, this.timeZoneName);
+      const normalizedUTCdate = toZonedTime(dateLocalOrUTC, this.timeZoneName);
       return normalizedUTCdate;
     }
     // does not point to midnight so we make it
@@ -440,7 +439,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     let newDate = new Date(newDay.year, newDay.monthIndex, newDay.date);
 
     if (this.timezone === 'UTC') {
-      newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
+      newDate = fromZonedTime(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }
 
     const dateToEmit = newDate;
@@ -550,7 +549,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     newDate = this.normalizeDate(newDate);
 
     if (this.timezone === 'UTC') {
-      newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
+      newDate = fromZonedTime(this.subtractTimezoneOffset(newDate), this.timeZoneName);
     }
 
     const today = this.getTodayDate();

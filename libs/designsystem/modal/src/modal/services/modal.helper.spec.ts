@@ -16,7 +16,6 @@ import {
   ModalCompactWrapperComponent,
   ModalConfig,
   ModalSize,
-  ModalWrapperComponent,
   ShowAlertCallback,
 } from '../../modal-wrapper';
 import { ModalNavigationService } from '../../modal-navigation.service';
@@ -29,6 +28,7 @@ import { AlertHelper } from './alert.helper';
     <h2>Embedded Input</h2>
     <input #input />
   `,
+  standalone: false,
 })
 class InputEmbeddedComponent implements OnInit {
   @ViewChild('input', { static: true, read: ElementRef })
@@ -37,7 +37,7 @@ class InputEmbeddedComponent implements OnInit {
   constructor(@Optional() private modal?: Modal) {}
 
   ngOnInit() {
-    this.modal && this.modal.didPresent.then(() => this.input.nativeElement.focus());
+    this.modal?.didPresent.then(() => this.input.nativeElement.focus());
   }
 }
 
@@ -48,6 +48,7 @@ class InputEmbeddedComponent implements OnInit {
       <button kirby-button>Button inside footer</button>
     </kirby-modal-footer>
   `,
+  standalone: false,
 })
 class ContentOverflowsWithFooterEmbeddedComponent {
   height: number = window.innerHeight;
@@ -57,6 +58,7 @@ class ContentOverflowsWithFooterEmbeddedComponent {
   template: `
     <div style="height: 1px;">Content</div>
   `,
+  standalone: false,
 })
 class ContentWithNoOverflowEmbeddedComponent {}
 
@@ -67,6 +69,7 @@ class ContentWithNoOverflowEmbeddedComponent {}
     </kirby-page-progress>
     <kirby-page-title>Modal With Page Progress</kirby-page-title>
   `,
+  standalone: false,
 })
 class PageProgressEmbeddedComponent {}
 
@@ -74,6 +77,7 @@ class PageProgressEmbeddedComponent {}
   template: `
     <kirby-page-title>Modal With Page Title</kirby-page-title>
   `,
+  standalone: false,
 })
 class PageTitleEmbeddedComponent {}
 

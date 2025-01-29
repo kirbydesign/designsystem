@@ -2,13 +2,13 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 /* eslint-disable-next-line no-restricted-imports */
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
 
-import { SegmentedControlExampleModule } from '~/app/examples/segmented-control-example/segmented-control-example.module';
+import { SegmentedControlExampleComponent } from '~/app/examples/segmented-control-example/segmented-control-example.component';
 
 const meta: Meta<SegmentedControlComponent> = {
   component: SegmentedControlComponent,
   decorators: [
     moduleMetadata({
-      imports: [SegmentedControlExampleModule],
+      imports: [SegmentedControlExampleComponent],
     }),
   ],
   title: 'Components / Segmented Control',

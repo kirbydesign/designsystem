@@ -29,7 +29,6 @@ import { FloatingDirective, OutletSelector } from './floating.directive';
     <pre #tagTarget></pre>
   `,
   imports: [FloatingDirective],
-  standalone: true,
 })
 class FloatingTestComponent {
   @ViewChild('floatingElement', { static: true }) public floatingElementRef: ElementRef;

@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/component-selector

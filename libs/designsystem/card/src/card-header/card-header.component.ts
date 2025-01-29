@@ -7,6 +7,7 @@ import { CardFlagLevel } from '../card-flag-level';
   templateUrl: './card-header.component.html',
   styleUrls: ['./card-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CardHeaderComponent {
   @Input() title: string;
