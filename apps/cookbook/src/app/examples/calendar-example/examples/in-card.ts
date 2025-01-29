@@ -1,10 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
-import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { DatePipe } from '@angular/common';
+import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 
 const config = {
   template: `<kirby-card>
@@ -109,13 +105,13 @@ export class CalendarCardExampleComponent implements OnChanges {
         // be misleading and confusing
         if (this.useTimezoneUTC) {
           // realign local -> selectedDate
-          this.selectedDate = zonedTimeToUtc(
+          this.selectedDate = fromZonedTime(
             this.subtractTimezoneOffset(this.selectedDate),
             this.timeZoneName
           );
         } else {
           // realign UTC -> local
-          this.selectedDate = utcToZonedTime(this.selectedDate, this.timeZoneName);
+          this.selectedDate = toZonedTime(this.selectedDate, this.timeZoneName);
         }
       }
     }
