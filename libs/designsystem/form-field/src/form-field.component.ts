@@ -64,6 +64,7 @@ export class FormFieldComponent
 
   set message(value: string) {
     this._message = value;
+    this.setNestedInteractiveElementAttributes();
   }
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
@@ -72,7 +73,7 @@ export class FormFieldComponent
   @ContentChild(InputComponent) inputComponent: InputComponent;
   @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
   @ContentChild(RadioGroupComponent, { read: ElementRef })
-  private radioGroupElement: ElementRef<HTMLIonRadioGroupElement>;
+  private radioGroupElement: ElementRef<HTMLElement>;
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
@@ -140,10 +141,6 @@ export class FormFieldComponent
   }
 
   ngAfterContentInit(): void {
-    this.initializeNestedInteractiveElement();
-    this.setNestedInteractiveElementAttributes();
-    this.subscribeToNestedInteractiveError();
-
     // Measure the width of all slotted affix elements,
     // and apply their width + standard padding to the input elements
     // padding, so the start/end of the input is correctly indented.
@@ -166,9 +163,7 @@ export class FormFieldComponent
 
   ngAfterContentChecked(): void {
     if (!this.nestedInteractiveElement) {
-      this.initializeNestedInteractiveElement();
-      this.setNestedInteractiveElementAttributes();
-      this.subscribeToNestedInteractiveError();
+      this.registerNestedInteractive();
     }
 
     if (!this.isRegistered && this.element.isConnected && (this.input || this.textarea)) {
@@ -198,7 +193,13 @@ export class FormFieldComponent
     this.nestedInteractiveErrorSubscription.unsubscribe();
   }
 
-  private initializeNestedInteractiveElement() {
+  private registerNestedInteractive() {
+    this.getNestedInteractiveElement();
+    this.setNestedInteractiveElementAttributes();
+    this.subscribeToNestedInteractiveError();
+  }
+
+  private getNestedInteractiveElement() {
     this.nestedInteractiveElement =
       this.input?.nativeElement ||
       this.textarea?.nativeElement ||
@@ -231,8 +232,8 @@ export class FormFieldComponent
     const nestedInteractiveComponent =
       this.inputComponent || this.textareaComponent || this.radioGroupComponent;
 
+    // set current value, then listen for changes
     this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
-
     this.nestedInteractiveErrorSubscription = nestedInteractiveComponent?.hasErrorChange.subscribe(
       (hasError) => {
         this._nestedInteractiveHasError = hasError;
