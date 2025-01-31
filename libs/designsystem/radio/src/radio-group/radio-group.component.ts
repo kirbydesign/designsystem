@@ -14,6 +14,7 @@ import {
 import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
+import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 import { RadioComponent } from '../radio.component';
 
@@ -31,7 +32,9 @@ import { RadioComponent } from '../radio.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class RadioGroupComponent implements AfterContentInit, ControlValueAccessor {
+export class RadioGroupComponent
+  implements AfterContentInit, ControlValueAccessor, FormFieldControl
+{
   constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
   // #region public properties

@@ -10,6 +10,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
   imports: [CommonModule],
@@ -19,7 +20,7 @@ import {
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',
 })
-export class TextareaComponent implements OnChanges {
+export class TextareaComponent implements OnChanges, FormFieldControl {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 

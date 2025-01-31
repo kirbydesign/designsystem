@@ -12,6 +12,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { FormFieldControl } from '@kirbydesign/designsystem/types';
 import { DateInputDirective } from '../directives/date/date-input.directive';
 
 export enum InputSize {
@@ -24,7 +25,7 @@ export enum InputSize {
   hostDirectives: [
     {
       directive: DateInputDirective,
-      // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+
       inputs: ['prefillYear', 'useNativeDatePicker'],
     },
   ],
@@ -34,7 +35,7 @@ export enum InputSize {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent implements OnChanges, OnInit {
+export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
