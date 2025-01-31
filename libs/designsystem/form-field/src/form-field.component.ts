@@ -231,7 +231,7 @@ export class FormFieldComponent
     const nestedInteractiveComponent =
       this.inputComponent || this.textareaComponent || this.radioGroupComponent;
 
-    this._nestedInteractiveHasError = nestedInteractiveComponent?.hasError;
+    this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
 
     this.nestedInteractiveErrorSubscription = nestedInteractiveComponent?.hasErrorChange.subscribe(
       (hasError) => {
