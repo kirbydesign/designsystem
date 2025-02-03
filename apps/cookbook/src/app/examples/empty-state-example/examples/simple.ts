@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
   template: `<kirby-empty-state
@@ -13,6 +15,7 @@ const config = {
 @Component({
   selector: 'cookbook-empty-state-simple-example',
   template: config.template,
+  imports: [EmptyStateModule, ButtonComponent],
 })
 export class EmptyStateSimpleExampleComponent {
   template: string = config.template;

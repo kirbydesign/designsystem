@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 export type FlagThemeColor = 'success' | 'warning' | 'danger' | 'semi-light' | 'transparent';
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   selector: 'kirby-flag',
   template: `

@@ -104,17 +104,17 @@ describe('RadioGroupComponent', () => {
         const templateScenarios = [
           {
             type: TemplateScenarioTypes.DEFAULT,
-            template: `<kirby-radio-group [(value)]="selected" [items]="${itemsTemplateVar}"></kirby-radio-group>`,
+            template: `<kirby-radio-group [(value)]="selected" [items]="${itemsTemplateVar}" [disabled]="disabled" [hasError]="hasError"></kirby-radio-group>`,
           },
           {
             type: TemplateScenarioTypes.SLOTTED,
-            template: `<kirby-radio-group [(value)]="selected">
+            template: `<kirby-radio-group [(value)]="selected" [disabled]="disabled" [hasError]="hasError">
                          <kirby-radio *ngFor="let item of ${itemsTemplateVar}" [value]="item" [text]="item.text || item"></kirby-radio>
                        </kirby-radio-group>`,
           },
           {
             type: TemplateScenarioTypes.CUSTOM,
-            template: `<kirby-radio-group [(value)]="selected" [items]="${itemsTemplateVar}">
+            template: `<kirby-radio-group [(value)]="selected" [items]="${itemsTemplateVar}" [disabled]="disabled" [hasError]="hasError">
                          <div style="display: flex; flex-direction: row;"
                            *kirbyListItemTemplate="let item; let selected = selected; let index = index"
                            [attr.is-selected]="selected"
@@ -401,21 +401,21 @@ describe('RadioGroupComponent', () => {
                 });
 
                 it('should disable the radio items when the kirby-radio-group is disabled', () => {
-                  spectator.setInput('disabled', true);
+                  spectator.setHostInput('disabled', true);
                   radios.forEach((each) => expect(each.disabled).toBeTrue());
                 });
 
                 it('should re-enable the radio items when the kirby-radio-group is enabled', () => {
-                  spectator.setInput('disabled', true);
+                  spectator.setHostInput('disabled', true);
                   radios.forEach((each) => expect(each.disabled).toBeTrue());
 
-                  spectator.setInput('disabled', false);
+                  spectator.setHostInput('disabled', false);
                   radios.forEach((each) => expect(each.disabled).toBeUndefined());
                 });
 
                 it('should disable the radio items if items are set after the kirby-radio-group is disabled', async () => {
                   spectator.setHostInput('items', null);
-                  spectator.setInput('disabled', true);
+                  spectator.setHostInput('disabled', true);
                   await TestHelper.waitForTimeout(); // Wait a tick
 
                   spectator.setHostInput('items', dataScenario.items);
@@ -447,15 +447,15 @@ describe('RadioGroupComponent', () => {
                     });
 
                     it('should disable the radio items when the kirby-radio-group is disabled', () => {
-                      spectator.setInput('disabled', true);
+                      spectator.setHostInput('disabled', true);
                       radios.forEach((each) => expect(each.disabled).toBeTrue());
                     });
 
                     it('should only re-enable the radio items if the corresponding data item is not disabled when the kirby-radio-group is enabled', () => {
-                      spectator.setInput('disabled', true);
+                      spectator.setHostInput('disabled', true);
                       radios.forEach((each) => expect(each.disabled).toBeTrue());
 
-                      spectator.setInput('disabled', false);
+                      spectator.setHostInput('disabled', false);
                       expect(radios[0].disabled).toBeUndefined();
                       expect(radios[1].disabled).toBeFalse();
                       expect(radios[2].disabled).toBeTrue();
@@ -479,12 +479,12 @@ describe('RadioGroupComponent', () => {
 
               describe('hasError', () => {
                 it('should not have error state by default', () => {
-                  expect(spectator.component.hasError).toBeFalse;
+                  expect(spectator.component.hasError).toBeUndefined();
                   expect(spectator.element.classList).not.toContain('error');
                 });
 
                 it('should apply class `error` when hasError=true', () => {
-                  spectator.setInput('hasError', true);
+                  spectator.setHostInput('hasError', true);
                   spectator.detectChanges();
 
                   expect(spectator.element.classList).toContain('error');
@@ -655,7 +655,7 @@ describe('RadioGroupComponent', () => {
 
                     it('should have correct new selected item', async () => {
                       const newSelectedIndex = 0;
-                      spectator.setInput('selectedIndex', newSelectedIndex);
+                      spectator.setHostInput('selectedIndex', newSelectedIndex);
                       // Wait for radio checked attribute to be updated;
                       await TestHelper.whenTrue(() => radioChecked(newSelectedIndex));
 
@@ -675,46 +675,12 @@ describe('RadioGroupComponent', () => {
                     it('should not emit change event', () => {
                       const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
 
-                      spectator.setInput('selectedIndex', 0);
+                      spectator.setHostInput('selectedIndex', 0);
 
                       expect(onChangeSpy).not.toHaveBeenCalled();
                     });
                   });
                 });
-
-                if (templateScenario === TemplateScenarioTypes.DEFAULT) {
-                  describe('through input properties', () => {
-                    it('should set the value to the corresponding data item', () => {
-                      spectator = createHost('<kirby-radio-group></kirby-radio-group>', {
-                        props: { selectedIndex: defaultSelectedIndex, items: dataScenario.items },
-                      });
-
-                      expect(spectator.component.value).toEqual(
-                        dataScenario.items[defaultSelectedIndex]
-                      );
-                    });
-
-                    it('set the value to the corresponding data item when setting items after selected index', () => {
-                      spectator = createHost('<kirby-radio-group></kirby-radio-group>');
-                      spectator.setInput('selectedIndex', defaultSelectedIndex);
-                      spectator.setInput('items', dataScenario.items);
-
-                      expect(spectator.component.value).toEqual(
-                        dataScenario.items[defaultSelectedIndex]
-                      );
-                    });
-
-                    it('set the value to the corresponding data item when setting selected index after items', () => {
-                      spectator = createHost('<kirby-radio-group></kirby-radio-group>');
-                      spectator.setInput('items', dataScenario.items);
-                      spectator.setInput('selectedIndex', defaultSelectedIndex);
-
-                      expect(spectator.component.value).toEqual(
-                        dataScenario.items[defaultSelectedIndex]
-                      );
-                    });
-                  });
-                }
               });
             });
           });

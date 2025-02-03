@@ -10,12 +10,50 @@ import {
 import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
-import { ModalSizeOption } from '../modal-example-configuration/modal-example-size-selector.component';
+import { NgIf } from '@angular/common';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
+import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import {
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
+import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { ModalExampleConfigurationComponent } from '../modal-example-configuration/modal-example-configuration.component';
+import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
+import {
+  ModalExampleSizeSelectorComponent,
+  ModalSizeOption,
+} from '../modal-example-configuration/modal-example-size-selector.component';
 
 @Component({
   selector: 'cookbook-embedded-modal-example',
   templateUrl: './embedded-modal-example.component.html',
   styleUrls: ['./embedded-modal-example.component.scss'],
+  imports: [
+    NgIf,
+    PageModule,
+    ProgressCircleComponent,
+    ExampleConfigurationWrapperComponent,
+    ModalExampleConfigurationComponent,
+    LoadingOverlayComponent,
+    CardModule,
+    ButtonComponent,
+    DividerComponent,
+    ModalExampleSizeSelectorComponent,
+    IconModule,
+    FormFieldModule,
+    DateInputDirective,
+    InputComponent,
+    ModalFooterComponent,
+    ThemeColorDirective,
+  ],
 })
 export class EmbeddedModalExampleComponent implements OnInit {
   title: string;

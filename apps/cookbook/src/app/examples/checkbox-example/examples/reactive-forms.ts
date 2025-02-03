@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
+import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
 
 const config = {
   selector: 'cookbook-checkbox-reactive-forms-example',
@@ -69,6 +78,13 @@ toggleCanSelectFavorite() {
         }
       }
     `,
+  ],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CheckboxComponent,
+    ExampleConfigurationWrapperComponent,
+    ReactiveFormStateComponent,
   ],
 })
 export class CheckboxReactiveFormsExampleComponent {

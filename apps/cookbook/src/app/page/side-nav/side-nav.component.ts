@@ -9,13 +9,23 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { NavigationEnd, Route, Router } from '@angular/router';
+import { NavigationEnd, Route, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import { kebabToTitleCase } from '@kirbydesign/designsystem';
 
-import { routes as showcaseRoutes } from '../../showcase/showcase.routes';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { NgFor, NgIf } from '@angular/common';
+import {
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+} from '@kirbydesign/designsystem/form-field';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { routes as appRoutes } from '../../app.routes';
+import { SHOWCASE_ROUTES as showcaseRoutes } from '../../showcase/showcase.routes';
 
 const KEY_DOWN = 'ArrowDown';
 
@@ -28,6 +38,19 @@ interface SideNavLink {
   selector: 'cookbook-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
+  imports: [
+    CardModule,
+    NgFor,
+    RouterLink,
+    FormFieldModule,
+    DateInputDirective,
+    InputComponent,
+    FormsModule,
+    NgIf,
+    ButtonComponent,
+    IconModule,
+    RouterLinkActive,
+  ],
 })
 export class SideNavComponent implements OnInit {
   private allShowcaseRoutes: SideNavLink[];

@@ -2,14 +2,14 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { IconComponent, IconModule } from '@kirbydesign/designsystem/icon';
 
-import { IconExampleModule } from '~/app/examples/icon-example/icon-example.module';
+import { IconExampleComponent } from '~/app/examples/icon-example/icon-example.component';
 
 const meta: Meta<IconComponent> = {
   component: IconComponent,
   title: 'Components / Icon',
   decorators: [
     moduleMetadata({
-      imports: [IconModule, IconExampleModule],
+      imports: [IconModule, IconExampleComponent],
     }),
   ],
 };

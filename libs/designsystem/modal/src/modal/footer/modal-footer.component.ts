@@ -15,7 +15,6 @@ import {
 } from '../../modal.interfaces';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonFooter],
   selector: 'kirby-modal-footer',
   templateUrl: './modal-footer.component.html',

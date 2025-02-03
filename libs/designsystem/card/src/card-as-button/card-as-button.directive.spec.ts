@@ -3,7 +3,11 @@ import { Component } from '@angular/core';
 import { CardComponent } from '../card.component';
 import { CardAsButtonDirective } from './card-as-button.directive';
 
-@Component({ selector: 'kirby-card-click-host', template: '' })
+@Component({
+  selector: 'kirby-card-click-host',
+  template: '',
+  standalone: false,
+})
 class KirbyCardClickHostComponent {
   someMethod() {
     //noop

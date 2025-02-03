@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 const config = {
   selector: 'cookbook-badge-example-number',
@@ -12,6 +14,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./badge-example-shared.scss'],
+  imports: [ThemeColorDirective, BadgeComponent],
 })
 export class BadgeExampleNumberComponent {
   template: string = config.template;

@@ -19,7 +19,6 @@ import { setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonToggle],
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',

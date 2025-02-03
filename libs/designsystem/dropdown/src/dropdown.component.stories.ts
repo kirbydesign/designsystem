@@ -4,7 +4,7 @@ import { userEvent, within } from '@storybook/test';
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { DropdownExampleModule } from '~/app/examples/dropdown-example/dropdown-example.module';
+import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
@@ -13,7 +13,7 @@ const meta: Meta<DropdownComponent> = {
   title: 'Components / Dropdown',
   decorators: [
     moduleMetadata({
-      imports: [DropdownModule, ButtonComponent, DropdownExampleModule],
+      imports: [DropdownModule, ButtonComponent, DropdownExampleComponent],
     }),
   ],
   argTypes: {

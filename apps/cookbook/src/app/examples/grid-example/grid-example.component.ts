@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'cookbook-grid-example',
   templateUrl: './grid-example.component.html',
   styleUrls: ['./grid-example.component.scss'],
+  imports: [CardModule, NgFor],
 })
 export class GridExampleComponent {
   spacing = '';

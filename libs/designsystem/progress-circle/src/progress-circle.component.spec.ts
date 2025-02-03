@@ -316,7 +316,7 @@ describe('ProgressCircleComponent', () => {
 
     beforeEach(() => {
       spectator = createHost('<kirby-progress-circle></kirby-progress-circle>', {
-        props: { value: 50 },
+        hostProps: { value: 50 },
       });
     });
 

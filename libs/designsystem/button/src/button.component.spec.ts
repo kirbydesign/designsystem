@@ -223,33 +223,13 @@ describe('ButtonComponent', () => {
         });
       });
 
-      describe(`through an input property`, () => {
+      describe(`through template property binding`, () => {
         beforeEach(() => {
-          spectator = createHost(`<button kirby-button><span>Text</span></button>`, {
-            props: {
+          spectator = createHost(`<button kirby-button [size]="size"><span>Text</span></button>`, {
+            hostProps: {
               size: scenario.size,
             },
           });
-          element = spectator.element as HTMLButtonElement;
-        });
-        it('should render with correct font-size', () => {
-          expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
-        });
-
-        it('should render with correct height', () => {
-          expect(element).toHaveComputedStyle({ height: scenario.expected.height });
-        });
-
-        it('should render with correct min-width', () => {
-          expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
-        });
-      });
-
-      describe(`through template property binding`, () => {
-        beforeEach(() => {
-          spectator = createHost(
-            `<button kirby-button [size]="'${scenario.size}'"><span>Text</span></button>`
-          );
           element = spectator.element as HTMLButtonElement;
         });
         it('should render with correct font-size', () => {
@@ -407,10 +387,10 @@ describe('ButtonComponent', () => {
         }
       });
 
-      describe(`through an input property`, () => {
+      describe(`through template property binding`, () => {
         beforeEach(() => {
           spectator = createHost(
-            `<button kirby-button>
+            `<button kirby-button [size]="size" [showIconOnly]="showIconOnly">
               ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
               ${
                 scenario.iconPosition === 'icon-only'
@@ -420,44 +400,11 @@ describe('ButtonComponent', () => {
               ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
             </button>`,
             {
-              props: {
+              hostProps: {
                 size: scenario.size,
                 showIconOnly: scenario.showIconOnly,
               },
             }
-          );
-          element = spectator.element as HTMLButtonElement;
-        });
-
-        it('should render with correct padding-inline', () => {
-          expect(element.getElementsByClassName('content-layer').length).toBe(1);
-          expect(element.getElementsByClassName('content-layer')[0]).toHaveComputedStyle({
-            'padding-inline': scenario.expected.paddingInline,
-          });
-        });
-
-        if (scenario.iconPosition === 'icon-only') {
-          it('should render as icon only', () => {
-            expect(element).toHaveClass('icon-only');
-            expect(element.offsetWidth).toEqual(element.offsetHeight);
-          });
-        }
-      });
-
-      describe(`through template property binding`, () => {
-        beforeEach(() => {
-          spectator = createHost(
-            `<button kirby-button [size]="'${scenario.size}'" [showIconOnly]="${
-              scenario.showIconOnly
-            }">
-              ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
-              ${
-                scenario.iconPosition === 'icon-only'
-                  ? '<kirby-icon name="edit"></kirby-icon>'
-                  : '<span>Text</span>'
-              }
-              ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
-            </button>`
           );
           element = spectator.element as HTMLButtonElement;
         });
@@ -650,12 +597,11 @@ describe('ButtonComponent', () => {
       describe(`and plain text to the left of icon`, () => {
         it('should NOT apply `icon-right` class', () => {
           spectator = createHost(
-            `<button kirby-button>
+            `<button kirby-button [showIconOnly]="true">
               Hidden Text Left
               <kirby-icon name="edit"></kirby-icon>
             </button>`
           );
-          spectator.setInput('showIconOnly', true);
           element = spectator.element as HTMLButtonElement;
           expect(element).not.toHaveClass('icon-right');
         });
@@ -664,12 +610,11 @@ describe('ButtonComponent', () => {
       describe(`and plain text to the right of icon`, () => {
         it('should NOT apply `icon-left` class', () => {
           spectator = createHost(
-            `<button kirby-button>
+            `<button kirby-button [showIconOnly]="true">
               <kirby-icon name="edit"></kirby-icon>
               Hidden Text Right
             </button>`
           );
-          spectator.setInput('showIconOnly', true);
           element = spectator.element as HTMLButtonElement;
           expect(element).not.toHaveClass('icon-left');
         });

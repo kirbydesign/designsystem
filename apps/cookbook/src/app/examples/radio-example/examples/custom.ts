@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { ListModule } from '@kirbydesign/designsystem/list';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = [
@@ -55,6 +57,7 @@ selected = this.items[1];`,
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  imports: [RadioModule, ListModule],
 })
 export class RadioCustomContentExampleComponent {
   template: string = `<!-- 1. Using slotted <kirby-radio> -->

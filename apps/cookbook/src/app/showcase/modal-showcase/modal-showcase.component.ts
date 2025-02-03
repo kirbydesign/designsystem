@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { KirbyModule } from '@kirbydesign/designsystem';
+import { RouterLink } from '@angular/router';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { ModalExampleAlertWithGuardStepperComponent } from '../../examples/modal-example/alert-example/modal-example-alert-with-guard-stepper.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ModalExampleAdvancedComponent } from '~/app/examples/modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from '~/app/examples/modal-example/modal-example-outlet.component';
 import { ModalExampleSimpleComponent } from '~/app/examples/modal-example/modal-example-simple.component';
@@ -16,6 +24,16 @@ import { ModalComponentExampleComponent } from '~/app/examples/modal-example/mod
   templateUrl: './modal-showcase.component.html',
   styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
+  imports: [
+    ExampleViewerComponent,
+    IphoneComponent,
+    KirbyModule,
+    CodeViewerComponent,
+    RouterLink,
+    ModalExampleAlertWithGuardStepperComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;

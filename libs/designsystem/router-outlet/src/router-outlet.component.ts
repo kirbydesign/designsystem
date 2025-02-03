@@ -6,6 +6,7 @@ import { isPlatform } from '@ionic/angular/standalone';
   templateUrl: './router-outlet.component.html',
   styleUrls: ['./router-outlet.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class RouterOutletComponent {
   @Input() main: boolean;
