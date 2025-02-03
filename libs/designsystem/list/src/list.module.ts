@@ -30,6 +30,7 @@ import {
 const exportedDeclarations = [
   ListComponent,
   ListItemComponent,
+  ListItemTemplateDirective,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
   ListHeaderDirective,
@@ -38,7 +39,12 @@ const exportedDeclarations = [
   ListExperimentalComponent,
 ];
 
-const declarations = [...exportedDeclarations, ListItemColorDirective, InfiniteScrollDirective];
+const declarations = [
+  ...exportedDeclarations,
+  ListItemColorDirective,
+  InfiniteScrollDirective,
+  ListItemComponent,
+];
 
 @NgModule({
   declarations: declarations,
@@ -53,9 +59,8 @@ const declarations = [...exportedDeclarations, ListItemColorDirective, InfiniteS
     IonLabel,
     IonList,
     IonListHeader,
-    ListItemTemplateDirective,
   ],
-  exports: [exportedDeclarations, ListItemTemplateDirective],
+  exports: [exportedDeclarations],
   providers: [],
 })
 export class ListModule {}

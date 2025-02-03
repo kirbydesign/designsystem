@@ -23,7 +23,7 @@ const { getColor } = DesignTokenHelper;
 describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
-    declarations: [RadioComponent],
+    declarations: [RadioComponent, ListItemTemplateDirective],
     imports: [
       TestHelper.ionicModuleForTest,
       IonRadioGroup,
@@ -31,7 +31,6 @@ describe('RadioGroupComponent', () => {
       FormsModule,
       ReactiveFormsModule,
       FlagComponent,
-      ListItemTemplateDirective,
     ],
   });
 

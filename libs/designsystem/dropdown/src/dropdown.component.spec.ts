@@ -1009,9 +1009,9 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [ListItemTemplateDirective],
       declarations: [
         ItemComponent,
+        ListItemTemplateDirective,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
     });
