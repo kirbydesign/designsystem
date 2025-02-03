@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -15,7 +16,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonToggle } from '@ionic/angular/standalone';
-import { setAccessibleLabel } from '@kirbydesign/designsystem/shared';
+import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
@@ -33,9 +34,29 @@ import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToggleComponent implements ControlValueAccessor, OnInit, AfterViewInit {
+export class ToggleComponent
+  implements ControlValueAccessor, OnInit, AfterViewInit, AfterContentInit
+{
   @ViewChild(IonToggle, { read: ElementRef, static: true })
   private ionToggleElement?: ElementRef<HTMLIonToggleElement>;
+
+  @Input() checked: boolean = false;
+
+  @Input() disabled: boolean = false;
+  @HostBinding('attr.disabled')
+  get _isDisabled() {
+    return this.disabled ? 'disabled' : null;
+  }
+
+  @HostBinding('class.has-hidden-label') _labelText: string;
+
+  @Output() checkedChange = new EventEmitter<boolean>();
+
+  _justify: 'start' | 'end' | 'space-between' = 'start';
+  _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'start';
+  _hasSlottedContent: boolean;
+  _ariaLabel: string;
+  _pressed = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -61,42 +82,7 @@ export class ToggleComponent implements ControlValueAccessor, OnInit, AfterViewI
     if (slot === 'start' && this._hasSlottedContent) {
       this._labelPlacement = 'end';
     }
-
-    this.inheritAriaAttributes();
-    if (!this._labelText && !this._hasSlottedContent) {
-      // if no label has been set try to find a label in an item and use its text content
-      this._labelText = setAccessibleLabel(this.elementRef.nativeElement);
-    }
   }
-
-  _ariaLabel: string;
-
-  private inheritAriaAttributes() {
-    const el = this.elementRef.nativeElement;
-    const attribute = 'aria-label';
-    if (el.hasAttribute(attribute)) {
-      const value = el.getAttribute(attribute);
-      el.removeAttribute(attribute);
-      this._ariaLabel = value;
-    }
-  }
-
-  @Input() checked: boolean = false;
-  @Input() disabled: boolean = false;
-  @HostBinding('attr.disabled')
-  get _isDisabled() {
-    return this.disabled ? 'disabled' : null;
-  }
-
-  @HostBinding('class.has-hidden-label') _labelText: string;
-
-  @Output() checkedChange = new EventEmitter<boolean>();
-
-  _justify: 'start' | 'end' | 'space-between' = 'start';
-  _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'start';
-  _hasSlottedContent: boolean;
-
-  _pressed = false;
 
   ngAfterViewInit(): void {
     this.ionicElementPartHelper.setPart('label', this.ionToggleElement, '.toggle-wrapper');
@@ -105,6 +91,15 @@ export class ToggleComponent implements ControlValueAccessor, OnInit, AfterViewI
       this.ionToggleElement,
       '.label-text-wrapper'
     );
+  }
+
+  ngAfterContentInit(): void {
+    this._ariaLabel = inheritAriaLabelText(this.elementRef.nativeElement);
+
+    if (!this._labelText && !this._hasSlottedContent) {
+      // if no label has been set try to find a label in an item and use its text content
+      this._labelText = setAccessibleLabel(this.elementRef.nativeElement);
+    }
   }
 
   onCheckedChange(checked: boolean): void {

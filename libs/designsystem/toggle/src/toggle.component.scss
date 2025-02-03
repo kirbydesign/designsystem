@@ -108,7 +108,7 @@ ion-toggle {
     white-space: pre-line;
   }
 
-  // Overrides for kirby-checkbox inside kirby-item
+  // Overrides for kirby-toggle inside kirby-item
   &.in-item {
     &::part(label) {
       align-items: center;
