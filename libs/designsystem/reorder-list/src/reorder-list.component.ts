@@ -84,7 +84,7 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
 
   ngOnDestroy() {
     //clean up the observer
-    this.observer && this.observer.disconnect();
+    this.observer?.disconnect();
     delete this.observer;
   }
 }

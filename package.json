@@ -59,7 +59,7 @@
     "husky": "^3.0.9",
     "is-ci": "^2.0.0",
     "is-docker": "1.1.0",
-    "lint-staged": "^9.4.2",
+    "lint-staged": "^15.4.3",
     "nx": "^20.3.1",
     "nx-stylelint": "^17.1.4",
     "post-npm-install": "^2.0.0",

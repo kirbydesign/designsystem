@@ -71,7 +71,6 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
 
   @Input() set selectedIndex(value: number) {
     if (typeof value === 'string') value = parseInt(value); // Ensure data type number, e.g. when used with template syntax without binding: <... selectedIndex="1"
-
     if (value === undefined || value === null || Number.isNaN(value)) value = -1;
     if (value === this.selectedIndex) return;
     this._selectedIndex = value;
@@ -129,7 +128,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     const findFocusable = (radios: QueryList<RadioComponent>) =>
       radios && radios.find((radio) => !isNaN(radio.buttonTabIndex) && radio.buttonTabIndex !== -1);
     const focusable = findFocusable(this.radioButtons) || findFocusable(this.projectedRadioButtons);
-    focusable && focusable.focus();
+    focusable?.focus();
   }
 
   ngAfterContentInit(): void {
@@ -196,14 +195,13 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
 
   private getIndexOfProjectedRadio(value: string | any): number {
     let selectedIndex = -1;
-    this.projectedRadioButtons &&
-      this.projectedRadioButtons.find((radio, i) => {
-        const found = radio.value === value;
-        if (found) {
-          selectedIndex = i;
-        }
-        return found;
-      });
+    this.projectedRadioButtons?.find((radio, i) => {
+      const found = radio.value === value;
+      if (found) {
+        selectedIndex = i;
+      }
+      return found;
+    });
     return selectedIndex;
   }
 

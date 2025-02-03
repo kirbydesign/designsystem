@@ -6,7 +6,6 @@ import { TabNavigationItemComponent } from '@kirbydesign/designsystem/tab-naviga
 @Component({
   selector: 'kirby-tab-navigation-item',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {

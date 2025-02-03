@@ -6,7 +6,6 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 @Component({
   selector: 'kirby-empty-state',
   template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { mock: 'mock' },
   providers: [
     {

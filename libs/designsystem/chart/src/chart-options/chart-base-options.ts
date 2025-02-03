@@ -14,6 +14,7 @@ export abstract class BaseChartOptions {
     this._chartType = chartType;
 
     const chart = new Chart(this._chartType, this._options);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     chart.options;
   }
 
