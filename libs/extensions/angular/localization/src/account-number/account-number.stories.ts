@@ -4,46 +4,57 @@ import { type Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
   template: `
-    {{ accountNumber | accountNumber }}
+    {{ myAccountNumber | accountNumber }}
   `,
   selector: 'extensions-account-number-example',
   standalone: true,
   imports: [AccountNumberPipe],
 })
 class AccountNumberExampleComponent {
-  @Input() accountNumber!: AccountNumber;
+  /**
+   * The `AccountNumber` object to be formatted. Try it out in the Account Number example in the sidebar 👈.
+   */
+  @Input() myAccountNumber!: AccountNumber;
+
+  /**
+   * Pipe to use in the template.
+   */
+  @Input() accountNumber!: AccountNumberPipe;
 }
 
 /**
- * Pipe that formats an `AccountNumber` to a common format.
+ * The Account Pipe formats an `AccountNumber` to a common presentation.
  */
 const meta: Meta<AccountNumberExampleComponent> = {
   component: AccountNumberExampleComponent,
-  title: 'Pipes/Localization',
+  title: 'Pipes/Localization/Formatting',
   decorators: [
     moduleMetadata({
       imports: [AccountNumberPipe],
     }),
   ],
   tags: ['!autodocs', 'dev'],
+  argTypes: {
+    accountNumber: { control: false },
+  },
 };
 
 export default meta;
 type Story = StoryObj<AccountNumberExampleComponent>;
 
 /**
- * TODO: Specific Account Number story docs goes here.
+ * The registration number is padded with leading zeros if necessary, and any leading zeros in the account number are removed.
  */
-export const AccountNum: Story = {
+export const Account_Number: Story = {
   args: {
-    accountNumber: { regNo: '987', accountNo: '1234567890' },
+    myAccountNumber: { regNo: '987', accountNo: '1234567890' },
   },
   parameters: {
     docs: {
       source: {
         language: 'tsx', // Using tsx here to get better syntax highlighting
         code: `<p>
-          {{ { regNo: '9876', accountNo: '1234567890' } | accountNumber }}
+          {{ myAccountNumber /* e.g. { regNo: '987', accountNo: '1234567890' } */ | accountNumber }}
         </p> `,
       },
     },
