@@ -10,6 +10,7 @@ import { PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 import { DropdownComponent } from './dropdown.component';
 import { KeyboardHandlerService } from './keyboard-handler.service';
+import { ListItemTemplateDirective, ListModule } from '@kirbydesign/designsystem/list';
 
 const declarations = [DropdownComponent];
 
@@ -22,9 +23,10 @@ const declarations = [DropdownComponent];
     PopoverComponent,
     ButtonComponent,
     CommonModule,
+    ListModule,
   ],
   declarations: [...declarations],
-  exports: [...declarations],
+  exports: [...declarations, ListItemTemplateDirective],
   providers: [KeyboardHandlerService],
 })
 export class DropdownModule {}
