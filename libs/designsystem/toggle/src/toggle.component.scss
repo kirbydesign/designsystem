@@ -1,9 +1,45 @@
 @use 'sass:math';
+@use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+$spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
+$spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
+
 :host {
   display: inline-flex;
+
+  &:has(ion-toggle.in-item.toggle-justify-space-between) {
+    width: 100%;
+  }
+
+  &.has-hidden-label {
+    position: initial;
+
+    &[slot='end'] {
+      ion-toggle {
+        margin-inline-start: $spacing-to-label;
+      }
+    }
+
+    ion-toggle {
+      position: initial;
+
+      &::part(label) {
+        position: initial;
+      }
+
+      &.in-item::part(label-text-wrapper) {
+        margin-inline: 0;
+      }
+    }
+
+    .hidden-label {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+  }
 }
 
 ion-toggle {
@@ -66,6 +102,36 @@ ion-toggle {
       height: $toggle-size;
     }
   }
+
+  ::part(label-text-wrapper) {
+    line-height: utils.line-height('n');
+    white-space: pre-line;
+  }
+
+  // Overrides for kirby-toggle inside kirby-item
+  &.in-item {
+    &::part(label) {
+      align-items: center;
+      padding-inline: 0;
+    }
+
+    &::part(label),
+    &::part(label-text-wrapper) {
+      margin-block: 0;
+    }
+
+    &.toggle-label-placement-start {
+      &::part(label-text-wrapper) {
+        margin-inline: 0 $spacing-to-label;
+      }
+    }
+
+    &.toggle-label-placement-end {
+      &::part(label-text-wrapper) {
+        margin-inline: $spacing-to-label 0;
+      }
+    }
+  }
   /* stylelint-enable no-duplicate-selectors */
 }
 
@@ -76,4 +142,16 @@ ion-toggle {
 */
 ion-toggle.in-item.legacy-toggle {
   padding: 0;
+}
+
+:host-context(kirby-item) {
+  z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+
+  ion-toggle {
+    margin: 0;
+  }
+
+  &[slot='start'] {
+    margin-inline-end: $spacing-to-label;
+  }
 }
