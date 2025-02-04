@@ -60,7 +60,7 @@ const declarations = [
     IonList,
     IonListHeader,
   ],
-  exports: [exportedDeclarations],
+  exports: exportedDeclarations,
   providers: [],
 })
 export class ListModule {}
