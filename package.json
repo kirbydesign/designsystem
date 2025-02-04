@@ -75,6 +75,7 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run sync-node-version && lint-staged",
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
