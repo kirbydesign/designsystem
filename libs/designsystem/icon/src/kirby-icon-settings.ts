@@ -5,7 +5,6 @@ const sortIconsByName = (icons: Icon[]) => {
   return icons.sort((a, b) => collator.compare(a.name, b.name));
 };
 
-/* eslint-disable */
 export const kirbyIconSettings: IconSettings = {
   icons: sortIconsByName([
     { name: 'accounts-outline', svg: 'accounts-outline.svg' },
