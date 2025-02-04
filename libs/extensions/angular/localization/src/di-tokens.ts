@@ -1,17 +1,18 @@
 import { InjectionToken } from '@angular/core';
 
-export const KIRBY_EXTENSIONS_LOCALIZATION_TOKEN = new InjectionToken<KirbyExtensionsToken>(
-  'KIRBY_EXTENSIONS_LOCALIZATION_TOKEN'
-);
+export const KIRBY_EXTENSIONS_LOCALIZATION_TOKEN =
+  new InjectionToken<KirbyExtensionsLocalizationToken>('KIRBY_EXTENSIONS_LOCALIZATION_TOKEN');
 
-export function provideKirbyExtensionsToken(factory: () => KirbyExtensionsToken) {
+export function provideKirbyExtensionsLocalizationToken(
+  factory: () => KirbyExtensionsLocalizationToken
+) {
   return {
     provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
     useFactory: factory,
   };
 }
 
-interface KirbyExtensionsToken {
+interface KirbyExtensionsLocalizationToken {
   /**
    * @example 'DKK | kr. | EUR'
    */
