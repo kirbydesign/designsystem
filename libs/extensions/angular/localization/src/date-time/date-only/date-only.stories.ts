@@ -54,7 +54,7 @@ type Story = StoryObj<DateOnlyExampleComponent>;
  */
 export const DateOnly: Story = {
   args: {
-    myDate: new Date(),
+    myDate: new Date(2025, 0, 1, 23, 56, 0),
   },
   parameters: {
     docs: {

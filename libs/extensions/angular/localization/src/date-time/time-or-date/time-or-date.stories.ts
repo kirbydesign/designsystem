@@ -60,6 +60,10 @@ const meta: Meta<TimeOrDateExampleComponent> = {
     }),
   ],
   tags: ['!autodocs', 'dev'],
+  parameters: {
+    // Disables Chromatic's snapshotting as the date stuff is dynamic, and we want to showcase the formatting of todays date
+    chromatic: { disableSnapshot: true },
+  },
   argTypes: {
     myTimestamp: { control: { type: 'date' } },
     tomorrowTimestamp: { table: { disable: true } },
