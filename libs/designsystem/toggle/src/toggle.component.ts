@@ -55,7 +55,6 @@ export class ToggleComponent
   _justify: 'start' | 'end' | 'space-between' = 'start';
   _labelPlacement: 'end' | 'fixed' | 'stacked' | 'start' = 'start';
   _hasSlottedContent: boolean;
-  _ariaLabel: string;
   _pressed = false;
 
   constructor(
@@ -94,7 +93,7 @@ export class ToggleComponent
   }
 
   ngAfterContentInit(): void {
-    this._ariaLabel = inheritAriaLabelText(this.elementRef.nativeElement);
+    this._labelText = inheritAriaLabelText(this.elementRef.nativeElement);
 
     if (!this._labelText && !this._hasSlottedContent) {
       // if no label has been set try to find a label in an item and use its text content
