@@ -6,7 +6,11 @@
   (keyup.space)="_onInactive()"
   (blur)="_onInactive()"
   (ionChange)="onCheckedChange($event.detail.checked)"
-  [attr.aria-label]="_ariaLabel"
+  [justify]="_justify"
+  [labelPlacement]="_labelPlacement"
 >
-  <ng-content></ng-content>
+  <span class="hidden-label" *ngIf="_labelText">{{ _labelText }}</span>
+  <span class="default-content">
+    <ng-content></ng-content>
+  </span>
 </ion-toggle>

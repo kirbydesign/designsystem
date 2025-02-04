@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DividerComponent } from './divider.component';
-//TODO: Remove!
+
 describe('DividerComponent', () => {
   let component: DividerComponent;
   let fixture: ComponentFixture<DividerComponent>;
