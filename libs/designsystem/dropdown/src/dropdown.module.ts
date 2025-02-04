@@ -8,9 +8,9 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
 
-import { ListItemTemplateDirective, ListModule } from '@kirbydesign/designsystem/list';
 import { DropdownComponent } from './dropdown.component';
 import { KeyboardHandlerService } from './keyboard-handler.service';
+import { ListItemTemplateDirective, ListModule } from '@kirbydesign/designsystem/list';
 
 const declarations = [DropdownComponent];
 
