@@ -5,15 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: var(--kirby-border-radius-xs);
+  height: var(--kirby-font-size-n);
 }
 
-:host .skeleton-text-animated {
-  position: relative;
-  animation-duration: 1.5s;
-  background-clip: border-box;
-}
-
-:host.light .skeleton-text-animated {
+:host.dark ion-skeleton-text {
   background-image: linear-gradient(
     to right,
     rgb(40 40 40 / 6%) 0%,
@@ -22,11 +18,17 @@
   );
 }
 
-:host.dark .skeleton-text-animated {
+:host.light ion-skeleton-text {
   background-image: linear-gradient(
     to right,
     rgb(255 255 255 / 16%) 0%,
     rgb(255 255 255 / 28%) 25%,
     rgb(255 255 255 / 16%) 50%
   );
+}
+
+ion-skeleton-text {
+  position: relative;
+  animation-duration: 1.5s;
+  background-clip: border-box;
 }
