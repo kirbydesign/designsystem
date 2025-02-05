@@ -44,7 +44,7 @@ export class TimeOrDateExampleComponent {
 }
 
 /**
- * Formats a given timestamp so that:
+ * The TimeOrDate Pipe formats a given timestamp so that:
  * - If timestamp is of "today", it's formatted as time with hours and minutes (eg. 23:56)
  * - If timestamp is different from "today", it's formatted as date with "day of month", month and year  (eg. 28.02.2020)
  *
@@ -92,7 +92,7 @@ export const TimeOrDate: Story = {
       source: {
         language: 'tsx', // Using tsx here to get better syntax highlighting
         code: `<p>Original Timestamp: {{ myTimestamp | json }}</p>
-               <p>Today, Formatted: {{ myTimestamp | timeOrDate: showSeconds : formatMonth }}</p>
+               <p>Today, formatted: {{ myTimestamp | timeOrDate: showSeconds : formatMonth }}</p>
                <p>Tomorrow, formatted: {{ tomorrowTimestamp | timeOrDate: showSeconds : formatMonth }}</p>`,
       },
     },

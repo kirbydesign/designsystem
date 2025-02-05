@@ -43,7 +43,7 @@ export class TimeOnlyExampleComponent {
 }
 
 /**
- * Formats a given timestamp as a time.
+ * The Time Only Pipe formats a given timestamp as a time.
  *
  * Timestamps can be formatted as 2 variants:
  * - 'short' being 'HH:mm' (hours and minutes)

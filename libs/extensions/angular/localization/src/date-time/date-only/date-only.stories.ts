@@ -32,7 +32,7 @@ export class DateOnlyExampleComponent {
 }
 
 /**
- * Formats a given timestamp as a date.
+ * The Date Only Pipe formats a given timestamp as a date.
  */
 const meta: Meta<DateOnlyExampleComponent> = {
   component: DateOnlyExampleComponent,
