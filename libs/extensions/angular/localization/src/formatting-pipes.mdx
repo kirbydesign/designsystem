@@ -6,6 +6,7 @@ import * as NumberStories from './number/format-number.stories';
 import * as DateOnlyStories from './date-time/date-only/date-only.stories';
 import * as TimeOnlyStories from './date-time/time-only/time-only.stories';
 import * as TimeOrDateStories from './date-time/time-or-date/time-or-date.stories';
+import * as PhoneNumberStories from './phone-number/phone-number.stories';
 
 <Meta title="Pipes/Localization/Formatting" />
 # Formatting Pipes
@@ -47,26 +48,34 @@ If you need the formatted value in your component code instead of in the templat
 FormatNumberService.formatNumber(value: number, digitsInfo: string);
 ```
 
-## Date & Time 
-<Description of={DateOnlyStories.default} />
-<Description of={DateOnlyStories.DateOnly} />
-<Canvas of={DateOnlyStories.DateOnly} />
-<Description of={TimeOnlyStories.TimeOnly} />
+## Time & Date
+### Time Only
+<Description of={TimeOnlyStories.default} />
 <Canvas of={TimeOnlyStories.TimeOnly} />
-<Description of={TimeOrDateStories.TimeOrDate} /> 
+
+### Date Only
+<Description of={DateOnlyStories.default} />
+<Canvas of={DateOnlyStories.DateOnly} />
+
+### Date or Time
+<Description of={TimeOrDateStories.default} /> 
 <Canvas of={TimeOrDateStories.TimeOrDate} />
+
+## Phone Number
+<Description of={PhoneNumberStories.PhoneNumber} /> 
+<Canvas of={PhoneNumberStories.PhoneNumber} />
 
 ## Setup
 
 To set up the localization formatting pipes, you need to provide the necessary configuration token in the providers array of your module or component, or when bootstrapping your application. This configuration includes details such as the native currency, default language, country code, and time zone.
 
 ```ts
-import { provideKirbyExtensionsToken } from '@kirbydesign/extensions-angular/localization';
+import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions-angular/localization';
 
+const lo
 providers: [
-    provideKirbyExtensionsToken(() => ({
-        /* @example 'DKK | kr. | EUR' */
-        nativeCurrency: 'DKK',
+    provideKirbyExtensionsLocalizationToken(() => ({
+        nativeCurrency: 'DKK', /* @example 'DKK | kr. | EUR' */
         defaultLang: 'da',
         countryCode: '+45',
         timeZone: 'Europe/Copenhagen',
@@ -90,13 +99,16 @@ It is possible to experiment and interact with these by selecting the specific e
 ### Number
 <Controls of={NumberStories.FormatNumber} /> 
 
-### Date Time
+### Phone Number
+<Controls of={PhoneNumberStories.PhoneNumber} /> 
 
-#### Date Only
-<Controls of={DateOnlyStories.DateOnly} /> 
+### Time & Date
 
 #### Time Only
 <Controls of={TimeOnlyStories.TimeOnly} /> 
+
+#### Date Only
+<Controls of={DateOnlyStories.DateOnly} /> 
 
 #### Time Or Date
 <Controls of={TimeOrDateStories.TimeOrDate} /> 

@@ -80,9 +80,6 @@ const meta: Meta<TimeOrDateExampleComponent> = {
 export default meta;
 type Story = StoryObj<TimeOrDateExampleComponent>;
 
-/**
- * This example formats a timestamp using the `timeOrDate` pipe.
- */
 export const TimeOrDate: Story = {
   args: {
     myTimestamp: new Date(),

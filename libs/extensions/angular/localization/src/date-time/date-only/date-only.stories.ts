@@ -31,6 +31,9 @@ export class DateOnlyExampleComponent {
   @Input() dateOnly!: DateOnlyPipe;
 }
 
+/**
+ * Formats a given timestamp as a date.
+ */
 const meta: Meta<DateOnlyExampleComponent> = {
   component: DateOnlyExampleComponent,
   title: 'Pipes/Localization/Formatting',
@@ -49,9 +52,6 @@ const meta: Meta<DateOnlyExampleComponent> = {
 export default meta;
 type Story = StoryObj<DateOnlyExampleComponent>;
 
-/**
- * This example formats a date using the `dateOnly` pipe.
- */
 export const DateOnly: Story = {
   args: {
     myDate: new Date(2025, 0, 1, 23, 56, 0),

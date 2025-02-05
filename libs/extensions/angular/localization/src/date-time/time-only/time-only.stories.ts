@@ -42,6 +42,14 @@ export class TimeOnlyExampleComponent {
   @Input() timeOnly!: TimeOnlyPipe;
 }
 
+/**
+ * Formats a given timestamp as a time.
+ *
+ * Timestamps can be formatted as 2 variants:
+ * - 'short' being 'HH:mm' (hours and minutes)
+ * - 'medium' being 'HH:mm:ss' (as above, but with seconds appended)
+ *
+ */
 const meta: Meta<TimeOnlyExampleComponent> = {
   component: TimeOnlyExampleComponent,
   title: 'Pipes/Localization/Formatting',
@@ -61,9 +69,6 @@ const meta: Meta<TimeOnlyExampleComponent> = {
 export default meta;
 type Story = StoryObj<TimeOnlyExampleComponent>;
 
-/**
- * This example formats a date using the `timeOnly` pipe.
- */
 export const TimeOnly: Story = {
   args: {
     myDate: new Date(2025, 0, 1, 23, 56, 0),
