@@ -48,6 +48,17 @@ If you need the formatted value in your component code instead of in the templat
 FormatNumberService.formatNumber(value: number, digitsInfo: string);
 ```
 
+## Phone Number
+<Description of={PhoneNumberStories.PhoneNumber} /> 
+<Canvas of={PhoneNumberStories.PhoneNumber} />
+
+If you need the formatted value in your component code instead of in the template, you can use the underlying service directly:
+
+```ts
+PhoneNumberService.formatPhoneNumber(phoneNumber: PhoneNumber | string, chunk?: number, showCountryCode?: boolean);
+```
+
+
 ## Time & Date
 ### Time Only
 <Description of={TimeOnlyStories.default} />
@@ -60,10 +71,6 @@ FormatNumberService.formatNumber(value: number, digitsInfo: string);
 ### Date or Time
 <Description of={TimeOrDateStories.default} /> 
 <Canvas of={TimeOrDateStories.TimeOrDate} />
-
-## Phone Number
-<Description of={PhoneNumberStories.PhoneNumber} /> 
-<Canvas of={PhoneNumberStories.PhoneNumber} />
 
 ## Setup
 
