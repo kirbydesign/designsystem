@@ -28,7 +28,7 @@ class AmountExampleComponent {
   @Input() amount!: AmountPipe;
 
   /**
-   * An example Amount object to be formatted.
+   * An example `Amount` to be formatted.
    */
   @Input() myAmount!: Amount;
 
