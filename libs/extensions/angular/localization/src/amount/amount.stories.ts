@@ -41,7 +41,7 @@ class AmountExampleComponent {
 
 /**
  * 
- * The Amount-pipe formats an `Amount`-object to a common format.
+ * The Amount-pipe formats an `Amount` to a common format.
  *
  * The `AmountServiceConfiguration` object can be used to control
  * the formatting of the amount, and can be passed as an argument to the amount-pipe when used on an `Amount`.
