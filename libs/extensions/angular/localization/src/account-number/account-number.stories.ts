@@ -12,7 +12,7 @@ import { type Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 })
 class AccountNumberExampleComponent {
   /**
-   * An example `AccountNumber` object to be formatted.
+   * An example `AccountNumber` to be formatted.
    */
   @Input() myAccountNumber!: AccountNumber;
 
