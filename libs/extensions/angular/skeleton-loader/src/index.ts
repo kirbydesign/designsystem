@@ -1,1 +1,1 @@
-export { SkeletonLoaderComponent, SkeletonLoaderTheme } from './skeleton-loader.component';
+export { SkeletonLoaderComponent } from './skeleton-loader.component';

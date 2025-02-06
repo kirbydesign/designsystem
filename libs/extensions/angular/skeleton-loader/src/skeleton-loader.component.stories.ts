@@ -36,8 +36,12 @@ const meta: Meta<SkeletonLoaderComponent> = {
       imports: [ButtonComponent, CardModule, ItemModule],
     }),
   ],
+  args: {
+    theme: 'light',
+    shape: 'rectangle',
+  },
   argTypes: {
-    themeColor: {
+    theme: {
       control: {
         type: 'select',
         options: ['light', 'dark'],
@@ -49,7 +53,7 @@ export default meta;
 type Story = StoryObj<SkeletonLoaderComponent>;
 
 /**
- * By default the skeleton loader uses the dark theme, and fills its parent containers width, while maintaining a height matching the browsers base font size.
+ * By default the skeleton loader fills its parent containers width, while maintaining a height matching the browsers base font size.
  */
 export const Default: Story = {
   render: (args) => ({
@@ -61,12 +65,28 @@ export const Default: Story = {
 };
 
 /**
+ * The skeleton loader can be styled as a rectangle, pill or circle.
+ */
+export const Shape: Story = {
+  render: (args) => ({
+    props: args,
+    styles: ['div { display: flex; gap: var(--kirby-spacing-xs); flex-direction: column; }'],
+    template: `<div>
+      <kirby-x-skeleton-loader style="width: 100px;" shape="rectangle"></kirby-x-skeleton-loader>
+      <kirby-x-skeleton-loader style="width: 100px; height: var(--kirby-spacing-l);" shape="pill"></kirby-x-skeleton-loader>
+      <kirby-x-skeleton-loader style="height: var(--kirby-spacing-xxxl); width: var(--kirby-spacing-xxxl);" shape="circle"></kirby-x-skeleton-loader>
+    </div>`,
+  }),
+  argTypes: {
+    theme: { control: { disable: true } },
+    shape: { control: { disable: true } },
+  },
+};
+
+/**
  * A light skeleton loader on a dark background.
  */
 export const DarkCard: Story = {
-  args: {
-    themeColor: 'light',
-  },
   render: (args) => ({
     props: args,
     styles: [
@@ -74,31 +94,32 @@ export const DarkCard: Story = {
       ' .text { display: flex; flex-direction: column; justify-content: space-evenly; height: 50px; }',
       ' .end { align-items: flex-end }',
     ],
-    template: `<kirby-card [themeColor]="'dark'" class="skeleton-card">
+    template: `<kirby-card themeColor="dark" class="skeleton-card">
       <kirby-item style="--kirby-item-background: transparent;">
         <div slot="start">
-          <kirby-x-skeleton-loader style="height: var(--kirby-spacing-xxxl); width: var(--kirby-spacing-xxxl); border-radius: var(--kirby-border-radius-circle);" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="height: var(--kirby-spacing-xxxl); width: var(--kirby-spacing-xxxl); border-radius: var(--kirby-border-radius-circle);"></kirby-x-skeleton-loader>
         </div>
         <div class="text">
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-n); width: 50px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;"></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="width: 50px;"></kirby-x-skeleton-loader>
         </div>
         <div class="text end" slot="end">
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-n); width: 50px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;"></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="width: 50px;"></kirby-x-skeleton-loader>
         </div>
       </kirby-item>
     </kirby-card>`,
   }),
+  argTypes: {
+    theme: { control: { disable: true } },
+    shape: { control: { disable: true } },
+  },
 };
 
 /**
  * A dark skeleton loader on a light background.
  */
 export const LightCard: Story = {
-  args: {
-    themeColor: 'dark',
-  },
   render: (args) => ({
     props: args,
     styles: [
@@ -109,17 +130,21 @@ export const LightCard: Story = {
     template: `<kirby-card class="skeleton-card">
       <kirby-item style="--kirby-item-background: transparent;">
         <div slot="start">
-          <kirby-x-skeleton-loader style="height: var(--kirby-spacing-xxxl); width: var(--kirby-spacing-xxxl); border-radius: var(--kirby-border-radius-circle);" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="height: var(--kirby-spacing-xxxl); width: var(--kirby-spacing-xxxl); border-radius: var(--kirby-border-radius-circle);"></kirby-x-skeleton-loader>
         </div>
         <div class="text">
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-n); width: 50px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;"></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="width: 50px;"></kirby-x-skeleton-loader>
         </div>
         <div class="text end" slot="end">
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
-          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-n); width: 50px;" ${argsToTemplate(args)}></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="height: var(--kirby-font-size-m); width: 100px;"></kirby-x-skeleton-loader>
+          <kirby-x-skeleton-loader style="width: 50px;"></kirby-x-skeleton-loader>
         </div>
       </kirby-item>
     </kirby-card>`,
   }),
+  argTypes: {
+    theme: { control: { disable: true } },
+    shape: { control: { disable: true } },
+  },
 };
