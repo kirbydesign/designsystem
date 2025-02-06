@@ -33,12 +33,6 @@ $light-theme-gradient: linear-gradient(
   border-radius: var(--kirby-border-radius-pill);
 }
 
-ion-skeleton-text {
-  position: relative;
-  animation-duration: 1.5s;
-  background-clip: border-box;
-}
-
 :host.dark ion-skeleton-text {
   background-image: $dark-theme-gradient;
 }
@@ -58,4 +52,11 @@ ion-skeleton-text {
   ion-skeleton-text {
     background-image: $dark-theme-gradient;
   }
+}
+
+ion-skeleton-text {
+  position: relative;
+  margin: 0;
+  animation-duration: 1.5s;
+  background-clip: border-box;
 }
