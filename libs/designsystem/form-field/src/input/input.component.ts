@@ -25,7 +25,6 @@ export enum InputSize {
   hostDirectives: [
     {
       directive: DateInputDirective,
-
       inputs: ['prefillYear', 'useNativeDatePicker'],
     },
   ],

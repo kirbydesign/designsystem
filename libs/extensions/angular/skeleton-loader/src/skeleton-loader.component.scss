@@ -1,0 +1,62 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+$dark-theme-gradient: linear-gradient(
+  to right,
+  rgb(255 255 255 / 16%) 0%,
+  rgb(255 255 255 / 28%) 25%,
+  rgb(255 255 255 / 16%) 50%
+);
+$light-theme-gradient: linear-gradient(
+  to right,
+  rgb(40 40 40 / 6%) 0%,
+  rgb(40 40 40 / 12%) 25%,
+  rgb(40 40 40 / 6%) 50%
+);
+
+:host {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--kirby-font-size-n);
+}
+
+:host.rectangle {
+  border-radius: var(--kirby-border-radius-xs);
+}
+
+:host.circle {
+  border-radius: var(--kirby-border-radius-circle);
+}
+
+:host.pill {
+  border-radius: var(--kirby-border-radius-pill);
+}
+
+:host.dark ion-skeleton-text {
+  background-image: $dark-theme-gradient;
+}
+
+:host.light ion-skeleton-text {
+  background-image: $light-theme-gradient;
+}
+
+:host-context(.kirby-color-brightness-white),
+:host-context(.kirby-color-brightness-light) {
+  ion-skeleton-text {
+    background-image: $light-theme-gradient;
+  }
+}
+
+:host-context(.kirby-color-brightness-dark) {
+  ion-skeleton-text {
+    background-image: $dark-theme-gradient;
+  }
+}
+
+ion-skeleton-text {
+  position: relative;
+  margin: 0;
+  animation-duration: 1.5s;
+  background-clip: border-box;
+}

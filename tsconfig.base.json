@@ -72,6 +72,10 @@
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/dist/toggle-button"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/dist/types"],
       "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
+      "@kirbydesign/extensions-angular/localization": ["libs/extensions/angular/dist/localization"],
+      "@kirbydesign/extensions-angular/skeleton-loader": [
+        "libs/extensions/angular/dist/skeleton-loader"
+      ],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]
     }

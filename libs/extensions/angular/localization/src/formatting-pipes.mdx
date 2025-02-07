@@ -1,0 +1,121 @@
+import { Canvas, Controls, Description, Meta } from '@storybook/blocks';
+
+import * as AccountNumberStories from './account-number/account-number.stories';
+import * as AmountStories from './amount/amount.stories';
+import * as NumberStories from './number/format-number.stories';
+import * as DateOnlyStories from './date-time/date-only/date-only.stories';
+import * as TimeOnlyStories from './date-time/time-only/time-only.stories';
+import * as TimeOrDateStories from './date-time/time-or-date/time-or-date.stories';
+import * as PhoneNumberStories from './phone-number/phone-number.stories';
+
+<Meta title="Pipes/Localization/Formatting" />
+# Formatting Pipes
+The following pipes are utilities that can be used to format data for display purposes. They are particularly useful in localization, where data such as numbers, dates, and currencies need to be presented in a format that is familiar to the user based on their locale. The pipes are also useful for ensuring a common presentation of the supported data types across one or more applications.
+
+## Account Number 
+<Description of={AccountNumberStories.default} />
+<Description of={AccountNumberStories.Account_Number} />
+<Canvas of={AccountNumberStories.Account_Number} />
+If you need the formatted value in your component code instead of in the template, you can import and use the function directly:
+
+```ts
+import { formatAccountNumber } from '@kirbydesign/extensions-angular/localization';
+
+formatAccountNumber(value: AccountNumber);
+```
+
+## Amount 
+<Description of={AmountStories.default} />
+<Description of={AmountStories.AmountDKK} />
+<Canvas of={AmountStories.AmountDKK} />
+<Description of={AmountStories.AmountUSD} />
+<Canvas of={AmountStories.AmountUSD} />
+
+If you need the formatted value in your component code instead of in the template, you can use the underlying service directly:
+
+```ts
+AmountService.formatAmount(amount: Amount, amountServiceConfiguration: AmountServiceConfiguration)
+```
+
+## Number 
+<Description of={NumberStories.default} />
+<Description of={NumberStories.FormatNumber} />
+<Canvas of={NumberStories.FormatNumber} />
+
+If you need the formatted value in your component code instead of in the template, you can use the underlying service directly:
+
+```ts
+FormatNumberService.formatNumber(value: number, digitsInfo: string);
+```
+
+## Phone Number
+<Description of={PhoneNumberStories.PhoneNumber} /> 
+<Canvas of={PhoneNumberStories.PhoneNumber} />
+
+If you need the formatted value in your component code instead of in the template, you can use the underlying service directly:
+
+```ts
+PhoneNumberService.formatPhoneNumber(phoneNumber: PhoneNumber | string, chunk?: number, showCountryCode?: boolean);
+```
+
+
+## Time & Date
+### Time Only
+<Description of={TimeOnlyStories.default} />
+<Canvas of={TimeOnlyStories.TimeOnly} />
+
+### Date Only
+<Description of={DateOnlyStories.default} />
+<Canvas of={DateOnlyStories.DateOnly} />
+
+### Date or Time
+<Description of={TimeOrDateStories.default} /> 
+<Canvas of={TimeOrDateStories.TimeOrDate} />
+
+## Setup
+
+To set up the localization formatting pipes, you need to provide the necessary configuration token in the providers array of your module or component, or when bootstrapping your application. This configuration includes details such as the native currency, default language, country code, and time zone.
+
+```ts
+import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions-angular/localization';
+
+const lo
+providers: [
+    provideKirbyExtensionsLocalizationToken(() => ({
+        nativeCurrency: 'DKK', /* @example 'DKK | kr. | EUR' */
+        defaultLang: 'da',
+        countryCode: '+45',
+        timeZone: 'Europe/Copenhagen',
+    })),
+    // other providers
+],
+```
+
+Once the token is provided, you can import any of the pipes described into your component and use them in the template. This setup ensures that the pipes will format data according to the specified locale settings.
+
+## API
+The following tables show an overview of all the configurations of the pipes showcased above.
+It is possible to experiment and interact with these by selecting the specific examples in the sidebar 👈
+
+### Account Number
+<Controls of={AccountNumberStories.Account_Number} />
+
+### Amount
+<Controls of={AmountStories.AmountDKK} />
+
+### Number
+<Controls of={NumberStories.FormatNumber} /> 
+
+### Phone Number
+<Controls of={PhoneNumberStories.PhoneNumber} /> 
+
+### Time & Date
+
+#### Time Only
+<Controls of={TimeOnlyStories.TimeOnly} /> 
+
+#### Date Only
+<Controls of={DateOnlyStories.DateOnly} /> 
+
+#### Time Or Date
+<Controls of={TimeOrDateStories.TimeOrDate} /> 
