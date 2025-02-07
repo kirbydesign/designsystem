@@ -14,6 +14,7 @@ import {
 import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
+import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 import { RadioComponent } from '../radio.component';
 
@@ -31,7 +32,9 @@ import { RadioComponent } from '../radio.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class RadioGroupComponent implements AfterContentInit, ControlValueAccessor {
+export class RadioGroupComponent
+  implements AfterContentInit, ControlValueAccessor, FormFieldControl
+{
   constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
   // #region public properties
@@ -45,9 +48,22 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     this.setProjectedRadiosDisabledState(value);
   }
 
-  @HostBinding('class.error') // Used to style radios with error state
+  private _hasError: boolean = false;
+
+  @HostBinding('class.error')
   @Input()
-  hasError: boolean = false;
+  get hasError(): boolean {
+    return this._hasError;
+  }
+
+  set hasError(value: boolean) {
+    if (this._hasError !== value) {
+      this._hasError = value;
+      this.hasErrorChange.emit(this._hasError);
+    }
+  }
+
+  @Output() hasErrorChange = new EventEmitter<boolean>();
 
   get items(): string[] | any[] {
     return this._items || []; // Ensure items return empty array even if set to null/undefined

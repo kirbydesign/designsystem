@@ -7,8 +7,10 @@ import {
   HostListener,
   Input,
   OnChanges,
+  Output,
   SimpleChanges,
 } from '@angular/core';
+import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
   imports: [CommonModule],
@@ -18,8 +20,9 @@ import {
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',
 })
-export class TextareaComponent implements OnChanges {
+export class TextareaComponent implements OnChanges, FormFieldControl {
   kirbyChange = new EventEmitter<string>();
+  private _hasError: boolean = false;
 
   @Input() value: string;
 
@@ -30,9 +33,19 @@ export class TextareaComponent implements OnChanges {
   @Input()
   borderless: boolean;
 
+  @HostBinding('attr.aria-invalid')
   @HostBinding('class.error')
   @Input()
-  hasError: boolean;
+  get hasError(): boolean {
+    return this._hasError;
+  }
+
+  set hasError(value: boolean) {
+    if (this._hasError !== value) {
+      this._hasError = value;
+      this.hasErrorChange.emit(this._hasError);
+    }
+  }
 
   @HostBinding('attr.autocomplete')
   @Input()
@@ -46,6 +59,14 @@ export class TextareaComponent implements OnChanges {
   @Input()
   maxlength: number;
 
+  @Output() hasErrorChange = new EventEmitter<boolean>();
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.value) {
+      this.kirbyChange.emit(changes.value.currentValue);
+    }
+  }
+
   @HostListener('keyup', ['$event.target.value'])
   _onKeyUp(value: string) {
     this.kirbyChange.emit(value);
@@ -56,11 +77,5 @@ export class TextareaComponent implements OnChanges {
   _onCutPaste(target: HTMLInputElement) {
     //Value of textarea element is updated after cut/paste:
     setTimeout(() => this.kirbyChange.emit(target.value));
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.value) {
-      this.kirbyChange.emit(changes.value.currentValue);
-    }
   }
 }

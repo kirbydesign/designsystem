@@ -2,6 +2,7 @@ import {
   AfterContentChecked,
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ContentChildren,
@@ -21,6 +22,7 @@ import {
 import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
+import { Subscription } from 'rxjs';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -40,22 +42,38 @@ export class FormFieldComponent
 {
   private isRegistered = false;
   private element: HTMLElement;
-  private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
+  private nestedInteractiveElement:
+    | HTMLInputElement
+    | HTMLTextAreaElement
+    | HTMLIonRadioGroupElement;
+  private nestedInteractiveErrorSubscription: Subscription;
+  private _message: string | null;
 
   showDefaultCalendarIcon = false;
 
+  _nestedInteractiveHasError: boolean;
   _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
+  _errorMessageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
+  _messageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
 
   @Input() label: string;
-  @Input() message: string | null;
+  @Input() get message(): string | null {
+    return this._message;
+  }
+
+  set message(value: string) {
+    this._message = value;
+    this.setNestedInteractiveElementAttributes();
+  }
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
+  @ContentChild(InputComponent) inputComponent: InputComponent;
+  @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
   @ContentChild(RadioGroupComponent, { read: ElementRef })
   private radioGroupElement: ElementRef<HTMLElement>;
-
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
@@ -66,7 +84,8 @@ export class FormFieldComponent
     private platform: PlatformService,
     private renderer: Renderer2,
     private windowRef: WindowRef,
-    private resizeObserverService: ResizeObserverService
+    private resizeObserverService: ResizeObserverService,
+    private cdr: ChangeDetectorRef
   ) {
     this.element = elementRef.nativeElement;
   }
@@ -96,7 +115,8 @@ export class FormFieldComponent
   }
 
   public focus() {
-    if (!this.inputElement) return;
+    if (!this.nestedInteractiveElement) return;
+    if (!(this.input || this.textarea)) return;
 
     /*
      * This timeout ensures that any previous manipulation of inputElement
@@ -108,10 +128,10 @@ export class FormFieldComponent
         // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
         const touchStart = new TouchEvent('touchstart');
         const touchEnd = new TouchEvent('touchend');
-        this.inputElement.dispatchEvent(touchStart);
-        this.inputElement.dispatchEvent(touchEnd);
+        this.nestedInteractiveElement.dispatchEvent(touchStart);
+        this.nestedInteractiveElement.dispatchEvent(touchEnd);
       } else {
-        this.inputElement.focus();
+        this.nestedInteractiveElement.focus();
       }
     });
   }
@@ -121,14 +141,6 @@ export class FormFieldComponent
   }
 
   ngAfterContentInit(): void {
-    if (this.label && this.radioGroupElement) {
-      this.renderer.setAttribute(
-        this.radioGroupElement.nativeElement,
-        'aria-labelledby',
-        this._labelId
-      );
-    }
-
     // Measure the width of all slotted affix elements,
     // and apply their width + standard padding to the input elements
     // padding, so the start/end of the input is correctly indented.
@@ -150,18 +162,11 @@ export class FormFieldComponent
   }
 
   ngAfterContentChecked(): void {
-    if (!this.inputElement) {
-      this.inputElement = this.element.querySelector('input, textarea');
+    if (!this.nestedInteractiveElement) {
+      this.registerNestedInteractive();
     }
 
-    // TODO: remove "!this.inputElement.readOnly" when ionic has fixed input click issue
-    // https://github.com/ionic-team/ionic-framework/issues/22740
-    if (
-      !this.isRegistered &&
-      this.element.isConnected &&
-      !!this.inputElement &&
-      !this.inputElement.readOnly
-    ) {
+    if (!this.isRegistered && this.element.isConnected && (this.input || this.textarea)) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
@@ -169,13 +174,6 @@ export class FormFieldComponent
 
     // Decide if default calendar icon for date input should be shown
     this.showDefaultCalendarIcon = this.shouldShowDefaultCalendarIcon();
-  }
-
-  private shouldShowDefaultCalendarIcon() {
-    return (
-      this.dateInput?.useNativeDatePicker &&
-      !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
-    );
   }
 
   ngOnDestroy(): void {
@@ -191,5 +189,63 @@ export class FormFieldComponent
     this.affixElements.forEach((affix) => {
       this.resizeObserverService.unobserve(affix.el);
     });
+
+    this.nestedInteractiveErrorSubscription.unsubscribe();
+  }
+
+  private registerNestedInteractive() {
+    this.getNestedInteractiveElement();
+    this.setNestedInteractiveElementAttributes();
+    this.subscribeToNestedInteractiveError();
+  }
+
+  private getNestedInteractiveElement() {
+    this.nestedInteractiveElement =
+      this.input?.nativeElement ||
+      this.textarea?.nativeElement ||
+      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group');
+  }
+
+  private setNestedInteractiveElementAttributes() {
+    if (!this.nestedInteractiveElement) return;
+
+    if (this.message) {
+      this.renderer.setAttribute(
+        this.nestedInteractiveElement,
+        'aria-describedby',
+        this._messageId
+      );
+
+      this.renderer.setAttribute(
+        this.nestedInteractiveElement,
+        'aria-errormessage',
+        this._errorMessageId
+      );
+    }
+
+    if (this.label && this.radioGroupElement) {
+      this.renderer.setAttribute(this.nestedInteractiveElement, 'aria-labelledby', this._labelId);
+    }
+  }
+
+  private subscribeToNestedInteractiveError() {
+    const nestedInteractiveComponent =
+      this.inputComponent || this.textareaComponent || this.radioGroupComponent;
+
+    // set current value, then listen for changes
+    this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
+    this.nestedInteractiveErrorSubscription = nestedInteractiveComponent?.hasErrorChange.subscribe(
+      (hasError) => {
+        this._nestedInteractiveHasError = hasError;
+        this.cdr.markForCheck();
+      }
+    );
+  }
+
+  private shouldShowDefaultCalendarIcon() {
+    return (
+      this.dateInput?.useNativeDatePicker &&
+      !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
+    );
   }
 }
