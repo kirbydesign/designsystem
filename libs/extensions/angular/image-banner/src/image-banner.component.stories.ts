@@ -14,7 +14,7 @@ const meta: Meta<ImageBannerComponent> = {
       handles: ['dismissClick'],
     },
     controls: {
-      exclude: ['bannerClicked', 'dismissClicked'],
+      exclude: ['bannerClicked', 'dismissClicked', 'onImageError'],
     },
     chromatic: {
       modes: {
@@ -39,6 +39,9 @@ const meta: Meta<ImageBannerComponent> = {
       control: false,
     },
     dismissClick: {
+      control: false,
+    },
+    onImageError: {
       control: false,
     },
     externalLink: {
