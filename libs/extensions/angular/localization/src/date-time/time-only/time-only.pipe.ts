@@ -18,7 +18,7 @@ export type TimeOnlyFormat = 'short' | 'medium';
   standalone: true,
 })
 export class TimeOnlyPipe extends AbstractTimezoneCompensatingPipe implements PipeTransform {
-  transform(input: number | Date, format: TimeOnlyFormat = 'short'): string {
+  transform(input: number | Date | string, format: TimeOnlyFormat = 'short'): string {
     return this.format(input, this.getFormat(format));
   }
 

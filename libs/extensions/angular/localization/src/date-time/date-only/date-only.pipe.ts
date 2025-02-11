@@ -11,7 +11,7 @@ import { DateFormats } from '../date-formats';
   standalone: true,
 })
 export class DateOnlyPipe extends AbstractTimezoneCompensatingPipe implements PipeTransform {
-  transform(input: number | Date): string {
+  transform(input: number | Date | string): string {
     return this.format(input, DateFormats.SHORT_DATE_FORMAT);
   }
 }
