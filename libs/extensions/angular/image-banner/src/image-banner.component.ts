@@ -28,6 +28,11 @@ export class ImageBannerComponent {
   @Input() bodyText: string | undefined;
 
   /**
+   * Whether the button should be shown in mobile view or not.
+   */
+  @Input() showButtonInMobileView: boolean = true;
+
+  /**
    * The text of the button in the content area of the image banner.
    */
   @Input() actionButtonText: string | undefined;

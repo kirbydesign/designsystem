@@ -10,40 +10,20 @@ const meta: Meta<ImageBannerComponent> = {
   component: ImageBannerComponent,
   title: 'Components/Banner/Image Banner',
   parameters: {
-    actions: {
-      handles: ['dismissClick'],
-    },
-    controls: {
-      exclude: ['bannerClicked', 'dismissClicked'],
-    },
-    chromatic: {
-      modes: {
-        ...responsiveModes,
-      },
-    },
+    actions: { handles: ['dismissClick'] },
+    controls: { exclude: ['bannerClicked', 'dismissClicked'] },
+    chromatic: { modes: { ...responsiveModes } },
   },
   argTypes: {
-    title: {
-      control: 'text',
-    },
-    bodyText: {
-      control: 'text',
-    },
-    actionButtonText: {
-      control: 'text',
-    },
-    imagePath: {
-      control: 'text',
-    },
-    bannerClick: {
-      control: false,
-    },
-    dismissClick: {
-      control: false,
-    },
-    externalLink: {
-      control: 'text',
-    },
+    showButtonInMobileView: { control: 'boolean' },
+
+    title: { control: 'text' },
+    bodyText: { control: 'text' },
+    actionButtonText: { control: 'text' },
+    imagePath: { control: 'text' },
+    bannerClick: { control: false },
+    dismissClick: { control: false },
+    externalLink: { control: 'text' },
   },
 };
 export default meta;
@@ -124,10 +104,7 @@ export const NoDismiss: Story = {
  * If these defaults are unwanted custom `title` and `bodyText` markup can instead be provided to the image banner which can be styled as needed.
  */
 export const CustomContent: Story = {
-  args: {
-    actionButtonText: 'Read more',
-    imagePath: 'assets/images/leaves.jpg',
-  },
+  args: { actionButtonText: 'Read more', imagePath: 'assets/images/leaves.jpg' },
 
   render: (args) => ({
     props: args,

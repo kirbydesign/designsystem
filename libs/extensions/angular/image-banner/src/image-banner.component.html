@@ -45,34 +45,42 @@
           </span>
         </div>
 
-        <ng-container *ngIf="externalLink">
-          <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
-          <a
-            kirby-button
-            class="main-content-body-action-text"
-            [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
-            [showIconOnly]="!actionButtonText"
-            [href]="externalLink"
-            target="_blank"
-            size="sm"
-          >
-            {{ actionButtonText }}
-            <kirby-icon name="link"></kirby-icon>
-          </a>
+        <div *ngIf="!showButtonInMobileView && externalLink" class="main-content-body-action-link">
+          <kirby-icon name="link"></kirby-icon>
+        </div>
 
-          <div class="main-content-body-action-link">
-            <kirby-icon name="link"></kirby-icon>
-          </div>
-        </ng-container>
+        <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
+        <a
+          *ngIf="externalLink"
+          kirby-button
+          class="main-content-body-action-text"
+          [class.visible]="showButtonInMobileView"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [href]="externalLink"
+          target="_blank"
+          size="sm"
+        >
+          @if (actionButtonText) {
+            {{ actionButtonText }}
+          } @else {
+            {{ translations.get('readMore') }}
+          }
+          <kirby-icon name="link"></kirby-icon>
+        </a>
 
         <button
+          *ngIf="!externalLink"
+          [class.visible]="showButtonInMobileView"
           class="main-content-body-action-text"
           kirby-button
-          *ngIf="actionButtonText && !externalLink"
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           size="sm"
         >
-          {{ actionButtonText }}
+          @if (actionButtonText) {
+            {{ actionButtonText }}
+          } @else {
+            {{ translations.get('readMore') }}
+          }
         </button>
       </div>
     </div>

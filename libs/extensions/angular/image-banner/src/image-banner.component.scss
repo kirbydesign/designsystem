@@ -196,6 +196,10 @@ kirby-card {
 .main-content-body-action-text {
   display: none;
 
+  &.visible {
+    display: inline-flex;
+  }
+
   @include container-more-than-width {
     align-self: start;
     display: inline-flex;

@@ -9,4 +9,5 @@ export const en: Translation = {
   previousMonth: 'Previous month',
   previousSlide: 'Previous slide',
   selectYear: 'Select year',
+  readMore: 'Read more',
 };
