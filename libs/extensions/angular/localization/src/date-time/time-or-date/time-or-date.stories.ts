@@ -23,12 +23,12 @@ export class TimeOrDateExampleComponent {
   /**
    * An example timestamp to be formatted.
    */
-  @Input() myTimestamp!: number | Date;
+  @Input() myTimestamp!: number | Date | string;
 
   /**
    * The timestamp to be formatted.
    */
-  @Input() tomorrowTimestamp: number | Date = new Date(
+  @Input() tomorrowTimestamp: number | Date | string = new Date(
     new Date().setDate(new Date().getDate() + 1)
   );
 

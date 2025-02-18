@@ -18,7 +18,7 @@ import { DateFormats } from '../date-formats';
 })
 export class TimeOrDatePipe extends AbstractTimezoneCompensatingPipe implements PipeTransform {
   transform(
-    time: number | Date,
+    time: number | Date | string,
     showSeconds = false,
     formatMonth: 'month-as-digits' | 'month-as-letters' = 'month-as-digits'
   ): string {
@@ -26,7 +26,7 @@ export class TimeOrDatePipe extends AbstractTimezoneCompensatingPipe implements 
       return '';
     }
 
-    const date = typeof time === 'number' ? new Date(time) : time;
+    const date = typeof time === 'number' || typeof time === 'string' ? new Date(time) : time;
 
     const today = new Date();
     const sameDay =
