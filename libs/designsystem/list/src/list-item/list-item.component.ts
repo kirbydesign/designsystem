@@ -1,18 +1,21 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
+  Renderer2,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular/standalone';
 
 import { ThemeColor } from '@kirbydesign/core';
-import { PlatformService } from '@kirbydesign/designsystem/helpers';
-
+import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
+import { UnobserveFn } from '@kirbydesign/designsystem/types';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
 export type BoundaryClass = 'first' | 'last';
@@ -23,10 +26,16 @@ export type BoundaryClass = 'first' | 'last';
   styleUrls: ['../list.component.scss', './list-item.component.scss'],
   standalone: false,
 })
-export class ListItemComponent implements OnInit, AfterViewInit {
+export class ListItemComponent implements OnInit, AfterViewInit, OnDestroy {
+  private mutationObserverUnobserveFn: UnobserveFn;
+
   _isSwipingEnabled = false;
 
-  constructor(private platform: PlatformService) {
+  constructor(
+    private platform: PlatformService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef<HTMLElement>
+  ) {
     this.initializeSwipeActions();
   }
 
@@ -71,6 +80,16 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     if (!this.itemTemplate) {
       console.warn('No item template was provided.');
     }
+
+    this.mutationObserverUnobserveFn = observeContent(
+      this.elementRef.nativeElement,
+      this.removeAriaRole,
+      { attributeFilter: ['role'], childList: true, subtree: true }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.mutationObserverUnobserveFn();
   }
 
   _hasSwipeActions(item: any): boolean {
@@ -142,4 +161,15 @@ export class ListItemComponent implements OnInit, AfterViewInit {
       this._isSwipingEnabled = this.platform.isTouch();
     }
   }
+
+  /**
+   * Removes any listitem role from nested elements, sets the role on this element instead and stops listening.
+   * This is needed to ensure that the listitem role is a direct child of the element with role="list".
+   */
+  private removeAriaRole = () => {
+    const currentListItem = this.elementRef.nativeElement.querySelector('[role="listitem"]');
+    this.renderer.removeAttribute(currentListItem, 'role');
+    this.mutationObserverUnobserveFn();
+    this.renderer.setAttribute(this.elementRef.nativeElement, 'role', 'listitem');
+  };
 }
