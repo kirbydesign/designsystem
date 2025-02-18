@@ -1,5 +1,11 @@
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
 
+const mutationOberverDefaults: MutationObserverInit = {
+  characterData: true,
+  childList: true,
+  subtree: true,
+};
+
 /* Function based on https://github.com/angular/components/blob/main/src/cdk/observers/observe-content.ts
  * Angular may add, remove, or edit comment nodes during change detection. We don't care about
  * these changes because they don't affect the user-preceived content, and worse it can cause
@@ -36,7 +42,8 @@ function shouldIgnoreMutationRecord(record: MutationRecord) {
  */
 export function observeContent(
   observedElement: HTMLElement,
-  contentChangedCallback: () => void
+  contentChangedCallback: () => void,
+  options: MutationObserverInit = mutationOberverDefaults
 ): UnobserveFn {
   const mutationObserver = new MutationObserver((mutations) => {
     const filteredMutations = mutations.filter((mutation) => !shouldIgnoreMutationRecord(mutation));
@@ -45,11 +52,7 @@ export function observeContent(
     }
   });
 
-  mutationObserver.observe(observedElement, {
-    characterData: true,
-    childList: true,
-    subtree: true,
-  });
+  mutationObserver.observe(observedElement, options);
 
   return () => {
     mutationObserver.disconnect();
