@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
 import { ExtensionsLandingPageComponent } from './extensions/extensions-landing-page.component';
 import { LocalizationComponent } from './localization/localization.component';
-import { ExamplesRoutingModule } from './examples/examples-routing.module';
 
 export const routes: Routes = [
   {
@@ -70,7 +69,6 @@ export const routes: Routes = [
   },
   {
     path: 'examples',
-    loadChildren: () =>
-      import('./examples/examples-routing.module').then((m) => m.ExamplesRoutingModule),
+    loadChildren: () => import('./examples/examples.routes').then((m) => m.EXAMPLE_ROUTES),
   },
 ];

@@ -37,12 +37,33 @@ export class ModalNavigationService {
     moduleRootRoutePath?: string
   ): Promise<string[]> {
     const flattenedRoutes: Routes = [].concat(...routeConfig);
+    await this.addLazyLoadedChildRoutes(flattenedRoutes);
+
     let modalRoutes: string[] = [];
     const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes, moduleRootRoutePath);
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
     return modalRoutes;
+  }
+
+  private async addLazyLoadedChildRoutes(flattenedRoutes: Routes) {
+    for (const route of flattenedRoutes) {
+      const lazyLoadedRoutes = await this.getLazyLoadedChildRoutes(route);
+      if (lazyLoadedRoutes.length) {
+        flattenedRoutes.push(...lazyLoadedRoutes);
+      }
+    }
+  }
+
+  private async getLazyLoadedChildRoutes(route: Route): Promise<Route[]> {
+    if (route?.loadChildren) {
+      const lazyLoadedChildren = await route.loadChildren();
+      if (Array.isArray(lazyLoadedChildren)) {
+        return lazyLoadedChildren;
+      }
+    }
+    return [];
   }
 
   private async getModuleRootPath(routes: Routes, moduleRootRoutePath?: string): Promise<string[]> {
