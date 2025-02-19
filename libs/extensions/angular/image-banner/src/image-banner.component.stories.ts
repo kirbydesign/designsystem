@@ -14,7 +14,7 @@ const meta: Meta<ImageBannerComponent> = {
       handles: ['dismissClick'],
     },
     controls: {
-      exclude: ['bannerClicked', 'dismissClicked', 'onImageError'],
+      exclude: ['bannerClicked', 'dismissClicked', 'onImageError', 'translations'],
     },
     chromatic: {
       modes: {
@@ -196,4 +196,24 @@ export const UsageInGrid: Story = {
       </div>
     `,
   }),
+};
+
+const handleImageError = (event: Event) => {
+  console.error('Image failed to load:', event);
+  const image = event?.target as HTMLImageElement;
+  image.src = 'assets/images/not-found.png';
+};
+
+/**
+ * If a fallback image is needed when the provided image path results in an error,
+ * subscribe to the `imageError` event and update the imagePath to an alternative image in your handler function.
+ */
+export const ImageError: Story = {
+  args: {
+    title: 'Image Banner with Fallback Image',
+    bodyText: 'This is the body text.',
+    actionButtonText: 'Read more',
+    imageError: handleImageError,
+    imagePath: 'assets/images/does-not-exist.jpg',
+  },
 };

@@ -60,7 +60,6 @@ export class ImageBannerComponent {
   @Output()
   imageError = new EventEmitter<ErrorEvent>();
 
-
   constructor(public translations: TranslationService) {}
 
   public bannerClicked(event: Event) {
