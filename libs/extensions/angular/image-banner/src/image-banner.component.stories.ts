@@ -144,13 +144,14 @@ export const CustomMinimumHeight: Story = {
 /**
  * The component adapts to the containers width, and thus should be plug and
  * play with the kirby css grid and slider utilities.
- * It switches between a narrow and wide view.
+ * It switches between a narrow and wide view. Here the button is also shown in the narrow view.
  */
-export const UsageInGrid: Story = {
+export const UsageInGridAndButtonInNarrowView: Story = {
   args: {
     title: 'Banners that adapt in grid',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
+    showButtonInMobileView: true,
     imagePath: 'assets/images/leaves.jpg',
     externalLink: 'http://www.kirby.design',
   },
