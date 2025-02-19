@@ -41,7 +41,7 @@ const meta: Meta<ImageBannerComponent> = {
     dismissClick: {
       control: false,
     },
-    onImageError: {
+    imageError: {
       control: false,
     },
     externalLink: {
