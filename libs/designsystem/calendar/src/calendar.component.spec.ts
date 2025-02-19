@@ -493,6 +493,16 @@ describe('CalendarComponent', () => {
       expect(spectator.component.activeMonthName).toBe('Juli');
     });
 
+    it('should be possible to change the locale to German', () => {
+      spectator = createHostWithLocale('de');
+
+      spectator.setInput('selectedDate', localMidnightDate('2022-06-01'));
+
+      const headerTexts = trimmedTexts('th :not(.visually-hidden)');
+      expect(headerTexts).toEqual(['M', 'D', 'M', 'D', 'F', 'S', 'S']);
+      expect(spectator.component.activeMonthName).toBe('Mai');
+    });
+
     it('should have correct aria-label for locale "en"', () => {
       spectator = createHostWithLocale('en');
 
@@ -527,6 +537,15 @@ describe('CalendarComponent', () => {
 
       const day = spectator.query('.day.current-month');
       expect(day.getAttribute('aria-label')).toBe('1. juli');
+    });
+
+    it('should have correct aria-label for locale "de"', () => {
+      spectator = createHostWithLocale('de');
+
+      spectator.setInput('selectedDate', localMidnightDate('2022-06-01'));
+
+      const day = spectator.query('.day.current-month');
+      expect(day.getAttribute('aria-label')).toBe('1. mai');
     });
   });
 

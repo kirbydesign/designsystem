@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Inject, LOCALE_ID } from '@angular/core';
 import { da } from './translations/da';
 import { en } from './translations/en';
+import { de } from './translations/de';
 import { Translation } from './translation.interface';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Translation } from './translation.interface';
 })
 export class TranslationService {
   private activeTranslation: Translation = en;
-  private translations: { [key: string]: Translation } = { da, en };
+  private translations: { [key: string]: Translation } = { da, en, de };
 
   constructor(@Inject(LOCALE_ID) private localeId: string) {
     this.setActiveTranslation(localeId);

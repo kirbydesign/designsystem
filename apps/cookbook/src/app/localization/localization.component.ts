@@ -9,6 +9,7 @@ import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component
 import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
 import { DaLocaleProviderComponent } from './locale-provider/da-locale-provider.component';
 import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.component';
+import { DeLocaleProviderComponent } from './locale-provider/de-locale-provider.component';
 
 @Component({
   selector: 'cookbook-localization',
@@ -19,6 +20,7 @@ import { EnLocaleProviderComponent } from './locale-provider/en-locale-provider.
     CodeViewerComponent,
     DaLocaleProviderComponent,
     EnLocaleProviderComponent,
+    DeLocaleProviderComponent,
     CalendarComponent,
     CardModule,
     AvatarComponent,
