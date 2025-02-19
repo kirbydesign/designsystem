@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/interaction-state';
 
-$blur-radius: 60px;
+$blur-radius: 110px;
 $max-content-width: 324px;
 $main-image-height-small: 132px;
 $main-image-height-large: 164px;
@@ -48,11 +48,13 @@ $container-query-breakpoint: 600px;
 }
 
 :host(.dark) .blur-image {
-  filter: blur($blur-radius) brightness(0.8);
+  filter: blur($blur-radius);
+  opacity: 0.45;
 }
 
 :host(.light) .blur-image {
-  filter: blur($blur-radius) brightness(1.3);
+  filter: blur($blur-radius);
+  opacity: 0.45;
 }
 
 .blur-image-wrapper {

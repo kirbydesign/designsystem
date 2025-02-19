@@ -30,7 +30,7 @@ export class ImageBannerComponent {
   /**
    * Whether the button should be shown in mobile view or not.
    */
-  @Input() showButtonInMobileView: boolean = true;
+  @Input() showButtonInMobileView: boolean = false;
 
   /**
    * The text of the button in the content area of the image banner.
