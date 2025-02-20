@@ -199,7 +199,6 @@ export const UsageInGrid: Story = {
 };
 
 const handleImageError = (event: Event) => {
-  console.error('Image failed to load:', event);
   const image = event?.target as HTMLImageElement;
   image.src = 'assets/images/not-found.png';
 };
