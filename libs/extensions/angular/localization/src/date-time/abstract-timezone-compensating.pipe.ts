@@ -13,12 +13,12 @@ export abstract class AbstractTimezoneCompensatingPipe implements PipeTransform 
 
   abstract transform(value: unknown, ...args: unknown[]): unknown;
 
-  protected format(time: number | Date, formatPattern: string): string {
+  protected format(time: number | Date | string, formatPattern: string): string {
     if (!time) {
       return '';
     }
 
-    const date = typeof time === 'number' ? new Date(time) : time;
+    const date = typeof time === 'number' || typeof time === 'string' ? new Date(time) : time;
 
     const timeZone = this.config.timeZone;
     const options = this.getIntlOptions(formatPattern);
