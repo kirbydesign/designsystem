@@ -21,7 +21,7 @@ $container-query-breakpoint: 600px;
   }
 }
 
-// Container-type: inline-size currently causes block elements to collapse in curtain scenarios on Safari
+// Container-type: inline-size currently causes block elements to collapse in certain scenarios on Safari
 // To avoid content collapsing we use an empty block element as the container instead (we only need the inline size)
 .banner-ruler {
   container-name: banner;
