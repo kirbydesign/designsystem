@@ -1,20 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  inject,
-  Input,
-  OnDestroy,
-  Output,
-  Renderer2,
-} from '@angular/core';
+import { Component, EventEmitter, HostBinding, inject, Input, Output } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { ResizeObserverService, TranslationService } from '@kirbydesign/designsystem/shared';
+import { TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-x-image-banner',
@@ -22,14 +11,8 @@ import { ResizeObserverService, TranslationService } from '@kirbydesign/designsy
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',
 })
-export class ImageBannerComponent implements AfterViewInit, OnDestroy {
-  private host = inject(ElementRef);
-  private renderer = inject(Renderer2);
-  private resizeObserverService = inject(ResizeObserverService);
-
+export class ImageBannerComponent {
   public translations = inject(TranslationService);
-
-  private readonly CONTAINER_BREAKPOINT = 600;
 
   /**
    * The title placed inside the image banners header.
@@ -78,27 +61,6 @@ export class ImageBannerComponent implements AfterViewInit, OnDestroy {
    */
   @Output()
   imageError = new EventEmitter<ErrorEvent>();
-
-  ngAfterViewInit() {
-    this.resizeObserverService.observe(this.host.nativeElement, (entry) =>
-      this.handleHostResize(entry)
-    );
-  }
-
-  ngOnDestroy() {
-    this.resizeObserverService.unobserve(this.host.nativeElement);
-  }
-
-  private handleHostResize(entry: ResizeObserverEntry) {
-    console.log(entry);
-    if (entry.contentRect.width < this.CONTAINER_BREAKPOINT) {
-      this.renderer.removeClass(this.host.nativeElement, 'container-more-than-width');
-      this.renderer.addClass(this.host.nativeElement, 'container-less-than-width');
-    } else {
-      this.renderer.removeClass(this.host.nativeElement, 'container-less-than-width');
-      this.renderer.addClass(this.host.nativeElement, 'container-more-than-width');
-    }
-  }
 
   public bannerClicked(event: Event) {
     const eventTarget = event.target as HTMLElement;
