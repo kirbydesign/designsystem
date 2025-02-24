@@ -76,7 +76,7 @@ export const LightBackgroundBlur: Story = {
     title: 'Light Background Blur',
     bodyText: 'This is the body text.',
     imagePath: 'assets/images/leaves.jpg',
-    backgroundBlur: 'white',
+    backgroundBlur: 'light',
     actionButtonText: 'Read more',
   },
 };

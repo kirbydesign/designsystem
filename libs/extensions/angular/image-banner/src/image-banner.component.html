@@ -1,12 +1,12 @@
 @if (externalLink) {
-  <kirby-card [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'">
+  <kirby-card [themeColor]="backgroundBlur === 'dark' ? 'dark' : 'white'">
     <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
   </kirby-card>
 }
 
 @if (!externalLink) {
   <kirby-card
-    [themeColor]="backgroundBlur === 'none' ? 'white' : 'dark'"
+    [themeColor]="backgroundBlur === 'dark' ? 'dark' : 'white'"
     (click)="bannerClicked($event)"
   >
     <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
