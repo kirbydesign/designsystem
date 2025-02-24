@@ -33,7 +33,7 @@ export class ImageBannerComponent {
   @Input() showButtonInMobileView: boolean = false;
 
   /**
-   * The text of the button in the content area of the image banner.
+   * The text of the button in the content area of the image banner. If left empty, will default to 'Read more'.
    */
   @Input() actionButtonText: string | undefined;
 

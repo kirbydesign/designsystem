@@ -144,7 +144,7 @@ export const CustomMinimumHeight: Story = {
 /**
  * The component adapts to the containers width, and thus should be plug and
  * play with the kirby css grid and slider utilities.
- * It switches between a narrow and wide view. Here the button is also shown in the narrow view.
+ * It switches between a narrow and wide view. Here the button is also shown in the narrow view by switching on the `showButtonInMobileView`.
  */
 export const UsageInGridAndButtonInNarrowView: Story = {
   args: {
