@@ -23,6 +23,7 @@ $container-query-breakpoint: 600px;
 
 :host {
   display: block;
+  height: max-content;
 }
 
 :host(.none) {
