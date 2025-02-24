@@ -23,6 +23,7 @@ $container-query-breakpoint: 600px;
 
 // Elements with container-type: inline-size will collapse on Safari when navigating which prevents Angular from setting the correct scroll position on return.
 // Until the issue is fixed on Safari we cannot use container queries. It's currently unknown whether this issue is being worked on or not.
+// The use of .container-more-than-width & .container-less-than-width css classes is controlled by the ImageBannerResizeDirective.
 :host(:not(.container-more-than-width, .container-less-than-width)) {
   display: block;
   container-name: banner;
@@ -30,8 +31,7 @@ $container-query-breakpoint: 600px;
 }
 
 // Temporary styling to support desired behaviour without container queries.
-// See ImageBannerResizeDirective directive.
-// START
+// See ImageBannerResizeDirective.
 :host(.container-less-than-width) {
   .dismiss {
     // on mobile we always want the button to be white as it sits on top of the image
@@ -42,6 +42,8 @@ $container-query-breakpoint: 600px;
   }
 }
 
+// Temporary styling to support desired behaviour without container queries.
+// See ImageBannerResizeDirective.
 :host(.container-more-than-width) {
   .main-content-wrapper {
     gap: utils.size('s');
@@ -87,10 +89,6 @@ $container-query-breakpoint: 600px;
   }
 }
 
-// Temporary styling to support desired behaviour without container queries.
-// See ImageBannerResizeDirective directive.
-// END
-
 :host(.none) {
   .blur-image {
     display: none;
@@ -132,6 +130,10 @@ $container-query-breakpoint: 600px;
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+kirby-card {
+  height: 100%;
 }
 
 .main-content-wrapper {
