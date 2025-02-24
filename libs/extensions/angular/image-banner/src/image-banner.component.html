@@ -25,7 +25,7 @@
 
   <div class="main-content-wrapper">
     <div class="main-content-image-wrapper">
-      <img class="main-content-image" [src]="imagePath" alt="" />
+      <img class="main-content-image" [src]="imagePath" alt="" (error)="onImageError($event)" />
     </div>
 
     <div class="main-content">

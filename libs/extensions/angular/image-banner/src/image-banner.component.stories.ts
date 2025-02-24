@@ -10,20 +10,44 @@ const meta: Meta<ImageBannerComponent> = {
   component: ImageBannerComponent,
   title: 'Components/Banner/Image Banner',
   parameters: {
-    actions: { handles: ['dismissClick'] },
-    controls: { exclude: ['bannerClicked', 'dismissClicked'] },
-    chromatic: { modes: { ...responsiveModes } },
+    actions: {
+      handles: ['dismissClick'],
+    },
+    controls: {
+      exclude: ['bannerClicked', 'dismissClicked', 'onImageError', 'translations'],
+    },
+    chromatic: {
+      modes: {
+        ...responsiveModes,
+      },
+    },
   },
   argTypes: {
+    title: {
+      control: 'text',
+    },
+    bodyText: {
+      control: 'text',
+    },
+    actionButtonText: {
+      control: 'text',
+    },
+    imagePath: {
+      control: 'text',
+    },
+    bannerClick: {
+      control: false,
+    },
+    dismissClick: {
+      control: false,
+    },
+    imageError: {
+      control: false,
+    },
     showButtonInMobileView: { control: 'boolean' },
-
-    title: { control: 'text' },
-    bodyText: { control: 'text' },
-    actionButtonText: { control: 'text' },
-    imagePath: { control: 'text' },
-    bannerClick: { control: false },
-    dismissClick: { control: false },
-    externalLink: { control: 'text' },
+    externalLink: {
+      control: 'text',
+    },
   },
 };
 export default meta;
@@ -171,4 +195,23 @@ export const UsageInGridAndButtonInNarrowView: Story = {
       </div>
     `,
   }),
+};
+
+const handleImageError = (event: Event) => {
+  const image = event?.target as HTMLImageElement;
+  image.src = 'assets/images/not-found.png';
+};
+
+/**
+ * If a fallback image is needed when the provided image path results in an error,
+ * subscribe to the `imageError` event and update the imagePath to an alternative image in your handler function.
+ */
+export const ImageError: Story = {
+  args: {
+    title: 'Image Banner with Fallback Image',
+    bodyText: 'This is the body text.',
+    actionButtonText: 'Read more',
+    imageError: handleImageError,
+    imagePath: 'assets/images/does-not-exist.jpg',
+  },
 };
