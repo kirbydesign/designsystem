@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 
 import { AccessibilityGuidelinesComponent } from './accessibility/accessibility-guidelines.component';
 import { ComponentOverviewComponent } from './component-overview/component-overview.component';
+import { ExtensionsLandingPageComponent } from './extensions/extensions-landing-page.component';
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
-import { ExtensionsLandingPageComponent } from './extensions/extensions-landing-page.component';
 import { LocalizationComponent } from './localization/localization.component';
 
 export const routes: Routes = [
@@ -69,6 +69,7 @@ export const routes: Routes = [
   },
   {
     path: 'examples',
-    loadChildren: () => import('./examples/examples.routes').then((m) => m.EXAMPLE_ROUTES),
+    loadChildren: () =>
+      import('./examples/examples-routing.module').then((m) => m.ExamplesRoutingModule),
   },
 ];
