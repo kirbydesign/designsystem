@@ -40,19 +40,9 @@ export class ModalNavigationService {
     let modalRoutes: string[] = [];
     const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes, moduleRootRoutePath);
     if (moduleRootPaths) {
-      modalRoutes = await this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
+      modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
     return modalRoutes;
-  }
-
-  private async getLazyLoadedChildRoutes(route: Route): Promise<Routes> {
-    if (route?.loadChildren) {
-      const lazyLoadedChildren = await route.loadChildren();
-      if (Array.isArray(lazyLoadedChildren)) {
-        return lazyLoadedChildren;
-      }
-    }
-    return [];
   }
 
   private async getModuleRootPath(routes: Routes, moduleRootRoutePath?: string): Promise<string[]> {
@@ -173,7 +163,7 @@ export class ModalNavigationService {
     return routes.concat(this.getRoutePaths(route.children, currentPath));
   }
 
-  private async getModalRoutePath(route: Route, parentPath: string[]): Promise<string[]> {
+  private getModalRoutePath(route: Route, parentPath: string[]): string[] {
     const modalOutletName = 'modal';
     if (!!route.path && route.outlet === modalOutletName) {
       const modalOutletPath = `(${modalOutletName}:${route.path})`;
@@ -184,23 +174,13 @@ export class ModalNavigationService {
     if (route.path) {
       currentPath.push(route.path);
     }
-    //If route has lazy loaded childen then get the paths for those children
-    if (route.loadChildren) {
-      return ([] as string[]).concat(
-        await this.getModalRoutePaths(await this.getLazyLoadedChildRoutes(route), currentPath)
-      );
-    }
-    return ([] as string[]).concat(await this.getModalRoutePaths(route.children, currentPath));
+    return ([] as string[]).concat(...this.getModalRoutePaths(route.children, currentPath));
   }
 
-  private async getModalRoutePaths(routes: Routes, parentPath: string[]): Promise<string[]> {
-    if (!Array.isArray(routes)) {
-      return [];
-    }
-    const modalRoutePaths = await Promise.all(
-      routes.map((route) => this.getModalRoutePath(route, parentPath))
-    );
-    return ([] as string[]).concat(...modalRoutePaths);
+  private getModalRoutePaths(routes: Routes, parentPath: string[]): string[] {
+    return Array.isArray(routes)
+      ? ([] as string[]).concat(...routes.map((route) => this.getModalRoutePath(route, parentPath)))
+      : [];
   }
 
   private isNewModalWindow(navigationEnd: NavigationEnd): boolean {
