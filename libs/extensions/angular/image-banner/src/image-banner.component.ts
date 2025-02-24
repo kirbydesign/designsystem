@@ -47,7 +47,7 @@ export class ImageBannerComponent {
    */
   @HostBinding('class')
   @Input()
-  backgroundBlur: 'dark' | 'light' | 'none' = 'dark';
+  backgroundBlur: 'dark' | 'white' | 'none' = 'dark';
 
   /**
    * Emitted every time the banner is activated. The entire banner is interactive, and will be activated by click and keyboard interaction.

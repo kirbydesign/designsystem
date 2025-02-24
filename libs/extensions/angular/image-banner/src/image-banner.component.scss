@@ -49,12 +49,36 @@ $container-query-breakpoint: 600px;
 
 :host(.dark) .blur-image {
   filter: blur($blur-radius);
-  opacity: 0.45;
 }
 
-:host(.light) .blur-image {
+:host(.white) .blur-image {
   filter: blur($blur-radius);
-  opacity: 0.45;
+}
+
+:host(.dark) .blur-image-wrapper {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000, $alpha: 42%);
+    z-index: 1;
+  }
+}
+
+:host(.white) .blur-image-wrapper {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #fff, $alpha: 55%);
+    z-index: 1;
+  }
 }
 
 .blur-image-wrapper {
