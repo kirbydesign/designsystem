@@ -7,6 +7,7 @@ import {
   HostBinding,
   inject,
   Input,
+  OnDestroy,
   Output,
   Renderer2,
 } from '@angular/core';
@@ -21,7 +22,7 @@ import { ResizeObserverService, TranslationService } from '@kirbydesign/designsy
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',
 })
-export class ImageBannerComponent implements AfterViewInit {
+export class ImageBannerComponent implements AfterViewInit, OnDestroy {
   private host = inject(ElementRef);
   private renderer = inject(Renderer2);
   private resizeObserverService = inject(ResizeObserverService);
@@ -82,6 +83,10 @@ export class ImageBannerComponent implements AfterViewInit {
     this.resizeObserverService.observe(this.host.nativeElement, (entry) =>
       this.handleHostResize(entry)
     );
+  }
+
+  ngOnDestroy() {
+    this.resizeObserverService.unobserve(this.host.nativeElement);
   }
 
   private handleHostResize(entry: ResizeObserverEntry) {
