@@ -165,12 +165,14 @@ ion-radio {
   }
 
   &.radio-checked {
-    --border-width: 0px;
-
     &:not(:focus, .radio-disabled) {
       &::part(container) {
         box-shadow: utils.get-elevation(4);
       }
+    }
+
+    &::part(container) {
+      border-color: var(--kirby-semi-dark);
     }
   }
 }
