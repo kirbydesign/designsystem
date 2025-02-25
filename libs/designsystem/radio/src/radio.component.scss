@@ -4,7 +4,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $radio-icon-size: utils.size('m');
-$radio-icon-mark-size: 60%;
+$radio-icon-mark-size: 12px;
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
@@ -168,11 +168,8 @@ ion-radio {
     &:not(:focus, .radio-disabled) {
       &::part(container) {
         box-shadow: utils.get-elevation(4);
+        border-color: var(--kirby-semi-dark);
       }
-    }
-
-    &::part(container) {
-      border-color: var(--kirby-semi-dark);
     }
   }
 }
