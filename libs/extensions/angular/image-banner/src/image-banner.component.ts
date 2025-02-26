@@ -56,6 +56,12 @@ export class ImageBannerComponent {
    */
   @Output() dismissClick = new EventEmitter<Event>();
 
+  /**
+   * If the input imagePath results in an error, it will be reflected in this output.
+   */
+  @Output()
+  imageError = new EventEmitter<ErrorEvent>();
+
   constructor(public translations: TranslationService) {}
 
   public bannerClicked(event: Event) {
@@ -67,5 +73,9 @@ export class ImageBannerComponent {
 
   public dismissClicked(event: Event) {
     this.dismissClick.emit(event);
+  }
+
+  public onImageError($event: ErrorEvent) {
+    this.imageError.emit($event);
   }
 }

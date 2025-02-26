@@ -36,7 +36,7 @@ class AmountExampleComponent {
    * Configuration object for the Amount Pipe. The configuration object can be used to control
    * the formatting of the amount, and can be passed as an argument to the Amount Pipe when used on an `Amount`.
    */
-  @Input() amountServiceConfiguration!: AmountServiceConfiguration;
+  @Input() amountServiceConfiguration?: AmountServiceConfiguration;
 }
 
 /**
