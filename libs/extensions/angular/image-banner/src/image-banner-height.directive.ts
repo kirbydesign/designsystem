@@ -10,7 +10,7 @@ import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 @Directive({
   selector: `[kirbyImageBannerResize]`,
 })
-export class ImageBannerResizeDirective implements OnInit, OnDestroy {
+export class ImageBannerHeightDirective implements OnInit, OnDestroy {
   private currentHeight: number = 0;
   private host = inject(ElementRef);
   private resizeObserverService = inject(ResizeObserverService);
