@@ -4,10 +4,12 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { TranslationService } from '@kirbydesign/designsystem/shared';
+import { ImageBannerResizeDirective } from './image-banner-height.directive';
 
 @Component({
   selector: 'kirby-x-image-banner',
   imports: [CardModule, ButtonComponent, IconModule, CommonModule],
+  hostDirectives: [ImageBannerResizeDirective],
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',
 })
