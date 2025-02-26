@@ -168,6 +168,11 @@ ion-radio {
     &:not(:focus, .radio-disabled) {
       &::part(container) {
         box-shadow: utils.get-elevation(4);
+      }
+    }
+
+    &:not(.radio-disabled) {
+      &::part(container) {
         border-color: var(--kirby-semi-dark);
       }
     }
