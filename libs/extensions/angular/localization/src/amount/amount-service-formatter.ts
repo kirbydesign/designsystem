@@ -4,9 +4,9 @@ import { Amount } from './amount.model';
 
 export function formatAmount(
   amount: Amount,
-  amountServiceConfiguration: AmountServiceConfiguration,
   locale: string,
-  nativeCurrency: string
+  nativeCurrency: string,
+  amountServiceConfiguration?: AmountServiceConfiguration
 ) {
   const config = deriveConfiguration(amountServiceConfiguration);
 
@@ -47,7 +47,7 @@ export function deriveCurrencyCode(
   return currencyCodeToAppend || '';
 }
 
-export function deriveConfiguration(configuration: AmountServiceConfiguration) {
+export function deriveConfiguration(configuration: AmountServiceConfiguration = {}) {
   const config: AmountServiceConfiguration = {
     showCurrencyCode: '',
     digitsInfo: '1.2-2',
@@ -66,7 +66,7 @@ export interface AmountServiceConfiguration {
    * - 'alwaysShowCurrency' - always shows CurrencyCode, regardless of presentation currency
    * - 'showForeignCurrency' - only show CurrencyCode if it differs from the presentation currency
    */
-  showCurrencyCode: ShowCurrencyCode;
+  showCurrencyCode?: ShowCurrencyCode;
   /**
    * The position of the currency code in the formatted amount
    * - 'postfix' - output CurrencyCode after the formatted amount, eg. 1.234,56 EUR
