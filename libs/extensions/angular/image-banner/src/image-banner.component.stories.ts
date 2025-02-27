@@ -146,12 +146,15 @@ export const CustomContent: Story = {
 };
 
 /**
- * The components min-height can be overridden with the custom css property `--kirby-x-image-banner-min-height`. In this case it is set to `auto` to allow the image banners height to adjust automatically when only a title is set.
+ * The components min-height can be overridden with the custom css property `--kirby-x-image-banner-min-height`.
+ * In this case it is set to `auto` to allow the image banners height to adjust automatically when only a title is set.
+ *  Here the button is also shown in the narrow view by switching on the `showButtonInMobileView`.
  */
 export const CustomMinimumHeight: Story = {
   args: {
     title: 'This card is narrow and only has a title',
     imagePath: 'assets/images/leaves.jpg',
+    showButtonInMobileView: true,
   },
 
   render: (args) => ({
@@ -168,14 +171,13 @@ export const CustomMinimumHeight: Story = {
 /**
  * The component adapts to the containers width, and thus should be plug and
  * play with the kirby css grid and slider utilities.
- * It switches between a narrow and wide view. Here the button is also shown in the narrow view by switching on the `showButtonInMobileView`.
+ * It switches between a narrow and wide view.
  */
-export const UsageInGridAndButtonInNarrowView: Story = {
+export const UsageInGrid: Story = {
   args: {
     title: 'Banners that adapt in grid',
     bodyText: 'This is the body text.',
     actionButtonText: 'Read more',
-    showButtonInMobileView: true,
     imagePath: 'assets/images/leaves.jpg',
     externalLink: 'http://www.kirby.design',
   },
