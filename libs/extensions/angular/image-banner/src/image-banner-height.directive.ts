@@ -33,6 +33,6 @@ export class ImageBannerHeightDirective implements OnInit, OnDestroy {
     if (cardHeight === this.currentHeight) return;
 
     this.currentHeight = cardHeight;
-    this.renderer.setStyle(hostElement, 'minHeight', `${this.currentHeight}px`);
+    this.renderer.setStyle(hostElement, 'min-height', `${cardHeight}px`);
   }
 }
