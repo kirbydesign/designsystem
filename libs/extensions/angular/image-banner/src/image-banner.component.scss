@@ -23,8 +23,6 @@ $container-query-breakpoint: 600px;
 
 :host {
   display: block;
-  container-name: banner;
-  container-type: inline-size;
 }
 
 :host(.none) {
@@ -71,6 +69,8 @@ $container-query-breakpoint: 600px;
 }
 
 kirby-card {
+  container-name: banner;
+  container-type: inline-size;
   height: 100%;
 }
 
