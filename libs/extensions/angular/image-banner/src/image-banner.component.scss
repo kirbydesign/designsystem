@@ -208,14 +208,19 @@ kirby-card {
 }
 
 .main-content-body-text {
-  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  max-height: utils.size('xl');
-  padding-inline-end: utils.size('xxs');
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  max-height: 4.5em;
 
-  @include container-more-than-width {
-    padding-inline-end: utils.size('xxl');
-    max-height: utils.size('xxxxl');
+  @include container-less-than-width {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 3em;
   }
 }
 
