@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { Directive, ElementRef, inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
 /**
@@ -14,6 +14,7 @@ export class ImageBannerHeightDirective implements OnInit, OnDestroy {
   private currentHeight: number = 0;
   private host = inject(ElementRef);
   private resizeObserverService = inject(ResizeObserverService);
+  private renderer = inject(Renderer2);
 
   ngOnInit() {
     this.resizeObserverService.observe(this.host, (entry) => this.setCardHeightOnHost(entry));
@@ -32,6 +33,6 @@ export class ImageBannerHeightDirective implements OnInit, OnDestroy {
     if (cardHeight === this.currentHeight) return;
 
     this.currentHeight = cardHeight;
-    hostElement.style.minHeight = `${this.currentHeight}px`;
+    this.renderer.setStyle(hostElement, 'minHeight', `${this.currentHeight}px`);
   }
 }
