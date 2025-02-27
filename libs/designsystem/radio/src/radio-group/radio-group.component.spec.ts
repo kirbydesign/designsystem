@@ -739,6 +739,31 @@ describe('RadioGroupComponent', () => {
     });
   });
 
+  describe('aria attributes', () => {
+    let spectator: SpectatorHost<
+      RadioGroupComponent,
+      {
+        items: string[];
+      }
+    >;
+    let ionRadioGroupElement: HTMLIonRadioGroupElement;
+
+    beforeEach(async () => {
+      spectator = createHost(
+        `<kirby-radio-group aria-label="aria-test" [items]="['Bacon', 'Salami', 'Tenderloin']">
+        </kirby-radio-group>`,
+        {}
+      );
+
+      ionRadioGroupElement = spectator.query('ion-radio-group');
+      await TestHelper.whenReady(ionRadioGroupElement);
+    });
+    it('should set aria-label attribute on ion-radio-group', () => {
+      expect(ionRadioGroupElement.getAttribute('aria-label')).toEqual('aria-test');
+      expect(spectator.element.getAttribute('aria-label')).toBeNull();
+    });
+  });
+
   describe('implementing ControlValueAccessor interface', () => {
     const items = ['Bacon', 'Sausage', 'Onion'];
     const defaultSelectedIndex = 1;

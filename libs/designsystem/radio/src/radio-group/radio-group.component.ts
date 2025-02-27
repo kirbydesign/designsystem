@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   ContentChild,
   ContentChildren,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Output,
@@ -16,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
+import { inheritAriaLabelText } from '@kirbydesign/designsystem/shared';
 import { RadioComponent } from '../radio.component';
 
 @Component({
@@ -35,9 +37,14 @@ import { RadioComponent } from '../radio.component';
 export class RadioGroupComponent
   implements AfterContentInit, ControlValueAccessor, FormFieldControl
 {
-  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+  constructor(
+    private changeDetectionRef: ChangeDetectorRef,
+    private element: ElementRef<HTMLElement>
+  ) {}
 
   // #region public properties
+
+  _ariaLabel: string;
 
   get disabled(): boolean {
     return this._disabled;
@@ -150,6 +157,7 @@ export class RadioGroupComponent
   ngAfterContentInit(): void {
     this.initSelectionStateFromProjectedContent();
     this.listenForProjectedRadiosChange();
+    this._ariaLabel = inheritAriaLabelText(this.element.nativeElement);
   }
 
   registerOnChange(fn: any): void {
