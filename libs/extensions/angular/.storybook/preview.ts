@@ -1,6 +1,8 @@
 import { importProvidersFrom } from '@angular/core';
 import { applicationConfig, Preview } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
+/** Zone JS is required by Angular itself. */
+import 'zone.js';
 
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions-angular/localization';
@@ -8,6 +10,7 @@ import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions
 import { defaultParameters } from 'tools/storybook-config/shared-config';
 
 import docJson from '../docs/documentation.json';
+
 setCompodocJson(docJson);
 
 const preview: Preview = {
