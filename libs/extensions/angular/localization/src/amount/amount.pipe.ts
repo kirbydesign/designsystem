@@ -30,7 +30,7 @@ export class AmountPipe implements PipeTransform {
    * @param amount the {@link Amount} to configure
    * @param amountServiceConfiguration
    */
-  transform(amount: Amount, amountServiceConfiguration: AmountServiceConfiguration) {
+  transform(amount: Amount, amountServiceConfiguration?: AmountServiceConfiguration) {
     return this.amountService.formatAmount(amount, amountServiceConfiguration);
   }
 }

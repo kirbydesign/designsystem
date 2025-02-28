@@ -23,7 +23,7 @@ export class AmountService {
    * @param amountServiceConfiguration
    */
 
-  formatAmount(amount: Amount, amountServiceConfiguration: AmountServiceConfiguration) {
+  formatAmount(amount: Amount, amountServiceConfiguration?: AmountServiceConfiguration) {
     if (amount == undefined) {
       const config = deriveConfiguration(amountServiceConfiguration);
       if (config.returnValueOnEmptyAmount) {
@@ -37,9 +37,9 @@ export class AmountService {
 
     return formatAmount(
       amount,
-      amountServiceConfiguration,
       this.locale,
-      this.config.nativeCurrency
+      this.config.nativeCurrency,
+      amountServiceConfiguration
     );
   }
 }
