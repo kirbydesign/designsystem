@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { ChartHighlightedElements } from '@kirbydesign/designsystem';
 import { ActiveElement, ChartEvent, ChartOptions } from 'chart.js';
+import { ChartsModule } from '@kirbydesign/designsystem/chart';
 
 const config = {
   selector: 'cookbook-chart-example-interaction',
@@ -39,6 +40,7 @@ _customOptions: ChartOptions = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ChartsModule],
 })
 export class ChartExampleInteractionComponent {
   template: string = config.template;

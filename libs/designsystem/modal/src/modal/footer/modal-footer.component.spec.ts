@@ -20,6 +20,7 @@ const TRANSFORM_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, -${KEYBOARD_HEIGHT})
 
 @Component({
   template: '<kirby-modal-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer>',
+  standalone: false,
 })
 class TestHostComponent {
   snapToKeyboard = false;

@@ -7,94 +7,6 @@
   display: block;
   position: relative;
 
-  ion-item {
-    @include interaction-state.apply-focus-visible-background('xxxs');
-    @include interaction-state.apply-hover-ionic('xxxs');
-    @include interaction-state.apply-active-ionic('xxs');
-
-    // Wrap declarations to avoid mixing with nested rules.
-    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-    /* stylelint-disable no-duplicate-selectors */
-    & {
-      --padding-top: var(--item-padding-top, 0px);
-      --padding-bottom: var(--item-padding-bottom, 0px);
-      --min-height: #{map.get(utils.$item-heights, 'm')};
-      --padding-start: #{utils.size('s')};
-      --inner-padding-top: #{utils.size('xxs')};
-      --inner-padding-bottom: #{utils.size('xxs')};
-      --inner-padding-end: #{utils.size('s')};
-      --background: var(--kirby-item-background, #{utils.get-color('white')});
-
-      // WORKAROUND: Needed to fix ignored click on scrollend
-      // https://github.com/ionic-team/ionic-framework/issues/21871
-      --background-activated-opacity: 0.99;
-      --background-focused: var(
-        --kirby-item-background-focused,
-        #{utils.get-color('background-color')}
-      );
-      --background-focused-opacity: 1;
-
-      font-size: utils.font-size('n');
-    }
-    /* stylelint-enable no-duplicate-selectors */
-
-    // Prevent additional padding in iOS Safari on devices with "screen notch"
-    // by removing horizontal safe area when rotated to landscape orientation.
-    // See https://github.com/kirbydesign/designsystem/issues/1689
-    @media screen and (orientation: landscape) {
-      --ion-safe-area-left: 0px;
-      --ion-safe-area-right: 0px;
-    }
-
-    @include utils.slotted('[slot="end"]') {
-      margin-inline: 0;
-      text-align: end;
-
-      kirby-label {
-        text-align: start;
-      }
-    }
-
-    @include utils.slotted('time[slot="end"]') {
-      margin-inline-start: utils.size('xs');
-    }
-
-    @include utils.slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
-      margin-inline-start: utils.size('s');
-    }
-
-    @include item.item-typography;
-
-    @include utils.slotted(':not([slot])') {
-      width: 100%;
-    }
-
-    @include utils.slotted('input[slot="end"], kirby-form-field[slot="end"] input') {
-      margin-inline-start: utils.size('s');
-      width: auto;
-      text-align: end;
-    }
-
-    // Wrap declarations to avoid mixing with nested rules.
-    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-    /* stylelint-disable no-duplicate-selectors */
-    & {
-      --transition: #{interaction-state.transition('background-color')};
-    }
-    /* stylelint-enable no-duplicate-selectors */
-
-    // Consistent height on items containing checkbox or radio regardless of slot placement
-    &:has(kirby-checkbox, kirby-radio) {
-      --inner-padding-top: 0;
-      --inner-padding-bottom: 0;
-    }
-
-    // Avoid cutting off focus ring when radio is placed in default slot
-    &:has(kirby-checkbox:not([slot]), kirby-radio:not([slot])) {
-      overflow: inherit;
-    }
-  }
-
   &.sm,
   :host-context(kirby-card.menu-popover) &:not([size]) {
     ion-item {
@@ -120,6 +32,93 @@
   }
 }
 
+ion-item {
+  @include interaction-state.apply-focus-visible-background('xxxs');
+  @include interaction-state.apply-hover-ionic('xxxs');
+  @include interaction-state.apply-active-ionic('xxs');
+
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --padding-top: var(--item-padding-top, 0px);
+    --padding-bottom: var(--item-padding-bottom, 0px);
+    --min-height: #{map.get(utils.$item-heights, 'm')};
+    --padding-start: #{utils.size('s')};
+    --inner-padding-top: #{utils.size('xxs')};
+    --inner-padding-bottom: #{utils.size('xxs')};
+    --inner-padding-end: #{utils.size('s')};
+    --background: var(--kirby-item-background, #{utils.get-color('white')});
+
+    // WORKAROUND: Needed to fix ignored click on scrollend
+    // https://github.com/ionic-team/ionic-framework/issues/21871
+    --background-activated-opacity: 0.99;
+    --background-focused: var(
+      --kirby-item-background-focused,
+      #{utils.get-color('background-color')}
+    );
+    --background-focused-opacity: 1;
+
+    font-size: utils.font-size('n');
+  }
+  /* stylelint-enable no-duplicate-selectors */
+
+  // Prevent additional padding in iOS Safari on devices with "screen notch"
+  // by removing horizontal safe area when rotated to landscape orientation.
+  // See https://github.com/kirbydesign/designsystem/issues/1689
+  @media screen and (orientation: landscape) {
+    --ion-safe-area-left: 0px;
+    --ion-safe-area-right: 0px;
+  }
+
+  @include utils.slotted('[slot="end"]') {
+    text-align: end;
+
+    kirby-label {
+      text-align: start;
+    }
+  }
+
+  @include utils.slotted('time[slot="end"]') {
+    margin-inline-start: utils.size('xs');
+  }
+
+  @include utils.slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
+    margin-inline-start: utils.size('s');
+  }
+
+  @include item.item-typography;
+
+  @include utils.slotted(':not([slot])') {
+    width: 100%;
+  }
+
+  @include utils.slotted('input[slot="end"], kirby-form-field[slot="end"] input') {
+    margin-inline-start: utils.size('s');
+    width: auto;
+    text-align: end;
+  }
+
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --transition: #{interaction-state.transition('background-color')};
+  }
+  /* stylelint-enable no-duplicate-selectors */
+
+  // Consistent height on items containing checkbox or radio regardless of slot placement
+  &:has(kirby-checkbox, kirby-radio) {
+    --inner-padding-top: 0;
+    --inner-padding-bottom: 0;
+  }
+
+  // Avoid cutting off focus ring when radio is placed in default slot
+  &:has(kirby-checkbox:not([slot]), kirby-radio:not([slot])) {
+    overflow: inherit;
+  }
+}
+
 .disclosure {
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
@@ -142,6 +141,7 @@
 }
 
 :host-context(kirby-dropdown) ion-item,
+:host-context(kirby-menu) ion-item,
 :host-context(kirby-popover) ion-item {
   --min-height: #{utils.$dropdown-item-height};
 }

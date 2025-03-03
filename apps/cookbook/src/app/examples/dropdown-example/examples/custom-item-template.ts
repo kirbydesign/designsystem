@@ -1,4 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { JsonPipe, NgIf } from '@angular/common';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-dropdown-example-custom-item-template',
@@ -15,12 +19,12 @@ const config = {
   >
     <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
     <kirby-label>
-      <h3>{{ item.title }}</h3>
-      <p detail>{{ item.subtitle }}</p>
+      <p class="kirby-item-title">{{ item.title }}</p>
+      <p class="kirby-item-detail">{{ item.subtitle }}</p>
     </kirby-label>
     <kirby-label slot="end">
       <data>Value</data>
-      <data detail>{{ item.value }}</data>
+      <data class="kirby-item-detail">{{ item.value }}</data>
     </kirby-label>
   </kirby-item>
 </kirby-dropdown>
@@ -38,6 +42,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  imports: [DropdownModule, NgIf, IconModule, JsonPipe, ItemModule],
 })
 export class DropdownExampleCustomItemTemplateComponent {
   template: string = config.template;

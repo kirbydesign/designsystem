@@ -14,6 +14,7 @@ import { AlertHelper } from './alert.helper';
   template: `
     <h2>Dummy Component</h2>
   `,
+  standalone: false,
 })
 class EmbeddedDummyComponent {}
 
@@ -44,10 +45,11 @@ describe('AlertHelper', () => {
     let ionModal: HTMLIonModalElement;
     let backdrop: HTMLIonBackdropElement;
     let ionModalController: IonicModalController;
+    const title = 'Alert';
 
     beforeEach(async () => {
       ionModalController = spectator.inject(IonicModalController);
-      overlay = await alertHelper.showAlert({ title: 'Alert' });
+      overlay = await alertHelper.showAlert({ title });
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
       backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
@@ -85,6 +87,14 @@ describe('AlertHelper', () => {
       backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
       expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
       await ionModalElement.dismiss();
+    });
+
+    it('should set alert title text content as modal label', async () => {
+      await TestHelper.whenReady(ionModal);
+      const dialogElement = ionModal.shadowRoot.querySelector('[role="dialog"]');
+      await TestHelper.whenTrue(() => dialogElement.hasAttribute('aria-label'));
+
+      expect(dialogElement.getAttribute('aria-label')).toBe(title);
     });
   });
 });

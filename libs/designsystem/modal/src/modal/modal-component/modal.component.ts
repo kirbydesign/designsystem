@@ -7,6 +7,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
   TemplateRef,
@@ -14,12 +15,12 @@ import {
 } from '@angular/core';
 import { IonContent, IonModal } from '@ionic/angular/standalone';
 import { OverlayEventDetail } from '@ionic/core/components';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
+import { inheritAriaLabelText } from '@kirbydesign/designsystem/shared';
 import { ModalNavigationService } from '../../modal-navigation.service';
 import {
   DrawerSupplementaryAction,
@@ -33,7 +34,6 @@ import {
 import { CanDismissHelper } from '../services';
 
 @Component({
-  standalone: true,
   selector: 'kirby-modal',
   templateUrl: './modal.component.html',
   imports: [
@@ -41,13 +41,12 @@ import { CanDismissHelper } from '../services';
     KirbyIonicModule,
     IconModule,
     IonModal,
-    ButtonComponent,
     ModalWrapperComponent,
     ModalCompactWrapperComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent implements OnChanges {
+export class ModalComponent implements OnChanges, OnInit {
   @ViewChild(IonModal, { static: true, read: ElementRef })
   modalElement: ElementRef<HTMLIonModalElement>;
   @ViewChild(IonContent) ionContent: IonContent;
@@ -88,14 +87,18 @@ export class ModalComponent implements OnChanges {
     drawerSupplementaryAction: this.drawerSupplementaryAction,
     interactWithBackground: this.interactWithBackground,
   };
-
   _canDismiss: ShowAlertCallback | boolean = true;
 
   constructor(
     private canDismissHelper: CanDismissHelper,
     private modalNavigationService: ModalNavigationService,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private elementRef: ElementRef
   ) {}
+
+  ngOnInit(): void {
+    this.forwardAriaLabel();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updateModalConfigOnChange(changes);
@@ -141,5 +144,13 @@ export class ModalComponent implements OnChanges {
         this._config[key] = changes[key].currentValue;
       }
     });
+  }
+
+  private forwardAriaLabel() {
+    // Instead of setting aria label on ion-modal in the template we forward it to modal-wrapper for consistency
+    // and so we do not start listening for title changes in the modal-wrapper.
+    this._config.htmlAttributes = {
+      'aria-label': inheritAriaLabelText(this.elementRef.nativeElement),
+    };
   }
 }

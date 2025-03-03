@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-right-aligned',
@@ -22,9 +23,8 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.right-align]': 'true' },
+  imports: [DropdownModule],
 })
 export class DropdownExampleRightAlignedComponent {
   template: string = config.template;

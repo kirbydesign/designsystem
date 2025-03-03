@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-item-example-flagged',
@@ -8,8 +12,8 @@ const config = {
     <kirby-badge themeColor="warning" size="sm"></kirby-badge>
   </div>
   <kirby-label>
-    <h3 class="kirby-text-bold">Title</h3>
-    <p detail>Detail</p>
+    <p class="kirby-text-normal-bold">Title</p>
+    <p class="kirby-item-detail">Detail</p>
   </kirby-label>
   <kirby-flag slot="end" themeColor="success">
     <data value="60.0">60</data>
@@ -27,6 +31,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  imports: [ItemModule, ThemeColorDirective, BadgeComponent, FlagComponent],
 })
 export class ItemExampleFlaggedComponent {
   template: string = config.template;

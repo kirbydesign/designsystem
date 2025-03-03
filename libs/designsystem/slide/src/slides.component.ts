@@ -21,6 +21,7 @@ import {
   PlatformService,
   UniqueIdGenerator,
 } from '@kirbydesign/designsystem/helpers';
+import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { SlideDirective } from './slide.directive';
 
 // Swiper is not an Angular library,
@@ -41,11 +42,13 @@ type SwiperContainer = HTMLElement & { initialize: () => void; swiper: Swiper };
   templateUrl: './slides.component.html',
   styleUrls: ['./slides.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(
     private platform: PlatformService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translations: TranslationService
   ) {}
 
   @ViewChild('swiperContainer') swiperContainer: ElementRef<SwiperContainer>;
@@ -125,6 +128,10 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
             index: swiper.activeIndex,
           });
         },
+      },
+      a11y: {
+        prevSlideMessage: this.translations.get('previousSlide'),
+        nextSlideMessage: this.translations.get('nextSlide'),
       },
     };
   }

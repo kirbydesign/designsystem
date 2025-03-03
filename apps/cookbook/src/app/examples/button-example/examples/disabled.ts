@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-button-example-disabled',
@@ -9,10 +11,10 @@ const config = {
   <kirby-icon name="edit"></kirby-icon>  
   Disabled with icon
 </button>
-<button kirby-button disabled>
+<button kirby-button disabled aria-label="Close">
   <kirby-icon name="close"></kirby-icon>  
 </button>
-<button kirby-button disabled [noDecoration]="true">
+<button kirby-button disabled [noDecoration]="true" aria-label="Close">
   <kirby-icon name="close"></kirby-icon>
 </button>`,
 };
@@ -21,6 +23,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
+  imports: [ButtonComponent, IconModule],
 })
 export class ButtonExampleDisabledComponent {
   template: string = config.template;

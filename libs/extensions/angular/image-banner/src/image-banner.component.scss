@@ -23,8 +23,6 @@ $container-query-breakpoint: 600px;
 
 :host {
   display: block;
-  container-name: banner;
-  container-type: inline-size;
 }
 
 :host(.none) {
@@ -70,6 +68,12 @@ $container-query-breakpoint: 600px;
   object-position: center;
 }
 
+kirby-card {
+  container-name: banner;
+  container-type: inline-size;
+  height: 100%;
+}
+
 .main-content-wrapper {
   width: 100%;
   padding: utils.size('xxs');
@@ -95,11 +99,37 @@ $container-query-breakpoint: 600px;
 
 .main-content {
   display: flex;
-  min-height: utils.line-height('l') * 3; // text content height should always be minimum 3 lines
+  min-height: var(
+    --kirby-x-image-banner-min-height,
+    #{utils.line-height('l') * 3}
+  ); // text content height should be minimum 3 lines by default
+
   box-sizing: border-box;
   flex-direction: column;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
   overflow: hidden;
+
+  .main-content-header {
+    padding-inline-end: utils.size('xxs');
+
+    @include container-more-than-width {
+      padding-inline-end: utils.size('xl');
+    }
+  }
+
+  &:has(.main-content-body-action-link) {
+    .main-content-header {
+      padding-inline-end: utils.size('xl');
+    }
+  }
+
+  &:has(.header-text:empty):has(.body-text:empty) {
+    padding-block-start: 0;
+  }
+
+  &:has(.body-text:empty):has(.header-text:empty) {
+    padding-block-end: 0;
+  }
 
   @include container-more-than-width {
     flex: 1;
@@ -114,8 +144,6 @@ $container-query-breakpoint: 600px;
 }
 
 .main-content-header {
-  margin-right: utils.size('xl');
-
   p {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -157,6 +185,7 @@ $container-query-breakpoint: 600px;
   display: block;
   overflow: hidden;
   max-height: utils.size('xl');
+  padding-inline-end: utils.size('xxs');
 
   @include container-more-than-width {
     padding-inline-end: utils.size('xxl');

@@ -44,6 +44,7 @@ export type StandAloneSpacing =
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper],
+  standalone: false,
 })
 export class ListComponent implements OnInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;

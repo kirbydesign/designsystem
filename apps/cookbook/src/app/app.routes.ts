@@ -2,8 +2,10 @@ import { Routes } from '@angular/router';
 
 import { AccessibilityGuidelinesComponent } from './accessibility/accessibility-guidelines.component';
 import { ComponentOverviewComponent } from './component-overview/component-overview.component';
+import { ExtensionsLandingPageComponent } from './extensions/extensions-landing-page.component';
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
+import { LocalizationComponent } from './localization/localization.component';
 
 export const routes: Routes = [
   {
@@ -23,22 +25,45 @@ export const routes: Routes = [
       {
         path: 'intro',
         component: IntroComponent,
+        data: {
+          resourceLink: 'Introduction',
+        },
       },
       {
         path: 'showcase',
-        loadChildren: () => import('./showcase/showcase.module').then((m) => m.ShowcaseModule),
+        loadChildren: () => import('./showcase/showcase.routes').then((m) => m.SHOWCASE_ROUTES),
       },
       {
         path: 'guides',
-        loadChildren: () => import('./guides/guides.module').then((m) => m.GuideModule),
+        loadChildren: () => import('./guides/guides.routes').then((m) => m.GUIDES_ROUTES),
+        data: {
+          resourceLink: 'Guides',
+        },
       },
       {
         path: 'accessibility-in-kirby',
         component: AccessibilityGuidelinesComponent,
+        data: {
+          resourceLink: 'Accessibility',
+        },
       },
       {
         path: 'component-overview',
         component: ComponentOverviewComponent,
+      },
+      {
+        path: 'extensions',
+        component: ExtensionsLandingPageComponent,
+        data: {
+          resourceLink: 'Extensions',
+        },
+      },
+      {
+        path: 'localization',
+        component: LocalizationComponent,
+        data: {
+          resourceLink: 'Localization',
+        },
       },
     ],
   },
@@ -46,9 +71,5 @@ export const routes: Routes = [
     path: 'examples',
     loadChildren: () =>
       import('./examples/examples-routing.module').then((m) => m.ExamplesRoutingModule),
-  },
-  {
-    path: 'designer',
-    loadChildren: () => import('./designer/designer.module').then((m) => m.DesignerModule),
   },
 ];

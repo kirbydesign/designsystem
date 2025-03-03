@@ -1,15 +1,20 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-portal-example',
   template: `<kirby-menu 
   [DOMPortalOutlet]="_outlet"
   >
-  <kirby-item [selectable]="true">
-    <h3>Action 1</h3>
+  <kirby-item>
+    <p class="kirby-item-title">Stone</p>
   </kirby-item>
-  <kirby-item [selectable]="true">
-    <h3>Action 2</h3>
+  <kirby-item>
+    <p class="kirby-item-title">Rick</p>
+  </kirby-item>
+  <kirby-item>
+    <p class="kirby-item-title">Gooey</p>
   </kirby-item>
 </kirby-menu>
 `,
@@ -18,6 +23,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [MenuComponent, ItemModule],
 })
 export class MenuPortalExampleComponent {
   template: string = config.template;

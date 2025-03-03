@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 
 const config = {
   selector: 'cookbook-checkbox-sizes-example',
@@ -12,6 +14,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['../../checkbox-radio-sizes-example.scss'],
+  imports: [CheckboxComponent, DividerComponent],
 })
 export class CheckboxSizesExampleComponent {
   template: string = config.template;

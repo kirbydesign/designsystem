@@ -26,22 +26,44 @@ code {
 
   code.highlight {
     font-weight: utils.font-weight('bold');
+    margin-block-start: 0.5rem;
   }
 }
 
 /* prettier-ignore */
 .sample {
+  &-display-1,
+  &-display-2,
+  &-display-3,
   &-header-1,
   &-header-2,
   &-header-3,
   &-header-4,
+  &-text-bold,
   &-body,
   &-body-small,
   &-body-small-light,
   &-body-xsmall,
   &-body-xxsmall {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-block: 2rem 0.5rem;
+  }
+
+  &-display-1 {
+    &::after {
+      content: '(#{utils.font-size('xxxxl')})';
+    }
+  }
+  
+  &-display-2 {
+    &::after {
+      content: '(#{utils.font-size('xxxl')})';
+    }
+  }
+  
+  &-display-3 {
+    &::after {
+      content: '(#{utils.font-size('xxl')})';
+    }
   }
 
   &-header-1 {
@@ -74,7 +96,8 @@ code {
     }    
   }
 
-  &-body-small {
+  &-body-small,
+  &-body-small-light {
     &::after {
       content: '(#{utils.font-size('s')})';
     }    
@@ -96,7 +119,8 @@ code {
 [class^='sample-']::after {
   color: utils.get-text-color('danger');
   font-size: utils.font-size('xs');
-  margin-left: utils.size('m');
+  font-weight: utils.font-weight('normal');
+  margin-left: utils.size('xs');
 }
 
 .info-box {

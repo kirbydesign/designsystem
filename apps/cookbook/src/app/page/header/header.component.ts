@@ -1,38 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-interface HeaderLink {
-  text: string;
-  route?: string;
-  externalUrl?: string;
-  showAsActive?: boolean;
-}
-
-export const navigationItems: HeaderLink[] = [
-  { text: 'Components', route: '/home/component-overview' },
-  { text: 'Introduction', route: '/home/intro' },
-  { text: 'Guides', route: '/home/guides' },
-  { text: 'Accessibility', route: '/home/accessibility-in-kirby' },
-  {
-    text: 'Changelog',
-    externalUrl: 'https://github.com/kirbydesign/designsystem/releases',
-  },
-
-  { text: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
-];
-
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'cookbook-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  imports: [ButtonComponent, IconModule, RouterLink],
 })
 export class HeaderComponent {
   @Input() isMenuOpen = false;
   @Output() menuToggle = new EventEmitter<boolean>();
 
-  navigationItems = navigationItems;
-
   get menuIcon(): string {
-    return this.isMenuOpen ? 'close' : 'more';
+    return this.isMenuOpen ? 'close' : 'navigation';
   }
 
   onToggleMenu() {

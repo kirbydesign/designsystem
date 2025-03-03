@@ -7,7 +7,6 @@ import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
-import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { ChartsExampleComponent } from './charts-example/charts-example.component';
@@ -17,9 +16,6 @@ import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
-import { FormFieldInputDateExampleComponent } from './form-field-example/examples/input/date';
-import { FormFieldInputDateNativeExampleComponent } from './form-field-example/examples/input/date-native';
-import { FormFieldInputDecimalMaskExampleComponent } from './form-field-example/examples/input/decimal-mask';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { GridLayoutExtendedExampleComponent } from './grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component';
@@ -94,7 +90,7 @@ import { ModalEmbeddedAlertExampleComponent } from './modal-example/alert-exampl
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
 
-export const routes: ModalEnabledRoutes = [
+export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: '',
     component: ExamplesComponent,
@@ -351,32 +347,15 @@ export const routes: ModalEnabledRoutes = [
           },
         ],
       },
-      {
-        path: 'form-field',
-        children: [
-          {
-            path: '',
-            component: FormFieldExampleComponent,
-          },
-          {
-            path: 'date',
-            component: FormFieldInputDateExampleComponent,
-          },
-          {
-            path: 'date-native',
-            component: FormFieldInputDateNativeExampleComponent,
-          },
-          {
-            path: 'decimal-mask',
-            component: FormFieldInputDecimalMaskExampleComponent,
-          },
-        ],
-      },
     ],
   },
   {
     path: 'item',
     component: ItemExampleComponent,
+  },
+  {
+    path: 'form-field',
+    component: FormFieldExampleComponent,
   },
   {
     path: 'item-sliding',
@@ -544,10 +523,6 @@ export const routes: ModalEnabledRoutes = [
   {
     path: 'calendar',
     component: CalendarExampleComponent,
-  },
-  {
-    path: 'calendar-card',
-    component: CalendarCardExampleComponent,
   },
   {
     path: 'empty-state',

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const config = {
@@ -8,12 +11,12 @@ const config = {
     <kirby-list [items]="itemsFullList.slice(0,4)">
       <kirby-item *kirbyListItemTemplate="let item">
         <kirby-label>
-          <h3>{{item.title}}</h3>
-          <p subtitle>{{item.subTitle}}</p>
+          <p class="kirby-item-title">{{item.title}}</p>
+          <p class="kirby-item-subtitle">{{item.subTitle}}</p>
         </kirby-label>
         <kirby-label slot="end">
           <data [value]="item.amount">{{item.amount}}</data>
-          <data [value]="item.detail" detail>{{item.detail}}</data>
+          <data [value]="item.detail" class="kirby-item-detail">{{item.detail}}</data>
         </kirby-label>
       </kirby-item>
     </kirby-list>
@@ -22,12 +25,12 @@ const config = {
     <kirby-list [items]="itemsFullList.slice(4,7)">
       <kirby-item *kirbyListItemTemplate="let item">
         <kirby-label>
-          <h3>{{item.title}}</h3>
-          <p subtitle>{{item.subTitle}}</p>
+          <p class="kirby-item-title">{{item.title}}</p>
+          <p class="kirby-item-subtitle">{{item.subTitle}}</p>
         </kirby-label>
         <kirby-label slot="end">
           <data [value]="item.amount">{{item.amount}}</data>
-          <data [value]="item.detail" detail>{{item.detail}}</data>
+          <data [value]="item.detail" class="kirby-item-detail">{{item.detail}}</data>
         </kirby-label>
       </kirby-item>
     </kirby-list>
@@ -38,6 +41,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [AccordionModule, ListModule, ItemModule],
 })
 export class AccordionWithListExampleComponent extends BaseListComponent {
   template: string = config.template;

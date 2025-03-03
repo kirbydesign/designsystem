@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { KirbyModule } from '@kirbydesign/designsystem';
+import { RouterLink } from '@angular/router';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { IphoneComponent } from '../../iphone/iphone.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { ModalExampleAlertWithGuardStepperComponent } from '../../examples/modal-example/alert-example/modal-example-alert-with-guard-stepper.component';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ModalExampleAdvancedComponent } from '~/app/examples/modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from '~/app/examples/modal-example/modal-example-outlet.component';
 import { ModalExampleSimpleComponent } from '~/app/examples/modal-example/modal-example-simple.component';
@@ -16,6 +24,16 @@ import { ModalComponentExampleComponent } from '~/app/examples/modal-example/mod
   templateUrl: './modal-showcase.component.html',
   styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
+  imports: [
+    ExampleViewerComponent,
+    IphoneComponent,
+    KirbyModule,
+    CodeViewerComponent,
+    RouterLink,
+    ModalExampleAlertWithGuardStepperComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;
@@ -26,6 +44,17 @@ export class ModalShowcaseComponent {
   alertModalConfigExample = ModalExampleAlertComponent;
   isOpenExampleHtml = ModalComponentExampleComponent.isOpenExampleHtml;
   isOpenCodeSnippet = ModalComponentExampleComponent.isOpenCodeSnippet;
+  modalComponentAriaLabelCodeSnippet = `<!-- Setting a label when using the component-based modal -->
+<kirby-modal aria-label="This is my own custom label" trigger="open-modal">
+  <ng-template>
+    <!-- Modal content here -->
+  </ng-template>
+</kirby-modal>`;
+  modalConfigAriaLabelCodeSnippet = `// Setting a label when using the modal controller
+const config: ModalConfig = {
+  component: YourEmbeddedModalComponent,
+  htmlAttributes: { 'aria-label': 'Accessible label for modal' },
+};`;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
@@ -70,7 +99,7 @@ export class ModalShowcaseComponent {
       name: 'drawerSupplementaryAction',
       description: `(Optional) Allows placing a supplementary button in the top right corner of drawers.
       Please note: Only available on modals with a \`drawer\` flavor.`,
-      defaultValue: '',
+      defaultValue: 'undefined',
       type: ['{iconName: string, action: Function}'],
     },
     {
@@ -93,6 +122,12 @@ export class ModalShowcaseComponent {
       description: 'Disable scrolling of the modal',
       type: ['true', 'false'],
       defaultValue: 'false',
+    },
+    {
+      name: 'htmlAttributes',
+      description: '(Optional) Adds custom attributes to the modal.',
+      type: ['{ [key: string]: any; }'],
+      defaultValue: 'undefined',
     },
   ];
 

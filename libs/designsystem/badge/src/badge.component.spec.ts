@@ -80,7 +80,9 @@ describe('BadgeComponent', () => {
 
   describe('when one character is slotted', () => {
     beforeEach(async () => {
-      spectator = createHost('<kirby-badge></kirby-badge>', { props: { text: 'x' } });
+      spectator = createHost('<kirby-badge [text]="text"></kirby-badge>', {
+        hostProps: { text: 'x' },
+      });
       ionBadge = spectator.element.querySelector('ion-badge');
       await TestHelper.whenReady(ionBadge);
     });

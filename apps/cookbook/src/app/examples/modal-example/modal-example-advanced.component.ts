@@ -3,8 +3,12 @@ import { Component } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { NgFor, NgIf } from '@angular/common';
+import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
+import { ModalExampleConfigurationComponent } from './modal-example-configuration/modal-example-configuration.component';
 
 const config = {
   selector: 'cookbook-modal-example-advanced',
@@ -181,6 +185,13 @@ export class EmbeddedComponent() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-advanced.component.scss'],
+  imports: [
+    ButtonComponent,
+    ExampleConfigurationWrapperComponent,
+    ModalExampleConfigurationComponent,
+    NgIf,
+    NgFor,
+  ],
 })
 export class ModalExampleAdvancedComponent {
   static readonly template = config.template.split('<cookbook-example-configuration-wrapper')[0]; // Remove config part of the template

@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { noop } from 'rxjs';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-card-example-disclosure',
   template: `<kirby-card [hasPadding]="true" (click)="noop()">
   <kirby-card-header [hasPadding]="false">
     <kirby-item [disclosure]="'arrow-more'">
-      <h3 class="kirby-text-bold">Item disclosure in header</h3>
+      <p class="kirby-text-normal-bold">Item disclosure in header</p>
     </kirby-item>
   </kirby-card-header>
 
@@ -33,6 +36,7 @@ const config = {
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
   styles: [config.style],
+  imports: [CardModule, ItemModule, FlagComponent],
 })
 export class CardExampleDisclosureComponent {
   template: string = config.template;

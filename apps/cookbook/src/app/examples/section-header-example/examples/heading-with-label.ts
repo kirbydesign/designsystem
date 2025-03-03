@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardModule } from '@kirbydesign/designsystem/card';
 
 const config = {
   selector: 'cookbook-section-header-heading-with-label',
@@ -10,11 +13,11 @@ const config = {
 </kirby-section-header>
 <kirby-card [hasPadding]="true">
   <kirby-item>
-    <h3>Title</h3>
+    <p class="kirby-item-title">Title</p>
     <data slot="end">Value</data>
   </kirby-item>
   <kirby-item>
-    <h3>Title</h3>
+    <p class="kirby-item-title">Title</p>
     <data slot="end">Value</data>
   </kirby-item>
 </kirby-card>`,
@@ -23,6 +26,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [SectionHeaderComponent, ItemModule, CardModule],
 })
 export class SectionHeaderHeadingWithLabelExampleComponent {
   template: string = config.template;

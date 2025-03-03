@@ -1,8 +1,10 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
   HostBinding,
+  HostListener,
   Input,
   Output,
   ViewChild,
@@ -20,19 +22,12 @@ export enum SegmentedControlMode {
   default = 'default',
 }
 
-// Workaround until TS 5.4 official NoInfer
-// https://github.com/millsp/ts-toolbelt/blob/master/sources/Function/NoInfer.ts
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type NoInfer<T> = [T][T extends any ? 0 : never];
-
 @Component({
-  standalone: true,
   imports: [IconModule, BadgeComponent, CommonModule, IonSegment, IonSegmentButton],
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: { role: 'group' },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
   @ViewChild(IonSegment, { static: true, read: ElementRef })
@@ -93,7 +88,7 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
         );
         if (selectedSegmentButton) return; // Nothing to patch
 
-        ionSelectEvent.emit({ value: this._value.id });
+        ionSelectEvent.emit({ value: this._value?.id });
       });
     }
   }
@@ -149,5 +144,29 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
         this.segmentSelect.emit(this.value);
       });
     }
+  }
+
+  focusNativeButton(event: UIEvent) {
+    (event.target as HTMLIonSegmentButtonElement)?.setFocus();
+  }
+
+  private _segmentElementHasFocus = false;
+
+  getTabIndex(item: TItem, index: number) {
+    // When focused prevent tab stop from inner native button to outer ion-segment-button:
+    if (this._segmentElementHasFocus) return -1;
+    // Allow tab stop on selected item:
+    if (item.id === this.value?.id) return null;
+    // Allow tab stop on first item if no value is set:
+    if (!this.value && index === 0) return null;
+    // Prevent tab stop on all other items:
+    return -1;
+  }
+
+  @HostListener('focusin')
+  @HostListener('focusout')
+  _onFocusInOut() {
+    // @HostListener(focusin|focusout) triggers Change Detection and updates attr.tabindex on each ion-segment-button
+    this._segmentElementHasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
   }
 }

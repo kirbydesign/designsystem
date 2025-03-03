@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
@@ -12,12 +16,12 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
   <!-- BODY -->
   <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
     <kirby-label>
-      <h3>{{item.title}}</h3>
-      <p subtitle>{{item.subTitle}}</p>
+      <p class="kirby-item-title">{{item.title}}</p>
+      <p class="kirby-item-subtitle">{{item.subTitle}}</p>
     </kirby-label>
     <kirby-label slot="end">
       <data [value]="item.amount">{{item.amount}}</data>
-      <data [value]="item.detail" detail>{{item.detail}}</data>
+      <data [value]="item.detail" class="kirby-item-detail">{{item.detail}}</data>
     </kirby-label>
   </kirby-item>
 
@@ -36,5 +40,6 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
     </kirby-page>
   `,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
+  imports: [PageModule, ListModule, ItemModule, ButtonComponent],
 })
 export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {}

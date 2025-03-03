@@ -1,21 +1,41 @@
 import { Component } from '@angular/core';
 import { AvatarSize } from '@kirbydesign/designsystem';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { AvatarExampleDefaultComponent } from '../../examples/avatar-example/examples/default';
+import { AvatarExampleColorsComponent } from '../../examples/avatar-example/examples/colors';
+import { AvatarExampleTextComponent } from '../../examples/avatar-example/examples/text';
+import { AvatarExampleIconComponent } from '../../examples/avatar-example/examples/icon';
+import { AvatarExampleBadgeComponent } from '../../examples/avatar-example/examples/badge';
+import { AvatarExampleImageComponent } from '../../examples/avatar-example/examples/image';
+import { AvatarExampleImageSizeComponent } from '../../examples/avatar-example/examples/image-sizes';
+import { AvatarExampleImageLazyLoadingComponent } from '../../examples/avatar-example/examples/image-lazy-loading';
+import { AvatarExampleImageErrorComponent } from '../../examples/avatar-example/examples/image-error';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
 @Component({
   selector: 'cookbook-avatar-showcase',
   templateUrl: './avatar-showcase.component.html',
   styleUrls: ['./avatar-showcase.component.scss'],
+  imports: [
+    ExampleViewerComponent,
+    AvatarExampleDefaultComponent,
+    AvatarExampleColorsComponent,
+    AvatarExampleTextComponent,
+    AvatarExampleIconComponent,
+    AvatarExampleBadgeComponent,
+    AvatarExampleImageComponent,
+    AvatarExampleImageSizeComponent,
+    AvatarExampleImageLazyLoadingComponent,
+    AvatarExampleImageErrorComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class AvatarShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
-    {
-      name: 'imageSrc',
-      description: 'Points to the src of the image location',
-      defaultValue: 'null',
-      type: ['string'],
-    },
     {
       name: 'size',
       description: 'Sets the size of the avatar.',
@@ -23,11 +43,24 @@ export class AvatarShowcaseComponent {
       type: Object.values(AvatarSize),
     },
     {
+      name: 'imageSrc',
+      description: 'The path to the image you want to embed in the avatar.',
+      defaultValue: 'undefined',
+      type: ['string'],
+    },
+    {
       name: 'altText',
       description:
-        'Must be filled out - its the alt text attribute that screenreaders use when "viewing" the image.',
-      defaultValue: 'null',
+        'The alt text attribute that screenreaders use when "viewing" the image. Mandatory when using the avatar with an image.',
+      defaultValue: 'undefined',
       type: ['string'],
+    },
+    {
+      name: 'imageLoading',
+      description:
+        'Sets the loading attribute of the image.\n\nSee: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading',
+      defaultValue: 'undefined',
+      type: ['eager', 'lazy'],
     },
     {
       name: 'overlay',

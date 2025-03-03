@@ -1,4 +1,4 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, createKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -84,6 +84,46 @@ describe('ButtonComponent', () => {
         expect(element).toHaveComputedStyle({
           color: getColor('semi-dark', 'shade'),
         });
+      });
+    });
+
+    describe('when aria-disabled=true', () => {
+      beforeEach(() => {
+        element.ariaDisabled = 'true';
+      });
+
+      it('should render with correct background-color', () => {
+        expect(element).toHaveComputedStyle({
+          'background-color': getColor('semi-light'),
+        });
+      });
+
+      it('should render with correct color', () => {
+        expect(element).toHaveComputedStyle({
+          color: getColor('semi-dark', 'shade'),
+        });
+      });
+
+      it('should prevent activation on Enter', () => {
+        const keyDownEvent = createKeyboardEvent('keydown', 'Enter', element);
+        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
+        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+
+        element.dispatchEvent(keyDownEvent);
+
+        expect(preventDefaultSpy).toHaveBeenCalled();
+        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
+      });
+
+      it('should prevent activation on Space', () => {
+        const keyDownEvent = createKeyboardEvent('keydown', 'Space', element);
+        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
+        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+
+        element.dispatchEvent(keyDownEvent);
+
+        expect(preventDefaultSpy).toHaveBeenCalled();
+        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
       });
     });
 
@@ -183,33 +223,13 @@ describe('ButtonComponent', () => {
         });
       });
 
-      describe(`through an input property`, () => {
+      describe(`through template property binding`, () => {
         beforeEach(() => {
-          spectator = createHost(`<button kirby-button><span>Text</span></button>`, {
-            props: {
+          spectator = createHost(`<button kirby-button [size]="size"><span>Text</span></button>`, {
+            hostProps: {
               size: scenario.size,
             },
           });
-          element = spectator.element as HTMLButtonElement;
-        });
-        it('should render with correct font-size', () => {
-          expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
-        });
-
-        it('should render with correct height', () => {
-          expect(element).toHaveComputedStyle({ height: scenario.expected.height });
-        });
-
-        it('should render with correct min-width', () => {
-          expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
-        });
-      });
-
-      describe(`through template property binding`, () => {
-        beforeEach(() => {
-          spectator = createHost(
-            `<button kirby-button [size]="'${scenario.size}'"><span>Text</span></button>`
-          );
           element = spectator.element as HTMLButtonElement;
         });
         it('should render with correct font-size', () => {
@@ -367,10 +387,10 @@ describe('ButtonComponent', () => {
         }
       });
 
-      describe(`through an input property`, () => {
+      describe(`through template property binding`, () => {
         beforeEach(() => {
           spectator = createHost(
-            `<button kirby-button>
+            `<button kirby-button [size]="size" [showIconOnly]="showIconOnly">
               ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
               ${
                 scenario.iconPosition === 'icon-only'
@@ -380,44 +400,11 @@ describe('ButtonComponent', () => {
               ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
             </button>`,
             {
-              props: {
+              hostProps: {
                 size: scenario.size,
                 showIconOnly: scenario.showIconOnly,
               },
             }
-          );
-          element = spectator.element as HTMLButtonElement;
-        });
-
-        it('should render with correct padding-inline', () => {
-          expect(element.getElementsByClassName('content-layer').length).toBe(1);
-          expect(element.getElementsByClassName('content-layer')[0]).toHaveComputedStyle({
-            'padding-inline': scenario.expected.paddingInline,
-          });
-        });
-
-        if (scenario.iconPosition === 'icon-only') {
-          it('should render as icon only', () => {
-            expect(element).toHaveClass('icon-only');
-            expect(element.offsetWidth).toEqual(element.offsetHeight);
-          });
-        }
-      });
-
-      describe(`through template property binding`, () => {
-        beforeEach(() => {
-          spectator = createHost(
-            `<button kirby-button [size]="'${scenario.size}'" [showIconOnly]="${
-              scenario.showIconOnly
-            }">
-              ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
-              ${
-                scenario.iconPosition === 'icon-only'
-                  ? '<kirby-icon name="edit"></kirby-icon>'
-                  : '<span>Text</span>'
-              }
-              ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
-            </button>`
           );
           element = spectator.element as HTMLButtonElement;
         });
@@ -466,8 +453,11 @@ describe('ButtonComponent', () => {
         expect(contentLayer.lastChild).toBe(contentLayer.querySelector('kirby-icon'));
       });
 
-      it('should hide the plain text', () => {
-        expect(contentLayer.firstChild).toBeHidden();
+      it('should visually hide the plain text', () => {
+        expect(contentLayer.firstChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.firstChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {
@@ -500,8 +490,11 @@ describe('ButtonComponent', () => {
         expect(contentLayer.firstChild).toBe(contentLayer.querySelector('kirby-icon'));
       });
 
-      it('should hide the plain text', () => {
-        expect(contentLayer.lastChild).toBeHidden();
+      it('should visually hide the plain text', () => {
+        expect(contentLayer.lastChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.lastChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {
@@ -528,8 +521,11 @@ describe('ButtonComponent', () => {
         expect(firstChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
       });
 
-      it('should hide the text element', () => {
-        expect(contentLayer.firstChild).toBeHidden();
+      it('should visually hide the text element', () => {
+        expect(contentLayer.firstChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.firstChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {
@@ -556,8 +552,11 @@ describe('ButtonComponent', () => {
         expect(lastChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
       });
 
-      it('should hide the text element', () => {
-        expect(contentLayer.lastChild).toBeHidden();
+      it('should visually hide the text element', () => {
+        expect(contentLayer.lastChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (contentLayer.lastChild as HTMLElement).getBoundingClientRect();
+        expect(hiddenTextRect.height).toEqual(0);
+        expect(hiddenTextRect.width).toEqual(0);
       });
 
       it('should render as icon only', () => {
@@ -598,12 +597,11 @@ describe('ButtonComponent', () => {
       describe(`and plain text to the left of icon`, () => {
         it('should NOT apply `icon-right` class', () => {
           spectator = createHost(
-            `<button kirby-button>
+            `<button kirby-button [showIconOnly]="true">
               Hidden Text Left
               <kirby-icon name="edit"></kirby-icon>
             </button>`
           );
-          spectator.setInput('showIconOnly', true);
           element = spectator.element as HTMLButtonElement;
           expect(element).not.toHaveClass('icon-right');
         });
@@ -612,12 +610,11 @@ describe('ButtonComponent', () => {
       describe(`and plain text to the right of icon`, () => {
         it('should NOT apply `icon-left` class', () => {
           spectator = createHost(
-            `<button kirby-button>
+            `<button kirby-button [showIconOnly]="true">
               <kirby-icon name="edit"></kirby-icon>
               Hidden Text Right
             </button>`
           );
-          spectator.setInput('showIconOnly', true);
           element = spectator.element as HTMLButtonElement;
           expect(element).not.toHaveClass('icon-left');
         });

@@ -8,6 +8,9 @@
       "@kirbydesign/extensions-angular/image-banner": [
         "libs/extensions/angular/image-banner/index.ts"
       ],
+      "@kirbydesign/extensions-angular/skeleton-loader": [
+        "libs/extensions/angular/skeleton-loader/index.ts"
+      ],
       "@kirbydesign/designsystem/*": ["libs/designsystem/*"],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/accordion/index.ts"],
       "@kirbydesign/designsystem/action-group": ["libs/designsystem/action-group/index.ts"],

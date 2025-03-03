@@ -57,6 +57,7 @@
       "cache": true
     },
     "test": {
+      "dependsOn": ["build", "^build"],
       "cache": true
     },
     "e2e": {
@@ -79,7 +80,7 @@
   },
   "plugins": [
     {
-      "plugin": "@nx/eslint/plugin",
+      "plugin": "@nx/eslint-plugin",
       "options": {
         "targetName": "lint"
       }

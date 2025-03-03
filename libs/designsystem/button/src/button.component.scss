@@ -226,7 +226,8 @@ $button-margin: utils.size('xxxs');
 
     .content-layer {
       @include utils.slotted(':not(kirby-icon)') {
-        display: none;
+        position: absolute;
+        scale: 0;
       }
     }
   }
@@ -267,7 +268,8 @@ $button-margin: utils.size('xxxs');
     width: 100%;
   }
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled='true'] {
     color: utils.get-color('semi-dark-shade');
     border-color: transparent;
     pointer-events: none;
@@ -317,7 +319,7 @@ $button-margin: utils.size('xxxs');
 }
 
 :host-context(kirby-item)[slot='end'] {
-  margin-inline-start: utils.size('s');
+  margin-inline: utils.size('s') 0;
 }
 
 :host-context(kirby-dropdown) {

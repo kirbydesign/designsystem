@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
   selector: 'cookbook-item-example-avatar-flagged',
@@ -14,8 +20,8 @@ const config = {
     </kirby-badge>
   </kirby-avatar>
   <kirby-label>
-    <h3>Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</h3>
-    <p detail>Phone, Internet, Streaming services og other</p>
+    <p class="kirby-item-title">Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</p>
+    <p class="kirby-item-detail">Phone, Internet, Streaming services og other</p>
   </kirby-label>
   <kirby-flag slot="end" themeColor="success">
     <data value="300.00">EUR 300,00</data>
@@ -33,6 +39,14 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
+  imports: [
+    ItemModule,
+    ThemeColorDirective,
+    BadgeComponent,
+    AvatarComponent,
+    IconModule,
+    FlagComponent,
+  ],
 })
 export class ItemExampleAvatarFlaggedComponent {
   template: string = config.template;

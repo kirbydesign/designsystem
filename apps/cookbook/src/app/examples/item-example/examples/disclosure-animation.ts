@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-disclosure-animation',
   template: `<kirby-card [hasPadding]="true" (click)="isExpanded = !isExpanded">
   <kirby-card-header [hasPadding]="false">
     <kirby-item disclosure="arrow-down" [rotateIcon]="isExpanded">
-      <h3 class="kirby-text-bold">Disclosure animation example</h3>
+      <p class="kirby-text-normal-bold">Disclosure animation example</p>
     </kirby-item>
   </kirby-card-header>
 
@@ -43,6 +45,7 @@ export class MyComponent {
       transition('true <=> false', animate('0.2s')),
     ]),
   ],
+  imports: [CardModule, ItemModule],
 })
 export class ItemExampleDisclosureAnimationComponent {
   template: string = config.template;

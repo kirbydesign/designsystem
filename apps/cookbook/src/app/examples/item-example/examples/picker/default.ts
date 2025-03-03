@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-picker-default',
   template: `<kirby-item selectable="true">
   <kirby-label>
-    <h3 class="kirby-text-bold">Title</h3>
-    <p detail>Detail</p>
+    <p class="kirby-text-normal-bold">Title</p>
+    <p class="kirby-item-detail">Detail</p>
   </kirby-label>
   <kirby-label slot="end">
     <data>Value</data>
-    <data detail>Detail</data>
+    <data class="kirby-item-detail">Detail</data>
   </kirby-label>
 </kirby-item>`,
 };
@@ -17,6 +18,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemModule],
 })
 export class ItemExamplePickerDefaultComponent {
   template: string = config.template;

@@ -1,7 +1,9 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ItemComponent } from './item.component';
@@ -9,55 +11,74 @@ import { LabelComponent } from '.';
 
 const { fontWeight } = DesignTokenHelper;
 
-describe('ItemComponent with LabelComponent', () => {
+describe('ItemComponent', () => {
   let ionItem: HTMLElement;
 
   let spectator: SpectatorHost<ItemComponent>;
   const createHost = createHostFactory({
     component: ItemComponent,
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, CheckboxComponent, RadioModule, ToggleComponent],
     declarations: [LabelComponent],
   });
 
-  describe('selectable and selected', () => {
-    let labelElements: Element[];
+  describe('with kirby-label', () => {
+    describe('selectable and selected', () => {
+      let labelElements: Element[];
 
-    beforeEach(async () => {
-      spectator = createHost(
-        `
+      beforeEach(async () => {
+        spectator = createHost(
+          `
         <kirby-item selectable="true" selected="true">
           <kirby-label>
-            <h3>Title</h3>
-            <p detail>Detail</p>
+            <p>Title</p>
+            <p class="kirby-item-detail">Detail</p>
           </kirby-label>
           <kirby-label slot="end">
             <data>Value</data>
-            <data detail>Detail</data>
+            <data class="kirby-item-detail">Detail</data>
           </kirby-label>
         </kirby-item>
         `
-      );
-      ionItem = spectator.queryHost('ion-label');
-      await TestHelper.whenReady(ionItem);
-      labelElements = spectator.queryAll(
-        'ion-item ion-label > :is(h1, h2, h3, h4, h5, h6, p, data)'
-      );
-    });
+        );
+        ionItem = spectator.queryHost('ion-label');
+        await TestHelper.whenReady(ionItem);
+        labelElements = spectator.queryAll(
+          'ion-item ion-label > :is(h1, h2, h3, h4, h5, h6, p, data)'
+        );
+      });
 
-    it('should render general header, data and paragraph elements with correct font-weight', () => {
-      labelElements
-        .filter((e) => !e.attributes.getNamedItem('detail'))
-        .forEach((e) => {
-          expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('bold') });
-        });
-    });
+      it('should render heading, data and paragraph elements with correct font-weight', () => {
+        labelElements
+          .filter((e) => !e.classList.contains('kirby-item-detail'))
+          .forEach((e) => {
+            expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('bold') });
+          });
+      });
 
-    it('should render detail data and paragraph elements with correct font-weight', () => {
-      labelElements
-        .filter((e) => !!e.attributes.getNamedItem('detail'))
-        .forEach((e) => {
-          expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
-        });
+      it('should render detail data and paragraph elements with correct font-weight', () => {
+        labelElements
+          .filter((e) => !!e.classList.contains('kirby-item-detail'))
+          .forEach((e) => {
+            expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
+          });
+      });
+    });
+  });
+
+  describe('when configured with selectable="true"', () => {
+    const nestedInteractiveElements = ['kirby-checkbox', 'kirby-radio', 'kirby-toggle'];
+    nestedInteractiveElements.forEach((element) => {
+      it(`should not render native button when there is a nested ${element}`, async () => {
+        spectator = createHost(`<kirby-item selectable="true">
+          <${element}></${element}>
+        </kirby-item>
+        `);
+        ionItem = spectator.queryHost('ion-item');
+        await TestHelper.whenReady(ionItem);
+
+        const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+        expect(nativePart.tagName).not.toEqual('BUTTON');
+      });
     });
   });
 });

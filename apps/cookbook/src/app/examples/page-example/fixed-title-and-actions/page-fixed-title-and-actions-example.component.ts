@@ -4,6 +4,9 @@ import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const customTitleConfig = {
@@ -26,7 +29,7 @@ const config = {
   template: `<kirby-page toolbarTitle="A Fixed Title" defaultBackHref="/">
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
-    <button kirby-button (click)="onMoreSelect()">
+    <button kirby-button (click)="onMoreSelect()" aria-label="More">
       <kirby-icon name="more"></kirby-icon>
     </button>
   </kirby-page-actions>
@@ -38,6 +41,7 @@ const config = {
 };
 @Component({
   template: config.template,
+  imports: [PageModule, ButtonComponent, IconModule],
 })
 export class PageFixedTitleAndActionsExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

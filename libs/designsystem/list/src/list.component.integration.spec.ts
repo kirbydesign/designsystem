@@ -17,7 +17,7 @@ import {
 
 import { ListItemComponent } from './list-item/list-item.component';
 
-const { fontWeight, size } = DesignTokenHelper;
+const { fontWeight, size, getColor } = DesignTokenHelper;
 
 describe('ListComponent', () => {
   let ionList: HTMLElement;
@@ -49,15 +49,15 @@ describe('ListComponent', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
-          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" [hasItemSpacing]="hasItemSpacing" [disableSelectionHighlight]="disableSelectionHighlight" [shape]="shape" (itemSelect)="($event)">
+          <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
         </kirby-list>
         `
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
-      itemTexts = spectator.queryAll('ion-list ion-item h3');
+      itemTexts = spectator.queryAll('ion-list ion-item p');
     });
 
     it('should create list wrapper', () => {
@@ -82,7 +82,7 @@ describe('ListComponent', () => {
     });
 
     it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
-      spectator.setInput('disableSelectionHighlight', true);
+      spectator.setHostInput('disableSelectionHighlight', true);
       spectator.detectChanges();
 
       const selectItem = itemsInList[1];
@@ -95,7 +95,7 @@ describe('ListComponent', () => {
 
     describe('with hasItemSpacing set to true', () => {
       it('should apply spacing to all but the last item', () => {
-        spectator.setInput('hasItemSpacing', true);
+        spectator.setHostInput('hasItemSpacing', true);
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:not(:last-child)');
 
@@ -106,7 +106,7 @@ describe('ListComponent', () => {
       });
 
       it('should not apply spacing to the last item', () => {
-        spectator.setInput('hasItemSpacing', true);
+        spectator.setHostInput('hasItemSpacing', true);
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:last-child');
 
@@ -119,13 +119,65 @@ describe('ListComponent', () => {
 
     describe('with hasItemSpacing set to false', () => {
       it('should not apply spacing to items', () => {
-        spectator.setInput('hasItemSpacing', false);
+        spectator.setHostInput('hasItemSpacing', false);
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item');
 
         expect(kirbyItemsInList).not.toBeEmpty();
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
+        });
+      });
+    });
+
+    describe('with shape="none"', () => {
+      beforeEach(() => {
+        spectator.setHostInput('shape', 'none');
+        spectator.detectChanges();
+      });
+
+      it('should apply transparent background to kirby-list-items', () => {
+        const ionItemList = spectator.queryAll('ion-item');
+        expect(ionItemList.length).toBeGreaterThan(0);
+        ionItemList.forEach((item) => {
+          const itemNative = item.shadowRoot.querySelector('.item-native');
+          expect(itemNative).toHaveComputedStyle({ 'background-color': 'rgba(0, 0, 0, 0)' });
+        });
+      });
+
+      it('should apply "medium" border color to all but last item', () => {
+        const ionItemSlidingList = spectator.queryAll('ion-item-sliding:not(.last)'); // last item doesn't have border
+
+        expect(ionItemSlidingList.length).toBeGreaterThan(0);
+        ionItemSlidingList.forEach((item) => {
+          expect(item).toHaveComputedStyle({ 'border-bottom-color': getColor('medium') });
+        });
+      });
+    });
+  });
+
+  describe('with shape="none" inside card', () => {
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+        <kirby-card>
+          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" shape="none">
+            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
+          </kirby-list>
+        </kirby-card>
+        `
+      );
+      ionList = spectator.queryHost('ion-list');
+      await TestHelper.whenReady(ionList);
+      itemsInList = spectator.queryAll('ion-list ion-item');
+    });
+
+    it('should apply "background" border color to all but last item when inside card and list has shape "none"', () => {
+      const ionItemSlidingList = spectator.queryAll('ion-item-sliding:not(.last)'); // last item doesn't have border
+      expect(ionItemSlidingList.length).toBeGreaterThan(0);
+      ionItemSlidingList.forEach((item) => {
+        expect(item).toHaveComputedStyle({
+          'border-bottom-color': getColor('background-color'),
         });
       });
     });
@@ -171,7 +223,7 @@ describe('ListComponent', () => {
       spectator = createHost<ListComponent>(
         `
         <kirby-list [items]="[{ name: 'Item1' }]" (itemSelect)="($event)">
-          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
         </kirby-list>
         `
       );
@@ -191,7 +243,7 @@ describe('ListComponent', () => {
       spectator = createHost<ListComponent>(
         `
           <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }]" (itemSelect)="($event)">
-            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
           </kirby-list>
           `
       );
@@ -222,7 +274,7 @@ describe('ListComponent', () => {
       spectator = createHost<ListComponent>(
         `
           <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
-            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
           </kirby-list>
           `
       );

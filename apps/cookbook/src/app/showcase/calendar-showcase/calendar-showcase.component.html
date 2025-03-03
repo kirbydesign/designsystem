@@ -1,78 +1,162 @@
-<div class="example">
-  <h2>Default (transparent background)</h2>
-  <div class="calendar-example">
-    <cookbook-calendar-example></cookbook-calendar-example>
-    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+<p>
+  The calendar is a picker interface that displays a date grid with month navigation, for users to
+  select a single date.
+</p>
+
+<h2 class="custom-example">Calendar in card</h2>
+<p>The calendar should in most use-cases be placed inside a card to stand out from the canvas.</p>
+<p>
+  By default any date is selectable for the user but various configurations can be applied to
+  restrict what dates users can select. For instance, the calendar can be configured with min and
+  max dates, disable weekends, disable specific dates and more.
+</p>
+
+<p>
+  This example showcases the many different options, and will also allow you to play around with
+  setting the
+  <code>selectedDate</code>
+  programmatically.
+</p>
+<cookbook-example-viewer
+  [html]="calendarCardExample.template"
+  [ts]="calendarCardExample.codeSnippet"
+>
+  <div class="example-frame">
+    <cookbook-calendar-card-example
+      #calendarCardExample
+      class="calendar-example"
+      [disableWeekends]="disableWeekends"
+      [disablePastDates]="disablePastDates"
+      [disableFutureDates]="disableFutureDates"
+      [setDisabledDates]="setDisabledDates"
+      [setEnabledDates]="setEnabledDates"
+      [setMinDate]="setMinDate"
+      [setMaxDate]="setMaxDate"
+      [setTodayDate]="setTodayDate"
+      [useTimezoneUTC]="useTimezoneUTC"
+      [showYearNavigator]="showYearNavigator"
+    ></cookbook-calendar-card-example>
+
+    <!-- prettier-ignore -->
+    <cookbook-example-configuration-wrapper configAppearance="toggle">
+      <kirby-checkbox size="xs" [(checked)]="disableWeekends" text="Disable weekends"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="alwaysEnableToday" text="Always enable current date"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="disablePastDates" text="Disable past dates"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="disableFutureDates" text="Disable future dates"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="setDisabledDates" text="Set disabled dates"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="setEnabledDates" text="Set enabled dates"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="setMinDate" text="Set min date ({{ minDate | date: 'dd-MM-yyyy' : (useTimezoneUTC ? 'UTC' : undefined) }})"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="setMaxDate" text="Set max date ({{ maxDate | date: 'dd-MM-yyyy' : (useTimezoneUTC ? 'UTC' : undefined) }})"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="setTodayDate" text="Set today date ({{ todayDate | date: 'dd-MM-yyyy' : (useTimezoneUTC ? 'UTC' : undefined) }})"></kirby-checkbox>
+      <kirby-checkbox size="xs" [(checked)]="useTimezoneUTC" text="Use UTC instead of local time"></kirby-checkbox>
+    </cookbook-example-configuration-wrapper>
   </div>
-  <h2 class="custom-example">Wrapped in card + custom buttons integration</h2>
-  <div class="calendar-example">
-    <div>
-      <cookbook-calendar-card-example
-        [disableWeekends]="disableWeekends"
-        [disablePastDates]="disablePastDates"
-        [disableFutureDates]="disableFutureDates"
-        [setDisabledDates]="setDisabledDates"
-        [setEnabledDates]="setEnabledDates"
-        [setMinDate]="setMinDate"
-        [setMaxDate]="setMaxDate"
-        [setTodayDate]="setTodayDate"
-        [useTimezoneUTC]="useTimezoneUTC"
-        [showYearNavigator]="showYearNavigator"
-      ></cookbook-calendar-card-example>
-    </div>
+</cookbook-example-viewer>
 
-    <div>
-      <!-- prettier-ignore -->
-      <fieldset>  
-        <legend>Configuration</legend>
-        <kirby-checkbox size="xs" [(checked)]="disableWeekends" text="Disable weekends"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="alwaysEnableToday" text="Always enable current date"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="disablePastDates" text="Disable past dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="disableFutureDates" text="Disable future dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setDisabledDates" text="Set disabled dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setEnabledDates" text="Set enabled dates"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setMinDate" text="Set min date ({{minDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setMaxDate" text="Set max date ({{maxDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="setTodayDate" text="Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="useTimezoneUTC" text="Use UTC instead of local time"></kirby-checkbox>
-        <kirby-checkbox size="xs" [(checked)]="showYearNavigator" text="Show year navigator"></kirby-checkbox>
-      </fieldset>
-    </div>
+<h2>Calendar with year navigator</h2>
+<p>
+  A year-navigator can be shown in the calendars header to provide quick navigation between years.
+</p>
+
+<cookbook-example-viewer [html]="yearNavigatorExample.template">
+  <div class="example-frame">
+    <cookbook-calendar-year-navigator-example
+      #yearNavigatorExample
+    ></cookbook-calendar-year-navigator-example>
   </div>
+</cookbook-example-viewer>
 
-  <cookbook-example-viewer
-    [html]="calendarCardExample.template"
-    [ts]="calendarCardExample.codeSnippet"
-  ></cookbook-example-viewer>
+<h2>Calendar without background</h2>
+<p>
+  The calendar comes with minimal styling out of the box and we recommend to place it in a
+  <code>kirby-card</code>
+  .
+</p>
 
-  <h4>Properties</h4>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
+<p>
+  In some rare use-cases it can be necessary to place the calendar on a different background or
+  directly on canvas, in which case the calendar can be used without any surrounding card.
+</p>
 
-  <h4>Events</h4>
-  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+<cookbook-example-viewer [html]="noBackgroundExample.template">
+  <div class="example-frame">
+    <cookbook-calendar-no-background-example
+      #noBackgroundExample
+    ></cookbook-calendar-no-background-example>
+  </div>
+</cookbook-example-viewer>
 
-  <h4>Locales</h4>
+<h2>Accessibility</h2>
+<p>
+  The calendar uses a table to provide an easily navigable grid of dates. Screen-reader users can
+  navigate using standard table navigation commands.
+</p>
 
-  <p>
-    The locale of the calendar (i.e. day and month names) can be set by providing a
-    <code>LOCALE_ID</code>
-    . The calendar currently supports LOCALE_IDs
-    <code>da</code>
-    ,
-    <code>en-GB</code>
-    and
-    <code>en-US</code>
-    and it defaults to
-    <code>en-GB</code>
-    if none is provided.
-  </p>
-  <p>
-    Usually the locale should be configured for the entire app, typically in
-    <code>AppModule</code>
-    like this:
-  </p>
+<p>
+  When using the calendar on another background than a white
+  <code>kirby-card</code>
+  , additional care should be taken by implementers to ensure proper contrast and readability of the
+  date grid and controls.
+</p>
 
-  <cookbook-code-viewer [ts]="moduleProviderExample"></cookbook-code-viewer>
-</div>
+<h2>Keyboard support</h2>
+<p>The calendar has full keyboard support to make it easier to navigate and select dates.</p>
+<p>The following keys can be used to move the currently focussed date:</p>
+<!-- prettier-ignore -->
+<ul>
+  <li>
+    <b>Arrow keys</b>
+    <ul>
+      <li>
+        <kbd>&#8592;</kbd> and <kbd>&#8594;</kbd> moves focus to previous and next day
+      </li>
+      <li>
+        <kbd>&#8593;</kbd> and <kbd>&#8595;</kbd> moves focus to same weekday of previous and next week
+      </li>
+    </ul>
+  </li>
+  <li>
+    <kbd>Home</kbd> and <kbd>End</kbd> moves focus to first day (Monday) and last day (Sunday) of the current week
+  </li>
+  <li>
+    <kbd>PageUp</kbd> and <kbd>PageDown</kbd> moves focus to same day of previous and next month
+  </li>
+  <li>
+    <kbd>Shift</kbd> + <kbd>PageUp</kbd> and <kbd>Shift</kbd> + <kbd>PageDown</kbd> moves focus to same day and month of previous and next year
+  </li>
+</ul>
+
+<!-- prettier-ignore -->
+<p>
+  When focussed, a date can be selected with <kbd>Enter &#8629;</kbd> and <kbd>Space</kbd>.
+</p>
+
+<h2>Specifying locale</h2>
+<p>
+  The locale of the calendar (i.e. day and month names) can be set by providing a
+  <code>LOCALE_ID</code>
+  . The calendar currently supports LOCALE_IDs
+  <code>da</code>
+  ,
+  <code>en-GB</code>
+  and
+  <code>en-US</code>
+  and it defaults to
+  <code>en-GB</code>
+  if none is provided.
+</p>
+<p>
+  Usually the locale should be configured for the entire app, typically in
+  <code>AppModule</code>
+  like this:
+</p>
+
+<cookbook-code-viewer [ts]="moduleProviderExample"></cookbook-code-viewer>
+
+<h2>Properties</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+
+<h2>Events</h2>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>

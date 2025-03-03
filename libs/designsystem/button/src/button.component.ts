@@ -6,6 +6,7 @@ import {
   ContentChild,
   ElementRef,
   HostBinding,
+  HostListener,
   Input,
   Renderer2,
 } from '@angular/core';
@@ -24,7 +25,6 @@ export enum ButtonSize {
 export type AttentionLevel = '1' | '2' | '3';
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button],a[kirby-button]',
@@ -152,6 +152,15 @@ export class ButtonComponent implements AfterContentInit {
       this._isIconLeft =
         this.elementRef.nativeElement.querySelector('.content-layer').firstChild === iconElement;
       this._isIconRight = !this._isIconLeft;
+    }
+  }
+
+  @HostListener('keydown.enter', ['$event'])
+  @HostListener('keydown.space', ['$event'])
+  _onEnterOrSpace(event: KeyboardEvent) {
+    if (this.elementRef.nativeElement.ariaDisabled === 'true') {
+      event.preventDefault();
+      event.stopImmediatePropagation();
     }
   }
 }

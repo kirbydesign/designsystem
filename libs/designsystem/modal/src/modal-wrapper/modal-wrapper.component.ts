@@ -23,11 +23,11 @@ import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { WindowRef } from '@kirbydesign/designsystem/types';
-import { PlatformService } from '@kirbydesign/designsystem/helpers';
+import { ResizeObserverService, TranslationService } from '@kirbydesign/designsystem/shared';
+import { UnobserveFn, WindowRef } from '@kirbydesign/designsystem/types';
+import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
@@ -51,7 +51,6 @@ const contentScrollDebounceTimeInMS = 10;
 const contentScrolledOffsetInPixels = 4;
 
 @Component({
-  standalone: true,
   imports: [
     RouterModule,
     ButtonComponent,
@@ -135,6 +134,7 @@ export class ModalWrapperComponent
   private initialViewportHeight: number;
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
+  private ionModalDialog?: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = firstValueFrom(this.ionModalDidPresent);
   private readonly ionModalWillDismiss = new Subject<void>();
@@ -143,7 +143,7 @@ export class ModalWrapperComponent
   private viewportResize$ = this.viewportResize
     .asObservable()
     .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
-  private _mutationObserver: MutationObserver;
+  private mutationObserverUnobserveFn: UnobserveFn;
   private _intersectionObserver: IntersectionObserver;
   private get intersectionObserver(): IntersectionObserver {
     if (!this._intersectionObserver) {
@@ -174,7 +174,8 @@ export class ModalWrapperComponent
     private windowRef: WindowRef,
     private platform: PlatformService,
     private canDismissHelper: CanDismissHelper,
-    private environmentInjector: EnvironmentInjector
+    private environmentInjector: EnvironmentInjector,
+    public translations: TranslationService
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
@@ -183,6 +184,7 @@ export class ModalWrapperComponent
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.ionModalDialog = getIonModalDialogAncestor(this.elementRef.nativeElement);
     this.initializeSizing();
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
@@ -204,6 +206,8 @@ export class ModalWrapperComponent
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
+
+    this.setAriaLabel();
   }
 
   private _currentFooter: HTMLElement | null = null;
@@ -394,6 +398,32 @@ export class ModalWrapperComponent
           }
         });
     });
+  }
+
+  private observeTitleContentChanges() {
+    this.mutationObserverUnobserveFn = observeContent(
+      this.ionTitleElement.nativeElement,
+      this.setAriaLabelFromTitleContent
+    );
+  }
+
+  private setAriaLabelFromTitleContent = () => {
+    const titleTextContent = this.ionTitleElement?.nativeElement.textContent;
+    if (this.ionModalDialog && titleTextContent) {
+      this.renderer.setAttribute(this.ionModalDialog, 'aria-label', titleTextContent);
+    }
+  };
+
+  private setAriaLabel() {
+    const ariaLabel = this.config.htmlAttributes?.['aria-label'];
+    const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
+
+    if (ionModalElementDialog && ariaLabel) {
+      this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
+    } else {
+      this.setAriaLabelFromTitleContent();
+      this.observeTitleContentChanges();
+    }
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
@@ -602,7 +632,7 @@ export class ModalWrapperComponent
       this.routerOutlet.deactivate();
     }
     //clean up the observer
-    delete this._mutationObserver;
+    this.mutationObserverUnobserveFn?.();
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
     if (this.resizeObserverService) {

@@ -22,9 +22,12 @@ describe('AccordionItemComponent', () => {
 
   describe('by default', () => {
     beforeEach(() => {
-      spectator = createHost(`<kirby-accordion-item>content</kirby-accordion-item>`, {
-        props: { title: 'Title' },
-      });
+      spectator = createHost(
+        `<kirby-accordion-item [title]="title" [hasPadding]="hasPadding">content</kirby-accordion-item>`,
+        {
+          hostProps: { title: 'Title', hasPadding: true },
+        }
+      );
     });
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
@@ -69,7 +72,7 @@ describe('AccordionItemComponent', () => {
     });
 
     it('should have no padding if hasPadding is false', () => {
-      spectator.setInput('hasPadding', false);
+      spectator.setHostInput('hasPadding', false);
       spectator.detectChanges();
 
       expect(spectator.query('.content-body')).toHaveComputedStyle({

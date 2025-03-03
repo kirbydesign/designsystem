@@ -1,13 +1,15 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
+import { TranslationService } from '@kirbydesign/designsystem/shared';
+import { ImageBannerHeightDirective } from './image-banner-height.directive';
 
 @Component({
   selector: 'kirby-x-image-banner',
-  standalone: true,
-  imports: [CardModule, ButtonComponent, IconModule, NgClass, CommonModule],
+  imports: [CardModule, ButtonComponent, IconModule, CommonModule],
+  hostDirectives: [ImageBannerHeightDirective],
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',
 })
@@ -54,6 +56,14 @@ export class ImageBannerComponent {
    */
   @Output() dismissClick = new EventEmitter<Event>();
 
+  /**
+   * If the input imagePath results in an error, it will be reflected in this output.
+   */
+  @Output()
+  imageError = new EventEmitter<ErrorEvent>();
+
+  constructor(public translations: TranslationService) {}
+
   public bannerClicked(event: Event) {
     const eventTarget = event.target as HTMLElement;
     const dismissButtonClicked = eventTarget.closest('.dismiss');
@@ -63,5 +73,9 @@ export class ImageBannerComponent {
 
   public dismissClicked(event: Event) {
     this.dismissClick.emit(event);
+  }
+
+  public onImageError($event: ErrorEvent) {
+    this.imageError.emit($event);
   }
 }

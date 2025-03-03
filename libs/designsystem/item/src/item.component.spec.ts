@@ -20,7 +20,9 @@ describe('ItemComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost('<kirby-item>Value</kirby-item>');
+    spectator = createHost(
+      '<kirby-item [disclosure]="disclosure" [selectable]="selectable" [rotateIcon]="rotateIcon">Value</kirby-item>'
+    );
   });
 
   it('should create', () => {
@@ -31,6 +33,14 @@ describe('ItemComponent', () => {
     expect(spectator.query('ion-item')).toHaveComputedStyle({
       '--min-height': itemHeight('m'),
     });
+  });
+
+  it('should not render a native button by default', async () => {
+    const ionItem = spectator.queryHost('ion-item');
+    await TestHelper.whenReady(ionItem);
+
+    const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+    expect(nativePart.tagName).not.toEqual('BUTTON');
   });
 
   describe('when configured with size', () => {
@@ -95,7 +105,7 @@ describe('ItemComponent', () => {
     });
 
     it('should make the disclosure wrapper element get the same height as its child (kirby-icon)', async () => {
-      spectator.setInput('disclosure', 'arrow-down');
+      spectator.setHostInput('disclosure', 'arrow-down');
       spectator.detectChanges();
 
       const disclosureWrapper = spectator.query<HTMLElement>('.disclosure');
@@ -108,11 +118,11 @@ describe('ItemComponent', () => {
 
     describe('when rotateIcon is set to true', () => {
       beforeEach(() => {
-        spectator.setInput('rotateIcon', true);
+        spectator.setHostInput('rotateIcon', true);
       });
 
       it('should rotate the icon 180deg if the disclosure icon is "arrow-down"', async () => {
-        spectator.setInput('disclosure', 'arrow-down');
+        spectator.setHostInput('disclosure', 'arrow-down');
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
@@ -128,7 +138,7 @@ describe('ItemComponent', () => {
       });
 
       it('should rotate the icon 180deg if the disclosure icon is "arrow-up"', async () => {
-        spectator.setInput('disclosure', 'arrow-up');
+        spectator.setHostInput('disclosure', 'arrow-up');
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
@@ -144,7 +154,7 @@ describe('ItemComponent', () => {
       });
 
       it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more"', async () => {
-        spectator.setInput('disclosure', 'arrow-more');
+        spectator.setHostInput('disclosure', 'arrow-more');
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
@@ -160,7 +170,7 @@ describe('ItemComponent', () => {
       });
 
       it('should NOT rotate the icon 180deg if the disclosure icon is "link"', async () => {
-        spectator.setInput('disclosure', 'link');
+        spectator.setHostInput('disclosure', 'link');
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
@@ -226,6 +236,26 @@ describe('ItemComponent', () => {
       spectator.detectChanges();
 
       expect(spectator.element).toHaveComputedStyle({ 'pointer-events': 'none' });
+    });
+  });
+
+  describe('when configured with selectable', () => {
+    it('should not render a native button when selectable="false"', async () => {
+      spectator.setHostInput('selectable', false);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
+
+      const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+      expect(nativePart.tagName).not.toEqual('BUTTON');
+    });
+
+    it('should render a native button when selectable="true"', async () => {
+      spectator.setHostInput('selectable', true);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
+
+      const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+      expect(nativePart.tagName).toEqual('BUTTON');
     });
   });
 });

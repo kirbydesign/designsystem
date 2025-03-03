@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
   Input,
   OnChanges,
+  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 
@@ -21,13 +23,15 @@ export enum IconSize {
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.kirby-icon]': 'true' },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
   private _icon = (this.icon = this.defaultIcon);
+  private element: HTMLElement;
+
   @HostBinding('class')
   @Input()
   size: IconSize | `${IconSize}`;
@@ -64,11 +68,28 @@ Do you have a typo in 'name' for a built-in icon or
 forgot to configure the custom icon through the 'IconRegistryService'?`);
   }
 
-  constructor(private iconRegistryService: IconRegistryService) {}
+  constructor(
+    private iconRegistryService: IconRegistryService,
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {
+    this.element = this.elementRef.nativeElement;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.iconRegistryService.getIcon(changes.name.currentValue);
+
+      // This will always run on first init - and again later if name is changed
+      // If name changes a new aria-label might have been added, so we need to check again.
+      this.setAriaHiddenIfNoLabel();
+    }
+  }
+
+  private setAriaHiddenIfNoLabel() {
+    const existingAriaLabel = this.element.hasAttribute('aria-label');
+    if (!existingAriaLabel) {
+      this.renderer.setAttribute(this.element, 'aria-hidden', 'true');
     }
   }
 }

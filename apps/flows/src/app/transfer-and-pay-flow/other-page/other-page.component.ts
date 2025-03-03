@@ -7,6 +7,7 @@ import { OtherService } from '../other.service';
   selector: 'flows-other-page',
   templateUrl: './other-page.component.html',
   styleUrls: ['./other-page.component.scss'],
+  standalone: false,
 })
 export class OtherPageComponent implements OnInit {
   public registerNumber: string;

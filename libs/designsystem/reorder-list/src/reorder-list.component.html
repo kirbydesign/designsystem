@@ -28,6 +28,6 @@
 
 <ng-template #defaultItemTemplate let-item let-isSubItem>
   <kirby-item [reorderable]="true">
-    <h3>{{ getItemTextDefault(item) }}</h3>
+    <p class="kirby-item-title">{{ getItemTextDefault(item) }}</p>
   </kirby-item>
 </ng-template>

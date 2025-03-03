@@ -28,6 +28,7 @@ let uniqueId = 0;
       transition('true <=> false', animate('0.2s')),
     ]),
   ],
+  standalone: false,
 })
 export class AccordionItemComponent implements OnChanges, AfterContentInit {
   @HostBinding('class.has-list') hasList: boolean = false;

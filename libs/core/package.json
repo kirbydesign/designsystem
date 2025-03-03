@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/core",
-  "version": "0.0.67",
+  "version": "0.0.69",
   "description": "Core styles and helpers for the Kirby Design System.",
   "type": "module",
   "main": "dist/index.js",
@@ -30,9 +30,15 @@
     "./scss/themes/colors": "./scss/themes/_colors.scss",
     "./scss/utils": "./scss/_utils.scss",
     "./scss/print": "./scss/print/_index.scss",
-    "./src/scss/*": {
-      "style": "./src/scss/*"
-    },
+    "./src/scss/base": "./src/scss/base/_index.scss",
+    "./src/scss/base/list": "./src/scss/base/_list.scss",
+    "./src/scss/base/item-typography": "./src/scss/base/_item-typography.scss",
+    "./src/scss/global-styles": "./src/scss/_global-styles.scss",
+    "./src/scss/interaction-state": "./src/scss/interaction-state/_index.scss",
+    "./src/scss/themes": "./src/scss/themes/_index.scss",
+    "./src/scss/utils": "./src/scss/_utils.scss",
+    "./src/scss/print": "./src/scss/print/_index.scss",
+    "./src/scss/opt-out": "./src/scss/opt-out/_index.scss",
     "./badge": {
       "types": "./dist/types/badge/index.d.ts",
       "default": "./dist/badge/index.js"

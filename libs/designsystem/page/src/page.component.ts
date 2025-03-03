@@ -60,7 +60,11 @@ import {
   ModalElementType,
   ModalNavigationService,
 } from '@kirbydesign/designsystem/modal';
-import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import {
+  FitHeadingConfig,
+  ResizeObserverService,
+  TranslationService,
+} from '@kirbydesign/designsystem/shared';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -96,21 +100,25 @@ export interface PullToRefreshEvent {
 
 @Directive({
   selector: '[kirbyPageTitle]',
+  standalone: false,
 })
 export class PageTitleDirective {}
 
 @Directive({
   selector: '[kirbyPageSubtitle]',
+  standalone: false,
 })
 export class PageSubtitleDirective {}
 
 @Directive({
   selector: '[kirbyPageToolbarTitle]',
+  standalone: false,
 })
 export class PageToolbarTitleDirective {}
 
 @Directive({
   selector: '[kirbyPageActions]',
+  standalone: false,
 })
 export class PageActionsDirective {
   @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
@@ -134,6 +142,7 @@ export class PageActionsDirective {
 
 @Directive({
   selector: '[kirbyPageContent]',
+  standalone: false,
 })
 export class PageContentDirective {
   @Input('kirbyPageContent') config: fixedConfig;
@@ -147,6 +156,7 @@ export class PageContentDirective {
 
 @Directive({
   selector: '[kirbyPageStickyContent]',
+  standalone: false,
 })
 export class PageStickyContentDirective {}
 
@@ -163,6 +173,7 @@ export class PageStickyContentDirective {}
       }
     `,
   ],
+  standalone: false,
 })
 export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
@@ -181,6 +192,7 @@ export class PageProgressComponent extends ModalElementComponent {
   template: `
     <ng-content></ng-content>
   `,
+  standalone: false,
 })
 export class PageTitleComponent extends ModalElementComponent {
   constructor(
@@ -196,6 +208,7 @@ export class PageTitleComponent extends ModalElementComponent {
   template: `
     <ng-content></ng-content>
   `,
+  standalone: false,
 })
 export class PageContentComponent {}
 
@@ -212,6 +225,7 @@ export class PageContentComponent {}
       }
     `,
   ],
+  standalone: false,
 })
 export class PageActionsComponent {}
 
@@ -221,6 +235,7 @@ export class PageActionsComponent {}
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [IonicElementPartHelper],
+  standalone: false,
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
@@ -364,7 +379,8 @@ export class PageComponent
     private routerOutlet: IonRouterOutlet,
     @Optional()
     private navCtrl: NavController,
-    private ionicElementPartHelper: IonicElementPartHelper
+    private ionicElementPartHelper: IonicElementPartHelper,
+    public translations: TranslationService
   ) {}
 
   private contentReadyPromise: Promise<void>;

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-item-example-avatar',
@@ -6,7 +9,7 @@ const config = {
   <kirby-avatar overlay="true" slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
-  <h3>Title</h3>
+  <p class="kirby-item-title">Title</p>
   <data slot="end" value="-849.00">-849,00</data>
 </kirby-item>`,
 };
@@ -14,6 +17,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemModule, AvatarComponent, IconModule],
 })
 export class ItemExampleAvatarComponent {
   template: string = config.template;

@@ -1,11 +1,39 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { RouterLink } from '@angular/router';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { CheckboxConfirmExampleComponent } from '../../examples/checkbox-example/examples/confirm';
+import { CheckboxDefaultExampleComponent } from '../../examples/checkbox-example/examples/default';
+import { CheckboxListExampleComponent } from '../../examples/checkbox-example/examples/list';
+import { CheckboxStatesExampleComponent } from '../../examples/checkbox-example/examples/states';
+import { CheckboxSizesExampleComponent } from '../../examples/checkbox-example/examples/sizes';
+import { CheckboxMultilineExampleComponent } from '../../examples/checkbox-example/examples/multiline';
+import { CheckboxEventsExampleComponent } from '../../examples/checkbox-example/examples/events';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { CheckboxReactiveFormsExampleComponent } from '../../examples/checkbox-example/examples/reactive-forms';
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
 @Component({
   selector: 'cookbook-checkbox-showcase',
   templateUrl: './checkbox-showcase.component.html',
   styleUrls: ['./checkbox-showcase.component.scss'],
+  imports: [
+    ExampleViewerComponent,
+    CheckboxConfirmExampleComponent,
+    CheckboxDefaultExampleComponent,
+    RouterLink,
+    CheckboxListExampleComponent,
+    CheckboxStatesExampleComponent,
+    CheckboxSizesExampleComponent,
+    CheckboxMultilineExampleComponent,
+    CheckboxEventsExampleComponent,
+    CodeViewerComponent,
+    CheckboxReactiveFormsExampleComponent,
+    ApiDescriptionPropertiesComponent,
+    ApiDescriptionEventsComponent,
+  ],
 })
 export class CheckboxShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

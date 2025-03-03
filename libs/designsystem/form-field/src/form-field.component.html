@@ -1,24 +1,39 @@
 <label *ngIf="_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+
+  <!-- add error message inside label if nested interative is in error state -->
+  <ng-container *ngIf="_nestedInteractiveHasError">
+    <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
+  </ng-container>
 </label>
+
+<!-- add message outside label if nested interative is in valid state -->
+<ng-container *ngIf="!_nestedInteractiveHasError && _wrapContentInLabel">
+  <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
+</ng-container>
 
 <ng-container *ngIf="!_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+  <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
 </ng-container>
 
-<div *ngIf="message !== undefined || counter" class="texts">
-  <kirby-form-field-message
-    *ngIf="message !== undefined"
-    class="message"
-    [text]="message"
-  ></kirby-form-field-message>
+<ng-template #messageTemplate>
+  <div *ngIf="message !== undefined || counter" class="texts">
+    <kirby-form-field-message
+      *ngIf="message !== undefined"
+      class="message"
+      [text]="message"
+      [attr.aria-live]="_nestedInteractiveHasError ? 'polite' : null"
+      [attr.id]="_nestedInteractiveHasError ? _errorMessageId : _messageId"
+    ></kirby-form-field-message>
 
-  <div *ngIf="counter" class="counter">
-    <ng-content select="kirby-input-counter"></ng-content>
+    <div *ngIf="counter" class="counter" aria-hidden="true">
+      <ng-content select="kirby-input-counter"></ng-content>
+    </div>
   </div>
-</div>
+</ng-template>
 
 <ng-template #slottedInputTemplate>
   <div class="affix-container">

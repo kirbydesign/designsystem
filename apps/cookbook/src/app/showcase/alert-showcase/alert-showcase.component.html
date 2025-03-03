@@ -37,7 +37,29 @@ private onAlertClose(result: boolean) {{ '{' }}
     ...
 {{ '}' }}</cookbook-code-viewer>
   </p>
-  <h4>Alert config properties:</h4>
+
+  <h2>Accessibility</h2>
+  <p>
+    Alerts have a
+    <!-- prettier-ignore -->
+    <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role">dialog</a>
+    role and implement focus management and keyboard support accordingly.
+  </p>
+  <p>
+    When opened, focus is moved into the alert. Focus is trapped within the alert while it is open,
+    preventing users from navigating to elements outside the alert. Upon closing, focus is moved
+    back to where it was before showing the alert.
+  </p>
+
+  <h3>Labeling</h3>
+  <p>
+    The alert title is automatically used as a label to add context for assistive technologies. For
+    example, screen readers use the label to announce when the modal dialog appears and to give
+    proper context when interacting with the content within.
+  </p>
+  <p>This emphasizes the importance of providing a meaningful title for all alerts.</p>
+
+  <h2>Alert config properties</h2>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>

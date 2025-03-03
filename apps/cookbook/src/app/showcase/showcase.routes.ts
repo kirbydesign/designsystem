@@ -56,7 +56,7 @@ import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 
-export const routes: Routes = [
+export const SHOWCASE_ROUTES: Routes = [
   {
     path: '',
     component: ShowcaseComponent,
@@ -227,8 +227,13 @@ export const routes: Routes = [
         component: SegmentedControlShowcaseComponent,
       },
       {
-        path: 'empty-state',
+        path: 'message-state',
         component: EmptyStateShowcaseComponent,
+      },
+      {
+        path: 'empty-state',
+        redirectTo: 'message-state',
+        pathMatch: 'full',
       },
       {
         path: 'toolbar',

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { SegmentItem } from '@kirbydesign/designsystem';
+import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   template: `<div class="wrapper">
@@ -22,8 +25,8 @@ const config = {
 <kirby-list [items]="filteredListItems">
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-label>
-      <h3>{{ item.title }}</h3>
-      <p detail>{{ item.mix.join(', ') }}</p>
+      <p class="kirby-item-title">{{ item.title }}</p>
+      <p class="kirby-item-detail">{{ item.mix.join(', ') }}</p>
     </kirby-label>
     <kirby-label slot="end">
       <data [value]="item.count">{{ item.count }}</data>
@@ -77,6 +80,7 @@ onSegmentSelect(segment: SegmentItem) {
   selector: 'cookbook-segmented-control-example-grouped',
   template: config.template,
   styles: config.styles,
+  imports: [SegmentedControlComponent, ButtonComponent, ListModule, ItemModule],
 })
 export class SegmentedControlExampleGroupedComponent {
   template: string = config.template;

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
+import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-group-with-section-header-example',
@@ -8,8 +11,8 @@ const config = {
   </kirby-section-header>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
-      <p detail>Detail</p>
+      <p class="kirby-text-normal-bold">Title</p>
+      <p class="kirby-item-detail">Detail</p>
     </kirby-label>
     <kirby-label slot="end">
       <data>Value</data>
@@ -17,8 +20,8 @@ const config = {
   </kirby-item>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
-      <p detail>Detail</p>
+      <p class="kirby-text-normal-bold">Title</p>
+      <p class="kirby-item-detail">Detail</p>
     </kirby-label>
     <kirby-label slot="end">
       <data>Value</data>
@@ -31,8 +34,8 @@ const config = {
   </kirby-section-header>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
-      <p detail>Detail</p>
+      <p class="kirby-text-normal-bold">Title</p>
+      <p class="kirby-item-detail">Detail</p>
     </kirby-label>
     <kirby-label slot="end">
       <data>Value</data>
@@ -40,8 +43,8 @@ const config = {
   </kirby-item>
   <kirby-item>
     <kirby-label>
-      <h3 class="kirby-text-bold">Title</h3>
-      <p detail>Detail</p>
+      <p class="kirby-text-normal-bold">Title</p>
+      <p class="kirby-item-detail">Detail</p>
     </kirby-label>
     <kirby-label slot="end">
       <data>Value</data>
@@ -53,6 +56,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  imports: [ItemGroupComponent, SectionHeaderComponent, ItemModule],
 })
 export class ItemGroupWithSectionHeaderExampleComponent {
   template: string = config.template;

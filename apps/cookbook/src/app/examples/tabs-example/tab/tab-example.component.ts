@@ -3,15 +3,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/designsystem';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
+import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 
 @Component({
   template: `
     <kirby-page [title]="title | async">
       <kirby-page-actions *kirbyPageActions>
-        <button kirby-button (click)="onCogSelect()">
+        <button kirby-button (click)="onCogSelect()" aria-label="Settings">
           <kirby-icon name="cog"></kirby-icon>
         </button>
-        <button kirby-button (click)="onMoreSelect()">
+        <button kirby-button (click)="onMoreSelect()" aria-label="More">
           <kirby-icon name="more"></kirby-icon>
         </button>
       </kirby-page-actions>
@@ -67,6 +73,15 @@ import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/desi
       </kirby-fab-sheet>
     </kirby-page>
   `,
+  imports: [
+    PageModule,
+    ButtonComponent,
+    IconModule,
+    NgIf,
+    FabSheetComponent,
+    ActionSheetComponent,
+    AsyncPipe,
+  ],
 })
 export class TabExampleComponent implements OnInit {
   title: Observable<string>;

@@ -5,26 +5,26 @@ import {
   Injector,
   Input,
   OnInit,
+  Renderer2,
   TemplateRef,
 } from '@angular/core';
 import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { CommonModule } from '@angular/common';
+import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 import { ModalConfig, ShowAlertCallback } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
 import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
 
 @Component({
-  standalone: true,
   selector: 'kirby-modal-compact-wrapper',
   templateUrl: './modal-compact-wrapper.component.html',
   styleUrls: ['./modal-compact-wrapper.component.scss'],
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
   imports: [CommonModule],
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
+  host: { '[class.ion-page]': 'false' },
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
   @Input() config: ModalConfig;
@@ -44,11 +44,14 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private windowRef: WindowRef,
-    private canDismissHelper: CanDismissHelper
+    private canDismissHelper: CanDismissHelper,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.setAriaLabel();
+
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
@@ -75,10 +78,17 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     }
   }
 
+  private setAriaLabel() {
+    const ionModalElementDialog = getIonModalDialogAncestor(this.ionModalElement);
+    const ariaLabel = this.config.htmlAttributes?.['aria-label'];
+    if (ionModalElementDialog && ariaLabel) {
+      this.renderer.setAttribute(ionModalElementDialog, 'aria-label', ariaLabel);
+    }
+  }
+
   async close(data?: any): Promise<void> {
-    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    if (ionModalElement) {
-      await ionModalElement.dismiss(data);
+    if (this.ionModalElement) {
+      await this.ionModalElement.dismiss(data);
     }
   }
 

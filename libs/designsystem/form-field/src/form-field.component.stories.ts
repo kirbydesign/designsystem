@@ -7,12 +7,14 @@ import {
   TextareaComponent,
 } from '@kirbydesign/designsystem/form-field';
 
+import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
+
 const meta: Meta<FormFieldComponent> = {
   component: FormFieldComponent,
   title: 'Components / FormField',
   decorators: [
     moduleMetadata({
-      imports: [FormFieldModule, InputComponent, TextareaComponent],
+      imports: [FormFieldModule, InputComponent, TextareaComponent, FormFieldExampleComponent],
     }),
   ],
 };
@@ -46,5 +48,11 @@ export const InputCounter: Story = {
     <input kirby-input placeholder="Input Counter" #input maxlength="140" />
     <kirby-input-counter [listenTo]="input"></kirby-input-counter>
   </kirby-form-field>`,
+  }),
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-form-field-example></cookbook-form-field-example>`,
   }),
 };
