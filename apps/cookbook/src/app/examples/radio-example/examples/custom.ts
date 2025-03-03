@@ -11,7 +11,7 @@ const items = [
 
 const config = {
   selector: 'cookbook-radio-custom-content-example',
-  template: `<kirby-radio-group [value]="selected" [items]="items">
+  template: `<kirby-radio-group [value]="selected" [items]="items" aria-label="Select main course">
   <div
     *kirbyListItemTemplate="let item; let selected = selected"
     [class.is-selected]="selected"
