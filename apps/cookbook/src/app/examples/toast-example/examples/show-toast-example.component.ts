@@ -32,7 +32,7 @@ export class ShowToastExampleComponent {
       message:
         messageType === 'warning' ? 'Your warning toast message' : 'Your successful toast message',
       messageType,
-      durationInMs: 5000,
+      durationInMs: 5000000,
     };
     this.toastController.showToast(config, this.onToastClosed);
   }
