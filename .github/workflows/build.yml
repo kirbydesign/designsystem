@@ -81,7 +81,7 @@ jobs:
       - name: Build Kirby Cookbook
         run: npx nx build cookbook --configuration=production
       - name: Upload Kirby Cookbook dist files
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             dist/
@@ -156,7 +156,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Download Kirby Cookbook dist files
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             dist/
