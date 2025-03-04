@@ -89,6 +89,7 @@ import { ModalExampleAlertWithGuardComponent } from './modal-example/modal-examp
 import { ModalEmbeddedAlertExampleComponent } from './modal-example/alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
+import { ShowToastExampleComponent } from './toast-example/examples/show-toast-example.component';
 
 export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
@@ -515,6 +516,17 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'toast',
     component: ToastExampleComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'show-toast',
+      },
+      {
+        path: 'show-toast',
+        component: ShowToastExampleComponent,
+      },
+    ],
   },
   {
     path: 'toggle',

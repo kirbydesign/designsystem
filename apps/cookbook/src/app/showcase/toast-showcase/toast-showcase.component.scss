@@ -1,0 +1,8 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+.page-example {
+  display: flex;
+  justify-content: space-between;
+  margin-top: utils.size('xl');
+  margin-bottom: utils.size('xl');
+}

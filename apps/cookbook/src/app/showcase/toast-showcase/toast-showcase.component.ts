@@ -1,14 +1,23 @@
 import { Component } from '@angular/core';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import exampleHtml from '../../examples/toast-example/toast-example.component.html?raw';
 import { ToastExampleComponent } from '../../examples/toast-example/toast-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { IphoneComponent } from '~/app/iphone/iphone.component';
 
 @Component({
   selector: 'cookbook-toast-showcase',
   templateUrl: './toast-showcase.component.html',
-  imports: [ToastExampleComponent, CodeViewerComponent, ApiDescriptionPropertiesComponent],
+  styleUrl: './toast-showcase.component.scss',
+  imports: [
+    ToastExampleComponent,
+    CodeViewerComponent,
+    ApiDescriptionPropertiesComponent,
+    IphoneComponent,
+    FlagComponent,
+  ],
 })
 export class ToastShowcaseComponent {
   exampleHtml = exampleHtml;
