@@ -20,6 +20,7 @@ describe('AmountService', () => {
         provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
         useValue: {
           nativeCurrency: 'DKK',
+          currencyMappings: { DKK: 'kr.' },
         },
       },
     ],
@@ -65,5 +66,29 @@ describe('AmountService', () => {
         returnValueOnEmptyAmount,
       })
     ).toBe(returnValueOnEmptyAmount);
+  });
+
+  it('should show currencyMapping', () => {
+    const amount: Amount = {
+      amount: 13.37,
+      currencyCode: 'DKK',
+    };
+    expect(
+      spectator.service.formatAmount(amount, {
+        showCurrencyCode: 'showCustomCurrencySymbol',
+      })
+    ).toBe('kr. 13,37');
+  });
+
+  it('should show fallback currency', () => {
+    const amount: Amount = {
+      amount: 13.37,
+      currencyCode: 'EUR',
+    };
+    expect(
+      spectator.service.formatAmount(amount, {
+        showCurrencyCode: 'showCustomCurrencySymbol',
+      })
+    ).toBe('EUR 13,37');
   });
 });

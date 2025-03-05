@@ -59,7 +59,11 @@ export function deriveConfiguration(configuration: AmountServiceConfiguration = 
   return Object.assign({}, config, configuration);
 }
 
-export type ShowCurrencyCode = '' | 'alwaysShowCurrency' | 'showForeignCurrency';
+export type ShowCurrencyCode =
+  | ''
+  | 'alwaysShowCurrency'
+  | 'showForeignCurrency'
+  | 'showCustomCurrencySymbol';
 export type CurrencyCodePosition = '' | 'prefix' | 'postfix';
 
 export interface AmountServiceConfiguration {
