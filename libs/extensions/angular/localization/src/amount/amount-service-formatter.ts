@@ -42,7 +42,7 @@ export function deriveCurrencyCode(
       currencyCodeToAppend =
         amount.currencyCode !== config.nativeCurrency ? amount.currencyCode : '';
     } else if (amountConfig.showCurrencyCode === 'showCustomCurrencySymbol') {
-      currencyCodeToAppend = config.currencyMappings?.[amount.currencyCode] || '';
+      currencyCodeToAppend = config.currencyMappings?.[amount.currencyCode] || amount.currencyCode;
     }
   }
 
