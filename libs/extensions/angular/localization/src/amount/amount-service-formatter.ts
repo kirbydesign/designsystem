@@ -41,7 +41,7 @@ export function deriveCurrencyCode(
     } else if (amountConfig.showCurrencyCode === 'showForeignCurrency') {
       currencyCodeToAppend =
         amount.currencyCode !== config.nativeCurrency ? amount.currencyCode : '';
-    } else if (amountConfig.showCurrencyCode === 'showCurrencySymbol') {
+    } else if (amountConfig.showCurrencyCode === 'showCustomCurrencySymbol') {
       currencyCodeToAppend = config.currencyMappings?.[amount.currencyCode] || '';
     }
   }
@@ -67,7 +67,7 @@ export interface AmountServiceConfiguration {
    * - '' - don't output CurrencyCode
    * - 'alwaysShowCurrency' - always shows CurrencyCode, regardless of presentation currency
    * - 'showForeignCurrency' - only show CurrencyCode if it differs from the presentation currency
-   * - 'showCurrencySymbol' - Shows the currency symbol defined in KirbyExtensionsLocalizationToken.currencyMappings instead of the currency code
+   * - 'showCustomCurrencySymbol' - Shows the currency symbol defined in KirbyExtensionsLocalizationToken.currencyMappings instead of the currency code. Fallback to currencyCode
    */
   showCurrencyCode?: ShowCurrencyCode;
   /**

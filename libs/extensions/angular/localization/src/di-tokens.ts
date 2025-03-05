@@ -12,6 +12,10 @@ export function provideKirbyExtensionsLocalizationToken(
   };
 }
 
+type DkkMapping = Record<'DKK', 'kr.'>;
+
+type CurrencyMappings = DkkMapping & Record<string, string>;
+
 export interface KirbyExtensionsLocalizationToken {
   /**
    * @example 'DKK | EUR'
@@ -35,5 +39,5 @@ export interface KirbyExtensionsLocalizationToken {
   /**
    * @example { 'DKK': 'kr.', 'EUR': '€' }
    */
-  currencyMappings?: Record<string, string>;
+  currencyMappings?: CurrencyMappings;
 }
