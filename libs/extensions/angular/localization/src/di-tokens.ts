@@ -12,9 +12,9 @@ export function provideKirbyExtensionsLocalizationToken(
   };
 }
 
-interface KirbyExtensionsLocalizationToken {
+export interface KirbyExtensionsLocalizationToken {
   /**
-   * @example 'DKK | kr. | EUR'
+   * @example 'DKK | EUR'
    */
   nativeCurrency: string;
   /**
@@ -32,4 +32,8 @@ interface KirbyExtensionsLocalizationToken {
    * @example 'Europe/Copenhagen'
    */
   timeZone: string;
+  /**
+   * @example { 'DKK': 'kr.', 'EUR': '€' }
+   */
+  currencyMappings?: Record<string, string>;
 }
