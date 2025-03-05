@@ -23,10 +23,7 @@ $desktop-gutter: minmax(utils.size('m'), 1fr);
   min-height: 100vh;
 
   @include utils.media('>=large') {
-    grid-template-columns: $desktop-gutter $sidebar-width minmax(
-        0,
-        $content-max-width
-      ) $desktop-gutter;
+    grid-template-columns: $desktop-gutter $sidebar-width minmax(0, $content-max-width) $desktop-gutter;
     grid-template-rows: $header-height-desktop minmax(0, 1fr) $footer-height;
     grid-template-areas:
       '. header header .'
