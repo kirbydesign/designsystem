@@ -37,7 +37,7 @@ export interface KirbyExtensionsLocalizationToken {
    */
   timeZone: string;
   /**
-   * @example { 'DKK': 'kr.', 'EUR': '€' }
+   * @example { DKK: 'kr.', EUR: '€' }
    */
   currencyMappings?: CurrencyMappings;
 }
