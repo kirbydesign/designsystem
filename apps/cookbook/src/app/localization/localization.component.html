@@ -5,11 +5,13 @@
     <code>kirby-calendar</code>
     and
     <code>input type="date"</code>
-    to automatically format values according to locale. Support has been added for three locales out
+    to automatically format values according to locale. Support has been added for four locales out
     of the box: American English (
     <code>en-US</code>
     ), British English (
     <code>en-GB</code>
+    ), German (
+    <code>de</code>
     ) and Danish (
     <code>da</code>
     ).
@@ -62,6 +64,17 @@
             altText="English locale"
           ></kirby-avatar>
         </cookbook-en-locale-provider>
+        <cookbook-de-locale-provider>
+          <kirby-card>
+            <kirby-calendar [selectedDate]="selectedDate"></kirby-calendar>
+          </kirby-card>
+          <kirby-avatar
+            class="locale-avatar"
+            size="sm"
+            imageSrc="assets/images/de.svg"
+            altText="German locale"
+          ></kirby-avatar>
+        </cookbook-de-locale-provider>
       </div>
     </div>
   </cookbook-example-viewer>
