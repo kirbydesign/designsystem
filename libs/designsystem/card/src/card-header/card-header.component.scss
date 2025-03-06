@@ -15,10 +15,8 @@
   }
 }
 
-h2 {
-  font-size: utils.font-size('n');
-  font-weight: utils.font-weight('normal');
-  margin: 0 0 var(--kirby-internal-card-header-margin-bottom, utils.size('xxs'));
+.title {
+  margin-bottom: var(--kirby-internal-card-header-margin-bottom, utils.size('xxs'));
   line-height: var(--kirby-internal-card-header-line-height, utils.line-height('l'));
 
   &.bold {
@@ -26,10 +24,9 @@ h2 {
   }
 }
 
-h4 {
+.subtitle {
   font-size: utils.font-size('s');
-  margin: 0;
-  font-weight: utils.font-weight('normal');
+  margin-bottom: 0;
 }
 
 // Flagged card headers
@@ -66,7 +63,7 @@ $_card-header-notification-colors-map: (
 :host(.flagged) {
   --kirby-internal-card-header-padding: #{utils.size('xxxxs')} #{utils.size('xxs')};
 
-  h2 {
+  p {
     --kirby-internal-card-header-line-height: #{utils.line-height('n')};
     --kirby-internal-card-header-margin-bottom: 0px;
   }
