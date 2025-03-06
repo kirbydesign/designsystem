@@ -75,7 +75,7 @@ describe('AmountService', () => {
     };
     expect(
       spectator.service.formatAmount(amount, {
-        showCurrencyCode: 'showCustomCurrencySymbol',
+        showCurrencyCode: 'useCurrencyMapping',
       })
     ).toBe('kr. 13,37');
   });
@@ -87,7 +87,7 @@ describe('AmountService', () => {
     };
     expect(
       spectator.service.formatAmount(amount, {
-        showCurrencyCode: 'showCustomCurrencySymbol',
+        showCurrencyCode: 'useCurrencyMapping',
       })
     ).toBe('EUR 13,37');
   });

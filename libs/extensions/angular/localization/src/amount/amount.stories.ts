@@ -50,7 +50,7 @@ class AmountExampleComponent {
  *   - `''`: Don't output currency code
  *   - `'alwaysShowCurrency'`: Always show currency code, regardless of presentation currency
  *   - `'showForeignCurrency'`: Only show currency code if it differs from the presentation currency
- *   - `'showCustomCurrencySymbol'`: - Shows the currency symbol defined in `KirbyExtensionsLocalizationToken.currencyMappings` instead of the currency code. Fallback to currencyCode
+ *   - `'useCurrencyMapping'`: - Shows the currency symbol defined in `KirbyExtensionsLocalizationToken.currencyMappings` instead of the currency code. Fallback to currencyCode
  * - `digitsInfo`: A string that represents the format of the number. Learn more about the format here: https://angular.dev/api/common/DecimalPipe?tab=usage-notes
  *  - `stripSign`: Controls whether the minus sign should be stripped from a negative amount.
  * - `currencyCodePosition`: Controls the position of the currency code in the formatted amount.
@@ -128,11 +128,11 @@ export const AmountDKK: Story = {
 /**
  * Here the amount is formatted with a custom currency symbol kr. instead of the currency code DKK
  */
-export const AmountCustomSymbol: Story = {
+export const AmountCurrentMapping: Story = {
   args: {
     myAmount: { amount: 123456, currencyCode: 'DKK' },
     amountServiceConfiguration: {
-      showCurrencyCode: 'showCustomCurrencySymbol',
+      showCurrencyCode: 'useCurrencyMapping',
       currencyCodePosition: 'postfix',
     },
   },
@@ -142,7 +142,7 @@ export const AmountCustomSymbol: Story = {
         language: 'tsx', // Using tsx here to get better syntax highlighting
         code: `<p>
           {{ myAmount /* e.g. { amount: 123456, currencyCode: 'DKK' } */ | amount: {
-        showCurrencyCode: 'showCustomCurrencySymbol',
+        showCurrencyCode: 'useCurrencyMapping',
         currencyCodePosition: 'postfix',
       } 
       }}
