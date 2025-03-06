@@ -16,12 +16,9 @@ $avatar-offset: -1 * utils.size('s');
 .locale-examples {
   display: flex;
   justify-content: center;
-  gap: var(--kirby-spacing-xxxl);
-
-  @container (width < #{map.get(utils.$breakpoints, small)}) {
-    flex-direction: column;
-    align-items: center;
-  }
+  flex-wrap: wrap;
+  gap: var(--kirby-spacing-xxl);
+  padding: 0 16px;
 }
 
 .locale-avatar {
