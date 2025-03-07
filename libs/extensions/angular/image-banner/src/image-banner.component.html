@@ -1,12 +1,12 @@
 @if (externalLink) {
-  <kirby-card [themeColor]="backgroundBlur === 'dark' ? 'dark' : 'white'">
+  <kirby-card [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur">
     <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
   </kirby-card>
 }
 
 @if (!externalLink) {
   <kirby-card
-    [themeColor]="backgroundBlur === 'dark' ? 'dark' : 'white'"
+    [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur"
     (click)="bannerClicked($event)"
   >
     <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
@@ -50,7 +50,7 @@
           </span>
         </div>
 
-        @if (!showButtonInMobileView && externalLink) {
+        @if (!showButtonInNarrowView && externalLink) {
           <div class="main-content-body-action-link">
             <kirby-icon name="link"></kirby-icon>
           </div>
@@ -61,7 +61,7 @@
           <a
             kirby-button
             class="main-content-body-action-text"
-            [class.visible]="showButtonInMobileView"
+            [class.visible]="showButtonInNarrowView"
             [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
             [href]="externalLink"
             target="_blank"
@@ -78,7 +78,7 @@
 
         @if (!externalLink) {
           <button
-            [class.visible]="showButtonInMobileView"
+            [class.visible]="showButtonInNarrowView"
             class="main-content-body-action-text"
             kirby-button
             [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"

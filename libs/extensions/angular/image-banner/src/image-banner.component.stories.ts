@@ -10,44 +10,20 @@ const meta: Meta<ImageBannerComponent> = {
   component: ImageBannerComponent,
   title: 'Components/Banner/Image Banner',
   parameters: {
-    actions: {
-      handles: ['dismissClick'],
-    },
-    controls: {
-      exclude: ['bannerClicked', 'dismissClicked', 'onImageError', 'translations'],
-    },
-    chromatic: {
-      modes: {
-        ...responsiveModes,
-      },
-    },
+    actions: { handles: ['dismissClick'] },
+    controls: { exclude: ['bannerClicked', 'dismissClicked', 'onImageError', 'translations'] },
+    chromatic: { modes: { ...responsiveModes } },
   },
   argTypes: {
-    title: {
-      control: 'text',
-    },
-    bodyText: {
-      control: 'text',
-    },
-    actionButtonText: {
-      control: 'text',
-    },
-    imagePath: {
-      control: 'text',
-    },
-    bannerClick: {
-      control: false,
-    },
-    dismissClick: {
-      control: false,
-    },
-    imageError: {
-      control: false,
-    },
-    showButtonInMobileView: { control: 'boolean' },
-    externalLink: {
-      control: 'text',
-    },
+    title: { control: 'text' },
+    bodyText: { control: 'text' },
+    actionButtonText: { control: 'text' },
+    imagePath: { control: 'text' },
+    bannerClick: { control: false },
+    dismissClick: { control: false },
+    imageError: { control: false },
+    showButtonInNarrowView: { control: 'boolean' },
+    externalLink: { control: 'text' },
   },
 };
 export default meta;
@@ -60,7 +36,6 @@ export const Default: Story = {
   args: {
     title: 'An Image Banner',
     bodyText: 'This is the body text.',
-    actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
     backgroundBlur: 'dark',
   },
@@ -77,7 +52,6 @@ export const LightBackgroundBlur: Story = {
     bodyText: 'This is the body text.',
     imagePath: 'assets/images/leaves.jpg',
     backgroundBlur: 'light',
-    actionButtonText: 'Read more',
   },
 };
 
@@ -85,7 +59,6 @@ export const NoBackgroundBlur: Story = {
   args: {
     title: 'No Background Blur',
     bodyText: 'This is the body text.',
-    actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
     backgroundBlur: 'none',
   },
@@ -112,7 +85,6 @@ export const NoDismiss: Story = {
   args: {
     title: 'No Dismiss in Banner',
     bodyText: 'This is the body text.',
-    actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
     dismissClick: undefined,
   },
@@ -128,7 +100,7 @@ export const NoDismiss: Story = {
  * If these defaults are unwanted custom `title` and `bodyText` markup can instead be provided to the image banner which can be styled as needed.
  */
 export const CustomContent: Story = {
-  args: { actionButtonText: 'Read more', imagePath: 'assets/images/leaves.jpg' },
+  args: { imagePath: 'assets/images/leaves.jpg' },
 
   render: (args) => ({
     props: args,
@@ -148,13 +120,11 @@ export const CustomContent: Story = {
 /**
  * The components min-height can be overridden with the custom css property `--kirby-x-image-banner-min-height`.
  * In this case it is set to `auto` to allow the image banners height to adjust automatically when only a title is set.
- *  Here the button is also shown in the narrow view by switching on the `showButtonInMobileView`.
  */
 export const CustomMinimumHeight: Story = {
   args: {
     title: 'This card is narrow and only has a title',
     imagePath: 'assets/images/leaves.jpg',
-    showButtonInMobileView: true,
   },
 
   render: (args) => ({
@@ -169,6 +139,28 @@ export const CustomMinimumHeight: Story = {
 };
 
 /**
+ *  You can toggle the `showButtonInNarrowView` to true to make the button appear in narrow views in addition to in the full width view.
+ */
+
+export const ButtonInNarrowView: Story = {
+  args: {
+    showButtonInNarrowView: true,
+    title: 'This card is narrow, but has the button shown',
+    bodyText: 'This is the body text.',
+    imagePath: 'assets/images/leaves.jpg',
+  },
+  render: (args) => ({
+    props: args,
+    styles: ['.narrow-wrapper { max-width: 500px; margin; auto}'],
+    template: `
+      <div class="narrow-wrapper">
+        <kirby-x-image-banner ${argsToTemplate(args)}></kirby-x-image-banner>
+      </div>
+    `,
+  }),
+};
+
+/**
  * The component adapts to the containers width, and thus should be plug and
  * play with the kirby css grid and slider utilities.
  * It switches between a narrow and wide view.
@@ -177,7 +169,6 @@ export const UsageInGrid: Story = {
   args: {
     title: 'Banners that adapt in grid',
     bodyText: 'This is the body text.',
-    actionButtonText: 'Read more',
     imagePath: 'assets/images/leaves.jpg',
     externalLink: 'http://www.kirby.design',
   },
@@ -212,7 +203,6 @@ export const ImageError: Story = {
   args: {
     title: 'Image Banner with Fallback Image',
     bodyText: 'This is the body text.',
-    actionButtonText: 'Read more',
     imageError: handleImageError,
     imagePath: 'assets/images/does-not-exist.jpg',
   },
