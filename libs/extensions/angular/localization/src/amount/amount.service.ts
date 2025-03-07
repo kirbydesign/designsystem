@@ -35,11 +35,6 @@ export class AmountService {
       };
     }
 
-    return formatAmount(
-      amount,
-      this.locale,
-      this.config.nativeCurrency,
-      amountServiceConfiguration
-    );
+    return formatAmount(amount, this.locale, this.config, amountServiceConfiguration);
   }
 }

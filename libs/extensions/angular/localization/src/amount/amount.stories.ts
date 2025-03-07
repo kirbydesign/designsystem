@@ -50,6 +50,7 @@ class AmountExampleComponent {
  *   - `''`: Don't output currency code
  *   - `'alwaysShowCurrency'`: Always show currency code, regardless of presentation currency
  *   - `'showForeignCurrency'`: Only show currency code if it differs from the presentation currency
+ *   - `'useCurrencyMapping'`: - Shows the currency symbol defined in `KirbyExtensionsLocalizationToken.currencyMappings` instead of the currency code. Fallback to currencyCode
  * - `digitsInfo`: A string that represents the format of the number. Learn more about the format here: https://angular.dev/api/common/DecimalPipe?tab=usage-notes
  *  - `stripSign`: Controls whether the minus sign should be stripped from a negative amount.
  * - `currencyCodePosition`: Controls the position of the currency code in the formatted amount.
@@ -125,6 +126,47 @@ export const AmountDKK: Story = {
 };
 
 /**
+ * Here the amount is formatted with a custom currency symbol kr. instead of the currency code DKK
+ */
+export const AmountCurrentMapping: Story = {
+  args: {
+    myAmount: { amount: 123456, currencyCode: 'DKK' },
+    amountServiceConfiguration: {
+      showCurrencyCode: 'useCurrencyMapping',
+      currencyCodePosition: 'postfix',
+    },
+  },
+  parameters: {
+    docs: {
+      source: {
+        language: 'tsx', // Using tsx here to get better syntax highlighting
+        code: `<p>
+          {{ myAmount /* e.g. { amount: 123456, currencyCode: 'DKK' } */ | amount: {
+        showCurrencyCode: 'useCurrencyMapping',
+        currencyCodePosition: 'postfix',
+      } 
+      }}
+        </p> `,
+      },
+    },
+  },
+  decorators: [
+    moduleMetadata({
+      providers: [
+        { provide: LOCALE_ID, useValue: 'da' },
+        {
+          provide: KIRBY_EXTENSIONS_LOCALIZATION_TOKEN,
+          useValue: {
+            nativeCurrency: 'DKK',
+            currencyMappings: { DKK: 'kr.' },
+          },
+        },
+      ],
+    }),
+  ],
+};
+
+/**
  * Here the amount is formatted with the US currency code USD, and the currency code is always shown.
  * The `LOCALE_ID` of the example is `en`, so the amount is formatted with a period as the decimal separator and a comma as the thousand separator.
  */
@@ -143,7 +185,13 @@ export const AmountUSD: Story = {
       source: {
         language: 'tsx', // Using tsx here to get better syntax highlighting
         code: `<p>
-          {{ myAmount /* e.g. { amount: 123456, currencyCode: 'USD' } */ | amount: amountServiceConfiguration }}
+          {{ myAmount /* e.g. { amount: 123456, currencyCode: 'USD' } */ | amount: {
+      showCurrencyCode: 'alwaysShowCurrency',
+      digitsInfo: '1.2-2',
+      stripSign: false,
+      currencyCodePosition: 'prefix',
+    } 
+    }}
         </p> `,
       },
     },
