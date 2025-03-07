@@ -65,7 +65,7 @@ describe('ActionSheetComponent', () => {
     it('should render', () => {
       const expected = 'Test header';
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const header = rootElement.querySelector('kirby-card-header header').firstElementChild;
+      const header = rootElement.querySelector('kirby-card-header').firstElementChild;
       expect(component.header).toEqual(expected);
       expect(header.textContent).toEqual(expected);
     });
@@ -75,7 +75,7 @@ describe('ActionSheetComponent', () => {
       component.header = newHeader;
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const header = rootElement.querySelector('kirby-card-header header').firstElementChild;
+      const header = rootElement.querySelector('kirby-card-header').firstElementChild;
       expect(header.textContent).toEqual(newHeader);
     });
   });
@@ -84,7 +84,7 @@ describe('ActionSheetComponent', () => {
     it('should render', () => {
       const expected = 'Test subheader';
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const subheader = rootElement.querySelector('kirby-card-header header').lastElementChild;
+      const subheader = rootElement.querySelector('kirby-card-header').lastElementChild;
       expect(component.subheader).toEqual(expected);
       expect(subheader.textContent).toEqual(expected);
     });
@@ -94,7 +94,7 @@ describe('ActionSheetComponent', () => {
       component.subheader = newSubheader;
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const subheader = rootElement.querySelector('kirby-card-header header').lastElementChild;
+      const subheader = rootElement.querySelector('kirby-card-header').lastElementChild;
       expect(subheader.textContent).toEqual(newSubheader);
     });
   });

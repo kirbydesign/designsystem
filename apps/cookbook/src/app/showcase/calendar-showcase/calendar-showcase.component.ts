@@ -146,14 +146,14 @@ export class CalendarShowcaseComponent {
     {
       name: 'locales',
       description:
-        '(Optional) Danish and English locales are built in, but if additional existing locales are needed (fx. Spanish), they can be specified here.',
+        '(Optional) Danish, German and English locales are built in, but if additional existing locales are needed (fx. Spanish), they can be specified here.',
       defaultValue: '{}',
       type: ['{ [key: string]: Locale }'],
     },
     {
       name: 'customLocales',
       description:
-        '(Optional) Danish and English locales are built in, but if custom locales are needed, they can be specified here.',
+        '(Optional) Danish, German and English locales are built in, but if custom locales are needed, they can be specified here.',
       defaultValue: '{}',
       type: ['{ [key: string]: Locale }'],
     },
