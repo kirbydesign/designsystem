@@ -214,8 +214,13 @@ kirby-card {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.5;
-  max-height: 4.5em;
+  max-height: utils.size('xl');
+  padding-inline-end: utils.size('xxs');
+
+  @include container-more-than-width {
+    padding-inline-end: utils.size('xxl');
+    max-height: utils.size('xxxxl');
+  }
 
   @include container-less-than-width {
     -webkit-line-clamp: 2;
