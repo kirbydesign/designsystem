@@ -199,7 +199,8 @@ kirby-card {
   display: flex;
   flex: 1;
   justify-content: space-between;
-  gap: utils.size('s');
+
+  // gap: utils.size('s');
   height: 100%;
 
   p {
@@ -290,5 +291,7 @@ a.visible {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  gap: 12px;
+  @include if-wide-view {
+    gap: utils.size('xs');
+  }
 }
