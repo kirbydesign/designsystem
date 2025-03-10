@@ -29,7 +29,7 @@
     </div>
 
     <div class="main-content">
-      <div class="foo">
+      <div class="text-content-layout">
         <div class="main-content-header">
           <p class="kirby-text-normal-bold">
             @if (title) {
@@ -57,11 +57,6 @@
         </div>
       </div>
       <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
-      <!-- @if (!showButtonInNarrowView && externalLink) {
-        <div class="main-content-body-action-link" [class.visible]="showButtonInNarrowView">
-          <kirby-icon name="link"></kirby-icon>
-        </div>
-      } -->
       @if (externalLink) {
         <a
           kirby-button

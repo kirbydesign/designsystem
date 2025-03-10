@@ -155,14 +155,6 @@ kirby-card {
     }
   }
 
-  // &:has(.header-text:empty):has(.body-text:empty) {
-  //   padding-block-start: 0;
-  // }
-
-  // &:has(.body-text:empty):has(.header-text:empty) {
-  //   padding-block-end: 0;
-  // }
-
   @include if-wide-view {
     flex: 1;
     gap: utils.size('xs');
@@ -180,7 +172,8 @@ kirby-card {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom: 0;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -199,14 +192,9 @@ kirby-card {
   display: flex;
   flex: 1;
   justify-content: space-between;
-
-  // gap: utils.size('s');
   height: 100%;
 
   p {
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
-    // overflow: hidden;
     text-wrap-mode: wrap;
     margin-bottom: 0;
   }
@@ -229,16 +217,10 @@ kirby-card {
   line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-
-  // text-overflow: ellipsis;
-  // white-space: nowrap;
-  // max-height: utils.size('xl');
   padding-inline-end: utils.size('xxs');
 
   @include if-wide-view {
     padding-inline-end: utils.size('xxl');
-
-    // max-height: utils.size('xxxxl');
   }
 
   @include if-narrow-view {
@@ -250,11 +232,6 @@ kirby-card {
 
 .main-content-body-action-text {
   display: none;
-
-  // &.visible {
-  //   display: inline-flex;
-  // }
-
   @include if-wide-view {
     align-self: start;
     display: inline-flex;
@@ -284,7 +261,7 @@ a.visible {
   }
 }
 
-.foo {
+.text-content-layout {
   display: flex;
   flex: 1;
   flex-direction: column;
