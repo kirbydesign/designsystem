@@ -29,69 +29,73 @@
     </div>
 
     <div class="main-content">
-      <div class="main-content-header">
-        <p class="kirby-text-normal-bold header-text">
-          @if (title) {
-            {{ title }}
-          } @else {
-            <ng-content select="[title]"></ng-content>
-          }
-        </p>
-      </div>
+      <div class="foo">
+        <div class="main-content-header">
+          <p class="kirby-text-normal-bold">
+            @if (title) {
+              {{ title }}
+            } @else {
+              <ng-content select="[title]"></ng-content>
+            }
+          </p>
+        </div>
 
-      <div class="main-content-body">
-        <div class="main-content-body-text">
-          <span class="kirby-text-small body-text">
+        <div class="main-content-body">
+          <p class="main-content-body-text kirby-text-small">
             @if (bodyText) {
               {{ bodyText }}
             } @else {
               <ng-content select="[bodyText]"></ng-content>
             }
-          </span>
+          </p>
+
+          @if (!showButtonInNarrowView && externalLink) {
+            <div class="main-content-body-action-link">
+              <kirby-icon name="link"></kirby-icon>
+            </div>
+          }
         </div>
-
-        @if (!showButtonInNarrowView && externalLink) {
-          <div class="main-content-body-action-link">
-            <kirby-icon name="link"></kirby-icon>
-          </div>
-        }
-
-        <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
-        @if (externalLink) {
-          <a
-            kirby-button
-            class="main-content-body-action-text"
-            [class.visible]="showButtonInNarrowView"
-            [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
-            [href]="externalLink"
-            target="_blank"
-            size="sm"
-          >
-            @if (actionButtonText) {
-              {{ actionButtonText }}
-            } @else {
-              {{ translations.get('readMore') }}
-            }
-            <kirby-icon name="link"></kirby-icon>
-          </a>
-        }
-
-        @if (!externalLink) {
-          <button
-            [class.visible]="showButtonInNarrowView"
-            class="main-content-body-action-text"
-            kirby-button
-            [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
-            size="sm"
-          >
-            @if (actionButtonText) {
-              {{ actionButtonText }}
-            } @else {
-              {{ translations.get('readMore') }}
-            }
-          </button>
-        }
       </div>
+      <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
+      <!-- @if (!showButtonInNarrowView && externalLink) {
+        <div class="main-content-body-action-link" [class.visible]="showButtonInNarrowView">
+          <kirby-icon name="link"></kirby-icon>
+        </div>
+      } -->
+      @if (externalLink) {
+        <a
+          kirby-button
+          class="main-content-body-action-text"
+          [class.visible]="showButtonInNarrowView"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [href]="externalLink"
+          target="_blank"
+          size="sm"
+        >
+          @if (actionButtonText) {
+            {{ actionButtonText }}
+          } @else {
+            {{ translations.get('readMore') }}
+          }
+          <kirby-icon name="link"></kirby-icon>
+        </a>
+      }
+
+      @if (!externalLink) {
+        <button
+          [class.visible]="showButtonInNarrowView"
+          class="main-content-body-action-text"
+          kirby-button
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          size="sm"
+        >
+          @if (actionButtonText) {
+            {{ actionButtonText }}
+          } @else {
+            {{ translations.get('readMore') }}
+          }
+        </button>
+      }
     </div>
   </div>
 

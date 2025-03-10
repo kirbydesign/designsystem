@@ -9,13 +9,13 @@ $main-image-height-large: 164px;
 // The breakpoint where container should switch from "narrow" to "wide"
 $container-query-breakpoint: 600px;
 
-@mixin container-less-than-width() {
+@mixin if-narrow-view() {
   @container banner (width < #{$container-query-breakpoint}) {
     @content;
   }
 }
 
-@mixin container-more-than-width() {
+@mixin if-wide-view() {
   @container banner (width >= #{$container-query-breakpoint}) {
     @content;
   }
@@ -32,7 +32,7 @@ $container-query-breakpoint: 600px;
 
   .dismiss {
     // on mobile we always want the button to be white as it sits on top of the image
-    @include container-less-than-width {
+    @include if-narrow-view {
       --kirby-inputs-background-color: var(--kirby-white);
       --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
       --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
@@ -107,7 +107,7 @@ kirby-card {
   display: flex;
   flex-direction: column;
 
-  @include container-more-than-width {
+  @include if-wide-view {
     gap: utils.size('s');
     flex-direction: initial;
   }
@@ -118,27 +118,33 @@ kirby-card {
   overflow: hidden;
   border-radius: utils.border-radius('s');
 
-  @include container-more-than-width {
+  @include if-wide-view {
     flex: 1;
   }
 }
 
 .main-content {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include if-narrow-view {
+    flex-direction: row;
+  }
+
   min-height: var(
     --kirby-x-image-banner-min-height,
     #{utils.line-height('l') * 3}
   ); // text content height should be minimum 3 lines by default
 
   box-sizing: border-box;
-  flex-direction: column;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
   overflow: hidden;
 
   .main-content-header {
     padding-inline-end: utils.size('xxs');
 
-    @include container-more-than-width {
+    @include if-wide-view {
       padding-inline-end: utils.size('xl');
     }
   }
@@ -149,15 +155,15 @@ kirby-card {
     }
   }
 
-  &:has(.header-text:empty):has(.body-text:empty) {
-    padding-block-start: 0;
-  }
+  // &:has(.header-text:empty):has(.body-text:empty) {
+  //   padding-block-start: 0;
+  // }
 
-  &:has(.body-text:empty):has(.header-text:empty) {
-    padding-block-end: 0;
-  }
+  // &:has(.body-text:empty):has(.header-text:empty) {
+  //   padding-block-end: 0;
+  // }
 
-  @include container-more-than-width {
+  @include if-wide-view {
     flex: 1;
     gap: utils.size('xs');
     padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
@@ -184,24 +190,33 @@ kirby-card {
   object-fit: cover;
   object-position: center;
 
-  @include container-more-than-width {
+  @include if-wide-view {
     height: $main-image-height-large;
   }
 }
 
 .main-content-body {
   display: flex;
+  flex: 1;
   justify-content: space-between;
   gap: utils.size('s');
   height: 100%;
 
-  @include container-more-than-width {
+  p {
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
+    // overflow: hidden;
+    text-wrap-mode: wrap;
+    margin-bottom: 0;
+  }
+
+  @include if-wide-view {
     flex-direction: column;
     max-width: $max-content-width;
   }
 
   .main-content-body-action-link {
-    @include container-more-than-width {
+    @include if-wide-view {
       display: none;
     }
   }
@@ -213,16 +228,19 @@ kirby-card {
   line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: utils.size('xl');
+
+  // text-overflow: ellipsis;
+  // white-space: nowrap;
+  // max-height: utils.size('xl');
   padding-inline-end: utils.size('xxs');
 
-  @include container-more-than-width {
+  @include if-wide-view {
     padding-inline-end: utils.size('xxl');
-    max-height: utils.size('xxxxl');
+
+    // max-height: utils.size('xxxxl');
   }
 
-  @include container-less-than-width {
+  @include if-narrow-view {
     -webkit-line-clamp: 2;
     line-clamp: 2;
     max-height: 3em;
@@ -232,11 +250,11 @@ kirby-card {
 .main-content-body-action-text {
   display: none;
 
-  &.visible {
-    display: inline-flex;
-  }
+  // &.visible {
+  //   display: inline-flex;
+  // }
 
-  @include container-more-than-width {
+  @include if-wide-view {
     align-self: start;
     display: inline-flex;
     margin: 0; // buttons have xxxs margin so reset that
@@ -252,4 +270,25 @@ kirby-card {
   button {
     margin: 0;
   }
+}
+
+.visible {
+  display: inline-flex;
+}
+
+button.visible,
+a.visible {
+  @include if-narrow-view {
+    align-self: center;
+  }
+}
+
+.foo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  gap: 12px;
 }
