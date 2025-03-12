@@ -3,8 +3,10 @@ import exampleHtml from '../../examples/toast-example/toast-example.component.ht
 import { ToastExampleComponent } from '../../examples/toast-example/toast-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { IphoneComponent } from '~/app/iphone/iphone.component';
+import { ShowToastExampleComponent } from '~/app/examples/toast-example/examples/show-toast-example.component';
 
 @Component({
   selector: 'cookbook-toast-showcase',
@@ -13,12 +15,14 @@ import { IphoneComponent } from '~/app/iphone/iphone.component';
   imports: [
     ToastExampleComponent,
     CodeViewerComponent,
+    ExampleViewerComponent,
     ApiDescriptionPropertiesComponent,
     IphoneComponent,
   ],
 })
 export class ToastShowcaseComponent {
   exampleHtml = exampleHtml;
+  showToastExampleComponent = ShowToastExampleComponent;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'message',

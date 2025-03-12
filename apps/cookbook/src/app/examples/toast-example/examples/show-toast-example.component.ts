@@ -11,10 +11,31 @@ const config = {
   styles: [
     `:host {
       justify-content: end;
+      align-items: center;
       margin: 20px 10px;
+      button {
+        max-width: 300px;
+        width: 100%;
+      }
    }`,
   ],
 };
+
+const ts = `showToast(messageType?: MessageType) {
+  const message =
+    messageType === 'warning' ? 'Your warning toast message' : 'Your successful toast message';
+  
+  const config: ToastConfig = {
+    message,
+    messageType,
+    durationInMs: 5000,
+  };
+  this.toastController.showToast(config, this.onToastClosed);
+}
+
+private onToastClosed() {
+  console.log(\`Toast closed\`);
+}`;
 
 @Component({
   selector: config.selector,
@@ -24,13 +45,16 @@ const config = {
 })
 export class ShowToastExampleComponent {
   template = config.template;
+  static readonly ts = ts;
 
   constructor(public toastController: ToastController) {}
 
   showToast(messageType?: MessageType) {
+    const message =
+      messageType === 'warning' ? 'Your warning toast message' : 'Your successful toast message';
+
     const config: ToastConfig = {
-      message:
-        messageType === 'warning' ? 'Your warning toast message' : 'Your successful toast message',
+      message,
       messageType,
       durationInMs: 5000,
     };

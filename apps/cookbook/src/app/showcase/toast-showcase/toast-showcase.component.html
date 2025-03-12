@@ -11,6 +11,19 @@
     <li>Warning is used for warnings, eg. something the user should be aware of</li>
   </ul>
 
+  <cookbook-iphone
+    src="/examples/toast/show-toast"
+    showExternalLink="true"
+    viewMode="full-size"
+    showViewModeToggle="true"
+  ></cookbook-iphone>
+
+  <!-- prettier-ignore -->
+  <cookbook-example-viewer [ts]="showToastExampleComponent.ts"></cookbook-example-viewer>
+  Optional) if you need to know when the toast is dismissed, you can pass a callback function:
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="ts">this.toastController.showToast(config, myCallback);</cookbook-code-viewer>
+
   <h3>Best Practice</h3>
   <ul>
     <li>Use a toast when it's not critical for the user to read the message.</li>
@@ -21,39 +34,6 @@
     <li>Keep the amount of text below 1 line.</li>
   </ul>
 
-  <div class="page-example">
-    <div>
-      To show the toast, create a
-      <code>ToastConfig</code>
-      and pass it to
-      <code>toastController.showToast</code>
-
-      <!-- prettier-ignore -->
-      <cookbook-code-viewer language="ts">const config: ToastConfig =
-      <pre>{{ '{' }}
-  message: 'Your toast message',
-  messageType: 'success',
-  durationInMs: 5000,
-{{ '}' }};
-this.toastController.showToast(config);
-</pre>
-    </cookbook-code-viewer>
-      Optional) if you need to know when the toast is dismissed, you can pass a callback function:
-      <!-- prettier-ignore -->
-      <cookbook-code-viewer language="ts">this.toastController.showToast(config, myCallback);</cookbook-code-viewer>
-      where
-      <code>myCallback</code>
-      can be e.g.:
-      <!-- prettier-ignore -->
-      <cookbook-code-viewer language="ts">myCallback() {{ '{' }}
-...
-{{ '}' }}</cookbook-code-viewer>
-    </div>
-
-    <div>
-      <cookbook-iphone src="/examples/toast/show-toast" showExternalLink="true"></cookbook-iphone>
-    </div>
-  </div>
   <h4>Toast config properties:</h4>
   <cookbook-api-description-properties
     [properties]="properties"
