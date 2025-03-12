@@ -3,6 +3,7 @@ import { LOCALE_ID } from '@angular/core';
 import { TranslationService } from './translation.service';
 import { en } from './translations/en';
 import { da } from './translations/da';
+import { de } from './translations/de';
 import { Translation } from './translation.interface';
 
 describe('TranslationService', () => {
@@ -42,6 +43,14 @@ describe('TranslationService', () => {
 
     Object.keys(en).forEach((key: keyof Translation) => {
       expect(spectator.service.get(key)).toBe(en[key]);
+    });
+  });
+
+  it('should return all translations correctly for de key', () => {
+    spectator = createService({ providers: [{ provide: LOCALE_ID, useValue: 'de' }] });
+
+    Object.keys(de).forEach((key: keyof Translation) => {
+      expect(spectator.service.get(key)).toBe(de[key]);
     });
   });
 });
