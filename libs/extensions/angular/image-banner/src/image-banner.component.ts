@@ -37,7 +37,7 @@ export class ImageBannerComponent {
   /**
    * The text of the button in the content area of the image banner. If left empty, will default to 'Read more' (or equivalent translation for [supported locales](https://cookbook.kirby.design/#/home/localization)).
    */
-  @Input() actionButtonText: string | undefined = 'Read more';
+  @Input() actionButtonText: string | undefined = this.translations.get('readMore');
 
   /**
    * When an external link is supplied the entire banner will be an anchor-tag and navigate when activated.

@@ -17,7 +17,7 @@ const meta: Meta<ImageBannerComponent> = {
   argTypes: {
     title: { control: 'text' },
     bodyText: { control: 'text' },
-    actionButtonText: { control: 'text' },
+    actionButtonText: { control: 'text', table: { defaultValue: { summary: 'Read more' } } },
     imagePath: { control: 'text' },
     bannerClick: { control: false },
     dismissClick: { control: false },
