@@ -476,57 +476,76 @@ describe('CalendarComponent', () => {
     it('should have English as the default locale', () => {
       spectator = createHostWithLocale();
 
-      spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
 
       const headerTexts = trimmedTexts('th :not(.visually-hidden)');
       expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
-      expect(spectator.component.activeMonthName).toBe('July');
+      expect(spectator.component.activeMonthName).toBe('May');
     });
 
     it('should be possible to change the locale to Danish', () => {
       spectator = createHostWithLocale('da');
 
-      spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
 
       const headerTexts = trimmedTexts('th :not(.visually-hidden)');
       expect(headerTexts).toEqual(['M', 'T', 'O', 'T', 'F', 'L', 'S']);
-      expect(spectator.component.activeMonthName).toBe('Juli');
+      expect(spectator.component.activeMonthName).toBe('Maj');
+    });
+
+    it('should be possible to change the locale to German', () => {
+      spectator = createHostWithLocale('de');
+
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
+
+      const headerTexts = trimmedTexts('th :not(.visually-hidden)');
+      expect(headerTexts).toEqual(['M', 'D', 'M', 'D', 'F', 'S', 'S']);
+      expect(spectator.component.activeMonthName).toBe('Mai');
     });
 
     it('should have correct aria-label for locale "en"', () => {
       spectator = createHostWithLocale('en');
 
-      spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
 
       const day = spectator.query('.day.current-month');
-      expect(day.getAttribute('aria-label')).toBe('1 July');
+      expect(day.getAttribute('aria-label')).toBe('1 May');
     });
 
     it('should have correct aria-label for locale "enGB"', () => {
       spectator = createHostWithLocale('enGB');
 
-      spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
 
       const day = spectator.query('.day.current-month');
-      expect(day.getAttribute('aria-label')).toBe('1 July');
+      expect(day.getAttribute('aria-label')).toBe('1 May');
     });
 
     it('should have correct aria-label for locale "enUS"', () => {
       spectator = createHostWithLocale('enUS');
 
-      spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
 
       const day = spectator.query('.day.current-month');
-      expect(day.getAttribute('aria-label')).toBe('July 1');
+      expect(day.getAttribute('aria-label')).toBe('May 1');
     });
 
     it('should have correct aria-label for locale "da"', () => {
       spectator = createHostWithLocale('da');
 
-      spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
 
       const day = spectator.query('.day.current-month');
-      expect(day.getAttribute('aria-label')).toBe('1. juli');
+      expect(day.getAttribute('aria-label')).toBe('1. maj');
+    });
+
+    it('should have correct aria-label for locale "de"', () => {
+      spectator = createHostWithLocale('de');
+
+      spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
+
+      const day = spectator.query('.day.current-month');
+      expect(day.getAttribute('aria-label')).toBe('1. Mai');
     });
   });
 
