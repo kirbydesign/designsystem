@@ -1068,7 +1068,7 @@ describe('DropdownComponent', () => {
     });
   });
 
-  fdescribe('when configured with expand=block and usePopover=true', () => {
+  describe('when configured with expand=block and usePopover=true', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [ItemModule],
