@@ -9,4 +9,5 @@ export const de: Translation = {
   previousMonth: 'Letzten Monat',
   previousSlide: 'Zur vorherigen Folie',
   selectYear: 'Jahr auswählen',
+  readMore: 'Mehr lesen',
 };

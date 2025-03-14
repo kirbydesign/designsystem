@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/interaction-state';
 
-$blur-radius: 60px;
+$blur-radius: 110px;
 $max-content-width: 324px;
 $main-image-height-small: 132px;
 $main-image-height-large: 164px;
@@ -9,13 +9,13 @@ $main-image-height-large: 164px;
 // The breakpoint where container should switch from "narrow" to "wide"
 $container-query-breakpoint: 600px;
 
-@mixin container-less-than-width() {
+@mixin if-narrow-view() {
   @container banner (width < #{$container-query-breakpoint}) {
     @content;
   }
 }
 
-@mixin container-more-than-width() {
+@mixin if-wide-view() {
   @container banner (width >= #{$container-query-breakpoint}) {
     @content;
   }
@@ -32,7 +32,7 @@ $container-query-breakpoint: 600px;
 
   .dismiss {
     // on mobile we always want the button to be white as it sits on top of the image
-    @include container-less-than-width {
+    @include if-narrow-view {
       --kirby-inputs-background-color: var(--kirby-white);
       --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
       --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
@@ -46,11 +46,37 @@ $container-query-breakpoint: 600px;
 }
 
 :host(.dark) .blur-image {
-  filter: blur($blur-radius) brightness(0.8);
+  filter: blur($blur-radius);
 }
 
 :host(.light) .blur-image {
-  filter: blur($blur-radius) brightness(1.3);
+  filter: blur($blur-radius);
+}
+
+:host(.dark) .blur-image-wrapper {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000, $alpha: 32%);
+    z-index: 1;
+  }
+}
+
+:host(.light) .blur-image-wrapper {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #fff, $alpha: 45%);
+    z-index: 1;
+  }
 }
 
 .blur-image-wrapper {
@@ -81,7 +107,7 @@ kirby-card {
   display: flex;
   flex-direction: column;
 
-  @include container-more-than-width {
+  @include if-wide-view {
     gap: utils.size('s');
     flex-direction: initial;
   }
@@ -92,27 +118,33 @@ kirby-card {
   overflow: hidden;
   border-radius: utils.border-radius('s');
 
-  @include container-more-than-width {
+  @include if-wide-view {
     flex: 1;
   }
 }
 
 .main-content {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include if-narrow-view {
+    flex-direction: row;
+  }
+
   min-height: var(
     --kirby-x-image-banner-min-height,
     #{utils.line-height('l') * 3}
   ); // text content height should be minimum 3 lines by default
 
   box-sizing: border-box;
-  flex-direction: column;
   padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
   overflow: hidden;
 
   .main-content-header {
     padding-inline-end: utils.size('xxs');
 
-    @include container-more-than-width {
+    @include if-wide-view {
       padding-inline-end: utils.size('xl');
     }
   }
@@ -123,15 +155,7 @@ kirby-card {
     }
   }
 
-  &:has(.header-text:empty):has(.body-text:empty) {
-    padding-block-start: 0;
-  }
-
-  &:has(.body-text:empty):has(.header-text:empty) {
-    padding-block-end: 0;
-  }
-
-  @include container-more-than-width {
+  @include if-wide-view {
     flex: 1;
     gap: utils.size('xs');
     padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
@@ -148,7 +172,8 @@ kirby-card {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom: 0;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -158,45 +183,56 @@ kirby-card {
   object-fit: cover;
   object-position: center;
 
-  @include container-more-than-width {
+  @include if-wide-view {
     height: $main-image-height-large;
   }
 }
 
 .main-content-body {
   display: flex;
+  flex: 1;
   justify-content: space-between;
-  gap: utils.size('s');
   height: 100%;
 
-  @include container-more-than-width {
+  p {
+    text-wrap-mode: wrap;
+    margin-bottom: 0;
+  }
+
+  @include if-wide-view {
     flex-direction: column;
     max-width: $max-content-width;
   }
 
   .main-content-body-action-link {
-    @include container-more-than-width {
+    @include if-wide-view {
       display: none;
     }
   }
 }
 
 .main-content-body-text {
-  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  max-height: utils.size('xl');
   padding-inline-end: utils.size('xxs');
 
-  @include container-more-than-width {
+  @include if-wide-view {
     padding-inline-end: utils.size('xxl');
-    max-height: utils.size('xxxxl');
+  }
+
+  @include if-narrow-view {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 3em;
   }
 }
 
 .main-content-body-action-text {
   display: none;
-
-  @include container-more-than-width {
+  @include if-wide-view {
     align-self: start;
     display: inline-flex;
     margin: 0; // buttons have xxxs margin so reset that
@@ -211,5 +247,28 @@ kirby-card {
 
   button {
     margin: 0;
+  }
+}
+
+.visible {
+  display: inline-flex;
+}
+
+button.visible,
+a.visible {
+  @include if-narrow-view {
+    align-self: center;
+  }
+}
+
+.text-content-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @include if-wide-view {
+    gap: utils.size('xs');
   }
 }
