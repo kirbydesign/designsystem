@@ -9,4 +9,5 @@ export const da: Translation = {
   previousMonth: 'Forrige måned',
   previousSlide: 'Forrige slide',
   selectYear: 'Vælg år',
+  readMore: 'Læs mere',
 };
