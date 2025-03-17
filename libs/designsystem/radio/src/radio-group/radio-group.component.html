@@ -3,7 +3,7 @@
   [value]="value"
   (ionChange)="_onChange($event.detail.value)"
   [attr.aria-invalid]="hasError"
-  [attr.aria-label]="_ariaLabel"
+  [kirbyAttributes]="_attributes"
 >
   <ng-container *ngIf="!items || !items.length; else itemsTemplate">
     <ng-content></ng-content>

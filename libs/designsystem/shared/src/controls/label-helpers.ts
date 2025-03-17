@@ -1,3 +1,5 @@
+import { Renderer2 } from '@angular/core';
+
 export function findItemLabel(element: HTMLElement): HTMLElement {
   const itemEl = element.closest('kirby-item');
   if (itemEl) {
@@ -22,4 +24,21 @@ export function inheritAriaLabelText(element: HTMLElement): string {
     element.removeAttribute(attribute);
     return value;
   }
+}
+
+export function inheritAttributes(
+  element: HTMLElement,
+  attributes: string[],
+  renderer: Renderer2
+): Record<string, string> {
+  const inheritedAttributes: Record<string, any> = {};
+
+  attributes.forEach((attribute) => {
+    if (element.hasAttribute(attribute)) {
+      inheritedAttributes[attribute] = element.getAttribute(attribute);
+      renderer.removeAttribute(element, attribute);
+    }
+  });
+
+  return inheritedAttributes;
 }

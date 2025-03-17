@@ -11,3 +11,5 @@ export * from './fit-heading/index';
 export * from './controls/label-helpers';
 
 export * from './translation/translation.service';
+
+export * from './controls/attributes.directive';

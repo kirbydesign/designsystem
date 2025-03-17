@@ -9,6 +9,7 @@ import {
   HostBinding,
   Output,
   QueryList,
+  Renderer2,
   TemplateRef,
   ViewChildren,
 } from '@angular/core';
@@ -17,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
-import { inheritAriaLabelText } from '@kirbydesign/designsystem/shared';
+import { inheritAttributes } from '@kirbydesign/designsystem/shared';
 import { RadioComponent } from '../radio.component';
 
 @Component({
@@ -39,12 +40,13 @@ export class RadioGroupComponent
 {
   constructor(
     private changeDetectionRef: ChangeDetectorRef,
-    private element: ElementRef<HTMLElement>
+    private element: ElementRef<HTMLElement>,
+    private renderer: Renderer2
   ) {}
 
   // #region public properties
 
-  _ariaLabel: string;
+  _attributes: Record<string, any> = {};
 
   get disabled(): boolean {
     return this._disabled;
@@ -130,6 +132,7 @@ export class RadioGroupComponent
   private _onTouched = () => {};
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
+
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
   @ContentChildren(RadioComponent, { descendants: true })
@@ -157,7 +160,11 @@ export class RadioGroupComponent
   ngAfterContentInit(): void {
     this.initSelectionStateFromProjectedContent();
     this.listenForProjectedRadiosChange();
-    this._ariaLabel = inheritAriaLabelText(this.element.nativeElement);
+    this._attributes = inheritAttributes(
+      this.element.nativeElement,
+      ['aria-label', 'aria-labelledby'],
+      this.renderer
+    );
   }
 
   registerOnChange(fn: any): void {
