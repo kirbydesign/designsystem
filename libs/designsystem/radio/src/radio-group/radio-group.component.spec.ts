@@ -14,6 +14,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
+import { AttributesDirective } from '@kirbydesign/designsystem/shared';
 import { RadioComponent } from '../radio.component';
 
 import { RadioGroupComponent } from './radio-group.component';
@@ -31,6 +32,7 @@ describe('RadioGroupComponent', () => {
       FormsModule,
       ReactiveFormsModule,
       FlagComponent,
+      AttributesDirective,
     ],
   });
 

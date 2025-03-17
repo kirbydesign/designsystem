@@ -10,6 +10,10 @@ export class AttributesDirective implements OnChanges {
   constructor(private el: ElementRef) {}
 
   ngOnChanges() {
+    if (this.attributesAreEqual()) {
+      return;
+    }
+
     this.resetAttributes();
     this._attributes = this.kirbyAttributes;
     Object.keys(this.kirbyAttributes).forEach((key) => {
@@ -21,5 +25,16 @@ export class AttributesDirective implements OnChanges {
     Object.keys(this._attributes).forEach((key) => {
       this.el.nativeElement.removeAttribute(key);
     });
+  }
+
+  private attributesAreEqual(): boolean {
+    const keys1 = Object.keys(this._attributes);
+    const keys2 = Object.keys(this.kirbyAttributes);
+
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+
+    return keys1.every((key) => this._attributes[key] === this.kirbyAttributes[key]);
   }
 }
