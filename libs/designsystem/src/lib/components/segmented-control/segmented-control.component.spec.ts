@@ -9,6 +9,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SegmentItem } from './segment-item';
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
 
@@ -454,5 +455,67 @@ describe('SegmentedControl with Badge', () => {
     ).componentInstance;
 
     expect(iconComponent).toBeDefined();
+  });
+});
+
+describe('segmentcontrol in form', () => {
+  const items: SegmentItem[] = [
+    {
+      text: 'First Item',
+      id: 'first',
+    },
+    {
+      text: 'Second item',
+      id: 'second',
+    },
+    {
+      text: 'Third item',
+      id: 'third',
+    },
+  ];
+  const formGroup = new FormGroup({
+    segmentedControl: new FormControl(items[0]),
+  });
+
+  let spectator: SpectatorHost<SegmentedControlComponent>;
+
+  const createHost = createHostFactory({
+    component: SegmentedControlComponent,
+    imports: [TestHelper.ionicModuleForTest, ReactiveFormsModule],
+  });
+  let ionSegmentElement: HTMLIonSegmentElement;
+
+  beforeEach(async () => {
+    spectator = createHost(
+      `<form [formGroup]="formGroup">
+        <kirby-segmented-control [items]="items" [formControl]="formGroup.controls.segmentedControl">
+        </kirby-segmented-control>
+       </form>`,
+      { hostProps: { items, formGroup } }
+    );
+
+    ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+    await TestHelper.whenReady(ionSegmentElement);
+    await TestHelper.whenReady(spectator.queryHostAll('ion-segment-button'));
+  });
+
+  it('should update form value on toggle', (done) => {
+    const idToSelect = items[1].id;
+    formGroup.valueChanges.subscribe((value) => {
+      expect(value.segmentedControl.id).toBe(idToSelect);
+      done();
+    });
+
+    const changeEvent = new CustomEvent('ionChange', { detail: { value: idToSelect } });
+    ionSegmentElement.dispatchEvent(changeEvent);
+    spectator.detectChanges();
+  });
+
+  it('should update value on form control change', () => {
+    expect(spectator.component.value.id).toBe(items[0].id);
+
+    formGroup.controls.segmentedControl.setValue(items[1]);
+
+    expect(spectator.component.value.id).toBe(items[1].id);
   });
 });

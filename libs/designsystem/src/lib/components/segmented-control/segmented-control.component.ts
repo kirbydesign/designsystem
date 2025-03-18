@@ -3,14 +3,17 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostBinding,
   HostListener,
   Input,
   Output,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
@@ -28,8 +31,17 @@ export enum SegmentedControlMode {
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SegmentedControlComponent),
+      multi: true,
+    },
+  ],
 })
-export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
+export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
+  implements ControlValueAccessor
+{
   @ViewChild(IonSegment, { static: true, read: ElementRef })
   private ionSegmentElement: ElementRef<HTMLIonSegmentElement>;
 
@@ -67,6 +79,8 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
     this._value = this.items[this.selectedIndex];
     this.ensureIonSegmentSelected();
   }
+
+  protected isDisabled = signal(false);
 
   /**
    * After upgrading to Ionic standalone components (Ionic v.7.6.6)
@@ -135,6 +149,28 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
 
   @Output() segmentSelect = new EventEmitter<TItem>();
 
+  // ControlValueAccessor implementation
+  private onChange: (value: NoInfer<TItem>) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  writeValue(value: NoInfer<TItem>): void {
+    if (value !== this._value) {
+      this.value = value;
+    }
+  }
+
+  registerOnChange(fn: (value: NoInfer<TItem>) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.isDisabled.set(isDisabled);
+  }
+
   onSegmentSelect(selectedId: string) {
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
 
@@ -142,12 +178,14 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
       this.selectedIndex = selectedItemIndex;
       setTimeout(() => {
         this.segmentSelect.emit(this.value);
+        this.onChange(this.value);
       });
     }
   }
 
   focusNativeButton(event: UIEvent) {
     (event.target as HTMLIonSegmentButtonElement)?.setFocus();
+    this.onTouched();
   }
 
   private _segmentElementHasFocus = false;
