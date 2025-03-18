@@ -4,37 +4,37 @@ import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
   selector: '[kirbyAttributes]',
 })
 export class AttributesDirective implements OnChanges {
-  _attributes: Record<string, any> = {};
+  private existingAttributes: Record<string, any> = {};
   @Input() kirbyAttributes: Record<string, any>;
 
   constructor(private el: ElementRef) {}
 
   ngOnChanges() {
-    if (this.attributesAreEqual()) {
+    if (!this.attributesChanged()) {
       return;
     }
 
     this.resetAttributes();
-    this._attributes = this.kirbyAttributes;
+    this.existingAttributes = this.kirbyAttributes;
     Object.keys(this.kirbyAttributes).forEach((key) => {
       this.el.nativeElement.setAttribute(key, this.kirbyAttributes[key]);
     });
   }
 
   private resetAttributes() {
-    Object.keys(this._attributes).forEach((key) => {
+    Object.keys(this.existingAttributes).forEach((key) => {
       this.el.nativeElement.removeAttribute(key);
     });
   }
 
-  private attributesAreEqual(): boolean {
-    const keys1 = Object.keys(this._attributes);
+  private attributesChanged(): boolean {
+    const keys1 = Object.keys(this.existingAttributes);
     const keys2 = Object.keys(this.kirbyAttributes);
 
     if (keys1.length !== keys2.length) {
-      return false;
+      return true;
     }
 
-    return keys1.every((key) => this._attributes[key] === this.kirbyAttributes[key]);
+    return keys1.some((key) => this.existingAttributes[key] !== this.kirbyAttributes[key]);
   }
 }

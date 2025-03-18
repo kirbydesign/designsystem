@@ -22,12 +22,13 @@ describe('AttributesDirective', () => {
   });
 
   it('should set attributes on the element', () => {
-    const testAttributes = { id: 'test-id', role: 'button' };
+    const testAttributes = { id: 'test-id', role: 'button', disabled: true };
     fixture.componentInstance.attributes = testAttributes;
     fixture.detectChanges();
 
     expect(element.nativeElement.getAttribute('id')).toBe('test-id');
     expect(element.nativeElement.getAttribute('role')).toBe('button');
+    expect(element.nativeElement.getAttribute('disabled')).toBe('true');
   });
 
   it('should update attributes when input changes', () => {

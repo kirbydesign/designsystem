@@ -30,7 +30,7 @@ export function inheritAttributes(
   element: HTMLElement,
   attributes: string[],
   renderer: Renderer2
-): Record<string, string> {
+): Record<string, any> {
   const inheritedAttributes: Record<string, any> = {};
 
   attributes.forEach((attribute) => {
