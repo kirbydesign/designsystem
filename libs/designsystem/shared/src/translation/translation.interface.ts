@@ -7,4 +7,5 @@ export interface Translation {
   previousMonth: string;
   previousSlide: string;
   selectYear: string;
+  readMore: string;
 }
