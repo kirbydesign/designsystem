@@ -514,7 +514,9 @@ describe('segmentcontrol in form', () => {
 
   it('should update value on form control change', () => {
     expect(spectator.component.value.id).toBe(items[0].id);
+
     formGroup.controls.segmentedControl.setValue(items[1]);
+
     expect(spectator.component.value.id).toBe(items[1].id);
   });
 });
