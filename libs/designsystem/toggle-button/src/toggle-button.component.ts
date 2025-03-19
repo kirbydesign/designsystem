@@ -4,18 +4,27 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostListener,
   Input,
   Output,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'kirby-toggle-button',
   templateUrl: './toggle-button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ToggleButtonComponent),
+      multi: true,
+    },
+  ],
 })
-export class ToggleButtonComponent {
+export class ToggleButtonComponent implements ControlValueAccessor {
   @Input() checked: boolean;
   @Output() checkChanged = new EventEmitter<boolean>();
 
@@ -23,6 +32,33 @@ export class ToggleButtonComponent {
     private elementRef: ElementRef<HTMLElement>,
     private cdr: ChangeDetectorRef
   ) {}
+
+  writeValue(checked: boolean): void {
+    if (this.checked !== checked) {
+      this.checked = checked;
+      // TODO: convert component to signals and bind in template for local CD
+      this.cdr.markForCheck();
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-empty-function
+  private onChange = (_checked: boolean) => {};
+  // eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
+  private onTouched = () => {};
+
+  registerOnChange(fn: (checked: boolean) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.elementRef.nativeElement
+      .querySelector('button[kirby-button]')
+      ?.toggleAttribute('disabled', isDisabled);
+  }
 
   @HostListener('click', ['$event'])
   onClick(event: PointerEvent) {
@@ -32,6 +68,8 @@ export class ToggleButtonComponent {
     if (!buttonEnabled) return;
 
     this.checked = !this.checked;
+    this.onChange(this.checked);
+    this.onTouched();
     this.checkChanged.emit(this.checked);
     this.focusToggledButton();
   }

@@ -1,6 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToggleButtonComponent } from './toggle-button.component';
 
 describe('ToggleButtonComponent', () => {
@@ -58,6 +59,60 @@ describe('ToggleButtonComponent', () => {
       spectator.click('button');
 
       expect(spectator.component.checked).toBe(true);
+    });
+  });
+
+  describe('in a form', () => {
+    let spectator: SpectatorHost<ToggleButtonComponent>;
+    let formGroup = new FormGroup({
+      toggleState: new FormControl(false),
+    });
+
+    const createHost = createHostFactory({
+      component: ToggleButtonComponent,
+      imports: [ButtonComponent, ReactiveFormsModule],
+    });
+
+    beforeEach(() => {
+      formGroup = new FormGroup({
+        toggleState: new FormControl(false),
+      });
+      spectator = createHost(
+        `<form [formGroup]="formGroup">
+          <kirby-toggle-button [formControl]="formGroup.controls.toggleState">
+            <button kirby-button unchecked>Unchecked</button>
+            <button kirby-button checked>Checked</button>
+          </kirby-toggle-button>
+        </form>`,
+        {
+          hostProps: { formGroup },
+          detectChanges: true,
+        }
+      );
+    });
+
+    it('should update form control value when clicked', () => {
+      spectator.click('button');
+      expect(formGroup.controls.toggleState.value).toBe(true);
+
+      spectator.click('button');
+      expect(formGroup.controls.toggleState.value).toBe(false);
+      expect(formGroup.controls.toggleState.touched).toBe(true);
+      expect(formGroup.controls.toggleState.dirty).toBe(true);
+    });
+
+    it('should update UI when form control value changes', () => {
+      formGroup.controls.toggleState.setValue(true);
+      spectator.detectChanges();
+
+      expect(spectator.query('button[checked]')).toBeVisible();
+      expect(spectator.query('button[unchecked]')).not.toBeVisible();
+
+      formGroup.controls.toggleState.setValue(false);
+      spectator.detectChanges();
+
+      expect(spectator.query('button[checked]')).not.toBeVisible();
+      expect(spectator.query('button[unchecked]')).toBeVisible();
     });
   });
 });
