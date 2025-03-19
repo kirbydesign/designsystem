@@ -545,7 +545,7 @@ export class PageComponent
 
     this.enter.emit();
 
-    this.updateHtmlDocTitle();
+    this.setHtmlDocTitle();
     this.patchIonLastFocussed();
 
     this.observeTitle();
@@ -720,7 +720,9 @@ export class PageComponent
     this.isObservingTitle = false;
   }
 
-  private updateHtmlDocTitle() {
+  private setHtmlDocTitle() {
+    if (!this.config?.setHtmlDocTitle) return;
+
     const toolbar: HTMLElement = this.ionHeaderElement.nativeElement.querySelector('ion-toolbar');
 
     const titleArea: HTMLElement = toolbar.querySelector('ion-title .toolbar-title');
