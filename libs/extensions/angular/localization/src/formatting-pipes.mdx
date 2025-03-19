@@ -28,13 +28,15 @@ formatAccountNumber(value: AccountNumber);
 <Description of={AmountStories.default} />
 <Description of={AmountStories.AmountDKK} />
 <Canvas of={AmountStories.AmountDKK} />
+<Description of={AmountStories.AmountCurrentMapping} />
+<Canvas of={AmountStories.AmountCurrentMapping} />
 <Description of={AmountStories.AmountUSD} />
 <Canvas of={AmountStories.AmountUSD} />
 
 If you need the formatted value in your component code instead of in the template, you can use the underlying service directly:
 
 ```ts
-AmountService.formatAmount(amount: Amount, amountServiceConfiguration: AmountServiceConfiguration)
+AmountService.formatAmount(amount: Amount, amountServiceConfiguration?: AmountServiceConfiguration)
 ```
 
 ## Number 
@@ -79,10 +81,10 @@ To set up the localization formatting pipes, you need to provide the necessary c
 ```ts
 import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions-angular/localization';
 
-const lo
 providers: [
     provideKirbyExtensionsLocalizationToken(() => ({
         nativeCurrency: 'DKK', /* @example 'DKK | kr. | EUR' */
+        currencyMappings: { DKK: 'kr.' },
         defaultLang: 'da',
         countryCode: '+45',
         timeZone: 'Europe/Copenhagen',

@@ -3,6 +3,7 @@ import {
   AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -77,7 +78,8 @@ export class CheckboxComponent
 
   constructor(
     private element: ElementRef<HTMLElement>,
-    private ionicElementPartHelper: IonicElementPartHelper
+    private ionicElementPartHelper: IonicElementPartHelper,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -144,6 +146,7 @@ export class CheckboxComponent
    */
   writeValue(value: boolean): void {
     this.checked = value;
+    this.cdr.detectChanges();
   }
 
   /**

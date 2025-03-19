@@ -149,7 +149,8 @@ describe('RadioComponent', () => {
         it('should have correct icon styling', () => {
           expect(radioIcon).toHaveComputedStyle({
             'background-color': getColor('white'),
-            'border-width': '0px',
+            'border-width': '1px',
+            'border-color': getColor('semi-dark'),
             'box-shadow': getElevation(4),
           });
         });
@@ -202,8 +203,8 @@ describe('RadioComponent', () => {
             opacity: '1',
           });
           expect(radioIcon).toHaveComputedStyle({
-            'background-color': getColor('semi-light'),
-            'border-width': '0px',
+            'border-width': '1px',
+            'border-color': getColor('medium'),
             'box-shadow': 'none',
           });
         });

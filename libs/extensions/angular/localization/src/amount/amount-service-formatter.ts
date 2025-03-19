@@ -1,27 +1,27 @@
 import { formatNumber } from '@angular/common';
-
+import { KirbyExtensionsLocalizationToken } from '../di-tokens';
 import { Amount } from './amount.model';
 
 export function formatAmount(
   amount: Amount,
-  amountServiceConfiguration: AmountServiceConfiguration,
   locale: string,
-  nativeCurrency: string
+  config: KirbyExtensionsLocalizationToken,
+  amountServiceConfiguration?: AmountServiceConfiguration
 ) {
-  const config = deriveConfiguration(amountServiceConfiguration);
+  const amountConfig = deriveConfiguration(amountServiceConfiguration);
 
-  let formattedAmount = formatNumber(amount && amount.amount, locale, config.digitsInfo);
+  let formattedAmount = formatNumber(amount && amount.amount, locale, amountConfig.digitsInfo);
 
-  if (config.stripSign) {
+  if (amountConfig.stripSign) {
     formattedAmount = formattedAmount.replace('-', '').trim();
   }
 
-  const currencyCodeToAppend = deriveCurrencyCode(config, amount, nativeCurrency);
+  const currencyCodeToAppend = deriveCurrencyCode(amountConfig, amount, config);
 
   if (!currencyCodeToAppend) {
     return formattedAmount;
   }
-  if (config.currencyCodePosition === 'postfix') {
+  if (amountConfig.currencyCodePosition === 'postfix') {
     return formattedAmount + ' ' + currencyCodeToAppend;
   } else {
     return currencyCodeToAppend + ' ' + formattedAmount;
@@ -29,25 +29,27 @@ export function formatAmount(
 }
 
 export function deriveCurrencyCode(
-  config: AmountServiceConfiguration,
+  amountConfig: AmountServiceConfiguration,
   amount: Amount,
-  nativeCurrency: string
+  config: KirbyExtensionsLocalizationToken
 ) {
   let currencyCodeToAppend;
 
-  if (config.showCurrencyCode) {
-    if (config.showCurrencyCode === 'alwaysShowCurrency') {
-      currencyCodeToAppend = amount && amount.currencyCode;
-    } else if (config.showCurrencyCode === 'showForeignCurrency') {
+  if (amountConfig.showCurrencyCode) {
+    if (amountConfig.showCurrencyCode === 'alwaysShowCurrency') {
+      currencyCodeToAppend = amount.currencyCode;
+    } else if (amountConfig.showCurrencyCode === 'showForeignCurrency') {
       currencyCodeToAppend =
-        amount && amount.currencyCode !== nativeCurrency ? amount.currencyCode : '';
+        amount.currencyCode !== config.nativeCurrency ? amount.currencyCode : '';
+    } else if (amountConfig.showCurrencyCode === 'useCurrencyMapping') {
+      currencyCodeToAppend = config.currencyMappings?.[amount.currencyCode] || amount.currencyCode;
     }
   }
 
   return currencyCodeToAppend || '';
 }
 
-export function deriveConfiguration(configuration: AmountServiceConfiguration) {
+export function deriveConfiguration(configuration: AmountServiceConfiguration = {}) {
   const config: AmountServiceConfiguration = {
     showCurrencyCode: '',
     digitsInfo: '1.2-2',
@@ -57,7 +59,11 @@ export function deriveConfiguration(configuration: AmountServiceConfiguration) {
   return Object.assign({}, config, configuration);
 }
 
-export type ShowCurrencyCode = '' | 'alwaysShowCurrency' | 'showForeignCurrency';
+export type ShowCurrencyCode =
+  | ''
+  | 'alwaysShowCurrency'
+  | 'showForeignCurrency'
+  | 'useCurrencyMapping';
 export type CurrencyCodePosition = '' | 'prefix' | 'postfix';
 
 export interface AmountServiceConfiguration {
@@ -65,8 +71,9 @@ export interface AmountServiceConfiguration {
    * - '' - don't output CurrencyCode
    * - 'alwaysShowCurrency' - always shows CurrencyCode, regardless of presentation currency
    * - 'showForeignCurrency' - only show CurrencyCode if it differs from the presentation currency
+   * - 'useCurrencyMapping' - Shows the currency symbol defined in KirbyExtensionsLocalizationToken.currencyMappings instead of the currency code. Fallback to currencyCode
    */
-  showCurrencyCode: ShowCurrencyCode;
+  showCurrencyCode?: ShowCurrencyCode;
   /**
    * The position of the currency code in the formatted amount
    * - 'postfix' - output CurrencyCode after the formatted amount, eg. 1.234,56 EUR

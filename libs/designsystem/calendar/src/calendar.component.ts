@@ -32,7 +32,7 @@ import {
   startOfWeek,
 } from 'date-fns';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
-import { da, enGB, enUS } from 'date-fns/locale';
+import { da, de, enGB, enUS } from 'date-fns/locale';
 
 import { capitalizeFirstLetter } from '@kirbydesign/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -120,7 +120,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   private focussedDate: Date;
   private locale: Locale;
   private timeZoneName: string;
-  private includedLocales = { da, enGB, enUS };
+  private includedLocales = { da, de, enGB, enUS };
 
   get selectedDate(): Date {
     return this._selectedDate;
@@ -248,6 +248,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   private formatDateLabel(): string {
     const localeDateFormats = {
       da: 'd. MMMM',
+      de: 'd. MMMM',
       'en-GB': 'd MMMM',
       'en-US': 'MMMM d',
     };
