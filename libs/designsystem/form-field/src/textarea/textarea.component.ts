@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  forwardRef,
   HostBinding,
   HostListener,
   Input,
@@ -10,6 +11,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
@@ -19,8 +21,15 @@ import { FormFieldControl } from '@kirbydesign/designsystem/types';
   selector: 'textarea[kirby-textarea]',
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TextareaComponent),
+      multi: true,
+    },
+  ],
 })
-export class TextareaComponent implements OnChanges, FormFieldControl {
+export class TextareaComponent implements OnChanges, FormFieldControl, ControlValueAccessor {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
@@ -65,6 +74,28 @@ export class TextareaComponent implements OnChanges, FormFieldControl {
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
     }
+  }
+
+  writeValue(value: string): void {
+    if (value !== this.value) {
+      this.kirbyChange.emit(value);
+      this.value = value;
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  registerOnChange(_fn: any): void {
+    // handled in textarea Angular component
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  registerOnTouched(_fn: any): void {
+    // handled in textarea Angular component
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setDisabledState?(_isDisabled: boolean): void {
+    // handled in textarea Angular component
   }
 
   @HostListener('keyup', ['$event.target.value'])
