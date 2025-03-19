@@ -71,6 +71,7 @@ import {
 } from '@kirbydesign/designsystem/shared';
 import { Title } from '@angular/platform-browser';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
+import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/kirby-ionic-module';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -389,7 +390,8 @@ export class PageComponent
     private navCtrl: NavController,
     private ionicElementPartHelper: IonicElementPartHelper,
     public translations: TranslationService,
-    private htmlDocTitle: Title
+    private htmlDocTitle: Title,
+    @Optional() @Inject(KIRBY_CONFIG) private config?: KirbyConfig
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -408,6 +410,8 @@ export class PageComponent
   }
 
   ngOnInit(): void {
+    console.log('PageComponent ngOnInit - kirbyConfig', this.config);
+
     this.removeWrapper();
     this.ionicElementPartHelper.setPart(
       'background',

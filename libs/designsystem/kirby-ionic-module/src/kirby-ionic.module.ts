@@ -1,14 +1,19 @@
-import { EnvironmentProviders, makeEnvironmentProviders, NgModule, Provider } from '@angular/core';
+import {
+  EnvironmentProviders,
+  InjectionToken,
+  makeEnvironmentProviders,
+  Provider,
+} from '@angular/core';
 import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
 import type { IonicConfig } from '@ionic/core';
 
-import { InjectionToken } from '@angular/core';
-
 export interface KirbyConfig {
+  moduleRootRoutePath?: string;
   focusManager?: boolean;
+  setHtmlDocTitle?: boolean;
 }
 
-export const KIRBY_CONFIG = new InjectionToken<any>('KIRBY_CONFIG');
+export const KIRBY_CONFIG = new InjectionToken<KirbyConfig>('KIRBY_CONFIG');
 
 export function provideKirby(config?: KirbyConfig): EnvironmentProviders {
   const shouldHaveNoopAnimation = !isPlatform('hybrid');
@@ -20,15 +25,13 @@ export function provideKirby(config?: KirbyConfig): EnvironmentProviders {
   const ionicConfig: IonicConfig = {
     mode: 'ios',
     ...navAnimationConfig,
+    focusManagerPriority: config?.focusManager ? ['heading'] : undefined,
   };
 
-  ionicConfig.focusManagerPriority = config?.focusManager ? ['heading'] : undefined;
+  const providers: Provider[] = [];
+  if (config) {
+    providers.push({ provide: KIRBY_CONFIG, useValue: config });
+  }
 
-  const providers: Provider[] = [{ provide: KIRBY_CONFIG, useValue: config }];
   return makeEnvironmentProviders([...providers, provideIonicAngular(ionicConfig)]);
 }
-
-@NgModule({
-  providers: [provideKirby({ focusManager: true })],
-})
-export class KirbyIonicModule {}

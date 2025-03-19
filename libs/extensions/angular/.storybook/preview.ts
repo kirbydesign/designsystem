@@ -1,8 +1,7 @@
-import { importProvidersFrom } from '@angular/core';
 import { applicationConfig, Preview } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { provideKirby } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions-angular/localization';
 
 import { defaultParameters } from 'tools/storybook-config/shared-config';
@@ -23,7 +22,7 @@ const preview: Preview = {
   decorators: [
     applicationConfig({
       providers: [
-        importProvidersFrom([KirbyIonicModule]),
+        provideKirby(),
         provideKirbyExtensionsLocalizationToken(() => ({
           nativeCurrency: 'DKK',
           defaultLang: 'da',

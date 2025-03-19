@@ -1,8 +1,9 @@
-import { importProvidersFrom, inject, provideAppInitializer } from '@angular/core';
+import { inject, provideAppInitializer } from '@angular/core';
 import { applicationConfig, Preview } from '@storybook/angular';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+
 import { defaultParameters } from 'tools/storybook-config/shared-config';
 import { IconRegistryService } from '@kirbydesign/designsystem/icon';
+import { provideKirby } from '@kirbydesign/designsystem/kirby-ionic-module';
 
 const preview: Preview = {
   parameters: {
@@ -16,7 +17,7 @@ const preview: Preview = {
   decorators: [
     applicationConfig({
       providers: [
-        importProvidersFrom([KirbyIonicModule]),
+        provideKirby(),
         provideAppInitializer(() => {
           const iconRegistry = inject(IconRegistryService);
           iconRegistry.addIcons([
