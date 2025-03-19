@@ -106,6 +106,10 @@ ion-toolbar {
     box-sizing: border-box;
     font-size: utils.font-size('n');
     font-weight: utils.font-weight('normal');
+    padding-inline: calc(
+      var(--action-buttons-width, $toolbar-button-size + $toolbar-button-spacing) +
+        var(--padding-start)
+    );
 
     h1 {
       margin-bottom: 0;
@@ -135,11 +139,6 @@ ion-toolbar {
       transition-property: opacity, transform;
       transition-duration: 150ms;
       transition-timing-function: utils.get-transition-easing('enter-exit');
-      font-weight: utils.font-weight('bold');
-      padding-inline: calc(
-        var(--action-buttons-width, $toolbar-button-size + $toolbar-button-spacing) +
-          var(--padding-start)
-      );
       transform: translateY(10px);
 
       span.clickable {
