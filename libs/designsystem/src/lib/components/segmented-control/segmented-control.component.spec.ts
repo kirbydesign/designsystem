@@ -10,6 +10,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { first } from 'rxjs';
 import { SegmentItem } from './segment-item';
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
 
@@ -502,7 +503,7 @@ describe('segmentcontrol in form', () => {
 
   it('should update form value on toggle', (done) => {
     const idToSelect = items[1].id;
-    formGroup.valueChanges.subscribe((value) => {
+    formGroup.valueChanges.pipe(first()).subscribe((value) => {
       expect(value.segmentedControl.id).toBe(idToSelect);
       done();
     });
