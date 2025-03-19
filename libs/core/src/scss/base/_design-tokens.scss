@@ -13,6 +13,12 @@
   }
 }
 
+@mixin dark-colors() {
+  @each $name, $value in colors.$dark-kirby-colors {
+    --kirby-#{$name}: #{$value};
+  }
+}
+
 @mixin text-colors() {
   @each $name, $value in colors.$text-colors {
     --kirby-text-color-#{$name}: #{$value};
@@ -86,15 +92,23 @@
   @include font-family;
 
   /* COLORS */
-  @include colors;
+  @media (prefers-color-scheme: light) {
+    @include colors;
+  }
+  @media (prefers-color-scheme: dark) {
+    @include dark-colors;
+  }
 
   /* TEXT-COLORS */
+
   @include text-colors;
 
   /* DECORATION-COLORS */
+
   @include decoration-colors;
 
   /* OVERLAY-COLORS */
+
   @include white-overlay-colors;
   @include dark-overlay-colors;
 

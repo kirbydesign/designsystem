@@ -87,6 +87,18 @@ $system-colors: (
   'dark-overlay': rgb(28 28 28 / 6%),
   'black': #1c1c1c,
 ) !default;
+$dark-system-colors: (
+  'background-color': #1c1c1c,
+  'white': black,
+  'white-overlay': rgb(0 0 0 / 15%),
+  'light': #353535,
+  'semi-light': #707070,
+  'medium': #8e8e8e,
+  'semi-dark': #d1d1d1,
+  'dark': #f2f2f2,
+  'dark-overlay': rgb(255 255 255 / 6%),
+  'black': #f6f6f6,
+) !default;
 $text-colors: (
   'white': #fff,
   'semi-dark': #707070,
@@ -111,7 +123,10 @@ $dark-overlay-colors: (
 ) !default;
 $focus-ring-color: rgb(77 144 254);
 
-@function get-all-colors() {
+@function get-all-colors($dark-theme: false) {
+  @if $dark-theme {
+    @return map.merge(map.merge($brand-colors, $notification-colors), $dark-system-colors);
+  }
   @return map.merge(map.merge($brand-colors, $notification-colors), $system-colors);
 }
 
@@ -200,4 +215,9 @@ $main-colors: map.remove(
 }
 
 $kirby-colors: generate-colors();
+$dark-kirby-colors: generate-colors(
+  get-all-colors(
+    $dark-theme: true,
+  )
+);
 $kirby-text-colors: generate-colors($text-colors);
