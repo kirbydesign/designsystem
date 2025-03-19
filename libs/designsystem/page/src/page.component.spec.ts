@@ -547,13 +547,13 @@ describe('PageComponent', () => {
 
     describe('having a title and subtitle', () => {
       it('should have the configured title in the toolbar-title', () => {
-        const toolbarTitle = ionToolbar.querySelector('ion-title .toolbar-title');
+        const toolbarTitle = ionToolbar.querySelector('ion-title .toolbar-title h1');
 
         expect(toolbarTitle).toHaveText(titleText);
       });
 
       it('should render the toolbar-title with the correct font-weight', () => {
-        const toolbarTitle = ionToolbar.querySelector('ion-title .toolbar-title');
+        const toolbarTitle = ionToolbar.querySelector('ion-title .toolbar-title h1');
 
         expect(toolbarTitle).toHaveComputedStyle({
           'font-weight': fontWeight('bold'),
@@ -561,7 +561,7 @@ describe('PageComponent', () => {
       });
 
       it('should have the configured title', () => {
-        const pageTitleHeading = ionContent.querySelector('.page-title > h1');
+        const pageTitleHeading = ionContent.querySelector('.page-title > span');
 
         expect(spectator.component.title).toEqual(titleText);
         expect(pageTitleHeading).toHaveText(titleText, true);
@@ -569,7 +569,7 @@ describe('PageComponent', () => {
 
       it('should render title with correct margin and padding', () => {
         const pageTitle = ionContent.querySelector('.page-title');
-        const pageTitleHeading = pageTitle.querySelector(':scope > h1');
+        const pageTitleHeading = pageTitle.querySelector(':scope > span');
 
         expect(pageTitle).toHaveComputedStyle({
           'margin-left': '0px',
@@ -619,7 +619,7 @@ describe('PageComponent', () => {
     describe('having a title and subtitle', () => {
       it('should have the configured title', async () => {
         await TestHelper.whenReady(ionContent);
-        const pageTitleHeading = ionContent.querySelector('.page-title > h1');
+        const pageTitleHeading = ionContent.querySelector('.page-title > span');
 
         expect(spectator.component.title).toEqual(titleText);
         expect(pageTitleHeading).toHaveText(titleText, true);
@@ -628,7 +628,7 @@ describe('PageComponent', () => {
       it('should render title with correct margin and padding', async () => {
         await TestHelper.whenReady(ionContent);
         const pageTitle = ionContent.querySelector('.page-title');
-        const pageTitleHeading = pageTitle.querySelector(':scope > h1');
+        const pageTitleHeading = pageTitle.querySelector(':scope > span');
 
         expect(pageTitle).toHaveComputedStyle({
           'margin-left': '0px',
@@ -1219,7 +1219,7 @@ describe('PageComponent', () => {
       describe('after scrolling page title above content top', () => {
         beforeEach(async () => {
           // Scroll page title above content top:
-          const pageTitle: HTMLElement = ionContent.querySelector('kirby-header h1.title');
+          const pageTitle: HTMLElement = ionContent.querySelector('kirby-header span.title');
           const andThenSome = 10;
           const verticalScrollAmount = pageTitle.offsetTop + pageTitle.offsetHeight + andThenSome;
 
