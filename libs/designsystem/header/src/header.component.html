@@ -20,7 +20,7 @@
   <span
     *ngIf="!!title && !!value"
     #titleElement
-    class="title value kirby-text-medium"
+    class="title kirby-text-medium"
     [class.clickable]="hasInteractiveTitle !== false && titleClick.observed"
     [class.has-icon]="!!titleActionIconTemplate"
     (click)="onTitleClick($event)"

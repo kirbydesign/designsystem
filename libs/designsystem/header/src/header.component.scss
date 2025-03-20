@@ -35,7 +35,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   max-width: 100%;
 
   // title in key value scenario should't have bottom margin:
-  & > span.title.value {
+  & > span.title {
     margin-bottom: 0;
   }
 }
