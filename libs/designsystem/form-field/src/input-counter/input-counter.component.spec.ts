@@ -242,4 +242,55 @@ describe('InputCounterComponent', () => {
       expect(inputCounterComponent.text).toBe('0');
     });
   });
+
+  describe('when used in a form with a form control bound to input', () => {
+    let component: InputCounterComponent;
+    let spectator: SpectatorHost<InputCounterComponent>;
+    let formGroup = new FormGroup({
+      input: new FormControl(''),
+    });
+
+    const createHost = createHostFactory({
+      component: InputCounterComponent,
+      declarations: [FormFieldMessageComponent],
+      imports: [InputComponent, ReactiveFormsModule],
+    });
+
+    beforeEach(() => {
+      formGroup = new FormGroup({
+        input: new FormControl(''),
+      });
+
+      spectator = createHost(
+        `<form [formGroup]="formGroup">
+          <input #input [formControl]="formGroup.controls.input" kirby-input ></input>
+          <kirby-input-counter #inputCounter [listenTo]="input" />
+        </form>`,
+        {
+          hostProps: { formGroup },
+          detectChanges: true,
+        }
+      );
+      component = spectator.component;
+
+      component.ngOnInit();
+    });
+
+    it('should update counter on formControl change', () => {
+      const initialValue = 'Initial value';
+      const updatedValue = 'Updated';
+      const inputCounterComponent = spectator.queryHost(InputCounterComponent);
+
+      formGroup.controls.input.setValue(initialValue);
+      expect(inputCounterComponent.text).toBe(initialValue.length.toString());
+
+      formGroup.controls.input.setValue(updatedValue);
+      expect(inputCounterComponent.text).toBe(updatedValue.length.toString());
+
+      formGroup.reset({
+        input: '',
+      });
+      expect(inputCounterComponent.text).toBe('0');
+    });
+  });
 });

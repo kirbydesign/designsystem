@@ -13,6 +13,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
+import { ControlValueAccessor } from '@angular/forms';
 import { DateInputDirective } from '../directives/date/date-input.directive';
 
 export enum InputSize {
@@ -34,7 +35,7 @@ export enum InputSize {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent implements OnChanges, OnInit, FormFieldControl {
+export class InputComponent implements OnChanges, OnInit, FormFieldControl, ControlValueAccessor {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
@@ -112,6 +113,28 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
     }
+  }
+
+  writeValue(value: string): void {
+    if (value !== this.value) {
+      this.kirbyChange.emit(value);
+      this.value = value;
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  registerOnChange(_fn: any): void {
+    // handled in textarea Angular component
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  registerOnTouched(_fn: any): void {
+    // handled in textarea Angular component
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setDisabledState?(_isDisabled: boolean): void {
+    // handled in textarea Angular component
   }
 
   private static typeToInputmodeMap = {
