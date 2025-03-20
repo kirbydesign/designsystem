@@ -8,7 +8,6 @@ import {
   HostListener,
   Input,
   Output,
-  signal,
   ViewChild,
 } from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
@@ -80,7 +79,7 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
     this.ensureIonSegmentSelected();
   }
 
-  protected isDisabled = signal(false);
+  protected isDisabled = false;
 
   /**
    * After upgrading to Ionic standalone components (Ionic v.7.6.6)
@@ -168,7 +167,7 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    this.isDisabled = isDisabled;
   }
 
   onSegmentSelect(selectedId: string) {

@@ -3,7 +3,7 @@
   [scrollable]="disableChangeOnSwipe || mode !== 'default'"
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventOutsideClick($event)"
-  [disabled]="isDisabled()"
+  [disabled]="isDisabled"
 >
   <ion-segment-button
     *ngFor="let item of items; let i = index"
