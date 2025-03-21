@@ -14,7 +14,6 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
-import { AttributesDirective } from '@kirbydesign/designsystem/shared';
 import { RadioComponent } from '../radio.component';
 
 import { RadioGroupComponent } from './radio-group.component';
@@ -32,7 +31,6 @@ describe('RadioGroupComponent', () => {
       FormsModule,
       ReactiveFormsModule,
       FlagComponent,
-      AttributesDirective,
     ],
   });
 
@@ -761,6 +759,7 @@ describe('RadioGroupComponent', () => {
       await TestHelper.whenReady(ionRadioGroupElement);
     });
     it('should set aria-label attribute on ion-radio-group', () => {
+      console.log('ion', ionRadioGroupElement);
       expect(ionRadioGroupElement.getAttribute('aria-label')).toEqual('aria-test');
       expect(spectator.element.getAttribute('aria-label')).toBeNull();
     });

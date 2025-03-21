@@ -26,6 +26,27 @@ export function inheritAriaLabelText(element: HTMLElement): string {
   }
 }
 
+export function forwardAttributes(
+  sourceElement: HTMLElement,
+  targetElement: HTMLElement,
+  attributes: string[],
+  renderer: Renderer2
+): void {
+  console.log('sourceElement', sourceElement);
+  console.log('targetElement', targetElement);
+  if (!sourceElement || !targetElement) {
+    return;
+  }
+
+  attributes.forEach((attribute) => {
+    if (sourceElement.hasAttribute(attribute)) {
+      const value = sourceElement.getAttribute(attribute);
+      renderer.setAttribute(targetElement, attribute, value);
+      renderer.removeAttribute(sourceElement, attribute);
+    }
+  });
+}
+
 export function inheritAttributes(
   element: HTMLElement,
   attributes: string[],

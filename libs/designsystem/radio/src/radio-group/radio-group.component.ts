@@ -18,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
-import { inheritAttributes } from '@kirbydesign/designsystem/shared';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { RadioComponent } from '../radio.component';
 
 @Component({
@@ -45,8 +45,6 @@ export class RadioGroupComponent
   ) {}
 
   // #region public properties
-
-  _attributes: Record<string, any> = {};
 
   get disabled(): boolean {
     return this._disabled;
@@ -160,8 +158,13 @@ export class RadioGroupComponent
   ngAfterContentInit(): void {
     this.initSelectionStateFromProjectedContent();
     this.listenForProjectedRadiosChange();
-    this._attributes = inheritAttributes(
+
+    console.log(this.element.nativeElement);
+    console.log(this.element.nativeElement.querySelector('ion-radio-group'));
+
+    forwardAttributes(
       this.element.nativeElement,
+      this.element.nativeElement.querySelector('ion-radio-group'),
       ['aria-label', 'aria-labelledby'],
       this.renderer
     );
