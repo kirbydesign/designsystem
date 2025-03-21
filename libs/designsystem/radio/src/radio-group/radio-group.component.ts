@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   ContentChild,
@@ -36,7 +37,7 @@ import { RadioComponent } from '../radio.component';
   standalone: false,
 })
 export class RadioGroupComponent
-  implements AfterContentInit, ControlValueAccessor, FormFieldControl
+  implements AfterContentInit, ControlValueAccessor, FormFieldControl, AfterViewInit
 {
   constructor(
     private changeDetectionRef: ChangeDetectorRef,
@@ -158,10 +159,9 @@ export class RadioGroupComponent
   ngAfterContentInit(): void {
     this.initSelectionStateFromProjectedContent();
     this.listenForProjectedRadiosChange();
+  }
 
-    console.log(this.element.nativeElement);
-    console.log(this.element.nativeElement.querySelector('ion-radio-group'));
-
+  ngAfterViewInit(): void {
     forwardAttributes(
       this.element.nativeElement,
       this.element.nativeElement.querySelector('ion-radio-group'),
@@ -214,6 +214,8 @@ export class RadioGroupComponent
 
   @HostListener('ionBlur')
   _onRadioBlur() {
+    console.log('TOUCHED');
+
     this._onTouched();
   }
 

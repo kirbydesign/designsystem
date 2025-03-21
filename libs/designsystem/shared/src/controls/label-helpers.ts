@@ -32,9 +32,7 @@ export function forwardAttributes(
   attributes: string[],
   renderer: Renderer2
 ): void {
-  console.log('sourceElement', sourceElement);
-  console.log('targetElement', targetElement);
-  if (!sourceElement || !targetElement) {
+  if (!sourceElement || !targetElement || !attributes || attributes.length === 0) {
     return;
   }
 
