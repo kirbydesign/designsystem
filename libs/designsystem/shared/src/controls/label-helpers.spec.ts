@@ -19,7 +19,7 @@ class TestComponent {
   }
 }
 
-describe('AttributesDirective', () => {
+describe('LabelHelpers', () => {
   let fixture: ComponentFixture<TestComponent>;
   let sourceElement: HTMLElement;
   let targetElement: HTMLElement;
@@ -33,7 +33,7 @@ describe('AttributesDirective', () => {
     console.log('targetElement', targetElement);
   });
 
-  it('should set attributes on the element', () => {
+  it('should forward attributes from source element to target element', () => {
     sourceElement.setAttribute('aria-label', 'label');
     sourceElement.setAttribute('aria-labelledby', 'labelledby');
 
