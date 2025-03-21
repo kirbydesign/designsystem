@@ -3,7 +3,6 @@ import localeDa from '@angular/common/locales/da';
 import { LOCALE_ID } from '@angular/core';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 
 import { InputComponent } from '../../input/input.component';
 
@@ -108,8 +107,20 @@ describe('DateInputDirective', () => {
         expect(datemaskFontFamily).toEqual(inputFontFamily);
       });
 
-      it('should have the same font-size as input', () => {
-        const datemask = spectator.element.parentNode.querySelector('.date-mask');
+      it('should have the same font-size as input by default', () => {
+        const datemask = spectator.element.parentElement.querySelector('.date-mask');
+
+        const inputFontSize = TestHelper.getCssProperty(spectator.element, 'font-size');
+        const datemaskFontSize = TestHelper.getCssProperty(datemask, 'font-size');
+
+        expect(datemaskFontSize).toEqual(inputFontSize);
+      });
+
+      it('should have the same font-size as input regardless of host font-size', () => {
+        const hostElement = spectator.element.parentElement;
+        const datemask = hostElement.querySelector('.date-mask');
+
+        hostElement.style.fontSize = '20px';
 
         const inputFontSize = TestHelper.getCssProperty(spectator.element, 'font-size');
         const datemaskFontSize = TestHelper.getCssProperty(datemask, 'font-size');
