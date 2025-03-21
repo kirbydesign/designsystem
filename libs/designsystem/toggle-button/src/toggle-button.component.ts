@@ -36,7 +36,6 @@ export class ToggleButtonComponent implements ControlValueAccessor {
   writeValue(checked: boolean): void {
     if (this.checked !== checked) {
       this.checked = checked;
-      // TODO: convert component to signals and bind in template for local CD
       this.cdr.markForCheck();
     }
   }
