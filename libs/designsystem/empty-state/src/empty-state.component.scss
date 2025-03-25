@@ -1,6 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-article {
+:host {
   max-width: 330px;
   margin: auto;
   display: flex;
