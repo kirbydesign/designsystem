@@ -85,7 +85,7 @@ export class TextareaComponent implements OnChanges, FormFieldControl, ControlVa
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   registerOnChange(_fn: any): void {
-    // handled in textarea Angular component
+    // handled by built-in textarea support in Angular 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
