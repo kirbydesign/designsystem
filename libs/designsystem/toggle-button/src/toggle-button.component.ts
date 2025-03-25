@@ -73,6 +73,11 @@ export class ToggleButtonComponent implements ControlValueAccessor {
     this.focusToggledButton();
   }
 
+  @HostListener('blur')
+  onBlur() {
+    this.onTouched();
+  }
+
   focusToggledButton() {
     // force re-render to ensure that the new button is in the dom
     this.cdr.detectChanges();

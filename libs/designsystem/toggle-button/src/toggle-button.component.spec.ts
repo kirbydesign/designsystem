@@ -114,5 +114,12 @@ describe('ToggleButtonComponent', () => {
       expect(spectator.query('button[checked]')).not.toBeVisible();
       expect(spectator.query('button[unchecked]')).toBeVisible();
     });
+
+    it('should emit blur event on blur', () => {
+      spectator.component.checked = true;
+      spectator.component.onBlur();
+
+      expect(formGroup.controls.toggleState.touched).toBe(true);
+    });
   });
 });
