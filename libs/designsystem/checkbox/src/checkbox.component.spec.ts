@@ -105,6 +105,14 @@ describe('CheckboxComponent', () => {
       expect(ionCheckbox.checked).toBe(false);
     });
 
+    it('should set the [indeterminate] input on ion-checkbox', () => {
+      spectator.setInput('indeterminate', true);
+      expect(ionCheckbox.indeterminate).toBe(true);
+
+      spectator.setInput('indeterminate', false);
+      expect(ionCheckbox.indeterminate).toBe(false);
+    });
+
     describe('with size', () => {
       it(`should have 'md' size by default`, () => {
         expect(spectator.element).toHaveComputedStyle({

@@ -5,6 +5,7 @@ const config = {
   selector: 'cookbook-checkbox-states-example',
   template: `<kirby-checkbox text="Default"></kirby-checkbox>
 <kirby-checkbox [checked]="true" text="Checked"></kirby-checkbox>
+<kirby-checkbox [indeterminate]="true" text="Partially checked"></kirby-checkbox>
 <kirby-checkbox disabled="true" text="Disabled"></kirby-checkbox>
 <kirby-checkbox disabled="true" [checked]="true" text="Disabled checked"></kirby-checkbox>
 <kirby-checkbox hasError="true" text="Has error"></kirby-checkbox>`,

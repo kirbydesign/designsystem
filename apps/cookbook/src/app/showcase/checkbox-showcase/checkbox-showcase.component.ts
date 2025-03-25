@@ -52,6 +52,13 @@ Use the default attentionLevel 2 for checkbox lists.`,
       type: ['boolean'],
     },
     {
+      name: 'indeterminate',
+      description:
+        'If `true`, the selection state is indeterminate and will take precedence over `checked` visually.',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
       name: 'disabled',
       description: 'Disables the checkbox',
       defaultValue: 'false',

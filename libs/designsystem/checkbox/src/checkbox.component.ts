@@ -42,6 +42,7 @@ export class CheckboxComponent
   private ionCheckboxElement?: ElementRef<HTMLIonCheckboxElement>;
 
   @Input() checked: boolean = false;
+  @Input() indeterminate: boolean = false;
   @Input() attentionLevel: '1' | '2' = '2';
 
   @Input()
