@@ -95,7 +95,7 @@ export class TextareaComponent implements OnChanges, FormFieldControl, ControlVa
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setDisabledState?(_isDisabled: boolean): void {
-    // handled in textarea Angular component
+    // handled by built-in textarea support in Angular 
   }
 
   @HostListener('keyup', ['$event.target.value'])
