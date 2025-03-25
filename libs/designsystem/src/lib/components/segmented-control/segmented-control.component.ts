@@ -178,6 +178,7 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
       setTimeout(() => {
         this.segmentSelect.emit(this.value);
         this.onChange(this.value);
+        this.onTouched();
       });
     }
   }
