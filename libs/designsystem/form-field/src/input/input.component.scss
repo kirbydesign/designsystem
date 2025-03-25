@@ -77,6 +77,7 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 .date-mask {
   font-family: shared.$form-field-input-font-family;
   line-height: shared.$form-field-input-line-height;
+  font-size: var(--kirby-font-size-n);
   color: var(--kirby-white-contrast);
   position: absolute;
   top: 0;
