@@ -205,5 +205,8 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
   _onFocusInOut() {
     // @HostListener(focusin|focusout) triggers Change Detection and updates attr.tabindex on each ion-segment-button
     this._segmentElementHasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
+    if (!this._segmentElementHasFocus) {
+      this.onTouched();
+    }
   }
 }
