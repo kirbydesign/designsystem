@@ -9,7 +9,7 @@ import {
   Input,
   OnDestroy,
 } from '@angular/core';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { inheritAriaLabelText, ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 @Component({
@@ -29,6 +29,8 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   @Input() value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
+
+  _ariaLabel: string;
 
   @HostBinding('class')
   get _cssSize() {
@@ -50,6 +52,7 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
       });
       this.observer.observe(this.elementRef.nativeElement);
     }
+    this._ariaLabel = inheritAriaLabelText(this.elementRef.nativeElement);
   }
 
   ngOnDestroy(): void {
