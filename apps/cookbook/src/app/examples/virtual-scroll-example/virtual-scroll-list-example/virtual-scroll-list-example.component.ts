@@ -8,6 +8,13 @@ import {
 } from '@angular/cdk/scrolling';
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import {
+  AvatarComponent,
+  FlagComponent,
+  IconModule,
+  SectionHeaderComponent,
+} from '@kirbydesign/designsystem';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 @Component({
@@ -21,6 +28,11 @@ import { BaseListComponent } from '../../list-shared/base-list.component';
     ListModule,
     CdkVirtualForOf,
     ItemModule,
+    BadgeComponent,
+    IconModule,
+    FlagComponent,
+    AvatarComponent,
+    SectionHeaderComponent,
   ],
 })
 export class VirtualScrollListExampleComponent extends BaseListComponent {}

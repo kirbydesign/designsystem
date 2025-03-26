@@ -6,11 +6,44 @@
       itemSize="56"
       style="height: 720px"
     >
-      <kirby-list-experimental>
-        <kirby-item *cdkVirtualFor="let item of itemsFullList">
-          <h1>{{ item.id }}: {{ item.title }}</h1>
-        </kirby-item>
-      </kirby-list-experimental>
+      <div *cdkVirtualFor="let item of itemsFullList">
+        @if (item.isStandAlone) {
+          <kirby-section-header>
+            <kirby-label>
+              <h3 heading>Section Header</h3>
+              <p label>With a label</p>
+            </kirby-label>
+          </kirby-section-header>
+        } @else {
+          <kirby-item>
+            <div slot="outside">
+              <kirby-badge themeColor="success" size="sm"></kirby-badge>
+              <kirby-badge themeColor="warning" size="sm"></kirby-badge>
+            </div>
+            <kirby-avatar overlay="true" slot="start">
+              <kirby-icon name="moneybag"></kirby-icon>
+              <kirby-badge>
+                <kirby-icon name="attach"></kirby-icon>
+              </kirby-badge>
+            </kirby-avatar>
+
+            <p class="kirby-item-title">
+              {{ item.title }}
+            </p>
+
+            <kirby-label slot="end">
+              @if (item.amount > 0) {
+                <kirby-flag themeColor="success">
+                  <data>{{ item.amount }} DKK</data>
+                </kirby-flag>
+              } @else {
+                <data>{{ item.amount }}</data>
+              }
+              <p class="kirby-item-detail">{{ item.detail }}</p>
+            </kirby-label>
+          </kirby-item>
+        }
+      </div>
     </cdk-virtual-scroll-viewport>
   </kirby-page-content>
 </kirby-page>
