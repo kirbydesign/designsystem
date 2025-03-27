@@ -117,7 +117,7 @@ describe('ToggleButtonComponent', () => {
 
     it('should emit blur event on blur', () => {
       spectator.component.checked = true;
-      spectator.component.onBlur();
+      spectator.component.onFocusOut();
 
       expect(formGroup.controls.toggleState.touched).toBe(true);
     });
