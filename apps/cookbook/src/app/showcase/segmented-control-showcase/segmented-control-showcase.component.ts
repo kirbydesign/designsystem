@@ -7,7 +7,9 @@ import { SegmentedControlExampleModesComponent } from '../../examples/segmented-
 import { SegmentedControlExampleGroupedComponent } from '../../examples/segmented-control-example/grouped/grouped';
 import { SegmentedControlExampleWithBadgeComponent } from '../../examples/segmented-control-example/with-badge/with-badge';
 import { SegmentedControlExampleColorComponent } from '../../examples/segmented-control-example/color/color';
+import { SegmentedControlReactiveFormsExampleComponent } from '../../examples/segmented-control-example/reactive-forms/reactive-forms';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -23,7 +25,9 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
     SegmentedControlExampleGroupedComponent,
     SegmentedControlExampleWithBadgeComponent,
     SegmentedControlExampleColorComponent,
+    SegmentedControlReactiveFormsExampleComponent,
     ApiDescriptionPropertiesComponent,
+    CodeViewerComponent,
   ],
 })
 export class SegmentedControlShowcaseComponent {

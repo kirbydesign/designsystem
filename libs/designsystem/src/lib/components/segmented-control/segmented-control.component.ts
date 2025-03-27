@@ -185,7 +185,6 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
 
   focusNativeButton(event: UIEvent) {
     (event.target as HTMLIonSegmentButtonElement)?.setFocus();
-    this.onTouched();
   }
 
   private _segmentElementHasFocus = false;
