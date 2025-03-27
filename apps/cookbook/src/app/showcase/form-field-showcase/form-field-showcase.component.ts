@@ -8,6 +8,7 @@ import { FormFieldInputLabelExampleComponent } from '../../examples/form-field-e
 import { FormFieldInputLabelMessageExampleComponent } from '../../examples/form-field-example/examples/input/label-message';
 import { FormFieldInputAffixExampleComponent } from '../../examples/form-field-example/examples/input/affix';
 import { FormFieldInputCounterExampleComponent } from '../../examples/form-field-example/examples/input/counter';
+import { FormFieldInputCounterFormExampleComponent } from '../../examples/form-field-example/examples/input/counter-form';
 import { FormFieldInputNumericExampleComponent } from '../../examples/form-field-example/examples/input/numeric';
 import { FormFieldInputDecimalMaskExampleComponent } from '../../examples/form-field-example/examples/input/decimal-mask';
 import { FormFieldInputDateExampleComponent } from '../../examples/form-field-example/examples/input/date';
@@ -22,6 +23,7 @@ import { FormFieldTextareaCounterExampleComponent } from '../../examples/form-fi
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
@@ -39,6 +41,7 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     FormFieldInputLabelMessageExampleComponent,
     FormFieldInputAffixExampleComponent,
     FormFieldInputCounterExampleComponent,
+    FormFieldInputCounterFormExampleComponent,
     FormFieldInputNumericExampleComponent,
     FormFieldInputDecimalMaskExampleComponent,
     FormFieldInputDateExampleComponent,
@@ -53,6 +56,7 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     ApiDescriptionPropertiesComponent,
     ApiDescriptionMethodsComponent,
     ApiDescriptionEventsComponent,
+    CodeViewerComponent,
   ],
 })
 export class FormFieldShowcaseComponent {

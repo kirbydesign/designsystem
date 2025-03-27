@@ -11,6 +11,7 @@ import { FormFieldInputLabelExampleComponent } from './examples/input/label';
 import { FormFieldInputLabelMessageExampleComponent } from './examples/input/label-message';
 import { FormFieldInputAffixExampleComponent } from './examples/input/affix';
 import { FormFieldInputCounterExampleComponent } from './examples/input/counter';
+import { FormFieldInputCounterFormExampleComponent } from './examples/input/counter-form';
 import { FormFieldInputNumericExampleComponent } from './examples/input/numeric';
 import { FormFieldInputDateExampleComponent } from './examples/input/date';
 import { FormFieldInputDateNativeExampleComponent } from './examples/input/date-native';
@@ -34,6 +35,7 @@ import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/co
     FormFieldInputLabelMessageExampleComponent,
     FormFieldInputAffixExampleComponent,
     FormFieldInputCounterExampleComponent,
+    FormFieldInputCounterFormExampleComponent,
     FormFieldInputNumericExampleComponent,
     FormFieldInputDateExampleComponent,
     FormFieldInputDateNativeExampleComponent,

@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  Injector,
   Input,
   OnChanges,
   OnInit,
@@ -13,7 +14,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
-import { ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateInputDirective } from '../directives/date/date-input.directive';
 
 export enum InputSize {
@@ -35,7 +36,7 @@ export enum InputSize {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent implements OnChanges, OnInit, FormFieldControl, ControlValueAccessor {
+export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
@@ -93,16 +94,29 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl, Cont
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
-  constructor(private elementRef: ElementRef<HTMLInputElement>) {}
+  constructor(
+    private elementRef: ElementRef<HTMLInputElement>,
+    private injector: Injector
+  ) {
+    const hostCVAs = this.injector.get(NG_VALUE_ACCESSOR, []);
+    if (Array.isArray(hostCVAs)) {
+      const hostCVA = hostCVAs[0];
+      if (hostCVA) {
+        const originalWriteValue = hostCVA.writeValue.bind(hostCVA);
+        hostCVA.writeValue = (value: string) => {
+          originalWriteValue(value);
+          this.kirbyChange.emit(value);
+        };
+      }
+    }
+  }
 
   ngOnInit(): void {
     // The native input value is emitted here to make sure that
     // the InputCounterComponent receives the value onInit,
     // when [(ngModel)] is used on kirby-input.
-
     setTimeout(() => {
       const inputValue = this.elementRef.nativeElement.value;
-
       if (inputValue) {
         this.kirbyChange.emit(inputValue);
       }
@@ -113,28 +127,6 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl, Cont
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
     }
-  }
-
-  writeValue(value: string): void {
-    if (value !== this.value) {
-      this.kirbyChange.emit(value);
-      this.value = value;
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  registerOnChange(_fn: any): void {
-    // handled in textarea Angular component
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  registerOnTouched(_fn: any): void {
-    // handled in textarea Angular component
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setDisabledState?(_isDisabled: boolean): void {
-    // handled in textarea Angular component
   }
 
   private static typeToInputmodeMap = {
