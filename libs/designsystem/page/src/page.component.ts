@@ -391,7 +391,7 @@ export class PageComponent
     private ionicElementPartHelper: IonicElementPartHelper,
     public translations: TranslationService,
     private htmlDocTitle: Title,
-    @Optional() @Inject(KIRBY_CONFIG) private config?: KirbyConfig
+    @Optional() @Inject(KIRBY_CONFIG) private config: KirbyConfig
   ) {}
 
   private contentReadyPromise: Promise<void>;

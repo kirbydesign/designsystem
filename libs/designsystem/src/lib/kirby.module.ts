@@ -174,13 +174,7 @@ export class KirbyModule {
   static forChild(config?: KirbyConfig): ModuleWithProviders<KirbyModule> {
     return {
       ngModule: KirbyModule,
-      providers: [
-        {
-          provide: KIRBY_CONFIG,
-          useValue: config,
-        },
-        provideKirby(config),
-      ],
+      providers: [provideKirby(config)],
     };
   }
 
