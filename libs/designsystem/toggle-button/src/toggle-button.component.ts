@@ -73,8 +73,8 @@ export class ToggleButtonComponent implements ControlValueAccessor {
     this.focusToggledButton();
   }
 
-  @HostListener('blur')
-  onBlur() {
+  @HostListener('focusout')
+  onFocusOut() {
     this.onTouched();
   }
 
