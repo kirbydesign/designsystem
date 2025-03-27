@@ -34,5 +34,5 @@ export abstract class BasePageExampleComponent {
             ipsa repellendus similique sunt vero. Alias aspernatur consequuntur debitis delectus ducimus, enim eveniet inventore laudantium libero molestiae
             nesciunt quas recusandae saepe soluta tempore velit, vitae! Aperiam distinctio exercitationem id incidunt
             ipsa repellendus similique sunt vero.</p>
-        <h3>THE END</h3>`;
+        <p class="kirby-text-medium">THE END</p>`;
 }
