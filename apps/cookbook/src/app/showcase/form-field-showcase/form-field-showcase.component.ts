@@ -20,6 +20,7 @@ import { FormFieldFocusExampleComponent } from '../../examples/form-field-exampl
 import { FormFieldTextareaDefaultExampleComponent } from '../../examples/form-field-example/examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from '../../examples/form-field-example/examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from '../../examples/form-field-example/examples/textarea/counter';
+import { FormFieldTextareaCounterFormExampleComponent } from '../../examples/form-field-example/examples/textarea/counter-form';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
@@ -53,6 +54,7 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     FormFieldTextareaDefaultExampleComponent,
     FormFieldTextareaLabelExampleComponent,
     FormFieldTextareaCounterExampleComponent,
+    FormFieldTextareaCounterFormExampleComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionMethodsComponent,
     ApiDescriptionEventsComponent,

@@ -22,6 +22,7 @@ import { FormFieldFocusExampleComponent } from './examples/input/focus';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
+import { FormFieldTextareaCounterFormExampleComponent } from './examples/textarea/counter-form';
 
 @Component({
   selector: 'cookbook-form-field-example',
@@ -46,6 +47,7 @@ import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/co
     FormFieldTextareaDefaultExampleComponent,
     FormFieldTextareaLabelExampleComponent,
     FormFieldTextareaCounterExampleComponent,
+    FormFieldTextareaCounterFormExampleComponent,
     ExampleConfigurationWrapperComponent,
     CheckboxComponent,
   ],

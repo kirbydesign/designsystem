@@ -6,7 +6,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
-  Injector,
+  inject,
   Input,
   OnChanges,
   OnInit,
@@ -94,11 +94,8 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
-  constructor(
-    private elementRef: ElementRef<HTMLInputElement>,
-    private injector: Injector
-  ) {
-    const hostCVAs = this.injector.get(NG_VALUE_ACCESSOR, []);
+  constructor(private elementRef: ElementRef<HTMLInputElement>) {
+    const hostCVAs = inject(NG_VALUE_ACCESSOR, { optional: true });
     if (Array.isArray(hostCVAs)) {
       const hostCVA = hostCVAs[0];
       if (hostCVA) {

@@ -1,23 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormFieldModule, InputComponent } from '@kirbydesign/designsystem/form-field';
+import { FormFieldModule, TextareaComponent } from '@kirbydesign/designsystem/form-field';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { InputSize } from '@kirbydesign/designsystem';
 import { ReactiveFormStateComponent } from '../../../reactive-form-state/reactive-form-state.component';
 import { ExampleConfigurationWrapperComponent } from '../../../example-configuration-wrapper/example-configuration-wrapper.component';
 
 const config = {
-  selector: 'cookbook-form-field-input-counter-form-example',
+  selector: 'cookbook-form-field-textarea-counter-form-example',
   template: `<form [formGroup]="form">
   <kirby-form-field>
-    <input 
-      kirby-input 
-      [size]="size" 
+    <textarea 
+      kirby-textarea 
       placeholder="Enter your message (max 140 chars)" 
       #message 
       maxlength="140"
       formControlName="message"
-    />
+    ></textarea>
     <kirby-input-counter [listenTo]="message"></kirby-input-counter>
   </kirby-form-field>
   
@@ -40,17 +38,17 @@ const config = {
   template: config.template,
   imports: [
     FormFieldModule,
-    InputComponent,
+    TextareaComponent,
     ReactiveFormsModule,
     ButtonComponent,
     ReactiveFormStateComponent,
     ExampleConfigurationWrapperComponent,
   ],
+  standalone: true,
 })
-export class FormFieldInputCounterFormExampleComponent {
+export class FormFieldTextareaCounterFormExampleComponent {
   template: string = config.template;
   form: FormGroup;
-  @Input() size: InputSize;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
