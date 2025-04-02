@@ -4,7 +4,7 @@
   'yes' (checked) or 'no' (not checked) to a simple yes/no question. Multiple checkboxes can be used
   to select several items in a list. In cases where there is a long list of selectable items, a
   "Select all" option at the top of the list can be added to enhance usability. If a user deselects
-  an item, the checkbox for "Select all" should display the state "Partially selected."
+  an item, the checkbox for "Select all" should display as indeterminate."
 </p>
 
 <h2>Types</h2>
@@ -34,6 +34,20 @@
   [ts]="checkboxListExample.codeSnippet"
 >
   <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
+</cookbook-example-viewer>
+
+<h2>Indetermined state</h2>
+<p>
+  In a list of checkboxes, the "Select all" checkbox can be in an indeterminate state. This means
+  that nor all or none are selected.
+</p>
+<cookbook-example-viewer
+  [html]="CheckboxIndeterminateListExample.template"
+  [ts]="CheckboxIndeterminateListExample.codeSnippet"
+>
+  <cookbook-indeterminate-checkbox-list-example
+    #CheckboxIndeterminateListExample
+  ></cookbook-indeterminate-checkbox-list-example>
 </cookbook-example-viewer>
 
 <h2>States</h2>
