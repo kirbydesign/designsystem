@@ -7,6 +7,7 @@ import { CheckboxStatesExampleComponent } from './examples/states';
 import { CheckboxSizesExampleComponent } from './examples/sizes';
 import { CheckboxMultilineExampleComponent } from './examples/multiline';
 import { CheckboxEventsExampleComponent } from './examples/events';
+import { CheckboxIndeterminateListExampleComponent } from '~/app/examples/checkbox-example/examples/list-indetermined';
 
 @Component({
   selector: 'cookbook-checkbox-example',
@@ -16,6 +17,7 @@ import { CheckboxEventsExampleComponent } from './examples/events';
     CheckboxConfirmExampleComponent,
     CheckboxDefaultExampleComponent,
     CheckboxListExampleComponent,
+    CheckboxIndeterminateListExampleComponent,
     CheckboxStatesExampleComponent,
     CheckboxSizesExampleComponent,
     CheckboxMultilineExampleComponent,
