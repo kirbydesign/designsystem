@@ -162,6 +162,8 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 }
 
 .value {
+  display: flex;
+  align-items: baseline;
   max-width: 100%;
   margin-bottom: utils.size('xxxs');
 }
