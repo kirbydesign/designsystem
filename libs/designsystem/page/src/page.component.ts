@@ -410,8 +410,6 @@ export class PageComponent
   }
 
   ngOnInit(): void {
-    console.log('PageComponent ngOnInit - kirbyConfig', this.config);
-
     this.removeWrapper();
     this.ionicElementPartHelper.setPart(
       'background',
