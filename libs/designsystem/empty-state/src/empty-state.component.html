@@ -1,10 +1,8 @@
-<article>
-  <div *ngIf="iconName" class="icon-outline">
-    <kirby-icon [name]="iconName" size="lg"></kirby-icon>
-  </div>
-  <span *ngIf="title" class="title kirby-text-medium">{{ title }}</span>
-  <p *ngIf="subtitle" class="subtitle">{{ subtitle }}</p>
-  <div class="content">
-    <ng-content></ng-content>
-  </div>
-</article>
+<div *ngIf="iconName" class="icon-outline">
+  <kirby-icon [name]="iconName" size="lg"></kirby-icon>
+</div>
+<span *ngIf="title" class="title kirby-text-medium">{{ title }}</span>
+<p *ngIf="subtitle" class="subtitle">{{ subtitle }}</p>
+<div class="content">
+  <ng-content></ng-content>
+</div>
