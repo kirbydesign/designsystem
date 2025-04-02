@@ -19,13 +19,15 @@ import { RouterOutletComponent, RouterOutletModule } from '@kirbydesign/designsy
 import { provideKirby } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { Component } from '@angular/core';
 import { PageModule } from '@kirbydesign/designsystem/page';
-import { PageComponent } from '../../page/src/page.component';
+
+const firstPageTitle = 'First Page';
+const secondPageTitle = 'Second Page';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'first-page',
   template: `
-    <kirby-page [title]="'First Page'">
+    <kirby-page [title]="'${firstPageTitle}'">
       <kirby-page-content>
         <p>Test content inside Kirby Page</p>
         <a [routerLink]="'./second-page'">Second Page Link</a>
@@ -40,7 +42,7 @@ class FirstPageComponent {}
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'second-page',
   template: `
-    <kirby-page [title]="'Second Page'">
+    <kirby-page [title]="'${secondPageTitle}'">
       <kirby-page-content>Content</kirby-page-content>
     </kirby-page>
   `,
@@ -48,15 +50,15 @@ class FirstPageComponent {}
 })
 class SecondPageComponent {}
 
-describe('RouterOutlet with focusManager + setHtmlDocTitle', () => {
+describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle', () => {
   let spectator: SpectatorHost<RouterOutletComponent>;
   let router: SpyObject<Router>;
 
-  const pageUrl = '';
+  const firstPageUrl = '';
   const secondPageUrl = 'second-page';
   const routes: Routes = [
     {
-      path: pageUrl,
+      path: firstPageUrl,
       component: FirstPageComponent,
     },
     {
@@ -83,7 +85,7 @@ describe('RouterOutlet with focusManager + setHtmlDocTitle', () => {
     providers: [provideKirby({ focusManager: true, setHtmlDocTitle: true }), provideRouter(routes)],
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     spectator = createHost(`<div style="position: relative; height: 200px;">
         <kirby-router-outlet></kirby-router-outlet>
       </div>`);
@@ -92,12 +94,37 @@ describe('RouterOutlet with focusManager + setHtmlDocTitle', () => {
   });
 
   it('should focus the h1 element after navigation', async () => {
-    router.navigate(['']);
+    // Go to first page
+    router.navigateByUrl(firstPageUrl);
     await spectator.fixture.whenStable();
 
-    const h1 = spectator.query('h1');
+    // Wait for focus to be set by Ionic
+    await TestHelper.whenTrue(() => document.activeElement !== document.body);
 
-    expect(h1).toBeTruthy();
-    expect(h1).toBe(document.activeElement);
+    const firstPageH1 = spectator.query('first-page h1');
+
+    expect(document.activeElement).toBe(firstPageH1);
+
+    // Navigate to second page via link
+    spectator.click('a');
+    await spectator.fixture.whenStable();
+
+    const secondPageH1 = spectator.query('second-page h1');
+
+    expect(document.activeElement).toBe(secondPageH1);
+  });
+
+  it('should update the HTML document title to match page title after navigation', async () => {
+    // Go to first page
+    router.navigateByUrl('');
+    await spectator.fixture.whenStable();
+
+    expect(document.title).toBe(firstPageTitle);
+
+    // Navigate to second page via link
+    spectator.click('a');
+    await spectator.fixture.whenStable();
+
+    expect(document.title).toBe(secondPageTitle);
   });
 });
