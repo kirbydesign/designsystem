@@ -71,7 +71,7 @@ import {
 } from '@kirbydesign/designsystem/shared';
 import { Title } from '@angular/platform-browser';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
-import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels

@@ -3,7 +3,7 @@ import { applicationConfig, Preview } from '@storybook/angular';
 
 import { defaultParameters } from 'tools/storybook-config/shared-config';
 import { IconRegistryService } from '@kirbydesign/designsystem/icon';
-import { provideKirby } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { provideKirby } from '@kirbydesign/designsystem/config';
 /** Zone JS is required by Angular itself. */
 import 'zone.js';
 

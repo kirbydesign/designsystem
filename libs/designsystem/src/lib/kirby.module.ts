@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
 import {
   ComponentLoaderDirective,
   ResizeObserverFactory,
@@ -77,7 +77,7 @@ import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
-import { provideKirby } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { provideKirby } from '@kirbydesign/designsystem/config';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';

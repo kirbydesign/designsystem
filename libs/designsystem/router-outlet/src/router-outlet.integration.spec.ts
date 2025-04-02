@@ -16,7 +16,7 @@ import { IonRouterOutlet } from '@kirbydesign/designsystem/tabs';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { RouterOutletComponent, RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
-import { provideKirby } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { provideKirby } from '@kirbydesign/designsystem/config';
 import { Component } from '@angular/core';
 import { PageModule } from '@kirbydesign/designsystem/page';
 
