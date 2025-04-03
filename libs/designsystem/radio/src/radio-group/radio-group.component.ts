@@ -131,6 +131,7 @@ export class RadioGroupComponent
   private _onTouched = () => {};
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
@@ -164,9 +165,9 @@ export class RadioGroupComponent
   ngAfterViewInit(): void {
     forwardAttributes(
       this.element.nativeElement,
-      this.element.nativeElement.querySelector('ion-radio-group'),
-      ['aria-label', 'aria-labelledby'],
-      this.renderer
+      this._attributesToForward,
+      this.renderer,
+      this.element.nativeElement.querySelector('ion-radio-group')
     );
   }
 
@@ -214,8 +215,6 @@ export class RadioGroupComponent
 
   @HostListener('ionBlur')
   _onRadioBlur() {
-    console.log('TOUCHED');
-
     this._onTouched();
   }
 
