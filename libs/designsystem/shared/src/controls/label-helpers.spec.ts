@@ -1,6 +1,4 @@
 import { Component, Renderer2 } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { forwardAttributes } from './label-helpers';
 
