@@ -593,7 +593,7 @@ export class PageComponent
     // to work around elements becoming inaccessible after navigating back: https://github.com/ionic-team/ionic-framework/issues/29875
     setTimeout(() => {
       if (ionLastFocus?.getAttribute('tabindex') !== '-1') return;
-      this.renderer.removeAttribute(ionLastFocus, 'tabIndex');
+      this.renderer.removeAttribute(ionLastFocus, 'tabindex');
     });
   }
 
