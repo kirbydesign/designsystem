@@ -344,25 +344,29 @@
 </cookbook-example-viewer>
 
 <h2>Accessibility</h2>
+<h3>Individual Radios</h3>
 <p>
   You should always provide a label for the radio to inform screen reader users what the radio is
-  controlling.
+  controlling. Any visible label provided via the text property of the radio is also used as an
+  accessible label.
 </p>
 <p>
-  When using the radio without a visible label, set the
+  When using radios without a visible label, set the
   <code>aria-label</code>
-  property instead.
+  property on the kirby-radio element to provide a label for screen readers.
+</p>
+
+<h3>Radio Group</h3>
+<p>
+  When using the radio in a form field, the label of the form field will be used as the radio-groups
+  label.
 </p>
 <p>
-  Make sure that your radio-group is also screen reader enabled by linking a label with the
-  <code>aria-labelledBy</code>
-  or by adding its own label with the
+  When using a radio-group without a form-field, a label can be set with the
+  <code>aria-labelledby</code>
+  attribute on the radio-group or by setting the
   <code>aria-label</code>
-  attribute
-</p>
-<p>
-  Note that when using the radio in a form field, the label of the form field will be used as the
-  radio's label.
+  attribute.
 </p>
 
 <h2>Properties</h2>
