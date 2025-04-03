@@ -1,6 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { forwardAttributes } from './label-helpers';
 
 @Component({
@@ -14,37 +15,40 @@ import { forwardAttributes } from './label-helpers';
 class TestComponent {
   constructor(private renderer: Renderer2) {}
 
-  forwardAttributes(sourceElement: HTMLElement, targetElement: HTMLElement, attributes: string[]) {
-    forwardAttributes(sourceElement, targetElement, attributes, this.renderer);
+  myForwardAttributes(
+    sourceElement: HTMLElement,
+    attributes: string[],
+    targetElement: HTMLElement
+  ) {
+    forwardAttributes(sourceElement, attributes, this.renderer, targetElement);
   }
 }
 
-describe('LabelHelpers', () => {
-  let fixture: ComponentFixture<TestComponent>;
+describe('forwardAttributes', () => {
+  let spectator: Spectator<TestComponent>;
+  const createComponent = createComponentFactory(TestComponent);
   let sourceElement: HTMLElement;
   let targetElement: HTMLElement;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
-    sourceElement = fixture.debugElement.query(By.css('div#source')).nativeElement;
-    console.log('sourceElement', sourceElement);
-
-    targetElement = fixture.debugElement.query(By.css('div#target')).nativeElement;
-    console.log('targetElement', targetElement);
+    spectator = createComponent();
+    sourceElement = spectator.query('div#source');
+    targetElement = spectator.query('div#target');
   });
 
-  it('should forward attributes from source element to target element', () => {
-    sourceElement.setAttribute('aria-label', 'label');
-    sourceElement.setAttribute('aria-labelledby', 'labelledby');
+  it('should remove attributes from source element and add them target element', () => {
+    sourceElement.setAttribute('aria-label', 'my-label');
+    sourceElement.setAttribute('aria-labelledby', 'my-labelledby');
 
-    fixture.componentInstance.forwardAttributes(sourceElement, targetElement, [
-      'aria-label',
-      'aria-labelledby',
-    ]);
+    spectator.component.myForwardAttributes(
+      sourceElement,
+      ['aria-label', 'aria-labelledby'],
+      targetElement
+    );
 
     expect(sourceElement.getAttribute('aria-label')).toBeNull();
     expect(sourceElement.getAttribute('aria-labelledby')).toBeNull();
-    expect(targetElement.getAttribute('aria-label')).toBe('label');
-    expect(targetElement.getAttribute('aria-labelledby')).toBe('labelledby');
+    expect(targetElement.getAttribute('aria-label')).toBe('my-label');
+    expect(targetElement.getAttribute('aria-labelledby')).toBe('my-labelledby');
   });
 });
