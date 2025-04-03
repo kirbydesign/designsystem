@@ -71,6 +71,9 @@
       "@kirbydesign/designsystem/toggle": ["libs/designsystem/dist/toggle"],
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/dist/toggle-button"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/dist/types"],
+      "@kirbydesign/extensions-angular/accessibility-utilities": [
+        "libs/extensions/angular/dist/accessibility-utilities"
+      ],
       "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
       "@kirbydesign/extensions-angular/localization": ["libs/extensions/angular/dist/localization"],
       "@kirbydesign/extensions-angular/skeleton-loader": [

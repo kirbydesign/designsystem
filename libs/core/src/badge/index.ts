@@ -6,6 +6,6 @@ KirbyBadgeElement.define();
 
 declare global {
   interface HTMLElementTagNameMap {
-    'kirby-badge': KirbyBadgeElement;
+    'kirby-badge': HTMLKirbyBadgeElement;
   }
 }
