@@ -544,7 +544,7 @@ export class PageComponent
     this.enter.emit();
 
     this.setHtmlDocTitle();
-    this.patchIonLastFocussed();
+    this.patchIonLastFocused();
 
     this.observeTitle();
     this.observeActions();
@@ -584,7 +584,7 @@ export class PageComponent
     };
   }
 
-  private patchIonLastFocussed() {
+  private patchIonLastFocused() {
     const ionLastFocus: HTMLElement =
       this.ionContentElement.nativeElement.querySelector('[ion-last-focus="true"]');
 
