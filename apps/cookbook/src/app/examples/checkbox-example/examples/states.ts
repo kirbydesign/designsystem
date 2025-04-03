@@ -4,7 +4,7 @@ import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 const config = {
   selector: 'cookbook-checkbox-states-example',
   template: `<kirby-checkbox text="Default"></kirby-checkbox>
-<kirby-checkbox [checked]="true" text="Checked" [attr.aria-label]="'hest'" ></kirby-checkbox>
+<kirby-checkbox [checked]="true" text="Checked"></kirby-checkbox>
 <kirby-checkbox [indeterminate]="true" text="Indeterminate"></kirby-checkbox>
 <kirby-checkbox disabled="true" text="Disabled"></kirby-checkbox>
 <kirby-checkbox [indeterminate]="true" text="Disabled Indeterminate" [disabled]="true"></kirby-checkbox>
