@@ -8,17 +8,6 @@ const config = {
   <button kirby-button (click)="showToast()">Show success toast (default)</button>
   <button kirby-button (click)="showToast('warning')">Show warning toast</button>
   `,
-  styles: [
-    `:host {
-      justify-content: end;
-      align-items: center;
-      margin: 20px 10px;
-      button {
-        max-width: 300px;
-        width: 100%;
-      }
-   }`,
-  ],
 };
 
 const ts = `showToast(messageType?: MessageType) {
@@ -40,7 +29,7 @@ private onToastClosed() {
 @Component({
   selector: config.selector,
   template: config.template,
-  styles: config.styles,
+  styleUrls: ['./show-toast-example.scss'],
   imports: [ButtonComponent],
 })
 export class ShowToastExampleComponent {
