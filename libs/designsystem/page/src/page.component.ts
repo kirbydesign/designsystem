@@ -721,9 +721,9 @@ export class PageComponent
   private setHtmlDocTitle() {
     if (!this.config?.setHtmlDocTitle) return;
 
-    const toolbar: HTMLElement = this.ionHeaderElement.nativeElement.querySelector('ion-toolbar');
-
-    const titleArea: HTMLElement = toolbar.querySelector('ion-title .toolbar-title');
+    const titleArea: HTMLElement = this.ionHeaderElement.nativeElement.querySelector(
+      'ion-toolbar ion-title .toolbar-title'
+    );
 
     if (titleArea.textContent) {
       // If title is already present in DOM, set it immediately:
