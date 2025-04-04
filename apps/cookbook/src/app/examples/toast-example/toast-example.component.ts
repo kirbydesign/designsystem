@@ -2,14 +2,6 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { MessageType, ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 
-const config = {
-  selector: 'cookbook-show-toast-example',
-  template: `
-  <button kirby-button (click)="showToast()">Show success toast (default)</button>
-  <button kirby-button (click)="showToast('warning')">Show warning toast</button>
-  `,
-};
-
 const ts = `showToast(messageType?: MessageType) {
   const message =
     messageType === 'warning' ? 'Your warning toast message' : 'Your successful toast message';
@@ -27,13 +19,12 @@ private onToastClosed() {
 }`;
 
 @Component({
-  selector: config.selector,
-  template: config.template,
+  selector: 'cookbook-toast-example',
+  templateUrl: './toast-example.component.html',
   styleUrls: ['../_examples.shared.scss', '../_modal-playground.shared.scss'],
   imports: [ButtonComponent],
 })
 export class ToastExampleComponent {
-  static template = config.template;
   static readonly ts = ts;
 
   constructor(public toastController: ToastController) {}
