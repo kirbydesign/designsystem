@@ -348,6 +348,16 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
           },
         ],
       },
+      {
+        path: 'toast',
+        component: ToastExampleComponent,
+        children: [
+          {
+            path: 'show-toast',
+            component: ShowToastExampleComponent,
+          },
+        ],
+      },
     ],
   },
   {
@@ -512,21 +522,6 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'checkbox',
     component: CheckboxExampleComponent,
-  },
-  {
-    path: 'toast',
-    component: ToastExampleComponent,
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'show-toast',
-      },
-      {
-        path: 'show-toast',
-        component: ShowToastExampleComponent,
-      },
-    ],
   },
   {
     path: 'toggle',

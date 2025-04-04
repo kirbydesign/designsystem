@@ -29,7 +29,7 @@ private onToastClosed() {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./show-toast-example.scss'],
+  styleUrl: '../../_modal-playground.shared.scss',
   imports: [ButtonComponent],
 })
 export class ShowToastExampleComponent {
