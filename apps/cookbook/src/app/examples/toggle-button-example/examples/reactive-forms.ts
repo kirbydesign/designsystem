@@ -6,7 +6,12 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ButtonComponent, IconModule, ToggleButtonModule } from '@kirbydesign/designsystem';
+import {
+  ButtonComponent,
+  CheckboxComponent,
+  IconModule,
+  ToggleButtonModule,
+} from '@kirbydesign/designsystem';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
 
@@ -32,10 +37,12 @@ const config = {
   </form>
 
   <cookbook-example-configuration-wrapper>
-    <kirby-toggle-button (checkChanged)="toggleEnabled()">
-      <button kirby-button unchecked attentionLevel="3">Form field disabled</button>
-      <button kirby-button checked attentionLevel="2">Form field enabled</button>
-    </kirby-toggle-button>
+    <kirby-checkbox
+    (checkedChange)="toggleEnabled($event)"
+    text="Form disabled"
+    size="xs"
+  >
+  </kirby-checkbox>
     <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
   </cookbook-example-configuration-wrapper>
 </div>`,
@@ -77,13 +84,14 @@ toggleEnabled() {
   template: config.template,
   styles: config.styles,
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     ToggleButtonModule,
     ButtonComponent,
     IconModule,
+    CheckboxComponent,
+    FormsModule,
     ExampleConfigurationWrapperComponent,
     ReactiveFormStateComponent,
+    ReactiveFormsModule,
   ],
 })
 export class ToggleButtonReactiveFormsExampleComponent {
