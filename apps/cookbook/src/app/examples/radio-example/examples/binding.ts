@@ -15,6 +15,7 @@ const items = [
 const config = {
   selector: 'cookbook-radio-example-binding',
   template: `<kirby-radio-group
+  aria-label="Select main course"
   [items]="items"
   itemTextProperty="title"
   [value]="selected"

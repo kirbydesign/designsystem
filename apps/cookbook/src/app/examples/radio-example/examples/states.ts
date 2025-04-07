@@ -3,7 +3,7 @@ import { RadioModule } from '@kirbydesign/designsystem/radio';
 
 const config = {
   selector: 'cookbook-radio-states-example',
-  template: `<kirby-radio-group>
+  template: `<kirby-radio-group aria-label="Radio state example">
   <kirby-radio text="Default"></kirby-radio>
 </kirby-radio-group>
 

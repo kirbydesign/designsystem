@@ -32,6 +32,7 @@ const config = {
 <cookbook-example-configuration-wrapper>
   <kirby-checkbox
     (checkedChange)="toggleCanSelectFavorite()"
+    [checked]="true"
     text="Form field enabled">
   </kirby-checkbox>
   <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
