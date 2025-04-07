@@ -57,7 +57,6 @@ const config = {
     .toggle-buttons {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
     }
 
     cookbook-example-configuration-wrapper {
