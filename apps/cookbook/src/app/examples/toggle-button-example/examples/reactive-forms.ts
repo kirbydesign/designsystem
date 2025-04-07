@@ -38,8 +38,9 @@ const config = {
 
   <cookbook-example-configuration-wrapper>
     <kirby-checkbox
+    [checked]="isEnabled"
     (checkedChange)="toggleEnabled($event)"
-    text="Form disabled"
+    text="Form enabled"
     size="xs"
   >
   </kirby-checkbox>
