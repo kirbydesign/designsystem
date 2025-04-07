@@ -19,11 +19,10 @@ export interface FitHeadingConfig {
 
 @Directive({
   standalone: true,
-  selector: `h1[kirbyFitHeading],h2[kirbyFitHeading],h3[kirbyFitHeading]`,
+  selector: `h1[kirbyFitHeading],h2[kirbyFitHeading],h3[kirbyFitHeading],[kirbyFitHeading]`,
   providers: [LineClampHelper],
 })
 export class FitHeadingDirective implements OnInit, OnDestroy {
-  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyFitHeading') config?: FitHeadingConfig;
 
   private isObservingHostElement: boolean;

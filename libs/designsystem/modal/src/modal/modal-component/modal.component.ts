@@ -17,7 +17,6 @@ import { IonContent, IonModal } from '@ionic/angular/standalone';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { inheritAriaLabelText } from '@kirbydesign/designsystem/shared';
@@ -38,7 +37,6 @@ import { CanDismissHelper } from '../services';
   templateUrl: './modal.component.html',
   imports: [
     CommonModule,
-    KirbyIonicModule,
     IconModule,
     IonModal,
     ModalWrapperComponent,
