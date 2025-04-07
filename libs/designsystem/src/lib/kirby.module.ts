@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
 import {
   ComponentLoaderDirective,
   ResizeObserverFactory,
@@ -76,6 +76,8 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+
+import { provideKirby } from '@kirbydesign/designsystem/config';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
@@ -162,13 +164,8 @@ const providers = [
   CanDismissHelper,
 ];
 
-const ConfigToken = new InjectionToken<unknown>('USERCONFIG');
-export interface KirbyConfig {
-  moduleRootRoutePath?: string;
-}
-
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyIonicModule, ...importedModules],
+  imports: [CommonModule, RouterModule, ...importedModules],
   declarations: [declarations],
   providers: providers,
   exports: [allExports],
@@ -177,18 +174,13 @@ export class KirbyModule {
   static forChild(config?: KirbyConfig): ModuleWithProviders<KirbyModule> {
     return {
       ngModule: KirbyModule,
-      providers: [
-        {
-          provide: ConfigToken,
-          useValue: config,
-        },
-      ],
+      providers: [provideKirby(config)],
     };
   }
 
   constructor(
     modalController: ModalController,
-    @Optional() @Inject(ConfigToken) config?: KirbyConfig
+    @Optional() @Inject(KIRBY_CONFIG) config?: KirbyConfig
   ) {
     modalController.initialize(config && config.moduleRootRoutePath);
   }

@@ -76,7 +76,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 await bootstrapApplication(RootComponent, {
   providers: [
     ...,
-    importProvidersFrom(KirbyModule)
+    provideKirby() // optionally takes config object, e.g. { focusManager: true, setHtmlDocTitle: true }
   ]
 });
 ```
