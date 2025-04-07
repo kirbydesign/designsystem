@@ -1,13 +1,16 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   ContentChild,
   ContentChildren,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Output,
   QueryList,
+  Renderer2,
   TemplateRef,
   ViewChildren,
 } from '@angular/core';
@@ -16,6 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { RadioComponent } from '../radio.component';
 
 @Component({
@@ -33,9 +37,13 @@ import { RadioComponent } from '../radio.component';
   standalone: false,
 })
 export class RadioGroupComponent
-  implements AfterContentInit, ControlValueAccessor, FormFieldControl
+  implements AfterContentInit, ControlValueAccessor, FormFieldControl, AfterViewInit
 {
-  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+  constructor(
+    private changeDetectionRef: ChangeDetectorRef,
+    private element: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
 
   // #region public properties
 
@@ -123,6 +131,8 @@ export class RadioGroupComponent
   private _onTouched = () => {};
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
   @ContentChildren(RadioComponent, { descendants: true })
@@ -150,6 +160,15 @@ export class RadioGroupComponent
   ngAfterContentInit(): void {
     this.initSelectionStateFromProjectedContent();
     this.listenForProjectedRadiosChange();
+  }
+
+  ngAfterViewInit(): void {
+    forwardAttributes(
+      this.element.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.element.nativeElement.querySelector('ion-radio-group')
+    );
   }
 
   registerOnChange(fn: any): void {

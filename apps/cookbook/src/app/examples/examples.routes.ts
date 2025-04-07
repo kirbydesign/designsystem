@@ -347,6 +347,10 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
           },
         ],
       },
+      {
+        path: 'toast',
+        component: ToastExampleComponent,
+      },
     ],
   },
   {
@@ -511,10 +515,6 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'checkbox',
     component: CheckboxExampleComponent,
-  },
-  {
-    path: 'toast',
-    component: ToastExampleComponent,
   },
   {
     path: 'toggle',

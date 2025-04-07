@@ -35,7 +35,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   max-width: 100%;
 
   // title in key value scenario should't have bottom margin:
-  & > h1.title {
+  & > span.title {
     margin-bottom: 0;
   }
 }
@@ -62,7 +62,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   .container {
     align-items: center;
 
-    & > h1.title {
+    & > span.title {
       text-align: center;
 
       &.has-icon {
@@ -88,7 +88,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
           align-self: flex-start;
         }
 
-        & > h1.title,
+        & > span.title,
         .title-container {
           grid-column-start: 2;
         }
@@ -124,7 +124,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 .avatar,
 .flag,
 .title-container,
-.container > h1.title {
+.container > span.title {
   margin-inline: $margin-inline;
 }
 
@@ -162,6 +162,8 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 }
 
 .value {
+  display: flex;
+  align-items: baseline;
   max-width: 100%;
   margin-bottom: utils.size('xxxs');
 }

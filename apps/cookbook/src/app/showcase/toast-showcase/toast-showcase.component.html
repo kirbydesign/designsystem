@@ -1,31 +1,40 @@
 <div class="example">
-  <cookbook-toast-example></cookbook-toast-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  To show the toast, create a
-  <code>ToastConfig</code>
-  and pass it to
-  <code>toastController.showToast</code>
+  <p>
+    Toasts are the most subtle 'notification' available in Kirby. These messages give users
+    immediate feedback after taking an action. Users don't need to dismiss toast messages, as they
+    appear only for a moment before they disappear.
+  </p>
+  <p>There are two types of toasts:</p>
+
+  <ul>
+    <li>Success is used for confirmations on an action</li>
+    <li>Warning is used for warnings, eg. something the user should be aware of</li>
+  </ul>
+
+  <cookbook-iphone
+    src="/examples/toast"
+    showExternalLink="true"
+    viewMode="full-size"
+    showViewModeToggle="true"
+  ></cookbook-iphone>
 
   <!-- prettier-ignore -->
-  <cookbook-code-viewer language="ts">const config: ToastConfig =
-      <pre>{{ '{' }}
-  message: 'Your toast message',
-  messageType: 'success',
-  durationInMs: 5000,
-{{ '}' }};
-this.toastController.showToast(config);
-</pre>
-    </cookbook-code-viewer>
-  (Optional) if you need to know when the toast is dismissed, you can pass a callback function:
+  <cookbook-example-viewer [ts]="toastExample.ts"></cookbook-example-viewer>
+  <h4>Callback</h4>
+  If you need to know when the toast is dismissed, you can pass a callback function:
   <!-- prettier-ignore -->
   <cookbook-code-viewer language="ts">this.toastController.showToast(config, myCallback);</cookbook-code-viewer>
-  where
-  <code>myCallback</code>
-  can be e.g.:
-  <!-- prettier-ignore -->
-  <cookbook-code-viewer language="ts">myCallback() {{ '{' }}
-...
-{{ '}' }}</cookbook-code-viewer>
+
+  <h3>Best Practice</h3>
+  <ul>
+    <li>Use a toast when it's not critical for the user to read the message.</li>
+    <li>
+      If you don't have clear instructions and/or the user can find the given information in the
+      screen shown.
+    </li>
+    <li>Keep the amount of text below 1 line.</li>
+  </ul>
+
   <h4>Toast config properties:</h4>
   <cookbook-api-description-properties
     [properties]="properties"
