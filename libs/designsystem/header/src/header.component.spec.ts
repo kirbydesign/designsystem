@@ -1,4 +1,4 @@
-import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -43,7 +43,7 @@ describe('HeaderComponent', () => {
     });
 
     it(`should have correct title`, () => {
-      const titleElement = spectator.query('h1.title');
+      const titleElement = spectator.query('span.title');
 
       expect(titleElement).toHaveExactTrimmedText(title);
       expect(titleElement).toHaveComputedStyle({
@@ -190,7 +190,7 @@ describe('HeaderComponent', () => {
     });
 
     it(`should have correct title`, () => {
-      const keyElement = spectator.query('h1.title');
+      const keyElement = spectator.query('span.title');
 
       expect(keyElement).toHaveExactTrimmedText(title);
       expect(keyElement).toHaveComputedStyle({
@@ -199,9 +199,9 @@ describe('HeaderComponent', () => {
     });
 
     it(`should have correct value`, () => {
-      const valueElement = spectator.query('h3.value');
+      const valueElement = spectator.query('span.value');
 
-      expect(valueElement).toHaveExactText(`${value}${valueUnit}`);
+      expect(valueElement).toHaveExactTrimmedText(`${value} ${valueUnit}`);
       expect(valueElement).toHaveComputedStyle({
         'font-size': fontSize('xxl'),
       });
@@ -219,7 +219,7 @@ describe('HeaderComponent', () => {
     });
 
     it(`should have correct title margin`, () => {
-      const keyElement = spectator.query('h1.title');
+      const keyElement = spectator.query('span.title');
 
       expect(keyElement).toHaveComputedStyle({
         'margin-bottom': '0px',
@@ -371,7 +371,7 @@ describe('HeaderComponent', () => {
       it('should NOT emit `titleClick` when title is clicked', () => {
         const titleClickSpy = spyOn(spectator.component.titleClick, 'emit');
 
-        spectator.click('h1.title');
+        spectator.click('span.title');
 
         expect(titleClickSpy).not.toHaveBeenCalled();
       });
@@ -391,7 +391,7 @@ describe('HeaderComponent', () => {
       it('should emit `titleClick` when title is clicked', () => {
         const titleClickSpy = spyOn(spectator.component.titleClick, 'emit');
 
-        spectator.click('h1.title');
+        spectator.click('span.title');
 
         expect(titleClickSpy).toHaveBeenCalledTimes(1);
       });

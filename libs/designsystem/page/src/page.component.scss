@@ -103,21 +103,23 @@ ion-toolbar {
   }
 
   ion-title {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(10px);
-    transition-property: opacity, transform;
-    transition-duration: 150ms;
-    transition-timing-function: utils.get-transition-easing('enter-exit');
+    box-sizing: border-box;
+    font-size: utils.font-size('n');
+    font-weight: utils.font-weight('normal');
     padding-inline: calc(
       var(--action-buttons-width, $toolbar-button-size + $toolbar-button-spacing) +
         var(--padding-start)
     );
 
+    h1 {
+      margin-bottom: 0;
+    }
+
     &.slide-and-fade-in {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0);
+      .toolbar-title {
+        scale: 1;
+        transform: translateY(0);
+      }
     }
 
     .toolbar-title,
@@ -129,7 +131,15 @@ ion-toolbar {
     }
 
     .toolbar-title {
-      font-weight: utils.font-weight('bold');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: #{utils.size('xxxl')};
+      scale: 0;
+      transition-property: opacity, transform;
+      transition-duration: 150ms;
+      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transform: translateY(10px);
 
       span.clickable {
         cursor: pointer;
@@ -162,12 +172,6 @@ ion-toolbar {
     visibility: inherit;
     opacity: 1;
   }
-}
-
-ion-title {
-  box-sizing: border-box;
-  font-size: utils.font-size('n');
-  font-weight: utils.font-weight('normal');
 }
 
 ion-back-button {

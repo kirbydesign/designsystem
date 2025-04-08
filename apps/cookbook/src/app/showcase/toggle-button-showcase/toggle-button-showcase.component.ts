@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { ColorHelper } from '@kirbydesign/designsystem/helpers';
-import { DividerComponent } from '@kirbydesign/designsystem';
 import { RouterLink } from '@angular/router';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
+import { ToggleButtonDefaultExampleComponent } from '../../examples/toggle-button-example/examples/default';
+import { ToggleButtonThemeColorExampleComponent } from '../../examples/toggle-button-example/examples/theme-color';
+import { ToggleButtonDisabledExampleComponent } from '../../examples/toggle-button-example/examples/disabled';
+import { ToggleButtonReactiveFormsExampleComponent } from '../../examples/toggle-button-example/examples/reactive-forms';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ToggleButtonDisabledExampleComponent } from '../../examples/toggle-button-example/examples/disabled';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ToggleButtonDefaultExampleComponent } from '~/app/examples/toggle-button-example/examples/default';
-import { ToggleButtonThemeColorExampleComponent } from '~/app/examples/toggle-button-example/examples/theme-color';
 
 @Component({
   styleUrls: ['./toggle-button-showcase.component.scss'],
@@ -17,9 +19,11 @@ import { ToggleButtonThemeColorExampleComponent } from '~/app/examples/toggle-bu
     ToggleButtonDefaultExampleComponent,
     ToggleButtonThemeColorExampleComponent,
     ToggleButtonDisabledExampleComponent,
+    ToggleButtonReactiveFormsExampleComponent,
     DividerComponent,
     ExampleViewerComponent,
     ApiDescriptionPropertiesComponent,
+    CodeViewerComponent,
   ],
 })
 export class ToggleButtonShowcaseComponent {
