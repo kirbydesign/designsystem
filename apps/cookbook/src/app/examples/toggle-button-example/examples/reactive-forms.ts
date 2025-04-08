@@ -17,8 +17,7 @@ import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-f
 
 const config = {
   selector: 'cookbook-toggle-button-reactive-forms-example',
-  template: `<div class="form-container">
-  <form [formGroup]="form">
+  template: `<form [formGroup]="form">
     <div class="toggle-buttons">
       <kirby-toggle-button formControlName="notifications" [disabled]="!isEnabled">
         <button kirby-button unchecked attentionLevel="3" aria-label="Notifications disabled">
@@ -37,19 +36,14 @@ const config = {
   </form>
 
   <cookbook-example-configuration-wrapper>
-    <kirby-checkbox
-    [checked]="isEnabled"
-    (checkedChange)="toggleEnabled()"
-    text="Form enabled"
-    size="xs"
-  >
-  </kirby-checkbox>
+    <kirby-checkbox [checked]="isEnabled" (checkedChange)="toggleEnabled()">
+      Form field enabled
+    </kirby-checkbox>
     <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
-  </cookbook-example-configuration-wrapper>
-</div>`,
+  </cookbook-example-configuration-wrapper>`,
   styles: [
     `
-    .form-container {
+    :host {
       display: flex;
       gap: 1rem;
     }
