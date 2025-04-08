@@ -148,28 +148,6 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
 
   @Output() segmentSelect = new EventEmitter<TItem>();
 
-  // ControlValueAccessor implementation
-  private onChange: (value: NoInfer<TItem>) => void = () => {};
-  private onTouched: () => void = () => {};
-
-  writeValue(value: NoInfer<TItem>): void {
-    if (value !== this._value) {
-      this.value = value;
-    }
-  }
-
-  registerOnChange(fn: (value: NoInfer<TItem>) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
-  }
-
   onSegmentSelect(selectedId: string) {
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
 
@@ -208,5 +186,54 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
     if (!this._segmentElementHasFocus) {
       this.onTouched();
     }
+  }
+
+  // Initialize default ControlValueAccessor callback functions (noop)
+  // eslint-disable-next-line no-empty-function
+  private onChange: (value: NoInfer<TItem>) => void = () => {};
+  // eslint-disable-next-line no-empty-function
+  private onTouched: () => void = () => {};
+  /**
+   * Sets the segmented control's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
+  writeValue(value: NoInfer<TItem>): void {
+    if (value !== this._value) {
+      this.value = value;
+    }
+  }
+
+  /**
+   * Saves a callback function to be invoked when the segmented control's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
+  registerOnChange(fn: (value: NoInfer<TItem>) => void): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * Saves a callback function to be invoked when the segmented control is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  /**
+   * Disables the segmented control. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
+  setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
   }
 }
