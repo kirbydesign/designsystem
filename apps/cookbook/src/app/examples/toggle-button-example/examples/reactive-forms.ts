@@ -36,12 +36,8 @@ const config = {
   </form>
 
   <cookbook-example-configuration-wrapper>
-      <kirby-checkbox
-      [checked]="isEnabled"
-      (checkedChange)="toggleEnabled()"
-      text="Form field enabled"
-      size="xs"
-    >
+    <kirby-checkbox [checked]="isEnabled" (checkedChange)="toggleEnabled()">
+      Form field enabled
     </kirby-checkbox>
     <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
   </cookbook-example-configuration-wrapper>`,
