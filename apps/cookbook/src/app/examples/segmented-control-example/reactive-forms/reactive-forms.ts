@@ -7,11 +7,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import {
-  CheckboxComponent,
-  SegmentedControlComponent,
-  SegmentItem,
-} from '@kirbydesign/designsystem';
+import { CheckboxComponent, SegmentedControlComponent } from '@kirbydesign/designsystem';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
 
@@ -27,7 +23,7 @@ const config = {
 <cookbook-example-configuration-wrapper>
   <kirby-checkbox
     [checked]="true"
-    (checkedChange)="toggleEnabled($event)"
+    (checkedChange)="toggleEnabled()"
     text="Form field enabled"
   ></kirby-checkbox>
   <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
