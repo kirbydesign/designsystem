@@ -173,7 +173,7 @@ describe('CheckboxComponent', () => {
           '--checkbox-background': getColor('semi-light'),
           '--checkbox-background-checked': getColor('semi-light'),
           '--border-color': getColor('medium'),
-          '--border-color-checked': getColor('semi-light'),
+          '--border-color-checked': getColor('medium'),
         });
       });
     });
