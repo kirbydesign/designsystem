@@ -22,7 +22,7 @@ const config = {
 </form>
 <cookbook-example-configuration-wrapper>
   <kirby-checkbox
-    [checked]="true"
+    [checked]="isEnabled"
     (checkedChange)="toggleEnabled()"
     text="Form field enabled"
   ></kirby-checkbox>
@@ -35,7 +35,9 @@ const config = {
     }
   `,
   ],
-  codeSnippet: ` viewItems = [
+  codeSnippet: `isEnabled = true;
+
+viewItems = [
   { text: 'Stone', id: '1' },
   { text: 'Rick', id: '2' },
   { text: 'Gooey', id: '3' },
