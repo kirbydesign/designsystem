@@ -53,7 +53,11 @@ import {
   HeaderComponent,
   HeaderTitleActionIconDirective,
 } from '@kirbydesign/designsystem/header';
-import { IonicElementPartHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import {
+  IonicElementPartHelper,
+  KirbyAnimation,
+  observeContent,
+} from '@kirbydesign/designsystem/helpers';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -65,6 +69,9 @@ import {
   ResizeObserverService,
   TranslationService,
 } from '@kirbydesign/designsystem/shared';
+import { Title } from '@angular/platform-browser';
+import { UnobserveFn } from '@kirbydesign/designsystem/types';
+import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -344,6 +351,8 @@ export class PageComponent
   private isObservingTitle = false;
   private isObservingActions = false;
 
+  private unobserveTitleMutation: UnobserveFn;
+
   private url: string;
   private isActive: boolean;
 
@@ -380,7 +389,9 @@ export class PageComponent
     @Optional()
     private navCtrl: NavController,
     private ionicElementPartHelper: IonicElementPartHelper,
-    public translations: TranslationService
+    public translations: TranslationService,
+    private htmlDocTitle: Title,
+    @Optional() @Inject(KIRBY_CONFIG) private config: KirbyConfig
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -491,6 +502,7 @@ export class PageComponent
     this.titleIntersectionObserver?.disconnect();
     this.stickyActionsIntersectionObserver?.disconnect();
     this.stickyContentIntersectionObserver?.disconnect();
+    this.unobserveTitleMutation?.();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -531,6 +543,9 @@ export class PageComponent
 
     this.enter.emit();
 
+    this.setHtmlDocTitle();
+    this.patchIonLastFocused();
+
     this.observeTitle();
     this.observeActions();
   }
@@ -543,6 +558,7 @@ export class PageComponent
 
     this.unobserveTitle();
     this.unobserveActions();
+    this.unobserveTitleMutation?.();
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
       this.tabsComponent.tabBarBottomHidden = false;
@@ -566,6 +582,19 @@ export class PageComponent
     this.backButton.onClick = (event: Event) => {
       this.backButtonClick.emit(event);
     };
+  }
+
+  private patchIonLastFocused() {
+    const ionLastFocus: HTMLElement =
+      this.ionContentElement.nativeElement.querySelector('[ion-last-focus="true"]');
+
+    // When a focusManagerPriority is set, Ionic handles moving focus back to the element that presented the current view.
+    // Unfortunately, we need to schedule a removal of tabindex="-1" from ionLastFocus element after Ionic might have set it
+    // to work around elements becoming inaccessible after navigating back: https://github.com/ionic-team/ionic-framework/issues/29875
+    setTimeout(() => {
+      if (ionLastFocus?.getAttribute('tabindex') !== '-1') return;
+      this.renderer.removeAttribute(ionLastFocus, 'tabindex');
+    });
   }
 
   private initializeStickyIntersectionObserver() {
@@ -687,6 +716,24 @@ export class PageComponent
       this.titleIntersectionObserver?.unobserve(titleElementRef.nativeElement);
     }
     this.isObservingTitle = false;
+  }
+
+  private setHtmlDocTitle() {
+    if (!this.config?.setHtmlDocTitle) return;
+
+    const titleArea: HTMLElement = this.ionHeaderElement.nativeElement.querySelector(
+      'ion-toolbar ion-title .toolbar-title'
+    );
+
+    if (titleArea.textContent) {
+      // If title is already present in DOM, set it immediately:
+      this.htmlDocTitle.setTitle(titleArea.textContent);
+    } else {
+      // If title is not yet present in DOM, observe the toolbars title and set it when it appears:
+      this.unobserveTitleMutation = observeContent(titleArea, () => {
+        this.htmlDocTitle.setTitle(titleArea.textContent);
+      });
+    }
   }
 
   private initializeActions() {

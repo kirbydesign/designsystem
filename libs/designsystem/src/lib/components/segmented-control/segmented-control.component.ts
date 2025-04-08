@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostBinding,
   HostListener,
   Input,
@@ -11,6 +12,7 @@ import {
 } from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
@@ -28,8 +30,17 @@ export enum SegmentedControlMode {
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SegmentedControlComponent),
+      multi: true,
+    },
+  ],
 })
-export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
+export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
+  implements ControlValueAccessor
+{
   @ViewChild(IonSegment, { static: true, read: ElementRef })
   private ionSegmentElement: ElementRef<HTMLIonSegmentElement>;
 
@@ -67,6 +78,8 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
     this._value = this.items[this.selectedIndex];
     this.ensureIonSegmentSelected();
   }
+
+  protected isDisabled = false;
 
   /**
    * After upgrading to Ionic standalone components (Ionic v.7.6.6)
@@ -142,6 +155,8 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
       this.selectedIndex = selectedItemIndex;
       setTimeout(() => {
         this.segmentSelect.emit(this.value);
+        this.onChange(this.value);
+        this.onTouched();
       });
     }
   }
@@ -168,5 +183,57 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem> 
   _onFocusInOut() {
     // @HostListener(focusin|focusout) triggers Change Detection and updates attr.tabindex on each ion-segment-button
     this._segmentElementHasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
+    if (!this._segmentElementHasFocus) {
+      this.onTouched();
+    }
+  }
+
+  // Initialize default ControlValueAccessor callback functions (noop)
+  // eslint-disable-next-line no-empty-function
+  private onChange: (value: NoInfer<TItem>) => void = () => {};
+  // eslint-disable-next-line no-empty-function
+  private onTouched: () => void = () => {};
+  /**
+   * Sets the segmented control's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
+  writeValue(value: NoInfer<TItem>): void {
+    if (value !== this._value) {
+      this.value = value;
+    }
+  }
+
+  /**
+   * Saves a callback function to be invoked when the segmented control's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
+  registerOnChange(fn: (value: NoInfer<TItem>) => void): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * Saves a callback function to be invoked when the segmented control is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  /**
+   * Disables the segmented control. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
+  setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
   }
 }

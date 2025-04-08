@@ -21,6 +21,7 @@
       "@kirbydesign/designsystem/card": ["libs/designsystem/card/index.ts"],
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
       "@kirbydesign/designsystem/checkbox": ["libs/designsystem/checkbox/index.ts"],
+      "@kirbydesign/designsystem/config": ["libs/designsystem/config/index.ts"],
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
       "@kirbydesign/designsystem/divider": ["libs/designsystem/divider/index.ts"],
       "@kirbydesign/designsystem/dropdown": ["libs/designsystem/dropdown/index.ts"],
@@ -36,9 +37,6 @@
       "@kirbydesign/designsystem/item-group": ["libs/designsystem/item-group/index.ts"],
       "@kirbydesign/designsystem/item-sliding": ["libs/designsystem/item-sliding/index.ts"],
       "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
-      "@kirbydesign/designsystem/kirby-ionic-module": [
-        "libs/designsystem/kirby-ionic-module/index.ts"
-      ],
       "@kirbydesign/designsystem/list": ["libs/designsystem/list/index.ts"],
       "@kirbydesign/designsystem/loading-overlay": ["libs/designsystem/loading-overlay/index.ts"],
       "@kirbydesign/designsystem/menu": ["libs/designsystem/menu/index.ts"],
