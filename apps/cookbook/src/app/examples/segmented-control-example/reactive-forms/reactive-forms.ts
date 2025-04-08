@@ -7,75 +7,56 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
+import {
+  CheckboxComponent,
+  SegmentedControlComponent,
+  SegmentItem,
+} from '@kirbydesign/designsystem';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
 
 const config = {
   selector: 'cookbook-segmented-control-reactive-forms-example',
-  template: `<div class="form-container">
-  <form [formGroup]="form">
-    <div class="segments">
-      <kirby-segmented-control
-        formControlName="view"
-        [items]="viewItems"
-        [disabled]="!isEnabled"
-      ></kirby-segmented-control>
-
-      <kirby-segmented-control
-        formControlName="mode"
-        [items]="modeItems"
-        mode="chip"
-        [disabled]="!isEnabled"
-      ></kirby-segmented-control>
-    </div>
-
-    <kirby-card hasPadding="true">
-      <h2>Content for {{ form.get('view')?.value?.text }} view</h2>
-      <p>Mode: {{ form.get('mode')?.value?.text }}</p>
-    </kirby-card>
-  </form>
-
-  <cookbook-example-configuration-wrapper>
+  template: `<form [formGroup]="form">
     <kirby-segmented-control
-      [items]="enableItems"
-      (segmentSelect)="toggleEnabled($event)"
+      formControlName="view"
+      [items]="viewItems"
+      [disabled]="!isEnabled"
     ></kirby-segmented-control>
-    <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
-  </cookbook-example-configuration-wrapper>
-</div>`,
+</form>
+<cookbook-example-configuration-wrapper>
+  <kirby-checkbox
+    [checked]="true"
+    (checkedChange)="toggleEnabled($event)"
+    text="Form field enabled"
+  ></kirby-checkbox>
+  <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
+</cookbook-example-configuration-wrapper>`,
   styles: [
-    `
-    .form-container {
+    `:host {
       display: flex;
       gap: 1rem;
-    }
-
-    .segments {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    cookbook-example-configuration-wrapper {
-      flex: 1;
     }
   `,
   ],
-  codeSnippet: `form: FormGroup = this.formBuilder.group({
+  codeSnippet: ` viewItems = [
+  { text: 'Stone', id: '1' },
+  { text: 'Rick', id: '2' },
+  { text: 'Gooey', id: '3' },
+];
+
+form: FormGroup = this.formBuilder.group({
   view: new FormControl(this.viewItems[0]),
-  mode: new FormControl(this.modeItems[0]),
 });
 
-toggleEnabled(segment: SegmentItem) {
-  this.isEnabled = segment.id === 'enabled';
-  if (this.isEnabled) {
-    this.form.enable();
-  } else {
-    this.form.disable();
-  }
-}`,
+toggleEnabled() {
+    this.isEnabled = !this.isEnabled;
+    if (this.isEnabled) {
+      this.form.enable();
+    } else {
+      this.form.disable();
+    }
+  }`,
 };
 
 @Component({
@@ -86,6 +67,7 @@ toggleEnabled(segment: SegmentItem) {
     FormsModule,
     ReactiveFormsModule,
     SegmentedControlComponent,
+    CheckboxComponent,
     CardModule,
     ExampleConfigurationWrapperComponent,
     ReactiveFormStateComponent,
@@ -96,32 +78,21 @@ export class SegmentedControlReactiveFormsExampleComponent {
   codeSnippet: string = config.codeSnippet;
 
   viewItems = [
-    { text: 'List', id: 'list' },
-    { text: 'Grid', id: 'grid' },
-    { text: 'Calendar', id: 'calendar' },
-  ];
-
-  modeItems = [
-    { text: 'Light', id: 'light' },
-    { text: 'Dark', id: 'dark' },
-  ];
-
-  enableItems = [
-    { text: 'Form enabled', id: 'enabled' },
-    { text: 'Form disabled', id: 'disabled' },
+    { text: 'Stone', id: '1' },
+    { text: 'Rick', id: '2' },
+    { text: 'Gooey', id: '3' },
   ];
 
   form: FormGroup = this.formBuilder.group({
     view: new FormControl(this.viewItems[0]),
-    mode: new FormControl(this.modeItems[0]),
   });
 
   isEnabled = true;
 
   constructor(private formBuilder: FormBuilder) {}
 
-  toggleEnabled(segment: SegmentItem) {
-    this.isEnabled = segment.id === 'enabled';
+  toggleEnabled() {
+    this.isEnabled = !this.isEnabled;
     if (this.isEnabled) {
       this.form.enable();
     } else {
