@@ -65,11 +65,10 @@ export class AppModule {}
 
 #### Standalone application
 
-Import providers from `KirbyModule` when bootstrapping your application:
+Set up environment providers for Kirby with the `provideKirby()` function:
 
 ```ts
-import { importProvidersFrom } from '@angular/core';
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { provideKirby } from '@kirbydesign/designsystem';
 
 ...
 
