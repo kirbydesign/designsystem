@@ -92,7 +92,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
     if (!this.hostElementClone) {
       this.hostElementClone = this.generateHostElementClone();
-      this.renderer.appendChild(this.elementRef.nativeElement, this.hostElementClone);
+      this.renderer.appendChild(this.elementRef.nativeElement.parentElement, this.hostElementClone);
     }
 
     this.renderer.setStyle(
