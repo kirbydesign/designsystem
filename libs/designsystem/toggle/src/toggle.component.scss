@@ -16,7 +16,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   &.has-hidden-label {
     &:has(ion-toggle.in-item) {
       // reset position when toggle is in item and has hidden label
-      // to ensure that it expands fills out its parent container
+      // to ensure that it fills out its parent container
       // so the entire item becomes clickable
       position: initial;
 
