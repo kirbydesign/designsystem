@@ -33,8 +33,6 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
 
-  _ariaLabel: string;
-
   @HostBinding('class')
   get _cssSize() {
     return this.size;
