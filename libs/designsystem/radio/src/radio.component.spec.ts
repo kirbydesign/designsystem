@@ -1,4 +1,9 @@
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import {
+  createComponentFactory,
+  createHostFactory,
+  Spectator,
+  SpectatorHost,
+} from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -238,4 +243,41 @@ describe('RadioComponent', () => {
       height: radioIconInnerSize,
     });
   }
+});
+
+describe('RadioComponent with aria label', () => {
+  const createHost = createHostFactory({
+    component: RadioComponent,
+    imports: [TestHelper.ionicModuleForTest, IonRadio],
+  });
+
+  let spectator: SpectatorHost<RadioComponent>;
+  let ionRadio: HTMLIonRadioElement;
+
+  beforeEach(async () => {
+    spectator = createHost(
+      '<kirby-radio [text]="text" [attr.aria-label]="ariaLabel"></kirby-radio>',
+      {
+        hostProps: {
+          text: 'test',
+          ariaLabel: 'my aria label',
+        },
+      }
+    );
+    ionRadio = spectator.query('ion-radio');
+    await TestHelper.whenReady(ionRadio);
+  });
+
+  it('should have same click area (.hidden-label element) size as ion-radio', () => {
+    const hiddenLabel: HTMLElement = ionRadio.querySelector('.hidden-label');
+    const hiddenLabelBoundingRect = hiddenLabel.getBoundingClientRect();
+    const ionRadioBoundingRect = ionRadio.getBoundingClientRect();
+
+    expect(hiddenLabelBoundingRect.height).toBe(ionRadioBoundingRect.height);
+    expect(hiddenLabelBoundingRect.width).toBe(ionRadioBoundingRect.width);
+    expect(hiddenLabelBoundingRect.left).toBe(ionRadioBoundingRect.left);
+    expect(hiddenLabelBoundingRect.right).toBe(ionRadioBoundingRect.right);
+    expect(hiddenLabelBoundingRect.top).toBe(ionRadioBoundingRect.top);
+    expect(hiddenLabelBoundingRect.bottom).toBe(ionRadioBoundingRect.bottom);
+  });
 });
