@@ -168,6 +168,32 @@
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
+<h2>Angular Forms</h2>
+<p>
+  The segmented control can be used directly in
+  <a href="https://angular.dev/guide/forms/template-driven-forms" target="_blank">
+    template driven
+  </a>
+  and
+  <a href="https://angular.dev/guide/forms/reactive-forms" target="_blank">reactive forms</a>
+  . To use segmented control in a reactive form, bind your form control to
+  <code>&lt;kirby-segmented-control&gt;</code>
+  with simple data binding:
+</p>
+<!-- prettier-ignore -->
+<cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-segmented-control [formControl]="yourFormControl"&gt;
+// or simply:
+&lt;kirby-segmented-control formControlName="yourFormControlName"&gt;
+</cookbook-code-viewer>
+<cookbook-example-viewer
+  [html]="segmentedControlReactiveFormsExample.template"
+  [ts]="segmentedControlReactiveFormsExample.codeSnippet"
+>
+  <cookbook-segmented-control-reactive-forms-example
+    #segmentedControlReactiveFormsExample
+  ></cookbook-segmented-control-reactive-forms-example>
+</cookbook-example-viewer>
+
 <h2>API</h2>
 <h3>Properties</h3>
 <cookbook-api-description-properties
