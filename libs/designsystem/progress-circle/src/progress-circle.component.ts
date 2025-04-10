@@ -9,7 +9,7 @@ import {
   Input,
   OnDestroy,
 } from '@angular/core';
-import { inheritAriaLabelText, ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 @Component({
@@ -26,7 +26,10 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
     lg: { diameter: 96, strokeWidth: 6, upperBound: 97 },
   };
 
-  @Input() value: number = 0;
+  @HostBinding('attr.role') readonly role = 'progressbar';
+  @HostBinding('attr.aria-valuenow')
+  @Input()
+  value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
 
@@ -52,7 +55,6 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
       });
       this.observer.observe(this.elementRef.nativeElement);
     }
-    this._ariaLabel = inheritAriaLabelText(this.elementRef.nativeElement);
   }
 
   ngOnDestroy(): void {
