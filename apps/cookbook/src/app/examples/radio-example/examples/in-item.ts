@@ -15,7 +15,7 @@ const items = [
 const config = {
   selector: 'cookbook-radio-in-item-example',
   template: `<kirby-card>
-  <kirby-radio-group [value]="selected">
+  <kirby-radio-group [value]="selected" aria-label="Select main course">
     <kirby-item *ngFor="let item of items">
       <kirby-radio [value]="item" slot="start" [disabled]="item.disabled">
         {{item.title}}

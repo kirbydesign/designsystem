@@ -19,6 +19,7 @@ type Story = StoryObj<CheckboxComponent>;
 export const Checkbox: Story = {
   args: {
     checked: false,
+    indeterminate: false,
     attentionLevel: '2',
     text: 'Label',
     size: 'md',

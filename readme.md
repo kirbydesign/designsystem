@@ -65,18 +65,19 @@ export class AppModule {}
 
 #### Standalone application
 
-Import providers from `KirbyModule` when bootstrapping your application:
+Set up environment providers for Kirby with the `provideKirby()` function:
 
 ```ts
 import { importProvidersFrom } from '@angular/core';
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModule, provideKirby } from '@kirbydesign/designsystem';
 
 ...
 
 await bootstrapApplication(RootComponent, {
   providers: [
     ...,
-    importProvidersFrom(KirbyModule)
+    provideKirby() // optionally takes config object, e.g. { focusManager: true, setHtmlDocTitle: true }
+    importProvidersFrom(KirbyModule),
   ]
 });
 ```

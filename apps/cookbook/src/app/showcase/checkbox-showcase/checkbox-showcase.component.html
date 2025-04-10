@@ -1,8 +1,7 @@
 <p>
-  A Checkbox is a control that permits the user to select options. This can be a binary choice, i.e.
-  a choice between one of two possible mutually exclusive options. For example, the user may have to
-  answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question. Multiple check boxes in
-  a group may be used to either select multipe items.
+  A Checkbox is a control that allows the user to select options. Checkboxes are used for multiple
+  choices, not for mutually exclusive choices. Each checkbox works independently from other
+  checkboxes in a list, therefore checking an additional box does not affect any other selections.
 </p>
 
 <h2>Types</h2>
@@ -20,18 +19,6 @@
 <h3>Attention Level 2</h3>
 <cookbook-example-viewer [html]="checkboxDefaultExample.template">
   <cookbook-checkbox-default-example #checkboxDefaultExample></cookbook-checkbox-default-example>
-</cookbook-example-viewer>
-
-<h2>Used in a list</h2>
-<p>
-  For more on using checkbox in an item, see
-  <a routerLink="/home/showcase/item">item documentation</a>
-</p>
-<cookbook-example-viewer
-  [html]="checkboxListExample.template"
-  [ts]="checkboxListExample.codeSnippet"
->
-  <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
 </cookbook-example-viewer>
 
 <h2>States</h2>
@@ -77,20 +64,55 @@
 >
   <cookbook-checkbox-events-example #checkboxEventsExample></cookbook-checkbox-events-example>
 </cookbook-example-viewer>
+
+<h2>Used in a list</h2>
+<p>
+  For more on using checkbox in an item, see
+  <a routerLink="/home/showcase/item">item documentation</a>
+</p>
+<cookbook-example-viewer
+  [html]="checkboxListExample.template"
+  [ts]="checkboxListExample.codeSnippet"
+>
+  <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
+</cookbook-example-viewer>
+
+<h2>Indeterminate state</h2>
+<p>
+  The most common use-case for an indeterminate checkbox is as a parent to a group of nested
+  checkboxes. If all of the children are checked, the parent checkbox is checked, and if all are
+  unchecked, the parent checkbox is unchecked. If any one or more of the children have a different
+  state than the others, the parent checkbox is indeterminate.
+</p>
+<p>
+  In this pattern, the parent checkbox should also provide functionality to select/deselect all
+  children. See below for a reference implementation of this pattern.
+</p>
+<cookbook-example-viewer
+  [html]="CheckboxIndeterminateListExample.template"
+  [ts]="CheckboxIndeterminateListExample.codeSnippet"
+>
+  <cookbook-indeterminate-checkbox-list-example
+    #CheckboxIndeterminateListExample
+  ></cookbook-indeterminate-checkbox-list-example>
+</cookbook-example-viewer>
+
 <h2>Angular Forms</h2>
 <p>
   The checkbox can be used directly in
-  <a href="https://angular.io/guide/forms" target="_blank">template driven</a>
+  <a href="https://angular.dev/guide/forms/template-driven-forms" target="_blank">
+    template driven
+  </a>
   and
-  <a href="https://angular.io/guide/reactive-forms" target="_blank">reactive forms</a>
+  <a href="https://angular.dev/guide/forms/reactive-forms" target="_blank">reactive forms</a>
   . To use checkbox in a reactive form, bind your form control to
   <code>&lt;kirby-checkbox&gt;</code>
   with simple data binding:
 </p>
 <!-- prettier-ignore -->
 <cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-checkbox [formControl]="yourFormControl"&gt;
-// or simply:
-&lt;kirby-checkbox formControlName="yourFormControlName"&gt;
+  // or simply:
+  &lt;kirby-checkbox formControlName="yourFormControlName"&gt;
 </cookbook-code-viewer>
 
 <cookbook-example-viewer

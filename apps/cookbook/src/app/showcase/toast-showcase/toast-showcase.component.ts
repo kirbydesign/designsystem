@@ -1,17 +1,26 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/toast-example/toast-example.component.html?raw';
-import { ToastExampleComponent } from '../../examples/toast-example/toast-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { IphoneComponent } from '~/app/iphone/iphone.component';
+import { ToastExampleComponent } from '~/app/examples/toast-example/toast-example.component';
 
 @Component({
   selector: 'cookbook-toast-showcase',
   templateUrl: './toast-showcase.component.html',
-  imports: [ToastExampleComponent, CodeViewerComponent, ApiDescriptionPropertiesComponent],
+  styleUrl: './toast-showcase.component.scss',
+  imports: [
+    ToastExampleComponent,
+    CodeViewerComponent,
+    ExampleViewerComponent,
+    ApiDescriptionPropertiesComponent,
+    IphoneComponent,
+  ],
 })
 export class ToastShowcaseComponent {
-  exampleHtml = exampleHtml;
+  toastExample = ToastExampleComponent;
+
   properties: ApiDescriptionProperty[] = [
     {
       name: 'message',

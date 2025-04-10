@@ -62,7 +62,7 @@ export class FormFieldComponent
     return this._message;
   }
 
-  set message(value: string) {
+  set message(value: string | null) {
     this._message = value;
     this.setNestedInteractiveElementAttributes();
   }

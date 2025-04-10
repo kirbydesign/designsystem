@@ -5,6 +5,7 @@ import { SegmentedControlExampleModesComponent } from './modes/modes';
 import { SegmentedControlExampleGroupedComponent } from './grouped/grouped';
 import { SegmentedControlExampleWithBadgeComponent } from './with-badge/with-badge';
 import { SegmentedControlExampleColorComponent } from './color/color';
+import { SegmentedControlReactiveFormsExampleComponent } from './reactive-forms/reactive-forms';
 
 @Component({
   selector: 'cookbook-segmented-control-example',
@@ -17,6 +18,7 @@ import { SegmentedControlExampleColorComponent } from './color/color';
     SegmentedControlExampleGroupedComponent,
     SegmentedControlExampleWithBadgeComponent,
     SegmentedControlExampleColorComponent,
+    SegmentedControlReactiveFormsExampleComponent,
   ],
 })
 export class SegmentedControlExampleComponent {}
