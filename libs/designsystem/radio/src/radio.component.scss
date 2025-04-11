@@ -41,24 +41,29 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   &.has-hidden-label {
-    position: initial;
+    &:has(ion-radio.in-item) {
+      // Reset position when radio is in item and has hidden label
+      // to ensure that it fills out its parent container
+      // so the entire item becomes clickable
+      position: initial;
+
+      ion-radio {
+        position: initial;
+
+        &::part(label) {
+          position: initial;
+        }
+
+        &.radio-label-placement-start::part(label-text-wrapper),
+        &.radio-label-placement-end::part(label-text-wrapper) {
+          margin-inline: 0;
+        }
+      }
+    }
 
     &[slot='end'] {
       ion-radio {
         margin-inline-start: $spacing-to-label;
-      }
-    }
-
-    ion-radio {
-      position: initial;
-
-      &::part(label) {
-        position: initial;
-      }
-
-      &.in-item.radio-label-placement-start::part(label-text-wrapper),
-      &.in-item.radio-label-placement-end::part(label-text-wrapper) {
-        margin-inline: 0;
       }
     }
 
