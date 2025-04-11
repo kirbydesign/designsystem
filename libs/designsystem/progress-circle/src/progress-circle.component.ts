@@ -26,7 +26,10 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
     lg: { diameter: 96, strokeWidth: 6, upperBound: 97 },
   };
 
-  @Input() value: number = 0;
+  @HostBinding('attr.role') readonly role = 'progressbar';
+  @HostBinding('attr.aria-valuenow')
+  @Input()
+  value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
 
