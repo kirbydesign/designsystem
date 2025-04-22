@@ -6,15 +6,16 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
-  inject,
+  Inject,
   Input,
   OnChanges,
   OnInit,
+  Optional,
   Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateInputDirective } from '../directives/date/date-input.directive';
 
 export enum InputSize {
@@ -36,7 +37,7 @@ export enum InputSize {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent implements OnChanges, FormFieldControl {
+export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
@@ -94,8 +95,23 @@ export class InputComponent implements OnChanges, FormFieldControl {
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
-  constructor(private elementRef: ElementRef<HTMLInputElement>) {
+  constructor(
+    private elementRef: ElementRef<HTMLInputElement>,
+    @Optional() @Inject(NG_VALUE_ACCESSOR) private builtInValueAccessors: ControlValueAccessor[]
+  ) {
     this.extendBuiltinValueAccessor();
+  }
+
+  ngOnInit(): void {
+    // The native input value is emitted here to make sure that
+    // the InputCounterComponent receives the value onInit,
+    // when [(ngModel)] is used on kirby-input.
+    setTimeout(() => {
+      const inputValue = this.elementRef.nativeElement.value;
+      if (inputValue) {
+        this.kirbyChange.emit(inputValue);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -105,9 +121,8 @@ export class InputComponent implements OnChanges, FormFieldControl {
   }
 
   extendBuiltinValueAccessor() {
-    const builtInValueAccessors = inject(NG_VALUE_ACCESSOR, { optional: true });
-    if (builtInValueAccessors) {
-      builtInValueAccessors.forEach((accessor) => {
+    if (this.builtInValueAccessors) {
+      this.builtInValueAccessors.forEach((accessor) => {
         const originalWriteValue = accessor.writeValue?.bind(accessor);
         accessor.writeValue = (value: any) => {
           if (originalWriteValue) {
