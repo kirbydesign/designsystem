@@ -91,7 +91,7 @@ describe('InputCounterComponent', () => {
 
     describe('when configured with listenTo = input', () => {
       describe('and input does not have initial value and maxlength', () => {
-        const input = new InputComponent(null);
+        const input = new InputComponent(null, null);
         beforeEach(() => {
           component.listenTo = input;
           component.ngOnInit();
@@ -116,7 +116,7 @@ describe('InputCounterComponent', () => {
         const initialValue = 'Test 123';
         const updatedValue = 'Test 123456';
         const maxlength = 99;
-        const input = new InputComponent(null);
+        const input = new InputComponent(null, null);
         input.value = initialValue;
         input.maxlength = maxlength;
         beforeEach(() => {
@@ -142,7 +142,7 @@ describe('InputCounterComponent', () => {
 
     describe('when configured with listenTo = textarea', () => {
       describe('and textarea does not have initial value and maxlength', () => {
-        const textarea = new TextareaComponent();
+        const textarea = new TextareaComponent(null);
         beforeEach(() => {
           component.listenTo = textarea;
           component.ngOnInit();
@@ -167,7 +167,7 @@ describe('InputCounterComponent', () => {
         const initialValue = 'Test 123';
         const updatedValue = 'Test 123456';
         const maxlength = 99;
-        const textarea = new TextareaComponent();
+        const textarea = new TextareaComponent(null);
         textarea.value = initialValue;
         textarea.maxlength = maxlength;
         beforeEach(() => {
@@ -212,8 +212,8 @@ describe('InputCounterComponent', () => {
 
       spectator = createHost(
         `<form [formGroup]="formGroup">
-          <textarea #textarea [formControl]="formGroup.controls.textarea" kirby-textarea ></textarea>
-          <kirby-input-counter #inputCounter [listenTo]="textarea" />
+          <textarea #textarea [formControl]="formGroup.controls.textarea" kirby-textarea></textarea>
+          <kirby-input-counter #inputCounter [listenTo]="textarea"></kirby-input-counter>
         </form>`,
         {
           hostProps: { formGroup },
@@ -263,8 +263,8 @@ describe('InputCounterComponent', () => {
 
       spectator = createHost(
         `<form [formGroup]="formGroup">
-          <input #input [formControl]="formGroup.controls.input" kirby-input ></input>
-          <kirby-input-counter #inputCounter [listenTo]="input" />
+          <input #input [formControl]="formGroup.controls.input" kirby-input />
+          <kirby-input-counter #inputCounter [listenTo]="input"></kirby-input-counter>
         </form>`,
         {
           hostProps: { formGroup },
