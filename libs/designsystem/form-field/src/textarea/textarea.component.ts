@@ -5,13 +5,14 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
-  inject,
+  Inject,
   Input,
   OnChanges,
+  Optional,
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
@@ -63,7 +64,9 @@ export class TextareaComponent implements OnChanges, FormFieldControl {
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
-  constructor() {
+  constructor(
+    @Optional() @Inject(NG_VALUE_ACCESSOR) private builtInValueAccessors: ControlValueAccessor[]
+  ) {
     this.extendBuiltinValueAccessor();
   }
 
@@ -74,9 +77,8 @@ export class TextareaComponent implements OnChanges, FormFieldControl {
   }
 
   extendBuiltinValueAccessor() {
-    const builtInValueAccessors = inject(NG_VALUE_ACCESSOR, { optional: true });
-    if (builtInValueAccessors) {
-      builtInValueAccessors.forEach((accessor) => {
+    if (this.builtInValueAccessors) {
+      this.builtInValueAccessors.forEach((accessor) => {
         const originalWriteValue = accessor.writeValue?.bind(accessor);
         accessor.writeValue = (value: any) => {
           if (originalWriteValue) {
