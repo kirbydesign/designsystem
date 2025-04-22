@@ -64,22 +64,27 @@ export class TextareaComponent implements OnChanges, FormFieldControl {
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   constructor() {
-    const hostCVAs = inject(NG_VALUE_ACCESSOR, { optional: true });
-    if (Array.isArray(hostCVAs)) {
-      const hostCVA = hostCVAs[0];
-      if (hostCVA) {
-        const originalWriteValue = hostCVA.writeValue.bind(hostCVA);
-        hostCVA.writeValue = (value: string) => {
-          originalWriteValue(value);
-          this.kirbyChange.emit(value);
-        };
-      }
-    }
+    this.extendBuiltinValueAccessor();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
+    }
+  }
+
+  extendBuiltinValueAccessor() {
+    const builtInValueAccessors = inject(NG_VALUE_ACCESSOR, { optional: true });
+    if (builtInValueAccessors) {
+      builtInValueAccessors.forEach((accessor) => {
+        const originalWriteValue = accessor.writeValue?.bind(accessor);
+        accessor.writeValue = (value: any) => {
+          if (originalWriteValue) {
+            originalWriteValue(value);
+          }
+          this.kirbyChange.emit(value);
+        };
+      });
     }
   }
 

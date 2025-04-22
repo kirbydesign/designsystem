@@ -36,7 +36,7 @@ export enum InputSize {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent implements OnChanges, OnInit, FormFieldControl {
+export class InputComponent implements OnChanges, FormFieldControl {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
@@ -95,34 +95,27 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   constructor(private elementRef: ElementRef<HTMLInputElement>) {
-    const hostCVAs = inject(NG_VALUE_ACCESSOR, { optional: true });
-    if (Array.isArray(hostCVAs)) {
-      const hostCVA = hostCVAs[0];
-      if (hostCVA) {
-        const originalWriteValue = hostCVA.writeValue.bind(hostCVA);
-        hostCVA.writeValue = (value: string) => {
-          originalWriteValue(value);
-          this.kirbyChange.emit(value);
-        };
-      }
-    }
-  }
-
-  ngOnInit(): void {
-    // The native input value is emitted here to make sure that
-    // the InputCounterComponent receives the value onInit,
-    // when [(ngModel)] is used on kirby-input.
-    setTimeout(() => {
-      const inputValue = this.elementRef.nativeElement.value;
-      if (inputValue) {
-        this.kirbyChange.emit(inputValue);
-      }
-    });
+    this.extendBuiltinValueAccessor();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
+    }
+  }
+
+  extendBuiltinValueAccessor() {
+    const builtInValueAccessors = inject(NG_VALUE_ACCESSOR, { optional: true });
+    if (builtInValueAccessors) {
+      builtInValueAccessors.forEach((accessor) => {
+        const originalWriteValue = accessor.writeValue?.bind(accessor);
+        accessor.writeValue = (value: any) => {
+          if (originalWriteValue) {
+            originalWriteValue(value);
+          }
+          this.kirbyChange.emit(value);
+        };
+      });
     }
   }
 
