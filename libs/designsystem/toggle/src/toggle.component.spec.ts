@@ -1,4 +1,9 @@
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import {
+  createComponentFactory,
+  createHostFactory,
+  Spectator,
+  SpectatorHost,
+} from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ToggleComponent } from './toggle.component';
@@ -95,5 +100,42 @@ describe('ToggleComponent', () => {
 
       expect(spectator.component.disabled).toBeTrue();
     });
+  });
+});
+
+describe('ToggleComponent with aria label', () => {
+  const createHost = createHostFactory({
+    component: ToggleComponent,
+    imports: [TestHelper.ionicModuleForTest],
+  });
+
+  let spectator: SpectatorHost<ToggleComponent>;
+  let ionToggle: HTMLIonToggleElement;
+
+  beforeEach(async () => {
+    spectator = createHost(
+      '<kirby-toggle [attr.aria-label]="ariaLabel">{{ text }}</kirby-toggle>',
+      {
+        hostProps: {
+          text: 'test',
+          ariaLabel: 'my aria label',
+        },
+      }
+    );
+    ionToggle = spectator.query('ion-toggle');
+    await TestHelper.whenReady(ionToggle);
+  });
+
+  it('should have same click area (.hidden-label element) size as ion-toggle', () => {
+    const hiddenLabel: HTMLElement = ionToggle.querySelector('.hidden-label');
+    const hiddenLabelBoundingRect = hiddenLabel.getBoundingClientRect();
+    const ionToggleBoundingRect = ionToggle.getBoundingClientRect();
+
+    expect(hiddenLabelBoundingRect.height).toBe(ionToggleBoundingRect.height);
+    expect(hiddenLabelBoundingRect.width).toBe(ionToggleBoundingRect.width);
+    expect(hiddenLabelBoundingRect.left).toBe(ionToggleBoundingRect.left);
+    expect(hiddenLabelBoundingRect.right).toBe(ionToggleBoundingRect.right);
+    expect(hiddenLabelBoundingRect.top).toBe(ionToggleBoundingRect.top);
+    expect(hiddenLabelBoundingRect.bottom).toBe(ionToggleBoundingRect.bottom);
   });
 });
