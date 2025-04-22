@@ -14,23 +14,28 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   &.has-hidden-label {
-    position: initial;
+    &:has(ion-toggle.in-item) {
+      // reset position when toggle is in item and has hidden label
+      // to ensure that it fills out its parent container
+      // so the entire item becomes clickable
+      position: initial;
+
+      ion-toggle {
+        position: initial;
+
+        &::part(label) {
+          position: initial;
+        }
+
+        &::part(label-text-wrapper) {
+          margin-inline: 0;
+        }
+      }
+    }
 
     &[slot='end'] {
       ion-toggle {
         margin-inline-start: $spacing-to-label;
-      }
-    }
-
-    ion-toggle {
-      position: initial;
-
-      &::part(label) {
-        position: initial;
-      }
-
-      &.in-item::part(label-text-wrapper) {
-        margin-inline: 0;
       }
     }
 

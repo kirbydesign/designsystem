@@ -2,14 +2,15 @@
   mode="md"
   [checked]="checked"
   [disabled]="disabled"
+  [indeterminate]="indeterminate"
   (ionChange)="onChecked($event.detail.checked)"
   (ionBlur)="onBlur()"
   [labelPlacement]="_labelPlacement"
   [justify]="_justify"
 >
   <span class="hidden-label" *ngIf="_labelText">{{ _labelText }}</span>
-  <span *ngIf="text">{{ text }}</span>
-  <span class="default-content">
+  <span *ngIf="text" [attr.aria-hidden]="_labelText ? true : undefined">{{ text }}</span>
+  <span class="default-content" [attr.aria-hidden]="_labelText ? true : undefined">
     <ng-content></ng-content>
   </span>
 </ion-checkbox>

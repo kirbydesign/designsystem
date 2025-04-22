@@ -12,6 +12,7 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
 import { CheckboxReactiveFormsExampleComponent } from '../../examples/checkbox-example/examples/reactive-forms';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
+import { CheckboxIndeterminateListExampleComponent } from '../../examples/checkbox-example/examples/list-indeterminate';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
@@ -25,6 +26,7 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     CheckboxDefaultExampleComponent,
     RouterLink,
     CheckboxListExampleComponent,
+    CheckboxIndeterminateListExampleComponent,
     CheckboxStatesExampleComponent,
     CheckboxSizesExampleComponent,
     CheckboxMultilineExampleComponent,
@@ -48,6 +50,13 @@ Use the default attentionLevel 2 for checkbox lists.`,
     {
       name: 'checked',
       description: 'If `true`, the checkbox is selected',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
+      name: 'indeterminate',
+      description:
+        'If `true`, the selection state is indeterminate and will take precedence over `checked` visually.',
       defaultValue: 'false',
       type: ['boolean'],
     },

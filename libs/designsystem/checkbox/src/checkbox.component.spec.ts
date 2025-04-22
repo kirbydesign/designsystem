@@ -1,4 +1,9 @@
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import {
+  createComponentFactory,
+  createHostFactory,
+  Spectator,
+  SpectatorHost,
+} from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -105,6 +110,14 @@ describe('CheckboxComponent', () => {
       expect(ionCheckbox.checked).toBe(false);
     });
 
+    it('should set the [indeterminate] input on ion-checkbox', () => {
+      spectator.setInput('indeterminate', true);
+      expect(ionCheckbox.indeterminate).toBe(true);
+
+      spectator.setInput('indeterminate', false);
+      expect(ionCheckbox.indeterminate).toBe(false);
+    });
+
     describe('with size', () => {
       it(`should have 'md' size by default`, () => {
         expect(spectator.element).toHaveComputedStyle({
@@ -165,7 +178,7 @@ describe('CheckboxComponent', () => {
           '--checkbox-background': getColor('semi-light'),
           '--checkbox-background-checked': getColor('semi-light'),
           '--border-color': getColor('medium'),
-          '--border-color-checked': getColor('semi-light'),
+          '--border-color-checked': getColor('medium'),
         });
       });
     });
@@ -228,5 +241,42 @@ describe('CheckboxComponent', () => {
       spectator.component.setDisabledState(isDisabled);
       expect(spectator.component.disabled).toBe(isDisabled);
     });
+  });
+});
+
+describe('CheckboxComponent with aria label', () => {
+  const createHost = createHostFactory({
+    component: CheckboxComponent,
+    imports: [TestHelper.ionicModuleForTest],
+  });
+
+  let spectator: SpectatorHost<CheckboxComponent>;
+  let ionCheckbox: HTMLIonCheckboxElement;
+
+  beforeEach(async () => {
+    spectator = createHost(
+      '<kirby-checkbox [text]="text" [attr.aria-label]="ariaLabel"></kirby-checkbox>',
+      {
+        hostProps: {
+          text: 'test',
+          ariaLabel: 'my aria label',
+        },
+      }
+    );
+    ionCheckbox = spectator.query('ion-checkbox');
+    await TestHelper.whenReady(ionCheckbox);
+  });
+
+  it('should have same click area (.hidden-label element) size as ion-checkbox', () => {
+    const hiddenLabel: HTMLElement = ionCheckbox.querySelector('.hidden-label');
+    const hiddenLabelBoundingRect = hiddenLabel.getBoundingClientRect();
+    const ionCheckboxBoundingRect = ionCheckbox.getBoundingClientRect();
+
+    expect(hiddenLabelBoundingRect.height).toBe(ionCheckboxBoundingRect.height);
+    expect(hiddenLabelBoundingRect.width).toBe(ionCheckboxBoundingRect.width);
+    expect(hiddenLabelBoundingRect.left).toBe(ionCheckboxBoundingRect.left);
+    expect(hiddenLabelBoundingRect.right).toBe(ionCheckboxBoundingRect.right);
+    expect(hiddenLabelBoundingRect.top).toBe(ionCheckboxBoundingRect.top);
+    expect(hiddenLabelBoundingRect.bottom).toBe(ionCheckboxBoundingRect.bottom);
   });
 });
