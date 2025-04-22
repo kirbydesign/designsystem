@@ -5,11 +5,14 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  Inject,
   Input,
   OnChanges,
+  Optional,
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
@@ -61,9 +64,29 @@ export class TextareaComponent implements OnChanges, FormFieldControl {
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
+  constructor(
+    @Optional() @Inject(NG_VALUE_ACCESSOR) private builtInValueAccessors: ControlValueAccessor[]
+  ) {
+    this.extendBuiltinValueAccessor();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
+    }
+  }
+
+  extendBuiltinValueAccessor() {
+    if (this.builtInValueAccessors) {
+      this.builtInValueAccessors.forEach((accessor) => {
+        const originalWriteValue = accessor.writeValue?.bind(accessor);
+        accessor.writeValue = (value: any) => {
+          if (originalWriteValue) {
+            originalWriteValue(value);
+          }
+          this.kirbyChange.emit(value);
+        };
+      });
     }
   }
 
