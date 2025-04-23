@@ -41,23 +41,21 @@ import {
   IonToolbar,
   NavController,
 } from '@ionic/angular/standalone';
-import { componentOnReady } from '@ionic/core';
+import { Title } from '@angular/platform-browser';
 import type { ScrollDetail } from '@ionic/core';
+import { componentOnReady } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
+import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
 import {
   HeaderActionsDirective,
   HeaderComponent,
   HeaderTitleActionIconDirective,
 } from '@kirbydesign/designsystem/header';
-import {
-  IonicElementPartHelper,
-  KirbyAnimation,
-  observeContent,
-} from '@kirbydesign/designsystem/helpers';
+import { IonicElementPartHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -69,9 +67,7 @@ import {
   ResizeObserverService,
   TranslationService,
 } from '@kirbydesign/designsystem/shared';
-import { Title } from '@angular/platform-browser';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
-import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -442,6 +438,9 @@ export class PageComponent
       this.subtitle = changes.title.currentValue;
       this.hasPageSubtitle = this.subtitle !== undefined;
     }
+    if (changes.title || changes.toolbarTitle) {
+      this.setHtmlDocTitle();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -543,7 +542,6 @@ export class PageComponent
 
     this.enter.emit();
 
-    this.setHtmlDocTitle();
     this.patchIonLastFocused();
 
     this.observeTitle();
@@ -618,6 +616,12 @@ export class PageComponent
       if (this.header.titleClick.observed && this.hasInteractiveTitle === undefined) {
         this.hasInteractiveTitle = true;
       }
+
+      // Set document title immediately if present, then subscribe to changes
+      this.setHtmlDocTitle();
+      this.header.title$.pipe(takeUntil(this.ngOnDestroy$)).subscribe(() => {
+        this.setHtmlDocTitle();
+      });
     }
   }
 
@@ -720,20 +724,10 @@ export class PageComponent
 
   private setHtmlDocTitle() {
     if (!this.config?.setHtmlDocTitle) return;
+    const currentTitle = this.header?.title || this.title || this.toolbarTitle;
+    if (!currentTitle || currentTitle.trim() === '') return;
 
-    const titleArea: HTMLElement = this.ionHeaderElement.nativeElement.querySelector(
-      'ion-toolbar ion-title .toolbar-title'
-    );
-
-    if (titleArea.textContent) {
-      // If title is already present in DOM, set it immediately:
-      this.htmlDocTitle.setTitle(titleArea.textContent);
-    } else {
-      // If title is not yet present in DOM, observe the toolbars title and set it when it appears:
-      this.unobserveTitleMutation = observeContent(titleArea, () => {
-        this.htmlDocTitle.setTitle(titleArea.textContent);
-      });
-    }
+    this.htmlDocTitle.setTitle(currentTitle);
   }
 
   private initializeActions() {
