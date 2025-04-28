@@ -1,6 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-:host {
+.message-container {
   max-width: 330px;
   margin: auto;
   display: flex;
