@@ -5,7 +5,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
-  selector: 'cookbook-item-example-flagged',
+  selector: 'cookbook-item-example-slots',
   template: `<kirby-item>
   <div slot="outside">
     <kirby-badge themeColor="success" size="sm"></kirby-badge>
@@ -33,7 +33,7 @@ const config = {
   styles: config.styles,
   imports: [ItemModule, ThemeColorDirective, BadgeComponent, FlagComponent],
 })
-export class ItemExampleFlaggedComponent {
+export class ItemExampleSlotsComponent {
   template: string = config.template;
   styles: string = config.styles[0];
 }

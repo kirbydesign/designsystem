@@ -6,9 +6,8 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 const config = {
   selector: 'cookbook-item-example-card',
   template: `<kirby-card>
-  <kirby-item selectable="true">
-    <p class="kirby-item-title">Title</p>
-    <kirby-toggle slot="end"></kirby-toggle>
+  <kirby-item>
+    <kirby-toggle slot="end"><span class="kirby-item-title">Title</span></kirby-toggle>
   </kirby-item>
 </kirby-card>`,
 };
