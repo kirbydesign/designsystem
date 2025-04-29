@@ -6,6 +6,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrls: ['./tab-navigation-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
+  host: { role: 'presentation' },
 })
 export class TabNavigationItemComponent {
   @Input()
@@ -13,8 +14,4 @@ export class TabNavigationItemComponent {
 
   @Input()
   truncate = true;
-
-  constructor() {
-    /* */
-  }
 }
