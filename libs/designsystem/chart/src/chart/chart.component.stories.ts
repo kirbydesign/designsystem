@@ -4,12 +4,15 @@ import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 
 import { ChartComponent, ChartConfigService } from '@kirbydesign/designsystem/chart';
 
+import { ChartsExampleComponent } from '~/app/examples/charts-example/charts-example.component';
+
 const meta: Meta<ChartComponent> = {
   component: ChartComponent,
   title: 'Components / Chart',
   decorators: [
     moduleMetadata({
       providers: [ChartConfigService],
+      imports: [ChartsExampleComponent],
     }),
   ],
   render: (args) => ({
@@ -31,4 +34,10 @@ export const Default: Story = {
       control: { type: 'radio' },
     },
   },
+};
+
+export const CookbookExamples: Story = {
+  render: () => ({
+    template: `<cookbook-charts-example></cookbook-charts-example>`,
+  }),
 };
