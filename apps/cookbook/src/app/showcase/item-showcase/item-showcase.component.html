@@ -69,6 +69,25 @@
   </div>
 </cookbook-example-viewer>
 
+<h2>Selectable & Disclosure</h2>
+<p>
+  Disclosure indicators are used on navigation and action list-items to inform the user that
+  clicking them will navigate to a new page, or open a new modal, drawer or similar.
+</p>
+<cookbook-example-viewer [html]="selectableExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-selectable #selectableExample></cookbook-item-example-selectable>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Avoiding nested interactives</h3>
+<!-- TODO: Add note about issues with nested interactives -->
+
+<h3>Disabled</h3>
+<p>Selectable items can be disabled, to prevent the user from activating them.</p>
+
+<!-- TODO: Add disabled example -->
+
 <h2>Nested Controls</h2>
 <p>Items can contain nested controls, such as checkboxes or radio buttons.</p>
 <cookbook-example-viewer [html]="nestedControlsExample.template">
@@ -79,16 +98,16 @@
   </div>
 </cookbook-example-viewer>
 
-<h2>Disclosure</h2>
+<h3>Selectable and Disabled</h3>
 <p>
-  Disclosure indicators are used on navigation and action list-items to inform the user that
-  clicking them will navigate to a new page, or open a new modal, drawer or similar.
+  Items with nested controls should not be marked as selectable or disabled, and item will ignore
+  any selected state added if a nested kirby control exist.
 </p>
-<cookbook-example-viewer [html]="disclosureExample.template">
-  <div class="example-frame">
-    <cookbook-item-example-disclosure #disclosureExample></cookbook-item-example-disclosure>
-  </div>
-</cookbook-example-viewer>
+<p>
+  Instead of marking the item as disabled, any nested control should be disabled, so users of
+  assistive technologies can still explore the item content, and get notified of possible actions.
+</p>
+<!-- TODO: Add disabled nested controls example -->
 
 <h2>API</h2>
 <h3>Item Properties</h3>

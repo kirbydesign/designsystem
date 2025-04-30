@@ -4,7 +4,7 @@ import { ItemExampleTextComponent } from './examples/text';
 import { ItemExampleTextVerticallyStackedComponent } from './examples/text-vertically-stacked';
 import { ItemExampleSlotsComponent } from './examples/slots';
 import { ItemExampleNestedControlsComponent } from './examples/nested-controls';
-import { ItemExampleDisclosureComponent } from './examples/disclosure';
+import { ItemExampleSelectableComponent } from './examples/selectable';
 
 @Component({
   selector: 'cookbook-item-example',
@@ -16,7 +16,7 @@ import { ItemExampleDisclosureComponent } from './examples/disclosure';
     ItemExampleTextVerticallyStackedComponent,
     ItemExampleSlotsComponent,
     ItemExampleNestedControlsComponent,
-    ItemExampleDisclosureComponent,
+    ItemExampleSelectableComponent,
   ],
 })
 export class ItemExampleComponent {}

@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { ItemExampleSizesComponent } from '../../examples/item-example/examples/sizes';
 import { ItemExampleNestedControlsComponent } from '../../examples/item-example/examples/nested-controls';
 import { ItemExampleTextComponent } from '../../examples/item-example/examples/text';
 import { ItemExampleSlotsComponent } from '../../examples/item-example/examples/slots';
-import { ItemExampleDisclosureComponent } from '../../examples/item-example/examples/disclosure';
+import { ItemExampleSelectableComponent } from '../../examples/item-example/examples/selectable';
+
 import { ItemExampleTextVerticallyStackedComponent } from '../../examples/item-example/examples/text-vertically-stacked';
 
+import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -24,7 +25,8 @@ import {
     ItemExampleTextVerticallyStackedComponent,
     ItemExampleNestedControlsComponent,
     ItemExampleSlotsComponent,
-    ItemExampleDisclosureComponent,
+    ItemExampleSelectableComponent,
+    ItemExampleSelectableComponent,
     ApiDescriptionPropertiesComponent,
   ],
 })
