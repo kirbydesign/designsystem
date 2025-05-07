@@ -30,7 +30,7 @@ import {
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
-import { forwardAttributes } from '@kirbydesign/designsystem/shared';
+import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-menu',
@@ -48,7 +48,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     private cdr: ChangeDetectorRef,
     private elementRef: ElementRef<HTMLElement>,
     private zone: NgZone,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    public translations: TranslationService
   ) {}
 
   @Input() public isDisabled: boolean = false;
@@ -283,9 +284,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   ngAfterContentInit(): void {
-    this.forwardAriaLabelToTriggerButton();
     this.setRoleAttributeForAllItems();
     this.setUserProvidedButtonAriaAttributes();
+    this.forwardAriaLabelToTriggerButton();
     this.ensureSelectableOnItems();
   }
 
@@ -345,6 +346,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
     if (!button.getAttribute('aria-haspopup')) {
       this.renderer.setAttribute(button, 'aria-haspopup', 'true');
+    }
+    if (!button.getAttribute('aria-label')) {
+      this.renderer.setAttribute(button, 'aria-label', this.translations.get('more'));
     }
   }
 
