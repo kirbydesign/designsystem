@@ -278,6 +278,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.floatingMenu.hide();
       });
     });
+
+    forwardAttributes(
+      this.element.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.element.nativeElement.querySelector('ion-radio-group')
+    );
   }
 
   ngAfterContentInit(): void {

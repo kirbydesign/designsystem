@@ -42,25 +42,20 @@ export function forwardAttributes(
   attributes: string[],
   renderer: Renderer2,
   targetElement?: HTMLElement
-): Record<string, any> {
-  const inheritedAttributes: Record<string, any> = {};
-
-  if (!sourceElement || !attributes || attributes.length === 0) {
-    return inheritedAttributes;
+) {
+  if (!sourceElement || !attributes || !renderer || !targetElement) {
+    return;
   }
 
   attributes.forEach((attribute) => {
     if (sourceElement.hasAttribute(attribute)) {
       const value = sourceElement.getAttribute(attribute);
-      inheritedAttributes[attribute] = value;
 
-      if (targetElement) {
+      if (!targetElement.hasAttribute(attribute)) {
         renderer.setAttribute(targetElement, attribute, value);
       }
 
       renderer.removeAttribute(sourceElement, attribute);
     }
   });
-
-  return inheritedAttributes;
 }
