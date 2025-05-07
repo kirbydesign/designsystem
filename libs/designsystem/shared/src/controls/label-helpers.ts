@@ -50,11 +50,7 @@ export function forwardAttributes(
   attributes.forEach((attribute) => {
     if (sourceElement.hasAttribute(attribute)) {
       const value = sourceElement.getAttribute(attribute);
-
-      if (!targetElement.hasAttribute(attribute)) {
-        renderer.setAttribute(targetElement, attribute, value);
-      }
-
+      renderer.setAttribute(targetElement, attribute, value);
       renderer.removeAttribute(sourceElement, attribute);
     }
   });

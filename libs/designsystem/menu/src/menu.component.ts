@@ -30,6 +30,7 @@ import {
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-menu',
@@ -41,6 +42,7 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
   readonly menuId: string = UniqueIdGenerator.scopedTo('kirby-menu').next();
   triggerButtonId: string = UniqueIdGenerator.scopedTo('kirby-menu-trigger-button').next();
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -278,19 +280,22 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.floatingMenu.hide();
       });
     });
-
-    forwardAttributes(
-      this.element.nativeElement,
-      this._attributesToForward,
-      this.renderer,
-      this.element.nativeElement.querySelector('ion-radio-group')
-    );
   }
 
   ngAfterContentInit(): void {
+    this.forwardAriaLabelToTriggerButton();
     this.setRoleAttributeForAllItems();
     this.setUserProvidedButtonAriaAttributes();
     this.ensureSelectableOnItems();
+  }
+
+  private forwardAriaLabelToTriggerButton() {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.getTriggerButton()
+    );
   }
 
   ensureSelectableOnItems() {
