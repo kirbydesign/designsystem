@@ -41,7 +41,9 @@
 <p>
   <kirby-card variant="flat" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="stockExample.template" [ts]="stockExample.codeSnippet">
-      <cookbook-stock-chart-example-simple #stockExample></cookbook-stock-chart-example-simple>
+      <cookbook-stock-chart-example-simple-dataset
+        #stockExample
+      ></cookbook-stock-chart-example-simple-dataset>
     </cookbook-example-viewer>
   </kirby-card>
 </p>

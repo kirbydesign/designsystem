@@ -65,14 +65,14 @@ const meta: Meta<StockChartComponent> = {
 export default meta;
 type Story = StoryObj<StockChartComponent>;
 
-export const StockChart: Story = {
+export const Default: Story = {
   args: {
     data: _datasets,
     dataLabelOptions: chartDataLabelOptions,
   },
 };
 
-export const CookbookStockChartExample: Story = {
+export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-stock-chart-example></cookbook-stock-chart-example>`,
   }),
