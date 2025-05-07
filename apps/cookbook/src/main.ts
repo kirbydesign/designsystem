@@ -12,8 +12,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { IconRegistryService, KirbyModule, provideKirby } from '@kirbydesign/designsystem';
+import { IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
+import { provideKirby } from '@kirbydesign/designsystem/config';
 import { environment } from './environments/environment';
 
 import { AppComponent } from './app/app.component';
@@ -28,7 +29,7 @@ registerLocaleData(localeData);
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, FormsModule, KirbyModule),
+    importProvidersFrom(BrowserModule, FormsModule),
     provideKirby(),
     provideHttpClient(),
     provideAnimations(),

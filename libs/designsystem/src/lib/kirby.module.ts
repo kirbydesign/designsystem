@@ -151,23 +151,10 @@ const allExports = [...exportedModules, ...exportedDeclarations];
 
 const importedModules = [...exportedModules];
 
-const providers = [
-  ModalController,
-  ActionSheetHelper,
-  ModalHelper,
-  AlertHelper,
-  ToastHelper,
-  ToastController,
-  LoadingOverlayService,
-  ResizeObserverFactory,
-  ResizeObserverService,
-  CanDismissHelper,
-];
-
 @NgModule({
   imports: [CommonModule, RouterModule, ...importedModules],
   declarations: [declarations],
-  providers: providers,
+  providers: [provideKirby()],
   exports: [allExports],
 })
 export class KirbyModule {
