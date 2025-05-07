@@ -5,7 +5,7 @@ import { ChartsModule } from '@kirbydesign/designsystem/chart';
 const { getThemeColorHexString } = ColorHelper;
 
 const config = {
-  selector: 'cookbook-chart-example-stock',
+  selector: 'cookbook-stock-chart-example-simple',
   template: `
   <kirby-stock-chart 
   [data]="_dataset"
@@ -43,7 +43,7 @@ const config = {
   template: config.template,
   imports: [ChartsModule],
 })
-export class StockChartExampleComponent {
+export class StockChartExampleSimpleComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 
