@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
-import { StockChartExampleComponent } from '../../examples/charts-example/examples/stock-chart-example.component';
-import { StockChartExampleComparisonComponent } from '../../examples/charts-example/examples/stock-chart-example-comparison.component';
+import { StockChartExampleSimpleDatasetComponent } from '../../examples/stock-chart-example/example/simple-dataset';
+import { StockChartExampleComparisonComponent } from '../../examples/stock-chart-example/example/comparison';
 import { baseChartApi, baseChartCssCustomProperties } from '../chart-showcase/base-chart-api';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import {
@@ -19,7 +19,7 @@ import {
     RouterLink,
     CardModule,
     ExampleViewerComponent,
-    StockChartExampleComponent,
+    StockChartExampleSimpleDatasetComponent,
     StockChartExampleComparisonComponent,
     DividerComponent,
     ApiDescriptionPropertiesComponent,

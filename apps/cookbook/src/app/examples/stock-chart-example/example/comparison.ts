@@ -6,7 +6,7 @@ import { ChartsModule } from '@kirbydesign/designsystem/chart';
 const { getThemeColorHexString } = ColorHelper;
 
 const config = {
-  selector: 'cookbook-chart-example-stock-comparison',
+  selector: 'cookbook-stock-chart-example-comparison',
   template: `
   <kirby-stock-chart 
   [data]="_datasets"

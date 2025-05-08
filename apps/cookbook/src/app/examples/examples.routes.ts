@@ -89,6 +89,7 @@ import { ModalExampleAlertWithGuardComponent } from './modal-example/modal-examp
 import { ModalEmbeddedAlertExampleComponent } from './modal-example/alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
+import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 
 export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
@@ -451,6 +452,10 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'chart',
     component: ChartsExampleComponent,
+  },
+  {
+    path: 'chart-stock',
+    component: StockChartExampleComponent,
   },
   {
     path: 'grid',
