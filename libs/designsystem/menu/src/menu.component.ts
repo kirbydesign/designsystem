@@ -281,12 +281,12 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.floatingMenu.hide();
       });
     });
+    this.forwardAriaLabelToTriggerButton();
   }
 
   ngAfterContentInit(): void {
     this.setRoleAttributeForAllItems();
     this.setUserProvidedButtonAriaAttributes();
-    this.forwardAriaLabelToTriggerButton();
     this.ensureSelectableOnItems();
   }
 
