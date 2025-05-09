@@ -136,6 +136,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   private handleKeyDownForClosedMenu(event: KeyboardEvent) {
     const key = event.key;
     switch (key) {
+      case ' ':
+      case 'Enter':
       case 'ArrowDown':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = 0;
