@@ -35,7 +35,6 @@
   [style.minWidth]="minWidth ? minWidth + 'px' : null"
   class="menu-popover"
   (keydown)="_onKeydown($event)"
-  (click)="_onKeydown($event)"
   (displayChanged)="menuVisibilityChanged($event)"
   role="menu"
   [attr.aria-labelledby]="triggerButtonId"
