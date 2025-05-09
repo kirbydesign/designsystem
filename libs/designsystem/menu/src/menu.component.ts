@@ -115,6 +115,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
+  @HostListener('click', ['$event'])
+  _onClick() {
+    if (!this.floatingMenuIsShown) return;
+    this.focusedIndex = 0;
+    this.focusItem();
+  }
+
   private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -129,8 +136,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   private handleKeyDownForClosedMenu(event: KeyboardEvent) {
     const key = event.key;
     switch (key) {
-      case ' ':
-      case 'Enter':
       case 'ArrowDown':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = 0;
