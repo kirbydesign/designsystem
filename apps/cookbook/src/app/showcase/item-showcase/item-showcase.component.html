@@ -71,8 +71,8 @@
 
 <h2>Selectable & Disclosure</h2>
 <p>
-  Disclosure indicators are used on navigation and action list-items to inform the user that
-  clicking them will navigate to a new page, or open a new modal, drawer or similar.
+  Disclosure indicators should be used on items with a related action or navigation, to inform the
+  user that clicking them will open a modal, navigate to a new page or similar.
 </p>
 <cookbook-example-viewer [html]="selectableExample.template">
   <div class="example-frame">
@@ -81,7 +81,19 @@
 </cookbook-example-viewer>
 
 <h3>Avoiding nested interactives</h3>
-<!-- TODO: Add note about issues with nested interactives -->
+<p>
+  Nested interactives are interactive elements, such as buttons or links, placed inside other
+  interactive elements. This can lead to accessibility issues and unexpected behavior, as browsers
+  and assistive technologies will handle them inconsistently if at all.
+</p>
+<p>
+  To avoid issues with nested interactives in selectable items, ensure that interactive controls are
+  not placed inside selectable items.
+</p>
+<p>
+  When a button, checkbox or similar is nested inside an item, the item should never be marked as
+  selectable.
+</p>
 
 <h3>Disabled</h3>
 <p>Selectable items can be disabled, to prevent the user from activating them.</p>
