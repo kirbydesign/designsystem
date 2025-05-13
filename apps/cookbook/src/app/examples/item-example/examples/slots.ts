@@ -7,10 +7,7 @@ import { FlagComponent } from '@kirbydesign/designsystem/flag';
 const config = {
   selector: 'cookbook-item-example-slots',
   template: `<kirby-item>
-  <div slot="outside">
-    <kirby-badge themeColor="success" size="sm"></kirby-badge>
-    <kirby-badge themeColor="warning" size="sm"></kirby-badge>
-  </div>
+  <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
   <kirby-label>
     <p class="kirby-text-normal-bold">Title</p>
     <p class="kirby-item-detail">Detail</p>

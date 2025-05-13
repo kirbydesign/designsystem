@@ -10,9 +10,11 @@ const config = {
   <kirby-checkbox slot="end">Item with Checkbox</kirby-checkbox>
 </kirby-item>
 
-<kirby-item>
-  <kirby-radio slot="end">Item with Radio</kirby-radio>
-</kirby-item>
+<kirby-radio-group>
+  <kirby-item>
+    <kirby-radio slot="end">Item with Radio</kirby-radio>
+  </kirby-item>
+</kirby-radio-group>
 
 <kirby-item>
   <kirby-toggle slot="end">Item with Toggle</kirby-toggle>
