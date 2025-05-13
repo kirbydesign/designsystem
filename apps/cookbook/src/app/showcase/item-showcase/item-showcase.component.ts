@@ -16,6 +16,7 @@ import {
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ItemExampleComplexLabelsComponent } from '~/app/examples/item-example/examples/complex-labels';
+import { ItemExampleDisclosureAnimationComponent } from '~/app/examples/item-example/examples/disclosure-animation';
 
 @Component({
   selector: 'cookbook-item-showcase',
@@ -32,6 +33,7 @@ import { ItemExampleComplexLabelsComponent } from '~/app/examples/item-example/e
     ItemExampleDisabledComponent,
     ItemExampleDisabledControlsComponent,
     ItemExampleComplexLabelsComponent,
+    ItemExampleDisclosureAnimationComponent,
     ApiDescriptionPropertiesComponent,
   ],
 })

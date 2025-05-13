@@ -158,6 +158,27 @@
   </div>
 </cookbook-example-viewer>
 
+<h3>Rotation animation</h3>
+<p>
+  It is possible to trigger an animation that rotates the disclosure icon by passing a boolean flag
+  to
+  <code>[rotateIcon]</code>
+  . When set to
+  <code>true</code>
+  it will rotate the icon 180 degrees and when set to
+  <code>false</code>
+  it will rotate the icon back to it's original position.
+</p>
+
+<cookbook-example-viewer
+  [html]="disclosureAnimationExample.template"
+  [ts]="disclosureAnimationExample.animationCodeSnippetTS"
+>
+  <cookbook-item-example-disclosure-animation
+    #disclosureAnimationExample
+  ></cookbook-item-example-disclosure-animation>
+</cookbook-example-viewer>
+
 <h2>Nested Controls</h2>
 <p>Items can contain nested controls, such as checkboxes or radio buttons.</p>
 <cookbook-example-viewer [html]="nestedControlsExample.template">
