@@ -9,10 +9,12 @@ import {
   Input,
   Output,
   QueryList,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { KeyboardHandlerService } from '@kirbydesign/designsystem/dropdown';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
 @Component({
@@ -34,6 +36,8 @@ export class TabNavigationComponent implements AfterViewInit {
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
   private tabButtonElements = new Array<HTMLElement>();
+
+  private _attributesToForward: string[] = ['aria-label', 'aria-labelledby'];
 
   @Input()
   get selectedIndex(): number {
@@ -70,15 +74,22 @@ export class TabNavigationComponent implements AfterViewInit {
 
   constructor(
     private window: WindowRef,
-    private keyboardHandlerService: KeyboardHandlerService
-  ) {
-    /**/
-  }
+    private keyboardHandlerService: KeyboardHandlerService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef<HTMLElement>
+  ) {}
 
   ngAfterViewInit(): void {
     this.tabBarElement = this.tabBar.nativeElement;
     this.setTabElements();
     this.updateTabElementsOnChanges();
+
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.tabBarElement
+    );
   }
 
   @HostListener('click', ['$event'])
