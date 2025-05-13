@@ -28,10 +28,12 @@
 <h2>Text</h2>
 
 <p>
-  By default, items display paragraphs as a single line of text, and the text is truncated with an
-  ellipsis if it exceeds available space. By adding the class
+  Items display paragraphs as a single line of text, and the text is truncated with an ellipsis if
+  it exceeds available space. By adding the class
   <code>kirby-item-wrap</code>
+  text will wrap to the next line.
 </p>
+
 <cookbook-example-viewer [html]="textExample.template">
   <div class="example-frame">
     <cookbook-item-example-text #textExample></cookbook-item-example-text>
@@ -45,6 +47,15 @@
   <code>kirby-label</code>
   component.
 </p>
+<p>
+  The appearance of text content can be adjusted using the
+  <code>kirby-item-title</code>
+  ,
+  <code>kirby-item-subtitle</code>
+  and
+  <code>kirby-item-detail</code>
+  css classes.
+</p>
 <cookbook-example-viewer [html]="textVerticallyStackedExample.template">
   <div class="example-frame">
     <cookbook-item-example-text-vertically-stacked
@@ -53,15 +64,31 @@
   </div>
 </cookbook-example-viewer>
 
+<h3>Complex label structures</h3>
+<p>
+  Items can display complex label structures using multiple
+  <code>kirby-label</code>
+  elements. When multiple labels are combined, the direction property of the label can be used to,
+  as in this example, horizontally align the title text with some other element like a related date.
+</p>
+
+<cookbook-example-viewer [html]="complexLabelsExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-complex-labels
+      #complexLabelsExample
+    ></cookbook-item-example-complex-labels>
+  </div>
+</cookbook-example-viewer>
+
 <h2>Slots</h2>
 <p>
-  Content can be placed in the
+  In addition to the default slot, content can be placed in the
   <code>start</code>
   ,
   <code>end</code>
   , or
   <code>outside</code>
-  slots for specific layouts.
+  slots.
 </p>
 <cookbook-example-viewer [html]="slotsExample.template">
   <div class="example-frame">
@@ -71,12 +98,35 @@
 
 <h2>Selectable & Disclosure</h2>
 <p>
-  Disclosure indicators should be used on items with a related action or navigation, to inform the
-  user that clicking them will open a modal, navigate to a new page or similar.
+  The selectable property should be added to items when some action is bound to the item with a
+  click listener or similar. The selectable property will add hover, focus and active states to the
+  item.
+</p>
+<p>
+  Generally, a disclosure indicator should be added on items that navigate to a new page or
+  activates a modal or similar overlay.
 </p>
 <cookbook-example-viewer [html]="selectableExample.template">
   <div class="example-frame">
     <cookbook-item-example-selectable #selectableExample></cookbook-item-example-selectable>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Disabled</h3>
+<p>Selectable items can be disabled, to prevent the user from activating them.</p>
+<cookbook-example-viewer [html]="disabledExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-disabled #disabledExample></cookbook-item-example-disabled>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Nested Controls</h2>
+<p>Items can contain nested controls, such as checkboxes or radio buttons.</p>
+<cookbook-example-viewer [html]="nestedControlsExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-nested-controls
+      #nestedControlsExample
+    ></cookbook-item-example-nested-controls>
   </div>
 </cookbook-example-viewer>
 
@@ -95,31 +145,20 @@
   selectable.
 </p>
 
-<h3>Disabled</h3>
-<p>Selectable items can be disabled, to prevent the user from activating them.</p>
+<h3>Disabled Nested Controls</h3>
+<p>
+  Since items with nested controls should not be selectable, they cannot be disabled either.
+  Instead, any nested control itself should be disabled so users of Assistive Technology can still
+  explore the remaining item content.
+</p>
 
-<!-- TODO: Add disabled example -->
-
-<h2>Nested Controls</h2>
-<p>Items can contain nested controls, such as checkboxes or radio buttons.</p>
-<cookbook-example-viewer [html]="nestedControlsExample.template">
+<cookbook-example-viewer [html]="disabledNestedControlsExample.template">
   <div class="example-frame">
-    <cookbook-item-example-nested-controls
-      #nestedControlsExample
-    ></cookbook-item-example-nested-controls>
+    <cookbook-item-example-disabled-controls
+      #disabledNestedControlsExample
+    ></cookbook-item-example-disabled-controls>
   </div>
 </cookbook-example-viewer>
-
-<h3>Selectable and Disabled</h3>
-<p>
-  Items with nested controls should not be marked as selectable or disabled, and item will ignore
-  any selected state added if a nested kirby control exist.
-</p>
-<p>
-  Instead of marking the item as disabled, any nested control should be disabled, so users of
-  assistive technologies can still explore the item content, and get notified of possible actions.
-</p>
-<!-- TODO: Add disabled nested controls example -->
 
 <h2>API</h2>
 <h3>Item Properties</h3>

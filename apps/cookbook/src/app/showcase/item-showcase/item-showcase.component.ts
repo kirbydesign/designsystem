@@ -9,10 +9,13 @@ import { ItemExampleSelectableComponent } from '../../examples/item-example/exam
 import { ItemExampleTextVerticallyStackedComponent } from '../../examples/item-example/examples/text-vertically-stacked';
 
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ItemExampleDisabledComponent } from '../../examples/item-example/examples/disabled';
+import { ItemExampleDisabledControlsComponent } from '../../examples/item-example/examples/disabled-controls';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ItemExampleComplexLabelsComponent } from '~/app/examples/item-example/examples/complex-labels';
 
 @Component({
   selector: 'cookbook-item-showcase',
@@ -26,7 +29,9 @@ import {
     ItemExampleNestedControlsComponent,
     ItemExampleSlotsComponent,
     ItemExampleSelectableComponent,
-    ItemExampleSelectableComponent,
+    ItemExampleDisabledComponent,
+    ItemExampleDisabledControlsComponent,
+    ItemExampleComplexLabelsComponent,
     ApiDescriptionPropertiesComponent,
   ],
 })
@@ -47,7 +52,7 @@ export class ItemShowcaseComponent {
     },
     {
       name: 'disabled',
-      description: 'Disable item entirely including its contents',
+      description: 'Disable any selectable item from being activated',
       defaultValue: 'false',
       type: ['boolean'],
     },
