@@ -1,2 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '../showcase.shared';
+
+.item-illustration {
+  display: flex;
+  justify-content: center;
+  margin: utils.size('m');
+
+  svg {
+    max-width: 600px;
+  }
+}
