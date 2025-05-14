@@ -4,7 +4,7 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-custom-placement-example',
-  template: `<kirby-menu [placement]="'bottom-end'">
+  template: `<kirby-menu [placement]="'bottom-end'" aria-label="Menu placement">
   <kirby-item>
     <p class="kirby-item-title">Stone</p>
   </kirby-item>

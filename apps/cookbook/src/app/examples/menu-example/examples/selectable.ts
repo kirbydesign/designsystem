@@ -5,7 +5,7 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-selectable-example',
-  template: `<kirby-menu aria-label="Kirby Menu">
+  template: `<kirby-menu>
   <kirby-item (click)="actionClicked('Stone')">
     <p class="kirby-item-title">Stone</p>
   </kirby-item>
