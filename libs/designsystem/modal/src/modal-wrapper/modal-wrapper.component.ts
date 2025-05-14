@@ -428,9 +428,9 @@ export class ModalWrapperComponent
   }
 
   private focusModalTitle() {
-    // Focus the title element if content inside modal is not already focussed
-    if (this.elementRef.nativeElement.contains(document.activeElement)) return;
-    this.didPresent.then(() => {
+    const focusAlreadyInModal = this.ionModalElement?.contains(document.activeElement);
+    if (focusAlreadyInModal) return;
+    this.ionModalDidPresent.pipe(takeUntil(this.willClose$)).subscribe(() => {
       this.ionTitleElement?.nativeElement.focus();
     });
   }
