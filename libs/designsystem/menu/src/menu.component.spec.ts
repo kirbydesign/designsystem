@@ -279,7 +279,7 @@ describe('MenuComponent', () => {
   });
 
   describe('trigger: default(click)', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item>
