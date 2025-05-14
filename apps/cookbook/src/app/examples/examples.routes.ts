@@ -53,7 +53,6 @@ import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageContentWidthExampleComponent } from './page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
-import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-tab-nav-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { RadioExampleComponent } from './radio-example/radio-example.component';
 import { RangeExampleComponent } from './range-example/range-example.component';
@@ -90,6 +89,7 @@ import { ModalEmbeddedAlertExampleComponent } from './modal-example/alert-exampl
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { TabNavigationExampleComponent } from './tab-navigation-example/tab-navigation-example.component';
 
 export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
@@ -177,10 +177,6 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
             component: PageAdvancedExampleComponent,
           },
           {
-            path: 'tab-navigation',
-            component: PageTabNavExampleComponent,
-          },
-          {
             path: 'pull-to-refresh',
             component: PagePullToRefreshExampleComponent,
           },
@@ -203,6 +199,10 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
           {
             path: 'header-and-interactive-title',
             component: HeaderWithInteractiveTitleExampleComponent,
+          },
+          {
+            path: 'tab-navigation',
+            component: TabNavigationExampleComponent,
           },
         ],
       },
@@ -596,5 +596,9 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'menu',
     component: MenuExampleComponent,
+  },
+  {
+    path: 'page-tab-navigation',
+    redirectTo: 'page/tab-navigation',
   },
 ];

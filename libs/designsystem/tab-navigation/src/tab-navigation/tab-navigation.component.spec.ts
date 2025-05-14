@@ -22,7 +22,7 @@ describe('TabNavigationComponent', () => {
   beforeEach(fakeAsync(() => {
     spectator = createHost(
       `
-      <kirby-tab-navigation [(selectedIndex)]="selectedIndex">
+      <kirby-tab-navigation [(selectedIndex)]="selectedIndex" aria-label="A sample Tab Navigation" aria-labelledby="tab-nav-label">
         <kirby-tab-navigation-item label="Tab1">
           <kirby-badge themeColor="warning">
             <kirby-icon name="attach"></kirby-icon>
@@ -149,4 +149,11 @@ describe('TabNavigationComponent', () => {
       expect(tabButton).toHaveAttribute('aria-selected', index === selectIndex ? 'true' : 'false');
     });
   }));
+
+  it('should forward aria-label and aria-labelledby to the tablist element', () => {
+    const tabBar = spectator.query('[role="tablist"]');
+
+    expect(tabBar).toHaveAttribute('aria-label', 'A sample Tab Navigation');
+    expect(tabBar).toHaveAttribute('aria-labelledby', 'tab-nav-label');
+  });
 });
