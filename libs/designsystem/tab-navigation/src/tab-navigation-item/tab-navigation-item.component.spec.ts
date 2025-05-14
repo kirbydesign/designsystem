@@ -1,4 +1,3 @@
-import { truncate } from 'fs';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -20,7 +19,7 @@ describe('TabNavigationItemComponent', () => {
   beforeEach(() => {
     spectator = createHost(
       `
-      <kirby-tab-navigation-item [label]="label" [truncate]="truncate">
+      <kirby-tab-navigation-item [label]="label" [truncate]="truncate" id="tab-nav-item-0" aria-controls="tab-panel-0">
         <kirby-badge themeColor="warning">
           <kirby-icon name="attach"></kirby-icon>
         </kirby-badge>
@@ -71,5 +70,16 @@ describe('TabNavigationItemComponent', () => {
     const textElement = spectator.query('span[data-text]');
 
     expect(textElement.clientWidth).toBeGreaterThan(100);
+  });
+
+  it('should forward the id and aria-controls attribute to actual tab button', () => {
+    const tabElement: HTMLElement = spectator.query('[role="tab"]');
+
+    expect(tabElement).toHaveAttribute('id', 'tab-nav-item-0');
+    expect(tabElement).toHaveAttribute('aria-controls', 'tab-panel-0');
+  });
+
+  it('should set the role attribute to "presentation" on tab-navigation item itself', () => {
+    expect(spectator.element).toHaveAttribute('role', 'presentation');
   });
 });
