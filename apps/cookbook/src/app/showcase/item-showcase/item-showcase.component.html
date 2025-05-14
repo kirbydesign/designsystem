@@ -1,11 +1,11 @@
 <p>
-  Items are elements that contain text, icons, avatars and controls such as checkboxes. They are
-  mainly used to structure similar content in a list together with other items.
+  Items are container elements that provide a structured way to layout text, icons, avatars and
+  controls. They are mainly used to structure similar content in a list together with other items.
 </p>
 
 <h2>Anatomy of an item</h2>
 <p>
-  Item consists of up to four columns of content: the
+  An item has up to four columns of content: the
   <code>default</code>
   slot, which spans the entire item, and optionally the
   <code>start</code>
@@ -17,6 +17,8 @@
   <em>flagging</em>
   an item with a small badge, if it should stand out in a list.
 </p>
+<p>Slots without content collapse and does not take up any space in the item.</p>
+
 <div class="item-illustration">
   <svg
     width="100%"
@@ -136,9 +138,8 @@
 
 <h2>Selectable & Disclosure</h2>
 <p>
-  The selectable property should be added to items when some action is bound to the item with a
-  click listener or similar. The selectable property will add hover, focus and active states to the
-  item.
+  The selectable property should be set when some action is bound to the item with a click listener,
+  to add hover, focus and active states to the item.
 </p>
 <p>
   Generally, a disclosure indicator should be added on items that navigate to a new page or
