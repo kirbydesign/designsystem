@@ -15,9 +15,7 @@ const config = {
     <p class="kirby-item-title">Title</p>
     <p class="kirby-item-detail">Detail</p>
   </kirby-label>
-  <kirby-flag slot="end" themeColor="success">
-    <data value="60.0">60</data>
-  </kirby-flag>
+  <kirby-flag slot="end" themeColor="success">60</kirby-flag>
 </kirby-item>`,
   styles: [
     `div[slot="outside"] {
