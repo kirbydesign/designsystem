@@ -152,6 +152,16 @@ describe('ModalWrapperComponent', () => {
       expect(title.getAttribute('aria-level')).toEqual('2');
       expect(title.getAttribute('tabindex')).toEqual('-1');
     });
+
+    it('should have focus on ion-title when opened', async () => {
+      const ionTitle = spectator.query('ion-title');
+      await TestHelper.ionComponentOnReady(ionTitle);
+
+      spectator.component['ionModalDidPresent'].next();
+      spectator.component['ionModalDidPresent'].complete();
+
+      expect(document.activeElement).toEqual(ionTitle);
+    });
   });
 
   describe('sizing', () => {
