@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { AvatarComponent, IconModule } from '@kirbydesign/designsystem';
 
 const config = {
-  selector: 'cookbook-item-example-flagged',
+  selector: 'cookbook-item-example-slots',
   template: `<kirby-item>
-  <div slot="outside">
-    <kirby-badge themeColor="success" size="sm"></kirby-badge>
-    <kirby-badge themeColor="warning" size="sm"></kirby-badge>
-  </div>
+  <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+  <kirby-avatar slot="start" themeColor="light">
+    <kirby-icon name="person"></kirby-icon>
+  </kirby-avatar>
   <kirby-label>
-    <p class="kirby-text-normal-bold">Title</p>
+    <p class="kirby-item-title">Title</p>
     <p class="kirby-item-detail">Detail</p>
   </kirby-label>
-  <kirby-flag slot="end" themeColor="success">
-    <data value="60.0">60</data>
-  </kirby-flag>
+  <kirby-flag slot="end" themeColor="success">60</kirby-flag>
 </kirby-item>`,
   styles: [
     `div[slot="outside"] {
@@ -31,9 +29,9 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [ItemModule, ThemeColorDirective, BadgeComponent, FlagComponent],
+  imports: [ItemModule, BadgeComponent, FlagComponent, AvatarComponent, IconModule],
 })
-export class ItemExampleFlaggedComponent {
+export class ItemExampleSlotsComponent {
   template: string = config.template;
   styles: string = config.styles[0];
 }

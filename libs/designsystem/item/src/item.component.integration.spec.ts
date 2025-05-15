@@ -6,6 +6,7 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ItemComponent } from './item.component';
 import { LabelComponent } from '.';
 
@@ -17,7 +18,13 @@ describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
   const createHost = createHostFactory({
     component: ItemComponent,
-    imports: [TestHelper.ionicModuleForTest, CheckboxComponent, RadioModule, ToggleComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      CheckboxComponent,
+      RadioModule,
+      ToggleComponent,
+      ButtonComponent,
+    ],
     declarations: [LabelComponent],
   });
 
@@ -66,11 +73,13 @@ describe('ItemComponent', () => {
   });
 
   describe('when configured with selectable="true"', () => {
-    const nestedInteractiveElements = ['kirby-checkbox', 'kirby-radio', 'kirby-toggle'];
+    const nestedInteractiveElements = ['kirby-checkbox', 'kirby-radio', 'kirby-toggle', 'button'];
     nestedInteractiveElements.forEach((element) => {
       it(`should not render native button when there is a nested ${element}`, async () => {
+        const elementStartTag = element === 'button' ? 'button kirby-button' : element;
+
         spectator = createHost(`<kirby-item selectable="true">
-          <${element}></${element}>
+          <${elementStartTag}></${element}>
         </kirby-item>
         `);
         ionItem = spectator.queryHost('ion-item');

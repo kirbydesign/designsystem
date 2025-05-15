@@ -1,33 +1,23 @@
-<!-- prettier-ignore -->
 <p>
-  The <code>kirby-item</code> component consists of three possible columns:
-  <em>the default</em>, which spans the entire item, and optionally the
-  <code>'start'</code> and <code>'end'</code> columns (aka <code>'slots'</code>).
-  In addition to this there is a special slot named <code>'outside'</code> for 
-  marking an item as flagged.
+  Items are container elements that provide a structured way to layout text, icons, avatars and
+  controls. They are mainly used to structure similar content in a list together with other items.
 </p>
 
-<!-- prettier-ignore -->
+<h2>Anatomy of an item</h2>
 <p>
-  The <em>default column</em> is the content that isn't slotted into either
-  <code>'start'</code> or <code>'end'</code>.
+  An item has up to four columns of content: the
+  <code>default</code>
+  slot, which spans the entire item, and optionally the
+  <code>start</code>
+  and
+  <code>end</code>
+  slot. A special
+  <code>outside</code>
+  slot is reserved for
+  <em>flagging</em>
+  an item with a small badge, if it should stand out in a list.
 </p>
-
-<!-- prettier-ignore -->
-<p>
-  If there are <a href="#" (click)="scrollTo(multiLine)">more than one line of content</a>
-  it can be contained within a <code>kirby-label</code> which stacks content vertically.
-  <br />
-  Optionally it can be configured to stack horizontally:
-  <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code>.
-</p>
-
-<!-- prettier-ignore -->
-<p>
-  <a href="#" (click)="scrollTo(threeLines)">Text elements within an item can be given
-  different visual weight</a> by assigning the <code>kirby-item-title</code>,
-  <code>kirby-item-subtitle</code> and <code>kirby-item-detail</code> CSS classes.
-</p>
+<p>Slots without content collapse and does not take up any space in the item.</p>
 
 <div class="item-illustration">
   <svg
@@ -61,217 +51,115 @@
   </svg>
 </div>
 
-<!-- prettier-ignore -->
-<p class="comment">
-  <strong>Please note</strong>, if you need a label to span a title and a value, you can
-  <a href="#" (click)="scrollTo(message)">wrap the title and value</a> in another<code>kirby-label</code>.
-  
-</p>
+<h3>Using slots</h3>
+<p>Add the corresponding slot attribute to place content in specific areas of the item.</p>
+<cookbook-example-viewer [html]="slotsExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-slots #slotsExample></cookbook-item-example-slots>
+  </div>
+</cookbook-example-viewer>
 
-<!-- prettier-ignore -->
+<h2>Sizes</h2>
 <p>
-  The <em>start column</em> is usually only used with avatars, icons and such. To place content in the
-  start column specify the <code>slot="start"</code> attribute on your content. If no content is placed
-  into the 'start' slot, the first column will not be shown.
+  Items can be displayed in different sizes, depending on the need for visual space around the
+  content. It can be controlled with the
+  <code>size</code>
+  property. Accepted values are
+  <code>xs</code>
+  ,
+  <code>sm</code>
+  or
+  <code>md</code>
+  . The default size is
+  <code>md</code>
+  .
 </p>
 
-<!-- prettier-ignore -->
+<cookbook-example-viewer [html]="sizesExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-sizes #sizesExample></cookbook-item-example-sizes>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Text</h2>
+
 <p>
-  The <em>end column</em> is usually used for values such as number, currency, date etc.
-  To place content in the end column specify the <code>slot="end"</code>
-  attribute on your content. <a href="#" (click)="scrollTo(avatarWithDate)">Values can
-  optionally be contained in a <code>time</code> or <code>data</code> tag</a>.
-  <br />
-  If <a href="#" (click)="scrollTo(twoValueLines)">multiple lines are needed the values can be wrapped</a>
-  in a <code>kirby-label</code>.
+  Items display paragraphs as a single line of text, and the text is truncated with an ellipsis if
+  it exceeds available space. By adding the class
+  <code>kirby-item-wrap</code>
+  text will wrap to the next line.
 </p>
 
-<!-- prettier-ignore -->
+<cookbook-example-viewer [html]="textExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-text #textExample></cookbook-item-example-text>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Vertically stacked texts</h3>
+
 <p>
-  The <em>outside</em> slot can be used for
-  <a href="#" (click)="scrollTo(flagged)">marking an item as flagged</a>
-  using a small <code>kirby-badge</code>.
+  Items can display multiple lines of content using the
+  <code>kirby-label</code>
+  component.
+</p>
+<p>
+  The appearance of text content can be adjusted using the
+  <code>kirby-item-title</code>
+  ,
+  <code>kirby-item-subtitle</code>
+  and
+  <code>kirby-item-detail</code>
+  CSS classes.
+</p>
+<cookbook-example-viewer [html]="textVerticallyStackedExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-text-vertically-stacked
+      #textVerticallyStackedExample
+    ></cookbook-item-example-text-vertically-stacked>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Complex label structures</h3>
+<p>
+  Items can display complex label structures using multiple
+  <code>kirby-label</code>
+  elements. When multiple labels are combined, the direction property of the label can be used to,
+  as in this example, horizontally align the title text with some other element like a related date.
 </p>
 
-<section class="sizes">
-  <h2>Sizes</h2>
-  <cookbook-example-viewer [html]="simpleExampleMedium.template">
-    <cookbook-item-example-simple-md #simpleExampleMedium></cookbook-item-example-simple-md>
-  </cookbook-example-viewer>
-  <cookbook-example-viewer [html]="simpleExampleSmall.template">
-    <cookbook-item-example-simple-sm #simpleExampleSmall></cookbook-item-example-simple-sm>
-  </cookbook-example-viewer>
-  <p class="comment">
-    <strong>Please note</strong>
-    , extra small should
-    <strong>NOT</strong>
-    be used if clickable
-  </p>
-  <cookbook-example-viewer [html]="simpleExampleExtraSmall.template">
-    <cookbook-item-example-simple-xs #simpleExampleExtraSmall></cookbook-item-example-simple-xs>
-  </cookbook-example-viewer>
-</section>
-
-<h2>Simple</h2>
-<h3>Default</h3>
-<cookbook-example-viewer [html]="simpleExample.template">
-  <cookbook-item-example-simple #simpleExample></cookbook-item-example-simple>
-</cookbook-example-viewer>
-<h3>Long title (truncated)</h3>
-<cookbook-example-viewer [html]="longTitleExample.template">
-  <cookbook-item-example-long-title #longTitleExample></cookbook-item-example-long-title>
-</cookbook-example-viewer>
-<h3>Two lines</h3>
-<cookbook-example-viewer [html]="twoLinesExample.template">
-  <cookbook-item-example-simple-two-lines #twoLinesExample></cookbook-item-example-simple-two-lines>
-</cookbook-example-viewer>
-<h3 #threeLines>Three lines</h3>
-<cookbook-example-viewer [html]="threeLinesExample.template">
-  <cookbook-item-example-simple-three-lines
-    #threeLinesExample
-  ></cookbook-item-example-simple-three-lines>
-</cookbook-example-viewer>
-<h3 #twoValueLines>Two value lines</h3>
-<cookbook-example-viewer [html]="twoValueLinesExample.template">
-  <cookbook-item-example-simple-two-value-lines
-    #twoValueLinesExample
-  ></cookbook-item-example-simple-two-value-lines>
-</cookbook-example-viewer>
-<h3 #multiLine>Multiline</h3>
-<cookbook-example-viewer [html]="multiLineExample.template">
-  <cookbook-item-example-simple-multiline
-    #multiLineExample
-  ></cookbook-item-example-simple-multiline>
-</cookbook-example-viewer>
-<h3>Multiline - subtitle</h3>
-<cookbook-example-viewer [html]="multiLineSubtitleExample.template">
-  <cookbook-item-example-simple-multiline-subtitle
-    #multiLineSubtitleExample
-  ></cookbook-item-example-simple-multiline-subtitle>
+<cookbook-example-viewer [html]="complexLabelsExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-complex-labels
+      #complexLabelsExample
+    ></cookbook-item-example-complex-labels>
+  </div>
 </cookbook-example-viewer>
 
-<h2>Picker</h2>
-<h3>Default</h3>
-<cookbook-example-viewer [html]="pickerDefaultExample.template">
-  <cookbook-item-example-picker-default
-    #pickerDefaultExample
-  ></cookbook-item-example-picker-default>
-</cookbook-example-viewer>
-<h3>Selected</h3>
-<cookbook-example-viewer [html]="pickerDefaultSelectedExample.template">
-  <cookbook-item-example-picker-default-selected
-    #pickerDefaultSelectedExample
-  ></cookbook-item-example-picker-default-selected>
-</cookbook-example-viewer>
-<h3>With Avatar - Selected</h3>
-<cookbook-example-viewer [html]="pickerAvatarSelectedExample.template">
-  <cookbook-item-example-picker-avatar-selected
-    #pickerAvatarSelectedExample
-  ></cookbook-item-example-picker-avatar-selected>
-</cookbook-example-viewer>
-<h3>With checkbox</h3>
-<cookbook-example-viewer [html]="pickerCheckboxExample.template">
-  <cookbook-item-example-picker-checkbox
-    #pickerCheckboxExample
-  ></cookbook-item-example-picker-checkbox>
+<h2>Selectable & Disclosure</h2>
+<p>
+  The selectable property should be set when some action is bound to the item with a click listener,
+  to add hover, focus and active states to the item.
+</p>
+<p>
+  Generally, a disclosure indicator should be added on items that navigate to a new page or
+  activates a modal or similar overlay.
+</p>
+<cookbook-example-viewer [html]="selectableExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-selectable #selectableExample></cookbook-item-example-selectable>
+  </div>
 </cookbook-example-viewer>
 
-<h2>FAB menu</h2>
-<cookbook-example-viewer [html]="fabMenuExample.template">
-  <cookbook-item-example-fab-menu #fabMenuExample></cookbook-item-example-fab-menu>
-</cookbook-example-viewer>
-
-<h2>Attachment</h2>
-<cookbook-example-viewer [html]="attachmentExample.template">
-  <cookbook-item-example-attachment #attachmentExample></cookbook-item-example-attachment>
-</cookbook-example-viewer>
-
-<h2>Settings</h2>
-<h3>Enabled</h3>
-<cookbook-example-viewer [html]="settingsDefaultExample.template">
-  <cookbook-item-example-settings #settingsDefaultExample></cookbook-item-example-settings>
-</cookbook-example-viewer>
 <h3>Disabled</h3>
-<cookbook-example-viewer [html]="settingsDisabledExample.template">
-  <cookbook-item-example-settings-disabled
-    #settingsDisabledExample
-  ></cookbook-item-example-settings-disabled>
-</cookbook-example-viewer>
-<p class="comment small">
-  <em>
-    <strong>Please note</strong>
-    , setting the
-    <code>disabled</code>
-    attribute on
-    <code>kirby-item</code>
-    will disable the entire item including buttons, toggles etc.
-  </em>
-</p>
-
-<h2 #flagged>Flagged</h2>
-<cookbook-example-viewer [html]="flaggedExample.template" [css]="flaggedExample.styles">
-  <cookbook-item-example-flagged #flaggedExample></cookbook-item-example-flagged>
+<p>Selectable items can be disabled, to prevent the user from activating them.</p>
+<cookbook-example-viewer [html]="disabledExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-disabled #disabledExample></cookbook-item-example-disabled>
+  </div>
 </cookbook-example-viewer>
 
-<h2>Avatar</h2>
-<h3>Default</h3>
-<cookbook-example-viewer [html]="avatarDefaultExample.template">
-  <cookbook-item-example-avatar #avatarDefaultExample></cookbook-item-example-avatar>
-</cookbook-example-viewer>
-<h3 #avatarWithDate>Avatar with date</h3>
-<cookbook-example-viewer [html]="avatarDateExample.template">
-  <cookbook-item-example-avatar-date #avatarDateExample></cookbook-item-example-avatar-date>
-</cookbook-example-viewer>
-<h3>Avatar flagged</h3>
-<cookbook-example-viewer [html]="avatarFlaggedExample.template" [css]="avatarFlaggedExample.styles">
-  <cookbook-item-example-avatar-flagged
-    #avatarFlaggedExample
-  ></cookbook-item-example-avatar-flagged>
-</cookbook-example-viewer>
-<h3>Avatar flagged, three lines</h3>
-<cookbook-example-viewer
-  [html]="avatarFlaggedThreeLinesExample.template"
-  [css]="avatarFlaggedThreeLinesExample.styles"
->
-  <cookbook-item-example-avatar-flagged-three-lines
-    #avatarFlaggedThreeLinesExample
-  ></cookbook-item-example-avatar-flagged-three-lines>
-</cookbook-example-viewer>
-
-<h2 #message>Message</h2>
-<cookbook-example-viewer [html]="messagesExample.template">
-  <cookbook-item-example-horizontal #messagesExample></cookbook-item-example-horizontal>
-</cookbook-example-viewer>
-
-<h2>Button</h2>
-<cookbook-example-viewer [html]="buttonExample.template">
-  <cookbook-item-example-button #buttonExample></cookbook-item-example-button>
-</cookbook-example-viewer>
-
-<h2>Input</h2>
-<h3>Default</h3>
-<cookbook-example-viewer [html]="inputDefaultExample.template">
-  <cookbook-item-example-input-default #inputDefaultExample></cookbook-item-example-input-default>
-</cookbook-example-viewer>
-<h3>Numeric</h3>
-<cookbook-example-viewer [html]="inputNumericExample.template">
-  <cookbook-item-example-input-numeric #inputNumericExample></cookbook-item-example-input-numeric>
-</cookbook-example-viewer>
-
-<h2 #disclosure>Disclosure</h2>
-<cookbook-example-viewer [html]="disclosureExample.template">
-  <cookbook-item-example-disclosure #disclosureExample></cookbook-item-example-disclosure>
-</cookbook-example-viewer>
-<p class="comment small">
-  <em>
-    <strong>Please note:</strong>
-    the disclosure input is limited to a set of predefined icons:
-    <code>'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'</code>
-  </em>
-</p>
-
-<h4>Rotation animation</h4>
-
+<h3>Rotation animation</h3>
 <p>
   It is possible to trigger an animation that rotates the disclosure icon by passing a boolean flag
   to
@@ -292,25 +180,53 @@
   ></cookbook-item-example-disclosure-animation>
 </cookbook-example-viewer>
 
-<p class="comment small">
-  <em>
-    <strong>Please note:</strong>
-    the animation of the disclosure icon is only available for:
-    <code>'arrow-down' | 'arrow-up'</code>
-  </em>
+<h2>Nested Controls</h2>
+<p>Items can contain nested controls, such as checkboxes or radio buttons.</p>
+<cookbook-example-viewer [html]="nestedControlsExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-nested-controls
+      #nestedControlsExample
+    ></cookbook-item-example-nested-controls>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Avoiding nested interactives</h3>
+<p>
+  Nested interactives are interactive elements, such as buttons or links, placed inside other
+  interactive elements. This can lead to accessibility issues and unexpected behavior, as browsers
+  and assistive technologies will handle them inconsistently if at all.
+</p>
+<p>
+  To avoid issues with nested interactives, ensure that interactive controls are not placed inside
+  selectable items.
+</p>
+<p>
+  When a button, checkbox or similar is nested inside an item, the item should never be marked as
+  selectable.
 </p>
 
-<h2>Card with item</h2>
-<cookbook-example-viewer [html]="cardExample.template">
-  <cookbook-item-example-card #cardExample></cookbook-item-example-card>
+<h3>Disabled Nested Controls</h3>
+<p>
+  Since items with nested controls should not be selectable, they cannot be disabled either.
+  Instead, any nested control itself should be disabled so users of Assistive Technology can still
+  explore the remaining item content.
+</p>
+
+<cookbook-example-viewer [html]="disabledNestedControlsExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-disabled-controls
+      #disabledNestedControlsExample
+    ></cookbook-item-example-disabled-controls>
+  </div>
 </cookbook-example-viewer>
 
 <h2>API</h2>
+<h3>Item Properties</h3>
 <cookbook-api-description-properties
   [properties]="properties"
 ></cookbook-api-description-properties>
 
-<h2>CSS Custom Properties</h2>
+<h3>CSS Custom Properties</h3>
 <cookbook-api-description-properties
   [properties]="customCssProperties"
   [columns]="customCssPropertiesColumns"

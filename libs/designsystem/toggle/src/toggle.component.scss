@@ -45,6 +45,21 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       opacity: 0;
     }
   }
+
+  &[disabled] {
+    color: #{utils.get-text-color('semi-dark')};
+
+    ion-toggle {
+      --color: #{utils.get-color('medium')};
+      --color-checked: #{utils.get-color('medium')};
+
+      opacity: 1; // Reset Ionic disabled style for label
+
+      &::part(track) {
+        opacity: 0.3; // Re-establish opacity for track
+      }
+    }
+  }
 }
 
 ion-toggle {

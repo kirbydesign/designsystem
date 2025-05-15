@@ -1,0 +1,5 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+kirby-item:not(:last-child) {
+  margin-bottom: var(--kirby-spacing-xxs);
+}
