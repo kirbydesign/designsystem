@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { AvatarComponent, IconModule } from '@kirbydesign/designsystem';
 
 const config = {
-  selector: 'cookbook-item-example-horizontal',
+  selector: 'cookbook-item-example-complex-labels',
   template: `<kirby-item>
   <kirby-avatar slot="start" overlay="true" imageSrc="/assets/images/woman.png">
     <kirby-badge>
@@ -15,10 +13,10 @@ const config = {
   </kirby-avatar>
   <kirby-label>
     <kirby-label direction="horizontal">
-      <p class="kirby-item-title">Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</p>
+      <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
       <time class="kirby-item-detail">20.12.2017</time>
     </kirby-label>
-    <p>Die Marvin, your papers have arrived and you should be able to sign these within 1 week from today if you follow the instructions below.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
   </kirby-label>
 </kirby-item>`,
 };
@@ -26,8 +24,9 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ItemModule, AvatarComponent, ThemeColorDirective, BadgeComponent, IconModule],
+  styleUrls: ['./_shared.scss'],
+  imports: [ItemModule, IconModule, BadgeComponent, AvatarComponent],
 })
-export class ItemExampleHorizontalComponent {
+export class ItemExampleComplexLabelsComponent {
   template: string = config.template;
 }

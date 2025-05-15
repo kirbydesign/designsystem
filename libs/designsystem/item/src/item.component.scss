@@ -117,6 +117,10 @@ ion-item {
   &:has(kirby-checkbox:not([slot]), kirby-radio:not([slot])) {
     overflow: inherit;
   }
+
+  &:has(.checkbox-disabled, .radio-disabled, .toggle-disabled) {
+    pointer-events: none;
+  }
 }
 
 .disclosure {

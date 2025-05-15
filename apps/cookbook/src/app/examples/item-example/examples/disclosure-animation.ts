@@ -8,12 +8,11 @@ const config = {
   template: `<kirby-card [hasPadding]="true" (click)="isExpanded = !isExpanded">
   <kirby-card-header [hasPadding]="false">
     <kirby-item disclosure="arrow-down" [rotateIcon]="isExpanded">
-      <p class="kirby-text-normal-bold">Disclosure animation example</p>
+      <p class="kirby-item-title">Disclosure animation example</p>
     </kirby-item>
   </kirby-card-header>
 
   <div [@isExpanded]="isExpanded">
-    <p class="kirby-text-bold">A card with animated disclosure icon</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   </div>
 </kirby-card>`,

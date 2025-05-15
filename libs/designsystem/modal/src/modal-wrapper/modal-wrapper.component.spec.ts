@@ -144,6 +144,24 @@ describe('ModalWrapperComponent', () => {
       const title = rootElement.querySelector('ion-title');
       expect(window.getComputedStyle(title).fontSize).toEqual(DesignTokenHelper.fontSize('n'));
     });
+
+    it('should have programatically focusable heading level 2 as title', async () => {
+      const title = spectator.query('ion-title');
+
+      expect(title.getAttribute('role')).toEqual('heading');
+      expect(title.getAttribute('aria-level')).toEqual('2');
+      expect(title.getAttribute('tabindex')).toEqual('-1');
+    });
+
+    it('should have focus on ion-title when opened', async () => {
+      const ionTitle = spectator.query('ion-title');
+      await TestHelper.ionComponentOnReady(ionTitle);
+
+      spectator.component['ionModalDidPresent'].next();
+      spectator.component['ionModalDidPresent'].complete();
+
+      expect(document.activeElement).toEqual(ionTitle);
+    });
   });
 
   describe('sizing', () => {

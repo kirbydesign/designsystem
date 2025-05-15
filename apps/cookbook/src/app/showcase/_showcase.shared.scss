@@ -17,10 +17,10 @@ cookbook-code-viewer {
   position: relative;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding-block: utils.size('m');
+  padding: utils.size('m');
 
-  &.no-vertical-padding {
-    padding-block: 0;
+  &.no-padding {
+    padding: 0;
   }
 }
 
