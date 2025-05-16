@@ -4,6 +4,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
+import { tick } from '@angular/core/testing';
 import {
   ACTIONGROUP_CONFIG,
   ActionGroupComponent,
@@ -125,7 +126,17 @@ describe('ActionGroupComponent', () => {
     });
 
     it('should render hidden buttons as menu items', () => {
+      expect(document.body.querySelectorAll('kirby-item')).toHaveLength(2);
       expect(spectator.component._collapsedActions).toHaveLength(2);
+    });
+
+    it('should keep buttons disabled when collapsed into menu', () => {
+      const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+      buttons[2].setAttribute('disabled', 'true');
+
+      spectator.setHostInput('visibleActions', 2); //By disabled the 3rd button and setting visibleActions to 2, the button should be moved to the menu.
+
+      expect(document.body.querySelectorAll('kirby-item.disabled')).toHaveLength(1);
     });
 
     describe('when updating visibleActions', () => {
