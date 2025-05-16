@@ -11,12 +11,12 @@ import { BasePageExampleComponent } from '../../page-example/base-page-example.c
 const config = {
   template: `<kirby-page defaultBackHref="/">
   <kirby-header [title]="'Action Group'" subtitle1="Subtitle one" subtitle2="Subtitle two">
-    <kirby-action-group *kirbyHeaderActions>
+    <kirby-action-group *kirbyHeaderActions [visibleActions]="3">
       <button kirby-button attentionLevel="3" (click)="actionClicked('Action 1')">
         <kirby-icon name="edit"></kirby-icon>
         <span class="text">Action 1</span>
       </button>
-      <button kirby-button attentionLevel="3" (click)="actionClicked('Action 2')">
+      <button kirby-button attentionLevel="3" (click)="actionClicked('Action 2')" [disabled]="disabled">
         Action 2
       </button>
       <button kirby-button attentionLevel="3" (click)="actionClicked('Action 3')">
@@ -35,6 +35,7 @@ const config = {
   imports: [PageModule, HeaderModule, ActionGroupComponent, ButtonComponent, IconModule],
 })
 export class HeaderWithActionGroupExampleComponent extends BasePageExampleComponent {
+  disabled = false;
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
     .replace(' [innerHTML]="content">', '>...');
@@ -50,5 +51,6 @@ export class HeaderWithActionGroupExampleComponent extends BasePageExampleCompon
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
+    this.disabled = !this.disabled;
   }
 }
