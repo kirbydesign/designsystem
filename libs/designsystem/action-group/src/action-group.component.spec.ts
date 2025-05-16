@@ -134,7 +134,7 @@ describe('ActionGroupComponent', () => {
       const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
       buttons[2].setAttribute('disabled', 'true');
 
-      spectator.setHostInput('visibleActions', 2); //By disabled the 3rd button and setting visibleActions to 2, the button should be moved to the menu.
+      spectator.setHostInput('visibleActions', 2); //By disabling the 3rd button and setting visibleActions to 2, the disabled button is now moved to the menu.
 
       expect(document.body.querySelectorAll('kirby-item.disabled')).toHaveLength(1);
     });
