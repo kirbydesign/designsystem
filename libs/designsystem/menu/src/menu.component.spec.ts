@@ -319,7 +319,7 @@ describe('MenuComponent', () => {
   });
 
   describe('trigger: default(click)', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item>
@@ -331,6 +331,8 @@ describe('MenuComponent', () => {
       buttonElement = spectator.query('button');
       card = spectator.query('kirby-card');
       buttonIcon = spectator.query(IconComponent);
+      items = card.querySelectorAll('ion-item');
+      await TestHelper.whenReady(items);
     });
 
     it('should open menu when button is clicked', async () => {
@@ -339,6 +341,12 @@ describe('MenuComponent', () => {
       await spectator.click(buttonElement);
 
       expect(card).toHaveComputedStyle({ display: 'block' });
+    });
+
+    it('should set focus on first item when button is clicked', async () => {
+      await spectator.click(buttonElement);
+
+      expect(document.activeElement).toEqual(items[0]);
     });
   });
 

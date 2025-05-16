@@ -6,6 +6,7 @@ import {
   HostBinding,
   Input,
 } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { RadioComponent } from '@kirbydesign/designsystem/radio';
@@ -50,6 +51,8 @@ export class ItemComponent {
   private radio: ElementRef<HTMLElement>;
   @ContentChild(ToggleComponent, { static: false, read: ElementRef })
   private toggle: ElementRef<HTMLElement>;
+  @ContentChild(ButtonComponent, { static: false, read: ElementRef })
+  private button: ElementRef<HTMLElement>;
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
@@ -64,6 +67,7 @@ export class ItemComponent {
   get _renderAsButton() {
     // We shouldn't render item as a button if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
-    return this.selectable && !(this.checkbox || this.radio || this.toggle);
+
+    return this.selectable && !(this.checkbox || this.radio || this.toggle || this.button);
   }
 }
