@@ -43,14 +43,18 @@ export function forwardAttributes(
   renderer: Renderer2,
   targetElement: HTMLElement
 ) {
-  if (!sourceElement || !attributes || !renderer || !targetElement) {
+  if (!sourceElement || !attributes || attributes.length === 0) {
     return;
   }
 
   attributes.forEach((attribute) => {
     if (sourceElement.hasAttribute(attribute)) {
       const value = sourceElement.getAttribute(attribute);
-      renderer.setAttribute(targetElement, attribute, value);
+
+      if (targetElement) {
+        renderer.setAttribute(targetElement, attribute, value);
+      }
+
       renderer.removeAttribute(sourceElement, attribute);
     }
   });
