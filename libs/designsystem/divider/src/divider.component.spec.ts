@@ -1,24 +1,23 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DividerComponent } from './divider.component';
 
 describe('DividerComponent', () => {
-  let component: DividerComponent;
-  let fixture: ComponentFixture<DividerComponent>;
+  let spectator: SpectatorHost<DividerComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [DividerComponent],
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DividerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  const createHost = createHostFactory({
+    component: DividerComponent,
+    imports: [DividerComponent],
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('by default', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-divider></kirby-divider>');
+    });
+
+    it('should have role presentation', () => {
+      const dividerElement = spectator.element.querySelector('hr');
+      expect(dividerElement.getAttribute('role')).toBe('presentation');
+    });
   });
 });
