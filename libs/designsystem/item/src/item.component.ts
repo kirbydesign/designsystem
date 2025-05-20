@@ -1,11 +1,14 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
   HostBinding,
   Input,
+  Renderer2,
 } from '@angular/core';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
@@ -25,7 +28,9 @@ export enum ItemSize {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class ItemComponent {
+export class ItemComponent implements AfterViewInit {
+  private _linkAttributesToForward = ['rel', 'target', 'download'];
+
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean;
@@ -43,6 +48,9 @@ export class ItemComponent {
   @Input()
   size: ItemSize | `${ItemSize}` = ItemSize.MD;
 
+  @Input()
+  href: string;
+
   @Input() rotateIcon: boolean = false;
 
   @ContentChild(CheckboxComponent, { static: false, read: ElementRef })
@@ -53,6 +61,24 @@ export class ItemComponent {
   private toggle: ElementRef<HTMLElement>;
   @ContentChild(ButtonComponent, { static: false, read: ElementRef })
   private button: ElementRef<HTMLElement>;
+
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
+
+  ngAfterViewInit(): void {
+    if (this.href) {
+      const ionItem = this.elementRef.nativeElement.querySelector('ion-item');
+      console.log('ionItem', ionItem);
+      forwardAttributes(
+        this.elementRef.nativeElement,
+        this._linkAttributesToForward,
+        this.renderer,
+        ionItem
+      );
+    }
+  }
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {

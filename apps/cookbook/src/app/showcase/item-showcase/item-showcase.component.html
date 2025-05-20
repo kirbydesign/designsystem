@@ -136,10 +136,30 @@
   </div>
 </cookbook-example-viewer>
 
-<h2>Selectable & Disclosure</h2>
+<h2>Selectable, Link & Disclosure</h2>
 <p>
-  The selectable property should be set when some action is bound to the item with a click listener,
-  to add hover, focus and active states to the item.
+  The
+  <code>selectable</code>
+  property should be set when the item should act like a button and some action will be bound to the
+  item with a click listener.
+</p>
+<p>
+  The item may also be used as a link, by setting the
+  <code>href</code>
+  property. When doing so, other link attributes like
+  <code>rel</code>
+  ,
+  <code>target</code>
+  and
+  <code>blank</code>
+  are correctly applied to the link within the item.
+</p>
+<p>
+  By setting either
+  <code>selectable</code>
+  or
+  <code>href</code>
+  , the item will get hover, focus and active states added.
 </p>
 <p>
   Generally, a disclosure indicator should be added on items that navigate to a new page or
