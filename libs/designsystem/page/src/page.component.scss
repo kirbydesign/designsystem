@@ -207,6 +207,15 @@ ion-back-button {
     overflow: hidden; // required for border radius to work
   }
 
+  &::part(native):focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--kirby-background-color),
+      0 0 0 4px #4d90fe;
+    z-index: 2;
+    position: relative;
+  }
+
   &::part(native)::after {
     transition: interaction-state.transition();
   }
