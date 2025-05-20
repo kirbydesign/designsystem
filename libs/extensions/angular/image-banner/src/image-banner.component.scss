@@ -92,6 +92,11 @@ $container-query-breakpoint: 600px;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transform: translate3d(
+    0,
+    0,
+    0
+  ); // force GPU acceleration to solve iPhone background image rendering issue
 }
 
 kirby-card {
