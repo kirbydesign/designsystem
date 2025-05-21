@@ -70,7 +70,6 @@ export class ItemComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     if (this.href) {
       const ionItem = this.elementRef.nativeElement.querySelector('ion-item');
-      console.log('ionItem', ionItem);
       forwardAttributes(
         this.elementRef.nativeElement,
         this._linkAttributesToForward,
