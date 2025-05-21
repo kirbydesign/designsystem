@@ -30,6 +30,7 @@ import { IonRange } from '@ionic/angular/standalone';
 export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
   @Input() minLabel: string;
   @Input() maxLabel: string;
+  @Input() ariaLabel: string;
   @Input() debounce: number;
   @Input() max: number;
   @Input() min: number;

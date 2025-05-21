@@ -17,6 +17,7 @@ export const Range: Story = {
     max: 100,
     minLabel: '',
     maxLabel: '',
+    ariaLabel: 'test',
     debounce: 0,
     pin: false,
     ticks: false,
