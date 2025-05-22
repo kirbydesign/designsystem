@@ -10,6 +10,10 @@
     [value]="value"
     max="100"
     [step]="step"
+    [attr.aria-label]="ariaLabel || 'Slide to complete action'"
   />
   <p class="slide-button-text slide-{{ pctInTens }}-pct">{{ text }}</p>
+  <div aria-live="polite" class="visually-hidden">
+    {{ value == 100 ? 'Goal reached' : '' }}
+  </div>
 </div>

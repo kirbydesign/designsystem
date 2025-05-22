@@ -20,6 +20,7 @@ import {
 export class SlideButtonComponent implements OnDestroy {
   @Input() text = '';
   @Input() expand: 'block';
+  @Input() ariaLabel: '';
 
   @Output() slideDone = new EventEmitter();
   @Output() slidingPercentageChanged = new EventEmitter<number>();

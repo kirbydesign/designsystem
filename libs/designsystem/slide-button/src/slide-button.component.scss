@@ -111,3 +111,12 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     pointer-events: none;
   }
 }
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
