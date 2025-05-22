@@ -3,7 +3,7 @@ import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const config = {
   selector: 'cookbook-range-disabled-form-example',
-  template: `<kirby-range disabled minLabel="Min value" maxLabel="Max value" max="15" min="1"></kirby-range>`,
+  template: `<kirby-range disabled minLabel="Min value" maxLabel="Max Value" ariaLabel="value" max="15" min="1"></kirby-range>`,
 };
 
 @Component({
