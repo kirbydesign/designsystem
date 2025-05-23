@@ -4,6 +4,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { LinkExampleDefaultComponent } from '../../examples/link-example/examples/default';
 import { LinkExampleNewTabComponent } from '../../examples/link-example/examples/new-tab';
 import { LinkExampleTrailingIconComponent } from '../../examples/link-example/examples/trailing-icon';
+import { LinkExampleButtonComponent } from '~/app/examples/link-example/examples/button';
 
 @Component({
   selector: 'cookbook-link-showcase',
@@ -15,6 +16,7 @@ import { LinkExampleTrailingIconComponent } from '../../examples/link-example/ex
     LinkExampleDefaultComponent,
     LinkExampleNewTabComponent,
     LinkExampleTrailingIconComponent,
+    LinkExampleButtonComponent,
   ],
 })
 export class LinkShowcaseComponent {}

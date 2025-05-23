@@ -73,3 +73,18 @@
 <cookbook-example-viewer [html]="trailingTab.template" [css]="trailingTab.style">
   <cookbook-link-example-trailing-icon #trailingTab></cookbook-link-example-trailing-icon>
 </cookbook-example-viewer>
+
+<h2>Button Link</h2>
+<p>
+  If the UI calls for a link that performs an action (for instance, opening a modal) rather than
+  navigation, you can use a button with the
+  <code>kirby-link</code>
+  directive. This will give you a button that looks and feels like a link, avoiding the semantically
+  incorrect use of an anchor tag without a
+  <code>href</code>
+  attribute.
+</p>
+
+<cookbook-example-viewer [html]="buttonExample.template">
+  <cookbook-link-example-button #buttonExample></cookbook-link-example-button>
+</cookbook-example-viewer>
