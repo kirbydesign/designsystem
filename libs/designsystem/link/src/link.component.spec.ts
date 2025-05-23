@@ -1,4 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { DesignTokenHelper } from '@kirbydesign/core';
 import { LinkComponent } from './link.component';
 
 describe('LinkComponent', () => {
@@ -21,7 +22,7 @@ describe('LinkComponent', () => {
 
     it('should render with no background-color', () => {
       expect(element).toHaveComputedStyle({
-        'background-color': 'none',
+        'background-color': 'rgba(0, 0, 0, 0)',
       });
     });
 
@@ -30,15 +31,18 @@ describe('LinkComponent', () => {
     });
 
     it('should render with underlined decoration', () => {
-      expect(element).toHaveComputedStyle({ 'text-decoration': 'underline' });
+      expect(getComputedStyle(element).textDecoration).toContain('underline');
     });
 
     it('should render with no border and padding', () => {
-      expect(element).toHaveComputedStyle({ border: 'none', padding: '0' });
+      expect(element).toHaveComputedStyle({ 'border-style': 'none', padding: '0px' });
     });
 
     it('should render with inhereted font and color', () => {
-      expect(element).toHaveComputedStyle({ font: 'inherit', color: 'inherit' });
+      expect(element).toHaveComputedStyle({
+        'font-size': DesignTokenHelper.fontSize('n'),
+        color: 'inherit',
+      });
     });
   });
 });
