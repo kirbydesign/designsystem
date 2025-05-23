@@ -190,7 +190,7 @@ describe('RadioComponent', () => {
 
         it('should have correct checkmark styling', () => {
           expect(radioCheckmark).toHaveComputedStyle({
-            'background-color': getColor('medium'),
+            'background-color': getColor('semi-dark'),
           });
         });
       });
@@ -209,14 +209,14 @@ describe('RadioComponent', () => {
           });
           expect(radioIcon).toHaveComputedStyle({
             'border-width': '1px',
-            'border-color': getColor('medium'),
+            'border-color': getColor('semi-dark'),
             'box-shadow': 'none',
           });
         });
 
         it('should have correct checkmark styling', () => {
           expect(radioCheckmark).toHaveComputedStyle({
-            'background-color': getColor('medium'),
+            'background-color': getColor('semi-dark'),
           });
         });
       });
