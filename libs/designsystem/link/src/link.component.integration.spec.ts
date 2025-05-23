@@ -1,4 +1,4 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { LinkComponent } from './link.component';
 
 describe('LinkComponent', () => {
