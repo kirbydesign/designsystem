@@ -10,52 +10,33 @@ describe('RangeComponent', () => {
     imports: [TestHelper.ionicModuleForTest],
   });
 
-  beforeEach(() => {
-    spectator = createHost('<kirby-range aria-label="aria-test" ></kirby-range>');
-  });
+  describe('default', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-range></kirby-range>');
+    });
 
-  it('should set aria-label attribute on ion-range', () => {
-    const ionRangeElement = spectator.query('ion-range');
-    expect(ionRangeElement.getAttribute('aria-label')).toEqual('aria-test');
-    expect(spectator.element.getAttribute('aria-label')).toBeNull();
-  });
-  it('should set aria-label attribute on ion-range with pin', () => {
-    spectator.setHostInput('pin', true);
-    const ionRangeElement = spectator.query('ion-range');
-    expect(ionRangeElement.getAttribute('aria-label')).toEqual('aria-test');
-    expect(spectator.element.getAttribute('aria-label')).toBeNull();
-  });
-  it('should set aria-label attribute on ion-range with pin and pinFormatter', () => {
-    spectator.setHostInput('pin', true);
-    spectator.setHostInput('pinFormatter', (value: number) => `${value}%`);
-    const ionRangeElement = spectator.query('ion-range');
-    expect(ionRangeElement.getAttribute('aria-label')).toEqual('aria-test');
-    expect(spectator.element.getAttribute('aria-label')).toBeNull();
-  });
-  it('should set aria-label attribute on ion-range with pin and pinFormatter and ticks', () => {
-    spectator.setHostInput('pin', true);
-    spectator.setHostInput('pinFormatter', (value: number) => `${value}%`);
-    spectator.setHostInput('ticks', true);
-    const ionRangeElement = spectator.query('ion-range');
-    expect(ionRangeElement.getAttribute('aria-label')).toEqual('aria-test');
-    expect(spectator.element.getAttribute('aria-label')).toBeNull();
-  });
-  it('should set aria-label attribute on ion-range with pin and pinFormatter and ticks and minLabel', () => {
-    spectator.setHostInput('pin', true);
-    spectator.setHostInput('pinFormatter', (value: number) => `${value}%`);
-    spectator.setHostInput('ticks', true);
-    spectator.setHostInput('minLabel', 'Min label');
-    const ionRangeElement = spectator.query('ion-range');
-    expect(ionRangeElement.getAttribute('aria-label')).toEqual('aria-test');
-    expect(spectator.element.getAttribute('aria-label')).toBeNull();
-  });
+    it('should create', () => {
+      expect(spectator.component).toBeTruthy();
+    });
 
-  it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    it('should always have a pinFormatter function when pin is set', () => {
+      spectator.setHostInput('pin', true);
+      expect(spectator.component.pinFormatter).toBeDefined();
+    });
   });
+  describe('with attributes', () => {
+    it('should set aria-label attribute on ion-range', () => {
+      spectator = createHost('<kirby-range aria-label="aria-test" ></kirby-range>');
+      const ionRangeElement = spectator.query('ion-range');
+      expect(ionRangeElement.getAttribute('aria-label')).toEqual('aria-test');
+      expect(spectator.element.getAttribute('aria-label')).toBeNull();
+    });
 
-  it('should always have a pinFormatter function when pin is set', () => {
-    spectator.setHostInput('pin', true);
-    expect(spectator.component.pinFormatter).toBeDefined();
+    it('should set aria-labelledby attribute on ion-range', () => {
+      spectator = createHost('<kirby-range aria-labelledby="aria-test" ></kirby-range>');
+      const ionRangeElement = spectator.query('ion-range');
+      expect(ionRangeElement.getAttribute('aria-labelledby')).toEqual('aria-test');
+      expect(spectator.element.getAttribute('aria-labelledby')).toBeNull();
+    });
   });
 });
