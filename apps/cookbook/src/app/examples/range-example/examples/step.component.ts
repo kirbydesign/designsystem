@@ -3,7 +3,7 @@ import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 const config = {
   selector: 'cookbook-range-step-example',
-  template: `<kirby-range minLabel="Min value" maxLabel="Max value" ariaLabel="Value" ticks="true" max="15" min="1" value="5"></kirby-range>`,
+  template: `<kirby-range minLabel="Min value" maxLabel="Max value" aria-label="Step range" ticks="true" max="15" min="1" value="5"></kirby-range>`,
 };
 @Component({
   selector: config.selector,

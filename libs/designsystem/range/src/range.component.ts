@@ -1,17 +1,21 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
   Input,
   OnChanges,
   OnInit,
   Output,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonRange } from '@ionic/angular/standalone';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 
 @Component({
   imports: [CommonModule, IonRange],
@@ -27,10 +31,9 @@ import { IonRange } from '@ionic/angular/standalone';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
+export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor, AfterViewInit {
   @Input() minLabel: string;
   @Input() maxLabel: string;
-  @Input() ariaLabel: string;
   @Input() debounce: number;
   @Input() max: number;
   @Input() min: number;
@@ -57,6 +60,12 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
   @ViewChild(IonRange, { static: true }) private ionRange: IonRange;
 
   private currentValue: number;
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+
+  constructor(
+    private element: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
     this.initializeMoveEventEmitter();
@@ -79,6 +88,15 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
     this.value = this.getTicks().reduce((a, b) => {
       return Math.abs(b - this.value) < Math.abs(a - this.value) ? b : a;
     });
+  }
+
+  ngAfterViewInit(): void {
+    forwardAttributes(
+      this.element.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.element.nativeElement.querySelector('ion-range')
+    );
   }
 
   private getTicks() {
