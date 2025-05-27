@@ -97,7 +97,7 @@ export class ItemComponent implements AfterViewInit {
   get _renderAsLink(): boolean {
     // We shouldn't render item as a link if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
-    return !!this.href && !this._containsNestedInteractives;
+    return this.href && !this._containsNestedInteractives;
   }
 
   get _containsNestedInteractives(): boolean {
