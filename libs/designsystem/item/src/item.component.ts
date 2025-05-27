@@ -68,15 +68,13 @@ export class ItemComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    if (this.href) {
-      const ionItem = this.elementRef.nativeElement.querySelector('ion-item');
-      forwardAttributes(
-        this.elementRef.nativeElement,
-        this._linkAttributesToForward,
-        this.renderer,
-        ionItem
-      );
-    }
+    const ionItem = this.elementRef.nativeElement.querySelector('ion-item');
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._linkAttributesToForward,
+      this.renderer,
+      ionItem
+    );
   }
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
@@ -89,10 +87,20 @@ export class ItemComponent implements AfterViewInit {
     }
   }
 
-  get _renderAsButton() {
+  get _renderAsButton(): boolean {
     // We shouldn't render item as a button if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
 
-    return this.selectable && !(this.checkbox || this.radio || this.toggle || this.button);
+    return this.selectable && !this._containsNestedInteractives;
+  }
+
+  get _renderAsLink(): boolean {
+    // We shouldn't render item as a link if the item contains
+    // nested interactive, i.e. checkbox, radio or toggle:
+    return !!this.href && !this._containsNestedInteractives;
+  }
+
+  get _containsNestedInteractives(): boolean {
+    return !!(this.checkbox || this.radio || this.toggle || this.button);
   }
 }
