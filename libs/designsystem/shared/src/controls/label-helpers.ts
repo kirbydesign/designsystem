@@ -38,7 +38,7 @@ export function forwardAttributes(
   sourceElement: HTMLElement,
   attributes: string[],
   renderer: Renderer2,
-  targetElement: HTMLElement
+  targetElement?: HTMLElement
 ) {
   if (!sourceElement || !attributes || attributes.length === 0) {
     return;
