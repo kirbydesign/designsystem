@@ -1,13 +1,17 @@
 import { CommonModule } from '@angular/common';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   HostListener,
   Input,
   OnDestroy,
   Output,
+  Renderer2,
 } from '@angular/core';
 
 @Component({
@@ -17,10 +21,9 @@ import {
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideButtonComponent implements OnDestroy {
+export class SlideButtonComponent implements OnDestroy, AfterViewInit {
   @Input() text = '';
   @Input() expand: 'block';
-  @Input() ariaLabel: '';
 
   @Output() slideDone = new EventEmitter();
   @Output() slidingPercentageChanged = new EventEmitter<number>();
@@ -40,6 +43,7 @@ export class SlideButtonComponent implements OnDestroy {
   }
 
   private _value: number = 0;
+
   private resetSliderIntervalTimer: any;
   private calculatePctInTens() {
     this.pctInTens = Math.ceil(this.value / 10) * 10;
@@ -49,6 +53,8 @@ export class SlideButtonComponent implements OnDestroy {
   private resetStep() {
     this.step = 1;
   }
+
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
   public get step() {
     return this._step;
   }
@@ -56,7 +62,20 @@ export class SlideButtonComponent implements OnDestroy {
     this._step = value;
   }
 
-  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+  constructor(
+    private changeDetectionRef: ChangeDetectorRef,
+    private element: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
+
+  ngAfterViewInit(): void {
+    forwardAttributes(
+      this.element.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.element.nativeElement.querySelector('ion-slide-button')
+    );
+  }
 
   ngOnDestroy(): void {
     if (this.resetSliderIntervalTimer) {
@@ -93,6 +112,10 @@ export class SlideButtonComponent implements OnDestroy {
   onSliderValueChange(val: string) {
     this.value = +val;
     this.slidingPercentageChanged.emit(this.value);
+    // If the slider is at the end, trigger change detection to update the aria-live region
+    if (this.value === 100) {
+      this.changeDetectionRef.detectChanges();
+    }
   }
 
   @HostListener('keydown.arrowup', ['$event'])
