@@ -27,6 +27,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   @Input() precision = 2;
   @Input() setMaxOnOverflow = false;
   @Input() alignment: 'left' | 'right' = 'right';
+  @Input() padPrecision: boolean = false;
 
   @Input() set allowMinus(allowMinus: boolean) {
     this._allowMinus = allowMinus || (this.min || 0) < 0;
@@ -92,6 +93,8 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
       groupSeparator: this._groupSeperatorDisabled ? '' : this.groupSeparator,
       radixPoint: this.radixPoint,
       digits: this._maxlength ? 0 : this.precision,
+      digitsOptional: !this.padPrecision,
+      enforceDigitsOnBlur: this.padPrecision,
       min: this.min,
       max: this.max,
       allowMinus: this._allowMinus,
@@ -102,7 +105,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
       SetMaxOnOverflow: this.setMaxOnOverflow,
       showMaskOnFocus: false,
       showMaskOnHover: false,
-      placeholder: '',
+      placeholder: this.padPrecision ? undefined : '',
       rightAlign: this.alignment === 'right',
       onBeforeWrite: () => {
         if (!this.inputmask) return;
