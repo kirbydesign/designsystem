@@ -32,10 +32,7 @@ export function inheritAriaLabelText(element: HTMLElement): string {
  * @param sourceElement - The HTML element from which attributes will be removed from.
  * @param attributes - An array of attribute names to inherit from the source element.
  * @param renderer - An instance of Angular's Renderer2.
- * @param targetElement - (Optional) The HTML element to which the attributes should be applied.
- *                        If not provided, the attributes will only be removed from the source element.
- *
- * @returns A record of the inherited attributes and their values. If no attributes are inherited, an empty object is returned.
+ * @param targetElement - (Optional) The HTML element to which the attributes should be applied. If not provided, the attributes will only be removed from the source element.
  */
 export function forwardAttributes(
   sourceElement: HTMLElement,
