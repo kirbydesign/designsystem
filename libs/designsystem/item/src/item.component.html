@@ -1,8 +1,8 @@
 <ion-item
   lines="none"
   [disabled]="disabled"
-  [button]="_renderAsButton ? true : null"
-  [href]="_renderAsLink ? true : null"
+  [button]="_renderButton"
+  [href]="_renderLink"
   [detail]="false"
   (mousedown)="onMouseDown($event)"
 >
