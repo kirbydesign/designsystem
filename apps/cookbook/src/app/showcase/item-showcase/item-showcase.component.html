@@ -138,32 +138,41 @@
 
 <h2>Selectable, Link & Disclosure</h2>
 <p>
-  The
+  When either
   <code>selectable</code>
-  property should be set when the item should act like a button and some action will be bound to the
-  item with a click listener.
+  or
+  <code>href</code>
+  is set on an item, it becomes interactive and will get hover, focus and active states.
 </p>
+<p>
+  Generally, an
+  <code>arrow</code>
+  disclosure indicator should be added on items that navigate to a new page within the application
+  or activates a modal overlay or similar.
+</p>
+<p>
+  If the user is sent to an external resource, the
+  <code>link</code>
+  disclosure indicator should be used.
+</p>
+<h3>Button behavior</h3>
+
+The
+<code>selectable</code>
+property should be set when the item should act like a button and some action will be bound to the
+item with a click listener.
+
+<h3>Link behavior</h3>
 <p>
   Items may also be used as a link, by setting the
   <code>href</code>
-  property. When doing so, other link attributes like
+  property. When doing so, the item also accepts the
   <code>rel</code>
   ,
   <code>target</code>
   and
   <code>download</code>
-  are correctly applied to the link within the item.
-</p>
-<p>
-  By setting either
-  <code>selectable</code>
-  or
-  <code>href</code>
-  , the item will get hover, focus and active states added.
-</p>
-<p>
-  Generally, a disclosure indicator should be added on items that navigate to a new page or
-  activates a modal or similar overlay.
+  attributes.
 </p>
 <cookbook-example-viewer [html]="selectableExample.template">
   <div class="example-frame">
