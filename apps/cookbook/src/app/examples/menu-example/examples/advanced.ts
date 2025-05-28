@@ -7,7 +7,7 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-menu-advanced-example',
-  template: `<kirby-menu [closeOnSelect]="false">
+  template: `<kirby-menu [closeOnSelect]="false" aria-label="Advanced items">
   <kirby-item>
     <kirby-icon name="person" slot="start"></kirby-icon>
     <kirby-checkbox slot="end">
