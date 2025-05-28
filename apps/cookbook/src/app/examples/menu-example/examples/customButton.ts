@@ -6,7 +6,7 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-custom-button-example',
-  template: `<kirby-menu>
+  template: `<kirby-menu aria-label="Custom button">
   <button
     kirby-button
     type="button"
