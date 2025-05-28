@@ -7,6 +7,7 @@ import {
   HostBinding,
   Input,
   Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -14,6 +15,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { RadioComponent } from '@kirbydesign/designsystem/radio';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { IonItem } from '@ionic/angular/standalone';
 
 export enum ItemSize {
   XS = 'xs',
@@ -61,6 +63,8 @@ export class ItemComponent implements AfterViewInit {
   private toggle: ElementRef<HTMLElement>;
   @ContentChild(ButtonComponent, { static: false, read: ElementRef })
   private button: ElementRef<HTMLElement>;
+  @ViewChild(IonItem, { static: true, read: ElementRef })
+  private ionItem: ElementRef<HTMLIonItemElement>;
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
@@ -68,12 +72,11 @@ export class ItemComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    const ionItem = this.elementRef.nativeElement.querySelector('ion-item');
     forwardAttributes(
       this.elementRef.nativeElement,
       this._linkAttributesToForward,
       this.renderer,
-      ionItem
+      this.ionItem.nativeElement
     );
   }
 
@@ -91,16 +94,16 @@ export class ItemComponent implements AfterViewInit {
     // We shouldn't render item as a button if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
 
-    return this.selectable && !this._containsNestedInteractives;
+    return this.selectable && !this.containsNestedInteractives;
   }
 
   get _renderAsLink(): boolean {
     // We shouldn't render item as a link if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
-    return this.href && !this._containsNestedInteractives;
+    return this.href && !this.containsNestedInteractives;
   }
 
-  get _containsNestedInteractives(): boolean {
+  private containsNestedInteractives(): boolean {
     return !!(this.checkbox || this.radio || this.toggle || this.button);
   }
 }
