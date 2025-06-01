@@ -1,16 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Inject, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import { Inject, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
-import {
-  ComponentLoaderDirective,
-  ResizeObserverFactory,
-  ResizeObserverService,
-  ThemeColorDirective,
-} from '@kirbydesign/designsystem/shared';
+import { ComponentLoaderDirective, ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
@@ -22,10 +17,7 @@ import { TabsModule } from '@kirbydesign/designsystem/tabs';
 import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 import { RangeComponent } from '@kirbydesign/designsystem/range';
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
-import {
-  LoadingOverlayComponent,
-  LoadingOverlayService,
-} from '@kirbydesign/designsystem/loading-overlay';
+import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { AccordionModule } from '@kirbydesign/designsystem/accordion';
@@ -50,14 +42,10 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 import {
   ActionSheetComponent,
-  ActionSheetHelper,
   AlertComponent,
-  AlertHelper,
-  CanDismissHelper,
   ModalCompactWrapperComponent,
   ModalController,
   ModalFooterComponent,
-  ModalHelper,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { ModalComponent } from '@kirbydesign/designsystem/modal';
@@ -71,7 +59,6 @@ import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
-import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
@@ -158,13 +145,6 @@ const importedModules = [...exportedModules];
   exports: [allExports],
 })
 export class KirbyModule {
-  static forChild(config?: KirbyConfig): ModuleWithProviders<KirbyModule> {
-    return {
-      ngModule: KirbyModule,
-      providers: [provideKirby(config)],
-    };
-  }
-
   constructor(
     modalController: ModalController,
     @Optional() @Inject(KIRBY_CONFIG) config?: KirbyConfig

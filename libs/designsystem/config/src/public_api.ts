@@ -1,1 +1,7 @@
-export { provideKirby, withGlobalConfig, KIRBY_CONFIG, KirbyConfig } from './provide-kirby';
+export {
+  provideKirby,
+  withGlobalConfig,
+  getGlobalConfig,
+  KIRBY_CONFIG,
+  KirbyConfig,
+} from './provide-kirby';

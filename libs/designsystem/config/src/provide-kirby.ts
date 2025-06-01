@@ -42,10 +42,15 @@ export interface KirbyConfig {
  */
 export const KIRBY_CONFIG = new InjectionToken<KirbyConfig>('KIRBY_CONFIG');
 
+/**
+ *
+ * @param features - Additional features to be provided to the Kirby environment:
+ * @see {@link withGlobalConfig} for setting up global configuration.
+ */
 export function provideKirby(
   ...features: Provider[] | EnvironmentProviders[]
 ): EnvironmentProviders {
-  const providers: Provider[] = [
+  return makeEnvironmentProviders([
     ModalController,
     ActionSheetHelper,
     ModalHelper,
@@ -56,18 +61,18 @@ export function provideKirby(
     ResizeObserverFactory,
     ResizeObserverService,
     CanDismissHelper,
-  ];
-
-  return makeEnvironmentProviders([...providers, importProvidersFrom(IonicModule), features]);
+    importProvidersFrom(IonicModule),
+    features,
+  ]);
 }
 
 /**
- * Sets up global configuration.
- * Should only be called once per application, to set up Kirby globally in the browser.
+ * Sets up global configuration when used with the provideKirby EnvironmentProvider function.
+ * Should always be called exactly once per application when bootstrapping, to set up Kirby in the browsers runtime.
  *
- * @param config - `KirbyConfig` object to configure Kirby globally.
+ * @param config - (Optional) Additional configuration via a `KirbyConfig` object.
  */
-export function withGlobalConfig(config: KirbyConfig): EnvironmentProviders {
+export function withGlobalConfig(config?: KirbyConfig): EnvironmentProviders {
   const shouldHaveNoopAnimation = !isPlatform('hybrid');
 
   // A no-op animation is parsed here when we are not on a native device,
@@ -85,8 +90,26 @@ export function withGlobalConfig(config: KirbyConfig): EnvironmentProviders {
     ionicConfig.focusManagerPriority = ['heading'];
   }
 
-  return makeEnvironmentProviders([
-    provideIonicAngular(ionicConfig),
-    { provide: KIRBY_CONFIG, useValue: config },
-  ]);
+  // Store the configuration globally in the browser, so it can be accessed at runtime by components.
+  setGlobalConfig(config);
+
+  return makeEnvironmentProviders([provideIonicAngular(ionicConfig)]);
+}
+
+/**
+ * Retrieves the global Kirby configuration object at runtime.
+ * This function assumes that the configuration has been set up using `withGlobalConfig`.
+ */
+export function getGlobalConfig(): KirbyConfig | undefined {
+  return (window as any).__KIRBY_CONFIG__ as KirbyConfig | undefined;
+}
+
+/**
+ * Sets the global Kirby configuration object in the browser.
+ *
+ * @param config - `KirbyConfig` object to configure Kirby globally.
+ */
+function setGlobalConfig(config: KirbyConfig): void {
+  if (!config) return;
+  (window as any).__KIRBY_CONFIG__ = config;
 }
