@@ -1,10 +1,12 @@
 import {
   EnvironmentProviders,
+  importProvidersFrom,
   InjectionToken,
   makeEnvironmentProviders,
   Provider,
 } from '@angular/core';
 import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import type { IonicConfig } from '@ionic/core';
 import { LoadingOverlayService } from '@kirbydesign/designsystem/loading-overlay';
 import {
@@ -40,12 +42,9 @@ export interface KirbyConfig {
  */
 export const KIRBY_CONFIG = new InjectionToken<KirbyConfig>('KIRBY_CONFIG');
 
-/**
- * Sets up top level configuration and providers needed for the Kirby components.
- *
- * @param config - Optional configuration for the Kirby design system.
- */
-export function provideKirby(config?: KirbyConfig): EnvironmentProviders {
+export function provideKirby(
+  ...features: Provider[] | EnvironmentProviders[]
+): EnvironmentProviders {
   const providers: Provider[] = [
     ModalController,
     ActionSheetHelper,
@@ -59,8 +58,16 @@ export function provideKirby(config?: KirbyConfig): EnvironmentProviders {
     CanDismissHelper,
   ];
 
-  if (config) providers.push({ provide: KIRBY_CONFIG, useValue: config });
+  return makeEnvironmentProviders([...providers, importProvidersFrom(IonicModule), features]);
+}
 
+/**
+ * Sets up global configuration.
+ * Should only be called once per application, to set up Kirby globally in the browser.
+ *
+ * @param config - `KirbyConfig` object to configure Kirby globally.
+ */
+export function withGlobalConfig(config: KirbyConfig): EnvironmentProviders {
   const shouldHaveNoopAnimation = !isPlatform('hybrid');
 
   // A no-op animation is parsed here when we are not on a native device,
@@ -78,7 +85,8 @@ export function provideKirby(config?: KirbyConfig): EnvironmentProviders {
     ionicConfig.focusManagerPriority = ['heading'];
   }
 
-  // Provide both Kirby and Ionic config as environment providers,
-  // to avoid multiple conflicting configurations of global options.
-  return makeEnvironmentProviders([...providers, provideIonicAngular(ionicConfig)]);
+  return makeEnvironmentProviders([
+    provideIonicAngular(ionicConfig),
+    { provide: KIRBY_CONFIG, useValue: config },
+  ]);
 }
