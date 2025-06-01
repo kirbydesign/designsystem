@@ -191,6 +191,7 @@ export class ModalWrapperComponent
     this.listenForIonModalWillDismiss();
     this.listenForScroll();
     this.initializeResizeModalToModalWrapper();
+    this.focusModalTitle();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -424,6 +425,14 @@ export class ModalWrapperComponent
       this.setAriaLabelFromTitleContent();
       this.observeTitleContentChanges();
     }
+  }
+
+  private focusModalTitle() {
+    const focusAlreadyInModal = this.ionModalElement?.contains(document.activeElement);
+    if (focusAlreadyInModal) return;
+    this.ionModalDidPresent.pipe(takeUntil(this.willClose$)).subscribe(() => {
+      this.ionTitleElement?.nativeElement.focus();
+    });
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {

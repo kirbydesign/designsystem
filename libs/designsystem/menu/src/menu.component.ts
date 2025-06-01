@@ -30,6 +30,7 @@ import {
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-menu',
@@ -41,12 +42,14 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
   readonly menuId: string = UniqueIdGenerator.scopedTo('kirby-menu').next();
   triggerButtonId: string = UniqueIdGenerator.scopedTo('kirby-menu-trigger-button').next();
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   constructor(
     private cdr: ChangeDetectorRef,
     private elementRef: ElementRef<HTMLElement>,
     private zone: NgZone,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    public translations: TranslationService
   ) {}
 
   @Input() public isDisabled: boolean = false;
@@ -113,6 +116,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     } else {
       this.handleKeyDownForClosedMenu(event);
     }
+  }
+
+  @HostListener('click', ['$event'])
+  _onClick() {
+    if (!this.floatingMenuIsShown) return;
+    this.focusedIndex = 0;
+    this.focusItem();
   }
 
   private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
@@ -278,12 +288,22 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.floatingMenu.hide();
       });
     });
+    this.forwardAriaLabelToTriggerButton();
   }
 
   ngAfterContentInit(): void {
     this.setRoleAttributeForAllItems();
     this.setUserProvidedButtonAriaAttributes();
     this.ensureSelectableOnItems();
+  }
+
+  private forwardAriaLabelToTriggerButton() {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.getTriggerButton()
+    );
   }
 
   ensureSelectableOnItems() {
@@ -333,6 +353,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
     if (!button.getAttribute('aria-haspopup')) {
       this.renderer.setAttribute(button, 'aria-haspopup', 'true');
+    }
+    if (!button.getAttribute('aria-label')) {
+      this.renderer.setAttribute(button, 'aria-label', this.translations.get('more'));
     }
   }
 

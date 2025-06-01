@@ -6,6 +6,16 @@ import {
 } from '@angular/core';
 import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
 import type { IonicConfig } from '@ionic/core';
+import { LoadingOverlayService } from '@kirbydesign/designsystem/loading-overlay';
+import {
+  ActionSheetHelper,
+  AlertHelper,
+  CanDismissHelper,
+  ModalController,
+  ModalHelper,
+} from '@kirbydesign/designsystem/modal';
+import { ResizeObserverFactory, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 
 /**
  * Configuration object for global configuration of Kirby.
@@ -36,6 +46,21 @@ export const KIRBY_CONFIG = new InjectionToken<KirbyConfig>('KIRBY_CONFIG');
  * @param config - Optional configuration for the Kirby design system.
  */
 export function provideKirby(config?: KirbyConfig): EnvironmentProviders {
+  const providers: Provider[] = [
+    ModalController,
+    ActionSheetHelper,
+    ModalHelper,
+    AlertHelper,
+    ToastHelper,
+    ToastController,
+    LoadingOverlayService,
+    ResizeObserverFactory,
+    ResizeObserverService,
+    CanDismissHelper,
+  ];
+
+  if (config) providers.push({ provide: KIRBY_CONFIG, useValue: config });
+
   const shouldHaveNoopAnimation = !isPlatform('hybrid');
 
   // A no-op animation is parsed here when we are not on a native device,
@@ -47,11 +72,11 @@ export function provideKirby(config?: KirbyConfig): EnvironmentProviders {
   const ionicConfig: IonicConfig = {
     mode: 'ios',
     ...navAnimationConfig,
-    // pass the focusManager config on and instruct Ionic to focus the primary heading after each navigation
-    focusManagerPriority: config?.focusManager ? ['heading'] : undefined,
   };
 
-  const providers: Provider[] = config ? [{ provide: KIRBY_CONFIG, useValue: config }] : [];
+  if (config?.focusManager) {
+    ionicConfig.focusManagerPriority = ['heading'];
+  }
 
   // Provide both Kirby and Ionic config as environment providers,
   // to avoid multiple conflicting configurations of global options.

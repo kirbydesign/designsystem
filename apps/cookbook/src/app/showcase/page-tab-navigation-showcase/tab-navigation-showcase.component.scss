@@ -1,0 +1,6 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '../showcase.shared';
+
+.example-container {
+  margin-bottom: utils.size('l');
+}

@@ -205,6 +205,7 @@ ion-back-button {
     opacity: 1; // required for interaction states to work
     border-radius: utils.border-radius('pill');
     overflow: hidden; // required for border radius to work
+    @include interaction-state.apply-focus-visible;
   }
 
   &::part(native)::after {

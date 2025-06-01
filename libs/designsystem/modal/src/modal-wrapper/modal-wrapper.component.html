@@ -1,6 +1,10 @@
-<ion-header [class.content-scrolled]="isContentScrolled" (touchstart)="onHeaderTouchStart($event)">
+<ion-header
+  role="presentation"
+  [class.content-scrolled]="isContentScrolled"
+  (touchstart)="onHeaderTouchStart($event)"
+>
   <ion-toolbar>
-    <ion-title></ion-title>
+    <ion-title role="heading" aria-level="2" tabindex="-1"></ion-title>
     <ion-buttons
       slot="secondary"
       *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction"

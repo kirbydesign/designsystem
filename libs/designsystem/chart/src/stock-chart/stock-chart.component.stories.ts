@@ -9,6 +9,8 @@ import {
 } from '@kirbydesign/designsystem/chart';
 import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 
+import { StockChartExampleComponent } from '~/app/examples/stock-chart-example/stock-chart-example.component';
+
 const { getThemeColorHexString } = ColorHelper;
 
 const chartDataLabelOptions: ChartDataLabelOptions = {
@@ -52,6 +54,7 @@ const meta: Meta<StockChartComponent> = {
   decorators: [
     moduleMetadata({
       providers: [ChartConfigService],
+      imports: [StockChartExampleComponent],
     }),
   ],
   render: (args) => ({
@@ -62,9 +65,15 @@ const meta: Meta<StockChartComponent> = {
 export default meta;
 type Story = StoryObj<StockChartComponent>;
 
-export const StockChart: Story = {
+export const Default: Story = {
   args: {
     data: _datasets,
     dataLabelOptions: chartDataLabelOptions,
   },
+};
+
+export const CookbookExamples: Story = {
+  render: () => ({
+    template: `<cookbook-stock-chart-example></cookbook-stock-chart-example>`,
+  }),
 };

@@ -1,0 +1,66 @@
+<p>
+  Tab Navigation is used to group related content, allowing users to browse content in sections
+  without leaving the page. The content in each tab should be located at the same hierarchical level
+  in the information architecture. Tab Navigation always contains at least two tabs, with one tab
+  active at a time.
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Default</h2>
+Tab Navigation is designed for use within a page. On scroll, it remains fixed near the title area.
+It also becomes horizontally scrollable if items overflow.
+
+<div class="example-container">
+  <cookbook-iphone
+    viewMode="full-size"
+    [showViewModeToggle]="true"
+    src="/examples/page/tab-navigation"
+    showExternalLink="true"
+  ></cookbook-iphone>
+
+  <cookbook-example-viewer [html]="pageWithTabNavigationTemplate"></cookbook-example-viewer>
+</div>
+
+<h3>Accessibility</h3>
+<p>
+  Tab Navigation and Tab Navigation Item implement the
+  <code>tablist</code>
+  and
+  <code>tab</code>
+  aria pattern, as defined in the
+  <a href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/" target="_blank">
+    WAI-ARIA Authoring Practices
+  </a>
+  .
+</p>
+
+<p>
+  To fully implement accessible tab navigation it is important to wire up the kirby tab navigation
+  component with the content that is shown when a tab is selected. This can be done by using the
+  <code>aria-controls</code>
+  attribute on the tab navigation item, and
+  <code>aria-labelledby</code>
+  and
+  <code>tabpanel</code>
+  role attribute on the matching content as shown in the example above.
+</p>
+
+<p class="comment">
+  <strong>Please note:</strong>
+  Only the active tabpanel should be visible to Assistive Technology. Non-active tabs should be
+  hidden with
+  <code>display: none</code>
+  or omitted from the DOM.
+</p>
+
+<h2>API</h2>
+<h3>Tab Navigation Properties</h3>
+<cookbook-api-description-properties
+  [properties]="tabNavProperties"
+></cookbook-api-description-properties>
+
+<h3>Tab Navigation Item Properties</h3>
+<cookbook-api-description-properties
+  [properties]="tabNavItemProperties"
+></cookbook-api-description-properties>

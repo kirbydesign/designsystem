@@ -41,7 +41,9 @@
 <p>
   <kirby-card variant="flat" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="stockExample.template" [ts]="stockExample.codeSnippet">
-      <cookbook-chart-example-stock #stockExample></cookbook-chart-example-stock>
+      <cookbook-stock-chart-example-simple-dataset
+        #stockExample
+      ></cookbook-stock-chart-example-simple-dataset>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
@@ -63,9 +65,9 @@
       [html]="stockComparisonExample.template"
       [ts]="stockComparisonExample.codeSnippet"
     >
-      <cookbook-chart-example-stock-comparison
+      <cookbook-stock-chart-example-comparison
         #stockComparisonExample
-      ></cookbook-chart-example-stock-comparison>
+      ></cookbook-stock-chart-example-comparison>
     </cookbook-example-viewer>
   </kirby-card>
 </p>

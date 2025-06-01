@@ -8,4 +8,5 @@ export interface Translation {
   previousSlide: string;
   selectYear: string;
   readMore: string;
+  more: string;
 }

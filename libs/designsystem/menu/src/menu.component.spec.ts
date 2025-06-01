@@ -94,6 +94,11 @@ describe('MenuComponent', () => {
       it('should add aria attributes to default button', () => {
         expect(buttonElement.getAttribute('aria-controls')).toEqual(card.id);
         expect(buttonElement.getAttribute('aria-haspopup')).toEqual('true');
+        expect(buttonElement.getAttribute('aria-label')).toEqual('More');
+      });
+
+      it('should add aria attributes to menu for default button', () => {
+        expect(card.getAttribute('aria-labelledby')).toEqual(buttonElement.id);
       });
 
       it('should add aria attributes to menu for default button', () => {
@@ -146,6 +151,40 @@ describe('MenuComponent', () => {
         spectator.setHostInput('minWidth', 300);
         expect(card).toHaveComputedStyle({ 'min-width': '300px' });
       });
+    });
+  });
+
+  describe('button with custom aria', () => {
+    it('should overwrite aria-label on default button if aria-label is set on menu', () => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu aria-label='Custom aria label'></kirby-menu>`,
+        {}
+      );
+      buttonElement = spectator.query('button');
+      expect(buttonElement.getAttribute('aria-label')).toEqual('Custom aria label');
+      expect(spectator.hostElement.getAttribute('aria-label')).toEqual(null);
+    });
+    it('should overwrite aria-labelledby on default button if aria-labelledby is set on menu', () => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu aria-labelledby='Custom labelledBy'></kirby-menu>`,
+        {}
+      );
+      buttonElement = spectator.query('button');
+      expect(buttonElement.getAttribute('aria-labelledby')).toEqual('Custom labelledBy');
+      expect(spectator.hostElement.getAttribute('aria-labelledBy')).toEqual(null);
+    });
+    it('should overwrite aria-label on custom button if aria-label is set on menu', () => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu aria-label='Custom aria label'>
+          <button kirby-button [size]="'md'" type="button" [attentionLevel]="'3'" aria-label="button aria label">
+            <kirby-icon [name]="'menu-outline'"></kirby-icon>
+          </button>
+        </kirby-menu>`,
+        {}
+      );
+      buttonElement = spectator.query('button');
+      expect(buttonElement.getAttribute('aria-label')).toEqual('Custom aria label');
+      expect(spectator.hostElement.getAttribute('aria-label')).toEqual(null);
     });
   });
 
@@ -271,6 +310,7 @@ describe('MenuComponent', () => {
     it('should add aria attributes to custom button', () => {
       expect(buttonElement.getAttribute('aria-controls')).toEqual(card.id);
       expect(buttonElement.getAttribute('aria-haspopup')).toEqual('true');
+      expect(buttonElement.getAttribute('aria-label')).toEqual('More');
     });
 
     it('should add aria attributes to menu for custom button', () => {
@@ -279,7 +319,7 @@ describe('MenuComponent', () => {
   });
 
   describe('trigger: default(click)', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
           <kirby-item>
@@ -291,6 +331,8 @@ describe('MenuComponent', () => {
       buttonElement = spectator.query('button');
       card = spectator.query('kirby-card');
       buttonIcon = spectator.query(IconComponent);
+      items = card.querySelectorAll('ion-item');
+      await TestHelper.whenReady(items);
     });
 
     it('should open menu when button is clicked', async () => {
@@ -299,6 +341,12 @@ describe('MenuComponent', () => {
       await spectator.click(buttonElement);
 
       expect(card).toHaveComputedStyle({ display: 'block' });
+    });
+
+    it('should set focus on first item when button is clicked', async () => {
+      await spectator.click(buttonElement);
+
+      expect(document.activeElement).toEqual(items[0]);
     });
   });
 
