@@ -1,6 +1,6 @@
 export {
   provideKirby,
-  withGlobalConfig,
+  withGlobalSetup,
   getGlobalConfig,
   KIRBY_CONFIG,
   KirbyConfig,

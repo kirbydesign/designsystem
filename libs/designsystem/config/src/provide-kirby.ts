@@ -1,12 +1,18 @@
 import {
   EnvironmentProviders,
-  importProvidersFrom,
   InjectionToken,
   makeEnvironmentProviders,
   Provider,
 } from '@angular/core';
 import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
-import { IonicModule } from '@ionic/angular';
+import {
+  ModalController as IonModalController,
+  PopoverController as IonPopoverController,
+} from '@ionic/angular/standalone';
+import {
+  AngularDelegate as IonAngularDelegate,
+  ConfigToken as IonConfigToken,
+} from '@ionic/angular/common';
 import type { IonicConfig } from '@ionic/core';
 import { LoadingOverlayService } from '@kirbydesign/designsystem/loading-overlay';
 import {
@@ -45,7 +51,7 @@ export const KIRBY_CONFIG = new InjectionToken<KirbyConfig>('KIRBY_CONFIG');
 /**
  *
  * @param features - Additional features to be provided to the Kirby environment:
- * @see {@link withGlobalConfig} for setting up global configuration.
+ * @see {@link withGlobalSetup} for setting up global configuration.
  */
 export function provideKirby(
   ...features: Provider[] | EnvironmentProviders[]
@@ -61,7 +67,7 @@ export function provideKirby(
     ResizeObserverFactory,
     ResizeObserverService,
     CanDismissHelper,
-    importProvidersFrom(IonicModule),
+    ...patchIonicProviders(),
     features,
   ]);
 }
@@ -70,9 +76,9 @@ export function provideKirby(
  * Sets up global configuration when used with the provideKirby EnvironmentProvider function.
  * Should always be called exactly once per application when bootstrapping, to set up Kirby in the browsers runtime.
  *
- * @param config - (Optional) Additional configuration via a `KirbyConfig` object.
+ * @param config - (Optional) Additional configuration via the `KirbyConfig` object.
  */
-export function withGlobalConfig(config?: KirbyConfig): EnvironmentProviders {
+export function withGlobalSetup(config?: KirbyConfig): EnvironmentProviders {
   const shouldHaveNoopAnimation = !isPlatform('hybrid');
 
   // A no-op animation is parsed here when we are not on a native device,
@@ -112,4 +118,16 @@ export function getGlobalConfig(): KirbyConfig | undefined {
 function setGlobalConfig(config: KirbyConfig): void {
   if (!config) return;
   (window as any).__KIRBY_CONFIG__ = config;
+}
+
+function patchIonicProviders(): Provider[] {
+  return [
+    {
+      provide: IonConfigToken,
+      useValue: {},
+    },
+    IonAngularDelegate,
+    IonPopoverController,
+    IonModalController,
+  ];
 }
