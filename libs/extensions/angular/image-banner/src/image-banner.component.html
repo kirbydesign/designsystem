@@ -58,6 +58,7 @@
       </div>
       <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
       @if (externalLink) {
+        @let buttonText = actionButtonText ?? translations.get('readMore');
         <a
           kirby-button
           class="main-content-body-action-text"
@@ -66,12 +67,9 @@
           [href]="externalLink"
           target="_blank"
           size="sm"
+          [attr.aria-label]="buttonText"
         >
-          @if (actionButtonText) {
-            {{ actionButtonText }}
-          } @else {
-            {{ translations.get('readMore') }}
-          }
+          {{ buttonText }}
           <kirby-icon name="link"></kirby-icon>
         </a>
       }
