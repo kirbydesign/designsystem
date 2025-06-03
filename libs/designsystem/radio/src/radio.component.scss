@@ -20,10 +20,14 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
     ion-radio {
       --color: #{utils.get-color('medium')};
-      --color-checked: #{utils.get-color('semi-dark')};
+      --color-checked: #{utils.get-color('medium')};
 
       &::part(container) {
         background-color: utils.get-color('semi-light');
+      }
+
+      &::part(mark) {
+        --color-checked: #{utils.get-color('semi-dark')};
       }
 
       &::part(label-text-wrapper) {
