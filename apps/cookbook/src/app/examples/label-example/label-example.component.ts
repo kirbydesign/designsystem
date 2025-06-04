@@ -7,6 +7,7 @@ import { RadioInFormFieldExampleComponent } from './examples/in-form-field';
 @Component({
   selector: 'cookbook-label-example',
   templateUrl: './label-example.component.html',
+  styleUrls: ['./label-example.component.scss'],
   imports: [
     LabelExampleItemComponent,
     FormFieldTextareaLabelExampleComponent,
