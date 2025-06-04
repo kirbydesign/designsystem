@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
 import { LabelExampleItemComponent } from './examples/item';
+import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
+import { LabelFormFieldInputLabelExampleComponent } from './examples/label';
+import { RadioInFormFieldExampleComponent } from './examples/in-form-field';
 
 @Component({
   selector: 'cookbook-label-example',
-  template: `
-    <cookbook-label-example-item></cookbook-label-example-item>
-  `,
-  imports: [LabelExampleItemComponent],
+  templateUrl: './label-example.component.html',
+  imports: [
+    LabelExampleItemComponent,
+    FormFieldTextareaLabelExampleComponent,
+    LabelFormFieldInputLabelExampleComponent,
+    RadioInFormFieldExampleComponent,
+  ],
 })
 export class LabelExampleComponent {}

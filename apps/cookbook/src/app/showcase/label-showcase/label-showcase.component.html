@@ -1,27 +1,49 @@
-<h2>Label Showcase</h2>
+<div class="example">
+  <p>
+    Recommended usage of Kirby-label and the standard label are illustrated in the following
+    examples. Kirby-label should be used in item components and label should be used in form fields.
+  </p>
+  <br />
 
-<p>
-  Recommended usage of the standard label and Kirby-label are illustrated in the following examples.
-</p>
-<br />
+  <h2>Use kirby-label in item</h2>
+  <p>Use the kirby-label inside the kirby-item to add title and detail</p>
+  <cookbook-example-viewer [html]="itemExample.template">
+    <div class="example-frame">
+      <cookbook-label-example-item #itemExample></cookbook-label-example-item>
+    </div>
+  </cookbook-example-viewer>
 
-<h3>Use Label in forms</h3>
-<cookbook-example-viewer [html]="inputLabelExample.template">
-  <cookbook-label-form-field-input-label-example
-    #inputLabelExample
-  ></cookbook-label-form-field-input-label-example>
+  <p>
+    Get more information about the
+    <a href="https://cookbook.kirby.design/#/home/showcase/item">Kirby-label component</a>
+    in item section.
+  </p>
+
+  <h2>Use Label in forms</h2>
+  <p>Use the kirby-label inside the kirby-item to add title and detail</p>
+  <h3>Input</h3>
+  <cookbook-example-viewer [html]="inputLabelExample.template">
+    <cookbook-label-form-field-input-label-example
+      #inputLabelExample
+    ></cookbook-label-form-field-input-label-example>
+  </cookbook-example-viewer>
+</div>
+
+<h3>Textarea</h3>
+<cookbook-example-viewer [html]="textareaLabelExample.template">
+  <cookbook-form-field-textarea-label-example
+    #textareaLabelExample
+  ></cookbook-form-field-textarea-label-example>
 </cookbook-example-viewer>
 
-<h3>Use kirby-label in item</h3>
-<p>Use the kirby-label inside the kirby-item to add title and detail</p>
-<cookbook-example-viewer [html]="itemExample.template">
-  <div class="example-frame">
-    <cookbook-label-example-item #itemExample></cookbook-label-example-item>
-  </div>
-</cookbook-example-viewer>
-
+<h3 #inFormField>Radio</h3>
 <p>
-  Get more information about the
-  <a href="https://cookbook.kirby.design/#/home/showcase/item">Kirby-label component</a>
-  in item section.
+  Radios can be placed within a
+  <code>&lt;kirby-form-field&gt;</code>
+  and assigned a label and an optional message.
+  <br />
+  Clicking the label will focus the selected radio, if any, otherwise the first radio.
 </p>
+<cookbook-example-viewer [html]="inFormFieldExample.template">
+  <cookbook-radio-in-form-field-example #inFormFieldExample></cookbook-radio-in-form-field-example>
+</cookbook-example-viewer>
