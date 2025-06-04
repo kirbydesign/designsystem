@@ -7,12 +7,13 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IonItem } from '@ionic/angular/standalone';
 import { ItemComponent } from './item.component';
 import { LabelComponent } from '.';
 
 const { fontWeight } = DesignTokenHelper;
 
-describe('ItemComponent', () => {
+describe('ItemComponent integration', () => {
   let ionItem: HTMLElement;
 
   let spectator: SpectatorHost<ItemComponent>;
@@ -24,6 +25,7 @@ describe('ItemComponent', () => {
       RadioModule,
       ToggleComponent,
       ButtonComponent,
+      IonItem,
     ],
     declarations: [LabelComponent],
   });

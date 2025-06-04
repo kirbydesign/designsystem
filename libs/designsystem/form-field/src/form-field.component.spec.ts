@@ -9,6 +9,7 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { RadioGroupComponent, RadioModule } from '@kirbydesign/designsystem/radio';
 
 import { fakeAsync, tick } from '@angular/core/testing';
+import { IonItem } from '@ionic/angular/standalone';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { FormFieldComponent } from './form-field.component';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -30,6 +31,7 @@ describe('FormFieldComponent', () => {
       InputComponent,
       TextareaComponent,
       RadioModule,
+      IonItem,
     ],
     mocks: [PlatformService],
     providers: [
