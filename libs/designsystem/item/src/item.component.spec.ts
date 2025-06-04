@@ -3,6 +3,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IonItem } from '@ionic/angular/standalone';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent, ItemSize } from './item.component';
@@ -15,14 +16,14 @@ describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
 
   const createHost = createHostFactory({
-    imports: [TestHelper.ionicModuleForTest, IconModule],
+    imports: [TestHelper.ionicModuleForTest, IconModule, IonItem],
     component: ItemComponent,
   });
 
   describe('kirby-item with input', () => {
     beforeEach(() => {
       spectator = createHost(
-        '<kirby-item [disclosure]="disclosure" [selectable]="selectable" [href]="href" [rotateIcon]="rotateIcon" [target]="target">Value</kirby-item>'
+        '<kirby-item [disclosure]="disclosure" [selectable]="selectable" [href]="href" [rotateIcon]="rotateIcon">Value</kirby-item>'
       );
     });
 
