@@ -10,4 +10,5 @@ export const en: Translation = {
   previousSlide: 'Previous slide',
   selectYear: 'Select year',
   readMore: 'Read more',
+  more: 'More',
 };

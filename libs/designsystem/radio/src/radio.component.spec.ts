@@ -190,7 +190,7 @@ describe('RadioComponent', () => {
 
         it('should have correct checkmark styling', () => {
           expect(radioCheckmark).toHaveComputedStyle({
-            'background-color': getColor('medium'),
+            'background-color': getColor('semi-dark'),
           });
         });
       });
@@ -216,7 +216,7 @@ describe('RadioComponent', () => {
 
         it('should have correct checkmark styling', () => {
           expect(radioCheckmark).toHaveComputedStyle({
-            'background-color': getColor('medium'),
+            'background-color': getColor('semi-dark'),
           });
         });
       });

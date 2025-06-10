@@ -26,6 +26,10 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
         background-color: utils.get-color('semi-light');
       }
 
+      &::part(mark) {
+        --color-checked: #{utils.get-color('semi-dark')};
+      }
+
       &::part(label-text-wrapper) {
         opacity: 1; // Reset Ionic disabled style
       }
