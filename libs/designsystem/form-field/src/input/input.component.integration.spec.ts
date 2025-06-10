@@ -5,6 +5,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { IonItem } from '@ionic/angular/standalone';
 import { InputComponent } from './input.component';
 
 const size = DesignTokenHelper.size;
@@ -16,7 +17,7 @@ describe('InputComponent in Item', () => {
   const createHost = createHostFactory({
     component: InputComponent,
     declarations: [ItemComponent],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, IonItem],
   });
 
   describe('by default', () => {
