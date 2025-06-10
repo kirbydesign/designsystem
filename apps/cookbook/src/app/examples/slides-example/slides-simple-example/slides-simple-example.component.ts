@@ -7,6 +7,7 @@ import { CardModule } from '@kirbydesign/designsystem/card';
   imports: [SlideModule, CardModule],
 })
 export class SlidesSimpleExampleComponent {
+  title = `Title`;
   slides = [...Array(9).keys()].map((number) => ({
     title: `Slide ${number + 1}`,
     subtitle: `Subtitle ${number + 1}`,
