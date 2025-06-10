@@ -5,6 +5,7 @@ import {
   Provider,
 } from '@angular/core';
 import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
+import { provideComponentInputBinding } from '@ionic/angular/common';
 import {
   ModalController as IonModalController,
   PopoverController as IonPopoverController,
@@ -126,6 +127,7 @@ function patchIonicProviders(): Provider[] {
       provide: IonConfigToken,
       useValue: {},
     },
+    provideComponentInputBinding(),
     IonAngularDelegate,
     IonPopoverController,
     IonModalController,
