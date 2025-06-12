@@ -10,6 +10,7 @@
 @use 'base/html-table';
 
 @use 'components/grid';
+@use 'components/button-link';
 @use 'themes/component-themes';
 
 /*
@@ -67,8 +68,8 @@ $modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-he
   $modal-close-button-inner-height: utils.size('l'); // Todo: Move to / get from shared var
   $modal-close-button-vertical-margin: utils.size('xxxs') * 2; // Todo: Move to / get from shared var
   $modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
-  $modal-header-total-height: $modal-close-button-inner-height + $modal-close-button-vertical-margin +
-    $modal-header-vertical-padding;
+  $modal-header-total-height: $modal-close-button-inner-height +
+    $modal-close-button-vertical-margin + $modal-header-vertical-padding;
   $modal-header-vertical-center: math.round($modal-header-total-height * 0.5);
   @return $modal-header-vertical-center;
 }
@@ -219,7 +220,9 @@ ion-loading.kirby-loading-overlay {
 
   // Set default colors
 
-  --background: #{utils.get-decoration-color(map.get($_toast-notification-colors-map, 'success')...)};
+  --background: #{utils.get-decoration-color(
+      map.get($_toast-notification-colors-map, 'success')...
+    )};
   --color: #{utils.get-color('black')};
   --button-color: var(--color);
 

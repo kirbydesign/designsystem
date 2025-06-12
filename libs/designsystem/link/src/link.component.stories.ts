@@ -19,12 +19,6 @@ type Story = StoryObj<LinkComponent>;
 
 export const Link: Story = {
   render: () => ({
-    template: `<button kirby-link>Link-style button</button>`,
-  }),
-};
-
-export const CookbookExample: Story = {
-  render: () => ({
     template: `<cookbook-link-example-button></cookbook-link-example-button>`,
   }),
 };

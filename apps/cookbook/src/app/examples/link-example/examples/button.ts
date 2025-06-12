@@ -3,7 +3,7 @@ import { LinkComponent } from '@kirbydesign/designsystem/link';
 
 const config = {
   selector: 'cookbook-link-example-button',
-  template: `This is a <button kirby-link>button styled as a link</button>.`,
+  template: `This is a <button class="kirby-button-link">button styled as a link</button>.`,
 };
 
 @Component({
