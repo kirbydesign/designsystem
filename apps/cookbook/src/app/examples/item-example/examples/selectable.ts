@@ -8,8 +8,12 @@ const config = {
   <p class="kirby-item-title">Selectable</p>
 </kirby-item>
 
-<kirby-item [selectable]="true" [disclosure]="'arrow-more'">
+<kirby-item [selectable]="true" disclosure="arrow-more">
   <p class="kirby-item-title">Selectable with disclosure</p>
+</kirby-item>
+
+<kirby-item href="https://github.com/kirbydesign/designsystem" disclosure="link" target="_blank">
+  <p class="kirby-item-title">Link with disclosure</p>
 </kirby-item>`,
 };
 

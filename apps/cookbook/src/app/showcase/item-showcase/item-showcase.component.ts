@@ -72,6 +72,13 @@ export class ItemShowcaseComponent {
       type: ['boolean'],
     },
     {
+      name: 'href',
+      description:
+        'If `true`, a native <a> tag will be rendered under the hood and the item will become a link. The link item supports the `target`, `rel` and `download` attributes.',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
       name: 'reorderable',
       description: 'Make item reorderable in a list - makes reorder icon appear',
       defaultValue: 'false',
