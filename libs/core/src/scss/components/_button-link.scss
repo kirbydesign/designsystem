@@ -1,23 +1,26 @@
-@use '../interaction-state';
-@use '../utils';
+// @use '../interaction-state';
+// @use '../utils';
+
+// $_focus-ring-gap: 3px;
+// $_focus-ring-border-radius: utils.border-radius('xxs');
 
 .kirby-button-link {
-  @include interaction-state.apply-focus-visible($gap: $_focus-ring-gap) {
-    outline: none;
-    border-radius: $_focus-ring-border-radius;
-  }
+  // @include interaction-state.apply-focus-visible($gap: $_focus-ring-gap) {
+  //   outline: none;
+  //   border-radius: $_focus-ring-border-radius;
+  // }
 
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  text-decoration: underline;
-  cursor: pointer;
+  // background: none;
+  // border: none;
+  // padding: 0;
+  // font: inherit;
+  // color: inherit;
+  // text-decoration: underline;
+  // cursor: pointer;
 
-  @include interaction-state.apply-hover {
-    text-decoration-color: transparent;
-  }
+  // @include interaction-state.apply-hover {
+  //   text-decoration-color: transparent;
+  // }
 
-  transition: interaction-state.transition();
+  // transition: interaction-state.transition();
 }

@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 
-import { LinkComponent } from '@kirbydesign/designsystem/link';
-
 import { LinkExampleButtonComponent } from '~/app/examples/link-example/examples/button';
 
-const meta: Meta<LinkComponent> = {
-  component: LinkComponent,
+const meta: Meta = {
   title: 'Components / Link',
   decorators: [
     moduleMetadata({
@@ -15,7 +12,7 @@ const meta: Meta<LinkComponent> = {
   ],
 };
 export default meta;
-type Story = StoryObj<LinkComponent>;
+type Story = StoryObj;
 
 export const Link: Story = {
   render: () => ({
