@@ -209,7 +209,7 @@ describe('RadioComponent', () => {
           });
           expect(radioIcon).toHaveComputedStyle({
             'border-width': '1px',
-            'border-color': getColor('semi-dark'),
+            'border-color': getColor('medium'),
             'box-shadow': 'none',
           });
         });
