@@ -18,6 +18,7 @@ cookbook-code-viewer {
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: utils.size('m');
+  margin-bottom: 24px;
 
   &.no-padding {
     padding: 0;

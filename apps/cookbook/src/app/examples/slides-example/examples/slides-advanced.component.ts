@@ -38,6 +38,7 @@ const config = {
   imports: [SlideModule, CardModule, ButtonComponent],
 })
 export class SlidesAdvancedExampleComponent {
+  template = config.template;
   constructor(private toastController: ToastController) {}
 
   config: KirbySwiperOptions = {
