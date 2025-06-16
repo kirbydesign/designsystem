@@ -1,5 +1,7 @@
 <div class="example">
   <p>
+    A kirby-label is a layout element used to structure text content inside
+    <a href="https://cookbook.kirby.design/#/home/showcase/item">Items.</a>
     Recommended usage of Kirby-label and the standard label are illustrated in the following
     examples. Kirby-label should be used in item components and label should be used in form fields.
   </p>
@@ -19,34 +21,33 @@
     in item section.
   </p>
 
-  <h2>Use Label in forms</h2>
-  <p>Use the native label inside the kirby-form</p>
-  <h3>Input</h3>
+  <h2>Other label types</h2>
+  <p>
+    Despite its naming, the kirby-label component is not to be confused with the HTML-element, which
+    has an entirely different purpose of associating a label text with a form control.
+  </p>
+  <p>
+    In fact, when you are using the form-field element, a native label element is rendered
+    under-the-hood around the supplied kirby components (input, checkbox, radio-group etc.)
+  </p>
+
+  <p>
+    More information about the advantage of this approach can be found in the
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label">
+      MDN label documentation
+    </a>
+    .
+  </p>
+  <h3>Form Field with label</h3>
+
   <cookbook-example-viewer [html]="inputLabelExample.template">
-    <cookbook-label-form-field-input-label-example
-      #inputLabelExample
-    ></cookbook-label-form-field-input-label-example>
+    <div class="example-frame">
+      <cookbook-label-form-field-input-label-example
+        #inputLabelExample
+      ></cookbook-label-form-field-input-label-example>
+    </div>
   </cookbook-example-viewer>
 </div>
-
-<h3>Textarea</h3>
-<cookbook-example-viewer [html]="textareaLabelExample.template">
-  <cookbook-form-field-textarea-label-example
-    #textareaLabelExample
-  ></cookbook-form-field-textarea-label-example>
-</cookbook-example-viewer>
-
-<h3 #inFormField>Radio</h3>
-<p>
-  Radios can be placed within a
-  <code>&lt;kirby-form-field&gt;</code>
-  and assigned a label and an optional message.
-  <br />
-  Clicking the label will focus the selected radio, if any, otherwise the first radio.
-</p>
-<cookbook-example-viewer [html]="inFormFieldExample.template">
-  <cookbook-radio-in-form-field-example #inFormFieldExample></cookbook-radio-in-form-field-example>
-</cookbook-example-viewer>
 
 <p>
   More information about the advantage of using label

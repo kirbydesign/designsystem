@@ -17,10 +17,19 @@
   }
 
   h3 {
-    font-size: utils.font-size('xs');
-    color: utils.get-color('semi-dark');
-    text-transform: uppercase;
     margin-top: utils.size('xs');
     margin-bottom: utils.size('xxxs');
+  }
+
+  .example-container {
+    margin: 32px auto;
+    max-width: 768px;
+  }
+
+  .example-frame {
+    margin-bottom: 32px;
+    border: 1px solid var(--kirby-medium);
+    border-radius: 12px;
+    padding: utils.size('s');
   }
 }
