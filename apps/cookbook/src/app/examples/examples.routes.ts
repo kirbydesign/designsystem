@@ -60,8 +60,11 @@ import { ReorderListExampleComponent } from './reorder-list-example/reorder-list
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
-import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
-import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
+import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { SlidesSimpleExampleComponent } from './slides-example/examples/slides-simple.component';
+import { SlidesAdvancedExampleComponent } from './slides-example/examples/slides-advanced.component';
+import { SlidesHeightExampleComponent } from './slides-example/examples/slides-height.component';
+import { SlidesCustomHeadingExampleComponent } from './slides-example/examples/slides-custom-heading.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
@@ -87,7 +90,6 @@ import { ModalExampleAlertComponent } from './modal-example/modal-example-alert.
 import { ModalExampleAlertWithGuardComponent } from './modal-example/modal-example-alert-with-guard.component';
 import { ModalEmbeddedAlertExampleComponent } from './modal-example/alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
-import { SlidesHeightExampleComponent } from './slides-example/slides-height-example/slides-height-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { TabNavigationExampleComponent } from './tab-navigation-example/tab-navigation-example.component';
 
@@ -387,6 +389,45 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
     component: CardExampleComponent,
   },
   {
+    path: 'slides-simple',
+    component: SlidesSimpleExampleComponent,
+  },
+  {
+    path: 'slides-height',
+    component: SlidesHeightExampleComponent,
+  },
+  {
+    path: 'slides-custom-heading',
+    component: SlidesCustomHeadingExampleComponent,
+  },
+  {
+    path: 'slides-advanced',
+    component: SlidesAdvancedExampleComponent,
+  },
+  {
+    path: 'slides',
+    component: SlidesExampleComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'slides-simple',
+      },
+      {
+        path: 'slides-advanced',
+        component: SlidesAdvancedExampleComponent,
+      },
+      {
+        path: 'slides-simple',
+        component: SlidesSimpleExampleComponent,
+      },
+      {
+        path: 'slides-height',
+        component: SlidesHeightExampleComponent,
+      },
+    ],
+  },
+  {
     path: 'list',
     component: ListExampleComponent,
     children: [
@@ -548,18 +589,6 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'toggle-button',
     component: ToggleButtonExampleComponent,
-  },
-  {
-    path: 'slides',
-    component: SlidesSimpleExampleComponent,
-  },
-  {
-    path: 'slides-height',
-    component: SlidesHeightExampleComponent,
-  },
-  {
-    path: 'slides-advanced',
-    component: SlidesAdvancedExampleComponent,
   },
   {
     path: 'accordion',

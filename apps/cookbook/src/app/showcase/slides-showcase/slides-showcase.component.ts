@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import {
   advancedExampleComponentHTML,
   customConfigExample,
-  defaultExampleComponentHTML,
   heightExampleComponentCSS,
-  heightExampleComponentHTML,
   slidesDefaultConfig,
 } from '../../examples/slides-example/slides-code-snippets';
 import {
@@ -23,6 +21,9 @@ import {
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
+import { SlidesCustomHeadingExampleComponent } from '~/app/examples/slides-example/examples/slides-custom-heading.component';
+import { SlidesHeightExampleComponent } from '~/app/examples/slides-example/examples/slides-height.component';
+import { SlidesSimpleExampleComponent } from '~/app/examples/slides-example/examples/slides-simple.component';
 @Component({
   selector: 'cookbook-slides-showcase',
   templateUrl: './slides-showcase.component.html',
@@ -34,12 +35,13 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
+    SlidesSimpleExampleComponent,
+    SlidesHeightExampleComponent,
+    SlidesCustomHeadingExampleComponent,
   ],
 })
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;
-  defaultExampleComponentHTML: string = defaultExampleComponentHTML;
-  heightExampleComponentHTML: string = heightExampleComponentHTML;
   heightExampleComponentCSS: string = heightExampleComponentCSS;
   advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
