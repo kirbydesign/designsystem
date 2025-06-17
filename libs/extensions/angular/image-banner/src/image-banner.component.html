@@ -5,10 +5,7 @@
 }
 
 @if (!externalLink) {
-  <kirby-card
-    [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur"
-    (click)="bannerClicked($event)"
-  >
+  <kirby-card [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur">
     <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
   </kirby-card>
 }
@@ -17,11 +14,6 @@
   <div class="blur-image-wrapper">
     <img class="blur-image" [src]="imagePath" alt="" />
   </div>
-
-  <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
-  @if (externalLink) {
-    <a class="main-content-anchor" [href]="externalLink" target="_blank"></a>
-  }
 
   <div class="main-content-wrapper">
     <div class="main-content-image-wrapper">
@@ -48,47 +40,33 @@
               <ng-content select="[bodyText]"></ng-content>
             }
           </p>
-
-          @if (!showButtonInNarrowView && externalLink) {
-            <div class="main-content-body-action-link">
-              <kirby-icon name="link"></kirby-icon>
-            </div>
-          }
         </div>
       </div>
       <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
       @if (externalLink) {
         <a
           kirby-button
-          class="main-content-body-action-text"
-          [class.visible]="showButtonInNarrowView"
+          class="main-content-body-action"
+          [class.reset]="!showButtonInNarrowView"
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           [href]="externalLink"
           target="_blank"
           size="sm"
         >
-          @if (actionButtonText) {
-            {{ actionButtonText }}
-          } @else {
-            {{ translations.get('readMore') }}
-          }
+          <span class="main-content-body-action-text">{{ actionButtonText }}</span>
           <kirby-icon name="link"></kirby-icon>
         </a>
       }
 
       @if (!externalLink) {
         <button
-          [class.visible]="showButtonInNarrowView"
-          class="main-content-body-action-text"
+          [class.reset]="!showButtonInNarrowView"
+          class="main-content-body-action"
           kirby-button
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           size="sm"
         >
-          @if (actionButtonText) {
-            {{ actionButtonText }}
-          } @else {
-            {{ translations.get('readMore') }}
-          }
+          <span class="main-content-body-action-text">{{ actionButtonText }}</span>
         </button>
       }
     </div>

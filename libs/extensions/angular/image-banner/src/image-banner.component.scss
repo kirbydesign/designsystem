@@ -162,11 +162,6 @@ kirby-card {
   }
 }
 
-.main-content-anchor {
-  position: absolute;
-  inset: 0;
-}
-
 .main-content-header {
   p {
     text-overflow: ellipsis;
@@ -230,12 +225,59 @@ kirby-card {
   }
 }
 
-.main-content-body-action-text {
-  display: none;
-  @include if-wide-view {
+a[kirby-button],
+button[kirby-button].main-content-body-action {
+  position: initial;
+  align-self: start;
+  margin: 0;
+
+  @include if-narrow-view {
+    margin: 4px;
+    align-self: center;
+
+    &.reset {
+      // reset button styling
+      border-radius: 0;
+      background: none;
+      padding: 0;
+      color: inherit;
+      cursor: pointer;
+
+      kirby-icon[name='link'] {
+        --kirby-icon-font-size: #{utils.icon-font-size('sm')};
+        --kirby-icon-margin-left: 0;
+      }
+
+      min-width: unset !important;
+
+      --kirby-button-padding-left: 0 !important;
+      --kirby-button-padding-right: 0 !important;
+
+      padding-block-start: 8px;
+      margin: 0;
+    }
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  .main-content-body-action-text {
     align-self: start;
     display: inline-flex;
     margin: 0; // buttons have xxxs margin so reset that
+  }
+}
+@include if-narrow-view {
+  a[kirby-button].reset .main-content-body-action-text {
+    display: none;
+  }
+
+  button[kirby-button].reset .main-content-body-action-text {
+    opacity: 0;
   }
 }
 
