@@ -35,24 +35,4 @@ export class LabelShowcaseComponent {
     description: 'Description',
     default: 'Default',
   };
-  customCssProperties: ApiDescriptionProperty[] = [
-    {
-      name: '--kirby-label-font-size',
-      description: 'Sets the font size of the label.',
-      defaultValue: '1rem',
-      type: ['string'],
-    },
-    {
-      name: '--kirby-label-font-weight',
-      description: 'Sets the font weight of the label.',
-      defaultValue: '400',
-      type: ['string'],
-    },
-    {
-      name: '--kirby-label-color',
-      description: 'Sets the color of the label.',
-      defaultValue: 'var(--kirby-color-text)',
-      type: ['string'],
-    },
-  ];
 }
