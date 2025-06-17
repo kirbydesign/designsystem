@@ -17,6 +17,7 @@ import { FormFieldInputDisabledExampleComponent } from '../../examples/form-fiel
 import { FormFieldInputErrorExampleComponent } from '../../examples/form-field-example/examples/input/error';
 import { FormFieldInputBorderlessExampleComponent } from '../../examples/form-field-example/examples/input/borderless';
 import { FormFieldFocusExampleComponent } from '../../examples/form-field-example/examples/input/focus';
+import { FormFieldInputPadPrecisionDigitsExampleComponent } from '../../examples/form-field-example/examples/input/pad-precision-digits';
 import { FormFieldTextareaDefaultExampleComponent } from '../../examples/form-field-example/examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from '../../examples/form-field-example/examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from '../../examples/form-field-example/examples/textarea/counter';
@@ -45,6 +46,7 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     FormFieldInputCounterFormExampleComponent,
     FormFieldInputNumericExampleComponent,
     FormFieldInputDecimalMaskExampleComponent,
+    FormFieldInputPadPrecisionDigitsExampleComponent,
     FormFieldInputDateExampleComponent,
     FormFieldInputDateNativeExampleComponent,
     FormFieldInputDisabledExampleComponent,
