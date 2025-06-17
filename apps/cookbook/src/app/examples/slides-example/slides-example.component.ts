@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
 import { SlidesHeightExampleComponent } from './examples/slides-height.component';
 import { SlidesSimpleExampleComponent } from './examples/slides-simple.component';
 import { SlidesCustomHeadingExampleComponent } from './examples/slides-custom-heading.component';
@@ -11,6 +12,7 @@ import { SlidesCustomHeadingExampleComponent } from './examples/slides-custom-he
     SlidesHeightExampleComponent,
     SlidesSimpleExampleComponent,
     SlidesCustomHeadingExampleComponent,
+    RouterOutletModule,
   ],
 })
 export class SlidesExampleComponent {}
