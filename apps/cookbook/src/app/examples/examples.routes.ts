@@ -391,29 +391,22 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'slides',
     component: SlidesExampleComponent,
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'slides-simple',
-      },
-      {
-        path: 'slides-advanced',
-        component: SlidesAdvancedExampleComponent,
-      },
-      {
-        path: 'slides-simple',
-        component: SlidesSimpleExampleComponent,
-      },
-      {
-        path: 'slides-height',
-        component: SlidesHeightExampleComponent,
-      },
-      {
-        path: 'slides-custom-heading',
-        component: SlidesCustomHeadingExampleComponent,
-      },
-    ],
+  },
+  {
+    path: 'slides-simple',
+    component: SlidesSimpleExampleComponent,
+  },
+  {
+    path: 'slides-height',
+    component: SlidesHeightExampleComponent,
+  },
+  {
+    path: 'slides-custom-heading',
+    component: SlidesCustomHeadingExampleComponent,
+  },
+  {
+    path: 'slides-advanced',
+    component: SlidesAdvancedExampleComponent,
   },
   {
     path: 'list',
