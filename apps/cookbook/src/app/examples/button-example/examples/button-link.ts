@@ -8,7 +8,6 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  // styleUrl: './link-examples.shared.scss',
 })
 export class ButtonExampleButtonLinkComponent {
   template: string = config.template;
