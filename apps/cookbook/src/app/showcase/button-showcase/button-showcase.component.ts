@@ -13,6 +13,7 @@ import { ButtonExampleUndecoratedComponent } from '../../examples/button-example
 import { ButtonExampleDisabledComponent } from '../../examples/button-example/examples/disabled';
 import { ButtonExampleAriaDisabledComponent } from '../../examples/button-example/examples/aria-disabled';
 import { ButtonExampleLinkComponent } from '../../examples/button-example/examples/link';
+import { ButtonExampleButtonLinkComponent } from '../../examples/button-example/examples/button-link';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
@@ -34,6 +35,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
     ButtonExampleDisabledComponent,
     ButtonExampleAriaDisabledComponent,
     ButtonExampleLinkComponent,
+    ButtonExampleButtonLinkComponent,
     ApiDescriptionPropertiesComponent,
   ],
 })

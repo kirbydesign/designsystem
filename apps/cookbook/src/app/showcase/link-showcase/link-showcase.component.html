@@ -76,16 +76,8 @@
 
 <h2>Button Link</h2>
 <p>
-  In some rare cases, specific UI-needs can warrant using a button that visually appears as a link,
-  even though it actually performs an action (for instance, opening a modal) rather than navigating.
-  In those cases, a button with the
-  <code>kirby-button-link</code>
-  class can be used. This will give you a button that looks and feels like a link, avoiding the
-  semantically incorrect use of an anchor tag without a
-  <code>href</code>
-  attribute.
+  As stated above, you should never use links to perform an action other than navigtion, even if the
+  UI calls for it visually. In this case a
+  <a routerLink="/home/showcase/button">button link</a>
+  should be used, which is a button styled to resamble a link.
 </p>
-
-<cookbook-example-viewer [html]="buttonExample.template">
-  <cookbook-link-example-button #buttonExample></cookbook-link-example-button>
-</cookbook-example-viewer>

@@ -9,6 +9,7 @@ import { ButtonExampleUndecoratedComponent } from './examples/undecorated';
 import { ButtonExampleDisabledComponent } from './examples/disabled';
 import { ButtonExampleAriaDisabledComponent } from './examples/aria-disabled';
 import { ButtonExampleLinkComponent } from './examples/link';
+import { ButtonExampleButtonLinkComponent } from './examples/button-link';
 
 @Component({
   selector: 'cookbook-button-example',
@@ -25,6 +26,7 @@ import { ButtonExampleLinkComponent } from './examples/link';
     ButtonExampleDisabledComponent,
     ButtonExampleAriaDisabledComponent,
     ButtonExampleLinkComponent,
+    ButtonExampleButtonLinkComponent,
   ],
 })
 export class ButtonExampleComponent {}

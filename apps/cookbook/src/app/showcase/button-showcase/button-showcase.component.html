@@ -221,6 +221,22 @@
     <cookbook-button-example-link #linkExample></cookbook-button-example-link>
   </cookbook-example-viewer>
 
+  <h2>Button Link</h2>
+  <p>
+    In some rare cases, specific UI-needs can warrant using a button that visually appears as a
+    link, even though it actually performs an action (for instance, opening a modal) rather than
+    navigating. In those cases, a button with the
+    <code>kirby-button-link</code>
+    class can be used. This will give you a button that looks and feels like a link, avoiding the
+    semantically incorrect use of an anchor tag without a
+    <code>href</code>
+    attribute.
+  </p>
+
+  <cookbook-example-viewer [html]="buttonLinkExample.template">
+    <cookbook-example-button-link #buttonLinkExample></cookbook-example-button-link>
+  </cookbook-example-viewer>
+
   <h2>Accessibility</h2>
   <p>Please refer to:</p>
   <ul>
