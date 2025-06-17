@@ -19,10 +19,9 @@ export class LabelShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
       name: 'direction',
-      description:
-        'Sets the direction of the label content (e.g., left-to-right or right-to-left).',
-      defaultValue: "'ltr'",
-      type: ["'ltr' | 'rtl'"],
+      description: 'Sets the direction of the label to be either "vertical" or "horizontal".',
+      defaultValue: "'horizontal'",
+      type: ["'vertical' | 'horizontal' "],
     },
   ];
 }
