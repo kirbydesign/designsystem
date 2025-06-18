@@ -63,6 +63,17 @@ $decoration-colors-yellow: (
   80: #866816,
   90: #5f4a10,
 ) !default;
+$decoration-color-orange: (
+  10: #ffead8,
+  20: #ffd8b5,
+  30: #ffbb81,
+  40: #ffaa61,
+  50: #ff9d48,
+  60: #d9731b,
+  70: #b56118,
+  80: #8e511b,
+  90: #5a310d,
+) !default;
 $decoration-colors: (
   'blue': $decoration-colors-blue,
   'green': $decoration-colors-green,
