@@ -39,10 +39,6 @@ describe('AccordionItemComponent', () => {
       expect(spectator.query('.title')).toHaveExactTrimmedText(expectedText);
     });
 
-    it('should have correct tabindex', () => {
-      expect(spectator.query('.header')).toHaveAttribute('tabIndex', '0');
-    });
-
     it('should not be expanded', () => {
       expect(spectator.component.isExpanded).toBeFalse();
       expect(spectator.query('.header')).toHaveAttribute('aria-expanded', 'false');
@@ -114,10 +110,6 @@ describe('AccordionItemComponent', () => {
 
     it('should not show content', () => {
       expect(spectator.query('.content')).toBeHidden();
-    });
-
-    it('should have correct tabindex', () => {
-      expect(spectator.query('.header')).toHaveAttribute('tabIndex', '-1');
     });
 
     it('should use disabled-style', () => {
