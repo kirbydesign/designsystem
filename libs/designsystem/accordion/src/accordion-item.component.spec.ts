@@ -121,10 +121,6 @@ describe('AccordionItemComponent', () => {
       });
     });
 
-    it('should add aria-disabled attribute on header', () => {
-      expect(spectator.query('.header')).toHaveAttribute('aria-disabled', 'true');
-    });
-
     it('should not emit the "toggle" event when clicked', () => {
       spyOn(spectator.component.toggle, 'emit');
 

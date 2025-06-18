@@ -10,7 +10,7 @@
       (click)="_onToggleExpanded($event)"
     >
       <span class="state-layer" aria-hidden="true"></span>
-      <div class="title">{{ getTitle() }}</div>
+      <div class="title" [class.bold]="isExpanded">{{ getTitle() }}</div>
       <kirby-icon name="arrow-down"></kirby-icon>
     </button>
   </div>

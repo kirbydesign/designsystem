@@ -40,6 +40,7 @@ $padding: utils.size('s');
     outline: none;
     background: none;
     box-shadow: none;
+    font-family: var(--kirby-font-family);
   }
 }
 
@@ -47,6 +48,10 @@ $padding: utils.size('s');
   flex-grow: 2;
   display: flex;
   font-size: 16px;
+}
+
+.title.bold {
+  font-weight: bold;
 }
 
 .kirby-icon {
@@ -62,7 +67,7 @@ $padding: utils.size('s');
   padding: 0 $padding $padding;
 }
 
-.disabled {
+button[disabled] {
   pointer-events: none;
 
   .kirby-icon {
