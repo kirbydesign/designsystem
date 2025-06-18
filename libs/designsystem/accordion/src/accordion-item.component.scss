@@ -35,11 +35,18 @@ $padding: utils.size('s');
     padding-left: $padding;
     padding-right: $padding;
     user-select: none;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
   }
 }
 
 .title {
   flex-grow: 2;
+  display: flex;
+  font-size: 16px;
 }
 
 .kirby-icon {

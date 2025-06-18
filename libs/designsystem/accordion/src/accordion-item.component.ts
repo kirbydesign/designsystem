@@ -37,6 +37,7 @@ export class AccordionItemComponent implements OnChanges, AfterContentInit {
   @Input() isDisabled: boolean = false;
   @Input() disabledTitle: string;
   @Input() hasPadding: boolean = true;
+  @Input() headingLevel: number;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ContentChildren(ListComponent) listChildren: QueryList<ListComponent>;

@@ -58,11 +58,11 @@ describe('AccordionItemComponent', () => {
     });
 
     it('should emit the "toggle" event when expanded', () => {
-      spyOn(spectator.component.toggle, 'emit');
+      spyOn(spectator.component.toggled, 'emit');
 
       spectator.click('.header');
 
-      expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(true);
+      expect(spectator.component.toggled.emit).toHaveBeenCalledOnceWith(true);
     });
 
     it('should have padding by default', () => {
@@ -97,11 +97,11 @@ describe('AccordionItemComponent', () => {
     });
 
     it('should emit the "toggle" event when collapsed', () => {
-      spyOn(spectator.component.toggle, 'emit');
+      spyOn(spectator.component.toggled, 'emit');
 
       spectator.click('.header');
 
-      expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(false);
+      expect(spectator.component.toggled.emit).toHaveBeenCalledOnceWith(false);
     });
   });
 
@@ -134,11 +134,11 @@ describe('AccordionItemComponent', () => {
     });
 
     it('should not emit the "toggle" event when clicked', () => {
-      spyOn(spectator.component.toggle, 'emit');
+      spyOn(spectator.component.toggled, 'emit');
 
       spectator.click('.header');
 
-      expect(spectator.component.toggle.emit).not.toHaveBeenCalled();
+      expect(spectator.component.toggled.emit).not.toHaveBeenCalled();
     });
   });
   describe('with list', () => {

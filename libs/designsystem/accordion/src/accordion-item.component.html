@@ -1,21 +1,18 @@
 <div class="content-layer">
-  <div
-    (click)="_onToggleExpanded($event)"
-    (keydown.ENTER)="_onToggleExpanded($event)"
-    (keydown.space)="_onToggleExpanded($event)"
-    class="header"
-    role="button"
-    [class.disabled]="isDisabled"
-    [tabindex]="isDisabled ? -1 : 0"
-    [class.expanded]="isExpanded"
-    [attr.aria-disabled]="isDisabled ? true : undefined"
-    [attr.aria-expanded]="isExpanded"
-    [attr.aria-controls]="_contentId"
-    [id]="_titleId"
-  >
-    <span class="state-layer" aria-hidden="true"></span>
-    <div class="title">{{ getTitle() }}</div>
-    <kirby-icon name="arrow-down"></kirby-icon>
+  <div [attr.aria-level]="headingLevel" [attr.role]="headingLevel ? 'heading' : null">
+    <button
+      type="button"
+      class="header"
+      [attr.aria-expanded]="isExpanded"
+      [attr.aria-controls]="_contentId"
+      [id]="_titleId"
+      [disabled]="isDisabled"
+      (click)="_onToggleExpanded($event)"
+    >
+      <span class="state-layer" aria-hidden="true"></span>
+      <div class="title">{{ getTitle() }}</div>
+      <kirby-icon name="arrow-down"></kirby-icon>
+    </button>
   </div>
   <div
     class="content"

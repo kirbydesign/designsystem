@@ -31,7 +31,7 @@ export class AccordionShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
-      description: 'The title that you can click to show the content',
+      description: 'The title for the accordion item',
       defaultValue: 'null',
       type: ['string'],
     },
@@ -64,7 +64,7 @@ export class AccordionShowcaseComponent {
   ];
   events: ApiDescriptionEvent[] = [
     {
-      name: 'toggle',
+      name: 'toggled',
       description: 'Emitted when the state of the accordion item has changed',
       signature: 'EventEmitter<boolean>',
     },
