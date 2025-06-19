@@ -1,10 +1,10 @@
 import { pathsToModuleNameMapper } from 'ts-jest';
 
-const esModules = ['@stencil/core', '@ionic/core', 'ionicons'].join('|');
+const esModules = ['@stencil/core', '@ionic/core', 'ionicons', '@angular/common/locales'].join('|');
 
 // nx doesn't allow importing tsconfig.json: https://github.com/nrwl/nx/issues/14888
 // Use require instead:
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+
 const json = require('../../../tsconfig.base.json');
 
 const mapDistToBarrelFile = (distFolderArray: string[]) => {
