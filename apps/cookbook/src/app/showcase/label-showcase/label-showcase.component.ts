@@ -25,7 +25,7 @@ export class LabelShowcaseComponent {
     {
       name: 'direction',
       description: 'Sets the direction of the label to be either "vertical" or "horizontal".',
-      defaultValue: "'horizontal'",
+      defaultValue: "'vertical'",
       type: ["'vertical' | 'horizontal' "],
     },
   ];
