@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
-import { SlidesHeightExampleComponent } from './examples/slides-height.component';
-import { SlidesSimpleExampleComponent } from './examples/slides-simple.component';
-import { SlidesCustomHeadingExampleComponent } from './examples/slides-custom-heading.component';
+import { SlidesHeightExampleComponent } from './examples/height';
+import { SlidesSimpleExampleComponent } from './examples/simple';
+import { SlidesCustomHeadingExampleComponent } from './examples/custom-heading';
 
 @Component({
   selector: 'cookbook-slides-example',
@@ -12,7 +11,6 @@ import { SlidesCustomHeadingExampleComponent } from './examples/slides-custom-he
     SlidesHeightExampleComponent,
     SlidesSimpleExampleComponent,
     SlidesCustomHeadingExampleComponent,
-    RouterOutletModule,
   ],
 })
 export class SlidesExampleComponent {}

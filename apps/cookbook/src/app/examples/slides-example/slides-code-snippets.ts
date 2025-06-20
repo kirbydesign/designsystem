@@ -40,27 +40,6 @@ export const heightExampleComponentCSS = `kirby-card {
   justify-content: start;
 }`;
 
-export const advancedExampleComponentHTML = `<kirby-slides
-  [slides]="slides"
-  (slideChange)="getDataFromActiveSlide($event)"
-  [slidesOptions]="customConfig"
-  [showNavigation]="true"
-  [title]="title"
-  #slidesInstance>
-
-  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
-    <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
-    <div>{{ slide.cardContent }}</div>
-  </kirby-card>
-
-  <button kirby-button attentionLevel="3" size="xs" (click)="showAll()">See all</button>
-
-</kirby-slides>
-
-<button kirby-button (click)="slidesInstance.slideTo(3)" style="display: block; margin: 24px auto 0">
-  Activate slide no. 4
-</button>`;
-
 export const customConfigExample = `customConfig: KirbySwiperOptions = {
   slidesPerView: 1.1,
   breakpoints: {

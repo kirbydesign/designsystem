@@ -61,10 +61,10 @@ import { SectionHeaderExampleComponent } from './section-header-example/section-
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
-import { SlidesSimpleExampleComponent } from './slides-example/examples/slides-simple.component';
-import { SlidesAdvancedExampleComponent } from './slides-example/examples/slides-advanced.component';
-import { SlidesHeightExampleComponent } from './slides-example/examples/slides-height.component';
-import { SlidesCustomHeadingExampleComponent } from './slides-example/examples/slides-custom-heading.component';
+import { SlidesSimpleExampleComponent } from './slides-example/examples/simple';
+import { SlidesAdvancedExampleComponent } from './slides-example/examples/advanced';
+import { SlidesHeightExampleComponent } from './slides-example/examples/height';
+import { SlidesCustomHeadingExampleComponent } from './slides-example/examples/custom-heading';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
