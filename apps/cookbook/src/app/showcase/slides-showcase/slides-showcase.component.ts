@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  advancedExampleComponentHTML,
   customConfigExample,
   heightExampleComponentCSS,
   slidesDefaultConfig,
@@ -42,6 +43,7 @@ import { SlidesSimpleExampleComponent } from '~/app/examples/slides-example/exam
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;
   heightExampleComponentCSS: string = heightExampleComponentCSS;
+  advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
 
   properties: ApiDescriptionProperty[] = [
