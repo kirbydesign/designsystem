@@ -3,7 +3,7 @@ import { applicationConfig, Preview } from '@storybook/angular';
 
 import { defaultParameters } from 'tools/storybook-config/shared-config';
 import { IconRegistryService } from '@kirbydesign/designsystem/icon';
-import { provideKirby } from '@kirbydesign/designsystem/config';
+import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 /** Zone JS is required by Angular itself. */
 import 'zone.js';
 
@@ -19,7 +19,7 @@ const preview: Preview = {
   decorators: [
     applicationConfig({
       providers: [
-        provideKirby(),
+        provideKirby(withGlobalSetup()),
         provideAppInitializer(() => {
           const iconRegistry = inject(IconRegistryService);
           iconRegistry.addIcons([
