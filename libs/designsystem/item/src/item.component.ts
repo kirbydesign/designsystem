@@ -1,16 +1,21 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
   HostBinding,
   Input,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { RadioComponent } from '@kirbydesign/designsystem/radio';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { IonItem } from '@ionic/angular/standalone';
 
 export enum ItemSize {
   XS = 'xs',
@@ -25,7 +30,9 @@ export enum ItemSize {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class ItemComponent {
+export class ItemComponent implements AfterViewInit {
+  private _linkAttributesToForward = ['rel', 'target', 'download'];
+
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean;
@@ -43,6 +50,9 @@ export class ItemComponent {
   @Input()
   size: ItemSize | `${ItemSize}` = ItemSize.MD;
 
+  @Input()
+  href: string;
+
   @Input() rotateIcon: boolean = false;
 
   @ContentChild(CheckboxComponent, { static: false, read: ElementRef })
@@ -53,6 +63,22 @@ export class ItemComponent {
   private toggle: ElementRef<HTMLElement>;
   @ContentChild(ButtonComponent, { static: false, read: ElementRef })
   private button: ElementRef<HTMLElement>;
+  @ViewChild(IonItem, { static: true, read: ElementRef })
+  private ionItem: ElementRef<HTMLIonItemElement>;
+
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
+
+  ngAfterViewInit(): void {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._linkAttributesToForward,
+      this.renderer,
+      this.ionItem.nativeElement
+    );
+  }
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
@@ -64,10 +90,20 @@ export class ItemComponent {
     }
   }
 
-  get _renderAsButton() {
+  get _renderButton(): boolean {
     // We shouldn't render item as a button if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
 
-    return this.selectable && !(this.checkbox || this.radio || this.toggle || this.button);
+    return this.selectable && !this.containsNestedInteractives();
+  }
+
+  get _renderLink(): string {
+    // We shouldn't render item as a link if the item contains
+    // nested interactive, i.e. checkbox, radio or toggle:
+    return this.containsNestedInteractives() ? undefined : this.href;
+  }
+
+  private containsNestedInteractives(): boolean {
+    return !!(this.checkbox || this.radio || this.toggle || this.button);
   }
 }
