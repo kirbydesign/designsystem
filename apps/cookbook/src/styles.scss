@@ -71,7 +71,7 @@ code:not([class*='language-']) {
 .example-frame {
   position: relative;
   border: 1px solid var(--kirby-medium);
-  border-radius: utils.border-radius('xs');
+  border-radius: 12px;
   padding: utils.size('m');
   margin-bottom: utils.size('l');
 
