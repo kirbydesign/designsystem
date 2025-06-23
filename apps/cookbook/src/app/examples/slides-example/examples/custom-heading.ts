@@ -5,7 +5,7 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 const config = {
   selector: 'cookbook-slides-custom-heading-example',
   template: `<kirby-slides [slides]="slides"   [title]="'Title'" [showNavigation]="true">    
-  <h4 class="kirby-text-medium">Custom heading</h4>
+  <h3 class="kirby-text-medium">Custom heading</h3>
   <kirby-card *kirbySlide="let slide; let i = index" slideStretchHeight [hasPadding]="true">
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
     <div class="card-content">
