@@ -68,6 +68,7 @@ import {
   TranslationService,
 } from '@kirbydesign/designsystem/shared';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
+import { getGlobalConfig } from '@kirbydesign/designsystem/config';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -386,8 +387,7 @@ export class PageComponent
     private navCtrl: NavController,
     private ionicElementPartHelper: IonicElementPartHelper,
     public translations: TranslationService,
-    private htmlDocTitle: Title,
-    @Optional() @Inject(KIRBY_CONFIG) private config: KirbyConfig
+    private htmlDocTitle: Title
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -723,9 +723,9 @@ export class PageComponent
   }
 
   private setHtmlDocTitle() {
-    if (!this.config?.setHtmlDocTitle) return;
     const currentTitle = this.header?.title || this.title || this.toolbarTitle;
-    if (!currentTitle || currentTitle.trim() === '') return;
+    const globalKirbyConfig = getGlobalConfig();
+    if (!globalKirbyConfig?.setHtmlDocTitle || !currentTitle || currentTitle.trim() === '') return;
 
     this.htmlDocTitle.setTitle(currentTitle);
   }

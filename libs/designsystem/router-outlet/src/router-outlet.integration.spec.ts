@@ -16,7 +16,7 @@ import { IonRouterOutlet } from '@kirbydesign/designsystem/tabs';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { RouterOutletComponent, RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
-import { provideKirby } from '@kirbydesign/designsystem/config';
+import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 import { Component } from '@angular/core';
 import { PageModule } from '@kirbydesign/designsystem/page';
 
@@ -82,7 +82,10 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
       IonRouterOutlet,
       RouterOutletModule,
     ],
-    providers: [provideKirby({ focusManager: true, setHtmlDocTitle: true }), provideRouter(routes)],
+    providers: [
+      provideKirby(withGlobalSetup({ focusManager: true, setHtmlDocTitle: true })),
+      provideRouter(routes),
+    ],
   });
 
   beforeEach(() => {
