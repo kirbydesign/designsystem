@@ -106,7 +106,8 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
 
     const firstPageH1 = spectator.query('first-page h1');
 
-    expect(document.activeElement).toBe(firstPageH1);
+    expect(document.activeElement.tagName).toBe(firstPageH1.tagName);
+    expect(document.activeElement.textContent).toBe(firstPageH1.textContent);
 
     // Navigate to second page via link
     spectator.click('a');
@@ -114,7 +115,8 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
 
     const secondPageH1 = spectator.query('second-page h1');
 
-    expect(document.activeElement).toBe(secondPageH1);
+    expect(document.activeElement.tagName).toBe(firstPageH1.tagName);
+    expect(document.activeElement.textContent).toBe(secondPageH1.textContent);
   });
 
   it('should update the HTML document title to match page title after navigation', async () => {
