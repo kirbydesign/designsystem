@@ -24,6 +24,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { SlidesCustomHeadingExampleComponent } from '~/app/examples/slides-example/examples/custom-heading';
 import { SlidesHeightExampleComponent } from '~/app/examples/slides-example/examples/height';
 import { SlidesSimpleExampleComponent } from '~/app/examples/slides-example/examples/simple';
+import { SlidesAdvancedExampleComponent } from '~/app/examples/slides-example/examples/advanced';
 @Component({
   selector: 'cookbook-slides-showcase',
   templateUrl: './slides-showcase.component.html',
@@ -45,6 +46,7 @@ export class SlidesShowcaseComponent {
   heightExampleComponentCSS: string = heightExampleComponentCSS;
   advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
+  advancedSlideExample = SlidesAdvancedExampleComponent;
 
   properties: ApiDescriptionProperty[] = [
     {
