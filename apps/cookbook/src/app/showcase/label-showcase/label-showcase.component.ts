@@ -4,10 +4,7 @@ import { LabelExampleItemComponent } from '../../examples/label-example/examples
 import { LabelFormFieldInputLabelExampleComponent } from '../../examples/label-example/examples/label';
 
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import {
-  ApiDescriptionProperty,
-  ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-label-showcase',
@@ -29,10 +26,4 @@ export class LabelShowcaseComponent {
       type: ["'vertical' | 'horizontal' "],
     },
   ];
-
-  customCssPropertiesColumns: ApiDescriptionPropertyColumns = {
-    name: 'Attribute',
-    description: 'Description',
-    default: 'Default',
-  };
 }
