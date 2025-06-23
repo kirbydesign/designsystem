@@ -46,7 +46,7 @@ npm i @kirbydesign/designsystem
 
 Environment providers for Kirby are set up with the `provideKirby()` function.
 
-In addition, any host-application should use `withGlobalSetup()` when providing Kirby during bootstrapping of the application to registrer Kirby components correctly in the browser.
+In addition, any host application must use `withGlobalSetup()` when providing Kirby during bootstrapping of the application to register Kirby components correctly in the browser.
 
 #### Example Usage
 
@@ -54,7 +54,7 @@ In addition, any host-application should use `withGlobalSetup()` when providing 
 providers: [provideKirby(withGlobalSetup())];
 ```
 
-If multiple Angular contexts exist within the same application, e.g. in a Micro Frontend architecture, the host should set up global config, and Micro Frontends should simply call `provideKirby()`.
+If multiple Angular contexts exist within the same application, e.g. in a Micro Frontend architecture, the host should set up the global config, and the Micro Frontends should simply call `provideKirby()`.
 
 An additional `KirbyConfig` can be provided to set up shared behavior across the application.
 
@@ -76,7 +76,7 @@ The `focusManager` option enables focus management for components rendered in a 
 #### Setting the HTML Document Title
 
 The `setHtmlDocTitle` function updates the `<title>` element of the HTML document to match any Kirby Page title on navigation.
-This is useful for dynamically reflecting the current page or application state in the browser tab, improving usability and accessibility for users.
+This is useful for dynamically reflecting the current page or application state in the browser tab, improving usability and accessibility.
 
 ### Sass
 

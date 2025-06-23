@@ -10,7 +10,7 @@ Version 11 introduces a single breaking change in how the Kirby components are c
 
 <h3 id="global-setup-v11">Global Setup</h3>
 
-To setup Kirby, any host-application should now use `withGlobalSetup()` when providing Kirby.
+To setup Kirby, any host application should now use `withGlobalSetup()` when providing Kirby.
 
 The function should be called once when bootstrapping the application, to set up Kirby in the browser runtime.
 
@@ -20,7 +20,7 @@ The function should be called once when bootstrapping the application, to set up
 providers: [provideKirby(withGlobalSetup())];
 ```
 
-If multiple Angular contexts exist within the same application, e.g. in a Micro Frontend architecture, the host should set up global config, and Micro Frontends should simply call `provideKirby()`.
+If multiple Angular contexts exist within the same application, e.g. in a Micro Frontend architecture, the host should set up the global config, and the Micro Frontends should simply call `provideKirby()`.
 
 ## Version 10.0.0
 

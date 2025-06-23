@@ -75,7 +75,7 @@ export function provideKirby(
 
 /**
  * Sets up global configuration when used with the provideKirby EnvironmentProvider function.
- * Should always be called exactly once per application when bootstrapping, to set up Kirby in the browsers runtime.
+ * Should be called exactly once per application when bootstrapping, to set up Kirby in the browsers runtime.
  *
  * @param config - (Optional) Additional configuration via the `KirbyConfig` object.
  */
