@@ -109,8 +109,7 @@ function setGlobalConfig(config: KirbyConfig | undefined): void {
   if (getGlobalConfig()) {
     console.warn(
       `Global Kirby configuration is already provided through withGlobalSetup() elsewhere. 
-Overwriting the existing configuration at a later time is currently not supported.  
-Consider removing duplicate calls.`
+Overwriting the existing configuration is not recommended. Consider removing duplicate calls.`
     );
   }
 
