@@ -99,8 +99,6 @@ $bullet-inactive-opacity: 0.2;
   }
 }
 
-@include utils.slotted(
-  '.kirby-text-medium, .kirby-text-medium h1, .kirby-text-medium h2, .kirby-text-medium h3, .kirby-text-medium h4, .kirby-text-medium h5, .kirby-text-medium h6'
-) {
+@include utils.slotted('.h1, .h2, .h3, .h4, .h5, .h6') {
   margin: 0;
 }
