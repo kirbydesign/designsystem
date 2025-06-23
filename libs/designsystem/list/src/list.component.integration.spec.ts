@@ -8,6 +8,7 @@ import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { IonItem } from '@ionic/angular/standalone';
 import {
   InfiniteScrollDirective,
   ListComponent,
@@ -26,7 +27,7 @@ describe('ListComponent', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule],
+    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule, IonItem],
     providers: [
       {
         provide: WindowRef,
