@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  advancedExampleComponentHTML,
   customConfigExample,
   heightExampleComponentCSS,
   slidesDefaultConfig,
@@ -44,7 +43,6 @@ import { SlidesAdvancedExampleComponent } from '~/app/examples/slides-example/ex
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;
   heightExampleComponentCSS: string = heightExampleComponentCSS;
-  advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
   advancedSlideExample = SlidesAdvancedExampleComponent;
 
