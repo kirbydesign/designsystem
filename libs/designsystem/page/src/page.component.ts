@@ -348,7 +348,10 @@ export class PageComponent
   private stickyContentIntersectionObserver?: IntersectionObserver;
   private isObservingTitle = false;
   private isObservingActions = false;
-  private docTitleAlreadyHandled = false;
+
+  // If doc title has been set in any way (title prop, toolbar title, header)
+  // we use this flag to not set up observation in `observeTitleDOMChanges`
+  private isDocTitleSetOnce = false;
 
   private unobserveTitleMutation: UnobserveFn;
 
@@ -441,8 +444,7 @@ export class PageComponent
       this.hasPageSubtitle = this.subtitle !== undefined;
     }
     if (changes.title || changes.toolbarTitle) {
-      const titleText = this.title || this.toolbarTitle; // Use toolbarTitle if title is not set
-      this.handleDocumentTitleUpdate(titleText);
+      this.setHTMLDocumentTitle(this.title || this.toolbarTitle);
     }
   }
 
@@ -494,7 +496,6 @@ export class PageComponent
     this.initializeActions();
     this.initializeContent();
     this.initializeStickyContent();
-    this.trackPageTitleChanges();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -550,6 +551,8 @@ export class PageComponent
 
     this.observeTitle();
     this.observeActions();
+    this.setHTMLDocumentTitle(this.header?.title || this.title || this.toolbarTitle);
+    this.observeTitleDOMChanges();
   }
 
   private onLeave() {
@@ -622,10 +625,10 @@ export class PageComponent
       }
 
       // Set document title from header immediately if present, then subscribe to changes
-      this.handleDocumentTitleUpdate(this.header.title);
+      this.setHTMLDocumentTitle(this.header.title);
 
       this.header.title$.pipe(takeUntil(this.ngOnDestroy$)).subscribe(() => {
-        this.handleDocumentTitleUpdate(this.header.title);
+        this.setHTMLDocumentTitle(this.header.title);
       });
     }
   }
@@ -727,25 +730,25 @@ export class PageComponent
     this.isObservingTitle = false;
   }
 
-  private trackPageTitleChanges() {
-    if (this.docTitleAlreadyHandled) return;
+  private observeTitleDOMChanges() {
+    if (this.isDocTitleSetOnce) return; // we never want to observe more than once
 
     const titleArea: HTMLElement | null = this.ionHeaderElement.nativeElement.querySelector(
       'ion-toolbar ion-title .toolbar-title'
     );
 
-    this.handleDocumentTitleUpdate(titleArea?.textContent);
+    this.setHTMLDocumentTitle(titleArea.textContent);
 
     this.unobserveTitleMutation = observeContent(titleArea, () => {
-      this.handleDocumentTitleUpdate(titleArea.textContent);
+      this.setHTMLDocumentTitle(titleArea.textContent);
     });
   }
 
-  private handleDocumentTitleUpdate(title: string) {
-    this.docTitleAlreadyHandled = true;
+  private setHTMLDocumentTitle(title: string) {
     const globalKirbyConfig: KirbyConfig = getGlobalConfig();
     if (!globalKirbyConfig?.setHtmlDocTitle || !title || title.trim() === '') return;
     this.htmlDocTitle.setTitle(title);
+    this.isDocTitleSetOnce = true;
   }
 
   private initializeActions() {
