@@ -49,7 +49,7 @@ import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
-import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
+import { KirbyConfig } from '@kirbydesign/designsystem/config';
 import {
   HeaderActionsDirective,
   HeaderComponent,
@@ -69,6 +69,7 @@ import {
 } from '@kirbydesign/designsystem/shared';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
 import { getGlobalConfig } from '@kirbydesign/designsystem/config';
+import { observeContent } from '@kirbydesign/designsystem/helpers';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -347,6 +348,7 @@ export class PageComponent
   private stickyContentIntersectionObserver?: IntersectionObserver;
   private isObservingTitle = false;
   private isObservingActions = false;
+  private docTitleAlreadyHandled = false;
 
   private unobserveTitleMutation: UnobserveFn;
 
@@ -439,7 +441,8 @@ export class PageComponent
       this.hasPageSubtitle = this.subtitle !== undefined;
     }
     if (changes.title || changes.toolbarTitle) {
-      this.setHtmlDocTitle();
+      const titleText = this.title || this.toolbarTitle; // Use toolbarTitle if title is not set
+      this.handleDocumentTitleUpdate(titleText);
     }
   }
 
@@ -491,6 +494,7 @@ export class PageComponent
     this.initializeActions();
     this.initializeContent();
     this.initializeStickyContent();
+    this.trackPageTitleChanges();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -617,10 +621,11 @@ export class PageComponent
         this.hasInteractiveTitle = true;
       }
 
-      // Set document title immediately if present, then subscribe to changes
-      this.setHtmlDocTitle();
+      // Set document title from header immediately if present, then subscribe to changes
+      this.handleDocumentTitleUpdate(this.header.title);
+
       this.header.title$.pipe(takeUntil(this.ngOnDestroy$)).subscribe(() => {
-        this.setHtmlDocTitle();
+        this.handleDocumentTitleUpdate(this.header.title);
       });
     }
   }
@@ -722,12 +727,25 @@ export class PageComponent
     this.isObservingTitle = false;
   }
 
-  private setHtmlDocTitle() {
-    const currentTitle = this.header?.title || this.title || this.toolbarTitle;
-    const globalKirbyConfig = getGlobalConfig();
-    if (!globalKirbyConfig?.setHtmlDocTitle || !currentTitle || currentTitle.trim() === '') return;
+  private trackPageTitleChanges() {
+    if (this.docTitleAlreadyHandled) return;
 
-    this.htmlDocTitle.setTitle(currentTitle);
+    const titleArea: HTMLElement | null = this.ionHeaderElement.nativeElement.querySelector(
+      'ion-toolbar ion-title .toolbar-title'
+    );
+
+    this.handleDocumentTitleUpdate(titleArea?.textContent);
+
+    this.unobserveTitleMutation = observeContent(titleArea, () => {
+      this.handleDocumentTitleUpdate(titleArea.textContent);
+    });
+  }
+
+  private handleDocumentTitleUpdate(title: string) {
+    this.docTitleAlreadyHandled = true;
+    const globalKirbyConfig: KirbyConfig = getGlobalConfig();
+    if (!globalKirbyConfig?.setHtmlDocTitle || !title || title.trim() === '') return;
+    this.htmlDocTitle.setTitle(title);
   }
 
   private initializeActions() {
