@@ -47,11 +47,7 @@ $padding: utils.size('s');
 .title {
   flex-grow: 2;
   display: flex;
-  font-size: 16px;
-}
-
-.title.bold {
-  font-weight: bold;
+  font-size: utils.font-size('n');
 }
 
 .kirby-icon {
@@ -79,7 +75,7 @@ button[disabled] {
   }
 }
 
-.expanded {
+button[aria-expanded='true'] {
   .title {
     font-weight: utils.font-weight('bold');
   }

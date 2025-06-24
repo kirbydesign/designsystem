@@ -8,10 +8,13 @@ h2:not(:first-child) {
 cookbook-example-viewer > *:first-child {
   display: block;
   margin-bottom: utils.size('s');
-  max-width: 550px;
 }
 
 h3 {
   margin-top: utils.size('l');
   border-bottom: none;
+}
+
+.example-frame {
+  padding: utils.size('xl');
 }

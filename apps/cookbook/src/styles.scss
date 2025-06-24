@@ -62,3 +62,15 @@ code:not([class*='language-']) {
     font-size: smaller;
   }
 }
+
+.example-container {
+  margin: utils.size('l') auto;
+  max-width: 768px;
+}
+
+.example-frame {
+  margin-bottom: utils.size('l');
+  border: 1px solid var(--kirby-medium);
+  border-radius: 12px;
+  padding: utils.size('s');
+}

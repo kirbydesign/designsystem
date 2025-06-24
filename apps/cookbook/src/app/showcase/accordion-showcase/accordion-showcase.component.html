@@ -81,6 +81,30 @@
     </div>
   </cookbook-example-viewer>
 
+  <h2>Accessibility</h2>
+  <p>
+    To enhance accessibility and improve screen reader navigation, a
+    <code>headingLevel</code>
+    can be assigned to the accordion headers to include them in the pages heading structure.
+    Headings use the
+
+    <!-- prettier-ignore -->
+    <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/heading_role">heading</a>
+    role.
+  </p>
+  <p>
+    The
+    <code>aria-level</code>
+    attribute is a required part of the heading role and indicates to assistive technologies that
+    the element should be treated as a heading. For example, applying
+    <code>headingLevel="1"</code>
+    to the accordion defines the header as the main heading of the page. A level 2 heading would
+    represent the first subsection, a level 3 a subsection of that, and so on. Heading levels can be
+    controlled for all accordion items by setting the heading level on the
+    <code>&lt;kirby-accordion&gt;</code>
+    , but for more fine-grained control, it can be set individually on each item instead.
+  </p>
+
   <h2>Properties:</h2>
   <cookbook-api-description-properties
     [properties]="properties"

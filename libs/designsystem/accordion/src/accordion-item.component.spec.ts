@@ -101,6 +101,30 @@ describe('AccordionItemComponent', () => {
     });
   });
 
+  describe('integration with kirby-accordion', () => {
+    it('should set aria-expanded="true" when isExpanded is true', () => {
+      spectator = createHost(`
+      <kirby-accordion>
+        <kirby-accordion-item [isExpanded]="true" title="Item 1">Content</kirby-accordion-item>
+      </kirby-accordion>
+    `);
+
+      const header = spectator.query('.header');
+      expect(header).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    it('should set aria-expanded="false" when isExpanded is false', () => {
+      spectator = createHost(`
+      <kirby-accordion>
+        <kirby-accordion-item [isExpanded]="false" title="Item 1">Content</kirby-accordion-item>
+      </kirby-accordion>
+    `);
+
+      const header = spectator.query('.header');
+      expect(header).toHaveAttribute('aria-expanded', 'false');
+    });
+  });
+
   describe('Disabled', () => {
     beforeEach(() => {
       spectator = createHost(

@@ -1,1 +1,6 @@
 @use '../examples.shared';
+@use '@kirbydesign/core/src/scss/utils';
+
+.example-frame {
+  padding: utils.size('xl');
+}
