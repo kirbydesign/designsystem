@@ -101,27 +101,41 @@ describe('AccordionItemComponent', () => {
     });
   });
 
-  describe('integration with kirby-accordion', () => {
-    it('should set aria-expanded="true" when isExpanded is true', () => {
-      spectator = createHost(`
-      <kirby-accordion>
-        <kirby-accordion-item [isExpanded]="true" title="Item 1">Content</kirby-accordion-item>
-      </kirby-accordion>
-    `);
+  describe('with heading level', () => {
+    describe('when headingLevel is defined', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-accordion-item headingLevel="3" title="Title">content</kirby-accordion-item>`
+        );
+      });
 
-      const header = spectator.query('.header');
-      expect(header).toHaveAttribute('aria-expanded', 'true');
+      it('should set role="heading"', () => {
+        const headingElement = spectator.query('[role="heading"]');
+        expect(headingElement).toBeTruthy();
+      });
+
+      it('should set aria-level to the correct heading level', () => {
+        const headingElement = spectator.query('[role="heading"]');
+        expect(headingElement?.getAttribute('aria-level')).toBe('3');
+      });
     });
 
-    it('should set aria-expanded="false" when isExpanded is false', () => {
-      spectator = createHost(`
-      <kirby-accordion>
-        <kirby-accordion-item [isExpanded]="false" title="Item 1">Content</kirby-accordion-item>
-      </kirby-accordion>
-    `);
+    describe('when headingLevel is undefined', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-accordion-item title="Title">content</kirby-accordion-item>`
+        );
+      });
 
-      const header = spectator.query('.header');
-      expect(header).toHaveAttribute('aria-expanded', 'false');
+      it('should not set role="heading"', () => {
+        const headingElement = spectator.query('[role="heading"]');
+        expect(headingElement).toBeNull();
+      });
+
+      it('should not set aria-level', () => {
+        const element = spectator.query('.header')?.parentElement;
+        expect(element?.hasAttribute('aria-level')).toBeFalse();
+      });
     });
   });
 
