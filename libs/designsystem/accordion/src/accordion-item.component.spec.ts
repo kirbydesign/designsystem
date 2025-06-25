@@ -120,7 +120,7 @@ describe('AccordionItemComponent', () => {
       });
     });
 
-    describe('when headingLevel is undefined', () => {
+    describe('when heading level is undefined', () => {
       beforeEach(() => {
         spectator = createHost(
           `<kirby-accordion-item title="Title">content</kirby-accordion-item>`
