@@ -731,7 +731,7 @@ export class PageComponent
   }
 
   private observeTitleDOMChanges() {
-    if (this.isDocTitleSetOnce) return; // we never want to observe more than once
+    if (this.isDocTitleSetOnce) return; // we never want to observe if the document title is already set via any title properties or already observed
 
     const titleArea: HTMLElement | null = this.ionHeaderElement.nativeElement.querySelector(
       'ion-toolbar ion-title .toolbar-title'
