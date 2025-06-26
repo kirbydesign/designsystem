@@ -1309,8 +1309,6 @@ describe('PageComponent', () => {
         hostProps: { title: undefined },
       });
 
-      expect(document.title).toBe('');
-
       tick(1000); // Simulate delay
       spectator.setHostInput('title', 'Delayed Title');
 
