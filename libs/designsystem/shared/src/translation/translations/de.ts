@@ -10,4 +10,5 @@ export const de: Translation = {
   previousSlide: 'Zur vorherigen Folie',
   selectYear: 'Jahr auswählen',
   readMore: 'Mehr lesen',
+  more: 'Mehr',
 };

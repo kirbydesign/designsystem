@@ -122,6 +122,23 @@
   </em>
 </p>
 
+<h4>Pad precision digits</h4>
+<p>
+  Setting
+  <code>[padPrecisionDigits]="true"</code>
+  ensures that the input value always has the number of fractional digits as specified by the
+  <code>precision</code>
+  property, even if the user enters fewer digits. For example, a value of "3.5" will automatically
+  render as "3.50".
+</p>
+
+<cookbook-example-viewer [html]="inputPadPrecisionDigitsExample.template">
+  <cookbook-form-field-input-pad-precision-digits-example
+    [size]="size"
+    #inputPadPrecisionDigitsExample
+  ></cookbook-form-field-input-pad-precision-digits-example>
+</cookbook-example-viewer>
+
 <h3>Date</h3>
 <cookbook-example-viewer [html]="inputDateExample.template">
   <cookbook-form-field-input-date-example
