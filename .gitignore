@@ -35,6 +35,8 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+.github/copilot-instructions.md
+
 # misc
 /.angular/cache
 /.sass-cache
