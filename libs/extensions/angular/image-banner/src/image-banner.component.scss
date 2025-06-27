@@ -244,26 +244,49 @@ kirby-card {
   border-radius: utils.size('s');
   align-self: center;
 
-  @include if-wide-view {
-    align-self: start;
-    margin: 0; // buttons have xxxs margin so reset that
-  }
-
-  @include if-narrow-view {
-    &:not(show-button-in-narrow-view) {
-      display: none;
-    }
-  }
-
-  &.no-decoration:has(.visually-hidden) {
-    height: 0;
-  }
-
   &::before {
     content: '';
     display: block;
     position: absolute;
     inset: 0;
+  }
+
+  @include if-wide-view {
+    align-self: start;
+    margin: 0; // buttons have xxxs margin so reset that
+
+    &.no-decoration {
+      display: none;
+    }
+  }
+
+  @include if-narrow-view {
+    display: none;
+
+    &.no-decoration {
+      display: inline-flex;
+      font-size: utils.font-size('l');
+    }
+  }
+
+  &.no-decoration:has(.visually-hidden) {
+    // button should be present and focusable for AT
+    // but not take up space so it doesn't affect layout of text
+    min-width: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+:host(.show-button-in-narrow-view) {
+  .main-content-body-action-text {
+    @include if-narrow-view {
+      display: inline-flex;
+    }
+  }
+
+  .no-decoration {
+    display: none;
   }
 }
 
@@ -300,26 +323,4 @@ kirby-card {
   overflow: hidden;
   white-space: nowrap;
   padding: 0;
-}
-
-.main-content-body-action-text.no-decoration {
-  @include if-narrow-view {
-    display: inline-flex;
-  }
-
-  @include if-wide-view {
-    display: none;
-  }
-}
-
-:host(.show-button-in-narrow-view) {
-  .main-content-body-action-text {
-    @include if-narrow-view {
-      display: inline-flex;
-    }
-  }
-
-  .no-decoration {
-    display: none;
-  }
 }
