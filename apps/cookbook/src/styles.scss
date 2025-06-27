@@ -72,8 +72,7 @@ code:not([class*='language-']) {
   position: relative;
   border: 1px solid var(--kirby-medium);
   border-radius: 12px;
-  padding: utils.size('m');
-  margin-bottom: utils.size('l');
+  padding: utils.size('l');
 
   &.no-padding {
     padding: 0;

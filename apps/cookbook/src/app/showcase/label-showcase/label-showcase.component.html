@@ -1,28 +1,35 @@
 <div class="example">
   <p>
-    A kirby-label is a layout element used to structure text content inside
+    Label is a layout element used to structure text content inside
     <a href="https://cookbook.kirby.design/#/home/showcase/item">Items.</a>
-    Recommended usage of kirby-label and its relation to other types of labels are illustrated in
-    the following examples.
+    Recommended use of label and its differences from the HTML-label element are illustrated in the
+    following examples.
   </p>
 
-  <h2>In item</h2>
-  <p>Use the kirby-label inside the kirby-item to add title and detail</p>
-  <cookbook-example-viewer [html]="itemExample.template">
+  <h2>In Item</h2>
+  <h3>Label direction</h3>
+  <p>
+    By default the text inside the label is vertically stacked. Setting the direction property to
+    <code>horizontal</code>
+    aligns the text horizontally. This is useful for composing items with multiple labels where some
+    of them should be aligned next to each other.
+  </p>
+
+  <cookbook-example-viewer [html]="itemVerticalExample.template">
     <div class="example-frame">
-      <cookbook-label-example-item #itemExample></cookbook-label-example-item>
+      <cookbook-label-example-direction #itemVerticalExample></cookbook-label-example-direction>
     </div>
   </cookbook-example-viewer>
 
   <h2>Other label types</h2>
   <p>
-    Despite its naming, the kirby-label component is not to be confused with the HTML-element, which
-    has an entirely different purpose of associating a label text with a form control.
+    Despite its naming, the label component is not to be confused with the HTML-element, which has
+    an entirely different purpose of associating a label text with a form control.
   </p>
   <p>
-    The behavior of the HTML-label element is achieved by using the form-field element, where a
-    label element is rendered under-the-hood around the supplied form controls (input, checkbox,
-    radio-group etc.).
+    In Kirby the behavior of the HTML-label element is achieved by using the form-field component,
+    where a label element is automatically rendered under-the-hood around the supplied form controls
+    (input, checkbox, radio-group etc.).
   </p>
 
   <p>
@@ -36,9 +43,9 @@
 
   <cookbook-example-viewer [html]="inputLabelExample.template">
     <div class="example-frame">
-      <cookbook-label-form-field-input-label-example
+      <cookbook-form-field-input-label-example
         #inputLabelExample
-      ></cookbook-label-form-field-input-label-example>
+      ></cookbook-form-field-input-label-example>
     </div>
   </cookbook-example-viewer>
 </div>

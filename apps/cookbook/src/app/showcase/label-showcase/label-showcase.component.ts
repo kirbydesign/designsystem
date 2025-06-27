@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
-import { LabelExampleItemComponent } from '../../examples/label-example/examples/item';
-import { LabelFormFieldInputLabelExampleComponent } from '../../examples/label-example/examples/label';
-
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { FormFieldInputLabelExampleComponent } from '~/app/examples/form-field-example/examples/input/label';
+import { LabelExampleDirectionComponent } from '~/app/examples/label-example/examples/direction';
 
 @Component({
   selector: 'cookbook-label-showcase',
@@ -12,9 +11,9 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./label-showcase.component.scss'],
   imports: [
     ExampleViewerComponent,
-    LabelExampleItemComponent,
-    LabelFormFieldInputLabelExampleComponent,
     ApiDescriptionPropertiesComponent,
+    FormFieldInputLabelExampleComponent,
+    LabelExampleDirectionComponent,
   ],
 })
 export class LabelShowcaseComponent {
