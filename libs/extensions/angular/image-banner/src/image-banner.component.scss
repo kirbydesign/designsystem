@@ -105,6 +105,7 @@ kirby-card {
   height: 100%;
 
   &:focus-within {
+    // no focus outline on interactive element itself, only surrounding card
     @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
 
     .main-content-body-action-text {
@@ -279,11 +280,11 @@ kirby-card {
   }
 
   &.no-decoration:has(.visually-hidden) {
-    // button should be present and focusable for AT
-    // but not take up space so it doesn't affect layout of text
-    min-width: 0;
-    width: 0;
-    height: 0;
+    // Button should be present and focusable for AT, while taking up as little space as possible
+    // If set to 0px, screen readers have a hard time adding a proper focus outline
+    min-width: 1px;
+    width: 1px;
+    height: 1px;
   }
 }
 
