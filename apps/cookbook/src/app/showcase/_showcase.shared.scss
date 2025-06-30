@@ -13,17 +13,6 @@ cookbook-code-viewer {
   margin-bottom: utils.size('l');
 }
 
-.example-frame {
-  position: relative;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: utils.size('m');
-
-  &.no-padding {
-    padding: 0;
-  }
-}
-
 // Style the Keyboard Input element. Borrowed from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd
 kbd {
   border-radius: 3px;

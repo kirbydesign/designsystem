@@ -92,6 +92,7 @@ import { ModalEmbeddedAlertExampleComponent } from './modal-example/alert-exampl
 import { ModalComponentExampleComponent } from './modal-example/modal-component-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { TabNavigationExampleComponent } from './tab-navigation-example/tab-navigation-example.component';
+import { LabelExampleComponent } from './label-example/label-example.component';
 
 export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
@@ -606,6 +607,10 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'menu',
     component: MenuExampleComponent,
+  },
+  {
+    path: 'label',
+    component: LabelExampleComponent,
   },
   {
     path: 'page-tab-navigation',
