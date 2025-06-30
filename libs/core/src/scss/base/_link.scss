@@ -9,7 +9,8 @@ $_focus-ring-border-radius: utils.border-radius('xxs');
  */
 :link,
 :visited,
-a[modal-router-link] {
+a[modal-router-link],
+.kirby-button-link {
   @include interaction-state.apply-focus-visible($gap: $_focus-ring-gap) {
     outline: none;
     border-radius: $_focus-ring-border-radius;
@@ -20,10 +21,18 @@ a[modal-router-link] {
   text-decoration: underline;
 }
 
-a {
+a,
+.kirby-button-link {
   @include interaction-state.apply-hover {
     text-decoration-color: transparent;
   }
 
   transition: interaction-state.transition();
+}
+
+button.kirby-button-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
 }

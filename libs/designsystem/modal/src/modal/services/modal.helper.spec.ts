@@ -124,7 +124,10 @@ describe('ModalHelper', () => {
 
   beforeAll(() => {
     dummyPresentingElement = window.document.createElement('div');
-    dummyPresentingElement.innerHTML = '<h1>Dummy Presenting Element</h1>';
+    dummyPresentingElement.innerHTML = `
+      <h1>Dummy Presenting Element</h1>
+      <button id="focus-btn">Dummy Focusable Button</button>
+    `;
     dummyPresentingElement.style.position = 'absolute';
     dummyPresentingElement.style.top = '0px';
     dummyPresentingElement.style.right = '0px';
@@ -561,6 +564,28 @@ describe('ModalHelper', () => {
 
         expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
       });
+    });
+  });
+
+  describe('focus', () => {
+    it('should be restored to the activating button after modal is dismissed', async () => {
+      const focusButton = window.document.getElementById('focus-btn');
+
+      focusButton.focus();
+
+      expect(document.activeElement).toBe(focusButton);
+
+      await openModal(PageTitleEmbeddedComponent);
+      const ionTitle = ionModal.querySelector('ion-title');
+      await TestHelper.ionComponentOnReady(ionTitle);
+
+      // Once opened the modal should take focus
+      expect(document.activeElement).not.toBe(focusButton);
+
+      await overlay.dismiss();
+
+      // After modal is closed, focus should return to the button
+      expect(document.activeElement).toBe(focusButton);
     });
   });
 });

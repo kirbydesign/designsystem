@@ -73,3 +73,12 @@
 <cookbook-example-viewer [html]="trailingTab.template" [css]="trailingTab.style">
   <cookbook-link-example-trailing-icon #trailingTab></cookbook-link-example-trailing-icon>
 </cookbook-example-viewer>
+
+<h2>Button Link</h2>
+<p>
+  As stated above, you should never use links to perform an action other than navigtion, even if the
+  UI calls for it visually. In case a link-like appearance is strictly needed, a
+  <a routerLink="/home/showcase/button">button link</a>
+  should be used, which is a button styled to resemble a link. Some visual button affordances are
+  lost doing this, so it is recommended to use an ordinary button whenever possible.
+</p>

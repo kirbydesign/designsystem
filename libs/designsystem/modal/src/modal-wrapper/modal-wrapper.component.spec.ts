@@ -160,6 +160,8 @@ describe('ModalWrapperComponent', () => {
       spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
 
+      await TestHelper.whenTrue(() => document.activeElement !== document.body);
+
       expect(document.activeElement).toEqual(ionTitle);
     });
   });

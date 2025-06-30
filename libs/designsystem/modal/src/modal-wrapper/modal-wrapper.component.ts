@@ -428,10 +428,16 @@ export class ModalWrapperComponent
   }
 
   private focusModalTitle() {
-    const focusAlreadyInModal = this.ionModalElement?.contains(document.activeElement);
-    if (focusAlreadyInModal) return;
     this.ionModalDidPresent.pipe(takeUntil(this.willClose$)).subscribe(() => {
-      this.ionTitleElement?.nativeElement.focus();
+      // Use queueMicrotask to defer our focus until after Ionic has saved a reference
+      // to the element that should have focus restored when modal is closed.
+      // https://github.com/ionic-team/ionic-framework/blob/v8.6.1/core/src/utils/overlays.ts#L592
+      queueMicrotask(() => {
+        const focusAlreadyInModal = this.ionModalElement?.contains(document.activeElement);
+        if (focusAlreadyInModal) return;
+
+        this.ionTitleElement?.nativeElement.focus();
+      });
     });
   }
 

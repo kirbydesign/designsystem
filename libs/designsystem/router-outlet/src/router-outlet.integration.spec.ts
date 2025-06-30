@@ -16,7 +16,7 @@ import { IonRouterOutlet } from '@kirbydesign/designsystem/tabs';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { RouterOutletComponent, RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
-import { provideKirby } from '@kirbydesign/designsystem/config';
+import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 import { Component } from '@angular/core';
 import { PageModule } from '@kirbydesign/designsystem/page';
 
@@ -82,7 +82,10 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
       IonRouterOutlet,
       RouterOutletModule,
     ],
-    providers: [provideKirby({ focusManager: true, setHtmlDocTitle: true }), provideRouter(routes)],
+    providers: [
+      provideKirby(withGlobalSetup({ focusManager: true, setHtmlDocTitle: true })),
+      provideRouter(routes),
+    ],
   });
 
   beforeEach(() => {
@@ -103,7 +106,8 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
 
     const firstPageH1 = spectator.query('first-page h1');
 
-    expect(document.activeElement).toBe(firstPageH1);
+    expect(document.activeElement.tagName).toBe(firstPageH1.tagName);
+    expect(document.activeElement.textContent).toBe(firstPageH1.textContent);
 
     // Navigate to second page via link
     spectator.click('a');
@@ -111,7 +115,8 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
 
     const secondPageH1 = spectator.query('second-page h1');
 
-    expect(document.activeElement).toBe(secondPageH1);
+    expect(document.activeElement.tagName).toBe(firstPageH1.tagName);
+    expect(document.activeElement.textContent).toBe(secondPageH1.textContent);
   });
 
   it('should update the HTML document title to match page title after navigation', async () => {

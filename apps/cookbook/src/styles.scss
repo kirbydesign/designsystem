@@ -69,8 +69,12 @@ code:not([class*='language-']) {
 }
 
 .example-frame {
-  margin-bottom: utils.size('l');
+  position: relative;
   border: 1px solid var(--kirby-medium);
   border-radius: 12px;
-  padding: utils.size('s');
+  padding: utils.size('l');
+
+  &.no-padding {
+    padding: 0;
+  }
 }
