@@ -104,12 +104,15 @@ kirby-card {
   container-type: inline-size;
   height: 100%;
 
+  // Apply focus styles to the card when any child element (except those inside .dismiss) is focused
   &:focus-within {
-    // no focus outline on interactive element itself, only surrounding card
-    @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
+    &:not(:has(.dismiss :focus)) {
+      @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
 
-    .main-content-body-action-text {
-      box-shadow: none;
+      // No focus outline on interactive element itself, only surrounding card
+      .main-content-body-action-text {
+        box-shadow: none;
+      }
     }
   }
 }
@@ -271,20 +274,20 @@ kirby-card {
       &:is(a) {
         width: utils.size('m');
         min-width: utils.size('m');
+
+        kirby-icon {
+          font-size: utils.size('m');
+        }
       }
 
-      kirby-icon {
-        font-size: utils.size('m');
+      &:is(button) {
+        // Narrow view button should be present and focusable for AT, while taking up as little space as possible
+        // If set to 0px, screen readers have a hard time adding a proper focus outline
+        min-width: 1px;
+        width: 1px;
+        height: 1px;
       }
     }
-  }
-
-  &.no-decoration:has(.visually-hidden) {
-    // Button should be present and focusable for AT, while taking up as little space as possible
-    // If set to 0px, screen readers have a hard time adding a proper focus outline
-    min-width: 1px;
-    width: 1px;
-    height: 1px;
   }
 }
 
