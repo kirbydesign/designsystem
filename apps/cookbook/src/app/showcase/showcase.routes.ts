@@ -56,6 +56,7 @@ import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 import { TabNavigationShowcaseComponent } from './page-tab-navigation-showcase/tab-navigation-showcase.component';
+import { LabelShowcaseComponent } from './label-showcase/label-showcase.component';
 
 export const SHOWCASE_ROUTES: Routes = [
   {
@@ -299,6 +300,10 @@ export const SHOWCASE_ROUTES: Routes = [
       {
         path: 'header',
         component: HeaderShowcaseComponent,
+      },
+      {
+        path: 'label',
+        component: LabelShowcaseComponent,
       },
     ],
   },
