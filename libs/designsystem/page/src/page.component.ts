@@ -349,7 +349,7 @@ export class PageComponent
   private isObservingTitle = false;
   private isObservingActions = false;
 
-  // If doc title has been set in any way (title prop, toolbar title, header)
+  // If doc title has been set in any way (title, toolbarTitle, header)
   // we use this flag to not set up observation in `observeTitleDOMChanges`
   private isDocTitleSetOnce = false;
 
