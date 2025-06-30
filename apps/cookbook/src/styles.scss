@@ -62,3 +62,19 @@ code:not([class*='language-']) {
     font-size: smaller;
   }
 }
+
+.example-container {
+  margin: utils.size('l') auto;
+  max-width: 768px;
+}
+
+.example-frame {
+  position: relative;
+  border: 1px solid var(--kirby-medium);
+  border-radius: 12px;
+  padding: utils.size('l');
+
+  &.no-padding {
+    padding: 0;
+  }
+}
