@@ -265,7 +265,16 @@ kirby-card {
 
     &.no-decoration {
       display: inline-flex;
-      font-size: utils.font-size('l');
+      margin: 0;
+
+      &:is(a) {
+        width: utils.size('m');
+        min-width: utils.size('m');
+      }
+
+      kirby-icon {
+        font-size: utils.size('m');
+      }
     }
   }
 
