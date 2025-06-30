@@ -27,6 +27,42 @@
       left: 0;
     }
   }
+
+  // Colors
+  &.success {
+    ion-badge {
+      --background: #{utils.get-color('success')};
+      --color: #{utils.get-color('success-contrast')};
+    }
+  }
+
+  &.warning {
+    ion-badge {
+      --color: #{utils.get-color('warning-contrast')};
+    }
+
+    &.sm {
+      ion-badge {
+        --background: #{utils.get-color('warning-shade')};
+      }
+    }
+
+    &.md {
+      ion-badge {
+        --background: #{utils.get-color('warning')};
+        @include utils.slotted(kirby-icon) {
+          --background: #{utils.get-color('warning-tint')};
+        }
+      }
+    }
+  }
+
+  &.danger {
+    ion-badge {
+      --background: #{utils.get-color('danger')};
+      --color: #{utils.get-text-color('white')};
+    }
+  }
 }
 
 :host(.sm) {
@@ -48,19 +84,6 @@
 
     min-width: utils.size('s');
     min-height: utils.size('s');
-  }
-}
-
-@each $color-name, $color-value in utils.$notification-colors {
-  $text-color: utils.get-color($color-name + '-contrast');
-  @if $color-name == 'danger' {
-    $text-color: utils.get-text-color('white');
-  }
-  :host(.#{$color-name}) {
-    ion-badge {
-      --background: #{utils.get-color($color-name)};
-      --color: #{var(--kirby-badge-color, #{$text-color})};
-    }
   }
 }
 
