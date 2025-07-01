@@ -31,13 +31,13 @@
     <div class="main-content">
       <div class="text-content-layout">
         <div class="main-content-header">
-          <p class="kirby-text-normal-bold">
+          <span class="kirby-text-normal-bold">
             @if (title) {
               {{ title }}
             } @else {
-              <ng-content select="[title]"></ng-content>
+              <ng-content select="h1,h2,h3,h4,h5,h6,[title]"></ng-content>
             }
-          </p>
+          </span>
         </div>
 
         <div class="main-content-body">

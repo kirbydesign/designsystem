@@ -42,6 +42,25 @@ export const Default: Story = {
 };
 
 /**
+ * Example of using custom markup for the heading/title of the image banner.
+ */
+export const CustomHeading: Story = {
+  args: {
+    bodyText: 'This is the body text.',
+    imagePath: 'assets/images/leaves.jpg',
+    backgroundBlur: 'dark',
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-x-image-banner ${argsToTemplate(args)}>
+        <h2 title class="kirby-text-normal-bold"> Custom Heading Example </h2>
+      </kirby-x-image-banner>
+    `,
+  }),
+};
+
+/**
  * By default the background is a darkened and blurred version of the provided image.
  * If needed, the background blur property can be set to `light` to make the background brigther, or `none` to make the background white.
  * You can test out different background images by inserting your own link for the `imagePath` in the API table above.

@@ -14,4 +14,15 @@ describe('BannerComponent', () => {
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
   });
+
+  it('should render custom heading content', () => {
+    spectator = createHost(`
+      <kirby-x-image-banner>
+        <h2 title class="kirby-text-normal-bold">Custom Heading Example</h2>
+      </kirby-x-image-banner>
+    `);
+    const heading = spectator.query('h2.kirby-text-normal-bold');
+    expect(heading).toBeTruthy();
+    expect(heading?.textContent).toContain('Custom Heading Example');
+  });
 });
