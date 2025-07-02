@@ -728,6 +728,8 @@ export class PageComponent
   }
 
   private observeTitleDOMChanges() {
+    const globalKirbyConfig: KirbyConfig = getGlobalConfig();
+    if (!globalKirbyConfig?.setHtmlDocTitle) return;
     if (this.isDocTitleSet) return; // we never want to observe if the document title is already set via any title properties (or already observed)
 
     const titleArea: HTMLElement | null = this.ionHeaderElement.nativeElement.querySelector(

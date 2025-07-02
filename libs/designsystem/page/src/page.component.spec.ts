@@ -1331,6 +1331,19 @@ describe('PageComponent', () => {
       );
       expect(document.title).toBe('Preferred Title');
     });
+
+    it('should set the document title to kirby header title', async () => {
+      spectator = createHost(
+        `<kirby-page>
+          <kirby-header [title]="title"></kirby-header>
+        </kirby-page>`,
+        {
+          hostProps: { title: testTitle },
+        }
+      );
+
+      expect(document.title).toBe(testTitle);
+    });
   });
 });
 
