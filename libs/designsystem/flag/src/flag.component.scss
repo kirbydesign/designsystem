@@ -37,6 +37,22 @@
     padding-left: utils.size('xxxs');
     padding-right: utils.size('xxxs');
   }
+
+  // Colors
+  &.success {
+    -kirby-flag-background-color: #{utils.get-color('success-tint')};
+  }
+
+  &.warning {
+    -kirby-flag-background-color: #{utils.get-color('warning-tint')};
+  }
+
+  &.danger {
+    -kirby-flag-background-color: #{utils.get-color('danger-tint')};
+  }
+
+  --kirby-flag-border-color: var(--kirby-flag-background-color);
+  --kirby-flag-color: #{utils.get-color('black')};
 }
 
 $_flag-notification-colors-map: (
@@ -63,7 +79,6 @@ $_flag-notification-colors-map: (
       --kirby-flag-background-color: #{utils.get-color($variant_shade)};
     }
 
-    --kirby-flag-color: #{utils.get-color('black')};
     --kirby-flag-border-color: var(--kirby-flag-background-color);
   }
 }

@@ -29,39 +29,29 @@
   }
 
   // Colors
-  &.success {
-    ion-badge {
-      --background: #{utils.get-color('success')};
-      --color: #{utils.get-color('success-contrast')};
+  &.success ion-badge {
+    --background: #{utils.get-color('success')};
+    --color: #{utils.get-color('success-contrast')};
+  }
+
+  &.warning ion-badge {
+    --color: #{utils.get-color('warning-contrast')};
+  }
+
+  &.warning.sm ion-badge {
+    --background: #{utils.get-color('warning-shade')};
+  }
+
+  &.warning.md ion-badge {
+    --background: #{utils.get-color('warning')};
+    @include utils.slotted(kirby-icon) {
+      --background: #{utils.get-color('warning-tint')};
     }
   }
 
-  &.warning {
-    ion-badge {
-      --color: #{utils.get-color('warning-contrast')};
-    }
-
-    &.sm {
-      ion-badge {
-        --background: #{utils.get-color('warning-shade')};
-      }
-    }
-
-    &.md {
-      ion-badge {
-        --background: #{utils.get-color('warning')};
-        @include utils.slotted(kirby-icon) {
-          --background: #{utils.get-color('warning-tint')};
-        }
-      }
-    }
-  }
-
-  &.danger {
-    ion-badge {
-      --background: #{utils.get-color('danger')};
-      --color: #{utils.get-text-color('white')};
-    }
+  &.danger ion-badge {
+    --background: #{utils.get-color('danger')};
+    --color: #{utils.get-text-color('white')};
   }
 }
 

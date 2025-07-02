@@ -26,7 +26,7 @@ $decoration-colors-green: (
   40: #64db9b,
   50: #47d489,
   60: #3cb374,
-  70: #31925f,
+  70: #349c65,
   80: #267149,
   90: #1b5134,
 ) !default;
@@ -83,14 +83,18 @@ $decoration-colors: (
   'orange': $decoration-color-orange,
 ) !default;
 $notification-colors: (
-  'success': map.get($decoration-colors, 'green', 50),
+  'success': map.get($decoration-colors, 'green', 30),
   'warning': map.get($decoration-colors, 'orange', 40),
   'danger': map.get($decoration-colors, 'red', 50),
 ) !default;
 $shade-tint-colors: (
+  'success-tint': map.get($decoration-colors, 'green', 30),
+  'success-shade': map.get($decoration-colors, 'green', 70),
   'warning-tint': map.get($decoration-colors, 'orange', 30),
   'warning-shade': map.get($decoration-colors, 'orange', 60),
-);
+  'danger-tint': map.get($decoration-colors, 'red', 30),
+  'danger-shade': map.get($decoration-colors, 'red', 60),
+) !default;
 $system-colors: (
   'background-color': #f6f6f6,
   'white': #fff,
@@ -181,26 +185,18 @@ $main-colors: map.remove(
   }
 }
 
-@function _get-tint-value($color, $weight: 10) {
+@function _get-tint-value($color-name, $color, $weight: 10) {
+  @if map.has-key($shade-tint-colors, $color-name) {
+    @return map.get($shade-tint-colors, $color-name);
+  }
   @return color.mix(white, $color, $weight * 1%);
 }
 
-@function _set-tint-value($color-name, $color) {
+@function _get-shade-value($color-name, $color, $weight: 12) {
   @if map.has-key($shade-tint-colors, $color-name) {
     @return map.get($shade-tint-colors, $color-name);
   }
-  @return _get-tint-value($color);
-}
-
-@function _get-shade-value($color, $weight: 12) {
   @return color.mix(black, $color, $weight * 1%);
-}
-
-@function _set-shade-value($color-name, $color) {
-  @if map.has-key($shade-tint-colors, $color-name) {
-    @return map.get($shade-tint-colors, $color-name);
-  }
-  @return _get-shade-value($color);
 }
 
 @function _get-rgb-values($color) {
@@ -217,10 +213,14 @@ $main-colors: map.remove(
         #{$color-name}-rgb: _get-rgb-values($color-value),
         #{$color-name}-contrast: _get-color-contrast($color-value),
         #{$color-name}-contrast-rgb: _get-rgb-values(_get-color-contrast($color-value)),
-        #{$color-name}-shade: _set-shade-value(#{$color-name}-shade, $color-value),
-        #{$color-name}-shade-rgb: _get-rgb-values(_get-shade-value($color-value)),
-        #{$color-name}-tint: _set-tint-value(#{$color-name}-tint, $color-value),
-        #{$color-name}-tint-rgb: _get-rgb-values(_get-tint-value($color-value)),
+        #{$color-name}-shade: _get-shade-value(#{$color-name}-shade, $color-value),
+        #{$color-name}-shade-rgb: _get-rgb-values(
+            _get-shade-value(#{$color-name}-tint, $color-value)
+          ),
+        #{$color-name}-tint: _get-tint-value(#{$color-name}-tint, $color-value),
+        #{$color-name}-tint-rgb: _get-rgb-values(
+            _get-tint-value(#{$color-name}-tint, $color-value)
+          ),
         #{$color-name}-color-brightness: _get-color-brightness($color-value),
       ),
       $color-list
