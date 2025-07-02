@@ -135,6 +135,7 @@ describe('NumberInputDirective', () => {
     });
 
     describe('with padPrecisionDigits', () => {
+      locale = 'en-GB';
       it('should not pad fractional digits when padPrecisionDigits is not set', () => {
         spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
         spectator.typeInElement('0.1', spectator.element);
@@ -142,6 +143,7 @@ describe('NumberInputDirective', () => {
       });
 
       it('should pad to the default precision when padPrecisionDigits is true', () => {
+        locale = 'en-GB';
         spectator = createDirective(
           `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
         );
@@ -150,6 +152,7 @@ describe('NumberInputDirective', () => {
       });
 
       it('should correctly pad input value to the specified precision', () => {
+        locale = 'en-GB';
         spectator = createDirective(
           `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="3" />`
         );
@@ -158,6 +161,7 @@ describe('NumberInputDirective', () => {
       });
 
       it('should pad fractional digits when none are entered', () => {
+        locale = 'en-GB';
         spectator = createDirective(
           `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="2" />`
         );

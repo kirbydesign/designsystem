@@ -14,7 +14,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
-import { provideKirby } from '@kirbydesign/designsystem/config';
+import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 import { environment } from './environments/environment';
 
 import { AppComponent } from './app/app.component';
@@ -30,7 +30,7 @@ registerLocaleData(localeData);
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(BrowserModule, FormsModule),
-    provideKirby(),
+    provideKirby(withGlobalSetup()),
     provideHttpClient(),
     provideAnimations(),
     provideRouter(

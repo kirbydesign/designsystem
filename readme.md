@@ -42,43 +42,41 @@ Install through npm:
 npm i @kirbydesign/designsystem
 ```
 
-### Include KirbyModule
+### Provide Kirby
 
-#### NgModule based application
+Environment providers for Kirby are set up with the `provideKirby()` function.
 
-Import the `KirbyModule` in your `AppModule` :
+In addition, any host application must use `withGlobalSetup()` when providing Kirby during bootstrapping of the application to register Kirby components correctly in the browser.
 
-```ts
-import { KirbyModule } from '@kirbydesign/designsystem';
-
-...
-
-@NgModule({
-    imports: [
-        ...,
-        KirbyModule
-    ],
-    ...
-})
-export class AppModule {}
-```
-
-#### Standalone application
-
-Set up environment providers for Kirby with the `provideKirby()` function:
+#### Example Usage
 
 ```ts
-import { provideKirby } from '@kirbydesign/designsystem';
-
-...
-
-await bootstrapApplication(RootComponent, {
-  providers: [
-    ...,
-    provideKirby() // optionally takes config object, e.g. { focusManager: true, setHtmlDocTitle: true }
-  ]
-});
+providers: [provideKirby(withGlobalSetup())];
 ```
+
+If multiple Angular contexts exist within the same application, e.g. in a Micro Frontend architecture, the host should set up the global config, and the Micro Frontends should simply call `provideKirby()`.
+
+An additional `KirbyConfig` can be provided to set up shared behavior across the application.
+
+#### Example Host Application Config
+
+```ts
+provideKirby(
+  withGlobalSetup({
+    focusManager: true,
+    setHtmlDocTitle: true,
+  })
+);
+```
+
+#### Focus Management
+
+The `focusManager` option enables focus management for components rendered in a `kirby-router-outlet`. For instance, when a `kirby-page` enters the view, focus will automatically be set to the primary heading (`h1`) inside the page toolbar. This improves accessibility and keyboard navigation.
+
+#### Setting the HTML Document Title
+
+The `setHtmlDocTitle` function updates the `<title>` element of the HTML document to match any Kirby Page title on navigation.
+This is useful for dynamically reflecting the current page or application state in the browser tab, improving usability and accessibility.
 
 ### Sass
 

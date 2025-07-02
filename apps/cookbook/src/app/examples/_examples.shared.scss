@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../shared/example-frame';
 
 :host {
   display: block;
@@ -17,9 +18,6 @@
   }
 
   h3 {
-    font-size: utils.font-size('xs');
-    color: utils.get-color('semi-dark');
-    text-transform: uppercase;
     margin-top: utils.size('xs');
     margin-bottom: utils.size('xxxs');
   }

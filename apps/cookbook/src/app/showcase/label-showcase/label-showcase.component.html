@@ -1,0 +1,57 @@
+<div class="example">
+  <p>
+    Label is a layout element used to structure text content inside
+    <a href="https://cookbook.kirby.design/#/home/showcase/item">Items.</a>
+    Recommended use of label and its differences from the HTML-label element are illustrated in the
+    following examples.
+  </p>
+
+  <h2>In Item</h2>
+  <h3>Label direction</h3>
+  <p>
+    By default the text inside the label is vertically stacked. Setting the direction property to
+    <code>horizontal</code>
+    aligns the text horizontally. This is useful for composing items with multiple labels where some
+    of them should be aligned next to each other.
+  </p>
+
+  <cookbook-example-viewer [html]="itemVerticalExample.template">
+    <div class="example-frame">
+      <cookbook-label-example-direction #itemVerticalExample></cookbook-label-example-direction>
+    </div>
+  </cookbook-example-viewer>
+
+  <h2>Other label types</h2>
+  <p>
+    Despite its naming, the label component is not to be confused with the HTML-element, which has
+    an entirely different purpose of associating a label text with a form control.
+  </p>
+  <p>
+    In Kirby the behavior of the HTML-label element is achieved by using the form-field component,
+    where a label element is automatically rendered under-the-hood around the supplied form controls
+    (input, checkbox, radio-group etc.).
+  </p>
+
+  <p>
+    More information about the advantages of this approach can be found in the
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label">
+      MDN label documentation
+    </a>
+    .
+  </p>
+  <h3>Form Field with label</h3>
+
+  <cookbook-example-viewer [html]="inputLabelExample.template">
+    <div class="example-frame">
+      <cookbook-form-field-input-label-example
+        #inputLabelExample
+      ></cookbook-form-field-input-label-example>
+    </div>
+  </cookbook-example-viewer>
+</div>
+
+<h2>API Description</h2>
+<h3>Label properties:</h3>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
