@@ -348,10 +348,7 @@ export class PageComponent
   private stickyContentIntersectionObserver?: IntersectionObserver;
   private isObservingTitle = false;
   private isObservingActions = false;
-
-  // If doc title has been set in any way (title, toolbarTitle, header)
-  // we use this flag to not set up observation in `observeTitleDOMChanges`
-  private isDocTitleSetOnce = false;
+  private isDocTitleSet = false;
 
   private unobserveTitleMutation: UnobserveFn;
 
@@ -731,7 +728,7 @@ export class PageComponent
   }
 
   private observeTitleDOMChanges() {
-    if (this.isDocTitleSetOnce) return; // we never want to observe if the document title is already set via any title properties or already observed
+    if (this.isDocTitleSet) return; // we never want to observe if the document title is already set via any title properties (or already observed)
 
     const titleArea: HTMLElement | null = this.ionHeaderElement.nativeElement.querySelector(
       'ion-toolbar ion-title .toolbar-title'
@@ -748,7 +745,7 @@ export class PageComponent
     const globalKirbyConfig: KirbyConfig = getGlobalConfig();
     if (!globalKirbyConfig?.setHtmlDocTitle || !title || title.trim() === '') return;
     this.htmlDocTitle.setTitle(title);
-    this.isDocTitleSetOnce = true;
+    this.isDocTitleSet = true;
   }
 
   private initializeActions() {
