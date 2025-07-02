@@ -66,8 +66,8 @@ describe('ToastHelper', () => {
       type ColorStep = [string, number];
 
       const messageTypeColorMap = new Map<MessageType, ColorStep>([
-        ['success', ['green', 40]],
-        ['warning', ['yellow', 40]],
+        ['success', ['green', 30]],
+        ['warning', ['orange', 50]],
       ]);
 
       messageTypeColorMap.forEach((notificationColor, messageType) => {
