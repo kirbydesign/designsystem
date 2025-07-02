@@ -35,7 +35,7 @@
             we want different behavior on varying screen widths -->
         <a
           kirby-button
-          class="main-content-body-action-text"
+          class="breakout wide-view-action"
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           [href]="externalLink"
           target="_blank"
@@ -47,7 +47,7 @@
 
         <a
           kirby-button
-          class="main-content-body-action-text"
+          class="breakout narrow-view-action"
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           [href]="externalLink"
           [noDecoration]="true"
@@ -65,7 +65,7 @@
             we want different behavior on varying screen widths -->
         <button
           kirby-button
-          class="main-content-body-action-text"
+          class="breakout wide-view-action"
           size="sm"
           (click)="bannerClicked($event)"
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
@@ -75,7 +75,7 @@
 
         <button
           kirby-button
-          class="main-content-body-action-text"
+          class="breakout narrow-view-action"
           size="sm"
           (click)="bannerClicked($event)"
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"

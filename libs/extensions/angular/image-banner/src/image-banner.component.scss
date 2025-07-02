@@ -110,7 +110,7 @@ kirby-card {
       @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
 
       // No focus outline on interactive element itself, only surrounding card
-      .main-content-body-action-text {
+      .breakout {
         box-shadow: none;
       }
     }
@@ -242,8 +242,7 @@ kirby-card {
   }
 }
 
-.main-content-body-action-text {
-  display: inline-flex;
+.breakout {
   position: initial;
   border-radius: utils.size('s');
   align-self: center;
@@ -254,51 +253,51 @@ kirby-card {
     position: absolute;
     inset: 0;
   }
+}
+
+.wide-view-action {
+  display: none;
 
   @include if-wide-view {
+    display: inline-flex;
     align-self: start;
     margin: 0; // buttons have xxxs margin so reset that
+  }
+}
 
-    &.no-decoration {
-      display: none;
+.narrow-view-action {
+  display: inline-flex;
+  margin: 0;
+
+  @include if-wide-view {
+    display: none;
+  }
+
+  &:is(a) {
+    width: utils.size('m');
+    min-width: utils.size('m');
+
+    kirby-icon {
+      font-size: utils.size('m');
     }
   }
 
-  @include if-narrow-view {
-    display: none;
-
-    &.no-decoration {
-      display: inline-flex;
-      margin: 0;
-
-      &:is(a) {
-        width: utils.size('m');
-        min-width: utils.size('m');
-
-        kirby-icon {
-          font-size: utils.size('m');
-        }
-      }
-
-      &:is(button) {
-        // Narrow view button should be present and focusable for AT, while taking up as little space as possible
-        // If set to 0px, screen readers have a hard time adding a proper focus outline
-        min-width: 1px;
-        width: 1px;
-        height: 1px;
-      }
-    }
+  &:is(button) {
+    // Narrow view button should be present and focusable for Assistive Tech,
+    // while taking up as little space as possible
+    // If set to 0px, screen readers have a hard time adding a proper focus outline
+    min-width: 1px;
+    width: 1px;
+    height: 1px;
   }
 }
 
 :host(.show-button-in-narrow-view) {
-  .main-content-body-action-text {
-    @include if-narrow-view {
-      display: inline-flex;
-    }
+  .wide-view-action {
+    display: inline-flex;
   }
 
-  .no-decoration {
+  .narrow-view-action {
     display: none;
   }
 }
