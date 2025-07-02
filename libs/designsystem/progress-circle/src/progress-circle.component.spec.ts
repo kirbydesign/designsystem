@@ -373,6 +373,8 @@ describe('ProgressCircleComponent', () => {
       spectator.setInput('themeColor', themeColor);
       spectator.detectChanges();
 
+      const color = getColor('warning', 'shade');
+      console.log('color', color);
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
         stroke: getColor('warning', 'shade'),
       });

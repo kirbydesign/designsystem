@@ -215,7 +215,7 @@ $main-colors: map.remove(
         #{$color-name}-contrast-rgb: _get-rgb-values(_get-color-contrast($color-value)),
         #{$color-name}-shade: _get-shade-value(#{$color-name}-shade, $color-value),
         #{$color-name}-shade-rgb: _get-rgb-values(
-            _get-shade-value(#{$color-name}-tint, $color-value)
+            _get-shade-value(#{$color-name}-shade, $color-value)
           ),
         #{$color-name}-tint: _get-tint-value(#{$color-name}-tint, $color-value),
         #{$color-name}-tint-rgb: _get-rgb-values(
