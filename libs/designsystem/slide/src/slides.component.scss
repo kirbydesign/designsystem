@@ -97,10 +97,4 @@ $bullet-inactive-opacity: 0.2;
   swiper-slide:has([slideStretchHeight]) {
     height: auto;
   }
-
-  .kirby-text-medium {
-    @include utils.slotted(span, h1, h2, h3, h4, h5, h6) {
-      margin: 0;
-    }
-  }
 }
