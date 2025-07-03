@@ -1,14 +1,6 @@
-import {
-  AfterContentInit,
-  ContentChildren,
-  Directive,
-  Input,
-  OnDestroy,
-  QueryList,
-} from '@angular/core';
+import { AfterContentInit, ContentChildren, Directive, Input, QueryList } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-
+import { startWith } from 'rxjs';
 import { AccordionItemComponent } from './accordion-item.component';
 
 @Directive({
@@ -16,29 +8,21 @@ import { AccordionItemComponent } from './accordion-item.component';
   exportAs: 'kirby-accordion',
   standalone: false,
 })
-export class AccordionDirective implements AfterContentInit, OnDestroy {
+export class AccordionDirective implements AfterContentInit {
   @Input() headingLevel: number;
-  @ContentChildren(AccordionItemComponent) accordionChildren: QueryList<AccordionItemComponent>;
-
-  private childrenChangesSub?: Subscription;
+  @ContentChildren(AccordionItemComponent) accordionItems: QueryList<AccordionItemComponent>;
 
   ngAfterContentInit(): void {
-    this.setHeadingLevels();
-
-    this.childrenChangesSub = this.accordionChildren.changes.subscribe(() => {
+    this.accordionItems.changes.pipe(startWith(0)).subscribe(() => {
       this.setHeadingLevels();
     });
   }
 
   private setHeadingLevels(): void {
-    if (this.accordionChildren) {
-      this.accordionChildren.forEach((child) => {
+    if (this.accordionItems && this.headingLevel) {
+      this.accordionItems.forEach((child) => {
         child.headingLevel = this.headingLevel;
       });
     }
-  }
-
-  ngOnDestroy(): void {
-    this.childrenChangesSub?.unsubscribe();
   }
 }

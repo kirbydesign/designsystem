@@ -16,7 +16,7 @@
   <h2>Simple accordion</h2>
 
   <cookbook-example-viewer [html]="accordionDefaultExample.template">
-    <div class="example-frame">
+    <div class="example-frame xl-padding">
       <cookbook-accordion-default-example
         #accordionDefaultExample
       ></cookbook-accordion-default-example>
@@ -29,7 +29,7 @@
     information.
   </p>
   <cookbook-example-viewer [html]="accordionExpandedExample.template">
-    <div class="example-frame">
+    <div class="example-frame xl-padding">
       <cookbook-accordion-expanded-example
         #accordionExpandedExample
       ></cookbook-accordion-expanded-example>
@@ -39,7 +39,7 @@
   <h2>Accordion inside a card</h2>
   <p>The accordion can be wrapped in a Kirby Card to make it stand out from the canvas.</p>
   <cookbook-example-viewer [html]="accordionCardExample.template">
-    <div class="example-frame">
+    <div class="example-frame xl-padding">
       <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
     </div>
   </cookbook-example-viewer>
@@ -50,7 +50,7 @@
     list-styling to ensure that the list looks correct without further adjustments.
   </p>
   <cookbook-example-viewer [html]="accordionWithListExample.template">
-    <div class="example-frame">
+    <div class="example-frame xl-padding">
       <cookbook-accordion-with-list-example
         #accordionWithListExample
       ></cookbook-accordion-with-list-example>
@@ -63,7 +63,7 @@
     to make it stand out from the canvas.
   </p>
   <cookbook-example-viewer [html]="accordionWithListInCardExample.template">
-    <div class="example-frame">
+    <div class="example-frame xl-padding">
       <cookbook-accordion-with-list-in-card-example
         #accordionWithListInCardExample
       ></cookbook-accordion-with-list-in-card-example>
@@ -76,7 +76,7 @@
     [html]="accordionEventExample.template"
     [ts]="accordionEventExample.codeSnippet"
   >
-    <div class="example-frame">
+    <div class="example-frame xl-padding">
       <cookbook-accordion-events-example #accordionEventExample></cookbook-accordion-events-example>
     </div>
   </cookbook-example-viewer>
@@ -85,25 +85,18 @@
   <p>
     To enhance accessibility and improve screen reader navigation, a
     <code>headingLevel</code>
-    can be assigned to the accordion headers to include them in the pages heading structure.
-    Headings use the
-
-    <!-- prettier-ignore -->
-    <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/heading_role">heading</a>
-    role.
-  </p>
-  <p>
-    The
-    <code>aria-level</code>
-    attribute is a required part of the heading role and indicates to assistive technologies that
-    the element should be treated as a heading. For example, applying
-    <code>headingLevel="1"</code>
-    to the accordion defines the header as the main heading of the page. A level 2 heading would
-    represent the first subsection, a level 3 a subsection of that, and so on. Heading levels can be
-    controlled for all accordion items by setting the heading level on the
+    can be assigned to the accordion headers to include them in the pages heading structure. Heading
+    levels can be controlled for all accordion items by setting the heading level on the
     <code>&lt;kirby-accordion&gt;</code>
     , but for more fine-grained control, it can be set individually on each item instead.
   </p>
+  <cookbook-example-viewer [html]="accordionHeadingLevelExample.template">
+    <div class="example-frame xl-padding">
+      <cookbook-accordion-heading-level-example
+        #accordionHeadingLevelExample
+      ></cookbook-accordion-heading-level-example>
+    </div>
+  </cookbook-example-viewer>
 
   <h2>Properties:</h2>
   <cookbook-api-description-properties
