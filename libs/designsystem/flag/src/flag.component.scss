@@ -40,15 +40,19 @@
 
   // Colors
   &.success {
-    -kirby-flag-background-color: #{utils.get-color('success-tint')};
+    --kirby-flag-background-color: #{utils.get-color('success-tint')};
   }
 
   &.warning {
-    -kirby-flag-background-color: #{utils.get-color('warning-tint')};
+    --kirby-flag-background-color: #{utils.get-color('warning-tint')};
   }
 
   &.danger {
-    -kirby-flag-background-color: #{utils.get-color('danger-tint')};
+    --kirby-flag-background-color: #{utils.get-color('danger-tint')};
+  }
+
+  &.semi-light {
+    --kirby-flag-background-color: #{utils.get-color('semi-light')};
   }
 
   --kirby-flag-border-color: var(--kirby-flag-background-color);
