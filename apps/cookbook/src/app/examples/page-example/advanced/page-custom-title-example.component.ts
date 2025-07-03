@@ -16,9 +16,9 @@ const config = {
   <!-- Custom Page Title -->
   <div *kirbyPageTitle>
     <div style="display: flex; gap: 0.5rem;">
-      <h1 [kirbyFitHeading]="{ maxLines: 2 }">
+      <span class="kirby-text-xlarge" [kirbyFitHeading]="{ maxLines: 2 }">
         Custom Titles with very long names that span multiple lines will be truncated
-      </h1>
+      </span>
       <kirby-icon name="arrow-down"></kirby-icon>
     </div>
   </div>

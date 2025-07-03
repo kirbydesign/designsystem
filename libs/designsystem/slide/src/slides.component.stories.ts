@@ -4,12 +4,14 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 import { SlideModule, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
+import { SlidesExampleComponent } from '~/app/examples/slides-example/slides-example.component';
+
 const meta: Meta<SlidesComponent> = {
   component: SlidesComponent,
   title: 'Components / Slides',
   decorators: [
     moduleMetadata({
-      imports: [SlideModule, CardModule],
+      imports: [SlideModule, CardModule, SlidesExampleComponent],
     }),
   ],
   parameters: {
@@ -41,5 +43,11 @@ export const Slides: Story = {
       <div>{{ slide.cardContent }}</div>
     </kirby-card>
   </kirby-slides>`,
+  }),
+};
+
+export const CookbookExamples: Story = {
+  render: () => ({
+    template: `<cookbook-slides-example></cookbook-slides-example>`,
   }),
 };

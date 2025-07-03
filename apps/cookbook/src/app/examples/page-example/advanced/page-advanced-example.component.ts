@@ -17,9 +17,9 @@ const config = {
 
   <!-- Custom Page Title -->
   <div *kirbyPageTitle>
-    <h1>
+    <span class="kirby-text-xlarge">
       <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-    </h1>
+    </span>
   </div>
 
   <!-- Custom Page Subtitle -->

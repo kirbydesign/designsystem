@@ -32,7 +32,9 @@ export class ImageBannerComponent {
   /**
    * Whether the button should be shown in narrow view or not.
    */
-  @Input() showButtonInNarrowView: boolean = false;
+  @HostBinding('class.show-button-in-narrow-view')
+  @Input()
+  showButtonInNarrowView: boolean = false;
 
   /**
    * The text of the button in the content area of the image banner. If left empty, will default to 'Read more' (or equivalent translation for [supported locales](https://cookbook.kirby.design/#/home/localization)).
