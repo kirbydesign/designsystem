@@ -211,6 +211,7 @@ ion-loading.kirby-loading-overlay {
   --color: #{utils.get-color('black')};
   --button-color: var(--color);
 
+  // For readability
   &.success {
     --background: #{utils.get-color('success-tint')};
   }
