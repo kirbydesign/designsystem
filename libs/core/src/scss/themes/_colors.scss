@@ -83,7 +83,7 @@ $decoration-colors: (
   'orange': $decoration-color-orange,
 ) !default;
 $notification-colors: (
-  'success': map.get($decoration-colors, 'green', 30),
+  'success': map.get($decoration-colors, 'green', 50),
   'warning': map.get($decoration-colors, 'orange', 40),
   'danger': map.get($decoration-colors, 'red', 50),
 ) !default;
