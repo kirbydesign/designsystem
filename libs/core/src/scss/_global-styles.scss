@@ -207,16 +207,15 @@ ion-loading.kirby-loading-overlay {
   text-align: center;
 
   // Set default colors
-
   --background: #{utils.get-color('success-tint')};
   --color: #{utils.get-color('black')};
   --button-color: var(--color);
 
-  .success {
+  &.success {
     --background: #{utils.get-color('success-tint')};
   }
 
-  .warning {
+  &.warning {
     --background: #{utils.get-color('warning')};
   }
 }
