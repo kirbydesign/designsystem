@@ -9,7 +9,7 @@ import { AccordionItemComponent } from './accordion-item.component';
   standalone: false,
 })
 export class AccordionDirective implements AfterContentInit {
-  @Input() headingLevel: number;
+  @Input() headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
   @ContentChildren(AccordionItemComponent) accordionItems: QueryList<AccordionItemComponent>;
 
   ngAfterContentInit(): void {
@@ -19,7 +19,7 @@ export class AccordionDirective implements AfterContentInit {
   }
 
   private setHeadingLevels(): void {
-    if (this.accordionItems && this.headingLevel) {
+    if (this.accordionItems.length > 0 && this.headingLevel) {
       this.accordionItems.forEach((child) => {
         child.headingLevel = this.headingLevel;
       });

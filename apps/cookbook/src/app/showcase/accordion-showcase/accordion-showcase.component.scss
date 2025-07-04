@@ -9,12 +9,3 @@ cookbook-example-viewer > *:first-child {
   display: block;
   margin-bottom: utils.size('s');
 }
-
-h3 {
-  margin-top: utils.size('l');
-  border-bottom: none;
-}
-
-.example-frame {
-  padding: utils.size('xl');
-}

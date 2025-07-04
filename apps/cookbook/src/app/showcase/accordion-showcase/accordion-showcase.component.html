@@ -16,7 +16,7 @@
   <h2>Simple accordion</h2>
 
   <cookbook-example-viewer [html]="accordionDefaultExample.template">
-    <div class="example-frame xl-padding">
+    <div class="example-frame">
       <cookbook-accordion-default-example
         #accordionDefaultExample
       ></cookbook-accordion-default-example>
@@ -29,7 +29,7 @@
     information.
   </p>
   <cookbook-example-viewer [html]="accordionExpandedExample.template">
-    <div class="example-frame xl-padding">
+    <div class="example-frame">
       <cookbook-accordion-expanded-example
         #accordionExpandedExample
       ></cookbook-accordion-expanded-example>
@@ -39,7 +39,7 @@
   <h2>Accordion inside a card</h2>
   <p>The accordion can be wrapped in a Kirby Card to make it stand out from the canvas.</p>
   <cookbook-example-viewer [html]="accordionCardExample.template">
-    <div class="example-frame xl-padding">
+    <div class="example-frame">
       <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
     </div>
   </cookbook-example-viewer>
@@ -50,7 +50,7 @@
     list-styling to ensure that the list looks correct without further adjustments.
   </p>
   <cookbook-example-viewer [html]="accordionWithListExample.template">
-    <div class="example-frame xl-padding">
+    <div class="example-frame">
       <cookbook-accordion-with-list-example
         #accordionWithListExample
       ></cookbook-accordion-with-list-example>
@@ -63,7 +63,7 @@
     to make it stand out from the canvas.
   </p>
   <cookbook-example-viewer [html]="accordionWithListInCardExample.template">
-    <div class="example-frame xl-padding">
+    <div class="example-frame">
       <cookbook-accordion-with-list-in-card-example
         #accordionWithListInCardExample
       ></cookbook-accordion-with-list-in-card-example>
@@ -76,7 +76,7 @@
     [html]="accordionEventExample.template"
     [ts]="accordionEventExample.codeSnippet"
   >
-    <div class="example-frame xl-padding">
+    <div class="example-frame">
       <cookbook-accordion-events-example #accordionEventExample></cookbook-accordion-events-example>
     </div>
   </cookbook-example-viewer>
@@ -91,16 +91,23 @@
     , but for more fine-grained control, it can be set individually on each item instead.
   </p>
   <cookbook-example-viewer [html]="accordionHeadingLevelExample.template">
-    <div class="example-frame xl-padding">
+    <div class="example-frame">
       <cookbook-accordion-heading-level-example
         #accordionHeadingLevelExample
       ></cookbook-accordion-heading-level-example>
     </div>
   </cookbook-example-viewer>
 
-  <h2>Properties:</h2>
+  <h2>API</h2>
+
+  <h3>Accordion Properties</h3>
   <cookbook-api-description-properties
-    [properties]="properties"
+    [properties]="accordionProperties"
+  ></cookbook-api-description-properties>
+
+  <h3>Accordion Item Properties</h3>
+  <cookbook-api-description-properties
+    [properties]="accordionItemProperties"
   ></cookbook-api-description-properties>
 
   <h2>Events</h2>

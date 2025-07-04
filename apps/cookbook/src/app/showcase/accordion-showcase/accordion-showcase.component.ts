@@ -30,10 +30,20 @@ import { AccordionHeadingLevelExampleComponent } from '~/app/examples/accordion-
   ],
 })
 export class AccordionShowcaseComponent {
-  properties: ApiDescriptionProperty[] = [
+  accordionProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'headingLevel',
+      description:
+        'If set, all accordion item titles within the accordion will render as a heading of that level',
+      defaultValue: 'null',
+      type: ['1 | 2 | 3 | 4 | 5 | 6'],
+    },
+  ];
+  accordionItemProperties: ApiDescriptionProperty[] = [
     {
       name: 'title',
-      description: 'The title for the accordion item',
+      description:
+        'The title for the accordion item. When activated, it will show/hide the accordion item content',
       defaultValue: 'null',
       type: ['string'],
     },
@@ -45,7 +55,7 @@ export class AccordionShowcaseComponent {
     },
     {
       name: 'isDisabled',
-      description: 'Disables expansion of the item and styles it as disabled.',
+      description: 'Disables expansion of the item and styles it as disabled',
       defaultValue: 'false',
       type: ['boolean'],
     },
@@ -63,10 +73,16 @@ export class AccordionShowcaseComponent {
       defaultValue: 'true',
       type: ['boolean'],
     },
+    {
+      name: 'headingLevel',
+      description: 'If set, the accordion item title will render as a heading of that level',
+      defaultValue: 'null',
+      type: ['1 | 2 | 3 | 4 | 5 | 6'],
+    },
   ];
   events: ApiDescriptionEvent[] = [
     {
-      name: 'toggled',
+      name: 'toggle',
       description: 'Emitted when the state of the accordion item has changed',
       signature: 'EventEmitter<boolean>',
     },
