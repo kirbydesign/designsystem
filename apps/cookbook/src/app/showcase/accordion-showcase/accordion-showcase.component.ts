@@ -10,6 +10,7 @@ import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { AccordionHeadingLevelExampleComponent } from '~/app/examples/accordion-example/examples/heading-level';
 
 @Component({
   selector: 'cookbook-accordion-showcase',
@@ -23,15 +24,26 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     AccordionWithListExampleComponent,
     AccordionWithItemsInCardExampleComponent,
     AccordionEventsExampleComponent,
+    AccordionHeadingLevelExampleComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
   ],
 })
 export class AccordionShowcaseComponent {
-  properties: ApiDescriptionProperty[] = [
+  accordionProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'headingLevel',
+      description:
+        'If set, all accordion item titles within the accordion will render as a heading of that level',
+      defaultValue: 'null',
+      type: ['1 | 2 | 3 | 4 | 5 | 6'],
+    },
+  ];
+  accordionItemProperties: ApiDescriptionProperty[] = [
     {
       name: 'title',
-      description: 'The title that you can click to show the content',
+      description:
+        'The title for the accordion item. When activated, it will show/hide the accordion item content',
       defaultValue: 'null',
       type: ['string'],
     },
@@ -43,7 +55,7 @@ export class AccordionShowcaseComponent {
     },
     {
       name: 'isDisabled',
-      description: 'Disables expansion of the item and styles it as disabled.',
+      description: 'Disables expansion of the item and styles it as disabled',
       defaultValue: 'false',
       type: ['boolean'],
     },
@@ -60,6 +72,12 @@ export class AccordionShowcaseComponent {
         'If set, the accordion item will have spacing between the border and the content',
       defaultValue: 'true',
       type: ['boolean'],
+    },
+    {
+      name: 'headingLevel',
+      description: 'If set, the accordion item title will render as a heading of that level',
+      defaultValue: 'null',
+      type: ['1 | 2 | 3 | 4 | 5 | 6'],
     },
   ];
   events: ApiDescriptionEvent[] = [

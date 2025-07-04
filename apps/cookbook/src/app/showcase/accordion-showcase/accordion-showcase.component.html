@@ -14,28 +14,34 @@
     .
   </p>
   <h2>Simple accordion</h2>
+
   <cookbook-example-viewer [html]="accordionDefaultExample.template">
-    <cookbook-accordion-default-example
-      #accordionDefaultExample
-    ></cookbook-accordion-default-example>
+    <div class="example-frame">
+      <cookbook-accordion-default-example
+        #accordionDefaultExample
+      ></cookbook-accordion-default-example>
+    </div>
   </cookbook-example-viewer>
 
   <h3>With initially expanded item</h3>
   <p>
-    It is possible to have an accordion expanded initially to draw attention to specific information.
+    It is possible to have an accordion expanded initially to draw attention to specific
+    information.
   </p>
   <cookbook-example-viewer [html]="accordionExpandedExample.template">
-    <cookbook-accordion-expanded-example
-      #accordionExpandedExample
-    ></cookbook-accordion-expanded-example>
+    <div class="example-frame">
+      <cookbook-accordion-expanded-example
+        #accordionExpandedExample
+      ></cookbook-accordion-expanded-example>
+    </div>
   </cookbook-example-viewer>
 
   <h2>Accordion inside a card</h2>
-  <p>
-    The accordion can be wrapped in a Kirby Card to make it stand out from the canvas.
-  </p>
+  <p>The accordion can be wrapped in a Kirby Card to make it stand out from the canvas.</p>
   <cookbook-example-viewer [html]="accordionCardExample.template">
-    <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
+    <div class="example-frame">
+      <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
+    </div>
   </cookbook-example-viewer>
 
   <h2>Accordion with list</h2>
@@ -44,36 +50,64 @@
     list-styling to ensure that the list looks correct without further adjustments.
   </p>
   <cookbook-example-viewer [html]="accordionWithListExample.template">
-    <cookbook-accordion-with-list-example
-      #accordionWithListExample
-    ></cookbook-accordion-with-list-example>
+    <div class="example-frame">
+      <cookbook-accordion-with-list-example
+        #accordionWithListExample
+      ></cookbook-accordion-with-list-example>
+    </div>
   </cookbook-example-viewer>
 
   <h3>Additional styling</h3>
   <p>
-    Similarly to the simple accordion, the accordion with a list can also be wrapped in a Kirby Card to
-    make it stand out from the canvas.
+    Similarly to the simple accordion, the accordion with a list can also be wrapped in a Kirby Card
+    to make it stand out from the canvas.
   </p>
   <cookbook-example-viewer [html]="accordionWithListInCardExample.template">
-    <cookbook-accordion-with-list-in-card-example
-      #accordionWithListInCardExample
-    ></cookbook-accordion-with-list-in-card-example>
+    <div class="example-frame">
+      <cookbook-accordion-with-list-in-card-example
+        #accordionWithListInCardExample
+      ></cookbook-accordion-with-list-in-card-example>
+    </div>
   </cookbook-example-viewer>
 
   <h2>Accordion toggle event</h2>
-  <p>
-    A toggle event is emitted whenever an accordion is expanded or collapsed.
-  </p>
+  <p>A toggle event is emitted whenever an accordion is expanded or collapsed.</p>
   <cookbook-example-viewer
     [html]="accordionEventExample.template"
     [ts]="accordionEventExample.codeSnippet"
   >
-    <cookbook-accordion-events-example #accordionEventExample></cookbook-accordion-events-example>
+    <div class="example-frame">
+      <cookbook-accordion-events-example #accordionEventExample></cookbook-accordion-events-example>
+    </div>
   </cookbook-example-viewer>
 
-  <h2>Properties:</h2>
+  <h2>Accessibility</h2>
+  <p>
+    To enhance accessibility and improve screen reader navigation, a
+    <code>headingLevel</code>
+    can be assigned to the accordion headers to include them in the pages heading structure. Heading
+    levels can be controlled for all accordion items by setting the heading level on the
+    <code>&lt;kirby-accordion&gt;</code>
+    , but for more fine-grained control, it can be set individually on each item instead.
+  </p>
+  <cookbook-example-viewer [html]="accordionHeadingLevelExample.template">
+    <div class="example-frame">
+      <cookbook-accordion-heading-level-example
+        #accordionHeadingLevelExample
+      ></cookbook-accordion-heading-level-example>
+    </div>
+  </cookbook-example-viewer>
+
+  <h2>API</h2>
+
+  <h3>Accordion Properties</h3>
   <cookbook-api-description-properties
-    [properties]="properties"
+    [properties]="accordionProperties"
+  ></cookbook-api-description-properties>
+
+  <h3>Accordion Item Properties</h3>
+  <cookbook-api-description-properties
+    [properties]="accordionItemProperties"
   ></cookbook-api-description-properties>
 
   <h2>Events</h2>
