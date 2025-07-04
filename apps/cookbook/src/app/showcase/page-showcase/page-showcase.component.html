@@ -270,9 +270,14 @@
     <p>
       <strong>*Please note:</strong>
       When supplying a custom page title element you must supply both a page title and a toolbar
-      title. You should also ensure the page title is wrapped in a
+      title. You should also ensure the page title is wrapped in an element with a class
+      <code>kirby-text-xlarge</code>
+      . Previously a
       <code>h1</code>
-      tag. Usage of the page subtitle element requires the presence of a page title.
+      tag was needed, but setting the correct heading element is now handled by the component and
+      should
+      <em>not</em>
+      be be set. Usage of the page subtitle element requires the presence of a page title.
     </p>
     <p>
       <strong>*Auto-scale page title:</strong>
@@ -305,18 +310,20 @@
       -directives.
     </p>
     <p>
-      <em>
-        <strong>*Please note:</strong>
-        When supplying a custom page title element you must supply both a page title and a toolbar
-        title. You should also ensure the page title is wrapped in a
-        <code>h1</code>
-        tag. See example below on how to reuse a template for both titles. Usage of the page
-        subtitle element requires the presence of a page title.
-        <br />
-        <strong>*Custom page title wrapper:</strong>
-        If you wrap your custom title (e.g. in a flex-container) you have to ensure the title is
-        truncated. See "Custom Title" example.
-      </em>
+      <strong>*Please note:</strong>
+      When supplying a custom page title element you must supply both a page title and a toolbar
+      title. You should also ensure the page title is wrapped in an element with a class
+      <code>kirby-text-xlarge</code>
+      . Previously a
+      <code>h1</code>
+      tag was needed, but setting the correct heading element is now handled by the component and
+      should
+      <em>not</em>
+      be be set. Usage of the page subtitle element requires the presence of a page title.
+      <br />
+      <strong>*Custom page title wrapper:</strong>
+      If you wrap your custom title (e.g. in a flex-container) you have to ensure the title is
+      truncated. See "Custom Title" example.
     </p>
     <cookbook-code-viewer [html]="advancedExampleHtml"></cookbook-code-viewer>
   </div>
@@ -339,13 +346,11 @@
       and shown only in the toolbar and not on the page itself.
     </p>
     <p>
-      <em>
-        <strong>*Please note:</strong>
-        Always apply the
-        <code>*kirbyPageActions</code>
-        directive to the action buttons host element to ensure the actions are shown in the toolbar.
-        This is especially important when using fixed titles:
-      </em>
+      <strong>*Please note:</strong>
+      Always apply the
+      <code>*kirbyPageActions</code>
+      directive to the action buttons host element to ensure the actions are shown in the toolbar.
+      This is especially important when using fixed titles:
     </p>
     <cookbook-code-viewer [html]="fixedTitleAndActionsExampleHtml"></cookbook-code-viewer>
     <p>
