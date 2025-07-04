@@ -19,14 +19,11 @@
 
 <h2>Basic usage</h2>
 
-<cookbook-iphone
-  viewMode="full-size"
-  [showViewModeToggle]="true"
-  src="/examples/slides/"
-  showExternalLink="true"
-></cookbook-iphone>
-
-<cookbook-code-viewer [html]="defaultExampleComponentHTML"></cookbook-code-viewer>
+<cookbook-example-viewer [html]="simpleExample.template">
+  <div class="example-frame">
+    <cookbook-slides-simple-example #simpleExample></cookbook-slides-simple-example>
+  </div>
+</cookbook-example-viewer>
 
 <h2>Inherit height</h2>
 
@@ -36,14 +33,30 @@
   to each slide to make them equal height as seen in the example below.
 </p>
 
-<cookbook-iphone
-  viewMode="full-size"
-  [showViewModeToggle]="true"
-  src="/examples/slides-height/"
-  showExternalLink="true"
-></cookbook-iphone>
+<cookbook-example-viewer [html]="heightExample.template">
+  <div class="example-frame">
+    <cookbook-slides-height-example #heightExample></cookbook-slides-height-example>
+  </div>
+</cookbook-example-viewer>
 
-<cookbook-code-viewer [html]="heightExampleComponentHTML"></cookbook-code-viewer>
+<h2>Heading level</h2>
+
+<p>
+  If you need a custom heading for the slides, you can add
+  <code>&lt;h1&gt;</code>
+  –
+  <code>&lt;h6&gt;</code>
+  . This allows slide titles to become part of the page’s heading structure, making them accessible
+  to screen readers.
+</p>
+
+<cookbook-example-viewer [html]="customHeadingExample.template">
+  <div class="example-frame">
+    <cookbook-slides-custom-heading-example
+      #customHeadingExample
+    ></cookbook-slides-custom-heading-example>
+  </div>
+</cookbook-example-viewer>
 
 <p>
   <em>
@@ -67,7 +80,7 @@
   showExternalLink="true"
 ></cookbook-iphone>
 
-<cookbook-example-viewer [html]="advancedExampleComponentHTML"></cookbook-example-viewer>
+<cookbook-example-viewer [html]="advancedSlideExample.template"></cookbook-example-viewer>
 
 <h3>Custom configuration</h3>
 
