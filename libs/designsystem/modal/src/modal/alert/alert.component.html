@@ -13,7 +13,7 @@
       class="cancel-btn"
       (click)="onCancel()"
     >
-      {{ cancelBtn }}
+      {{ cancelBtn$ | async }}
     </button>
     <button
       kirby-button
@@ -23,7 +23,7 @@
       [class.destructive]="okBtnIsDestructive"
       (click)="onOk()"
     >
-      {{ okBtn }}
+      {{ okBtn$ | async }}
     </button>
   </div>
 </article>

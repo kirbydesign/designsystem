@@ -43,15 +43,25 @@ export class AlertComponent implements AfterViewInit {
 
   message$: Observable<string>;
   @Input()
-  set message(message: string & Observable<string>) {
+  set message(message: string | Observable<string>) {
     this.message$ = typeof message === 'string' ? of(message) : message;
   }
 
   @Input() iconName: string;
   @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
-  @Input() okBtn: string;
+
+  okBtn$: Observable<string>;
+  @Input()
+  set okBtn(okBtn: string | Observable<string>) {
+    this.okBtn$ = typeof okBtn === 'string' ? of(okBtn) : okBtn;
+  }
   @Input() okBtnIsDestructive: boolean;
-  @Input() cancelBtn: string;
+
+  cancelBtn$: Observable<string>;
+  @Input()
+  set cancelBtn(cancelBtn: string | Observable<string>) {
+    this.cancelBtn$ = typeof cancelBtn === 'string' ? of(cancelBtn) : cancelBtn;
+  }
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
