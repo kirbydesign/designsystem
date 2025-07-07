@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../showcase.shared';
 
 h2:not(:first-child) {
   margin-top: utils.size('l');
@@ -7,10 +8,4 @@ h2:not(:first-child) {
 cookbook-example-viewer > *:first-child {
   display: block;
   margin-bottom: utils.size('s');
-  max-width: 550px;
-}
-
-h3 {
-  margin-top: utils.size('l');
-  border-bottom: none;
 }

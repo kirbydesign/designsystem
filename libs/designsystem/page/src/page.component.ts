@@ -41,23 +41,21 @@ import {
   IonToolbar,
   NavController,
 } from '@ionic/angular/standalone';
-import { componentOnReady } from '@ionic/core';
+import { Title } from '@angular/platform-browser';
 import type { ScrollDetail } from '@ionic/core';
+import { componentOnReady } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
+import { KirbyConfig } from '@kirbydesign/designsystem/config';
 import {
   HeaderActionsDirective,
   HeaderComponent,
   HeaderTitleActionIconDirective,
 } from '@kirbydesign/designsystem/header';
-import {
-  IonicElementPartHelper,
-  KirbyAnimation,
-  observeContent,
-} from '@kirbydesign/designsystem/helpers';
+import { IonicElementPartHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -69,9 +67,9 @@ import {
   ResizeObserverService,
   TranslationService,
 } from '@kirbydesign/designsystem/shared';
-import { Title } from '@angular/platform-browser';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
 import { getGlobalConfig } from '@kirbydesign/designsystem/config';
+import { observeContent } from '@kirbydesign/designsystem/helpers';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -350,6 +348,7 @@ export class PageComponent
   private stickyContentIntersectionObserver?: IntersectionObserver;
   private isObservingTitle = false;
   private isObservingActions = false;
+  private isDocTitleSet = false;
 
   private unobserveTitleMutation: UnobserveFn;
 
@@ -440,6 +439,9 @@ export class PageComponent
     if (changes.subtitle && !changes.subtitle.isFirstChange) {
       this.subtitle = changes.title.currentValue;
       this.hasPageSubtitle = this.subtitle !== undefined;
+    }
+    if (changes.title || changes.toolbarTitle) {
+      this.setHTMLDocumentTitle(this.title || this.toolbarTitle);
     }
   }
 
@@ -542,11 +544,12 @@ export class PageComponent
 
     this.enter.emit();
 
-    this.setHtmlDocTitle();
     this.patchIonLastFocused();
 
     this.observeTitle();
     this.observeActions();
+    this.setHTMLDocumentTitle(this.header?.title || this.title || this.toolbarTitle);
+    this.observeTitleDOMChanges();
   }
 
   private onLeave() {
@@ -617,6 +620,13 @@ export class PageComponent
       if (this.header.titleClick.observed && this.hasInteractiveTitle === undefined) {
         this.hasInteractiveTitle = true;
       }
+
+      // Set document title from header immediately if present, then subscribe to changes
+      this.setHTMLDocumentTitle(this.header.title);
+
+      this.header.title$.pipe(takeUntil(this.ngOnDestroy$)).subscribe(() => {
+        this.setHTMLDocumentTitle(this.header.title);
+      });
     }
   }
 
@@ -717,23 +727,27 @@ export class PageComponent
     this.isObservingTitle = false;
   }
 
-  private setHtmlDocTitle() {
-    const globalKirbyConfig = getGlobalConfig();
+  private observeTitleDOMChanges() {
+    const globalKirbyConfig: KirbyConfig = getGlobalConfig();
     if (!globalKirbyConfig?.setHtmlDocTitle) return;
+    if (this.isDocTitleSet) return; // we never want to observe if the document title is already set via any title properties (or already observed)
 
-    const titleArea: HTMLElement = this.ionHeaderElement.nativeElement.querySelector(
+    const titleArea: HTMLElement | null = this.ionHeaderElement.nativeElement.querySelector(
       'ion-toolbar ion-title .toolbar-title'
     );
 
-    if (titleArea.textContent) {
-      // If title is already present in DOM, set it immediately:
-      this.htmlDocTitle.setTitle(titleArea.textContent);
-    } else {
-      // If title is not yet present in DOM, observe the toolbars title and set it when it appears:
-      this.unobserveTitleMutation = observeContent(titleArea, () => {
-        this.htmlDocTitle.setTitle(titleArea.textContent);
-      });
-    }
+    this.setHTMLDocumentTitle(titleArea.textContent);
+
+    this.unobserveTitleMutation = observeContent(titleArea, () => {
+      this.setHTMLDocumentTitle(titleArea.textContent);
+    });
+  }
+
+  private setHTMLDocumentTitle(title: string) {
+    const globalKirbyConfig: KirbyConfig = getGlobalConfig();
+    if (!globalKirbyConfig?.setHtmlDocTitle || !title || title.trim() === '') return;
+    this.htmlDocTitle.setTitle(title);
+    this.isDocTitleSet = true;
   }
 
   private initializeActions() {

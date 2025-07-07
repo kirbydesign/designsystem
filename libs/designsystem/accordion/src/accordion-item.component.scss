@@ -35,11 +35,19 @@ $padding: utils.size('s');
     padding-left: $padding;
     padding-right: $padding;
     user-select: none;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    font-family: var(--kirby-font-family);
   }
 }
 
 .title {
   flex-grow: 2;
+  display: flex;
+  font-size: utils.font-size('n');
 }
 
 .kirby-icon {
@@ -55,7 +63,7 @@ $padding: utils.size('s');
   padding: 0 $padding $padding;
 }
 
-.disabled {
+button[disabled] {
   pointer-events: none;
 
   .kirby-icon {
@@ -67,7 +75,7 @@ $padding: utils.size('s');
   }
 }
 
-.expanded {
+button[aria-expanded='true'] {
   .title {
     font-weight: utils.font-weight('bold');
   }
