@@ -70,6 +70,11 @@ ion-toggle {
     contain: none;
   }
 
+  &:focus-visible {
+    // Remove default browser focus visible
+    outline: none;
+  }
+
   $background: 'semi-dark';
   $background-checked: 'success';
   $handle-background: 'white';
