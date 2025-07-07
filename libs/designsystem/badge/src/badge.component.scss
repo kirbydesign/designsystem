@@ -30,8 +30,15 @@
 
   // Colors
   &.success ion-badge {
-    --background: #{utils.get-color('success')};
     --color: #{utils.get-color('success-contrast')};
+  }
+
+  &.success.sm ion-badge {
+    --background: #{utils.get-color('success-shade')};
+  }
+
+  &.success.md ion-badge {
+    --background: #{utils.get-color('success-tint')};
   }
 
   &.warning ion-badge {
@@ -44,14 +51,22 @@
 
   &.warning.md ion-badge {
     --background: #{utils.get-color('warning')};
-    @include utils.slotted(kirby-icon) {
-      --background: #{utils.get-color('warning-tint')};
-    }
   }
 
   &.danger ion-badge {
-    --background: #{utils.get-color('danger')};
     --color: #{utils.get-text-color('white')};
+  }
+
+  &.danger.sm ion-badge {
+    --background: #{utils.get-color('danger')};
+  }
+
+  &.danger.md ion-badge {
+    --background: #{utils.get-color('danger-shade')};
+
+    &:has(kirby-icon) {
+      --background: #{utils.get-color('danger')};
+    }
   }
 }
 
