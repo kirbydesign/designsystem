@@ -2,10 +2,8 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import {
-  illustrations,
-  SpotIllustrationComponent,
-} from '@kirbydesign/extensions-angular/spot-illustration';
+// eslint-disable-next-line no-restricted-imports
+import { illustrations, SpotIllustrationComponent } from './index';
 
 /**
  * Spot illustrations

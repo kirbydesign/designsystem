@@ -29,7 +29,9 @@ export class SpotIllustrationComponent {
   svg = computed(() => {
     const illustration = this.illustration() as Illustration;
     const size = this.size();
-    return illustration[size] ? `assets/spot-illustrations/${illustration[size]}` : undefined;
+    return illustration && illustration[size]
+      ? `assets/spot-illustrations/${illustration[size]}`
+      : undefined;
   });
 
   kirbyIconName = computed(() => {
