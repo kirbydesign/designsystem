@@ -1,4 +1,6 @@
 import { applicationConfig, Preview } from '@storybook/angular';
+import { withThemeByClassName } from '@storybook/addon-themes';
+
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 /** Zone JS is required by Angular itself. */
 import 'zone.js';
@@ -8,6 +10,7 @@ import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions
 
 import { defaultParameters } from 'tools/storybook-config/shared-config';
 
+import { Renderer } from 'storybook/internal/types';
 import docJson from '../docs/documentation.json';
 
 setCompodocJson(docJson);
@@ -15,6 +18,9 @@ setCompodocJson(docJson);
 const preview: Preview = {
   parameters: {
     ...defaultParameters,
+    backgrounds: {
+      disable: true,
+    },
     docs: {
       canvas: { className: 'canvas' },
       toc: {
@@ -36,6 +42,16 @@ const preview: Preview = {
           timeZone: 'Europe/Copenhagen',
         })),
       ],
+    }),
+
+    withThemeByClassName<Renderer>({
+      themes: {
+        light: 'light-theme',
+        dark: 'dark-theme',
+        canvas: 'canvas-theme light-theme',
+        tertiary: 'tertiary-theme dark-theme',
+      },
+      defaultTheme: 'light',
     }),
   ],
   tags: ['autodocs'],
