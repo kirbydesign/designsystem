@@ -42,9 +42,9 @@ export const Default: Story = {
 };
 
 /**
- * Example of using custom markup for the heading/title of the image banner.
+ * This is a image banner with custom header.
  */
-export const CustomHeading: Story = {
+export const CustomHeader: Story = {
   args: {
     bodyText: 'This is the body text.',
     imagePath: 'assets/images/leaves.jpg',
@@ -54,7 +54,7 @@ export const CustomHeading: Story = {
     props: args,
     template: `
       <kirby-x-image-banner ${argsToTemplate(args)}>
-        <h2 title class="kirby-text-normal-bold"> Custom Heading Example </h2>
+        <h3 title> Custom Header</h3>
       </kirby-x-image-banner>
     `,
   }),
