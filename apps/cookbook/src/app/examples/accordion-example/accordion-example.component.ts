@@ -6,6 +6,7 @@ import { AccordionCardExampleComponent } from './examples/card';
 import { AccordionWithListExampleComponent } from './examples/list';
 import { AccordionWithItemsInCardExampleComponent } from './examples/card-list';
 import { AccordionEventsExampleComponent } from './examples/events';
+import { AccordionHeadingLevelExampleComponent } from './examples/heading-level';
 
 @Component({
   selector: 'cookbook-accordion-example',
@@ -18,6 +19,7 @@ import { AccordionEventsExampleComponent } from './examples/events';
     AccordionWithListExampleComponent,
     AccordionWithItemsInCardExampleComponent,
     AccordionEventsExampleComponent,
+    AccordionHeadingLevelExampleComponent,
   ],
   providers: [ToastHelper, ToastController],
 })

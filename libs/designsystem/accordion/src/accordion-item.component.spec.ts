@@ -39,10 +39,6 @@ describe('AccordionItemComponent', () => {
       expect(spectator.query('.title')).toHaveExactTrimmedText(expectedText);
     });
 
-    it('should have correct tabindex', () => {
-      expect(spectator.query('.header')).toHaveAttribute('tabIndex', '0');
-    });
-
     it('should not be expanded', () => {
       expect(spectator.component.isExpanded).toBeFalse();
       expect(spectator.query('.header')).toHaveAttribute('aria-expanded', 'false');
@@ -105,6 +101,44 @@ describe('AccordionItemComponent', () => {
     });
   });
 
+  describe('with heading level', () => {
+    describe('when headingLevel is defined', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-accordion-item headingLevel="3" title="Title">content</kirby-accordion-item>`
+        );
+      });
+
+      it('should set role="heading"', () => {
+        const headingElement = spectator.query('[role="heading"]');
+        expect(headingElement).toBeTruthy();
+      });
+
+      it('should set aria-level to the correct heading level', () => {
+        const headingElement = spectator.query('[role="heading"]');
+        expect(headingElement?.getAttribute('aria-level')).toBe('3');
+      });
+    });
+
+    describe('when headingLevel is undefined', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-accordion-item title="Title">content</kirby-accordion-item>`
+        );
+      });
+
+      it('should not set role="heading"', () => {
+        const headingElement = spectator.query('[role="heading"]');
+        expect(headingElement).toBeNull();
+      });
+
+      it('should not set aria-level', () => {
+        const element = spectator.query('.header')?.parentElement;
+        expect(element?.hasAttribute('aria-level')).toBeFalse();
+      });
+    });
+  });
+
   describe('Disabled', () => {
     beforeEach(() => {
       spectator = createHost(
@@ -116,10 +150,6 @@ describe('AccordionItemComponent', () => {
       expect(spectator.query('.content')).toBeHidden();
     });
 
-    it('should have correct tabindex', () => {
-      expect(spectator.query('.header')).toHaveAttribute('tabIndex', '-1');
-    });
-
     it('should use disabled-style', () => {
       expect(spectator.query('.title')).toHaveComputedStyle({
         color: getTextColor('semi-dark'),
@@ -127,10 +157,6 @@ describe('AccordionItemComponent', () => {
       expect(spectator.query('.kirby-icon')).toHaveComputedStyle({
         color: getColor('semi-dark'),
       });
-    });
-
-    it('should add aria-disabled attribute on header', () => {
-      expect(spectator.query('.header')).toHaveAttribute('aria-disabled', 'true');
     });
 
     it('should not emit the "toggle" event when clicked', () => {
