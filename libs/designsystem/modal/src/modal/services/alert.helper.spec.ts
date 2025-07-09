@@ -101,34 +101,35 @@ describe('AlertHelper', () => {
   });
 
   describe('getComponentProps', () => {
+    const getComponentProps = (config) => alertHelper['getComponentProps'](config);
     it('should return okBtn as string when okBtn is a string', () => {
       const config = { title: 'test', okBtn: 'OK' };
-      const props = alertHelper.getComponentProps(config);
+      const props = getComponentProps(config);
       expect(props.okBtn).toBe('OK');
     });
 
     it('should return okBtn as observable when okBtn is an observable', () => {
       const okBtnObservable = of('OK');
       const config = { title: 'test', okBtn: okBtnObservable };
-      const props = alertHelper.getComponentProps(config);
+      const props = getComponentProps(config);
       expect(props.okBtn).toEqual(okBtnObservable);
     });
 
     it('should return okBtn as text property when okBtn is an object with text property', () => {
       const config = { title: 'test', okBtn: { text: 'OK', isDestructive: true } };
-      const props = alertHelper.getComponentProps(config);
+      const props = getComponentProps(config);
       expect(props.okBtn).toBe('OK');
     });
 
     it('should return okBtnIsDestructive as true when okBtn is an object with isDestructive set to true', () => {
       const config = { title: 'test', okBtn: { text: 'OK', isDestructive: true } };
-      const props = alertHelper.getComponentProps(config);
+      const props = getComponentProps(config);
       expect(props.okBtnIsDestructive).toBeTrue();
     });
 
     it('should return cancelBtn as string when cancelBtn is a string', () => {
       const config = { title: 'test', okBtn: 'OK' };
-      const props = alertHelper.getComponentProps(config);
+      const props = getComponentProps(config);
       expect(props.okBtn).toBe('OK');
     });
 
@@ -137,7 +138,7 @@ describe('AlertHelper', () => {
         title: 'test',
         icon: { name: 'alert-icon', themeColor: 'danger' },
       };
-      const props = alertHelper.getComponentProps(config);
+      const props = getComponentProps(config);
       expect(props.iconName).toBe('alert-icon');
       expect(props.iconThemeColor).toBe('danger');
     });

@@ -27,7 +27,7 @@ export class AlertHelper {
     };
   }
 
-  public getComponentProps(config: AlertConfig) {
+  private getComponentProps(config: AlertConfig) {
     return {
       ...config,
       okBtn: this.getOkBtn(config),
