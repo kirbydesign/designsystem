@@ -54,7 +54,7 @@ export const CustomHeader: Story = {
     props: args,
     template: `
       <kirby-x-image-banner ${argsToTemplate(args)}>
-        <h3 title class="kirby-text-normal-bold"> Custom Header</h3>
+        <h3 title> Custom Header</h3>
       </kirby-x-image-banner>
     `,
   }),
