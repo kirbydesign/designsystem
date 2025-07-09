@@ -8,6 +8,7 @@
   <ion-segment-button
     *ngFor="let item of items; let i = index"
     [value]="item.id"
+    [attr.aria-label]="item.ariaLabel || item.text"
     [attr.tabindex]="getTabIndex(item, i)"
     (click)="focusNativeButton($event)"
   >
