@@ -52,6 +52,7 @@ export class SegmentedControlShowcaseComponent {
         `[{
   id: string,
   text: string,
+  ariaLabel?: string,
   badge?: {
     content?: string,
     icon?: string,
