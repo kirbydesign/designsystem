@@ -14,7 +14,6 @@ import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { ca } from 'date-fns/locale';
 
 @Component({
   imports: [

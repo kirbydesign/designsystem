@@ -40,8 +40,8 @@ this.modalController.showAlert(config);`;
 const message$ = remainingSeconds$.pipe(
   map((remainingSeconds) => \`Time remaining: \${remainingSeconds}\`)
 );
-const logoutText$ = translationService.translate('logout');
-const takeMeBackText$ = translationService.translate('take_me_back');
+const logoutText$ = this.myTranslationService.get('logout');
+const takeMeBackText$ = this.myTranslationService.get('take_me_back');
 
 const config: AlertConfig = {
   title: title$,
@@ -51,7 +51,7 @@ const config: AlertConfig = {
   },
   message: message$,
   okBtn: logoutText$,
-  cancelBtn: 'takeMeBackText$',
+  cancelBtn: takeMeBackText$,
 };
   
 this.modalController.showAlert(config);`;
