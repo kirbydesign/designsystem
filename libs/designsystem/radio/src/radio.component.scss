@@ -4,7 +4,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $radio-icon-size: utils.size('m');
-$radio-icon-mark-size: 12px;
+$radio-icon-mark-size: 0.75em;
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
@@ -132,7 +132,7 @@ ion-radio {
   &::part(label) {
     align-items: start;
     padding-inline: $spacing-to-edge $spacing-to-label;
-    line-height: utils.line-height('n');
+    line-height: 1.5; // TODO: Handle in #3579 (https://github.com/kirbydesign/designsystem/issues/3579)
   }
 
   &::part(label-text-wrapper) {

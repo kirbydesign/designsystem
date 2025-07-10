@@ -1,5 +1,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+$badge-border-radius: 0.5rem;
+$badge-size-small: 0.5rem;
+$badge-size-medium: 1rem;
+
 :host {
   position: var(--kirby-badge-position, relative);
   left: var(--kirby-badge-left, auto);
@@ -14,18 +18,12 @@
     --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: utils.border-radius('s');
+    border-radius: $badge-border-radius;
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
 
-    @include utils.slotted(kirby-icon) {
-      --kirby-icon-font-size: #{utils.font-size('n')};
-
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+    --kirby-icon-font-size: #{utils.font-size('n')};
   }
 }
 
@@ -34,20 +32,27 @@
     padding: initial;
     min-height: initial;
     min-width: initial;
-    height: utils.size('xxs');
-    width: utils.size('xxs');
+    height: $badge-size-small;
+    width: $badge-size-small;
   }
 }
 
 :host(.md) {
   ion-badge {
-    --padding-top: 3px;
     --padding-end: 5px;
-    --padding-bottom: 3px;
     --padding-start: 5px;
 
-    min-width: utils.size('s');
-    min-height: utils.size('s');
+    min-width: $badge-size-medium;
+  }
+
+  &:has(kirby-icon) {
+    ion-badge {
+      --padding-top: 0px;
+      --padding-start: 0px;
+
+      height: $badge-size-medium;
+      width: $badge-size-medium;
+    }
   }
 }
 

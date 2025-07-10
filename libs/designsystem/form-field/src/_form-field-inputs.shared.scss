@@ -3,7 +3,7 @@
 
 $form-field-input-font-family: var(--kirby-font-family);
 $form-field-input-line-height: 1.5;
-$form-field-input-padding: 1em;
+$form-field-input-padding: utils.size('xs');
 $form-field-label-height: 24px;
 
 :host(.error) {

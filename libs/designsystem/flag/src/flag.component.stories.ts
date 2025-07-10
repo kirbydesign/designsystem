@@ -1,9 +1,16 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+
+import { FlagExampleComponent } from '~/app/examples/flag-example/flag-example.component';
 
 const meta: Meta<FlagComponent> = {
   component: FlagComponent,
   title: 'Components / Flag',
+  decorators: [
+    moduleMetadata({
+      imports: [FlagExampleComponent],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<FlagComponent>;
@@ -23,5 +30,11 @@ export const Flag: Story = {
     props: args,
     template: `<kirby-flag ${argsToTemplate(args)}>Flag</kirby-flag>
   `,
+  }),
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-flag-example></cookbook-flag-example>`,
   }),
 };
