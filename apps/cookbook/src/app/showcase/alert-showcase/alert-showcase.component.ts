@@ -36,13 +36,16 @@ export class AlertShowcaseComponent {
       description:
         '(Optional) Defines the text that will appear on the OK button and if it should be destructive',
       defaultValue: 'OK',
-      type: ['string', '{ text: string, isDestructive: boolean }'],
+      type: [
+        'string | Observable<string>',
+        '{ text: string | Observable<string>, isDestructive: boolean }',
+      ],
     },
     {
       name: 'cancelBtn',
       description:
         '(Optional) The text that will appear on the cancel button. If not defined the cancel button will not be shown.',
-      type: ['string'],
+      type: ['string | Observable<string>'],
     },
   ];
 }
