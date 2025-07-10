@@ -37,22 +37,24 @@ this.modalController.showAlert(config);`;
   private alertClose$: Subject<void> = new Subject<void>();
 
   static readonly alertConfigWithDynamicValues = `const title$ = of('Need more time?');
-  const message$ = remainingSeconds$.pipe(
-    map((remainingSeconds) => \`Time remaining: \${remainingSeconds}\`)
-  );
+const message$ = remainingSeconds$.pipe(
+  map((remainingSeconds) => \`Time remaining: \${remainingSeconds}\`)
+);
+const logoutText$ = this.myTranslationService.get('logout');
+const takeMeBackText$ = this.myTranslationService.get('take_me_back');
 
-  const config: AlertConfig = {
-    title: title$,
-    icon: {
-      name: 'clock',
-      themeColor: 'warning',
-    },
-    message: message$,
-    okBtn: 'Logout',
-    cancelBtn: 'Take me back',
-  };
+const config: AlertConfig = {
+  title: title$,
+  icon: {
+    name: 'clock',
+    themeColor: 'warning',
+  },
+  message: message$,
+  okBtn: logoutText$,
+  cancelBtn: takeMeBackText$,
+};
   
-  this.modalController.showAlert(config);`;
+this.modalController.showAlert(config);`;
   constructor(
     private modalController: ModalController,
     private toastController: ToastController
