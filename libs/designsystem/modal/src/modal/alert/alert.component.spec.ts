@@ -68,7 +68,7 @@ describe('AlertComponent', () => {
     });
 
     it('should have default size when cancel button', () => {
-      expect(okButton.attributes['ng-reflect-size']).toBeUndefined();
+      expect(okButton).toHaveClass('md');
     });
   });
 
@@ -88,6 +88,10 @@ describe('AlertComponent', () => {
       spectator.setHostInput({ cancelBtn: null });
 
       expect(spectator.query('.cancel-btn')).toBeNull();
+    });
+
+    it('should have default size', () => {
+      expect(cancelButton).toHaveClass('md');
     });
   });
   describe('icon', () => {

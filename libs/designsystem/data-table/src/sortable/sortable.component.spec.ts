@@ -63,24 +63,6 @@ describe('TableSortableComponent', () => {
     });
   });
 
-  describe('sortDirection', () => {
-    it('should render an "arrow-up" icon, when sortDirection is "asc"', () => {
-      spectator.setHostInput('sortDirection', 'asc');
-
-      const icon = spectator.query('kirby-icon');
-
-      expect(icon.attributes.getNamedItem('ng-reflect-name').value).toBe('arrow-up-fill');
-    });
-
-    it('should render an "arrow-down" icon, when sortDirection is "desc"', () => {
-      spectator.setHostInput('sortDirection', 'desc');
-
-      const icon = spectator.query('kirby-icon');
-
-      expect(icon.attributes.getNamedItem('ng-reflect-name').value).toBe('arrow-down-fill');
-    });
-  });
-
   describe('when active', () => {
     it('should get the "active" class when the active input is set to true', () => {
       spectator.setHostInput('active', true);

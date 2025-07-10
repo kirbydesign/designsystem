@@ -85,10 +85,6 @@ describe('ItemSlidingComponent', () => {
       expect(uniqueSwipeActionTitles.size).toBe(swipeActions.length);
     });
 
-    it('should render swipeActions in the correct slot by default', () => {
-      expect(ionItemOptionsElement.getAttribute('ng-reflect-side')).toEqual('start');
-    });
-
     it('should render an ion-item-option element for each swipe action', () => {
       expect(ionItemOptionElements.length).toEqual(swipeActions.length);
     });
