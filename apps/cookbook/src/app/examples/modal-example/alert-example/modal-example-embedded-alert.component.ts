@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
 import { AlertConfig, COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem';
 import { PageModule } from '@kirbydesign/designsystem/page';
-import { NgIf } from '@angular/common';
+
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import {
   DateInputDirective,
@@ -16,12 +16,12 @@ import { ModalExampleAlertWithGuardStepperComponent } from './modal-example-aler
 const config = {
   template: `<kirby-page-title>Modal with alert</kirby-page-title>
 
-<ng-container *ngIf="showStepper">
+@if (showStepper) {
   <cookbook-modal-example-alert-with-guard-stepper
     [currentStep]="3"
   ></cookbook-modal-example-alert-with-guard-stepper>
   <kirby-divider [hasMargin]="true"></kirby-divider>
-</ng-container>
+}
 
 <div class="form-wrapper">
   <kirby-form-field>
@@ -56,7 +56,7 @@ firstName: string;
 lastName: string;
 
 ngOnInit() {
-  // Use an arrow function to avoid 'this' being undefined in the function callback: 
+  // Use an arrow function to avoid 'this' being undefined in the function callback:
   this.modal.canDismiss = () => this.validate();
 }
 
@@ -96,7 +96,6 @@ validate(): boolean | AlertConfig {
   ],
   imports: [
     PageModule,
-    NgIf,
     ModalExampleAlertWithGuardStepperComponent,
     DividerComponent,
     FormFieldModule,

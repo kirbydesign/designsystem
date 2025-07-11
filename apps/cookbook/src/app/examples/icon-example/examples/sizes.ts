@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { IconSize } from '@kirbydesign/designsystem';
-import { KeyValuePipe, NgFor } from '@angular/common';
+import { KeyValuePipe } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-icon-sizes-example',
-  template: `<div class="icon-item-container" *ngFor="let size of sizes | keyvalue">
-  <div class="icon-item-inner-container">
-    <kirby-icon name="person" [size]="size.value" [title]="size.value"></kirby-icon>
-    <span class="icon-item-title">{{ size.value }}</span>
+  template: `@for (size of sizes | keyvalue; track size.key) {
+  <div class="icon-item-container">
+    <div class="icon-item-inner-container">
+      <kirby-icon name="person" [size]="size.value" [title]="size.value"></kirby-icon>
+      <span class="icon-item-title">{{ size.value }}</span>
+    </div>
   </div>
-</div>`,
+}`,
   htmlSnippet: `<kirby-icon name="person" size="lg"></kirby-icon>
 <kirby-icon name="person" size="md"></kirby-icon>
 <kirby-icon name="person" size="sm"></kirby-icon>
@@ -21,7 +23,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
-  imports: [NgFor, IconModule, KeyValuePipe],
+  imports: [IconModule, KeyValuePipe],
 })
 export class IconSizesExampleComponent {
   static htmlSnippet: string = config.htmlSnippet;

@@ -1,14 +1,15 @@
 <ng-content select="button[kirby-button]"></ng-content>
 
 <kirby-menu [placement]="'bottom-end'">
-  <kirby-item
-    *ngFor="let action of _collapsedActions"
-    [selectable]="true"
-    [disabled]="action.button?.disabled"
-    (click)="onActionSelect(action)"
-  >
-    {{ action.text }}
-  </kirby-item>
+  @for (action of _collapsedActions; track action) {
+    <kirby-item
+      [selectable]="true"
+      [disabled]="action.button?.disabled"
+      (click)="onActionSelect(action)"
+    >
+      {{ action.text }}
+    </kirby-item>
+  }
 </kirby-menu>
 
 <div class="hidden-layer" #hiddenLayer></div>

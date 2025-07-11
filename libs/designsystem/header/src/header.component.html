@@ -1,49 +1,54 @@
-<div *ngIf="!!avatar || !!progressCircle" class="avatar">
-  <ng-content select="kirby-avatar,kirby-progress-circle"></ng-content>
-</div>
+@if (!!avatar || !!progressCircle) {
+  <div class="avatar">
+    <ng-content select="kirby-avatar,kirby-progress-circle"></ng-content>
+  </div>
+}
 
-<div *ngIf="!!flag || !!customFlagTemplate" class="flag">
-  <ng-container *ngIf="!!flag">
-    <ng-content select="kirby-flag"></ng-content>
-  </ng-container>
-
-  <!-- Custom Content in Flag section: -->
-  <ng-container *ngIf="!!customFlagTemplate">
-    <div class="custom-flag">
-      <ng-container *ngTemplateOutlet="customFlagTemplate"></ng-container>
-    </div>
-  </ng-container>
-</div>
+@if (!!flag || !!customFlagTemplate) {
+  <div class="flag">
+    @if (!!flag) {
+      <ng-content select="kirby-flag"></ng-content>
+    }
+    <!-- Custom Content in Flag section: -->
+    @if (!!customFlagTemplate) {
+      <div class="custom-flag">
+        <ng-container *ngTemplateOutlet="customFlagTemplate"></ng-container>
+      </div>
+    }
+  </div>
+}
 
 <div class="container">
   <!-- Title and value - title: -->
-  <span
-    *ngIf="!!title && !!value"
-    #titleElement
-    class="title kirby-text-medium"
-    [class.clickable]="hasInteractiveTitle !== false && titleClick.observed"
-    [class.has-icon]="!!titleActionIconTemplate"
-    (click)="onTitleClick($event)"
-  >
-    {{ title }}
-    <ng-container *ngTemplateOutlet="titleActionIconTemplate"></ng-container>
-  </span>
-  <div class="title-container">
-    <!-- Only title, no value: -->
+  @if (!!title && !!value) {
     <span
-      *ngIf="!!title && !value"
       #titleElement
-      class="title kirby-text-xlarge"
-      [kirbyFitHeading]="fitHeadingConfig"
+      class="title kirby-text-medium"
+      [class.clickable]="hasInteractiveTitle !== false && titleClick.observed"
+      [class.has-icon]="!!titleActionIconTemplate"
+      (click)="onTitleClick($event)"
     >
       {{ title }}
+      <ng-container *ngTemplateOutlet="titleActionIconTemplate"></ng-container>
     </span>
+  }
+  <div class="title-container">
+    <!-- Only title, no value: -->
+    @if (!!title && !value) {
+      <span #titleElement class="title kirby-text-xlarge" [kirbyFitHeading]="fitHeadingConfig">
+        {{ title }}
+      </span>
+    }
 
     <!-- Title and value - value: -->
-    <span *ngIf="!!value" class="value kirby-text-display-3" [kirbyFitHeading]="fitHeadingConfig">
-      {{ value }}
-      <span class="value-unit semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span>
-    </span>
+    @if (!!value) {
+      <span class="value kirby-text-display-3" [kirbyFitHeading]="fitHeadingConfig">
+        {{ value }}
+        @if (!!valueUnit) {
+          <span class="value-unit semi-dark-text">{{ valueUnit }}</span>
+        }
+      </span>
+    }
 
     <!-- Subtitles: -->
     <ng-container
@@ -54,25 +59,28 @@
     ></ng-container>
 
     <!-- Custom section -->
-    <div *ngIf="!!customSectionTemplate" class="custom-section">
-      <ng-container *ngTemplateOutlet="customSectionTemplate"></ng-container>
-    </div>
+    @if (!!customSectionTemplate) {
+      <div class="custom-section">
+        <ng-container *ngTemplateOutlet="customSectionTemplate"></ng-container>
+      </div>
+    }
   </div>
   <!-- Actions: -->
-  <div
-    *ngIf="!!actionsTemplate"
-    #actionsElement
-    class="actions"
-    [class.emphasize]="emphasizeActions"
-  >
-    <ng-container
-      *ngTemplateOutlet="actionsTemplate; injector: _actionGroupInjector"
-    ></ng-container>
-  </div>
+  @if (!!actionsTemplate) {
+    <div #actionsElement class="actions" [class.emphasize]="emphasizeActions">
+      <ng-container
+        *ngTemplateOutlet="actionsTemplate; injector: _actionGroupInjector"
+      ></ng-container>
+    </div>
+  }
 </div>
 
 <ng-template #subTitleTemplate let-subtitles>
-  <div *ngIf="!!subtitles" class="subtitle kirby-text-small">
-    <span *ngFor="let subtitle of subtitles">{{ subtitle }}</span>
-  </div>
+  @if (!!subtitles) {
+    <div class="subtitle kirby-text-small">
+      @for (subtitle of subtitles; track subtitle) {
+        <span>{{ subtitle }}</span>
+      }
+    </div>
+  }
 </ng-template>

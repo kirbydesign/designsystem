@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
 
 export interface ApiDescriptionMethod {
   name: string;
@@ -17,7 +16,7 @@ export interface ApiDescriptionMethodColumns {
   selector: 'cookbook-api-description-methods',
   templateUrl: './api-description-methods.component.html',
   styleUrls: ['../api-description.shared.scss'],
-  imports: [NgIf, NgFor],
+  imports: [],
 })
 export class ApiDescriptionMethodsComponent {
   @Input() methods: ApiDescriptionMethod[];

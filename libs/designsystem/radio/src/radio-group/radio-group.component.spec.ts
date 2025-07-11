@@ -109,7 +109,9 @@ describe('RadioGroupComponent', () => {
           {
             type: TemplateScenarioTypes.SLOTTED,
             template: `<kirby-radio-group [(value)]="selected" [disabled]="disabled" [hasError]="hasError">
-                         <kirby-radio *ngFor="let item of ${itemsTemplateVar}" [value]="item" [text]="item.text || item"></kirby-radio>
+                         @for (item of ${itemsTemplateVar}; track item) {
+                           <kirby-radio [value]="item" [text]="item.text || item"></kirby-radio>
+                         }
                        </kirby-radio-group>`,
           },
           {
@@ -578,7 +580,9 @@ describe('RadioGroupComponent', () => {
                           selectedIndex="${defaultSelectedIndex}">
                         </kirby-radio-group>`
                         : `<kirby-radio-group selectedIndex="${defaultSelectedIndex}">
-                           <kirby-radio *ngFor="let item of items" [value]="item" [text]="item.text || item"></kirby-radio>
+                           @for (item of items; track item) {
+                             <kirby-radio [value]="item" [text]="item.text || item"></kirby-radio>
+                           }
                          </kirby-radio-group>`;
                     spectator = createHost(template, {
                       hostProps: {
@@ -601,7 +605,9 @@ describe('RadioGroupComponent', () => {
                       [selectedIndex]="selectedIndex">
                     </kirby-radio-group>`
                       : `<kirby-radio-group [selectedIndex]="selectedIndex">
-                       <kirby-radio *ngFor="let item of items" [value]="item" [text]="item.text || item"></kirby-radio>
+                       @for (item of items; track item) {
+                         <kirby-radio [value]="item" [text]="item.text || item"></kirby-radio>
+                       }
                      </kirby-radio-group>`;
                   const createHostFromScenario = (
                     items = dataScenario.items,

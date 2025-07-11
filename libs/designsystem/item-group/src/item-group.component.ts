@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { Component, HostBinding } from '@angular/core';
 
 @Component({
-  imports: [CommonModule],
+  imports: [],
   selector: 'kirby-item-group',
   templateUrl: './item-group.component.html',
   styleUrls: ['./item-group.component.scss'],

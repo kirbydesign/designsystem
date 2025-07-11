@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 export type FlagThemeColor = 'success' | 'warning' | 'danger' | 'semi-light' | 'transparent';
 
 @Component({
-  imports: [CommonModule],
+  imports: [],
   selector: 'kirby-flag',
   template: `
     <ng-content></ng-content>

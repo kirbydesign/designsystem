@@ -1,20 +1,34 @@
 <table class="api-description">
   <thead>
-    <th *ngIf="columns.name">{{ columns.name }}</th>
-    <th *ngIf="columns.description">{{ columns.description }}</th>
-    <th *ngIf="columns.type">{{ columns.type }}</th>
+    @if (columns.name) {
+      <th>{{ columns.name }}</th>
+    }
+    @if (columns.description) {
+      <th>{{ columns.description }}</th>
+    }
+    @if (columns.type) {
+      <th>{{ columns.type }}</th>
+    }
   </thead>
   <tbody>
-    <tr *ngFor="let event of events">
-      <td *ngIf="columns.name">
-        <code>{{ event.name }}</code>
-      </td>
-      <td *ngIf="columns.description" class="description">{{ event.description }}</td>
-      <td *ngIf="columns.type">
-        <ng-container *ngIf="event.signature">
-          <code>{{ event.signature }}</code>
-        </ng-container>
-      </td>
-    </tr>
+    @for (event of events; track event) {
+      <tr>
+        @if (columns.name) {
+          <td>
+            <code>{{ event.name }}</code>
+          </td>
+        }
+        @if (columns.description) {
+          <td class="description">{{ event.description }}</td>
+        }
+        @if (columns.type) {
+          <td>
+            @if (event.signature) {
+              <code>{{ event.signature }}</code>
+            }
+          </td>
+        }
+      </tr>
+    }
   </tbody>
 </table>

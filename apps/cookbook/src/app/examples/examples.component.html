@@ -1,13 +1,13 @@
-<div
-  *ngIf="showDummyKeyboard"
-  [style.--keyboard-height]="keyboardHeight + 'px'"
-  class="dummy-keyboard"
->
-  <div class="top"></div>
-  <div class="bg" [class.keyboard-showing]="keyboardIsShowing">
-    <div *ngFor="let counter of keys"></div>
+@if (showDummyKeyboard) {
+  <div [style.--keyboard-height]="keyboardHeight + 'px'" class="dummy-keyboard">
+    <div class="top"></div>
+    <div class="bg" [class.keyboard-showing]="keyboardIsShowing">
+      @for (counter of keys; track counter) {
+        <div></div>
+      }
+    </div>
   </div>
-</div>
+}
 
 <kirby-app>
   <kirby-router-outlet></kirby-router-outlet>

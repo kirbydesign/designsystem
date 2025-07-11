@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { RadioModule } from '@kirbydesign/designsystem/radio';
-import { NgFor } from '@angular/common';
+
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
@@ -16,11 +16,13 @@ const config = {
   selector: 'cookbook-radio-in-item-example',
   template: `<kirby-card>
   <kirby-radio-group [value]="selected" aria-label="Select main course">
-    <kirby-item *ngFor="let item of items">
-      <kirby-radio [value]="item" slot="start" [disabled]="item.disabled">
-        {{item.title}}
-      </kirby-radio>
-    </kirby-item> 
+    @for (item of items; track item) {
+      <kirby-item>
+        <kirby-radio [value]="item" slot="start" [disabled]="item.disabled">
+          {{item.title}}
+        </kirby-radio>
+      </kirby-item>
+    }
   </kirby-radio-group>
 </kirby-card>`,
   codeSnippet: `items = ${stringifyPretty(items)};
@@ -30,7 +32,7 @@ selected = this.items[2];`,
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [CardModule, RadioModule, NgFor, ItemModule],
+  imports: [CardModule, RadioModule, ItemModule],
 })
 export class RadioInItemExampleComponent {
   template: string = config.template;

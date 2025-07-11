@@ -1,19 +1,25 @@
-<button
-  *ngIf="configAppearance === 'toggle'"
-  kirby-button
-  attentionLevel="3"
-  (click)="toggleConfig()"
->
-  Configure
-  <kirby-icon name="menu-outline" *ngIf="!showConfig"></kirby-icon>
-  <kirby-icon name="menu" *ngIf="showConfig"></kirby-icon>
-</button>
+@if (configAppearance === 'toggle') {
+  <button kirby-button attentionLevel="3" (click)="toggleConfig()">
+    Configure
+    @if (!showConfig) {
+      <kirby-icon name="menu-outline"></kirby-icon>
+    }
+    @if (showConfig) {
+      <kirby-icon name="menu"></kirby-icon>
+    }
+  </button>
+}
 
-<ng-container *ngIf="configAppearance !== 'block'; else fieldset">
+@if (configAppearance !== 'block') {
   <kirby-card>
     <ng-container *ngTemplateOutlet="fieldset"></ng-container>
   </kirby-card>
-</ng-container>
+} @else {
+  <fieldset>
+    <legend>{{ title }}</legend>
+    <ng-content></ng-content>
+  </fieldset>
+}
 
 <ng-template #fieldset>
   <fieldset>

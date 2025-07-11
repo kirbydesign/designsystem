@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+
 import exampleHtml from '../../examples/divider-example/divider-example.component.html?raw';
 import { DividerExampleComponent } from '../../examples/divider-example/divider-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
@@ -9,7 +9,7 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
 @Component({
   selector: 'cookbook-divider-showcase',
   templateUrl: './divider-showcase.component.html',
-  imports: [DividerExampleComponent, FormsModule, NgFor, CodeViewerComponent],
+  imports: [DividerExampleComponent, FormsModule, CodeViewerComponent],
 })
 export class DividerShowcaseComponent {
   themeColors = ['white', 'light'];

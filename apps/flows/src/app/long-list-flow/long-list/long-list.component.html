@@ -9,30 +9,30 @@
   </kirby-page-actions>
 
   <kirby-page-content>
-    <kirby-list
-      *ngIf="listMode === 'default'; else experimental"
-      [items]="transactions"
-      [getSectionName]="getSectionName"
-      [swipeActions]="swipeActions"
-    >
-      <kirby-section-header *kirbyListSectionHeader="let section">
-        <h2 heading>{{ section }}</h2>
-      </kirby-section-header>
-      <list-item *kirbyListItemTemplate="let transaction" [transaction]="transaction"></list-item>
-    </kirby-list>
+    @if (listMode === 'default') {
+      <kirby-list
+        [items]="transactions"
+        [getSectionName]="getSectionName"
+        [swipeActions]="swipeActions"
+      >
+        <kirby-section-header *kirbyListSectionHeader="let section">
+          <h2 heading>{{ section }}</h2>
+        </kirby-section-header>
+        <list-item *kirbyListItemTemplate="let transaction" [transaction]="transaction"></list-item>
+      </kirby-list>
+    } @else {
+      @for (section of transactionSections | keyvalue; track section) {
+        <kirby-list-experimental>
+          <kirby-section-header outside>
+            <h2 heading>{{ section.key }}</h2>
+          </kirby-section-header>
+          @for (transaction of section.value.transactions; track transaction) {
+            <kirby-item-sliding [swipeActions]="swipeActions">
+              <list-item [transaction]="transaction"></list-item>
+            </kirby-item-sliding>
+          }
+        </kirby-list-experimental>
+      }
+    }
   </kirby-page-content>
 </kirby-page>
-
-<ng-template #experimental>
-  <kirby-list-experimental *ngFor="let section of transactionSections | keyvalue">
-    <kirby-section-header outside>
-      <h2 heading>{{ section.key }}</h2>
-    </kirby-section-header>
-    <kirby-item-sliding
-      *ngFor="let transaction of section.value.transactions"
-      [swipeActions]="swipeActions"
-    >
-      <list-item [transaction]="transaction"></list-item>
-    </kirby-item-sliding>
-  </kirby-list-experimental>
-</ng-template>

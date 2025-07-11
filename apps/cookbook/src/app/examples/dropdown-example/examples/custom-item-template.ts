@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 
@@ -17,7 +17,9 @@ const config = {
     [selected]="selected"
     [class.focused]="focused"
   >
-    <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
+    @if (selected) {
+      <kirby-icon name="checkmark-selected" slot="start"></kirby-icon>
+    }
     <kirby-label>
       <p class="kirby-item-title">{{ item.title }}</p>
       <p class="kirby-item-detail">{{ item.subtitle }}</p>
@@ -42,7 +44,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [DropdownModule, NgIf, IconModule, JsonPipe, ItemModule],
+  imports: [DropdownModule, IconModule, JsonPipe, ItemModule],
 })
 export class DropdownExampleCustomItemTemplateComponent {
   template: string = config.template;

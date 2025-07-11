@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IonItemDivider } from '@ionic/angular/standalone';
 
 @Component({
-  imports: [CommonModule, IonItemDivider],
+  imports: [IonItemDivider],
   selector: 'kirby-section-header',
   templateUrl: './section-header.component.html',
   styleUrls: ['./section-header.component.scss'],

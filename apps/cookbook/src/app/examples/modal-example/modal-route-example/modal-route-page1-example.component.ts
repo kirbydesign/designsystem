@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
@@ -23,12 +23,14 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
       non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
-    <kirby-modal-footer *ngIf="showFooter">
-      <button kirby-button class="nav" routerLink="../page2">
-        Next
-        <kirby-icon name="arrow-more"></kirby-icon>
-      </button>
-    </kirby-modal-footer>
+    @if (showFooter) {
+      <kirby-modal-footer>
+        <button kirby-button class="nav" routerLink="../page2">
+          Next
+          <kirby-icon name="arrow-more"></kirby-icon>
+        </button>
+      </kirby-modal-footer>
+    }
   `,
   styles: [
     'kirby-modal-footer { --kirby-modal-footer-justify-content: flex-end; }',
@@ -37,7 +39,6 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
   imports: [
     PageModule,
     ButtonComponent,
-    NgIf,
     ModalFooterComponent,
     RouterLink,
     IconModule,

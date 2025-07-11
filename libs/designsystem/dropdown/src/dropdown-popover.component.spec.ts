@@ -1,8 +1,8 @@
-/* 
-  This file has been created to contain unit tests for the new dropdown utilizing popover 
-  instead of mixing them in with the ones for the old version. Having an additional file with 
-  almost identic tests should make it easier to remove the ones for the old version when we have 
-  to deprecate it. 
+/*
+  This file has been created to contain unit tests for the new dropdown utilizing popover
+  instead of mixing them in with the ones for the old version. Having an additional file with
+  almost identic tests should make it easier to remove the ones for the old version when we have
+  to deprecate it.
 */
 import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular/standalone';
@@ -904,7 +904,9 @@ describe('DropdownComponent (popover version)', () => {
              *kirbyListItemTemplate="let item; let selected = selected"
              selectable="true"
              [selected]="selected">
-             <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
+             @if (selected) {
+               <kirby-icon name="checkmark-selected" slot="start"></kirby-icon>
+             }
              <p>{{ item.title }}</p>
            </kirby-item>
          </kirby-dropdown>`,

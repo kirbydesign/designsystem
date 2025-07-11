@@ -1,4 +1,3 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -6,6 +5,7 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChild,
+  DOCUMENT,
   ElementRef,
   HostBinding,
   Inject,
@@ -17,7 +17,7 @@ import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 import { IonBackdrop, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
 
 @Component({
-  imports: [CommonModule, IonBackdrop, IonFab, IonFabButton, IonFabList],
+  imports: [IonBackdrop, IonFab, IonFabButton, IonFabList],
   selector: 'kirby-fab-sheet',
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],

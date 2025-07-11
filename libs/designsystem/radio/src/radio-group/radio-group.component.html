@@ -1,24 +1,23 @@
-<ion-radio-group
-  *ngIf="_hasItems"
-  [value]="value"
-  (ionChange)="_onChange($event.detail.value)"
-  [attr.aria-invalid]="hasError"
->
-  <ng-container *ngIf="!items || !items.length; else itemsTemplate">
-    <ng-content></ng-content>
-  </ng-container>
-</ion-radio-group>
-
-<ng-template #itemsTemplate>
-  <ng-container *ngFor="let item of items; let i = index">
-    <ng-container
-      *ngTemplateOutlet="
-        _customItemTemplate || defaultItemTemplate;
-        context: { $implicit: item, selected: i === selectedIndex, index: i }
-      "
-    ></ng-container>
-  </ng-container>
-</ng-template>
+@if (_hasItems) {
+  <ion-radio-group
+    [value]="value"
+    (ionChange)="_onChange($event.detail.value)"
+    [attr.aria-invalid]="hasError"
+  >
+    @if (!items || !items.length) {
+      <ng-content></ng-content>
+    } @else {
+      @for (item of items; track item; let i = $index) {
+        <ng-container
+          *ngTemplateOutlet="
+            _customItemTemplate || defaultItemTemplate;
+            context: { $implicit: item, selected: i === selectedIndex, index: i }
+          "
+        ></ng-container>
+      }
+    }
+  </ion-radio-group>
+}
 
 <ng-template #defaultItemTemplate let-item>
   <kirby-radio

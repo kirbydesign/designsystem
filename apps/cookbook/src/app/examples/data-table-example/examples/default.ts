@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { Person, tableExampleData } from '../example-data';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
@@ -15,11 +14,13 @@ const config = {
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let rowData of tableData">
+      @for (rowData of tableData; track rowData) {
+        <tr>
           <td>{{rowData.name}}</td>
           <td style="text-align:right;">{{rowData.height}}</td>
           <td style="text-align:right;">{{rowData.mass}}</td>
-      </tr>
+        </tr>
+      }
     </tbody>
   </table>`,
 };
@@ -27,7 +28,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [NgFor],
+  imports: [],
 })
 export class DataTableDefaultExampleComponent {
   template: string = config.template;

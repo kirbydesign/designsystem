@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { ModalFlavor } from '@kirbydesign/designsystem/modal';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { NgIf } from '@angular/common';
+
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 
@@ -10,7 +10,7 @@ import { DividerComponent } from '@kirbydesign/designsystem/divider';
   selector: 'cookbook-modal-example-configuration',
   templateUrl: './modal-example-configuration.component.html',
   styleUrls: ['./modal-example-configuration.component.scss'],
-  imports: [NgIf, CheckboxComponent, DividerComponent],
+  imports: [CheckboxComponent, DividerComponent],
 })
 export class ModalExampleConfigurationComponent {
   @Input() disabled: boolean;

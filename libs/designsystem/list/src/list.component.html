@@ -8,9 +8,11 @@
   [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
 >
-  <ion-list-header *ngIf="headerTemplate">
-    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
-  </ion-list-header>
+  @if (headerTemplate) {
+    <ion-list-header>
+      <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+    </ion-list-header>
+  }
 
   <ng-container
     *ngTemplateOutlet="
@@ -19,59 +21,66 @@
     "
   ></ng-container>
 
-  <div *ngIf="footerTemplate" class="footer">
-    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
-  </div>
+  @if (footerTemplate) {
+    <div class="footer">
+      <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+    </div>
+  }
 </ion-list>
 
-<p *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
-  {{ noMoreItemsText }}
-</p>
-<div *ngIf="_isLoading" class="loading">
-  <kirby-spinner></kirby-spinner>
-</div>
+@if (!isLoadOnDemandEnabled && noMoreItemsText) {
+  <p class="no-more-items">
+    {{ noMoreItemsText }}
+  </p>
+}
+@if (_isLoading) {
+  <div class="loading">
+    <kirby-spinner></kirby-spinner>
+  </div>
+}
 
 <ng-template #groupedListTemplate>
-  <ion-item-group
-    *ngFor="let section of _groupedItems; trackBy: sectionTrackBy"
-    [ngClass]="standAloneClass()"
-  >
-    <ion-item-divider *ngIf="_isSectionsEnabled">
-      <ng-container
-        *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
-      ></ng-container>
-    </ion-item-divider>
-
-    <ng-container *ngIf="_isSectionsEnabled && _isStandAloneEnabled; else groupedFlatList">
-      <div class="list-items" [ngClass]="standAloneClass()" *ngFor="let list of section.lists">
-        <ng-container
-          *ngTemplateOutlet="itemsTemplate; context: { $implicit: list }"
-        ></ng-container>
-      </div>
-    </ng-container>
-
-    <ng-template #groupedFlatList>
-      <div class="list-items" [ngClass]="standAloneClass()">
-        <ng-container
-          *ngTemplateOutlet="itemsTemplate; context: { $implicit: section.items }"
-        ></ng-container>
-      </div>
-    </ng-template>
-  </ion-item-group>
+  @for (section of _groupedItems; track sectionTrackBy($index, section)) {
+    <ion-item-group [ngClass]="standAloneClass()">
+      @if (_isSectionsEnabled) {
+        <ion-item-divider>
+          <ng-container
+            *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
+          ></ng-container>
+        </ion-item-divider>
+      }
+      @if (_isSectionsEnabled && _isStandAloneEnabled) {
+        @for (list of section.lists; track list) {
+          <div class="list-items" [ngClass]="standAloneClass()">
+            <ng-container
+              *ngTemplateOutlet="itemsTemplate; context: { $implicit: list }"
+            ></ng-container>
+          </div>
+        }
+      } @else {
+        <div class="list-items" [ngClass]="standAloneClass()">
+          <ng-container
+            *ngTemplateOutlet="itemsTemplate; context: { $implicit: section.items }"
+          ></ng-container>
+        </div>
+      }
+    </ion-item-group>
+  }
 </ng-template>
 
 <ng-template #itemsTemplate let-items>
-  <kirby-list-item
-    *ngFor="let item of items; let i = index; trackBy: trackBy || defaultTrackBy"
-    [item]="item"
-    [itemTemplate]="itemTemplate"
-    [swipeActions]="swipeActions"
-    [boundaryClass]="_getBoundaryClass(i, items)"
-    [isSelectable]="_isSelectable"
-    [getItemColor]="getItemColor"
-    [isSelected]="_isSelectable && item === _selectedItem"
-    (itemSelect)="onItemSelect($event)"
-    (swipeActionSelect)="onSwipeActionSelect($event)"
-    [class.is-single]="items.length === 1"
-  ></kirby-list-item>
+  @for (item of items; track trackBy || defaultTrackBy(i); let i = $index) {
+    <kirby-list-item
+      [item]="item"
+      [itemTemplate]="itemTemplate"
+      [swipeActions]="swipeActions"
+      [boundaryClass]="_getBoundaryClass(i, items)"
+      [isSelectable]="_isSelectable"
+      [getItemColor]="getItemColor"
+      [isSelected]="_isSelectable && item === _selectedItem"
+      (itemSelect)="onItemSelect($event)"
+      (swipeActionSelect)="onSwipeActionSelect($event)"
+      [class.is-single]="items.length === 1"
+    ></kirby-list-item>
+  }
 </ng-template>
