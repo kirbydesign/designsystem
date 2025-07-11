@@ -9,5 +9,6 @@ type SegmentItemBadge = {
 export interface SegmentItem {
   id: string;
   text: string;
+  ariaLabel?: string;
   badge?: SegmentItemBadge;
 }
