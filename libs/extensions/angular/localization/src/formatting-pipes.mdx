@@ -1,4 +1,4 @@
-import { Canvas, Controls, Description, Meta } from '@storybook/blocks';
+import { Canvas, Controls, Description, Meta } from '@storybook/addon-docs/blocks';
 
 import * as AccountNumberStories from './account-number/account-number.stories';
 import * as AmountStories from './amount/amount.stories';
@@ -12,7 +12,7 @@ import * as PhoneNumberStories from './phone-number/phone-number.stories';
 # Formatting Pipes
 The following pipes are utilities that can be used to format data for display purposes. They are particularly useful in localization, where data such as numbers, dates, and currencies need to be presented in a format that is familiar to the user based on their locale. The pipes are also useful for ensuring a common presentation of the supported data types across one or more applications.
 
-## Account Number 
+## Account Number
 <Description of={AccountNumberStories.default} />
 <Description of={AccountNumberStories.Account_Number} />
 <Canvas of={AccountNumberStories.Account_Number} />
@@ -24,7 +24,7 @@ import { formatAccountNumber } from '@kirbydesign/extensions-angular/localizatio
 formatAccountNumber(value: AccountNumber);
 ```
 
-## Amount 
+## Amount
 <Description of={AmountStories.default} />
 <Description of={AmountStories.AmountDKK} />
 <Canvas of={AmountStories.AmountDKK} />
@@ -39,7 +39,7 @@ If you need the formatted value in your component code instead of in the templat
 AmountService.formatAmount(amount: Amount, amountServiceConfiguration?: AmountServiceConfiguration)
 ```
 
-## Number 
+## Number
 <Description of={NumberStories.default} />
 <Description of={NumberStories.FormatNumber} />
 <Canvas of={NumberStories.FormatNumber} />
@@ -51,7 +51,7 @@ FormatNumberService.formatNumber(value: number, digitsInfo: string);
 ```
 
 ## Phone Number
-<Description of={PhoneNumberStories.PhoneNumber} /> 
+<Description of={PhoneNumberStories.PhoneNumber} />
 <Canvas of={PhoneNumberStories.PhoneNumber} />
 
 If you need the formatted value in your component code instead of in the template, you can use the underlying service directly:
@@ -71,7 +71,7 @@ PhoneNumberService.formatPhoneNumber(phoneNumber: PhoneNumber | string, chunk?: 
 <Canvas of={DateOnlyStories.DateOnly} />
 
 ### Date or Time
-<Description of={TimeOrDateStories.default} /> 
+<Description of={TimeOrDateStories.default} />
 <Canvas of={TimeOrDateStories.TimeOrDate} />
 
 ## Setup
@@ -106,18 +106,18 @@ It is possible to experiment and interact with these by selecting the specific e
 <Controls of={AmountStories.AmountDKK} />
 
 ### Number
-<Controls of={NumberStories.FormatNumber} /> 
+<Controls of={NumberStories.FormatNumber} />
 
 ### Phone Number
-<Controls of={PhoneNumberStories.PhoneNumber} /> 
+<Controls of={PhoneNumberStories.PhoneNumber} />
 
 ### Time & Date
 
 #### Time Only
-<Controls of={TimeOnlyStories.TimeOnly} /> 
+<Controls of={TimeOnlyStories.TimeOnly} />
 
 #### Date Only
-<Controls of={DateOnlyStories.DateOnly} /> 
+<Controls of={DateOnlyStories.DateOnly} />
 
 #### Time Or Date
-<Controls of={TimeOrDateStories.TimeOrDate} /> 
+<Controls of={TimeOrDateStories.TimeOrDate} />

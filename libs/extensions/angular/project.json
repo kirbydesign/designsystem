@@ -3,8 +3,8 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/extensions/angular",
   "prefix": "kirby-x",
-  "tags": [],
   "projectType": "library",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
@@ -46,11 +46,12 @@
       }
     },
     "storybook": {
-      "builder": "@storybook/angular:start-storybook",
-      "dependsOn": ["build"],
+      "executor": "@storybook/angular:start-storybook",
       "options": {
-        "configDir": "libs/extensions/angular/.storybook",
         "port": 6006,
+        "configDir": "libs/extensions/angular/.storybook",
+        "browserTarget": "extensions-angular:build-storybook",
+        "debugWebpack": true,
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
           "libs/extensions/angular/.storybook/styles.css"
@@ -68,11 +69,12 @@
       }
     },
     "build-storybook": {
-      "builder": "@storybook/angular:build-storybook",
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
       "options": {
-        "configDir": "libs/extensions/angular/.storybook",
         "outputDir": "dist/storybook/extensions/angular",
-        "enableProdMode": false,
+        "configDir": "libs/extensions/angular/.storybook",
+        "browserTarget": "extensions-angular:build-storybook",
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
           "libs/extensions/angular/.storybook/styles.css"
