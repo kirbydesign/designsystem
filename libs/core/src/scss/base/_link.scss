@@ -11,14 +11,19 @@ $_focus-ring-border-radius: utils.border-radius('xxs');
 :visited,
 a[modal-router-link],
 .kirby-button-link {
+  // Wrap declarations to avoid clashes with other mixins that have nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   @include interaction-state.apply-focus-visible($gap: $_focus-ring-gap) {
     outline: none;
     border-radius: $_focus-ring-border-radius;
   }
-
-  color: inherit;
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 a,
@@ -27,7 +32,11 @@ a,
     text-decoration-color: transparent;
   }
 
-  transition: interaction-state.transition();
+  // Wrap declarations to avoid clashes with other mixins that have nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  & {
+    transition: interaction-state.transition();
+  }
 }
 
 button.kirby-button-link {
