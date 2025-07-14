@@ -190,7 +190,7 @@ export class FormFieldComponent
       this.resizeObserverService.unobserve(affix.el);
     });
 
-    this.nestedInteractiveErrorSubscription.unsubscribe();
+    this.nestedInteractiveErrorSubscription?.unsubscribe();
   }
 
   private registerNestedInteractive() {

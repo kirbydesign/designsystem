@@ -73,7 +73,7 @@
     "chromatic": "^11.0.8",
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^2.6.11",
-    "eslint-plugin-storybook": "9.0.16",
+    "eslint-plugin-storybook": "^9.0.16",
     "fs-extra": "^8.1.0",
     "husky": "^3.0.9",
     "is-ci": "^2.0.0",
