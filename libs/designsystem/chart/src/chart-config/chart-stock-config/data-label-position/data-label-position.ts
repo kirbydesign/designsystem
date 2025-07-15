@@ -4,7 +4,7 @@ import { Context } from 'chartjs-plugin-datalabels/types/context';
 import { Align, Options } from 'chartjs-plugin-datalabels/types/options';
 
 const { getThemeColorHexString } = ColorHelper;
-const { fontSize } = DesignTokenHelper;
+const { fontSizeInPx } = DesignTokenHelper;
 
 export const getDataLabelPosition = (data: ScatterDataPoint[], dataIndex: number): Align | null => {
   const scatterPointDataYvalues: number[] = (data as ScatterDataPoint[]).map(
@@ -34,7 +34,7 @@ export const dataLabelsPluginConfig: Partial<Options> = {
   borderRadius: 3,
   font: {
     lineHeight: 1,
-    size: parseInt(fontSize('xs')),
+    size: parseInt(fontSizeInPx('xs')),
   },
   padding: {
     top: 6,

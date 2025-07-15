@@ -6,7 +6,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { ButtonComponent, ButtonSize } from './button.component';
 
-const { getColor, size, fontSize, fatFingerSize } = DesignTokenHelper;
+const { getColor, size, fontSizeInPx, fatFingerSize } = DesignTokenHelper;
 
 describe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
@@ -51,7 +51,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct font-size', () => {
-      expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
+      expect(element).toHaveComputedStyle({ 'font-size': fontSizeInPx('s') });
     });
 
     it('should render with correct height', () => {
@@ -186,19 +186,19 @@ describe('ButtonComponent', () => {
   const sizeTestScenarios: { size: ButtonSize; expected: any }[] = [
     {
       size: ButtonSize.XS,
-      expected: { fontSize: fontSize('xs'), height: size('m'), minWidth: '44px' },
+      expected: { fontSize: fontSizeInPx('xs'), height: size('m'), minWidth: '44px' },
     },
     {
       size: ButtonSize.SM,
-      expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' },
+      expected: { fontSize: fontSizeInPx('xs'), height: size('l'), minWidth: '44px' },
     },
     {
       size: ButtonSize.MD,
-      expected: { fontSize: fontSize('s'), height: size('xl'), minWidth: '88px' },
+      expected: { fontSize: fontSizeInPx('s'), height: size('xl'), minWidth: '88px' },
     },
     {
       size: ButtonSize.LG,
-      expected: { fontSize: fontSize('n'), height: size('xxl'), minWidth: '220px' },
+      expected: { fontSize: fontSizeInPx('n'), height: size('xxl'), minWidth: '220px' },
     },
   ];
   sizeTestScenarios.forEach((scenario) => {

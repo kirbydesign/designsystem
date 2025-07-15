@@ -6,7 +6,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { TabButtonComponent } from './tab-button.component';
 
-const { getTextColor, fontSize, fontWeight, lineHeight, size } = DesignTokenHelper;
+const { getTextColor, fontSizeInPx, fontWeight, lineHeight, size } = DesignTokenHelper;
 
 describe('TabsComponent', () => {
   let spectator: SpectatorHost<TabButtonComponent>;
@@ -81,7 +81,7 @@ describe('TabsComponent', () => {
         it('should have correct typography', () => {
           expect(ionTabButton).toHaveComputedStyle({
             'font-weight': fontWeight('medium'),
-            'font-size': fontSize('xs'),
+            'font-size': fontSizeInPx('xs'),
             'line-height': lineHeight('xs'),
           });
         });
@@ -109,7 +109,7 @@ describe('TabsComponent', () => {
 
         it('should have correct typography', () => {
           expect(ionTabButton).toHaveComputedStyle({
-            'font-size': fontSize('s'),
+            'font-size': fontSizeInPx('s'),
             'line-height': lineHeight('s'),
           });
         });

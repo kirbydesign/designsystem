@@ -23,9 +23,7 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { ButtonComponent } from './button.component';
 
-const getColor = DesignTokenHelper.getColor;
-const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
+const { getColor, fontSizeInPx, size } = DesignTokenHelper;
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -204,7 +202,7 @@ describe('ButtonComponent in kirby empty state', () => {
 
   it('should render with correct font-size', () => {
     expect(actionButtonInEmptyState).toHaveComputedStyle({
-      'font-size': fontSize('n'),
+      'font-size': fontSizeInPx('n'),
     });
   });
 

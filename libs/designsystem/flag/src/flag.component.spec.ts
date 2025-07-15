@@ -3,11 +3,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { FlagComponent } from './flag.component';
 
-const getColor = DesignTokenHelper.getColor;
-const getDecorationColor = DesignTokenHelper.getDecorationColor;
-const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
-const fontWeight = DesignTokenHelper.fontWeight;
+const { getColor, getDecorationColor, size, fontWeight, fontSizeInPx } = DesignTokenHelper;
 
 describe('FlagComponent', () => {
   let spectator: SpectatorHost<FlagComponent>;
@@ -55,7 +51,7 @@ describe('FlagComponent', () => {
   });
 
   it('should render with correct font-size', () => {
-    expect(element).toHaveComputedStyle({ 'font-size': fontSize('n') });
+    expect(element).toHaveComputedStyle({ 'font-size': fontSizeInPx('n') });
   });
 
   it('should render with correct font-weight', () => {
@@ -66,8 +62,8 @@ describe('FlagComponent', () => {
     expect(element).toHaveComputedStyle({
       'padding-left': size('xxs'),
       'padding-right': size('xxs'),
-      'padding-top': size('xxxxs'),
-      'padding-bottom': size('xxxxs'),
+      'padding-top': '0px',
+      'padding-bottom': '0px',
     });
   });
 
@@ -79,15 +75,15 @@ describe('FlagComponent', () => {
       });
 
       it('should render with correct font-size', () => {
-        expect(element).toHaveComputedStyle({ 'font-size': fontSize('xs') });
+        expect(element).toHaveComputedStyle({ 'font-size': fontSizeInPx('xs') });
       });
 
       it('should render with correct padding', () => {
         expect(element).toHaveComputedStyle({
           'padding-left': size('xxxs'),
           'padding-right': size('xxxs'),
-          'padding-top': size('xxxxs'),
-          'padding-bottom': size('xxxxs'),
+          'padding-top': '0px',
+          'padding-bottom': '0px',
         });
       });
     });
@@ -99,15 +95,15 @@ describe('FlagComponent', () => {
       });
 
       it('should render with correct font-size', () => {
-        expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
+        expect(element).toHaveComputedStyle({ 'font-size': fontSizeInPx('s') });
       });
 
       it('should render with correct padding', () => {
         expect(element).toHaveComputedStyle({
           'padding-left': size('xxs'),
           'padding-right': size('xxs'),
-          'padding-top': size('xxxxs'),
-          'padding-bottom': size('xxxxs'),
+          'padding-top': '0px',
+          'padding-bottom': '0px',
         });
       });
     });

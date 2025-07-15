@@ -62,12 +62,12 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe("when 'collapseTitle' is enabled", () => {
-    /* 
-      Whether the title is displayed & truncated is not tested. 
+    /*
+      Whether the title is displayed & truncated is not tested.
       This is the responsibility of the ionic components; we assume
-      they're working as intended. 
+      they're working as intended.
 
-      If needed, it should be implemented as an integration test. 
+      If needed, it should be implemented as an integration test.
     */
 
     let ionContentElement: HTMLIonContentElement;
@@ -142,7 +142,7 @@ describe('ModalWrapperComponent', () => {
       spectator.detectChanges();
       const rootElement: HTMLElement = spectator.element;
       const title = rootElement.querySelector('ion-title');
-      expect(window.getComputedStyle(title).fontSize).toEqual(DesignTokenHelper.fontSize('n'));
+      expect(window.getComputedStyle(title).fontSize).toEqual(DesignTokenHelper.fontSizeInPx('n'));
     });
 
     it('should have programatically focusable heading level 2 as title', async () => {

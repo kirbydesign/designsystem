@@ -4,7 +4,7 @@ import { Align, Color } from 'chartjs-plugin-datalabels/types/options';
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { BaseChartOptions } from './chart-base-options';
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
-const { fontSize } = DesignTokenHelper;
+const { fontSizeInPx } = DesignTokenHelper;
 
 export class StockChartOptions extends BaseChartOptions {
   constructor() {
@@ -37,7 +37,7 @@ export class StockChartOptions extends BaseChartOptions {
               maxRotation: 0,
               autoSkipPadding: 120,
               font: {
-                size: parseInt(fontSize('xs')),
+                size: parseInt(fontSizeInPx('xs')),
               },
             },
           },
@@ -50,7 +50,7 @@ export class StockChartOptions extends BaseChartOptions {
             ticks: {
               display: true,
               font: {
-                size: parseInt(fontSize('xs')),
+                size: parseInt(fontSizeInPx('xs')),
               },
             },
           },
@@ -99,7 +99,7 @@ export class StockChartOptions extends BaseChartOptions {
             borderRadius: 3,
             font: {
               lineHeight: 1,
-              size: parseInt(fontSize('xs')),
+              size: parseInt(fontSizeInPx('xs')),
             },
             padding: {
               top: 6,

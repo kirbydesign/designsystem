@@ -30,7 +30,7 @@ import {
 import { getVerticalLinePluginConfig } from './vertical-line-plugin/vertical-line-plugin';
 
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
-const { fontSize } = DesignTokenHelper;
+const { fontSizeInPx } = DesignTokenHelper;
 
 /**
  * This class is still experimental. Feel free to use it, but please note that it is still subject to breaking changes.
@@ -95,7 +95,7 @@ export class StockChartConfig extends ChartBaseConfig {
             maxRotation: 0,
             autoSkipPadding: 120,
             font: {
-              size: parseInt(fontSize('xs')),
+              size: parseInt(fontSizeInPx('xs')),
             },
             callback(tickValue) {
               const dateInMiliseconds = parseInt(this.getLabelForValue(parseInt(tickValue + '')));
@@ -116,7 +116,7 @@ export class StockChartConfig extends ChartBaseConfig {
           ticks: {
             display: true,
             font: {
-              size: parseInt(fontSize('xs')),
+              size: parseInt(fontSizeInPx('xs')),
             },
           },
         },

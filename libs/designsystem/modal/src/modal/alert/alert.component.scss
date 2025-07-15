@@ -1,4 +1,7 @@
+@use 'sass:math';
 @use '@kirbydesign/core/src/scss/utils';
+
+$column-gap: utils.size('xxs');
 
 article {
   overflow: hidden;
@@ -12,12 +15,13 @@ article {
 .buttongroup {
   display: flex;
   justify-content: center;
-  column-gap: utils.size('xxs');
+  column-gap: $column-gap;
+  flex-wrap: wrap;
 
   button {
-    flex: 1 1 50%;
+    flex: 1 1 calc(50% - #{math.div($column-gap, 2)});
     margin-inline: 0;
-
+    min-width: unset; // unset to allow buttons to expand and shrink as needed when side-by-side
     &:only-child {
       flex-grow: 0;
     }

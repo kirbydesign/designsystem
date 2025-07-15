@@ -57,6 +57,22 @@ export class DesignTokenHelper {
     return styles.fontSizes[key];
   }
 
+  public static fontSizeInPx(key: keyof typeof styles.fontSizes): string {
+    const fontSizesPx = {
+      xxxxl: '72px', // 4.5rem
+      xxxl: '56px', // 3.5rem
+      xxl: '40px', // 2.5rem
+      xl: '32px', // 2rem
+      l: '22px', // 1.375rem
+      m: '18px', // 1.125rem
+      n: '16px', // 1rem
+      s: '14px', // 0.875rem
+      xs: '12px', // 0.75rem
+      xxs: '10px', // 0.625rem
+    };
+    return fontSizesPx[key];
+  }
+
   public static iconFontSize(key: keyof typeof styles.iconFontSizes): string {
     return styles.iconFontSizes[key];
   }

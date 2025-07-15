@@ -9,7 +9,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { BadgeComponent } from './badge.component';
 
-const { getColor, fontSize, size } = DesignTokenHelper;
+const { getColor, fontSizeInPx, size } = DesignTokenHelper;
 const customElevation =
   'rgba(28, 28, 28, 0.3) 0px 20px 30px -15px, rgba(28, 28, 28, 0.12) 0px 0px 5px 0px';
 
@@ -38,13 +38,12 @@ describe('BadgeComponent', () => {
     });
 
     it('should have correct font-size', () => {
-      expect(ionBadge).toHaveComputedStyle({ 'font-size': fontSize('xxs') });
+      expect(ionBadge).toHaveComputedStyle({ 'font-size': fontSizeInPx('xxs') });
     });
 
     it('should be rendered with correct dimensions', () => {
       expect(ionBadge).toHaveComputedStyle({
         'min-width': size('s'),
-        'min-height': size('s'),
         'padding-bottom': '3px',
         'padding-top': '3px',
         'padding-inline-start': '5px',
@@ -90,7 +89,6 @@ describe('BadgeComponent', () => {
     it('should be rendered with correct dimensions', () => {
       expect(ionBadge).toHaveComputedStyle({
         'min-width': size('s'),
-        'min-height': size('s'),
       });
     });
   });

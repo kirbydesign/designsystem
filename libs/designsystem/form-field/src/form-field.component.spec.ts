@@ -17,7 +17,7 @@ import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { AffixDirective } from './directives/affix/affix.directive';
 
-const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
+const { size, fontSizeInPx, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
 
 describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
@@ -93,7 +93,7 @@ describe('FormFieldComponent', () => {
 
     it('should render the label with correct typography', () => {
       expect(labelTextElement).toHaveComputedStyle({
-        'font-size': fontSize('s'),
+        'font-size': fontSizeInPx('s'),
         'font-weight': fontWeight('light'),
         'line-height': lineHeight('s'),
       });

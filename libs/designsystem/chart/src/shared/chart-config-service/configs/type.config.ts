@@ -5,7 +5,7 @@ import { Align } from 'chartjs-plugin-datalabels/types/options';
 
 import { ChartTypesConfig } from '../../';
 
-const { fontSize } = DesignTokenHelper;
+const { fontSizeInPx } = DesignTokenHelper;
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
 
 /**
@@ -35,7 +35,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           },
           ticks: {
             font: {
-              size: parseInt(fontSize('s')),
+              size: parseInt(fontSizeInPx('s')),
             },
           },
         },
@@ -69,7 +69,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           },
           ticks: {
             font: {
-              size: parseInt(fontSize('xs')),
+              size: parseInt(fontSizeInPx('xs')),
             },
           },
         },
@@ -97,7 +97,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           },
           ticks: {
             font: {
-              size: parseInt(fontSize('xs')),
+              size: parseInt(fontSizeInPx('xs')),
             },
           },
         },
@@ -134,7 +134,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             maxRotation: 0,
             autoSkipPadding: 120,
             font: {
-              size: parseInt(fontSize('xs')),
+              size: parseInt(fontSizeInPx('xs')),
             },
           },
         },
@@ -147,7 +147,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           ticks: {
             display: true,
             font: {
-              size: parseInt(fontSize('xs')),
+              size: parseInt(fontSizeInPx('xs')),
             },
           },
         },
@@ -196,7 +196,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           borderRadius: 3,
           font: {
             lineHeight: 1,
-            size: parseInt(fontSize('xs')),
+            size: parseInt(fontSizeInPx('xs')),
           },
           padding: {
             top: 6,

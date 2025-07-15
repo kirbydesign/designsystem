@@ -5,7 +5,7 @@ import { LabelComponent } from '@kirbydesign/designsystem/item';
 
 import { SectionHeaderComponent } from './section-header.component';
 
-const { fontSize, fontWeight, lineHeight } = DesignTokenHelper;
+const { fontSizeInPx, fontWeight, lineHeight } = DesignTokenHelper;
 
 describe('SectionHeaderComponent with Kirby Label', () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
@@ -34,7 +34,7 @@ describe('SectionHeaderComponent with Kirby Label', () => {
     it('should have heading with correct typography styles', () => {
       const heading = spectator.queryHost<HTMLElement>('[heading]');
       expect(heading).toHaveComputedStyle({
-        'font-size': fontSize('m'),
+        'font-size': fontSizeInPx('m'),
         'font-weight': fontWeight('bold'),
         'line-height': lineHeight('m'),
       });
@@ -43,7 +43,7 @@ describe('SectionHeaderComponent with Kirby Label', () => {
     it('should have detail with correct typography styles', () => {
       const detail = spectator.queryHost<HTMLElement>('[detail]');
       expect(detail).toHaveComputedStyle({
-        'font-size': fontSize('s'),
+        'font-size': fontSizeInPx('s'),
         'font-weight': fontWeight('light'),
         'line-height': lineHeight('s'),
       });
@@ -52,7 +52,7 @@ describe('SectionHeaderComponent with Kirby Label', () => {
     it('should have label with correct typography styles', () => {
       const label = spectator.queryHost<HTMLElement>('[label]');
       expect(label).toHaveComputedStyle({
-        'font-size': fontSize('s'),
+        'font-size': fontSizeInPx('s'),
         'font-weight': fontWeight('light'),
         'line-height': lineHeight('s'),
       });

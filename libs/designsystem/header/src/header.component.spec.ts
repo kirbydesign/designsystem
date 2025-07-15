@@ -11,7 +11,7 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { HeaderModule } from './header.module';
 import { HeaderComponent } from './header.component';
 
-const { fontSize, size } = DesignTokenHelper;
+const { fontSizeInPx, size } = DesignTokenHelper;
 
 describe('HeaderComponent', () => {
   let spectator: SpectatorHost<HeaderComponent>;
@@ -47,14 +47,14 @@ describe('HeaderComponent', () => {
 
       expect(titleElement).toHaveExactTrimmedText(title);
       expect(titleElement).toHaveComputedStyle({
-        'font-size': fontSize('xl'),
+        'font-size': fontSizeInPx('xl'),
       });
     });
 
     it(`should have correct subtitle1`, () => {
       const subtitle1Element = spectator.queryAll('.subtitle')[0];
       const subtitle1SpanElement = subtitle1Element.firstElementChild;
-      const expectedFontSize = fontSize('s');
+      const expectedFontSize = fontSizeInPx('s');
       const spaceCharacterWidthInEm = 0.25;
       const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
 
@@ -76,7 +76,7 @@ describe('HeaderComponent', () => {
     it(`should have correct subtitle2`, () => {
       const subtitle2Element = spectator.queryAll('.subtitle')[1];
       const subtitle2SpanElement = subtitle2Element.firstElementChild;
-      const expectedFontSize = fontSize('s');
+      const expectedFontSize = fontSizeInPx('s');
       const spaceCharacterWidthInEm = 0.25;
       const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
 
@@ -194,7 +194,7 @@ describe('HeaderComponent', () => {
 
       expect(keyElement).toHaveExactTrimmedText(title);
       expect(keyElement).toHaveComputedStyle({
-        'font-size': fontSize('m'),
+        'font-size': fontSizeInPx('m'),
       });
     });
 
@@ -203,7 +203,7 @@ describe('HeaderComponent', () => {
 
       expect(valueElement).toHaveExactTrimmedText(`${value} ${valueUnit}`);
       expect(valueElement).toHaveComputedStyle({
-        'font-size': fontSize('xxl'),
+        'font-size': fontSizeInPx('xxl'),
       });
     });
 
@@ -211,7 +211,7 @@ describe('HeaderComponent', () => {
       const valueUnitElement = spectator.query('.value-unit');
 
       expect(valueUnitElement).toHaveExactTrimmedText(valueUnit);
-      const valueFontSize = parseInt(fontSize('xxl'));
+      const valueFontSize = parseInt(fontSizeInPx('xxl'));
       const valueUnitFontSize = valueFontSize * 0.5;
       expect(valueUnitElement).toHaveComputedStyle({
         'font-size': `${valueUnitFontSize}px`,
@@ -263,7 +263,7 @@ describe('HeaderComponent', () => {
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
-        <kirby-progress-circle value="75" themeColor="success" size="lg">  
+        <kirby-progress-circle value="75" themeColor="success" size="lg">
           <kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>
         </kirby-progress-circle>
       </kirby-header>
