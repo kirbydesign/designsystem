@@ -19,11 +19,12 @@ article {
   flex-wrap: wrap;
 
   button {
-    flex: 1 1 calc(50% - #{math.div($column-gap, 2)});
+    flex: 0 1 calc(50% - #{math.div($column-gap, 2)});
     margin-inline: 0;
-    min-width: unset; // unset to allow buttons to expand and shrink as needed when side-by-side
-    &:only-child {
-      flex-grow: 0;
+
+    &:not(:only-child) {
+      flex-grow: 1;
+      min-width: unset; // allow sibling buttons to shrink and grow based on available space
     }
   }
 }
