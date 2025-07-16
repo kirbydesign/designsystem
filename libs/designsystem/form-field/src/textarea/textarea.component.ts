@@ -15,7 +15,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
-  imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'textarea[kirby-textarea]',

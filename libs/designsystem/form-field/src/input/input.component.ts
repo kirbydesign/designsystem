@@ -23,7 +23,6 @@ export enum InputSize {
 }
 
 @Component({
-  imports: [],
   hostDirectives: [
     {
       directive: DateInputDirective,

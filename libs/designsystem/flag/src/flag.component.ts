@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 export type FlagThemeColor = 'success' | 'warning' | 'danger' | 'semi-light' | 'transparent';
 
 @Component({
-  imports: [],
   selector: 'kirby-flag',
   template: `
     <ng-content></ng-content>

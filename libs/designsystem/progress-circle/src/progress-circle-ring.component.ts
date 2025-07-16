@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 
 @Component({
-  imports: [],
   selector: 'kirby-progress-circle-ring',
   templateUrl: './progress-circle-ring.component.html',
   styleUrls: ['./progress-circle-ring.component.scss'],
