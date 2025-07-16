@@ -259,8 +259,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
-    if (typeof firstInteractiveElementWithinItem?.['setFocus'] === 'function') {
-      firstInteractiveElementWithinItem['setFocus']();
+    if (firstInteractiveElementWithinItem) {
+      firstInteractiveElementWithinItem.focus();
     } else {
       this.focusSelectableItem(ionItem);
     }

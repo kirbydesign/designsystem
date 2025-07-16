@@ -336,3 +336,12 @@ kirby-card {
   white-space: nowrap;
   padding: 0;
 }
+
+.title {
+  @include utils.slotted(h1, h2, h3, h4, h5, h6) {
+    margin-bottom: 0;
+    font-size: utils.font-size('n');
+    font-weight: utils.font-weight('bold');
+    line-height: utils.line-height('n');
+  }
+}

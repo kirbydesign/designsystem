@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular/standalone';
+import { isObservable, Observable } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
 
 import { AlertComponent } from '../alert/alert.component';
@@ -30,23 +31,23 @@ export class AlertHelper {
     return {
       ...config,
       okBtn: this.getOkBtn(config),
-      cancelBtn: config.cancelBtn,
       okBtnIsDestructive: this.getOkBtnIsDestructive(config),
       iconName: config.icon && config.icon.name,
       iconThemeColor: config.icon && config.icon.themeColor,
     };
   }
 
-  private getOkBtn(config: AlertConfig) {
-    let text: string;
+  private getOkBtn(config: AlertConfig): string | Observable<string> {
+    let text: string | Observable<string>;
 
     if (config.okBtn) {
-      if (typeof config.okBtn === 'string') {
+      if (typeof config.okBtn === 'string' || isObservable(config.okBtn)) {
         text = config.okBtn;
       } else {
-        text = config.okBtn.text;
+        text = config.okBtn?.text;
       }
     }
+
     return text;
   }
 

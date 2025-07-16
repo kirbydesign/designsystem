@@ -382,6 +382,45 @@ describe('SegmentedControlComponent', () => {
     });
   });
 
+  describe('SegmentedControl with ariaLabel', () => {
+    const itemsWithAriaLabel: SegmentItem[] = [
+      {
+        text: 'First Item',
+        id: 'first',
+        ariaLabel: 'First item aria label',
+      },
+      {
+        text: 'Second item',
+        id: 'second',
+      },
+    ];
+
+    let spectator: SpectatorHost<SegmentedControlComponent>;
+
+    const createHost = createHostFactory({
+      component: SegmentedControlComponent,
+      imports: [TestHelper.ionicModuleForTest],
+    });
+
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-segmented-control [items]="items">
+         </kirby-segmented-control>`,
+        { hostProps: { items: itemsWithAriaLabel } }
+      );
+    });
+
+    it('should render aria-label on segment button with ariaLabel when defined', () => {
+      const segmentButtons = spectator.queryHostAll('ion-segment-button');
+      expect(segmentButtons[0].getAttribute('aria-label')).toBe(itemsWithAriaLabel[0].ariaLabel);
+    });
+
+    it('should render aria-label on segment button with text when ariaLabel undefined', () => {
+      const segmentButtons = spectator.queryHostAll('ion-segment-button');
+      expect(segmentButtons[1].getAttribute('aria-label')).toBe(null);
+    });
+  });
+
   describe('SegmentedControl with Badge', () => {
     const itemsWithBadge: SegmentItem[] = [
       {
