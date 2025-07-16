@@ -1247,6 +1247,104 @@ describe('PageComponent', () => {
       });
     });
   });
+
+  describe('with Kirby global config and setHtmlDocTitle enabled', () => {
+    let spectator: SpectatorHost<PageComponent>;
+    const testTitle = 'Kirby Page Title';
+    let originalTitle: string;
+
+    beforeEach(() => {
+      originalTitle = document.title;
+
+      (window as any).__KIRBY_CONFIG__ = {
+        setHtmlDocTitle: true,
+      };
+    });
+
+    afterEach(() => {
+      document.title = originalTitle;
+    });
+
+    it('should set the document title to the Kirby page title', async () => {
+      spectator = createHost(`<kirby-page [title]="title"></kirby-page>`, {
+        hostProps: { title: testTitle },
+      });
+
+      expect(document.title).toBe(testTitle);
+    });
+
+    it('should update the document title when the title input changes', async () => {
+      spectator = createHost(`<kirby-page [title]="title"></kirby-page>`, {
+        hostProps: { title: testTitle },
+      });
+
+      spectator.setHostInput('title', 'Updated Title');
+      expect(document.title).toBe('Updated Title');
+    });
+
+    it('should not set the document title if the title is empty or whitespace', async () => {
+      spectator = createHost(`<kirby-page [title]="title"></kirby-page>`, {
+        hostProps: { title: testTitle },
+      });
+      spectator.setHostInput('title', '');
+      spectator.detectChanges();
+
+      expect(document.title).toBe(testTitle);
+
+      spectator.setHostInput('title', ' ');
+      spectator.detectChanges();
+
+      expect(document.title).toBe(testTitle);
+    });
+
+    it('should update the document title when a custom title template is used', async () => {
+      spectator = createHost(
+        `<kirby-page><span *kirbyPageTitle>Custom Template Title</span></kirby-page>`
+      );
+      expect(document.title).toContain('Custom Template Title');
+    });
+
+    it('should update the document title when the title is set after a delay', fakeAsync(() => {
+      spectator = createHost(`<kirby-page [title]="title"></kirby-page>`, {
+        hostProps: { title: undefined },
+      });
+
+      tick(1000); // Simulate delay
+      spectator.setHostInput('title', 'Delayed Title');
+
+      expect(document.title).toBe('Delayed Title');
+    }));
+
+    it('should set the document title to toolbarTitle if only toolbarTitle is set', () => {
+      spectator = createHost(`<kirby-page [toolbarTitle]="toolbarTitle"></kirby-page>`, {
+        hostProps: { toolbarTitle: 'Toolbar Only Title' },
+      });
+      expect(document.title).toBe('Toolbar Only Title');
+    });
+
+    it('should prefer title over toolbarTitle for the document title', () => {
+      spectator = createHost(
+        `<kirby-page [title]="title" [toolbarTitle]="toolbarTitle"></kirby-page>`,
+        {
+          hostProps: { title: 'Preferred Title', toolbarTitle: 'Toolbar Title' },
+        }
+      );
+      expect(document.title).toBe('Preferred Title');
+    });
+
+    it('should set the document title to kirby header title', async () => {
+      spectator = createHost(
+        `<kirby-page>
+          <kirby-header [title]="title"></kirby-header>
+        </kirby-page>`,
+        {
+          hostProps: { title: testTitle },
+        }
+      );
+
+      expect(document.title).toBe(testTitle);
+    });
+  });
 });
 
 describe('PageActionsComponent', () => {

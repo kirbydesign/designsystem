@@ -45,7 +45,6 @@ describe('AlertComponent', () => {
     it('should render', () => {
       const expected = 'Test OK Button Text';
 
-      expect(spectator.component.okBtn).toEqual(expected);
       expect(okButton).toHaveText(expected);
     });
 
@@ -82,7 +81,6 @@ describe('AlertComponent', () => {
     it('should render', () => {
       const expected = 'Test Cancel Button Text';
 
-      expect(spectator.component.cancelBtn).toEqual(expected);
       expect(cancelButton).toHaveText(expected);
     });
 

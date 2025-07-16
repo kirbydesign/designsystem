@@ -1,27 +1,7 @@
-@if (externalLink) {
-  <kirby-card [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur">
-    <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
-  </kirby-card>
-}
-
-@if (!externalLink) {
-  <kirby-card
-    [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur"
-    (click)="bannerClicked($event)"
-  >
-    <ng-container *ngTemplateOutlet="sharedCardContent"></ng-container>
-  </kirby-card>
-}
-
-<ng-template #sharedCardContent>
+<kirby-card [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur">
   <div class="blur-image-wrapper">
     <img class="blur-image" [src]="imagePath" alt="" />
   </div>
-
-  <!-- When an external link is supplied, this anchor tag expands and fills the entire banner so users can click anywhere or focus the banner -->
-  @if (externalLink) {
-    <a class="main-content-anchor" [href]="externalLink" target="_blank"></a>
-  }
 
   <div class="main-content-wrapper">
     <div class="main-content-image-wrapper">
@@ -31,13 +11,15 @@
     <div class="main-content">
       <div class="text-content-layout">
         <div class="main-content-header">
-          <p class="kirby-text-normal-bold">
-            @if (title) {
+          @if (title) {
+            <p class="kirby-text-normal-bold">
               {{ title }}
-            } @else {
+            </p>
+          } @else {
+            <div class="title kirby-text-normal-bold">
               <ng-content select="[title]"></ng-content>
-            }
-          </p>
+            </div>
+          }
         </div>
 
         <div class="main-content-body">
@@ -48,47 +30,63 @@
               <ng-content select="[bodyText]"></ng-content>
             }
           </p>
-
-          @if (!showButtonInNarrowView && externalLink) {
-            <div class="main-content-body-action-link">
-              <kirby-icon name="link"></kirby-icon>
-            </div>
-          }
         </div>
       </div>
-      <!-- On large screens we also show a button-like anchor tag in addition to the entire banner anchor -->
       @if (externalLink) {
+        <!-- Only one of below anchors is displayed at a time -
+            we want different behavior on varying screen widths -->
         <a
           kirby-button
-          class="main-content-body-action-text"
-          [class.visible]="showButtonInNarrowView"
+          class="breakout wide-view-action"
           [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           [href]="externalLink"
           target="_blank"
           size="sm"
         >
-          @if (actionButtonText) {
-            {{ actionButtonText }}
-          } @else {
-            {{ translations.get('readMore') }}
-          }
+          {{ actionButtonText }}
+          <kirby-icon name="link"></kirby-icon>
+        </a>
+
+        <a
+          kirby-button
+          class="breakout narrow-view-action"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [href]="externalLink"
+          [noDecoration]="true"
+          [showIconOnly]="true"
+          target="_blank"
+          size="sm"
+        >
+          {{ actionButtonText }}
           <kirby-icon name="link"></kirby-icon>
         </a>
       }
 
       @if (!externalLink) {
+        <!-- Only one of below buttons is displayed at a time -
+            we want different behavior on varying screen widths -->
         <button
-          [class.visible]="showButtonInNarrowView"
-          class="main-content-body-action-text"
           kirby-button
-          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          class="breakout wide-view-action"
           size="sm"
+          (click)="bannerClicked($event)"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
         >
-          @if (actionButtonText) {
+          {{ actionButtonText }}
+        </button>
+
+        <button
+          kirby-button
+          class="breakout narrow-view-action"
+          size="sm"
+          (click)="bannerClicked($event)"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [noDecoration]="true"
+          [showIconOnly]="true"
+        >
+          <span class="visually-hidden">
             {{ actionButtonText }}
-          } @else {
-            {{ translations.get('readMore') }}
-          }
+          </span>
         </button>
       }
     </div>
@@ -98,14 +96,14 @@
     <div class="dismiss">
       <button
         kirby-button
+        size="xs"
         (click)="dismissClicked($event)"
         [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
         [showIconOnly]="true"
-        size="xs"
         [attr.aria-label]="translations.get('close') + ' ' + title"
       >
         <kirby-icon name="close"></kirby-icon>
       </button>
     </div>
   }
-</ng-template>
+</kirby-card>

@@ -103,6 +103,18 @@ kirby-card {
   container-name: banner;
   container-type: inline-size;
   height: 100%;
+
+  // Apply focus styles to the card when any child element (except those inside .dismiss) is focused
+  &:focus-within {
+    &:not(:has(.dismiss :focus)) {
+      @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
+
+      // No focus outline on interactive element itself, only surrounding card
+      .breakout {
+        box-shadow: none;
+      }
+    }
+  }
 }
 
 .main-content-wrapper {
@@ -165,11 +177,6 @@ kirby-card {
     gap: utils.size('xs');
     padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
   }
-}
-
-.main-content-anchor {
-  position: absolute;
-  inset: 0;
 }
 
 .main-content-header {
@@ -235,12 +242,63 @@ kirby-card {
   }
 }
 
-.main-content-body-action-text {
+.breakout {
+  position: initial;
+  border-radius: utils.size('s');
+  align-self: center;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.wide-view-action {
   display: none;
+
   @include if-wide-view {
-    align-self: start;
     display: inline-flex;
+    align-self: start;
     margin: 0; // buttons have xxxs margin so reset that
+  }
+}
+
+.narrow-view-action {
+  display: inline-flex;
+  margin: 0;
+
+  @include if-wide-view {
+    display: none;
+  }
+
+  &:is(a) {
+    width: utils.size('m');
+    min-width: utils.size('m');
+
+    kirby-icon {
+      font-size: utils.size('m');
+    }
+  }
+
+  &:is(button) {
+    // Narrow view button should be present and focusable for Assistive Tech,
+    // while taking up as little space as possible
+    // If set to 0px, screen readers have a hard time adding a proper focus outline
+    min-width: 1px;
+    width: 1px;
+    height: 1px;
+  }
+}
+
+:host(.show-button-in-narrow-view) {
+  .wide-view-action {
+    display: inline-flex;
+  }
+
+  .narrow-view-action {
+    display: none;
   }
 }
 
@@ -255,17 +313,6 @@ kirby-card {
   }
 }
 
-.visible {
-  display: inline-flex;
-}
-
-button.visible,
-a.visible {
-  @include if-narrow-view {
-    align-self: center;
-  }
-}
-
 .text-content-layout {
   display: flex;
   flex: 1;
@@ -275,5 +322,26 @@ a.visible {
   white-space: nowrap;
   @include if-wide-view {
     gap: utils.size('xs');
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  border: medium;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.title {
+  @include utils.slotted(h1, h2, h3, h4, h5, h6) {
+    margin-bottom: 0;
+    font-size: utils.font-size('n');
+    font-weight: utils.font-weight('bold');
+    line-height: utils.line-height('n');
   }
 }
