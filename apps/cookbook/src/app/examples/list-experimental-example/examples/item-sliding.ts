@@ -9,7 +9,7 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const template = `<kirby-list-experimental>
-  @for (item of items; track item) {
+  @for (item of items; track item.id) {
     <kirby-item-sliding [swipeActions]="swipeActions">
       <kirby-item>
         <p>{{ item.title }}</p>
@@ -18,6 +18,7 @@ const template = `<kirby-list-experimental>
     </kirby-item-sliding>
   }
 </kirby-list-experimental>`;
+
 @Component({
   // tslint:disable-next-line
   selector: 'cookbook-list-experimental-sliding-items-example',

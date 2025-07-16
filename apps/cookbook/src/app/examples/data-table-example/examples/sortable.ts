@@ -11,7 +11,7 @@ const config = {
   <table class="kirby-table">
     <thead>
       <tr>
-        @for (heading of headings; track heading; let i = $index) {
+        @for (heading of headings; track heading.title; let i = $index) {
           <th
             [sortable]="heading.sortable"
             [sortDirection]="heading.sortDirection"
@@ -27,7 +27,7 @@ const config = {
       </tr>
     </thead>
     <tbody>
-      @for (rowData of tableData; track rowData; let i = $index) {
+      @for (rowData of tableData; track rowData.name; let i = $index) {
         <tr>
             <td>{{rowData.name}}</td>
             <td>{{rowData.eye_color}}</td>

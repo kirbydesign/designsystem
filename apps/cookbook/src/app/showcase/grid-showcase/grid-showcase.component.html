@@ -7,7 +7,7 @@
   <h3>Breakpoints</h3>
   <p>Each breakpoint is named using t-shirt sizes and maps to a defined screen size or bigger:</p>
   <ul>
-    @for (breakpoint of shorthandToBreakpointMap | keyvalue: originalOrder; track breakpoint) {
+    @for (breakpoint of shorthandToBreakpointMap | keyvalue: originalOrder; track breakpoint.key) {
       <li>{{ breakpoint.key }}: {{ breakpoint.value }}</li>
     }
   </ul>

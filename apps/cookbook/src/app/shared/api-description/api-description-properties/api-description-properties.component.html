@@ -14,7 +14,7 @@
     }
   </thead>
   <tbody>
-    @for (prop of properties; track prop) {
+    @for (prop of properties; track prop.name) {
       <tr>
         @if (columns.name) {
           <td class="property-name">

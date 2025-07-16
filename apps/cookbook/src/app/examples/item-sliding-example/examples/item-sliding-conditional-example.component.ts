@@ -10,7 +10,7 @@ const config = {
   selector: 'cookbook-item-sliding-conditional-example',
   template: `<p>{{text}}</p>
 <kirby-list-experimental>
-  @for (item of items; track item; let i = $index) {
+  @for (item of items; track item.id; let i = $index) {
     <kirby-item-sliding
       [swipeActions]="getSwipeActions(i)"
     >

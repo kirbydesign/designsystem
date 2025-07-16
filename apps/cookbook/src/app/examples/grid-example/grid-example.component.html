@@ -56,7 +56,7 @@
     <legend>Grid Spacing</legend>
     <select (change)="onSpacingSizeChange($event.target.value)">
       <option value="">-</option>
-      @for (size of spacingSizes; track size) {
+      @for (size of spacingSizes; track size.value) {
         <option
           value="{{ size.value }}"
           [attr.selected]="spacingSizes === size.value ? true : null"
@@ -68,7 +68,7 @@
     <legend>Grid Row Spacing</legend>
     <select (change)="onRowSpacingSizeChange($event.target.value)">
       <option value="">-</option>
-      @for (size of spacingSizes; track size) {
+      @for (size of spacingSizes; track size.value) {
         <option
           value="{{ size.value }}"
           [attr.selected]="spacingSizes === size.value ? true : null"
@@ -80,7 +80,7 @@
     <legend>Grid Column Spacing</legend>
     <select (change)="onColumnSpacingSizeChange($event.target.value)">
       <option value="">-</option>
-      @for (size of spacingSizes; track size) {
+      @for (size of spacingSizes; track size.value) {
         <option
           value="{{ size.value }}"
           [attr.selected]="spacingSizes === size.value ? true : null"

@@ -1,5 +1,5 @@
 <kirby-radio-group [value]="size" (valueChange)="onValueChange($event)">
-  @for (option of modalSizeOptions; track option) {
+  @for (option of modalSizeOptions; track option.value || option.text) {
     <kirby-item size="xs">
       <kirby-radio [value]="option" slot="start"></kirby-radio>
       <kirby-label>{{ option.text }}</kirby-label>

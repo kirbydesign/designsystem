@@ -8,7 +8,7 @@ import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 const config = {
   selector: 'cookbook-icon-default-example',
   template: `<div>
-  @for(icon of icons; track $index) {
+  @for(icon of icons; track icon) {
     <div class="icon-item-container">
       <div class="icon-item-inner-container">
         <kirby-icon class="copy-to-clipboard" [name]="icon" [title]="icon" [themeColor]="color?.name" (click)="onIconClick($event, icon)"></kirby-icon>
@@ -20,7 +20,7 @@ const config = {
 
   <p>Icons automatically inherit the value set via the <code>color</code> css property. You can experiment with various colors for the icons above here:</p>
   <div class="color-options">
-    @for(color of colors; track $index) {
+    @for(color of colors; track color.name) {
       <button (click)="changeColor(color)" [ngClass]="color.name"></button>
     }
   </div>

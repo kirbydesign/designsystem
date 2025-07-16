@@ -5,7 +5,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   selector: 'cookbook-modal-example-alert-with-guard-stepper',
   template: `
     <ol>
-      @for (step of steps; track step; let i = $index) {
+      @for (step of steps; track step.text; let i = $index) {
         <li [class.active]="currentStep - 1 === i && !step.steps">
           @if (i === currentStep - 1 && !!step.route) {
             <a [routerLink]="step.route" [target]="step.target">
@@ -17,7 +17,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
           }
           @if (currentStep - 1 === i && !!step.steps) {
             <ul>
-              @for (substep of step.steps; track substep) {
+              @for (substep of step.steps; track substep.text) {
                 <li class="active">
                   <a
                     class="kirby-external-icon"

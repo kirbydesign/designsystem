@@ -21,12 +21,12 @@
         <list-item *kirbyListItemTemplate="let transaction" [transaction]="transaction"></list-item>
       </kirby-list>
     } @else {
-      @for (section of transactionSections | keyvalue; track section) {
+      @for (section of transactionSections | keyvalue; track section.key) {
         <kirby-list-experimental>
           <kirby-section-header outside>
             <h2 heading>{{ section.key }}</h2>
           </kirby-section-header>
-          @for (transaction of section.value.transactions; track transaction) {
+          @for (transaction of section.value.transactions; track transaction.id) {
             <kirby-item-sliding [swipeActions]="swipeActions">
               <list-item [transaction]="transaction"></list-item>
             </kirby-item-sliding>

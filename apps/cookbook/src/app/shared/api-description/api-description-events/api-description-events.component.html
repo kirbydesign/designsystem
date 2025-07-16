@@ -11,7 +11,7 @@
     }
   </thead>
   <tbody>
-    @for (event of events; track event) {
+    @for (event of events; track event.name) {
       <tr>
         @if (columns.name) {
           <td>

@@ -3,7 +3,7 @@
 
   @if (_hasSwipeActions) {
     <ion-item-options [side]="_side">
-      @for (swipeAction of swipeActions; track swipeAction) {
+      @for (swipeAction of swipeActions; track swipeAction.title) {
         @if (!swipeAction.isDisabled) {
           <ion-item-option [ngClass]="swipeAction.type" (click)="onSwipeActionClick(swipeAction)">
             @if (swipeAction.icon !== undefined) {

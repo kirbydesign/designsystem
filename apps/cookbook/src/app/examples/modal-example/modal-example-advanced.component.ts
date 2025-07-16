@@ -34,7 +34,7 @@ const config = {
 
 @if (interactWithBackground) {
   <section class="dummy-text-section">
-    @for (dummyText of dummyBackgroundTexts; track dummyText) {
+    @for (dummyText of dummyBackgroundTexts; track $index) {
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
       </p>

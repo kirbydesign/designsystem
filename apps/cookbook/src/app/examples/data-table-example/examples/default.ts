@@ -14,7 +14,7 @@ const config = {
       </tr>
     </thead>
     <tbody>
-      @for (rowData of tableData; track rowData) {
+      @for (rowData of tableData; track rowData.name) {
         <tr>
           <td>{{rowData.name}}</td>
           <td style="text-align:right;">{{rowData.height}}</td>

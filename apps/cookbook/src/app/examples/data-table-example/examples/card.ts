@@ -21,7 +21,7 @@ const config = {
       </tr>
     </thead>
     <tbody>
-      @for (rowData of tableData; track rowData; let i = $index) {
+      @for (rowData of tableData; track rowData.name; let i = $index) {
         <tr class="kirby-selectable-row" (click)="onClickRow(i)">
           <td>{{rowData.name}}</td>
           <td>{{rowData.eye_color}}</td>

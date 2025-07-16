@@ -46,7 +46,7 @@
 <table [attr.aria-labelledby]="_tableMonthId" role="grid">
   <thead>
     <tr>
-      @for (weekDay of _weekDays; track weekDay) {
+      @for (weekDay of _weekDays; track weekDay.fullName) {
         <th scope="col">
           <span aria-hidden="true">{{ weekDay.firstLetterCapitalized }}</span>
           <span class="visually-hidden">{{ weekDay.fullName }}</span>
@@ -56,9 +56,9 @@
   </thead>
 
   <tbody>
-    @for (week of _month; track week) {
+    @for (week of _month; track $index) {
       <tr>
-        @for (day of week; track day) {
+        @for (day of week; track day.date + '-' + day.monthIndex + '-' + day.year) {
           <td [attr.aria-selected]="day.isSelected ? true : false">
             <button
               kirby-button

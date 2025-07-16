@@ -16,7 +16,7 @@ export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="
         {{ item.amount | currency }}
       </data>
     </kirby-item>
-    @for (shadowAccount of item.shadowAccounts; track shadowAccount) {
+    @for (shadowAccount of item.shadowAccounts; track shadowAccount.title) {
       <kirby-item>
         <h4>{{ shadowAccount.title }}</h4>
         <data [value]="shadowAccount.amount" slot="end">{{ shadowAccount.amount | currency }}</data>

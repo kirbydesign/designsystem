@@ -7,11 +7,11 @@
     @if (!items || !items.length) {
       <ng-content></ng-content>
     } @else {
-      @for (item of items; track item; let i = $index) {
+      @for (item of items; track _getTextFromItem(item)) {
         <ng-container
           *ngTemplateOutlet="
             _customItemTemplate || defaultItemTemplate;
-            context: { $implicit: item, selected: i === selectedIndex, index: i }
+            context: { $implicit: item, selected: $index === selectedIndex, index: $index }
           "
         ></ng-container>
       }

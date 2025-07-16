@@ -199,10 +199,6 @@ export class ListComponent implements OnInit, OnChanges {
     this.listHelper.onLoadOnDemand(this);
   }
 
-  defaultTrackBy(index: number): any {
-    return index;
-  }
-
   sectionTrackBy(_: number, section: { name: string }): string {
     return section.name;
   }

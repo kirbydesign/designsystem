@@ -5,7 +5,7 @@
   (click)="preventOutsideClick($event)"
   [disabled]="isDisabled"
 >
-  @for (item of items; track item; let i = $index) {
+  @for (item of items; track item.id; let i = $index) {
     <ion-segment-button
       [value]="item.id"
       [attr.aria-label]="item.ariaLabel"

@@ -6,7 +6,7 @@
       [subtitle]="subheader"
     ></kirby-card-header>
   }
-  @for (item of items; track item) {
+  @for (item of items; track item.id) {
     <button
       kirby-button
       expand="block"

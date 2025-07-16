@@ -11,7 +11,7 @@
     }
   </thead>
   <tbody>
-    @for (method of methods; track method) {
+    @for (method of methods; track method.name) {
       <tr>
         @if (columns.name) {
           <td>

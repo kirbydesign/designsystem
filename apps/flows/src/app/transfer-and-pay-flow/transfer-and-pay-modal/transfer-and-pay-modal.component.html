@@ -23,7 +23,7 @@
       <div class="container-over">
         <div class="grid" (click)="showModalChooseOwnAccount()">
           <p>From</p>
-          @for (account of selectedAccount; track account) {
+          @for (account of selectedAccount; track account.id) {
             <p>
               <b>{{ account.name }}</b>
             </p>
@@ -39,7 +39,7 @@
       <div class="container-over">
         <div class="grid" (click)="showModalChooseOwnAccount()">
           <p>From</p>
-          @for (account of selectedAccount; track account) {
+          @for (account of selectedAccount; track account.id) {
             <span>
               <b>{{ account.name }}</b>
             </span>
@@ -48,7 +48,7 @@
         <kirby-divider></kirby-divider>
         <div class="grid" (click)="showModalChooseReciever()">
           <p>To</p>
-          @for (other of selectedReceiver; track other) {
+          @for (other of selectedReceiver; track other.id) {
             <span>
               <b>{{ other.name }}</b>
             </span>

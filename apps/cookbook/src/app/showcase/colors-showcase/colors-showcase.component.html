@@ -47,7 +47,7 @@
 
 <h2>Text colors</h2>
 <ul class="text-color-palette">
-  @for (color of textColors; track color) {
+  @for (color of textColors; track color.name) {
     <li class="text-color-box {{ color.name }}">
       <div>
         <h3 class="color-name">{{ color.name }}</h3>
@@ -62,7 +62,7 @@
 
 <ng-template #colorPalette let-colors>
   <ul class="color-palette">
-    @for (color of colors; track color) {
+    @for (color of colors; track color.name) {
       <li class="color-box" (click)="onColorClick(color)">
         <h3 class="color-name">{{ color.name }}</h3>
         <div class="color-samples">
@@ -89,11 +89,11 @@
 
 <ng-template #decorationColorPalette let-colors>
   <div class="color-palette-ramps">
-    @for (color of colors; track color) {
+    @for (color of colors; track color.name) {
       <div class="color-box">
         <h3 class="color-name">{{ color.name }}</h3>
         <dl>
-          @for (ramp of color.ramp; track ramp) {
+          @for (ramp of color.ramp; track ramp.step) {
             <ng-container class="color-box">
               <dd>{{ ramp.step }}</dd>
               <dt

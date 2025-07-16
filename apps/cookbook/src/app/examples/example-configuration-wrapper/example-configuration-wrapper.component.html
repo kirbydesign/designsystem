@@ -15,10 +15,7 @@
     <ng-container *ngTemplateOutlet="fieldset"></ng-container>
   </kirby-card>
 } @else {
-  <fieldset>
-    <legend>{{ title }}</legend>
-    <ng-content></ng-content>
-  </fieldset>
+  <ng-container *ngTemplateOutlet="fieldset"></ng-container>
 }
 
 <ng-template #fieldset>

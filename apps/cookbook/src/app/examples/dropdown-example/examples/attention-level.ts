@@ -38,7 +38,7 @@ const config = {
 
 <div>
 <select (change)="onChange($event.target.value)">
-  @for (color of themeColors; track color) {
+  @for (color of themeColors; track $index) {
     <option
       value="{{ color }}"
       [attr.selected]="themeColor === color ? true : null"

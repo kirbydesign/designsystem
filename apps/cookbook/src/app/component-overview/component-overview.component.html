@@ -6,7 +6,7 @@
 </p>
 <kirby-divider [hasMargin]="true"></kirby-divider>
 <div class="grid">
-  @for (item of listOfComponents; track item; let i = $index) {
+  @for (item of listOfComponents; track item.route; let i = $index) {
     <cookbook-component-display
       [route]="item.route"
       [svgPath]="item.svgPath"

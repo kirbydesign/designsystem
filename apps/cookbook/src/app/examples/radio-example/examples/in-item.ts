@@ -16,7 +16,7 @@ const config = {
   selector: 'cookbook-radio-in-item-example',
   template: `<kirby-card>
   <kirby-radio-group [value]="selected" aria-label="Select main course">
-    @for (item of items; track item) {
+    @for (item of items; track item.value) {
       <kirby-item>
         <kirby-radio [value]="item" slot="start" [disabled]="item.disabled">
           {{item.title}}

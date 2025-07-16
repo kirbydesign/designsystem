@@ -1,7 +1,7 @@
 <ng-content select="button[kirby-button]"></ng-content>
 
 <kirby-menu [placement]="'bottom-end'">
-  @for (action of _collapsedActions; track action) {
+  @for (action of _collapsedActions; track action.text) {
     <kirby-item
       [selectable]="true"
       [disabled]="action.button?.disabled"

@@ -5,7 +5,6 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChild,
-  DOCUMENT,
   ElementRef,
   HostBinding,
   Inject,
@@ -15,6 +14,7 @@ import {
 } from '@angular/core';
 import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 import { IonBackdrop, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   imports: [IonBackdrop, IonFab, IonFabButton, IonFabList],

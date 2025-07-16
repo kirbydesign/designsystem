@@ -6,7 +6,7 @@
   <div>
     <select (change)="onThemeChange($event.target.value)">
       <option value="">Card color: None</option>
-      @for (color of themeColors; track color) {
+      @for (color of themeColors; track $index) {
         <option value="{{ color }}" [attr.selected]="themeColor === color ? true : null">
           Card color: {{ color }}
         </option>

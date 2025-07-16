@@ -10,7 +10,7 @@ const template = `<kirby-list-experimental>
   <kirby-section-header outside>
     <h2 heading>Stocks</h2>
   </kirby-section-header>
-  @for (item of items; track item) {
+  @for (item of items; track item.id) {
     <kirby-item>
       <p>{{ item.title }}</p>
       <data slot="end" class="kirby-text-bold">{{item.amount}}</data>

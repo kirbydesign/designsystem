@@ -2,7 +2,7 @@
   <div [style.--keyboard-height]="keyboardHeight + 'px'" class="dummy-keyboard">
     <div class="top"></div>
     <div class="bg" [class.keyboard-showing]="keyboardIsShowing">
-      @for (counter of keys; track counter) {
+      @for (counter of keys; track $index) {
         <div></div>
       }
     </div>
