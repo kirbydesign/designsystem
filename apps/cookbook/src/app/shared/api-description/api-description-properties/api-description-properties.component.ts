@@ -19,7 +19,6 @@ export interface ApiDescriptionPropertyColumns {
   selector: 'cookbook-api-description-properties',
   templateUrl: './api-description-properties.component.html',
   styleUrls: ['../api-description.shared.scss'],
-  imports: [],
 })
 export class ApiDescriptionPropertiesComponent {
   @Input() properties: ApiDescriptionProperty[];
