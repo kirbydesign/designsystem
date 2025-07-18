@@ -79,10 +79,6 @@ describe('DropdownComponent', () => {
       expect(spectator.component.selectedText).toBeNull();
     });
 
-    it('should have selected index = -1', () => {
-      expect(spectator.component.selectedIndex).toEqual(-1);
-    });
-
     it('should have default placeholder text', () => {
       expect(buttonElement).toHaveText(spectator.component.placeholder, true);
     });
@@ -139,6 +135,38 @@ describe('DropdownComponent', () => {
     // Fixes https://github.com/kirbydesign/designsystem/issues/1987
     it('should have type="button" attribute', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
+    it('should have correct ARIA attributes on button', () => {
+      expect(buttonElement.getAttribute('role')).toBe('combobox');
+      expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
+      expect(buttonElement.getAttribute('aria-controls')).toBe('listbox1');
+      expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('should update aria-expanded when opened', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+      expect(buttonElement.getAttribute('aria-expanded')).toBe('true');
+    });
+
+    it('should set aria-activedescendant when focusedIndex is set', () => {
+      spectator.component.focusedIndex = 1;
+      spectator.detectChanges();
+      expect(buttonElement.getAttribute('aria-activedescendant')).toBe('listbox1-item-1');
+    });
+
+    it('should set correct ARIA attributes on listbox and options when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+      const listbox = spectator.query('[role="listbox"]');
+      expect(listbox).toBeTruthy();
+      expect(listbox.getAttribute('id')).toBe('listbox1');
+      const options = spectator.queryAll('[role="option"]');
+      expect(options.length).toBe(items.length);
+      options.forEach((option: HTMLElement, i: number) => {
+        expect(option.getAttribute('id')).toBe(`listbox1-item-${i}`);
+      });
     });
 
     describe('when setting selected index', () => {

@@ -131,7 +131,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   usePopover = false;
 
-  @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
   }
@@ -335,10 +334,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         this.showDropdown();
         this.changeDetectorRef.detectChanges();
       };
-      // Add null check for cardElement
-      if (!this.cardElement || !this.cardElement.nativeElement) {
-        return;
-      }
       this.intersectionObserverRef = new IntersectionObserver(callback, options);
       this.intersectionObserverRef.observe(this.cardElement.nativeElement);
     }
@@ -633,40 +628,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.focusedIndex = newFocusedIndex;
     }
     return false;
-  }
-
-  onKeyDown(event: KeyboardEvent): void {
-    // Delegate to existing keyboard handling logic
-    // This will allow (keydown)="onKeyDown($event)" in the template
-    if (this.disabled) {
-      event.preventDefault();
-      return;
-    }
-    switch (event.key) {
-      case 'ArrowDown':
-      case 'ArrowUp':
-      case 'ArrowLeft':
-      case 'ArrowRight':
-        this._onArrowKeys(event);
-        break;
-      case 'Enter':
-      case ' ':
-        this._onEnterOrSpace(event);
-        break;
-      case 'Tab':
-        this._onTab(event);
-        break;
-      case 'Home':
-      case 'End':
-        this._onHomeEndKeys(event);
-        break;
-      case 'Escape':
-        this._onEnterOrEscape();
-        break;
-      default:
-        // Do nothing for other keys
-        break;
-    }
   }
 
   private unlistenAllSlottedItems() {
