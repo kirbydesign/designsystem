@@ -18,7 +18,6 @@ export enum HorizontalDirection {
 }
 
 @Component({
-  imports: [],
   selector: 'kirby-popover',
   template: `
     <div #wrapper class="wrapper"><ng-content></ng-content></div>

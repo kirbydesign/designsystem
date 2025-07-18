@@ -28,7 +28,6 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [],
 })
 export class DataTableDefaultExampleComponent {
   template: string = config.template;
