@@ -7,7 +7,10 @@
     "npm": "10"
   },
   "workspaces": [
-    "libs/*",
+    "libs/core",
+    "libs/angular",
+    "libs/designsystem",
+    "libs/extensions/angular",
     "apps/*",
     "tools/*"
   ],
