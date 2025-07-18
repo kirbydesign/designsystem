@@ -1,29 +1,47 @@
 <table class="api-description">
   <thead>
-    <th *ngIf="columns.name">{{ columns.name }}</th>
-    <th *ngIf="columns.description">{{ columns.description }}</th>
-    <th *ngIf="columns.type">{{ columns.type }}</th>
-    <th *ngIf="columns.default">{{ columns.default }}</th>
+    @if (columns.name) {
+      <th>{{ columns.name }}</th>
+    }
+    @if (columns.description) {
+      <th>{{ columns.description }}</th>
+    }
+    @if (columns.type) {
+      <th>{{ columns.type }}</th>
+    }
+    @if (columns.default) {
+      <th>{{ columns.default }}</th>
+    }
   </thead>
   <tbody>
-    <tr *ngFor="let prop of properties">
-      <td class="property-name" *ngIf="columns.name">
-        <code>{{ prop.name }}</code>
-      </td>
-      <td *ngIf="columns.description" class="description">{{ prop.description }}</td>
-      <td *ngIf="columns.type">
-        <ng-container *ngIf="!prop.preserveTypeWhitespaces && prop.type">
-          <code>{{ prop.type.join(' | ') }}</code>
-        </ng-container>
-        <pre
-          *ngIf="prop.preserveTypeWhitespaces && prop.type"
-        ><code>{{  prop.type.join(' | ') }}</code></pre>
-      </td>
-      <td *ngIf="columns.default">
-        <ng-container *ngIf="prop.defaultValue">
-          <code>{{ prop.defaultValue }}</code>
-        </ng-container>
-      </td>
-    </tr>
+    @for (prop of properties; track prop.name) {
+      <tr>
+        @if (columns.name) {
+          <td class="property-name">
+            <code>{{ prop.name }}</code>
+          </td>
+        }
+        @if (columns.description) {
+          <td class="description">{{ prop.description }}</td>
+        }
+        @if (columns.type) {
+          <td>
+            @if (!prop.preserveTypeWhitespaces && prop.type) {
+              <code>{{ prop.type.join(' | ') }}</code>
+            }
+            @if (prop.preserveTypeWhitespaces && prop.type) {
+              <pre><code>{{  prop.type.join(' | ') }}</code></pre>
+            }
+          </td>
+        }
+        @if (columns.default) {
+          <td>
+            @if (prop.defaultValue) {
+              <code>{{ prop.defaultValue }}</code>
+            }
+          </td>
+        }
+      </tr>
+    }
   </tbody>
 </table>

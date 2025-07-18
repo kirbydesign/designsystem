@@ -1,6 +1,6 @@
 <div class="button-container" #buttonContainer>
   <ng-content select="button[kirby-button]"></ng-content>
-  <ng-container *ngIf="!userProvidedButton">
+  @if (!userProvidedButton) {
     <button
       #defaultButton
       [id]="triggerButtonId"
@@ -16,7 +16,7 @@
     >
       <kirby-icon [name]="'more'"></kirby-icon>
     </button>
-  </ng-container>
+  }
 </div>
 <kirby-card
   [id]="menuId"

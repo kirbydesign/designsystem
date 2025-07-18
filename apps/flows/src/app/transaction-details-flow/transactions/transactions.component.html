@@ -13,16 +13,13 @@
         [transaction]="transaction"
         [routerLink]="['../transactions-details', transaction.id]"
       >
-        <kirby-badge
-          *ngIf="transaction.balanced"
-          slot="outside"
-          [size]="'sm'"
-          [themeColor]="'warning'"
-        ></kirby-badge>
+        @if (transaction.balanced) {
+          <kirby-badge slot="outside" [size]="'sm'" [themeColor]="'warning'"></kirby-badge>
+        }
         <kirby-avatar slot="start">
-          <kirby-badge [themeColor]="'danger'" *ngIf="transaction.amount.amount < -11000">
-            !
-          </kirby-badge>
+          @if (transaction.amount.amount < -11000) {
+            <kirby-badge [themeColor]="'danger'">!</kirby-badge>
+          }
           <kirby-icon [name]="transaction.iconName"></kirby-icon>
         </kirby-avatar>
         <kirby-label>

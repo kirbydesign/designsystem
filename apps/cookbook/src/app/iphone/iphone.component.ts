@@ -1,4 +1,4 @@
-import { HashLocationStrategy, LocationStrategy, NgIf } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -16,7 +16,7 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
   selector: 'cookbook-iphone',
   templateUrl: './iphone.component.html',
   styleUrls: ['./iphone.component.scss'],
-  imports: [NgIf, ToggleComponent],
+  imports: [ToggleComponent],
 })
 export class IphoneComponent implements OnChanges, AfterViewInit {
   @Input() src: string;

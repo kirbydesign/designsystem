@@ -1,2 +1,5 @@
-<ng-content *ngIf="!value"></ng-content>
-<ng-container *ngIf="value">{{ value }}</ng-container>
+@if (!value) {
+  <ng-content></ng-content>
+}
+<!-- prettier-ignore -->
+@if (value) {{{value}}}

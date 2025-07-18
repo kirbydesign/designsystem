@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +14,7 @@ import {
 } from '../../modal.interfaces';
 
 @Component({
-  imports: [CommonModule, IonFooter],
+  imports: [IonFooter],
   selector: 'kirby-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],

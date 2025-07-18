@@ -1,6 +1,8 @@
 <kirby-page-title>
   See details
-  <span *ngIf="!verified">and verify</span>
+  @if (!verified) {
+    <span>and verify</span>
+  }
 </kirby-page-title>
 <kirby-card>
   <kirby-item>
@@ -29,6 +31,8 @@
   </kirby-item>
 </kirby-card>
 
-<div class="center-button" *ngIf="!verified">
-  <button kirby-button (click)="onVerify()">Verify</button>
-</div>
+@if (!verified) {
+  <div class="center-button">
+    <button kirby-button (click)="onVerify()">Verify</button>
+  </div>
+}

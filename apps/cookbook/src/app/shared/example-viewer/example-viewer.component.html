@@ -1,13 +1,15 @@
 <ng-content></ng-content>
-<button
-  *ngIf="html || ts || css"
-  kirby-button
-  size="sm"
-  attentionLevel="3"
-  (click)="expanded = !expanded"
->
-  {{ expanded ? 'Hide Code' : 'View Code' }}
-</button>
-<cookbook-code-viewer *ngIf="expanded && html" [html]="html"></cookbook-code-viewer>
-<cookbook-code-viewer *ngIf="expanded && ts" [ts]="ts"></cookbook-code-viewer>
-<cookbook-code-viewer *ngIf="expanded && css" [css]="css"></cookbook-code-viewer>
+@if (html || ts || css) {
+  <button kirby-button size="sm" attentionLevel="3" (click)="expanded = !expanded">
+    {{ expanded ? 'Hide Code' : 'View Code' }}
+  </button>
+}
+@if (expanded && html) {
+  <cookbook-code-viewer [html]="html"></cookbook-code-viewer>
+}
+@if (expanded && ts) {
+  <cookbook-code-viewer [ts]="ts"></cookbook-code-viewer>
+}
+@if (expanded && css) {
+  <cookbook-code-viewer [css]="css"></cookbook-code-viewer>
+}

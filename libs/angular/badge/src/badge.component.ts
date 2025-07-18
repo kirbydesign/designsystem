@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -14,7 +13,6 @@ import type { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign
   selector: 'kirby-badge',
   template: '<ng-content></ng-content>',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
 })
 export class KirbyBadgeComponent {
   private el: KirbyBadgeElement;

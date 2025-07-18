@@ -1,124 +1,136 @@
-<kirby-checkbox
-  *ngIf="showDummyKeyboard !== undefined"
-  [checked]="showDummyKeyboard && !interactWithBackground"
-  (checkedChange)="toggleDummyKeyboard($event)"
-  [disabled]="interactWithBackground || disabled"
-  text="Show dummy keyboard"
-  size="xs"
-></kirby-checkbox>
+@if (showDummyKeyboard !== undefined) {
+  <kirby-checkbox
+    [checked]="showDummyKeyboard && !interactWithBackground"
+    (checkedChange)="toggleDummyKeyboard($event)"
+    [disabled]="interactWithBackground || disabled"
+    text="Show dummy keyboard"
+    size="xs"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="showPageProgress !== undefined && (flavor === undefined || flavor === 'modal')"
-  [checked]="showPageProgress && !interactWithBackground"
-  (checkedChange)="toggleShowPageProgress($event)"
-  [disabled]="interactWithBackground || disabled"
-  text="Show page progress (modal only)"
-  size="xs"
-></kirby-checkbox>
+@if (showPageProgress !== undefined && (flavor === undefined || flavor === 'modal')) {
+  <kirby-checkbox
+    [checked]="showPageProgress && !interactWithBackground"
+    (checkedChange)="toggleShowPageProgress($event)"
+    [disabled]="interactWithBackground || disabled"
+    text="Show page progress (modal only)"
+    size="xs"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="showFooter !== undefined"
-  [checked]="showFooter && !interactWithBackground"
-  (checkedChange)="toggleShowFooter($event)"
-  [disabled]="interactWithBackground || disabled"
-  text="Show footer"
-  size="xs"
-></kirby-checkbox>
+@if (showFooter !== undefined) {
+  <kirby-checkbox
+    [checked]="showFooter && !interactWithBackground"
+    (checkedChange)="toggleShowFooter($event)"
+    [disabled]="interactWithBackground || disabled"
+    text="Show footer"
+    size="xs"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="displayFooterAsInline !== undefined"
-  [checked]="displayFooterAsInline"
-  (checkedChange)="toggleDisplayFooterAsInline($event)"
-  [disabled]="disabled || !showFooter"
-  text="Display footer as inline"
-  size="xs"
-  class="indent"
-></kirby-checkbox>
+@if (displayFooterAsInline !== undefined) {
+  <kirby-checkbox
+    [checked]="displayFooterAsInline"
+    (checkedChange)="toggleDisplayFooterAsInline($event)"
+    [disabled]="disabled || !showFooter"
+    text="Display footer as inline"
+    size="xs"
+    class="indent"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="snapFooterToKeyboard !== undefined"
-  [checked]="snapFooterToKeyboard"
-  (checkedChange)="toggleSnapFooterToKeyboard($event)"
-  [disabled]="disabled || !showFooter"
-  text="Snap footer to keyboard"
-  size="xs"
-  class="indent"
-></kirby-checkbox>
+@if (snapFooterToKeyboard !== undefined) {
+  <kirby-checkbox
+    [checked]="snapFooterToKeyboard"
+    (checkedChange)="toggleSnapFooterToKeyboard($event)"
+    [disabled]="disabled || !showFooter"
+    text="Snap footer to keyboard"
+    size="xs"
+    class="indent"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="disableScroll !== undefined"
-  [checked]="disableScroll"
-  (checkedChange)="toggleDisableScroll($event)"
-  [disabled]="disabled"
-  text="Disable scroll"
-  size="xs"
-></kirby-checkbox>
+@if (disableScroll !== undefined) {
+  <kirby-checkbox
+    [checked]="disableScroll"
+    (checkedChange)="toggleDisableScroll($event)"
+    [disabled]="disabled"
+    text="Disable scroll"
+    size="xs"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="showDummyContent !== undefined"
-  [checked]="showDummyContent"
-  (checkedChange)="toggleShowDummyContent($event)"
-  [disabled]="interactWithBackground || disabled"
-  text="Show dummy content"
-  size="xs"
-></kirby-checkbox>
+@if (showDummyContent !== undefined) {
+  <kirby-checkbox
+    [checked]="showDummyContent"
+    (checkedChange)="toggleShowDummyContent($event)"
+    [disabled]="interactWithBackground || disabled"
+    text="Show dummy content"
+    size="xs"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="delayLoadDummyContent !== undefined"
-  [checked]="delayLoadDummyContent && !interactWithBackground"
-  (checkedChange)="toggleDelayLoadDummyContent($event)"
-  [disabled]="!showDummyContent || interactWithBackground || disabled"
-  text="Delay load modal"
-  size="xs"
-  class="indent"
-></kirby-checkbox>
+@if (delayLoadDummyContent !== undefined) {
+  <kirby-checkbox
+    [checked]="delayLoadDummyContent && !interactWithBackground"
+    (checkedChange)="toggleDelayLoadDummyContent($event)"
+    [disabled]="!showDummyContent || interactWithBackground || disabled"
+    text="Delay load modal"
+    size="xs"
+    class="indent"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="loadAdditionalContent !== undefined"
-  [checked]="loadAdditionalContent && !interactWithBackground"
-  (checkedChange)="toggleLoadAdditionalContent($event)"
-  [disabled]="!showDummyContent || interactWithBackground || disabled"
-  text="Delay load additional"
-  size="xs"
-  class="indent"
-></kirby-checkbox>
+@if (loadAdditionalContent !== undefined) {
+  <kirby-checkbox
+    [checked]="loadAdditionalContent && !interactWithBackground"
+    (checkedChange)="toggleLoadAdditionalContent($event)"
+    [disabled]="!showDummyContent || interactWithBackground || disabled"
+    text="Delay load additional"
+    size="xs"
+    class="indent"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="collapseTitle !== undefined"
-  [checked]="collapseTitle"
-  (checkedChange)="toggleCollapseTitle($event)"
-  [disabled]="disabled"
-  text="Collapse title"
-  size="xs"
-></kirby-checkbox>
+@if (collapseTitle !== undefined) {
+  <kirby-checkbox
+    [checked]="collapseTitle"
+    (checkedChange)="toggleCollapseTitle($event)"
+    [disabled]="disabled"
+    text="Collapse title"
+    size="xs"
+  ></kirby-checkbox>
+}
 
-<kirby-checkbox
-  *ngIf="alertBeforeClose !== undefined"
-  [checked]="alertBeforeClose"
-  (checkedChange)="toggleAlertBeforeClose($event)"
-  [disabled]="disabled"
-  text="Alert before closing"
-  size="xs"
-></kirby-checkbox>
+@if (alertBeforeClose !== undefined) {
+  <kirby-checkbox
+    [checked]="alertBeforeClose"
+    (checkedChange)="toggleAlertBeforeClose($event)"
+    [disabled]="disabled"
+    text="Alert before closing"
+    size="xs"
+  ></kirby-checkbox>
+}
 
-<ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
+@if (interactWithBackground !== undefined || customCssClass !== undefined) {
   <kirby-divider [hasMargin]="true"></kirby-divider>
   <p>Custom modal/drawer:</p>
-  <kirby-checkbox
-    *ngIf="interactWithBackground !== undefined"
-    [checked]="interactWithBackground"
-    (checkedChange)="toggleInteractWithBackground($event)"
-    [disabled]="disabled"
-    text="Interact with background (drawer only)"
-    size="xs"
-  ></kirby-checkbox>
-
-  <kirby-checkbox
-    *ngIf="customCssClass !== undefined"
-    [checked]="customCssClass"
-    (checkedChange)="toggleCustomCssClass($event)"
-    [disabled]="disabled"
-    text="Add custom CSS class"
-    size="xs"
-  ></kirby-checkbox>
-</ng-container>
+  @if (interactWithBackground !== undefined) {
+    <kirby-checkbox
+      [checked]="interactWithBackground"
+      (checkedChange)="toggleInteractWithBackground($event)"
+      [disabled]="disabled"
+      text="Interact with background (drawer only)"
+      size="xs"
+    ></kirby-checkbox>
+  }
+  @if (customCssClass !== undefined) {
+    <kirby-checkbox
+      [checked]="customCssClass"
+      (checkedChange)="toggleCustomCssClass($event)"
+      [disabled]="disabled"
+      text="Add custom CSS class"
+      size="xs"
+    ></kirby-checkbox>
+  }
+}

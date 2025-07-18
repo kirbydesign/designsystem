@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { NgFor, NgIf } from '@angular/common';
+
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
 import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
 
@@ -10,7 +10,7 @@ import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
   selector: 'cookbook-examples',
   templateUrl: './examples.component.html',
   styleUrls: ['./examples.component.scss'],
-  imports: [NgIf, NgFor, KirbyAppModule, RouterOutletModule],
+  imports: [KirbyAppModule, RouterOutletModule],
 })
 export class ExamplesComponent {
   showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(

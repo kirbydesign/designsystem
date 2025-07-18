@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DesignTokenHelper } from '@kirbydesign/designsystem';
-import { KeyValuePipe, NgFor } from '@angular/common';
+import { KeyValuePipe } from '@angular/common';
 import exampleHtml from '../../examples/grid-example/grid-example.component.html?raw';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { GridExampleComponent } from '../../examples/grid-example/grid-example.component';
@@ -13,7 +13,6 @@ const { breakpoints } = DesignTokenHelper;
   selector: 'cookbook-grid-showcase',
   templateUrl: './grid-showcase.component.html',
   imports: [
-    NgFor,
     ExampleViewerComponent,
     GridExampleComponent,
     ApiDescriptionPropertiesComponent,

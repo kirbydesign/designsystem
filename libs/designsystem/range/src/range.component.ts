@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -18,7 +17,7 @@ import { IonRange } from '@ionic/angular/standalone';
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 
 @Component({
-  imports: [CommonModule, IonRange],
+  imports: [IonRange],
   selector: 'kirby-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],

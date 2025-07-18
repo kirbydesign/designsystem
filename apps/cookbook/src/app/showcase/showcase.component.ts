@@ -2,13 +2,12 @@ import { Component, ElementRef, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'cookbook-showcase',
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss'],
-  imports: [NgIf, RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterOutlet],
 })
 export class ShowcaseComponent implements OnDestroy {
   exampleComponentName: string;

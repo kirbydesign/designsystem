@@ -15,7 +15,7 @@ import { filter } from 'rxjs/operators';
 import { kebabToTitleCase } from '@kirbydesign/designsystem';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { NgFor, NgIf } from '@angular/common';
+
 import {
   DateInputDirective,
   FormFieldModule,
@@ -40,13 +40,11 @@ interface SideNavLink {
   styleUrls: ['./side-nav.component.scss'],
   imports: [
     CardModule,
-    NgFor,
     RouterLink,
     FormFieldModule,
     DateInputDirective,
     InputComponent,
     FormsModule,
-    NgIf,
     ButtonComponent,
     IconModule,
     RouterLinkActive,
