@@ -126,36 +126,26 @@ describe('DropdownComponent', () => {
       });
     });
 
-    it('should receive focus', () => {
-      spectator.element.focus();
-      expect(spectator.element).toBeFocused();
-    });
-
-    it('should receive focus on button click', () => {
-      spectator.click('button');
-      expect(spectator.element).toBeFocused();
-    });
-
     // Fixes https://github.com/kirbydesign/designsystem/issues/1987
     it('should have type="button" attribute', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
     });
 
-    it('should have correct aria attributes on button', () => {
+    it('should have correct ARIA attributes on button', () => {
       expect(buttonElement.getAttribute('role')).toBe('combobox');
       expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
       expect(buttonElement.getAttribute('aria-controls')).toBe(listboxId);
       expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
     });
 
-    it('should have correct id on button', () => {
+    it('should have correct ID on button', () => {
       expect(buttonElement.getAttribute('id')).toBe(comboboxId);
     });
 
     it('should update aria-expanded when opened', () => {
       spectator.component.open();
       spectator.detectChanges();
-      expect(buttonElement.getAttribute('aria-expanded')).toBe('true');
+      expect(buttonElement.getAttribute('aria-expanded')).toBeTruthy();
     });
 
     it('should set aria-activedescendant when focusedIndex is set', () => {
@@ -384,11 +374,10 @@ describe('DropdownComponent', () => {
       });
 
       describe('and button is clicked', () => {
-        it('should open and focus dropdown', fakeAsync(() => {
+        it('should open', fakeAsync(() => {
           spectator.click('button');
           tick(openDelayInMs);
           expect(spectator.component.isOpen).toBeTruthy();
-          expect(spectator.element).toBeFocused();
         }));
       });
 

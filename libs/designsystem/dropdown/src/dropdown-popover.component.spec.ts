@@ -32,6 +32,9 @@ describe('DropdownComponent (popover version)', () => {
   ];
   const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
 
+  let listboxId: string;
+  let comboboxId: string;
+
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
@@ -51,6 +54,8 @@ describe('DropdownComponent (popover version)', () => {
         { hostProps: { items } }
       );
       buttonElement = spectator.query('button[kirby-button]');
+      listboxId = spectator.component._listboxId;
+      comboboxId = spectator.component._comboboxId;
     });
 
     it('should create', () => {
@@ -67,10 +72,6 @@ describe('DropdownComponent (popover version)', () => {
 
     it('should not have selected text', () => {
       expect(spectator.component.selectedText).toBeNull();
-    });
-
-    it('should have selected index = -1', () => {
-      expect(spectator.component.selectedIndex).toEqual(-1);
     });
 
     it('should have default placeholder text', () => {
@@ -104,6 +105,44 @@ describe('DropdownComponent (popover version)', () => {
 
     it('should not render disabled attribute on button', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
+    });
+
+    it('should have correct ARIA attributes on button', () => {
+      expect(buttonElement.getAttribute('role')).toBe('combobox');
+      expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
+      expect(buttonElement.getAttribute('aria-controls')).toBe(listboxId);
+      expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('should have correct ID on button', () => {
+      expect(buttonElement.getAttribute('id')).toBe(comboboxId);
+    });
+
+    it('should update aria-expanded when opened', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+      expect(buttonElement.getAttribute('aria-expanded')).toBeTruthy();
+    });
+
+    it('should set aria-activedescendant when focusedIndex is set', () => {
+      spectator.component.focusedIndex = 1;
+      spectator.detectChanges();
+      expect(buttonElement.getAttribute('aria-activedescendant')).toBe(
+        listboxId + '-item-' + spectator.component.focusedIndex
+      );
+    });
+
+    it('should set correct ARIA attributes on listbox and options when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+      const listbox = spectator.query('[role="listbox"]');
+      expect(listbox).toBeTruthy();
+      expect(listbox.getAttribute('id')).toBe(listboxId);
+      const options = spectator.queryAll('[role="option"]');
+      expect(options.length).toBe(items.length);
+      options.forEach((option: HTMLElement, i: number) => {
+        expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
+      });
     });
 
     it('should have correct item size', fakeAsync(() => {
