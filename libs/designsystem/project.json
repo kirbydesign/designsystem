@@ -72,10 +72,14 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "dist/storybook/designsystem",
         "configDir": "libs/designsystem/.storybook",
-        "browserTarget": "designsystem:build-storybook",
-        "compodoc": false
+        "outputDir": "dist/storybook/designsystem",
+        "enableProdMode": false,
+        "compodoc": false,
+        "styles": [
+          "libs/core/src/scss/_global-styles.scss",
+          "libs/designsystem/.storybook/styles.css"
+        ]
       },
       "configurations": {
         "ci": {

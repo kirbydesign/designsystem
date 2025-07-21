@@ -72,9 +72,10 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "dist/storybook/extensions/angular",
         "configDir": "libs/extensions/angular/.storybook",
+        "outputDir": "dist/storybook/extensions/angular",
         "browserTarget": "extensions-angular:build-storybook",
+        "enableProdMode": false,
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
           "libs/extensions/angular/.storybook/styles.css"
