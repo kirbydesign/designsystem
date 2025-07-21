@@ -22,6 +22,9 @@ const preview: Preview = {
       },
     },
   },
+  initialGlobals: {
+    backgrounds: { value: 'gray' },
+  },
   decorators: [
     applicationConfig({
       providers: [
