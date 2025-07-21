@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
@@ -52,7 +52,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     HorizontalDirection.right;
   private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
 
+  _listboxId = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
+  _comboboxId = UniqueIdGenerator.scopedTo('kirby-button').next();
+
   private _items: string[] | any[] = [];
+
   get items(): string[] | any[] {
     return this._items;
   }

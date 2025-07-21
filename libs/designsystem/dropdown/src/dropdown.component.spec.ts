@@ -46,6 +46,8 @@ describe('DropdownComponent', () => {
 
     let spectator: SpectatorHost<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
+    let listboxId: string;
+    let comboboxId: string;
 
     beforeEach(() => {
       spectator = createHost(
@@ -57,6 +59,8 @@ describe('DropdownComponent', () => {
         }
       );
       buttonElement = spectator.query('button[kirby-button]');
+      listboxId = spectator.component._listboxId;
+      comboboxId = spectator.component._comboboxId;
     });
 
     it('should create', () => {
@@ -137,11 +141,15 @@ describe('DropdownComponent', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
     });
 
-    it('should have correct ARIA attributes on button', () => {
+    it('should have correct aria attributes on button', () => {
       expect(buttonElement.getAttribute('role')).toBe('combobox');
       expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
-      expect(buttonElement.getAttribute('aria-controls')).toBe('listbox1');
+      expect(buttonElement.getAttribute('aria-controls')).toBe(listboxId);
       expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('should have correct id on button', () => {
+      expect(buttonElement.getAttribute('id')).toBe(comboboxId);
     });
 
     it('should update aria-expanded when opened', () => {
@@ -153,7 +161,9 @@ describe('DropdownComponent', () => {
     it('should set aria-activedescendant when focusedIndex is set', () => {
       spectator.component.focusedIndex = 1;
       spectator.detectChanges();
-      expect(buttonElement.getAttribute('aria-activedescendant')).toBe('listbox1-item-1');
+      expect(buttonElement.getAttribute('aria-activedescendant')).toBe(
+        listboxId + '-item-' + spectator.component.focusedIndex
+      );
     });
 
     it('should set correct ARIA attributes on listbox and options when open', () => {
@@ -161,11 +171,11 @@ describe('DropdownComponent', () => {
       spectator.detectChanges();
       const listbox = spectator.query('[role="listbox"]');
       expect(listbox).toBeTruthy();
-      expect(listbox.getAttribute('id')).toBe('listbox1');
+      expect(listbox.getAttribute('id')).toBe(listboxId);
       const options = spectator.queryAll('[role="option"]');
       expect(options.length).toBe(items.length);
       options.forEach((option: HTMLElement, i: number) => {
-        expect(option.getAttribute('id')).toBe(`listbox1-item-${i}`);
+        expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
       });
     });
 

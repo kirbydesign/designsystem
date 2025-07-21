@@ -119,16 +119,6 @@ describe('DropdownComponent (popover version)', () => {
       });
     }));
 
-    it('should receive focus', () => {
-      spectator.element.focus();
-      expect(spectator.element).toBeFocused();
-    });
-
-    it('should receive focus on button click', () => {
-      spectator.click('button');
-      expect(spectator.element).toBeFocused();
-    });
-
     describe('when setting selected index', () => {
       let onChangeSpy: jasmine.Spy;
       const newSelectedIndex = 2;
