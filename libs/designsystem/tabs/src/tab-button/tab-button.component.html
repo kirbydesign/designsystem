@@ -4,11 +4,12 @@
   (click)="onClick($event, ionTabButton.selected)"
   tabindex="0"
 >
-  <ng-content
-    *ngIf="icons.length === 1 || !ionTabButton.selected"
-    select="kirby-icon:not([selected-tab])"
-  ></ng-content>
-  <ng-content *ngIf="ionTabButton.selected" select="kirby-icon[selected-tab]"></ng-content>
+  @if (icons.length === 1 || !ionTabButton.selected) {
+    <ng-content select="kirby-icon:not([selected-tab])"></ng-content>
+  }
+  @if (ionTabButton.selected) {
+    <ng-content select="kirby-icon[selected-tab]"></ng-content>
+  }
   <ng-content></ng-content>
   <ng-content select="kirby-badge"></ng-content>
 </ion-tab-button>

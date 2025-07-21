@@ -1,33 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'cookbook-modal-example-alert-with-guard-stepper',
   template: `
     <ol>
-      <li
-        *ngFor="let step of steps; let i = index"
-        [class.active]="currentStep - 1 === i && !step.steps"
-      >
-        <a
-          *ngIf="i === currentStep - 1 && !!step.route"
-          [routerLink]="step.route"
-          [target]="step.target"
-        >
-          {{ step.text }}
-        </a>
-        <ng-container *ngIf="i !== currentStep - 1 || (i === currentStep - 1 && !step.route)">
-          {{ step.text }}
-        </ng-container>
-        <ul *ngIf="currentStep - 1 === i && !!step.steps">
-          <li *ngFor="let substep of step.steps" class="active">
-            <a class="kirby-external-icon" [routerLink]="substep.route" [target]="substep.target">
-              {{ substep.text }}
+      @for (step of steps; track step.text; let i = $index) {
+        <li [class.active]="currentStep - 1 === i && !step.steps">
+          @if (i === currentStep - 1 && !!step.route) {
+            <a [routerLink]="step.route" [target]="step.target">
+              {{ step.text }}
             </a>
-          </li>
-        </ul>
-      </li>
+          }
+          @if (i !== currentStep - 1 || (i === currentStep - 1 && !step.route)) {
+            {{ step.text }}
+          }
+          @if (currentStep - 1 === i && !!step.steps) {
+            <ul>
+              @for (substep of step.steps; track substep.text) {
+                <li class="active">
+                  <a
+                    class="kirby-external-icon"
+                    [routerLink]="substep.route"
+                    [target]="substep.target"
+                  >
+                    {{ substep.text }}
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+        </li>
+      }
     </ol>
   `,
   styles: [
@@ -41,7 +45,7 @@ import { NgFor, NgIf } from '@angular/common';
       }
     `,
   ],
-  imports: [NgFor, NgIf, RouterLink],
+  imports: [RouterLink],
 })
 export class ModalExampleAlertWithGuardStepperComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}

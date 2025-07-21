@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -63,7 +62,7 @@ enum TimeUnit {
 }
 
 @Component({
-  imports: [DropdownModule, ButtonComponent, IconModule, CommonModule],
+  imports: [DropdownModule, ButtonComponent, IconModule],
   selector: 'kirby-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ItemSwipeAction } from '@kirbydesign/designsystem';
 import { ListModule } from '@kirbydesign/designsystem/list';
-import { NgFor } from '@angular/common';
+
 import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 
@@ -10,12 +10,13 @@ const config = {
   selector: 'cookbook-item-sliding-conditional-example',
   template: `<p>{{text}}</p>
 <kirby-list-experimental>
-  <kirby-item-sliding
-    *ngFor="let item of items; let i = index"
-    [swipeActions]="getSwipeActions(i)"
-  >
-    <kirby-item>{{ item.value }}</kirby-item>
-  </kirby-item-sliding>
+  @for (item of items; track item.value; let i = $index) {
+    <kirby-item-sliding
+      [swipeActions]="getSwipeActions(i)"
+    >
+      <kirby-item>{{ item.value }}</kirby-item>
+    </kirby-item-sliding>
+  }
 </kirby-list-experimental>`,
   codeSnippet: `export class ItemSlidingConditionalExampleComponent {
   text = 'Nothing was selected';
@@ -73,7 +74,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ListModule, NgFor, ItemSlidingComponent, ItemModule],
+  imports: [ListModule, ItemSlidingComponent, ItemModule],
 })
 export class ItemSlidingConditionalExampleComponent {
   public template = config.template;

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -24,7 +23,6 @@ export enum InputSize {
 }
 
 @Component({
-  imports: [CommonModule],
   hostDirectives: [
     {
       directive: DateInputDirective,

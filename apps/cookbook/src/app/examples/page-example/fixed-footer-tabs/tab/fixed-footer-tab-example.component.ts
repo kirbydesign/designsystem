@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PageFooterComponent } from '@kirbydesign/designsystem';
 
 import { PageModule } from '@kirbydesign/designsystem/page';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { CardModule } from '@kirbydesign/designsystem/card';
@@ -18,13 +18,15 @@ const pageTemplate = `<kirby-page [title]="title" [tabBarBottomHidden]="!showTab
     <div [innerHTML]="content"></div>
     <ng-container *ngTemplateOutlet="controls"></ng-container>
   </kirby-page-content>
-  <kirby-page-footer *ngIf="showFooter">
+  @if (showFooter) {
+    <kirby-page-footer>
     <h3>0 selected</h3>
     This is a fixed footer
     <button kirby-button attentionLevel="2" class="close-footer-btn" (click)="onCloseClick()" aria-label="Close">
       <kirby-icon name="close"></kirby-icon>
     </button>
-  </kirby-page-footer>
+    </kirby-page-footer>
+  }
 </kirby-page>`;
 const controlsTemplate = `<ng-template #controls>
   <kirby-card>
@@ -61,7 +63,6 @@ const config = {
   imports: [
     PageModule,
     NgTemplateOutlet,
-    NgIf,
     ButtonComponent,
     IconModule,
     CardModule,

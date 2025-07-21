@@ -11,7 +11,6 @@ import { ToastExampleComponent } from '~/app/examples/toast-example/toast-exampl
   templateUrl: './toast-showcase.component.html',
   styleUrl: './toast-showcase.component.scss',
   imports: [
-    ToastExampleComponent,
     CodeViewerComponent,
     ExampleViewerComponent,
     ApiDescriptionPropertiesComponent,

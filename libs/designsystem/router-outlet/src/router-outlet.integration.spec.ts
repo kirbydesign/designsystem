@@ -129,6 +129,7 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
     // Navigate to second page via link
     spectator.click('a');
     await spectator.fixture.whenStable();
+    await TestHelper.whenTrue(() => document.title !== firstPageTitle);
 
     expect(document.title).toBe(secondPageTitle);
   });

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -34,7 +33,7 @@ import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem
 
 @Component({
   selector: 'kirby-menu',
-  imports: [ButtonComponent, CommonModule, FloatingDirective, IconModule, CardModule, ItemModule],
+  imports: [ButtonComponent, FloatingDirective, IconModule, CardModule, ItemModule],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

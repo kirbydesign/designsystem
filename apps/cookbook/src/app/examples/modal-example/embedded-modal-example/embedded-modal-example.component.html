@@ -1,8 +1,10 @@
-<kirby-page-progress *ngIf="showPageProgress && flavor === 'modal'">
-  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
-    2/4
-  </kirby-progress-circle>
-</kirby-page-progress>
+@if (showPageProgress && flavor === 'modal') {
+  <kirby-page-progress>
+    <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+      2/4
+    </kirby-progress-circle>
+  </kirby-page-progress>
+}
 
 <kirby-page-title>{{ title }}</kirby-page-title>
 <p>{{ subtitle }}</p>
@@ -24,118 +26,134 @@
 </cookbook-example-configuration-wrapper>
 
 <kirby-loading-overlay [isLoading]="isLoading">
-  <div *ngIf="!isLoading">
-    <!-- configuration of nested modals opened on top of current modal -->
-    <kirby-card *ngIf="showNestedOptions" hasPadding="true" class="nested-modal-configuration">
-      <h3>Open nested:</h3>
-      <button kirby-button attentionLevel="2" (click)="showNestedModal()">Modal</button>
-      <button kirby-button attentionLevel="2" (click)="showNestedDrawer()">Drawer</button>
-      <button kirby-button attentionLevel="2" (click)="showNestedAlert()">Alert</button>
-      <button kirby-button attentionLevel="2" (click)="showNestedActionSheet()">
-        Action sheet
-      </button>
-      <details>
-        <summary>Configuration for nested modal</summary>
-        <cookbook-modal-example-configuration
-          [(showPageProgress)]="showNestedPageProgress"
-          [(showFooter)]="showNestedFooter"
-          [(snapFooterToKeyboard)]="snapNestedFooterToKeyboard"
-          [(displayFooterAsInline)]="displayNestedFooterAsInline"
-          [(showDummyContent)]="showNestedDummyContent"
-          [(collapseTitle)]="showNestedCollapseTitle"
-          [(delayLoadDummyContent)]="delayLoadDummyContent"
-          [(loadAdditionalContent)]="loadAdditionalContent"
-        ></cookbook-modal-example-configuration>
-        <ng-container *ngIf="showModalSizeSelector !== undefined">
-          <kirby-divider [hasMargin]="true"></kirby-divider>
-          <p class="size-selector-heading">
-            Size of nested modal/drawer
-            <br />
-            <em>(on screens larger than 768px)</em>
-          </p>
-          <cookbook-modal-example-size-selector
-            (sizeChange)="setSelectedModalSize($event)"
-          ></cookbook-modal-example-size-selector>
-        </ng-container>
-      </details>
-    </kirby-card>
-
-    <div *ngIf="showStaticDummyContent">
-      <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
-      <p>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      </p>
-    </div>
-
-    <ng-container *ngIf="showDummyContent">
-      <div class="example-properties" *ngIf="exampleProperties">
-        <h4>Component properties (injected from parent component):</h4>
-        <dl>
-          <dt><code>stringProperty:</code></dt>
-          <dd>{{ exampleProperties.stringProperty }}</dd>
-          <dt><code>numberProperty:</code></dt>
-          <dd>{{ exampleProperties.numberProperty }}</dd>
-          <dt><code>booleanProperty:</code></dt>
-          <dd>{{ exampleProperties.booleanProperty }}</dd>
-        </dl>
-      </div>
-      <button kirby-button attentionLevel="3" (click)="scrollToBottom()">
-        Scroll to bottom
-        <kirby-icon name="arrow-down"></kirby-icon>
-      </button>
-      <button kirby-button (click)="close()">Hide me</button>
-      <kirby-form-field>
-        <input kirby-input placeholder="Focus me on device to scroll input into view" />
-      </kirby-form-field>
-      <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
-      <p>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      </p>
-      <kirby-loading-overlay [isLoading]="isLoadingAdditionalContent">
-        <div *ngIf="!isLoadingAdditionalContent">
-          <h4>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</h4>
+  @if (!isLoading) {
+    <div>
+      <!-- configuration of nested modals opened on top of current modal -->
+      @if (showNestedOptions) {
+        <kirby-card hasPadding="true" class="nested-modal-configuration">
+          <h3>Open nested:</h3>
+          <button kirby-button attentionLevel="2" (click)="showNestedModal()">Modal</button>
+          <button kirby-button attentionLevel="2" (click)="showNestedDrawer()">Drawer</button>
+          <button kirby-button attentionLevel="2" (click)="showNestedAlert()">Alert</button>
+          <button kirby-button attentionLevel="2" (click)="showNestedActionSheet()">
+            Action sheet
+          </button>
+          <details>
+            <summary>Configuration for nested modal</summary>
+            <cookbook-modal-example-configuration
+              [(showPageProgress)]="showNestedPageProgress"
+              [(showFooter)]="showNestedFooter"
+              [(snapFooterToKeyboard)]="snapNestedFooterToKeyboard"
+              [(displayFooterAsInline)]="displayNestedFooterAsInline"
+              [(showDummyContent)]="showNestedDummyContent"
+              [(collapseTitle)]="showNestedCollapseTitle"
+              [(delayLoadDummyContent)]="delayLoadDummyContent"
+              [(loadAdditionalContent)]="loadAdditionalContent"
+            ></cookbook-modal-example-configuration>
+            @if (showModalSizeSelector !== undefined) {
+              <kirby-divider [hasMargin]="true"></kirby-divider>
+              <p class="size-selector-heading">
+                Size of nested modal/drawer
+                <br />
+                <em>(on screens larger than 768px)</em>
+              </p>
+              <cookbook-modal-example-size-selector
+                (sizeChange)="setSelectedModalSize($event)"
+              ></cookbook-modal-example-size-selector>
+            }
+          </details>
+        </kirby-card>
+      }
+      @if (showStaticDummyContent) {
+        <div>
+          <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
           <p>
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-            sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-            amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-            labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
-            nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
-            pariatur?" 1914 translation by H. Rackham "
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+            mollit anim id est laborum."
           </p>
         </div>
-      </kirby-loading-overlay>
-      <button *ngIf="!showFooter" kirby-button attentionLevel="3" (click)="scrollToTop()">
-        Scroll to top
-        <kirby-icon name="arrow-up"></kirby-icon>
-      </button>
-    </ng-container>
-  </div>
+      }
+      @if (showDummyContent) {
+        @if (exampleProperties) {
+          <div class="example-properties">
+            <h4>Component properties (injected from parent component):</h4>
+            <dl>
+              <dt><code>stringProperty:</code></dt>
+              <dd>{{ exampleProperties.stringProperty }}</dd>
+              <dt><code>numberProperty:</code></dt>
+              <dd>{{ exampleProperties.numberProperty }}</dd>
+              <dt><code>booleanProperty:</code></dt>
+              <dd>{{ exampleProperties.booleanProperty }}</dd>
+            </dl>
+          </div>
+        }
+        <button kirby-button attentionLevel="3" (click)="scrollToBottom()">
+          Scroll to bottom
+          <kirby-icon name="arrow-down"></kirby-icon>
+        </button>
+        <button kirby-button (click)="close()">Hide me</button>
+        <kirby-form-field>
+          <input kirby-input placeholder="Focus me on device to scroll input into view" />
+        </kirby-form-field>
+        <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
+        <p>
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum."
+        </p>
+        <kirby-loading-overlay [isLoading]="isLoadingAdditionalContent">
+          @if (!isLoadingAdditionalContent) {
+            <div>
+              <h4>
+                Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+              </h4>
+              <p>
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
+                numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+                voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
+                suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum
+                iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" 1914 translation by
+                H. Rackham "
+              </p>
+            </div>
+          }
+        </kirby-loading-overlay>
+        @if (!showFooter) {
+          <button kirby-button attentionLevel="3" (click)="scrollToTop()">
+            Scroll to top
+            <kirby-icon name="arrow-up"></kirby-icon>
+          </button>
+        }
+      }
+    </div>
+  }
 </kirby-loading-overlay>
 
-<kirby-modal-footer
-  *ngIf="!isLoading && showFooter"
-  [type]="_footerType"
-  themeColor="white"
-  [snapToKeyboard]="snapFooterToKeyboard"
->
-  <div>
-    <button kirby-button attentionLevel="3" (click)="scrollToTop()">
-      To top
-      <kirby-icon name="arrow-up"></kirby-icon>
-    </button>
-    <button kirby-button (click)="close()">Close</button>
-  </div>
-</kirby-modal-footer>
+@if (!isLoading && showFooter) {
+  <kirby-modal-footer
+    [type]="_footerType"
+    themeColor="white"
+    [snapToKeyboard]="snapFooterToKeyboard"
+  >
+    <div>
+      <button kirby-button attentionLevel="3" (click)="scrollToTop()">
+        To top
+        <kirby-icon name="arrow-up"></kirby-icon>
+      </button>
+      <button kirby-button (click)="close()">Close</button>
+    </div>
+  </kirby-modal-footer>
+}

@@ -27,7 +27,7 @@
 
 <ng-template #itemWrapperTemplate>
   <kirby-card>
-    <ng-container *ngFor="let item of items; let i = index">
+    @for (item of items; track item; let i = $index) {
       <ng-container
         *ngTemplateOutlet="
           itemTemplate || defaultItemTemplate;
@@ -39,7 +39,7 @@
           }
         "
       ></ng-container>
-    </ng-container>
+    }
   </kirby-card>
 </ng-template>
 
@@ -59,6 +59,8 @@
   >
     <!-- Tabindex fixes issue with popover dropdown not working in safari -->
     <p class="kirby-item-title" tabindex="0">{{ getTextFromItem(item) }}</p>
-    <kirby-icon *ngIf="selected" name="checkmark-selected" slot="end"></kirby-icon>
+    @if (selected) {
+      <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
+    }
   </kirby-item>
 </ng-template>

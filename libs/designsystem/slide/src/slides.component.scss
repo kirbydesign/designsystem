@@ -101,6 +101,9 @@ $bullet-inactive-opacity: 0.2;
   .title {
     @include utils.slotted(h1, h2, h3, h4, h5, h6) {
       margin: 0;
+      font-size: utils.font-size('m');
+      font-weight: utils.font-weight('bold');
+      line-height: utils.line-height('m');
     }
   }
 }

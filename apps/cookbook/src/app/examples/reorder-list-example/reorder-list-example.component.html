@@ -1,9 +1,11 @@
 <kirby-page title="Reorder">
   <kirby-page-content>
     <header class="section-header">
-      <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">
-        {{ headerText }}
-      </span>
+      @for (headerText of headerTexts; track headerText) {
+        <span class="kirby-text-small-light">
+          {{ headerText }}
+        </span>
+      }
     </header>
     <kirby-reorder-list
       (itemReorder)="doReorderItem($event)"
@@ -17,7 +19,9 @@
       >
         <kirby-label>
           <h3 [ngClass]="{ 'kirby-text-bold': !isSubItem }">{{ reorderItem.title }}</h3>
-          <p *ngIf="!reorderItem.isOwnAccount" detail>{{ reorderItem.ownerName }}</p>
+          @if (!reorderItem.isOwnAccount) {
+            <p detail>{{ reorderItem.ownerName }}</p>
+          }
         </kirby-label>
         <kirby-toggle
           slot="end"

@@ -88,7 +88,9 @@ export const ReorderList: Story = {
     >
       <kirby-label>
         <p class="kirby-item-title" [ngClass]="{ 'kirby-text-bold': !isSubItem }">{{ reorderItem.title }}</p>
-        <p *ngIf="!reorderItem.isOwnAccount" class="kirby-item-detail">{{ reorderItem.ownerName }}</p>
+        @if (!reorderItem.isOwnAccount) {
+          <p class="kirby-item-detail">{{ reorderItem.ownerName }}</p>
+        }
       </kirby-label>
       <kirby-toggle slot="end" checked="true"></kirby-toggle>
     </kirby-item>`,

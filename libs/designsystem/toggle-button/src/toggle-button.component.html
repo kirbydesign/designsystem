@@ -1,2 +1,6 @@
-<ng-content *ngIf="!checked" select="button[kirby-button][unchecked]"></ng-content>
-<ng-content *ngIf="checked" select="button[kirby-button][checked]"></ng-content>
+@if (!checked) {
+  <ng-content select="button[kirby-button][unchecked]"></ng-content>
+}
+@if (checked) {
+  <ng-content select="button[kirby-button][checked]"></ng-content>
+}

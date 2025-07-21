@@ -8,11 +8,13 @@
     <hr />
     <nav>
       <ul>
-        <li *ngFor="let item of filteredResourceRoutes">
-          <a class="list-item-link" routerLink="{{ item.path }}" #resourceLink>
-            {{ item.data['resourceLink'] }}
-          </a>
-        </li>
+        @for (item of filteredResourceRoutes; track item.path) {
+          <li>
+            <a class="list-item-link" routerLink="{{ item.path }}" #resourceLink>
+              {{ item.data['resourceLink'] }}
+            </a>
+          </li>
+        }
         <li>
           <a
             href="https://github.com/kirbydesign/designsystem"
@@ -58,32 +60,37 @@
           [ngModel]="filter"
         />
       </kirby-form-field>
-      <button
-        *ngIf="filter.length > 0"
-        kirby-button
-        size="sm"
-        [noDecoration]="true"
-        class="clear-button"
-        (click)="onFilterChange('')"
-      >
-        <kirby-icon name="close"></kirby-icon>
-      </button>
+      @if (filter.length > 0) {
+        <button
+          kirby-button
+          size="sm"
+          [noDecoration]="true"
+          class="clear-button"
+          (click)="onFilterChange('')"
+        >
+          <kirby-icon name="close"></kirby-icon>
+        </button>
+      }
     </div>
     <ul>
-      <ng-container *ngFor="let item of filteredShowcaseRoutes; let isLast = last">
-        <li *ngFor="let link of item">
-          <a
-            [routerLink]="link.path"
-            routerLinkActive="is-selected"
-            (click)="closeMenu()"
-            class="list-item-link"
-            #componentLink
-          >
-            {{ link.name }}
-          </a>
-        </li>
-        <hr aria-hidden="true" *ngIf="!isLast" />
-      </ng-container>
+      @for (item of filteredShowcaseRoutes; track $index; let isLast = $last) {
+        @for (link of item; track link.path) {
+          <li>
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="is-selected"
+              (click)="closeMenu()"
+              class="list-item-link"
+              #componentLink
+            >
+              {{ link.name }}
+            </a>
+          </li>
+        }
+        @if (!isLast) {
+          <hr aria-hidden="true" />
+        }
+      }
     </ul>
   </kirby-card>
 </section>

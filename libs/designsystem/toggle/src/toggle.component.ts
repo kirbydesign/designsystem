@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -20,7 +19,7 @@ import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsys
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
-  imports: [CommonModule, IonToggle],
+  imports: [IonToggle],
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.scss'],

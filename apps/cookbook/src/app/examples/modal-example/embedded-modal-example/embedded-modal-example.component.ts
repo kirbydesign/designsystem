@@ -10,7 +10,7 @@ import {
 import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
-import { NgIf } from '@angular/common';
+
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
@@ -37,7 +37,6 @@ import {
   templateUrl: './embedded-modal-example.component.html',
   styleUrls: ['./embedded-modal-example.component.scss'],
   imports: [
-    NgIf,
     PageModule,
     ProgressCircleComponent,
     ExampleConfigurationWrapperComponent,
