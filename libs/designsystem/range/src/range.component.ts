@@ -35,8 +35,8 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor, 
   @Input() minLabel: string;
   @Input() maxLabel: string;
   @Input() debounce: number;
-  @Input() max: number = 100;
-  @Input() min: number = 0;
+  @Input() max: number;
+  @Input() min: number;
   @Input() pin: boolean;
   @Input() step = 1;
   @Input() ticks: boolean;
