@@ -68,7 +68,8 @@
           "buildTarget": "flows:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "continuous": true
     }
   }
 }

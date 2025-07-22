@@ -14,25 +14,25 @@
 </ion-item-sliding>
 
 <ng-template #swipeActionsTemplate let-item>
-  <ion-item-options *ngIf="_hasSwipeActions(item)" [side]="_getSwipeActionEnd(item)">
-    <div class="swipe-action">
-      <ng-container *ngFor="let swipeAction of _getSwipeActions(item)">
-        <ion-item-option
-          [ngClass]="_getSwipeActionType(swipeAction, item)"
-          (click)="_onSwipeActionSelect(swipeAction, item, $event)"
-        >
-          <div class="item-content">
-            <kirby-icon
-              *ngIf="_getSwipeActionIcon(swipeAction, item)"
-              size="sm"
-              [name]="_getSwipeActionIcon(swipeAction, item)"
-            ></kirby-icon>
-            <ion-label>
-              {{ _getSwipeActionTitle(swipeAction, item) }}
-            </ion-label>
-          </div>
-        </ion-item-option>
-      </ng-container>
-    </div>
-  </ion-item-options>
+  @if (_hasSwipeActions(item)) {
+    <ion-item-options [side]="_getSwipeActionEnd(item)">
+      <div class="swipe-action">
+        @for (swipeAction of _getSwipeActions(item); track swipeAction.title) {
+          <ion-item-option
+            [ngClass]="_getSwipeActionType(swipeAction, item)"
+            (click)="_onSwipeActionSelect(swipeAction, item, $event)"
+          >
+            <div class="item-content">
+              @if (_getSwipeActionIcon(swipeAction, item)) {
+                <kirby-icon size="sm" [name]="_getSwipeActionIcon(swipeAction, item)"></kirby-icon>
+              }
+              <ion-label>
+                {{ _getSwipeActionTitle(swipeAction, item) }}
+              </ion-label>
+            </div>
+          </ion-item-option>
+        }
+      </div>
+    </ion-item-options>
+  }
 </ng-template>

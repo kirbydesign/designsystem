@@ -1050,7 +1050,9 @@ describe('DropdownComponent', () => {
              *kirbyListItemTemplate="let item; let selected = selected"
              selectable="true"
              [selected]="selected">
-             <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
+             @if (selected) {
+               <kirby-icon name="checkmark-selected" slot="start"></kirby-icon>
+             }
              <p>{{ item.title }}</p>
            </kirby-item>
          </kirby-dropdown>`,

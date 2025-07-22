@@ -12,5 +12,9 @@
   [disabled]="disabled"
 ></ion-range>
 
-<label *ngIf="minLabel" class="min-label">{{ minLabel }}</label>
-<label *ngIf="maxLabel" class="max-label">{{ maxLabel }}</label>
+@if (minLabel) {
+  <label class="min-label">{{ minLabel }}</label>
+}
+@if (maxLabel) {
+  <label class="max-label">{{ maxLabel }}</label>
+}

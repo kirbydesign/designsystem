@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -8,7 +7,6 @@ import {
 } from '@angular/core';
 
 @Component({
-  imports: [CommonModule],
   selector: 'kirby-progress-circle-ring',
   templateUrl: './progress-circle-ring.component.html',
   styleUrls: ['./progress-circle-ring.component.scss'],

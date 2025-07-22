@@ -8,8 +8,12 @@
   [labelPlacement]="_labelPlacement"
   [justify]="_justify"
 >
-  <span class="hidden-label" *ngIf="_labelText">{{ _labelText }}</span>
-  <span *ngIf="text" [attr.aria-hidden]="_labelText ? true : undefined">{{ text }}</span>
+  @if (_labelText) {
+    <span class="hidden-label">{{ _labelText }}</span>
+  }
+  @if (text) {
+    <span [attr.aria-hidden]="_labelText ? true : undefined">{{ text }}</span>
+  }
   <span class="default-content" [attr.aria-hidden]="_labelText ? true : undefined">
     <ng-content></ng-content>
   </span>

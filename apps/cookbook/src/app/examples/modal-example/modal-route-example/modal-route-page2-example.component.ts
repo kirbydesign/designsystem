@@ -3,7 +3,7 @@ import { Component, Optional, SkipSelf } from '@angular/core';
 import { Modal, ModalController } from '@kirbydesign/designsystem';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { NgIf } from '@angular/common';
+
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
@@ -22,18 +22,25 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
       voluptatem."
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
-    <kirby-modal-footer *ngIf="showFooter">
-      <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()" aria-label="Back">
-        <kirby-icon name="arrow-back"></kirby-icon>
-      </button>
-      <button kirby-button (click)="close()">Finish</button>
-    </kirby-modal-footer>
+    @if (showFooter) {
+      <kirby-modal-footer>
+        <button
+          kirby-button
+          attentionLevel="3"
+          (click)="navigateToPreviousModal()"
+          aria-label="Back"
+        >
+          <kirby-icon name="arrow-back"></kirby-icon>
+        </button>
+        <button kirby-button (click)="close()">Finish</button>
+      </kirby-modal-footer>
+    }
   `,
   styles: [
     'h4 { margin-top: 24px; } ',
     'kirby-modal-footer { --kirby-modal-footer-justify-content: space-between; }',
   ],
-  imports: [PageModule, ButtonComponent, NgIf, ModalFooterComponent, IconModule],
+  imports: [PageModule, ButtonComponent, ModalFooterComponent, IconModule],
 })
 export class ModalRoutePage2ExampleComponent {
   constructor(

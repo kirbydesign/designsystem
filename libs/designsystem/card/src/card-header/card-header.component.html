@@ -1,3 +1,7 @@
-<p *ngIf="title" class="title" [class.bold]="isTitleBold">{{ title }}</p>
-<p *ngIf="subtitle" class="subtitle">{{ subtitle }}</p>
+@if (title) {
+  <p class="title" [class.bold]="isTitleBold">{{ title }}</p>
+}
+@if (subtitle) {
+  <p class="subtitle">{{ subtitle }}</p>
+}
 <ng-content></ng-content>

@@ -10,14 +10,18 @@
     <ng-content select="[slot='outside']"></ng-content>
   </div>
   <ng-content></ng-content>
-  <ion-reorder slot="end" *ngIf="reorderable">
-    <kirby-icon name="reorder"></kirby-icon>
-  </ion-reorder>
+  @if (reorderable) {
+    <ion-reorder slot="end">
+      <kirby-icon name="reorder"></kirby-icon>
+    </ion-reorder>
+  }
 
-  <span class="disclosure" slot="end" *ngIf="disclosure">
-    <kirby-icon
-      [class.rotate]="rotateIcon && (disclosure === 'arrow-down' || disclosure === 'arrow-up')"
-      name="{{ disclosure }}"
-    ></kirby-icon>
-  </span>
+  @if (disclosure) {
+    <span class="disclosure" slot="end">
+      <kirby-icon
+        [class.rotate]="rotateIcon && (disclosure === 'arrow-down' || disclosure === 'arrow-up')"
+        name="{{ disclosure }}"
+      ></kirby-icon>
+    </span>
+  }
 </ion-item>
