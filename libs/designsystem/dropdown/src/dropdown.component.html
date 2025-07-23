@@ -31,7 +31,7 @@
 </ng-template>
 
 <ng-template #itemWrapperTemplate>
-  <kirby-card role="listbox" [attr.id]="_listboxId">
+  <kirby-card role="listbox" [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId + '-label'">
     @for (item of items; track item; let i = $index) {
       <ng-container
         *ngTemplateOutlet="

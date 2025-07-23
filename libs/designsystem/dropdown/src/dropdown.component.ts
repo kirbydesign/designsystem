@@ -27,7 +27,7 @@ import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
@@ -51,6 +51,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
     HorizontalDirection.right;
   private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   _listboxId = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
   _comboboxId = UniqueIdGenerator.scopedTo('kirby-button').next();
@@ -207,6 +208,16 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   popover?: PopoverComponent;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
+
+  private forwardAriaLabelToDropdownButton() {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.buttonElement.nativeElement
+    );
+  }
+
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
 
@@ -306,6 +317,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.cardElement && this.cardElement.nativeElement) {
       this.initializeAlignment();
     }
+    this.forwardAriaLabelToDropdownButton();
   }
 
   private initializeAlignment() {
