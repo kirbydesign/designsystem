@@ -23,6 +23,7 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Subscription } from 'rxjs';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -44,6 +45,7 @@ export class FormFieldComponent
   private element: HTMLElement;
   private isTouch: boolean;
   private nestedInteractiveElement:
+    | HTMLButtonElement
     | HTMLInputElement
     | HTMLTextAreaElement
     | HTMLIonRadioGroupElement;
@@ -71,10 +73,12 @@ export class FormFieldComponent
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
   @ContentChild(InputComponent) inputComponent: InputComponent;
+  @ContentChild(DropdownComponent) dropDownComponent: DropdownComponent;
   @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
   @ContentChild(RadioGroupComponent, { read: ElementRef })
   private radioGroupElement: ElementRef<HTMLElement>;
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
+  @ContentChild(DropdownComponent, { read: ElementRef }) dropDown: ElementRef<HTMLButtonElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
   @ContentChild(DateInputDirective) dateInput: DateInputDirective;
@@ -230,7 +234,10 @@ export class FormFieldComponent
 
   private subscribeToNestedInteractiveError() {
     const nestedInteractiveComponent =
-      this.inputComponent || this.textareaComponent || this.radioGroupComponent;
+      this.inputComponent ||
+      this.textareaComponent ||
+      this.radioGroupComponent ||
+      this.dropDownComponent;
 
     // set current value, then listen for changes
     this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
