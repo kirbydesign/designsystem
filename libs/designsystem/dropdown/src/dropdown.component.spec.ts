@@ -51,7 +51,7 @@ describe('DropdownComponent', () => {
 
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-dropdown [selectedIndex]="selectedIndex" [items]="items" [size]="size"></kirby-dropdown>`,
+        `<kirby-dropdown [selectedIndex]="selectedIndex" aria-labelledby="labelId" [items]="items" [size]="size"></kirby-dropdown>`,
         {
           hostProps: {
             items: items,
@@ -131,15 +131,19 @@ describe('DropdownComponent', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
     });
 
-    it('should have correct ARIA attributes on button', () => {
+    it('should have correct aria attributes on button', () => {
       expect(buttonElement.getAttribute('role')).toBe('combobox');
       expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
       expect(buttonElement.getAttribute('aria-controls')).toBe(listboxId);
       expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
     });
 
-    it('should have correct ID on button', () => {
+    it('should have correct id on button', () => {
       expect(buttonElement.getAttribute('id')).toBe(comboboxId);
+    });
+
+    it('should add aria-labelledby on button', () => {
+      expect(buttonElement.getAttribute('aria-labelledby')).toBe('labelId');
     });
 
     it('should update aria-expanded when opened', () => {
@@ -156,7 +160,7 @@ describe('DropdownComponent', () => {
       );
     });
 
-    it('should set correct ARIA attributes on listbox and options when open', () => {
+    it('should set correct aria attributes on listbox and options when open', () => {
       spectator.component.open();
       spectator.detectChanges();
       const listbox = spectator.query('[role="listbox"]');
