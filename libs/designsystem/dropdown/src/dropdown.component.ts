@@ -21,13 +21,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
@@ -51,6 +51,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
     HorizontalDirection.right;
   private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+
+  _listboxId = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
+  _comboboxId = UniqueIdGenerator.scopedTo('kirby-button').next();
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -131,7 +135,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   usePopover = false;
 
-  @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
   }
@@ -160,9 +163,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   get _isBlockLevel() {
     return this.expand === 'block';
   }
-
-  @HostBinding('attr.role')
-  _role = 'listbox';
 
   @HostBinding('class.is-opening')
   get _isOpening(): boolean {
@@ -207,6 +207,15 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   popover?: PopoverComponent;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
+
+  private forwardAriaLabelToDropdownButton() {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.buttonElement.nativeElement
+    );
+  }
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
 
@@ -301,6 +310,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
           this.setPopoverCardStyle('--kirby-card-width', `${newWidth}px`);
         }
       });
+      this.forwardAriaLabelToDropdownButton();
     }
     this.initializeAlignment();
   }
@@ -507,6 +517,154 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       // which is expected to happen, when using the tab key
       this.clicked = false;
     }
+  }
+
+  private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+  }
+
+  @HostListener('keydown', ['$event'])
+  _onKeydown(event: KeyboardEvent) {
+    if (this.items.length === 0) {
+      console.warn('[Kirby] No items found within dropdown');
+      return;
+    }
+    if (this.isOpen) {
+      this.handleKeyDownForOpenedDropdown(event);
+    } else {
+      this.handleKeyDownForClosedDropdown(event);
+    }
+  }
+
+  private handleKeyDownForClosedDropdown(event: KeyboardEvent) {
+    const key = event.key;
+    if (this.isPrintableCharacter(key)) {
+      this.open();
+      const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+      if (foundItemIndex > -1) {
+        this.focusedIndex = foundItemIndex;
+        this.scrollItemIntoView(foundItemIndex);
+      }
+      return;
+    }
+    if (key === 'ArrowDown' && event.altKey) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      this.open();
+      return;
+    }
+    switch (key) {
+      case ' ':
+        this.preventDefaultAndStopImmediatePropagation(event);
+        this.open();
+        this.focusedIndex = this.selectedIndex;
+        break;
+      case 'Enter':
+      case 'ArrowDown':
+        this.preventDefaultAndStopImmediatePropagation(event);
+        this.open();
+        this.focusedIndex = this.selectedIndex;
+        break;
+      case 'ArrowUp':
+        this.preventDefaultAndStopImmediatePropagation(event);
+        this.open();
+        this.focusedIndex = 0;
+        break;
+      case 'Home':
+        this.preventDefaultAndStopImmediatePropagation(event);
+        this.open();
+        this.focusedIndex = 0;
+        break;
+      case 'End':
+        this.preventDefaultAndStopImmediatePropagation(event);
+        this.open();
+        this.focusedIndex = this.items.length - 1;
+        break;
+    }
+  }
+
+  private isPrintableCharacter(key: string) {
+    return key.length === 1 && key.match(/\S/);
+  }
+
+  private handleKeyDownForOpenedDropdown(event: KeyboardEvent) {
+    const key = event.key;
+
+    switch (key) {
+      case 'ArrowDown':
+        this.preventDefaultAndStopImmediatePropagation(event);
+        if (this.focusedIndex < this.items.length - 1) {
+          this.focusedIndex++;
+        }
+        break;
+      case 'ArrowUp':
+        this.preventDefaultAndStopImmediatePropagation(event);
+        if (event.altKey) {
+          this.selectItem(this.focusedIndex);
+          this.close();
+          this.buttonElement.nativeElement.focus();
+          break;
+        }
+        if (this.focusedIndex > 0) {
+          this.focusedIndex--;
+        }
+        break;
+      case 'Home': {
+        this.preventDefaultAndStopImmediatePropagation(event);
+        if (this.focusedIndex > 0) {
+          this.focusedIndex = 0;
+        }
+        break;
+      }
+      case 'End': {
+        this.preventDefaultAndStopImmediatePropagation(event);
+        if (this.focusedIndex < this.items.length - 1) {
+          this.focusedIndex = this.items.length - 1;
+        }
+        break;
+      }
+      default: {
+        if (this.isPrintableCharacter(key)) {
+          this.preventDefaultAndStopImmediatePropagation(event);
+          const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+          if (foundItemIndex > -1) {
+            this.focusedIndex = foundItemIndex;
+          }
+        }
+      }
+    }
+  }
+
+  private getIndexOfItemByFirstCharacter(char: string) {
+    const itemTexts = this.items.map((item) =>
+      typeof item === 'string' ? item : item[this.itemTextProperty]
+    );
+    return this.getIndexByFirstMatchingStartString(char, itemTexts, this.focusedIndex + 1);
+  }
+
+  private getIndexByFirstMatchingStartString(
+    searchString: string,
+    words: string[],
+    startIndex: number
+  ): number {
+    searchString = searchString.toLowerCase();
+
+    const wordsStartingWithMatchString = words
+      .map((word, index) => {
+        return { word: word.toLowerCase(), index };
+      })
+      .filter((match) => match.word.startsWith(searchString));
+
+    if (wordsStartingWithMatchString.length === 0) {
+      return -1;
+    }
+
+    const firstWordStartingWithChar = wordsStartingWithMatchString[0];
+    const nextWordStartingWithChar = wordsStartingWithMatchString.find(
+      (wordAndIndex) => wordAndIndex.index >= startIndex
+    );
+
+    return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
   }
 
   @HostListener('mousedown', ['$event'])

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { DropdownExampleConfigurationComponent } from '../../examples/dropdown-example/dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { DropdownExampleDefaultComponent } from '../../examples/dropdown-example/examples/default';
@@ -16,6 +17,7 @@ import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { DropdownExampleKeyboardSupportComponent } from '~/app/examples/dropdown-example/examples/keyboard-support';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -36,16 +38,24 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
+    DividerComponent,
+    DropdownExampleKeyboardSupportComponent,
   ],
 })
 export class DropdownShowcaseComponent {
   size: string = 'md';
   properties: ApiDescriptionProperty[] = [
     {
-      name: 'items',
-      description: 'The items rendered within the dropdown.',
-      defaultValue: '[ ]',
-      type: ['Array<string> | Array<any>'],
+      name: 'aria-label',
+      description: 'Provides an accessible label for the dropdown.',
+      defaultValue: 'undefined',
+      type: ['string'],
+    },
+    {
+      name: 'aria-labelledby',
+      description: 'The ID of the element that labels the dropdown.',
+      defaultValue: 'undefined',
+      type: ['string'],
     },
     {
       name: 'size',
