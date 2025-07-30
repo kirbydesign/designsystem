@@ -1,39 +1,3 @@
 .canvas {
 /*    background-color: var(--kirby-background-color) !important; */
 }
-
-.dark-theme, .tertiary-theme {
-  color-scheme: only dark;
-    --kirby-spot-illustration-background-opacity: 0.15;
-    --kirby-spot-illustration-background-color: var(--kirby-white);
-    --kirby-spot-illustration-cutaway-color: var(--kirby-semi-dark);
-    --kirby-spot-illustration-outline-color: white;
-    --kirby-spot-illustration-highlight-color: var(--kirby-primary);
-}
-.light-theme, .canvas-theme {
-  color-scheme: only light;
-    --kirby-spot-illustration-background-opacity: 0.065;
-    --kirby-spot-illustration-background-color: var(--kirby-semi-dark);
-    --kirby-spot-illustration-cutaway-color: white;
-    --kirby-spot-illustration-outline-color: black;
-    --kirby-spot-illustration-highlight-color: var(--kirby-primary);
-}
-
-
-
-.dark-theme {
-    background: #333;
-}
-.canvas-theme {
-  background: grey;
-}
-.tertiary-theme {
-  background: var(--kirby-tertiary);
-  --kirby-spot-illustration-cutaway-color: var(--kirby-tertiary);
-}
-
-/* Kirby icon override, should be supported elsewhere, just for example */
-.dark-theme kirby-icon, .tertiary-theme kirby-icon {
-
-  color: #fff;
-}
