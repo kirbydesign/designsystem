@@ -34,10 +34,13 @@ export const illustrations = {
   robot: {
     md: 'robot.NONE.dot.body.md.svg',
   },
-  miv: {
+  'DEPRECATED-miv-coin-stack': {
     sm: 'miv.sm.svg',
     md: 'miv.md.svg',
     lg: 'miv.lg.svg',
+  },
+  'DEPRECATED-miv-congratulations-checkmark': {
+    lg: 'congratulations-checkmark.lg.svg',
   },
 } as const satisfies Record<string, Illustration>;
 
