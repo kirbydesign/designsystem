@@ -316,7 +316,7 @@ export const ExtendingLibrary: Story = {
   },
   render: () => ({
     template: `
-      <div style="padding: 20px; max-width: 800px; text-align: center;">
+      <div style="padding: 20px;text-align: center;">
         <h2>📚 Spot Illustration Extension Guide</h2>
         <p>This documentation story contains all the guidelines needed to extend the spot illustration library.</p>
         <p><em>All requirements and examples are documented in the story's JSDoc comments above.</em></p>
