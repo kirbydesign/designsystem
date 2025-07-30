@@ -85,7 +85,7 @@ export const DropdownOpened: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const dropdownToOpen = canvas.getByRole('button', {
+    const dropdownToOpen = canvas.getByRole('combobox', {
       name: 'Item 1',
     });
 

@@ -16,9 +16,6 @@ const config = {
         'Blackberry',
         'Blueberry',   
         'Grapes',
-        'Kiwi',
-        'Orange',
-        'Strawberry'
       ]"
     ></kirby-dropdown>
   `,

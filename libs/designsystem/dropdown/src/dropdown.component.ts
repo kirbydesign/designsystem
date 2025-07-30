@@ -310,8 +310,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
           this.setPopoverCardStyle('--kirby-card-width', `${newWidth}px`);
         }
       });
-      this.forwardAriaLabelToDropdownButton();
     }
+    this.forwardAriaLabelToDropdownButton();
     this.initializeAlignment();
   }
 
@@ -563,12 +563,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       case 'ArrowDown':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.open();
-        this.focusedIndex = this.selectedIndex;
+        this.focusedIndex = this.selectedIndex >= 0 ? this.selectedIndex : this.items.length - 1;
+
         break;
       case 'ArrowUp':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.open();
-        this.focusedIndex = 0;
+        this.focusedIndex = this.selectedIndex >= 0 ? this.selectedIndex : 0;
         break;
       case 'Home':
         this.preventDefaultAndStopImmediatePropagation(event);
@@ -636,10 +637,21 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   private getIndexOfItemByFirstCharacter(char: string) {
-    const itemTexts = this.items.map((item) =>
-      typeof item === 'string' ? item : item[this.itemTextProperty]
-    );
-    return this.getIndexByFirstMatchingStartString(char, itemTexts, this.focusedIndex + 1);
+    let itemTexts: string[];
+
+    // Prefer slotted/projected items if present
+    if (this.kirbyItemsSlotted && this.kirbyItemsSlotted.length) {
+      itemTexts = this.kirbyItemsSlotted
+        .toArray()
+        .map((ref) => ref.nativeElement.textContent?.trim() ?? '');
+    } else {
+      itemTexts = this.items.map((item) =>
+        typeof item === 'string' ? item : item[this.itemTextProperty]
+      );
+    }
+
+    const startIndex = this.isOpen ? this.focusedIndex + 1 : 0;
+    return this.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
   }
 
   private getIndexByFirstMatchingStartString(

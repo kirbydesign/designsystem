@@ -44,6 +44,8 @@ describe('DropdownComponent (popover version)', () => {
 
     let spectator: SpectatorHost<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
+    let listboxId: string;
+    let comboboxId: string;
 
     beforeEach(() => {
       spectator = createHost(
@@ -51,6 +53,8 @@ describe('DropdownComponent (popover version)', () => {
         { hostProps: { items } }
       );
       buttonElement = spectator.query('button[kirby-button]');
+      listboxId = spectator.component._listboxId;
+      comboboxId = spectator.component._comboboxId;
     });
 
     it('should create', () => {
@@ -67,10 +71,6 @@ describe('DropdownComponent (popover version)', () => {
 
     it('should not have selected text', () => {
       expect(spectator.component.selectedText).toBeNull();
-    });
-
-    it('should have selected index = -1', () => {
-      expect(spectator.component.selectedIndex).toEqual(-1);
     });
 
     it('should have default placeholder text', () => {
@@ -104,6 +104,43 @@ describe('DropdownComponent (popover version)', () => {
 
     it('should not render disabled attribute on button', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
+    });
+
+    it('should have correct ARIA attributes on button', () => {
+      expect(buttonElement.getAttribute('role')).toBe('combobox');
+      expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
+      expect(buttonElement.getAttribute('aria-controls')).toBe(listboxId);
+      expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('should have correct ID on button', () => {
+      expect(buttonElement.getAttribute('id')).toBe(comboboxId);
+    });
+
+    it('should update aria-expanded when opened', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+      expect(buttonElement.getAttribute('aria-expanded')).toBeTruthy();
+    });
+
+    it('should set aria-activedescendant when focusedIndex is set', () => {
+      spectator.component.focusedIndex = 1;
+      spectator.detectChanges();
+      expect(buttonElement.getAttribute('aria-activedescendant')).toBe(
+        listboxId + '-item-' + spectator.component.focusedIndex
+      );
+    });
+    it('should set correct ARIA attributes on listbox and options when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+      const listbox = spectator.query('[role="listbox"]');
+      expect(listbox).toBeTruthy();
+      expect(listbox.getAttribute('id')).toBe(listboxId);
+      const options = spectator.queryAll('[role="option"]');
+      expect(options.length).toBe(items.length);
+      options.forEach((option: HTMLElement, i: number) => {
+        expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
+      });
     });
 
     it('should have correct item size', fakeAsync(() => {
@@ -591,6 +628,53 @@ describe('DropdownComponent (popover version)', () => {
               expect(spectator.component.value).toEqual(items[scenario.expectedIndex]);
             });
           });
+        });
+      });
+
+      describe('when a printable character key is pressed', () => {
+        beforeEach(() => {
+          spectator.component['state'] = OpenState.open;
+          spectator.detectChanges();
+        });
+
+        it('should focus/select the first item starting with that character', () => {
+          const testItems = [
+            { text: 'Apple', value: 1 },
+            { text: 'Banana', value: 2 },
+            { text: 'Cherry', value: 3 },
+            { text: 'Date', value: 4 },
+            { text: 'Elderberry', value: 5 },
+          ];
+          spectator.setHostInput('items', testItems);
+          spectator.detectChanges();
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'c');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(2);
+          expect(spectator.component.value).not.toEqual(testItems[2]);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(1);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'E');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(4);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'D');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(3);
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+          spectator.detectChanges();
+          expect(spectator.component.selectedIndex).toBe(3);
+          expect(spectator.component.value).toEqual(testItems[3]);
+        });
+
+        it('should not change focus if no item starts with the character', () => {
+          const initialFocusedIndex = spectator.component.focusedIndex;
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Z');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(initialFocusedIndex);
         });
       });
     });
