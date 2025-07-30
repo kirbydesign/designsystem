@@ -1,9 +1,2 @@
-@let name = kirbyIconName();
-<ng-container *ngIf="name; else svgTemplate">
-  <kirby-icon [name]="name"></kirby-icon>
-</ng-container>
-
-<ng-template #svgTemplate>
-  <ion-icon *ngIf="svg()" [src]="svg()" [class]="size()"></ion-icon>
-  <ng-content select="not-found" *ngIf="!svg()"></ng-content>
-</ng-template>
+<ion-icon *ngIf="svg()" [src]="svg()" [class]="size()"></ion-icon>
+<ng-content select="not-found" *ngIf="!svg()"></ng-content>

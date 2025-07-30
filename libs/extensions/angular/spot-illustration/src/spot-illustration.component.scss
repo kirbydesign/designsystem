@@ -1,10 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-.base {
-  font-size: 24px;
-  display: block;
-}
-
 .sm {
   font-size: 40px;
   display: block;
@@ -20,19 +15,19 @@
   display: block;
 }
 
-ion-icon::part(cutaway) {
-  fill: var(--kirby-spot-illustration-cutaway-color);
+.xl {
+  font-size: 136px;
+  display: block;
 }
 
 ion-icon::part(background) {
-  fill: var(--kirby-spot-illustration-background-color);
-  fill-opacity: var(--kirby-spot-illustration-background-opacity);
+  fill: var(--kirby-spot-illustration-background-color, var(--kirby-dark-overlay));
 }
 
 ion-icon::part(outline) {
-  fill: var(--kirby-spot-illustration-outline-color);
+  fill: var(--kirby-spot-illustration-outline-color, var(--kirby-black));
 }
 
 ion-icon::part(highlight) {
-  fill: var(--kirby-spot-illustration-highlight-color);
+  fill: var(--kirby-spot-illustration-highlight-color, var(--kirby-primary));
 }

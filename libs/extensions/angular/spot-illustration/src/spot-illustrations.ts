@@ -1,48 +1,40 @@
 export interface Illustration {
-  baseIsKirbyIcon?: boolean;
-  base?: string;
   sm?: string;
   md?: string;
   lg?: string;
+  xl?: string;
 }
 
-export type SpotIllustrationSize = keyof Omit<Illustration, 'baseIsKirbyIcon'>;
+export enum SpotIllustrationSize {
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+  XL = 'xl',
+}
 
 export const illustrations = {
   'calendar-money-arrow': {
-    baseIsKirbyIcon: true,
-    base: 'calendar',
-    md: 'calender-money-arrows.md.svg',
+    md: 'calender-money.arrows.dot.bars.md.svg',
   },
   'airballoon-wind': {
-    baseIsKirbyIcon: true,
-    base: 'air-balloon',
-    md: 'airballoon.wind.md.svg',
+    md: 'airballoon.wind.dot.cloud.md.svg',
   },
   'box-curve': {
-    md: 'box-curve-dot.md.svg',
+    md: 'box.curve.dot.circle.md.svg',
   },
   'investboard-money': {
-    baseIsKirbyIcon: true,
-    base: 'banknotes',
-    md: 'investboard-money.md.svg',
+    md: 'investboard.money.arrows.dot.bars.md.svg',
   },
   'investboard-papers': {
-    baseIsKirbyIcon: true,
-    base: 'budget',
-    md: 'investboard-papers.md.svg',
+    md: 'investboard.papers.dot.rectangle.md.svg',
   },
   'piggy-bank': {
-    baseIsKirbyIcon: true,
-    base: 'piggybank',
-    md: 'piggy-bank.md.svg',
+    md: 'piggy-bank.money.dot.bars.md.svg',
   },
   robot: {
-    base: 'robot.md.svg',
-    md: 'robot.md.svg',
+    md: 'robot.NONE.dot.body.md.svg',
   },
   miv: {
-    base: 'miv.base.svg',
     sm: 'miv.sm.svg',
     md: 'miv.md.svg',
     lg: 'miv.lg.svg',

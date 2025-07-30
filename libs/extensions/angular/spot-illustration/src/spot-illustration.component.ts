@@ -18,7 +18,7 @@ import {
   styleUrl: './spot-illustration.component.scss',
 })
 export class SpotIllustrationComponent {
-  size = input<SpotIllustrationSize>('base');
+  size = input<SpotIllustrationSize>(SpotIllustrationSize.MD);
   name = input.required<IllustrationName>();
 
   illustration = computed(() => {
@@ -32,12 +32,5 @@ export class SpotIllustrationComponent {
     return illustration && illustration[size]
       ? `assets/spot-illustrations/${illustration[size]}`
       : undefined;
-  });
-
-  kirbyIconName = computed(() => {
-    const illustration = this.illustration() as Illustration;
-    return illustration && illustration.baseIsKirbyIcon && this.size() === 'base'
-      ? illustration.base
-      : '';
   });
 }
