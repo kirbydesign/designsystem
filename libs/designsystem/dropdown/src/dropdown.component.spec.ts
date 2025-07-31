@@ -126,16 +126,6 @@ describe('DropdownComponent', () => {
       });
     });
 
-    it('should receive focus', () => {
-      spectator.element.focus();
-      expect(spectator.element).toBeFocused();
-    });
-
-    it('should receive focus on button click', () => {
-      spectator.click('button');
-      expect(spectator.element).toBeFocused();
-    });
-
     it('should have correct aria attributes on button', () => {
       expect(buttonElement.getAttribute('role')).toBe('combobox');
       expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
@@ -394,15 +384,6 @@ describe('DropdownComponent', () => {
         expect(icon.name).toEqual('arrow-down');
       });
 
-      describe('and button is clicked', () => {
-        it('should open and focus dropdown', fakeAsync(() => {
-          spectator.click('button');
-          tick(openDelayInMs);
-          expect(spectator.component.isOpen).toBeTruthy();
-          expect(spectator.element).toBeFocused();
-        }));
-      });
-
       describe('and Space key is pressed', () => {
         beforeEach(fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
@@ -431,7 +412,7 @@ describe('DropdownComponent', () => {
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
         });
-        it('should focus last item', () => {
+        it('should focus first item', () => {
           expect(spectator.component.focusedIndex).toBe(0);
         });
       });
@@ -446,6 +427,63 @@ describe('DropdownComponent', () => {
         });
         it('should focus first item', () => {
           expect(spectator.component.focusedIndex).toBe(items.length - 1);
+        });
+      });
+
+      describe('and ArrowUp key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          buttonElement.focus();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
+        it('should keep DOM focus on the button', () => {
+          expect(document.activeElement).toEqual(buttonElement);
+        });
+      });
+
+      describe('and ArrowDown key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          buttonElement.focus();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should keep DOM focus on the button', () => {
+          expect(document.activeElement).toEqual(buttonElement);
+        });
+      });
+
+      describe('and Enter key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+      });
+
+      describe('and Alt+ArrowDown is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          const event = new KeyboardEvent('keydown', {
+            key: 'ArrowDown',
+            altKey: true,
+            bubbles: true,
+            cancelable: true,
+          });
+          spectator.element.dispatchEvent(event);
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
         });
       });
 
