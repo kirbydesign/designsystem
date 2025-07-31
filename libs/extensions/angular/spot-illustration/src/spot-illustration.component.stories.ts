@@ -2,6 +2,9 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ItemModule } from '@kirbydesign/designsystem/item';
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // eslint-disable-next-line no-restricted-imports
 import { SpotIllustrationSize } from './spot-illustrations';
 // eslint-disable-next-line no-restricted-imports
@@ -14,22 +17,30 @@ import { illustrations, SpotIllustrationComponent } from './index';
  *
  * ## Features
  * - **Multiple sizes**: Available in sm, md, lg, and xl sizes
- * - **Extensive library**: Wide variety of themed illustrations. Check the `illustrations` object for available names.
+ * - **Extensive library**: Wide variety of themed illustrations. Check the `illustrations` object or the *All* story for available names.
  *
  * ## Usage Guidelines
  * - Use spot illustrations to support content, not replace it
  * - Choose illustrations that match your content's tone and context
  * - Consider the illustration size in relation to surrounding content
+ * - Mind that the illustrations are not all available in all sizes.
  *
  * ## Technical Details
- * - Remember that the assets directory should be included in your application's build configuration, same way as i.e. kirby icons.
+ *  ** Remember that the assets directory should be included in your application's build configuration, same way as i.e. kirby icons.**
  */
 const meta: Meta<SpotIllustrationComponent> = {
   component: SpotIllustrationComponent,
   title: 'Components/Spot Illustration',
   decorators: [
     moduleMetadata({
-      imports: [ButtonComponent, CardModule, ItemModule],
+      imports: [
+        ButtonComponent,
+        CardModule,
+        ItemModule,
+        AccordionModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+      ],
     }),
   ],
   parameters: {
@@ -161,17 +172,18 @@ export const InCard: Story = {
  * - Comparing illustrations across different sizes
  * - Quality assurance and visual testing
  *
+ * ** Check the different themes [dark, light, canvas, tertiary] to see how illustrations adapt visually.**
+ *
  * ** This story is particularly useful for designers and developers who need
  * to see all available options at a glance. **
  *
-
  */
 export const All: Story = {
   parameters: {
     controls: { disable: true },
     actions: { disable: true },
   },
-  render: (args) => ({
+  render: () => ({
     props: {
       illustrations: Object.keys(illustrations),
       sizes: Object.values(SpotIllustrationSize),
@@ -196,15 +208,18 @@ export const All: Story = {
 }
        div { padding: 10px; }
        .dark-theme, .tertiary-theme { --story-text-color: var(--kirby-white); }
+       /* its just a guess of a darkmode background */
        .dark-theme { background: #333; }
-       .canvas-theme { background: grey; }
+       /* the color --kirby-background-color is not available in storybook for some reason */
+       .canvas-theme { background: #f6f6f6 }
        .tertiary-theme { background: var(--kirby-tertiary); }
        table.kirby-table td, h2 {color: var( --story-text-color, --kirby-black);}
        `,
     ],
     template: `
-      <div *ngFor="let theme of themes" [class]="theme + '-theme'">
-      <h2>Theme: {{ theme}}</h2>
+    <kirby-accordion>
+      <kirby-accordion-item *ngFor="let theme of themes; let i = index"  [title]="'Theme: ' + theme" [isExpanded]="i === 0">
+      <div [class]="theme + '-theme'">
         <table class="kirby-table">
           <thead>
           <th>Illustration Name</th>
@@ -222,6 +237,8 @@ export const All: Story = {
           </tbody>
         </table>
       </div>
+      </kirby-accordion-item>
+      </kirby-accordion>
       <ng-template #svgTemplate let-illustration="illustration" let-size="size">
         <kirby-x-spot-illustration [size]="size" [name]="illustration">
           <not-found> N/A</not-found>
@@ -256,10 +273,11 @@ export const All: Story = {
  * 4. **Part Attribute Required**
  *    - Each path/shape must have a `part` attribute
  *    - Part values correspond to colors: `highlight`, `outline`, or `background`
+ *    - In special cases the part can instead of `highlight` be `success`, `danger`, or `warning`. These are used for special illustrations that indicate success, danger, or warning states. And these colors are not meant to be modified by themes.
  *
  * 5. **Fill Colors**
  *    - Paths can have a fill property, (for easier inspection of the files) but it's always overridden.
- *    - Therefore we constrain the fill to be one of: `silver`, `cadetblue`, or `black` for easier inspection of the svg source files.
+ *    - Therefore we constrain the fill to be one of: `silver`, `cadetblue`, `black`, `green`, `red`, or `orange` for easier inspection of the svg source files.
  *
  * 6. **Allowed Properties Only**
  *    - Paths can only have: `part`, `fill`, and shape-defining properties
@@ -271,7 +289,7 @@ export const All: Story = {
  * - ✅ No strokes (all converted to paths)
  * - ✅ Maximum 3 shapes (one per color)
  * - ✅ Each path has 'part' attribute
- * - ✅ Fill colors: silver, cadetblue, or black only
+ * - ✅ Fill colors: silver, cadetblue, or black only (green, red and orange to represent success, danger, and warning states)
  * - ✅ No prohibited properties (style, fill-opacity, stroke, etc.)
  * - ✅ Follows general rules and naming pattern from Zeplin Guidelines document
  *

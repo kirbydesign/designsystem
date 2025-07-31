@@ -34,6 +34,15 @@ export const illustrations = {
   robot: {
     md: 'robot.NONE.dot.body.md.svg',
   },
+  'checkmark-success': {
+    lg: 'checkmark.success.lg.svg',
+  },
+  'cross-alert': {
+    lg: 'cross.alert.lg.svg',
+  },
+  'exclamation-mark-warning': {
+    lg: 'exclamation-mark.warning.lg.svg',
+  },
   'DEPRECATED-miv-coin-stack': {
     sm: 'miv.sm.svg',
     md: 'miv.md.svg',

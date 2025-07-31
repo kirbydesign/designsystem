@@ -31,3 +31,16 @@ ion-icon::part(outline) {
 ion-icon::part(highlight) {
   fill: var(--kirby-spot-illustration-highlight-color, var(--kirby-primary));
 }
+
+/* The following 3 shouldn't be overridden */
+ion-icon::part(danger) {
+  fill: var(--kirby-danger);
+}
+
+ion-icon::part(warning) {
+  fill: var(--kirby-warning);
+}
+
+ion-icon::part(success) {
+  fill: var(--kirby-success);
+}
