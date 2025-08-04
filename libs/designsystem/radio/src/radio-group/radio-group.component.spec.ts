@@ -765,7 +765,6 @@ describe('RadioGroupComponent', () => {
       await TestHelper.whenReady(ionRadioGroupElement);
     });
     it('should set aria-label attribute on ion-radio-group', () => {
-      console.log('ion', ionRadioGroupElement);
       expect(ionRadioGroupElement.getAttribute('aria-label')).toEqual('aria-test');
       expect(spectator.element.getAttribute('aria-label')).toBeNull();
     });
