@@ -524,6 +524,101 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+  }
+
+  @HostListener('keydown', ['$event'])
+  _onKeydown(event: KeyboardEvent) {
+    if (this.items.length === 0) {
+      console.warn('[Kirby] No items found within dropdown');
+      return;
+    }
+    if (this.isOpen) {
+      this.handleKeyDownForOpenedDropdown(event);
+    } else {
+      this.handleKeyDownForClosedDropdown(event);
+    }
+  }
+
+  private handleKeyDownForClosedDropdown(event: KeyboardEvent) {
+    const key = event.key;
+    if (this.isPrintableCharacter(key)) {
+      this.open();
+      const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+      if (foundItemIndex > -1) {
+        this.focusedIndex = foundItemIndex;
+        this.scrollItemIntoView(foundItemIndex);
+      }
+      return;
+    }
+    if (key === 'ArrowDown' && event.altKey) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      this.open();
+      return;
+    }
+  }
+
+  private isPrintableCharacter(key: string) {
+    return key.length === 1 && key.match(/\S/);
+  }
+
+  private handleKeyDownForOpenedDropdown(event: KeyboardEvent) {
+    const key = event.key;
+
+    if (this.isPrintableCharacter(key)) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+      if (foundItemIndex > -1) {
+        this.focusedIndex = foundItemIndex;
+      }
+    }
+  }
+
+  private getIndexOfItemByFirstCharacter(char: string) {
+    let itemTexts: string[];
+
+    // Prefer slotted/projected items if present
+    if (this.kirbyItemsSlotted && this.kirbyItemsSlotted.length) {
+      itemTexts = this.kirbyItemsSlotted
+        .toArray()
+        .map((ref) => ref.nativeElement.textContent?.trim() ?? '');
+    } else {
+      itemTexts = this.items.map((item) =>
+        typeof item === 'string' ? item : item[this.itemTextProperty]
+      );
+    }
+
+    const startIndex = this.isOpen ? this.focusedIndex + 1 : 0;
+    return this.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
+  }
+
+  private getIndexByFirstMatchingStartString(
+    searchString: string,
+    words: string[],
+    startIndex: number
+  ): number {
+    searchString = searchString.toLowerCase();
+
+    const wordsStartingWithMatchString = words
+      .map((word, index) => {
+        return { word: word.toLowerCase(), index };
+      })
+      .filter((match) => match.word.startsWith(searchString));
+
+    if (wordsStartingWithMatchString.length === 0) {
+      return -1;
+    }
+
+    const firstWordStartingWithChar = wordsStartingWithMatchString[0];
+    const nextWordStartingWithChar = wordsStartingWithMatchString.find(
+      (wordAndIndex) => wordAndIndex.index >= startIndex
+    );
+
+    return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
+  }
+
   @HostListener('mousedown', ['$event'])
   _onMouseDown(event: MouseEvent) {
     if (this.disabled) {
@@ -603,9 +698,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       if (this.selectedIndex < 0) {
         switch (event.key) {
           case 'ArrowUp':
-            this.focusedIndex = this.items.length - 1;
-            break;
-          case 'ArrowDown':
             this.focusedIndex = 0;
             break;
           default:

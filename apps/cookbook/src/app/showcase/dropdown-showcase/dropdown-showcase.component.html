@@ -85,6 +85,81 @@
     ></cookbook-dropdown-example-ng-forms>
   </div>
 </cookbook-example-viewer>
+<h2>Keyboard support</h2>
+<cookbook-example-viewer [html]="keyboardSupportExample.template">
+  <div>
+    <cookbook-dropdown-example-keyboard-support
+      [size]="size"
+      #keyboardSupportExample
+    ></cookbook-dropdown-example-keyboard-support>
+  </div>
+</cookbook-example-viewer>
+<p>
+  The component has full keyboard support for opening the dropdown and navigating between and
+  selecting items in the dropdown.
+</p>
+<p>The following keys can be used to open the dropdown when the dropdown button has focus:</p>
+<!-- prettier-ignore -->
+<ul>
+  <li>
+    <kbd>Enter</kbd>, <kbd>Space</kbd> and 
+<kbd>Alt</kbd> + <kbd>&#8595;</kbd>
+ opens dropdown without moving focus or changing selection.
+  </li>
+    <li>
+    <kbd>Home</kbd> opens dropdown and moves focus to the first dropdown item.
+  </li>
+  <li>
+    <kbd>End</kbd> opens dropdown and moves focus to the last dropdown item.
+  </li>
+  <li>
+    <kbd>&#8593;</kbd> opens dropdown and moves focus to first dropdown item.
+  </li>
+    <li>
+    <kbd>&#8595;</kbd>  opens dropdown without moving focus or changing selection.
+  </li>
+    <li>
+    <kbd>A</kbd>-<kbd>Z</kbd> opens the dropdown and moves focus to the first option that matches the typed character.
+  </li>
+</ul>
+<p>The following keys can be used to navigate and select within the dropdown:</p>
+<!-- prettier-ignore -->
+<ul>
+  <li>
+    <kbd>Enter</kbd> and <kbd>Space</kbd> sets value of focused item and closes the dropdown.
+  </li>
+  <li>
+    <kbd>Escape</kbd> closes the dropdown.
+  </li>
+  <li>
+    <kbd>&#8593;</kbd> moves focus to the previous dropdown item. If focus is on the first dropdown item, focus will not move.
+  </li>
+  <li>
+    <kbd>&#8595;</kbd> moves focus to the next dropdown item. If focus is on the last dropown item, focus will not move.
+  </li>
+    <li>
+    <kbd>Alt</kbd> + <kbd>&#8593;</kbd>  sets value of focused item and closes the dropdown.
+  </li>
+  <li>
+    <kbd>Home</kbd> moves focus to the first dropdown item.
+  </li>
+  <li>
+    <kbd>End</kbd> moves focus to the last dropdown item.
+  </li>
+    <li>
+    <kbd>PageUp</kbd> jumps focus up to first option.
+  </li>
+  <li>
+    <kbd>PageDown</kbd> 	jumps focus down to last option.
+  </li>
+  <li>
+    <kbd>A</kbd>-<kbd>Z</kbd> moves focus to the next dropdown item whose label starts with the typed character.
+  </li>
+  <li>
+    <kbd>Tab</kbd> sets value of focused item, closes the dropdown and moves focus to the next element in the tab sequence outside the control.
+  </li>
+</ul>
+
 <h2>Accessibility</h2>
 <p>
   The Dropdown implements the

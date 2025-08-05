@@ -12,6 +12,7 @@
   (click)="onToggle($event)"
   (mousedown)="onButtonMouseEvent($event)"
   [disabled]="disabled"
+  (keydown)="_onKeydown($event)"
 >
   <span class="text">{{ selectedText || placeholder }}</span>
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>

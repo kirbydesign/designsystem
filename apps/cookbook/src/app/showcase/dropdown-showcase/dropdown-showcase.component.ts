@@ -16,6 +16,7 @@ import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { DropdownExampleKeyboardSupportComponent } from '~/app/examples/dropdown-example/examples/keyboard-support';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -36,6 +37,8 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
+    DropdownExampleKeyboardSupportComponent,
+    DropdownExampleKeyboardSupportComponent,
   ],
 })
 export class DropdownShowcaseComponent {
