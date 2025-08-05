@@ -116,14 +116,71 @@ describe('DropdownComponent', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
     });
 
-    it('should have correct item size', () => {
-      const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
-      expect(itemElements).toHaveLength(items.length);
-      itemElements.forEach((item) => {
-        expect(item.querySelector('ion-item')).toHaveComputedStyle({
-          '--min-height': DesignTokenHelper.dropdownItemHeight(),
+    describe('listbox', () => {
+      it('should set correct aria attributes on listbox when open', () => {
+        spectator.component.open();
+        spectator.detectChanges();
+        const listbox = spectator.query('[role="listbox"]');
+        expect(listbox).toBeTruthy();
+        expect(listbox.getAttribute('id')).toBe(listboxId);
+      });
+
+      it('should have correct item size', () => {
+        spectator.component.open();
+        spectator.detectChanges();
+        const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
+        expect(itemElements).toHaveLength(items.length);
+        itemElements.forEach((item) => {
+          expect(item.querySelector('ion-item')).toHaveComputedStyle({
+            '--min-height': DesignTokenHelper.dropdownItemHeight(),
+          });
         });
       });
+    });
+
+    describe('option', () => {
+      it('should set correct aria attributes on options when open', () => {
+        spectator.component.open();
+        spectator.detectChanges();
+        const options = spectator.queryAll('[role="option"]');
+        expect(options.length).toBe(items.length);
+        options.forEach((option: HTMLElement, i: number) => {
+          expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
+        });
+      });
+    });
+
+    it('should have default placeholder text', () => {
+      expect(buttonElement).toHaveText(spectator.component.placeholder, true);
+    });
+
+    it('should have default popout set', () => {
+      expect(spectator.component.popout).toEqual(HorizontalDirection.right);
+    });
+
+    it('should render as inline block', () => {
+      expect(spectator.element).toHaveComputedStyle({ display: 'inline-block' });
+    });
+
+    it('should render button with default attentionLevel', () => {
+      const button = spectator.query(ButtonComponent);
+      expect(button.attentionLevel).toEqual('3');
+    });
+
+    it('should not render disabled attribute', () => {
+      expect(spectator.element.attributes['disabled']).toBeUndefined();
+    });
+
+    it('should render no-blur attribute', () => {
+      expect(spectator.element.attributes['no-blur']).toBeDefined();
+    });
+
+    it('should not render button as disabled ', () => {
+      expect(buttonElement.disabled).toBeFalsy();
+    });
+
+    it('should not render disabled attribute on button', () => {
+      expect(buttonElement.attributes['disabled']).toBeUndefined();
     });
 
     // Fixes https://github.com/kirbydesign/designsystem/issues/1987
@@ -158,19 +215,6 @@ describe('DropdownComponent', () => {
       expect(buttonElement.getAttribute('aria-activedescendant')).toBe(
         listboxId + '-item-' + spectator.component.focusedIndex
       );
-    });
-
-    it('should set correct aria attributes on listbox and options when open', () => {
-      spectator.component.open();
-      spectator.detectChanges();
-      const listbox = spectator.query('[role="listbox"]');
-      expect(listbox).toBeTruthy();
-      expect(listbox.getAttribute('id')).toBe(listboxId);
-      const options = spectator.queryAll('[role="option"]');
-      expect(options.length).toBe(items.length);
-      options.forEach((option: HTMLElement, i: number) => {
-        expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
-      });
     });
 
     describe('when setting selected index', () => {
