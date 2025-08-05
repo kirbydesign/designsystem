@@ -646,6 +646,53 @@ describe('DropdownComponent (popover version)', () => {
       });
     });
 
+    describe('when a printable character key is pressed', () => {
+      beforeEach(() => {
+        spectator.component['state'] = OpenState.open;
+        spectator.detectChanges();
+      });
+
+      it('should focus/select the first item starting with that character', () => {
+        const testItems = [
+          { text: 'Apple', value: 1 },
+          { text: 'Banana', value: 2 },
+          { text: 'Cherry', value: 3 },
+          { text: 'Date', value: 4 },
+          { text: 'Elderberry', value: 5 },
+        ];
+        spectator.setHostInput('items', testItems);
+        spectator.detectChanges();
+
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'c');
+        spectator.detectChanges();
+        expect(spectator.component.focusedIndex).toBe(2);
+        expect(spectator.component.value).not.toEqual(testItems[2]);
+
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
+        spectator.detectChanges();
+        expect(spectator.component.focusedIndex).toBe(1);
+
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'E');
+        spectator.detectChanges();
+        expect(spectator.component.focusedIndex).toBe(4);
+
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'D');
+        spectator.detectChanges();
+        expect(spectator.component.focusedIndex).toBe(3);
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+        spectator.detectChanges();
+        expect(spectator.component.selectedIndex).toBe(3);
+        expect(spectator.component.value).toEqual(testItems[3]);
+      });
+
+      it('should not change focus if no item starts with the character', () => {
+        const initialFocusedIndex = spectator.component.focusedIndex;
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Z');
+        spectator.detectChanges();
+        expect(spectator.component.focusedIndex).toBe(initialFocusedIndex);
+      });
+    });
+
     describe('when disabled', () => {
       beforeEach(() => {
         spectator.component.disabled = true;

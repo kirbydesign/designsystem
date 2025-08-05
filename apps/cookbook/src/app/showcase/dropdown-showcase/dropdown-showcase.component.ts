@@ -38,7 +38,6 @@ import { DropdownExampleKeyboardSupportComponent } from '~/app/examples/dropdown
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
     DropdownExampleKeyboardSupportComponent,
-    DropdownExampleKeyboardSupportComponent,
   ],
 })
 export class DropdownShowcaseComponent {
@@ -49,6 +48,18 @@ export class DropdownShowcaseComponent {
       description: 'The items rendered within the dropdown.',
       defaultValue: '[ ]',
       type: ['Array<string> | Array<any>'],
+    },
+    {
+      name: 'aria-label',
+      description: 'Provides an accessible label for the dropdown.',
+      defaultValue: 'undefined',
+      type: ['string'],
+    },
+    {
+      name: 'aria-labelledby',
+      description: 'The ID of the element that labels the dropdown.',
+      defaultValue: 'undefined',
+      type: ['string'],
     },
     {
       name: 'size',
