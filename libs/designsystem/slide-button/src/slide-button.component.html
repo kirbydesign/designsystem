@@ -1,5 +1,6 @@
 <div class="slide-button-container" [ngClass]="{ 'slide-done': isSlideDone }" [inert]="isSlideDone">
   <input
+    tabindex="-1"
     type="range"
     (mouseup)="onSliderMouseup()"
     (touchend)="onSliderMouseup()"
@@ -12,4 +13,7 @@
     [step]="step"
   />
   <p class="slide-button-text slide-{{ pctInTens }}-pct">{{ text }}</p>
+  <button #hiddenButton class="visually-hidden" (click)="handleSlideDone()">
+    {{ text }}
+  </button>
 </div>

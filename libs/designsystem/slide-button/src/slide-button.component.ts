@@ -1,14 +1,19 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   HostListener,
   Input,
   OnDestroy,
   Output,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 
 @Component({
   imports: [CommonModule],
@@ -17,12 +22,17 @@ import {
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideButtonComponent implements OnDestroy {
+export class SlideButtonComponent implements OnDestroy, AfterViewInit {
   @Input() text = '';
   @Input() expand: 'block';
 
   @Output() slideDone = new EventEmitter();
   @Output() slidingPercentageChanged = new EventEmitter<number>();
+
+  @ViewChild('hiddenButton', { read: ElementRef })
+  hiddenButton!: ElementRef<HTMLButtonElement>;
+
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   readonly slideDoneFadeTime = 500;
   readonly slideResetTime = 100;
@@ -55,7 +65,20 @@ export class SlideButtonComponent implements OnDestroy {
     this._step = value;
   }
 
-  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+  constructor(
+    private changeDetectionRef: ChangeDetectorRef,
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
+
+  ngAfterViewInit(): void {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.hiddenButton.nativeElement
+    );
+  }
 
   ngOnDestroy(): void {
     if (this.resetSliderIntervalTimer) {
@@ -111,7 +134,7 @@ export class SlideButtonComponent implements OnDestroy {
     clearInterval(this.resetSliderIntervalTimer);
   }
 
-  private handleSlideDone() {
+  handleSlideDone() {
     this.slideDone.emit();
     this.isSlideDone = true;
   }
