@@ -400,7 +400,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       );
 
       // Move focus to selected item (if any)
-      this.focusedIndex = this.selectedIndex;
+      // If no item is selected, focus the first item
+      this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
     }
   }
 
