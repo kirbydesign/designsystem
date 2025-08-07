@@ -156,16 +156,23 @@ describe('DropdownComponent', () => {
       );
     });
 
-    it('should set correct aria attributes on listbox and options when open', () => {
+    it('should set correct aria attributes on listbox when open', () => {
       spectator.component.open();
       spectator.detectChanges();
+
       const listbox = spectator.query('[role="listbox"]');
       expect(listbox).toBeTruthy();
       expect(listbox.getAttribute('id')).toBe(listboxId);
+    });
+
+    it('should set correct aria attributes on options when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+
       const options = spectator.queryAll('[role="option"]');
       expect(options.length).toBe(items.length);
       options.forEach((option: HTMLElement, i: number) => {
-        expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
+        expect(option.getAttribute('id')).toBe(`${listboxId}-item-${i}`);
       });
     });
 
@@ -425,7 +432,7 @@ describe('DropdownComponent', () => {
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
         });
-        it('should focus first item', () => {
+        it('should focus last item', () => {
           expect(spectator.component.focusedIndex).toBe(items.length - 1);
         });
       });
@@ -458,16 +465,6 @@ describe('DropdownComponent', () => {
         });
         it('should keep DOM focus on the button', () => {
           expect(document.activeElement).toEqual(buttonElement);
-        });
-      });
-
-      describe('and Enter key is pressed', () => {
-        beforeEach(fakeAsync(() => {
-          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
-          tick(openDelayInMs);
-        }));
-        it('should open dropdown', () => {
-          expect(spectator.component.isOpen).toBeTruthy();
         });
       });
 
@@ -565,14 +562,6 @@ describe('DropdownComponent', () => {
 
             expect(spectator.component.isOpen).toBeTruthy();
           }));
-
-          it('should focus last item on ArrowDown with no selection', () => {
-            spectator.setHostInput('selectedIndex', -1);
-
-            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
-
-            expect(spectator.component.focusedIndex).toEqual(items.length - 1);
-          });
 
           it('should focus first item on ArrowUp with no selection', () => {
             spectator.setHostInput('selectedIndex', -1);

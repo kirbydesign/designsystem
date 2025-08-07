@@ -130,16 +130,23 @@ describe('DropdownComponent (popover version)', () => {
         listboxId + '-item-' + spectator.component.focusedIndex
       );
     });
-    it('should set correct ARIA attributes on listbox and options when open', () => {
+    it('should set correct aria attributes on listbox when open', () => {
       spectator.component.open();
       spectator.detectChanges();
+
       const listbox = spectator.query('[role="listbox"]');
       expect(listbox).toBeTruthy();
       expect(listbox.getAttribute('id')).toBe(listboxId);
+    });
+
+    it('should set correct aria attributes on options when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+
       const options = spectator.queryAll('[role="option"]');
       expect(options.length).toBe(items.length);
       options.forEach((option: HTMLElement, i: number) => {
-        expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
+        expect(option.getAttribute('id')).toBe(`${listboxId}-item-${i}`);
       });
     });
 
@@ -358,22 +365,77 @@ describe('DropdownComponent (popover version)', () => {
         }));
       });
 
-      describe('and ArrowDown key is pressed', () => {
-        it('should open dropdown', fakeAsync(() => {
-          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+      describe('and Home key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Home');
           tick(openDelayInMs);
-
-          expect(spectator.component.isOpen).toBeTruthy();
         }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
+      });
+
+      describe('and End key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'End');
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus last item', () => {
+          expect(spectator.component.focusedIndex).toBe(items.length - 1);
+        });
       });
 
       describe('and ArrowUp key is pressed', () => {
-        it('should open dropdown', fakeAsync(() => {
+        beforeEach(fakeAsync(() => {
+          buttonElement.focus();
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
           tick(openDelayInMs);
-
-          expect(spectator.component.isOpen).toBeTruthy();
         }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
+        it('should keep DOM focus on the button', () => {
+          expect(document.activeElement).toEqual(buttonElement);
+        });
+      });
+
+      describe('and ArrowDown key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          buttonElement.focus();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should keep DOM focus on the button', () => {
+          expect(document.activeElement).toEqual(buttonElement);
+        });
+      });
+
+      describe('and Alt+ArrowDown is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          const event = new KeyboardEvent('keydown', {
+            key: 'ArrowDown',
+            altKey: true,
+            bubbles: true,
+            cancelable: true,
+          });
+          spectator.element.dispatchEvent(event);
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
       });
 
       describe('and first item is selected', () => {
