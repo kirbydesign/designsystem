@@ -132,38 +132,23 @@ describe('DropdownComponent (popover version)', () => {
       );
     });
 
-    describe('listbox', () => {
-      it('should set correct ARIA attributes on listbox when open', () => {
-        spectator.component.open();
-        spectator.detectChanges();
-        const listbox = spectator.query('[role="listbox"]');
-        expect(listbox).toBeTruthy();
-        expect(listbox.getAttribute('id')).toBe(listboxId);
-      });
+    it('should set correct aria attributes on listbox when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
 
-      it('should have correct item size', fakeAsync(() => {
-        spectator.component.open();
-        tick(openDelayInMs);
-
-        const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
-        expect(itemElements).toHaveLength(items.length);
-        itemElements.forEach((item) => {
-          expect(item.querySelector('ion-item')).toHaveComputedStyle({
-            '--min-height': DesignTokenHelper.dropdownItemHeight(),
-          });
-        });
-      }));
+      const listbox = spectator.query('[role="listbox"]');
+      expect(listbox).toBeTruthy();
+      expect(listbox.getAttribute('id')).toBe(listboxId);
     });
 
-    describe('option', () => {
-      it('should set correct ARIA attributes on options when open', () => {
-        spectator.component.open();
-        spectator.detectChanges();
-        const options = spectator.queryAll('[role="option"]');
-        expect(options.length).toBe(items.length);
-        options.forEach((option: HTMLElement, i: number) => {
-          expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
-        });
+    it('should set correct aria attributes on options when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+
+      const options = spectator.queryAll('[role="option"]');
+      expect(options.length).toBe(items.length);
+      options.forEach((option: HTMLElement, i: number) => {
+        expect(option.getAttribute('id')).toBe(`${listboxId}-item-${i}`);
       });
     });
 

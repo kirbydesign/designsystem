@@ -160,16 +160,23 @@ describe('DropdownComponent', () => {
       );
     });
 
-    it('should set correct aria attributes on listbox and options when open', () => {
+    it('should set correct aria attributes on listbox when open', () => {
       spectator.component.open();
       spectator.detectChanges();
+
       const listbox = spectator.query('[role="listbox"]');
       expect(listbox).toBeTruthy();
       expect(listbox.getAttribute('id')).toBe(listboxId);
+    });
+
+    it('should set correct aria attributes on options when open', () => {
+      spectator.component.open();
+      spectator.detectChanges();
+
       const options = spectator.queryAll('[role="option"]');
       expect(options.length).toBe(items.length);
       options.forEach((option: HTMLElement, i: number) => {
-        expect(option.getAttribute('id')).toBe(listboxId + `-item-${i}`);
+        expect(option.getAttribute('id')).toBe(`${listboxId}-item-${i}`);
       });
     });
 
