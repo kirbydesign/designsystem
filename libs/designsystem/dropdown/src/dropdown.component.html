@@ -32,7 +32,7 @@
 </ng-template>
 
 <ng-template #itemWrapperTemplate>
-  <kirby-card role="listbox" [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId + '-label'">
+  <kirby-card role="listbox" [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
     @for (item of items; track item; let i = $index) {
       <ng-container
         *ngTemplateOutlet="
@@ -64,7 +64,6 @@
     role="option"
     [attr.id]="_listboxId + '-item-' + index"
     [attr.aria-selected]="selected"
-    tabindex="0"
   >
     <!-- Tabindex fixes issue with popover dropdown not working in safari -->
     <p class="kirby-item-title">{{ getTextFromItem(item) }}</p>

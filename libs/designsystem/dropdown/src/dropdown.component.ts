@@ -394,8 +394,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         DropdownComponent.OPEN_DELAY_IN_MS
       );
 
-      // Move focus to selected item (if any)
-      this.focusedIndex = this.selectedIndex;
+      // Move focus to selected item (if any) or first item
+      this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
     }
   }
 
@@ -524,6 +524,23 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     event.preventDefault();
   }
 
+  private searchBuffer = '';
+  private searchBufferTimeout: any;
+  private SEARCH_BUFFER_DELAY = 500; // ms
+
+  // Extracted buffer logic for sharing or reuse
+  private addToSearchBuffer(char: string) {
+    clearTimeout(this.searchBufferTimeout);
+    this.searchBuffer += char;
+    this.searchBufferTimeout = setTimeout(() => {
+      this.resetSearchBuffer();
+    }, this.SEARCH_BUFFER_DELAY);
+  }
+
+  private resetSearchBuffer() {
+    this.searchBuffer = '';
+  }
+
   @HostListener('keydown', ['$event'])
   _onKeydown(event: KeyboardEvent) {
     if (this.items.length === 0) {
@@ -540,8 +557,15 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private handleKeyDownForClosedDropdown(event: KeyboardEvent) {
     const key = event.key;
     if (this.isPrintableCharacter(key)) {
+      this.addToSearchBuffer(key);
+
       this.open();
-      const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+      // Try multi-character match first
+      let foundItemIndex = this.getIndexOfItemByFirstCharacter(this.searchBuffer);
+      // If no match, try single character match (first character)
+      if (foundItemIndex === -1 && this.searchBuffer.length > 1) {
+        foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+      }
       if (foundItemIndex > -1) {
         this.focusedIndex = foundItemIndex;
         this.scrollItemIntoView(foundItemIndex);
@@ -551,89 +575,47 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (key === 'ArrowDown' && event.altKey) {
       this.preventDefaultAndStopImmediatePropagation(event);
       this.open();
+      this.focusedIndex = this.selectedIndex;
       return;
     }
     switch (key) {
+      case 'Enter':
       case ' ':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.open();
         this.focusedIndex = this.selectedIndex;
         break;
-      case 'Enter':
-      case 'ArrowDown':
-        this.preventDefaultAndStopImmediatePropagation(event);
-        this.open();
-        this.focusedIndex = this.selectedIndex >= 0 ? this.selectedIndex : this.items.length - 1;
+    }
+  }
 
-        break;
-      case 'ArrowUp':
-        this.preventDefaultAndStopImmediatePropagation(event);
-        this.open();
-        this.focusedIndex = this.selectedIndex >= 0 ? this.selectedIndex : 0;
-        break;
-      case 'Home':
-        this.preventDefaultAndStopImmediatePropagation(event);
-        this.open();
-        this.focusedIndex = 0;
-        break;
-      case 'End':
-        this.preventDefaultAndStopImmediatePropagation(event);
-        this.open();
-        this.focusedIndex = this.items.length - 1;
-        break;
+  private handleKeyDownForOpenedDropdown(event: KeyboardEvent) {
+    const key = event.key;
+    if (key === 'ArrowUp' && event.altKey) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      // Select the focused item and close dropdown
+      if (this.focusedIndex > -1) {
+        this.selectItem(this.focusedIndex);
+        this.close();
+      }
+      return;
+    }
+    if (this.isPrintableCharacter(key)) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+
+      this.addToSearchBuffer(key);
+
+      let foundItemIndex = this.getIndexOfItemByFirstCharacter(this.searchBuffer);
+      if (foundItemIndex === -1 && this.searchBuffer.length > 1) {
+        foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+      }
+      if (foundItemIndex > -1) {
+        this.focusedIndex = foundItemIndex;
+      }
     }
   }
 
   private isPrintableCharacter(key: string) {
     return key.length === 1 && key.match(/\S/);
-  }
-
-  private handleKeyDownForOpenedDropdown(event: KeyboardEvent) {
-    const key = event.key;
-
-    switch (key) {
-      case 'ArrowDown':
-        this.preventDefaultAndStopImmediatePropagation(event);
-        if (this.focusedIndex < this.items.length - 1) {
-          this.focusedIndex++;
-        }
-        break;
-      case 'ArrowUp':
-        this.preventDefaultAndStopImmediatePropagation(event);
-        if (event.altKey) {
-          this.selectItem(this.focusedIndex);
-          this.close();
-          this.buttonElement.nativeElement.focus();
-          break;
-        }
-        if (this.focusedIndex > 0) {
-          this.focusedIndex--;
-        }
-        break;
-      case 'Home': {
-        this.preventDefaultAndStopImmediatePropagation(event);
-        if (this.focusedIndex > 0) {
-          this.focusedIndex = 0;
-        }
-        break;
-      }
-      case 'End': {
-        this.preventDefaultAndStopImmediatePropagation(event);
-        if (this.focusedIndex < this.items.length - 1) {
-          this.focusedIndex = this.items.length - 1;
-        }
-        break;
-      }
-      default: {
-        if (this.isPrintableCharacter(key)) {
-          this.preventDefaultAndStopImmediatePropagation(event);
-          const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
-          if (foundItemIndex > -1) {
-            this.focusedIndex = foundItemIndex;
-          }
-        }
-      }
-    }
   }
 
   private getIndexOfItemByFirstCharacter(char: string) {
@@ -758,16 +740,15 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       if (this.selectedIndex < 0) {
         switch (event.key) {
           case 'ArrowUp':
-            this.focusedIndex = this.items.length - 1;
+            this.focusedIndex = 0;
             break;
           case 'ArrowDown':
-            this.focusedIndex = 0;
+            this.focusedIndex = this.items.length - 1;
             break;
           default:
             break;
         }
       }
-
       return false;
     }
 
@@ -776,11 +757,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.focusedIndex,
       this.items.length - 1
     );
-
     if (newFocusedIndex > -1) {
       this.focusedIndex = newFocusedIndex;
     }
-
     return false;
   }
 
@@ -788,8 +767,16 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
     if (this.disabled) return;
-    if (!this.isOpen) return;
-
+    if (!this.isOpen) {
+      event.preventDefault();
+      this.open();
+      // After opening, let keyboardHandlerService handle focus
+      const newFocusedIndex = this.keyboardHandlerService.handle(event, -1, this.items.length - 1);
+      if (newFocusedIndex > -1) {
+        this.focusedIndex = newFocusedIndex;
+      }
+      return false;
+    }
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
       this.focusedIndex,

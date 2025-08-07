@@ -174,25 +174,14 @@
   from ARIA Authoring Practices Guide.
 </p>
 <p>
-  The Dropdown is a button that toggles a list of items. It uses the
-  <code>aria-haspopup="listbox"</code>
-  attribute to indicate the presence of a listbox, along with
-  <code>aria-expanded</code>
-  and
-  <code>aria-activedescendant</code>
-  to reflect the dropdown's state and the currently focused item. To ensure screen readers announce
-  the dropdown correctly, it is required to provide either an
+  The Dropdown is a button that toggles a list of items. To ensure screen readers announce the
+  dropdown correctly, it is required to provide either an
   <code>aria-label</code>
   or an
   <code>aria-labelledby</code>
   attribute to give it an accessible name. The dropdown component will apply this attribute to the
   internal button element.
 </p>
-<ul>
-  <li>Use aria-label if you do not have a visible label.</li>
-  <li>Use aria-labelledby to reference an existing visible label element.</li>
-  <li>Do not use both at the same time.</li>
-</ul>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 <h2>Properties:</h2>
