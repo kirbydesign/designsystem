@@ -1,25 +1,24 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { SlideButtonComponent } from './slide-button.component';
 
 describe('SlideButtonComponent', () => {
   let component: SlideButtonComponent;
-  let fixture: ComponentFixture<SlideButtonComponent>;
+  let spectator: SpectatorHost<SlideButtonComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [SlideButtonComponent],
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SlideButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  const createHost = createHostFactory({
+    component: SlideButtonComponent,
   });
 
+  beforeEach(() => {
+    spectator = createHost(
+      `<kirby-slide-button [text]="'slide to confirm'" aria-label="fake-label" aria-labelledby="fake-dom-label"></kirby-slide-button>`
+    );
+    component = spectator.component;
+  });
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   describe('onSliderMouseup', () => {
@@ -71,5 +70,34 @@ describe('SlideButtonComponent', () => {
 
       expect(component.value).toBe(initVal - 2);
     }));
+  });
+
+  describe('input range', () => {
+    it('should not be tabbable', () => {
+      const inputRange = spectator.query('input[type="range"]');
+      expect(inputRange).toHaveAttribute('tabindex', '-1');
+    });
+  });
+
+  describe('aria attributes', () => {
+    it('should have aria-hidden on the input range', () => {
+      const inputRange = spectator.query('input[type="range"]');
+      expect(inputRange).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should have aria-hidden on the text paragraph', () => {
+      const textParagraph = spectator.query('.slide-button-text');
+      expect(textParagraph).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should have aria-labelledby on the hidden button', () => {
+      const hiddenButton = spectator.query('button.visually-hidden');
+      expect(hiddenButton).toHaveAttribute('aria-labelledby', 'fake-dom-label');
+    });
+
+    it('should have aria-label on the hidden button', () => {
+      const hiddenButton = spectator.query('button.visually-hidden');
+      expect(hiddenButton).toHaveAttribute('aria-label', 'fake-label');
+    });
   });
 });
