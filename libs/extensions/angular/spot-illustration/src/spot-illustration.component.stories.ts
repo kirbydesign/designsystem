@@ -260,7 +260,7 @@ export const All: Story = {
        /* the color --kirby-background-color is not available in storybook for some reason */
        .canvas-theme { background: #f6f6f6 }
        .tertiary-theme { background: var(--kirby-tertiary); }
-       table.kirby-table td, h2 {color: var( --story-text-color, --kirby-black);}
+       table.kirby-table td, h2 {color: var( --story-text-color, --kirby-black); text-align:center}
        `,
     ],
     template: `
