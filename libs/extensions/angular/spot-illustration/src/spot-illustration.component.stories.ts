@@ -260,7 +260,14 @@ export const All: Story = {
        /* the color --kirby-background-color is not available in storybook for some reason */
        .canvas-theme { background: #f6f6f6 }
        .tertiary-theme { background: var(--kirby-tertiary); }
+
+
+       table.kirby-table td.illustration-name {
+         font-weight: bold;
+         text-align: left;
+       }
        table.kirby-table td, h2 {color: var( --story-text-color, --kirby-black); text-align:center}
+       kirby-x-spot-illustration { display: inline-block}
        `,
     ],
     template: `
@@ -275,7 +282,7 @@ export const All: Story = {
           <tbody>
           <ng-container *ngFor="let illustration of illustrations">
             <tr>
-              <td>{{ illustration }}</td>
+              <td class="illustration-name">{{ illustration }}</td>
               <td *ngFor="let size of sizes">
                 <ng-container *ngTemplateOutlet="svgTemplate; context: { illustration, size }"></ng-container>
               </td>
