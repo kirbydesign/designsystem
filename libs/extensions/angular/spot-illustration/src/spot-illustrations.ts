@@ -32,7 +32,7 @@ export const illustrations = {
     md: 'piggy-bank.money.dot.bars.md.svg',
   },
   robot: {
-    md: 'robot.NONE.dot.body.md.svg',
+    lg: 'robot.NONE.dot.body.lg.svg',
   },
   'checkmark-success': {
     lg: 'checkmark.success.lg.svg',
@@ -47,9 +47,6 @@ export const illustrations = {
     sm: 'miv.sm.svg',
     md: 'miv.md.svg',
     lg: 'miv.lg.svg',
-  },
-  'DEPRECATED-miv-congratulations-checkmark': {
-    lg: 'congratulations-checkmark.lg.svg',
   },
 } as const satisfies Record<string, Illustration>;
 

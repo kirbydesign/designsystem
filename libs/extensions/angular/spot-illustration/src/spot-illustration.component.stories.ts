@@ -86,7 +86,7 @@ const meta: Meta<SpotIllustrationComponent> = {
     },
   },
   args: {
-    name: 'robot',
+    name: 'investboard-money',
     size: SpotIllustrationSize.MD,
   },
 };
@@ -123,8 +123,8 @@ export const Default: Story = {
 export const InCard: Story = {
   render: (args) => ({
     props: {
-      name: 'robot',
-      size: 'md',
+      name: args.name,
+      size: args.size,
     },
     styles: [
       `.card-content {
@@ -147,10 +147,57 @@ export const InCard: Story = {
     template: `
       <kirby-card [hasPadding]="false">
       <kirby-item [disclosure]="'arrow-more'">
-            <p title class="kirby-item-title kirby-text-bold">Robooobt</p>
+            <p title class="kirby-item-title kirby-text-bold">Spot illustration in card</p>
       </kirby-item>
       <div class="card-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet. Phasellus volutpat ultrices risus. Nullam rutrum vitae justo eu mollis. Duis vel augue nec ex condimentum vestibulum et id libero. Quisque neque magna, ultrices ac justo nec, rhoncus imperdiet risus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet.</p>
+<kirby-x-spot-illustration [slot]="'end'" ${argsToTemplate(args)}>
+<not-found> N/A</not-found>
+</kirby-x-spot-illustration>
+      
+      </div>
+
+      </kirby-card>
+    `,
+  }),
+};
+
+/**
+ * Demonstrates the SpotIllustrationComponent integrated within a Alert component.
+ *
+ * ```
+ */
+export const Alert: Story = {
+  render: (args) => ({
+    props: {
+      name: args.name,
+      size: args.size,
+    },
+    styles: [
+      `.card-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap;
+  padding: 0 16px;
+  box-sizing: border-box;
+
+  .subtitle-no-margin {
+    margin-bottom: 0;
+  }
+
+  kirby-icon {
+    margin-bottom: 16px;
+  }
+}`,
+    ],
+    template: `
+      <kirby-card [hasPadding]="false">
+      <kirby-item [disclosure]="'arrow-more'">
+            <p title class="kirby-item-title kirby-text-bold">Spot illustration in card</p>
+      </kirby-item>
+      <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet.</p>
 <kirby-x-spot-illustration [slot]="'end'" ${argsToTemplate(args)}>
 <not-found> N/A</not-found>
 </kirby-x-spot-illustration>
