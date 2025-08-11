@@ -13,11 +13,6 @@ export enum SpotIllustrationSize {
 }
 
 export const illustrations = {
-  'DEPRECATED-miv-coin-stack': {
-    sm: 'miv.sm.svg',
-    md: 'miv.md.svg',
-    lg: 'miv.lg.svg',
-  },
   'airballoon-wind': {
     md: 'airballoon.wind.dot.cloud.md.svg',
   },
@@ -93,6 +88,11 @@ export const illustrations = {
   },
   robot: {
     lg: 'robot.NONE.dot.body.lg.svg',
+  },
+  'DEPRECATED-miv-coin-stack': {
+    sm: 'miv.sm.svg',
+    md: 'miv.md.svg',
+    lg: 'miv.lg.svg',
   },
 } as const satisfies Record<string, Illustration>;
 
