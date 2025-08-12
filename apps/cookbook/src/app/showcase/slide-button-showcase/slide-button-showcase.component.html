@@ -1,8 +1,25 @@
-<h1>Slide button</h1>
-<p>Great slide button</p>
 <div class="example">
-  <cookbook-slide-button-example></cookbook-slide-button-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <p>
+    The slide button is a simple button that requires the user to slide it to the right to confirm
+    the action. The sliding gesture helps preventing accidental actions and is often used on touch
+    devices where the user needs to confirm an action.
+  </p>
+  <h2>Example</h2>
+  <cookbook-example-viewer [html]="accordionDefaultExample.template">
+    <div class="example-frame">
+      <cookbook-slide-button-example #accordionDefaultExample></cookbook-slide-button-example>
+    </div>
+  </cookbook-example-viewer>
+
+  <h2>Accessibility</h2>
+  <p>
+    While a gesture is needed to activate the slide button for the touch user, it will act as a
+    regular button for users using a screen reader. If the text of the slide button contains the
+    gesture like "slide to...", then it is advised to provide an aria-label that describes the
+    action without the gesture, like "confirm" or "unlock". This way, the screen reader user will
+    not be confused by the gesture requirement.
+  </p>
+
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>

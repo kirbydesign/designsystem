@@ -1,10 +1,12 @@
 <kirby-slide-button
-  [text]="'Slide to unlock'"
+  [text]="'Slide to confirm'"
+  aria-label="Confirm"
   (slideDone)="showAlert()"
   aria-label="Unlock"
 ></kirby-slide-button>
 <kirby-slide-button
-  [text]="'Slide to transfer'"
+  [text]="'Slide to confirm'"
+  aria-label="Confirm"
   expand="block"
   (slideDone)="showAlert()"
   aria-label="Transfer"

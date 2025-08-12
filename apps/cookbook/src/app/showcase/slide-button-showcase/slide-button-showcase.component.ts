@@ -4,11 +4,18 @@ import { SlideButtonExampleComponent } from '../../examples/slide-button-example
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
 
 @Component({
   selector: 'cookbook-slide-button-showcase',
   templateUrl: './slide-button-showcase.component.html',
-  imports: [SlideButtonExampleComponent, CodeViewerComponent, ApiDescriptionPropertiesComponent],
+  styleUrl: './slide-button-showcase.component.scss',
+  imports: [
+    SlideButtonExampleComponent,
+    CodeViewerComponent,
+    ApiDescriptionPropertiesComponent,
+    ExampleViewerComponent,
+  ],
 })
 export class SlideButtonShowcaseComponent {
   exampleHtml = exampleHtml;
