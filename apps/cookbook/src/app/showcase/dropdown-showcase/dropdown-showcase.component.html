@@ -85,6 +85,28 @@
     ></cookbook-dropdown-example-ng-forms>
   </div>
 </cookbook-example-viewer>
+<h2>Accessibility</h2>
+<p>
+  The Dropdown implements the
+  <a
+    class="kirby-external-icon"
+    target="_blank"
+    href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/"
+  >
+    Select-only Combobox Pattern
+  </a>
+  from ARIA Authoring Practices Guide.
+</p>
+<p>
+  The Dropdown is a button that toggles a list of items. To ensure screen readers announce the
+  dropdown correctly, it is required to provide either an
+  <code>aria-label</code>
+  or an
+  <code>aria-labelledby</code>
+  attribute to give it an accessible name. The dropdown component will apply this attribute to the
+  internal button element.
+</p>
+
 <h2>Properties:</h2>
 <cookbook-api-description-properties
   [properties]="properties"
