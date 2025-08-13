@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -8,7 +7,7 @@ import { ImageBannerHeightDirective } from './image-banner-height.directive';
 
 @Component({
   selector: 'kirby-x-image-banner',
-  imports: [CardModule, ButtonComponent, IconModule, CommonModule],
+  imports: [CardModule, ButtonComponent, IconModule],
   hostDirectives: [ImageBannerHeightDirective],
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',

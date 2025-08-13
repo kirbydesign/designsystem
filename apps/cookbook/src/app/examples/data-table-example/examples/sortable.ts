@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { NgFor } from '@angular/common';
+
 import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 import { Heading, Person, tableExampleData, tableExampleHeadingData } from '../example-data';
 
@@ -11,30 +11,34 @@ const config = {
   <table class="kirby-table">
     <thead>
       <tr>
-        <th *ngFor="let heading of headings; let i = index" 
-          [sortable]="heading.sortable"  
-          [sortDirection]="heading.sortDirection"
-          [iconAlignment]="heading.iconAlignment"
-          [alignment]="heading.textAlignment"
-          [active]="heading.active"
-          (click)="sortData(i, heading.title)"
-        >
-         {{heading.title}}
-        </th>
-            
+        @for (heading of headings; track heading.title; let i = $index) {
+          <th
+            [sortable]="heading.sortable"
+            [sortDirection]="heading.sortDirection"
+            [iconAlignment]="heading.iconAlignment"
+            [alignment]="heading.textAlignment"
+            [active]="heading.active"
+            (click)="sortData(i, heading.title)"
+          >
+           {{heading.title}}
+          </th>
+        }
+
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let rowData of tableData; let i = index">
-          <td>{{rowData.name}}</td>
-          <td>{{rowData.eye_color}}</td>
-          <td>{{rowData.gender}}</td>
-          <td>{{rowData.hair_color}}</td>
-          <td>{{rowData.skin_color}}</td>
-          <td>{{rowData.birth_year}}</td>
-          <td class="text-align-right">{{rowData.height}}</td>
-          <td class="text-align-right">{{rowData.mass}}</td>
-      </tr>
+      @for (rowData of tableData; track rowData.name; let i = $index) {
+        <tr>
+            <td>{{rowData.name}}</td>
+            <td>{{rowData.eye_color}}</td>
+            <td>{{rowData.gender}}</td>
+            <td>{{rowData.hair_color}}</td>
+            <td>{{rowData.skin_color}}</td>
+            <td>{{rowData.birth_year}}</td>
+            <td class="text-align-right">{{rowData.height}}</td>
+            <td class="text-align-right">{{rowData.mass}}</td>
+        </tr>
+      }
     </tbody>
   </table>
 </kirby-card>`,
@@ -63,7 +67,7 @@ export class MyModule {}`,
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [CardModule, NgFor, TableSortableComponent],
+  imports: [CardModule, TableSortableComponent],
 })
 export class DataTableSortableExampleComponent implements OnInit {
   tableData: Person[] = tableExampleData;

@@ -14,7 +14,7 @@ describe('AlertComponent', () => {
   beforeEach(() => {
     spectator = createHost(
       `
-      <kirby-alert 
+      <kirby-alert
         [okBtn]="okBtn"
         [cancelBtn]="cancelBtn"
         [okBtnIsDestructive]="okBtnIsDestructive"
@@ -45,7 +45,6 @@ describe('AlertComponent', () => {
     it('should render', () => {
       const expected = 'Test OK Button Text';
 
-      expect(spectator.component.okBtn).toEqual(expected);
       expect(okButton).toHaveText(expected);
     });
 
@@ -69,7 +68,7 @@ describe('AlertComponent', () => {
     });
 
     it('should have default size when cancel button', () => {
-      expect(okButton.attributes['ng-reflect-size']).toBeUndefined();
+      expect(okButton).not.toHaveAttribute('size');
     });
   });
 
@@ -82,7 +81,6 @@ describe('AlertComponent', () => {
     it('should render', () => {
       const expected = 'Test Cancel Button Text';
 
-      expect(spectator.component.cancelBtn).toEqual(expected);
       expect(cancelButton).toHaveText(expected);
     });
 
@@ -92,6 +90,7 @@ describe('AlertComponent', () => {
       expect(spectator.query('.cancel-btn')).toBeNull();
     });
   });
+
   describe('icon', () => {
     it('should render', () => {
       spectator.setHostInput({ iconName: 'warning' });

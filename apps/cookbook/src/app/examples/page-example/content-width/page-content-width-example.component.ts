@@ -7,7 +7,7 @@ import { PageModule } from '@kirbydesign/designsystem/page';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { NgIf } from '@angular/common';
+
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const fieldsetHtml = `
@@ -26,7 +26,9 @@ const fieldsetHtml = `
       >
         <kirby-label>
           <p class="kirby-item-title">{{ item.text }}</p>
-          <code class="kirby-item-detail" *ngIf="item.value !== 'default'">maxWidth="{{item.value}}"</code>
+          @if (item.value !== 'default') {
+            <code class="kirby-item-detail">maxWidth="{{item.value}}"</code>
+          }
         </kirby-label>
         <kirby-label slot="end">
           <data class="kirby-item-detail">{{ item.width }}</data>
@@ -52,7 +54,7 @@ const config = {
       }
     `,
   ],
-  imports: [PageModule, DropdownModule, ListModule, ItemModule, NgIf],
+  imports: [PageModule, DropdownModule, ListModule, ItemModule],
 })
 export class PageContentWidthExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

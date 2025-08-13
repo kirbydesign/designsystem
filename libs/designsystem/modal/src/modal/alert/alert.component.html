@@ -6,24 +6,20 @@
     [subtitle]="message$ | async"
   ></kirby-empty-state>
   <div class="buttongroup">
+    @if (cancelBtn$ | async; as cancelBtn) {
+      <button kirby-button attentionLevel="3" class="cancel-btn" (click)="onCancel()">
+        {{ cancelBtn }}
+      </button>
+    }
     <button
       kirby-button
-      *ngIf="cancelBtn"
-      attentionLevel="3"
-      class="cancel-btn"
-      (click)="onCancel()"
-    >
-      {{ cancelBtn }}
-    </button>
-    <button
-      kirby-button
-      [size]="cancelBtn ? null : 'lg'"
+      [size]="(cancelBtn$ | async) ? null : 'lg'"
       attentionLevel="1"
       class="ok-btn"
       [class.destructive]="okBtnIsDestructive"
       (click)="onOk()"
     >
-      {{ okBtn }}
+      {{ okBtn$ | async }}
     </button>
   </div>
 </article>

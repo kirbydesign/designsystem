@@ -550,7 +550,7 @@ describe('ButtonComponent configured with text and icon using an ngIf directive'
 
   it('should not have the icon-only class, if kirby-icon is inserted before text', () => {
     spectator = createHost(
-      '<button kirby-button><kirby-icon name="close" *ngIf="true"></kirby-icon>Test</button>'
+      '<button kirby-button>@if (true) { <kirby-icon name="close"></kirby-icon> } Test</button>'
     );
     element = spectator.element as HTMLButtonElement;
 
@@ -559,7 +559,7 @@ describe('ButtonComponent configured with text and icon using an ngIf directive'
 
   it('should not have the icon-only class, if kirby-icon is inserted after text', () => {
     spectator = createHost(
-      '<button kirby-button>Test<kirby-icon name="close" *ngIf="true"></kirby-icon></button>'
+      '<button kirby-button>Test @if (true) { <kirby-icon name="close"></kirby-icon> }</button>'
     );
     element = spectator.element as HTMLButtonElement;
 

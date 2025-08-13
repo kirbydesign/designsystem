@@ -15,7 +15,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
-import { CommonModule } from '@angular/common';
+
 import { SegmentItem } from './segment-item';
 
 export enum SegmentedControlMode {
@@ -25,7 +25,7 @@ export enum SegmentedControlMode {
 }
 
 @Component({
-  imports: [IconModule, BadgeComponent, CommonModule, IonSegment, IonSegmentButton],
+  imports: [IconModule, BadgeComponent, IonSegment, IonSegmentButton],
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],

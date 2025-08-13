@@ -121,6 +121,11 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       --checkbox-background: #{interaction-state.get-state-color('white', 'xs')};
     }
 
+    &:focus-visible {
+      // Remove default browser focus visible
+      outline: none;
+    }
+
     // Wrap declarations to avoid mixing with nested rules.
     // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
     /* stylelint-disable no-duplicate-selectors */

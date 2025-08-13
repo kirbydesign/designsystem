@@ -4,18 +4,18 @@ import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { NgIf } from '@angular/common';
+
 import { BasePageExampleComponent } from '../page-example/base-page-example.component';
 
 const config = {
-  template: `<kirby-page 
-  title="Tab Navigation" 
+  template: `<kirby-page
+  title="Tab Navigation"
   subtitle="Page with Tab Navigation">
-  <kirby-tab-navigation 
-    *kirbyPageStickyContent 
+  <kirby-tab-navigation
+    *kirbyPageStickyContent
     aria-label="A sample Tab Navigation"
     [(selectedIndex)]="selectedIndex">
-    <kirby-tab-navigation-item 
+    <kirby-tab-navigation-item
       label="{{labels[0]}}"
       id="tab-navigation-item-0"
       aria-controls="tab-panel-0">
@@ -29,7 +29,7 @@ const config = {
         </kirby-icon>
       </kirby-badge>
     </kirby-tab-navigation-item>
-    <kirby-tab-navigation-item 
+    <kirby-tab-navigation-item
       [truncate]="false"
       label="{{labels[2]}}"
       id="tab-navigation-item-2"
@@ -38,12 +38,12 @@ const config = {
         3
       </kirby-badge>
     </kirby-tab-navigation-item>
-    <kirby-tab-navigation-item 
+    <kirby-tab-navigation-item
       label="{{labels[3]}}"
       id="tab-navigation-item-3"
       aria-controls="tab-panel-3">
     </kirby-tab-navigation-item>
-    <kirby-tab-navigation-item 
+    <kirby-tab-navigation-item
       label="{{labels[4]}}"
       id="tab-navigation-item-4"
       aria-controls="tab-panel-4">
@@ -51,7 +51,7 @@ const config = {
         <kirby-icon name="edit"></kirby-icon>
       </kirby-badge>
     </kirby-tab-navigation-item>
-    <kirby-tab-navigation-item 
+    <kirby-tab-navigation-item
       label="{{labels[5]}}"
       id="tab-navigation-item-5"
       aria-controls="tab-panel-5">
@@ -64,9 +64,11 @@ const config = {
   <kirby-page-content>
     <div role="tabpanel" attr.id="tab-panel-{{selectedIndex}}" attr.aria-labelledby="tab-navigation-item-{{selectedIndex}}">
       <h2>About {{labels[selectedIndex]}}</h2>
-      <p *ngIf="selectedIndex % 2 === 0">
-        Aut, dignissimos dolorum ducimus et rem reprehenderit rerum sunt ut!
-      </p>
+      @if (selectedIndex % 2 === 0) {
+        <p>
+          Aut, dignissimos dolorum ducimus et rem reprehenderit rerum sunt ut!
+        </p>
+      }
       <div [innerHTML]="content"></div>
     </div>
   </kirby-page-content>
@@ -74,7 +76,7 @@ const config = {
 };
 @Component({
   template: config.template,
-  imports: [PageModule, TabNavigationModule, ThemeColorDirective, BadgeComponent, IconModule, NgIf],
+  imports: [PageModule, TabNavigationModule, ThemeColorDirective, BadgeComponent, IconModule],
 })
 export class TabNavigationExampleComponent extends BasePageExampleComponent {
   selectedIndex = 0;

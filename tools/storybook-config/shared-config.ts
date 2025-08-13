@@ -3,21 +3,20 @@ import { Parameters } from '@storybook/angular';
 
 export const defaultParameters: Parameters = {
   backgrounds: {
-    default: 'gray',
-    values: [
-      {
+    options: {
+      white: {
         name: 'white',
         value: '#fff',
       },
-      {
+      gray: {
         name: 'gray',
         value: ColorHelper.getBackgroundColor(),
       },
-      {
+      dark: {
         name: 'dark',
         value: '#353535',
       },
-    ],
+    },
   },
   viewport: {
     viewports: {

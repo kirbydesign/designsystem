@@ -15,8 +15,8 @@
 /*
  * Modal variables
  *
- * height & width variables are kept local here until we have determined the exact values  
- * and can migrate them to heights/widths in _variables.scss as a breaking change 
+ * height & width variables are kept local here until we have determined the exact values
+ * and can migrate them to heights/widths in _variables.scss as a breaking change
  * to the existing modal heights.
  */
 
@@ -118,7 +118,12 @@ ion-modal.kirby-overlay {
         }
       }
 
-      padding-top: var(--kirby-modal-padding-top);
+      // Wrap declarations to avoid clashes with other mixins that have nested rules.
+      // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+      /* stylelint-disable no-duplicate-selectors */
+      & {
+        padding-top: var(--kirby-modal-padding-top);
+      }
     }
 
     @include utils.media('<medium') {
@@ -237,7 +242,7 @@ ion-loading.kirby-loading-overlay {
   }
 }
 
-/* 
+/*
   * Class to add link-icon to the right of e.g. anchor tag.
   */
 .kirby-external-icon {

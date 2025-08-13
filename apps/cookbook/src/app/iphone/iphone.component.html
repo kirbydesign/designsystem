@@ -1,11 +1,13 @@
 <div class="container">
-  <div class="toggle-wrapper" *ngIf="showViewModeToggle">
-    Device view
-    <kirby-toggle
-      (checkedChange)="onViewModeToggleChange($event)"
-      [checked]="viewMode === 'device'"
-    ></kirby-toggle>
-  </div>
+  @if (showViewModeToggle) {
+    <div class="toggle-wrapper">
+      Device view
+      <kirby-toggle
+        (checkedChange)="onViewModeToggleChange($event)"
+        [checked]="viewMode === 'device'"
+      ></kirby-toggle>
+    </div>
+  }
 
   <div class="docs-demo-device ios">
     <figure>
@@ -29,7 +31,7 @@
       <iframe loading="lazy" importance="low" [src]="trustedSrc" #iframe></iframe>
     </figure>
   </div>
-  <a *ngIf="showExternalLink" class="kirby-external-icon" [href]="trustedSrc" target="_blank">
-    Pop out
-  </a>
+  @if (showExternalLink) {
+    <a class="kirby-external-icon" [href]="trustedSrc" target="_blank">Pop out</a>
+  }
 </div>

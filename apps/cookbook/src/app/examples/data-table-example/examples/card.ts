@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@kirbydesign/designsystem';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { NgFor } from '@angular/common';
+
 import { Person, tableExampleData } from '../example-data';
 
 const config = {
@@ -21,7 +21,8 @@ const config = {
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let rowData of tableData; let i = index" class="kirby-selectable-row" (click)="onClickRow(i)">
+      @for (rowData of tableData; track rowData.name; let i = $index) {
+        <tr class="kirby-selectable-row" (click)="onClickRow(i)">
           <td>{{rowData.name}}</td>
           <td>{{rowData.eye_color}}</td>
           <td>{{rowData.gender}}</td>
@@ -30,7 +31,8 @@ const config = {
           <td>{{rowData.birth_year}}</td>
           <td style="text-align:right;">{{rowData.height}}</td>
           <td style="text-align:right;">{{rowData.mass}}</td>
-      </tr>
+        </tr>
+      }
     </tbody>
   </table>
 </kirby-card>`,
@@ -39,7 +41,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [CardModule, NgFor],
+  imports: [CardModule],
 })
 export class DataTableCardExampleComponent {
   tableData: Person[] = [...tableExampleData];

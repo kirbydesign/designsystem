@@ -2,8 +2,12 @@
 <kirby-list [items]="items" showDivider="true" [swipeActions]="swipeActions">
   <kirby-item *kirbyListItemTemplate="let item">
     <div slot="outside">
-      <div class="flag success" *ngIf="item.flagged"></div>
-      <div class="flag warning" *ngIf="item.archived"></div>
+      @if (item.flagged) {
+        <div class="flag success"></div>
+      }
+      @if (item.archived) {
+        <div class="flag warning"></div>
+      }
     </div>
     <h3>{{ item.title }}</h3>
     <data slot="end" class="kirby-text-bold">{{ item.amount }}</data>

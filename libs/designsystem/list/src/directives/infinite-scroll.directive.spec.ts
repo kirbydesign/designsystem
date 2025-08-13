@@ -19,7 +19,6 @@ describe('InfiniteScrollDirective', () => {
 
     nativeElement.getBoundingClientRect.and.returnValue({ height, bottom });
     nativeElement.closest.and.returnValue(null);
-    document.getElementsByTagName.and.returnValue([]);
 
     const mockNgZone: SpyObject<NgZone> = jasmine.createSpyObj('ngZone', [
       'runOutsideAngular',

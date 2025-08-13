@@ -1,38 +1,43 @@
-<label *ngIf="_wrapContentInLabel">
-  <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
-  <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
-
-  <!-- add error message inside label if nested interative is in error state -->
-  <ng-container *ngIf="_nestedInteractiveHasError">
-    <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
-  </ng-container>
-</label>
+@if (_wrapContentInLabel) {
+  <label>
+    <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+    <!-- add error message inside label if nested interative is in error state -->
+    @if (_nestedInteractiveHasError) {
+      <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
+    }
+  </label>
+}
 
 <!-- add message outside label if nested interative is in valid state -->
-<ng-container *ngIf="!_nestedInteractiveHasError && _wrapContentInLabel">
+@if (!_nestedInteractiveHasError && _wrapContentInLabel) {
   <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
-</ng-container>
+}
 
-<ng-container *ngIf="!_wrapContentInLabel">
+@if (!_wrapContentInLabel) {
   <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
   <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
-</ng-container>
+}
 
 <ng-template #messageTemplate>
-  <div *ngIf="message !== undefined || counter" class="texts">
-    <kirby-form-field-message
-      *ngIf="message !== undefined"
-      class="message"
-      [text]="message"
-      [attr.aria-live]="_nestedInteractiveHasError ? 'polite' : null"
-      [attr.id]="_nestedInteractiveHasError ? _errorMessageId : _messageId"
-    ></kirby-form-field-message>
-
-    <div *ngIf="counter" class="counter" aria-hidden="true">
-      <ng-content select="kirby-input-counter"></ng-content>
+  @if (message !== undefined || counter) {
+    <div class="texts">
+      @if (message !== undefined) {
+        <kirby-form-field-message
+          class="message"
+          [text]="message"
+          [attr.aria-live]="_nestedInteractiveHasError ? 'polite' : null"
+          [attr.id]="_nestedInteractiveHasError ? _errorMessageId : _messageId"
+        ></kirby-form-field-message>
+      }
+      @if (counter) {
+        <div class="counter" aria-hidden="true">
+          <ng-content select="kirby-input-counter"></ng-content>
+        </div>
+      }
     </div>
-  </div>
+  }
 </ng-template>
 
 <ng-template #slottedInputTemplate>
@@ -45,21 +50,21 @@
     <ng-content select="kirby-radio-group"></ng-content>
     <div class="suffix vertical-align semi-dark-text">
       <ng-content select="[kirby-affix='suffix']"></ng-content>
-      <ng-container *ngIf="showDefaultCalendarIcon">
+      @if (showDefaultCalendarIcon) {
         <kirby-icon name="calendar"></kirby-icon>
-      </ng-container>
+      }
     </div>
   </div>
 </ng-template>
 
 <ng-template #labelTextTemplate>
-  <ng-container *ngIf="label">
+  @if (label) {
     <span class="text">{{ label }}</span>
-  </ng-container>
+  }
 </ng-template>
 
 <ng-template #labelTemplate>
-  <ng-container *ngIf="label">
+  @if (label) {
     <label class="text" [id]="_labelId" (click)="onLabelClick()">{{ label }}</label>
-  </ng-container>
+  }
 </ng-template>
