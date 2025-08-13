@@ -21,13 +21,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
@@ -51,8 +51,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
     HorizontalDirection.right;
   private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+
+  _listboxId = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
+  _comboboxId = UniqueIdGenerator.scopedTo('kirby-button').next();
 
   private _items: string[] | any[] = [];
+
   get items(): string[] | any[] {
     return this._items;
   }
@@ -131,7 +136,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   usePopover = false;
 
-  @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
   }
@@ -160,9 +164,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   get _isBlockLevel() {
     return this.expand === 'block';
   }
-
-  @HostBinding('attr.role')
-  _role = 'listbox';
 
   @HostBinding('class.is-opening')
   get _isOpening(): boolean {
@@ -207,6 +208,16 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   popover?: PopoverComponent;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
+
+  private forwardAriaLabelToDropdownButton() {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.buttonElement.nativeElement
+    );
+  }
+
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
 
@@ -302,7 +313,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         }
       });
     }
-    this.initializeAlignment();
+    // Only call initializeAlignment if cardElement is defined
+    if (this.cardElement && this.cardElement.nativeElement) {
+      this.initializeAlignment();
+    }
+    this.forwardAriaLabelToDropdownButton();
   }
 
   private initializeAlignment() {
@@ -385,7 +400,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       );
 
       // Move focus to selected item (if any)
-      this.focusedIndex = this.selectedIndex;
+      // If no item is selected, focus the first item
+      this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
     }
   }
 
