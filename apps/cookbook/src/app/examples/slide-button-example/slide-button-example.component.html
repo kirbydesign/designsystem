@@ -1,13 +1,13 @@
-<kirby-slide-button
-  [text]="'Slide to confirm'"
-  aria-label="Confirm"
-  (slideDone)="showAlert()"
-  aria-label="Unlock"
-></kirby-slide-button>
-<kirby-slide-button
-  [text]="'Slide to confirm'"
-  aria-label="Confirm"
-  expand="block"
-  (slideDone)="showAlert()"
-  aria-label="Transfer"
-></kirby-slide-button>
+<div class="example-container">
+  <h1>Slide Button</h1>
+
+  <h2>Simple</h2>
+  <div class="example-frame">
+    <cookbook-simple-slide-button-example></cookbook-simple-slide-button-example>
+  </div>
+
+  <h2>Expand block</h2>
+  <div class="example-frame">
+    <cookbook-expand-block-slide-button-example></cookbook-expand-block-slide-button-example>
+  </div>
+</div>
