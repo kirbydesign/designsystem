@@ -44,17 +44,13 @@ describe('DropdownComponent (popover version)', () => {
 
     let spectator: SpectatorHost<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
-    let listboxId: string;
-    let comboboxId: string;
 
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-dropdown [usePopover]="true" [selectedIndex]="selectedIndex" [items]="items" [size]="size"></kirby-dropdown>`,
+        `<kirby-dropdown [usePopover]="true" [selectedIndex]="selectedIndex" aria-labelledby="labelId" [items]="items" [size]="size"></kirby-dropdown>`,
         { hostProps: { items } }
       );
       buttonElement = spectator.query('button[kirby-button]');
-      listboxId = spectator.component._listboxId;
-      comboboxId = spectator.component._comboboxId;
     });
 
     it('should create', () => {
@@ -106,48 +102,9 @@ describe('DropdownComponent (popover version)', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
     });
 
-    it('should have correct ARIA attributes on button', () => {
-      expect(buttonElement.getAttribute('role')).toBe('combobox');
-      expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
-      expect(buttonElement.getAttribute('aria-controls')).toBe(listboxId);
-      expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
-    });
-
-    it('should have correct ID on button', () => {
+    it('should have correct id on button', () => {
+      const comboboxId = spectator.component._comboboxId;
       expect(buttonElement.getAttribute('id')).toBe(comboboxId);
-    });
-
-    it('should update aria-expanded when opened', () => {
-      spectator.component.open();
-      spectator.detectChanges();
-      expect(buttonElement.getAttribute('aria-expanded')).toBeTruthy();
-    });
-
-    it('should set aria-activedescendant when focusedIndex is set', () => {
-      spectator.component.focusedIndex = 1;
-      spectator.detectChanges();
-      expect(buttonElement.getAttribute('aria-activedescendant')).toBe(
-        listboxId + '-item-' + spectator.component.focusedIndex
-      );
-    });
-    it('should set correct aria attributes on listbox when open', () => {
-      spectator.component.open();
-      spectator.detectChanges();
-
-      const listbox = spectator.query('[role="listbox"]');
-      expect(listbox).toBeTruthy();
-      expect(listbox.getAttribute('id')).toBe(listboxId);
-    });
-
-    it('should set correct aria attributes on options when open', () => {
-      spectator.component.open();
-      spectator.detectChanges();
-
-      const options = spectator.queryAll('[role="option"]');
-      expect(options.length).toBe(items.length);
-      options.forEach((option: HTMLElement, i: number) => {
-        expect(option.getAttribute('id')).toBe(`${listboxId}-item-${i}`);
-      });
     });
 
     it('should have correct item size', fakeAsync(() => {
@@ -162,6 +119,61 @@ describe('DropdownComponent (popover version)', () => {
         });
       });
     }));
+
+    describe('ARIA attributes', () => {
+      let listboxId: string;
+
+      beforeEach(() => {
+        listboxId = spectator.component._listboxId;
+      });
+
+      it('should have correct aria attributes on button', () => {
+        expect(buttonElement.getAttribute('role')).toBe('combobox');
+        expect(buttonElement.getAttribute('aria-haspopup')).toBe('listbox');
+        expect(buttonElement.getAttribute('aria-controls')).toBe(listboxId);
+        expect(buttonElement.getAttribute('aria-expanded')).toBe('false');
+      });
+
+      it('should add aria-labelledby on button', () => {
+        expect(buttonElement.getAttribute('aria-labelledby')).toBe('labelId');
+      });
+
+      it('should set aria-activedescendant when focusedIndex is set', () => {
+        spectator.component.focusedIndex = 2;
+        spectator.detectChanges();
+        expect(buttonElement.getAttribute('aria-activedescendant')).toBe(
+          `${listboxId}-item-${spectator.component.focusedIndex}`
+        );
+      });
+
+      it('should set correct aria attributes on listbox when open', () => {
+        spectator.component.open();
+        spectator.detectChanges();
+
+        const listbox = spectator.query('[role="listbox"]');
+        expect(listbox).toBeTruthy();
+        expect(listbox.getAttribute('id')).toBe(listboxId);
+      });
+
+      it('should update aria-expanded when opened', fakeAsync(() => {
+        spectator.component.open();
+        tick(openDelayInMs);
+        spectator.detectChanges();
+        const updatedButtonElement = spectator.query('button');
+        expect(updatedButtonElement.getAttribute('aria-expanded')).toBe('true');
+      }));
+
+      it('should set correct aria attributes on options when open', () => {
+        spectator.component.open();
+        spectator.detectChanges();
+
+        const options = spectator.queryAll('[role="option"]');
+        expect(options.length).toBe(items.length);
+        options.forEach((option: HTMLElement, i: number) => {
+          expect(option.getAttribute('id')).toBe(`${listboxId}-item-${i}`);
+        });
+      });
+    });
 
     describe('when setting selected index', () => {
       let onChangeSpy: jasmine.Spy;
@@ -313,6 +325,18 @@ describe('DropdownComponent (popover version)', () => {
 
         expect(cardRect.right).toEqual(buttonRect.right);
       }));
+      it('open card to the left when popout=left', () => {
+        spectator.component.popout = HorizontalDirection.left;
+        spectator.element.style.cssFloat = 'right';
+        spectator.component['state'] = OpenState.open;
+        spectator.detectChanges();
+
+        const card = spectator.query('kirby-card');
+        const buttonRect = buttonElement.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+
+        expect(cardRect.right).toEqual(buttonRect.right);
+      });
     });
 
     describe('when configured with expand=block', () => {
@@ -330,6 +354,18 @@ describe('DropdownComponent (popover version)', () => {
       beforeEach(() => {
         spectator.component['state'] = OpenState.closed;
         spectator.detectChanges();
+      });
+
+      it('should set focusedIndex to selectedIndex if selectedIndex is set', () => {
+        spectator.component.selectedIndex = 2;
+        spectator.component.open();
+        expect(spectator.component.focusedIndex).toBe(2);
+      });
+
+      it('should set focusedIndex to 0 if no selectedIndex is set', () => {
+        spectator.component.selectedIndex = -1;
+        spectator.component.open();
+        expect(spectator.component.focusedIndex).toBe(0);
       });
 
       it('should have correct icon', () => {
