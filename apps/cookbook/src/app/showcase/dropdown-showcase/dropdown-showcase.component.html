@@ -5,7 +5,7 @@
 <h2>Simple</h2>
 <h3>Default</h3>
 <cookbook-example-viewer [html]="defaultExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-default
       [size]="size"
       #defaultExample
@@ -14,7 +14,7 @@
 </cookbook-example-viewer>
 <h3>Scroll</h3>
 <cookbook-example-viewer [html]="scrollExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-scroll
       [size]="size"
       #scrollExample
@@ -23,7 +23,7 @@
 </cookbook-example-viewer>
 <h3>Pre-selected</h3>
 <cookbook-example-viewer [html]="preSelectedExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-pre-selected
       [size]="size"
       #preSelectedExample
@@ -32,7 +32,7 @@
 </cookbook-example-viewer>
 <h3>Block level</h3>
 <cookbook-example-viewer [html]="expandExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-expand
       [size]="size"
       #expandExample
@@ -41,7 +41,7 @@
 </cookbook-example-viewer>
 <h3>Right aligned</h3>
 <cookbook-example-viewer [html]="rightAlignedExample.template" [css]="rightAlignedExample.styles">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-right-aligned
       [size]="size"
       #rightAlignedExample
@@ -50,7 +50,7 @@
 </cookbook-example-viewer>
 <h3>Attention level</h3>
 <cookbook-example-viewer [html]="attentionLevelExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-attention-level
       [size]="size"
       #attentionLevelExample
@@ -59,7 +59,7 @@
 </cookbook-example-viewer>
 <h3>Event handler</h3>
 <cookbook-example-viewer [html]="itemSelectExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-item-select
       [size]="size"
       #itemSelectExample
@@ -69,7 +69,7 @@
 <h2>Advanced</h2>
 <h3>Custom Item template</h3>
 <cookbook-example-viewer [html]="customItemTemplateExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-custom-item-template
       [size]="size"
       #customItemTemplateExample
@@ -78,7 +78,7 @@
 </cookbook-example-viewer>
 <h3>Forms</h3>
 <cookbook-example-viewer [html]="formsExample.template" [ts]="formsExample.codeSnippet">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-ng-forms
       [size]="size"
       #formsExample
@@ -88,7 +88,7 @@
 
 <h2>Keyboard support</h2>
 <cookbook-example-viewer [html]="keyboardSupportExample.template">
-  <div>
+  <div class="example-frame">
     <cookbook-dropdown-example-keyboard-support
       [size]="size"
       #keyboardSupportExample
