@@ -100,11 +100,6 @@ describe('DropdownComponent', () => {
       expect(spectator.element.attributes['disabled']).toBeUndefined();
     });
 
-    it('should have correct id on button', () => {
-      const comboboxId = spectator.component._comboboxId;
-      expect(buttonElement.getAttribute('id')).toBe(comboboxId);
-    });
-
     it('should render no-blur attribute', () => {
       expect(spectator.element.attributes['no-blur']).toBeDefined();
     });
@@ -119,6 +114,11 @@ describe('DropdownComponent', () => {
 
     it('should have type="button" attribute', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
+    it('should have correct id on button', () => {
+      const comboboxId = spectator.component._comboboxId;
+      expect(buttonElement.getAttribute('id')).toBe(comboboxId);
     });
 
     it('should have correct item size', () => {

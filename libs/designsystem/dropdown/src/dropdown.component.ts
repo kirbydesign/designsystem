@@ -57,6 +57,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   _comboboxId = UniqueIdGenerator.scopedTo('kirby-button').next();
 
   private _items: string[] | any[] = [];
+
   get items(): string[] | any[] {
     return this._items;
   }

@@ -1,10 +1,5 @@
 <button
   kirby-button
-  [size]="size"
-  [attentionLevel]="attentionLevel"
-  (click)="onToggle($event)"
-  (mousedown)="onButtonMouseEvent($event)"
-  [disabled]="disabled"
   type="button"
   [attr.id]="_comboboxId"
   role="combobox"
@@ -12,6 +7,11 @@
   [attr.aria-controls]="_listboxId"
   [attr.aria-expanded]="isOpen"
   [attr.aria-activedescendant]="_listboxId + '-item-' + focusedIndex"
+  [size]="size"
+  [attentionLevel]="attentionLevel"
+  (click)="onToggle($event)"
+  (mousedown)="onButtonMouseEvent($event)"
+  [disabled]="disabled"
   (keydown)="_onKeydown($event)"
 >
   <span class="text">{{ selectedText || placeholder }}</span>

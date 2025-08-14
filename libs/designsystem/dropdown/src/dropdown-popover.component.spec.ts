@@ -86,17 +86,12 @@ describe('DropdownComponent (popover version)', () => {
       expect(button.attentionLevel).toEqual('3');
     });
 
-    it('should not render disabled attribute', () => {
-      expect(spectator.element.attributes['disabled']).toBeUndefined();
-    });
-
-    it('should have correct id on button', () => {
-      const comboboxId = spectator.component._comboboxId;
-      expect(buttonElement.getAttribute('id')).toBe(comboboxId);
-    });
-
     it('should render no-blur attribute', () => {
       expect(spectator.element.attributes['no-blur']).toBeDefined();
+    });
+
+    it('should not render disabled attribute', () => {
+      expect(spectator.element.attributes['disabled']).toBeUndefined();
     });
 
     it('should not render button as disabled ', () => {
@@ -105,6 +100,15 @@ describe('DropdownComponent (popover version)', () => {
 
     it('should not render disabled attribute on button', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
+    });
+
+    it('should have type="button" attribute', () => {
+      expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
+    it('should have correct id on button', () => {
+      const comboboxId = spectator.component._comboboxId;
+      expect(buttonElement.getAttribute('id')).toBe(comboboxId);
     });
 
     it('should have correct item size', fakeAsync(() => {
