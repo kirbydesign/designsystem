@@ -28,7 +28,7 @@ import {
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { StartStringMatch, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
@@ -220,36 +220,11 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private getIndexOfItemByFirstCharacter(char: string) {
-    return this.getIndexByFirstMatchingStartString(
+    return StartStringMatch.getIndexByFirstMatchingStartString(
       char,
       this.kirbyItems.map((item) => item.nativeElement.innerText),
       this.focusedIndex + 1
     );
-  }
-
-  private getIndexByFirstMatchingStartString(
-    searchString: string,
-    words: string[],
-    startIndex: number
-  ): number {
-    searchString = searchString.toLowerCase();
-
-    const wordsStartingWithMatchString = words
-      .map((word, index) => {
-        return { word: word.toLowerCase(), index };
-      })
-      .filter((match) => match.word.startsWith(searchString));
-
-    if (wordsStartingWithMatchString.length === 0) {
-      return -1;
-    }
-
-    const firstWordStartingWithChar = wordsStartingWithMatchString[0];
-    const nextWordStartingWithChar = wordsStartingWithMatchString.find(
-      (wordAndIndex) => wordAndIndex.index >= startIndex
-    );
-
-    return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
   }
 
   focusItem() {

@@ -21,7 +21,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import {
+  DesignTokenHelper,
+  StartStringMatch,
+  UniqueIdGenerator,
+} from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
@@ -529,7 +533,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private searchBufferTimeout: any;
   private SEARCH_BUFFER_DELAY = 500; // ms
 
-  // Extracted buffer logic for sharing or reuse
   private addToSearchBuffer(char: string) {
     clearTimeout(this.searchBufferTimeout);
     this.searchBuffer += char;
@@ -634,32 +637,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
 
     const startIndex = this.isOpen ? this.focusedIndex + 1 : 0;
-    return this.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
-  }
-
-  private getIndexByFirstMatchingStartString(
-    searchString: string,
-    words: string[],
-    startIndex: number
-  ): number {
-    searchString = searchString.toLowerCase();
-
-    const wordsStartingWithMatchString = words
-      .map((word, index) => {
-        return { word: word.toLowerCase(), index };
-      })
-      .filter((match) => match.word.startsWith(searchString));
-
-    if (wordsStartingWithMatchString.length === 0) {
-      return -1;
-    }
-
-    const firstWordStartingWithChar = wordsStartingWithMatchString[0];
-    const nextWordStartingWithChar = wordsStartingWithMatchString.find(
-      (wordAndIndex) => wordAndIndex.index >= startIndex
-    );
-
-    return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
+    return StartStringMatch.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
   }
 
   @HostListener('mousedown', ['$event'])
