@@ -1,3 +1,7 @@
+<p>
+  A dropdown is a UI element that displays a list of options when activated, allowing users to
+  select one item from the list.
+</p>
 <cookbook-dropdown-example-configuration
   [size]="size"
   (sizeChanged)="setSize($event)"
@@ -13,6 +17,10 @@
   </div>
 </cookbook-example-viewer>
 <h3>Scroll</h3>
+<p>
+  If the list contains more than 8 items, a scroll function is automatically enabled to maintain
+  usability and prevent overflow.
+</p>
 <cookbook-example-viewer [html]="scrollExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-scroll
@@ -22,6 +30,10 @@
   </div>
 </cookbook-example-viewer>
 <h3>Pre-selected</h3>
+<p>
+  This is useful when you want to show a default selection or when the user has previously made a
+  selection.
+</p>
 <cookbook-example-viewer [html]="preSelectedExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-pre-selected
@@ -31,6 +43,9 @@
   </div>
 </cookbook-example-viewer>
 <h3>Block level</h3>
+<p>
+  To display the dropdown in full width of its container, apply block-level styling to the dropdown.
+</p>
 <cookbook-example-viewer [html]="expandExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-expand
@@ -40,6 +55,10 @@
   </div>
 </cookbook-example-viewer>
 <h3>Right aligned</h3>
+<p>
+  The dropdown can be right aligned, to place the dropdown with different alignment than the default
+  left alignment.
+</p>
 <cookbook-example-viewer [html]="rightAlignedExample.template" [css]="rightAlignedExample.styles">
   <div class="example-frame">
     <cookbook-dropdown-example-right-aligned
@@ -49,6 +68,10 @@
   </div>
 </cookbook-example-viewer>
 <h3>Attention level</h3>
+<p>
+  Applying an attention level changes the background color to help draw attention to the dropdown
+  element.
+</p>
 <cookbook-example-viewer [html]="attentionLevelExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-attention-level
@@ -58,6 +81,10 @@
   </div>
 </cookbook-example-viewer>
 <h3>Event handler</h3>
+<p>
+  The dropdown can be used with an event handler to perform an action when an item is selected. This
+  is useful when you want to perform an action based on the selected item.
+</p>
 <cookbook-example-viewer [html]="itemSelectExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-item-select
@@ -68,6 +95,10 @@
 </cookbook-example-viewer>
 <h2>Advanced</h2>
 <h3>Custom Item template</h3>
+<p>
+  Custom item templates can be used to create more complex layouts for each option in the dropdown,
+  allowing for enhanced flexibility and design.
+</p>
 <cookbook-example-viewer [html]="customItemTemplateExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-custom-item-template
@@ -77,6 +108,10 @@
   </div>
 </cookbook-example-viewer>
 <h3>Forms</h3>
+<p>
+  The dropdown can be used with Angular forms. This allows you to use the dropdown as a form control
+  and bind it to a form model.
+</p>
 <cookbook-example-viewer [html]="formsExample.template" [ts]="formsExample.codeSnippet">
   <div class="example-frame">
     <cookbook-dropdown-example-ng-forms
