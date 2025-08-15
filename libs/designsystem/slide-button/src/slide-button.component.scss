@@ -60,6 +60,12 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     background-color: $slide-button-container-bg-color;
     height: $slide-button-container-height;
     border-radius: $slide-button-container-radius;
+
+    &:focus-within {
+      @include utils.not-touch {
+        @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
+      }
+    }
   }
 
   @for $i from 1 through 10 {
@@ -99,10 +105,6 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     @include _slider-thumb;
   }
 
-  .slide-button:focus-visible::-webkit-slider-thumb {
-    @include interaction-state.apply-focus-ring;
-  }
-
   .slide-done {
     transition: all 0.3s ease-in-out;
     opacity: 0;
@@ -110,4 +112,16 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     transform: scale(0);
     pointer-events: none;
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  border: medium;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0;
 }

@@ -1,6 +1,37 @@
 <div class="example">
-  <cookbook-slide-button-example></cookbook-slide-button-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <p>
+    The slide button is a interactive element that requires a sliding gesture to confirm the action.
+    The sliding gesture requires a degree of intent, reducing the risk of accidentally triggering an
+    action. Often used on touch devices.
+  </p>
+  <h2>Simple slide button</h2>
+  <cookbook-example-viewer [html]="simpleSlideButtonExample.template">
+    <div class="example-frame">
+      <cookbook-simple-slide-button-example
+        #simpleSlideButtonExample
+      ></cookbook-simple-slide-button-example>
+    </div>
+  </cookbook-example-viewer>
+
+  <h3>Expand to fill width</h3>
+  <p>If needed the slide button can be expanded to fill the width of its container.</p>
+  <cookbook-example-viewer [html]="expandSlideButtonExample.template">
+    <div class="example-frame">
+      <cookbook-expand-block-slide-button-example
+        #expandSlideButtonExample
+      ></cookbook-expand-block-slide-button-example>
+    </div>
+  </cookbook-example-viewer>
+
+  <h2>Accessibility</h2>
+  <p>
+    While a gesture is needed to activate the slide button for the touch user, it will act as a
+    regular button for users using a screen reader. If the text of the slide button contains the
+    gesture like "slide to...", then it is advised to provide an aria-label that describes the
+    action without the gesture, like "confirm" or "unlock". This way, the screen reader user will
+    not be confused by the gesture requirement.
+  </p>
+
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
