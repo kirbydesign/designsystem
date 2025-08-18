@@ -98,6 +98,13 @@ describe('AlertHelper', () => {
 
       expect(dialogElement.getAttribute('aria-label')).toBe(title);
     });
+
+    it('should set alert title as h2', async () => {
+      await TestHelper.whenReady(ionModal);
+      const kirbyAlert = ionModal.querySelector('kirby-alert');
+      const titleTag = kirbyAlert.querySelector('.title')?.tagName?.toLowerCase();
+      expect(titleTag).toBe('h2');
+    });
   });
 
   describe('getComponentProps', () => {
