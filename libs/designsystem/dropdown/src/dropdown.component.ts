@@ -530,7 +530,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   private searchBuffer = '';
-  private searchBufferTimeout: number;
+  private searchBufferTimeout: any;
   private SEARCH_BUFFER_DELAY = 500; // ms
 
   private addToSearchBuffer(char: string) {
@@ -540,7 +540,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.resetSearchBuffer();
     }, this.SEARCH_BUFFER_DELAY);
   }
-
   private resetSearchBuffer() {
     this.searchBuffer = '';
   }
