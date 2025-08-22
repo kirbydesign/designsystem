@@ -809,6 +809,7 @@ describe('DropdownComponent', () => {
           spectator.setHostInput('items', testItems);
           spectator.detectChanges();
 
+          console.log('items', spectator.component.items);
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'c');
           spectator.detectChanges();
           expect(spectator.component.focusedIndex).toBe(2);

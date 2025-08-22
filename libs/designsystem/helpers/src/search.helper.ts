@@ -1,4 +1,4 @@
-export class StartStringMatch {
+export class SearchHelper {
   static getIndexByFirstMatchingStartString(
     searchString: string,
     words: string[],
@@ -22,5 +22,8 @@ export class StartStringMatch {
     );
 
     return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
+  }
+  static isPrintableCharacter(key: string): boolean {
+    return key.length === 1 && /\S/.test(key);
   }
 }

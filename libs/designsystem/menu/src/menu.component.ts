@@ -28,7 +28,7 @@ import {
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { StartStringMatch, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { SearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
@@ -220,7 +220,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private getIndexOfItemByFirstCharacter(char: string) {
-    return StartStringMatch.getIndexByFirstMatchingStartString(
+    return SearchHelper.getIndexByFirstMatchingStartString(
       char,
       this.kirbyItems.map((item) => item.nativeElement.innerText),
       this.focusedIndex + 1
