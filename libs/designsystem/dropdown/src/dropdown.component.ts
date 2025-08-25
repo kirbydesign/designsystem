@@ -615,9 +615,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         .toArray()
         .map((ref) => ref.nativeElement.textContent?.trim() ?? '');
     } else {
-      itemTexts = this.items.map((item) =>
-        typeof item === 'string' ? item : item[this.itemTextProperty]
-      );
+      itemTexts = this.items.map((item) => this.getTextFromItem(item) ?? '');
     }
 
     const startIndex = this.isOpen ? this.focusedIndex + 1 : 0;
