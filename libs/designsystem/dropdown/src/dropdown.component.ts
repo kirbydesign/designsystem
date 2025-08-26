@@ -270,9 +270,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     this.clicked = true;
 
-    if (!this.isOpen) {
-      this.elementRef.nativeElement.focus();
-    }
+    this.elementRef.nativeElement.focus();
+
     this.toggle();
   }
 
@@ -283,10 +282,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.isOpen ? this.close() : this.open();
   }
 
-  onButtonMouseEvent(event: Event) {
-    // Prevent button focus;
-    event.preventDefault();
-  }
+  onButtonMouseEvent(_event: Event) {}
 
   /* Utility that makes it easier to set styles on card element
   when using popover*/
@@ -529,8 +525,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     event.preventDefault();
   }
 
-  private searchBuffer = '';
-  private searchBufferTimeout: any;
+  private searchBuffer: string = '';
+  private searchBufferTimeout: number;
   private SEARCH_BUFFER_DELAY = 500; // ms
 
   private addToSearchBuffer(char: string) {
@@ -564,7 +560,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         this.open();
         this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : -1;
       }
-      return false;
+      return;
     }
 
     // ALT + ArrowUp: Select focused item and close dropdown
@@ -574,7 +570,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         this.selectItem(this.focusedIndex);
         this.close();
       }
-      return false;
     }
     return true;
   }
@@ -600,9 +595,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     if (foundItemIndex > -1) {
       this.focusedIndex = foundItemIndex;
-      if (!isOpen) {
-        this.scrollItemIntoView(foundItemIndex);
-      }
     }
   }
 
@@ -618,7 +610,16 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       itemTexts = this.items.map((item) => this.getTextFromItem(item) ?? '');
     }
 
-    const startIndex = this.isOpen ? this.focusedIndex + 1 : 0;
+    // If multi-character search, always start from 0
+    const isMultiCharSearch = this.searchBuffer && this.searchBuffer.length > 1;
+    let startIndex: number;
+    if (isMultiCharSearch) {
+      startIndex = 0;
+    } else if (this.isOpen) {
+      startIndex = this.focusedIndex + 1;
+    } else {
+      startIndex = 0;
+    }
     return SearchHelper.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
   }
 
@@ -727,8 +728,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.home', ['$event'])
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
-    console.log('keydown', event.key);
-
     if (this.disabled) return;
     if (!this.isOpen) {
       event.preventDefault();

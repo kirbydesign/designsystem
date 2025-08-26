@@ -155,10 +155,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
-  private isPrintableCharacter(key: string) {
-    return key.length === 1 && key.match(/\S/);
-  }
-
   private handleKeyDownForOpenedMenu(event: KeyboardEvent) {
     const key = event.key;
 
@@ -207,7 +203,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.floatingMenu.hide();
         break;
       default: {
-        if (this.isPrintableCharacter(key)) {
+        if (SearchHelper.isPrintableCharacter(key)) {
           this.preventDefaultAndStopImmediatePropagation(event);
           const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
           if (foundItemIndex > -1) {
