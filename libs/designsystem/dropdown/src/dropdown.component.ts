@@ -526,7 +526,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   private searchBuffer: string = '';
-  private searchBufferTimeout: number;
+  private searchBufferTimeout: ReturnType<typeof setTimeout>;
   private SEARCH_BUFFER_DELAY = 500; // ms
 
   private addToSearchBuffer(char: string) {
