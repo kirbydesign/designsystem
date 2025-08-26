@@ -541,17 +541,19 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('keydown', ['$event'])
-  _onKeydown(event: KeyboardEvent): boolean {
+  _onKeydown(event: KeyboardEvent) {
     const key = event.key;
 
     if (this.items.length === 0) {
       console.warn('[Kirby] No items found within dropdown');
-      return false;
+      return;
     }
 
-    if (this.disabled) return false;
+    if (this.disabled) return;
 
-    this.handlePrintableCharacterKey(event, this.isOpen);
+    if (SearchHelper.isPrintableCharacter(key)) {
+      this.handlePrintableCharacterKey(event, this.isOpen);
+    }
 
     // ALT + ArrowDown: Open dropdown
     if (key === 'ArrowDown' && event.altKey) {
@@ -571,15 +573,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         this.close();
       }
     }
-    return true;
   }
 
   private handlePrintableCharacterKey(event: KeyboardEvent, isOpen: boolean) {
     const key = event.key;
 
-    if (!SearchHelper.isPrintableCharacter(key)) {
-      return;
-    }
     if (isOpen) {
       this.preventDefaultAndStopImmediatePropagation(event);
     } else {
