@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   OnDestroy,
   Output,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 
 @Component({
   imports: [CommonModule],
@@ -17,12 +21,17 @@ import {
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideButtonComponent implements OnDestroy {
+export class SlideButtonComponent implements OnDestroy, AfterViewInit {
   @Input() text = '';
   @Input() expand: 'block';
 
   @Output() slideDone = new EventEmitter();
   @Output() slidingPercentageChanged = new EventEmitter<number>();
+
+  @ViewChild('hiddenButton', { read: ElementRef })
+  hiddenButton!: ElementRef<HTMLButtonElement>;
+
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   readonly slideDoneFadeTime = 500;
   readonly slideResetTime = 100;
@@ -44,18 +53,20 @@ export class SlideButtonComponent implements OnDestroy {
     this.pctInTens = Math.ceil(this.value / 10) * 10;
   }
 
-  private _step = 1;
-  private resetStep() {
-    this.step = 1;
-  }
-  public get step() {
-    return this._step;
-  }
-  public set step(value) {
-    this._step = value;
-  }
+  constructor(
+    private changeDetectionRef: ChangeDetectorRef,
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
 
-  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+  ngAfterViewInit(): void {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.hiddenButton.nativeElement
+    );
+  }
 
   ngOnDestroy(): void {
     if (this.resetSliderIntervalTimer) {
@@ -63,16 +74,7 @@ export class SlideButtonComponent implements OnDestroy {
     }
   }
 
-  @HostListener('keyup.arrowup', ['$event'])
-  @HostListener('keyup.arrowdown', ['$event'])
-  @HostListener('keyup.arrowleft', ['$event'])
-  @HostListener('keyup.arrowright', ['$event'])
-  @HostListener('keyup.pageup', ['$event'])
-  @HostListener('keyup.pagedown', ['$event'])
-  @HostListener('keyup.home', ['$event'])
-  @HostListener('keyup.end', ['$event'])
   onSliderMouseup() {
-    this.resetStep();
     if (this.value == 100) {
       this.handleSlideDone();
     } else {
@@ -94,24 +96,11 @@ export class SlideButtonComponent implements OnDestroy {
     this.slidingPercentageChanged.emit(this.value);
   }
 
-  @HostListener('keydown.arrowup', ['$event'])
-  @HostListener('keydown.arrowdown', ['$event'])
-  @HostListener('keydown.arrowleft', ['$event'])
-  @HostListener('keydown.arrowright', ['$event'])
-  onKeyDownEvents() {
-    clearInterval(this.resetSliderIntervalTimer);
-    this.step = 10;
-  }
-
-  @HostListener('keydown.pageup', ['$event'])
-  @HostListener('keydown.pagedown', ['$event'])
-  @HostListener('keydown.home', ['$event'])
-  @HostListener('keydown.end', ['$event'])
   onSliderMousedown() {
     clearInterval(this.resetSliderIntervalTimer);
   }
 
-  private handleSlideDone() {
+  handleSlideDone() {
     this.slideDone.emit();
     this.isSlideDone = true;
   }
