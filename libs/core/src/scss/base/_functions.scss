@@ -195,9 +195,9 @@
 }
 
 /*
-* This mixin is applied both in the section-header styles, for using 
-* headings and paragraphs directly, and in kirby-label styles, for 
-* wrapping them in a kirby-label within a section-header. 
+* This mixin is applied both in the section-header styles, for using
+* headings and paragraphs directly, and in kirby-label styles, for
+* wrapping them in a kirby-label within a section-header.
 */
 
 @mixin section-header-typography() {
@@ -245,7 +245,6 @@
     background-image: image-set('#{$icon-url}');
   }
 
-  white-space: nowrap;
   background-repeat: no-repeat;
   background-position: right 50%;
   background-size: $icon-scaling-factor;
