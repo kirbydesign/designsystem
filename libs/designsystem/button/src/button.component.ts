@@ -94,7 +94,6 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
   iconElementRef?: ElementRef<HTMLElement>;
 
   private removeListeners: (() => void)[] = [];
-  private abortListener = new AbortController();
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
