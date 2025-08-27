@@ -7,6 +7,7 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnDestroy,
   Renderer2,
 } from '@angular/core';
 
@@ -30,7 +31,7 @@ export type AttentionLevel = '1' | '2' | '3';
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent implements AfterContentInit {
+export class ButtonComponent implements AfterContentInit, OnDestroy {
   @Input() attentionLevel: AttentionLevel;
 
   @HostBinding('class.no-decoration')
@@ -92,10 +93,29 @@ export class ButtonComponent implements AfterContentInit {
   @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef?: ElementRef<HTMLElement>;
 
+  private removeListeners: (() => void)[] = [];
+  private abortListener = new AbortController();
+
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
-  ) {}
+  ) {
+    this.setupEventListenerForAriaDisabledHandling();
+  }
+
+  setupEventListenerForAriaDisabledHandling() {
+    // Prevent event bubbling for aria-disabled buttons using a native event listener.
+    // HostListener cannot block event bubbling, see: https://github.com/angular/angular/issues/9587
+    ['click', 'keydown.enter', 'keydown.space'].forEach((evt) => {
+      const eventListener = this.renderer.listen(
+        this.elementRef.nativeElement,
+        evt,
+        this.blockEventOnAriaDisabled.bind(this),
+        { capture: true }
+      );
+      this.removeListeners.push(eventListener);
+    });
+  }
 
   private wrapTextNode(iconElement?: HTMLElement) {
     if (!iconElement) {
@@ -153,9 +173,10 @@ export class ButtonComponent implements AfterContentInit {
     }
   }
 
-  @HostListener('keydown.enter', ['$event'])
-  @HostListener('keydown.space', ['$event'])
-  _onEnterOrSpace(event: KeyboardEvent) {
+  ngOnDestroy() {
+    this.removeListeners.forEach((removeListener) => removeListener());
+  }
+  private blockEventOnAriaDisabled(event: Event) {
     if (this.elementRef.nativeElement.ariaDisabled === 'true') {
       event.preventDefault();
       event.stopImmediatePropagation();
