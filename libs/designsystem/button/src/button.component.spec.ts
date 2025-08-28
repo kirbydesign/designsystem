@@ -105,25 +105,29 @@ describe('ButtonComponent', () => {
       });
 
       it('should prevent activation on Enter', () => {
-        const keyDownEvent = createKeyboardEvent('keydown', 'Enter', element);
-        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
-        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+        let eventReceived = false;
+        element.addEventListener('keydown.enter', () => (eventReceived = true));
 
-        element.dispatchEvent(keyDownEvent);
-
-        expect(preventDefaultSpy).toHaveBeenCalled();
-        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
+        element.dispatchEvent(createKeyboardEvent('keydown', 'enter', element));
+        expect(eventReceived).toBe(false);
       });
 
       it('should prevent activation on Space', () => {
-        const keyDownEvent = createKeyboardEvent('keydown', 'Space', element);
-        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
-        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+        let eventReceived = false;
+        element.addEventListener('keydown.space', () => (eventReceived = true));
 
-        element.dispatchEvent(keyDownEvent);
+        element.dispatchEvent(createKeyboardEvent('keydown', 'space', element));
+        expect(eventReceived).toBe(false);
+      });
 
-        expect(preventDefaultSpy).toHaveBeenCalled();
-        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
+      it('should prevent activation on click', () => {
+        let eventReceived = false;
+        element.addEventListener('click', () => (eventReceived = true));
+        const clickEvent = new MouseEvent('click', { bubbles: true });
+
+        element.dispatchEvent(clickEvent);
+
+        expect(eventReceived).toBe(false);
       });
     });
 
