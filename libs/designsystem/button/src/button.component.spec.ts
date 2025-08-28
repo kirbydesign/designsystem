@@ -110,7 +110,6 @@ describe('ButtonComponent', () => {
         element.addEventListener('keydown', (event: KeyboardEvent) => {
           if (event.key === 'enter') {
             eventReceived++;
-            console.log('event');
           }
         });
 
