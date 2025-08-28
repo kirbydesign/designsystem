@@ -270,8 +270,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     this.clicked = true;
 
-    this.elementRef.nativeElement.focus();
-
     this.toggle();
   }
 
@@ -281,8 +279,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
     this.isOpen ? this.close() : this.open();
   }
-
-  onButtonMouseEvent(_event: Event) {}
 
   /* Utility that makes it easier to set styles on card element
   when using popover*/
@@ -675,7 +671,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.isOpen) {
       this.selectItem(this.focusedIndex);
     }
-
     this.toggle();
   }
 
