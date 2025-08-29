@@ -290,6 +290,16 @@ describe('NumberInputDirective', () => {
         expect(spectator.element).toHaveAttribute('disabled');
         expect((spectator.element as HTMLInputElement).disabled).toBeTrue();
       });
+
+      it('should call onTouched when blurred', () => {
+        spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
+        const onTouchedSpy = jasmine.createSpy('onTouched');
+        spectator.directive.registerOnTouched(onTouchedSpy);
+
+        spectator.element.dispatchEvent(new Event('blur'));
+
+        expect(onTouchedSpy).toHaveBeenCalledTimes(1);
+      });
     });
   });
 });

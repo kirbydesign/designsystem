@@ -1,5 +1,13 @@
 import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-import { Directive, ElementRef, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Inject,
+  Input,
+  LOCALE_ID,
+  OnInit,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import 'inputmask/lib/extensions/inputmask.numeric.extensions';
 import Inputmask from 'inputmask/lib/inputmask';
@@ -53,8 +61,13 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   _maxlength: number;
   _groupSeperatorDisabled: boolean;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onChange = (_: string) => {};
+  _onChange = (_: string) => {};
+  _onTouched = () => {};
+
+  @HostListener('blur')
+  onTouched(): void {
+    this._onTouched();
+  }
 
   constructor(
     private elementRef: ElementRef,
@@ -78,11 +91,12 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   }
 
   registerOnChange(onChange: any): void {
-    this.onChange = onChange;
+    this._onChange = onChange;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  registerOnTouched(_: any): void {}
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
+  }
 
   setDisabledState?(isDisabled: boolean): void {
     this.elementRef.nativeElement.disabled = isDisabled;
@@ -109,7 +123,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
       onBeforeWrite: () => {
         if (!this.inputmask) return;
         const unmaskedValue = this.inputmask.unmaskedvalue();
-        this.onChange(unmaskedValue.replace(this.radixPoint, '.'));
+        this._onChange(unmaskedValue.replace(this.radixPoint, '.'));
       },
     }).mask(this.elementRef.nativeElement);
     this.inputmask = this.elementRef.nativeElement.inputmask;
