@@ -5,6 +5,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $border-width: 1px;
+$padding-block-md: 5px;
+$padding-block-sm: 4px;
+$padding-block-xs: 3px;
 
 :host {
   display: inline-block;
@@ -13,20 +16,18 @@ $border-width: 1px;
   border: $border-width solid var(--kirby-flag-border-color, utils.get-color('medium'));
   border-radius: utils.border-radius('xs');
   font-size: utils.font-size('n');
-  padding-inline: utils.size('xxs');
+  padding: $padding-block-md utils.size('xxs');
   font-weight: utils.font-weight('medium');
-  line-height: calc(28px - 2 * $border-width);
+  line-height: 1;
 
   &.sm {
     font-size: utils.font-size('s');
-    line-height: calc(24px - 2 * $border-width);
+    padding-block: $padding-block-sm;
   }
 
   &.xs {
     font-size: utils.font-size('xs');
-    line-height: calc(20px - 2 * $border-width);
-    padding-left: utils.size('xxxs');
-    padding-right: utils.size('xxxs');
+    padding: $padding-block-xs utils.size('xxxs');
   }
 }
 
