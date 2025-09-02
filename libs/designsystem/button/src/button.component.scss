@@ -11,6 +11,7 @@ $button-width: (
   lg: 220px,
 ) !default;
 $button-margin: utils.size('xxxs');
+$default-icon-only-font-size: 1.5rem;
 
 @function button-width($key) {
   @return map.get($button-width, $key);
@@ -18,8 +19,8 @@ $button-margin: utils.size('xxxs');
 
 @mixin button-xs {
   /*
-  * Extra small button needs a smaller click area to e.g. not overlap with other 
-  * interactive elements. The maximum target size we can safely do is the button's 
+  * Extra small button needs a smaller click area to e.g. not overlap with other
+  * interactive elements. The maximum target size we can safely do is the button's
   * minimum width plus its margin on each side
   */
   $button-xs-icon-only-size: utils.size('m');
@@ -40,7 +41,8 @@ $button-margin: utils.size('xxxs');
   }
 
   &.icon-only {
-    --kirby-icon-font-size: #{utils.size('s')};
+    // Limit icon font size to not grow larger than button size on text resize
+    --kirby-icon-font-size: min(#{utils.font-size('n')}, #{$button-xs-icon-only-size});
 
     width: $button-xs-icon-only-size;
     min-width: unset;
@@ -58,7 +60,7 @@ $button-margin: utils.size('xxxs');
 
   &.icon-left,
   &.icon-right {
-    --kirby-icon-font-size: #{utils.size('s')};
+    --kirby-icon-font-size: #{utils.font-size('n')};
 
     min-width: button-width('xs');
   }
@@ -75,7 +77,7 @@ $button-margin: utils.size('xxxs');
   }
 
   &.icon-only {
-    --kirby-icon-font-size: #{utils.size('s')};
+    --kirby-icon-font-size: #{utils.font-size('n')};
 
     width: utils.size('l');
     min-width: unset;
@@ -91,7 +93,7 @@ $button-margin: utils.size('xxxs');
 
   &.icon-left,
   &.icon-right {
-    --kirby-icon-font-size: #{utils.size('s')};
+    --kirby-icon-font-size: #{utils.font-size('n')};
 
     min-width: button-width('md');
   }
@@ -103,6 +105,8 @@ $button-margin: utils.size('xxxs');
   min-width: button-width('lg');
 
   &.icon-only {
+    --kirby-icon-font-size: #{$default-icon-only-font-size};
+
     width: utils.size('xxl');
     min-width: unset;
   }
@@ -219,6 +223,7 @@ $button-margin: utils.size('xxxs');
   &.icon-only {
     --kirby-button-padding-left: 0;
     --kirby-button-padding-right: 0;
+    --kirby-icon-font-size: min(#{$default-icon-only-font-size}, #{utils.size('xl')});
 
     width: utils.size('xl');
     padding: 0;
