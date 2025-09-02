@@ -62,10 +62,10 @@ $font-weight: (
 /* Icon
 ****************************************************************************/
 $icon-font-sizes: (
-  'xs': map.get($sizes, 's'),
-  'sm': map.get($sizes, 'm'),
-  'md': map.get($sizes, 'l'),
-  'lg': map.get($sizes, 'xxxl'),
+  'xs': 1rem,
+  'sm': 1.5rem,
+  'md': 2rem,
+  'lg': 3rem,
 ) !default;
 
 /*

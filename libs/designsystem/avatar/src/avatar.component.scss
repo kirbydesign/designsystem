@@ -66,7 +66,7 @@ $badge-diameter: utils.$avatar-badge-size;
 
 :host(.xs) {
   .avatar {
-    --kirby-icon-font-size: #{utils.icon-font-size('sm')};
+    --kirby-icon-font-size: #{utils.size('s')};
 
     width: $diameter-xsmall;
     height: $diameter-xsmall;
@@ -81,7 +81,7 @@ $badge-diameter: utils.$avatar-badge-size;
 :host-context(kirby-progress-circle.sm),
 :host(.sm) {
   .avatar {
-    --kirby-icon-font-size: #{utils.icon-font-size('sm')};
+    --kirby-icon-font-size: #{utils.size('m')};
 
     width: $diameter-small;
     height: $diameter-small;
@@ -98,7 +98,7 @@ $badge-diameter: utils.$avatar-badge-size;
   --kirby-badge-top: #{get-badge-position($diameter-medium)};
 
   .avatar {
-    --kirby-icon-font-size: #{utils.icon-font-size('md')};
+    --kirby-icon-font-size: #{utils.size('l')};
 
     width: $diameter-medium;
     height: $diameter-medium;
@@ -115,7 +115,7 @@ $badge-diameter: utils.$avatar-badge-size;
   --kirby-badge-top: #{get-badge-position($diameter-large)};
 
   .avatar {
-    --kirby-icon-font-size: #{utils.icon-font-size('lg')};
+    --kirby-icon-font-size: #{utils.size('xxxl')};
 
     width: $diameter-large;
     height: $diameter-large;
