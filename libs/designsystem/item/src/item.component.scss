@@ -3,6 +3,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
 
+$outside-slot-width: 1rem;
+
 :host {
   display: block;
   position: relative;
@@ -27,7 +29,7 @@
     left: utils.size('xxxs');
     margin: 0;
     position: absolute;
-    width: utils.size('s');
+    width: $outside-slot-width;
     z-index: 1;
   }
 }
@@ -127,7 +129,7 @@ ion-item {
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
 
-  /* 
+  /*
     display: inline-flex; is used to make sure the span.disclosure element
     is the same height as the child (kirby-icon)
   */
