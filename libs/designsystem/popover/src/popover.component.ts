@@ -10,6 +10,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 export enum HorizontalDirection {
@@ -62,6 +63,8 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     this.hide();
   }
 
+  private unlistenScrollEventListener: EventListenerDisposeFn;
+
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
@@ -91,7 +94,6 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // document.removeEventListener needs the exact same event handler & options reference:
   private static preventEventOutsidePopover(event: TouchEvent) {
     if (event.target instanceof HTMLElement) {
       const targetIsInPopover = !!event.target.closest('kirby-popover');
@@ -107,8 +109,8 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
       this.renderer.addClass(this.document.body, 'backdrop-no-scroll');
     }
 
-    // preventDefault does not work with Renderer2.listen method; add event listener directly to document instead
-    this.document.addEventListener(
+    this.unlistenScrollEventListener = this.renderer.listen(
+      this.document,
       'touchmove',
       PopoverComponent.preventEventOutsidePopover,
       this.preventScrollEventListenerOptions
@@ -120,11 +122,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
       this.renderer.removeClass(this.document.body, 'backdrop-no-scroll');
     }
 
-    this.document.removeEventListener(
-      'touchmove',
-      PopoverComponent.preventEventOutsidePopover,
-      this.preventScrollEventListenerOptions
-    );
+    this.unlistenScrollEventListener?.();
   }
 
   show() {
