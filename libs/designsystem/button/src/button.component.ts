@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 
 import { NotificationColor } from '@kirbydesign/core';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
@@ -92,7 +93,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
   @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef?: ElementRef<HTMLElement>;
 
-  private removeEventListeners: (() => void)[] = [];
+  private eventUnlisteners: EventListenerDisposeFn[] = [];
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
@@ -111,7 +112,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
         this.blockEventOnAriaDisabled.bind(this),
         { capture: true }
       );
-      this.removeEventListeners.push(removeEventListener);
+      this.eventUnlisteners.push(removeEventListener);
     });
   }
 
@@ -179,6 +180,6 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.removeEventListeners.forEach((removeEventListener) => removeEventListener());
+    this.eventUnlisteners.forEach((unlistenEvent) => unlistenEvent());
   }
 }
