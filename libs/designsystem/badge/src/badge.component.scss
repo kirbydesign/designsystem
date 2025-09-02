@@ -11,7 +11,6 @@ $badge-size-medium: 1rem;
   top: var(--kirby-badge-top, auto);
   z-index: var(--kirby-badge-z-index, auto);
   font-size: utils.font-size('xxs');
-  line-height: 1;
 
   ion-badge {
     --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
@@ -20,6 +19,7 @@ $badge-size-medium: 1rem;
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: $badge-border-radius;
     font-size: inherit;
+    line-height: 1.6; // TODO: Handle in #3579 (https://github.com/kirbydesign/designsystem/issues/3579)
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
 
@@ -41,7 +41,10 @@ $badge-size-medium: 1rem;
   ion-badge {
     --padding-end: 5px;
     --padding-start: 5px;
+    --padding-top: 0;
+    --padding-bottom: 0;
 
+    min-height: $badge-size-medium;
     min-width: $badge-size-medium;
   }
 
