@@ -234,7 +234,7 @@ export const All: Story = {
     props: {
       illustrations: Object.keys(illustrations),
       sizes: Object.values(SpotIllustrationSize),
-      themes: ['light', 'dark', 'canvas', 'tertiary'],
+      themes: ['white', 'dark', 'canvas', 'tertiary'],
     },
     styles: [
       ` 
@@ -247,7 +247,7 @@ export const All: Story = {
         --kirby-spot-illustration-outline-color: var(--kirby-white);
         --kirby-spot-illustration-highlight-color: var(--kirby-primary);
       }
-      .light-theme, .canvas-theme {
+      .white-theme, .canvas-theme {
         color-scheme: only light;
         --kirby-spot-illustration-background-color: var(--kirby-dark-overlay);
         --kirby-spot-illustration-outline-color: var(--kirby-black);
@@ -258,7 +258,7 @@ export const All: Story = {
        /* its just a guess of a darkmode background */
        .dark-theme { background: #333; }
        /* the color --kirby-background-color is not available in storybook for some reason */
-       .canvas-theme { background: #f6f6f6 }
+       .white-theme { background: #fff }
        .tertiary-theme { background: var(--kirby-tertiary); }
 
 
@@ -386,13 +386,5 @@ export const ExtendingLibrary: Story = {
     controls: { disable: true },
     actions: { disable: true },
   },
-  render: () => ({
-    template: `
-      <div style="padding: 20px;text-align: center;">
-        <h2>📚 Spot Illustration Extension Guide</h2>
-        <p>This documentation story contains all the guidelines needed to extend the spot illustration library.</p>
-        <p><em>All requirements and examples are documented in the story's JSDoc comments above.</em></p>
-      </div>
-    `,
-  }),
+  tags: ['!dev'],
 };

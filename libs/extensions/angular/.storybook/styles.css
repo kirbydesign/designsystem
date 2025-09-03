@@ -1,8 +1,3 @@
 .canvas {
-/*    background-color: var(--kirby-background-color) !important; */
-}
-
-body {
-    /* The primary color is overridden in order to show the difference between success and primary. */
---kirby-primary: LightCoral;
+    background-color: var(--kirby-background-color) !important; 
 }

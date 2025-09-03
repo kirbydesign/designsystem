@@ -1,7 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { IconModule } from '@kirbydesign/designsystem/icon';
 import { IonIcon } from '@ionic/angular/standalone';
 import {
   Illustration,
@@ -12,8 +9,7 @@ import {
 
 @Component({
   selector: 'kirby-x-spot-illustration',
-  standalone: true,
-  imports: [CardModule, IconModule, CommonModule, IonIcon, IconModule, IconModule],
+  imports: [IonIcon],
   templateUrl: './spot-illustration.component.html',
   styleUrl: './spot-illustration.component.scss',
 })

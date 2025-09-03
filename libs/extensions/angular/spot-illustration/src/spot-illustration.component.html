@@ -1,2 +1,5 @@
-<ion-icon *ngIf="svg()" [src]="svg()" [class]="size()"></ion-icon>
-<ng-content select="not-found" *ngIf="!svg()"></ng-content>
+@if (svg()) {
+  <ion-icon [src]="svg()" [class]="size()"></ion-icon>
+} @else {
+  <ng-content select="not-found"></ng-content>
+}

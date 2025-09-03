@@ -1,5 +1,4 @@
 import { applicationConfig, Preview } from '@storybook/angular';
-
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 /** Zone JS is required by Angular itself. */
 import 'zone.js';
@@ -16,9 +15,6 @@ setCompodocJson(docJson);
 const preview: Preview = {
   parameters: {
     ...defaultParameters,
-    backgrounds: {
-      disable: true,
-    },
     docs: {
       canvas: { className: 'canvas' },
       toc: {
