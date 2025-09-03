@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import { NotificationColor } from '@kirbydesign/core';
-import { EventListenerDisposeFn } from '@kirbydesign/designsystem';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 

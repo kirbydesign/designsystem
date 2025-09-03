@@ -10,7 +10,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { EventListenerDisposeFn } from '@kirbydesign/designsystem';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 export enum HorizontalDirection {
