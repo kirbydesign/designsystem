@@ -232,7 +232,7 @@ export const All: Story = {
   },
   render: () => ({
     props: {
-      illustrations: Object.keys(illustrations),
+      illustrations: illustrations,
       sizes: Object.values(SpotIllustrationSize),
       themes: ['white', 'dark', 'canvas', 'tertiary'],
     },
@@ -280,9 +280,9 @@ export const All: Story = {
           <th *ngFor="let size of sizes">{{ size }}</th>
           </thead>
           <tbody>
-          <ng-container *ngFor="let illustration of illustrations">
+          <ng-container *ngFor="let illustration of illustrations | keyvalue">
             <tr>
-              <td class="illustration-name">{{ illustration }}</td>
+              <td class="illustration-name">{{ illustration.key }}</td>
               <td *ngFor="let size of sizes">
                 <ng-container *ngTemplateOutlet="svgTemplate; context: { illustration, size }"></ng-container>
               </td>
@@ -294,9 +294,12 @@ export const All: Story = {
       </kirby-accordion-item>
       </kirby-accordion>
       <ng-template #svgTemplate let-illustration="illustration" let-size="size">
-        <kirby-x-spot-illustration [size]="size" [name]="illustration">
-          <not-found> N/A</not-found>
-        </kirby-x-spot-illustration>
+        @if (illustration.value[size]) {
+          <kirby-x-spot-illustration [size]="size" [name]="illustration.key"></kirby-x-spot-illustration>
+        }
+        @else {
+          N/A
+        }
       </ng-template>
     `,
   }),
