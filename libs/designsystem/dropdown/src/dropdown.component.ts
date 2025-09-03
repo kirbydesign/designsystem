@@ -611,8 +611,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       startIndex = 0;
     } else if (this.isOpen) {
       startIndex = this.focusedIndex + 1;
-    } else {
-      startIndex = 0;
     }
     return SearchHelper.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
   }
