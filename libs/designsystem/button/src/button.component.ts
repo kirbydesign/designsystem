@@ -93,7 +93,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
   @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef?: ElementRef<HTMLElement>;
 
-  private disposeAriaEvents: EventListenerDisposeFn[] = [];
+  private disposeEvents: EventListenerDisposeFn[] = [];
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
@@ -106,13 +106,13 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
     // Prevent event bubbling for aria-disabled buttons using a native event listener.
     // HostListener cannot block event bubbling, see: https://github.com/angular/angular/issues/9587
     ['click', 'keydown.enter', 'keydown.space'].forEach((evt) => {
-      const removeEventListener = this.renderer.listen(
+      const disposeEvent = this.renderer.listen(
         this.elementRef.nativeElement,
         evt,
-        this.blockEventOnAriaDisabled.bind(this),
+        this.blockEventIfAriaDisabled.bind(this),
         { capture: true }
       );
-      this.disposeAriaEvents.push(removeEventListener);
+      this.disposeEvents.push(disposeEvent);
     });
   }
 
@@ -172,7 +172,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
     }
   }
 
-  private blockEventOnAriaDisabled(event: Event) {
+  private blockEventIfAriaDisabled(event: Event) {
     if (this.elementRef.nativeElement.ariaDisabled === 'true') {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -180,6 +180,6 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.disposeAriaEvents.forEach((unlistenEvent) => unlistenEvent());
+    this.disposeEvents.forEach((unlistenEvent) => unlistenEvent());
   }
 }
