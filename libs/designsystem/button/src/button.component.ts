@@ -93,7 +93,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
   @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef?: ElementRef<HTMLElement>;
 
-  private eventUnlisteners: EventListenerDisposeFn[] = [];
+  private disposeAriaEvents: EventListenerDisposeFn[] = [];
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
@@ -112,7 +112,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
         this.blockEventOnAriaDisabled.bind(this),
         { capture: true }
       );
-      this.eventUnlisteners.push(removeEventListener);
+      this.disposeAriaEvents.push(removeEventListener);
     });
   }
 
@@ -180,6 +180,6 @@ export class ButtonComponent implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.eventUnlisteners.forEach((unlistenEvent) => unlistenEvent());
+    this.disposeAriaEvents.forEach((unlistenEvent) => unlistenEvent());
   }
 }

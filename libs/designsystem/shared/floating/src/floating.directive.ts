@@ -24,6 +24,7 @@ import {
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { from } from 'rxjs';
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 
 export type TriggerEvent = 'hover' | 'click' | 'focus';
 
@@ -49,8 +50,6 @@ interface EventMethods {
   event: string;
   method: () => void;
 }
-
-type EventListenerDisposeFn = () => void;
 
 /**
  * @summary FloatingDirective is a utility that lets you declarative anchor "popup" containers to another element.
@@ -211,9 +210,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
-  private referenceEventListenerDisposeFns: EventListenerDisposeFn[] = [];
-  private documentClickEventListenerDisposeFn: EventListenerDisposeFn;
-  private hostClickEventListenerDisposeFn: EventListenerDisposeFn;
+  private disposeTriggerEvents: EventListenerDisposeFn[] = [];
+  private disposeDocumentClick: EventListenerDisposeFn;
+  private disposeHostClick: EventListenerDisposeFn;
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -371,26 +370,22 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private attachDocumentClickEventHandler(): void {
-    if (this.documentClickEventListenerDisposeFn) {
+    if (this.disposeDocumentClick) {
       return;
     }
 
-    this.documentClickEventListenerDisposeFn = this.renderer.listen(
-      'document',
-      'mousedown',
-      (event) => this.handleClickOutsideHostElement(event)
+    this.disposeDocumentClick = this.renderer.listen('document', 'mousedown', (event) =>
+      this.handleClickOutsideHostElement(event)
     );
   }
 
   private attachHostClickEventHandler(): void {
-    if (this.hostClickEventListenerDisposeFn || !this.closeOnSelect) {
+    if (this.disposeHostClick || !this.closeOnSelect) {
       return;
     }
 
-    this.hostClickEventListenerDisposeFn = this.renderer.listen(
-      this.elementRef.nativeElement,
-      'click',
-      () => this.handleClickInsideHostElement()
+    this.disposeHostClick = this.renderer.listen(this.elementRef.nativeElement, 'click', () =>
+      this.handleClickInsideHostElement()
     );
   }
 
@@ -407,7 +402,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
         event.event,
         event.method
       );
-      this.referenceEventListenerDisposeFns.push(eventListenerDisposeFn);
+      this.disposeTriggerEvents.push(eventListenerDisposeFn);
     });
   }
 
@@ -459,25 +454,23 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownReferenceElementEventHandling(): void {
-    this.referenceEventListenerDisposeFns.forEach(
-      (eventListenerDisposeFunction: EventListenerDisposeFn) => {
-        if (eventListenerDisposeFunction != null) {
-          eventListenerDisposeFunction();
-        }
+    this.disposeTriggerEvents.forEach((eventListenerDisposeFunction: EventListenerDisposeFn) => {
+      if (eventListenerDisposeFunction != null) {
+        eventListenerDisposeFunction();
       }
-    );
-    this.referenceEventListenerDisposeFns = [];
+    });
+    this.disposeTriggerEvents = [];
   }
 
   private tearDownDocumentClickEventHandling(): void {
-    if (this.documentClickEventListenerDisposeFn) {
-      this.documentClickEventListenerDisposeFn();
-      this.documentClickEventListenerDisposeFn = null;
+    if (this.disposeDocumentClick) {
+      this.disposeDocumentClick();
+      this.disposeDocumentClick = null;
     }
 
-    if (this.hostClickEventListenerDisposeFn) {
-      this.hostClickEventListenerDisposeFn();
-      this.hostClickEventListenerDisposeFn = null;
+    if (this.disposeHostClick) {
+      this.disposeHostClick();
+      this.disposeHostClick = null;
     }
   }
 

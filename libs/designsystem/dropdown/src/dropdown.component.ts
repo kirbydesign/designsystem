@@ -224,7 +224,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   _kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
   set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
-    const hasSlottedItems = this.itemClickUnlisten?.length > 0;
+    const hasSlottedItems = this.disposeItemClicks?.length > 0;
     if (hasSlottedItems) {
       this.unlistenAllSlottedItems();
     }
@@ -240,7 +240,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         }
       );
 
-      this.itemClickUnlisten.push(unlisten);
+      this.disposeItemClicks.push(unlisten);
     });
 
     this._kirbyItemsSlotted = kirbyItems;
@@ -250,7 +250,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._kirbyItemsSlotted;
   }
 
-  private itemClickUnlisten: EventListenerDisposeFn[] = [];
+  private disposeItemClicks: EventListenerDisposeFn[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
 
