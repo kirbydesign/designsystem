@@ -232,7 +232,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // Setup a click listener for each new slotted items
     kirbyItems.forEach((kirbyItem, index) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-      const unlisten: EventListenerDisposeFn = this.renderer.listen(
+      const disposeClick: EventListenerDisposeFn = this.renderer.listen(
         kirbyItem.nativeElement,
         'click',
         () => {
@@ -240,7 +240,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         }
       );
 
-      this.disposeItemClicks.push(unlisten);
+      this.disposeItemClicks.push(disposeClick);
     });
 
     this._kirbyItemsSlotted = kirbyItems;
@@ -648,9 +648,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   private unlistenAllSlottedItems() {
-    let unlistenItem: () => void;
-    while ((unlistenItem = this.itemClickUnlisten.pop()) !== undefined) {
-      unlistenItem();
+    let disposeClick: EventListenerDisposeFn;
+    while ((disposeClick = this.disposeItemClicks.pop()) !== undefined) {
+      disposeClick();
     }
   }
 
