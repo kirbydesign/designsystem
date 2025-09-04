@@ -419,6 +419,9 @@ describe('DropdownComponent', () => {
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
         });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
       });
 
       describe('and Home key is pressed', () => {
@@ -491,6 +494,9 @@ describe('DropdownComponent', () => {
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
         });
       });
 
@@ -838,6 +844,41 @@ describe('DropdownComponent', () => {
           spectator.detectChanges();
           expect(spectator.component.focusedIndex).toBe(initialFocusedIndex);
         });
+      });
+    });
+
+    describe('when a multi-character key sequence is pressed', () => {
+      const testItems = [
+        { text: 'Banana 1', value: 1 },
+        { text: 'Banana 2', value: 2 },
+        { text: 'Banana 3', value: 3 },
+      ];
+
+      beforeEach(() => {
+        spectator.component['state'] = OpenState.open;
+        spectator.setHostInput('items', testItems);
+        spectator.detectChanges();
+      });
+
+      it('should focus/select the first item starting with the sequence', () => {
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'a');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'n');
+        spectator.detectChanges();
+
+        expect(spectator.component.focusedIndex).toBe(0);
+      });
+
+      it('should focus first item when multi-character sequence matches, even if another item is focused', () => {
+        spectator.component.focusedIndex = 1;
+        spectator.detectChanges();
+
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'a');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'n');
+        spectator.detectChanges();
+
+        expect(spectator.component.focusedIndex).toBe(0);
       });
     });
 

@@ -86,7 +86,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   // _focusedIndex keeps track of which element has focus and will be selected
   // if it is activated (by pressing ENTER or SPACE key)
-  private _focusedIndex: number = -1;
+  private _focusedIndex: number = 0;
   get focusedIndex(): number {
     return this._focusedIndex;
   }
@@ -556,7 +556,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       if (!this.isOpen) {
         event.preventDefault();
         this.open();
-        this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : -1;
+        this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
       }
       return;
     }
