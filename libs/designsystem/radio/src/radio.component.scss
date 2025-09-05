@@ -3,8 +3,9 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+$radio-size: 20px; // used to overwrite ionics default relative sizing, so radio size same across font sizes
 $radio-icon-size: utils.size('m');
-$radio-icon-mark-size: 0.75em;
+$radio-icon-mark-size: utils.size('xs');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
@@ -122,6 +123,8 @@ ion-radio {
     transition-property: background-color;
     background-color: utils.get-color('white');
     margin: utils.size('xxxxs');
+    width: $radio-size;
+    height: $radio-size;
   }
 
   &::part(mark) {
@@ -138,6 +141,14 @@ ion-radio {
   &::part(label-text-wrapper) {
     margin-inline: $spacing-to-label 0;
     white-space: pre-line;
+  }
+
+  &::part(native-wrapper) {
+    /**
+     * We style the native wrapper to make sure it has the same height as the container
+     * so the radio can be properly start-aligned with multiline labels
+     */
+    height: 1.5rem;
   }
 
   // Overrides for kirby-radio inside kirby-item
