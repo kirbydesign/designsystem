@@ -27,6 +27,47 @@
       left: 0;
     }
   }
+
+  // Colors
+  &.success ion-badge {
+    --color: #{utils.get-color('success-contrast')};
+  }
+
+  &.success.sm ion-badge {
+    --background: #{utils.get-color('success-shade')};
+  }
+
+  &.success.md ion-badge {
+    --background: #{utils.get-color('success-tint')};
+  }
+
+  &.warning ion-badge {
+    --color: #{utils.get-color('warning-contrast')};
+  }
+
+  &.warning.sm ion-badge {
+    --background: #{utils.get-color('warning-shade')};
+  }
+
+  &.warning.md ion-badge {
+    --background: #{utils.get-color('warning')};
+  }
+
+  &.danger ion-badge {
+    --color: #{utils.get-text-color('white')};
+  }
+
+  &.danger.sm ion-badge {
+    --background: #{utils.get-color('danger')};
+  }
+
+  &.danger.md ion-badge {
+    --background: #{utils.get-color('danger-shade')};
+
+    &:has(kirby-icon) {
+      --background: #{utils.get-color('danger')};
+    }
+  }
 }
 
 :host(.sm) {
@@ -48,19 +89,6 @@
 
     min-width: utils.size('s');
     min-height: utils.size('s');
-  }
-}
-
-@each $color-name, $color-value in utils.$notification-colors {
-  $text-color: utils.get-color($color-name + '-contrast');
-  @if $color-name == 'danger' {
-    $text-color: utils.get-text-color('white');
-  }
-  :host(.#{$color-name}) {
-    ion-badge {
-      --background: #{utils.get-color($color-name)};
-      --color: #{var(--kirby-badge-color, #{$text-color})};
-    }
   }
 }
 
