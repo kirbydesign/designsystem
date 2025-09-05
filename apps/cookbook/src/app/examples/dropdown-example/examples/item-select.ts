@@ -8,6 +8,7 @@ const config = {
   template: `<kirby-dropdown
   [size]="size"
   placeholder="Dropdown with event handler"
+  aria-label="dropdown-label"
   [items]="items"
   (change)="onItemSelect($event)"
 ></kirby-dropdown>`,
@@ -21,12 +22,13 @@ const config = {
 export class DropdownExampleItemSelectComponent {
   template: string = config.template;
   items = [
-    { id: 11, text: 'Item 1' },
-    { id: 22, text: 'Item 2' },
-    { id: 33, text: 'Item 3' },
-    { id: 44, text: 'Item 4' },
-    { id: 55, text: 'Item 5' },
+    { id: 11, text: 'Apple' },
+    { id: 22, text: 'Banana' },
+    { id: 33, text: 'Blackberry' },
+    { id: 44, text: 'Blueberry' },
+    { id: 55, text: 'Grapes' },
   ];
+
   @Input() size: string;
 
   constructor(private toastController: ToastController) {}

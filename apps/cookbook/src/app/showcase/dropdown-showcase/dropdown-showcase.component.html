@@ -1,6 +1,6 @@
 <p>
-  A dropdown is a UI element that displays a list of options when activated, allowing users to
-  select one item from the list.
+  Dropdown displays multiple choices for user selection and appears upon interaction with an
+  elemeent.
 </p>
 <cookbook-dropdown-example-configuration
   [size]="size"
@@ -17,10 +17,7 @@
   </div>
 </cookbook-example-viewer>
 <h3>Scroll</h3>
-<p>
-  If the list contains more than 8 items, a scroll function is automatically enabled to maintain
-  usability and prevent overflow.
-</p>
+<p>The dropdown becomes scrollable if it contains more than 8 items.</p>
 <cookbook-example-viewer [html]="scrollExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-scroll
@@ -30,10 +27,7 @@
   </div>
 </cookbook-example-viewer>
 <h3>Pre-selected</h3>
-<p>
-  This is useful when you want to show a default selection or when the user has previously made a
-  selection.
-</p>
+<p>Use this if you want an initial preselected item.</p>
 <cookbook-example-viewer [html]="preSelectedExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-pre-selected
@@ -69,8 +63,7 @@
 </cookbook-example-viewer>
 <h3>Attention level</h3>
 <p>
-  Applying an attention level changes the background color to help draw attention to the dropdown
-  element.
+  Applying an attention level changes the background color to help draw attention to the dropdown.
 </p>
 <cookbook-example-viewer [html]="attentionLevelExample.template">
   <div class="example-frame">
@@ -81,10 +74,7 @@
   </div>
 </cookbook-example-viewer>
 <h3>Event handler</h3>
-<p>
-  The dropdown can be used with an event handler to perform an action when an item is selected. This
-  is useful when you want to perform an action based on the selected item.
-</p>
+<p>The dropdown can be used with an event handler to perform an action when an item is selected.</p>
 <cookbook-example-viewer [html]="itemSelectExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-item-select
@@ -121,19 +111,33 @@
   </div>
 </cookbook-example-viewer>
 
-<h2>Keyboard support</h2>
+<h2>Accessibility</h2>
+<p>
+  The Dropdown implements the
+  <a
+    class="kirby-external-icon"
+    target="_blank"
+    href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/"
+  >
+    Select-only Combobox Pattern
+  </a>
+  from ARIA Authoring Practices Guide.
+</p>
+<p>
+  The Dropdown is a button that toggles a list of items. To ensure screen readers announce the
+  dropdown correctly, it is required to provide either an
+  <code>aria-label</code>
+  or an
+  <code>aria-labelledby</code>
+  attribute to give it an accessible name. The dropdown component will apply this attribute to the
+  internal button element.
+</p>
+
+<h3>Keyboard support</h3>
 <p>
   The component has full keyboard support for opening the dropdown and navigating between and
   selecting items in the dropdown.
 </p>
-<cookbook-example-viewer [html]="keyboardSupportExample.template">
-  <div class="example-frame">
-    <cookbook-dropdown-example-keyboard-support
-      [size]="size"
-      #keyboardSupportExample
-    ></cookbook-dropdown-example-keyboard-support>
-  </div>
-</cookbook-example-viewer>
 <p>The following keys can be used to open the dropdown when the dropdown button has focus:</p>
 <!-- prettier-ignore -->
 <ul>
@@ -152,7 +156,7 @@
     <kbd>&#8595;</kbd>  opens dropdown without moving focus or changing selection.
   </li>
     <li>
-    <kbd>A</kbd>-<kbd>Z</kbd> opens the dropdown and moves focus to the first option that matches the typed character.
+    <kbd>A</kbd>-<kbd>Z</kbd> opens the dropdown and moves focus to the first option that matches the typed character. If multiple keys are typed in quick succession, focus moves to the first option that matches the full string. If the same character is typed in succession, visual focus cycles among the options starting with that character.
   </li>
 </ul>
 <p>The following keys can be used to navigate and select within the dropdown:</p>
@@ -180,40 +184,18 @@
     <kbd>End</kbd> moves focus to the last dropdown item.
   </li>
     <li>
-    <kbd>PageUp</kbd> jumps focus up to first option.
+    <kbd>PageUp</kbd> jumps focus up 10 options (or to first option).
   </li>
   <li>
-    <kbd>PageDown</kbd> 	jumps focus down to last option.
+    <kbd>PageDown</kbd> jumps focus down 10 options (or to last option).
   </li>
   <li>
-    <kbd>A</kbd>-<kbd>Z</kbd> moves focus to the next dropdown item whose label starts with the typed character.
+      <kbd>A</kbd>-<kbd>Z</kbd> opens the dropdown and moves focus to the first option that matches the typed character. If multiple keys are typed in quick succession, focus moves to the first option that matches the full string. If the same character is typed in succession, visual focus cycles among the options starting with that character.
   </li>
   <li>
     <kbd>Tab</kbd> sets value of focused item, closes the dropdown and moves focus to the next element in the tab sequence outside the control.
   </li>
 </ul>
-
-<h2>Accessibility</h2>
-<p>
-  The Dropdown implements the
-  <a
-    class="kirby-external-icon"
-    target="_blank"
-    href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/"
-  >
-    Select-only Combobox Pattern
-  </a>
-  from ARIA Authoring Practices Guide.
-</p>
-<p>
-  The Dropdown is a button that toggles a list of items. To ensure screen readers announce the
-  dropdown correctly, it is required to provide either an
-  <code>aria-label</code>
-  or an
-  <code>aria-labelledby</code>
-  attribute to give it an accessible name. The dropdown component will apply this attribute to the
-  internal button element.
-</p>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 <h2>Properties:</h2>

@@ -6,7 +6,14 @@ const config = {
   template: `<kirby-dropdown
   [size]="size"
   placeholder="Right aligned (opens left)"
-  [items]="['Item 1','Item 2','Item 3','Item 4','Item 5']"
+  aria-label="dropdown-label"
+ [items]="[
+        'Apple',   
+        'Banana',
+        'Blackberry',
+        'Blueberry',   
+        'Grapes',
+      ]"
   popout="left"
 ></kirby-dropdown>`,
   styles: [

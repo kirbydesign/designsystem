@@ -409,6 +409,9 @@ describe('DropdownComponent', () => {
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
         });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
       });
 
       describe('and Enter key is pressed', () => {
@@ -649,9 +652,21 @@ describe('DropdownComponent', () => {
       });
 
       describe('and Tab key is pressed', () => {
-        it('should close dropdown', () => {
+        beforeEach(() => {
+          spectator.component['state'] = OpenState.open;
+          spectator.component.focusedIndex = 2;
+          spectator.detectChanges();
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Tab');
+          spectator.detectChanges();
+        });
+
+        it('should close dropdown', () => {
           expect(spectator.component.isOpen).toBeFalsy();
+        });
+
+        it('should select the focused item', () => {
+          expect(spectator.component.selectedIndex).toBe(2);
+          expect(spectator.component.value).toEqual(items[2]);
         });
       });
 
@@ -674,6 +689,44 @@ describe('DropdownComponent', () => {
           spectator.setHostInput('selectedIndex', 2);
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowRight');
           expect(spectator.component.selectedIndex).toEqual(2);
+        });
+      });
+
+      describe('and Alt+ArrowUp is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          const event = new KeyboardEvent('keydown', {
+            key: 'ArrowUp',
+            altKey: true,
+            bubbles: true,
+            cancelable: true,
+          });
+          spectator.element.dispatchEvent(event);
+          tick(openDelayInMs);
+        }));
+        it('should close dropdown', () => {
+          expect(spectator.component.isOpen).toBeFalsy();
+        });
+      });
+
+      describe('when PageDown key is pressed', () => {
+        it('should jump focus down 10 items or to last item', () => {
+          spectator.component.focusedIndex = 0;
+          spectator.detectChanges();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'PageDown');
+          spectator.detectChanges();
+          const expectedIndex = Math.min(spectator.component.items.length - 1, 0 + 10);
+          expect(spectator.component.focusedIndex).toBe(expectedIndex);
+        });
+      });
+
+      describe('when PageUp key is pressed', () => {
+        it('should jump focus up 10 items or to first item', () => {
+          spectator.component.focusedIndex = 4;
+          spectator.detectChanges();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'PageUp');
+          spectator.detectChanges();
+          const expectedIndex = Math.max(0, 4 - 10);
+          expect(spectator.component.focusedIndex).toBe(expectedIndex);
         });
       });
 
@@ -814,12 +867,10 @@ describe('DropdownComponent', () => {
           ];
           spectator.setHostInput('items', testItems);
           spectator.detectChanges();
-
-          console.log('items', spectator.component.items);
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'c');
           spectator.detectChanges();
           expect(spectator.component.focusedIndex).toBe(2);
-          expect(spectator.component.value).not.toEqual(testItems[2]);
+          expect(spectator.component.items[spectator.component.focusedIndex].text).toBe('Cherry');
 
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
           spectator.detectChanges();
@@ -835,7 +886,7 @@ describe('DropdownComponent', () => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
           spectator.detectChanges();
           expect(spectator.component.selectedIndex).toBe(3);
-          expect(spectator.component.value).toEqual(testItems[3]);
+          expect(spectator.component.items[spectator.component.focusedIndex].text).toBe('Date');
         });
 
         it('should not change focus if no item starts with the character', () => {

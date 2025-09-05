@@ -6,7 +6,7 @@ describe('SearchHelper', () => {
     words = ['apple', 'banana', 'bandana', 'cherry', 'blueberry'];
   });
 
-  describe('SearchHelper.getIndexByFirstMatchingStartString', () => {
+  describe('Search through words', () => {
     it('returns -1 when no word starts with the search string', () => {
       const result = SearchHelper.getIndexByFirstMatchingStartString('z', words, 0);
       expect(result).toBe(-1);

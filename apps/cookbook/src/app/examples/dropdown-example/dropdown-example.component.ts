@@ -10,7 +10,6 @@ import { DropdownExampleAttentionLevelComponent } from './examples/attention-lev
 import { DropdownExampleItemSelectComponent } from './examples/item-select';
 import { DropdownExampleCustomItemTemplateComponent } from './examples/custom-item-template';
 import { DropdownExampleNgFormsComponent } from './examples/ng-forms';
-import { DropdownExampleKeyboardSupportComponent } from './examples/keyboard-support';
 
 @Component({
   selector: 'cookbook-dropdown-example',
@@ -27,7 +26,6 @@ import { DropdownExampleKeyboardSupportComponent } from './examples/keyboard-sup
     DropdownExampleItemSelectComponent,
     DropdownExampleCustomItemTemplateComponent,
     DropdownExampleNgFormsComponent,
-    DropdownExampleKeyboardSupportComponent, // Import the keyboard support example
   ],
   providers: [ToastHelper, ToastController],
 })

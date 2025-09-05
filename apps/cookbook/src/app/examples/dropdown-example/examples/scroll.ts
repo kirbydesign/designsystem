@@ -5,8 +5,26 @@ const config = {
   selector: 'cookbook-dropdown-example-scroll',
   template: `<kirby-dropdown
   [size]="size"
+  aria-label="dropdown-label"
   placeholder="Dropdown with scroll (> 8 items)"
-  [items]="['Item 1','Item 2','Item 3','Item 4','Item 5','Item 6','Item 7','Item 8','Item 9','Item 10','Item 11','Item 12','Item 13','Item 14','Item 15','Item 16']"
+[items]="[
+  'Apple',
+  'Banana',
+  'Blackberry',
+  'Blueberry',
+  'Carrot',
+  'Cherry',
+  'Cucumber',
+  'Date',
+  'Eggplant',
+  'Fig',
+  'Grapes',
+  'Kiwi',
+  'Lemon',
+  'Mango',
+  'Orange',
+  'Peach'
+]"
 ></kirby-dropdown>`,
 };
 

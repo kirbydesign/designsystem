@@ -501,10 +501,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  @HostListener('keydown.tab', ['$event'])
-  _onTab(event: KeyboardEvent) {
+  @HostListener('keydown.tab')
+  _onTab() {
     if (this.isOpen) {
-      event.preventDefault();
+      this.selectItem(this.focusedIndex);
       this.close();
     }
 
@@ -553,8 +553,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     // ALT + ArrowDown: Open dropdown
     if (key === 'ArrowDown' && event.altKey) {
+      this.preventDefaultAndStopImmediatePropagation(event);
       if (!this.isOpen) {
-        event.preventDefault();
         this.open();
         this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
       }
@@ -568,6 +568,25 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         this.selectItem(this.focusedIndex);
         this.close();
       }
+    }
+    // PageUp: Jump up 10 options or to first
+    if (key === 'PageUp') {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      if (!this.isOpen) {
+        this.open();
+      }
+      this.focusedIndex = Math.max(0, this.focusedIndex - 10);
+      return;
+    }
+
+    // PageDown: Jump down 10 options or to last
+    if (key === 'PageDown') {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      if (!this.isOpen) {
+        this.open();
+      }
+      this.focusedIndex = Math.min(this.items.length - 1, this.focusedIndex + 10);
+      return;
     }
   }
 

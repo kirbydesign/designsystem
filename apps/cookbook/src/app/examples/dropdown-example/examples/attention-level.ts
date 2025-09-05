@@ -11,6 +11,7 @@ const config = {
   <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 1"
+    aria-label="dropdown-label 1"
     attentionLevel="1"
     expand="block"
     usePopover="true"
@@ -20,6 +21,7 @@ const config = {
     <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 2"
+    aria-label="dropdown-label 2"
     attentionLevel="2"
     expand="block"
     usePopover="true"
@@ -29,6 +31,7 @@ const config = {
   <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 3"
+    aria-label="dropdown-label 3"
     attentionLevel="3"
     expand="block"
     usePopover="true"
@@ -65,7 +68,7 @@ const config = {
 })
 export class DropdownExampleAttentionLevelComponent {
   template: string = config.template;
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  items = ['Apple', 'Banana', 'Blackberry', 'Blueberry', 'Grapes'];
   themeColors = ['light', 'white', 'dark'];
   themeColor = 'white';
 

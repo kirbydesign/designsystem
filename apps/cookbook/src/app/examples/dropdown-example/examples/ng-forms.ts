@@ -17,6 +17,7 @@ const config = {
     formControlName="favoriteFood"
     [size]="size"
     placeholder="Dropdown in form"
+    aria-label="dropdown-label"
     [items]="items"
     itemTextProperty="title"
   ></kirby-dropdown>
