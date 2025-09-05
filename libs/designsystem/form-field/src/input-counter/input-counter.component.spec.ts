@@ -6,6 +6,7 @@ import {
 } from '@ngneat/spectator';
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { FormFieldMessageComponent } from '../form-field-message/form-field-message.component';
 import { InputComponent } from '../input/input.component';
 import { TextareaComponent } from '../textarea/textarea.component';
@@ -112,31 +113,68 @@ describe('InputCounterComponent', () => {
         });
       });
 
-      describe('and input has initial value and maxlength', () => {
-        const initialValue = 'Test 123';
-        const updatedValue = 'Test 123456';
-        const maxlength = 99;
-        const input = new InputComponent(null, null);
-        input.value = initialValue;
-        input.maxlength = maxlength;
+      describe('text announcement for screen readers', () => {
+        let input: InputComponent;
         beforeEach(() => {
+          input = new InputComponent(null, null);
           component.listenTo = input;
+        });
+        it('should set textToAnnounce correctly when maxlength is defined', fakeAsync(() => {
+          input.maxlength = 20;
           component.ngOnInit();
-        });
+          const testValue = '123';
+          input.kirbyChange.emit(testValue);
+          tick(1000); //simulate debounce time
 
-        it('should get initial length from input value', () => {
-          expect(component.length).toEqual(initialValue.length);
-        });
+          expect(component.textToAnnounce).toBe(`Characters ${testValue.length} out of 20`);
+        }));
 
-        it('should get maxlength from input', () => {
-          expect(component.maxlength).toEqual(maxlength);
-        });
+        it('should set textToAnnounce correctly when maxlength is NOT defined', fakeAsync(() => {
+          input.maxlength = undefined;
+          component.ngOnInit();
+          const testValue = '123';
+          input.kirbyChange.emit(testValue);
+          tick(1000); //simulate debounce time
 
-        it('should get updated length from kirbyChange event', () => {
-          expect(component.length).toEqual(initialValue.length);
-          input.kirbyChange.emit(updatedValue);
-          expect(component.length).toEqual(updatedValue.length);
-        });
+          expect(component.textToAnnounce).toBe(`${testValue.length} Characters entered`);
+        }));
+
+        it('should NOT set textToAnnounce on initial value', fakeAsync(() => {
+          input.value = 'Initial value';
+          input.maxlength = 20;
+          component.ngOnInit();
+          tick(1000); //simulate debounce time
+          expect(component.length).toBe(input.value.length);
+          expect(component.maxlength).toBe(20);
+          expect(component.textToAnnounce).toBeUndefined();
+        }));
+      });
+    });
+
+    describe('and input has initial value and maxlength', () => {
+      const initialValue = 'Test 123';
+      const updatedValue = 'Test 123456';
+      const maxlength = 99;
+      const input = new InputComponent(null, null);
+      input.value = initialValue;
+      input.maxlength = maxlength;
+      beforeEach(() => {
+        component.listenTo = input;
+        component.ngOnInit();
+      });
+
+      it('should get initial length from input value', () => {
+        expect(component.length).toEqual(initialValue.length);
+      });
+
+      it('should get maxlength from input', () => {
+        expect(component.maxlength).toEqual(maxlength);
+      });
+
+      it('should get updated length from kirbyChange event', () => {
+        expect(component.length).toEqual(initialValue.length);
+        input.kirbyChange.emit(updatedValue);
+        expect(component.length).toEqual(updatedValue.length);
       });
     });
 
