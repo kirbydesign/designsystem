@@ -11,4 +11,7 @@ export const de: Translation = {
   selectYear: 'Jahr auswählen',
   readMore: 'Mehr lesen',
   more: 'Mehr',
+  characters: 'Zeichen',
+  outOf: 'von',
+  entered: 'eingegeben',
 };

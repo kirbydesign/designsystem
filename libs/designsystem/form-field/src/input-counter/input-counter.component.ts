@@ -1,6 +1,8 @@
-import { Component, Inject, Input, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
-import { debounceTime, map, skip, Subscription, tap } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { debounceTime, filter, skip, Subscription, tap } from 'rxjs';
 
+import { TranslationService } from '@kirbydesign/designsystem/shared';
+import { UntypedFormBuilder } from '@angular/forms';
 import { InputComponent } from '../input/input.component';
 
 import { TextareaComponent } from './../textarea/textarea.component';
@@ -18,6 +20,7 @@ export class InputCounterComponent implements OnInit, OnDestroy {
   private _inputChangeSubscription: Subscription;
   textToAnnounce: string;
   lastAnnouncedLength: number;
+  skipAnnouncement = false;
 
   get text(): string {
     if (this.length === undefined) {
@@ -27,19 +30,25 @@ export class InputCounterComponent implements OnInit, OnDestroy {
     return `${this.length}${ofMaxlength}`;
   }
 
-  constructor(@Inject(LOCALE_ID) locale: string) {}
+  constructor(private translations: TranslationService) {}
 
   ngOnInit(): void {
     if (this.listenTo) {
       this.length = this.listenTo.value ? this.listenTo.value.length : 0;
+      this.skipAnnouncement = this.length > 0; //If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
       this.maxlength = this.maxlength = this.listenTo.maxlength
         ? +this.listenTo.maxlength
         : undefined;
-
       this._inputChangeSubscription = this.listenTo.kirbyChange
         .pipe(
-          skip(1),
           tap((value) => (this.length = value?.length || 0)),
+          filter((_) => {
+            if (this.skipAnnouncement) {
+              this.skipAnnouncement = false;
+              return false;
+            }
+            return true;
+          }),
           debounceTime(1000)
         )
         .subscribe((_) => {
@@ -53,15 +62,13 @@ export class InputCounterComponent implements OnInit, OnDestroy {
   }
 
   announceText(): void {
+    const characters = this.translations.get('characters');
     if (this.maxlength === undefined) {
-      this.textToAnnounce = this.length + ' characters entered';
+      const entered = this.translations.get('entered');
+      this.textToAnnounce = `${this.length} ${characters} ${entered}`;
     } else {
-      if (this.maxlength === this.length) {
-        this.textToAnnounce = 'maximum characters reached';
-      } else {
-        const lengthDiff = this.maxlength - this.length;
-        this.textToAnnounce = `${lengthDiff} character${lengthDiff === 1 ? '' : 's'} remaining`;
-      }
+      const outOf = this.translations.get('outOf');
+      this.textToAnnounce = `${characters} ${this.length} ${outOf} ${this.maxlength}`;
     }
   }
 }
