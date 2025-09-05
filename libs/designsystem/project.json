@@ -51,26 +51,41 @@
       }
     },
     "storybook": {
-      "builder": "@storybook/angular:start-storybook",
+      "executor": "@storybook/angular:start-storybook",
       "options": {
+        "port": 6006,
         "configDir": "libs/designsystem/.storybook",
-        "port": 6006
-      }
-    },
-    "build-storybook": {
-      "builder": "@storybook/angular:build-storybook",
-      "options": {
-        "configDir": "libs/designsystem/.storybook",
-        "outputDir": "dist/storybook/designsystem",
-        "enableProdMode": false,
+        "browserTarget": "designsystem:build-storybook",
+        "compodoc": false,
         "styles": [
           "libs/core/src/scss/_global-styles.scss",
           "libs/designsystem/.storybook/styles.css"
         ]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "configDir": "libs/designsystem/.storybook",
+        "outputDir": "dist/storybook/designsystem",
+        "enableProdMode": false,
+        "compodoc": false,
+        "styles": [
+          "libs/core/src/scss/_global-styles.scss",
+          "libs/designsystem/.storybook/styles.css"
+        ]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
       }
     }
-  },
-  "generators": {
-    "@nx/angular:component": {}
   }
 }

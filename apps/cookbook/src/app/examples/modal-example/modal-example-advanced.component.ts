@@ -4,7 +4,7 @@ import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { NgFor, NgIf } from '@angular/common';
+
 import { ExampleConfigurationWrapperComponent } from '../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
@@ -31,15 +31,17 @@ const config = {
   >
   </cookbook-modal-example-configuration>
 </cookbook-example-configuration-wrapper>
-  
-<ng-container *ngIf="interactWithBackground">
+
+@if (interactWithBackground) {
   <section class="dummy-text-section">
-    <p *ngFor="let dummyText of dummyBackgroundTexts">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-    </p>
+    @for (dummyText of dummyBackgroundTexts; track $index) {
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+      </p>
+    }
   </section>
-</ng-container>`,
-  componentTemplate: `<kirby-page-progress>
+}`,
+  componentTemplate: `<kirby-page-progress
   <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
   2/4
   </kirby-progress-circle>
@@ -48,7 +50,7 @@ const config = {
 <kirby-page-title>
   My Modal Title
 </kirby-page-title>
- 
+
 <p>Some content of the embedded component</p>
 
 <kirby-modal-footer>
@@ -140,7 +142,7 @@ this.modal?.scrollDisabled = true;`,
 @ViewChild('nameInput', { static: false, read: ElementRef }) private nameInputElement: ElementRef<HTMLInputElement>;
 
 ngOnInit() {
-  this.modal?.didPresent.then(() => this.nameInputElement?.nativeElement.focus()); 
+  this.modal?.didPresent.then(() => this.nameInputElement?.nativeElement.focus());
 }`,
   willCloseCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
@@ -172,7 +174,7 @@ export class EmbeddedComponent() {
     await this.modal?.close();
     // Do something...
   }
-    
+
   // (Optional) You can additionally pass data, which will be available in the parent callback:
   onDismiss() {
     const returnData = {...};
@@ -189,8 +191,6 @@ export class EmbeddedComponent() {
     ButtonComponent,
     ExampleConfigurationWrapperComponent,
     ModalExampleConfigurationComponent,
-    NgIf,
-    NgFor,
   ],
 })
 export class ModalExampleAdvancedComponent {

@@ -103,7 +103,7 @@ describe('ProgressCircleRingComponent', () => {
       spectator.detectChanges();
 
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor(themeColor),
+        stroke: getColor('warning', 'shade'),
       });
     });
 

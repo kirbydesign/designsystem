@@ -1,12 +1,17 @@
 <button
   kirby-button
+  type="button"
+  [attr.id]="_comboboxId"
+  role="combobox"
+  aria-haspopup="listbox"
+  [attr.aria-controls]="_listboxId"
+  [attr.aria-expanded]="isOpen"
+  [attr.aria-activedescendant]="_listboxId + '-item-' + focusedIndex"
   [size]="size"
   [attentionLevel]="attentionLevel"
-  tabindex="-1"
   (click)="onToggle($event)"
   (mousedown)="onButtonMouseEvent($event)"
   [disabled]="disabled"
-  type="button"
 >
   <span class="text">{{ selectedText || placeholder }}</span>
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
@@ -26,8 +31,8 @@
 </ng-template>
 
 <ng-template #itemWrapperTemplate>
-  <kirby-card>
-    <ng-container *ngFor="let item of items; let i = index">
+  <kirby-card role="listbox" [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
+    @for (item of items; track item; let i = $index) {
       <ng-container
         *ngTemplateOutlet="
           itemTemplate || defaultItemTemplate;
@@ -39,7 +44,7 @@
           }
         "
       ></ng-container>
-    </ng-container>
+    }
   </kirby-card>
 </ng-template>
 
@@ -56,9 +61,13 @@
     (click)="onItemSelect(index)"
     [class.focused]="focused"
     role="option"
+    [attr.id]="_listboxId + '-item-' + index"
+    [attr.aria-selected]="selected"
   >
     <!-- Tabindex fixes issue with popover dropdown not working in safari -->
-    <p class="kirby-item-title" tabindex="0">{{ getTextFromItem(item) }}</p>
-    <kirby-icon *ngIf="selected" name="checkmark-selected" slot="end"></kirby-icon>
+    <p class="kirby-item-title">{{ getTextFromItem(item) }}</p>
+    @if (selected) {
+      <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
+    }
   </kirby-item>
 </ng-template>

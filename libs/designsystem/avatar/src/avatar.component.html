@@ -1,12 +1,17 @@
 <div class="avatar" [ngClass]="{ overlay: overlay, stroke: stroke }">
-  <img
-    *ngIf="imageSrc"
-    [src]="imageSrc"
-    [attr.alt]="altText"
-    [attr.loading]="imageLoading"
-    (error)="onImageError($event)"
-  />
-  <ng-content *ngIf="!text" select="kirby-icon"></ng-content>
-  <span class="avatar-text" *ngIf="text">{{ text }}</span>
+  @if (imageSrc) {
+    <img
+      [src]="imageSrc"
+      [attr.alt]="altText"
+      [attr.loading]="imageLoading"
+      (error)="onImageError($event)"
+    />
+  }
+  @if (!text) {
+    <ng-content select="kirby-icon"></ng-content>
+  }
+  @if (text) {
+    <span class="avatar-text">{{ text }}</span>
+  }
 </div>
 <ng-content select="kirby-badge"></ng-content>

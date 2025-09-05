@@ -1,13 +1,11 @@
-<ng-container *ngIf="!sortable; else sortableTemplate">
+@if (!sortable) {
   <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
-</ng-container>
-
-<ng-template #sortableTemplate>
+} @else {
   <button [ngClass]="_getAlignmentClasses()">
     <span #span><ng-container *ngTemplateOutlet="contentTemplate"></ng-container></span>
     <kirby-icon [name]="sortDirection === 'asc' ? 'arrow-up-fill' : 'arrow-down-fill'"></kirby-icon>
   </button>
-</ng-template>
+}
 
 <ng-template #contentTemplate>
   <ng-content></ng-content>

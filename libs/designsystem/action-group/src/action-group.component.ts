@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -31,7 +30,7 @@ type CollapsedAction = { button: HTMLButtonElement; text: string };
 
 @Component({
   selector: 'kirby-action-group',
-  imports: [CommonModule, ButtonComponent, ItemModule, MenuComponent],
+  imports: [ButtonComponent, ItemModule, MenuComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-group.component.html',
   styleUrls: ['./action-group.component.scss'],

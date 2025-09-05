@@ -37,4 +37,22 @@ describe('EmptyStateComponent', () => {
     const outlineElement = element.getElementsByClassName('icon-outline')[0];
     expect(outlineElement).toHaveComputedStyle({ 'border-width': DesignTokenHelper.size('xxxs') });
   });
+  it('should have title', () => {
+    const titleElement = element.querySelector('.title');
+    expect(titleElement).toBeTruthy();
+    expect(titleElement.textContent).toBe('No items');
+  });
+
+  it('should have title as span', () => {
+    const titleElement = element.querySelector('.title');
+    expect(titleElement?.tagName.toLowerCase()).toBe('span');
+  });
+
+  it('should have subtitle', () => {
+    const subtitleElement = element.querySelector('.subtitle');
+    expect(subtitleElement).toBeTruthy();
+    expect(subtitleElement.textContent).toBe(
+      "You don't have any items. Call support to add some items to your account."
+    );
+  });
 });

@@ -1,4 +1,4 @@
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { Color, DesignTokenHelper, ThemeColorVariant } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { FlagComponent } from './flag.component';
@@ -112,23 +112,20 @@ describe('FlagComponent', () => {
   describe(`when configured with themeColor`, () => {
     const allowedThemeColors = ['success', 'warning', 'danger', 'semi-light'] as const;
     type FlagThemeColor = (typeof allowedThemeColors)[number];
-    type ColorStep = [string, number];
 
-    const themeColorMap = new Map<FlagThemeColor, ColorStep | 'semi-light'>([
-      ['success', ['green', 30]],
-      ['warning', ['yellow', 30]],
-      ['danger', ['red', 30]],
-      ['semi-light', 'semi-light'],
+    const themeColorMap = new Map<FlagThemeColor, ThemeColorVariant | undefined>([
+      ['success', 'tint'],
+      ['warning', 'tint'],
+      ['danger', 'tint'],
+      ['semi-light', undefined],
     ]);
 
-    themeColorMap.forEach((color, themeColor) => {
+    themeColorMap.forEach((variation, themeColor) => {
       it(`should render with correct colors when themeColor = '${themeColor}'`, () => {
         spectator.component.themeColor = themeColor;
         spectator.detectChanges();
 
-        const expectedBgColor = Array.isArray(color)
-          ? getDecorationColor(...color)
-          : getColor(color);
+        const expectedBgColor = getColor(themeColor, variation);
         expect(element).toHaveComputedStyle({
           'background-color': expectedBgColor.value,
           color: getColor(themeColor, 'contrast'),

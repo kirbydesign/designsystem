@@ -1,9 +1,19 @@
 <div class="message-container">
-  <div *ngIf="iconName" class="icon-outline">
-    <kirby-icon [name]="iconName" size="lg"></kirby-icon>
-  </div>
-  <span *ngIf="title" class="title kirby-text-medium">{{ title }}</span>
-  <p *ngIf="subtitle" class="subtitle">{{ subtitle }}</p>
+  @if (iconName) {
+    <div class="icon-outline">
+      <kirby-icon [name]="iconName" size="lg"></kirby-icon>
+    </div>
+  }
+  @if (title) {
+    @if (_insideModal) {
+      <h2 class="title kirby-text-medium">{{ title }}</h2>
+    } @else {
+      <span class="title kirby-text-medium">{{ title }}</span>
+    }
+  }
+  @if (subtitle) {
+    <p class="subtitle">{{ subtitle }}</p>
+  }
   <div class="content">
     <ng-content></ng-content>
   </div>

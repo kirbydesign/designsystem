@@ -14,7 +14,9 @@
 
     <div class="month-and-year" [id]="_tableMonthId" aria-live="polite" aria-atomic="true">
       <span class="month">{{ activeMonthName }}</span>
-      <span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
+      @if (!_hasYearNavigator) {
+        <span class="year">{{ activeYear }}</span>
+      }
     </div>
 
     <button
@@ -29,52 +31,59 @@
       <kirby-icon name="arrow-more" aria-hidden="true"></kirby-icon>
     </button>
   </div>
-  <kirby-dropdown
-    *ngIf="_hasYearNavigator"
-    [usePopover]="usePopover"
-    [selectedIndex]="navigatedYear"
-    [items]="navigableYears"
-    [attr.aria-label]="translations.get('selectYear')"
-    popout="left"
-    (change)="_changeYear($event)"
-  ></kirby-dropdown>
+  @if (_hasYearNavigator) {
+    <kirby-dropdown
+      [usePopover]="usePopover"
+      [selectedIndex]="navigatedYear"
+      [items]="navigableYears"
+      [attr.aria-label]="translations.get('selectYear')"
+      popout="left"
+      (change)="_changeYear($event)"
+    ></kirby-dropdown>
+  }
 </div>
 
 <table [attr.aria-labelledby]="_tableMonthId" role="grid">
   <thead>
     <tr>
-      <th *ngFor="let weekDay of _weekDays" scope="col">
-        <span aria-hidden="true">{{ weekDay.firstLetterCapitalized }}</span>
-        <span class="visually-hidden">{{ weekDay.fullName }}</span>
-      </th>
+      @for (weekDay of _weekDays; track weekDay.fullName) {
+        <th scope="col">
+          <span aria-hidden="true">{{ weekDay.firstLetterCapitalized }}</span>
+          <span class="visually-hidden">{{ weekDay.fullName }}</span>
+        </th>
+      }
     </tr>
   </thead>
 
   <tbody>
-    <tr *ngFor="let week of _month">
-      <td *ngFor="let day of week" [attr.aria-selected]="day.isSelected ? true : false">
-        <button
-          kirby-button
-          type="button"
-          (click)="_onDateSelected(day)"
-          (keydown)="_onDateKeydown($event)"
-          class="day"
-          [class.current-month]="day.isCurrentMonth"
-          [class.weekend]="day.isWeekend"
-          [class.today]="day.isToday"
-          [class.selectable]="day.isSelectable"
-          [class.selected]="day.isSelected"
-          [class.focussed]="day.isFocussed"
-          [class.past]="day.isPast"
-          [attr.aria-label]="day.ariaLabel"
-          [attr.aria-disabled]="day.isSelectable ? null : true"
-          [noDecoration]="true"
-          [disabled]="day.isFocusable ? null : true"
-          [tabIndex]="day.isFocussed ? 0 : -1"
-        >
-          {{ day.date }}
-        </button>
-      </td>
-    </tr>
+    @for (week of _month; track $index) {
+      <tr>
+        @for (day of week; track day.date + '-' + day.monthIndex + '-' + day.year) {
+          <td [attr.aria-selected]="day.isSelected ? true : false">
+            <button
+              kirby-button
+              type="button"
+              (click)="_onDateSelected(day)"
+              (keydown)="_onDateKeydown($event)"
+              class="day"
+              [class.current-month]="day.isCurrentMonth"
+              [class.weekend]="day.isWeekend"
+              [class.today]="day.isToday"
+              [class.selectable]="day.isSelectable"
+              [class.selected]="day.isSelected"
+              [class.focussed]="day.isFocussed"
+              [class.past]="day.isPast"
+              [attr.aria-label]="day.ariaLabel"
+              [attr.aria-disabled]="day.isSelectable ? null : true"
+              [noDecoration]="true"
+              [disabled]="day.isFocusable ? null : true"
+              [tabIndex]="day.isFocussed ? 0 : -1"
+            >
+              {{ day.date }}
+            </button>
+          </td>
+        }
+      </tr>
+    }
   </tbody>
 </table>

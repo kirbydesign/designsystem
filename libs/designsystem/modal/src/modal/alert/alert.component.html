@@ -6,15 +6,11 @@
     [subtitle]="message$ | async"
   ></kirby-empty-state>
   <div class="buttongroup">
-    <button
-      kirby-button
-      *ngIf="cancelBtn$ | async as cancelBtn"
-      attentionLevel="3"
-      class="cancel-btn"
-      (click)="onCancel()"
-    >
-      {{ cancelBtn }}
-    </button>
+    @if (cancelBtn$ | async; as cancelBtn) {
+      <button kirby-button attentionLevel="3" class="cancel-btn" (click)="onCancel()">
+        {{ cancelBtn }}
+      </button>
+    }
     <button
       kirby-button
       [size]="(cancelBtn$ | async) ? null : 'lg'"

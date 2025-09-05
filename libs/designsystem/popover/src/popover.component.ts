@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -19,7 +18,6 @@ export enum HorizontalDirection {
 }
 
 @Component({
-  imports: [CommonModule],
   selector: 'kirby-popover',
   template: `
     <div #wrapper class="wrapper"><ng-content></ng-content></div>

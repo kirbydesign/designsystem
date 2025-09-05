@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-import { NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 const config = {
   selector: 'cookbook-dropdown-example-attention-level',
-  template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor"> 
+  template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
   <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 1"
@@ -15,7 +15,7 @@ const config = {
     expand="block"
     usePopover="true"
     [items]="items">
-    </kirby-dropdown> 
+    </kirby-dropdown>
 
     <kirby-dropdown
     [size]="size"
@@ -24,7 +24,7 @@ const config = {
     expand="block"
     usePopover="true"
     [items]="items">
-  </kirby-dropdown> 
+  </kirby-dropdown>
 
   <kirby-dropdown
     [size]="size"
@@ -33,18 +33,19 @@ const config = {
     expand="block"
     usePopover="true"
     [items]="items">
-  </kirby-dropdown> 
+  </kirby-dropdown>
 </kirby-card>
 
 <div>
 <select (change)="onChange($event.target.value)">
-  <option
-    *ngFor="let color of themeColors"
-    value="{{ color }}"
-    [attr.selected]="themeColor === color ? true : null"
-  >
-    Card color: {{ color }}
-  </option>
+  @for (color of themeColors; track $index) {
+    <option
+      value="{{ color }}"
+      [attr.selected]="themeColor === color ? true : null"
+    >
+      Card color: {{ color }}
+    </option>
+  }
 </select>
 </div>
 
@@ -60,7 +61,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./dropdown-examples.shared.scss'],
-  imports: [CardModule, ThemeColorDirective, DropdownModule, NgFor, FormsModule],
+  imports: [CardModule, ThemeColorDirective, DropdownModule, FormsModule],
 })
 export class DropdownExampleAttentionLevelComponent {
   template: string = config.template;

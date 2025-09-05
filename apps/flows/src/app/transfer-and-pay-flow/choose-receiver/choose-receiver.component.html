@@ -8,9 +8,15 @@
   (segmentSelect)="changeSegment($event)"
 ></kirby-segmented-control>
 
-<flows-own-account-page *ngIf="selectedSegment.id === 'OwnAccountPage'"></flows-own-account-page>
-<flows-other-page *ngIf="selectedSegment.id === 'OtherPage'"></flows-other-page>
+@if (selectedSegment.id === 'OwnAccountPage') {
+  <flows-own-account-page></flows-own-account-page>
+}
+@if (selectedSegment.id === 'OtherPage') {
+  <flows-other-page></flows-other-page>
+}
 
-<kirby-modal-footer *ngIf="selectedSegment.id === 'OtherPage'">
-  <button kirby-button (click)="saveReceiver()" [disabled]="isDisabled">OK</button>
-</kirby-modal-footer>
+@if (selectedSegment.id === 'OtherPage') {
+  <kirby-modal-footer>
+    <button kirby-button (click)="saveReceiver()" [disabled]="isDisabled">OK</button>
+  </kirby-modal-footer>
+}

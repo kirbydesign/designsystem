@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -21,7 +20,7 @@ import { IonCheckbox } from '@ionic/angular/standalone';
 import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 
 @Component({
-  imports: [CommonModule, IonCheckbox],
+  imports: [IonCheckbox],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],

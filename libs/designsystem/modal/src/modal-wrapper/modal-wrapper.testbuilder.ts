@@ -110,9 +110,11 @@ export class StaticFooterEmbeddedComponent {}
   template: `
     <div>DynamicFooterEmbeddedComponent - Some test content</div>
 
-    <kirby-modal-footer *ngIf="showFooter" [class.enabled]="isEnabled">
-      <button kirby-button>Test</button>
-    </kirby-modal-footer>
+    @if (showFooter) {
+      <kirby-modal-footer [class.enabled]="isEnabled">
+        <button kirby-button>Test</button>
+      </kirby-modal-footer>
+    }
   `,
   standalone: false,
 })
@@ -145,7 +147,9 @@ export class StaticPageProgressEmbeddedComponent {}
 
 @Component({
   template: `
-    <kirby-page-progress *ngIf="showPageProgress"></kirby-page-progress>
+    @if (showPageProgress) {
+      <kirby-page-progress></kirby-page-progress>
+    }
   `,
   standalone: false,
 })

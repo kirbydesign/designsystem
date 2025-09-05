@@ -113,26 +113,120 @@ describe('BadgeComponent', () => {
   });
 
   describe(`when rendering Badge with themeColor`, () => {
-    const colors = [
-      ...ColorHelper.notificationColors,
-      ColorHelper.systemColors.find((color) => color.name === 'white'),
-    ];
-    colors.forEach((color) => {
-      it(`should render with correct colors when themeColor = '${color.name}'`, async () => {
-        spectator = createHost(`
-        <kirby-badge themeColor="${color.name}">
+    describe('Badge with text', () => {
+      beforeEach(async () => {
+        spectator = createHost(
+          `
+        <kirby-badge [size]="'md'" [themeColor]="themeColor">
+          Text
         </kirby-badge>
-        `);
+        `,
+          {
+            hostProps: { themeColor: 'success' },
+          }
+        );
         ionBadge = spectator.element.querySelector('ion-badge');
         await TestHelper.whenReady(ionBadge);
-
-        const expectedTextColor =
-          color.name === 'danger'
-            ? getColor('white')
-            : getColor(color.name as ThemeColorExtended, 'contrast');
+      });
+      it('should have success tint background when themeColor = "success"', async () => {
+        spectator.setHostInput('themeColor', 'success');
         expect(ionBadge).toHaveComputedStyle({
-          'background-color': getColor(color.name as ThemeColorExtended),
-          color: expectedTextColor,
+          'background-color': getColor('success', 'tint'),
+          color: getColor('success', 'contrast'),
+        });
+      });
+
+      it('should have warning background when themeColor = "warning"', async () => {
+        spectator.setHostInput('themeColor', 'warning');
+
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('warning'),
+          color: getColor('warning', 'contrast'),
+        });
+      });
+
+      it('should have danger shade background when themeColor = "danger"', async () => {
+        spectator.setHostInput('themeColor', 'danger');
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('danger', 'shade'),
+          color: getColor('white'),
+        });
+      });
+    });
+
+    describe('Badge with icon', () => {
+      beforeEach(async () => {
+        spectator = createHost(
+          `
+        <kirby-badge [themeColor]="themeColor">
+          <kirby-icon name="checkmark"></kirby-icon>
+        </kirby-badge>
+        `,
+          {
+            hostProps: { themeColor: 'success' },
+          }
+        );
+        ionBadge = spectator.element.querySelector('ion-badge');
+        await TestHelper.whenReady(ionBadge);
+      });
+      it('should have success tint background when themeColor = "success"', async () => {
+        spectator.setHostInput('themeColor', 'success');
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('success', 'tint'),
+          color: getColor('success', 'contrast'),
+        });
+      });
+
+      it('should have warning background when themeColor = "warning"', async () => {
+        spectator.setHostInput('themeColor', 'warning');
+
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('warning'),
+          color: getColor('warning', 'contrast'),
+        });
+      });
+
+      it('should have danger background when themeColor = "danger"', async () => {
+        spectator.setHostInput('themeColor', 'danger');
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('danger'),
+          color: getColor('white'),
+        });
+      });
+    });
+
+    describe('Small badge', () => {
+      beforeEach(async () => {
+        spectator = createHost(
+          `
+        <kirby-badge [size]="'sm'" [themeColor]="themeColor"></kirby-badge>
+        `,
+          {
+            hostProps: { themeColor: 'success' },
+          }
+        );
+        ionBadge = spectator.element.querySelector('ion-badge');
+        await TestHelper.whenReady(ionBadge);
+      });
+      it('should have success shade background when themeColor = "success"', async () => {
+        spectator.setHostInput('themeColor', 'success');
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('success', 'shade'),
+        });
+      });
+
+      it('should have warning shade background when themeColor = "warning"', async () => {
+        spectator.setHostInput('themeColor', 'warning');
+
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('warning', 'shade'),
+        });
+      });
+
+      it('should have danger background when themeColor = "danger"', async () => {
+        spectator.setHostInput('themeColor', 'danger');
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': getColor('danger'),
         });
       });
     });

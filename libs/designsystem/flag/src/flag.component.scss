@@ -29,33 +29,24 @@ $padding-block-xs: 3px;
     font-size: utils.font-size('xs');
     padding: $padding-block-xs utils.size('xxxs');
   }
-}
 
-$_flag-notification-colors-map: (
-  'success': (
-    'green',
-    30,
-  ),
-  'warning': (
-    'yellow',
-    30,
-  ),
-  'danger': (
-    'red',
-    30,
-  ),
-  'semi-light': 'semi-light',
-);
-
-@each $name, $variant_shade in $_flag-notification-colors-map {
-  :host(.#{$name}) {
-    @if meta.type_of($variant_shade) == list {
-      --kirby-flag-background-color: #{utils.get-decoration-color($variant_shade...)};
-    } @else {
-      --kirby-flag-background-color: #{utils.get-color($variant_shade)};
-    }
-
-    --kirby-flag-color: #{utils.get-color('black')};
-    --kirby-flag-border-color: var(--kirby-flag-background-color);
+  // Colors
+  &.success {
+    --kirby-flag-background-color: #{utils.get-color('success-tint')};
   }
+
+  &.warning {
+    --kirby-flag-background-color: #{utils.get-color('warning-tint')};
+  }
+
+  &.danger {
+    --kirby-flag-background-color: #{utils.get-color('danger-tint')};
+  }
+
+  &.semi-light {
+    --kirby-flag-background-color: #{utils.get-color('semi-light')};
+  }
+
+  --kirby-flag-border-color: var(--kirby-flag-background-color);
+  --kirby-flag-color: #{utils.get-color('black')};
 }
