@@ -11,7 +11,7 @@ import { ThemeColorDirective } from '../../src/lib';
 import { IconRegistryService } from './icon-registry.service';
 import { IconComponent, IconSize } from './icon.component';
 
-const { getColor, iconFontSize } = DesignTokenHelper;
+const { getColor, iconFontSizeInPx } = DesignTokenHelper;
 
 describe('IconComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -168,7 +168,7 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
     const el = fixture.debugElement.query(By.directive(IconComponent));
 
     expect(el.nativeElement).toHaveComputedStyle({
-      'font-size': iconFontSize('sm'),
+      'font-size': iconFontSizeInPx('sm'),
     });
   });
 
@@ -181,7 +181,7 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
       const el = fixture.debugElement.query(By.directive(IconComponent));
 
       expect(el.nativeElement).toHaveComputedStyle({
-        'font-size': iconFontSize(size),
+        'font-size': iconFontSizeInPx(size),
       });
     });
   });

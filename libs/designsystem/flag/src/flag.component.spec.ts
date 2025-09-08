@@ -62,8 +62,8 @@ describe('FlagComponent', () => {
     expect(element).toHaveComputedStyle({
       'padding-left': size('xxs'),
       'padding-right': size('xxs'),
-      'padding-top': '0px',
-      'padding-bottom': '0px',
+      'padding-top': '5px',
+      'padding-bottom': '5px',
     });
   });
 
@@ -82,8 +82,8 @@ describe('FlagComponent', () => {
         expect(element).toHaveComputedStyle({
           'padding-left': size('xxxs'),
           'padding-right': size('xxxs'),
-          'padding-top': '0px',
-          'padding-bottom': '0px',
+          'padding-top': '3px',
+          'padding-bottom': '3px',
         });
       });
     });
@@ -102,8 +102,8 @@ describe('FlagComponent', () => {
         expect(element).toHaveComputedStyle({
           'padding-left': size('xxs'),
           'padding-right': size('xxs'),
-          'padding-top': '0px',
-          'padding-bottom': '0px',
+          'padding-top': size('xxxs'),
+          'padding-bottom': size('xxxs'),
         });
       });
     });

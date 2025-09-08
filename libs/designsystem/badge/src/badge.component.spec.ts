@@ -44,8 +44,8 @@ describe('BadgeComponent', () => {
     it('should be rendered with correct dimensions', () => {
       expect(ionBadge).toHaveComputedStyle({
         'min-width': size('s'),
-        'padding-bottom': '3px',
-        'padding-top': '3px',
+        'padding-bottom': '0px',
+        'padding-top': '0px',
         'padding-inline-start': '5px',
         'padding-inline-end': '5px',
       });

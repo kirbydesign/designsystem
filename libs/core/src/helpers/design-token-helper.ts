@@ -77,6 +77,16 @@ export class DesignTokenHelper {
     return styles.iconFontSizes[key];
   }
 
+  public static iconFontSizeInPx(key: keyof typeof styles.iconFontSizes): string {
+    const iconFontSizesPx = {
+      lg: '48px', // 3rem
+      md: '32px', // 2rem
+      sm: '24px', // 1.5rem
+      xs: '16px', // 1rem
+    };
+    return iconFontSizesPx[key];
+  }
+
   public static fontWeight(key: keyof typeof styles.fontWeight): string {
     return styles.fontWeight[key];
   }
