@@ -83,6 +83,7 @@ ion-modal::part(backdrop) {
 
 ion-modal.kirby-overlay {
   position: fixed;
+  font-family: var(--kirby-font-family);
 
   &.kirby-modal {
     --border-radius: 0;
