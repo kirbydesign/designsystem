@@ -211,29 +211,18 @@ ion-loading.kirby-loading-overlay {
   user-select: none;
   text-align: center;
 
-  $_toast-notification-colors-map: (
-    'success': (
-      'green',
-      40,
-    ),
-    'warning': (
-      'yellow',
-      40,
-    ),
-  );
-
   // Set default colors
-
-  --background: #{utils.get-decoration-color(
-      map.get($_toast-notification-colors-map, 'success')...
-    )};
+  --background: #{utils.get-color('success-tint')};
   --color: #{utils.get-color('black')};
   --button-color: var(--color);
 
-  @each $name, $variant_shade in $_toast-notification-colors-map {
-    &.#{$name} {
-      --background: #{utils.get-decoration-color($variant_shade...)};
-    }
+  // For readability
+  &.success {
+    --background: #{utils.get-color('success-tint')};
+  }
+
+  &.warning {
+    --background: #{utils.get-color('warning')};
   }
 }
 
