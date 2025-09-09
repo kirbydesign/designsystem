@@ -23,7 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import {
   DesignTokenHelper,
-  SearchHelper,
+  StringSearchHelper,
   UniqueIdGenerator,
 } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
@@ -547,7 +547,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     if (this.disabled) return;
 
-    if (SearchHelper.isPrintableCharacter(key)) {
+    if (StringSearchHelper.isPrintableCharacter(key)) {
       this.handlePrintableCharacterKey(event, this.isOpen);
     }
 
@@ -631,7 +631,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     } else if (this.isOpen) {
       startIndex = this.focusedIndex + 1;
     }
-    return SearchHelper.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
+    return StringSearchHelper.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
   }
 
   @HostListener('mousedown', ['$event'])

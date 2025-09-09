@@ -11,7 +11,7 @@ const config = {
   <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 1"
-    aria-label="dropdown-label 1"
+    aria-label="Choose your favorite fruit"
     attentionLevel="1"
     expand="block"
     usePopover="true"
@@ -21,7 +21,7 @@ const config = {
     <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 2"
-    aria-label="dropdown-label 2"
+    aria-label="Choose your favorite fruit"
     attentionLevel="2"
     expand="block"
     usePopover="true"
@@ -31,7 +31,7 @@ const config = {
   <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 3"
-    aria-label="dropdown-label 3"
+    aria-label="Choose your favorite fruit"
     attentionLevel="3"
     expand="block"
     usePopover="true"

@@ -28,7 +28,7 @@ import {
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { SearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
@@ -203,7 +203,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.floatingMenu.hide();
         break;
       default: {
-        if (SearchHelper.isPrintableCharacter(key)) {
+        if (StringSearchHelper.isPrintableCharacter(key)) {
           this.preventDefaultAndStopImmediatePropagation(event);
           const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
           if (foundItemIndex > -1) {
@@ -216,7 +216,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private getIndexOfItemByFirstCharacter(char: string) {
-    return SearchHelper.getIndexByFirstMatchingStartString(
+    return StringSearchHelper.getIndexByFirstMatchingStartString(
       char,
       this.kirbyItems.map((item) => item.nativeElement.innerText),
       this.focusedIndex + 1

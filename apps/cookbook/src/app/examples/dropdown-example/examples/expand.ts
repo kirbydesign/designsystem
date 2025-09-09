@@ -6,7 +6,7 @@ const config = {
   template: `<kirby-dropdown
   [size]="size"
   placeholder="Block level Dropdown"
-  aria-label="dropdown-label"
+  aria-label="Choose your favorite fruit"
   expand="block"
   [items]="[
         'Apple',   

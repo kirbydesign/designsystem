@@ -8,7 +8,7 @@ const config = {
   template: `<kirby-dropdown
   [size]="size"
   placeholder="Dropdown with event handler"
-  aria-label="dropdown-label"
+  aria-label="Choose your favorite fruit"
   [items]="items"
   (change)="onItemSelect($event)"
 ></kirby-dropdown>`,

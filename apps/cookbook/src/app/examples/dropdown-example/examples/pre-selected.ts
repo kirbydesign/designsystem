@@ -5,7 +5,7 @@ const config = {
   selector: 'cookbook-dropdown-example-pre-selected',
   template: `<kirby-dropdown
   [size]="size"
-  aria-label="dropdown-label"
+  aria-label="Choose your favorite fruit"
         [items]="[
         'Apple',   
         'Banana',
