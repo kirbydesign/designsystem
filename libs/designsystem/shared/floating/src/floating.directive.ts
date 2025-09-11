@@ -210,9 +210,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
-  private disposeTriggerEvents: EventListenerDisposeFn[] = [];
-  private disposeDocumentClick: EventListenerDisposeFn;
-  private disposeHostClick: EventListenerDisposeFn;
+  private disposeTriggerEventListeners: EventListenerDisposeFn[] = [];
+  private disposeDocumentClickListener: EventListenerDisposeFn;
+  private disposeHostClickListener: EventListenerDisposeFn;
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -370,22 +370,24 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private attachDocumentClickEventHandler(): void {
-    if (this.disposeDocumentClick) {
+    if (this.disposeDocumentClickListener) {
       return;
     }
 
-    this.disposeDocumentClick = this.renderer.listen('document', 'mousedown', (event) =>
+    this.disposeDocumentClickListener = this.renderer.listen('document', 'mousedown', (event) =>
       this.handleClickOutsideHostElement(event)
     );
   }
 
   private attachHostClickEventHandler(): void {
-    if (this.disposeHostClick || !this.closeOnSelect) {
+    if (this.disposeHostClickListener || !this.closeOnSelect) {
       return;
     }
 
-    this.disposeHostClick = this.renderer.listen(this.elementRef.nativeElement, 'click', () =>
-      this.handleClickInsideHostElement()
+    this.disposeHostClickListener = this.renderer.listen(
+      this.elementRef.nativeElement,
+      'click',
+      () => this.handleClickInsideHostElement()
     );
   }
 
@@ -397,12 +399,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
 
     events.forEach((event: EventMethods) => {
-      const eventListenerDisposeFn: EventListenerDisposeFn = this.renderer.listen(
+      const disposeTriggerEventListener: EventListenerDisposeFn = this.renderer.listen(
         this.reference?.nativeElement,
         event.event,
         event.method
       );
-      this.disposeTriggerEvents.push(eventListenerDisposeFn);
+      this.disposeTriggerEventListeners.push(disposeTriggerEventListener);
     });
   }
 
@@ -454,23 +456,21 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownReferenceElementEventHandling(): void {
-    this.disposeTriggerEvents.forEach((eventListenerDisposeFunction: EventListenerDisposeFn) => {
-      if (eventListenerDisposeFunction != null) {
-        eventListenerDisposeFunction();
-      }
-    });
-    this.disposeTriggerEvents = [];
+    this.disposeTriggerEventListeners.forEach((disposeTriggerEventListener) =>
+      disposeTriggerEventListener?.()
+    );
+    this.disposeTriggerEventListeners = [];
   }
 
   private tearDownDocumentClickEventHandling(): void {
-    if (this.disposeDocumentClick) {
-      this.disposeDocumentClick();
-      this.disposeDocumentClick = null;
+    if (this.disposeDocumentClickListener) {
+      this.disposeDocumentClickListener();
+      this.disposeDocumentClickListener = null;
     }
 
-    if (this.disposeHostClick) {
-      this.disposeHostClick();
-      this.disposeHostClick = null;
+    if (this.disposeHostClickListener) {
+      this.disposeHostClickListener();
+      this.disposeHostClickListener = null;
     }
   }
 

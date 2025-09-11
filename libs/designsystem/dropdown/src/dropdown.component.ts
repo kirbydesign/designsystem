@@ -224,7 +224,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   _kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
   set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
-    const hasSlottedItems = this.disposeItemClicks?.length > 0;
+    const hasSlottedItems = this.disposeItemClickListeners?.length > 0;
     if (hasSlottedItems) {
       this.unlistenAllSlottedItems();
     }
@@ -232,7 +232,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // Setup a click listener for each new slotted items
     kirbyItems.forEach((kirbyItem, index) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-      const disposeClick: EventListenerDisposeFn = this.renderer.listen(
+      const disposeClickListener: EventListenerDisposeFn = this.renderer.listen(
         kirbyItem.nativeElement,
         'click',
         () => {
@@ -240,7 +240,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         }
       );
 
-      this.disposeItemClicks.push(disposeClick);
+      this.disposeItemClickListeners.push(disposeClickListener);
     });
 
     this._kirbyItemsSlotted = kirbyItems;
@@ -250,7 +250,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._kirbyItemsSlotted;
   }
 
-  private disposeItemClicks: EventListenerDisposeFn[] = [];
+  private disposeItemClickListeners: EventListenerDisposeFn[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
 
@@ -648,9 +648,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   private unlistenAllSlottedItems() {
-    let disposeClick: EventListenerDisposeFn;
-    while ((disposeClick = this.disposeItemClicks.pop()) !== undefined) {
-      disposeClick();
+    let disposeClickListener: EventListenerDisposeFn;
+    while ((disposeClickListener = this.disposeItemClickListeners.pop()) !== undefined) {
+      disposeClickListener();
     }
   }
 

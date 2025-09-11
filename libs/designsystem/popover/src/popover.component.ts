@@ -63,7 +63,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     this.hide();
   }
 
-  private disposeTouchmove: EventListenerDisposeFn;
+  private disposeTouchMoveListener: EventListenerDisposeFn;
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
@@ -109,7 +109,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
       this.renderer.addClass(this.document.body, 'backdrop-no-scroll');
     }
 
-    this.disposeTouchmove = this.renderer.listen(
+    this.disposeTouchMoveListener = this.renderer.listen(
       this.document,
       'touchmove',
       PopoverComponent.preventEventOutsidePopover,
@@ -122,7 +122,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
       this.renderer.removeClass(this.document.body, 'backdrop-no-scroll');
     }
 
-    this.disposeTouchmove?.();
+    this.disposeTouchMoveListener?.();
   }
 
   show() {
