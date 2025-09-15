@@ -256,6 +256,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private itemClickUnlisten: EventListenerDisposeFn[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
+  private searchBuffer: string = '';
+  private searchBufferTimeout: ReturnType<typeof setTimeout>;
+  private SEARCH_BUFFER_DELAY = 500; // ms
 
   constructor(
     private renderer: Renderer2,
@@ -520,10 +523,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     event.stopImmediatePropagation();
     event.preventDefault();
   }
-
-  private searchBuffer: string = '';
-  private searchBufferTimeout: ReturnType<typeof setTimeout>;
-  private SEARCH_BUFFER_DELAY = 500; // ms
 
   private addToSearchBuffer(char: string) {
     clearTimeout(this.searchBufferTimeout);
