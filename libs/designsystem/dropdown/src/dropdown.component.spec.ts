@@ -1106,7 +1106,7 @@ describe('DropdownComponent', () => {
 
     it('should set up click listeners for slotted items', () => {
       spectator.detectChanges();
-      const clickListeners = spectator.component['disposeItemClicks'];
+      const clickListeners = spectator.component['disposeItemClickListeners'];
       expect(clickListeners).toHaveLength(items.length);
     });
 
@@ -1119,9 +1119,9 @@ describe('DropdownComponent', () => {
         ];
         const unlistenMockArrayLength = unlistenMockArray.length;
         let unlistenCounter = 0;
-        spectator.component['disposeItemClicks'] = unlistenMockArray;
+        spectator.component['disposeItemClickListeners'] = unlistenMockArray;
         spectator.component.ngOnDestroy();
-        expect(spectator.component['disposeItemClicks']).toHaveLength(0);
+        expect(spectator.component['disposeItemClickListeners']).toHaveLength(0);
         expect(unlistenCounter).toEqual(unlistenMockArrayLength);
       });
     });
