@@ -1104,9 +1104,9 @@ describe('DropdownComponent', () => {
       });
     });
 
-    it('should set up click listernes for slotted items', () => {
+    it('should set up click listeners for slotted items', () => {
       spectator.detectChanges();
-      const clickListeners = spectator.component['itemClickUnlisten'];
+      const clickListeners = spectator.component['disposeItemClickListeners'];
       expect(clickListeners).toHaveLength(items.length);
     });
 
@@ -1119,9 +1119,9 @@ describe('DropdownComponent', () => {
         ];
         const unlistenMockArrayLength = unlistenMockArray.length;
         let unlistenCounter = 0;
-        spectator.component['itemClickUnlisten'] = unlistenMockArray;
+        spectator.component['disposeItemClickListeners'] = unlistenMockArray;
         spectator.component.ngOnDestroy();
-        expect(spectator.component['itemClickUnlisten']).toHaveLength(0);
+        expect(spectator.component['disposeItemClickListeners']).toHaveLength(0);
         expect(unlistenCounter).toEqual(unlistenMockArrayLength);
       });
     });
