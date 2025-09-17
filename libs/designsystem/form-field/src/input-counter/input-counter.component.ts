@@ -9,7 +9,6 @@ import { TextareaComponent } from './../textarea/textarea.component';
 @Component({
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
-  styleUrls: ['./input-counter.component.scss'],
   standalone: false,
 })
 export class InputCounterComponent implements OnInit, OnDestroy {
