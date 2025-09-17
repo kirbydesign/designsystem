@@ -20,7 +20,7 @@ export class InputCounterComponent implements OnInit, OnDestroy {
   private _inputChangeSubscription: Subscription;
   textToAnnounce: string;
   lastAnnouncedLength: number;
-  skipAnnouncement = false;
+  skipNextAnnouncement = false;
 
   get text(): string {
     if (this.length === undefined) {
@@ -35,20 +35,14 @@ export class InputCounterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.listenTo) {
       this.length = this.listenTo.value ? this.listenTo.value.length : 0;
-      this.skipAnnouncement = this.length > 0; //If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
+      this.skipNextAnnouncement = this.length > 0; //If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
       this.maxlength = this.maxlength = this.listenTo.maxlength
         ? +this.listenTo.maxlength
         : undefined;
       this._inputChangeSubscription = this.listenTo.kirbyChange
         .pipe(
           tap((value) => (this.length = value?.length || 0)),
-          filter((_) => {
-            if (this.skipAnnouncement) {
-              this.skipAnnouncement = false;
-              return false;
-            }
-            return true;
-          }),
+          filter(() => this.skipAnnouncement()),
           debounceTime(1000)
         )
         .subscribe((_) => {
@@ -57,18 +51,26 @@ export class InputCounterComponent implements OnInit, OnDestroy {
     }
   }
 
+  private skipAnnouncement(): boolean {
+    if (this.skipNextAnnouncement) {
+      this.skipNextAnnouncement = false;
+      return false;
+    }
+    return true;
+  }
+
   ngOnDestroy(): void {
     this._inputChangeSubscription?.unsubscribe();
   }
 
   announceText(): void {
     const characters = this.translations.get('characters');
+    const entered = this.translations.get('entered');
     if (this.maxlength === undefined) {
-      const entered = this.translations.get('entered');
-      this.textToAnnounce = `${this.length} ${characters} ${entered}`;
+      this.textToAnnounce = `${characters} ${this.length} ${entered}`;
     } else {
       const outOf = this.translations.get('outOf');
-      this.textToAnnounce = `${characters} ${this.length} ${outOf} ${this.maxlength}`;
+      this.textToAnnounce = `${characters} ${this.length} ${outOf} ${this.maxlength} ${entered}`;
     }
   }
 }
