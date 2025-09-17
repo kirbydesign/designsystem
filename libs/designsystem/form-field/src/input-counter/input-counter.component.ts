@@ -45,7 +45,7 @@ export class InputCounterComponent implements OnInit, OnDestroy {
           filter(() => this.skipAnnouncement()),
           debounceTime(1000)
         )
-        .subscribe((_) => {
+        .subscribe(() => {
           this.announceText();
         });
     }

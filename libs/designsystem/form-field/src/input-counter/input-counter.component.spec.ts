@@ -126,7 +126,7 @@ describe('InputCounterComponent', () => {
           input.kirbyChange.emit(testValue);
           tick(1000); //simulate debounce time
 
-          expect(component.textToAnnounce).toBe(`Characters ${testValue.length} out of 20`);
+          expect(component.textToAnnounce).toBe(`Characters ${testValue.length} out of 20 entered`);
         }));
 
         it('should set textToAnnounce correctly when maxlength is NOT defined', fakeAsync(() => {
@@ -136,7 +136,7 @@ describe('InputCounterComponent', () => {
           input.kirbyChange.emit(testValue);
           tick(1000); //simulate debounce time
 
-          expect(component.textToAnnounce).toBe(`${testValue.length} Characters entered`);
+          expect(component.textToAnnounce).toBe(`Characters ${testValue.length} entered`);
         }));
 
         it('should NOT set textToAnnounce on initial value', fakeAsync(() => {
