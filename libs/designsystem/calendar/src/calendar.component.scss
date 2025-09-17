@@ -116,8 +116,3 @@ button[aria-disabled='true'] {
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
 }
-
-.visually-hidden {
-  position: absolute;
-  scale: 0;
-}
