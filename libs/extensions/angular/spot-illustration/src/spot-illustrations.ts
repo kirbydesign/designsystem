@@ -96,4 +96,4 @@ export const illustrations = {
   },
 } as const satisfies Record<string, Illustration>;
 
-export type IllustrationName = keyof typeof illustrations | null;
+export type SpotIllustrationName = keyof typeof illustrations | null;

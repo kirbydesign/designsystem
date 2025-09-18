@@ -1,23 +1,26 @@
-import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardModule } from '@kirbydesign/designsystem/card';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { AccordionModule } from '@kirbydesign/designsystem/accordion';
+import {
+  illustrations,
+  SpotIllustrationComponent,
+  SpotIllustrationSize,
+} from '@kirbydesign/extensions-angular/spot-illustration';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// eslint-disable-next-line no-restricted-imports
-import { SpotIllustrationSize } from './spot-illustrations';
-// eslint-disable-next-line no-restricted-imports
-import { illustrations, SpotIllustrationComponent } from './index';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 /**
- * The SpotIllustrationComponent provides a flexible way to display decorative illustrations
- * throughout your application. These illustrations are designed to enhance user experience
- * by providing visual context and improving the overall aesthetic appeal.
+ * Spot Illustrations are visual elements that help convey complex ideas in a simple way.
+ * They contribute to clear communication and makes the experience more present and welcoming.
+ * Spot Illustrations underpin a narrative, gives character, identity and personality
+ * through brand theming. Spot Illustrations are abstract by nature and do not contain numbers or text.
  *
  * ## Features
  * - **Multiple sizes**: Available in sm, md, lg, and xl sizes
- * - **Extensive library**: Wide variety of themed illustrations. Check the `illustrations` object or the *All* story for available names.
+ * - **Theming**: Wide variety of themed illustrations. See the *All* example for all available variants.
  *
  * ## Usage Guidelines
  * - Use spot illustrations to support content, not replace it
@@ -62,17 +65,16 @@ const meta: Meta<SpotIllustrationComponent> = {
     name: {
       control: { type: 'select' },
       options: Object.keys(illustrations),
-      description:
-        'The name of the spot illustration to display. This is a key from the illustrations object.',
+      description: 'The name of the Spot Illustration to display.',
       table: {
         category: 'inputs',
-        type: { summary: 'IllustrationName' },
+        type: { summary: 'SpotIllustrationName' },
       },
     },
     size: {
       control: { type: 'select' },
       options: Object.values(SpotIllustrationSize),
-      description: 'The size of the spot illustration',
+      description: 'The size of the Spot Illustration',
       table: {
         category: 'inputs',
         type: { summary: 'SpotIllustrationSize' },
@@ -85,127 +87,97 @@ const meta: Meta<SpotIllustrationComponent> = {
       table: { disable: true },
     },
   },
-  args: {
-    name: 'investboard-money',
-    size: SpotIllustrationSize.MD,
-  },
 };
 export default meta;
 type Story = StoryObj<SpotIllustrationComponent>;
 
 /**
- * Default story showcasing the SpotIllustrationComponent with basic usage.
- *
- * This is the simplest way to use the spot illustration component. It requires:
- * - `name`: A valid illustration name from the available illustrations
- * - `size` (optional): Defaults to md. The size of the illustration (sm, md, lg, xl)
- *
+ * To show a Spot Illustration, provide a name of one of the available illustrations, and optionally a size.
  */
 export const Default: Story = {
+  args: {
+    name: 'investboard-money',
+    size: SpotIllustrationSize.MD,
+  },
   render: (args) => ({
     props: {
       name: args.name,
       size: args.size,
     },
     template: `
-      <kirby-x-spot-illustration ${argsToTemplate(args)}>
-      <not-found> N/A</not-found>
-</kirby-x-spot-illustration>
+      <kirby-x-spot-illustration ${argsToTemplate(args)}></kirby-x-spot-illustration>
     `,
   }),
 };
 
+const inCardStyles = `
+kirby-card {
+   --kirby-card-padding-top: 0;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--kirby-spacing-s);
+
+  kirby-x-spot-illustration {
+    align-self: end;
+  }
+}`;
+
 /**
- * Demonstrates the SpotIllustrationComponent integrated within a Kirby Card component.
- *
- * ```
+ * Spot Illustrations can also be used to support text content in a card.
+ * The illustrations theme is automatically adjusted based on the surrounding card.
  */
 export const InCard: Story = {
+  args: {
+    name: 'plant-leaf',
+    size: SpotIllustrationSize.MD,
+  },
   render: (args) => ({
     props: {
       name: args.name,
       size: args.size,
     },
-    styles: [
-      `.card-content {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: nowrap;
-  padding: 0 16px;
-  box-sizing: border-box;
+    styles: [inCardStyles, `kirby-card:not(:first-child) { margin-top: var(--kirby-spacing-m); }`],
+    template: `<kirby-card [hasPadding]="true">
+  <kirby-card-header [hasPadding]="false">
+    <kirby-item [disclosure]="'arrow-more'">
+      <p class="kirby-text-normal-bold">Spot Illustration in card</p>
+    </kirby-item>
+  </kirby-card-header>
+  <div class="card-content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet.</p>
+    <kirby-x-spot-illustration ${argsToTemplate(args)}></kirby-x-spot-illustration>
+  </div>
+</kirby-card>
 
-  .subtitle-no-margin {
-    margin-bottom: 0;
-  }
+<kirby-card [hasPadding]="true" [variant]="'outlined'">
+  <kirby-card-header [hasPadding]="false">
+    <kirby-item [disclosure]="'arrow-more'" style="--kirby-item-background: transparent;">
+      <p class="kirby-text-normal-bold">Spot Illustration in card</p>
+    </kirby-item>
+  </kirby-card-header>
+  <div class="card-content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet.</p>
+    <kirby-x-spot-illustration ${argsToTemplate(args)}></kirby-x-spot-illustration>
+  </div>
+</kirby-card>
 
-  kirby-icon {
-    margin-bottom: 16px;
-  }
-}`,
-    ],
-    template: `
-      <kirby-card [hasPadding]="false">
-      <kirby-item [disclosure]="'arrow-more'">
-            <p title class="kirby-item-title kirby-text-bold">Spot illustration in card</p>
-      </kirby-item>
-      <div class="card-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet.</p>
-<kirby-x-spot-illustration [slot]="'end'" ${argsToTemplate(args)}>
-<not-found> N/A</not-found>
-</kirby-x-spot-illustration>
-      
-      </div>
-
-      </kirby-card>
-    `,
-  }),
-};
-
-/**
- * Demonstrates the SpotIllustrationComponent integrated within a Alert component.
- *
- * ```
- */
-export const Alert: Story = {
-  render: (args) => ({
-    props: {
-      name: args.name,
-      size: args.size,
-    },
-    styles: [
-      `.card-content {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: nowrap;
-  padding: 0 16px;
-  box-sizing: border-box;
-
-  .subtitle-no-margin {
-    margin-bottom: 0;
-  }
-
-  kirby-icon {
-    margin-bottom: 16px;
-  }
-}`,
-    ],
-    template: `
-      <kirby-card [hasPadding]="false">
-      <kirby-item [disclosure]="'arrow-more'">
-            <p title class="kirby-item-title kirby-text-bold">Spot illustration in card</p>
-      </kirby-item>
-      <div class="card-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet.</p>
-<kirby-x-spot-illustration [slot]="'end'" ${argsToTemplate(args)}>
-<not-found> N/A</not-found>
-</kirby-x-spot-illustration>
-      
-      </div>
-
-      </kirby-card>
-    `,
+<kirby-card [hasPadding]="true" [themeColor]="'dark'">
+  <kirby-card-header [hasPadding]="false">
+    <kirby-item [disclosure]="'arrow-more'" style="--kirby-item-background: var(--kirby-dark);">
+      <p class="kirby-text-normal-bold" style="color: var(--kirby-white);">Spot Illustration in card</p>
+    </kirby-item>
+  </kirby-card-header>
+  <div class="card-content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula consectetur odio ut sodales. Quisque sit amet libero eu ligula feugiat imperdiet.</p>
+    <kirby-x-spot-illustration ${argsToTemplate(args)}></kirby-x-spot-illustration>
+  </div>
+</kirby-card>
+<!-- Custom CSS:
+${inCardStyles}
+-->`,
   }),
 };
 
@@ -219,7 +191,7 @@ export const Alert: Story = {
  * - Comparing illustrations across different sizes
  * - Quality assurance and visual testing
  *
- * ** Check the different themes [dark, light, canvas, tertiary] to see how illustrations adapt visually.**
+ * ** Check the different themes to see how illustrations adapt visually.**
  *
  * ** This story is particularly useful for designers and developers who need
  * to see all available options at a glance. **
@@ -234,73 +206,60 @@ export const All: Story = {
     props: {
       illustrations: illustrations,
       sizes: Object.values(SpotIllustrationSize),
-      themes: ['white', 'dark', 'canvas', 'tertiary'],
+      themes: ['light', 'white', 'dark'],
     },
     styles: [
-      ` 
+      `
       h2 {
         padding-left: 16px;
       }
-      .dark-theme, .tertiary-theme {
-        color-scheme: only dark;
-        --kirby-spot-illustration-background-color: var(--kirby-white-overlay);
-        --kirby-spot-illustration-outline-color: var(--kirby-white);
-        --kirby-spot-illustration-highlight-color: var(--kirby-primary);
+
+      table.kirby-table td.illustration-name {
+        font-weight: bold;
+        text-align: left;
       }
-      .white-theme, .canvas-theme {
-        color-scheme: only light;
-        --kirby-spot-illustration-background-color: var(--kirby-dark-overlay);
-        --kirby-spot-illustration-outline-color: var(--kirby-black);
-        --kirby-spot-illustration-highlight-color: var(--kirby-primary);
-}
-       div { padding: 10px; }
-       .dark-theme, .tertiary-theme { --story-text-color: var(--kirby-white); }
-       /* its just a guess of a darkmode background */
-       .dark-theme { background: #333; }
-       /* the color --kirby-background-color is not available in storybook for some reason */
-       .white-theme { background: #fff }
-       .tertiary-theme { background: var(--kirby-tertiary); }
 
+      table.kirby-table td, h2 {
+        color: var(--story-text-color, --kirby-black);
+        text-align: center;
+      }
 
-       table.kirby-table td.illustration-name {
-         font-weight: bold;
-         text-align: left;
-       }
-       table.kirby-table td, h2 {color: var( --story-text-color, --kirby-black); text-align:center}
-       kirby-x-spot-illustration { display: inline-block}
-       `,
+      kirby-x-spot-illustration {
+        display: inline-block;
+      }
+      `,
     ],
     template: `
     <kirby-accordion>
       <kirby-accordion-item *ngFor="let theme of themes; let i = index"  [title]="'Theme: ' + theme" [isExpanded]="i === 0">
-      <div [class]="theme + '-theme'">
-        <table class="kirby-table">
-          <thead>
-          <th>Illustration Name</th>
-          <th *ngFor="let size of sizes">{{ size }}</th>
-          </thead>
-          <tbody>
-          <ng-container *ngFor="let illustration of illustrations | keyvalue">
-            <tr>
-              <td class="illustration-name">{{ illustration.key }}</td>
-              <td *ngFor="let size of sizes">
-                <ng-container *ngTemplateOutlet="svgTemplate; context: { illustration, size }"></ng-container>
-              </td>
-            </tr>
-          </ng-container>
-          </tbody>
-        </table>
-      </div>
+        <kirby-card [themeColor]="theme" [variant]="theme === 'light' ? 'outlined' : null">
+          <table class="kirby-table">
+            <thead>
+            <th>Illustration Name</th>
+            <th *ngFor="let size of sizes">{{ size }}</th>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let illustration of illustrations | keyvalue">
+              <tr>
+                <td class="illustration-name">{{ illustration.key }}</td>
+                <td *ngFor="let size of sizes">
+                  <ng-container *ngTemplateOutlet="svgTemplate; context: { illustration, size }"></ng-container>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </kirby-card>
       </kirby-accordion-item>
-      </kirby-accordion>
-      <ng-template #svgTemplate let-illustration="illustration" let-size="size">
-        @if (illustration.value[size]) {
-          <kirby-x-spot-illustration [size]="size" [name]="illustration.key"></kirby-x-spot-illustration>
-        }
-        @else {
-          N/A
-        }
-      </ng-template>
+    </kirby-accordion>
+    <ng-template #svgTemplate let-illustration="illustration" let-size="size">
+      @if (illustration.value[size]) {
+        <kirby-x-spot-illustration [size]="size" [name]="illustration.key"></kirby-x-spot-illustration>
+      }
+      @else {
+        N/A
+      }
+    </ng-template>
     `,
   }),
 };

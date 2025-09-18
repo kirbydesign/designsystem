@@ -20,16 +20,28 @@
   display: block;
 }
 
+:host-context(.kirby-color-brightness-dark) {
+  --kirby-x-spot-illustration-background-color: var(--kirby-white-overlay);
+  --kirby-x-spot-illustration-outline-color: var(--kirby-white);
+  --kirby-x-spot-illustration-highlight-color: var(--kirby-primary);
+}
+
+:host-context(.kirby-color-brightness-white) {
+  --kirby-x-spot-illustration-background-color: var(--kirby-dark-overlay);
+  --kirby-x-spot-illustration-outline-color: var(--kirby-black);
+  --kirby-x-spot-illustration-highlight-color: var(--kirby-primary);
+}
+
 ion-icon::part(background) {
-  fill: var(--kirby-spot-illustration-background-color, var(--kirby-dark-overlay));
+  fill: var(--kirby-x-spot-illustration-background-color, var(--kirby-dark-overlay));
 }
 
 ion-icon::part(outline) {
-  fill: var(--kirby-spot-illustration-outline-color, var(--kirby-black));
+  fill: var(--kirby-x-spot-illustration-outline-color, var(--kirby-black));
 }
 
 ion-icon::part(highlight) {
-  fill: var(--kirby-spot-illustration-highlight-color, var(--kirby-primary));
+  fill: var(--kirby-x-spot-illustration-highlight-color, var(--kirby-primary));
 }
 
 /* The following 3 shouldn't be overridden */

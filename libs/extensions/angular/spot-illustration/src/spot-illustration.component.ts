@@ -2,8 +2,8 @@ import { Component, computed, input } from '@angular/core';
 import { IonIcon } from '@ionic/angular/standalone';
 import {
   Illustration,
-  IllustrationName,
   illustrations,
+  SpotIllustrationName,
   SpotIllustrationSize,
 } from './spot-illustrations';
 
@@ -15,7 +15,7 @@ import {
 })
 export class SpotIllustrationComponent {
   size = input<SpotIllustrationSize>(SpotIllustrationSize.MD);
-  name = input.required<IllustrationName>();
+  name = input.required<SpotIllustrationName>();
 
   illustration = computed(() => {
     const name = this.name();
