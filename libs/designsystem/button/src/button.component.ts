@@ -5,12 +5,14 @@ import {
   ContentChild,
   ElementRef,
   HostBinding,
-  HostListener,
   Input,
+  OnDestroy,
+  OnInit,
   Renderer2,
 } from '@angular/core';
 
 import { NotificationColor } from '@kirbydesign/core';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
@@ -30,7 +32,7 @@ export type AttentionLevel = '1' | '2' | '3';
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent implements AfterContentInit {
+export class ButtonComponent implements AfterContentInit, OnDestroy, OnInit {
   @Input() attentionLevel: AttentionLevel;
 
   @HostBinding('class.no-decoration')
@@ -92,10 +94,30 @@ export class ButtonComponent implements AfterContentInit {
   @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef?: ElementRef<HTMLElement>;
 
+  private disposeEventListeners: EventListenerDisposeFn[] = [];
+
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {}
+
+  ngOnInit(): void {
+    this.setupEventListenerForAriaDisabledHandling();
+  }
+
+  setupEventListenerForAriaDisabledHandling() {
+    // Prevent event bubbling for aria-disabled buttons using a native event listener.
+    // HostListener cannot block event bubbling, see: https://github.com/angular/angular/issues/9587
+    ['click', 'keydown.enter', 'keydown.space'].forEach((evt) => {
+      const disposeEventListener = this.renderer.listen(
+        this.elementRef.nativeElement,
+        evt,
+        this.blockEventIfAriaDisabled.bind(this),
+        { capture: true }
+      );
+      this.disposeEventListeners.push(disposeEventListener);
+    });
+  }
 
   private wrapTextNode(iconElement?: HTMLElement) {
     if (!iconElement) {
@@ -153,12 +175,14 @@ export class ButtonComponent implements AfterContentInit {
     }
   }
 
-  @HostListener('keydown.enter', ['$event'])
-  @HostListener('keydown.space', ['$event'])
-  _onEnterOrSpace(event: KeyboardEvent) {
+  private blockEventIfAriaDisabled(event: Event) {
     if (this.elementRef.nativeElement.ariaDisabled === 'true') {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
+  }
+
+  ngOnDestroy() {
+    this.disposeEventListeners.forEach((unlistenEvent) => unlistenEvent());
   }
 }
