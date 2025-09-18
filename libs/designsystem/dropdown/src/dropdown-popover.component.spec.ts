@@ -782,6 +782,40 @@ describe('DropdownComponent (popover version)', () => {
         });
       });
 
+      describe('when a printable character key is pressed repeatedly', () => {
+        const testItems = [
+          { text: 'Banana', value: 1 },
+          { text: 'Blueberry', value: 2 },
+          { text: 'Blackberry', value: 3 },
+          { text: 'Apple', value: 4 },
+        ];
+
+        beforeEach(() => {
+          spectator.setHostInput('items', testItems);
+          spectator.component['state'] = OpenState.open;
+          spectator.component.focusedIndex = -1;
+          spectator.detectChanges();
+        });
+
+        it('should cycle focus through items starting with the repeated character', () => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(0);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(1);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(2);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
+      });
+
       describe('when a printable character key is pressed', () => {
         beforeEach(() => {
           spectator.component['state'] = OpenState.open;

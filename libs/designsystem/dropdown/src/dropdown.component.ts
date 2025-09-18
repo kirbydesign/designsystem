@@ -598,11 +598,31 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.open();
     }
 
-    this.addToSearchBuffer(key);
+    // If the same character is typed twice, the search buffer should only contain that character once
+    if (
+      this.searchBuffer.length === 1 &&
+      this.searchBuffer[0].toLowerCase() === key.toLowerCase()
+    ) {
+      this.searchBuffer = key;
+    } else {
+      this.addToSearchBuffer(key);
+    }
 
-    let foundItemIndex = this.getIndexOfItemByFirstCharacter(this.searchBuffer);
-    if (foundItemIndex === -1 && this.searchBuffer.length > 1) {
-      foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
+    const isMultiCharSearch = this.searchBuffer.length > 1;
+    let startIndex = 0;
+
+    if (!isMultiCharSearch && this.isOpen) {
+      startIndex = this.focusedIndex + 1;
+    }
+
+    let foundItemIndex = this.getIndexOfItemByFirstCharacter(this.searchBuffer, startIndex);
+
+    if (foundItemIndex === -1 && isMultiCharSearch) {
+      foundItemIndex = this.getIndexOfItemByFirstCharacter(key, startIndex);
+    }
+
+    if (foundItemIndex === -1 && !isMultiCharSearch && this.isOpen) {
+      foundItemIndex = this.getIndexOfItemByFirstCharacter(this.searchBuffer, 0);
     }
 
     if (foundItemIndex > -1) {
@@ -610,9 +630,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  private getIndexOfItemByFirstCharacter(char: string) {
+  private getIndexOfItemByFirstCharacter(char: string, startIndex: number = 0) {
     let itemTexts: string[];
-
     // Prefer slotted/projected items if present
     if (this.kirbyItemsSlotted && this.kirbyItemsSlotted.length) {
       itemTexts = this.kirbyItemsSlotted
@@ -622,14 +641,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       itemTexts = this.items.map((item) => this.getTextFromItem(item) ?? '');
     }
 
-    // If multi-character search, always start from 0
-    const isMultiCharSearch = this.searchBuffer && this.searchBuffer.length > 1;
-    let startIndex: number;
-    if (isMultiCharSearch) {
-      startIndex = 0;
-    } else if (this.isOpen) {
-      startIndex = this.focusedIndex + 1;
-    }
     return StringSearchHelper.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
   }
 
