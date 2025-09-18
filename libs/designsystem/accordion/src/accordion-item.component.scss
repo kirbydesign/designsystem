@@ -31,6 +31,7 @@ $padding: utils.size('s');
   & {
     display: flex;
     align-items: center;
+    gap: utils.size('xxs');
     height: utils.size('xxxl');
     padding-left: $padding;
     padding-right: $padding;
@@ -41,6 +42,7 @@ $padding: utils.size('s');
     background: none;
     box-shadow: none;
     font-family: var(--kirby-font-family);
+    text-align: start;
   }
 }
 
