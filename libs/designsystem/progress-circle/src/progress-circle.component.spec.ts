@@ -353,10 +353,8 @@ describe('ProgressCircleComponent', () => {
     });
 
     it('should render progress stroke with themeColor `success`, when themeColor is not set', () => {
-      const themeColor: ThemeColor = 'success';
-
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor(themeColor),
+        stroke: getColor('success', 'shade'),
       });
     });
 
@@ -366,7 +364,7 @@ describe('ProgressCircleComponent', () => {
       spectator.detectChanges();
 
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor(themeColor),
+        stroke: getColor('success', 'shade'),
       });
     });
 
@@ -375,8 +373,10 @@ describe('ProgressCircleComponent', () => {
       spectator.setInput('themeColor', themeColor);
       spectator.detectChanges();
 
+      const color = getColor('warning', 'shade');
+      console.log('color', color);
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor(themeColor),
+        stroke: getColor('warning', 'shade'),
       });
     });
 

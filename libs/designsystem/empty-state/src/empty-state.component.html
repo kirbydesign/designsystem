@@ -5,7 +5,11 @@
     </div>
   }
   @if (title) {
-    <span class="title kirby-text-medium">{{ title }}</span>
+    @if (_insideModal) {
+      <h2 class="title kirby-text-medium">{{ title }}</h2>
+    } @else {
+      <span class="title kirby-text-medium">{{ title }}</span>
+    }
   }
   @if (subtitle) {
     <p class="subtitle">{{ subtitle }}</p>

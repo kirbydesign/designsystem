@@ -24,6 +24,7 @@ import {
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { from } from 'rxjs';
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 
 export type TriggerEvent = 'hover' | 'click' | 'focus';
 
@@ -49,8 +50,6 @@ interface EventMethods {
   event: string;
   method: () => void;
 }
-
-type EventListenerDisposeFn = () => void;
 
 /**
  * @summary FloatingDirective is a utility that lets you declarative anchor "popup" containers to another element.
@@ -211,9 +210,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
-  private referenceEventListenerDisposeFns: EventListenerDisposeFn[] = [];
-  private documentClickEventListenerDisposeFn: EventListenerDisposeFn;
-  private hostClickEventListenerDisposeFn: EventListenerDisposeFn;
+  private disposeTriggerEventListeners: EventListenerDisposeFn[] = [];
+  private disposeDocumentClickListener: EventListenerDisposeFn;
+  private disposeHostClickListener: EventListenerDisposeFn;
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -371,23 +370,21 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private attachDocumentClickEventHandler(): void {
-    if (this.documentClickEventListenerDisposeFn) {
+    if (this.disposeDocumentClickListener) {
       return;
     }
 
-    this.documentClickEventListenerDisposeFn = this.renderer.listen(
-      'document',
-      'mousedown',
-      (event) => this.handleClickOutsideHostElement(event)
+    this.disposeDocumentClickListener = this.renderer.listen('document', 'mousedown', (event) =>
+      this.handleClickOutsideHostElement(event)
     );
   }
 
   private attachHostClickEventHandler(): void {
-    if (this.hostClickEventListenerDisposeFn || !this.closeOnSelect) {
+    if (this.disposeHostClickListener || !this.closeOnSelect) {
       return;
     }
 
-    this.hostClickEventListenerDisposeFn = this.renderer.listen(
+    this.disposeHostClickListener = this.renderer.listen(
       this.elementRef.nativeElement,
       'click',
       () => this.handleClickInsideHostElement()
@@ -402,12 +399,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
 
     events.forEach((event: EventMethods) => {
-      const eventListenerDisposeFn: EventListenerDisposeFn = this.renderer.listen(
+      const disposeTriggerEventListener: EventListenerDisposeFn = this.renderer.listen(
         this.reference?.nativeElement,
         event.event,
         event.method
       );
-      this.referenceEventListenerDisposeFns.push(eventListenerDisposeFn);
+      this.disposeTriggerEventListeners.push(disposeTriggerEventListener);
     });
   }
 
@@ -459,25 +456,21 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownReferenceElementEventHandling(): void {
-    this.referenceEventListenerDisposeFns.forEach(
-      (eventListenerDisposeFunction: EventListenerDisposeFn) => {
-        if (eventListenerDisposeFunction != null) {
-          eventListenerDisposeFunction();
-        }
-      }
+    this.disposeTriggerEventListeners.forEach((disposeTriggerEventListener) =>
+      disposeTriggerEventListener?.()
     );
-    this.referenceEventListenerDisposeFns = [];
+    this.disposeTriggerEventListeners = [];
   }
 
   private tearDownDocumentClickEventHandling(): void {
-    if (this.documentClickEventListenerDisposeFn) {
-      this.documentClickEventListenerDisposeFn();
-      this.documentClickEventListenerDisposeFn = null;
+    if (this.disposeDocumentClickListener) {
+      this.disposeDocumentClickListener();
+      this.disposeDocumentClickListener = null;
     }
 
-    if (this.hostClickEventListenerDisposeFn) {
-      this.hostClickEventListenerDisposeFn();
-      this.hostClickEventListenerDisposeFn = null;
+    if (this.disposeHostClickListener) {
+      this.disposeHostClickListener();
+      this.disposeHostClickListener = null;
     }
   }
 

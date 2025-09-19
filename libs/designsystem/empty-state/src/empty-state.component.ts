@@ -36,6 +36,7 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
   get title(): string {
     return this._title;
   }
+  _insideModal: boolean = false;
 
   @Input() subtitle: string;
 
@@ -54,6 +55,7 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
      */
     this.ionModalDialog = getIonModalDialogAncestor(this.elementRef.nativeElement);
     if (this.ionModalDialog) {
+      this._insideModal = true;
       this.renderer.setAttribute(this.ionModalDialog, 'aria-label', this.title);
     }
   }
