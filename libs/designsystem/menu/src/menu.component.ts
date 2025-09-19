@@ -101,7 +101,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   public floatingMenuIsShown: boolean = false;
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
-  private scrollListenerDisposeFn: EventListenerDisposeFn;
+  private disposeIonScrollListener: EventListenerDisposeFn;
   private focusedIndex = -1;
 
   @HostListener('keydown', ['$event'])
@@ -254,7 +254,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
        * Listen for ionScroll outside of Angular's change detection to
        * avoid a change detection cycle for every scroll-event fired
        */
-      this.scrollListenerDisposeFn = this.renderer.listen(document, 'ionScroll', () => {
+      this.disposeIonScrollListener = this.renderer.listen(document, 'ionScroll', () => {
         this.floatingMenu.hide();
       });
     });
@@ -330,6 +330,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   ngOnDestroy(): void {
-    this.scrollListenerDisposeFn?.();
+    this.disposeIonScrollListener?.();
   }
 }

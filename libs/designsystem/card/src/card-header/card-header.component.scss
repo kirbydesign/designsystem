@@ -13,6 +13,25 @@
   &.has-padding {
     padding: var(--kirby-internal-card-header-padding, utils.size('s'));
   }
+
+  // Flagged card headers
+  &.success {
+    --kirby-card-header-background-color: #{utils.get-color('success-tint')};
+  }
+
+  &.warning {
+    --kirby-card-header-background-color: #{utils.get-color('warning-tint')};
+  }
+
+  &.danger {
+    --kirby-card-header-background-color: #{utils.get-color('danger-tint')};
+  }
+
+  &.info {
+    --kirby-card-header-background-color: #{utils.get-color('semi-light')};
+  }
+
+  --kirby-card-header-color: #{utils.get-color('black')};
 }
 
 .title {
@@ -27,37 +46,6 @@
 .subtitle {
   font-size: utils.font-size('s');
   margin-bottom: 0;
-}
-
-// Flagged card headers
-
-// key = level, value = decoration color name + shade
-$_card-header-notification-colors-map: (
-  'success': (
-    'green',
-    30,
-  ),
-  'warning': (
-    'yellow',
-    30,
-  ),
-  'danger': (
-    'red',
-    30,
-  ),
-  'info': 'semi-light',
-);
-
-@each $name, $variant_shade in $_card-header-notification-colors-map {
-  :host(.#{$name}) {
-    @if meta.type_of($variant_shade) == list {
-      --kirby-card-header-background-color: #{utils.get-decoration-color($variant_shade...)};
-    } @else {
-      --kirby-card-header-background-color: #{utils.get-color($variant_shade)};
-    }
-
-    --kirby-card-header-color: #{utils.get-color('black')};
-  }
 }
 
 :host(.flagged) {
