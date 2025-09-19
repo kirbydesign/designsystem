@@ -44,18 +44,6 @@ export class DropdownShowcaseComponent {
   size: string = 'md';
   properties: ApiDescriptionProperty[] = [
     {
-      name: 'aria-label',
-      description: 'Provides an accessible label for the dropdown.',
-      defaultValue: 'undefined',
-      type: ['string'],
-    },
-    {
-      name: 'aria-labelledby',
-      description: 'The ID of the element that labels the dropdown.',
-      defaultValue: 'undefined',
-      type: ['string'],
-    },
-    {
       name: 'size',
       description:
         'The size of the dropdown. The touch area will always be a minimum of 44px by 44px. If the dropdown is smaller than this, the surrounding area will still be clickable, to preserve accessibility.',

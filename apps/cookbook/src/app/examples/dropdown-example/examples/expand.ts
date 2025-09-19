@@ -9,12 +9,12 @@ const config = {
   aria-label="Choose your favorite fruit"
   expand="block"
   [items]="[
-        'Apple',   
-        'Banana',
-        'Blackberry',
-        'Blueberry',   
-        'Grapes',
-      ]"
+    'Apple',   
+    'Banana',
+    'Blackberry',
+    'Blueberry',   
+    'Grapes',
+    ]"
 ></kirby-dropdown>`,
 };
 

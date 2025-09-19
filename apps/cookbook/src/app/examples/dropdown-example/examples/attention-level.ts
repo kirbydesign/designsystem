@@ -16,9 +16,9 @@ const config = {
     expand="block"
     usePopover="true"
     [items]="items">
-    </kirby-dropdown>
+  </kirby-dropdown>
 
-    <kirby-dropdown
+  <kirby-dropdown
     [size]="size"
     placeholder="Dropdown with attention level 2"
     aria-label="Choose your favorite fruit"
@@ -40,16 +40,16 @@ const config = {
 </kirby-card>
 
 <div>
-<select (change)="onChange($event.target.value)">
-  @for (color of themeColors; track $index) {
-    <option
-      value="{{ color }}"
-      [attr.selected]="themeColor === color ? true : null"
-    >
-      Card color: {{ color }}
-    </option>
-  }
-</select>
+  <select (change)="onChange($event.target.value)">
+    @for (color of themeColors; track $index) {
+      <option
+        value="{{ color }}"
+        [attr.selected]="themeColor === color ? true : null"
+      >
+        Card color: {{ color }}
+      </option>
+    }
+  </select>
 </div>
 
 <p class="comment small">

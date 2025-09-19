@@ -7,13 +7,13 @@ const config = {
   [size]="size"
   placeholder="Right aligned (opens left)"
   aria-label="Choose your favorite fruit"
- [items]="[
-        'Apple',   
-        'Banana',
-        'Blackberry',
-        'Blueberry',   
-        'Grapes',
-      ]"
+  [items]="[
+    'Apple',   
+    'Banana',
+    'Blackberry',
+    'Blueberry',   
+    'Grapes',
+    ]"
   popout="left"
 ></kirby-dropdown>`,
   styles: [

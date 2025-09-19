@@ -6,13 +6,13 @@ const config = {
   template: `<kirby-dropdown
   [size]="size"
   aria-label="Choose your favorite fruit"
-        [items]="[
-        'Apple',   
-        'Banana',
-        'Blackberry',
-        'Blueberry',   
-        'Grapes (preselected)',
-      ]"
+  [items]="[
+    'Apple',   
+    'Banana',
+    'Blackberry',
+    'Blueberry',   
+    'Grapes (preselected)',
+    ]"
   [selectedIndex]="4"
 ></kirby-dropdown>`,
 };

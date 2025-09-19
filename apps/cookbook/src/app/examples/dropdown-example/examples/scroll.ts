@@ -7,24 +7,24 @@ const config = {
   [size]="size"
   aria-label="Choose your favorite fruit"
   placeholder="Dropdown with scroll (> 8 items)"
-[items]="[
-  'Apple',
-  'Banana',
-  'Blackberry',
-  'Blueberry',
-  'Carrot',
-  'Cherry',
-  'Cucumber',
-  'Date',
-  'Eggplant',
-  'Fig',
-  'Grapes',
-  'Kiwi',
-  'Lemon',
-  'Mango',
-  'Orange',
-  'Peach'
-]"
+  [items]="[
+    'Apple',
+    'Banana',
+    'Blackberry',
+    'Blueberry',
+    'Carrot',
+    'Cherry',
+    'Cucumber',
+    'Date',
+    'Eggplant',
+    'Fig',
+    'Grapes',
+    'Kiwi',
+    'Lemon',
+    'Mango',
+    'Orange',
+    'Peach'
+    ]"
 ></kirby-dropdown>`,
 };
 
