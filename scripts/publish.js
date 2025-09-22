@@ -83,7 +83,7 @@ function buildPackage(project) {
 
 function writeCoreVersionToPackageJson(distPackageJsonPath) {
   return fs.readJson(distPackageJsonPath, 'utf-8').then((packageJson) => {
-    packageJson.dependencies['@kirbydesign/core'] = coreVersion;
+    packageJson.peerDependencies['@kirbydesign/core'] = '^' + coreVersion;
 
     // (over-)write destination package.json file
     const json = JSON.stringify(packageJson, null, 2);

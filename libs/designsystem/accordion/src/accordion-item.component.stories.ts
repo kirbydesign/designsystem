@@ -7,11 +7,15 @@ import { importProvidersFrom } from '@angular/core';
 import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { AccordionExampleComponent } from '~/app/examples/accordion-example/accordion-example.component';
 
 const meta: Meta<AccordionItemComponent> = {
   component: AccordionItemComponent,
   title: 'Components / Accordion',
+  parameters: {
+    chromatic: { modes: { ...responsiveModes } },
+  },
   decorators: [
     moduleMetadata({
       imports: [AccordionModule, AccordionExampleComponent],
