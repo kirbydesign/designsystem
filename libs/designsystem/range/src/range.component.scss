@@ -3,7 +3,9 @@
 
 $tick-height: 6px;
 $tick-width: 6px;
-$knob-shadow: 0 5px 10px 0 rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 8%);
+$knob-shadow:
+  0 5px 10px 0 rgb(28 28 28 / 30%),
+  0 0 5px 0 rgb(28 28 28 / 8%);
 
 :host {
   display: flex;
@@ -63,10 +65,10 @@ ion-range {
     font-size: utils.font-size('xs');
     color: var(--pin-color);
     background-color: var(--pin-background);
-    padding: utils.size('xxxxs') utils.size('xxxs');
-    border-radius: 4px;
-    min-width: 40px;
-    position: relative;
+    padding: utils.size('xxxxs') utils.size('xxs');
+    border-radius: utils.size('xxxs');
+    min-width: utils.size('m');
+    top: -#{utils.size('xxs')};
 
     &::before {
       content: '';
