@@ -86,12 +86,12 @@ describe('DropdownComponent (popover version)', () => {
       expect(button.attentionLevel).toEqual('3');
     });
 
-    it('should not render disabled attribute', () => {
-      expect(spectator.element.attributes['disabled']).toBeUndefined();
-    });
-
     it('should render no-blur attribute', () => {
       expect(spectator.element.attributes['no-blur']).toBeDefined();
+    });
+
+    it('should not render disabled attribute', () => {
+      expect(spectator.element.attributes['disabled']).toBeUndefined();
     });
 
     it('should not render button as disabled ', () => {
@@ -100,6 +100,10 @@ describe('DropdownComponent (popover version)', () => {
 
     it('should not render disabled attribute on button', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
+    });
+
+    it('should have type="button" attribute', () => {
+      expect(buttonElement).toHaveAttribute('type', 'button');
     });
 
     it('should have correct id on button', () => {
@@ -119,10 +123,6 @@ describe('DropdownComponent (popover version)', () => {
         });
       });
     }));
-
-    it('should have type="button" attribute', () => {
-      expect(buttonElement).toHaveAttribute('type', 'button');
-    });
 
     describe('ARIA attributes', () => {
       let listboxId: string;
@@ -329,7 +329,6 @@ describe('DropdownComponent (popover version)', () => {
 
         expect(cardRect.right).toEqual(buttonRect.right);
       }));
-
       it('open card to the left when popout=left', () => {
         spectator.component.popout = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
@@ -395,6 +394,9 @@ describe('DropdownComponent (popover version)', () => {
 
           expect(spectator.component.isOpen).toBeTruthy();
         }));
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
       });
 
       describe('and Enter key is pressed', () => {
@@ -404,24 +406,85 @@ describe('DropdownComponent (popover version)', () => {
 
           expect(spectator.component.isOpen).toBeTruthy();
         }));
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
       });
 
-      describe('and ArrowDown key is pressed', () => {
-        it('should open dropdown', fakeAsync(() => {
-          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+      describe('and Home key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Home');
           tick(openDelayInMs);
-
-          expect(spectator.component.isOpen).toBeTruthy();
         }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
+      });
+
+      describe('and End key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'End');
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus last item', () => {
+          expect(spectator.component.focusedIndex).toBe(items.length - 1);
+        });
       });
 
       describe('and ArrowUp key is pressed', () => {
-        it('should open dropdown', fakeAsync(() => {
+        beforeEach(fakeAsync(() => {
+          buttonElement.focus();
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
           tick(openDelayInMs);
-
-          expect(spectator.component.isOpen).toBeTruthy();
         }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
+        it('should keep DOM focus on the button', () => {
+          expect(document.activeElement).toEqual(buttonElement);
+        });
+      });
+
+      describe('and ArrowDown key is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          buttonElement.focus();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should keep DOM focus on the button', () => {
+          expect(document.activeElement).toEqual(buttonElement);
+        });
+      });
+
+      describe('and Alt+ArrowDown is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          const event = new KeyboardEvent('keydown', {
+            key: 'ArrowDown',
+            altKey: true,
+            bubbles: true,
+            cancelable: true,
+          });
+          spectator.element.dispatchEvent(event);
+          tick(openDelayInMs);
+        }));
+        it('should open dropdown', () => {
+          expect(spectator.component.isOpen).toBeTruthy();
+        });
+        it('should focus first item', () => {
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
       });
 
       describe('and first item is selected', () => {
@@ -519,9 +582,21 @@ describe('DropdownComponent (popover version)', () => {
       });
 
       describe('and Tab key is pressed', () => {
-        it('should close dropdown', () => {
+        beforeEach(() => {
+          spectator.component['state'] = OpenState.open;
+          spectator.component.focusedIndex = 2;
+          spectator.detectChanges();
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Tab');
+          spectator.detectChanges();
+        });
+
+        it('should close dropdown', () => {
           expect(spectator.component.isOpen).toBeFalsy();
+        });
+
+        it('should select the focused item', () => {
+          expect(spectator.component.selectedIndex).toBe(2);
+          expect(spectator.component.value).toEqual(items[2]);
         });
       });
 
@@ -545,6 +620,44 @@ describe('DropdownComponent (popover version)', () => {
           spectator.setHostInput('selectedIndex', 2);
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowRight');
           expect(spectator.component.selectedIndex).toEqual(2);
+        });
+      });
+
+      describe('and Alt+ArrowUp is pressed', () => {
+        beforeEach(fakeAsync(() => {
+          const event = new KeyboardEvent('keydown', {
+            key: 'ArrowUp',
+            altKey: true,
+            bubbles: true,
+            cancelable: true,
+          });
+          spectator.element.dispatchEvent(event);
+          tick(openDelayInMs);
+        }));
+        it('should close dropdown', () => {
+          expect(spectator.component.isOpen).toBeFalsy();
+        });
+      });
+
+      describe('when PageDown key is pressed', () => {
+        it('should jump focus down 10 items or to last item', () => {
+          spectator.component.focusedIndex = 0;
+          spectator.detectChanges();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'PageDown');
+          spectator.detectChanges();
+          const expectedIndex = Math.min(spectator.component.items.length - 1, 0 + 10);
+          expect(spectator.component.focusedIndex).toBe(expectedIndex);
+        });
+      });
+
+      describe('when PageUp key is pressed', () => {
+        it('should jump focus up 10 items or to first item', () => {
+          spectator.component.focusedIndex = 4;
+          spectator.detectChanges();
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'PageUp');
+          spectator.detectChanges();
+          const expectedIndex = Math.max(0, 4 - 10);
+          expect(spectator.component.focusedIndex).toBe(expectedIndex);
         });
       });
 
@@ -667,6 +780,111 @@ describe('DropdownComponent (popover version)', () => {
             });
           });
         });
+      });
+
+      describe('when a printable character key is pressed repeatedly', () => {
+        const testItems = [
+          { text: 'Banana', value: 1 },
+          { text: 'Blueberry', value: 2 },
+          { text: 'Blackberry', value: 3 },
+          { text: 'Apple', value: 4 },
+        ];
+
+        beforeEach(() => {
+          spectator.setHostInput('items', testItems);
+          spectator.component['state'] = OpenState.open;
+          spectator.component.focusedIndex = -1;
+          spectator.detectChanges();
+        });
+
+        it('should cycle focus through items starting with the repeated character', () => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(0);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(1);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(2);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'B');
+          spectator.detectChanges();
+          expect(spectator.component.focusedIndex).toBe(0);
+        });
+      });
+
+      describe('when a printable character key is pressed', () => {
+        beforeEach(() => {
+          spectator.component['state'] = OpenState.open;
+          spectator.detectChanges();
+        });
+
+        it('should focus/select the first item starting with that character', () => {
+          const testItems = [
+            { text: 'Apple', value: 1 },
+            { text: 'Banana', value: 2 },
+            { text: 'Cherry', value: 3 },
+            { text: 'Date', value: 4 },
+            { text: 'Elderberry', value: 5 },
+          ];
+          spectator.setHostInput('items', testItems);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'c');
+          expect(spectator.component.focusedIndex).toBe(2);
+          expect(spectator.component.value).not.toEqual(testItems[2]);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
+          expect(spectator.component.focusedIndex).toBe(1);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'E');
+          expect(spectator.component.focusedIndex).toBe(4);
+
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'D');
+          expect(spectator.component.focusedIndex).toBe(3);
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+          expect(spectator.component.selectedIndex).toBe(3);
+          expect(spectator.component.value).toEqual(testItems[3]);
+        });
+
+        it('should not change focus if no item starts with the character', () => {
+          const initialFocusedIndex = spectator.component.focusedIndex;
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Z');
+          expect(spectator.component.focusedIndex).toBe(initialFocusedIndex);
+        });
+      });
+    });
+
+    describe('when a multi-character key sequence is pressed', () => {
+      const testItems = [
+        { text: 'Banana 1', value: 1 },
+        { text: 'Banana 2', value: 2 },
+        { text: 'Banana 3', value: 3 },
+      ];
+
+      beforeEach(() => {
+        spectator.component['state'] = OpenState.open;
+        spectator.setHostInput('items', testItems);
+      });
+
+      it('should focus/select the first item starting with the sequence', () => {
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'a');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'n');
+
+        expect(spectator.component.focusedIndex).toBe(0);
+      });
+
+      it('should focus first item when multi-character sequence matches, even if another item is focused', () => {
+        spectator.component.focusedIndex = 1;
+
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'b');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'a');
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'n');
+
+        expect(spectator.component.focusedIndex).toBe(0);
       });
     });
 
