@@ -403,7 +403,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
-      this.scrollItemIntoView(this.selectedIndex);
+      this.scrollItemIntoView(this.focusedIndex);
       this.changeDetectorRef.markForCheck();
     }
   }
