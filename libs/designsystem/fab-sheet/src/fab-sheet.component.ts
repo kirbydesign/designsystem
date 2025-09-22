@@ -17,7 +17,7 @@ import { IonBackdrop, IonFab, IonFabButton, IonFabList } from '@ionic/angular/st
 import { DOCUMENT } from '@angular/common';
 
 const KIRBY_FAB_SHEET_DEPRECATION_WARNING =
-  '[Kirby fab sheet] Under deprecation - Use Header Action Group instead';
+  '[Kirby fab sheet] Deprecated - Use Header with Action Group instead';
 
 @Component({
   imports: [IonBackdrop, IonFab, IonFabButton, IonFabList],

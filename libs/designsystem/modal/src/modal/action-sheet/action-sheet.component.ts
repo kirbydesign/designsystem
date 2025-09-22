@@ -4,6 +4,9 @@ import { CardModule } from '@kirbydesign/designsystem/card';
 
 import { ActionSheetItem } from './config/action-sheet-item';
 
+const KIRBY_ACTION_SHEET_DEPRECATION_WARNING =
+  '[Kirby action sheet] Deprecated - Use Menu component instead';
+
 @Component({
   imports: [CardModule, ButtonComponent],
   selector: 'kirby-action-sheet',
@@ -19,6 +22,10 @@ export class ActionSheetComponent {
   @Input() items: Array<ActionSheetItem>;
   @Output() cancel = new EventEmitter();
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
+
+  constructor() {
+    console.warn(KIRBY_ACTION_SHEET_DEPRECATION_WARNING);
+  }
 
   onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
