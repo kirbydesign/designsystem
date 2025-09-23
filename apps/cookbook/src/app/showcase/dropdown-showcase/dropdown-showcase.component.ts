@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { DropdownExampleConfigurationComponent } from '../../examples/dropdown-example/dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { DropdownExampleDefaultComponent } from '../../examples/dropdown-example/examples/default';
@@ -36,17 +37,12 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
+    DividerComponent,
   ],
 })
 export class DropdownShowcaseComponent {
   size: string = 'md';
   properties: ApiDescriptionProperty[] = [
-    {
-      name: 'items',
-      description: 'The items rendered within the dropdown.',
-      defaultValue: '[ ]',
-      type: ['Array<string> | Array<any>'],
-    },
     {
       name: 'size',
       description:

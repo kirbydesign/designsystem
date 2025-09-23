@@ -6,8 +6,15 @@ const config = {
   template: `<kirby-dropdown
   [size]="size"
   placeholder="Block level Dropdown"
+  aria-label="Choose your favorite fruit"
   expand="block"
-  [items]="items"
+  [items]="[
+    'Apple',   
+    'Banana',
+    'Blackberry',
+    'Blueberry',   
+    'Grapes',
+    ]"
 ></kirby-dropdown>`,
 };
 
@@ -18,6 +25,5 @@ const config = {
 })
 export class DropdownExampleExpandComponent {
   template: string = config.template;
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
   @Input() size: string;
 }
