@@ -1,3 +1,7 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../utils';
+
 /*
  * Modal variables
  *
@@ -39,6 +43,10 @@ $modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-he
     $modal-close-button-vertical-margin + $modal-header-vertical-padding;
   $modal-header-vertical-center: math.round($modal-header-total-height * 0.5);
   @return $modal-header-vertical-center;
+}
+
+body.allow-background-scroll {
+  overflow: initial !important;
 }
 
 ion-modal::part(backdrop) {

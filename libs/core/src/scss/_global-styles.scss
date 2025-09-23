@@ -1,5 +1,3 @@
-@use 'sass:map';
-@use 'sass:math';
 @use 'utils';
 @use 'base/design-tokens';
 @use 'base/ionic';
@@ -12,7 +10,6 @@
 @use 'components/grid';
 @use 'components/overlays';
 @use 'themes/component-themes';
-
 
 :root,
 :host {
@@ -30,10 +27,6 @@
 
   // Prevent iOS tap highlight:
   -webkit-tap-highlight-color: transparent;
-}
-
-body.allow-background-scroll {
-  overflow: initial !important;
 }
 
 /*
