@@ -40,11 +40,10 @@ export const RangePin: Story = {
   render: (args) => ({
     props: args,
     styles: [
-      `
       // Pin only shows on drag interaction, but can be imitated with transform: scale(1) for testing.
       // Scaling messes with Ionics translate styles that move it to the right position.
       // But since we just want to verify its dimensions, we simply hide the knob and show just the pin.
-
+      `
       ::ng-deep ion-range::part(pin) {
         transform: scale(1);
       }
