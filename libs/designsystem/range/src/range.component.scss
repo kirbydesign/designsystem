@@ -68,7 +68,7 @@ ion-range {
     padding: utils.size('xxxxs') utils.size('xxs');
     border-radius: utils.size('xxxs');
     min-width: utils.size('m');
-    top: -#{utils.size('xxs')};
+    top: -#{utils.size('xs')};
 
     &::before {
       content: '';
