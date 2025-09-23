@@ -44,6 +44,10 @@ export const RangePin: Story = {
       // Scaling messes with Ionics translate styles that move it to the right position.
       // But since we just want to verify its dimensions, we simply hide the knob and show just the pin.
       `
+      kirby-range {
+        margin: var(--kirby-spacing-l);
+      }
+
       ::ng-deep ion-range::part(pin) {
         transform: scale(1);
       }
