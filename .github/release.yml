@@ -2,8 +2,7 @@ changelog:
   exclude:
     labels:
       - ignore-for-release
-    authors:
-      - app/dependabot
+      - dependencies
   categories:
     - title: Breaking Changes 🛠
       labels:
