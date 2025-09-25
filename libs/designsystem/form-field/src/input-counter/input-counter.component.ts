@@ -13,7 +13,7 @@ import { TextareaComponent } from './../textarea/textarea.component';
 export class InputCounterComponent implements OnInit, OnDestroy {
   @Input() listenTo: InputComponent | TextareaComponent;
   length: number;
-  maxlength: number = 0;
+  maxlength: number;
   private _inputChangeSubscription: Subscription;
 
   get text(): string {
