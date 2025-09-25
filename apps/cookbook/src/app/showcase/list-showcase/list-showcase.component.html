@@ -152,6 +152,28 @@
   </div>
 </div>
 
+<h2>Accessibility</h2>
+<h3>Lists</h3>
+<p>
+  Always provide an accessible label for your list using the
+  <code>aria-label</code>
+  or
+  <code>aria-labelledby</code>
+  attribute on the
+  <code>kirby-list</code>
+  component. This helps screen reader users understand the purpose and content of the list.
+</p>
+<p>
+  The
+  <code>kirby-list</code>
+  component uses correct ARIA roles (
+  <code>role="list"</code>
+  and
+  <code>role="listitem"</code>
+  on its children) to ensure that assistive technologies recognize the structure as a list. The
+  accessible label you provide will be announced together with the number of items in the list.
+</p>
+
 <h2>API:</h2>
 <cookbook-api-description-properties
   [properties]="properties"
