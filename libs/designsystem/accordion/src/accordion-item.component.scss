@@ -77,6 +77,11 @@ button[disabled] {
   }
 }
 
+button {
+  // Enforce button text color to avoid inheriting native button color from browser
+  color: utils.get-color('black');
+}
+
 button[aria-expanded='true'] {
   .title {
     font-weight: utils.font-weight('bold');
