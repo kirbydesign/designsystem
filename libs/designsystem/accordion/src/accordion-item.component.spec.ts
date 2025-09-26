@@ -75,6 +75,12 @@ describe('AccordionItemComponent', () => {
         padding: '0px',
       });
     });
+
+    it('should have correct text color in title', () => {
+      expect(spectator.query('.title')).toHaveComputedStyle({
+        color: getTextColor('black'),
+      });
+    });
   });
 
   describe('when expanded', () => {
