@@ -5,7 +5,7 @@ import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
-export const ListItemsExampleTemplate = `<kirby-list [items]="items" aria-label="Campanies">
+export const ListItemsExampleTemplate = `<kirby-list [items]="items" aria-label="Companies">
    <kirby-item *kirbyListItemTemplate="let item">
      <p class="kirby-item-title">{{item.title}}</p>
      <data slot="end">{{item.amount}}</data>
