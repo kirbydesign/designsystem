@@ -70,9 +70,8 @@ describe('ToastHelper', () => {
         ['warning', ['orange', 40]],
       ]);
 
-      //TODO: This flaky test has been skipped
       messageTypeColorMap.forEach((notificationColor, messageType) => {
-        xit(`should render with correct background color for messageType = '${messageType}'`, async () => {
+        it(`should render with correct background color for messageType = '${messageType}'`, async () => {
           overlay = await spectator.service.showToast({
             message: 'Test Message',
             messageType: messageType,
