@@ -9,7 +9,7 @@ import {
   LOCALE_ID,
   Renderer2,
 } from '@angular/core';
-import Inputmask from 'inputmask';
+import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
 @Directive({
   standalone: true,

@@ -9,7 +9,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import Inputmask from 'inputmask';
+import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
 interface InputMask {
   unmaskedvalue: () => string;
