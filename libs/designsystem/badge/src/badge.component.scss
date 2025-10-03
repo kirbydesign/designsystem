@@ -1,8 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$badge-border-radius: 0.5rem;
-$badge-size-small: 0.5rem;
-$badge-size-medium: 1rem;
+$badge-size-small: utils.relative-spacing('xxs');
+$badge-size-medium: utils.relative-spacing('s');
 
 :host {
   position: var(--kirby-badge-position, relative);
@@ -17,7 +16,7 @@ $badge-size-medium: 1rem;
     --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: $badge-border-radius;
+    border-radius: utils.relative-spacing('xxs');
     font-size: inherit;
     line-height: 1.6; // TODO: Handle in #3579 (https://github.com/kirbydesign/designsystem/issues/3579)
     position: relative;

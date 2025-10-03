@@ -11,7 +11,7 @@ $button-width: (
   lg: 220px,
 ) !default;
 $button-margin: utils.size('xxxs');
-$default-icon-only-font-size: 1.5rem;
+$default-icon-only-font-size: utils.relative-spacing('m');
 
 @function button-width($key) {
   @return map.get($button-width, $key);

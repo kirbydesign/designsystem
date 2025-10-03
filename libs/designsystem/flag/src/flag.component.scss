@@ -4,16 +4,15 @@
 @use 'sass:meta';
 @use '@kirbydesign/core/src/scss/utils';
 
-$border-width: 1px;
-$padding-block-md: 5px;
-$padding-block-sm: 4px;
-$padding-block-xs: 3px;
+$padding-block-xs: utils.size('xxxs') - 1px;
+$padding-block-sm: utils.size('xxxs');
+$padding-block-md: utils.size('xxxs') + 1px;
 
 :host {
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
   color: var(--kirby-flag-color, utils.get-color('white-contrast'));
-  border: $border-width solid var(--kirby-flag-border-color, utils.get-color('medium'));
+  border: 1px solid var(--kirby-flag-border-color, utils.get-color('medium'));
   border-radius: utils.border-radius('xs');
   font-size: utils.font-size('n');
   padding: $padding-block-md utils.size('xxs');

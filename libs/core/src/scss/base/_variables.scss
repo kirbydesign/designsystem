@@ -20,6 +20,18 @@ $sizes: (
 ) !default;
 
 /*
+  RELATIVE SPACINGS - use sparingly when there is a need
+  for component spacing to scale with font size
+****************************************************************************/
+$relative-spacings: (
+  m: 1.5rem,
+  s: 1rem,
+  xs: 0.75rem,
+  xxs: 0.5rem,
+  xxxs: 0.25rem,
+) !default;
+
+/*
   FONT SETTINGS
 ****************************************************************************/
 $font-sizes: (
@@ -36,19 +48,19 @@ $font-sizes: (
 ) !default;
 $line-height: (
   // h1:
-  xl: 38px,
+  xl: 1.1875,
   // h2:
-  l: 28px,
+  l: 1.2727,
   // h3:
-  m: 24px,
-  // p - please note: p and h3 share the same line-height, added the sizes to "match" with font-size:
-  n: 24px,
+  m: 1.3333,
+  // p:
+  n: 1.5,
   // text-small:
-  s: 20px,
+  s: 1.4286,
   // text-xsmall:
-  xs: 16px,
+  xs: 1.3333,
   // text-xxsmall:
-  xxs: 11px
+  xxs: 1.1
 ) !default;
 $font-weight: (
   light: 300,
@@ -62,10 +74,10 @@ $font-weight: (
 /* Icon
 ****************************************************************************/
 $icon-font-sizes: (
-  'xs': 1rem,
-  'sm': 1.5rem,
-  'md': 2rem,
   'lg': 3rem,
+  'md': 2rem,
+  'sm': 1.5rem,
+  'xs': 1rem,
 ) !default;
 
 /*
@@ -128,7 +140,7 @@ $elevations: (
   ),
 ) !default;
 
-/* avatar
+/* Avatar
 ****************************************************************************/
 $avatar-sizes: (
   xs: 32px,
@@ -136,7 +148,15 @@ $avatar-sizes: (
   m: 56px,
   l: 96px,
 ) !default;
-$avatar-badge-size: 1rem;
+
+// icons in xs and s avatar have same size by design
+$avatar-icon-font-sizes: (
+  'lg': 56px,
+  'md': 32px,
+  'sm': 24px,
+  'xs': 24px,
+) !default;
+$avatar-badge-size: map.get($relative-spacings, 's');
 
 /* Page
 ****************************************************************************/
