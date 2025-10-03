@@ -25,6 +25,9 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     color: utils.get-text-color('black');
     display: block;
     margin: 0;
+  }
+
+  @include utils.slotted(':not(data)') {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
