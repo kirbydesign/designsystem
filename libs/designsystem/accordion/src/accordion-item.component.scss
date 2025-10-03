@@ -31,6 +31,7 @@ $padding: utils.size('s');
   & {
     display: flex;
     align-items: center;
+    gap: utils.size('xxs');
     padding: $padding;
     user-select: none;
     width: 100%;
@@ -39,6 +40,7 @@ $padding: utils.size('s');
     background: none;
     box-shadow: none;
     font-family: var(--kirby-font-family);
+    text-align: start;
   }
 }
 
@@ -71,6 +73,11 @@ button[disabled] {
   .title {
     color: utils.get-text-color('semi-dark');
   }
+}
+
+button {
+  // Enforce button text color to avoid inheriting native button color from browser
+  color: utils.get-color('black');
 }
 
 button[aria-expanded='true'] {

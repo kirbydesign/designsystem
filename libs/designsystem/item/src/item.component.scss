@@ -105,7 +105,7 @@ ion-item {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --transition: #{interaction-state.transition('background-color')};
+    --transition: #{interaction-state.transition('background-color, opacity')};
   }
   /* stylelint-enable no-duplicate-selectors */
 

@@ -124,7 +124,7 @@ describe('FloatingDirective', () => {
       it('should not add event listeners when only reference is set without triggers', () => {
         directive.triggers = null;
         directive.reference = component.floatingElementRef;
-        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(0);
+        expect(directive['disposeTriggerEventListeners']).toHaveLength(0);
       });
     });
 
@@ -206,25 +206,25 @@ describe('FloatingDirective', () => {
       it('should not add event listeners when only triggers is set without reference', () => {
         directive.reference = null;
         directive.triggers = ['hover'];
-        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(0);
+        expect(directive['disposeTriggerEventListeners']).toHaveLength(0);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['click'];
         directive.reference = component.floatingElementRef;
-        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(1);
+        expect(directive['disposeTriggerEventListeners']).toHaveLength(1);
       });
 
       it('should add event listeners for hover event when reference and triggers is set', () => {
         directive.triggers = ['hover'];
         directive.reference = component.floatingElementRef;
-        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(2);
+        expect(directive['disposeTriggerEventListeners']).toHaveLength(2);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['focus'];
         directive.reference = component.floatingElementRef;
-        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(2);
+        expect(directive['disposeTriggerEventListeners']).toHaveLength(2);
       });
     });
 
