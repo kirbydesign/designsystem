@@ -227,6 +227,8 @@ describe('ListComponent', () => {
       component.ngAfterViewInit();
       const list = spectator.query('ion-list');
       expect(list.getAttribute('aria-label')).toBe('My Accessible List');
+      // Ensure the attribute is removed from the original element
+      expect(spectator.element.hasAttribute('aria-label')).toBeFalse();
     });
 
     it('should forward aria-labelledby to ion-list', () => {
@@ -234,6 +236,8 @@ describe('ListComponent', () => {
       component.ngAfterViewInit();
       const list = spectator.query('ion-list');
       expect(list.getAttribute('aria-labelledby')).toBe('my-label-id');
+      // Ensure the attribute is removed from the original element
+      expect(spectator.element.hasAttribute('aria-labelledby')).toBeFalse();
     });
   });
 });
