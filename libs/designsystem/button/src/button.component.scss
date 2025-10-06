@@ -11,7 +11,6 @@ $button-width: (
   lg: 220px,
 ) !default;
 $button-margin: utils.size('xxxs');
-$default-icon-only-font-size: utils.relative-spacing('m');
 
 @function button-width($key) {
   @return map.get($button-width, $key);
@@ -41,8 +40,7 @@ $default-icon-only-font-size: utils.relative-spacing('m');
   }
 
   &.icon-only {
-    // Limit icon font size to not grow larger than button size on text resize
-    --kirby-icon-font-size: min(#{utils.font-size('n')}, #{$button-xs-icon-only-size});
+    --kirby-icon-font-size: #{utils.size('s')};
 
     width: $button-xs-icon-only-size;
     min-width: unset;
@@ -60,7 +58,7 @@ $default-icon-only-font-size: utils.relative-spacing('m');
 
   &.icon-left,
   &.icon-right {
-    --kirby-icon-font-size: #{utils.font-size('n')};
+    --kirby-icon-font-size: #{utils.size('s')};
 
     min-width: button-width('xs');
   }
@@ -77,7 +75,7 @@ $default-icon-only-font-size: utils.relative-spacing('m');
   }
 
   &.icon-only {
-    --kirby-icon-font-size: #{utils.font-size('n')};
+    --kirby-icon-font-size: #{utils.size('s')};
 
     width: utils.size('l');
     min-width: unset;
@@ -93,7 +91,7 @@ $default-icon-only-font-size: utils.relative-spacing('m');
 
   &.icon-left,
   &.icon-right {
-    --kirby-icon-font-size: #{utils.font-size('n')};
+    --kirby-icon-font-size: #{utils.size('s')};
 
     min-width: button-width('md');
   }
@@ -105,7 +103,7 @@ $default-icon-only-font-size: utils.relative-spacing('m');
   min-width: button-width('lg');
 
   &.icon-only {
-    --kirby-icon-font-size: #{$default-icon-only-font-size};
+    --kirby-icon-font-size: #{utils.size('m')};
 
     width: utils.size('xxl');
     min-width: unset;
@@ -223,7 +221,7 @@ $default-icon-only-font-size: utils.relative-spacing('m');
   &.icon-only {
     --kirby-button-padding-left: 0;
     --kirby-button-padding-right: 0;
-    --kirby-icon-font-size: min(#{$default-icon-only-font-size}, #{utils.size('xl')});
+    --kirby-icon-font-size: #{utils.size('m')};
 
     width: utils.size('xl');
     padding: 0;
