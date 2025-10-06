@@ -29,7 +29,7 @@ export const illustrations = {
     lg: 'box.none.plus-dot.bars.large.svg',
   },
   'box.curve.box.half-circle': {
-    md: 'box.curve.box.half-circle.medium.md.svg',
+    md: 'box.curve.box.half-circle.medium.svg',
   },
   'calculator.money.coin.rectangle': {
     md: 'calculator.money.coin.rectangle.medium.svg',
