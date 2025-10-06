@@ -1,6 +1,5 @@
-<svg width="56" height="56" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink">
-    <path part="background" fill="lightgray"
+<svg width="56" height="56" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path part="background" fill="silver"
         d="M24.45 8.574c-6.745 0-12.255 5.32-12.605 12.014a10.339 10.339 0 0 0-6.76 11.082c.579 4.608 4.298 8.334 8.883 8.904h16.525c-2.825-3.789-8.492-12.264-8.492-19.275 0-5.634 1.913-9.828 5.81-12.27a12.565 12.565 0 0 0-3.361-.455z" />
     <path part="highlight" fill="cadetblue"
         d="M37.794 6.983S25.72 15.93 36.28 42.573h3.502C50.34 15.932 37.794 6.937 37.794 6.937Z" />

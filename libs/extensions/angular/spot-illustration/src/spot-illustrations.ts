@@ -14,85 +14,80 @@ export enum SpotIllustrationSize {
 
 export const illustrations = {
   'airballoon-wind': {
-    md: 'airballoon.wind.dot.cloud.md.svg',
+    md: 'airballoon.wind.ballon-part.cloud.medium.svg',
+  },
+  'banknotes-arrow': {
+    md: 'banknotes.arrow.dot.circle.medium.svg',
+  },
+  'bell-attention': {
+    md: 'bell.exclamation-mark.triangle.bars.medium.svg',
+  },
+  'bell-checkmark': {
+    xl: 'bell.checkmark.dot.bars.xlarge.svg',
   },
   'box-add': {
-    lg: 'box-add.dot.bars.large.svg',
+    lg: 'box.none.plus-dot.bars.large.svg',
   },
   'box-curve': {
-    md: 'box.curve.dot.circle.md.svg',
+    md: 'box.curve.box.half-circle.medium.md.svg',
   },
   'calculator-money': {
-    md: 'calculator-money.dot.retangle.medium.svg',
+    md: 'calculator.money.coin.rectangle.medium.svg',
   },
   'calendar-loop-magnify': {
-    lg: 'chart-loop-arrow.dot.bars.large.svg',
-    xl: 'calender-loop-arrow.dot.bars.xlarge.svg',
+    lg: 'calender.loop-arrow.zoom.bars.large.svg',
+    xl: 'calender.loop-arrow.zoom.bars.xlarge.svg',
   },
   'calendar-money': {
-    md: 'bar.calendar.money.medium.svg',
+    md: 'calendar.money.coin.bars.medium.svg',
   },
-  'calendar-money-arrow': {
-    md: 'calender-money.arrows.dot.bars.md.svg',
-    lg: 'calender-money.dot.arrows.bars.large.svg',
-  },
-  checkmark: {
-    lg: 'checkmark.dot.circle.large.svg',
+  'calendar-money-arrows': {
+    md: 'calender.money-arrows.header.bars.medium.svg',
+    lg: 'calender.money-arrows.header.bars.large.svg',
   },
   'checkmark-success': {
-    lg: 'checkmark.success.lg.svg',
+    lg: 'checkmark.circle.circle-part.shadow.large.svg',
   },
-  'clock-attention': {
-    md: 'clock.attention.triangledot.bars.medium.svg',
-  },
-  'clock-checkmark': {
-    lg: 'clock-checkmark.dot.bars.x-large.svg',
-  },
-  'computer-certificate-keylock': {
-    lg: 'computer-certificate-keylock.dot.circle.large.svg',
+  'computer-certificate': {
+    lg: 'computer.certificate.padlock.circle.large.svg',
   },
   'cross-alert': {
-    lg: 'cross.alert.lg.svg',
+    lg: 'cross.circle.circle-part.shadow.large.svg',
   },
-  'exclamation-mark-warning': {
-    lg: 'exclamation-mark.warning.lg.svg',
+  'exclamation-warning': {
+    lg: 'exclamation-mark.circle.circle-part.shadow.large.svg',
   },
   'hand-balloon': {
-    xl: 'hand-baloon.dot.circle.xlarge.svg',
+    xl: 'hand.balloon.balloon.circle.xlarge.svg',
   },
   'hand-money': {
-    md: 'hand-money.dot.bars.medium.svg',
+    md: 'hand-money.line.money-dot.bars.medium.svg',
   },
-  'investboard-money': {
-    md: 'investboard.money.arrows.dot.bars.md.svg',
+  'invest-page': {
+    md: 'invest-page.money.dot.circle.medium.svg',
   },
-  'investboard-papers': {
-    md: 'investboard.papers.dot.rectangle.md.svg',
-    lg: 'investboard.papers.dot.rectangle.large.svg',
-    xl: 'investboard-money.dot.circle.xlarge.svg',
+  'invest-document': {
+    md: 'invest-document.graph.bars.square.medium.svg',
+    xl: 'invest-document.graph.bars.square.xlarge.svg',
   },
   megaphone: {
-    xl: 'megaphone.dot.x-large.svg',
+    xl: 'megaphone.sound.megaphone-part.circle.xlarge.svg',
   },
   money: {
-    md: 'money.dot.bars.medium.svg',
+    md: 'money.none.coin.bars.medium.svg',
   },
-  'money-circle': {
-    md: 'money-circle.dot.bars.medium.svg',
+  'money-arrow': {
+    md: 'money.arrow.coin.bars.medium.svg',
   },
   'piggy-bank': {
-    md: 'piggy-bank.money.dot.bars.md.svg',
+    md: 'piggy-bank.money.money-dot.bars.medium.svg',
   },
   'plant-leaf': {
-    md: 'plant-leaf.bars.medium.svg',
+    md: 'plant.bars.leaf.bars.medium.svg',
   },
   robot: {
-    lg: 'robot.NONE.dot.body.lg.svg',
-  },
-  'DEPRECATED-miv-coin-stack': {
-    sm: 'miv.sm.svg',
-    md: 'miv.md.svg',
-    lg: 'miv.lg.svg',
+    md: 'robot.none.antenna-dot.body.medium.svg',
+    lg: 'robot.none.antenna-dot.body.large.svg',
   },
 } as const satisfies Record<string, Illustration>;
 
