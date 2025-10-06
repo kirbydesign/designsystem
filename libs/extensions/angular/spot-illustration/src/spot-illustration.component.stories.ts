@@ -2,7 +2,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import {
   illustrations,
@@ -96,7 +95,7 @@ type Story = StoryObj<SpotIllustrationComponent>;
  */
 export const Default: Story = {
   args: {
-    name: 'investboard-money',
+    name: 'invest-page',
     size: SpotIllustrationSize.MD,
   },
   render: (args) => ({
