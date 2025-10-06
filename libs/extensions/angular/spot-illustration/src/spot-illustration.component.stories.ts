@@ -95,7 +95,7 @@ type Story = StoryObj<SpotIllustrationComponent>;
  */
 export const Default: Story = {
   args: {
-    name: 'invest-page',
+    name: 'invest-page.money.dot.circle',
     size: SpotIllustrationSize.MD,
   },
   render: (args) => ({
@@ -130,7 +130,7 @@ kirby-card {
  */
 export const InCard: Story = {
   args: {
-    name: 'plant-leaf',
+    name: 'plant.bars.leaf.bars',
     size: SpotIllustrationSize.MD,
   },
   render: (args) => ({
