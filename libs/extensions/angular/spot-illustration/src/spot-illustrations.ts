@@ -54,7 +54,7 @@ export const illustrations = {
   'cross.circle.circle-part.shadow': {
     lg: 'cross.circle.circle-part.shadow.large.svg',
   },
-  'exclamation-warning': {
+  'exclamation-mark.circle.circle-part.shadow': {
     lg: 'exclamation-mark.circle.circle-part.shadow.large.svg',
   },
   'hand.balloon.balloon.circle': {
