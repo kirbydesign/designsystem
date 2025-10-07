@@ -1,0 +1,216 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../utils';
+
+/*
+ * Modal variables
+ *
+ * height & width variables are kept local here until we have determined the exact values
+ * and can migrate them to heights/widths in _variables.scss as a breaking change
+ * to the existing modal heights.
+ */
+
+$modal-widths: (
+  s: 480px,
+  m: 636px,
+  l: 888px,
+);
+$modal-heights: (
+  s: 540px,
+  m: 565px,
+  l: 754px,
+);
+$modal-border-radius: utils.border-radius('xl');
+$modal-gutter: #{utils.size('xxl')};
+$modal-header-height: 88px;
+$modal-expected-footer-height: 88px;
+$modal-min-content-height: 88px;
+$modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-height +
+  $modal-min-content-height;
+
+@mixin bottom-drawer() {
+  --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
+  --min-height: #{utils.$drawer-default-height};
+
+  align-items: flex-end;
+}
+
+@function get-drawer-additional-padding-top() {
+  $modal-close-button-inner-height: utils.size('l'); // Todo: Move to / get from shared var
+  $modal-close-button-vertical-margin: utils.size('xxxs') * 2; // Todo: Move to / get from shared var
+  $modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
+  $modal-header-total-height: $modal-close-button-inner-height +
+    $modal-close-button-vertical-margin + $modal-header-vertical-padding;
+  $modal-header-vertical-center: math.round($modal-header-total-height * 0.5);
+  @return $modal-header-vertical-center;
+}
+
+body.allow-background-scroll {
+  overflow: initial !important;
+}
+
+ion-modal::part(backdrop) {
+  --backdrop-opacity: 0.4;
+}
+
+ion-modal.kirby-overlay {
+  position: fixed;
+  font-family: var(--kirby-font-family);
+
+  &.kirby-modal {
+    --border-radius: 0;
+    --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+    --height: auto;
+    --box-shadow: #{utils.get-elevation(8)};
+
+    box-sizing: border-box;
+
+    &.kirby-modal-compact {
+      --max-width: #{utils.$compact-modal-max-width};
+      --border-radius: #{$modal-border-radius};
+
+      text-align: center;
+    }
+
+    &.kirby-drawer {
+      @include utils.media('<medium') {
+        @include bottom-drawer;
+
+        --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
+
+        &.kirby-modal-full-height {
+          --height: 100%;
+        }
+      }
+
+      &.interact-with-background {
+        &.kirby-modal.kirby-drawer {
+          @include bottom-drawer;
+
+          --kirby-modal-padding-top: 0;
+        }
+      }
+
+      // Wrap declarations to avoid clashes with other mixins that have nested rules.
+      // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+      /* stylelint-disable no-duplicate-selectors */
+      & {
+        padding-top: var(--kirby-modal-padding-top);
+      }
+    }
+
+    @include utils.media('<medium') {
+      &:not(.kirby-drawer, .kirby-modal-compact) {
+        --height: 100%;
+      }
+    }
+
+    &.modal-card:not(.kirby-drawer) {
+      @include utils.media('<medium') {
+        --height: 100%;
+      }
+    }
+
+    &:not(.kirby-modal-compact) {
+      @include utils.media('>=medium') {
+        --modal-gutter: #{$modal-gutter};
+        --border-radius: #{$modal-border-radius};
+        --min-height: #{$modal-large-screen-min-height};
+        --max-height: calc(100vh - var(--modal-gutter) * 2);
+        --max-width: calc(100vw - var(--modal-gutter) * 2);
+
+        &.kirby-modal-full-height {
+          --width: #{map.get($modal-widths, 'm')};
+          --height: var(--max-height);
+        }
+
+        &.kirby-modal-small {
+          --width: #{map.get($modal-widths, 's')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 's')});
+        }
+
+        &.kirby-modal-medium {
+          --width: #{map.get($modal-widths, 'm')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 'm')});
+        }
+
+        &.kirby-modal-large {
+          --width: #{map.get($modal-widths, 'l')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 'l')});
+        }
+      }
+    }
+  }
+
+  &.kirby-action-sheet {
+    --background: transparent;
+    --width: 100%;
+    --height: 100%;
+    --box-shadow: none;
+
+    &::part(content) {
+      pointer-events: none;
+    }
+  }
+
+  &.kirby-alert {
+    --background: #{utils.get-color('background-color')};
+    --border-radius: #{utils.border-radius('n')};
+    --box-shadow: #{utils.get-elevation(8)};
+    --max-width: #{utils.$alert-max-width};
+    --height: auto;
+  }
+}
+
+ion-modal {
+  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+}
+
+ion-loading.kirby-loading-overlay {
+  --backdrop-opacity: #{utils.$loading-overlay-backdrop-opacity};
+  --ion-backdrop-color: #{utils.get-color('background-color')};
+
+  .loading-wrapper {
+    --background: transparent;
+  }
+
+  &.kirby-loading-hide-content {
+    --backdrop-opacity: 1;
+  }
+}
+
+.kirby-toast {
+  position: fixed;
+  user-select: none;
+  text-align: center;
+
+  // Set default colors
+  --background: #{utils.get-color('success-tint')};
+  --color: #{utils.get-color('black')};
+  --button-color: var(--color);
+
+  // For readability
+  &.success {
+    --background: #{utils.get-color('success-tint')};
+  }
+
+  &.warning {
+    --background: #{utils.get-color('warning')};
+  }
+}
+
+/*
+ * FAB-sheet backdrop
+*/
+.fab-sheet-active {
+  .tabs-inner,
+  ion-router-outlet,
+  .ion-page {
+    overflow: visible;
+    contain: none !important;
+  }
+
+  ion-tab-bar {
+    z-index: -1;
+  }
+}

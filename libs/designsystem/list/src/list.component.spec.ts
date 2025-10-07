@@ -220,4 +220,24 @@ describe('ListComponent', () => {
       });
     });
   });
+
+  describe('aria attributes', () => {
+    it('should forward aria-label to ion-list', () => {
+      spectator.element.setAttribute('aria-label', 'My Accessible List');
+      component.ngAfterViewInit();
+      const list = spectator.query('ion-list');
+      expect(list.getAttribute('aria-label')).toBe('My Accessible List');
+      // Ensure the attribute is removed from the original element
+      expect(spectator.element.hasAttribute('aria-label')).toBeFalse();
+    });
+
+    it('should forward aria-labelledby to ion-list', () => {
+      spectator.element.setAttribute('aria-labelledby', 'my-label-id');
+      component.ngAfterViewInit();
+      const list = spectator.query('ion-list');
+      expect(list.getAttribute('aria-labelledby')).toBe('my-label-id');
+      // Ensure the attribute is removed from the original element
+      expect(spectator.element.hasAttribute('aria-labelledby')).toBeFalse();
+    });
+  });
 });
