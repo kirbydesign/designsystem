@@ -20,6 +20,10 @@ export class ToastHelper {
       cssClass: this.getCssClass(config.messageType),
     });
     await toast.present();
+    toast.addEventListener('ionToastDidPresent', () => {
+      toast.setAttribute('role', 'alert');
+      toast.setAttribute('aria-live', 'assertive');
+    });
     return {
       dismiss: toast.dismiss.bind(toast),
       onWillDismiss: toast.onWillDismiss(),
