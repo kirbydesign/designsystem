@@ -7,15 +7,13 @@ import { CurrencyPipe } from '@angular/common';
 import { BaseListNoShape } from '../base-list-no-shape';
 
 export const detailedCardWithListNoShapeTemplate = `<kirby-card>
-  <kirby-dropdown class="margin" placeholder="Options"
-    [items]="['Much cool','Such items','Wow']"
-  ></kirby-dropdown>
+  <kirby-dropdown class="margin" placeholder="Options" 
+  [items]="['Much cool','Such items','Wow']">
+  </kirby-dropdown>
   <kirby-list [items]="items" shape="none">
     <kirby-item *kirbyListItemTemplate="let item">
       <p class="kirby-text-normal-bold">{{ item.title }}</p>
-      <data [value]="item.amount" slot="end">
-        {{ item.amount | currency }}
-      </data>
+      <data [value]="item.amount" slot="end">{{ item.amount | currency }}</data>
     </kirby-item>
   </kirby-list>
 </kirby-card>`;

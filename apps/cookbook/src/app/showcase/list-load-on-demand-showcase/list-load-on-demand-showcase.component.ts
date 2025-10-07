@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
@@ -16,6 +17,7 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     IphoneComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
+    RouterLink,
   ],
 })
 export class ListLoadOnDemandShowcaseComponent {
