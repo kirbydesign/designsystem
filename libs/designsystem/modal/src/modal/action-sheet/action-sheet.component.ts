@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
 import { ActionSheetItem } from './config/action-sheet-item';
 
@@ -8,7 +8,7 @@ const KIRBY_ACTION_SHEET_DEPRECATION_WARNING =
   '[Kirby action sheet] Deprecated - Use Menu component instead';
 
 @Component({
-  imports: [CardModule, ButtonComponent],
+  imports: [CardComponent, CardHeaderComponent, ButtonComponent],
   selector: 'kirby-action-sheet',
   templateUrl: './action-sheet.component.html',
   styleUrls: ['./action-sheet.component.scss'],

@@ -20,20 +20,20 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import {
   DesignTokenHelper,
   StringSearchHelper,
   UniqueIdGenerator,
 } from '@kirbydesign/designsystem/helpers';
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { NgTemplateOutlet } from '@angular/common';
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
@@ -51,11 +51,11 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
   ],
   imports: [
     ButtonComponent,
-    IconModule,
     NgTemplateOutlet,
     PopoverComponent,
-    CardModule,
-    ItemModule,
+    CardComponent,
+    ItemComponent,
+    IconComponent,
   ],
 })
 export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {

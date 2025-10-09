@@ -24,7 +24,7 @@ import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Subscription } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -38,7 +38,7 @@ import { FormFieldMessageComponent } from './form-field-message/form-field-messa
   selector: 'kirby-form-field',
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
-  imports: [NgTemplateOutlet, FormFieldMessageComponent, IconModule],
+  imports: [NgTemplateOutlet, FormFieldMessageComponent, IconComponent],
 })
 export class FormFieldComponent
   implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy

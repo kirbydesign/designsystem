@@ -25,7 +25,7 @@ import {
 import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { SlideDirective } from './slide.directive';
 
 // Swiper is not an Angular library,
@@ -46,7 +46,7 @@ type SwiperContainer = HTMLElement & { initialize: () => void; swiper: Swiper };
   templateUrl: './slides.component.html',
   styleUrls: ['./slides.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgClass, ButtonComponent, IconModule, NgTemplateOutlet],
+  imports: [NgClass, ButtonComponent, IconComponent, NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {

@@ -16,7 +16,7 @@ import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { RadioComponent } from '@kirbydesign/designsystem/radio';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { IonItem, IonReorder } from '@ionic/angular/standalone';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 export enum ItemSize {
   XS = 'xs',
@@ -29,7 +29,7 @@ export enum ItemSize {
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [IonItem, IonReorder, IconModule],
+  imports: [IonItem, IonReorder, IconComponent],
 })
 export class ItemComponent implements AfterViewInit {
   private _linkAttributesToForward = ['rel', 'target', 'download'];

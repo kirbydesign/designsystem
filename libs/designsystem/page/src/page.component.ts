@@ -74,7 +74,7 @@ import { UnobserveFn } from '@kirbydesign/designsystem/types';
 import { getGlobalConfig } from '@kirbydesign/designsystem/config';
 import { observeContent } from '@kirbydesign/designsystem/helpers';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -232,7 +232,7 @@ export class PageActionsComponent {}
     NgTemplateOutlet,
     IonContent,
     IonRefresher,
-    SpinnerModule,
+    SpinnerComponent,
     NgClass,
     IonFooter,
     FitHeadingDirective,

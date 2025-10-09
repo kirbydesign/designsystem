@@ -16,7 +16,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 
 export type ActionGroupConfig = {
@@ -30,7 +30,7 @@ type CollapsedAction = { button: HTMLButtonElement; text: string };
 
 @Component({
   selector: 'kirby-action-group',
-  imports: [ButtonComponent, ItemModule, MenuComponent],
+  imports: [ButtonComponent, ItemComponent, MenuComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-group.component.html',
   styleUrls: ['./action-group.component.scss'],

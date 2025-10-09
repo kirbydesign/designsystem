@@ -20,7 +20,7 @@ import { ThemeColor } from '@kirbydesign/core';
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { IonItemDivider, IonItemGroup, IonList, IonListHeader } from '@ionic/angular/standalone';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
 import { BoundaryClass, ListItemComponent } from './list-item/list-item.component';
@@ -56,7 +56,7 @@ export type StandAloneSpacing =
     InfiniteScrollDirective,
     IonListHeader,
     NgTemplateOutlet,
-    SpinnerModule,
+    SpinnerComponent,
     IonItemGroup,
     NgClass,
     IonItemDivider,

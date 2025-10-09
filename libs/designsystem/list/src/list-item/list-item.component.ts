@@ -14,7 +14,7 @@ import { ThemeColor } from '@kirbydesign/core';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 import { ListItemColorDirective } from '../directives/list-item-color.directive';
 
@@ -30,7 +30,7 @@ export type BoundaryClass = 'first' | 'last';
     NgClass,
     NgTemplateOutlet,
     IonItemOptions,
-    IconModule,
+    IconComponent,
     IonLabel,
   ],
 })

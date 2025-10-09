@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 @Component({
-  imports: [SpinnerModule, CommonModule],
+  imports: [SpinnerComponent, CommonModule],
   selector: 'kirby-loading-overlay',
   templateUrl: './loading-overlay.component.html',
   styleUrls: ['./loading-overlay.component.scss'],

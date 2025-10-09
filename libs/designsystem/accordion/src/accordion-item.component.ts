@@ -12,7 +12,7 @@ import {
   QueryList,
 } from '@angular/core';
 import { ListComponent } from '@kirbydesign/designsystem/list';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 // Counter for generating unique element ids
 let uniqueId = 0;
@@ -29,7 +29,7 @@ let uniqueId = 0;
       transition('true <=> false', animate('0.2s')),
     ]),
   ],
-  imports: [IconModule],
+  imports: [IconComponent],
 })
 export class AccordionItemComponent implements OnChanges, AfterContentInit {
   @HostBinding('class.has-list') hasList: boolean = false;
