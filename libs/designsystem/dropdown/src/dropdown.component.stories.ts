@@ -1,7 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { userEvent, within } from 'storybook/test';
 
-import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
@@ -13,7 +13,7 @@ const meta: Meta<DropdownComponent> = {
   title: 'Components / Dropdown',
   decorators: [
     moduleMetadata({
-      imports: [DropdownModule, ButtonComponent, DropdownExampleComponent],
+      imports: [DropdownComponent, ButtonComponent, DropdownExampleComponent],
     }),
   ],
   argTypes: {

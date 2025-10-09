@@ -1,6 +1,6 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
-import { CardHeaderComponent, CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
 const cardContent = `<p>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -12,7 +12,7 @@ const meta: Meta<CardHeaderComponent> = {
   title: 'Components / Card / Card Header',
   decorators: [
     moduleMetadata({
-      imports: [CardModule],
+      imports: [CardComponent, CardHeaderComponent],
     }),
   ],
 };
@@ -37,7 +37,7 @@ export const Default: Story = {
 
 export const FlaggedInCard: Story = {
   render: () => ({
-    template: ` 
+    template: `
       <kirby-card>
         <kirby-card-header [title]="'Flagged - Success'" flagged="success"></kirby-card-header>
         ${cardContent}
