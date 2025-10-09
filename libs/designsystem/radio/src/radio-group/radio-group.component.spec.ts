@@ -31,6 +31,7 @@ describe('RadioGroupComponent', () => {
       ReactiveFormsModule,
       FlagComponent,
       RadioComponent,
+      RadioGroupComponent,
       ListItemTemplateDirective,
     ],
   });

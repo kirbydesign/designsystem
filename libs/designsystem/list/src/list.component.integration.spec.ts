@@ -7,7 +7,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { IonItem } from '@ionic/angular/standalone';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import {
   InfiniteScrollDirective,
   ListComponent,
@@ -28,9 +28,9 @@ describe('ListComponent', () => {
     component: ListComponent,
     imports: [
       TestHelper.ionicModuleForTest,
-      IonItem,
       ItemComponent,
       IconComponent,
+      CardComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
       ListItemTemplateDirective,

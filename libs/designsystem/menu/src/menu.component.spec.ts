@@ -6,6 +6,7 @@ import { FloatingDirective } from '@kirbydesign/designsystem/shared/floating';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from './menu.component';
 
 describe('MenuComponent', () => {
@@ -19,6 +20,7 @@ describe('MenuComponent', () => {
     component: MenuComponent,
     imports: [
       IconComponent,
+      ItemComponent,
       TestHelper.ionicModuleForTest,
       ToggleComponent,
       CheckboxComponent,

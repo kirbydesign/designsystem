@@ -13,6 +13,7 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 
 import {
+  PageActionsComponent,
   PageActionsDirective,
   PageComponent,
   PageContentComponent,
@@ -38,6 +39,7 @@ describe('ButtonComponent in Kirby Page', () => {
       PageComponent,
       PageContentComponent,
       PageActionsDirective,
+      PageActionsComponent,
       PageTitleDirective,
     ],
     providers: [

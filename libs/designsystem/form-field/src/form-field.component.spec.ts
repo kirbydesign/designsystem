@@ -30,6 +30,7 @@ describe('FormFieldComponent', () => {
       InputComponent,
       TextareaComponent,
       RadioComponent,
+      RadioGroupComponent,
       IonItem,
       InputCounterComponent,
       ItemComponent,

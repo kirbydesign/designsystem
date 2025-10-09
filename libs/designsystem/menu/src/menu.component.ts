@@ -41,11 +41,8 @@ import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem
   imports: [
     ButtonComponent,
     FloatingDirective,
-    IconComponent,
     CardComponent,
-    CardHeaderComponent,
-    CardFooterComponent,
-    CardAsButtonDirective,
+    IconComponent,
     ItemComponent,
     LabelComponent,
   ],

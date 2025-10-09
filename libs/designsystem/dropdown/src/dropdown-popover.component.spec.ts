@@ -37,15 +37,8 @@ describe('DropdownComponent (popover version)', () => {
       component: DropdownComponent,
       imports: [
         TestHelper.ionicModuleForTest,
-        IonItem,
-        MockComponents(
-          ButtonComponent,
-          IconComponent,
-          ItemComponent,
-          IonItem,
-          PopoverComponent,
-          CardComponent
-        ),
+        ItemComponent,
+        MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
       ],
     });
 

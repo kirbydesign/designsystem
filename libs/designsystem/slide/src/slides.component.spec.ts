@@ -2,7 +2,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { CardComponent } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { KirbySwiperOptions, SlidesComponent } from './slides.component';
 import { SlideDirective } from './slide.directive';
@@ -33,6 +33,7 @@ describe('SlidesComponent', () => {
       ButtonComponent,
       IconComponent,
       CardComponent,
+      CardHeaderComponent,
       SlideDirective,
       SlideStretchHeightDirective,
     ],
