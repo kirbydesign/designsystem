@@ -7,8 +7,7 @@ import { EmptyStateComponent } from './empty-state.component';
 const declarations = [EmptyStateComponent];
 
 @NgModule({
-  imports: [IconModule, CommonModule, ThemeColorDirective],
-  declarations: [...declarations],
+  imports: [IconModule, CommonModule, ThemeColorDirective, ...declarations],
   exports: [...declarations, ThemeColorDirective],
 })
 export class EmptyStateModule {}

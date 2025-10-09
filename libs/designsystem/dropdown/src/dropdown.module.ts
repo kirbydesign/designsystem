@@ -24,8 +24,8 @@ const declarations = [DropdownComponent];
     ButtonComponent,
     CommonModule,
     ListModule,
+    ...declarations,
   ],
-  declarations: [...declarations],
   exports: [...declarations, ListItemTemplateDirective],
   providers: [KeyboardHandlerService],
 })

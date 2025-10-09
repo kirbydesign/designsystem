@@ -8,12 +8,15 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonItemSliding } from '@ionic/angular/standalone';
+import { IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
 
 import { ThemeColor } from '@kirbydesign/core';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
+import { ListItemColorDirective } from '../directives/list-item-color.directive';
 
 export type BoundaryClass = 'first' | 'last';
 
@@ -21,7 +24,15 @@ export type BoundaryClass = 'first' | 'last';
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
   styleUrls: ['../list.component.scss', './list-item.component.scss'],
-  standalone: false,
+  imports: [
+    IonItemSliding,
+    ListItemColorDirective,
+    NgClass,
+    NgTemplateOutlet,
+    IonItemOptions,
+    IconModule,
+    IonLabel,
+  ],
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
   _isSwipingEnabled = false;

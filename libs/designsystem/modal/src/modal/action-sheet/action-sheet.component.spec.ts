@@ -23,7 +23,9 @@ describe('ActionSheetComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [
+      imports: [
+        CardModule,
+        SpinnerModule,
         ActionSheetComponent,
         ListComponent,
         InfiniteScrollDirective,
@@ -38,7 +40,6 @@ describe('ActionSheetComponent', () => {
         MockComponent(ionic.IonItemOptions),
         MockComponent(ionic.IonItemSliding),
       ],
-      imports: [CardModule, SpinnerModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));

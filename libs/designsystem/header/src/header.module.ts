@@ -19,8 +19,7 @@ const declarations = [
 ];
 
 @NgModule({
-  declarations: declarations,
-  imports: [CommonModule, FitHeadingDirective],
+  imports: [CommonModule, FitHeadingDirective, ...declarations],
   exports: declarations,
 })
 export class HeaderModule {}

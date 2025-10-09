@@ -47,7 +47,6 @@ const declarations = [
 ];
 
 @NgModule({
-  declarations: declarations,
   imports: [
     CommonModule,
     IconModule,
@@ -59,6 +58,7 @@ const declarations = [
     IonLabel,
     IonList,
     IonListHeader,
+    ...declarations,
   ],
   exports: exportedDeclarations,
   providers: [],

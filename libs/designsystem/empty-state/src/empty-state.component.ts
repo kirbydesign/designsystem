@@ -11,13 +11,14 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 @Component({
   selector: 'kirby-empty-state',
   templateUrl: './empty-state.component.html',
   styleUrls: ['./empty-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IconModule],
 })
 export class EmptyStateComponent implements AfterContentInit, OnInit {
   private _title: string;

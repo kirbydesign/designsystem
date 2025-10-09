@@ -7,8 +7,7 @@ import { AccordionDirective } from './accordion.directive';
 const declarations = [AccordionDirective, AccordionItemComponent];
 
 @NgModule({
-  declarations: [...declarations],
-  imports: [IconModule],
+  imports: [IconModule, ...declarations],
   exports: [...declarations],
 })
 export class AccordionModule {}

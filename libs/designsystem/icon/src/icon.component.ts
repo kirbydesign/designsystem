@@ -9,6 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
+import { IonIcon } from '@ionic/angular/standalone';
 import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
 
@@ -25,7 +26,7 @@ export enum IconSize {
   styleUrls: ['./icon.component.scss'],
   host: { '[class.kirby-icon]': 'true' },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IonIcon],
 })
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');

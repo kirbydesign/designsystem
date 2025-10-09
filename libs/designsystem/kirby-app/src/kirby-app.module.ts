@@ -4,8 +4,7 @@ import { IonApp } from '@ionic/angular/standalone';
 import { AppComponent as KirbyAppComponent } from './kirby-app.component';
 
 @NgModule({
-  declarations: [KirbyAppComponent],
-  imports: [CommonModule, IonApp],
+  imports: [CommonModule, IonApp, KirbyAppComponent],
   exports: [KirbyAppComponent],
 })
 export class KirbyAppModule {}

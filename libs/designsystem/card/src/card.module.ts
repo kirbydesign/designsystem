@@ -14,8 +14,7 @@ const declarations = [
   CardAsButtonDirective,
 ];
 @NgModule({
-  imports: [CommonModule, ThemeColorDirective],
-  declarations: [...declarations],
+  imports: [CommonModule, ThemeColorDirective, ...declarations],
   exports: [...declarations, ThemeColorDirective],
 })
 export class CardModule {}

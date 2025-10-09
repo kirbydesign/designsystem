@@ -10,8 +10,7 @@ import { SlideStretchHeightDirective } from './slide-stretch-height.directive';
 const declarations = [SlidesComponent, SlideDirective, SlideStretchHeightDirective];
 
 @NgModule({
-  declarations: [...declarations],
-  imports: [CommonModule, ButtonComponent, IconModule],
+  imports: [CommonModule, ButtonComponent, IconModule, ...declarations],
   exports: [...declarations],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

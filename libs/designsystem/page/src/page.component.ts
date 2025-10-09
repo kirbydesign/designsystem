@@ -37,7 +37,9 @@ import {
   IonContent,
   IonFooter,
   IonHeader,
+  IonRefresher,
   IonRouterOutlet,
+  IonTitle,
   IonToolbar,
   NavController,
 } from '@ionic/angular/standalone';
@@ -64,12 +66,15 @@ import {
 } from '@kirbydesign/designsystem/modal';
 import {
   FitHeadingConfig,
+  FitHeadingDirective,
   ResizeObserverService,
   TranslationService,
 } from '@kirbydesign/designsystem/shared';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
 import { getGlobalConfig } from '@kirbydesign/designsystem/config';
 import { observeContent } from '@kirbydesign/designsystem/helpers';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -103,28 +108,16 @@ export interface PullToRefreshEvent {
   complete();
 }
 
-@Directive({
-  selector: '[kirbyPageTitle]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyPageTitle]' })
 export class PageTitleDirective {}
 
-@Directive({
-  selector: '[kirbyPageSubtitle]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyPageSubtitle]' })
 export class PageSubtitleDirective {}
 
-@Directive({
-  selector: '[kirbyPageToolbarTitle]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyPageToolbarTitle]' })
 export class PageToolbarTitleDirective {}
 
-@Directive({
-  selector: '[kirbyPageActions]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyPageActions]' })
 export class PageActionsDirective {
   @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
   private readonly stickyDefault = true;
@@ -145,10 +138,7 @@ export class PageActionsDirective {
   }
 }
 
-@Directive({
-  selector: '[kirbyPageContent]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyPageContent]' })
 export class PageContentDirective {
   @Input('kirbyPageContent') config: fixedConfig;
 
@@ -159,10 +149,7 @@ export class PageContentDirective {
   }
 }
 
-@Directive({
-  selector: '[kirbyPageStickyContent]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyPageStickyContent]' })
 export class PageStickyContentDirective {}
 
 @Component({
@@ -178,7 +165,6 @@ export class PageStickyContentDirective {}
       }
     `,
   ],
-  standalone: false,
 })
 export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
@@ -197,7 +183,6 @@ export class PageProgressComponent extends ModalElementComponent {
   template: `
     <ng-content></ng-content>
   `,
-  standalone: false,
 })
 export class PageTitleComponent extends ModalElementComponent {
   constructor(
@@ -213,7 +198,6 @@ export class PageTitleComponent extends ModalElementComponent {
   template: `
     <ng-content></ng-content>
   `,
-  standalone: false,
 })
 export class PageContentComponent {}
 
@@ -230,7 +214,6 @@ export class PageContentComponent {}
       }
     `,
   ],
-  standalone: false,
 })
 export class PageActionsComponent {}
 
@@ -240,7 +223,20 @@ export class PageActionsComponent {}
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [IonicElementPartHelper],
-  standalone: false,
+  imports: [
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
+    NgTemplateOutlet,
+    IonContent,
+    IonRefresher,
+    SpinnerModule,
+    NgClass,
+    IonFooter,
+    FitHeadingDirective,
+  ],
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges

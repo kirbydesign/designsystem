@@ -10,8 +10,7 @@ import { AffixDirective } from './directives/affix/affix.directive';
 const declarations = [FormFieldComponent, FormFieldMessageComponent, InputCounterComponent];
 
 @NgModule({
-  imports: [CommonModule, DecimalMaskDirective, IconModule, AffixDirective],
-  declarations: [...declarations],
+  imports: [CommonModule, DecimalMaskDirective, IconModule, AffixDirective, ...declarations],
   exports: [...declarations, DecimalMaskDirective, AffixDirective],
 })
 export class FormFieldModule {}

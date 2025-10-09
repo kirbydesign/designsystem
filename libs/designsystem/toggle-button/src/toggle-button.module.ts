@@ -6,8 +6,7 @@ import { ToggleButtonComponent } from './toggle-button.component';
 const DECLARATIONS = [ToggleButtonComponent];
 
 @NgModule({
-  declarations: [...DECLARATIONS],
-  imports: [CommonModule],
+  imports: [CommonModule, ...DECLARATIONS],
   exports: [...DECLARATIONS],
 })
 export class ToggleButtonModule {}

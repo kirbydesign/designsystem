@@ -16,12 +16,7 @@ const { getColor, iconFontSize } = DesignTokenHelper;
 describe('IconComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        IconComponent,
-        ThemeColorDirective,
-        TestWrapperComponent,
-        MockComponent(IonIcon),
-      ],
+      imports: [IconComponent, ThemeColorDirective, TestWrapperComponent, MockComponent(IonIcon)],
       providers: [IconRegistryService],
     });
   }));
@@ -193,7 +188,6 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
 @Component({
   selector: 'kirby-test-component',
   template: '<span>PlaceHolder HTML to be Replaced</span>',
-  standalone: false,
 })
 export class TestWrapperComponent {}
 

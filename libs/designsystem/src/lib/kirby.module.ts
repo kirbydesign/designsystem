@@ -139,8 +139,7 @@ const allExports = [...exportedModules, ...exportedDeclarations];
 const importedModules = [...exportedModules];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, ...importedModules],
-  declarations: [declarations],
+  imports: [CommonModule, RouterModule, ...importedModules, declarations],
   providers: [provideKirby()],
   exports: [allExports],
 })

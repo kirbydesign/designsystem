@@ -5,7 +5,7 @@ import { ChartConfigService } from './shared';
 import { StockChartComponent } from './stock-chart';
 
 @NgModule({
-  declarations: [ChartComponent, StockChartComponent],
+  imports: [ChartComponent, StockChartComponent],
   exports: [ChartComponent, StockChartComponent],
   providers: [ChartConfigService],
 })

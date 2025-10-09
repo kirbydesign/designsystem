@@ -8,8 +8,7 @@ import { LabelComponent } from './label/label.component';
 
 const declarations = [ItemComponent, LabelComponent];
 @NgModule({
-  imports: [IconModule, CommonModule, IonItem, IonReorder, IonLabel],
-  declarations: [...declarations],
+  imports: [IconModule, CommonModule, IonItem, IonReorder, IonLabel, ...declarations],
   exports: [...declarations],
 })
 export class ItemModule {}
