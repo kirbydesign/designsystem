@@ -1,13 +1,13 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { TranslationService } from '@kirbydesign/designsystem/shared';
+import { ThemeColorDirective, TranslationService } from '@kirbydesign/designsystem/shared';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ImageBannerHeightDirective } from './image-banner-height.directive';
 
 @Component({
   selector: 'kirby-x-image-banner',
-  imports: [CardComponent, ButtonComponent, IconComponent],
+  imports: [CardComponent, ButtonComponent, IconComponent, ThemeColorDirective],
   hostDirectives: [ImageBannerHeightDirective],
   templateUrl: './image-banner.component.html',
   styleUrl: './image-banner.component.scss',
