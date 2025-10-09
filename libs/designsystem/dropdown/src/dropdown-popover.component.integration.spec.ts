@@ -1,8 +1,8 @@
-/* 
-  This file has been created to contain unit tests for the new dropdown utilizing popover 
-  instead of mixing them in with the ones for the old version. Having an additional file with 
-  almost identic tests should make it easier to remove the ones for the old version when we have 
-  to deprecate it. 
+/*
+  This file has been created to contain unit tests for the new dropdown utilizing popover
+  instead of mixing them in with the ones for the old version. Having an additional file with
+  almost identic tests should make it easier to remove the ones for the old version when we have
+  to deprecate it.
 */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
@@ -46,8 +46,9 @@ describe('DropdownComponent + PopoverComponent', () => {
   describe('with default change detection strategy', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [TestHelper.ionicModuleForTest, ItemModule],
-      declarations: [
+      imports: [
+        TestHelper.ionicModuleForTest,
+        ItemModule,
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem),
         PopoverComponent,
@@ -144,9 +145,9 @@ describe('DropdownComponent + PopoverComponent', () => {
   describe("with 'OnPush' change detection strategy", () => {
     const createOnPushHost = createHostFactory({
       component: DropdownComponent,
-      imports: [TestHelper.ionicModuleForTest, ItemModule],
-
-      declarations: [
+      imports: [
+        TestHelper.ionicModuleForTest,
+        ItemModule,
         PopoverComponent,
         MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
       ],

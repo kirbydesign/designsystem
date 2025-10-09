@@ -16,7 +16,7 @@ const { getColor, iconFontSize } = DesignTokenHelper;
 describe('IconComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [IconComponent, ThemeColorDirective, TestWrapperComponent, MockComponent(IonIcon)],
+      imports: [IconComponent, TestWrapperComponent, MockComponent(IonIcon), ThemeColorDirective],
       providers: [IconRegistryService],
     });
   }));
@@ -66,7 +66,7 @@ describe('IconComponent', () => {
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Icon with name "${noExistingIconName}" was not found. 
+        `Icon with name "${noExistingIconName}" was not found.
 Do you have a typo in 'name' for a built-in icon or
 forgot to configure the custom icon through the 'IconRegistryService'?`
       );
@@ -188,6 +188,7 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
 @Component({
   selector: 'kirby-test-component',
   template: '<span>PlaceHolder HTML to be Replaced</span>',
+  imports: [IconComponent, ThemeColorDirective],
 })
 export class TestWrapperComponent {}
 

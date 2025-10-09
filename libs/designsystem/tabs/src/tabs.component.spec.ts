@@ -15,7 +15,6 @@ describe('TabsComponent', () => {
   const createHost = createComponentFactory({
     imports: [TestHelper.ionicModuleForTest, IonTabs, RouterTestingModule],
     component: TabsComponent,
-    declarations: [],
   });
 
   beforeEach(() => {

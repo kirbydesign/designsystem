@@ -37,8 +37,8 @@ describe('DropdownComponent', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [ItemModule],
-      declarations: [
+      imports: [
+        ItemModule,
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
@@ -1110,7 +1110,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1161,7 +1161,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1230,7 +1230,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1280,7 +1280,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         ItemComponent,
         ListItemTemplateDirective,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
@@ -1344,8 +1344,8 @@ describe('DropdownComponent', () => {
   describe('when configured with expand=block and usePopover=true', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [ItemModule],
-      declarations: [
+      imports: [
+        ItemModule,
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],

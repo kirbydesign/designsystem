@@ -20,8 +20,7 @@ describe('CardAsButtonDirective', () => {
 
   const createDirective = createDirectiveFactory({
     directive: CardAsButtonDirective,
-    imports: [],
-    declarations: [CardComponent],
+    imports: [CardComponent],
     host: KirbyCardClickHostComponent,
   });
   beforeEach(() => {

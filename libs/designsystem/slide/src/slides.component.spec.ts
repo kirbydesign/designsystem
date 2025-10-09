@@ -28,8 +28,14 @@ describe('SlidesComponent', () => {
 
   const createHost = createHostFactory({
     component: SlidesComponent,
-    imports: [TestHelper.ionicModuleForTest, ButtonComponent, IconModule, CardModule],
-    declarations: [SlideDirective, SlideStretchHeightDirective],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      ButtonComponent,
+      IconModule,
+      CardModule,
+      SlideDirective,
+      SlideStretchHeightDirective,
+    ],
   });
 
   const hostTemplate = `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions" [title]="'Title'" [showNavigation]="true">

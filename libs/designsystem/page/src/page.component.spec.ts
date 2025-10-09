@@ -1,6 +1,5 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { Router, Routes } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter, Router, Routes } from '@angular/router';
 import {
   IonBackButton,
   IonButtons,
@@ -86,7 +85,6 @@ describe('PageComponent', () => {
     component: PageComponent,
     imports: [
       TestHelper.ionicModuleForTest,
-      RouterTestingModule.withRoutes(routes),
       ActionGroupComponent,
       ButtonComponent,
       FitHeadingDirective,
@@ -99,8 +97,6 @@ describe('PageComponent', () => {
       IonTitle,
       IonToolbar,
       SpinnerModule,
-    ],
-    declarations: [
       PageContentComponent,
       PageActionsComponent,
       PageActionsDirective,
@@ -118,6 +114,7 @@ describe('PageComponent', () => {
       },
       mockProvider(TabsComponent, { tabBarBottomHidden: false }),
       mockProvider(ModalNavigationService),
+      provideRouter(routes),
     ],
   });
 

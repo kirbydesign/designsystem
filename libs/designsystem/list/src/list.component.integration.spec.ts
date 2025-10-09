@@ -27,20 +27,23 @@ describe('ListComponent', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule, IonItem],
-    providers: [
-      {
-        provide: WindowRef,
-        useValue: <WindowRef>{ nativeWindow: window },
-      },
-    ],
-    declarations: [
+    imports: [
+      TestHelper.ionicModuleForTest,
+      CardModule,
+      SpinnerModule,
+      IonItem,
       ItemComponent,
       IconComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
       ListItemTemplateDirective,
       ListItemComponent,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: <WindowRef>{ nativeWindow: window },
+      },
     ],
   });
 

@@ -15,8 +15,11 @@ describe('TabNavigationComponent', () => {
 
   const createHost = createHostFactory({
     component: TabNavigationComponent,
-    declarations: [TabNavigationItemComponent, MockComponents(BadgeComponent, IconComponent)],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      TabNavigationItemComponent,
+      MockComponents(BadgeComponent, IconComponent),
+    ],
   });
 
   beforeEach(fakeAsync(() => {
@@ -27,14 +30,14 @@ describe('TabNavigationComponent', () => {
           <kirby-badge themeColor="warning">
             <kirby-icon name="attach"></kirby-icon>
           </kirby-badge>
-        </kirby-tab-navigation-item> 
+        </kirby-tab-navigation-item>
         <kirby-tab-navigation-item label="Tab2">
           <kirby-badge themeColor="success">
             3
           </kirby-badge>
-        </kirby-tab-navigation-item> 
+        </kirby-tab-navigation-item>
         <kirby-tab-navigation-item label="Tab3">
-        </kirby-tab-navigation-item> 
+        </kirby-tab-navigation-item>
       </kirby-tab-navigation>
       `,
       {

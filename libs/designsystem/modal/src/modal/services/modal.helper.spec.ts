@@ -104,6 +104,8 @@ describe('ModalHelper', () => {
       ModalFooterComponent,
       ButtonComponent,
       ModalCompactWrapperComponent,
+      PageTitleComponent,
+      PageProgressComponent,
     ],
     providers: [
       {
@@ -111,7 +113,6 @@ describe('ModalHelper', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [PageTitleComponent, PageProgressComponent],
     entryComponents: [
       InputEmbeddedComponent,
       ContentOverflowsWithFooterEmbeddedComponent,

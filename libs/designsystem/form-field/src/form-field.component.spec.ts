@@ -24,7 +24,6 @@ describe('FormFieldComponent', () => {
 
   const createHost = createHostFactory({
     component: FormFieldComponent,
-    declarations: [InputCounterComponent, ItemComponent, FormFieldMessageComponent],
     imports: [
       TestHelper.ionicModuleForTest,
       AffixDirective,
@@ -32,6 +31,9 @@ describe('FormFieldComponent', () => {
       TextareaComponent,
       RadioModule,
       IonItem,
+      InputCounterComponent,
+      ItemComponent,
+      FormFieldMessageComponent,
     ],
     mocks: [PlatformService],
     providers: [

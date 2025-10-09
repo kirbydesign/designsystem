@@ -5,7 +5,6 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from './icon.component';
-import { IconModule } from './icon.module';
 
 const size = DesignTokenHelper.size;
 
@@ -14,7 +13,7 @@ describe('IconComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: IconComponent,
-    imports: [IconModule, ItemModule],
+    imports: [ItemModule],
   });
 
   describe('slotted start', () => {

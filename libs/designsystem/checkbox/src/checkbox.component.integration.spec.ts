@@ -15,8 +15,7 @@ describe('CheckboxComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
-    imports: [IconModule],
-    declarations: MockComponents(ItemComponent),
+    imports: [IconModule, MockComponents(ItemComponent)],
   });
 
   describe('by default', () => {

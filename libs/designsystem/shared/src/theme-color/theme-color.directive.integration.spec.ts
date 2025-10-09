@@ -7,7 +7,7 @@ describe('ThemeColorDirective', () => {
 
   const createDirective = createDirectiveFactory({
     directive: ThemeColorDirective,
-    declarations: [CardComponent],
+    imports: [CardComponent],
   });
 
   describe('when initialized', () => {

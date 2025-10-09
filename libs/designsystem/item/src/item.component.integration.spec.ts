@@ -26,8 +26,8 @@ describe('ItemComponent integration', () => {
       ToggleComponent,
       ButtonComponent,
       IonItem,
+      LabelComponent,
     ],
-    declarations: [LabelComponent],
   });
 
   describe('with kirby-label', () => {

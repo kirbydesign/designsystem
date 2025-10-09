@@ -17,7 +17,7 @@ describe('InputCounterComponent', () => {
     let spectator: Spectator<InputCounterComponent>;
     const createHost = createComponentFactory({
       component: InputCounterComponent,
-      declarations: [FormFieldMessageComponent],
+      imports: [FormFieldMessageComponent],
     });
 
     beforeEach(() => {
@@ -201,8 +201,7 @@ describe('InputCounterComponent', () => {
 
     const createHost = createHostFactory({
       component: InputCounterComponent,
-      declarations: [FormFieldMessageComponent],
-      imports: [TextareaComponent, ReactiveFormsModule],
+      imports: [TextareaComponent, ReactiveFormsModule, FormFieldMessageComponent],
     });
 
     beforeEach(() => {
@@ -252,8 +251,7 @@ describe('InputCounterComponent', () => {
 
     const createHost = createHostFactory({
       component: InputCounterComponent,
-      declarations: [FormFieldMessageComponent],
-      imports: [InputComponent, ReactiveFormsModule],
+      imports: [InputComponent, ReactiveFormsModule, FormFieldMessageComponent],
     });
 
     beforeEach(() => {

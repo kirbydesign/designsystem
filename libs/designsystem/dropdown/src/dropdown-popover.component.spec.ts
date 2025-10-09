@@ -35,8 +35,10 @@ describe('DropdownComponent (popover version)', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [TestHelper.ionicModuleForTest, IonItem, ItemModule],
-      declarations: [
+      imports: [
+        TestHelper.ionicModuleForTest,
+        IonItem,
+        ItemModule,
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
       ],
@@ -1006,7 +1008,7 @@ describe('DropdownComponent (popover version)', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1088,7 +1090,7 @@ describe('DropdownComponent (popover version)', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1183,7 +1185,7 @@ describe('DropdownComponent (popover version)', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         ItemComponent,
         ListItemTemplateDirective,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
@@ -1247,7 +1249,7 @@ describe('DropdownComponent (popover version)', () => {
   describe('with popover enabled', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],

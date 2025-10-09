@@ -26,8 +26,9 @@ describe('MenuComponent', () => {
       TestHelper.ionicModuleForTest,
       ToggleComponent,
       CheckboxComponent,
+      FloatingDirective,
+      MockComponent(ButtonComponent),
     ],
-    declarations: [FloatingDirective, MockComponent(ButtonComponent)],
   });
   describe('by default', () => {
     beforeEach(() => {

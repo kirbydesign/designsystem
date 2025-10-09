@@ -234,9 +234,8 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
 describe('ModalWrapperComponent + PageTitleComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule],
+    imports: [RouterTestingModule, PageTitleComponent],
     entryComponents: [TitleEmbeddedComponent],
-    declarations: [PageTitleComponent],
     mocks: [CanDismissHelper],
   });
 
@@ -293,9 +292,8 @@ describe('ModalWrapperComponent + PageTitleComponent', () => {
 describe('ModalWrapperComponent + PageProgressComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule],
+    imports: [RouterTestingModule, PageProgressComponent],
     entryComponents: [StaticPageProgressEmbeddedComponent, DynamicPageProgressEmbeddedComponent],
-    declarations: [PageProgressComponent],
     mocks: [CanDismissHelper],
   });
 
@@ -386,8 +384,7 @@ describe('ModalWrapperComponent + ModalComponent', () => {
 
   const createHost = createHostFactory({
     component: ModalComponent,
-    imports: [TestHelper.ionicModuleForTest],
-    declarations: [PageTitleComponent],
+    imports: [TestHelper.ionicModuleForTest, PageTitleComponent],
     providers: [CanDismissHelper, AlertHelper],
     mocks: [ModalNavigationService],
   });

@@ -61,7 +61,8 @@ describe('ListComponent', () => {
 
   const createHost = createComponentFactory({
     component: ListComponent,
-    declarations: [
+    imports: [
+      SpinnerModule,
       ListComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
@@ -81,7 +82,6 @@ describe('ListComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    imports: [SpinnerModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 
