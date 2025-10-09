@@ -4,10 +4,10 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { AccordionItemComponent } from './accordion-item.component';
 import { AccordionDirective } from './accordion.directive';
 
-const declarations = [AccordionDirective, AccordionItemComponent];
+const imports = [AccordionDirective, AccordionItemComponent];
 
 @NgModule({
-  imports: [IconModule, ...declarations],
-  exports: [...declarations],
+  imports: [IconModule, ...imports],
+  exports: [...imports],
 })
 export class AccordionModule {}

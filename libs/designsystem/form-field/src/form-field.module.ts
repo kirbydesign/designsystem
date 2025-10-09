@@ -7,10 +7,10 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
 import { DecimalMaskDirective } from './directives/decimal-mask/decimal-mask.directive';
 import { AffixDirective } from './directives/affix/affix.directive';
 
-const declarations = [FormFieldComponent, FormFieldMessageComponent, InputCounterComponent];
+const imports = [FormFieldComponent, FormFieldMessageComponent, InputCounterComponent];
 
 @NgModule({
-  imports: [CommonModule, DecimalMaskDirective, IconModule, AffixDirective, ...declarations],
-  exports: [...declarations, DecimalMaskDirective, AffixDirective],
+  imports: [CommonModule, DecimalMaskDirective, IconModule, AffixDirective, ...imports],
+  exports: [...imports, DecimalMaskDirective, AffixDirective],
 })
 export class FormFieldModule {}

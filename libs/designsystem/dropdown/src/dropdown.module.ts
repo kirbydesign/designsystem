@@ -12,8 +12,6 @@ import { ListItemTemplateDirective, ListModule } from '@kirbydesign/designsystem
 import { DropdownComponent } from './dropdown.component';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
-const declarations = [DropdownComponent];
-
 @NgModule({
   imports: [
     CardModule,
@@ -24,9 +22,9 @@ const declarations = [DropdownComponent];
     ButtonComponent,
     CommonModule,
     ListModule,
-    ...declarations,
+    DropdownComponent,
   ],
-  exports: [...declarations, ListItemTemplateDirective],
+  exports: [DropdownComponent, ListItemTemplateDirective],
   providers: [KeyboardHandlerService],
 })
 export class DropdownModule {}
