@@ -6,7 +6,7 @@ import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { RadioGroupComponent, RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular/standalone';
@@ -29,7 +29,7 @@ describe('FormFieldComponent', () => {
       AffixDirective,
       InputComponent,
       TextareaComponent,
-      RadioModule,
+      RadioComponent,
       IonItem,
       InputCounterComponent,
       ItemComponent,

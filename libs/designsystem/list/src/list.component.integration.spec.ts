@@ -4,8 +4,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
-import { CardModule } from '@kirbydesign/designsystem/card';
+
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { IonItem } from '@ionic/angular/standalone';
@@ -29,8 +28,6 @@ describe('ListComponent', () => {
     component: ListComponent,
     imports: [
       TestHelper.ionicModuleForTest,
-      CardModule,
-      SpinnerModule,
       IonItem,
       ItemComponent,
       IconComponent,

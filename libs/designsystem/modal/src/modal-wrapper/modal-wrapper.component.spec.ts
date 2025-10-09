@@ -9,7 +9,11 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import {
+  PageComponent,
+  PageProgressComponent,
+  PageTitleComponent,
+} from '@kirbydesign/designsystem/page';
 import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 import {
   DummyContentEmbeddedComponent,
@@ -27,7 +31,12 @@ const { getColor } = DesignTokenHelper;
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [PageModule, MockComponents(ButtonComponent)],
+    imports: [
+      PageComponent,
+      PageProgressComponent,
+      PageTitleComponent,
+      MockComponents(ButtonComponent),
+    ],
     entryComponents: [
       TitleEmbeddedComponent,
       StaticFooterEmbeddedComponent,

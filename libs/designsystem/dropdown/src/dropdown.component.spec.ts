@@ -8,7 +8,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -38,7 +38,6 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [
-        ItemModule,
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
@@ -1345,7 +1344,6 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [
-        ItemModule,
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],

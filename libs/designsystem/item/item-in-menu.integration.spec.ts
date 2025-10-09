@@ -1,14 +1,14 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { MenuComponent } from '../menu';
-import { ItemModule } from './src';
+import { ItemComponent, LabelComponent } from './src';
 
 describe('ItemComponent in a MenuComponent', () => {
   let spectator: SpectatorHost<MenuComponent>;
 
   const createHost = createHostFactory({
-    imports: [MockModule(IconModule), ItemModule],
+    imports: [MockModule(IconComponent), ItemComponent, LabelComponent],
     component: MenuComponent,
   });
 

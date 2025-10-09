@@ -1,4 +1,4 @@
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import {
   createComponentFactory,
   createHostFactory,
@@ -9,7 +9,7 @@ import {
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import {
   AlertHelper,
   CanDismissHelper,
@@ -31,9 +31,10 @@ import {
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule, ModalFooterComponent, IconModule],
+    imports: [ModalFooterComponent, IconComponent],
     entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
     mocks: [CanDismissHelper],
+    providers: [provideRouter([])],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -234,9 +235,10 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
 describe('ModalWrapperComponent + PageTitleComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule, PageTitleComponent],
+    imports: [PageTitleComponent],
     entryComponents: [TitleEmbeddedComponent],
     mocks: [CanDismissHelper],
+    providers: [provideRouter([])],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -292,9 +294,10 @@ describe('ModalWrapperComponent + PageTitleComponent', () => {
 describe('ModalWrapperComponent + PageProgressComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule, PageProgressComponent],
+    imports: [PageProgressComponent],
     entryComponents: [StaticPageProgressEmbeddedComponent, DynamicPageProgressEmbeddedComponent],
     mocks: [CanDismissHelper],
+    providers: [provideRouter([])],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;

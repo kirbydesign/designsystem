@@ -1,4 +1,3 @@
-import { RouterTestingModule } from '@angular/router/testing';
 import { IonIcon } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents } from 'ng-mocks';
@@ -16,11 +15,12 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import {
   PageActionsDirective,
   PageComponent,
-  PageModule,
+  PageContentComponent,
   PageTitleDirective,
 } from '@kirbydesign/designsystem/page';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
+import { provideRouter } from '@angular/router';
 import { ButtonComponent } from './button.component';
 
 const getColor = DesignTokenHelper.getColor;
@@ -33,10 +33,10 @@ describe('ButtonComponent in Kirby Page', () => {
     component: PageComponent,
     imports: [
       TestHelper.ionicModuleForTest,
-      RouterTestingModule,
       ButtonComponent,
       FitHeadingDirective,
-      PageModule,
+      PageComponent,
+      PageContentComponent,
       PageActionsDirective,
       PageTitleDirective,
     ],
@@ -45,6 +45,7 @@ describe('ButtonComponent in Kirby Page', () => {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
       },
+      provideRouter([]),
     ],
   });
 
@@ -186,7 +187,7 @@ describe('ButtonComponent in kirby empty state', () => {
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ButtonComponent, IconComponent],
+    imports: [TestHelper.ionicModuleForTest, ButtonComponent, IconComponent],
   });
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as ionic from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
@@ -62,7 +62,7 @@ describe('ListComponent', () => {
   const createHost = createComponentFactory({
     component: ListComponent,
     imports: [
-      SpinnerModule,
+      SpinnerComponent,
       ListComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,

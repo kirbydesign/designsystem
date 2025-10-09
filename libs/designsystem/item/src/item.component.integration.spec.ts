@@ -1,7 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -22,7 +22,8 @@ describe('ItemComponent integration', () => {
     imports: [
       TestHelper.ionicModuleForTest,
       CheckboxComponent,
-      RadioModule,
+      RadioComponent,
+      RadioGroupComponent,
       ToggleComponent,
       ButtonComponent,
       IonItem,

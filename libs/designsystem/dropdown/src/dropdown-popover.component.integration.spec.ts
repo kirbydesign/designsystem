@@ -11,7 +11,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -48,9 +48,7 @@ describe('DropdownComponent + PopoverComponent', () => {
       component: DropdownComponent,
       imports: [
         TestHelper.ionicModuleForTest,
-        ItemModule,
-        ItemComponent,
-        MockComponents(ButtonComponent, IconComponent, IonItem),
+        MockComponents(ItemComponent, ButtonComponent, IconComponent, IonItem),
         PopoverComponent,
         CardComponent,
       ],
@@ -147,7 +145,6 @@ describe('DropdownComponent + PopoverComponent', () => {
       component: DropdownComponent,
       imports: [
         TestHelper.ionicModuleForTest,
-        ItemModule,
         PopoverComponent,
         MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
       ],

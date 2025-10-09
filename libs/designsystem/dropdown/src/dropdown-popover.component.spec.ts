@@ -13,7 +13,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
@@ -38,9 +38,14 @@ describe('DropdownComponent (popover version)', () => {
       imports: [
         TestHelper.ionicModuleForTest,
         IonItem,
-        ItemModule,
-        ItemComponent,
-        MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
+        MockComponents(
+          ButtonComponent,
+          IconComponent,
+          ItemComponent,
+          IonItem,
+          PopoverComponent,
+          CardComponent
+        ),
       ],
     });
 

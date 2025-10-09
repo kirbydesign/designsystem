@@ -3,14 +3,14 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import * as ionic from '@ionic/angular/standalone';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import {
   InfiniteScrollDirective,
   ListComponent,
   ListItemColorDirective,
 } from '@kirbydesign/designsystem/list';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { MockComponent } from 'ng-mocks';
 
 import { ActionSheetComponent } from './action-sheet.component';
@@ -24,8 +24,7 @@ describe('ActionSheetComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        CardModule,
-        SpinnerModule,
+        SpinnerComponent,
         ActionSheetComponent,
         ListComponent,
         InfiniteScrollDirective,

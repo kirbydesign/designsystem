@@ -1,7 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from './icon.component';
@@ -13,7 +13,7 @@ describe('IconComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: IconComponent,
-    imports: [ItemModule],
+    imports: [ItemComponent, LabelComponent],
   });
 
   describe('slotted start', () => {
