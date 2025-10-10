@@ -1,0 +1,32 @@
+@use '@kirbydesign/core/src/scss/utils' as utils;
+
+:host {
+  display: flex;
+  width: 100%;
+}
+
+.menu-item-start {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: utils.icon-font-size('sm');
+  height: utils.icon-font-size('sm');
+}
+
+.menu-item-content {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  margin-inline-start: utils.size('xs');
+  font-size: inherit;
+}
+
+.menu-item-end {
+  display: inline-flex;
+  align-items: center;
+  height: utils.icon-font-size('sm');
+}
+
+.expanded-icon {
+  transform: rotate(90deg) !important;
+}

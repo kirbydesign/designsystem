@@ -1,0 +1,66 @@
+@use '@kirbydesign/core/src/scss/utils' as utils;
+
+.menu-item-list-0 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.menu-item-list-1 {
+  font-size: utils.font-size('s');
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: utils.size('xxs') utils.size('s');
+  border-radius: utils.border-radius('s');
+  color: inherit;
+  outline: none;
+
+  &:hover {
+    background-color: var(--menuitem-hover-background-color, utils.get-color('tertiary-tint'));
+  }
+
+  &:focus-visible {
+    --kirby-background-color: var(
+      --menuitem-hover-background-color,
+      #{utils.get-color('tertiary')}
+    );
+
+    box-shadow: inset 0 0 0 utils.size('xxxxs') utils.$focus-ring-color;
+  }
+}
+
+.clickable-menu-item {
+  text-decoration: none;
+
+  &:focus-visible:not(.selected) {
+    background-color: var(--menuitem-hover-background-color, utils.get-color('tertiary-tint'));
+  }
+
+  &.selected {
+    background-color: var(--menuitem-selected-background-color, utils.get-color('primary'));
+    color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
+    font-weight: utils.font-weight('bold');
+  }
+}
+
+.togglable-menu-item {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  text-align: left;
+
+  &[aria-expanded='true'] {
+    font-weight: utils.font-weight('bold');
+  }
+}
+
+kirby-divider {
+  display: block;
+  width: 100%;
+  opacity: 0.2;
+  margin: 8px -8px;
+}
