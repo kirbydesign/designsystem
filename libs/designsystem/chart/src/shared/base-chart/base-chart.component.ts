@@ -20,7 +20,6 @@ import { ChartJSService } from '../chart-js-service/';
   selector: 'kirby-base-chart',
   templateUrl: './base-chart.component.html',
   styleUrls: ['./base-chart.component.scss'],
-  standalone: false,
 })
 export class BaseChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() type: ChartType;
@@ -46,11 +45,11 @@ export class BaseChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   constructor(protected chartJSService: ChartJSService) {}
 
   ngAfterViewInit() {
-    /* 
-       A chart is not rendered until it has both a height and a width. 
+    /*
+       A chart is not rendered until it has both a height and a width.
        If ChartComponent is slotted in an ionic component it will
-       not have any height or width on afterViewInit. This will cause 
-       the animation to not be played on first draw. 
+       not have any height or width on afterViewInit. This will cause
+       the animation to not be played on first draw.
     */
     const canvasElement = this.canvasElement.nativeElement;
     this.whenElementHasHeightAndWidth(canvasElement).then(() => this.renderChart());

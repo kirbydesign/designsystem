@@ -1,7 +1,6 @@
-import { MockModule } from 'ng-mocks';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TableSortableComponent } from './sortable.component';
@@ -13,15 +12,7 @@ describe('TableSortableComponent', () => {
 
   const createHost = createHostFactory({
     component: TableSortableComponent,
-    overrideComponents: [
-      [
-        TableSortableComponent,
-        {
-          remove: { imports: [IconModule] },
-          add: { imports: [[MockModule(IconModule)]] },
-        },
-      ],
-    ],
+    imports: [IconComponent],
   });
 
   beforeEach(() => {

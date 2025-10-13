@@ -17,9 +17,9 @@ import {
 } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
 
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 import {
   FloatingDirective,
@@ -33,7 +33,7 @@ import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem
 
 @Component({
   selector: 'kirby-menu',
-  imports: [ButtonComponent, FloatingDirective, IconModule, CardModule, ItemModule],
+  imports: [ButtonComponent, FloatingDirective, CardComponent, IconComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

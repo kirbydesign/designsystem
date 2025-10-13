@@ -30,20 +30,6 @@ import {
 } from './page.component';
 
 @NgModule({
-  declarations: [
-    PageComponent,
-    PageActionsComponent,
-    PageActionsDirective,
-    PageContentComponent,
-    PageFooterComponent,
-    PageContentDirective,
-    PageProgressComponent,
-    PageTitleComponent,
-    PageTitleDirective,
-    PageSubtitleDirective,
-    PageToolbarTitleDirective,
-    PageStickyContentDirective,
-  ],
   imports: [
     CommonModule,
     FitHeadingDirective,
@@ -57,6 +43,18 @@ import {
     IonTitle,
     IonRefresher,
     IonFooter,
+    PageComponent,
+    PageActionsComponent,
+    PageActionsDirective,
+    PageContentComponent,
+    PageFooterComponent,
+    PageContentDirective,
+    PageProgressComponent,
+    PageTitleComponent,
+    PageTitleDirective,
+    PageSubtitleDirective,
+    PageToolbarTitleDirective,
+    PageStickyContentDirective,
   ],
   exports: [
     PageComponent,

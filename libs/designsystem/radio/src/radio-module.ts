@@ -7,8 +7,7 @@ import { RadioComponent } from './radio.component';
 const declarations = [RadioComponent, RadioGroupComponent];
 
 @NgModule({
-  imports: [CommonModule, IonRadio, IonRadioGroup],
-  declarations: [...declarations],
+  imports: [CommonModule, IonRadio, IonRadioGroup, ...declarations],
   exports: [...declarations],
 })
 export class RadioModule {}

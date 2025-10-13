@@ -8,7 +8,6 @@ describe('LabelComponent', () => {
   const createHost = createComponentFactory({
     imports: [TestHelper.ionicModuleForTest],
     component: LabelComponent,
-    declarations: [],
   });
 
   beforeEach(() => {

@@ -9,6 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
+import { IonIcon } from '@ionic/angular/standalone';
 import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
 
@@ -25,7 +26,7 @@ export enum IconSize {
   styleUrls: ['./icon.component.scss'],
   host: { '[class.kirby-icon]': 'true' },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IonIcon],
 })
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
@@ -63,7 +64,7 @@ export class IconComponent implements OnChanges {
   }
 
   private warnAboutMissingIcon(): void {
-    console.warn(`Icon with name "${this.name}" was not found. 
+    console.warn(`Icon with name "${this.name}" was not found.
 Do you have a typo in 'name' for a built-in icon or
 forgot to configure the custom icon through the 'IconRegistryService'?`);
   }

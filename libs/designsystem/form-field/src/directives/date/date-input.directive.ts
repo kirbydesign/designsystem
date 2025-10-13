@@ -11,9 +11,7 @@ import {
 } from '@angular/core';
 import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
-@Directive({
-  standalone: true,
-})
+@Directive({})
 export class DateInputDirective implements AfterViewInit {
   @HostListener('input')
   onInput() {

@@ -43,8 +43,7 @@ describe('SegmentedControlComponent', () => {
   describe('used standalone', () => {
     const createHost = createHostFactory({
       component: SegmentedControlComponent,
-      declarations: [MockDirective(ThemeColorDirective)],
-      imports: [TestHelper.ionicModuleForTest],
+      imports: [TestHelper.ionicModuleForTest, MockDirective(ThemeColorDirective)],
     });
 
     beforeEach(async () => {

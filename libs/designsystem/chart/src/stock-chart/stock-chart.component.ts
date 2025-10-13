@@ -9,7 +9,6 @@ import { StockChartJSService } from './stock-chart-js.service';
   providers: [{ provide: ChartJSService, useClass: StockChartJSService }],
   templateUrl: '../shared/base-chart/base-chart.component.html',
   styleUrls: ['../shared/base-chart/base-chart.component.scss'],
-  standalone: false,
 })
 export class StockChartComponent extends BaseChartComponent {
   @Input() dataLabelOptions?: ChartDataLabelOptions;
