@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 
 import { IonIcon } from '@ionic/angular/standalone';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
 
@@ -27,7 +26,7 @@ export enum IconSize {
   styleUrls: ['./icon.component.scss'],
   host: { '[class.kirby-icon]': 'true' },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [IonIcon, ThemeColorDirective],
+  imports: [IonIcon],
 })
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
