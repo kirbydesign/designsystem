@@ -7,6 +7,7 @@ import {
   ContentChild,
   ContentChildren,
   ElementRef,
+  HostBinding,
   HostListener,
   Input,
   OnDestroy,
@@ -90,6 +91,7 @@ export class FormFieldComponent
     this.element = elementRef.nativeElement;
   }
 
+  @HostBinding('class.wrap-content-in-label')
   get _wrapContentInLabel(): boolean {
     return !!this.label && (!!this.input || !!this.textarea);
   }

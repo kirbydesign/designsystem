@@ -71,7 +71,8 @@ label {
 
 // Background color needs to be synchronized with input.component
 // Background color must be fully opaque to cover native icon
-label:has(input[type='date']) {
+:host:not(.wrap-content-in-label) .affix-container:has(input[type='date']),
+:host(.wrap-content-in-label) label:has(input[type='date']) {
   --date-input-background-color: var(--kirby-inputs-background-color);
 
   @include interaction-state.apply-hover {
