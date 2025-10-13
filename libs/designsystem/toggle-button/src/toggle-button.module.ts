@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ToggleButtonComponent } from './toggle-button.component';
 
-const DECLARATIONS = [ToggleButtonComponent];
-
 @NgModule({
-  imports: [CommonModule, ...DECLARATIONS],
-  exports: [...DECLARATIONS],
+  imports: [CommonModule, ToggleButtonComponent],
+  exports: [ToggleButtonComponent],
 })
 export class ToggleButtonModule {}
