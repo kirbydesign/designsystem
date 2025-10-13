@@ -11,6 +11,7 @@
   [attentionLevel]="attentionLevel"
   (click)="onToggle($event)"
   [disabled]="disabled"
+  [tabindex]="tabindex"
 >
   <span class="text">{{ selectedText || placeholder }}</span>
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
