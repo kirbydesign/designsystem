@@ -3,6 +3,7 @@ import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 import {
   ActionSheetConfig,
   AlertConfig,
+  DropdownModule,
   ModalController,
   ModalFlavor,
   ModalSize,
@@ -52,6 +53,7 @@ import {
     InputComponent,
     ModalFooterComponent,
     ThemeColorDirective,
+    DropdownModule,
   ],
 })
 export class EmbeddedModalExampleComponent implements OnInit {
