@@ -33,6 +33,8 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { NgTemplateOutlet } from '@angular/common';
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
@@ -47,7 +49,14 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
       multi: true,
     },
   ],
-  standalone: false,
+  imports: [
+    ButtonComponent,
+    NgTemplateOutlet,
+    PopoverComponent,
+    CardComponent,
+    ItemComponent,
+    IconComponent,
+  ],
 })
 export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;

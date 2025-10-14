@@ -13,8 +13,7 @@ describe('EmptyStateComponent with slotted buttons', () => {
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [PageComponent],
-    declarations: [MockComponent(IconComponent), ButtonComponent],
+    imports: [PageComponent, MockComponent(IconComponent), ButtonComponent],
   });
 
   beforeEach(() => {
@@ -50,7 +49,7 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    declarations: [MockComponent(IconComponent), ButtonComponent],
+    imports: [MockComponent(IconComponent), ButtonComponent],
   });
 
   beforeEach(() => {
@@ -80,7 +79,7 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    declarations: [MockComponent(IconComponent), ButtonComponent],
+    imports: [MockComponent(IconComponent), ButtonComponent],
   });
 
   beforeEach(() => {

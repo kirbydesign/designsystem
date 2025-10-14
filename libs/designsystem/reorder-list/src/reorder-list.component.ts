@@ -13,15 +13,22 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 
 import { IonBackdrop, IonReorderGroup } from '@ionic/angular/standalone';
 import { ReorderEvent } from './reorder-event';
 
 @Component({
-  imports: [CardModule, ItemModule, CommonModule, IonBackdrop, IonReorderGroup],
+  imports: [
+    CardComponent,
+    ItemComponent,
+    LabelComponent,
+    CommonModule,
+    IonBackdrop,
+    IonReorderGroup,
+  ],
   selector: 'kirby-reorder-list',
   templateUrl: './reorder-list.component.html',
   styleUrls: ['./reorder-list.component.scss'],

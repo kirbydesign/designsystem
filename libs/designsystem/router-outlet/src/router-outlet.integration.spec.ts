@@ -15,10 +15,10 @@ import { IonRouterOutlet } from '@kirbydesign/designsystem/tabs';
 
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
-import { RouterOutletComponent, RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
+import { RouterOutletComponent } from '@kirbydesign/designsystem/router-outlet';
 import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 import { Component } from '@angular/core';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 
 const firstPageTitle = 'First Page';
 const secondPageTitle = 'Second Page';
@@ -34,7 +34,7 @@ const secondPageTitle = 'Second Page';
       </kirby-page-content>
     </kirby-page>
   `,
-  imports: [PageModule, RouterLink],
+  imports: [PageComponent, PageContentComponent, RouterLink],
 })
 class FirstPageComponent {}
 
@@ -46,7 +46,7 @@ class FirstPageComponent {}
       <kirby-page-content>Content</kirby-page-content>
     </kirby-page>
   `,
-  imports: [PageModule, RouterLink],
+  imports: [PageComponent, PageContentComponent, RouterLink],
 })
 class SecondPageComponent {}
 
@@ -80,7 +80,7 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
       IonTitle,
       IonToolbar,
       IonRouterOutlet,
-      RouterOutletModule,
+      RouterOutletComponent,
     ],
     providers: [
       provideKirby(withGlobalSetup({ focusManager: true, setHtmlDocTitle: true })),

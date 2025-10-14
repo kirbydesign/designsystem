@@ -1,13 +1,14 @@
 import { Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { IonTabButton } from '@ionic/angular/standalone';
 import { selectedTabClickEvent } from './tab-button.events';
 
 @Component({
   selector: 'kirby-tab-button',
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss'],
-  standalone: false,
+  imports: [IonTabButton],
 })
 export class TabButtonComponent {
   @Input() tab: string;

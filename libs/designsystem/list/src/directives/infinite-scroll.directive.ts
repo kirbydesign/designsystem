@@ -20,10 +20,7 @@ import { Scroll } from './scroll.model';
  */
 export const INFINITE_SCROLL_DEBOUNCE = 100;
 
-@Directive({
-  selector: '[kirbyInfiniteScroll]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyInfiniteScroll]' })
 export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   /**
    * Event that will be triggered when the user has scrolled to

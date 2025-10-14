@@ -13,8 +13,7 @@ describe('CardComponent', () => {
 
   const createHost = createHostFactory({
     component: CardComponent,
-    declarations: [CardHeaderComponent],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, CardHeaderComponent],
   });
 
   describe('by default', () => {

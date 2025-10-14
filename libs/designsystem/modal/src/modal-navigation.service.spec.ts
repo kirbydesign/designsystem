@@ -1,6 +1,6 @@
 import { Component, NgModule, NgZone } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, Routes } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { EMPTY } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
@@ -134,8 +134,8 @@ describe('ModalNavigationService', () => {
 
   const createService = createServiceFactory({
     service: ModalNavigationService,
-    imports: [
-      RouterTestingModule.withRoutes([
+    providers: [
+      provideRouter([
         {
           path: 'home',
           component: DummyHomeComponent,

@@ -20,8 +20,12 @@ describe('AvatarComponent', () => {
 
   const createHost = createHostFactory({
     component: AvatarComponent,
-    declarations: [IconComponent],
-    imports: [TestHelper.ionicModuleForTest, ProgressCircleComponent, ProgressCircleRingComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      ProgressCircleComponent,
+      ProgressCircleRingComponent,
+      IconComponent,
+    ],
   });
 
   it('should create', () => {

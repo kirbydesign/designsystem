@@ -29,7 +29,7 @@ import { ResizeObserverService, TranslationService } from '@kirbydesign/designsy
 import { UnobserveFn, WindowRef } from '@kirbydesign/designsystem/types';
 import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
@@ -54,7 +54,7 @@ const contentScrolledOffsetInPixels = 4;
   imports: [
     RouterModule,
     ButtonComponent,
-    IconModule,
+    IconComponent,
     CommonModule,
     IonHeader,
     IonToolbar,

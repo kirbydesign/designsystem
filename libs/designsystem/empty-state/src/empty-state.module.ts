@@ -4,11 +4,8 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { EmptyStateComponent } from './empty-state.component';
 
-const declarations = [EmptyStateComponent];
-
 @NgModule({
-  imports: [IconModule, CommonModule, ThemeColorDirective],
-  declarations: [...declarations],
-  exports: [...declarations, ThemeColorDirective],
+  imports: [IconModule, CommonModule, ThemeColorDirective, EmptyStateComponent],
+  exports: [EmptyStateComponent, ThemeColorDirective],
 })
 export class EmptyStateModule {}
