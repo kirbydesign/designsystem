@@ -133,6 +133,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   size: 'sm' | 'md' = 'md';
 
+  // Tabindex defaults to 0 instead of no value to align tabbing behavior in Safari
+  // with other browsers and the default select behavior: https://mayank.co/blog/safari-focus/
   @Input()
   tabindex = 0;
 
@@ -194,7 +196,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     after the page is loaded. If the user interacts with any other element before, then the dropdown won't get a focus ring.
     See issue: https://github.com/kirbydesign/designsystem/issues/2477.
 
-    This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible 
+    This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible
     to close the dropdown when the popover backdrop is clicked, instead of relying on the blur event, which is utilized
     by this line below: this.elementRef.nativeElement.focus(). Right now this forces the blur event to be triggered, when
     clicking outside of the dropdown.
