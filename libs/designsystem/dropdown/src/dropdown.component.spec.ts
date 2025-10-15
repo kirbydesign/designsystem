@@ -103,7 +103,7 @@ describe('DropdownComponent', () => {
       expect(spectator.element.attributes['no-blur']).toBeDefined();
     });
 
-    it('should not render button as disabled ', () => {
+    it('should not render button as disabled', () => {
       expect(buttonElement.disabled).toBeFalsy();
     });
 
@@ -111,8 +111,12 @@ describe('DropdownComponent', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
     });
 
-    it('should have type="button" attribute', () => {
+    it('should have type="button" attribute on button', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
+    it('should have tabindex="0" by default on button', () => {
+      expect(buttonElement).toHaveAttribute('tabindex', '0');
     });
 
     it('should have correct id on button', () => {
@@ -993,12 +997,16 @@ describe('DropdownComponent', () => {
         expect(spectator.element.attributes['disabled']).toBeDefined();
       });
 
-      it('should render button as disabled ', () => {
+      it('should render button as disabled', () => {
         expect(buttonElement.disabled).toBeTruthy();
       });
 
       it('should render disabled attribute on button', () => {
         expect(buttonElement.attributes['disabled']).toBeDefined();
+      });
+
+      it('should render tabindex="-1" attribute on button', () => {
+        expect(buttonElement).toHaveAttribute('tabindex', '-1');
       });
 
       it('should not open', fakeAsync(() => {

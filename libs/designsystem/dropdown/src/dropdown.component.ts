@@ -142,6 +142,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   size: 'sm' | 'md' = 'md';
 
+  // Tabindex defaults to 0 instead of no value to align tabbing behavior in Safari
+  // with other browsers and the default select behavior: https://mayank.co/blog/safari-focus/
   @Input()
   tabindex = 0;
 
