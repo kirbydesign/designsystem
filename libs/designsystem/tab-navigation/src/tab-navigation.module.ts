@@ -4,8 +4,7 @@ import { TabNavigationComponent } from './tab-navigation/tab-navigation.componen
 import { TabNavigationItemComponent } from './tab-navigation-item/tab-navigation-item.component';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [TabNavigationComponent, TabNavigationItemComponent],
+  imports: [CommonModule, TabNavigationComponent, TabNavigationItemComponent],
   exports: [TabNavigationComponent, TabNavigationItemComponent],
 })
 export class TabNavigationModule {}

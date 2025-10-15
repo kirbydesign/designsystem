@@ -18,9 +18,12 @@ import {
 import { ThemeColor } from '@kirbydesign/core';
 
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
+import { IonItemDivider, IonItemGroup, IonList, IonListHeader } from '@ionic/angular/standalone';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { BoundaryClass } from './list-item/list-item.component';
+import { BoundaryClass, ListItemComponent } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action.type';
 import {
   ListFooterDirective,
@@ -48,7 +51,17 @@ export type StandAloneSpacing =
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper],
-  standalone: false,
+  imports: [
+    IonList,
+    InfiniteScrollDirective,
+    IonListHeader,
+    NgTemplateOutlet,
+    SpinnerComponent,
+    IonItemGroup,
+    NgClass,
+    IonItemDivider,
+    ListItemComponent,
+  ],
 })
 export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('list', { static: true }) list: any;

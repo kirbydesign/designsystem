@@ -15,7 +15,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'kirby-toggle-button',
   templateUrl: './toggle-button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

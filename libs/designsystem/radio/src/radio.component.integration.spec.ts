@@ -18,7 +18,7 @@ describe('RadioComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: RadioComponent,
-    declarations: MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup),
+    imports: [MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup)],
   });
 
   describe('by default', () => {
@@ -66,8 +66,11 @@ describe('RadioComponent in RadioGroup', () => {
 
   const createHost = createHostFactory({
     component: RadioGroupComponent,
-    declarations: [RadioComponent, MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup)],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      RadioComponent,
+      MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup),
+    ],
   });
 
   describe('when radio group hasError=true', () => {

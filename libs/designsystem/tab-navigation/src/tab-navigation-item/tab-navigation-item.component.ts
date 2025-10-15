@@ -13,7 +13,6 @@ import { forwardAttributes } from '@kirbydesign/designsystem/shared';
   templateUrl: './tab-navigation-item.component.html',
   styleUrls: ['./tab-navigation-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
   host: { role: 'presentation' },
 })
 export class TabNavigationItemComponent implements AfterViewInit {

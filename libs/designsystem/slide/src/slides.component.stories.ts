@@ -1,7 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { SlideModule, SlidesComponent } from '@kirbydesign/designsystem/slide';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
+import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
 import { SlidesExampleComponent } from '~/app/examples/slides-example/slides-example.component';
@@ -11,7 +11,7 @@ const meta: Meta<SlidesComponent> = {
   title: 'Components / Slides',
   decorators: [
     moduleMetadata({
-      imports: [SlideModule, CardModule, SlidesExampleComponent],
+      imports: [SlideDirective, CardComponent, CardHeaderComponent, SlidesExampleComponent],
     }),
   ],
   parameters: {

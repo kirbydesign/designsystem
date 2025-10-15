@@ -1,8 +1,8 @@
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { IconModule } from '@kirbydesign/designsystem/icon';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { KirbySwiperOptions, SlidesComponent } from './slides.component';
 import { SlideDirective } from './slide.directive';
@@ -28,8 +28,15 @@ describe('SlidesComponent', () => {
 
   const createHost = createHostFactory({
     component: SlidesComponent,
-    imports: [TestHelper.ionicModuleForTest, ButtonComponent, IconModule, CardModule],
-    declarations: [SlideDirective, SlideStretchHeightDirective],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      ButtonComponent,
+      IconComponent,
+      CardComponent,
+      CardHeaderComponent,
+      SlideDirective,
+      SlideStretchHeightDirective,
+    ],
   });
 
   const hostTemplate = `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions" [title]="'Title'" [showNavigation]="true">

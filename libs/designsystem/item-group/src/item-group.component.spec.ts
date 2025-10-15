@@ -9,7 +9,7 @@ describe('ItemGroup', () => {
 
   const createHost = createHostFactory({
     component: ItemGroupComponent,
-    declarations: [ItemGroupComponent, MockComponent(ItemComponent)],
+    imports: [ItemGroupComponent, MockComponent(ItemComponent)],
   });
 
   beforeEach(() => {

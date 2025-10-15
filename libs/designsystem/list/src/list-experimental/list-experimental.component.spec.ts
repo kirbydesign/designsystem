@@ -14,7 +14,7 @@ describe('ListExperimental', () => {
 
   const createHost = createHostFactory({
     component: ListExperimentalComponent,
-    declarations: [
+    imports: [
       ListExperimentalComponent,
       MockComponent(IonList),
       MockComponent(IonItem),
