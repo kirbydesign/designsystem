@@ -6,7 +6,7 @@ export function selectMenuItem<T extends SidebarMenuItem>(itemId: string, items:
       return { ...item, selected: true };
     }
     if (item.children) {
-      return item.isExpanded ? { ...item, children: selectMenuItem(itemId, item.children) } : item;
+      return { ...item, children: selectMenuItem(itemId, item.children) };
     }
     return { ...item, selected: false };
   });

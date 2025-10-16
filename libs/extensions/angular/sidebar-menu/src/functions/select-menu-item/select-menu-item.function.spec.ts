@@ -27,7 +27,7 @@ const menuItemsMock: SidebarMenuItem[] = [
       {
         id: 'advanced',
         title: 'Advanced',
-        isExpanded: true,
+        isExpanded: false,
         children: [
           {
             id: 'nested-setting',
@@ -51,11 +51,5 @@ describe('Function: selectMenuItem', () => {
     const result = selectMenuItem('home', menuItemsMock);
 
     expect(result[2].children?.[0].children?.[0].selected).toBe(false);
-  });
-
-  it('should NOT select nested item when parent is collapsed', () => {
-    const result = selectMenuItem('product-1', menuItemsMock);
-
-    expect(result[1].children?.[0].selected).toBe(false);
   });
 });
