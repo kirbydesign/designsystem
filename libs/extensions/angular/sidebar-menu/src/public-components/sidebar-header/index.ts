@@ -1,1 +1,1 @@
-export * from './sidebar-header.component';
+export * from './sidebar-header.public-component';

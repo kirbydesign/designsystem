@@ -1,6 +1,6 @@
 <nav class="sidebar">
   <div class="sidebar-header" [class.bottom-border]="vm.showHeaderBottomBorder()">
-    <ng-content select="kirby-x-sidebar-header"></ng-content>
+    <ng-content select="header"></ng-content>
   </div>
   <div
     kirbyXHeightObserver
@@ -15,6 +15,6 @@
     ></kirby-x-menu-container>
   </div>
   <div class="sidebar-footer" [class.top-border]="vm.showFooterTopBorder()">
-    <ng-content select="kirby-x-sidebar-footer"></ng-content>
+    <ng-content select="footer"></ng-content>
   </div>
 </nav>

@@ -2,7 +2,7 @@ import { createHostFactory } from '@ngneat/spectator/jest';
 import { SidebarService } from '../../services/sidebar';
 import { MenuStateService } from '../../services/menu-state';
 import { SidebarMenuItem } from '../../models';
-import { SidebarComponent } from './sidebar.component';
+import { SidebarMenuComponent } from './sidebar-menu.component';
 
 const menuItemMock1 = { id: '1', children: [], isExpanded: false };
 const menuItemMock2 = { id: '2' };
@@ -14,15 +14,15 @@ type HostProps = {
   autoCollapse: boolean;
 };
 
-describe(SidebarComponent.name, () => {
+describe(SidebarMenuComponent.name, () => {
   const createHost = createHostFactory({
-    component: SidebarComponent,
+    component: SidebarMenuComponent,
     providers: [SidebarService, MenuStateService],
   });
 
   const render = (propOverrides: Partial<HostProps> = {}) =>
     createHost(
-      `<kirby-x-sidebar [menuItems]="menuItems" [autoCollapse]="autoCollapse"></kirby-x-sidebar>`,
+      `<kirby-x-sidebar-menu [menuItems]="menuItems" [autoCollapse]="autoCollapse"></kirby-x-sidebar-menu>`,
       {
         hostProps: {
           menuItems: menuItemsMock,
@@ -43,7 +43,7 @@ describe(SidebarComponent.name, () => {
     it('should emit the toggled submenu', async () => {
       const spectator = render();
       const stateService = spectator.inject(MenuStateService);
-      const emitSpy = jest.spyOn(spectator.component.afterMenuToggled, 'emit');
+      const emitSpy = jest.spyOn(spectator.component.submenuToggle, 'emit');
 
       stateService.toggledSubmenu = menuItemMock1;
 
@@ -97,7 +97,7 @@ describe(SidebarComponent.name, () => {
     it('should emit the selected menu item', async () => {
       const spectator = render();
       const stateService = spectator.inject(MenuStateService);
-      const emitSpy = jest.spyOn(spectator.component.afterMenuClicked, 'emit');
+      const emitSpy = jest.spyOn(spectator.component.itemClick, 'emit');
 
       stateService.selectedItem = menuItemMock2;
 
@@ -121,20 +121,6 @@ describe(SidebarComponent.name, () => {
         ...menuItemMock3.children[0],
         selected: false,
       });
-    });
-  });
-
-  describe('Effect : menuItemsChanged backwards compatability', () => {
-    it('should emit menuItemsChanged when menu items changes', async () => {
-      const spectator = render();
-      const emitSpy = jest.spyOn(spectator.component.menuItemsChanged, 'emit');
-
-      spectator.component.menuItems.set([{ id: 'new', children: [] }]);
-
-      spectator.detectChanges();
-      await spectator.fixture.whenStable();
-
-      expect(emitSpy).toHaveBeenCalledWith([{ id: 'new', children: [] }]);
     });
   });
 });

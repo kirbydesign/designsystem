@@ -1,6 +1,5 @@
 import { Component, effect, inject, input, model, output, Signal } from '@angular/core';
-
-import { MenuContainerComponent } from '../../components/menu-container';
+import { MenuContainerComponent } from '../menu-container';
 import { HeightObserverDirective } from '../../directives/height-observer';
 import { selectMenuItem } from '../../functions/select-menu-item';
 import { toggleSubmenu } from '../../functions/toggle-submenu';
@@ -19,26 +18,16 @@ type ViewModel<T> = {
 };
 
 @Component({
-  selector: 'kirby-x-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  selector: 'kirby-x-sidebar-menu',
+  templateUrl: './sidebar-menu.component.html',
+  styleUrls: ['./sidebar-menu.component.scss'],
   imports: [HeightObserverDirective, MenuContainerComponent],
 })
-export class SidebarComponent<T extends SidebarMenuItem> {
+export class SidebarMenuComponent<T extends SidebarMenuItem> {
   readonly menuItems = model.required<T[]>();
   readonly autoCollapse = input<boolean>(false);
-  readonly afterMenuToggled = output<T>();
-  readonly afterMenuClicked = output<T>();
-
-  /**
-   * @deprecated has not had an effect for a long time
-   */
-  readonly expandIconOnHover = input<boolean>(false);
-
-  /**
-   * @deprecated should use menuItemsChange or two-way binding on menuItems instead
-   */
-  readonly menuItemsChanged = output<T[]>();
+  readonly submenuToggle = output<T>();
+  readonly itemClick = output<T>();
 
   readonly #sidebarService = inject(SidebarService);
   readonly #menuStateService = inject(MenuStateService<T>);
@@ -47,7 +36,7 @@ export class SidebarComponent<T extends SidebarMenuItem> {
     effect(() => {
       const toggledSubmenu = this.#menuStateService.toggledSubmenu();
       if (toggledSubmenu) {
-        this.afterMenuToggled.emit(toggledSubmenu);
+        this.submenuToggle.emit(toggledSubmenu);
         this.menuItems.update((items) =>
           this.autoCollapse()
             ? toggleSubmenuAutoCollapsed(toggledSubmenu.id, items)
@@ -59,13 +48,9 @@ export class SidebarComponent<T extends SidebarMenuItem> {
     effect(() => {
       const selectedItem = this.#menuStateService.selectedItem();
       if (selectedItem) {
-        this.afterMenuClicked.emit(selectedItem);
+        this.itemClick.emit(selectedItem);
         this.menuItems.update((items) => selectMenuItem(selectedItem.id, items));
       }
-    });
-
-    effect(() => {
-      this.menuItemsChanged.emit(this.menuItems());
     });
   }
 
