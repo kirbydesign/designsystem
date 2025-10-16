@@ -11,9 +11,6 @@
   <span class="text">{{ selectedText || placeholder }}</span>
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
 </button>
-<kirby-label *ngIf="hasError && errorMessage" class="error-message" themeColor="danger" size="xs">
-  {{ errorMessage }}
-</kirby-label>
 
 <ng-container *ngTemplateOutlet="usePopover ? popoverTemplate : itemWrapperTemplate"></ng-container>
 

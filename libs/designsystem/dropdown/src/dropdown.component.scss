@@ -43,18 +43,6 @@ $min-screen-width: 375px;
     }
   }
 
-  &.error-message {
-    font-style: italic;
-    font-size: utils.font-size('xs');
-    font-weight: utils.font-weight('normal');
-    font-stretch: normal;
-    line-height: utils.line-height('xs');
-    min-height: utils.line-height('xs');
-    letter-spacing: normal;
-    color: utils.get-text-color('black');
-    padding-left: var(--kirby-spacing-4);
-  }
-
   > button {
     position: relative;
     margin: 0;

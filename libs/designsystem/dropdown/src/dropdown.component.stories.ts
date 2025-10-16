@@ -40,7 +40,6 @@ export const Dropdown: Story = {
     attentionLevel: '3',
     disabled: false,
     hasError: false,
-    errorMessage: '',
     size: 'md',
     selectedIndex: -1,
     tabindex: 0,

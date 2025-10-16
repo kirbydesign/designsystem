@@ -48,7 +48,8 @@ export class FormFieldComponent
     | HTMLButtonElement
     | HTMLInputElement
     | HTMLTextAreaElement
-    | HTMLIonRadioGroupElement;
+    | HTMLIonRadioGroupElement
+    | HTMLElement;
   private nestedInteractiveErrorSubscription: Subscription;
   private _message: string | null;
 
@@ -73,12 +74,12 @@ export class FormFieldComponent
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
   @ContentChild(InputComponent) inputComponent: InputComponent;
-  @ContentChild(DropdownComponent) dropDownComponent: DropdownComponent;
+  @ContentChild(DropdownComponent) dropdownComponent: DropdownComponent;
   @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
   @ContentChild(RadioGroupComponent, { read: ElementRef })
   private radioGroupElement: ElementRef<HTMLElement>;
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
-  @ContentChild(DropdownComponent, { read: ElementRef }) dropDown: ElementRef<HTMLButtonElement>;
+  @ContentChild(DropdownComponent, { read: ElementRef }) dropdown: ElementRef<HTMLElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
   @ContentChild(DateInputDirective) dateInput: DateInputDirective;
@@ -207,7 +208,8 @@ export class FormFieldComponent
     this.nestedInteractiveElement =
       this.input?.nativeElement ||
       this.textarea?.nativeElement ||
-      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group');
+      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group') ||
+      this.dropdown?.nativeElement;
   }
 
   private setNestedInteractiveElementAttributes() {
@@ -237,7 +239,7 @@ export class FormFieldComponent
       this.inputComponent ||
       this.textareaComponent ||
       this.radioGroupComponent ||
-      this.dropDownComponent;
+      this.dropdownComponent;
 
     // set current value, then listen for changes
     this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
