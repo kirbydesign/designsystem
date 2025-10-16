@@ -11,13 +11,14 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 @Component({
   selector: 'kirby-empty-state',
   templateUrl: './empty-state.component.html',
   styleUrls: ['./empty-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IconComponent],
 })
 export class EmptyStateComponent implements AfterContentInit, OnInit {
   private _title: string;
@@ -36,6 +37,7 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
   get title(): string {
     return this._title;
   }
+  _insideModal: boolean = false;
 
   @Input() subtitle: string;
 
@@ -54,6 +56,7 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
      */
     this.ionModalDialog = getIonModalDialogAncestor(this.elementRef.nativeElement);
     if (this.ionModalDialog) {
+      this._insideModal = true;
       this.renderer.setAttribute(this.ionModalDialog, 'aria-label', this.title);
     }
   }
@@ -61,7 +64,7 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
   ngAfterContentInit() {
     this.enforceAttentionLevelRules();
 
-    /* setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when changing attention 
+    /* setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when changing attention
     levels of slotted buttons in this.enforceAttentionLevelRules */
     this.slottedButtons.changes.subscribe(() => {
       setTimeout(() => this.enforceAttentionLevelRules());

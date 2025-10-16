@@ -3,8 +3,8 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
-import { PageComponent, PageModule } from '@kirbydesign/designsystem/page';
-import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
+import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
 const meta: Meta<PageComponent> = {
@@ -13,7 +13,7 @@ const meta: Meta<PageComponent> = {
   decorators: [
     moduleMetadata({
       providers: [ModalNavigationService],
-      imports: [RouterTestingModule, KirbyAppModule, PageModule],
+      imports: [RouterTestingModule, AppComponent, PageComponent, PageContentComponent],
     }),
   ],
   parameters: {

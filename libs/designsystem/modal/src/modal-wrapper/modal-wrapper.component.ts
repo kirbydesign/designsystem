@@ -29,7 +29,7 @@ import { ResizeObserverService, TranslationService } from '@kirbydesign/designsy
 import { UnobserveFn, WindowRef } from '@kirbydesign/designsystem/types';
 import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
@@ -54,7 +54,7 @@ const contentScrolledOffsetInPixels = 4;
   imports: [
     RouterModule,
     ButtonComponent,
-    IconModule,
+    IconComponent,
     CommonModule,
     IonHeader,
     IonToolbar,
@@ -117,8 +117,8 @@ export class ModalWrapperComponent
   private _contentTitleElement: ElementRef<HTMLElement>;
 
   get contentTitleElement(): ElementRef<HTMLElement> {
-    /* 
-        contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
+    /*
+        contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried.
         Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
       */
     if (!this._contentTitleElement && this._hasCollapsibleTitle) {
@@ -214,6 +214,10 @@ export class ModalWrapperComponent
   private _currentFooter: HTMLElement | null = null;
 
   private set currentFooter(footer: HTMLElement | null) {
+    if (this._currentFooter) {
+      this.resizeObserverService.unobserve(this._currentFooter);
+    }
+    this._currentFooter = footer;
     if (footer !== null) {
       this.resizeObserverService.observe(footer, (entry) => {
         const [property, pixelValue] = [

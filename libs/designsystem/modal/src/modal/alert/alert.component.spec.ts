@@ -1,5 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { AlertComponent } from './alert.component';
 
@@ -8,13 +8,13 @@ describe('AlertComponent', () => {
 
   const createHost = createHostFactory({
     component: AlertComponent,
-    imports: [IconModule],
+    imports: [IconComponent],
   });
 
   beforeEach(() => {
     spectator = createHost(
       `
-      <kirby-alert 
+      <kirby-alert
         [okBtn]="okBtn"
         [cancelBtn]="cancelBtn"
         [okBtnIsDestructive]="okBtnIsDestructive"
@@ -68,7 +68,7 @@ describe('AlertComponent', () => {
     });
 
     it('should have default size when cancel button', () => {
-      expect(okButton.attributes['ng-reflect-size']).toBeUndefined();
+      expect(okButton).not.toHaveAttribute('size');
     });
   });
 
@@ -90,6 +90,7 @@ describe('AlertComponent', () => {
       expect(spectator.query('.cancel-btn')).toBeNull();
     });
   });
+
   describe('icon', () => {
     it('should render', () => {
       spectator.setHostInput({ iconName: 'warning' });

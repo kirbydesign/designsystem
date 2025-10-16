@@ -9,10 +9,17 @@ svg {
 }
 
 :host {
-  @each $color-name, $color-value in utils.$notification-colors {
-    &.#{$color-name} {
-      --kirby-progress-circle-stroke-color: #{utils.get-color($color-name)};
-    }
+  // Colors
+  &.success {
+    --kirby-progress-circle-stroke-color: #{utils.get-color('success-shade')};
+  }
+
+  &.warning {
+    --kirby-progress-circle-stroke-color: #{utils.get-color('warning-shade')};
+  }
+
+  &.danger {
+    --kirby-progress-circle-stroke-color: #{utils.get-color('danger')};
   }
 
   &.view-initialized {

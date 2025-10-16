@@ -4,10 +4,18 @@ import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 const config = {
   selector: 'cookbook-dropdown-example-default',
   template: `<kirby-dropdown
+  aria-label="Choose your favorite fruit"
   [size]="size"
   placeholder="Dropdown with plain text"
-  [items]="['Item 1','Item 2','Item 3','Item 4','Item 5']"
-></kirby-dropdown>`,
+  [items]="[
+    'Apple',   
+    'Banana',
+    'Blackberry',
+    'Blueberry',   
+    'Grapes',
+    ]"
+></kirby-dropdown>
+`,
 };
 
 @Component({

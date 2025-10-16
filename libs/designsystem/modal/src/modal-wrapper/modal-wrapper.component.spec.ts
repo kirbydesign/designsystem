@@ -9,7 +9,11 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import {
+  PageComponent,
+  PageProgressComponent,
+  PageTitleComponent,
+} from '@kirbydesign/designsystem/page';
 import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 import {
   DummyContentEmbeddedComponent,
@@ -27,7 +31,12 @@ const { getColor } = DesignTokenHelper;
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [PageModule],
+    imports: [
+      PageComponent,
+      PageProgressComponent,
+      PageTitleComponent,
+      MockComponents(ButtonComponent),
+    ],
     entryComponents: [
       TitleEmbeddedComponent,
       StaticFooterEmbeddedComponent,
@@ -42,7 +51,6 @@ describe('ModalWrapperComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [MockComponents(ButtonComponent)],
     mocks: [CanDismissHelper],
   });
 
@@ -62,12 +70,12 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe("when 'collapseTitle' is enabled", () => {
-    /* 
-      Whether the title is displayed & truncated is not tested. 
+    /*
+      Whether the title is displayed & truncated is not tested.
       This is the responsibility of the ionic components; we assume
-      they're working as intended. 
+      they're working as intended.
 
-      If needed, it should be implemented as an integration test. 
+      If needed, it should be implemented as an integration test.
     */
 
     let ionContentElement: HTMLIonContentElement;

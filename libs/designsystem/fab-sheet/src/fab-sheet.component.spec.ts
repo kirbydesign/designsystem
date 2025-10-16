@@ -1,12 +1,12 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem/modal';
+import { provideRouter } from '@angular/router';
 import { FabSheetComponent } from './fab-sheet.component';
 
 describe('FabSheetComponent', () => {
@@ -16,13 +16,8 @@ describe('FabSheetComponent', () => {
 
   const createHost = createHostFactory({
     component: FabSheetComponent,
-    imports: [
-      TestHelper.ionicModuleForTest,
-      RouterTestingModule,
-      ButtonComponent,
-      IconModule,
-      ActionSheetComponent,
-    ],
+    imports: [TestHelper.ionicModuleForTest, ButtonComponent, IconComponent, ActionSheetComponent],
+    providers: [provideRouter([])],
   });
 
   const items: ActionSheetItem[] = [

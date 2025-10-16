@@ -1,6 +1,6 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { ButtonSize } from '@kirbydesign/designsystem/button';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 
 const meta: Meta<MenuComponent> = {
@@ -8,7 +8,7 @@ const meta: Meta<MenuComponent> = {
   title: 'Components / Menu',
   decorators: [
     moduleMetadata({
-      imports: [ItemModule],
+      imports: [ItemComponent],
     }),
   ],
 };

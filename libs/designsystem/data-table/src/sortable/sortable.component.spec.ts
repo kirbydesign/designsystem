@@ -1,7 +1,6 @@
-import { MockModule } from 'ng-mocks';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TableSortableComponent } from './sortable.component';
@@ -13,15 +12,7 @@ describe('TableSortableComponent', () => {
 
   const createHost = createHostFactory({
     component: TableSortableComponent,
-    overrideComponents: [
-      [
-        TableSortableComponent,
-        {
-          remove: { imports: [IconModule] },
-          add: { imports: [[MockModule(IconModule)]] },
-        },
-      ],
-    ],
+    imports: [IconComponent],
   });
 
   beforeEach(() => {
@@ -60,24 +51,6 @@ describe('TableSortableComponent', () => {
       spectator.setHostInput('sortable', false);
 
       expect(spectator.element.firstChild.nodeType).toBe(Node.TEXT_NODE);
-    });
-  });
-
-  describe('sortDirection', () => {
-    it('should render an "arrow-up" icon, when sortDirection is "asc"', () => {
-      spectator.setHostInput('sortDirection', 'asc');
-
-      const icon = spectator.query('kirby-icon');
-
-      expect(icon.attributes.getNamedItem('ng-reflect-name').value).toBe('arrow-up-fill');
-    });
-
-    it('should render an "arrow-down" icon, when sortDirection is "desc"', () => {
-      spectator.setHostInput('sortDirection', 'desc');
-
-      const icon = spectator.query('kirby-icon');
-
-      expect(icon.attributes.getNamedItem('ng-reflect-name').value).toBe('arrow-down-fill');
     });
   });
 

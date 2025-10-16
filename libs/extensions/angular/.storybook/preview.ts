@@ -22,6 +22,9 @@ const preview: Preview = {
       },
     },
   },
+  initialGlobals: {
+    backgrounds: { value: 'gray' },
+  },
   decorators: [
     applicationConfig({
       providers: [
@@ -35,6 +38,7 @@ const preview: Preview = {
       ],
     }),
   ],
+  tags: ['autodocs'],
 };
 
 export default preview;

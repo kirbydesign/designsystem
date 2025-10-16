@@ -8,9 +8,16 @@ import { TabsService } from './tabs.service';
 import { TabsComponent } from './tabs.component';
 
 @NgModule({
-  imports: [IconModule, CommonModule, IonTabs, IonTabBar, IonTabButton],
+  imports: [
+    IconModule,
+    CommonModule,
+    IonTabs,
+    IonTabBar,
+    IonTabButton,
+    TabsComponent,
+    TabButtonComponent,
+  ],
   providers: [TabsService],
-  declarations: [TabsComponent, TabButtonComponent],
   exports: [TabsComponent, TabButtonComponent],
 })
 export class TabsModule {}

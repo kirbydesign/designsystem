@@ -2,10 +2,7 @@ import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/core';
 
-@Directive({
-  selector: '[kirbyListItemColor]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyListItemColor]' })
 export class ListItemColorDirective implements OnChanges {
   @Input()
   kirbyListItemColor: (item: any) => ThemeColor;

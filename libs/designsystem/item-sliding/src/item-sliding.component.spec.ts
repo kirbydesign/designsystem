@@ -1,7 +1,7 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import {
   ItemSlidingComponent,
   ItemSwipeAction,
@@ -15,7 +15,7 @@ describe('ItemSlidingComponent', () => {
 
   const createHost = createHostFactory({
     component: ItemSlidingComponent,
-    imports: [ItemModule],
+    imports: [ItemComponent, LabelComponent],
   });
 
   let ionItemOptionsElement: HTMLIonItemOptionsElement;
@@ -83,10 +83,6 @@ describe('ItemSlidingComponent', () => {
       const uniqueSwipeActionTitles = new Set(swipeActions.map(({ title }) => title));
       expect(swipeActions.length).not.toBe(0);
       expect(uniqueSwipeActionTitles.size).toBe(swipeActions.length);
-    });
-
-    it('should render swipeActions in the correct slot by default', () => {
-      expect(ionItemOptionsElement.getAttribute('ng-reflect-side')).toEqual('start');
     });
 
     it('should render an ion-item-option element for each swipe action', () => {

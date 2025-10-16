@@ -1,4 +1,4 @@
-import { createHostFactory, createKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -14,7 +14,7 @@ describe('ButtonComponent', () => {
 
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [MockComponent(IconComponent)],
+    imports: [MockComponent(IconComponent)],
   });
 
   describe('by default', () => {
@@ -105,25 +105,47 @@ describe('ButtonComponent', () => {
       });
 
       it('should prevent activation on Enter', () => {
-        const keyDownEvent = createKeyboardEvent('keydown', 'Enter', element);
-        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
-        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+        element.ariaDisabled = 'false'; //First test that enter is allowed
+        let eventReceived = 0;
+        element.addEventListener('keydown', (event: KeyboardEvent) => {
+          if (event.key === 'enter') {
+            eventReceived++;
+          }
+        });
 
-        element.dispatchEvent(keyDownEvent);
-
-        expect(preventDefaultSpy).toHaveBeenCalled();
-        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
+        spectator.dispatchKeyboardEvent(element, 'keydown', 'enter');
+        expect(eventReceived).toBe(1);
+        element.ariaDisabled = 'true';
+        spectator.dispatchKeyboardEvent(element, 'keydown', 'enter');
+        expect(eventReceived).toBe(1);
       });
 
       it('should prevent activation on Space', () => {
-        const keyDownEvent = createKeyboardEvent('keydown', 'Space', element);
-        const preventDefaultSpy = spyOn(keyDownEvent, 'preventDefault');
-        const stopImmediatePropagationSpy = spyOn(keyDownEvent, 'stopImmediatePropagation');
+        element.ariaDisabled = 'false'; //First test that space is allowed
+        let eventReceived = 0;
+        element.addEventListener('keydown', (event: KeyboardEvent) => {
+          if (event.key === 'space') {
+            eventReceived++;
+          }
+        });
 
-        element.dispatchEvent(keyDownEvent);
+        spectator.dispatchKeyboardEvent(element, 'keydown', 'space');
+        expect(eventReceived).toBe(1);
+        element.ariaDisabled = 'true';
+        spectator.dispatchKeyboardEvent(element, 'keydown', 'space');
+        expect(eventReceived).toBe(1);
+      });
 
-        expect(preventDefaultSpy).toHaveBeenCalled();
-        expect(stopImmediatePropagationSpy).toHaveBeenCalled();
+      it('should prevent activation on click', () => {
+        element.ariaDisabled = 'false'; //First test that click is allowed
+        let eventReceived = 0;
+        element.addEventListener('click', () => eventReceived++);
+
+        spectator.click(element);
+        expect(eventReceived).toBe(1);
+        element.ariaDisabled = 'true';
+        spectator.click(element);
+        expect(eventReceived).toBe(1);
       });
     });
 

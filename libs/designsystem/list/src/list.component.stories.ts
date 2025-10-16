@@ -1,14 +1,14 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { ItemModule } from '@kirbydesign/designsystem/item';
-import { ListComponent, ListModule } from '@kirbydesign/designsystem/list';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 
 const meta: Meta<ListComponent> = {
   component: ListComponent,
   title: 'Components / List',
   decorators: [
     moduleMetadata({
-      imports: [ItemModule, ListModule],
+      imports: [ItemComponent, ListComponent, ListItemTemplateDirective],
     }),
   ],
 };

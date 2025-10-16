@@ -7,6 +7,7 @@ import {
   ContentChild,
   ContentChildren,
   ElementRef,
+  HostBinding,
   HostListener,
   Input,
   OnDestroy,
@@ -23,20 +24,22 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Subscription } from 'rxjs';
-import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
+import { NgTemplateOutlet } from '@angular/common';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 
 import { TextareaComponent } from './textarea/textarea.component';
+import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'kirby-form-field',
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
-  standalone: false,
+  imports: [NgTemplateOutlet, FormFieldMessageComponent, IconComponent],
 })
 export class FormFieldComponent
   implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy
@@ -95,6 +98,7 @@ export class FormFieldComponent
     this.element = elementRef.nativeElement;
   }
 
+  @HostBinding('class.wrap-content-in-label')
   get _wrapContentInLabel(): boolean {
     return !!this.label && (!!this.input || !!this.textarea);
   }
@@ -195,7 +199,7 @@ export class FormFieldComponent
       this.resizeObserverService.unobserve(affix.el);
     });
 
-    this.nestedInteractiveErrorSubscription.unsubscribe();
+    this.nestedInteractiveErrorSubscription?.unsubscribe();
   }
 
   private registerNestedInteractive() {

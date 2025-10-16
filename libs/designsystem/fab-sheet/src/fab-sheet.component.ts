@@ -16,6 +16,9 @@ import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 import { IonBackdrop, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
 import { DOCUMENT } from '@angular/common';
 
+const KIRBY_FAB_SHEET_DEPRECATION_WARNING =
+  '[Kirby fab sheet] Deprecated - Use Header with Action Group instead';
+
 @Component({
   imports: [IonBackdrop, IonFab, IonFabButton, IonFabList],
   selector: 'kirby-fab-sheet',
@@ -45,7 +48,9 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) {
+    console.warn(KIRBY_FAB_SHEET_DEPRECATION_WARNING);
+  }
 
   ngAfterContentInit(): void {
     if (this.actionSheet) {

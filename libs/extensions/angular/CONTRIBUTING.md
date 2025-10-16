@@ -7,6 +7,7 @@ If you wish to contribute a feature or a bug fix the preferred process is as fol
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose)** if a similar issue is not already added to the issue tracker (See guidelines on how to write "[The good: Issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue)").
 2. **Implementation:**
    - Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#before-you-get-coding)".
+   - Write to a member of the Kirby Team to gain write access to the repository.
    - Signal to others you are working on the issue by assigning yourself.
    - Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/develop) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch).
    - Consider creating test(s) that reproduces the bug or validates the feature, following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".

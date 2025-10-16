@@ -69,9 +69,9 @@ import { SegmentedControlComponent } from './components/segmented-control/segmen
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 
-const exportedDeclarations = [ModalRouterLinkDirective];
+const reexportedImports = [ModalRouterLinkDirective];
 
-const declarations = [...exportedDeclarations, KeyHandlerDirective];
+const imports = [...reexportedImports, KeyHandlerDirective];
 
 const standaloneComponents = [
   ActionGroupComponent,
@@ -134,13 +134,12 @@ const exportedModules = [
   ...standaloneComponents,
 ];
 
-const allExports = [...exportedModules, ...exportedDeclarations];
+const allExports = [...exportedModules, ...reexportedImports];
 
 const importedModules = [...exportedModules];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, ...importedModules],
-  declarations: [declarations],
+  imports: [CommonModule, RouterModule, ...importedModules, imports],
   providers: [provideKirby()],
   exports: [allExports],
 })

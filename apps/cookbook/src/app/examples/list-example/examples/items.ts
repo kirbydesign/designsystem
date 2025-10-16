@@ -10,7 +10,7 @@ export const ListItemsExampleTemplate = `<kirby-list [items]="items">
      <p class="kirby-item-title">{{item.title}}</p>
      <data slot="end">{{item.amount}}</data>
    </kirby-item>
- </kirby-list>`;
+</kirby-list>`;
 
 @Component({
   // tslint:disable-next-line

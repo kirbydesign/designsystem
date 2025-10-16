@@ -17,9 +17,9 @@ import {
 } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
 
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 import {
   FloatingDirective,
@@ -28,12 +28,12 @@ import {
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-menu',
-  imports: [ButtonComponent, FloatingDirective, IconModule, CardModule, ItemModule],
+  imports: [ButtonComponent, FloatingDirective, CardComponent, IconComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -101,7 +101,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   public floatingMenuIsShown: boolean = false;
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
-  private scrollListenerDisposeFn: EventListenerDisposeFn;
+  private disposeIonScrollListener: EventListenerDisposeFn;
   private focusedIndex = -1;
 
   @HostListener('keydown', ['$event'])
@@ -155,10 +155,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
-  private isPrintableCharacter(key: string) {
-    return key.length === 1 && key.match(/\S/);
-  }
-
   private handleKeyDownForOpenedMenu(event: KeyboardEvent) {
     const key = event.key;
 
@@ -207,7 +203,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.floatingMenu.hide();
         break;
       default: {
-        if (this.isPrintableCharacter(key)) {
+        if (StringSearchHelper.isPrintableCharacter(key)) {
           this.preventDefaultAndStopImmediatePropagation(event);
           const foundItemIndex = this.getIndexOfItemByFirstCharacter(key);
           if (foundItemIndex > -1) {
@@ -220,36 +216,11 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   private getIndexOfItemByFirstCharacter(char: string) {
-    return this.getIndexByFirstMatchingStartString(
+    return StringSearchHelper.getIndexByFirstMatchingStartString(
       char,
       this.kirbyItems.map((item) => item.nativeElement.innerText),
       this.focusedIndex + 1
     );
-  }
-
-  private getIndexByFirstMatchingStartString(
-    searchString: string,
-    words: string[],
-    startIndex: number
-  ): number {
-    searchString = searchString.toLowerCase();
-
-    const wordsStartingWithMatchString = words
-      .map((word, index) => {
-        return { word: word.toLowerCase(), index };
-      })
-      .filter((match) => match.word.startsWith(searchString));
-
-    if (wordsStartingWithMatchString.length === 0) {
-      return -1;
-    }
-
-    const firstWordStartingWithChar = wordsStartingWithMatchString[0];
-    const nextWordStartingWithChar = wordsStartingWithMatchString.find(
-      (wordAndIndex) => wordAndIndex.index >= startIndex
-    );
-
-    return nextWordStartingWithChar?.index ?? firstWordStartingWithChar.index;
   }
 
   focusItem() {
@@ -283,7 +254,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
        * Listen for ionScroll outside of Angular's change detection to
        * avoid a change detection cycle for every scroll-event fired
        */
-      this.scrollListenerDisposeFn = this.renderer.listen(document, 'ionScroll', () => {
+      this.disposeIonScrollListener = this.renderer.listen(document, 'ionScroll', () => {
         this.floatingMenu.hide();
       });
     });
@@ -359,6 +330,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   ngOnDestroy(): void {
-    this.scrollListenerDisposeFn?.();
+    this.disposeIonScrollListener?.();
   }
 }
