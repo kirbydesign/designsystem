@@ -106,6 +106,10 @@ describe('DropdownComponent (popover version)', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
     });
 
+    it('should have tabindex="0" by default on button', () => {
+      expect(buttonElement).toHaveAttribute('tabindex', '0');
+    });
+
     it('should have correct id on button', () => {
       const comboboxId = spectator.component._comboboxId;
       expect(buttonElement.getAttribute('id')).toBe(comboboxId);
@@ -904,6 +908,10 @@ describe('DropdownComponent (popover version)', () => {
 
       it('should render disabled attribute on button', () => {
         expect(buttonElement.attributes['disabled']).toBeDefined();
+      });
+
+      it('should render tabindex="-1" attribute on button', () => {
+        expect(buttonElement).toHaveAttribute('tabindex', '-1');
       });
 
       it('should not open', fakeAsync(() => {
