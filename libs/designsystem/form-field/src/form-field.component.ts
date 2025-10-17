@@ -26,6 +26,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Subscription } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -51,8 +52,7 @@ export class FormFieldComponent
     | HTMLButtonElement
     | HTMLInputElement
     | HTMLTextAreaElement
-    | HTMLIonRadioGroupElement
-    | HTMLElement;
+    | HTMLIonRadioGroupElement;
   private nestedInteractiveErrorSubscription: Subscription;
   private _message: string | null;
 
@@ -100,7 +100,7 @@ export class FormFieldComponent
 
   @HostBinding('class.wrap-content-in-label')
   get _wrapContentInLabel(): boolean {
-    return !!this.label && (!!this.input || !!this.textarea);
+    return !!this.label && (!!this.input || !!this.textarea || !!this.dropdown);
   }
 
   private dispatchLoadEvent() {
@@ -213,7 +213,7 @@ export class FormFieldComponent
       this.input?.nativeElement ||
       this.textarea?.nativeElement ||
       this.radioGroupElement?.nativeElement.querySelector('ion-radio-group') ||
-      this.dropdown?.nativeElement;
+      this.dropdown?.nativeElement.querySelector('button[kirby-button]');
   }
 
   private setNestedInteractiveElementAttributes() {

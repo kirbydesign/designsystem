@@ -138,7 +138,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   private _hasError: boolean;
-  @HostBinding('attr.aria-invalid')
   @HostBinding('class.error')
   @Input()
   get hasError(): boolean {

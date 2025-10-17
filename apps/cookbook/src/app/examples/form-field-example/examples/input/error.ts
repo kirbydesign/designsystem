@@ -1,7 +1,8 @@
 import { D } from '@angular/cdk/scrolling-module.d-C_w4tIrZ';
 import { Component, Input } from '@angular/core';
 
-import { DropdownModule, InputSize } from '@kirbydesign/designsystem';
+import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { InputSize } from '@kirbydesign/designsystem/form-field';
 import {
   DateInputDirective,
   FormFieldModule,
@@ -18,7 +19,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldModule, DateInputDirective, InputComponent, DropdownModule],
+  imports: [FormFieldModule, DateInputDirective, InputComponent, DropdownComponent],
 })
 export class FormFieldInputErrorExampleComponent {
   template: string = config.template;
