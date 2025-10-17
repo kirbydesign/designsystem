@@ -5,7 +5,7 @@ import { DropDownAnimation } from '../../animations';
 import { ensureInView } from '../../functions/ensure-in-view';
 import { SidebarMenuItem } from '../../models';
 import { MenuStateService } from '../../services/menu-state';
-import { MenuItemContentComponent } from '../menu-item-content';
+import { MenuItemComponent } from '../menu-item';
 
 type ViewModel<T> = {
   id: Signal<string | undefined>;
@@ -22,7 +22,7 @@ type ViewModel<T> = {
   styleUrls: ['./menu-item-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [DropDownAnimation],
-  imports: [DividerComponent, MenuItemContentComponent, RouterLink],
+  imports: [DividerComponent, RouterLink, MenuItemComponent],
 })
 export class MenuItemListComponent<T extends SidebarMenuItem> {
   readonly items = input.required<T[]>();

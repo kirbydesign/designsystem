@@ -1,5 +1,5 @@
 @let level = vm.level();
-<div class="menu-item-list menu-item-list-{{ level }}" [attr.id]="vm.id()">
+<div class="menu-item-list level-{{ level }}" [attr.id]="vm.id()">
   @for (item of vm.items(); track item.id) {
     @if (item.isDivider) {
       <kirby-divider></kirby-divider>
@@ -7,18 +7,13 @@
       @let submenuId = `item-${item.id}-content`;
       <button
         type="button"
-        class="menu-item menu-item-{{ level }} togglable-menu-item"
+        class="menu-item-wrapper submenu-toggle"
         [attr.id]="'item' + item.id"
         [attr.aria-controls]="submenuId"
         [attr.aria-expanded]="item.isExpanded"
         (click)="vm.toggleSubmenu(item)"
       >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-          [isExpanded]="item.isExpanded ?? false"
-        ></kirby-x-menu-item-content>
+        <kirby-x-menu-item [item]="item" [level]="level"></kirby-x-menu-item>
       </button>
       @if (item.isExpanded) {
         <div [@dropDownMenu] [@.disabled]="vm.disableAnimations()">
@@ -32,22 +27,18 @@
       }
     } @else if (item.isAction) {
       <a
-        class="menu-item menu-item-{{ level }} clickable-menu-item"
+        class="menu-item-wrapper link-item"
         [class.selected]="item.selected ?? false"
         [attr.id]="'item' + item.id"
         [attr.href]="item.link?.url ?? ''"
         (click)="$event.preventDefault(); vm.selectItem(item)"
         (keydown.enter)="$event.preventDefault(); vm.selectItem(item)"
       >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-        ></kirby-x-menu-item-content>
+        <kirby-x-menu-item [item]="item" [level]="level"></kirby-x-menu-item>
       </a>
     } @else if (item.link?.relativeLink) {
       <a
-        class="menu-item menu-item-{{ level }} clickable-menu-item"
+        class="menu-item-wrapper link-item"
         [class.selected]="item.selected ?? false"
         [attr.id]="'item' + item.id"
         [target]="item.link?.target ?? '_self'"
@@ -58,15 +49,11 @@
         (click)="vm.selectItem(item)"
         (keydown.enter)="vm.selectItem(item)"
       >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-        ></kirby-x-menu-item-content>
+        <kirby-x-menu-item [item]="item" [level]="level"></kirby-x-menu-item>
       </a>
     } @else if (item.link?.url) {
       <a
-        class="menu-item menu-item-{{ level }} clickable-menu-item"
+        class="menu-item-wrapper link-item"
         [class.selected]="item.selected ?? false"
         [attr.id]="'item' + item.id"
         [attr.href]="item.link?.url"
@@ -74,11 +61,7 @@
         (click)="vm.selectItem(item)"
         (keydown.enter)="vm.selectItem(item)"
       >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-        ></kirby-x-menu-item-content>
+        <kirby-x-menu-item [item]="item" [level]="level"></kirby-x-menu-item>
       </a>
     }
   }
