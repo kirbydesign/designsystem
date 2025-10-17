@@ -155,6 +155,14 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       white-space: pre-line;
     }
 
+    &::part(native-wrapper) {
+      /**
+       * We style the native wrapper to make sure it has the same height as the container
+       * so the checkbox can be properly start-aligned with multiline labels
+       */
+      height: utils.relative-spacing('m');
+    }
+
     // Overrides for kirby-checkbox inside kirby-item
     &.in-item {
       &::part(label) {
