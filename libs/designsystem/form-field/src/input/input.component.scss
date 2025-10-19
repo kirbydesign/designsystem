@@ -28,6 +28,9 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   // Background color needs to be synchronized with form-field.component
   &[type='date'] {
     background-color: var(--date-input-background-color);
+
+    // Default size date input
+    padding-block: calc(#{shared.$form-field-input-padding} - 1px);
   }
 
   &[type='number'] {
@@ -47,10 +50,28 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   border-radius: utils.border-radius('l');
   padding-block: $padding-block-size-md;
 
+  &[type='date'] {
+    padding-block: calc(#{$padding-block-size-md} - 1px);
+
+    &.error {
+      padding-block: calc(#{$padding-block-size-md} - 2px);
+    }
+  }
+
   &.error {
     padding-block: calc(
       #{$padding-block-size-md} - 1px
     ); // subtract border width from padding to maintain overall height
+  }
+}
+
+:host(.lg) {
+  &[type='date'] {
+    padding-block: calc(#{shared.$form-field-input-padding} - 1px);
+
+    &.error {
+      padding-block: calc(#{shared.$form-field-input-padding} - 2px);
+    }
   }
 }
 
