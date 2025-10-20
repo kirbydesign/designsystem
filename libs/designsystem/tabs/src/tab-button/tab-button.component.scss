@@ -40,11 +40,12 @@ ion-tab-button {
     --color-selected: #{utils.get-color('black')};
     --padding-start: 0;
     --padding-end: 0;
+    --padding-top: 5px;
+    --padding-bottom: 5px;
 
     // Magic values here as we have no tokens that gives
     // badge the correct position in relation to the tab icon
     --kirby-badge-position: absolute;
-    --kirby-badge-top: 0.55em;
     --kirby-badge-left: calc(50% + 0.4em);
   }
   /* stylelint-enable no-duplicate-selectors */
@@ -53,14 +54,12 @@ ion-tab-button {
     &.md {
       // Magic values here as we have no tokens that gives
       // badge the correct position in relation to the tab icon
-      --kirby-badge-top: 0.3em;
+      --kirby-badge-top: -0.2em;
       --kirby-badge-left: calc(50% + 0.2em);
     }
   }
 
   @include utils.media('>=medium') {
-    flex: none;
-    flex-direction: row;
     font-size: utils.font-size('s');
     line-height: utils.line-height('s');
 
@@ -70,14 +69,13 @@ ion-tab-button {
     // Magic values here as we have no tokens that gives
     // badge the correct position in relation to the tab icon
     --kirby-badge-position: absolute; // Repeated for readability
-    --kirby-badge-top: calc(50% - 1.35em);
+    --kirby-badge-top: 1em;
     --kirby-badge-left: 1.6em;
 
     @include utils.slotted(kirby-badge) {
       &.md {
-        --kirby-badge-position: relative;
-        --kirby-badge-top: 0;
-        --kirby-badge-left: 0;
+        --kirby-badge-top: -0.2em;
+        --kirby-badge-left: calc(50% + 0.2em);
 
         margin-left: utils.size('xxxxs');
 
@@ -87,13 +85,10 @@ ion-tab-button {
         margin-bottom: math.div(utils.size('xxxxs'), 2);
       }
     }
-
-    @include utils.slotted(kirby-icon) {
-      --kirby-icon-margin-right: #{utils.size('xxs')};
-    }
   }
 
   @include utils.media('>=large') {
+    flex: none;
     @include utils.not-touch {
       --padding-start: #{utils.size('xs')};
       --padding-end: #{utils.size('xs')};

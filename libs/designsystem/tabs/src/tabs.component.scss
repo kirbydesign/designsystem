@@ -13,7 +13,7 @@ ion-tabs {
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;
-    height: var(--kirby-tab-bar-height);
+    height: var(--kirby-tab-bar-height, max(50px, #{utils.relative-spacing('xl')}));
 
     $padding: calc((100vw - var(--kirby-tab-bar-max-width, none)) / 2);
 
@@ -27,11 +27,7 @@ ion-tabs {
   }
 
   @include utils.media('>=medium') {
-    --kirby-tab-bar-height: 70px;
-
-    ion-tab-bar {
-      column-gap: utils.size('m');
-    }
+    --kirby-tab-bar-height: max(70px, #{utils.relative-spacing('xl')});
   }
 
   // move tabs to top of screen if not touch and large device
@@ -45,7 +41,7 @@ ion-tabs {
       ion-tab-bar {
         margin: 0 auto;
         justify-content: flex-end;
-        column-gap: initial;
+        column-gap: 24px;
 
         // Ensure tabs are not hidden when displayed at top of screen
         &.bottom-hidden {
