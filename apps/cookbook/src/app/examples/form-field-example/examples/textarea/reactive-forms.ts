@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormFieldModule, TextareaComponent } from '@kirbydesign/designsystem/form-field';
+import { FormFieldComponent, TextareaComponent } from '@kirbydesign/designsystem/form-field';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CheckboxComponent } from '@kirbydesign/designsystem';
 import { ReactiveFormStateComponent } from '../../../reactive-form-state/reactive-form-state.component';
@@ -42,7 +42,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   imports: [
-    FormFieldModule,
+    FormFieldComponent,
     TextareaComponent,
     ReactiveFormsModule,
     ButtonComponent,

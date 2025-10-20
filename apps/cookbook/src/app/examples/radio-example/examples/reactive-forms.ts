@@ -6,7 +6,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
@@ -80,7 +80,7 @@ toggleRequired(required: boolean) {
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    RadioModule,
+    RadioGroupComponent,
     ExampleConfigurationWrapperComponent,
     CheckboxComponent,
     ButtonComponent,

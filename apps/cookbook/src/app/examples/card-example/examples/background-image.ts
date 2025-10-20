@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { noop } from 'rxjs';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 const config = {
@@ -43,7 +43,7 @@ kirby-card {
   selector: config.selector,
   template: config.template,
   styleUrls: ['card-example.shared.scss', './background-image.scss'],
-  imports: [CardModule, ThemeColorDirective],
+  imports: [CardComponent, ThemeColorDirective],
 })
 export class CardExampleBackgroundImageComponent {
   template: string = config.template;

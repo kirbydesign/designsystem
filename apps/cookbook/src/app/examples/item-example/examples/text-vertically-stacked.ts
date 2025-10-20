@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-text-vertically-stacked',
@@ -24,7 +24,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  imports: [ItemModule],
+  imports: [ItemComponent],
 })
 export class ItemExampleTextVerticallyStackedComponent {
   template: string = config.template;

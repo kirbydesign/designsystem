@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
-import { ItemModule } from '@kirbydesign/designsystem/item';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
 const config = {
   selector: 'cookbook-section-header-heading-with-label',
@@ -26,7 +26,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [SectionHeaderComponent, ItemModule, CardModule],
+  imports: [SectionHeaderComponent, ItemComponent, CardComponent],
 })
 export class SectionHeaderHeadingWithLabelExampleComponent {
   template: string = config.template;

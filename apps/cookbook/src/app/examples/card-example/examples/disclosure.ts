@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { noop } from 'rxjs';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
@@ -36,7 +36,7 @@ const config = {
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
   styles: [config.style],
-  imports: [CardModule, ItemModule, FlagComponent],
+  imports: [CardComponent, ItemComponent, FlagComponent],
 })
 export class CardExampleDisclosureComponent {
   template: string = config.template;

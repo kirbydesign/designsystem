@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { CurrencyPipe } from '@angular/common';
 
 const config = {
@@ -47,7 +47,7 @@ const config = {
       }
     `,
   ],
-  imports: [CardModule, ItemModule, ProgressCircleComponent, IconModule, CurrencyPipe],
+  imports: [CardComponent, ItemComponent, ProgressCircleComponent, IconComponent, CurrencyPipe],
 })
 export class ProgressCircleExampleCardComponent {
   template: string = config.template;

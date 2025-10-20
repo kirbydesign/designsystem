@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-group-with-section-header-example',
@@ -56,7 +56,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ItemGroupComponent, SectionHeaderComponent, ItemModule],
+  imports: [ItemGroupComponent, SectionHeaderComponent, ItemComponent],
 })
 export class ItemGroupWithSectionHeaderExampleComponent {
   template: string = config.template;

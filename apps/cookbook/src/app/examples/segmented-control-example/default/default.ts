@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { SegmentedControlComponent } from '@kirbydesign/designsystem';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { SegmentedControlExampleBaseComponent } from '../segmented-control-example-base';
 
 const config = {
@@ -24,7 +24,7 @@ const config = {
   selector: 'cookbook-segmented-control-example-default',
   template: config.template,
   styleUrls: ['../segmented-control-examples.shared.scss'],
-  imports: [SegmentedControlComponent, CardModule],
+  imports: [SegmentedControlComponent, CardComponent],
 })
 export class SegmentedControlExampleDefaultComponent extends SegmentedControlExampleBaseComponent {
   template = config.template;

@@ -3,12 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PageFooterComponent } from '@kirbydesign/designsystem';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
+import { PageComponent } from '@kirbydesign/designsystem/page';
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { IconModule } from '@kirbydesign/designsystem/icon';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { BasePageExampleComponent } from '../../base-page-example.component';
 
@@ -61,12 +61,12 @@ const config = {
   template: config.template,
   styles: config.styles,
   imports: [
-    PageModule,
+    PageComponent,
     NgTemplateOutlet,
     ButtonComponent,
-    IconModule,
-    CardModule,
-    ItemModule,
+    IconComponent,
+    CardComponent,
+    ItemComponent,
     ToggleComponent,
   ],
 })

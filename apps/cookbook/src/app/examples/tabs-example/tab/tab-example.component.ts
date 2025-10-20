@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { ActionSheetItem, ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { AsyncPipe } from '@angular/common';
 import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
@@ -74,9 +74,10 @@ import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
     </kirby-page>
   `,
   imports: [
-    PageModule,
+    PageComponent,
+    PageContentComponent,
     ButtonComponent,
-    IconModule,
+    IconComponent,
     FabSheetComponent,
     ActionSheetComponent,
     AsyncPipe,

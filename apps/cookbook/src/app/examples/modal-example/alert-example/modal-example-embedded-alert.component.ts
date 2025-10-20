@@ -1,14 +1,13 @@
 import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
 import { AlertConfig, COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import { PageTitleComponent } from '@kirbydesign/designsystem/page';
 
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import {
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 import { ModalExampleAlertWithGuardStepperComponent } from './modal-example-alert-with-guard-stepper.component';
@@ -95,13 +94,12 @@ validate(): boolean | AlertConfig {
     `,
   ],
   imports: [
-    PageModule,
+    PageTitleComponent,
     ModalExampleAlertWithGuardStepperComponent,
     DividerComponent,
-    FormFieldModule,
+    FormFieldComponent,
     DateInputDirective,
     InputComponent,
-    FormsModule,
     ButtonComponent,
     ModalFooterComponent,
   ],

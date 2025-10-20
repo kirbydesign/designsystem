@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
-import { ListModule } from '@kirbydesign/designsystem/list';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { PageComponent } from '@kirbydesign/designsystem/page';
+import {
+  ListComponent,
+  ListItemTemplateDirective,
+  ListSectionHeaderComponent,
+} from '@kirbydesign/designsystem/list';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListWithSectionsExampleTemplate = `<kirby-list
@@ -37,7 +41,14 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
       <kirby-page-content>${ListWithSectionsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
-  imports: [PageModule, ListModule, ItemModule],
+  imports: [
+    PageComponent,
+    ListComponent,
+    ItemComponent,
+    LabelComponent,
+    ListSectionHeaderComponent,
+    ListItemTemplateDirective,
+  ],
 })
 export class ListWithSectionsExampleComponent extends BaseListComponent {
   getSectionName(item: any): string {

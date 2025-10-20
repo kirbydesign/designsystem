@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { TabsModule } from '@kirbydesign/designsystem/tabs';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { TabsComponent } from '@kirbydesign/designsystem/tabs';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
@@ -40,7 +40,7 @@ const template = `<!-- This container is only needed due to layout of larger scr
   selector: 'cookbook-fixed-footer-tabs-example',
   template,
   styleUrls: ['./fixed-footer-tabs-example.component.scss'],
-  imports: [AvatarComponent, TabsModule, IconModule, ThemeColorDirective, BadgeComponent],
+  imports: [AvatarComponent, TabsComponent, IconComponent, ThemeColorDirective, BadgeComponent],
 })
 export class PageFixedFooterTabsExampleComponent {
   static template = template;

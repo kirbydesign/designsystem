@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
-import { ItemModule } from '@kirbydesign/designsystem/item';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
@@ -38,7 +38,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [MenuComponent, ItemModule, IconModule, CheckboxComponent, ToggleComponent],
+  imports: [MenuComponent, ItemComponent, IconComponent, CheckboxComponent, ToggleComponent],
 })
 export class MenuAdvancedExampleComponent {
   template: string = config.template;

@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ModalSize } from '@kirbydesign/designsystem';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalComponent, ModalFooterComponent } from '@kirbydesign/designsystem/modal';
-import { PageModule } from '@kirbydesign/designsystem/page';
-import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
+import { PageTitleComponent } from '@kirbydesign/designsystem/page';
+import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import {
   ModalExampleSizeSelectorComponent,
   ModalSizeOption,
@@ -83,11 +83,11 @@ didDismiss() {
   imports: [
     ButtonComponent,
     ModalComponent,
-    PageModule,
+    PageTitleComponent,
     ModalFooterComponent,
-    EmptyStateModule,
+    EmptyStateComponent,
     ThemeColorDirective,
-    CardModule,
+    CardComponent,
     ModalExampleSizeSelectorComponent,
   ],
 })

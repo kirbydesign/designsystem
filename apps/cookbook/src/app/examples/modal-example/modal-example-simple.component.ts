@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalConfig, ModalController, ModalFlavor } from '@kirbydesign/designsystem';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import {
@@ -40,7 +40,7 @@ showModal(flavor: ModalFlavor, size?: ModalSize) {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-simple.component.scss'],
-  imports: [ButtonComponent, CardModule, ModalExampleSizeSelectorComponent],
+  imports: [ButtonComponent, CardComponent, ModalExampleSizeSelectorComponent],
 })
 export class ModalExampleSimpleComponent implements OnInit {
   static readonly template = config.template.split('<kirby-card')[0]; // Remove config part of the template

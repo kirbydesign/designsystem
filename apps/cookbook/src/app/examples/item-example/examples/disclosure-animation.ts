@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-disclosure-animation',
@@ -44,7 +44,7 @@ export class MyComponent {
       transition('true <=> false', animate('0.2s')),
     ]),
   ],
-  imports: [CardModule, ItemModule],
+  imports: [CardComponent, ItemComponent],
 })
 export class ItemExampleDisclosureAnimationComponent {
   template: string = config.template;

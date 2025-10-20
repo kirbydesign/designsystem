@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonComponent, IconModule, ToggleButtonModule } from '@kirbydesign/designsystem';
+import { ButtonComponent, IconComponent, ToggleButtonComponent } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-toggle-button-default',
@@ -22,7 +22,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  imports: [ToggleButtonModule, ButtonComponent, IconModule],
+  imports: [ToggleButtonComponent, ButtonComponent, IconComponent],
 })
 export class ToggleButtonDefaultExampleComponent {
   template: string = config.template;

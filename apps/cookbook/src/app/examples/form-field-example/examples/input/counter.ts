@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { InputSize } from '@kirbydesign/designsystem';
 import {
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
 
@@ -28,7 +28,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldModule, DateInputDirective, InputComponent],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent],
 })
 export class FormFieldInputCounterExampleComponent {
   template: string = config.template;

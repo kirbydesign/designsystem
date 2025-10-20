@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
-import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -47,7 +47,7 @@ const config = {
   template: config.template,
   styles: config.styles,
   imports: [
-    HeaderModule,
+    HeaderComponent,
     IconModule,
     ActionGroupComponent,
     ButtonComponent,

@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
-import { ListModule } from '@kirbydesign/designsystem/list';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { PageComponent } from '@kirbydesign/designsystem/page';
+import {
+  ListComponent,
+  ListHeaderComponent,
+  ListItemTemplateDirective,
+} from '@kirbydesign/designsystem/list';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
@@ -49,6 +53,14 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list
     </kirby-page>
   `,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
-  imports: [PageModule, ListModule, ItemModule, ButtonComponent],
+  imports: [
+    PageComponent,
+    ListComponent,
+    ItemComponent,
+    ButtonComponent,
+    LabelComponent,
+    ListHeaderComponent,
+    ListItemTemplateDirective,
+  ],
 })
 export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {}

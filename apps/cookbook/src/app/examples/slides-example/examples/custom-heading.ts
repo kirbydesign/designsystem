@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SlideModule } from '@kirbydesign/designsystem/slide';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
 const config = {
   selector: 'cookbook-slides-custom-heading-example',
@@ -19,7 +19,7 @@ const config = {
   styleUrls: ['./_shared.scss'],
   selector: config.selector,
   template: config.template,
-  imports: [SlideModule, CardModule],
+  imports: [SlidesComponent, SlideDirective, CardComponent, CardHeaderComponent],
 })
 export class SlidesCustomHeadingExampleComponent {
   template = config.template;

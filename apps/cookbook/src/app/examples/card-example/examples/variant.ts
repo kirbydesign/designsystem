@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
 const config = {
   selector: 'cookbook-card-example-variant',
@@ -25,7 +25,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example-variant.scss'],
-  imports: [CardModule],
+  imports: [CardComponent],
 })
 export class CardExampleVariantComponent {
   template: string = config.template;

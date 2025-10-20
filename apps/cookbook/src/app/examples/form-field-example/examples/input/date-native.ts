@@ -4,7 +4,7 @@ import { InputSize } from '@kirbydesign/designsystem';
 import {
   AffixDirective,
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
 import { IconModule } from '@kirbydesign/designsystem/icon';
@@ -24,7 +24,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldModule, DateInputDirective, InputComponent, IconModule, AffixDirective],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent, IconModule, AffixDirective],
 })
 export class FormFieldInputDateNativeExampleComponent {
   template: string = config.template;

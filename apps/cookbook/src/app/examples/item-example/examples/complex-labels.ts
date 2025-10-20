@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
-import { AvatarComponent, IconModule } from '@kirbydesign/designsystem';
+import { AvatarComponent, IconComponent } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-item-example-complex-labels',
@@ -25,7 +25,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./_shared.scss'],
-  imports: [ItemModule, IconModule, BadgeComponent, AvatarComponent],
+  imports: [ItemComponent, IconComponent, BadgeComponent, AvatarComponent],
 })
 export class ItemExampleComplexLabelsComponent {
   template: string = config.template;

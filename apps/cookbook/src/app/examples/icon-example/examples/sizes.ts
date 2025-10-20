@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IconSize } from '@kirbydesign/designsystem';
 import { KeyValuePipe } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-icon-sizes-example',
@@ -23,7 +23,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
-  imports: [IconModule, KeyValuePipe],
+  imports: [IconComponent, KeyValuePipe],
 })
 export class IconSizesExampleComponent {
   static htmlSnippet: string = config.htmlSnippet;
