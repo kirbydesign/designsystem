@@ -1,75 +1,31 @@
 @use '@kirbydesign/core/src/scss/utils' as utils;
 
-.menu-item-list {
+:host {
   display: flex;
   flex-direction: column;
 
-  &.level-0 {
+  &.lg {
     padding: var(--kirby-spacing-xxxs, 4px) var(--kirby-spacing-xxs, 8px);
   }
 
-  &.level-1 {
+  &.md {
     padding: var(--kirby-spacing-xxs, 8px) 0;
   }
 
-  &.level-2 {
+  &.sm {
     background: var(--white-overlay-10, rgb(255 255 255 / 10%));
     padding: var(--kirby-spacing-xxs, 8px);
     margin: var(--kirby-spacing-xxs, 8px);
   }
 
-  &.level-3 {
+  &.xs {
     background: var(--white-overlay-10, rgb(255 255 255 / 10%));
     padding: var(--kirby-spacing-xxs, 8px);
     margin: var(--kirby-spacing-xxs, 8px) 0;
   }
 
-  &:not(.level-0) {
+  &:not(.lg) {
     border-radius: var(--kirby-border-radius-n, 16px);
-  }
-}
-
-.menu-item-wrapper {
-  display: flex;
-  align-self: stretch;
-  padding: 0;
-  border-radius: var(--kirby-border-radius-s, 8px);
-
-  &:hover {
-    background: var(--menuitem-hover-background-color, rgb(255 255 255 / 15%));
-  }
-
-  &:active {
-    background: var(--menuitem-active-background-color, rgb(255 255 255 / 30%));
-  }
-
-  &:focus-visible {
-    background: var(--sidebar-background-color, utils.get-color('tertiary'));
-    box-shadow:
-      0 0 0 2px utils.get-color('background-color'),
-      0 0 0 4px #4d90fe;
-  }
-}
-
-.submenu-toggle {
-  width: 100%;
-  border: none;
-  color: inherit;
-  background-color: transparent;
-  cursor: pointer;
-
-  &[aria-expanded='true'] {
-    font-weight: utils.font-weight('bold');
-  }
-}
-
-.link-item {
-  text-decoration: none;
-
-  &.selected {
-    background-color: var(--menuitem-selected-background-color, utils.get-color('primary'));
-    color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
-    font-weight: utils.font-weight('bold');
   }
 }
 

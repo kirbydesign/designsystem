@@ -58,20 +58,12 @@
   position: sticky;
 }
 
-.sidebar-header {
-  padding: 0 24px;
-
-  &.bottom-border {
-    box-shadow: 0 4px 10px 2px rgb(28 28 28 / 30%);
-    transition: opacity 0.3s;
-  }
+.sidebar-header.bottom-border {
+  box-shadow: 0 4px 10px 2px rgb(28 28 28 / 30%);
+  transition: opacity 0.3s;
 }
 
-.sidebar-footer {
-  min-height: 80px;
-
-  &.top-border {
-    box-shadow: 0 -4px 10px 2px rgb(28 28 28 / 30%);
-    transition: opacity 0.3s;
-  }
+.sidebar-footer.top-border {
+  box-shadow: 0 -4px 10px 2px rgb(28 28 28 / 30%);
+  transition: opacity 0.3s;
 }

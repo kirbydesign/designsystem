@@ -2,29 +2,44 @@
 
 :host {
   display: flex;
-  width: 100%;
-}
-
-.menu-item {
-  display: flex;
   flex-direction: row;
   flex-grow: 1;
   align-items: center;
   align-self: stretch;
+  border-radius: var(--kirby-border-radius-s, 8px);
+  border: none;
+  background: inherit;
+  color: inherit;
+  text-decoration: none;
 
-  &.level-0 {
+  &.lg {
     padding: var(--kirby-spacing-xxs, 8px) var(--kirby-spacing-s, 16px);
   }
 
-  &.level-1 {
+  &.md {
     padding: var(--kirby-spacing-xxxs, 4px) var(--kirby-spacing-s, 16px);
   }
 
-  &.level-2,
-  &.level-3 {
+  &.sm,
+  &.xs {
     box-sizing: border-box;
     min-height: var(--kirby-spacing-l, 24px);
     padding: var(--kirby-spacing-xxxs, 4px) var(--kirby-spacing-xxs, 8px);
+  }
+
+  &:hover {
+    background: var(--menuitem-hover-background-color, rgb(255 255 255 / 15%));
+  }
+
+  &:active {
+    background: var(--menuitem-active-background-color, rgb(255 255 255 / 30%));
+  }
+
+  &:focus-visible {
+    background: var(--sidebar-background-color, utils.get-color('tertiary'));
+    box-shadow:
+      0 0 0 2px utils.get-color('background-color'),
+      0 0 0 4px #4d90fe;
   }
 }
 
@@ -33,14 +48,14 @@
   align-items: center;
   justify-content: center;
 
-  &.level-0,
-  &.level-1 {
+  &.lg,
+  &.md {
     width: utils.icon-font-size('sm');
     height: utils.icon-font-size('sm');
   }
 
-  &.level-2,
-  &.level-3 {
+  &.sm,
+  &.xs {
     width: utils.icon-font-size('xs');
     height: utils.icon-font-size('xs');
   }
@@ -50,20 +65,22 @@
   display: flex;
   flex-grow: 1;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--kirby-spacing-xxs, 8px);
   margin-inline-start: utils.size('xs');
 
-  &.level-0,
-  &.level-1 {
+  &.lg,
+  &.md {
     font-size: var(--kirby-font-size-n, 16px);
     line-height: var(--kirby-line-height-m, 24px);
   }
 
-  &.level-2 {
+  &.sm {
     font-size: var(--kirby-font-size-s, 14px);
     line-height: var(--kirby-line-height-s, 20px);
   }
 
-  &.level-3 {
+  &.xs {
     font-size: var(--kirby-font-size-xs, 12px);
     line-height: var(--kirby-line-height-xs, 16px);
   }
@@ -72,12 +89,4 @@
 .menu-item-end {
   display: inline-flex;
   align-items: center;
-}
-
-.disclosure {
-  transition: transform 0.3s ease;
-
-  &.rotate {
-    transform: rotate(90deg) !important;
-  }
 }

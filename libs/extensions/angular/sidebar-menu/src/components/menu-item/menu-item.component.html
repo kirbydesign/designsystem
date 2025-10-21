@@ -1,24 +1,16 @@
-<div class="menu-item level-{{ vm.level() }}">
-  <div class="menu-item-start level-{{ vm.level() }}">
-    @if (vm.icon(); as icon) {
-      <kirby-icon [size]="vm.iconSize()" [name]="icon"></kirby-icon>
-    }
-  </div>
+<div class="menu-item-start {{ size() }}">
+  @if (icon(); as icon) {
+    <kirby-icon [size]="iconSize()" [name]="icon"></kirby-icon>
+  }
+</div>
 
-  <div class="menu-item-content level-{{ vm.level() }}">{{ vm.title() }}</div>
+<div class="menu-item-content {{ size() }}">
+  <span><ng-content></ng-content></span>
+  @if (badge(); as badge) {
+    <kirby-badge [themeColor]="badge.themeColor ?? 'primary'">{{ badge.value }}</kirby-badge>
+  }
+</div>
 
-  <div class="menu-item-end">
-    @if (vm.badge(); as badge) {
-      <kirby-badge [themeColor]="badge.color">{{ badge.text }}</kirby-badge>
-    }
-
-    @if (vm.disclosure(); as disclosure) {
-      <kirby-icon
-        class="disclosure"
-        [class.rotate]="vm.rotateDisclosure()"
-        [size]="vm.iconSize()"
-        [name]="disclosure"
-      ></kirby-icon>
-    }
-  </div>
+<div class="menu-item-end">
+  <ng-content select="[slot='end']"></ng-content>
 </div>
