@@ -16,11 +16,9 @@ import { ModalRouteActivation } from './modal.interfaces';
 @Injectable({ providedIn: 'root' })
 export class ModalNavigationService {
   private router?: Router;
+  private route?: ActivatedRoute;
 
-  constructor(
-    private route: ActivatedRoute,
-    private injector: Injector
-  ) {}
+  constructor(private injector: Injector) {}
 
   private getRouter(): Router {
     if (!this.router) {
@@ -29,12 +27,19 @@ export class ModalNavigationService {
     return this.router;
   }
 
+  private getActivatedRoute(): ActivatedRoute {
+    if (!this.route) {
+      this.route = runInInjectionContext(this.injector, () => inject(ActivatedRoute));
+    }
+    return this.route;
+  }
+
   isModalRoute(url: string): boolean {
     return url.includes('(modal:');
   }
 
   private getCurrentActivatedRoute(): ActivatedRoute {
-    let childRoute = this.route.root;
+    let childRoute = this.getActivatedRoute().root;
     while (childRoute.firstChild) {
       childRoute = childRoute.firstChild;
     }
@@ -83,7 +88,7 @@ export class ModalNavigationService {
       await firstValueFrom(this.navigationEndListener$);
     }
 
-    let childRoute = this.route.snapshot.root;
+    let childRoute = this.getActivatedRoute().snapshot.root;
     while (childRoute.firstChild) {
       childRoute = childRoute.firstChild;
     }
