@@ -1,7 +1,7 @@
-import { D } from '@angular/cdk/scrolling-module.d-C_w4tIrZ';
+
 import { Component, Input, signal, WritableSignal } from '@angular/core';
 
-import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { InputSize } from '@kirbydesign/designsystem/form-field';
 import {
   DateInputDirective,
