@@ -1,1 +1,1 @@
-export * from './sidebar.public-component';
+export * from './sidebar.component';

@@ -1,1 +1,1 @@
-export * from './sidebar-footer.public-component';
+export * from './sidebar-footer.component';

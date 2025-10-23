@@ -27,6 +27,10 @@
   height: utils.icon-font-size('sm');
 }
 
-.expanded-icon {
-  transform: rotate(90deg) !important;
+kirby-icon {
+  transition: transform utils.get-transition-duration('quick');
+
+  &.expanded-icon {
+    transform: rotate(90deg);
+  }
 }
