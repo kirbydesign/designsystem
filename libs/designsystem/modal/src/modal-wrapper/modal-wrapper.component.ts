@@ -314,7 +314,7 @@ export class ModalWrapperComponent
         this.routerOutlet.deactivate();
       }
       this.routerOutlet.activateWith(route, this.environmentInjector);
-      this.focusTitleElement();
+      this.focusTitle();
     });
   }
 
@@ -434,11 +434,11 @@ export class ModalWrapperComponent
 
   private focusTitleOnDidPresent() {
     this.ionModalDidPresent.pipe(takeUntil(this.willClose$)).subscribe(() => {
-      this.focusTitleElement();
+      this.focusTitle();
     });
   }
 
-  focusTitleElement() {
+  focusTitle() {
     // Use queueMicrotask to defer our focus until after Ionic has saved a reference
     // to the element that should have focus restored when modal is closed.
     // https://github.com/ionic-team/ionic-framework/blob/v8.6.1/core/src/utils/overlays.ts#L592
