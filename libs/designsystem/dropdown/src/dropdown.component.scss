@@ -39,7 +39,7 @@ $min-screen-width: 375px;
   &.error,
   &.ng-touched.ng-invalid {
     > button {
-      border: solid 1px utils.get-color('danger');
+      border-color: utils.get-color('danger');
     }
   }
 
@@ -49,6 +49,7 @@ $min-screen-width: 375px;
     outline: none;
     width: 100%;
     min-width: 0;
+    border: 1px solid transparent;
 
     // Temporary fix for button-width as attention level 3 has border,
     // and attention level 2 does not:
