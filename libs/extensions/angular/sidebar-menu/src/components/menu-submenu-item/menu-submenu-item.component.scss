@@ -14,9 +14,9 @@
 }
 
 .disclosure {
-  transition: transform 0.3s ease;
+  transition: transform utils.get-transition-duration('quick');
 
   &.rotate {
-    transform: rotate(90deg) !important;
+    transform: rotate(90deg);
   }
 }
