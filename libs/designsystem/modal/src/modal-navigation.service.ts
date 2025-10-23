@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, Injector, runInInjectionContext } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -15,10 +15,19 @@ import { ModalRouteActivation } from './modal.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ModalNavigationService {
+  private router?: Router;
+
   constructor(
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private injector: Injector
   ) {}
+
+  private getRouter(): Router {
+    if (!this.router) {
+      this.router = runInInjectionContext(this.injector, () => inject(Router));
+    }
+    return this.router;
+  }
 
   isModalRoute(url: string): boolean {
     return url.includes('(modal:');
@@ -62,9 +71,9 @@ export class ModalNavigationService {
 
   private async getCurrentRoutePaths(): Promise<string[]> {
     const rootPath = [''];
-    const currentNavigation = this.router.getCurrentNavigation();
+    const currentNavigation = this.getRouter().getCurrentNavigation();
 
-    if (!this.router.navigated && !currentNavigation) {
+    if (!this.getRouter().navigated && !currentNavigation) {
       // If router hasn't navigated yet and we are not in the middle of navigating, assume root:
       return rootPath;
     }
@@ -184,7 +193,7 @@ export class ModalNavigationService {
   }
 
   private isNewModalWindow(navigationEnd: NavigationEnd): boolean {
-    const currentNavigation = this.router.getCurrentNavigation();
+    const currentNavigation = this.getRouter().getCurrentNavigation();
     if (!currentNavigation || !currentNavigation.previousNavigation) {
       return true;
     }
@@ -204,12 +213,14 @@ export class ModalNavigationService {
     return previousModalRouteParent !== currentModalRouteParent;
   }
 
-  private navigationEndListener$ = this.router.events.pipe(
-    filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-  );
+  private get navigationEndListener$() {
+    return this.getRouter().events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    );
+  }
 
   private async waitForCurrentThenGetNavigationEndStream(): Promise<Observable<NavigationEnd>> {
-    if (this.router.getCurrentNavigation()) {
+    if (this.getRouter().getCurrentNavigation()) {
       const currentNavigationEnd = await firstValueFrom(this.navigationEndListener$);
       return this.navigationEndListener$.pipe(startWith(currentNavigationEnd));
     }
@@ -311,15 +322,18 @@ export class ModalNavigationService {
   async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
     const commands = Array.isArray(path) ? [...path] : path.split('/');
     const childPath = commands.pop();
-    const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
-      queryParams,
-      relativeTo: this.getCurrentActivatedRoute(),
-    });
+    const result = await this.getRouter().navigate(
+      [...commands, { outlets: { modal: [childPath] } }],
+      {
+        queryParams,
+        relativeTo: this.getCurrentActivatedRoute(),
+      }
+    );
     return result;
   }
 
   async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
-    return this.router.navigate([relativePath], {
+    return this.getRouter().navigate([relativePath], {
       queryParams,
       relativeTo: this.getCurrentActivatedRoute(),
     });
@@ -327,7 +341,7 @@ export class ModalNavigationService {
 
   async navigateOutOfModalOutlet(): Promise<boolean> {
     const currentActivatedRoute = this.getCurrentActivatedRoute();
-    const currentNavigationFinalUrl = this.router.getCurrentNavigation()?.finalUrl?.toString();
+    const currentNavigationFinalUrl = this.getRouter().getCurrentNavigation()?.finalUrl?.toString();
     const isCurrentlyNavigatingOutOfModalOutlet =
       currentNavigationFinalUrl && !this.isModalRoute(currentNavigationFinalUrl);
 
@@ -337,7 +351,7 @@ export class ModalNavigationService {
     }
 
     const parentRoute = this.getBackdropRoute(currentActivatedRoute);
-    return this.router.navigate(['./'], {
+    return this.getRouter().navigate(['./'], {
       relativeTo: parentRoute,
     });
   }
@@ -351,13 +365,13 @@ export class ModalNavigationService {
   }
 
   handleBrowserBackButton(modal: HTMLIonModalElement) {
-    const popstateNavigationStart$ = this.router.events.pipe(
+    const popstateNavigationStart$ = this.getRouter().events.pipe(
       filter(
         (event): event is NavigationStart =>
           event instanceof NavigationStart && event.navigationTrigger === 'popstate'
       )
     );
-    const navigationEnd$ = this.router.events.pipe(
+    const navigationEnd$ = this.getRouter().events.pipe(
       filter((event) => event instanceof NavigationEnd)
     );
     navigationEnd$
