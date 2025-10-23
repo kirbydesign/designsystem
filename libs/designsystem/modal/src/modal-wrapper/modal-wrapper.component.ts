@@ -191,7 +191,7 @@ export class ModalWrapperComponent
     this.listenForIonModalWillDismiss();
     this.listenForScroll();
     this.initializeResizeModalToModalWrapper();
-    this.focusModalTitle();
+    this.focusTitleOnDidPresent();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -314,6 +314,7 @@ export class ModalWrapperComponent
         this.routerOutlet.deactivate();
       }
       this.routerOutlet.activateWith(route, this.environmentInjector);
+      this.focusTitleElement();
     });
   }
 
@@ -431,17 +432,23 @@ export class ModalWrapperComponent
     }
   }
 
-  private focusModalTitle() {
+  private focusTitleOnDidPresent() {
     this.ionModalDidPresent.pipe(takeUntil(this.willClose$)).subscribe(() => {
-      // Use queueMicrotask to defer our focus until after Ionic has saved a reference
-      // to the element that should have focus restored when modal is closed.
-      // https://github.com/ionic-team/ionic-framework/blob/v8.6.1/core/src/utils/overlays.ts#L592
-      queueMicrotask(() => {
-        const focusAlreadyInModal = this.ionModalElement?.contains(document.activeElement);
-        if (focusAlreadyInModal) return;
+      this.focusTitleElement();
+    });
+  }
 
-        this.ionTitleElement?.nativeElement.focus();
-      });
+  focusTitleElement() {
+    // Use queueMicrotask to defer our focus until after Ionic has saved a reference
+    // to the element that should have focus restored when modal is closed.
+    // https://github.com/ionic-team/ionic-framework/blob/v8.6.1/core/src/utils/overlays.ts#L592
+    queueMicrotask(() => {
+      const focusAlreadyInModalContent = this.ionContentElement?.nativeElement.contains(
+        document.activeElement
+      );
+      if (focusAlreadyInModalContent) return;
+
+      this.ionTitleElement?.nativeElement.focus();
     });
   }
 
