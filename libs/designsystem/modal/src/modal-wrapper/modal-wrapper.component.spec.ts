@@ -1,5 +1,7 @@
 import { fakeAsync, tick } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { IonContent } from '@ionic/angular/standalone';
+import { Observable, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
@@ -167,6 +169,23 @@ describe('ModalWrapperComponent', () => {
 
       spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
+
+      await TestHelper.whenTrue(() => document.activeElement !== document.body);
+
+      expect(document.activeElement).toEqual(ionTitle);
+    });
+
+    it('should have focus on ion-title after onSiblingModalRouteActivated is called', async () => {
+      const ionTitle = spectator.query('ion-title');
+      await TestHelper.ionComponentOnReady(ionTitle);
+      const siblingModalRouteActivated$ = new Subject<ActivatedRoute>();
+      const mockRoute = {} as ActivatedRoute;
+
+      spyOn(spectator.component['routerOutlet'], 'deactivate');
+      spyOn(spectator.component['routerOutlet'], 'activateWith');
+      spectator.component['onSiblingModalRouteActivated'](siblingModalRouteActivated$);
+
+      siblingModalRouteActivated$.next(mockRoute);
 
       await TestHelper.whenTrue(() => document.activeElement !== document.body);
 
