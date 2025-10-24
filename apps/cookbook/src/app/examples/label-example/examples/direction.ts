@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { LabelComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-label-example-direction',
@@ -25,7 +26,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  imports: [ItemComponent],
+  imports: [ItemComponent, LabelComponent],
 })
 export class LabelExampleDirectionComponent {
   template: string = config.template;

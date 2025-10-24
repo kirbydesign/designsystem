@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { PageComponent } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import {
   ListComponent,
   ListHeaderComponent,
@@ -61,6 +61,7 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list
     LabelComponent,
     ListHeaderComponent,
     ListItemTemplateDirective,
+    PageContentComponent,
   ],
 })
 export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {}
