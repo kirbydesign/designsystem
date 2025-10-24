@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-simple-item-group-example',
@@ -50,7 +50,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ItemGroupComponent, ItemComponent],
+  imports: [ItemGroupComponent, ItemComponent, LabelComponent],
 })
 export class ItemGroupSimpleExampleComponent {
   template: string = config.template;

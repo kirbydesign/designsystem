@@ -4,7 +4,7 @@ import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
-import { PageComponent } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BasePageExampleComponent } from '../base-page-example.component';
@@ -41,7 +41,7 @@ const config = {
 };
 @Component({
   template: config.template,
-  imports: [PageComponent, ButtonComponent, IconComponent],
+  imports: [PageComponent, ButtonComponent, IconComponent, PageContentComponent],
 })
 export class PageFixedTitleAndActionsExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { PageComponent } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
@@ -16,7 +16,7 @@ const config = {
 };
 @Component({
   template: config.template,
-  imports: [PageComponent],
+  imports: [PageComponent, PageContentComponent],
 })
 export class PageFitHeadingExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

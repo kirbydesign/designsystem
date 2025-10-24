@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { AvatarComponent, IconComponent } from '@kirbydesign/designsystem';
 
@@ -25,7 +25,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./_shared.scss'],
-  imports: [ItemComponent, IconComponent, BadgeComponent, AvatarComponent],
+  imports: [ItemComponent, IconComponent, BadgeComponent, AvatarComponent, LabelComponent],
 })
 export class ItemExampleComplexLabelsComponent {
   template: string = config.template;

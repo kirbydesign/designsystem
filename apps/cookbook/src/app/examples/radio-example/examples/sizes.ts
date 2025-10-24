@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 const config = {
   selector: 'cookbook-radio-sizes-example',
@@ -14,7 +14,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['../../checkbox-radio-sizes-example.scss'],
-  imports: [RadioGroupComponent],
+  imports: [RadioGroupComponent, RadioComponent],
 })
 export class RadioSizesExampleComponent {
   template: string = config.template;

@@ -5,7 +5,7 @@ import { ModalComponent, ModalFooterComponent } from '@kirbydesign/designsystem/
 import { PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { CardComponent } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import {
   ModalExampleSizeSelectorComponent,
   ModalSizeOption,
@@ -89,6 +89,7 @@ didDismiss() {
     ThemeColorDirective,
     CardComponent,
     ModalExampleSizeSelectorComponent,
+    CardHeaderComponent,
   ],
 })
 export class ModalComponentExampleComponent {

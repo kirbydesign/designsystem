@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { CurrencyPipe } from '@angular/common';
@@ -47,7 +47,14 @@ const config = {
       }
     `,
   ],
-  imports: [CardComponent, ItemComponent, ProgressCircleComponent, IconComponent, CurrencyPipe],
+  imports: [
+    CardComponent,
+    ItemComponent,
+    ProgressCircleComponent,
+    IconComponent,
+    CurrencyPipe,
+    LabelComponent,
+  ],
 })
 export class ProgressCircleExampleCardComponent {
   template: string = config.template;

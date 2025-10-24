@@ -5,7 +5,7 @@ import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/ca
   selector: 'cookbook-grid-example',
   templateUrl: './grid-example.component.html',
   styleUrls: ['./grid-example.component.scss'],
-  imports: [CardComponent, CardHeaderComponent],
+  imports: [CardComponent, CardHeaderComponent, CardHeaderComponent],
 })
 export class GridExampleComponent {
   spacing = '';

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CardComponent } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
@@ -44,7 +44,7 @@ export class MyComponent {
       transition('true <=> false', animate('0.2s')),
     ]),
   ],
-  imports: [CardComponent, ItemComponent],
+  imports: [CardComponent, ItemComponent, CardHeaderComponent],
 })
 export class ItemExampleDisclosureAnimationComponent {
   template: string = config.template;

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { LabelComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-label-example-direction',

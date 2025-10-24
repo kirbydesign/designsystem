@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 
 const config = {
@@ -27,7 +27,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [SectionHeaderComponent, CardComponent, ItemComponent, AvatarComponent],
+  imports: [SectionHeaderComponent, CardComponent, ItemComponent, AvatarComponent, LabelComponent],
 })
 export class SectionHeaderWithCardComponent {
   template: string = config.template;

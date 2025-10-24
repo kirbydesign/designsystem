@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 const getMaxWidth = DesignTokenHelper.pageContentMaxWidth;
 
-import { PageComponent } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 
@@ -53,7 +53,7 @@ const config = {
       }
     `,
   ],
-  imports: [PageComponent, DropdownComponent, ItemComponent],
+  imports: [PageComponent, DropdownComponent, ItemComponent, PageContentComponent],
 })
 export class PageContentWidthExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

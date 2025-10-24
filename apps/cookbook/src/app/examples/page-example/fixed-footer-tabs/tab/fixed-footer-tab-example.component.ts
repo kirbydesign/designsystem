@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PageFooterComponent } from '@kirbydesign/designsystem';
 
-import { PageComponent } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -68,6 +68,7 @@ const config = {
     CardComponent,
     ItemComponent,
     ToggleComponent,
+    PageContentComponent,
   ],
 })
 export class PageFixedFooterTabExampleComponent extends BasePageExampleComponent implements OnInit {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
 
-import { PageComponent } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../list-shared/base-list.component';
@@ -35,7 +35,14 @@ export const ListLoadOnDemandExampleTemplate = `<kirby-list
       <kirby-page-content>${ListLoadOnDemandExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
-  imports: [PageComponent, ListComponent, ItemComponent, LabelComponent, ListItemTemplateDirective],
+  imports: [
+    PageComponent,
+    ListComponent,
+    ItemComponent,
+    LabelComponent,
+    ListItemTemplateDirective,
+    PageContentComponent,
+  ],
 })
 export class ListLoadOnDemandExampleComponent extends BaseListComponent {
   private itemCount: number = 0;

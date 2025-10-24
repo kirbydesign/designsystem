@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
-import { PageComponent } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -51,6 +51,7 @@ const config = {
     ButtonComponent,
     IconComponent,
     ItemComponent,
+    PageContentComponent,
   ],
 })
 export class HeaderWithCustomActionsExampleComponent extends BasePageExampleComponent {
