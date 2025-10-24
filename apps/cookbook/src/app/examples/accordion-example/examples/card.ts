@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
+import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 
 const config = {
   selector: 'cookbook-accordion-card-example',
@@ -25,7 +25,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [CardComponent, AccordionItemComponent],
+  imports: [CardComponent, AccordionItemComponent, AccordionDirective],
 })
 export class AccordionCardExampleComponent {
   template: string = config.template;

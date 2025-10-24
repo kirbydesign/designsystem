@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
+import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 import { ListComponent } from '@kirbydesign/designsystem/list';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const config = {
@@ -44,7 +44,14 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [CardComponent, AccordionItemComponent, ListComponent, ItemComponent],
+  imports: [
+    CardComponent,
+    AccordionItemComponent,
+    ListComponent,
+    ItemComponent,
+    AccordionDirective,
+    LabelComponent,
+  ],
 })
 export class AccordionWithItemsInCardExampleComponent extends BaseListComponent {
   template: string = config.template;
