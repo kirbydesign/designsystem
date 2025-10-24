@@ -5,6 +5,7 @@ import {
   DateInputDirective,
   FormFieldComponent,
   InputComponent,
+  InputCounterComponent,
 } from '@kirbydesign/designsystem/form-field';
 
 const config = {
@@ -28,7 +29,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldComponent, DateInputDirective, InputComponent],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent, InputCounterComponent],
 })
 export class FormFieldInputCounterExampleComponent {
   template: string = config.template;
