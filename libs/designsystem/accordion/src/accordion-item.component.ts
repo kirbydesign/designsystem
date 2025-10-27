@@ -18,7 +18,6 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 let uniqueId = 0;
 
 @Component({
-  standalone: true,
   selector: 'kirby-accordion-item',
   templateUrl: './accordion-item.component.html',
   styleUrls: ['./accordion-item.component.scss'],

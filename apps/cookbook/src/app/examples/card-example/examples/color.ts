@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardComponent } from '@kirbydesign/designsystem/card';
+import { CardModule } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 const config = {
@@ -29,7 +29,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
-  imports: [CardComponent, ThemeColorDirective],
+  imports: [CardModule, ThemeColorDirective],
 })
 export class CardExampleColorComponent {
   template: string = config.template;

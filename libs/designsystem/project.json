@@ -70,7 +70,6 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "dependsOn": ["cookbook"],
       "outputs": ["{options.outputDir}"],
       "options": {
         "configDir": "libs/designsystem/.storybook",

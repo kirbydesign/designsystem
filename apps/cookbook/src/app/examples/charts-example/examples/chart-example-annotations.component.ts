@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { ChartsModule } from '@kirbydesign/designsystem/chart';
+import { ChartComponent } from '@kirbydesign/designsystem/chart';
 
 const config = {
   selector: 'cookbook-chart-example-annotations',
@@ -42,7 +42,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ChartsModule],
+  imports: [ChartComponent],
 })
 export class ChartExampleAnnotationsComponent {
   template: string = config.template;

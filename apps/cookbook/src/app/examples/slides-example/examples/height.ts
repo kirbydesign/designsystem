@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
+import {
+  SlideDirective,
+  SlidesComponent,
+  SlideStretchHeightDirective,
+} from '@kirbydesign/designsystem/slide';
 import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
 const config = {
@@ -19,7 +23,13 @@ const config = {
   selector: config.selector,
   template: config.template,
 
-  imports: [SlidesComponent, SlideDirective, CardComponent, CardHeaderComponent],
+  imports: [
+    SlidesComponent,
+    SlideDirective,
+    CardComponent,
+    CardHeaderComponent,
+    SlideStretchHeightDirective,
+  ],
 })
 export class SlidesHeightExampleComponent {
   template = config.template;

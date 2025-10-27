@@ -5,7 +5,7 @@ import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/ca
 const config = {
   selector: 'cookbook-slides-simple-example',
   template: `<kirby-slides [slides]="slides" [title]="'Title'" [showNavigation]="true">
-  <kirby-card *kirbySlide="let slide; let i = index" slideStretchHeight [hasPadding]="true">
+  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
     <div class="card-content">
       {{ slide.cardContent }}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
+import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
@@ -41,7 +41,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
-  imports: [CardComponent, IconComponent, CardHeaderComponent],
+  imports: [CardModule, IconComponent],
 })
 export class CardExampleFlagComponent {
   template: string = config.template;
