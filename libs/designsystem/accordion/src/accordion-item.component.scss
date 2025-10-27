@@ -14,6 +14,7 @@ $padding: utils.size('s');
     display: block;
     border-top: 1px solid $divider-color;
     border-bottom: 1px solid $divider-color;
+    box-sizing: border-box;
   }
 }
 
@@ -43,7 +44,6 @@ $padding: utils.size('s');
     box-shadow: none;
     font-family: var(--kirby-font-family);
     text-align: start;
-    box-sizing: border-box;
   }
 }
 
