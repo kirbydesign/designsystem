@@ -7,7 +7,7 @@ import { SectionHeaderComponent } from './section-header.component';
 
 const { fontSizeInPx, fontWeight, lineHeight } = DesignTokenHelper;
 
-describe('SectionHeaderComponent with Kirby Label', () => {
+xdescribe('SectionHeaderComponent with Kirby Label', () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({

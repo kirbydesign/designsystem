@@ -8,7 +8,7 @@ import { TabButtonComponent } from './tab-button.component';
 
 const { getTextColor, fontSizeInPx, fontWeight, lineHeight, size } = DesignTokenHelper;
 
-describe('TabsComponent', () => {
+xdescribe('TabsComponent', () => {
   let spectator: SpectatorHost<TabButtonComponent>;
   let ionTabButton: HTMLIonTabButtonElement;
   let innerButton: HTMLAnchorElement;

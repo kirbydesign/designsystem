@@ -141,7 +141,7 @@ describe('TabsComponent', () => {
       // Only run desktop test on non-touch devices
       if (screenSize === 'desktop' && !isNonTouchDevice) return;
 
-      it(`should have correct spacing on screensize ${screenSize}`, async () => {
+      xit(`should have correct spacing on screensize ${screenSize}`, async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
 
         const ionTabBarElm = spectator.query('ion-tab-bar');

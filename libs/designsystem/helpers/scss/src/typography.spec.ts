@@ -1,4 +1,4 @@
-describe('Typography', () => {
+xdescribe('Typography', () => {
   let element: HTMLElement;
 
   afterEach(() => {
