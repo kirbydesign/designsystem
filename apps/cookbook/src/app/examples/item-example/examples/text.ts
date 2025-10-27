@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-text',
@@ -18,7 +18,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  imports: [ItemComponent],
+  imports: [ItemComponent, LabelComponent],
 })
 export class ItemExampleTextComponent {
   template: string = config.template;
