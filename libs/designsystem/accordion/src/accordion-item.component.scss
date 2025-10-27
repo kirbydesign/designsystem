@@ -43,6 +43,7 @@ $padding: utils.size('s');
     box-shadow: none;
     font-family: var(--kirby-font-family);
     text-align: start;
+    box-sizing: border-box;
   }
 }
 
