@@ -10,6 +10,7 @@ import {
 } from '@kirbydesign/designsystem/form-field';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
+import { FormsModule } from '@angular/forms';
 import { ModalExampleAlertWithGuardStepperComponent } from './modal-example-alert-with-guard-stepper.component';
 
 const config = {
@@ -102,6 +103,7 @@ validate(): boolean | AlertConfig {
     InputComponent,
     ButtonComponent,
     ModalFooterComponent,
+    FormsModule,
   ],
 })
 export class ModalEmbeddedAlertExampleComponent implements OnInit {
