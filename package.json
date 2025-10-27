@@ -63,6 +63,7 @@
     "@nx/storybook": "21.2.2",
     "@nx/web": "21.2.2",
     "@nx/workspace": "21.2.2",
+    "@storybook/addon-a11y": "^9.1.13",
     "@storybook/addon-docs": "^9.0.16",
     "@storybook/angular": "^9.0.16",
     "@storybook/jest": "^0.2.3",
@@ -102,6 +103,5 @@
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
-  },
-  "dependencies": {}
+  }
 }

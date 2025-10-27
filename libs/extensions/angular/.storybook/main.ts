@@ -12,6 +12,7 @@ const config: StorybookConfig = {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: { transcludeMarkdown: true },
     },
+    getAbsolutePath('@storybook/addon-a11y'),
   ],
 
   framework: {
