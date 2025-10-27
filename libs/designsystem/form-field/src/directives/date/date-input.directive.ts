@@ -9,12 +9,9 @@ import {
   LOCALE_ID,
   Renderer2,
 } from '@angular/core';
-import 'inputmask/lib/extensions/inputmask.date.extensions';
-import Inputmask from 'inputmask/lib/inputmask';
+import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
-@Directive({
-  standalone: true,
-})
+@Directive({})
 export class DateInputDirective implements AfterViewInit {
   @HostListener('input')
   onInput() {

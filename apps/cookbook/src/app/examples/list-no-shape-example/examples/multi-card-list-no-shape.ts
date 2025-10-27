@@ -8,7 +8,8 @@ import { BaseListNoShape } from '../base-list-no-shape';
 export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="none" hasItemSpacing="true" [showDivider]="false">
   <kirby-card *kirbyListItemTemplate="let item">
     @if (item.amount < 0) {
-      <kirby-card-header title="Account is overdraft" [flagged]="'warning'"></kirby-card-header>
+      <kirby-card-header title="Account is overdraft" [flagged]="'warning'">
+      </kirby-card-header>
     }
     <kirby-item>
       <h4 class="kirby-text-bold">{{ item.title }}</h4>
@@ -19,7 +20,8 @@ export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="
     @for (shadowAccount of item.shadowAccounts; track shadowAccount.title) {
       <kirby-item>
         <h4>{{ shadowAccount.title }}</h4>
-        <data [value]="shadowAccount.amount" slot="end">{{ shadowAccount.amount | currency }}</data>
+        <data [value]="shadowAccount.amount" slot="end">
+        {{ shadowAccount.amount | currency }}</data>
       </kirby-item>
     }
   </kirby-card>

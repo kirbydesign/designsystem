@@ -10,7 +10,7 @@ import {
   HeaderTitleActionIconDirective,
 } from './header.component';
 
-const declarations = [
+const imports = [
   HeaderComponent,
   HeaderActionsDirective,
   HeaderCustomSectionDirective,
@@ -19,8 +19,7 @@ const declarations = [
 ];
 
 @NgModule({
-  declarations: declarations,
-  imports: [CommonModule, FitHeadingDirective],
-  exports: declarations,
+  imports: [CommonModule, FitHeadingDirective, ...imports],
+  exports: imports,
 })
 export class HeaderModule {}

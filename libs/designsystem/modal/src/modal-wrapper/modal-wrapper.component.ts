@@ -29,7 +29,7 @@ import { ResizeObserverService, TranslationService } from '@kirbydesign/designsy
 import { UnobserveFn, WindowRef } from '@kirbydesign/designsystem/types';
 import { observeContent, PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
@@ -54,7 +54,7 @@ const contentScrolledOffsetInPixels = 4;
   imports: [
     RouterModule,
     ButtonComponent,
-    IconModule,
+    IconComponent,
     CommonModule,
     IonHeader,
     IonToolbar,
@@ -191,7 +191,7 @@ export class ModalWrapperComponent
     this.listenForIonModalWillDismiss();
     this.listenForScroll();
     this.initializeResizeModalToModalWrapper();
-    this.focusModalTitle();
+    this.focusTitleOnDidPresent();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -314,6 +314,7 @@ export class ModalWrapperComponent
         this.routerOutlet.deactivate();
       }
       this.routerOutlet.activateWith(route, this.environmentInjector);
+      this.focusTitle();
     });
   }
 
@@ -431,17 +432,23 @@ export class ModalWrapperComponent
     }
   }
 
-  private focusModalTitle() {
+  private focusTitleOnDidPresent() {
     this.ionModalDidPresent.pipe(takeUntil(this.willClose$)).subscribe(() => {
-      // Use queueMicrotask to defer our focus until after Ionic has saved a reference
-      // to the element that should have focus restored when modal is closed.
-      // https://github.com/ionic-team/ionic-framework/blob/v8.6.1/core/src/utils/overlays.ts#L592
-      queueMicrotask(() => {
-        const focusAlreadyInModal = this.ionModalElement?.contains(document.activeElement);
-        if (focusAlreadyInModal) return;
+      this.focusTitle();
+    });
+  }
 
-        this.ionTitleElement?.nativeElement.focus();
-      });
+  focusTitle() {
+    // Use queueMicrotask to defer our focus until after Ionic has saved a reference
+    // to the element that should have focus restored when modal is closed.
+    // https://github.com/ionic-team/ionic-framework/blob/v8.6.1/core/src/utils/overlays.ts#L592
+    queueMicrotask(() => {
+      const focusAlreadyInModalContent = this.ionContentElement?.nativeElement.contains(
+        document.activeElement
+      );
+      if (focusAlreadyInModalContent) return;
+
+      this.ionTitleElement?.nativeElement.focus();
     });
   }
 

@@ -14,6 +14,7 @@ $padding: utils.size('s');
     display: block;
     border-top: 1px solid $divider-color;
     border-bottom: 1px solid $divider-color;
+    box-sizing: border-box;
   }
 }
 
@@ -31,6 +32,7 @@ $padding: utils.size('s');
   & {
     display: flex;
     align-items: center;
+    gap: utils.size('xxs');
     height: utils.size('xxxl');
     padding-left: $padding;
     padding-right: $padding;
@@ -41,6 +43,7 @@ $padding: utils.size('s');
     background: none;
     box-shadow: none;
     font-family: var(--kirby-font-family);
+    text-align: start;
   }
 }
 
@@ -73,6 +76,11 @@ button[disabled] {
   .title {
     color: utils.get-text-color('semi-dark');
   }
+}
+
+button {
+  // Enforce button text color to avoid inheriting native button color from browser
+  color: utils.get-color('black');
 }
 
 button[aria-expanded='true'] {

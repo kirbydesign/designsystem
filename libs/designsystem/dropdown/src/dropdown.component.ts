@@ -21,7 +21,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import {
+  DesignTokenHelper,
+  StringSearchHelper,
+  UniqueIdGenerator,
+} from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
@@ -29,6 +33,8 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { NgTemplateOutlet } from '@angular/common';
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
@@ -43,7 +49,14 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
       multi: true,
     },
   ],
-  standalone: false,
+  imports: [
+    ButtonComponent,
+    NgTemplateOutlet,
+    PopoverComponent,
+    CardComponent,
+    ItemComponent,
+    IconComponent,
+  ],
 })
 export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
@@ -82,7 +95,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   // _focusedIndex keeps track of which element has focus and will be selected
   // if it is activated (by pressing ENTER or SPACE key)
-  private _focusedIndex: number = -1;
+  private _focusedIndex: number = 0;
   get focusedIndex(): number {
     return this._focusedIndex;
   }
@@ -129,6 +142,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   size: 'sm' | 'md' = 'md';
 
+  // Tabindex defaults to 0 instead of no value to align tabbing behavior in Safari
+  // with other browsers and the default select behavior: https://mayank.co/blog/safari-focus/
   @Input()
   tabindex = 0;
 
@@ -190,7 +205,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     after the page is loaded. If the user interacts with any other element before, then the dropdown won't get a focus ring.
     See issue: https://github.com/kirbydesign/designsystem/issues/2477.
 
-    This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible 
+    This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible
     to close the dropdown when the popover backdrop is clicked, instead of relying on the blur event, which is utilized
     by this line below: this.elementRef.nativeElement.focus(). Right now this forces the blur event to be triggered, when
     clicking outside of the dropdown.
@@ -217,7 +232,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.buttonElement.nativeElement
     );
   }
-
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
 
@@ -253,6 +267,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private disposeItemClickListeners: EventListenerDisposeFn[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
+  private searchBuffer: string = '';
+  private searchBufferTimeout: ReturnType<typeof setTimeout>;
+  private SEARCH_BUFFER_DELAY = 500; // ms
 
   constructor(
     private renderer: Renderer2,
@@ -267,9 +284,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     this.clicked = true;
 
-    if (!this.isOpen) {
-      this.elementRef.nativeElement.focus();
-    }
     this.toggle();
   }
 
@@ -278,11 +292,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       return;
     }
     this.isOpen ? this.close() : this.open();
-  }
-
-  onButtonMouseEvent(event: Event) {
-    // Prevent button focus;
-    event.preventDefault();
   }
 
   /* Utility that makes it easier to set styles on card element
@@ -313,11 +322,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         }
       });
     }
-    // Only call initializeAlignment if cardElement is defined
-    if (this.cardElement && this.cardElement.nativeElement) {
-      this.initializeAlignment();
-    }
     this.forwardAriaLabelToDropdownButton();
+    this.initializeAlignment();
   }
 
   private initializeAlignment() {
@@ -399,8 +405,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         DropdownComponent.OPEN_DELAY_IN_MS
       );
 
-      // Move focus to selected item (if any)
-      // If no item is selected, focus the first item
+      // Move focus to selected item (if any) or first item
       this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
     }
   }
@@ -409,7 +414,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
-      this.scrollItemIntoView(this.selectedIndex);
+      this.scrollItemIntoView(this.focusedIndex);
       this.changeDetectorRef.markForCheck();
     }
   }
@@ -510,10 +515,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  @HostListener('keydown.tab', ['$event'])
-  _onTab(event: KeyboardEvent) {
+  @HostListener('keydown.tab')
+  _onTab() {
     if (this.isOpen) {
-      event.preventDefault();
+      this.selectItem(this.focusedIndex);
       this.close();
     }
 
@@ -523,6 +528,131 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       // which is expected to happen, when using the tab key
       this.clicked = false;
     }
+  }
+
+  private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+  }
+
+  private addToSearchBuffer(char: string) {
+    clearTimeout(this.searchBufferTimeout);
+    this.searchBuffer += char;
+    this.searchBufferTimeout = setTimeout(() => {
+      this.resetSearchBuffer();
+    }, this.SEARCH_BUFFER_DELAY);
+  }
+  private resetSearchBuffer() {
+    this.searchBuffer = '';
+  }
+
+  @HostListener('keydown', ['$event'])
+  _onKeydown(event: KeyboardEvent) {
+    const key = event.key;
+
+    if (this.items.length === 0) {
+      console.warn('[Kirby] No items found within dropdown');
+      return;
+    }
+
+    if (this.disabled) return;
+
+    if (StringSearchHelper.isPrintableCharacter(key)) {
+      this.handlePrintableCharacterKey(event, this.isOpen);
+    }
+
+    // ALT + ArrowDown: Open dropdown
+    if (key === 'ArrowDown' && event.altKey) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      if (!this.isOpen) {
+        this.open();
+        this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
+      }
+      return;
+    }
+
+    // ALT + ArrowUp: Select focused item and close dropdown
+    if (key === 'ArrowUp' && event.altKey) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      if (this.focusedIndex > -1) {
+        this.selectItem(this.focusedIndex);
+        this.close();
+      }
+    }
+    // PageUp: Jump up 10 options or to first
+    if (key === 'PageUp') {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      if (!this.isOpen) {
+        this.open();
+      }
+      this.focusedIndex = Math.max(0, this.focusedIndex - 10);
+      return;
+    }
+
+    // PageDown: Jump down 10 options or to last
+    if (key === 'PageDown') {
+      this.preventDefaultAndStopImmediatePropagation(event);
+      if (!this.isOpen) {
+        this.open();
+      }
+      this.focusedIndex = Math.min(this.items.length - 1, this.focusedIndex + 10);
+      return;
+    }
+  }
+
+  private handlePrintableCharacterKey(event: KeyboardEvent, isOpen: boolean) {
+    const key = event.key;
+
+    if (isOpen) {
+      this.preventDefaultAndStopImmediatePropagation(event);
+    } else {
+      this.open();
+    }
+
+    // If the same character is typed twice, the search buffer should only contain that character once
+    if (
+      this.searchBuffer.length === 1 &&
+      this.searchBuffer[0].toLowerCase() === key.toLowerCase()
+    ) {
+      this.searchBuffer = key;
+    } else {
+      this.addToSearchBuffer(key);
+    }
+
+    const isMultiCharSearch = this.searchBuffer.length > 1;
+    let startIndex = 0;
+
+    if (!isMultiCharSearch && this.isOpen) {
+      startIndex = this.focusedIndex + 1;
+    }
+
+    let foundItemIndex = this.getIndexOfItemByFirstCharacter(this.searchBuffer, startIndex);
+
+    if (foundItemIndex === -1 && isMultiCharSearch) {
+      foundItemIndex = this.getIndexOfItemByFirstCharacter(key, startIndex);
+    }
+
+    if (foundItemIndex === -1 && !isMultiCharSearch && this.isOpen) {
+      foundItemIndex = this.getIndexOfItemByFirstCharacter(this.searchBuffer, 0);
+    }
+
+    if (foundItemIndex > -1) {
+      this.focusedIndex = foundItemIndex;
+    }
+  }
+
+  private getIndexOfItemByFirstCharacter(char: string, startIndex: number = 0) {
+    let itemTexts: string[];
+    // Prefer slotted/projected items if present
+    if (this.kirbyItemsSlotted && this.kirbyItemsSlotted.length) {
+      itemTexts = this.kirbyItemsSlotted
+        .toArray()
+        .map((ref) => ref.nativeElement.textContent?.trim() ?? '');
+    } else {
+      itemTexts = this.items.map((item) => this.getTextFromItem(item) ?? '');
+    }
+
+    return StringSearchHelper.getIndexByFirstMatchingStartString(char, itemTexts, startIndex);
   }
 
   @HostListener('mousedown', ['$event'])
@@ -579,7 +709,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.isOpen) {
       this.selectItem(this.focusedIndex);
     }
-
     this.toggle();
   }
 
@@ -601,19 +730,18 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.open();
 
       // If no selected item then focus first or last item
-      if (this.selectedIndex < 0) {
+      if (!event.altKey && this.selectedIndex < 0) {
         switch (event.key) {
           case 'ArrowUp':
-            this.focusedIndex = this.items.length - 1;
+            this.focusedIndex = 0;
             break;
           case 'ArrowDown':
-            this.focusedIndex = 0;
+            this.focusedIndex = this.items.length - 1;
             break;
           default:
             break;
         }
       }
-
       return false;
     }
 
@@ -622,11 +750,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.focusedIndex,
       this.items.length - 1
     );
-
     if (newFocusedIndex > -1) {
       this.focusedIndex = newFocusedIndex;
     }
-
     return false;
   }
 
@@ -634,8 +760,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
     if (this.disabled) return;
-    if (!this.isOpen) return;
-
+    if (!this.isOpen) {
+      event.preventDefault();
+      this.open();
+    }
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
       this.focusedIndex,

@@ -1,7 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { ListComponent } from '@kirbydesign/designsystem/list';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -16,8 +16,7 @@ describe('AccordionItemComponent', () => {
 
   const createHost = createHostFactory({
     component: AccordionItemComponent,
-    declarations: [ListComponent],
-    imports: [IconModule, TestHelper.ionicModuleForTest],
+    imports: [IconComponent, TestHelper.ionicModuleForTest, ListComponent],
   });
 
   describe('by default', () => {
@@ -73,6 +72,12 @@ describe('AccordionItemComponent', () => {
 
       expect(spectator.query('.content-body')).toHaveComputedStyle({
         padding: '0px',
+      });
+    });
+
+    it('should have correct text color in title', () => {
+      expect(spectator.query('.title')).toHaveComputedStyle({
+        color: getTextColor('black'),
       });
     });
   });

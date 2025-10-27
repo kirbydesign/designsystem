@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { FlagComponent } from '@kirbydesign/designsystem';
 import exampleHtml from '../../examples/fab-sheet-example/fab-sheet-example.component.html?raw';
 import { FabSheetExampleComponent } from '../../examples/fab-sheet-example/fab-sheet-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
@@ -15,6 +16,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
     FabSheetExampleComponent,
     CodeViewerComponent,
     ApiDescriptionPropertiesComponent,
+    FlagComponent,
   ],
 })
 export class FabSheetShowcaseComponent {

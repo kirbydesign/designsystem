@@ -4,12 +4,13 @@ import { debounceTime, filter, Subscription, tap } from 'rxjs';
 import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { InputComponent } from '../input/input.component';
 
+import { FormFieldMessageComponent } from '../form-field-message/form-field-message.component';
 import { TextareaComponent } from './../textarea/textarea.component';
 
 @Component({
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
-  standalone: false,
+  imports: [FormFieldMessageComponent],
 })
 export class InputCounterComponent implements OnInit, OnDestroy {
   @Input() listenTo: InputComponent | TextareaComponent;

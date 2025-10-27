@@ -1,6 +1,6 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { RadioGroupComponent, RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 import { RadioExampleComponent } from '~/app/examples/radio-example/radio-example.component';
 
@@ -9,7 +9,7 @@ const meta: Meta<RadioGroupComponent> = {
   title: 'Components / Radio',
   decorators: [
     moduleMetadata({
-      imports: [RadioModule, RadioExampleComponent],
+      imports: [RadioComponent, RadioExampleComponent],
     }),
   ],
 };

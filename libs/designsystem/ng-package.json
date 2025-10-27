@@ -3,13 +3,5 @@
   "dest": "dist",
   "lib": {
     "entryFile": "src/public-api.ts"
-  },
-  "allowedNonPeerDependencies": [
-    "@fontsource/roboto",
-    "@ionic/angular",
-    "@kirbydesign/core",
-    "@floating-ui/dom",
-    "@angular/cdk",
-    "inputmask"
-  ]
+  }
 }
