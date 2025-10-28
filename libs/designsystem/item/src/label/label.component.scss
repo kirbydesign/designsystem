@@ -8,6 +8,23 @@
     justify-content: space-between;
     align-items: center;
 
+    // Add ellipsis to first child
+    @include utils.slotted(':first-child') {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+      flex: 1 1 0%;
+    }
+
+    // Remove ellipsis from last child
+    @include utils.slotted(':last-child') {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: initial;
+      flex-shrink: 0;
+    }
+
     @include utils.slotted(':not(:first-child)') {
       margin-left: utils.size('xs');
     }
