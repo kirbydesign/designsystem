@@ -5,6 +5,7 @@ import {
   HeaderActionsDirective,
   HeaderComponent,
   HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
 } from '@kirbydesign/designsystem/header';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
@@ -61,6 +62,7 @@ const config = {
     BadgeComponent,
     HeaderCustomSectionDirective,
     HeaderActionsDirective,
+    HeaderTitleActionIconDirective,
   ],
 })
 export class HeaderExampleCombinedComponent {
