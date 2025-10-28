@@ -17,11 +17,6 @@ const config = {
 <kirby-form-field>
   <input kirby-input [size]="size" value="Character counter with prefilled value" #prefilled maxlength="50" />
   <kirby-input-counter [listenTo]="prefilled"></kirby-input-counter>
-</kirby-form-field>
-
-<kirby-form-field message="Character counter with message and no maxlength">
-  <input kirby-input [size]="size" #message />
-  <kirby-input-counter [listenTo]="message"></kirby-input-counter>
 </kirby-form-field>`,
 };
 
