@@ -101,7 +101,7 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
 ];
 
-type SideBarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaContent?: string };
+type SidebarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaContent?: string };
 
 /**
  *
@@ -127,12 +127,12 @@ type SideBarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaC
 
  *
  */
-const meta: Meta<SideBarPropsAndCustomArgs> = {
+const meta: Meta<SidebarPropsAndCustomArgs> = {
   title: 'Components/Sidebar',
   component: SidebarComponent,
   decorators: [
     moduleMetadata({
-      imports: [SidebarHeaderComponent, SidebarFooterComponent, IconModule],
+      imports: [SidebarHeaderComponent, SidebarFooterComponent],
     }),
     applicationConfig({
       providers: [provideRouter([]), provideAnimations()],
@@ -162,6 +162,9 @@ const meta: Meta<SideBarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item is clicked',
       control: false,
     },
+    expandIconOnHover: { table: { disable: true } },
+    menuItemsChanged: { table: { disable: true } },
+    changeMenuItems: { table: { disable: true } },
     mainAreaContent: { table: { disable: true } },
   },
   render: ({ mainAreaContent, ...args }) => ({
@@ -170,7 +173,7 @@ const meta: Meta<SideBarPropsAndCustomArgs> = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo.svg" alt=""/>
+            <img src="assets/images/kirby-logo-light-vertical.svg" alt="" height="50"/>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
@@ -186,7 +189,8 @@ const meta: Meta<SideBarPropsAndCustomArgs> = {
 };
 
 export default meta;
-type Story = StoryObj<SideBarPropsAndCustomArgs>;
+type Story = StoryObj<SidebarPropsAndCustomArgs>;
+
 /**
  * Using the sidebar menu alongside a main content area.
  */
