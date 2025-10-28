@@ -13,7 +13,6 @@ import {
 } from '@kirbydesign/extensions-angular/sidebar-menu';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { IconModule } from '@kirbydesign/designsystem/icon';
 
 const menuItemsExample: SidebarMenuItem[] = [
   {
@@ -173,7 +172,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo-light-vertical.svg" alt="" height="50"/>
+            <img src="assets/images/kirby-logo.svg" alt=""/>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
