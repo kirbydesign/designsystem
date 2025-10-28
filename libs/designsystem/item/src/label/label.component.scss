@@ -29,6 +29,12 @@
   }
 }
 
+:host([slot='end']) ion-label :last-child {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+}
+
 :host-context(kirby-item.selected) ion-label {
   @include utils.slotted(
     h1,
