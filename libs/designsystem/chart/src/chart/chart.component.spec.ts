@@ -11,19 +11,19 @@ describe('ChartComponent', () => {
   let component: ChartComponent;
   const createHost = createHostFactory({
     component: ChartComponent,
-    declarations: [ChartComponent],
+    imports: [ChartComponent],
     componentProviders: [MockProvider(ChartJSService)],
   });
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-chart 
-        [height]="height" 
-        [labels]="labels" 
-        [type]="type" 
-        [data]="data" 
-        [customOptions]="customOptions" 
-        [annotations]="annotations" 
+      `<kirby-chart
+        [height]="height"
+        [labels]="labels"
+        [type]="type"
+        [data]="data"
+        [customOptions]="customOptions"
+        [annotations]="annotations"
         [highlightedElements]="highlightedElements">
       </kirby-chart>`,
       { hostProps: { type: 'column' } }

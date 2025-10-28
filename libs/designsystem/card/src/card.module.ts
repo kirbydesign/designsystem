@@ -7,15 +7,9 @@ import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardFooterComponent } from './card-footer/card-footer.component';
 import { CardAsButtonDirective } from './card-as-button/card-as-button.directive';
 
-const declarations = [
-  CardComponent,
-  CardFooterComponent,
-  CardHeaderComponent,
-  CardAsButtonDirective,
-];
+const imports = [CardComponent, CardFooterComponent, CardHeaderComponent, CardAsButtonDirective];
 @NgModule({
-  imports: [CommonModule, ThemeColorDirective],
-  declarations: [...declarations],
-  exports: [...declarations, ThemeColorDirective],
+  imports: [CommonModule, ThemeColorDirective, ...imports],
+  exports: [...imports, ThemeColorDirective],
 })
 export class CardModule {}

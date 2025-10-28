@@ -1,5 +1,7 @@
 import { fakeAsync, tick } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { IonContent } from '@ionic/angular/standalone';
+import { Observable, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
@@ -9,7 +11,11 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import {
+  PageComponent,
+  PageProgressComponent,
+  PageTitleComponent,
+} from '@kirbydesign/designsystem/page';
 import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 import {
   DummyContentEmbeddedComponent,
@@ -27,7 +33,12 @@ const { getColor } = DesignTokenHelper;
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [PageModule],
+    imports: [
+      PageComponent,
+      PageProgressComponent,
+      PageTitleComponent,
+      MockComponents(ButtonComponent),
+    ],
     entryComponents: [
       TitleEmbeddedComponent,
       StaticFooterEmbeddedComponent,
@@ -42,7 +53,6 @@ describe('ModalWrapperComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [MockComponents(ButtonComponent)],
     mocks: [CanDismissHelper],
   });
 
@@ -62,12 +72,12 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe("when 'collapseTitle' is enabled", () => {
-    /* 
-      Whether the title is displayed & truncated is not tested. 
+    /*
+      Whether the title is displayed & truncated is not tested.
       This is the responsibility of the ionic components; we assume
-      they're working as intended. 
+      they're working as intended.
 
-      If needed, it should be implemented as an integration test. 
+      If needed, it should be implemented as an integration test.
     */
 
     let ionContentElement: HTMLIonContentElement;
@@ -159,6 +169,23 @@ describe('ModalWrapperComponent', () => {
 
       spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
+
+      await TestHelper.whenTrue(() => document.activeElement !== document.body);
+
+      expect(document.activeElement).toEqual(ionTitle);
+    });
+
+    it('should have focus on ion-title after onSiblingModalRouteActivated is called', async () => {
+      const ionTitle = spectator.query('ion-title');
+      await TestHelper.ionComponentOnReady(ionTitle);
+      const siblingModalRouteActivated$ = new Subject<ActivatedRoute>();
+      const mockRoute = {} as ActivatedRoute;
+
+      spyOn(spectator.component['routerOutlet'], 'deactivate');
+      spyOn(spectator.component['routerOutlet'], 'activateWith');
+      spectator.component['onSiblingModalRouteActivated'](siblingModalRouteActivated$);
+
+      siblingModalRouteActivated$.next(mockRoute);
 
       await TestHelper.whenTrue(() => document.activeElement !== document.body);
 

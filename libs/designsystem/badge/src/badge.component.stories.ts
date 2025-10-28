@@ -2,7 +2,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 
 import { ThemeColor } from '@kirbydesign/core';
 
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 import { BadgeExampleComponent } from '~/app/examples/badge-example/badge-example.component';
@@ -15,7 +15,7 @@ const meta: Meta<BadgeProps> = {
   component: BadgeComponent,
   decorators: [
     moduleMetadata({
-      imports: [IconModule, BadgeExampleComponent],
+      imports: [IconComponent, BadgeExampleComponent],
     }),
   ],
   title: 'Components / Badge',

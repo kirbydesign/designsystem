@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { provideRouter } from '@angular/router';
 import { RouterOutletComponent } from './router-outlet.component';
 
 describe('PageComponent', () => {
@@ -10,8 +11,8 @@ describe('PageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
-      declarations: [RouterOutletComponent],
+      imports: [NoopAnimationsModule, RouterOutletComponent],
+      providers: [provideRouter([])],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));

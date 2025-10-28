@@ -1,7 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 
@@ -10,7 +10,7 @@ const meta: Meta<ActionGroupComponent> = {
   title: 'Components / Header / ActionGroup',
   decorators: [
     moduleMetadata({
-      imports: [ButtonComponent, IconModule],
+      imports: [ButtonComponent, IconComponent],
     }),
   ],
 };

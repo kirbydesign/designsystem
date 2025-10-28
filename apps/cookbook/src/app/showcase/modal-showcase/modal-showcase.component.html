@@ -670,14 +670,26 @@
   <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role">dialog</a>
   role and implement focus management and keyboard support accordingly.
 </p>
+
+<h3 #focusManagement>Focus Management</h3>
 <p>
-  When opened, focus is moved into the modal. Focus is trapped within the modal while it is open,
-  preventing users from navigating to elements outside the modal. Upon closing, focus is moved back
-  to where it was before showing the modal. Pressing
+  When opened, focus is moved to the title unless any element in the content area is already
+  focused. Focus becomes trapped within the modal while it is open, preventing users from navigating
+  to elements outside the modal. Upon closing, focus is moved back to where it was before showing
+  the modal. Pressing
   <kbd>Esc</kbd>
   dismisses the modal.
 </p>
 
+<p>
+  If the component inside the modal is dynamically changed or replaced in a way that renders a new
+  title in the modal, it is highly recommended to re-focus the title to improve keyboard navigation
+  and inform screen reader users of the change. Focusing the title can be done by injecting
+  <code>Modal</code>
+  in the embedded component and call its
+  <code>focusTitle</code>
+  method.
+</p>
 <h3>Labeling</h3>
 <p>
   The provided

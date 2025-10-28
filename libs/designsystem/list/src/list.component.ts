@@ -1,12 +1,15 @@
 import {
+  AfterViewInit,
   Component,
   ContentChild,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Input,
   OnChanges,
   OnInit,
   Output,
+  Renderer2,
   TemplateRef,
   TrackByFunction,
   ViewChild,
@@ -14,9 +17,13 @@ import {
 
 import { ThemeColor } from '@kirbydesign/core';
 
+import { forwardAttributes } from '@kirbydesign/designsystem/shared';
+import { IonItemDivider, IonItemGroup, IonList, IonListHeader } from '@ionic/angular/standalone';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { BoundaryClass } from './list-item/list-item.component';
+import { BoundaryClass, ListItemComponent } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action.type';
 import {
   ListFooterDirective,
@@ -44,9 +51,19 @@ export type StandAloneSpacing =
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper],
-  standalone: false,
+  imports: [
+    IonList,
+    InfiniteScrollDirective,
+    IonListHeader,
+    NgTemplateOutlet,
+    SpinnerComponent,
+    IonItemGroup,
+    NgClass,
+    IonItemDivider,
+    ListItemComponent,
+  ],
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('list', { static: true }) list: any;
   @ViewChild(InfiniteScrollDirective) scrollDirective: InfiniteScrollDirective;
 
@@ -141,6 +158,8 @@ export class ListComponent implements OnInit, OnChanges {
 
   @Input() disableSelectionHighlight: boolean = false;
 
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
   headerTemplate: TemplateRef<any>;
 
@@ -165,7 +184,11 @@ export class ListComponent implements OnInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper) {}
+  constructor(
+    private listHelper: ListHelper,
+    private element: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;
@@ -193,6 +216,15 @@ export class ListComponent implements OnInit, OnChanges {
         this.getStandAloneByProperty
       );
     }
+  }
+
+  ngAfterViewInit(): void {
+    forwardAttributes(
+      this.element.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.element.nativeElement.querySelector('ion-list')
+    );
   }
 
   _onLoadOnDemand() {

@@ -27,7 +27,7 @@ import {
   ListSectionHeaderDirective,
 } from './list.directive';
 
-const exportedDeclarations = [
+const reexportedImports = [
   ListComponent,
   ListItemComponent,
   ListItemTemplateDirective,
@@ -39,15 +39,14 @@ const exportedDeclarations = [
   ListExperimentalComponent,
 ];
 
-const declarations = [
-  ...exportedDeclarations,
+const imports = [
+  ...reexportedImports,
   ListItemColorDirective,
   InfiniteScrollDirective,
   ListItemComponent,
 ];
 
 @NgModule({
-  declarations: declarations,
   imports: [
     CommonModule,
     IconModule,
@@ -59,8 +58,9 @@ const declarations = [
     IonLabel,
     IonList,
     IonListHeader,
+    ...imports,
   ],
-  exports: exportedDeclarations,
+  exports: reexportedImports,
   providers: [],
 })
 export class ListModule {}

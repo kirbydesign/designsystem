@@ -1,7 +1,7 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import {
   ItemSlidingComponent,
   ItemSwipeAction,
@@ -15,7 +15,7 @@ describe('ItemSlidingComponent', () => {
 
   const createHost = createHostFactory({
     component: ItemSlidingComponent,
-    imports: [ItemModule],
+    imports: [ItemComponent, LabelComponent],
   });
 
   let ionItemOptionsElement: HTMLIonItemOptionsElement;

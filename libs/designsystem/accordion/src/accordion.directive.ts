@@ -6,7 +6,6 @@ import { AccordionItemComponent } from './accordion-item.component';
 @Directive({
   selector: '[kirbyAccordion], kirby-accordion',
   exportAs: 'kirby-accordion',
-  standalone: false,
 })
 export class AccordionDirective implements AfterContentInit {
   @Input() headingLevel: 1 | 2 | 3 | 4 | 5 | 6;

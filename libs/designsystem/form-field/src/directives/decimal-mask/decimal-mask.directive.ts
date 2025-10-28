@@ -9,8 +9,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import 'inputmask/lib/extensions/inputmask.numeric.extensions';
-import Inputmask from 'inputmask/lib/inputmask';
+import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
 interface InputMask {
   unmaskedvalue: () => string;
@@ -18,7 +17,6 @@ interface InputMask {
 }
 
 @Directive({
-  standalone: true,
   // eslint-disable-next-line
   selector: '[kirby-decimal-mask]',
   providers: [

@@ -19,7 +19,7 @@ import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsys
   styleUrls: ['./radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [IonicElementPartHelper],
-  standalone: false,
+  imports: [IonRadio],
 })
 export class RadioComponent implements AfterViewInit, OnInit, AfterContentInit {
   @ViewChild(IonRadio, { read: ElementRef, static: true })

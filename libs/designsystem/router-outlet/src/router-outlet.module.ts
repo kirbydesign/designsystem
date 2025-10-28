@@ -4,8 +4,7 @@ import { IonRouterOutlet } from '@ionic/angular/standalone';
 import { RouterOutletComponent } from './router-outlet.component';
 
 @NgModule({
-  declarations: [RouterOutletComponent],
-  imports: [CommonModule, IonRouterOutlet],
+  imports: [CommonModule, IonRouterOutlet, RouterOutletComponent],
   exports: [RouterOutletComponent],
 })
 export class RouterOutletModule {}

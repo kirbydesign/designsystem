@@ -1,5 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { AlertComponent } from './alert.component';
 
@@ -8,7 +8,7 @@ describe('AlertComponent', () => {
 
   const createHost = createHostFactory({
     component: AlertComponent,
-    imports: [IconModule],
+    imports: [IconComponent],
   });
 
   beforeEach(() => {

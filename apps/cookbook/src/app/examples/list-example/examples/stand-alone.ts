@@ -9,17 +9,22 @@ export const ListWithStandAloneExampleTemplate = `<kirby-list
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getStandAloneByProperty]="'isStandAlone'"
-  [standAloneSpacing]="'xxs'"
->
-  <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
-    <kirby-label>
-      <p class="kirby-item-title">{{ item.title }}</p>
-      <data [value]="item.detail" class="kirby-item-detail">{{ item.detail }}</data>
-    </kirby-label>
-    <kirby-label slot="end">
-      <data [value]="item.amount">{{ item.amount }}</data>
-    </kirby-label>
-  </kirby-item>
+  [standAloneSpacing]="'xxs'">
+    <kirby-item 
+      *kirbyListItemTemplate="let item" 
+      [selectable]="true">
+        <kirby-label>
+          <p class="kirby-item-title">
+          {{ item.title }}</p>
+          <data [value]="item.detail" 
+          class="kirby-item-detail">
+          {{ item.detail }}</data>
+        </kirby-label>
+        <kirby-label slot="end">
+          <data [value]="item.amount">
+          {{ item.amount }}</data>
+        </kirby-label>
+    </kirby-item>
 </kirby-list>`;
 
 @Component({

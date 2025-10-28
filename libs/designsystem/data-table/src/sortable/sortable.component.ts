@@ -10,7 +10,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -18,7 +18,7 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
   templateUrl: './sortable.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, IconModule],
+  imports: [CommonModule, IconComponent],
 })
 export class TableSortableComponent implements AfterViewInit {
   constructor(private renderer: Renderer2) {}

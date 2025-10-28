@@ -7,12 +7,11 @@ import { SlidesComponent } from './slides.component';
 import { SlideDirective } from './slide.directive';
 import { SlideStretchHeightDirective } from './slide-stretch-height.directive';
 
-const declarations = [SlidesComponent, SlideDirective, SlideStretchHeightDirective];
+const imports = [SlidesComponent, SlideDirective, SlideStretchHeightDirective];
 
 @NgModule({
-  declarations: [...declarations],
-  imports: [CommonModule, ButtonComponent, IconModule],
-  exports: [...declarations],
+  imports: [CommonModule, ButtonComponent, IconModule, ...imports],
+  exports: [...imports],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SlideModule {}
