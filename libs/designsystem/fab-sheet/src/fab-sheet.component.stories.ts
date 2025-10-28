@@ -1,7 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 
 const meta: Meta<FabSheetComponent> = {
@@ -9,7 +9,7 @@ const meta: Meta<FabSheetComponent> = {
   title: 'Components / Fab Sheet',
   decorators: [
     moduleMetadata({
-      imports: [ActionSheetComponent, IconModule],
+      imports: [ActionSheetComponent, IconComponent],
     }),
   ],
 };

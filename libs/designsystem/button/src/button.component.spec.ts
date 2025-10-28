@@ -14,7 +14,7 @@ describe('ButtonComponent', () => {
 
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [MockComponent(IconComponent)],
+    imports: [MockComponent(IconComponent)],
   });
 
   describe('by default', () => {

@@ -48,7 +48,8 @@ $_light: utils.get-color('black-contrast');
       content: '';
       position: absolute;
       pointer-events: none;
-      inset: -50%;
+      inset: 0;
+      border-radius: inherit;
       opacity: var(--state-layer-opacity, 0);
       background-color: var(--state-layer-background-color, $_dark);
     }

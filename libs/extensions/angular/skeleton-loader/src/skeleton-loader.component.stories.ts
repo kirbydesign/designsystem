@@ -1,8 +1,9 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleton-loader';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 /**
  * A skeleton loader is a visual indicator that is used to render placeholder content and mimic the full content shown when loaded.
@@ -17,7 +18,7 @@ const meta: Meta<SkeletonLoaderComponent> = {
   title: 'Components/Loaders/Skeleton Loader',
   decorators: [
     moduleMetadata({
-      imports: [ButtonComponent, CardModule, ItemModule],
+      imports: [ButtonComponent, CardComponent, ItemComponent, ThemeColorDirective],
     }),
   ],
   args: {

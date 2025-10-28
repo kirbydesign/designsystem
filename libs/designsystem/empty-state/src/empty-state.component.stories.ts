@@ -1,5 +1,5 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { EmptyStateComponent, EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
+import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import { EmptyStateExampleComponent } from '~/app/examples/empty-state-example/empty-state-example.component';
 
 const meta: Meta<EmptyStateComponent> = {
@@ -7,7 +7,7 @@ const meta: Meta<EmptyStateComponent> = {
   title: 'Components / Empty State',
   decorators: [
     moduleMetadata({
-      imports: [EmptyStateModule, EmptyStateExampleComponent],
+      imports: [EmptyStateComponent, EmptyStateExampleComponent],
     }),
   ],
 };

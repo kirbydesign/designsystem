@@ -16,7 +16,6 @@ import { PageComponent } from '../page.component';
   templateUrl: './page-footer.component.html',
   styleUrls: ['./page-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class PageFooterComponent implements OnDestroy {
   @Input()

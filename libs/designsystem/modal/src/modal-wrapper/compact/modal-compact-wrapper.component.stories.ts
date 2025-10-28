@@ -1,7 +1,7 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { Component } from '@angular/core';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import { PageTitleComponent } from '@kirbydesign/designsystem/page';
 import {
   AlertHelper,
   CanDismissHelper,
@@ -14,7 +14,7 @@ import {
     <kirby-page-title>title</kirby-page-title>
   `,
   standalone: true,
-  imports: [PageModule],
+  imports: [PageTitleComponent],
 })
 export class VrtEmbeddedModalExampleComponent {}
 

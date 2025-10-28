@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, ViewChild } from '@angular/core';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
 @Component({
-  imports: [IconModule, CommonModule, IonItemSliding, IonItemOptions, IonItemOption, IonLabel],
+  imports: [IconComponent, CommonModule, IonItemSliding, IonItemOptions, IonItemOption, IonLabel],
   selector: 'kirby-item-sliding',
   templateUrl: './item-sliding.component.html',
   styleUrls: ['./item-sliding.component.scss'],

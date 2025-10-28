@@ -1,12 +1,9 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import {
-  ColorHelper,
-  DesignTokenHelper,
-  ThemeColorExtended,
-} from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from './badge.component';
 
 const { getColor, fontSize, size } = DesignTokenHelper;
@@ -19,7 +16,7 @@ describe('BadgeComponent', () => {
 
   const createHost = createHostFactory({
     component: BadgeComponent,
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, IconComponent],
   });
 
   describe('by default', () => {

@@ -20,6 +20,8 @@ import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
+import { IonRadioGroup } from '@ionic/angular/standalone';
+import { NgTemplateOutlet } from '@angular/common';
 import { RadioComponent } from '../radio.component';
 
 @Component({
@@ -34,7 +36,7 @@ import { RadioComponent } from '../radio.component';
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IonRadioGroup, NgTemplateOutlet, RadioComponent],
 })
 export class RadioGroupComponent
   implements AfterContentInit, ControlValueAccessor, FormFieldControl, AfterViewInit

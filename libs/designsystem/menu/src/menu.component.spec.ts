@@ -1,13 +1,12 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-import { IconComponent, IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FloatingDirective } from '@kirbydesign/designsystem/shared/floating';
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
-import { ItemModule } from '@kirbydesign/designsystem/item';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from './menu.component';
 
 describe('MenuComponent', () => {
@@ -20,14 +19,14 @@ describe('MenuComponent', () => {
   const createHost = createHostFactory({
     component: MenuComponent,
     imports: [
-      IconModule,
-      CardModule,
-      ItemModule,
+      IconComponent,
+      ItemComponent,
       TestHelper.ionicModuleForTest,
       ToggleComponent,
       CheckboxComponent,
+      FloatingDirective,
+      MockComponent(ButtonComponent),
     ],
-    declarations: [FloatingDirective, MockComponent(ButtonComponent)],
   });
   describe('by default', () => {
     beforeEach(() => {

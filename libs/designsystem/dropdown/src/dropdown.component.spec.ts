@@ -8,7 +8,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -37,8 +37,7 @@ describe('DropdownComponent', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [ItemModule],
-      declarations: [
+      imports: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
@@ -104,7 +103,7 @@ describe('DropdownComponent', () => {
       expect(spectator.element.attributes['no-blur']).toBeDefined();
     });
 
-    it('should not render button as disabled ', () => {
+    it('should not render button as disabled', () => {
       expect(buttonElement.disabled).toBeFalsy();
     });
 
@@ -112,8 +111,12 @@ describe('DropdownComponent', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
     });
 
-    it('should have type="button" attribute', () => {
+    it('should have type="button" attribute on button', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
+    it('should have tabindex="0" by default on button', () => {
+      expect(buttonElement).toHaveAttribute('tabindex', '0');
     });
 
     it('should have correct id on button', () => {
@@ -994,12 +997,16 @@ describe('DropdownComponent', () => {
         expect(spectator.element.attributes['disabled']).toBeDefined();
       });
 
-      it('should render button as disabled ', () => {
+      it('should render button as disabled', () => {
         expect(buttonElement.disabled).toBeTruthy();
       });
 
       it('should render disabled attribute on button', () => {
         expect(buttonElement.attributes['disabled']).toBeDefined();
+      });
+
+      it('should render tabindex="-1" attribute on button', () => {
+        expect(buttonElement).toHaveAttribute('tabindex', '-1');
       });
 
       it('should not open', fakeAsync(() => {
@@ -1110,7 +1117,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1161,7 +1168,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1230,7 +1237,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1280,7 +1287,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         ItemComponent,
         ListItemTemplateDirective,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
@@ -1344,8 +1351,7 @@ describe('DropdownComponent', () => {
   describe('when configured with expand=block and usePopover=true', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [ItemModule],
-      declarations: [
+      imports: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],

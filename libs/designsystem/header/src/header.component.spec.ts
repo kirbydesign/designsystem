@@ -5,10 +5,15 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
-import { HeaderModule } from './header.module';
+import {
+  HeaderActionsDirective,
+  HeaderCustomFlagDirective,
+  HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
+} from './header.component';
 import { HeaderComponent } from './header.component';
 
 const { fontSize, size } = DesignTokenHelper;
@@ -20,10 +25,14 @@ describe('HeaderComponent', () => {
     component: HeaderComponent,
     imports: [
       TestHelper.ionicModuleForTest,
-      HeaderModule,
+      HeaderComponent,
+      HeaderActionsDirective,
+      HeaderCustomFlagDirective,
+      HeaderCustomSectionDirective,
+      HeaderTitleActionIconDirective,
       FlagComponent,
       AvatarComponent,
-      IconModule,
+      IconComponent,
       ProgressCircleComponent,
       ActionGroupComponent,
     ],
@@ -263,7 +272,7 @@ describe('HeaderComponent', () => {
     beforeEach(() => {
       spectator = createHost(`
       <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
-        <kirby-progress-circle value="75" themeColor="success" size="lg">  
+        <kirby-progress-circle value="75" themeColor="success" size="lg">
           <kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>
         </kirby-progress-circle>
       </kirby-header>
