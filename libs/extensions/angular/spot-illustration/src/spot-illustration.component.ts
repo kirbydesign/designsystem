@@ -14,7 +14,14 @@ import {
   styleUrl: './spot-illustration.component.scss',
 })
 export class SpotIllustrationComponent {
+  /**
+   * The size of the Spot Illustration
+   */
   size = input<SpotIllustrationSize>(SpotIllustrationSize.MD);
+
+  /**
+   * The name of the Spot Illustration to display
+   */
   name = input.required<SpotIllustrationName>();
 
   illustration = computed(() => {
