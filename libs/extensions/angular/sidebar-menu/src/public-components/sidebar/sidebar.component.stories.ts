@@ -5,6 +5,8 @@ import {
   moduleMetadata,
   StoryObj,
 } from '@storybook/angular';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import {
   SidebarComponent,
   SidebarFooterComponent,
@@ -131,7 +133,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   component: SidebarComponent,
   decorators: [
     moduleMetadata({
-      imports: [SidebarHeaderComponent, SidebarFooterComponent],
+      imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
     }),
     applicationConfig({
       providers: [provideRouter([]), provideAnimations()],
@@ -176,7 +178,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
-              &copy; 2025 Kirby Design
+              <button kirby-button attentionLevel="3">
+                <kirby-icon name="log-out"></kirby-icon>
+                Log out
+              </button>
             </div>
           </kirby-x-sidebar-footer>
         </kirby-x-sidebar>
