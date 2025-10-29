@@ -49,7 +49,6 @@ const config = {
     LabelComponent,
     ListItemTemplateDirective,
     AccordionDirective,
-    ListItemTemplateDirective,
   ],
 })
 export class AccordionWithListExampleComponent extends BaseListComponent {

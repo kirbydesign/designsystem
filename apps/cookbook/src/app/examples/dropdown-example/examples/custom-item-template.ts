@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { JsonPipe } from '@angular/common';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-dropdown-example-custom-item-template',
@@ -44,7 +45,14 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [DropdownComponent, IconComponent, JsonPipe, ItemComponent],
+  imports: [
+    DropdownComponent,
+    IconComponent,
+    JsonPipe,
+    ItemComponent,
+    LabelComponent,
+    ListItemTemplateDirective,
+  ],
 })
 export class DropdownExampleCustomItemTemplateComponent {
   template: string = config.template;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
-import { HeaderComponent } from '@kirbydesign/designsystem/header';
+import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -39,6 +39,7 @@ const config = {
     ButtonComponent,
     IconComponent,
     PageContentComponent,
+    HeaderActionsDirective,
   ],
 })
 export class HeaderWithActionGroupExampleComponent extends BasePageExampleComponent {
