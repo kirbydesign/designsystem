@@ -52,6 +52,7 @@
   font-size: inherit;
   font-family: inherit;
   text-align: left;
+  cursor: pointer;
 
   &[aria-expanded='true'] {
     font-weight: utils.font-weight('bold');

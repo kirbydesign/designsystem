@@ -178,7 +178,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
-              <button kirby-button attentionLevel="3">
+              <button kirby-button attentionLevel="3" size="sm">
                 <kirby-icon name="log-out"></kirby-icon>
                 Log out
               </button>
