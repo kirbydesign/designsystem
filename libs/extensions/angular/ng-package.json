@@ -3,5 +3,12 @@
   "dest": "dist/",
   "lib": {
     "entryFile": "index.ts"
-  }
+  },
+  "assets": [
+    {
+      "input": "spot-illustration/src/svgs",
+      "glob": "**/*.svg",
+      "output": "assets/spot-illustrations"
+    }
+  ]
 }
