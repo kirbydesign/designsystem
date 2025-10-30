@@ -40,19 +40,46 @@ const menuItemsExample: SidebarMenuItem[] = [
     icon: 'copy',
     children: [
       {
+        id: 'menu-1-link-1',
+        title: 'Level 2 Link 1',
+        link: { relativeLink: '/menu-1-link-1' },
+      },
+      {
         id: 'menu-1-sub-menu-1',
-        title: 'Sub Menu Item 1',
-        link: { relativeLink: '/menu-1-sub-menu-1' },
+        title: 'Level 2 Submenu 1',
+        children: [
+          {
+            id: 'menu-1-sub-1-link-1',
+            title: 'Level 3 Link 1',
+            link: { relativeLink: '/menu-1-sub-1-link-1' },
+          },
+          {
+            id: 'menu-1-sub-1-sub-1',
+            title: 'Level 3 Submenu 1',
+            children: [
+              {
+                id: 'menu-1-sub-1-sub-1-link-1',
+                title: 'Level 4 Link 1',
+                link: { relativeLink: '/menu-1-sub-1-sub-1-link-1' },
+              },
+              {
+                id: 'menu-1-sub-1-sub-1-link-2',
+                title: 'Level 4 Link 2',
+                link: { relativeLink: '/menu-1-sub-1-sub-1-link-2' },
+              },
+            ],
+          },
+          {
+            id: 'menu-1-sub-1-link-2',
+            title: 'Level 3 Link 2',
+            link: { relativeLink: '/menu-1-sub-1-link-2' },
+          },
+        ],
       },
       {
-        id: 'menu-1-sub-menu-2',
-        title: 'Sub Menu Item 2',
-        link: { relativeLink: '/menu-1-sub-menu-2' },
-      },
-      {
-        id: 'menu-1-sub-menu-3',
-        title: 'Sub Menu Item 3',
-        link: { relativeLink: '/menu-1-sub-menu-3' },
+        id: 'menu-1-link-2',
+        title: 'Level 2 Link 2',
+        link: { relativeLink: '/menu-1-link-2' },
       },
     ],
   },
@@ -62,19 +89,79 @@ const menuItemsExample: SidebarMenuItem[] = [
     icon: 'copy',
     children: [
       {
+        id: 'menu-2-link-1',
+        title: 'Level 2 Link 1',
+        link: { relativeLink: '/menu-2-link-1' },
+      },
+      {
         id: 'menu-2-sub-menu-1',
-        title: 'Sub Menu Item 1',
-        link: { relativeLink: '/menu-2-sub-menu-1' },
+        title: 'Level 2 Submenu 1',
+        children: [
+          {
+            id: 'menu-2-sub-1-link-1',
+            title: 'Level 3 Link 1',
+            link: { relativeLink: '/menu-2-sub-1-link-1' },
+          },
+          {
+            id: 'menu-2-sub-1-sub-1',
+            title: 'Level 3 Submenu 1',
+            children: [
+              {
+                id: 'menu-2-sub-1-sub-1-link-1',
+                title: 'Level 4 Link 1',
+                link: { relativeLink: '/menu-2-sub-1-sub-1-link-1' },
+              },
+              {
+                id: 'menu-2-sub-1-sub-1-link-2',
+                title: 'Level 4 Link 2',
+                link: { relativeLink: '/menu-2-sub-1-sub-1-link-2' },
+              },
+            ],
+          },
+          {
+            id: 'menu-2-sub-1-sub-2',
+            title: 'Level 3 Submenu 2',
+            children: [
+              {
+                id: 'menu-2-sub-1-sub-2-link-1',
+                title: 'Level 4 Link 1',
+                link: { relativeLink: '/menu-2-sub-1-sub-2-link-1' },
+              },
+              {
+                id: 'menu-2-sub-1-sub-2-link-2',
+                title: 'Level 4 Link 2',
+                link: { relativeLink: '/menu-2-sub-1-sub-2-link-2' },
+              },
+            ],
+          },
+        ],
       },
       {
         id: 'menu-2-sub-menu-2',
-        title: 'Sub Menu Item 2',
-        link: { relativeLink: '/menu-2-sub-menu-2' },
-      },
-      {
-        id: 'menu-2-sub-menu-3',
-        title: 'Sub Menu Item 3',
-        link: { relativeLink: '/menu-2-sub-menu-3' },
+        title: 'Level 2 Submenu 2',
+        children: [
+          {
+            id: 'menu-2-sub-2-link-1',
+            title: 'Level 3 Link 1',
+            link: { relativeLink: '/menu-2-sub-2-link-1' },
+          },
+          {
+            id: 'menu-2-sub-2-sub-1',
+            title: 'Level 3 Submenu 1',
+            children: [
+              {
+                id: 'menu-2-sub-2-sub-1-link-1',
+                title: 'Level 4 Link 1',
+                link: { relativeLink: '/menu-2-sub-2-sub-1-link-1' },
+              },
+              {
+                id: 'menu-2-sub-2-sub-1-link-2',
+                title: 'Level 4 Link 2',
+                link: { relativeLink: '/menu-2-sub-2-sub-1-link-2' },
+              },
+            ],
+          },
+        ],
       },
     ],
   },
