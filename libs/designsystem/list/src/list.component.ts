@@ -231,8 +231,8 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
     this.listHelper.onLoadOnDemand(this);
   }
 
-  sectionTrackBy(_: number, section: { name: string }): string {
-    return section.name;
+  sectionTrackBy(index: number, section: { name: string }): string | number {
+    return section?.name ?? index;
   }
 
   onItemSelect(item: any) {
