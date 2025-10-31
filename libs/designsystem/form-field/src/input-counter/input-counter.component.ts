@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { debounceTime, filter, Subscription, tap } from 'rxjs';
 
+import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { InputComponent } from '../input/input.component';
 
 import { FormFieldMessageComponent } from '../form-field-message/form-field-message.component';
@@ -14,8 +15,11 @@ import { TextareaComponent } from './../textarea/textarea.component';
 export class InputCounterComponent implements OnInit, OnDestroy {
   @Input() listenTo: InputComponent | TextareaComponent;
   length: number;
-  maxlength: number;
+  maxlength: number | undefined;
   private _inputChangeSubscription: Subscription;
+  textToAnnounce: string;
+  lastAnnouncedLength: number;
+  skipNextAnnouncement = false;
 
   get text(): string {
     if (this.length === undefined) {
@@ -25,19 +29,47 @@ export class InputCounterComponent implements OnInit, OnDestroy {
     return `${this.length}${ofMaxlength}`;
   }
 
+  constructor(private translations: TranslationService) {}
+
   ngOnInit(): void {
     if (this.listenTo) {
       this.length = this.listenTo.value ? this.listenTo.value.length : 0;
-      this.maxlength = this.listenTo.maxlength;
-      this._inputChangeSubscription = this.listenTo.kirbyChange.subscribe((value) => {
-        this.length = value?.length || 0;
-      });
+      this.skipNextAnnouncement = this.length > 0; //If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
+      this.maxlength = this.maxlength = this.listenTo.maxlength
+        ? +this.listenTo.maxlength
+        : undefined;
+      this._inputChangeSubscription = this.listenTo.kirbyChange
+        .pipe(
+          tap((value) => (this.length = value?.length || 0)),
+          filter(() => this.skipAnnouncement()),
+          debounceTime(1000)
+        )
+        .subscribe(() => {
+          this.announceText();
+        });
     }
   }
 
+  private skipAnnouncement(): boolean {
+    if (this.skipNextAnnouncement) {
+      this.skipNextAnnouncement = false;
+      return false;
+    }
+    return true;
+  }
+
   ngOnDestroy(): void {
-    if (this._inputChangeSubscription) {
-      this._inputChangeSubscription.unsubscribe();
+    this._inputChangeSubscription?.unsubscribe();
+  }
+
+  announceText(): void {
+    const characters = this.translations.get('characters');
+    const entered = this.translations.get('entered');
+    if (this.maxlength === undefined) {
+      this.textToAnnounce = `${characters} ${this.length} ${entered}`;
+    } else {
+      const outOf = this.translations.get('outOf');
+      this.textToAnnounce = `${characters} ${this.length} ${outOf} ${this.maxlength} ${entered}`;
     }
   }
 }

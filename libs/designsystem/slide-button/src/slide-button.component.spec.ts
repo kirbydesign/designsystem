@@ -91,12 +91,12 @@ describe('SlideButtonComponent', () => {
     });
 
     it('should have aria-labelledby on the hidden button', () => {
-      const hiddenButton = spectator.query('button.visually-hidden');
+      const hiddenButton = spectator.query('button.kirby-visually-hidden');
       expect(hiddenButton).toHaveAttribute('aria-labelledby', 'fake-dom-label');
     });
 
     it('should have aria-label on the hidden button', () => {
-      const hiddenButton = spectator.query('button.visually-hidden');
+      const hiddenButton = spectator.query('button.kirby-visually-hidden');
       expect(hiddenButton).toHaveAttribute('aria-label', 'fake-label');
     });
   });

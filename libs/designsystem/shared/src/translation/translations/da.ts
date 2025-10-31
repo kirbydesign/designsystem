@@ -11,4 +11,7 @@ export const da: Translation = {
   selectYear: 'Vælg år',
   readMore: 'Læs mere',
   more: 'Mere',
+  characters: 'Tegn',
+  outOf: 'af',
+  entered: 'indtastet',
 };
