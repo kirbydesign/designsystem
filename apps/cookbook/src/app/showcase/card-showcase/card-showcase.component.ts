@@ -12,6 +12,7 @@ import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportCodeViewerComponent } from '~/app/shared/import-code-viewer';
 
 @Component({
   selector: 'cookbook-card-showcase',
@@ -26,6 +27,7 @@ import {
     CardExampleBackgroundImageComponent,
     DividerComponent,
     ApiDescriptionPropertiesComponent,
+    ImportCodeViewerComponent,
   ],
 })
 export class CardShowcaseComponent {
