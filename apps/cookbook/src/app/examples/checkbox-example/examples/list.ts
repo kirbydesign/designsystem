@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ListModule } from '@kirbydesign/designsystem/list';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 const config = {
@@ -24,7 +24,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ListModule, ItemModule, CheckboxComponent],
+  imports: [ListComponent, ItemComponent, CheckboxComponent, ListItemTemplateDirective],
 })
 export class CheckboxListExampleComponent {
   template: string = config.template;

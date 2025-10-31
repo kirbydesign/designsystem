@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { KirbySwiperOptions, SelectedSlide, SlideModule } from '@kirbydesign/designsystem/slide';
+import {
+  KirbySwiperOptions,
+  SelectedSlide,
+  SlideDirective,
+  SlidesComponent,
+} from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
@@ -35,7 +40,7 @@ const config = {
   styleUrls: ['./_shared.scss', '../../_examples.shared.scss'],
   selector: config.selector,
   template: config.template,
-  imports: [SlideModule, CardModule, ButtonComponent],
+  imports: [SlidesComponent, SlideDirective, CardComponent, ButtonComponent, CardHeaderComponent],
 })
 export class SlidesAdvancedExampleComponent {
   static readonly template = config.template;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ColorHelper } from '@kirbydesign/designsystem/helpers';
-import { ChartsModule } from '@kirbydesign/designsystem/chart';
+import { ChartComponent } from '@kirbydesign/designsystem/chart';
 
 const { getThemeColorHexString } = ColorHelper;
 
@@ -35,7 +35,7 @@ _datasets = [
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ChartsModule],
+  imports: [ChartComponent],
 })
 export class ChartExampleMultipleDatasetsComponent {
   template: string = config.template;

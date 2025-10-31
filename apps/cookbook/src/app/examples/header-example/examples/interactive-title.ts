@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
-import { HeaderModule } from '@kirbydesign/designsystem/header';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BasePageExampleComponent } from '../../page-example/base-page-example.component';
 
 export const config = {
@@ -19,7 +19,7 @@ export const config = {
 };
 @Component({
   template: config.template,
-  imports: [PageModule, HeaderModule, IconModule],
+  imports: [PageComponent, HeaderComponent, IconComponent, PageContentComponent],
 })
 export class HeaderWithInteractiveTitleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

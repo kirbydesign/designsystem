@@ -4,10 +4,10 @@ import { InputSize } from '@kirbydesign/designsystem';
 import {
   AffixDirective,
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-form-field-input-date-native-example',
@@ -24,7 +24,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldModule, DateInputDirective, InputComponent, IconModule, AffixDirective],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent, IconComponent, AffixDirective],
 })
 export class FormFieldInputDateNativeExampleComponent {
   template: string = config.template;

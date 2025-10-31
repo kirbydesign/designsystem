@@ -6,7 +6,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { JsonPipe } from '@angular/common';
 
@@ -85,7 +85,7 @@ toggleRequired(required: boolean) {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [FormsModule, ReactiveFormsModule, DropdownModule, CheckboxComponent, JsonPipe],
+  imports: [FormsModule, ReactiveFormsModule, DropdownComponent, CheckboxComponent, JsonPipe],
 })
 export class DropdownExampleNgFormsComponent implements OnInit {
   template: string = config.template.split('<fieldset>')[0]; // Remove config part of the template

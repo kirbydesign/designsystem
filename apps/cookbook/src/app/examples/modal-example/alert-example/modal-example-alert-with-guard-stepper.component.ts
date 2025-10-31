@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
@@ -45,7 +46,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
       }
     `,
   ],
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
 })
 export class ModalExampleAlertWithGuardStepperComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}

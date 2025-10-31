@@ -9,8 +9,8 @@ import {
 import {
   ButtonComponent,
   CheckboxComponent,
-  IconModule,
-  ToggleButtonModule,
+  IconComponent,
+  ToggleButtonComponent,
 } from '@kirbydesign/designsystem';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
@@ -78,9 +78,9 @@ toggleEnabled() {
   template: config.template,
   styles: config.styles,
   imports: [
-    ToggleButtonModule,
+    ToggleButtonComponent,
     ButtonComponent,
-    IconModule,
+    IconComponent,
     CheckboxComponent,
     FormsModule,
     ExampleConfigurationWrapperComponent,

@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 
 import { ListSwipeAction } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { ListModule } from '@kirbydesign/designsystem/list';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ListComponent } from '@kirbydesign/designsystem/list';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 @Component({
   selector: 'cookbook-list-swipe-example',
   templateUrl: './list-swipe-example.component.html',
   styleUrls: ['./list-swipe-example.component.scss'],
-  imports: [ListModule, ItemModule],
+  imports: [ListComponent, ItemComponent],
 })
 export class ListSwipeExampleComponent {
   items: any[] = [

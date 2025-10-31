@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 @Component({
   selector: 'cookbook-spinner-example',
   templateUrl: './spinner-example.component.html',
-  imports: [SpinnerModule],
+  imports: [SpinnerComponent],
 })
 export class SpinnerExampleComponent {}

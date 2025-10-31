@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioComponent } from '@kirbydesign/designsystem/radio';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
@@ -29,7 +29,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./_shared.scss'],
-  imports: [ItemModule, CheckboxComponent, RadioModule, ToggleComponent, ButtonComponent],
+  imports: [ItemComponent, CheckboxComponent, RadioComponent, ToggleComponent, ButtonComponent],
 })
 export class ItemExampleDisabledControlsComponent {
   template: string = config.template;
