@@ -37,7 +37,7 @@ export class ImportCodeViewerComponent implements OnInit {
       // File doesn't exist - use inference fallback
       console.warn(
         '[ImportCodeViewer] Generated import map not found. Using name inference fallback. ' +
-          'Run "node apps/cookbook/scripts/generate-import-map.js" for better accuracy.'
+          'Run "nx build designsystem && node scripts/generate-docs-import-map.js" for better accuracy.'
       );
       this.componentToPackage = {};
     }
@@ -93,11 +93,6 @@ export class ImportCodeViewerComponent implements OnInit {
 
     // Convert PascalCase to kebab-case
     packageName = packageName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-
-    console.warn(
-      `No mapping found for "${componentName}". Inferring package: "${packageName}". ` +
-        `Run: tsx apps/cookbook/scripts/generate-import-map.ts to update the mapping.`
-    );
 
     return packageName;
   }
