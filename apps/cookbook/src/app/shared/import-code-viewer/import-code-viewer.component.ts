@@ -7,7 +7,7 @@ import { CodeViewerComponent } from '../code-viewer/code-viewer.component';
   styleUrls: ['./import-code-viewer.component.scss'],
   imports: [CodeViewerComponent],
 })
-export class ImportCodeViewerComponent implements OnInit {
+export class ImportViewerComponent implements OnInit {
   @Input() imports: string | string[];
 
   importCode: string;
@@ -32,7 +32,7 @@ export class ImportCodeViewerComponent implements OnInit {
       // Dynamically import the generated map
       // This allows the component to work even if the map hasn't been generated yet
       const generatedMap = require('./generated-import-map');
-      this.componentToPackage = generatedMap.COMPONENT_TO_PACKAGE_MAP || {};
+      this.componentToPackage = generatedMap.COMPONENT_TO_PACKAGE_ENTRY_MAP || {};
     } catch {
       // File doesn't exist - use inference fallback
       console.warn(
@@ -46,15 +46,14 @@ export class ImportCodeViewerComponent implements OnInit {
   private generateImportCode(): string {
     const imports = Array.isArray(this.imports) ? this.imports : [this.imports];
 
-    if (imports.length === 0) {
-      return '';
-    }
+    if (imports.length === 0) return '';
 
     // Group imports by package
     const packageMap = new Map<string, string[]>();
 
     imports.forEach((importName) => {
       const packageName = this.getPackageName(importName);
+      if (!packageName) return;
       if (!packageMap.has(packageName)) {
         packageMap.set(packageName, []);
       }
@@ -75,25 +74,13 @@ export class ImportCodeViewerComponent implements OnInit {
   }
 
   private getPackageName(componentName: string): string {
-    // First check if we have a mapping (from generated file or manual)
     if (this.componentToPackage[componentName]) {
       return this.componentToPackage[componentName];
+    } else {
+      console.warn(
+        `[ImportCodeViewer] No matching package entry found for ${componentName}. No import statement generated.`
+      );
+      return;
     }
-
-    // Fallback: Try to infer from the component name
-    // Remove common suffixes and convert to kebab-case
-    let packageName = componentName
-      .replace(/Component$/, '')
-      .replace(/Module$/, '')
-      .replace(/Directive$/, '')
-      .replace(/Controller$/, '')
-      .replace(/Config$/, '')
-      .replace(/Helper$/, '')
-      .replace(/Service$/, '');
-
-    // Convert PascalCase to kebab-case
-    packageName = packageName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-
-    return packageName;
   }
 }

@@ -192,11 +192,11 @@ function generateTypeScriptFile(map) {
  * to their corresponding @kirbydesign/designsystem package paths.
  */
 
-export interface ComponentToPackageMap {
+export interface ComponentToPackageEntryMap {
   [componentName: string]: string;
 }
 
-export const COMPONENT_TO_PACKAGE_MAP: ComponentToPackageMap = {
+export const COMPONENT_TO_PACKAGE_ENTRY_MAP: ComponentToPackageEntryMap = {
 `;
 
   // Add entries grouped by package with comments
