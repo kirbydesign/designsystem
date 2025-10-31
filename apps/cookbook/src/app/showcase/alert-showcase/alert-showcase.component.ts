@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
-import { AlertExampleComponent as AlertExampleComponent_1 } from '../../examples/alert-example/alert-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { AlertExampleComponent } from '~/app/examples/alert-example/alert-example.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-alert-showcase',
   templateUrl: './alert-showcase.component.html',
   preserveWhitespaces: true,
-  imports: [AlertExampleComponent_1, CodeViewerComponent, ApiDescriptionPropertiesComponent],
+  imports: [
+    AlertExampleComponent,
+    CodeViewerComponent,
+    ImportViewerComponent,
+    ApiDescriptionPropertiesComponent,
+  ],
 })
 export class AlertShowcaseComponent {
   alertConfigWithIcon: string = AlertExampleComponent.alertConfigWithIcon;
