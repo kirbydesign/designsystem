@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { SegmentedControlComponent } from '@kirbydesign/designsystem';
 import { SegmentedControlExampleBaseComponent } from '../segmented-control-example-base';
@@ -23,7 +23,7 @@ const config = {
   selector: 'cookbook-segmented-control-example-color',
   template: config.template,
   styleUrls: ['./color.scss'],
-  imports: [CardModule, ThemeColorDirective, SegmentedControlComponent],
+  imports: [CardComponent, ThemeColorDirective, SegmentedControlComponent],
 })
 export class SegmentedControlExampleColorComponent extends SegmentedControlExampleBaseComponent {
   template = config.template.split('<div class="card-option-button-group">')[0]; // Remove config part of the template

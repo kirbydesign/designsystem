@@ -14,13 +14,13 @@ import { KirbyAnimation } from '@kirbydesign/designsystem';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import {
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
@@ -42,12 +42,12 @@ import {
     ExampleConfigurationWrapperComponent,
     ModalExampleConfigurationComponent,
     LoadingOverlayComponent,
-    CardModule,
+    CardComponent,
     ButtonComponent,
     DividerComponent,
     ModalExampleSizeSelectorComponent,
-    IconModule,
-    FormFieldModule,
+    IconComponent,
+    FormFieldComponent,
     DateInputDirective,
     InputComponent,
     ModalFooterComponent,

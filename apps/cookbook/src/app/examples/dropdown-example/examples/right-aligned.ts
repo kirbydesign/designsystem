@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-right-aligned',
@@ -31,7 +31,7 @@ const config = {
   template: config.template,
   styles: config.styles,
   host: { '[class.right-align]': 'true' },
-  imports: [DropdownModule],
+  imports: [DropdownComponent],
 })
 export class DropdownExampleRightAlignedComponent {
   template: string = config.template;

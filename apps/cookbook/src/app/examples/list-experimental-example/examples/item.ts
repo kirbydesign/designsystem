@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ListModule } from '@kirbydesign/designsystem/list';
+import { ListExperimentalComponent } from '@kirbydesign/designsystem/list';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const template = `<kirby-list-experimental>
@@ -22,7 +22,7 @@ const template = `<kirby-list-experimental>
   // tslint:disable-next-line
   selector: 'cookbook-list-experimental-items-example',
   template: template,
-  imports: [ListModule, SectionHeaderComponent, ItemModule],
+  imports: [SectionHeaderComponent, ItemComponent, ListExperimentalComponent],
 })
 export class ListExperimentalItemsExampleComponent extends BaseListComponent {
   template: string = template;

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemModule } from '@kirbydesign/designsystem/item';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-selectable',
@@ -21,7 +20,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./_shared.scss'],
-  imports: [ItemModule, IconModule],
+  imports: [ItemComponent],
 })
 export class ItemExampleSelectableComponent {
   template: string = config.template;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@kirbydesign/designsystem';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { Person, tableExampleData } from '../example-data';
 
@@ -41,7 +41,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [CardModule],
+  imports: [CardComponent],
 })
 export class DataTableCardExampleComponent {
   tableData: Person[] = [...tableExampleData];

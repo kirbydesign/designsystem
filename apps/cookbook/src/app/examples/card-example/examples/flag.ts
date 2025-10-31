@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-card-example-flag',
@@ -41,7 +41,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
-  imports: [CardModule, IconModule],
+  imports: [CardModule, IconComponent],
 })
 export class CardExampleFlagComponent {
   template: string = config.template;

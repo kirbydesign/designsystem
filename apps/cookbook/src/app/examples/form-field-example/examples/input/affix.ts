@@ -4,11 +4,11 @@ import { InputSize } from '@kirbydesign/designsystem';
 import {
   AffixDirective,
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
-import { IconModule } from '@kirbydesign/designsystem/icon';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 const config = {
   selector: 'cookbook-form-field-input-affix-example',
@@ -33,12 +33,12 @@ const config = {
   selector: config.selector,
   template: config.template,
   imports: [
-    FormFieldModule,
-    IconModule,
+    FormFieldComponent,
+    IconComponent,
     AffixDirective,
     DateInputDirective,
     InputComponent,
-    SpinnerModule,
+    SpinnerComponent,
   ],
 })
 export class FormFieldInputAffixExampleComponent {
