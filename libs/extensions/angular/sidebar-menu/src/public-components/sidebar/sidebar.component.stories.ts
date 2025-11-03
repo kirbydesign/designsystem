@@ -305,3 +305,30 @@ export const AutoCollapse: Story = {
     mainAreaContent: '<h1>Sidebar with Auto Collapse Items</h1>',
   },
 };
+
+/**
+ * The sidebar can be used without a header and/or footer, to provide more space for the menu items.
+ * In this example, the sidebar is rendered without a footer.
+ */
+export const WithoutFooter: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    mainAreaContent: `<h1>Sidebar without Header and Footer</h1>
+    <p>This sidebar does not have a header or footer.</p>`,
+  },
+  render: ({ mainAreaContent, ...args }) => ({
+    props: args,
+    template: `
+      <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
+        <kirby-x-sidebar ${argsToTemplate(args)}>
+          <kirby-x-sidebar-header>
+            <img src="assets/images/kirby-logo.svg" alt=""/>
+          </kirby-x-sidebar-header>
+        </kirby-x-sidebar>
+        <div style="padding: var(--kirby-spacing-s);">
+          ${mainAreaContent}
+        </div>
+      </div>`,
+  }),
+};

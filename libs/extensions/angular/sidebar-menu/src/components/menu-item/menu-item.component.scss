@@ -6,6 +6,8 @@
   flex-grow: 1;
   align-items: center;
   align-self: stretch;
+  box-sizing: border-box;
+  min-height: var(--kirby-x-sidebar-menu-item-min-height, 32px);
   border-radius: var(--kirby-border-radius-s, 8px);
   border: none;
   background: inherit;
@@ -23,8 +25,6 @@
 
   &.sm,
   &.xs {
-    box-sizing: border-box;
-    min-height: var(--kirby-spacing-l, 24px);
     padding: var(--kirby-spacing-xxxs, 4px) var(--kirby-spacing-xxs, 8px);
   }
 
