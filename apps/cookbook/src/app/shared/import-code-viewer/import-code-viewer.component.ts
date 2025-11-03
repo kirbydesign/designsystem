@@ -2,9 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CodeViewerComponent } from '../code-viewer/code-viewer.component';
 
 @Component({
-  selector: 'cookbook-import-code-viewer',
+  selector: 'cookbook-import-viewer',
   templateUrl: './import-code-viewer.component.html',
-  styleUrls: ['./import-code-viewer.component.scss'],
   imports: [CodeViewerComponent],
 })
 export class ImportViewerComponent implements OnInit {
