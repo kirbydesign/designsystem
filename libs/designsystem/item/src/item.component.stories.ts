@@ -791,3 +791,18 @@ export const CookbookExamples: Story = {
     template: `<cookbook-item-example></cookbook-item-example>`,
   }),
 };
+
+export const EllipsisBugExamples: Story = {
+  render: () => ({
+    template: `<kirby-item>
+    <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
+    <data class="kirby-item-detail" slot="end">22.86%</data> 
+</kirby-item>
+<kirby-item>
+    <kirby-label direction="horizontal">
+        <p class="kirby-item-title" >Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
+        <data class="kirby-item-detail">22.86%</data> 
+    </kirby-label>
+</kirby-item>`,
+  }),
+};
