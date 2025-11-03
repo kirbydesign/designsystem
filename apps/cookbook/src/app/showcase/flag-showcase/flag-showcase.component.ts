@@ -4,6 +4,7 @@ import { FlagExampleColorsComponent } from '../../examples/flag-example/examples
 import { FlagExampleSizesComponent } from '../../examples/flag-example/examples/sizes';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-flag-showcase',
@@ -14,6 +15,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
     FlagExampleColorsComponent,
     FlagExampleSizesComponent,
     ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
   ],
 })
 export class FlagShowcaseComponent {

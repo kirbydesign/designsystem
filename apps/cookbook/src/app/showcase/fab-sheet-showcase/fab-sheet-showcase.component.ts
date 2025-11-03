@@ -6,6 +6,7 @@ import { FabSheetExampleComponent } from '../../examples/fab-sheet-example/fab-s
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-fab-sheet-showcase',
@@ -17,6 +18,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
     CodeViewerComponent,
     ApiDescriptionPropertiesComponent,
     FlagComponent,
+    ImportViewerComponent,
   ],
 })
 export class FabSheetShowcaseComponent {

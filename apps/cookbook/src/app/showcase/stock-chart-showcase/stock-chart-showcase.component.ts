@@ -11,6 +11,7 @@ import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-stock-chart-showcase',
@@ -19,6 +20,7 @@ import {
     RouterLink,
     CardModule,
     ExampleViewerComponent,
+    ImportViewerComponent,
     StockChartExampleSimpleDatasetComponent,
     StockChartExampleComparisonComponent,
     DividerComponent,

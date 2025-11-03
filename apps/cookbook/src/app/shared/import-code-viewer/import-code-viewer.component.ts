@@ -35,8 +35,8 @@ export class ImportViewerComponent implements OnInit {
     } catch {
       // File doesn't exist - use inference fallback
       console.warn(
-        '[ImportCodeViewer] Generated import map not found. Using name inference fallback. ' +
-          'Run "nx build designsystem && node scripts/generate-docs-import-map.js" for better accuracy.'
+        '[ImportCodeViewer] Generated import map not found.' +
+          'Run "nx build designsystem && npm run generate-docs-import-map".'
       );
       this.componentToPackage = {};
     }

@@ -9,6 +9,7 @@ import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 @Component({
   selector: 'cookbook-range-showcase',
   templateUrl: './range-showcase.component.html',
@@ -22,6 +23,7 @@ import { ApiDescriptionMethod } from '~/app/shared/api-description/api-descripti
     RangeDisabledFormExampleComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
+    ImportViewerComponent,
   ],
 })
 export class RangeShowcaseComponent {
