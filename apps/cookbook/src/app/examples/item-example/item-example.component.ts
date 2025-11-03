@@ -8,6 +8,7 @@ import { ItemExampleNestedControlsComponent } from './examples/nested-controls';
 import { ItemExampleDisabledControlsComponent } from './examples/disabled-controls';
 import { ItemExampleSelectableComponent } from './examples/selectable';
 import { ItemExampleDisabledComponent } from './examples/disabled';
+import { ItemExampleEllipsisBehaviorComponent } from './examples/ellipsis-behavior';
 
 @Component({
   selector: 'cookbook-item-example',
@@ -23,6 +24,7 @@ import { ItemExampleDisabledComponent } from './examples/disabled';
     ItemExampleDisabledControlsComponent,
     ItemExampleSelectableComponent,
     ItemExampleDisabledComponent,
+    ItemExampleEllipsisBehaviorComponent,
   ],
 })
 export class ItemExampleComponent {}
