@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 const config = {
   selector: 'cookbook-radio-states-example',
@@ -39,7 +39,7 @@ const config = {
       }
     `,
   ],
-  imports: [RadioModule],
+  imports: [RadioGroupComponent, RadioComponent],
 })
 export class RadioStatesExampleComponent {
   template: string = config.template;

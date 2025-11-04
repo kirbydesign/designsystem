@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/designsystem';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-button-example-attention-level',
@@ -34,7 +34,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './attention-level.scss',
-  imports: [CardModule, ThemeColorDirective, ButtonComponent, DropdownModule],
+  imports: [CardComponent, ThemeColorDirective, ButtonComponent, DropdownComponent],
 })
 export class ButtonExampleAttentionLevelComponent {
   template: string = config.template.split('<fieldset')[0];

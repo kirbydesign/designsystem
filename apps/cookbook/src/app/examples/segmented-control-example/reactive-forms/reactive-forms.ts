@@ -6,7 +6,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { CardModule } from '@kirbydesign/designsystem/card';
 import { CheckboxComponent, SegmentedControlComponent } from '@kirbydesign/designsystem';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
@@ -66,7 +65,6 @@ toggleEnabled() {
     ReactiveFormsModule,
     SegmentedControlComponent,
     CheckboxComponent,
-    CardModule,
     ExampleConfigurationWrapperComponent,
     ReactiveFormStateComponent,
   ],

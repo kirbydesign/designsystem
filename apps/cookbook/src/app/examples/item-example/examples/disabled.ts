@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-disabled',
@@ -16,7 +16,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./_shared.scss'],
-  imports: [ItemModule],
+  imports: [ItemComponent],
 })
 export class ItemExampleDisabledComponent {
   template: string = config.template;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
 const config = {
@@ -12,7 +12,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [HeaderModule, FlagComponent],
+  imports: [HeaderComponent, FlagComponent],
 })
 export class HeaderExampleFlagComponent {
   template: string = config.template;

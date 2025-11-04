@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
+import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 const config = {
@@ -28,7 +28,7 @@ const config = {
   selector: 'cookbook-empty-state-message-types-example',
   template: config.template,
   styleUrls: ['./empty-state-example.shared.scss'],
-  imports: [EmptyStateModule, ThemeColorDirective],
+  imports: [EmptyStateComponent, ThemeColorDirective],
 })
 export class EmptyStateMessageTypesExampleComponent {
   template: string = config.template;

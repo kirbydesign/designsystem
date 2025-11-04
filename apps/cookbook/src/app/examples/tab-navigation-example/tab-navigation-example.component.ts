@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
-import { PageModule } from '@kirbydesign/designsystem/page';
-import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
+import {
+  PageComponent,
+  PageContentComponent,
+  PageStickyContentDirective,
+} from '@kirbydesign/designsystem/page';
+import {
+  TabNavigationComponent,
+  TabNavigationItemComponent,
+} from '@kirbydesign/designsystem/tab-navigation';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { BasePageExampleComponent } from '../page-example/base-page-example.component';
 
@@ -76,7 +83,16 @@ const config = {
 };
 @Component({
   template: config.template,
-  imports: [PageModule, TabNavigationModule, ThemeColorDirective, BadgeComponent, IconModule],
+  imports: [
+    PageComponent,
+    TabNavigationComponent,
+    ThemeColorDirective,
+    BadgeComponent,
+    IconComponent,
+    PageStickyContentDirective,
+    PageContentComponent,
+    TabNavigationItemComponent,
+  ],
 })
 export class TabNavigationExampleComponent extends BasePageExampleComponent {
   selectedIndex = 0;

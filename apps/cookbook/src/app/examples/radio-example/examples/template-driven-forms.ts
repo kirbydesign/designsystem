@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -65,7 +65,7 @@ favoriteRequired = true;`,
   template: config.template,
   styleUrls: ['../../ng-forms.shared.scss'],
   imports: [
-    RadioModule,
+    RadioGroupComponent,
     FormsModule,
     ExampleConfigurationWrapperComponent,
     CheckboxComponent,

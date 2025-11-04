@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-
-import { FormsModule } from '@angular/forms';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-attention-level',
@@ -64,7 +62,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./dropdown-examples.shared.scss'],
-  imports: [CardModule, ThemeColorDirective, DropdownModule, FormsModule],
+  imports: [CardComponent, ThemeColorDirective, DropdownComponent],
 })
 export class DropdownExampleAttentionLevelComponent {
   template: string = config.template;

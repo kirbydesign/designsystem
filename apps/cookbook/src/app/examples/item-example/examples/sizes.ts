@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-sizes',
@@ -18,7 +18,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  imports: [ItemModule],
+  imports: [ItemComponent],
 })
 export class ItemExampleSizesComponent {
   template: string = config.template;
