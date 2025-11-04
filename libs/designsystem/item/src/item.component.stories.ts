@@ -23,9 +23,6 @@ const meta: Meta<ItemComponent> = {
     }),
   ],
   title: 'Components / Item',
-  parameters: {
-    chromatic: { modes: { ...responsiveModes } },
-  },
 };
 export default meta;
 type Story = StoryObj<ItemComponent>;
@@ -797,6 +794,9 @@ export const CookbookExamples: Story = {
 };
 
 export const ItemWithHorizontalLabelTruncation: Story = {
+  parameters: {
+    chromatic: { modes: { ...responsiveModes } },
+  },
   render: () => ({
     template: `<kirby-item>
     <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
