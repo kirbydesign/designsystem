@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
-import { HeaderModule } from '@kirbydesign/designsystem/header';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import {
+  HeaderActionsDirective,
+  HeaderComponent,
+  HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
+} from '@kirbydesign/designsystem/header';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
@@ -47,14 +52,17 @@ const config = {
   template: config.template,
   styles: config.styles,
   imports: [
-    HeaderModule,
-    IconModule,
+    HeaderComponent,
+    IconComponent,
     ActionGroupComponent,
     ButtonComponent,
     AvatarComponent,
     FlagComponent,
     ThemeColorDirective,
     BadgeComponent,
+    HeaderCustomSectionDirective,
+    HeaderActionsDirective,
+    HeaderTitleActionIconDirective,
   ],
 })
 export class HeaderExampleCombinedComponent {

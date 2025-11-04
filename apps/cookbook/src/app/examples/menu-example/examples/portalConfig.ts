@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OutletSelector, PortalOutletConfig } from '@kirbydesign/designsystem/shared/floating';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-portal-config-example',
@@ -25,7 +25,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [MenuComponent, ItemModule],
+  imports: [MenuComponent, ItemComponent],
 })
 export class MenuPortalConfigExampleComponent {
   template: string = config.template;

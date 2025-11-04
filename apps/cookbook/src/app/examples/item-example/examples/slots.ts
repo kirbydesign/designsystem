@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
-import { AvatarComponent, IconModule } from '@kirbydesign/designsystem';
+import { AvatarComponent, IconComponent } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-item-example-slots',
@@ -29,7 +29,14 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [ItemModule, BadgeComponent, FlagComponent, AvatarComponent, IconModule],
+  imports: [
+    ItemComponent,
+    BadgeComponent,
+    FlagComponent,
+    AvatarComponent,
+    IconComponent,
+    LabelComponent,
+  ],
 })
 export class ItemExampleSlotsComponent {
   template: string = config.template;

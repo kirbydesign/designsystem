@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-
-import { CardModule } from '@kirbydesign/designsystem/card';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
-
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = [
@@ -32,7 +30,7 @@ selected = this.items[2];`,
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [CardModule, RadioModule, ItemModule],
+  imports: [CardComponent, RadioGroupComponent, ItemComponent, RadioComponent],
 })
 export class RadioInItemExampleComponent {
   template: string = config.template;

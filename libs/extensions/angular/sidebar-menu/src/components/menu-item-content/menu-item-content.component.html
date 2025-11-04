@@ -1,0 +1,17 @@
+<div class="menu-item-start">
+  @if (icon(); as icon) {
+    <kirby-icon class="item-icon" size="sm" [name]="icon"></kirby-icon>
+  }
+</div>
+
+<div class="menu-item-content">{{ title() }}</div>
+
+<div class="menu-item-end">
+  @if (badge(); as badge) {
+    <kirby-badge [themeColor]="badge.themeColor ?? 'primary'">{{ badge.value }}</kirby-badge>
+  }
+
+  @if (isExpanded() !== undefined) {
+    <kirby-icon [class.expanded-icon]="isExpanded()" size="sm" name="arrow-more"></kirby-icon>
+  }
+</div>

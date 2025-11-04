@@ -1,12 +1,17 @@
 import { Component, Input } from '@angular/core';
 
-import { BaseChartComponent, ChartDataLabelOptions, ChartJSService } from '../shared';
+import {
+  BaseChartComponent,
+  ChartConfigService,
+  ChartDataLabelOptions,
+  ChartJSService,
+} from '../shared';
 
 import { StockChartJSService } from './stock-chart-js.service';
 
 @Component({
   selector: 'kirby-stock-chart',
-  providers: [{ provide: ChartJSService, useClass: StockChartJSService }],
+  providers: [{ provide: ChartJSService, useClass: StockChartJSService }, ChartConfigService],
   templateUrl: '../shared/base-chart/base-chart.component.html',
   styleUrls: ['../shared/base-chart/base-chart.component.scss'],
 })

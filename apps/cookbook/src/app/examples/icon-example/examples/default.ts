@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { defaultIcons } from '@kirbydesign/designsystem';
 import { Color, ColorHelper } from '@kirbydesign/designsystem';
 import { NgClass } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 const config = {
@@ -33,7 +33,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
-  imports: [IconModule, ThemeColorDirective, NgClass],
+  imports: [IconComponent, ThemeColorDirective, NgClass],
 })
 export class IconDefaultExampleComponent {
   static htmlSnippet: string = config.htmlSnippet;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { PageModule } from '@kirbydesign/designsystem/page';
-import { ListModule } from '@kirbydesign/designsystem/list';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
+import { ListComponent } from '@kirbydesign/designsystem/list';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 @Component({
   template: `
@@ -15,7 +15,7 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
       </kirby-page-content>
     </kirby-page>
   `,
-  imports: [PageModule, ListModule, ItemModule],
+  imports: [PageComponent, PageContentComponent, ListComponent, ItemComponent],
 })
 export class TabExampleMenuComponent {
   public menuItems = ['Overview', 'Transfer', 'Inbox', 'Settings', 'About'];
