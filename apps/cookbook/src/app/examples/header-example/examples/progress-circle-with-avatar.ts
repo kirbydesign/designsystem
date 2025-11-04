@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-header-example-progress-circle-with-avatar',
@@ -20,11 +20,11 @@ const config = {
   selector: config.selector,
   template: config.template,
   imports: [
-    HeaderModule,
+    HeaderComponent,
     ProgressCircleComponent,
     AvatarComponent,
     ThemeColorDirective,
-    IconModule,
+    IconComponent,
   ],
 })
 export class HeaderExampleProgressCircleWithAvatarComponent {

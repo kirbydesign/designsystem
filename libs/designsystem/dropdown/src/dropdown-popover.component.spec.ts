@@ -13,7 +13,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
@@ -35,8 +35,8 @@ describe('DropdownComponent (popover version)', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      imports: [TestHelper.ionicModuleForTest, IonItem, ItemModule],
-      declarations: [
+      imports: [
+        TestHelper.ionicModuleForTest,
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
       ],
@@ -104,6 +104,10 @@ describe('DropdownComponent (popover version)', () => {
 
     it('should have type="button" attribute', () => {
       expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
+    it('should have tabindex="0" by default on button', () => {
+      expect(buttonElement).toHaveAttribute('tabindex', '0');
     });
 
     it('should have correct id on button', () => {
@@ -906,6 +910,10 @@ describe('DropdownComponent (popover version)', () => {
         expect(buttonElement.attributes['disabled']).toBeDefined();
       });
 
+      it('should render tabindex="-1" attribute on button', () => {
+        expect(buttonElement).toHaveAttribute('tabindex', '-1');
+      });
+
       it('should not open', fakeAsync(() => {
         spectator.component.open();
         tick(openDelayInMs);
@@ -1006,7 +1014,7 @@ describe('DropdownComponent (popover version)', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1088,7 +1096,7 @@ describe('DropdownComponent (popover version)', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         MockComponents(
           ButtonComponent,
           CardComponent,
@@ -1183,7 +1191,7 @@ describe('DropdownComponent (popover version)', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         ItemComponent,
         ListItemTemplateDirective,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
@@ -1247,7 +1255,7 @@ describe('DropdownComponent (popover version)', () => {
   describe('with popover enabled', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
+      imports: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-menu-custom-placement-example',
@@ -20,7 +20,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [MenuComponent, ItemModule],
+  imports: [MenuComponent, ItemComponent],
 })
 export class MenuCustomPlacementExampleComponent {
   template: string = config.template;

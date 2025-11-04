@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 
 const config = {
@@ -12,7 +12,7 @@ const config = {
   selector: 'cookbook-calendar-year-navigator-example',
   template: config.template,
   styleUrl: './_shared.scss',
-  imports: [CardModule, CalendarComponent],
+  imports: [CardComponent, CalendarComponent],
 })
 export class CalendarYearNavigatorExampleComponent {
   template: string = config.template;

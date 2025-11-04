@@ -1,29 +1,38 @@
 import { Component } from '@angular/core';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
-import { ListModule } from '@kirbydesign/designsystem/list';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
+import {
+  ListComponent,
+  ListItemTemplateDirective,
+  ListSectionHeaderComponent,
+} from '@kirbydesign/designsystem/list';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListWithSectionsAndColoredItemsExampleTemplate = `<kirby-list
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
-  [getItemColor]="getItemColor"
->
+  [getItemColor]="getItemColor">
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
-    [title]="section"
-  ></kirby-list-section-header>
-  <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
-    <kirby-label>
-      <p class="kirby-item-title">{{ item.title }}</p>
-      <data [value]="item.detail" class="kirby-item-detail">{{ item.detail }}</data>
-    </kirby-label>
-    <kirby-label slot="end">
-      <data [value]="item.amount">{{ item.amount }}</data>
-    </kirby-label>
-  </kirby-item> 
+    [title]="section">
+  </kirby-list-section-header>
+    <kirby-item 
+      *kirbyListItemTemplate="let item" 
+      [selectable]="true">
+        <kirby-label>
+          <p class="kirby-item-title">
+          {{ item.title }}</p>
+          <data [value]="item.detail" 
+          class="kirby-item-detail">
+          {{item.detail }}</data>
+        </kirby-label>
+        <kirby-label slot="end">
+          <data [value]="item.amount">
+          {{ item.amount }}</data>
+        </kirby-label>
+    </kirby-item> 
 </kirby-list>`;
 
 @Component({
@@ -33,7 +42,15 @@ export const ListWithSectionsAndColoredItemsExampleTemplate = `<kirby-list
       <kirby-page-content>${ListWithSectionsAndColoredItemsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
-  imports: [PageModule, ListModule, ItemModule],
+  imports: [
+    PageComponent,
+    ListComponent,
+    ItemComponent,
+    LabelComponent,
+    ListSectionHeaderComponent,
+    ListItemTemplateDirective,
+    PageContentComponent,
+  ],
 })
 export class ListWithSectionsAndColoredItemsExampleComponent extends BaseListComponent {
   getItemColor = (item) => item.color;

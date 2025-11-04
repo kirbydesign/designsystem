@@ -17,7 +17,6 @@ interface InputMask {
 }
 
 @Directive({
-  standalone: true,
   // eslint-disable-next-line
   selector: '[kirby-decimal-mask]',
   providers: [

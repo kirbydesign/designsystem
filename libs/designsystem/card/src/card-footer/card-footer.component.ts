@@ -5,7 +5,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   templateUrl: './card-footer.component.html',
   styleUrls: ['./card-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class CardFooterComponent {
   @HostBinding('class.has-padding')

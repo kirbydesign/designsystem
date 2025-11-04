@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartsModule } from '@kirbydesign/designsystem/chart';
+import { ChartComponent } from '@kirbydesign/designsystem/chart';
 
 const config = {
   selector: 'cookbook-chart-example-line',
@@ -14,7 +14,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ChartsModule],
+  imports: [ChartComponent],
 })
 export class ChartExampleLineComponent {
   template: string = config.template;

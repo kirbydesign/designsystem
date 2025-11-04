@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simple-column-chart.component';
 import { ChartExampleBarComponent } from './examples/chart-example-bar.component';
 import { ChartExampleColumnComponent } from './examples/chart-example-column-chart.component';
@@ -16,7 +16,7 @@ import { ChartExampleAnnotationsComponent } from './examples/chart-example-annot
   templateUrl: './charts-example.component.html',
   styleUrls: ['./charts-example.component.scss'],
   imports: [
-    CardModule,
+    CardComponent,
     ChartExampleSimpleColumnComponent,
     ChartExampleBarComponent,
     ChartExampleColumnComponent,

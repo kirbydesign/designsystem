@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { FormFieldComponent } from '@kirbydesign/designsystem/form-field';
+import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 const config = {
   selector: 'cookbook-radio-in-form-field-example',
@@ -27,7 +27,7 @@ const config = {
       }
     `,
   ],
-  imports: [FormFieldModule, RadioModule],
+  imports: [FormFieldComponent, RadioGroupComponent],
 })
 export class RadioInFormFieldExampleComponent {
   template: string = config.template;

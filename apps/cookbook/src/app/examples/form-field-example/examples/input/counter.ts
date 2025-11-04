@@ -3,8 +3,9 @@ import { Component, Input } from '@angular/core';
 import { InputSize } from '@kirbydesign/designsystem';
 import {
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
+  InputCounterComponent,
 } from '@kirbydesign/designsystem/form-field';
 
 const config = {
@@ -17,18 +18,13 @@ const config = {
 <kirby-form-field>
   <input kirby-input [size]="size" value="Character counter with prefilled value" #prefilled maxlength="50" />
   <kirby-input-counter [listenTo]="prefilled"></kirby-input-counter>
-</kirby-form-field>
-
-<kirby-form-field message="Character counter with message and no maxlength">
-  <input kirby-input [size]="size" #message />
-  <kirby-input-counter [listenTo]="message"></kirby-input-counter>
 </kirby-form-field>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldModule, DateInputDirective, InputComponent],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent, InputCounterComponent],
 })
 export class FormFieldInputCounterExampleComponent {
   template: string = config.template;

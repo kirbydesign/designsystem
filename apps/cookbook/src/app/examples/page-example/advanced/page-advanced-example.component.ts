@@ -4,10 +4,18 @@ import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
+import {
+  PageActionsComponent,
+  PageActionsDirective,
+  PageComponent,
+  PageContentDirective,
+  PageSubtitleDirective,
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+} from '@kirbydesign/designsystem/page';
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 import { BasePageExampleComponent } from '../base-page-example.component';
@@ -72,12 +80,18 @@ const config = {
   template: config.template,
   styles: ['.custom-page-title { display: inline-flex; }'],
   imports: [
-    PageModule,
+    PageActionsComponent,
     NgTemplateOutlet,
     ButtonComponent,
-    IconModule,
+    IconComponent,
     FabSheetComponent,
     ActionSheetComponent,
+    PageComponent,
+    PageSubtitleDirective,
+    PageToolbarTitleDirective,
+    PageTitleDirective,
+    PageContentDirective,
+    PageActionsDirective,
   ],
 })
 export class PageAdvancedExampleComponent extends BasePageExampleComponent {

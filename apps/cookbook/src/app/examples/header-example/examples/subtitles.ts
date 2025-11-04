@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderModule } from '@kirbydesign/designsystem/header';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
 
 const config = {
   selector: 'cookbook-header-example-subtitle-list',
@@ -25,7 +25,7 @@ const config = {
       }
     `,
   ],
-  imports: [HeaderModule],
+  imports: [HeaderComponent],
 })
 export class HeaderExampleSubtitleListComponent {
   template: string = config.template;

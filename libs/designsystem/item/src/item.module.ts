@@ -6,10 +6,9 @@ import { IonItem, IonLabel, IonReorder } from '@ionic/angular/standalone';
 import { ItemComponent } from './item.component';
 import { LabelComponent } from './label/label.component';
 
-const declarations = [ItemComponent, LabelComponent];
+const imports = [ItemComponent, LabelComponent];
 @NgModule({
-  imports: [IconModule, CommonModule, IonItem, IonReorder, IonLabel],
-  declarations: [...declarations],
-  exports: [...declarations],
+  imports: [IconModule, CommonModule, IonItem, IonReorder, IonLabel, ...imports],
+  exports: [...imports],
 })
 export class ItemModule {}

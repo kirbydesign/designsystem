@@ -23,29 +23,19 @@ import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
+import { NgTemplateOutlet } from '@angular/common';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
-@Directive({
-  selector: '[kirbyHeaderActions]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyHeaderActions]' })
 export class HeaderActionsDirective {}
 
-@Directive({
-  selector: '[kirbyHeaderCustomSection]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyHeaderCustomSection]' })
 export class HeaderCustomSectionDirective {}
 
-@Directive({
-  selector: '[kirbyHeaderTitleActionIcon]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyHeaderTitleActionIcon]' })
 export class HeaderTitleActionIconDirective {}
 
-@Directive({
-  selector: '[kirbyHeaderCustomFlag]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyHeaderCustomFlag]' })
 export class HeaderCustomFlagDirective {}
 
 @Component({
@@ -53,7 +43,7 @@ export class HeaderCustomFlagDirective {}
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [NgTemplateOutlet, FitHeadingDirective],
 })
 export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
   @HostBinding('class.centered')

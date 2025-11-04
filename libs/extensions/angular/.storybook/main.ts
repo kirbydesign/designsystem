@@ -12,14 +12,15 @@ const config: StorybookConfig = {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: { transcludeMarkdown: true },
     },
+    getAbsolutePath('@storybook/addon-a11y'),
   ],
 
   framework: {
     name: getAbsolutePath('@storybook/angular'),
     options: {},
   },
-
   staticDirs: [
+    { from: '../spot-illustration/src/svgs', to: '/assets/spot-illustrations' },
     { from: '../../../designsystem/icon/src/icons/svg', to: '/assets/kirby/icons/svg' },
     { from: '../../../../node_modules/ionicons/dist/ionicons/svg', to: '/svg' },
     { from: '../docs/assets', to: '/assets/images' },

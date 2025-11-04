@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { PullToRefreshEvent } from '@kirbydesign/designsystem';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
@@ -14,7 +14,7 @@ const config = {
 };
 @Component({
   template: config.template,
-  imports: [PageModule],
+  imports: [PageComponent, PageContentComponent],
 })
 export class PagePullToRefreshExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

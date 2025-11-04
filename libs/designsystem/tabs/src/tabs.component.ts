@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostBinding, OnDestroy, ViewChild } from '@angular/core';
-import { IonTabs } from '@ionic/angular/standalone';
+import { IonTabBar, IonTabs } from '@ionic/angular/standalone';
 
 import { TabsService } from './tabs.service';
 
@@ -7,7 +7,7 @@ import { TabsService } from './tabs.service';
   selector: 'kirby-tab-bar',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
-  standalone: false,
+  imports: [IonTabs, IonTabBar],
 })
 export class TabsComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.tab-bar-bottom-hidden')

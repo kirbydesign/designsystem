@@ -4,8 +4,7 @@ import { IonIcon } from '@ionic/angular/standalone';
 import { IconComponent } from './icon.component';
 
 @NgModule({
-  imports: [ThemeColorDirective, IonIcon],
-  declarations: [IconComponent],
+  imports: [ThemeColorDirective, IonIcon, IconComponent],
   exports: [IconComponent, ThemeColorDirective],
 })
 export class IconModule {}

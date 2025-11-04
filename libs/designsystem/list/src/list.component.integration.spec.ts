@@ -4,11 +4,10 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
-import { CardModule } from '@kirbydesign/designsystem/card';
+
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { IonItem } from '@ionic/angular/standalone';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import {
   InfiniteScrollDirective,
   ListComponent,
@@ -27,20 +26,21 @@ describe('ListComponent', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule, IonItem],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      ItemComponent,
+      IconComponent,
+      CardComponent,
+      InfiniteScrollDirective,
+      ListItemColorDirective,
+      ListItemTemplateDirective,
+      ListItemComponent,
+    ],
     providers: [
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
       },
-    ],
-    declarations: [
-      ItemComponent,
-      IconComponent,
-      InfiniteScrollDirective,
-      ListItemColorDirective,
-      ListItemTemplateDirective,
-      ListItemComponent,
     ],
   });
 

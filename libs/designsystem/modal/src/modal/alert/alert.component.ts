@@ -9,21 +9,14 @@ import {
 } from '@angular/core';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Observable, of } from 'rxjs';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
+import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({
-  imports: [
-    IconModule,
-    EmptyStateModule,
-    ButtonComponent,
-    CommonModule,
-    EmptyStateModule,
-    ThemeColorDirective,
-  ],
+  imports: [IconComponent, EmptyStateComponent, ButtonComponent, CommonModule, ThemeColorDirective],
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
