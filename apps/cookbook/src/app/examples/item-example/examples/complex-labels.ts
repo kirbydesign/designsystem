@@ -18,7 +18,14 @@ const config = {
     </kirby-label>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
   </kirby-label>
-</kirby-item>`,
+</kirby-item>
+<kirby-item>
+    <kirby-label direction="horizontal">
+        <p class="kirby-item-title" >Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
+        <data class="kirby-item-detail">22.86%</data> 
+    </kirby-label>
+</kirby-item>
+`,
 };
 
 @Component({

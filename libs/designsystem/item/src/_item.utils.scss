@@ -30,12 +30,6 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     text-overflow: ellipsis;
   }
 
-  @include utils.slotted('[slot="end"]') {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: initial;
-  }
-
   /* Needs to come before the base typography styles to allow for p.kirby-item-title to be applied
      as the selectors have the same specificity */
   @include utils.slotted(':where(p)') {
