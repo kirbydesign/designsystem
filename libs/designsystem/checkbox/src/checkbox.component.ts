@@ -179,5 +179,6 @@ export class CheckboxComponent
    */
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cdr.detectChanges();
   }
 }
