@@ -16,6 +16,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
 @Component({
   selector: 'cookbook-stock-chart-showcase',
   templateUrl: './stock-chart-showcase.component.html',
+  styleUrls: ['../_showcase.shared.scss'],
   imports: [
     RouterLink,
     CardModule,

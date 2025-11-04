@@ -8,7 +8,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
 @Component({
   selector: 'cookbook-alert-showcase',
   templateUrl: './alert-showcase.component.html',
-  styleUrl: './alert-showcase.component.scss',
+  styleUrls: ['../_showcase.shared.scss'],
   preserveWhitespaces: true,
   imports: [
     AlertExampleComponent,
