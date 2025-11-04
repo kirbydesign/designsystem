@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 import { ItemSwipeAction } from '@kirbydesign/designsystem';
 
-import { ListModule } from '@kirbydesign/designsystem/list';
+import { ListExperimentalComponent } from '@kirbydesign/designsystem/list';
 
 import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const template = `<kirby-list-experimental>
@@ -23,7 +23,7 @@ const template = `<kirby-list-experimental>
   // tslint:disable-next-line
   selector: 'cookbook-list-experimental-sliding-items-example',
   template: template,
-  imports: [ListModule, ItemSlidingComponent, ItemModule],
+  imports: [ItemSlidingComponent, ItemComponent, ListExperimentalComponent],
 })
 export class ListExperimentalSlidingItemsExampleComponent extends BaseListComponent {
   template: string = template;

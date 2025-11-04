@@ -4,7 +4,7 @@ import { InputSize } from '@kirbydesign/designsystem';
 import {
   DateInputDirective,
   DecimalMaskDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
 
@@ -19,7 +19,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldModule, DateInputDirective, InputComponent, DecimalMaskDirective],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent, DecimalMaskDirective],
 })
 export class FormFieldInputPadPrecisionDigitsExampleComponent {
   template: string = config.template;

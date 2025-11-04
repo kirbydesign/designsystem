@@ -1,11 +1,10 @@
-
 import { Component, Input, signal, WritableSignal } from '@angular/core';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { InputSize } from '@kirbydesign/designsystem/form-field';
 import {
   DateInputDirective,
-  FormFieldModule,
+  FormFieldComponent,
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
 
@@ -20,7 +19,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldModule, DateInputDirective, InputComponent, DropdownComponent],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent, DropdownComponent],
 })
 export class FormFieldInputErrorExampleComponent {
   template: string = config.template;

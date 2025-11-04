@@ -1,6 +1,4 @@
-import { Directive, ElementRef, HostBinding, HostListener, Optional } from '@angular/core';
-
-import { CardComponent } from '../card.component';
+import { Directive, ElementRef, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -11,10 +9,7 @@ export class CardAsButtonDirective {
   @HostBinding('attr.tabindex') tabindex: number = 0;
   @HostBinding('class.interaction-state-active') _pressed = false;
 
-  constructor(
-    @Optional() private card: CardComponent,
-    private clickableElement: ElementRef
-  ) {}
+  constructor(private clickableElement: ElementRef) {}
 
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])

@@ -28,7 +28,28 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
  * - Mind that the illustrations are not all available in all sizes.
  *
  * ## Technical Details
- *  ** Remember that the assets directory should be included in your application's build configuration, same way as i.e. kirby icons.**
+ * The Spot Illustration component expect SVGs to be placed in `assets/spot-illustrations`.
+ * Make sure they are copied to your applications output folder by adding the following to `build > options > assets` in `angular.json`.
+ *
+ * In a Micro Frontend setup, this should be handled by the application host.
+ * ```json
+ * {
+ *   ...
+ *   "build": {
+ *     "options": {
+ *       "assets": [
+ *         ...,
+ *         {
+ *           "glob": "*.svg",
+ *           "input": "node_modules/@kirbydesign/extensions-angular/assets/spot-illustrations",
+ *           "output": "assets/spot-illustrations"
+ *         }
+ *         ...
+ *       ],
+ *     }
+ *   }
+ * }
+ ```
  */
 const meta: Meta<SpotIllustrationComponent> = {
   component: SpotIllustrationComponent,
@@ -64,7 +85,6 @@ const meta: Meta<SpotIllustrationComponent> = {
     name: {
       control: { type: 'select' },
       options: Object.keys(illustrations),
-      description: 'The name of the Spot Illustration to display.',
       table: {
         category: 'inputs',
         type: { summary: 'SpotIllustrationName' },
@@ -73,7 +93,6 @@ const meta: Meta<SpotIllustrationComponent> = {
     size: {
       control: { type: 'select' },
       options: Object.values(SpotIllustrationSize),
-      description: 'The size of the Spot Illustration',
       table: {
         category: 'inputs',
         type: { summary: 'SpotIllustrationSize' },

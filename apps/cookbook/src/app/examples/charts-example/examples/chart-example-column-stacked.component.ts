@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ColorHelper } from '@kirbydesign/designsystem';
 import { ChartOptions } from 'chart.js';
-import { ChartsModule } from '@kirbydesign/designsystem/chart';
+import { ChartComponent } from '@kirbydesign/designsystem/chart';
 
 const config = {
   selector: 'cookbook-chart-example-column-stacked',
@@ -37,7 +37,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [ChartsModule],
+  imports: [ChartComponent],
 })
 export class ChartExampleColumnStackedComponent {
   template: string = config.template;

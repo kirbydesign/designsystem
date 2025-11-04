@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { SlideModule } from '@kirbydesign/designsystem/slide';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import {
+  SlideDirective,
+  SlidesComponent,
+  SlideStretchHeightDirective,
+} from '@kirbydesign/designsystem/slide';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
 const config = {
   selector: 'cookbook-slides-height-example',
@@ -19,7 +23,13 @@ const config = {
   selector: config.selector,
   template: config.template,
 
-  imports: [SlideModule, CardModule],
+  imports: [
+    SlidesComponent,
+    SlideDirective,
+    CardComponent,
+    CardHeaderComponent,
+    SlideStretchHeightDirective,
+  ],
 })
 export class SlidesHeightExampleComponent {
   template = config.template;

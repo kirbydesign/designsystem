@@ -1,17 +1,27 @@
 import { Component } from '@angular/core';
 
 import { ReorderEvent, ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
-import { PageModule } from '@kirbydesign/designsystem/page';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { NgClass } from '@angular/common';
-import { ListModule } from '@kirbydesign/designsystem/list';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { LabelComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 @Component({
   selector: 'cookbook-reorder-list-example',
   templateUrl: './reorder-list-example.component.html',
   styleUrls: ['./reorder-list-example.component.scss'],
-  imports: [PageModule, ReorderListComponent, ListModule, ItemModule, NgClass, ToggleComponent],
+  imports: [
+    PageComponent,
+    PageContentComponent,
+    ReorderListComponent,
+    LabelComponent,
+    ItemComponent,
+    NgClass,
+    ToggleComponent,
+    ListItemTemplateDirective,
+  ],
 })
 export class ReorderListExampleComponent {
   items: any[] = [

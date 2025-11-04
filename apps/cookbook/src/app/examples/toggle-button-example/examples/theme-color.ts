@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonComponent, IconModule, ToggleButtonModule } from '@kirbydesign/designsystem';
+import { ButtonComponent, ToggleButtonComponent } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-toggle-button-theme-color',
@@ -23,7 +23,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './_shared.scss',
-  imports: [ToggleButtonModule, ButtonComponent, IconModule],
+  imports: [ToggleButtonComponent, ButtonComponent],
 })
 export class ToggleButtonThemeColorExampleComponent {
   template: string = config.template;
