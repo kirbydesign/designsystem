@@ -91,7 +91,7 @@
     "generate-docs-import-map": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm run generate-docs-import-map"
+        "command": "nx build designsystem && npm run generate-docs-import-map"
       }
     }
   }
