@@ -4,6 +4,7 @@ import { ItemComponent, ItemSize, LabelComponent } from '@kirbydesign/designsyst
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
@@ -789,5 +790,23 @@ export const LabelTypographyOverride: Story = {
 export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-item-example></cookbook-item-example>`,
+  }),
+};
+
+export const ItemWithHorizontalLabelTruncation: Story = {
+  parameters: {
+    chromatic: { modes: { ...responsiveModes } },
+  },
+  render: () => ({
+    template: `<kirby-item>
+    <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
+    <data class="kirby-item-detail" slot="end">22.86%</data> 
+</kirby-item>
+<kirby-item>
+    <kirby-label direction="horizontal">
+        <p class="kirby-item-title" >Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
+        <data class="kirby-item-detail">22.86%</data> 
+    </kirby-label>
+</kirby-item>`,
   }),
 };
