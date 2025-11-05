@@ -146,7 +146,7 @@ export class CheckboxComponent
    */
   writeValue(value: boolean): void {
     this.checked = value;
-    this.cdr.detectChanges();
+    this.cdr.markForCheck();
   }
 
   /**
@@ -179,5 +179,6 @@ export class CheckboxComponent
    */
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cdr.markForCheck();
   }
 }
