@@ -4,12 +4,18 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-tabs-showcase',
   templateUrl: './tabs-showcase.component.html',
   styleUrls: ['./tabs-showcase.component.scss'],
-  imports: [CodeViewerComponent, IphoneComponent, ApiDescriptionPropertiesComponent],
+  imports: [
+    CodeViewerComponent,
+    IphoneComponent,
+    ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
+  ],
 })
 export class TabsShowcaseComponent {
   exampleHtml = exampleHtml;
@@ -51,7 +57,7 @@ const routes: Routes = [
   import { TabsService } from '@kirbydesign/designsystem';
   ...
   constructor(private tabsSerivce: TabsService) {}
-  
+
   ngOnInit() {
     this.tabsService.subscribe((outlet) => {
       console.log(outlet.canGoBack());

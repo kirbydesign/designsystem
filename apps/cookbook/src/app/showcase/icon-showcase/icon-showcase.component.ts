@@ -11,6 +11,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 import { IconSizesExampleComponent } from '~/app/examples/icon-example/examples/sizes';
 import { IconDefaultExampleComponent } from '~/app/examples/icon-example/examples/default';
 import { IconCustomExampleComponent } from '~/app/examples/icon-example/examples/custom';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-icon-showcase',
@@ -25,6 +26,7 @@ import { IconCustomExampleComponent } from '~/app/examples/icon-example/examples
     CodeViewerComponent,
     IconCustomExampleComponent_1,
     ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
   ],
 })
 export class IconShowcaseComponent {

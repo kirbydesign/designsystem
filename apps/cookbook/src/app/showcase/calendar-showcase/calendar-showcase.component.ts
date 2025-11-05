@@ -16,6 +16,7 @@ import { ExampleConfigurationWrapperComponent } from '../../examples/example-con
 import { CalendarYearNavigatorExampleComponent } from '../../examples/calendar-example/examples/year-navigator';
 import { CalendarNoBackgroundExampleComponent } from '../../examples/calendar-example/examples/no-background';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-calendar-showcase',
@@ -23,6 +24,7 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
   styleUrls: ['./calendar-showcase.component.scss'],
   imports: [
     ExampleViewerComponent,
+    ImportViewerComponent,
     CalendarCardExampleComponent,
     ExampleConfigurationWrapperComponent,
     CheckboxComponent,
