@@ -13,12 +13,18 @@ import { ListWithSectionsAndStandAloneExampleTemplate } from '~/app/examples/lis
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
 import { ListWithStandAloneExampleTemplate } from '~/app/examples/list-example/examples/stand-alone';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-list-showcase',
   templateUrl: './list-showcase.component.html',
   styleUrls: ['./list-showcase.component.scss'],
-  imports: [CodeViewerComponent, IphoneComponent, ApiDescriptionPropertiesComponent],
+  imports: [
+    CodeViewerComponent,
+    IphoneComponent,
+    ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
+  ],
 })
 export class ListShowcaseComponent {
   items: string = ListItemsExampleTemplate;

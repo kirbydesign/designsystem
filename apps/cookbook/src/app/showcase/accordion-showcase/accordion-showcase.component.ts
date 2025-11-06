@@ -11,6 +11,7 @@ import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { AccordionHeadingLevelExampleComponent } from '~/app/examples/accordion-example/examples/heading-level';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-accordion-showcase',
@@ -18,6 +19,7 @@ import { AccordionHeadingLevelExampleComponent } from '~/app/examples/accordion-
   styleUrls: ['./accordion-showcase.component.scss'],
   imports: [
     ExampleViewerComponent,
+    ImportViewerComponent,
     AccordionDefaultExampleComponent,
     AccordionExpandedExampleComponent,
     AccordionCardExampleComponent,
