@@ -3,10 +3,32 @@
   option. It appears upon interaction with an element (such as an icon or button). A selected option
   can represent a value in a form, or can be used as an action to filter or sort existing content.
 </p>
-<cookbook-dropdown-example-configuration
-  [size]="size"
-  (sizeChanged)="setSize($event)"
-></cookbook-dropdown-example-configuration>
+
+<p>
+  There are two sizes to be used. Generally, the two sizes are interchangeable, but should be used
+  consistently.
+</p>
+
+<div class="config-columns">
+  <div class="list">
+    <ul>
+      <li>
+        <strong>Medium</strong>
+        typically used when only one or a few dropdowns are needed in a view.
+      </li>
+      <li>
+        <strong>Small</strong>
+        typically used in smaller areas or when there is a need to fit multiple dropdowns within the
+        content area.
+      </li>
+    </ul>
+  </div>
+  <cookbook-dropdown-example-configuration
+    [size]="size"
+    (sizeChanged)="setSize($event)"
+  ></cookbook-dropdown-example-configuration>
+</div>
+
 <h2>Simple</h2>
 <h3>Default</h3>
 <cookbook-example-viewer [html]="defaultExample.template">
@@ -17,6 +39,47 @@
     ></cookbook-dropdown-example-default>
   </div>
 </cookbook-example-viewer>
+
+<h3>States</h3>
+<cookbook-example-viewer [html]="statesExample.template">
+  <div class="example-frame">
+    <cookbook-dropdown-example-states
+      #statesExample
+      [size]="size"
+    ></cookbook-dropdown-example-states>
+  </div>
+</cookbook-example-viewer>
+
+<h3>In Form Field</h3>
+<p>
+  Dropdowns can placed within a
+  <code>&lt;kirby-form-field&gt;</code>
+  and assigned a label and an optional message.
+  <br />
+  Clicking the label toggles the open/closed state of the dropdown.
+</p>
+<p>
+  <strong>Validation</strong>
+  <br />
+  If validation for the field fails you can set the
+  <code>hasError</code>
+  property of
+  <code>&lt;kirby-dropdown&gt;</code>
+  (and optionally an error message through the
+  <code>message</code>
+  property of
+  <code>&lt;kirby-form-field&gt;</code>
+  ).
+</p>
+<cookbook-example-viewer [html]="formFieldExample.template">
+  <div class="example-frame">
+    <cookbook-dropdown-example-form-field
+      [size]="size"
+      #formFieldExample
+    ></cookbook-dropdown-example-form-field>
+  </div>
+</cookbook-example-viewer>
+
 <h3>Scroll</h3>
 <p>The dropdown becomes scrollable if it contains more than 8 items.</p>
 <cookbook-example-viewer [html]="scrollExample.template">

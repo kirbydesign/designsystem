@@ -1,7 +1,6 @@
-import { Component, Input, signal, WritableSignal } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
-import { InputSize } from '@kirbydesign/designsystem/form-field';
+import { InputSize } from '@kirbydesign/designsystem';
 import {
   DateInputDirective,
   FormFieldComponent,
@@ -11,23 +10,16 @@ import {
 const config = {
   selector: 'cookbook-form-field-input-error-example',
   template: `<kirby-form-field label="Error" message="This is an error message">
-  <kirby-dropdown [items]="['Item 1', 'Item 2', 'Item 3']" [hasError]="isError()" />
-</kirby-form-field><button type="button" (click)="toggleError()">{{ isError() ? 'Clear error' : 'Set error' }}</button>
-`,
+  <input kirby-input [size]="size" hasError="true" />
+</kirby-form-field>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [FormFieldComponent, DateInputDirective, InputComponent, DropdownComponent],
+  imports: [FormFieldComponent, DateInputDirective, InputComponent],
 })
 export class FormFieldInputErrorExampleComponent {
   template: string = config.template;
   @Input() size: InputSize;
-
-  isError: WritableSignal<boolean> = signal(false);
-
-  toggleError() {
-    this.isError.update((value) => !value);
-  }
 }

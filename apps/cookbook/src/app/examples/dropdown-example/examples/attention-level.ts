@@ -8,16 +8,6 @@ const config = {
   template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
   <kirby-dropdown
     [size]="size"
-    placeholder="Dropdown with attention level 1"
-    aria-label="Choose your favorite fruit"
-    attentionLevel="1"
-    expand="block"
-    usePopover="true"
-    [items]="items">
-  </kirby-dropdown>
-
-  <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown with attention level 2"
     aria-label="Choose your favorite fruit"
     attentionLevel="2"

@@ -17,6 +17,8 @@ import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { DropdownExampleStatesComponent } from '~/app/examples/dropdown-example/examples/states';
+import { DropdownExampleFormFieldComponent } from '~/app/examples/dropdown-example/examples/form-field';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -34,6 +36,8 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
     DropdownExampleItemSelectComponent,
     DropdownExampleCustomItemTemplateComponent,
     DropdownExampleNgFormsComponent,
+    DropdownExampleStatesComponent,
+    DropdownExampleFormFieldComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,

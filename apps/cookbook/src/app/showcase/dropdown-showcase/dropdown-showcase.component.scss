@@ -12,3 +12,13 @@ h3 {
 cookbook-example-viewer {
   margin-bottom: utils.size('l');
 }
+
+.config-columns {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--kirby-spacing-xl);
+
+  .list {
+    flex: 1 1 300px;
+  }
+}
