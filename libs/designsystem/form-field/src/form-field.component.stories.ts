@@ -8,6 +8,7 @@ import {
 } from '@kirbydesign/designsystem/form-field';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { IconComponent } from '@kirbydesign/designsystem';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {
@@ -15,7 +16,13 @@ const meta: Meta<FormFieldComponent> = {
   title: 'Components / FormField',
   decorators: [
     moduleMetadata({
-      imports: [FormFieldModule, InputComponent, TextareaComponent, FormFieldExampleComponent],
+      imports: [
+        FormFieldModule,
+        InputComponent,
+        TextareaComponent,
+        FormFieldExampleComponent,
+        IconComponent,
+      ],
     }),
   ],
 };
