@@ -8,6 +8,13 @@
     justify-content: space-between;
     align-items: center;
 
+    // Remove ellipsis from last child
+    @include utils.slotted(':last-child') {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: initial;
+    }
+
     @include utils.slotted(':not(:first-child)') {
       margin-left: utils.size('xs');
     }
