@@ -56,6 +56,7 @@ label {
 
   .prefix {
     left: utils.size('xs');
+    z-index: utils.z('default');
   }
 
   .suffix {
