@@ -8,6 +8,7 @@ import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-
 import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-reorder-showcase',
@@ -20,6 +21,7 @@ import { ApiDescriptionMethod } from '~/app/shared/api-description/api-descripti
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
+    ImportViewerComponent,
   ],
 })
 export class ReorderListShowcaseComponent {

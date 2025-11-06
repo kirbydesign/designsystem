@@ -19,6 +19,7 @@ import { ApiDescriptionMethod } from '~/app/shared/api-description/api-descripti
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { DropdownExampleStatesComponent } from '~/app/examples/dropdown-example/examples/states';
 import { DropdownExampleFormFieldComponent } from '~/app/examples/dropdown-example/examples/form-field';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -27,6 +28,7 @@ import { DropdownExampleFormFieldComponent } from '~/app/examples/dropdown-examp
   imports: [
     DropdownExampleConfigurationComponent,
     ExampleViewerComponent,
+    ImportViewerComponent,
     DropdownExampleDefaultComponent,
     DropdownExampleScrollComponent,
     DropdownExamplePreSelectedComponent,

@@ -170,6 +170,20 @@
 </p>
 <p>The label you provide will be announced together with the number of items in the list.</p>
 
+<h2>Importing</h2>
+<cookbook-import-viewer
+  [imports]="['ListComponent', 'ItemComponent', 'LabelComponent']"
+></cookbook-import-viewer>
+<p>
+  <em>
+    <strong>Please note:</strong>
+    The
+    <code>ListModule</code>
+    bundles the various directives and components relevant for building lists, and can be used
+    instead of individual imports for convenience.
+  </em>
+</p>
+
 <h2>API:</h2>
 <cookbook-api-description-properties
   [properties]="properties"

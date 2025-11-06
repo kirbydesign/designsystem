@@ -12,6 +12,7 @@
   "targets": {
     "build": {
       "executor": "@angular-builders/custom-webpack:browser",
+      "dependsOn": ["generate-docs-import-map"],
       "options": {
         "customWebpackConfig": {
           "path": "./tools/sass-to-ts/webpack.sass-to-ts.config.ts",
@@ -77,6 +78,7 @@
     },
     "serve": {
       "executor": "@angular-builders/custom-webpack:dev-server",
+      "dependsOn": ["generate-docs-import-map"],
       "options": {
         "buildTarget": "cookbook:build:development"
       },
@@ -84,6 +86,12 @@
         "production": {
           "buildTarget": "cookbook:build:production"
         }
+      }
+    },
+    "generate-docs-import-map": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx build designsystem && npm run generate-docs-import-map"
       }
     }
   }

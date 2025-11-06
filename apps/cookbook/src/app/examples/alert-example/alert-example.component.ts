@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { of, Subject, timer } from 'rxjs';
 import { map, takeUntil, takeWhile } from 'rxjs/operators';
 
-import { ModalController } from '@kirbydesign/designsystem';
+import { ModalController } from '@kirbydesign/designsystem/modal';
 import { AlertConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -25,7 +25,7 @@ export class AlertExampleComponent {
   static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExampleComponent.stringify(
     alertConfigWithIcon
   )}
-  
+
 this.modalController.showAlert(config);`;
 
   private static stringify(value: any): string {
@@ -53,7 +53,7 @@ const config: AlertConfig = {
   okBtn: logoutText$,
   cancelBtn: takeMeBackText$,
 };
-  
+
 this.modalController.showAlert(config);`;
   constructor(
     private modalController: ModalController,

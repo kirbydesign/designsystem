@@ -16,6 +16,7 @@ import {
 } from '../../examples/menu-example/examples/portalOutletConfig';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from './../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-menu-showcase',
@@ -34,6 +35,7 @@ import { ApiDescriptionProperty } from './../../shared/api-description/api-descr
     MenuPortalConfigExampleComponent,
     DividerComponent,
     ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
   ],
 })
 export class MenuShowcaseComponent {

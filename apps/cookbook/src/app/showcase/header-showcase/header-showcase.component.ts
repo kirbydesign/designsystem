@@ -19,6 +19,7 @@ import {
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 import { HeaderWithInteractiveTitleExampleComponent } from '~/app/examples/header-example/examples/interactive-title';
 import { HeaderWithCustomActionsExampleComponent } from '~/app/examples/header-example/examples/custom-actions';
 import { HeaderWithEmphasizedActionGroupExampleComponent } from '~/app/examples/header-example/examples/emphasize-actions';
@@ -44,6 +45,7 @@ import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-exa
     HeaderExampleCombinedComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
+    ImportViewerComponent,
   ],
 })
 export class HeaderShowcaseComponent {

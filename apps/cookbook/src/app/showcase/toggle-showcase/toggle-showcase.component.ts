@@ -7,6 +7,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { ToggleReactiveFormsExampleComponent } from '../../examples/toggle-example/examples/reactive-forms';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-toggle-showcase',
@@ -19,6 +20,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
     ExampleViewerComponent,
     ToggleReactiveFormsExampleComponent,
     ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
   ],
 })
 export class ToggleShowcaseComponent {

@@ -5,6 +5,7 @@ import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-view
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { IphoneComponent } from '~/app/iphone/iphone.component';
 import { ToastExampleComponent } from '~/app/examples/toast-example/toast-example.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-toast-showcase',
@@ -15,6 +16,7 @@ import { ToastExampleComponent } from '~/app/examples/toast-example/toast-exampl
     ExampleViewerComponent,
     ApiDescriptionPropertiesComponent,
     IphoneComponent,
+    ImportViewerComponent,
   ],
 })
 export class ToastShowcaseComponent {
