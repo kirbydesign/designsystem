@@ -1,29 +1,17 @@
-<fieldset>
-  <legend>Dropdown size for examples below</legend>
-  <p>
-    <label>
-      <input
-        type="radio"
-        name="size"
-        value="md"
-        [checked]="size === 'md'"
-        (change)="sizeChanged.emit($event.target.value)"
-      />
-      Medium (
+<kirby-form-field label="Choose dropdown size for examples below">
+  <kirby-radio-group [value]="size" (valueChange)="sizeChanged.emit($event)">
+    <kirby-radio value="md" size="sm">
+      <strong>Medium</strong>
+      (
       <code>md</code>
-      ) - default
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="size"
-        value="sm"
-        [checked]="size === 'sm'"
-        (change)="sizeChanged.emit($event.target.value)"
-      />
-      Small (
+      ) typically used when only one or a few dropdowns are needed in a view.
+    </kirby-radio>
+    <kirby-radio value="sm" size="sm">
+      <strong>Small</strong>
+      (
       <code>sm</code>
-      )
-    </label>
-  </p>
-</fieldset>
+      ) typically used in smaller areas or when there is a need to fit multiple dropdowns within the
+      content area.
+    </kirby-radio>
+  </kirby-radio-group>
+</kirby-form-field>

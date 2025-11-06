@@ -9,25 +9,10 @@
   consistently.
 </p>
 
-<div class="config-columns">
-  <div class="list">
-    <ul>
-      <li>
-        <strong>Medium</strong>
-        typically used when only one or a few dropdowns are needed in a view.
-      </li>
-      <li>
-        <strong>Small</strong>
-        typically used in smaller areas or when there is a need to fit multiple dropdowns within the
-        content area.
-      </li>
-    </ul>
-  </div>
-  <cookbook-dropdown-example-configuration
-    [size]="size"
-    (sizeChanged)="setSize($event)"
-  ></cookbook-dropdown-example-configuration>
-</div>
+<cookbook-dropdown-example-configuration
+  [size]="size"
+  (sizeChanged)="setSize($event)"
+></cookbook-dropdown-example-configuration>
 
 <h2>Simple</h2>
 <h3>Default</h3>
