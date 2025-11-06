@@ -7,7 +7,6 @@ import {
   TextareaComponent,
 } from '@kirbydesign/designsystem/form-field';
 
-import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { IconComponent } from '@kirbydesign/designsystem';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
@@ -66,9 +65,6 @@ export const CookbookExample: Story = {
 };
 
 export const DateInputWithPrefixIcon: Story = {
-  parameters: {
-    chromatic: { modes: { ...responsiveModes } },
-  },
   render: () => ({
     template: `
       <kirby-form-field label="Date input with prefix icon">
