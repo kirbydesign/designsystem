@@ -18,8 +18,7 @@ const config = {
     </kirby-label>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
   </kirby-label>
-</kirby-item>
-`,
+</kirby-item>`,
 };
 
 @Component({
