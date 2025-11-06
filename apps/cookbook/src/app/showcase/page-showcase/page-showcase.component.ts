@@ -21,6 +21,7 @@ import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-page-showcase',
@@ -34,6 +35,7 @@ import {
     IphoneComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
+    ImportViewerComponent,
   ],
 })
 export class PageShowcaseComponent {
@@ -204,7 +206,7 @@ export class PageShowcaseComponent {
   ];
 
   public injectionTokenExample = `import { PAGE_BACK_BUTTON_OVERRIDE, PageBackButtonOverride } from '@kirbydesign/designsystem/page';
-  
+
 @Injectable({
   providedIn: 'root',
 })
@@ -246,16 +248,16 @@ export class APageComponent implements OnInit, OnDestroy {
  public ngOnInit(): void {
    this.subscribe();
  }
-  
+
  public ngOnDestroy(): void {
    this.unsubscribe();
  }
 
  public startSubscription = () => this.subscribe();
  public stopSubscription = () => this.unsubscribe();
-   
+
  private subscribe = () => this.aService.get().pipe(takeUntil(this.$destroy));
-   
+
  private unsubscribe = () => {
    this.$destroy.next();
    this.$destroy.complete;

@@ -6,6 +6,7 @@ import { DataTableSortableExampleComponent } from '../../examples/data-table-exa
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { dataTableApi } from './data-table-api';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-data-table-showcase',
@@ -13,6 +14,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./data-table-showcase.component.scss'],
   imports: [
     ExampleViewerComponent,
+    ImportViewerComponent,
     DataTableDefaultExampleComponent,
     DataTableCardExampleComponent,
     DataTableSortableExampleComponent,

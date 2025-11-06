@@ -18,6 +18,7 @@ import {
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
 import { ModalComponentExampleComponent } from '~/app/examples/modal-example/modal-component-example.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -33,6 +34,7 @@ import { ModalComponentExampleComponent } from '~/app/examples/modal-example/mod
     ModalExampleAlertWithGuardStepperComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
+    ImportViewerComponent,
   ],
 })
 export class ModalShowcaseComponent {
@@ -65,12 +67,12 @@ const config: ModalConfig = {
     {
       name: 'flavor',
       description: `(Optional) The flavor of the modal.
-      
+
       With the \`modal\` flavor the dialog is presented directly on top of content, either as a full screen modal on small screens or centered on the page on larger screens.
 
       Modals with a \`drawer\` flavor appears as a sheet on top of page content on small screens, and adapts its height to fit its content. On
       larger screens the drawer is identical to the modal.
-      
+
       Modals with a \`compact\` flavor simply render the specified component, similar to alerts.
       **Please note: As there is no toolbar or close button, you should handle closing the modal yourself.`,
       defaultValue: 'modal',
@@ -78,7 +80,7 @@ const config: ModalConfig = {
     },
     {
       name: 'collapseTitle',
-      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; once scrolled out of view it collapses and appears in the header area. 
+      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; once scrolled out of view it collapses and appears in the header area.
       \n Useful for long titles that would otherwise truncate. `,
       defaultValue: 'false',
       type: ['boolean'],
@@ -112,7 +114,7 @@ const config: ModalConfig = {
     {
       name: 'canDismiss',
       description: `(Optional) Determines whether or not a modal can be dismissed.
- 
+
       The canDismiss option takes a callback function that returns either a boolean or an AlertConfig. If an AlertConfig is returned an alert will appear when the user tries to dismiss the modal. If false is returned the modal cannot be dismissed by user-interaction or with ModalController.hideTopMost(). `,
       defaultValue: 'true',
       type: ['boolean | AlertConfig | Promise<boolean | AlertConfig>'],

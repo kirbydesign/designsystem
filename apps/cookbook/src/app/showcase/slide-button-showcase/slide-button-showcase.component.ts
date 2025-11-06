@@ -3,6 +3,7 @@ import exampleHtml from '../../examples/slide-button-example/slide-button-exampl
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 import { SimpleSlideButtonExampleComponent } from '~/app/examples/slide-button-example/examples/simple';
 import { ExpandBlockSlideButtonExampleComponent } from '~/app/examples/slide-button-example/examples/expand-block';
 
@@ -15,6 +16,7 @@ import { ExpandBlockSlideButtonExampleComponent } from '~/app/examples/slide-but
     ExampleViewerComponent,
     SimpleSlideButtonExampleComponent,
     ExpandBlockSlideButtonExampleComponent,
+    ImportViewerComponent,
   ],
 })
 export class SlideButtonShowcaseComponent {

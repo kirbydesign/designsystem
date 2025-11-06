@@ -4,6 +4,7 @@ import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { FormFieldInputLabelExampleComponent } from '~/app/examples/form-field-example/examples/input/label';
 import { LabelExampleDirectionComponent } from '~/app/examples/label-example/examples/direction';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-label-showcase',
@@ -11,6 +12,7 @@ import { LabelExampleDirectionComponent } from '~/app/examples/label-example/exa
   styleUrls: ['./label-showcase.component.scss'],
   imports: [
     ExampleViewerComponent,
+    ImportViewerComponent,
     ApiDescriptionPropertiesComponent,
     FormFieldInputLabelExampleComponent,
     LabelExampleDirectionComponent,

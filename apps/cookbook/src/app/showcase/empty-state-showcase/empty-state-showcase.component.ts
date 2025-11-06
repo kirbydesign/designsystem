@@ -7,6 +7,7 @@ import { EmptyStateSimpleExampleComponent } from '../../examples/empty-state-exa
 import { EmptyStateButtonsExampleComponent } from '../../examples/empty-state-example/examples/buttons';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-empty-state-showcase',
@@ -15,6 +16,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   imports: [
     FlagComponent,
     ExampleViewerComponent,
+    ImportViewerComponent,
     EmptyStateMessageTypesExampleComponent,
     EmptyStateSimpleExampleComponent,
     EmptyStateButtonsExampleComponent,

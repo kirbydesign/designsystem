@@ -23,6 +23,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { SlidesCustomHeadingExampleComponent } from '~/app/examples/slides-example/examples/custom-heading';
 import { SlidesHeightExampleComponent } from '~/app/examples/slides-example/examples/height';
 import { SlidesSimpleExampleComponent } from '~/app/examples/slides-example/examples/simple';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 import { SlidesAdvancedExampleComponent } from '~/app/examples/slides-example/examples/advanced';
 @Component({
   selector: 'cookbook-slides-showcase',
@@ -38,6 +39,7 @@ import { SlidesAdvancedExampleComponent } from '~/app/examples/slides-example/ex
     SlidesSimpleExampleComponent,
     SlidesHeightExampleComponent,
     SlidesCustomHeadingExampleComponent,
+    ImportViewerComponent,
   ],
 })
 export class SlidesShowcaseComponent {

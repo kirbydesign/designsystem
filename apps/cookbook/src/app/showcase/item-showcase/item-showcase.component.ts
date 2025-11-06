@@ -17,6 +17,7 @@ import {
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ItemExampleComplexLabelsComponent } from '~/app/examples/item-example/examples/complex-labels';
 import { ItemExampleDisclosureAnimationComponent } from '~/app/examples/item-example/examples/disclosure-animation';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-item-showcase',
@@ -35,6 +36,7 @@ import { ItemExampleDisclosureAnimationComponent } from '~/app/examples/item-exa
     ItemExampleComplexLabelsComponent,
     ItemExampleDisclosureAnimationComponent,
     ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
   ],
 })
 export class ItemShowcaseComponent {
