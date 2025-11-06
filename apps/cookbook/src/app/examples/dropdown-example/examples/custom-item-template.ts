@@ -10,6 +10,7 @@ const config = {
   template: `<kirby-dropdown #dropdown
   [size]="size"
   placeholder="Dropdown with custom item template"
+  aria-label="Choose your custom item"
   [items]="items"
   itemTextProperty="title">
   <kirby-item

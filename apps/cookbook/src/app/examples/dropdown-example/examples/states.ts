@@ -5,6 +5,7 @@ const config = {
   selector: 'cookbook-dropdown-example-states',
   template: `<kirby-dropdown
   [placeholder]="'Enabled'"
+  aria-label="An enabled dropdown"
   [size]="size"
   [items]="[
     'Apple',
@@ -17,6 +18,7 @@ const config = {
 <kirby-dropdown
   [disabled]="true"
   [placeholder]="'Disabled'"
+  aria-label="A dropdown with disabled state"
   [size]="size"
   [items]="[
     'Apple',
@@ -29,6 +31,7 @@ const config = {
 <kirby-dropdown
   [size]="size"
   [hasError]="true"
+  aria-label="A dropdown with error state"
   [placeholder]="'Error'"
   [items]="[
     'Apple',

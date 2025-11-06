@@ -19,9 +19,8 @@ const config = {
       formControlName="favoriteFood"
       [size]="size"
       placeholder="Dropdown in form"
-      aria-label="dropdown-label"
       [items]="items"
-      [hasError]="favoriteRequired && !form.valid"
+      [hasError]="favoriteRequired && !form.controls['favoriteFood']?.valid"
       itemTextProperty="title"
     ></kirby-dropdown>
   </kirby-form-field>
