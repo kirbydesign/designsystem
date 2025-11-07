@@ -28,8 +28,6 @@ export class DropdownExampleItemSelectComponent {
     { id: 55, text: 'Grapes' },
   ];
 
-  @Input() size: string;
-
   constructor(private toastController: ToastController) {}
 
   onItemSelect(item: { id: number; text: string }) {

@@ -59,8 +59,6 @@ export class DropdownExampleAttentionLevelComponent {
   themeColors = ['light', 'white', 'dark'];
   themeColor = 'white';
 
-  @Input() size: string;
-
   onChange(value) {
     this.themeColor = value;
   }

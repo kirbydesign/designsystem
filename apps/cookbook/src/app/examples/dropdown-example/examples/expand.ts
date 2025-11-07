@@ -24,5 +24,4 @@ const config = {
 })
 export class DropdownExampleExpandComponent {
   template: string = config.template;
-  @Input() size: string;
 }

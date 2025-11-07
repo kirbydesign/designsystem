@@ -63,5 +63,4 @@ export class DropdownExampleCustomItemTemplateComponent {
     { title: 'Item 4', subtitle: 'Tongue bresaola tail swine', value: 4 },
     { title: 'Item 5', subtitle: 'Drumstick pastrami sirloin ', value: 5 },
   ];
-  @Input() size: string;
 }

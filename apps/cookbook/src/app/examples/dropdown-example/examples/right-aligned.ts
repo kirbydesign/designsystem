@@ -36,5 +36,4 @@ export class DropdownExampleRightAlignedComponent {
   template: string = config.template;
   styles: string = config.styles.join(`
 `);
-  @Input() size: string;
 }

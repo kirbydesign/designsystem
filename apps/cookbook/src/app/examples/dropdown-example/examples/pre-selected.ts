@@ -23,5 +23,4 @@ const config = {
 })
 export class DropdownExamplePreSelectedComponent {
   template: string = config.template;
-  @Input() size: string;
 }

@@ -110,7 +110,6 @@ export class DropdownExampleNgFormsComponent implements OnInit {
   ];
   form: UntypedFormGroup;
   favoriteFoodControl: UntypedFormControl;
-  @Input() size: string;
 
   ngOnInit(): void {
     this.buildForm();

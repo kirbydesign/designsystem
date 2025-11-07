@@ -26,5 +26,4 @@ const config = {
 })
 export class DropdownExampleFormFieldComponent {
   template: string = config.template;
-  @Input() size: string;
 }

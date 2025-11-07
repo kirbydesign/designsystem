@@ -34,5 +34,4 @@ const config = {
 })
 export class DropdownExampleScrollComponent {
   template: string = config.template;
-  @Input() size: string;
 }
