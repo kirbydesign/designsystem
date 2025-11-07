@@ -31,10 +31,4 @@ import { DropdownExampleFormFieldComponent } from './examples/form-field';
   ],
   providers: [ToastHelper, ToastController],
 })
-export class DropdownExampleComponent {
-  size: string = 'md';
-
-  onSizeChange(size: string) {
-    this.size = size;
-  }
-}
+export class DropdownExampleComponent {}

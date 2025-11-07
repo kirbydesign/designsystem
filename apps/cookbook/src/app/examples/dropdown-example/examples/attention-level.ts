@@ -16,7 +16,6 @@ const config = {
   </kirby-dropdown>
 
   <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown with attention level 3"
     aria-label="Choose your favorite fruit"
     attentionLevel="3"
