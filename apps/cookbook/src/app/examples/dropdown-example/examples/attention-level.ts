@@ -7,7 +7,6 @@ const config = {
   selector: 'cookbook-dropdown-example-attention-level',
   template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
   <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown with attention level 2"
     aria-label="Choose your favorite fruit"
     attentionLevel="2"

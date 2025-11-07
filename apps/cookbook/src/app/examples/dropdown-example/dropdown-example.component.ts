@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
-import { DropdownExampleConfigurationComponent } from './dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { DropdownExampleDefaultComponent } from './examples/default';
 import { DropdownExampleScrollComponent } from './examples/scroll';
 import { DropdownExamplePreSelectedComponent } from './examples/pre-selected';
@@ -18,7 +17,6 @@ import { DropdownExampleFormFieldComponent } from './examples/form-field';
   templateUrl: './dropdown-example.component.html',
   styleUrls: ['./dropdown-example.component.scss'],
   imports: [
-    DropdownExampleConfigurationComponent,
     DropdownExampleDefaultComponent,
     DropdownExampleScrollComponent,
     DropdownExamplePreSelectedComponent,

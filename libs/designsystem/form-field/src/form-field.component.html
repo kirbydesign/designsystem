@@ -1,5 +1,5 @@
 @if (_wrapContentInLabel) {
-  <label>
+  <label (click)="onLabelClick()">
     <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
     <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
     <!-- add error message inside label if nested interative is in error state -->

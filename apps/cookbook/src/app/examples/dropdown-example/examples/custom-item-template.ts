@@ -8,7 +8,6 @@ import { ListItemTemplateDirective } from '@kirbydesign/designsystem';
 const config = {
   selector: 'cookbook-dropdown-example-custom-item-template',
   template: `<kirby-dropdown #dropdown
-  [size]="size"
   placeholder="Dropdown with custom item template"
   aria-label="Choose your custom item"
   [items]="items"

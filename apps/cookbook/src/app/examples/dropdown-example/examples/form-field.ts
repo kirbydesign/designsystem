@@ -6,7 +6,6 @@ const config = {
   selector: 'cookbook-dropdown-example-form-field',
   template: `<kirby-form-field [label]="'Label'" [message]="'Message'">
   <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown in form field"
     [items]="[
       'Apple',

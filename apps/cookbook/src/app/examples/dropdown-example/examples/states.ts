@@ -1,12 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-states',
   template: `<kirby-dropdown
-  [placeholder]="'Enabled'"
-  aria-label="An enabled dropdown"
-  [size]="size"
+  [placeholder]="'Choose your favorite fruit'"
+  aria-label="Choose your favorite fruit"
   [items]="[
     'Apple',
     'Banana',
@@ -17,9 +16,8 @@ const config = {
 ></kirby-dropdown>
 <kirby-dropdown
   [disabled]="true"
-  [placeholder]="'Disabled'"
-  aria-label="A dropdown with disabled state"
-  [size]="size"
+  [placeholder]="'Choose your favorite fruit'"
+  aria-label="Choose your favorite fruit"
   [items]="[
     'Apple',
     'Banana',
@@ -29,10 +27,9 @@ const config = {
     ]"
 ></kirby-dropdown>
 <kirby-dropdown
-  [size]="size"
   [hasError]="true"
-  aria-label="A dropdown with error state"
-  [placeholder]="'Error'"
+  [placeholder]="'Choose your favorite fruit'"
+  aria-label="Choose your favorite fruit"
   [items]="[
     'Apple',
     'Banana',
@@ -51,12 +48,11 @@ const config = {
     :host {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--kirby-spacing-xs);
+      gap: var(--kirby-spacing-m);
     }
   `,
   imports: [DropdownComponent],
 })
 export class DropdownExampleStatesComponent {
   template: string = config.template;
-  @Input() size: string;
 }

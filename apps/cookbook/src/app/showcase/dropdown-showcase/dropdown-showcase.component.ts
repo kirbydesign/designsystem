@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-import { DropdownExampleConfigurationComponent } from '../../examples/dropdown-example/dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { DropdownExampleDefaultComponent } from '../../examples/dropdown-example/examples/default';
 import { DropdownExampleScrollComponent } from '../../examples/dropdown-example/examples/scroll';
@@ -20,13 +19,13 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
 import { DropdownExampleStatesComponent } from '~/app/examples/dropdown-example/examples/states';
 import { DropdownExampleFormFieldComponent } from '~/app/examples/dropdown-example/examples/form-field';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { DropdownExampleSizesComponent } from '~/app/examples/dropdown-example/examples/sizes';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
   templateUrl: './dropdown-showcase.component.html',
   styleUrls: ['./dropdown-showcase.component.scss'],
   imports: [
-    DropdownExampleConfigurationComponent,
     ExampleViewerComponent,
     ImportViewerComponent,
     DropdownExampleDefaultComponent,
@@ -40,6 +39,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     DropdownExampleNgFormsComponent,
     DropdownExampleStatesComponent,
     DropdownExampleFormFieldComponent,
+    DropdownExampleSizesComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
@@ -128,8 +128,4 @@ export class DropdownShowcaseComponent {
       signature: '(item: string | any) => void',
     },
   ];
-
-  setSize(size: string) {
-    this.size = size;
-  }
 }

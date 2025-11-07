@@ -17,7 +17,6 @@ const config = {
   <kirby-form-field [label]="'Label'" [message]="'Message'">
     <kirby-dropdown
       formControlName="favoriteFood"
-      [size]="size"
       placeholder="Dropdown in form"
       [items]="items"
       [hasError]="favoriteRequired && !form.controls['favoriteFood']?.valid"

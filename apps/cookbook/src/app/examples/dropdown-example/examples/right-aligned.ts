@@ -4,14 +4,13 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 const config = {
   selector: 'cookbook-dropdown-example-right-aligned',
   template: `<kirby-dropdown
-  [size]="size"
   placeholder="Right aligned (opens left)"
   aria-label="Choose your favorite fruit"
   [items]="[
-    'Apple',   
+    'Apple',
     'Banana',
     'Blackberry',
-    'Blueberry',   
+    'Blueberry',
     'Grapes',
     ]"
   popout="left"

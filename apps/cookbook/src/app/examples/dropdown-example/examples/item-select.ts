@@ -6,7 +6,6 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 const config = {
   selector: 'cookbook-dropdown-example-item-select',
   template: `<kirby-dropdown
-  [size]="size"
   placeholder="Dropdown with event handler"
   aria-label="Choose your favorite fruit"
   [items]="items"

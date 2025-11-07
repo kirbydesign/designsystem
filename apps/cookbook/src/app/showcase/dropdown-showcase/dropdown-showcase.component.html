@@ -4,36 +4,48 @@
   can represent a value in a form, or can be used as an action to filter or sort existing content.
 </p>
 
-<p>
-  There are two sizes to be used. Generally, the two sizes are interchangeable, but should be used
-  consistently.
-</p>
-
-<cookbook-dropdown-example-configuration
-  [size]="size"
-  (sizeChanged)="setSize($event)"
-></cookbook-dropdown-example-configuration>
-
 <h2>Simple</h2>
 <h3>Default</h3>
 <p>The default dropdown displays a list of options with no pre-selected value.</p>
 <cookbook-example-viewer [html]="defaultExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-default
-      [size]="size"
-      #defaultExample
-    ></cookbook-dropdown-example-default>
+    <cookbook-dropdown-example-default #defaultExample></cookbook-dropdown-example-default>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Sizes</h3>
+<p>
+  There are two available sizes. While they are generally interchangeable, it is important to use
+  them consistently.
+</p>
+<ul>
+  <li>
+    <strong>Medium</strong>
+    (
+    <code>md</code>
+    ) typically used when only one or a few dropdowns are needed in a view.
+  </li>
+  <li>
+    <strong>Small</strong>
+    (
+    <code>sm</code>
+    ) typically used in smaller areas or when there is a need to fit multiple dropdowns within the
+    content area.
+  </li>
+</ul>
+
+<cookbook-example-viewer [html]="sizesExample.template">
+  <div class="example-frame">
+    <cookbook-dropdown-example-sizes #sizesExample></cookbook-dropdown-example-sizes>
   </div>
 </cookbook-example-viewer>
 
 <h3>States</h3>
-<p>State variations reflect the dropdowns status, providing visual feedback to the user.</p>
+<p>States reflect the dropdowns current status, providing visual feedback to the user.</p>
+<p>Showcased below are the supported states: enabled, disabled and error state, respectively.</p>
 <cookbook-example-viewer [html]="statesExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-states
-      #statesExample
-      [size]="size"
-    ></cookbook-dropdown-example-states>
+    <cookbook-dropdown-example-states #statesExample></cookbook-dropdown-example-states>
   </div>
 </cookbook-example-viewer>
 
@@ -60,10 +72,7 @@
 </p>
 <cookbook-example-viewer [html]="formFieldExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-form-field
-      [size]="size"
-      #formFieldExample
-    ></cookbook-dropdown-example-form-field>
+    <cookbook-dropdown-example-form-field #formFieldExample></cookbook-dropdown-example-form-field>
   </div>
 </cookbook-example-viewer>
 
@@ -71,10 +80,7 @@
 <p>The dropdown becomes scrollable if it contains more than 8 items.</p>
 <cookbook-example-viewer [html]="scrollExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-scroll
-      [size]="size"
-      #scrollExample
-    ></cookbook-dropdown-example-scroll>
+    <cookbook-dropdown-example-scroll #scrollExample></cookbook-dropdown-example-scroll>
   </div>
 </cookbook-example-viewer>
 
@@ -83,7 +89,6 @@
 <cookbook-example-viewer [html]="preSelectedExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-pre-selected
-      [size]="size"
       #preSelectedExample
     ></cookbook-dropdown-example-pre-selected>
   </div>
@@ -95,10 +100,7 @@
 </p>
 <cookbook-example-viewer [html]="expandExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-expand
-      [size]="size"
-      #expandExample
-    ></cookbook-dropdown-example-expand>
+    <cookbook-dropdown-example-expand #expandExample></cookbook-dropdown-example-expand>
   </div>
 </cookbook-example-viewer>
 
@@ -110,7 +112,6 @@
 <cookbook-example-viewer [html]="rightAlignedExample.template" [css]="rightAlignedExample.styles">
   <div class="example-frame">
     <cookbook-dropdown-example-right-aligned
-      [size]="size"
       #rightAlignedExample
     ></cookbook-dropdown-example-right-aligned>
   </div>
@@ -123,7 +124,6 @@
 <cookbook-example-viewer [html]="attentionLevelExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-attention-level
-      [size]="size"
       #attentionLevelExample
     ></cookbook-dropdown-example-attention-level>
   </div>
@@ -134,7 +134,6 @@
 <cookbook-example-viewer [html]="itemSelectExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-item-select
-      [size]="size"
       #itemSelectExample
     ></cookbook-dropdown-example-item-select>
   </div>
@@ -149,7 +148,6 @@
 <cookbook-example-viewer [html]="customItemTemplateExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-custom-item-template
-      [size]="size"
       #customItemTemplateExample
     ></cookbook-dropdown-example-custom-item-template>
   </div>
@@ -162,12 +160,28 @@
 </p>
 <cookbook-example-viewer [html]="formsExample.template" [ts]="formsExample.codeSnippet">
   <div class="example-frame">
-    <cookbook-dropdown-example-ng-forms
-      [size]="size"
-      #formsExample
-    ></cookbook-dropdown-example-ng-forms>
+    <cookbook-dropdown-example-ng-forms #formsExample></cookbook-dropdown-example-ng-forms>
   </div>
 </cookbook-example-viewer>
+
+<h2>Best Practices</h2>
+<ul>
+  <li>
+    Use a dropdown when there are multiple choices that can be collapsed under one title, if the
+    list of items is too long, or when space is constrained.
+  </li>
+  <li>
+    Use a dropdown when the selected option is more important than the alternatives (in contrast to
+    radio buttons where all the choices are visible, putting equal emphasis on all options).
+  </li>
+  <li>
+    Don't use a dropdown if there are two options to choose from. In this case, use a radio button
+    group instead.
+  </li>
+  <li>
+    If it isn't possible to have a default selected choice, then show a guiding placeholder text
+  </li>
+</ul>
 
 <h2>Accessibility</h2>
 <p>
