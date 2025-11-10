@@ -73,11 +73,11 @@
       "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
       "@kirbydesign/extensions-angular/localization": ["libs/extensions/angular/dist/localization"],
       "@kirbydesign/extensions-angular/sidebar-menu": ["libs/extensions/angular/dist/sidebar-menu"],
-      "@kirbydesign/extensions-angular/spot-illustration": [
-        "libs/extensions/angular/dist/spot-illustration"
-      ],
       "@kirbydesign/extensions-angular/skeleton-loader": [
         "libs/extensions/angular/dist/skeleton-loader"
+      ],
+      "@kirbydesign/extensions-angular/spot-illustration": [
+        "libs/extensions/angular/dist/spot-illustration"
       ],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]

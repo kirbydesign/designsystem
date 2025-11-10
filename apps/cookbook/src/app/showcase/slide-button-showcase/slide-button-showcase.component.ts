@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/slide-button-example/slide-button-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/slide-button-example/slide-button-example.component.html' with { loader: 'text' };
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
