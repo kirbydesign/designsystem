@@ -100,7 +100,7 @@ export class FormFieldComponent
 
   @HostBinding('class.wrap-content-in-label')
   get _wrapContentInLabel(): boolean {
-    return !!this.label && (!!this.input || !!this.textarea || !!this.dropdown);
+    return !!this.label && (!!this.input || !!this.textarea);
   }
 
   private dispatchLoadEvent() {
@@ -120,7 +120,10 @@ export class FormFieldComponent
   }
 
   onLabelClick() {
-    this.radioGroupComponent?.focus();
+    // If its a radio group its focus method that contains advanced logic
+    this.radioGroupComponent
+      ? this.radioGroupComponent?.focus()
+      : this.nestedInteractiveElement?.focus();
   }
 
   public focus() {
