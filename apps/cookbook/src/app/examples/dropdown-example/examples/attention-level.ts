@@ -5,7 +5,7 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-attention-level',
-  template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
+  template: `<kirby-card hasPadding="true" class="constrain-width" [themeColor]="themeColor">
   <kirby-dropdown
     placeholder="Dropdown with attention level 2"
     aria-label="Choose your favorite fruit"

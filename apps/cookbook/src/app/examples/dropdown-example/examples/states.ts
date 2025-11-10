@@ -14,6 +14,7 @@ const config = {
     'Grapes',
     ]"
 ></kirby-dropdown>
+
 <kirby-dropdown
   [disabled]="true"
   [placeholder]="'Choose your favorite fruit'"
@@ -26,6 +27,7 @@ const config = {
     'Grapes',
     ]"
 ></kirby-dropdown>
+
 <kirby-dropdown
   [hasError]="true"
   [placeholder]="'Choose your favorite fruit'"
@@ -43,14 +45,10 @@ const config = {
 
 @Component({
   selector: config.selector,
-  template: config.template,
-  styles: `
-    :host {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--kirby-spacing-m);
-    }
+  template: `
+    <div class="column-layout constrain-width">${config.template}</div>
   `,
+  styleUrl: './dropdown-examples.shared.scss',
   imports: [DropdownComponent],
 })
 export class DropdownExampleStatesComponent {
