@@ -40,7 +40,23 @@
         ],
         "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
         "scripts": [],
-        "browser": "apps/cookbook/src/main.ts"
+        "browser": "apps/cookbook/src/main.ts",
+        "plugins": [
+          {
+            "path": "tools/sass-to-ts/dist/sass-to-ts.plugin.js",
+            "options": {
+              "watchGlob": [
+                "libs/core/src/helpers/*.scss",
+                "libs/core/src/scss/base/*.scss",
+                "libs/core/src/scss/themes/*.scss"
+              ],
+              "transform": [
+                "libs/core/src/helpers/color-helper.scss",
+                "libs/core/src/helpers/design-token-helper.scss"
+              ]
+            }
+          }
+        ]
       },
       "configurations": {
         "development": {
