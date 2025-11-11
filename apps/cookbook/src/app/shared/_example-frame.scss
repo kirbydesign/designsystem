@@ -16,7 +16,7 @@
   }
 
   @include utils.media('<medium') {
-    padding: 0;
-    border: none;
+    margin-inline: -1 * utils.size('s');
+    padding-inline: utils.size('s');
   }
 }

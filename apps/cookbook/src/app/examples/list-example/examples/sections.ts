@@ -4,6 +4,7 @@ import {
   ListComponent,
   ListItemTemplateDirective,
   ListSectionHeaderComponent,
+  ListSectionHeaderDirective,
 } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
@@ -40,6 +41,7 @@ export const template = `<kirby-list
     ItemComponent,
     LabelComponent,
     ListSectionHeaderComponent,
+    ListSectionHeaderDirective,
     ListItemTemplateDirective,
   ],
 })
