@@ -39,7 +39,6 @@
           }
         ],
         "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
-        "scripts": [],
         "browser": "apps/cookbook/src/main.ts",
         "plugins": [
           {
