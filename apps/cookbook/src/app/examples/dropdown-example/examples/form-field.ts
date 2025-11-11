@@ -4,9 +4,23 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-form-field',
-  template: `<kirby-form-field [label]="'Label'" [message]="'Message'">
+  template: `<kirby-form-field [label]="'Label for medium dropdown'" [message]="'Message'">
   <kirby-dropdown
     placeholder="Dropdown in form field"
+    [items]="[
+      'Apple',
+      'Banana',
+      'Blackberry',
+      'Blueberry',
+      'Grapes',
+      ]"
+  ></kirby-dropdown>
+</kirby-form-field>
+
+<kirby-form-field [label]="'Label for small dropdown'" [message]="'Message'">
+  <kirby-dropdown
+    placeholder="Dropdown in form field"
+    [size]="'sm'"
     [items]="[
       'Apple',
       'Banana',
@@ -21,7 +35,10 @@ const config = {
 
 @Component({
   selector: config.selector,
-  template: config.template,
+  template: `
+    <div class="column-layout constrain-width">${config.template}</div>
+  `,
+  styleUrl: './dropdown-examples.shared.scss',
   imports: [DropdownComponent, FormFieldComponent],
 })
 export class DropdownExampleFormFieldComponent {
