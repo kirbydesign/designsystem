@@ -236,7 +236,7 @@ export class FormFieldComponent
       );
     }
 
-    if (this.label && this.radioGroupElement) {
+    if (this.label && (this.radioGroupElement || this.dropdown)) {
       this.renderer.setAttribute(this.nestedInteractiveElement, 'aria-labelledby', this._labelId);
     }
   }
