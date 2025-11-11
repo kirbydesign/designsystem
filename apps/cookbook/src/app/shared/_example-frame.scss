@@ -14,4 +14,9 @@
   &.no-padding {
     padding: 0;
   }
+
+  @include utils.media('<medium') {
+    padding: 0;
+    border: none;
+  }
 }
