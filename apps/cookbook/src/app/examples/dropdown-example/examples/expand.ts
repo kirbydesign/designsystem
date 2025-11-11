@@ -4,15 +4,14 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 const config = {
   selector: 'cookbook-dropdown-example-expand',
   template: `<kirby-dropdown
-  [size]="size"
   placeholder="Block level Dropdown"
   aria-label="Choose your favorite fruit"
   expand="block"
   [items]="[
-    'Apple',   
+    'Apple',
     'Banana',
     'Blackberry',
-    'Blueberry',   
+    'Blueberry',
     'Grapes',
     ]"
 ></kirby-dropdown>`,
@@ -25,5 +24,4 @@ const config = {
 })
 export class DropdownExampleExpandComponent {
   template: string = config.template;
-  @Input() size: string;
 }

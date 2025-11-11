@@ -135,9 +135,21 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.disabled ? 'disabled' : null;
   }
 
+  @Output() hasErrorChange = new EventEmitter<boolean>();
+
+  private _hasError: boolean;
   @HostBinding('class.error')
   @Input()
-  hasError: boolean;
+  get hasError(): boolean {
+    return this._hasError;
+  }
+
+  set hasError(value: boolean) {
+    if (this._hasError !== value) {
+      this._hasError = value;
+      this.hasErrorChange.emit(this._hasError);
+    }
+  }
 
   @Input()
   size: 'sm' | 'md' = 'md';
