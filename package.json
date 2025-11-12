@@ -1,6 +1,7 @@
 {
   "name": "kirbydesign",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
   "engines": {
     "node": "24",
