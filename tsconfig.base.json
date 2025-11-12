@@ -79,6 +79,7 @@
       "@kirbydesign/extensions-angular/spot-illustration": [
         "libs/extensions/angular/dist/spot-illustration"
       ],
+      "@repo/docs-import-map/*": ["tools/docs-import-map/*"],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]
     }
