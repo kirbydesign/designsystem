@@ -60,7 +60,7 @@
             "options": {
               "distPackageJsonPath": "libs/designsystem/dist/package.json",
               "distPath": "libs/designsystem/dist",
-              "outputPath": "apps/cookbook/src/app/shared/import-code-viewer/generated-import-map.ts"
+              "outputPath": "tools/docs-import-map/dist/designsystem.ts"
             }
           }
         ]
