@@ -18,14 +18,12 @@ export default function docsImportMapPlugin(options: DocsImportMapPluginOptions)
       // Generate the import map on build start (initial build and every rebuild in watch mode)
       build.onStart(async () => {
         console.info(
-          `[docs-import-map] Generating: ${colorYellow}${engine.getOutputPath()}${colorReset}`
+          `[docs-import-map] Checking: ${colorYellow}${engine.getOutputPath()}${colorReset}`
         );
 
         try {
           engine.generate();
-          console.info(
-            `[docs-import-map] ${colorGreen}✓${colorReset} Successfully generated import map`
-          );
+          console.info(`[docs-import-map] ${colorGreen}✓${colorReset} Complete`);
         } catch (error) {
           console.error(
             `[docs-import-map] Failed to generate import map: ${error instanceof Error ? error.message : String(error)}`

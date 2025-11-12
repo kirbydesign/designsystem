@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join, resolve } from 'path';
 
 interface EntryPoint {
@@ -79,7 +79,7 @@ export class DocsImportMapEngine {
       return entryPoints;
     } catch (error) {
       throw new Error(
-        `Error reading dist/package.json: ${error instanceof Error ? error.message : String(error)}\n` +
+        `\n[docs-import-map] Error reading dist/package.json: ${error instanceof Error ? error.message : String(error)}\n` +
           'Make sure to build the design system first: nx build designsystem'
       );
     }
@@ -129,7 +129,7 @@ export class DocsImportMapEngine {
       return exports;
     } catch (error) {
       console.warn(
-        `Warning: Could not read ${filePath}: ${error instanceof Error ? error.message : String(error)}`
+        `\n[docs-import-map] Warning: Could not read ${filePath}: ${error instanceof Error ? error.message : String(error)}`
       );
       return [];
     }
@@ -142,15 +142,15 @@ export class DocsImportMapEngine {
     const map: ComponentToPackageEntryMap = {};
     const entryPoints = this.getExportEntryPoints();
 
-    console.log(`\nFound ${entryPoints.length} entry points in dist/package.json exports`);
+    console.log(
+      `\n[docs-import-map] Found ${entryPoints.length} entry points in dist/package.json exports`
+    );
 
     for (const { packageName, typesPath } of entryPoints) {
       const fullTypesPath = join(this.distPath, typesPath);
       const exports = this.parseTypeDefinitionFile(fullTypesPath);
 
       if (exports.length > 0) {
-        console.log(`  ${packageName}: ${exports.length} exports`);
-
         for (const exportName of exports) {
           // Only include exports that look like components, modules, directives, etc.
           // Filter out internal Angular symbols (starting with ɵ) and lowercase-only names
@@ -163,7 +163,7 @@ export class DocsImportMapEngine {
 
           if (map[exportName] && map[exportName] !== packageName) {
             console.warn(
-              `  Warning: ${exportName} exported from both ${map[exportName]} and ${packageName}`
+              `\n[docs-import-map] Warning: ${exportName} exported from both ${map[exportName]} and ${packageName}`
             );
           }
           map[exportName] = packageName;
@@ -237,19 +237,47 @@ export const COMPONENT_TO_PACKAGE_ENTRY_MAP: ComponentToPackageEntryMap = {
 
   /**
    * Main transformation method - generates the import map file
+   * Only writes if the content has changed or the file doesn't exist
    */
   public generate(): void {
     console.log('[docs-import-map] Generating import map from design system dist package...');
 
     const componentMap = this.buildComponentMap();
 
-    console.log(`\nTotal exports mapped: ${Object.keys(componentMap).length}`);
+    console.log(`\n[docs-import-map]Total exports mapped: ${Object.keys(componentMap).length}`);
 
     const fileContent = this.generateTypeScriptFile(componentMap);
 
-    writeFileSync(this.outputPath, fileContent, 'utf-8');
+    // Only write if the file doesn't exist or the content has changed
+    const shouldWrite = this.shouldWriteFile(fileContent);
 
-    console.log(`[docs-import-map] Generated mapping file: ${this.outputPath}`);
+    if (shouldWrite) {
+      writeFileSync(this.outputPath, fileContent, 'utf-8');
+      console.log(`\n[docs-import-map] Generated mapping file: ${this.outputPath}`);
+    } else {
+      console.log(`\n[docs-import-map] No changes detected, skipping write: ${this.outputPath}`);
+    }
+  }
+
+  /**
+   * Check if the file should be written
+   * Returns true if the file doesn't exist or if the content has changed
+   */
+  private shouldWriteFile(newContent: string): boolean {
+    if (!existsSync(this.outputPath)) {
+      return true;
+    }
+
+    try {
+      const existingContent = readFileSync(this.outputPath, 'utf-8');
+      return existingContent !== newContent;
+    } catch (error) {
+      // If we can't read the file, write it anyway
+      console.warn(
+        `\n[docs-import-map] Could not read existing file: ${error instanceof Error ? error.message : String(error)}`
+      );
+      return true;
+    }
   }
 
   /**
