@@ -354,7 +354,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
           this.setVerticalDirection(entry);
         }
         this.showDropdown();
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       };
       this.intersectionObserverRef = new IntersectionObserver(callback, options);
       this.intersectionObserverRef.observe(this.cardElement.nativeElement);
