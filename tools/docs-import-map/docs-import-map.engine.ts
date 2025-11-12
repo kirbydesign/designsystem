@@ -11,14 +11,19 @@ interface ComponentToPackageEntryMap {
 }
 
 export class DocsImportMapEngine {
-  private distPackageJsonPath: string;
   private distPath: string;
   private outputPath: string;
 
-  constructor(distPackageJsonPath: string, distPath: string, outputPath: string) {
-    this.distPackageJsonPath = resolve(distPackageJsonPath);
+  constructor(distPath: string, outputPath: string) {
     this.distPath = resolve(distPath);
     this.outputPath = resolve(outputPath);
+  }
+
+  /**
+   * Get the path to the dist package.json file
+   */
+  private get distPackageJsonPath(): string {
+    return join(this.distPath, 'package.json');
   }
 
   /**

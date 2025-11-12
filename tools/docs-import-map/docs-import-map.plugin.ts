@@ -2,7 +2,6 @@ import type { Plugin, PluginBuild } from 'esbuild';
 import { DocsImportMapEngine } from './docs-import-map.engine.js';
 
 export interface DocsImportMapPluginOptions {
-  distPackageJsonPath: string;
   distPath: string;
   outputPath: string;
 }
@@ -11,11 +10,7 @@ export default function docsImportMapPlugin(options: DocsImportMapPluginOptions)
   return {
     name: 'docs-import-map-plugin',
     setup(build: PluginBuild) {
-      const engine = new DocsImportMapEngine(
-        options.distPackageJsonPath,
-        options.distPath,
-        options.outputPath
-      );
+      const engine = new DocsImportMapEngine(options.distPath, options.outputPath);
       const colorGreen = '\x1b[92m';
       const colorYellow = '\x1b[93m';
       const colorReset = '\x1b[0m';
