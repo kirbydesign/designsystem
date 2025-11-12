@@ -13,10 +13,12 @@ interface ComponentToPackageEntryMap {
 export class DocsImportMapEngine {
   private distPath: string;
   private outputPath: string;
+  private verbose: boolean;
 
-  constructor(distPath: string, outputPath: string) {
+  constructor(distPath: string, outputPath: string, verbose = false) {
     this.distPath = resolve(distPath);
     this.outputPath = resolve(outputPath);
+    this.verbose = verbose;
   }
 
   /**
@@ -142,9 +144,11 @@ export class DocsImportMapEngine {
     const map: ComponentToPackageEntryMap = {};
     const entryPoints = this.getExportEntryPoints();
 
-    console.log(
-      `\n[docs-import-map] Found ${entryPoints.length} entry points in dist/package.json exports`
-    );
+    if (this.verbose) {
+      console.log(
+        `\n[docs-import-map] Found ${entryPoints.length} entry points in dist/package.json exports`
+      );
+    }
 
     for (const { packageName, typesPath } of entryPoints) {
       const fullTypesPath = join(this.distPath, typesPath);
@@ -161,7 +165,7 @@ export class DocsImportMapEngine {
             continue;
           }
 
-          if (map[exportName] && map[exportName] !== packageName) {
+          if (map[exportName] && map[exportName] !== packageName && this.verbose) {
             console.warn(
               `\n[docs-import-map] Warning: ${exportName} exported from both ${map[exportName]} and ${packageName}`
             );
@@ -238,13 +242,18 @@ export const COMPONENT_TO_PACKAGE_ENTRY_MAP: ComponentToPackageEntryMap = {
   /**
    * Main transformation method - generates the import map file
    * Only writes if the content has changed or the file doesn't exist
+   * @returns true if the file was written, false if skipped
    */
-  public generate(): void {
-    console.log('[docs-import-map] Generating import map from design system dist package...');
+  public generate(): boolean {
+    if (this.verbose) {
+      console.log('[docs-import-map] Generating import map from design system dist package...');
+    }
 
     const componentMap = this.buildComponentMap();
 
-    console.log(`\n[docs-import-map]Total exports mapped: ${Object.keys(componentMap).length}`);
+    if (this.verbose) {
+      console.log(`\n[docs-import-map] Total exports mapped: ${Object.keys(componentMap).length}`);
+    }
 
     const fileContent = this.generateTypeScriptFile(componentMap);
 
@@ -253,9 +262,14 @@ export const COMPONENT_TO_PACKAGE_ENTRY_MAP: ComponentToPackageEntryMap = {
 
     if (shouldWrite) {
       writeFileSync(this.outputPath, fileContent, 'utf-8');
-      console.log(`\n[docs-import-map] Generated mapping file: ${this.outputPath}`);
+      // Always log when writing changes
+      console.log(`[docs-import-map] Generated mapping file: ${this.outputPath}`);
+      return true;
     } else {
-      console.log(`\n[docs-import-map] No changes detected, skipping write: ${this.outputPath}`);
+      if (this.verbose) {
+        console.log(`\n[docs-import-map] No changes detected, skipping write: ${this.outputPath}`);
+      }
+      return false;
     }
   }
 

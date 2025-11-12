@@ -42,7 +42,7 @@
         "browser": "apps/cookbook/src/main.ts",
         "plugins": [
           {
-            "path": "tools/sass-to-ts/dist/sass-to-ts.plugin.js",
+            "path": "tools/sass-to-ts/sass-to-ts.plugin.ts",
             "options": {
               "watchGlob": [
                 "libs/core/src/helpers/*.scss",
@@ -56,7 +56,7 @@
             }
           },
           {
-            "path": "tools/docs-import-map/dist/docs-import-map.plugin.js",
+            "path": "tools/docs-import-map/docs-import-map.plugin.ts",
             "options": {
               "distPath": "libs/designsystem/dist",
               "outputPath": "tools/docs-import-map/dist/designsystem.ts"
