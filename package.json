@@ -19,8 +19,6 @@
     "build": "nx run-many -t build",
     "start": "nx dev designsystem",
     "start:extensions": "nx dev extensions-angular",
-    "start:ios": "nx build flows && npx cap run ios --workspace=apps/flows",
-    "start:android": "nx build flows && npx cap run android --workspace=apps/flows",
     "test:headless-browser": "nx run-many -t test --output-style=stream -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "storybook": "nx storybook designsystem",
