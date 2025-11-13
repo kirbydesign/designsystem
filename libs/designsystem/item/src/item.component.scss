@@ -32,13 +32,22 @@
   }
 }
 
-ion-item {
-  &:focus-within {
-    overflow: visible;
+:host-context(kirby-card) {
+  &:first-child > ion-item::part(native):focus-visible {
+    border-top-left-radius: utils.border-radius('n');
+    border-top-right-radius: utils.border-radius('n');
+  }
 
-    &::part(native):focus-visible {
-      @include interaction-state.apply-focus-ring;
-    }
+  &:last-child > ion-item::part(native):focus-visible {
+    border-bottom-left-radius: utils.border-radius('n');
+    border-bottom-right-radius: utils.border-radius('n');
+  }
+}
+
+ion-item {
+  &::part(native):focus-visible {
+    outline: 2px solid utils.$focus-ring-color;
+    outline-offset: -2px;
   }
   @include interaction-state.apply-hover-ionic('xxxs');
   @include interaction-state.apply-active-ionic('xxs');
