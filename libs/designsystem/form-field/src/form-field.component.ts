@@ -153,24 +153,7 @@ export class FormFieldComponent
   }
 
   ngAfterContentInit(): void {
-    // Measure the width of all slotted affix elements,
-    // and apply their width + standard padding to the input elements
-    // padding, so the start/end of the input is correctly indented.
-    if (this.input) {
-      this.affixElements.forEach((affix) => {
-        this.resizeObserverService.observe(affix.el, (entry) => {
-          const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
-          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
-          const existingPadding = parseInt(DesignTokenHelper.size('s'));
-
-          this.renderer.setStyle(
-            this.input.nativeElement,
-            `${padding}`,
-            `${affixWidth + existingPadding}px`
-          );
-        });
-      });
-    }
+    this.handleAffixOffset();
   }
 
   ngAfterContentChecked(): void {
@@ -263,5 +246,31 @@ export class FormFieldComponent
       this.dateInput?.useNativeDatePicker &&
       !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
     );
+  }
+
+  private handleAffixOffset() {
+    // Measure the width of all slotted affix elements,
+    // and apply their width + standard padding to the input elements
+    // padding, so the start/end of the input is correctly indented.
+    if (this.input) {
+      this.affixElements.forEach((affix) => {
+        this.resizeObserverService.observe(affix.el, (entry) => {
+          const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
+          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
+          const existingPadding = parseInt(DesignTokenHelper.size('s'));
+
+          this.renderer.setStyle(
+            this.input.nativeElement,
+            `${padding}`,
+            `${affixWidth + existingPadding}px`
+          );
+
+          const dateMask = this.element.querySelector('.date-mask');
+          if (dateMask) {
+            this.renderer.setStyle(dateMask, `${padding}`, `${affixWidth + existingPadding}px`);
+          }
+        });
+      });
+    }
   }
 }
