@@ -33,7 +33,13 @@
 }
 
 ion-item {
-  @include interaction-state.apply-focus-visible-background('xxxs');
+  &:focus-within {
+    overflow: visible;
+
+    &::part(native):focus-visible {
+      @include interaction-state.apply-focus-ring;
+    }
+  }
   @include interaction-state.apply-hover-ionic('xxxs');
   @include interaction-state.apply-active-ionic('xxs');
 
