@@ -12,7 +12,7 @@
   "targets": {
     "build": {
       "executor": "@angular-builders/custom-webpack:browser",
-      "dependsOn": ["generate-docs-import-map"],
+      "dependsOn": ["angular:build"],
       "options": {
         "customWebpackConfig": {
           "path": "./tools/sass-to-ts/webpack.sass-to-ts.config.ts",
