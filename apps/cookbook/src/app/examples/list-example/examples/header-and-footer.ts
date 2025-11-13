@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import {
   ListComponent,
   ListFooterDirective,
@@ -12,7 +11,7 @@ import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
-export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list 
+export const template = `<kirby-list 
   [items]="items" 
   (itemSelect)="onItemSelect($event)">
     <!-- HEADER-->
@@ -49,23 +48,19 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list
 
 @Component({
   selector: 'cookbook-list-with-header-and-footer-example',
-  template: `
-    <kirby-page title="List with header and footer">
-      <kirby-page-content>${ListWithHeaderAndFooterExampleTemplate}</kirby-page-content>
-    </kirby-page>
-  `,
+  template: template,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
   imports: [
-    PageComponent,
     ListComponent,
     ItemComponent,
     ButtonComponent,
     LabelComponent,
     ListHeaderComponent,
     ListItemTemplateDirective,
-    PageContentComponent,
     ListFooterDirective,
     ListHeaderDirective,
   ],
 })
-export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {}
+export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {
+  template: string = template;
+}

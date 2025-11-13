@@ -80,7 +80,6 @@ libs/designsystem/tsconfig.spec.json
 
 // apps folders
 apps/cookbook/tsconfig.json
-apps/flows/tsconfig.json
 ```
 
 Under `path`, add you SE:
@@ -145,10 +144,7 @@ The library should now compile.
 
 ## 7. Verify the entry
 
-To verify the move is successfull, do the following;
-
-1. Run `npm run start` -> navigate to the cookbook page for the component and check that the component looks correct. Also check that there is no errors in the console.
-2. Run `npm run start:flows` -> move around in the app and verify there are no errors in the console.
+To verify the move is successful, run `npm run start` -> navigate to the cookbook page for the component and check that the component looks correct. Also check that there is no errors in the console.
 
 ### 7.a Verify in seperate project
 
