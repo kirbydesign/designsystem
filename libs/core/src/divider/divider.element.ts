@@ -1,23 +1,16 @@
-import { css, html } from 'lit';
+import { CSSResultGroup, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import KirbyElement from '../internal/kirby-element';
 
+import baseStyles from '../styles/element.base.styles';
+
+import styles from './divider.element.styles';
+
 export class KirbyDividerElement extends KirbyElement {
   static override tagName = 'kirby-divider';
-  @property({ type: Boolean }) hasMargin = true;
 
-  static styles = css`
-    hr {
-      margin-top: 4px;
-      margin-bottom: 4px;
-      border: 0;
-      border-top: 1px solid var(--kirby-divider-color, #ccc);
-    }
-    hr.no-margin {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  `;
+  static styles: CSSResultGroup = [baseStyles, styles];
+  @property({ type: Boolean }) hasMargin = true;
 
   render() {
     return html`
