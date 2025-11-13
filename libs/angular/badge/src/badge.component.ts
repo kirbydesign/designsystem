@@ -12,6 +12,7 @@ import type { BadgeSize, BadgeThemeColor, KirbyBadgeElement } from '@kirbydesign
 @Component({
   selector: 'kirby-badge',
   template: '<ng-content></ng-content>',
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KirbyBadgeComponent {

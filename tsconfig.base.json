@@ -18,6 +18,7 @@
     "paths": {
       "@kirbydesign/angular/badge": ["libs/angular/dist/badge"],
       "@kirbydesign/angular/spinner": ["libs/angular/dist/spinner"],
+      "@kirbydesign/angular/divider": ["libs/angular/dist/divider"],
       "@kirbydesign/core": ["libs/core/dist/"],
       "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/dist/*"],
