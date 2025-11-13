@@ -1,46 +1,34 @@
 import { Component } from '@angular/core';
-import { ListItemsNoDividersExampleTemplate } from '../../examples/list-example/examples/items-no-dividers';
-import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { IphoneComponent } from '../../iphone/iphone.component';
+import { ListItemsNoDividersExampleComponent } from '../../examples/list-example/examples/items-no-dividers';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ListColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/colored-items';
-import { ListItemsExampleTemplate } from '~/app/examples/list-example/examples/items';
-import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list-example/examples/header-and-footer';
-import { ListWithSectionsExampleTemplate } from '~/app/examples/list-example/examples/sections';
-import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/sections-and-colored-items';
-import { ListWithSectionsAndStandAloneExampleTemplate } from '~/app/examples/list-example/examples/sections-with-standalone';
-import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
-import { ListWithStandAloneExampleTemplate } from '~/app/examples/list-example/examples/stand-alone';
+import { ListItemsExampleComponent } from '~/app/examples/list-example/examples/items';
+import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list-example/examples/header-and-footer';
+import { ListWithSectionsExampleComponent } from '~/app/examples/list-example/examples/sections';
+import { ListWithSectionsAndStandAloneExampleComponent } from '~/app/examples/list-example/examples/sections-with-standalone';
+import { ListSelectableItemsExampleComponent } from '~/app/examples/list-example/examples/selectable-items';
+import { ListWithStandAloneExampleComponent } from '~/app/examples/list-example/examples/stand-alone';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
 
 @Component({
   selector: 'cookbook-list-showcase',
   templateUrl: './list-showcase.component.html',
   styleUrls: ['./list-showcase.component.scss'],
   imports: [
-    CodeViewerComponent,
-    IphoneComponent,
     ApiDescriptionPropertiesComponent,
     ImportViewerComponent,
+    ExampleViewerComponent,
+    ListItemsExampleComponent,
+    ListItemsNoDividersExampleComponent,
+    ListWithHeaderAndFooterExampleComponent,
+    ListWithSectionsExampleComponent,
+    ListWithStandAloneExampleComponent,
+    ListWithSectionsAndStandAloneExampleComponent,
+    ListSelectableItemsExampleComponent,
   ],
 })
 export class ListShowcaseComponent {
-  items: string = ListItemsExampleTemplate;
-  selectableItemsExampleTemplate: string = ListSelectableItemsExampleTemplate;
-  coloredItemsExampleTemplate: string = ListColoredItemsExampleTemplate;
-  sectionsAndColoredItemsExampleTemplate: string = ListWithSectionsAndColoredItemsExampleTemplate;
-  headerAndFooterExampleTemplate: string = ListWithHeaderAndFooterExampleTemplate;
-  sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
-  standAloneExampleTemplate: string = ListWithStandAloneExampleTemplate;
-  sectionsAndStandAloneExampleTemplate: string = ListWithSectionsAndStandAloneExampleTemplate;
-  noDividersExampleTemplate: string = ListItemsNoDividersExampleTemplate;
-
-  exampleHtml = exampleHtml;
-
-  sectionHeaderExampleHtml: string =
-    '<GridLayout *kirbyListSectionHeader="let section" ios:height="50">...</GridLayout>';
   properties: ApiDescriptionProperty[] = [
     {
       name: 'showDivider',
@@ -53,13 +41,6 @@ export class ListShowcaseComponent {
       description: 'Emitting event when an item is selected',
       defaultValue: 'null',
       type: ['any'],
-    },
-    {
-      name: 'getItemColor',
-      description:
-        ' Callback used by each item in the list. Should return a ThemeColor which will become the background color of that item',
-      defaultValue: 'null',
-      type: ['ThemeColor'],
     },
     {
       name: 'getSectionName',
