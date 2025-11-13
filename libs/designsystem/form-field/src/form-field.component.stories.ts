@@ -1,4 +1,5 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { userEvent, within } from 'storybook/test';
 
 import {
   FormFieldComponent,
@@ -73,4 +74,12 @@ export const DateInputWithPrefixIcon: Story = {
       </kirby-form-field>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByRole('textbox');
+
+    await userEvent.click(input);
+    await userEvent.type(input, '987654');
+  },
 };
