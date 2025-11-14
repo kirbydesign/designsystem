@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 // Publish script.
 // ---------------
 // Serves two distinct purposes:
@@ -20,11 +18,14 @@
 //
 // NOTICE: This script automatically determines if running on CI, or a local developer machine.
 
-const cp = require('child_process');
-const fs = require('fs-extra');
-const path = require('path');
-const isCI = require('is-ci');
-const { forwardScssFiles } = require('./forward-scss-files');
+import cp from 'child_process';
+import fs from 'fs-extra';
+import path from 'path';
+import isCI from 'is-ci';
+import { forwardScssFiles } from './forward-scss-files.js';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 const packageAlias = '@kirbydesign';
 

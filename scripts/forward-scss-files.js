@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 function pipe(...fns) {
   return (x) => fns.reduce((v, f) => f(v), x);
@@ -64,12 +64,7 @@ function createForwardScssFile({
   fs.writeFileSync(targetFilePath, forwardRule);
 }
 
-module.exports.forwardScssFiles = ({
-  sourceRootDir,
-  targetRootDir,
-  packageAlias,
-  sharedRootDir,
-}) => {
+export function forwardScssFiles({ sourceRootDir, targetRootDir, packageAlias, sharedRootDir }) {
   const scssFilesToForward = findAllFilesWithExtension('scss', sourceRootDir);
   scssFilesToForward.forEach((sourceFilePath) => {
     createForwardScssFile({
@@ -80,4 +75,4 @@ module.exports.forwardScssFiles = ({
       sharedRootDir,
     });
   });
-};
+}

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import exampleHtml from '../../examples/fonts-example/fonts-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/fonts-example/fonts-example.component.html' with { loader: 'text' };
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({

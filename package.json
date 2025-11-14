@@ -1,6 +1,7 @@
 {
   "name": "kirbydesign",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
   "engines": {
     "node": "24",
@@ -25,19 +26,18 @@
     "build-storybook": "nx build-storybook designsystem",
     "chromatic": "chromatic",
     "publish": "node ./scripts/publish.js",
-    "postinstall": "npm run transpile:tools && npm run extract-scss-variables && npm run generate-design-tokens && npx nx build core && npm run transpile:generate-mocks",
-    "transpile:tools": "tsc -b tools/sass-to-ts",
+    "postinstall": "npm run transpile:tools && npm run extract-scss-variables && npm run generate-design-tokens && npx nx build core && npm run transpile:generate-mocks && npm run generate-docs-import-map",
+    "sync-node-version": "node ./scripts/sync-node-version.js",
+    "transpile:tools": "tsc -b tools/sass-to-ts && tsc -b tools/docs-import-map",
     "transpile:generate-mocks": "tsc -b tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
-    "sync-node-version": "node ./scripts/sync-node-version.js",
     "generate-angular-proxies": "ts-node tools/generate-proxies/generate-angular-proxies.ts",
     "generate-design-tokens": "sass libs/core/src/scss/themes/design-tokens.scss libs/core/src/scss/themes/design-tokens.css --no-source-map",
-    "generate-docs-import-map": "node ./scripts/generate-docs-import-map.js",
+    "generate-docs-import-map": "nx build designsystem && node ./scripts/generate-docs-import-map.js",
     "nx": "nx"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^20.0.0",
     "@angular-devkit/build-angular": "^20.1.1",
     "@angular-devkit/core": "^20.1.0",
     "@angular-devkit/schematics": "^20.1.0",
