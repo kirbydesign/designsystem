@@ -54,7 +54,7 @@ export class FormFieldComponent
     | HTMLTextAreaElement
     | HTMLIonRadioGroupElement;
   private nestedInteractiveErrorSubscription: Subscription;
-  private _message: string | null;
+  private _message: string | null | undefined;
 
   showDefaultCalendarIcon = false;
 
@@ -63,12 +63,12 @@ export class FormFieldComponent
   _errorMessageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
   _messageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
 
-  @Input() label: string;
-  @Input() get message(): string | null {
+  @Input() label: string | undefined;
+  @Input() get message(): string | null | undefined {
     return this._message;
   }
 
-  set message(value: string | null) {
+  set message(value: string | null | undefined) {
     this._message = value;
     this.setNestedInteractiveElementAttributes();
   }
