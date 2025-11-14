@@ -11,14 +11,12 @@
   (click)="vm.toggleSubmenu()"
 >
   {{ vm.title() }}
-  @if (vm.showDisclosure()) {
-    <kirby-icon
-      slot="end"
-      name="arrow-more"
-      class="disclosure"
-      [class.rotate]="vm.isExpanded()"
-    ></kirby-icon>
-  }
+  <kirby-icon
+    slot="end"
+    name="arrow-more"
+    class="disclosure"
+    [class.rotate]="vm.isExpanded()"
+  ></kirby-icon>
 </button>
 @if (vm.isExpanded()) {
   <div [@dropDownMenu] [@.disabled]="vm.disableAnimations()">

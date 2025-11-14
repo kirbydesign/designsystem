@@ -36,49 +36,49 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     id: 'menu-item-1',
-    title: 'Menu Item 1',
+    title: 'Menu item 1',
     icon: 'copy',
     children: [
       {
-        id: 'menu-1-link-1',
-        title: 'Level 2 Link 1',
-        link: { relativeLink: '/menu-1-link-1' },
+        id: 'menu-item-1-1',
+        title: 'Menu item 1.1',
+        link: { relativeLink: '/menu-item/1/2' },
       },
       {
-        id: 'menu-1-sub-menu-1',
-        title: 'Level 2 Submenu 1',
+        id: 'menu-item-1-2',
+        title: 'Menu item 1.2',
         children: [
           {
-            id: 'menu-1-sub-1-link-1',
-            title: 'Level 3 Link 1',
+            id: 'menu-item-1-2-1',
+            title: 'Menu item 1.2.1',
             link: { relativeLink: '/menu-1-sub-1-link-1' },
           },
           {
-            id: 'menu-1-sub-1-sub-1',
-            title: 'Level 3 Submenu 1',
+            id: 'menu-item-1-2-2',
+            title: 'Menu item 1.2.2',
             children: [
               {
-                id: 'menu-1-sub-1-sub-1-link-1',
-                title: 'Level 4 Link 1',
+                id: 'menu-item-1-2-2-1',
+                title: 'Menu item 1.2.2.1',
                 link: { relativeLink: '/menu-1-sub-1-sub-1-link-1' },
               },
               {
-                id: 'menu-1-sub-1-sub-1-link-2',
-                title: 'Level 4 Link 2',
+                id: 'menu-item-1-2-2-2',
+                title: 'Menu item 1.2.2.2',
                 link: { relativeLink: '/menu-1-sub-1-sub-1-link-2' },
               },
             ],
           },
           {
-            id: 'menu-1-sub-1-link-2',
-            title: 'Level 3 Link 2',
+            id: 'menu-item-1-2-3',
+            title: 'Menu item 1.2.3',
             link: { relativeLink: '/menu-1-sub-1-link-2' },
           },
         ],
       },
       {
-        id: 'menu-1-link-2',
-        title: 'Level 2 Link 2',
+        id: 'menu-item-1-3',
+        title: 'Menu item 1.3',
         link: { relativeLink: '/menu-1-link-2' },
       },
     ],
@@ -89,47 +89,47 @@ const menuItemsExample: SidebarMenuItem[] = [
     icon: 'copy',
     children: [
       {
-        id: 'menu-2-link-1',
-        title: 'Level 2 Link 1',
+        id: 'menu-item-2-1',
+        title: 'Menu Item 2.1',
         link: { relativeLink: '/menu-2-link-1' },
       },
       {
-        id: 'menu-2-sub-menu-1',
-        title: 'Level 2 Submenu 1',
+        id: 'menu-item-2-2',
+        title: 'Menu Item 2.2',
         children: [
           {
-            id: 'menu-2-sub-1-link-1',
-            title: 'Level 3 Link 1',
+            id: 'menu-item-2-2-1',
+            title: 'Menu Item 2.2.1',
             link: { relativeLink: '/menu-2-sub-1-link-1' },
           },
           {
-            id: 'menu-2-sub-1-sub-1',
-            title: 'Level 3 Submenu 1',
+            id: 'menu-item-2-2-2',
+            title: 'Menu Item 2.2.2',
             children: [
               {
-                id: 'menu-2-sub-1-sub-1-link-1',
-                title: 'Level 4 Link 1',
+                id: 'menu-item-2-2-2-1',
+                title: 'Menu item 2.2.2.1',
                 link: { relativeLink: '/menu-2-sub-1-sub-1-link-1' },
               },
               {
-                id: 'menu-2-sub-1-sub-1-link-2',
-                title: 'Level 4 Link 2',
+                id: 'menu-item-2-2-2-2',
+                title: 'Menu item 2.2.2.2',
                 link: { relativeLink: '/menu-2-sub-1-sub-1-link-2' },
               },
             ],
           },
           {
-            id: 'menu-2-sub-1-sub-2',
-            title: 'Level 3 Submenu 2',
+            id: 'menu-item-2-2-3',
+            title: 'Menu Item 2.2.3',
             children: [
               {
-                id: 'menu-2-sub-1-sub-2-link-1',
-                title: 'Level 4 Link 1',
+                id: 'menu-item-2-2-3-1',
+                title: 'Menu item 2.2.3.1',
                 link: { relativeLink: '/menu-2-sub-1-sub-2-link-1' },
               },
               {
-                id: 'menu-2-sub-1-sub-2-link-2',
-                title: 'Level 4 Link 2',
+                id: 'menu-item-2-2-3-2',
+                title: 'Menu item 2.2.3.2',
                 link: { relativeLink: '/menu-2-sub-1-sub-2-link-2' },
               },
             ],
@@ -137,26 +137,26 @@ const menuItemsExample: SidebarMenuItem[] = [
         ],
       },
       {
-        id: 'menu-2-sub-menu-2',
-        title: 'Level 2 Submenu 2',
+        id: 'menu-item-2-3',
+        title: 'Menu item 2.3',
         children: [
           {
-            id: 'menu-2-sub-2-link-1',
-            title: 'Level 3 Link 1',
+            id: 'menu-item-2-3-1',
+            title: 'Menu item 2.3.1',
             link: { relativeLink: '/menu-2-sub-2-link-1' },
           },
           {
-            id: 'menu-2-sub-2-sub-1',
-            title: 'Level 3 Submenu 1',
+            id: 'menu-item-2-3-2',
+            title: 'Menu item 2.3.2',
             children: [
               {
-                id: 'menu-2-sub-2-sub-1-link-1',
-                title: 'Level 4 Link 1',
+                id: 'menu-item-2-3-2-1',
+                title: 'Menu item 2.3.2.1',
                 link: { relativeLink: '/menu-2-sub-2-sub-1-link-1' },
               },
               {
-                id: 'menu-2-sub-2-sub-1-link-2',
-                title: 'Level 4 Link 2',
+                id: 'menu-item-2-3-2-2',
+                title: 'Menu item 2.3.2.2',
                 link: { relativeLink: '/menu-2-sub-2-sub-1-link-2' },
               },
             ],
@@ -304,31 +304,4 @@ export const AutoCollapse: Story = {
     autoCollapse: true,
     mainAreaContent: '<h1>Sidebar with Auto Collapse Items</h1>',
   },
-};
-
-/**
- * The sidebar can be used without a header and/or footer, to provide more space for the menu items.
- * In this example, the sidebar is rendered without a footer.
- */
-export const WithoutFooter: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    mainAreaContent: `<h1>Sidebar without Header and Footer</h1>
-    <p>This sidebar does not have a header or footer.</p>`,
-  },
-  render: ({ mainAreaContent, ...args }) => ({
-    props: args,
-    template: `
-      <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
-        <kirby-x-sidebar ${argsToTemplate(args)}>
-          <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo.svg" alt=""/>
-          </kirby-x-sidebar-header>
-        </kirby-x-sidebar>
-        <div style="padding: var(--kirby-spacing-s);">
-          ${mainAreaContent}
-        </div>
-      </div>`,
-  }),
 };

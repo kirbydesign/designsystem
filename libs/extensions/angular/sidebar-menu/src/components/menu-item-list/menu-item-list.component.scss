@@ -5,32 +5,13 @@
   flex-direction: column;
 
   &.lg {
-    padding: var(--kirby-spacing-xxxs, 4px) var(--kirby-spacing-xxs, 8px);
-  }
-
-  &.md {
-    padding: var(--kirby-spacing-xxs, 8px) 0;
-  }
-
-  &.sm {
-    background: var(--white-overlay-10, rgb(255 255 255 / 10%));
-    padding: var(--kirby-spacing-xxs, 8px);
-    margin: var(--kirby-spacing-xxs, 8px);
-  }
-
-  &.xs {
-    background: var(--white-overlay-10, rgb(255 255 255 / 10%));
-    padding: var(--kirby-spacing-xxs, 8px);
-    margin: var(--kirby-spacing-xxs, 8px) 0;
-  }
-
-  &:not(.lg) {
-    border-radius: var(--kirby-border-radius-n, 16px);
+    padding: 0 var(--kirby-spacing-xxs, 8px);
   }
 }
 
 kirby-divider {
   display: flex;
   background: var(--white-overlay-20, rgb(255 255 255 / 20%));
-  margin: var(--kirby-spacing-xxs, 8px) 0;
+  height: 1px;
+  margin: 8px 0;
 }

@@ -37,7 +37,7 @@ export class MenuAnchorItemComponent<T extends SidebarMenuItem> {
     id: computed(() => this.item().id),
     size: this.size,
     badge: computed(() => this.item().badge),
-    icon: computed(() => (this.size() === 'lg' ? this.item().icon : 'arrow-right-fill')),
+    icon: computed(() => this.item().icon),
     isSelected: computed(() => this.item().selected ?? false),
     title: computed(() => this.item().title ?? ''),
     selectItem: this.#selectItem.bind(this),

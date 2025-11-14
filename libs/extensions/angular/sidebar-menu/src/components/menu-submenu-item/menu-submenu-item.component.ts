@@ -1,5 +1,5 @@
 import { Component, computed, ElementRef, forwardRef, inject, input, Signal } from '@angular/core';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { Badge, SidebarMenuItem } from '../../models';
 import { MenuItemComponent } from '../menu-item';
 import { MenuItemSize } from '../../types';
@@ -15,7 +15,6 @@ type ViewModel<T> = {
   size: Signal<MenuItemSize>;
   icon: Signal<string | undefined>;
   badge: Signal<Badge | undefined>;
-  showDisclosure: Signal<boolean>;
   isExpanded: Signal<boolean>;
   children: Signal<T[]>;
   submenuSize: Signal<MenuItemSize>;
@@ -28,23 +27,17 @@ type ViewModel<T> = {
   templateUrl: './menu-submenu-item.component.html',
   styleUrls: ['./menu-submenu-item.component.scss'],
   animations: [DropDownAnimation],
-  imports: [MenuItemComponent, IconModule, forwardRef(() => MenuItemListComponent)],
+  imports: [MenuItemComponent, IconComponent, forwardRef(() => MenuItemListComponent)],
 })
 export class MenuSubmenuItemComponent<T extends SidebarMenuItem> {
   readonly item = input.required<T>();
   readonly size = input.required<MenuItemSize>();
   readonly disableAnimations = input.required<boolean>();
 
-  readonly #element = inject(ElementRef).nativeElement as HTMLElement;
+  readonly #element = inject(ElementRef).nativeElement as Element;
   readonly #menuStateService = inject(MenuStateService);
 
   readonly #isExpanded = computed(() => this.item().isExpanded ?? false);
-  readonly #icon = computed(() => {
-    if (this.size() === 'lg') {
-      return this.item().icon;
-    }
-    return this.#isExpanded() ? 'remove' : 'add';
-  });
   readonly #submenuSize = computed(() => {
     switch (this.size()) {
       case 'lg':
@@ -57,10 +50,11 @@ export class MenuSubmenuItemComponent<T extends SidebarMenuItem> {
   });
 
   #toggleSubmenu(): void {
-    const scrollContainer: HTMLElement | null = this.#element?.closest('.sidebar-content') ?? null;
-    if (scrollContainer) {
+    const button = this.#element.querySelector('button[kirby-x-menu-item]');
+    const scrollContainer = this.#element.closest('.sidebar-content');
+    if (button && scrollContainer) {
       console.log('Ensuring submenu item is in view');
-      ensureInView(scrollContainer, this.#element, 400);
+      ensureInView(scrollContainer, button, 400);
     }
     this.#menuStateService.toggledSubmenu = this.item();
   }
@@ -70,9 +64,8 @@ export class MenuSubmenuItemComponent<T extends SidebarMenuItem> {
     submenuId: computed(() => `item-${this.item().id}-content`),
     title: computed(() => this.item().title ?? ''),
     size: this.size,
-    icon: this.#icon,
+    icon: computed(() => this.item().icon),
     badge: computed(() => this.item().badge),
-    showDisclosure: computed(() => this.size() === 'lg'),
     isExpanded: this.#isExpanded,
     children: computed(() => this.item().children ?? []),
     submenuSize: this.#submenuSize,
