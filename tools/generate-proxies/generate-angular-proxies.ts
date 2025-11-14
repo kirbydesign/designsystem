@@ -142,6 +142,8 @@ async function formatWithPrettier(code: string) {
 async function generateComponentSource(element: LitCustomElement) {
   const { name, tagName } = element;
   const angularComponentName = name.replace('Element', 'Component');
+  // Remove 'Kirby' prefix and keep 'Component' suffix for alias
+  const aliasName = angularComponentName.replace(/^Kirby/, '');
 
   const componentSource = `${getJsdocElementSummary(element)}
     // AUTO-GENERATED - Any missing type imports can be added manually above, but do not change component source
@@ -162,7 +164,10 @@ async function generateComponentSource(element: LitCustomElement) {
 
       ${getInputProperties(element)}
       ${getOutputProperties(element)}
-    }`;
+    }
+
+    export { ${angularComponentName} as ${aliasName} };
+    `;
 
   return componentSource;
 }
