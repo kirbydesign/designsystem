@@ -35,3 +35,5 @@ export class KirbyDividerComponent {
     return this.el.hasMargin;
   }
 }
+
+export { KirbyDividerComponent as DividerComponent };
