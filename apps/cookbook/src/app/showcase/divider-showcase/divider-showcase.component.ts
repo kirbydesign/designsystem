@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +11,6 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
   selector: 'cookbook-divider-showcase',
   templateUrl: './divider-showcase.component.html',
   imports: [DividerExampleComponent, FormsModule, CodeViewerComponent, ImportViewerComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DividerShowcaseComponent {
   themeColors = ['white', 'light'];

@@ -11,7 +11,6 @@ import type { KirbySpinnerElement } from '@kirbydesign/core/spinner';
 @Component({
   selector: 'kirby-spinner',
   template: '<ng-content></ng-content>',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KirbySpinnerComponent {

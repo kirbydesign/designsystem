@@ -2,12 +2,12 @@ import { css } from 'lit';
 
 export default css`
   hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: 0;
-    border-top: 1px solid var(--kirby-divider-color, #ccc);
+    margin-block: var(--kirby-spacing-xxxs);
+    border: none;
+    border-top: 1px solid var(--kirby-divider-color);
   }
-  hr.no-margin {
+  :host([hasMargin='false']) hr,
+  :host([hasMargin='false']) hr[role='presentation'] {
     margin-top: 0;
     margin-bottom: 0;
   }

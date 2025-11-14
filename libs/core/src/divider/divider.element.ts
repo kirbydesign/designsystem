@@ -10,11 +10,12 @@ export class KirbyDividerElement extends KirbyElement {
   static override tagName = 'kirby-divider';
 
   static styles: CSSResultGroup = [baseStyles, styles];
-  @property({ type: Boolean }) hasMargin = true;
+
+  @property({ type: Boolean, reflect: true }) hasMargin = true;
 
   render() {
     return html`
-      <hr role="presentation" class=${this.hasMargin ? '' : 'no-margin'} />
+      <hr role="presentation" />
     `;
   }
 }

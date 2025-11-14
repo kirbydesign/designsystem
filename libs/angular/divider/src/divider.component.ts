@@ -12,7 +12,6 @@ import type { KirbyDividerElement } from '@kirbydesign/core/divider';
 @Component({
   selector: 'kirby-divider',
   template: '<ng-content></ng-content>',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KirbyDividerComponent {
@@ -36,5 +35,3 @@ export class KirbyDividerComponent {
     return this.el.hasMargin;
   }
 }
-
-export { KirbyDividerComponent as DividerComponent };

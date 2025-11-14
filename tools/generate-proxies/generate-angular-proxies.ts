@@ -148,7 +148,6 @@ async function generateComponentSource(element: LitCustomElement) {
     @Component({
       selector: '${tagName}',
       template: '<ng-content></ng-content>',
-      standalone: true,
       changeDetection: ChangeDetectionStrategy.OnPush,
     })
     export class ${angularComponentName} {
