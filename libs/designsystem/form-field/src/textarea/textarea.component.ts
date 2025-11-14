@@ -72,7 +72,15 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   }
 
   ngOnInit(): void {
-    console.log('hej');
+    // The native input value is emitted here to make sure that
+    // the InputCounterComponent receives the value onInit,
+    // when [(ngModel)] is used on kirby-textarea.
+    setTimeout(() => {
+      const inputValue = this.elementRef.nativeElement.value;
+      if (inputValue) {
+        this.kirbyChange.emit(inputValue);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
