@@ -7,14 +7,14 @@ const esModules = ['@stencil/core', '@ionic/core', 'ionicons', '@angular/common/
 
 const json = require('../../../tsconfig.base.json');
 
-const mapDistToBarrelFile = (distFolderArray: string[]) => {
+const mapDistToBarrelFile = (distFolderArray) => {
   return distFolderArray.map((distFolder) => {
     return distFolder.replace('libs/', '../../').replace('/dist', '') + '/index.ts';
   });
 };
 
 const pathAliases = Object.fromEntries(
-  Object.entries<string[]>(json.compilerOptions.paths).map(([key, value]) => [
+  Object.entries(json.compilerOptions.paths).map(([key, value]) => [
     key,
     mapDistToBarrelFile(value),
   ])
