@@ -179,7 +179,7 @@ const menuItemsExample: SidebarMenuItem[] = [
   {
     id: 'settings',
     title: 'Settings',
-    icon: 'cog',
+    icon: 'settings',
     link: { relativeLink: '/settings' },
   },
   {
