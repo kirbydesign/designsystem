@@ -217,10 +217,19 @@ export class FormFieldComponent
         'aria-errormessage',
         this._errorMessageId
       );
+    } else {
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-describedby');
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-errormessage');
     }
 
-    if (this.label && (this.radioGroupElement || this.dropdown)) {
+    if (!this._wrapContentInLabel) return;
+
+    const hasLabel = !!this.label;
+
+    if (hasLabel) {
       this.renderer.setAttribute(this.nestedInteractiveElement, 'aria-labelledby', this._labelId);
+    } else {
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-labelledby');
     }
   }
 

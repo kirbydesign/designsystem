@@ -230,6 +230,36 @@ describe('FormFieldComponent', () => {
 
         expect(parentLabel).toBeDefined();
       });
+
+      it('should remove aria attributes when message is set to undefined', () => {
+        spectator.setHostInput({ hasError: true, message: 'Initial message' });
+        spectator.setHostInput({ message: undefined });
+
+        expect(inputElement).not.toHaveAttribute('aria-describedby');
+        expect(inputElement).not.toHaveAttribute('aria-errormessage');
+      });
+
+      it('should add aria attributes when message is added back', () => {
+        spectator.setHostInput({ hasError: true, message: undefined });
+        spectator.setHostInput({ message: 'My Message' });
+
+        expect(inputElement).toHaveAttribute('aria-describedby', messageElement.id);
+        expect(inputElement).toHaveAttribute('aria-errormessage', messageElement.id);
+      });
+
+      it('should remove aria-labelledby when label is undefined', () => {
+        spectator.setHostInput({ label: 'Initial label' });
+        spectator.setHostInput({ label: undefined });
+
+        expect(inputElement).not.toHaveAttribute('aria-labelledby');
+      });
+
+      it('should add aria-labelledby when label is added back', () => {
+        spectator.setHostInput({ label: undefined });
+        spectator.setHostInput({ label: 'My Label' });
+
+        expect(inputElement).toHaveAttribute('aria-labelledby', spectator.queryHost('label').id);
+      });
     });
 
     describe('and slotted textarea', () => {
