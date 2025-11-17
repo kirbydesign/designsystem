@@ -97,5 +97,24 @@ label {
     background-color: var(--date-input-background-color);
     transition: interaction-state.transition();
     transition-property: background-color;
+
+    // FIX: Calendar icon size should be 24px (Issue #3915)
+    kirby-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ion-icon {
+        width: 24px;
+        height: 24px;
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
   }
 }
