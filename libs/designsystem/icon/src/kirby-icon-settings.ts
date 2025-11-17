@@ -136,7 +136,6 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'top-up', svg: 'top-up.svg' },
     { name: 'signed-document', svg: 'signed-document.svg' },
     { name: 'bank', svg: 'bank.svg' },
-    { name: 'arrow-right-fill', svg: 'arrow-right-fill.svg' },
   ]),
 };
 
