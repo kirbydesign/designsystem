@@ -268,9 +268,9 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
           <kirby-x-sidebar-header style="
             --kirby-x-sidebar-header-height: auto; 
             --kirby-x-sidebar-header-margin-top: var(--kirby-spacing-l);
-            --kirby-x-sidebar-header-margin-left: 21px;
+            --kirby-x-sidebar-header-margin-left: var(--kirby-spacing-s, 16px);
             --kirby-x-sidebar-header-margin-bottom: var(--kirby-spacing-s);
-            --kirby-x-sidebar-header-margin-right: 21px;
+            --kirby-x-sidebar-header-margin-right: var(--kirby-spacing-s, 16px);
           ">
             <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; gap: var(--kirby-spacing-s);">
               <img src="assets/images/kirby-logo.svg" alt=""/>
