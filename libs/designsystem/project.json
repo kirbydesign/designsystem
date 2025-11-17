@@ -21,7 +21,7 @@
       "options": {
         "main": "libs/designsystem/test.ts",
         "tsConfig": "libs/designsystem/tsconfig.spec.json",
-        "karmaConfig": "libs/designsystem/karma.conf.js",
+        "karmaConfig": "libs/designsystem/karma.conf.cjs",
         "styles": ["libs/designsystem/testing/src/styles.scss"]
       },
       "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]

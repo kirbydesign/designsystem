@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { FlagComponent } from '@kirbydesign/designsystem';
-import exampleHtml from '../../examples/fab-sheet-example/fab-sheet-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/fab-sheet-example/fab-sheet-example.component.html' with { loader: 'text' };
 import { FabSheetExampleComponent } from '../../examples/fab-sheet-example/fab-sheet-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
