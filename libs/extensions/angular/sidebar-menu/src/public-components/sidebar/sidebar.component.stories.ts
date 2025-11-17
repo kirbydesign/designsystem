@@ -265,8 +265,25 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
     template: `
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
-          <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo.svg" alt=""/>
+          <kirby-x-sidebar-header style="
+            --kirby-x-sidebar-header-height: auto; 
+            --kirby-x-sidebar-header-margin-top: var(--kirby-spacing-l);
+            --kirby-x-sidebar-header-margin-left: 21px;
+            --kirby-x-sidebar-header-margin-bottom: var(--kirby-spacing-s);
+            --kirby-x-sidebar-header-margin-right: 21px;
+          ">
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; gap: var(--kirby-spacing-s);">
+              <img src="assets/images/kirby-logo.svg" alt=""/>
+              <div style="display: flex; width: 100%;">
+                <button kirby-button size="sm" style="display: flex; flex-grow: 1; justify-content: flex-start; --kirby-button-background-color: rgb(255 255 255 / 15%); --kirby-button-color: rgb(255 255 255);">
+                  <kirby-icon name="search"></kirby-icon>
+                  <span>Search...</span>
+                </button>
+                <button kirby-button size="sm" style="--kirby-button-background-color: rgb(255 255 255 / 15%); --kirby-button-color: rgb(255 255 255);">
+                  <kirby-icon name="more"></kirby-icon>
+                </button>
+              </div>
+            </div>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
@@ -293,7 +310,7 @@ type Story = StoryObj<SidebarPropsAndCustomArgs>;
 export const Default: Story = {
   args: {
     menuItems: menuItemsExample,
-    mainAreaContent: ` <h1>Welcome to the main content area</h1>
+    mainAreaContent: `<h1>Welcome to the main content area</h1>
     <p>This is where your main application content would go.</p>`,
   },
 };
@@ -308,5 +325,30 @@ export const AutoCollapse: Story = {
     ...Default.args,
     autoCollapse: true,
     mainAreaContent: '<h1>Sidebar with Auto Collapse Items</h1>',
+  },
+};
+
+/**
+ * A simple sidebar with only an icon in the header and no footer.
+ */
+export const SimpleSidebar: Story = {
+  ...Default,
+  render: ({ mainAreaContent, ...args }) => ({
+    props: args,
+    template: `
+      <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
+        <kirby-x-sidebar ${argsToTemplate(args)}>
+          <kirby-x-sidebar-header>
+            <img src="assets/images/kirby-logo.svg" alt=""/>
+          </kirby-x-sidebar-header>
+        </kirby-x-sidebar>
+        <div style="padding: var(--kirby-spacing-s);">
+          ${mainAreaContent}
+        </div>
+      </div>`,
+  }),
+  args: {
+    ...Default.args,
+    mainAreaContent: '<h1>Sidebar with simple header and no footer</h1>',
   },
 };

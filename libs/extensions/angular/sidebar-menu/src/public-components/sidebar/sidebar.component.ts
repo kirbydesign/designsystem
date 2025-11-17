@@ -12,8 +12,8 @@ import { SidebarMenuComponent } from '../../components/sidebar-menu';
       (itemClick)="afterMenuClicked.emit($event)"
       (submenuToggle)="afterMenuToggled.emit($event)"
     >
-      <header><ng-content select="kirby-x-sidebar-header"></ng-content></header>
-      <footer><ng-content select="kirby-x-sidebar-footer"></ng-content></footer>
+      <ng-content select="kirby-x-sidebar-header" slot="header"></ng-content>
+      <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
     </kirby-x-sidebar-menu>
   `,
   imports: [SidebarMenuComponent],
