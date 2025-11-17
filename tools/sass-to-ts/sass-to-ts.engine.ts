@@ -1,7 +1,6 @@
+import { promises as fs } from 'fs';
 import * as prettier from 'prettier';
 import * as sass from 'sass';
-
-const fs = require('fs').promises;
 
 export class SassToTypescriptEngine {
   async transform(...files: string[]) {
@@ -62,7 +61,8 @@ export class SassToTypescriptEngine {
 
       // 'this' in context of the reviver function is the object
       // containing the property while parsing the JSON string:
-      const jsonObject: {} = this;
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      const jsonObject: object = this;
       // Unflatten dot-separated property tree (e.g. 'transition-easings.modal.enter'):
       parseFlattenedKeyToObject(nestedKeys, value, jsonObject);
     };
@@ -70,7 +70,7 @@ export class SassToTypescriptEngine {
     return JSON.parse(jsonRoot, reviverFn);
   }
 
-  private parseFlattenedKeyToObject(nestedKeys: string[], value: string, jsonObject: {}) {
+  private parseFlattenedKeyToObject(nestedKeys: string[], value: string, jsonObject: object) {
     nestedKeys.reduce((nestedMap, nestedKey, index) => {
       let nestedObject = nestedMap[nestedKey];
       if (!nestedObject) {
@@ -81,7 +81,7 @@ export class SassToTypescriptEngine {
     }, jsonObject);
   }
 
-  private renderStyleObject(styleObject: {}): string {
+  private renderStyleObject(styleObject: object): string {
     return Object.entries(styleObject)
       .map(([style, styleValue]) => {
         const propertyWithQuotationRegEx = /\"(\w+)\"\:/gm;

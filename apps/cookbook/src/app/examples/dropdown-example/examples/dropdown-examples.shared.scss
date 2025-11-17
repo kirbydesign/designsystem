@@ -3,10 +3,7 @@
 
 kirby-card {
   margin-block: utils.size('m');
-
-  &.attention-levels {
-    max-width: map.get(utils.$breakpoints, 'xsmall');
-  }
+  max-width: fit-content;
 
   kirby-dropdown + kirby-dropdown {
     margin-top: utils.size('s');
@@ -15,4 +12,16 @@ kirby-card {
 
 p {
   margin-top: utils.size('s');
+}
+
+.column-layout {
+  display: flex;
+  flex-flow: column wrap;
+  gap: var(--kirby-spacing-m);
+}
+
+.constrain-width {
+  kirby-dropdown {
+    max-width: fit-content;
+  }
 }

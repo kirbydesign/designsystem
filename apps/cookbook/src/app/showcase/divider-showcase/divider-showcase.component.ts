@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
-import exampleHtml from '../../examples/divider-example/divider-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/divider-example/divider-example.component.html' with { loader: 'text' };
 import { DividerExampleComponent } from '../../examples/divider-example/divider-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';

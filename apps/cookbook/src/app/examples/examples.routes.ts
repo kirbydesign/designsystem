@@ -1,6 +1,5 @@
 import { ModalEnabledRoutes } from '@kirbydesign/designsystem';
 import { CanDismissModalGuard } from '@kirbydesign/designsystem/modal';
-
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -26,15 +25,6 @@ import { ItemExampleComponent } from './item-example/item-example.component';
 import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
 import { ItemSlidingExampleComponent } from './item-sliding-example/item-sliding-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
-import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
-import { ListItemsExampleComponent } from './list-example/examples/items';
-import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
-import { ListItemsNoDividersExampleComponent } from './list-example/examples/items-no-dividers';
-import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
-import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
-import { ListWithSectionsAndStandAloneExampleComponent } from './list-example/examples/sections-with-standalone';
-import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
-import { ListWithStandAloneExampleComponent } from './list-example/examples/stand-alone';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListExperimentalExampleComponent } from './list-experimental-example/list-experimental-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
@@ -412,49 +402,6 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'list',
     component: ListExampleComponent,
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'with-items',
-      },
-      {
-        path: 'with-items',
-        component: ListItemsExampleComponent,
-      },
-      {
-        path: 'with-selectable-items',
-        component: ListSelectableItemsExampleComponent,
-      },
-      {
-        path: 'with-colored-items',
-        component: ListColoredItemsExampleComponent,
-      },
-      {
-        path: 'with-sections-and-colored-items',
-        component: ListWithSectionsAndColoredItemsExampleComponent,
-      },
-      {
-        path: 'with-header-and-footer',
-        component: ListWithHeaderAndFooterExampleComponent,
-      },
-      {
-        path: 'with-sections',
-        component: ListWithSectionsExampleComponent,
-      },
-      {
-        path: 'with-items-no-dividers',
-        component: ListItemsNoDividersExampleComponent,
-      },
-      {
-        path: 'with-stand-alone',
-        component: ListWithStandAloneExampleComponent,
-      },
-      {
-        path: 'with-sections-and-stand-alone',
-        component: ListWithSectionsAndStandAloneExampleComponent,
-      },
-    ],
   },
   {
     path: 'list-swipe',

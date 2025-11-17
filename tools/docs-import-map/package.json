@@ -1,0 +1,7 @@
+{
+  "name": "@repo/docs-import-map",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tool for generating information about component and type exports and their respective package entry points."
+}
