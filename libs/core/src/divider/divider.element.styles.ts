@@ -6,8 +6,8 @@ export default css`
     border: none;
     border-top: 1px solid var(--kirby-divider-color);
   }
-  
-  :host([hasMargin) hr,
-    margin-block: var(--kirby-spacing-xxxs)
+
+  :host([hasMargin) hr {
+    margin-block: var(--kirby-spacing-xxxs);
   }
 `;
