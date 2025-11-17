@@ -142,8 +142,6 @@ async function formatWithPrettier(code: string) {
 async function generateComponentSource(element: LitCustomElement) {
   const { name, tagName } = element;
   const angularComponentName = name.replace('Element', 'Component');
-  // Remove 'Kirby' prefix and keep 'Component' suffix for alias
-  const aliasName = angularComponentName.replace(/^Kirby/, '');
 
   const componentSource = `${getJsdocElementSummary(element)}
     // AUTO-GENERATED - Any missing type imports can be added manually above, but do not change component source
@@ -166,7 +164,6 @@ async function generateComponentSource(element: LitCustomElement) {
       ${getOutputProperties(element)}
     }
 
-    export { ${angularComponentName} as ${aliasName} };
     `;
 
   return componentSource;
@@ -174,9 +171,13 @@ async function generateComponentSource(element: LitCustomElement) {
 
 async function generatePublicApiSource(element: LitCustomElement) {
   const { name, tagNameWithoutPrefix } = element;
+  const angularComponentName = name.replace('Element', 'Component');
+  // Remove 'Kirby' prefix and keep 'Component' suffix for alias
+  const aliasName = angularComponentName.replace(/^Kirby/, '');
   return `// AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY.
     import { ${name} } from '${CORE_PACKAGE_JSON_NAME}/${tagNameWithoutPrefix}.element';
     export * from './${tagNameWithoutPrefix}.component';
+    export { ${angularComponentName} as ${aliasName} } from './${tagNameWithoutPrefix}.component';
     ${name}.define();`;
 }
 

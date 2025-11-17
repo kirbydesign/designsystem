@@ -25,5 +25,3 @@ export class KirbySpinnerComponent {
     this.cdr.detach();
   }
 }
-
-export { KirbySpinnerComponent as SpinnerComponent };

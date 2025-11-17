@@ -63,5 +63,3 @@ Please set the text of the Badge between the opening and closing tag.
     return this.el.text;
   }
 }
-
-export { KirbyBadgeComponent as BadgeComponent };
