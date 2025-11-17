@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-import exampleHtml from '../../examples/toggle-example/toggle-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/toggle-example/toggle-example.component.html' with { loader: 'text' };
 import { ToggleDefaultExampleComponent } from '../../examples/toggle-example/examples/default';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
