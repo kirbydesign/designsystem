@@ -2,13 +2,12 @@ import { css } from 'lit';
 
 export default css`
   hr {
-    margin-block: var(--kirby-spacing-xxxs);
+    margin-block: 0;
     border: none;
     border-top: 1px solid var(--kirby-divider-color);
   }
-  :host([hasMargin='false']) hr,
-  :host([hasMargin='false']) hr[role='presentation'] {
-    margin-top: 0;
-    margin-bottom: 0;
+  
+  :host([hasMargin) hr,
+    margin-block: var(--kirby-spacing-xxxs)
   }
 `;
