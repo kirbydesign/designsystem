@@ -29,7 +29,7 @@
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "dependsOn": ["^build"],
       "options": {
-        "jestConfig": "libs/extensions/angular/jest.config.js"
+        "jestConfig": "libs/extensions/angular/jest.config.ts"
       }
     },
     "dev": {
