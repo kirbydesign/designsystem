@@ -2,7 +2,7 @@
 @use '@kirbydesign/core/src/scss/themes' as themes;
 @use 'sass:color';
 
-.sidebar {
+:host {
   @include themes.apply-dark-theme;
 
   height: 100%; // Fallback for browsers that do not support dynamic viewport units

@@ -19,8 +19,16 @@ type ViewModel<T> = {
 
 @Component({
   selector: 'kirby-x-menu-container',
-  template:
-    '<ul kirby-x-menu-item-list [items]="vm.items()" [disableAnimations]="vm.disableAnimations()"></ul>',
+  template: `
+    <nav aria-label="Sidebar Menu">
+      <ul
+        kirby-x-menu-item-list
+        [items]="vm.items()"
+        [disableAnimations]="vm.disableAnimations()"
+      ></ul>
+    </nav>
+  `,
+  styles: 'nav { padding: var(--kirby-spacing-xxxs, 4px) var(--kirby-spacing-xxs, 8px); }',
   imports: [MenuItemListComponent],
 })
 export class MenuContainerComponent<T extends SidebarMenuItem> {
