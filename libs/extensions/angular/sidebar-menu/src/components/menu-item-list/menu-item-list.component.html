@@ -2,12 +2,13 @@
   @if (item.isDivider) {
     <kirby-divider></kirby-divider>
   } @else if (item.children) {
-    <kirby-x-menu-submenu-item
+    <li
+      kirby-x-menu-submenu-item
       [item]="item"
       [size]="vm.size()"
       [disableAnimations]="vm.disableAnimations()"
-    ></kirby-x-menu-submenu-item>
+    ></li>
   } @else {
-    <kirby-x-menu-anchor-item [item]="item" [size]="vm.size()"></kirby-x-menu-anchor-item>
+    <li kirby-x-menu-anchor-item [item]="item" [size]="vm.size()"></li>
   }
 }

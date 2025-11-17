@@ -23,7 +23,7 @@ type ViewModel<T> = {
 };
 
 @Component({
-  selector: 'kirby-x-menu-submenu-item',
+  selector: 'li[kirby-x-menu-submenu-item]',
   templateUrl: './menu-submenu-item.component.html',
   styleUrls: ['./menu-submenu-item.component.scss'],
   animations: [DropDownAnimation],

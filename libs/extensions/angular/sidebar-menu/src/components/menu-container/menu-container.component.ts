@@ -20,7 +20,7 @@ type ViewModel<T> = {
 @Component({
   selector: 'kirby-x-menu-container',
   template:
-    '<kirby-x-menu-item-list [items]="vm.items()" [disableAnimations]="vm.disableAnimations()"></kirby-x-menu-item-list>',
+    '<ul kirby-x-menu-item-list [items]="vm.items()" [disableAnimations]="vm.disableAnimations()"></ul>',
   imports: [MenuItemListComponent],
 })
 export class MenuContainerComponent<T extends SidebarMenuItem> {

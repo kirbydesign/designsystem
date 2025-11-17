@@ -3,6 +3,10 @@
 :host {
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+  list-style-type: none;
 
   &.lg {
     padding: 0 var(--kirby-spacing-xxs, 8px);
@@ -14,4 +18,9 @@ kirby-divider {
   background: var(--white-overlay-20, rgb(255 255 255 / 20%));
   height: 1px;
   margin: 8px 0;
+}
+
+li {
+  // Unfortunately kirby adds some global styling to nested li
+  margin-block-start: 0 !important;
 }

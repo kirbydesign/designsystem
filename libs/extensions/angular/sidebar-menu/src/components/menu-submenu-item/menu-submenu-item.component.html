@@ -19,12 +19,13 @@
   ></kirby-icon>
 </button>
 @if (vm.isExpanded()) {
-  <div [@dropDownMenu] [@.disabled]="vm.disableAnimations()">
-    <kirby-x-menu-item-list
-      [items]="vm.children()"
-      [size]="vm.submenuSize()"
-      [id]="vm.submenuId()"
-      [disableAnimations]="vm.disableAnimations()"
-    ></kirby-x-menu-item-list>
-  </div>
+  <ul
+    kirby-x-menu-item-list
+    [items]="vm.children()"
+    [size]="vm.submenuSize()"
+    [id]="vm.submenuId()"
+    [disableAnimations]="vm.disableAnimations()"
+    [@dropDownMenu]
+    [@.disabled]="vm.disableAnimations()"
+  ></ul>
 }

@@ -17,7 +17,7 @@ type ViewModel = {
 };
 
 @Component({
-  selector: 'kirby-x-menu-anchor-item',
+  selector: 'li[kirby-x-menu-anchor-item]',
   templateUrl: './menu-anchor-item.component.html',
   styleUrls: ['./menu-anchor-item.component.scss'],
   imports: [MenuItemComponent, RouterLink],

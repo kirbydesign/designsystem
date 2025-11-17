@@ -20,7 +20,7 @@ type ViewModel<T> = {
 };
 
 @Component({
-  selector: 'kirby-x-menu-item-list',
+  selector: 'ul[kirby-x-menu-item-list]',
   templateUrl: './menu-item-list.component.html',
   styleUrls: ['./menu-item-list.component.scss'],
   host: {
