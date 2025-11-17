@@ -162,9 +162,7 @@ async function generateComponentSource(element: LitCustomElement) {
 
       ${getInputProperties(element)}
       ${getOutputProperties(element)}
-    }
-
-    `;
+    }`;
 
   return componentSource;
 }
