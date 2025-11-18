@@ -189,7 +189,10 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
 ];
 
-type SidebarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaContent?: string };
+type SidebarPropsAndCustomArgs = Omit<SidebarComponent<SidebarMenuItem>, 'menuItems'> & {
+  menuItems: SidebarMenuItem[];
+  mainAreaContent?: string;
+};
 
 /**
  *
@@ -231,8 +234,12 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   },
   argTypes: {
     menuItems: {
-      description: 'Array of menu items to display in the sidebar. Can be two-way bound.',
+      description:
+        'Array of menu items to display in the sidebar. Can be two-way bound. See <a href="https://github.com/kirbydesign/designsystem/blob/develop/libs/extensions/angular/sidebar-menu/src/models/menu-item.ts">SidebarMenuItem</a> interface for more information.',
       control: { type: 'object' },
+      table: {
+        type: { summary: 'SidebarMenuItem[]' },
+      },
     },
     autoCollapse: {
       description: 'Whether to auto-collapse other submenus when one is opened',
