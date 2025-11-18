@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
 
 :host {
   display: flex;
@@ -37,10 +38,9 @@
 
   &:focus-visible {
     background: var(--sidebar-background-color, utils.get-color('tertiary'));
-    box-shadow:
-      0 0 0 2px utils.get-color('background-color'),
-      0 0 0 4px #4d90fe;
   }
+
+  @include interaction-state.apply-focus-visible;
 }
 
 .menu-item-start {

@@ -28,7 +28,7 @@ type ViewModel<T> = {
       ></ul>
     </nav>
   `,
-  styles: 'nav { padding: var(--kirby-spacing-xxxs) var(--kirby-spacing-xxs); }',
+  styles: 'nav { padding: 0 var(--kirby-spacing-xxs); }',
   imports: [MenuItemListComponent],
 })
 export class MenuContainerComponent<T extends SidebarMenuItem> {
