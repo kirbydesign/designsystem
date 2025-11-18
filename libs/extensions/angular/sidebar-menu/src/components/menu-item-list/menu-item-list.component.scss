@@ -1,4 +1,4 @@
-@use '@kirbydesign/core/src/scss/utils' as utils;
+@use '@kirbydesign/core/src/scss/utils';
 
 :host {
   display: flex;
@@ -11,9 +11,8 @@
 
 kirby-divider {
   display: flex;
-  background: var(--white-overlay-20, rgb(255 255 255 / 20%));
-  height: 1px;
-  margin: 8px 0;
+  background: var(--kirby-white-overlay-20);
+  margin: utils.size('xxs') 0;
 }
 
 li {

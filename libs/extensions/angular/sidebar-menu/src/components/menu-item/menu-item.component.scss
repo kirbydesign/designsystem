@@ -1,4 +1,4 @@
-@use '@kirbydesign/core/src/scss/utils' as utils;
+@use '@kirbydesign/core/src/scss/utils';
 
 :host {
   display: flex;
@@ -7,10 +7,10 @@
   align-items: center;
   align-self: stretch;
   box-sizing: border-box;
-  min-height: 32px;
-  border-radius: var(--kirby-border-radius-s, 8px);
-  padding: var(--kirby-spacing-xxxs, 4px) var(--kirby-spacing-xs, 12px);
-  gap: var(--kirby-spacing-xxs, 8px);
+  min-height: utils.size('l');
+  border-radius: utils.border-radius('s');
+  padding: utils.size('xxxs') utils.size('xs');
+  gap: utils.size('xxs');
   border: none;
   background: inherit;
   color: inherit;
@@ -18,21 +18,21 @@
   cursor: pointer;
 
   &.lg {
-    min-height: 40px;
+    min-height: utils.size('xl');
   }
 
   @media (pointer: coarse) {
     &.md {
-      min-height: 40px;
+      min-height: utils.size('xl');
     }
   }
 
   &:hover {
-    background: var(--menuitem-hover-background-color, rgb(255 255 255 / 15%));
+    background: var(--menuitem-hover-background-color, var(--kirby-white-overlay-30));
   }
 
   &:active {
-    background: var(--menuitem-active-background-color, rgb(255 255 255 / 30%));
+    background: var(--menuitem-active-background-color, var(--kirby-white-overlay-40));
   }
 
   &:focus-visible {
@@ -61,11 +61,11 @@
   }
 
   &.sm {
-    padding-left: 32px;
+    padding-left: utils.size('l');
   }
 
   &.xs {
-    padding-left: 56px;
+    padding-left: utils.size('xxxl');
   }
 }
 
@@ -77,18 +77,18 @@
 
   &.lg,
   &.md {
-    font-size: var(--kirby-font-size-n, 16px);
-    line-height: var(--kirby-line-height-m, 24px);
+    font-size: utils.font-size('n');
+    line-height: utils.line-height('m');
   }
 
   &.sm {
-    font-size: var(--kirby-font-size-s, 14px);
-    line-height: var(--kirby-line-height-s, 20px);
+    font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
   }
 
   &.xs {
-    font-size: var(--kirby-font-size-xs, 12px);
-    line-height: var(--kirby-line-height-xs, 16px);
+    font-size: utils.font-size('xs');
+    line-height: utils.line-height('xs');
   }
 }
 
@@ -100,5 +100,5 @@
 .item-badge {
   display: flex;
   justify-content: center;
-  min-width: 24px;
+  min-width: utils.icon-font-size('sm');
 }

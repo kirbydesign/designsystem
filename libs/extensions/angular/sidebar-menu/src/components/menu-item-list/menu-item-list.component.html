@@ -1,6 +1,6 @@
 @for (item of vm.items(); track item.id) {
   @if (item.isDivider) {
-    <kirby-divider></kirby-divider>
+    <kirby-divider aria-hidden="true"></kirby-divider>
   } @else if (item.children) {
     <li
       kirby-x-menu-submenu-item

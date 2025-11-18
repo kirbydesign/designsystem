@@ -217,7 +217,7 @@ type SidebarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaC
  */
 const meta: Meta<SidebarPropsAndCustomArgs> = {
   title: 'Components/Sidebar',
-  component: SidebarComponent,
+  component: SidebarComponent<SidebarMenuItem>,
   decorators: [
     moduleMetadata({
       imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
