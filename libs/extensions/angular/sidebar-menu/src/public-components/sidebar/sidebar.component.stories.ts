@@ -189,10 +189,7 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
 ];
 
-type SidebarPropsAndCustomArgs = Omit<SidebarComponent<SidebarMenuItem>, 'menuItems'> & {
-  menuItems: SidebarMenuItem[];
-  mainAreaContent?: string;
-};
+type SidebarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaContent?: string };
 
 /**
  *
