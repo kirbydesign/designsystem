@@ -6,7 +6,8 @@
   height: 100%;
   overflow-x: hidden;
   background: utils.get-color('background-color');
-  padding: utils.size('s');
+  padding-inline: utils.size('m');
+  padding-block: utils.size('s');
   box-sizing: border-box;
 
   @include utils.media('>=medium') {

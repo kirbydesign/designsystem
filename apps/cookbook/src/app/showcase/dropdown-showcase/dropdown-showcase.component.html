@@ -3,52 +3,115 @@
   option. It appears upon interaction with an element (such as an icon or button). A selected option
   can represent a value in a form, or can be used as an action to filter or sort existing content.
 </p>
-<cookbook-dropdown-example-configuration
-  [size]="size"
-  (sizeChanged)="setSize($event)"
-></cookbook-dropdown-example-configuration>
+
 <h2>Simple</h2>
 <h3>Default</h3>
+<p>The default dropdown displays a list of options with no pre-selected value.</p>
 <cookbook-example-viewer [html]="defaultExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-default
-      [size]="size"
-      #defaultExample
-    ></cookbook-dropdown-example-default>
+    <cookbook-dropdown-example-default #defaultExample></cookbook-dropdown-example-default>
   </div>
 </cookbook-example-viewer>
+
+<h3>Sizes</h3>
+<p>
+  There are two available sizes. While they are generally interchangeable, it is important to use
+  them consistently.
+</p>
+<ul>
+  <li>
+    <strong>Medium</strong>
+    (
+    <code>md</code>
+    ) typically used when only one or a few dropdowns are needed in a view.
+  </li>
+  <li>
+    <strong>Small</strong>
+    (
+    <code>sm</code>
+    ) typically used in smaller areas or when there is a need to fit multiple dropdowns within the
+    content area.
+  </li>
+</ul>
+
+<cookbook-example-viewer [html]="sizesExample.template">
+  <div class="example-frame">
+    <cookbook-dropdown-example-sizes #sizesExample></cookbook-dropdown-example-sizes>
+  </div>
+</cookbook-example-viewer>
+
+<h3>States</h3>
+<p>States reflect the dropdowns current status, providing visual feedback to the user.</p>
+<p>
+  The three following states are supported, alongside hover and focussed state on interactions with
+  mouse and keyboard.
+</p>
+<ul>
+  <li><strong>Enabled</strong></li>
+  <li><strong>Disabled</strong></li>
+  <li><strong>Error</strong></li>
+</ul>
+<cookbook-example-viewer [html]="statesExample.template">
+  <div class="example-frame">
+    <cookbook-dropdown-example-states #statesExample></cookbook-dropdown-example-states>
+  </div>
+</cookbook-example-viewer>
+
+<h3>In Form Field</h3>
+<p>
+  Dropdowns can be placed within a
+  <code>&lt;kirby-form-field&gt;</code>
+  and assigned a label and an optional message.
+  <br />
+  Clicking the label toggles the open/closed state of the dropdown.
+</p>
+<p>
+  <strong>Validation</strong>
+  <br />
+  If validation for the field fails you can set the
+  <code>hasError</code>
+  property of
+  <code>&lt;kirby-dropdown&gt;</code>
+  (and optionally an error message through the
+  <code>message</code>
+  property of
+  <code>&lt;kirby-form-field&gt;</code>
+  ).
+</p>
+<cookbook-example-viewer [html]="formFieldExample.template">
+  <div class="example-frame">
+    <cookbook-dropdown-example-form-field #formFieldExample></cookbook-dropdown-example-form-field>
+  </div>
+</cookbook-example-viewer>
+
 <h3>Scroll</h3>
 <p>The dropdown becomes scrollable if it contains more than 8 items.</p>
 <cookbook-example-viewer [html]="scrollExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-scroll
-      [size]="size"
-      #scrollExample
-    ></cookbook-dropdown-example-scroll>
+    <cookbook-dropdown-example-scroll #scrollExample></cookbook-dropdown-example-scroll>
   </div>
 </cookbook-example-viewer>
+
 <h3>Pre-selected</h3>
 <p>Use this if you want an initial preselected item.</p>
 <cookbook-example-viewer [html]="preSelectedExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-pre-selected
-      [size]="size"
       #preSelectedExample
     ></cookbook-dropdown-example-pre-selected>
   </div>
 </cookbook-example-viewer>
+
 <h3>Block level</h3>
 <p>
   To display the dropdown in full width of its container, apply block-level styling to the dropdown.
 </p>
 <cookbook-example-viewer [html]="expandExample.template">
   <div class="example-frame">
-    <cookbook-dropdown-example-expand
-      [size]="size"
-      #expandExample
-    ></cookbook-dropdown-example-expand>
+    <cookbook-dropdown-example-expand #expandExample></cookbook-dropdown-example-expand>
   </div>
 </cookbook-example-viewer>
+
 <h3>Right aligned</h3>
 <p>
   The dropdown can be right aligned, so the list of items appear along the right-most edge of the
@@ -57,11 +120,11 @@
 <cookbook-example-viewer [html]="rightAlignedExample.template" [css]="rightAlignedExample.styles">
   <div class="example-frame">
     <cookbook-dropdown-example-right-aligned
-      [size]="size"
       #rightAlignedExample
     ></cookbook-dropdown-example-right-aligned>
   </div>
 </cookbook-example-viewer>
+
 <h3>Attention level</h3>
 <p>
   Applying an attention level changes the background color to help draw attention to the dropdown.
@@ -69,21 +132,21 @@
 <cookbook-example-viewer [html]="attentionLevelExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-attention-level
-      [size]="size"
       #attentionLevelExample
     ></cookbook-dropdown-example-attention-level>
   </div>
 </cookbook-example-viewer>
+
 <h3>Event handler</h3>
 <p>The dropdown can be used with an event handler to perform an action when an item is selected.</p>
 <cookbook-example-viewer [html]="itemSelectExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-item-select
-      [size]="size"
       #itemSelectExample
     ></cookbook-dropdown-example-item-select>
   </div>
 </cookbook-example-viewer>
+
 <h2>Advanced</h2>
 <h3>Custom Item template</h3>
 <p>
@@ -93,11 +156,11 @@
 <cookbook-example-viewer [html]="customItemTemplateExample.template">
   <div class="example-frame">
     <cookbook-dropdown-example-custom-item-template
-      [size]="size"
       #customItemTemplateExample
     ></cookbook-dropdown-example-custom-item-template>
   </div>
 </cookbook-example-viewer>
+
 <h3>Forms</h3>
 <p>
   The dropdown can be used with Angular forms. This allows you to use the dropdown as a form control
@@ -105,12 +168,28 @@
 </p>
 <cookbook-example-viewer [html]="formsExample.template" [ts]="formsExample.codeSnippet">
   <div class="example-frame">
-    <cookbook-dropdown-example-ng-forms
-      [size]="size"
-      #formsExample
-    ></cookbook-dropdown-example-ng-forms>
+    <cookbook-dropdown-example-ng-forms #formsExample></cookbook-dropdown-example-ng-forms>
   </div>
 </cookbook-example-viewer>
+
+<h2>Best Practices</h2>
+<ul>
+  <li>
+    Use a dropdown when there are multiple choices that can be collapsed under one title, if the
+    list of items is too long, or when space is constrained.
+  </li>
+  <li>
+    Use a dropdown when the selected option is more important than the alternatives (in contrast to
+    radio buttons where all the choices are visible, putting equal emphasis on all options).
+  </li>
+  <li>
+    Don't use a dropdown if there are two options to choose from. In this case, use a radio button
+    group instead.
+  </li>
+  <li>
+    If it isn't possible to have a default selected choice, then show a guiding placeholder text
+  </li>
+</ul>
 
 <h2>Accessibility</h2>
 <p>
@@ -125,13 +204,11 @@
   from ARIA Authoring Practices Guide.
 </p>
 <p>
-  The Dropdown is a button that toggles a list of items. To ensure screen readers announce the
-  dropdown correctly, it is required to provide either an
+  When used without a surrounding form-field, an accessible name provided with either an
   <code>aria-label</code>
-  or an
+  or
   <code>aria-labelledby</code>
-  attribute to give it an accessible name. The dropdown component will apply this attribute to the
-  internal button element.
+  attribute is needed to ensure screen readers announce the dropdown correctly.
 </p>
 
 <h3>Keyboard support</h3>
@@ -199,6 +276,10 @@
 </ul>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Importing</h2>
+<cookbook-import-viewer [imports]="'DropdownComponent'"></cookbook-import-viewer>
+
 <h2>Properties:</h2>
 <cookbook-api-description-properties
   [properties]="properties"

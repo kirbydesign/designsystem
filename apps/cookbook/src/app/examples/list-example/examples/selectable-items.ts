@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
-import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
-export const ListSelectableItemsExampleTemplate = `<kirby-list 
+export const template = `<kirby-list 
   [items]="items" 
   (itemSelect)="onItemSelect($event)">
     <kirby-item 
@@ -19,19 +18,10 @@ export const ListSelectableItemsExampleTemplate = `<kirby-list
 </kirby-list>`;
 
 @Component({
-  // tslint:disable-next-line
   selector: 'cookbook-list-selectable-items-example',
-  template: `
-    <kirby-page title="Selectable items">
-      <kirby-page-content>${ListSelectableItemsExampleTemplate}</kirby-page-content>
-    </kirby-page>
-  `,
-  imports: [
-    PageComponent,
-    ListComponent,
-    ItemComponent,
-    ListItemTemplateDirective,
-    PageContentComponent,
-  ],
+  template: template,
+  imports: [ListComponent, ItemComponent, ListItemTemplateDirective],
 })
-export class ListSelectableItemsExampleComponent extends BaseListComponent {}
+export class ListSelectableItemsExampleComponent extends BaseListComponent {
+  template: string = template;
+}

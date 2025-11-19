@@ -148,7 +148,6 @@ async function generateComponentSource(element: LitCustomElement) {
     @Component({
       selector: '${tagName}',
       template: '<ng-content></ng-content>',
-      standalone: true,
       changeDetection: ChangeDetectionStrategy.OnPush,
     })
     export class ${angularComponentName} {
@@ -170,9 +169,13 @@ async function generateComponentSource(element: LitCustomElement) {
 
 async function generatePublicApiSource(element: LitCustomElement) {
   const { name, tagNameWithoutPrefix } = element;
+  const angularComponentName = name.replace('Element', 'Component');
+  // Remove 'Kirby' prefix and keep 'Component' suffix for alias
+  const aliasName = angularComponentName.replace(/^Kirby/, '');
   return `// AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY.
     import { ${name} } from '${CORE_PACKAGE_JSON_NAME}/${tagNameWithoutPrefix}.element';
     export * from './${tagNameWithoutPrefix}.component';
+    export { ${angularComponentName} as ${aliasName} } from './${tagNameWithoutPrefix}.component';
     ${name}.define();`;
 }
 

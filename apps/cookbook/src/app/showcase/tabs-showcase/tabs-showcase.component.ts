@@ -1,15 +1,22 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/tabs-example/tabs-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/tabs-example/tabs-example.component.html' with { loader: 'text' };
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-tabs-showcase',
   templateUrl: './tabs-showcase.component.html',
   styleUrls: ['./tabs-showcase.component.scss'],
-  imports: [CodeViewerComponent, IphoneComponent, ApiDescriptionPropertiesComponent],
+  imports: [
+    CodeViewerComponent,
+    IphoneComponent,
+    ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
+  ],
 })
 export class TabsShowcaseComponent {
   exampleHtml = exampleHtml;
@@ -51,7 +58,7 @@ const routes: Routes = [
   import { TabsService } from '@kirbydesign/designsystem';
   ...
   constructor(private tabsSerivce: TabsService) {}
-  
+
   ngOnInit() {
     this.tabsService.subscribe((outlet) => {
       console.log(outlet.canGoBack());

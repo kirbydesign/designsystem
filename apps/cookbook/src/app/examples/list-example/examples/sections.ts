@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
-import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import {
   ListComponent,
   ListItemTemplateDirective,
   ListSectionHeaderComponent,
+  ListSectionHeaderDirective,
 } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
-export const ListWithSectionsExampleTemplate = `<kirby-list
+export const template = `<kirby-list
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
@@ -34,24 +34,20 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
 </kirby-list>`;
 
 @Component({
-  // tslint:disable-next-line
   selector: 'cookbook-list-with-sections-example',
-  template: `
-    <kirby-page title="List with sections">
-      <kirby-page-content>${ListWithSectionsExampleTemplate}</kirby-page-content>
-    </kirby-page>
-  `,
+  template: template,
   imports: [
-    PageComponent,
     ListComponent,
     ItemComponent,
     LabelComponent,
     ListSectionHeaderComponent,
+    ListSectionHeaderDirective,
     ListItemTemplateDirective,
-    PageContentComponent,
   ],
 })
 export class ListWithSectionsExampleComponent extends BaseListComponent {
+  template: string = template;
+
   getSectionName(item: any): string {
     return item.detail > 0 ? 'Positive' : 'Negative';
   }

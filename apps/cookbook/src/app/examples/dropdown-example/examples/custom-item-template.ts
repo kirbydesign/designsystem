@@ -8,8 +8,8 @@ import { ListItemTemplateDirective } from '@kirbydesign/designsystem';
 const config = {
   selector: 'cookbook-dropdown-example-custom-item-template',
   template: `<kirby-dropdown #dropdown
-  [size]="size"
   placeholder="Dropdown with custom item template"
+  aria-label="Choose your custom item"
   [items]="items"
   itemTextProperty="title">
   <kirby-item
@@ -63,5 +63,4 @@ export class DropdownExampleCustomItemTemplateComponent {
     { title: 'Item 4', subtitle: 'Tongue bresaola tail swine', value: 4 },
     { title: 'Item 5', subtitle: 'Drumstick pastrami sirloin ', value: 5 },
   ];
-  @Input() size: string;
 }

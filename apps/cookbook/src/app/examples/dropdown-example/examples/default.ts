@@ -5,13 +5,12 @@ const config = {
   selector: 'cookbook-dropdown-example-default',
   template: `<kirby-dropdown
   aria-label="Choose your favorite fruit"
-  [size]="size"
-  placeholder="Dropdown with plain text"
+  placeholder="Choose your favorite fruit"
   [items]="[
-    'Apple',   
+    'Apple',
     'Banana',
     'Blackberry',
-    'Blueberry',   
+    'Blueberry',
     'Grapes',
     ]"
 ></kirby-dropdown>
@@ -25,5 +24,4 @@ const config = {
 })
 export class DropdownExampleDefaultComponent {
   template: string = config.template;
-  @Input() size: string;
 }
