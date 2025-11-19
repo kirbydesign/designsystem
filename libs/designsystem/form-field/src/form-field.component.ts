@@ -235,11 +235,9 @@ export class FormFieldComponent
 
   private setNestedInteractiveLabelAttributes() {
     if (!this.nestedInteractiveElement) return;
-    if (!(this.radioGroupElement || this.dropdown)) return; // label is not wrapping the nested interactive, so needs aria-labelledby
+    if (this._wrapContentInLabel) return; // return if label is wrapping the nested interactive. No need for aria-labelledby.
 
-    const hasLabel = !!this.label;
-
-    if (hasLabel) {
+    if (this.label) {
       this.renderer.setAttribute(this.nestedInteractiveElement, 'aria-labelledby', this._labelId);
     } else {
       this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-labelledby');
