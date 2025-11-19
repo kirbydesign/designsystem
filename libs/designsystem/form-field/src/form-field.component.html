@@ -32,7 +32,7 @@
         ></kirby-form-field-message>
       }
       @if (counter) {
-        <div class="counter" aria-hidden="true">
+        <div class="counter">
           <ng-content select="kirby-input-counter"></ng-content>
         </div>
       }
@@ -48,6 +48,7 @@
     <ng-content select="input[kirby-input]"></ng-content>
     <ng-content select="textarea[kirby-textarea]"></ng-content>
     <ng-content select="kirby-radio-group"></ng-content>
+    <ng-content select="kirby-dropdown"></ng-content>
     <div class="suffix vertical-align semi-dark-text">
       <ng-content select="[kirby-affix='suffix']"></ng-content>
       @if (showDefaultCalendarIcon) {

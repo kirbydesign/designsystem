@@ -7,10 +7,12 @@
   [attr.aria-controls]="_listboxId"
   [attr.aria-expanded]="isOpen"
   [attr.aria-activedescendant]="_listboxId + '-item-' + focusedIndex"
+  [attr.aria-invalid]="hasError"
   [size]="size"
   [attentionLevel]="attentionLevel"
   (click)="onToggle($event)"
   [disabled]="disabled"
+  [tabindex]="_tabindex"
 >
   <span class="text">{{ selectedText || placeholder }}</span>
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>

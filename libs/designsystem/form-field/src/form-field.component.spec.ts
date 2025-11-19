@@ -6,10 +6,11 @@ import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { RadioGroupComponent, RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular/standalone';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { FormFieldComponent } from './form-field.component';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -24,14 +25,18 @@ describe('FormFieldComponent', () => {
 
   const createHost = createHostFactory({
     component: FormFieldComponent,
-    declarations: [InputCounterComponent, ItemComponent, FormFieldMessageComponent],
     imports: [
       TestHelper.ionicModuleForTest,
       AffixDirective,
       InputComponent,
       TextareaComponent,
-      RadioModule,
+      RadioComponent,
+      RadioGroupComponent,
+      DropdownComponent,
       IonItem,
+      InputCounterComponent,
+      ItemComponent,
+      FormFieldMessageComponent,
     ],
     mocks: [PlatformService],
     providers: [
@@ -110,7 +115,7 @@ describe('FormFieldComponent', () => {
 
     it('should render the label with correct margin', () => {
       expect(labelTextElement).toHaveComputedStyle({
-        'margin-bottom': size('xxs'),
+        'margin-bottom': size('xxxs'),
       });
     });
   });
@@ -303,6 +308,51 @@ describe('FormFieldComponent', () => {
       });
 
       it('should not place message inside label when hasError on input is false', () => {
+        spectator.setHostInput({ label: 'My Label' });
+
+        const parentLabel = messageElement.closest('label');
+
+        expect(parentLabel).toBeNull();
+      });
+
+      it('should place message inside label when hasError on input is true', () => {
+        spectator.setHostInput({ label: 'My Label' });
+        spectator.setHostInput({ hasError: true });
+
+        const parentLabel = messageElement.closest('label');
+
+        expect(parentLabel).toBeDefined();
+      });
+    });
+
+    describe('and slotted dropdown', () => {
+      let dropdownTrigger: HTMLButtonElement;
+      let messageElement: HTMLElement;
+
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field message="My Message" [label]="label">
+            <kirby-dropdown [items]="['Item 1', 'Item 2', 'Item 3']" [hasError]="hasError"></kirby-dropdown>
+          </kirby-form-field>`,
+          { hostProps: { hasError: false, label: '' } }
+        );
+        dropdownTrigger = spectator.queryHost('button[kirby-button]');
+        messageElement = spectator.queryHost('kirby-form-field-message');
+      });
+
+      it('should set aria-describedby on input to message id', () => {
+        spectator.detectChanges();
+        expect(dropdownTrigger).toHaveAttribute('aria-describedby', messageElement.id);
+      });
+
+      it('should set error-specific aria attributes on dropdown', () => {
+        spectator.setHostInput({ hasError: true });
+
+        expect(dropdownTrigger).toHaveAttribute('aria-invalid', 'true');
+        expect(dropdownTrigger).toHaveAttribute('aria-errormessage', messageElement.id);
+      });
+
+      it('should not place message inside label when hasError on dropdown is false', () => {
         spectator.setHostInput({ label: 'My Label' });
 
         const parentLabel = messageElement.closest('label');

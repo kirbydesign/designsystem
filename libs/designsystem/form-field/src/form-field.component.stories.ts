@@ -1,4 +1,5 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { userEvent, within } from 'storybook/test';
 
 import {
   FormFieldComponent,
@@ -7,6 +8,7 @@ import {
   TextareaComponent,
 } from '@kirbydesign/designsystem/form-field';
 
+import { IconComponent } from '@kirbydesign/designsystem';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {
@@ -14,7 +16,13 @@ const meta: Meta<FormFieldComponent> = {
   title: 'Components / FormField',
   decorators: [
     moduleMetadata({
-      imports: [FormFieldModule, InputComponent, TextareaComponent, FormFieldExampleComponent],
+      imports: [
+        FormFieldModule,
+        InputComponent,
+        TextareaComponent,
+        FormFieldExampleComponent,
+        IconComponent,
+      ],
     }),
   ],
 };
@@ -55,4 +63,23 @@ export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-form-field-example></cookbook-form-field-example>`,
   }),
+};
+
+export const DateInputWithPrefixIcon: Story = {
+  render: () => ({
+    template: `
+      <kirby-form-field label="Date input with prefix icon">
+        <kirby-icon kirby-affix="prefix" name="calendar"></kirby-icon>
+        <input kirby-input type="date" size="size" />
+      </kirby-form-field>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByRole('textbox');
+
+    await userEvent.click(input);
+    await userEvent.type(input, '987654');
+  },
 };

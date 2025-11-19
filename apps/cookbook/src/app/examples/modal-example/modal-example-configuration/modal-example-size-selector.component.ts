@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ModalSize } from '@kirbydesign/designsystem';
-import { RadioModule } from '@kirbydesign/designsystem/radio';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 export type ModalSizeOption = { text: string; value: ModalSize };
 
@@ -16,7 +16,7 @@ export type ModalSizeOption = { text: string; value: ModalSize };
       }
     `,
   ],
-  imports: [RadioModule, ItemModule],
+  imports: [RadioComponent, ItemComponent, RadioGroupComponent],
 })
 export class ModalExampleSizeSelectorComponent {
   modalSizeOptions: ModalSizeOption[] = [

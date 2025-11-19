@@ -1,4 +1,3 @@
-import { RouterTestingModule } from '@angular/router/testing';
 import { IonIcon } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents } from 'ng-mocks';
@@ -14,13 +13,15 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 
 import {
+  PageActionsComponent,
   PageActionsDirective,
   PageComponent,
-  PageModule,
+  PageContentComponent,
   PageTitleDirective,
 } from '@kirbydesign/designsystem/page';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
+import { provideRouter } from '@angular/router';
 import { ButtonComponent } from './button.component';
 
 const { getColor, fontSizeInPx, size } = DesignTokenHelper;
@@ -31,17 +32,20 @@ describe('ButtonComponent in Kirby Page', () => {
     component: PageComponent,
     imports: [
       TestHelper.ionicModuleForTest,
-      RouterTestingModule,
       ButtonComponent,
       FitHeadingDirective,
-      PageModule,
+      PageComponent,
+      PageContentComponent,
+      PageActionsDirective,
+      PageActionsComponent,
+      PageTitleDirective,
     ],
-    declarations: [PageActionsDirective, PageTitleDirective],
     providers: [
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
       },
+      provideRouter([]),
     ],
   });
 
@@ -183,8 +187,7 @@ describe('ButtonComponent in kirby empty state', () => {
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ButtonComponent],
-    declarations: [IconComponent],
+    imports: [TestHelper.ionicModuleForTest, ButtonComponent, IconComponent],
   });
 
   beforeEach(() => {
@@ -219,7 +222,7 @@ describe('ButtonComponent in Kirby dropdown', () => {
   let spectator: SpectatorHost<DropdownComponent>;
   const createHost = createHostFactory({
     component: DropdownComponent,
-    declarations: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
+    imports: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
   });
 
   it('should render with space between text and icon', () => {
@@ -237,7 +240,7 @@ describe('ButtonComponent configured with icon only', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [MockComponent(IconComponent)],
+    imports: [MockComponent(IconComponent)],
   });
 
   type AttentionLevel = '1' | '2' | '3';
@@ -394,7 +397,7 @@ describe('ButtonComponent configured with text and icon', () => {
   let content: Element;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [IconComponent, MockComponent(IonIcon)],
+    imports: [IconComponent, MockComponent(IonIcon)],
   });
 
   it('should render with correct icon font-size', () => {
@@ -543,7 +546,7 @@ describe('ButtonComponent configured with text and icon using an ngIf directive'
 
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [MockComponent(IconComponent)],
+    imports: [MockComponent(IconComponent)],
   });
 
   it('should not have the icon-only class, if kirby-icon is inserted before text', () => {

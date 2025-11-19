@@ -1,14 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { JsonPipe } from '@angular/common';
-import { IconModule } from '@kirbydesign/designsystem/icon';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-dropdown-example-custom-item-template',
   template: `<kirby-dropdown #dropdown
-  [size]="size"
   placeholder="Dropdown with custom item template"
+  aria-label="Choose your custom item"
   [items]="items"
   itemTextProperty="title">
   <kirby-item
@@ -44,7 +45,14 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [DropdownModule, IconModule, JsonPipe, ItemModule],
+  imports: [
+    DropdownComponent,
+    IconComponent,
+    JsonPipe,
+    ItemComponent,
+    LabelComponent,
+    ListItemTemplateDirective,
+  ],
 })
 export class DropdownExampleCustomItemTemplateComponent {
   template: string = config.template;
@@ -55,5 +63,4 @@ export class DropdownExampleCustomItemTemplateComponent {
     { title: 'Item 4', subtitle: 'Tongue bresaola tail swine', value: 4 },
     { title: 'Item 5', subtitle: 'Drumstick pastrami sirloin ', value: 5 },
   ];
-  @Input() size: string;
 }

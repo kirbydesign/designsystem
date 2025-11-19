@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-avatar-example-icon',
@@ -25,7 +25,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
-  imports: [AvatarComponent, IconModule],
+  imports: [AvatarComponent, IconComponent],
 })
 export class AvatarExampleIconComponent {
   template: string = config.template;

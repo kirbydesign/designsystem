@@ -6,6 +6,7 @@ import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { TabNavigationExampleComponent } from '~/app/examples/tab-navigation-example/tab-navigation-example.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-tab-navigation-showcase',
@@ -14,6 +15,7 @@ import { TabNavigationExampleComponent } from '~/app/examples/tab-navigation-exa
   preserveWhitespaces: true,
   imports: [
     ExampleViewerComponent,
+    ImportViewerComponent,
     IphoneComponent,
     DividerComponent,
     ApiDescriptionPropertiesComponent,

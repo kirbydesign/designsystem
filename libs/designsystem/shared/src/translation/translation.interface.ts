@@ -9,4 +9,7 @@ export interface Translation {
   selectYear: string;
   readMore: string;
   more: string;
+  characters: string;
+  outOf: string;
+  entered: string;
 }

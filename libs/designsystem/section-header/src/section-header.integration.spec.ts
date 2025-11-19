@@ -12,8 +12,7 @@ xdescribe('SectionHeaderComponent with Kirby Label', () => {
 
   const createHost = createHostFactory({
     component: SectionHeaderComponent,
-    declarations: [LabelComponent],
-    imports: [SectionHeaderComponent],
+    imports: [SectionHeaderComponent, LabelComponent],
   });
 
   beforeEach(() => {

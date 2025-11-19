@@ -35,9 +35,9 @@ import { da, de, enGB, enUS } from 'date-fns/locale';
 
 import { capitalizeFirstLetter } from '@kirbydesign/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { TranslationService } from '@kirbydesign/designsystem/shared';
 import { CalendarDay, CalendarDayMetadata } from './interfaces/calendar-day';
@@ -62,7 +62,7 @@ enum TimeUnit {
 }
 
 @Component({
-  imports: [DropdownModule, ButtonComponent, IconModule],
+  imports: [DropdownComponent, ButtonComponent, IconComponent],
   selector: 'kirby-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
@@ -82,13 +82,13 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   @Input() set locales(locales: { [key: string]: Locale }) {
     console.warn(
-      `Supplying additional locales to the Kirby Calendar Component via an input property is deprecated and should not be used. 
+      `Supplying additional locales to the Kirby Calendar Component via an input property is deprecated and should not be used.
         A future update will allow injecting additional locales via a provider instead.`
     );
   }
   @Input() customLocales: { [key: string]: Locale } = {};
-  /* 
-    Experimental: Input property not documented on purpose. 
+  /*
+    Experimental: Input property not documented on purpose.
     For context see: https://github.com/kirbydesign/designsystem/issues/2087
   */
   @Input() usePopover = false;

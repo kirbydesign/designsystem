@@ -4,9 +4,17 @@ import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
-import { PageModule } from '@kirbydesign/designsystem/page';
+import {
+  PageActionsComponent,
+  PageActionsDirective,
+  PageComponent,
+  PageContentDirective,
+  PageSubtitleDirective,
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+} from '@kirbydesign/designsystem/page';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
@@ -56,7 +64,19 @@ const config = {
 };
 @Component({
   template: config.template,
-  imports: [PageModule, FitHeadingDirective, IconModule, ButtonComponent],
+  imports: [
+    PageComponent,
+    PageActionsComponent,
+    PageSubtitleDirective,
+    PageActionsComponent,
+    FitHeadingDirective,
+    IconComponent,
+    ButtonComponent,
+    PageTitleDirective,
+    PageToolbarTitleDirective,
+    PageContentDirective,
+    PageActionsDirective,
+  ],
 })
 export class PageCustomTitleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

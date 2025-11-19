@@ -1,10 +1,11 @@
 {
   "name": "kirbydesign",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
   "engines": {
-    "node": "22",
-    "npm": "10"
+    "node": "24",
+    "npm": "11"
   },
   "workspaces": [
     "libs/core",
@@ -19,26 +20,24 @@
     "build": "nx run-many -t build",
     "start": "nx dev designsystem",
     "start:extensions": "nx dev extensions-angular",
-    "start:ios": "nx build flows && npx cap run ios --workspace=apps/flows",
-    "start:android": "nx build flows && npx cap run android --workspace=apps/flows",
     "test:headless-browser": "nx run-many -t test --output-style=stream -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "storybook": "nx storybook designsystem",
     "build-storybook": "nx build-storybook designsystem",
     "chromatic": "chromatic",
     "publish": "node ./scripts/publish.js",
-    "postinstall": "npm run transpile:tools && npm run extract-scss-variables && npm run generate-design-tokens && npx nx build core && npm run transpile:generate-mocks",
-    "transpile:tools": "tsc -b tools/sass-to-ts",
+    "postinstall": "npm run transpile:tools && npm run extract-scss-variables && npm run generate-design-tokens && npx nx build core && npm run transpile:generate-mocks && npm run generate-docs-import-map",
+    "sync-node-version": "node ./scripts/sync-node-version.js",
+    "transpile:tools": "tsc -b tools/sass-to-ts && tsc -b tools/docs-import-map",
     "transpile:generate-mocks": "tsc -b tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
-    "sync-node-version": "node ./scripts/sync-node-version.js",
-    "generate-angular-proxies": "ts-node tools/generate-proxies/generate-angular-proxies.ts",
+    "generate-angular-proxies": "npx tsx tools/generate-proxies/generate-angular-proxies.ts",
     "generate-design-tokens": "sass libs/core/src/scss/themes/design-tokens.scss libs/core/src/scss/themes/design-tokens.css --no-source-map",
+    "generate-docs-import-map": "nx build designsystem && node ./scripts/generate-docs-import-map.js",
     "nx": "nx"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^20.0.0",
     "@angular-devkit/build-angular": "^20.1.1",
     "@angular-devkit/core": "^20.1.0",
     "@angular-devkit/schematics": "^20.1.0",
@@ -63,6 +62,7 @@
     "@nx/storybook": "21.2.2",
     "@nx/web": "21.2.2",
     "@nx/workspace": "21.2.2",
+    "@storybook/addon-a11y": "^9.1.13",
     "@storybook/addon-docs": "^9.0.16",
     "@storybook/angular": "^9.0.16",
     "@storybook/jest": "^0.2.3",
@@ -92,7 +92,8 @@
     "stylelint": "^16.3.1",
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^13.1.0",
-    "ts-node": "10.9.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "5.8.3",
     "wait-on": "^7.2.0"
   },
@@ -102,6 +103,5 @@
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
-  },
-  "dependencies": {}
+  }
 }

@@ -1,7 +1,4 @@
 import { Directive } from '@angular/core';
 
-@Directive({
-  selector: '[kirbySlide]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbySlide]' })
 export class SlideDirective {}

@@ -1,25 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { CardModule } from '@kirbydesign/designsystem/card';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-
-import { FormsModule } from '@angular/forms';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-attention-level',
-  template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
+  template: `<kirby-card hasPadding="true" class="constrain-width" [themeColor]="themeColor">
   <kirby-dropdown
-    [size]="size"
-    placeholder="Dropdown with attention level 1"
-    aria-label="Choose your favorite fruit"
-    attentionLevel="1"
-    expand="block"
-    usePopover="true"
-    [items]="items">
-  </kirby-dropdown>
-
-  <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown with attention level 2"
     aria-label="Choose your favorite fruit"
     attentionLevel="2"
@@ -29,7 +16,6 @@ const config = {
   </kirby-dropdown>
 
   <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown with attention level 3"
     aria-label="Choose your favorite fruit"
     attentionLevel="3"
@@ -64,15 +50,13 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./dropdown-examples.shared.scss'],
-  imports: [CardModule, ThemeColorDirective, DropdownModule, FormsModule],
+  imports: [CardComponent, ThemeColorDirective, DropdownComponent],
 })
 export class DropdownExampleAttentionLevelComponent {
   template: string = config.template;
   items = ['Apple', 'Banana', 'Blackberry', 'Blueberry', 'Grapes'];
   themeColors = ['light', 'white', 'dark'];
   themeColor = 'white';
-
-  @Input() size: string;
 
   onChange(value) {
     this.themeColor = value;

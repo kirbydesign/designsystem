@@ -2,35 +2,22 @@
   "name": "cookbook",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "sourceRoot": "apps/cookbook/src",
+  "prefix": "cookbook",
   "generators": {
     "@nx/angular:component": {
       "style": "scss"
     }
   },
-  "sourceRoot": "apps/cookbook/src",
-  "prefix": "cookbook",
   "targets": {
     "build": {
-      "executor": "@angular-builders/custom-webpack:browser",
+      "executor": "@nx/angular:application",
       "options": {
-        "customWebpackConfig": {
-          "path": "./tools/sass-to-ts/webpack.sass-to-ts.config.ts",
-          "sassToTs": {
-            "watchGlob": [
-              "libs/core/src/helpers/*.scss",
-              "libs/core/src/scss/base/*.scss",
-              "libs/core/src/scss/themes/*.scss"
-            ],
-            "transform": [
-              "libs/core/src/helpers/color-helper.scss",
-              "libs/core/src/helpers/design-token-helper.scss"
-            ]
-          }
+        "outputPath": {
+          "base": "dist/apps/cookbook"
         },
-        "outputPath": "dist/apps/cookbook",
         "index": "apps/cookbook/src/index.html",
-        "main": "apps/cookbook/src/main.ts",
-        "polyfills": "apps/cookbook/src/polyfills.ts",
+        "polyfills": ["apps/cookbook/src/polyfills.ts"],
         "tsConfig": "apps/cookbook/tsconfig.app.json",
         "assets": [
           "apps/cookbook/src/favicon.ico",
@@ -52,17 +39,38 @@
           }
         ],
         "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
-        "scripts": []
+        "browser": "apps/cookbook/src/main.ts",
+        "plugins": [
+          {
+            "path": "tools/sass-to-ts/sass-to-ts.plugin.ts",
+            "options": {
+              "watchGlob": [
+                "libs/core/src/helpers/*.scss",
+                "libs/core/src/scss/base/*.scss",
+                "libs/core/src/scss/themes/*.scss"
+              ],
+              "transform": [
+                "libs/core/src/helpers/color-helper.scss",
+                "libs/core/src/helpers/design-token-helper.scss"
+              ]
+            }
+          },
+          {
+            "path": "tools/docs-import-map/docs-import-map.plugin.ts",
+            "options": {
+              "distPath": "libs/designsystem/dist",
+              "outputPath": "tools/docs-import-map/dist/designsystem.ts"
+            }
+          }
+        ]
       },
       "configurations": {
         "development": {
           "optimization": false,
           "aot": false,
-          "buildOptimizer": false,
           "sourceMap": true,
           "extractLicenses": false,
-          "namedChunks": true,
-          "vendorChunk": true
+          "namedChunks": true
         },
         "production": {
           "fileReplacements": [
@@ -76,7 +84,7 @@
       }
     },
     "serve": {
-      "executor": "@angular-builders/custom-webpack:dev-server",
+      "executor": "@nx/angular:dev-server",
       "options": {
         "buildTarget": "cookbook:build:development"
       },

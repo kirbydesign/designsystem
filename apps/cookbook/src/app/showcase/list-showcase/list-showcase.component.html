@@ -10,147 +10,124 @@
   </p>
 </div>
 
-<div class="page-example">
-  <div>
-    <h2>List with items:</h2>
-    <cookbook-code-viewer [html]="items"></cookbook-code-viewer>
+<h2>List with items</h2>
+
+<cookbook-example-viewer [html]="listItemsExample.template">
+  <div class="example-frame">
+    <cookbook-list-items-example #listItemsExample></cookbook-list-items-example>
   </div>
+</cookbook-example-viewer>
 
-  <div>
-    <cookbook-iphone src="/examples/list/with-items" showExternalLink="true"></cookbook-iphone>
+<h2>List with items with no dividers</h2>
+<cookbook-example-viewer [html]="listItemsNoDividersExample.template">
+  <div class="example-frame">
+    <cookbook-list-items-no-dividers-example
+      #listItemsNoDividersExample
+    ></cookbook-list-items-no-dividers-example>
   </div>
-</div>
+</cookbook-example-viewer>
 
-<div class="page-example">
-  <div>
-    <h2>List with items with no dividers:</h2>
-    <cookbook-code-viewer [html]="noDividersExampleTemplate"></cookbook-code-viewer>
+<h2>List with selectable items</h2>
+<p>
+  In order to make items selectable a callback must provided to
+  <code>(itemSelect)</code>
+  as shown below. If the item should have a darker background on hover and change the cursor to a
+  pointer, then
+  <code>[selectable]="true"</code>
+  must be provided to the
+  <code>kirby-item</code>
+  component in the template. The selected item is highligted in bold by default. This behaviour can
+  be suppressed by passing
+  <code>[disableSelectionHighlight]="true"</code>
+  to the list component.
+</p>
+
+<cookbook-example-viewer [html]="listWithSelectableItemsExample.template">
+  <div class="example-frame">
+    <cookbook-list-selectable-items-example
+      #listWithSelectableItemsExample
+    ></cookbook-list-selectable-items-example>
   </div>
+</cookbook-example-viewer>
 
-  <cookbook-iphone
-    src="/examples/list/with-items-no-dividers"
-    showExternalLink="true"
-  ></cookbook-iphone>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with selectable items:</h2>
-    <p>
-      In order to make items selectable a callback must provided to
-      <code>(itemSelect)</code>
-      as shown below. If the item should have a darker background on hover and change the cursor to
-      a pointer, then
-      <code>[selectable]="true"</code>
-      must be provided to the
-      <code>kirby-item</code>
-      component in the template. The selected item is highligted in bold by default. This behaviour
-      can be suppressed by passing
-      <code>[disableSelectionHighlight]="true"</code>
-      to the list component.
-    </p>
-    <cookbook-code-viewer [html]="selectableItemsExampleTemplate"></cookbook-code-viewer>
+<h2>List with header and footer</h2>
+<cookbook-example-viewer [html]="listWithHeaderAndFooterExample.template">
+  <div class="example-frame">
+    <cookbook-list-with-header-and-footer-example
+      #listWithHeaderAndFooterExample
+    ></cookbook-list-with-header-and-footer-example>
   </div>
+</cookbook-example-viewer>
 
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-selectable-items"
-      showExternalLink="true"
-    ></cookbook-iphone>
+<h2>List with sections</h2>
+<cookbook-example-viewer [html]="listWithSectionsExample.template">
+  <div class="example-frame">
+    <cookbook-list-with-sections-example
+      #listWithSectionsExample
+    ></cookbook-list-with-sections-example>
   </div>
-</div>
+</cookbook-example-viewer>
 
-<div class="page-example">
-  <div>
-    <h2>List with colored items:</h2>
-    <cookbook-code-viewer [html]="coloredItemsExampleTemplate"></cookbook-code-viewer>
+<h2>List with standalone items</h2>
+<p>
+  Stand alone items are enabled by passing the
+  <code>getStandAloneByProperty</code>
+  to the list.
+  <code>getStandAloneByProperty</code>
+  is the name of the property on the item that defines if the item should stand alone. In this
+  example some of the items have
+  <code>isStandAlone: true</code>
+  .
+</p>
+
+<cookbook-example-viewer [html]="listWithStandAloneExample.template">
+  <div class="example-frame">
+    <cookbook-list-with-stand-alone-example
+      #listWithStandAloneExample
+    ></cookbook-list-with-stand-alone-example>
   </div>
+</cookbook-example-viewer>
 
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-colored-items"
-      showExternalLink="true"
-    ></cookbook-iphone>
+<h2>List with sections and standalone items</h2>
+<cookbook-example-viewer [html]="listWithSectionsAndStandAloneExample.template">
+  <div class="example-frame">
+    <cookbook-list-with-sections-and-stand-alone-example
+      #listWithSectionsAndStandAloneExample
+    ></cookbook-list-with-sections-and-stand-alone-example>
   </div>
-</div>
+</cookbook-example-viewer>
 
-<div class="page-example">
-  <div>
-    <h2>List with sections and colored items:</h2>
-    <cookbook-code-viewer [html]="sectionsAndColoredItemsExampleTemplate"></cookbook-code-viewer>
-  </div>
+<h2>Accessibility</h2>
+<p>
+  If the list has no apparent heading or does not in itself communicate a clear purpose, consider
+  adding an accessible name to help screen reader users understand the purpose and content of the
+  list.
+</p>
 
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-sections-and-colored-items"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
+<p>
+  It is possible to provide an accessible name for your list using the
+  <code>aria-label</code>
+  or
+  <code>aria-labelledby</code>
+  attribute on the
+  <code>kirby-list</code>
+  element.
+</p>
+<p>The label you provide will be announced together with the number of items in the list.</p>
 
-<div class="page-example">
-  <div>
-    <h2>List with header and footer:</h2>
-    <cookbook-code-viewer [html]="headerAndFooterExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-header-and-footer"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with sections:</h2>
-    <cookbook-code-viewer [html]="sectionsExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone src="/examples/list/with-sections" showExternalLink="true"></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with standalone items:</h2>
-    <p>
-      Stand alone items are enabled by passing the
-      <code>getStandAloneByProperty</code>
-      to the list.
-      <code>getStandAloneByProperty</code>
-      is the name of the property on the item that defines if the item should stand alone. In this
-      example some of the items have
-      <code>isStandAlone: true</code>
-      .
-    </p>
-
-    <cookbook-code-viewer [html]="standAloneExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-stand-alone"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with sections and standalone items:</h2>
-    <cookbook-code-viewer [html]="sectionsAndStandAloneExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-sections-and-stand-alone"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
+<h2>Importing</h2>
+<cookbook-import-viewer
+  [imports]="['ListComponent', 'ItemComponent', 'LabelComponent']"
+></cookbook-import-viewer>
+<p>
+  <em>
+    <strong>Please note:</strong>
+    The
+    <code>ListModule</code>
+    bundles the various directives and components relevant for building lists, and can be used
+    instead of individual imports for convenience.
+  </em>
+</p>
 
 <h2>API:</h2>
 <cookbook-api-description-properties

@@ -16,8 +16,7 @@ describe('InputComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: InputComponent,
-    declarations: [ItemComponent],
-    imports: [TestHelper.ionicModuleForTest, IonItem],
+    imports: [TestHelper.ionicModuleForTest, IonItem, ItemComponent],
   });
 
   describe('by default', () => {

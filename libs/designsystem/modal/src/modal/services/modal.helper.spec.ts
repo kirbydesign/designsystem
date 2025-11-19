@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { ModalController as IonicModalController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
@@ -100,18 +100,19 @@ describe('ModalHelper', () => {
     service: ModalHelper,
     imports: [
       TestHelper.ionicModuleForTest,
-      RouterTestingModule,
       ModalFooterComponent,
       ButtonComponent,
       ModalCompactWrapperComponent,
+      PageTitleComponent,
+      PageProgressComponent,
     ],
     providers: [
+      provideRouter([]),
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [PageTitleComponent, PageProgressComponent],
     entryComponents: [
       InputEmbeddedComponent,
       ContentOverflowsWithFooterEmbeddedComponent,

@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as ionic from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
@@ -61,7 +61,8 @@ describe('ListComponent', () => {
 
   const createHost = createComponentFactory({
     component: ListComponent,
-    declarations: [
+    imports: [
+      SpinnerComponent,
       ListComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
@@ -81,7 +82,6 @@ describe('ListComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    imports: [SpinnerModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 
@@ -218,6 +218,26 @@ describe('ListComponent', () => {
 
         expect(component.isLoadOnDemandEnabled).toBeFalse();
       });
+    });
+  });
+
+  describe('aria attributes', () => {
+    it('should forward aria-label to ion-list', () => {
+      spectator.element.setAttribute('aria-label', 'My Accessible List');
+      component.ngAfterViewInit();
+      const list = spectator.query('ion-list');
+      expect(list.getAttribute('aria-label')).toBe('My Accessible List');
+      // Ensure the attribute is removed from the original element
+      expect(spectator.element.hasAttribute('aria-label')).toBeFalse();
+    });
+
+    it('should forward aria-labelledby to ion-list', () => {
+      spectator.element.setAttribute('aria-labelledby', 'my-label-id');
+      component.ngAfterViewInit();
+      const list = spectator.query('ion-list');
+      expect(list.getAttribute('aria-labelledby')).toBe('my-label-id');
+      // Ensure the attribute is removed from the original element
+      expect(spectator.element.hasAttribute('aria-labelledby')).toBeFalse();
     });
   });
 });

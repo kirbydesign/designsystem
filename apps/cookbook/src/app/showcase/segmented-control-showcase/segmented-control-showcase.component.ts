@@ -11,6 +11,7 @@ import { SegmentedControlReactiveFormsExampleComponent } from '../../examples/se
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-segmented-control-showcase',
@@ -28,6 +29,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
     SegmentedControlReactiveFormsExampleComponent,
     ApiDescriptionPropertiesComponent,
     CodeViewerComponent,
+    ImportViewerComponent,
   ],
 })
 export class SegmentedControlShowcaseComponent {

@@ -1,0 +1,18 @@
+<div class="menu-item-start {{ size() }}">
+  @if (icon(); as icon) {
+    <kirby-icon [size]="iconSize()" [name]="icon"></kirby-icon>
+  }
+</div>
+
+<div class="menu-item-content {{ size() }}">
+  <ng-content></ng-content>
+</div>
+
+<div class="menu-item-end">
+  @if (badge(); as badge) {
+    <kirby-badge class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
+      {{ badge.value }}
+    </kirby-badge>
+  }
+  <ng-content select="[slot='end']"></ng-content>
+</div>

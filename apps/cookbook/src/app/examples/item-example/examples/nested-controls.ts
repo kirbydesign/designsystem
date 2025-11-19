@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ButtonComponent, RadioModule } from '@kirbydesign/designsystem';
+import { ButtonComponent, RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
-import { ItemModule } from '@kirbydesign/designsystem/item';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
@@ -30,7 +30,14 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./_shared.scss'],
-  imports: [ItemModule, CheckboxComponent, ToggleComponent, RadioModule, ButtonComponent],
+  imports: [
+    ItemComponent,
+    CheckboxComponent,
+    ToggleComponent,
+    RadioComponent,
+    ButtonComponent,
+    RadioGroupComponent,
+  ],
 })
 export class ItemExampleNestedControlsComponent {
   template: string = config.template;

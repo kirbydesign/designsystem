@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-import exampleHtml from '../../examples/card-example/card-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/card-example/card-example.component.html' with { loader: 'text' };
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { CardExampleVariantComponent } from '../../examples/card-example/examples/variant';
 import { CardExampleDisclosureComponent } from '../../examples/card-example/examples/disclosure';
@@ -12,6 +13,7 @@ import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-card-showcase',
@@ -26,6 +28,7 @@ import {
     CardExampleBackgroundImageComponent,
     DividerComponent,
     ApiDescriptionPropertiesComponent,
+    ImportViewerComponent,
   ],
 })
 export class CardShowcaseComponent {

@@ -5,10 +5,15 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { IconModule } from '@kirbydesign/designsystem/icon';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
-import { HeaderModule } from './header.module';
+import {
+  HeaderActionsDirective,
+  HeaderCustomFlagDirective,
+  HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
+} from './header.component';
 import { HeaderComponent } from './header.component';
 
 const { fontSizeInPx, size } = DesignTokenHelper;
@@ -20,10 +25,14 @@ describe('HeaderComponent', () => {
     component: HeaderComponent,
     imports: [
       TestHelper.ionicModuleForTest,
-      HeaderModule,
+      HeaderComponent,
+      HeaderActionsDirective,
+      HeaderCustomFlagDirective,
+      HeaderCustomSectionDirective,
+      HeaderTitleActionIconDirective,
       FlagComponent,
       AvatarComponent,
-      IconModule,
+      IconComponent,
       ProgressCircleComponent,
       ActionGroupComponent,
     ],

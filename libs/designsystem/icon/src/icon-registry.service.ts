@@ -22,7 +22,7 @@ export class IconRegistryService {
     this.addDefaultIcons();
   }
 
-  public addIcon(iconName: string, svgPath: string): void {
+  addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
       this.iconRegistry.set(iconName, svgPath);
     } else {
@@ -30,7 +30,7 @@ export class IconRegistryService {
     }
   }
 
-  public addIcons(icons: Icon[]): void {
+  addIcons(icons: Icon[]): void {
     if (!icons) {
       console.error('Icons not defined');
       return;
@@ -43,16 +43,13 @@ export class IconRegistryService {
   private addDefaultIcons(): void {
     const baseUrl = this.builtInIconsUrl ?? DEFAULT_BUILT_IN_ICONS_URL;
     const baseUrlWithSlash = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
-    kirbyIconSettings.icons.forEach(({ name, svg }) => {
-      const url = baseUrlWithSlash + svg;
-      this.addIcon(name, url);
-    });
+    this.addIcons(
+      kirbyIconSettings.icons.map((icon) => ({ name: icon.name, svg: baseUrlWithSlash + icon.svg }))
+    );
   }
 
   getIcons(): Icon[] {
-    return [...this.iconRegistry].map(
-      (keyValPair) => ({ name: keyValPair[0], svg: keyValPair[1] }) as Icon
-    );
+    return Array.from(this.iconRegistry.keys()).map((key) => this.getIcon(key));
   }
 
   getIcon(name: string): Icon {

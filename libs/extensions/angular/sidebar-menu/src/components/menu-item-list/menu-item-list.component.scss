@@ -1,0 +1,21 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+  list-style-type: none;
+}
+
+kirby-divider {
+  display: flex;
+  background: var(--kirby-white-overlay-20);
+  margin: utils.size('xxs') 0;
+}
+
+li {
+  // Unfortunately kirby adds some global styling to nested li
+  margin-block-start: 0 !important;
+}

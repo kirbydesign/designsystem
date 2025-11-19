@@ -1,0 +1,22 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu-toggle {
+  width: 100%;
+
+  &[aria-expanded='true'] {
+    font-weight: utils.font-weight('bold');
+  }
+}
+
+.disclosure {
+  transition: transform utils.get-transition-duration('quick');
+
+  &.rotate {
+    transform: rotate(90deg);
+  }
+}

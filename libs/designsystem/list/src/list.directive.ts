@@ -1,25 +1,13 @@
 import { Directive } from '@angular/core';
 
-@Directive({
-  selector: '[kirbyListItemTemplate]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyListItemTemplate]' })
 export class ListItemTemplateDirective {}
 
-@Directive({
-  selector: '[kirbyListHeader], [kirbyListHeaderTemplate]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyListHeader], [kirbyListHeaderTemplate]' })
 export class ListHeaderDirective {}
 
-@Directive({
-  selector: '[kirbyListSectionHeader], [kirbyListSectionHeaderTemplate]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyListSectionHeader], [kirbyListSectionHeaderTemplate]' })
 export class ListSectionHeaderDirective {}
 
-@Directive({
-  selector: '[kirbyListFooter], [kirbyListFooterTemplate]',
-  standalone: false,
-})
+@Directive({ selector: '[kirbyListFooter], [kirbyListFooterTemplate]' })
 export class ListFooterDirective {}

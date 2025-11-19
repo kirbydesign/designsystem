@@ -1,0 +1,77 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
+@use 'sass:color';
+
+:host {
+  @include themes.apply-dark-theme;
+
+  height: 100%; // Fallback for browsers that do not support dynamic viewport units
+  height: 100dvh;
+  background-color: var(--sidebar-background-color, utils.get-color('tertiary'));
+  color: var(--sidebar-color, utils.get-color('tertiary-contrast'));
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: utils.get-color('semi-dark') utils.get-color('tertiary');
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* get kirby color with 50% opacity */
+  *::-webkit-scrollbar-thumb {
+    background-color: color.adjust(utils.get-color('semi-dark', $getValueOnly: true), $alpha: -0.5);
+    border-radius: 20px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+.sidebar-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  @supports (scrollbar-gutter: stable) {
+    overflow: hidden auto;
+    scrollbar-gutter: auto;
+  }
+}
+
+.sidebar-header,
+.sidebar-footer {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: sticky;
+}
+
+.sidebar-header {
+  padding: 0 24px;
+
+  &.bottom-border {
+    box-shadow: 0 4px 10px 2px rgb(28 28 28 / 30%);
+    transition: opacity 0.3s;
+  }
+}
+
+.sidebar-footer {
+  min-height: 80px;
+
+  &.top-border {
+    box-shadow: 0 -4px 10px 2px rgb(28 28 28 / 30%);
+    transition: opacity 0.3s;
+  }
+}

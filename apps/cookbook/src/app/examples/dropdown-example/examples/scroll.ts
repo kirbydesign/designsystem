@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-scroll',
   template: `<kirby-dropdown
-  [size]="size"
   aria-label="Choose your favorite fruit"
   placeholder="Dropdown with scroll (> 8 items)"
   [items]="[
@@ -31,9 +30,8 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [DropdownModule],
+  imports: [DropdownComponent],
 })
 export class DropdownExampleScrollComponent {
   template: string = config.template;
-  @Input() size: string;
 }

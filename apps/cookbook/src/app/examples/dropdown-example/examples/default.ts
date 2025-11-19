@@ -1,17 +1,16 @@
 import { Component, Input } from '@angular/core';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-default',
   template: `<kirby-dropdown
   aria-label="Choose your favorite fruit"
-  [size]="size"
-  placeholder="Dropdown with plain text"
+  placeholder="Choose your favorite fruit"
   [items]="[
-    'Apple',   
+    'Apple',
     'Banana',
     'Blackberry',
-    'Blueberry',   
+    'Blueberry',
     'Grapes',
     ]"
 ></kirby-dropdown>
@@ -21,9 +20,8 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [DropdownModule],
+  imports: [DropdownComponent],
 })
 export class DropdownExampleDefaultComponent {
   template: string = config.template;
-  @Input() size: string;
 }

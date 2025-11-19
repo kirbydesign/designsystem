@@ -16,8 +16,7 @@ xdescribe('TabsComponent', () => {
 
   const createHost = createHostFactory({
     component: TabButtonComponent,
-    imports: [TestHelper.ionicModuleForTest],
-    declarations: [IconComponent],
+    imports: [TestHelper.ionicModuleForTest, IconComponent],
     template: `<kirby-tab-button>Title</kirby-tab-button>`,
   });
 

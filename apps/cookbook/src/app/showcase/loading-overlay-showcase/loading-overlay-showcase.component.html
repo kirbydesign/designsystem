@@ -11,11 +11,6 @@
   <cookbook-loading-overlay-example></cookbook-loading-overlay-example>
 </cookbook-example-viewer>
 
-<h2>Properties</h2>
-<cookbook-api-description-properties
-  [properties]="properties"
-></cookbook-api-description-properties>
-
 <h2>Service</h2>
 
 <p>
@@ -46,3 +41,13 @@
 </p>
 
 <cookbook-loading-overlay-service-example></cookbook-loading-overlay-service-example>
+
+<h2>Importing</h2>
+<cookbook-import-viewer
+  [imports]="['LoadingOverlayService', 'LoadingOverlayComponent']"
+></cookbook-import-viewer>
+
+<h2>Properties</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>

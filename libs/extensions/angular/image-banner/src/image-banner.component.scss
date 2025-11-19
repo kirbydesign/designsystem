@@ -105,7 +105,7 @@ kirby-card {
   height: 100%;
 
   // Apply focus styles to the card when any child element (except those inside .dismiss) is focused
-  &:focus-within {
+  &:focus-within:has(:focus-visible) {
     &:not(:has(.dismiss :focus)) {
       @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
 
@@ -323,18 +323,6 @@ kirby-card {
   @include if-wide-view {
     gap: utils.size('xs');
   }
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  clip: rect(0, 0, 0, 0);
-  clip-path: inset(50%);
-  border: medium;
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 0;
 }
 
 .title {

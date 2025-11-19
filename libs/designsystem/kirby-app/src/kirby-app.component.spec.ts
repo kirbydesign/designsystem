@@ -16,7 +16,6 @@ import { AppComponent } from './kirby-app.component';
       useExisting: forwardRef(() => IonAppMockComponent),
     },
   ],
-  standalone: false,
 })
 export class IonAppMockComponent {}
 
@@ -28,8 +27,7 @@ describe('AppComponent', () => {
     const modalControllerSpy = jasmine.createSpy('ModalController');
 
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
-      declarations: [AppComponent, IonAppMockComponent],
+      imports: [NoopAnimationsModule, AppComponent, IonAppMockComponent],
       providers: [{ provide: ModalController, useValue: modalControllerSpy }],
     }).compileComponents();
   }));

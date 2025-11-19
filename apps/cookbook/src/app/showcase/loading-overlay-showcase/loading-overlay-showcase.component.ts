@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import exampleHtml from '../../examples/loading-overlay-example/loading-overlay-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/loading-overlay-example/loading-overlay-example.component.html' with { loader: 'text' };
 import {
   ApiDescriptionPropertiesComponent,
   ApiDescriptionProperty,
@@ -7,6 +8,7 @@ import {
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { LoadingOverlayExampleComponent } from '../../examples/loading-overlay-example/loading-overlay-example.component';
 import { LoadingOverlayServiceExampleComponent } from '../../examples/loading-overlay-example/service/loading-overlay-service-example.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-loading-overlay-showcase',
@@ -17,6 +19,7 @@ import { LoadingOverlayServiceExampleComponent } from '../../examples/loading-ov
     LoadingOverlayExampleComponent,
     ApiDescriptionPropertiesComponent,
     LoadingOverlayServiceExampleComponent,
+    ImportViewerComponent,
   ],
 })
 export class LoadingOverlayShowcaseComponent {
