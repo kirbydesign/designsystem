@@ -1,0 +1,10 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+.selected,
+.selected:hover,
+.selected:active,
+.selected:focus-visible {
+  background: var(--menuitem-selected-background-color, utils.get-color('primary'));
+  color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
+  font-weight: utils.font-weight('bold');
+}
