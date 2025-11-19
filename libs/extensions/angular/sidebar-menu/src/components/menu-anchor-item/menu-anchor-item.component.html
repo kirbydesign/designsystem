@@ -1,0 +1,54 @@
+@let link = vm.link();
+@if (link) {
+  @switch (link.type) {
+    @case ('action') {
+      <a
+        kirby-x-menu-item
+        [class.selected]="vm.isSelected()"
+        [id]="vm.id()"
+        [size]="vm.size()"
+        [icon]="vm.icon()"
+        [badge]="vm.badge()"
+        [attr.href]="link.url"
+        (click)="$event.preventDefault(); vm.selectItem()"
+        (keydown.enter)="$event.preventDefault(); vm.selectItem()"
+      >
+        {{ vm.title() }}
+      </a>
+    }
+    @case ('router-link') {
+      <a
+        kirby-x-menu-item
+        [class.selected]="vm.isSelected()"
+        [id]="vm.id()"
+        [size]="vm.size()"
+        [icon]="vm.icon()"
+        [badge]="vm.badge()"
+        [routerLink]="link.route"
+        [queryParams]="link.queryParams"
+        [skipLocationChange]="link.skipLocationChange"
+        [replaceUrl]="link.replaceUrl"
+        (click)="vm.selectItem()"
+        (keydown.enter)="vm.selectItem()"
+      >
+        {{ vm.title() }}
+      </a>
+    }
+    @case ('external-link') {
+      <a
+        kirby-x-menu-item
+        [class.selected]="vm.isSelected()"
+        [id]="vm.id()"
+        [size]="vm.size()"
+        [icon]="vm.icon()"
+        [badge]="vm.badge()"
+        [attr.href]="link.url"
+        [attr.target]="link.target"
+        (click)="vm.selectItem()"
+        (keydown.enter)="vm.selectItem()"
+      >
+        {{ vm.title() }}
+      </a>
+    }
+  }
+}

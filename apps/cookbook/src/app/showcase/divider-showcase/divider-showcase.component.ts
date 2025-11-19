@@ -14,7 +14,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
   imports: [DividerExampleComponent, FormsModule, CodeViewerComponent, ImportViewerComponent],
 })
 export class DividerShowcaseComponent {
-  themeColors = ['white', 'light'];
+  themeColors = ['white', 'light', 'dark'];
   themeColor = 'white';
   hasMargin = false;
 
