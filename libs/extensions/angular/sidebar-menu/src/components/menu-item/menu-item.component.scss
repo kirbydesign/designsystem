@@ -29,15 +29,14 @@
   }
 
   &:hover {
-    background: var(--menuitem-hover-background-color, var(--kirby-white-overlay-30));
+    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
   }
 
   &:active {
-    background: var(--menuitem-active-background-color, var(--kirby-white-overlay-40));
-  }
-
-  &:focus-visible {
-    background: var(--sidebar-background-color, utils.get-color('tertiary'));
+    background: var(
+      --menuitem-active-background-color,
+      var(--kirby-inputs-background-color-active)
+    );
   }
 
   @include interaction-state.apply-focus-visible;
