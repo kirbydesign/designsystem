@@ -699,16 +699,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  @HostListener('focus')
-  _onFocus() {
-    if (this.disabled) {
-      this.elementRef.nativeElement.blur();
-    }
-  }
-
   _onPopoverWillHide() {
     this.state = OpenState.closed;
-    this.elementRef.nativeElement.focus();
+    this.buttonElement.nativeElement.focus();
   }
 
   @HostListener('keydown.enter')
@@ -720,13 +713,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   _onPopoverClick() {
     this.close();
-  }
-
-  @HostListener('blur')
-  _onBlur() {
-    if (this.usePopover) return;
-    this.close();
-    this._onTouched();
   }
 
   @HostListener('keydown.enter', ['$event'])
