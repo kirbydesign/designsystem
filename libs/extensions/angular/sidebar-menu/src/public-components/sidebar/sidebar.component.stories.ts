@@ -22,6 +22,7 @@ const menuItemsExample: SidebarMenuItem[] = [
     title: 'Home',
     icon: 'home',
     link: { relativeLink: '/' },
+    selected: true,
   },
   {
     id: 'inbox',
