@@ -715,6 +715,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
+  @HostListener('blur')
+  _onBlur() {
+    if (this.usePopover) return;
+    this.close();
+    this._onTouched();
+  }
+
   @HostListener('keydown.enter', ['$event'])
   @HostListener('keydown.space', ['$event'])
   _onEnterOrSpace(event: KeyboardEvent) {
