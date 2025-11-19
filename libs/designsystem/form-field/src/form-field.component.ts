@@ -55,6 +55,7 @@ export class FormFieldComponent
     | HTMLIonRadioGroupElement;
   private nestedInteractiveErrorSubscription: Subscription;
   private _message: string | null | undefined;
+  private _label: string | undefined;
 
   showDefaultCalendarIcon = false;
 
@@ -63,14 +64,22 @@ export class FormFieldComponent
   _errorMessageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
   _messageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
 
-  @Input() label: string | undefined;
+  @Input() get label(): string | undefined {
+    return this._label;
+  }
+
+  set label(value: string | undefined) {
+    this._label = value;
+    this.setNestedInteractiveLabelAttributes();
+  }
+
   @Input() get message(): string | null | undefined {
     return this._message;
   }
 
   set message(value: string | null | undefined) {
     this._message = value;
-    this.setNestedInteractiveElementAttributes();
+    this.setNestedInteractiveMessageAttributes();
   }
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
@@ -190,7 +199,8 @@ export class FormFieldComponent
 
   private registerNestedInteractive() {
     this.getNestedInteractiveElement();
-    this.setNestedInteractiveElementAttributes();
+    this.setNestedInteractiveLabelAttributes();
+    this.setNestedInteractiveMessageAttributes();
     this.subscribeToNestedInteractiveError();
   }
 
@@ -202,7 +212,7 @@ export class FormFieldComponent
       this.dropdown?.nativeElement.querySelector('button[kirby-button]');
   }
 
-  private setNestedInteractiveElementAttributes() {
+  private setNestedInteractiveMessageAttributes() {
     if (!this.nestedInteractiveElement) return;
 
     if (this.message) {
@@ -221,8 +231,11 @@ export class FormFieldComponent
       this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-describedby');
       this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-errormessage');
     }
+  }
 
-    if (!this._wrapContentInLabel) return;
+  private setNestedInteractiveLabelAttributes() {
+    if (!this.nestedInteractiveElement) return;
+    if (!(this.radioGroupElement || this.dropdown)) return; // label is not wrapping the nested interactive, so needs aria-labelledby
 
     const hasLabel = !!this.label;
 
