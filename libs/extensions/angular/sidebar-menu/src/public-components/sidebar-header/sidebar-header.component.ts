@@ -18,6 +18,12 @@ import { Component } from '@angular/core';
       flex-grow: 1;
     }
 
+    :host::ng-deep .sidebar-logo > img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+
     .sidebar-logo {
       display: flex;
       align-items: center;
