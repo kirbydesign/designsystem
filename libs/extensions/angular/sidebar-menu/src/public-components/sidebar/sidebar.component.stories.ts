@@ -10,6 +10,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import {
   SidebarComponent,
   SidebarFooterComponent,
+  SidebarHeaderActionsComponent,
   SidebarHeaderComponent,
   SidebarMenuItem,
 } from '@kirbydesign/extensions-angular/sidebar-menu';
@@ -221,7 +222,13 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   component: SidebarComponent<SidebarMenuItem>,
   decorators: [
     moduleMetadata({
-      imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
+      imports: [
+        SidebarHeaderComponent,
+        SidebarFooterComponent,
+        SidebarHeaderActionsComponent,
+        ButtonComponent,
+        IconComponent,
+      ],
     }),
     applicationConfig({
       providers: [provideRouter([]), provideAnimations()],
@@ -265,25 +272,17 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
     template: `
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
-          <kirby-x-sidebar-header style="
-            --kirby-x-sidebar-header-height: auto; 
-            --kirby-x-sidebar-header-margin-top: var(--kirby-spacing-l);
-            --kirby-x-sidebar-header-margin-left: var(--kirby-spacing-s, 16px);
-            --kirby-x-sidebar-header-margin-bottom: var(--kirby-spacing-s);
-            --kirby-x-sidebar-header-margin-right: var(--kirby-spacing-s, 16px);
-          ">
-            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; gap: var(--kirby-spacing-s);">
-              <img src="assets/images/kirby-logo.svg" alt=""/>
-              <div style="display: flex; width: 100%;">
-                <button kirby-button size="sm" style="display: flex; flex-grow: 1; justify-content: flex-start; --kirby-button-background-color: rgb(255 255 255 / 15%); --kirby-button-color: rgb(255 255 255);">
-                  <kirby-icon name="search"></kirby-icon>
-                  <span>Search...</span>
-                </button>
-                <button kirby-button size="sm" style="--kirby-button-background-color: rgb(255 255 255 / 15%); --kirby-button-color: rgb(255 255 255);">
-                  <kirby-icon name="more"></kirby-icon>
-                </button>
-              </div>
-            </div>
+          <kirby-x-sidebar-header>
+            <img src="assets/images/kirby-logo.svg" alt=""/>
+            <kirby-x-sidebar-header-actions>
+              <button kirby-button size="sm" style="display: flex; flex-grow: 1; justify-content: flex-start; --kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
+                <kirby-icon name="search"></kirby-icon>
+                <span>Search...</span>
+              </button>
+              <button kirby-button size="sm" style="--kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
+                <kirby-icon name="more"></kirby-icon>
+              </button>
+            </kirby-x-sidebar-header-actions>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
