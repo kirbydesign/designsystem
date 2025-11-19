@@ -10,7 +10,6 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import {
   SidebarComponent,
   SidebarFooterComponent,
-  SidebarHeaderActionsComponent,
   SidebarHeaderComponent,
   SidebarMenuItem,
 } from '@kirbydesign/extensions-angular/sidebar-menu';
@@ -222,13 +221,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   component: SidebarComponent<SidebarMenuItem>,
   decorators: [
     moduleMetadata({
-      imports: [
-        SidebarHeaderComponent,
-        SidebarFooterComponent,
-        SidebarHeaderActionsComponent,
-        ButtonComponent,
-        IconComponent,
-      ],
+      imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
     }),
     applicationConfig({
       providers: [provideRouter([]), provideAnimations()],
@@ -274,15 +267,13 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
             <img src="assets/images/kirby-logo.svg" alt=""/>
-            <kirby-x-sidebar-header-actions>
-              <button kirby-button size="sm" style="display: flex; flex-grow: 1; justify-content: flex-start; --kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
-                <kirby-icon name="search"></kirby-icon>
-                <span>Search...</span>
-              </button>
-              <button kirby-button size="sm" style="--kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
-                <kirby-icon name="more"></kirby-icon>
-              </button>
-            </kirby-x-sidebar-header-actions>
+            <button kirby-button size="sm" slot="search" style="display: flex; flex-grow: 1; justify-content: flex-start; --kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
+              <kirby-icon name="search"></kirby-icon>
+              <span>Search...</span>
+            </button>
+            <button kirby-button size="sm" slot="action" style="--kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
+              <kirby-icon name="more"></kirby-icon>
+            </button>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">

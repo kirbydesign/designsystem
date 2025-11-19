@@ -4,7 +4,10 @@ import { Component } from '@angular/core';
   selector: 'kirby-x-sidebar-header',
   template: `
     <span class="sidebar-logo"><ng-content></ng-content></span>
-    <ng-content select="kirby-x-sidebar-header-actions"></ng-content>
+    <div class="action-bar">
+      <ng-content select="[slot='search']"></ng-content>
+      <ng-content select="[slot='action']"></ng-content>
+    </div>
   `,
   styles: `
     :host {
@@ -20,6 +23,19 @@ import { Component } from '@angular/core';
       align-items: center;
       height: 50px;
       margin: var(--kirby-spacing-l) var(--kirby-spacing-m);
+    }
+
+    .action-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      width: 100%;
+
+      &:has(button) {
+        padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-s);
+      }
     }
   `,
 })
