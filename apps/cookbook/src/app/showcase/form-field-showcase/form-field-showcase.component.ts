@@ -71,14 +71,14 @@ export class FormFieldShowcaseComponent {
       defaultValue: 'undefined',
       description:
         '(Optional) The label shown above the input. Clicking the label sets focus to the input/textarea.',
-      type: ['string'],
+      type: ['string | undefined'],
     },
     {
       name: 'message',
       defaultValue: 'undefined',
       description: `(Optional) Message shown below the input. Can be used for hints, error and/or validation messages.
         \n If set to null space will be reserved for the message but nothing will be rendered inside. This is useful for preventing layout-shifts when e.g. an error message dynamically appears.`,
-      type: ['string | null'],
+      type: ['string | null | undefined'],
     },
   ];
 
