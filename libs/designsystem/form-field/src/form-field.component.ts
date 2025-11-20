@@ -54,7 +54,8 @@ export class FormFieldComponent
     | HTMLTextAreaElement
     | HTMLIonRadioGroupElement;
   private nestedInteractiveErrorSubscription: Subscription;
-  private _message: string | null;
+  private _message: string | null | undefined;
+  private _label: string | undefined;
 
   showDefaultCalendarIcon = false;
 
@@ -63,14 +64,22 @@ export class FormFieldComponent
   _errorMessageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
   _messageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
 
-  @Input() label: string;
-  @Input() get message(): string | null {
+  @Input() get label(): string | undefined {
+    return this._label;
+  }
+
+  set label(value: string | undefined) {
+    this._label = value;
+    this.setNestedInteractiveLabelAttributes();
+  }
+
+  @Input() get message(): string | null | undefined {
     return this._message;
   }
 
-  set message(value: string | null) {
+  set message(value: string | null | undefined) {
     this._message = value;
-    this.setNestedInteractiveElementAttributes();
+    this.setNestedInteractiveMessageAttributes();
   }
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
@@ -190,7 +199,8 @@ export class FormFieldComponent
 
   private registerNestedInteractive() {
     this.getNestedInteractiveElement();
-    this.setNestedInteractiveElementAttributes();
+    this.setNestedInteractiveLabelAttributes();
+    this.setNestedInteractiveMessageAttributes();
     this.subscribeToNestedInteractiveError();
   }
 
@@ -202,7 +212,7 @@ export class FormFieldComponent
       this.dropdown?.nativeElement.querySelector('button[kirby-button]');
   }
 
-  private setNestedInteractiveElementAttributes() {
+  private setNestedInteractiveMessageAttributes() {
     if (!this.nestedInteractiveElement) return;
 
     if (this.message) {
@@ -217,10 +227,20 @@ export class FormFieldComponent
         'aria-errormessage',
         this._errorMessageId
       );
+    } else {
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-describedby');
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-errormessage');
     }
+  }
 
-    if (this.label && (this.radioGroupElement || this.dropdown)) {
+  private setNestedInteractiveLabelAttributes() {
+    if (!this.nestedInteractiveElement) return;
+    if (this._wrapContentInLabel) return; // return if label is wrapping the nested interactive. No need for aria-labelledby.
+
+    if (this.label) {
       this.renderer.setAttribute(this.nestedInteractiveElement, 'aria-labelledby', this._labelId);
+    } else {
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-labelledby');
     }
   }
 
