@@ -1,7 +1,5 @@
-'use strict';
-
-const { exec } = require('child_process');
-const { GenerateMocks } = require('../tools/generate-mocks/dist/generate-mocks');
+import { exec } from 'child_process';
+import { GenerateMocks } from '../tools/generate-mocks/dist/generate-mocks.js';
 
 // We diff changes in /libs/core/src to make sure that changes to prop
 // types (that unfortunately are not outputted to the proxies file) will result

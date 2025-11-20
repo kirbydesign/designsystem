@@ -1,0 +1,31 @@
+<button
+  kirby-x-menu-item
+  type="button"
+  class="submenu-toggle"
+  [id]="vm.id()"
+  [size]="vm.size()"
+  [icon]="vm.icon()"
+  [badge]="vm.badge()"
+  [attr.aria-controls]="vm.submenuId()"
+  [attr.aria-expanded]="vm.isExpanded()"
+  (click)="vm.toggleSubmenu()"
+>
+  {{ vm.title() }}
+  <kirby-icon
+    slot="end"
+    name="arrow-more"
+    class="disclosure"
+    [class.rotate]="vm.isExpanded()"
+  ></kirby-icon>
+</button>
+@if (vm.isExpanded()) {
+  <ul
+    kirby-x-menu-item-list
+    [items]="vm.children()"
+    [size]="vm.submenuSize()"
+    [id]="vm.submenuId()"
+    [disableAnimations]="vm.disableAnimations()"
+    [@dropDownMenu]
+    [@.disabled]="vm.disableAnimations()"
+  ></ul>
+}

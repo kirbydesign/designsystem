@@ -1,85 +1,14 @@
-@let level = vm.level();
-<div class="menu-item-list menu-item-list-{{ level }}" [attr.id]="vm.id()">
-  @for (item of vm.items(); track item.id) {
-    @if (item.isDivider) {
-      <kirby-divider></kirby-divider>
-    } @else if (item.children) {
-      @let submenuId = `item-${item.id}-content`;
-      <button
-        type="button"
-        class="menu-item menu-item-{{ level }} togglable-menu-item"
-        [attr.id]="'item' + item.id"
-        [attr.aria-controls]="submenuId"
-        [attr.aria-expanded]="item.isExpanded"
-        (click)="vm.toggleSubmenu(item)"
-      >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-          [isExpanded]="item.isExpanded ?? false"
-        ></kirby-x-menu-item-content>
-      </button>
-      @if (item.isExpanded) {
-        <div [@dropDownMenu] [@.disabled]="vm.disableAnimations()">
-          <kirby-x-menu-item-list
-            [items]="item.children"
-            [level]="level + 1"
-            [id]="submenuId"
-            [disableAnimations]="disableAnimations()"
-          ></kirby-x-menu-item-list>
-        </div>
-      }
-    } @else if (item.isAction) {
-      <a
-        class="menu-item menu-item-{{ level }} clickable-menu-item"
-        [class.selected]="item.selected ?? false"
-        [attr.id]="'item' + item.id"
-        [attr.href]="item.link?.url ?? ''"
-        (click)="$event.preventDefault(); vm.selectItem(item)"
-        (keydown.enter)="$event.preventDefault(); vm.selectItem(item)"
-      >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-        ></kirby-x-menu-item-content>
-      </a>
-    } @else if (item.link?.relativeLink) {
-      <a
-        class="menu-item menu-item-{{ level }} clickable-menu-item"
-        [class.selected]="item.selected ?? false"
-        [attr.id]="'item' + item.id"
-        [target]="item.link?.target ?? '_self'"
-        [routerLink]="item.link?.relativeLink"
-        [queryParams]="item.link?.queryParams"
-        [skipLocationChange]="item.skipLocationChange ?? false"
-        [replaceUrl]="item.replaceUrl ?? false"
-        (click)="vm.selectItem(item)"
-        (keydown.enter)="vm.selectItem(item)"
-      >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-        ></kirby-x-menu-item-content>
-      </a>
-    } @else if (item.link?.url) {
-      <a
-        class="menu-item menu-item-{{ level }} clickable-menu-item"
-        [class.selected]="item.selected ?? false"
-        [attr.id]="'item' + item.id"
-        [attr.href]="item.link?.url"
-        [attr.target]="item.link?.target"
-        (click)="vm.selectItem(item)"
-        (keydown.enter)="vm.selectItem(item)"
-      >
-        <kirby-x-menu-item-content
-          [title]="item.title ?? ''"
-          [icon]="item.icon"
-          [badge]="item.badge"
-        ></kirby-x-menu-item-content>
-      </a>
-    }
+@for (item of vm.items(); track item.id) {
+  @if (item.isDivider) {
+    <kirby-divider aria-hidden="true"></kirby-divider>
+  } @else if (item.children) {
+    <li
+      kirby-x-menu-submenu-item
+      [item]="item"
+      [size]="vm.size()"
+      [disableAnimations]="vm.disableAnimations()"
+    ></li>
+  } @else {
+    <li kirby-x-menu-anchor-item [item]="item" [size]="vm.size()"></li>
   }
-</div>
+}

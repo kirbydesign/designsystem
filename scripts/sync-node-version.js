@@ -1,8 +1,9 @@
 'use strict';
 
-const { exec } = require('child_process');
-const fs = require('fs-extra');
-const os = require('os');
+import { exec } from 'child_process';
+import pkg from 'fs-extra';
+const { writeFile } = pkg;
+import { EOL } from 'os';
 
 function hasNodeVersionChanged() {
   return new Promise((resolve, reject) => {
@@ -26,7 +27,7 @@ hasNodeVersionChanged()
       const {
         engines: { node: nodeVersion },
       } = require('../package.json');
-      fs.writeFile('.nvmrc', nodeVersion.replace('^', '').replace('~', '') + os.EOL);
+      writeFile('.nvmrc', nodeVersion.replace('^', '').replace('~', '') + EOL);
       exec('git add .nvmrc');
       console.log(
         '[sync-node-version] ...DONE. Node version synced to .nvmrc file and added to commit.'
