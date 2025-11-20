@@ -266,7 +266,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt=""/></a>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
@@ -322,7 +322,7 @@ export const WithActions: Story = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt=""/></a>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
             <button kirby-button size="sm" attentionLevel="3" slot="action" style="display: flex; flex-grow: 1; justify-content: flex-start;">
               <kirby-icon name="search"></kirby-icon>
               <span>Search...</span>
