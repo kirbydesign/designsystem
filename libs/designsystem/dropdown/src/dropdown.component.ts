@@ -405,8 +405,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  private documentClickListener: EventListenerDisposeFn | null = null;
-
   open() {
     if (this.disabled) {
       return;
@@ -421,16 +419,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
       // Move focus to selected item (if any) or first item
       this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
-
-      this.documentClickListener = this.renderer.listen(
-        'document',
-        'click',
-        (event: MouseEvent) => {
-          if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-            this.close();
-          }
-        }
-      );
     }
   }
 
@@ -452,11 +440,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       // Reset vertical direction to default
       this.verticalDirection = VerticalDirection.down;
       this.popover?.hide();
-
-      if (this.documentClickListener) {
-        this.documentClickListener();
-        this.documentClickListener = null;
-      }
     }
   }
 
@@ -808,10 +791,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.resizeObserverService.unobserve(this.elementRef);
     if (this.intersectionObserverRef) {
       this.intersectionObserverRef.disconnect();
-    }
-    if (this.documentClickListener) {
-      this.documentClickListener();
-      this.documentClickListener = null;
     }
   }
 }
