@@ -266,14 +266,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo.svg" alt=""/>
-            <button kirby-button size="sm" slot="search" style="display: flex; flex-grow: 1; justify-content: flex-start; --kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
-              <kirby-icon name="search"></kirby-icon>
-              <span>Search...</span>
-            </button>
-            <button kirby-button size="sm" slot="action" style="--kirby-button-background-color: var(--kirby-inputs-background-color); --kirby-button-color: var(--kirby-inputs-color);">
-              <kirby-icon name="more"></kirby-icon>
-            </button>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt=""/></a>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
@@ -319,9 +312,9 @@ export const AutoCollapse: Story = {
 };
 
 /**
- * A simple sidebar with only an icon in the header and no footer.
+ * A sidebar with extra action buttons in the header.
  */
-export const SimpleSidebar: Story = {
+export const WithActions: Story = {
   ...Default,
   render: ({ mainAreaContent, ...args }) => ({
     props: args,
@@ -329,7 +322,14 @@ export const SimpleSidebar: Story = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo.svg" alt=""/>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt=""/></a>
+            <button kirby-button size="sm" attentionLevel="3" slot="action" style="display: flex; flex-grow: 1; justify-content: flex-start;">
+              <kirby-icon name="search"></kirby-icon>
+              <span>Search...</span>
+            </button>
+            <button kirby-button size="sm" attentionLevel="3" slot="action" aria-label="More settings">
+              <kirby-icon name="more"></kirby-icon>
+            </button>
           </kirby-x-sidebar-header>
         </kirby-x-sidebar>
         <div style="padding: var(--kirby-spacing-s);">
@@ -339,6 +339,6 @@ export const SimpleSidebar: Story = {
   }),
   args: {
     ...Default.args,
-    mainAreaContent: '<h1>Sidebar with simple header and no footer</h1>',
+    mainAreaContent: '<h1>Sidebar with extra action buttons in the header</h1>',
   },
 };

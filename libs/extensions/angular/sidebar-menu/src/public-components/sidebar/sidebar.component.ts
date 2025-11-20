@@ -5,7 +5,8 @@ import { SidebarMenuComponent } from '../../components/sidebar-menu';
 @Component({
   selector: 'kirby-x-sidebar',
   template: `
-    <kirby-x-sidebar-menu
+    <aside
+      kirby-x-sidebar-menu
       [menuItems]="menuItems"
       [autoCollapse]="autoCollapse"
       (menuItemsChange)="changeMenuItems($event)"
@@ -14,7 +15,7 @@ import { SidebarMenuComponent } from '../../components/sidebar-menu';
     >
       <ng-content select="kirby-x-sidebar-header" slot="header"></ng-content>
       <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
-    </kirby-x-sidebar-menu>
+    </aside>
   `,
   imports: [SidebarMenuComponent],
 })

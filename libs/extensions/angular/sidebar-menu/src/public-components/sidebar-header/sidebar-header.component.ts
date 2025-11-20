@@ -3,22 +3,31 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'kirby-x-sidebar-header',
   template: `
-    <span class="sidebar-logo"><ng-content></ng-content></span>
-    <div class="action-bar">
-      <ng-content select="[slot='search']"></ng-content>
-      <ng-content select="[slot='action']"></ng-content>
-    </div>
+    <header>
+      <span class="sidebar-logo"><ng-content slot="logo"></ng-content></span>
+      <div class="action-bar">
+        <ng-content select="[slot='action']"></ng-content>
+      </div>
+    </header>
   `,
   styles: `
-    :host {
+    :host,
+    header {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    :host {
       flex-grow: 1;
     }
 
-    :host::ng-deep .sidebar-logo > img {
+    header {
+      width: 100%;
+    }
+
+    :host::ng-deep [slot='logo'] img {
       object-fit: contain;
       width: 100%;
       height: 100%;
@@ -39,8 +48,8 @@ import { Component } from '@angular/core';
       box-sizing: border-box;
       width: 100%;
 
-      &:has(button) {
-        padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-s);
+      &:has([slot='action']) {
+        padding: 0 var(--kirby-spacing-xs) var(--kirby-spacing-xs);
       }
     }
   `,

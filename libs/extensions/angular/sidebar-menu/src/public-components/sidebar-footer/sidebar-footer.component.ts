@@ -2,14 +2,22 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'kirby-x-sidebar-footer',
-  template: '<ng-content></ng-content>',
+  template: '<footer><ng-content></ng-content></footer>',
   styles: `
-    :host {
+    :host,
+    footer {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    :host {
       min-height: 80px;
+    }
+
+    footer {
+      width: 100%;
     }
   `,
 })
