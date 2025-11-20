@@ -715,7 +715,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
-  onBlur() {
+  _onBlur() {
     if (this.usePopover) return;
     this.close();
     this._onTouched();
