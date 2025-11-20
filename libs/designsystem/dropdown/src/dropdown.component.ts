@@ -405,7 +405,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  private documentClickListener: (() => void) | null = null;
+  private documentClickListener: EventListenerDisposeFn | null = null;
 
   open() {
     if (this.disabled) {
@@ -715,8 +715,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
-  @HostListener('blur')
-  _onBlur() {
+  onBlur() {
     if (this.usePopover) return;
     this.close();
     this._onTouched();

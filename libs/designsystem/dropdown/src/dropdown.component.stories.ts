@@ -69,6 +69,31 @@ export const Dropdown: Story = {
   },
 };
 
+export const DropdownClosedOnOutsideClick: Story = {
+  args: {
+    items: items,
+    selectedIndex: 0,
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>
+         <button kirby-button style="position: absolute; top: 0; right: 0;" data-testid="outside-close-btn">
+        Outside Close
+      </button>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const toOpen = canvas.getByRole('combobox');
+    await userEvent.click(toOpen);
+
+    const outsideButton = canvas.getByTestId('outside-close-btn');
+    await userEvent.click(outsideButton);
+  },
+};
+
 export const DropdownOpened: Story = {
   args: {
     items: items,
