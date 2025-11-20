@@ -2,16 +2,60 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'kirby-x-sidebar-header',
-  template: '<span class="sidebar-logo"><ng-content></ng-content></span>',
-  styles: [
-    `
-      .sidebar-logo {
-        display: flex;
-        align-items: center;
-        margin: 32px 0;
-        height: 50px;
+  template: `
+    <header>
+      <span class="sidebar-logo"><ng-content slot="logo"></ng-content></span>
+      <div class="action-bar">
+        <ng-content select="[slot='action']"></ng-content>
+      </div>
+    </header>
+  `,
+  styles: `
+    :host,
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    :host {
+      flex-grow: 1;
+    }
+
+    header {
+      width: 100%;
+    }
+
+    :host::ng-deep [slot='logo'] {
+      height: inherit;
+    }
+
+    :host::ng-deep [slot='logo'] img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      margin: var(--kirby-spacing-l) var(--kirby-spacing-m);
+    }
+
+    .action-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      width: 100%;
+
+      &:has([slot='action']) {
+        padding: 0 var(--kirby-spacing-xs) var(--kirby-spacing-xs);
       }
-    `,
-  ],
+    }
+  `,
 })
 export class SidebarHeaderComponent {}
