@@ -27,6 +27,10 @@ import { Component } from '@angular/core';
       width: 100%;
     }
 
+    :host::ng-deep [slot='logo'] {
+      height: inherit;
+    }
+
     :host::ng-deep [slot='logo'] img {
       object-fit: contain;
       width: 100%;
