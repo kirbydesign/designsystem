@@ -1098,7 +1098,7 @@ describe('DropdownComponent', () => {
         spectator.component.registerOnTouched(onTouchedSpy);
 
         const buttonElement = spectator.query('button[kirby-button]');
-        buttonElement.blur();
+        buttonElement.dispatchEvent(new FocusEvent('blur'));
         spectator.detectChanges();
 
         expect(onTouchedSpy).toHaveBeenCalled();
