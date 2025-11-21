@@ -673,6 +673,19 @@ describe('DropdownComponent', () => {
         });
       });
 
+      describe('and looses focus', () => {
+        it('should close dropdown', () => {
+          const buttonElement = spectator.query('button[kirby-button]');
+          spectator.component.open();
+          spectator.detectChanges();
+
+          buttonElement.dispatchEvent(new FocusEvent('blur'));
+          spectator.detectChanges();
+
+          expect(spectator.component.isOpen).toBeFalsy();
+        });
+      });
+
       describe('and ArrowLeft key is pressed', () => {
         it('should not change selected item', () => {
           spectator.setHostInput('selectedIndex', 2);
@@ -1079,6 +1092,17 @@ describe('DropdownComponent', () => {
         spectator.component.registerOnChange(onChangeSpy);
         spectator.component.onItemSelect(selectedIndex);
         expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+      });
+
+      it('should invoke callback from registerOnTouched() function on blur', () => {
+        const onTouchedSpy = jasmine.createSpy('_onTouched');
+        spectator.component.registerOnTouched(onTouchedSpy);
+
+        const buttonElement = spectator.query('button[kirby-button]');
+        buttonElement.dispatchEvent(new FocusEvent('blur'));
+        spectator.detectChanges();
+
+        expect(onTouchedSpy).toHaveBeenCalled();
       });
 
       describe('when setDisabledState() function is invoked', () => {

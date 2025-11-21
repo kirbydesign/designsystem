@@ -1,5 +1,5 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
@@ -86,11 +86,19 @@ export const DropdownClosedOnOutsideClick: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const toOpen = canvas.getByRole('combobox');
-    await userEvent.click(toOpen);
+    const dropdown = canvas.getByRole('combobox');
+    await userEvent.click(dropdown);
+
+    await waitFor(() => {
+      expect(dropdown).toHaveAttribute('aria-expanded', 'true');
+    });
 
     const outsideButton = canvas.getByTestId('outside-close-btn');
     await userEvent.click(outsideButton);
+
+    await waitFor(() => {
+      expect(dropdown).toHaveAttribute('aria-expanded', 'false');
+    });
   },
 };
 
