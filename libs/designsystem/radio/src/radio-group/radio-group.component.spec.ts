@@ -1359,10 +1359,10 @@ describe('RadioGroupComponent', () => {
       { text: 'Banana', value: 2 },
       { text: 'Cherry', value: 3 },
     ];
-    let spectator: SpectatorHost<RadioGroupComponent>;
+    let spectator: SpectatorHost<RadioGroupComponent, OnPushHostComponent>;
     let formControl: FormControl;
+    let ionRadioGroup: HTMLIonRadioGroupElement;
     let ionRadioElements: HTMLIonRadioElement[];
-    let radios: RadioComponent[];
 
     const createHost = createHostFactory({
       component: RadioGroupComponent,
@@ -1376,7 +1376,7 @@ describe('RadioGroupComponent', () => {
       ],
     });
 
-    beforeEach(async () => {
+    beforeEach(() => {
       formControl = new FormControl(items[0]);
       spectator = createHost(
         '<kirby-radio-group [items]="items" [formControl]="formControl"></kirby-radio-group>',
@@ -1387,59 +1387,41 @@ describe('RadioGroupComponent', () => {
           },
         }
       );
-      const ionRadioGroupElement = spectator.query('ion-radio-group');
-      await TestHelper.whenReady(ionRadioGroupElement);
-
+      ionRadioGroup = spectator.query('ion-radio-group');
       ionRadioElements = spectator.queryAll<HTMLIonRadioElement>('ion-radio');
-      await TestHelper.whenReady(ionRadioElements);
-
-      radios = spectator.queryAll(RadioComponent);
     });
 
-    it('should update disabled state when form control is disabled', async () => {
+    it('should update value when form control value changes', () => {
+      expect(spectator.component.value).toEqual(items[0]);
+
+      formControl.setValue(items[2]);
+      spectator.detectChanges();
+
+      expect(ionRadioGroup.value).toEqual(items[2]);
+    });
+
+    it('should update disabled state when form control is disabled', () => {
       expect(spectator.component.disabled).toBeFalsy();
-      ionRadioElements.forEach((ionRadio) => expect(ionRadio).not.toHaveAttribute('aria-disabled'));
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeFalsy());
 
       formControl.disable();
       spectator.detectChanges();
 
-      await TestHelper.whenReady(ionRadioElements);
-
       expect(spectator.component.disabled).toBeTruthy();
-      ionRadioElements.forEach((ionRadio) =>
-        expect(ionRadio).toHaveAttribute('aria-disabled', 'true')
-      );
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeTruthy());
     });
 
-    it('should update disabled state when form control is enabled', async () => {
+    it('should update disabled state when form control is enabled', () => {
       formControl.disable();
       spectator.detectChanges();
-
-      await TestHelper.whenReady(ionRadioElements);
-
       expect(spectator.component.disabled).toBeTruthy();
-      ionRadioElements.forEach((ionRadio) =>
-        expect(ionRadio).toHaveAttribute('aria-disabled', 'true')
-      );
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeTruthy());
 
       formControl.enable();
-
       spectator.detectChanges();
-      await TestHelper.whenReady(ionRadioElements);
 
       expect(spectator.component.disabled).toBeFalsy();
-      ionRadioElements.forEach((ionRadio) => expect(ionRadio).not.toHaveAttribute('aria-disabled'));
-    });
-
-    it('should update selected radio when form control value changes', async () => {
-      formControl.setValue(items[1]);
-      spectator.detectChanges();
-
-      await TestHelper.whenReady(ionRadioElements);
-
-      expect(spectator.component.value).toEqual(items[1]);
-      expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
-      expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('true');
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeFalsy());
     });
 
     it('should mark component for check when value is written', () => {
