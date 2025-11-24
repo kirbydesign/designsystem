@@ -2,7 +2,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { fakeAsync, tick } from '@angular/core/testing';
 import { RangeComponent } from './range.component';
 
 @Component({
