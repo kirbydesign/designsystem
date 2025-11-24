@@ -1,4 +1,6 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
+  FormControl,
   FormsModule,
   ReactiveFormsModule,
   UntypedFormControl,
@@ -19,6 +21,13 @@ import { RadioComponent } from '../radio.component';
 import { RadioGroupComponent } from './radio-group.component';
 
 const { getColor } = DesignTokenHelper;
+
+@Component({
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
+})
+class OnPushHostComponent {}
 
 describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
@@ -1341,6 +1350,126 @@ describe('RadioGroupComponent', () => {
         await TestHelper.waitForTimeout();
         spectator.detectChanges();
       }
+    });
+  });
+
+  describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
+    const items = [
+      { text: 'Apple', value: 1 },
+      { text: 'Banana', value: 2 },
+      { text: 'Cherry', value: 3 },
+    ];
+    let spectator: SpectatorHost<RadioGroupComponent>;
+    let formControl: FormControl;
+    let ionRadioElements: HTMLIonRadioElement[];
+    let radios: RadioComponent[];
+
+    const createHost = createHostFactory({
+      component: RadioGroupComponent,
+      host: OnPushHostComponent,
+      imports: [
+        TestHelper.ionicModuleForTest,
+        IonRadioGroup,
+        IonRadio,
+        ReactiveFormsModule,
+        RadioComponent,
+      ],
+    });
+
+    beforeEach(async () => {
+      formControl = new FormControl(items[0]);
+      spectator = createHost(
+        '<kirby-radio-group [items]="items" [formControl]="formControl"></kirby-radio-group>',
+        {
+          hostProps: {
+            items,
+            formControl,
+          },
+        }
+      );
+      const ionRadioGroupElement = spectator.query('ion-radio-group');
+      await TestHelper.whenReady(ionRadioGroupElement);
+
+      ionRadioElements = spectator.queryAll<HTMLIonRadioElement>('ion-radio');
+      await TestHelper.whenReady(ionRadioElements);
+
+      radios = spectator.queryAll(RadioComponent);
+    });
+
+    it('should update disabled state when form control is disabled', async () => {
+      expect(spectator.component.disabled).toBeFalsy();
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio).not.toHaveAttribute('aria-disabled'));
+
+      formControl.disable();
+      spectator.detectChanges();
+
+      await TestHelper.whenReady(ionRadioElements);
+
+      expect(spectator.component.disabled).toBeTruthy();
+      ionRadioElements.forEach((ionRadio) =>
+        expect(ionRadio).toHaveAttribute('aria-disabled', 'true')
+      );
+    });
+
+    it('should update disabled state when form control is enabled', async () => {
+      formControl.disable();
+      spectator.detectChanges();
+
+      await TestHelper.whenReady(ionRadioElements);
+
+      expect(spectator.component.disabled).toBeTruthy();
+      ionRadioElements.forEach((ionRadio) =>
+        expect(ionRadio).toHaveAttribute('aria-disabled', 'true')
+      );
+
+      formControl.enable();
+
+      spectator.detectChanges();
+      await TestHelper.whenReady(ionRadioElements);
+
+      expect(spectator.component.disabled).toBeFalsy();
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio).not.toHaveAttribute('aria-disabled'));
+    });
+
+    it('should update selected radio when form control value changes', async () => {
+      formControl.setValue(items[1]);
+      spectator.detectChanges();
+
+      await TestHelper.whenReady(ionRadioElements);
+
+      expect(spectator.component.value).toEqual(items[1]);
+      expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
+      expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('true');
+    });
+
+    it('should mark component for check when value is written', () => {
+      const cdr = spectator.component['cdr'];
+      spyOn(cdr, 'markForCheck');
+
+      spectator.component.writeValue(items[1]);
+
+      expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
+
+    describe('setDisabledState()', () => {
+      it('should mark component for check when disabled state is set to true', () => {
+        const cdr = spectator.component['cdr'];
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(true);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
+
+      it('should mark component for check when disabled state is set to false', () => {
+        const cdr = spectator.component['cdr'];
+        spectator.component.disabled = true;
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(false);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
     });
   });
 });
