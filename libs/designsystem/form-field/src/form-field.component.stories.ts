@@ -9,6 +9,7 @@ import {
 } from '@kirbydesign/designsystem/form-field';
 
 import { IconComponent } from '@kirbydesign/designsystem';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {
@@ -55,6 +56,23 @@ export const InputCounter: Story = {
     template: `<kirby-form-field>
     <input kirby-input placeholder="Input Counter" #input maxlength="140" />
     <kirby-input-counter [listenTo]="input"></kirby-input-counter>
+  </kirby-form-field>`,
+  }),
+};
+
+export const TextareaWithInputCounter: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule],
+    }),
+  ],
+  render: () => ({
+    props: {
+      textControl: new FormControl('Text area in form control'),
+    },
+    template: `<kirby-form-field label="Textarea with label and message" >
+    <textarea kirby-textarea [formControl]="textControl" #textarea></textarea>
+    <kirby-input-counter [listenTo]="textarea"></kirby-input-counter>
   </kirby-form-field>`,
   }),
 };

@@ -1,8 +1,8 @@
-@use '@kirbydesign/core/src/scss/utils' as utils;
-@use '@kirbydesign/core/src/scss/themes' as themes;
+@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 @use 'sass:color';
 
-.sidebar {
+:host {
   @include themes.apply-dark-theme;
 
   height: 100%; // Fallback for browsers that do not support dynamic viewport units
@@ -54,24 +54,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   position: sticky;
 }
 
-.sidebar-header {
-  padding: 0 24px;
-
-  &.bottom-border {
-    box-shadow: 0 4px 10px 2px rgb(28 28 28 / 30%);
-    transition: opacity 0.3s;
-  }
+.sidebar-header.bottom-border {
+  box-shadow: 0 4px 10px 2px rgb(28 28 28 / 30%);
+  transition: opacity 0.3s;
 }
 
-.sidebar-footer {
-  min-height: 80px;
-
-  &.top-border {
-    box-shadow: 0 -4px 10px 2px rgb(28 28 28 / 30%);
-    transition: opacity 0.3s;
-  }
+.sidebar-footer.top-border {
+  box-shadow: 0 -4px 10px 2px rgb(28 28 28 / 30%);
+  transition: opacity 0.3s;
 }
