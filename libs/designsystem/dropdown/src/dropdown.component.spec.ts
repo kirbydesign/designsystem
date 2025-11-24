@@ -675,9 +675,6 @@ describe('DropdownComponent', () => {
 
       describe('and looses focus', () => {
         it('should close dropdown', () => {
-          const buttonElement = spectator.query('button[kirby-button]');
-          spectator.detectChanges();
-
           buttonElement.dispatchEvent(new FocusEvent('blur'));
           spectator.detectChanges();
 
@@ -1097,7 +1094,6 @@ describe('DropdownComponent', () => {
         const onTouchedSpy = jasmine.createSpy('_onTouched');
         spectator.component.registerOnTouched(onTouchedSpy);
 
-        const buttonElement = spectator.query('button[kirby-button]');
         buttonElement.dispatchEvent(new FocusEvent('blur'));
         spectator.detectChanges();
 
