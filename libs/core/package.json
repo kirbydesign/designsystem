@@ -59,6 +59,14 @@
     "./spinner.element": {
       "types": "./dist/types/spinner/spinner.element.d.ts",
       "default": "./dist/spinner/spinner.element.js"
+    },
+    "./divider": {
+      "types": "./dist/types/divider/index.d.ts",
+      "default": "./dist/divider/index.js"
+    },
+    "./divider.element": {
+      "types": "./dist/types/divider/divider.element.d.ts",
+      "default": "./dist/divider/divider.element.js"
     }
   }
 }

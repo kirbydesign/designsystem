@@ -1,12 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   Inject,
   Input,
   OnChanges,
+  OnInit,
   Optional,
   Output,
   SimpleChanges,
@@ -21,7 +23,7 @@ import { FormFieldControl } from '@kirbydesign/designsystem/types';
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',
 })
-export class TextareaComponent implements OnChanges, FormFieldControl {
+export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
@@ -63,9 +65,22 @@ export class TextareaComponent implements OnChanges, FormFieldControl {
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   constructor(
+    private elementRef: ElementRef<HTMLTextAreaElement>,
     @Optional() @Inject(NG_VALUE_ACCESSOR) private builtInValueAccessors: ControlValueAccessor[]
   ) {
     this.extendBuiltinValueAccessor();
+  }
+
+  ngOnInit(): void {
+    // The native input value is emitted here to make sure that
+    // the InputCounterComponent receives the value onInit,
+    // when [(ngModel)] is used on kirby-textarea.
+    setTimeout(() => {
+      const inputValue = this.elementRef.nativeElement.value;
+      if (inputValue) {
+        this.kirbyChange.emit(inputValue);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

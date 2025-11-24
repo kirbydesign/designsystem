@@ -5,16 +5,17 @@ import { SidebarMenuComponent } from '../../components/sidebar-menu';
 @Component({
   selector: 'kirby-x-sidebar',
   template: `
-    <kirby-x-sidebar-menu
+    <aside
+      kirby-x-sidebar-menu
       [menuItems]="menuItems"
       [autoCollapse]="autoCollapse"
       (menuItemsChange)="changeMenuItems($event)"
       (itemClick)="afterMenuClicked.emit($event)"
       (submenuToggle)="afterMenuToggled.emit($event)"
     >
-      <header><ng-content select="kirby-x-sidebar-header"></ng-content></header>
-      <footer><ng-content select="kirby-x-sidebar-footer"></ng-content></footer>
-    </kirby-x-sidebar-menu>
+      <ng-content select="kirby-x-sidebar-header" slot="header"></ng-content>
+      <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
+    </aside>
   `,
   imports: [SidebarMenuComponent],
 })

@@ -26,6 +26,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Subscription } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -48,11 +49,13 @@ export class FormFieldComponent
   private element: HTMLElement;
   private isTouch: boolean;
   private nestedInteractiveElement:
+    | HTMLButtonElement
     | HTMLInputElement
     | HTMLTextAreaElement
     | HTMLIonRadioGroupElement;
   private nestedInteractiveErrorSubscription: Subscription;
-  private _message: string | null;
+  private _message: string | null | undefined;
+  private _label: string | undefined;
 
   showDefaultCalendarIcon = false;
 
@@ -61,24 +64,34 @@ export class FormFieldComponent
   _errorMessageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
   _messageId = UniqueIdGenerator.scopedTo('kirby-form-field-message').next();
 
-  @Input() label: string;
-  @Input() get message(): string | null {
+  @Input() get label(): string | undefined {
+    return this._label;
+  }
+
+  set label(value: string | undefined) {
+    this._label = value;
+    this.setNestedInteractiveLabelAttributes();
+  }
+
+  @Input() get message(): string | null | undefined {
     return this._message;
   }
 
-  set message(value: string | null) {
+  set message(value: string | null | undefined) {
     this._message = value;
-    this.setNestedInteractiveElementAttributes();
+    this.setNestedInteractiveMessageAttributes();
   }
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
   @ContentChild(InputComponent) inputComponent: InputComponent;
+  @ContentChild(DropdownComponent) dropdownComponent: DropdownComponent;
   @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
   @ContentChild(RadioGroupComponent, { read: ElementRef })
   private radioGroupElement: ElementRef<HTMLElement>;
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
+  @ContentChild(DropdownComponent, { read: ElementRef }) dropdown: ElementRef<HTMLElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
   @ContentChild(DateInputDirective) dateInput: DateInputDirective;
@@ -116,7 +129,10 @@ export class FormFieldComponent
   }
 
   onLabelClick() {
-    this.radioGroupComponent?.focus();
+    // If its a radio group its focus method that contains advanced logic
+    this.radioGroupComponent
+      ? this.radioGroupComponent?.focus()
+      : this.nestedInteractiveElement?.focus();
   }
 
   public focus() {
@@ -146,24 +162,7 @@ export class FormFieldComponent
   }
 
   ngAfterContentInit(): void {
-    // Measure the width of all slotted affix elements,
-    // and apply their width + standard padding to the input elements
-    // padding, so the start/end of the input is correctly indented.
-    if (this.input) {
-      this.affixElements.forEach((affix) => {
-        this.resizeObserverService.observe(affix.el, (entry) => {
-          const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
-          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
-          const existingPadding = parseInt(DesignTokenHelper.size('s'));
-
-          this.renderer.setStyle(
-            this.input.nativeElement,
-            `${padding}`,
-            `${affixWidth + existingPadding}px`
-          );
-        });
-      });
-    }
+    this.handleAffixOffset();
   }
 
   ngAfterContentChecked(): void {
@@ -200,7 +199,8 @@ export class FormFieldComponent
 
   private registerNestedInteractive() {
     this.getNestedInteractiveElement();
-    this.setNestedInteractiveElementAttributes();
+    this.setNestedInteractiveLabelAttributes();
+    this.setNestedInteractiveMessageAttributes();
     this.subscribeToNestedInteractiveError();
   }
 
@@ -208,10 +208,11 @@ export class FormFieldComponent
     this.nestedInteractiveElement =
       this.input?.nativeElement ||
       this.textarea?.nativeElement ||
-      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group');
+      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group') ||
+      this.dropdown?.nativeElement.querySelector('button[kirby-button]');
   }
 
-  private setNestedInteractiveElementAttributes() {
+  private setNestedInteractiveMessageAttributes() {
     if (!this.nestedInteractiveElement) return;
 
     if (this.message) {
@@ -226,16 +227,29 @@ export class FormFieldComponent
         'aria-errormessage',
         this._errorMessageId
       );
+    } else {
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-describedby');
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-errormessage');
     }
+  }
 
-    if (this.label && this.radioGroupElement) {
+  private setNestedInteractiveLabelAttributes() {
+    if (!this.nestedInteractiveElement) return;
+    if (this._wrapContentInLabel) return; // return if label is wrapping the nested interactive. No need for aria-labelledby.
+
+    if (this.label) {
       this.renderer.setAttribute(this.nestedInteractiveElement, 'aria-labelledby', this._labelId);
+    } else {
+      this.renderer.removeAttribute(this.nestedInteractiveElement, 'aria-labelledby');
     }
   }
 
   private subscribeToNestedInteractiveError() {
     const nestedInteractiveComponent =
-      this.inputComponent || this.textareaComponent || this.radioGroupComponent;
+      this.inputComponent ||
+      this.textareaComponent ||
+      this.radioGroupComponent ||
+      this.dropdownComponent;
 
     // set current value, then listen for changes
     this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
@@ -252,5 +266,31 @@ export class FormFieldComponent
       this.dateInput?.useNativeDatePicker &&
       !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
     );
+  }
+
+  private handleAffixOffset() {
+    // Measure the width of all slotted affix elements,
+    // and apply their width + standard padding to the input elements
+    // padding, so the start/end of the input is correctly indented.
+    if (this.input) {
+      this.affixElements.forEach((affix) => {
+        this.resizeObserverService.observe(affix.el, (entry) => {
+          const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
+          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
+          const existingPadding = parseInt(DesignTokenHelper.size('s'));
+
+          this.renderer.setStyle(
+            this.input.nativeElement,
+            `${padding}`,
+            `${affixWidth + existingPadding}px`
+          );
+
+          const dateMask = this.element.querySelector('.date-mask');
+          if (dateMask) {
+            this.renderer.setStyle(dateMask, `${padding}`, `${affixWidth + existingPadding}px`);
+          }
+        });
+      });
+    }
   }
 }

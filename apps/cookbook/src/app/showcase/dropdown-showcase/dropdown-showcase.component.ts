@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-import { DropdownExampleConfigurationComponent } from '../../examples/dropdown-example/dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { DropdownExampleDefaultComponent } from '../../examples/dropdown-example/examples/default';
 import { DropdownExampleScrollComponent } from '../../examples/dropdown-example/examples/scroll';
@@ -17,14 +16,16 @@ import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { DropdownExampleStatesComponent } from '~/app/examples/dropdown-example/examples/states';
+import { DropdownExampleFormFieldComponent } from '~/app/examples/dropdown-example/examples/form-field';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { DropdownExampleSizesComponent } from '~/app/examples/dropdown-example/examples/sizes';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
   templateUrl: './dropdown-showcase.component.html',
   styleUrls: ['./dropdown-showcase.component.scss'],
   imports: [
-    DropdownExampleConfigurationComponent,
     ExampleViewerComponent,
     ImportViewerComponent,
     DropdownExampleDefaultComponent,
@@ -36,6 +37,9 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     DropdownExampleItemSelectComponent,
     DropdownExampleCustomItemTemplateComponent,
     DropdownExampleNgFormsComponent,
+    DropdownExampleStatesComponent,
+    DropdownExampleFormFieldComponent,
+    DropdownExampleSizesComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ApiDescriptionMethodsComponent,
@@ -124,8 +128,4 @@ export class DropdownShowcaseComponent {
       signature: '(item: string | any) => void',
     },
   ];
-
-  setSize(size: string) {
-    this.size = size;
-  }
 }

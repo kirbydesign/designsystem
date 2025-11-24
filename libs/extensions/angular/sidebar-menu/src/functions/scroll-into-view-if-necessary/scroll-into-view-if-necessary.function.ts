@@ -3,8 +3,8 @@
  * so we implement a version based on standard
  */
 export function scrollIntoViewIfNecessary(
-  scrollContainer: HTMLElement,
-  child: HTMLElement,
+  scrollContainer: Element,
+  child: Element,
   position: ScrollLogicalPosition = 'center'
 ) {
   const containerRect = scrollContainer.getBoundingClientRect();

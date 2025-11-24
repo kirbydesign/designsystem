@@ -1,20 +1,18 @@
-<nav class="sidebar">
-  <div class="sidebar-header" [class.bottom-border]="vm.showHeaderBottomBorder()">
-    <ng-content select="header"></ng-content>
-  </div>
-  <div
+<div class="sidebar-header" [class.bottom-border]="vm.showHeaderBottomBorder()">
+  <ng-content select="[slot='header']"></ng-content>
+</div>
+<div
+  kirbyXHeightObserver
+  class="sidebar-content"
+  (scroll)="vm.setScroll($event)"
+  (heightChange)="vm.setContainerHeight($event)"
+>
+  <kirby-x-menu-container
     kirbyXHeightObserver
-    class="sidebar-content"
-    (scroll)="vm.setScroll($event)"
-    (heightChange)="vm.setContainerHeight($event)"
-  >
-    <kirby-x-menu-container
-      kirbyXHeightObserver
-      [items]="vm.items()"
-      (heightChange)="vm.setMenuHeight($event)"
-    ></kirby-x-menu-container>
-  </div>
-  <div class="sidebar-footer" [class.top-border]="vm.showFooterTopBorder()">
-    <ng-content select="footer"></ng-content>
-  </div>
-</nav>
+    [items]="vm.items()"
+    (heightChange)="vm.setMenuHeight($event)"
+  ></kirby-x-menu-container>
+</div>
+<div class="sidebar-footer" [class.top-border]="vm.showFooterTopBorder()">
+  <ng-content select="[slot='footer']"></ng-content>
+</div>

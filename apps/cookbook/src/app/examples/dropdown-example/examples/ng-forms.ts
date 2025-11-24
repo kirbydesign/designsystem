@@ -9,18 +9,20 @@ import {
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { JsonPipe } from '@angular/common';
+import { FormFieldComponent } from '@kirbydesign/designsystem/form-field';
 
 const config = {
   selector: 'cookbook-dropdown-example-ng-forms',
   template: `<form [formGroup]="form">
-  <kirby-dropdown
-    formControlName="favoriteFood"
-    [size]="size"
-    placeholder="Dropdown in form"
-    aria-label="dropdown-label"
-    [items]="items"
-    itemTextProperty="title"
-  ></kirby-dropdown>
+  <kirby-form-field [label]="'Label'" [message]="'Message'">
+    <kirby-dropdown
+      formControlName="favoriteFood"
+      placeholder="Dropdown in form"
+      [items]="items"
+      [hasError]="favoriteRequired && !form.controls['favoriteFood']?.valid"
+      itemTextProperty="title"
+    ></kirby-dropdown>
+  </kirby-form-field>
 </form>
 <fieldset>
   <legend>Configuration</legend>
@@ -85,13 +87,20 @@ toggleRequired(required: boolean) {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [FormsModule, ReactiveFormsModule, DropdownComponent, CheckboxComponent, JsonPipe],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    CheckboxComponent,
+    FormFieldComponent,
+    JsonPipe,
+  ],
 })
 export class DropdownExampleNgFormsComponent implements OnInit {
   template: string = config.template.split('<fieldset>')[0]; // Remove config part of the template
   codeSnippet: string = config.codeSnippet;
   canSelectFavorite = true;
-  favoriteRequired = true;
+  favoriteRequired = false;
   items = [
     { title: 'Bacon', subtitle: 'Bacon ipsum dolor', value: 1 },
     { title: 'Salami', subtitle: 'Salami andouille hamburger', value: 2 },
@@ -101,7 +110,6 @@ export class DropdownExampleNgFormsComponent implements OnInit {
   ];
   form: UntypedFormGroup;
   favoriteFoodControl: UntypedFormControl;
-  @Input() size: string;
 
   ngOnInit(): void {
     this.buildForm();

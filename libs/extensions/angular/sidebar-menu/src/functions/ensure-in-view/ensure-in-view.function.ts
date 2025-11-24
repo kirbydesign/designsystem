@@ -3,11 +3,7 @@ import { scrollIntoViewIfNecessary } from '../scroll-into-view-if-necessary';
 /**
  * Ensures the element top is not smaller than the scroll container top.
  */
-export function ensureInView(
-  scrollContainer: HTMLElement,
-  element: HTMLElement,
-  durationMs: number
-): void {
+export function ensureInView(scrollContainer: Element, element: Element, durationMs: number): void {
   let startTime: number | null = null;
 
   const updatePosition = (timestamp: number) => {

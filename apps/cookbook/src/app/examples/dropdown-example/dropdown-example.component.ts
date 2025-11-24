@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
-import { DropdownExampleConfigurationComponent } from './dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { DropdownExampleDefaultComponent } from './examples/default';
 import { DropdownExampleScrollComponent } from './examples/scroll';
 import { DropdownExamplePreSelectedComponent } from './examples/pre-selected';
@@ -10,13 +9,14 @@ import { DropdownExampleAttentionLevelComponent } from './examples/attention-lev
 import { DropdownExampleItemSelectComponent } from './examples/item-select';
 import { DropdownExampleCustomItemTemplateComponent } from './examples/custom-item-template';
 import { DropdownExampleNgFormsComponent } from './examples/ng-forms';
+import { DropdownExampleStatesComponent } from './examples/states';
+import { DropdownExampleFormFieldComponent } from './examples/form-field';
 
 @Component({
   selector: 'cookbook-dropdown-example',
   templateUrl: './dropdown-example.component.html',
   styleUrls: ['./dropdown-example.component.scss'],
   imports: [
-    DropdownExampleConfigurationComponent,
     DropdownExampleDefaultComponent,
     DropdownExampleScrollComponent,
     DropdownExamplePreSelectedComponent,
@@ -26,13 +26,9 @@ import { DropdownExampleNgFormsComponent } from './examples/ng-forms';
     DropdownExampleItemSelectComponent,
     DropdownExampleCustomItemTemplateComponent,
     DropdownExampleNgFormsComponent,
+    DropdownExampleStatesComponent,
+    DropdownExampleFormFieldComponent,
   ],
   providers: [ToastHelper, ToastController],
 })
-export class DropdownExampleComponent {
-  size: string = 'md';
-
-  onSizeChange(size: string) {
-    this.size = size;
-  }
-}
+export class DropdownExampleComponent {}

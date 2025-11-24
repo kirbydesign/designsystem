@@ -5,19 +5,8 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
   selector: 'cookbook-dropdown-example-attention-level',
-  template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
+  template: `<kirby-card hasPadding="true" class="constrain-width" [themeColor]="themeColor">
   <kirby-dropdown
-    [size]="size"
-    placeholder="Dropdown with attention level 1"
-    aria-label="Choose your favorite fruit"
-    attentionLevel="1"
-    expand="block"
-    usePopover="true"
-    [items]="items">
-  </kirby-dropdown>
-
-  <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown with attention level 2"
     aria-label="Choose your favorite fruit"
     attentionLevel="2"
@@ -27,7 +16,6 @@ const config = {
   </kirby-dropdown>
 
   <kirby-dropdown
-    [size]="size"
     placeholder="Dropdown with attention level 3"
     aria-label="Choose your favorite fruit"
     attentionLevel="3"
@@ -69,8 +57,6 @@ export class DropdownExampleAttentionLevelComponent {
   items = ['Apple', 'Banana', 'Blackberry', 'Blueberry', 'Grapes'];
   themeColors = ['light', 'white', 'dark'];
   themeColor = 'white';
-
-  @Input() size: string;
 
   onChange(value) {
     this.themeColor = value;

@@ -1,4 +1,5 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { userEvent, within } from 'storybook/test';
 
 import {
   FormFieldComponent,
@@ -8,6 +9,7 @@ import {
 } from '@kirbydesign/designsystem/form-field';
 
 import { IconComponent } from '@kirbydesign/designsystem';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {
@@ -58,6 +60,23 @@ export const InputCounter: Story = {
   }),
 };
 
+export const TextareaWithInputCounter: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule],
+    }),
+  ],
+  render: () => ({
+    props: {
+      textControl: new FormControl('Text area in form control'),
+    },
+    template: `<kirby-form-field label="Textarea with label and message" >
+    <textarea kirby-textarea [formControl]="textControl" #textarea></textarea>
+    <kirby-input-counter [listenTo]="textarea"></kirby-input-counter>
+  </kirby-form-field>`,
+  }),
+};
+
 export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-form-field-example></cookbook-form-field-example>`,
@@ -73,4 +92,12 @@ export const DateInputWithPrefixIcon: Story = {
       </kirby-form-field>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByRole('textbox');
+
+    await userEvent.click(input);
+    await userEvent.type(input, '987654');
+  },
 };

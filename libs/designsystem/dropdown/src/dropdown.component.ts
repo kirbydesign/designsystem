@@ -135,9 +135,21 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.disabled ? 'disabled' : null;
   }
 
+  @Output() hasErrorChange = new EventEmitter<boolean>();
+
+  private _hasError: boolean;
   @HostBinding('class.error')
   @Input()
-  hasError: boolean;
+  get hasError(): boolean {
+    return this._hasError;
+  }
+
+  set hasError(value: boolean) {
+    if (this._hasError !== value) {
+      this._hasError = value;
+      this.hasErrorChange.emit(this._hasError);
+    }
+  }
 
   @Input()
   size: 'sm' | 'md' = 'md';
@@ -672,16 +684,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  @HostListener('focus')
-  _onFocus() {
-    if (this.disabled) {
-      this.elementRef.nativeElement.blur();
-    }
-  }
-
   _onPopoverWillHide() {
     this.state = OpenState.closed;
-    this.elementRef.nativeElement.focus();
+    this.buttonElement.nativeElement.focus();
   }
 
   @HostListener('keydown.enter')
@@ -695,7 +700,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
-  @HostListener('blur', ['$event'])
   _onBlur() {
     if (this.usePopover) return;
     this.close();

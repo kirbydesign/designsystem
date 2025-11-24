@@ -22,7 +22,7 @@ describe(SidebarMenuComponent.name, () => {
 
   const render = (propOverrides: Partial<HostProps> = {}) =>
     createHost(
-      `<kirby-x-sidebar-menu [menuItems]="menuItems" [autoCollapse]="autoCollapse"></kirby-x-sidebar-menu>`,
+      `<aside kirby-x-sidebar-menu [menuItems]="menuItems" [autoCollapse]="autoCollapse"></aside>`,
       {
         hostProps: {
           menuItems: menuItemsMock,
