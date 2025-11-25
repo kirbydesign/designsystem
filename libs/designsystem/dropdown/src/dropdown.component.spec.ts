@@ -1307,11 +1307,16 @@ describe('DropdownComponent', () => {
     });
 
     it('should update disabled state when form control is enabled', () => {
-      expect(spectator.component.disabled).toBeFalsy();
+      formControl.disable();
+      spectator.detectChanges();
+
+      expect(spectator.component.disabled).toBeTruthy();
+      expect(buttonElement).toHaveAttribute('disabled');
 
       formControl.enable();
       spectator.detectChanges();
 
+      expect(buttonElement).not.toHaveAttribute('disabled');
       expect(spectator.component.disabled).toBeFalsy();
     });
 
