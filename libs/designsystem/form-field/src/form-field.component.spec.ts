@@ -115,7 +115,7 @@ describe('FormFieldComponent', () => {
 
     it('should render the label with correct margin', () => {
       expect(labelTextElement).toHaveComputedStyle({
-        'margin-bottom': size('xxs'),
+        'margin-bottom': size('xxxs'),
       });
     });
   });
@@ -194,21 +194,22 @@ describe('FormFieldComponent', () => {
 
       beforeEach(() => {
         spectator = createHost(
-          `<kirby-form-field message="My Message" [label]="label">
+          `<kirby-form-field [message]="message" [label]="label">
              <input kirby-input [hasError]="hasError" />
            </kirby-form-field>`,
-          { hostProps: { hasError: false, label: '' } }
+          { hostProps: { hasError: false, label: '', message: '' } }
         );
         inputElement = spectator.queryHost('input[kirby-input]');
         messageElement = spectator.queryHost('kirby-form-field-message');
       });
 
       it('should set aria-describedby on input to message id', () => {
+        spectator.setHostInput({ message: 'My message' });
         expect(inputElement).toHaveAttribute('aria-describedby', messageElement.id);
       });
 
       it('should set error-specific aria attributes on input', () => {
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, message: 'My message' });
 
         expect(inputElement).toHaveAttribute('aria-invalid', 'true');
         expect(inputElement).toHaveAttribute('aria-errormessage', messageElement.id);
@@ -223,12 +224,30 @@ describe('FormFieldComponent', () => {
       });
 
       it('should place message inside label when hasError on input is true', () => {
-        spectator.setHostInput({ label: 'My Label' });
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, label: 'My Label' });
 
         const parentLabel = messageElement.closest('label');
 
         expect(parentLabel).toBeDefined();
+      });
+
+      it('should not have aria attributes when message is set to undefined', () => {
+        spectator.setHostInput({ message: undefined });
+
+        expect(inputElement).not.toHaveAttribute('aria-describedby');
+        expect(inputElement).not.toHaveAttribute('aria-errormessage');
+      });
+
+      it('should add aria-describedby when message is added', () => {
+        spectator.setHostInput({ message: 'My Message' });
+
+        expect(inputElement).toHaveAttribute('aria-describedby', messageElement.id);
+      });
+
+      it('should add aria-errormessage when error-message is added', () => {
+        spectator.setHostInput({ hasError: true, message: 'My Message' });
+
+        expect(inputElement).toHaveAttribute('aria-errormessage', messageElement.id);
       });
     });
 
@@ -238,21 +257,22 @@ describe('FormFieldComponent', () => {
 
       beforeEach(() => {
         spectator = createHost(
-          `<kirby-form-field message="My Message" [label]="label">
+          `<kirby-form-field [message]="message" [label]="label">
              <textarea kirby-textarea [hasError]="hasError"></textarea>
            </kirby-form-field>`,
-          { hostProps: { hasError: false, label: '' } }
+          { hostProps: { hasError: false, label: '', message: '' } }
         );
         textareaElement = spectator.queryHost('textarea[kirby-textarea]');
         messageElement = spectator.queryHost('kirby-form-field-message');
       });
 
       it('should set aria-describedby on input to message id', () => {
+        spectator.setHostInput({ message: 'My message' });
         expect(textareaElement).toHaveAttribute('aria-describedby', messageElement.id);
       });
 
       it('should set error-specific aria attributes on input', () => {
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, message: 'My message' });
 
         expect(textareaElement).toHaveAttribute('aria-invalid', 'true');
         expect(textareaElement).toHaveAttribute('aria-errormessage', messageElement.id);
@@ -267,12 +287,30 @@ describe('FormFieldComponent', () => {
       });
 
       it('should place message inside label when hasError on input is true', () => {
-        spectator.setHostInput({ label: 'My Label' });
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, label: 'My Label' });
 
         const parentLabel = messageElement.closest('label');
 
         expect(parentLabel).toBeDefined();
+      });
+
+      it('should not have aria attributes when message is set to undefined', () => {
+        spectator.setHostInput({ message: undefined });
+
+        expect(textareaElement).not.toHaveAttribute('aria-describedby');
+        expect(textareaElement).not.toHaveAttribute('aria-errormessage');
+      });
+
+      it('should add aria-describedby when message is added', () => {
+        spectator.setHostInput({ message: 'My Message' });
+
+        expect(textareaElement).toHaveAttribute('aria-describedby', messageElement.id);
+      });
+
+      it('should add aria-errormessage when error-message is added', () => {
+        spectator.setHostInput({ hasError: true, message: 'My Message' });
+
+        expect(textareaElement).toHaveAttribute('aria-errormessage', messageElement.id);
       });
     });
 
@@ -282,26 +320,26 @@ describe('FormFieldComponent', () => {
 
       beforeEach(() => {
         spectator = createHost(
-          `<kirby-form-field message="My Message" [label]="label">
+          `<kirby-form-field [message]="message" [label]="label">
              <kirby-radio-group [hasError]="hasError" value="Bacon">
               <kirby-radio value="Bacon" text="Bacon"></kirby-radio>
               <kirby-radio value="Bologna" text="Bologna"></kirby-radio>
               <kirby-radio value="Tenderloin" text="Tenderloin"></kirby-radio>
             </kirby-radio-group>
            </kirby-form-field>`,
-          { hostProps: { hasError: false, label: '' } }
+          { hostProps: { hasError: false, label: '', message: '' } }
         );
         ionRadioGroup = spectator.queryHost('ion-radio-group');
         messageElement = spectator.queryHost('kirby-form-field-message');
       });
 
       it('should set aria-describedby on input to message id', () => {
-        spectator.detectChanges();
+        spectator.setHostInput({ message: 'My message' });
         expect(ionRadioGroup).toHaveAttribute('aria-describedby', messageElement.id);
       });
 
       it('should set error-specific aria attributes on input', () => {
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, message: 'My message' });
 
         expect(ionRadioGroup).toHaveAttribute('aria-invalid', 'true');
         expect(ionRadioGroup).toHaveAttribute('aria-errormessage', messageElement.id);
@@ -316,12 +354,43 @@ describe('FormFieldComponent', () => {
       });
 
       it('should place message inside label when hasError on input is true', () => {
-        spectator.setHostInput({ label: 'My Label' });
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, label: 'My Label' });
 
         const parentLabel = messageElement.closest('label');
 
         expect(parentLabel).toBeDefined();
+      });
+
+      it('should not have aria attributes when label is set to undefined', () => {
+        spectator.setHostInput({ label: undefined });
+
+        expect(ionRadioGroup).not.toHaveAttribute('aria-labelledby');
+      });
+
+      it('should add aria-labelledby when label is added', () => {
+        spectator.setHostInput({ label: 'My Label' });
+        const labelElement = spectator.queryHost('label');
+
+        expect(ionRadioGroup).toHaveAttribute('aria-labelledby', labelElement.id);
+      });
+
+      it('should not have aria attributes when message is set to undefined', () => {
+        spectator.setHostInput({ message: undefined });
+
+        expect(ionRadioGroup).not.toHaveAttribute('aria-describedby');
+        expect(ionRadioGroup).not.toHaveAttribute('aria-errormessage');
+      });
+
+      it('should add aria-describedby when message is added', () => {
+        spectator.setHostInput({ message: 'My Message' });
+
+        expect(ionRadioGroup).toHaveAttribute('aria-describedby', messageElement.id);
+      });
+
+      it('should add aria-errormessage when error-message is added', () => {
+        spectator.setHostInput({ hasError: true, message: 'My Message' });
+
+        expect(ionRadioGroup).toHaveAttribute('aria-errormessage', messageElement.id);
       });
     });
 
@@ -331,22 +400,22 @@ describe('FormFieldComponent', () => {
 
       beforeEach(() => {
         spectator = createHost(
-          `<kirby-form-field message="My Message" [label]="label">
+          `<kirby-form-field [message]="message" [label]="label">
             <kirby-dropdown [items]="['Item 1', 'Item 2', 'Item 3']" [hasError]="hasError"></kirby-dropdown>
           </kirby-form-field>`,
-          { hostProps: { hasError: false, label: '' } }
+          { hostProps: { hasError: false, label: '', message: '' } }
         );
         dropdownTrigger = spectator.queryHost('button[kirby-button]');
         messageElement = spectator.queryHost('kirby-form-field-message');
       });
 
       it('should set aria-describedby on input to message id', () => {
-        spectator.detectChanges();
+        spectator.setHostInput({ message: 'My message' });
         expect(dropdownTrigger).toHaveAttribute('aria-describedby', messageElement.id);
       });
 
       it('should set error-specific aria attributes on dropdown', () => {
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, message: 'My message' });
 
         expect(dropdownTrigger).toHaveAttribute('aria-invalid', 'true');
         expect(dropdownTrigger).toHaveAttribute('aria-errormessage', messageElement.id);
@@ -361,12 +430,43 @@ describe('FormFieldComponent', () => {
       });
 
       it('should place message inside label when hasError on input is true', () => {
-        spectator.setHostInput({ label: 'My Label' });
-        spectator.setHostInput({ hasError: true });
+        spectator.setHostInput({ hasError: true, label: 'My Label' });
 
         const parentLabel = messageElement.closest('label');
 
         expect(parentLabel).toBeDefined();
+      });
+
+      it('should not have aria attributes when label is set to undefined', () => {
+        spectator.setHostInput({ label: undefined });
+
+        expect(dropdownTrigger).not.toHaveAttribute('aria-labelledby');
+      });
+
+      it('should add aria-labelledby when label is added', () => {
+        spectator.setHostInput({ label: 'My Label' });
+        const labelElement = spectator.queryHost('label');
+
+        expect(dropdownTrigger).toHaveAttribute('aria-labelledby', labelElement.id);
+      });
+
+      it('should not have aria attributes when message is set to undefined', () => {
+        spectator.setHostInput({ message: undefined });
+
+        expect(dropdownTrigger).not.toHaveAttribute('aria-describedby');
+        expect(dropdownTrigger).not.toHaveAttribute('aria-errormessage');
+      });
+
+      it('should add aria-describedby when message is added', () => {
+        spectator.setHostInput({ message: 'My Message' });
+
+        expect(dropdownTrigger).toHaveAttribute('aria-describedby', messageElement.id);
+      });
+
+      it('should add aria-errormessage when error-message is added', () => {
+        spectator.setHostInput({ hasError: true, message: 'My Message' });
+
+        expect(dropdownTrigger).toHaveAttribute('aria-errormessage', messageElement.id);
       });
     });
 

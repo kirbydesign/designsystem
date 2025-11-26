@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as designsystemImportMap from '@repo/docs-import-map/dist/designsystem';
 import { CodeViewerComponent } from '../code-viewer/code-viewer.component';
 
 @Component({
@@ -30,8 +31,7 @@ export class ImportViewerComponent implements OnInit {
     try {
       // Dynamically import the generated map
       // This allows the component to work even if the map hasn't been generated yet
-      const generatedMap = require('./generated-import-map');
-      this.componentToPackage = generatedMap.COMPONENT_TO_PACKAGE_ENTRY_MAP || {};
+      this.componentToPackage = designsystemImportMap.COMPONENT_TO_PACKAGE_ENTRY_MAP || {};
     } catch {
       // File doesn't exist - use inference fallback
       console.warn(

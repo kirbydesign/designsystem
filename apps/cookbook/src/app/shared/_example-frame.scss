@@ -14,4 +14,9 @@
   &.no-padding {
     padding: 0;
   }
+
+  @include utils.media('<medium') {
+    margin-inline: -1 * utils.size('s');
+    padding-inline: utils.size('s');
+  }
 }

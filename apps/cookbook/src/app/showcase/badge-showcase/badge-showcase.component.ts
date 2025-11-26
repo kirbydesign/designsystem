@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import exampleHtml from '../../examples/badge-example/badge-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/badge-example/badge-example.component.html' with { loader: 'text' };
 import { BadgeExampleNumberComponent } from '../../examples/badge-example/examples/badge-example-number.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { BadgeExampleTextComponent } from '../../examples/badge-example/examples/badge-example-text.component';

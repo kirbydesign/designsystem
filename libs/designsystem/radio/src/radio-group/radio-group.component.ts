@@ -42,7 +42,7 @@ export class RadioGroupComponent
   implements AfterContentInit, ControlValueAccessor, FormFieldControl, AfterViewInit
 {
   constructor(
-    private changeDetectionRef: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
     private element: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {}
@@ -183,12 +183,12 @@ export class RadioGroupComponent
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
-    this.changeDetectionRef.markForCheck();
+    this.cdr.markForCheck();
   }
 
   writeValue(value: any): void {
     this.value = value;
-    this.changeDetectionRef.markForCheck();
+    this.cdr.markForCheck();
   }
 
   // #endregion public methods
@@ -287,7 +287,7 @@ export class RadioGroupComponent
 
   private refreshStateFromProjectedContent() {
     if (this._customItemTemplate) return; // Only refresh on changes to projected content, not when re-rendering custom template
-    this.changeDetectionRef.markForCheck(); // Ensure changes to projected content gets checked in next change detection cycle
+    this.cdr.markForCheck(); // Ensure changes to projected content gets checked in next change detection cycle
     this.refreshSelectionState(); // Sync selected index and value from projected radios
   }
 

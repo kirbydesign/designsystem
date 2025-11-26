@@ -1,3 +1,5 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   createComponentFactory,
   createHostFactory,
@@ -9,6 +11,13 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ToggleComponent } from './toggle.component';
 
 const size = DesignTokenHelper.size;
+
+@Component({
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
+})
+class OnPushHostComponent {}
 
 describe('ToggleComponent', () => {
   let spectator: Spectator<ToggleComponent>;
@@ -137,5 +146,88 @@ describe('ToggleComponent with aria label', () => {
     expect(hiddenLabelBoundingRect.right).toBe(ionToggleBoundingRect.right);
     expect(hiddenLabelBoundingRect.top).toBe(ionToggleBoundingRect.top);
     expect(hiddenLabelBoundingRect.bottom).toBe(ionToggleBoundingRect.bottom);
+  });
+});
+
+describe('ToggleComponent when inside host component with ChangeDetectionStrategy.OnPush', () => {
+  let spectator: SpectatorHost<ToggleComponent, OnPushHostComponent>;
+  let formControl: FormControl;
+  let ionToggle: HTMLIonToggleElement;
+
+  const createHost = createHostFactory({
+    component: ToggleComponent,
+    host: OnPushHostComponent,
+    imports: [TestHelper.ionicModuleForTest, ReactiveFormsModule],
+  });
+
+  beforeEach(async () => {
+    formControl = new FormControl(false);
+    spectator = createHost('<kirby-toggle [formControl]="formControl"></kirby-toggle>', {
+      hostProps: {
+        formControl,
+      },
+    });
+    ionToggle = spectator.query('ion-toggle');
+    await TestHelper.whenReady(ionToggle);
+  });
+
+  it('should update value when form control value changes', () => {
+    expect(spectator.component.checked).toBeFalse();
+
+    formControl.setValue(true);
+    spectator.detectChanges();
+
+    expect(spectator.component.checked).toBeTrue();
+    expect(ionToggle.checked).toBeTrue();
+  });
+
+  it('should update disabled state when form control is disabled', () => {
+    expect(ionToggle.disabled).toBeFalsy();
+
+    formControl.disable();
+    spectator.detectChanges();
+
+    expect(ionToggle.disabled).toBeTruthy();
+  });
+
+  it('should update disabled state when form control is enabled', () => {
+    formControl.disable();
+    spectator.detectChanges();
+    expect(ionToggle.disabled).toBeTruthy();
+
+    formControl.enable();
+    spectator.detectChanges();
+
+    expect(ionToggle.disabled).toBeFalsy();
+  });
+
+  it('should mark component for check when value is written', () => {
+    const cdr = spectator.component['cdr'];
+    spyOn(cdr, 'markForCheck');
+
+    spectator.component.writeValue(true);
+
+    expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+  });
+
+  describe('setDisabledState()', () => {
+    it('should mark component for check when disabled state is set to true', () => {
+      const cdr = spectator.component['cdr'];
+      spyOn(cdr, 'markForCheck');
+
+      spectator.component.setDisabledState(true);
+
+      expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
+
+    it('should mark component for check when disabled state is set to false', () => {
+      const cdr = spectator.component['cdr'];
+      spectator.component.setDisabledState(true);
+      spyOn(cdr, 'markForCheck');
+
+      spectator.component.setDisabledState(false);
+
+      expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
   });
 });

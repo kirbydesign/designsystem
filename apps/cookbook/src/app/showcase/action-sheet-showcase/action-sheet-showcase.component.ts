@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FlagComponent } from '@kirbydesign/designsystem';
-import exampleHtml from '../../examples/action-sheet-example/action-sheet-example.component.html?raw';
+// @ts-expect-error TypeScript cannot provide types based on attributes yet
+import exampleHtml from '../../examples/action-sheet-example/action-sheet-example.component.html' with { loader: 'text' };
 import { ActionSheetExampleComponent } from '../../examples/action-sheet-example/action-sheet-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';

@@ -22,6 +22,7 @@ const menuItemsExample: SidebarMenuItem[] = [
     title: 'Home',
     icon: 'home',
     link: { relativeLink: '/' },
+    selected: true,
   },
   {
     id: 'inbox',
@@ -36,23 +37,50 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     id: 'menu-item-1',
-    title: 'Menu Item 1',
+    title: 'Menu item 1',
     icon: 'copy',
     children: [
       {
-        id: 'menu-1-sub-menu-1',
-        title: 'Sub Menu Item 1',
-        link: { relativeLink: '/menu-1-sub-menu-1' },
+        id: 'menu-item-1-1',
+        title: 'Menu item 1.1',
+        link: { relativeLink: '/menu-item/1/2' },
       },
       {
-        id: 'menu-1-sub-menu-2',
-        title: 'Sub Menu Item 2',
-        link: { relativeLink: '/menu-1-sub-menu-2' },
+        id: 'menu-item-1-2',
+        title: 'Menu item 1.2',
+        children: [
+          {
+            id: 'menu-item-1-2-1',
+            title: 'Menu item 1.2.1',
+            link: { relativeLink: '/menu-1-sub-1-link-1' },
+          },
+          {
+            id: 'menu-item-1-2-2',
+            title: 'Menu item 1.2.2',
+            children: [
+              {
+                id: 'menu-item-1-2-2-1',
+                title: 'Menu item 1.2.2.1',
+                link: { relativeLink: '/menu-1-sub-1-sub-1-link-1' },
+              },
+              {
+                id: 'menu-item-1-2-2-2',
+                title: 'Menu item 1.2.2.2',
+                link: { relativeLink: '/menu-1-sub-1-sub-1-link-2' },
+              },
+            ],
+          },
+          {
+            id: 'menu-item-1-2-3',
+            title: 'Menu item 1.2.3',
+            link: { relativeLink: '/menu-1-sub-1-link-2' },
+          },
+        ],
       },
       {
-        id: 'menu-1-sub-menu-3',
-        title: 'Sub Menu Item 3',
-        link: { relativeLink: '/menu-1-sub-menu-3' },
+        id: 'menu-item-1-3',
+        title: 'Menu item 1.3',
+        link: { relativeLink: '/menu-1-link-2' },
       },
     ],
   },
@@ -62,19 +90,79 @@ const menuItemsExample: SidebarMenuItem[] = [
     icon: 'copy',
     children: [
       {
-        id: 'menu-2-sub-menu-1',
-        title: 'Sub Menu Item 1',
-        link: { relativeLink: '/menu-2-sub-menu-1' },
+        id: 'menu-item-2-1',
+        title: 'Menu Item 2.1',
+        link: { relativeLink: '/menu-2-link-1' },
       },
       {
-        id: 'menu-2-sub-menu-2',
-        title: 'Sub Menu Item 2',
-        link: { relativeLink: '/menu-2-sub-menu-2' },
+        id: 'menu-item-2-2',
+        title: 'Menu Item 2.2',
+        children: [
+          {
+            id: 'menu-item-2-2-1',
+            title: 'Menu Item 2.2.1',
+            link: { relativeLink: '/menu-2-sub-1-link-1' },
+          },
+          {
+            id: 'menu-item-2-2-2',
+            title: 'Menu Item 2.2.2',
+            children: [
+              {
+                id: 'menu-item-2-2-2-1',
+                title: 'Menu item 2.2.2.1',
+                link: { relativeLink: '/menu-2-sub-1-sub-1-link-1' },
+              },
+              {
+                id: 'menu-item-2-2-2-2',
+                title: 'Menu item 2.2.2.2',
+                link: { relativeLink: '/menu-2-sub-1-sub-1-link-2' },
+              },
+            ],
+          },
+          {
+            id: 'menu-item-2-2-3',
+            title: 'Menu Item 2.2.3',
+            children: [
+              {
+                id: 'menu-item-2-2-3-1',
+                title: 'Menu item 2.2.3.1',
+                link: { relativeLink: '/menu-2-sub-1-sub-2-link-1' },
+              },
+              {
+                id: 'menu-item-2-2-3-2',
+                title: 'Menu item 2.2.3.2',
+                link: { relativeLink: '/menu-2-sub-1-sub-2-link-2' },
+              },
+            ],
+          },
+        ],
       },
       {
-        id: 'menu-2-sub-menu-3',
-        title: 'Sub Menu Item 3',
-        link: { relativeLink: '/menu-2-sub-menu-3' },
+        id: 'menu-item-2-3',
+        title: 'Menu item 2.3',
+        children: [
+          {
+            id: 'menu-item-2-3-1',
+            title: 'Menu item 2.3.1',
+            link: { relativeLink: '/menu-2-sub-2-link-1' },
+          },
+          {
+            id: 'menu-item-2-3-2',
+            title: 'Menu item 2.3.2',
+            children: [
+              {
+                id: 'menu-item-2-3-2-1',
+                title: 'Menu item 2.3.2.1',
+                link: { relativeLink: '/menu-2-sub-2-sub-1-link-1' },
+              },
+              {
+                id: 'menu-item-2-3-2-2',
+                title: 'Menu item 2.3.2.2',
+                link: { relativeLink: '/menu-2-sub-2-sub-1-link-2' },
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -130,7 +218,7 @@ type SidebarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaC
  */
 const meta: Meta<SidebarPropsAndCustomArgs> = {
   title: 'Components/Sidebar',
-  component: SidebarComponent,
+  component: SidebarComponent<SidebarMenuItem>,
   decorators: [
     moduleMetadata({
       imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
@@ -144,8 +232,12 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   },
   argTypes: {
     menuItems: {
-      description: 'Array of menu items to display in the sidebar. Can be two-way bound.',
+      description:
+        'Array of menu items to display in the sidebar. Can be two-way bound. See <a href="https://github.com/kirbydesign/designsystem/blob/develop/libs/extensions/angular/sidebar-menu/src/models/menu-item.ts">SidebarMenuItem</a> interface for more information.',
       control: { type: 'object' },
+      table: {
+        type: { summary: 'SidebarMenuItem[]' },
+      },
     },
     autoCollapse: {
       description: 'Whether to auto-collapse other submenus when one is opened',
@@ -174,7 +266,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo.svg" alt=""/>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
@@ -201,7 +293,7 @@ type Story = StoryObj<SidebarPropsAndCustomArgs>;
 export const Default: Story = {
   args: {
     menuItems: menuItemsExample,
-    mainAreaContent: ` <h1>Welcome to the main content area</h1>
+    mainAreaContent: `<h1>Welcome to the main content area</h1>
     <p>This is where your main application content would go.</p>`,
   },
 };
@@ -216,5 +308,37 @@ export const AutoCollapse: Story = {
     ...Default.args,
     autoCollapse: true,
     mainAreaContent: '<h1>Sidebar with Auto Collapse Items</h1>',
+  },
+};
+
+/**
+ * A sidebar with extra action buttons in the header.
+ */
+export const WithActions: Story = {
+  ...Default,
+  render: ({ mainAreaContent, ...args }) => ({
+    props: args,
+    template: `
+      <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
+        <kirby-x-sidebar ${argsToTemplate(args)}>
+          <kirby-x-sidebar-header>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
+            <button kirby-button size="sm" attentionLevel="3" slot="action" style="display: flex; flex-grow: 1; justify-content: flex-start;">
+              <kirby-icon name="search"></kirby-icon>
+              <span>Search...</span>
+            </button>
+            <button kirby-button size="sm" attentionLevel="3" slot="action" aria-label="More settings">
+              <kirby-icon name="more"></kirby-icon>
+            </button>
+          </kirby-x-sidebar-header>
+        </kirby-x-sidebar>
+        <div style="padding: var(--kirby-spacing-s);">
+          ${mainAreaContent}
+        </div>
+      </div>`,
+  }),
+  args: {
+    ...Default.args,
+    mainAreaContent: '<h1>Sidebar with extra action buttons in the header</h1>',
   },
 };

@@ -18,6 +18,7 @@
     "paths": {
       "@kirbydesign/angular/badge": ["libs/angular/dist/badge"],
       "@kirbydesign/angular/spinner": ["libs/angular/dist/spinner"],
+      "@kirbydesign/angular/divider": ["libs/angular/dist/divider"],
       "@kirbydesign/core": ["libs/core/dist/"],
       "@kirbydesign/designsystem": ["libs/designsystem/dist/"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/dist/*"],
@@ -73,12 +74,13 @@
       "@kirbydesign/extensions-angular/image-banner": ["libs/extensions/angular/dist/image-banner"],
       "@kirbydesign/extensions-angular/localization": ["libs/extensions/angular/dist/localization"],
       "@kirbydesign/extensions-angular/sidebar-menu": ["libs/extensions/angular/dist/sidebar-menu"],
-      "@kirbydesign/extensions-angular/spot-illustration": [
-        "libs/extensions/angular/dist/spot-illustration"
-      ],
       "@kirbydesign/extensions-angular/skeleton-loader": [
         "libs/extensions/angular/dist/skeleton-loader"
       ],
+      "@kirbydesign/extensions-angular/spot-illustration": [
+        "libs/extensions/angular/dist/spot-illustration"
+      ],
+      "@repo/docs-import-map/*": ["tools/docs-import-map/*"],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]
     }
