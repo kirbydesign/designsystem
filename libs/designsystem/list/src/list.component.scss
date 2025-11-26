@@ -8,7 +8,6 @@ $item-height: utils.size('xxxl');
 
 :host {
   display: block;
-  @include themes.apply-white-theme;
 }
 
 .list {
