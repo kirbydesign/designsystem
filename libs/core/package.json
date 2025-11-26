@@ -67,6 +67,10 @@
     "./divider.element": {
       "types": "./dist/types/divider/divider.element.d.ts",
       "default": "./dist/divider/divider.element.js"
+    },
+    "./helpers": {
+      "types": "./dist/types/helpers/index.d.ts",
+      "default": "./dist/helpers/index.js"
     }
   }
 }

@@ -8,7 +8,7 @@ const config: StorybookConfig = {
   stories: ['./**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-a11y')],
   framework: {
-    name: getAbsolutePath('@storybook/angular'),
+    name: '@storybook/angular',
     options: {},
   },
   staticDirs: [
@@ -25,6 +25,6 @@ export default config;
  * This function is used to resolve the absolute path of a package.
  * It is needed when using storybook in a monorepo.
  */
-function getAbsolutePath(value: string): any {
+function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, 'package.json')));
 }

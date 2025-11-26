@@ -1,7 +1,9 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "module": "esnext",
+    "moduleResolution": "bundler"
   },
   "exclude": ["../**/*.spec.ts", "../testing*/**"],
   "include": ["../**/*.stories.ts", "../**/*.mdx", "*.js", "*.ts"]

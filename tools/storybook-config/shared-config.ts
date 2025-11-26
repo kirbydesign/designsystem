@@ -1,4 +1,4 @@
-import { ColorHelper, DesignTokenHelper } from '@kirbydesign/core';
+import { ColorHelper, DesignTokenHelper } from '@kirbydesign/core/helpers';
 import { Parameters } from '@storybook/angular';
 
 export const defaultParameters: Parameters = {
