@@ -8,6 +8,10 @@ kirby-card {
   kirby-dropdown + kirby-dropdown {
     margin-top: utils.size('s');
   }
+
+  &.attention-levels {
+    max-width: 320px;
+  }
 }
 
 p {
