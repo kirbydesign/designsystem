@@ -1,4 +1,6 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
+  FormControl,
   FormsModule,
   ReactiveFormsModule,
   UntypedFormControl,
@@ -19,6 +21,13 @@ import { RadioComponent } from '../radio.component';
 import { RadioGroupComponent } from './radio-group.component';
 
 const { getColor } = DesignTokenHelper;
+
+@Component({
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
+})
+class OnPushHostComponent {}
 
 describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
@@ -1341,6 +1350,108 @@ describe('RadioGroupComponent', () => {
         await TestHelper.waitForTimeout();
         spectator.detectChanges();
       }
+    });
+  });
+
+  describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
+    const items = [
+      { text: 'Apple', value: 1 },
+      { text: 'Banana', value: 2 },
+      { text: 'Cherry', value: 3 },
+    ];
+    let spectator: SpectatorHost<RadioGroupComponent, OnPushHostComponent>;
+    let formControl: FormControl;
+    let ionRadioGroup: HTMLIonRadioGroupElement;
+    let ionRadioElements: HTMLIonRadioElement[];
+
+    const createHost = createHostFactory({
+      component: RadioGroupComponent,
+      host: OnPushHostComponent,
+      imports: [
+        TestHelper.ionicModuleForTest,
+        IonRadioGroup,
+        IonRadio,
+        ReactiveFormsModule,
+        RadioComponent,
+      ],
+    });
+
+    beforeEach(() => {
+      formControl = new FormControl(items[0]);
+      spectator = createHost(
+        '<kirby-radio-group [items]="items" [formControl]="formControl"></kirby-radio-group>',
+        {
+          hostProps: {
+            items,
+            formControl,
+          },
+        }
+      );
+      ionRadioGroup = spectator.query('ion-radio-group');
+      ionRadioElements = spectator.queryAll<HTMLIonRadioElement>('ion-radio');
+    });
+
+    it('should update value when form control value changes', () => {
+      expect(spectator.component.value).toEqual(items[0]);
+
+      formControl.setValue(items[2]);
+      spectator.detectChanges();
+
+      expect(ionRadioGroup.value).toEqual(items[2]);
+    });
+
+    it('should update disabled state when form control is disabled', () => {
+      expect(spectator.component.disabled).toBeFalsy();
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeFalsy());
+
+      formControl.disable();
+      spectator.detectChanges();
+
+      expect(spectator.component.disabled).toBeTruthy();
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeTruthy());
+    });
+
+    it('should update disabled state when form control is enabled', () => {
+      formControl.disable();
+      spectator.detectChanges();
+      expect(spectator.component.disabled).toBeTruthy();
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeTruthy());
+
+      formControl.enable();
+      spectator.detectChanges();
+
+      expect(spectator.component.disabled).toBeFalsy();
+      ionRadioElements.forEach((ionRadio) => expect(ionRadio.disabled).toBeFalsy());
+    });
+
+    it('should mark component for check when value is written', () => {
+      const cdr = spectator.component['cdr'];
+      spyOn(cdr, 'markForCheck');
+
+      spectator.component.writeValue(items[1]);
+
+      expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
+
+    describe('setDisabledState()', () => {
+      it('should mark component for check when disabled state is set to true', () => {
+        const cdr = spectator.component['cdr'];
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(true);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
+
+      it('should mark component for check when disabled state is set to false', () => {
+        const cdr = spectator.component['cdr'];
+        spectator.component.disabled = true;
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(false);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
     });
   });
 });

@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
@@ -15,6 +16,13 @@ import { SegmentItem } from './segment-item';
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
 
 const fatFingerSize = DesignTokenHelper.fatFingerSize;
+
+@Component({
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
+})
+class OnPushHostComponent {}
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -558,6 +566,99 @@ describe('SegmentedControlComponent', () => {
       formGroup.controls.segmentedControl.setValue(items[1]);
 
       expect(spectator.component.value.id).toBe(items[1].id);
+    });
+  });
+
+  describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
+    const items: SegmentItem[] = [
+      { text: 'First', id: 'first' },
+      { text: 'Second', id: 'second' },
+      { text: 'Third', id: 'third' },
+    ];
+    let spectator: SpectatorHost<SegmentedControlComponent, OnPushHostComponent>;
+    let formControl: FormControl;
+    let ionSegmentElement: HTMLIonSegmentElement;
+
+    const createHost = createHostFactory({
+      component: SegmentedControlComponent,
+      host: OnPushHostComponent,
+      imports: [TestHelper.ionicModuleForTest, ReactiveFormsModule],
+    });
+
+    beforeEach(async () => {
+      formControl = new FormControl(items[0]);
+      spectator = createHost(
+        '<kirby-segmented-control [items]="items" [formControl]="formControl"></kirby-segmented-control>',
+        {
+          hostProps: {
+            items,
+            formControl,
+          },
+        }
+      );
+      ionSegmentElement = spectator.query('ion-segment');
+      await TestHelper.whenReady(ionSegmentElement);
+      await TestHelper.whenReady(spectator.queryAll('ion-segment-button'));
+    });
+
+    it('should update value when form control value changes', () => {
+      expect(spectator.component.value).toEqual(items[0]);
+
+      formControl.setValue(items[2]);
+      spectator.detectChanges();
+
+      expect(spectator.component.value).toEqual(items[2]);
+      expect(ionSegmentElement.value).toBe(items[2].id);
+    });
+
+    it('should update disabled state when form control is disabled', () => {
+      expect(ionSegmentElement.disabled).toBeFalsy();
+
+      formControl.disable();
+      spectator.detectChanges();
+
+      expect(ionSegmentElement.disabled).toBeTruthy();
+    });
+
+    it('should update disabled state when form control is enabled', () => {
+      formControl.disable();
+      spectator.detectChanges();
+      expect(ionSegmentElement.disabled).toBeTruthy();
+
+      formControl.enable();
+      spectator.detectChanges();
+
+      expect(ionSegmentElement.disabled).toBeFalsy();
+    });
+
+    it('should mark component for check when value is written', () => {
+      const cdr = spectator.component['cdr'];
+      spyOn(cdr, 'markForCheck');
+
+      spectator.component.writeValue(items[1]);
+
+      expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
+
+    describe('setDisabledState()', () => {
+      it('should mark component for check when disabled state is set to true', () => {
+        const cdr = spectator.component['cdr'];
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(true);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
+
+      it('should mark component for check when disabled state is set to false', () => {
+        const cdr = spectator.component['cdr'];
+        spectator.component.setDisabledState(true);
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(false);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
     });
   });
 });

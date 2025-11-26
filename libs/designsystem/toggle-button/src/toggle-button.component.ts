@@ -112,5 +112,6 @@ export class ToggleButtonComponent implements ControlValueAccessor {
     this.elementRef.nativeElement
       .querySelector('button[kirby-button]')
       ?.toggleAttribute('disabled', isDisabled);
+    this.cdr.markForCheck();
   }
 }
