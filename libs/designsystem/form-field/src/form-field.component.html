@@ -23,7 +23,7 @@
 <ng-template #messageTemplate>
   @if (message !== undefined || counter) {
     <div class="texts">
-      <div aria-live="polite">
+      <div aria-live="polite" class="message-container">
         @if (message !== undefined) {
           <kirby-form-field-message
             class="message"
