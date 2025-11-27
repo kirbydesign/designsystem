@@ -65,9 +65,9 @@ h1,
 .kirby-text-xlarge,
 #{$in-item-selector}.kirby-text-xlarge,
 #{$in-label-selector}.kirby-text-xlarge {
-  font-size: functions.font-size('xl');
-  font-weight: functions.font-weight('black');
-  line-height: functions.line-height('xl');
+  font-size: var(--kirby-font-size-xl);
+  font-weight: var(--kirby-font-weight-black);
+  line-height: var(--kirby-line-height-xl);
 }
 
 h2,

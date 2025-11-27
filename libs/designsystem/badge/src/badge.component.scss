@@ -9,7 +9,7 @@ $badge-size-medium: utils.relative-spacing('s');
   right: var(--kirby-badge-right, auto);
   top: var(--kirby-badge-top, auto);
   z-index: var(--kirby-badge-z-index, auto);
-  font-size: utils.font-size('xxs');
+  font-size: var(--kirby-badge-font-size, var(--kirby-font-size-xxs));
   display: inline-flex;
 
   ion-badge {
@@ -79,10 +79,10 @@ $badge-size-medium: utils.relative-spacing('s');
 
 :host(.md) {
   ion-badge {
-    --padding-end: 0.3125rem;
-    --padding-start: 0.3125rem;
-    --padding-bottom: 0.1875rem;
-    --padding-top: 0.1875rem;
+    --padding-end: var(--kirby-badge-padding-inline, 0.3125rem);
+    --padding-start: var(--kirby-badge-padding-inline, 0.3125rem);
+    --padding-bottom: var(--kirby-badge-padding-block, 0.1875rem);
+    --padding-top: var(--kirby-badge-padding-block, 0.1875rem);
   }
 
   &:has(kirby-icon) {
