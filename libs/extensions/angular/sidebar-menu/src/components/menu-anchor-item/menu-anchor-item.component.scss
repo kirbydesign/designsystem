@@ -1,10 +1,64 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
 
-.selected,
-.selected:hover,
-.selected:active,
-.selected:focus-visible {
-  background: var(--menuitem-selected-background-color, utils.get-color('primary'));
-  color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
-  font-weight: utils.font-weight('bold');
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: utils.border-radius('s');
+
+  &.selected {
+    background: var(--menuitem-selected-background-color, utils.get-color('primary'));
+    color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
+    font-weight: utils.font-weight('bold');
+  }
+
+  &:not(.selected):hover {
+    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+  }
+
+  &:not(.selected):active {
+    background: var(
+      --menuitem-active-background-color,
+      var(--kirby-inputs-background-color-active)
+    );
+  }
+
+  &:has(a:focus-visible) {
+    @include interaction-state.apply-focus-ring;
+  }
+}
+
+.item-badge {
+  display: flex;
+  justify-content: center;
+  min-width: utils.icon-font-size('sm');
+}
+
+:host:has(.toggle-button-unchecked):hover .item-badge,
+:host:has(.toggle-button-unchecked):active .item-badge,
+:host:has(.toggle-button-unchecked):has(*:focus-visible) .item-badge {
+  display: none;
+}
+
+.toggle-button-unchecked {
+  transition-property: width;
+  transition-duration: 0ms;
+}
+
+:host:not(:hover, :active, :has(*:focus-visible)) .toggle-button-unchecked {
+  z-index: -1;
+  width: 0;
+}
+
+.toggle-button {
+  margin-left: -(utils.size('xs'));
+  margin-right: utils.size('xs');
+
+  --kirby-button-color: inherit;
+
+  &:not(:hover, :active, :focus-visible) {
+    --kirby-button-background-color: transparent;
+  }
 }

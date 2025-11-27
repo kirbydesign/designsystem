@@ -342,3 +342,32 @@ export const WithActions: Story = {
     mainAreaContent: '<h1>Sidebar with extra action buttons in the header</h1>',
   },
 };
+
+/**
+ * A sidebar with toggle buttons on its items.
+ */
+export const WithToggleButtons: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsExample.map(convertToToggleButtonsExample),
+    mainAreaContent: '<h1>Sidebar with Toggle Buttons</h1>',
+  },
+};
+
+function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
+  if (item.children) {
+    return {
+      ...item,
+      children: item.children.map(convertToToggleButtonsExample),
+    };
+  }
+  return {
+    ...item,
+    toggle: {
+      isChecked: false,
+      uncheckedIcon: 'star',
+      checkedIcon: 'star-fill',
+    },
+  };
+}

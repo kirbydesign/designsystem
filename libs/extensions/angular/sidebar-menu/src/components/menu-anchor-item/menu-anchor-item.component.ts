@@ -1,6 +1,10 @@
 import { Component, computed, inject, input, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Badge, SidebarMenuItem } from '../../models';
+import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { Badge, SidebarMenuItem, ToggleButton } from '../../models';
 import { MenuItemSize } from '../../types';
 import { MenuItemComponent } from '../menu-item';
 import { MenuStateService } from '../../services/menu-state';
@@ -10,6 +14,7 @@ type ViewModel = {
   id: Signal<string>;
   size: Signal<MenuItemSize>;
   badge: Signal<Badge | undefined>;
+  toggle: Signal<ToggleButton | undefined>;
   icon: Signal<string | undefined>;
   isSelected: Signal<boolean>;
   title: Signal<string>;
@@ -20,7 +25,17 @@ type ViewModel = {
   selector: 'li[kirby-x-menu-anchor-item]',
   templateUrl: './menu-anchor-item.component.html',
   styleUrls: ['./menu-anchor-item.component.scss'],
-  imports: [MenuItemComponent, RouterLink],
+  host: {
+    '[class.selected]': 'vm.isSelected()',
+  },
+  imports: [
+    MenuItemComponent,
+    RouterLink,
+    ToggleButtonComponent,
+    ButtonComponent,
+    IconComponent,
+    BadgeComponent,
+  ],
 })
 export class MenuAnchorItemComponent<T extends SidebarMenuItem> {
   readonly item = input.required<T>();
@@ -37,6 +52,7 @@ export class MenuAnchorItemComponent<T extends SidebarMenuItem> {
     id: computed(() => this.item().id),
     size: this.size,
     badge: computed(() => this.item().badge),
+    toggle: computed(() => this.item().toggle),
     icon: computed(() => this.item().icon),
     isSelected: computed(() => this.item().selected ?? false),
     title: computed(() => this.item().title ?? ''),

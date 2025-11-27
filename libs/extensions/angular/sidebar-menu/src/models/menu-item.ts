@@ -1,4 +1,5 @@
 import type { ThemeColor } from '@kirbydesign/designsystem';
+import { ToggleButton } from './toggle-button.model';
 
 export type Params = {
   [key: string]: any;
@@ -19,6 +20,7 @@ export interface SidebarMenuItem {
   replaceUrl?: boolean;
   hidden?: boolean;
   badge?: Badge;
+  toggle?: ToggleButton;
   children?: this[];
 }
 

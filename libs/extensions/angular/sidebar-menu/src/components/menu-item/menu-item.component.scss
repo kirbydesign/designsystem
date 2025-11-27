@@ -13,7 +13,7 @@
   padding: utils.size('xxxs') utils.size('xs');
   gap: utils.size('xxs');
   border: none;
-  background: inherit;
+  background: none;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
@@ -28,22 +28,26 @@
     }
   }
 
-  &:hover {
+  &:is(button):hover {
     background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
   }
 
-  &:active {
+  &:is(button):active {
     background: var(
       --menuitem-active-background-color,
       var(--kirby-inputs-background-color-active)
     );
   }
 
-  &:focus-visible {
+  &:is(button):focus-visible {
+    @include interaction-state.apply-focus-ring;
+
     outline: none;
   }
 
-  @include interaction-state.apply-focus-visible;
+  &:is(a):focus-visible {
+    box-shadow: none;
+  }
 }
 
 .menu-item-start {

@@ -8,12 +8,16 @@
         [id]="vm.id()"
         [size]="vm.size()"
         [icon]="vm.icon()"
-        [badge]="vm.badge()"
         [attr.href]="link.url"
         (click)="$event.preventDefault(); vm.selectItem()"
         (keydown.enter)="$event.preventDefault(); vm.selectItem()"
       >
         {{ vm.title() }}
+        @if (vm.badge(); as badge) {
+          <kirby-badge slot="end" class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
+            {{ badge.value }}
+          </kirby-badge>
+        }
       </a>
     }
     @case ('router-link') {
@@ -23,7 +27,6 @@
         [id]="vm.id()"
         [size]="vm.size()"
         [icon]="vm.icon()"
-        [badge]="vm.badge()"
         [routerLink]="link.route"
         [queryParams]="link.queryParams"
         [skipLocationChange]="link.skipLocationChange"
@@ -32,6 +35,11 @@
         (keydown.enter)="vm.selectItem()"
       >
         {{ vm.title() }}
+        @if (vm.badge(); as badge) {
+          <kirby-badge slot="end" class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
+            {{ badge.value }}
+          </kirby-badge>
+        }
       </a>
     }
     @case ('external-link') {
@@ -41,14 +49,41 @@
         [id]="vm.id()"
         [size]="vm.size()"
         [icon]="vm.icon()"
-        [badge]="vm.badge()"
         [attr.href]="link.url"
         [attr.target]="link.target"
         (click)="vm.selectItem()"
         (keydown.enter)="vm.selectItem()"
       >
         {{ vm.title() }}
+        @if (vm.badge(); as badge) {
+          <kirby-badge slot="end" class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
+            {{ badge.value }}
+          </kirby-badge>
+        }
       </a>
     }
+  }
+
+  @if (vm.toggle(); as toggle) {
+    <kirby-toggle-button [checked]="toggle.isChecked">
+      <button
+        kirby-button
+        unchecked
+        size="xs"
+        attentionLevel="3"
+        class="toggle-button toggle-button-unchecked"
+      >
+        <kirby-icon size="xs" [name]="toggle.uncheckedIcon"></kirby-icon>
+      </button>
+      <button
+        kirby-button
+        checked
+        size="xs"
+        attentionLevel="3"
+        class="toggle-button toggle-button-checked"
+      >
+        <kirby-icon size="xs" [name]="toggle.checkedIcon"></kirby-icon>
+      </button>
+    </kirby-toggle-button>
   }
 }
