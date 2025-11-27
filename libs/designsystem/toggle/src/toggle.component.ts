@@ -129,6 +129,7 @@ export class ToggleComponent
    */
   writeValue(value: boolean): void {
     this.checked = value;
+    this.cdr.markForCheck();
   }
   /**
    * Saves a callback function to be invoked when the toggle's value
@@ -158,6 +159,6 @@ export class ToggleComponent
    */
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
-    this.cdr.detectChanges();
+    this.cdr.markForCheck();
   }
 }

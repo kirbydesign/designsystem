@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -178,6 +179,8 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
     return -1;
   }
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   @HostListener('focusin')
   @HostListener('focusout')
   _onFocusInOut() {
@@ -202,6 +205,7 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
   writeValue(value: NoInfer<TItem>): void {
     if (value !== this._value) {
       this.value = value;
+      this.cdr.markForCheck();
     }
   }
 
@@ -235,5 +239,6 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
    */
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+    this.cdr.markForCheck();
   }
 }

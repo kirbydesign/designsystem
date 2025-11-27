@@ -90,7 +90,6 @@
       "options": {
         "buildStorybookTargetName": "build-storybook",
         "serveStorybookTargetName": "storybook",
-        "testStorybookTargetName": "test-storybook",
         "staticStorybookTargetName": "static-storybook"
       }
     }
