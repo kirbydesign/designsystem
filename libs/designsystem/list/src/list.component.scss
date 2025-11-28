@@ -50,6 +50,8 @@ ion-item {
 }
 
 ion-item-sliding {
+  @include themes.apply-white-theme;
+
   &.item-sliding-active-slide {
     // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
     backface-visibility: hidden;
@@ -59,6 +61,8 @@ ion-item-sliding {
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {
     &.#{$color-name} {
+      @include themes.apply-light-theme;
+
       --kirby-item-background: #{utils.get-color($color-name)};
       --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
       --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};

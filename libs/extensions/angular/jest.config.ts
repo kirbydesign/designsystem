@@ -1,11 +1,10 @@
 import { pathsToModuleNameMapper } from 'ts-jest';
+import json from '../../../tsconfig.base.json' with { type: 'json' };
 
 const esModules = ['@stencil/core', '@ionic/core', 'ionicons', '@angular/common/locales'].join('|');
 
 // nx doesn't allow importing tsconfig.json: https://github.com/nrwl/nx/issues/14888
 // Use require instead:
-
-const json = require('../../../tsconfig.base.json');
 
 const mapDistToBarrelFile = (distFolderArray: string[]) => {
   return distFolderArray.map((distFolder) => {
@@ -20,7 +19,7 @@ const pathAliases = Object.fromEntries(
   ])
 );
 
-module.exports = {
+export default {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
   transform: {
