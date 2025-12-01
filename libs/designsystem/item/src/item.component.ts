@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -43,7 +44,14 @@ export class ItemComponent implements AfterViewInit {
   @HostBinding('class.disclosure')
   @Input()
   disclosure: 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up' | null;
-  @Input() selectable: boolean;
+  @Input() set selectable(value: boolean) {
+    this._selectable = value;
+    this.cdr.markForCheck();
+  }
+  get selectable(): boolean {
+    return this._selectable;
+  }
+  private _selectable: boolean;
 
   @Input()
   reorderable: boolean;
@@ -69,7 +77,8 @@ export class ItemComponent implements AfterViewInit {
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {

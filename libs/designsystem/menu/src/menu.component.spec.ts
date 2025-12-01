@@ -286,6 +286,53 @@ describe('MenuComponent', () => {
     });
   });
 
+  describe('interaction with items in condition', () => {
+    it('should select item when clicked when wrapped in if statement', async () => {
+      spectator = createHost(
+        `<kirby-menu>
+          @if (show) {
+            <kirby-item>
+              <p>Action 1</p>
+            </kirby-item>
+          }
+        </kirby-menu>`,
+        { hostProps: { show: false } }
+      );
+      buttonElement = spectator.query('button');
+      spectator.setHostInput({ show: true });
+      await spectator.click(buttonElement);
+      spectator.detectChanges();
+      const ionItem = spectator.query('ion-item');
+      await TestHelper.whenReady(ionItem);
+      const selectableIonItem = ionItem.shadowRoot.querySelector('button'); //"button" only exist if item is selectable
+      expect(selectableIonItem).toBeTruthy();
+    });
+
+    it('should select item when clicked when wrapped in for loop', async () => {
+      const items = ['Item 1', 'Item 2', 'Item 3'];
+      spectator = createHost(
+        `<kirby-menu>
+          @for(item of items; track item) {
+            <kirby-item>            
+              <kirby-icon name="add" slot="start" />
+              {{item}}                               
+            </kirby-item>
+          }
+        </kirby-menu>`,
+        { hostProps: { items } }
+      );
+      buttonElement = spectator.query('button');
+      spectator.setHostInput({ show: true });
+      await spectator.click(buttonElement);
+      spectator.detectChanges();
+      const ionItems = spectator.queryAll('ion-item');
+      const firstIonItem = ionItems[0];
+      await TestHelper.whenReady(firstIonItem);
+      const selectableIonItem = firstIonItem.shadowRoot.querySelector('button'); //"button" only exist if item is selectable
+      expect(selectableIonItem).toBeTruthy();
+    });
+  });
+
   describe('custom button', () => {
     beforeEach(() => {
       spectator = createHost<MenuComponent>(
