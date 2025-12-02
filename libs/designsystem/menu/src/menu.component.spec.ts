@@ -286,8 +286,8 @@ describe('MenuComponent', () => {
     });
   });
 
-  describe('interaction with items in condition', () => {
-    it('should select item when clicked when wrapped in if statement', async () => {
+  describe('interaction with items that are conditionally shown', () => {
+    it('should select item inside if statement', async () => {
       spectator = createHost(
         `<kirby-menu>
           @if (show) {
