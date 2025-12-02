@@ -9,7 +9,6 @@ import {
   DestroyRef,
   ElementRef,
   HostListener,
-  inject,
   Input,
   NgZone,
   OnDestroy,
@@ -47,14 +46,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   triggerButtonId: string = UniqueIdGenerator.scopedTo('kirby-menu-trigger-button').next();
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
-  private destroyRef = inject(DestroyRef);
-
   constructor(
     private cdr: ChangeDetectorRef,
     private elementRef: ElementRef<HTMLElement>,
     private zone: NgZone,
     private renderer: Renderer2,
-    public translations: TranslationService
+    public translations: TranslationService,
+    private destroyRef: DestroyRef
   ) {}
 
   @Input() public isDisabled: boolean = false;
