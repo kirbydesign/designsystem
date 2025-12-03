@@ -1,4 +1,4 @@
-import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { userEvent, within } from 'storybook/test';
 
 import {
