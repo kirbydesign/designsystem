@@ -200,7 +200,7 @@ describe('FormFieldComponent', () => {
           { hostProps: { hasError: false, label: '', message: '' } }
         );
         inputElement = spectator.queryHost('input[kirby-input]');
-        messageElement = spectator.queryHost('kirby-form-field-message');
+        messageElement = spectator.queryHost('.message');
       });
 
       it('should set aria-describedby on input to message id', () => {
@@ -263,7 +263,7 @@ describe('FormFieldComponent', () => {
           { hostProps: { hasError: false, label: '', message: '' } }
         );
         textareaElement = spectator.queryHost('textarea[kirby-textarea]');
-        messageElement = spectator.queryHost('kirby-form-field-message');
+        messageElement = spectator.queryHost('.message');
       });
 
       it('should set aria-describedby on input to message id', () => {
@@ -330,7 +330,7 @@ describe('FormFieldComponent', () => {
           { hostProps: { hasError: false, label: '', message: '' } }
         );
         ionRadioGroup = spectator.queryHost('ion-radio-group');
-        messageElement = spectator.queryHost('kirby-form-field-message');
+        messageElement = spectator.queryHost('.message');
       });
 
       it('should set aria-describedby on input to message id', () => {
@@ -406,7 +406,7 @@ describe('FormFieldComponent', () => {
           { hostProps: { hasError: false, label: '', message: '' } }
         );
         dropdownTrigger = spectator.queryHost('button[kirby-button]');
-        messageElement = spectator.queryHost('kirby-form-field-message');
+        messageElement = spectator.queryHost('.message');
       });
 
       it('should set aria-describedby on input to message id', () => {

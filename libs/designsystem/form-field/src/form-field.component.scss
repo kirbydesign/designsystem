@@ -16,17 +16,17 @@
   justify-content: space-between;
   padding: 2px utils.size('s') 0 utils.size('s');
 
-  .message-container {
+  .message {
     flex: 75%;
 
     &:only-child {
       flex-basis: auto;
     }
-  }
 
-  .message {
-    width: 100%;
-    display: flex;
+    & > kirby-form-field-message {
+      width: 100%;
+      display: flex;
+    }
   }
 
   .counter {

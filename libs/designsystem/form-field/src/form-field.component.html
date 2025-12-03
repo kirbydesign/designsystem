@@ -25,11 +25,11 @@
     <div class="texts">
       <div
         aria-live="polite"
-        class="message-container"
+        class="message"
         [id]="_nestedInteractiveHasError ? _errorMessageId : _messageId"
       >
         @if (message !== undefined) {
-          <kirby-form-field-message class="message" [text]="message"></kirby-form-field-message>
+          <kirby-form-field-message [text]="message"></kirby-form-field-message>
         }
       </div>
       @if (counter) {
