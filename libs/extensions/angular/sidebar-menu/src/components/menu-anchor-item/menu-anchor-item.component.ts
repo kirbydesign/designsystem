@@ -19,6 +19,7 @@ type ViewModel = {
   isSelected: Signal<boolean>;
   title: Signal<string>;
   selectItem: () => void;
+  checkItem: (checked: boolean) => void;
 };
 
 @Component({
@@ -27,6 +28,9 @@ type ViewModel = {
   styleUrls: ['./menu-anchor-item.component.scss'],
   host: {
     '[class.selected]': 'vm.isSelected()',
+    '[class.checked]': 'vm.toggle()?.isChecked',
+    '[class.has-toggle]': '!!vm.toggle()',
+    '[class.has-badge]': '!!vm.badge()',
   },
   imports: [
     MenuItemComponent,
@@ -47,6 +51,10 @@ export class MenuAnchorItemComponent<T extends SidebarMenuItem> {
     this.#menuStateService.selectedItem = this.item();
   }
 
+  #checkItem(checked: boolean): void {
+    this.#menuStateService.setCheckedItem(this.item().id, checked);
+  }
+
   readonly vm: ViewModel = {
     link: computed(() => determineLinkType(this.item())),
     id: computed(() => this.item().id),
@@ -57,6 +65,7 @@ export class MenuAnchorItemComponent<T extends SidebarMenuItem> {
     isSelected: computed(() => this.item().selected ?? false),
     title: computed(() => this.item().title ?? ''),
     selectItem: this.#selectItem.bind(this),
+    checkItem: this.#checkItem.bind(this),
   };
 }
 

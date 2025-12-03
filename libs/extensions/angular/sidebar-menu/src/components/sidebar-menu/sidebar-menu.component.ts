@@ -7,6 +7,7 @@ import { toggleSubmenuAutoCollapsed } from '../../functions/toggle-submenu-auto-
 import { SidebarMenuItem } from '../../models';
 import { MenuStateService } from '../../services/menu-state';
 import { SidebarService } from '../../services/sidebar';
+import { checkMenuItem } from '../../functions/check-menu-item';
 
 type ViewModel<T> = {
   items: Signal<T[]>;
@@ -50,6 +51,13 @@ export class SidebarMenuComponent<T extends SidebarMenuItem> {
       if (selectedItem) {
         this.itemClick.emit(selectedItem);
         this.menuItems.update((items) => selectMenuItem(selectedItem.id, items));
+      }
+    });
+
+    effect(() => {
+      const checkedItem = this.#menuStateService.checkedItem();
+      if (checkedItem) {
+        this.menuItems.update((items) => checkMenuItem(checkedItem.id, checkedItem.checked, items));
       }
     });
   }
