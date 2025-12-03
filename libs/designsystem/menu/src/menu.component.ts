@@ -266,11 +266,11 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   ngAfterContentInit(): void {
-    this.setRoleAttributeForAllItems();
     this.setUserProvidedButtonAriaAttributes();
     this.kirbyItemComponents.changes
       .pipe(startWith(null), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
+        this.setRoleAttributeForAllItems();
         this.ensureSelectableItems();
       });
   }
