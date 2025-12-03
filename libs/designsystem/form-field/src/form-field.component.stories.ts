@@ -29,16 +29,24 @@ const meta: Meta<FormFieldComponent> = {
 };
 export default meta;
 type Story = StoryObj<FormFieldComponent>;
+type HasErrorStory = StoryObj<FormFieldComponent & { hasError: boolean }>;
 
-export const Default: Story = {
+export const Default: HasErrorStory = {
   args: {
     label: 'Input with label and message',
     message: 'This is additional info that will be shown below the input',
+    hasError: false,
+  },
+  argTypes: {
+    hasError: {
+      control: 'boolean',
+      description: 'Sets error state on the input element',
+    },
   },
   render: (args) => ({
     props: args,
-    template: `<kirby-form-field ${argsToTemplate(args)}>
-    <input kirby-input />
+    template: `<kirby-form-field label="${args.label}" message="${args.message}">
+    <input kirby-input [hasError]="hasError"/>
   </kirby-form-field>`,
   }),
 };
