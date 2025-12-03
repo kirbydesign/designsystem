@@ -287,7 +287,7 @@ describe('MenuComponent', () => {
   });
 
   describe('interaction with items that are conditionally shown', () => {
-    describe('items rendered inside if statement', () => {
+    describe('inside if statement', () => {
       beforeEach(async () => {
         spectator = createHost(
           `<kirby-menu>
