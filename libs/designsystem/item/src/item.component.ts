@@ -44,14 +44,16 @@ export class ItemComponent implements AfterViewInit {
   @HostBinding('class.disclosure')
   @Input()
   disclosure: 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up' | null;
+
+  private _selectable: boolean;
+  get selectable(): boolean {
+    return this._selectable;
+  }
+
   @Input() set selectable(value: boolean) {
     this._selectable = value;
     this.cdr.markForCheck();
   }
-  get selectable(): boolean {
-    return this._selectable;
-  }
-  private _selectable: boolean;
 
   @Input()
   reorderable: boolean;
