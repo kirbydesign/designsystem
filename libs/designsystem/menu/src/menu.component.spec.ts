@@ -321,7 +321,7 @@ describe('MenuComponent', () => {
       });
     });
 
-    describe('items rendered inside for loop', () => {
+    describe('inside for loop', () => {
       beforeEach(async () => {
         const items = ['Item 1', 'Item 2', 'Item 3'];
         spectator = createHost(
