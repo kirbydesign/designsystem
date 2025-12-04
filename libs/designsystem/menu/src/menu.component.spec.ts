@@ -287,34 +287,45 @@ describe('MenuComponent', () => {
   });
 
   describe('interaction with items that are conditionally shown', () => {
-    it('should select item inside if statement', async () => {
-      spectator = createHost(
-        `<kirby-menu>
-          @if (show) {
-            <kirby-item>
-              <p>Action 1</p>
-            </kirby-item>
-          }
-        </kirby-menu>`,
-        { hostProps: { show: false } }
-      );
-      triggerButton = spectator.query('button');
-      spectator.setHostInput({ show: true });
+    describe('inside if statement', () => {
+      beforeEach(async () => {
+        spectator = createHost(
+          `<kirby-menu>
+            @if (show) {
+              <kirby-item>
+                <p>Action 1</p>
+              </kirby-item>
+            }
+          </kirby-menu>`,
+          { hostProps: { show: false } }
+        );
+        triggerButton = spectator.query('button');
+        spectator.setHostInput({ show: true });
 
-      await spectator.click(triggerButton);
-      spectator.detectChanges();
+        await spectator.click(triggerButton); //Open menu
+        spectator.detectChanges();
+      });
 
-      const ionItem = spectator.query('ion-item');
-      await TestHelper.whenReady(ionItem);
-      const selectableIonItem = ionItem.shadowRoot.querySelector('button'); //"button" only exist if item is selectable
+      it('should make item selectable', async () => {
+        const ionItem = spectator.query('ion-item');
+        await TestHelper.whenReady(ionItem);
+        const selectableIonItem = ionItem.shadowRoot.querySelector('button'); //"button" only exist if item is selectable
 
-      expect(selectableIonItem).toBeTruthy();
+        expect(selectableIonItem).toBeTruthy();
+      });
+
+      it('should add role="menuitem" to item', async () => {
+        const kirbyItem = spectator.query('kirby-item');
+
+        expect(kirbyItem.getAttribute('role')).toBe('menuitem');
+      });
     });
 
-    it('should select item in for loop', async () => {
-      const items = ['Item 1', 'Item 2', 'Item 3'];
-      spectator = createHost(
-        `<kirby-menu>
+    describe('inside for loop', () => {
+      beforeEach(async () => {
+        const items = ['Item 1', 'Item 2', 'Item 3'];
+        spectator = createHost(
+          `<kirby-menu>
           @for(item of items; track item) {
             <kirby-item>            
               <kirby-icon name="add" slot="start" />
@@ -322,20 +333,31 @@ describe('MenuComponent', () => {
             </kirby-item>
           }
         </kirby-menu>`,
-        { hostProps: { items } }
-      );
-      triggerButton = spectator.query('button');
-      spectator.setHostInput({ show: true });
+          { hostProps: { items } }
+        );
+        triggerButton = spectator.query('button');
+        spectator.setHostInput({ show: true });
 
-      await spectator.click(triggerButton);
-      spectator.detectChanges();
+        await spectator.click(triggerButton); //Open menu
+        spectator.detectChanges();
+      });
 
-      const ionItems = spectator.queryAll('ion-item');
-      const firstIonItem = ionItems[0];
-      await TestHelper.whenReady(firstIonItem);
-      const selectableIonItem = firstIonItem.shadowRoot.querySelector('button'); //"button" only exist if item is selectable
+      it('should make items selectable', async () => {
+        const ionItems = spectator.queryAll('ion-item');
+        await TestHelper.whenReady(ionItems[0]);
+        ionItems.forEach((ionItem) => {
+          const selectableIonItem = ionItem.shadowRoot.querySelector('button'); //"button" only exist if item is selectable
 
-      expect(selectableIonItem).toBeTruthy();
+          expect(selectableIonItem).toBeTruthy();
+        });
+      });
+
+      it('should add role="menuitem" to items ', async () => {
+        const kirbyItems = spectator.queryAll('kirby-item');
+        kirbyItems.forEach((kirbyItem) => {
+          expect(kirbyItem.getAttribute('role')).toBe('menuitem');
+        });
+      });
     });
   });
 
