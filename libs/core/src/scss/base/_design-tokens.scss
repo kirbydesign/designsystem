@@ -69,6 +69,12 @@
   }
 }
 
+@mixin avatar-icon-sizes() {
+  @each $name, $value in variables.$avatar-icon-font-sizes {
+    --kirby-avatar-icon-size-#{$name}: #{$value};
+  }
+}
+
 @mixin spacings() {
   @each $name, $value in variables.$sizes {
     --kirby-spacing-#{$name}: #{$value};
@@ -112,6 +118,9 @@
 
   /* LINE-HEIGHT */
   @include line-heights;
+
+  /* AVATAR ICON SIZES */
+  @include avatar-icon-sizes;
 
   /* SPACINGS */
   @include spacings;

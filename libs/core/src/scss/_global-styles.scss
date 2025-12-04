@@ -14,7 +14,6 @@
 
 :root,
 :host {
-  font-family: var(--kirby-font-family);
   @include design-tokens.all;
   @include component-themes.apply-light-theme;
 
