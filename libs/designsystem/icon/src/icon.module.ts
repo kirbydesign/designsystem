@@ -1,3 +1,4 @@
+import { createCustomElement } from '@angular/elements';
 import { NgModule } from '@angular/core';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { IonIcon } from '@ionic/angular/standalone';

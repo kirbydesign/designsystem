@@ -305,7 +305,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     } else if (item.matches(':has(kirby-radio)')) {
       menuItemRole = 'menuitemradio';
     }
-    this.renderer.setAttribute(item, 'role', menuItemRole);
+    const ionItem = item.querySelector('ion-item');
+    this.renderer.setAttribute(ionItem ?? item, 'role', menuItemRole);
   }
 
   menuVisibilityChanged(menuIsShown: boolean) {
