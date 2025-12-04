@@ -49,7 +49,7 @@ export class ItemComponent implements AfterViewInit {
   get selectable(): boolean {
     return this._selectable;
   }
-  
+
   @Input() set selectable(value: boolean) {
     this._selectable = value;
     this.cdr.markForCheck();
