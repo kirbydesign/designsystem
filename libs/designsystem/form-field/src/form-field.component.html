@@ -23,14 +23,15 @@
 <ng-template #messageTemplate>
   @if (message !== undefined || counter) {
     <div class="texts">
-      @if (message !== undefined) {
-        <kirby-form-field-message
-          class="message"
-          [text]="message"
-          [attr.aria-live]="_nestedInteractiveHasError ? 'polite' : null"
-          [id]="_nestedInteractiveHasError ? _errorMessageId : _messageId"
-        ></kirby-form-field-message>
-      }
+      <div
+        aria-live="polite"
+        class="message"
+        [id]="_nestedInteractiveHasError ? _errorMessageId : _messageId"
+      >
+        @if (message !== undefined) {
+          <kirby-form-field-message [text]="message"></kirby-form-field-message>
+        }
+      </div>
       @if (counter) {
         <div class="counter">
           <ng-content select="kirby-input-counter"></ng-content>
