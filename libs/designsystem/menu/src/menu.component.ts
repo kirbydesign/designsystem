@@ -65,7 +65,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
-  @Input() public DOMPortalOutlet: HTMLElement = this.elementRef.nativeElement.ownerDocument.body;
+  @Input() public DOMPortalOutlet: HTMLElement = this.elementRef.nativeElement;
 
   @Input() public portalOutletConfig: PortalOutletConfig | undefined;
 
@@ -123,9 +123,12 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   @HostListener('click')
   _onClick() {
+    console.log('Menu host clicked');
     if (!this.floatingMenuIsShown) return;
+    console.log('Menu is open - focusing first item');
     this.focusedIndex = 0;
     this.focusItem();
+    this.cdr.detectChanges();
   }
 
   private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
@@ -238,6 +241,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     } else {
       this.focusSelectableItem(ionItem);
     }
+    console.log('active element after focus', document.activeElement);
   }
 
   private focusSelectableItem(ionItem: HTMLIonItemElement) {

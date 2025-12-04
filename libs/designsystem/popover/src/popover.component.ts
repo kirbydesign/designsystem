@@ -136,6 +136,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     this.renderer.removeClass(this.elementRef.nativeElement, 'is-opening');
 
     this.isShowing = true;
+    console.log('Popover is now showing');
   }
 
   hide() {
