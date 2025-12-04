@@ -23,6 +23,57 @@
     </div>
   </cookbook-example-viewer>
 
+  <p>test</p>
+
+  <cookbook-example-viewer [html]="accordionDefaultExample.template">
+    <div class="example-frame">
+      <kirby-accordion>
+        <kirby-accordion-item title="Title for accordion item 1">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis
+          ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit
+          condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam
+          ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+        </kirby-accordion-item>
+        <kirby-accordion-item title="Title for accordion item 2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis
+          ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit
+          condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam
+          ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+        </kirby-accordion-item>
+        <kirby-accordion-item
+          title="Title for accordion item 3"
+          isDisabled="{true}"
+          disabledTitle="Title for disabled accordion item 3"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis
+          ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit
+          condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam
+          ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+        </kirby-accordion-item>
+        <kirby-accordion-item title="Title for accordion item 4">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis
+          ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit
+          condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam
+          ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+        </kirby-accordion-item>
+      </kirby-accordion>
+    </div>
+  </cookbook-example-viewer>
+
+  <p>test webcompoenent</p>
+
+  <kirby-icon></kirby-icon>
+
+  <cookbook-example-viewer [html]="accordionDefaultExample.template">
+    <div class="example-frame">
+      <kirby-accordion-item #accordionDefaultExample></kirby-accordion-item>
+    </div>
+  </cookbook-example-viewer>
+
+  <div class="example-frame">
+    <kirby-accordion-item></kirby-accordion-item>
+  </div>
+
   <h3>With initially expanded item</h3>
   <p>
     It is possible to have an accordion expanded initially to draw attention to specific

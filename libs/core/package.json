@@ -71,6 +71,14 @@
     "./helpers": {
       "types": "./dist/types/helpers/index.d.ts",
       "default": "./dist/helpers/index.js"
+    },
+    "./accordion-item": {
+      "types": "./dist/types/accordion-item/index.d.ts",
+      "default": "./dist/accordion-item/index.js"
+    },
+    "./accordion-item.element": {
+      "types": "./dist/types/accordion-item/accordion-item.element.d.ts",
+      "default": "./dist/accordion-item/accordion-item.element.js"
     }
   }
 }

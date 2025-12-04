@@ -125,7 +125,7 @@ function getEventListeners(element: LitCustomElement) {
   return element.events
     .map(
       (event) => `
-        this._el.addEventListener('${event.name}', (e: Event) => {
+        this.el.addEventListener('${event.name}', (e: Event) => {
           this.${eventToPropertyName(event.name)}.emit(e);
         });`
     )
