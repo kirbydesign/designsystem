@@ -54,11 +54,16 @@ export class DesignTokenHelper {
   }
 
   public static fontSize(key: keyof typeof styles.fontSizes): string {
-    return styles.fontSizes[key];
+    const remValue = styles.fontSizes[key];
+    const remToPxValue = parseFloat(remValue) * 16;
+    return `${remToPxValue}px`;
   }
 
   public static iconFontSize(key: keyof typeof styles.iconFontSizes): string {
-    return styles.iconFontSizes[key];
+    const remValue = styles.iconFontSizes[key];
+    const remToPxValue = parseFloat(remValue) * 16;
+
+    return `${remToPxValue}px`;
   }
 
   public static fontWeight(key: keyof typeof styles.fontWeight): string {
