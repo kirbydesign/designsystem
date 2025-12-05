@@ -10,6 +10,10 @@
   &.selected {
     color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
   }
+
+  &:not(.selected):hover a {
+    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+  }
 }
 
 .selected,
