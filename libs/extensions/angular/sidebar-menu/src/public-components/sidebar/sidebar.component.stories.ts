@@ -255,6 +255,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item is clicked',
       control: false,
     },
+    itemChecked: {
+      description: 'Event emitted when a menu item toggle button is clicked',
+      control: false,
+    },
     expandIconOnHover: { table: { disable: true } },
     menuItemsChanged: { table: { disable: true } },
     changeMenuItems: { table: { disable: true } },

@@ -52,7 +52,7 @@ export class MenuAnchorItemComponent<T extends SidebarMenuItem> {
   }
 
   #checkItem(checked: boolean): void {
-    this.#menuStateService.setCheckedItem(this.item().id, checked);
+    this.#menuStateService.checkEvent = { item: this.item(), checked };
   }
 
   readonly vm: ViewModel = {
