@@ -56,10 +56,6 @@
   margin: 0;
 
   --kirby-button-color: inherit;
-
-  &:not(:hover, :active, :focus-visible) {
-    --kirby-button-background-color: transparent;
-  }
 }
 
 .toggle-button-unchecked {
