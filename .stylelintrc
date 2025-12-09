@@ -20,6 +20,7 @@
       }
     ],
     "scss/at-extend-no-missing-placeholder": null,
+    "scss/dollar-variable-no-missing-interpolation": null,
     "no-descending-specificity": null,
     "length-zero-no-unit": [
       true,
