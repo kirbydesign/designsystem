@@ -7,6 +7,7 @@ import {
   Input,
   LOCALE_ID,
   OnInit,
+  Optional,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import Inputmask from 'inputmask/dist/inputmask.es6.js';
@@ -19,15 +20,8 @@ interface InputMask {
 @Directive({
   // eslint-disable-next-line
   selector: '[kirby-decimal-mask]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: DecimalMaskDirective,
-    },
-  ],
 })
-export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
+export class DecimalMaskDirective implements OnInit {
   @Input() min: number;
   @Input() max: number;
   @Input() precision = 2;
@@ -86,18 +80,6 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     if (!this.inputmask) return;
     const formattedValue = String(val).replace('.', this.radixPoint);
     this.inputmask.setValue(formattedValue);
-  }
-
-  registerOnChange(onChange: any): void {
-    this._onChange = onChange;
-  }
-
-  registerOnTouched(fn: any): void {
-    this._onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.elementRef.nativeElement.disabled = isDisabled;
   }
 
   private initMask(): void {
