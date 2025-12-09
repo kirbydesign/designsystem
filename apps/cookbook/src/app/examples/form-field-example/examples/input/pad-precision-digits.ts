@@ -16,7 +16,7 @@ const config = {
   <input type="number" kirby-input kirby-decimal-mask formControlName="amount" [precision]="4" [padPrecisionDigits]="true"/>
 </kirby-form-field>
 </div>
-<button (click)="changeAmount()" kirby-button>Klik på mig</button> 
+<button (click)="changeAmount()" kirby-button>Klik på mig</button>
 `,
 };
 
