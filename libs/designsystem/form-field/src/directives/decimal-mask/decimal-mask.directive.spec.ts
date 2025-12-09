@@ -15,7 +15,8 @@ import { DecimalMaskDirective } from './decimal-mask.directive';
   standalone: false,
 })
 class NumericInputHostComponent {
-  numericInput = new UntypedFormControl('');
+  // Initialize with null to simulate real-world scenario where form control starts empty
+  numericInput = new UntypedFormControl(null);
 }
 
 describe('NumberInputDirective', () => {
@@ -135,39 +136,154 @@ describe('NumberInputDirective', () => {
     });
 
     describe('with padPrecisionDigits', () => {
-      locale = 'en-GB';
-      it('should not pad fractional digits when padPrecisionDigits is not set', () => {
-        spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
-        spectator.typeInElement('0.1', spectator.element);
-        expect(spectator.element).toHaveValue('0.1');
+      describe('and en-GB locale', () => {
+        locale = 'en-GB';
+        it('should not pad fractional digits when padPrecisionDigits is not set', () => {
+          spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
+          spectator.typeInElement('0.1', spectator.element);
+          expect(spectator.element).toHaveValue('0.1');
+        });
+
+        it('should pad to the default precision when padPrecisionDigits is true', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
+          );
+          spectator.typeInElement('0.1', spectator.element);
+          expect(spectator.element).toHaveValue('0.10');
+        });
+
+        it('should correctly pad input value to the specified precision', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="3" />`
+          );
+          spectator.typeInElement('0.1', spectator.element);
+          expect(spectator.element).toHaveValue('0.100');
+        });
+
+        it('should pad fractional digits when none are entered', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="2" />`
+          );
+
+          spectator.typeInElement('1', spectator.element);
+          expect(spectator.element).toHaveValue('1.00');
+        });
+
+        it('should correctly set value programmatically with precision 2', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" [padPrecisionDigits]="true" precision="2" />`
+          );
+          const numericInput = spectator.hostComponent['numericInput'];
+
+          // Verify initial state is null/empty
+          expect(numericInput.value).toBeNull();
+          expect(spectator.element).toHaveValue('');
+
+          numericInput.setValue(1);
+
+          // Verify the value is NOT multiplied by 10^precision (bug would show '100.00')
+          expect(spectator.element).toHaveValue('1.00');
+          expect((spectator.element as HTMLInputElement).value).not.toContain('100');
+          expect(numericInput.value).toEqual('1.00');
+          expect(numericInput.value).not.toEqual('100.00');
+        });
+
+        it('should correctly set value programmatically with precision 4', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" [padPrecisionDigits]="true" precision="4" />`
+          );
+          const numericInput = spectator.hostComponent['numericInput'];
+
+          expect(spectator.element).toHaveValue('');
+
+          numericInput.setValue(1);
+
+          expect(spectator.element).toHaveValue('1.0000');
+          expect(numericInput.value).toEqual('1.0000');
+        });
       });
 
-      it('should pad to the default precision when padPrecisionDigits is true', () => {
-        locale = 'en-GB';
-        spectator = createDirective(
-          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
-        );
-        spectator.typeInElement('0.1', spectator.element);
-        expect(spectator.element).toHaveValue('0.10');
-      });
+      describe('and DA locale', () => {
+        locale = 'da';
+        it('should not pad fractional digits when padPrecisionDigits is not set', () => {
+          spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
+          spectator.typeInElement('0,1', spectator.element);
+          expect(spectator.element).toHaveValue('0.1');
+        });
 
-      it('should correctly pad input value to the specified precision', () => {
-        locale = 'en-GB';
-        spectator = createDirective(
-          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="3" />`
-        );
-        spectator.typeInElement('0.1', spectator.element);
-        expect(spectator.element).toHaveValue('0.100');
-      });
+        it('should pad to the default precision when padPrecisionDigits is true', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
+          );
+          spectator.typeInElement('0,1', spectator.element);
+          expect(spectator.element).toHaveValue('0.10');
+        });
 
-      it('should pad fractional digits when none are entered', () => {
-        locale = 'en-GB';
-        spectator = createDirective(
-          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="2" />`
-        );
+        it('should correctly pad input value to the specified precision', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="3" />`
+          );
+          spectator.typeInElement('0,1', spectator.element);
+          expect(spectator.element).toHaveValue('0.100');
+        });
 
-        spectator.typeInElement('1', spectator.element);
-        expect(spectator.element).toHaveValue('1.00');
+        it('should pad fractional digits when none are entered', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" precision="2" />`
+          );
+
+          spectator.typeInElement('1', spectator.element);
+          expect(spectator.element).toHaveValue('1.00');
+        });
+
+        it('should correctly set value programmatically with precision 2', () => {
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" [padPrecisionDigits]="true" precision="2" />`
+          );
+          const numericInput = spectator.hostComponent['numericInput'];
+
+          expect(spectator.element).toHaveValue('');
+
+          numericInput.setValue(1);
+
+          expect(spectator.element).toHaveValue('1,00');
+          expect(numericInput.value).toEqual('1.00');
+        });
+
+        it('should correctly set value programmatically with precision 4', () => {
+          locale = 'da';
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" [padPrecisionDigits]="true" precision="4" />`
+          );
+          const numericInput = spectator.hostComponent['numericInput'];
+
+          expect(spectator.element).toHaveValue('');
+
+          numericInput.setValue(1);
+
+          expect(spectator.element).toHaveValue('1,0000');
+          expect(numericInput.value).toEqual('1.0000');
+        });
+
+        it('should correctly set value programmatically after clearing a previous value', () => {
+          locale = 'en-GB';
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" [padPrecisionDigits]="true" precision="4" />`
+          );
+          const numericInput = spectator.hostComponent['numericInput'];
+
+          numericInput.setValue(5);
+          expect(spectator.element).toHaveValue('5.0000');
+
+          numericInput.setValue(null);
+          expect(spectator.element).toHaveValue('');
+
+          numericInput.setValue(4);
+
+          expect(spectator.element).toHaveValue('4.0000');
+          expect((spectator.element as HTMLInputElement).value).not.toContain('40000');
+          expect(numericInput.value).toEqual('4.0000');
+        });
       });
     });
   });
@@ -277,7 +393,6 @@ describe('NumberInputDirective', () => {
         );
 
         spectator.directive.setDisabledState(false);
-
         expect(spectator.element).not.toHaveAttribute('disabled');
         expect((spectator.element as HTMLInputElement).disabled).toBeFalse();
       });
