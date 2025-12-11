@@ -29,7 +29,13 @@ import {
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import {
+  Browser,
+  DeviceType,
+  PlatformService,
+  StringSearchHelper,
+  UniqueIdGenerator,
+} from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -52,7 +58,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     private zone: NgZone,
     private renderer: Renderer2,
     public translations: TranslationService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private platformService: PlatformService
   ) {}
 
   @Input() public isDisabled: boolean = false;
@@ -232,22 +239,63 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   focusItem() {
     const itemToBeFocused = this.kirbyItems.get(this.focusedIndex);
-    const ionItem = itemToBeFocused.nativeElement.querySelector('ion-item');
+    if (!itemToBeFocused) return;
+
+    const kirbyItem = itemToBeFocused.nativeElement;
+    const ionItem = kirbyItem.querySelector('ion-item');
 
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
     if (firstInteractiveElementWithinItem) {
-      firstInteractiveElementWithinItem.focus();
+      this.focusInteractiveElement(firstInteractiveElementWithinItem, kirbyItem);
     } else {
-      this.focusSelectableItem(ionItem);
+      const nativeButton: HTMLButtonElement =
+        ionItem.shadowRoot?.querySelector('button:not([disabled])');
+      if (!nativeButton) return;
+      this.focusButtonElement(nativeButton, kirbyItem);
     }
     console.log('active element after focus', document.activeElement);
   }
 
-  private focusSelectableItem(ionItem: HTMLIonItemElement) {
-    const nativeButton: HTMLButtonElement =
-      ionItem.shadowRoot.querySelector('button:not([disabled])');
-    nativeButton?.focus();
+  private focusInteractiveElement(
+    interactiveElement: HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement,
+    kirbyItem: HTMLElement
+  ) {
+    // Determine if we need temporary kirby item focus: VoiceOver Fix on Safari on mac
+    const needsTemporaryHostFocus =
+      this.platformService.getBrowser() === Browser.Safari &&
+      this.platformService.getDeviceType() !== DeviceType.iOS;
+    if (needsTemporaryHostFocus) {
+      this.temporaryFocusOnKirbyItem(kirbyItem, interactiveElement);
+    } else {
+      // Direct focus (iOS interactive elements, and all other platforms)
+      interactiveElement.focus();
+    }
+  }
+
+  private focusButtonElement(focusElement: HTMLButtonElement, kirbyItem: HTMLElement) {
+    // Determine if we need temporary kirby item focus: VoiceOver Fix on IOS and Safari on mac
+    const needsTemporaryHostFocus =
+      this.platformService.getBrowser() === Browser.Safari ||
+      this.platformService.getDeviceType() === DeviceType.iOS;
+    if (needsTemporaryHostFocus) {
+      // Briefly focus host to move VoiceOver cursor, then move to target element
+      this.temporaryFocusOnKirbyItem(kirbyItem, focusElement);
+    } else {
+      // Direct focus (iOS interactive elements, and all other platforms)
+      focusElement.focus();
+    }
+  }
+
+  // Briefly focus kirby item and then move to target element: A fix to move VoiceOver cursor correctly
+  private temporaryFocusOnKirbyItem(kirbyItem: HTMLElement, focusElement: HTMLElement) {
+    this.renderer.setAttribute(kirbyItem, 'tabindex', '-1');
+    kirbyItem.focus();
+
+    setTimeout(() => {
+      focusElement.focus();
+      this.renderer.removeAttribute(kirbyItem, 'tabindex');
+    }, 50);
   }
 
   getTriggerButton(): HTMLButtonElement {
@@ -274,7 +322,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     this.kirbyItemComponents.changes
       .pipe(startWith(null), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        this.setRoleAttributeForAllItems();
         this.ensureSelectableItems();
       });
   }
@@ -294,23 +341,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         itemComponent.selectable = true;
       }
     });
-  }
-
-  private setRoleAttributeForAllItems() {
-    this.kirbyItems.forEach((item) => {
-      this.setRoleAttributeForItem(item.nativeElement);
-    });
-  }
-
-  private setRoleAttributeForItem(item: HTMLElement) {
-    let menuItemRole = 'menuitem';
-    if (item.matches(':has(kirby-toggle, kirby-checkbox)')) {
-      menuItemRole = 'menuitemcheckbox';
-    } else if (item.matches(':has(kirby-radio)')) {
-      menuItemRole = 'menuitemradio';
-    }
-    const ionItem = item.querySelector('ion-item');
-    this.renderer.setAttribute(ionItem ?? item, 'role', menuItemRole);
   }
 
   menuVisibilityChanged(menuIsShown: boolean) {
