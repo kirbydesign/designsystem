@@ -133,7 +133,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     if (!this.floatingMenuIsShown) return;
     this.focusedIndex = 0;
     this.focusItem();
-    this.cdr.detectChanges();
   }
 
   private preventDefaultAndStopImmediatePropagation(event: KeyboardEvent) {
