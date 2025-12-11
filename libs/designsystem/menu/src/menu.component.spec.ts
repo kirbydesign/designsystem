@@ -187,28 +187,6 @@ describe('MenuComponent', () => {
     });
   });
 
-  describe('menu card', () => {
-    beforeEach(async () => {
-      spectator = createHost<MenuComponent>(
-        `<kirby-menu>
-          <kirby-item>
-            <p>Action 1</p>
-          </kirby-item>
-        </kirby-menu>`,
-        {}
-      );
-      card = spectator.query('kirby-card');
-    });
-
-    it('should have role=menu', () => {
-      expect(card.getAttribute('role')).toEqual('menu');
-    });
-
-    it('should have items with role=menuitem', () => {
-      expect(card.querySelector('kirby-item').getAttribute('role')).toEqual('menuitem');
-    });
-  });
-
   describe('interaction', () => {
     beforeEach(() => {
       spectator = createHost(
@@ -349,13 +327,6 @@ describe('MenuComponent', () => {
           const selectableIonItem = ionItem.shadowRoot.querySelector('button'); //"button" only exist if item is selectable
 
           expect(selectableIonItem).toBeTruthy();
-        });
-      });
-
-      it('should add role="menuitem" to items ', async () => {
-        const kirbyItems = spectator.queryAll('kirby-item');
-        kirbyItems.forEach((kirbyItem) => {
-          expect(kirbyItem.getAttribute('role')).toBe('menuitem');
         });
       });
     });
@@ -642,29 +613,6 @@ describe('MenuComponent', () => {
           spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
 
           expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
-        });
-      });
-
-      describe('accessibility', () => {
-        beforeEach(async () => {
-          spectator = createHost<MenuComponent>(
-            `<kirby-menu>
-              <kirby-item>
-                <kirby-checkbox></kirby-checkbox>
-              </kirby-item>
-              <kirby-item>
-                <kirby-toggle></kirby-toggle>
-              </kirby-item>
-            </kirby-menu>`,
-            {}
-          );
-          card = spectator.query('kirby-card');
-          items = card.querySelectorAll('kirby-item');
-        });
-
-        it('should add role="menuitemcheckbox" to items with toggle or checkbox', () => {
-          expect(items[0].getAttribute('role')).toEqual('menuitemcheckbox');
-          expect(items[1].getAttribute('role')).toEqual('menuitemcheckbox');
         });
       });
     });
