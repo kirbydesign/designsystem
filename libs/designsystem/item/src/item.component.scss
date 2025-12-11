@@ -23,6 +23,10 @@
     }
   }
 
+  &.md ion-item {
+    --min-height: #{map.get(utils.$item-heights, 'm')};
+  }
+
   .outside {
     left: utils.size('xxxs');
     margin: 0;
