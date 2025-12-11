@@ -34,9 +34,14 @@
   --kirby-card-header-color: #{utils.get-color('black')};
 }
 
+.title,
+.subtitle {
+  line-height: normal;
+}
+
 .title {
-  margin-bottom: var(--kirby-internal-card-header-margin-bottom, utils.size('xxs'));
-  line-height: var(--kirby-internal-card-header-line-height, utils.line-height('l'));
+  margin-top: utils.size('xxxs');
+  margin-bottom: var(--kirby-internal-card-header-margin-bottom, utils.size('s'));
 
   &.bold {
     font-weight: utils.font-weight('bold');
@@ -45,7 +50,7 @@
 
 .subtitle {
   font-size: utils.font-size('s');
-  margin-bottom: 0;
+  margin-bottom: utils.size('xxxs');
 }
 
 :host(.flagged) {
