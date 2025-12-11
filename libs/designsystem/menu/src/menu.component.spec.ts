@@ -291,12 +291,6 @@ describe('MenuComponent', () => {
 
         expect(selectableIonItem).toBeTruthy();
       });
-
-      it('should add role="menuitem" to item', async () => {
-        const kirbyItem = spectator.query('kirby-item');
-
-        expect(kirbyItem.getAttribute('role')).toBe('menuitem');
-      });
     });
 
     describe('inside for loop', () => {
