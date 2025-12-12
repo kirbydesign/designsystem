@@ -56,13 +56,13 @@ describe('ItemComponent in a MenuComponent', () => {
       spectator = createHost(`<kirby-menu><kirby-item size="xs">Value</kirby-item></kirby-menu>`);
     });
 
-    it(`should have ion-item '--min-height 32px'`, () => {
+    it(`should force ion-item to be '--min-height 44px'`, () => {
       spectator.detectChanges();
       const ionItem = spectator.query('ion-item');
 
       expect(ionItem).toBeTruthy();
       expect(spectator.query('ion-item')).toHaveComputedStyle({
-        '--min-height': '32px',
+        '--min-height': '44px',
       });
     });
   });
