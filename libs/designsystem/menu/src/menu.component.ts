@@ -264,7 +264,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     if (needsTemporaryHostFocus) {
       this.temporaryFocusOnKirbyItem(kirbyItem, interactiveElement);
     } else {
-      // Direct focus (iOS interactive elements, and all other platforms)
       interactiveElement.focus();
     }
   }
@@ -275,10 +274,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       this.platformService.getBrowser() === Browser.Safari ||
       this.platformService.getDeviceType() === DeviceType.iOS;
     if (needsTemporaryHostFocus) {
-      // Briefly focus host to move VoiceOver cursor, then move to target element
       this.temporaryFocusOnKirbyItem(kirbyItem, focusElement);
     } else {
-      // Direct focus (iOS interactive elements, and all other platforms)
       focusElement.focus();
     }
   }
