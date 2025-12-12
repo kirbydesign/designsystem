@@ -6,6 +6,7 @@ import {
   Component,
   ContentChild,
   ContentChildren,
+  DestroyRef,
   ElementRef,
   HostListener,
   Input,
@@ -30,6 +31,8 @@ import {
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
+import { startWith } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'kirby-menu',
@@ -48,7 +51,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     private elementRef: ElementRef<HTMLElement>,
     private zone: NgZone,
     private renderer: Renderer2,
-    public translations: TranslationService
+    public translations: TranslationService,
+    private destroyRef: DestroyRef
   ) {}
 
   @Input() public isDisabled: boolean = false;
@@ -117,7 +121,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
-  @HostListener('click', ['$event'])
+  @HostListener('click')
   _onClick() {
     if (!this.floatingMenuIsShown) return;
     this.focusedIndex = 0;
@@ -262,9 +266,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   }
 
   ngAfterContentInit(): void {
-    this.setRoleAttributeForAllItems();
     this.setUserProvidedButtonAriaAttributes();
-    this.ensureSelectableOnItems();
+    this.kirbyItemComponents.changes
+      .pipe(startWith(null), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.setRoleAttributeForAllItems();
+        this.ensureSelectableItems();
+      });
   }
 
   private forwardAriaLabelToTriggerButton() {
@@ -276,7 +284,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     );
   }
 
-  ensureSelectableOnItems() {
+  ensureSelectableItems() {
     this.kirbyItemComponents.forEach((itemComponent) => {
       if (itemComponent.selectable === undefined) {
         itemComponent.selectable = true;
