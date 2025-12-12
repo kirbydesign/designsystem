@@ -349,6 +349,9 @@ export const WithActions: Story = {
 
 /**
  * A sidebar with toggle buttons on its items.
+ *
+ * > __Important:__ The current implementation of toggle buttons in the sidebar menu is not WCAG compliant.
+ * > It is therefore recommended to avoid using this feature in consumer-facing solutions that should adhere to accessibility standards.
  */
 export const WithToggleButtons: Story = {
   ...Default,
