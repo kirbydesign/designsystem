@@ -22,6 +22,11 @@
     &:only-child {
       flex-basis: auto;
     }
+
+    & > kirby-form-field-message {
+      width: 100%;
+      display: flex;
+    }
   }
 
   .counter {

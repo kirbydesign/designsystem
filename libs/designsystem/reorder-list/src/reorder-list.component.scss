@@ -69,7 +69,7 @@ kirby-card {
   overflow: inherit;
   z-index: auto;
 
-  @include utils.slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
+  @include utils.slotted('div:last-child ion-reorder-group div:last-child kirby-item') {
     border-bottom-left-radius: utils.border-radius('n');
     border-bottom-right-radius: utils.border-radius('n');
     overflow: hidden;
@@ -79,7 +79,7 @@ kirby-card {
     z-index: 1; // for showing rounded corners on ios devices
   }
 
-  @include utils.slotted('.content-layer > div:first-child > kirby-item') {
+  @include utils.slotted('.content-layer > div:first-child kirby-item') {
     border-radius: utils.border-radius('n');
     overflow: hidden;
   }
