@@ -9,6 +9,7 @@
   padding: 0;
   color: var(--kirby-card-header-color);
   background-color: var(--kirby-card-header-background-color);
+  line-height: normal;
 
   &.has-padding {
     padding: var(--kirby-internal-card-header-padding, utils.size('s'));
@@ -34,14 +35,10 @@
   --kirby-card-header-color: #{utils.get-color('black')};
 }
 
-.title,
-.subtitle {
-  line-height: normal;
-}
-
 .title {
-  margin-top: utils.size('xxxs');
   margin-bottom: var(--kirby-internal-card-header-margin-bottom, utils.size('s'));
+  margin-top: utils.size('xxxs');
+  line-height: var(--kirby-internal-card-header-line-height);
 
   &.bold {
     font-weight: utils.font-weight('bold');
@@ -50,7 +47,7 @@
 
 .subtitle {
   font-size: utils.font-size('s');
-  margin-bottom: utils.size('xxxs');
+  margin-bottom: 0;
 }
 
 :host(.flagged) {
