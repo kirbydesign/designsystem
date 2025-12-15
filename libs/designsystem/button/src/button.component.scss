@@ -30,7 +30,10 @@ $button-margin: utils.size('xxxs');
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   & {
     font-size: utils.font-size('xs');
-    height: max($button-xs-icon-only-size, 1rem);
+
+    // use fixed size unless font-size grows too large, then let button
+    // height adjust to font-size (effectively when text is resized to 150% and above)
+    height: max($button-xs-icon-only-size, utils.relative-spacing('s'));
     min-width: button-width('xs');
   }
 
@@ -42,7 +45,9 @@ $button-margin: utils.size('xxxs');
   &.icon-only {
     --kirby-icon-font-size: #{utils.size('s')};
 
-    width: max($button-xs-icon-only-size, 1rem);
+    // use fixed size unless font-size grows too large, then let button
+    // height adjust to font-size (effectively when text is resized to 150% and above)
+    width: max($button-xs-icon-only-size, utils.relative-spacing('s'));
     min-width: unset;
   }
 
