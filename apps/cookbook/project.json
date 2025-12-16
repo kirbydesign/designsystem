@@ -17,7 +17,6 @@
           "base": "dist/apps/cookbook"
         },
         "index": "apps/cookbook/src/index.html",
-        "polyfills": ["apps/cookbook/src/polyfills.ts"],
         "tsConfig": "apps/cookbook/tsconfig.app.json",
         "assets": [
           "apps/cookbook/src/favicon.ico",

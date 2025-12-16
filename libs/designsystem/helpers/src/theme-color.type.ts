@@ -1,1 +1,1 @@
-export { ThemeColor } from '@kirbydesign/core';
+export type { ThemeColor } from '@kirbydesign/core';
