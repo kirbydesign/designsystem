@@ -37,7 +37,6 @@
 
 .title {
   margin-bottom: var(--kirby-internal-card-header-margin-bottom, utils.size('s'));
-  margin-top: utils.size('xxxs');
   line-height: var(--kirby-internal-card-header-line-height);
 
   &.bold {
@@ -48,6 +47,12 @@
 .subtitle {
   font-size: utils.font-size('s');
   margin-bottom: 0;
+}
+
+:host:has(.subtitle) .title {
+  margin-top: utils.size(
+    'xxxs'
+  ); // when subtitle is present, we want a bit more spacious look, therefore top margin here
 }
 
 :host(.flagged) {
