@@ -3,8 +3,7 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 const config = {
   selector: 'cookbook-item-example-selectable',
-  template: `
-  <kirby-item [selectable]="true">
+  template: `<kirby-item [selectable]="true">
   <p class="kirby-item-title">Selectable</p>
 </kirby-item>
 
