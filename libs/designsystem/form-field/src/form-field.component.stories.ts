@@ -68,6 +68,22 @@ export const InputCounter: Story = {
   }),
 };
 
+export const InputWithInputCounter: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule],
+    }),
+  ],
+  render: () => ({
+    props: {
+      textControl: new FormControl('Text area in form control'),
+    },
+    template: `<kirby-form-field label="Textarea with label and message" >
+    <input kirby-input [formControl]="textControl" #input />
+    <kirby-input-counter [listenTo]="input"></kirby-input-counter>
+  </kirby-form-field>`,
+  }),
+};
 export const TextareaWithInputCounter: Story = {
   decorators: [
     moduleMetadata({
