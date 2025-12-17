@@ -1,11 +1,12 @@
 import { Injectable, Signal, signal } from '@angular/core';
 
-import { SidebarMenuItem } from '../../models';
+import { CheckEvent, SidebarMenuItem } from '../../models';
 
 @Injectable({ providedIn: 'root' })
 export class MenuStateService<T extends SidebarMenuItem> {
   readonly #toggledSubmenu = signal<T | undefined>(undefined);
   readonly #selectedItem = signal<T | undefined>(undefined);
+  readonly #checkEvent = signal<CheckEvent<T> | undefined>(undefined);
 
   get toggledSubmenu(): Signal<T | undefined> {
     return this.#toggledSubmenu;
@@ -23,5 +24,13 @@ export class MenuStateService<T extends SidebarMenuItem> {
     if (item.selectable ?? true) {
       this.#selectedItem.set(item);
     }
+  }
+
+  get checkEvent(): Signal<CheckEvent<T> | undefined> {
+    return this.#checkEvent.asReadonly();
+  }
+
+  set checkEvent(event: CheckEvent<T>) {
+    this.#checkEvent.set(event);
   }
 }

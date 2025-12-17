@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SidebarMenuItem } from '../../models';
+import { CheckEvent, SidebarMenuItem } from '../../models';
 import { SidebarMenuComponent } from '../../components/sidebar-menu';
 
 @Component({
@@ -12,6 +12,7 @@ import { SidebarMenuComponent } from '../../components/sidebar-menu';
       (menuItemsChange)="changeMenuItems($event)"
       (itemClick)="afterMenuClicked.emit($event)"
       (submenuToggle)="afterMenuToggled.emit($event)"
+      (itemChecked)="itemChecked.emit($event)"
     >
       <ng-content select="kirby-x-sidebar-header" slot="header"></ng-content>
       <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
@@ -25,6 +26,7 @@ export class SidebarComponent<T extends SidebarMenuItem> {
   @Output() menuItemsChange = new EventEmitter<T[]>();
   @Output() afterMenuClicked = new EventEmitter<T>();
   @Output() afterMenuToggled = new EventEmitter<T>();
+  @Output() itemChecked = new EventEmitter<CheckEvent<T>>();
 
   /**
    * @deprecated has not had an effect for a long time

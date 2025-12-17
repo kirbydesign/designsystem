@@ -255,6 +255,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item is clicked',
       control: false,
     },
+    itemChecked: {
+      description: 'Event emitted when a menu item toggle button is clicked',
+      control: false,
+    },
     expandIconOnHover: { table: { disable: true } },
     menuItemsChanged: { table: { disable: true } },
     changeMenuItems: { table: { disable: true } },
@@ -342,3 +346,35 @@ export const WithActions: Story = {
     mainAreaContent: '<h1>Sidebar with extra action buttons in the header</h1>',
   },
 };
+
+/**
+ * A sidebar with toggle buttons on its items.
+ *
+ * > __Important:__ The current implementation of toggle buttons in the sidebar menu is not WCAG compliant.
+ * > It is therefore recommended to avoid using this feature in consumer-facing solutions that should adhere to accessibility standards.
+ */
+export const WithToggleButtons: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsExample.map(convertToToggleButtonsExample),
+    mainAreaContent: '<h1>Sidebar with Toggle Buttons</h1>',
+  },
+};
+
+function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
+  if (item.children) {
+    return {
+      ...item,
+      children: item.children.map(convertToToggleButtonsExample),
+    };
+  }
+  return {
+    ...item,
+    toggle: {
+      isChecked: false,
+      uncheckedIcon: 'star',
+      checkedIcon: 'star-fill',
+    },
+  };
+}
