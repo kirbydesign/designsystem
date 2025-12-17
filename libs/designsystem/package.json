@@ -41,7 +41,7 @@
     "zone.js": "^0.14.3 || ~0.15.0"
   },
   "devDependencies": {
-    "@ngneat/spectator": "^20.0.0",
+    "@ngneat/spectator": "^22.1.0",
     "@types/jasmine": "4.0.3",
     "@types/jest": "^29.5.5",
     "jasmine-core": "4.2.0",
