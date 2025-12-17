@@ -1,4 +1,4 @@
-import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { userEvent, within } from 'storybook/test';
 
 import {
@@ -9,6 +9,7 @@ import {
 } from '@kirbydesign/designsystem/form-field';
 
 import { IconComponent } from '@kirbydesign/designsystem';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {
@@ -28,16 +29,24 @@ const meta: Meta<FormFieldComponent> = {
 };
 export default meta;
 type Story = StoryObj<FormFieldComponent>;
+type HasErrorStory = StoryObj<FormFieldComponent & { hasError: boolean }>;
 
-export const Default: Story = {
+export const Default: HasErrorStory = {
   args: {
     label: 'Input with label and message',
     message: 'This is additional info that will be shown below the input',
+    hasError: false,
+  },
+  argTypes: {
+    hasError: {
+      control: 'boolean',
+      description: 'Sets error state on the input element',
+    },
   },
   render: (args) => ({
     props: args,
-    template: `<kirby-form-field ${argsToTemplate(args)}>
-    <input kirby-input />
+    template: `<kirby-form-field label="${args.label}" message="${args.message}">
+    <input kirby-input [hasError]="hasError"/>
   </kirby-form-field>`,
   }),
 };
@@ -55,6 +64,23 @@ export const InputCounter: Story = {
     template: `<kirby-form-field>
     <input kirby-input placeholder="Input Counter" #input maxlength="140" />
     <kirby-input-counter [listenTo]="input"></kirby-input-counter>
+  </kirby-form-field>`,
+  }),
+};
+
+export const TextareaWithInputCounter: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule],
+    }),
+  ],
+  render: () => ({
+    props: {
+      textControl: new FormControl('Text area in form control'),
+    },
+    template: `<kirby-form-field label="Textarea with label and message" >
+    <textarea kirby-textarea [formControl]="textControl" #textarea></textarea>
+    <kirby-input-counter [listenTo]="textarea"></kirby-input-counter>
   </kirby-form-field>`,
   }),
 };

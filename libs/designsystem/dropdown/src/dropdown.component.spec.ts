@@ -14,6 +14,7 @@ import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 
@@ -675,7 +676,9 @@ describe('DropdownComponent', () => {
 
       describe('and looses focus', () => {
         it('should close dropdown', () => {
-          spectator.dispatchFakeEvent(spectator.element, 'blur');
+          buttonElement.dispatchEvent(new FocusEvent('blur'));
+          spectator.detectChanges();
+
           expect(spectator.component.isOpen).toBeFalsy();
         });
       });
@@ -1091,8 +1094,10 @@ describe('DropdownComponent', () => {
       it('should invoke callback from registerOnTouched() function on blur', () => {
         const onTouchedSpy = jasmine.createSpy('_onTouched');
         spectator.component.registerOnTouched(onTouchedSpy);
-        spectator.blur();
+
+        buttonElement.dispatchEvent(new FocusEvent('blur'));
         spectator.detectChanges();
+
         expect(onTouchedSpy).toHaveBeenCalled();
       });
 
@@ -1234,9 +1239,12 @@ describe('DropdownComponent', () => {
   describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
     let spectator: SpectatorHost<DropdownComponent>;
     let cardElement: HTMLElement;
+    let formControl: FormControl;
+    let buttonElement: HTMLElement;
 
     const createHost = createHostFactory({
       component: DropdownComponent,
+      host: OnPushHostComponent,
       imports: [
         MockComponents(
           ButtonComponent,
@@ -1245,16 +1253,22 @@ describe('DropdownComponent', () => {
           IconComponent,
           PopoverComponent
         ),
+        ReactiveFormsModule,
       ],
-      host: OnPushHostComponent,
     });
 
     beforeEach(() => {
-      spectator = createHost(`<kirby-dropdown [items]="items"></kirby-dropdown>`, {
-        hostProps: {
-          items: items,
-        },
-      });
+      formControl = new FormControl(items[0]);
+      spectator = createHost(
+        '<kirby-dropdown [items]="items" [formControl]="formControl"></kirby-dropdown>',
+        {
+          hostProps: {
+            items,
+            formControl,
+          },
+        }
+      );
+      buttonElement = spectator.query('button');
     });
 
     beforeEach(fakeAsync(() => {
@@ -1279,6 +1293,69 @@ describe('DropdownComponent', () => {
     it('options should be visible', () => {
       expect(cardElement).toBeVisible();
       expect(cardElement).toHaveComputedStyle({ opacity: '1' });
+    });
+
+    it('should update disabled state when form control is disabled', () => {
+      expect(spectator.component.disabled).toBeFalsy();
+      expect(buttonElement).not.toHaveAttribute('disabled');
+
+      formControl.disable();
+      spectator.detectChanges();
+
+      expect(spectator.component.disabled).toBeTruthy();
+      expect(buttonElement).toHaveAttribute('disabled');
+    });
+
+    it('should update disabled state when form control is enabled', () => {
+      formControl.disable();
+      spectator.detectChanges();
+
+      expect(spectator.component.disabled).toBeTruthy();
+      expect(buttonElement).toHaveAttribute('disabled');
+
+      formControl.enable();
+      spectator.detectChanges();
+
+      expect(buttonElement).not.toHaveAttribute('disabled');
+      expect(spectator.component.disabled).toBeFalsy();
+    });
+
+    it('should display selected text in button when value changes via form control', () => {
+      formControl.setValue(items[1]);
+      spectator.detectChanges();
+
+      const buttonText = buttonElement.textContent?.trim();
+      expect(buttonText).toContain(items[1].text);
+    });
+
+    it('should mark component for check when value is written', () => {
+      const cdr = spectator.component['cdr'];
+      spyOn(cdr, 'markForCheck');
+
+      spectator.component.writeValue(items[1]);
+
+      expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
+
+    describe('setDisabledState()', () => {
+      it('should mark component for check when disabled state is set to true', () => {
+        const cdr = spectator.component['cdr'];
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(true);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
+
+      it('should mark component for check when disabled state is set to false', () => {
+        const cdr = spectator.component['cdr'];
+        spectator.component.disabled = true;
+        spyOn(cdr, 'markForCheck');
+
+        spectator.component.setDisabledState(false);
+
+        expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
     });
   });
 

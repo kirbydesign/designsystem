@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -62,6 +63,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor, 
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private element: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {}
@@ -122,6 +124,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor, 
 
   public setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cdr.markForCheck();
   }
 
   public _onRangeValueChange($event: any): void {
@@ -142,6 +145,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor, 
   public writeValue(value: any): void {
     if (value !== undefined) {
       this.value = value;
+      this.cdr.markForCheck();
     }
   }
 

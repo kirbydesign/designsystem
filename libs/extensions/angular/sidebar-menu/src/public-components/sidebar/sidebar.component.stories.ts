@@ -179,7 +179,7 @@ const menuItemsExample: SidebarMenuItem[] = [
   {
     id: 'settings',
     title: 'Settings',
-    icon: 'cog',
+    icon: 'settings',
     link: { relativeLink: '/settings' },
   },
   {
@@ -255,6 +255,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item is clicked',
       control: false,
     },
+    itemChecked: {
+      description: 'Event emitted when a menu item toggle button is clicked',
+      control: false,
+    },
     expandIconOnHover: { table: { disable: true } },
     menuItemsChanged: { table: { disable: true } },
     changeMenuItems: { table: { disable: true } },
@@ -266,7 +270,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <img src="assets/images/kirby-logo.svg" alt=""/>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
           </kirby-x-sidebar-header>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
@@ -293,7 +297,7 @@ type Story = StoryObj<SidebarPropsAndCustomArgs>;
 export const Default: Story = {
   args: {
     menuItems: menuItemsExample,
-    mainAreaContent: ` <h1>Welcome to the main content area</h1>
+    mainAreaContent: `<h1>Welcome to the main content area</h1>
     <p>This is where your main application content would go.</p>`,
   },
 };
@@ -310,3 +314,67 @@ export const AutoCollapse: Story = {
     mainAreaContent: '<h1>Sidebar with Auto Collapse Items</h1>',
   },
 };
+
+/**
+ * A sidebar with extra action buttons in the header.
+ */
+export const WithActions: Story = {
+  ...Default,
+  render: ({ mainAreaContent, ...args }) => ({
+    props: args,
+    template: `
+      <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
+        <kirby-x-sidebar ${argsToTemplate(args)}>
+          <kirby-x-sidebar-header>
+            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
+            <button kirby-button size="sm" attentionLevel="3" slot="action" style="display: flex; flex-grow: 1; justify-content: flex-start;">
+              <kirby-icon name="search"></kirby-icon>
+              <span>Search...</span>
+            </button>
+            <button kirby-button size="sm" attentionLevel="3" slot="action" aria-label="More settings">
+              <kirby-icon name="more"></kirby-icon>
+            </button>
+          </kirby-x-sidebar-header>
+        </kirby-x-sidebar>
+        <div style="padding: var(--kirby-spacing-s);">
+          ${mainAreaContent}
+        </div>
+      </div>`,
+  }),
+  args: {
+    ...Default.args,
+    mainAreaContent: '<h1>Sidebar with extra action buttons in the header</h1>',
+  },
+};
+
+/**
+ * A sidebar with toggle buttons on its items.
+ *
+ * > __Important:__ The current implementation of toggle buttons in the sidebar menu is not WCAG compliant.
+ * > It is therefore recommended to avoid using this feature in consumer-facing solutions that should adhere to accessibility standards.
+ */
+export const WithToggleButtons: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsExample.map(convertToToggleButtonsExample),
+    mainAreaContent: '<h1>Sidebar with Toggle Buttons</h1>',
+  },
+};
+
+function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
+  if (item.children) {
+    return {
+      ...item,
+      children: item.children.map(convertToToggleButtonsExample),
+    };
+  }
+  return {
+    ...item,
+    toggle: {
+      isChecked: false,
+      uncheckedIcon: 'star',
+      checkedIcon: 'star-fill',
+    },
+  };
+}

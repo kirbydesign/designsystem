@@ -286,7 +286,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef<HTMLElement>,
-    private changeDetectorRef: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
     private keyboardHandlerService: KeyboardHandlerService,
     private resizeObserverService: ResizeObserverService
   ) {}
@@ -366,7 +366,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
           this.setVerticalDirection(entry);
         }
         this.showDropdown();
-        this.changeDetectorRef.detectChanges();
+        this.cdr.markForCheck();
       };
       this.intersectionObserverRef = new IntersectionObserver(callback, options);
       this.intersectionObserverRef.observe(this.cardElement.nativeElement);
@@ -427,7 +427,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.state = OpenState.open;
       this.popover?.show();
       this.scrollItemIntoView(this.focusedIndex);
-      this.changeDetectorRef.markForCheck();
+      this.cdr.markForCheck();
     }
   }
 
@@ -459,6 +459,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
    */
   writeValue(value: any): void {
     this._selectItemByValue(value);
+    this.cdr.markForCheck();
   }
 
   /**
@@ -491,6 +492,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
    */
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cdr.markForCheck();
   }
 
   private selectItem(index: number) {
@@ -682,16 +684,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  @HostListener('focus')
-  _onFocus() {
-    if (this.disabled) {
-      this.elementRef.nativeElement.blur();
-    }
-  }
-
   _onPopoverWillHide() {
     this.state = OpenState.closed;
-    this.elementRef.nativeElement.focus();
+    this.buttonElement.nativeElement.focus();
   }
 
   @HostListener('keydown.enter')
@@ -705,7 +700,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
-  @HostListener('blur', ['$event'])
   _onBlur() {
     if (this.usePopover) return;
     this.close();

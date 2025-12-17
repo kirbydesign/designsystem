@@ -180,7 +180,7 @@ describe('InputCounterComponent', () => {
 
     describe('when configured with listenTo = textarea', () => {
       describe('and textarea does not have initial value and maxlength', () => {
-        const textarea = new TextareaComponent(null);
+        const textarea = new TextareaComponent(null, null);
         beforeEach(() => {
           component.listenTo = textarea;
           component.ngOnInit();
@@ -205,7 +205,7 @@ describe('InputCounterComponent', () => {
         const initialValue = 'Test 123';
         const updatedValue = 'Test 123456';
         const maxlength = 99;
-        const textarea = new TextareaComponent(null);
+        const textarea = new TextareaComponent(null, null);
         textarea.value = initialValue;
         textarea.maxlength = maxlength;
         beforeEach(() => {

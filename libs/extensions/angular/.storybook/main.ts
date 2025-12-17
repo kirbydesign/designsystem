@@ -6,7 +6,6 @@ const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: ['../**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-
   addons: [
     {
       name: getAbsolutePath('@storybook/addon-docs'),
@@ -33,6 +32,6 @@ export default config;
  * This function is used to resolve the absolute path of a package.
  * It is needed when using storybook in a monorepo.
  */
-function getAbsolutePath(value: string): any {
+function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, 'package.json')));
 }
