@@ -4,9 +4,10 @@ import { HeightObserverDirective } from '../../directives/height-observer';
 import { selectMenuItem } from '../../functions/select-menu-item';
 import { toggleSubmenu } from '../../functions/toggle-submenu';
 import { toggleSubmenuAutoCollapsed } from '../../functions/toggle-submenu-auto-collapsed';
-import { SidebarMenuItem } from '../../models';
+import { CheckEvent, SidebarMenuItem } from '../../models';
 import { MenuStateService } from '../../services/menu-state';
 import { SidebarService } from '../../services/sidebar';
+import { checkMenuItem } from '../../functions/check-menu-item';
 
 type ViewModel<T> = {
   items: Signal<T[]>;
@@ -28,6 +29,7 @@ export class SidebarMenuComponent<T extends SidebarMenuItem> {
   readonly autoCollapse = input<boolean>(false);
   readonly submenuToggle = output<T>();
   readonly itemClick = output<T>();
+  readonly itemChecked = output<CheckEvent<T>>();
 
   readonly #sidebarService = inject(SidebarService);
   readonly #menuStateService = inject(MenuStateService<T>);
@@ -50,6 +52,16 @@ export class SidebarMenuComponent<T extends SidebarMenuItem> {
       if (selectedItem) {
         this.itemClick.emit(selectedItem);
         this.menuItems.update((items) => selectMenuItem(selectedItem.id, items));
+      }
+    });
+
+    effect(() => {
+      const checkEvent = this.#menuStateService.checkEvent();
+      if (checkEvent) {
+        this.itemChecked.emit(checkEvent);
+        this.menuItems.update((items) =>
+          checkMenuItem(checkEvent.item.id, checkEvent.checked, items)
+        );
       }
     });
   }
