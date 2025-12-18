@@ -7,8 +7,11 @@ import {
   Inject,
   Input,
   LOCALE_ID,
+  Optional,
   Renderer2,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
 @Directive({})
@@ -54,13 +57,20 @@ export class DateInputDirective implements AfterViewInit {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    @Inject(LOCALE_ID) private locale: string
+    @Inject(LOCALE_ID) private locale: string,
+    @Optional() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[]
   ) {
     this.isDateInput = this.elementRef.nativeElement.type === 'date';
     if (this.isDateInput) {
       // Remove type to avoid user-agent specific behaviour for [type="date"]
       // Has to be done in constructor to avoid browser behavior kicking in
       this.elementRef.nativeElement.removeAttribute('type');
+
+      extendValueAccessors(valueAccessors, {
+        writeValue: {
+          afterWriteValue: (value) => this.updateMask(value as string),
+        },
+      });
     }
   }
 
@@ -130,10 +140,14 @@ export class DateInputDirective implements AfterViewInit {
     return wrapper;
   }
 
-  private updateMask(value: string): void {
+  private updateMask(value: string | null | undefined): void {
     if (!this.maskingElement) return;
+    if (!value) {
+      this.maskingElement.innerHTML = '';
+      return;
+    }
     const lastNumber = value.match(/.*?(\d)[^\d]*$/); // get last number in string
-    this.maskingElement.innerHTML = value
+    this.maskingElement.innerHTML = lastNumber
       ? value.slice(0, value.lastIndexOf(lastNumber[1]) + 1)
       : '';
   }

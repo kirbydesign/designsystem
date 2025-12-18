@@ -1,6 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
 import { LOCALE_ID } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
@@ -207,6 +208,70 @@ describe('DateInputDirective', () => {
 
     it('should replace type="date" with type="text"', () => {
       expect((spectator.element as HTMLInputElement).type).toBe('text');
+    });
+  });
+
+  describe('when used with reactive forms', () => {
+    let formControl: FormControl<string>;
+
+    const createDirectiveWithForm = createDirectiveFactory({
+      directive: DateInputDirective,
+      imports: [InputComponent, ReactiveFormsModule],
+      providers: [
+        {
+          provide: LOCALE_ID,
+          useFactory: () => locale,
+        },
+      ],
+    });
+
+    beforeEach(() => {
+      formControl = new FormControl<string>('');
+      spectator = createDirectiveWithForm(
+        `<input kirby-input type="date" [formControl]="formControl" />`,
+        {
+          hostProps: { formControl },
+        }
+      );
+    });
+
+    it('should update mask when value is set programmatically', () => {
+      const datemask = spectator.element.parentNode.querySelector('.date-mask');
+
+      formControl.setValue('12/25/2024');
+
+      expect(spectator.element).toHaveValue('12/25/2024');
+      expect(datemask.innerHTML).toBe('12/25/2024');
+    });
+
+    it('should update mask when value is changed programmatically multiple times', () => {
+      const datemask = spectator.element.parentNode.querySelector('.date-mask');
+
+      formControl.setValue('01/01/2024');
+      expect(datemask.innerHTML).toBe('01/01/2024');
+
+      formControl.setValue('06/15/2025');
+      expect(datemask.innerHTML).toBe('06/15/2025');
+    });
+
+    it('should clear mask when value is set to empty string', () => {
+      const datemask = spectator.element.parentNode.querySelector('.date-mask');
+
+      formControl.setValue('12/25/2024');
+      expect(datemask.innerHTML).toBe('12/25/2024');
+
+      formControl.setValue('');
+      expect(datemask.innerHTML).toBe('');
+    });
+
+    it('should handle null value', () => {
+      const datemask = spectator.element.parentNode.querySelector('.date-mask');
+
+      formControl.setValue('12/25/2024');
+      expect(datemask.innerHTML).toBe('12/25/2024');
+
+      formControl.setValue(null);
+      expect(datemask.innerHTML).toBe('');
     });
   });
 });
