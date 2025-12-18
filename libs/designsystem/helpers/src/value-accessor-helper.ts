@@ -55,10 +55,10 @@ export interface ValueAccessorExtensionConfig<
 /**
  * Extends the methods of provided ControlValueAccessors.
  *
- * This utility wraps the original methods to add custom behavior while preserving
- * the original functionality. It's commonly used to:
- * - Emit custom events when values are written programmatically
- * - Transform or normalize values before they're passed to form controls
+ * This utility wraps the control value accessor methods to add custom behavior while preserving
+ * the original functionality. Its used to:
+ * - Emit kirbyChange when values are written programmatically
+ * - Transform or normalize values before they're passed to form controls to work with inputmasking
  *
  * @param accessors - Array of ControlValueAccessors to extend, typically injected via `NG_VALUE_ACCESSOR`
  * @param config - Configuration specifying which methods to extend and how
