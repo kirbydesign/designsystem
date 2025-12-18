@@ -137,8 +137,8 @@ describe('NumberInputDirective', () => {
 
     describe('with padPrecisionDigits', () => {
       describe('and en-GB locale', () => {
-        locale = 'en-GB';
         it('should not pad fractional digits when padPrecisionDigits is not set', () => {
+          locale = 'en-GB';
           spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
           spectator.typeInElement('0.1', spectator.element);
           expect(spectator.element).toHaveValue('0.1');
@@ -294,7 +294,7 @@ describe('NumberInputDirective', () => {
 
   describe('reactive form', () => {
     it('should be able to receive value with locale radix point from form-control', () => {
-      locale = 'en-GB';
+      locale = 'da';
       spectator = createDirective(
         `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" />`
       );
@@ -336,6 +336,40 @@ describe('NumberInputDirective', () => {
       // @ts-ignore
       const numericInput = spectator.hostComponent.numericInput;
       expect(numericInput.value).toEqual('1000.12');
+    });
+
+    it('should update display value when form control value is set programmatically', () => {
+      locale = 'en-GB';
+      spectator = createDirective(
+        `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" />`
+      );
+      const numericInput = spectator.hostComponent['numericInput'];
+
+      numericInput.setValue(1000.12);
+
+      expect(spectator.element).toHaveValue('1,000.12');
+    });
+
+    it('should format display value with EN locale group separator when typing', () => {
+      locale = 'en-GB';
+      spectator = createDirective(
+        `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" />`
+      );
+
+      spectator.typeInElement('1000.12', spectator.element);
+
+      expect(spectator.element).toHaveValue('1,000.12');
+    });
+
+    it('should format display value with DA locale group separator when typing', () => {
+      locale = 'da';
+      spectator = createDirective(
+        `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput" />`
+      );
+
+      spectator.typeInElement('1000,12', spectator.element);
+
+      expect(spectator.element).toHaveValue('1.000,12');
     });
   });
 
