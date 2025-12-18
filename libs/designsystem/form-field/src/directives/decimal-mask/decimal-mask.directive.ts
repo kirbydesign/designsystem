@@ -1,6 +1,7 @@
 import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
 import { Directive, ElementRef, Inject, Input, LOCALE_ID, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
 interface InputMask {
@@ -98,37 +99,26 @@ export class DecimalMaskDirective implements OnInit {
   }
 
   private extendBuiltinValueAccessor(): void {
-    if (!this.valueAccessors) return;
-
-    this.valueAccessors.forEach((accessor) => {
-      const originalRegisterOnChange = accessor.registerOnChange?.bind(accessor);
-      if (originalRegisterOnChange) {
-        accessor.registerOnChange = (fn: (value: any) => void) => {
-          // Wrap the original onChange to provide unmasked values
-          const wrappedFn = (_: any) => {
-            if (this.inputmask) {
-              const unmaskedValue = this.inputmask.unmaskedvalue();
-              const normalizedValue = unmaskedValue.replace(this.radixPoint, '.');
-              fn(normalizedValue);
-            } else {
-              fn(_);
-            }
-          };
-          originalRegisterOnChange(wrappedFn);
-        };
-      }
-
-      const originalWriteValue = accessor.writeValue?.bind(accessor);
-      if (originalWriteValue) {
-        accessor.writeValue = (value: any) => {
-          originalWriteValue(value);
-          // Also update the inputmask display when value is set programmatically
+    extendValueAccessors<string>(this.valueAccessors, {
+      writeValue: {
+        afterWriteValue: (value) => {
+          // Update the inputmask display when value is set programmatically
           if (this.inputmask && value != null) {
             const formattedValue = String(value).replace('.', this.radixPoint);
             this.inputmask.setValue(formattedValue);
           }
-        };
-      }
+        },
+      },
+      registerOnChange: {
+        transformValue: (value) => {
+          // Provide unmasked and normalized values to the form control
+          if (this.inputmask) {
+            const unmaskedValue = this.inputmask.unmaskedvalue();
+            return unmaskedValue.replace(this.radixPoint, '.');
+          }
+          return value;
+        },
+      },
     });
   }
 }
