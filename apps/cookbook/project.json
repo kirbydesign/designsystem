@@ -86,7 +86,10 @@
     "serve": {
       "executor": "@nx/angular:dev-server",
       "options": {
-        "buildTarget": "cookbook:build:development"
+        "buildTarget": "cookbook:build:development",
+        "prebundle": {
+          "exclude": ["@kirbydesign/core"]
+        }
       },
       "configurations": {
         "production": {
