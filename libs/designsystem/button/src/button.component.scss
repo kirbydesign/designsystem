@@ -18,8 +18,8 @@ $button-margin: utils.size('xxxs');
 
 @mixin button-xs {
   /*
-  * Extra small button needs a smaller click area to e.g. not overlap with other 
-  * interactive elements. The maximum target size we can safely do is the button's 
+  * Extra small button needs a smaller click area to e.g. not overlap with other
+  * interactive elements. The maximum target size we can safely do is the button's
   * minimum width plus its margin on each side
   */
   $button-xs-icon-only-size: utils.size('m');
@@ -30,7 +30,10 @@ $button-margin: utils.size('xxxs');
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   & {
     font-size: utils.font-size('xs');
-    height: $button-xs-icon-only-size;
+
+    // use fixed size unless font-size grows too large, then let button
+    // height adjust to font-size (effectively when text is resized to 150% and above)
+    height: max($button-xs-icon-only-size, utils.relative-size('s'));
     min-width: button-width('xs');
   }
 
@@ -42,7 +45,9 @@ $button-margin: utils.size('xxxs');
   &.icon-only {
     --kirby-icon-font-size: #{utils.size('s')};
 
-    width: $button-xs-icon-only-size;
+    // use fixed size unless font-size grows too large, then let button
+    // height adjust to font-size (effectively when text is resized to 150% and above)
+    width: max($button-xs-icon-only-size, utils.relative-size('s'));
     min-width: unset;
   }
 
@@ -103,8 +108,15 @@ $button-margin: utils.size('xxxs');
   min-width: button-width('lg');
 
   &.icon-only {
+    --kirby-icon-font-size: #{utils.size('m')};
+
     width: utils.size('xxl');
     min-width: unset;
+  }
+
+  &.icon-left,
+  &.icon-right {
+    --kirby-icon-font-size: #{utils.size('m')};
   }
 }
 
@@ -187,7 +199,6 @@ $button-margin: utils.size('xxxs');
     min-width: button-width('md');
     padding: 0;
     margin: $button-margin;
-    line-height: utils.line-height('s');
 
     // Outline is applied on button border instead,
     // to keep the rounded shape:
@@ -198,6 +209,11 @@ $button-margin: utils.size('xxxs');
 
   &.no-margin {
     margin: 0;
+  }
+
+  &.icon-left,
+  &.icon-right {
+    --kirby-icon-font-size: #{utils.size('m')};
   }
 
   &.icon-left {
@@ -219,6 +235,7 @@ $button-margin: utils.size('xxxs');
   &.icon-only {
     --kirby-button-padding-left: 0;
     --kirby-button-padding-right: 0;
+    --kirby-icon-font-size: #{utils.size('m')};
 
     width: utils.size('xl');
     padding: 0;

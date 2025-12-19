@@ -2,6 +2,8 @@ import { ColorHelper } from './color-helper';
 import { styles } from './design-token-helper.styles';
 import { ThemeColor } from './theme-color.type';
 
+const BASE_PIXEL_VALUE = 16;
+
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
   public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter;
@@ -54,11 +56,16 @@ export class DesignTokenHelper {
   }
 
   public static fontSize(key: keyof typeof styles.fontSizes): string {
-    return styles.fontSizes[key];
+    const remValue = styles.fontSizes[key];
+    const remToPxValue = parseFloat(remValue) * BASE_PIXEL_VALUE;
+    return `${remToPxValue}px`;
   }
 
   public static iconFontSize(key: keyof typeof styles.iconFontSizes): string {
-    return styles.iconFontSizes[key];
+    const remValue = styles.iconFontSizes[key];
+    const remToPxValue = parseFloat(remValue) * BASE_PIXEL_VALUE;
+
+    return `${remToPxValue}px`;
   }
 
   public static fontWeight(key: keyof typeof styles.fontWeight): string {
