@@ -151,7 +151,7 @@ describe('DateInputDirective', () => {
 
   describe('when configured with value', () => {
     beforeEach(() => {
-      spectator = createDirective(`<input kirby-input type="date" value="01-01-2024" />`);
+      spectator = createDirective(`<input kirby-input type="date" value="01/01/2024" />`);
     });
 
     it('should have date-mask placeholder', () => {
