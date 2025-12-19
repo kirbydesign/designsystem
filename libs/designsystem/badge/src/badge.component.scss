@@ -19,7 +19,7 @@ $badge-padding-block: 0.1875rem;
     --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: utils.relative-spacing('xxs');
+    border-radius: utils.border-radius('pill');
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
