@@ -2,6 +2,8 @@
 
 $badge-size-small: utils.relative-spacing('xxs');
 $badge-size-medium: utils.relative-spacing('s');
+$badge-padding-inline: 0.3125rem;
+$badge-padding-block: 0.1875rem;
 
 :host {
   position: var(--kirby-badge-position, relative);
@@ -79,10 +81,10 @@ $badge-size-medium: utils.relative-spacing('s');
 
 :host(.md) {
   ion-badge {
-    --padding-end: var(--kirby-badge-padding-inline, 0.3125rem);
-    --padding-start: var(--kirby-badge-padding-inline, 0.3125rem);
-    --padding-bottom: var(--kirby-badge-padding-block, 0.1875rem);
-    --padding-top: var(--kirby-badge-padding-block, 0.1875rem);
+    --padding-end: var(--kirby-badge-padding-inline, #{$badge-padding-inline});
+    --padding-start: var(--kirby-badge-padding-inline, #{$badge-padding-inline});
+    --padding-bottom: var(--kirby-badge-padding-block, #{$badge-padding-block});
+    --padding-top: var(--kirby-badge-padding-block, #{$badge-padding-block});
 
     min-width: $badge-size-medium;
     min-height: $badge-size-medium;
