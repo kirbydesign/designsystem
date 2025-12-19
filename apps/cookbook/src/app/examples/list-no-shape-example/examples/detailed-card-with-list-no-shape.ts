@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
-import { ListComponent } from '@kirbydesign/designsystem/list';
+import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CurrencyPipe } from '@angular/common';
 import { BaseListNoShape } from '../base-list-no-shape';
@@ -22,7 +22,14 @@ export const detailedCardWithListNoShapeTemplate = `<kirby-card>
   selector: 'cookbook-detailed-card-with-list-no-shape-example',
   template: detailedCardWithListNoShapeTemplate,
   styles: ['.margin { margin-top: 16px; margin-inline: 16px; }', 'kirby-card {min-height: 224px;}'],
-  imports: [CardComponent, DropdownComponent, ListComponent, ItemComponent, CurrencyPipe],
+  imports: [
+    CardComponent,
+    DropdownComponent,
+    ListComponent,
+    ListItemTemplateDirective,
+    ItemComponent,
+    CurrencyPipe,
+  ],
 })
 export class DetailedCardWithListNoShapeComponent extends BaseListNoShape {
   template: string = detailedCardWithListNoShapeTemplate;
