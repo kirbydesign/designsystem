@@ -24,8 +24,8 @@ export default css`
     justify-content: center;
     box-sizing: border-box;
     padding: 0.3em 0.5em;
-    min-height: var(--kirby-relative-spacing-s);
-    min-width: var(--kirby-relative-spacing-s);
+    min-height: var(--kirby-relative-size-s);
+    min-width: var(--kirby-relative-size-s);
   }
 
   :host([themecolor='white']) {
@@ -59,8 +59,8 @@ export default css`
     padding: initial;
     min-height: initial;
     min-width: initial;
-    height: var(--kirby-relative-spacing-xxs);
-    width: var(--kirby-relative-spacing-xxs);
+    height: var(--kirby-relative-size-xxs);
+    width: var(--kirby-relative-size-xxs);
   }
 
   ::slotted(kirby-icon) {

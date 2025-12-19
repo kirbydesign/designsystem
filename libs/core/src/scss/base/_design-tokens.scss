@@ -75,9 +75,9 @@
   }
 }
 
-@mixin relative-spacings() {
-  @each $name, $value in variables.$relative-spacings {
-    --kirby-relative-spacing-#{$name}: #{$value};
+@mixin relative-sizes() {
+  @each $name, $value in variables.$relative-sizes {
+    --kirby-relative-size-#{$name}: #{$value};
   }
 }
 
@@ -123,7 +123,7 @@
   @include spacings;
 
   /* RELATIVE SPACINGS */
-  @include relative-spacings;
+  @include relative-sizes;
 
   /* Z-INDEXES */
   @include z-layers;

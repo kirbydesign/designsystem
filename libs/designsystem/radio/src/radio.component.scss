@@ -148,7 +148,7 @@ ion-radio {
      * We style the native wrapper to make sure it has the same height as the container
      * so the radio can be properly start-aligned with multiline labels
      */
-    height: utils.relative-spacing('m');
+    height: utils.relative-size('m');
   }
 
   // Overrides for kirby-radio inside kirby-item

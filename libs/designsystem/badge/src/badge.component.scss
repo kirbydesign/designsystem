@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$badge-size-small: utils.relative-spacing('xxs');
-$badge-size-medium: utils.relative-spacing('s');
+$badge-size-small: utils.relative-size('xxs');
+$badge-size-medium: utils.relative-size('s');
 $badge-padding-inline: 0.3125rem;
 $badge-padding-block: 0.1875rem;
 

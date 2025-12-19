@@ -24,8 +24,8 @@
   $value: _get-map-prop(variables.$sizes, $key);
   @return if($negative, string.unquote('-' + $value), $value);
 }
-@function relative-spacing($key: 'm') {
-  @return _get-map-prop(variables.$relative-spacings, $key);
+@function relative-size($key: 'm') {
+  @return _get-map-prop(variables.$relative-sizes, $key);
 }
 
 @function z($key) {

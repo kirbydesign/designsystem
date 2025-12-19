@@ -20,7 +20,7 @@ $sizes: (
 ) !default;
 
 // relative spacings are used sparingly when there is a need for component spacing to scale with font size
-$relative-spacings: (
+$relative-sizes: (
   xl: 2.5rem,
   l: 2rem,
   m: 1.5rem,
@@ -155,7 +155,7 @@ $avatar-icon-font-sizes: (
   'sm': 24px,
   'xs': 24px,
 ) !default;
-$avatar-badge-size: map.get($relative-spacings, 's');
+$avatar-badge-size: map.get($relative-sizes, 's');
 
 /* Page
 ****************************************************************************/
