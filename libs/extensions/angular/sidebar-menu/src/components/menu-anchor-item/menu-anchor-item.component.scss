@@ -1,10 +1,73 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+
+  &.selected {
+    color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
+  }
+
+  &:not(.selected):hover a {
+    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+  }
+}
 
 .selected,
 .selected:hover,
 .selected:active,
 .selected:focus-visible {
   background: var(--menuitem-selected-background-color, utils.get-color('primary'));
-  color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
   font-weight: utils.font-weight('bold');
+}
+
+:host:where(.has-toggle, .has-badge) .end-wrapper {
+  display: inline-flex;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: utils.icon-font-size('sm');
+}
+
+:host.checked .end-wrapper {
+  padding-right: utils.size('l');
+}
+
+.item-badge {
+  display: inline-flex;
+}
+
+:host.has-toggle:not(.checked):hover .item-badge,
+:host.has-toggle:not(.checked):active .item-badge,
+:host.has-toggle:not(.checked):has(a:focus-visible) .item-badge,
+:host.has-toggle:not(.checked):has(.toggle-button-unchecked:focus-visible) .item-badge {
+  display: none;
+}
+
+.toggle-button-wrapper {
+  display: inline-flex;
+  position: absolute;
+  right: utils.size('xs');
+}
+
+.toggle-button {
+  margin: 0;
+
+  --kirby-button-color: inherit;
+}
+
+.toggle-button-unchecked {
+  transition: opacity 0ms;
+}
+
+.toggle-button-unchecked:not(:focus-visible) {
+  opacity: 0;
+}
+
+:host:hover .toggle-button-unchecked,
+:host:active .toggle-button-unchecked,
+:host:has(a:focus-visible) .toggle-button-unchecked {
+  opacity: 1;
 }

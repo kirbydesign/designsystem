@@ -1,6 +1,6 @@
 import { Component, computed, ElementRef, forwardRef, inject, input, Signal } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { Badge, SidebarMenuItem } from '../../models';
+import { SidebarMenuItem } from '../../models';
 import { MenuItemComponent } from '../menu-item';
 import { MenuItemSize } from '../../types';
 import { MenuItemListComponent } from '../menu-item-list';
@@ -14,7 +14,6 @@ type ViewModel<T> = {
   title: Signal<string>;
   size: Signal<MenuItemSize>;
   icon: Signal<string | undefined>;
-  badge: Signal<Badge | undefined>;
   isExpanded: Signal<boolean>;
   children: Signal<T[]>;
   submenuSize: Signal<MenuItemSize>;
@@ -65,7 +64,6 @@ export class MenuSubmenuItemComponent<T extends SidebarMenuItem> {
     title: computed(() => this.item().title ?? ''),
     size: this.size,
     icon: computed(() => this.item().icon),
-    badge: computed(() => this.item().badge),
     isExpanded: this.#isExpanded,
     children: computed(() => this.item().children ?? []),
     submenuSize: this.#submenuSize,
