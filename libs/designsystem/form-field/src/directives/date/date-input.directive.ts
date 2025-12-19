@@ -102,7 +102,7 @@ export class DateInputDirective implements AfterViewInit, OnChanges {
     if (this.enableInputMask) {
       this.initMask();
 
-      // Update mask with initial value if set via [value] binding f
+      // Update mask with initial value if set via [value] binding on input
       if (this.dateValue && this.inputmask) {
         this.updateMask(this.dateValue);
         this.inputmask.setValue(this.dateValue);
