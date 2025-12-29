@@ -3,7 +3,6 @@ import { css } from 'lit';
 export default css`
   :host {
     display: block;
-    /* border-top: 1px solid var(--kirby-divider-color); */
     border-bottom: 1px solid var(--kirby-divider-color);
     box-sizing: border-box;
   }
@@ -19,7 +18,6 @@ export default css`
   .header {
     display: flex;
     align-items: center;
-    gap: var(--kirby-spacing-xxs);
     height: var(--kirby-spacing-xxxl);
     padding-left: var(--kirby-spacing-s);
     padding-right: var(--kirby-spacing-s);
@@ -42,6 +40,7 @@ export default css`
 
   .kirby-icon {
     transition: transform var(--kirby-transition-quick);
+    font-size: var(--kirby-icon-font-size, 24px);
   }
 
   .content {
@@ -69,7 +68,6 @@ export default css`
 
   button[disabled] {
     pointer-events: none;
-    cusor: none;
   }
 
   button[disabled] .kirby-icon {
@@ -120,4 +118,17 @@ export default css`
   .content-layer:active {
     background: var(--kirby-background-color-active, #e0e0e0);
   }
+
+  // :host-context(kirby-accordion):not(:first-child) {
+  //   border-top: none;
+  // }
+  // :host-context(kirby-card) {
+  //   border-color: var(--kirby-background-color);
+  // }
+  // :host-context(kirby-card):first-child {
+  //   border-top: none;
+  // }
+  // :host-context(kirby-card):last-child {
+  //   border-bottom: none;
+  // }
 `;

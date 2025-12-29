@@ -16,11 +16,25 @@ import { FormsModule } from '@angular/forms';
 import { IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
+import { createCustomElement } from '@angular/elements';
+import { createApplication } from '@angular/platform-browser';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { environment } from './environments/environment';
 
 import { AppComponent } from './app/app.component';
 
 import { routes } from './app/app.routes';
+
+(async () => {
+  const app = await createApplication({ providers: [] });
+
+  if (!customElements.get('kirby-icon')) {
+    const iconElement = createCustomElement(IconComponent, {
+      injector: app.injector,
+    });
+    customElements.define('kirby-icon', iconElement);
+  }
+})();
 
 if (environment.production) {
   enableProdMode();

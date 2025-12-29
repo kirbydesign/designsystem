@@ -9,6 +9,7 @@ import {
   Output,
 } from '@angular/core';
 import type { KirbyAccordionItemElement } from '@kirbydesign/core/accordion-item';
+
 // START_OF_AUTO_GENERATED_COMPONENT
 // AUTO-GENERATED - Any missing type imports can be added manually above, but do not change component source
 @Component({

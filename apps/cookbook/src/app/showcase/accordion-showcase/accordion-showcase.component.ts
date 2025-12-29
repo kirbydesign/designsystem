@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { IconComponent } from '@kirbydesign/designsystem';
+import { IconComponent, ListComponent } from '@kirbydesign/designsystem';
 import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { AccordionDefaultExampleComponent } from '../../examples/accordion-example/examples/default';
@@ -10,7 +10,7 @@ import { AccordionWithItemsInCardExampleComponent } from '../../examples/accordi
 import { AccordionEventsExampleComponent } from '../../examples/accordion-example/examples/events';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
-import { KirbyAccordionItemElement } from '../../../../../../libs/core/dist/accordion';
+import { KirbyAccordionItemElement } from '../../../../../../libs/core/dist/accordion-item';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { AccordionHeadingLevelExampleComponent } from '~/app/examples/accordion-example/examples/heading-level';
@@ -34,6 +34,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     ApiDescriptionEventsComponent,
     IconComponent,
     AccordionDirective,
+    ListComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
