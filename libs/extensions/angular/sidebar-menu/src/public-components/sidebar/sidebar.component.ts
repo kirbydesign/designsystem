@@ -1,46 +1,53 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CheckEvent, SidebarMenuItem } from '../../models';
+import { Component, effect, EventEmitter, inject, Input, Output } from '@angular/core';
+import { MenuItem } from '../../models';
 import { SidebarMenuComponent } from '../../components/sidebar-menu';
+import { MenuStateService } from '../../services/menu-state';
 
 @Component({
   selector: 'kirby-x-sidebar',
   template: `
-    <aside
-      kirby-x-sidebar-menu
-      [menuItems]="menuItems"
-      [autoCollapse]="autoCollapse"
-      (menuItemsChange)="changeMenuItems($event)"
-      (itemClick)="afterMenuClicked.emit($event)"
-      (submenuToggle)="afterMenuToggled.emit($event)"
-      (itemChecked)="itemChecked.emit($event)"
-    >
+    <aside kirby-x-sidebar-menu>
       <ng-content select="kirby-x-sidebar-header" slot="header"></ng-content>
       <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
     </aside>
   `,
   imports: [SidebarMenuComponent],
 })
-export class SidebarComponent<T extends SidebarMenuItem> {
-  @Input() menuItems!: T[];
-  @Input() autoCollapse = false;
-  @Output() menuItemsChange = new EventEmitter<T[]>();
-  @Output() afterMenuClicked = new EventEmitter<T>();
-  @Output() afterMenuToggled = new EventEmitter<T>();
-  @Output() itemChecked = new EventEmitter<CheckEvent<T>>();
+export class SidebarComponent {
+  readonly #stateService = inject(MenuStateService);
 
-  /**
-   * @deprecated has not had an effect for a long time
-   */
-  @Input() expandIconOnHover = false;
+  @Input()
+  set menuItems(menuItems: MenuItem[]) {
+    this.#stateService.menuItems = menuItems;
+  }
 
-  /**
-   * @deprecated should use menuItemsChange or two-way binding on menuItems instead
-   **/
-  @Output() menuItemsChanged = new EventEmitter<T[]>();
+  @Input()
+  set selectedItem(value: string) {
+    this.#stateService.selectedItem = value;
+  }
 
-  changeMenuItems(event: T[]): void {
-    this.menuItems = event;
-    this.menuItemsChange.emit(this.menuItems);
-    this.menuItemsChanged.emit(this.menuItems);
+  @Input()
+  set expandedItems(value: Set<string>) {
+    this.#stateService.expandedItems = value;
+  }
+
+  @Input()
+  set checkedItems(value: Set<string>) {
+    this.#stateService.checkedItems = value;
+  }
+
+  @Input()
+  set autoCollapse(value: boolean) {
+    this.#stateService.autoCollapse = value;
+  }
+
+  @Output() selectedItemChange = new EventEmitter<string>();
+  @Output() expandedItemsChange = new EventEmitter<Set<string>>();
+  @Output() checkedItemsChange = new EventEmitter<Set<string>>();
+
+  constructor() {
+    effect(() => this.selectedItemChange.emit(this.#stateService.selectedItem()));
+    effect(() => this.expandedItemsChange.emit(this.#stateService.expandedItems()));
+    effect(() => this.checkedItemsChange.emit(this.#stateService.checkedItems()));
   }
 }

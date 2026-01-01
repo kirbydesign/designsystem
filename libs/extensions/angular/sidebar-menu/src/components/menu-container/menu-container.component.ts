@@ -9,11 +9,11 @@ import {
 } from '@angular/core';
 
 import { scrollIntoViewIfNecessary } from '../../functions/scroll-into-view-if-necessary';
-import { SidebarMenuItem } from '../../models';
+import { MenuItem } from '../../models';
 import { MenuItemListComponent } from '../menu-item-list';
 
-type ViewModel<T> = {
-  items: Signal<T[]>;
+type ViewModel = {
+  items: Signal<MenuItem[]>;
   disableAnimations: Signal<boolean>;
 };
 
@@ -31,8 +31,8 @@ type ViewModel<T> = {
   styles: 'nav { padding: 0 var(--kirby-spacing-xxs); }',
   imports: [MenuItemListComponent],
 })
-export class MenuContainerComponent<T extends SidebarMenuItem> {
-  readonly items = input.required<T[]>();
+export class MenuContainerComponent {
+  readonly items = input.required<MenuItem[]>();
 
   readonly #element = inject(ElementRef).nativeElement;
 
@@ -55,7 +55,7 @@ export class MenuContainerComponent<T extends SidebarMenuItem> {
     }
   }
 
-  readonly vm: ViewModel<T> = {
+  readonly vm: ViewModel = {
     items: this.items,
     disableAnimations: this.#disableAnimations.asReadonly(),
   };

@@ -1,103 +1,101 @@
-@let link = vm.link();
-@if (link) {
-  @switch (link.type) {
-    @case ('action') {
-      <a
-        kirby-x-menu-item
-        [class.selected]="vm.isSelected()"
-        [id]="vm.id()"
-        [size]="vm.size()"
-        [icon]="vm.icon()"
-        [attr.href]="link.url"
-        (click)="$event.preventDefault(); vm.selectItem()"
-        (keydown.enter)="$event.preventDefault(); vm.selectItem()"
-      >
-        {{ vm.title() }}
-        <div class="end-wrapper" slot="end">
-          @if (vm.badge(); as badge) {
-            <kirby-badge class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
-              {{ badge.value }}
-            </kirby-badge>
-          }
-        </div>
-      </a>
-    }
-    @case ('router-link') {
-      <a
-        kirby-x-menu-item
-        [class.selected]="vm.isSelected()"
-        [id]="vm.id()"
-        [size]="vm.size()"
-        [icon]="vm.icon()"
-        [routerLink]="link.route"
-        [queryParams]="link.queryParams"
-        [skipLocationChange]="link.skipLocationChange"
-        [replaceUrl]="link.replaceUrl"
-        (click)="vm.selectItem()"
-        (keydown.enter)="vm.selectItem()"
-      >
-        {{ vm.title() }}
-        <div class="end-wrapper" slot="end">
-          @if (vm.badge(); as badge) {
-            <kirby-badge class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
-              {{ badge.value }}
-            </kirby-badge>
-          }
-        </div>
-      </a>
-    }
-    @case ('external-link') {
-      <a
-        kirby-x-menu-item
-        [class.selected]="vm.isSelected()"
-        [id]="vm.id()"
-        [size]="vm.size()"
-        [icon]="vm.icon()"
-        [attr.href]="link.url"
-        [attr.target]="link.target"
-        (click)="vm.selectItem()"
-        (keydown.enter)="vm.selectItem()"
-      >
-        {{ vm.title() }}
-        <div class="end-wrapper" slot="end">
-          @if (vm.badge(); as badge) {
-            <kirby-badge class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
-              {{ badge.value }}
-            </kirby-badge>
-          }
-        </div>
-      </a>
-    }
-  }
-
-  @if (vm.toggle(); as toggle) {
-    <kirby-toggle-button
-      class="toggle-button-wrapper"
-      [checked]="toggle.isChecked"
-      (checkChanged)="vm.checkItem($event)"
+@let item = vm.item();
+@switch (item.type) {
+  @case ('action') {
+    <a
+      kirby-x-menu-item
+      [class.selected]="vm.isSelected()"
+      [size]="vm.size()"
+      [id]="item.id"
+      [icon]="item.icon"
+      [attr.href]="item.href"
+      (click)="$event.preventDefault(); vm.selectItem()"
+      (keydown.enter)="$event.preventDefault(); vm.selectItem()"
     >
-      <button
-        kirby-button
-        unchecked
-        size="xs"
-        attentionLevel="3"
-        tabindex="-1"
-        [noDecoration]="true"
-        class="toggle-button toggle-button-unchecked"
-      >
-        <kirby-icon size="xs" [name]="toggle.uncheckedIcon"></kirby-icon>
-      </button>
-      <button
-        kirby-button
-        checked
-        size="xs"
-        attentionLevel="3"
-        tabindex="-1"
-        [noDecoration]="true"
-        class="toggle-button toggle-button-checked"
-      >
-        <kirby-icon size="xs" [name]="toggle.checkedIcon"></kirby-icon>
-      </button>
-    </kirby-toggle-button>
+      {{ item.title }}
+      <div class="end-wrapper" slot="end">
+        @if (item.badge) {
+          <kirby-badge class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
+            {{ item.badge.value }}
+          </kirby-badge>
+        }
+      </div>
+    </a>
   }
+  @case ('router-link') {
+    <a
+      kirby-x-menu-item
+      [class.selected]="vm.isSelected()"
+      [size]="vm.size()"
+      [id]="item.id"
+      [icon]="item.icon"
+      [routerLink]="item.route"
+      [queryParams]="item.queryParams"
+      [skipLocationChange]="item.skipLocationChange"
+      [replaceUrl]="item.replaceUrl"
+      (click)="vm.selectItem()"
+      (keydown.enter)="vm.selectItem()"
+    >
+      {{ item.title }}
+      <div class="end-wrapper" slot="end">
+        @if (item.badge) {
+          <kirby-badge class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
+            {{ item.badge.value }}
+          </kirby-badge>
+        }
+      </div>
+    </a>
+  }
+  @case ('external-link') {
+    <a
+      kirby-x-menu-item
+      [class.selected]="vm.isSelected()"
+      [size]="vm.size()"
+      [id]="item.id"
+      [icon]="item.icon"
+      [attr.href]="item.url"
+      [attr.target]="item.target"
+      (click)="vm.selectItem()"
+      (keydown.enter)="vm.selectItem()"
+    >
+      {{ item.title }}
+      <div class="end-wrapper" slot="end">
+        @if (item.badge) {
+          <kirby-badge class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
+            {{ item.badge.value }}
+          </kirby-badge>
+        }
+      </div>
+    </a>
+  }
+}
+
+@if (item.toggle) {
+  <kirby-toggle-button
+    class="toggle-button-wrapper"
+    [checked]="vm.isChecked()"
+    (checkChanged)="vm.checkItem($event)"
+  >
+    <button
+      kirby-button
+      unchecked
+      size="xs"
+      attentionLevel="3"
+      tabindex="-1"
+      [noDecoration]="true"
+      class="toggle-button toggle-button-unchecked"
+    >
+      <kirby-icon size="xs" [name]="item.toggle.uncheckedIcon"></kirby-icon>
+    </button>
+    <button
+      kirby-button
+      checked
+      size="xs"
+      attentionLevel="3"
+      tabindex="-1"
+      [noDecoration]="true"
+      class="toggle-button toggle-button-checked"
+    >
+      <kirby-icon size="xs" [name]="item.toggle.checkedIcon"></kirby-icon>
+    </button>
+  </kirby-toggle-button>
 }

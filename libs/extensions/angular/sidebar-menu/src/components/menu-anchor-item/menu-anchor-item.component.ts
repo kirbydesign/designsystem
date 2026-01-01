@@ -4,20 +4,16 @@ import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
-import { Badge, SidebarMenuItem, ToggleButton } from '../../models';
+import { ActionItem, ExternalLinkItem, RouterLinkItem } from '../../models';
 import { MenuItemSize } from '../../types';
 import { MenuItemComponent } from '../menu-item';
 import { MenuStateService } from '../../services/menu-state';
 
 type ViewModel = {
-  link: Signal<LinkType | undefined>;
-  id: Signal<string>;
+  item: Signal<ActionItem | RouterLinkItem | ExternalLinkItem>;
   size: Signal<MenuItemSize>;
-  badge: Signal<Badge | undefined>;
-  toggle: Signal<ToggleButton | undefined>;
-  icon: Signal<string | undefined>;
   isSelected: Signal<boolean>;
-  title: Signal<string>;
+  isChecked: Signal<boolean>;
   selectItem: () => void;
   checkItem: (checked: boolean) => void;
 };
@@ -28,9 +24,9 @@ type ViewModel = {
   styleUrls: ['./menu-anchor-item.component.scss'],
   host: {
     '[class.selected]': 'vm.isSelected()',
-    '[class.checked]': 'vm.toggle()?.isChecked',
-    '[class.has-toggle]': '!!vm.toggle()',
-    '[class.has-badge]': '!!vm.badge()',
+    '[class.checked]': 'vm.isChecked()',
+    '[class.has-toggle]': '!!vm.item().toggle',
+    '[class.has-badge]': '!!vm.item().badge',
   },
   imports: [
     MenuItemComponent,
@@ -41,79 +37,37 @@ type ViewModel = {
     BadgeComponent,
   ],
 })
-export class MenuAnchorItemComponent<T extends SidebarMenuItem> {
-  readonly item = input.required<T>();
+export class MenuAnchorItemComponent {
+  readonly item = input.required<ActionItem | RouterLinkItem | ExternalLinkItem>();
   readonly size = input.required<MenuItemSize>();
 
-  readonly #menuStateService = inject(MenuStateService);
+  readonly #stateService = inject(MenuStateService);
+
+  readonly #isSelected = computed(() => this.item().id === this.#stateService.selectedItem());
+  readonly #isChecked = computed(() => {
+    const id = this.item().id;
+    const checkedItems = this.#stateService.checkedItems();
+    return checkedItems.has(id);
+  });
 
   #selectItem(): void {
-    this.#menuStateService.selectedItem = this.item();
+    this.#stateService.selectedItem = this.item().id;
   }
 
   #checkItem(checked: boolean): void {
-    this.#menuStateService.checkEvent = { item: this.item(), checked };
+    if (checked) {
+      this.#stateService.checkItem(this.item().id);
+    } else {
+      this.#stateService.uncheckItem(this.item().id);
+    }
   }
 
   readonly vm: ViewModel = {
-    link: computed(() => determineLinkType(this.item())),
-    id: computed(() => this.item().id),
+    item: this.item,
     size: this.size,
-    badge: computed(() => this.item().badge),
-    toggle: computed(() => this.item().toggle),
-    icon: computed(() => this.item().icon),
-    isSelected: computed(() => this.item().selected ?? false),
-    title: computed(() => this.item().title ?? ''),
+    isSelected: this.#isSelected,
+    isChecked: this.#isChecked,
     selectItem: this.#selectItem.bind(this),
     checkItem: this.#checkItem.bind(this),
   };
 }
-
-function determineLinkType(item: SidebarMenuItem): LinkType | undefined {
-  if (item.isAction) {
-    return {
-      type: 'action',
-      url: item.link?.url ?? '',
-    };
-  }
-  if (item.link?.relativeLink) {
-    return {
-      type: 'router-link',
-      target: item.link.target ?? '_self',
-      route: item.link.relativeLink,
-      queryParams: item.link.queryParams,
-      skipLocationChange: item.skipLocationChange ?? false,
-      replaceUrl: item.replaceUrl ?? false,
-    };
-  }
-  if (item.link?.url) {
-    return {
-      type: 'external-link',
-      url: item.link.url,
-      target: item.link.target ?? '_self',
-    };
-  }
-  return undefined;
-}
-
-type ActionType = {
-  type: 'action';
-  url: string;
-};
-
-type RouterLinkType = {
-  type: 'router-link';
-  target: string;
-  route: string;
-  queryParams?: { [key: string]: unknown };
-  skipLocationChange: boolean;
-  replaceUrl: boolean;
-};
-
-type ExternalLinkType = {
-  type: 'external-link';
-  url: string;
-  target: string;
-};
-
-type LinkType = ActionType | RouterLinkType | ExternalLinkType;
