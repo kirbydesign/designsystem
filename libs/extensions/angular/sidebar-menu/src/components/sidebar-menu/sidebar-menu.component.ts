@@ -2,11 +2,11 @@ import { Component, inject, Signal } from '@angular/core';
 import { MenuContainerComponent } from '../menu-container';
 import { HeightObserverDirective } from '../../directives/height-observer';
 import { SidebarService } from '../../services/sidebar';
-import { MenuItem } from '../../models';
+import { SidebarMenuItem } from '../../models';
 import { MenuStateService } from '../../services/menu-state';
 
 type ViewModel = {
-  items: Signal<MenuItem[]>;
+  items: Signal<SidebarMenuItem[]>;
   showHeaderBottomBorder: Signal<boolean>;
   showFooterTopBorder: Signal<boolean>;
   setContainerHeight: (height: number) => void;

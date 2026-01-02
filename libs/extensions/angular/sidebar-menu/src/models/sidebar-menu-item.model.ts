@@ -4,4 +4,9 @@ import { ExternalLinkItem } from './external-link-item.model';
 import { Divider } from './divider.model';
 import { ActionItem } from './action-item.model';
 
-export type MenuItem = SubmenuItem | ActionItem | RouterLinkItem | ExternalLinkItem | Divider;
+export type SidebarMenuItem =
+  | SubmenuItem
+  | ActionItem
+  | RouterLinkItem
+  | ExternalLinkItem
+  | Divider;

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input, Signal } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-import { MenuItem } from '../../models';
+import { SidebarMenuItem } from '../../models';
 import { MenuAnchorItemComponent } from '../menu-anchor-item';
 import { MenuSubmenuItemComponent } from '../menu-submenu-item';
 import { MenuItemSize } from '../../types';
@@ -8,7 +8,7 @@ import { MenuItemSize } from '../../types';
 type ViewModel = {
   id: Signal<string | undefined>;
   size: Signal<MenuItemSize>;
-  items: Signal<MenuItem[]>;
+  items: Signal<SidebarMenuItem[]>;
   disableAnimations: Signal<boolean>;
 };
 
@@ -24,7 +24,7 @@ type ViewModel = {
   imports: [DividerComponent, MenuAnchorItemComponent, forwardRef(() => MenuSubmenuItemComponent)],
 })
 export class MenuItemListComponent {
-  readonly items = input.required<MenuItem[]>();
+  readonly items = input.required<SidebarMenuItem[]>();
   readonly size = input<MenuItemSize>('lg');
   readonly id = input<string>();
   readonly disableAnimations = input<boolean>(false);

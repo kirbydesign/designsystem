@@ -1,28 +1,22 @@
-import { effect, Injectable, Signal, signal } from '@angular/core';
-import { MenuItem } from '../../models';
+import { Injectable, Signal, signal } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { CheckEvent, ExpandEvent, SidebarMenuItem } from '../../models';
 
 @Injectable({ providedIn: 'root' })
 export class MenuStateService {
-  readonly #menuItems = signal<MenuItem[]>([]);
+  readonly #menuItems = signal<SidebarMenuItem[]>([]);
   readonly #selectedItem = signal<string | undefined>(undefined);
   readonly #expandedItems = signal<Set<string>>(new Set());
   readonly #checkedItems = signal<Set<string>>(new Set());
   readonly #autoCollapse = signal<boolean>(false);
+  readonly #expandEvents = new Subject<ExpandEvent>();
+  readonly #checkEvents = new Subject<CheckEvent>();
 
-  constructor() {
-    effect(() => {
-      if (this.#autoCollapse()) {
-        const selectedItem = this.selectedItem();
-        this.#expandedItems.set(selectedItem ? this.#findAncestors(selectedItem) : new Set());
-      }
-    });
-  }
-
-  get menuItems(): Signal<MenuItem[]> {
+  get menuItems(): Signal<SidebarMenuItem[]> {
     return this.#menuItems.asReadonly();
   }
 
-  set menuItems(items: MenuItem[]) {
+  set menuItems(items: SidebarMenuItem[]) {
     this.#menuItems.set(items);
   }
 
@@ -54,7 +48,16 @@ export class MenuStateService {
     this.#autoCollapse.set(enabled);
   }
 
+  get expandEvents(): Observable<ExpandEvent> {
+    return this.#expandEvents.asObservable();
+  }
+
+  get checkEvents(): Observable<CheckEvent> {
+    return this.#checkEvents.asObservable();
+  }
+
   expandItem(id: string): void {
+    this.#expandEvents.next({ id, isExpanded: true });
     if (this.#autoCollapse()) {
       this.#expandedItems.set(this.#findAncestors(id));
       return;
@@ -66,6 +69,7 @@ export class MenuStateService {
   }
 
   collapseItem(id: string): void {
+    this.#expandEvents.next({ id, isExpanded: false });
     this.#expandedItems.update((items) => {
       items.delete(id);
       return new Set(items);
@@ -73,6 +77,7 @@ export class MenuStateService {
   }
 
   checkItem(id: string): void {
+    this.#checkEvents.next({ id, isChecked: true });
     this.#checkedItems.update((items) => {
       items.add(id);
       return new Set(items);
@@ -80,6 +85,7 @@ export class MenuStateService {
   }
 
   uncheckItem(id: string): void {
+    this.#checkEvents.next({ id, isChecked: false });
     this.#checkedItems.update((items) => {
       items.delete(id);
       return new Set(items);
@@ -91,7 +97,7 @@ export class MenuStateService {
   }
 }
 
-function recursivelyFindAncestors(items: MenuItem[], id: string): Set<string> | undefined {
+function recursivelyFindAncestors(items: SidebarMenuItem[], id: string): Set<string> | undefined {
   for (const item of items) {
     if (item.id === id) {
       return new Set([item.id]);

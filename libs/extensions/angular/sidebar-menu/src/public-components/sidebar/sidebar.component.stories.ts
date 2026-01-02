@@ -8,15 +8,15 @@ import {
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import {
-  MenuItem,
   SidebarComponent,
   SidebarFooterComponent,
   SidebarHeaderComponent,
+  SidebarMenuItem,
 } from '@kirbydesign/extensions-angular/sidebar-menu';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
-const menuItemsExample: MenuItem[] = [
+const menuItemsExample: SidebarMenuItem[] = [
   {
     type: 'router-link',
     id: 'home',
@@ -241,7 +241,6 @@ type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string }
  * - *Dividers* are used to separate groups of menu items visually.
  *
  * Note: Items can also be configured as external links, but the design for this feature is not finalized yet.
-
  *
  */
 const meta: Meta<SidebarPropsAndCustomArgs> = {
@@ -287,10 +286,18 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       control: false,
     },
     expandedItemsChange: {
-      description: 'Event emitted when a submenu is expanded/collapsed',
+      description: 'Event emitted when the set of expanded submenu items changes',
       control: false,
     },
     checkedItemsChange: {
+      description: 'Event emitted when the set of checked menu item toggles changes',
+      control: false,
+    },
+    expandChange: {
+      description: 'Event emitted when a submenu item is expanded/collapsed',
+      control: false,
+    },
+    checkChange: {
       description: 'Event emitted when a menu item toggle is checked/unchecked',
       control: false,
     },
@@ -395,7 +402,7 @@ export const WithToggleButtons: Story = {
   },
 };
 
-function convertToToggleButtonsExample(item: MenuItem): MenuItem {
+function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
   if (item.type === 'divider') {
     return item;
   }

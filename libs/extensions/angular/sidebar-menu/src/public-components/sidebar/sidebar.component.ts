@@ -1,5 +1,5 @@
 import { Component, effect, EventEmitter, inject, Input, Output } from '@angular/core';
-import { MenuItem } from '../../models';
+import { SidebarMenuItem } from '../../models';
 import { SidebarMenuComponent } from '../../components/sidebar-menu';
 import { MenuStateService } from '../../services/menu-state';
 
@@ -17,7 +17,7 @@ export class SidebarComponent {
   readonly #stateService = inject(MenuStateService);
 
   @Input()
-  set menuItems(menuItems: MenuItem[]) {
+  set menuItems(menuItems: SidebarMenuItem[]) {
     this.#stateService.menuItems = menuItems;
   }
 
@@ -44,6 +44,8 @@ export class SidebarComponent {
   @Output() selectedItemChange = new EventEmitter<string>();
   @Output() expandedItemsChange = new EventEmitter<Set<string>>();
   @Output() checkedItemsChange = new EventEmitter<Set<string>>();
+  @Output() expandChange = this.#stateService.expandEvents;
+  @Output() checkChange = this.#stateService.checkEvents;
 
   constructor() {
     effect(() => this.selectedItemChange.emit(this.#stateService.selectedItem()));
