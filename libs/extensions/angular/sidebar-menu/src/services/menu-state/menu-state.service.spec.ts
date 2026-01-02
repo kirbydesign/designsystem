@@ -2,6 +2,14 @@ import { createServiceFactory } from '@ngneat/spectator/jest';
 import { SidebarMenuItem } from '../../models';
 import { MenuStateService } from './menu-state.service';
 
+type MenuStateServiceProps = {
+  menuItems: SidebarMenuItem[];
+  selectedItem: string;
+  expandedItems: Set<string>;
+  checkedItems: Set<string>;
+  autoCollapse: boolean;
+};
+
 const menuItemsMock: SidebarMenuItem[] = [
   {
     type: 'submenu',
@@ -33,10 +41,14 @@ const menuItemsMock: SidebarMenuItem[] = [
 ];
 
 describe(MenuStateService.name, () => {
-  const render = () => {
-    const factory = createServiceFactory({ service: MenuStateService });
+  const factory = createServiceFactory({ service: MenuStateService });
+  const render = (props: Partial<MenuStateServiceProps> = {}) => {
     const spectator = factory();
-    spectator.service.menuItems = menuItemsMock;
+    spectator.service.menuItems = props.menuItems ?? menuItemsMock;
+    spectator.service.selectedItem = props.selectedItem ?? '';
+    spectator.service.expandedItems = props.expandedItems ?? new Set<string>();
+    spectator.service.checkedItems = props.checkedItems ?? new Set<string>();
+    spectator.service.autoCollapse = props.autoCollapse ?? false;
     return spectator;
   };
 
@@ -54,8 +66,7 @@ describe(MenuStateService.name, () => {
     });
 
     it('should collapse non-ancestor submenu items when autoCollapse is enabled', () => {
-      const spectator = render();
-      spectator.service.autoCollapse = true;
+      const spectator = render({ autoCollapse: true });
 
       spectator.service.expandItem('item-1');
       spectator.service.expandItem('item-2');
@@ -84,8 +95,7 @@ describe(MenuStateService.name, () => {
 
   describe('Method : collapseItem', () => {
     it('should collapse the specified submenu item', () => {
-      const spectator = render();
-      spectator.service.expandedItems = new Set(['item-1', 'item-2', 'item-2.3']);
+      const spectator = render({ expandedItems: new Set(['item-1', 'item-2', 'item-2.3']) });
 
       spectator.service.collapseItem('item-1');
 
@@ -139,8 +149,7 @@ describe(MenuStateService.name, () => {
 
   describe('Method : uncheckItem', () => {
     it('should uncheck the specified item', () => {
-      const spectator = render();
-      spectator.service.checkedItems = new Set(['item-1.1', 'item-2.2']);
+      const spectator = render({ checkedItems: new Set(['item-1.1', 'item-2.2']) });
 
       spectator.service.uncheckItem('item-1.1');
 
