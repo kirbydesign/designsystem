@@ -1,3 +1,4 @@
+import { Params } from '@angular/router';
 import { Badge } from './badge.model';
 import { Toggle } from './toggle.model';
 
@@ -13,8 +14,4 @@ export type RouterLinkItem = {
   queryParams?: Params;
   replaceUrl?: boolean;
   skipLocationChange?: boolean;
-};
-
-type Params = {
-  [key: string]: unknown;
 };
