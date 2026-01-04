@@ -9,6 +9,7 @@ export class MenuStateService {
   readonly #expandedItems = signal<Set<string>>(new Set());
   readonly #checkedItems = signal<Set<string>>(new Set());
   readonly #autoCollapse = signal<boolean>(false);
+  readonly #animationsDisabled = signal<boolean>(false);
   readonly #expandEvents = new Subject<ExpandEvent>();
   readonly #checkEvents = new Subject<CheckEvent>();
 
@@ -46,6 +47,14 @@ export class MenuStateService {
 
   set autoCollapse(enabled: boolean) {
     this.#autoCollapse.set(enabled);
+  }
+
+  get animationsDisabled(): Signal<boolean> {
+    return this.#animationsDisabled.asReadonly();
+  }
+
+  set animationsDisabled(disabled: boolean) {
+    this.#animationsDisabled.set(disabled);
   }
 
   get expandEvents(): Observable<ExpandEvent> {

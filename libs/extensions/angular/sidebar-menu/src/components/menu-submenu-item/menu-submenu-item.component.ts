@@ -14,7 +14,7 @@ type ViewModel = {
   isExpanded: Signal<boolean>;
   submenuId: Signal<string>;
   submenuSize: Signal<MenuItemSize>;
-  disableAnimations: Signal<boolean>;
+  animationsDisabled: Signal<boolean>;
   toggleSubmenu: () => void;
 };
 
@@ -28,7 +28,6 @@ type ViewModel = {
 export class MenuSubmenuItemComponent {
   readonly item = input.required<SubmenuItem>();
   readonly size = input.required<MenuItemSize>();
-  readonly disableAnimations = input.required<boolean>();
 
   readonly #element = inject(ElementRef).nativeElement as Element;
   readonly #stateService = inject(MenuStateService);
@@ -68,7 +67,7 @@ export class MenuSubmenuItemComponent {
     isExpanded: this.#isExpanded,
     submenuId: computed(() => `item-${this.item().id}-content`),
     submenuSize: this.#submenuSize,
-    disableAnimations: this.disableAnimations,
+    animationsDisabled: this.#stateService.animationsDisabled,
     toggleSubmenu: this.#toggleSubmenu.bind(this),
   };
 }

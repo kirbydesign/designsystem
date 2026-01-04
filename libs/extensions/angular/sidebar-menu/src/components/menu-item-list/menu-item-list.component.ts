@@ -9,7 +9,6 @@ type ViewModel = {
   id: Signal<string | undefined>;
   size: Signal<MenuItemSize>;
   items: Signal<SidebarMenuItem[]>;
-  disableAnimations: Signal<boolean>;
 };
 
 @Component({
@@ -27,12 +26,10 @@ export class MenuItemListComponent {
   readonly items = input.required<SidebarMenuItem[]>();
   readonly size = input<MenuItemSize>('lg');
   readonly id = input<string>();
-  readonly disableAnimations = input<boolean>(false);
 
   readonly vm: ViewModel = {
     id: this.id,
     size: this.size,
     items: this.items,
-    disableAnimations: this.disableAnimations,
   };
 }

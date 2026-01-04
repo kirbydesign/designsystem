@@ -24,8 +24,7 @@
     [items]="item.children"
     [size]="vm.submenuSize()"
     [id]="vm.submenuId()"
-    [disableAnimations]="vm.disableAnimations()"
     [@dropDownMenu]
-    [@.disabled]="vm.disableAnimations()"
+    [@.disabled]="vm.animationsDisabled()"
   ></ul>
 }
