@@ -6,9 +6,7 @@
 */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
@@ -48,7 +46,9 @@ describe('DropdownComponent + PopoverComponent', () => {
       component: DropdownComponent,
       imports: [
         TestHelper.ionicModuleForTest,
-        MockComponents(ItemComponent, ButtonComponent, IconComponent, IonItem),
+        ItemComponent,
+        ButtonComponent,
+        IconComponent,
         PopoverComponent,
         CardComponent,
       ],
@@ -146,7 +146,10 @@ describe('DropdownComponent + PopoverComponent', () => {
       imports: [
         TestHelper.ionicModuleForTest,
         PopoverComponent,
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        ButtonComponent,
+        CardComponent,
+        ItemComponent,
+        IconComponent,
       ],
       host: OnPushHostComponent,
     });

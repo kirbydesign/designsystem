@@ -1,7 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -15,15 +15,17 @@ describe('CheckboxComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
-    imports: [IconComponent, MockComponents(ItemComponent)],
+    imports: [TestHelper.ionicModuleForTest, IconComponent, ItemComponent],
   });
 
   describe('by default', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost(`
     <kirby-item>
       <kirby-checkbox></kirby-checkbox>
     </kirby-item>`);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
       ionCheckbox = spectator.query('ion-checkbox');
     });
 
@@ -41,11 +43,13 @@ describe('CheckboxComponent in Item', () => {
   });
 
   describe('slotted start', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost(`
     <kirby-item>
       <kirby-checkbox slot="start"></kirby-checkbox>
     </kirby-item>`);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
       ionCheckbox = spectator.query('ion-checkbox');
     });
 
