@@ -1,14 +1,7 @@
 import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-import {
-  Directive,
-  ElementRef,
-  HostListener,
-  Inject,
-  Input,
-  LOCALE_ID,
-  OnInit,
-} from '@angular/core';
+import { Directive, ElementRef, Inject, Input, LOCALE_ID, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
 interface InputMask {
@@ -19,15 +12,8 @@ interface InputMask {
 @Directive({
   // eslint-disable-next-line
   selector: '[kirby-decimal-mask]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: DecimalMaskDirective,
-    },
-  ],
 })
-export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
+export class DecimalMaskDirective implements OnInit {
   @Input() min: number;
   @Input() max: number;
   @Input() precision = 2;
@@ -59,18 +45,13 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   _maxlength: number;
   _groupSeperatorDisabled: boolean;
 
-  _onChange = (_: string) => {};
-  _onTouched = () => {};
-
-  @HostListener('blur')
-  onTouched(): void {
-    this._onTouched();
-  }
-
   constructor(
     private elementRef: ElementRef,
-    @Inject(LOCALE_ID) private locale: string
-  ) {}
+    @Inject(LOCALE_ID) private locale: string,
+    @Optional() @Inject(NG_VALUE_ACCESSOR) private valueAccessors: ControlValueAccessor[]
+  ) {
+    this.extendBuiltinValueAccessor();
+  }
 
   ngOnInit(): void {
     // Set type="text", because functionality like 'setSelectionRange' are not supported on type="number"
@@ -80,24 +61,6 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     this.elementRef.nativeElement.removeAttribute('maxlength');
 
     this.initMask();
-  }
-
-  writeValue(val: number): void {
-    if (!this.inputmask) return;
-    const formattedValue = String(val).replace('.', this.radixPoint);
-    this.inputmask.setValue(formattedValue);
-  }
-
-  registerOnChange(onChange: any): void {
-    this._onChange = onChange;
-  }
-
-  registerOnTouched(fn: any): void {
-    this._onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.elementRef.nativeElement.disabled = isDisabled;
   }
 
   private initMask(): void {
@@ -120,8 +83,6 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
       rightAlign: this.alignment === 'right',
       onBeforeWrite: () => {
         if (!this.inputmask) return;
-        const unmaskedValue = this.inputmask.unmaskedvalue();
-        this._onChange(unmaskedValue.replace(this.radixPoint, '.'));
       },
     }).mask(this.elementRef.nativeElement);
     this.inputmask = this.elementRef.nativeElement.inputmask;
@@ -135,5 +96,29 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     if (!this.allowMinus) return;
     maxlengthValue = -Math.abs(maxlengthValue);
     return this.min === undefined ? maxlengthValue : -Math.abs(Math.max(this.min, maxlengthValue));
+  }
+
+  private extendBuiltinValueAccessor(): void {
+    extendValueAccessors<string>(this.valueAccessors, {
+      writeValue: {
+        afterWriteValue: (value) => {
+          // Update the inputmask display when value is set programmatically
+          if (this.inputmask && value != null) {
+            const formattedValue = String(value).replace('.', this.radixPoint);
+            this.inputmask.setValue(formattedValue);
+          }
+        },
+      },
+      registerOnChange: {
+        transformValue: (value) => {
+          // Provide unmasked and normalized values to the form control
+          if (this.inputmask) {
+            const unmaskedValue = this.inputmask.unmaskedvalue();
+            return unmaskedValue.replace(this.radixPoint, '.');
+          }
+          return value;
+        },
+      },
+    });
   }
 }

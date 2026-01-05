@@ -15,3 +15,4 @@ export * from './string-search.helper';
 export * from './line-clamp-helper';
 export * from './kirby-animation';
 export * from './ionic-element-part-helper';
+export * from './value-accessor-helper';
