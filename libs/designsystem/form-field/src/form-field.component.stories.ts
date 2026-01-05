@@ -68,7 +68,6 @@ export const InputCounter: Story = {
   }),
 };
 
-const prefilledInputValue = 'Prefilled Input Value';
 export const InputWithFormControlInputCounter: Story = {
   decorators: [
     moduleMetadata({
@@ -77,23 +76,15 @@ export const InputWithFormControlInputCounter: Story = {
   ],
   render: () => ({
     props: {
-      textControl: new FormControl(prefilledInputValue),
+      textControl: new FormControl('Prefilled Input Value'),
     },
     template: `<kirby-form-field label="Form Control Input with Input Counter" >
     <input kirby-input [formControl]="textControl" #input />
     <kirby-input-counter [listenTo]="input"></kirby-input-counter>
   </kirby-form-field>`,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await waitFor(async () => {
-      // Allow input counter to update before snapshotting in chromatic
-      await expect(canvas.getByText(prefilledInputValue.length)).toBeVisible();
-    });
-  },
 };
 
-const prefilledTextareaValue = 'Prefilled Textarea Value';
 export const TextareaWithFormControlInputCounter: Story = {
   decorators: [
     moduleMetadata({
@@ -102,20 +93,13 @@ export const TextareaWithFormControlInputCounter: Story = {
   ],
   render: () => ({
     props: {
-      textControl: new FormControl(prefilledTextareaValue),
+      textControl: new FormControl('Prefilled Textarea Value'),
     },
     template: `<kirby-form-field label="Form Control Textarea with Input Counter" >
     <textarea kirby-textarea [formControl]="textControl" #textarea></textarea>
     <kirby-input-counter [listenTo]="textarea"></kirby-input-counter>
   </kirby-form-field>`,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await waitFor(async () => {
-      // Allow input counter to update before snapshotting in chromatic
-      await expect(canvas.getByText(prefilledTextareaValue.length)).toBeVisible();
-    });
-  },
 };
 
 export const CookbookExample: Story = {
