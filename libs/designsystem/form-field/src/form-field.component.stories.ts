@@ -1,5 +1,5 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import {
   FormFieldComponent,
@@ -68,7 +68,8 @@ export const InputCounter: Story = {
   }),
 };
 
-export const InputWithInputCounter: Story = {
+const prefilledInputValue = 'Prefilled Input Value';
+export const InputWithFormControlInputCounter: Story = {
   decorators: [
     moduleMetadata({
       imports: [ReactiveFormsModule],
@@ -76,15 +77,24 @@ export const InputWithInputCounter: Story = {
   ],
   render: () => ({
     props: {
-      textControl: new FormControl('Text area in form control'),
+      textControl: new FormControl(prefilledInputValue),
     },
-    template: `<kirby-form-field label="Textarea with label and message" >
+    template: `<kirby-form-field label="Form Control Input with Input Counter" >
     <input kirby-input [formControl]="textControl" #input />
     <kirby-input-counter [listenTo]="input"></kirby-input-counter>
   </kirby-form-field>`,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await waitFor(async () => {
+      // Allow input counter to update before snapshotting in chromatic
+      await expect(canvas.getByText(prefilledInputValue.length)).toBeVisible();
+    });
+  },
 };
-export const TextareaWithInputCounter: Story = {
+
+const prefilledTextareaValue = 'Prefilled Textarea Value';
+export const TextareaWithFormControlInputCounter: Story = {
   decorators: [
     moduleMetadata({
       imports: [ReactiveFormsModule],
@@ -92,13 +102,20 @@ export const TextareaWithInputCounter: Story = {
   ],
   render: () => ({
     props: {
-      textControl: new FormControl('Text area in form control'),
+      textControl: new FormControl(prefilledTextareaValue),
     },
-    template: `<kirby-form-field label="Textarea with label and message" >
+    template: `<kirby-form-field label="Form Control Textarea with Input Counter" >
     <textarea kirby-textarea [formControl]="textControl" #textarea></textarea>
     <kirby-input-counter [listenTo]="textarea"></kirby-input-counter>
   </kirby-form-field>`,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await waitFor(async () => {
+      // Allow input counter to update before snapshotting in chromatic
+      await expect(canvas.getByText(prefilledTextareaValue.length)).toBeVisible();
+    });
+  },
 };
 
 export const CookbookExample: Story = {
