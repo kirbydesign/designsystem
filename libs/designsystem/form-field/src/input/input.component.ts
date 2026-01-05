@@ -27,7 +27,11 @@ export enum InputSize {
   hostDirectives: [
     {
       directive: DateInputDirective,
-      inputs: ['prefillYear', 'useNativeDatePicker'],
+      inputs: [
+        'prefillYear',
+        'useNativeDatePicker',
+        'dateValue: value' /* sync input value updates with date-input mask */,
+      ],
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
