@@ -59,3 +59,30 @@ export const InputWithDecimalMaskAndPrecision: Story = {
 </kirby-form-field>`,
   }),
 };
+
+export const InputWithDateMask: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule, InputComponent],
+    }),
+  ],
+  render: () => ({
+    template: `<input kirby-input type="date" />`,
+  }),
+};
+
+export const InputWithDateMaskAndInitialValue: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule, InputComponent],
+    }),
+  ],
+  args: {
+    value: '10/02/2025',
+  },
+
+  render: (args) => ({
+    props: args,
+    template: `<input kirby-input type="date" ${argsToTemplate(args)} />`,
+  }),
+};
