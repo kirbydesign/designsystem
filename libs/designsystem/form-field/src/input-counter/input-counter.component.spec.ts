@@ -231,11 +231,9 @@ describe('InputCounterComponent', () => {
   });
 
   describe('when used in a form with a form control bound to textarea', () => {
-    let component: InputCounterComponent;
     let spectator: SpectatorHost<InputCounterComponent>;
-    let formGroup = new FormGroup({
-      textarea: new FormControl(''),
-    });
+    let formGroup: FormGroup;
+    let initialValue: string;
 
     const createHost = createHostFactory({
       component: InputCounterComponent,
@@ -244,7 +242,7 @@ describe('InputCounterComponent', () => {
 
     beforeEach(() => {
       formGroup = new FormGroup({
-        textarea: new FormControl(''),
+        textarea: new FormControl(initialValue),
       });
 
       spectator = createHost(
@@ -257,35 +255,51 @@ describe('InputCounterComponent', () => {
           detectChanges: true,
         }
       );
-      component = spectator.component;
-
-      component.ngOnInit();
     });
 
-    it('should update counter on formControl change', () => {
-      const initialValue = 'Initial value';
-      const updatedValue = 'Updated';
-      const inputCounterComponent = spectator.queryHost(InputCounterComponent);
-
-      formGroup.controls.textarea.setValue(initialValue);
-      expect(inputCounterComponent.text).toBe(initialValue.length.toString());
-
-      formGroup.controls.textarea.setValue(updatedValue);
-      expect(inputCounterComponent.text).toBe(updatedValue.length.toString());
-
-      formGroup.reset({
-        textarea: '',
+    describe('with empty initial value', () => {
+      beforeAll(() => {
+        initialValue = '';
       });
-      expect(inputCounterComponent.text).toBe('0');
+
+      it('should update counter on formControl change', () => {
+        const newValue = 'Initial value';
+        const updatedValue = 'Updated';
+        const inputCounterComponent = spectator.queryHost(InputCounterComponent);
+
+        formGroup.controls.textarea.setValue(newValue);
+        expect(inputCounterComponent.text).toBe(newValue.length.toString());
+
+        formGroup.controls.textarea.setValue(updatedValue);
+        expect(inputCounterComponent.text).toBe(updatedValue.length.toString());
+
+        formGroup.reset({ textarea: '' });
+        expect(inputCounterComponent.text).toBe('0');
+      });
+    });
+
+    describe('with pre-filled value', () => {
+      beforeAll(() => {
+        initialValue = 'Prefilled Textarea Value';
+      });
+
+      it('should show correct initial length for pre-filled value', () => {
+        const inputCounterComponent = spectator.queryHost(InputCounterComponent);
+        expect(inputCounterComponent.text).toBe(initialValue.length.toString());
+      });
+
+      it('should NOT announce pre-filled value to screen readers', fakeAsync(() => {
+        const inputCounterComponent = spectator.queryHost(InputCounterComponent);
+        tick(1000);
+        expect(inputCounterComponent.textToAnnounce).toBeUndefined();
+      }));
     });
   });
 
   describe('when used in a form with a form control bound to input', () => {
-    let component: InputCounterComponent;
     let spectator: SpectatorHost<InputCounterComponent>;
-    let formGroup = new FormGroup({
-      input: new FormControl(''),
-    });
+    let formGroup: FormGroup;
+    let initialValue: string;
 
     const createHost = createHostFactory({
       component: InputCounterComponent,
@@ -294,7 +308,7 @@ describe('InputCounterComponent', () => {
 
     beforeEach(() => {
       formGroup = new FormGroup({
-        input: new FormControl(''),
+        input: new FormControl(initialValue),
       });
 
       spectator = createHost(
@@ -307,26 +321,44 @@ describe('InputCounterComponent', () => {
           detectChanges: true,
         }
       );
-      component = spectator.component;
-
-      component.ngOnInit();
     });
 
-    it('should update counter on formControl change', () => {
-      const initialValue = 'Initial value';
-      const updatedValue = 'Updated';
-      const inputCounterComponent = spectator.queryHost(InputCounterComponent);
-
-      formGroup.controls.input.setValue(initialValue);
-      expect(inputCounterComponent.text).toBe(initialValue.length.toString());
-
-      formGroup.controls.input.setValue(updatedValue);
-      expect(inputCounterComponent.text).toBe(updatedValue.length.toString());
-
-      formGroup.reset({
-        input: '',
+    describe('with empty initial value', () => {
+      beforeAll(() => {
+        initialValue = '';
       });
-      expect(inputCounterComponent.text).toBe('0');
+
+      it('should update counter on formControl change', () => {
+        const newValue = 'Initial value';
+        const updatedValue = 'Updated';
+        const inputCounterComponent = spectator.queryHost(InputCounterComponent);
+
+        formGroup.controls.input.setValue(newValue);
+        expect(inputCounterComponent.text).toBe(newValue.length.toString());
+
+        formGroup.controls.input.setValue(updatedValue);
+        expect(inputCounterComponent.text).toBe(updatedValue.length.toString());
+
+        formGroup.reset({ input: '' });
+        expect(inputCounterComponent.text).toBe('0');
+      });
+    });
+
+    describe('with pre-filled value', () => {
+      beforeAll(() => {
+        initialValue = 'Prefilled Input Value';
+      });
+
+      it('should show correct initial length for pre-filled value', () => {
+        const inputCounterComponent = spectator.queryHost(InputCounterComponent);
+        expect(inputCounterComponent.text).toBe(initialValue.length.toString());
+      });
+
+      it('should NOT announce pre-filled value to screen readers', fakeAsync(() => {
+        const inputCounterComponent = spectator.queryHost(InputCounterComponent);
+        tick(1000);
+        expect(inputCounterComponent.textToAnnounce).toBeUndefined();
+      }));
     });
   });
 });

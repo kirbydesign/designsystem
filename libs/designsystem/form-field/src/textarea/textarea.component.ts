@@ -63,6 +63,10 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   @Input()
   maxlength: number;
 
+  get nativeValue(): string {
+    return this.elementRef?.nativeElement?.value;
+  }
+
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   constructor(
