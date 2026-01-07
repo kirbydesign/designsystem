@@ -36,12 +36,11 @@ export class InputCounterComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (this.listenTo) {
-      // A FormControl initialized with a value writes directly to the nativeElement.
-      // Check for this scenario first, before checking for listenTo's value @Input.
-      const initialValue = this.listenTo.nativeValue ?? this.listenTo.value ?? '';
-      this.length = initialValue.length;
-      this.skipNextAnnouncement = this.length > 0; // If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
-      this.maxlength = this.listenTo.maxlength ? +this.listenTo.maxlength : undefined;
+      this.length = this.listenTo.value ? this.listenTo.value.length : 0;
+      this.skipNextAnnouncement = this.length > 0; //If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
+      this.maxlength = this.maxlength = this.listenTo.maxlength
+        ? +this.listenTo.maxlength
+        : undefined;
       this.cdr.detectChanges();
       this._inputChangeSubscription = this.listenTo.kirbyChange
         .pipe(
