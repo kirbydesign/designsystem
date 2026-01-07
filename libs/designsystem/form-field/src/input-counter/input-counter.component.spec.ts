@@ -95,7 +95,7 @@ describe('InputCounterComponent', () => {
         const input = new InputComponent(null, null);
         beforeEach(() => {
           component.listenTo = input;
-          component.ngOnInit();
+          component.ngAfterViewInit();
         });
 
         it('should have initial length = 0', () => {
@@ -121,7 +121,7 @@ describe('InputCounterComponent', () => {
         });
         it('should set textToAnnounce correctly when maxlength is defined', fakeAsync(() => {
           input.maxlength = 20;
-          component.ngOnInit();
+          component.ngAfterViewInit();
           const testValue = '123';
           input.kirbyChange.emit(testValue);
           tick(1000); //simulate debounce time
@@ -131,7 +131,7 @@ describe('InputCounterComponent', () => {
 
         it('should set textToAnnounce correctly when maxlength is NOT defined', fakeAsync(() => {
           input.maxlength = undefined;
-          component.ngOnInit();
+          component.ngAfterViewInit();
           const testValue = '123';
           input.kirbyChange.emit(testValue);
           tick(1000); //simulate debounce time
@@ -142,7 +142,7 @@ describe('InputCounterComponent', () => {
         it('should NOT set textToAnnounce on initial value', fakeAsync(() => {
           input.value = 'Initial value';
           input.maxlength = 20;
-          component.ngOnInit();
+          component.ngAfterViewInit();
           tick(1000); //simulate debounce time
           expect(component.length).toBe(input.value.length);
           expect(component.maxlength).toBe(20);
@@ -160,7 +160,7 @@ describe('InputCounterComponent', () => {
       input.maxlength = maxlength;
       beforeEach(() => {
         component.listenTo = input;
-        component.ngOnInit();
+        component.ngAfterViewInit();
       });
 
       it('should get initial length from input value', () => {
@@ -183,7 +183,7 @@ describe('InputCounterComponent', () => {
         const textarea = new TextareaComponent(null, null);
         beforeEach(() => {
           component.listenTo = textarea;
-          component.ngOnInit();
+          component.ngAfterViewInit();
         });
 
         it('should have initial length = 0', () => {
@@ -210,7 +210,7 @@ describe('InputCounterComponent', () => {
         textarea.maxlength = maxlength;
         beforeEach(() => {
           component.listenTo = textarea;
-          component.ngOnInit();
+          component.ngAfterViewInit();
         });
 
         it('should get initial length from textarea value', () => {
