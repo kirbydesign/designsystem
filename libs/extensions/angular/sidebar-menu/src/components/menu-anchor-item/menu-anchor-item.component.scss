@@ -24,26 +24,29 @@
   font-weight: utils.font-weight('bold');
 }
 
-:host:where(.has-toggle, .has-badge) .end-wrapper {
-  display: inline-flex;
-  justify-content: center;
-  box-sizing: border-box;
-  min-width: utils.icon-font-size('sm');
-}
-
-:host.checked .end-wrapper {
-  padding-right: utils.size('l');
-}
-
 .item-badge {
   display: inline-flex;
 }
 
-:host.has-toggle:not(.checked):hover .item-badge,
-:host.has-toggle:not(.checked):active .item-badge,
-:host.has-toggle:not(.checked):has(a:focus-visible) .item-badge,
-:host.has-toggle:not(.checked):has(.toggle-button-unchecked:focus-visible) .item-badge {
+.toggle-spacer {
+  width: utils.icon-font-size('sm');
+}
+
+.toggle-spacer.unchecked {
   display: none;
+}
+
+:host.has-toggle:not(.checked):hover,
+:host.has-toggle:not(.checked):active,
+:host.has-toggle:not(.checked):has(a:focus-visible),
+:host.has-toggle:not(.checked):has(.toggle-button-unchecked:focus-visible) {
+  & .item-badge {
+    display: none;
+  }
+
+  & .toggle-spacer.unchecked {
+    display: initial;
+  }
 }
 
 .toggle-button-wrapper {

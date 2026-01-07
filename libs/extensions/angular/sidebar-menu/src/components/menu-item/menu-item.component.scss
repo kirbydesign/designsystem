@@ -99,5 +99,12 @@
 
 .menu-item-end {
   display: inline-flex;
+  min-width: utils.icon-font-size('sm');
   align-items: center;
+  justify-content: center;
+  gap: utils.size('xxs');
+
+  &:empty {
+    display: none;
+  }
 }
