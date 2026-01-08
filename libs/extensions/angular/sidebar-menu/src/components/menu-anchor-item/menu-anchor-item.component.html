@@ -13,12 +13,16 @@
     >
       {{ item.title }}
       @if (item.badge) {
-        <kirby-badge slot="end" class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
+        <kirby-badge
+          slot="end"
+          class="item-badge"
+          [themeColor]="item.badge.themeColor ?? 'primary'"
+        >
           {{ item.badge.value }}
         </kirby-badge>
       }
       @if (item.toggle) {
-        <div slot="end" class="toggle-spacer" [class.unchecked]="!item.toggle.isChecked"></div>
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
     </a>
   }
@@ -38,12 +42,16 @@
     >
       {{ item.title }}
       @if (item.badge) {
-        <kirby-badge slot="end" class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
+        <kirby-badge
+          slot="end"
+          class="item-badge"
+          [themeColor]="item.badge.themeColor ?? 'primary'"
+        >
           {{ item.badge.value }}
         </kirby-badge>
       }
       @if (item.toggle) {
-        <div slot="end" class="toggle-spacer" [class.unchecked]="!item.toggle.isChecked"></div>
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
     </a>
   }
@@ -61,12 +69,16 @@
     >
       {{ item.title }}
       @if (item.badge) {
-        <kirby-badge slot="end" class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
+        <kirby-badge
+          slot="end"
+          class="item-badge"
+          [themeColor]="item.badge.themeColor ?? 'primary'"
+        >
           {{ item.badge.value }}
         </kirby-badge>
       }
       @if (item.toggle) {
-        <div slot="end" class="toggle-spacer" [class.unchecked]="!item.toggle.isChecked"></div>
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
     </a>
   }
