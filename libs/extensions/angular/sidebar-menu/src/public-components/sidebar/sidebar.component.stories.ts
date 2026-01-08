@@ -18,147 +18,172 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 const menuItemsExample: SidebarMenuItem[] = [
   {
+    type: 'router-link',
     id: 'home',
     title: 'Home',
     icon: 'home',
-    link: { relativeLink: '/' },
-    selected: true,
+    route: '/',
   },
   {
+    type: 'router-link',
     id: 'inbox',
     title: 'Inbox',
     icon: 'inbox-outline',
-    link: { relativeLink: '/inbox' },
+    route: '/inbox',
     badge: { value: '2', themeColor: 'danger' },
   },
   {
+    type: 'divider',
     id: 'divider-1',
-    isDivider: true,
   },
   {
+    type: 'submenu',
     id: 'menu-item-1',
     title: 'Menu item 1',
     icon: 'copy',
     children: [
       {
+        type: 'router-link',
         id: 'menu-item-1-1',
         title: 'Menu item 1.1',
-        link: { relativeLink: '/menu-item/1/2' },
+        route: '/menu-item/1/2',
       },
       {
+        type: 'submenu',
         id: 'menu-item-1-2',
         title: 'Menu item 1.2',
         children: [
           {
+            type: 'router-link',
             id: 'menu-item-1-2-1',
             title: 'Menu item 1.2.1',
-            link: { relativeLink: '/menu-1-sub-1-link-1' },
+            route: '/menu-1-sub-1-link-1',
           },
           {
+            type: 'submenu',
             id: 'menu-item-1-2-2',
             title: 'Menu item 1.2.2',
             children: [
               {
+                type: 'router-link',
                 id: 'menu-item-1-2-2-1',
                 title: 'Menu item 1.2.2.1',
-                link: { relativeLink: '/menu-1-sub-1-sub-1-link-1' },
+                route: '/menu-1-sub-1-sub-1-link-1',
               },
               {
+                type: 'router-link',
                 id: 'menu-item-1-2-2-2',
                 title: 'Menu item 1.2.2.2',
-                link: { relativeLink: '/menu-1-sub-1-sub-1-link-2' },
+                route: '/menu-1-sub-1-sub-1-link-2',
               },
             ],
           },
           {
+            type: 'router-link',
             id: 'menu-item-1-2-3',
             title: 'Menu item 1.2.3',
-            link: { relativeLink: '/menu-1-sub-1-link-2' },
+            route: '/menu-1-sub-1-link-2',
           },
         ],
       },
       {
+        type: 'router-link',
         id: 'menu-item-1-3',
         title: 'Menu item 1.3',
-        link: { relativeLink: '/menu-1-link-2' },
+        route: '/menu-1-link-2',
       },
     ],
   },
   {
+    type: 'submenu',
     id: 'menu-item-2',
     title: 'Menu Item 2',
     icon: 'copy',
     children: [
       {
+        type: 'router-link',
         id: 'menu-item-2-1',
         title: 'Menu Item 2.1',
-        link: { relativeLink: '/menu-2-link-1' },
+        route: '/menu-2-link-1',
       },
       {
+        type: 'submenu',
         id: 'menu-item-2-2',
         title: 'Menu Item 2.2',
         children: [
           {
+            type: 'router-link',
             id: 'menu-item-2-2-1',
             title: 'Menu Item 2.2.1',
-            link: { relativeLink: '/menu-2-sub-1-link-1' },
+            route: '/menu-2-sub-1-link-1',
           },
           {
+            type: 'submenu',
             id: 'menu-item-2-2-2',
             title: 'Menu Item 2.2.2',
             children: [
               {
+                type: 'router-link',
                 id: 'menu-item-2-2-2-1',
                 title: 'Menu item 2.2.2.1',
-                link: { relativeLink: '/menu-2-sub-1-sub-1-link-1' },
+                route: '/menu-2-sub-1-sub-1-link-1',
               },
               {
+                type: 'router-link',
                 id: 'menu-item-2-2-2-2',
                 title: 'Menu item 2.2.2.2',
-                link: { relativeLink: '/menu-2-sub-1-sub-1-link-2' },
+                route: '/menu-2-sub-1-sub-1-link-2',
               },
             ],
           },
           {
+            type: 'submenu',
             id: 'menu-item-2-2-3',
             title: 'Menu Item 2.2.3',
             children: [
               {
+                type: 'router-link',
                 id: 'menu-item-2-2-3-1',
                 title: 'Menu item 2.2.3.1',
-                link: { relativeLink: '/menu-2-sub-1-sub-2-link-1' },
+                route: '/menu-2-sub-1-sub-2-link-1',
               },
               {
+                type: 'router-link',
                 id: 'menu-item-2-2-3-2',
                 title: 'Menu item 2.2.3.2',
-                link: { relativeLink: '/menu-2-sub-1-sub-2-link-2' },
+                route: '/menu-2-sub-1-sub-2-link-2',
               },
             ],
           },
         ],
       },
       {
+        type: 'submenu',
         id: 'menu-item-2-3',
         title: 'Menu item 2.3',
         children: [
           {
+            type: 'router-link',
             id: 'menu-item-2-3-1',
             title: 'Menu item 2.3.1',
-            link: { relativeLink: '/menu-2-sub-2-link-1' },
+            route: '/menu-2-sub-2-link-1',
           },
           {
+            type: 'submenu',
             id: 'menu-item-2-3-2',
             title: 'Menu item 2.3.2',
             children: [
               {
+                type: 'router-link',
                 id: 'menu-item-2-3-2-1',
                 title: 'Menu item 2.3.2.1',
-                link: { relativeLink: '/menu-2-sub-2-sub-1-link-1' },
+                route: '/menu-2-sub-2-sub-1-link-1',
               },
               {
+                type: 'router-link',
                 id: 'menu-item-2-3-2-2',
                 title: 'Menu item 2.3.2.2',
-                link: { relativeLink: '/menu-2-sub-2-sub-1-link-2' },
+                route: '/menu-2-sub-2-sub-1-link-2',
               },
             ],
           },
@@ -167,30 +192,33 @@ const menuItemsExample: SidebarMenuItem[] = [
     ],
   },
   {
+    type: 'divider',
     id: 'divider-2',
-    isDivider: true,
   },
   {
+    type: 'router-link',
     id: 'profile',
     title: 'Profile',
     icon: 'person-outline',
-    link: { relativeLink: '/profile' },
+    route: '/profile',
   },
   {
+    type: 'router-link',
     id: 'settings',
     title: 'Settings',
-    icon: 'settings',
-    link: { relativeLink: '/settings' },
+    icon: 'cog',
+    route: '/settings',
   },
   {
+    type: 'router-link',
     id: 'contact',
     title: 'Contact',
     icon: 'contact',
-    link: { relativeLink: '/contact' },
+    route: '/contact',
   },
 ];
 
-type SidebarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaContent?: string };
+type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string };
 
 /**
  *
@@ -213,12 +241,11 @@ type SidebarPropsAndCustomArgs = SidebarComponent<SidebarMenuItem> & { mainAreaC
  * - *Dividers* are used to separate groups of menu items visually.
  *
  * Note: Items can also be configured as external links, but the design for this feature is not finalized yet.
-
  *
  */
 const meta: Meta<SidebarPropsAndCustomArgs> = {
   title: 'Components/Sidebar',
-  component: SidebarComponent<SidebarMenuItem>,
+  component: SidebarComponent,
   decorators: [
     moduleMetadata({
       imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
@@ -229,39 +256,51 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   ],
   parameters: {
     layout: 'fullscreen',
+    controls: {
+      exclude: ['#stateService'],
+    },
   },
   argTypes: {
     menuItems: {
-      description:
-        'Array of menu items to display in the sidebar. Can be two-way bound. See <a href="https://github.com/kirbydesign/designsystem/blob/develop/libs/extensions/angular/sidebar-menu/src/models/menu-item.ts">SidebarMenuItem</a> interface for more information.',
+      description: 'Array of menu items to display in the sidebar.',
       control: { type: 'object' },
-      table: {
-        type: { summary: 'SidebarMenuItem[]' },
-      },
+    },
+    selectedItem: {
+      description: 'The id of the selected menu item. Can be two-way bound.',
+      control: { type: 'text' },
+    },
+    expandedItems: {
+      description: 'The ids of the expanded submenu items. Can be two-way bound.',
+      control: { type: 'object' },
+    },
+    checkedItems: {
+      description: 'The ids of the menu items with checked toggle buttons. Can be two-way bound.',
+      control: { type: 'object' },
     },
     autoCollapse: {
       description: 'Whether to auto-collapse other submenus when one is opened',
       control: { type: 'boolean' },
     },
-    menuItemsChange: {
-      description: 'Event emitted when the menu items change',
+    selectedItemChange: {
+      description: 'Event emitted when a new menu item is selected',
       control: false,
     },
-    afterMenuToggled: {
-      description: 'Event emitted when a submenu is toggled',
+    expandedItemsChange: {
+      description: 'Event emitted when the set of expanded submenu items changes',
       control: false,
     },
-    afterMenuClicked: {
-      description: 'Event emitted when a menu item is clicked',
+    checkedItemsChange: {
+      description: 'Event emitted when the set of checked menu item toggles changes',
       control: false,
     },
-    itemChecked: {
-      description: 'Event emitted when a menu item toggle button is clicked',
+    expandChange: {
+      description: 'Event emitted when a submenu item is expanded/collapsed',
       control: false,
     },
-    expandIconOnHover: { table: { disable: true } },
-    menuItemsChanged: { table: { disable: true } },
-    changeMenuItems: { table: { disable: true } },
+    checkChange: {
+      description: 'Event emitted when a menu item toggle is checked/unchecked',
+      control: false,
+    },
     mainAreaContent: { table: { disable: true } },
   },
   render: ({ mainAreaContent, ...args }) => ({
@@ -297,6 +336,7 @@ type Story = StoryObj<SidebarPropsAndCustomArgs>;
 export const Default: Story = {
   args: {
     menuItems: menuItemsExample,
+    selectedItem: 'home',
     mainAreaContent: `<h1>Welcome to the main content area</h1>
     <p>This is where your main application content would go.</p>`,
   },
@@ -363,7 +403,10 @@ export const WithToggleButtons: Story = {
 };
 
 function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
-  if (item.children) {
+  if (item.type === 'divider') {
+    return item;
+  }
+  if (item.type === 'submenu') {
     return {
       ...item,
       children: item.children.map(convertToToggleButtonsExample),
@@ -372,7 +415,6 @@ function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
   return {
     ...item,
     toggle: {
-      isChecked: false,
       uncheckedIcon: 'star',
       checkedIcon: 'star-fill',
     },
