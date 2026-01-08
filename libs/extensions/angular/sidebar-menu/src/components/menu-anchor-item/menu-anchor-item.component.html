@@ -12,13 +12,18 @@
       (keydown.enter)="$event.preventDefault(); vm.selectItem()"
     >
       {{ item.title }}
-      <div class="end-wrapper" slot="end">
-        @if (item.badge) {
-          <kirby-badge class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
-            {{ item.badge.value }}
-          </kirby-badge>
-        }
-      </div>
+      @if (item.badge) {
+        <kirby-badge
+          slot="end"
+          class="item-badge"
+          [themeColor]="item.badge.themeColor ?? 'primary'"
+        >
+          {{ item.badge.value }}
+        </kirby-badge>
+      }
+      @if (item.toggle) {
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
+      }
     </a>
   }
   @case ('router-link') {
@@ -36,13 +41,18 @@
       (keydown.enter)="vm.selectItem()"
     >
       {{ item.title }}
-      <div class="end-wrapper" slot="end">
-        @if (item.badge) {
-          <kirby-badge class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
-            {{ item.badge.value }}
-          </kirby-badge>
-        }
-      </div>
+      @if (item.badge) {
+        <kirby-badge
+          slot="end"
+          class="item-badge"
+          [themeColor]="item.badge.themeColor ?? 'primary'"
+        >
+          {{ item.badge.value }}
+        </kirby-badge>
+      }
+      @if (item.toggle) {
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
+      }
     </a>
   }
   @case ('external-link') {
@@ -58,13 +68,18 @@
       (keydown.enter)="vm.selectItem()"
     >
       {{ item.title }}
-      <div class="end-wrapper" slot="end">
-        @if (item.badge) {
-          <kirby-badge class="item-badge" [themeColor]="item.badge.themeColor ?? 'primary'">
-            {{ item.badge.value }}
-          </kirby-badge>
-        }
-      </div>
+      @if (item.badge) {
+        <kirby-badge
+          slot="end"
+          class="item-badge"
+          [themeColor]="item.badge.themeColor ?? 'primary'"
+        >
+          {{ item.badge.value }}
+        </kirby-badge>
+      }
+      @if (item.toggle) {
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
+      }
     </a>
   }
 }
