@@ -1,6 +1,6 @@
 import { Component, computed, ElementRef, forwardRef, inject, input, Signal } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { SidebarMenuItem } from '../../models';
+import { SubmenuItem } from '../../models';
 import { MenuItemComponent } from '../menu-item';
 import { MenuItemSize } from '../../types';
 import { MenuItemListComponent } from '../menu-item-list';
@@ -8,16 +8,13 @@ import { MenuStateService } from '../../services/menu-state';
 import { ensureInView } from '../../functions/ensure-in-view';
 import { DropDownAnimation } from '../../animations';
 
-type ViewModel<T> = {
-  id: Signal<string>;
-  submenuId: Signal<string>;
-  title: Signal<string>;
+type ViewModel = {
+  item: Signal<SubmenuItem>;
   size: Signal<MenuItemSize>;
-  icon: Signal<string | undefined>;
   isExpanded: Signal<boolean>;
-  children: Signal<T[]>;
+  submenuId: Signal<string>;
   submenuSize: Signal<MenuItemSize>;
-  disableAnimations: Signal<boolean>;
+  animationsDisabled: Signal<boolean>;
   toggleSubmenu: () => void;
 };
 
@@ -28,15 +25,18 @@ type ViewModel<T> = {
   animations: [DropDownAnimation],
   imports: [MenuItemComponent, IconComponent, forwardRef(() => MenuItemListComponent)],
 })
-export class MenuSubmenuItemComponent<T extends SidebarMenuItem> {
-  readonly item = input.required<T>();
+export class MenuSubmenuItemComponent {
+  readonly item = input.required<SubmenuItem>();
   readonly size = input.required<MenuItemSize>();
-  readonly disableAnimations = input.required<boolean>();
 
   readonly #element = inject(ElementRef).nativeElement as Element;
-  readonly #menuStateService = inject(MenuStateService);
+  readonly #stateService = inject(MenuStateService);
 
-  readonly #isExpanded = computed(() => this.item().isExpanded ?? false);
+  readonly #isExpanded = computed(() => {
+    const id = this.item().id;
+    const expandedItems = this.#stateService.expandedItems();
+    return expandedItems.has(id);
+  });
   readonly #submenuSize = computed(() => {
     switch (this.size()) {
       case 'lg':
@@ -52,22 +52,22 @@ export class MenuSubmenuItemComponent<T extends SidebarMenuItem> {
     const button = this.#element.querySelector('button[kirby-x-menu-item]');
     const scrollContainer = this.#element.closest('.sidebar-content');
     if (button && scrollContainer) {
-      console.log('Ensuring submenu item is in view');
       ensureInView(scrollContainer, button, 400);
     }
-    this.#menuStateService.toggledSubmenu = this.item();
+    if (this.#isExpanded()) {
+      this.#stateService.collapseItem(this.item().id);
+    } else {
+      this.#stateService.expandItem(this.item().id);
+    }
   }
 
-  readonly vm: ViewModel<T> = {
-    id: computed(() => this.item().id),
-    submenuId: computed(() => `item-${this.item().id}-content`),
-    title: computed(() => this.item().title ?? ''),
+  readonly vm: ViewModel = {
+    item: this.item,
     size: this.size,
-    icon: computed(() => this.item().icon),
     isExpanded: this.#isExpanded,
-    children: computed(() => this.item().children ?? []),
+    submenuId: computed(() => `item-${this.item().id}-content`),
     submenuSize: this.#submenuSize,
-    disableAnimations: this.disableAnimations,
+    animationsDisabled: this.#stateService.animationsDisabled,
     toggleSubmenu: this.#toggleSubmenu.bind(this),
   };
 }
