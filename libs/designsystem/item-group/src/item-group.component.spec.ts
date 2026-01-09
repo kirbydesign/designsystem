@@ -1,6 +1,6 @@
 import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { ItemGroupComponent } from './item-group.component';
 
@@ -9,7 +9,7 @@ describe('ItemGroup', () => {
 
   const createHost = createHostFactory({
     component: ItemGroupComponent,
-    imports: [ItemGroupComponent, MockComponent(ItemComponent)],
+    imports: [TestHelper.ionicModuleForTest, ItemGroupComponent, ItemComponent],
   });
 
   beforeEach(() => {

@@ -1,5 +1,4 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FloatingDirective } from '@kirbydesign/designsystem/shared/floating';
@@ -19,13 +18,13 @@ describe('MenuComponent', () => {
   const createHost = createHostFactory({
     component: MenuComponent,
     imports: [
+      TestHelper.ionicModuleForTest,
       IconComponent,
       ItemComponent,
-      TestHelper.ionicModuleForTest,
       ToggleComponent,
       CheckboxComponent,
       FloatingDirective,
-      MockComponent(ButtonComponent),
+      ButtonComponent,
     ],
   });
   describe('by default', () => {
@@ -327,9 +326,9 @@ describe('MenuComponent', () => {
         spectator = createHost(
           `<kirby-menu>
           @for(item of items; track item) {
-            <kirby-item>            
+            <kirby-item>
               <kirby-icon name="add" slot="start" />
-              {{item}}                               
+              {{item}}
             </kirby-item>
           }
         </kirby-menu>`,

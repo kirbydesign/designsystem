@@ -28,7 +28,9 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
-  @Input() value: string;
+  @HostBinding('attr.value')
+  @Input()
+  value: string;
 
   /**
    * Removes padding, width, rounded borders and drop-shadow when set to `true`.
@@ -62,6 +64,10 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   @HostBinding('attr.maxlength')
   @Input()
   maxlength: number;
+
+  get nativeValue(): string {
+    return this.elementRef?.nativeElement?.value;
+  }
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
 

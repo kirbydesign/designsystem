@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockDirective } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -51,7 +50,7 @@ describe('SegmentedControlComponent', () => {
   describe('used standalone', () => {
     const createHost = createHostFactory({
       component: SegmentedControlComponent,
-      imports: [TestHelper.ionicModuleForTest, MockDirective(ThemeColorDirective)],
+      imports: [TestHelper.ionicModuleForTest, ThemeColorDirective],
     });
 
     beforeEach(async () => {

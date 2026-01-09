@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import * as ionic from '@ionic/angular/standalone';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -11,7 +10,7 @@ import {
   ListItemColorDirective,
 } from '@kirbydesign/designsystem/list';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
-import { MockComponent } from 'ng-mocks';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ActionSheetComponent } from './action-sheet.component';
 
@@ -24,20 +23,13 @@ describe('ActionSheetComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
+        TestHelper.ionicModuleForTest,
         SpinnerComponent,
         ActionSheetComponent,
         ListComponent,
         InfiniteScrollDirective,
         ButtonComponent,
         ListItemColorDirective,
-        MockComponent(ionic.IonList),
-        MockComponent(ionic.IonListHeader),
-        MockComponent(ionic.IonLabel),
-        MockComponent(ionic.IonItem),
-        MockComponent(ionic.IonItemDivider),
-        MockComponent(ionic.IonItemGroup),
-        MockComponent(ionic.IonItemOptions),
-        MockComponent(ionic.IonItemSliding),
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

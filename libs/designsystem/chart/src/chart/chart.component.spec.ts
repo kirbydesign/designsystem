@@ -1,6 +1,5 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockProvider } from 'ng-mocks';
+import { createHostFactory, mockProvider, SpectatorHost } from '@ngneat/spectator';
 
 import { ChartJSService } from '../shared';
 
@@ -12,7 +11,7 @@ describe('ChartComponent', () => {
   const createHost = createHostFactory({
     component: ChartComponent,
     imports: [ChartComponent],
-    componentProviders: [MockProvider(ChartJSService)],
+    componentProviders: [mockProvider(ChartJSService)],
   });
 
   beforeEach(() => {

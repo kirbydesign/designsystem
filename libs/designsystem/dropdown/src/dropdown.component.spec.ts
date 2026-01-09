@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -39,8 +37,12 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [
+        TestHelper.ionicModuleForTest,
         ItemComponent,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
+        ButtonComponent,
+        CardComponent,
+        IconComponent,
+        PopoverComponent,
       ],
     });
 
@@ -1123,13 +1125,12 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [
-        MockComponents(
-          ButtonComponent,
-          CardComponent,
-          ItemComponent,
-          IconComponent,
-          PopoverComponent
-        ),
+        TestHelper.ionicModuleForTest,
+        ButtonComponent,
+        CardComponent,
+        ItemComponent,
+        IconComponent,
+        PopoverComponent,
       ],
     });
 
@@ -1174,13 +1175,12 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [
-        MockComponents(
-          ButtonComponent,
-          CardComponent,
-          ItemComponent,
-          IconComponent,
-          PopoverComponent
-        ),
+        TestHelper.ionicModuleForTest,
+        ButtonComponent,
+        CardComponent,
+        ItemComponent,
+        IconComponent,
+        PopoverComponent,
       ],
     });
 
@@ -1246,13 +1246,12 @@ describe('DropdownComponent', () => {
       component: DropdownComponent,
       host: OnPushHostComponent,
       imports: [
-        MockComponents(
-          ButtonComponent,
-          CardComponent,
-          ItemComponent,
-          IconComponent,
-          PopoverComponent
-        ),
+        TestHelper.ionicModuleForTest,
+        ButtonComponent,
+        CardComponent,
+        ItemComponent,
+        IconComponent,
+        PopoverComponent,
         ReactiveFormsModule,
       ],
     });
@@ -1365,9 +1364,13 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [
+        TestHelper.ionicModuleForTest,
         ItemComponent,
         ListItemTemplateDirective,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
+        ButtonComponent,
+        CardComponent,
+        IconComponent,
+        PopoverComponent,
       ],
     });
 
@@ -1429,8 +1432,12 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       imports: [
+        TestHelper.ionicModuleForTest,
         ItemComponent,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
+        ButtonComponent,
+        CardComponent,
+        IconComponent,
+        PopoverComponent,
       ],
     });
 

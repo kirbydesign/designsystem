@@ -1,8 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ButtonComponent, ButtonSize } from './button.component';
 
@@ -14,7 +14,7 @@ describe('ButtonComponent', () => {
 
   const createHost = createHostFactory({
     component: ButtonComponent,
-    imports: [MockComponent(IconComponent)],
+    imports: [TestHelper.ionicModuleForTest, IconComponent],
   });
 
   describe('by default', () => {

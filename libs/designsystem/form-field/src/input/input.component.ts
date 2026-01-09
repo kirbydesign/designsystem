@@ -96,6 +96,10 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   @Input()
   inputmode: string;
 
+  get nativeValue(): string {
+    return this.elementRef?.nativeElement?.value;
+  }
+
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   constructor(

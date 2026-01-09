@@ -62,7 +62,7 @@ export class ModalNavigationService {
 
   private async getCurrentRoutePaths(): Promise<string[]> {
     const rootPath = [''];
-    const currentNavigation = this.router.getCurrentNavigation();
+    const currentNavigation = this.router.currentNavigation();
 
     if (!this.router.navigated && !currentNavigation) {
       // If router hasn't navigated yet and we are not in the middle of navigating, assume root:
@@ -184,7 +184,7 @@ export class ModalNavigationService {
   }
 
   private isNewModalWindow(navigationEnd: NavigationEnd): boolean {
-    const currentNavigation = this.router.getCurrentNavigation();
+    const currentNavigation = this.router.currentNavigation();
     if (!currentNavigation || !currentNavigation.previousNavigation) {
       return true;
     }
@@ -209,7 +209,7 @@ export class ModalNavigationService {
   );
 
   private async waitForCurrentThenGetNavigationEndStream(): Promise<Observable<NavigationEnd>> {
-    if (this.router.getCurrentNavigation()) {
+    if (this.router.currentNavigation()) {
       const currentNavigationEnd = await firstValueFrom(this.navigationEndListener$);
       return this.navigationEndListener$.pipe(startWith(currentNavigationEnd));
     }
@@ -327,7 +327,7 @@ export class ModalNavigationService {
 
   async navigateOutOfModalOutlet(): Promise<boolean> {
     const currentActivatedRoute = this.getCurrentActivatedRoute();
-    const currentNavigationFinalUrl = this.router.getCurrentNavigation()?.finalUrl?.toString();
+    const currentNavigationFinalUrl = this.router.currentNavigation()?.finalUrl?.toString();
     const isCurrentlyNavigatingOutOfModalOutlet =
       currentNavigationFinalUrl && !this.isModalRoute(currentNavigationFinalUrl);
 

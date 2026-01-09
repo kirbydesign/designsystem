@@ -1,10 +1,9 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { IonContent } from '@ionic/angular/standalone';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -37,7 +36,8 @@ describe('ModalWrapperComponent', () => {
       PageComponent,
       PageProgressComponent,
       PageTitleComponent,
-      MockComponents(ButtonComponent),
+      ButtonComponent,
+      IconComponent,
     ],
     entryComponents: [
       TitleEmbeddedComponent,
@@ -615,10 +615,9 @@ describe('ModalWrapperComponent', () => {
       });
 
       it('should not blur document.activeElement if event is from toolbar button child node', () => {
-        spectator.dispatchTouchEvent(
-          'ion-header > ion-toolbar > ion-buttons > button > kirby-icon',
-          'touchstart'
-        );
+        const toolbarButton = spectator.query('ion-header > ion-toolbar > ion-buttons > button');
+        const childNode = toolbarButton.firstElementChild;
+        spectator.dispatchTouchEvent(childNode, 'touchstart');
         expect(input.blur).not.toHaveBeenCalled();
       });
     });

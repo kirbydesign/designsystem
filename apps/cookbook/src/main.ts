@@ -4,6 +4,7 @@ import {
   inject,
   LOCALE_ID,
   provideAppInitializer,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
@@ -29,6 +30,7 @@ registerLocaleData(localeData);
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideZonelessChangeDetection(),
     importProvidersFrom(BrowserModule, FormsModule),
     provideKirby(withGlobalSetup()),
     provideHttpClient(),
