@@ -23,12 +23,6 @@
     min-height: utils.size('xl');
   }
 
-  @media (pointer: coarse) {
-    &.md {
-      min-height: utils.size('xl');
-    }
-  }
-
   &:hover {
     background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
   }
@@ -79,22 +73,8 @@
   flex-grow: 1;
   align-items: center;
   text-align: left;
-
-  &.lg,
-  &.md {
-    font-size: utils.font-size('n');
-    line-height: utils.line-height('m');
-  }
-
-  &.sm {
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
-  }
-
-  &.xs {
-    font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
-  }
+  font-size: utils.font-size('n');
+  line-height: utils.line-height('m');
 }
 
 .menu-item-end {
