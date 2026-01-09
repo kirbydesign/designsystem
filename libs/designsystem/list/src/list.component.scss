@@ -165,7 +165,7 @@ ion-item-options[side='end'] {
   }
 }
 
-:host-context(.shape-rounded) {
+:host([shape='rounded']) {
   .list,
   .list-items {
     border-radius: utils.border-radius('n');
@@ -208,7 +208,7 @@ ion-item-options[side='end'] {
   }
 }
 
-:host-context(.shape-none) {
+:host([shape='none']) {
   .list,
   .list-items {
     box-shadow: none;

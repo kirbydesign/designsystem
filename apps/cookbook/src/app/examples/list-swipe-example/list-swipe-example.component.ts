@@ -9,7 +9,7 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
   selector: 'cookbook-list-swipe-example',
   templateUrl: './list-swipe-example.component.html',
   styleUrls: ['./list-swipe-example.component.scss'],
-  imports: [ListComponent, ListItemTemplateDirective, ItemComponent],
+  imports: [ListComponent, ItemComponent, ListItemTemplateDirective],
 })
 export class ListSwipeExampleComponent {
   items: any[] = [

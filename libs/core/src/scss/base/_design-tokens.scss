@@ -81,6 +81,10 @@
   }
 }
 
+@mixin transitions() {
+  --kirby-transition-quick: 200ms;
+}
+
 @mixin all() {
   /* FONT-FAMILY */
   @include font-family;
@@ -118,4 +122,7 @@
 
   /* Z-INDEXES */
   @include z-layers;
+
+  /* TRANSITIONS */
+  @include transitions;
 }

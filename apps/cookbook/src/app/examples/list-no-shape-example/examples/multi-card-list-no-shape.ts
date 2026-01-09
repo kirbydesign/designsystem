@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
-import { CardComponent } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { CurrencyPipe } from '@angular/common';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { BaseListNoShape } from '../base-list-no-shape';
@@ -31,7 +31,14 @@ export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="
 @Component({
   selector: 'cookbook-multi-card-list-no-shape-example',
   template: multiCardListExampleTemplate,
-  imports: [ListComponent, ListItemTemplateDirective, CardComponent, ItemComponent, CurrencyPipe],
+  imports: [
+    ListComponent,
+    CardComponent,
+    ItemComponent,
+    CurrencyPipe,
+    ListItemTemplateDirective,
+    CardHeaderComponent,
+  ],
 })
 export class MultiCardListNoShapeExampleComponent extends BaseListNoShape {
   template: string = multiCardListExampleTemplate;

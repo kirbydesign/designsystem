@@ -19,6 +19,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
   @property({ type: String }) disabledTitle = '';
   @property({ type: Boolean, reflect: true }) hasPadding = true;
   @property({ type: Number }) headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  @property({ type: String }) shape = 'none';
   private _titleId = `kirby-accordion-item-title-${++uniqueId}`;
   private _contentId = `kirby-accordion-item-content-${uniqueId}`;
 
@@ -44,18 +45,17 @@ export class KirbyAccordionItemElement extends KirbyElement {
     );
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('isExpanded')) {
-      const content = this.renderRoot.querySelector('.content') as HTMLElement;
-      if (content) {
-        if (this.isExpanded) {
-          content.style.height = content.scrollHeight + 'px';
-          content.style.visibility = 'visible';
-        } else {
-          content.style.height = '0px';
-          content.style.visibility = 'hidden';
-        }
-      }
+  firstUpdated() {
+    const slot = this.renderRoot.querySelector('slot');
+    if (slot) {
+      slot.addEventListener('slotchange', () => {
+        const assigned = slot.assignedElements({ flatten: true });
+        assigned.forEach((el) => {
+          if (el.tagName === 'KIRBY-LIST') {
+            el.setAttribute('shape', 'none');
+          }
+        });
+      });
     }
   }
 
@@ -77,7 +77,10 @@ export class KirbyAccordionItemElement extends KirbyElement {
           >
             <span class="state-layer" aria-hidden="true"></span>
             <div class="title" ?bold=${this.isExpanded}>${this.getTitle()}</div>
-            <kirby-icon name="arrow-down"></kirby-icon>
+
+            <span class="kirby-icon">
+              <kirby-icon name="arrow-down"></kirby-icon>
+            </span>
           </button>
         </div>
         <div

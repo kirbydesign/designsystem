@@ -34,6 +34,15 @@ export class KirbyAccordionItemComponent {
   }
 
   @Input()
+  set shape(v: string) {
+    this.ngZone.runOutsideAngular(() => ((this.el as any).shape = v));
+  }
+
+  get shape(): string {
+    return (this.el as any).shape;
+  }
+
+  @Input()
   set title(v: string) {
     this.ngZone.runOutsideAngular(() => (this.el.title = v));
   }
