@@ -383,7 +383,7 @@ export const WithActions: Story = {
   }),
   args: {
     ...Default.args,
-    mainAreaContent: '<h1>Sidebar with extra action buttons in the header</h1>',
+    mainAreaContent: '<h1>Sidebar with extra action buttons in the header but no logo link</h1>',
   },
 };
 
