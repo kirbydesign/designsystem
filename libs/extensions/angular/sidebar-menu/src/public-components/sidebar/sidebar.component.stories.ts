@@ -356,7 +356,7 @@ export const AutoCollapse: Story = {
 };
 
 /**
- * A sidebar with extra action buttons in the header.
+ * A sidebar with extra action buttons in the header but no logo link.
  */
 export const WithActions: Story = {
   ...Default,
@@ -366,7 +366,7 @@ export const WithActions: Story = {
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
         <kirby-x-sidebar ${argsToTemplate(args)}>
           <kirby-x-sidebar-header>
-            <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
+            <img slot="logo" src="assets/images/kirby-logo.svg" alt="Kirby Design System"/>
             <button kirby-button size="sm" attentionLevel="3" slot="action" style="display: flex; flex-grow: 1; justify-content: flex-start;">
               <kirby-icon name="search"></kirby-icon>
               <span>Search...</span>

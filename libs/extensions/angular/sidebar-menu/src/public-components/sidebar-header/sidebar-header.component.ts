@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'kirby-x-sidebar-header',
   template: `
     <header>
-      <span class="sidebar-logo"><ng-content slot="logo"></ng-content></span>
+      <span class="sidebar-logo"><ng-content select="[slot='logo']"></ng-content></span>
       <div class="action-bar">
         <ng-content select="[slot='action']"></ng-content>
       </div>
@@ -31,7 +31,8 @@ import { Component } from '@angular/core';
       height: inherit;
     }
 
-    :host::ng-deep [slot='logo'] img {
+    :host::ng-deep [slot='logo'] img,
+    :host::ng-deep img[slot='logo'] {
       object-fit: contain;
       width: 100%;
       height: 100%;
