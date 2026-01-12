@@ -98,7 +98,7 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
 
   it('should focus the h1 element after navigation', async () => {
     // Go to first page
-    router.navigateByUrl(firstPageUrl);
+    await router.navigateByUrl(firstPageUrl);
     await spectator.fixture.whenStable();
 
     await TestHelper.whenTrue(() => document.activeElement !== document.body); // Wait for focus to be set by Ionic
@@ -121,7 +121,7 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
 
   it('should update the HTML document title to match page title after navigation', async () => {
     // Go to first page
-    router.navigateByUrl('');
+    await router.navigateByUrl('');
     await spectator.fixture.whenStable();
 
     expect(document.title).toBe(firstPageTitle);
