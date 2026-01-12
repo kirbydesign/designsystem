@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { debounceTime, filter, Subscription, tap } from 'rxjs';
 
 import { TranslationService } from '@kirbydesign/designsystem/shared';
@@ -12,7 +12,7 @@ import { TextareaComponent } from './../textarea/textarea.component';
   templateUrl: './input-counter.component.html',
   imports: [FormFieldMessageComponent],
 })
-export class InputCounterComponent implements OnInit, OnDestroy {
+export class InputCounterComponent implements AfterViewInit, OnDestroy {
   @Input() listenTo: InputComponent | TextareaComponent;
   length: number;
   maxlength: number | undefined;
@@ -29,15 +29,20 @@ export class InputCounterComponent implements OnInit, OnDestroy {
     return `${this.length}${ofMaxlength}`;
   }
 
-  constructor(private translations: TranslationService) {}
+  constructor(
+    private translations: TranslationService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     if (this.listenTo) {
-      this.length = this.listenTo.value ? this.listenTo.value.length : 0;
-      this.skipNextAnnouncement = this.length > 0; //If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
-      this.maxlength = this.maxlength = this.listenTo.maxlength
-        ? +this.listenTo.maxlength
-        : undefined;
+      // A FormControl initialized with a value writes directly to the nativeElement.
+      // Check for this scenario first, before checking for listenTo's value @Input.
+      const initialValue = this.listenTo.nativeValue ?? this.listenTo.value ?? '';
+      this.length = initialValue.length;
+      this.skipNextAnnouncement = this.length > 0; // If there is already text in the input, skip the first announcement so we don't announce on refresh or prefilled text fields.
+      this.maxlength = this.listenTo.maxlength ? +this.listenTo.maxlength : undefined;
+      this.cdr.detectChanges();
       this._inputChangeSubscription = this.listenTo.kirbyChange
         .pipe(
           tap((value) => (this.length = value?.length || 0)),

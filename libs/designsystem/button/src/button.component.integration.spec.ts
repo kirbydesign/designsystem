@@ -1,6 +1,4 @@
-import { IonIcon } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent, MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -224,7 +222,7 @@ describe('ButtonComponent in Kirby dropdown', () => {
   let spectator: SpectatorHost<DropdownComponent>;
   const createHost = createHostFactory({
     component: DropdownComponent,
-    imports: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
+    imports: [ButtonComponent, CardComponent, ItemComponent, IconComponent],
   });
 
   it('should render with space between text and icon', () => {
@@ -242,7 +240,7 @@ describe('ButtonComponent configured with icon only', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    imports: [MockComponent(IconComponent)],
+    imports: [IconComponent],
   });
 
   type AttentionLevel = '1' | '2' | '3';
@@ -399,7 +397,7 @@ describe('ButtonComponent configured with text and icon', () => {
   let content: Element;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    imports: [IconComponent, MockComponent(IonIcon)],
+    imports: [TestHelper.ionicModuleForTest, IconComponent],
   });
 
   it('should render with correct icon font-size', () => {
@@ -548,7 +546,7 @@ describe('ButtonComponent configured with text and icon using an ngIf directive'
 
   const createHost = createHostFactory({
     component: ButtonComponent,
-    imports: [MockComponent(IconComponent)],
+    imports: [IconComponent],
   });
 
   it('should not have the icon-only class, if kirby-icon is inserted before text', () => {

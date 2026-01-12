@@ -2,7 +2,7 @@
 
 import 'zone.js';
 import 'zone.js/testing';
-// eslint-disable-next-line import/order
+
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
@@ -10,9 +10,15 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 
 import { ElementCssCustomMatchers } from '@kirbydesign/designsystem/testing';
+import { NgModule, provideZoneChangeDetection } from '@angular/core';
 
+@NgModule({
+  providers: [provideZoneChangeDetection()],
+  imports: [BrowserDynamicTestingModule],
+})
+class TestSetupModule {}
 // First, initialize the Angular testing environment.
-getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+getTestBed().initTestEnvironment(TestSetupModule, platformBrowserDynamicTesting(), {
   teardown: { destroyAfterEach: false },
 });
 

@@ -1,8 +1,7 @@
 import { ElementRef } from '@angular/core';
-import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator';
 import { Chart, ChartType as ChartJSType, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { MockProvider } from 'ng-mocks';
 
 import { chartConfigHasType } from '@kirbydesign/designsystem/helpers';
 import { deepCopy } from '@kirbydesign/designsystem/helpers';
@@ -18,7 +17,7 @@ describe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
-  const mockChartConfigService = MockProvider(ChartConfigService, {
+  const mockChartConfigService = mockProvider(ChartConfigService, {
     getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPES_CONFIG[chartType]),
     getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATIONS_CONFIG[type],
     chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPES_CONFIG[type].type as ChartJSType,
@@ -261,10 +260,10 @@ describe('ChartJSService', () => {
 
           /* This assertion relies on the assumption that:
           1. if chart.data.labels is empty &
-          2. datasets contains string along the index axis 
-          : then the strings in datasets will be used as labels. 
+          2. datasets contains string along the index axis
+          : then the strings in datasets will be used as labels.
 
-          This assumption comes from the internal logic of chartjs. 
+          This assumption comes from the internal logic of chartjs.
           */
           const chartData = chartJSService['chart'].data;
           expect(chartJSService['chart'].options.indexAxis).toEqual('x');
@@ -754,9 +753,9 @@ describe('ChartJSService', () => {
     });
 
     it('should mark the given elements as highlighted for respective datasets', () => {
-      /* I have not found a way to directly test which color each datapoint is rendered with. 
-      That would however have been the better approach, as it can be seen directly how it is 
-      rendered. But this will suffice for now - the assumption is, that if it is marked 
+      /* I have not found a way to directly test which color each datapoint is rendered with.
+      That would however have been the better approach, as it can be seen directly how it is
+      rendered. But this will suffice for now - the assumption is, that if it is marked
       as highlighted in the dataset, it is rendered with the correct color */
       const highlightedElements: ChartHighlightedElements = [
         [0, 1],

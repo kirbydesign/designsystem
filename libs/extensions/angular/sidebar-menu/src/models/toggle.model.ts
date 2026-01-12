@@ -1,5 +1,4 @@
-export type ToggleButton = {
+export type Toggle = {
   checkedIcon: string;
   uncheckedIcon: string;
-  isChecked: boolean;
 };

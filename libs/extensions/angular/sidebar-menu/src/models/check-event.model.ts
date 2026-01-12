@@ -1,6 +1,4 @@
-import { SidebarMenuItem } from './menu-item';
-
-export type CheckEvent<T extends SidebarMenuItem> = {
-  item: T;
-  checked: boolean;
+export type CheckEvent = {
+  id: string;
+  isChecked: boolean;
 };

@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem';
+import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -18,6 +18,14 @@ export class MockPopoverComponent {
   @Input() popout: HorizontalDirection | `${HorizontalDirection}`;
   @Input() target: HTMLElement | ElementRef<HTMLElement>;
   @Output() willHide = new EventEmitter<void>();
+
+  hide() {
+    // NOOP
+  }
+
+  show() {
+    // NOOP
+  }
 }
 
 // #endregion

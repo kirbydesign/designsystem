@@ -1,6 +1,5 @@
 import { Component, computed, input } from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { MenuItemSize } from '../../types';
 
 @Component({
@@ -11,7 +10,7 @@ import { MenuItemSize } from '../../types';
   },
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.scss'],
-  imports: [IconModule, BadgeComponent],
+  imports: [IconModule],
 })
 export class MenuItemComponent {
   readonly id = input.required<string>();

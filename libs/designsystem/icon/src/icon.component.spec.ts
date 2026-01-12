@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { IonIcon } from '@ionic/angular/standalone';
-import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ThemeColorDirective } from '../../src/lib';
 
@@ -16,7 +15,12 @@ const { getColor, iconFontSize } = DesignTokenHelper;
 describe('IconComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [IconComponent, TestWrapperComponent, MockComponent(IonIcon), ThemeColorDirective],
+      imports: [
+        TestHelper.ionicModuleForTest,
+        IconComponent,
+        TestWrapperComponent,
+        ThemeColorDirective,
+      ],
       providers: [IconRegistryService],
     });
   }));
