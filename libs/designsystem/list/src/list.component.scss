@@ -2,7 +2,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$divider-color: utils.get-color('background-color');
+$divider-color: var(--kirby-list-item-border-color);
 $shadow: utils.get-elevation(2);
 $item-height: utils.size('xxxl');
 
@@ -209,13 +209,14 @@ ion-item-options[side='end'] {
 }
 
 :host([shape='none']) {
+  --kirby-list-item-border-color: #{utils.get-color('medium')};
+
   .list,
   .list-items {
     box-shadow: none;
     border-radius: unset;
 
     --kirby-item-background: transparent;
-    --kirby-list-item-border-color: #{utils.get-color('medium')};
   }
 }
 
@@ -234,6 +235,10 @@ ion-item-options[side='end'] {
       }
     }
   }
+}
+
+:host-context([shape='none']) .item-native {
+  background-color: transparent !important;
 }
 
 @each $sizeName, $size in utils.$sizes {

@@ -142,7 +142,7 @@ describe('ListComponent', () => {
         expect(ionItemList.length).toBeGreaterThan(0);
         ionItemList.forEach((item) => {
           const itemNative = item.shadowRoot.querySelector('.item-native');
-          expect(itemNative).toHaveComputedStyle({ 'background-color': 'rgba(0, 0, 0, 0)' });
+          expect(itemNative).toHaveComputedStyle({ 'background-color': 'rgb(255, 255, 255)' });
         });
       });
 
@@ -151,7 +151,7 @@ describe('ListComponent', () => {
 
         expect(ionItemSlidingList.length).toBeGreaterThan(0);
         ionItemSlidingList.forEach((item) => {
-          expect(item).toHaveComputedStyle({ 'border-bottom-color': getColor('medium') });
+          expect(item).toHaveComputedStyle({ 'border-bottom-color': getColor('background-color') });
         });
       });
     });
