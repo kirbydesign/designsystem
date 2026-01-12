@@ -70,6 +70,7 @@ ion-tab-button {
   @include utils.media('>=medium') {
     flex: none;
     flex-direction: row;
+    font-size: min(utils.font-size('s'), $maximum-font-size);
 
     --padding-start: #{utils.size('m')};
     --padding-end: #{utils.size('m')};
