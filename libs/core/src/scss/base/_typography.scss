@@ -1,6 +1,6 @@
-@use 'functions';
 @use 'item-typography';
 
+@import '@ionic/angular/css/typography';
 @import '@fontsource/roboto/300';
 @import '@fontsource/roboto/400';
 @import '@fontsource/roboto/500';
@@ -18,7 +18,7 @@ h4,
 p,
 .p {
   margin: 0;
-  margin-bottom: functions.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 }
 
 kirby-app .page-title {
@@ -38,24 +38,24 @@ $in-label-selector: 'ion-item kirby-label ion-label > :is(#{item-typography.$slo
 .kirby-text-display-1,
 #{$in-item-selector}.kirby-text-display-1,
 #{$in-label-selector}.kirby-text-display-1 {
-  font-size: functions.font-size('xxxxl');
-  font-weight: functions.font-weight('black');
+  font-size: var(--kirby-font-size-xxxxl);
+  font-weight: var(--kirby-font-weight-black);
   line-height: normal;
 }
 
 .kirby-text-display-2,
 #{$in-item-selector}.kirby-text-display-2,
 #{$in-label-selector}.kirby-text-display-2 {
-  font-size: functions.font-size('xxxl');
-  font-weight: functions.font-weight('black');
+  font-size: var(--kirby-font-size-xxxl);
+  font-weight: var(--kirby-font-weight-black);
   line-height: normal;
 }
 
 .kirby-text-display-3,
 #{$in-item-selector}.kirby-text-display-3,
 #{$in-label-selector}.kirby-text-display-3 {
-  font-size: functions.font-size('xxl');
-  font-weight: functions.font-weight('black');
+  font-size: var(--kirby-font-size-xxl);
+  font-weight: var(--kirby-font-weight-black);
   line-height: normal;
 }
 
@@ -64,9 +64,9 @@ h1,
 .kirby-text-xlarge,
 #{$in-item-selector}.kirby-text-xlarge,
 #{$in-label-selector}.kirby-text-xlarge {
-  font-size: functions.font-size('xl');
-  font-weight: functions.font-weight('black');
-  line-height: functions.line-height('xl');
+  font-size: var(--kirby-font-size-xl);
+  font-weight: var(--kirby-font-weight-black);
+  line-height: var(--kirby-line-height-xl);
 }
 
 h2,
@@ -74,9 +74,9 @@ h2,
 .kirby-text-large,
 #{$in-item-selector}.kirby-text-large,
 #{$in-label-selector}.kirby-text-large {
-  font-size: functions.font-size('l');
-  font-weight: functions.font-weight('bold');
-  line-height: functions.line-height('l');
+  font-size: var(--kirby-font-size-l);
+  font-weight: var(--kirby-font-weight-bold);
+  line-height: var(--kirby-line-height-l);
 }
 
 h3,
@@ -84,9 +84,9 @@ h3,
 .kirby-text-medium,
 #{$in-item-selector}.kirby-text-medium,
 #{$in-label-selector}.kirby-text-medium {
-  font-size: functions.font-size('m');
-  font-weight: functions.font-weight('bold');
-  line-height: functions.line-height('m');
+  font-size: var(--kirby-font-size-m);
+  font-weight: var(--kirby-font-weight-bold);
+  line-height: var(--kirby-line-height-m);
 }
 
 h4,
@@ -94,9 +94,9 @@ h4,
 .kirby-text-normal-bold,
 #{$in-item-selector}.kirby-text-normal-bold,
 #{$in-label-selector}.kirby-text-normal-bold {
-  font-size: functions.font-size('n');
-  font-weight: functions.font-weight('bold');
-  line-height: functions.line-height('n');
+  font-size: var(--kirby-font-size-n);
+  font-weight: var(--kirby-font-weight-bold);
+  line-height: var(--kirby-line-height-n);
 }
 
 p,
@@ -104,41 +104,41 @@ p,
 .kirby-text-normal,
 #{$in-item-selector}.kirby-text-normal,
 #{$in-label-selector}.kirby-text-normal {
-  font-size: functions.font-size('n');
-  line-height: functions.line-height('n');
+  font-size: var(--kirby-font-size-n);
+  line-height: var(--kirby-line-height-n);
 }
 
 .kirby-text-small,
 #{$in-item-selector}.kirby-text-small,
 #{$in-label-selector}.kirby-text-small {
-  font-size: functions.font-size('s');
-  line-height: functions.line-height('s');
+  font-size: var(--kirby-font-size-s);
+  line-height: var(--kirby-line-height-s);
 }
 
 .kirby-text-small-light,
 #{$in-item-selector}.kirby-text-small-light,
 #{$in-label-selector}.kirby-text-small-light {
-  font-size: functions.font-size('s');
-  font-weight: functions.font-weight('light');
-  line-height: functions.line-height('s');
+  font-size: var(--kirby-font-size-s);
+  font-weight: var(--kirby-font-weight-light);
+  line-height: var(--kirby-line-height-s);
 }
 
 .kirby-text-xsmall,
 #{$in-item-selector}.kirby-text-xsmall,
 #{$in-label-selector}.kirby-text-xsmall {
-  font-size: functions.font-size('xs');
-  line-height: functions.line-height('xs');
+  font-size: var(--kirby-font-size-xs);
+  line-height: var(--kirby-line-height-xs);
 }
 
 .kirby-text-xxsmall,
 #{$in-item-selector}.kirby-text-xxsmall,
 #{$in-label-selector}.kirby-text-xxsmall {
-  font-size: functions.font-size('xxs');
-  line-height: functions.line-height('xxs');
+  font-size: var(--kirby-font-size-xxs);
+  line-height: var(--kirby-line-height-xxs);
 }
 
 .kirby-text-bold,
 #{$in-item-selector}.kirby-text-bold,
 #{$in-label-selector}.kirby-text-bold {
-  font-weight: functions.font-weight('bold');
+  font-weight: var(--kirby-font-weight-bold);
 }
