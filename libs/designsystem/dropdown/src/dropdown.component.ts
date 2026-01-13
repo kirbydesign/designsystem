@@ -330,10 +330,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (!this.isOpen) {
       this.state = OpenState.opening;
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
-      this.showDropdownTimeoutId = setTimeout(
-        () => this.showDropdown(),
-        DropdownComponent.OPEN_DELAY_IN_MS
-      );
+      setTimeout(() => this.showDropdown(), DropdownComponent.OPEN_DELAY_IN_MS);
 
       // Move focus to selected item (if any) or first item
       this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
