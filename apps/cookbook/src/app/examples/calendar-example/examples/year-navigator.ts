@@ -4,7 +4,7 @@ import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 
 const config = {
   template: `<kirby-card>
-  <kirby-calendar [yearNavigatorOptions]="yearNavigatorOptions" [usePopover]="true"></kirby-calendar>
+  <kirby-calendar [yearNavigatorOptions]="yearNavigatorOptions"></kirby-calendar>
 </kirby-card>`,
 };
 
