@@ -55,9 +55,31 @@ export class DesignTokenHelper {
     return styles.sizes[key];
   }
 
+  /**
+   * Returns the base pixel value for a font size.
+   * Handles three formats used in non-linear font scaling:
+   * - Fixed px values (e.g., '72px') - returns as-is
+   * - Clamp values (e.g., 'clamp(32px, 2rem, 38px)') - returns the min (base) value
+   * - Rem values (e.g., '1rem') - converts to px using BASE_PIXEL_VALUE
+   */
   public static fontSize(key: keyof typeof styles.fontSizes): string {
-    const remValue = styles.fontSizes[key];
-    const remToPxValue = parseFloat(remValue) * BASE_PIXEL_VALUE;
+    const value = styles.fontSizes[key];
+
+    // Handle clamp() values - extract the first (min/base) value
+    if (value.startsWith('clamp(')) {
+      const match = value.match(/clamp\(([^,]+),/);
+      if (match) {
+        return match[1].trim();
+      }
+    }
+
+    // Handle px values - return as-is
+    if (value.endsWith('px')) {
+      return value;
+    }
+
+    // Handle rem values - convert to px
+    const remToPxValue = parseFloat(value) * BASE_PIXEL_VALUE;
     return `${remToPxValue}px`;
   }
 

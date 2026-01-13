@@ -33,17 +33,31 @@ $relative-sizes: (
 /*
   FONT SETTINGS
 ****************************************************************************/
+// Non-linear font scaling: Large display text uses fixed px values to prevent
+// excessive scaling at high zoom levels. Heading sizes use clamp() to cap scaling.
+// Body text (n and below) scales linearly with user font-size preference.
+// See: https://developer.android.com/about/versions/14/features#non-linear-font-scaling
 $font-sizes: (
-  xxxxl: 4.5rem,
-  xxxl: 3.5rem,
-  xxl: 2.5rem,
-  xl: 2rem,
-  l: 1.375rem,
-  m: 1.125rem,
+  // Display sizes - fixed, no scaling (already large enough)
+  xxxxl: 72px,
+  xxxl: 56px,
+  xxl: 40px,
+  // Heading (primarily) sizes - capped non-linear scaling
+  // h1 - minimal scaling (~1.19x at 200%)
+  xl: clamp(32px, 2rem, 38px),
+  // h2 - moderate scaling (~1.64x at 200%)
+  l: clamp(22px, 1.375rem, 36px),
+  // h3 - near-full scaling (~1.89x at 200%)
+  m: clamp(18px, 1.125rem, 34px),
+  // Body text sizes - full linear scaling
+  // p/normal
   n: 1rem,
+  // small
   s: 0.875rem,
+  // x-small
   xs: 0.75rem,
-  xxs: 0.625rem,
+  // xx-small
+  xxs: 0.625rem
 ) !default;
 $line-height: (
   // h1:
