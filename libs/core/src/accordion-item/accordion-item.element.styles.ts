@@ -86,7 +86,7 @@ export default css`
   }
 
   button[disabled] .kirby-icon {
-    color: var(--kirby-color-semi-dark);
+    color: var(--kirby-color-semi-dark, #8e8e8e);
   }
 
   button[disabled] .title {
