@@ -101,9 +101,9 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
     await router.navigateByUrl(firstPageUrl);
     await spectator.fixture.whenStable();
 
-    await TestHelper.whenTrue(() => document.activeElement !== document.body); // Wait for focus to be set by Ionic
-
     const firstPageH1 = spectator.query('first-page h1');
+
+    await TestHelper.whenTrue(() => document.activeElement === firstPageH1); // Wait for focus to be set by Ionic
 
     expect(document.activeElement.tagName).toBe(firstPageH1.tagName);
     expect(document.activeElement.textContent).toBe(firstPageH1.textContent);
@@ -111,11 +111,11 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
     // Navigate to second page via link
     spectator.click('a');
     await spectator.fixture.whenStable();
-    await TestHelper.whenTrue(() => document.activeElement !== document.body); // Wait for focus to be set by Ionic
-
     const secondPageH1 = spectator.query('second-page h1');
 
-    expect(document.activeElement.tagName).toBe(firstPageH1.tagName);
+    await TestHelper.whenTrue(() => document.activeElement === secondPageH1); // Wait for focus to be set by Ionic
+
+    expect(document.activeElement.tagName).toBe(secondPageH1.tagName);
     expect(document.activeElement.textContent).toBe(secondPageH1.textContent);
   });
 
