@@ -94,7 +94,7 @@ h4,
 .kirby-text-normal-bold,
 #{$in-item-selector}.kirby-text-normal-bold,
 #{$in-label-selector}.kirby-text-normal-bold {
-  font-size: clamp(16px, var(--kirby-font-size-n), 32px);
+  font-size: var(--kirby-font-size-n);
   font-weight: var(--kirby-font-weight-bold);
   line-height: var(--kirby-line-height-n);
 }
