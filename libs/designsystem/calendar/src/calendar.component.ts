@@ -93,8 +93,8 @@ export class CalendarComponent implements OnInit, OnChanges {
    */
   @Input() set usePopover(_value: boolean) {
     console.warn(
-      `[Kirby Calendar] The 'usePopover' input is deprecated and no longer has any effect. ` +
-        `The year selection dropdown now always uses popover positioning. This input will be removed in a future major version.`
+      `[Kirby Calendar] The 'usePopover' input is deprecated and no longer has any effect. 
+        The year selection dropdown now always uses popover positioning. This input will be removed in a future major version.`
     );
   }
   /**
