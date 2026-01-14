@@ -340,9 +340,10 @@ describe('DropdownComponent', () => {
     });
 
     describe('when configured with popout direction', () => {
-      it('open card to the right when popout=right', () => {
+      it('open card to the right when popout=right', fakeAsync(() => {
         spectator.component.popout = HorizontalDirection.right;
-        spectator.component['state'] = OpenState.open;
+        spectator.component.open();
+        tick(openDelayInMs);
         spectator.detectChanges();
 
         const buttonRect = buttonElement.getBoundingClientRect();
@@ -350,12 +351,13 @@ describe('DropdownComponent', () => {
         const cardRect = card.getBoundingClientRect();
 
         expect(cardRect.left).toEqual(buttonRect.left);
-      });
+      }));
 
-      it('open card to the left when popout=left', () => {
+      it('open card to the left when popout=left', fakeAsync(() => {
         spectator.component.popout = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
-        spectator.component['state'] = OpenState.open;
+        spectator.component.open();
+        tick(openDelayInMs);
         spectator.detectChanges();
 
         const card = spectator.query('kirby-card');
@@ -363,7 +365,7 @@ describe('DropdownComponent', () => {
         const cardRect = card.getBoundingClientRect();
 
         expect(cardRect.right).toEqual(buttonRect.right);
-      });
+      }));
     });
 
     describe('when configured with expand=block', () => {
@@ -382,15 +384,16 @@ describe('DropdownComponent', () => {
         expect(buttonWidth).toEqual(componentWidth);
       });
 
-      it('should render dropdown with full width', () => {
-        spectator.component['state'] = OpenState.open;
+      it('should render dropdown with full width', fakeAsync(() => {
+        spectator.component.open();
+        tick(openDelayInMs);
         spectator.detectChanges();
         const card = spectator.query('kirby-card');
         const componentWidth = spectator.element.clientWidth;
         const cardWidth = card.getBoundingClientRect().width;
         expect(cardWidth).toEqual(componentWidth);
         expect(card).toHaveComputedStyle({ 'min-width': '0px', 'max-width': 'none' });
-      });
+      }));
     });
 
     describe('when closed', () => {
