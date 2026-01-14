@@ -600,13 +600,28 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   _onPopoverWillHide() {
     this.state = OpenState.closed;
     this.buttonElement.nativeElement.focus();
+    this._onTouched();
+  }
+
+  @HostListener('focusout', ['$event'])
+  _onFocusOut(event: FocusEvent) {
+    const relatedTarget = event.relatedTarget as HTMLElement | null; // relatedTarget is the element receiving focus
+    const isOnTriggerButton =
+      relatedTarget && this.elementRef.nativeElement.contains(relatedTarget);
+    const isInsidePopover = relatedTarget && relatedTarget.closest('kirby-popover');
+
+    if (!isOnTriggerButton && !isInsidePopover) {
+      if (this.isOpen) {
+        this.close();
+      }
+      this._onTouched();
+    }
   }
 
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
   _onEnterOrEscape() {
     this.close();
-    this._onTouched();
   }
 
   _onPopoverClick() {
