@@ -11,7 +11,6 @@ import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
@@ -24,6 +23,7 @@ import { OpenState } from './dropdown.types';
 class OnPushHostComponent {}
 
 describe('DropdownComponent', () => {
+  let spectator: SpectatorHost<DropdownComponent>;
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -32,6 +32,16 @@ describe('DropdownComponent', () => {
     { text: 'Item 5', value: 5 },
   ];
   const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
+
+  afterEach(() => {
+    // Ensure dropdown is closed to trigger popover cleanup
+    if (spectator?.component?.isOpen) {
+      spectator.component.close();
+      spectator.detectChanges();
+    }
+    // Clean up any lingering popover elements from document.body
+    document.querySelectorAll('kirby-popover').forEach((el) => el.remove());
+  });
 
   describe('by default', () => {
     const createHost = createHostFactory({
@@ -46,7 +56,6 @@ describe('DropdownComponent', () => {
       ],
     });
 
-    let spectator: SpectatorHost<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
 
     beforeEach(() => {
@@ -63,10 +72,6 @@ describe('DropdownComponent', () => {
 
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
-    });
-
-    it('should have popover disabled', () => {
-      expect(spectator.component.usePopover).toBeFalse();
     });
 
     it('should be closed', () => {
@@ -127,7 +132,10 @@ describe('DropdownComponent', () => {
       expect(buttonElement.getAttribute('id')).toBe(comboboxId);
     });
 
-    it('should have correct item size', () => {
+    it('should have correct item size', fakeAsync(() => {
+      spectator.component.open();
+      tick(openDelayInMs);
+      spectator.detectChanges();
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
       expect(itemElements).toHaveLength(items.length);
       itemElements.forEach((item) => {
@@ -135,7 +143,7 @@ describe('DropdownComponent', () => {
           '--min-height': DesignTokenHelper.dropdownItemHeight(),
         });
       });
-    });
+    }));
 
     describe('ARIA attributes', () => {
       let listboxId: string;
@@ -680,6 +688,14 @@ describe('DropdownComponent', () => {
         it('should close dropdown', () => {
           buttonElement.dispatchEvent(new FocusEvent('blur'));
           spectator.detectChanges();
+
+          expect(spectator.component.isOpen).toBeFalsy();
+        });
+      });
+
+      describe('and popover is clicked', () => {
+        it('should close dropdown', () => {
+          spectator.click('kirby-popover');
 
           expect(spectator.component.isOpen).toBeFalsy();
         });
@@ -1272,9 +1288,6 @@ describe('DropdownComponent', () => {
 
     beforeEach(fakeAsync(() => {
       cardElement = spectator.query('kirby-card');
-      // Assert that card is initially hidden:
-      expect(cardElement).toBeHidden();
-      expect(cardElement).toHaveComputedStyle({ opacity: '0' });
       // Act:
       spectator.click('button');
       tick(openDelayInMs);
@@ -1291,7 +1304,6 @@ describe('DropdownComponent', () => {
 
     it('options should be visible', () => {
       expect(cardElement).toBeVisible();
-      expect(cardElement).toHaveComputedStyle({ opacity: '1' });
     });
 
     it('should update disabled state when form control is disabled', () => {
@@ -1395,7 +1407,11 @@ describe('DropdownComponent', () => {
       );
     });
 
-    it('should have correct item size', () => {
+    it('should have correct item size', fakeAsync(() => {
+      spectator.component.open();
+      tick(openDelayInMs);
+      spectator.detectChanges();
+
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
       expect(itemElements).toHaveLength(items.length);
       itemElements.forEach((item) => {
@@ -1403,7 +1419,7 @@ describe('DropdownComponent', () => {
           '--min-height': DesignTokenHelper.dropdownItemHeight(),
         });
       });
-    });
+    }));
 
     it('should set up click listeners for slotted items', () => {
       spectator.detectChanges();
@@ -1425,74 +1441,6 @@ describe('DropdownComponent', () => {
         expect(spectator.component['disposeItemClickListeners']).toHaveLength(0);
         expect(unlistenCounter).toEqual(unlistenMockArrayLength);
       });
-    });
-  });
-
-  describe('when configured with expand=block and usePopover=true', () => {
-    const createHost = createHostFactory({
-      component: DropdownComponent,
-      imports: [
-        TestHelper.ionicModuleForTest,
-        ItemComponent,
-        ButtonComponent,
-        CardComponent,
-        IconComponent,
-        PopoverComponent,
-      ],
-    });
-
-    let spectator: SpectatorHost<DropdownComponent>;
-
-    beforeEach(() => {
-      spectator = createHost(
-        `<kirby-dropdown [items]="items" [usePopover]="usePopover" [expand]="expand"></kirby-dropdown>`,
-        {
-          hostProps: {
-            items: items,
-            expand: 'block',
-            usePopover: true,
-          },
-        }
-      );
-    });
-
-    // Flaky test
-    xit('should update popover card size when resized', async () => {
-      const resizeObserverService = spectator.inject(ResizeObserverService);
-      const handleResizeSpy = spyOn(resizeObserverService as any, 'handleResize').and.callThrough();
-      const initWidth = spectator.element.clientWidth;
-      const popoverCard = spectator.element.querySelector<HTMLElement>('kirby-card');
-      const initCardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
-      expect(initCardWidth).toEqual(`${initWidth}px`);
-
-      const newWidth = '200px';
-      (spectator.hostElement as HTMLElement).style.width = newWidth;
-      await TestHelper.waitForResizeObserver();
-      // Resize observe callback can be flaky in test, so ensure width has changed before asserting:
-      await TestHelper.whenTrue(() => spectator.element.clientWidth !== initWidth);
-
-      const cardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
-      if (cardWidth !== newWidth) {
-        console.warn('*** Card width not changed yet ***');
-        console.warn(
-          '*** After 1st wait - handleResizeSpy.calls.count:',
-          handleResizeSpy.calls.count()
-        );
-        console.warn('*** After 1st wait - cardWidth:', cardWidth);
-        // ResizeObserver has not fired yet, let's wait one more time:
-        await TestHelper.waitForResizeObserver();
-        // Commented out for now as we want the test to fail and see the logs...
-        // cardWidth = popoverCard.style.getPropertyValue('--kirby-card-width');
-        console.warn(
-          '*** After 2nd wait - handleResizeSpy.calls.count:',
-          handleResizeSpy.calls.count()
-        );
-        console.warn(
-          '*** After 2nd wait - cardWidth:',
-          popoverCard.style.getPropertyValue('--kirby-card-width')
-        );
-      }
-      expect(cardWidth).toEqual(newWidth);
     });
   });
 });
