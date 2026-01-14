@@ -32,7 +32,12 @@ describe('DropdownComponent integration', () => {
   let cardElement: HTMLElement;
 
   afterEach(() => {
-    spectator.query('kirby-popover').remove();
+    if (spectator?.component?.isOpen) {
+      spectator.component.close();
+      spectator.detectChanges();
+    }
+    // Clean up any lingering popover elements from document.body
+    document.querySelectorAll('kirby-popover').forEach((el) => el.remove());
   });
 
   describe('with default change detection strategy', () => {
