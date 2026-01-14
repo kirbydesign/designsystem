@@ -33,17 +33,21 @@ $relative-sizes: (
 /*
   FONT SETTINGS
 ****************************************************************************/
+// Non-linear font scaling: Display, Heading and body text use clamp()
+// to prioritize user preferences but maintain hierarchy with:
+// - minimum values that enforce a minimum font size of 10px
+// - maximum values that provide a maximum font resize of 200%
 $font-sizes: (
-  xxxxl: 4.5rem,
-  xxxl: 3.5rem,
-  xxl: 2.5rem,
-  xl: 2rem,
-  l: 1.375rem,
-  m: 1.125rem,
-  n: 1rem,
-  s: 0.875rem,
-  xs: 0.75rem,
-  xxs: 0.625rem,
+  xxxxl: clamp(56px, 4.5rem, 72px),
+  xxxl: clamp(45px, 3.5rem, 56px),
+  xxl: clamp(32px, 2.5rem, 46px),
+  xl: clamp(26px, 2rem, 41px),
+  l: clamp(19px, 1.375rem, 38px),
+  m: clamp(14px, 1.125rem, 35px),
+  n: clamp(13px, 1rem, 32px),
+  s: clamp(12px, 0.875rem, 28px),
+  xs: clamp(11px, 0.75rem, 24px),
+  xxs: clamp(10px, 0.625rem, 20px),
 ) !default;
 $line-height: (
   // h1:

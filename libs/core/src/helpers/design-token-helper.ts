@@ -55,10 +55,19 @@ export class DesignTokenHelper {
     return styles.sizes[key];
   }
 
+  /**
+   * Returns the pixel value for a font size at 100% zoom (16px base).
+   * Extracts the rem value from any CSS value (e.g., 'clamp(13px, 1rem, 32px)')
+   * and converts it to px. This is robust towards CSS functions like clamp, min, max.
+   */
   public static fontSize(key: keyof typeof styles.fontSizes): string {
-    const remValue = styles.fontSizes[key];
-    const remToPxValue = parseFloat(remValue) * BASE_PIXEL_VALUE;
-    return `${remToPxValue}px`;
+    const value = styles.fontSizes[key];
+    const remValue = value.split(/[,\s()]/).find((part) => part.endsWith('rem'));
+
+    if (remValue) {
+      return `${parseFloat(remValue) * BASE_PIXEL_VALUE}px`;
+    }
+    return value;
   }
 
   public static iconFontSize(key: keyof typeof styles.iconFontSizes): string {
