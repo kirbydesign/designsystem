@@ -385,6 +385,7 @@ describe('DropdownComponent', () => {
       });
 
       it('should render dropdown with full width', fakeAsync(() => {
+        spectator.component.ngAfterViewInit();
         spectator.component.open();
         tick(openDelayInMs);
         spectator.detectChanges();
@@ -689,7 +690,7 @@ describe('DropdownComponent', () => {
 
       describe('and looses focus', () => {
         it('should close dropdown', () => {
-          buttonElement.dispatchEvent(new FocusEvent('blur'));
+          buttonElement.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
           spectator.detectChanges();
 
           expect(spectator.component.isOpen).toBeFalsy();
@@ -1116,7 +1117,7 @@ describe('DropdownComponent', () => {
         const onTouchedSpy = jasmine.createSpy('_onTouched');
         spectator.component.registerOnTouched(onTouchedSpy);
 
-        buttonElement.dispatchEvent(new FocusEvent('blur'));
+        buttonElement.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
         spectator.detectChanges();
 
         expect(onTouchedSpy).toHaveBeenCalled();
