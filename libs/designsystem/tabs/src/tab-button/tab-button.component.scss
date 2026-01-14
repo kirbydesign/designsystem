@@ -3,6 +3,14 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+// There is a limit to how large text can be on narrow viewports with text resized
+// before tab button texts start to collide horizontally, so we cap it at 135% for narrow viewports
+$maximum-font-size: utils.size('xs') * 1.35;
+
+// badge size is fixed on narrow viewports to ensure it is properly sized accordion to the tab icon
+$fixed-badge-size: 10px;
+$wide-viewport-badge-margin: 0.4em;
+
 :host {
   // Ignore the tab-button elements box and replace with its content
   display: contents;
@@ -33,19 +41,20 @@ ion-tab-button {
     flex: 1 1 0%;
     max-width: 168px;
     font-weight: utils.font-weight('medium');
-    font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
+    font-size: min(utils.font-size('xs'), $maximum-font-size);
 
     --color: #{utils.get-text-color('semi-dark')};
     --color-selected: #{utils.get-color('black')};
     --padding-start: 0;
     --padding-end: 0;
+    --kirby-icon-font-size: #{utils.size('m')};
 
     // Magic values here as we have no tokens that gives
     // badge the correct position in relation to the tab icon
     --kirby-badge-position: absolute;
     --kirby-badge-top: 0.55em;
     --kirby-badge-left: calc(50% + 0.4em);
+    --kirby-badge-font-size: #{$fixed-badge-size};
   }
   /* stylelint-enable no-duplicate-selectors */
 
@@ -61,8 +70,7 @@ ion-tab-button {
   @include utils.media('>=medium') {
     flex: none;
     flex-direction: row;
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
+    font-size: min(utils.font-size('s'), $maximum-font-size);
 
     --padding-start: #{utils.size('m')};
     --padding-end: #{utils.size('m')};
@@ -74,12 +82,13 @@ ion-tab-button {
     --kirby-badge-left: 1.6em;
 
     @include utils.slotted(kirby-badge) {
-      &.md {
+      &.md,
+      &[size='md'] {
         --kirby-badge-position: relative;
         --kirby-badge-top: 0;
         --kirby-badge-left: 0;
 
-        margin-left: utils.size('xxxxs');
+        margin-left: $wide-viewport-badge-margin;
 
         // Using / for division outside of calc() is deprecated
         // and will be removed in Dart Sass 2.0.0. Use math.div() instead.
@@ -94,6 +103,11 @@ ion-tab-button {
   }
 
   @include utils.media('>=large') {
+    font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
+
+    --kirby-badge-font-size: initial;
+
     @include utils.not-touch {
       --padding-start: #{utils.size('xs')};
       --padding-end: #{utils.size('xs')};

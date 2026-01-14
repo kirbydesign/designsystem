@@ -1,9 +1,10 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$badge-size-small: utils.relative-size('xxs');
-$badge-size-medium: utils.relative-size('s');
-$badge-padding-inline: 0.3125rem;
-$badge-padding-block: 0.1875rem;
+$badge-size-small: 0.8em;
+$badge-size-medium: 1.6em;
+$badge-padding-inline: 0.5em;
+$badge-padding-block: 0.3em;
+$badge-icon-size: 1.6em;
 
 :host {
   position: var(--kirby-badge-position, relative);
@@ -24,7 +25,7 @@ $badge-padding-block: 0.1875rem;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
 
-    --kirby-icon-font-size: #{utils.font-size('n')};
+    --kirby-icon-font-size: #{$badge-icon-size};
   }
 
   // Colors

@@ -19,12 +19,17 @@ $toolbar-shaded-background: color.mix(
 );
 $toolbar-button-size: utils.size('xl');
 $toolbar-button-spacing: utils.size('xxs');
+$toolbar-max-font-size: 18px * 1.2;
 
 ion-header,
 ion-toolbar {
   --background: #{utils.get-color('background-color')};
 
   margin: 0 auto;
+}
+
+ion-title h1 {
+  font-size: min(utils.font-size('m'), $toolbar-max-font-size);
 }
 
 ion-toolbar {
