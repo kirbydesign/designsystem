@@ -123,7 +123,7 @@ export const DropdownOpened: Story = {
   },
 };
 
-export const DropdownOpenedTopRight: Story = {
+export const DropdownPopoutLeft: Story = {
   args: {
     items: items,
     selectedIndex: 0,
@@ -148,7 +148,7 @@ export const DropdownOpenedTopRight: Story = {
   },
 };
 
-export const DropdownOpenedAtBottom: Story = {
+export const DropdownPopoutUpwards: Story = {
   args: {
     items: items,
     selectedIndex: 0,
