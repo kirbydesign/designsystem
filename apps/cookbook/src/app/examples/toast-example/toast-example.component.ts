@@ -6,7 +6,7 @@ import { ToastExampleDismissComponent } from './examples/dismiss';
 @Component({
   selector: 'cookbook-toast-example',
   templateUrl: './toast-example.component.html',
-  styleUrls: ['../_examples.shared.scss'],
+  styleUrls: ['./toast-example.component.scss'],
   imports: [
     ToastExampleDefaultComponent,
     ToastExampleDurationComponent,

@@ -14,7 +14,9 @@
   <h2>Default</h2>
   <p>By default, toasts will automatically dismiss after 4 seconds (4000ms).</p>
   <cookbook-example-viewer [html]="defaultExample.template" [ts]="defaultExample.codeSnippet">
-    <cookbook-toast-example-default #defaultExample></cookbook-toast-example-default>
+    <div class="example-frame">
+      <cookbook-toast-example-default #defaultExample></cookbook-toast-example-default>
+    </div>
   </cookbook-example-viewer>
 
   <h2>Duration</h2>
@@ -26,7 +28,9 @@
     to keep the toast visible until it is dismissed programmatically.
   </p>
   <cookbook-example-viewer [html]="durationExample.template" [ts]="durationExample.codeSnippet">
-    <cookbook-toast-example-duration #durationExample></cookbook-toast-example-duration>
+    <div class="example-frame">
+      <cookbook-toast-example-duration #durationExample></cookbook-toast-example-duration>
+    </div>
   </cookbook-example-viewer>
 
   <h2>Programmatic Dismiss</h2>
@@ -41,7 +45,9 @@
     .
   </p>
   <cookbook-example-viewer [html]="dismissExample.template" [ts]="dismissExample.codeSnippet">
-    <cookbook-toast-example-dismiss #dismissExample></cookbook-toast-example-dismiss>
+    <div class="example-frame">
+      <cookbook-toast-example-dismiss #dismissExample></cookbook-toast-example-dismiss>
+    </div>
   </cookbook-example-viewer>
 
   <h2>Callback</h2>
