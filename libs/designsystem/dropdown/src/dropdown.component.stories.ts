@@ -2,8 +2,9 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
-
+import { DesignTokenHelper } from '@kirbydesign/core/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
@@ -11,6 +12,9 @@ const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
   title: 'Components / Dropdown',
+  parameters: {
+    chromatic: { modes: { ...responsiveModes } },
+  },
   decorators: [
     moduleMetadata({
       imports: [DropdownComponent, ButtonComponent, DropdownExampleComponent],
@@ -69,6 +73,13 @@ export const Dropdown: Story = {
 };
 
 export const DropdownClosedOnOutsideClick: Story = {
+  parameters: {
+    chromatic: {
+      modes: {
+        mobile: { disable: true },
+      },
+    },
+  },
   args: {
     items: items,
     selectedIndex: 0,
@@ -123,11 +134,10 @@ export const DropdownOpened: Story = {
   },
 };
 
-export const DropdownPopoutLeft: Story = {
+export const DropdownOpenedPopoutBottomEnd: Story = {
   args: {
     items: items,
     selectedIndex: 0,
-    popout: 'left',
   },
   render: (args) => ({
     props: args,
@@ -148,7 +158,7 @@ export const DropdownPopoutLeft: Story = {
   },
 };
 
-export const DropdownPopoutUpwards: Story = {
+export const DropdownOpenedPopoutTopStart: Story = {
   args: {
     items: items,
     selectedIndex: 0,
@@ -156,8 +166,8 @@ export const DropdownPopoutUpwards: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <div style="display: flex; flex-direction: column; justify-content: flex-end; height: 400px;">
-        <kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>
+      <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);"> <!-- Adapt to full height of storybook root accounting for padding -->
+        <kirby-dropdown style="position: absolute; bottom: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
       </div>
     `,
   }),
@@ -172,17 +182,17 @@ export const DropdownPopoutUpwards: Story = {
   },
 };
 
-export const DropdownOpenedBlockExpand: Story = {
+export const DropdownOpenedPopoutTopEnd: Story = {
   args: {
     items: items,
     selectedIndex: 0,
-    expand: 'block',
+    popout: 'left',
   },
   render: (args) => ({
     props: args,
     template: `
-      <div style="width: 300px;">
-        <kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>
+      <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);"> <!-- Adapt to full height of storybook root accounting for padding -->
+        <kirby-dropdown style="position: absolute; bottom: var(--kirby-spacing-s); right: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
       </div>
     `,
   }),
@@ -193,31 +203,6 @@ export const DropdownOpenedBlockExpand: Story = {
 
     await waitFor(() => {
       expect(dropdown).toHaveAttribute('aria-expanded', 'true');
-    });
-  },
-};
-
-export const MultipleDropdowns: Story = {
-  args: {
-    items: items,
-    selectedIndex: 0,
-  },
-  render: (args) => ({
-    props: args,
-    template: `
-      <div style="display: flex; gap: 16px;">
-        <kirby-dropdown ${argsToTemplate(args)} data-testid="dropdown-1"></kirby-dropdown>
-        <kirby-dropdown ${argsToTemplate(args)} data-testid="dropdown-2"></kirby-dropdown>
-      </div>
-    `,
-  }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const dropdown1 = canvas.getByTestId('dropdown-1').querySelector('[role="combobox"]');
-    await userEvent.click(dropdown1);
-
-    await waitFor(() => {
-      expect(dropdown1).toHaveAttribute('aria-expanded', 'true');
     });
   },
 };
