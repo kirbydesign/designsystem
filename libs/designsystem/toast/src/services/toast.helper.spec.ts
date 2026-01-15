@@ -85,6 +85,48 @@ describe('ToastHelper', () => {
           });
         });
       });
+
+      describe('when configured with durationInMs', () => {
+        it('should pass durationInMs to ionic toast', async () => {
+          const toastController = spectator.inject(ToastController);
+          const createSpy = spyOn(toastController, 'create').and.callThrough();
+
+          overlay = await spectator.service.showToast({
+            message: testMessage,
+            messageType: 'success',
+            durationInMs: 2000,
+          });
+
+          expect(createSpy).toHaveBeenCalledWith(jasmine.objectContaining({ duration: 2000 }));
+        });
+
+        it('should pass durationInMs: 0 to ionic toast (no auto-dismiss)', async () => {
+          const toastController = spectator.inject(ToastController);
+          const createSpy = spyOn(toastController, 'create').and.callThrough();
+
+          overlay = await spectator.service.showToast({
+            message: testMessage,
+            messageType: 'success',
+            durationInMs: 0,
+          });
+
+          expect(createSpy).toHaveBeenCalledWith(jasmine.objectContaining({ duration: 0 }));
+        });
+
+        it('should use default duration when durationInMs is not specified', async () => {
+          const toastController = spectator.inject(ToastController);
+          const createSpy = spyOn(toastController, 'create').and.callThrough();
+
+          overlay = await spectator.service.showToast({
+            message: testMessage,
+            messageType: 'success',
+          });
+
+          expect(createSpy).toHaveBeenCalledWith(
+            jasmine.objectContaining({ duration: ToastHelper.DURATION_IN_MS })
+          );
+        });
+      });
     });
   });
 });
