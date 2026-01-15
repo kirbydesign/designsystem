@@ -87,7 +87,7 @@ export const DropdownClosedOnOutsideClick: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>
+      <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
          <button kirby-button style="position: absolute; top: 0; right: 0;" data-testid="outside-close-btn">
         Outside Close
       </button>
@@ -120,7 +120,7 @@ export const DropdownOpened: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>
+      <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
       <br />
       <button kirby-button>Button - below</button>
     `,
@@ -143,7 +143,7 @@ export const DropdownOpenedPopoutBottomEnd: Story = {
     props: args,
     template: `
       <div style="display: flex; justify-content: flex-end; width: 100%;">
-        <kirby-dropdown ${argsToTemplate(args)}></kirby-dropdown>
+        <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
       </div>
     `,
   }),
@@ -167,7 +167,7 @@ export const DropdownOpenedPopoutTopStart: Story = {
     props: args,
     template: `
       <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);"> <!-- Adapt to full height of storybook root accounting for padding -->
-        <kirby-dropdown style="position: absolute; bottom: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
+        <kirby-dropdown aria-label="Choose your favorite item" style="position: absolute; bottom: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
       </div>
     `,
   }),
@@ -192,7 +192,7 @@ export const DropdownOpenedPopoutTopEnd: Story = {
     props: args,
     template: `
       <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);"> <!-- Adapt to full height of storybook root accounting for padding -->
-        <kirby-dropdown style="position: absolute; bottom: var(--kirby-spacing-s); right: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
+        <kirby-dropdown aria-label="Choose your favorite item" style="position: absolute; bottom: var(--kirby-spacing-s); right: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
       </div>
     `,
   }),

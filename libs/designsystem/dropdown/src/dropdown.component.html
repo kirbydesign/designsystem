@@ -6,7 +6,7 @@
   aria-haspopup="listbox"
   [attr.aria-controls]="_listboxId"
   [attr.aria-expanded]="isOpen"
-  [attr.aria-activedescendant]="_listboxId + '-item-' + focusedIndex"
+  [attr.aria-activedescendant]="isOpen ? _listboxId + '-item-' + focusedIndex : null"
   [attr.aria-invalid]="hasError"
   [size]="size"
   [attentionLevel]="attentionLevel"
