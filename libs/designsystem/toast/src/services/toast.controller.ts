@@ -9,12 +9,11 @@ import { ToastHelper } from './toast.helper';
 export class ToastController {
   constructor(private toastHelper: ToastHelper) {}
 
-  public showToast(config: ToastConfig, onCloseToast?: () => void): Promise<Overlay> {
-    return this.toastHelper.showToast(config).then((overlay) => {
-      if (onCloseToast) {
-        overlay.onDidDismiss.then(() => onCloseToast());
-      }
-      return overlay;
-    });
+  public async showToast(config: ToastConfig, onCloseToast?: () => void): Promise<Overlay> {
+    const overlay = await this.toastHelper.showToast(config);
+    if (onCloseToast) {
+      overlay.onDidDismiss.then(() => onCloseToast());
+    }
+    return overlay;
   }
 }
