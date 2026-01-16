@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
-import { AccordionItemComponent } from '@kirbydesign/angular/accordion-item';
+import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BaseListComponent } from '../../list-shared/base-list.component';
