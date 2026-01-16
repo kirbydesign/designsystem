@@ -163,13 +163,16 @@ describe('DropdownComponent', () => {
         expect(buttonElement.getAttribute('aria-labelledby')).toBe('labelId');
       });
 
-      it('should set aria-activedescendant when focusedIndex is set', () => {
+      it('should set aria-activedescendant when focusedIndex is set', fakeAsync(() => {
+        spectator.component.open();
+        tick(openDelayInMs);
+        spectator.detectChanges();
         spectator.component.focusedIndex = 2;
         spectator.detectChanges();
         expect(buttonElement.getAttribute('aria-activedescendant')).toBe(
           `${listboxId}-item-${spectator.component.focusedIndex}`
         );
-      });
+      }));
 
       it('should set correct aria attributes on listbox when open', () => {
         spectator.component.open();
