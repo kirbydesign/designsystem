@@ -25,8 +25,8 @@ export const detailedCardWithListNoShapeTemplate = `<kirby-card>
   imports: [
     CardComponent,
     DropdownComponent,
-    ListItemTemplateDirective,
     ListComponent,
+    ListItemTemplateDirective,
     ItemComponent,
     CurrencyPipe,
   ],
