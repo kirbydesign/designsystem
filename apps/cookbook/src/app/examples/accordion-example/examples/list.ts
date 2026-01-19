@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
-import { AccordionItemComponent } from '@kirbydesign/angular/accordion-item';
+import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 import { ListComponent } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
