@@ -21,11 +21,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import {
-  DesignTokenHelper,
-  StringSearchHelper,
-  UniqueIdGenerator,
-} from '@kirbydesign/designsystem/helpers';
+import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
@@ -35,7 +31,7 @@ import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsys
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { NgTemplateOutlet } from '@angular/common';
-import { OpenState, VerticalDirection } from './dropdown.types';
+import { OpenState } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
 @Component({
@@ -61,9 +57,7 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
 export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
-  private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
-    HorizontalDirection.right;
-  private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
+  private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   _listboxId = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
@@ -114,11 +108,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   placeholder = 'Please select:';
 
   @Input() set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
-    this.horizontalDirection = direction || HorizontalDirection.right;
+    this._popout = direction || HorizontalDirection.right;
   }
 
   get popout() {
-    return this.horizontalDirection;
+    return this._popout;
   }
 
   @Input()
@@ -159,9 +153,16 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   tabindex = 0;
 
-  @HostBinding('class.with-popover')
-  @Input()
-  usePopover = false;
+  /**
+   * @deprecated This input is no longer needed. The dropdown now always uses popover positioning.
+   * This input will be removed in a future major version.
+   */
+  @Input() set usePopover(_value: boolean) {
+    console.warn(
+      `[Kirby Dropdown] The 'usePopover' input is deprecated and no longer has any effect.
+        The dropdown now always uses popover positioning. This input will be removed in a future major version.`
+    );
+  }
 
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
@@ -202,16 +203,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.state === OpenState.open;
   }
 
-  @HostBinding('class.popout-left')
-  get _popoutLeft() {
-    return this.horizontalDirection === HorizontalDirection.left;
-  }
-
-  @HostBinding('class.popout-up')
-  get _popoutUp() {
-    return this.verticalDirection === VerticalDirection.up;
-  }
-
   /* The 'clicked' class is applied through Hostbinding to prevent the dropdown from getting a focus ring on click.
     There is a bug that causes the dropdown to get a focus ring on click, if it is the first element that is interacted with
     after the page is loaded. If the user interacts with any other element before, then the dropdown won't get a focus ring.
@@ -232,7 +223,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @ViewChild(CardComponent, { read: ElementRef })
   cardElement: ElementRef<HTMLElement>;
   @ViewChild(PopoverComponent)
-  popover?: PopoverComponent;
+  popover: PopoverComponent;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
 
@@ -277,8 +268,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   private disposeItemClickListeners: EventListenerDisposeFn[] = [];
-  private intersectionObserverRef: IntersectionObserver;
-  private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
   private searchBuffer: string = '';
   private searchBufferTimeout: ReturnType<typeof setTimeout>;
   private SEARCH_BUFFER_DELAY = 500; // ms
@@ -306,11 +295,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.isOpen ? this.close() : this.open();
   }
 
-  /* Utility that makes it easier to set styles on card element
-  when using popover*/
+  /* Utility that makes it easier to set styles on card element */
   private setPopoverCardStyle(style: string, value: string) {
-    if (!this.usePopover) return;
-
     this.renderer.setStyle(
       this.cardElement.nativeElement,
       style,
@@ -320,7 +306,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   ngAfterViewInit() {
-    if (this.usePopover && this.expand === 'block') {
+    if (this.expand === 'block') {
       const { width: initialWidth } = this.elementRef.nativeElement.getBoundingClientRect();
       this.setPopoverCardStyle('max-width', 'initial');
       this.setPopoverCardStyle('min-width', 'initial');
@@ -335,74 +321,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       });
     }
     this.forwardAriaLabelToDropdownButton();
-    this.initializeAlignment();
-  }
-
-  private initializeAlignment() {
-    if (this.usePopover) return;
-    if (!this.intersectionObserverRef) {
-      // Get the design token size of the button. In the button stylesheet a medium button height is utils.size(xl)
-      // and a small button height is utils.size("l")
-      const designTokenSizeHeight = this.size === 'md' ? 'xl' : 'l';
-
-      // Setting the rootMargin equal to the height of the button
-      // allows the Intersection Observer Callback to be called
-      // even if the dropdown button is intersecting with the viewport
-      const options = {
-        rootMargin: DesignTokenHelper.size(designTokenSizeHeight),
-      };
-      const callback: IntersectionObserverCallback = (entries) => {
-        // Only apply alignment when opening:
-        if (this.state !== OpenState.opening) {
-          return;
-        }
-
-        // Cancel any pending timer to show dropdown:
-        clearTimeout(this.showDropdownTimeoutId);
-        const entry = entries[0];
-        const isVisible = entry.boundingClientRect.width > 0;
-        if (isVisible && entry.intersectionRatio < 1) {
-          this.setHorizontalDirection(entry);
-          this.setVerticalDirection(entry);
-        }
-        this.showDropdown();
-        this.cdr.markForCheck();
-      };
-      this.intersectionObserverRef = new IntersectionObserver(callback, options);
-      this.intersectionObserverRef.observe(this.cardElement.nativeElement);
-    }
-  }
-
-  private setHorizontalDirection(entry: IntersectionObserverEntry) {
-    // If popout direction is set to right, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
-    // it is set to popout left instead, and vice versa for popout direction left
-    if (this.horizontalDirection === HorizontalDirection.right) {
-      if (entry.boundingClientRect.right > entry.rootBounds.right) {
-        this.horizontalDirection = HorizontalDirection.left;
-      }
-    } else {
-      if (entry.boundingClientRect.left < entry.rootBounds.left) {
-        this.horizontalDirection = HorizontalDirection.right;
-      }
-    }
-  }
-
-  private setVerticalDirection(entry: IntersectionObserverEntry) {
-    if (entry.boundingClientRect.top < 0) {
-      // entry is cut off at the top by ${entry.boundingClientRect.top}px
-      // open downwards:
-      this.verticalDirection = VerticalDirection.down;
-    }
-    if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
-      // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
-      const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
-      const SPACING = 5; //TODO: Get from SCSS
-      // Check if the card can fit on top of button:
-      if (containerOffsetTop > entry.target.clientHeight + SPACING) {
-        // open upwards:
-        this.verticalDirection = VerticalDirection.up;
-      }
-    }
   }
 
   open() {
@@ -412,10 +330,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (!this.isOpen) {
       this.state = OpenState.opening;
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
-      this.showDropdownTimeoutId = setTimeout(
-        () => this.showDropdown(),
-        DropdownComponent.OPEN_DELAY_IN_MS
-      );
+      setTimeout(() => this.showDropdown(), DropdownComponent.OPEN_DELAY_IN_MS);
 
       // Move focus to selected item (if any) or first item
       this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
@@ -437,8 +352,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
     if (this.isOpen) {
       this.state = OpenState.closed;
-      // Reset vertical direction to default
-      this.verticalDirection = VerticalDirection.down;
       this.popover?.hide();
     }
   }
@@ -687,23 +600,32 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   _onPopoverWillHide() {
     this.state = OpenState.closed;
     this.buttonElement.nativeElement.focus();
+    this._onTouched();
+  }
+
+  @HostListener('focusout', ['$event'])
+  _onFocusOut(event: FocusEvent) {
+    const relatedTarget = event.relatedTarget as HTMLElement | null; // relatedTarget is the element receiving focus
+    const isOnTriggerButton =
+      relatedTarget && this.elementRef.nativeElement.contains(relatedTarget);
+    const isInsidePopover = relatedTarget && relatedTarget.closest('kirby-popover');
+
+    if (!isOnTriggerButton && !isInsidePopover) {
+      if (this.isOpen) {
+        this.close();
+      }
+      this._onTouched();
+    }
   }
 
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
   _onEnterOrEscape() {
     this.close();
-    this._onTouched();
   }
 
   _onPopoverClick() {
     this.close();
-  }
-
-  _onBlur() {
-    if (this.usePopover) return;
-    this.close();
-    this._onTouched();
   }
 
   @HostListener('keydown.enter', ['$event'])
@@ -791,8 +713,5 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   ngOnDestroy(): void {
     this.unlistenAllSlottedItems();
     this.resizeObserverService.unobserve(this.elementRef);
-    if (this.intersectionObserverRef) {
-      this.intersectionObserverRef.disconnect();
-    }
   }
 }

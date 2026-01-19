@@ -3,8 +3,3 @@ export enum OpenState {
   opening,
   open,
 }
-
-export enum VerticalDirection {
-  up,
-  down,
-}
