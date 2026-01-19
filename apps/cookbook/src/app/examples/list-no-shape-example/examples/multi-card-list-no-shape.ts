@@ -33,10 +33,10 @@ export const multiCardListExampleTemplate = `<kirby-list [items]="items" shape="
   template: multiCardListExampleTemplate,
   imports: [
     ListComponent,
+    ListItemTemplateDirective,
     CardComponent,
     ItemComponent,
     CurrencyPipe,
-    ListItemTemplateDirective,
     CardHeaderComponent,
   ],
 })
