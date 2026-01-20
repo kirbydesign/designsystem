@@ -5,7 +5,7 @@
   "private": true,
   "engines": {
     "node": "24",
-    "npm": "11.6.2"
+    "npm": "~11.6.2"
   },
   "workspaces": [
     "libs/core",
