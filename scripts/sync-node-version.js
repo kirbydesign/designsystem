@@ -19,14 +19,16 @@ function hasNodeVersionChanged() {
 }
 
 hasNodeVersionChanged()
-  .then((hasChanged) => {
+  .then(async (hasChanged) => {
     if (hasChanged) {
       console.log(
         '[sync-node-version] Node version from package.json changed! Syncing version to .nvmrc file and staging changes...'
       );
       const {
-        engines: { node: nodeVersion },
-      } = require('../package.json');
+        default: {
+          engines: { node: nodeVersion },
+        },
+      } = await import('../package.json', { with: { type: 'json' } });
       writeFile('.nvmrc', nodeVersion.replace('^', '').replace('~', '') + EOL);
       exec('git add .nvmrc');
       console.log(
