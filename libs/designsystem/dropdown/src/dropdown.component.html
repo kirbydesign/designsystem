@@ -6,12 +6,11 @@
   aria-haspopup="listbox"
   [attr.aria-controls]="_listboxId"
   [attr.aria-expanded]="isOpen"
-  [attr.aria-activedescendant]="_listboxId + '-item-' + focusedIndex"
+  [attr.aria-activedescendant]="isOpen ? _listboxId + '-item-' + focusedIndex : null"
   [attr.aria-invalid]="hasError"
   [size]="size"
   [attentionLevel]="attentionLevel"
   (click)="onToggle($event)"
-  (blur)="_onBlur()"
   [disabled]="disabled"
   [tabindex]="_tabindex"
 >
@@ -19,20 +18,12 @@
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
 </button>
 
-<ng-container *ngTemplateOutlet="usePopover ? popoverTemplate : itemWrapperTemplate"></ng-container>
-
-<ng-template #popoverTemplate>
-  <kirby-popover
-    [target]="buttonElement"
-    [popout]="popout"
-    (click)="_onPopoverClick()"
-    (willHide)="_onPopoverWillHide()"
-  >
-    <ng-container *ngTemplateOutlet="itemWrapperTemplate"></ng-container>
-  </kirby-popover>
-</ng-template>
-
-<ng-template #itemWrapperTemplate>
+<kirby-popover
+  [target]="buttonElement"
+  [popout]="popout"
+  (click)="_onPopoverClick()"
+  (willHide)="_onPopoverWillHide()"
+>
   <kirby-card role="listbox" [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
     @for (item of items; track item; let i = $index) {
       <ng-container
@@ -48,7 +39,7 @@
       ></ng-container>
     }
   </kirby-card>
-</ng-template>
+</kirby-popover>
 
 <ng-template
   #defaultItemTemplate
@@ -66,7 +57,6 @@
     [attr.id]="_listboxId + '-item-' + index"
     [attr.aria-selected]="selected"
   >
-    <!-- Tabindex fixes issue with popover dropdown not working in safari -->
     <p class="kirby-item-title">{{ getTextFromItem(item) }}</p>
     @if (selected) {
       <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
