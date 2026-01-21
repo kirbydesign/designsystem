@@ -61,8 +61,8 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     height: $slide-button-container-height;
     border-radius: $slide-button-container-radius;
 
-    &:focus-within {
-      @include utils.not-touch {
+    @include utils.not-touch {
+      &:has(:focus-visible) {
         @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
       }
     }
