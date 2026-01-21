@@ -11,6 +11,7 @@ import { ToastExampleDefaultComponent } from '~/app/examples/toast-example/examp
 import { ToastExampleDurationComponent } from '~/app/examples/toast-example/examples/duration';
 import { ToastExampleDismissComponent } from '~/app/examples/toast-example/examples/dismiss';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { IphoneComponent } from '~/app/iphone/iphone.component';
 
 @Component({
   selector: 'cookbook-toast-showcase',
@@ -21,13 +22,15 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     ExampleViewerComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionMethodsComponent,
-    ToastExampleDefaultComponent,
-    ToastExampleDurationComponent,
-    ToastExampleDismissComponent,
     ImportViewerComponent,
+    IphoneComponent,
   ],
 })
 export class ToastShowcaseComponent {
+  defaultExample = ToastExampleDefaultComponent;
+  durationExample = ToastExampleDurationComponent;
+  dismissExample = ToastExampleDismissComponent;
+
   methods: ApiDescriptionMethod[] = [
     {
       name: 'showToast',

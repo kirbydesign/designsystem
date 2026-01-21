@@ -4,6 +4,8 @@
     immediate feedback after taking an action. Users don't need to dismiss toast messages, as they
     appear only for a moment before they disappear.
   </p>
+
+  <h2>Message Type</h2>
   <p>There are two types of toasts:</p>
 
   <ul>
@@ -11,29 +13,45 @@
     <li>Warning is used for warnings, eg. something the user should be aware of</li>
   </ul>
 
-  <h2>Default</h2>
-  <p>By default, toasts will automatically dismiss after 4 seconds (4000ms).</p>
-  <cookbook-example-viewer [html]="defaultExample.template" [ts]="defaultExample.codeSnippet">
-    <div class="example-frame">
-      <cookbook-toast-example-default #defaultExample></cookbook-toast-example-default>
-    </div>
-  </cookbook-example-viewer>
+  <cookbook-iphone
+    viewMode="full-size"
+    [showViewModeToggle]="true"
+    src="/examples/toast-default/"
+    showExternalLink="true"
+  ></cookbook-iphone>
+
+  <cookbook-example-viewer
+    [html]="defaultExample.template"
+    [ts]="defaultExample.codeSnippet"
+  ></cookbook-example-viewer>
 
   <h2>Duration</h2>
+  <p>By default, toasts will automatically dismiss after 4 seconds (4000ms).</p>
   <p>
-    You can customize how long the toast is displayed using the
+    You can customize how long the toast is displayed using
     <code>durationInMs</code>
-    property. Set it to
-    <code>0</code>
-    to keep the toast visible until it is dismissed programmatically.
+    .
   </p>
-  <cookbook-example-viewer [html]="durationExample.template" [ts]="durationExample.codeSnippet">
-    <div class="example-frame">
-      <cookbook-toast-example-duration #durationExample></cookbook-toast-example-duration>
-    </div>
-  </cookbook-example-viewer>
+
+  <cookbook-iphone
+    viewMode="full-size"
+    [showViewModeToggle]="true"
+    src="/examples/toast-duration/"
+    showExternalLink="true"
+  ></cookbook-iphone>
+
+  <cookbook-example-viewer
+    [html]="durationExample.template"
+    [ts]="durationExample.codeSnippet"
+  ></cookbook-example-viewer>
 
   <h2>Programmatic Dismiss</h2>
+  <p>If duration is set to 0, the toast will show until programatically dismissed.</p>
+  <p>
+    As there is currently no way for the user to close a toast, it is
+    <em>very important</em>
+    to always ensure dismissal to avoid lingering toasts in the UI.
+  </p>
   <p>
     The
     <code>showToast()</code>
@@ -44,11 +62,18 @@
     <code>dismiss()</code>
     .
   </p>
-  <cookbook-example-viewer [html]="dismissExample.template" [ts]="dismissExample.codeSnippet">
-    <div class="example-frame">
-      <cookbook-toast-example-dismiss #dismissExample></cookbook-toast-example-dismiss>
-    </div>
-  </cookbook-example-viewer>
+
+  <cookbook-iphone
+    viewMode="full-size"
+    [showViewModeToggle]="true"
+    src="/examples/toast-dismiss/"
+    showExternalLink="true"
+  ></cookbook-iphone>
+
+  <cookbook-example-viewer
+    [html]="dismissExample.template"
+    [ts]="dismissExample.codeSnippet"
+  ></cookbook-example-viewer>
 
   <h2>Callback</h2>
   <p>
@@ -59,7 +84,7 @@
   <cookbook-code-viewer language="ts">this.toastController.showToast(config, () => {{ '{' }}
   console.log('Toast was dismissed'){{ '}' }});</cookbook-code-viewer>
 
-  <h3>Best Practice</h3>
+  <h2>Best Practices</h2>
   <ul>
     <li>
       Use a toast when

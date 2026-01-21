@@ -22,19 +22,12 @@ await toast.dismiss();`;
 @Component({
   selector: config.selector,
   template: config.template,
-  styles: [
-    `
-      :host {
-        display: flex;
-        gap: 8px;
-      }
-    `,
-  ],
+  styleUrls: ['../../_examples.shared.scss', '../../_modal-playground.shared.scss'],
   imports: [ButtonComponent],
 })
 export class ToastExampleDismissComponent {
-  template: string = config.template;
-  codeSnippet: string = codeSnippet;
+  static readonly template = config.template;
+  static readonly codeSnippet = codeSnippet;
 
   private currentToast: Overlay | null = null;
 

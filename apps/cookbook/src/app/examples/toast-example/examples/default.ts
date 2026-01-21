@@ -17,11 +17,12 @@ this.toastController.showToast(config);`;
 @Component({
   selector: config.selector,
   template: config.template,
+  styleUrls: ['../../_examples.shared.scss', '../../_modal-playground.shared.scss'],
   imports: [ButtonComponent],
 })
 export class ToastExampleDefaultComponent {
-  template: string = config.template;
-  codeSnippet: string = codeSnippet;
+  static readonly template = config.template;
+  static readonly codeSnippet = codeSnippet;
 
   constructor(private toastController: ToastController) {}
 
