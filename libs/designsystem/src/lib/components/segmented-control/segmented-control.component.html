@@ -1,32 +1,30 @@
-<div>
-  <ion-segment
-    [value]="value?.id"
-    [scrollable]="true"
-    (ionChange)="onSegmentSelect($event.detail.value)"
-    (click)="preventOutsideClick($event)"
-    [disabled]="isDisabled"
-  >
-    @for (item of items; track item.id) {
-      <ion-segment-button
-        [value]="item.id"
-        [attr.aria-label]="item.ariaLabel"
-        (click)="focusNativeButton($event)"
-      >
-        {{ item.text }}
-        @if (item.badge) {
-          <kirby-badge
-            role="text"
-            [attr.aria-label]="item.badge.description"
-            [themeColor]="item.badge.themeColor"
-          >
-            @if (item.badge.icon) {
-              <kirby-icon [name]="item.badge.icon"></kirby-icon>
-            } @else {
-              {{ item.badge.content }}
-            }
-          </kirby-badge>
-        }
-      </ion-segment-button>
-    }
-  </ion-segment>
-</div>
+<ion-segment
+  [value]="value?.id"
+  [scrollable]="disableChangeOnSwipe || mode !== 'default'"
+  (ionChange)="onSegmentSelect($event.detail.value)"
+  (click)="preventOutsideClick($event)"
+  [disabled]="isDisabled"
+>
+  @for (item of items; track item.id) {
+    <ion-segment-button
+      [value]="item.id"
+      [attr.aria-label]="item.ariaLabel"
+      (click)="focusNativeButton($event)"
+    >
+      {{ item.text }}
+      @if (item.badge) {
+        <kirby-badge
+          role="text"
+          [attr.aria-label]="item.badge.description"
+          [themeColor]="item.badge.themeColor"
+        >
+          @if (item.badge.icon) {
+            <kirby-icon [name]="item.badge.icon"></kirby-icon>
+          } @else {
+            {{ item.badge.content }}
+          }
+        </kirby-badge>
+      }
+    </ion-segment-button>
+  }
+</ion-segment>
