@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
@@ -22,6 +22,13 @@ const fatFingerSize = DesignTokenHelper.fatFingerSize;
   standalone: false,
 })
 class OnPushHostComponent {}
+
+@Component({
+  template: '<ng-content></ng-content>',
+  encapsulation: ViewEncapsulation.ShadowDom,
+  standalone: false,
+})
+class ShadowDomHostComponent {}
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -152,52 +159,52 @@ describe('SegmentedControlComponent', () => {
           expect(focusedItem).toHaveClass('segment-button-checked');
         });
       });
-      describe('with checked item', () => {
-        it('should have only 1 tab stop', async () => {
-          const segmentButtons =
-            spectator.queryHostAll<HTMLIonSegmentButtonElement>('ion-segment-button');
 
-          const segmentButtonsWithTabStop = segmentButtons.filter(
-            (button) => !button.hasAttribute('tabindex')
+      /**
+       * Helper to get native buttons from ion-segment-button shadow DOMs
+       */
+      function getNativeButtons(): HTMLButtonElement[] {
+        const segmentButtons =
+          spectator.queryHostAll<HTMLIonSegmentButtonElement>('ion-segment-button');
+        return segmentButtons.map((segmentBtn) => segmentBtn.shadowRoot?.querySelector('button'));
+      }
+
+      describe('with checked item', () => {
+        it('should have only 1 native button in tab order', async () => {
+          const nativeButtons = getNativeButtons();
+
+          const buttonsInTabOrder = nativeButtons.filter(
+            (button) => !button.hasAttribute('tabindex') || button.getAttribute('tabindex') !== '-1'
           );
-          const segmentButtonsWithoutTabStop = segmentButtons.filter(
+          const buttonsNotInTabOrder = nativeButtons.filter(
             (button) => button.getAttribute('tabindex') === '-1'
           );
-          expect(segmentButtonsWithTabStop).toHaveLength(1);
-          expect(segmentButtonsWithoutTabStop).toHaveLength(segmentButtons.length - 1);
+          expect(buttonsInTabOrder).toHaveLength(1);
+          expect(buttonsNotInTabOrder).toHaveLength(nativeButtons.length - 1);
         });
 
-        it('should set selected segment button as tab stop', async () => {
+        it('should set selected segment button native button as tab stop', async () => {
           const selectedSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
             'ion-segment-button.segment-button-checked'
           );
-          expect(selectedSegmentButton).not.toHaveAttribute('tabindex');
+          const nativeButton = selectedSegmentButton.shadowRoot?.querySelector('button');
+          expect(nativeButton).not.toHaveAttribute('tabindex');
         });
 
-        it('should remove tab stop when focused', async () => {
+        it('should restore tab stop on selected button when blurred', async () => {
           const selectedSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
             'ion-segment-button.segment-button-checked'
           );
-          expect(selectedSegmentButton).not.toHaveAttribute('tabindex');
+          const nativeButton = selectedSegmentButton.shadowRoot?.querySelector('button');
 
           await selectedSegmentButton.setFocus();
           spectator.detectComponentChanges();
-
-          expect(selectedSegmentButton).toHaveAttribute('tabindex', '-1');
-        });
-
-        it('should add tab stop when blurred', async () => {
-          const selectedSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
-            'ion-segment-button.segment-button-checked'
-          );
-          await selectedSegmentButton.setFocus();
-          spectator.detectComponentChanges();
-          expect(selectedSegmentButton).toHaveAttribute('tabindex', '-1');
 
           selectedSegmentButton.blur();
           spectator.detectComponentChanges();
 
-          expect(selectedSegmentButton).not.toHaveAttribute('tabindex');
+          // After blur, the selected button should be the tab stop again
+          expect(nativeButton).not.toHaveAttribute('tabindex');
         });
       });
 
@@ -206,50 +213,43 @@ describe('SegmentedControlComponent', () => {
           spectator.setHostInput('selectedIndex', -1);
         });
 
-        it('should have only 1 tab stop', async () => {
-          const segmentButtons =
-            spectator.queryHostAll<HTMLIonSegmentButtonElement>('ion-segment-button');
+        it('should have only 1 native button in tab order', async () => {
+          // Wait for tabindex update after selectedIndex change
+          await TestHelper.whenTrue(() => {
+            const nativeButtons = getNativeButtons();
+            const buttonsInTabOrder = nativeButtons.filter(
+              (button) =>
+                !button.hasAttribute('tabindex') || button.getAttribute('tabindex') !== '-1'
+            );
+            return buttonsInTabOrder.length === 1;
+          });
 
-          const segmentButtonsWithTabStop = segmentButtons.filter(
-            (button) => !button.hasAttribute('tabindex')
+          const nativeButtons = getNativeButtons();
+          const buttonsInTabOrder = nativeButtons.filter(
+            (button) => !button.hasAttribute('tabindex') || button.getAttribute('tabindex') !== '-1'
           );
-          const segmentButtonsWithoutTabStop = segmentButtons.filter(
+          const buttonsNotInTabOrder = nativeButtons.filter(
             (button) => button.getAttribute('tabindex') === '-1'
           );
-          expect(segmentButtonsWithTabStop).toHaveLength(1);
-          expect(segmentButtonsWithoutTabStop).toHaveLength(segmentButtons.length - 1);
+          expect(buttonsInTabOrder).toHaveLength(1);
+          expect(buttonsNotInTabOrder).toHaveLength(nativeButtons.length - 1);
         });
 
-        it('should set first segment button as tab stop', async () => {
+        it('should set first segment button native button as tab stop', async () => {
+          // Wait for tabindex update after selectedIndex change
+          await TestHelper.whenTrue(() => {
+            const firstSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
+              'ion-segment-button:first-of-type'
+            );
+            const nativeButton = firstSegmentButton.shadowRoot?.querySelector('button');
+            return nativeButton && !nativeButton.hasAttribute('tabindex');
+          });
+
           const firstSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
             'ion-segment-button:first-of-type'
           );
-          expect(firstSegmentButton).not.toHaveAttribute('tabindex');
-        });
-
-        it('should remove tab stop when focused', async () => {
-          const focusableSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
-            'ion-segment-button:not([tabindex])'
-          );
-
-          await focusableSegmentButton.setFocus();
-          spectator.detectComponentChanges();
-
-          expect(focusableSegmentButton).toHaveAttribute('tabindex', '-1');
-        });
-
-        it('should add tab stop when blurred', async () => {
-          const focusableSegmentButton = spectator.queryHost<HTMLIonSegmentButtonElement>(
-            'ion-segment-button:not([tabindex])'
-          );
-          await focusableSegmentButton.setFocus();
-          spectator.detectComponentChanges();
-          expect(focusableSegmentButton).toHaveAttribute('tabindex', '-1');
-
-          focusableSegmentButton.blur();
-          spectator.detectComponentChanges();
-
-          expect(focusableSegmentButton).not.toHaveAttribute('tabindex');
+          const nativeButton = firstSegmentButton.shadowRoot?.querySelector('button');
+          expect(nativeButton).not.toHaveAttribute('tabindex');
         });
       });
     });
@@ -657,6 +657,106 @@ describe('SegmentedControlComponent', () => {
         spectator.component.setDisabledState(false);
 
         expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
+
+  describe('when inside host component with ViewEncapsulation.ShadowDom', () => {
+    const items: SegmentItem[] = [
+      { text: 'First', id: 'first' },
+      { text: 'Second', id: 'second' },
+      { text: 'Third', id: 'third' },
+    ];
+
+    let spectator: SpectatorHost<SegmentedControlComponent, ShadowDomHostComponent>;
+    let hostShadowRoot: ShadowRoot;
+    let ionSegmentElement: HTMLIonSegmentElement;
+    let segmentButtons: HTMLIonSegmentButtonElement[];
+
+    const createHost = createHostFactory({
+      component: SegmentedControlComponent,
+      host: ShadowDomHostComponent,
+      imports: [TestHelper.ionicModuleForTest],
+    });
+
+    /**
+     * Helper to get the currently focused segment button, traversing shadow DOM boundaries.
+     */
+    function getFocusedSegmentButton(): HTMLIonSegmentButtonElement | null {
+      let activeElement: Element | null = document.activeElement;
+      let lastSegmentButton: HTMLIonSegmentButtonElement | null = null;
+
+      // Traverse shadow DOM boundaries to find the actual focused element
+      // Keep track of the last ion-segment-button we encounter
+      while (activeElement) {
+        if (activeElement.tagName?.toLowerCase() === 'ion-segment-button') {
+          lastSegmentButton = activeElement as HTMLIonSegmentButtonElement;
+        }
+        // If the focused element is the native button inside ion-segment-button,
+        // the lastSegmentButton will be its parent
+        if (activeElement.tagName?.toLowerCase() === 'button' && lastSegmentButton) {
+          return lastSegmentButton;
+        }
+        // Continue traversing if there's a shadow root with an active element
+        if (activeElement.shadowRoot?.activeElement) {
+          activeElement = activeElement.shadowRoot.activeElement;
+        } else {
+          break;
+        }
+      }
+
+      // If we ended on an ion-segment-button, return it
+      if (activeElement?.tagName?.toLowerCase() === 'ion-segment-button') {
+        return activeElement as HTMLIonSegmentButtonElement;
+      }
+
+      // If we ended on a button and have a lastSegmentButton, return it
+      if (activeElement?.tagName?.toLowerCase() === 'button' && lastSegmentButton) {
+        return lastSegmentButton;
+      }
+
+      return lastSegmentButton;
+    }
+
+    beforeEach(async () => {
+      spectator = createHost(
+        `<kirby-segmented-control [items]="items" [selectedIndex]="selectedIndex">
+         </kirby-segmented-control>`,
+        {
+          hostProps: {
+            items: items,
+            selectedIndex: 1,
+          },
+        }
+      );
+
+      // Get the shadow root of the host component to query elements inside it
+      hostShadowRoot = spectator.hostElement.shadowRoot;
+      ionSegmentElement = hostShadowRoot.querySelector<HTMLIonSegmentElement>('ion-segment');
+      await TestHelper.whenReady(ionSegmentElement);
+
+      segmentButtons = Array.from(
+        hostShadowRoot.querySelectorAll<HTMLIonSegmentButtonElement>('ion-segment-button')
+      );
+      await TestHelper.whenReady(segmentButtons);
+    });
+
+    describe('click interaction', () => {
+      it('should focus native button inside segment button when clicked', async () => {
+        const firstSegmentButton = hostShadowRoot.querySelector<HTMLIonSegmentButtonElement>(
+          'ion-segment-button:first-of-type'
+        );
+
+        spectator.click(firstSegmentButton);
+        spectator.detectChanges();
+
+        // The focused segment button should be the first one
+        const focusedButton = getFocusedSegmentButton();
+        expect(focusedButton).toEqual(firstSegmentButton);
+
+        // Additionally, verify the native button inside has focus
+        const nativeButtonInSegmentButton = firstSegmentButton.shadowRoot?.activeElement;
+        expect(nativeButtonInSegmentButton?.tagName?.toLowerCase()).toBe('button');
       });
     });
   });

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -40,7 +41,7 @@ export enum SegmentedControlMode {
   ],
 })
 export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
-  implements ControlValueAccessor
+  implements ControlValueAccessor, AfterViewInit
 {
   @ViewChild(IonSegment, { static: true, read: ElementRef })
   private ionSegmentElement: ElementRef<HTMLIonSegmentElement>;
@@ -78,6 +79,8 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
     this._items = value || [];
     this._value = this.items[this.selectedIndex];
     this.ensureIonSegmentSelected();
+    // Update tabindex when items change (native buttons will be re-created)
+    this.updateTabIndexesWhenReady();
   }
 
   protected isDisabled = false;
@@ -117,6 +120,7 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
       this._selectedIndex = index;
       this._value = this.items[this.selectedIndex];
       this.selectedIndexChange.emit(this.selectedIndex);
+      this.updateNativeButtonTabIndexes();
     }
   }
 
@@ -163,31 +167,96 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
   }
 
   focusNativeButton(event: UIEvent) {
-    (event.target as HTMLIonSegmentButtonElement)?.setFocus();
+    const segmentButton = event.target as HTMLIonSegmentButtonElement;
+    this.focusSegmentButton(segmentButton);
   }
 
-  private _segmentElementHasFocus = false;
+  /**
+   * Focus the native button inside an ion-segment-button.
+   * This method handles shadow DOM boundaries by directly accessing the shadow root
+   * to focus the native button, which is necessary when the component is nested
+   * inside another shadow DOM (e.g., in a micro frontend or web component).
+   */
+  private focusSegmentButton(segmentButton: HTMLIonSegmentButtonElement): void {
+    if (!segmentButton) return;
 
-  getTabIndex(item: TItem, index: number) {
-    // When focused prevent tab stop from inner native button to outer ion-segment-button:
-    if (this._segmentElementHasFocus) return -1;
-    // Allow tab stop on selected item:
-    if (item.id === this.value?.id) return null;
-    // Allow tab stop on first item if no value is set:
-    if (!this.value && index === 0) return null;
-    // Prevent tab stop on all other items:
-    return -1;
+    // Try to focus the native button inside the shadow DOM directly
+    // This works across nested shadow DOM boundaries where setFocus() may fail
+    const nativeButton = segmentButton.shadowRoot?.querySelector('button');
+    nativeButton?.focus();
+  }
+
+  /**
+   * Get all native buttons from the ion-segment-buttons' shadow DOMs.
+   */
+  private getNativeButtons(): HTMLButtonElement[] {
+    const segmentButtons =
+      this.ionSegmentElement.nativeElement.querySelectorAll('ion-segment-button');
+    const nativeButtons: HTMLButtonElement[] = [];
+
+    segmentButtons.forEach((segmentButton) => {
+      const nativeButton = segmentButton.shadowRoot?.querySelector('button');
+      if (nativeButton) {
+        nativeButtons.push(nativeButton);
+      }
+    });
+
+    return nativeButtons;
+  }
+
+  /**
+   * Update tabindex on native buttons to implement roving tabindex pattern.
+   * Only the selected button (or first if none selected) should be in the tab order.
+   */
+  private updateNativeButtonTabIndexes(): void {
+    const nativeButtons = this.getNativeButtons();
+    if (nativeButtons.length === 0) return;
+
+    const tabStopIndex = this.selectedIndex === -1 ? 0 : this.selectedIndex;
+
+    nativeButtons.forEach((button, index) => {
+      if (index === tabStopIndex) {
+        button.removeAttribute('tabindex');
+      } else {
+        button.setAttribute('tabindex', '-1');
+      }
+    });
+  }
+
+  /**
+   * Wait for native buttons to be available, then update tabindex.
+   * Ionic components render asynchronously, so we poll until ready.
+   */
+  private updateTabIndexesWhenReady(): void {
+    const tryUpdate = () => {
+      const segmentButtons =
+        this.ionSegmentElement.nativeElement.querySelectorAll('ion-segment-button');
+      const nativeButtons = this.getNativeButtons();
+
+      if (nativeButtons.length === segmentButtons.length && nativeButtons.length > 0) {
+        this.updateNativeButtonTabIndexes();
+      } else {
+        requestAnimationFrame(tryUpdate);
+      }
+    };
+    setTimeout(tryUpdate);
   }
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  ngAfterViewInit(): void {
+    this.updateTabIndexesWhenReady();
+  }
+
   @HostListener('focusin')
   @HostListener('focusout')
   _onFocusInOut() {
-    // @HostListener(focusin|focusout) triggers Change Detection and updates attr.tabindex on each ion-segment-button
-    this._segmentElementHasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
-    if (!this._segmentElementHasFocus) {
+    const hasFocus = this.ionSegmentElement.nativeElement.matches(':focus-within');
+    console.log('hasFocus', hasFocus);
+    if (!hasFocus) {
       this.onTouched();
+      // When focus leaves, ensure the selected button is the tab stop
+      this.updateNativeButtonTabIndexes();
     }
   }
 
