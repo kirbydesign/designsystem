@@ -33,7 +33,6 @@
   </div>
   @if (_hasYearNavigator) {
     <kirby-dropdown
-      [usePopover]="usePopover"
       [selectedIndex]="navigatedYear"
       [items]="navigableYears"
       [attr.aria-label]="translations.get('selectYear')"

@@ -6,7 +6,16 @@ const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: ['./**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: [getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-a11y')],
+  addons: [
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    {
+      name: getAbsolutePath('@chromatic-com/storybook'),
+      options: {
+        configFile: 'libs/designsystem/.storybook/chromatic.config.json',
+      },
+    },
+  ],
   framework: {
     name: getAbsolutePath('@storybook/angular'),
     options: {},
