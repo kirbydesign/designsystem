@@ -1,9 +1,3 @@
-/*
-  This file has been created to contain unit tests for the new dropdown utilizing popover
-  instead of mixing them in with the ones for the old version. Having an additional file with
-  almost identic tests should make it easier to remove the ones for the old version when we have
-  to deprecate it.
-*/
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
@@ -23,7 +17,7 @@ import { DropdownComponent } from './dropdown.component';
 })
 class OnPushHostComponent {}
 
-describe('DropdownComponent + PopoverComponent', () => {
+describe('DropdownComponent integration', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -38,7 +32,12 @@ describe('DropdownComponent + PopoverComponent', () => {
   let cardElement: HTMLElement;
 
   afterEach(() => {
-    spectator.query('kirby-popover').remove();
+    if (spectator?.component?.isOpen) {
+      spectator.component.close();
+      spectator.detectChanges();
+    }
+    // Clean up any lingering popover elements from document.body
+    document.querySelectorAll('kirby-popover').forEach((el) => el.remove());
   });
 
   describe('with default change detection strategy', () => {
@@ -56,14 +55,11 @@ describe('DropdownComponent + PopoverComponent', () => {
 
     describe('when configured with popout direction', () => {
       beforeEach(() => {
-        spectator = createHost(
-          `<kirby-dropdown [items]="items" [usePopover]="true" popout="right"></kirby-dropdown>`,
-          {
-            hostProps: {
-              items: items,
-            },
-          }
-        );
+        spectator = createHost(`<kirby-dropdown [items]="items" popout="right"></kirby-dropdown>`, {
+          hostProps: {
+            items: items,
+          },
+        });
         buttonElement = spectator.query('button[kirby-button]');
       });
 
@@ -81,14 +77,11 @@ describe('DropdownComponent + PopoverComponent', () => {
 
     describe('when configured with expand=block', () => {
       beforeEach(() => {
-        spectator = createHost(
-          `<kirby-dropdown [usePopover]="true" expand="block"></kirby-dropdown>`,
-          {
-            hostProps: {
-              items: items,
-            },
-          }
-        );
+        spectator = createHost(`<kirby-dropdown expand="block"></kirby-dropdown>`, {
+          hostProps: {
+            items: items,
+          },
+        });
         buttonElement = spectator.query('button[kirby-button]');
       });
 
@@ -117,7 +110,7 @@ describe('DropdownComponent + PopoverComponent', () => {
 
     describe('when aligned to right side of viewport', () => {
       beforeEach(() => {
-        spectator = createHost(`<kirby-dropdown [usePopover]="true"></kirby-dropdown>`, {
+        spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
           hostProps: {
             items: items,
           },
@@ -155,14 +148,11 @@ describe('DropdownComponent + PopoverComponent', () => {
     });
 
     beforeEach(fakeAsync(() => {
-      spectator = createOnPushHost(
-        `<kirby-dropdown [items]="items" [usePopover]="true"></kirby-dropdown>`,
-        {
-          hostProps: {
-            items: items,
-          },
-        }
-      );
+      spectator = createOnPushHost(`<kirby-dropdown [items]="items"></kirby-dropdown>`, {
+        hostProps: {
+          items: items,
+        },
+      });
       cardElement = spectator.query('kirby-card');
 
       // Assert that card is initially hidden:
