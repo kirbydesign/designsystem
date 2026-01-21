@@ -1,6 +1,11 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+// There is a limit to how large text can be on narrow viewports with text resized
+// before segment-button texts start to collide horizontally, so we cap it at 135% for narrow viewports
+$maximum-font-size-sm: utils.size('xs') * 1.35;
+$maximum-font-size-md: 14px * 1.35;
+
 :host {
   display: block;
   user-select: none;
@@ -13,7 +18,7 @@
   &.sm {
     ion-segment-button {
       min-height: utils.size('l');
-      font-size: utils.font-size('xs');
+      font-size: min(utils.font-size('xs'), $maximum-font-size-sm);
 
       --padding-start: #{utils.size('s')};
       --padding-end: #{utils.size('s')};
@@ -126,7 +131,7 @@ ion-segment-button {
     min-height: utils.size('xl');
     min-width: fit-content;
     font-weight: utils.font-weight('normal');
-    font-size: utils.font-size('s');
+    font-size: min(utils.font-size('s'), $maximum-font-size-md);
     text-transform: none;
     margin: 0;
   }
