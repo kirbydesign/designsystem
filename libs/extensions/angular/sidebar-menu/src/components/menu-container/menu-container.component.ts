@@ -34,7 +34,7 @@ export class MenuContainerComponent {
   }
 
   #scrollSelectedItemIntoView() {
-    const selectedItem = this.#element.querySelector('.menu-item.selected');
+    const selectedItem = this.#element.querySelector('li.selected');
     const scrollContainer = this.#element.closest('.sidebar-content');
     if (selectedItem && scrollContainer) {
       scrollIntoViewIfNecessary(scrollContainer, selectedItem);
