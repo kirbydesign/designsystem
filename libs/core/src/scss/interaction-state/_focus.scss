@@ -61,10 +61,8 @@
 
 // ---------------------------------------------------------------------------
 // The apply-focus-part mixin is used where ionics components do not allow
-// us to apply styling directly to the tabbed element, as it is hidden inside
-// a shadow root and not exposed as a part. In some of these cases, we are
-// unable to provide focus-visible like functionality, and thus the focus ring
-// will always show.
+// us to apply styling directly to the focussed element, as it is hidden inside
+// a shadow root and exposed as a part.
 
 /// @param {string} $part
 ///    Add focus styles to a specific CSS Shadow Part.
@@ -77,7 +75,14 @@
   @include utils.not-touch {
     @content;
 
-    &:focus-within::part(#{$part}) {
+    //  This semi-repeated functionality is to support two mutually exclusive patterns
+    //   - One where the part is also the focusable element (e.g., ion-segment-button) in segmented-control
+    //   - Another where the host delegates focus (e.g., ion-checkbox, ion-radio, ion-toggle)
+    &:focus-within::part(#{$part}):focus-visible {
+      @include _focus-ring($shadow, $gap);
+    }
+
+    &:focus-visible:focus-within::part(#{$part}) {
       @include _focus-ring($shadow, $gap);
     }
   }
