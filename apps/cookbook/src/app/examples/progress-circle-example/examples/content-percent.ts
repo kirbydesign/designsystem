@@ -3,7 +3,7 @@ import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circ
 
 const config = {
   selector: 'cookbook-progress-circle-example-content-percent',
-  template: `<kirby-progress-circle value="33" size="lg">33%</kirby-progress-circle>`,
+  template: `<kirby-progress-circle aria-label="Percent" value="33" size="lg">33%</kirby-progress-circle>`,
 };
 
 @Component({

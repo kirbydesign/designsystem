@@ -15,7 +15,7 @@ const config = {
         <data class="kirby-text-large">{{ 2435034 | currency }}</data>
       </div>
     </kirby-label>
-    <kirby-progress-circle themeColor="success" value="37" slot="end">
+    <kirby-progress-circle themeColor="success" aria-label="Investment savings" value="37" slot="end">
       <kirby-icon name="moneybag" size="md"></kirby-icon>
     </kirby-progress-circle>
   </kirby-item>
@@ -23,7 +23,7 @@ const config = {
 
 <kirby-card hasPadding="true">
   <kirby-item>
-    <kirby-progress-circle themeColor="success" value="37" slot="start">
+    <kirby-progress-circle themeColor="success" aria-label="Investment savings" value="37" slot="start">
       <kirby-icon name="moneybag" size="md"></kirby-icon>
     </kirby-progress-circle>
     <h2>Your investment savings</h2>

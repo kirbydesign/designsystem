@@ -6,7 +6,7 @@ import { DecimalPipe } from '@angular/common';
 
 const config = {
   selector: 'cookbook-progress-circle-example-animated',
-  template: `<kirby-progress-circle [themeColor]="themeColor" [value]="progress" size="lg">
+  template: `<kirby-progress-circle [themeColor]="themeColor" aria-label="Dynamic" [value]="progress" size="lg">
   {{ progress | number: '1.1-1' }}%
 </kirby-progress-circle>`,
   codeSnippet: `
