@@ -61,6 +61,9 @@ import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabExampleMenuComponent } from './tabs-example/tab/tab-example-menu.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
+import { ToastExampleDefaultComponent } from './toast-example/examples/default';
+import { ToastExampleDurationComponent } from './toast-example/examples/duration';
+import { ToastExampleDismissComponent } from './toast-example/examples/dismiss';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component';
@@ -558,6 +561,18 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'label',
     component: LabelExampleComponent,
+  },
+  {
+    path: 'toast-default',
+    component: ToastExampleDefaultComponent,
+  },
+  {
+    path: 'toast-duration',
+    component: ToastExampleDurationComponent,
+  },
+  {
+    path: 'toast-dismiss',
+    component: ToastExampleDismissComponent,
   },
   {
     path: 'page-tab-navigation',

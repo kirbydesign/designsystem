@@ -12,6 +12,12 @@ const config: StorybookConfig = {
       options: { transcludeMarkdown: true },
     },
     getAbsolutePath('@storybook/addon-a11y'),
+    {
+      name: getAbsolutePath('@chromatic-com/storybook'),
+      options: {
+        configFile: 'libs/extensions/angular/.storybook/chromatic.config.json',
+      },
+    },
   ],
 
   framework: {

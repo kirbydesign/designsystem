@@ -27,7 +27,7 @@ table.kirby-table {
   }
 
   th {
-    kirby-icon {
+    kirby-icon.sortable-icon {
       visibility: hidden;
     }
 
@@ -35,7 +35,7 @@ table.kirby-table {
       color: utils.get-text-color('black');
       font-weight: utils.font-weight('bold');
 
-      & kirby-icon {
+      & kirby-icon.sortable-icon {
         visibility: visible;
       }
     }

@@ -11,7 +11,6 @@ const config = {
     aria-label="Choose your favorite fruit"
     attentionLevel="2"
     expand="block"
-    usePopover="true"
     [items]="items">
   </kirby-dropdown>
 
@@ -20,7 +19,6 @@ const config = {
     aria-label="Choose your favorite fruit"
     attentionLevel="3"
     expand="block"
-    usePopover="true"
     [items]="items">
   </kirby-dropdown>
 </kirby-card>
@@ -37,12 +35,6 @@ const config = {
     }
   </select>
 </div>
-
-<p class="comment small">
-  <em
-    ><strong>Please note</strong>, these examples have <code>usePopover</code> enabled to not be cut off by the card.
-  </em>
-</p>
 `,
 };
 
