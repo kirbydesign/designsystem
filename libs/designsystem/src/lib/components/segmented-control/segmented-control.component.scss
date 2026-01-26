@@ -3,16 +3,17 @@
 
 // There is a limit to how large text can be on narrow viewports with text resized
 // before segment-button texts start to collide horizontally, so we cap it at 135% for narrow viewports
+$base-font-size-in-px: 14px;
 $maximum-font-size-sm: utils.size('xs') * 1.35;
-$maximum-font-size-md: 14px * 1.35;
+$maximum-font-size-md: $base-font-size-in-px * 1.35;
 
 :host {
   display: block;
   user-select: none;
 
   --kirby-badge-position: absolute;
-  --kirby-badge-top: -#{utils.size('xxs')};
-  --kirby-badge-right: -#{utils.size('s')};
+  --kirby-badge-top: -#{utils.relative-size('xxs')};
+  --kirby-badge-right: -#{utils.relative-size('s')};
   --kirby-badge-z-index: #{utils.z('segment-badge')};
 
   &.sm {
