@@ -4,6 +4,8 @@
     immediate feedback after taking an action. Users don't need to dismiss toast messages, as they
     appear only for a moment before they disappear.
   </p>
+
+  <h2>Message Type</h2>
   <p>There are two types of toasts:</p>
 
   <ul>
@@ -12,25 +14,87 @@
   </ul>
 
   <cookbook-iphone
-    src="/examples/toast"
-    showExternalLink="true"
     viewMode="full-size"
-    showViewModeToggle="true"
+    [showViewModeToggle]="true"
+    src="/examples/toast-default/"
+    showExternalLink="true"
   ></cookbook-iphone>
 
-  <!-- prettier-ignore -->
-  <cookbook-example-viewer [ts]="toastExample.ts"></cookbook-example-viewer>
-  <h4>Callback</h4>
-  If you need to know when the toast is dismissed, you can pass a callback function:
-  <!-- prettier-ignore -->
-  <cookbook-code-viewer language="ts">this.toastController.showToast(config, myCallback);</cookbook-code-viewer>
+  <cookbook-example-viewer
+    [html]="defaultExample.template"
+    [ts]="defaultExample.codeSnippet"
+  ></cookbook-example-viewer>
 
-  <h3>Best Practice</h3>
+  <h2>Duration</h2>
+  <p>By default, toasts will automatically dismiss after 4 seconds (4000ms).</p>
+  <p>
+    You can customize how long the toast is displayed using
+    <code>durationInMs</code>
+    .
+  </p>
+
+  <cookbook-iphone
+    viewMode="full-size"
+    [showViewModeToggle]="true"
+    src="/examples/toast-duration/"
+    showExternalLink="true"
+  ></cookbook-iphone>
+
+  <cookbook-example-viewer
+    [html]="durationExample.template"
+    [ts]="durationExample.codeSnippet"
+  ></cookbook-example-viewer>
+
+  <h2>Programmatic Dismiss</h2>
+  <p>If duration is set to 0, the toast will show until programatically dismissed.</p>
+  <p>
+    As there is currently no way for the user to close a toast, it is
+    <em>very important</em>
+    to always ensure dismissal to avoid lingering toasts in the UI.
+  </p>
+  <p>
+    The
+    <code>showToast()</code>
+    method returns a
+    <code>Promise&lt;Overlay&gt;</code>
+    that resolves to an overlay object. You can use this to dismiss the toast programmatically by
+    calling
+    <code>dismiss()</code>
+    .
+  </p>
+
+  <cookbook-iphone
+    viewMode="full-size"
+    [showViewModeToggle]="true"
+    src="/examples/toast-dismiss/"
+    showExternalLink="true"
+  ></cookbook-iphone>
+
+  <cookbook-example-viewer
+    [html]="dismissExample.template"
+    [ts]="dismissExample.codeSnippet"
+  ></cookbook-example-viewer>
+
+  <h2>Callback</h2>
+  <p>
+    If you need to know when the toast is dismissed, you can pass a callback function as the second
+    argument:
+  </p>
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="ts">this.toastController.showToast(config, () => {{ '{' }}
+  console.log('Toast was dismissed'){{ '}' }});</cookbook-code-viewer>
+
+  <h2>Best Practices</h2>
   <ul>
-    <li>Use a toast when it's not critical for the user to read the message.</li>
     <li>
-      If you don't have clear instructions and/or the user can find the given information in the
-      screen shown.
+      Use a toast when
+      <ul>
+        <li>it is not critical for the user to read the message.</li>
+        <li>
+          you don't have clear instructions and/or the user can find the given information in the
+          screen shown.
+        </li>
+      </ul>
     </li>
     <li>Keep the amount of text below 1 line.</li>
   </ul>
@@ -38,8 +102,15 @@
   <h2>Importing</h2>
   <cookbook-import-viewer [imports]="'ToastController'"></cookbook-import-viewer>
 
-  <h2>Toast config properties:</h2>
+  <h2>API</h2>
+  <h3>Methods</h3>
+  <cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
+  <h3>ToastConfig Properties</h3>
   <cookbook-api-description-properties
     [properties]="properties"
+  ></cookbook-api-description-properties>
+  <h3>Overlay Properties</h3>
+  <cookbook-api-description-properties
+    [properties]="overlayProperties"
   ></cookbook-api-description-properties>
 </div>

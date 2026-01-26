@@ -16,7 +16,7 @@ export class ToastHelper {
       animated: config.animated,
       message: config.message,
       position: 'top',
-      duration: config.durationInMs ? config.durationInMs : ToastHelper.DURATION_IN_MS,
+      duration: config.durationInMs ?? ToastHelper.DURATION_IN_MS,
       cssClass: this.getCssClass(config.messageType),
     });
     await toast.present();
