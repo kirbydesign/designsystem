@@ -7,8 +7,9 @@ import {
   HostBinding,
   Input,
   OnDestroy,
+  Renderer2,
 } from '@angular/core';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { forwardAttributes, ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 @Component({
@@ -37,15 +38,24 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
     return this.size;
   }
 
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+
   private hasElementBeenVisible?: boolean;
   private observer: IntersectionObserver;
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private renderer: Renderer2
   ) {}
 
   ngAfterViewInit(): void {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.elementRef.nativeElement.querySelector('kirby-progress-circle-ring')
+    );
     if (!this.observer) {
       this.observer = new IntersectionObserver(this.onIntersectionChange, {
         threshold: 0.5,

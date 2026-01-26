@@ -47,6 +47,24 @@
     <cookbook-progress-circle-example-card #cardExample></cookbook-progress-circle-example-card>
   </cookbook-example-viewer>
 
+  <h2>Accessibility</h2>
+  <p>
+    If the progress circle has no apparent heading or does not in itself communicate a clear
+    purpose, consider adding an accessible name to help screen reader users understand the purpose
+    and content of the progress circle.
+  </p>
+
+  <p>
+    It is possible to provide an accessible name for your progress circle using the
+    <code>aria-label</code>
+    or
+    <code>aria-labelledby</code>
+    attribute on the
+    <code>progress-circle</code>
+    element.
+  </p>
+  <p>The label you provide will be announced together with the progress circle.</p>
+
   <h2>Importing</h2>
   <cookbook-import-viewer [imports]="'ProgressCircleComponent'"></cookbook-import-viewer>
 
