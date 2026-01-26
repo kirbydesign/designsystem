@@ -216,7 +216,7 @@ describe('ButtonComponent', () => {
     },
     {
       size: ButtonSize.MD,
-      expected: { fontSize: fontSize('s'), height: size('xl'), minWidth: '88px' },
+      expected: { fontSize: fontSize('n'), height: size('xl'), minWidth: '88px' },
     },
     {
       size: ButtonSize.LG,
