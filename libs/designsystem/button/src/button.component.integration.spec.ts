@@ -53,7 +53,7 @@ describe('ButtonComponent in Kirby Page', () => {
     spectator = createHost<PageComponent>(
       `<kirby-page>
         <ng-template kirbyPageTitle>
-          <h1>Test Title</h1>
+          <h1>Title</h1>
           <button kirby-button class="normal-button">Test</button>
         </ng-template>
         <ng-template kirbyPageToolbarTitle>
