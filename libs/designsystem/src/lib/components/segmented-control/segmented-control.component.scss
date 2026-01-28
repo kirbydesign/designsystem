@@ -3,18 +3,20 @@
 
 // There is a limit to how large text can be on narrow viewports with text resized
 // before segment-button texts start to collide horizontally, so we cap it at 135% for narrow viewports
-$base-font-size-in-px: 14px;
 $maximum-font-size-sm: utils.size('xs') * 1.35;
-$maximum-font-size-md: $base-font-size-in-px * 1.35;
+$maximum-font-size-md: utils.size('s') * 1.35;
+$badge-offset: 0.8em;
+$badge-font-size: 0.625em;
 
 :host {
   display: block;
   user-select: none;
 
   --kirby-badge-position: absolute;
-  --kirby-badge-top: -#{utils.relative-size('xxs')};
-  --kirby-badge-right: -#{utils.relative-size('s')};
+  --kirby-badge-top: #{-1 * $badge-offset};
+  --kirby-badge-right: #{-2 * $badge-offset};
   --kirby-badge-z-index: #{utils.z('segment-badge')};
+  --kirby-badge-font-size: #{$badge-font-size};
 
   &.sm {
     ion-segment-button {
@@ -132,7 +134,7 @@ ion-segment-button {
     min-height: utils.size('xl');
     min-width: fit-content;
     font-weight: utils.font-weight('normal');
-    font-size: min(utils.font-size('s'), $maximum-font-size-md);
+    font-size: min(utils.font-size('n'), $maximum-font-size-md);
     text-transform: none;
     margin: 0;
   }
