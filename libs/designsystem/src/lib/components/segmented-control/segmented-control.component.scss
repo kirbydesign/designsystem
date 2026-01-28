@@ -134,7 +134,7 @@ ion-segment-button {
     min-height: utils.size('xl');
     min-width: fit-content;
     font-weight: utils.font-weight('normal');
-    font-size: min(utils.font-size('n'), $maximum-font-size-md);
+    font-size: min(utils.font-size('s'), $maximum-font-size-md);
     text-transform: none;
     margin: 0;
   }
