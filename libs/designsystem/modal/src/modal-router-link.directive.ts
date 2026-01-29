@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Params } from '@angular/router';
-import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
+import { ModalNavigationService } from './modal-navigation.service';
 
 @Directive({ selector: `[kirbyModalRouterLink]` })
 export class ModalRouterLinkDirective implements OnInit {

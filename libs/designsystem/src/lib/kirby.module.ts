@@ -48,6 +48,7 @@ import {
   ModalFooterComponent,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
+import { ModalRouterLinkDirective } from '@kirbydesign/designsystem/modal';
 import { ModalComponent } from '@kirbydesign/designsystem/modal';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { HeaderModule } from '@kirbydesign/designsystem/header';
@@ -66,8 +67,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 import { provideKirby } from '@kirbydesign/designsystem/config';
 import { SegmentedControlComponent } from '@kirbydesign/designsystem/segmented-control';
-import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
-import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
+import { KeyHandlerDirective } from '@kirbydesign/designsystem/shared';
 
 const reexportedImports = [ModalRouterLinkDirective];
 

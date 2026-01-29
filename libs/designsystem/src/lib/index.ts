@@ -1,5 +1,3 @@
-export * from './directives';
-
 export * from '@kirbydesign/designsystem/accordion';
 export * from '@kirbydesign/designsystem/avatar';
 export * from '@kirbydesign/designsystem/button';

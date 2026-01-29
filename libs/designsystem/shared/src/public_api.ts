@@ -1,3 +1,5 @@
+export { KeyHandlerDirective } from './key-handler/key-handler.directive';
+
 export * from './resize-observer/resize-observer.factory';
 export * from './resize-observer/resize-observer.service';
 export * from './theme-color/theme-color.directive';
