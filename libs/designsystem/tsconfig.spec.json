@@ -58,6 +58,9 @@
       "@kirbydesign/designsystem/tab-navigation": ["libs/designsystem/tab-navigation/index.ts"],
       "@kirbydesign/designsystem/tabs": ["libs/designsystem/tabs/index.ts"],
       "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
+      "@kirbydesign/designsystem/segmented-control": [
+        "libs/designsystem/segmented-control/index.ts"
+      ],
       "@kirbydesign/designsystem/toggle": ["libs/designsystem/toggle/index.ts"],
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/toggle-button/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"]

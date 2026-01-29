@@ -65,7 +65,7 @@ import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 import { provideKirby } from '@kirbydesign/designsystem/config';
-import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
+import { SegmentedControlComponent } from '@kirbydesign/designsystem/segmented-control';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 

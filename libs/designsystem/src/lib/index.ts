@@ -1,4 +1,3 @@
-export * from './components';
 export * from './directives';
 
 export * from '@kirbydesign/designsystem/accordion';
@@ -46,5 +45,6 @@ export * from '@kirbydesign/designsystem/types';
 export * from '@kirbydesign/designsystem/chart';
 export * from '@kirbydesign/designsystem/action-group';
 export * from '@kirbydesign/designsystem/header';
+export * from '@kirbydesign/designsystem/segmented-control';
 
 export { KirbyModule } from './kirby.module';
