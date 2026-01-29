@@ -60,3 +60,26 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     white-space: normal;
   }
 }
+
+/*
+ * Narrow screen (<768px) with text scaled >135% in User Agent settings.
+ */
+@mixin optimitze-for-scaled-text() {
+  :host-context(.kirby-text-scale-135) {
+    @include utils.media('<medium') {
+      ion-item {
+        @include utils.slotted('[slot="end"]') {
+          margin-inline-start: initial;
+        }
+
+        --item-padding-top: #{utils.size('xxs')};
+        --inner-padding-top: 0;
+      }
+
+      ion-item::part(item-inner) {
+        position: initial;
+        gap: utils.size('xxxs');
+      }
+    }
+  }
+}

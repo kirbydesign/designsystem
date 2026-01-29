@@ -77,10 +77,10 @@ $font-weight: (
 /* Icon
 ****************************************************************************/
 $icon-font-sizes: (
-  'lg': 3.5rem,
-  'md': 2rem,
-  'sm': 1.5rem,
-  'xs': 1rem,
+  'lg': clamp(35px, 3.5rem, 112px),
+  'md': clamp(20px, 2rem, 64px),
+  'sm': clamp(15px, 1.5rem, 48px),
+  'xs': clamp(10px, 1rem, 32px),
 ) !default;
 
 /*

@@ -9,21 +9,27 @@ import {
 } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const template = `<kirby-list 
   [items]="items" 
   (itemSelect)="onItemSelect($event)">
-    <!-- HEADER-->
-    <kirby-list-header *kirbyListHeader>
-      <p>Name</p>
-      <p>Value</p>
-    </kirby-list-header>
 
     <!-- BODY -->
     <kirby-item 
       *kirbyListItemTemplate="let item" 
-      [selectable]="true">
+      [selectable]="true"
+      [disclosure]="'arrow-more'">
+ <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+@if(item.id >= 4) {
+  <kirby-avatar slot="start" themeColor="light">
+    <kirby-icon name="person"></kirby-icon>
+  </kirby-avatar>
+}
         <kirby-label>
           <p class="kirby-item-title">
           {{item.title}}</p>
@@ -31,19 +37,13 @@ export const template = `<kirby-list
           {{item.subTitle}}</p>
         </kirby-label>
         <kirby-label slot="end">
-          <data [value]="item.amount">
-          {{item.amount}}</data>
-          <data [value]="item.detail" 
+          <kirby-flag themeColor="success">
+          {{item.amount}}</kirby-flag>
+          <data
           class="kirby-item-detail">
-          {{item.detail}}</data>
+          385.954,23</data>
         </kirby-label>
     </kirby-item>
-
-    <!-- Footer -->
-    <div class="footer" *kirbyListFooter>
-      <p>An appropriate footer</p>
-      <button kirby-button>Click me!</button>
-    </div>
 </kirby-list>`;
 
 @Component({
@@ -52,6 +52,10 @@ export const template = `<kirby-list
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
   imports: [
     ListComponent,
+    BadgeComponent,
+    FlagComponent,
+    AvatarComponent,
+    IconComponent,
     ItemComponent,
     ButtonComponent,
     LabelComponent,

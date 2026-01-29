@@ -26,10 +26,13 @@ $outside-slot-width: utils.relative-size('s');
   }
 
   .outside {
-    left: utils.size('xxxs');
+    --kirby-badge-font-size: 10px; // #{utils.size('xxs'};
+
+    display: flex;
+    width: $outside-slot-width;
     margin: 0;
     position: absolute;
-    width: $outside-slot-width;
+    left: utils.size('xxxs');
     z-index: 1;
   }
 }
@@ -72,6 +75,8 @@ ion-item {
     --ion-safe-area-left: 0px;
     --ion-safe-area-right: 0px;
   }
+
+  @include item.optimitze-for-scaled-text;
 
   @include utils.slotted('[slot="end"]') {
     text-align: end;
@@ -207,5 +212,42 @@ ion-item {
   ion-item::part(native) {
     border-top-left-radius: utils.border-radius('n');
     border-top-right-radius: utils.border-radius('n');
+  }
+}
+
+@include utils.media('<medium') {
+  :host-context(.kirby-text-scale-135) {
+    :host(.disclosure) {
+      ion-item {
+        // Make space for dicslosure indicator in item-end
+        --inner-padding-end: min(#{utils.relative-size('m')}, #{utils.size('xxl')});
+      }
+    }
+
+    ion-item::part(native) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    ion-item {
+      @include utils.slotted('.kirby-item-title') {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        white-space: initial;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .disclosure {
+      position: absolute;
+      right: 0;
+      top: utils.size('xxs');
+    }
+
+    .outside {
+      top: min(calc(10px + 0.5rem), 26px);
+    }
   }
 }

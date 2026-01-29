@@ -50,3 +50,27 @@
     font-weight: utils.font-weight('bold');
   }
 }
+
+/*
+ * Narrow screen (<768px) with text scaled >135% in User Agent settings.
+ */
+@include utils.media('<medium') {
+  :host-context(.kirby-text-scale-135) {
+    :host([slot='end']) ion-label {
+      @include utils.slotted('*') {
+        margin-inline-start: 0;
+      }
+    }
+
+    ion-label {
+      @include utils.slotted('.kirby-item-title') {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        white-space: initial;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
