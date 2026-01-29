@@ -62,24 +62,41 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 }
 
 /*
- * Narrow screen (<768px) with text scaled >135% in User Agent settings.
- */
-@mixin optimitze-for-scaled-text() {
+* Clamps text to a specified number of lines with ellipsis overflow.
+* @param {Number} $lines [2] - Maximum number of lines to display
+*/
+@mixin text-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: initial;
+  text-overflow: ellipsis;
+}
+
+@mixin if-scaled-text() {
   :host-context(.kirby-text-scale-135) {
     @include utils.media('<medium') {
-      ion-item {
-        @include utils.slotted('[slot="end"]') {
-          margin-inline-start: initial;
-        }
+      @content;
+    }
+  }
+}
 
-        --item-padding-top: #{utils.size('xxs')};
-        --inner-padding-top: 0;
-      }
+/// Applies optimizations for ion-item when text is scaled on narrow screens.
+@mixin optimize-item-for-scaled-text() {
+  @include if-scaled-text {
+    ion-item {
+      --item-padding-top: #{utils.size('xxs')};
+      --inner-padding-top: 0;
 
-      ion-item::part(item-inner) {
-        position: initial;
-        gap: utils.size('xxxs');
+      @include utils.slotted('[slot="end"]') {
+        margin-inline-start: initial;
       }
+    }
+
+    ion-item::part(item-inner) {
+      position: initial;
+      gap: utils.size('xxxs');
     }
   }
 }

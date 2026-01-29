@@ -26,7 +26,7 @@ $outside-slot-width: utils.relative-size('s');
   }
 
   .outside {
-    --kirby-badge-font-size: 10px; // #{utils.size('xxs'};
+    --kirby-badge-font-size: 10px;
 
     display: flex;
     width: $outside-slot-width;
@@ -76,7 +76,7 @@ ion-item {
     --ion-safe-area-right: 0px;
   }
 
-  @include item.optimitze-for-scaled-text;
+  @include item.optimize-item-for-scaled-text;
 
   @include utils.slotted('[slot="end"]') {
     text-align: end;
@@ -151,6 +151,34 @@ ion-item {
   }
 }
 
+@include item.if-scaled-text {
+  :host(.disclosure) ion-item {
+    // Make space for disclosure indicator in item-end
+    --inner-padding-end: min(#{utils.relative-size('m')}, #{utils.size('xxl')});
+  }
+
+  ion-item {
+    @include utils.slotted('.kirby-item-title') {
+      @include item.text-clamp(2);
+    }
+  }
+
+  ion-item::part(native) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .disclosure {
+    position: absolute;
+    right: 0;
+    top: utils.size('xxs');
+  }
+
+  .outside {
+    top: min(calc(10px + 0.5rem), 26px);
+  }
+}
+
 :host-context(kirby-dropdown) ion-item,
 :host-context(kirby-menu) ion-item,
 :host-context(kirby-popover) ion-item {
@@ -212,42 +240,5 @@ ion-item {
   ion-item::part(native) {
     border-top-left-radius: utils.border-radius('n');
     border-top-right-radius: utils.border-radius('n');
-  }
-}
-
-@include utils.media('<medium') {
-  :host-context(.kirby-text-scale-135) {
-    :host(.disclosure) {
-      ion-item {
-        // Make space for dicslosure indicator in item-end
-        --inner-padding-end: min(#{utils.relative-size('m')}, #{utils.size('xxl')});
-      }
-    }
-
-    ion-item::part(native) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    ion-item {
-      @include utils.slotted('.kirby-item-title') {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        white-space: initial;
-        text-overflow: ellipsis;
-      }
-    }
-
-    .disclosure {
-      position: absolute;
-      right: 0;
-      top: utils.size('xxs');
-    }
-
-    .outside {
-      top: min(calc(10px + 0.5rem), 26px);
-    }
   }
 }
