@@ -59,6 +59,7 @@
     :host([slot='end']) ion-label {
       @include utils.slotted('*') {
         margin-inline-start: 0;
+        text-align: start;
       }
     }
 
