@@ -5,6 +5,9 @@ import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/r
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
@@ -19,6 +22,9 @@ const meta: Meta<ItemComponent> = {
         RadioGroupComponent,
         ToggleComponent,
         ItemExampleComponent,
+        AvatarComponent,
+        IconComponent,
+        BadgeComponent,
       ],
     }),
   ],
@@ -783,6 +789,49 @@ export const LabelTypographyOverride: Story = {
 <kirby-item><kirby-label><p class="kirby-text-small-light">kirby-text-small-light</p></kirby-label></kirby-item>
 <kirby-item><kirby-label><p class="kirby-text-xsmall">kirby-text-xsmall</p></kirby-label></kirby-item>
 <kirby-item><kirby-label><p class="kirby-text-xxsmall">kirby-text-xxsmall</p></kirby-label></kirby-item>
+`,
+  }),
+};
+
+/*
+ * Here we test that item layout correctly adapts when text is scaled past a certain threshold on narrow screens.
+ * @see PreferredTextScaleService and ItemComponent
+ *
+ * Unfortunately, we have no option to change the browser text scale during vistual snapshots, so we have to emulate it by applying the CSS class.
+ */
+export const ItemTextScaleLayout: Story = {
+  parameters: {
+    chromatic: { modes: { ...responsiveModes } },
+  },
+  render: () => ({
+    template: `<div class="kirby-text-scale-135">
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-avatar slot="start" themeColor="light">
+      <kirby-icon name="person"></kirby-icon>
+    </kirby-avatar>
+    <kirby-label>
+      <p class="kirby-item-title">Vestas Wind Systems. Truncation takes place above two lines. As evident on narrow screens. </p>
+      <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <kirby-flag themeColor="success">76.543,21</kirby-flag>
+      <data class="kirby-item-detail">385.954,23</data>
+    </kirby-label>
+  </kirby-item>
+  <br>
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-label>
+      <p class="kirby-item-title">Vestas Wind Systems. Truncation takes place above two lines. As evident on narrow screens. </p>
+      <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <kirby-flag themeColor="success">76.543,21</kirby-flag>
+      <data class="kirby-item-detail">385.954,23</data>
+    </kirby-label>
+  </kirby-item>
+</div>
 `,
   }),
 };
