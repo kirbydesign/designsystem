@@ -71,10 +71,13 @@ export class DesignTokenHelper {
   }
 
   public static iconFontSize(key: keyof typeof styles.iconFontSizes): string {
-    const remValue = styles.iconFontSizes[key];
-    const remToPxValue = parseFloat(remValue) * BASE_PIXEL_VALUE;
+    const value = styles.iconFontSizes[key];
+    const remValue = value.split(/[,\s()]/).find((part) => part.endsWith('rem'));
 
-    return `${remToPxValue}px`;
+    if (remValue) {
+      return `${parseFloat(remValue) * BASE_PIXEL_VALUE}px`;
+    }
+    return value;
   }
 
   public static fontWeight(key: keyof typeof styles.fontWeight): string {
