@@ -75,7 +75,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 }
 
 @mixin if-scaled-text() {
-  :host-context(.kirby-text-scale-135) {
+  :host-context(.kirby-text-scale-135):not(.has-interactive) {
     @include utils.media('<medium') {
       @content;
     }
@@ -96,7 +96,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
     ion-item::part(item-inner) {
       position: initial;
-      gap: utils.size('xxxs');
+      gap: utils.size('xs');
     }
   }
 }
