@@ -7,12 +7,21 @@ import {
   Inject,
   Input,
   LOCALE_ID,
+  OnChanges,
+  Optional,
   Renderer2,
+  SimpleChanges,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import Inputmask from 'inputmask/dist/inputmask.es6.js';
 
+interface InputMask {
+  setValue: (val: string) => void;
+}
+
 @Directive({})
-export class DateInputDirective implements AfterViewInit {
+export class DateInputDirective implements AfterViewInit, OnChanges {
   @HostListener('input')
   onInput() {
     if (!this.isDateInput) return;
@@ -24,8 +33,10 @@ export class DateInputDirective implements AfterViewInit {
 
   @Input() prefillYear = false;
   @Input() useNativeDatePicker = false;
+  @Input() dateValue: string;
 
   private maskingElement: HTMLElement;
+  private inputmask: InputMask;
 
   /**
    * `isDateInput` is used to avoid removing the type attribute on the input element and calling updateMask()
@@ -54,13 +65,30 @@ export class DateInputDirective implements AfterViewInit {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    @Inject(LOCALE_ID) private locale: string
+    @Inject(LOCALE_ID) private locale: string,
+    @Optional() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[]
   ) {
     this.isDateInput = this.elementRef.nativeElement.type === 'date';
     if (this.isDateInput) {
       // Remove type to avoid user-agent specific behaviour for [type="date"]
       // Has to be done in constructor to avoid browser behavior kicking in
       this.elementRef.nativeElement.removeAttribute('type');
+
+      extendValueAccessors(valueAccessors, {
+        writeValue: {
+          afterWriteValue: (value) => this.updateMask(value as string),
+        },
+      });
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.dateValue && this.isDateInput && this.maskingElement) {
+      const newValue = changes.dateValue.currentValue;
+      this.updateMask(newValue);
+      if (newValue != null) {
+        this.inputmask?.setValue(newValue);
+      }
     }
   }
 
@@ -73,6 +101,12 @@ export class DateInputDirective implements AfterViewInit {
     // option was introduced
     if (this.enableInputMask) {
       this.initMask();
+
+      // Update mask with initial value if set via [value] binding on input
+      if (this.dateValue && this.inputmask) {
+        this.updateMask(this.dateValue);
+        this.inputmask.setValue(this.dateValue);
+      }
     }
 
     if (this.useNativeDatePicker) {
@@ -93,6 +127,7 @@ export class DateInputDirective implements AfterViewInit {
       placeholder,
       prefillYear: this.prefillYear,
     }).mask(this.elementRef.nativeElement);
+    this.inputmask = this.elementRef.nativeElement.inputmask;
 
     // Append input overlay, so it's possible to style typed date differntly than the date-mask
     this.appendMaskingElement();
@@ -130,10 +165,14 @@ export class DateInputDirective implements AfterViewInit {
     return wrapper;
   }
 
-  private updateMask(value: string): void {
+  private updateMask(value: string | null | undefined): void {
     if (!this.maskingElement) return;
+    if (!value) {
+      this.maskingElement.innerHTML = '';
+      return;
+    }
     const lastNumber = value.match(/.*?(\d)[^\d]*$/); // get last number in string
-    this.maskingElement.innerHTML = value
+    this.maskingElement.innerHTML = lastNumber
       ? value.slice(0, value.lastIndexOf(lastNumber[1]) + 1)
       : '';
   }

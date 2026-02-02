@@ -4,15 +4,10 @@
   }
 </div>
 
-<div class="menu-item-content {{ size() }}">
+<div class="menu-item-content">
   <ng-content></ng-content>
 </div>
 
 <div class="menu-item-end">
-  @if (badge(); as badge) {
-    <kirby-badge class="item-badge" [themeColor]="badge.themeColor ?? 'primary'">
-      {{ badge.value }}
-    </kirby-badge>
-  }
   <ng-content select="[slot='end']"></ng-content>
 </div>

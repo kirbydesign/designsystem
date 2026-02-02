@@ -189,7 +189,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * */
   @Output() public displayChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener('document:keydown.escape')
   public onEscapeKeyPressed(): void {
     if (this.closeOnEscapeKey) {
       this.hide();

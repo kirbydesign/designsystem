@@ -1,9 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as ionic from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
@@ -62,18 +61,12 @@ describe('ListComponent', () => {
   const createHost = createComponentFactory({
     component: ListComponent,
     imports: [
+      TestHelper.ionicModuleForTest,
       SpinnerComponent,
       ListComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
       ListItemComponent,
-      MockComponent(ionic.IonList),
-      MockComponent(ionic.IonListHeader),
-      MockComponent(ionic.IonLabel),
-      MockComponent(ionic.IonItem),
-      MockComponent(ionic.IonItemDivider),
-      MockComponent(ionic.IonItemGroup),
-      MockComponent(ionic.IonItemSliding),
     ],
     providers: [
       ListHelper,

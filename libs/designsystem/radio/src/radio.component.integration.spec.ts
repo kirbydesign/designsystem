@@ -1,11 +1,7 @@
-import { IonItem, IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { RadioGroupComponent } from './radio-group/radio-group.component';
 import { RadioComponent } from './radio.component';
@@ -18,15 +14,17 @@ describe('RadioComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: RadioComponent,
-    imports: [MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup)],
+    imports: [TestHelper.ionicModuleForTest, ItemComponent],
   });
 
   describe('by default', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost(`
     <kirby-item>
       <kirby-radio></kirby-radio>
     </kirby-item>`);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
       ionRadio = spectator.query('ion-radio');
     });
 
@@ -44,11 +42,13 @@ describe('RadioComponent in Item', () => {
   });
 
   describe('slotted start', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost(`
     <kirby-item>
       <kirby-radio slot="start"></kirby-radio>
     </kirby-item>`);
+      const ionItem = spectator.queryHost('ion-item');
+      await TestHelper.whenReady(ionItem);
     });
 
     it(`should have correct vertical spacing`, () => {
@@ -66,11 +66,7 @@ describe('RadioComponent in RadioGroup', () => {
 
   const createHost = createHostFactory({
     component: RadioGroupComponent,
-    imports: [
-      TestHelper.ionicModuleForTest,
-      RadioComponent,
-      MockComponents(ItemComponent, IonItem, IonRadio, IonRadioGroup),
-    ],
+    imports: [TestHelper.ionicModuleForTest, RadioComponent, ItemComponent],
   });
 
   describe('when radio group hasError=true', () => {

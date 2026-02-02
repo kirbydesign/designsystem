@@ -1,27 +1,123 @@
 import { Injectable, Signal, signal } from '@angular/core';
-
-import { SidebarMenuItem } from '../../models';
+import { Observable, Subject } from 'rxjs';
+import { CheckEvent, ExpandEvent, SidebarMenuItem } from '../../models';
 
 @Injectable({ providedIn: 'root' })
-export class MenuStateService<T extends SidebarMenuItem> {
-  readonly #toggledSubmenu = signal<T | undefined>(undefined);
-  readonly #selectedItem = signal<T | undefined>(undefined);
+export class MenuStateService {
+  readonly #menuItems = signal<SidebarMenuItem[]>([]);
+  readonly #selectedItem = signal<string | undefined>(undefined);
+  readonly #expandedItems = signal<Set<string>>(new Set());
+  readonly #checkedItems = signal<Set<string>>(new Set());
+  readonly #autoCollapse = signal<boolean>(false);
+  readonly #animationsDisabled = signal<boolean>(false);
+  readonly #expandEvents = new Subject<ExpandEvent>();
+  readonly #checkEvents = new Subject<CheckEvent>();
 
-  get toggledSubmenu(): Signal<T | undefined> {
-    return this.#toggledSubmenu;
+  get menuItems(): Signal<SidebarMenuItem[]> {
+    return this.#menuItems.asReadonly();
   }
 
-  set toggledSubmenu(item: T) {
-    this.#toggledSubmenu.set(item);
+  set menuItems(items: SidebarMenuItem[]) {
+    this.#menuItems.set(items);
   }
 
-  get selectedItem(): Signal<T | undefined> {
-    return this.#selectedItem;
+  get selectedItem(): Signal<string | undefined> {
+    return this.#selectedItem.asReadonly();
   }
 
-  set selectedItem(item: T) {
-    if (item.selectable ?? true) {
-      this.#selectedItem.set(item);
+  set selectedItem(id: string) {
+    this.#selectedItem.set(id);
+  }
+
+  get expandedItems(): Signal<Set<string>> {
+    return this.#expandedItems.asReadonly();
+  }
+
+  set expandedItems(ids: Set<string>) {
+    this.#expandedItems.set(ids);
+  }
+
+  get checkedItems(): Signal<Set<string>> {
+    return this.#checkedItems.asReadonly();
+  }
+
+  set checkedItems(ids: Set<string>) {
+    this.#checkedItems.set(ids);
+  }
+
+  set autoCollapse(enabled: boolean) {
+    this.#autoCollapse.set(enabled);
+  }
+
+  get animationsDisabled(): Signal<boolean> {
+    return this.#animationsDisabled.asReadonly();
+  }
+
+  set animationsDisabled(disabled: boolean) {
+    this.#animationsDisabled.set(disabled);
+  }
+
+  get expandEvents(): Observable<ExpandEvent> {
+    return this.#expandEvents.asObservable();
+  }
+
+  get checkEvents(): Observable<CheckEvent> {
+    return this.#checkEvents.asObservable();
+  }
+
+  expandItem(id: string): void {
+    this.#expandEvents.next({ id, isExpanded: true });
+    if (this.#autoCollapse()) {
+      this.#expandedItems.set(this.#findAncestors(id));
+      return;
+    }
+    this.#expandedItems.update((items) => {
+      items.add(id);
+      return new Set(items);
+    });
+  }
+
+  collapseItem(id: string): void {
+    this.#expandEvents.next({ id, isExpanded: false });
+    this.#expandedItems.update((items) => {
+      items.delete(id);
+      return new Set(items);
+    });
+  }
+
+  checkItem(id: string): void {
+    this.#checkEvents.next({ id, isChecked: true });
+    this.#checkedItems.update((items) => {
+      items.add(id);
+      return new Set(items);
+    });
+  }
+
+  uncheckItem(id: string): void {
+    this.#checkEvents.next({ id, isChecked: false });
+    this.#checkedItems.update((items) => {
+      items.delete(id);
+      return new Set(items);
+    });
+  }
+
+  #findAncestors(id: string): Set<string> {
+    return recursivelyFindAncestors(this.#menuItems(), id) ?? new Set();
+  }
+}
+
+function recursivelyFindAncestors(items: SidebarMenuItem[], id: string): Set<string> | undefined {
+  for (const item of items) {
+    if (item.id === id) {
+      return new Set([item.id]);
+    }
+    if (item.type === 'submenu') {
+      const foundAncestors = recursivelyFindAncestors(item.children, id);
+      if (foundAncestors) {
+        foundAncestors.add(item.id);
+        return foundAncestors;
+      }
     }
   }
+  return undefined;
 }

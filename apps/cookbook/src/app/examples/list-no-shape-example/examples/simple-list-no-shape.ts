@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListComponent } from '@kirbydesign/designsystem/list';
+import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CurrencyPipe } from '@angular/common';
 import { BaseListNoShape } from '../base-list-no-shape';
@@ -16,7 +16,7 @@ export const simpleListNoShapeExampleTemplate = `<kirby-list [items]="items" sha
 @Component({
   selector: 'cookbook-simple-list-no-shape-example',
   template: simpleListNoShapeExampleTemplate,
-  imports: [ListComponent, ItemComponent, CurrencyPipe],
+  imports: [ListComponent, ItemComponent, ListItemTemplateDirective, CurrencyPipe],
 })
 export class SimpleListNoShapeExampleComponent extends BaseListNoShape {
   template = simpleListNoShapeExampleTemplate;

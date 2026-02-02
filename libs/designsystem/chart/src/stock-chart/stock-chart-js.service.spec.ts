@@ -1,7 +1,6 @@
 import { ElementRef } from '@angular/core';
-import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator';
 import { ChartDataset as ChartJSDataset, ChartType as ChartJSType, ChartOptions } from 'chart.js';
-import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '@kirbydesign/designsystem/helpers';
 import {
@@ -19,11 +18,12 @@ describe('StockChartJSService', () => {
   let chartJSService: StockChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
-  const mockChartConfigService = MockProvider(ChartConfigService, {
+  const mockChartConfigService = mockProvider(ChartConfigService, {
     getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPES_CONFIG[chartType]),
     getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATIONS_CONFIG[type],
     chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPES_CONFIG[type].type as ChartJSType,
     applyInteractionFunctionsExtensions: (options: ChartOptions) => options,
+    getStockChartOptions: () => ({}),
   });
 
   const createService = createServiceFactory({
