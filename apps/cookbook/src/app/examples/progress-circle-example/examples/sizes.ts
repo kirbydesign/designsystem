@@ -3,9 +3,9 @@ import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circ
 
 const config = {
   selector: 'cookbook-progress-circle-example-sizes',
-  template: `<kirby-progress-circle size="sm" aria-label="Size small" value="25" themeColor="danger"><p>sm</p></kirby-progress-circle>
-<kirby-progress-circle size="md" aria-label="Size medium" value="50" themeColor="warning"><p>md <em>(default)</em></p></kirby-progress-circle>
-<kirby-progress-circle size="lg" aria-label="Size large" value="75" themeColor="success"><p>lg</p></kirby-progress-circle>`,
+  template: `<kirby-progress-circle size="sm" aria-label="Progress according to investment savings" value="25" themeColor="danger"><p>sm</p></kirby-progress-circle>
+<kirby-progress-circle size="md" aria-label="Progress according to investment savings" value="50" themeColor="warning"><p>md <em>(default)</em></p></kirby-progress-circle>
+<kirby-progress-circle size="lg" aria-label="Progress according to investment savings" value="75" themeColor="success"><p>lg</p></kirby-progress-circle>`,
 };
 
 @Component({

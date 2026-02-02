@@ -6,7 +6,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-progress-circle-example-content-avatar',
-  template: `<kirby-progress-circle aria-label="Avatar small" value="25" themeColor="danger" size="sm">
+  template: `<kirby-progress-circle aria-label="Progress according to investment savings" value="25" themeColor="danger" size="sm">
   <kirby-avatar themeColor="white">
     <kirby-icon name="kirby"></kirby-icon>
   </kirby-avatar>
