@@ -7,7 +7,6 @@ import {
   HostBinding,
   Input,
   OnDestroy,
-  Renderer2,
 } from '@angular/core';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
@@ -43,8 +42,7 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
-    private changeDetectorRef: ChangeDetectorRef,
-    private renderer: Renderer2
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
