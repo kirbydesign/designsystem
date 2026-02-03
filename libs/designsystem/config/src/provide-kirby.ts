@@ -25,6 +25,7 @@ import {
 } from '@kirbydesign/designsystem/modal';
 import { ResizeObserverFactory, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
+//import { KirbyAccordionItemElement } from '@kirbydesign/core/accordion-item';
 
 /**
  * Configuration object for global configuration of Kirby.
@@ -57,6 +58,7 @@ export const KIRBY_CONFIG = new InjectionToken<KirbyConfig>('KIRBY_CONFIG');
 export function provideKirby(
   ...features: Provider[] | EnvironmentProviders[]
 ): EnvironmentProviders {
+  //KirbyAccordionItemElement.define();
   return makeEnvironmentProviders([
     ModalController,
     ActionSheetHelper,
