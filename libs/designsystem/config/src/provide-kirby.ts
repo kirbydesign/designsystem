@@ -25,6 +25,9 @@ import {
 } from '@kirbydesign/designsystem/modal';
 import { ResizeObserverFactory, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { createCustomElement } from '@angular/elements';
+import { Injector } from '@angular/core';
 //import { KirbyAccordionItemElement } from '@kirbydesign/core/accordion-item';
 
 /**
@@ -72,6 +75,18 @@ export function provideKirby(
     CanDismissHelper,
     ...patchIonicProviders(),
     features,
+    {
+      provide: 'KIRBY_REGISTER_ELEMENTS',
+      multi: true,
+      useFactory: (injector: Injector) => {
+        if (!customElements.get('kirby-icon')) {
+          const iconElement = createCustomElement(IconComponent, { injector });
+          customElements.define('kirby-icon', iconElement);
+        }
+        return true;
+      },
+      deps: [Injector],
+    },
   ]);
 }
 
