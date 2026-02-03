@@ -1,19 +1,30 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+// There is a limit to how large text can be on narrow viewports with text resized
+// before segment-button texts start to collide horizontally, so we cap it at 135% for narrow viewports
+$maximum-font-size-sm: utils.size('xs') * 1.35;
+$maximum-font-size-md: utils.size('s') * 1.35;
+$badge-offset: 0.8em;
+
+// Make badge scale proportionally with segment font-size instead of browser setting, so it also caps at 135% and preserves ratio.
+// Achieved by calculating the font size ratio between badge and segment, and converting it to em.
+$badge-font-size: calc(utils.font-size-base('xxs') / utils.font-size-base('s') * 1em);
+
 :host {
   display: block;
   user-select: none;
 
   --kirby-badge-position: absolute;
-  --kirby-badge-top: -#{utils.size('xxs')};
-  --kirby-badge-right: -#{utils.size('s')};
+  --kirby-badge-top: #{-1 * $badge-offset};
+  --kirby-badge-right: #{-2 * $badge-offset};
   --kirby-badge-z-index: #{utils.z('segment-badge')};
+  --kirby-badge-font-size: #{$badge-font-size};
 
   &.sm {
     ion-segment-button {
       min-height: utils.size('l');
-      font-size: utils.font-size('xs');
+      font-size: min(utils.font-size('xs'), $maximum-font-size-sm);
 
       --padding-start: #{utils.size('s')};
       --padding-end: #{utils.size('s')};
@@ -126,7 +137,7 @@ ion-segment-button {
     min-height: utils.size('xl');
     min-width: fit-content;
     font-weight: utils.font-weight('normal');
-    font-size: utils.font-size('s');
+    font-size: min(utils.font-size('s'), $maximum-font-size-md);
     text-transform: none;
     margin: 0;
   }

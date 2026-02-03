@@ -39,6 +39,10 @@
   @return _get-map-prop(variables.$font-sizes, $key);
 }
 
+@function font-size-base($key: 'n') {
+  @return _get-map-prop(variables.$font-sizes-base, $key);
+}
+
 @function line-height($key: 'm') {
   @return _get-map-prop(variables.$line-height, $key);
 }
