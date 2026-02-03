@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component } from '@angular/core';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { AccordionDefaultExampleComponent } from '../../examples/accordion-example/examples/default';
 import { AccordionExpandedExampleComponent } from '../../examples/accordion-example/examples/expanded';
@@ -30,7 +30,6 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AccordionShowcaseComponent {
   accordionProperties: ApiDescriptionProperty[] = [
