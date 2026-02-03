@@ -10,12 +10,12 @@ const config = {
   template: `<kirby-card hasPadding="true">
   <kirby-item>
     <kirby-label>
-      <h2 id="card1-header-label">Your investment savings</h2>
+      <h2 id="first-card-header-label">Your investment savings</h2>
       <div>
         <data class="kirby-text-large">{{ 2435034 | currency }}</data>
       </div>
     </kirby-label>
-    <kirby-progress-circle themeColor="success" aria-labelledby="card1-header-label" value="37" slot="end">
+    <kirby-progress-circle themeColor="success" aria-labelledby="first-card-header-label" value="37" slot="end">
       <kirby-icon name="moneybag" size="md"></kirby-icon>
     </kirby-progress-circle>
   </kirby-item>
@@ -23,10 +23,10 @@ const config = {
 
 <kirby-card hasPadding="true">
   <kirby-item>
-    <kirby-progress-circle themeColor="success" aria-labelledby="card2-header-label" value="37" slot="start">
+    <kirby-progress-circle themeColor="success" aria-labelledby="second-card-header-label" value="37" slot="start">
       <kirby-icon name="moneybag" size="md"></kirby-icon>
     </kirby-progress-circle>
-    <h2 id="card2-header-label">Your investment savings</h2>
+    <h2 id="second-card-header-label">Your investment savings</h2>
     <data slot="end" class="kirby-text-bold">{{ 2435034 | currency }}</data>
   </kirby-item>
 </kirby-card>`,
