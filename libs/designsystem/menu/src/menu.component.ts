@@ -253,33 +253,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
   }
 
-  private focusInteractiveElement(
-    interactiveElement: HTMLIonToggleElement | HTMLIonRadioElement | HTMLIonCheckboxElement,
-    kirbyItem: HTMLElement
-  ) {
-    // Determine if we need temporary kirby item focus: VoiceOver Fix on Safari on mac
-    const needsTemporaryHostFocus =
-      this.platformService.getBrowser() === Browser.Safari &&
-      this.platformService.getDeviceType() !== DeviceType.iOS;
-    if (needsTemporaryHostFocus) {
-      this.setFocusWithTempFocusToKirbyItem(kirbyItem, interactiveElement);
-    } else {
-      interactiveElement.focus();
-    }
-  }
-
-  private focusButtonElement(focusElement: HTMLButtonElement, kirbyItem: HTMLElement) {
-    // Determine if we need temporary kirby item focus: VoiceOver Fix on IOS and Safari on mac
-    const needsTemporaryHostFocus =
-      this.platformService.getBrowser() === Browser.Safari ||
-      this.platformService.getDeviceType() === DeviceType.iOS;
-    if (needsTemporaryHostFocus) {
-      this.setFocusWithTempFocusToKirbyItem(kirbyItem, focusElement);
-    } else {
-      focusElement.focus();
-    }
-  }
-
   // Briefly focus kirby item and then move to target element: A fix to move VoiceOver cursor correctly
   private setFocusWithTempFocusToKirbyItem(focusElement: HTMLElement, kirbyItem: HTMLElement) {
     this.renderer.setAttribute(kirbyItem, 'tabindex', '-1');
