@@ -244,12 +244,12 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
     if (firstInteractiveElementWithinItem) {
-      this.focusInteractiveElement(firstInteractiveElementWithinItem, kirbyItem);
+      this.setFocusWithTempFocusToKirbyItem(firstInteractiveElementWithinItem, kirbyItem);
     } else {
       const nativeButton: HTMLButtonElement =
         ionItem.shadowRoot?.querySelector('button:not([disabled])');
       if (!nativeButton) return;
-      this.focusButtonElement(nativeButton, kirbyItem);
+      this.setFocusWithTempFocusToKirbyItem(nativeButton, kirbyItem);
     }
   }
 
@@ -262,7 +262,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       this.platformService.getBrowser() === Browser.Safari &&
       this.platformService.getDeviceType() !== DeviceType.iOS;
     if (needsTemporaryHostFocus) {
-      this.temporaryFocusOnKirbyItem(kirbyItem, interactiveElement);
+      this.setFocusWithTempFocusToKirbyItem(kirbyItem, interactiveElement);
     } else {
       interactiveElement.focus();
     }
@@ -274,14 +274,14 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
       this.platformService.getBrowser() === Browser.Safari ||
       this.platformService.getDeviceType() === DeviceType.iOS;
     if (needsTemporaryHostFocus) {
-      this.temporaryFocusOnKirbyItem(kirbyItem, focusElement);
+      this.setFocusWithTempFocusToKirbyItem(kirbyItem, focusElement);
     } else {
       focusElement.focus();
     }
   }
 
   // Briefly focus kirby item and then move to target element: A fix to move VoiceOver cursor correctly
-  private temporaryFocusOnKirbyItem(kirbyItem: HTMLElement, focusElement: HTMLElement) {
+  private setFocusWithTempFocusToKirbyItem(focusElement: HTMLElement, kirbyItem: HTMLElement) {
     this.renderer.setAttribute(kirbyItem, 'tabindex', '-1');
     kirbyItem.focus();
 
@@ -315,6 +315,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     this.kirbyItemComponents.changes
       .pipe(startWith(null), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
+        this.setRoleAttributeForAllItems();
         this.ensureSelectableItems();
       });
   }
@@ -367,5 +368,21 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   ngOnDestroy(): void {
     this.disposeIonScrollListener?.();
+  }
+
+  private setRoleAttributeForAllItems() {
+    this.kirbyItems.forEach((item) => {
+      this.setRoleAttributeForItem(item.nativeElement);
+    });
+  }
+
+  private setRoleAttributeForItem(item: HTMLElement) {
+    let menuItemRole = 'menuitem';
+    if (item.matches(':has(kirby-toggle, kirby-checkbox)')) {
+      menuItemRole = 'menuitemcheckbox';
+    } else if (item.matches(':has(kirby-radio)')) {
+      menuItemRole = 'menuitemradio';
+    }
+    this.renderer.setAttribute(item, 'role', menuItemRole);
   }
 }
