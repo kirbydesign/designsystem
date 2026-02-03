@@ -6,9 +6,10 @@
 $maximum-font-size-sm: utils.size('xs') * 1.35;
 $maximum-font-size-md: utils.size('s') * 1.35;
 $badge-offset: 0.8em;
-$badge-font-size: calc(
-  10em / 14
-); // Base font size in segment-button is 14px, and our target is 10px. `em` ensures that badge scales with font-size of segment-button.
+
+// Make badge scale proportionally with segment font-size instead of browser setting, so it is also capped at 135%.
+// Achieved by calculating the font size ratio between badge and segment, and converting it to em.
+$badge-font-size: calc(utils.font-size-base('xxs') / utils.font-size-base('s') * 1em);
 
 :host {
   display: block;
