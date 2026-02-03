@@ -26,7 +26,7 @@ $outside-slot-width: utils.relative-size('s');
   }
 
   .outside {
-    --kirby-badge-font-size: 10px;
+    --kirby-badge-font-size: 10px; // do not scale badge with font-size in outside slot
 
     display: flex;
     width: $outside-slot-width;
@@ -131,6 +131,8 @@ ion-item {
 }
 
 .disclosure {
+  --kirby-icon-font-size: #{utils.size('m')}; // do not scale disclosure with font-size in end slot
+
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
 
@@ -152,30 +154,10 @@ ion-item {
 }
 
 @include item.if-scaled-text {
-  :host(.disclosure) ion-item {
-    // Make space for disclosure indicator in item-end
-    --inner-padding-end: min(#{utils.relative-size('m')}, #{utils.size('xxl')});
-  }
-
   ion-item {
     @include utils.slotted('.kirby-item-title') {
       @include item.text-clamp(2);
     }
-  }
-
-  ion-item::part(native) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .disclosure {
-    position: absolute;
-    right: 0;
-    top: utils.size('xxs');
-  }
-
-  .outside {
-    top: min(calc(10px + 0.5rem), 26px);
   }
 }
 

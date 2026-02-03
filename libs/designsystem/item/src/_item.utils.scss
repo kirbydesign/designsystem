@@ -1,4 +1,5 @@
 @use 'sass:list';
+@use 'sass:math';
 
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/base/item-typography';
@@ -82,21 +83,64 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   }
 }
 
-/// Applies optimizations for ion-item when text is scaled on narrow screens.
+// Applies optimizations for ion-item when text is scaled on narrow screens.
 @mixin optimize-item-for-scaled-text() {
   @include if-scaled-text {
-    ion-item {
+    $line-center: 0.5lh;
+    $disclosure-radius: utils.size('xs');
+    $badge-radius: utils.size('xxxs') * 0.5;
+    $start-slot-content-margin: utils.size('xxxxs');
+    $outside-slot-offset: utils.size(
+      's'
+    ); // best guess for what might work with different start slot content (e.g. small avatar)
+
+    ion-item:has([slot='start']:not(.outside), [slot='end']:not(.disclosure)) {
       --item-padding-top: #{utils.size('xxs')};
       --inner-padding-top: 0;
+      --inner-padding-end: #{utils.size('l')}; // Make space for disclosure indicator in item-end
+
+      // center badge vertically with first line of text
+      .outside {
+        align-items: start;
+        top: calc(var(--item-padding-top) + $line-center - $badge-radius);
+      }
+
+      // center disclosure vertically with first line of text
+      .disclosure {
+        position: absolute;
+        right: utils.size('xxs');
+        top: calc(var(--item-padding-top) + $line-center - $disclosure-radius);
+        font-size: utils.font-size('n');
+        line-height: utils.line-height('n');
+      }
 
       @include utils.slotted('[slot="end"]') {
         margin-inline-start: initial;
       }
+
+      &::part(item-inner) {
+        position: initial;
+        gap: utils.size('xs');
+      }
+
+      &::part(input-wrapper) {
+        justify-content: center;
+      }
+
+      &::part(native) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
-    ion-item::part(item-inner) {
-      position: initial;
-      gap: utils.size('xs');
+    ion-item:has([slot='start']:not(.outside)) {
+      .outside {
+        top: calc(var(--item-padding-top) + $start-slot-content-margin + $outside-slot-offset);
+      }
+
+      .disclosure {
+        top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+      }
     }
   }
 }

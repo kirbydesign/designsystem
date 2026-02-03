@@ -8,6 +8,7 @@ import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
@@ -15,6 +16,7 @@ const meta: Meta<ItemComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
+        FlagComponent,
         CheckboxComponent,
         ItemComponent,
         LabelComponent,
@@ -797,19 +799,32 @@ export const LabelTypographyOverride: Story = {
  * Here we test that item layout correctly adapts when text is scaled past a certain threshold on narrow screens.
  * @see PreferredTextScaleService and ItemComponent
  *
- * Unfortunately, we have no option to change the browser text scale during vistual snapshots, so we have to emulate it by applying the CSS class.
+ * Unfortunately, we have no option to change the browser text scale during vistual snapshots,
+ * so we have to mock it by manually adding '.kirby-text-scale-135' class on a surrounding element.
  */
 export const ItemTextScaleLayout: Story = {
   parameters: {
     chromatic: { modes: { ...responsiveModes } },
   },
   render: () => ({
-    template: `<div class="kirby-text-scale-135">
+    template: `<p><em>On narrow screens only</em>, items with either start or end slot content should change to row-based layout, when text is scaled above 135%.</p>
+<p>Here mocked by adding the '.kirby-text-scale-135' class on a surrounding element, as base font cannot be changed for visual snapshots.</p>
+<p>On wideer screens, items should not change layout even for larger text size.</p>
+<div class="kirby-text-scale-135">
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
     <kirby-avatar slot="start" themeColor="light">
       <kirby-icon name="person"></kirby-icon>
     </kirby-avatar>
+    <kirby-label>
+      <p class="kirby-item-title">Vestas Wind Systems. Truncation takes place above two lines. As evident on narrow screens. </p>
+      <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
+    </kirby-label>
+    <kirby-flag slot="end" themeColor="success">76.543,21</kirby-flag>
+  </kirby-item>
+  <br>
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
     <kirby-label>
       <p class="kirby-item-title">Vestas Wind Systems. Truncation takes place above two lines. As evident on narrow screens. </p>
       <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
@@ -823,13 +838,40 @@ export const ItemTextScaleLayout: Story = {
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
     <kirby-label>
-      <p class="kirby-item-title">Vestas Wind Systems. Truncation takes place above two lines. As evident on narrow screens. </p>
+      <p class="kirby-item-title">Vestas Wind Systems</p>
       <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
     </kirby-label>
-    <kirby-label slot="end">
-      <kirby-flag themeColor="success">76.543,21</kirby-flag>
-      <data class="kirby-item-detail">385.954,23</data>
-    </kirby-label>
+  </kirby-item>
+  <br>
+
+  <p>Items with controls should not change layout on neither mobile nor desktop.</p>
+  <kirby-item size="md">
+    <kirby-checkbox [checked]="true" slot="start">Slot start, selected</kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox slot="start">Slot start</kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox slot="end">Slot end</kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox>No slot</kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox slot="start">
+      <kirby-label>
+        <p class="kirby-item-title">Slot start, complex label</p>
+        <p class="kirby-item-detail">Label</p>
+      </kirby-label>
+    </kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox slot="end">
+      <kirby-label>
+        <p class="kirby-item-title">Slot end, complex label</p>
+        <p class="kirby-item-detail">Label</p>
+      </kirby-label>
+    </kirby-checkbox>
   </kirby-item>
 </div>
 `,

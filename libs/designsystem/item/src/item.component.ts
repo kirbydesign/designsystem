@@ -94,6 +94,7 @@ export class ItemComponent implements AfterViewInit {
       this.ionItem.nativeElement
     );
     this.ionicElementPartHelper.setPart('item-inner', this.ionItem, '.item-inner');
+    this.ionicElementPartHelper.setPart('input-wrapper', this.ionItem, '.input-wrapper');
   }
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
