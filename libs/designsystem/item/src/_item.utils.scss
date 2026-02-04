@@ -75,6 +75,9 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 // Applies optimizations for ion-item when text is scaled on narrow screens.
 @mixin optimize-text-resize() {
   @include if-scaled-text-narrow-viewport {
+    $start-slot-content: '[slot="start"]:not(.outside)';
+    $end-slot-content: '[slot="end"]:not(.disclosure)';
+    $end-slot-content-only: ':not(:has(#{$start-slot-content})):has(#{$end-slot-content})';
     $line-center: 0.5lh;
     $disclosure-radius: utils.size('xs');
     $badge-radius: utils.size('xxxs') * 0.5;
@@ -82,9 +85,6 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     $outside-slot-offset: utils.size(
       's'
     ); // best guess for what might work with different start slot content (e.g. small avatar)
-
-    $start-slot-content: '[slot="start"]:not(.outside)';
-    $end-slot-content: '[slot="end"]:not(.disclosure)';
 
     // Apply text clamp if text is scaled
     ion-item {
@@ -96,11 +96,16 @@ $base-typography-selectors: (':where(.kirby-item-title)');
       }
     }
 
+    // if there is either start or end slot (or both), change layout to better fit scaled text, with row layout etc.
     ion-item:has(#{$start-slot-content}),
     ion-item:has(#{$end-slot-content}) {
       --item-padding-top: #{utils.size('xxs')};
       --inner-padding-top: 0;
       --inner-padding-end: #{utils.size('l')}; // Make space for disclosure indicator in item-end
+
+      @include utils.slotted('[slot="end"]') {
+        margin-inline-start: initial;
+      }
 
       &::part(item-inner) {
         position: initial;
@@ -125,13 +130,6 @@ $base-typography-selectors: (':where(.kirby-item-title)');
       }
     }
 
-    ion-item:not(:has(#{$start-slot-content})):has(#{$end-slot-content}) {
-      .outside {
-        align-items: start;
-        top: calc(var(--item-padding-top) + $line-center - $badge-radius);
-      }
-    }
-
     // center disclosure and badge vertically with start slot content
     ion-item:has(#{$start-slot-content}) {
       .outside {
@@ -140,6 +138,13 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
       .disclosure {
         top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+      }
+    }
+
+    ion-item#{$end-slot-content-only} {
+      .outside {
+        align-items: start;
+        top: calc(var(--item-padding-top) + $line-center - $badge-radius);
       }
     }
   }
