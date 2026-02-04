@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 
 const TEXT_SCALE_THRESHOLD = 1.35;
-const BASE_REM_PX = 16;
+const BASE_REM_IN_PX = 16;
 const TEXT_SCALE_CLASS = 'kirby-text-resize';
 const OBSERVED_ELEMENT_STYLES =
   'position:absolute;width:1rem;height:1rem;top:-9999px;visibility:hidden;pointer-events:none';
@@ -48,8 +48,8 @@ export class TextResizeObserverService implements OnDestroy {
   }
 
   private updateTextScaleClass = (): void => {
-    const remInPx = this.observedElement?.offsetWidth ?? BASE_REM_PX;
-    const scale = remInPx / BASE_REM_PX;
+    const remInPx = this.observedElement?.offsetWidth ?? BASE_REM_IN_PX;
+    const scale = remInPx / BASE_REM_IN_PX;
     document.documentElement.classList.toggle(TEXT_SCALE_CLASS, scale > TEXT_SCALE_THRESHOLD);
   };
 }
