@@ -257,8 +257,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
     setTimeout(() => {
       focusElement.focus();
-      console.log('focusElement', focusElement);
-      console.log('document.activeElement', document.activeElement);
       this.renderer.removeAttribute(kirbyItem, 'tabindex');
     }, 50);
   }
