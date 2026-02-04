@@ -11,7 +11,6 @@ export enum SpotIllustrationSize {
   LG = 'lg',
   XL = 'xl',
 }
-
 export const illustrations = {
   'airballoon.wind.ballon-part.cloud': {
     md: 'airballoon.wind.ballon-part.cloud.medium.svg',
@@ -68,6 +67,7 @@ export const illustrations = {
   },
   'invest-document.graph.bars.square': {
     md: 'invest-document.graph.bars.square.medium.svg',
+    lg: 'invest-document.graph.bars.square.large.svg',
     xl: 'invest-document.graph.bars.square.xlarge.svg',
   },
   'megaphone.sound.megaphone-part.circle': {
