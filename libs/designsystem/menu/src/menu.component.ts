@@ -30,7 +30,6 @@ import {
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import {
-  Browser,
   DeviceType,
   PlatformService,
   StringSearchHelper,
@@ -155,13 +154,11 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = 0;
         this.floatingMenu.show();
-        this.focusItem();
         break;
       case 'ArrowUp':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = this.kirbyItems.length - 1;
         this.floatingMenu.show();
-        this.focusItem();
         break;
     }
   }
@@ -244,7 +241,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
     if (firstInteractiveElementWithinItem) {
-      this.setFocusWithTempFocusToKirbyItem(firstInteractiveElementWithinItem, kirbyItem);
+      firstInteractiveElementWithinItem.focus();
     } else {
       const nativeButton: HTMLButtonElement =
         ionItem.shadowRoot?.querySelector('button:not([disabled])');
@@ -288,7 +285,9 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     this.kirbyItemComponents.changes
       .pipe(startWith(null), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        this.setRoleAttributeForAllItems();
+        if (this.platformService.getDeviceType() !== DeviceType.iOS) {
+          this.setRoleAttributeForAllItems();
+        }
         this.ensureSelectableItems();
       });
   }
@@ -316,7 +315,22 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     if (!menuIsShown) {
       this.focusedIndex = -1;
       this.getTriggerButton().focus();
+      return;
     }
+
+    if (this.focusedIndex === -1) {
+      this.focusedIndex = 0;
+    }
+
+    this.focusFirstItemAfterRender();
+  }
+
+  private focusFirstItemAfterRender() {
+    setTimeout(() => {
+      if (this.kirbyItems.length > 0) {
+        this.focusItem();
+      }
+    }, 50);
   }
 
   private setUserProvidedButtonAriaAttributes() {
