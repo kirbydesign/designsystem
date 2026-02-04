@@ -75,7 +75,9 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   text-overflow: ellipsis;
 }
 
-@mixin if-scaled-text() {
+// Applies styles when text is scaled on narrow viewports.
+// Only exception is items with radio, checkbox etc. (.has-interactive), that should not be adjusted.
+@mixin if-scaled-text-narrow-viewport() {
   :host-context(.kirby-text-resize):not(.has-interactive) {
     @include utils.media('<medium') {
       @content;
@@ -85,7 +87,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
 // Applies optimizations for ion-item when text is scaled on narrow screens.
 @mixin optimize-text-resize() {
-  @include if-scaled-text {
+  @include if-scaled-text-narrow-viewport {
     $line-center: 0.5lh;
     $disclosure-radius: utils.size('xs');
     $badge-radius: utils.size('xxxs') * 0.5;
@@ -94,45 +96,21 @@ $base-typography-selectors: (':where(.kirby-item-title)');
       's'
     ); // best guess for what might work with different start slot content (e.g. small avatar)
 
+    $start-slot-content: '[slot="start"]:not(.outside)';
+    $end-slot-content: '[slot="end"]:not(.disclosure)';
+
+    // Apply text clamp if text is scaled
     ion-item {
       @include utils.slotted('.kirby-item-title') {
         @include text-clamp(2);
       }
     }
 
-    // center disclosure and badge vertically with start slot content
-    ion-item:has([slot='start']:not(.outside)) {
-      .outside {
-        top: calc(var(--item-padding-top) + $start-slot-content-margin + $outside-slot-offset);
-      }
-
-      .disclosure {
-        top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
-      }
-    }
-
-    // center disclosure and outside content vertically with first line of text (no start content)
-    ion-item:has([slot='start']:not(.outside), [slot='end']:not(.disclosure)) {
+    ion-item:has(#{$start-slot-content}),
+    ion-item:has(#{$end-slot-content}) {
       --item-padding-top: #{utils.size('xxs')};
       --inner-padding-top: 0;
       --inner-padding-end: #{utils.size('l')}; // Make space for disclosure indicator in item-end
-
-      .outside {
-        align-items: start;
-        top: calc(var(--item-padding-top) + $line-center - $badge-radius);
-      }
-
-      .disclosure {
-        position: absolute;
-        right: utils.size('xxs');
-        top: calc(var(--item-padding-top) + $line-center - $disclosure-radius);
-        font-size: utils.font-size('n');
-        line-height: utils.line-height('n');
-      }
-
-      @include utils.slotted('[slot="end"]') {
-        margin-inline-start: initial;
-      }
 
       &::part(item-inner) {
         position: initial;
@@ -147,26 +125,48 @@ $base-typography-selectors: (':where(.kirby-item-title)');
         flex-direction: column;
         align-items: flex-start;
       }
+
+      .disclosure {
+        position: absolute;
+        right: utils.size('xxs');
+        top: calc(var(--item-padding-top) + $line-center - $disclosure-radius);
+        font-size: utils.font-size('n');
+        line-height: utils.line-height('n');
+      }
+    }
+
+    ion-item:not(:has(#{$start-slot-content})):has(#{$end-slot-content}) {
+      .outside {
+        align-items: start;
+        top: calc(var(--item-padding-top) + $line-center - $badge-radius);
+      }
+    }
+
+    // center disclosure and badge vertically with start slot content
+    ion-item:has(#{$start-slot-content}) {
+      .outside {
+        top: calc(var(--item-padding-top) + $start-slot-content-margin + $outside-slot-offset);
+      }
+
+      .disclosure {
+        top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+      }
     }
   }
 }
 
-// Applies truncation and text alignment adjustments for kirby-label when text is scaled on narrow screens.
-// Only exception is items with radio, checkbox etc. (.has-interactive), that should not be adjusted.
 @mixin optimize-label-text-resize() {
-  @include utils.media('<medium') {
-    :host-context(.kirby-text-resize kirby-item:not(.has-interactive)) {
-      :host([slot='end']) ion-label {
-        @include utils.slotted('*') {
-          margin-inline-start: 0;
-          text-align: start;
-        }
+  @include if-scaled-text-narrow-viewport {
+    :host([slot='end']) ion-label {
+      @include utils.slotted('*') {
+        margin-inline-start: 0;
+        text-align: start;
       }
+    }
 
-      ion-label {
-        @include utils.slotted('.kirby-item-title') {
-          @include text-clamp(2);
-        }
+    ion-label {
+      @include utils.slotted('.kirby-item-title') {
+        @include text-clamp(2);
       }
     }
   }
