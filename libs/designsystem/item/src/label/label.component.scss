@@ -53,19 +53,4 @@
 /*
  * Scaled text optimizations for label elements.
  */
-:host-context(kirby-item:not(.has-interactive)) {
-  @include item.if-scaled-text {
-    :host([slot='end']) ion-label {
-      @include utils.slotted('*') {
-        margin-inline-start: 0;
-        text-align: start;
-      }
-    }
-
-    ion-label {
-      @include utils.slotted('.kirby-item-title') {
-        @include item.text-clamp(2);
-      }
-    }
-  }
-}
+@include item.optimize-label-text-resize;

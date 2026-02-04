@@ -76,8 +76,6 @@ ion-item {
     --ion-safe-area-right: 0px;
   }
 
-  @include item.optimize-item-for-scaled-text;
-
   @include utils.slotted('[slot="end"]') {
     text-align: end;
 
@@ -95,6 +93,7 @@ ion-item {
   }
 
   @include item.item-typography;
+  @include item.optimize-text-resize;
 
   @include utils.slotted(':not([slot])') {
     width: 100%;
@@ -149,14 +148,6 @@ ion-item {
 
     &.rotate {
       transform: rotate(180deg);
-    }
-  }
-}
-
-@include item.if-scaled-text {
-  ion-item {
-    @include utils.slotted('.kirby-item-title') {
-      @include item.text-clamp(2);
     }
   }
 }

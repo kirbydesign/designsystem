@@ -84,7 +84,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 }
 
 // Applies optimizations for ion-item when text is scaled on narrow screens.
-@mixin optimize-item-for-scaled-text() {
+@mixin optimize-text-resize() {
   @include if-scaled-text {
     $line-center: 0.5lh;
     $disclosure-radius: utils.size('xs');
@@ -94,18 +94,34 @@ $base-typography-selectors: (':where(.kirby-item-title)');
       's'
     ); // best guess for what might work with different start slot content (e.g. small avatar)
 
+    ion-item {
+      @include utils.slotted('.kirby-item-title') {
+        @include text-clamp(2);
+      }
+    }
+
+    // center disclosure and badge vertically with start slot content
+    ion-item:has([slot='start']:not(.outside)) {
+      .outside {
+        top: calc(var(--item-padding-top) + $start-slot-content-margin + $outside-slot-offset);
+      }
+
+      .disclosure {
+        top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+      }
+    }
+
+    // center disclosure and outside content vertically with first line of text (no start content)
     ion-item:has([slot='start']:not(.outside), [slot='end']:not(.disclosure)) {
       --item-padding-top: #{utils.size('xxs')};
       --inner-padding-top: 0;
       --inner-padding-end: #{utils.size('l')}; // Make space for disclosure indicator in item-end
 
-      // center badge vertically with first line of text
       .outside {
         align-items: start;
         top: calc(var(--item-padding-top) + $line-center - $badge-radius);
       }
 
-      // center disclosure vertically with first line of text
       .disclosure {
         position: absolute;
         right: utils.size('xxs');
@@ -132,14 +148,25 @@ $base-typography-selectors: (':where(.kirby-item-title)');
         align-items: flex-start;
       }
     }
+  }
+}
 
-    ion-item:has([slot='start']:not(.outside)) {
-      .outside {
-        top: calc(var(--item-padding-top) + $start-slot-content-margin + $outside-slot-offset);
+// Applies truncation and text alignment adjustments for kirby-label when text is scaled on narrow screens.
+// Only exception is items with radio, checkbox etc. (.has-interactive), that should not be adjusted.
+@mixin optimize-label-text-resize() {
+  @include utils.media('<medium') {
+    :host-context(.kirby-text-resize kirby-item:not(.has-interactive)) {
+      :host([slot='end']) ion-label {
+        @include utils.slotted('*') {
+          margin-inline-start: 0;
+          text-align: start;
+        }
       }
 
-      .disclosure {
-        top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+      ion-label {
+        @include utils.slotted('.kirby-item-title') {
+          @include text-clamp(2);
+        }
       }
     }
   }
