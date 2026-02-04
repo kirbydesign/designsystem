@@ -62,19 +62,6 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   }
 }
 
-/*
-* Clamps text to a specified number of lines with ellipsis overflow.
-* @param {Number} $lines [2] - Maximum number of lines to display
-*/
-@mixin text-clamp($lines: 2) {
-  display: -webkit-box;
-  -webkit-line-clamp: $lines;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  white-space: initial;
-  text-overflow: ellipsis;
-}
-
 // Applies styles when text is scaled on narrow viewports.
 // Only exception is items with radio, checkbox etc. (.has-interactive), that should not be adjusted.
 @mixin if-scaled-text-narrow-viewport() {
@@ -102,7 +89,10 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     // Apply text clamp if text is scaled
     ion-item {
       @include utils.slotted('.kirby-item-title') {
-        @include text-clamp(2);
+        @include utils.line-clamp(2);
+
+        white-space: initial;
+        text-overflow: ellipsis;
       }
     }
 
@@ -166,7 +156,10 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
     ion-label {
       @include utils.slotted('.kirby-item-title') {
-        @include text-clamp(2);
+        @include utils.line-clamp(2);
+
+        white-space: initial;
+        text-overflow: ellipsis;
       }
     }
   }
