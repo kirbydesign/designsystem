@@ -809,7 +809,7 @@ export const ItemTextResizeLayout: Story = {
   render: () => ({
     template: `<p><em>On narrow screens only</em>, items with either start or end slot content should change to row-based layout, when text is scaled above 135%.</p>
 <p>Here mocked by adding the '.kirby-text-resize' class on a surrounding element, as base font cannot be changed for visual snapshots.</p>
-<p>On wideer screens, items should not change layout even for larger text size.</p>
+<p>On wider screens items should not change layout even for larger text size.</p>
 <div class="kirby-text-resize">
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
@@ -836,8 +836,10 @@ export const ItemTextResizeLayout: Story = {
   <br>
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-label>
       <p class="kirby-item-title">Item with end slot content, no start slot. Text is clamped at two lines.</p>
       <p class="kirby-item-subtitle">Subtitle</p>
+    </kirby-label>
     <kirby-label slot="end">
       <kirby-flag themeColor="success">76.543,21</kirby-flag>
       <data class="kirby-item-detail">385.954,23</data>
@@ -853,7 +855,7 @@ export const ItemTextResizeLayout: Story = {
   </kirby-item>
   <br>
 
-  <p>Items with controls should not change layout on neither mobile nor desktop.</p> 
+  <p>Items with controls should not change layout on neither mobile nor desktop.</p>
   <kirby-item size="md">
     <kirby-checkbox slot="start">Slot start</kirby-checkbox>
   </kirby-item>

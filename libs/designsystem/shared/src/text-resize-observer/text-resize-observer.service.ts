@@ -21,6 +21,10 @@ const OBSERVED_ELEMENT_STYLES =
  *   }
  * }
  * ```
+ *
+ * If `env(preferred-text-scale)` from the CSS Environment Variables spec matures,
+ * it might replace some of this functionality.
+ * @see https://drafts.csswg.org/css-env-1/#preferred-text-scale
  */
 @Injectable({ providedIn: 'root' })
 export class TextResizeObserverService implements OnDestroy {
