@@ -802,7 +802,7 @@ export const LabelTypographyOverride: Story = {
  * Unfortunately, we have no option to change the browser text scale during vistual snapshots,
  * so we have to mock it by manually adding '.kirby-text-resize' class on a surrounding element.
  */
-export const ItemTextScaleLayout: Story = {
+export const ItemTextResizeLayout: Story = {
   parameters: {
     chromatic: { modes: { ...responsiveModes } },
   },
@@ -817,18 +817,27 @@ export const ItemTextScaleLayout: Story = {
       <kirby-icon name="person"></kirby-icon>
     </kirby-avatar>
     <kirby-label>
-      <p class="kirby-item-title">Vestas Wind Systems. Truncation takes place above two lines. As evident on narrow screens. </p>
-      <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
+      <p class="kirby-item-title">Item with start and end slot content. Text is clamped at two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
     </kirby-label>
     <kirby-flag slot="end" themeColor="success">76.543,21</kirby-flag>
   </kirby-item>
   <br>
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-avatar slot="start" themeColor="light">
+      <kirby-icon name="person"></kirby-icon>
+    </kirby-avatar>
     <kirby-label>
-      <p class="kirby-item-title">Vestas Wind Systems. Truncation takes place above two lines. As evident on narrow screens. </p>
-      <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
+      <p class="kirby-item-title">Item with start slot content, no end slot. Text is clamped at two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
     </kirby-label>
+  </kirby-item>
+  <br>
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <p class="kirby-item-title">Item with end slot content, no start slot. Text is clamped at two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
     <kirby-label slot="end">
       <kirby-flag themeColor="success">76.543,21</kirby-flag>
       <data class="kirby-item-detail">385.954,23</data>
@@ -838,16 +847,13 @@ export const ItemTextScaleLayout: Story = {
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
     <kirby-label>
-      <p class="kirby-item-title">Vestas Wind Systems</p>
-      <p class="kirby-item-subtitle">Renewable Energy, Wind</p>
+      <p class="kirby-item-title">Item with no start or end slot content. Still has line clamp for two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
     </kirby-label>
   </kirby-item>
   <br>
 
-  <p>Items with controls should not change layout on neither mobile nor desktop.</p>
-  <kirby-item size="md">
-    <kirby-checkbox [checked]="true" slot="start">Slot start, selected</kirby-checkbox>
-  </kirby-item>
+  <p>Items with controls should not change layout on neither mobile nor desktop.</p> 
   <kirby-item size="md">
     <kirby-checkbox slot="start">Slot start</kirby-checkbox>
   </kirby-item>
