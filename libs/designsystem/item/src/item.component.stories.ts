@@ -797,10 +797,10 @@ export const LabelTypographyOverride: Story = {
 
 /*
  * Here we test that item layout correctly adapts when text is scaled past a certain threshold on narrow screens.
- * @see PreferredTextScaleService and ItemComponent
+ * @see TextResizeObserverService and ItemComponent
  *
  * Unfortunately, we have no option to change the browser text scale during vistual snapshots,
- * so we have to mock it by manually adding '.kirby-text-scale-135' class on a surrounding element.
+ * so we have to mock it by manually adding '.kirby-text-resize' class on a surrounding element.
  */
 export const ItemTextScaleLayout: Story = {
   parameters: {
@@ -808,9 +808,9 @@ export const ItemTextScaleLayout: Story = {
   },
   render: () => ({
     template: `<p><em>On narrow screens only</em>, items with either start or end slot content should change to row-based layout, when text is scaled above 135%.</p>
-<p>Here mocked by adding the '.kirby-text-scale-135' class on a surrounding element, as base font cannot be changed for visual snapshots.</p>
+<p>Here mocked by adding the '.kirby-text-resize' class on a surrounding element, as base font cannot be changed for visual snapshots.</p>
 <p>On wideer screens, items should not change layout even for larger text size.</p>
-<div class="kirby-text-scale-135">
+<div class="kirby-text-resize">
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
     <kirby-avatar slot="start" themeColor="light">
@@ -891,12 +891,12 @@ export const ItemWithHorizontalLabelTruncation: Story = {
   render: () => ({
     template: `<kirby-item>
     <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
-    <data class="kirby-item-detail" slot="end">22.86%</data> 
+    <data class="kirby-item-detail" slot="end">22.86%</data>
 </kirby-item>
 <kirby-item>
     <kirby-label direction="horizontal">
         <p class="kirby-item-title" >Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
-        <data class="kirby-item-detail">22.86%</data> 
+        <data class="kirby-item-detail">22.86%</data>
     </kirby-label>
 </kirby-item>`,
   }),

@@ -76,7 +76,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 }
 
 @mixin if-scaled-text() {
-  :host-context(.kirby-text-scale-135):not(.has-interactive) {
+  :host-context(.kirby-text-resize):not(.has-interactive) {
     @include utils.media('<medium') {
       @content;
     }

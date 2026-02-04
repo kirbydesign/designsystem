@@ -26,9 +26,9 @@ import {
   ModalHelper,
 } from '@kirbydesign/designsystem/modal';
 import {
-  PreferredTextScaleService,
   ResizeObserverFactory,
   ResizeObserverService,
+  TextResizeObserverService,
 } from '@kirbydesign/designsystem/shared';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 
@@ -98,7 +98,7 @@ export function withGlobalSetup(config?: KirbyConfig): EnvironmentProviders {
 
   return makeEnvironmentProviders([
     provideIonicAngular(ionicConfig),
-    provideAppInitializer(() => inject(PreferredTextScaleService).initialize()),
+    provideAppInitializer(() => inject(TextResizeObserverService).initialize()),
   ]);
 }
 
