@@ -1,15 +1,19 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   Input,
   NgZone,
+  OnChanges,
   Output,
+  QueryList,
 } from '@angular/core';
 import type { KirbyAccordionItemElement } from '@kirbydesign/core/accordion-item';
-
+import { ListComponent } from '@kirbydesign/designsystem/list';
 // START_OF_AUTO_GENERATED_COMPONENT
 // AUTO-GENERATED - Any missing type imports can be added manually above, but do not change component source
 @Component({
@@ -17,8 +21,25 @@ import type { KirbyAccordionItemElement } from '@kirbydesign/core/accordion-item
   template: '<ng-content></ng-content>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class KirbyAccordionItemComponent {
+export class KirbyAccordionItemComponent implements AfterContentInit, OnChanges {
   private el: KirbyAccordionItemElement;
+  @ContentChildren(ListComponent) listChildren: QueryList<ListComponent> | undefined;
+
+  ngAfterContentInit(): void {
+    if (this.listChildren && this.listChildren.length > 0) {
+      this.hasPadding = false;
+      // this.hasList = true;
+      this.listChildren.forEach((child) => {
+        child.shape = 'none';
+      });
+    }
+  }
+
+  ngOnChanges(): void {
+    if (this.isDisabled) {
+      this.isExpanded = false;
+    }
+  }
 
   constructor(
     private e: ElementRef<KirbyAccordionItemElement>,

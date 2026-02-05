@@ -45,20 +45,6 @@ export class KirbyAccordionItemElement extends KirbyElement {
     );
   }
 
-  firstUpdated() {
-    const slot = this.renderRoot.querySelector('slot');
-    if (slot) {
-      slot.addEventListener('slotchange', () => {
-        const assigned = slot.assignedElements({ flatten: true });
-        assigned.forEach((el) => {
-          if (el.tagName === 'KIRBY-LIST') {
-            el.setAttribute('shape', 'none');
-          }
-        });
-      });
-    }
-  }
-
   render() {
     return html`
       <div class="content-layer" aria-disabled=${this.isDisabled ? 'true' : 'false'}>
