@@ -88,6 +88,10 @@ export class DesignTokenHelper {
     return styles.lineHeight[key];
   }
 
+  public static fontResizeThreshold(): string {
+    return styles.fontResizeThreshold;
+  }
+
   public static backgroundColor(): string {
     return ColorHelper.getBackgroundColor();
   }

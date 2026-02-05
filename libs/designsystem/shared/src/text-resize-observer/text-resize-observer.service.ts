@@ -1,13 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-const TEXT_SCALE_THRESHOLD = 1.35;
+const TEXT_SCALE_THRESHOLD = DesignTokenHelper.fontResizeThreshold();
 const BASE_REM_IN_PX = 16;
 const TEXT_SCALE_CLASS = 'kirby-text-resize';
 const OBSERVED_ELEMENT_STYLES =
   'position:absolute;width:1rem;height:1rem;top:-9999px;visibility:hidden;pointer-events:none';
 
 /**
- * Detects when text is resized above 135% in browser/OS settings and toggles a
+ * Detects when text is resized above a certain threshold in browser/OS settings and toggles a
  * `kirby-text-resize` class on the root html element.
  *
  * Uses a `ResizeObserver` on a hidden rem-sized element. When the user changes text size, the element's pixel size changes,

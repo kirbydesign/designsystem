@@ -89,6 +89,18 @@ $font-weight: (
   'black': 900,
 ) !default;
 
+/*
+* Threshold based on the maximum font scale of iOS/iPad devices (without larger A11y types enabled):
+* (xxxLarge body / Large body) * (Large body / default browser size), or: (23 / 17) * (17 / 16) = 1,.4375 ~ 1.45
+*
+* @see https://developer.apple.com/design/human-interface-guidelines/typography#iOS-iPadOS-Dynamic-Type-sizes
+*
+* It is used to determine when to apply alternative layout styles to items,
+* and as a text-resize maximum scale for a few components that cannot reasonably 
+* scale to 200% (tab button, tab navigation)
+*/
+$font-resize-threshold: 1.45;
+
 /* Icon
 ****************************************************************************/
 $icon-font-sizes: (
