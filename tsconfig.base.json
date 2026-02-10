@@ -80,6 +80,9 @@
       "@kirbydesign/extensions-angular/spot-illustration": [
         "libs/extensions/angular/dist/spot-illustration"
       ],
+      "@kirbydesign/extensions-angular/multi-select-autocomplete": [
+        "libs/extensions/angular/dist/multi-select-autocomplete"
+      ],
       "@repo/docs-import-map/*": ["tools/docs-import-map/*"],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]

@@ -1,0 +1,58 @@
+<kirby-form-field>
+  <input
+    kirby-input
+    type="text"
+    [attr.id]="inputId"
+    aria-haspopup="listbox"
+    [attr.aria-controls]="dropdownId"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-activedescendant]="isOpen ? dropdownId + '-item-' + focusedItem : null"
+    [attr.aria-invalid]="hasError"
+    [size]="size"
+    (click)="onToggle($event)"
+    [disabled]="disabled"
+    [tabindex]="tabindex"
+    [placeholder]="placeholder"
+    [value]="selectedText"
+    (input)="onInput($event)"
+  />
+</kirby-form-field>
+
+<kirby-popover
+  [target]="formFieldElement"
+  [popout]="popout"
+  (click)="onPopoverClick()"
+  (willHide)="onPopoverWillHide()"
+>
+  <kirby-card role="listbox" [attr.id]="dropdownId" [attr.aria-labelledby]="inputId">
+    @for (item of searchItems; track item) {
+      <ng-container
+        *ngTemplateOutlet="
+          itemTemplate || defaultItemTemplate;
+          context: {
+            $implicit: item,
+            selected: item === selectedItem,
+            focused: item === focusedItem,
+          }
+        "
+      ></ng-container>
+    }
+  </kirby-card>
+</kirby-popover>
+
+<ng-template #defaultItemTemplate let-item let-selected="selected" let-focused="focused">
+  <kirby-item
+    [selectable]="true"
+    [selected]="selected"
+    (click)="onItemSelect(item)"
+    [class.focused]="focused"
+    role="option"
+    [attr.id]="dropdownId + '-item-' + getTextFromItem(item)"
+    [attr.aria-selected]="selected"
+  >
+    <p class="kirby-item-title">{{ getTextFromItem(item) }}</p>
+    @if (selected) {
+      <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
+    }
+  </kirby-item>
+</ng-template>
