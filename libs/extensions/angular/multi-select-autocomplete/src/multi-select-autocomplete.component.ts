@@ -72,9 +72,24 @@ export class MultiSelectAutocomplete
   protected inputId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
   @Input()
-  searchFunction: (searchTerm: string) => unknown[] = () => [];
+  public displayStringFunction: (item: unknown) => string = () => '';
 
-  protected searchItems: unknown[] = [];
+  @Input()
+  public searchFunction: (searchTerm: string) => unknown[] = () => [];
+
+  private _searchItems: unknown[] = [];
+  protected get searchItems(): unknown[] {
+    return this._searchItems;
+  }
+  private set searchItems(value: unknown[]) {
+    this._searchItems = value;
+    if (!this._searchItems) {
+      return;
+    }
+
+    this.focusedItem = this._searchItems[0];
+  }
+
   private _items: unknown[] = [];
 
   get items(): unknown[] {
@@ -103,7 +118,7 @@ export class MultiSelectAutocomplete
     }
   }
 
-  // _focusedIndex keeps track of which element has focus and will be selected
+  // _focusedItem keeps track of which element has focus and will be selected
   // if it is activated (by pressing ENTER)
   private _focusedItem: unknown = undefined;
   get focusedItem(): unknown {
@@ -114,45 +129,39 @@ export class MultiSelectAutocomplete
   public set focusedItem(item: unknown) {
     if (this._focusedItem !== item) {
       this._focusedItem = item;
-      this.scrollItemIntoView(this._focusedItem);
     }
   }
-
-  @Input()
-  public itemTextProperty: string = 'text';
-
-  // @Input()
-  // public itemIdProperty!: string; // required and verified in _ensureComponents()
 
   @Input()
   public placeholder = 'Please search...';
 
   @Input()
-  set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
+  public set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
     this._popout = direction || HorizontalDirection.right;
   }
 
-  get popout() {
+  public get popout() {
     return this._popout;
   }
 
   @Input()
-  attentionLevel: '1' | '2' | '3' = '3';
+  public attentionLevel: '1' | '2' | '3' = '3';
 
   @Input()
-  expand?: 'block';
+  public expand?: 'block';
 
   @Input()
-  disabled = false;
+  public disabled = false;
 
   @HostBinding('attr.disabled')
-  get _isDisabled(): 'disabled' | null {
+  public get _isDisabled(): 'disabled' | null {
     return this.disabled ? 'disabled' : null;
   }
 
-  @Output() hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+  @Output()
+  hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   private _hasError: boolean = false;
+
   @HostBinding('class.error')
   @Input()
   get hasError(): boolean {
@@ -174,7 +183,7 @@ export class MultiSelectAutocomplete
   @Input()
   public tabindex = 0;
 
-  private get _tabindex(): number {
+  protected get _tabindex(): number {
     return this.disabled ? -1 : this.tabindex;
   }
 
@@ -191,10 +200,6 @@ export class MultiSelectAutocomplete
   public change: EventEmitter<unknown> = new EventEmitter<unknown>();
 
   protected value: unknown = undefined;
-
-  protected get selectedText(): string {
-    return this.getTextFromItem(this.value) ?? '';
-  }
 
   @HostBinding('class.expand')
   public get _isBlockLevel() {
@@ -270,8 +275,7 @@ export class MultiSelectAutocomplete
         kirbyItem.nativeElement,
         'click',
         () => {
-          const dataItem = this.getDataItemForRenderedElement(kirbyItem.nativeElement);
-          this.onItemSelect(dataItem);
+          this.onItemSelect(kirbyItem.nativeElement);
         }
       );
 
@@ -309,16 +313,6 @@ export class MultiSelectAutocomplete
     this.isOpen ? this.close() : this.open();
   }
 
-  /* Utility that makes it easier to set styles on card element */
-  private setPopoverCardStyle(style: string, value: string) {
-    this.renderer.setStyle(
-      this.cardElement?.nativeElement,
-      style,
-      value,
-      RendererStyleFlags2.DashCase
-    );
-  }
-
   public ngOnInit() {
     this.ensureComponents();
   }
@@ -339,6 +333,16 @@ export class MultiSelectAutocomplete
       });
     }
     this.forwardAriaLabelToDropdownButton();
+  }
+
+  /* Utility that makes it easier to set styles on card element */
+  private setPopoverCardStyle(style: string, value: string) {
+    this.renderer.setStyle(
+      this.cardElement?.nativeElement,
+      style,
+      value,
+      RendererStyleFlags2.DashCase
+    );
   }
 
   public ngOnDestroy(): void {
@@ -373,7 +377,6 @@ export class MultiSelectAutocomplete
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
-      this.scrollItemIntoView(this.focusedItem);
       this.cdr.markForCheck();
     }
   }
@@ -384,6 +387,8 @@ export class MultiSelectAutocomplete
     }
     if (this.isOpen) {
       this.state = OpenState.closed;
+      this.setInputDisplayValue(this.displayStringFunction(this.selectedItem));
+      this.searchItems = this.items;
       this.popover?.hide();
     }
   }
@@ -410,7 +415,7 @@ export class MultiSelectAutocomplete
     this.selectItemByValue(value);
 
     // When written from outside, reflect selected text in the input
-    this.setInputDisplayValue(this.getTextFromItem(this.value) ?? '');
+    this.setInputDisplayValue(this.displayStringFunction(this.value));
 
     this.cdr.markForCheck();
   }
@@ -454,7 +459,7 @@ export class MultiSelectAutocomplete
       this.focusedItem = item;
       this.change.emit(this.value);
       this.onChange(this.value);
-      this.setInputDisplayValue(this.getTextFromItem(item));
+      this.setInputDisplayValue(this.displayStringFunction(item));
       this.searchItems = this.items;
     }
   }
@@ -463,36 +468,62 @@ export class MultiSelectAutocomplete
     this.selectedItem = this.findDataItem(item);
   }
 
-  public getTextFromItem(item: unknown): string {
-    if (typeof item === 'string') {
-      return item;
-    }
-    if (item && typeof item === 'object' && this.itemTextProperty in item) {
-      return (item as Record<string, unknown>)[this.itemTextProperty] as string;
-    }
-    return '';
-  }
-
-  // private getIdFromItem(item: string): string | undefined {
+  // protected getTextFromItem(item: unknown): string {
   //   if (typeof item === 'string') {
   //     return item;
   //   }
-  //   if (item && typeof item === 'object' && this.itemIdProperty in item) {
-  //     return (item as Record<string, string>)[this.itemIdProperty] as string;
+  //   if (item && typeof item === 'object' && this.itemTextProperty in item) {
+  //     return (item as Record<string, unknown>)[this.itemTextProperty] as string;
   //   }
-  //   return undefined;
+  //   return '';
   // }
 
-  private scrollItemIntoView(item: unknown): void {
-    const kirbyItems: QueryList<ElementRef<HTMLElement>> | undefined =
-      this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
-        ? this.kirbyItemsSlotted
-        : this.kirbyItemsDefault;
-    if (kirbyItems && kirbyItems.length) {
-      const itemElement = this.findItemElement(item);
-      if (itemElement) {
-        itemElement.scrollIntoView({ block: 'nearest' });
+  protected onInput(event: Event): void {
+    if (!this.isOpen) {
+      this.open();
+    }
+
+    const input = event.target as HTMLInputElement;
+    this.searchItems = input.value ? this.searchFunction(input.value) : this.items;
+  }
+
+  protected onPopoverWillHide() {
+    this.state = OpenState.closed;
+    this.formFieldElement.nativeElement.focus();
+    this.onTouched();
+  }
+
+  protected onPopoverClick() {
+    this.close();
+  }
+
+  @HostListener('mousedown', ['$event'])
+  public onMouseDown(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  public onTouchStart(event: TouchEvent) {
+    if (this.isOpen) {
+      event.stopPropagation();
+    }
+  }
+
+  @HostListener('focusout', ['$event'])
+  public onFocusOut(event: FocusEvent) {
+    const relatedTarget = event.relatedTarget as HTMLElement | null; // relatedTarget is the element receiving focus
+    const isOnTriggerButton =
+      relatedTarget && this.elementRef.nativeElement.contains(relatedTarget);
+    const isInsidePopover = relatedTarget && relatedTarget.closest('kirby-popover');
+
+    if (!isOnTriggerButton && !isInsidePopover) {
+      if (this.isOpen) {
+        this.close();
       }
+      this.onTouched();
     }
   }
 
@@ -511,106 +542,9 @@ export class MultiSelectAutocomplete
     }
   }
 
-  // @HostListener('keydown', ['$event'])
-  // _onKeydown(event: KeyboardEvent) {
-  //   const key = event.key;
-  //
-  //   if (this.items.length === 0) {
-  //     console.warn('[Kirby] No items found within dropdown');
-  //     return;
-  //   }
-  //
-  //   if (this.disabled) return;
-  //
-  //   // ALT + ArrowDown: Open dropdown
-  //   if (key === 'ArrowDown' && event.altKey) {
-  //     this.preventDefaultAndStopImmediatePropagation(event);
-  //     if (!this.isOpen) {
-  //       this.open();
-  //       this.focusedIndex = this.selectedIndex > -1 ? this.selectedIndex : 0;
-  //     }
-  //     return;
-  //   }
-  //
-  //   // ALT + ArrowUp: Select focused item and close dropdown
-  //   if (key === 'ArrowUp' && event.altKey) {
-  //     this.preventDefaultAndStopImmediatePropagation(event);
-  //     if (this.focusedIndex > -1) {
-  //       this.selectItem(this.focusedIndex);
-  //       this.close();
-  //     }
-  //   }
-  //   // PageUp: Jump up 10 options or to first
-  //   if (key === 'PageUp') {
-  //     this.preventDefaultAndStopImmediatePropagation(event);
-  //     if (!this.isOpen) {
-  //       this.open();
-  //     }
-  //     this.focusedIndex = Math.max(0, this.focusedIndex - 10);
-  //     return;
-  //   }
-  //
-  //   // PageDown: Jump down 10 options or to last
-  //   if (key === 'PageDown') {
-  //     this.preventDefaultAndStopImmediatePropagation(event);
-  //     if (!this.isOpen) {
-  //       this.open();
-  //     }
-  //     this.focusedIndex = Math.min(this.items.length - 1, this.focusedIndex + 10);
-  //     return;
-  //   }
-  //
-  //   console.log('Unhandled key:', key);
-  // }
-
-  public onInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchItems = input.value ? this.searchFunction(input.value) : this.items;
-  }
-
-  @HostListener('mousedown', ['$event'])
-  public onMouseDown(event: MouseEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  }
-
-  @HostListener('touchstart', ['$event'])
-  public onTouchStart(event: TouchEvent) {
-    if (this.isOpen) {
-      event.stopPropagation();
-    }
-  }
-
-  public onPopoverWillHide() {
-    this.state = OpenState.closed;
-    this.formFieldElement.nativeElement.focus();
-    this.onTouched();
-  }
-
-  @HostListener('focusout', ['$event'])
-  public onFocusOut(event: FocusEvent) {
-    const relatedTarget = event.relatedTarget as HTMLElement | null; // relatedTarget is the element receiving focus
-    const isOnTriggerButton =
-      relatedTarget && this.elementRef.nativeElement.contains(relatedTarget);
-    const isInsidePopover = relatedTarget && relatedTarget.closest('kirby-popover');
-
-    if (!isOnTriggerButton && !isInsidePopover) {
-      if (this.isOpen) {
-        this.close();
-      }
-      this.onTouched();
-    }
-  }
-
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
   public onEnterOrEscape() {
-    this.close();
-  }
-
-  public onPopoverClick() {
     this.close();
   }
 
@@ -625,71 +559,96 @@ export class MultiSelectAutocomplete
     this.toggle();
   }
 
-  // @HostListener('keydown.arrowup', ['$event'])
-  // @HostListener('keydown.arrowdown', ['$event'])
-  // @HostListener('keydown.arrowleft', ['$event'])
-  // @HostListener('keydown.arrowright', ['$event'])
-  // _onArrowKeys(event: Event) {
-  //   if (this.disabled) return false;
-  //
-  //   const keyEvent = event as KeyboardEvent; // safe in this context
-  //   // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
-  //   if (this.isOpen && (keyEvent.key === 'ArrowLeft' || keyEvent.key === 'ArrowRight')) {
-  //     return false;
-  //   }
-  //
-  //   if (!this.isOpen) {
-  //     // Avoid page scroll
-  //     event.preventDefault();
-  //     this.open();
-  //
-  //     // If no selected item then focus first or last item
-  //     if (!keyEvent.altKey && this.selectedItem) {
-  //       switch (keyEvent.key) {
-  //         case 'ArrowUp':
-  //           this.focusedItem = 0;
-  //           break;
-  //         case 'ArrowDown':
-  //           this.focusedItem = this.items.length - 1;
-  //           break;
-  //         default:
-  //           break;
-  //       }
-  //     }
-  //     return false;
-  //   }
-  //
-  //   const newFocusedIndex = this.keyboardHandlerService.handle(
-  //     keyEvent,
-  //     this.focusedItem,
-  //     this.items.length - 1
-  //   );
-  //   if (newFocusedIndex > -1) {
-  //     this.focusedItem = newFocusedIndex;
-  //   }
-  //   return false;
-  // }
+  @HostListener('keydown.arrowUp', ['$event'])
+  @HostListener('keydown.arrowDown', ['$event'])
+  @HostListener('keydown.pageUp', ['$event'])
+  @HostListener('keydown.pageDown', ['$event'])
+  @HostListener('keydown.home', ['$event'])
+  @HostListener('keydown.end', ['$event'])
+  public onArrowKeys(event: Event): void {
+    if (this.disabled) return;
 
-  // @HostListener('keydown.home', ['$event'])
-  // @HostListener('keydown.end', ['$event'])
-  // _onHomeEndKeys(event: Event) {
-  //   if (this.disabled) return;
-  //   if (!this.isOpen) {
-  //     event.preventDefault();
-  //     this.open();
-  //   }
-  //
-  //   const keyEvent = event as KeyboardEvent; // safe in this context
-  //   const newFocusedIndex = this.keyboardHandlerService.handle(
-  //     keyEvent,
-  //     this.focusedItem,
-  //     this.items.length - 1
-  //   );
-  //   if (newFocusedIndex > -1) {
-  //     this.focusedItem = newFocusedIndex;
-  //   }
-  //   return false;
-  // }
+    const keyEvent = event as KeyboardEvent; // safe in this context
+    // Avoid page scroll
+    event.preventDefault();
+
+    if (!this.isOpen) {
+      this.open();
+      this.setFocusOnFirstOrLastItem(keyEvent);
+    } else {
+      this.handleFocusNavigation(keyEvent);
+    }
+  }
+
+  private handleFocusNavigation(keyEvent: KeyboardEvent): void {
+    switch (keyEvent.key) {
+      case 'ArrowDown':
+        this.shiftFocusIndex(1);
+        break;
+      case 'ArrowUp':
+        this.shiftFocusIndex(-1);
+        break;
+      case 'PageDown':
+        this.shiftFocusIndex(10);
+        break;
+      case 'PageUp':
+        this.shiftFocusIndex(-10);
+        break;
+      case 'Home':
+        this.setFocusOnFirstItem();
+        break;
+      case 'End':
+        this.setFocusOnLastItem();
+        break;
+      default:
+        break;
+    }
+  }
+
+  private shiftFocusIndex(numberOfItems: number) {
+    // Handle up/down navigation when open
+    const currentIndex = this.searchItems.indexOf(this.focusedItem);
+    let newIndex;
+
+    if (numberOfItems > 0) {
+      newIndex = Math.min(this.searchItems.length - 1, currentIndex + 1);
+    } else {
+      newIndex = Math.max(0, currentIndex - 1);
+    }
+
+    if (newIndex !== currentIndex) {
+      this.focusedItem = this.searchItems[newIndex];
+    }
+  }
+
+  private setFocusOnFirstOrLastItem(keyEvent: KeyboardEvent): void {
+    switch (keyEvent.key) {
+      case 'ArrowUp':
+      case 'PageUp':
+      case 'Home':
+        this.setFocusOnFirstItem();
+        break;
+      case 'ArrowDown':
+      case 'PageDown':
+      case 'End':
+        this.setFocusOnLastItem();
+        break;
+      default:
+        break;
+    }
+  }
+
+  private setFocusOnLastItem(): void {
+    if (this.searchItems.length > 0) {
+      this.focusedItem = this.searchItems[this.searchItems.length - 1];
+    }
+  }
+
+  private setFocusOnFirstItem(): void {
+    if (this.searchItems.length > 0) {
+      this.focusedItem = this.searchItems[0];
+    }
+  }
 
   private unlistenAllSlottedItems(): void {
     let disposeClickListener: EventListenerDisposeFn | undefined;
@@ -708,66 +667,12 @@ export class MultiSelectAutocomplete
       return item;
     }
 
-    const itemText = this.getTextFromItem(item);
+    const itemText = this.displayStringFunction(item);
     if (!itemText) {
       return item;
     }
 
-    return this.items.find((it) => this.getTextFromItem(it) === itemText) ?? item;
-  }
-
-  /** Map a rendered slotted/default item element back to its data item based on the element id. */
-  private getDataItemForRenderedElement(element: HTMLElement): unknown {
-    // Prefer explicit id: dropdownId-item-<text>
-    const id = element.getAttribute('id');
-    if (id) {
-      const prefix = `${this.dropdownId}-item-`;
-      if (id.startsWith(prefix)) {
-        const text = id.substring(prefix.length);
-        return this.items.find((it) => this.getTextFromItem(it) === text) ?? text;
-      }
-    }
-
-    // Fallback to text content.
-    const text = (element.textContent ?? '').trim();
-    if (text) {
-      return this.items.find((it) => this.getTextFromItem(it) === text) ?? text;
-    }
-
-    return undefined;
-  }
-
-  /** Find the rendered element for a given item (used for scrolling). */
-  private findItemElement(item: unknown): HTMLElement | undefined {
-    const kirbyItems =
-      this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
-        ? this.kirbyItemsSlotted
-        : this.kirbyItemsDefault;
-
-    if (!kirbyItems || kirbyItems.length === 0) {
-      return undefined;
-    }
-
-    const itemText = this.getTextFromItem(item);
-    if (!itemText) {
-      return undefined;
-    }
-
-    const expectedId = `${this.dropdownId}-item-${itemText}`;
-    const match = kirbyItems
-      .toArray()
-      .map((r) => r.nativeElement)
-      .find((el: HTMLElement) => el.getAttribute('id') === expectedId);
-
-    if (match) {
-      return match;
-    }
-
-    // Fallback: match by rendered text.
-    return kirbyItems
-      .toArray()
-      .map((r) => r.nativeElement)
-      .find((el: HTMLElement) => (el.textContent ?? '').trim() === itemText);
+    return this.items.find((it) => this.displayStringFunction(it) === itemText) ?? item;
   }
 
   private setInputDisplayValue(value: string): void {

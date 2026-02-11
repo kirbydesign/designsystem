@@ -100,3 +100,7 @@ kirby-card {
     }
   }
 }
+
+.no-results {
+  color: utils.get-text-color('semi-dark');
+}

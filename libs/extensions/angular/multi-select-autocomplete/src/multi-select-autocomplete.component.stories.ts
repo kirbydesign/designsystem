@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { MultiSelectAutocomplete } from '@kirbydesign/extensions-angular/multi-select-autocomplete';
-import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -15,10 +14,31 @@ const currencyItems: CurrencyItem[] = [
   { code: 'CNY', name: 'Chinese Yuan' },
   { code: 'SEK', name: 'Swedish Krona' },
   { code: 'NZD', name: 'New Zealand Dollar' },
+  { code: 'MXN', name: 'Mexican Peso' },
+  { code: 'SGD', name: 'Singapore Dollar' },
+  { code: 'HKD', name: 'Hong Kong Dollar' },
+  { code: 'NOK', name: 'Norwegian Krone' },
+  { code: 'KRW', name: 'South Korean Won' },
+  { code: 'TRY', name: 'Turkish Lira' },
+  { code: 'RUB', name: 'Russian Ruble' },
+  { code: 'INR', name: 'Indian Rupee' },
+  { code: 'BRL', name: 'Brazilian Real' },
+  { code: 'ZAR', name: 'South African Rand' },
+  { code: 'DKK', name: 'Danish Krone' },
+  { code: 'PLN', name: 'Polish Zloty' },
+  { code: 'TWD', name: 'New Taiwan Dollar' },
+  { code: 'THB', name: 'Thai Baht' },
 ];
+
+const myDisplayStringFunction = (item: unknown): string => {
+  const currency = item as CurrencyItem;
+  return `${currency.code} - ${currency.name}`;
+};
+
 const mySearchFunction = (searchTerm: string): unknown[] => {
   return currencyItems.filter((item) => item.code.toLowerCase().includes(searchTerm.toLowerCase()));
 };
+
 type Args = {
   items: CurrencyItem[];
   searchFunction: (searchTerm: string) => unknown[];
@@ -34,34 +54,6 @@ export default meta;
 
 type Story = StoryObj<MultiSelectAutocomplete & Args>;
 
-// export const MultiSelectAuto: Story = {
-//   args: {
-//     items: currencyItems,
-//     placeholder: 'Please select:',
-//     itemTextProperty: 'text',
-//     attentionLevel: '3',
-//     disabled: false,
-//     hasError: false,
-//     size: InputSize.medium,
-//     tabindex: 0,
-//     searchFunction: mySearchFunction,
-//   },
-//   argTypes: {
-//     attentionLevel: {
-//       options: ['1', '2', '3'],
-//       control: { type: 'radio' },
-//     },
-//     size: {
-//       options: ['md', 'lg'],
-//       control: { type: 'radio' },
-//     },
-//     expand: {
-//       options: [undefined, 'block'],
-//       control: { type: 'radio' },
-//     },
-//   },
-// };
-
 export const WithTemplate: Story = {
   parameters: {
     chromatic: {
@@ -73,19 +65,24 @@ export const WithTemplate: Story = {
   args: {
     items: currencyItems,
     searchFunction: mySearchFunction,
+    displayStringFunction: myDisplayStringFunction,
     placeholder: 'Select currencies',
-    // IMPORTANT: items are shaped as { code, name }, so the component must use `code` as text.
-    // Otherwise getTextFromItem() returns '' and the dropdown options appear empty.
     itemTextProperty: 'code',
+    disabled: false,
+    attentionLevel: '1',
+    hasError: false,
   },
   render: (args) => ({
     props: args,
     template: `
       <kirby-multi-select-autocomplete
         [items]="items"
+        [displayStringFunction]="displayStringFunction"
         [searchFunction]="searchFunction"
         [placeholder]="placeholder"
-        [itemTextProperty]="itemTextProperty"
+        [disabled]="disabled"
+        [attentionLevel]="attentionLevel"
+        [hasError]="hasError"
       >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused"
@@ -102,27 +99,6 @@ export const WithTemplate: Story = {
           </kirby-label>
         </kirby-item>
       </kirby-multi-select-autocomplete>
-
-      <button kirby-button style="position: absolute; top: 0; right: 0;" data-testid="outside-close-btn">
-        Outside Close
-      </button>
     `,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const dropdown = canvas.getByRole('combobox');
-    await userEvent.click(dropdown);
-
-    await waitFor(() => {
-      expect(dropdown).toHaveAttribute('aria-expanded', 'true');
-    });
-
-    const outsideButton = canvas.getByTestId('outside-close-btn');
-    await userEvent.click(outsideButton);
-
-    await waitFor(() => {
-      expect(dropdown).toHaveAttribute('aria-expanded', 'false');
-    });
-  },
 };

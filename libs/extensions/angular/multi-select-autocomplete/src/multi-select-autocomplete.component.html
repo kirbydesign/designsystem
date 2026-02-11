@@ -10,7 +10,7 @@
     [attr.aria-invalid]="hasError"
     [size]="size"
     [disabled]="disabled"
-    [tabindex]="tabindex"
+    [tabindex]="_tabindex"
     [placeholder]="placeholder"
     (input)="onInput($event)"
   />
@@ -24,6 +24,11 @@
   (willHide)="onPopoverWillHide()"
 >
   <kirby-card role="listbox" [attr.id]="dropdownId" [attr.aria-labelledby]="inputId">
+    @if (searchItems.length === 0) {
+      <kirby-item>
+        <p class="kirby-item-title no-results">ingen resultater</p>
+      </kirby-item>
+    }
     @for (item of searchItems; track item) {
       <ng-container
         *ngTemplateOutlet="
@@ -46,10 +51,10 @@
     (click)="onItemSelect(item)"
     [class.focused]="focused"
     role="option"
-    [attr.id]="dropdownId + '-item-' + getTextFromItem(item)"
+    [attr.id]="dropdownId + '-item-' + displayStringFunction(item)"
     [attr.aria-selected]="selected"
   >
-    <p class="kirby-item-title">{{ getTextFromItem(item) }}</p>
+    <p class="kirby-item-title">{{ displayStringFunction(item) }}</p>
     @if (selected) {
       <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
     }
