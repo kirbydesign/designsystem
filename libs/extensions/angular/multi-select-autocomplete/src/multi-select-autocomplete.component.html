@@ -1,4 +1,4 @@
-<kirby-form-field>
+<kirby-form-field (click)="onToggle($event)">
   <input
     kirby-input
     type="text"
@@ -9,13 +9,12 @@
     [attr.aria-activedescendant]="isOpen ? dropdownId + '-item-' + focusedItem : null"
     [attr.aria-invalid]="hasError"
     [size]="size"
-    (click)="onToggle($event)"
     [disabled]="disabled"
     [tabindex]="tabindex"
     [placeholder]="placeholder"
-    [value]="selectedText"
     (input)="onInput($event)"
   />
+  <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'" kirby-affix="suffix"></kirby-icon>
 </kirby-form-field>
 
 <kirby-popover

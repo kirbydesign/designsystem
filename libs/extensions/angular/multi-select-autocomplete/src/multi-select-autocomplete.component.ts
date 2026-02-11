@@ -26,7 +26,11 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
-import { FormFieldComponent, InputSize } from '@kirbydesign/designsystem/form-field';
+import {
+  AffixDirective,
+  FormFieldComponent,
+  InputSize,
+} from '@kirbydesign/designsystem/form-field';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
@@ -53,6 +57,7 @@ import { OpenState } from './multi-select-autocomplete.types';
     CardComponent,
     ItemComponent,
     IconComponent,
+    AffixDirective,
   ],
 })
 export class MultiSelectAutocomplete
@@ -66,9 +71,8 @@ export class MultiSelectAutocomplete
   protected dropdownId: string = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
   protected inputId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
-  @Input() searchFunction: (searchTerm: string) => unknown[] = (
-    searchTerm: string
-  ): unknown[] => [];
+  @Input()
+  searchFunction: (searchTerm: string) => unknown[] = () => [];
 
   protected searchItems: unknown[] = [];
   private _items: unknown[] = [];
@@ -81,7 +85,6 @@ export class MultiSelectAutocomplete
   public set items(value: unknown[]) {
     this._items = value;
     this.searchItems = this._items;
-    this._value = undefined;
   }
 
   private _selectedItem: unknown = undefined;
@@ -96,7 +99,7 @@ export class MultiSelectAutocomplete
       this._selectedItem = value;
       this.focusedItem = this._selectedItem;
       // Keep ControlValueAccessor value in sync with the selected data item
-      this._value = this._selectedItem;
+      this.value = this._selectedItem;
     }
   }
 
@@ -187,10 +190,7 @@ export class MultiSelectAutocomplete
   @Output()
   public change: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-  private _value: unknown = undefined;
-  public get value(): unknown {
-    return this._value;
-  }
+  protected value: unknown = undefined;
 
   protected get selectedText(): string {
     return this.getTextFromItem(this.value) ?? '';
@@ -224,7 +224,7 @@ export class MultiSelectAutocomplete
   @HostBinding('class.clicked')
   public clicked: boolean = false;
 
-  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
+  @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
 
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
@@ -239,6 +239,9 @@ export class MultiSelectAutocomplete
   @ViewChild(FormFieldComponent, { static: true, read: ElementRef })
   public formFieldElement!: ElementRef<HTMLElement>;
 
+  @ViewChild(InputComponent, { read: ElementRef })
+  private textInput?: ElementRef<HTMLInputElement>;
+
   private forwardAriaLabelToDropdownButton() {
     forwardAttributes(
       this.elementRef.nativeElement,
@@ -247,6 +250,7 @@ export class MultiSelectAutocomplete
       this.formFieldElement.nativeElement
     );
   }
+
   @ViewChildren(ItemComponent, { read: ElementRef })
   public kirbyItemsDefault?: QueryList<ElementRef<HTMLElement>>;
 
@@ -258,14 +262,16 @@ export class MultiSelectAutocomplete
       this.unlistenAllSlottedItems();
     }
 
-    // Setup a click listener for each new slotted items
+    // Setup a click listener for each new slotted item.
+    // We can't pass the ElementRef to onItemSelect; we must map back to the corresponding data item.
     kirbyItems.forEach((kirbyItem) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
       const disposeClickListener: EventListenerDisposeFn = this.renderer.listen(
         kirbyItem.nativeElement,
         'click',
         () => {
-          this.onItemSelect(kirbyItem);
+          const dataItem = this.getDataItemForRenderedElement(kirbyItem.nativeElement);
+          this.onItemSelect(dataItem);
         }
       );
 
@@ -290,7 +296,7 @@ export class MultiSelectAutocomplete
 
   protected onToggle(event: MouseEvent) {
     event.stopPropagation();
-
+    this.textInput?.nativeElement.focus();
     this.clicked = true;
 
     this.toggle();
@@ -372,7 +378,7 @@ export class MultiSelectAutocomplete
     }
   }
 
-  close() {
+  private close() {
     if (this.disabled) {
       return;
     }
@@ -400,8 +406,12 @@ export class MultiSelectAutocomplete
    *
    * @param value New value to be written to the model.
    */
-  writeValue(value: unknown): void {
+  public writeValue(value: string): void {
     this.selectItemByValue(value);
+
+    // When written from outside, reflect selected text in the input
+    this.setInputDisplayValue(this.getTextFromItem(this.value) ?? '');
+
     this.cdr.markForCheck();
   }
 
@@ -444,34 +454,36 @@ export class MultiSelectAutocomplete
       this.focusedItem = item;
       this.change.emit(this.value);
       this.onChange(this.value);
+      this.setInputDisplayValue(this.getTextFromItem(item));
+      this.searchItems = this.items;
     }
   }
 
-  private selectItemByValue(item: unknown): void {
+  private selectItemByValue(item: string): void {
     this.selectedItem = this.findDataItem(item);
   }
 
-  public getTextFromItem(item: unknown): string | undefined {
+  public getTextFromItem(item: unknown): string {
     if (typeof item === 'string') {
       return item;
     }
     if (item && typeof item === 'object' && this.itemTextProperty in item) {
       return (item as Record<string, unknown>)[this.itemTextProperty] as string;
     }
-    return undefined;
+    return '';
   }
 
-  // private getIdFromItem(item: unknown): string | undefined {
+  // private getIdFromItem(item: string): string | undefined {
   //   if (typeof item === 'string') {
   //     return item;
   //   }
   //   if (item && typeof item === 'object' && this.itemIdProperty in item) {
-  //     return (item as Record<string, unknown>)[this.itemIdProperty] as string;
+  //     return (item as Record<string, string>)[this.itemIdProperty] as string;
   //   }
   //   return undefined;
   // }
 
-  public scrollItemIntoView(item: unknown): void {
+  private scrollItemIntoView(item: unknown): void {
     const kirbyItems: QueryList<ElementRef<HTMLElement>> | undefined =
       this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
         ? this.kirbyItemsSlotted
@@ -691,7 +703,7 @@ export class MultiSelectAutocomplete
    * This is used to map an incoming form value or input `selectedItem` to an item
    * from the list.
    */
-  private findDataItem(item: unknown): unknown {
+  private findDataItem(item: string): unknown {
     if (!this.items || this.items.length === 0) {
       return item;
     }
@@ -702,6 +714,27 @@ export class MultiSelectAutocomplete
     }
 
     return this.items.find((it) => this.getTextFromItem(it) === itemText) ?? item;
+  }
+
+  /** Map a rendered slotted/default item element back to its data item based on the element id. */
+  private getDataItemForRenderedElement(element: HTMLElement): unknown {
+    // Prefer explicit id: dropdownId-item-<text>
+    const id = element.getAttribute('id');
+    if (id) {
+      const prefix = `${this.dropdownId}-item-`;
+      if (id.startsWith(prefix)) {
+        const text = id.substring(prefix.length);
+        return this.items.find((it) => this.getTextFromItem(it) === text) ?? text;
+      }
+    }
+
+    // Fallback to text content.
+    const text = (element.textContent ?? '').trim();
+    if (text) {
+      return this.items.find((it) => this.getTextFromItem(it) === text) ?? text;
+    }
+
+    return undefined;
   }
 
   /** Find the rendered element for a given item (used for scrolling). */
@@ -720,12 +753,28 @@ export class MultiSelectAutocomplete
       return undefined;
     }
 
-    const kirbyItem = kirbyItems.toArray().find((elementRef: ElementRef<HTMLElement>) => {
-      // Slotted items are ElementRefs; default template items are data items
-      // so we compare by their text representation.
-      return this.getTextFromItem(elementRef as unknown) === itemText;
-    });
+    const expectedId = `${this.dropdownId}-item-${itemText}`;
+    const match = kirbyItems
+      .toArray()
+      .map((r) => r.nativeElement)
+      .find((el: HTMLElement) => el.getAttribute('id') === expectedId);
 
-    return kirbyItem ? kirbyItem.nativeElement : undefined;
+    if (match) {
+      return match;
+    }
+
+    // Fallback: match by rendered text.
+    return kirbyItems
+      .toArray()
+      .map((r) => r.nativeElement)
+      .find((el: HTMLElement) => (el.textContent ?? '').trim() === itemText);
+  }
+
+  private setInputDisplayValue(value: string): void {
+    // We intentionally update the DOM input imperatively ("hard way")
+    // to ensure the visible value is cleared/updated immediately.
+    if (this.textInput?.nativeElement) {
+      this.textInput.nativeElement.value = value;
+    }
   }
 }
