@@ -6,7 +6,9 @@
     aria-haspopup="listbox"
     [attr.aria-controls]="dropdownId"
     [attr.aria-expanded]="isOpen"
-    [attr.aria-activedescendant]="isOpen ? dropdownId + '-item-' + focusedItem : null"
+    [attr.aria-activedescendant]="
+      isOpen ? dropdownId + '-item-' + displayStringFunction(focusedItem) : null
+    "
     [attr.aria-invalid]="hasError"
     [size]="size"
     [disabled]="disabled"
@@ -29,7 +31,7 @@
         <p class="kirby-item-title no-results">ingen resultater</p>
       </kirby-item>
     }
-    @for (item of searchItems; track item) {
+    @for (item of searchItems; track item; let i = $index) {
       <ng-container
         *ngTemplateOutlet="
           itemTemplate || defaultItemTemplate;
@@ -37,6 +39,7 @@
             $implicit: item,
             selected: item === selectedItem,
             focused: item === focusedItem,
+            index: i,
           }
         "
       ></ng-container>

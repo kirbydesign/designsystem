@@ -31,6 +31,10 @@ const currencyItems: CurrencyItem[] = [
 ];
 
 const myDisplayStringFunction = (item: unknown): string => {
+  if (item === undefined) {
+    return '';
+  }
+
   const currency = item as CurrencyItem;
   return `${currency.code} - ${currency.name}`;
 };

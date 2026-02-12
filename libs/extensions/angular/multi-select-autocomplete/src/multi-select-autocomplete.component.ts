@@ -129,6 +129,7 @@ export class MultiSelectAutocomplete
   public set focusedItem(item: unknown) {
     if (this._focusedItem !== item) {
       this._focusedItem = item;
+      this.scrollFocusedItemIntoView();
     }
   }
 
@@ -275,7 +276,13 @@ export class MultiSelectAutocomplete
         kirbyItem.nativeElement,
         'click',
         () => {
-          this.onItemSelect(kirbyItem.nativeElement);
+          const prefix = `${this.dropdownId}-item-`;
+          const id = kirbyItem.nativeElement.id || '';
+          const key = id.startsWith(prefix) ? id.slice(prefix.length) : '';
+          const dataItem = this.findDataItemByKey(key);
+          if (dataItem !== undefined) {
+            this.onItemSelect(dataItem);
+          }
         }
       );
 
@@ -365,7 +372,6 @@ export class MultiSelectAutocomplete
     }
     if (!this.isOpen) {
       this.state = OpenState.opening;
-      // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
       setTimeout(() => this.showDropdown(), MultiSelectAutocomplete.OPEN_DELAY_IN_MS);
 
       // Move focus to selected item (if any) or first item
@@ -377,6 +383,7 @@ export class MultiSelectAutocomplete
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
+      this.scrollFocusedItemIntoView();
       this.cdr.markForCheck();
     }
   }
@@ -394,6 +401,8 @@ export class MultiSelectAutocomplete
   }
 
   protected onItemSelect(item: unknown) {
+    // Guard: slotted click listeners should map back to a data item, but be safe.
+    if (item instanceof HTMLElement) return;
     this.selectItem(item);
     this.close();
   }
@@ -675,11 +684,38 @@ export class MultiSelectAutocomplete
     return this.items.find((it) => this.displayStringFunction(it) === itemText) ?? item;
   }
 
+  private getItemKey(item: unknown): string {
+    return this.displayStringFunction(item) || '';
+  }
+
+  private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
+    return this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
+      ? this.kirbyItemsSlotted
+      : this.kirbyItemsDefault;
+  }
+
+  private findDataItemByKey(key: string): unknown | undefined {
+    if (!key) return undefined;
+    return this.searchItems.find((it) => this.getItemKey(it) === key);
+  }
+
   private setInputDisplayValue(value: string): void {
     // We intentionally update the DOM input imperatively ("hard way")
     // to ensure the visible value is cleared/updated immediately.
     if (this.textInput?.nativeElement) {
       this.textInput.nativeElement.value = value;
     }
+  }
+
+  private scrollFocusedItemIntoView(): void {
+    const kirbyItems = this.getKirbyItems();
+    if (!kirbyItems || kirbyItems.length === 0) return;
+
+    const key = this.getItemKey(this.focusedItem);
+    if (!key) return;
+
+    const targetId = `${this.dropdownId}-item-${key}`;
+    const match = kirbyItems.toArray().find((el) => el.nativeElement.id === targetId);
+    match?.nativeElement?.scrollIntoView({ block: 'nearest' });
   }
 }
