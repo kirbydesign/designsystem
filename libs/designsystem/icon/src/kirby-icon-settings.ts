@@ -37,6 +37,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'moneybag', svg: 'moneybag.svg' },
     { name: 'help', svg: 'help.svg' },
     { name: 'home', svg: 'home.svg' },
+    { name: 'id-card', svg: 'id-card.svg' },
     { name: 'inbox', svg: 'inbox.svg' },
     { name: 'inbox-outline', svg: 'inbox-outline.svg' },
     { name: 'information', svg: 'information.svg' },
