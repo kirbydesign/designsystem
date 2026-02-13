@@ -1,1 +1,1 @@
-export { MultiSelectAutocomplete } from './multi-select-autocomplete.component';
+export { MultiSelectAutocompleteComponent } from './multi-select-autocomplete.component';

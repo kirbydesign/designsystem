@@ -6,10 +6,8 @@
     aria-haspopup="listbox"
     [attr.aria-controls]="dropdownId"
     [attr.aria-expanded]="isOpen"
-    [attr.aria-activedescendant]="
-      isOpen ? dropdownId + '-item-' + displayStringFunction(focusedItem) : null
-    "
-    [attr.aria-invalid]="hasError"
+    [attr.aria-activedescendant]="isOpen ? dropdownId + '-item-' + getItemText(focusedItem) : null"
+    [hasError]="hasError"
     [size]="size"
     [disabled]="disabled"
     [tabindex]="_tabindex"
@@ -28,7 +26,7 @@
   <kirby-card role="listbox" [attr.id]="dropdownId" [attr.aria-labelledby]="inputId">
     @if (searchItems.length === 0) {
       <kirby-item>
-        <p class="kirby-item-title no-results">ingen resultater</p>
+        <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
     }
     @for (item of searchItems; track item; let i = $index) {
@@ -54,10 +52,10 @@
     (click)="onItemSelect(item)"
     [class.focused]="focused"
     role="option"
-    [attr.id]="dropdownId + '-item-' + displayStringFunction(item)"
+    [attr.id]="dropdownId + '-item-' + getItemText(item)"
     [attr.aria-selected]="selected"
   >
-    <p class="kirby-item-title">{{ displayStringFunction(item) }}</p>
+    <p class="kirby-item-title">{{ getItemText(item) }}</p>
     @if (selected) {
       <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
     }

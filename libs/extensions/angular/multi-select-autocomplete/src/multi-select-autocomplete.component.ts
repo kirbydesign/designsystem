@@ -45,12 +45,11 @@ import { OpenState } from './multi-select-autocomplete.types';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MultiSelectAutocomplete),
+      useExisting: forwardRef(() => MultiSelectAutocompleteComponent),
       multi: true,
     },
   ],
   imports: [
-    FormFieldComponent,
     InputComponent,
     NgTemplateOutlet,
     PopoverComponent,
@@ -58,9 +57,10 @@ import { OpenState } from './multi-select-autocomplete.types';
     ItemComponent,
     IconComponent,
     AffixDirective,
+    FormFieldComponent,
   ],
 })
-export class MultiSelectAutocomplete
+export class MultiSelectAutocompleteComponent
   implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor
 {
   static readonly OPEN_DELAY_IN_MS = 100;
@@ -71,11 +71,61 @@ export class MultiSelectAutocomplete
   protected dropdownId: string = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
   protected inputId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
-  @Input()
-  public displayStringFunction: (item: unknown) => string = () => '';
+  private readonly _defaultSearchFunction = (searchTerm: string): unknown[] => {
+    if (!searchTerm) {
+      return this.items;
+    }
+
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return this.items.filter((item) =>
+      this.getItemText(item).toLowerCase().includes(lowerSearchTerm)
+    );
+  };
 
   @Input()
-  public searchFunction: (searchTerm: string) => unknown[] = () => [];
+  public noSearchResultsText = 'Ingen resultater';
+
+  @Input()
+  public itemTextProperty: string = 'text';
+  protected getItemText(item: unknown): string {
+    if (typeof item === 'string') {
+      return item;
+    }
+    if (item && typeof item === 'object' && this.itemTextProperty in item) {
+      return (item as Record<string, unknown>)[this.itemTextProperty] as string;
+    }
+    return '';
+  }
+
+  @Input()
+  public itemIdProperty = 'id';
+  protected getItemId(item: unknown): string {
+    if (!item) {
+      return '';
+    }
+
+    if (typeof item === 'string') {
+      return item;
+    }
+
+    // object is complex, but the user uses standard template, so we generate an id based on the text
+    if (item && typeof item === 'object' && !this.itemTemplate) {
+      return this.dropdownId + '-item-' + this.getItemText(item);
+    }
+
+    // object is complex, and the user uses custom template, so we rely on itemIdProperty
+    if (item && typeof item === 'object' && this.itemIdProperty in item) {
+      return String((item as Record<string, unknown>)[this.itemIdProperty]);
+    }
+
+    // object is complex, and the user uses custom template, but itemIdProperty is missing
+    throw new Error(
+      'Each item must have an id property for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
+    );
+  }
+
+  @Input()
+  public searchFunction: (searchTerm: string) => unknown[] = this._defaultSearchFunction;
 
   private _searchItems: unknown[] = [];
   protected get searchItems(): unknown[] {
@@ -146,9 +196,6 @@ export class MultiSelectAutocomplete
   }
 
   @Input()
-  public attentionLevel: '1' | '2' | '3' = '3';
-
-  @Input()
   public expand?: 'block';
 
   @Input()
@@ -163,7 +210,6 @@ export class MultiSelectAutocomplete
   hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   private _hasError: boolean = false;
 
-  @HostBinding('class.error')
   @Input()
   get hasError(): boolean {
     return this._hasError;
@@ -268,21 +314,13 @@ export class MultiSelectAutocomplete
       this.unlistenAllSlottedItems();
     }
 
-    // Setup a click listener for each new slotted item.
-    // We can't pass the ElementRef to onItemSelect; we must map back to the corresponding data item.
-    kirbyItems.forEach((kirbyItem) => {
+    kirbyItems.forEach((kirbyItem, index) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
       const disposeClickListener: EventListenerDisposeFn = this.renderer.listen(
         kirbyItem.nativeElement,
         'click',
         () => {
-          const prefix = `${this.dropdownId}-item-`;
-          const id = kirbyItem.nativeElement.id || '';
-          const key = id.startsWith(prefix) ? id.slice(prefix.length) : '';
-          const dataItem = this.findDataItemByKey(key);
-          if (dataItem !== undefined) {
-            this.onItemSelect(dataItem);
-          }
+          this.onItemSelectIndex(index);
         }
       );
 
@@ -372,7 +410,7 @@ export class MultiSelectAutocomplete
     }
     if (!this.isOpen) {
       this.state = OpenState.opening;
-      setTimeout(() => this.showDropdown(), MultiSelectAutocomplete.OPEN_DELAY_IN_MS);
+      setTimeout(() => this.showDropdown(), MultiSelectAutocompleteComponent.OPEN_DELAY_IN_MS);
 
       // Move focus to selected item (if any) or first item
       this.focusedItem = this.selectedItem;
@@ -394,10 +432,15 @@ export class MultiSelectAutocomplete
     }
     if (this.isOpen) {
       this.state = OpenState.closed;
-      this.setInputDisplayValue(this.displayStringFunction(this.selectedItem));
+      this.setInputDisplayValue(this.getItemText(this.selectedItem));
       this.searchItems = this.items;
       this.popover?.hide();
     }
+  }
+
+  private onItemSelectIndex(index: number): void {
+    const item = this.searchItems[index];
+    this.onItemSelect(item);
   }
 
   protected onItemSelect(item: unknown) {
@@ -421,10 +464,10 @@ export class MultiSelectAutocomplete
    * @param value New value to be written to the model.
    */
   public writeValue(value: string): void {
-    this.selectItemByValue(value);
+    this.selectItemByInput(value);
 
     // When written from outside, reflect selected text in the input
-    this.setInputDisplayValue(this.displayStringFunction(this.value));
+    this.setInputDisplayValue(this.getItemText(this.value));
 
     this.cdr.markForCheck();
   }
@@ -468,24 +511,14 @@ export class MultiSelectAutocomplete
       this.focusedItem = item;
       this.change.emit(this.value);
       this.onChange(this.value);
-      this.setInputDisplayValue(this.displayStringFunction(item));
+      this.setInputDisplayValue(this.getItemText(item));
       this.searchItems = this.items;
     }
   }
 
-  private selectItemByValue(item: string): void {
-    this.selectedItem = this.findDataItem(item);
+  private selectItemByInput(input: string): void {
+    this.selectedItem = this.findItemByInput(input);
   }
-
-  // protected getTextFromItem(item: unknown): string {
-  //   if (typeof item === 'string') {
-  //     return item;
-  //   }
-  //   if (item && typeof item === 'object' && this.itemTextProperty in item) {
-  //     return (item as Record<string, unknown>)[this.itemTextProperty] as string;
-  //   }
-  //   return '';
-  // }
 
   protected onInput(event: Event): void {
     if (!this.isOpen) {
@@ -671,32 +704,12 @@ export class MultiSelectAutocomplete
    * This is used to map an incoming form value or input `selectedItem` to an item
    * from the list.
    */
-  private findDataItem(item: string): unknown {
+  private findItemByInput(input: string): unknown {
     if (!this.items || this.items.length === 0) {
-      return item;
+      return input;
     }
 
-    const itemText = this.displayStringFunction(item);
-    if (!itemText) {
-      return item;
-    }
-
-    return this.items.find((it) => this.displayStringFunction(it) === itemText) ?? item;
-  }
-
-  private getItemKey(item: unknown): string {
-    return this.displayStringFunction(item) || '';
-  }
-
-  private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
-    return this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
-      ? this.kirbyItemsSlotted
-      : this.kirbyItemsDefault;
-  }
-
-  private findDataItemByKey(key: string): unknown | undefined {
-    if (!key) return undefined;
-    return this.searchItems.find((it) => this.getItemKey(it) === key);
+    return this.items.find((it) => this.getItemText(it) === input) ?? input;
   }
 
   private setInputDisplayValue(value: string): void {
@@ -711,11 +724,23 @@ export class MultiSelectAutocomplete
     const kirbyItems = this.getKirbyItems();
     if (!kirbyItems || kirbyItems.length === 0) return;
 
-    const key = this.getItemKey(this.focusedItem);
-    if (!key) return;
+    const id = this.getItemId(this.focusedItem);
+    if (!id) return;
 
-    const targetId = `${this.dropdownId}-item-${key}`;
-    const match = kirbyItems.toArray().find((el) => el.nativeElement.id === targetId);
+    const match = kirbyItems.toArray().find((el) => {
+      if (el.nativeElement.id === undefined) {
+        throw new Error(
+          'Each item must have an id attribute for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
+        );
+      }
+      return el.nativeElement.id === id;
+    });
     match?.nativeElement?.scrollIntoView({ block: 'nearest' });
+  }
+
+  private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
+    return this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
+      ? this.kirbyItemsSlotted
+      : this.kirbyItemsDefault;
   }
 }

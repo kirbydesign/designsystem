@@ -1,8 +1,12 @@
-import { Meta, StoryObj } from '@storybook/angular';
-import { MultiSelectAutocomplete } from '@kirbydesign/extensions-angular/multi-select-autocomplete';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { MultiSelectAutocompleteComponent } from '@kirbydesign/extensions-angular/multi-select-autocomplete';
+
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 type CurrencyItem = { code: string; name: string };
-
+const simpleCurrencyItems: string[] = ['USD', 'EUR', 'JPY', 'GBP', 'AUD'];
 const currencyItems: CurrencyItem[] = [
   { code: 'USD', name: 'United States Dollar' },
   { code: 'EUR', name: 'Euro' },
@@ -30,59 +34,86 @@ const currencyItems: CurrencyItem[] = [
   { code: 'THB', name: 'Thai Baht' },
 ];
 
-const myDisplayStringFunction = (item: unknown): string => {
-  if (item === undefined) {
-    return '';
-  }
-
-  const currency = item as CurrencyItem;
-  return `${currency.code} - ${currency.name}`;
-};
-
 const mySearchFunction = (searchTerm: string): unknown[] => {
   return currencyItems.filter((item) => item.code.toLowerCase().includes(searchTerm.toLowerCase()));
 };
 
-type Args = {
-  items: CurrencyItem[];
-  searchFunction: (searchTerm: string) => unknown[];
-  placeholder: string;
-  itemTextProperty: string;
-};
-
-const meta: Meta<MultiSelectAutocomplete & Args> = {
-  component: MultiSelectAutocomplete,
-  title: 'Components/MultiSelectAutocomplete',
+const meta: Meta<MultiSelectAutocompleteComponent> = {
+  component: MultiSelectAutocompleteComponent,
+  title: 'Components/Forms/Multi Select Autocomplete',
+  decorators: [
+    moduleMetadata({
+      imports: [ListModule, ItemModule, DropdownModule],
+    }),
+  ],
+  parameters: {
+    actions: { handles: ['selectionChange'] },
+    controls: { exclude: ['dropdownId', 'displayStringFunction', 'searchFunction'] },
+  },
+  argTypes: {
+    items: { control: false },
+    searchFunction: { control: false },
+    placeholder: { control: 'text' },
+    disabled: { control: 'boolean' },
+    hasError: { control: 'boolean' },
+  },
 };
 export default meta;
+type Story = StoryObj<MultiSelectAutocompleteComponent>;
 
-type Story = StoryObj<MultiSelectAutocomplete & Args>;
-
-export const WithTemplate: Story = {
-  parameters: {
-    chromatic: {
-      modes: {
-        mobile: { disable: true },
-      },
-    },
+export const Default: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currencies',
+    disabled: false,
+    hasError: false,
   },
+};
+
+export const WithTextProperty: Story = {
   args: {
     items: currencyItems,
-    searchFunction: mySearchFunction,
-    displayStringFunction: myDisplayStringFunction,
-    placeholder: 'Select currencies',
     itemTextProperty: 'code',
+    placeholder: 'Select currencies',
     disabled: false,
-    attentionLevel: '1',
     hasError: false,
   },
   render: (args) => ({
     props: args,
     template: `
       <kirby-multi-select-autocomplete
+        [items]="items" 
+        [itemTextProperty]="itemTextProperty"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [attentionLevel]="attentionLevel"
+        [hasError]="hasError"
+      >
+      </kirby-multi-select-autocomplete>
+    `,
+  }),
+};
+
+export const WithTemplate: Story = {
+  args: {
+    items: currencyItems,
+    itemTextProperty: 'code',
+    itemIdProperty: 'code',
+    placeholder: 'Select currencies',
+    disabled: false,
+    hasError: false,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      stableSearchFunction: mySearchFunction,
+    },
+    template: `
+      <kirby-multi-select-autocomplete
         [items]="items"
-        [displayStringFunction]="displayStringFunction"
-        [searchFunction]="searchFunction"
+        [searchFunction]="stableSearchFunction"
+        [itemIdProperty]="itemIdProperty"
+        [itemTextProperty]="itemTextProperty"
         [placeholder]="placeholder"
         [disabled]="disabled"
         [attentionLevel]="attentionLevel"
@@ -94,14 +125,53 @@ export const WithTemplate: Story = {
           [selected]="selected"
           [class.focused]="focused"
           role="option"
-          [attr.id]="dropdownId + '-item-' + item.code"
           [attr.aria-selected]="selected"
+          [attr.id]="item.code"
         >
           <kirby-label>
             <p class="kirby-item-title">{{ item.code }}</p>
             <p class="kirby-item-detail">{{ item.name }}</p>
           </kirby-label>
         </kirby-item>
+      </kirby-multi-select-autocomplete>
+    `,
+  }),
+};
+
+export const Disabled: Story = {
+  args: {
+    placeholder: 'Select currencies',
+    disabled: true,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+    },
+    template: `
+      <kirby-multi-select-autocomplete
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+      >
+      </kirby-multi-select-autocomplete>
+    `,
+  }),
+};
+
+export const HasError: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currencies',
+    hasError: true,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+    },
+    template: `
+      <kirby-multi-select-autocomplete
+        [placeholder]="placeholder"
+        [hasError]="hasError"
+      >
       </kirby-multi-select-autocomplete>
     `,
   }),
