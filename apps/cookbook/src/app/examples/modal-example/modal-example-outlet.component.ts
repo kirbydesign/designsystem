@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Params } from '@angular/router';
 
-import { KirbyModule, ModalController } from '@kirbydesign/designsystem';
+import { ModalController } from '@kirbydesign/designsystem';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 const config = {
@@ -24,14 +24,14 @@ export const routes: ModalEnabledRoutes = [
         path: 'child-route-presented-in-modal',
         outlet: 'modal',
         component: FirstChildComponent,
-        
+
         // optional ModalConfig passed via Angular Router's built in data object
         data: {
           modalConfig: {
             size: 'large',
             flavor: 'drawer',
           },
-        },  
+        },
       },
       {
         path: 'second-child-route-presented-in-modal',
@@ -52,7 +52,7 @@ export const routes = [
     canDeactivate: [CanDismissModalGuard],
   }
 ];
-  
+
 // When using route based modals, set the guard on the child route(s):
 export const routes = [
   {
@@ -118,7 +118,7 @@ modalController.navigateToModal('../main-route-presented-behind-the-modal/child-
 // Absolute path when opened from another component:
 modalController.navigateToModal(['/home', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']);
 
-// Passing query parameters (OPTIONAL): 
+// Passing query parameters (OPTIONAL):
 modalController.navigateToModal('child-route-presented-in-modal', {awesomeQueryParam: 'awesome value'});
 `,
 
@@ -136,10 +136,10 @@ constructor(private modalController: ModalController) {}
 
 navigate() {
   // Relative path to sibling modal route:
-  modalController.navigateWithinModal('../second-child-route-presented-in-modal');    
+  modalController.navigateWithinModal('../second-child-route-presented-in-modal');
 
   // Relative path to sibling modal route with query parameters (OPTIONAL):
-  modalController.navigateWithinModal('../second-child-route-presented-in-modal', {awesomeQueryParam: 'awesome value'});    
+  modalController.navigateWithinModal('../second-child-route-presented-in-modal', {awesomeQueryParam: 'awesome value'});
 }
 
 // OR using Angular Router:
@@ -157,7 +157,7 @@ navigate() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-outlet.component.scss'],
-  imports: [ButtonComponent, KirbyModule],
+  imports: [ButtonComponent],
 })
 export class ModalExampleOutletComponent {
   static readonly template = config.template;

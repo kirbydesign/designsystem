@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { KirbyModule } from '@kirbydesign/designsystem';
 import { RouterLink } from '@angular/router';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
@@ -28,7 +27,6 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
   imports: [
     ExampleViewerComponent,
     IphoneComponent,
-    KirbyModule,
     CodeViewerComponent,
     RouterLink,
     ModalExampleAlertWithGuardStepperComponent,
