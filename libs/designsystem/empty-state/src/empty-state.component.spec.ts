@@ -1,9 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { EmptyStateComponent } from './empty-state.component';
 
@@ -13,7 +12,7 @@ describe('EmptyStateComponent', () => {
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [MockComponent(IconComponent)],
+    imports: [TestHelper.ionicModuleForTest, IconComponent],
   });
 
   beforeEach(() => {

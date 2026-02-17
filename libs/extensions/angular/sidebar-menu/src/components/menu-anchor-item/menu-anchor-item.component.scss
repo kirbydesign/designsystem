@@ -1,10 +1,83 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+
+  &.selected {
+    color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
+  }
+
+  &:not(.selected):hover a {
+    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+  }
+
+  &:not(.selected):active a {
+    background: var(
+      --menuitem-active-background-color,
+      var(--kirby-inputs-background-color-active)
+    );
+  }
+}
 
 .selected,
 .selected:hover,
 .selected:active,
 .selected:focus-visible {
   background: var(--menuitem-selected-background-color, utils.get-color('primary'));
-  color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
   font-weight: utils.font-weight('bold');
+}
+
+.item-badge {
+  display: inline-flex;
+}
+
+.toggle-spacer {
+  width: utils.icon-font-size('sm');
+}
+
+.toggle-spacer.unchecked {
+  display: none;
+}
+
+:host.has-toggle:not(.checked):hover,
+:host.has-toggle:not(.checked):active,
+:host.has-toggle:not(.checked):has(a:focus-visible),
+:host.has-toggle:not(.checked):has(.toggle-button-unchecked:focus-visible) {
+  & .item-badge {
+    display: none;
+  }
+
+  & .toggle-spacer.unchecked {
+    display: initial;
+  }
+}
+
+.toggle-button-wrapper {
+  display: inline-flex;
+  position: absolute;
+  right: utils.size('xs');
+}
+
+.toggle-button {
+  margin: 0;
+
+  --kirby-button-color: inherit;
+}
+
+.toggle-button-unchecked {
+  transition: opacity 0ms;
+}
+
+.toggle-button-unchecked:not(:focus-visible) {
+  opacity: 0;
+}
+
+:host:hover .toggle-button-unchecked,
+:host:active .toggle-button-unchecked,
+:host:has(a:focus-visible) .toggle-button-unchecked {
+  opacity: 1;
 }

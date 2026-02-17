@@ -1,11 +1,11 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { PageComponent } from '@kirbydesign/designsystem/page';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 describe('EmptyStateComponent with slotted buttons', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
@@ -13,7 +13,7 @@ describe('EmptyStateComponent with slotted buttons', () => {
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [PageComponent, MockComponent(IconComponent), ButtonComponent],
+    imports: [TestHelper.ionicModuleForTest, PageComponent, IconComponent, ButtonComponent],
   });
 
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [MockComponent(IconComponent), ButtonComponent],
+    imports: [TestHelper.ionicModuleForTest, IconComponent, ButtonComponent],
   });
 
   beforeEach(() => {
@@ -79,7 +79,7 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [MockComponent(IconComponent), ButtonComponent],
+    imports: [TestHelper.ionicModuleForTest, IconComponent, ButtonComponent],
   });
 
   beforeEach(() => {

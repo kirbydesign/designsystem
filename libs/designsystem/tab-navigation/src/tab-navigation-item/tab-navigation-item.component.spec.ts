@@ -1,8 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { TabNavigationItemComponent } from './tab-navigation-item.component';
 
@@ -15,7 +13,8 @@ describe('TabNavigationItemComponent', () => {
     imports: [
       TestHelper.ionicModuleForTest,
       TabNavigationItemComponent,
-      MockComponents(BadgeComponent, IconComponent),
+      BadgeComponent,
+      IconComponent,
     ],
   });
 

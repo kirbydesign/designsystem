@@ -1,5 +1,5 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import {
   FormFieldComponent,
@@ -68,7 +68,7 @@ export const InputCounter: Story = {
   }),
 };
 
-export const TextareaWithInputCounter: Story = {
+export const InputWithFormControlInputCounter: Story = {
   decorators: [
     moduleMetadata({
       imports: [ReactiveFormsModule],
@@ -76,9 +76,26 @@ export const TextareaWithInputCounter: Story = {
   ],
   render: () => ({
     props: {
-      textControl: new FormControl('Text area in form control'),
+      textControl: new FormControl('Prefilled Input Value'),
     },
-    template: `<kirby-form-field label="Textarea with label and message" >
+    template: `<kirby-form-field label="Form Control Input with Input Counter" >
+    <input kirby-input [formControl]="textControl" #input />
+    <kirby-input-counter [listenTo]="input"></kirby-input-counter>
+  </kirby-form-field>`,
+  }),
+};
+
+export const TextareaWithFormControlInputCounter: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule],
+    }),
+  ],
+  render: () => ({
+    props: {
+      textControl: new FormControl('Prefilled Textarea Value'),
+    },
+    template: `<kirby-form-field label="Form Control Textarea with Input Counter" >
     <textarea kirby-textarea [formControl]="textControl" #textarea></textarea>
     <kirby-input-counter [listenTo]="textarea"></kirby-input-counter>
   </kirby-form-field>`,

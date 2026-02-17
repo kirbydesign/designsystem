@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import { DateInputDirective } from '../directives/date/date-input.directive';
 
 export enum InputSize {
@@ -26,7 +27,11 @@ export enum InputSize {
   hostDirectives: [
     {
       directive: DateInputDirective,
-      inputs: ['prefillYear', 'useNativeDatePicker'],
+      inputs: [
+        'prefillYear',
+        'useNativeDatePicker',
+        'dateValue: value' /* sync input value updates with date-input mask */,
+      ],
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -91,13 +96,21 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   @Input()
   inputmode: string;
 
+  get nativeValue(): string {
+    return this.elementRef?.nativeElement?.value;
+  }
+
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   constructor(
     private elementRef: ElementRef<HTMLInputElement>,
-    @Optional() @Inject(NG_VALUE_ACCESSOR) private builtInValueAccessors: ControlValueAccessor[]
+    @Optional() @Inject(NG_VALUE_ACCESSOR) builtInValueAccessors: ControlValueAccessor[]
   ) {
-    this.extendBuiltinValueAccessor();
+    extendValueAccessors<string>(builtInValueAccessors, {
+      writeValue: {
+        afterWriteValue: (value) => this.kirbyChange.emit(value),
+      },
+    });
   }
 
   ngOnInit(): void {
@@ -115,20 +128,6 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
-    }
-  }
-
-  extendBuiltinValueAccessor() {
-    if (this.builtInValueAccessors) {
-      this.builtInValueAccessors.forEach((accessor) => {
-        const originalWriteValue = accessor.writeValue?.bind(accessor);
-        accessor.writeValue = (value: any) => {
-          if (originalWriteValue) {
-            originalWriteValue(value);
-          }
-          this.kirbyChange.emit(value);
-        };
-      });
     }
   }
 

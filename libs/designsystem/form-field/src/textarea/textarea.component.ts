@@ -14,6 +14,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import { FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
@@ -27,7 +28,9 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
 
-  @Input() value: string;
+  @HostBinding('attr.value')
+  @Input()
+  value: string;
 
   /**
    * Removes padding, width, rounded borders and drop-shadow when set to `true`.
@@ -62,13 +65,21 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   @Input()
   maxlength: number;
 
+  get nativeValue(): string {
+    return this.elementRef?.nativeElement?.value;
+  }
+
   @Output() hasErrorChange = new EventEmitter<boolean>();
 
   constructor(
     private elementRef: ElementRef<HTMLTextAreaElement>,
-    @Optional() @Inject(NG_VALUE_ACCESSOR) private builtInValueAccessors: ControlValueAccessor[]
+    @Optional() @Inject(NG_VALUE_ACCESSOR) builtInValueAccessors: ControlValueAccessor[]
   ) {
-    this.extendBuiltinValueAccessor();
+    extendValueAccessors<string>(builtInValueAccessors, {
+      writeValue: {
+        afterWriteValue: (value) => this.kirbyChange.emit(value),
+      },
+    });
   }
 
   ngOnInit(): void {
@@ -86,20 +97,6 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
       this.kirbyChange.emit(changes.value.currentValue);
-    }
-  }
-
-  extendBuiltinValueAccessor() {
-    if (this.builtInValueAccessors) {
-      this.builtInValueAccessors.forEach((accessor) => {
-        const originalWriteValue = accessor.writeValue?.bind(accessor);
-        accessor.writeValue = (value: any) => {
-          if (originalWriteValue) {
-            originalWriteValue(value);
-          }
-          this.kirbyChange.emit(value);
-        };
-      });
     }
   }
 

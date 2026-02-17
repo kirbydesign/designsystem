@@ -1,8 +1,7 @@
-import { IonItem, IonList } from '@ionic/angular/standalone';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { ListExperimentalComponent } from './list-experimental.component';
 
@@ -14,12 +13,7 @@ describe('ListExperimental', () => {
 
   const createHost = createHostFactory({
     component: ListExperimentalComponent,
-    imports: [
-      ListExperimentalComponent,
-      MockComponent(IonList),
-      MockComponent(IonItem),
-      MockComponent(ItemComponent),
-    ],
+    imports: [TestHelper.ionicModuleForTest, ListExperimentalComponent, ItemComponent],
   });
 
   describe('with slotted kirby-item elements', () => {

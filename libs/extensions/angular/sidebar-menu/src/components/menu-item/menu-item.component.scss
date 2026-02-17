@@ -14,18 +14,13 @@
   gap: utils.size('xxs');
   border: none;
   background: inherit;
+  font: inherit;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
 
   &.lg {
     min-height: utils.size('xl');
-  }
-
-  @media (pointer: coarse) {
-    &.md {
-      min-height: utils.size('xl');
-    }
   }
 
   &:hover {
@@ -47,9 +42,10 @@
 }
 
 .menu-item-start {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 
   &.lg,
   &.md {
@@ -77,31 +73,19 @@
   flex-grow: 1;
   align-items: center;
   text-align: left;
-
-  &.lg,
-  &.md {
-    font-size: utils.font-size('n');
-    line-height: utils.line-height('m');
-  }
-
-  &.sm {
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
-  }
-
-  &.xs {
-    font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
-  }
+  word-break: break-word;
+  font-size: utils.font-size('n');
+  line-height: utils.line-height('m');
 }
 
 .menu-item-end {
   display: inline-flex;
-  align-items: center;
-}
-
-.item-badge {
-  display: flex;
-  justify-content: center;
   min-width: utils.icon-font-size('sm');
+  align-items: center;
+  justify-content: center;
+  gap: utils.size('xxs');
+
+  &:empty {
+    display: none;
+  }
 }

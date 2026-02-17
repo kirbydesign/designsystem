@@ -87,11 +87,16 @@ export class CalendarComponent implements OnInit, OnChanges {
     );
   }
   @Input() customLocales: { [key: string]: Locale } = {};
-  /*
-    Experimental: Input property not documented on purpose.
-    For context see: https://github.com/kirbydesign/designsystem/issues/2087
-  */
-  @Input() usePopover = false;
+  /**
+   * @deprecated This input is no longer needed. The year selection dropdown now always uses popover positioning.
+   * This input will be removed in a future major version.
+   */
+  @Input() set usePopover(_value: boolean) {
+    console.warn(
+      `[Kirby Calendar] The 'usePopover' input is deprecated and no longer has any effect. 
+        The year selection dropdown now always uses popover positioning. This input will be removed in a future major version.`
+    );
+  }
   /**
    * Configuration for the year navigator.
    *
