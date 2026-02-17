@@ -9,6 +9,7 @@ import {
   Output,
 } from '@angular/core';
 import type { KirbyAccordionItemElement } from '@kirbydesign/core/accordion-item';
+import { KirbyAccordionItemBaseComponent } from './accordion-item-base.component';
 
 // START_OF_AUTO_GENERATED_COMPONENT
 // AUTO-GENERATED - Any missing type imports can be added manually above, but do not change component source
@@ -17,7 +18,7 @@ import type { KirbyAccordionItemElement } from '@kirbydesign/core/accordion-item
   template: '<ng-content></ng-content>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class KirbyAccordionItemComponent {
+export class KirbyAccordionItemComponent extends KirbyAccordionItemBaseComponent {
   private el: KirbyAccordionItemElement;
 
   constructor(
@@ -25,21 +26,13 @@ export class KirbyAccordionItemComponent {
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef
   ) {
+    super();
     this.el = this.e.nativeElement;
     this.cdr.detach();
 
     this.el.addEventListener('toggle', (e: Event) => {
       this.toggle.emit(e);
     });
-  }
-
-  @Input()
-  set shape(v: string) {
-    this.ngZone.runOutsideAngular(() => ((this.el as any).shape = v));
-  }
-
-  get shape(): string {
-    return (this.el as any).shape;
   }
 
   @Input()
@@ -52,20 +45,20 @@ export class KirbyAccordionItemComponent {
   }
 
   @Input()
-  set isExpanded(v: boolean) {
+  override set isExpanded(v: boolean) {
     this.ngZone.runOutsideAngular(() => (this.el.isExpanded = v));
   }
 
-  get isExpanded(): boolean {
+  override get isExpanded(): boolean {
     return this.el.isExpanded;
   }
 
   @Input()
-  set isDisabled(v: boolean) {
+  override set isDisabled(v: boolean) {
     this.ngZone.runOutsideAngular(() => (this.el.isDisabled = v));
   }
 
-  get isDisabled(): boolean {
+  override get isDisabled(): boolean {
     return this.el.isDisabled;
   }
 
@@ -79,11 +72,11 @@ export class KirbyAccordionItemComponent {
   }
 
   @Input()
-  set hasPadding(v: boolean) {
+  override set hasPadding(v: boolean) {
     this.ngZone.runOutsideAngular(() => (this.el.hasPadding = v));
   }
 
-  get hasPadding(): boolean {
+  override get hasPadding(): boolean {
     return this.el.hasPadding;
   }
 
@@ -94,6 +87,15 @@ export class KirbyAccordionItemComponent {
 
   get headingLevel(): 1 | 2 | 3 | 4 | 5 | 6 | undefined {
     return this.el.headingLevel;
+  }
+
+  @Input()
+  set shape(v: string) {
+    this.ngZone.runOutsideAngular(() => (this.el.shape = v));
+  }
+
+  get shape(): string {
+    return this.el.shape;
   }
   @Output() toggle = new EventEmitter<unknown>();
 }
