@@ -3,7 +3,7 @@
 
 // There is a limit to how large text can be on narrow viewports with text resized
 // before segment-button texts start to collide horizontally, so we cap it for narrow viewports
-$maximum-font-size-sm: utils.size('xs') * utils.$font.resize-threshold;
+$maximum-font-size-sm: utils.size('xs') * utils.$font-resize-threshold;
 $maximum-font-size-md: utils.size('s') * utils.$font-resize-threshold;
 $badge-offset: 0.8em;
 
