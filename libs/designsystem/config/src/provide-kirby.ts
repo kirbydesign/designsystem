@@ -75,9 +75,9 @@ export function provideKirby(
     features,
     provideEnvironmentInitializer(() => {
       const injector = inject(Injector);
-      if (!customElements.get('kirby-icon')) {
+      if (!customElements.get('kirby-icon-element')) {
         const iconElement = createCustomElement(IconComponent, { injector });
-        customElements.define('kirby-icon', iconElement);
+        customElements.define('kirby-icon-element', iconElement);
       }
     }),
   ]);

@@ -79,7 +79,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
             <div class="title" ?bold=${this.isExpanded}>${this.getTitle()}</div>
 
             <span class="kirby-icon">
-              <kirby-icon name="arrow-down"></kirby-icon>
+              <kirby-icon-element name="arrow-down"></kirby-icon-element>
             </span>
           </button>
         </div>
