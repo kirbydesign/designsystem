@@ -1,7 +1,9 @@
 import {
   EnvironmentProviders,
+  inject,
   InjectionToken,
   makeEnvironmentProviders,
+  provideEnvironmentInitializer,
   Provider,
 } from '@angular/core';
 import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
@@ -70,6 +72,9 @@ export function provideKirby(
     CanDismissHelper,
     ...patchIonicProviders(),
     features,
+    provideEnvironmentInitializer(
+      async () => await inject(ModalController).initialize(getGlobalConfig()?.moduleRootRoutePath)
+    ),
   ]);
 }
 
@@ -108,7 +113,7 @@ export function getGlobalConfig(): KirbyConfig | undefined {
 function setGlobalConfig(config: KirbyConfig | undefined): void {
   if (getGlobalConfig()) {
     console.warn(
-      `Global Kirby configuration is already provided through withGlobalSetup() elsewhere. 
+      `Global Kirby configuration is already provided through withGlobalSetup() elsewhere.
 Overwriting the existing configuration is not recommended. Consider removing duplicate calls.`
     );
   }
