@@ -71,7 +71,7 @@ export function provideKirby(
     ResizeObserverService,
     CanDismissHelper,
     ...patchIonicProviders(),
-    features,
+    ...features,
     provideEnvironmentInitializer(
       async () => await inject(ModalController).initialize(getGlobalConfig()?.moduleRootRoutePath)
     ),
