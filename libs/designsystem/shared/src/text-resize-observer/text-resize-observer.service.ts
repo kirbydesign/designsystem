@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-const TEXT_SCALE_THRESHOLD = DesignTokenHelper.fontResizeThreshold();
+const TEXT_SCALE_THRESHOLD = parseFloat(DesignTokenHelper.fontResizeThreshold());
 const BASE_REM_IN_PX = 16;
 const TEXT_SCALE_CLASS = 'kirby-text-resize';
 const OBSERVED_ELEMENT_STYLES =
