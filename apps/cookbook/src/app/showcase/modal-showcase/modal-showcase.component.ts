@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ModalComponent, ModalRouterLinkDirective } from '@kirbydesign/designsystem';
+import { ModalRouterLinkDirective } from '@kirbydesign/designsystem';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';

@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Params } from '@angular/router';
 
-import {
-  ModalComponent,
-  ModalController,
-  ModalRouterLinkDirective,
-} from '@kirbydesign/designsystem';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { KirbyModule, ModalController } from '@kirbydesign/designsystem';
+import { ButtonComponent } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-modal-example-outlet',
@@ -161,7 +157,7 @@ navigate() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-outlet.component.scss'],
-  imports: [ButtonComponent, ModalRouterLinkDirective],
+  imports: [ButtonComponent, KirbyModule],
 })
 export class ModalExampleOutletComponent {
   static readonly template = config.template;
@@ -178,9 +174,9 @@ export class ModalExampleOutletComponent {
   static readonly modalControllerWithinModalOutletCodeSnippet =
     config.modalControllerWithinModalOutletCodeSnippet;
 
-  constructor(private modalController: ModalController) {}
+  private readonly modalController = inject(ModalController);
 
-  navigateToModalRoute(path: string | string[], queryParams?: Params) {
-    this.modalController.navigateToModal(path, queryParams);
+  async navigateToModalRoute(path: string | string[], queryParams?: Params): Promise<void> {
+    await this.modalController.navigateToModal(path, queryParams);
   }
 }

@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Inject, NgModule, Optional } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
 import { ComponentLoaderDirective, ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
@@ -44,7 +43,6 @@ import {
   ActionSheetComponent,
   AlertComponent,
   ModalCompactWrapperComponent,
-  ModalController,
   ModalFooterComponent,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
@@ -143,11 +141,4 @@ const importedModules = [...exportedModules];
   providers: [provideKirby()],
   exports: [allExports],
 })
-export class KirbyModule {
-  constructor(
-    modalController: ModalController,
-    @Optional() @Inject(KIRBY_CONFIG) config?: KirbyConfig
-  ) {
-    modalController.initialize(config && config.moduleRootRoutePath);
-  }
-}
+export class KirbyModule {}

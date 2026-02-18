@@ -7,7 +7,7 @@ describe('KirbyModule', () => {
 
   beforeEach(() => {
     modalControllerSpy = jasmine.createSpyObj<ModalController>('ModalController', ['initialize']);
-    kirbyModule = new KirbyModule(modalControllerSpy);
+    kirbyModule = new KirbyModule();
   });
 
   it('should create an instance', () => {
