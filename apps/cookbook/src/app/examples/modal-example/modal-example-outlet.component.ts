@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Params } from '@angular/router';
 
-import { KirbyModule, ModalController } from '@kirbydesign/designsystem';
+import { ModalController, ModalRouterLinkDirective } from '@kirbydesign/designsystem';
 import { ButtonComponent } from '@kirbydesign/designsystem';
 
 const config = {
@@ -157,7 +157,7 @@ navigate() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-example-outlet.component.scss'],
-  imports: [ButtonComponent, KirbyModule],
+  imports: [ButtonComponent, ModalRouterLinkDirective],
 })
 export class ModalExampleOutletComponent {
   static readonly template = config.template;
