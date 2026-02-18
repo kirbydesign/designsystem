@@ -57,7 +57,7 @@ export const KIRBY_CONFIG = new InjectionToken<KirbyConfig>('KIRBY_CONFIG');
  * @see {@link withGlobalSetup} for setting up global configuration.
  */
 export function provideKirby(
-  ...features: Provider[] | EnvironmentProviders[]
+  ...features: (Provider | EnvironmentProviders)[]
 ): EnvironmentProviders {
   return makeEnvironmentProviders([
     ModalController,
