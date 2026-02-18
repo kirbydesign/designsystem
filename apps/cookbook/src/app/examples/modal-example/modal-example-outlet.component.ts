@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Params } from '@angular/router';
 
-import { ModalController, ModalRouterLinkDirective } from '@kirbydesign/designsystem';
-import { ButtonComponent } from '@kirbydesign/designsystem';
+import {
+  ButtonComponent,
+  ModalController,
+  ModalRouterLinkDirective,
+} from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-modal-example-outlet',
