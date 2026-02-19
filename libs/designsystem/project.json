@@ -71,7 +71,7 @@
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
-      "dependsOn": ["^build"],
+      "dependsOn": ["angular:build", "core:build"],
       "options": {
         "configDir": "libs/designsystem/.storybook",
         "outputDir": "dist/storybook/designsystem",
