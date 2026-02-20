@@ -4,6 +4,7 @@
     <button
       #defaultButton
       [id]="triggerButtonId"
+      [attr.popovertarget]="menuId"
       kirby-button
       [size]="buttonSize"
       [disabled]="isDisabled"
@@ -21,15 +22,12 @@
 <kirby-card
   [id]="menuId"
   kirbyFloating
+  popover
   [strategy]="'fixed'"
   [reference]="buttonContainerElement"
   [isDisabled]="isDisabled"
   [triggers]="triggers"
   [placement]="placement"
-  [DOMPortalOutlet]="DOMPortalOutlet"
-  [portalOutletConfig]="portalOutletConfig"
-  [closeOnBackdrop]="closeOnBackdrop"
-  [closeOnEscapeKey]="closeOnEscapeKey"
   [closeOnSelect]="closeOnSelect"
   [autoPlacement]="autoPlacement"
   [shift]="shift"
@@ -39,6 +37,7 @@
   (displayChanged)="menuVisibilityChanged($event)"
   role="menu"
   [attr.aria-labelledby]="triggerButtonId"
+  (toggle)="toggled($event)"
 >
   <ng-content select="kirby-item"></ng-content>
 </kirby-card>

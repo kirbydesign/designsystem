@@ -15,8 +15,9 @@ $max-screen-width-small: 460px;
 
 kirby-card {
   max-height: $dropdown-max-height;
-  overflow-y: auto;
   box-shadow: utils.get-elevation(4);
   min-width: $min-screen-width;
   max-width: $max-screen-width-small;
+  position: fixed;
+  margin: 0;
 }

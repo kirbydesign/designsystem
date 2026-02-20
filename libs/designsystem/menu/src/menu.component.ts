@@ -65,7 +65,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
-  @Input() public DOMPortalOutlet: HTMLElement = this.elementRef.nativeElement.ownerDocument.body;
+  @Input() public DOMPortalOutlet: HTMLElement;
 
   @Input() public portalOutletConfig: PortalOutletConfig | undefined;
 
@@ -144,16 +144,17 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     switch (key) {
       case ' ':
       case 'Enter':
+        this.focusedIndex = 0;
+        this.focusItem();
+        break;
       case 'ArrowDown':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = 0;
-        this.floatingMenu.show();
         this.focusItem();
         break;
       case 'ArrowUp':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = this.kirbyItems.length - 1;
-        this.floatingMenu.show();
         this.focusItem();
         break;
     }
@@ -197,15 +198,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         }
         break;
       }
-      case 'Escape':
-        this.preventDefaultAndStopImmediatePropagation(event);
-        if (this.closeOnEscapeKey) {
-          this.floatingMenu.hide();
-        }
-        break;
-      case 'Tab':
-        this.floatingMenu.hide();
-        break;
       default: {
         if (StringSearchHelper.isPrintableCharacter(key)) {
           this.preventDefaultAndStopImmediatePropagation(event);
@@ -334,6 +326,14 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
     if (!button.getAttribute('aria-label')) {
       this.renderer.setAttribute(button, 'aria-label', this.translations.get('more'));
+    }
+  }
+
+  toggled(event: ToggleEvent) {
+    console.log(event.newState);
+    if (event.newState === 'open') {
+      this.focusedIndex = 0;
+      this.focusItem();
     }
   }
 

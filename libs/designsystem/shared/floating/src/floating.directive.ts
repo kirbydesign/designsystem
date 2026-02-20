@@ -65,7 +65,7 @@ interface EventMethods {
   hostDirectives: [PortalDirective],
   standalone: true,
 })
-export class FloatingDirective implements OnInit, OnDestroy {
+export class FloatingDirective implements OnDestroy {
   /**
    * Reference to the element for which the host should anchor to
    * */
@@ -247,19 +247,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
     private portalDirective: PortalDirective
   ) {}
 
-  public ngOnInit(): void {
-    this.addFloatStylingToHostElement();
-  }
-
   /* Should be accessible for programmatically setting display */
   public show(): void {
-    if (this.isDisabled) {
-      return;
-    }
-
     this.attachDocumentClickEventHandler();
     this.attachHostClickEventHandler();
-    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
+    //this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.isShown = true;
     this.autoUpdatePosition();
     this.displayChanged.emit(this.isShown);
@@ -273,7 +265,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
     this.removeAutoUpdaterRef();
     this.tearDownDocumentClickEventHandling();
-    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
+    // this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
     this.isShown = false;
     this.displayChanged.emit(this.isShown);
   }
@@ -356,7 +348,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private setPositionStylingOnHostElement(xPosition: number, yPosition: number): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${xPosition}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${yPosition}px`);
-    this.setDisplayStyling();
   }
 
   private setupEventHandling(): void {

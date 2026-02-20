@@ -85,6 +85,7 @@
     "serve": {
       "executor": "@nx/angular:dev-server",
       "options": {
+        "allowedHosts": ["4e53-2a05-f6c4-15bd-0-bd34-8a95-1b6b-feed.ngrok-free.app"],
         "buildTarget": "cookbook:build:development",
         "prebundle": {
           "exclude": ["@kirbydesign/core"]

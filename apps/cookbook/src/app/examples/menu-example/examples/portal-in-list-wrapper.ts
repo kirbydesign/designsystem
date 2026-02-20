@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ListHeaderComponent } from '@kirbydesign/designsystem/list';
+import { ListHeaderComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ListItemComponent } from '@kirbydesign/designsystem/list';
 import { ListComponent } from '@kirbydesign/designsystem/list';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 @Component({
   selector: 'cookbook-menu-portal-in-list-wrapper-example',
@@ -17,6 +18,12 @@ import { ListComponent } from '@kirbydesign/designsystem/list';
       </kirby-list-item>
     </kirby-list>
   `,
-  imports: [ListHeaderComponent, ListItemComponent, ListComponent],
+  imports: [
+    ListHeaderComponent,
+    ListItemComponent,
+    ListComponent,
+    ListItemTemplateDirective,
+    ItemComponent,
+  ],
 })
 export class PortalInListWrapperComponent {}
