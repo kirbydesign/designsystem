@@ -86,7 +86,6 @@ export const WithTextProperty: Story = {
         [itemTextProperty]="itemTextProperty"
         [placeholder]="placeholder"
         [disabled]="disabled"
-        [attentionLevel]="attentionLevel"
         [hasError]="hasError"
       >
       </kirby-multi-select-autocomplete>
@@ -116,7 +115,6 @@ export const WithTemplate: Story = {
         [itemTextProperty]="itemTextProperty"
         [placeholder]="placeholder"
         [disabled]="disabled"
-        [attentionLevel]="attentionLevel"
         [hasError]="hasError"
       >
         <kirby-item
