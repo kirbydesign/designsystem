@@ -26,11 +26,7 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
-import {
-  AffixDirective,
-  FormFieldComponent,
-  InputSize,
-} from '@kirbydesign/designsystem/form-field';
+import { AffixDirective, InputSize } from '@kirbydesign/designsystem/form-field';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
@@ -57,7 +53,6 @@ import { OpenState } from './multi-select-autocomplete.types';
     ItemComponent,
     IconComponent,
     AffixDirective,
-    FormFieldComponent,
   ],
 })
 export class MultiSelectAutocompleteComponent
@@ -288,8 +283,8 @@ export class MultiSelectAutocompleteComponent
   @ViewChild(PopoverComponent)
   public popover?: PopoverComponent;
 
-  @ViewChild(FormFieldComponent, { static: true, read: ElementRef })
-  public formFieldElement!: ElementRef<HTMLElement>;
+  @ViewChild('rootElement', { static: true, read: ElementRef })
+  public rootElement!: ElementRef<HTMLElement>;
 
   @ViewChild(InputComponent, { read: ElementRef })
   private textInput?: ElementRef<HTMLInputElement>;
@@ -299,7 +294,7 @@ export class MultiSelectAutocompleteComponent
       this.elementRef.nativeElement,
       this._attributesToForward,
       this.renderer,
-      this.formFieldElement.nativeElement
+      this.rootElement.nativeElement
     );
   }
 
@@ -395,7 +390,7 @@ export class MultiSelectAutocompleteComponent
   }
 
   private ensureComponents(): void {
-    if (!this.formFieldElement) {
+    if (!this.rootElement) {
       throw new Error('requires <kirby-form-field> element to function properly');
     }
 
@@ -531,7 +526,7 @@ export class MultiSelectAutocompleteComponent
 
   protected onPopoverWillHide() {
     this.state = OpenState.closed;
-    this.formFieldElement.nativeElement.focus();
+    this.rootElement.nativeElement.focus();
     this.onTouched();
   }
 

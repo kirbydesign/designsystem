@@ -4,6 +4,7 @@ import { MultiSelectAutocompleteComponent } from '@kirbydesign/extensions-angula
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
 
 type CurrencyItem = { code: string; name: string };
 const simpleCurrencyItems: string[] = ['USD', 'EUR', 'JPY', 'GBP', 'AUD'];
@@ -43,7 +44,13 @@ const meta: Meta<MultiSelectAutocompleteComponent> = {
   title: 'Components/Forms/Multi Select Autocomplete',
   decorators: [
     moduleMetadata({
-      imports: [ListModule, ItemModule, DropdownModule],
+      imports: [
+        ListModule,
+        ItemModule,
+        DropdownModule,
+        FormFieldModule,
+        MultiSelectAutocompleteComponent,
+      ],
     }),
   ],
   parameters: {
@@ -171,6 +178,29 @@ export const HasError: Story = {
         [hasError]="hasError"
       >
       </kirby-multi-select-autocomplete>
+    `,
+  }),
+};
+
+export const WithFormField: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currencies',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+    },
+    template: `      
+      <kirby-form-field 
+        [label]="'label'"
+        [message]="'message'">
+        <kirby-multi-select-autocomplete
+          [placeholder]="placeholder"
+          [items]="items"
+        >
+        </kirby-multi-select-autocomplete>
+      </kirby-form-field>
     `,
   }),
 };

@@ -35,6 +35,14 @@ $min-screen-width: 375px;
       max-width: initial;
     }
   }
+
+  div {
+    display: flex;
+
+    > kirby-icon {
+      margin-left: - utils.size('l');
+    }
+  }
 }
 
 kirby-popover {

@@ -1,4 +1,4 @@
-<kirby-form-field (click)="onToggle($event)">
+<div (click)="onToggle($event)" #rootElement>
   <input
     kirby-input
     type="text"
@@ -15,10 +15,10 @@
     (input)="onInput($event)"
   />
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'" kirby-affix="suffix"></kirby-icon>
-</kirby-form-field>
+</div>
 
 <kirby-popover
-  [target]="formFieldElement"
+  [target]="rootElement"
   [popout]="popout"
   (click)="onPopoverClick()"
   (willHide)="onPopoverWillHide()"
