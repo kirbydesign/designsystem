@@ -1,10 +1,10 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
-import { MultiSelectAutocomplete } from './multi-select-autocomplete.component';
+import { MultiSelectAutocompleteComponent } from './multi-select-autocomplete.component';
 
 describe('MultiSelectAutocomplete', () => {
-  let spectator: SpectatorHost<MultiSelectAutocomplete>;
+  let spectator: SpectatorHost<MultiSelectAutocompleteComponent>;
   const createHost = createHostFactory({
-    component: MultiSelectAutocomplete,
+    component: MultiSelectAutocompleteComponent,
   });
 
   beforeEach(async () => {

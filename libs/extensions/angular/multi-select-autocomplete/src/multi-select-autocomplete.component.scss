@@ -39,6 +39,11 @@ $min-screen-width: 375px;
   div {
     display: flex;
 
+    > input[kirby-input] {
+      padding-right: utils.size('l');
+      text-overflow: ellipsis;
+    }
+
     > kirby-icon {
       margin-left: - utils.size('l');
     }
