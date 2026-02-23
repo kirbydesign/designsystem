@@ -59,6 +59,12 @@ export class KirbyAccordionItemElement extends KirbyElement {
     }
   }
 
+  updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has('isDisabled') && this.isDisabled) {
+      this.isExpanded = false;
+    }
+  }
+
   render() {
     return html`
       <div class="content-layer" aria-disabled=${this.isDisabled ? 'true' : 'false'}>

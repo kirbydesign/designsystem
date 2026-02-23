@@ -38,28 +38,12 @@ export default css`
     font-size: var(--kirby-font-size-n);
   }
 
-  kirby-icon {
+  kirby-icon-element {
     transition: transform var(--kirby-transition-quick);
     font-size: var(--kirby-icon-font-size, 24px);
     width: 24px;
     height: 24px;
     display: block;
-  }
-
-  .kirby-icon {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
-    max-width: 24px;
-    max-height: 24px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    line-height: 1;
-    vertical-align: middle;
-    overflow: hidden;
   }
 
   .content {
@@ -101,7 +85,7 @@ export default css`
     font-weight: var(--kirby-font-weight-bold);
   }
 
-  button[aria-expanded='true'] kirby-icon {
+  button[aria-expanded='true'] kirby-icon-element {
     transform: rotate(180deg);
   }
 
@@ -122,40 +106,5 @@ export default css`
       background: none;
       cursor: default;
     }
-  }
-
-  .header:focus-visible {
-    background: var(--kirby-background-color-hover, #f0f0f0);
-    outline: 0;
-  }
-
-  .header:active,
-  .content-layer:active {
-    background: var(--kirby-background-color-active, #e0e0e0);
-  }
-
-  /* Contextual styling for card/accordion parents */
-  :host-context(kirby-accordion):not(:first-child) {
-    border-top: none;
-  }
-  :host-context(kirby-card) {
-    border-color: var(--kirby-background-color);
-  }
-  :host-context(kirby-card):first-child {
-    border-top: none;
-  }
-  :host-context(kirby-card):last-child {
-    border-bottom: none;
-  }
-
-  /* Only reset padding/margin for content.has-list */
-  .content.has-list {
-    padding: 0 !important;
-    margin: 0 !important;
-    min-height: 0 !important;
-  }
-  .content.has-list > * {
-    margin: 0 !important;
-    padding: 0 !important;
   }
 `;
