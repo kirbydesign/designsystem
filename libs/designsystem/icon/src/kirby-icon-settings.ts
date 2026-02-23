@@ -141,6 +141,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'balloon', svg: 'balloon.svg' },
     { name: 'scale', svg: 'scale.svg' },
     { name: 'ownership', svg: 'ownership.svg' },
+    { name: 'maintenance', svg: 'maintenance.svg' },
   ]),
 };
 
