@@ -13,8 +13,9 @@ $toolbar-bottom-border-width: 1px;
   ion-content {
     contain: content;
     max-height: calc(
-      var(--vh100) - var(--kirby-modal-padding-top, 0px) - var(--header-height) -
-        var(--footer-height)
+      var(--vh100) - var(--kirby-modal-padding-top, 0px) - var(--header-height) - var(
+          --footer-height
+        )
     );
 
     &::part(scroll) {
@@ -134,6 +135,7 @@ ion-title {
   padding-inline: calc(48px + var(--padding-start)) calc(48px + var(--padding-end));
   font-size: utils.font-size('n');
   font-weight: utils.font-weight('bold');
+  outline: none;
 }
 
 ion-content {
