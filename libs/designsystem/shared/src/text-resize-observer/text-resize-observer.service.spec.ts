@@ -143,13 +143,10 @@ describe('TextResizeObserverService', () => {
 
       const observedElement = getObservedElement();
 
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(24);
+      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValues(24, 16);
       resizeObserverCallback([], {} as ResizeObserver);
       expect(document.documentElement.classList.contains('kirby-text-resize')).toBeTrue();
 
-      (
-        Object.getOwnPropertyDescriptor(observedElement, 'offsetWidth')?.get as jasmine.Spy
-      ).and.returnValue(16);
       resizeObserverCallback([], {} as ResizeObserver);
 
       expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
