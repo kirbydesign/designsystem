@@ -4,7 +4,6 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { AvatarExampleDefaultComponent } from '../../examples/avatar-example/examples/default';
 import { AvatarExampleColorsComponent } from '../../examples/avatar-example/examples/colors';
 import { AvatarExampleTextComponent } from '../../examples/avatar-example/examples/text';
-import { AvatarExampleIconComponent } from '../../examples/avatar-example/examples/icon';
 import { AvatarExampleBadgeComponent } from '../../examples/avatar-example/examples/badge';
 import { AvatarExampleImageComponent } from '../../examples/avatar-example/examples/image';
 import { AvatarExampleImageSizeComponent } from '../../examples/avatar-example/examples/image-sizes';
@@ -26,7 +25,6 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     AvatarExampleDefaultComponent,
     AvatarExampleColorsComponent,
     AvatarExampleTextComponent,
-    AvatarExampleIconComponent,
     AvatarExampleBadgeComponent,
     AvatarExampleImageComponent,
     AvatarExampleImageSizeComponent,
