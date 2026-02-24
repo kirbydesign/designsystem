@@ -114,7 +114,8 @@ describe('TextResizeObserverService', () => {
       spectator.service.initialize();
 
       const observedElement = getObservedElement();
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(24);
+      const valueExceedingThreshold = 24;
+      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(valueExceedingThreshold);
 
       resizeObserverCallback([], {} as ResizeObserver);
 
@@ -125,7 +126,8 @@ describe('TextResizeObserverService', () => {
       spectator.service.initialize();
 
       const observedElement = getObservedElement();
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(23.2);
+      const valueExactlyAtThreshold = 23.2;
+      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(valueExactlyAtThreshold);
 
       resizeObserverCallback([], {} as ResizeObserver);
 
@@ -136,7 +138,8 @@ describe('TextResizeObserverService', () => {
       spectator.service.initialize();
 
       const observedElement = getObservedElement();
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(19.2);
+      const valueBelowThreshold = 19.2;
+      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(valueBelowThreshold);
 
       resizeObserverCallback([], {} as ResizeObserver);
 
