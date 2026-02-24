@@ -12,6 +12,10 @@ describe('TextResizeObserverService', () => {
   let observeSpy: jasmine.Spy;
   let disconnectSpy: jasmine.Spy;
 
+  const hasTextResizeClass = () => document.documentElement.classList.contains('kirby-text-resize');
+  const getObservedElement = (): HTMLElement | null =>
+    document.querySelector('body > [style*="top: -9999px"]');
+
   beforeEach(() => {
     originalResizeObserver = window.ResizeObserver;
     observeSpy = jasmine.createSpy('observe');
@@ -36,10 +40,6 @@ describe('TextResizeObserverService', () => {
     document.documentElement.classList.remove('kirby-text-resize');
     window.ResizeObserver = originalResizeObserver;
   });
-
-  function getObservedElement(): HTMLElement | null {
-    return document.querySelector('body > [style*="top: -9999px"]');
-  }
 
   it('should be created', () => {
     expect(spectator.service).toBeTruthy();
@@ -68,7 +68,7 @@ describe('TextResizeObserverService', () => {
     it('should not add kirby-text-resize class at default text scale', () => {
       spectator.service.initialize();
 
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
+      expect(hasTextResizeClass()).toBeFalse();
     });
   });
 
@@ -101,7 +101,7 @@ describe('TextResizeObserverService', () => {
     it('should not add kirby-text-resize class at default text scale', () => {
       spectator.service.initialize();
 
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
+      expect(hasTextResizeClass()).toBeFalse();
     });
 
     it('should add kirby-text-resize class when text scale exceeds threshold', () => {
@@ -113,7 +113,7 @@ describe('TextResizeObserverService', () => {
 
       resizeObserverCallback([], {} as ResizeObserver);
 
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeTrue();
+      expect(hasTextResizeClass()).toBeTrue();
     });
 
     it('should not add kirby-text-resize class when text scale is at threshold', () => {
@@ -125,7 +125,7 @@ describe('TextResizeObserverService', () => {
 
       resizeObserverCallback([], {} as ResizeObserver);
 
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
+      expect(hasTextResizeClass()).toBeFalse();
     });
 
     it('should not add kirby-text-resize class when text scale is below threshold', () => {
@@ -137,7 +137,7 @@ describe('TextResizeObserverService', () => {
 
       resizeObserverCallback([], {} as ResizeObserver);
 
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
+      expect(hasTextResizeClass()).toBeFalse();
     });
 
     it('should remove kirby-text-resize class when text scale drops below threshold', () => {
@@ -147,11 +147,11 @@ describe('TextResizeObserverService', () => {
 
       spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValues(24, 16);
       resizeObserverCallback([], {} as ResizeObserver);
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeTrue();
+      expect(hasTextResizeClass()).toBeTrue();
 
       resizeObserverCallback([], {} as ResizeObserver);
 
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
+      expect(hasTextResizeClass()).toBeFalse();
     });
   });
 });
