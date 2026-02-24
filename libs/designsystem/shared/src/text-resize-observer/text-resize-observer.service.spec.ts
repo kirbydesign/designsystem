@@ -32,6 +32,8 @@ describe('TextResizeObserverService', () => {
   });
 
   afterEach(() => {
+    spectator.service.ngOnDestroy();
+    document.documentElement.classList.remove('kirby-text-resize');
     window.ResizeObserver = originalResizeObserver;
   });
 
