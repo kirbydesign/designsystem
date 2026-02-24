@@ -11,7 +11,7 @@ const config = {
     <p label>With a label</p>
   </kirby-label>
 </kirby-section-header>
-<kirby-card [hasPadding]="true">
+<kirby-card>
   <kirby-item>
     <p class="kirby-item-title">Title</p>
     <data slot="end">Value</data>

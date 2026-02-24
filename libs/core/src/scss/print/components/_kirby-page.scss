@@ -11,6 +11,16 @@
     padding: initial !important;
   }
 
+  ion-content::part(background) {
+    display: none !important;
+  }
+
+  // Part of making sure you can print more than a single page
+  .inner-scroll,
+  ion-content::part(scroll) {
+    display: contents !important;
+  }
+
   .page-title {
     margin: initial !important;
   }
