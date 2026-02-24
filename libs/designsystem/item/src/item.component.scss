@@ -59,9 +59,6 @@ ion-item {
     box-shadow:
       0 0 0 2px utils.$focus-ring-color inset,
       0 0 0 4px utils.get-color('white') inset;
-
-    // outline: 2px solid utils.$focus-ring-color;
-    // outline-offset: -2px;
   }
   @include interaction-state.apply-hover-ionic('xxxs');
   @include interaction-state.apply-active-ionic('xxs');
