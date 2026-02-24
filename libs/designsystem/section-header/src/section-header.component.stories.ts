@@ -3,12 +3,14 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { LabelComponent } from '@kirbydesign/designsystem/item';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 
+import { SectionHeaderExampleComponent } from '~/app/examples/section-header-example/section-header-example.component';
+
 const meta: Meta<SectionHeaderComponent> = {
   component: SectionHeaderComponent,
   title: 'Components / Section Header',
   decorators: [
     moduleMetadata({
-      imports: [LabelComponent],
+      imports: [LabelComponent, SectionHeaderExampleComponent],
     }),
   ],
 };
@@ -24,5 +26,11 @@ export const SectionHeader: Story = {
       <p label>With a label</p>
     </kirby-label>
   </kirby-section-header>`,
+  }),
+};
+
+export const CookbookExample: Story = {
+  render: () => ({
+    template: `<cookbook-section-header-example></cookbook-section-header-example>`,
   }),
 };
