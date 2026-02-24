@@ -41,6 +41,7 @@ $min-screen-width: 375px;
 
     > input[kirby-input] {
       padding-right: utils.size('l');
+      font-size: utils.font-size('s');
       text-overflow: ellipsis;
     }
 

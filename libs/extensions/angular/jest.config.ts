@@ -1,7 +1,13 @@
 import { pathsToModuleNameMapper } from 'ts-jest';
 import json from '../../../tsconfig.base.json' with { type: 'json' };
 
-const esModules = ['@stencil/core', '@ionic/core', 'ionicons', '@angular/common/locales'].join('|');
+const esModules = [
+  '@stencil/core',
+  '@ionic/core',
+  'ionicons',
+  '@angular/common/locales',
+  'inputmask',
+].join('|');
 
 // nx doesn't allow importing tsconfig.json: https://github.com/nrwl/nx/issues/14888
 // Use require instead:

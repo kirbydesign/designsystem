@@ -4,7 +4,7 @@ import { MultiSelectAutocompleteComponent } from '@kirbydesign/extensions-angula
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
+import { FormFieldModule, InputComponent } from '@kirbydesign/designsystem/form-field';
 
 type CurrencyItem = { code: string; name: string };
 const simpleCurrencyItems: string[] = ['USD', 'EUR', 'JPY', 'GBP', 'AUD'];
@@ -49,6 +49,7 @@ const meta: Meta<MultiSelectAutocompleteComponent> = {
         ItemModule,
         DropdownModule,
         FormFieldModule,
+        InputComponent,
         MultiSelectAutocompleteComponent,
       ],
     }),
@@ -198,9 +199,12 @@ export const WithFormField: Story = {
         <kirby-dropdown
           [placeholder]="placeholder"
           [items]="items"
+          [size]="'md'"
         >
         </kirby-dropdown>
       </kirby-form-field>
+      
+      <input kirby-input [placeholder]="placeholder" [size]="'md'" />
 
       <kirby-form-field 
         [label]="'label'"

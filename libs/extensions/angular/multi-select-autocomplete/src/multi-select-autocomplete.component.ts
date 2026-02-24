@@ -63,8 +63,8 @@ export class MultiSelectAutocompleteComponent
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
-  protected dropdownId: string = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
-  protected inputId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
+  public dropdownId: string = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
+  public inputId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
   private readonly _defaultSearchFunction = (searchTerm: string): unknown[] => {
     if (!searchTerm) {
@@ -241,7 +241,7 @@ export class MultiSelectAutocompleteComponent
   @Output()
   public change: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-  protected value: unknown = undefined;
+  public value: unknown = undefined;
 
   @HostBinding('class.expand')
   public get _isBlockLevel() {
@@ -399,7 +399,7 @@ export class MultiSelectAutocompleteComponent
     // }
   }
 
-  private open(): void {
+  public open(): void {
     if (this.disabled) {
       return;
     }
@@ -421,7 +421,7 @@ export class MultiSelectAutocompleteComponent
     }
   }
 
-  private close() {
+  public close() {
     if (this.disabled) {
       return;
     }
