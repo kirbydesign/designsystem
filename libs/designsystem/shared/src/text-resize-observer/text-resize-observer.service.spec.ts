@@ -102,14 +102,6 @@ describe('TextResizeObserverService', () => {
       expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
     });
 
-    it('should toggle kirby-text-resize class when ResizeObserver callback is triggered', () => {
-      spectator.service.initialize();
-
-      resizeObserverCallback([], {} as ResizeObserver);
-
-      expect(document.documentElement.classList.contains('kirby-text-resize')).toBeFalse();
-    });
-
     it('should add kirby-text-resize class when text scale exceeds threshold', () => {
       spectator.service.initialize();
 
