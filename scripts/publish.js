@@ -93,6 +93,35 @@ function writeCoreVersionToPackageJson(distPackageJsonPath) {
   });
 }
 
+function addTypesVersions(distPackageJsonPath) {
+  return fs.readJson(distPackageJsonPath, 'utf-8').then((packageJson) => {
+    const typesVersions = {};
+
+    if (packageJson.exports) {
+      for (const [subpath, entry] of Object.entries(packageJson.exports)) {
+        // Skip root entry (handled by top-level "typings" field),
+        // the package.json self-reference, and non-object entries (e.g. SCSS)
+        if (
+          subpath === '.' ||
+          subpath === './package.json' ||
+          typeof entry !== 'object' ||
+          !entry.types
+        ) {
+          continue;
+        }
+        // Strip leading "./" to get the bare subpath key
+        const key = subpath.replace(/^\.\//, '');
+        typesVersions[key] = [entry.types];
+      }
+    }
+
+    packageJson.typesVersions = { '*': typesVersions };
+
+    console.log(`Writing typesVersions to ${distPackageJsonPath}`);
+    return fs.writeJson(distPackageJsonPath, packageJson, { spaces: 2 });
+  });
+}
+
 function copyReadme(distTarget) {
   console.log('Copying README.md file...');
   return fs.copy('readme.md', `${distTarget}/readme.md`);
@@ -209,6 +238,7 @@ if (doPublishDesignsystem) {
   cleanDistribution(distDesignsystemTarget)
     .then(() => buildPackage('designsystem'))
     .then(() => writeCoreVersionToPackageJson(distDesignsystemPackageJsonPath))
+    .then(() => addTypesVersions(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
