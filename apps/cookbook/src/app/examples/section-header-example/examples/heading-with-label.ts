@@ -8,7 +8,7 @@ const config = {
   template: `<kirby-section-header>
     <kirby-label>
       <h3 heading>Section Header</h3>
-      <p label>With a label</p>
+      <p label>Label</p>
     </kirby-label>
     <p detail slot="end">Detail in end-slot</p>
 </kirby-section-header>
