@@ -11,6 +11,7 @@
     font-weight: inherit;
     min-height: 0;
     z-index: initial;
+    align-items: flex-end;
 
     @include section-header.typography;
   }
