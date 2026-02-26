@@ -70,8 +70,8 @@ export class AvatarShowcaseComponent {
       type: ['true', 'false'],
     },
     {
-      name: 'shadow (deprecated - use stroke instead)',
-      description: 'Adds a box-shadow to the avatar.',
+      name: 'shadow (deprecated)',
+      description: 'Deprecated - use stroke instead. Adds a box-shadow to the avatar.',
       defaultValue: 'false',
       type: ['true', 'false'],
     },
