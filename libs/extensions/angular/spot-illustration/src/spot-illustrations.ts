@@ -89,6 +89,12 @@ export const illustrations = {
     md: 'robot.none.antenna-dot.body.medium.svg',
     lg: 'robot.none.antenna-dot.body.large.svg',
   },
+  'hand.moneybag.dot.stars.circle': {
+    lg: 'hand.moneybag.dot.stars.circle.large.svg',
+  },
+  'wallet.face.coins.stars.dot.circle': {
+    lg: 'wallet.face.coins.stars.dot.circle.large.svg',
+  },
 } as const satisfies Record<string, Illustration>;
 
 export type SpotIllustrationName = keyof typeof illustrations | null;
