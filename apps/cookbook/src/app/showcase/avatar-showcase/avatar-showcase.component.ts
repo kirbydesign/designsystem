@@ -81,6 +81,12 @@ export class AvatarShowcaseComponent {
       defaultValue: 'false',
       type: ['true', 'false'],
     },
+    {
+      name: 'themeColor',
+      description: 'Sets which color the icon should use from the theme palette.',
+      defaultValue: 'white',
+      type: ['white', 'light'],
+    },
   ];
 
   events: ApiDescriptionEvent[] = [
