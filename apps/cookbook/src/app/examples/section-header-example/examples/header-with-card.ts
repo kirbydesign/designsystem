@@ -9,7 +9,7 @@ const config = {
   template: `<kirby-section-header>
   <h3 heading>Contact Info</h3>
 </kirby-section-header>
-<kirby-card [hasPadding]="true">
+<kirby-card>
   <kirby-item>
     <kirby-avatar slot="start" imageSrc="/assets/images/woman.png" altText="Example" size="sm" title="sm">
     </kirby-avatar>
