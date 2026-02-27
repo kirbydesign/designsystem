@@ -37,6 +37,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'moneybag', svg: 'moneybag.svg' },
     { name: 'help', svg: 'help.svg' },
     { name: 'home', svg: 'home.svg' },
+    { name: 'id-card', svg: 'id-card.svg' },
     { name: 'inbox', svg: 'inbox.svg' },
     { name: 'inbox-outline', svg: 'inbox-outline.svg' },
     { name: 'information', svg: 'information.svg' },
@@ -140,6 +141,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'balloon', svg: 'balloon.svg' },
     { name: 'scale', svg: 'scale.svg' },
     { name: 'ownership', svg: 'ownership.svg' },
+    { name: 'maintenance', svg: 'maintenance.svg' },
   ]),
 };
 
