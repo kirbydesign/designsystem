@@ -611,7 +611,11 @@ export class MultiSelectAutocompleteComponent
 
     if (!this.isOpen) {
       this.open();
-      this.setFocusOnFirstOrLastItem(keyEvent);
+      if (this.selectedItem) {
+        this.setFocusOnSelectedItem();
+      } else {
+        this.setFocusOnFirstOrLastItem(keyEvent);
+      }
     } else {
       this.handleFocusNavigation(keyEvent);
     }
@@ -648,11 +652,12 @@ export class MultiSelectAutocompleteComponent
     let newIndex;
 
     if (numberOfItems > 0) {
-      newIndex = Math.min(this.searchItems.length - 1, currentIndex + 1);
+      newIndex = Math.min(this.searchItems.length - 1, currentIndex + numberOfItems);
     } else {
-      newIndex = Math.max(0, currentIndex - 1);
+      newIndex = Math.max(0, currentIndex + numberOfItems);
     }
 
+    console.log('newIndex', newIndex);
     if (newIndex !== currentIndex) {
       this.focusedItem = this.searchItems[newIndex];
     }
@@ -672,6 +677,12 @@ export class MultiSelectAutocompleteComponent
         break;
       default:
         break;
+    }
+  }
+
+  private setFocusOnSelectedItem(): void {
+    if (this.selectedItem) {
+      this.focusedItem = this.selectedItem;
     }
   }
 
