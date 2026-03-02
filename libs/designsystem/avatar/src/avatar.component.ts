@@ -33,7 +33,7 @@ export class AvatarComponent {
   @Input() overlay: boolean;
   @Input() size: AvatarSize | `${AvatarSize}` = AvatarSize.SM;
   @Input()
-  themeColor: NotificationColor | BrandColor | 'white' | 'light';
+  themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
   @Output()
   imageError: EventEmitter<ErrorEvent> = new EventEmitter();
 
