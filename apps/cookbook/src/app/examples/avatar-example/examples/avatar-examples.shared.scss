@@ -9,14 +9,6 @@
     margin-right: utils.size('s');
   }
 
-  &.wrap {
-    flex-wrap: wrap;
-
-    > * {
-      margin-bottom: utils.size('s');
-    }
-  }
-
   &.align-top {
     align-items: flex-start;
   }
@@ -26,48 +18,37 @@ kirby-avatar {
   position: relative;
 }
 
-kirby-avatar[title] {
-  margin-bottom: utils.size('s');
+.avatar-item-container {
+  display: inline-block;
+  text-align: center;
+}
 
-  &::before {
-    content: '';
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    transform: translateY(100%);
-    font-size: utils.font-size('xs');
-    text-align: center;
-  }
+.avatar-item-inner-container {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: utils.size('xxs');
+}
 
-  &[title='Overlay']::before {
-    content: 'Overlay';
-  }
+.avatar-item-title {
+  display: block;
+  max-width: 96px;
+  font-size: 12px;
+  color: rgb(0 0 0 / 60%);
+  white-space: nowrap;
+}
 
-  &[title='Shadow']::before {
-    content: 'Shadow';
-  }
+.avatar-item-inner-container-bg {
+  background-color: utils.get-color('white');
+  padding: utils.size('xs');
+  border-radius: utils.border-radius('n');
+  margin-bottom: utils.size('xxs');
+}
 
-  &[title='Stroke']::before {
-    content: 'Stroke';
-  }
-
-  &[title='light (default)']::before {
-    content: '(default)';
-  }
-
-  &[title='xs']::before {
-    content: 'xs';
-  }
-
-  &[title='sm']::before {
-    content: 'sm';
-  }
-
-  &[title='md']::before {
-    content: 'md';
-  }
-
-  &[title='lg']::before {
-    content: 'lg';
-  }
+.avatar-item-inner-container-bg-none {
+  padding: utils.size('xs');
+  border-radius: utils.border-radius('n');
+  margin-bottom: utils.size('xxs');
 }

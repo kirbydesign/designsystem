@@ -6,7 +6,7 @@ import { AvatarExampleColorsComponent } from './examples/colors';
 import { AvatarExampleTextComponent } from './examples/text';
 import { AvatarExampleBadgeComponent } from './examples/badge';
 import { AvatarExampleImageComponent } from './examples/image';
-import { AvatarExampleImageSizeComponent } from './examples/image-sizes';
+import { AvatarExampleImageSizeComponent } from './examples/avatar-sizes';
 import { AvatarExampleImageLazyLoadingComponent } from './examples/image-lazy-loading';
 import { AvatarExampleImageErrorComponent } from './examples/image-error';
 

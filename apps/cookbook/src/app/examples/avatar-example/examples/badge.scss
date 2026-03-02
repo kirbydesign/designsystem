@@ -1,6 +1,2 @@
 @use 'avatar-examples.shared';
 @use '@kirbydesign/core/src/scss/utils';
-
-:host {
-  padding: utils.size('l');
-}
