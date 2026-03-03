@@ -73,11 +73,17 @@ export const illustrations = {
   'megaphone.sound.megaphone-part.circle': {
     xl: 'megaphone.sound.megaphone-part.circle.xlarge.svg',
   },
-  'money.none.coin.bars': {
+  'money.none.medium.coin.bars': {
     md: 'money.none.coin.bars.medium.svg',
   },
   'money.arrow.coin.bars': {
     md: 'money.arrow.coin.bars.medium.svg',
+  },
+  'money-coinstack.graphline.topcoin.bars': {
+    md: 'money-coinstack.graphline.topcoin.bars.medium.svg',
+  },
+  'money-notes.shield.heart.circle': {
+    md: 'money-notes.shield.heart.circle.medium.svg',
   },
   'piggy-bank.money.money-dot.bars': {
     md: 'piggy-bank.money.money-dot.bars.medium.svg',
