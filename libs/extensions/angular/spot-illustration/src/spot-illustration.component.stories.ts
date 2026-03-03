@@ -287,6 +287,34 @@ export const All: Story = {
  *
  * This story provides comprehensive guidelines for adding new spot illustrations to the design system.
  *
+ * ## Where to contribute
+ *
+ * New spot illustrations must be added to the Kirby Extensions package in this repository (`kirbydesign/designsystem`):
+ *
+ * - `libs/extensions/angular/spot-illustration/src/svgs/`
+ * - `libs/extensions/angular/spot-illustration/src/spot-illustrations.ts`
+ *
+ * ## Naming convention
+ *
+ * Suggested rule to follow: use lowercase dot-separated semantic tokens with 4 parts:
+ *
+ * `foreground.foreground.highlight.background`
+ *
+ * The last segment should describe the background/container shape.
+ * The segment before last should describe the highlight/accent element.
+ * Keep size out of the key. Size belongs in the filename suffix (`.small`, `.medium`, `.large`, `.xlarge`).
+ *
+ * Examples:
+ *
+ * - `invest-page.money.dot.circle`
+ * - `banknotes.arrow.dot.circle`
+ * - `piggy-bank.money.money-dot.bars`
+ *
+ * The key in `spot-illustrations.ts` must match the SVG base filename.
+ *
+ * - `invest-page.money.dot.circle` → `invest-page.money.dot.circle.medium.svg`
+ * - `box.none.plus-dot.bars` → `box.none.plus-dot.bars.large.svg`
+ *
  * ## SVG Requirements
  *
  * All spot illustration SVGs must follow these strict rules:
@@ -328,7 +356,7 @@ export const All: Story = {
  * - ✅ Follows general rules and naming pattern from Zeplin Guidelines document
  *
  * ## Implementation Steps
- * 1. **Create SVG**: Follow the ruleset above and general rules and naming patterns from the Zeplin document "Spot-illustrations/Guidelines"
+ * 1. **Create SVG**: Follow the ruleset above and naming convention in this story (plus the Zeplin document "Spot-illustrations/Guidelines")
  * 2. **Add to folder**: Place SVG file in `spot-illustration/src/svgs/`
  * 3. **Update registry**: Add illustration name to `spot-illustration/src/spot-illustrations.ts`
  * 4. **Test**: Verify the illustration appears in all themes and sizes
@@ -359,7 +387,7 @@ export const All: Story = {
  *
  * ```
  *
- * **Note**: For complete guidelines and naming patterns, request access to the "Spot-illustrations/Guidelines" document in Zeplin.
+ * **Note**: For complete visual and design guidance, request access to the "Spot-illustrations/Guidelines" document in Zeplin.
  */
 export const ExtendingLibrary: Story = {
   parameters: {
