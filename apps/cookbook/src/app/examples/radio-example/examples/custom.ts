@@ -41,7 +41,6 @@ selected = this.items[1];`,
 .rating {
   font-size: 14px;
   padding: 2px 8px;
-  margin-left: 8px;
   background-color: var(--kirby-semi-light);
   border-radius: 4px;
   transition: background-color 200ms;
