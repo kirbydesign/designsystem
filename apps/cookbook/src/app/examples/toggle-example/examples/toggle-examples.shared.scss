@@ -10,3 +10,24 @@
     gap: utils.size('xl');
   }
 }
+
+.toggle-item-inner-container {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: utils.size('xxs');
+}
+
+.toggle-item-title {
+  display: block;
+  max-width: 96px;
+  font-size: 12px;
+  color: rgb(0 0 0 / 60%);
+  white-space: nowrap;
+}
+
+.toggle-item-container {
+  display: inline-block;
+  text-align: center;
+}
