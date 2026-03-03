@@ -26,6 +26,15 @@ const config = {
   </div>
     <span class="avatar-item-title">Stroke</span>
 </div>`,
+
+  htmlSnippet: `<kirby-avatar imageSrc="/assets/images/woman.png" altText="Example" size="lg">
+</kirby-avatar>
+
+<kirby-avatar imageSrc="/assets/images/woman.png" altText="Example" overlay="true" size="lg">
+</kirby-avatar>
+
+<kirby-avatar imageSrc="/assets/images/woman.png" altText="Example" stroke="true" size="lg">
+</kirby-avatar>`,
 };
 
 @Component({
@@ -36,5 +45,5 @@ const config = {
   imports: [AvatarComponent],
 })
 export class AvatarExampleImageComponent {
-  template: string = config.template;
+  htmlSnippet: string = config.htmlSnippet;
 }
