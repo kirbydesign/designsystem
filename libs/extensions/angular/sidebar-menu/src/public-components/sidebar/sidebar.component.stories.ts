@@ -282,7 +282,8 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       control: { type: 'boolean' },
     },
     selectedItemChange: {
-      description: 'Event emitted when a new menu item is selected',
+      description:
+        'Event emitted when a menu item is selected (will also emit when the selected item is reselected).',
       control: false,
     },
     expandedItemsChange: {

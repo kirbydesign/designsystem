@@ -41,14 +41,13 @@ export class SidebarComponent {
     this.#stateService.autoCollapse = value;
   }
 
-  @Output() selectedItemChange = new EventEmitter<string>();
+  @Output() selectedItemChange = this.#stateService.selectEvents;
   @Output() expandedItemsChange = new EventEmitter<Set<string>>();
   @Output() checkedItemsChange = new EventEmitter<Set<string>>();
   @Output() expandChange = this.#stateService.expandEvents;
   @Output() checkChange = this.#stateService.checkEvents;
 
   constructor() {
-    effect(() => this.selectedItemChange.emit(this.#stateService.selectedItem()));
     effect(() => this.expandedItemsChange.emit(this.#stateService.expandedItems()));
     effect(() => this.checkedItemsChange.emit(this.#stateService.checkedItems()));
   }
