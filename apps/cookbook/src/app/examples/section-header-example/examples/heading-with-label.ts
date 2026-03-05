@@ -6,10 +6,11 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 const config = {
   selector: 'cookbook-section-header-heading-with-label',
   template: `<kirby-section-header>
-  <kirby-label>
-    <h3 heading>Section Header</h3>
-    <p label>With a label</p>
-  </kirby-label>
+    <kirby-label>
+      <h3 heading>Section Header</h3>
+      <p label>Label</p>
+    </kirby-label>
+    <p detail slot="end">Detail in end-slot</p>
 </kirby-section-header>
 <kirby-card>
   <kirby-item>

@@ -157,6 +157,22 @@ function copyPackageJson(libDir, distJsonPath) {
   return fs.copy(`${libDir}/package.json`, distJsonPath);
 }
 
+function removeNpmIgnoreNestedPackageJsonRule(distTarget) {
+  // ng-packagr 21 generates a .npmignore that excludes **/package.json,
+  // stripping the subdirectory package.json (e.g. button/package.json) that consumers
+  // with moduleResolution: "node" need to resolve subpath imports.
+  const npmignorePath = `${distTarget}/.npmignore`;
+  if (fs.existsSync(npmignorePath)) {
+    const content = fs.readFileSync(npmignorePath, 'utf-8');
+    const updated = content
+      .split('\n')
+      .filter((line) => line.trim() !== '**/package.json')
+      .join('\n');
+    fs.writeFileSync(npmignorePath, updated, 'utf-8');
+    console.log('Removed **/package.json rule from .npmignore to preserve subpath imports');
+  }
+}
+
 function createTarballPackage(distTarget) {
   return npm(['pack', distTarget], {
     onFailMessage: 'Unable to create gzipped tar-ball package',
@@ -173,7 +189,7 @@ function publish(distTarget, tarballNamePrefix) {
     // Publish to NPM
     console.log('Running on CI, hence publishing package');
 
-    return npm(['publish', distTarget], { onFailMessage: 'Unable to publishpackage' });
+    return npm(['publish', distTarget], { onFailMessage: 'Unable to publish package' });
   } else {
     // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating package as a gzipped tar-ball');
@@ -208,6 +224,7 @@ if (doPublishDesignsystem) {
   console.log('--- Publishing designsystem ---');
   cleanDistribution(distDesignsystemTarget)
     .then(() => buildPackage('designsystem'))
+    .then(() => removeNpmIgnoreNestedPackageJsonRule(distDesignsystemTarget))
     .then(() => writeCoreVersionToPackageJson(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))

@@ -15,7 +15,7 @@
     font-size: utils.font-size('m');
     line-height: utils.line-height('m');
     color: var(--kirby-section-header-color);
-    margin: 0;
+    margin: 0 0 utils.size('xxs');
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
