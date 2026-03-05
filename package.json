@@ -5,7 +5,7 @@
   "private": true,
   "engines": {
     "node": "24",
-    "npm": "~11.6.2"
+    "npm": "11"
   },
   "workspaces": [
     "libs/core",
@@ -64,9 +64,9 @@
     "@nx/storybook": "22.3.3",
     "@nx/web": "22.3.3",
     "@nx/workspace": "22.3.3",
-    "@storybook/addon-a11y": "10.1.11",
-    "@storybook/addon-docs": "10.1.11",
-    "@storybook/angular": "10.1.11",
+    "@storybook/addon-a11y": "10.2.13",
+    "@storybook/addon-docs": "10.2.13",
+    "@storybook/angular": "10.2.13",
     "@swc-node/register": "^1.9.1",
     "@swc/core": "^1.5.7",
     "@swc/helpers": "^0.5.11",
@@ -76,7 +76,7 @@
     "chromatic": "^11.0.8",
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^2.6.11",
-    "eslint-plugin-storybook": "10.1.11",
+    "eslint-plugin-storybook": "10.2.13",
     "fs-extra": "^8.1.0",
     "husky": "^3.0.9",
     "is-ci": "^2.0.0",
@@ -88,7 +88,7 @@
     "post-npm-install": "^2.0.0",
     "prettier": "^3.3.3",
     "sass": "^1.83.4",
-    "storybook": "10.1.11",
+    "storybook": "10.2.13",
     "stylelint": "^16.3.1",
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^13.1.0",
