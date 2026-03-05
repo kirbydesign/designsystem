@@ -69,7 +69,10 @@
 
 ion-item {
   &::part(native) {
-    border-radius: var(--kirby-item-top-start-radius, 0) var(--kirby-item-top-end-radius, 0) var(--kirby-item-bottom-end-radius, 0) var(--kirby-item-bottom-start-radius, 0);
+    border-start-start-radius: var(--kirby-item-top-start-radius, 0);
+    border-start-end-radius: var(--kirby-item-top-end-radius, 0);
+    border-end-end-radius: var(--kirby-item-bottom-end-radius, 0);
+    border-end-start-radius: var(--kirby-item-bottom-start-radius, 0);
   }
 
   &::part(native):focus-visible {
