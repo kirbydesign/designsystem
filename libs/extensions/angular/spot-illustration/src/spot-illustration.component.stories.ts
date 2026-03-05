@@ -294,6 +294,8 @@ export const All: Story = {
  * - `libs/extensions/angular/spot-illustration/src/svgs/`
  * - `libs/extensions/angular/spot-illustration/src/spot-illustrations.ts`
  *
+ * In the implementation steps below, any paths written as `spot-illustration/src/...` are relative to `libs/extensions/angular/spot-illustration/src`.
+ *
  * ## Naming convention
  *
  * Suggested rule to follow: use lowercase dot-separated semantic tokens with 4 parts:
