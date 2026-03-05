@@ -218,6 +218,217 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
 ];
 
+const menuItemsWithExternalLinks: SidebarMenuItem[] = [
+  {
+    type: 'router-link',
+    id: 'home',
+    title: 'Home',
+    icon: 'home',
+    route: '/',
+  },
+  {
+    type: 'external-link',
+    id: 'inbox',
+    title: 'Inbox',
+    icon: 'inbox-outline',
+    badge: { value: '2', themeColor: 'danger' },
+    url: 'https://example.com/inbox',
+    target: '_blank',
+  },
+  {
+    type: 'divider',
+    id: 'divider-1',
+  },
+  {
+    type: 'submenu',
+    id: 'menu-item-1',
+    title: 'Menu item 1',
+    icon: 'copy',
+    children: [
+      {
+        type: 'router-link',
+        id: 'menu-item-1-1',
+        title: 'Menu item 1.1',
+        route: '/menu-item/1/2',
+      },
+      {
+        type: 'submenu',
+        id: 'menu-item-1-2',
+        title: 'Menu item 1.2',
+        children: [
+          {
+            type: 'external-link',
+            id: 'menu-item-1-2-1',
+            title: 'Menu item 1.2.1',
+            url: 'https://example.com/menu-1-sub-1-link-1',
+            target: '_blank',
+          },
+          {
+            type: 'submenu',
+            id: 'menu-item-1-2-2',
+            title: 'Menu item 1.2.2',
+            children: [
+              {
+                type: 'router-link',
+                id: 'menu-item-1-2-2-1',
+                title: 'Menu item 1.2.2.1',
+                route: '/menu-1-sub-1-sub-1-link-1',
+              },
+              {
+                type: 'action',
+                id: 'menu-item-1-2-2-2',
+                title: 'Menu item 1.2.2.2',
+                href: 'https://example.com/menu-1-sub-1-sub-1-link-2',
+                isLink: true,
+              },
+            ],
+          },
+          {
+            type: 'router-link',
+            id: 'menu-item-1-2-3',
+            title: 'Menu item 1.2.3',
+            route: '/menu-1-sub-1-link-2',
+          },
+        ],
+      },
+      {
+        type: 'action',
+        id: 'menu-item-1-3',
+        title: 'Menu item 1.3',
+        href: 'https://example.com/menu-1-link-2',
+        isLink: true,
+      },
+    ],
+  },
+  {
+    type: 'submenu',
+    id: 'menu-item-2',
+    title: 'Menu Item 2',
+    icon: 'copy',
+    children: [
+      {
+        type: 'router-link',
+        id: 'menu-item-2-1',
+        title: 'Menu Item 2.1',
+        route: '/menu-2-link-1',
+      },
+      {
+        type: 'submenu',
+        id: 'menu-item-2-2',
+        title: 'Menu Item 2.2',
+        children: [
+          {
+            type: 'router-link',
+            id: 'menu-item-2-2-1',
+            title: 'Menu Item 2.2.1',
+            route: '/menu-2-sub-1-link-1',
+          },
+          {
+            type: 'submenu',
+            id: 'menu-item-2-2-2',
+            title: 'Menu Item 2.2.2',
+            children: [
+              {
+                type: 'router-link',
+                id: 'menu-item-2-2-2-1',
+                title: 'Menu item 2.2.2.1',
+                route: '/menu-2-sub-1-sub-1-link-1',
+              },
+              {
+                type: 'external-link',
+                id: 'menu-item-2-2-2-2',
+                title: 'Menu item 2.2.2.2',
+                url: 'https://example.com/menu-2-sub-1-sub-1-link-2',
+                target: '_blank',
+              },
+            ],
+          },
+          {
+            type: 'submenu',
+            id: 'menu-item-2-2-3',
+            title: 'Menu Item 2.2.3',
+            children: [
+              {
+                type: 'router-link',
+                id: 'menu-item-2-2-3-1',
+                title: 'Menu item 2.2.3.1',
+                route: '/menu-2-sub-1-sub-2-link-1',
+              },
+              {
+                type: 'router-link',
+                id: 'menu-item-2-2-3-2',
+                title: 'Menu item 2.2.3.2',
+                route: '/menu-2-sub-1-sub-2-link-2',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'submenu',
+        id: 'menu-item-2-3',
+        title: 'Menu item 2.3',
+        children: [
+          {
+            type: 'router-link',
+            id: 'menu-item-2-3-1',
+            title: 'Menu item 2.3.1',
+            route: '/menu-2-sub-2-link-1',
+          },
+          {
+            type: 'submenu',
+            id: 'menu-item-2-3-2',
+            title: 'Menu item 2.3.2',
+            children: [
+              {
+                type: 'router-link',
+                id: 'menu-item-2-3-2-1',
+                title: 'Menu item 2.3.2.1',
+                route: '/menu-2-sub-2-sub-1-link-1',
+              },
+              {
+                type: 'action',
+                id: 'menu-item-2-3-2-2',
+                title: 'Menu item 2.3.2.2',
+                icon: 'link',
+                href: 'https://example.com/menu-2-sub-2-sub-1-link-2',
+                isLink: true,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'divider',
+    id: 'divider-2',
+  },
+  {
+    type: 'router-link',
+    id: 'profile',
+    title: 'Profile',
+    icon: 'person-outline',
+    route: '/profile',
+  },
+  {
+    type: 'external-link',
+    id: 'settings',
+    title: 'Settings',
+    icon: 'cog',
+    url: 'https://example.com/settings',
+    target: '_blank',
+  },
+  {
+    type: 'action',
+    id: 'contact',
+    title: 'Contact',
+    icon: 'contact',
+    href: 'mailto:contact@example.com',
+    isLink: true,
+  },
+];
+
 type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string };
 
 /**
@@ -392,6 +603,19 @@ export const WithActions: Story = {
 };
 
 /**
+ * A sidebar that highlights external-link and action items which display an external link icon.
+ */
+export const WithExternalLinkIcons: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsWithExternalLinks,
+    mainAreaContent:
+      '<h1>Sidebar with External Link Icons</h1><p>External link and action items display an external link icon.</p>',
+  },
+};
+
+/**
  * A sidebar with toggle buttons on its items.
  *
  * > __Important:__ The current implementation of toggle buttons in the sidebar menu is not WCAG compliant.
@@ -401,7 +625,7 @@ export const WithToggleButtons: Story = {
   ...Default,
   args: {
     ...Default.args,
-    menuItems: menuItemsExample.map(convertToToggleButtonsExample),
+    menuItems: menuItemsWithExternalLinks.map(convertToToggleButtonsExample),
     mainAreaContent: '<h1>Sidebar with Toggle Buttons</h1>',
   },
 };
