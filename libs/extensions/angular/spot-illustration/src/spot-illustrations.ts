@@ -73,7 +73,7 @@ export const illustrations = {
   'megaphone.sound.megaphone-part.circle': {
     xl: 'megaphone.sound.megaphone-part.circle.xlarge.svg',
   },
-  'money.none.medium.coin.bars': {
+  'money.none.coin.bars': {
     md: 'money.none.coin.bars.medium.svg',
   },
   'money.arrow.coin.bars': {
