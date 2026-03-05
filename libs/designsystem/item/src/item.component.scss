@@ -32,29 +32,46 @@
   }
 }
 
-:host-context(kirby-card) {
-  &:first-child > ion-item::part(native):focus-visible {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
-  }
-
-  &:last-child > ion-item::part(native):focus-visible {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
-  }
+// Top corners: first item in card, list, or list section
+:host-context(kirby-card):first-child,
+:host-context(kirby-list-item:first-child),
+:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
+  --kirby-item-top-start-radius: #{utils.border-radius('n')};
+  --kirby-item-top-end-radius: #{utils.border-radius('n')};
 }
 
-:host-context(kirby-list-item:first-child) ion-item::part(native):focus-visible {
-  border-top-left-radius: utils.border-radius('n');
-  border-top-right-radius: utils.border-radius('n');
+// Bottom corners: last item in card or list
+:host-context(kirby-card):last-child,
+:host-context(kirby-list-item:last-child) {
+  --kirby-item-bottom-start-radius: #{utils.border-radius('n')};
+  --kirby-item-bottom-end-radius: #{utils.border-radius('n')};
 }
 
-:host-context(kirby-list-item:last-child) ion-item::part(native):focus-visible {
-  border-bottom-left-radius: utils.border-radius('n');
-  border-bottom-right-radius: utils.border-radius('n');
+// Single-item list: all corners (fixes #1711)
+:host-context(.shape-rounded .is-single) {
+  --kirby-item-top-start-radius: #{utils.border-radius('n')};
+  --kirby-item-top-end-radius: #{utils.border-radius('n')};
+  --kirby-item-bottom-start-radius: #{utils.border-radius('n')};
+  --kirby-item-bottom-end-radius: #{utils.border-radius('n')};
+}
+
+// Single-item list with header: flatten top corners
+:host-context(.has-header .is-single) {
+  --kirby-item-top-start-radius: 0;
+  --kirby-item-top-end-radius: 0;
+}
+
+// Single-item list with footer: flatten bottom corners
+:host-context(.has-footer .is-single) {
+  --kirby-item-bottom-start-radius: 0;
+  --kirby-item-bottom-end-radius: 0;
 }
 
 ion-item {
+  &::part(native) {
+    border-radius: var(--kirby-item-top-start-radius, 0) var(--kirby-item-top-end-radius, 0) var(--kirby-item-bottom-end-radius, 0) var(--kirby-item-bottom-start-radius, 0);
+  }
+
   &::part(native):focus-visible {
     box-shadow:
       0 0 0 2px utils.$focus-ring-color inset,
@@ -200,36 +217,5 @@ ion-item {
 :host(.disclosure) {
   ion-item {
     --inner-padding-end: #{utils.size('xxs')};
-  }
-}
-
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.shape-rounded .is-single) {
-  ion-item {
-    --border-radius: #{utils.border-radius('n')};
-  }
-}
-
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.has-header .is-single) {
-  ion-item::part(native) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.has-footer .is-single) {
-  ion-item::part(native) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-}
-
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
-  ion-item::part(native) {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
   }
 }
