@@ -282,8 +282,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       control: { type: 'boolean' },
     },
     selectedItemChange: {
-      description:
-        'Event emitted when a menu item is selected (will also emit when the selected item is reselected).',
+      description: 'Event emitted when a new menu item is selected.',
       control: false,
     },
     expandedItemsChange: {
@@ -300,6 +299,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
     },
     checkChange: {
       description: 'Event emitted when a menu item toggle is checked/unchecked',
+      control: false,
+    },
+    itemSelect: {
+      description: 'Event emitted when a menu item is selected',
       control: false,
     },
     mainAreaContent: { table: { disable: true } },
