@@ -4,7 +4,6 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { AvatarExampleDefaultComponent } from '../../examples/avatar-example/examples/default';
 import { AvatarExampleColorsComponent } from '../../examples/avatar-example/examples/colors';
 import { AvatarExampleTextComponent } from '../../examples/avatar-example/examples/text';
-import { AvatarExampleIconComponent } from '../../examples/avatar-example/examples/icon';
 import { AvatarExampleBadgeComponent } from '../../examples/avatar-example/examples/badge';
 import { AvatarExampleImageComponent } from '../../examples/avatar-example/examples/image';
 import { AvatarExampleImageSizeComponent } from '../../examples/avatar-example/examples/image-sizes';
@@ -26,7 +25,6 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     AvatarExampleDefaultComponent,
     AvatarExampleColorsComponent,
     AvatarExampleTextComponent,
-    AvatarExampleIconComponent,
     AvatarExampleBadgeComponent,
     AvatarExampleImageComponent,
     AvatarExampleImageSizeComponent,
@@ -72,8 +70,8 @@ export class AvatarShowcaseComponent {
       type: ['true', 'false'],
     },
     {
-      name: 'shadow (deprecated - use stroke instead)',
-      description: 'Adds a box-shadow to the avatar.',
+      name: 'shadow (deprecated)',
+      description: 'Deprecated - use stroke instead. Adds a box-shadow to the avatar.',
       defaultValue: 'false',
       type: ['true', 'false'],
     },
@@ -82,6 +80,12 @@ export class AvatarShowcaseComponent {
       description: 'Adds an outline to the avatar.',
       defaultValue: 'false',
       type: ['true', 'false'],
+    },
+    {
+      name: 'themeColor',
+      description: 'Sets which color the icon should use from the theme palette.',
+      defaultValue: 'white',
+      type: ['white', 'light'],
     },
   ];
 
