@@ -18,7 +18,7 @@ const config = {
   styles: [
     `
       :host {
-        max-width: 480px;
+        max-width: 500px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0 var(--kirby-spacing-s);
