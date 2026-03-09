@@ -35,11 +35,14 @@ const designsystemLibSrcDir = `${designsystemLibDir}/icon/src`;
 const coreLibDir = `${libsRootDir}/core`;
 const coreLibSrcDir = `${coreLibDir}/src`;
 
+const extensionsAngularLibDir = `${libsRootDir}/extensions/angular`;
+
 const dist = `dist`;
 const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
 const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
 const distCoreTarget = `${dist}/${coreLibDir}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
+const distExtensionsAngularTarget = `${extensionsAngularLibDir}/${dist}`;
 
 const { version: coreVersion } = require('../libs/core/package.json');
 
@@ -157,6 +160,22 @@ function copyPackageJson(libDir, distJsonPath) {
   return fs.copy(`${libDir}/package.json`, distJsonPath);
 }
 
+function removeNpmIgnoreNestedPackageJsonRule(distTarget) {
+  // ng-packagr 21 generates a .npmignore that excludes **/package.json,
+  // stripping the subdirectory package.json (e.g. button/package.json) that consumers
+  // with moduleResolution: "node" need to resolve subpath imports.
+  const npmignorePath = `${distTarget}/.npmignore`;
+  if (fs.existsSync(npmignorePath)) {
+    const content = fs.readFileSync(npmignorePath, 'utf-8');
+    const updated = content
+      .split('\n')
+      .filter((line) => line.trim() !== '**/package.json')
+      .join('\n');
+    fs.writeFileSync(npmignorePath, updated, 'utf-8');
+    console.log('Removed **/package.json rule from .npmignore to preserve subpath imports');
+  }
+}
+
 function createTarballPackage(distTarget) {
   return npm(['pack', distTarget], {
     onFailMessage: 'Unable to create gzipped tar-ball package',
@@ -173,7 +192,7 @@ function publish(distTarget, tarballNamePrefix) {
     // Publish to NPM
     console.log('Running on CI, hence publishing package');
 
-    return npm(['publish', distTarget], { onFailMessage: 'Unable to publishpackage' });
+    return npm(['publish', distTarget], { onFailMessage: 'Unable to publish package' });
   } else {
     // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating package as a gzipped tar-ball');
@@ -190,6 +209,7 @@ function publish(distTarget, tarballNamePrefix) {
 const args = process.argv.slice(2).map((value) => value.toLowerCase());
 const doPublishCore = args.length === 0 || args.includes('core');
 const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
+const doPublishExtensionsAngular = args.includes('extensions-angular');
 
 if (doPublishCore) {
   // Publish core
@@ -208,10 +228,21 @@ if (doPublishDesignsystem) {
   console.log('--- Publishing designsystem ---');
   cleanDistribution(distDesignsystemTarget)
     .then(() => buildPackage('designsystem'))
+    .then(() => removeNpmIgnoreNestedPackageJsonRule(distDesignsystemTarget))
     .then(() => writeCoreVersionToPackageJson(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
     .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'))
     .catch((err) => console.warn('*** ERROR WHEN PUBLISHING DESIGNSYSTEM ***', err));
+}
+
+if (doPublishExtensionsAngular) {
+  // Publish extensions-angular
+  console.log('--- Publishing extensions-angular ---');
+  cleanDistribution(distExtensionsAngularTarget)
+    .then(() => buildPackage('extensions-angular'))
+    .then(() => removeNpmIgnoreNestedPackageJsonRule(distExtensionsAngularTarget))
+    .then(() => publish(distExtensionsAngularTarget, 'kirbydesign-extensions-angular'))
+    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING EXTENSIONS-ANGULAR ***', err));
 }
