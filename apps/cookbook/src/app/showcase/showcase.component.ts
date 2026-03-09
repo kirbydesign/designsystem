@@ -39,7 +39,7 @@ export class ShowcaseComponent implements OnDestroy {
   private onNavigationEnd() {
     this.routerEventsSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe(() => setTimeout(() => this.setExampleComponentFromUrl(this.router.url)));
+      .subscribe((event) => this.setExampleComponentFromUrl(event.urlAfterRedirects));
   }
 
   private setExampleComponentFromUrl(url: string) {
