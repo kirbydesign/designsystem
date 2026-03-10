@@ -30,13 +30,6 @@ export const Disabled: Story = {
   },
 };
 
-export const Checked: Story = {
-  args: {
-    checked: true,
-    disabled: false,
-  },
-};
-
 export const DefaultExample: Story = {
   render: () => ({
     template: `<cookbook-toggle-default-example></cookbook-toggle-default-example>`,
