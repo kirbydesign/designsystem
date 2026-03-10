@@ -46,6 +46,10 @@ table.kirby-table {
     color: utils.get-text-color('semi-dark');
     padding: utils.size('s') utils.size('s');
 
+    &.sortable {
+      padding: utils.size('xxs') utils.size('s');
+    }
+
     button {
       padding: 0;
       border: none;
