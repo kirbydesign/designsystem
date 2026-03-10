@@ -26,4 +26,8 @@ const config = {
 })
 export class ToggleItemExampleComponent {
   template: string = config.template;
+
+  onCheckedChange(checked: boolean) {
+    console.log('Checked changed:', checked);
+  }
 }
