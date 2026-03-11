@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 // @ts-expect-error TypeScript cannot provide types based on attributes yet
-import exampleHtml from '../../examples/card-example/card-example.component.html' with { loader: 'text' };
+import exampleHtml from '../../examples/card-example/card-example.component.html' with {
+  loader: 'text',
+};
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { CardExampleVariantComponent } from '../../examples/card-example/examples/variant';
 import { CardExampleDisclosureComponent } from '../../examples/card-example/examples/disclosure';
@@ -69,17 +71,7 @@ export class CardShowcaseComponent {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: '',
-      type: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'success',
-        'warning',
-        'danger',
-        'light',
-        'medium',
-        'dark',
-      ],
+      type: ['tertiary', 'dark'],
     },
   ];
 

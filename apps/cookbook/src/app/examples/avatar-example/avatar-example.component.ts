@@ -4,7 +4,6 @@ import { AvatarSize, Color, ColorHelper } from '@kirbydesign/designsystem';
 import { AvatarExampleDefaultComponent } from './examples/default';
 import { AvatarExampleColorsComponent } from './examples/colors';
 import { AvatarExampleTextComponent } from './examples/text';
-import { AvatarExampleIconComponent } from './examples/icon';
 import { AvatarExampleBadgeComponent } from './examples/badge';
 import { AvatarExampleImageComponent } from './examples/image';
 import { AvatarExampleImageSizeComponent } from './examples/image-sizes';
@@ -19,7 +18,6 @@ import { AvatarExampleImageErrorComponent } from './examples/image-error';
     AvatarExampleDefaultComponent,
     AvatarExampleColorsComponent,
     AvatarExampleTextComponent,
-    AvatarExampleIconComponent,
     AvatarExampleBadgeComponent,
     AvatarExampleImageComponent,
     AvatarExampleImageSizeComponent,
