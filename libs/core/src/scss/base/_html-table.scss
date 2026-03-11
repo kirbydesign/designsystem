@@ -44,11 +44,9 @@ table.kirby-table {
     font-weight: utils.font-weight('normal');
     font-size: utils.font-size('xs');
     color: utils.get-text-color('semi-dark');
-    padding: utils.size('s') utils.size('s');
-
-    &.sortable {
-      padding: utils.size('xxs') utils.size('s');
-    }
+    line-height: utils.line-height('xs');
+    padding: 0 utils.size('s') 0 utils.size('s');
+    height: 44px;
 
     button {
       padding: 0;
