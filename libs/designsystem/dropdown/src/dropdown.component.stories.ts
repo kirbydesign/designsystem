@@ -88,9 +88,6 @@ export const DropdownClosedOnOutsideClick: Story = {
     props: args,
     template: `
       <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
-         <button kirby-button style="position: absolute; top: 0; right: 0;" data-testid="outside-close-btn">
-        Outside Close
-      </button>
     `,
   }),
   play: async ({ canvasElement }) => {
@@ -103,8 +100,8 @@ export const DropdownClosedOnOutsideClick: Story = {
       expect(dropdown).toHaveAttribute('aria-expanded', 'true');
     });
 
-    const outsideButton = canvas.getByTestId('outside-close-btn');
-    await userEvent.click(outsideButton);
+    const popoverBackdrop = document.querySelector('kirby-popover') as HTMLElement;
+    await userEvent.click(popoverBackdrop);
 
     await waitFor(() => {
       expect(dropdown).toHaveAttribute('aria-expanded', 'false');
