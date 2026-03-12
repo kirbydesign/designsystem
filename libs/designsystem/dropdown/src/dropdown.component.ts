@@ -444,6 +444,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('keydown.tab')
+  @HostListener('keydown.shift.tab')
   _onTab() {
     if (this.isOpen) {
       this.selectItem(this.focusedIndex);
