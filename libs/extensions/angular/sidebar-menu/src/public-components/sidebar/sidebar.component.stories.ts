@@ -249,8 +249,8 @@ type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string }
  * - *Submenus* contain nested menu items.
  * - *Router links* navigate within the application using Angular's Router.
  * - *Dividers* are used to separate groups of menu items visually.
+ * - *External links* navigate to external URLs and can open in a new tab. They have an external link icon at the end to indicate that they lead to an external destination.
  *
- * Note: Items can also be configured as external links, but the design for this feature is not finalized yet.
  *
  */
 const meta: Meta<SidebarPropsAndCustomArgs> = {
