@@ -420,3 +420,22 @@ function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
     },
   };
 }
+
+/**
+ * A sidebar with reorderable menu items.
+ */
+export const WithReorderableMenuItems: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsExample.map((item, index) =>
+      item.type === 'submenu'
+        ? {
+            ...item,
+            isChildrenReorderable: true,
+          }
+        : item
+    ),
+    mainAreaContent: '<h1>Sidebar with reorderable submenu items</h1>',
+  },
+};

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input, Signal } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 import { SidebarMenuItem } from '../../models';
 import { MenuAnchorItemComponent } from '../menu-anchor-item';
 import { MenuSubmenuItemComponent } from '../menu-submenu-item';
@@ -20,7 +21,12 @@ type ViewModel = {
     '[class]': 'vm.size()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DividerComponent, MenuAnchorItemComponent, forwardRef(() => MenuSubmenuItemComponent)],
+  imports: [
+    DividerComponent,
+    MenuAnchorItemComponent,
+    forwardRef(() => MenuSubmenuItemComponent),
+    CdkDrag,
+  ],
 })
 export class MenuItemListComponent {
   readonly items = input.required<SidebarMenuItem[]>();

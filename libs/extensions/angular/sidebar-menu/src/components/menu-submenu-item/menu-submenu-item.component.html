@@ -26,5 +26,7 @@
     [id]="vm.submenuId()"
     [@dropDownMenu]
     [@.disabled]="vm.animationsDisabled()"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
   ></ul>
 }
