@@ -22,6 +22,7 @@
   <ul
     kirby-x-menu-item-list
     [items]="item.children"
+    [isDraggable]="item.isChildrenReorderable ?? false"
     [size]="vm.submenuSize()"
     [id]="vm.submenuId()"
     [@dropDownMenu]
