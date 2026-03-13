@@ -17,6 +17,7 @@ type ViewModel = {
   submenuSize: Signal<MenuItemSize>;
   animationsDisabled: Signal<boolean>;
   toggleSubmenu: () => void;
+  dropDraggableItem: (event: CdkDragDrop<string[]>) => void;
 };
 
 @Component({
@@ -62,7 +63,7 @@ export class MenuSubmenuItemComponent {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  #dropDraggableItem(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.item().children, event.previousIndex, event.currentIndex);
   }
 
@@ -74,5 +75,6 @@ export class MenuSubmenuItemComponent {
     submenuSize: this.#submenuSize,
     animationsDisabled: this.#stateService.animationsDisabled,
     toggleSubmenu: this.#toggleSubmenu.bind(this),
+    dropDraggableItem: this.#dropDraggableItem.bind(this),
   };
 }
