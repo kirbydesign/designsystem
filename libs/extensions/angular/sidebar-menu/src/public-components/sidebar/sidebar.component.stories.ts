@@ -192,6 +192,44 @@ const menuItemsExample: SidebarMenuItem[] = [
     ],
   },
   {
+    type: 'submenu',
+    id: 'menu-item-3',
+    title: 'Menu item 3',
+    icon: 'copy',
+    children: [
+      {
+        type: 'router-link',
+        id: 'menu-item-3-1',
+        title: 'Menu item 3.1',
+        route: '/menu-item/3/1',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-3-2',
+        title: 'Menu item 3.2',
+        route: '/menu-item/3/2',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-3-3',
+        title: 'Menu item 3.3',
+        route: '/menu-item/3/3',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-3-4',
+        title: 'Menu item 3.4',
+        route: '/menu-item/3/4',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-3-5',
+        title: 'Menu item 3.5',
+        route: '/menu-item/3/5',
+      },
+    ],
+  },
+  {
     type: 'divider',
     id: 'divider-2',
   },

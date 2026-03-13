@@ -12,6 +12,7 @@
         [item]="item"
         [size]="vm.size()"
         cdkDrag
+        [cdkDragBoundary]="'[cdkDropList]'"
         [cdkDragDisabled]="!vm.isDraggable()"
       ></li>
     }
