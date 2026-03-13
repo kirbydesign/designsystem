@@ -41,3 +41,15 @@ li {
   transition-duration: utils.get-transition-duration('quick');
   transition-timing-function: utils.get-transition-easing('static');
 }
+
+:host .cdk-drag:not(.cdk-drag-placeholder) {
+  transition: none;
+}
+
+:host.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+  transition-property: transform;
+  transition-duration: utils.get-transition-duration('short');
+  transition-timing-function: utils.get-transition-easing('static');
+  pointer-events: none;
+  opacity: 0.7;
+}
