@@ -466,14 +466,20 @@ export const WithReorderableMenuItems: Story = {
   ...Default,
   args: {
     ...Default.args,
-    menuItems: menuItemsExample.map((item, index) =>
-      item.type === 'submenu'
-        ? {
-            ...item,
-            isChildrenReorderable: true,
-          }
-        : item
-    ),
+    menuItems: menuItemsExample.map(convertToReorderableExample),
     mainAreaContent: '<h1>Sidebar with reorderable submenu items</h1>',
   },
 };
+
+function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
+  if (item.type === 'submenu') {
+    return {
+      ...item,
+      isChildrenReorderable: true,
+      children: item.children.map(convertToReorderableExample),
+    };
+  }
+  return {
+    ...item,
+  };
+}
