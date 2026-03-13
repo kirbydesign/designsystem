@@ -22,14 +22,9 @@ li {
 
 .cdk-drag-preview,
 .cdk-drag-placeholder {
-  box-sizing: border-box;
   border-radius: var(--kirby-border-radius-s);
   background: var(--menuitem-selected-background-color, utils.get-color('primary'));
   font-weight: utils.font-weight('bold');
-}
-
-.cdk-drag-preview {
-  box-shadow: var(--kirby-elevation-8);
 }
 
 .cdk-drag-placeholder {
