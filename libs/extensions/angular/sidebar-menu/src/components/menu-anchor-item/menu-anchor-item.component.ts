@@ -14,6 +14,7 @@ type ViewModel = {
   size: Signal<MenuItemSize>;
   isSelected: Signal<boolean>;
   isChecked: Signal<boolean>;
+  shortcutHint: Signal<string | null>;
   selectItem: () => void;
   checkItem: (checked: boolean) => void;
 };
@@ -49,6 +50,15 @@ export class MenuAnchorItemComponent {
     const checkedItems = this.#stateService.checkedItems();
     return checkedItems.has(id);
   });
+  readonly #shortcutHint = computed(() => {
+    const shortcut = this.item().shortcut;
+    if (!shortcut) {
+      return null;
+    }
+    return shortcut.modifierKeys
+      ? [...shortcut.modifierKeys, shortcut.key].join(' + ')
+      : shortcut.key;
+  });
 
   #selectItem(): void {
     this.#stateService.selectItem(this.item().id);
@@ -67,6 +77,7 @@ export class MenuAnchorItemComponent {
     size: this.size,
     isSelected: this.#isSelected,
     isChecked: this.#isChecked,
+    shortcutHint: this.#shortcutHint,
     selectItem: this.#selectItem.bind(this),
     checkItem: this.#checkItem.bind(this),
   };

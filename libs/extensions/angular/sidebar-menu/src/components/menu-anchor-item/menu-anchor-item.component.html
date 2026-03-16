@@ -21,6 +21,9 @@
           {{ item.badge.value }}
         </kirby-badge>
       }
+      @if (vm.shortcutHint(); as shortcutHint) {
+        <span class="shortcut-hint" slot="end">{{ shortcutHint }}</span>
+      }
       @if (item.toggle) {
         <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
@@ -50,6 +53,9 @@
           {{ item.badge.value }}
         </kirby-badge>
       }
+      @if (vm.shortcutHint(); as shortcutHint) {
+        <span class="shortcut-hint" slot="end">{{ shortcutHint }}</span>
+      }
       @if (item.toggle) {
         <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
@@ -76,6 +82,9 @@
         >
           {{ item.badge.value }}
         </kirby-badge>
+      }
+      @if (vm.shortcutHint(); as shortcutHint) {
+        <span class="shortcut-hint" slot="end">{{ shortcutHint }}</span>
       }
       @if (item.toggle) {
         <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>

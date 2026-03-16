@@ -1,5 +1,6 @@
 import { Badge } from './badge.model';
 import { Toggle } from './toggle.model';
+import { ShortcutModel } from './shortcut.model';
 
 export type ActionItem = {
   id: string;
@@ -9,4 +10,5 @@ export type ActionItem = {
   badge?: Badge;
   toggle?: Toggle;
   href?: string;
+  shortcut?: ShortcutModel;
 };

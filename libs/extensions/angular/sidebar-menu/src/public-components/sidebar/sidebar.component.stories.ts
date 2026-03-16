@@ -406,6 +406,71 @@ export const WithToggleButtons: Story = {
   },
 };
 
+const itemsSubmenuWithShortcutHintsExample: SidebarMenuItem[] = [
+  ...menuItemsExample,
+  {
+    type: 'submenu',
+    id: 'shortcuts-and-toggles-submenu',
+    title: 'Items with shortcuts',
+    icon: 'copy',
+    children: [
+      {
+        type: 'action',
+        id: 'action-1',
+        title: 'Action item',
+        shortcut: {
+          key: 'a',
+        },
+        toggle: {
+          uncheckedIcon: 'star',
+          checkedIcon: 'star-fill',
+        },
+      },
+      {
+        type: 'external-link',
+        id: 'external-link-1',
+        title: 'external link',
+        url: 'https://www.kirby.design',
+        target: '_blank',
+        shortcut: {
+          key: 'k',
+          modifierKeys: ['meta'],
+        },
+        toggle: {
+          uncheckedIcon: 'star',
+          checkedIcon: 'star-fill',
+        },
+      },
+      {
+        type: 'router-link',
+        id: 'router-link-1',
+        title: 'router link',
+        route: '/',
+        shortcut: {
+          key: 'h',
+          modifierKeys: ['ctrl', 'shift'],
+        },
+        toggle: {
+          uncheckedIcon: 'star',
+          checkedIcon: 'star-fill',
+        },
+      },
+    ],
+  },
+];
+
+/**
+ * A sidebar with a submenu containing different types of items with shortcut hints enabled.
+ */
+export const WithShortcutHints: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: itemsSubmenuWithShortcutHintsExample,
+    mainAreaContent: '<h1>Sidebar with Shortcut Hints</h1>',
+  },
+};
+
 function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
   if (item.type === 'divider') {
     return item;

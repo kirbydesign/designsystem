@@ -81,3 +81,15 @@
 :host:has(a:focus-visible) .toggle-button-unchecked {
   opacity: 1;
 }
+
+.shortcut-hint {
+  color: var(--kirby-inputs-placeholder-color);
+}
+
+.shortcut-hint:not(:focus-visible) {
+  opacity: 0;
+}
+
+:host:hover .shortcut-hint {
+  opacity: 1;
+}

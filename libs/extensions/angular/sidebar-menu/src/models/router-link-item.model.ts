@@ -1,6 +1,7 @@
 import { Params } from '@angular/router';
 import { Badge } from './badge.model';
 import { Toggle } from './toggle.model';
+import { ShortcutModel } from './shortcut.model';
 
 export type RouterLinkItem = {
   id: string;
@@ -14,4 +15,5 @@ export type RouterLinkItem = {
   queryParams?: Params;
   replaceUrl?: boolean;
   skipLocationChange?: boolean;
+  shortcut?: ShortcutModel;
 };
