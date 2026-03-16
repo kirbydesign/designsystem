@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { ToggleExampleComponent } from '~/app/examples/toggle-example/toggle-example.component';
-import { ToggleDefaultExampleComponent } from '~/app/examples/toggle-example/examples/default';
+import { ToggleStateExampleComponent } from '~/app/examples/toggle-example/examples/state';
 
 const meta: Meta<ToggleComponent> = {
   component: ToggleComponent,
   title: 'Components / Toggle',
   decorators: [
     moduleMetadata({
-      imports: [ToggleExampleComponent, ToggleDefaultExampleComponent],
+      imports: [ToggleExampleComponent, ToggleStateExampleComponent],
     }),
   ],
 };
@@ -30,9 +30,9 @@ export const Disabled: Story = {
   },
 };
 
-export const DefaultExample: Story = {
+export const StateExample: Story = {
   render: () => ({
-    template: `<cookbook-toggle-default-example></cookbook-toggle-default-example>`,
+    template: `<cookbook-toggle-state-example></cookbook-toggle-state-example>`,
   }),
 };
 

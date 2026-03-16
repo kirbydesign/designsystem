@@ -11,7 +11,7 @@ import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 import { ToggleItemExampleComponent } from '~/app/examples/toggle-example/examples/item';
-import { ToggleDefaultExampleComponent } from '~/app/examples/toggle-example/examples/state';
+import { ToggleStateExampleComponent } from '~/app/examples/toggle-example/examples/state';
 
 @Component({
   selector: 'cookbook-toggle-showcase',
@@ -25,7 +25,7 @@ import { ToggleDefaultExampleComponent } from '~/app/examples/toggle-example/exa
     ApiDescriptionPropertiesComponent,
     ImportViewerComponent,
     ToggleItemExampleComponent,
-    ToggleDefaultExampleComponent,
+    ToggleStateExampleComponent,
   ],
 })
 export class ToggleShowcaseComponent {

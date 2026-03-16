@@ -3,7 +3,7 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
-  selector: 'cookbook-toggle-default-example',
+  selector: 'cookbook-toggle-state-example',
   template: `
   <div class="container-wrapper">
   <kirby-item>
@@ -30,7 +30,7 @@ const config = {
   template: config.template,
   imports: [ToggleComponent, ItemComponent],
 })
-export class ToggleDefaultExampleComponent {
+export class ToggleStateExampleComponent {
   template = config.template;
 
   onCheckedChange(checked: boolean) {

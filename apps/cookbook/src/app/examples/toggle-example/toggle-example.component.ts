@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToggleReactiveFormsExampleComponent } from './examples/reactive-forms';
 import { ToggleItemExampleComponent } from './examples/item';
-import { ToggleDefaultExampleComponent } from './examples/state';
+import { ToggleStateExampleComponent } from './examples/state';
 
 @Component({
   selector: 'cookbook-toggle-example',
@@ -10,7 +10,7 @@ import { ToggleDefaultExampleComponent } from './examples/state';
   imports: [
     ToggleReactiveFormsExampleComponent,
     ToggleItemExampleComponent,
-    ToggleDefaultExampleComponent,
+    ToggleStateExampleComponent,
   ],
 })
 export class ToggleExampleComponent {}
