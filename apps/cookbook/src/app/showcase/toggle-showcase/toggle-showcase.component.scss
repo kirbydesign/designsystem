@@ -2,16 +2,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 cookbook-toggle-default-example {
-  padding: 0;
-  margin-bottom: utils.size('s');
-  display: flex;
-  flex-direction: column;
-  gap: utils.size('s');
-
-  @include utils.media('>=medium') {
-    flex-direction: row;
-    gap: utils.size('xl');
-  }
+  --kirby-item-background: transparent;
 }
 
 cookbook-reative-forms-example {

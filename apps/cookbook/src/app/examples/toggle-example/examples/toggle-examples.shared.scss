@@ -3,3 +3,7 @@
 kirby-item:not(:last-child) {
   margin-bottom: var(--kirby-spacing-xxs);
 }
+
+.container-wrapper {
+  max-width: 200px;
+}
