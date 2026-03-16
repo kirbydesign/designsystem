@@ -343,6 +343,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when menu items are reordered',
       control: false,
     },
+    itemSelect: {
+      description: 'Event emitted when a menu item is selected',
+      control: false,
+    },
     mainAreaContent: { table: { disable: true } },
   },
   render: ({ mainAreaContent, ...args }) => ({
