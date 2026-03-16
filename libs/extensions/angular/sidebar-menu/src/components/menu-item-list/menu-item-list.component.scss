@@ -23,7 +23,6 @@ li {
 .cdk-drag-preview {
   border-radius: var(--kirby-border-radius-s);
   background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
-  font-weight: utils.font-weight('bold');
 }
 
 .cdk-drag-placeholder {
