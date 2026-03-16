@@ -65,6 +65,10 @@ export class MenuSubmenuItemComponent {
 
   #dropDraggableItem(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.item().children, event.previousIndex, event.currentIndex);
+    this.#stateService.reorderItems(
+      this.item().id,
+      this.item().children.map((child) => child.id)
+    );
   }
 
   readonly vm: ViewModel = {

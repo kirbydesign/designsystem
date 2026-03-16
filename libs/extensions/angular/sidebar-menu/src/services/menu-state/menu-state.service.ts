@@ -1,6 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CheckEvent, ExpandEvent, SidebarMenuItem } from '../../models';
+import { CheckEvent, ExpandEvent, ReorderEvent, SidebarMenuItem } from '../../models';
 
 @Injectable({ providedIn: 'root' })
 export class MenuStateService {
@@ -12,6 +12,7 @@ export class MenuStateService {
   readonly #animationsDisabled = signal<boolean>(false);
   readonly #expandEvents = new Subject<ExpandEvent>();
   readonly #checkEvents = new Subject<CheckEvent>();
+  readonly #reorderEvents = new Subject<ReorderEvent>();
 
   get menuItems(): Signal<SidebarMenuItem[]> {
     return this.#menuItems.asReadonly();
@@ -65,6 +66,10 @@ export class MenuStateService {
     return this.#checkEvents.asObservable();
   }
 
+  get reorderEvents(): Observable<ReorderEvent> {
+    return this.#reorderEvents.asObservable();
+  }
+
   expandItem(id: string): void {
     this.#expandEvents.next({ id, isExpanded: true });
     if (this.#autoCollapse()) {
@@ -103,6 +108,10 @@ export class MenuStateService {
 
   #findAncestors(id: string): Set<string> {
     return recursivelyFindAncestors(this.#menuItems(), id) ?? new Set();
+  }
+
+  reorderItems(menuId: string, reorderedIds: string[]): void {
+    this.#reorderEvents.next({ menuId, reorderedIds });
   }
 }
 

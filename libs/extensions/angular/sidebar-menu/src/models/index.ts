@@ -7,3 +7,4 @@ export * from './expand-event.model';
 export * from './submenu-item.model';
 export * from './toggle.model';
 export * from './check-event.model';
+export * from './reorder-event.model';

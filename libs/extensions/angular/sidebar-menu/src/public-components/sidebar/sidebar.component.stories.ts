@@ -339,6 +339,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item toggle is checked/unchecked',
       control: false,
     },
+    reorderChange: {
+      description: 'Event emitted when menu items are reordered',
+      control: false,
+    },
     mainAreaContent: { table: { disable: true } },
   },
   render: ({ mainAreaContent, ...args }) => ({
@@ -475,7 +479,7 @@ function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
   if (item.type === 'submenu') {
     return {
       ...item,
-      isChildrenReorderable: true,
+      isReorderable: true,
       children: item.children.map(convertToReorderableExample),
     };
   }

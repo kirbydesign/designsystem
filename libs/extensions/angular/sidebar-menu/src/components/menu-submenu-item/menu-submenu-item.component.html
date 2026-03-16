@@ -28,6 +28,6 @@
     [@.disabled]="vm.animationsDisabled()"
     cdkDropList
     (cdkDropListDropped)="vm.dropDraggableItem($event)"
-    [isDraggable]="item.isChildrenReorderable ?? false"
+    [isDraggable]="item.isReorderable ?? false"
   ></ul>
 }

@@ -5,6 +5,6 @@ export type SubmenuItem = {
   type: 'submenu';
   title: string;
   icon?: string;
-  isChildrenReorderable?: boolean;
+  isReorderable?: boolean;
   children: SidebarMenuItem[];
 };

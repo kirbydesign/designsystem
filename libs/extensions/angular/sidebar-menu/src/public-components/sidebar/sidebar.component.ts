@@ -46,6 +46,7 @@ export class SidebarComponent {
   @Output() checkedItemsChange = new EventEmitter<Set<string>>();
   @Output() expandChange = this.#stateService.expandEvents;
   @Output() checkChange = this.#stateService.checkEvents;
+  @Output() reorderChange = this.#stateService.reorderEvents;
 
   constructor() {
     effect(() => this.selectedItemChange.emit(this.#stateService.selectedItem()));
