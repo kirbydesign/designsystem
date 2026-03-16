@@ -4,7 +4,15 @@
       <kirby-divider aria-hidden="true"></kirby-divider>
     }
     @case ('submenu') {
-      <li kirby-x-menu-submenu-item [item]="item" [size]="vm.size()"></li>
+      <li
+        kirby-x-menu-submenu-item
+        [item]="item"
+        [size]="vm.size()"
+        cdkDrag
+        cdkDragPreviewContainer="parent"
+        [cdkDragBoundary]="'[cdkDropList]'"
+        [cdkDragDisabled]="!vm.isDraggable()"
+      ></li>
     }
     @default {
       <li
@@ -12,6 +20,7 @@
         [item]="item"
         [size]="vm.size()"
         cdkDrag
+        cdkDragPreviewContainer="parent"
         [cdkDragBoundary]="'[cdkDropList]'"
         [cdkDragDisabled]="!vm.isDraggable()"
       ></li>
