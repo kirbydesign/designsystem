@@ -1,3 +1,4 @@
+import { isReadable } from 'node:stream';
 import { createServiceFactory } from '@ngneat/spectator/jest';
 import { SidebarMenuItem } from '../../models';
 import { MenuStateService } from './menu-state.service';
@@ -195,6 +196,23 @@ describe(MenuStateService.name, () => {
       });
 
       spectator.service.selectItem('item-2.3.1');
+    });
+  });
+
+  describe('Method : reorderItems', () => {
+    it('should emit a reorder event when a menu is reordered', (done) => {
+      const spectator = render();
+
+      spectator.service.reorderEvents.subscribe((event) => {
+        try {
+          expect(event).toEqual({ menuId: 'item-1', reorderedIds: ['item-1.2', 'item-1.1'] });
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
+
+      spectator.service.reorderItems('item-1', ['item-1.2', 'item-1.1']);
     });
   });
 });
