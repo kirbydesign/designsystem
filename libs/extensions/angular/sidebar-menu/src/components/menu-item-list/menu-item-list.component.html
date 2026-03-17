@@ -11,7 +11,7 @@
         cdkDrag
         cdkDragPreviewContainer="parent"
         [cdkDragBoundary]="'[cdkDropList]'"
-        [cdkDragDisabled]="!vm.isDraggable()"
+        [cdkDragDisabled]="!vm.isReorderable()"
       ></li>
     }
     @default {
@@ -22,7 +22,7 @@
         cdkDrag
         cdkDragPreviewContainer="parent"
         [cdkDragBoundary]="'[cdkDropList]'"
-        [cdkDragDisabled]="!vm.isDraggable()"
+        [cdkDragDisabled]="!vm.isReorderable()"
       ></li>
     }
   }

@@ -10,7 +10,7 @@ type ViewModel = {
   id: Signal<string | undefined>;
   size: Signal<MenuItemSize>;
   items: Signal<SidebarMenuItem[]>;
-  isDraggable: Signal<boolean>;
+  isReorderable: Signal<boolean>;
 };
 
 @Component({
@@ -33,12 +33,12 @@ export class MenuItemListComponent {
   readonly items = input.required<SidebarMenuItem[]>();
   readonly size = input<MenuItemSize>('lg');
   readonly id = input<string>();
-  readonly isDraggable = input<boolean>(false);
+  readonly isReorderable = input<boolean>(false);
 
   readonly vm: ViewModel = {
     id: this.id,
     size: this.size,
     items: this.items,
-    isDraggable: this.isDraggable,
+    isReorderable: this.isReorderable,
   };
 }
