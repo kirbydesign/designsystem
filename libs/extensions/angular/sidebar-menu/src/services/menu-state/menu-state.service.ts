@@ -12,6 +12,7 @@ export class MenuStateService {
   readonly #animationsDisabled = signal<boolean>(false);
   readonly #expandEvents = new Subject<ExpandEvent>();
   readonly #checkEvents = new Subject<CheckEvent>();
+  readonly #selectEvents = new Subject<string>();
 
   get menuItems(): Signal<SidebarMenuItem[]> {
     return this.#menuItems.asReadonly();
@@ -65,6 +66,10 @@ export class MenuStateService {
     return this.#checkEvents.asObservable();
   }
 
+  get selectEvents(): Observable<string> {
+    return this.#selectEvents.asObservable();
+  }
+
   expandItem(id: string): void {
     this.#expandEvents.next({ id, isExpanded: true });
     if (this.#autoCollapse()) {
@@ -99,6 +104,11 @@ export class MenuStateService {
       items.delete(id);
       return new Set(items);
     });
+  }
+
+  selectItem(id: string): void {
+    this.#selectEvents.next(id);
+    this.#selectedItem.set(id);
   }
 
   #findAncestors(id: string): Set<string> {

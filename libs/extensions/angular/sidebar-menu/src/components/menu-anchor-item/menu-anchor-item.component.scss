@@ -51,6 +51,10 @@
     display: none;
   }
 
+  & .external-link {
+    display: none;
+  }
+
   & .toggle-spacer.unchecked {
     display: initial;
   }
