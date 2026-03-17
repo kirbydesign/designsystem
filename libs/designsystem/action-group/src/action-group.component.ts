@@ -1,10 +1,13 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
+  DestroyRef,
   ElementRef,
   HostBinding,
+  inject,
   Inject,
   InjectionToken,
   Input,
@@ -15,6 +18,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
@@ -41,15 +45,14 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
   @Input()
   align: 'start' | 'end' = 'end';
 
-  @ContentChildren(ButtonComponent, { read: ElementRef }) private buttonElements?: QueryList<
-    ElementRef<HTMLButtonElement>
-  >;
-  @ContentChildren(ButtonComponent) private buttons?: QueryList<ButtonComponent>;
+  @ContentChildren(ButtonComponent, { read: ElementRef })
+  private readonly buttonElements?: QueryList<ElementRef<HTMLButtonElement>>;
+  @ContentChildren(ButtonComponent) private readonly buttons?: QueryList<ButtonComponent>;
   @ViewChild('hiddenLayer', { read: ElementRef, static: true })
-  private hiddenLayer!: ElementRef<HTMLElement>;
+  private readonly hiddenLayer!: ElementRef<HTMLElement>;
 
   @ViewChild(MenuComponent, { read: ElementRef, static: true })
-  private menuElement!: ElementRef<HTMLElement>;
+  private readonly menuElement!: ElementRef<HTMLElement>;
 
   @HostBinding('class.is-collapsed')
   _isCollapsed: boolean;
@@ -61,11 +64,13 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
   }
 
   private collapseThreshold = 2;
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor(
-    private elementRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2,
-    @Optional() @Inject(ACTIONGROUP_CONFIG) private config: ActionGroupConfig
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly renderer: Renderer2,
+    private readonly cdr: ChangeDetectorRef,
+    @Optional() @Inject(ACTIONGROUP_CONFIG) private readonly config: ActionGroupConfig
   ) {}
 
   ngAfterContentInit(): void {
@@ -80,6 +85,8 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
     if (this.visibleActions !== undefined) {
       this.initializeCollapsing();
     }
+
+    this.subscribeToProjectedButtonChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -98,7 +105,7 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
     const event = new PointerEvent('click', {
       bubbles: true,
       cancelable: true,
-      view: window,
+      view: globalThis.window,
     });
 
     action.button.dispatchEvent(event);
@@ -113,7 +120,10 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
 
     if (this.config.maxVisibleActions !== undefined) {
       // Don't overwrite visibleActions value if configured lower than maxVisibleActions:
-      if (!(this.visibleActions < this.config.maxVisibleActions)) {
+      if (
+        this.visibleActions === undefined ||
+        this.visibleActions >= this.config.maxVisibleActions
+      ) {
         this.visibleActions = this.config.maxVisibleActions;
       }
     }
@@ -124,17 +134,21 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
   }
 
   private initializeCollapsing() {
-    if (this.buttonElements.length <= this.collapseThreshold) return;
+    if (!this.buttonElements) return;
 
-    this.moveButtons();
-    this.populateMenu();
-    this.toggleMenu();
+    if (this.buttonElements.length > this.collapseThreshold) {
+      this.moveVisibleButtonsBeforeMenu();
+      this.moveOverflowButtonsToHiddenLayer();
+    } else {
+      this.moveHiddenButtonsBeforeMenu();
+    }
+
+    this.refreshCollapsedState();
   }
 
-  private moveButtons() {
-    const buttonsToShow = [...this.buttonElements]
-      .slice(0, this.visibleActions)
-      .filter((btn) => btn.nativeElement.parentElement === this.hiddenLayer.nativeElement);
+  private moveVisibleButtonsBeforeMenu(): void {
+    const buttonsToShow = this.getButtonsToShow();
+
     buttonsToShow.forEach((button) => {
       this.renderer.insertBefore(
         this.elementRef.nativeElement,
@@ -142,26 +156,82 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
         this.menuElement.nativeElement
       );
     });
+  }
 
-    const buttonsToHide = [...this.buttonElements].slice(this.visibleActions);
+  private moveOverflowButtonsToHiddenLayer(): void {
+    const buttonsToHide = this.getButtonsToHide();
+
     buttonsToHide.forEach((button) => {
       this.renderer.appendChild(this.hiddenLayer.nativeElement, button.nativeElement);
     });
   }
 
+  private moveHiddenButtonsBeforeMenu(): void {
+    this.getHiddenButtons().forEach((button) => {
+      this.renderer.insertBefore(
+        this.elementRef.nativeElement,
+        button,
+        this.menuElement.nativeElement
+      );
+    });
+  }
+
+  private getButtonsToShow(): Array<ElementRef<HTMLButtonElement>> {
+    const visibleActions = this.visibleActions ?? 0;
+
+    return [...this.buttonElements]
+      .slice(0, visibleActions)
+      .filter((button) => button.nativeElement.parentElement === this.hiddenLayer.nativeElement);
+  }
+
+  private getButtonsToHide(): Array<ElementRef<HTMLButtonElement>> {
+    const visibleActions = this.visibleActions ?? 0;
+    return [...this.buttonElements].slice(visibleActions);
+  }
+
+  private getHiddenButtons(): HTMLButtonElement[] {
+    return Array.from(this.hiddenLayer.nativeElement.children) as HTMLButtonElement[];
+  }
+
+  private refreshCollapsedState(): void {
+    this.populateMenu();
+    this.toggleMenu();
+  }
+
   private toggleMenu() {
-    const hasHiddenButtons = this.hiddenLayer.nativeElement.childElementCount > 0;
-    this._isCollapsed = hasHiddenButtons;
+    this._isCollapsed = this.hiddenLayer.nativeElement.childElementCount > 0;
   }
 
   private populateMenu() {
-    const hiddenButtons = Array.from(
-      this.hiddenLayer.nativeElement.children
-    ) as HTMLButtonElement[];
+    const hiddenButtons = this.getHiddenButtons();
 
     this._collapsedActions = hiddenButtons.map((button) => ({
       button,
       text: button.textContent.trim(),
     }));
+  }
+
+  private subscribeToProjectedButtonChanges(): void {
+    this.buttonElements?.changes
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.onProjectedButtonsChanged());
+  }
+
+  private onProjectedButtonsChanged(): void {
+    this.updateCondensedButtons();
+    this.updateCollapsedButtons();
+  }
+
+  private updateCondensedButtons(): void {
+    if (!this.config?.isCondensed) return;
+
+    this.buttons?.forEach((button) => (button.showIconOnly = true));
+  }
+
+  private updateCollapsedButtons(): void {
+    if (this.visibleActions === undefined) return;
+
+    this.initializeCollapsing();
+    this.cdr.markForCheck();
   }
 }

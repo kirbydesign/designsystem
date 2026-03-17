@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
@@ -10,7 +10,7 @@ import { BasePageExampleComponent } from '../../page-example/base-page-example.c
 
 const config = {
   template: `<kirby-page defaultBackHref="/">
-  <kirby-header [title]="'Action Group'" subtitle1="Subtitle one" subtitle2="Subtitle two">
+  <kirby-header [title]="'Action Grousdadsadsaa sadadawewwp'" subtitle1="Subtitle one" subtitle2="Subtitle two">
     <kirby-action-group *kirbyHeaderActions>
       <button kirby-button attentionLevel="3" (click)="actionClicked('Action 1')">
         <kirby-icon name="edit"></kirby-icon>
@@ -22,6 +22,11 @@ const config = {
       <button kirby-button attentionLevel="3" (click)="actionClicked('Action 3')">
         Action 3
       </button>
+      @if (showDelayedAction) {
+        <button kirby-button attentionLevel="3" (click)="actionClicked('Action 4')">
+          Action 4
+        </button>
+      }
     </kirby-action-group>
   </kirby-header>
 
@@ -42,13 +47,31 @@ const config = {
     HeaderActionsDirective,
   ],
 })
-export class HeaderWithActionGroupExampleComponent extends BasePageExampleComponent {
+export class HeaderWithActionGroupExampleComponent
+  extends BasePageExampleComponent
+  implements OnInit, OnDestroy
+{
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
     .replace(' [innerHTML]="content">', '>...');
 
-  constructor(private toastController: ToastController) {
+  showDelayedAction = false;
+  private delayedActionTimer?: ReturnType<typeof setTimeout>;
+
+  constructor(private readonly toastController: ToastController) {
     super();
+  }
+
+  ngOnInit(): void {
+    this.delayedActionTimer = setTimeout(() => {
+      this.showDelayedAction = true;
+    }, 2000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.delayedActionTimer) {
+      clearTimeout(this.delayedActionTimer);
+    }
   }
 
   actionClicked(action: string) {

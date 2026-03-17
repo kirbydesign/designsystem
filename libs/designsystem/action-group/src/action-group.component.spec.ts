@@ -3,8 +3,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-
-import { tick } from '@angular/core/testing';
 import {
   ACTIONGROUP_CONFIG,
   ActionGroupComponent,
@@ -251,6 +249,55 @@ describe('ActionGroupComponent', () => {
           expect(buttons).toHaveLength(3);
         });
       });
+    });
+  });
+
+  describe('when projected buttons change dynamically', () => {
+    const createDynamicHost = createHostFactory({
+      component: ActionGroupComponent,
+      imports: [TestHelper.ionicModuleForTest, ButtonComponent],
+      template: `<kirby-action-group [visibleActions]="visibleActions">
+                  <button kirby-button>Action 1</button>
+                  <button kirby-button>Action 2</button>
+                  <button kirby-button>Action 3</button>
+                  @if (showAction4) {
+                    <button kirby-button>Action 4</button>
+                  }
+                </kirby-action-group>`,
+      providers: [
+        {
+          provide: ACTIONGROUP_CONFIG,
+          useFactory: () => {
+            return config;
+          },
+        },
+      ],
+    });
+
+    afterEach(() => {
+      config = undefined;
+    });
+
+    it('should keep collapsed actions in the expected order when adding a new action', () => {
+      config = { defaultVisibleActions: 1 };
+      spectator = createDynamicHost(undefined, {
+        hostProps: { showAction4: false },
+      });
+
+      spectator.setHostInput('showAction4', true);
+
+      const hiddenButtons = spectator.element.querySelectorAll(
+        '.hidden-layer > button[kirby-button]'
+      );
+      const hiddenButtonTexts = Array.from(hiddenButtons).map((button) =>
+        button.textContent.trim()
+      );
+      const collapsedActionTexts = spectator.component._collapsedActions.map(
+        (action) => action.text
+      );
+
+      expect(hiddenButtonTexts).toEqual(['Action 2', 'Action 3', 'Action 4']);
+      expect(collapsedActionTexts).toEqual(['Action 2', 'Action 3', 'Action 4']);
     });
   });
 });
