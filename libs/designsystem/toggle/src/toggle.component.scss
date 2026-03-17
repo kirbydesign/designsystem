@@ -9,9 +9,9 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 :host {
   display: inline-flex;
 
-  // &:has(ion-toggle.in-item.toggle-justify-space-between) {
-  //   width: 100%;
-  // }
+  &:has(ion-toggle.in-item.toggle-justify-space-between) {
+    width: 100%;
+  }
 
   &.has-hidden-label {
     &:has(ion-toggle.in-item) {
