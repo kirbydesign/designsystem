@@ -1,5 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { CheckEvent, ExpandEvent, ReorderEvent, SidebarMenuItem } from '../../models';
 
 @Injectable({ providedIn: 'root' })
@@ -120,8 +121,9 @@ export class MenuStateService {
     return recursivelyFindAncestors(this.#menuItems(), id) ?? new Set();
   }
 
-  reorderItems(menuId: string, reorderedIds: string[]): void {
-    this.#reorderEvents.next({ menuId, reorderedIds });
+  reorderItems(menuItems: SidebarMenuItem[], reorderEvent: ReorderEvent): void {
+    moveItemInArray(menuItems, reorderEvent.previousIndex, reorderEvent.newIndex);
+    this.#reorderEvents.next(reorderEvent);
     this.#menuItems.update((items) => [...items]);
   }
 }

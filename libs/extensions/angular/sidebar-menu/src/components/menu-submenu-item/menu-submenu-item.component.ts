@@ -1,7 +1,7 @@
 import { Component, computed, ElementRef, forwardRef, inject, input, Signal } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { SubmenuItem } from '../../models';
+import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
+import { ReorderEvent, SubmenuItem } from '../../models';
 import { MenuItemComponent } from '../menu-item';
 import { MenuItemSize } from '../../types';
 import { MenuItemListComponent } from '../menu-item-list';
@@ -64,11 +64,13 @@ export class MenuSubmenuItemComponent {
   }
 
   #reorderItem(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(this.item().children, event.previousIndex, event.currentIndex);
-    this.#stateService.reorderItems(
-      this.item().id,
-      this.item().children.map((child) => child.id)
-    );
+    const reorderEvent: ReorderEvent = {
+      menuId: this.item().id,
+      itemId: event.item.data,
+      previousIndex: event.previousIndex,
+      newIndex: event.currentIndex,
+    };
+    this.#stateService.reorderItems(this.item().children, reorderEvent);
   }
 
   readonly vm: ViewModel = {
