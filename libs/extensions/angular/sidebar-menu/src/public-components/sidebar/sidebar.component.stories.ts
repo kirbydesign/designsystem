@@ -339,7 +339,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item toggle is checked/unchecked',
       control: false,
     },
-    itemOrderChange: {
+    itemReorder: {
       description: 'Event emitted when menu items are reordered',
       control: false,
     },
