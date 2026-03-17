@@ -347,6 +347,10 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item is selected',
       control: false,
     },
+    menuItemsChange: {
+      description: 'Event emitted when the menu items input changes',
+      control: false,
+    },
     mainAreaContent: { table: { disable: true } },
   },
   render: ({ mainAreaContent, ...args }) => ({

@@ -122,6 +122,7 @@ export class MenuStateService {
 
   reorderItems(menuId: string, reorderedIds: string[]): void {
     this.#reorderEvents.next({ menuId, reorderedIds });
+    this.#menuItems.update((items) => [...items]);
   }
 }
 

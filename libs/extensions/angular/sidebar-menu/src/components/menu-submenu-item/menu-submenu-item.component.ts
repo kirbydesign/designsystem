@@ -64,7 +64,7 @@ export class MenuSubmenuItemComponent {
   }
 
   #reorderItem(event: CdkDragDrop<string[]>): void {
-    //moveItemInArray(this.item().children, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.item().children, event.previousIndex, event.currentIndex);
     this.#stateService.reorderItems(
       this.item().id,
       this.item().children.map((child) => child.id)
