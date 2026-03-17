@@ -9,4 +9,5 @@ export type ActionItem = {
   badge?: Badge;
   toggle?: Toggle;
   href?: string;
+  isLink?: boolean;
 };
