@@ -203,8 +203,6 @@ export const WithFormField: Story = {
         >
         </kirby-dropdown>
       </kirby-form-field>
-      
-      <input kirby-input [placeholder]="placeholder" [size]="'md'" />
 
       <kirby-form-field 
         [label]="'label'"
