@@ -76,7 +76,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   };
 
   @Input()
-  public noSearchResultsText = 'Ingen resultater';
+  public noSearchResultsText = 'No results found.';
 
   @Input()
   public itemTextProperty: string = 'text';
