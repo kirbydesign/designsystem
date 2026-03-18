@@ -168,7 +168,7 @@ export const WithTemplate: Story = {
 export const CustomSearchFunction: Story = {
   args: {
     items: currencyItems,
-    itemTextProperty: 'code',
+    itemTextProperty: 'name',
     placeholder: 'Select currencies',
     disabled: false,
     hasError: false,
