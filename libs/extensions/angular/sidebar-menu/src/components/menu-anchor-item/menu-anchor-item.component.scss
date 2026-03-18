@@ -49,11 +49,12 @@
   }
 
   & .toggle-spacer {
+    display: initial;
+  }
 
   & .external-link {
     display: none;
   }
-
 }
 
 .toggle-button-wrapper {
