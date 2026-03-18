@@ -98,7 +98,7 @@ describe('MultiSelectAutocomplete', () => {
     });
 
     it('should have correct id on button', () => {
-      const inputId = spectator.component.inputId;
+      const inputId = spectator.component._comboboxId;
       expect(inputElement?.getAttribute('id')).toBe(inputId);
     });
   });

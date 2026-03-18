@@ -2,11 +2,11 @@
   <input
     kirby-input
     type="text"
-    [attr.id]="inputId"
+    [attr.id]="_comboboxId"
     aria-haspopup="listbox"
-    [attr.aria-controls]="comboboxId"
+    [attr.aria-controls]="_listboxId"
     [attr.aria-expanded]="isOpen"
-    [attr.aria-activedescendant]="isOpen ? comboboxId + '-item-' + getItemText(focusedItem) : null"
+    [attr.aria-activedescendant]="isOpen ? _listboxId + '-item-' + getItemText(focusedItem) : null"
     [hasError]="hasError"
     [size]="size"
     [disabled]="disabled"
@@ -23,7 +23,7 @@
   (click)="onPopoverClick()"
   (willHide)="onPopoverWillHide()"
 >
-  <kirby-card role="listbox" [attr.id]="comboboxId" [attr.aria-labelledby]="inputId">
+  <kirby-card role="listbox" [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
     @if (searchItems.length === 0) {
       <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
@@ -52,7 +52,7 @@
     (click)="onItemSelect(item)"
     [class.focused]="focused"
     role="option"
-    [attr.id]="comboboxId + '-item-' + getItemText(item)"
+    [attr.id]="_listboxId + '-item-' + getItemText(item)"
     [attr.aria-selected]="selected"
   >
     <p class="kirby-item-title">{{ getItemText(item) }}</p>
