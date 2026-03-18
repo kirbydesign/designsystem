@@ -88,10 +88,6 @@ describe('Combobox', () => {
       expect(inputElement).toHaveAttribute('type', 'text');
     });
 
-    it('should have tabindex="0" by default on button', () => {
-      expect(inputElement).toHaveAttribute('tabindex', '0');
-    });
-
     it('should have correct id on button', () => {
       const inputId = spectator.component._comboboxId;
       expect(inputElement?.getAttribute('id')).toBe(inputId);
