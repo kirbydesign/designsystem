@@ -178,11 +178,10 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   // _focusedItem keeps track of which element has focus and will be selected
   // if it is activated (by pressing ENTER)
   private _focusedItem: unknown = undefined;
-  get focusedItem(): unknown {
+  public get focusedItem(): unknown {
     return this._focusedItem;
   }
 
-  @Input()
   public set focusedItem(item: unknown) {
     if (this._focusedItem !== item) {
       this._focusedItem = item;
