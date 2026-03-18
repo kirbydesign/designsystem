@@ -218,15 +218,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   @Input()
   public size: InputSize = InputSize.medium;
 
-  // Tabindex defaults to 0 instead of no value to align tabbing behavior in Safari
-  // with other browsers and the default select behavior: https://mayank.co/blog/safari-focus/
-  @Input()
-  public tabindex = 0;
-
-  protected get _tabindex(): number {
-    return this.disabled ? -1 : this.tabindex;
-  }
-
   // Prevent Ionic blur on scroll
   @HostBinding('attr.no-blur')
   public get _noBlurOnScroll(): boolean {
