@@ -260,19 +260,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     return this.state === OpenState.open;
   }
 
-  /* The 'clicked' class is applied through Hostbinding to prevent the dropdown from getting a focus ring on click.
-    There is a bug that causes the dropdown to get a focus ring on click, if it is the first element that is interacted with
-    after the page is loaded. If the user interacts with any other element before, then the dropdown won't get a focus ring.
-    See issue: https://github.com/kirbydesign/designsystem/issues/2477.
-
-    This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible
-    to close the dropdown when the popover backdrop is clicked, instead of relying on the blur event, which is utilized
-    by this line below: this.elementRef.nativeElement.focus(). Right now this forces the blur event to be triggered, when
-    clicking outside of the dropdown.
-    */
-  @HostBinding('class.clicked')
-  public clicked: boolean = false;
-
   @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
 
@@ -343,7 +330,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   protected onToggle(event: MouseEvent) {
     event.stopPropagation();
     this.textInput?.nativeElement.focus();
-    this.clicked = true;
 
     this.toggle();
   }
@@ -571,13 +557,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     if (this.isOpen) {
       this.selectItem(this.focusedItem);
       this.close();
-    }
-
-    if (this.clicked) {
-      // Remove the 'clicked' class (Hostbinding) if the user has previously opened the dropdown by clicking,
-      // since the class prevents the focus ring from showing,
-      // which is expected to happen, when using the tab key
-      this.clicked = false;
     }
   }
 

@@ -163,9 +163,8 @@ export const CustomSearchFunction: Story = {
   args: {
     items: currencyItems,
     itemTextProperty: 'name',
+    itemIdProperty: 'code',
     placeholder: 'Select currencies',
-    disabled: false,
-    hasError: false,
   },
   render: (args) => ({
     props: {
