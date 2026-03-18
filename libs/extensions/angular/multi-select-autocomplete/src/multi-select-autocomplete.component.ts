@@ -515,7 +515,7 @@ export class MultiSelectAutocompleteComponent
     this.selectedItem = this.findItemByInput(input);
   }
 
-  protected onInput(event: Event): void {
+  protected updateSearchResults(event: Event): void {
     if (!this.isOpen) {
       this.open();
     }

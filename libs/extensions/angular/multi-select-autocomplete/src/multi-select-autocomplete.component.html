@@ -12,7 +12,7 @@
     [disabled]="disabled"
     [tabindex]="_tabindex"
     [placeholder]="placeholder"
-    (input)="onInput($event)"
+    (input)="updateSearchResults($event)"
   />
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'" kirby-affix="suffix"></kirby-icon>
 </div>
