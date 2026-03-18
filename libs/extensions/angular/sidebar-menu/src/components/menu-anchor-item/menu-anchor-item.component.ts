@@ -50,7 +50,7 @@ export class MenuAnchorItemComponent {
   });
 
   #selectItem(): void {
-    this.#stateService.selectedItem = this.item().id;
+    this.#stateService.selectItem(this.item().id);
   }
 
   #checkItem(checked: boolean): void {

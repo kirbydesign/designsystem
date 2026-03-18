@@ -21,6 +21,9 @@
           {{ item.badge.value }}
         </kirby-badge>
       }
+      @if (item.isLink) {
+        <kirby-icon name="link" slot="end" class="external-link"></kirby-icon>
+      }
       @if (item.toggle) {
         <div slot="end" class="toggle-spacer"></div>
       }
@@ -77,6 +80,7 @@
           {{ item.badge.value }}
         </kirby-badge>
       }
+      <kirby-icon name="link" slot="end" class="external-link"></kirby-icon>
       @if (item.toggle) {
         <div slot="end" class="toggle-spacer"></div>
       }
