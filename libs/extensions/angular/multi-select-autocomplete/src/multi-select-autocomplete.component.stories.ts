@@ -35,10 +35,10 @@ const currencyItems: CurrencyItem[] = [
   { code: 'THB', name: 'Thai Baht' },
 ];
 
-const mySearchFunction = (searchTerm: string): unknown[] => {
-  return currencyItems.filter((item) => item.code.toLowerCase().includes(searchTerm.toLowerCase()));
-};
-
+/**
+ * The Combobox is a form control that allows the user to filter and select from a list of options. It combines the functionality of a dropdown and an input field, providing an efficient way to handle large datasets while maintaining a clean and user-friendly interface.
+ * The user can type in the input field to filter the options, and the dropdown will display only the matching items. This component is ideal for scenarios where there are many options to choose from, such as selecting a country, city, or in this case, a currency.
+ */
 const meta: Meta<MultiSelectAutocompleteComponent> = {
   component: MultiSelectAutocompleteComponent,
   title: 'Components/Forms/Multi Select Autocomplete',
@@ -68,6 +68,13 @@ const meta: Meta<MultiSelectAutocompleteComponent> = {
 export default meta;
 type Story = StoryObj<MultiSelectAutocompleteComponent>;
 
+/**
+ * This is a default combobox with a simple list of string items. The user can type in the input field to filter the options, and the dropdown will display only the matching items.
+ * The placeholder text is intentionally long to demonstrate how the component handles long text and to ensure that it does not break the layout or cause any visual issues.
+ * The component should gracefully handle the long placeholder text without affecting the overall user experience.
+ * All the currencies are simple strings, and the component will use the default behavior to display them in the dropdown.
+ * The filtering is based on the string values of the items, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
+ */
 export const Default: Story = {
   args: {
     items: simpleCurrencyItems,
@@ -77,6 +84,11 @@ export const Default: Story = {
   },
 };
 
+/**
+ * In this example, the items are objects with 'code' and 'name' properties.
+ * By setting the 'itemTextProperty' to 'code', the component will display the currency codes in the dropdown.
+ * The filtering will be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
+ */
 export const WithTextProperty: Story = {
   args: {
     items: currencyItems,
@@ -100,6 +112,12 @@ export const WithTextProperty: Story = {
   }),
 };
 
+/**
+ * This example demonstrates how to use a custom template for the dropdown items.
+ * The items are objects with 'code' and 'name' properties, and we set the 'itemTextProperty' to 'code' to display the currency codes when an item is selected.
+ * The custom template allows us to display both the currency code and name in a more visually appealing way.
+ * The filtering will still be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items with their corresponding names.
+ */
 export const WithTemplate: Story = {
   args: {
     items: currencyItems,
@@ -112,12 +130,10 @@ export const WithTemplate: Story = {
   render: (args) => ({
     props: {
       ...args,
-      stableSearchFunction: mySearchFunction,
     },
     template: `
       <kirby-multi-select-autocomplete
         [items]="items"
-        [searchFunction]="stableSearchFunction"
         [itemIdProperty]="itemIdProperty"
         [itemTextProperty]="itemTextProperty"
         [placeholder]="placeholder"
@@ -143,6 +159,58 @@ export const WithTemplate: Story = {
   }),
 };
 
+/**
+ * This example demonstrates how to use a custom search function to filter the options in the dropdown.
+ * The 'searchFunction' property allows you to provide a custom function that takes the search term as input and returns an array of matching items.
+ * In this example, the custom search function filters the currency items based on their 'name' property, allowing the user to search for currencies by their full names instead of just their codes.
+ * When the user types in the input field, the custom search function will be called with the current search term, and it will return only the items whose names include the search term, which will then be displayed in the dropdown.
+ */
+export const CustomSearchFunction: Story = {
+  args: {
+    items: currencyItems,
+    itemTextProperty: 'code',
+    placeholder: 'Select currencies',
+    disabled: false,
+    hasError: false,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      searchFunction: (term: string) => {
+        const lowerTerm = term.toLowerCase();
+        return currencyItems.filter((item) => item.name.toLowerCase().includes(lowerTerm));
+      },
+    },
+    template: `
+      <kirby-multi-select-autocomplete
+        [items]="items"
+        [itemIdProperty]="itemIdProperty"
+        [itemTextProperty]="itemTextProperty"
+        [placeholder]="placeholder"
+        [searchFunction]="searchFunction"
+      >
+        <kirby-item
+          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused"
+          [selectable]="true"
+          [selected]="selected"
+          [class.focused]="focused"
+          role="option"
+          [attr.aria-selected]="selected"
+          [attr.id]="item.code"
+        >
+          <kirby-label>
+            <p class="kirby-item-title">{{ item.code }}</p>
+            <p class="kirby-item-detail">{{ item.name }}</p>
+          </kirby-label>
+        </kirby-item>
+      </kirby-multi-select-autocomplete>
+    `,
+  }),
+};
+
+/**
+ * This example demonstrates the disabled state of the component. When the 'disabled' property is set to true, the input field will be non-interactive, and the user will not be able to open the dropdown or select any options.
+ */
 export const Disabled: Story = {
   args: {
     placeholder: 'Select currencies',
@@ -162,6 +230,10 @@ export const Disabled: Story = {
   }),
 };
 
+/**
+ * This example demonstrates the error state of the component.
+ * When the 'hasError' property is set to true, the input field will be styled to indicate that there is an error.
+ */
 export const HasError: Story = {
   args: {
     items: simpleCurrencyItems,
@@ -182,6 +254,11 @@ export const HasError: Story = {
   }),
 };
 
+/**
+ * This example demonstrates the different sizes of the component. The 'size' property can be set to 'md', or 'lg' to adjust the size of the input field and dropdown.
+ * In this example, we show both 'md' and 'lg' sizes to illustrate the difference in appearance.
+ * The placeholder text is intentionally long to demonstrate how the component handles long text in different sizes.
+ */
 export const Sizes: Story = {
   args: {
     items: simpleCurrencyItems,
@@ -211,6 +288,10 @@ export const Sizes: Story = {
   }),
 };
 
+/**
+ * This example demonstrates the 'expand' property of the component.
+ * When the 'expand' property is set to 'block', the component will take up the full width of its container.
+ */
 export const ExpandBlock: Story = {
   args: {
     items: simpleCurrencyItems,
