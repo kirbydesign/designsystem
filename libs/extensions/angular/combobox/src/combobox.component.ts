@@ -379,12 +379,8 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
 
   private ensureComponents(): void {
     if (!this.rootElement) {
-      throw new Error('requires <kirby-form-field> element to function properly');
+      throw new Error('requires the component to function properly');
     }
-
-    // if (!this.itemIdProperty) {
-    //   throw new Error('itemIdProperty input is required.');
-    // }
   }
 
   public open(): void {
