@@ -63,7 +63,7 @@ export class MultiSelectAutocompleteComponent
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
-  public dropdownId: string = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
+  public comboboxId: string = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
   public inputId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
   private readonly _defaultSearchFunction = (searchTerm: string): unknown[] => {
@@ -105,7 +105,7 @@ export class MultiSelectAutocompleteComponent
 
     // object is complex, but the user uses standard template, so we generate an id based on the text
     if (item && typeof item === 'object' && !this.itemTemplate) {
-      return this.dropdownId + '-item-' + this.getItemText(item);
+      return this.comboboxId + '-item-' + this.getItemText(item);
     }
 
     // object is complex, and the user uses custom template, so we rely on itemIdProperty
