@@ -35,7 +35,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { OpenState } from './multi-select-autocomplete.types';
 
 @Component({
-  selector: 'kirby-multi-select-autocomplete',
+  selector: 'kirby-x-combobox',
   templateUrl: './multi-select-autocomplete.component.html',
   styleUrls: ['./multi-select-autocomplete.component.scss'],
   providers: [

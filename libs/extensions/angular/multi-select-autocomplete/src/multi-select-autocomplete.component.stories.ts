@@ -100,14 +100,14 @@ export const WithTextProperty: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <kirby-multi-select-autocomplete
+      <kirby-x-combobox
         [items]="items" 
         [itemTextProperty]="itemTextProperty"
         [placeholder]="placeholder"
         [disabled]="disabled"
         [hasError]="hasError"
       >
-      </kirby-multi-select-autocomplete>
+      </kirby-x-combobox>
     `,
   }),
 };
@@ -132,7 +132,7 @@ export const WithTemplate: Story = {
       ...args,
     },
     template: `
-      <kirby-multi-select-autocomplete
+      <kirby-x-combobox
         [items]="items"
         [itemIdProperty]="itemIdProperty"
         [itemTextProperty]="itemTextProperty"
@@ -154,7 +154,7 @@ export const WithTemplate: Story = {
             <p class="kirby-item-detail">{{ item.name }}</p>
           </kirby-label>
         </kirby-item>
-      </kirby-multi-select-autocomplete>
+      </kirby-x-combobox>
     `,
   }),
 };
@@ -182,7 +182,7 @@ export const CustomSearchFunction: Story = {
       },
     },
     template: `
-      <kirby-multi-select-autocomplete
+      <kirby-x-combobox
         [items]="items"
         [itemIdProperty]="itemIdProperty"
         [itemTextProperty]="itemTextProperty"
@@ -203,7 +203,7 @@ export const CustomSearchFunction: Story = {
             <p class="kirby-item-detail">{{ item.name }}</p>
           </kirby-label>
         </kirby-item>
-      </kirby-multi-select-autocomplete>
+      </kirby-x-combobox>
     `,
   }),
 };
@@ -221,11 +221,11 @@ export const Disabled: Story = {
       ...args,
     },
     template: `
-      <kirby-multi-select-autocomplete
+      <kirby-x-combobox
         [placeholder]="placeholder"
         [disabled]="disabled"
       >
-      </kirby-multi-select-autocomplete>
+      </kirby-x-combobox>
     `,
   }),
 };
@@ -245,11 +245,11 @@ export const HasError: Story = {
       ...args,
     },
     template: `
-      <kirby-multi-select-autocomplete
+      <kirby-x-combobox
         [placeholder]="placeholder"
         [hasError]="hasError"
       >
-      </kirby-multi-select-autocomplete>
+      </kirby-x-combobox>
     `,
   }),
 };
@@ -270,19 +270,19 @@ export const Sizes: Story = {
     },
     template: `
       <div>
-        <kirby-multi-select-autocomplete
+        <kirby-x-combobox
           [placeholder]="placeholder"
           [items]="items"
           [size]="'md'"
         >
-        </kirby-multi-select-autocomplete>
+        </kirby-x-combobox>
         <p><br></p>
-        <kirby-multi-select-autocomplete
+        <kirby-x-combobox
           [placeholder]="placeholder"
           [items]="items"
           [size]="'lg'"
         >
-        </kirby-multi-select-autocomplete>
+        </kirby-x-combobox>
       </div>
     `,
   }),
@@ -303,12 +303,12 @@ export const ExpandBlock: Story = {
       ...args,
     },
     template: `
-      <kirby-multi-select-autocomplete
+      <kirby-x-combobox
         [placeholder]="placeholder"
         [items]="items"
         [expand]="expand"
       >
-      </kirby-multi-select-autocomplete>
+      </kirby-x-combobox>
     `,
   }),
 };
