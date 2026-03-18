@@ -61,7 +61,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
-  public _listboxId: string = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
+  public _listboxId: string = UniqueIdGenerator.scopedTo('kirby-x-combobox').next();
   public _comboboxId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
   private readonly _defaultSearchFunction = (searchTerm: string): unknown[] => {
@@ -278,7 +278,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   @ViewChild(InputComponent, { read: ElementRef })
   private textInput?: ElementRef<HTMLInputElement>;
 
-  private forwardAriaLabelToDropdownButton() {
+  private forwardAriaLabelToCombobox() {
     forwardAttributes(
       this.elementRef.nativeElement,
       this._attributesToForward,
@@ -360,7 +360,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
         }
       });
     }
-    this.forwardAriaLabelToDropdownButton();
+    this.forwardAriaLabelToCombobox();
   }
 
   /* Utility that makes it easier to set styles on card element */
@@ -393,14 +393,14 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     }
     if (!this.isOpen) {
       this.state = OpenState.opening;
-      setTimeout(() => this.showDropdown(), ComboboxComponent.OPEN_DELAY_IN_MS);
+      setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
 
       // Move focus to selected item (if any) or first item
       this.focusedItem = this.selectedItem;
     }
   }
 
-  private showDropdown() {
+  private showPopOver() {
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
