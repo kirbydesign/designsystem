@@ -1,5 +1,4 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
-import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CardComponent } from '@kirbydesign/designsystem/card';
@@ -18,7 +17,6 @@ describe('MultiSelectAutocomplete', () => {
     { text: 'Item 4', value: 4 },
     { text: 'Item 5', value: 5 },
   ];
-  const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
 
   afterEach(() => {
     // Ensure dropdown is closed to trigger popover cleanup
@@ -46,14 +44,11 @@ describe('MultiSelectAutocomplete', () => {
     let inputElement: HTMLInputElement | null;
 
     beforeEach(() => {
-      spectator = createHost(
-        `<kirby-multi-select-autocomplete [items]="items"></kirby-multi-select-autocomplete>`,
-        {
-          hostProps: {
-            items: items,
-          },
-        }
-      );
+      spectator = createHost(`<kirby-x-combobox [items]="items"></kirby-x-combobox>`, {
+        hostProps: {
+          items: items,
+        },
+      });
       inputElement = spectator.query('input[kirby-input]');
     });
 
