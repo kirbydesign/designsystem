@@ -81,13 +81,27 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   @Input()
   public itemTextProperty: string = 'text';
   protected getItemText(item: unknown): string {
-    if (typeof item === 'string') {
-      return item;
+    if (this.isTypeString(item)) {
+      return item as string;
     }
-    if (item && typeof item === 'object' && this.itemTextProperty in item) {
-      return (item as Record<string, unknown>)[this.itemTextProperty] as string;
+
+    if (this.objectHasItemTextProperty(item)) {
+      const objectItem = item as Record<string, unknown>;
+      const textValue: unknown = objectItem[this.itemTextProperty];
+
+      if (typeof textValue === 'string') {
+        return textValue;
+      }
     }
     return '';
+  }
+
+  private isTypeString(item: unknown): boolean {
+    return typeof item === 'string';
+  }
+
+  private objectHasItemTextProperty(item: unknown): boolean {
+    return item != undefined && typeof item === 'object' && this.itemTextProperty in item;
   }
 
   @Input()
