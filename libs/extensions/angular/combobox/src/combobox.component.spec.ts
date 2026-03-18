@@ -5,10 +5,10 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
-import { MultiSelectAutocompleteComponent } from './multi-select-autocomplete.component';
+import { ComboboxComponent } from './combobox.component';
 
-describe('MultiSelectAutocomplete', () => {
-  let spectator: SpectatorHost<MultiSelectAutocompleteComponent>;
+describe('Combobox', () => {
+  let spectator: SpectatorHost<ComboboxComponent>;
 
   const items = [
     { text: 'Item 1', value: 1 },
@@ -30,7 +30,7 @@ describe('MultiSelectAutocomplete', () => {
 
   describe('by default', () => {
     const createHost = createHostFactory({
-      component: MultiSelectAutocompleteComponent,
+      component: ComboboxComponent,
       imports: [
         TestHelper.ionicModuleForTest,
         ItemComponent,

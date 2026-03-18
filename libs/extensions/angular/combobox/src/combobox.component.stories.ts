@@ -1,5 +1,5 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { MultiSelectAutocompleteComponent } from '@kirbydesign/extensions-angular/multi-select-autocomplete';
+import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
 
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
@@ -39,18 +39,12 @@ const currencyItems: CurrencyItem[] = [
  * The Combobox is a form control that allows the user to filter and select from a list of options. It combines the functionality of a dropdown and an input field, providing an efficient way to handle large datasets while maintaining a clean and user-friendly interface.
  * The user can type in the input field to filter the options, and the dropdown will display only the matching items. This component is ideal for scenarios where there are many options to choose from, such as selecting a country, city, or in this case, a currency.
  */
-const meta: Meta<MultiSelectAutocompleteComponent> = {
-  component: MultiSelectAutocompleteComponent,
-  title: 'Components/Forms/Multi Select Autocomplete',
+const meta: Meta<ComboboxComponent> = {
+  component: ComboboxComponent,
+  title: 'Components/Forms/Combobox',
   decorators: [
     moduleMetadata({
-      imports: [
-        ListModule,
-        ItemModule,
-        DropdownModule,
-        InputComponent,
-        MultiSelectAutocompleteComponent,
-      ],
+      imports: [ListModule, ItemModule, DropdownModule, InputComponent, ComboboxComponent],
     }),
   ],
   parameters: {
@@ -66,7 +60,7 @@ const meta: Meta<MultiSelectAutocompleteComponent> = {
   },
 };
 export default meta;
-type Story = StoryObj<MultiSelectAutocompleteComponent>;
+type Story = StoryObj<ComboboxComponent>;
 
 /**
  * This is a default combobox with a simple list of string items. The user can type in the input field to filter the options, and the dropdown will display only the matching items.

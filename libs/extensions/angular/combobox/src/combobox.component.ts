@@ -32,16 +32,16 @@ import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsys
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { NgTemplateOutlet } from '@angular/common';
-import { OpenState } from './multi-select-autocomplete.types';
+import { OpenState } from './combobox.types';
 
 @Component({
   selector: 'kirby-x-combobox',
-  templateUrl: './multi-select-autocomplete.component.html',
-  styleUrls: ['./multi-select-autocomplete.component.scss'],
+  templateUrl: './combobox.component.html',
+  styleUrls: ['./combobox.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MultiSelectAutocompleteComponent),
+      useExisting: forwardRef(() => ComboboxComponent),
       multi: true,
     },
   ],
@@ -55,9 +55,7 @@ import { OpenState } from './multi-select-autocomplete.types';
     AffixDirective,
   ],
 })
-export class MultiSelectAutocompleteComponent
-  implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor
-{
+export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
@@ -405,7 +403,7 @@ export class MultiSelectAutocompleteComponent
     }
     if (!this.isOpen) {
       this.state = OpenState.opening;
-      setTimeout(() => this.showDropdown(), MultiSelectAutocompleteComponent.OPEN_DELAY_IN_MS);
+      setTimeout(() => this.showDropdown(), ComboboxComponent.OPEN_DELAY_IN_MS);
 
       // Move focus to selected item (if any) or first item
       this.focusedItem = this.selectedItem;

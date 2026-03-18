@@ -9,7 +9,7 @@ import { PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 import { ListItemTemplateDirective, ListModule } from '@kirbydesign/designsystem/list';
 import { FormFieldModule, InputComponent } from '@kirbydesign/designsystem/form-field';
-import { MultiSelectAutocompleteComponent } from './multi-select-autocomplete.component';
+import { ComboboxComponent } from './combobox.component';
 
 @NgModule({
   imports: [
@@ -22,9 +22,9 @@ import { MultiSelectAutocompleteComponent } from './multi-select-autocomplete.co
     ListModule,
     FormFieldModule,
     InputComponent,
-    MultiSelectAutocompleteComponent,
+    ComboboxComponent,
   ],
-  exports: [MultiSelectAutocompleteComponent, ListItemTemplateDirective],
+  exports: [ComboboxComponent, ListItemTemplateDirective],
   providers: [],
 })
-export class MultiSelectAutocompleteModule {}
+export class ComboboxModule {}
