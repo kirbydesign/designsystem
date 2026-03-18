@@ -698,7 +698,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     // We intentionally update the DOM input imperatively ("hard way")
     // to ensure the visible value is cleared/updated immediately.
     if (this.textInput?.nativeElement) {
-      this.textInput.nativeElement.value = value;
+      this.renderer.setProperty(this.textInput.nativeElement, 'value', value);
     }
   }
 
