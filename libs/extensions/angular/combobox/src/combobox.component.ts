@@ -634,7 +634,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       newIndex = Math.max(0, currentIndex + numberOfItems);
     }
 
-    console.log('newIndex', newIndex);
     if (newIndex !== currentIndex) {
       this.focusedItem = this.searchItems[newIndex];
     }
