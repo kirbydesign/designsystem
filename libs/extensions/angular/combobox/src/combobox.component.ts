@@ -717,7 +717,13 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       }
       return el.nativeElement.id === id;
     });
-    match?.nativeElement?.scrollIntoView({ block: 'nearest' });
+
+    if (!match) return;
+
+    const scrollIntoView = match.nativeElement.scrollIntoView;
+    if (typeof scrollIntoView === 'function') {
+      scrollIntoView.call(match.nativeElement, { block: 'nearest' });
+    }
   }
 
   private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
