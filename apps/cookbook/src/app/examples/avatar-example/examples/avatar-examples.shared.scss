@@ -44,20 +44,19 @@ kirby-avatar[overlay]::before {
 }
 
 kirby-avatar[themeColor] {
+  margin: 0;
+  display: block;
+
+  &::before {
+    padding-top: utils.size('s');
+  }
+
   &[themeColor='light']::before {
     content: 'Light';
-
-    // display: block;
-    padding-top: utils.size('l');
-    margin-bottom: utils.size('s');
   }
 
   &[themeColor='white']::before {
     content: 'White';
-
-    // display: block;
-    padding-top: utils.size('l');
-    margin-bottom: utils.size('s');
   }
 }
 
