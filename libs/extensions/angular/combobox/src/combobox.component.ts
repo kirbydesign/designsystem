@@ -107,17 +107,19 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   @Input()
   public itemIdProperty = 'id';
   protected getItemId(item: unknown): string {
+    const prefix = this._listboxId + '-item-';
+
     if (!item) {
       return '';
     }
 
     if (typeof item === 'string') {
-      return item;
+      return prefix + item;
     }
 
     // object is complex, but the user uses standard template, so we generate an id based on the text
     if (item && typeof item === 'object' && !this.itemTemplate) {
-      return this._listboxId + '-item-' + this.getItemText(item);
+      return prefix + this.getItemText(item);
     }
 
     // object is complex, and the user uses custom template, so we rely on itemIdProperty
@@ -709,15 +711,18 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     const id = this.getItemId(this.focusedItem);
     if (!id) return;
 
+    console.log('Scrolling item into view with id: ' + id);
     const match = kirbyItems.toArray().find((el) => {
       if (el.nativeElement.id === undefined) {
         throw new Error(
           'Each item must have an id attribute for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
         );
       }
+      console.log('Comparing with item id: ' + el.nativeElement.id);
       return el.nativeElement.id === id;
     });
 
+    console.log(match);
     if (!match) return;
 
     const scrollIntoView = match.nativeElement.scrollIntoView;

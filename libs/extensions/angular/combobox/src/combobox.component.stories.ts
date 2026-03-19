@@ -7,7 +7,32 @@ import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 
 type CurrencyItem = { code: string; name: string };
-const simpleCurrencyItems: string[] = ['USD', 'EUR', 'JPY', 'GBP', 'AUD'];
+const simpleCurrencyItems: string[] = [
+  'USD',
+  'EUR',
+  'JPY',
+  'GBP',
+  'AUD',
+  'CAD',
+  'CHF',
+  'CNY',
+  'SEK',
+  'NZD',
+  'MXN',
+  'SGD',
+  'HKD',
+  'NOK',
+  'KRW',
+  'TRY',
+  'RUB',
+  'INR',
+  'BRL',
+  'ZAR',
+  'DKK',
+  'PLN',
+  'TWD',
+  'THB',
+];
 const currencyItems: CurrencyItem[] = [
   { code: 'USD', name: 'United States Dollar' },
   { code: 'EUR', name: 'Euro' },
