@@ -35,28 +35,28 @@ kirby-avatar {
   }
 }
 
-kirby-avatar[stroke] {
-  &[stroke='true']::before {
-    content: 'Stroke';
-  }
+kirby-avatar[stroke]::before {
+  content: 'Stroke';
 }
 
-kirby-avatar[overlay] {
-  &[overlay='true']::before {
-    content: 'Overlay';
-  }
+kirby-avatar[overlay]::before {
+  content: 'Overlay';
 }
 
 kirby-avatar[themeColor] {
   &[themeColor='light']::before {
     content: 'Light';
-    padding-top: utils.size('m');
+
+    // display: block;
+    padding-top: utils.size('l');
     margin-bottom: utils.size('s');
   }
 
   &[themeColor='white']::before {
     content: 'White';
-    padding-top: utils.size('m');
+
+    // display: block;
+    padding-top: utils.size('l');
     margin-bottom: utils.size('s');
   }
 }
@@ -65,11 +65,11 @@ kirby-avatar[themeColor] {
   background-color: utils.get-color('white');
   padding: utils.size('xs');
   border-radius: utils.border-radius('n');
-  margin-bottom: utils.size('xxs');
+  margin-bottom: utils.size('s');
 }
 
 .avatar-item-inner-container-bg-none {
   padding: utils.size('xs');
   border-radius: utils.border-radius('n');
-  margin-bottom: utils.size('xxs');
+  margin-bottom: utils.size('s');
 }

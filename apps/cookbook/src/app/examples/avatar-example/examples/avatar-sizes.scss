@@ -1,7 +1,7 @@
 @use 'avatar-examples.shared';
 @use '@kirbydesign/core/src/scss/utils';
 
-kirby-avatar[size] {
+kirby-avatar {
   &[size='xs']::before {
     content: 'xs';
   }
