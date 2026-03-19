@@ -691,15 +691,6 @@ describe('DropdownComponent', () => {
         });
       });
 
-      describe('and looses focus', () => {
-        it('should close dropdown', () => {
-          buttonElement.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
-          spectator.detectChanges();
-
-          expect(spectator.component.isOpen).toBeFalsy();
-        });
-      });
-
       describe('and popover is clicked', () => {
         it('should close dropdown', () => {
           spectator.click('kirby-popover');

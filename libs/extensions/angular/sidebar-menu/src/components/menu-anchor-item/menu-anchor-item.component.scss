@@ -37,22 +37,23 @@
 
 .toggle-spacer {
   width: utils.icon-font-size('sm');
-}
-
-.toggle-spacer.unchecked {
   display: none;
 }
 
-:host.has-toggle:not(.checked):hover,
-:host.has-toggle:not(.checked):active,
-:host.has-toggle:not(.checked):has(a:focus-visible),
-:host.has-toggle:not(.checked):has(.toggle-button-unchecked:focus-visible) {
+:host.has-toggle:hover,
+:host.has-toggle:active,
+:host.has-toggle:has(a:focus-visible),
+:host.has-toggle:has(.toggle-button:focus-visible) {
   & .item-badge {
     display: none;
   }
 
-  & .toggle-spacer.unchecked {
+  & .toggle-spacer {
     display: initial;
+  }
+
+  & .external-link {
+    display: none;
   }
 }
 
@@ -64,20 +65,17 @@
 
 .toggle-button {
   margin: 0;
+  transition: opacity 0ms;
 
   --kirby-button-color: inherit;
 }
 
-.toggle-button-unchecked {
-  transition: opacity 0ms;
-}
-
-.toggle-button-unchecked:not(:focus-visible) {
+.toggle-button:not(:focus-visible) {
   opacity: 0;
 }
 
-:host:hover .toggle-button-unchecked,
-:host:active .toggle-button-unchecked,
-:host:has(a:focus-visible) .toggle-button-unchecked {
+:host:hover .toggle-button,
+:host:active .toggle-button,
+:host:has(a:focus-visible) .toggle-button {
   opacity: 1;
 }
