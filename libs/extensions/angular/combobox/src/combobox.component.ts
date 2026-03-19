@@ -711,18 +711,15 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     const id = this.getItemId(this.focusedItem);
     if (!id) return;
 
-    console.log('Scrolling item into view with id: ' + id);
     const match = kirbyItems.toArray().find((el) => {
       if (el.nativeElement.id === undefined) {
         throw new Error(
           'Each item must have an id attribute for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
         );
       }
-      console.log('Comparing with item id: ' + el.nativeElement.id);
       return el.nativeElement.id === id;
     });
 
-    console.log(match);
     if (!match) return;
 
     const scrollIntoView = match.nativeElement.scrollIntoView;
