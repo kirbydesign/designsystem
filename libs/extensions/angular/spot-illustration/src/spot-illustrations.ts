@@ -101,6 +101,9 @@ export const illustrations = {
   'wallet.face.coins.stars.dot.circle': {
     lg: 'wallet.face.coins.stars.dot.circle.large.svg',
   },
+  'device.arrowdownload.dot.stars.circle': {
+    xl: 'device.arrowdownload.dot.stars.circle.xlarge.svg',
+  },
 } as const satisfies Record<string, Illustration>;
 
 export type SpotIllustrationName = keyof typeof illustrations | null;
