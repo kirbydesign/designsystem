@@ -4,45 +4,19 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-avatar-example-size',
-  template: `<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="xs"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
-  </div>
-    <span class="avatar-item-title">xs</span>
-</div>
-
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="sm"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
-  </div>
-    <span class="avatar-item-title">sm</span>
-</div>
-
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="md"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
-  </div>
-    <span class="avatar-item-title">md</span>
-</div>
-
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="lg"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
-  </div>
-    <span class="avatar-item-title">lg</span>
-</div>`,
-  htmlSnippet: `<kirby-avatar size="xs"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
+  template: `<kirby-avatar size="xs"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
 <kirby-avatar size="sm"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
 <kirby-avatar size="md"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
-<kirby-avatar size="lg"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>`,
+<kirby-avatar size="lg"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
+`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./avatar-examples.shared.scss'],
+  styleUrls: ['./avatar-sizes.scss'],
   imports: [AvatarComponent, IconComponent],
 })
 export class AvatarExampleSizeComponent {
-  htmlSnippet: string = config.htmlSnippet;
+  template: string = config.template;
 }

@@ -12,7 +12,6 @@ const config = {
       </kirby-icon>
     </kirby-avatar>
   </div>
-  <span class="avatar-item-title">White</span>
 </div>
 
 <div class="avatar-item-container">
@@ -22,11 +21,10 @@ const config = {
       </kirby-icon>
     </kirby-avatar>
   </div>
-  <span class="avatar-item-title">Light</span>
 </div>`,
-
   htmlSnippet: `<kirby-avatar themeColor="white"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
-<kirby-avatar themeColor="light"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>`,
+<kirby-avatar themeColor="light"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
+  `,
 };
 
 @Component({
@@ -36,6 +34,7 @@ const config = {
   imports: [AvatarComponent, ThemeColorDirective, IconComponent],
 })
 export class AvatarExampleColorsComponent {
+  template: string = config.template;
   htmlSnippet: string = config.htmlSnippet;
 
   @HostBinding('class.wrap')
