@@ -95,14 +95,14 @@ export const illustrations = {
     md: 'robot.none.antenna-dot.body.medium.svg',
     lg: 'robot.none.antenna-dot.body.large.svg',
   },
-  'hand.moneybag.dot.stars.circle': {
-    lg: 'hand.moneybag.dot.stars.circle.large.svg',
+  'hand.moneybag.ribbon.circle': {
+    lg: 'hand.moneybag.ribbon.circle.large.svg',
   },
-  'wallet.face.coins.stars.dot.circle': {
-    lg: 'wallet.face.coins.stars.dot.circle.large.svg',
+  'wallet.face-coins.star.circle': {
+    lg: 'wallet.face-coins.star.circle.large.svg',
   },
-  'device.arrowdownload.dot.stars.circle': {
-    xl: 'device.arrowdownload.dot.stars.circle.xlarge.svg',
+  'device.arrow-download.dot.circle': {
+    xl: 'device.arrow-download.dot.circle.xlarge.svg',
   },
 } as const satisfies Record<string, Illustration>;
 
