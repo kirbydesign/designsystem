@@ -1,6 +1,4 @@
 export type ReorderEvent = {
-  menuId: string;
-  itemId: string;
-  previousIndex: number;
-  newIndex: number;
+  parentId: string;
+  reorderedItemIds: string[];
 };
