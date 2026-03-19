@@ -2,6 +2,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 kirby-avatar {
+  margin-bottom: utils.size('s');
+
   &[size='xs']::before {
     content: 'xs';
   }
