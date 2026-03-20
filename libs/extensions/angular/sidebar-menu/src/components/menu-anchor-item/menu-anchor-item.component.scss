@@ -11,13 +11,19 @@
     color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
   }
 
-  &:not(.selected):hover a,
+  &:not(.selected):hover a {
+    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+  }
+
+  &:not(.selected):hover .hover-content-background {
+    background: var(--sidebar-background-color, utils.get-color('tertiary'));
+  }
+
   &:not(.selected):hover .hover-content {
     background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
   }
 
-  &:not(.selected):active a,
-  &:not(.selected):hover .hover-content {
+  &:not(.selected):active a {
     background: var(
       --menuitem-active-background-color,
       var(--kirby-inputs-background-color-active)
@@ -60,10 +66,14 @@
 
 .hover-content {
   display: inline-flex;
+  gap: utils.size('xxs');
+  padding-left: utils.size('xxs');
+}
+
+.hover-content-background {
+  display: inline-flex;
   position: absolute;
   right: utils.size('xs');
-  background: inherit;
-  gap: utils.size('xxs');
 }
 
 .toggle-button-wrapper {

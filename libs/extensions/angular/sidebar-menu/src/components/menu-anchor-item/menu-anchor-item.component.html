@@ -83,38 +83,40 @@
     </a>
   }
 }
-<div class="hover-content">
-  @if (vm.shortcutHint(); as shortcutHint) {
-    <span class="shortcut-hint">{{ shortcutHint }}</span>
-  }
-  @if (item.toggle) {
-    <kirby-toggle-button
-      class="toggle-button-wrapper"
-      [checked]="vm.isChecked()"
-      (checkChanged)="vm.checkItem($event)"
-    >
-      <button
-        kirby-button
-        unchecked
-        size="xs"
-        attentionLevel="3"
-        tabindex="-1"
-        [noDecoration]="true"
-        class="toggle-button toggle-button-unchecked"
+<div class="hover-content-background">
+  <div class="hover-content">
+    @if (vm.shortcutHint(); as shortcutHint) {
+      <span class="shortcut-hint">{{ shortcutHint }}</span>
+    }
+    @if (item.toggle) {
+      <kirby-toggle-button
+        class="toggle-button-wrapper"
+        [checked]="vm.isChecked()"
+        (checkChanged)="vm.checkItem($event)"
       >
-        <kirby-icon size="xs" [name]="item.toggle.uncheckedIcon"></kirby-icon>
-      </button>
-      <button
-        kirby-button
-        checked
-        size="xs"
-        attentionLevel="3"
-        tabindex="-1"
-        [noDecoration]="true"
-        class="toggle-button toggle-button-checked"
-      >
-        <kirby-icon size="xs" [name]="item.toggle.checkedIcon"></kirby-icon>
-      </button>
-    </kirby-toggle-button>
-  }
+        <button
+          kirby-button
+          unchecked
+          size="xs"
+          attentionLevel="3"
+          tabindex="-1"
+          [noDecoration]="true"
+          class="toggle-button toggle-button-unchecked"
+        >
+          <kirby-icon size="xs" [name]="item.toggle.uncheckedIcon"></kirby-icon>
+        </button>
+        <button
+          kirby-button
+          checked
+          size="xs"
+          attentionLevel="3"
+          tabindex="-1"
+          [noDecoration]="true"
+          class="toggle-button toggle-button-checked"
+        >
+          <kirby-icon size="xs" [name]="item.toggle.checkedIcon"></kirby-icon>
+        </button>
+      </kirby-toggle-button>
+    }
+  </div>
 </div>
