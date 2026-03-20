@@ -68,6 +68,22 @@
       "types": "./dist/types/divider/divider.element.d.ts",
       "default": "./dist/divider/divider.element.js"
     },
+    "./popover": {
+      "types": "./dist/types/popover/index.d.ts",
+      "default": "./dist/popover/index.js"
+    },
+    "./popover.element": {
+      "types": "./dist/types/popover/popover.element.d.ts",
+      "default": "./dist/popover/popover.element.js"
+    },
+    "./tooltip": {
+      "types": "./dist/types/tooltip/index.d.ts",
+      "default": "./dist/tooltip/index.js"
+    },
+    "./tooltip.element": {
+      "types": "./dist/types/tooltip/tooltip.element.d.ts",
+      "default": "./dist/tooltip/tooltip.element.js"
+    },
     "./helpers": {
       "types": "./dist/types/helpers/index.d.ts",
       "default": "./dist/helpers/index.js"
