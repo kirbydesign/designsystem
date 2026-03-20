@@ -64,8 +64,8 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
 // Applies styles when text is scaled on narrow viewports.
 // Only exception is items with radio, checkbox etc. (.has-interactive), that should not be adjusted.
-@mixin if-scaled-text-narrow-viewport() {
-  :host-context(.kirby-text-resize):not(.has-interactive) {
+@mixin when-text-resized-on-narrow-viewport() {
+  :host-context(.kirby-trt):not(.has-interactive) {
     @include utils.media('<medium') {
       @content;
     }
@@ -73,8 +73,8 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 }
 
 // Applies optimizations for ion-item when text is scaled on narrow screens.
-@mixin optimize-text-resize() {
-  @include if-scaled-text-narrow-viewport {
+@mixin handle-text-resize() {
+  @include when-text-resized-on-narrow-viewport {
     $start-slot-content: '[slot="start"]:not(.outside)';
     $end-slot-content: '[slot="end"]:not(.disclosure)';
     $end-slot-content-only: ':not(:has(#{$start-slot-content})):has(#{$end-slot-content})';
@@ -150,8 +150,8 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   }
 }
 
-@mixin optimize-label-text-resize() {
-  @include if-scaled-text-narrow-viewport {
+@mixin handle-text-resize-for-label() {
+  @include when-text-resized-on-narrow-viewport {
     :host([slot='end']) ion-label {
       @include utils.slotted('*') {
         margin-inline-start: 0;

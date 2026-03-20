@@ -800,7 +800,7 @@ export const LabelTypographyOverride: Story = {
  * @see TextResizeObserverService and ItemComponent
  *
  * Unfortunately, we have no option to change the browser text scale during vistual snapshots,
- * so we have to mock it by manually adding '.kirby-text-resize' class on a surrounding element.
+ * so we have to mock it by manually adding '.kirby-trt' class on a surrounding element.
  */
 export const ItemTextResizeLayout: Story = {
   parameters: {
@@ -808,9 +808,9 @@ export const ItemTextResizeLayout: Story = {
   },
   render: () => ({
     template: `<p><em>On narrow screens only</em>, items with either start or end slot content should change to row-based layout, when text is scaled above the font resize threshold (145%).</p>
-<p>Here mocked by adding the '.kirby-text-resize' class on a surrounding element, as base font cannot be changed for visual snapshots.</p>
+<p>Here mocked by adding the '.kirby-trt' class on a surrounding element, as base font cannot be changed for visual snapshots.</p>
 <p>On wider screens items should not change layout even for larger text size.</p>
-<div class="kirby-text-resize">
+<div class="kirby-trt">
   <kirby-item [disclosure]="'arrow-more'">
     <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
     <kirby-avatar slot="start" themeColor="light">

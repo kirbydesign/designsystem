@@ -94,7 +94,7 @@ ion-item {
   }
 
   @include item.item-typography;
-  @include item.optimize-text-resize;
+  @include item.handle-text-resize;
 
   @include utils.slotted(':not([slot])') {
     width: 100%;

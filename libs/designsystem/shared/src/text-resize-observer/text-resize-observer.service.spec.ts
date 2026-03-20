@@ -12,7 +12,7 @@ describe('TextResizeObserverService', () => {
   let observeSpy: jasmine.Spy;
   let disconnectSpy: jasmine.Spy;
 
-  const hasTextResizeClass = () => document.documentElement.classList.contains('kirby-text-resize');
+  const hasTextResizeClass = () => document.documentElement.classList.contains('kirby-trt');
   const getObservedElement = (): HTMLElement | null =>
     document.querySelector('body > [style*="top: -9999px"]');
 
@@ -37,7 +37,7 @@ describe('TextResizeObserverService', () => {
 
   afterEach(() => {
     spectator.service.ngOnDestroy();
-    document.documentElement.classList.remove('kirby-text-resize');
+    document.documentElement.classList.remove('kirby-trt');
     window.ResizeObserver = originalResizeObserver;
   });
 
@@ -65,7 +65,7 @@ describe('TextResizeObserverService', () => {
       expect(observeSpy).toHaveBeenCalledWith(getObservedElement());
     });
 
-    it('should not add kirby-text-resize class at default text scale', () => {
+    it('should not add kirby-trt class at default text scale', () => {
       spectator.service.initialize();
 
       expect(hasTextResizeClass()).toBeFalse();
@@ -98,13 +98,13 @@ describe('TextResizeObserverService', () => {
   });
 
   describe('text scale class toggling', () => {
-    it('should not add kirby-text-resize class at default text scale', () => {
+    it('should not add kirby-trt class at default text scale', () => {
       spectator.service.initialize();
 
       expect(hasTextResizeClass()).toBeFalse();
     });
 
-    it('should add kirby-text-resize class when text scale exceeds threshold', () => {
+    it('should add kirby-trt class when text scale exceeds threshold', () => {
       spectator.service.initialize();
 
       const observedElement = getObservedElement();
@@ -116,7 +116,7 @@ describe('TextResizeObserverService', () => {
       expect(hasTextResizeClass()).toBeTrue();
     });
 
-    it('should not add kirby-text-resize class when text scale is at threshold', () => {
+    it('should not add kirby-trt class when text scale is at threshold', () => {
       spectator.service.initialize();
 
       const observedElement = getObservedElement();
@@ -128,7 +128,7 @@ describe('TextResizeObserverService', () => {
       expect(hasTextResizeClass()).toBeFalse();
     });
 
-    it('should not add kirby-text-resize class when text scale is below threshold', () => {
+    it('should not add kirby-trt class when text scale is below threshold', () => {
       spectator.service.initialize();
 
       const observedElement = getObservedElement();
@@ -140,7 +140,7 @@ describe('TextResizeObserverService', () => {
       expect(hasTextResizeClass()).toBeFalse();
     });
 
-    it('should remove kirby-text-resize class when text scale drops below threshold', () => {
+    it('should remove kirby-trt class when text scale drops below threshold', () => {
       spectator.service.initialize();
 
       const observedElement = getObservedElement();
