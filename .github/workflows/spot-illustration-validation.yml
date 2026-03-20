@@ -18,4 +18,4 @@ jobs:
           python-version: '3.x'
 
       - name: Run SVG validator
-        run: python scripts/spot_illustration_validator.py libs/extensions/angular/spot-illustration/src/svgs
+        run: python scripts/spot-illustration-validator.py libs/extensions/angular/spot-illustration/src/svgs
