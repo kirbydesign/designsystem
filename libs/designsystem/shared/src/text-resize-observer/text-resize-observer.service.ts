@@ -30,30 +30,30 @@ const OBSERVED_ELEMENT_STYLES =
 @Injectable({ providedIn: 'root' })
 export class TextResizeObserverService implements OnDestroy {
   private resizeObserver: ResizeObserver | null = null;
-  private observedElement: HTMLElement | null = null;
+  private textResizeObserverElement: HTMLElement | null = null;
 
   initialize(): void {
     if (typeof window === 'undefined') {
       return;
     }
 
-    this.observedElement = document.createElement('div');
-    this.observedElement.style.cssText = OBSERVED_ELEMENT_STYLES;
-    document.body.appendChild(this.observedElement);
+    this.textResizeObserverElement = document.createElement('div');
+    this.textResizeObserverElement.style.cssText = OBSERVED_ELEMENT_STYLES;
+    document.body.appendChild(this.textResizeObserverElement);
 
     this.resizeObserver = new ResizeObserver(this.updateTextScaleClass);
-    this.resizeObserver.observe(this.observedElement);
+    this.resizeObserver.observe(this.textResizeObserverElement);
 
     this.updateTextScaleClass();
   }
 
   ngOnDestroy(): void {
     this.resizeObserver?.disconnect();
-    this.observedElement?.remove();
+    this.textResizeObserverElement?.remove();
   }
 
   private updateTextScaleClass = (): void => {
-    const remInPx = this.observedElement?.offsetWidth ?? BASE_REM_IN_PX;
+    const remInPx = this.textResizeObserverElement?.offsetWidth ?? BASE_REM_IN_PX;
     const scale = remInPx / BASE_REM_IN_PX;
     document.documentElement.classList.toggle(TEXT_SCALE_CLASS, scale > TEXT_SCALE_THRESHOLD);
   };

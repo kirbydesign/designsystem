@@ -13,7 +13,7 @@ describe('TextResizeObserverService', () => {
   let disconnectSpy: jasmine.Spy;
 
   const hasTextResizeClass = () => document.documentElement.classList.contains('kirby-trt');
-  const getObservedElement = (): HTMLElement | null =>
+  const getTextResizeObserverElement = (): HTMLElement | null =>
     document.querySelector('body > [style*="top: -9999px"]');
 
   beforeEach(() => {
@@ -49,20 +49,20 @@ describe('TextResizeObserverService', () => {
     it('should create a hidden observed element and append it to the body', () => {
       spectator.service.initialize();
 
-      const observedElement = getObservedElement();
+      const textResizeObserverElement = getTextResizeObserverElement();
 
-      expect(observedElement).toBeTruthy();
-      expect(observedElement.style.position).toBe('absolute');
-      expect(observedElement.style.width).toBe('1rem');
-      expect(observedElement.style.height).toBe('1rem');
-      expect(observedElement.style.visibility).toBe('hidden');
-      expect(observedElement.style.pointerEvents).toBe('none');
+      expect(textResizeObserverElement).toBeTruthy();
+      expect(textResizeObserverElement.style.position).toBe('absolute');
+      expect(textResizeObserverElement.style.width).toBe('1rem');
+      expect(textResizeObserverElement.style.height).toBe('1rem');
+      expect(textResizeObserverElement.style.visibility).toBe('hidden');
+      expect(textResizeObserverElement.style.pointerEvents).toBe('none');
     });
 
     it('should create a ResizeObserver and observe the element', () => {
       spectator.service.initialize();
 
-      expect(observeSpy).toHaveBeenCalledWith(getObservedElement());
+      expect(observeSpy).toHaveBeenCalledWith(getTextResizeObserverElement());
     });
 
     it('should not add kirby-trt class at default text scale', () => {
@@ -83,13 +83,13 @@ describe('TextResizeObserverService', () => {
     it('should remove the observed element from the DOM', () => {
       spectator.service.initialize();
 
-      const observedElement = getObservedElement();
-      expect(observedElement).toBeTruthy();
-      expect(observedElement.parentNode).toBe(document.body);
+      const textResizeObserverElement = getTextResizeObserverElement();
+      expect(textResizeObserverElement).toBeTruthy();
+      expect(textResizeObserverElement.parentNode).toBe(document.body);
 
       spectator.service.ngOnDestroy();
 
-      expect(getObservedElement()).toBeNull();
+      expect(getTextResizeObserverElement()).toBeNull();
     });
 
     it('should handle being called before initialize gracefully', () => {
@@ -107,9 +107,11 @@ describe('TextResizeObserverService', () => {
     it('should add kirby-trt class when text scale exceeds threshold', () => {
       spectator.service.initialize();
 
-      const observedElement = getObservedElement();
+      const textResizeObserverElement = getTextResizeObserverElement();
       const valueExceedingThreshold = 24;
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(valueExceedingThreshold);
+      spyOnProperty(textResizeObserverElement, 'offsetWidth', 'get').and.returnValue(
+        valueExceedingThreshold
+      );
 
       resizeObserverCallback([], {} as ResizeObserver);
 
@@ -119,9 +121,11 @@ describe('TextResizeObserverService', () => {
     it('should not add kirby-trt class when text scale is at threshold', () => {
       spectator.service.initialize();
 
-      const observedElement = getObservedElement();
+      const textResizeObserverElement = getTextResizeObserverElement();
       const valueExactlyAtThreshold = 23.2;
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(valueExactlyAtThreshold);
+      spyOnProperty(textResizeObserverElement, 'offsetWidth', 'get').and.returnValue(
+        valueExactlyAtThreshold
+      );
 
       resizeObserverCallback([], {} as ResizeObserver);
 
@@ -131,9 +135,11 @@ describe('TextResizeObserverService', () => {
     it('should not add kirby-trt class when text scale is below threshold', () => {
       spectator.service.initialize();
 
-      const observedElement = getObservedElement();
+      const textResizeObserverElement = getTextResizeObserverElement();
       const valueBelowThreshold = 19.2;
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValue(valueBelowThreshold);
+      spyOnProperty(textResizeObserverElement, 'offsetWidth', 'get').and.returnValue(
+        valueBelowThreshold
+      );
 
       resizeObserverCallback([], {} as ResizeObserver);
 
@@ -143,9 +149,9 @@ describe('TextResizeObserverService', () => {
     it('should remove kirby-trt class when text scale drops below threshold', () => {
       spectator.service.initialize();
 
-      const observedElement = getObservedElement();
+      const textResizeObserverElement = getTextResizeObserverElement();
 
-      spyOnProperty(observedElement, 'offsetWidth', 'get').and.returnValues(24, 16);
+      spyOnProperty(textResizeObserverElement, 'offsetWidth', 'get').and.returnValues(24, 16);
       resizeObserverCallback([], {} as ResizeObserver);
       expect(hasTextResizeClass()).toBeTrue();
 
