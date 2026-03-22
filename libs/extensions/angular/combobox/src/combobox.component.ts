@@ -32,6 +32,11 @@ import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsys
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { NgTemplateOutlet } from '@angular/common';
+import {
+  CdkFixedSizeVirtualScroll,
+  CdkVirtualForOf,
+  CdkVirtualScrollViewport,
+} from '@angular/cdk/scrolling';
 import { OpenState } from './combobox.types';
 
 @Component({
@@ -53,6 +58,9 @@ import { OpenState } from './combobox.types';
     ItemComponent,
     IconComponent,
     AffixDirective,
+    CdkFixedSizeVirtualScroll,
+    CdkVirtualScrollViewport,
+    CdkVirtualForOf,
   ],
 })
 export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
@@ -96,6 +104,42 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     return '';
   }
 
+  protected itemHeight: number = 44;
+  protected get dropdownMaxHeight(): number {
+    return 8 * this.itemHeight;
+  }
+
+  protected get dropdownMinHeight(): number {
+    return this.itemHeight;
+  }
+
+  protected get viewportHeight(): number {
+    const itemCount = this.searchItems?.length ?? 0;
+
+    if (itemCount === 0) {
+      return this.dropdownMinHeight;
+    }
+
+    return Math.min(
+      this.dropdownMaxHeight,
+      Math.max(this.dropdownMinHeight, itemCount * this.itemHeight)
+    );
+  }
+  protected getItemHeight(item: ElementRef<HTMLElement> | undefined): number {
+    let itemSize = this.itemHeight;
+    if (item) {
+      const templateElement = item.nativeElement as HTMLElement;
+      const computedStyle = getComputedStyle(templateElement);
+      const pixelHeight = computedStyle.height;
+      const height = parseFloat(pixelHeight);
+      if (height) {
+        itemSize = height;
+      }
+    }
+
+    return itemSize;
+  }
+
   private isTypeString(item: unknown): boolean {
     return typeof item === 'string';
   }
@@ -104,30 +148,26 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     return item != undefined && typeof item === 'object' && this.itemTextProperty in item;
   }
 
+  private objectHasItemIdProperty(item: unknown): boolean {
+    return item != undefined && typeof item === 'object' && this.itemIdProperty in item;
+  }
+
   @Input()
   public itemIdProperty = 'id';
   protected getItemId(item: unknown): string {
-    const prefix = this._listboxId + '-item-';
-
-    if (!item) {
-      return '';
+    if (this.isTypeString(item)) {
+      return item as string;
     }
 
-    if (typeof item === 'string') {
-      return prefix + item;
+    if (this.objectHasItemIdProperty(item)) {
+      const objectItem = item as Record<string, unknown>;
+      const idValue: unknown = objectItem[this.itemIdProperty];
+
+      if (this.isTypeString(idValue)) {
+        return idValue as string;
+      }
     }
 
-    // object is complex, but the user uses standard template, so we generate an id based on the text
-    if (item && typeof item === 'object' && !this.itemTemplate) {
-      return prefix + this.getItemText(item);
-    }
-
-    // object is complex, and the user uses custom template, so we rely on itemIdProperty
-    if (item && typeof item === 'object' && this.itemIdProperty in item) {
-      return String((item as Record<string, unknown>)[this.itemIdProperty]);
-    }
-
-    // object is complex, and the user uses custom template, but itemIdProperty is missing
     throw new Error(
       'Each item must have an id property for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
     );
@@ -187,7 +227,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   public set focusedItem(item: unknown) {
     if (this._focusedItem !== item) {
       this._focusedItem = item;
-      this.scrollFocusedItemIntoView();
+      this.scrollFocusedItemIntoViewWhileNavigating();
     }
   }
 
@@ -280,6 +320,9 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   @ViewChild(InputComponent, { read: ElementRef })
   private textInput?: ElementRef<HTMLInputElement>;
 
+  @ViewChild(CdkVirtualScrollViewport)
+  private virtualScrollViewport?: CdkVirtualScrollViewport;
+
   private forwardAriaLabelToCombobox() {
     forwardAttributes(
       this.elementRef.nativeElement,
@@ -300,13 +343,23 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       this.unlistenAllSlottedItems();
     }
 
-    kirbyItems.forEach((kirbyItem, index) => {
+    // when using slotted items, we need to calculate the item height based on the items.
+    // not all items will be rendered at the same time due to virtual scroll,
+    // so we can only calculate the height based on the first item.
+    this.itemHeight = this.getItemHeight(kirbyItems.first);
+
+    kirbyItems.forEach((kirbyItem) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
       const disposeClickListener: EventListenerDisposeFn = this.renderer.listen(
         kirbyItem.nativeElement,
         'click',
         () => {
-          this.onItemSelectIndex(index);
+          const id = kirbyItem.nativeElement.getAttribute('id');
+          console.log(id);
+          const item = this.items.find((it) => this.getItemId(it) === id);
+          if (item) {
+            this.onItemSelect(item);
+          }
         }
       );
 
@@ -393,7 +446,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       this.state = OpenState.opening;
       setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
 
-      // Move focus to selected item (if any) or first item
       this.focusedItem = this.selectedItem;
     }
   }
@@ -402,7 +454,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
-      this.scrollFocusedItemIntoView();
+      this.scrollToIndexIntoViewWhenOpeningPopup();
       this.cdr.markForCheck();
     }
   }
@@ -417,11 +469,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       this.searchItems = this.items;
       this.popover?.hide();
     }
-  }
-
-  private onItemSelectIndex(index: number): void {
-    const item = this.searchItems[index];
-    this.onItemSelect(item);
   }
 
   protected onItemSelect(item: unknown) {
@@ -704,9 +751,13 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     }
   }
 
-  private scrollFocusedItemIntoView(): void {
+  private scrollFocusedItemIntoViewWhileNavigating(): void {
     const kirbyItems = this.getKirbyItems();
     if (!kirbyItems || kirbyItems.length === 0) return;
+
+    if (!this.focusedItem) {
+      return;
+    }
 
     const id = this.getItemId(this.focusedItem);
     if (!id) return;
@@ -732,5 +783,14 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     return this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
       ? this.kirbyItemsSlotted
       : this.kirbyItemsDefault;
+  }
+
+  private scrollToIndexIntoViewWhenOpeningPopup(): void {
+    const focusedIndex = this.searchItems.indexOf(this.focusedItem);
+    if (focusedIndex < 0) return;
+
+    const offset =
+      this.dropdownMaxHeight > focusedIndex * this.itemHeight ? 0 : focusedIndex * this.itemHeight;
+    this.virtualScrollViewport?.scrollToOffset(offset, 'instant');
   }
 }

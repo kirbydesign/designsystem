@@ -27,19 +27,28 @@
       <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
-    }
-    @for (item of searchItems; track item; let i = $index) {
-      <ng-container
-        *ngTemplateOutlet="
-          itemTemplate || defaultItemTemplate;
-          context: {
-            $implicit: item,
-            selected: item === selectedItem,
-            focused: item === focusedItem,
-            index: i,
-          }
-        "
-      ></ng-container>
+    } @else {
+      <cdk-virtual-scroll-viewport
+        class="combobox-viewport"
+        minBufferPx="840"
+        maxBufferPx="1120"
+        [itemSize]="itemHeight"
+        [style.height.px]="viewportHeight"
+      >
+        <ng-container *cdkVirtualFor="let item of searchItems; let i = index">
+          <ng-container
+            *ngTemplateOutlet="
+              itemTemplate || defaultItemTemplate;
+              context: {
+                $implicit: item,
+                selected: item === selectedItem,
+                focused: item === focusedItem,
+                index: i,
+              }
+            "
+          ></ng-container>
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
     }
   </kirby-card>
 </kirby-popover>
@@ -51,7 +60,7 @@
     (click)="onItemSelect(item)"
     [class.focused]="focused"
     role="option"
-    [attr.id]="_listboxId + '-item-' + getItemText(item)"
+    [attr.id]="getItemText(item)"
     [attr.aria-selected]="selected"
   >
     <p class="kirby-item-title">{{ getItemText(item) }}</p>

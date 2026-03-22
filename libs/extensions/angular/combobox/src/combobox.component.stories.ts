@@ -7,6 +7,7 @@ import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 
 type CurrencyItem = { code: string; name: string };
+
 const simpleCurrencyItems: string[] = [
   'USD',
   'EUR',
@@ -33,6 +34,11 @@ const simpleCurrencyItems: string[] = [
   'TWD',
   'THB',
 ];
+const currencyItems5000: CurrencyItem[] = [];
+for (let i = 0; i < 5000; i++) {
+  currencyItems5000.push({ code: `CUR${i}`, name: `Currency ${i}` });
+}
+
 const currencyItems: CurrencyItem[] = [
   { code: 'USD', name: 'United States Dollar' },
   { code: 'EUR', name: 'Euro' },
@@ -112,6 +118,7 @@ export const WithTextProperty: Story = {
   args: {
     items: currencyItems,
     itemTextProperty: 'code',
+    itemIdProperty: 'code',
     placeholder: 'Select currencies',
     disabled: false,
     hasError: false,
@@ -122,6 +129,7 @@ export const WithTextProperty: Story = {
       <kirby-x-combobox
         [items]="items" 
         [itemTextProperty]="itemTextProperty"
+        [itemIdProperty]="itemIdProperty"
         [placeholder]="placeholder"
         [disabled]="disabled"
         [hasError]="hasError"
@@ -136,6 +144,7 @@ export const WithTextProperty: Story = {
  * The items are objects with 'code' and 'name' properties, and we set the 'itemTextProperty' to 'code' to display the currency codes when an item is selected.
  * The custom template allows us to display both the currency code and name in a more visually appealing way.
  * The filtering will still be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items with their corresponding names.
+ * NOTE: When using a custom template, it's important to ensure that the 'itemIdProperty' is set correctly and is equal to '[attr.id]' selecting and scrolling to work properly, as the component relies on the item IDs to manage selection and focus within the dropdown. In this example, we set 'itemIdProperty' to 'code', and in the template, we bind '[attr.id]' to 'item.code' to ensure that each item has a unique ID that corresponds to its code.
  */
 export const WithTemplate: Story = {
   args: {
@@ -209,6 +218,49 @@ export const CustomSearchFunction: Story = {
       >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused"
+          [size]="'sm'"
+          [selectable]="true"
+          [selected]="selected"
+          [class.focused]="focused"
+          role="option"
+          [attr.aria-selected]="selected"
+          [attr.id]="item.code"
+        >
+          <kirby-label>
+            <p class="kirby-item-title">{{ item.code }}</p>
+            <p class="kirby-item-detail">{{ item.name }}</p>
+          </kirby-label>
+        </kirby-item>
+      </kirby-x-combobox>
+    `,
+  }),
+};
+
+/**
+ * This example demonstrates the performance of the component when handling a large list of items.
+ * The 'items' property is set to an array of 5000 currency items, which simulates a scenario where there are many options to choose from.
+ */
+export const LargeList: Story = {
+  args: {
+    items: currencyItems5000,
+    itemTextProperty: 'code',
+    itemIdProperty: 'code',
+    placeholder: 'Select currencies',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+    },
+    template: `
+      <kirby-x-combobox
+        [items]="items"
+        [itemIdProperty]="itemIdProperty"
+        [itemTextProperty]="itemTextProperty"
+        [placeholder]="placeholder"
+      >
+        <kirby-item
+          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused"
+          [size]="'sm'"
           [selectable]="true"
           [selected]="selected"
           [class.focused]="focused"
