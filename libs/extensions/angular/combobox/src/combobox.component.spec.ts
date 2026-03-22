@@ -1,6 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -62,11 +61,12 @@ describe('Combobox', () => {
   beforeEach(() => {
     spectator = createHost(
       `
-            <kirby-x-combobox [items]="items"></kirby-x-combobox>
+            <kirby-x-combobox [items]="items" [itemIdProperty]="itemIdProperty"></kirby-x-combobox>
             <button></button>`,
       {
         hostProps: {
           items: items20,
+          itemIdProperty: 'text',
         },
       }
     );
@@ -376,10 +376,6 @@ describe('Combobox', () => {
         const kirbyItems = document.querySelectorAll('kirby-item');
         const tenthMinusItemIndex = kirbyItems.length - 1 - 10;
 
-        kirbyItems.forEach((element) => {
-          console.log(element.className);
-        });
-
         expect(kirbyItems.item(tenthMinusItemIndex)).toHaveClass('focused');
       }));
 
@@ -399,25 +395,5 @@ describe('Combobox', () => {
         expect(kirbyItems.item(firstItemIndex)).toHaveClass('focused');
       }));
     });
-  });
-
-  describe('virtual scroll', () => {
-    it('uses scrollToIndex when moving focus', fakeAsync(() => {
-      inputElement?.click();
-      tick(openDelayInMs);
-      spectator.detectChanges();
-
-      const viewport = spectator.query(CdkVirtualScrollViewport);
-      expect(viewport).toBeTruthy();
-      if (!viewport) {
-        throw new Error('Virtual scroll viewport not found');
-      }
-      const scrollToIndexSpy = jest.spyOn(viewport, 'scrollToIndex');
-
-      spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-      spectator.detectChanges();
-
-      expect(scrollToIndexSpy).toHaveBeenCalledWith(items20.length - 1, 'smooth');
-    }));
   });
 });

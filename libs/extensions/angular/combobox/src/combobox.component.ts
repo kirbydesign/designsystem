@@ -355,7 +355,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
         'click',
         () => {
           const id = kirbyItem.nativeElement.getAttribute('id');
-          console.log(id);
           const item = this.items.find((it) => this.getItemId(it) === id);
           if (item) {
             this.onItemSelect(item);
@@ -765,7 +764,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     const match = kirbyItems.toArray().find((el) => {
       if (el.nativeElement.id === undefined) {
         throw new Error(
-          'Each item must have an id attribute for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
+          'Each item must have an id attribute for scroll to work. Ensure that the ´[attr.id]´ is set correctly, and that each item has a unique id value.'
         );
       }
       return el.nativeElement.id === id;
