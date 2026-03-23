@@ -69,7 +69,7 @@
 </ng-template>
 
 <ng-template #itemsTemplate let-items>
-  @for (item of items; track trackBy || $index; let i = $index) {
+  @for (item of items; track trackBy ? trackBy($index, item) : $index; let i = $index) {
     <kirby-list-item
       [item]="item"
       [itemTemplate]="itemTemplate"
