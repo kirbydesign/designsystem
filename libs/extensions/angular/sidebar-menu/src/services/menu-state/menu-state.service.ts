@@ -123,6 +123,7 @@ export class MenuStateService {
 
   reorderItems(reorderedItems: SidebarMenuItem[], reorderEvent: ReorderEvent): void {
     moveItemInArray(reorderedItems, reorderEvent.previousIndex, reorderEvent.currentIndex);
+    reorderEvent.reorderedItemIds = reorderedItems.map((item) => item.id);
     this.#reorderEvents.next(reorderEvent);
     this.#menuItems.update((items) => [...items]);
   }

@@ -69,7 +69,7 @@ export class MenuSubmenuItemComponent {
       itemId: event.item.data,
       previousIndex: event.previousIndex,
       currentIndex: event.currentIndex,
-      reorderedItemIds: this.item().children.map((child) => child.id),
+      reorderedItemIds: [],
     };
     this.#stateService.reorderItems(this.item().children, reorderEvent);
   }
