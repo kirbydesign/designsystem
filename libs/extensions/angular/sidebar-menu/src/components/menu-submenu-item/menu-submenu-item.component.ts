@@ -64,7 +64,14 @@ export class MenuSubmenuItemComponent {
   }
 
   #reorderItem(event: CdkDragDrop<string[]>): void {
-    this.#stateService.reorderItems(this.item(), event.previousIndex, event.currentIndex);
+    const reorderEvent: ReorderEvent = {
+      parentId: this.item().id,
+      itemId: event.item.data,
+      previousIndex: event.previousIndex,
+      currentIndex: event.currentIndex,
+      reorderedItemIds: this.item().children.map((child) => child.id),
+    };
+    this.#stateService.reorderItems(this.item().children, reorderEvent);
   }
 
   readonly vm: ViewModel = {
