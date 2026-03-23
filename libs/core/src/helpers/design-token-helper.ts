@@ -2,8 +2,6 @@ import { ColorHelper } from './color-helper';
 import { styles } from './design-token-helper.styles';
 import { ThemeColor } from './theme-color.type';
 
-const BASE_PIXEL_VALUE = 16;
-
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
   public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter;
@@ -65,7 +63,7 @@ export class DesignTokenHelper {
     const remValue = value.split(/[,\s()]/).find((part) => part.endsWith('rem'));
 
     if (remValue) {
-      return `${parseFloat(remValue) * BASE_PIXEL_VALUE}px`;
+      return `${parseFloat(remValue) * parseInt(styles.baseFontSizePx)}px`;
     }
     return value;
   }
@@ -75,7 +73,7 @@ export class DesignTokenHelper {
     const remValue = value.split(/[,\s()]/).find((part) => part.endsWith('rem'));
 
     if (remValue) {
-      return `${parseFloat(remValue) * BASE_PIXEL_VALUE}px`;
+      return `${parseFloat(remValue) * parseInt(styles.baseFontSizePx)}px`;
     }
     return value;
   }
@@ -88,8 +86,12 @@ export class DesignTokenHelper {
     return styles.lineHeight[key];
   }
 
-  public static fontResizeThreshold(): string {
-    return styles.fontResizeThreshold;
+  public static textResizeThreshold(): string {
+    return styles.textResizeThreshold;
+  }
+
+  public static baseFontSizePx(): string {
+    return styles.baseFontSizePx;
   }
 
   public static backgroundColor(): string {

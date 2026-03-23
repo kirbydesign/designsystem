@@ -1,10 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-const TEXT_SCALE_THRESHOLD = parseFloat(DesignTokenHelper.fontResizeThreshold());
-const BASE_REM_IN_PX = 16;
-const TEXT_SCALE_CLASS = 'kirby-trt';
-const OBSERVED_ELEMENT_STYLES =
+const TEXT_RESIZE_THRESHOLD = parseFloat(DesignTokenHelper.textResizeThreshold());
+const TEXT_RESIZE_CLASS = 'kirby-trt';
+const BASE_FONT_SIZE_PX = DesignTokenHelper.baseFontSizePx();
+const OBSERVER_ELEMENT_STYLES =
   'position:absolute;width:1rem;height:1rem;top:-9999px;visibility:hidden;pointer-events:none';
 
 /**
@@ -38,7 +38,7 @@ export class TextResizeObserverService implements OnDestroy {
     }
 
     this.textResizeObserverElement = document.createElement('div');
-    this.textResizeObserverElement.style.cssText = OBSERVED_ELEMENT_STYLES;
+    this.textResizeObserverElement.style.cssText = OBSERVER_ELEMENT_STYLES;
     document.body.appendChild(this.textResizeObserverElement);
 
     this.resizeObserver = new ResizeObserver(this.updateTextScaleClass);
@@ -53,8 +53,8 @@ export class TextResizeObserverService implements OnDestroy {
   }
 
   private updateTextScaleClass = (): void => {
-    const remInPx = this.textResizeObserverElement?.offsetWidth ?? BASE_REM_IN_PX;
-    const scale = remInPx / BASE_REM_IN_PX;
-    document.documentElement.classList.toggle(TEXT_SCALE_CLASS, scale > TEXT_SCALE_THRESHOLD);
+    const remInPx = this.textResizeObserverElement?.offsetWidth ?? BASE_FONT_SIZE_PX;
+    const scale = remInPx / BASE_FONT_SIZE_PX;
+    document.documentElement.classList.toggle(TEXT_RESIZE_CLASS, scale > TEXT_RESIZE_THRESHOLD);
   };
 }
