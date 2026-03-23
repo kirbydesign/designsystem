@@ -3,6 +3,7 @@
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-selected: utils.get-color('dark');
+$maximum-font-size: utils.size('s') * utils.$font-resize-threshold;
 
 @mixin button-reset {
   background: transparent;
@@ -34,7 +35,7 @@ $border-color-selected: utils.get-color('dark');
     color: utils.get-color('black');
     box-sizing: border-box; // Ensure border is not added to button height
     padding: utils.size('s');
-    font-size: utils.font-size('n');
+    font-size: min(utils.font-size('n'), $maximum-font-size);
     line-height: utils.line-height('m');
     gap: utils.size('xxxs');
 

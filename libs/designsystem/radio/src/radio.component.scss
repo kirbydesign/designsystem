@@ -134,7 +134,7 @@ ion-radio {
 
   &::part(label) {
     align-items: start;
-    padding-inline: $spacing-to-edge $spacing-to-label;
+    padding-inline: $spacing-to-edge;
     line-height: utils.line-height('n');
   }
 
