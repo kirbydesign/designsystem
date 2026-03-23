@@ -4,8 +4,6 @@ import { LabelComponent } from '@kirbydesign/designsystem/item';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 import { SectionHeaderExampleComponent } from '~/app/examples/section-header-example/section-header-example.component';
 
-import { SectionHeaderExampleComponent } from '~/app/examples/section-header-example/section-header-example.component';
-
 const meta: Meta<SectionHeaderComponent> = {
   component: SectionHeaderComponent,
   title: 'Components / Section Header',
