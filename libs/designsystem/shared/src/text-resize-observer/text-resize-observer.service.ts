@@ -3,7 +3,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 const TEXT_RESIZE_THRESHOLD = parseFloat(DesignTokenHelper.textResizeThreshold());
 const TEXT_RESIZE_CLASS = 'kirby-trt';
-const BASE_FONT_SIZE_PX = DesignTokenHelper.baseFontSizePx();
+const BASE_FONT_SIZE_PX = parseInt(DesignTokenHelper.baseFontSizePx());
 const OBSERVER_ELEMENT_STYLES =
   'position:absolute;width:1rem;height:1rem;top:-9999px;visibility:hidden;pointer-events:none';
 
