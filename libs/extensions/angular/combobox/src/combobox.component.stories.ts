@@ -88,6 +88,7 @@ const meta: Meta<ComboboxComponent> = {
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
     hasError: { control: 'boolean' },
+    itemHeight: { control: 'number' },
   },
 };
 export default meta;
@@ -145,6 +146,7 @@ export const WithTextProperty: Story = {
  * The custom template allows us to display both the currency code and name in a more visually appealing way.
  * The filtering will still be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items with their corresponding names.
  * NOTE: When using a custom template, it's important to ensure that the 'itemIdProperty' is set correctly and is equal to '[attr.id]' selecting and scrolling to work properly, as the component relies on the item IDs to manage selection and focus within the dropdown. In this example, we set 'itemIdProperty' to 'code', and in the template, we bind '[attr.id]' to 'item.code' to ensure that each item has a unique ID that corresponds to its code.
+ * Also it is important to set 'itemHeight' of your items, otherwise the component will not be able to calculate the height of the dropdown and it will not be able to scroll to the selected item when the dropdown is opened.
  */
 export const WithTemplate: Story = {
   args: {
@@ -154,6 +156,7 @@ export const WithTemplate: Story = {
     placeholder: 'Select currencies',
     disabled: false,
     hasError: false,
+    itemHeight: 56,
   },
   render: (args) => ({
     props: {
@@ -164,6 +167,7 @@ export const WithTemplate: Story = {
         [items]="items"
         [itemIdProperty]="itemIdProperty"
         [itemTextProperty]="itemTextProperty"
+        [itemHeight]="itemHeight"
         [placeholder]="placeholder"
         [disabled]="disabled"
         [hasError]="hasError"
@@ -198,14 +202,15 @@ export const CustomSearchFunction: Story = {
     items: currencyItems,
     itemTextProperty: 'name',
     itemIdProperty: 'code',
+    itemHeight: 56,
     placeholder: 'Select currencies',
   },
   render: (args) => ({
     props: {
       ...args,
-      searchFunction: (term: string) => {
+      searchFunction: (term: string, itemsToSearch: CurrencyItem[]) => {
         const lowerTerm = term.toLowerCase();
-        return currencyItems.filter((item) => item.name.toLowerCase().includes(lowerTerm));
+        return itemsToSearch.filter((item) => item.name.toLowerCase().includes(lowerTerm));
       },
     },
     template: `
@@ -213,6 +218,7 @@ export const CustomSearchFunction: Story = {
         [items]="items"
         [itemIdProperty]="itemIdProperty"
         [itemTextProperty]="itemTextProperty"
+        [itemHeight]="itemHeight"
         [placeholder]="placeholder"
         [searchFunction]="searchFunction"
       >
@@ -245,6 +251,7 @@ export const LargeList: Story = {
     items: currencyItems5000,
     itemTextProperty: 'code',
     itemIdProperty: 'code',
+    itemHeight: 56,
     placeholder: 'Select currencies',
   },
   render: (args) => ({
@@ -256,6 +263,7 @@ export const LargeList: Story = {
         [items]="items"
         [itemIdProperty]="itemIdProperty"
         [itemTextProperty]="itemTextProperty"
+        [itemHeight]="itemHeight"
         [placeholder]="placeholder"
       >
         <kirby-item

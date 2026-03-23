@@ -72,13 +72,16 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   public _listboxId: string = UniqueIdGenerator.scopedTo('kirby-x-combobox').next();
   public _comboboxId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
-  private readonly _defaultSearchFunction = (searchTerm: string): unknown[] => {
+  private readonly _defaultSearchFunction = (
+    searchTerm: string,
+    itemsToSearch: unknown[]
+  ): unknown[] => {
     if (!searchTerm) {
-      return this.items;
+      return itemsToSearch;
     }
 
     const lowerSearchTerm = searchTerm.toLowerCase();
-    return this.items.filter((item) =>
+    return itemsToSearch.filter((item) =>
       this.getItemText(item).toLowerCase().includes(lowerSearchTerm)
     );
   };
@@ -104,9 +107,13 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     return '';
   }
 
-  protected itemHeight: number = 44;
+  protected readonly defaultItemHeight = 44;
+
+  @Input()
+  public itemHeight: number = this.defaultItemHeight;
+
   protected get dropdownMaxHeight(): number {
-    return 8 * this.itemHeight;
+    return 8 * this.defaultItemHeight;
   }
 
   protected get dropdownMinHeight(): number {
@@ -124,20 +131,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       this.dropdownMaxHeight,
       Math.max(this.dropdownMinHeight, itemCount * this.itemHeight)
     );
-  }
-  protected getItemHeight(item: ElementRef<HTMLElement> | undefined): number {
-    let itemSize = this.itemHeight;
-    if (item) {
-      const templateElement = item.nativeElement as HTMLElement;
-      const computedStyle = getComputedStyle(templateElement);
-      const pixelHeight = computedStyle.height;
-      const height = parseFloat(pixelHeight);
-      if (height) {
-        itemSize = height;
-      }
-    }
-
-    return itemSize;
   }
 
   private isTypeString(item: unknown): boolean {
@@ -174,7 +167,8 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   }
 
   @Input()
-  public searchFunction: (searchTerm: string) => unknown[] = this._defaultSearchFunction;
+  public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] =
+    this._defaultSearchFunction;
 
   private _searchItems: unknown[] = [];
   protected get searchItems(): unknown[] {
@@ -227,7 +221,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   public set focusedItem(item: unknown) {
     if (this._focusedItem !== item) {
       this._focusedItem = item;
-      this.scrollFocusedItemIntoViewWhileNavigating();
     }
   }
 
@@ -347,11 +340,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     if (hasSlottedItems) {
       this.unlistenAllSlottedItems();
     }
-
-    // when using slotted items, we need to calculate the item height based on the items.
-    // not all items will be rendered at the same time due to virtual scroll,
-    // so we can only calculate the height based on the first item.
-    this.itemHeight = this.getItemHeight(kirbyItems.first);
 
     kirbyItems.forEach((kirbyItem) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
@@ -558,7 +546,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     }
 
     const input = event.target as HTMLInputElement;
-    this.searchItems = input.value ? this.searchFunction(input.value) : this.items;
+    this.searchItems = input.value ? this.searchFunction(input.value, this.items) : this.items;
   }
 
   protected onPopoverWillHide() {
@@ -690,6 +678,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     if (newIndex !== currentIndex) {
       this.focusedItem = this.searchItems[newIndex];
     }
+    this.scrollFocusedItemIntoViewWhileNavigating();
   }
 
   private setFocusOnFirstOrLastItem(keyEvent: KeyboardEvent): void {
@@ -775,7 +764,10 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       return el.nativeElement.id === id;
     });
 
-    if (!match) return;
+    if (!match) {
+      this.scrollToIndexIntoViewWhenOpeningPopup();
+      return;
+    }
 
     const scrollIntoView = match.nativeElement.scrollIntoView;
     if (typeof scrollIntoView === 'function') {
@@ -793,8 +785,12 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
     if (focusedIndex < 0) return;
 
-    const offset =
-      this.dropdownMaxHeight > focusedIndex * this.itemHeight ? 0 : focusedIndex * this.itemHeight;
-    this.virtualScrollViewport?.scrollToOffset(offset, 'instant');
+    if (focusedIndex === 0) {
+      this.virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
+      this.virtualScrollViewport?.checkViewportSize();
+      return;
+    }
+
+    this.virtualScrollViewport?.scrollToIndex(focusedIndex);
   }
 }
