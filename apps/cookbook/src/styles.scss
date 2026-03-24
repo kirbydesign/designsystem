@@ -62,3 +62,16 @@ code:not([class*='language-']) {
     font-size: smaller;
   }
 }
+
+/* Hide the native datepicker icon globally inside Kirby form-fields */
+kirby-form-field input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+kirby-form-field input[type='date']::-webkit-inner-spin-button {
+  display: none;
+}
+
+kirby-form-field input[type='date']::-webkit-clear-button {
+  display: none;
+}

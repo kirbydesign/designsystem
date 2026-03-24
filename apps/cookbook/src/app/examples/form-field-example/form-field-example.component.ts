@@ -15,6 +15,7 @@ import { FormFieldInputCounterFormExampleComponent } from './examples/input/reac
 import { FormFieldInputNumericExampleComponent } from './examples/input/numeric';
 import { FormFieldInputDateExampleComponent } from './examples/input/date';
 import { FormFieldInputDateNativeExampleComponent } from './examples/input/date-native';
+import { FormFieldInputDateNativeInCardExampleComponent } from './examples/input/date-native-in-card';
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
@@ -40,6 +41,7 @@ import { FormFieldTextareaCounterFormExampleComponent } from './examples/textare
     FormFieldInputNumericExampleComponent,
     FormFieldInputDateExampleComponent,
     FormFieldInputDateNativeExampleComponent,
+    FormFieldInputDateNativeInCardExampleComponent,
     FormFieldInputDisabledExampleComponent,
     FormFieldInputErrorExampleComponent,
     FormFieldInputBorderlessExampleComponent,

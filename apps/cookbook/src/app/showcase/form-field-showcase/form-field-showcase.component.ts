@@ -13,6 +13,7 @@ import { FormFieldInputNumericExampleComponent } from '../../examples/form-field
 import { FormFieldInputDecimalMaskExampleComponent } from '../../examples/form-field-example/examples/input/decimal-mask';
 import { FormFieldInputDateExampleComponent } from '../../examples/form-field-example/examples/input/date';
 import { FormFieldInputDateNativeExampleComponent } from '../../examples/form-field-example/examples/input/date-native';
+import { FormFieldInputDateNativeInCardExampleComponent } from '../../examples/form-field-example/examples/input/date-native-in-card';
 import { FormFieldInputDisabledExampleComponent } from '../../examples/form-field-example/examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from '../../examples/form-field-example/examples/input/error';
 import { FormFieldInputBorderlessExampleComponent } from '../../examples/form-field-example/examples/input/borderless';
@@ -49,6 +50,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     FormFieldInputPadPrecisionDigitsExampleComponent,
     FormFieldInputDateExampleComponent,
     FormFieldInputDateNativeExampleComponent,
+    FormFieldInputDateNativeInCardExampleComponent,
     FormFieldInputDisabledExampleComponent,
     FormFieldInputErrorExampleComponent,
     FormFieldInputBorderlessExampleComponent,

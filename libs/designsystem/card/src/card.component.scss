@@ -110,3 +110,10 @@ $default-border-outline: 1px solid utils.get-color('medium');
     --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
   }
 }
+
+/* stylelint-disable selector-pseudo-element-no-unknown */
+:host ::ng-deep kirby-form-field .affix-container,
+:host ::ng-deep kirby-form-field .wrap-content-in-label label {
+  --date-input-background-color: transparent;
+}
+/* stylelint-enable selector-pseudo-element-no-unknown */
