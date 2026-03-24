@@ -121,10 +121,20 @@ export class MenuStateService {
     return recursivelyFindAncestors(this.#menuItems(), id) ?? new Set();
   }
 
-  reorderItems(reorderedItems: SidebarMenuItem[], reorderEvent: ReorderEvent): void {
-    moveItemInArray(reorderedItems, reorderEvent.previousIndex, reorderEvent.currentIndex);
-    reorderEvent.reorderedItemIds = reorderedItems.map((item) => item.id);
-    this.#reorderEvents.next(reorderEvent);
+  reorderItems(
+    submenu: SubmenuItem,
+    itemId: string,
+    previousIndex: number,
+    currentIndex: number
+  ): void {
+    moveItemInArray(submenu.children, previousIndex, currentIndex);
+    this.#reorderEvents.next({
+      parentId: submenu.id,
+      itemId,
+      previousIndex,
+      currentIndex,
+      reorderedItemIds: submenu.children.map((item) => item.id),
+    });
     this.#menuItems.update((items) => [...items]);
   }
 }
