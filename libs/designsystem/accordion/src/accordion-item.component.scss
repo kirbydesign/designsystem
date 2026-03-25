@@ -80,7 +80,7 @@ button[disabled] {
 
 button {
   // Enforce button text color to avoid inheriting native button color from browser
-  color: utils.get-color('black');
+  color: utils.get-text-color('black');
 }
 
 button[aria-expanded='true'] {

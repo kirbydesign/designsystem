@@ -54,11 +54,16 @@ export class DecimalMaskDirective implements OnInit {
   }
 
   ngOnInit(): void {
+    const element = this.elementRef.nativeElement;
     // Set type="text", because functionality like 'setSelectionRange' are not supported on type="number"
-    this.elementRef.nativeElement.setAttribute('type', 'text');
+    element.setAttribute('type', 'text');
 
     // Remove maxlength as this is handled by the mask
-    this.elementRef.nativeElement.removeAttribute('maxlength');
+    element.removeAttribute('maxlength');
+
+    if (element.value) {
+      element.value = this.toLocaleRadixPoint(element.value);
+    }
 
     this.initMask();
   }
@@ -98,14 +103,21 @@ export class DecimalMaskDirective implements OnInit {
     return this.min === undefined ? maxlengthValue : -Math.abs(Math.max(this.min, maxlengthValue));
   }
 
+  private toLocaleRadixPoint(value: string): string {
+    return value.replace('.', this.radixPoint);
+  }
+
+  private toStandardRadixPoint(value: string): string {
+    return value.replace(this.radixPoint, '.');
+  }
+
   private extendBuiltinValueAccessor(): void {
     extendValueAccessors<string>(this.valueAccessors, {
       writeValue: {
         afterWriteValue: (value) => {
           // Update the inputmask display when value is set programmatically
           if (this.inputmask && value != null) {
-            const formattedValue = String(value).replace('.', this.radixPoint);
-            this.inputmask.setValue(formattedValue);
+            this.inputmask.setValue(this.toLocaleRadixPoint(String(value)));
           }
         },
       },
@@ -113,8 +125,7 @@ export class DecimalMaskDirective implements OnInit {
         transformValue: (value) => {
           // Provide unmasked and normalized values to the form control
           if (this.inputmask) {
-            const unmaskedValue = this.inputmask.unmaskedvalue();
-            return unmaskedValue.replace(this.radixPoint, '.');
+            return this.toStandardRadixPoint(this.inputmask.unmaskedvalue());
           }
           return value;
         },

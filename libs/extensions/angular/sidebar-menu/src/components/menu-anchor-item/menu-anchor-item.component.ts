@@ -24,7 +24,6 @@ type ViewModel = {
   styleUrls: ['./menu-anchor-item.component.scss'],
   host: {
     '[class.selected]': 'vm.isSelected()',
-    '[class.checked]': 'vm.isChecked()',
     '[class.has-toggle]': '!!vm.item().toggle',
     '[class.has-badge]': '!!vm.item().badge',
   },
@@ -51,7 +50,7 @@ export class MenuAnchorItemComponent {
   });
 
   #selectItem(): void {
-    this.#stateService.selectedItem = this.item().id;
+    this.#stateService.selectItem(this.item().id);
   }
 
   #checkItem(checked: boolean): void {

@@ -1,0 +1,23 @@
+name: Publish extensions-angular to npm
+
+# Tags matching 'vX.X.X-extensions-angular' are protected tags and can only be pushed by admins.
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-extensions-angular'
+
+permissions:
+  id-token: write  # Required for OIDC (https://docs.github.com/en/actions/concepts/security/openid-connect)
+  contents: read
+
+jobs:
+  publish_extensions_angular:
+    name: Publish extensions-angular
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+      - name: Build extensions-angular package and publish to npm
+        run: npm run publish -- extensions-angular

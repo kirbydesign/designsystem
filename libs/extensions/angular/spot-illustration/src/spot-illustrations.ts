@@ -79,6 +79,12 @@ export const illustrations = {
   'money.arrow.coin.bars': {
     md: 'money.arrow.coin.bars.medium.svg',
   },
+  'money-coinstack.graphline.topcoin.bars': {
+    md: 'money-coinstack.graphline.topcoin.bars.medium.svg',
+  },
+  'money-notes.shield.heart.circle': {
+    md: 'money-notes.shield.heart.circle.medium.svg',
+  },
   'piggy-bank.money.money-dot.bars': {
     md: 'piggy-bank.money.money-dot.bars.medium.svg',
   },
@@ -88,6 +94,15 @@ export const illustrations = {
   'robot.none.antenna-dot.body': {
     md: 'robot.none.antenna-dot.body.medium.svg',
     lg: 'robot.none.antenna-dot.body.large.svg',
+  },
+  'hand.moneybag.ribbon.circle': {
+    lg: 'hand.moneybag.ribbon.circle.large.svg',
+  },
+  'wallet.face-coins.star.circle': {
+    lg: 'wallet.face-coins.star.circle.large.svg',
+  },
+  'device.arrow-download.dot.circle': {
+    xl: 'device.arrow-download.dot.circle.xlarge.svg',
   },
 } as const satisfies Record<string, Illustration>;
 
