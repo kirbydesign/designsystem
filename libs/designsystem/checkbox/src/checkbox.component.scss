@@ -146,7 +146,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
     &::part(label) {
       align-items: start;
-      padding-inline: $spacing-to-edge $spacing-to-label;
+      padding-inline: $spacing-to-edge;
       line-height: utils.line-height('n');
     }
 

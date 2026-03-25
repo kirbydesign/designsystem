@@ -35,11 +35,14 @@ const designsystemLibSrcDir = `${designsystemLibDir}/icon/src`;
 const coreLibDir = `${libsRootDir}/core`;
 const coreLibSrcDir = `${coreLibDir}/src`;
 
+const extensionsAngularLibDir = `${libsRootDir}/extensions/angular`;
+
 const dist = `dist`;
 const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
 const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
 const distCoreTarget = `${dist}/${coreLibDir}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
+const distExtensionsAngularTarget = `${extensionsAngularLibDir}/${dist}`;
 
 const { version: coreVersion } = require('../libs/core/package.json');
 
@@ -206,6 +209,7 @@ function publish(distTarget, tarballNamePrefix) {
 const args = process.argv.slice(2).map((value) => value.toLowerCase());
 const doPublishCore = args.length === 0 || args.includes('core');
 const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
+const doPublishExtensionsAngular = args.includes('extensions-angular');
 
 if (doPublishCore) {
   // Publish core
@@ -231,4 +235,14 @@ if (doPublishDesignsystem) {
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
     .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'))
     .catch((err) => console.warn('*** ERROR WHEN PUBLISHING DESIGNSYSTEM ***', err));
+}
+
+if (doPublishExtensionsAngular) {
+  // Publish extensions-angular
+  console.log('--- Publishing extensions-angular ---');
+  cleanDistribution(distExtensionsAngularTarget)
+    .then(() => buildPackage('extensions-angular'))
+    .then(() => removeNpmIgnoreNestedPackageJsonRule(distExtensionsAngularTarget))
+    .then(() => publish(distExtensionsAngularTarget, 'kirbydesign-extensions-angular'))
+    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING EXTENSIONS-ANGULAR ***', err));
 }
