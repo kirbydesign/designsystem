@@ -32,54 +32,13 @@
   }
 }
 
-// Top corners: first item in card, list, or list section
-:host-context(kirby-card):first-child,
-:host-context(kirby-list-item:first-child),
-:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
-  --kirby-item-top-start-radius: #{utils.border-radius('n')};
-  --kirby-item-top-end-radius: #{utils.border-radius('n')};
-}
-
-// Bottom corners: last item in card or list
-:host-context(kirby-card):last-child,
-:host-context(kirby-list-item:last-child) {
-  --kirby-item-bottom-start-radius: #{utils.border-radius('n')};
-  --kirby-item-bottom-end-radius: #{utils.border-radius('n')};
-}
-
-// Single-item list: all corners (fixes #1711)
-:host-context(.shape-rounded .is-single) {
-  --kirby-item-top-start-radius: #{utils.border-radius('n')};
-  --kirby-item-top-end-radius: #{utils.border-radius('n')};
-  --kirby-item-bottom-start-radius: #{utils.border-radius('n')};
-  --kirby-item-bottom-end-radius: #{utils.border-radius('n')};
-}
-
-// Single-item list with header: flatten top corners
-:host-context(.has-header .is-single) {
-  --kirby-item-top-start-radius: 0;
-  --kirby-item-top-end-radius: 0;
-}
-
-// Single-item list with footer: flatten bottom corners
-:host-context(.has-footer .is-single) {
-  --kirby-item-bottom-start-radius: 0;
-  --kirby-item-bottom-end-radius: 0;
-}
-
 ion-item {
-  &::part(native) {
-    border-start-start-radius: var(--kirby-item-top-start-radius, 0);
-    border-start-end-radius: var(--kirby-item-top-end-radius, 0);
-    border-end-end-radius: var(--kirby-item-bottom-end-radius, 0);
-    border-end-start-radius: var(--kirby-item-bottom-start-radius, 0);
-  }
-
   &::part(native):focus-visible {
     box-shadow:
       0 0 0 2px utils.$focus-ring-color inset,
       0 0 0 4px utils.get-color('white') inset;
   }
+
   @include interaction-state.apply-hover-ionic('xxxs');
   @include interaction-state.apply-active-ionic('xxs');
 
@@ -173,7 +132,7 @@ ion-item {
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
 
-  /* 
+  /*
     display: inline-flex; is used to make sure the span.disclosure element
     is the same height as the child (kirby-icon)
   */
@@ -220,5 +179,35 @@ ion-item {
 :host(.disclosure) {
   ion-item {
     --inner-padding-end: #{utils.size('xxs')};
+  }
+}
+
+:host-context(kirby-list-item:first-of-type),
+:host-context(kirby-card):first-child {
+  ion-item::part(native) {
+    border-top-left-radius: utils.border-radius('n');
+    border-top-right-radius: utils.border-radius('n');
+  }
+}
+
+:host-context(kirby-list-item:last-of-type),
+:host-context(kirby-card):last-child {
+  ion-item::part(native) {
+    border-bottom-left-radius: utils.border-radius('n');
+    border-bottom-right-radius: utils.border-radius('n');
+  }
+}
+
+:host-context(.has-header kirby-list-item:first-of-type) {
+  ion-item::part(native) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+:host-context(.has-footer kirby-list-item:last-of-type) {
+  ion-item::part(native) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
