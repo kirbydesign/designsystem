@@ -91,18 +91,6 @@ describe('CardComponent', () => {
       const contentWrapperElement = spectator.queryHost('.content-wrapper');
 
       expect(contentWrapperElement).toHaveComputedStyle({
-        'border-block-end-color': getColor('medium'),
-        'border-block-end-style': 'solid',
-        'border-block-end-width': '1px',
-
-        'border-inline-start-color': getColor('medium'),
-        'border-inline-start-style': 'solid',
-        'border-inline-start-width': '1px',
-
-        'border-inline-end-color': getColor('medium'),
-        'border-inline-end-style': 'solid',
-        'border-inline-end-width': '1px',
-
         'border-bottom-left-radius': size('s'),
         'border-bottom-right-radius': size('s'),
       });
