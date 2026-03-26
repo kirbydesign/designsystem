@@ -1,7 +1,7 @@
 import { Component, computed, ElementRef, forwardRef, inject, input, Signal } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
-import { ReorderEvent, SubmenuItem } from '../../models';
+import { SubmenuItem } from '../../models';
 import { MenuItemComponent } from '../menu-item';
 import { MenuItemSize } from '../../types';
 import { MenuItemListComponent } from '../menu-item-list';

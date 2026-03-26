@@ -20,29 +20,44 @@ li {
   margin-block-start: 0 !important;
 }
 
+// When dragging, style the preview element
 .cdk-drag-preview {
   border-radius: var(--kirby-border-radius-s);
-  background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+  background: var(--sidebar-background-color, var(--kirby-tertiary));
+  box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+  z-index: 104;
 }
 
+// When dragging, hide the placeholder element
 .cdk-drag-placeholder {
   opacity: 0;
 }
 
-.cdk-drag-animating {
-  transition-property: transform;
-  transition-duration: utils.get-transition-duration('quick');
-  transition-timing-function: utils.get-transition-easing('static');
-}
-
+// Disable transition on non-dragged items to prevent unwanted animations when ending drag
 :host .cdk-drag:not(.cdk-drag-preview, .cdk-drag-placeholder) {
   transition: none;
 }
 
+// When dragging, style non-dragged items
 :host.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-preview, .cdk-drag-placeholder) {
   transition-property: transform;
   transition-duration: utils.get-transition-duration('short');
   transition-timing-function: utils.get-transition-easing('static');
   pointer-events: none;
-  opacity: 0.7;
+  border-radius: var(--kirby-border-radius-s);
+  z-index: 103;
+}
+
+// Create full viewport dark overlay when dragging
+:host.cdk-drop-list-dragging {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 30%);
+    z-index: 101;
+    pointer-events: none;
+  }
 }
