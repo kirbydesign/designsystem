@@ -31,3 +31,18 @@ export const Calendar: Story = {
     todayDate: new Date(2026, 2, 29),
   },
 };
+
+export const DisabledDates: Story = {
+  args: {
+    timezone: 'local',
+    disableWeekends: false,
+    disablePastDates: false,
+    disableFutureDates: false,
+    alwaysEnableToday: false,
+    customLocales: {},
+    selectedDate: null,
+    todayDate: new Date(2026, 2, 29),
+    disabledDates: [new Date(2026, 2, 29), new Date(2026, 2, 30), new Date(2026, 2, 31)],
+    enabledDates: [],
+  },
+};
