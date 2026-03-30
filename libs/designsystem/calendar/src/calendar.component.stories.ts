@@ -25,9 +25,9 @@ export const Calendar: Story = {
     disableFutureDates: false,
     alwaysEnableToday: false,
     customLocales: {},
-    selectedDate: new Date(2024, 0, 1),
+    selectedDate: new Date(2026, 2, 28),
     disabledDates: [],
     enabledDates: [],
-    todayDate: new Date(2024, 0, 2),
+    todayDate: new Date(2026, 2, 29),
   },
 };

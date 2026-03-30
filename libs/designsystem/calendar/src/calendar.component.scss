@@ -107,12 +107,25 @@ button[aria-disabled='true'] {
   color: #{utils.get-text-color('semi-dark')};
 }
 
+button[aria-disabled='true'].day.today {
+  // Hardcoded color because we don't want it to be part of a shared color palette
+  color: #b4b4b4;
+  border: 1px solid utils.get-color('semi-dark');
+}
+
 .day.today {
   color: utils.get-color('medium-contrast');
-  background-color: utils.get-color('medium');
+  border: 1px solid utils.get-color('semi-dark');
 }
 
 .day.selected {
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
+}
+
+button.selected[aria-disabled='true'],
+button.selected.disabled {
+  // Hardcoded color because we don't want it to be part of a shared color palette
+  color: #b4b4b4;
+  background: none;
 }
