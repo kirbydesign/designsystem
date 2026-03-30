@@ -110,7 +110,6 @@ button[aria-disabled='true'] {
 button[aria-disabled='true'].day.today {
   // Hardcoded color because we don't want it to be part of a shared color palette
   color: #b4b4b4;
-  border: 1px solid utils.get-color('semi-dark');
 }
 
 .day.today {

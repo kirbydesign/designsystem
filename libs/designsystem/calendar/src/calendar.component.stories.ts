@@ -25,24 +25,17 @@ export const Calendar: Story = {
     disableFutureDates: false,
     alwaysEnableToday: false,
     customLocales: {},
-    selectedDate: new Date(2026, 2, 28),
+    selectedDate: new Date(2024, 0, 1),
     disabledDates: [],
     enabledDates: [],
-    todayDate: new Date(2026, 2, 29),
+    todayDate: new Date(2024, 0, 2),
   },
 };
 
 export const DisabledDates: Story = {
   args: {
-    timezone: 'local',
-    disableWeekends: false,
-    disablePastDates: false,
-    disableFutureDates: false,
-    alwaysEnableToday: false,
-    customLocales: {},
-    selectedDate: null,
-    todayDate: new Date(2026, 2, 29),
-    disabledDates: [new Date(2026, 2, 29), new Date(2026, 2, 30), new Date(2026, 2, 31)],
-    enabledDates: [],
+    todayDate: new Date(2024, 0, 1),
+    selectedDate: new Date(2024, 0, 2),
+    disabledDates: [new Date(2024, 0, 1)],
   },
 };
