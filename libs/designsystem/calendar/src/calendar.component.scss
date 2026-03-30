@@ -121,10 +121,3 @@ button[aria-disabled='true'].day.today {
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
 }
-
-button.selected[aria-disabled='true'],
-button.selected.disabled {
-  // Hardcoded color because we don't want it to be part of a shared color palette
-  color: #b4b4b4;
-  background: none;
-}
