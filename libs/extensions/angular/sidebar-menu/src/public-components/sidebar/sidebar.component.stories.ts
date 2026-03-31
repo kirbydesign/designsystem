@@ -69,6 +69,10 @@ const menuItemsExample: SidebarMenuItem[] = [
     ],
   },
   {
+    type: 'divider',
+    id: 'divider-2',
+  },
+  {
     type: 'submenu',
     id: 'menu-item-1',
     title: 'Menu item 1',
@@ -225,7 +229,7 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     type: 'divider',
-    id: 'divider-2',
+    id: 'divider-3',
   },
   {
     type: 'router-link',
