@@ -38,6 +38,38 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     type: 'submenu',
+    id: 'favorites',
+    title: 'Favorites',
+    icon: 'copy',
+    children: [
+      {
+        type: 'router-link',
+        id: 'menu-item-apple',
+        title: 'Apple',
+        route: '/menu-item/apple',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-banana',
+        title: 'Banana',
+        route: '/menu-item/banana',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-lemon',
+        title: 'Lemon',
+        route: '/menu-item/lemon',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-pear',
+        title: 'Pear',
+        route: '/menu-item/pear',
+      },
+    ],
+  },
+  {
+    type: 'submenu',
     id: 'menu-item-1',
     title: 'Menu item 1',
     icon: 'copy',
@@ -188,44 +220,6 @@ const menuItemsExample: SidebarMenuItem[] = [
             ],
           },
         ],
-      },
-    ],
-  },
-  {
-    type: 'submenu',
-    id: 'menu-item-3',
-    title: 'Menu item 3',
-    icon: 'copy',
-    children: [
-      {
-        type: 'router-link',
-        id: 'menu-item-3-1',
-        title: 'Menu item 3.1',
-        route: '/menu-item/3/1',
-      },
-      {
-        type: 'router-link',
-        id: 'menu-item-3-2',
-        title: 'Menu item 3.2',
-        route: '/menu-item/3/2',
-      },
-      {
-        type: 'router-link',
-        id: 'menu-item-3-3',
-        title: 'Menu item 3.3',
-        route: '/menu-item/3/3',
-      },
-      {
-        type: 'router-link',
-        id: 'menu-item-3-4',
-        title: 'Menu item 3.4',
-        route: '/menu-item/3/4',
-      },
-      {
-        type: 'router-link',
-        id: 'menu-item-3-5',
-        title: 'Menu item 3.5',
-        route: '/menu-item/3/5',
       },
     ],
   },
@@ -479,12 +473,12 @@ export const WithReorderableMenuItems: Story = {
   args: {
     ...Default.args,
     menuItems: menuItemsExample.map(convertToReorderableExample),
-    mainAreaContent: '<h1>Sidebar with reorderable submenu items</h1>',
+    mainAreaContent: '<h1>Sidebar with reorderable favorites submenu items</h1>',
   },
 };
 
 function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
-  if (item.type === 'submenu') {
+  if (item.type === 'submenu' && item.id === 'favorites') {
     return {
       ...item,
       isReorderable: true,
