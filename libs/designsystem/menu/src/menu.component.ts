@@ -29,16 +29,10 @@ import {
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
-import {
-  DeviceType,
-  PlatformService,
-  StringSearchHelper,
-  UniqueIdGenerator,
-} from '@kirbydesign/designsystem/helpers';
+import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { componentOnReady } from '@ionic/core';
 
 @Component({
   selector: 'kirby-menu',
@@ -58,8 +52,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     private zone: NgZone,
     private renderer: Renderer2,
     public translations: TranslationService,
-    private destroyRef: DestroyRef,
-    private platformService: PlatformService
+    private destroyRef: DestroyRef
   ) {}
 
   @Input() public isDisabled: boolean = false;
@@ -155,11 +148,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = 0;
         this.floatingMenu.show();
+        this.focusItem();
         break;
       case 'ArrowUp':
         this.preventDefaultAndStopImmediatePropagation(event);
         this.focusedIndex = this.kirbyItems.length - 1;
         this.floatingMenu.show();
+        this.focusItem();
         break;
     }
   }
@@ -234,32 +229,21 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   focusItem() {
     const itemToBeFocused = this.kirbyItems.get(this.focusedIndex);
-    if (!itemToBeFocused) return;
-
-    const kirbyItem = itemToBeFocused.nativeElement;
-    const ionItem = kirbyItem.querySelector('ion-item');
+    const ionItem = itemToBeFocused.nativeElement.querySelector('ion-item');
 
     // Look for interactive element within ion-item like toggle or checkbox and set focus if found
     const firstInteractiveElementWithinItem = this.getFirstInteractiveElement(ionItem);
     if (firstInteractiveElementWithinItem) {
       firstInteractiveElementWithinItem.focus();
     } else {
-      const nativeButton: HTMLButtonElement =
-        ionItem.shadowRoot?.querySelector('button:not([disabled])');
-      if (!nativeButton) return;
-      this.setFocusWithTempFocusToKirbyItem(nativeButton, kirbyItem);
+      this.focusSelectableItem(ionItem);
     }
   }
 
-  // Briefly focus kirby item and then move to target element: A fix to move VoiceOver cursor correctly
-  private setFocusWithTempFocusToKirbyItem(focusElement: HTMLElement, kirbyItem: HTMLElement) {
-    this.renderer.setAttribute(kirbyItem, 'tabindex', '-1');
-    kirbyItem.focus();
-
-    setTimeout(() => {
-      focusElement.focus();
-      this.renderer.removeAttribute(kirbyItem, 'tabindex');
-    }, 50);
+  private focusSelectableItem(ionItem: HTMLIonItemElement) {
+    const nativeButton: HTMLButtonElement =
+      ionItem.shadowRoot.querySelector('button:not([disabled])');
+    nativeButton?.focus();
   }
 
   getTriggerButton(): HTMLButtonElement {
@@ -286,9 +270,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     this.kirbyItemComponents.changes
       .pipe(startWith(null), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        if (this.platformService.getDeviceType() !== DeviceType.iOS) {
-          this.setRoleAttributeForAllItems();
-        }
+        this.setRoleAttributeForAllItems();
         this.ensureSelectableItems();
       });
   }
