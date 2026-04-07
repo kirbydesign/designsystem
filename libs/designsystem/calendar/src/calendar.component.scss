@@ -107,13 +107,7 @@ button[aria-disabled='true'] {
   color: #{utils.get-text-color('semi-dark')};
 }
 
-button[aria-disabled='true'].day.today {
-  // Hardcoded color because we don't want it to be part of a shared color palette
-  color: #b4b4b4;
-}
-
 .day.today {
-  color: utils.get-color('medium-contrast');
   border: 1px solid utils.get-color('semi-dark');
 }
 
