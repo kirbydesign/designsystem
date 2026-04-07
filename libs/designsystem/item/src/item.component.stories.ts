@@ -6,7 +6,8 @@ import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
-import { componentOnReady } from '@ionic/core';
+// eslint-disable-next-line no-restricted-imports
+import { focusSelectableItem } from '../../.storybook/story-helpers';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
@@ -803,60 +804,45 @@ export const ItemWithHorizontalLabelTruncation: Story = {
   render: () => ({
     template: `<kirby-item>
     <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
-    <data class="kirby-item-detail" slot="end">22.86%</data> 
+    <data class="kirby-item-detail" slot="end">22.86%</data>
 </kirby-item>
 <kirby-item>
     <kirby-label direction="horizontal">
         <p class="kirby-item-title" >Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
-        <data class="kirby-item-detail">22.86%</data> 
+        <data class="kirby-item-detail">22.86%</data>
     </kirby-label>
 </kirby-item>`,
   }),
 };
 
-const focusSelectableItem =
-  (index: number) =>
-  async ({ canvasElement }) => {
-    const ionItems = canvasElement.querySelectorAll('kirby-item ion-item');
-    const ionItem = ionItems[index];
-
-    await new Promise<void>((resolve) => {
-      componentOnReady(ionItem, () => resolve());
-    });
-
-    const nativeEl = ionItem.shadowRoot.querySelector('[part="native"]') as HTMLElement;
-    nativeEl.focus();
-  };
-
 export const SelectableFocused: Story = {
   name: 'Selectable - Focused',
   render: () => ({
-    template: `<kirby-item [selectable]="true">Selectable item (focused)</kirby-item>
+    template: `<kirby-item [selectable]="true">Selectable item</kirby-item>
 <kirby-item [selectable]="true">Selectable item</kirby-item>`,
   }),
   play: focusSelectableItem(0),
 };
 
-export const SelectableInCardFocused: Story = {
+export const SelectableInCardFirstFocused: Story = {
   name: 'Selectable in Card - Focused',
   render: () => ({
     template: `<kirby-card>
-  <kirby-item [selectable]="true">First selectable item (focused)</kirby-item>
+  <kirby-item [selectable]="true">First selectable item</kirby-item>
   <kirby-item [selectable]="true">Second selectable item</kirby-item>
   <kirby-item [selectable]="true">Third selectable item</kirby-item>
 </kirby-card>`,
   }),
   play: focusSelectableItem(0),
 };
+export const SelectableInCardSecondFocused: Story = {
+  ...SelectableInCardFirstFocused,
+  name: 'Selectable in Card - Second Focused',
+  play: focusSelectableItem(1),
+};
 
 export const SelectableInCardLastFocused: Story = {
+  ...SelectableInCardFirstFocused,
   name: 'Selectable in Card - Last Focused',
-  render: () => ({
-    template: `<kirby-card>
-  <kirby-item [selectable]="true">First selectable item</kirby-item>
-  <kirby-item [selectable]="true">Second selectable item</kirby-item>
-  <kirby-item [selectable]="true">Third selectable item (focused)</kirby-item>
-</kirby-card>`,
-  }),
   play: focusSelectableItem(2),
 };

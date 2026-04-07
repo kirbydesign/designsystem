@@ -3,6 +3,8 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent, IconComponent } from '@kirbydesign/designsystem';
+// eslint-disable-next-line no-restricted-imports
+import { focusSelectableItem } from '../../.storybook/story-helpers';
 import { ListExampleComponent } from '~/app/examples/list-example/list-example.component';
 
 const meta: Meta<ListComponent> = {
@@ -130,12 +132,11 @@ export const List: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `
-    <kirby-list ${argsToTemplate(args)}>
-    '<kirby-item *kirbyListItemTemplate="let item">
-    <p class="kirby-item-title">{{item.title}}</p>
-    <data slot="end">{{item.amount}}</data>
-  </kirby-item>
+    template: `<kirby-list ${argsToTemplate(args)}>
+    <kirby-item *kirbyListItemTemplate="let item">
+      <p class="kirby-item-title">{{item.title}}</p>
+      <data slot="end">{{item.amount}}</data>
+    </kirby-item>
   </kirby-list>`,
   }),
 };
@@ -165,22 +166,58 @@ export const ListWithIcons: Story = {
     props: args,
     template: `
     <kirby-list ${argsToTemplate(args)}>
-    '<kirby-item *kirbyListItemTemplate="let item">
-    <p class="kirby-item-title">{{item.title}}</p>
-    <div slot="end">
-        <button kirby-button size="sm" attentionLevel="3" aria-label="More settings">
-          <kirby-icon name="see"></kirby-icon>
-        </button>
-        <button kirby-button size="sm" attentionLevel="3" aria-label="More settings">
-          <kirby-icon name="edit"></kirby-icon>
-        </button>
-        <button kirby-button size="sm" attentionLevel="3" aria-label="More settings">
-          <kirby-icon name="tractor"></kirby-icon>
-        </button>
-     </div>
-  </kirby-item>
+      <kirby-item *kirbyListItemTemplate="let item">
+        <p class="kirby-item-title">{{item.title}}</p>
+        <div slot="end">
+          <button kirby-button size="sm" attentionLevel="3" aria-label="More settings">
+            <kirby-icon name="see"></kirby-icon>
+          </button>
+          <button kirby-button size="sm" attentionLevel="3" aria-label="More settings">
+            <kirby-icon name="edit"></kirby-icon>
+          </button>
+          <button kirby-button size="sm" attentionLevel="3" aria-label="More settings">
+            <kirby-icon name="tractor"></kirby-icon>
+          </button>
+        </div>
+      </kirby-item>
+    </kirby-list>`,
+  }),
+};
+
+export const ListWithSelectableItemsFirstFocused: Story = {
+  args: {
+    ...List.args,
+    items: [
+      {
+        title: 'First selectable item',
+      },
+      {
+        title: 'Second selectable item',
+      },
+      {
+        title: 'Third selectable item',
+      },
+    ],
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-list ${argsToTemplate(args)}>
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+      <p class="kirby-item-title">{{item.title}}</p>
+    </kirby-item>
   </kirby-list>`,
   }),
+  play: focusSelectableItem(0),
+};
+
+export const ListWithSelectableItemsSecondFocused: Story = {
+  ...ListWithSelectableItemsFirstFocused,
+  play: focusSelectableItem(1),
+};
+
+export const ListWithSelectableItemsLastFocused: Story = {
+  ...ListWithSelectableItemsFirstFocused,
+  play: focusSelectableItem(2),
 };
 
 export const CookbookExamples: Story = {
