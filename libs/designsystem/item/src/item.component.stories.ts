@@ -825,7 +825,7 @@ export const SelectableFocused: Story = {
 };
 
 export const SelectableInCardFirstFocused: Story = {
-  name: 'Selectable in Card - Focused',
+  name: 'Selectable in Card - First Focused',
   render: () => ({
     template: `<kirby-card>
   <kirby-item [selectable]="true">First selectable item</kirby-item>
