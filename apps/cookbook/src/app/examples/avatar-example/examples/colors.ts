@@ -22,8 +22,13 @@ const config = {
     </kirby-avatar>
   </div>
 </div>`,
-  htmlSnippet: `<kirby-avatar themeColor="white"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>
-<kirby-avatar themeColor="light"><kirby-icon name="kirby"></kirby-icon></kirby-avatar>`,
+  htmlSnippet: `<kirby-avatar themeColor="white">
+  <kirby-icon name="kirby"></kirby-icon>
+</kirby-avatar>
+
+<kirby-avatar themeColor="light">
+  <kirby-icon name="kirby"></kirby-icon>
+</kirby-avatar>`,
 };
 
 @Component({
