@@ -185,6 +185,7 @@ export const ListWithIcons: Story = {
 };
 
 export const ListWithSelectableItemsFirstFocused: Story = {
+  name: 'List with Selectable Items - First Focused',
   args: {
     items: [
       {
@@ -210,11 +211,13 @@ export const ListWithSelectableItemsFirstFocused: Story = {
 };
 
 export const ListWithSelectableItemsSecondFocused: Story = {
+  name: 'List with Selectable Items - Second Focused',
   ...ListWithSelectableItemsFirstFocused,
   play: focusSelectableItem(1),
 };
 
 export const ListWithSelectableItemsLastFocused: Story = {
+  name: 'List with Selectable Items - Last Focused',
   ...ListWithSelectableItemsFirstFocused,
   play: focusSelectableItem(2),
 };
