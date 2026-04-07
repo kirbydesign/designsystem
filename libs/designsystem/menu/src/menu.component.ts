@@ -391,14 +391,4 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
   ngOnDestroy(): void {
     this.disposeIonScrollListener?.();
   }
-
-  private setRoleAttributeForItem(item: HTMLElement) {
-    let menuItemRole = 'menuitem';
-    if (item.matches(':has(kirby-toggle, kirby-checkbox)')) {
-      menuItemRole = 'menuitemcheckbox';
-    } else if (item.matches(':has(kirby-radio)')) {
-      menuItemRole = 'menuitemradio';
-    }
-    this.renderer.setAttribute(item, 'role', menuItemRole);
-  }
 }
