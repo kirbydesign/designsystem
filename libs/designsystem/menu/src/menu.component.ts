@@ -38,6 +38,7 @@ import {
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { componentOnReady } from '@ionic/core';
 
 @Component({
   selector: 'kirby-menu',
@@ -309,6 +310,40 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     });
   }
 
+  private setRoleAttributeForAllItems() {
+    this.kirbyItems.forEach((item) => {
+      this.setRoleOnNativeControl(item.nativeElement);
+    });
+  }
+
+  private async setRoleOnNativeControl(item: HTMLElement) {
+    const ionItem = item.querySelector<HTMLIonItemElement>('ion-item');
+    if (!ionItem) return;
+
+    // Wait for ion-item to be hydrated before accessing Shadow DOM
+    await new Promise<void>((resolve) => {
+      componentOnReady(ionItem, () => resolve());
+    });
+
+    // Pierce Shadow DOM and set role/aria-label directly on the native button/input
+    // This is needed for VoiceOver compatibility in Safari mobile
+    if (item.matches(':has(kirby-toggle, kirby-checkbox)')) {
+      const nativeInput = ionItem
+        ?.querySelector('ion-toggle, ion-checkbox')
+        ?.shadowRoot?.querySelector('input');
+
+      if (nativeInput) {
+        this.renderer.setAttribute(nativeInput, 'role', 'menuitemcheckbox');
+        return;
+      }
+    } else {
+      const nativeButton = ionItem.shadowRoot?.querySelector('button');
+      if (nativeButton) {
+        nativeButton.setAttribute('role', 'menuitem');
+      }
+    }
+  }
+
   menuVisibilityChanged(menuIsShown: boolean) {
     this.floatingMenuIsShown = menuIsShown;
     this.renderer.setAttribute(this.getTriggerButton(), 'aria-expanded', menuIsShown.toString());
@@ -355,12 +390,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   ngOnDestroy(): void {
     this.disposeIonScrollListener?.();
-  }
-
-  private setRoleAttributeForAllItems() {
-    this.kirbyItems.forEach((item) => {
-      this.setRoleAttributeForItem(item.nativeElement);
-    });
   }
 
   private setRoleAttributeForItem(item: HTMLElement) {
