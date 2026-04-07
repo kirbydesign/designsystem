@@ -186,7 +186,6 @@ export const ListWithIcons: Story = {
 
 export const ListWithSelectableItemsFirstFocused: Story = {
   args: {
-    ...List.args,
     items: [
       {
         title: 'First selectable item',
