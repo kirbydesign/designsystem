@@ -146,8 +146,7 @@ ion-item {
 
 :host-context(kirby-dropdown) ion-item,
 :host-context(kirby-menu) ion-item,
-:host-context(kirby-popover) ion-item,
-:host-context(kirby-card.menu-popover) ion-item {
+:host-context(kirby-popover) ion-item {
   --min-height: #{utils.$dropdown-item-height};
 }
 

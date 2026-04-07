@@ -6,10 +6,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { fakeAsync, tick } from '@angular/core/testing';
 import { MenuComponent } from './menu.component';
-
-const requestAnimationTimeInMillis = 17; // Approximate time for one requestAnimationFrame cycle (default 60fps => 1000ms/60 ≈ 16.67ms)
 
 describe('MenuComponent', () => {
   let spectator: SpectatorHost<MenuComponent>;
@@ -419,12 +416,11 @@ describe('MenuComponent', () => {
       expect(card).toHaveComputedStyle({ display: 'block' });
     });
 
-    it('should set focus on first item when button is clicked', fakeAsync(async () => {
+    it('should set focus on first item when button is clicked', async () => {
       await spectator.click(triggerButton);
-      tick(requestAnimationTimeInMillis + 50);
 
       expect(document.activeElement).toEqual(items[0]);
-    }));
+    });
   });
 
   describe('trigger: hover', () => {
@@ -482,158 +478,131 @@ describe('MenuComponent', () => {
         items.forEach((item) => expect(item.shadowRoot.querySelector('button')).toExist());
       });
 
-      it('should set focus on first item when opened by enter', fakeAsync(() => {
+      it('should set focus on first item when opened by enter', async () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
 
         expect(document.activeElement).toEqual(items[0]);
-      }));
+      });
 
-      it('should set focus to native button within item', fakeAsync(() => {
+      it('should set focus to native button within item', () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
 
         expect(document.activeElement.shadowRoot.activeElement).toEqual(
           items[0].shadowRoot.querySelector('button')
         );
-      }));
+      });
 
-      it('should set focus on first item when opened by arrow down', fakeAsync(() => {
+      it('should set focus on first item when opened by arrow down', () => {
         spectator.keyboard.pressKey('ArrowDown', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
 
         expect(document.activeElement).toEqual(items[0]);
-      }));
+      });
 
-      it('should set focus on first item when opened by space', fakeAsync(() => {
+      it('should set focus on first item when opened by space', async () => {
         spectator.keyboard.pressKey(' ', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
 
         expect(document.activeElement).toEqual(items[0]);
-      }));
+      });
 
-      it('should set focus on last item when opened by arrow up', fakeAsync(() => {
+      it('should set focus on last item when opened by arrow up', async () => {
         spectator.keyboard.pressKey('ArrowUp', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
 
         expect(document.activeElement).toEqual(items[items.length - 1]);
-      }));
+      });
 
-      it('should set focus to next item when navigating by arrow down', fakeAsync(() => {
+      it('should set focus to next item when navigating by arrow down', async () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
         spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[1]);
-      }));
+      });
 
-      it('should set focus to previous item when navigating by arrow up', fakeAsync(() => {
+      it('should set focus to previous item when navigating by arrow up', async () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
         spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
         spectator.keyboard.pressKey('ArrowUp', card, 'keydown');
 
-        tick(50);
-
         expect(document.activeElement).toEqual(items[0]);
-      }));
+      });
 
-      it('should set focus to first item when focus is on the last item and navigating by arrow down', fakeAsync(() => {
+      it('should set focus to first item when focus is on the last item and navigating by arrow down', async () => {
         spectator.keyboard.pressKey('ArrowUp', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
-
         expect(document.activeElement).toEqual(items[items.length - 1]);
 
         spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[0]);
-      }));
+      });
 
-      it('should set focus to last item when focus is on the first item and navigating by arrow up', fakeAsync(() => {
+      it('should set focus to last item when focus is on the first item and navigating by arrow up', async () => {
         spectator.keyboard.pressKey('ArrowDown', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
         expect(document.activeElement).toEqual(items[0]);
 
         spectator.keyboard.pressKey('ArrowUp', card, 'keydown');
-        tick(50);
-        expect(document.activeElement).toEqual(items[items.length - 1]);
-      }));
 
-      it('should set focus to last item when navigating by end', fakeAsync(() => {
+        expect(document.activeElement).toEqual(items[items.length - 1]);
+      });
+
+      it('should set focus to last item when navigating by end', async () => {
         spectator.keyboard.pressKey('ArrowDown', triggerButton, 'keydown');
         spectator.keyboard.pressKey('End', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[items.length - 1]);
-      }));
+      });
 
-      it('should set focus to first item when navigating by home', fakeAsync(() => {
+      it('should set focus to first item when navigating by home', async () => {
         spectator.keyboard.pressKey('ArrowUp', triggerButton, 'keydown');
         spectator.keyboard.pressKey('Home', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[0]);
-      }));
+      });
 
-      it('should set focus to trigger button when selecting item', fakeAsync(() => {
+      it('should set focus to trigger button when selecting item', async () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
 
         const focusedNativeButton = document.activeElement.shadowRoot.activeElement;
 
         spectator.click(focusedNativeButton); //Using click instead of enter here since browsers natively interprete enter as a click event
         expect(document.activeElement).toEqual(triggerButton);
-      }));
+      });
 
-      it('should set focus to trigger button when pressing escape', fakeAsync(() => {
+      it('should set focus to trigger button when pressing escape', async () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
 
         spectator.keyboard.pressKey('Escape', card, 'keydown'); //Using click instead of enter here since browsers natively interprete enter as a click event
         expect(document.activeElement).toEqual(triggerButton);
-      }));
+      });
 
-      it('should set focus to "third action" when pressing "t"', fakeAsync(() => {
+      it('should set focus to "third action" when pressing "t"', () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
         spectator.keyboard.pressKey('t', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[3]);
-      }));
+      });
 
-      it('should set focus to "second action" when pressing "s"', fakeAsync(() => {
+      it('should set focus to "second action" when pressing "s"', () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
         spectator.keyboard.pressKey('s', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[1]);
-      }));
+      });
 
-      it('should set focus to "second action 2" when pressing "s" twice', fakeAsync(() => {
+      it('should set focus to "second action 2" when pressing "s" twice', () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
         spectator.keyboard.pressKey('s', card, 'keydown');
-        tick(50);
         spectator.keyboard.pressKey('s', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[2]);
-      }));
+      });
 
-      it('should return focus to "second action" when pressing "s" three times', fakeAsync(() => {
+      it('should return focus to "second action" when pressing "s" three times', () => {
         spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-        tick(requestAnimationTimeInMillis + 50);
         spectator.keyboard.pressKey('s', card, 'keydown');
-        tick(50);
         spectator.keyboard.pressKey('s', card, 'keydown');
-        tick(50);
         spectator.keyboard.pressKey('s', card, 'keydown');
-        tick(50);
 
         expect(document.activeElement).toEqual(items[1]);
-      }));
+      });
     });
     describe('with interactive element inside items', () => {
       describe('keyboard interaction', () => {
@@ -655,28 +624,24 @@ describe('MenuComponent', () => {
           await TestHelper.whenReady(items);
         });
 
-        it('should set focus on first interactive element inside item when opened by enter', fakeAsync(() => {
+        it('should set focus on first interactive element inside item when opened by enter', async () => {
           spectator.keyboard.pressKey('Enter', triggerButton, 'keydown');
-          tick(requestAnimationTimeInMillis + 50);
 
           expect(document.activeElement).toEqual(items[0].querySelector('ion-checkbox'));
-        }));
+        });
 
-        it('should set focus on last interactive element inside item when opened by arrow up', fakeAsync(() => {
+        it('should set focus on last interactive element inside item when opened by arrow up', async () => {
           spectator.keyboard.pressKey('ArrowUp', triggerButton, 'keydown');
-          tick(requestAnimationTimeInMillis + 50);
 
           expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
-        }));
+        });
 
-        it('should set focus on next interactive element inside item when navigating by arrow down', fakeAsync(() => {
+        it('should set focus on next interactive element inside item when navigating by arrow down', async () => {
           spectator.keyboard.pressKey('ArrowDown', triggerButton, 'keydown');
-          tick(requestAnimationTimeInMillis + 50);
           spectator.keyboard.pressKey('ArrowDown', card, 'keydown');
-          tick(50);
 
           expect(document.activeElement).toEqual(items[1].querySelector('ion-toggle'));
-        }));
+        });
       });
 
       describe('accessibility', () => {

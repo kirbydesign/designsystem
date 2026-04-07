@@ -40,13 +40,13 @@ describe('ItemComponent in a MenuComponent', () => {
       spectator = createHost(`<kirby-menu><kirby-item size="md">Value</kirby-item></kirby-menu>`);
     });
 
-    it(`should force ion-item to be '--min-height 44px'`, () => {
+    it(`should have ion-item '--min-height 56px'`, () => {
       spectator.detectChanges();
       const ionItem = spectator.query('ion-item');
 
       expect(ionItem).toBeTruthy();
       expect(spectator.query('ion-item')).toHaveComputedStyle({
-        '--min-height': '44px',
+        '--min-height': '56px',
       });
     });
   });
@@ -56,13 +56,13 @@ describe('ItemComponent in a MenuComponent', () => {
       spectator = createHost(`<kirby-menu><kirby-item size="xs">Value</kirby-item></kirby-menu>`);
     });
 
-    it(`should force ion-item to be '--min-height 44px'`, () => {
+    it(`should have ion-item '--min-height 32px'`, () => {
       spectator.detectChanges();
       const ionItem = spectator.query('ion-item');
 
       expect(ionItem).toBeTruthy();
       expect(spectator.query('ion-item')).toHaveComputedStyle({
-        '--min-height': '44px',
+        '--min-height': '32px',
       });
     });
   });
