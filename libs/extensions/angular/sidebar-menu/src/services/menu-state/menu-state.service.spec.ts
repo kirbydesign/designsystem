@@ -172,4 +172,29 @@ describe(MenuStateService.name, () => {
       spectator.service.uncheckItem('item-1.1');
     });
   });
+
+  describe('Method : selectItem', () => {
+    it('should select the specified item', () => {
+      const spectator = render();
+
+      spectator.service.selectItem('item-2.3.1');
+
+      expect(spectator.service.selectedItem()).toBe('item-2.3.1');
+    });
+
+    it('should emit a select event when an item is selected', (done) => {
+      const spectator = render();
+
+      spectator.service.selectEvents.subscribe((selectedItemId) => {
+        try {
+          expect(selectedItemId).toBe('item-2.3.1');
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
+
+      spectator.service.selectItem('item-2.3.1');
+    });
+  });
 });

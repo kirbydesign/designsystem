@@ -108,8 +108,7 @@ button[aria-disabled='true'] {
 }
 
 .day.today {
-  color: utils.get-color('medium-contrast');
-  background-color: utils.get-color('medium');
+  border: 1px solid utils.get-color('semi-dark');
 }
 
 .day.selected {

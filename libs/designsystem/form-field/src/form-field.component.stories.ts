@@ -1,5 +1,5 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { expect, userEvent, waitFor, within } from 'storybook/test';
+import { userEvent, within } from 'storybook/test';
 
 import {
   FormFieldComponent,
@@ -8,7 +8,7 @@ import {
   TextareaComponent,
 } from '@kirbydesign/designsystem/form-field';
 
-import { IconComponent } from '@kirbydesign/designsystem';
+import { CardComponent, IconComponent } from '@kirbydesign/designsystem';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
@@ -125,4 +125,23 @@ export const DateInputWithPrefixIcon: Story = {
     await userEvent.click(input);
     await userEvent.type(input, '987654');
   },
+};
+
+export const InputWithNativeDatePicker: Story = {
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule, InputComponent, FormFieldComponent, CardComponent],
+    }),
+  ],
+  render: () => ({
+    template: `<kirby-form-field>
+      <input kirby-input type="date" [useNativeDatePicker]="true" />
+    </kirby-form-field>
+    <kirby-card [hasPadding]="true">
+      <kirby-form-field style="margin-bottom: 0">
+        <input kirby-input type="date" [useNativeDatePicker]="true" />
+      </kirby-form-field>
+    </kirby-card>
+    `,
+  }),
 };

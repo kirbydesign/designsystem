@@ -327,6 +327,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.disabled) {
       return;
     }
+
     if (!this.isOpen) {
       this.state = OpenState.opening;
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
@@ -443,6 +444,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('keydown.tab')
+  @HostListener('keydown.shift.tab')
   _onTab() {
     if (this.isOpen) {
       this.selectItem(this.focusedIndex);
@@ -603,17 +605,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this._onTouched();
   }
 
-  @HostListener('focusout', ['$event'])
-  _onFocusOut(event: FocusEvent) {
-    const relatedTarget = event.relatedTarget as HTMLElement | null; // relatedTarget is the element receiving focus
-    const isOnTriggerButton =
-      relatedTarget && this.elementRef.nativeElement.contains(relatedTarget);
-    const isInsidePopover = relatedTarget && relatedTarget.closest('kirby-popover');
-
-    if (!isOnTriggerButton && !isInsidePopover) {
-      if (this.isOpen) {
-        this.close();
-      }
+  @HostListener('focusout')
+  _onFocusOut() {
+    if (!this.isOpen) {
       this._onTouched();
     }
   }

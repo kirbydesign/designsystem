@@ -1,1 +1,6 @@
 @use '../examples.shared';
+
+.example-frame {
+  display: flex;
+  justify-content: center;
+}
