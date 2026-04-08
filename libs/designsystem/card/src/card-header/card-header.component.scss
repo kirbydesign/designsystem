@@ -28,10 +28,10 @@
   }
 
   &.info {
-    --kirby-card-header-background-color: #{utils.get-color('semi-light')};
+    --kirby-card-header-background-color: var(--kirby-surface-canvas-bg);
   }
 
-  --kirby-card-header-color: #{utils.get-color('black')};
+  --kirby-card-header-color: var(--kirby-text-color);
 }
 
 .title {

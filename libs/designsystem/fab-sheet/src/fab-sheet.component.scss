@@ -40,7 +40,7 @@ ion-fab-button {
   /* stylelint-enable no-duplicate-selectors */
 
   &[disabled] {
-    --background: #{utils.get-color('semi-light')};
+    --background: var(--kirby-surface-canvas-bg);
     --box-shadow: none;
 
     opacity: 1;

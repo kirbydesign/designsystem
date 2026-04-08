@@ -5,7 +5,7 @@ svg {
 }
 
 .circle {
-  stroke: utils.get-color('semi-light');
+  stroke: var(--kirby-divider-color);
 }
 
 :host {

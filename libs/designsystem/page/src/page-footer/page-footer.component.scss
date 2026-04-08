@@ -6,8 +6,8 @@ $padding-vertical: utils.size('xxs');
 
 :host {
   display: block;
-  background-color: utils.get-color('white');
-  @include themes.apply-white-theme;
+  background-color: var(--kirby-surface-card-bg);
+  @include themes.apply-card-surface;
 
   .wrapper {
     position: relative;

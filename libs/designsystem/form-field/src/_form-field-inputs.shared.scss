@@ -35,8 +35,8 @@ $form-field-label-height: 24px;
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    background-color: var(--kirby-inputs-background-color);
-    color: var(--kirby-inputs-color);
+    background-color: var(--kirby-inputs-background-color, var(--kirby-surface-card-bg));
+    color: var(--kirby-inputs-color, var(--kirby-surface-card-on));
     border: none;
     box-sizing: border-box;
 
@@ -57,7 +57,7 @@ $form-field-label-height: 24px;
     margin: 0;
     appearance: none;
     border-radius: utils.border-radius('n');
-    box-shadow: var(--kirby-inputs-elevation);
+    box-shadow: var(--kirby-inputs-elevation, var(--kirby-elevation-2));
     padding: $form-field-input-padding;
     width: 100%;
   }
@@ -72,13 +72,13 @@ $form-field-label-height: 24px;
   }
 
   &:disabled {
-    background-color: utils.get-color('light-tint');
-    color: utils.get-text-color('semi-dark');
+    background-color: var(--kirby-surface-card-bg);
+    color: var(--kirby-text-color-secondary);
     box-shadow: none;
   }
 
   &::placeholder {
-    color: var(--kirby-inputs-placeholder-color);
+    color: var(--kirby-inputs-placeholder-color, var(--kirby-text-color-secondary));
   }
 }
 

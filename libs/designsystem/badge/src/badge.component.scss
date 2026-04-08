@@ -10,8 +10,8 @@
   line-height: 1;
 
   ion-badge {
-    --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
-    --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
+    --background: var(--kirby-badge-background-color, var(--kirby-surface-card-bg));
+    --color: var(--kirby-badge-color, var(--kirby-surface-card-on));
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: utils.border-radius('s');
@@ -54,7 +54,7 @@
   }
 
   &.danger ion-badge {
-    --color: #{utils.get-text-color('white')};
+    --color: var(--kirby-surface-highlight-on);
   }
 
   &.danger.sm ion-badge {

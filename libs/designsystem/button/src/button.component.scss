@@ -110,7 +110,7 @@ $button-margin: utils.size('xxxs');
 
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
-  --kirby-button-color: #{utils.get-color('black')};
+  --kirby-button-color: var(--kirby-text-color);
 
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
@@ -129,15 +129,15 @@ $button-margin: utils.size('xxxs');
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: #{utils.get-color('black')};
-  --kirby-button-color: #{utils.get-color('black-contrast')};
+  --kirby-button-background-color: var(--kirby-surface-highlight-bg);
+  --kirby-button-color: var(--kirby-surface-highlight-on);
 
   @include interaction-state.apply-hover('s', $make-lighter: true);
   @include interaction-state.apply-active('m', $make-lighter: true);
 }
 
 @mixin button-attentionlevel3 {
-  --kirby-button-background-color: var(--kirby-inputs-background-color);
+  --kirby-button-background-color: var(--kirby-surface-card-input-bg);
   --kirby-button-color: var(--kirby-inputs-color);
 
   @include interaction-state.apply-hover('xs');
@@ -270,12 +270,12 @@ $button-margin: utils.size('xxxs');
 
   &:disabled,
   &[aria-disabled='true'] {
-    color: utils.get-color('semi-dark-shade');
+    color: var(--kirby-text-color-secondary);
     border-color: transparent;
     pointer-events: none;
 
     &:not(.no-decoration) {
-      background-color: utils.get-color('semi-light');
+      background-color: var(--kirby-surface-canvas-bg);
     }
   }
 
@@ -298,15 +298,15 @@ $button-margin: utils.size('xxxs');
 
 :host-context(.kirby-color-brightness-dark) {
   &.no-decoration {
-    --kirby-button-color: #{utils.get-color('white')};
+    --kirby-button-color: var(--kirby-surface-highlight-on);
 
     @include interaction-state.apply-hover('xs', $make-lighter: true);
     @include interaction-state.apply-active('m', $make-lighter: true);
   }
 
   &.attention-level2 {
-    --kirby-button-background-color: #{utils.get-color('white')};
-    --kirby-button-color: #{utils.get-color('white-contrast')};
+    --kirby-button-background-color: var(--kirby-surface-highlight-on);
+    --kirby-button-color: var(--kirby-surface-highlight-bg);
 
     @include interaction-state.apply-hover;
     @include interaction-state.apply-active('s');

@@ -11,17 +11,17 @@
 ion-tab-button {
   &.ion-focused {
     @include interaction-state.apply-focus-visible-background {
-      --background: #{interaction-state.get-state-color('white', 'xxxs')};
+      --background: var(--kirby-inputs-background-color-hover);
       --background-focused-opacity: 0;
     }
   }
 
   @include interaction-state.apply-hover {
-    --background: #{interaction-state.get-state-color('white', 'xxxs')};
+    --background: var(--kirby-inputs-background-color-hover);
   }
 
   @include interaction-state.apply-active {
-    --background: #{interaction-state.get-state-color('white', 'xxs')};
+    --background: var(--kirby-inputs-background-color-active);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -36,8 +36,8 @@ ion-tab-button {
     font-size: utils.font-size('xs');
     line-height: utils.line-height('xs');
 
-    --color: #{utils.get-text-color('semi-dark')};
-    --color-selected: #{utils.get-color('black')};
+    --color: var(--kirby-text-color-secondary);
+    --color-selected: var(--kirby-text-color);
     --padding-start: 0;
     --padding-end: 0;
 

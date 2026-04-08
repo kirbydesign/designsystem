@@ -9,8 +9,11 @@
 // in a component that uses interaction state layer.
 $_content-layer-z-index: utils.z('default');
 $state-layer-z-index: $_content-layer-z-index + 1;
-$_dark: utils.get-color('black');
-$_light: utils.get-color('black-contrast');
+// Theme-aware interaction colors:
+// - default state layer color is configurable per theme mode
+// - lighter state layer color is the inverse tint configured per theme mode
+$_dark: var(--kirby-state-layer-color, var(--kirby-text-color));
+$_light: var(--kirby-state-layer-color-inverse, var(--kirby-surface-card-bg));
 
 /// Prepare state layer and content layer for interaction state changes.
 /// Should be initialized before applying hover.

@@ -16,18 +16,18 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   display: flex;
 
   &[disabled] {
-    color: #{utils.get-text-color('semi-dark')};
+    color: var(--kirby-text-color-secondary);
 
     ion-radio {
-      --color: #{utils.get-color('medium')};
-      --color-checked: #{utils.get-color('medium')};
+      --color: var(--kirby-divider-color);
+      --color-checked: var(--kirby-divider-color);
 
       &::part(container) {
-        background-color: utils.get-color('semi-light');
+        background-color: var(--kirby-surface-canvas-bg);
       }
 
       &::part(mark) {
-        --color-checked: #{utils.get-color('semi-dark')};
+        --color-checked: var(--kirby-text-color-secondary);
       }
 
       &::part(label-text-wrapper) {
@@ -99,28 +99,28 @@ ion-radio {
     box-sizing: border-box; // Ensure padding is not added to radio width/height
 
     --border-width: 1px;
-    --color: #{utils.get-color('semi-dark')};
+    --color: var(--kirby-divider-color);
     --color-checked: #{utils.get-color('success')};
   }
   /* stylelint-enable no-duplicate-selectors */
 
   @include interaction-state.apply-hover {
     &::part(container) {
-      background-color: interaction-state.get-state-color('white', 'xxs');
+      background-color: var(--kirby-inputs-background-color-hover);
     }
   }
   @include interaction-state.apply-active {
     --color-checked: #{interaction-state.get-state-color('success')};
 
     &::part(container) {
-      background-color: interaction-state.get-state-color('white', 'xs');
+      background-color: var(--kirby-inputs-background-color-active);
     }
   }
 
   &::part(container) {
     transition: interaction-state.transition();
     transition-property: background-color;
-    background-color: utils.get-color('white');
+    background-color: var(--kirby-inputs-background-color);
     margin: utils.size('xxxxs');
   }
 
@@ -181,7 +181,7 @@ ion-radio {
 
     &:not(.radio-disabled) {
       &::part(container) {
-        border-color: var(--kirby-semi-dark);
+        border-color: var(--kirby-divider-color);
       }
     }
   }

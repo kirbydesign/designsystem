@@ -33,12 +33,7 @@
 }
 
 ion-item {
-  &::part(native):focus-visible {
-    box-shadow:
-      0 0 0 2px utils.$focus-ring-color inset,
-      0 0 0 4px utils.get-color('white') inset;
-  }
-
+  @include interaction-state.apply-focus-visible-background('xxxs');
   @include interaction-state.apply-hover-ionic('xxxs');
   @include interaction-state.apply-active-ionic('xxs');
 
@@ -53,14 +48,14 @@ ion-item {
     --inner-padding-top: #{utils.size('xxs')};
     --inner-padding-bottom: #{utils.size('xxs')};
     --inner-padding-end: #{utils.size('s')};
-    --background: var(--kirby-item-background, #{utils.get-color('white')});
+    --background: var(--kirby-item-background, var(--kirby-surface-card-bg));
 
     // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871
     --background-activated-opacity: 0.99;
     --background-focused: var(
       --kirby-item-background-focused,
-      #{utils.get-color('background-color')}
+      var(--kirby-inputs-background-color-hover)
     );
     --background-focused-opacity: 1;
 
@@ -130,9 +125,9 @@ ion-item {
 
 .disclosure {
   padding-left: #{utils.size('xxxs')};
-  color: #{utils.get-color('semi-dark')};
+  color: var(--kirby-text-color-secondary);
 
-  /*
+  /* 
     display: inline-flex; is used to make sure the span.disclosure element
     is the same height as the child (kirby-icon)
   */
@@ -158,7 +153,7 @@ ion-item {
 // Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
 :host-context(kirby-dropdown .focused) ion-item,
 :host-context(kirby-popover .focused) ion-item {
-  --background: #{interaction-state.get-state-color('white', 'xxxs')};
+  --background: var(--kirby-inputs-background-color-hover);
 }
 
 // Prevents the item from being clicked when disabled
@@ -182,32 +177,33 @@ ion-item {
   }
 }
 
-:host-context(kirby-list-item:first-of-type),
-:host-context(kirby-card):first-child {
-  ion-item::part(native) {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.shape-rounded .is-single) {
+  ion-item {
+    --border-radius: #{utils.border-radius('n')};
   }
 }
 
-:host-context(kirby-list-item:last-of-type),
-:host-context(kirby-card):last-child {
-  ion-item::part(native) {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
-  }
-}
-
-:host-context(.has-header kirby-list-item:first-of-type) {
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.has-header .is-single) {
   ion-item::part(native) {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 }
 
-:host-context(.has-footer kirby-list-item:last-of-type) {
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.has-footer .is-single) {
   ion-item::part(native) {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
+  ion-item::part(native) {
+    border-top-left-radius: utils.border-radius('n');
+    border-top-right-radius: utils.border-radius('n');
   }
 }

@@ -6,7 +6,7 @@ $slide-button-spacing: 2px;
 $slide-button-width: 52px;
 $slide-button-container-height: $slide-button-width + 2 * $slide-button-spacing;
 $slide-button-container-bg-color: utils.get-color('primary');
-$slider-thumb-bg-color: utils.get-color('white');
+$slider-thumb-bg-color: var(--kirby-surface-highlight-on);
 $slide-button-text-color: utils.get-color('primary-contrast');
 $total-slider-thumb-width: $slide-button-width + $slide-button-spacing * 2;
 $slide-button-container-radius: $slide-button-width * 0.5;
@@ -14,10 +14,10 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
 
 @mixin _slider-thumb() {
   @include interaction-state.apply-hover {
-    background-color: interaction-state.get-state-color('white');
+    background-color: color-mix(in srgb, #{$slider-thumb-bg-color}, var(--kirby-text-color) 6%);
   }
   @include interaction-state.apply-active {
-    background-color: interaction-state.get-state-color('white', 'xs');
+    background-color: color-mix(in srgb, #{$slider-thumb-bg-color}, var(--kirby-text-color) 12%);
   }
 
   // Wrap declarations to avoid mixing with nested rules.

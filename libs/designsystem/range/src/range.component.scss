@@ -16,23 +16,23 @@ $knob-shadow:
 ion-range {
   @include interaction-state.apply-focus-part($part: 'knob', $shadow: $knob-shadow);
   @include interaction-state.apply-hover {
-    --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
+    --knob-background: var(--kirby-inputs-background-color-hover);
   }
   @include interaction-state.apply-active {
-    --knob-background: #{interaction-state.get-state-color('white', 's')};
+    --knob-background: var(--kirby-inputs-background-color-active);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --knob-background: #{utils.get-color('white')};
+    --knob-background: var(--kirby-inputs-background-color);
     --knob-box-shadow: #{$knob-shadow};
     --knob-size: 24px;
-    --pin-color: #{utils.get-text-color('black')};
-    --pin-background: #{utils.get-color('semi-light')};
-    --bar-background: #{utils.get-color('medium')};
-    --bar-background-active: #{utils.get-color('dark')};
+    --pin-color: var(--kirby-text-color);
+    --pin-background: var(--kirby-inputs-background-color);
+    --bar-background: var(--kirby-divider-color);
+    --bar-background-active: var(--kirby-text-color);
     --bar-border-radius: #{utils.size('xxxs')};
     --bar-height: #{utils.size('xxxxs')};
 
@@ -42,13 +42,13 @@ ion-range {
   /* stylelint-enable no-duplicate-selectors */
 
   &.range-disabled {
-    --knob-background: #{utils.get-color('medium')};
+    --knob-background: var(--kirby-divider-color);
     --knob-box-shadow: none;
-    --bar-background: #{utils.get-color('semi-light')};
-    --bar-background-active: #{utils.get-color('medium')};
+    --bar-background: var(--kirby-surface-canvas-bg);
+    --bar-background-active: var(--kirby-divider-color);
 
     &::part(tick) {
-      background: utils.get-color('semi-light');
+      background: var(--kirby-surface-canvas-bg);
     }
   }
 
@@ -93,13 +93,13 @@ ion-range {
   }
 
   &::part(tick) {
-    background: utils.get-color('medium');
+    background: var(--kirby-divider-color);
   }
 }
 
 label {
   font-size: utils.font-size('xs');
   line-height: utils.line-height('xs');
-  color: utils.get-text-color('semi-dark');
+  color: var(--kirby-text-color-secondary);
   margin-top: -#{utils.size('xxxs')};
 }

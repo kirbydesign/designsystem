@@ -12,17 +12,13 @@ $ion-content-padding-top: utils.size('xs');
 $toolbar-transition-duration-in: utils.get-transition-duration('quick');
 $toolbar-transition-duration-out: 50ms;
 $toolbar-transition: background-color $toolbar-transition-duration-out linear;
-$toolbar-shaded-background: color.mix(
-  #000,
-  utils.get-color('background-color', $getValueOnly: true),
-  1.1%
-);
+$toolbar-shaded-background: color-mix(in srgb, var(--kirby-surface-canvas-bg), black 1.1%);
 $toolbar-button-size: utils.size('xl');
 $toolbar-button-spacing: utils.size('xxs');
 
 ion-header,
 ion-toolbar {
-  --background: #{utils.get-color('background-color')};
+  --background: var(--kirby-surface-canvas-bg);
 
   margin: 0 auto;
 }
@@ -33,7 +29,7 @@ ion-toolbar {
   --padding-end: #{utils.size('s')};
   --padding-top: 0;
   --padding-bottom: 0;
-  --ion-toolbar-color: #{utils.get-color('black')};
+  --ion-toolbar-color: var(--kirby-text-color);
   --min-height: #{utils.size('xxxl')};
 
   @include utils.media('>=medium') {
@@ -71,7 +67,7 @@ ion-toolbar {
     }
 
     &:not(.content-pinned)::before {
-      background-color: utils.get-color('medium');
+      background-color: var(--kirby-divider-color);
     }
   }
 
@@ -182,8 +178,8 @@ ion-back-button {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --color: #{utils.get-color('black')};
-    --background: #{utils.get-color('white')};
+    --color: var(--kirby-text-color);
+    --background: var(--kirby-inputs-background-color);
     --icon-font-size: 24px;
 
     height: $toolbar-button-size;
@@ -194,7 +190,6 @@ ion-back-button {
     // ion-segment-button.
     opacity: 1; // required for interaction states to work
   }
-
   /* stylelint-enable no-duplicate-selectors */
 
   // Properly center back-icon
@@ -267,8 +262,8 @@ ion-content {
   --padding-top: #{$ion-content-padding-top};
   --padding-start: var(--page-content-padding-start, #{utils.size('s')});
   --padding-end: var(--page-content-padding-end, #{utils.size('s')});
-  --background: #{utils.get-color('background-color')};
-  --color: #{utils.get-color('black')};
+  --background: var(--kirby-surface-canvas-bg);
+  --color: var(--kirby-text-color);
 
   @include utils.media('>=medium') {
     --padding-start: var(--page-content-padding-start, #{utils.size('xxl')});
@@ -299,10 +294,6 @@ ion-content {
     max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
     padding-bottom: utils.size('xl');
-
-    // Prevents flickering on navigation back animation on ios
-    transform: translateZ(0);
-    will-change: transform;
   }
 
   /*
@@ -374,7 +365,7 @@ ion-content {
 
     &::after {
       /* Divider - pinned */
-      background-color: utils.get-color('medium');
+      background-color: var(--kirby-divider-color);
     }
   }
 }

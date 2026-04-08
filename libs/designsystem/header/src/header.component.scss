@@ -170,7 +170,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 
 .value-unit {
   font-weight: initial;
-  color: utils.get-text-color('semi-dark');
+  color: var(--kirby-text-color-secondary);
   margin-left: utils.size('xxxs');
   font-size: 50%;
 }

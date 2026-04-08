@@ -12,7 +12,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   display: flex;
 
   &.attention-level1 ion-checkbox {
-    --checkmark-color: #{utils.get-color('black')};
+    --checkmark-color: var(--kirby-surface-card-on);
     --checkbox-background-checked: #{utils.get-color('success')};
     --border-color-checked: #{utils.get-color('success')};
 
@@ -27,9 +27,9 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   &.attention-level2 ion-checkbox {
-    --checkmark-color: #{utils.get-color('white')};
-    --checkbox-background-checked: #{utils.get-color('black')};
-    --border-color-checked: #{utils.get-color('black')};
+    --checkmark-color: var(--kirby-surface-highlight-on);
+    --checkbox-background-checked: var(--kirby-surface-highlight-bg);
+    --border-color-checked: var(--kirby-surface-highlight-bg);
 
     @include interaction-state.apply-hover {
       --checkbox-background-checked: #{interaction-state.get-state-color(
@@ -63,14 +63,14 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   &[disabled] {
-    color: #{utils.get-text-color('semi-dark')};
+    color: var(--kirby-text-color-secondary);
 
     ion-checkbox {
-      --checkmark-color: #{utils.get-color('semi-dark')};
-      --checkbox-background: #{utils.get-color('semi-light')};
-      --checkbox-background-checked: #{utils.get-color('semi-light')};
-      --border-color: #{utils.get-color('medium')};
-      --border-color-checked: #{utils.get-color('medium')};
+      --checkmark-color: var(--kirby-text-color-secondary);
+      --checkbox-background: var(--kirby-surface-canvas-bg);
+      --checkbox-background-checked: var(--kirby-surface-canvas-bg);
+      --border-color: var(--kirby-divider-color);
+      --border-color-checked: var(--kirby-divider-color);
 
       &::part(label-text-wrapper) {
         opacity: 1; // Reset Ionic disabled style
@@ -115,10 +115,10 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   ion-checkbox {
     @include interaction-state.apply-focus-part($part: 'container');
     @include interaction-state.apply-hover {
-      --checkbox-background: #{interaction-state.get-state-color('white')};
+      --checkbox-background: var(--kirby-inputs-background-color-hover);
     }
     @include interaction-state.apply-active {
-      --checkbox-background: #{interaction-state.get-state-color('white', 'xs')};
+      --checkbox-background: var(--kirby-inputs-background-color-active);
     }
 
     &:focus-visible {
@@ -133,9 +133,9 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       --transition: #{interaction-state.$default-transition-duration};
       --size: #{$checkbox-icon-size};
       --checkmark-width: #{utils.size('xxxs')};
-      --checkbox-background: #{utils.get-color('white')};
+      --checkbox-background: var(--kirby-inputs-background-color);
       --border-width: 1px;
-      --border-color: #{utils.get-color('semi-dark')};
+      --border-color: var(--kirby-divider-color);
       --border-radius: #{$border-radius};
     }
     /* stylelint-enable no-duplicate-selectors */

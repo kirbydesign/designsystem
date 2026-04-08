@@ -2,15 +2,15 @@
 @use '@kirbydesign/core/src/scss/themes';
 
 ion-footer {
-  @include themes.apply-white-theme;
+  @include themes.apply-card-surface;
 
   box-shadow: utils.get-elevation(8);
   box-sizing: inherit;
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
-  background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
-  color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
+  background-color: var(--kirby-modal-footer-background, var(--kirby-surface-card-bg));
+  color: var(--kirby-modal-footer-color, var(--kirby-surface-card-on));
   padding: utils.size('s');
   padding-bottom: calc(#{utils.size('xs')} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 
@@ -37,13 +37,13 @@ ion-footer {
 }
 
 :host(.light) ion-footer {
-  @include themes.apply-light-theme;
+  @include themes.apply-canvas-surface;
 
-  background-color: utils.get-color('background-color');
+  background-color: var(--kirby-surface-canvas-bg);
 }
 
 :host(.inline) ion-footer {
-  @include themes.apply-light-theme;
+  @include themes.apply-canvas-surface;
 
   background: transparent;
   box-shadow: none;

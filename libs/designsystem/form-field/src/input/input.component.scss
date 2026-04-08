@@ -25,29 +25,9 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
     /* stylelint-enable no-duplicate-selectors */
   }
 
+  // Background color needs to be synchronized with form-field.component
   &[type='date'] {
-    // Hide the builtin picker icon but position it so it overlays input, to ensure clicking the
-    // input opens the date picker as expected
-    &::-webkit-calendar-picker-indicator {
-      opacity: 0;
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
-  &[type='date']::ng-deep + .suffix {
-    pointer-events: none; // ensure clicking icon opens date picker
-
-    // In firefox, we can't target and hide the builtin picker icon, so we use a feature query to hide
-    // kirby-icon instead and accept that the native appearance is a bit different
-    @supports (-moz-appearance: none) {
-      kirby-icon {
-        display: none;
-      }
-    }
+    background-color: var(--date-input-background-color);
   }
 
   &[type='number'] {
@@ -91,14 +71,14 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 }
 
 :host-context(.date-mask-wrapper) {
-  color: var(--kirby-text-color-semi-dark);
+  color: var(--kirby-text-color-secondary);
 }
 
 .date-mask {
   font-family: shared.$form-field-input-font-family;
   line-height: shared.$form-field-input-line-height;
   font-size: var(--kirby-font-size-n);
-  color: var(--kirby-white-contrast);
+  color: var(--kirby-text-color);
   position: absolute;
   top: 0;
   left: 0;

@@ -184,8 +184,8 @@ export const InCard: Story = {
 
 <kirby-card [hasPadding]="true" [themeColor]="'dark'">
   <kirby-card-header [hasPadding]="false">
-    <kirby-item [disclosure]="'arrow-more'" style="--kirby-item-background: var(--kirby-dark);">
-      <p class="kirby-text-normal-bold" style="color: var(--kirby-white);">Spot Illustration in card</p>
+    <kirby-item [disclosure]="'arrow-more'" style="--kirby-item-background: var(--kirby-surface-highlight-bg);">
+      <p class="kirby-text-normal-bold" style="color: var(--kirby-surface-highlight-on);">Spot Illustration in card</p>
     </kirby-item>
   </kirby-card-header>
   <div class="card-content">
@@ -238,7 +238,7 @@ export const All: Story = {
       }
 
       table.kirby-table td, h2 {
-        color: var(--story-text-color, --kirby-black);
+        color: var(--story-text-color, var(--kirby-text-color));
         text-align: center;
       }
 

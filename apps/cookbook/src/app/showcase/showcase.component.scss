@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
 $icon-size: utils.size('s');
 
@@ -8,7 +9,7 @@ $icon-size: utils.size('s');
   h1 {
     text-transform: uppercase;
     font-size: utils.font-size('xxl');
-    color: utils.get-color('dark');
+    color: var(--kirby-text-color-secondary);
     font-weight: utils.font-weight('light');
     position: relative;
     padding-bottom: 5 * utils.size('xxxs');

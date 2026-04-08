@@ -1,5 +1,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+:host {
+  color: var(--kirby-text-color);
+}
+
 article {
   overflow: hidden;
   padding: utils.size('s');

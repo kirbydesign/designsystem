@@ -2,7 +2,7 @@
 
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
-$border-color-selected: utils.get-color('dark');
+$border-color-selected: var(--kirby-text-color);
 
 @mixin button-reset {
   background: transparent;
@@ -31,7 +31,7 @@ $border-color-selected: utils.get-color('dark');
   button[role='tab'] {
     @include button-reset;
 
-    color: utils.get-color('black');
+    color: var(--kirby-text-color);
     box-sizing: border-box; // Ensure border is not added to button height
     padding: utils.size('s');
     font-size: utils.font-size('n');

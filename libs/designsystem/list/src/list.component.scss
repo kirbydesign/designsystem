@@ -1,8 +1,6 @@
-@use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$divider-color: utils.get-color('background-color');
 $shadow: utils.get-elevation(2);
 $item-height: utils.size('xxxl');
 
@@ -18,8 +16,8 @@ $item-height: utils.size('xxxl');
 }
 
 ion-list-header {
-  background-color: utils.get-color('white');
-  border-bottom: 1px solid $divider-color;
+  background-color: var(--kirby-surface-card-bg);
+  border-bottom: 1px solid var(--kirby-divider-color);
   padding: 0;
   text-transform: inherit;
   letter-spacing: inherit;
@@ -30,10 +28,10 @@ ion-list-header {
 }
 
 ion-item {
-  --background: #{utils.get-color('white')};
-  --background-activated: #{utils.get-color('white-shade')};
-  --background-hover: #{utils.get-color('background-color')};
-  --background-focused: #{utils.get-color('background-color')};
+  --background: var(--kirby-surface-card-bg);
+  --background-activated: var(--kirby-surface-card-input-active);
+  --background-hover: var(--kirby-surface-card-input-hover);
+  --background-focused: var(--kirby-surface-card-input-hover);
   --inner-border-width: 0;
   --ion-safe-area-right: 0;
   --min-height: #{$item-height};
@@ -50,7 +48,7 @@ ion-item {
 }
 
 ion-item-sliding {
-  @include themes.apply-white-theme;
+  @include themes.apply-card-surface;
 
   &.item-sliding-active-slide {
     // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
@@ -61,19 +59,19 @@ ion-item-sliding {
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {
     &.#{$color-name} {
-      @include themes.apply-light-theme;
+      @include themes.apply-canvas-surface;
 
-      --kirby-item-background: #{utils.get-color($color-name)};
-      --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
-      --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};
-      --kirby-item-background-hover: #{utils.get-color($color-name + '-tint')};
+      --kirby-item-background: var(--kirby-surface-canvas-bg);
+      --kirby-item-background-activated: var(--kirby-surface-canvas-input-active);
+      --kirby-item-background-focused: var(--kirby-surface-canvas-input-hover);
+      --kirby-item-background-hover: var(--kirby-surface-canvas-input-hover);
 
       ion-item {
-        --background: #{utils.get-color($color-name)};
-        --color: #{utils.get-color($color-name + '-contrast')};
-        --background-activated: #{utils.get-color($color-name + '-shade')};
-        --background-focused: #{utils.get-color($color-name + '-shade')};
-        --background-hover: #{utils.get-color($color-name + '-tint')};
+        --background: var(--kirby-surface-canvas-bg);
+        --color: var(--kirby-surface-canvas-on);
+        --background-activated: var(--kirby-surface-canvas-input-active);
+        --background-focused: var(--kirby-surface-canvas-input-hover);
+        --background-hover: var(--kirby-surface-canvas-input-hover);
       }
     }
   }
@@ -99,10 +97,10 @@ ion-item-divider {
 }
 
 .footer {
-  @include themes.apply-white-theme;
+  @include themes.apply-card-surface;
 
-  background-color: utils.get-color('white');
-  border-top: 1px solid $divider-color;
+  background-color: var(--kirby-surface-card-bg);
+  border-top: 1px solid var(--kirby-divider-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,7 +116,7 @@ ion-item-divider {
 
 .swipe-action {
   display: flex;
-  color: #{utils.get-color('black')};
+  color: var(--kirby-text-color);
   background-color: transparent;
 
   ion-item-option {
@@ -215,12 +213,12 @@ ion-item-options[side='end'] {
     border-radius: unset;
 
     --kirby-item-background: transparent;
-    --kirby-list-item-border-color: #{utils.get-color('medium')};
+    --kirby-list-item-border-color: var(--kirby-divider-color);
   }
 }
 
 :host-context(kirby-card) {
-  --kirby-list-item-border-color: #{utils.get-color('background-color')};
+  --kirby-list-item-border-color: var(--kirby-divider-color);
 }
 
 :host-context(.item-spacing) {

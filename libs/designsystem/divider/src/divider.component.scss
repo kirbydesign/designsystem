@@ -4,7 +4,7 @@ hr {
   margin-top: utils.size('xxs');
   margin-bottom: utils.size('xxs');
   border: 0;
-  border-top: 1px solid var(--kirby-divider-color, utils.get-color('medium'));
+  border-top: 1px solid var(--kirby-divider-color);
 
   &.no-margin {
     margin-top: 0;

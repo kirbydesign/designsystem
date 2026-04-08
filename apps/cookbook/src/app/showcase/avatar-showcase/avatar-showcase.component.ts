@@ -6,7 +6,7 @@ import { AvatarExampleColorsComponent } from '../../examples/avatar-example/exam
 import { AvatarExampleTextComponent } from '../../examples/avatar-example/examples/text';
 import { AvatarExampleBadgeComponent } from '../../examples/avatar-example/examples/badge';
 import { AvatarExampleImageComponent } from '../../examples/avatar-example/examples/image';
-import { AvatarExampleSizeComponent } from '../../examples/avatar-example/examples/avatar-sizes';
+import { AvatarExampleImageSizeComponent } from '../../examples/avatar-example/examples/image-sizes';
 import { AvatarExampleImageLazyLoadingComponent } from '../../examples/avatar-example/examples/image-lazy-loading';
 import { AvatarExampleImageErrorComponent } from '../../examples/avatar-example/examples/image-error';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
@@ -27,7 +27,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     AvatarExampleTextComponent,
     AvatarExampleBadgeComponent,
     AvatarExampleImageComponent,
-    AvatarExampleSizeComponent,
+    AvatarExampleImageSizeComponent,
     AvatarExampleImageLazyLoadingComponent,
     AvatarExampleImageErrorComponent,
     ApiDescriptionPropertiesComponent,

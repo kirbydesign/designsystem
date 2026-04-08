@@ -59,7 +59,7 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     --border-radius: 0;
-    --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+    --background: var(--kirby-modal-background, var(--kirby-surface-card-bg));
     --height: auto;
     --box-shadow: #{utils.get-elevation(8)};
 
@@ -154,7 +154,7 @@ ion-modal.kirby-overlay {
   }
 
   &.kirby-alert {
-    --background: #{utils.get-color('background-color')};
+    --background: var(--kirby-surface-card-bg);
     --border-radius: #{utils.border-radius('n')};
     --box-shadow: #{utils.get-elevation(8)};
     --max-width: #{utils.$alert-max-width};
@@ -163,7 +163,7 @@ ion-modal.kirby-overlay {
 }
 
 ion-modal {
-  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+  --background: var(--kirby-modal-background, var(--kirby-surface-card-bg));
 }
 
 ion-loading.kirby-loading-overlay {
