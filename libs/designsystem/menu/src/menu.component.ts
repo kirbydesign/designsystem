@@ -31,6 +31,7 @@ import {
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
+import { componentOnReady } from '@ionic/core';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -332,22 +333,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     if (!menuIsShown) {
       this.focusedIndex = -1;
       this.getTriggerButton().focus();
-      return;
     }
-
-    if (this.focusedIndex === -1) {
-      this.focusedIndex = 0;
-    }
-
-    this.focusFirstItemAfterRender();
-  }
-
-  private focusFirstItemAfterRender() {
-    requestAnimationFrame(() => {
-      if (this.kirbyItems.length > 0) {
-        this.focusItem();
-      }
-    });
   }
 
   private setUserProvidedButtonAriaAttributes() {
