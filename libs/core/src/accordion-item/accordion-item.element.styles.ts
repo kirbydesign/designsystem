@@ -58,6 +58,7 @@ export default css`
     background: none;
     box-shadow: none;
     font-family: var(--kirby-font-family);
+    line-height: normal;
     text-align: start;
   }
 
