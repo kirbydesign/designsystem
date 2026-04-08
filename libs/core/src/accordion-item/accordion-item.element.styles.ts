@@ -2,9 +2,13 @@ import { css } from 'lit';
 
 export default css`
   :host {
+    --state-layer-opacity: 0;
+    --state-layer-background-color: var(--kirby-black);
+
     display: block;
     border-bottom: 1px solid var(--kirby-divider-color);
     box-sizing: border-box;
+    position: relative;
   }
 
   :host(:first-child) {
@@ -15,9 +19,35 @@ export default css`
     --kirby-item-background: transparent;
   }
 
+  .content-layer {
+    position: relative;
+    z-index: 1;
+  }
+
+  .state-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 2;
+  }
+
+  .state-layer::before {
+    transition: all 80ms linear;
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    border-radius: inherit;
+    opacity: var(--state-layer-opacity, 0);
+    background-color: var(--state-layer-background-color, var(--kirby-black));
+  }
+
   .header {
     display: flex;
     align-items: center;
+    gap: var(--kirby-spacing-xxs);
     height: var(--kirby-spacing-xxxl);
     padding-left: var(--kirby-spacing-s);
     padding-right: var(--kirby-spacing-s);
@@ -29,7 +59,6 @@ export default css`
     box-shadow: none;
     font-family: var(--kirby-font-family);
     text-align: start;
-    transition: background var(--kirby-transition-quick);
   }
 
   .title {
@@ -70,7 +99,7 @@ export default css`
   }
 
   button[disabled] .kirby-icon {
-    color: var(--kirby-color-semi-dark, #8e8e8e);
+    color: var(--kirby-semi-dark);
   }
 
   button[disabled] .title {
@@ -78,7 +107,7 @@ export default css`
   }
 
   button {
-    color: var(--kirby-color-black);
+    color: var(--kirby-text-color-black);
   }
 
   button[aria-expanded='true'] .title {
@@ -95,16 +124,44 @@ export default css`
     cursor: default;
   }
 
+  :host(.in-card) {
+    border-color: var(--kirby-background-color);
+  }
+
+  :host(.in-card:first-child) {
+    border-top: none;
+  }
+
+  :host(.in-card:last-child) {
+    border-bottom: none;
+  }
+
   @media (hover: hover) {
-    .header:hover,
-    .content-layer:hover {
-      background: var(--kirby-background-color-hover, #f0f0f0);
+    .header:hover {
+      --state-layer-opacity: 0.04;
       cursor: pointer;
     }
+
+    .content-layer:hover {
+      cursor: pointer;
+    }
+
     .header[disabled]:hover,
     .content-layer[aria-disabled='true']:hover {
-      background: none;
+      --state-layer-opacity: 0;
       cursor: default;
+    }
+  }
+
+  .header:active {
+    --state-layer-opacity: 0.08;
+  }
+
+  @media (pointer: fine) {
+    .header:focus-visible {
+      --state-layer-opacity: 0.04;
+      box-shadow: none;
+      outline: 0;
     }
   }
 `;
