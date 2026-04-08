@@ -35,7 +35,12 @@ $outside-slot-width: utils.relative-size('s');
 }
 
 ion-item {
-  @include interaction-state.apply-focus-visible-background('xxxs');
+  &::part(native):focus-visible {
+    box-shadow:
+      0 0 0 2px utils.$focus-ring-color inset,
+      0 0 0 4px utils.get-color('white') inset;
+  }
+
   @include interaction-state.apply-hover-ionic('xxxs');
   @include interaction-state.apply-active-ionic('xxs');
 
@@ -179,33 +184,32 @@ ion-item {
   }
 }
 
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.shape-rounded .is-single) {
-  ion-item {
-    --border-radius: #{utils.border-radius('n')};
+:host-context(kirby-list-item:first-of-type),
+:host-context(kirby-card):first-child {
+  ion-item::part(native) {
+    border-top-left-radius: utils.border-radius('n');
+    border-top-right-radius: utils.border-radius('n');
   }
 }
 
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.has-header .is-single) {
+:host-context(kirby-list-item:last-of-type),
+:host-context(kirby-card):last-child {
+  ion-item::part(native) {
+    border-bottom-left-radius: utils.border-radius('n');
+    border-bottom-right-radius: utils.border-radius('n');
+  }
+}
+
+:host-context(.has-header kirby-list-item:first-of-type) {
   ion-item::part(native) {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 }
 
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.has-footer .is-single) {
+:host-context(.has-footer kirby-list-item:last-of-type) {
   ion-item::part(native) {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-  }
-}
-
-// Fixes https://github.com/kirbydesign/designsystem/issues/1711
-:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
-  ion-item::part(native) {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
   }
 }
