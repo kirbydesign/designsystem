@@ -11,7 +11,7 @@ export default css`
     position: relative;
   }
 
-  :host(:first-child) {
+  :host(:first-child:not(.in-card)) {
     border-top: 1px solid var(--kirby-divider-color);
   }
 
