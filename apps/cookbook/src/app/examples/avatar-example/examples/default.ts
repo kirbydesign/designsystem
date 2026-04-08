@@ -4,19 +4,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-avatar-example-default',
-  template: `<kirby-avatar size="xs">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar size="sm">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar size="md">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar size="lg">
+  template: `<kirby-avatar>
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>`,
 };
