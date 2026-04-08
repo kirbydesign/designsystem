@@ -38,20 +38,19 @@ $badge-diameter: utils.$avatar-badge-size;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: utils.get-color('white');
-  color: utils.get-color('light-contrast');
+  background-color: var(--kirby-surface-card-bg);
+  color: var(--kirby-surface-card-on);
 
   // default to icon size 'sm'
   --kirby-icon-font-size: #{utils.icon-font-size('sm')};
 
   &.stroke {
-    border: 1px solid utils.get-color('semi-light');
+    border: 1px solid var(--kirby-divider-color);
   }
 
   &.overlay::before {
     content: '';
-    background-color: utils.get-color('black');
-    opacity: 0.05;
+    background-color: color-mix(in srgb, transparent, var(--kirby-text-color) 5%);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -133,20 +132,21 @@ $badge-diameter: utils.$avatar-badge-size;
   }
 }
 
-@each $color-name,
-  $color-value
-    in map.merge(
-      utils.$main-colors,
-      (
-        'white': utils.get-color('white'),
-        'semi-light': utils.get-color('semi-light'),
-      )
-    )
-{
+@each $color-name, $color-value in utils.$main-colors {
   :host(.#{$color-name}) {
     .avatar {
       background-color: utils.get-color($color-name);
       color: utils.get-color($color-name + '-contrast');
     }
   }
+}
+
+:host(.white) .avatar {
+  background-color: var(--kirby-surface-card-bg);
+  color: var(--kirby-surface-card-on);
+}
+
+:host(.semi-light) .avatar {
+  background-color: var(--kirby-surface-canvas-bg);
+  color: var(--kirby-surface-canvas-on);
 }

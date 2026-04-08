@@ -11,12 +11,13 @@
 @use 'components/grid';
 @use 'components/overlays';
 @use 'themes/component-themes';
+@use 'themes/theme-modes';  // Add this line
 
 :root,
 :host {
   font-family: var(--kirby-font-family);
   @include design-tokens.all;
-  @include component-themes.apply-light-theme;
+  @include component-themes.apply-canvas-surface;
 
   --kirby-page-max-width: 1366px;
   --kirby-statusbar-padding: var(--ion-statusbar-padding);

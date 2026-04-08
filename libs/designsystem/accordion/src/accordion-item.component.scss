@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$divider-color: utils.get-color('medium');
+$divider-color: var(--kirby-divider-color);
 $padding: utils.size('s');
 
 :host {
@@ -70,17 +70,17 @@ button[disabled] {
   pointer-events: none;
 
   .kirby-icon {
-    color: utils.get-color('semi-dark');
+    color: var(--kirby-text-color-secondary);
   }
 
   .title {
-    color: utils.get-text-color('semi-dark');
+    color: var(--kirby-text-color-secondary);
   }
 }
 
 button {
   // Enforce button text color to avoid inheriting native button color from browser
-  color: utils.get-text-color('black');
+  color: var(--kirby-text-color);
 }
 
 button[aria-expanded='true'] {
@@ -100,7 +100,7 @@ button[aria-expanded='true'] {
 }
 
 :host-context(kirby-card) {
-  border-color: utils.get-color('background-color');
+  border-color: var(--kirby-divider-color);
 
   &:first-child {
     border-top: none;

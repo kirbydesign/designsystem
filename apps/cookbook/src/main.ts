@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
+import { ThemeService } from '@kirbydesign/core';
 import { environment } from './environments/environment';
 
 import { AppComponent } from './app/app.component';
@@ -46,6 +47,8 @@ bootstrapApplication(AppComponent, {
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideAppInitializer(() => {
       const iconRegistry = inject(IconRegistryService);
+      inject(ThemeService); // This line ensures it initializes
+
       iconRegistry.addIcons([
         {
           name: 'football',

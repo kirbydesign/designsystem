@@ -5,4 +5,5 @@
 :host {
   display: block;
   padding: utils.size('m') utils.size('s');
+  color: var(--kirby-modal-color, var(--kirby-text-color));
 }

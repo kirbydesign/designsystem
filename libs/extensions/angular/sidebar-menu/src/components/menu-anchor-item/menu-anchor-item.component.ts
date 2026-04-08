@@ -24,6 +24,7 @@ type ViewModel = {
   styleUrls: ['./menu-anchor-item.component.scss'],
   host: {
     '[class.selected]': 'vm.isSelected()',
+    '[class.checked]': 'vm.isChecked()',
     '[class.has-toggle]': '!!vm.item().toggle',
     '[class.has-badge]': '!!vm.item().badge',
   },

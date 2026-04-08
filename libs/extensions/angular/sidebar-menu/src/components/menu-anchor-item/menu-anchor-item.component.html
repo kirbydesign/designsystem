@@ -25,7 +25,7 @@
         <kirby-icon name="link" slot="end" class="external-link"></kirby-icon>
       }
       @if (item.toggle) {
-        <div slot="end" class="toggle-spacer"></div>
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
     </a>
   }
@@ -54,7 +54,7 @@
         </kirby-badge>
       }
       @if (item.toggle) {
-        <div slot="end" class="toggle-spacer"></div>
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
     </a>
   }
@@ -82,7 +82,7 @@
       }
       <kirby-icon name="link" slot="end" class="external-link"></kirby-icon>
       @if (item.toggle) {
-        <div slot="end" class="toggle-spacer"></div>
+        <div slot="end" class="toggle-spacer" [class.unchecked]="!vm.isChecked()"></div>
       }
     </a>
   }
@@ -101,7 +101,7 @@
       attentionLevel="3"
       tabindex="-1"
       [noDecoration]="true"
-      class="toggle-button"
+      class="toggle-button toggle-button-unchecked"
     >
       <kirby-icon size="xs" [name]="item.toggle.uncheckedIcon"></kirby-icon>
     </button>
@@ -112,7 +112,7 @@
       attentionLevel="3"
       tabindex="-1"
       [noDecoration]="true"
-      class="toggle-button"
+      class="toggle-button toggle-button-checked"
     >
       <kirby-icon size="xs" [name]="item.toggle.checkedIcon"></kirby-icon>
     </button>

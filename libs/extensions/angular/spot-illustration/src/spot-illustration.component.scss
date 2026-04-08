@@ -21,23 +21,23 @@
 }
 
 :host-context(.kirby-color-brightness-dark) {
-  --kirby-x-spot-illustration-background-color: var(--kirby-white-overlay);
-  --kirby-x-spot-illustration-outline-color: var(--kirby-white);
+  --kirby-x-spot-illustration-background-color: var(--kirby-surface-highlight-input-bg);
+  --kirby-x-spot-illustration-outline-color: var(--kirby-surface-highlight-on);
   --kirby-x-spot-illustration-highlight-color: var(--kirby-primary);
 }
 
 :host-context(.kirby-color-brightness-white) {
-  --kirby-x-spot-illustration-background-color: var(--kirby-dark-overlay);
-  --kirby-x-spot-illustration-outline-color: var(--kirby-black);
+  --kirby-x-spot-illustration-background-color: var(--kirby-surface-card-input-bg);
+  --kirby-x-spot-illustration-outline-color: var(--kirby-surface-card-on);
   --kirby-x-spot-illustration-highlight-color: var(--kirby-primary);
 }
 
 ion-icon::part(background) {
-  fill: var(--kirby-x-spot-illustration-background-color, var(--kirby-dark-overlay));
+  fill: var(--kirby-x-spot-illustration-background-color, var(--kirby-surface-card-input-bg));
 }
 
 ion-icon::part(outline) {
-  fill: var(--kirby-x-spot-illustration-outline-color, var(--kirby-black));
+  fill: var(--kirby-x-spot-illustration-outline-color, var(--kirby-text-color));
 }
 
 ion-icon::part(highlight) {

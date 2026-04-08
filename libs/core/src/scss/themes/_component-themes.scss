@@ -1,40 +1,43 @@
+// This file should be renamed to something like surface-context. It does not actually describe a theme, but moreso a context for what surface the UI is currently on.
+
 @use 'sass:color';
 @use '../utils';
 @use '../interaction-state';
 
-@mixin apply-dark-theme {
-  --kirby-inputs-background-color: var(--kirby-white-overlay);
-  --kirby-inputs-background-color-hover: var(--kirby-white-overlay-30);
-  --kirby-inputs-background-color-active: var(--kirby-white-overlay-40);
-  --kirby-inputs-color: var(--kirby-white);
-  --kirby-inputs-indicator-background-color: var(--kirby-white);
-  --kirby-inputs-indicator-color: var(--kirby-black);
-  --kirby-inputs-placeholder-color: var(--kirby-white-overlay-50);
+// Highlight surface: high-contrast, adapts to theme
+@mixin apply-highlight-surface {
+  --kirby-inputs-background-color: var(--kirby-surface-highlight-input-bg);
+  --kirby-inputs-background-color-hover: var(--kirby-surface-highlight-input-hover);
+  --kirby-inputs-background-color-active: var(--kirby-surface-highlight-input-active);
+  --kirby-inputs-color: var(--kirby-surface-highlight-on);
+  --kirby-inputs-indicator-background-color: var(--kirby-surface-highlight-on);
+  --kirby-inputs-indicator-color: var(--kirby-surface-highlight-bg);
+  --kirby-inputs-placeholder-color: rgba(255, 255, 255, 0.5);  // Adjust as needed
   --kirby-inputs-elevation: none;
 }
 
-@mixin apply-white-theme {
-  --kirby-inputs-background-color: var(--kirby-dark-overlay);
-  --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
-  --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
-  --kirby-inputs-color: var(--kirby-black);
-  --kirby-inputs-indicator-background-color: var(--kirby-black);
-  --kirby-inputs-indicator-color: var(--kirby-white);
-  --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
-  --kirby-inputs-elevation: none;
-  --kirby-divider-color: #{utils.get-color('background-color')};
-}
-
-@mixin apply-light-theme {
-  --kirby-inputs-background-color: var(--kirby-white);
-  --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
-  --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
-  --kirby-inputs-color: var(--kirby-black);
-  --kirby-inputs-indicator-background-color: var(--kirby-black);
-  --kirby-inputs-indicator-color: var(--kirby-white);
-  --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
-  --kirby-divider-color: #{utils.get-color('medium')};
-
-  // Only set elevation on input components for light theme
+// Card surface: primary surface
+@mixin apply-card-surface {
+  --kirby-inputs-background-color: var(--kirby-surface-canvas-input-bg);
+  --kirby-inputs-background-color-hover: var(--kirby-surface-card-input-hover);
+  --kirby-inputs-background-color-active: var(--kirby-surface-card-input-active);
+  --kirby-inputs-color: var(--kirby-surface-card-on);
+  --kirby-inputs-indicator-background-color: var(--kirby-surface-card-on);
+  --kirby-inputs-indicator-color: var(--kirby-surface-card-bg);
+  --kirby-inputs-placeholder-color: var(--kirby-surface-card-on);
+  --kirby-divider-color: var(--kirby-surface-card-divider);
   --kirby-inputs-elevation: var(--kirby-elevation-2);
+}
+
+// Canvas surface: neutral background
+@mixin apply-canvas-surface {
+  --kirby-inputs-background-color: var(--kirby-surface-card-input-bg);
+  --kirby-inputs-background-color-hover: var(--kirby-surface-canvas-input-hover);
+  --kirby-inputs-background-color-active: var(--kirby-surface-canvas-input-active);
+  --kirby-inputs-color: var(--kirby-surface-canvas-on);
+  --kirby-inputs-indicator-background-color: var(--kirby-surface-canvas-on);
+  --kirby-inputs-indicator-color: var(--kirby-surface-canvas-bg);
+  --kirby-inputs-placeholder-color: var(--kirby-surface-canvas-on);
+  --kirby-divider-color: var(--kirby-surface-canvas-divider);
+  --kirby-inputs-elevation: none;
 }

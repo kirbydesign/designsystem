@@ -47,11 +47,11 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   &[disabled] {
-    color: #{utils.get-text-color('semi-dark')};
+    color: var(--kirby-text-color-secondary);
 
     ion-toggle {
-      --color: #{utils.get-color('medium')};
-      --color-checked: #{utils.get-color('medium')};
+      --color: var(--kirby-divider-color);
+      --color-checked: var(--kirby-divider-color);
 
       opacity: 1; // Reset Ionic disabled style for label
 
@@ -75,28 +75,26 @@ ion-toggle {
     outline: none;
   }
 
-  $background: 'semi-dark';
   $background-checked: 'success';
-  $handle-background: 'white';
 
   @include interaction-state.apply-hover {
     // Not checked
-    --track-background: #{interaction-state.get-state-color($background, 's')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxxs')};
+    --track-background: var(--kirby-divider-color);
+    --handle-background: var(--kirby-surface-card-bg);
 
     // Checked
     --track-background-checked: #{interaction-state.get-state-color($background-checked, 's')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxxs')};
+    --handle-background-checked: var(--kirby-surface-card-bg);
   }
 
   @include interaction-state.apply-active {
     // Not checked
-    --track-background: #{interaction-state.get-state-color($background, 'l')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxs')};
+    --track-background: var(--kirby-divider-color);
+    --handle-background: var(--kirby-surface-card-bg);
 
     // Checked
     --track-background-checked: #{interaction-state.get-state-color($background-checked, 'l')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxs')};
+    --handle-background-checked: var(--kirby-surface-card-bg);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -104,12 +102,12 @@ ion-toggle {
   /* stylelint-disable no-duplicate-selectors */
   & {
     // Not checked
-    --track-background: #{utils.get-color($background)};
-    --handle-background: #{utils.get-color($handle-background)};
+    --track-background: var(--kirby-divider-color);
+    --handle-background: var(--kirby-surface-card-bg);
 
     // Checked
     --track-background-checked: #{utils.get-color($background-checked)};
-    --handle-background-checked: #{utils.get-color($handle-background)};
+    --handle-background-checked: var(--kirby-surface-card-bg);
     --handle-transition: #{utils.get-transition-duration('quick')};
     --handle-box-shadow: #{utils.get-elevation(2)};
 

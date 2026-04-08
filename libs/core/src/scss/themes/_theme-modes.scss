@@ -1,0 +1,94 @@
+@use 'sass:map';
+@use './colors';
+
+.kirby-theme-light {
+  //Base
+  --kirby-text-color: #{map.get(colors.$gray, 950)};
+  --kirby-text-color-secondary: #{map.get(colors.$gray, 700)};
+  --kirby-text-background-color-highlight: #{map.get(colors.$gray, 200)};
+  --kirby-text-background-color-hightlight: var(--kirby-text-background-color-highlight);
+  // Used for hover/active state overlays in light mode.
+  // Kept intentionally subtle to avoid overly dark hover treatments.
+  --kirby-state-layer-color: #{map.get(colors.$gray, 500)};
+  --kirby-state-layer-color-inverse: #{map.get(colors.$gray, 50)};
+
+  // Card surface: white background
+  --kirby-surface-card-bg: #{map.get(colors.$gray, 50)};
+  --kirby-surface-card-on: #{map.get(colors.$gray, 950)};
+  --kirby-surface-card-border: #{map.get(colors.$gray, 400)};
+  --kirby-surface-card-input-bg: var(--kirby-surface-card-bg);
+  --kirby-surface-card-input-hover: color-mix(
+    in srgb,
+    var(--kirby-surface-card-bg),
+    var(--kirby-state-layer-color) 6%
+  );
+  --kirby-surface-card-input-active: color-mix(
+    in srgb,
+    var(--kirby-surface-card-bg),
+    var(--kirby-state-layer-color) 10%
+  );
+  --kirby-surface-card-divider: #{map.get(colors.$gray, 200)};
+
+  // Canvas surface: light gray background
+  --kirby-surface-canvas-bg: #{map.get(colors.$gray, 100)};
+  --kirby-surface-canvas-on: #{map.get(colors.$gray, 950)};
+  --kirby-surface-canvas-border: #{map.get(colors.$gray, 400)};
+  --kirby-surface-canvas-input-bg: var(--kirby-surface-canvas-bg);
+  --kirby-surface-canvas-input-hover: color-mix(
+    in srgb,
+    var(--kirby-surface-canvas-bg),
+    var(--kirby-state-layer-color) 8%
+  );
+  --kirby-surface-canvas-input-active: color-mix(
+    in srgb,
+    var(--kirby-surface-canvas-bg),
+    var(--kirby-state-layer-color) 12%
+  );
+  --kirby-surface-canvas-divider: #{map.get(colors.$gray, 400)};
+
+  // Highlight surface: dark gray background (for contrast/highlight)
+  --kirby-surface-highlight-bg: #{map.get(colors.$gray, 800)};
+  --kirby-surface-highlight-on: #{map.get(colors.$gray, 50)};
+  --kirby-surface-highlight-border: #{map.get(colors.$gray, 700)};
+  --kirby-surface-highlight-input-bg: rgba(255, 255, 255, 0.15);  // semi-transparent white
+  --kirby-surface-highlight-input-hover: rgba(255, 255, 255, 0.3);
+  --kirby-surface-highlight-input-active: rgba(255, 255, 255, 0.4);
+  --kirby-surface-highlight-divider: #{map.get(colors.$gray, 700)};
+}
+
+.kirby-theme-dark {
+  //Base
+  --kirby-text-color: #{map.get(colors.$gray, 50)};
+  --kirby-text-color-secondary: #{map.get(colors.$gray, 300)};
+  --kirby-text-background-color-highlight: #{map.get(colors.$gray, 700)};
+  --kirby-text-background-color-hightlight: var(--kirby-text-background-color-highlight);
+  --kirby-state-layer-color: #{map.get(colors.$gray, 50)};
+  --kirby-state-layer-color-inverse: #{map.get(colors.$gray, 950)};
+
+  // Card surface: black background
+  --kirby-surface-card-bg: #{map.get(colors.$gray, 950)};
+  --kirby-surface-card-on: #{map.get(colors.$gray, 50)};
+  --kirby-surface-card-border: #{map.get(colors.$gray, 800)};
+  --kirby-surface-card-input-bg: var(--kirby-surface-card-bg);
+  --kirby-surface-card-input-hover: #{map.get(colors.$gray, 800)};
+  --kirby-surface-card-input-active: #{map.get(colors.$gray, 700)};
+  --kirby-surface-card-divider: #{map.get(colors.$gray, 700)};
+
+  // Canvas surface: very dark gray background
+  --kirby-surface-canvas-bg: #{map.get(colors.$gray, 900)};
+  --kirby-surface-canvas-on: #{map.get(colors.$gray, 50)};
+  --kirby-surface-canvas-border: #{map.get(colors.$gray, 800)};
+  --kirby-surface-canvas-input-bg: var(--kirby-surface-canvas-bg);
+  --kirby-surface-canvas-input-hover: #{map.get(colors.$gray, 800)};
+  --kirby-surface-canvas-input-active: #{map.get(colors.$gray, 700)};
+  --kirby-surface-canvas-divider: #{map.get(colors.$gray, 800)};
+
+  // Highlight surface: medium gray (lighter than canvas for contrast)
+  --kirby-surface-highlight-bg: #{map.get(colors.$gray, 700)};
+  --kirby-surface-highlight-on: #{map.get(colors.$gray, 50)};
+  --kirby-surface-highlight-border: #{map.get(colors.$gray, 500)};
+  --kirby-surface-highlight-input-bg: #{map.get(colors.$gray, 700)};
+  --kirby-surface-highlight-input-hover: #{map.get(colors.$gray, 800)};
+  --kirby-surface-highlight-input-active: #{map.get(colors.$gray, 900)};
+  --kirby-surface-highlight-divider: #{map.get(colors.$gray, 500)};
+}

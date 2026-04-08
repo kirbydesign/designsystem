@@ -18,8 +18,8 @@
 :host {
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
-  color: var(--kirby-flag-color, utils.get-color('white-contrast'));
-  border: 1px solid var(--kirby-flag-border-color, utils.get-color('medium'));
+  color: var(--kirby-flag-color, var(--kirby-text-color));
+  border: 1px solid var(--kirby-flag-border-color, var(--kirby-divider-color));
   border-radius: utils.border-radius('xs');
   font-size: utils.font-size('n');
   padding: utils.size('xxxxs') utils.size('xxs');
@@ -52,9 +52,9 @@
   }
 
   &.semi-light {
-    --kirby-flag-background-color: #{utils.get-color('semi-light')};
+    --kirby-flag-background-color: var(--kirby-surface-canvas-bg);
   }
 
   --kirby-flag-border-color: var(--kirby-flag-background-color);
-  --kirby-flag-color: #{utils.get-color('black')};
+  --kirby-flag-color: var(--kirby-text-color);
 }

@@ -107,6 +107,25 @@ $system-colors: (
   'dark-overlay': rgb(28 28 28 / 6%),
   'black': #1c1c1c,
 ) !default;
+
+// This is the new 2026 color system:
+
+$gray: (
+  50: #ffffff,
+  100: #f6f6f6, 
+  200: #d9d9d9, 
+  300: #bcbcbc,
+  400: #a3a3a3,
+  500: #737373,
+  600: #525252,
+  700: #404040,
+  800: #363636, 
+  900: #212121, 
+  950: #0a0a0a
+) !default;
+
+// END of NEW color system
+
 $text-colors: (
   'white': #fff,
   'semi-dark': #707070,

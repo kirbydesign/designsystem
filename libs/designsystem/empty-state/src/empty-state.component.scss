@@ -20,12 +20,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: utils.size('xxxs') solid utils.get-color('medium');
+  border: utils.size('xxxs') solid var(--kirby-divider-color);
   border-radius: utils.border-radius('circle');
 }
 
 kirby-icon {
-  color: utils.get-color('medium');
+  color: var(--kirby-text-color-secondary);
 }
 
 .title {

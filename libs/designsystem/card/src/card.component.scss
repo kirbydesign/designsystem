@@ -2,22 +2,22 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$default-border-outline: 1px solid utils.get-color('medium');
+$default-border-outline: 1px solid var(--kirby-surface-card-divider);
 
 :host {
-  --kirby-card-main-background-color: #{utils.get-color('white')};
-  --kirby-card-main-color: #{utils.get-color('white-contrast')};
-  --kirby-card-footer-background-color: #{utils.get-color('white')};
-  --kirby-card-footer-color: #{utils.get-color('white-contrast')};
+--kirby-card-main-background-color: var(--kirby-surface-card-bg);
+--kirby-card-main-color: var(--kirby-surface-card-on);
+--kirby-card-footer-background-color: var(--kirby-surface-card-bg);
+--kirby-card-footer-color: var(--kirby-surface-card-on);
 
-  @include themes.apply-white-theme;
+  @include themes.apply-canvas-surface;
 
   &.kirby-color-brightness-light {
-    @include themes.apply-light-theme;
+    @include themes.apply-card-surface;
   }
 
   &.kirby-color-brightness-dark {
-    @include themes.apply-dark-theme;
+    @include themes.apply-highlight-surface;
 
     &[role='button'] {
       @include interaction-state.apply-hover('xxs', $make-lighter: true);
@@ -60,6 +60,7 @@ $default-border-outline: 1px solid utils.get-color('medium');
 
   &.outlined {
     background-color: transparent;
+    color: var(--kirby-text-color);
     border: var(--kirby-card-border, $default-border-outline);
     box-shadow: none;
 

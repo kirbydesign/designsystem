@@ -22,7 +22,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
 @mixin item-typography() {
   @include utils.slotted(item-typography.$slotted-text-elements) {
-    color: utils.get-text-color('black');
+    color: var(--kirby-text-color);
     display: block;
     margin: 0;
     white-space: nowrap;
@@ -53,7 +53,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   }
 
   @include utils.slotted('[detail]', '.kirby-item-detail') {
-    color: utils.get-text-color('semi-dark');
+    color: var(--kirby-text-color-secondary);
   }
 
   @include utils.slotted('[wrap]', '.kirby-item-wrap') {

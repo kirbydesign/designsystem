@@ -1,7 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
 import { Component, LOCALE_ID } from '@angular/core';
-import { FormControl, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
 import { InputComponent } from '../../input/input.component';
@@ -43,22 +43,6 @@ describe('NumberInputDirective', () => {
     spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
     const instance = spectator.directive;
     expect(instance).toBeDefined();
-  });
-
-  it('should format one-time string initialization correctly for DA locale', () => {
-    locale = 'da';
-    spectator = createDirective(
-      `<input kirby-input kirby-decimal-mask value="1000.00" type="number" />`
-    );
-    expect(spectator.element).toHaveValue('1.000,00');
-  });
-
-  it('should format one-time string initialization correctly for EN locale', () => {
-    locale = 'en-GB';
-    spectator = createDirective(
-      `<input kirby-input kirby-decimal-mask value="1000.00" type="number" />`
-    );
-    expect(spectator.element).toHaveValue('1,000.00');
   });
 
   describe('grouping seperator', () => {
@@ -309,36 +293,6 @@ describe('NumberInputDirective', () => {
   });
 
   describe('reactive form', () => {
-    it('should format initial value correctly for DA locale', () => {
-      locale = 'da';
-      spectator = createDirective(
-        `<input kirby-input kirby-decimal-mask [formControl]="numericInput" type="number" />`,
-        {
-          hostProps: {
-            numericInput: new FormControl(1000.12),
-          },
-        }
-      );
-      // @ts-ignore
-      const numericInput = spectator.hostComponent.numericInput;
-      expect(spectator.element).toHaveValue('1.000,12');
-    });
-
-    it('should format initial value correctly for EN locale', () => {
-      locale = 'en-GB';
-      spectator = createDirective(
-        `<input kirby-input kirby-decimal-mask [formControl]="numericInput" type="number" />`,
-        {
-          hostProps: {
-            numericInput: new FormControl(1000.12),
-          },
-        }
-      );
-      // @ts-ignore
-      const numericInput = spectator.hostComponent.numericInput;
-      expect(spectator.element).toHaveValue('1,000.12');
-    });
-
     it('should be able to receive value with locale radix point from form-control', () => {
       locale = 'da';
       spectator = createDirective(

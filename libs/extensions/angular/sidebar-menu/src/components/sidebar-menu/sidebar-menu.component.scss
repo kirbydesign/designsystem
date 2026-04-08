@@ -3,7 +3,7 @@
 @use 'sass:color';
 
 :host {
-  @include themes.apply-dark-theme;
+  @include themes.apply-highlight-surface;
 
   height: 100%; // Fallback for browsers that do not support dynamic viewport units
   height: 100dvh;
@@ -15,7 +15,7 @@
 
   * {
     scrollbar-width: thin;
-    scrollbar-color: utils.get-color('semi-dark') utils.get-color('tertiary');
+    scrollbar-color: var(--kirby-text-color-secondary) var(--kirby-surface-highlight-bg);
   }
 
   /* Works on Chrome, Edge, and Safari */
@@ -29,7 +29,7 @@
 
   /* get kirby color with 50% opacity */
   *::-webkit-scrollbar-thumb {
-    background-color: color.adjust(utils.get-color('semi-dark', $getValueOnly: true), $alpha: -0.5);
+    background-color: color-mix(in srgb, transparent, var(--kirby-text-color-secondary) 50%);
     border-radius: 20px;
     border: 4px solid transparent;
     background-clip: content-box;
@@ -58,11 +58,11 @@
 }
 
 .sidebar-header.bottom-border {
-  box-shadow: 0 4px 10px 2px rgb(28 28 28 / 30%);
+  box-shadow: 0 4px 10px 2px color-mix(in srgb, transparent, var(--kirby-text-color) 30%);
   transition: opacity 0.3s;
 }
 
 .sidebar-footer.top-border {
-  box-shadow: 0 -4px 10px 2px rgb(28 28 28 / 30%);
+  box-shadow: 0 -4px 10px 2px color-mix(in srgb, transparent, var(--kirby-text-color) 30%);
   transition: opacity 0.3s;
 }

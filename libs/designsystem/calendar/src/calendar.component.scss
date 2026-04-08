@@ -30,7 +30,7 @@ td {
 
 th {
   height: 50px;
-  border-bottom: 1px solid utils.get-color('background-color');
+  border-bottom: 1px solid var(--kirby-divider-color);
 }
 
 .header,
@@ -104,14 +104,15 @@ button[aria-disabled='true'] {
 }
 
 .day.selectable:not(.current-month, .selected) {
-  color: #{utils.get-text-color('semi-dark')};
+  color: var(--kirby-text-color-secondary);
 }
 
 .day.today {
-  border: 1px solid utils.get-color('semi-dark');
+  color: var(--kirby-text-color);
+  background-color: var(--kirby-inputs-background-color-hover);
 }
 
 .day.selected {
-  color: utils.get-color('black-contrast');
-  background-color: utils.get-color('black');
+  color: var(--kirby-surface-highlight-on);
+  background-color: var(--kirby-surface-highlight-bg);
 }

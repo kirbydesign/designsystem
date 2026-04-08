@@ -1,8 +1,9 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
 :host {
   grid-area: footer;
-  background-color: utils.get-color('white');
+  background-color: var(--kirby-surface-card-bg);
   text-align: center;
   padding: utils.size('xl') 0;
 

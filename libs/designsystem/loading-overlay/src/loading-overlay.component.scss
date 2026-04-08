@@ -22,14 +22,15 @@
     place-items: center;
 
     &.backdrop {
-      background-color: rgba(
-        utils.get-color('background-color', $getValueOnly: true),
-        utils.$loading-overlay-backdrop-opacity
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--kirby-surface-canvas-bg) 70%
       );
     }
 
     &.hide-content {
-      background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
+      background-color: var(--kirby-surface-canvas-bg);
     }
 
     .spinner {
