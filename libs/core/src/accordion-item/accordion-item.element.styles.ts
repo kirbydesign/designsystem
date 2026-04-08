@@ -66,7 +66,6 @@ export default css`
     flex-grow: 2;
     display: flex;
     font-size: var(--kirby-font-size-n);
-    line-height: var(--kirby-line-height-n);
   }
 
   kirby-icon-element {
