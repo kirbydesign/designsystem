@@ -35,7 +35,6 @@
     "generate-angular-proxies": "npx tsx tools/generate-proxies/generate-angular-proxies.ts",
     "generate-design-tokens": "sass libs/core/src/scss/themes/design-tokens.scss libs/core/src/scss/themes/design-tokens.css --no-source-map",
     "generate-docs-import-map": "nx build designsystem && node ./scripts/generate-docs-import-map.js",
-    "check:semantic-tokens": "node ./scripts/check-semantic-tokens.mjs",
     "nx": "nx"
   },
   "devDependencies": {
