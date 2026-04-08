@@ -7,22 +7,28 @@ import {
   ListSectionHeaderDirective,
 } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
+import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const template = `<kirby-list
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
-  <kirby-list-section-header
+  <kirby-section-header
     *kirbyListSectionHeader="let section"
-    [title]="section">
-  </kirby-list-section-header>
-  <kirby-item 
-    *kirbyListItemTemplate="let item" 
+    >
+    <kirby-label>
+      <h3 heading>Section Header</h3>
+      <p label>Label</p>
+    </kirby-label>
+    <p detail slot="end">Detail in end-slot</p>
+  </kirby-section-header>
+  <kirby-item
+    *kirbyListItemTemplate="let item"
     [selectable]="true">
     <kirby-label>
       <p class="kirby-item-title">{{ item.title }}</p>
-      <data [value]="item.detail" 
+      <data [value]="item.detail"
       class="kirby-item-detail">
       {{ item.detail }}</data>
     </kirby-label>
@@ -42,6 +48,8 @@ export const template = `<kirby-list
     LabelComponent,
     ListSectionHeaderComponent,
     ListSectionHeaderDirective,
+    SectionHeaderComponent,
+    LabelComponent,
     ListItemTemplateDirective,
   ],
 })

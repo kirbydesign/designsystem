@@ -43,11 +43,9 @@
   @for (section of _groupedItems; track sectionTrackBy($index, section)) {
     <ion-item-group [ngClass]="standAloneClass()">
       @if (_isSectionsEnabled) {
-        <ion-item-divider>
-          <ng-container
-            *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
-          ></ng-container>
-        </ion-item-divider>
+        <ng-container
+          *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
+        ></ng-container>
       }
       @if (_isSectionsEnabled && _isStandAloneEnabled) {
         @for (list of section.lists; track list) {
