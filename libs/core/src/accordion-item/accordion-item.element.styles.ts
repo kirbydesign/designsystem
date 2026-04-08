@@ -58,7 +58,6 @@ export default css`
     background: none;
     box-shadow: none;
     font-family: var(--kirby-font-family);
-    font-size: inherit;
     text-align: start;
   }
 
