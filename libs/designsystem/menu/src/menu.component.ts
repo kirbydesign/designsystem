@@ -322,7 +322,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     } else {
       const nativeButton = ionItem.shadowRoot?.querySelector('button');
       if (nativeButton) {
-        nativeButton.setAttribute('role', 'menuitem');
+        this.renderer.setAttribute(nativeButton, 'role', 'menuitem');
       }
     }
   }
