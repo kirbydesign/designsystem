@@ -93,7 +93,7 @@ export default css`
     visibility: visible;
   }
 
-  .content-body.padding {
+  :host([haspadding]) .content-body {
     padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-s);
   }
 

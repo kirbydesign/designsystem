@@ -1,6 +1,5 @@
 import { CSSResultGroup, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import KirbyElement from '../internal/kirby-element';
 import baseStyles from '../styles/element.base.styles';
 import styles from './accordion-item.element.styles';
@@ -99,7 +98,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
           </button>
         </div>
         <div class="content" role="region" aria-labelledby=${this._titleId} id=${this._contentId}>
-          <div class="content-body ${classMap({ padding: this.hasPadding })}">
+          <div class="content-body">
             <slot></slot>
           </div>
         </div>
