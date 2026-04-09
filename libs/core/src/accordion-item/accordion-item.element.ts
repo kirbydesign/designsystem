@@ -98,13 +98,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
             </span>
           </button>
         </div>
-        <div
-          class="content"
-          role="region"
-          aria-labelledby=${this._titleId}
-          id=${this._contentId}
-          ?expanded=${this.isExpanded}
-        >
+        <div class="content" role="region" aria-labelledby=${this._titleId} id=${this._contentId}>
           <div class=${classMap({ 'content-body': true, padding: this.hasPadding })}>
             <slot></slot>
           </div>

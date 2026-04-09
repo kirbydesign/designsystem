@@ -88,7 +88,7 @@ export default css`
     cursor: default;
   }
 
-  .content[expanded] {
+  :host([isexpanded]) .content {
     height: auto;
     visibility: visible;
   }
