@@ -75,7 +75,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
 
   render() {
     return html`
-      <div class="content-layer" aria-disabled=${this.isDisabled ? 'true' : 'false'}>
+      <div class="content-layer" aria-disabled=${this.isDisabled}>
         <div
           aria-level=${this.headingLevel ?? nothing}
           role=${this.headingLevel ? 'heading' : nothing}
