@@ -91,7 +91,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
             @click=${this._onToggleExpanded}
           >
             <span class="state-layer" aria-hidden="true"></span>
-            <div class="title" ?bold=${this.isExpanded}>${this.getTitle()}</div>
+            <div class="title">${this.getTitle()}</div>
 
             <span class="kirby-icon" aria-hidden="true">
               <kirby-icon-element name="arrow-down"></kirby-icon-element>
