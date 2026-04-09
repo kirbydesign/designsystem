@@ -7,6 +7,7 @@
   padding-left: 0;
   padding-right: 0;
   list-style-type: none;
+  overflow: visible;
 }
 
 kirby-divider {
@@ -18,28 +19,6 @@ kirby-divider {
 li {
   // Unfortunately kirby adds some global styling to nested li
   margin-block-start: 0 !important;
-}
-
-// When dragging, style the preview element
-.cdk-drag-preview {
-  border-radius: var(--kirby-border-radius-s);
-  background: var(--sidebar-background-color, var(--kirby-tertiary));
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: var(
-      --menuitem-active-background-color,
-      var(--kirby-inputs-background-color-active)
-    );
-    pointer-events: none;
-  }
-
-  &.selected::before {
-    display: none;
-  }
 }
 
 // When dragging, style the placeholder element
