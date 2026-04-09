@@ -45,6 +45,14 @@ export class KirbyAccordionItemElement extends KirbyElement {
     );
   }
 
+  //detect card and add class to prevent double borders when used inside card
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.closest('kirby-card')) {
+      this.classList.add('in-card');
+    }
+  }
+
   firstUpdated() {
     const slot = this.renderRoot.querySelector('slot');
     if (slot) {
