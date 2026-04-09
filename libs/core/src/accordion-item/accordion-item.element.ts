@@ -83,7 +83,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
           <button
             type="button"
             class="header"
-            aria-expanded=${String(this.isExpanded)}
+            aria-expanded=${this.isExpanded}
             aria-controls=${this._contentId}
             id=${this._titleId}
             ?disabled=${this.isDisabled}
