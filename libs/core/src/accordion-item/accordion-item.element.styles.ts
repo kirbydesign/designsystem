@@ -50,7 +50,8 @@ export default css`
     gap: var(--kirby-spacing-xxs);
     height: var(--kirby-spacing-xxxl);
     margin: 0;
-    padding: 0 var(--kirby-spacing-s);
+    padding-left: var(--kirby-spacing-s);
+    padding-right: var(--kirby-spacing-s);
     user-select: none;
     width: 100%;
     border: none;
@@ -58,6 +59,7 @@ export default css`
     background: none;
     box-shadow: none;
     font-family: var(--kirby-font-family);
+    font-size: inherit;
     line-height: normal;
     text-align: start;
   }
