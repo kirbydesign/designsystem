@@ -11,7 +11,7 @@ export default css`
     position: relative;
   }
 
-  :host(:first-child:not(.in-card)) {
+  :host(:first-child:not([incard])) {
     border-top: 1px solid var(--kirby-divider-color);
   }
 
@@ -127,15 +127,15 @@ export default css`
     cursor: default;
   }
 
-  :host(.in-card) {
+  :host([incard]) {
     border-color: var(--kirby-background-color);
   }
 
-  :host(.in-card:first-child) {
+  :host([incard]:first-child) {
     border-top: none;
   }
 
-  :host(.in-card:last-child) {
+  :host([incard]:last-child) {
     border-bottom: none;
   }
 

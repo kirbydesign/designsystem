@@ -20,6 +20,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
   @property({ type: Boolean, reflect: true }) hasPadding = true;
   @property({ type: Number }) headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
   @property({ type: String }) shape = 'none';
+  @property({ type: Boolean, reflect: true }) inCard = false;
   private _titleId = `kirby-accordion-item-title-${++uniqueId}`;
   private _contentId = `kirby-accordion-item-content-${uniqueId}`;
 
@@ -49,7 +50,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
   connectedCallback() {
     super.connectedCallback();
     if (this.closest('kirby-card')) {
-      this.classList.add('in-card');
+      this.inCard = true;
     }
   }
 
