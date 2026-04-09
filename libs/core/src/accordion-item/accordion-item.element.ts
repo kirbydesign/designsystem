@@ -99,7 +99,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
           </button>
         </div>
         <div class="content" role="region" aria-labelledby=${this._titleId} id=${this._contentId}>
-          <div class=${classMap({ 'content-body': true, padding: this.hasPadding })}>
+          <div class="content-body ${classMap({ padding: this.hasPadding })}">
             <slot></slot>
           </div>
         </div>
