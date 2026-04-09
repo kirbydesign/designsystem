@@ -85,6 +85,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
             class="header"
             aria-expanded=${String(this.isExpanded)}
             aria-controls=${this._contentId}
+            aria-label=${this.getTitle()}
             id=${this._titleId}
             ?disabled=${this.isDisabled}
             @click=${this._onToggleExpanded}
@@ -92,7 +93,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
             <span class="state-layer" aria-hidden="true"></span>
             <div class="title" ?bold=${this.isExpanded}>${this.getTitle()}</div>
 
-            <span class="kirby-icon">
+            <span class="kirby-icon" aria-hidden="true">
               <kirby-icon-element name="arrow-down"></kirby-icon-element>
             </span>
           </button>
