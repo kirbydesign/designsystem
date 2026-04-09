@@ -13,7 +13,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
 
   static styles: CSSResultGroup = [baseStyles, styles];
 
-  @property({ type: String }) title = '';
+  @property({ type: String, attribute: 'title' }) itemTitle = '';
   @property({ type: Boolean, reflect: true }) isExpanded = false;
   @property({ type: Boolean, reflect: true }) isDisabled = false;
   @property({ type: String }) disabledTitle = '';
@@ -27,7 +27,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
     if (this.isDisabled && !!this.disabledTitle) {
       return this.disabledTitle;
     } else {
-      return this.title;
+      return this.itemTitle;
     }
   }
 
