@@ -6,6 +6,7 @@ import baseStyles from '../styles/element.base.styles';
 import styles from './accordion-item.element.styles';
 
 // Counter for generating unique element ids
+// When the unigue-id-generator.helper.ts is available in the core, this should be used instead to ensure unique ids across all elements
 let uniqueId = 0;
 
 export class KirbyAccordionItemElement extends KirbyElement {
