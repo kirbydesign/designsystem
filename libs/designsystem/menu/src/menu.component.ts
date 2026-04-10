@@ -303,28 +303,20 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     const ionItem = item.querySelector<HTMLIonItemElement>('ion-item');
     if (!ionItem) return;
 
-    // Wait for ion-item to be hydrated before accessing Shadow DOM
-    await new Promise<void>((resolve) => {
-      componentOnReady(ionItem, () => resolve());
-    });
+    await new Promise<void>((resolve) => componentOnReady(ionItem, resolve));
 
-    // Pierce Shadow DOM and set role/aria-label directly on the native button/input
-    // This is needed for VoiceOver compatibility in Safari mobile
-    if (item.matches(':has(kirby-toggle, kirby-checkbox)')) {
-      const nativeInput = ionItem
-        ?.querySelector('ion-toggle, ion-checkbox')
-        ?.shadowRoot?.querySelector('input');
+    const checkableInput = ionItem
+      .querySelector('ion-toggle, ion-checkbox')
+      ?.shadowRoot?.querySelector('input');
+    const button = ionItem.shadowRoot?.querySelector('button');
+    const nativeControl = checkableInput ?? button;
 
-      if (nativeInput) {
-        this.renderer.setAttribute(nativeInput, 'role', 'menuitemcheckbox');
-        return;
-      }
-    } else {
-      const nativeButton = ionItem.shadowRoot?.querySelector('button');
-      if (nativeButton) {
-        this.renderer.setAttribute(nativeButton, 'role', 'menuitem');
-      }
-    }
+    if (!nativeControl) return;
+    this.renderer.setAttribute(
+      nativeControl,
+      'role',
+      checkableInput ? 'menuitemcheckbox' : 'menuitem'
+    );
   }
 
   menuVisibilityChanged(menuIsShown: boolean) {
