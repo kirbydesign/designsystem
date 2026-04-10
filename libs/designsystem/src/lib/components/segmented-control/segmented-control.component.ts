@@ -39,9 +39,9 @@ export enum SegmentedControlMode {
     },
   ],
 })
-export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
-  implements ControlValueAccessor
-{
+export class SegmentedControlComponent<
+  TItem extends SegmentItem = SegmentItem,
+> implements ControlValueAccessor {
   @ViewChild(IonSegment, { static: true, read: ElementRef })
   private ionSegmentElement: ElementRef<HTMLIonSegmentElement>;
 
@@ -154,11 +154,9 @@ export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
 
     if (selectedItemIndex !== this.selectedIndex) {
       this.selectedIndex = selectedItemIndex;
-      setTimeout(() => {
-        this.segmentSelect.emit(this.value);
-        this.onChange(this.value);
-        this.onTouched();
-      });
+      this.segmentSelect.emit(this.value);
+      this.onChange(this.value);
+      this.onTouched();
     }
   }
 
