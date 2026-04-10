@@ -570,7 +570,7 @@ describe('SegmentedControlComponent', () => {
       ionSegmentElement.dispatchEvent(
         new CustomEvent('ionChange', { detail: { value: items[2].id } })
       );
-      spectator.detectChanges();
+      tick();
 
       expect(formGroup.controls.segmentedControl.value).toEqual(items[2]);
     }));
@@ -637,7 +637,7 @@ describe('SegmentedControlComponent', () => {
       ionSegmentElement.dispatchEvent(
         new CustomEvent('ionChange', { detail: { value: items[2].id } })
       );
-      spectator.detectChanges();
+      tick();
 
       expect(formControl.value).toEqual(items[2]);
     }));
