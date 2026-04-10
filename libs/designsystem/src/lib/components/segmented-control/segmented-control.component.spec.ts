@@ -559,6 +559,22 @@ describe('SegmentedControlComponent', () => {
       spectator.detectChanges();
     });
 
+    it('should update form value when segment is selected', fakeAsync(() => {
+      ionSegmentElement.dispatchEvent(
+        new CustomEvent('ionChange', { detail: { value: items[1].id } })
+      );
+      tick();
+
+      expect(formGroup.controls.segmentedControl.value).toEqual(items[1]);
+
+      ionSegmentElement.dispatchEvent(
+        new CustomEvent('ionChange', { detail: { value: items[2].id } })
+      );
+      spectator.detectChanges();
+
+      expect(formGroup.controls.segmentedControl.value).toEqual(items[2]);
+    }));
+
     it('should update value on form control change', () => {
       expect(spectator.component.value.id).toBe(items[0].id);
 
@@ -609,6 +625,22 @@ describe('SegmentedControlComponent', () => {
       expect(spectator.component.value).toEqual(items[2]);
       expect(ionSegmentElement.value).toBe(items[2].id);
     });
+
+    it('should update form control value when segment is selected', fakeAsync(() => {
+      ionSegmentElement.dispatchEvent(
+        new CustomEvent('ionChange', { detail: { value: items[1].id } })
+      );
+      tick();
+
+      expect(formControl.value).toEqual(items[1]);
+
+      ionSegmentElement.dispatchEvent(
+        new CustomEvent('ionChange', { detail: { value: items[2].id } })
+      );
+      spectator.detectChanges();
+
+      expect(formControl.value).toEqual(items[2]);
+    }));
 
     it('should update disabled state when form control is disabled', () => {
       expect(ionSegmentElement.disabled).toBeFalsy();
