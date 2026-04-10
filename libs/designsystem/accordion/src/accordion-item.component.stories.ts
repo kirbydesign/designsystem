@@ -4,7 +4,8 @@ import { applicationConfig, componentWrapperDecorator, moduleMetadata } from '@s
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 
-import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
+import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
+import { AccordionItemComponent } from '@kirbydesign/angular/accordion-item';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { AccordionExampleComponent } from '~/app/examples/accordion-example/accordion-example.component';
