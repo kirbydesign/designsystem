@@ -1,7 +1,7 @@
-// This file is temporary until the list component is also converted to a lit element and this base component can be removed.
 import { AfterContentInit, ContentChildren, Directive, OnChanges, QueryList } from '@angular/core';
 import { ListComponent } from '@kirbydesign/designsystem/list';
 
+// This file is temporary until the list component is also converted to a lit element and this base component can be removed.
 @Directive()
 export abstract class KirbyAccordionItemBaseComponent implements AfterContentInit, OnChanges {
   @ContentChildren(ListComponent) listChildren: QueryList<ListComponent> | undefined;
