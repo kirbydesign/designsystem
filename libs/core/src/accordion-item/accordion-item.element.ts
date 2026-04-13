@@ -24,7 +24,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
   private _titleId = `kirby-accordion-item-title-${++uniqueId}`;
   private _contentId = `kirby-accordion-item-content-${uniqueId}`;
 
-  getTitle() {
+  private getTitle() {
     if (this.isDisabled && !!this.disabledTitle) {
       return this.disabledTitle;
     } else {
