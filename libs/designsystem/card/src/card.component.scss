@@ -9,6 +9,9 @@ $default-border-outline: 1px solid utils.get-color('medium');
   --kirby-card-main-color: #{utils.get-color('white-contrast')};
   --kirby-card-footer-background-color: #{utils.get-color('white')};
   --kirby-card-footer-color: #{utils.get-color('white-contrast')};
+  --kirby-accordion-item-border-color: #{utils.get-color('background-color')};
+  --kirby-accordion-item-first-border-top: none;
+  --kirby-accordion-item-last-border-bottom: none;
 
   @include themes.apply-white-theme;
 
@@ -53,15 +56,6 @@ $default-border-outline: 1px solid utils.get-color('medium');
     width: var(--kirby-card-width, auto);
   }
   /* stylelint-enable no-duplicate-selectors */
-
-  kirby-accordion-item {
-    --kirby-accordion-item-border-color: #{utils.get-color('background-color')};
-    --kirby-accordion-item-first-border-top: none;
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
 
   &.flat {
     box-shadow: none;
