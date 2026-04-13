@@ -65,7 +65,7 @@ export default css`
   }
 
   .title {
-    flex-grow: 2;
+    flex-grow: 1;
     display: flex;
     font-size: var(--kirby-font-size-n);
   }
