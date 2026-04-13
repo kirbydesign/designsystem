@@ -54,6 +54,15 @@ $default-border-outline: 1px solid utils.get-color('medium');
   }
   /* stylelint-enable no-duplicate-selectors */
 
+  kirby-accordion-item {
+    --kirby-accordion-item-border-color: #{utils.get-color('background-color')};
+    --kirby-accordion-item-first-border-top: none;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
   &.flat {
     box-shadow: none;
   }

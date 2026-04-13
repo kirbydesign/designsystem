@@ -6,13 +6,16 @@ export default css`
     --state-layer-background-color: var(--kirby-black);
 
     display: block;
-    border-bottom: 1px solid var(--kirby-divider-color);
+    border-bottom: 1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color));
     box-sizing: border-box;
     position: relative;
   }
 
-  :host(:first-child:not([incard])) {
-    border-top: 1px solid var(--kirby-divider-color);
+  :host(:first-child) {
+    border-top: var(
+      --kirby-accordion-item-first-border-top,
+      1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color))
+    );
   }
 
   :host(.has-list) {
@@ -127,16 +130,11 @@ export default css`
     cursor: default;
   }
 
-  :host([incard]) {
-    border-color: var(--kirby-background-color);
-  }
-
-  :host([incard]:first-child) {
-    border-top: none;
-  }
-
-  :host([incard]:last-child) {
-    border-bottom: none;
+  :host(:last-child) {
+    border-bottom: var(
+      --kirby-accordion-item-last-border-bottom,
+      1px solid var(--kirby-divider-color)
+    );
   }
 
   @media (hover: hover) {

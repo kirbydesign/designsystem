@@ -88,14 +88,5 @@ export class KirbyAccordionItemComponent extends KirbyAccordionItemBaseComponent
   get headingLevel(): 1 | 2 | 3 | 4 | 5 | 6 | undefined {
     return this.el.headingLevel;
   }
-
-  @Input()
-  set shape(v: string) {
-    this.ngZone.runOutsideAngular(() => (this.el.shape = v));
-  }
-
-  get shape(): string {
-    return this.el.shape;
-  }
   @Output() toggle = new EventEmitter<unknown>();
 }
