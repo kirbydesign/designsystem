@@ -32,7 +32,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
     }
   }
 
-  _onToggleExpanded(event: UIEvent) {
+  private onToggleExpanded(event: UIEvent) {
     event.preventDefault();
     if (this.isDisabled) return;
 
@@ -88,7 +88,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
             aria-controls=${this._contentId}
             id=${this._titleId}
             ?disabled=${this.isDisabled}
-            @click=${this._onToggleExpanded}
+            @click=${this.onToggleExpanded}
           >
             <span class="state-layer" aria-hidden="true"></span>
             <div class="title">${this.getTitle()}</div>
