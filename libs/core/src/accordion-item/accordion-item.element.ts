@@ -68,7 +68,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
     }
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  willUpdate(changedProps: Map<string, unknown>) {
     if (changedProps.has('isDisabled') && this.isDisabled) {
       this.isExpanded = false;
     }
