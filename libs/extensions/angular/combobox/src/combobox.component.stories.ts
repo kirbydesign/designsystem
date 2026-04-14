@@ -72,7 +72,7 @@ const currencyItems: CurrencyItem[] = [
  */
 const meta: Meta<ComboboxComponent> = {
   component: ComboboxComponent,
-  title: 'Components/Forms/Combobox',
+  title: 'Components/Combobox',
   decorators: [
     moduleMetadata({
       imports: [ListModule, ItemModule, DropdownModule, InputComponent, ComboboxComponent],
@@ -92,7 +92,6 @@ const meta: Meta<ComboboxComponent> = {
   },
 };
 export default meta;
-type Story = StoryObj<ComboboxComponent>;
 
 /**
  * This is a default combobox with a simple list of string items. The user can type in the input field to filter the options, and the dropdown will display only the matching items.
@@ -101,6 +100,7 @@ type Story = StoryObj<ComboboxComponent>;
  * All the currencies are simple strings, and the component will use the default behavior to display them in the dropdown.
  * The filtering is based on the string values of the items, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
  */
+type Story = StoryObj<ComboboxComponent>;
 export const Default: Story = {
   args: {
     items: simpleCurrencyItems,
