@@ -253,6 +253,16 @@ const menuItemsExample: SidebarMenuItem[] = [
     route: '/contact',
   },
 ];
+const menuItemsWithExternalLinks: SidebarMenuItem[] = [
+  ...menuItemsExample,
+  {
+    type: 'external-link',
+    id: 'external-link-1',
+    title: 'External Link 1',
+    icon: 'balloon',
+    url: 'https://example.com/external-link-1',
+  },
+];
 
 type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string };
 
@@ -275,8 +285,8 @@ type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string }
  * - *Submenus* contain nested menu items.
  * - *Router links* navigate within the application using Angular's Router.
  * - *Dividers* are used to separate groups of menu items visually.
+ * - *External links* navigate to external URLs and can open in a new tab. They have an external link icon at the end to indicate that they lead to an external destination.
  *
- * Note: Items can also be configured as external links, but the design for this feature is not finalized yet.
  *
  */
 const meta: Meta<SidebarPropsAndCustomArgs> = {
@@ -436,6 +446,19 @@ export const WithActions: Story = {
 };
 
 /**
+ * A sidebar that highlights external-link and action items which display an external link icon.
+ */
+export const WithExternalLinkIcons: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsWithExternalLinks,
+    mainAreaContent:
+      '<h1>Sidebar with External Link Icons</h1><p>External link and action items display an external link icon.</p>',
+  },
+};
+
+/**
  * A sidebar with toggle buttons on its items.
  *
  * > __Important:__ The current implementation of toggle buttons in the sidebar menu is not WCAG compliant.
@@ -445,7 +468,7 @@ export const WithToggleButtons: Story = {
   ...Default,
   args: {
     ...Default.args,
-    menuItems: menuItemsExample.map(convertToToggleButtonsExample),
+    menuItems: menuItemsWithExternalLinks.map(convertToToggleButtonsExample),
     mainAreaContent: '<h1>Sidebar with Toggle Buttons</h1>',
   },
 };

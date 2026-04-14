@@ -31,6 +31,7 @@ import {
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { StringSearchHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { forwardAttributes, TranslationService } from '@kirbydesign/designsystem/shared';
+import { componentOnReady } from '@ionic/core';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -294,18 +295,28 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
 
   private setRoleAttributeForAllItems() {
     this.kirbyItems.forEach((item) => {
-      this.setRoleAttributeForItem(item.nativeElement);
+      this.setRoleOnNativeControl(item.nativeElement);
     });
   }
 
-  private setRoleAttributeForItem(item: HTMLElement) {
-    let menuItemRole = 'menuitem';
-    if (item.matches(':has(kirby-toggle, kirby-checkbox)')) {
-      menuItemRole = 'menuitemcheckbox';
-    } else if (item.matches(':has(kirby-radio)')) {
-      menuItemRole = 'menuitemradio';
-    }
-    this.renderer.setAttribute(item, 'role', menuItemRole);
+  private async setRoleOnNativeControl(item: HTMLElement) {
+    const ionItem = item.querySelector<HTMLIonItemElement>('ion-item');
+    if (!ionItem) return;
+
+    await new Promise<void>((resolve) => componentOnReady(ionItem, resolve));
+
+    const checkableInput = ionItem
+      .querySelector('ion-toggle, ion-checkbox')
+      ?.shadowRoot?.querySelector('input');
+    const button = ionItem.shadowRoot?.querySelector('button');
+    const nativeControl = checkableInput ?? button;
+
+    if (!nativeControl) return;
+    this.renderer.setAttribute(
+      nativeControl,
+      'role',
+      checkableInput ? 'menuitemcheckbox' : 'menuitem'
+    );
   }
 
   menuVisibilityChanged(menuIsShown: boolean) {
