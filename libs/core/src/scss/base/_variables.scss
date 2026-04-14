@@ -105,6 +105,11 @@ $text-resize-threshold: 1.45;
 
 /* Icon
 ****************************************************************************/
+
+// Non-linear icon scaling: icons use clamp()
+// to prioritize user preferences but maintain hierarchy with:
+// - minimum values that enforce a size equal to 0.625 (10/16) of the base rem in px
+// - maximum values that provide a maximum icon resize of 200%
 $icon-font-sizes: (
   'lg': clamp(35px, 3.5rem, 112px),
   'md': clamp(20px, 2rem, 64px),
