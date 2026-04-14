@@ -1,4 +1,4 @@
-export type ReorderEvent = {
+export type SidebarMenuItemReorderEvent = {
   parentId: string;
   itemId: string;
   previousIndex: number;

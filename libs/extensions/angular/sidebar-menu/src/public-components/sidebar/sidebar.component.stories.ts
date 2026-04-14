@@ -470,7 +470,10 @@ function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
 }
 
 /**
- * A sidebar with reorderable menu items.
+ * A sidebar with menu items that can be re-ordered. Re-ordering should be limited to the top-level items inside a sub-menu, demonstrated in this example through the "Favorites" menu item.
+ *
+ * > __Important:__ The current implementation of reorderable items in the sidebar menu is not WCAG compliant.
+ * > It is therefore recommended to avoid using this feature in consumer-facing solutions that should adhere to accessibility standards.
  */
 export const WithReorderableMenuItems: Story = {
   ...Default,

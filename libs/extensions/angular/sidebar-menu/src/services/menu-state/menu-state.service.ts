@@ -1,7 +1,13 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { CheckEvent, ExpandEvent, ReorderEvent, SidebarMenuItem, SubmenuItem } from '../../models';
+import {
+  CheckEvent,
+  ExpandEvent,
+  SidebarMenuItem,
+  SidebarMenuItemReorderEvent,
+  SubmenuItem,
+} from '../../models';
 
 @Injectable({ providedIn: 'root' })
 export class MenuStateService {
@@ -13,7 +19,7 @@ export class MenuStateService {
   readonly #animationsDisabled = signal<boolean>(false);
   readonly #expandEvents = new Subject<ExpandEvent>();
   readonly #checkEvents = new Subject<CheckEvent>();
-  readonly #reorderEvents = new Subject<ReorderEvent>();
+  readonly #reorderEvents = new Subject<SidebarMenuItemReorderEvent>();
   readonly #selectEvents = new Subject<string>();
 
   get menuItems(): Signal<SidebarMenuItem[]> {
@@ -68,7 +74,7 @@ export class MenuStateService {
     return this.#checkEvents.asObservable();
   }
 
-  get reorderEvents(): Observable<ReorderEvent> {
+  get reorderEvents(): Observable<SidebarMenuItemReorderEvent> {
     return this.#reorderEvents.asObservable();
   }
 
