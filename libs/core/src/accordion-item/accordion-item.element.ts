@@ -30,7 +30,8 @@ export class KirbyAccordionItemElement extends KirbyElement {
     }
   }
 
-  private onToggleExpanded() {
+  private onToggleExpanded(event: UIEvent) {
+    event.preventDefault();
     if (this.isDisabled) return;
 
     this.isExpanded = !this.isExpanded;
