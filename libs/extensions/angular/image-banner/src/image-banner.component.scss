@@ -3,7 +3,9 @@
 
 $blur-radius: 110px;
 $max-content-width: 324px;
+$min-text-content-height: 100px;
 $main-image-height-small: 132px;
+$wide-image-banner-min-height: 180px;
 
 // The breakpoint where container should switch from "narrow" to "wide"
 $container-query-breakpoint: 600px;
@@ -119,6 +121,7 @@ kirby-card {
 
 .main-content-wrapper {
   width: 100%;
+  min-height: $wide-image-banner-min-height;
   padding: utils.size('xxs');
   box-sizing: border-box;
   display: flex;
@@ -173,7 +176,7 @@ kirby-card {
   @include if-wide-view {
     flex: 1;
     gap: utils.size('xs');
-    padding: utils.size('xs') utils.size('xxs') utils.size('xxs') 0;
+    padding: 10px utils.size('xxs') utils.size('xxs') 0;
   }
 }
 
@@ -201,10 +204,10 @@ kirby-card {
 }
 
 .main-content-body {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  height: 100%;
+  // display: flex;
+  // flex: 1;
+  // justify-content: space-between;
+  // height: 100%;
 
   p {
     text-wrap-mode: wrap;
@@ -212,10 +215,7 @@ kirby-card {
   }
 
   @include if-wide-view {
-    flex: none;
-    flex-direction: column;
     max-width: $max-content-width;
-    height: var(--kirby-x-image-banner-min-height, 3lh);
   }
 
   .main-content-body-action-link {
@@ -319,12 +319,8 @@ button.dismiss {
   text-overflow: ellipsis;
   white-space: nowrap;
   @include if-wide-view {
-    min-height: var(
-      --kirby-x-image-banner-min-height,
-      max(3lh, 100px)
-    ); // text content height should be minimum 3 lines by default to match design spec
-
-    gap: utils.size('s');
+    min-height: var(--kirby-x-image-banner-min-height);
+    gap: utils.size('xs');
   }
 }
 
@@ -333,10 +329,14 @@ button.dismiss {
     margin-bottom: 0;
     font-size: utils.font-size('n');
     font-weight: utils.font-weight('bold');
-    line-height: 1;
+    line-height: utils.line-height('n');
   }
 }
 
-.kirby-text-normal-bold {
-  line-height: 1;
+.kirby-text-normal-bold,
+.title {
+  @supports (text-box: trim-start text alphabetic) {
+    margin-top: 0;
+    text-box: trim-start text alphabetic;
+  }
 }
