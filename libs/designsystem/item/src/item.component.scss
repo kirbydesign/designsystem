@@ -3,6 +3,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
 
+$fixed-badge-font-size: 10px;
 $outside-slot-width: utils.relative-size('s');
 
 :host {
@@ -26,10 +27,13 @@ $outside-slot-width: utils.relative-size('s');
   }
 
   .outside {
-    left: utils.size('xxxs');
+    --kirby-badge-font-size: #{$fixed-badge-font-size}; // do not scale badge with font-size in outside slot
+
+    display: flex;
+    width: $outside-slot-width;
     margin: 0;
     position: absolute;
-    width: $outside-slot-width;
+    left: utils.size('xxxs');
     z-index: 1;
   }
 }
@@ -95,6 +99,7 @@ ion-item {
   }
 
   @include item.item-typography;
+  @include item.handle-text-resize;
 
   @include utils.slotted(':not([slot])') {
     width: 100%;
@@ -131,6 +136,8 @@ ion-item {
 }
 
 .disclosure {
+  --kirby-icon-font-size: #{utils.size('m')}; // do not scale disclosure with font-size
+
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
 
