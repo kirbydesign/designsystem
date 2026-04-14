@@ -4,11 +4,14 @@ import { ItemComponent, ItemSize, LabelComponent } from '@kirbydesign/designsyst
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+// eslint-disable-next-line no-restricted-imports
+import { focusSelectableItem } from '../../.storybook/story-helpers';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
@@ -17,6 +20,7 @@ const meta: Meta<ItemComponent> = {
     moduleMetadata({
       imports: [
         FlagComponent,
+        CardComponent,
         CheckboxComponent,
         ItemComponent,
         LabelComponent,
@@ -908,4 +912,36 @@ export const ItemWithHorizontalLabelTruncation: Story = {
     </kirby-label>
 </kirby-item>`,
   }),
+};
+
+export const SelectableFocused: Story = {
+  name: 'Selectable - Focused',
+  render: () => ({
+    template: `<kirby-item [selectable]="true">Selectable item</kirby-item>
+<kirby-item [selectable]="true">Selectable item</kirby-item>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const SelectableInCardFirstFocused: Story = {
+  name: 'Selectable in Card - First Focused',
+  render: () => ({
+    template: `<kirby-card>
+  <kirby-item [selectable]="true">First selectable item</kirby-item>
+  <kirby-item [selectable]="true">Second selectable item</kirby-item>
+  <kirby-item [selectable]="true">Third selectable item</kirby-item>
+</kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+export const SelectableInCardSecondFocused: Story = {
+  ...SelectableInCardFirstFocused,
+  name: 'Selectable in Card - Second Focused',
+  play: focusSelectableItem(1),
+};
+
+export const SelectableInCardLastFocused: Story = {
+  ...SelectableInCardFirstFocused,
+  name: 'Selectable in Card - Last Focused',
+  play: focusSelectableItem(2),
 };
