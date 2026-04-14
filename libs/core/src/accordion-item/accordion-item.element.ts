@@ -18,6 +18,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
   @property({ type: Boolean, reflect: true }) isDisabled = false;
   @property({ type: String }) disabledTitle = '';
   @property({ type: Boolean, reflect: true }) hasPadding = true;
+  @property({ type: Boolean, reflect: true }) hasList = false;
   @property({ type: Number }) headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
   private _titleId = `kirby-accordion-item-title-${++uniqueId}`;
   private _contentId = `kirby-accordion-item-content-${uniqueId}`;
@@ -47,13 +48,14 @@ export class KirbyAccordionItemElement extends KirbyElement {
   firstUpdated() {
     const slot = this.renderRoot.querySelector('slot');
     if (slot) {
-      slot.addEventListener('slotchange', () => {
-        const assigned = slot.assignedElements({ flatten: true });
-        assigned.forEach((el) => {
-          if (el.tagName === 'KIRBY-LIST') {
-            el.setAttribute('shape', 'none');
-          }
-        });
+      const assigned = slot.assignedElements({ flatten: true });
+      const hasList = assigned.some((el) => el.tagName === 'KIRBY-LIST');
+      this.hasList = hasList;
+      this.hasPadding = !hasList;
+      assigned.forEach((el) => {
+        if (el.tagName === 'KIRBY-LIST') {
+          el.setAttribute('shape', 'none');
+        }
       });
     }
   }

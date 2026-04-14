@@ -18,7 +18,7 @@ export default css`
     );
   }
 
-  :host(.has-list) {
+  :host([hasList]) {
     --kirby-item-background: transparent;
   }
 

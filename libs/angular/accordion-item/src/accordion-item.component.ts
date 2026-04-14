@@ -81,6 +81,15 @@ export class KirbyAccordionItemComponent extends KirbyAccordionItemBaseComponent
   }
 
   @Input()
+  set hasList(v: boolean) {
+    this.ngZone.runOutsideAngular(() => (this.el.hasList = v));
+  }
+
+  get hasList(): boolean {
+    return this.el.hasList;
+  }
+
+  @Input()
   set headingLevel(v: 1 | 2 | 3 | 4 | 5 | 6 | undefined) {
     this.ngZone.runOutsideAngular(() => (this.el.headingLevel = v));
   }
