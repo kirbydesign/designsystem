@@ -102,7 +102,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
   updated(changedProps: Map<string, unknown>) {
     super.updated?.(changedProps);
     if (changedProps.has('isExpanded')) {
-      const content = this.renderRoot.querySelector('.content');
+      const content = this.renderRoot.querySelector('.content') as HTMLElement;
       if (content) {
         if (this.isExpanded) {
           // Animate open
