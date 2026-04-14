@@ -98,4 +98,41 @@ export class KirbyAccordionItemElement extends KirbyElement {
       </div>
     `;
   }
+
+  updated(changedProps: Map<string, unknown>) {
+    super.updated?.(changedProps);
+    if (changedProps.has('isExpanded')) {
+      const content = this.renderRoot.querySelector('.content');
+      if (content) {
+        if (this.isExpanded) {
+          // Animate open
+          content.style.height = '0px';
+          content.style.visibility = 'visible';
+          const scrollHeight = content.scrollHeight;
+          requestAnimationFrame(() => {
+            content.style.transition = 'height 0.2s';
+            content.style.height = scrollHeight + 'px';
+          });
+        } else {
+          // Animate close
+          const scrollHeight = content.scrollHeight;
+          content.style.transition = 'height 0.2s';
+          content.style.height = scrollHeight + 'px';
+          requestAnimationFrame(() => {
+            content.style.height = '0px';
+          });
+        }
+        // Clean up after transition
+        const onTransitionEnd = () => {
+          if (this.isExpanded) {
+            content.style.height = 'auto';
+          } else {
+            content.style.visibility = 'hidden';
+          }
+          content.removeEventListener('transitionend', onTransitionEnd);
+        };
+        content.addEventListener('transitionend', onTransitionEnd);
+      }
+    }
+  }
 }

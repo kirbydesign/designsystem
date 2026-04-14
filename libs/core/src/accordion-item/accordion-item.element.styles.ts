@@ -83,9 +83,6 @@ export default css`
 
   .content {
     overflow: hidden;
-    transition:
-      height 0.2s,
-      visibility 0.2s;
     height: 0;
     visibility: hidden;
     cursor: default;
