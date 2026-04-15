@@ -88,11 +88,6 @@ export default css`
     cursor: default;
   }
 
-  :host([isexpanded]) .content {
-    height: auto;
-    visibility: visible;
-  }
-
   :host([haspadding]) .content-body {
     padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-s);
   }
