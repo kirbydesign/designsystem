@@ -7,6 +7,7 @@ export default css`
 
     display: block;
     border-bottom: 1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color));
+    background: var(--kirby-accordion-item-background, var(--kirby-item-background, transparent));
     box-sizing: border-box;
     position: relative;
   }
@@ -16,10 +17,6 @@ export default css`
       --kirby-accordion-item-first-border-top,
       1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color))
     );
-  }
-
-  :host([hasList]) {
-    --kirby-item-background: transparent;
   }
 
   .content-layer {
