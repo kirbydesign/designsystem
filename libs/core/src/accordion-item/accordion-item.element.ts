@@ -99,11 +99,9 @@ export class KirbyAccordionItemElement extends KirbyElement {
     `;
   }
 
-  private _hasAnimated = false;
   updated(changedProps: Map<string, unknown>) {
     super.updated?.(changedProps);
-    // Only animate after the first update (skip initial render)
-    if (changedProps.has('isExpanded') && this._hasAnimated) {
+    if (changedProps.has('isExpanded')) {
       const content = this.renderRoot.querySelector('.content') as HTMLElement;
       if (content) {
         if (this.isExpanded) {
@@ -136,6 +134,45 @@ export class KirbyAccordionItemElement extends KirbyElement {
         content.addEventListener('transitionend', onTransitionEnd);
       }
     }
-    this._hasAnimated = true;
   }
+
+  //private _hasAnimated = false;
+  // updated(changedProps: Map<string, unknown>) {
+  //   super.updated?.(changedProps);
+  //   // Only animate after the first update (skip initial render)
+  //   if (changedProps.has('isExpanded') && this._hasAnimated) {
+  //     const content = this.renderRoot.querySelector('.content') as HTMLElement;
+  //     if (content) {
+  //       if (this.isExpanded) {
+  //         // Animate open
+  //         content.style.height = '0px';
+  //         content.style.visibility = 'visible';
+  //         const scrollHeight = content.scrollHeight;
+  //         requestAnimationFrame(() => {
+  //           content.style.transition = 'height 0.2s';
+  //           content.style.height = scrollHeight + 'px';
+  //         });
+  //       } else {
+  //         // Animate close
+  //         const scrollHeight = content.scrollHeight;
+  //         content.style.transition = 'height 0.2s';
+  //         content.style.height = scrollHeight + 'px';
+  //         requestAnimationFrame(() => {
+  //           content.style.height = '0px';
+  //         });
+  //       }
+  //       // Clean up after transition
+  //       const onTransitionEnd = () => {
+  //         if (this.isExpanded) {
+  //           content.style.height = 'auto';
+  //         } else {
+  //           content.style.visibility = 'hidden';
+  //         }
+  //         content.removeEventListener('transitionend', onTransitionEnd);
+  //       };
+  //       content.addEventListener('transitionend', onTransitionEnd);
+  //     }
+  //   }
+  //   this._hasAnimated = true;
+  // }
 }
