@@ -76,14 +76,18 @@ describe('ActionGroupComponent', () => {
       it('should only show buttons as configured in visibleActions', () => {
         spectator.setHostInput('visibleActions', 3);
 
-        const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+        const buttons = spectator.element.querySelectorAll(
+          ':scope > button[kirby-button]:not([style*="display: none"])'
+        );
         expect(buttons).toHaveLength(3);
       });
 
       it('should hide buttons as configured in visibleActions', () => {
         spectator.setHostInput('visibleActions', 3);
 
-        const buttons = spectator.element.querySelectorAll('.hidden-layer> button[kirby-button]');
+        const buttons = spectator.element.querySelectorAll(
+          ':scope > button[kirby-button][style*="display: none"]'
+        );
         expect(buttons).toHaveLength(2);
         buttons.forEach((btn) => {
           expect(btn).toBeHidden();
@@ -111,12 +115,16 @@ describe('ActionGroupComponent', () => {
     });
 
     it('should only show buttons as configured in visibleActions', () => {
-      const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+      const buttons = spectator.element.querySelectorAll(
+        ':scope > button[kirby-button]:not([style*="display: none"])'
+      );
       expect(buttons).toHaveLength(3);
     });
 
     it('should hide buttons as configured in visibleActions', () => {
-      const buttons = spectator.element.querySelectorAll('.hidden-layer> button[kirby-button]');
+      const buttons = spectator.element.querySelectorAll(
+        ':scope > button[kirby-button][style*="display: none"]'
+      );
       expect(buttons).toHaveLength(2);
       buttons.forEach((btn) => {
         expect(btn).toBeHidden();
@@ -141,14 +149,18 @@ describe('ActionGroupComponent', () => {
       it('should show buttons as configured in visibleActions', () => {
         spectator.setHostInput('visibleActions', 4);
 
-        const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+        const buttons = spectator.element.querySelectorAll(
+          ':scope > button[kirby-button]:not([style*="display: none"])'
+        );
         expect(buttons).toHaveLength(4);
       });
 
       it('should hide buttons as configured in visibleActions', () => {
         spectator.setHostInput('visibleActions', 2);
 
-        const buttons = spectator.element.querySelectorAll('.hidden-layer> button[kirby-button]');
+        const buttons = spectator.element.querySelectorAll(
+          ':scope > button[kirby-button][style*="display: none"]'
+        );
         expect(buttons).toHaveLength(3);
         buttons.forEach((btn) => {
           expect(btn).toBeHidden();
@@ -232,7 +244,9 @@ describe('ActionGroupComponent', () => {
 
           spectator.setHostInput('visibleActions', 2);
 
-          const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+          const buttons = spectator.element.querySelectorAll(
+            ':scope > button[kirby-button]:not([style*="display: none"])'
+          );
           expect(buttons).toHaveLength(2);
         });
 
@@ -245,7 +259,9 @@ describe('ActionGroupComponent', () => {
 
           spectator.setHostInput('visibleActions', 4);
 
-          const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+          const buttons = spectator.element.querySelectorAll(
+            ':scope > button[kirby-button]:not([style*="display: none"])'
+          );
           expect(buttons).toHaveLength(3);
         });
       });
@@ -287,7 +303,7 @@ describe('ActionGroupComponent', () => {
       spectator.setHostInput('showAction4', true);
 
       const hiddenButtons = spectator.element.querySelectorAll(
-        '.hidden-layer > button[kirby-button]'
+        ':scope > button[kirby-button][style*="display: none"]'
       );
       const hiddenButtonTexts = Array.from(hiddenButtons).map((button) =>
         button.textContent.trim()

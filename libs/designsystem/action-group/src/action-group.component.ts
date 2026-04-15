@@ -16,7 +16,6 @@ import {
   QueryList,
   Renderer2,
   SimpleChanges,
-  ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -48,11 +47,6 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
   @ContentChildren(ButtonComponent, { read: ElementRef })
   private readonly buttonElements?: QueryList<ElementRef<HTMLButtonElement>>;
   @ContentChildren(ButtonComponent) private readonly buttons?: QueryList<ButtonComponent>;
-  @ViewChild('hiddenLayer', { read: ElementRef, static: true })
-  private readonly hiddenLayer!: ElementRef<HTMLElement>;
-
-  @ViewChild(MenuComponent, { read: ElementRef, static: true })
-  private readonly menuElement!: ElementRef<HTMLElement>;
 
   @HostBinding('class.is-collapsed')
   _isCollapsed: boolean;
@@ -63,27 +57,19 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
     return 'align-' + this.align;
   }
 
-  private collapseThreshold = 2;
   private readonly destroyRef = inject(DestroyRef);
 
   constructor(
-    private readonly elementRef: ElementRef<HTMLElement>,
     private readonly renderer: Renderer2,
     private readonly cdr: ChangeDetectorRef,
     @Optional() @Inject(ACTIONGROUP_CONFIG) private readonly config: ActionGroupConfig
   ) {}
 
   ngAfterContentInit(): void {
-    // Ensure we collapse according to visibleActions if lower than our default threshold (2).
-    // I.e. if there are 2 buttons and visibleActions = 1 we'll collapse the 2nd button into the menu:
-    if (this.visibleActions < this.collapseThreshold) {
-      this.collapseThreshold = this.visibleActions;
-    }
-
     this.initializeFromConfig();
 
     if (this.visibleActions !== undefined) {
-      this.initializeCollapsing();
+      this.applyVisibility();
     }
 
     this.subscribeToProjectedButtonChanges();
@@ -96,7 +82,7 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
         this.config?.maxVisibleActions === null ||
         changes.visibleActions.currentValue <= this.config?.maxVisibleActions;
       if (satifiesMaxVisibleActions) {
-        this.initializeCollapsing();
+        this.applyVisibility();
       }
     }
   }
@@ -133,82 +119,25 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
     }
   }
 
-  private initializeCollapsing() {
+  private applyVisibility(): void {
     if (!this.buttonElements) return;
 
-    if (this.buttonElements.length > this.collapseThreshold) {
-      this.moveVisibleButtonsBeforeMenu();
-      this.moveOverflowButtonsToHiddenLayer();
-    } else {
-      this.moveHiddenButtonsBeforeMenu();
-    }
+    const visibleActions = this.visibleActions ?? this.buttonElements.length;
 
-    this.refreshCollapsedState();
-  }
-
-  private moveVisibleButtonsBeforeMenu(): void {
-    const buttonsToShow = this.getButtonsToShow();
-
-    buttonsToShow.forEach((button) => {
-      this.renderer.insertBefore(
-        this.elementRef.nativeElement,
-        button.nativeElement,
-        this.menuElement.nativeElement
-      );
+    this._collapsedActions = [];
+    this.buttonElements.forEach((button, index) => {
+      if (index < visibleActions) {
+        this.renderer.removeStyle(button.nativeElement, 'display');
+      } else {
+        this.renderer.setStyle(button.nativeElement, 'display', 'none');
+        this._collapsedActions.push({
+          button: button.nativeElement,
+          text: button.nativeElement.textContent.trim(),
+        });
+      }
     });
-  }
 
-  private moveOverflowButtonsToHiddenLayer(): void {
-    const buttonsToHide = this.getButtonsToHide();
-
-    buttonsToHide.forEach((button) => {
-      this.renderer.appendChild(this.hiddenLayer.nativeElement, button.nativeElement);
-    });
-  }
-
-  private moveHiddenButtonsBeforeMenu(): void {
-    this.getHiddenButtons().forEach((button) => {
-      this.renderer.insertBefore(
-        this.elementRef.nativeElement,
-        button,
-        this.menuElement.nativeElement
-      );
-    });
-  }
-
-  private getButtonsToShow(): Array<ElementRef<HTMLButtonElement>> {
-    const visibleActions = this.visibleActions ?? 0;
-
-    return [...this.buttonElements]
-      .slice(0, visibleActions)
-      .filter((button) => button.nativeElement.parentElement === this.hiddenLayer.nativeElement);
-  }
-
-  private getButtonsToHide(): Array<ElementRef<HTMLButtonElement>> {
-    const visibleActions = this.visibleActions ?? 0;
-    return [...this.buttonElements].slice(visibleActions);
-  }
-
-  private getHiddenButtons(): HTMLButtonElement[] {
-    return Array.from(this.hiddenLayer.nativeElement.children) as HTMLButtonElement[];
-  }
-
-  private refreshCollapsedState(): void {
-    this.populateMenu();
-    this.toggleMenu();
-  }
-
-  private toggleMenu() {
-    this._isCollapsed = this.hiddenLayer.nativeElement.childElementCount > 0;
-  }
-
-  private populateMenu() {
-    const hiddenButtons = this.getHiddenButtons();
-
-    this._collapsedActions = hiddenButtons.map((button) => ({
-      button,
-      text: button.textContent.trim(),
-    }));
+    this._isCollapsed = this._collapsedActions.length > 0;
   }
 
   private subscribeToProjectedButtonChanges(): void {
@@ -231,7 +160,7 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
   private updateCollapsedButtons(): void {
     if (this.visibleActions === undefined) return;
 
-    this.initializeCollapsing();
+    this.applyVisibility();
     this.cdr.markForCheck();
   }
 }
