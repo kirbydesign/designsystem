@@ -1,6 +1,3 @@
-// Ensure Kirby environment and web components are initialized before any stories render
-import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
-provideKirby(withGlobalSetup());
 import { inject, provideAppInitializer } from '@angular/core';
 import { applicationConfig, Preview } from '@storybook/angular';
 
