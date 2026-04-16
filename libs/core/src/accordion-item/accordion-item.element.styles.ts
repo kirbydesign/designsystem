@@ -80,9 +80,6 @@ export default css`
 
   .content {
     overflow: hidden;
-    transition:
-      height 0.2s,
-      visibility 0.2s;
     height: 0;
     visibility: hidden;
     cursor: default;
@@ -95,6 +92,33 @@ export default css`
 
   :host([haspadding]) .content-body {
     padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-s);
+  }
+
+  /* Safari + Firefox */
+  @supports not (interpolate-size: allow-keywords) {
+    .content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.25s ease;
+      overflow: hidden;
+    }
+
+    :host([isexpanded]) .content {
+      grid-template-rows: 1fr;
+    }
+
+    .content-body {
+      overflow: hidden;
+      min-height: 0;
+    }
+  }
+
+  /* Chrome / Edge */
+  @supports (interpolate-size: allow-keywords) {
+    .content {
+      interpolate-size: allow-keywords;
+      transition: height 0.25s ease;
+    }
   }
 
   button[disabled] {
