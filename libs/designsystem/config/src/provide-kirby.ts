@@ -78,6 +78,20 @@ export function provideKirby(
       if (!customElements.get('kirby-icon-element')) {
         const iconElement = createCustomElement(IconComponent, { injector });
         customElements.define('kirby-icon-element', iconElement);
+      } else {
+        // The browser does not allow re-registering custom elements. When Storybook
+        // destroys and recreates the Angular app between story navigations, the
+        // element class retains the original (now stale) injector in its closure.
+        // Patch the existing prototype so new instances pick up the fresh injector.
+        const existingClass = customElements.get('kirby-icon-element');
+        const freshElement = createCustomElement(IconComponent, { injector });
+        const descriptor = Object.getOwnPropertyDescriptor(
+          freshElement.prototype,
+          'ngElementStrategy'
+        );
+        if (existingClass && descriptor) {
+          Object.defineProperty(existingClass.prototype, 'ngElementStrategy', descriptor);
+        }
       }
     }),
   ]);
