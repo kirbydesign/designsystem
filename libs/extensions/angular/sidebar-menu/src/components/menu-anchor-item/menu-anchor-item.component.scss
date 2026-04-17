@@ -6,6 +6,7 @@
   flex-direction: row;
   align-items: center;
   position: relative;
+  overflow: visible;
 
   &.selected {
     color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
