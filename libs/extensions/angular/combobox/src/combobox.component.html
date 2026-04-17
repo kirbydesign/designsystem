@@ -6,7 +6,7 @@
     aria-haspopup="listbox"
     [attr.aria-controls]="_listboxId"
     [attr.aria-expanded]="isOpen"
-    [attr.aria-activedescendant]="isOpen ? _listboxId + '-item-' + getItemText(focusedItem) : null"
+    [attr.aria-activedescendant]="isOpen && focusedItem ? getItemId(focusedItem) : null"
     [hasError]="hasError"
     [size]="size"
     [disabled]="disabled"
@@ -60,7 +60,7 @@
     (click)="onItemSelect(item)"
     [class.focused]="focused"
     role="option"
-    [attr.id]="getItemText(item)"
+    [attr.id]="getItemId(item)"
     [attr.aria-selected]="selected"
   >
     <p class="kirby-item-title">{{ getItemText(item) }}</p>
