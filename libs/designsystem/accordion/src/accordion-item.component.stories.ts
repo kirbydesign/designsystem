@@ -38,6 +38,29 @@ export const Default: Story = {
   },
 };
 
+export const HeadingLevel: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-accordion [headingLevel]="headingLevel">
+        <kirby-accordion-item title="Heading 1"></kirby-accordion-item>
+        <kirby-accordion-item title="Heading 2"></kirby-accordion-item>
+        <kirby-accordion-item title="Heading 3"></kirby-accordion-item>
+      </kirby-accordion>
+    `,
+  }),
+  args: {
+    headingLevel: 2,
+  },
+  argTypes: {
+    headingLevel: {
+      control: { type: 'select' },
+      options: [1, 2, 3, 4, 5, 6],
+      description: 'Sets the heading level for all accordion items',
+    },
+  },
+};
+
 export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-accordion-example></cookbook-accordion-example>`,
