@@ -79,10 +79,9 @@ export default css`
   }
 
   .content {
-    overflow: hidden;
-    height: 0;
     visibility: hidden;
     cursor: default;
+    overflow: hidden;
   }
 
   :host([isexpanded]) .content {
@@ -91,7 +90,11 @@ export default css`
   }
 
   :host([haspadding]) .content-body {
-    padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-s);
+    padding-inline: var(--kirby-spacing-s);
+  }
+
+  :host([haspadding][isexpanded]) .content-body {
+    padding-bottom: var(--kirby-spacing-s);
   }
 
   /* Safari + Firefox */
@@ -116,8 +119,14 @@ export default css`
   /* Chrome / Edge */
   @supports (interpolate-size: allow-keywords) {
     .content {
+      overflow: hidden;
+      height: 0;
       interpolate-size: allow-keywords;
       transition: height 0.25s ease;
+    }
+
+    :host([isexpanded]) .content {
+      height: auto;
     }
   }
 
