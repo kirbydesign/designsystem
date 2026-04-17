@@ -38,6 +38,42 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     type: 'submenu',
+    id: 'favorites',
+    title: 'Favorites',
+    icon: 'copy',
+    children: [
+      {
+        type: 'router-link',
+        id: 'menu-item-apple',
+        title: 'Apple',
+        route: '/menu-item/apple',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-banana',
+        title: 'Banana',
+        route: '/menu-item/banana',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-lemon',
+        title: 'Lemon',
+        route: '/menu-item/lemon',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-pear',
+        title: 'Pear',
+        route: '/menu-item/pear',
+      },
+    ],
+  },
+  {
+    type: 'divider',
+    id: 'divider-2',
+  },
+  {
+    type: 'submenu',
     id: 'menu-item-1',
     title: 'Menu item 1',
     icon: 'copy',
@@ -193,7 +229,7 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     type: 'divider',
-    id: 'divider-2',
+    id: 'divider-3',
   },
   {
     type: 'router-link',
@@ -311,8 +347,16 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       description: 'Event emitted when a menu item toggle is checked/unchecked',
       control: false,
     },
+    itemReorder: {
+      description: 'Event emitted when menu items are reordered',
+      control: false,
+    },
     itemSelect: {
       description: 'Event emitted when a menu item is selected',
+      control: false,
+    },
+    menuItemsChange: {
+      description: 'Event emitted when the menu items input changes',
       control: false,
     },
     mainAreaContent: { table: { disable: true } },
@@ -445,5 +489,33 @@ function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
       uncheckedIcon: 'star',
       checkedIcon: 'star-fill',
     },
+  };
+}
+
+/**
+ * A sidebar with menu items that can be re-ordered. Re-ordering should be limited to the top-level items inside a sub-menu, demonstrated in this example through the "Favorites" menu item.
+ *
+ * > __Important:__ The current implementation of reorderable items in the sidebar menu is not WCAG compliant.
+ * > It is therefore recommended to avoid using this feature in consumer-facing solutions that should adhere to accessibility standards.
+ */
+export const WithReorderableMenuItems: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsExample.map(convertToReorderableExample),
+    mainAreaContent: '<h1>Sidebar with reorderable favorites submenu items</h1>',
+  },
+};
+
+function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
+  if (item.type === 'submenu' && item.id === 'favorites') {
+    return {
+      ...item,
+      isReorderable: true,
+      children: item.children.map(convertToReorderableExample),
+    };
+  }
+  return {
+    ...item,
   };
 }
