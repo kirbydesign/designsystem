@@ -88,6 +88,11 @@ ion-modal.kirby-overlay {
           @include bottom-drawer;
 
           --kirby-modal-padding-top: 0;
+
+          // Override Ionic's `contain: strict` (which includes paint containment)
+          // to prevent the box-shadow from being clipped when the ion-modal host
+          // is resized to match the drawer wrapper bounds.
+          contain: size layout style;
         }
       }
 

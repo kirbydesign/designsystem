@@ -1,4 +1,5 @@
 import { Component, inject, Signal } from '@angular/core';
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { MenuContainerComponent } from '../menu-container';
 import { HeightObserverDirective } from '../../directives/height-observer';
 import { SidebarService } from '../../services/sidebar';
@@ -15,7 +16,7 @@ type ViewModel = {
   selector: 'aside[kirby-x-sidebar-menu]',
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss'],
-  imports: [HeightObserverDirective, MenuContainerComponent],
+  imports: [HeightObserverDirective, MenuContainerComponent, CdkScrollable],
 })
 export class SidebarMenuComponent {
   readonly #sidebarService = inject(SidebarService);

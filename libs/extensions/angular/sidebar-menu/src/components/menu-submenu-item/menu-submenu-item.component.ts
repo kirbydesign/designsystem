@@ -1,5 +1,6 @@
 import { Component, computed, ElementRef, forwardRef, inject, input, Signal } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { SubmenuItem } from '../../models';
 import { MenuItemComponent } from '../menu-item';
 import { MenuItemSize } from '../../types';
@@ -16,6 +17,7 @@ type ViewModel = {
   submenuSize: Signal<MenuItemSize>;
   animationsDisabled: Signal<boolean>;
   toggleSubmenu: () => void;
+  reorderItem: (event: CdkDragDrop<string[]>) => void;
 };
 
 @Component({
@@ -23,7 +25,7 @@ type ViewModel = {
   templateUrl: './menu-submenu-item.component.html',
   styleUrls: ['./menu-submenu-item.component.scss'],
   animations: [DropDownAnimation],
-  imports: [MenuItemComponent, IconComponent, forwardRef(() => MenuItemListComponent)],
+  imports: [MenuItemComponent, IconComponent, forwardRef(() => MenuItemListComponent), CdkDropList],
 })
 export class MenuSubmenuItemComponent {
   readonly item = input.required<SubmenuItem>();
@@ -61,6 +63,15 @@ export class MenuSubmenuItemComponent {
     }
   }
 
+  #reorderItem(event: CdkDragDrop<string[]>): void {
+    this.#stateService.reorderItems(
+      this.item(),
+      event.item.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+
   readonly vm: ViewModel = {
     item: this.item,
     size: this.size,
@@ -69,5 +80,6 @@ export class MenuSubmenuItemComponent {
     submenuSize: this.#submenuSize,
     animationsDisabled: this.#stateService.animationsDisabled,
     toggleSubmenu: this.#toggleSubmenu.bind(this),
+    reorderItem: this.#reorderItem.bind(this),
   };
 }

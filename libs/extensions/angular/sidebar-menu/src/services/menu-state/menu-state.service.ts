@@ -1,6 +1,13 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CheckEvent, ExpandEvent, SidebarMenuItem } from '../../models';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CheckEvent,
+  ExpandEvent,
+  SidebarMenuItem,
+  SidebarMenuItemReorderEvent,
+  SubmenuItem,
+} from '../../models';
 
 @Injectable({ providedIn: 'root' })
 export class MenuStateService {
@@ -12,6 +19,7 @@ export class MenuStateService {
   readonly #animationsDisabled = signal<boolean>(false);
   readonly #expandEvents = new Subject<ExpandEvent>();
   readonly #checkEvents = new Subject<CheckEvent>();
+  readonly #reorderEvents = new Subject<SidebarMenuItemReorderEvent>();
   readonly #selectEvents = new Subject<string>();
 
   get menuItems(): Signal<SidebarMenuItem[]> {
@@ -66,6 +74,10 @@ export class MenuStateService {
     return this.#checkEvents.asObservable();
   }
 
+  get reorderEvents(): Observable<SidebarMenuItemReorderEvent> {
+    return this.#reorderEvents.asObservable();
+  }
+
   get selectEvents(): Observable<string> {
     return this.#selectEvents.asObservable();
   }
@@ -113,6 +125,23 @@ export class MenuStateService {
 
   #findAncestors(id: string): Set<string> {
     return recursivelyFindAncestors(this.#menuItems(), id) ?? new Set();
+  }
+
+  reorderItems(
+    submenu: SubmenuItem,
+    itemId: string,
+    previousIndex: number,
+    currentIndex: number
+  ): void {
+    moveItemInArray(submenu.children, previousIndex, currentIndex);
+    this.#reorderEvents.next({
+      parentId: submenu.id,
+      itemId,
+      previousIndex,
+      currentIndex,
+      reorderedItemIds: submenu.children.map((item) => item.id),
+    });
+    this.#menuItems.update((items) => [...items]);
   }
 }
 
