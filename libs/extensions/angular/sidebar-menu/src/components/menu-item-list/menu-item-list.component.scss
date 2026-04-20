@@ -19,3 +19,21 @@ li {
   // Unfortunately kirby adds some global styling to nested li
   margin-block-start: 0 !important;
 }
+
+// When dragging, style the placeholder element
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+// When dragging, style non-dragged items
+:host.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-preview, .cdk-drag-placeholder) {
+  transition-property: transform;
+  transition-duration: utils.get-transition-duration('short');
+  transition-timing-function: utils.get-transition-easing('static');
+  pointer-events: none;
+}
+
+// Disable transition on non-dragged items to prevent unwanted animations when ending drag
+:host .cdk-drag:not(.cdk-drag-preview, .cdk-drag-placeholder) {
+  transition: none;
+}

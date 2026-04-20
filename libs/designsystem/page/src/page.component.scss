@@ -194,6 +194,7 @@ ion-back-button {
     // ion-segment-button.
     opacity: 1; // required for interaction states to work
   }
+
   /* stylelint-enable no-duplicate-selectors */
 
   // Properly center back-icon
@@ -298,6 +299,10 @@ ion-content {
     max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
     padding-bottom: utils.size('xl');
+
+    // Prevents flickering on navigation back animation on ios
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   /*

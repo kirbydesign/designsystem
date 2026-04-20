@@ -3,7 +3,7 @@ import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
-  selector: 'cookbook-avatar-example-icon',
+  selector: 'cookbook-avatar-example-size',
   template: `<kirby-avatar size="xs">
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>
@@ -18,15 +18,16 @@ const config = {
 
 <kirby-avatar size="lg">
   <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>`,
+</kirby-avatar>
+`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./avatar-examples.shared.scss'],
+  styleUrls: ['./avatar-sizes.scss'],
   imports: [AvatarComponent, IconComponent],
 })
-export class AvatarExampleIconComponent {
+export class AvatarExampleSizeComponent {
   template: string = config.template;
 }

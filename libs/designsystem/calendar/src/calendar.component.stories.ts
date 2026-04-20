@@ -31,3 +31,11 @@ export const Calendar: Story = {
     todayDate: new Date(2024, 0, 2),
   },
 };
+
+export const DisabledDates: Story = {
+  args: {
+    todayDate: new Date(2024, 0, 1),
+    selectedDate: new Date(2024, 0, 2),
+    disabledDates: [new Date(2024, 0, 1)],
+  },
+};
