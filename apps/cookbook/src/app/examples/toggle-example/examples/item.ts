@@ -18,8 +18,7 @@ const config = {
     [title]="section">
   </kirby-list-section-header>
    <kirby-item *kirbyListItemTemplate="let item">
-     <p class="kirby-item-title">{{item.title}}</p>
-     <kirby-toggle slot="end"></kirby-toggle>
+    <kirby-toggle slot="end">{{item.title}}</kirby-toggle>
    </kirby-item>
 </kirby-list>
 `,
