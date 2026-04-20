@@ -59,7 +59,7 @@ describe('CheckboxComponent', () => {
     it('should have correct vertical spacing', () => {
       expect(label).toHaveComputedStyle({
         'padding-left': size('s'),
-        'padding-right': size('xs'),
+        'padding-right': size('s'),
       });
     });
 

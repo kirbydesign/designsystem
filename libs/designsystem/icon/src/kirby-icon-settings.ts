@@ -21,6 +21,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'calendar', svg: 'calendar.svg' },
     { name: 'camera', svg: 'camera.svg' },
     { name: 'car', svg: 'car.svg' },
+    { name: 'chainlink', svg: 'chainlink.svg' },
     { name: 'checkbox-outline', svg: 'checkbox-outline.svg' },
     { name: 'checkbox', svg: 'checkbox.svg' },
     { name: 'checkmark-selected', svg: 'checkmark-selected.svg' },

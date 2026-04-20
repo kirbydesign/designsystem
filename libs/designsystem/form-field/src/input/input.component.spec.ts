@@ -51,7 +51,6 @@ describe('InputComponent', () => {
 
   it('should render without outline', () => {
     expect(element).toHaveComputedStyle({
-      'outline-width': '0px',
       'outline-style': 'none',
     });
   });

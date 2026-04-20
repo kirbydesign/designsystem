@@ -38,6 +38,42 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     type: 'submenu',
+    id: 'favorites',
+    title: 'Favorites',
+    icon: 'copy',
+    children: [
+      {
+        type: 'router-link',
+        id: 'menu-item-apple',
+        title: 'Apple',
+        route: '/menu-item/apple',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-banana',
+        title: 'Banana',
+        route: '/menu-item/banana',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-lemon',
+        title: 'Lemon',
+        route: '/menu-item/lemon',
+      },
+      {
+        type: 'router-link',
+        id: 'menu-item-pear',
+        title: 'Pear',
+        route: '/menu-item/pear',
+      },
+    ],
+  },
+  {
+    type: 'divider',
+    id: 'divider-2',
+  },
+  {
+    type: 'submenu',
     id: 'menu-item-1',
     title: 'Menu item 1',
     icon: 'copy',
@@ -193,7 +229,7 @@ const menuItemsExample: SidebarMenuItem[] = [
   },
   {
     type: 'divider',
-    id: 'divider-2',
+    id: 'divider-3',
   },
   {
     type: 'router-link',
@@ -215,6 +251,16 @@ const menuItemsExample: SidebarMenuItem[] = [
     title: 'Contact',
     icon: 'contact',
     route: '/contact',
+  },
+];
+const menuItemsWithExternalLinks: SidebarMenuItem[] = [
+  ...menuItemsExample,
+  {
+    type: 'external-link',
+    id: 'external-link-1',
+    title: 'External Link 1',
+    icon: 'balloon',
+    url: 'https://example.com/external-link-1',
   },
 ];
 
@@ -239,8 +285,8 @@ type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string }
  * - *Submenus* contain nested menu items.
  * - *Router links* navigate within the application using Angular's Router.
  * - *Dividers* are used to separate groups of menu items visually.
+ * - *External links* navigate to external URLs and can open in a new tab. They have an external link icon at the end to indicate that they lead to an external destination.
  *
- * Note: Items can also be configured as external links, but the design for this feature is not finalized yet.
  *
  */
 const meta: Meta<SidebarPropsAndCustomArgs> = {
@@ -299,6 +345,18 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
     },
     checkChange: {
       description: 'Event emitted when a menu item toggle is checked/unchecked',
+      control: false,
+    },
+    itemReorder: {
+      description: 'Event emitted when menu items are reordered',
+      control: false,
+    },
+    itemSelect: {
+      description: 'Event emitted when a menu item is selected',
+      control: false,
+    },
+    menuItemsChange: {
+      description: 'Event emitted when the menu items input changes',
       control: false,
     },
     mainAreaContent: { table: { disable: true } },
@@ -388,6 +446,19 @@ export const WithActions: Story = {
 };
 
 /**
+ * A sidebar that highlights external-link and action items which display an external link icon.
+ */
+export const WithExternalLinkIcons: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsWithExternalLinks,
+    mainAreaContent:
+      '<h1>Sidebar with External Link Icons</h1><p>External link and action items display an external link icon.</p>',
+  },
+};
+
+/**
  * A sidebar with toggle buttons on its items.
  *
  * > __Important:__ The current implementation of toggle buttons in the sidebar menu is not WCAG compliant.
@@ -397,7 +468,7 @@ export const WithToggleButtons: Story = {
   ...Default,
   args: {
     ...Default.args,
-    menuItems: menuItemsExample.map(convertToToggleButtonsExample),
+    menuItems: menuItemsWithExternalLinks.map(convertToToggleButtonsExample),
     mainAreaContent: '<h1>Sidebar with Toggle Buttons</h1>',
   },
 };
@@ -418,5 +489,33 @@ function convertToToggleButtonsExample(item: SidebarMenuItem): SidebarMenuItem {
       uncheckedIcon: 'star',
       checkedIcon: 'star-fill',
     },
+  };
+}
+
+/**
+ * A sidebar with menu items that can be re-ordered. Re-ordering should be limited to the top-level items inside a sub-menu, demonstrated in this example through the "Favorites" menu item.
+ *
+ * > __Important:__ The current implementation of reorderable items in the sidebar menu is not WCAG compliant.
+ * > It is therefore recommended to avoid using this feature in consumer-facing solutions that should adhere to accessibility standards.
+ */
+export const WithReorderableMenuItems: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    menuItems: menuItemsExample.map(convertToReorderableExample),
+    mainAreaContent: '<h1>Sidebar with reorderable favorites submenu items</h1>',
+  },
+};
+
+function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
+  if (item.type === 'submenu' && item.id === 'favorites') {
+    return {
+      ...item,
+      isReorderable: true,
+      children: item.children.map(convertToReorderableExample),
+    };
+  }
+  return {
+    ...item,
   };
 }

@@ -5,47 +5,28 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
   selector: 'cookbook-avatar-example-colors',
-  template: `<kirby-avatar themeColor="light" title="light (default)">
+  template: `<div class="avatar-item-container">
+  <div class="avatar-item-inner-container-bg-none">
+    <kirby-avatar themeColor="white">
+      <kirby-icon name="kirby">
+      </kirby-icon>
+    </kirby-avatar>
+  </div>
+</div>
+
+<div class="avatar-item-container">
+  <div class="avatar-item-inner-container-bg">
+    <kirby-avatar themeColor="light">
+      <kirby-icon name="kirby">
+      </kirby-icon>
+    </kirby-avatar>
+  </div>
+</div>`,
+  htmlSnippet: `<kirby-avatar themeColor="white">
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>
 
-<kirby-avatar themeColor="semi-light" title="semi-light">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="medium" title="medium">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="white" title="white">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="dark" title="dark">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="primary" title="primary">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="secondary" title="secondary">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="tertiary" title="tertiary">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="success" title="success">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="warning" title="warning">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="danger" title="danger">
+<kirby-avatar themeColor="light">
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>`,
 };
@@ -58,6 +39,7 @@ const config = {
 })
 export class AvatarExampleColorsComponent {
   template: string = config.template;
+  htmlSnippet: string = config.htmlSnippet;
 
   @HostBinding('class.wrap')
   shouldWrap: boolean = true;
