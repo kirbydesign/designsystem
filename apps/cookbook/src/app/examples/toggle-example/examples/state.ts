@@ -1,26 +1,12 @@
 import { Component } from '@angular/core';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-toggle-state-example',
   template: `
-  <div class="container-wrapper">
-  <kirby-item>
-    <p class="kirby-item-title">Default</p>
-  <kirby-toggle slot="end"></kirby-toggle>
- </kirby-item>
-
-<kirby-item>
-    <p class="kirby-item-title">Checked</p> 
+    <kirby-toggle slot="end"></kirby-toggle>
     <kirby-toggle checked="true" (checkedChange)="onCheckedChange($event)" slot="end"></kirby-toggle>
-</kirby-item>
-
-<kirby-item>
-    <p class="kirby-item-title">Disabled</p> 
     <kirby-toggle disabled="true" slot="end"></kirby-toggle>
-</kirby-item>
-</div>
 `,
 };
 
@@ -28,7 +14,7 @@ const config = {
   selector: config.selector,
   styleUrls: ['./toggle-examples.shared.scss'],
   template: config.template,
-  imports: [ToggleComponent, ItemComponent],
+  imports: [ToggleComponent],
 })
 export class ToggleStateExampleComponent {
   template = config.template;

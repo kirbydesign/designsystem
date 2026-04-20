@@ -1,9 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-kirby-item:not(:last-child) {
-  margin-bottom: var(--kirby-spacing-xxs);
-}
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: utils.size('s');
 
-.container-wrapper {
-  max-width: 200px;
+  @include utils.media('>=medium') {
+    flex-direction: row;
+    gap: utils.size('s');
+  }
 }
