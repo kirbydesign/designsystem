@@ -547,6 +547,14 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
 
     const input = event.target as HTMLInputElement;
     this.searchItems = input.value ? this.searchFunction(input.value, this.items) : this.items;
+
+    // Screen readers (VoiceOver/NVDA) may move real browser focus to a list-item button.
+    // When the list re-renders after filtering, that button is removed from the DOM and
+    // focus falls to `document.body`. Restore it to the input so the user can keep typing
+    // and the focusout handler doesn't mistake the body-focus for a genuine blur-away.
+    if (document.activeElement !== this.textInput?.nativeElement) {
+      this.textInput?.nativeElement.focus();
+    }
   }
 
   protected onPopoverWillHide() {
@@ -574,19 +582,38 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     }
   }
 
-  @HostListener('focusout', ['$event'])
-  public onFocusOut(event: FocusEvent) {
-    const relatedTarget = event.relatedTarget as HTMLElement | null; // relatedTarget is the element receiving focus
-    const isOnTriggerButton =
-      relatedTarget && this.elementRef.nativeElement.contains(relatedTarget);
-    const isInsidePopover = relatedTarget && relatedTarget.closest('kirby-popover');
+  @HostListener('focusout')
+  public onFocusOut() {
+    // Defer the check to allow the browser (and screen readers like VoiceOver/NVDA)
+    // to settle focus. `relatedTarget` is often `null` with screen readers, so we
+    // inspect `document.activeElement` after the microtask queue has flushed.
+    setTimeout(() => {
+      const activeElement = document.activeElement as HTMLElement | null;
+      const isOnTriggerButton =
+        activeElement && this.elementRef.nativeElement.contains(activeElement);
+      const isInsidePopover = activeElement && activeElement.closest('kirby-popover');
 
-    if (!isOnTriggerButton && !isInsidePopover) {
+      if (isOnTriggerButton || isInsidePopover) {
+        // Focus is still within the component — nothing to do.
+        return;
+      }
+
+      // When a screen reader (VoiceOver/NVDA) moves real focus to a list-item button
+      // and the user then types a character, CDK virtual scroll re-renders the list and
+      // removes the focused button from the DOM. The browser then drops focus to
+      // `document.body`. Detect this case: if the popover is still showing and focus is
+      // on the body, it means focus was lost due to DOM removal — restore it to the
+      // input rather than closing the popover.
+      if (this.isOpen && activeElement === document.body) {
+        this.textInput?.nativeElement.focus();
+        return;
+      }
+
       if (this.isOpen) {
         this.close();
       }
       this.onTouched();
-    }
+    }, 0);
   }
 
   @HostListener('keydown.tab')
