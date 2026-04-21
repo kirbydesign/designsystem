@@ -6,8 +6,6 @@
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
-// test comment
-
 :host {
   display: inline-flex;
 
