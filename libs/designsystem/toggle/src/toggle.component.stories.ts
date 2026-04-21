@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { ToggleExampleComponent } from '~/app/examples/toggle-example.component';
 
 const meta: Meta<ToggleComponent> = {
   component: ToggleComponent,
   title: 'Components / Toggle',
   decorators: [
     moduleMetadata({
-      imports: [ToggleComponent],
+      imports: [ToggleComponent, ToggleExampleComponent],
     }),
   ],
 };
