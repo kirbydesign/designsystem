@@ -710,13 +710,13 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
 
   private setFocusOnFirstOrLastItem(keyEvent: KeyboardEvent): void {
     switch (keyEvent.key) {
-      case 'ArrowUp':
-      case 'PageUp':
+      case 'ArrowDown':
+      case 'PageDown':
       case 'Home':
         this.setFocusOnFirstItem();
         break;
-      case 'ArrowDown':
-      case 'PageDown':
+      case 'ArrowUp':
+      case 'PageUp':
       case 'End':
         this.setFocusOnLastItem();
         break;

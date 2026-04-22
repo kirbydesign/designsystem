@@ -179,7 +179,7 @@ describe('Combobox', () => {
 
   describe('keyboard navigation', () => {
     describe('arrow down key', () => {
-      it('opens the popover and highlights the last item', fakeAsync(() => {
+      it('opens the popover and highlights the first item', fakeAsync(() => {
         // Arrange
 
         // Act
@@ -189,93 +189,15 @@ describe('Combobox', () => {
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const lastItemIndex = kirbyItems.length - 1;
-        expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
-      }));
-
-      it('arrow down and then arrow up highlights the second last item', fakeAsync(() => {
-        // Arrange
-
-        // Act
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-
-        // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const secondLastItemIndex = kirbyItems.length - 2;
-        expect(kirbyItems.item(secondLastItemIndex)).toHaveClass('focused');
-      }));
-
-      it('arrow down and then arrow up and press enter key selects the highlighted item and closes the popover', fakeAsync(() => {
-        // Arrange
-
-        // Act
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
-
-        // Assert
-        const secondLastItemIndex = items20.length - 2;
-        expect(spectator.component.isOpen).toBeFalsy();
-        expect(spectator.component.value).toEqual(items20[secondLastItemIndex]);
-        expect(inputElement).toHaveValue(items20[secondLastItemIndex].text);
-      }));
-
-      it('arrow down and then arrow up and press tab key selects the highlighted item and closes the popover', fakeAsync(() => {
-        // Arrange
-
-        // Act
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Tab');
-
-        // Assert
-        const secondLastItemIndex = items20.length - 2;
-        expect(spectator.component.isOpen).toBeFalsy();
-        expect(spectator.component.value).toEqual(items20[secondLastItemIndex]);
-        expect(inputElement).toHaveValue(items20[secondLastItemIndex].text);
-      }));
-
-      it('arrow down after an item was selected opens the popover and highlights the selected item', fakeAsync(() => {
-        // Arrange
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
-
-        // Act
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
-
-        // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const selectedItemIndex = items20.length - 2;
-        expect(kirbyItems.item(selectedItemIndex)).toHaveClass('focused');
-      }));
-    });
-
-    describe('arrow up key', () => {
-      it('opens the popover and highlights the first item', fakeAsync(() => {
-        // Arrange
-
-        // Act
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        tick(openDelayInMs);
-
-        // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
         const firstItemIndex = 0;
         expect(kirbyItems.item(firstItemIndex)).toHaveClass('focused');
       }));
 
-      it('arrow up and then down highlights the second item', fakeAsync(() => {
+      it('arrow down twice highlights the second item', fakeAsync(() => {
         // Arrange
 
         // Act
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
         tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
 
@@ -285,9 +207,87 @@ describe('Combobox', () => {
         expect(kirbyItems.item(secondItemIndex)).toHaveClass('focused');
       }));
 
-      it('arrow up after an item was selected opens the popover and highlights the selected item', fakeAsync(() => {
+      it('arrow down twice and press enter key selects the highlighted item and closes the popover', fakeAsync(() => {
+        // Arrange
+
+        // Act
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        tick(openDelayInMs);
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
+
+        // Assert
+        const secondItemIndex = 1;
+        expect(spectator.component.isOpen).toBeFalsy();
+        expect(spectator.component.value).toEqual(items20[secondItemIndex]);
+        expect(inputElement).toHaveValue(items20[secondItemIndex].text);
+      }));
+
+      it('arrow down twice and press tab key selects the highlighted item and closes the popover', fakeAsync(() => {
+        // Arrange
+
+        // Act
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        tick(openDelayInMs);
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Tab');
+
+        // Assert
+        const secondItemIndex = 1;
+        expect(spectator.component.isOpen).toBeFalsy();
+        expect(spectator.component.value).toEqual(items20[secondItemIndex]);
+        expect(inputElement).toHaveValue(items20[secondItemIndex].text);
+      }));
+
+      it('arrow down after an item was selected opens the popover and highlights the selected item', fakeAsync(() => {
         // Arrange
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        tick(openDelayInMs);
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
+
+        // Act
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        tick(openDelayInMs);
+
+        // Assert
+        const kirbyItems = document.querySelectorAll('kirby-item');
+        const selectedItemIndex = 1;
+        expect(kirbyItems.item(selectedItemIndex)).toHaveClass('focused');
+      }));
+    });
+
+    describe('arrow up key', () => {
+      it('opens the popover and highlights the last item', fakeAsync(() => {
+        // Arrange
+
+        // Act
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
+        tick(openDelayInMs);
+
+        // Assert
+        const kirbyItems = document.querySelectorAll('kirby-item');
+        const lastItemIndex = items20.length - 1;
+        expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
+      }));
+
+      it('arrow up twice highlights the second last item', fakeAsync(() => {
+        // Arrange
+
+        // Act
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
+        tick(openDelayInMs);
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
+
+        // Assert
+        const kirbyItems = document.querySelectorAll('kirby-item');
+        const secondLastItemIndex = items20.length - 2;
+        expect(kirbyItems.item(secondLastItemIndex)).toHaveClass('focused');
+      }));
+
+      it('arrow up after an item was selected opens the popover and highlights the selected item', fakeAsync(() => {
+        // Arrange
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
         tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
@@ -304,7 +304,7 @@ describe('Combobox', () => {
     });
 
     describe('page down key', () => {
-      it('popover and highlights the last item', fakeAsync(() => {
+      it('popover and highlights the first item', fakeAsync(() => {
         // Arrange
 
         // Act
@@ -314,8 +314,8 @@ describe('Combobox', () => {
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const lastItemIndex = kirbyItems.length - 1;
-        expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
+        const firstItemIndex = 0;
+        expect(kirbyItems.item(firstItemIndex)).toHaveClass('focused');
       }));
 
       it('skips 10 items and highlights the 10th plus item', fakeAsync(() => {
@@ -350,7 +350,7 @@ describe('Combobox', () => {
     });
 
     describe('page up key', () => {
-      it('popover and highlights the first item', fakeAsync(() => {
+      it('popover and highlights the last item', fakeAsync(() => {
         // Arrange
 
         // Act
@@ -360,13 +360,13 @@ describe('Combobox', () => {
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const firstItemIndex = 0;
-        expect(kirbyItems.item(firstItemIndex)).toHaveClass('focused');
+        const lastItemIndex = items20.length - 1;
+        expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
       }));
 
       it('skips 10 items and highlights the 10th minus item', fakeAsync(() => {
         // Arrange
-        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
         tick(openDelayInMs);
 
         // Act
