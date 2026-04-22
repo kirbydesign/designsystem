@@ -81,10 +81,39 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     }
 
     const lowerSearchTerm = searchTerm.toLowerCase();
-    return itemsToSearch.filter((item) =>
-      this.getItemText(item).toLowerCase().includes(lowerSearchTerm)
-    );
+    return itemsToSearch
+      .filter((item) => this.getItemText(item).toLowerCase().includes(lowerSearchTerm))
+      .sort((a, b) => {
+        const textA = this.getItemText(a).toLowerCase();
+        const textB = this.getItemText(b).toLowerCase();
+
+        const textAStartsWith = textA.startsWith(searchTerm);
+        const textBStartsWith = textB.startsWith(searchTerm);
+        if (textAStartsWith && textBStartsWith) {
+          return this.compareAlphabetically(textA, textB);
+        }
+
+        if (textAStartsWith) {
+          return -1;
+        }
+
+        if (textBStartsWith) {
+          return 1;
+        }
+
+        return this.compareAlphabetically(textA, textB);
+      });
   };
+
+  private compareAlphabetically(textA: string, textB: string): number {
+    if (textA < textB) {
+      return -1;
+    }
+    if (textA > textB) {
+      return 1;
+    }
+    return 0;
+  }
 
   @Input()
   public noSearchResultsText = 'No results found.';
