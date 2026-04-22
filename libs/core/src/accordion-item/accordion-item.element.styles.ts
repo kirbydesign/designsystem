@@ -79,14 +79,14 @@ export default css`
   }
 
   .content {
-    visibility: hidden;
-    cursor: default;
     overflow: hidden;
+    height: 0;
+    interpolate-size: allow-keywords;
+    transition: height 0.25s ease;
   }
 
   :host([isexpanded]) .content {
     height: auto;
-    visibility: visible;
   }
 
   :host([haspadding]) .content-body {
@@ -113,20 +113,6 @@ export default css`
     .content-body {
       overflow: hidden;
       min-height: 0;
-    }
-  }
-
-  /* Chrome / Edge */
-  @supports (interpolate-size: allow-keywords) {
-    .content {
-      overflow: hidden;
-      height: 0;
-      interpolate-size: allow-keywords;
-      transition: height 0.25s ease;
-    }
-
-    :host([isexpanded]) .content {
-      height: auto;
     }
   }
 
