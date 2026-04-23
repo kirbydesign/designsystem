@@ -10,7 +10,7 @@
   --kirby-inputs-indicator-background-color: var(--kirby-white);
   --kirby-inputs-indicator-color: var(--kirby-black);
   --kirby-inputs-placeholder-color: var(--kirby-white-overlay-50);
-  --kirby-segmentcontrol-hover-color: var(--kirby-white-overlay-50);
+  --kirby-inputs-color-hover: var(--kirby-white-overlay-50);
   --kirby-inputs-elevation: none;
 }
 
@@ -22,7 +22,7 @@
   --kirby-inputs-indicator-background-color: var(--kirby-black);
   --kirby-inputs-indicator-color: var(--kirby-white);
   --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
-  --kirby-segmentcontrol-hover-color: var(--kirby-semi-dark);
+  --kirby-inputs-color-hover: var(--kirby-semi-dark);
   --kirby-inputs-elevation: none;
   --kirby-divider-color: #{utils.get-color('background-color')};
 }
@@ -35,7 +35,7 @@
   --kirby-inputs-indicator-background-color: var(--kirby-black);
   --kirby-inputs-indicator-color: var(--kirby-white);
   --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
-  --kirby-segmentcontrol-hover-color: var(--kirby-semi-dark);
+  --kirby-inputs-color-hover: var(--kirby-semi-dark);
   --kirby-divider-color: #{utils.get-color('medium')};
 
   // Only set elevation on input components for light theme
