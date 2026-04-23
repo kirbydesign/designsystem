@@ -44,6 +44,7 @@
                 selected: item === selectedItem,
                 focused: item === focusedItem,
                 index: i,
+                setsize: searchItems.length,
               }
             "
           ></ng-container>
@@ -53,15 +54,24 @@
   </kirby-card>
 </kirby-popover>
 
-<ng-template #defaultItemTemplate let-item let-selected="selected" let-focused="focused">
+<ng-template
+  #defaultItemTemplate
+  let-item
+  let-selected="selected"
+  let-focused="focused"
+  let-index="index"
+  let-setsize="setsize"
+>
   <kirby-item
+    role="option"
     [selectable]="true"
     [selected]="selected"
-    (click)="onItemSelect(item)"
     [class.focused]="focused"
-    role="option"
     [attr.id]="getItemId(item)"
     [attr.aria-selected]="selected"
+    [attr.aria-setsize]="setsize"
+    [attr.aria-posinset]="index + 1"
+    (click)="onItemSelect(item)"
   >
     <p class="kirby-item-title">{{ getItemText(item) }}</p>
     @if (selected) {
