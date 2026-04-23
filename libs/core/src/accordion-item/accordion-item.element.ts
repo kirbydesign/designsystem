@@ -50,7 +50,9 @@ export class KirbyAccordionItemElement extends KirbyElement {
       const assigned = slot.assignedElements({ flatten: true });
       const hasList = assigned.some((el) => el.tagName === 'KIRBY-LIST');
       this.hasList = hasList;
-      this.hasPadding = !hasList;
+      if (hasList) {
+        this.hasPadding = false;
+      }
       assigned.forEach((el) => {
         if (el.tagName === 'KIRBY-LIST') {
           el.setAttribute('shape', 'none');
