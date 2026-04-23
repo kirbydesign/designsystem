@@ -14,7 +14,7 @@ export default css`
 
   :host(:first-child) {
     border-top: var(
-      --kirby-accordion-item-first-border-top,
+      --kirby-accordion-item-border,
       1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color))
     );
   }
@@ -147,10 +147,7 @@ export default css`
   }
 
   :host(:last-child) {
-    border-bottom: var(
-      --kirby-accordion-item-last-border-bottom,
-      1px solid var(--kirby-divider-color)
-    );
+    border-bottom: var(--kirby-accordion-item-border, 1px solid var(--kirby-divider-color));
   }
 
   @media (hover: hover) {
