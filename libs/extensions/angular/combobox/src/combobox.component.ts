@@ -248,9 +248,43 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
   }
 
   public set focusedItem(item: unknown) {
-    if (this._focusedItem !== item) {
-      this._focusedItem = item;
+    if (this._focusedItem === item) {
+      return;
     }
+    this._focusedItem = item;
+
+    const htmlElement = this.getKirbyHtmlElementForItem(item);
+    const index = this.getIndexOfItem(item);
+    const setsize = this.searchItems.length;
+    this.setAriaAttributeOnHtmlElement(htmlElement, 'aria-setsize', setsize.toString());
+    this.setAriaAttributeOnHtmlElement(htmlElement, 'aria-posinset', `${index + 1}`);
+  }
+
+  private getIndexOfItem(item: unknown): number {
+    return this.searchItems.indexOf(item);
+  }
+
+  private getKirbyHtmlElementForItem(
+    item: unknown | undefined
+  ): ElementRef<HTMLElement> | undefined {
+    const kirbyItems = this.getKirbyItems();
+    if (!kirbyItems || !item) {
+      return undefined;
+    }
+
+    const itemId = this.getItemId(item);
+    return kirbyItems.find((el) => el.nativeElement.id === itemId);
+  }
+
+  private setAriaAttributeOnHtmlElement(
+    htmlElement: ElementRef<HTMLElement> | undefined,
+    attributeName: string,
+    value: string
+  ): void {
+    if (!htmlElement) {
+      return;
+    }
+    this.renderer.setAttribute(htmlElement.nativeElement, attributeName, value);
   }
 
   @Input()

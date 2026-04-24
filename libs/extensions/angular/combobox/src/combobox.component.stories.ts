@@ -145,7 +145,6 @@ export const WithTextProperty: Story = {
  * The items are objects with 'code' and 'name' properties, and we set the 'itemTextProperty' to 'code' to display the currency codes when an item is selected.
  * The custom template allows us to display both the currency code and name in a more visually appealing way.
  * The filtering will still be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items with their corresponding names.
- * For accessibility reasons, we also set the appropriate ARIA attributes in the template, such as 'role', 'aria-selected', 'aria-setsize', and 'aria-posinset' to ensure that the dropdown is accessible to screen readers and assistive technologies.
  * NOTE: When using a custom template, it's important to ensure that the 'itemIdProperty' is set correctly and is equal to '[attr.id]' selecting and scrolling to work properly, as the component relies on the item IDs to manage selection and focus within the dropdown. In this example, we set 'itemIdProperty' to 'code', and in the template, we bind '[attr.id]' to 'item.code' to ensure that each item has a unique ID that corresponds to its code.
  * Also it is important to set 'itemHeight' of your items, otherwise the component will not be able to calculate the height of the dropdown and it will not be able to scroll to the selected item when the dropdown is opened.
  */
@@ -174,15 +173,13 @@ export const WithTemplate: Story = {
         [hasError]="hasError"
       >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused; let setsize = setsize; let index = index"
+          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           role="option"
           [selectable]="true"
           [selected]="selected"
           [class.focused]="focused"
           [attr.aria-selected]="selected"
           [attr.id]="item.code"
-          [attr.aria-setsize]="setsize"
-          [attr.aria-posinset]="index + 1"
         >
           <kirby-label>
             <p class="kirby-item-title">{{ item.code }}</p>
@@ -226,7 +223,7 @@ export const CustomSearchFunction: Story = {
         [searchFunction]="searchFunction"
       >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused; let setsize = setsize; let index = index"
+          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
           [selectable]="true"
           [selected]="selected"
@@ -234,8 +231,6 @@ export const CustomSearchFunction: Story = {
           role="option"
           [attr.aria-selected]="selected"
           [attr.id]="item.code"
-          [attr.aria-setsize]="setsize"
-          [attr.aria-posinset]="index + 1"
         >
           <kirby-label>
             <p class="kirby-item-title">{{ item.code }}</p>
@@ -272,7 +267,7 @@ export const LargeList: Story = {
         [placeholder]="placeholder"
       >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused; let setsize = setsize; let index = index"
+          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
           [selectable]="true"
           [selected]="selected"
@@ -280,8 +275,6 @@ export const LargeList: Story = {
           role="option"
           [attr.aria-selected]="selected"
           [attr.id]="item.code"
-          [attr.aria-setsize]="setsize"
-          [attr.aria-posinset]="index + 1"
         >
           <kirby-label>
             <p class="kirby-item-title">{{ item.code }}</p>
