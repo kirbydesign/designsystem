@@ -2,15 +2,16 @@
   <input
     kirby-input
     type="text"
-    [attr.id]="_comboboxId"
     aria-haspopup="listbox"
-    [attr.aria-controls]="_listboxId"
-    [attr.aria-expanded]="isOpen"
-    [attr.aria-activedescendant]="isOpen && focusedItem ? getItemId(focusedItem) : null"
+    role="combobox"
     [hasError]="hasError"
     [size]="size"
     [disabled]="disabled"
     [placeholder]="placeholder"
+    [attr.id]="_comboboxId"
+    [attr.aria-controls]="_listboxId"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-activedescendant]="isOpen && focusedItem ? getItemId(focusedItem) : null"
     (input)="updateSearchResults($event)"
   />
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'" kirby-affix="suffix"></kirby-icon>
@@ -22,7 +23,7 @@
   (click)="onPopoverClick()"
   (willHide)="onPopoverWillHide()"
 >
-  <kirby-card role="listbox" [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
+  <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
     @if (searchItems.length === 0) {
       <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
@@ -30,12 +31,13 @@
     } @else {
       <cdk-virtual-scroll-viewport
         class="combobox-viewport"
+        role="listbox"
         minBufferPx="1240"
         maxBufferPx="1620"
         [itemSize]="itemHeight"
         [style.height.px]="viewportHeight"
       >
-        <ng-container *cdkVirtualFor="let item of searchItems; let i = index">
+        <ng-container *cdkVirtualFor="let item of searchItems">
           <ng-container
             *ngTemplateOutlet="
               itemTemplate || defaultItemTemplate;
@@ -43,8 +45,6 @@
                 $implicit: item,
                 selected: item === selectedItem,
                 focused: item === focusedItem,
-                index: i,
-                setsize: searchItems.length,
               }
             "
           ></ng-container>
@@ -54,14 +54,7 @@
   </kirby-card>
 </kirby-popover>
 
-<ng-template
-  #defaultItemTemplate
-  let-item
-  let-selected="selected"
-  let-focused="focused"
-  let-index="index"
-  let-setsize="setsize"
->
+<ng-template #defaultItemTemplate let-item let-selected="selected" let-focused="focused">
   <kirby-item
     role="option"
     [selectable]="true"
@@ -69,8 +62,6 @@
     [class.focused]="focused"
     [attr.id]="getItemId(item)"
     [attr.aria-selected]="selected"
-    [attr.aria-setsize]="setsize"
-    [attr.aria-posinset]="index + 1"
     (click)="onItemSelect(item)"
   >
     <p class="kirby-item-title">{{ getItemText(item) }}</p>

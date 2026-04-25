@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -11,7 +12,6 @@ import {
   HostListener,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   Renderer2,
@@ -62,8 +62,9 @@ import { OpenState } from './combobox.types';
     CdkVirtualScrollViewport,
     CdkVirtualForOf,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
@@ -190,9 +191,10 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
       }
     }
 
-    throw new Error(
+    console.error(
       'Each item must have an id property for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
     );
+    return '';
   }
 
   @Input()
@@ -451,10 +453,6 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     this.isOpen ? this.close() : this.open();
   }
 
-  public ngOnInit() {
-    this.ensureComponents();
-  }
-
   public ngAfterViewInit() {
     if (this.expand === 'block') {
       const { width: initialWidth } = this.elementRef.nativeElement.getBoundingClientRect();
@@ -485,12 +483,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
 
   public ngOnDestroy(): void {
     this.unlistenAllSlottedItems();
-  }
-
-  private ensureComponents(): void {
-    if (!this.rootElement) {
-      throw new Error('requires the component to function properly');
-    }
+    this.unobserveResize();
   }
 
   public open(): void {
@@ -687,14 +680,13 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     }
   }
 
-  @HostListener('keydown.enter')
   @HostListener('keydown.escape')
-  public onEnterOrEscape() {
+  public onEscape() {
     this.close();
   }
 
   @HostListener('keydown.enter', ['$event'])
-  public onEnterOrSpace(event: Event) {
+  public onEnterO(event: Event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -813,6 +805,10 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     }
   }
 
+  private unobserveResize() {
+    this.resizeObserverService.unobserve(this.elementRef);
+  }
+
   /**
    * Resolve a model/data item based on current `items` by comparing displayed text.
    * This is used to map an incoming form value or input `selectedItem` to an item
@@ -847,7 +843,7 @@ export class ComboboxComponent implements OnInit, AfterViewInit, OnDestroy, Cont
 
     const match = kirbyItems.toArray().find((el) => {
       if (el.nativeElement.id === undefined) {
-        throw new Error(
+        console.error(
           'Each item must have an id attribute for scroll to work. Ensure that the ´[attr.id]´ is set correctly, and that each item has a unique id value.'
         );
       }
