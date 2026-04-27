@@ -263,7 +263,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.searchItems.indexOf(item);
   }
 
-  private getKirbyElementForItem(item: unknown | undefined): ElementRef<HTMLElement> | undefined {
+  private getKirbyElement(item: unknown | undefined): ElementRef<HTMLElement> | undefined {
     const kirbyItems = this.getKirbyItems();
     if (!kirbyItems || !item) {
       return undefined;
@@ -274,7 +274,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   private setAriaPosinsetOnElement(item: unknown) {
-    const element = this.getKirbyElementForItem(item);
+    const element = this.getKirbyElement(item);
     const index = this.getIndexOfItem(item);
     const setsize = this.searchItems.length;
 
