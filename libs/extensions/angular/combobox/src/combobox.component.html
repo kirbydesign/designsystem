@@ -25,7 +25,7 @@
 >
   <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
     @if (searchItems.length === 0) {
-      <kirby-item>
+      <kirby-item [attr.aria-live]="'polite'">
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
     } @else {
