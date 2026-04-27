@@ -250,25 +250,20 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   public set focusedItem(item: unknown) {
+    // the focus might not have changed, but where in the list might
+    this.setAriaPosinsetOnElement(item);
+
     if (this._focusedItem === item) {
       return;
     }
     this._focusedItem = item;
-
-    const htmlElement = this.getKirbyHtmlElementForItem(item);
-    const index = this.getIndexOfItem(item);
-    const setsize = this.searchItems.length;
-    this.setAriaAttributeOnHtmlElement(htmlElement, 'aria-setsize', setsize.toString());
-    this.setAriaAttributeOnHtmlElement(htmlElement, 'aria-posinset', `${index + 1}`);
   }
 
   private getIndexOfItem(item: unknown): number {
     return this.searchItems.indexOf(item);
   }
 
-  private getKirbyHtmlElementForItem(
-    item: unknown | undefined
-  ): ElementRef<HTMLElement> | undefined {
+  private getKirbyElementForItem(item: unknown | undefined): ElementRef<HTMLElement> | undefined {
     const kirbyItems = this.getKirbyItems();
     if (!kirbyItems || !item) {
       return undefined;
@@ -278,15 +273,17 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return kirbyItems.find((el) => el.nativeElement.id === itemId);
   }
 
-  private setAriaAttributeOnHtmlElement(
-    htmlElement: ElementRef<HTMLElement> | undefined,
-    attributeName: string,
-    value: string
-  ): void {
-    if (!htmlElement) {
+  private setAriaPosinsetOnElement(item: unknown) {
+    const element = this.getKirbyElementForItem(item);
+    const index = this.getIndexOfItem(item);
+    const setsize = this.searchItems.length;
+
+    if (!element) {
       return;
     }
-    this.renderer.setAttribute(htmlElement.nativeElement, attributeName, value);
+
+    this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
+    this.renderer.setAttribute(element.nativeElement, 'aria-posintset', `${index + 1}`);
   }
 
   @Input()
