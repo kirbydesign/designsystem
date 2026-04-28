@@ -9,13 +9,13 @@ const config = {
   template: `<kirby-card>
   <kirby-item>
     Item with medium size input
-    <input kirby-input slot="end" size="md">
+    <input kirby-input slot="end" size="md" placeholder="Input in end slot">
   </kirby-item>
 </kirby-card>
 <kirby-card>
   <kirby-item>
     Item with large (default) size input
-    <input kirby-input slot="end">
+    <input kirby-input slot="end" placeholder="Input in end slot">
   </kirby-item>
 </kirby-card>`,
 };
