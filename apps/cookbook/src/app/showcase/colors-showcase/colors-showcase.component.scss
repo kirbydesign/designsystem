@@ -28,11 +28,7 @@
 
   @each $color-name, $color-value in utils.$text-colors {
     &.#{$color-name} {
-      background-color: utils.get-text-color(
-        $color-name + '-contrast',
-        true,
-        utils.$kirby-text-colors
-      );
+      background-color: var(--kirby-text-color-#{$color-name}-contrast);
       color: var(--kirby-text-color-#{$color-name});
 
       .color-values {

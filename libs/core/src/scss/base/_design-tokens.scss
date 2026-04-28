@@ -19,7 +19,7 @@
 }
 
 @mixin text-colors() {
-  @each $name, $value in colors.$text-colors {
+  @each $name, $value in colors.$kirby-text-colors {
     --kirby-text-color-#{$name}: #{$value};
   }
 }
