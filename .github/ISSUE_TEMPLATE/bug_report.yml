@@ -39,11 +39,11 @@ body:
       label: Severity
       description: How serious is the impact of this issue?
       options:
-        - Critical (app crashes or critical user flow broken)
-        - High (feature broken)
-        - Medium (usable with workaround)
-        - Low (minor issue)
-        - Trivial (design or code discrepancies, docs)
+        - 1:Critical (app crashes or critical user flow broken)
+        - 2:High (feature broken)
+        - 3:Medium (usable with workaround)
+        - 4:Low (minor issue)
+        - 5:Trivial (design or code discrepancies, docs)
     validations:
       required: true
 
