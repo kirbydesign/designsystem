@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
+import {
+  SegmentedControlComponent,
+  SegmentItem,
+} from '@kirbydesign/designsystem/segmented-control';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';

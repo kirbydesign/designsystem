@@ -6,7 +6,8 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { CheckboxComponent, SegmentedControlComponent } from '@kirbydesign/designsystem';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { SegmentedControlComponent } from '@kirbydesign/designsystem/segmented-control';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
 
