@@ -1,7 +1,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use './card-example.shared';
 
-$card-gap: utils.size('s');
+$card-gap: utils.size(
+  's'
+); // use scss variable instead of custom property here for container query compatability
 $card-min-width: 250px;
 $break-width: 2 * $card-min-width + $card-gap;
 
@@ -14,7 +16,7 @@ $break-width: 2 * $card-min-width + $card-gap;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: var(--kirby-spacing-s);
+  gap: $card-gap;
 
   kirby-card {
     max-width: 50%;
