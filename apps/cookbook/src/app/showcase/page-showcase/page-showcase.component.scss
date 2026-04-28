@@ -1,8 +1,7 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../showcase.shared';
 
 .page-example {
   display: flex;
-  margin-top: utils.size('xl');
-  margin-bottom: utils.size('xl');
+  margin-top: var(--kirby-spacing-xl);
+  margin-bottom: var(--kirby-spacing-xl);
 }

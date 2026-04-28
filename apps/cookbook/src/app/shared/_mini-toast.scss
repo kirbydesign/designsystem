@@ -1,7 +1,5 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 @mixin copied {
-  transition: transform utils.get-transition-duration('quick');
+  transition: transform var(--kirby-transition-duration-quick);
   cursor: pointer;
 
   &:hover {
@@ -12,11 +10,11 @@
     display: block;
     position: absolute;
     content: 'Copied!';
-    background-color: utils.get-color('semi-light');
-    color: utils.get-color('semi-dark-contrast');
-    font-size: utils.font-size('xxs');
-    padding: utils.size('xxxxs') utils.size('xxxs');
-    border-radius: utils.size('xxxs');
+    background-color: var(--kirby-semi-light);
+    color: var(--kirby-semi-dark-contrast);
+    font-size: var(--kirby-font-size-xxs);
+    padding: var(--kirby-spacing-xxxxs) var(--kirby-spacing-xxxs);
+    border-radius: var(--kirby-spacing-xxxs);
     opacity: 0;
     transform: translateY(-50%);
   }
