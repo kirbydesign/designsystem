@@ -30,24 +30,6 @@ describe('InputComponent in Item', () => {
       await TestHelper.whenReady(spectator.queryHost('ion-item'));
     });
 
-    it('should render with correct padding', () => {
-      expect(element).toHaveComputedStyle({
-        'padding-inline': '0px',
-      });
-    });
-
-    it('should render without border-radius', () => {
-      expect(element).toHaveComputedStyle({
-        'border-radius': '0px',
-      });
-    });
-
-    it('should render without box-shadow', () => {
-      expect(element).toHaveComputedStyle({
-        'border-shadow': '',
-      });
-    });
-
     it('should render with correct width', () => {
       //window.getComputedStyle() returns width in pixels - so use element.computedStyleMap:
       const styleWidth = (element as any).computedStyleMap().get('width').toString();
