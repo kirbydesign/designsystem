@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostBinding,
   HostListener,
   Inject,
@@ -39,10 +40,20 @@ export enum InputSize {
   selector: 'input[kirby-input]',
   styleUrls: ['./input.component.scss'],
   template: '',
+  providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => InputComponent) }],
 })
-export class InputComponent implements OnChanges, OnInit, FormFieldControl {
+export class InputComponent extends FormFieldControl implements OnChanges, OnInit {
+  override wrapInLabel = true;
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
+
+  getInteractiveElement(): HTMLElement | null {
+    return this.elementRef.nativeElement;
+  }
+
+  override getInputElement(): HTMLInputElement | null {
+    return this.elementRef.nativeElement;
+  }
 
   @Input() set type(value: string) {
     const mappedValue = InputComponent.typeToInputmodeMap[value];
@@ -106,6 +117,7 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
     private elementRef: ElementRef<HTMLInputElement>,
     @Optional() @Inject(NG_VALUE_ACCESSOR) builtInValueAccessors: ControlValueAccessor[]
   ) {
+    super();
     extendValueAccessors<string>(builtInValueAccessors, {
       writeValue: {
         afterWriteValue: (value) => this.kirbyChange.emit(value),

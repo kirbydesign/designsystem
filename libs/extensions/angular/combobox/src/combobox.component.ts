@@ -27,7 +27,7 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { AffixDirective, InputSize } from '@kirbydesign/designsystem/form-field';
-import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
+import { EventListenerDisposeFn, FormFieldControl } from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -49,6 +49,10 @@ import { OpenState } from './combobox.types';
       useExisting: forwardRef(() => ComboboxComponent),
       multi: true,
     },
+    {
+      provide: FormFieldControl,
+      useExisting: forwardRef(() => ComboboxComponent),
+    },
   ],
   imports: [
     InputComponent,
@@ -64,7 +68,10 @@ import { OpenState } from './combobox.types';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class ComboboxComponent
+  extends FormFieldControl
+  implements AfterViewInit, OnDestroy, ControlValueAccessor
+{
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
@@ -434,7 +441,13 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     private elementRef: ElementRef<HTMLElement>,
     private cdr: ChangeDetectorRef,
     private resizeObserverService: ResizeObserverService
-  ) {}
+  ) {
+    super();
+  }
+
+  getInteractiveElement(): HTMLElement | null {
+    return this.textInput?.nativeElement ?? null;
+  }
 
   protected onToggle(event: MouseEvent) {
     event.stopPropagation();

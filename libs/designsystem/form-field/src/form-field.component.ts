@@ -20,19 +20,14 @@ import {
   PlatformService,
   UniqueIdGenerator,
 } from '@kirbydesign/designsystem/helpers';
-import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { WindowRef } from '@kirbydesign/designsystem/types';
+import { FormFieldControl, WindowRef } from '@kirbydesign/designsystem/types';
 import { Subscription } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
-import { InputComponent } from './input/input.component';
-
-import { TextareaComponent } from './textarea/textarea.component';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 
 @Component({
@@ -48,11 +43,7 @@ export class FormFieldComponent
   private isRegistered = false;
   private element: HTMLElement;
   private isTouch: boolean;
-  private nestedInteractiveElement:
-    | HTMLButtonElement
-    | HTMLInputElement
-    | HTMLTextAreaElement
-    | HTMLIonRadioGroupElement;
+  private nestedInteractiveElement: HTMLElement | null = null;
   private nestedInteractiveErrorSubscription: Subscription;
   private _message: string | null | undefined;
   private _label: string | undefined;
@@ -84,16 +75,7 @@ export class FormFieldComponent
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
-  @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
-  @ContentChild(InputComponent) inputComponent: InputComponent;
-  @ContentChild(DropdownComponent) dropdownComponent: DropdownComponent;
-  @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
-  @ContentChild(RadioGroupComponent, { read: ElementRef })
-  private radioGroupElement: ElementRef<HTMLElement>;
-  @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
-  @ContentChild(DropdownComponent, { read: ElementRef }) dropdown: ElementRef<HTMLElement>;
-  @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
-
+  @ContentChild(FormFieldControl) private _formFieldControl: FormFieldControl;
   @ContentChild(DateInputDirective) dateInput: DateInputDirective;
 
   constructor(
@@ -109,7 +91,7 @@ export class FormFieldComponent
 
   @HostBinding('class.wrap-content-in-label')
   get _wrapContentInLabel(): boolean {
-    return !!this.label && (!!this.input || !!this.textarea);
+    return !!this.label && !!this._formFieldControl?.wrapInLabel;
   }
 
   private dispatchLoadEvent() {
@@ -129,30 +111,24 @@ export class FormFieldComponent
   }
 
   onLabelClick() {
-    // If its a radio group its focus method that contains advanced logic
-    this.radioGroupComponent
-      ? this.radioGroupComponent?.focus()
-      : this.nestedInteractiveElement?.focus();
+    this._formFieldControl?.focus();
   }
 
   public focus() {
-    if (!this.nestedInteractiveElement) return;
-    if (!(this.input || this.textarea)) return;
+    if (!this._formFieldControl?.wrapInLabel) return;
 
-    /*
-     * This timeout ensures that any previous manipulation of inputElement
-     * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
-     */
     setTimeout(() => {
+      const element = this._formFieldControl.getInteractiveElement();
+      if (!element) return;
       if (this.isTouch) {
         // Trigger Ionic's input shims to ensure input is scrolled into view.
         // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
         const touchStart = new TouchEvent('touchstart');
         const touchEnd = new TouchEvent('touchend');
-        this.nestedInteractiveElement.dispatchEvent(touchStart);
-        this.nestedInteractiveElement.dispatchEvent(touchEnd);
+        element.dispatchEvent(touchStart);
+        element.dispatchEvent(touchEnd);
       } else {
-        this.nestedInteractiveElement.focus();
+        element.focus();
       }
     });
   }
@@ -170,8 +146,8 @@ export class FormFieldComponent
       this.registerNestedInteractive();
     }
 
-    if (!this.isRegistered && this.element.isConnected && (this.input || this.textarea)) {
-      // Host is connected to dom and slotted input/textarea is present:
+    const inputElement = this._formFieldControl?.getInputElement();
+    if (!this.isRegistered && this.element.isConnected && inputElement) {
       this.isRegistered = true;
       this.dispatchLoadEvent();
     }
@@ -205,23 +181,20 @@ export class FormFieldComponent
   }
 
   private getNestedInteractiveElement() {
-    this.nestedInteractiveElement =
-      this.input?.nativeElement ||
-      this.textarea?.nativeElement ||
-      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group') ||
-      this.dropdown?.nativeElement.querySelector('button[kirby-button]');
+    this.nestedInteractiveElement = this._formFieldControl?.getInteractiveElement() ?? null;
   }
 
   private setNestedInteractiveMessageAttributes() {
     if (!this.nestedInteractiveElement) return;
 
     if (this.message) {
-      this.renderer.setAttribute(
-        this.nestedInteractiveElement,
-        'aria-describedby',
-        this._messageId
-      );
-
+      // When there's an error the message div's id switches to _errorMessageId, so
+      // aria-describedby must follow to ensure screen readers (e.g. VoiceOver) can
+      // still find and announce the message text.
+      const describedById = this._nestedInteractiveHasError
+        ? this._errorMessageId
+        : this._messageId;
+      this.renderer.setAttribute(this.nestedInteractiveElement, 'aria-describedby', describedById);
       this.renderer.setAttribute(
         this.nestedInteractiveElement,
         'aria-errormessage',
@@ -245,17 +218,13 @@ export class FormFieldComponent
   }
 
   private subscribeToNestedInteractiveError() {
-    const nestedInteractiveComponent =
-      this.inputComponent ||
-      this.textareaComponent ||
-      this.radioGroupComponent ||
-      this.dropdownComponent;
+    if (!this._formFieldControl) return;
 
-    // set current value, then listen for changes
-    this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
-    this.nestedInteractiveErrorSubscription = nestedInteractiveComponent?.hasErrorChange.subscribe(
+    this._nestedInteractiveHasError = !!this._formFieldControl.hasError;
+    this.nestedInteractiveErrorSubscription = this._formFieldControl.hasErrorChange.subscribe(
       (hasError) => {
         this._nestedInteractiveHasError = hasError;
+        this.setNestedInteractiveMessageAttributes();
         this.cdr.markForCheck();
       }
     );
@@ -264,26 +233,20 @@ export class FormFieldComponent
   private shouldShowDefaultCalendarIcon() {
     return (
       this.dateInput?.useNativeDatePicker &&
-      !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
+      !this.affixElements.some((affix) => affix.type === 'suffix')
     );
   }
 
   private handleAffixOffset() {
-    // Measure the width of all slotted affix elements,
-    // and apply their width + standard padding to the input elements
-    // padding, so the start/end of the input is correctly indented.
-    if (this.input) {
+    const inputElement = this._formFieldControl?.getInputElement();
+    if (inputElement) {
       this.affixElements.forEach((affix) => {
         this.resizeObserverService.observe(affix.el, (entry) => {
           const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
-          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
+          const affixWidth = inputElement.type === 'date' ? 0 : entry.contentRect.width;
           const existingPadding = parseInt(DesignTokenHelper.size('s'));
 
-          this.renderer.setStyle(
-            this.input.nativeElement,
-            `${padding}`,
-            `${affixWidth + existingPadding}px`
-          );
+          this.renderer.setStyle(inputElement, `${padding}`, `${affixWidth + existingPadding}px`);
 
           const dateMask = this.element.querySelector('.date-mask');
           if (dateMask) {

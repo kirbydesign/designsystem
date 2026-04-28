@@ -7,6 +7,7 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostBinding,
   Output,
   QueryList,
@@ -34,18 +35,25 @@ import { RadioComponent } from '../radio.component';
       useExisting: RadioGroupComponent,
       multi: true,
     },
+    {
+      provide: FormFieldControl,
+      useExisting: forwardRef(() => RadioGroupComponent),
+    },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [IonRadioGroup, NgTemplateOutlet, RadioComponent],
 })
 export class RadioGroupComponent
-  implements AfterContentInit, ControlValueAccessor, FormFieldControl, AfterViewInit
+  extends FormFieldControl
+  implements AfterContentInit, ControlValueAccessor, AfterViewInit
 {
   constructor(
     private cdr: ChangeDetectorRef,
     private element: ElementRef<HTMLElement>,
     private renderer: Renderer2
-  ) {}
+  ) {
+    super();
+  }
 
   // #region public properties
 
@@ -152,13 +160,6 @@ export class RadioGroupComponent
   // #endregion private fields
 
   // #region public methods
-  focus() {
-    const findFocusable = (radios: QueryList<RadioComponent>) =>
-      radios && radios.find((radio) => !isNaN(radio.buttonTabIndex) && radio.buttonTabIndex !== -1);
-    const focusable = findFocusable(this.radioButtons) || findFocusable(this.projectedRadioButtons);
-    focusable?.focus();
-  }
-
   ngAfterContentInit(): void {
     this.initSelectionStateFromProjectedContent();
     this.listenForProjectedRadiosChange();
@@ -305,5 +306,15 @@ export class RadioGroupComponent
     });
   }
 
+  getInteractiveElement(): HTMLElement | null {
+    return this.element.nativeElement.querySelector('ion-radio-group');
+  }
+
+  override focus(): void {
+    const findFocusable = (radios: QueryList<RadioComponent>) =>
+      radios && radios.find((radio) => !isNaN(radio.buttonTabIndex) && radio.buttonTabIndex !== -1);
+    const focusable = findFocusable(this.radioButtons) || findFocusable(this.projectedRadioButtons);
+    focusable?.focus();
+  }
   // #endregion private methods
 }

@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostBinding,
   HostListener,
   Inject,
@@ -23,10 +24,16 @@ import { FormFieldControl } from '@kirbydesign/designsystem/types';
   selector: 'textarea[kirby-textarea]',
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',
+  providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => TextareaComponent) }],
 })
-export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
+export class TextareaComponent extends FormFieldControl implements OnChanges, OnInit {
+  override wrapInLabel = true;
   kirbyChange = new EventEmitter<string>();
   private _hasError: boolean = false;
+
+  getInteractiveElement(): HTMLElement | null {
+    return this.elementRef.nativeElement;
+  }
 
   @HostBinding('attr.value')
   @Input()
@@ -75,6 +82,7 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
     private elementRef: ElementRef<HTMLTextAreaElement>,
     @Optional() @Inject(NG_VALUE_ACCESSOR) builtInValueAccessors: ControlValueAccessor[]
   ) {
+    super();
     extendValueAccessors<string>(builtInValueAccessors, {
       writeValue: {
         afterWriteValue: (value) => this.kirbyChange.emit(value),

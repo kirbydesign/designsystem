@@ -4,7 +4,7 @@ import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-import { InputComponent } from '@kirbydesign/designsystem/form-field';
+import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -75,7 +75,7 @@ const meta: Meta<ComboboxComponent> = {
   title: 'Components/Combobox',
   decorators: [
     moduleMetadata({
-      imports: [ListModule, ItemModule, DropdownModule, InputComponent, ComboboxComponent],
+      imports: [ListModule, ItemModule, DropdownModule, FormFieldModule, ComboboxComponent],
     }),
   ],
   parameters: {
@@ -328,6 +328,32 @@ export const HasError: Story = {
         [hasError]="hasError"
       >
       </kirby-x-combobox>
+    `,
+  }),
+};
+
+/**
+ */
+export const FormField: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currencies',
+    hasError: true,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+    },
+    template: `
+      <kirby-form-field
+      [message]="'This is a message'"
+      [label]="'This is a label'">
+        <kirby-x-combobox
+          [placeholder]="placeholder"
+          [hasError]="hasError"
+        >
+        </kirby-x-combobox>
+      </kirby-form-field>
     `,
   }),
 };
