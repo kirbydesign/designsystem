@@ -8,8 +8,8 @@ body:
   - type: textarea
     id: describe_the_bug
     attributes:
-      label: Describe the bug
-      placeholder: A clear and concise description of the bug
+      label: Describe the bug and what you expected to happen.
+      placeholder: A clear and concise description of the bug and what you expected to happen.
     validations:
       required: true
 
@@ -17,6 +17,10 @@ body:
     id: steps_to_reproduce
     attributes:
       label: Describe how to reproduce the bug
+      description: >
+        If possible, provide a minimal example or
+        [StackBlitz](https://stackblitz.com/edit/stackblitz-starters-6de5dek3?file=package.json)
+        that we can use to reproduce the issue.
       placeholder: |
         1. Go to '...'
         2. Click on '...'
@@ -25,25 +29,16 @@ body:
     validations:
       required: true
 
-  - type: textarea
-    id: expected_behavior
-    attributes:
-      label: What was the expected behavior?
-      placeholder: A clear and concise description of what you expected to happen
-    validations:
-      required: true
-
   - type: dropdown
     id: severity
     attributes:
       label: Severity
-      description: How serious is the impact of this issue?
+      description: What is your best bet on how severe the impact of this issue is? (The kirby team might change this, but your input is valuable)
       options:
-        - 1: Critical (app crashes or critical user flow broken)
-        - 2: High (feature broken)
-        - 3: Medium (usable with workaround)
-        - 4: Low (minor issue)
-        - 5: Trivial (design or code discrepancies, docs)
+        - (1) Critical — app crashes or critical user flow broken
+        - (2) High — feature broken
+        - (3) Medium — usable with workaround
+        - (4) Low — minor issue
     validations:
       required: true
 
