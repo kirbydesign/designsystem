@@ -4,7 +4,7 @@ import {
   SegmentedControlComponent,
   SegmentedControlMode,
   SegmentItem,
-} from '@kirbydesign/designsystem';
+} from '@kirbydesign/designsystem/segmented-control';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
