@@ -63,7 +63,7 @@ body:
     id: environment
     attributes:
       label: Environment (OS / Browser)
-      description: Add any relevant environment details if applicable
+      description: Add any relevant environment details if applicable.
       placeholder: e.g. macOS + Chrome 122, iOS + Safari, Windows + Edge
 
   - type: textarea
