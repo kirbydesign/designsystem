@@ -92,6 +92,11 @@
   }
 }
 
+@mixin transition-soft-keyboard() {
+  --kirby-transition-soft-keyboard-enter: #{variables.$soft-keyboard-transition-enter};
+  --kirby-transition-soft-keyboard-leave: #{variables.$soft-keyboard-transition-leave};
+}
+
 @mixin transition-durations() {
   @each $name, $value in variables.$transition-durations {
     --kirby-transition-duration-#{$name}: #{$value};
@@ -157,4 +162,5 @@
   /* TRANSITIONS */
   @include transition-durations;
   @include transition-easings;
+  @include transition-soft-keyboard;
 }
