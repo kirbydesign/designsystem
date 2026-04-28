@@ -70,5 +70,5 @@ body:
     id: additional_context
     attributes:
       label: Additional context
-      description: Add any other relevant information or context about the problem
+      description: Add any other relevant information or context about the problem.
       placeholder: e.g. Only happens after login, only on mobile, etc.
