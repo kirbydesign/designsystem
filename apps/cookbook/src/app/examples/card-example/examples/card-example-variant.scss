@@ -14,7 +14,7 @@ $break-width: 2 * $card-min-width + $card-gap;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: $card-gap;
+  gap: var(--kirby-spacing-s);
 
   kirby-card {
     max-width: 50%;

@@ -4,11 +4,11 @@
   display: block;
   height: 100%;
   overflow-x: hidden;
-  background: utils.get-color('background-color');
-  padding: utils.size('s');
+  background: var(--kirby-background-color);
+  padding: var(--kirby-spacing-s);
   box-sizing: border-box;
 
   @include utils.media('>=medium') {
-    padding: utils.size('l');
+    padding: var(--kirby-spacing-l);
   }
 }

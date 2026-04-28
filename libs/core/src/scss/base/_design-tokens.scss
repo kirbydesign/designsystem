@@ -1,10 +1,15 @@
 @use 'sass:color';
 @use 'sass:map';
+@use 'sass:meta';
 @use '../themes/colors';
 @use 'variables';
 
 @mixin font-family() {
   --kirby-font-family: 'Roboto';
+}
+
+@mixin fat-finger-size() {
+  --kirby-fat-finger-size: #{variables.$fat-finger-size};
 }
 
 @mixin colors() {
@@ -81,6 +86,30 @@
   }
 }
 
+@mixin breakpoints() {
+  @each $name, $value in variables.$breakpoints {
+    --kirby-breakpoint-#{$name}: #{$value};
+  }
+}
+
+@mixin transition-durations() {
+  @each $name, $value in variables.$transition-durations {
+    --kirby-transition-duration-#{$name}: #{$value};
+  }
+}
+
+@mixin transition-easings() {
+  @each $name, $value in variables.$transition-easings {
+    @if meta.type-of($value) == 'map' {
+      @each $subname, $subvalue in $value {
+        --kirby-transition-easing-#{$name}-#{$subname}: #{$subvalue};
+      }
+    } @else {
+      --kirby-transition-easing-#{$name}: #{$value};
+    }
+  }
+}
+
 @mixin all() {
   /* FONT-FAMILY */
   @include font-family;
@@ -116,6 +145,16 @@
   /* SPACINGS */
   @include spacings;
 
+  /* FAT FINGER SIZE */
+  @include fat-finger-size;
+
   /* Z-INDEXES */
   @include z-layers;
+
+  /* BREAKPOINTS */
+  @include breakpoints;
+
+  /* TRANSITIONS */
+  @include transition-durations;
+  @include transition-easings;
 }
