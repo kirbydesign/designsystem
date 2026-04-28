@@ -1,5 +1,5 @@
 import { createServiceFactory } from '@ngneat/spectator/jest';
-import { SidebarMenuItem } from '../../models';
+import { SidebarMenuItem, SubmenuItem } from '../../models';
 import { MenuStateService } from './menu-state.service';
 
 type MenuStateServiceProps = {
@@ -195,6 +195,29 @@ describe(MenuStateService.name, () => {
       });
 
       spectator.service.selectItem('item-2.3.1');
+    });
+  });
+
+  describe('Method : reorderItems', () => {
+    it('should emit a reorder event when a menu is reordered', (done) => {
+      const spectator = render();
+
+      spectator.service.reorderEvents.subscribe((event) => {
+        try {
+          expect(event).toEqual({
+            parentId: 'item-1',
+            itemId: 'item-1.1',
+            previousIndex: 0,
+            currentIndex: 1,
+            reorderedItemIds: ['item-1.2', 'item-1.1'],
+          });
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
+
+      spectator.service.reorderItems(menuItemsMock[0] as SubmenuItem, 'item-1.1', 0, 1);
     });
   });
 });
