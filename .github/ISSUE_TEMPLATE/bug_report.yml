@@ -57,7 +57,7 @@ body:
       description: |
         Drag and drop images or videos here, or paste them directly.
         You can also copy/paste screenshots into this field.
-      placeholder: Paste or drop files here
+      placeholder: Paste or drop files here.
 
   - type: input
     id: environment
