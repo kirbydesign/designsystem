@@ -33,7 +33,7 @@ body:
     id: severity
     attributes:
       label: Severity
-      description: What is your best bet on how severe the impact of this issue is? (The kirby team might change this, but your input is valuable)
+      description: What is your best bet on how severe the impact of this issue is? (Team Kirby might change this, but your input is valuable).
       options:
         - (1) Critical — app crashes or critical user flow broken
         - (2) High — feature broken
