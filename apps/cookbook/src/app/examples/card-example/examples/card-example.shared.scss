@@ -37,8 +37,8 @@ $_card-header-notification-colors-map: (
 $_card-colors: 'tertiary', 'dark';
 
 button {
-  height: var(--kirby-fat-finger-size);
-  width: var(--kirby-fat-finger-size);
+  height: var(--kirby-size-fat-finger);
+  width: var(--kirby-size-fat-finger);
   border: none;
   border-radius: var(--kirby-border-radius-circle);
   margin: 0;

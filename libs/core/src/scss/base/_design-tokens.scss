@@ -8,8 +8,8 @@
   --kirby-font-family: 'Roboto';
 }
 
-@mixin fat-finger-size() {
-  --kirby-fat-finger-size: #{variables.$fat-finger-size};
+@mixin size-fat-finger() {
+  --kirby-size-fat-finger: #{variables.$fat-finger-size};
 }
 
 @mixin colors() {
@@ -146,7 +146,7 @@
   @include spacings;
 
   /* FAT FINGER SIZE */
-  @include fat-finger-size;
+  @include size-fat-finger;
 
   /* Z-INDEXES */
   @include z-layers;

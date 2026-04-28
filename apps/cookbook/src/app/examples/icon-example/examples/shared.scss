@@ -49,8 +49,8 @@ kirby-icon {
 $_icon-color-examples: 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger';
 
 button {
-  height: var(--kirby-fat-finger-size);
-  width: var(--kirby-fat-finger-size);
+  height: var(--kirby-size-fat-finger);
+  width: var(--kirby-size-fat-finger);
   border: none;
   border-radius: var(--kirby-border-radius-circle);
   margin: 0;
