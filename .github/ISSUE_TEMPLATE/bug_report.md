@@ -5,6 +5,8 @@ title: "[BUG]"
 labels: bug
 assignees: ''
 
+
+body:
 - type: textarea
     id: describe_the_bug
     attributes:
