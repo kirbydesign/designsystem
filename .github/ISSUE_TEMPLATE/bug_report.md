@@ -1,70 +1,81 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a bug report 
 title: "[BUG]"
-labels: 👶🏻 New, NOT Prioritized, NOT Verified, bug
+labels: bug
 assignees: ''
 
----
+- type: textarea
+    id: describe_the_bug
+    attributes:
+      label: Describe the bug    
+      placeholder: A clear and concise description of the bug
+    validations:
+      required: true
 
-- [ ] I have written a [good issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue) 
+- type: textarea
+  id: steps_to_reproduce
+  attributes:
+    label: Describe how to reproduce the bug
+    description: 
+    placeholder: |
+      1. Go to '...'
+      2. Click on '...'
+      3. Scroll down to '...'
+      4. See error
+  validations:
+    required: true
 
-<!-- 
-Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
+- type: textarea
+  id: expected_behavior
+  attributes:
+    label: What was the expected behavior?
+    placeholder: A clear and concise description of what you expected to happen
+  validations:
+    required: true
 
-The good issue: contains only one issue, is self-contained, is specific & unambigious, follows the template, has a good title, is easy to read and contains screenshots & -recordings
--->
+- type: dropdown
+  id: severity
+  attributes:
+    label: Severity
+    description: How serious is the impact of this issue?
+    options:
+        1 = Critical (app crashes or critical user flow broken)
+        2 = High (feature broken)
+        3 = Medium (usable with workaround)
+        4 = Low (minor issue)
+        5 = Trivial (design or code discrepancies, docs)  
+  validations:
+    required: true
 
-## Describe the bug
-<!-- Replace this paragraph with a clear and concise description of what the bug is. --> 
+- type: input
+  id: kirby_version
+  attributes:
+    label: Which Kirby version was used?
+    placeholder: e.g. v11.6.0
+  validations:
+    required: true
 
-## Describe how to reproduce the bug
-<!-- Replace this with steps to reproduce the behavior: 
+- type: textarea
+  id: attachments
+  attributes:
+    label: Add screenshots or videos
+    description: |
+      Drag and drop images or videos here, or paste them directly.
+      You can also copy/paste screenshots into this field.
+    placeholder: Paste or drop files here
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error -->
+- type: input
+  id: environment
+  attributes:
+    label: Environment (OS / Browser)
+    description: Add any relevant environment details if applicable
+    placeholder: e.g. macOS + Chrome 122, iOS + Safari, Windows + Edge
 
-## Which Kirby version was used?
-<!-- e.g. 1.1.10 --> 
+- type: textarea
+  id: additional_context
+  attributes:
+    label: Additional context
+    description: Add any other relevant information or context about the problem
+    placeholder: e.g. Only happens after login, only on mobile, etc.
 
-## What was the expected behavior?
-<!-- Replace this paragraph with a clear and concise description of what you expected to happen -->
-
-## Add any screenshots
-<!-- Replace this paragraph with screenshots to help explain your problem (if applicable) -->
-
-## Please complete the following information:
-- OS: [e.g. Windows, MacOS, iOS]
-- Browser [e.g. Chrome, Safari]
-- Browser version [e.g. 22]
-
-## Are there any additional context?
-<!-- Replace this paragraph with any additional context about the problem here (if any) -->
-
-<hr />
-
-## Checklist:
-
-The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#the-process-of-contributing) correctly.
-
-### Verification
-To make sure the bug is not intended behaviour; it should be verified by a member of team Kirby before moving on to implementation. 
-
-- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](https://github.com/kirbydesign/designsystem/blob/develop/.github/SUPPORT.md#team-kirby); do not proceed until this is done.
-
-### Implementation 
-The contributor who wants to implement this issue should: 
-
-- [ ] Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/develop/.github/CONTRIBUTING.md#before-you-get-coding)".
-- [ ] Signal to others you are working on the issue by assigning yourself.
-- [ ] Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/develop) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
-- [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)". 
-- [ ] Write code to fix the bug
-
-### Review
-Once the issue has been implemented and is ready for review:
-
-- [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review). 
-- [ ] Create a pull-request.
