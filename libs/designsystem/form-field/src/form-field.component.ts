@@ -190,7 +190,7 @@ export class FormFieldComponent
       })
     );
 
-    this.affixElements.forEach((affix) => {
+    this.affixElements?.forEach((affix) => {
       this.resizeObserverService.unobserve(affix.el);
     });
 
