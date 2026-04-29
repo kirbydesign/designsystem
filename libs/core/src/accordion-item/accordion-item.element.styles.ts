@@ -2,49 +2,33 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --state-layer-opacity: 0;
+    --state-layer-opacity-hover: 0.04;
+    --state-layer-opacity-active: 0.08;
     --state-layer-background-color: var(--kirby-black);
 
+    --kirby-accordion-item-border-color: var(--kirby-divider-color);
+    --kirby-accordion-item-background: var(--kirby-item-background, transparent);
+
     display: block;
-    border-bottom: 1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color));
-    background: var(--kirby-accordion-item-background, var(--kirby-item-background, transparent));
-    box-sizing: border-box;
-    position: relative;
   }
 
-  :host(:first-child) {
-    border-top: var(
-      --kirby-accordion-item-border,
-      1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color))
-    );
-  }
+  /* ===========================
+               BASE
+  =========================== */
 
-  .content-layer {
+  .accordion-item {
     position: relative;
     z-index: 1;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color));
+    background: var(--kirby-accordion-item-background, var(--kirby-item-background, transparent));
   }
 
-  .state-layer {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    border-radius: inherit;
-    z-index: 2;
-  }
+  /* ===================================
+               HEADER
+  ==================================== */
 
-  .state-layer::before {
-    transition: all 80ms linear;
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    inset: 0;
-    border-radius: inherit;
-    opacity: var(--state-layer-opacity, 0);
-    background-color: var(--state-layer-background-color, var(--kirby-black));
-  }
-
-  .header {
+  .accordion-item__header {
     display: flex;
     align-items: center;
     gap: var(--kirby-spacing-xxs);
@@ -62,9 +46,11 @@ export default css`
     font-size: inherit;
     line-height: normal;
     text-align: start;
+    color: var(--kirby-text-color-black);
+    cursor: pointer;
   }
 
-  .title {
+  .accordion-item__title {
     flex-grow: 1;
     display: flex;
     font-size: var(--kirby-font-size-n);
@@ -78,104 +64,124 @@ export default css`
     display: block;
   }
 
-  .content {
+  :host([isdisabled]) .accordion-item__header {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  :host([isdisabled]) .accordion-item__title {
+    color: var(--kirby-text-color-semi-dark);
+  }
+
+  :host([isdisabled]) .accordion-item__icon {
+    color: var(--kirby-semi-dark);
+  }
+
+  :host([isexpanded]) .accordion-item__title {
+    font-weight: var(--kirby-font-weight-bold);
+  }
+
+  :host([isexpanded]) kirby-icon-element {
+    transform: rotate(180deg);
+  }
+
+  /* ===================================
+          STATE-LAYER
+  ==================================== */
+
+  .accordion-item__state-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .accordion-item__state-layer::before {
+    transition: all 80ms linear;
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: var(--state-layer-opacity, 0);
+    background-color: var(--state-layer-background-color);
+  }
+
+  .accordion-item__header:hover .accordion-item__state-layer::before {
+    opacity: var(--state-layer-opacity-hover);
+  }
+
+  .accordion-item__header:active .accordion-item__state-layer::before {
+    opacity: var(--state-layer-opacity-active);
+  }
+
+  :host([isdisabled]) .accordion-item__state-layer::before {
+    opacity: 0;
+  }
+
+  /* ===================================
+          CONTENT
+  ==================================== */
+
+  .accordion-item__content {
     overflow: hidden;
     height: 0;
     interpolate-size: allow-keywords;
     transition: height 0.25s ease;
   }
 
-  :host([isexpanded]) .content {
+  :host([isexpanded]) .accordion-item__content {
     height: auto;
   }
 
-  :host([haspadding]) .content-body {
+  :host([haspadding]) .accordion-item__content-body {
     padding-inline: var(--kirby-spacing-s);
   }
 
-  :host([haspadding][isexpanded]) .content-body {
+  :host([haspadding][isexpanded]) .accordion-item__content-body {
     padding-bottom: var(--kirby-spacing-s);
   }
 
   /* Safari + Firefox */
   @supports not (interpolate-size: allow-keywords) {
-    .content {
+    .accordion-item__content {
       display: grid;
       grid-template-rows: 0fr;
       transition: grid-template-rows 0.25s ease;
       overflow: hidden;
     }
 
-    :host([isexpanded]) .content {
+    :host([isexpanded]) .accordion-item__content {
       grid-template-rows: 1fr;
     }
 
-    .content-body {
+    .accordion-item__content-body {
       overflow: hidden;
       min-height: 0;
     }
   }
 
-  button[disabled] {
-    pointer-events: none;
+  /* ===================================
+          ACCESSIBILITY FOCUS
+  ==================================== */
+
+  .accordion-item__header:focus-visible .accordion-item__state-layer::before {
+    opacity: var(--state-layer-opacity-hover);
+    box-shadow: none;
+    outline: 0;
   }
 
-  button[disabled] .kirby-icon {
-    color: var(--kirby-semi-dark);
-  }
+  /* ===================================
+        OUTCOMMENETED - TO BE REEVALUATED
+  ==================================== */
 
-  button[disabled] .title {
-    color: var(--kirby-text-color-semi-dark);
-  }
+  /* :host(:first-child) {
+    border-top: var(
+      1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color))
+     );
+   }
 
-  button {
-    color: var(--kirby-text-color-black);
-  }
-
-  button[aria-expanded='true'] .title {
-    font-weight: var(--kirby-font-weight-bold);
-  }
-
-  button[aria-expanded='true'] kirby-icon-element {
-    transform: rotate(180deg);
-  }
-
-  button[disabled],
-  .header[disabled],
-  .content-layer[aria-disabled='true'] {
-    cursor: default;
-  }
-
-  :host(:last-child) {
-    border-bottom: var(--kirby-accordion-item-border, 1px solid var(--kirby-divider-color));
-  }
-
-  @media (hover: hover) {
-    .header:hover {
-      --state-layer-opacity: 0.04;
-      cursor: pointer;
-    }
-
-    .content-layer:hover {
-      cursor: pointer;
-    }
-
-    .header[disabled]:hover,
-    .content-layer[aria-disabled='true']:hover {
-      --state-layer-opacity: 0;
-      cursor: default;
-    }
-  }
-
-  .header:active {
-    --state-layer-opacity: 0.08;
-  }
-
-  @media (pointer: fine) {
-    .header:focus-visible {
-      --state-layer-opacity: 0.04;
-      box-shadow: none;
-      outline: 0;
-    }
-  }
+   :host(:last-child) {
+     border-bottom: var(--kirby-accordion-item-border, 1px solid var(--kirby-divider-color));
+   } */
 `;

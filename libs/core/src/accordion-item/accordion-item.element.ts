@@ -6,7 +6,7 @@ import styles from './accordion-item.element.styles';
 
 // Counter for generating unique element ids
 // When the unigue-id-generator.helper.ts is available in the core, this should be used instead to ensure unique ids across all elements
-let uniqueId = 0;
+const uniqueId = 0;
 
 export class KirbyAccordionItemElement extends KirbyElement {
   static override tagName = 'kirby-accordion-item';
@@ -20,29 +20,8 @@ export class KirbyAccordionItemElement extends KirbyElement {
   @property({ type: Boolean, reflect: true }) hasPadding = true;
   @property({ type: Boolean, reflect: true }) hasList = false;
   @property({ type: Number }) headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
-  private _titleId = `kirby-accordion-item-title-${++uniqueId}`;
+
   private _contentId = `kirby-accordion-item-content-${uniqueId}`;
-
-  private getTitle() {
-    if (this.isDisabled && !!this.disabledTitle) {
-      return this.disabledTitle;
-    } else {
-      return this.title;
-    }
-  }
-
-  private onToggleExpanded() {
-    if (this.isDisabled) return;
-
-    this.isExpanded = !this.isExpanded;
-    this.dispatchEvent(
-      new CustomEvent('toggle', {
-        detail: this.isExpanded,
-        bubbles: true,
-        composed: true,
-      })
-    );
-  }
 
   firstUpdated() {
     const slot = this.renderRoot.querySelector('slot');
@@ -67,32 +46,52 @@ export class KirbyAccordionItemElement extends KirbyElement {
     }
   }
 
+  private getTitle() {
+    if (this.isDisabled && !!this.disabledTitle) {
+      return this.disabledTitle;
+    } else {
+      return this.title;
+    }
+  }
+
+  private onToggleExpanded() {
+    if (this.isDisabled) return;
+
+    this.isExpanded = !this.isExpanded;
+    this.dispatchEvent(
+      new CustomEvent('toggle', {
+        detail: this.isExpanded,
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
+
   render() {
     return html`
-      <div class="content-layer" aria-disabled=${this.isDisabled}>
+      <div class="accordion-item">
         <div
           aria-level=${this.headingLevel ?? nothing}
           role=${this.headingLevel ? 'heading' : nothing}
         >
           <button
             type="button"
-            class="header"
+            class="accordion-item__header"
             aria-expanded=${this.isExpanded}
             aria-controls=${this._contentId}
-            id=${this._titleId}
-            ?disabled=${this.isDisabled}
             @click=${this.onToggleExpanded}
+            ?disabled=${this.isDisabled}
           >
-            <span class="state-layer" aria-hidden="true"></span>
-            <div class="title">${this.getTitle()}</div>
+            <span class="accordion-item__state-layer" aria-hidden="true"></span>
+            <div class="accordion-item__title">${this.getTitle()}</div>
 
-            <span class="kirby-icon" aria-hidden="true">
+            <span class="accordion-item__icon" aria-hidden="true">
               <kirby-icon-element name="arrow-down"></kirby-icon-element>
             </span>
           </button>
         </div>
-        <div class="content" role="region" aria-labelledby=${this._titleId} id=${this._contentId}>
-          <div class="content-body">
+        <div class="accordion-item__content" aria-hidden=${!this.isExpanded} id=${this._contentId}>
+          <div class="accordion-item__content-body">
             <slot></slot>
           </div>
         </div>
