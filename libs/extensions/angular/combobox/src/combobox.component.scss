@@ -38,14 +38,19 @@ $min-screen-width: 375px;
   }
 
   div {
-    display: flex;
+    position: relative;
 
     > input[kirby-input] {
-      padding-right: utils.size('l');
+      padding-right: utils.size('xl');
     }
 
     > kirby-icon {
-      margin-left: - utils.size('l');
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: utils.size('xs');
     }
   }
 
