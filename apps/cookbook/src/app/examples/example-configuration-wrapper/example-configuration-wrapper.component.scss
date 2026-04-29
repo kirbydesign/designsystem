@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$card-z-index: utils.z('default') + 1;
-$button-z-index: $card-z-index + 1;
+$card-z-index: calc(var(--kirby-z-index-default) + 1);
+$button-z-index: calc(var(--kirby-z-index-default) + 2);
 
 :host {
   display: block;
@@ -11,8 +11,8 @@ $button-z-index: $card-z-index + 1;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
-    right: utils.size('s');
-    top: calc(utils.size('s') + var(--ion-safe-area-top));
+    right: var(--kirby-spacing-s);
+    top: calc(var(--kirby-spacing-s) + var(--ion-safe-area-top));
 
     &.align-end {
       align-items: flex-end;
@@ -32,8 +32,8 @@ $button-z-index: $card-z-index + 1;
       visibility: hidden;
       rotate: 45deg;
       transition-property: opacity, rotate, scale;
-      transition-duration: utils.get-transition-duration('quick');
-      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transition-duration: var(--kirby-transition-duration-quick);
+      transition-timing-function: var(--kirby-transition-easing-enter-exit);
       transform-origin: top left;
       scale: 0.5;
     }
@@ -51,9 +51,10 @@ $button-z-index: $card-z-index + 1;
   &.snap-to-viewport {
     kirby-card {
       position: fixed;
-      margin-top: utils.border-radius('n');
+      margin-top: var(--kirby-border-radius-n);
       opacity: 0.5;
-      transform: rotate(-90deg) translateY(-#{utils.border-radius('n') + utils.size('xs')});
+      transform: rotate(-90deg)
+        translateY(calc(-1 * (var(--kirby-border-radius-n) + var(--kirby-spacing-xs))));
       transform-origin: top right;
       overflow: initial;
 
@@ -77,9 +78,9 @@ $button-z-index: $card-z-index + 1;
 
       &:hover,
       &:active {
-        transition-duration: utils.get-transition-duration('short');
+        transition-duration: var(--kirby-transition-duration-short);
         transition-property: transform, border-radius;
-        transition-timing-function: utils.get-transition-easing('enter-exit');
+        transition-timing-function: var(--kirby-transition-easing-enter-exit);
       }
     }
   }
@@ -102,20 +103,20 @@ $button-z-index: $card-z-index + 1;
 }
 
 fieldset {
-  border: 1px solid var(--kirby-border-color, utils.get-color('medium'));
-  padding: utils.size('xs');
+  border: 1px solid var(--kirby-border-color, var(--kirby-medium));
+  padding: var(--kirby-spacing-xs);
 
   legend {
-    color: utils.get-text-color('semi-dark');
+    color: var(--kirby-text-color-semi-dark);
     text-align: var(--text-align, initial);
-    font-size: utils.font-size('s');
+    font-size: var(--kirby-font-size-s);
   }
 }
 
 kirby-card {
   z-index: $card-z-index;
-  font-size: utils.font-size('xs');
-  padding: utils.size('xxs');
+  font-size: var(--kirby-font-size-xs);
+  padding: var(--kirby-spacing-xxs);
   top: 0;
   right: 0;
 }

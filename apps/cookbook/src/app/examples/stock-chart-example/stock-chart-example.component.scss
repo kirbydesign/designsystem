@@ -5,16 +5,16 @@
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  background: utils.get-color('background-color');
-  padding: utils.size('s');
+  background: var(--kirby-background-color);
+  padding: var(--kirby-spacing-s);
 
   @include utils.media('>=medium') {
-    padding: utils.size('l');
+    padding: var(--kirby-spacing-l);
   }
 
   > * {
     display: block;
-    margin: utils.size('s') 0;
+    margin: var(--kirby-spacing-s) 0;
   }
 
   kirby-card {

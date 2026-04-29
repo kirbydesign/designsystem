@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 // We need this for api-description to avoid breaking mobile.
 :host {
   display: block;
@@ -8,26 +6,26 @@
 }
 
 table.api-description {
-  margin-bottom: utils.size('xl');
+  margin-bottom: var(--kirby-spacing-xl);
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
 
   thead {
-    background-color: utils.get-color('light-tint');
+    background-color: var(--kirby-light-tint);
   }
 
   th {
-    font-weight: utils.font-weight('normal');
+    font-weight: var(--kirby-font-weight-normal);
     border: none;
     text-align: left;
-    height: utils.size('xl');
+    height: var(--kirby-spacing-xl);
     border-bottom: none;
   }
 
   td,
   th {
-    border: 1px solid utils.get-color('medium');
+    border: 1px solid var(--kirby-medium);
     padding: 0.5rem 1rem;
   }
 

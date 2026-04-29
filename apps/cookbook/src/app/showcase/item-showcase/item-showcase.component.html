@@ -209,13 +209,27 @@
   ></cookbook-item-example-disclosure-animation>
 </cookbook-example-viewer>
 
-<h2>Nested Controls</h2>
-<p>Items can contain nested controls, such as checkboxes or radio buttons.</p>
+<h2>Controls</h2>
+<p>Items can contain controls, such as checkboxes or radio buttons.</p>
 <cookbook-example-viewer [html]="nestedControlsExample.template">
   <div class="example-frame">
     <cookbook-item-example-nested-controls
       #nestedControlsExample
     ></cookbook-item-example-nested-controls>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Input</h3>
+<p>
+  A special case is when an input is placed inside an item. For proper theming of the input, the
+  item (or any parent of one or more items) currently needs to be wrapped inside a
+  <code>kirby-card</code>
+  .
+</p>
+
+<cookbook-example-viewer [html]="withInputExample.template">
+  <div class="example-frame">
+    <cookbook-item-example-with-input #withInputExample></cookbook-item-example-with-input>
   </div>
 </cookbook-example-viewer>
 
@@ -234,11 +248,11 @@
   selectable.
 </p>
 
-<h3>Disabled Nested Controls</h3>
+<h3>Disabled Controls</h3>
 <p>
-  Since items with nested controls should not be selectable, they cannot be disabled either.
-  Instead, any nested control itself should be disabled so users of Assistive Technology can still
-  explore the remaining item content.
+  Since items with controls should not be selectable, they cannot be disabled either. Instead, any
+  control itself should be disabled so users of Assistive Technology can still explore the remaining
+  item content.
 </p>
 
 <cookbook-example-viewer [html]="disabledNestedControlsExample.template">
