@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { SegmentedControlComponent } from '@kirbydesign/designsystem';
+import { SegmentedControlComponent } from '@kirbydesign/designsystem/segmented-control';
 import { SegmentedControlExampleBaseComponent } from '../segmented-control-example-base';
 
 const config = {

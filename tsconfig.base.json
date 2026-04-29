@@ -59,6 +59,7 @@
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/dist/reorder-list"],
       "@kirbydesign/designsystem/router-outlet": ["libs/designsystem/dist/router-outlet"],
       "@kirbydesign/designsystem/section-header": ["libs/designsystem/dist/section-header"],
+      "@kirbydesign/designsystem/segmented-control": ["libs/designsystem/dist/segmented-control"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/dist/shared"],
       "@kirbydesign/designsystem/shared/floating": ["libs/designsystem/dist/shared/floating"],
       "@kirbydesign/designsystem/shared/portal": ["libs/designsystem/dist/shared/portal"],
