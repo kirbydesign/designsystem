@@ -38,10 +38,9 @@ $min-screen-width: 375px;
   }
 
   div {
-    position: relative;
-
     > input[kirby-input] {
       padding-right: utils.size('xl');
+      text-overflow: ellipsis;
     }
 
     > kirby-icon {
@@ -57,12 +56,6 @@ $min-screen-width: 375px;
   &.is-open {
     > div > input[kirby-input] {
       box-shadow: utils.get-elevation(4);
-    }
-  }
-
-  &.has-value {
-    > div > input[kirby-input] {
-      text-overflow: ellipsis;
     }
   }
 }
