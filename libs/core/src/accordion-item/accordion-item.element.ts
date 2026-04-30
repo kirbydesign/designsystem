@@ -6,7 +6,7 @@ import styles from './accordion-item.element.styles';
 
 // Counter for generating unique element ids
 // When the unigue-id-generator.helper.ts is available in the core, this should be used instead to ensure unique ids across all elements
-const uniqueId = 0;
+let uniqueId = 0;
 
 export class KirbyAccordionItemElement extends KirbyElement {
   static override tagName = 'kirby-accordion-item';
@@ -21,7 +21,7 @@ export class KirbyAccordionItemElement extends KirbyElement {
   @property({ type: Boolean, reflect: true }) hasList = false;
   @property({ type: Number }) headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 
-  private _contentId = `kirby-accordion-item-content-${uniqueId}`;
+  private _contentId = `kirby-accordion-item-content-${uniqueId++}`;
 
   firstUpdated() {
     const slot = this.renderRoot.querySelector('slot');

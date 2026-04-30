@@ -66,7 +66,6 @@ export default css`
 
   :host([isdisabled]) .accordion-item__header {
     cursor: default;
-    pointer-events: none;
   }
 
   :host([isdisabled]) .accordion-item__title {
@@ -172,7 +171,7 @@ export default css`
   }
 
   /* ===================================
-        OUTCOMMENETED - TO BE REEVALUATED
+         OUTCOMMENTED TO BE REEVALUATED 
   ==================================== */
 
   /* :host(:first-child) {
