@@ -357,6 +357,11 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.state === OpenState.open;
   }
 
+  @HostBinding('class.has-value')
+  public get hasValue(): boolean {
+    return this.selectedItem != null;
+  }
+
   @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
 
