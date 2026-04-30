@@ -3,9 +3,18 @@
 
 $blur-radius: 110px;
 $max-content-width: 324px;
-$min-text-content-height: 100px;
+
+// Minimum height for the text area: 1 line of normal-sized title + 2 lines of small-sized body.
+// Computed explicitly because the two text styles have different font-sizes, so a single `lh` unit cannot represent both.
+$min-text-content-height: calc(
+  #{utils.font-size('n')} * #{utils.line-height('n')} + 2 * #{utils.font-size('s')} *
+    #{utils.line-height('s')}
+);
 $main-image-height-small: 132px;
 $wide-image-banner-min-height: 180px;
+$main-content-top-padding: 14px;
+$wide-main-content-top-padding: 10px;
+$main-content-bottom-padding: 6px;
 
 // The breakpoint where container should switch from "narrow" to "wide"
 $container-query-breakpoint: 600px;
@@ -148,7 +157,7 @@ kirby-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 14px 0 utils.size('xxs') utils.size('xxs');
+  padding: $main-content-top-padding 0 $main-content-bottom-padding utils.size('xxs');
   overflow: hidden;
 
   @include if-narrow-view {
@@ -158,7 +167,7 @@ kirby-card {
   @include if-wide-view {
     flex: 1;
     gap: utils.size('xs');
-    padding: 10px utils.size('xxs') utils.size('xxs') 0;
+    padding: $wide-main-content-top-padding utils.size('xxs') utils.size('xxs') 0;
   }
 
   .main-content-header {
@@ -269,6 +278,7 @@ kirby-card {
   &:is(a) {
     width: utils.size('m');
     min-width: utils.size('m');
+    margin-bottom: utils.size('xxxs');
 
     kirby-icon {
       font-size: utils.size('m');
@@ -288,6 +298,7 @@ kirby-card {
 :host(.show-button-in-narrow-view) {
   .wide-view-action {
     display: inline-flex;
+    margin-bottom: utils.size('xxs');
   }
 
   .narrow-view-action {
@@ -309,7 +320,7 @@ button.dismiss {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  min-height: var(--kirby-x-image-banner-min-height, 3lh);
+  min-height: var(--kirby-x-image-banner-min-height, $min-text-content-height);
 
   @include if-wide-view {
     gap: utils.size('xs');
