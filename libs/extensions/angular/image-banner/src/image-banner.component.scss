@@ -337,6 +337,8 @@ button.dismiss {
   }
 }
 
+// Trim the top of the text box so increased line-height from text resize etc.
+// does not push it out of alignment with the dismiss button.
 .kirby-text-normal-bold,
 .title {
   @supports (text-box: trim-start text alphabetic) {
