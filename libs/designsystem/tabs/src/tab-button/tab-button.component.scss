@@ -4,8 +4,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 // There is a limit to how large text can be on narrow viewports with text resized
-// before tab button texts start to collide horizontally, so we cap it at 135% for narrow viewports
-$maximum-font-size: utils.size('xs') * 1.35;
+// before tab button texts start to collide horizontally, so we cap it for narrow viewports
+$maximum-font-size: utils.size('xs') * utils.$text-resize-threshold;
 
 // badge size is fixed on narrow viewports to ensure it is properly sized accordion to the tab icon
 $fixed-badge-size: 10px;

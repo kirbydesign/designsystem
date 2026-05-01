@@ -4,7 +4,14 @@ import { ItemComponent, ItemSize, LabelComponent } from '@kirbydesign/designsyst
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
+// eslint-disable-next-line no-restricted-imports
+import { focusSelectableItem } from '../../.storybook/story-helpers';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
@@ -12,6 +19,8 @@ const meta: Meta<ItemComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
+        FlagComponent,
+        CardComponent,
         CheckboxComponent,
         ItemComponent,
         LabelComponent,
@@ -19,6 +28,9 @@ const meta: Meta<ItemComponent> = {
         RadioGroupComponent,
         ToggleComponent,
         ItemExampleComponent,
+        AvatarComponent,
+        IconComponent,
+        BadgeComponent,
       ],
     }),
   ],
@@ -787,6 +799,97 @@ export const LabelTypographyOverride: Story = {
   }),
 };
 
+/*
+ * Here we test that item layout correctly adapts when text is scaled past a certain threshold on narrow screens.
+ * @see TextResizeObserverService and ItemComponent
+ *
+ * Unfortunately, we have no option to change the browser text scale during vistual snapshots,
+ * so we have to mock it by manually adding '.kirby-trt' class on a surrounding element.
+ */
+export const ItemTextResizeLayout: Story = {
+  parameters: {
+    chromatic: { modes: { ...responsiveModes } },
+  },
+  render: () => ({
+    template: `<p><em>On narrow screens only</em>, items with either start or end slot content should change to row-based layout, when text is scaled above the font resize threshold (145%).</p>
+<p>Here mocked by adding the '.kirby-trt' class on a surrounding element, as base font cannot be changed for visual snapshots.</p>
+<p>On wider screens items should not change layout even for larger text size.</p>
+<div class="kirby-trt">
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-avatar slot="start" themeColor="light">
+      <kirby-icon name="person"></kirby-icon>
+    </kirby-avatar>
+    <kirby-label>
+      <p class="kirby-item-title">Item with start and end slot content. Text is clamped at two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
+    </kirby-label>
+    <kirby-flag slot="end" themeColor="success">76.543,21</kirby-flag>
+  </kirby-item>
+  <br>
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-avatar slot="start" themeColor="light">
+      <kirby-icon name="person"></kirby-icon>
+    </kirby-avatar>
+    <kirby-label>
+      <p class="kirby-item-title">Item with start slot content, no end slot. Text is clamped at two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
+    </kirby-label>
+  </kirby-item>
+  <br>
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-label>
+      <p class="kirby-item-title">Item with end slot content, no start slot. Text is clamped at two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <kirby-flag themeColor="success">76.543,21</kirby-flag>
+      <data class="kirby-item-detail">385.954,23</data>
+    </kirby-label>
+  </kirby-item>
+  <br>
+  <kirby-item [disclosure]="'arrow-more'">
+    <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+    <kirby-label>
+      <p class="kirby-item-title">Item with no start or end slot content. Still has line clamp for two lines.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
+    </kirby-label>
+  </kirby-item>
+  <br>
+
+  <p>Items with controls should not change layout on neither mobile nor desktop.</p>
+  <kirby-item size="md">
+    <kirby-checkbox slot="start">Slot start</kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox slot="end">Slot end</kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox>No slot</kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox slot="start">
+      <kirby-label>
+        <p class="kirby-item-title">Slot start, complex label</p>
+        <p class="kirby-item-detail">Label</p>
+      </kirby-label>
+    </kirby-checkbox>
+  </kirby-item>
+  <kirby-item size="md">
+    <kirby-checkbox slot="end">
+      <kirby-label>
+        <p class="kirby-item-title">Slot end, complex label</p>
+        <p class="kirby-item-detail">Label</p>
+      </kirby-label>
+    </kirby-checkbox>
+  </kirby-item>
+</div>
+`,
+  }),
+};
+
 export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-item-example></cookbook-item-example>`,
@@ -800,13 +903,45 @@ export const ItemWithHorizontalLabelTruncation: Story = {
   render: () => ({
     template: `<kirby-item>
     <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
-    <data class="kirby-item-detail" slot="end">22.86%</data> 
+    <data class="kirby-item-detail" slot="end">22.86%</data>
 </kirby-item>
 <kirby-item>
     <kirby-label direction="horizontal">
         <p class="kirby-item-title" >Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
-        <data class="kirby-item-detail">22.86%</data> 
+        <data class="kirby-item-detail">22.86%</data>
     </kirby-label>
 </kirby-item>`,
   }),
+};
+
+export const SelectableFocused: Story = {
+  name: 'Selectable - Focused',
+  render: () => ({
+    template: `<kirby-item [selectable]="true">Selectable item</kirby-item>
+<kirby-item [selectable]="true">Selectable item</kirby-item>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const SelectableInCardFirstFocused: Story = {
+  name: 'Selectable in Card - First Focused',
+  render: () => ({
+    template: `<kirby-card>
+  <kirby-item [selectable]="true">First selectable item</kirby-item>
+  <kirby-item [selectable]="true">Second selectable item</kirby-item>
+  <kirby-item [selectable]="true">Third selectable item</kirby-item>
+</kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+export const SelectableInCardSecondFocused: Story = {
+  ...SelectableInCardFirstFocused,
+  name: 'Selectable in Card - Second Focused',
+  play: focusSelectableItem(1),
+};
+
+export const SelectableInCardLastFocused: Story = {
+  ...SelectableInCardFirstFocused,
+  name: 'Selectable in Card - Last Focused',
+  play: focusSelectableItem(2),
 };

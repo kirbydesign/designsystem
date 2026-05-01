@@ -203,8 +203,10 @@ describe('MenuComponent', () => {
       expect(card.getAttribute('role')).toEqual('menu');
     });
 
-    it('should have items with role=menuitem', () => {
-      expect(card.querySelector('kirby-item').getAttribute('role')).toEqual('menuitem');
+    it('should have items with role=menuitem', async () => {
+      const ionItem = card.querySelector('ion-item');
+      await TestHelper.whenReady(ionItem);
+      expect(ionItem.shadowRoot.querySelector('button').getAttribute('role')).toEqual('menuitem');
     });
   });
 
@@ -214,8 +216,8 @@ describe('MenuComponent', () => {
         `<kirby-menu [closeOnEscapeKey]="closeOnEscapeKey" [closeOnSelect]="closeOnSelect" [isDisabled]="isDisabled">
           <kirby-item>
             <p>Action 1</p>
-              </kirby-item>
-          </kirby-menu>`,
+          </kirby-item>
+        </kirby-menu>`,
         { hostProps: { closeOnEscapeKey: true, closeOnSelect: true, isDisabled: false } }
       );
       triggerButton = spectator.query('button');
@@ -314,9 +316,10 @@ describe('MenuComponent', () => {
       });
 
       it('should add role="menuitem" to item', async () => {
-        const kirbyItem = spectator.query('kirby-item');
+        const ionItem = spectator.query('ion-item');
+        await TestHelper.whenReady(ionItem);
 
-        expect(kirbyItem.getAttribute('role')).toBe('menuitem');
+        expect(ionItem.shadowRoot.querySelector('button').getAttribute('role')).toBe('menuitem');
       });
     });
 
@@ -352,9 +355,10 @@ describe('MenuComponent', () => {
       });
 
       it('should add role="menuitem" to items ', async () => {
-        const kirbyItems = spectator.queryAll('kirby-item');
-        kirbyItems.forEach((kirbyItem) => {
-          expect(kirbyItem.getAttribute('role')).toBe('menuitem');
+        const ionItems = spectator.queryAll('ion-item');
+        await TestHelper.whenReady(ionItems[0]);
+        ionItems.forEach((ionItem) => {
+          expect(ionItem.shadowRoot.querySelector('button').getAttribute('role')).toBe('menuitem');
         });
       });
     });
@@ -661,9 +665,17 @@ describe('MenuComponent', () => {
           items = card.querySelectorAll('kirby-item');
         });
 
-        it('should add role="menuitemcheckbox" to items with toggle or checkbox', () => {
-          expect(items[0].getAttribute('role')).toEqual('menuitemcheckbox');
-          expect(items[1].getAttribute('role')).toEqual('menuitemcheckbox');
+        it('should add role="menuitemcheckbox" to items with toggle or checkbox', async () => {
+          const ionItems = card.querySelectorAll('ion-item');
+          await TestHelper.whenReady(ionItems[0]);
+          const checkboxInput = ionItems[0]
+            .querySelector('ion-checkbox')
+            ?.shadowRoot?.querySelector('input');
+          const toggleInput = ionItems[1]
+            .querySelector('ion-toggle')
+            ?.shadowRoot?.querySelector('input');
+          expect(checkboxInput.getAttribute('role')).toEqual('menuitemcheckbox');
+          expect(toggleInput.getAttribute('role')).toEqual('menuitemcheckbox');
         });
       });
     });

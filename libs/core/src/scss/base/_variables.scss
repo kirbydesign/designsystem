@@ -33,6 +33,8 @@ $relative-sizes: (
 /*
   FONT SETTINGS
 ****************************************************************************/
+$base-font-size-px: 16;
+
 // Base font sizes in rem for use in calculations
 // These are the preferred values used in $font-sizes clamps
 $font-sizes-base: (
@@ -96,18 +98,23 @@ $font-weight: (
 * @see https://developer.apple.com/design/human-interface-guidelines/typography#iOS-iPadOS-Dynamic-Type-sizes
 *
 * It is used to determine when to apply alternative layout styles to items,
-* and as a text-resize maximum scale for a few components that cannot reasonably 
+* and as a text-resize maximum scale for a few components that cannot reasonably
 * scale to 200% (tab button, tab navigation)
 */
-$font-resize-threshold: 1.45;
+$text-resize-threshold: 1.45;
 
 /* Icon
 ****************************************************************************/
+
+// Non-linear icon scaling: icons use clamp()
+// to prioritize user preferences but maintain hierarchy with:
+// - minimum values that enforce a size equal to 0.625 (10/16) of the base rem in px
+// - maximum values that provide a maximum icon resize of 200%
 $icon-font-sizes: (
-  'lg': 3.5rem,
-  'md': 2rem,
-  'sm': 1.5rem,
-  'xs': 1rem,
+  'lg': clamp(35px, 3.5rem, 112px),
+  'md': clamp(20px, 2rem, 64px),
+  'sm': clamp(15px, 1.5rem, 48px),
+  'xs': clamp(10px, 1rem, 32px),
 ) !default;
 
 /*

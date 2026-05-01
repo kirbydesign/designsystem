@@ -3,7 +3,7 @@
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-selected: utils.get-color('dark');
-$maximum-font-size: utils.size('s') * utils.$font-resize-threshold;
+$maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
 
 @mixin button-reset {
   background: transparent;

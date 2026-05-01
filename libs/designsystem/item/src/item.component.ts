@@ -18,6 +18,7 @@ import { RadioComponent } from '@kirbydesign/designsystem/radio';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { IonItem, IonReorder } from '@ionic/angular/standalone';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 export enum ItemSize {
   XS = 'xs',
@@ -30,6 +31,7 @@ export enum ItemSize {
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [IonicElementPartHelper],
   imports: [IonItem, IonReorder, IconComponent],
 })
 export class ItemComponent implements AfterViewInit {
@@ -80,7 +82,8 @@ export class ItemComponent implements AfterViewInit {
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private ionicElementPartHelper: IonicElementPartHelper
   ) {}
 
   ngAfterViewInit(): void {
@@ -90,6 +93,8 @@ export class ItemComponent implements AfterViewInit {
       this.renderer,
       this.ionItem.nativeElement
     );
+    this.ionicElementPartHelper.setPart('item-inner', this.ionItem, '.item-inner');
+    this.ionicElementPartHelper.setPart('input-wrapper', this.ionItem, '.input-wrapper');
   }
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
@@ -106,16 +111,17 @@ export class ItemComponent implements AfterViewInit {
     // We shouldn't render item as a button if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
 
-    return this.selectable && !this.containsNestedInteractives();
+    return this.selectable && !this.containsNestedInteractives;
   }
 
   get _renderLink(): string {
     // We shouldn't render item as a link if the item contains
     // nested interactive, i.e. checkbox, radio or toggle:
-    return this.containsNestedInteractives() ? undefined : this.href;
+    return this.containsNestedInteractives ? undefined : this.href;
   }
 
-  private containsNestedInteractives(): boolean {
+  @HostBinding('class.has-interactive')
+  private get containsNestedInteractives(): boolean {
     return !!(this.checkbox || this.radio || this.toggle || this.button);
   }
 }

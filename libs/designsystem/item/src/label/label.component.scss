@@ -1,5 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
-@use '../item.utils';
+@use '../item.utils' as item;
 
 :host {
   &.horizontal ion-label {
@@ -50,3 +50,5 @@
     font-weight: utils.font-weight('bold');
   }
 }
+
+@include item.handle-text-resize-for-label;
