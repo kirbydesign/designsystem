@@ -7,10 +7,6 @@ $maximum-font-size-sm: utils.size('xs') * utils.$text-resize-threshold;
 $maximum-font-size-md: utils.size('s') * utils.$text-resize-threshold;
 $badge-offset: 0.8em;
 
-// Make badge scale proportionally with segment font-size instead of browser setting, so it also caps and preserves ratio.
-// Achieved by calculating the font size ratio between badge and segment, and converting it to em.
-$badge-font-size: calc(utils.font-size-base('xxs') / utils.font-size-base('s') * 1em);
-
 :host {
   display: block;
   user-select: none;
@@ -19,7 +15,6 @@ $badge-font-size: calc(utils.font-size-base('xxs') / utils.font-size-base('s') *
   --kirby-badge-top: #{-1 * $badge-offset};
   --kirby-badge-right: #{-2 * $badge-offset};
   --kirby-badge-z-index: #{utils.z('segment-badge')};
-  --kirby-badge-font-size: #{$badge-font-size};
 
   &.sm {
     ion-segment-button {
