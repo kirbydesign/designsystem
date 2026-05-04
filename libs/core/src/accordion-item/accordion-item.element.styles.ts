@@ -61,15 +61,15 @@ export default css`
     display: block;
   }
 
-  :host([isDisabled]) .header {
+  :host([isdisabled]) .header {
     cursor: default;
   }
 
-  :host([isDisabled]) .title {
+  :host([isdisabled]) .title {
     color: var(--kirby-text-color-semi-dark);
   }
 
-  :host([isDisabled]) .icon {
+  :host([isdisabled]) .icon {
     color: var(--kirby-semi-dark);
   }
 
@@ -114,7 +114,7 @@ export default css`
     opacity: var(--_opacity-active);
   }
 
-  :host([disabled]) .state-layer::before {
+  :host([isdisabled]) .state-layer::before {
     opacity: var(--_opacity);
   }
 
@@ -166,18 +166,4 @@ export default css`
   .header:focus-visible .state-layer::before {
     opacity: var(--_opacity-hover);
   }
-
-  /* ===================================
-         OUTCOMMENTED TO BE REEVALUATED 
-  ==================================== */
-
-  /* :host(:first-child) {
-    border-top: var(
-      1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color))
-     );
-   }
-
-   :host(:last-child) {
-     border-bottom: var(--kirby-accordion-item-border, 1px solid var(--kirby-divider-color));
-   } */
 `;
