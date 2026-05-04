@@ -81,25 +81,6 @@ const meta: Meta<ComboboxComponent> = {
   ],
   parameters: {
     actions: { handles: ['selectionChange'] },
-    controls: {
-      include: [
-        'items',
-        'selectedItem',
-        'itemTextProperty',
-        'itemIdProperty',
-        'placeholder',
-        'popout',
-        'expand',
-        'disabled',
-        'itemHeight',
-        'noSearchResultsText',
-        'searchFunction',
-        'hasError',
-        'hasErrorChange',
-        'size',
-        'change',
-      ],
-    },
   },
   argTypes: {
     items: { control: false },
