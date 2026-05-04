@@ -618,7 +618,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('mousedown', ['$event'])
-  protected onMouseDown(event: MouseEvent) {
+  public onMouseDown(event: MouseEvent) {
     if (this.disabled) {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -626,14 +626,14 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('touchstart', ['$event'])
-  protected onTouchStart(event: TouchEvent) {
+  public onTouchStart(event: TouchEvent) {
     if (this.isOpen) {
       event.stopPropagation();
     }
   }
 
   @HostListener('focusout')
-  protected onFocusOut() {
+  public onFocusOut() {
     // Defer the check to allow the browser (and screen readers like VoiceOver/NVDA)
     // to settle focus. `relatedTarget` is often `null` with screen readers, so we
     // inspect `document.activeElement` after the microtask queue has flushed.
@@ -667,7 +667,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('keydown.tab')
-  protected onTab() {
+  public onTab() {
     if (this.isOpen) {
       this.selectItem(this.focusedItem);
       this.close();
@@ -675,12 +675,12 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('keydown.escape')
-  protected onEscape() {
+  public onEscape() {
     this.close();
   }
 
   @HostListener('keydown.enter', ['$event'])
-  protected onEnterO(event: Event) {
+  public onEnter(event: Event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -696,7 +696,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.pageDown', ['$event'])
   @HostListener('keydown.home', ['$event'])
   @HostListener('keydown.end', ['$event'])
-  protected onArrowKeys(event: Event): void {
+  public onArrowKeys(event: Event): void {
     if (this.disabled) return;
 
     const keyEvent = event as KeyboardEvent; // safe in this context
