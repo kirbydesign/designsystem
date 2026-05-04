@@ -80,7 +80,25 @@ const meta: Meta<ComboboxComponent> = {
   ],
   parameters: {
     actions: { handles: ['selectionChange'] },
-    controls: { exclude: ['dropdownId', 'displayStringFunction', 'searchFunction'] },
+    controls: {
+      include: [
+        'items',
+        'selectedItem',
+        'itemTextProperty',
+        'itemIdProperty',
+        'placeholder',
+        'popout',
+        'expand',
+        'disabled',
+        'itemHeight',
+        'noSearchResultsText',
+        'searchFunction',
+        'hasError',
+        'hasErrorChange',
+        'size',
+        'change',
+      ],
+    },
   },
   argTypes: {
     items: { control: false },
@@ -93,6 +111,8 @@ const meta: Meta<ComboboxComponent> = {
 };
 export default meta;
 
+type Story = StoryObj<ComboboxComponent>;
+
 /**
  * This is a default combobox with a simple list of string items. The user can type in the input field to filter the options, and the dropdown will display only the matching items.
  * The placeholder text is intentionally long to demonstrate how the component handles long text and to ensure that it does not break the layout or cause any visual issues.
@@ -100,20 +120,27 @@ export default meta;
  * All the currencies are simple strings, and the component will use the default behavior to display them in the dropdown.
  * The filtering is based on the string values of the items, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
  */
-type Story = StoryObj<ComboboxComponent>;
 export const Default: Story = {
   args: {
     items: simpleCurrencyItems,
-    placeholder: 'Select currencies but very much longer',
-    disabled: false,
-    hasError: false,
+    placeholder: 'Select currencies',
   },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-x-combobox
+        [items]="items"
+        [placeholder]="placeholder"
+      >
+      </kirby-x-combobox>
+    `,
+  }),
 };
 
 /**
- * In this example, the items are objects with 'code' and 'name' properties.
  * By setting the 'itemTextProperty' to 'code', the component will display the currency codes in the dropdown.
  * The filtering will be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
+ * Note: itemIdProperty is also set, for scrolling to work properly on complex objects.
  */
 export const WithTextProperty: Story = {
   args: {
@@ -121,8 +148,6 @@ export const WithTextProperty: Story = {
     itemTextProperty: 'code',
     itemIdProperty: 'code',
     placeholder: 'Select currencies',
-    disabled: false,
-    hasError: false,
   },
   render: (args) => ({
     props: args,
@@ -132,8 +157,6 @@ export const WithTextProperty: Story = {
         [itemTextProperty]="itemTextProperty"
         [itemIdProperty]="itemIdProperty"
         [placeholder]="placeholder"
-        [disabled]="disabled"
-        [hasError]="hasError"
       >
       </kirby-x-combobox>
     `,
@@ -141,12 +164,9 @@ export const WithTextProperty: Story = {
 };
 
 /**
- * This example demonstrates how to use a custom template for the dropdown items.
- * The items are objects with 'code' and 'name' properties, and we set the 'itemTextProperty' to 'code' to display the currency codes when an item is selected.
- * The custom template allows us to display both the currency code and name in a more visually appealing way.
- * The filtering will still be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items with their corresponding names.
- * NOTE: When using a custom template, it's important to ensure that the 'itemIdProperty' is set correctly and is equal to '[attr.id]' selecting and scrolling to work properly, as the component relies on the item IDs to manage selection and focus within the dropdown. In this example, we set 'itemIdProperty' to 'code', and in the template, we bind '[attr.id]' to 'item.code' to ensure that each item has a unique ID that corresponds to its code.
- * Also it is important to set 'itemHeight' of your items, otherwise the component will not be able to calculate the height of the dropdown and it will not be able to scroll to the selected item when the dropdown is opened.
+ * The items are objects with 'code' and 'name' properties.
+ * Because the item rendered by the DOM has changed, it is up to the developer to set 'itemHeight' to ensure that the component can calculate the height of the dropdown and scroll to the selected item when the dropdown is opened.
+ * When using a custom template, it's important to ensure that the 'itemIdProperty' is set correctly and is equal to '[attr.id]' selecting and scrolling to work properly, as the component relies on the item IDs to manage selection and focus within the dropdown.
  */
 export const WithTemplate: Story = {
   args: {
@@ -154,8 +174,6 @@ export const WithTemplate: Story = {
     itemTextProperty: 'code',
     itemIdProperty: 'code',
     placeholder: 'Select currencies',
-    disabled: false,
-    hasError: false,
     itemHeight: 56,
   },
   render: (args) => ({
@@ -192,10 +210,8 @@ export const WithTemplate: Story = {
 };
 
 /**
- * This example demonstrates how to use a custom search function to filter the options in the dropdown.
  * The 'searchFunction' property allows you to provide a custom function that takes the search term as input and returns an array of matching items.
- * In this example, the custom search function filters the currency items based on their 'name' property, allowing the user to search for currencies by their full names instead of just their codes.
- * When the user types in the input field, the custom search function will be called with the current search term, and it will return only the items whose names include the search term, which will then be displayed in the dropdown.
+ * In this example, the custom search function filters the currency items based on their 'name' property.
  */
 export const CustomSearchFunction: Story = {
   args: {
@@ -243,7 +259,6 @@ export const CustomSearchFunction: Story = {
 };
 
 /**
- * This example demonstrates the performance of the component when handling a large list of items.
  * The 'items' property is set to an array of 5000 currency items, which simulates a scenario where there are many options to choose from.
  */
 export const LargeList: Story = {
@@ -286,9 +301,6 @@ export const LargeList: Story = {
   }),
 };
 
-/**
- * This example demonstrates the disabled state of the component. When the 'disabled' property is set to true, the input field will be non-interactive, and the user will not be able to open the dropdown or select any options.
- */
 export const Disabled: Story = {
   args: {
     placeholder: 'Select currencies',
@@ -308,10 +320,6 @@ export const Disabled: Story = {
   }),
 };
 
-/**
- * This example demonstrates the error state of the component.
- * When the 'hasError' property is set to true, the input field will be styled to indicate that there is an error.
- */
 export const HasError: Story = {
   args: {
     items: simpleCurrencyItems,
@@ -332,15 +340,10 @@ export const HasError: Story = {
   }),
 };
 
-/**
- * This example demonstrates the different sizes of the component. The 'size' property can be set to 'md', or 'lg' to adjust the size of the input field and dropdown.
- * In this example, we show both 'md' and 'lg' sizes to illustrate the difference in appearance.
- * The placeholder text is intentionally long to demonstrate how the component handles long text in different sizes.
- */
 export const Sizes: Story = {
   args: {
     items: simpleCurrencyItems,
-    placeholder: 'Select currencies but very long',
+    placeholder: 'Select currencies',
   },
   render: (args) => ({
     props: {
@@ -366,10 +369,6 @@ export const Sizes: Story = {
   }),
 };
 
-/**
- * This example demonstrates the 'expand' property of the component.
- * When the 'expand' property is set to 'block', the component will take up the full width of its container.
- */
 export const ExpandBlock: Story = {
   args: {
     items: simpleCurrencyItems,
