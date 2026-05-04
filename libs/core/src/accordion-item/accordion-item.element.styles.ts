@@ -2,10 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --state-layer-opacity-hover: 0.04;
-    --state-layer-opacity-active: 0.08;
-    --state-layer-background-color: var(--kirby-black);
-
+    --kirby-accordion-item-state-layer-color: var(--kirby-text-color-black);
     --kirby-accordion-item-border-color: var(--kirby-divider-color);
     --kirby-accordion-item-background: var(--kirby-item-background, transparent);
 
@@ -16,19 +13,19 @@ export default css`
                BASE
   =========================== */
 
-  .accordion-item {
+  .item {
     position: relative;
     z-index: 1;
     box-sizing: border-box;
-    border-bottom: 1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color));
-    background: var(--kirby-accordion-item-background, var(--kirby-item-background, transparent));
+    border-bottom: 1px solid var(--kirby-accordion-item-border-color);
+    background: var(--kirby-accordion-item-background);
   }
 
   /* ===================================
                HEADER
   ==================================== */
 
-  .accordion-item__header {
+  .header {
     display: flex;
     align-items: center;
     gap: var(--kirby-spacing-xxs);
@@ -50,7 +47,7 @@ export default css`
     cursor: pointer;
   }
 
-  .accordion-item__title {
+  .title {
     flex-grow: 1;
     display: flex;
     font-size: var(--kirby-font-size-n);
@@ -64,19 +61,19 @@ export default css`
     display: block;
   }
 
-  :host([isdisabled]) .accordion-item__header {
+  :host([isDisabled]) .header {
     cursor: default;
   }
 
-  :host([isdisabled]) .accordion-item__title {
+  :host([isDisabled]) .title {
     color: var(--kirby-text-color-semi-dark);
   }
 
-  :host([isdisabled]) .accordion-item__icon {
+  :host([isDisabled]) .icon {
     color: var(--kirby-semi-dark);
   }
 
-  :host([isexpanded]) .accordion-item__title {
+  :host([isexpanded]) .title {
     font-weight: var(--kirby-font-weight-bold);
   }
 
@@ -88,7 +85,7 @@ export default css`
           STATE-LAYER
   ==================================== */
 
-  .accordion-item__state-layer {
+  .state-layer {
     position: absolute;
     inset: 0;
     border-radius: inherit;
@@ -96,67 +93,69 @@ export default css`
     pointer-events: none;
   }
 
-  .accordion-item__state-layer::before {
-    transition: all 80ms linear;
+  .state-layer::before {
+    --_opacity: 0;
+    --_opacity-hover: 0.04;
+    --_opacity-active: 0.08;
+    transition: opacity 80ms linear;
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    opacity: var(--state-layer-opacity, 0);
-    background-color: var(--state-layer-background-color);
+    opacity: var(--_opacity);
+    background-color: var(--kirby-accordion-item-state-layer-color);
   }
 
-  .accordion-item__header:hover .accordion-item__state-layer::before {
-    opacity: var(--state-layer-opacity-hover);
+  .header:hover .state-layer::before {
+    opacity: var(--_opacity-hover);
   }
 
-  .accordion-item__header:active .accordion-item__state-layer::before {
-    opacity: var(--state-layer-opacity-active);
+  .header:active .state-layer::before {
+    opacity: var(--_opacity-active);
   }
 
-  :host([isdisabled]) .accordion-item__state-layer::before {
-    opacity: 0;
+  :host([disabled]) .state-layer::before {
+    opacity: var(--_opacity);
   }
 
   /* ===================================
           CONTENT
   ==================================== */
 
-  .accordion-item__content {
+  .content {
     overflow: hidden;
     height: 0;
     interpolate-size: allow-keywords;
     transition: height 0.25s ease;
   }
 
-  :host([isexpanded]) .accordion-item__content {
+  :host([isexpanded]) .content {
     height: auto;
   }
 
-  :host([haspadding]) .accordion-item__content-body {
+  :host([haspadding]) .content-body {
     padding-inline: var(--kirby-spacing-s);
   }
 
-  :host([haspadding][isexpanded]) .accordion-item__content-body {
+  :host([haspadding][isexpanded]) .content-body {
     padding-bottom: var(--kirby-spacing-s);
   }
 
   /* Safari + Firefox */
   @supports not (interpolate-size: allow-keywords) {
-    .accordion-item__content {
+    .content {
       display: grid;
       grid-template-rows: 0fr;
       transition: grid-template-rows 0.25s ease;
-      overflow: hidden;
     }
 
-    :host([isexpanded]) .accordion-item__content {
+    :host([isexpanded]) .content {
       grid-template-rows: 1fr;
     }
 
-    .accordion-item__content-body {
-      overflow: hidden;
+    .content-body {
       min-height: 0;
+      overflow: hidden;
     }
   }
 
@@ -164,10 +163,8 @@ export default css`
           ACCESSIBILITY FOCUS
   ==================================== */
 
-  .accordion-item__header:focus-visible .accordion-item__state-layer::before {
-    opacity: var(--state-layer-opacity-hover);
-    box-shadow: none;
-    outline: 0;
+  .header:focus-visible .state-layer::before {
+    opacity: var(--_opacity-hover);
   }
 
   /* ===================================
