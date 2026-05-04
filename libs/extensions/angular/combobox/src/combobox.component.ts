@@ -70,8 +70,8 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
-  protected _listboxId: string = UniqueIdGenerator.scopedTo('kirby-x-combobox').next();
-  protected _comboboxId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
+  public _listboxId: string = UniqueIdGenerator.scopedTo('kirby-x-combobox').next();
+  public _comboboxId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
   private readonly _defaultSearchFunction = (
     searchTerm: string,
@@ -245,11 +245,11 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   // _focusedItem keeps track of which element has focus and will be selected
   // if it is activated (by pressing ENTER)
   private _focusedItem: unknown = undefined;
-  protected get focusedItem(): unknown {
+  public get focusedItem(): unknown {
     return this._focusedItem;
   }
 
-  protected set focusedItem(item: unknown) {
+  public set focusedItem(item: unknown) {
     // the focus might not have changed, but where in the list might
     this.setAriaPosinsetOnElement(item);
 
@@ -334,10 +334,13 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return true;
   }
 
+  /**
+   * Emitted when an item is selected (tap on mobile, click/keypress on web)
+   */
   @Output()
   public change: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-  protected value: unknown = undefined;
+  public value: unknown = undefined;
 
   @HostBinding('class.expand')
   public get _isBlockLevel() {
@@ -360,19 +363,19 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
-  protected itemTemplate?: TemplateRef<unknown>;
+  public itemTemplate?: TemplateRef<unknown>;
 
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
-  protected slottedItems?: QueryList<ElementRef<HTMLElement>>;
+  public slottedItems?: QueryList<ElementRef<HTMLElement>>;
 
   @ViewChild(CardComponent, { read: ElementRef })
-  protected cardElement?: ElementRef<HTMLElement>;
+  public cardElement?: ElementRef<HTMLElement>;
 
   @ViewChild(PopoverComponent)
-  protected popover?: PopoverComponent;
+  public popover?: PopoverComponent;
 
   @ViewChild('rootElement', { static: true, read: ElementRef })
-  protected rootElement!: ElementRef<HTMLElement>;
+  public rootElement!: ElementRef<HTMLElement>;
 
   @ViewChild(InputComponent, { read: ElementRef })
   private textInput?: ElementRef<HTMLInputElement>;
@@ -390,11 +393,11 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @ViewChildren(ItemComponent, { read: ElementRef })
-  protected kirbyItemsDefault?: QueryList<ElementRef<HTMLElement>>;
+  public kirbyItemsDefault?: QueryList<ElementRef<HTMLElement>>;
 
-  protected _kirbyItemsSlotted?: QueryList<ElementRef<HTMLElement>>;
+  _kirbyItemsSlotted?: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
-  protected set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
+  public set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
     const hasSlottedItems = this.disposeItemClickListeners?.length > 0;
     if (hasSlottedItems) {
       this.unlistenAllSlottedItems();
@@ -420,7 +423,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     this._kirbyItemsSlotted = kirbyItems;
   }
 
-  protected get kirbyItemsSlotted(): QueryList<ElementRef<HTMLElement>> | undefined {
+  public get kirbyItemsSlotted(): QueryList<ElementRef<HTMLElement>> | undefined {
     return this._kirbyItemsSlotted;
   }
 
@@ -501,7 +504,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  private close() {
+  public close() {
     if (this.disabled) {
       return;
     }
@@ -549,7 +552,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
    *
    * @param fn Callback to be triggered when the value changes.
    */
-  public registerOnChange(fn: (value: unknown) => void): void {
+  registerOnChange(fn: (value: unknown) => void): void {
     this.onChange = fn;
   }
 
@@ -560,7 +563,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
    *
    * @param fn Callback to be triggered when the component has been touched.
    */
-  public registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
@@ -680,7 +683,7 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @HostListener('keydown.enter', ['$event'])
-  public onEnter(event: Event) {
+  public onEnterO(event: Event) {
     event.preventDefault();
     event.stopPropagation();
 
