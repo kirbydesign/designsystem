@@ -1,0 +1,56 @@
+import { ArgTypes, Canvas, Description, Meta, Story, Title } from '@storybook/addon-docs/blocks';
+
+import * as ComboboxStories from './combobox.component.stories';
+
+<Meta of={ComboboxStories} />
+
+<Title />
+
+<Description of={ComboboxStories} />
+
+<Canvas of={ComboboxStories.Default} />
+
+## With Text Property
+
+<Description of={ComboboxStories.WithTextProperty} />
+
+<Canvas of={ComboboxStories.WithTextProperty} />
+
+## With Template
+
+<Description of={ComboboxStories.WithTemplate} />
+
+<Canvas of={ComboboxStories.WithTemplate} />
+
+## Custom Search Function
+
+<Description of={ComboboxStories.CustomSearchFunction} />
+
+<Canvas of={ComboboxStories.CustomSearchFunction} />
+
+## Large List
+
+<Description of={ComboboxStories.LargeList} />
+
+<Canvas of={ComboboxStories.LargeList} />
+
+## Disabled
+
+<Canvas of={ComboboxStories.Disabled} />
+
+## Has Error
+
+<Canvas of={ComboboxStories.HasError} />
+
+## Sizes
+
+<Canvas of={ComboboxStories.Sizes} />
+
+## Expand Block
+
+<Canvas of={ComboboxStories.ExpandBlock} />
+
+## API
+
+<ArgTypes of={ComboboxStories} include={['items', 'selectedItem', 'itemTextProperty', 'itemIdProperty', 'placeholder', 'popout', 'expand', 'disabled', 'itemHeight', 'noSearchResultsText', 'searchFunction', 'hasError', 'hasErrorChange', 'size', 'change']} />
+
