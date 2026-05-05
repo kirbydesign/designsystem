@@ -201,8 +201,9 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     const contentHeight = wrapperDimensions.height;
     const availableSpaceDown = viewPortHeight - targetDimensions.bottom;
     const availableSpaceUp = targetDimensions.top;
+    // contentHeight > 0 guards against treating an unrendered popover as fitting below
     const contentCanFitBelowTarget =
-      availableSpaceDown >= contentHeight + this.POPOVER_BODY_PADDING;
+      contentHeight > 0 && availableSpaceDown >= contentHeight + this.POPOVER_BODY_PADDING;
 
     const isAvailableSpaceBelow =
       contentCanFitBelowTarget || availableSpaceDown >= availableSpaceUp;
