@@ -168,14 +168,21 @@ ion-item-options[side='end'] {
 :host-context(.shape-rounded) {
   .list,
   .list-items {
-    border-radius: utils.border-radius('n');
+    border-radius: var(--kirby-border-radius-n);
+    border-radius: var(--kirby-container-border-top-radius, var(--kirby-border-radius-n)) var(--kirby-container-border-top-radius, var(--kirby-border-radius-n)) var(
+      --kirby-container-border-bottom-radius,
+      var(--kirby-border-radius-n)
+    ) var(
+      --kirby-container-border-bottom-radius,
+      var(--kirby-border-radius-n)
+    );
   }
 
   ion-item.first,
   ion-item-sliding.first,
   ion-list-header {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
+    border-top-left-radius: var(--kirby-container-border-top-radius, var(--kirby-border-radius-n));
+    border-top-right-radius: var(--kirby-container-border-top-radius, var(--kirby-border-radius-n));
     mask-image: radial-gradient(
       white,
       black
@@ -192,8 +199,14 @@ ion-item-options[side='end'] {
   ion-item.last,
   ion-item-sliding.last,
   .footer {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
+    border-bottom-left-radius: var(
+      --kirby-container-border-bottom-radius,
+      var(--kirby-border-radius-n)
+    );
+    border-bottom-right-radius: var(
+      --kirby-container-border-bottom-radius,
+      var(--kirby-border-radius-n)
+    );
     mask-image: radial-gradient(
       white,
       black
@@ -206,6 +219,36 @@ ion-item-options[side='end'] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
+}
+
+// Set border radius variables on kirby-list-item for the item component to consume.
+// Reads --kirby-container-border-*-radius as fallback so the container can override
+// when it has a header/footer.
+kirby-list-item {
+  --kirby-item-border-top-radius: 0;
+  --kirby-item-border-bottom-radius: 0;
+}
+
+kirby-list-item:first-of-type {
+  --kirby-item-border-top-radius: var(
+    --kirby-container-border-top-radius,
+    var(--kirby-border-radius-n)
+  );
+}
+
+kirby-list-item:last-of-type {
+  --kirby-item-border-bottom-radius: var(
+    --kirby-container-border-bottom-radius,
+    var(--kirby-border-radius-n)
+  );
+}
+
+.has-header kirby-list-item:first-of-type {
+  --kirby-item-border-top-radius: 0;
+}
+
+.has-footer kirby-list-item:last-of-type {
+  --kirby-item-border-bottom-radius: 0;
 }
 
 :host-context(.shape-none) {

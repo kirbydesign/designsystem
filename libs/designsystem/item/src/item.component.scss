@@ -182,55 +182,31 @@ ion-item {
   }
 }
 
-:host-context(kirby-list-item:first-of-type),
-:host-context(kirby-card):first-child {
-  ion-item::part(native) {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
-  }
+// Border radius via CSS custom properties — set by parent components (card, list, card-header)
+// --kirby-item-border-*-radius (set by list/card-header) takes precedence.
+// --kirby-container-border-*-radius (set by container) is only read on :first-child / :last-child.
+ion-item::part(native) {
+  border-radius: var(--kirby-item-border-top-radius, 0) var(--kirby-item-border-top-radius, 0) var(--kirby-item-border-bottom-radius, 0) var(--kirby-item-border-bottom-radius, 0);
 }
 
-:host-context(kirby-list-item:last-of-type),
-:host-context(kirby-card):last-child {
-  ion-item::part(native) {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
-  }
+:host(:first-child) ion-item::part(native) {
+  border-top-left-radius: var(
+    --kirby-item-border-top-radius,
+    var(--kirby-container-border-top-radius, 0)
+  );
+  border-top-right-radius: var(
+    --kirby-item-border-top-radius,
+    var(--kirby-container-border-top-radius, 0)
+  );
 }
 
-:host-context(.has-header kirby-list-item:first-of-type) {
-  ion-item::part(native) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-
-:host-context(.has-footer kirby-list-item:last-of-type) {
-  ion-item::part(native) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-}
-
-/* -----Special cases for border radius----- */
-// Item inside kirby-card-header should not have bottom border radius
-:host-context(kirby-card kirby-card-header):last-child ion-item::part(native) {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-// First item in a card with a card-header should not have top border radius
-:host-context(kirby-card:has(kirby-card-header)):first-child {
-  ion-item::part(native) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-
-// Last item in a card that has a card-footer should not have bottom border radius
-:host-context(kirby-card:has(kirby-card-footer)):last-child {
-  ion-item::part(native) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
+:host(:last-child) ion-item::part(native) {
+  border-bottom-left-radius: var(
+    --kirby-item-border-bottom-radius,
+    var(--kirby-container-border-bottom-radius, 0)
+  );
+  border-bottom-right-radius: var(
+    --kirby-item-border-bottom-radius,
+    var(--kirby-container-border-bottom-radius, 0)
+  );
 }
