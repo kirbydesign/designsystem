@@ -211,3 +211,26 @@ ion-item {
     border-bottom-right-radius: 0;
   }
 }
+
+/* -----Special cases for border radius----- */
+// Item inside kirby-card-header should not have bottom border radius
+:host-context(kirby-card kirby-card-header):last-child ion-item::part(native) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+// First item in a card with a card-header should not have top border radius
+:host-context(kirby-card:has(kirby-card-header)):first-child {
+  ion-item::part(native) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+// Last item in a card that has a card-footer should not have bottom border radius
+:host-context(kirby-card:has(kirby-card-footer)):last-child {
+  ion-item::part(native) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
