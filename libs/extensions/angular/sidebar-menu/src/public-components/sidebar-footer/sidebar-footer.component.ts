@@ -17,7 +17,9 @@ import { Component } from '@angular/core';
       min-height: 80px;
     }
 
-
+    footer {
+      width: 100%;
+    }
   `,
 })
 export class SidebarFooterComponent {}

@@ -17,9 +17,6 @@ import { Component } from '@angular/core';
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    :host {
       flex-grow: 1;
     }
 
