@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Description, Meta, Story, Title } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Controls, Description, Meta, Story, Title } from '@storybook/addon-docs/blocks';
 
 import * as ComboboxStories from './combobox.component.stories';
 
@@ -52,5 +52,7 @@ import * as ComboboxStories from './combobox.component.stories';
 
 ## API
 
-<ArgTypes of={ComboboxStories} include={['items', 'selectedItem', 'itemTextProperty', 'itemIdProperty', 'placeholder', 'popout', 'expand', 'disabled', 'itemHeight', 'noSearchResultsText', 'searchFunction', 'hasError', 'hasErrorChange', 'size', 'change']} />
+<Canvas of={ComboboxStories.Playground} />
+
+<Controls of={ComboboxStories.Playground} include={['items', 'selectedItem', 'itemTextProperty', 'itemIdProperty', 'placeholder', 'popout', 'expand', 'disabled', 'itemHeight', 'noSearchResultsText', 'searchFunction', 'hasError', 'hasErrorChange', 'size', 'change']} />
 

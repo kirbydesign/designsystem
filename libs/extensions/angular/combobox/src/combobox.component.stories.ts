@@ -4,7 +4,8 @@ import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-import { InputComponent } from '@kirbydesign/designsystem/form-field';
+import { InputComponent, InputSize } from '@kirbydesign/designsystem/form-field';
+import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -84,11 +85,29 @@ const meta: Meta<ComboboxComponent> = {
   },
   argTypes: {
     items: { control: false },
+    selectedItem: { control: false },
     searchFunction: { control: false },
+    hasErrorChange: { control: false },
+    change: { control: false },
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
     hasError: { control: 'boolean' },
     itemHeight: { control: 'number' },
+    itemTextProperty: { control: 'text' },
+    itemIdProperty: { control: 'text' },
+    noSearchResultsText: { control: 'text' },
+    size: {
+      control: 'select',
+      options: Object.values(InputSize),
+    },
+    expand: {
+      control: 'select',
+      options: [undefined, 'block'],
+    },
+    popout: {
+      control: 'select',
+      options: Object.values(HorizontalDirection),
+    },
   },
 };
 export default meta;
@@ -102,6 +121,41 @@ type Story = StoryObj<ComboboxComponent>;
  * All the currencies are simple strings, and the component will use the default behavior to display them in the dropdown.
  * The filtering is based on the string values of the items, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
  */
+export const Playground: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currencies',
+    disabled: false,
+    hasError: false,
+    itemHeight: 44,
+    itemTextProperty: 'text',
+    itemIdProperty: 'id',
+    noSearchResultsText: 'No results found.',
+    size: InputSize.medium,
+    expand: undefined,
+    popout: HorizontalDirection.right,
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-x-combobox
+        [items]="items"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [hasError]="hasError"
+        [itemHeight]="itemHeight"
+        [itemTextProperty]="itemTextProperty"
+        [itemIdProperty]="itemIdProperty"
+        [noSearchResultsText]="noSearchResultsText"
+        [size]="size"
+        [expand]="expand"
+        [popout]="popout"
+      >
+      </kirby-x-combobox>
+    `,
+  }),
+};
+
 export const Default: Story = {
   args: {
     items: simpleCurrencyItems,
