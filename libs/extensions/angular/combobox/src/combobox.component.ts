@@ -116,9 +116,15 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return 0;
   }
 
+  /**
+   * The text to display when the search returns no results.
+   */
   @Input()
   public noSearchResultsText = 'No results found.';
 
+  /**
+   * The name of the property to use as the display text for each item.
+   */
   @Input()
   public itemTextProperty: string = 'text';
   protected getItemText(item: unknown): string {
@@ -137,13 +143,14 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return '';
   }
 
-  protected readonly defaultItemHeight = 44;
-
+  /**
+   * The height of each item in the dropdown, in pixels. This is used to calculate the height of the dropdown based on the number of items.
+   */
   @Input()
-  public itemHeight: number = this.defaultItemHeight;
+  public itemHeight: number = 44;
 
   protected get dropdownMaxHeight(): number {
-    return 8 * this.defaultItemHeight;
+    return 8 * this.itemHeight;
   }
 
   protected get dropdownMinHeight(): number {
@@ -175,6 +182,9 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return item != undefined && typeof item === 'object' && this.itemIdProperty in item;
   }
 
+  /**
+   * The name of the property to use as the unique identifier for each item.
+   */
   @Input()
   public itemIdProperty = 'id';
   protected getItemId(item: unknown): string {
@@ -197,6 +207,9 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return '';
   }
 
+  /**
+   * A function that takes a search term and the list of items, and returns a filtered list of items to display in the dropdown.
+   */
   @Input()
   public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] =
     this._defaultSearchFunction;
@@ -220,6 +233,10 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._items;
   }
 
+  /**
+   * The list of items to display in the dropdown.
+   * @param value
+   */
   @Input()
   public set items(value: unknown[]) {
     this._items = value;
@@ -231,6 +248,10 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._selectedItem;
   }
 
+  /**
+   * The currently selected item.
+   * @param value
+   */
   @Input()
   public set selectedItem(value: unknown) {
     // Allow clearing by setting undefined
@@ -286,9 +307,16 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     this.renderer.setAttribute(element.nativeElement, 'aria-posintset', `${index + 1}`);
   }
 
+  /**
+   * The placeholder text to display in the input when no item is selected and the input is empty.
+   */
   @Input()
   public placeholder = 'Please search...';
 
+  /**
+   * The direction in which the dropdown should open relative to the input.
+   * @param direction
+   */
   @Input()
   public set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
     this._popout = direction || HorizontalDirection.right;
@@ -298,9 +326,15 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._popout;
   }
 
+  /**
+   * If the combobox needs to expand to full width of its parent container, then use expand.
+   */
   @Input()
   public expand?: 'block';
 
+  /**
+   * When `true`, the user cannot interact with the combobox.
+   */
   @Input()
   public disabled = false;
 
@@ -309,10 +343,16 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.disabled ? 'disabled' : null;
   }
 
+  /**
+   * Will emit the new value when error changes.
+   */
   @Output()
   hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   private _hasError: boolean = false;
 
+  /**
+   * When `true`, the combobox will be styled with error styles.
+   */
   @Input()
   get hasError(): boolean {
     return this._hasError;
@@ -325,6 +365,9 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  /**
+   * The size of the input element.
+   */
   @Input()
   public size: InputSize = InputSize.medium;
 
