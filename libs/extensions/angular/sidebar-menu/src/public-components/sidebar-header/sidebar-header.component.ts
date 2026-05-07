@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-width: 100%;
+      width: 100%;
     }
 
     :host::ng-deep [slot='logo'] {
