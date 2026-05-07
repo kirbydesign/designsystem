@@ -93,8 +93,8 @@ $default-border-outline: 1px solid utils.get-color('medium');
 }
 
 .content-wrapper {
-  --kirby-container-border-top-radius: var(--kirby-border-radius-n);
-  --kirby-container-border-bottom-radius: var(--kirby-border-radius-n);
+  --kirby-context-border-top-radius: var(--kirby-border-radius-n);
+  --kirby-context-border-bottom-radius: var(--kirby-border-radius-n);
 
   &.padding {
     padding-top: var(--kirby-card-padding-top, utils.size('s'));
@@ -104,11 +104,11 @@ $default-border-outline: 1px solid utils.get-color('medium');
 }
 
 :host:has(kirby-card-header) .content-wrapper {
-  --kirby-container-border-top-radius: 0;
+  --kirby-context-border-top-radius: 0;
 }
 
 :host:has(kirby-card-footer) .content-wrapper {
-  --kirby-container-border-bottom-radius: 0;
+  --kirby-context-border-bottom-radius: 0;
 }
 
 .content-layer {

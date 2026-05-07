@@ -10,11 +10,11 @@ $item-height: utils.size('xxxl');
   display: block;
 
   --kirby-list-border-top-radius: var(
-    --kirby-container-border-top-radius,
+    --kirby-context-border-top-radius,
     var(--kirby-border-radius-n)
   );
   --kirby-list-border-bottom-radius: var(
-    --kirby-container-border-bottom-radius,
+    --kirby-context-border-bottom-radius,
     var(--kirby-border-radius-n)
   );
 }
@@ -160,7 +160,7 @@ ion-item-options[side='end'] {
 
   .list-items {
     box-shadow: $shadow;
-    border-radius: utils.border-radius('n');
+    border-radius: var(--kirby-border-radius-n);
   }
 
   .footer {
@@ -184,12 +184,15 @@ ion-item-options[side='end'] {
   ion-item.first,
   ion-item-sliding.first,
   ion-list-header {
-    border-top-left-radius: var(--kirby-list-border-top-radius);
-    border-top-right-radius: var(--kirby-list-border-top-radius);
     mask-image: radial-gradient(
       white,
       black
     ); // Solves issues with round borders at iOS in certain scenarios
+  }
+
+  ion-list-header {
+    border-top-left-radius: var(--kirby-list-border-top-radius);
+    border-top-right-radius: var(--kirby-list-border-top-radius);
   }
 
   ion-item-sliding > ion-item,
@@ -202,12 +205,15 @@ ion-item-options[side='end'] {
   ion-item.last,
   ion-item-sliding.last,
   .footer {
-    border-bottom-left-radius: var(--kirby-list-border-bottom-radius);
-    border-bottom-right-radius: var(--kirby-list-border-bottom-radius);
     mask-image: radial-gradient(
       white,
       black
     ); // Solves issues with round borders at iOS in certain scenarios
+  }
+
+  .footer {
+    border-bottom-left-radius: var(--kirby-list-border-bottom-radius);
+    border-bottom-right-radius: var(--kirby-list-border-bottom-radius);
   }
 
   ion-item-sliding > ion-item,
