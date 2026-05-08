@@ -74,7 +74,6 @@ const currencyItems: CurrencyItem[] = [
 const meta: Meta<ComboboxComponent> = {
   component: ComboboxComponent,
   title: 'Components/Combobox',
-  tags: ['!autodocs'],
   decorators: [
     moduleMetadata({
       imports: [ListModule, ItemModule, DropdownModule, InputComponent, ComboboxComponent],
@@ -82,6 +81,25 @@ const meta: Meta<ComboboxComponent> = {
   ],
   parameters: {
     actions: { handles: ['selectionChange'] },
+    controls: {
+      include: [
+        'items',
+        'selectedItem',
+        'itemTextProperty',
+        'itemIdProperty',
+        'placeholder',
+        'popout',
+        'expand',
+        'disabled',
+        'itemHeight',
+        'noSearchResultsText',
+        'searchFunction',
+        'hasError',
+        'hasErrorChange',
+        'size',
+        'change',
+      ],
+    },
   },
   argTypes: {
     items: { control: false },
