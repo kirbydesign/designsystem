@@ -25,19 +25,14 @@ describe('DropdownComponent integration', () => {
     { text: 'Item 4', value: 4 },
     { text: 'Item 5', value: 5 },
   ];
-  const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
+  const openDropdownDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
+  // Zone.js patches requestAnimationFrame as a macrotask with a fixed 16ms delay in fakeAsync
+  const popoverRafDelayInMs = 16;
+  const totalOpenDelayInMs = openDropdownDelayInMs + popoverRafDelayInMs;
 
   let spectator: SpectatorHost<DropdownComponent>;
   let buttonElement: HTMLButtonElement;
   let cardElement: HTMLElement;
-
-  // requestAnimationFrame is not flushed by fakeAsync/tick — replace with synchronous implementation
-  beforeEach(() => {
-    spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback) => {
-      cb(0);
-      return 0;
-    });
-  });
 
   afterEach(() => {
     if (spectator?.component?.isOpen) {
@@ -73,7 +68,7 @@ describe('DropdownComponent integration', () => {
 
       it('should open card to the right when popout=right', fakeAsync(() => {
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
 
         const buttonRect = buttonElement.getBoundingClientRect();
         const card = spectator.query('kirby-card');
@@ -103,7 +98,7 @@ describe('DropdownComponent integration', () => {
         spectator.component.ngAfterViewInit();
 
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
 
         const card = spectator.query('kirby-card');
         const componentWidth = spectator.element.clientWidth;
@@ -129,7 +124,7 @@ describe('DropdownComponent integration', () => {
 
       it('should align the dropdown to the right side of button and component container ', fakeAsync(() => {
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         spectator.detectChanges();
 
         const card = spectator.query('kirby-card');
@@ -166,7 +161,7 @@ describe('DropdownComponent integration', () => {
       expect(cardElement).toBeHidden();
 
       spectator.click('button');
-      tick(openDelayInMs);
+      tick(totalOpenDelayInMs);
       spectator.detectChanges();
     }));
 
