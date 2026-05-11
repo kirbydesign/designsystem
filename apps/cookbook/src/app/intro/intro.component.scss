@@ -1,6 +1,33 @@
-img {
-  max-width: 100%;
+:host {
   display: block;
-  margin: 0 auto;
-  margin-bottom: var(--kirby-spacing-xxl);
+  padding: var(--kirby-spacing-m);
+}
+
+h1 {
+  margin-bottom: var(--kirby-spacing-xs);
+}
+
+p {
+  margin-bottom: var(--kirby-spacing-m);
+  color: var(--kirby-text-color-semi-dark);
+}
+
+.ag-grid-container {
+  width: 100%;
+  height: 500px;
+
+  --ag-foreground-color: var(--kirby-text-color-black);
+  --ag-border-width: 0;
+  --ag-row-border: 1px solid var(--kirby-divider-color);
+  --ag-background-color: var(--kirby-background-color);
+  --ag-data-background-color: transparent;
+  --ag-header-background-color: transparent;
+  --ag-menu-background-color: var(--kirby-white);
+  --ag-header-text-color: var(--kirby-text-color-semi-dark);
+  --ag-header-font-weight: var(--kirby-font-weight-normal);
+  --ag-header-font-size: var(--kirby-font-size-xs);
+}
+
+.xs .ag-grid-container {
+  --ag-spacing: var(--kirby-spacing-xxxs);
 }
