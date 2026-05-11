@@ -1,8 +1,6 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 code {
-  background-color: utils.get-color('medium');
-  color: utils.get-color('medium-contrast');
+  background-color: var(--kirby-medium);
+  color: var(--kirby-medium-contrast);
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
@@ -20,12 +18,12 @@ code {
   code {
     padding: 0.25rem 0 0;
     display: block;
-    color: utils.get-color('dark');
+    color: var(--kirby-dark);
     background-color: transparent;
   }
 
   code.highlight {
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
     margin-block-start: 0.5rem;
   }
 }
@@ -47,85 +45,18 @@ code {
   &-body-xxsmall {
     margin-block: 2rem 0.5rem;
   }
-
-  &-display-1 {
-    &::after {
-      content: '(#{utils.font-size('xxxxl')})';
-    }
-  }
-  
-  &-display-2 {
-    &::after {
-      content: '(#{utils.font-size('xxxl')})';
-    }
-  }
-  
-  &-display-3 {
-    &::after {
-      content: '(#{utils.font-size('xxl')})';
-    }
-  }
-
-  &-header-1 {
-    &::after {
-      content: '(#{utils.font-size('xl')})';
-    }
-  }
-
-  &-header-2 {
-    &::after {
-      content: '(#{utils.font-size('l')})';
-    }
-  }
-
-  &-header-3 {
-    &::after {
-      content: '(#{utils.font-size('m')})';
-    }
-  }
-
-  &-header-4 {
-    &::after {
-      content: '(#{utils.font-size('n')})';
-    }
-  }
-
-  &-body {
-    &::after {
-      content: '(#{utils.font-size('n')})';
-    }    
-  }
-
-  &-body-small,
-  &-body-small-light {
-    &::after {
-      content: '(#{utils.font-size('s')})';
-    }    
-  }
-
-  &-body-xsmall {
-    &::after {
-      content: '(#{utils.font-size('xs')})';
-    }    
-  }
-
-  &-body-xxsmall {
-    &::after {
-      content: '(#{utils.font-size('xxs')})';
-    }    
-  }
 }
 
 [class^='sample-']::after {
-  color: utils.get-text-color('danger');
-  font-size: utils.font-size('xs');
-  font-weight: utils.font-weight('normal');
-  margin-left: utils.size('xs');
+  color: var(--kirby-text-color-danger);
+  font-size: var(--kirby-font-size-xs);
+  font-weight: var(--kirby-font-weight-normal);
+  margin-left: var(--kirby-spacing-xs);
 }
 
 .info-box {
-  background-color: utils.get-color('white');
+  background-color: var(--kirby-white);
   padding: 0.5rem 1rem;
   margin-right: 1rem;
-  border: 1px solid utils.get-color('medium');
+  border: 1px solid var(--kirby-medium);
 }

@@ -1,35 +1,33 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: flex;
 }
 
 .form-state {
-  margin-top: utils.size('xs');
-  border-top: 1px solid utils.get-color('medium');
-  padding: utils.size('xxs');
+  margin-top: var(--kirby-spacing-xs);
+  border-top: 1px solid var(--kirby-medium);
+  padding: var(--kirby-spacing-xxs);
 
   h4 {
-    margin-bottom: utils.size('xxxs');
-    font-weight: utils.font-weight('normal');
+    margin-bottom: var(--kirby-spacing-xxxs);
+    font-weight: var(--kirby-font-weight-normal);
   }
 
   p {
     margin: 0;
-    font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
+    font-size: var(--kirby-font-size-xs);
+    line-height: var(--kirby-line-height-xs);
   }
 
   span {
-    background-color: utils.get-color('danger');
-    color: utils.get-color('white');
-    margin-right: utils.size('xxxs');
-    padding: 0 utils.size('xxxxs');
-    border-radius: utils.size('xxxs');
+    background-color: var(--kirby-danger);
+    color: var(--kirby-white);
+    margin-right: var(--kirby-spacing-xxxs);
+    padding: 0 var(--kirby-spacing-xxxxs);
+    border-radius: var(--kirby-spacing-xxxs);
   }
 
   span.state-true {
-    background-color: utils.get-color('success');
-    color: utils.get-color('success-contrast');
+    background-color: var(--kirby-success);
+    color: var(--kirby-success-contrast);
   }
 }

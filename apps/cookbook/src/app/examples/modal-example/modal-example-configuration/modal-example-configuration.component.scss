@@ -1,17 +1,15 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 kirby-checkbox {
   &:not(:first-of-type) {
-    margin-top: utils.size('xxxs');
+    margin-top: var(--kirby-spacing-xxxs);
   }
 
   &.indent {
-    margin-left: utils.size('l');
-    margin-top: utils.size('xxxs');
+    margin-left: var(--kirby-spacing-l);
+    margin-top: var(--kirby-spacing-xxxs);
   }
 }
 
 p {
   margin: 0;
-  font-size: utils.font-size('s');
+  font-size: var(--kirby-font-size-s);
 }

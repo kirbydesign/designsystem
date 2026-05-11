@@ -1,13 +1,11 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 table {
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 
   thead {
-    background-color: utils.get-color('light-tint');
+    background-color: var(--kirby-light-tint);
   }
 
   th {
@@ -20,7 +18,7 @@ table {
 
   td,
   th {
-    border: 1px solid utils.get-color('medium');
+    border: 1px solid var(--kirby-medium);
     padding: 1rem;
   }
 

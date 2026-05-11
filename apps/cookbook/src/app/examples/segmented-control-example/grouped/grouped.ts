@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
+import {
+  SegmentedControlComponent,
+  SegmentItem,
+} from '@kirbydesign/designsystem/segmented-control';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
@@ -38,16 +41,16 @@ const config = {
     `.wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--kirby-spacing-s);
 }
 
 kirby-segmented-control {
-  margin-right: 8px;
+  margin-right: var(--kirby-spacing-xxs);
 }
 `,
     `:host {
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: var(--kirby-spacing-s);
 }`,
   ],
 
@@ -91,9 +94,7 @@ onSegmentSelect(segment: SegmentItem) {
 })
 export class SegmentedControlExampleGroupedComponent {
   template: string = config.template;
-  styles: string =
-    "@use '@kirbydesign/core/src/scss/utils';\n\n" +
-    config.styles[0].replace('8px;', "utils.size('xxs');").replace('16px;', "utils.size('s');");
+  styles: string = "@use '@kirbydesign/core/src/scss/utils';\n\n" + config.styles[0];
   codeSnippet: string = config.codeSnippet;
 
   size = 'md';
