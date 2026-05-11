@@ -31,8 +31,7 @@ export default css`
     gap: var(--kirby-spacing-xxs);
     height: var(--kirby-spacing-xxxl);
     margin: 0;
-    padding-left: var(--kirby-spacing-s);
-    padding-right: var(--kirby-spacing-s);
+    padding-inline: var(--kirby-spacing-s);
     user-select: none;
     width: 100%;
     border: none;
@@ -122,6 +121,12 @@ export default css`
           CONTENT
   ==================================== */
 
+  /* 
+  Animated height for accordion content.
+  Uses interpolate-size where supported,
+  grid fallback for Safari/Firefox.
+*/
+
   .content {
     overflow: hidden;
     height: 0;
@@ -166,4 +171,19 @@ export default css`
   .header:focus-visible .state-layer::before {
     opacity: var(--_opacity-hover);
   }
+
+  /* =====================================================================================  
+          FIRST + LAST ITEM Should this be implemented in the accordion element instead?
+  ====================================================================================== */
+  /* :host(:first-child) {
+   border-top: var(
+     --kirby-accordion-item-border,
+     1px solid var(--kirby-accordion-item-border-color, var(--kirby-divider-color))
+   );
+ }
+
+  :host(:last-child) {
+    border-bottom: var(--kirby-accordion-item-border, 1px solid var(--kirby-divider-color));
+   }
+  */
 `;

@@ -18,8 +18,8 @@ export class KirbyAccordionItemElement extends KirbyElement {
   @property({ type: Boolean, reflect: true }) isDisabled = false;
   @property({ type: String }) disabledTitle = '';
   @property({ type: Boolean, reflect: true }) hasPadding = true;
-  @state() hasList = false;
   @property({ type: Number }) headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  @state() hasList = false;
 
   private _contentId = `kirby-accordion-item-content-${uniqueId++}`;
 
