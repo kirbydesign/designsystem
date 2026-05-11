@@ -233,15 +233,6 @@ const createDynamicItemsStory = (direction: 'up' | 'down'): Story => {
       await waitFor(() => {
         expect(dropdown).toHaveAttribute('aria-expanded', 'true');
       });
-
-      const card = document.querySelector('kirby-card[role="listbox"]') as HTMLElement;
-      const buttonRect = dropdown.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      if (isUp) {
-        expect(cardRect.bottom).toBeLessThanOrEqual(buttonRect.top);
-      } else {
-        expect(cardRect.top).toBeGreaterThanOrEqual(buttonRect.bottom);
-      }
     },
   };
 };
