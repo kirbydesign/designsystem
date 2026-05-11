@@ -53,7 +53,7 @@ export default css`
   }
 
   kirby-icon-element {
-    transition: transform var(--kirby-transition-quick);
+    transition: transform var(--kirby-transition-duration-quick);
     font-size: var(--kirby-icon-font-size, 24px);
     width: 24px;
     height: 24px;

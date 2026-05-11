@@ -86,8 +86,6 @@
   }
 }
 
-@mixin transitions() {
-  --kirby-transition-quick: 200ms;
 @mixin breakpoints() {
   @each $name, $value in variables.$breakpoints {
     --kirby-breakpoint-#{$name}: #{$value};
@@ -158,8 +156,6 @@
   /* Z-INDEXES */
   @include z-layers;
 
-  /* TRANSITIONS */
-  @include transitions;
   /* BREAKPOINTS */
   @include breakpoints;
 
