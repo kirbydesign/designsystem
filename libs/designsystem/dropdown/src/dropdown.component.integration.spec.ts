@@ -31,6 +31,14 @@ describe('DropdownComponent integration', () => {
   let buttonElement: HTMLButtonElement;
   let cardElement: HTMLElement;
 
+  // requestAnimationFrame is not flushed by fakeAsync/tick — replace with synchronous implementation
+  beforeEach(() => {
+    spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback) => {
+      cb(0);
+      return 0;
+    });
+  });
+
   afterEach(() => {
     if (spectator?.component?.isOpen) {
       spectator.component.close();
@@ -121,7 +129,6 @@ describe('DropdownComponent integration', () => {
 
       it('should align the dropdown to the right side of button and component container ', fakeAsync(() => {
         spectator.component.open();
-        spectator.detectChanges();
         tick(openDelayInMs);
         spectator.detectChanges();
 

@@ -33,6 +33,14 @@ describe('DropdownComponent', () => {
   ];
   const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
 
+  // requestAnimationFrame is not flushed by fakeAsync/tick — replace with synchronous implementation
+  beforeEach(() => {
+    spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback) => {
+      cb(0);
+      return 0;
+    });
+  });
+
   afterEach(() => {
     // Ensure dropdown is closed to trigger popover cleanup
     if (spectator?.component?.isOpen) {
