@@ -65,7 +65,7 @@ $min-screen-width: 375px;
   }
 
   div > input[kirby-input]:disabled ~ kirby-icon {
-    color: utils.get-text-color('semi-dark');
+    color: utils.get-color('semi-dark-shade');
   }
 }
 
