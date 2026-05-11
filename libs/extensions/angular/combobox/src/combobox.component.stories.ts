@@ -1,10 +1,10 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-import { InputComponent } from '@kirbydesign/designsystem/form-field';
+import { FormFieldComponent, InputComponent } from '@kirbydesign/designsystem/form-field';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -75,7 +75,14 @@ const meta: Meta<ComboboxComponent> = {
   title: 'Components/Combobox',
   decorators: [
     moduleMetadata({
-      imports: [ListModule, ItemModule, DropdownModule, InputComponent, ComboboxComponent],
+      imports: [
+        ListModule,
+        ItemModule,
+        InputComponent,
+        ComboboxComponent,
+        FormFieldComponent,
+        ReactiveFormsModule,
+      ],
     }),
   ],
   parameters: {
@@ -387,6 +394,50 @@ export const ExpandBlock: Story = {
         [expand]="expand"
       >
       </kirby-x-combobox>
+    `,
+  }),
+};
+
+/**
+ * This example demonstrates the combobox integrated inside a `kirby-form-field`
+ * with a reactive `FormControl`. It validates that:
+ * - The form-field label and message render correctly around the combobox
+ * - The combobox participates in Angular reactive forms (value binding, validation)
+ * - Required validation triggers the error state on the form-field
+ *
+ * Try selecting a value and then clearing it to see the validation error appear.
+ */
+export const FormField: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currencies',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      currencyControl: new FormControl(null, Validators.required),
+    },
+    template: `
+      <form>
+        <kirby-form-field
+          [label]="'Currency'"
+          [message]="currencyControl.touched && currencyControl.invalid ? 'Please select a currency' : 'Pick your preferred currency'"
+        >
+          <kirby-x-combobox
+            [items]="items"
+            [placeholder]="placeholder"
+            [formControl]="currencyControl"
+            [hasError]="currencyControl.touched && currencyControl.invalid"
+          >
+          </kirby-x-combobox>
+        </kirby-form-field>
+
+        <p style="margin-top: 1rem; font-size: 14px;">
+          <strong>Form value:</strong> {{ currencyControl.value || '(none)' }}<br>
+          <strong>Valid:</strong> {{ currencyControl.valid }}<br>
+          <strong>Touched:</strong> {{ currencyControl.touched }}
+        </p>
+      </form>
     `,
   }),
 };

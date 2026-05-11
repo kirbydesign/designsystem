@@ -26,7 +26,11 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
+import {
+  EventListenerDisposeFn,
+  FORM_FIELD_CONTROL,
+  FormFieldControl,
+} from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -44,6 +48,7 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
       useExisting: forwardRef(() => DropdownComponent),
       multi: true,
     },
+    { provide: FORM_FIELD_CONTROL, useExisting: forwardRef(() => DropdownComponent) },
   ],
   imports: [
     ButtonComponent,
@@ -54,7 +59,9 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
     IconComponent,
   ],
 })
-export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class DropdownComponent
+  implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
+{
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
@@ -226,6 +233,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   popover: PopoverComponent;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
+
+  get interactiveElement(): HTMLElement {
+    return this.buttonElement?.nativeElement;
+  }
 
   private forwardAriaLabelToDropdownButton() {
     forwardAttributes(

@@ -13,7 +13,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormFieldControl } from '@kirbydesign/designsystem/types';
+import { FORM_FIELD_CONTROL, FormFieldControl } from '@kirbydesign/designsystem/types';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import { DateInputDirective } from '../directives/date/date-input.directive';
@@ -39,6 +39,7 @@ export enum InputSize {
   selector: 'input[kirby-input]',
   styleUrls: ['./input.component.scss'],
   template: '',
+  providers: [{ provide: FORM_FIELD_CONTROL, useExisting: InputComponent }],
 })
 export class InputComponent implements OnChanges, OnInit, FormFieldControl {
   kirbyChange = new EventEmitter<string>();
@@ -98,6 +99,10 @@ export class InputComponent implements OnChanges, OnInit, FormFieldControl {
 
   get nativeValue(): string {
     return this.elementRef?.nativeElement?.value;
+  }
+
+  get interactiveElement(): HTMLElement {
+    return this.elementRef?.nativeElement;
   }
 
   @Output() hasErrorChange = new EventEmitter<boolean>();

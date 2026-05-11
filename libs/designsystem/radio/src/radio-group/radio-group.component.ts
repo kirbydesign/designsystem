@@ -17,7 +17,7 @@ import {
 import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
-import { FormFieldControl } from '@kirbydesign/designsystem/types';
+import { FORM_FIELD_CONTROL, FormFieldControl } from '@kirbydesign/designsystem/types';
 
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 import { IonRadioGroup } from '@ionic/angular/standalone';
@@ -34,6 +34,7 @@ import { RadioComponent } from '../radio.component';
       useExisting: RadioGroupComponent,
       multi: true,
     },
+    { provide: FORM_FIELD_CONTROL, useExisting: RadioGroupComponent },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [IonRadioGroup, NgTemplateOutlet, RadioComponent],
@@ -74,6 +75,10 @@ export class RadioGroupComponent
   }
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
+
+  get interactiveElement(): HTMLElement {
+    return this.element?.nativeElement?.querySelector('ion-radio-group');
+  }
 
   get items(): string[] | any[] {
     return this._items || []; // Ensure items return empty array even if set to null/undefined
