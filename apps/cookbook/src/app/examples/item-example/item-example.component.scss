@@ -1,8 +1,7 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../examples.shared';
 
 cookbook-item-example-simple-sm,
 cookbook-item-example-simple-xs {
   display: block;
-  margin-block-start: utils.size('xs');
+  margin-block-start: var(--kirby-spacing-xs);
 }

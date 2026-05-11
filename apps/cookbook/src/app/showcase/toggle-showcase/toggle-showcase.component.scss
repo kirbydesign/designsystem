@@ -3,18 +3,18 @@
 
 cookbook-toggle-default-example {
   padding: 0;
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
   display: flex;
   flex-direction: column;
-  gap: utils.size('s');
+  gap: var(--kirby-spacing-s);
 
   @include utils.media('>=medium') {
     flex-direction: row;
-    gap: utils.size('xl');
+    gap: var(--kirby-spacing-xl);
   }
 }
 
 cookbook-reative-forms-example {
   padding: 0;
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 }

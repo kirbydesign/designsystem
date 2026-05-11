@@ -2,10 +2,10 @@
 
 :host {
   display: block;
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 
   a {
-    margin-right: utils.size('s');
+    margin-right: var(--kirby-spacing-s);
   }
 }
 

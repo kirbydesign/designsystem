@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
+import {
+  SegmentedControlComponent,
+  SegmentItem,
+} from '@kirbydesign/designsystem/segmented-control';
 
 const config = {
   template: `<kirby-segmented-control

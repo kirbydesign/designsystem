@@ -72,7 +72,7 @@ toggleCanSelectFavorite() {
       }
 
       cookbook-reactive-form-state {
-        margin-left: utils.size('xxs');
+        margin-left: var(--kirby-size-xxs);
 
         @include utils.media('>=medium') {
           margin-left: utils.size('xl');

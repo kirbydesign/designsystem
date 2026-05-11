@@ -1,12 +1,10 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: flex;
   align-items: flex-end;
-  margin-bottom: utils.size('xs');
+  margin-bottom: var(--kirby-spacing-xs);
 
   > * {
-    margin-right: utils.size('s');
+    margin-right: var(--kirby-spacing-s);
   }
 
   &.wrap {
@@ -27,10 +25,10 @@ kirby-avatar {
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
-    font-size: utils.font-size('xs');
+    font-size: var(--kirby-font-size-xs);
     text-align: center;
     display: inline-block;
-    padding-top: utils.size('xxxs');
+    padding-top: var(--kirby-spacing-xxxs);
   }
 }
 
@@ -46,7 +44,7 @@ kirby-avatar[themeColor] {
   display: block;
 
   &::before {
-    padding-top: utils.size('s');
+    padding-top: var(--kirby-spacing-s);
   }
 
   &[themeColor='light']::before {
@@ -59,14 +57,14 @@ kirby-avatar[themeColor] {
 }
 
 .avatar-item-inner-container-bg {
-  background-color: utils.get-color('white');
-  padding: utils.size('xs');
-  border-radius: utils.border-radius('n');
-  margin-bottom: utils.size('s');
+  background-color: var(--kirby-white);
+  padding: var(--kirby-spacing-xs);
+  border-radius: var(--kirby-border-radius-n);
+  margin-bottom: var(--kirby-spacing-s);
 }
 
 .avatar-item-inner-container-bg-none {
-  padding: utils.size('xs');
-  border-radius: utils.border-radius('n');
-  margin-bottom: utils.size('s');
+  padding: var(--kirby-spacing-xs);
+  border-radius: var(--kirby-border-radius-n);
+  margin-bottom: var(--kirby-spacing-s);
 }

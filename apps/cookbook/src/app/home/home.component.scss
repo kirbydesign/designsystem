@@ -3,15 +3,15 @@
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
 
 $header-height-mobile: auto;
-$header-height-desktop: 2 * utils.size('xxl');
-$footer-height: 3 * utils.size('xxl');
-$sidebar-width: 5 * utils.size('xxl');
+$header-height-desktop: calc(2 * var(--kirby-spacing-xxl));
+$footer-height: calc(3 * var(--kirby-spacing-xxl));
+$sidebar-width: calc(5 * var(--kirby-spacing-xxl));
 $content-max-width: 1020px;
-$mobile-gutter: utils.size('s');
-$desktop-gutter: minmax(utils.size('m'), 1fr);
+$mobile-gutter: var(--kirby-spacing-s);
+$desktop-gutter: minmax(var(--kirby-spacing-m), 1fr);
 
 :host {
-  background-color: utils.get-color('background-color');
+  background-color: var(--kirby-background-color);
   display: grid;
   grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
   grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
@@ -19,21 +19,20 @@ $desktop-gutter: minmax(utils.size('m'), 1fr);
     'header header header'
     '. main .'
     'footer footer footer';
-  gap: utils.size('xxs');
+  gap: var(--kirby-spacing-xxs);
   min-height: 100vh;
 
   @include utils.media('>=large') {
-    grid-template-columns: $desktop-gutter $sidebar-width minmax(
-        0,
-        $content-max-width
-      ) $desktop-gutter;
+    grid-template-columns:
+      $desktop-gutter $sidebar-width minmax(0, $content-max-width)
+      $desktop-gutter;
     grid-template-rows: $header-height-desktop minmax(0, 1fr) $footer-height;
     grid-template-areas:
       '. header header .'
       '. sidebar main .'
       'footer footer footer footer';
-    column-gap: utils.size('xl');
-    row-gap: utils.size('m');
+    column-gap: var(--kirby-spacing-xl);
+    row-gap: var(--kirby-spacing-m);
   }
 }
 
