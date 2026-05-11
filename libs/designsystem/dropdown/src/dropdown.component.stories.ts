@@ -2,7 +2,6 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
-import { DesignTokenHelper } from '@kirbydesign/core/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
@@ -209,3 +208,45 @@ export const CookbookExample: Story = {
     template: `<cookbook-dropdown-example></cookbook-dropdown-example>`,
   }),
 };
+
+const createDynamicItemsStory = (direction: 'up' | 'down'): Story => {
+  const isUp = direction === 'up';
+  return {
+    render: () => ({
+      props: { dynamicItems: [] as string[] },
+      template: `
+        <div style="${isUp ? 'height: calc(100vh - var(--kirby-spacing-s) * 2);' : ''}">
+          <button (click)="dynamicItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']" style="display: none;">Load items</button>
+          <kirby-dropdown aria-label="Choose your favorite item" ${isUp ? 'style="position: absolute; bottom: var(--kirby-spacing-s);"' : ''} [items]="dynamicItems"></kirby-dropdown>
+        </div>
+      `,
+    }),
+    play: async ({ canvasElement }) => {
+      // Simulate items being added after the dropdown has been initialized.
+      // Use native .click() so the Angular event binding fires regardless of display:none.
+      (canvasElement.querySelector('button') as HTMLButtonElement).click();
+
+      const canvas = within(canvasElement);
+      const dropdown = canvas.getByRole('combobox');
+      await userEvent.click(dropdown);
+
+      await waitFor(() => {
+        expect(dropdown).toHaveAttribute('aria-expanded', 'true');
+      });
+
+      const card = document.querySelector('kirby-card[role="listbox"]') as HTMLElement;
+      const buttonRect = dropdown.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      if (isUp) {
+        expect(cardRect.bottom).toBeLessThanOrEqual(buttonRect.top);
+      } else {
+        expect(cardRect.top).toBeGreaterThanOrEqual(buttonRect.bottom);
+      }
+    },
+  };
+};
+
+export const DropdownOpenedPopoutTopStartWithDynamicItems: Story = createDynamicItemsStory('up');
+
+export const DropdownOpenedPopoutBottomStartWithDynamicItems: Story =
+  createDynamicItemsStory('down');
