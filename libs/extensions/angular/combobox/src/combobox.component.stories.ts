@@ -142,7 +142,7 @@ type Story = StoryObj<ComboboxComponent>;
 export const Playground: Story = {
   args: {
     items: simpleCurrencyItems,
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
     disabled: false,
     hasError: false,
     itemHeight: 44,
@@ -177,7 +177,7 @@ export const Playground: Story = {
 export const Default: Story = {
   args: {
     items: simpleCurrencyItems,
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
   },
   render: (args) => ({
     props: args,
@@ -201,7 +201,7 @@ export const WithTextProperty: Story = {
     items: currencyItems,
     itemTextProperty: 'code',
     itemIdProperty: 'code',
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
   },
   render: (args) => ({
     props: args,
@@ -227,7 +227,7 @@ export const WithTemplate: Story = {
     items: currencyItems,
     itemTextProperty: 'code',
     itemIdProperty: 'code',
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
     itemHeight: 56,
   },
   render: (args) => ({
@@ -273,7 +273,7 @@ export const CustomSearchFunction: Story = {
     itemTextProperty: 'name',
     itemIdProperty: 'code',
     itemHeight: 56,
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
   },
   render: (args) => ({
     props: {
@@ -321,7 +321,7 @@ export const LargeList: Story = {
     itemTextProperty: 'code',
     itemIdProperty: 'code',
     itemHeight: 56,
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
   },
   render: (args) => ({
     props: {
@@ -357,7 +357,7 @@ export const LargeList: Story = {
 
 export const Disabled: Story = {
   args: {
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
     disabled: true,
   },
   render: (args) => ({
@@ -377,7 +377,7 @@ export const Disabled: Story = {
 export const HasError: Story = {
   args: {
     items: simpleCurrencyItems,
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
     hasError: true,
   },
   render: (args) => ({
@@ -397,7 +397,7 @@ export const HasError: Story = {
 export const Sizes: Story = {
   args: {
     items: simpleCurrencyItems,
-    placeholder: 'Select currencies',
+    placeholder: 'Select currency',
   },
   render: (args) => ({
     props: {
@@ -426,7 +426,7 @@ export const Sizes: Story = {
 export const ExpandBlock: Story = {
   args: {
     items: simpleCurrencyItems,
-    placeholder: 'Select currencies but very long',
+    placeholder: 'Select currency',
     expand: 'block',
   },
   render: (args) => ({
