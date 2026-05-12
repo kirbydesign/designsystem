@@ -74,7 +74,7 @@
   .
 </p>
 
-<h2>Heading, label, detail and wrap</h2>
+<h2>Heading, label and detail</h2>
 <p>
   The
   <em>heading</em>
@@ -86,34 +86,45 @@
   styling to any heading or paragraph.
 </p>
 <p>
-  This means that you are free to use the correct heading element for your context, e.g. h1 if it is
-  the only heading on your page, or as it is the case in these examples a h3, as our section
-  headings are nested within a h1 and h2.
+  This means that you are free to use the correct heading element for your context to fit the page
+  structure.
 </p>
 
+<cookbook-example-viewer [html]="sectionHeaderHeadingWithLabel.template">
+  <div class="example-frame">
+    <cookbook-section-header-heading-with-label
+      #sectionHeaderHeadingWithLabel
+    ></cookbook-section-header-heading-with-label>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Label with detail</h3>
+<p>
+  A label can be used with a detail on its own, when the section header should not act as or look
+  like a heading.
+</p>
+<cookbook-example-viewer [html]="sectionHeaderLabelAndDetail.template">
+  <div class="example-frame">
+    <cookbook-section-header-label-and-detail
+      #sectionHeaderLabelAndDetail
+    ></cookbook-section-header-label-and-detail>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Wrap</h3>
 <p>
   The
   <em>wrap</em>
   attribute can be used on the same elements to enable multiline formatting and can be combined with
   the other attributes.
 </p>
-
-<cookbook-section-header-heading-with-label
-  #sectionHeaderHeadingWithLabel
-></cookbook-section-header-heading-with-label>
-<cookbook-example-viewer [html]="sectionHeaderHeadingWithLabel.template"></cookbook-example-viewer>
-
-<cookbook-section-header-label-and-detail
-  #sectionHeaderLabelAndDetail
-></cookbook-section-header-label-and-detail>
-<cookbook-example-viewer [html]="sectionHeaderLabelAndDetail.template"></cookbook-example-viewer>
-
-<cookbook-section-header-heading-with-multiline-label
-  #sectionHeaderHeadingWithMultilineLabel
-></cookbook-section-header-heading-with-multiline-label>
-<cookbook-example-viewer
-  [html]="sectionHeaderHeadingWithMultilineLabel.template"
-></cookbook-example-viewer>
+<cookbook-example-viewer [html]="sectionHeaderHeadingWithMultilineLabel.template">
+  <div class="example-frame">
+    <cookbook-section-header-heading-with-multiline-label
+      #sectionHeaderHeadingWithMultilineLabel
+    ></cookbook-section-header-heading-with-multiline-label>
+  </div>
+</cookbook-example-viewer>
 
 <h3>Custom section header</h3>
 <p>
@@ -137,8 +148,45 @@
 </p>
 
 <h2>Section Header with Card</h2>
-<cookbook-section-header-with-card #sectionHeaderWithCard></cookbook-section-header-with-card>
-<cookbook-example-viewer [html]="sectionHeaderWithCard.template"></cookbook-example-viewer>
+<cookbook-example-viewer [html]="sectionHeaderWithCard.template">
+  <div class="example-frame">
+    <cookbook-section-header-with-card #sectionHeaderWithCard></cookbook-section-header-with-card>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Heading levels</h2>
+<p>The size of the heading is adjusted by using the appropriate heading element or CSS class:</p>
+<ul>
+  <li>
+    <strong>Large</strong>
+    :
+    <code>&lt;h2 heading&gt;</code>
+    or
+    <code>class="kirby-text-large"</code>
+  </li>
+  <li>
+    <strong>Medium (default)</strong>
+    :
+    <code>&lt;h3 heading&gt;</code>
+    or
+    <code>class="kirby-text-medium"</code>
+  </li>
+  <li>
+    <strong>Normal</strong>
+    :
+    <code>&lt;h4 heading&gt;</code>
+    or
+    <code>class="kirby-text-normal"</code>
+  </li>
+</ul>
+
+<cookbook-example-viewer [html]="sectionHeaderHeadingLevels.template">
+  <div class="example-frame">
+    <cookbook-section-header-heading-levels
+      #sectionHeaderHeadingLevels
+    ></cookbook-section-header-heading-levels>
+  </div>
+</cookbook-example-viewer>
 
 <h2>Importing</h2>
 <cookbook-import-viewer [imports]="'SectionHeaderComponent'"></cookbook-import-viewer>
