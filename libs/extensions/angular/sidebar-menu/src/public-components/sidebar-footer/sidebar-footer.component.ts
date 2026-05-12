@@ -10,14 +10,12 @@ import { Component } from '@angular/core';
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-grow: 1;
+      width: 100%;
     }
 
     :host {
       min-height: 80px;
     }
-
-
   `,
 })
 export class SidebarFooterComponent {}
