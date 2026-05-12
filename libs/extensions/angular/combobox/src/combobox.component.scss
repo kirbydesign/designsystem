@@ -42,6 +42,10 @@ $min-screen-width: 375px;
       padding-right: utils.size('xl');
     }
 
+    > input[kirby-input]:disabled ~ kirby-icon {
+      color: utils.get-color('semi-dark-shade');
+    }
+
     > kirby-icon {
       display: flex;
       align-items: center;
@@ -52,20 +56,10 @@ $min-screen-width: 375px;
     }
   }
 
-  &.is-open {
-    > div > input[kirby-input] {
-      box-shadow: utils.get-elevation(4);
-    }
-  }
-
   &.has-value {
     > div > input[kirby-input] {
       text-overflow: ellipsis;
     }
-  }
-
-  div > input[kirby-input]:disabled ~ kirby-icon {
-    color: utils.get-color('semi-dark-shade');
   }
 }
 
