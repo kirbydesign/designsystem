@@ -235,7 +235,7 @@ export class DropdownComponent
   buttonElement: ElementRef<HTMLElement>;
 
   get interactiveElement(): HTMLElement {
-    return this.buttonElement?.nativeElement;
+    return this.buttonElement.nativeElement;
   }
 
   private forwardAriaLabelToDropdownButton() {

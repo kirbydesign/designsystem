@@ -162,7 +162,19 @@ export class FormFieldComponent
     this.handleAffixOffset();
   }
 
+  private hasWarnedMissingControl = false;
+
   ngAfterContentChecked(): void {
+    if (!this.formFieldControl) {
+      if (!this.hasWarnedMissingControl) {
+        this.hasWarnedMissingControl = true;
+        console.warn(
+          'kirby-form-field: No form field control found. Ensure a component providing FORM_FIELD_CONTROL is projected.'
+        );
+      }
+      return;
+    }
+
     if (!this.nestedInteractiveElement) {
       this.registerNestedInteractive();
     }
@@ -200,13 +212,6 @@ export class FormFieldComponent
   }
 
   private registerNestedInteractive() {
-    if (!this.formFieldControl) {
-      console.warn(
-        'kirby-form-field: No form field control found. Ensure a component providing FORM_FIELD_CONTROL is projected.'
-      );
-      return;
-    }
-
     this.getNestedInteractiveElement();
     this.setNestedInteractiveLabelAttributes();
     this.setNestedInteractiveMessageAttributes();
@@ -214,7 +219,7 @@ export class FormFieldComponent
   }
 
   private getNestedInteractiveElement() {
-    this.nestedInteractiveElement = this.formFieldControl?.interactiveElement;
+    this.nestedInteractiveElement = this.formFieldControl.interactiveElement;
   }
 
   private setNestedInteractiveMessageAttributes() {
