@@ -193,3 +193,84 @@ describe('SectionHeaderComponent heading levels with Kirby Label: normal (.kirby
     });
   });
 });
+
+describe('SectionHeaderComponent heading levels with Kirby Label: medium (.kirby-text-medium)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <h2 heading class="kirby-text-medium">Section Header</h2>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should override h2 to medium typography when using .kirby-text-medium class', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('m'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('m'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading levels with Kirby Label: normal (h5)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <h5 heading>Section Header</h5>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should apply normal typography when using h5 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading levels with Kirby Label: normal (h6)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <h6 heading>Section Header</h6>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should apply normal typography when using h6 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});

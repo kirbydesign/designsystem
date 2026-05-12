@@ -185,3 +185,75 @@ describe('SectionHeaderComponent heading level: normal (.kirby-text-normal)', ()
     });
   });
 });
+
+describe('SectionHeaderComponent heading level: medium (.kirby-text-medium)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <h2 heading class="kirby-text-medium">Section Header</h2>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should override h2 to medium typography when using .kirby-text-medium class', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('m'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('m'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading level: normal (h5)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <h5 heading>Section Header</h5>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should apply normal typography when using h5 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading level: normal (h6)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <h6 heading>Section Header</h6>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should apply normal typography when using h6 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});
