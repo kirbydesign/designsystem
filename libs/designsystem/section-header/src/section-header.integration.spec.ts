@@ -58,3 +58,138 @@ describe('SectionHeaderComponent with Kirby Label', () => {
     });
   });
 });
+
+describe('SectionHeaderComponent heading levels with Kirby Label: large (h2)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <h2 heading>Section Header</h2>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should apply large typography when using h2 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('l'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('l'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading levels with Kirby Label: medium (h3)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <h3 heading>Section Header</h3>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should apply medium typography when using h3 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('m'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('m'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading levels with Kirby Label: normal (h4)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <h4 heading>Section Header</h4>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should apply normal typography when using h4 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading levels with Kirby Label: large (.kirby-text-large)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <p heading class="kirby-text-large">Section Header</p>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should apply large typography when using .kirby-text-large class', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('l'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('l'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading levels with Kirby Label: normal (.kirby-text-normal)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+    imports: [SectionHeaderComponent, LabelComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <kirby-label>
+        <p heading class="kirby-text-normal">Section Header</p>
+        <p label>Label</p>
+      </kirby-label>
+    </kirby-section-header>`);
+  });
+
+  it('should apply normal typography when using .kirby-text-normal class', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});

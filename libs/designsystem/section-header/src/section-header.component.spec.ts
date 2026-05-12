@@ -65,3 +65,123 @@ describe('SectionHeaderComponent', () => {
     });
   });
 });
+
+describe('SectionHeaderComponent heading level: large (h2)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <h2 heading>Section Header</h2>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should apply large typography when using h2 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('l'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('l'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading level: large (.kirby-text-large)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <p heading class="kirby-text-large">Section Header</p>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should apply large typography when using .kirby-text-large class', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('l'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('l'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading level: medium (h3, default)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <h3 heading>Section Header</h3>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should apply medium typography when using h3 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('m'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('m'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading level: normal (h4)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <h4 heading>Section Header</h4>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should apply normal typography when using h4 element', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});
+
+describe('SectionHeaderComponent heading level: normal (.kirby-text-normal)', () => {
+  let spectator: SpectatorHost<SectionHeaderComponent>;
+
+  const createHost = createHostFactory({
+    component: SectionHeaderComponent,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+      <p heading class="kirby-text-normal">Section Header</p>
+    </kirby-section-header>`);
+    await TestHelper.whenReady(spectator.queryHost('ion-item-divider'));
+  });
+
+  it('should apply normal typography when using .kirby-text-normal class', () => {
+    const heading = spectator.queryHost<HTMLElement>('[heading]');
+    expect(heading).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+      'font-weight': fontWeight('bold'),
+      'line-height': lineHeight('n'),
+    });
+  });
+});

@@ -21,6 +21,16 @@
     text-overflow: ellipsis;
   }
 
+  @include utils.slotted('h2[heading]', '.kirby-text-large[heading]') {
+    font-size: utils.font-size('l');
+    line-height: utils.line-height('l');
+  }
+
+  @include utils.slotted('h4[heading]', '.kirby-text-normal[heading]') {
+    font-size: utils.font-size('n');
+    line-height: utils.line-height('n');
+  }
+
   @include utils.slotted('[detail]', '[label]') {
     font-weight: utils.font-weight('light');
     font-size: utils.font-size('s');

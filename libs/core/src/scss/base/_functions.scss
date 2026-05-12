@@ -215,6 +215,16 @@
     text-overflow: ellipsis;
   }
 
+  @include slotted('h2[heading]', '.kirby-text-large[heading]') {
+    font-size: font-size('l');
+    line-height: line-height('l');
+  }
+
+  @include slotted('h4[heading]', '.kirby-text-normal[heading]') {
+    font-size: font-size('n');
+    line-height: line-height('n');
+  }
+
   @include slotted('[detail]', '[label]') {
     font-weight: font-weight('light');
     font-size: font-size('s');
