@@ -387,7 +387,7 @@ export class ComboboxComponent
   @ViewChild('rootElement', { static: true, read: ElementRef })
   public rootElement!: ElementRef<HTMLElement>;
 
-  @ViewChild(InputComponent, { read: ElementRef })
+  @ViewChild(InputComponent, { static: true, read: ElementRef })
   private textInput!: ElementRef<HTMLInputElement>;
 
   get interactiveElement(): HTMLElement {
