@@ -130,28 +130,29 @@ export class FormFieldComponent
 
   public focus() {
     if (!this.nestedInteractiveElement) return;
-    if (
-      !(this.formFieldControl instanceof InputComponent) &&
-      !(this.formFieldControl instanceof TextareaComponent)
-    )
-      return;
 
-    /*
-     * This timeout ensures that any previous manipulation of inputElement
-     * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
-     */
-    setTimeout(() => {
-      if (this.isTouch) {
-        // Trigger Ionic's input shims to ensure input is scrolled into view.
-        // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
-        const touchStart = new TouchEvent('touchstart');
-        const touchEnd = new TouchEvent('touchend');
-        this.nestedInteractiveElement.dispatchEvent(touchStart);
-        this.nestedInteractiveElement.dispatchEvent(touchEnd);
-      } else {
-        this.nestedInteractiveElement.focus();
-      }
-    });
+    const isInputOrTextarea =
+      this.formFieldControl instanceof InputComponent ||
+      this.formFieldControl instanceof TextareaComponent;
+
+    if (isInputOrTextarea) {
+      /*
+       * This timeout ensures that any previous manipulation of inputElement or textareaElement
+       * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
+       */
+      setTimeout(() => {
+        if (this.isTouch) {
+          // Trigger Ionic's input shims to ensure input is scrolled into view.
+          // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
+          const touchStart = new TouchEvent('touchstart');
+          const touchEnd = new TouchEvent('touchend');
+          this.nestedInteractiveElement.dispatchEvent(touchStart);
+          this.nestedInteractiveElement.dispatchEvent(touchEnd);
+        } else {
+          this.nestedInteractiveElement.focus();
+        }
+      });
+    }
   }
 
   ngOnInit() {
