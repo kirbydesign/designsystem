@@ -51,6 +51,7 @@ export class FormFieldComponent
   private nestedInteractiveErrorSubscription: Subscription;
   private _message: string | null | undefined;
   private _label: string | undefined;
+  private hasWarnedMissingControl = false;
 
   showDefaultCalendarIcon = false;
 
@@ -161,8 +162,6 @@ export class FormFieldComponent
   ngAfterContentInit(): void {
     this.handleAffixOffset();
   }
-
-  private hasWarnedMissingControl = false;
 
   ngAfterContentChecked(): void {
     if (!this.formFieldControl) {
