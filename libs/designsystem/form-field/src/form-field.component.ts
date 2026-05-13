@@ -94,13 +94,16 @@ export class FormFieldComponent
     this.element = elementRef.nativeElement;
   }
 
+  private isInputOrTextarea(): boolean {
+    return (
+      this.formFieldControl instanceof InputComponent ||
+      this.formFieldControl instanceof TextareaComponent
+    );
+  }
+
   @HostBinding('class.wrap-content-in-label')
   get _wrapContentInLabel(): boolean {
-    return (
-      !!this.label &&
-      (this.formFieldControl instanceof InputComponent ||
-        this.formFieldControl instanceof TextareaComponent)
-    );
+    return !!this.label && this.isInputOrTextarea();
   }
 
   private dispatchLoadEvent() {
@@ -131,11 +134,7 @@ export class FormFieldComponent
   public focus() {
     if (!this.nestedInteractiveElement) return;
 
-    const isInputOrTextarea =
-      this.formFieldControl instanceof InputComponent ||
-      this.formFieldControl instanceof TextareaComponent;
-
-    if (isInputOrTextarea) {
+    if (this.isInputOrTextarea()) {
       /*
        * This timeout ensures that any previous manipulation of inputElement or textareaElement
        * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
@@ -175,11 +174,7 @@ export class FormFieldComponent
       this.registerNestedInteractive();
     }
 
-    const isInputOrTextarea =
-      this.formFieldControl instanceof InputComponent ||
-      this.formFieldControl instanceof TextareaComponent;
-
-    if (!this.isRegistered && this.element.isConnected && isInputOrTextarea) {
+    if (!this.isRegistered && this.element.isConnected && this.isInputOrTextarea()) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
