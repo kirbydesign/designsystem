@@ -166,12 +166,7 @@ export class FormFieldComponent
 
   ngAfterContentChecked(): void {
     if (!this.formFieldControl) {
-      if (!this.hasWarnedMissingControl) {
-        this.hasWarnedMissingControl = true;
-        console.warn(
-          'kirby-form-field: No form field control found. Ensure a component providing FORM_FIELD_CONTROL is projected.'
-        );
-      }
+      this.warnMissingControl();
       return;
     }
 
@@ -179,12 +174,11 @@ export class FormFieldComponent
       this.registerNestedInteractive();
     }
 
-    if (
-      !this.isRegistered &&
-      this.element.isConnected &&
-      (this.formFieldControl instanceof InputComponent ||
-        this.formFieldControl instanceof TextareaComponent)
-    ) {
+    const isInputOrTextarea =
+      this.formFieldControl instanceof InputComponent ||
+      this.formFieldControl instanceof TextareaComponent;
+
+    if (!this.isRegistered && this.element.isConnected && isInputOrTextarea) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
@@ -192,6 +186,15 @@ export class FormFieldComponent
 
     // Decide if default calendar icon for date input should be shown
     this.showDefaultCalendarIcon = this.shouldShowDefaultCalendarIcon();
+  }
+
+  private warnMissingControl() {
+    if (!this.hasWarnedMissingControl) {
+      this.hasWarnedMissingControl = true;
+      console.warn(
+        'kirby-form-field: No form field control found. Ensure a component providing FORM_FIELD_CONTROL is projected.'
+      );
+    }
   }
 
   ngOnDestroy(): void {
