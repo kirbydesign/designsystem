@@ -4,7 +4,12 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-import { FormFieldComponent, InputComponent } from '@kirbydesign/designsystem/form-field';
+import {
+  FormFieldComponent,
+  InputComponent,
+  InputSize,
+} from '@kirbydesign/designsystem/form-field';
+import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
 
 type CurrencyItem = { code: string; name: string };
 
