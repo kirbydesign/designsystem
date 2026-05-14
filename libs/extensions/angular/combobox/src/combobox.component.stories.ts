@@ -68,9 +68,8 @@ const currencyItems: CurrencyItem[] = [
 ];
 
 /**
- * The Combobox is a form control that allows the user to filter and select from a list of options. It combines the functionality of a dropdown and an input field, providing an efficient way to handle large datasets while maintaining a clean and user-friendly interface.
-* The Combobox is a form control that allows the user to filter and select from a list of options. 
-* A Combobox is useful when there are many options to filter through and choose from, such as selecting a country, city or currency.
+ * The Combobox is a form control that allows the user to filter and select from a list of options.
+ * A Combobox is useful when there are many options to filter through and choose from, such as selecting a country, city or currency.
  */
 const meta: Meta<ComboboxComponent> = {
   component: ComboboxComponent,
@@ -134,9 +133,9 @@ export default meta;
 type Story = StoryObj<ComboboxComponent>;
 
 /**
-* When a user starts typing in the input field, options are filtered so the dropdown will display only matching items. When given a simple list of string, the default filtering matches directly against  the value of each string.
+ * When a user starts typing in the input field, options are filtered so the dropdown will display only matching items. When given a simple list of string, the default filtering matches directly against  the value of each string.
  */
-export const Playground: Story = {
+export const Default: Story = {
   args: {
     items: simpleCurrencyItems,
     placeholder: 'Select currency',
@@ -171,32 +170,13 @@ export const Playground: Story = {
   }),
 };
 
-export const Default: Story = {
-  args: {
-    items: simpleCurrencyItems,
-    placeholder: 'Select currency',
-  },
-  render: (args) => ({
-    props: args,
-    template: `
-      <kirby-x-combobox
-        [items]="items"
-        [placeholder]="placeholder"
-      >
-      </kirby-x-combobox>
-    `,
-  }),
-};
-
 /**
- * By setting the 'itemTextProperty' to 'code', the component will display the currency codes in the dropdown.
- * The filtering will be based on the itemTextProperty, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
- * Note: itemIdProperty is also set, for scrolling to work properly on complex objects.
+ * When the items array consists of objects rather than simple strings, the `itemTextProperty` can be used to identify what property the dropdown should use for displaying values and filtering matches.
  */
 export const WithTextProperty: Story = {
   args: {
     items: currencyItems,
-    itemTextProperty: 'code',
+    itemTextProperty: 'name',
     itemIdProperty: 'code',
     placeholder: 'Select currency',
   },
@@ -215,9 +195,9 @@ export const WithTextProperty: Story = {
 };
 
 /**
- * The items are objects with 'code' and 'name' properties.
- * Because the item rendered by the DOM has changed, it is up to the developer to set 'itemHeight' to ensure that the component can calculate the height of the dropdown and scroll to the selected item when the dropdown is opened.
- * When using a custom template, it's important to ensure that the 'itemIdProperty' is set correctly and is equal to '[attr.id]' selecting and scrolling to work properly, as the component relies on the item IDs to manage selection and focus within the dropdown.
+ * This example demonstrates how to use a custom template for items shown in the dropdown.
+ * Since the combobox no longer controls the visual appearance of the items, `itemHeight` should be supplied to ensure correct dropdown height and scroll-into-view functionality.
+ * Additionally, `itemIdProperty` should be set to match `[attr.id]` of the item template, as the id is used to manage selection and focus.
  */
 export const WithTemplate: Story = {
   args: {
@@ -261,8 +241,8 @@ export const WithTemplate: Story = {
 };
 
 /**
- * The 'searchFunction' property allows you to provide a custom function that takes the search term as input and returns an array of matching items.
- * In this example, the custom search function filters the currency items based on their 'name' property.
+ * The `searchFunction` property allows you to provide a custom function that takes the search term as input and returns an array of matching items.
+ * In this example, the custom search function filters the currency items based on their `name` property.
  */
 export const CustomSearchFunction: Story = {
   args: {
@@ -310,7 +290,7 @@ export const CustomSearchFunction: Story = {
 };
 
 /**
- * The 'items' property is set to an array of 5000 currency items, which simulates a scenario where there are many options to choose from.
+ * The `items` property is set to an array of 5000 currency items, which simulates a scenario where there are many options to choose from.
  */
 export const LargeList: Story = {
   args: {
@@ -352,6 +332,10 @@ export const LargeList: Story = {
   }),
 };
 
+/**
+ * This example demonstrates the disabled state of the component.
+ * When the `disabled` property is set to true, the input field will be non-interactive, and the user will not be able to open the dropdown or select any options.
+ */
 export const Disabled: Story = {
   args: {
     placeholder: 'Select currency',
@@ -371,6 +355,10 @@ export const Disabled: Story = {
   }),
 };
 
+/**
+ * This example demonstrates the error state of the component.
+ * When the `hasError` property is set to true, the input field will be styled to indicate that there is an error.
+ */
 export const HasError: Story = {
   args: {
     items: simpleCurrencyItems,
@@ -390,7 +378,9 @@ export const HasError: Story = {
     `,
   }),
 };
-
+/**
+ * The `size` property can be set to `md`, or `lg` to adjust the size of the input field.
+ */
 export const Sizes: Story = {
   args: {
     items: simpleCurrencyItems,
