@@ -27,7 +27,11 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { AffixDirective, InputSize } from '@kirbydesign/designsystem/form-field';
-import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
+import {
+  EventListenerDisposeFn,
+  FORM_FIELD_CONTROL,
+  FormFieldControl,
+} from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -49,6 +53,10 @@ import { OpenState } from './combobox.types';
       useExisting: forwardRef(() => ComboboxComponent),
       multi: true,
     },
+    {
+      provide: FORM_FIELD_CONTROL,
+      useExisting: forwardRef(() => ComboboxComponent),
+    },
   ],
   imports: [
     InputComponent,
@@ -64,7 +72,9 @@ import { OpenState } from './combobox.types';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class ComboboxComponent
+  implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
+{
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
@@ -420,8 +430,12 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   @ViewChild('rootElement', { static: true, read: ElementRef })
   public rootElement!: ElementRef<HTMLElement>;
 
-  @ViewChild(InputComponent, { read: ElementRef })
-  private textInput?: ElementRef<HTMLInputElement>;
+  @ViewChild(InputComponent, { static: true, read: ElementRef })
+  private textInput!: ElementRef<HTMLInputElement>;
+
+  get interactiveElement(): HTMLElement {
+    return this.textInput.nativeElement;
+  }
 
   @ViewChild(CdkVirtualScrollViewport)
   private virtualScrollViewport?: CdkVirtualScrollViewport;

@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
-import { FormFieldControl } from '@kirbydesign/designsystem/types';
+import { FORM_FIELD_CONTROL, FormFieldControl } from '@kirbydesign/designsystem/types';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +23,7 @@ import { FormFieldControl } from '@kirbydesign/designsystem/types';
   selector: 'textarea[kirby-textarea]',
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',
+  providers: [{ provide: FORM_FIELD_CONTROL, useExisting: TextareaComponent }],
 })
 export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
   kirbyChange = new EventEmitter<string>();
@@ -67,6 +68,10 @@ export class TextareaComponent implements OnChanges, FormFieldControl, OnInit {
 
   get nativeValue(): string {
     return this.elementRef?.nativeElement?.value;
+  }
+
+  get interactiveElement(): HTMLElement {
+    return this.elementRef?.nativeElement;
   }
 
   @Output() hasErrorChange = new EventEmitter<boolean>();
