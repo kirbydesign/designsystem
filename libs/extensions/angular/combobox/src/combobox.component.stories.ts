@@ -69,7 +69,8 @@ const currencyItems: CurrencyItem[] = [
 
 /**
  * The Combobox is a form control that allows the user to filter and select from a list of options. It combines the functionality of a dropdown and an input field, providing an efficient way to handle large datasets while maintaining a clean and user-friendly interface.
- * The user can type in the input field to filter the options, and the dropdown will display only the matching items. This component is ideal for scenarios where there are many options to choose from, such as selecting a country, city, or in this case, a currency.
+* The Combobox is a form control that allows the user to filter and select from a list of options. 
+* A Combobox is useful when there are many options to filter through and choose from, such as selecting a country, city or currency.
  */
 const meta: Meta<ComboboxComponent> = {
   component: ComboboxComponent,
