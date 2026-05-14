@@ -134,11 +134,7 @@ export default meta;
 type Story = StoryObj<ComboboxComponent>;
 
 /**
- * This is a default combobox with a simple list of string items. The user can type in the input field to filter the options, and the dropdown will display only the matching items.
- * The placeholder text is intentionally long to demonstrate how the component handles long text and to ensure that it does not break the layout or cause any visual issues.
- * The component should gracefully handle the long placeholder text without affecting the overall user experience.
- * All the currencies are simple strings, and the component will use the default behavior to display them in the dropdown.
- * The filtering is based on the string values of the items, so when the user types in the input field, it will filter the options based on the currency codes, and the dropdown will display only the matching items.
+* When a user starts typing in the input field, options are filtered so the dropdown will display only matching items. When given a simple list of string, the default filtering matches directly against  the value of each string.
  */
 export const Playground: Story = {
   args: {
