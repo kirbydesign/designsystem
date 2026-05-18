@@ -344,7 +344,6 @@ export const LargeList: Story = {
 };
 
 /**
- * This example demonstrates the disabled state of the component.
  * When the `disabled` property is set to true, the input field will be non-interactive, and the user will not be able to open the dropdown or select any options.
  */
 export const Disabled: Story = {
@@ -367,7 +366,6 @@ export const Disabled: Story = {
 };
 
 /**
- * This example demonstrates the error state of the component.
  * When the `hasError` property is set to true, the input field will be styled to indicate that there is an error.
  */
 export const HasError: Story = {
@@ -390,7 +388,8 @@ export const HasError: Story = {
   }),
 };
 /**
- * The `size` property can be set to `md`, or `lg` to adjust the size of the input field.
+ * The `size` property defaults to `md`, and can be set to `lg` to display a larger input field.
+ * While the sizes are generally interchangeable, it is important to use them consistently for elements in the same form.
  */
 export const Sizes: Story = {
   args: {
@@ -421,6 +420,9 @@ export const Sizes: Story = {
   }),
 };
 
+/*
+ * To display the combobox in full width of its container, apply the expand styling to the combobox.
+ */
 export const ExpandBlock: Story = {
   args: {
     items: simpleCurrencyItems,
