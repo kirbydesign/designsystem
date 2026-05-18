@@ -22,11 +22,10 @@ import {
 } from '@kirbydesign/designsystem/helpers';
 import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { WindowRef } from '@kirbydesign/designsystem/types';
+import { FORM_FIELD_CONTROL, FormFieldControl, WindowRef } from '@kirbydesign/designsystem/types';
 import { Subscription } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { AffixDirective } from './directives/affix/affix.directive';
 import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -48,14 +47,11 @@ export class FormFieldComponent
   private isRegistered = false;
   private element: HTMLElement;
   private isTouch: boolean;
-  private nestedInteractiveElement:
-    | HTMLButtonElement
-    | HTMLInputElement
-    | HTMLTextAreaElement
-    | HTMLIonRadioGroupElement;
+  private nestedInteractiveElement: HTMLElement;
   private nestedInteractiveErrorSubscription: Subscription;
   private _message: string | null | undefined;
   private _label: string | undefined;
+  private hasWarnedMissingControl = false;
 
   showDefaultCalendarIcon = false;
 
@@ -84,16 +80,8 @@ export class FormFieldComponent
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
-  @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
-  @ContentChild(InputComponent) inputComponent: InputComponent;
-  @ContentChild(DropdownComponent) dropdownComponent: DropdownComponent;
-  @ContentChild(TextareaComponent) textareaComponent: TextareaComponent;
-  @ContentChild(RadioGroupComponent, { read: ElementRef })
-  private radioGroupElement: ElementRef<HTMLElement>;
-  @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
-  @ContentChild(DropdownComponent, { read: ElementRef }) dropdown: ElementRef<HTMLElement>;
-  @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
+  @ContentChild(FORM_FIELD_CONTROL) private formFieldControl: FormFieldControl;
   @ContentChild(DateInputDirective) dateInput: DateInputDirective;
 
   constructor(
@@ -107,9 +95,16 @@ export class FormFieldComponent
     this.element = elementRef.nativeElement;
   }
 
+  private isInputOrTextarea(): boolean {
+    return (
+      this.formFieldControl instanceof InputComponent ||
+      this.formFieldControl instanceof TextareaComponent
+    );
+  }
+
   @HostBinding('class.wrap-content-in-label')
   get _wrapContentInLabel(): boolean {
-    return !!this.label && (!!this.input || !!this.textarea);
+    return !!this.label && this.isInputOrTextarea();
   }
 
   private dispatchLoadEvent() {
@@ -130,31 +125,34 @@ export class FormFieldComponent
 
   onLabelClick() {
     // If its a radio group its focus method that contains advanced logic
-    this.radioGroupComponent
-      ? this.radioGroupComponent?.focus()
-      : this.nestedInteractiveElement?.focus();
+    if (this.formFieldControl instanceof RadioGroupComponent) {
+      this.formFieldControl.focus();
+    } else {
+      this.nestedInteractiveElement?.focus();
+    }
   }
 
   public focus() {
     if (!this.nestedInteractiveElement) return;
-    if (!(this.input || this.textarea)) return;
 
-    /*
-     * This timeout ensures that any previous manipulation of inputElement
-     * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
-     */
-    setTimeout(() => {
-      if (this.isTouch) {
-        // Trigger Ionic's input shims to ensure input is scrolled into view.
-        // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
-        const touchStart = new TouchEvent('touchstart');
-        const touchEnd = new TouchEvent('touchend');
-        this.nestedInteractiveElement.dispatchEvent(touchStart);
-        this.nestedInteractiveElement.dispatchEvent(touchEnd);
-      } else {
-        this.nestedInteractiveElement.focus();
-      }
-    });
+    if (this.isInputOrTextarea()) {
+      /*
+       * This timeout ensures that any previous manipulation of inputElement or textareaElement
+       * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
+       */
+      setTimeout(() => {
+        if (this.isTouch) {
+          // Trigger Ionic's input shims to ensure input is scrolled into view.
+          // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
+          const touchStart = new TouchEvent('touchstart');
+          const touchEnd = new TouchEvent('touchend');
+          this.nestedInteractiveElement.dispatchEvent(touchStart);
+          this.nestedInteractiveElement.dispatchEvent(touchEnd);
+        } else {
+          this.nestedInteractiveElement.focus();
+        }
+      });
+    }
   }
 
   ngOnInit() {
@@ -166,11 +164,16 @@ export class FormFieldComponent
   }
 
   ngAfterContentChecked(): void {
+    if (!this.formFieldControl) {
+      this.warnMissingControl();
+      return;
+    }
+
     if (!this.nestedInteractiveElement) {
       this.registerNestedInteractive();
     }
 
-    if (!this.isRegistered && this.element.isConnected && (this.input || this.textarea)) {
+    if (!this.isRegistered && this.element.isConnected && this.isInputOrTextarea()) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
@@ -178,6 +181,15 @@ export class FormFieldComponent
 
     // Decide if default calendar icon for date input should be shown
     this.showDefaultCalendarIcon = this.shouldShowDefaultCalendarIcon();
+  }
+
+  private warnMissingControl() {
+    if (!this.hasWarnedMissingControl) {
+      this.hasWarnedMissingControl = true;
+      console.warn(
+        'kirby-form-field: No form field control found. Ensure a component providing FORM_FIELD_CONTROL is projected.'
+      );
+    }
   }
 
   ngOnDestroy(): void {
@@ -205,11 +217,7 @@ export class FormFieldComponent
   }
 
   private getNestedInteractiveElement() {
-    this.nestedInteractiveElement =
-      this.input?.nativeElement ||
-      this.textarea?.nativeElement ||
-      this.radioGroupElement?.nativeElement.querySelector('ion-radio-group') ||
-      this.dropdown?.nativeElement.querySelector('button[kirby-button]');
+    this.nestedInteractiveElement = this.formFieldControl.interactiveElement;
   }
 
   private setNestedInteractiveMessageAttributes() {
@@ -245,15 +253,9 @@ export class FormFieldComponent
   }
 
   private subscribeToNestedInteractiveError() {
-    const nestedInteractiveComponent =
-      this.inputComponent ||
-      this.textareaComponent ||
-      this.radioGroupComponent ||
-      this.dropdownComponent;
-
     // set current value, then listen for changes
-    this._nestedInteractiveHasError = !!nestedInteractiveComponent?.hasError;
-    this.nestedInteractiveErrorSubscription = nestedInteractiveComponent?.hasErrorChange.subscribe(
+    this._nestedInteractiveHasError = !!this.formFieldControl?.hasError;
+    this.nestedInteractiveErrorSubscription = this.formFieldControl?.hasErrorChange.subscribe(
       (hasError) => {
         this._nestedInteractiveHasError = hasError;
         this.cdr.markForCheck();
@@ -272,18 +274,15 @@ export class FormFieldComponent
     // Measure the width of all slotted affix elements,
     // and apply their width + standard padding to the input elements
     // padding, so the start/end of the input is correctly indented.
-    if (this.input) {
+    if (this.formFieldControl instanceof InputComponent) {
+      const inputElement = this.formFieldControl.interactiveElement as HTMLInputElement;
       this.affixElements.forEach((affix) => {
         this.resizeObserverService.observe(affix.el, (entry) => {
           const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
-          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
+          const affixWidth = inputElement.type === 'date' ? 0 : entry.contentRect.width;
           const existingPadding = parseInt(DesignTokenHelper.size('s'));
 
-          this.renderer.setStyle(
-            this.input.nativeElement,
-            `${padding}`,
-            `${affixWidth + existingPadding}px`
-          );
+          this.renderer.setStyle(inputElement, `${padding}`, `${affixWidth + existingPadding}px`);
 
           const dateMask = this.element.querySelector('.date-mask');
           if (dateMask) {
