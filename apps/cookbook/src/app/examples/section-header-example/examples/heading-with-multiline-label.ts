@@ -7,8 +7,8 @@ const config = {
   selector: 'cookbook-section-header-heading-with-multiline-label',
   template: `<kirby-section-header>
   <kirby-label>
-    <h3 heading> Section Header with multiline label</h3>
-    <p label wrap>This label is quite lengthy, typically prone to truncation within a section header. However, with the <code>'wrap'</code> attribute applied, behold the magic of multiline functionality! Don't take my word for it; witness it yourself. It truly works. Can you believe that?</p>
+    <h4 heading> Section Header with multiline label</h4>
+    <p label wrap>Label that will not be truncated because it wraps to multiple lines when text cannot fit within the container. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   </kirby-label>
 </kirby-section-header>
 <kirby-card>

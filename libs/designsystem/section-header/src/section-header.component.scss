@@ -4,6 +4,8 @@
 :host {
   --kirby-section-header-color: #{utils.get-text-color('black')};
 
+  display: block;
+
   ion-item-divider {
     --inner-padding-end: 0;
     --background: transparent;
