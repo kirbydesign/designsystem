@@ -12,7 +12,7 @@
     [attr.aria-controls]="_listboxId"
     [attr.aria-expanded]="isOpen"
     [attr.aria-activedescendant]="isOpen && focusedItem ? getItemId(focusedItem) : null"
-    (input)="updateSearchResults($event)"
+    (input)="onInput($event)"
   />
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'" kirby-affix="suffix"></kirby-icon>
 </div>
