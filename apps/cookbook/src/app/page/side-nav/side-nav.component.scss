@@ -11,7 +11,7 @@ $logo-size-mobile: var(--kirby-spacing-xl);
 
 :host {
   display: none;
-  z-index: utils.z('sticky-content');
+  z-index: var(--kirby-z-index-sticky-content);
   padding: $menu-padding-mobile;
   position: absolute;
   top: var(--kirby-spacing-xxxxl);
@@ -20,8 +20,8 @@ $logo-size-mobile: var(--kirby-spacing-xl);
 
   &.is-open {
     display: block;
-    background-color: utils.get-color('light');
-    box-shadow: utils.get-elevation(8);
+    background-color: var(--kirby-light);
+    box-shadow: var(--kirby-elevation-8);
   }
 
   @include utils.media('>=large') {
@@ -67,14 +67,14 @@ a {
 
   &:hover,
   &:focus {
-    color: utils.get-text-color('semi-dark');
-    z-index: utils.z('default');
+    color: var(--kirby-text-color-semi-dark);
+    z-index: var(--kirby-z-index-default);
   }
 
   &.is-selected {
-    color: utils.get-text-color('black');
+    color: var(--kirby-text-color-black);
     font-weight: bold;
-    background-color: utils.get-color('semi-light');
+    background-color: var(--kirby-semi-light);
   }
 
   &.is-hidden {
@@ -118,7 +118,7 @@ h2 {
 }
 
 hr {
-  border: solid 1px utils.get-color('light');
+  border: solid 1px var(--kirby-light);
   border-bottom: none;
   margin-block: $divider-spacing;
   margin-inline: $divider-inset;

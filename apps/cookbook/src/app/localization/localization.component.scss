@@ -1,8 +1,7 @@
 @use 'sass:map';
 @use '../showcase/showcase.shared';
-@use '@kirbydesign/core/src/scss/utils';
 
-$avatar-offset: -1 * utils.size('s');
+$avatar-offset: calc(-1 * var(--kirby-spacing-s));
 
 :host {
   display: block;
@@ -26,5 +25,5 @@ $avatar-offset: -1 * utils.size('s');
 }
 
 .code-only-example {
-  margin-block-end: utils.size('s');
+  margin-block-end: var(--kirby-spacing-s);
 }

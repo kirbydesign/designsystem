@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SegmentItem } from '@kirbydesign/designsystem';
+import { SegmentItem } from '@kirbydesign/designsystem/segmented-control';
 
 @Component({
   template: '',

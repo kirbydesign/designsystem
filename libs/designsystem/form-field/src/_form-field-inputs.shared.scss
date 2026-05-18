@@ -63,7 +63,6 @@ $form-field-label-height: 24px;
   }
   /* stylelint-enable no-duplicate-selectors */
 
-  &:host-context(kirby-item),
   &.borderless {
     border-radius: 0;
     box-shadow: none;

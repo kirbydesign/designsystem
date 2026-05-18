@@ -1,6 +1,5 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../showcase.shared';
 
 .header-example-container {
-  margin-bottom: utils.size('l');
+  margin-bottom: var(--kirby-spacing-l);
 }

@@ -4,7 +4,7 @@
 
 /* Configure grid properties */
 $columns: 12;
-$gap: utils.size('m');
+$gap: var(--kirby-spacing-m);
 
 /* Declare the grid container */
 .grid-container {

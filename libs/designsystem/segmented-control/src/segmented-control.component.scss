@@ -43,7 +43,7 @@ $badge-offset: 0.8em;
     }
 
     ion-segment-button {
-      --color-hover: rgba(#{utils.get-color('black-rgb')}, 0.4);
+      --color-hover: var(--kirby-inputs-color-hover);
     }
   }
 

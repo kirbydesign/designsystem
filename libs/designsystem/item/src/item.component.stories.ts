@@ -5,6 +5,7 @@ import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/r
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { CardComponent } from '@kirbydesign/designsystem/card';
+import { InputComponent } from '@kirbydesign/designsystem/form-field';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -22,6 +23,7 @@ const meta: Meta<ItemComponent> = {
         FlagComponent,
         CardComponent,
         CheckboxComponent,
+        InputComponent,
         ItemComponent,
         LabelComponent,
         RadioComponent,
@@ -63,7 +65,7 @@ export const Default: Story = {
 export const ItemWithRadioLegacySyntax: Story = {
   name: 'Item With Radio - Legacy Syntax',
   render: () => ({
-    styles: [`h2 { margin-top: 32px; }`],
+    styles: [`h2 { margin-top: var(--kirby-spacing-l); }`],
     template: `<h2>Extra small</h2>
 <kirby-radio-group value="1">
   <kirby-item size="xs">
@@ -186,7 +188,7 @@ export const ItemWithRadioLegacySyntax: Story = {
 export const ItemWithRadioModernSyntax: Story = {
   name: 'Item With Radio - Modern Syntax',
   render: () => ({
-    styles: [`h2 { margin-top: 32px; }`],
+    styles: [`h2 { margin-top: var(--kirby-spacing-l); }`],
     template: `<h2>Extra small</h2>
 <kirby-radio-group value="1">
   <kirby-item size="xs">
@@ -288,7 +290,7 @@ export const ItemWithRadioModernSyntax: Story = {
 export const ItemWithCheckboxLegacySyntax: Story = {
   name: 'Item With Checkbox - Legacy Syntax',
   render: () => ({
-    styles: [`h2 { margin-top: 32px; }`],
+    styles: [`h2 { margin-top: var(--kirby-spacing-l); }`],
     template: `<h2>Extra small</h2>
 <kirby-item size="xs">
   <kirby-checkbox [checked]="true" slot="start"></kirby-checkbox>
@@ -407,7 +409,7 @@ export const ItemWithCheckboxLegacySyntax: Story = {
 export const ItemWithCheckboxModernSyntax: Story = {
   name: 'Item With Checkbox - Modern Syntax',
   render: () => ({
-    styles: [`h2 { margin-top: 32px; }`],
+    styles: [`h2 { margin-top: var(--kirby-spacing-l); }`],
     template: `<h2>Extra small</h2>
 <kirby-item size="xs">
   <kirby-checkbox [checked]="true" slot="start">Slot start, selected</kirby-checkbox>
@@ -503,7 +505,7 @@ export const ItemWithCheckboxModernSyntax: Story = {
 export const ItemWithToggleLegacySyntax: Story = {
   name: 'Item With Toggle - Legacy Syntax',
   render: () => ({
-    styles: [`h2 { margin-top: 32px; }`],
+    styles: [`h2 { margin-top: var(--kirby-spacing-l); }`],
     template: `<h2>Extra small</h2>
     <kirby-item size="xs">
       <kirby-toggle [checked]="true" slot="start"></kirby-toggle>
@@ -622,7 +624,7 @@ export const ItemWithToggleLegacySyntax: Story = {
 export const ItemWithToggleModernSyntax: Story = {
   name: 'Item With Toggle - Modern Syntax',
   render: () => ({
-    styles: [`h2 { margin-top: 32px; }`],
+    styles: [`h2 { margin-top: var(--kirby-spacing-l); }`],
     template: `<h2>Extra small</h2>
     <kirby-item size="xs">
       <kirby-toggle [checked]="true" slot="start">Slot start, selected</kirby-toggle>
@@ -712,6 +714,43 @@ export const ItemWithToggleModernSyntax: Story = {
         </kirby-label>
       </kirby-toggle>
     </kirby-item>`,
+  }),
+};
+
+export const ItemWithInput: Story = {
+  name: 'Item With Input',
+  render: () => ({
+    styles: [
+      `kirby-card + kirby-card { margin-top: var(--kirby-spacing-xxs); }`,
+      `h2 { margin-top: var(--kirby-spacing-l); }`,
+    ],
+    template: `<h2>Medium size input</h2>
+<kirby-card>
+  <kirby-item>
+    Item with medium size input
+    <input kirby-input slot="end" size="md">
+  </kirby-item>
+</kirby-card>
+
+<h2>Large (default) size input</h2>
+<kirby-card>
+  <kirby-item>
+    Item with large (default) size input
+    <input kirby-input slot="end">
+  </kirby-item>
+</kirby-card>
+
+<h2>Multiple items with inputs in a card</h2>
+<kirby-card>
+  <kirby-item>
+    First item
+    <input kirby-input slot="end" size="md">
+  </kirby-item>
+  <kirby-item>
+    Second item
+    <input kirby-input slot="end" size="md">
+  </kirby-item>
+</kirby-card>`,
   }),
 };
 

@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 .example-container {
-  margin: utils.size('l') auto;
+  margin: var(--kirby-spacing-l) auto;
   max-width: 768px;
 }
 
@@ -9,14 +9,14 @@
   position: relative;
   border: 1px solid var(--kirby-medium);
   border-radius: 12px;
-  padding: utils.size('l');
+  padding: var(--kirby-spacing-l);
 
   &.no-padding {
     padding: 0;
   }
 
   @include utils.media('<medium') {
-    margin-inline: -1 * utils.size('s');
-    padding-inline: utils.size('s');
+    margin-inline: calc(-1 * var(--kirby-spacing-s));
+    padding-inline: var(--kirby-spacing-s);
   }
 }
