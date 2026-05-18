@@ -74,7 +74,7 @@ const currencyItems: CurrencyItem[] = [
 /**
  * The Combobox is a form control that allows the user to filter and select from a list of options.
  * A Combobox is useful when there are many options to filter through and choose from, such as selecting a country, city or currency.
- * Clearing the selected value, can be achieved by deleting
+ * Clearing the selected value, can be achieved by deleting the text and pressing `Enter`, `Tab`, or `Esc`
  */
 const meta: Meta<ComboboxComponent> = {
   component: ComboboxComponent,
