@@ -3,6 +3,7 @@ import { SectionHeaderHeadingWithLabelExampleComponent } from './examples/headin
 import { SectionHeaderLabelAndDetailExampleComponent } from './examples/label-and-detail';
 import { SectionHeaderHeadingWithMultilineLabelExampleComponent } from './examples/heading-with-multiline-label';
 import { SectionHeaderWithCardComponent } from './examples/header-with-card';
+import { SectionHeaderHeadingLevelsExampleComponent } from './examples/heading-levels';
 
 @Component({
   selector: 'cookbook-section-header-example',
@@ -13,6 +14,7 @@ import { SectionHeaderWithCardComponent } from './examples/header-with-card';
     SectionHeaderLabelAndDetailExampleComponent,
     SectionHeaderHeadingWithMultilineLabelExampleComponent,
     SectionHeaderWithCardComponent,
+    SectionHeaderHeadingLevelsExampleComponent,
   ],
 })
 export class SectionHeaderExampleComponent {}

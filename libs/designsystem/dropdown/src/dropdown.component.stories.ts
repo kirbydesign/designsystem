@@ -1,13 +1,67 @@
-import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { Component, OnInit, signal } from '@angular/core';
+import {
+  argsToTemplate,
+  componentWrapperDecorator,
+  type Meta,
+  moduleMetadata,
+  type StoryObj,
+} from '@storybook/angular';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
-import { DesignTokenHelper } from '@kirbydesign/core/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+
+@Component({
+  selector: 'kirby-dropdown-async-items-wrapper',
+  standalone: true,
+  imports: [DropdownComponent],
+  template: `
+    <kirby-dropdown
+      aria-label="Choose your favorite item"
+      [items]="items()"
+      [placeholder]="items().length ? 'Please select:' : 'Loading...'"
+    ></kirby-dropdown>
+  `,
+})
+class AsyncItemsWrapperComponent implements OnInit {
+  items = signal<string[]>([]);
+  ngOnInit() {
+    setTimeout(() => {
+      this.items.set(['Async Item 1', 'Async Item 2', 'Async Item 3']);
+    });
+  }
+}
+
+const withPosition = (position: 'top-start' | 'top-end' | 'bottom-end') =>
+  componentWrapperDecorator((story) => {
+    switch (position) {
+      case 'top-start':
+        return `
+          <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);">
+            <div style="position: absolute; bottom: var(--kirby-spacing-s);">
+              ${story}
+            </div>
+          </div>`;
+      case 'top-end':
+        return `
+          <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);">
+            <div style="position: absolute; bottom: var(--kirby-spacing-s); right: var(--kirby-spacing-s);">
+              ${story}
+            </div>
+          </div>`;
+      case 'bottom-end':
+        return `
+          <div style="display: flex; justify-content: flex-end; width: 100%;">
+            ${story}
+          </div>`;
+      default:
+        return story;
+    }
+  });
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
@@ -17,7 +71,12 @@ const meta: Meta<DropdownComponent> = {
   },
   decorators: [
     moduleMetadata({
-      imports: [DropdownComponent, ButtonComponent, DropdownExampleComponent],
+      imports: [
+        DropdownComponent,
+        ButtonComponent,
+        DropdownExampleComponent,
+        AsyncItemsWrapperComponent,
+      ],
     }),
   ],
   argTypes: {
@@ -35,6 +94,12 @@ const meta: Meta<DropdownComponent> = {
 };
 export default meta;
 type Story = StoryObj<DropdownComponent>;
+
+const openDropdown: Story['play'] = async ({ canvasElement }) => {
+  const dropdown = within(canvasElement).getByRole('combobox');
+  await userEvent.click(dropdown);
+  await waitFor(() => expect(dropdown).toHaveAttribute('aria-expanded', 'true'));
+};
 
 export const Dropdown: Story = {
   args: {
@@ -136,23 +201,12 @@ export const DropdownOpenedPopoutBottomEnd: Story = {
     items: items,
     selectedIndex: 0,
   },
+  decorators: [withPosition('bottom-end')],
   render: (args) => ({
     props: args,
-    template: `
-      <div style="display: flex; justify-content: flex-end; width: 100%;">
-        <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
-      </div>
-    `,
+    template: `<kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>`,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const dropdown = canvas.getByRole('combobox');
-    await userEvent.click(dropdown);
-
-    await waitFor(() => {
-      expect(dropdown).toHaveAttribute('aria-expanded', 'true');
-    });
-  },
+  play: openDropdown,
 };
 
 export const DropdownOpenedPopoutTopStart: Story = {
@@ -160,23 +214,12 @@ export const DropdownOpenedPopoutTopStart: Story = {
     items: items,
     selectedIndex: 0,
   },
+  decorators: [withPosition('top-start')],
   render: (args) => ({
     props: args,
-    template: `
-      <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);"> <!-- Adapt to full height of storybook root accounting for padding -->
-        <kirby-dropdown aria-label="Choose your favorite item" style="position: absolute; bottom: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
-      </div>
-    `,
+    template: `<kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>`,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const dropdown = canvas.getByRole('combobox');
-    await userEvent.click(dropdown);
-
-    await waitFor(() => {
-      expect(dropdown).toHaveAttribute('aria-expanded', 'true');
-    });
-  },
+  play: openDropdown,
 };
 
 export const DropdownOpenedPopoutTopEnd: Story = {
@@ -185,27 +228,31 @@ export const DropdownOpenedPopoutTopEnd: Story = {
     selectedIndex: 0,
     popout: 'left',
   },
+  decorators: [withPosition('top-end')],
   render: (args) => ({
     props: args,
-    template: `
-      <div style="height: calc(100vh - var(--kirby-spacing-s) * 2);"> <!-- Adapt to full height of storybook root accounting for padding -->
-        <kirby-dropdown aria-label="Choose your favorite item" style="position: absolute; bottom: var(--kirby-spacing-s); right: var(--kirby-spacing-s);" ${argsToTemplate(args)}></kirby-dropdown>
-      </div>
-    `,
+    template: `<kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>`,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const dropdown = canvas.getByRole('combobox');
-    await userEvent.click(dropdown);
-
-    await waitFor(() => {
-      expect(dropdown).toHaveAttribute('aria-expanded', 'true');
-    });
-  },
+  play: openDropdown,
 };
 
 export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-dropdown-example></cookbook-dropdown-example>`,
   }),
+};
+
+export const DropdownOpenedPopoutTopStartWithAsyncItems: Story = {
+  decorators: [withPosition('top-start')],
+  render: () => ({
+    template: `<kirby-dropdown-async-items-wrapper></kirby-dropdown-async-items-wrapper>`,
+  }),
+  play: openDropdown,
+};
+
+export const DropdownOpenedPopoutBottomStartWithAsyncItems: Story = {
+  render: () => ({
+    template: `<kirby-dropdown-async-items-wrapper></kirby-dropdown-async-items-wrapper>`,
+  }),
+  play: openDropdown,
 };

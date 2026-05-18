@@ -38,20 +38,21 @@ $min-screen-width: 375px;
   }
 
   div {
-    display: flex;
-
     > input[kirby-input] {
-      padding-right: utils.size('l');
+      padding-right: utils.size('xl');
+    }
+
+    > input[kirby-input]:disabled ~ kirby-icon {
+      color: utils.get-color('semi-dark-shade');
     }
 
     > kirby-icon {
-      margin-left: - utils.size('l');
-    }
-  }
-
-  &.is-open {
-    > div > input[kirby-input] {
-      box-shadow: utils.get-elevation(4);
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: utils.size('xs');
     }
   }
 

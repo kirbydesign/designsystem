@@ -31,7 +31,10 @@ describe('DropdownComponent', () => {
     { text: 'Item 4', value: 4 },
     { text: 'Item 5', value: 5 },
   ];
-  const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
+  const openDropdownDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
+  // Zone.js patches requestAnimationFrame as a macrotask with a fixed 16ms delay in fakeAsync
+  const popoverRafDelayInMs = 16;
+  const totalOpenDelayInMs = openDropdownDelayInMs + popoverRafDelayInMs;
 
   afterEach(() => {
     // Ensure dropdown is closed to trigger popover cleanup
@@ -134,7 +137,7 @@ describe('DropdownComponent', () => {
 
     it('should have correct item size', fakeAsync(() => {
       spectator.component.open();
-      tick(openDelayInMs);
+      tick(totalOpenDelayInMs);
       spectator.detectChanges();
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
       expect(itemElements).toHaveLength(items.length);
@@ -165,7 +168,7 @@ describe('DropdownComponent', () => {
 
       it('should set aria-activedescendant when focusedIndex is set', fakeAsync(() => {
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         spectator.detectChanges();
         spectator.component.focusedIndex = 2;
         spectator.detectChanges();
@@ -185,7 +188,7 @@ describe('DropdownComponent', () => {
 
       it('should update aria-expanded when opened', fakeAsync(() => {
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         spectator.detectChanges();
         const updatedButtonElement = spectator.query('button');
         expect(updatedButtonElement.getAttribute('aria-expanded')).toBe('true');
@@ -346,7 +349,7 @@ describe('DropdownComponent', () => {
       it('open card to the right when popout=right', fakeAsync(() => {
         spectator.component.popout = HorizontalDirection.right;
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         spectator.detectChanges();
 
         const buttonRect = buttonElement.getBoundingClientRect();
@@ -360,7 +363,7 @@ describe('DropdownComponent', () => {
         spectator.component.popout = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         spectator.detectChanges();
 
         const card = spectator.query('kirby-card');
@@ -390,7 +393,7 @@ describe('DropdownComponent', () => {
       it('should render dropdown with full width', fakeAsync(() => {
         spectator.component.ngAfterViewInit();
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         spectator.detectChanges();
         const card = spectator.query('kirby-card');
         const componentWidth = spectator.element.clientWidth;
@@ -425,7 +428,7 @@ describe('DropdownComponent', () => {
       describe('and Space key is pressed', () => {
         beforeEach(fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -438,7 +441,7 @@ describe('DropdownComponent', () => {
       describe('and Enter key is pressed', () => {
         beforeEach(fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -451,7 +454,7 @@ describe('DropdownComponent', () => {
       describe('and Home key is pressed', () => {
         beforeEach(fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Home');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -464,7 +467,7 @@ describe('DropdownComponent', () => {
       describe('and End key is pressed', () => {
         beforeEach(fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'End');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -478,7 +481,7 @@ describe('DropdownComponent', () => {
         beforeEach(fakeAsync(() => {
           buttonElement.focus();
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -495,7 +498,7 @@ describe('DropdownComponent', () => {
         beforeEach(fakeAsync(() => {
           buttonElement.focus();
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -514,7 +517,7 @@ describe('DropdownComponent', () => {
             cancelable: true,
           });
           spectator.element.dispatchEvent(event);
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -591,14 +594,14 @@ describe('DropdownComponent', () => {
 
           it('should open the dropdown when ArrowUp key is pressed', fakeAsync(() => {
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
-            tick(openDelayInMs);
+            tick(totalOpenDelayInMs);
 
             expect(spectator.component.isOpen).toBeTruthy();
           }));
 
           it('should open the dropdown when ArrowDown key is pressed', fakeAsync(() => {
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
-            tick(openDelayInMs);
+            tick(totalOpenDelayInMs);
 
             expect(spectator.component.isOpen).toBeTruthy();
           }));
@@ -723,7 +726,7 @@ describe('DropdownComponent', () => {
             cancelable: true,
           });
           spectator.element.dispatchEvent(event);
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
         }));
         it('should close dropdown', () => {
           expect(spectator.component.isOpen).toBeFalsy();
@@ -1002,7 +1005,7 @@ describe('DropdownComponent', () => {
           const card = spectator.query('kirby-card');
           expect(card).toHaveComputedStyle({ right: '0px' });
           done();
-        }, openDelayInMs);
+        }, openDropdownDelayInMs);
       });
     });
 
@@ -1030,13 +1033,13 @@ describe('DropdownComponent', () => {
 
       it('should not open', fakeAsync(() => {
         spectator.component.open();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));
 
       it('should not toggle', fakeAsync(() => {
         spectator.component.toggle();
-        tick(openDelayInMs);
+        tick(totalOpenDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));
 
@@ -1060,13 +1063,13 @@ describe('DropdownComponent', () => {
 
         it('should not open dropdown when Space key is pressed', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
           expect(spectator.component.isOpen).toBeFalsy();
         }));
 
         it('should not open dropdown when Enter key is pressed', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
-          tick(openDelayInMs);
+          tick(totalOpenDelayInMs);
           expect(spectator.component.isOpen).toBeFalsy();
         }));
 
@@ -1288,7 +1291,7 @@ describe('DropdownComponent', () => {
       cardElement = spectator.query('kirby-card');
       // Act:
       spectator.click('button');
-      tick(openDelayInMs);
+      tick(totalOpenDelayInMs);
       spectator.detectChanges();
     }));
 
@@ -1407,7 +1410,7 @@ describe('DropdownComponent', () => {
 
     it('should have correct item size', fakeAsync(() => {
       spectator.component.open();
-      tick(openDelayInMs);
+      tick(totalOpenDelayInMs);
       spectator.detectChanges();
 
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');

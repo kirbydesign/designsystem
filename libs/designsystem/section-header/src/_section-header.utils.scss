@@ -1,9 +1,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 /*
-* This mixin is applied both in the section-header styles, for using 
-* headings and paragraphs directly, and in kirby-label styles, for 
-* wrapping them in a kirby-label within a section-header. 
+* This mixin is applied both in the section-header styles, for using
+* headings and paragraphs directly, and in kirby-label styles, for
+* wrapping them in a kirby-label within a section-header.
 */
 
 @mixin typography() {
@@ -19,6 +19,26 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  @include utils.slotted('h2[heading]', '.kirby-text-large[heading]') {
+    font-size: utils.font-size('l');
+    line-height: utils.line-height('l');
+  }
+
+  @include utils.slotted('.kirby-text-medium[heading]') {
+    font-size: utils.font-size('m');
+    line-height: utils.line-height('m');
+  }
+
+  @include utils.slotted(
+    'h4[heading]',
+    'h5[heading]',
+    'h6[heading]',
+    '.kirby-text-normal[heading]'
+  ) {
+    font-size: utils.font-size('n');
+    line-height: utils.line-height('n');
   }
 
   @include utils.slotted('[detail]', '[label]') {
