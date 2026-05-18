@@ -75,16 +75,56 @@ import { OpenState } from './combobox.types';
 export class ComboboxComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
 {
-  // ─── Static ────────────────────────────────────────────────────────────────
-
   static readonly OPEN_DELAY_IN_MS = 100;
-
-  // ─── IDs ───────────────────────────────────────────────────────────────────
+  private state = OpenState.closed;
+  private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
+  private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   public _listboxId: string = UniqueIdGenerator.scopedTo('kirby-x-combobox').next();
   public _comboboxId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
-  // ─── @Input() ──────────────────────────────────────────────────────────────
+  private readonly _defaultSearchFunction = (
+    searchTerm: string,
+    itemsToSearch: unknown[]
+  ): unknown[] => {
+    if (!searchTerm) {
+      return itemsToSearch;
+    }
+
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return itemsToSearch
+      .filter((item) => this.getItemText(item).toLowerCase().includes(lowerSearchTerm))
+      .sort((a, b) => {
+        const textA = this.getItemText(a).toLowerCase();
+        const textB = this.getItemText(b).toLowerCase();
+
+        const textAStartsWith = textA.startsWith(searchTerm);
+        const textBStartsWith = textB.startsWith(searchTerm);
+        if (textAStartsWith && textBStartsWith) {
+          return this.compareAlphabetically(textA, textB);
+        }
+
+        if (textAStartsWith) {
+          return -1;
+        }
+
+        if (textBStartsWith) {
+          return 1;
+        }
+
+        return this.compareAlphabetically(textA, textB);
+      });
+  };
+
+  private compareAlphabetically(textA: string, textB: string): number {
+    if (textA < textB) {
+      return -1;
+    }
+    if (textA > textB) {
+      return 1;
+    }
+    return 0;
+  }
 
   /**
    * The text to display when the search returns no results.
@@ -97,6 +137,21 @@ export class ComboboxComponent
    */
   @Input()
   public itemTextProperty: string = 'text';
+  protected getItemText(item: unknown): string {
+    if (this.isTypeString(item)) {
+      return item as string;
+    }
+
+    if (this.objectHasItemTextProperty(item)) {
+      const objectItem = item as Record<string, unknown>;
+      const textValue: unknown = objectItem[this.itemTextProperty];
+
+      if (typeof textValue === 'string') {
+        return textValue;
+      }
+    }
+    return '';
+  }
 
   /**
    * The height of each item in the dropdown, in pixels. This is used to calculate the height of the dropdown based on the number of items.
@@ -125,41 +180,42 @@ export class ComboboxComponent
     );
   }
 
+  private isTypeString(item: unknown): boolean {
+    return typeof item === 'string';
+  }
+
+  private objectHasItemTextProperty(item: unknown): boolean {
+    return item != undefined && typeof item === 'object' && this.itemTextProperty in item;
+  }
+
+  private objectHasItemIdProperty(item: unknown): boolean {
+    return item != undefined && typeof item === 'object' && this.itemIdProperty in item;
+  }
+
   /**
    * The name of the property to use as the unique identifier for each item.
    */
   @Input()
   public itemIdProperty = 'id';
-
-  // _defaultSearchFunction must be declared before searchFunction to avoid an
-  // uninitialized reference in the field initializer of searchFunction.
-  private readonly _defaultSearchFunction = (
-    searchTerm: string,
-    itemsToSearch: unknown[]
-  ): unknown[] => {
-    if (!searchTerm) {
-      return itemsToSearch;
+  protected getItemId(item: unknown): string {
+    if (this.isTypeString(item)) {
+      return item as string;
     }
 
-    const lowerSearchTerm = searchTerm.toLowerCase();
-    return itemsToSearch
-      .filter((item) => this.getItemText(item).toLowerCase().includes(lowerSearchTerm))
-      .sort((a, b) => {
-        const textA = this.getItemText(a).toLowerCase();
-        const textB = this.getItemText(b).toLowerCase();
+    if (this.objectHasItemIdProperty(item)) {
+      const objectItem = item as Record<string, unknown>;
+      const idValue: unknown = objectItem[this.itemIdProperty];
 
-        const textAStartsWith = textA.startsWith(searchTerm);
-        const textBStartsWith = textB.startsWith(searchTerm);
-        if (textAStartsWith && textBStartsWith) {
-          return this.compareAlphabetically(textA, textB);
-        }
+      if (this.isTypeString(idValue)) {
+        return idValue as string;
+      }
+    }
 
-        if (textAStartsWith) return -1;
-        if (textBStartsWith) return 1;
-
-        return this.compareAlphabetically(textA, textB);
-      });
-  };
+    console.error(
+      'Each item must have an id property for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
+    );
+    return '';
+  }
 
   /**
    * A function that takes a search term and the list of items, and returns a filtered list of items to display in the dropdown.
@@ -167,6 +223,22 @@ export class ComboboxComponent
   @Input()
   public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] =
     this._defaultSearchFunction;
+
+  private _searchItems: unknown[] = [];
+  protected get searchItems(): unknown[] {
+    return this._searchItems;
+  }
+  private set searchItems(value: unknown[]) {
+    this._searchItems = value;
+    if (!this._searchItems) {
+      return;
+    }
+
+    // only set the focused item of the search result, if the input has value
+    if (this.textInput?.nativeElement?.value) {
+      this.focusedItem = this._searchItems[0];
+    }
+  }
 
   private _items: unknown[] = [];
 
@@ -176,6 +248,7 @@ export class ComboboxComponent
 
   /**
    * The list of items to display in the dropdown.
+   * @param value
    */
   @Input()
   public set items(value: unknown[]) {
@@ -184,13 +257,13 @@ export class ComboboxComponent
   }
 
   private _selectedItem: unknown = undefined;
-
   get selectedItem(): unknown {
     return this._selectedItem;
   }
 
   /**
    * The currently selected item.
+   * @param value
    */
   @Input()
   public set selectedItem(value: unknown) {
@@ -206,7 +279,6 @@ export class ComboboxComponent
   // _focusedItem keeps track of which element has focus and will be selected
   // if it is activated (by pressing ENTER)
   private _focusedItem: unknown = undefined;
-
   public get focusedItem(): unknown {
     return this._focusedItem;
   }
@@ -221,16 +293,42 @@ export class ComboboxComponent
     this._focusedItem = item;
   }
 
+  private getIndexOfItem(item: unknown): number {
+    return this.searchItems.indexOf(item);
+  }
+
+  private getKirbyElement(item: unknown | undefined): ElementRef<HTMLElement> | undefined {
+    const kirbyItems = this.getKirbyItems();
+    if (!kirbyItems || !item) {
+      return undefined;
+    }
+
+    const itemId = this.getItemId(item);
+    return kirbyItems.find((el) => el.nativeElement.id === itemId);
+  }
+
+  private setAriaPosinsetOnElement(item: unknown) {
+    const element = this.getKirbyElement(item);
+    const index = this.getIndexOfItem(item);
+    const setsize = this.searchItems.length;
+
+    if (!element) {
+      return;
+    }
+
+    this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
+    this.renderer.setAttribute(element.nativeElement, 'aria-posintset', `${index + 1}`);
+  }
+
   /**
    * The placeholder text to display in the input when no item is selected and the input is empty.
    */
   @Input()
   public placeholder = 'Please search...';
 
-  private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
-
   /**
    * The direction in which the dropdown should open relative to the input.
+   * @param direction
    */
   @Input()
   public set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
@@ -253,6 +351,16 @@ export class ComboboxComponent
   @Input()
   public disabled = false;
 
+  @HostBinding('attr.disabled')
+  public get _isDisabled(): 'disabled' | null {
+    return this.disabled ? 'disabled' : null;
+  }
+
+  /**
+   * Will emit the new value when error changes.
+   */
+  @Output()
+  hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   private _hasError: boolean = false;
 
   /**
@@ -276,13 +384,11 @@ export class ComboboxComponent
   @Input()
   public size: InputSize = InputSize.medium;
 
-  // ─── @Output() ─────────────────────────────────────────────────────────────
-
-  /**
-   * Will emit the new value when error changes.
-   */
-  @Output()
-  hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  // Prevent Ionic blur on scroll
+  @HostBinding('attr.no-blur')
+  public get _noBlurOnScroll(): boolean {
+    return true;
+  }
 
   /**
    * Emitted when an item is selected (tap on mobile, click/keypress on web)
@@ -290,18 +396,7 @@ export class ComboboxComponent
   @Output()
   public change: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-  // ─── @HostBinding ──────────────────────────────────────────────────────────
-
-  @HostBinding('attr.disabled')
-  public get _isDisabled(): 'disabled' | null {
-    return this.disabled ? 'disabled' : null;
-  }
-
-  // Prevent Ionic blur on scroll
-  @HostBinding('attr.no-blur')
-  public get _noBlurOnScroll(): boolean {
-    return true;
-  }
+  public value: unknown = undefined;
 
   @HostBinding('class.expand')
   public get _isBlockLevel() {
@@ -323,42 +418,44 @@ export class ComboboxComponent
     return this.selectedItem != null;
   }
 
-  // ─── State ─────────────────────────────────────────────────────────────────
-
-  private state = OpenState.closed;
-  private _attributesToForward = ['aria-label', 'aria-labelledby'];
-  public value: unknown = undefined;
-  private hasInput: boolean = false;
-
-  private _searchItems: unknown[] = [];
-
-  protected get searchItems(): unknown[] {
-    return this._searchItems;
-  }
-
-  private set searchItems(value: unknown[]) {
-    this._searchItems = value;
-    if (!this._searchItems) {
-      return;
-    }
-
-    if (this.hasInput) {
-      this.focusedItem = this._searchItems[0];
-    }
-  }
-
-  private disposeItemClickListeners: EventListenerDisposeFn[] = [];
-
-  // ─── Content Queries ───────────────────────────────────────────────────────
-
   @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
 
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
   public slottedItems?: QueryList<ElementRef<HTMLElement>>;
 
-  _kirbyItemsSlotted?: QueryList<ElementRef<HTMLElement>>;
+  @ViewChild(CardComponent, { read: ElementRef })
+  public cardElement?: ElementRef<HTMLElement>;
 
+  @ViewChild(PopoverComponent)
+  public popover?: PopoverComponent;
+
+  @ViewChild('rootElement', { static: true, read: ElementRef })
+  public rootElement!: ElementRef<HTMLElement>;
+
+  @ViewChild(InputComponent, { static: true, read: ElementRef })
+  private textInput!: ElementRef<HTMLInputElement>;
+
+  get interactiveElement(): HTMLElement {
+    return this.textInput.nativeElement;
+  }
+
+  @ViewChild(CdkVirtualScrollViewport)
+  private virtualScrollViewport?: CdkVirtualScrollViewport;
+
+  private forwardAriaLabelToCombobox() {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.rootElement.nativeElement
+    );
+  }
+
+  @ViewChildren(ItemComponent, { read: ElementRef })
+  public kirbyItemsDefault?: QueryList<ElementRef<HTMLElement>>;
+
+  _kirbyItemsSlotted?: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
   public set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
     const hasSlottedItems = this.disposeItemClickListeners?.length > 0;
@@ -390,31 +487,7 @@ export class ComboboxComponent
     return this._kirbyItemsSlotted;
   }
 
-  // ─── View Queries ──────────────────────────────────────────────────────────
-
-  @ViewChild(CardComponent, { read: ElementRef })
-  public cardElement?: ElementRef<HTMLElement>;
-
-  @ViewChild(PopoverComponent)
-  public popover?: PopoverComponent;
-
-  @ViewChild('rootElement', { static: true, read: ElementRef })
-  public rootElement!: ElementRef<HTMLElement>;
-
-  @ViewChild(InputComponent, { static: true, read: ElementRef })
-  private textInput!: ElementRef<HTMLInputElement>;
-
-  @ViewChild(CdkVirtualScrollViewport)
-  private virtualScrollViewport?: CdkVirtualScrollViewport;
-
-  @ViewChildren(ItemComponent, { read: ElementRef })
-  public kirbyItemsDefault?: QueryList<ElementRef<HTMLElement>>;
-
-  get interactiveElement(): HTMLElement {
-    return this.textInput.nativeElement;
-  }
-
-  // ─── Constructor ───────────────────────────────────────────────────────────
+  private disposeItemClickListeners: EventListenerDisposeFn[] = [];
 
   public constructor(
     private renderer: Renderer2,
@@ -423,7 +496,19 @@ export class ComboboxComponent
     private resizeObserverService: ResizeObserverService
   ) {}
 
-  // ─── Lifecycle Hooks ───────────────────────────────────────────────────────
+  protected onToggle(event: MouseEvent) {
+    event.stopPropagation();
+    this.textInput?.nativeElement.focus();
+
+    this.toggle();
+  }
+
+  private toggle(): void {
+    if (this.disabled) {
+      return;
+    }
+    this.isOpen ? this.close() : this.open();
+  }
 
   public ngAfterViewInit() {
     if (this.expand === 'block') {
@@ -443,17 +528,64 @@ export class ComboboxComponent
     this.forwardAriaLabelToCombobox();
   }
 
+  /* Utility that makes it easier to set styles on card element */
+  private setPopoverCardStyle(style: string, value: string) {
+    this.renderer.setStyle(
+      this.cardElement?.nativeElement,
+      style,
+      value,
+      RendererStyleFlags2.DashCase
+    );
+  }
+
   public ngOnDestroy(): void {
     this.unlistenAllSlottedItems();
     this.unobserveResize();
   }
 
-  // ─── ControlValueAccessor ──────────────────────────────────────────────────
+  public open(): void {
+    if (this.disabled) {
+      return;
+    }
+    if (!this.isOpen) {
+      this.state = OpenState.opening;
+      setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
+
+      this.focusedItem = this.selectedItem;
+    }
+  }
+
+  private showPopOver() {
+    if (this.state === OpenState.opening) {
+      this.state = OpenState.open;
+      this.popover?.show();
+      this.scrollToIndexIntoViewWhenOpeningPopup();
+      this.cdr.markForCheck();
+    }
+  }
+
+  public close() {
+    if (this.disabled) {
+      return;
+    }
+    if (this.isOpen) {
+      this.state = OpenState.closed;
+      this.setInputDisplayValue(this.getItemText(this.selectedItem));
+      this.searchItems = this.items;
+      this.popover?.hide();
+    }
+  }
+
+  protected onItemSelect(item: unknown) {
+    // Guard: slotted click listeners should map back to a data item, but be safe.
+    if (item instanceof HTMLElement) return;
+    this.selectItem(item);
+    this.close();
+  }
 
   private onChange: (value: unknown) => void = () => {
     /* empty */
   };
-
   private onTouched: () => void = (): void => {
     /* empty */
   };
@@ -506,50 +638,22 @@ export class ComboboxComponent
     this.cdr.markForCheck();
   }
 
-  // ─── Public API ────────────────────────────────────────────────────────────
-
-  public open(): void {
-    if (this.disabled) {
-      return;
-    }
-    if (!this.isOpen) {
-      this.state = OpenState.opening;
-      setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
-
-      this.focusedItem = this.selectedItem;
-    }
-  }
-
-  public close() {
-    if (this.disabled) {
-      return;
-    }
-    if (this.isOpen) {
-      this.state = OpenState.closed;
-      this.setInputDisplayValue(this.getItemText(this.selectedItem));
+  private selectItem(item: unknown): void {
+    if (item != this.selectedItem) {
+      this.selectedItem = item;
+      this.focusedItem = item;
+      this.change.emit(this.value);
+      this.onChange(this.value);
+      this.setInputDisplayValue(this.getItemText(item));
       this.searchItems = this.items;
-      this.popover?.hide();
     }
   }
 
-  // ─── Protected Template Handlers ───────────────────────────────────────────
-
-  protected onToggle(event: MouseEvent) {
-    event.stopPropagation();
-    this.textInput?.nativeElement.focus();
-
-    this.toggle();
-  }
-
-  protected onItemSelect(item: unknown) {
-    // Guard: slotted click listeners should map back to a data item, but be safe.
-    if (item instanceof HTMLElement) return;
-    this.selectItem(item);
-    this.close();
+  private selectItemByInput(input: string): void {
+    this.selectedItem = this.findItemByInput(input);
   }
 
   protected onInput(event: Event): void {
-    this.hasInput = true;
     if (!this.isOpen) {
       this.open();
     }
@@ -571,6 +675,14 @@ export class ComboboxComponent
     }
   }
 
+  private clearSelection(): void {
+    this.selectItem(undefined);
+  }
+
+  private updateSearchResults(inputValue: string): void {
+    this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
+  }
+
   protected onPopoverWillHide() {
     this.state = OpenState.closed;
     this.rootElement.nativeElement.focus();
@@ -580,8 +692,6 @@ export class ComboboxComponent
   protected onPopoverClick() {
     this.close();
   }
-
-  // ─── @HostListener ─────────────────────────────────────────────────────────
 
   @HostListener('mousedown', ['$event'])
   public onMouseDown(event: MouseEvent) {
@@ -681,121 +791,6 @@ export class ComboboxComponent
     }
   }
 
-  // ─── Private Helpers ───────────────────────────────────────────────────────
-
-  // --- Item / data helpers ---
-
-  private compareAlphabetically(textA: string, textB: string): number {
-    if (textA < textB) return -1;
-    if (textA > textB) return 1;
-    return 0;
-  }
-
-  private isTypeString(item: unknown): boolean {
-    return typeof item === 'string';
-  }
-
-  private objectHasItemTextProperty(item: unknown): boolean {
-    return item != undefined && typeof item === 'object' && this.itemTextProperty in item;
-  }
-
-  private objectHasItemIdProperty(item: unknown): boolean {
-    return item != undefined && typeof item === 'object' && this.itemIdProperty in item;
-  }
-
-  protected getItemText(item: unknown): string {
-    if (this.isTypeString(item)) {
-      return item as string;
-    }
-
-    if (this.objectHasItemTextProperty(item)) {
-      const objectItem = item as Record<string, unknown>;
-      const textValue: unknown = objectItem[this.itemTextProperty];
-
-      if (typeof textValue === 'string') {
-        return textValue;
-      }
-    }
-    return '';
-  }
-
-  protected getItemId(item: unknown): string {
-    if (this.isTypeString(item)) {
-      return item as string;
-    }
-
-    if (this.objectHasItemIdProperty(item)) {
-      const objectItem = item as Record<string, unknown>;
-      const idValue: unknown = objectItem[this.itemIdProperty];
-
-      if (this.isTypeString(idValue)) {
-        return idValue as string;
-      }
-    }
-
-    console.error(
-      'Each item must have an id property for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
-    );
-    return '';
-  }
-
-  /**
-   * Resolve a model/data item based on current `items` by comparing displayed text.
-   * This is used to map an incoming form value or input `selectedItem` to an item
-   * from the list.
-   */
-  private findItemByInput(input: string): unknown {
-    if (!this.items || this.items.length === 0) {
-      return input;
-    }
-
-    return this.items.find((it) => this.getItemText(it) === input) ?? input;
-  }
-
-  private selectItem(item: unknown): void {
-    if (item != this.selectedItem) {
-      this.selectedItem = item;
-      this.focusedItem = item;
-      this.change.emit(this.value);
-      this.onChange(this.value);
-      this.setInputDisplayValue(this.getItemText(item));
-      this.searchItems = this.items;
-    }
-  }
-
-  private selectItemByInput(input: string): void {
-    this.selectedItem = this.findItemByInput(input);
-  }
-
-  private clearSelection(): void {
-    this.hasInput = false;
-    this.selectItem(undefined);
-  }
-
-  private updateSearchResults(inputValue: string): void {
-    this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
-  }
-
-  // --- Toggle / open-close helpers ---
-
-  private toggle(): void {
-    if (this.disabled) {
-      return;
-    }
-    this.isOpen ? this.close() : this.open();
-  }
-
-  private showPopOver() {
-    if (this.state === OpenState.opening) {
-      this.state = OpenState.open;
-      this.popover?.show();
-      this.scrollToIndexIntoViewWhenOpeningPopup();
-      this.cdr.markForCheck();
-    }
-  }
-
-  // --- Focus navigation ---
-
   private handleFocusNavigation(keyEvent: KeyboardEvent): void {
     switch (keyEvent.key) {
       case 'ArrowDown':
@@ -822,6 +817,7 @@ export class ComboboxComponent
   }
 
   private shiftFocusIndex(numberOfItems: number) {
+    // Handle up/down navigation when open
     const currentIndex = this.searchItems.indexOf(this.focusedItem);
     let newIndex;
 
@@ -860,46 +856,49 @@ export class ComboboxComponent
     }
   }
 
-  private setFocusOnFirstItem(): void {
-    if (this.searchItems.length > 0) {
-      this.focusedItem = this.searchItems[0];
-    }
-  }
-
   private setFocusOnLastItem(): void {
     if (this.searchItems.length > 0) {
       this.focusedItem = this.searchItems[this.searchItems.length - 1];
     }
   }
 
-  private getIndexOfItem(item: unknown): number {
-    return this.searchItems.indexOf(item);
+  private setFocusOnFirstItem(): void {
+    if (this.searchItems.length > 0) {
+      this.focusedItem = this.searchItems[0];
+    }
   }
 
-  private getKirbyElement(item: unknown | undefined): ElementRef<HTMLElement> | undefined {
-    const kirbyItems = this.getKirbyItems();
-    if (!kirbyItems || !item) {
-      return undefined;
+  private unlistenAllSlottedItems(): void {
+    let disposeClickListener: EventListenerDisposeFn | undefined;
+    while ((disposeClickListener = this.disposeItemClickListeners.pop()) !== undefined) {
+      disposeClickListener();
+    }
+  }
+
+  private unobserveResize() {
+    this.resizeObserverService.unobserve(this.elementRef);
+  }
+
+  /**
+   * Resolve a model/data item based on current `items` by comparing displayed text.
+   * This is used to map an incoming form value or input `selectedItem` to an item
+   * from the list.
+   */
+  private findItemByInput(input: string): unknown {
+    if (!this.items || this.items.length === 0) {
+      return input;
     }
 
-    const itemId = this.getItemId(item);
-    return kirbyItems.find((el) => el.nativeElement.id === itemId);
+    return this.items.find((it) => this.getItemText(it) === input) ?? input;
   }
 
-  private setAriaPosinsetOnElement(item: unknown) {
-    const element = this.getKirbyElement(item);
-    const index = this.getIndexOfItem(item);
-    const setsize = this.searchItems.length;
-
-    if (!element) {
-      return;
+  private setInputDisplayValue(value: string): void {
+    // We intentionally update the DOM input imperatively ("hard way")
+    // to ensure the visible value is cleared/updated immediately.
+    if (this.textInput?.nativeElement) {
+      this.renderer.setProperty(this.textInput.nativeElement, 'value', value);
     }
-
-    this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
-    this.renderer.setAttribute(element.nativeElement, 'aria-posintset', `${index + 1}`);
   }
-
-  // --- Scroll helpers ---
 
   private scrollFocusedItemIntoViewWhileNavigating(): void {
     const kirbyItems = this.getKirbyItems();
@@ -932,6 +931,12 @@ export class ComboboxComponent
     }
   }
 
+  private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
+    return this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
+      ? this.kirbyItemsSlotted
+      : this.kirbyItemsDefault;
+  }
+
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
     if (focusedIndex < 0) return;
@@ -943,51 +948,5 @@ export class ComboboxComponent
     }
 
     this.virtualScrollViewport?.scrollToIndex(focusedIndex);
-  }
-
-  private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
-    return this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
-      ? this.kirbyItemsSlotted
-      : this.kirbyItemsDefault;
-  }
-
-  // --- DOM / rendering helpers ---
-
-  private setInputDisplayValue(value: string): void {
-    // We intentionally update the DOM input imperatively ("hard way")
-    // to ensure the visible value is cleared/updated immediately.
-    if (this.textInput?.nativeElement) {
-      this.renderer.setProperty(this.textInput.nativeElement, 'value', value);
-    }
-  }
-
-  /* Utility that makes it easier to set styles on card element */
-  private setPopoverCardStyle(style: string, value: string) {
-    this.renderer.setStyle(
-      this.cardElement?.nativeElement,
-      style,
-      value,
-      RendererStyleFlags2.DashCase
-    );
-  }
-
-  private forwardAriaLabelToCombobox() {
-    forwardAttributes(
-      this.elementRef.nativeElement,
-      this._attributesToForward,
-      this.renderer,
-      this.rootElement.nativeElement
-    );
-  }
-
-  private unlistenAllSlottedItems(): void {
-    let disposeClickListener: EventListenerDisposeFn | undefined;
-    while ((disposeClickListener = this.disposeItemClickListeners.pop()) !== undefined) {
-      disposeClickListener();
-    }
-  }
-
-  private unobserveResize() {
-    this.resizeObserverService.unobserve(this.elementRef);
   }
 }
