@@ -5,6 +5,7 @@ $badge-size-medium: 1.6em;
 $badge-padding-inline: 0.5em;
 $badge-padding-block: 0.3em;
 $badge-icon-size: 1.6em;
+$maximum-font-size: 10px * utils.$text-resize-threshold;
 
 :host {
   position: var(--kirby-badge-position, relative);
@@ -12,7 +13,7 @@ $badge-icon-size: 1.6em;
   right: var(--kirby-badge-right, auto);
   top: var(--kirby-badge-top, auto);
   z-index: var(--kirby-badge-z-index, auto);
-  font-size: var(--kirby-badge-font-size, var(--kirby-font-size-xxs));
+  font-size: var(--kirby-badge-font-size, min($maximum-font-size, var(--kirby-font-size-xxs)));
   display: inline-flex;
 
   ion-badge {
