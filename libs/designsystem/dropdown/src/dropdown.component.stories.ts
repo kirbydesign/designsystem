@@ -16,7 +16,7 @@ import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdo
 const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
 @Component({
-  selector: 'kirby-dropdown-dynamic-wrapper',
+  selector: 'kirby-dropdown-async-items-wrapper',
   standalone: true,
   imports: [DropdownComponent],
   template: `
@@ -27,7 +27,7 @@ const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
     ></kirby-dropdown>
   `,
 })
-class DynamicItemsWrapperComponent implements OnInit {
+class AsyncItemsWrapperComponent implements OnInit {
   items = signal<string[]>([]);
   ngOnInit() {
     setTimeout(() => {
@@ -75,7 +75,7 @@ const meta: Meta<DropdownComponent> = {
         DropdownComponent,
         ButtonComponent,
         DropdownExampleComponent,
-        DynamicItemsWrapperComponent,
+        AsyncItemsWrapperComponent,
       ],
     }),
   ],
@@ -242,17 +242,17 @@ export const CookbookExample: Story = {
   }),
 };
 
-export const DropdownOpenedPopoutTopStartWithDynamicItems: Story = {
+export const DropdownOpenedPopoutTopStartWithAsyncItems: Story = {
   decorators: [withPosition('top-start')],
   render: () => ({
-    template: `<kirby-dropdown-dynamic-wrapper></kirby-dropdown-dynamic-wrapper>`,
+    template: `<kirby-dropdown-async-items-wrapper></kirby-dropdown-async-items-wrapper>`,
   }),
   play: openDropdown,
 };
 
-export const DropdownOpenedPopoutBottomStartWithDynamicItems: Story = {
+export const DropdownOpenedPopoutBottomStartWithAsyncItems: Story = {
   render: () => ({
-    template: `<kirby-dropdown-dynamic-wrapper></kirby-dropdown-dynamic-wrapper>`,
+    template: `<kirby-dropdown-async-items-wrapper></kirby-dropdown-async-items-wrapper>`,
   }),
   play: openDropdown,
 };
