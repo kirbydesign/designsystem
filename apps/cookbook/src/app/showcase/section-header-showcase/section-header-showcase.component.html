@@ -126,34 +126,6 @@
   </div>
 </cookbook-example-viewer>
 
-<h3>Custom section header</h3>
-<p>
-  For use cases where styling via
-  <em>heading</em>
-  ,
-  <em>label</em>
-  and
-  <em>detail</em>
-  attributes are not sufficient, it is possible to simply supply any markup or component within the
-  section header tags, to render it in the default slot.
-</p>
-
-<p>
-  The section header is ideal as a first element within a
-  <code>kirby-item-group</code>
-  , as a header for that specific group of items, but can also be used for other groups of content
-  such as a
-  <code>kirby-card</code>
-  .
-</p>
-
-<h2>Section Header with Card</h2>
-<cookbook-example-viewer [html]="sectionHeaderWithCard.template">
-  <div class="example-frame">
-    <cookbook-section-header-with-card #sectionHeaderWithCard></cookbook-section-header-with-card>
-  </div>
-</cookbook-example-viewer>
-
 <h2>Heading levels</h2>
 <p>The size of the heading is adjusted by using the appropriate heading element or CSS class:</p>
 <ul>
@@ -190,6 +162,34 @@
   <code>h2</code>
   at medium size.
 </p>
+
+<h2>Custom section header</h2>
+<p>
+  For use cases where styling via
+  <em>heading</em>
+  ,
+  <em>label</em>
+  and
+  <em>detail</em>
+  attributes are not sufficient, it is possible to simply supply any markup or component within the
+  section header tags, to render it in the default slot.
+</p>
+
+<p>
+  The section header is ideal as a first element within a
+  <code>kirby-item-group</code>
+  , as a header for that specific group of items, but can also be used for other groups of content
+  such as a
+  <code>kirby-card</code>
+  .
+</p>
+
+<h2>Section Header with Card</h2>
+<cookbook-example-viewer [html]="sectionHeaderWithCard.template">
+  <div class="example-frame">
+    <cookbook-section-header-with-card #sectionHeaderWithCard></cookbook-section-header-with-card>
+  </div>
+</cookbook-example-viewer>
 
 <cookbook-example-viewer [html]="sectionHeaderHeadingLevels.template">
   <div class="example-frame">
