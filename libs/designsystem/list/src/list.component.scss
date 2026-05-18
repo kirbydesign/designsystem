@@ -8,15 +8,11 @@ $item-height: utils.size('xxxl');
 
 :host {
   display: block;
+}
 
-  --kirby-list-border-top-radius: var(
-    --kirby-context-border-top-radius,
-    var(--kirby-border-radius-n)
-  );
-  --kirby-list-border-bottom-radius: var(
-    --kirby-context-border-bottom-radius,
-    var(--kirby-border-radius-n)
-  );
+:host(:not(kirby-list-item)) {
+  --kirby-list-border-top-radius: var(--kirby-border-radius-n);
+  --kirby-list-border-bottom-radius: var(--kirby-border-radius-n);
 }
 
 .list {

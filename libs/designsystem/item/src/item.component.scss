@@ -33,10 +33,15 @@
 }
 
 ion-item {
-  &::part(native):focus-visible {
-    box-shadow:
-      0 0 0 2px utils.$focus-ring-color inset,
-      0 0 0 4px utils.get-color('white') inset;
+  &::part(native) {
+    border-radius: var(--kirby-item-border-top-radius, 0) var(--kirby-item-border-top-radius, 0)
+      var(--kirby-item-border-bottom-radius, 0) var(--kirby-item-border-bottom-radius, 0);
+
+    &:focus-visible {
+      box-shadow:
+        0 0 0 2px utils.$focus-ring-color inset,
+        0 0 0 4px utils.get-color('white') inset;
+    }
   }
 
   @include interaction-state.apply-hover-ionic('xxxs');
@@ -180,34 +185,4 @@ ion-item {
   ion-item {
     --inner-padding-end: #{utils.size('xxs')};
   }
-}
-
-// Border radius via CSS custom properties — set by parent components (card, list, card-header)
-// --kirby-item-border-*-radius (set by list/card-header) takes precedence.
-// --kirby-context-border-*-radius (set by container) is only read on :first-child / :last-child.
-ion-item::part(native) {
-  border-radius: var(--kirby-item-border-top-radius, 0) var(--kirby-item-border-top-radius, 0)
-    var(--kirby-item-border-bottom-radius, 0) var(--kirby-item-border-bottom-radius, 0);
-}
-
-:host(:first-child) ion-item::part(native) {
-  border-top-left-radius: var(
-    --kirby-item-border-top-radius,
-    var(--kirby-context-border-top-radius, 0)
-  );
-  border-top-right-radius: var(
-    --kirby-item-border-top-radius,
-    var(--kirby-context-border-top-radius, 0)
-  );
-}
-
-:host(:last-child) ion-item::part(native) {
-  border-bottom-left-radius: var(
-    --kirby-item-border-bottom-radius,
-    var(--kirby-context-border-bottom-radius, 0)
-  );
-  border-bottom-right-radius: var(
-    --kirby-item-border-bottom-radius,
-    var(--kirby-context-border-bottom-radius, 0)
-  );
 }
