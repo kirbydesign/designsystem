@@ -12,7 +12,7 @@
     grid-template: auto / auto 1fr;
 
     dt {
-      padding-right: utils.size('xxxs');
+      padding-right: var(--kirby-spacing-xxxs);
     }
 
     dd {
@@ -23,36 +23,36 @@
 }
 
 kirby-card.nested-modal-configuration {
-  margin-top: utils.size('l');
-  margin-bottom: utils.size('l');
+  margin-top: var(--kirby-spacing-l);
+  margin-bottom: var(--kirby-spacing-l);
 
   details {
-    margin-top: utils.size('m');
-    border: 1px solid utils.get-color('medium');
-    border-radius: utils.size('xxxs');
-    padding: utils.size('xxs') utils.size('xxs') 0;
+    margin-top: var(--kirby-spacing-m);
+    border: 1px solid var(--kirby-medium);
+    border-radius: var(--kirby-spacing-xxxs);
+    padding: var(--kirby-spacing-xxs) var(--kirby-spacing-xxs) 0;
 
     summary {
       cursor: pointer;
-      margin: -#{utils.size('xxs')} -#{utils.size('xxs')} 0;
-      padding: utils.size('xxs');
+      margin: calc(var(--kirby-spacing-xxs) * -1) calc(var(--kirby-spacing-xxs) * -1) 0;
+      padding: var(--kirby-spacing-xxs);
     }
 
     &[open] {
-      padding: utils.size('xxs');
-      border-bottom-left-radius: utils.size('s');
-      border-bottom-right-radius: utils.size('s');
+      padding: var(--kirby-spacing-xxs);
+      border-bottom-left-radius: var(--kirby-spacing-s);
+      border-bottom-right-radius: var(--kirby-spacing-s);
 
       summary {
-        border-bottom: 1px dashed utils.get-color('medium');
-        margin-bottom: utils.size('xs');
+        border-bottom: 1px dashed var(--kirby-medium);
+        margin-bottom: var(--kirby-spacing-xs);
       }
     }
   }
 }
 
 kirby-form-field {
-  margin-top: utils.size('m');
+  margin-top: var(--kirby-spacing-m);
 }
 
 .size-selector-heading {

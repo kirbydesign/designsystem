@@ -1,4 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../../../shared/mini-toast';
 
 :host {
@@ -6,7 +5,7 @@
 }
 
 p {
-  margin-top: utils.size('s');
+  margin-top: var(--kirby-spacing-s);
 }
 
 .icon-item-container {
@@ -50,17 +49,17 @@ kirby-icon {
 $_icon-color-examples: 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger';
 
 button {
-  height: utils.$fat-finger-size;
-  width: utils.$fat-finger-size;
+  height: var(--kirby-size-fat-finger);
+  width: var(--kirby-size-fat-finger);
   border: none;
-  border-radius: utils.border-radius('circle');
+  border-radius: var(--kirby-border-radius-circle);
   margin: 0;
-  color: utils.get-color('black');
+  color: var(--kirby-black);
   cursor: pointer;
 
   @each $color in $_icon-color-examples {
     &.#{$color} {
-      background-color: utils.get-color($color);
+      background-color: var(--kirby-#{$color});
 
       &:hover {
         background-color: var(--kirby-#{$color}-shade);

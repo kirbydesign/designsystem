@@ -1,7 +1,6 @@
 @use '../showcase.shared';
-@use '@kirbydesign/core/src/scss/utils';
 
 cookbook-toggle-button-example {
   padding: 0;
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 }

@@ -2,13 +2,13 @@
 @use '../showcase.shared';
 
 h4 {
-  padding-top: utils.size('s');
+  padding-top: var(--kirby-spacing-s);
 }
 
 .card-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-gap: utils.size('s');
+  grid-gap: var(--kirby-spacing-s);
 
   @include utils.media('>=medium') {
     grid-template-columns: repeat(2, 1fr);

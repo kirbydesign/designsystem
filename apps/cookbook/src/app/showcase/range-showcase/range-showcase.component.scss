@@ -1,8 +1,7 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../showcase.shared';
 
 cookbook-example-viewer {
-  margin-bottom: utils.size('l');
+  margin-bottom: var(--kirby-spacing-l);
   background: #fff;
-  padding: utils.size('s');
+  padding: var(--kirby-spacing-s);
 }

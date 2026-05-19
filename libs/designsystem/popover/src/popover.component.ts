@@ -37,6 +37,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   private isFirstToLockScroll: boolean;
   private zIndex: number;
   private document: Document;
+  private openingFrameId: ReturnType<typeof requestAnimationFrame> | null = null;
 
   @ViewChild('wrapper', { static: true, read: ElementRef })
   wrapperElement: ElementRef<HTMLDivElement>;
@@ -130,16 +131,25 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     this.renderer.appendChild(this.document.body, this.elementRef.nativeElement);
 
     this.preventScroll();
-    this.positionWrapper();
-
-    this.renderer.addClass(this.elementRef.nativeElement, 'is-open');
-    this.renderer.removeClass(this.elementRef.nativeElement, 'is-opening');
-
     this.isShowing = true;
+
+    this.openingFrameId = requestAnimationFrame(() => {
+      this.openingFrameId = null;
+      if (!this.isShowing) return;
+      this.positionWrapper();
+      this.renderer.addClass(this.elementRef.nativeElement, 'is-open');
+      this.renderer.removeClass(this.elementRef.nativeElement, 'is-opening');
+    });
   }
 
   hide() {
     if (!this.isShowing) return;
+
+    if (this.openingFrameId !== null) {
+      cancelAnimationFrame(this.openingFrameId);
+      this.openingFrameId = null;
+      this.renderer.removeClass(this.elementRef.nativeElement, 'is-opening');
+    }
 
     this.willHide.emit();
     this.renderer.removeChild(

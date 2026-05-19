@@ -1,12 +1,11 @@
 @use 'sass:map';
-@use '@kirbydesign/core/src/scss/utils';
 
 kirby-card {
-  margin-block: utils.size('m');
+  margin-block: var(--kirby-spacing-m);
   max-width: fit-content;
 
   kirby-dropdown + kirby-dropdown {
-    margin-top: utils.size('s');
+    margin-top: var(--kirby-spacing-s);
   }
 
   &.attention-levels {
@@ -15,7 +14,7 @@ kirby-card {
 }
 
 p {
-  margin-top: utils.size('s');
+  margin-top: var(--kirby-spacing-s);
 }
 
 .column-layout {

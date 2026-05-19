@@ -63,9 +63,9 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { SegmentedControlComponent } from '@kirbydesign/designsystem/segmented-control';
 
 import { provideKirby } from '@kirbydesign/designsystem/config';
-import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 
@@ -96,7 +96,6 @@ const standaloneComponents = [
   FabSheetComponent,
   ToggleComponent,
   SlideButtonComponent,
-  SegmentedControlComponent,
   CheckboxComponent,
   MenuComponent,
   ActionSheetComponent,
