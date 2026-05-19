@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
@@ -43,6 +43,7 @@ export const template = `<kirby-loading-overlay
   imports: [LoadingOverlayComponent, ButtonComponent],
 })
 export class DefaultExampleComponent {
+  constructor(private cdr: ChangeDetectorRef) {}
   template: string = template;
   public isLoading = false;
   public showBackdrop = false;
@@ -54,7 +55,12 @@ export class DefaultExampleComponent {
     this.isLoading = true;
 
     setTimeout(() => {
-      this.isLoading = false;
+      this.hideLoadingOverlay();
     }, 5000);
+  }
+
+  public hideLoadingOverlay() {
+    this.isLoading = false;
+    this.cdr.detectChanges();
   }
 }
