@@ -13,9 +13,12 @@
   ></cookbook-loading-overlay-example-default>
 </cookbook-example-viewer>
 
-<h2>Card</h2>
+<h3>Card</h3>
 
-<p>The loading overlay component will add the overlay on top of the card</p>
+<p>
+  A common scenario is to show a loading overlay on top of a card, when loading the content of the
+  card.
+</p>
 
 <cookbook-example-viewer [html]="cardExample.template">
   <cookbook-loading-overlay-example-card #cardExample></cookbook-loading-overlay-example-card>
@@ -50,9 +53,9 @@
   is required to dismiss the overlay. It takes no arguments.
 </p>
 
-<cookbook-loading-overlay-example-service></cookbook-loading-overlay-example-service>
-
-<cookbook-code-viewer [ts]="loadingOverlayServiceExample"></cookbook-code-viewer>
+<cookbook-example-viewer [html]="service.template">
+  <cookbook-loading-overlay-example-service #service></cookbook-loading-overlay-example-service>
+</cookbook-example-viewer>
 
 <h2>Importing</h2>
 <cookbook-import-viewer

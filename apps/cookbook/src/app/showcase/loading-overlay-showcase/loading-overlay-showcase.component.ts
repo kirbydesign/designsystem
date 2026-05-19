@@ -12,8 +12,6 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
 import { CardExampleComponent } from '~/app/examples/loading-overlay-example/examples/card';
 import { DefaultExampleComponent } from '~/app/examples/loading-overlay-example/examples/default';
 import { ServiceExampleComponent } from '~/app/examples/loading-overlay-example/examples/service';
-import { CodeViewerComponent } from '~/app/shared/code-viewer/code-viewer.component';
-import { loadingOverlayServiceExample } from '~/app/examples/loading-overlay-example/loading-overlay-service-code-snippets';
 
 @Component({
   selector: 'cookbook-loading-overlay-showcase',
@@ -26,12 +24,10 @@ import { loadingOverlayServiceExample } from '~/app/examples/loading-overlay-exa
     CardExampleComponent,
     DefaultExampleComponent,
     ServiceExampleComponent,
-    CodeViewerComponent,
   ],
 })
 export class LoadingOverlayShowcaseComponent {
   exampleHtml = exampleHtml;
-  loadingOverlayServiceExample = loadingOverlayServiceExample;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'isLoading',

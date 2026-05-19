@@ -1,21 +1,21 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { SharedLoadingOverlayBase } from './shared-loading-overlay';
+import { createExampleLoadingOverlayProps } from './shared-loading-overlay';
 
 const config = {
   selector: 'cookbook-loading-overlay-example-default',
   template: `<kirby-loading-overlay
-  [isLoading]="isLoading"
-  [showBackdrop]="showBackdrop"
-  [hideContent]="hideContent"
+  [isLoading]="overlay.isLoading()"
+  [showBackdrop]="overlay.showBackdrop()"
+  [hideContent]="overlay.hideContent()"
 >
   <button
     kirby-button
     attentionLevel="2"
     size="lg"
     expand="block"
-    (click)="showWrapperLoadingOverlay(true)"
+(click)="overlay.show(true)"
   >
     Show wrapper loading overlay
   </button>
@@ -24,7 +24,7 @@ const config = {
     attentionLevel="2"
     size="lg"
     expand="block"
-    (click)="showWrapperLoadingOverlay(false, true)"
+    (click)="overlay.show(false, true)"
   >
     Show wrapper loading overlay that hides content
   </button>
@@ -33,7 +33,7 @@ const config = {
     attentionLevel="2"
     size="lg"
     expand="block"
-    (click)="showWrapperLoadingOverlay(false)"
+    (click)="overlay.show(false)"
   >
     Show wrapper loading overlay without backdrop
   </button>
@@ -46,9 +46,7 @@ const config = {
   styleUrls: ['./loading-overlay-example.shared.scss'],
   imports: [LoadingOverlayComponent, ButtonComponent],
 })
-export class DefaultExampleComponent extends SharedLoadingOverlayBase {
-  constructor(cdr: ChangeDetectorRef) {
-    super(cdr);
-  }
+export class DefaultExampleComponent {
+  overlay = createExampleLoadingOverlayProps();
   template: string = config.template;
 }

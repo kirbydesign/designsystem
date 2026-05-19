@@ -1,25 +1,25 @@
-import { ChangeDetectorRef } from '@angular/core';
+import { signal } from '@angular/core';
 
-export abstract class SharedLoadingOverlayBase {
-  constructor(protected cdr: ChangeDetectorRef) {}
+export function createExampleLoadingOverlayProps() {
+  const isLoading = signal(false);
+  const showBackdrop = signal(false);
+  const hideContent = signal(false);
 
-  public isLoading = false;
-  public showBackdrop = false;
-  public hideContent = false;
-
-  public showWrapperLoadingOverlay(showBackdrop: boolean, hideContent?: boolean) {
-    this.showBackdrop = showBackdrop;
-    this.hideContent = hideContent ?? false;
-    this.isLoading = true;
-    setTimeout(() => {
-      this.hideLoadingOverlay();
-    }, 3000);
-  }
-
-  public hideLoadingOverlay() {
-    this.isLoading = false;
-    this.showBackdrop = false;
-    this.hideContent = false;
-    this.cdr.detectChanges();
-  }
+  const overlayProps = {
+    isLoading: isLoading.asReadonly(),
+    showBackdrop: showBackdrop.asReadonly(),
+    hideContent: hideContent.asReadonly(),
+    show(backdrop = false, hide = false) {
+      showBackdrop.set(backdrop);
+      hideContent.set(hide);
+      isLoading.set(true);
+      setTimeout(() => overlayProps.hide(), 3000);
+    },
+    hide() {
+      isLoading.set(false);
+      showBackdrop.set(false);
+      hideContent.set(false);
+    },
+  };
+  return overlayProps;
 }
