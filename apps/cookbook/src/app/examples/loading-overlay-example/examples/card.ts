@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
+import { SharedLoadingOverlayBase } from './shared-loading-overlay';
 
 const config = {
   selector: 'cookbook-loading-overlay-example-card',
@@ -12,7 +13,7 @@ const config = {
       attentionLevel="2"
       size="lg"
       expand="block"
-      (click)="showCardLoadingOverlay(true, true)"
+      (click)="showWrapperLoadingOverlay(true, true)"
     >
       Show wrapper loading overlay that hides card content
     </button>
@@ -23,7 +24,7 @@ const config = {
       attentionLevel="2"
       size="lg"
       expand="block"
-      (click)="showCardLoadingOverlay(false, true)"
+      (click)="showWrapperLoadingOverlay(false, true)"
     >
       Show wrapper loading overlay on card with backdrop
     </button>
@@ -36,24 +37,9 @@ const config = {
   template: config.template,
   imports: [LoadingOverlayComponent, ButtonComponent, CardComponent],
 })
-export class CardExampleComponent {
-  constructor(private cdr: ChangeDetectorRef) {}
+export class CardExampleComponent extends SharedLoadingOverlayBase {
+  constructor(cdr: ChangeDetectorRef) {
+    super(cdr);
+  }
   template: string = config.template;
-  public isLoading = false;
-  public hideContent = false;
-  public showBackdrop = false;
-
-  public showCardLoadingOverlay(hideContent: boolean, showBackdrop: boolean) {
-    this.hideContent = hideContent;
-    this.showBackdrop = showBackdrop;
-    this.isLoading = true;
-    setTimeout(() => {
-      this.hideLoadingOverlay();
-    }, 3000);
-  }
-
-  public hideLoadingOverlay() {
-    this.isLoading = false;
-    this.cdr.detectChanges();
-  }
 }

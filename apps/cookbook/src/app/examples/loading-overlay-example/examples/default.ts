@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { SharedLoadingOverlayBase } from './shared-loading-overlay';
 
 const config = {
   selector: 'cookbook-loading-overlay-example-default',
@@ -45,27 +46,9 @@ const config = {
   styleUrls: ['./loading-overlay-example.shared.scss'],
   imports: [LoadingOverlayComponent, ButtonComponent],
 })
-export class DefaultExampleComponent {
-  constructor(private cdr: ChangeDetectorRef) {}
+export class DefaultExampleComponent extends SharedLoadingOverlayBase {
+  constructor(cdr: ChangeDetectorRef) {
+    super(cdr);
+  }
   template: string = config.template;
-  public isLoading = false;
-  public showBackdrop = false;
-  public hideContent = false;
-
-  public showWrapperLoadingOverlay(showBackdrop: boolean, hideContent?: boolean) {
-    this.showBackdrop = showBackdrop;
-    this.hideContent = hideContent ?? false;
-    this.isLoading = true;
-
-    setTimeout(() => {
-      this.hideLoadingOverlay();
-    }, 3000);
-  }
-
-  public hideLoadingOverlay() {
-    this.isLoading = false;
-    this.showBackdrop = false;
-    this.hideContent = false;
-    this.cdr.detectChanges();
-  }
 }
