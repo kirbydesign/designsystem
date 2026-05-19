@@ -85,7 +85,7 @@ jobs:
       - name: Build Kirby Cookbook
         run: npx nx build cookbook --configuration=production
       - name: Upload Kirby Cookbook dist files
-        uses: actions/cache@v5
+        uses: actions/cache@v5.0.5
         with:
           path: |
             dist/
@@ -159,7 +159,7 @@ jobs:
             -f state="$DEPLOYMENT_STATE" \
             -f log_url="$REPO_URL/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Download Kirby Cookbook dist files
-        uses: actions/cache@v5
+        uses: actions/cache@v5.0.5
         with:
           path: |
             dist/
