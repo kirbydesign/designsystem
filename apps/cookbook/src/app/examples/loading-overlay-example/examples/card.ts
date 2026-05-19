@@ -3,7 +3,9 @@ import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overl
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-export const template = `<kirby-loading-overlay [hideContent]="true" [isLoading]="isLoading">
+const config = {
+  selector: 'cookbook-loading-overlay-example-card',
+  template: `<kirby-loading-overlay [hideContent]="true" [isLoading]="isLoading">
   <kirby-card [hasPadding]="true">
     <button
       kirby-button
@@ -15,22 +17,24 @@ export const template = `<kirby-loading-overlay [hideContent]="true" [isLoading]
       Show wrapper loading overlay that hides card content
     </button>
   </kirby-card>
-</kirby-loading-overlay>`;
+</kirby-loading-overlay>`,
+};
 
 @Component({
-  selector: 'cookbook-card-example',
-  template: template,
+  selector: config.selector,
+  template: config.template,
   imports: [LoadingOverlayComponent, ButtonComponent, CardComponent],
 })
 export class CardExampleComponent {
   constructor(private cdr: ChangeDetectorRef) {}
-  template: string = template;
+  template: string = config.template;
   public isLoading = false;
+
   public showCardLoadingOverlay() {
     this.isLoading = true;
     setTimeout(() => {
       this.hideLoadingOverlay();
-    }, 5000);
+    }, 3000);
   }
 
   public hideLoadingOverlay() {

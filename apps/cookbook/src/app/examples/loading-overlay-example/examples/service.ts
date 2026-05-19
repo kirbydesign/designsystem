@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { LoadingOverlayService } from '@kirbydesign/designsystem';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
-export const template = `<button
+const config = {
+  selector: 'cookbook-loading-overlay-example-service',
+  template: `<button
   kirby-button
   attentionLevel="2"
   size="lg"
@@ -29,21 +31,23 @@ export const template = `<button
 >
   Show full page loading overlay without backdrop
 </button>
-`;
+`,
+};
 
 @Component({
-  selector: 'cookbook-service-example',
-  template: template,
+  selector: config.selector,
+  template: config.template,
   imports: [ButtonComponent],
 })
 export class ServiceExampleComponent {
   constructor(private loadingOverlayService: LoadingOverlayService) {}
+  template: string = config.template;
 
   public showFullscreenLoadingOverlay(showBackdrop: boolean, hideContent?: boolean) {
     this.loadingOverlayService.showLoadingOverlay(showBackdrop, hideContent);
 
     setTimeout(() => {
       this.loadingOverlayService.hideLoadingOverlay();
-    }, 5000);
+    }, 3000);
   }
 }

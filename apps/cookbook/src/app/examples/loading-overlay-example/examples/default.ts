@@ -2,7 +2,9 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
-export const template = `<kirby-loading-overlay
+const config = {
+  selector: 'cookbook-loading-overlay-example-default',
+  template: `<kirby-loading-overlay
   [isLoading]="isLoading"
   [showBackdrop]="showBackdrop"
   [hideContent]="hideContent"
@@ -34,17 +36,18 @@ export const template = `<kirby-loading-overlay
   >
     Show wrapper loading overlay without backdrop
   </button>
-</kirby-loading-overlay>`;
+</kirby-loading-overlay>`,
+};
 
 @Component({
-  selector: 'cookbook-default-example',
-  template: template,
-  styleUrls: ['./default.scss'],
+  selector: config.selector,
+  template: config.template,
+  styleUrls: ['./loading-overlay-example.shared.scss'],
   imports: [LoadingOverlayComponent, ButtonComponent],
 })
 export class DefaultExampleComponent {
   constructor(private cdr: ChangeDetectorRef) {}
-  template: string = template;
+  template: string = config.template;
   public isLoading = false;
   public showBackdrop = false;
   public hideContent = false;
@@ -56,7 +59,7 @@ export class DefaultExampleComponent {
 
     setTimeout(() => {
       this.hideLoadingOverlay();
-    }, 5000);
+    }, 3000);
   }
 
   public hideLoadingOverlay() {
