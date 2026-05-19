@@ -61,6 +61,8 @@ export class DefaultExampleComponent {
 
   public hideLoadingOverlay() {
     this.isLoading = false;
+    this.showBackdrop = false;
+    this.hideContent = false;
     this.cdr.detectChanges();
   }
 }
