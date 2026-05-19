@@ -7,7 +7,7 @@ runs:
       run: echo "NODE_VERSION=$(jq -r .engines.node ./package.json)" >> $GITHUB_ENV
       shell: bash
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6.4.0
       with:
         node-version: ${{env.NODE_VERSION}}
     - name: Prepare hash-files
