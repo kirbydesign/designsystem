@@ -8,17 +8,15 @@ const config = {
   selector: 'cookbook-loading-overlay-example-card',
   template: `<kirby-loading-overlay [hideContent]="hideContent" [isLoading]="isLoading"  [showBackdrop]="showBackdrop">
   <kirby-card [hasPadding]="true">
-    <button
+      <button
       kirby-button
       attentionLevel="2"
       size="lg"
       expand="block"
-      (click)="showWrapperLoadingOverlay(true, true)"
+      (click)="showWrapperLoadingOverlay(true)"
     >
-      Show wrapper loading overlay that hides card content
+      Show wrapper loading overlay on card
     </button>
-  </kirby-card>
-    <kirby-card [hasPadding]="true">
     <button
       kirby-button
       attentionLevel="2"
@@ -26,7 +24,7 @@ const config = {
       expand="block"
       (click)="showWrapperLoadingOverlay(false, true)"
     >
-      Show wrapper loading overlay on card with backdrop
+      Show wrapper loading overlay that hides card
     </button>
   </kirby-card>
 </kirby-loading-overlay>`,
