@@ -26,10 +26,10 @@ jobs:
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Check modified files
         id: filter
-        uses: dorny/paths-filter@v2.9.2
+        uses: dorny/paths-filter@v4.0.1
         with:
           filters: |
             libs:
@@ -47,7 +47,7 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Run linting
@@ -64,7 +64,7 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby lib
@@ -79,7 +79,7 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby Cookbook
@@ -99,7 +99,7 @@ jobs:
       DOMAIN: 'kirby.design'
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Get deployment name for default or feature branch
         if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
         run: |
@@ -137,15 +137,14 @@ jobs:
       - name: Create Github Deployment
         id: create_deployment
         run: |
-          # Skip commit checks
-          required_contexts='[]'
-          deployment_id=$(gh api /repos/${{ github.repository }}/deployments \
+          payload=$(jq -n \
+            --arg ref "${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}" \
+            --arg environment "${{ env.GH_DEPLOY_ENVIRONMENT }}" \
+            --argjson production_environment ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }} \
+            '{ref: $ref, environment: $environment, production_environment: $production_environment, auto_merge: false, required_contexts: []}')
+          deployment_id=$(echo "$payload" | gh api /repos/${{ github.repository }}/deployments \
             --method POST \
-            -f ref="${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}" \
-            -f environment="${{ env.GH_DEPLOY_ENVIRONMENT }}" \
-            -F production_environment=${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }} \
-            -F auto_merge=false \
-            --field required_contexts:json="$required_contexts" \
+            --input - \
             --jq '.id')
           echo "deployment_id=${deployment_id}" >> $GITHUB_OUTPUT
         env:

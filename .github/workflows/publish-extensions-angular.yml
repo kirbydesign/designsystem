@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build extensions-angular package and publish to npm
