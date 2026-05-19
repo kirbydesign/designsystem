@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoadingOverlayService } from '@kirbydesign/designsystem';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { loadingOverlayServiceExample } from '../loading-overlay-service-code-snippets';
 
 const config = {
   selector: 'cookbook-loading-overlay-example-service',
@@ -42,6 +43,7 @@ const config = {
 export class ServiceExampleComponent {
   constructor(private loadingOverlayService: LoadingOverlayService) {}
   template: string = config.template;
+  codeSnippet: string = loadingOverlayServiceExample;
 
   public showFullscreenLoadingOverlay(showBackdrop: boolean, hideContent?: boolean) {
     this.loadingOverlayService.showLoadingOverlay(showBackdrop, hideContent);
