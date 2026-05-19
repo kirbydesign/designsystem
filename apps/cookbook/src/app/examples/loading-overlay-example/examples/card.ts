@@ -12,7 +12,7 @@ export const template = `<kirby-loading-overlay [hideContent]="true" [isLoading]
       expand="block"
       (click)="showCardLoadingOverlay()"
     >
-      Show card with loading overlay that hides content
+      Show wrapperloading overlay that hides card content
     </button>
   </kirby-card>
 </kirby-loading-overlay>`;
