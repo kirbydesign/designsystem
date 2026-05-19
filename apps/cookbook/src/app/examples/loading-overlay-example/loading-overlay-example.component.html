@@ -1,33 +1,8 @@
-<kirby-loading-overlay
-  [isLoading]="isLoading"
-  [showBackdrop]="showBackdrop"
-  [hideContent]="hideContent"
->
-  <button
-    kirby-button
-    attentionLevel="2"
-    size="lg"
-    expand="block"
-    (click)="showWrapperLoadingOverlay(true)"
-  >
-    Show wrapper loading overlay
-  </button>
-  <button
-    kirby-button
-    attentionLevel="2"
-    size="lg"
-    expand="block"
-    (click)="showWrapperLoadingOverlay(false, true)"
-  >
-    Show wrapper loading overlay that hides content
-  </button>
-  <button
-    kirby-button
-    attentionLevel="2"
-    size="lg"
-    expand="block"
-    (click)="showWrapperLoadingOverlay(false)"
-  >
-    Show wrapper loading overlay without backdrop
-  </button>
-</kirby-loading-overlay>
+<div class="example-container">
+  <h2>Component</h2>
+  <cookbook-default-example></cookbook-default-example>
+  <h2>Card</h2>
+  <cookbook-card-example></cookbook-card-example>
+  <h2>Service</h2>
+  <cookbook-service-example></cookbook-service-example>
+</div>
