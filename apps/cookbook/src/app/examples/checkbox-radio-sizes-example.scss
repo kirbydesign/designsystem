@@ -6,8 +6,8 @@ $default-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 kirby-checkbox,
 kirby-radio {
-  margin-bottom: utils.size('xxs');
-  background-color: utils.get-color('semi-light');
+  margin-bottom: var(--kirby-spacing-xxs);
+  background-color: var(--kirby-semi-light);
   position: relative;
 }
 
@@ -17,7 +17,7 @@ kirby-checkbox::after,
 kirby-radio::before,
 kirby-radio::after {
   height: 100%;
-  border: 1px solid utils.get-color('danger');
+  border: 1px solid var(--kirby-danger);
   position: absolute;
   right: 0;
 }
@@ -28,7 +28,7 @@ kirby-radio::before {
   content: '';
   border-left: 0;
   border-right: 0;
-  width: utils.size('xxs') + 1px;
+  width: calc(var(--kirby-spacing-xxs) + 1px);
 }
 
 /* vertical measure */
@@ -39,10 +39,10 @@ kirby-radio::after {
   border-top: 0;
   border-bottom: 0;
   line-height: $default-size;
-  font-size: utils.font-size('xs');
-  color: utils.get-color('danger');
-  padding-right: utils.size('xxs');
-  margin-right: utils.size('xxs') * 0.5;
+  font-size: var(--kirby-font-size-xs);
+  color: var(--kirby-danger);
+  padding-right: var(--kirby-spacing-xxs);
+  margin-right: calc(var(--kirby-spacing-xxs) * 0.5);
   vertical-align: center;
 }
 

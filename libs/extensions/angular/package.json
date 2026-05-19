@@ -33,7 +33,7 @@
     "jest-preset-angular": "^16.0.0",
     "jest-util": "^30.2.0",
     "jsonc-eslint-parser": "^2.1.0",
-    "postcss": "^8.4.5",
+    "postcss": "^8.5.10",
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.5.0",
     "postcss-url": "~10.1.3",

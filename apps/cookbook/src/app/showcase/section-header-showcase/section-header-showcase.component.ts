@@ -4,6 +4,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { SectionHeaderLabelAndDetailExampleComponent } from '../../examples/section-header-example/examples/label-and-detail';
 import { SectionHeaderHeadingWithMultilineLabelExampleComponent } from '../../examples/section-header-example/examples/heading-with-multiline-label';
 import { SectionHeaderWithCardComponent } from '../../examples/section-header-example/examples/header-with-card';
+import { SectionHeaderHeadingLevelsExampleComponent } from '../../examples/section-header-example/examples/heading-levels';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import {
   ApiDescriptionProperty,
@@ -21,6 +22,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     SectionHeaderLabelAndDetailExampleComponent,
     SectionHeaderHeadingWithMultilineLabelExampleComponent,
     SectionHeaderWithCardComponent,
+    SectionHeaderHeadingLevelsExampleComponent,
     ApiDescriptionPropertiesComponent,
     ImportViewerComponent,
   ],

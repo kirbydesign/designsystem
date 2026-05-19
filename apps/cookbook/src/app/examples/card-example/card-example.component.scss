@@ -1,6 +1,5 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../examples.shared';
 
 :host > :not(:last-child) {
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 }

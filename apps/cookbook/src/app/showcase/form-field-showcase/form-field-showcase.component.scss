@@ -1,17 +1,15 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 h2:not(:first-child) {
-  margin-top: utils.size('l');
+  margin-top: var(--kirby-spacing-l);
 }
 
 h3 {
-  border-bottom: 1px dotted utils.get-color('medium');
+  border-bottom: 1px dotted var(--kirby-medium);
 }
 
 h4 {
-  margin-top: utils.size('s');
+  margin-top: var(--kirby-spacing-s);
 }
 
 cookbook-example-viewer {
-  margin-bottom: utils.size('l');
+  margin-bottom: var(--kirby-spacing-l);
 }
