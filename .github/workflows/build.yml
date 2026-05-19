@@ -12,6 +12,10 @@ defaults:
   run:
     shell: bash
 
+env:
+  REPO_URL: https://github.com
+  REPO_HOST: github.com
+
 jobs:
   pre_build:
     name: Check if build is needed
@@ -22,7 +26,7 @@ jobs:
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Check modified files
         id: filter
         uses: dorny/paths-filter@v2.9.2
@@ -32,7 +36,7 @@ jobs:
               - 'libs/**'
       - name: Get Node.JS version from package.json
         id: get_node_version
-        run: echo ::set-output name=node_version::$(jq -r .engines.node ./package.json)
+        run: echo "node_version=$(jq -r .engines.node ./package.json)" >> $GITHUB_OUTPUT
 
   lint_and_unittest:
     name: Lint & unit test
@@ -43,7 +47,7 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Run linting
@@ -60,7 +64,7 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby lib
@@ -75,13 +79,13 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby Cookbook
         run: npx nx build cookbook --configuration=production
       - name: Upload Kirby Cookbook dist files
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             dist/
@@ -95,7 +99,7 @@ jobs:
       DOMAIN: 'kirby.design'
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Get deployment name for default or feature branch
         if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
         run: |
@@ -132,31 +136,31 @@ jobs:
         run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments
-          repository: ${{ github.repository }}
-          ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
-          environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
-          production_environment: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
-          auto_merge: false
-          required_contexts: '[]' # Skip commit checks
-          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+        run: |
+          # Skip commit checks
+          required_contexts='[]'
+          deployment_id=$(gh api /repos/${{ github.repository }}/deployments \
+            --method POST \
+            -f ref="${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}" \
+            -f environment="${{ env.GH_DEPLOY_ENVIRONMENT }}" \
+            -F production_environment=${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }} \
+            -F auto_merge=false \
+            --field required_contexts:json="$required_contexts" \
+            --jq '.id')
+          echo "deployment_id=${deployment_id}" >> $GITHUB_OUTPUT
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to in progress
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: in_progress
-          mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOYMENT_STATE: in_progress
+        run: |
+          gh api /repos/${{ github.repository }}/deployments/${{ steps.create_deployment.outputs.deployment_id }}/statuses \
+            --method POST \
+            -f state="$DEPLOYMENT_STATE" \
+            -f log_url="$REPO_URL/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Download Kirby Cookbook dist files
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             dist/
@@ -166,7 +170,7 @@ jobs:
           set -e
           echo "Hostname: ${HOSTNAME}"
 
-          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystem_web
+          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@$REPO_HOST/kirbydesign/designsystem.git -b gh-pages designsystem_web
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'
@@ -223,27 +227,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to success
         id: successful_deployment
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: success
-          mediaType: '{"previews": ["ant-man"]}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOYMENT_STATE: success
+        run: |
+          gh api /repos/${{ github.repository }}/deployments/${{ steps.create_deployment.outputs.deployment_id }}/statuses \
+            --method POST \
+            -f state="$DEPLOYMENT_STATE" \
+            -f log_url="$REPO_URL/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            -f environment_url="${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}"
       - name: Set deployment status to failure
         id: failed_deployment
-        uses: octokit/request-action@v2.x
         if: failure()
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: failure
-          mediaType: '{"previews": ["ant-man"]}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOYMENT_STATE: failure
+        run: |
+          gh api /repos/${{ github.repository }}/deployments/${{ steps.create_deployment.outputs.deployment_id }}/statuses \
+            --method POST \
+            -f state="$DEPLOYMENT_STATE" \
+            -f log_url="$REPO_URL/${{ github.repository }}/actions/runs/${{ github.run_id }}"
