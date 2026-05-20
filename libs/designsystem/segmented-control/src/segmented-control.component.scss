@@ -1,6 +1,10 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+.hidden-items {
+  display: none;
+}
+
 :host {
   display: block;
   user-select: none;

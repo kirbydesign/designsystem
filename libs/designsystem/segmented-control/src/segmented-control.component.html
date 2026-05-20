@@ -1,31 +1,47 @@
 <ion-segment
-  [value]="value?.id"
+  [value]="getSelectedSegmentValue()"
   [scrollable]="disableChangeOnSwipe || mode !== 'default'"
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventOutsideClick($event)"
   [disabled]="isDisabled"
 >
-  @for (item of items; track item.id; let i = $index) {
-    <ion-segment-button
-      [value]="item.id"
-      [attr.aria-label]="item.ariaLabel"
-      [attr.tabindex]="getTabIndex(item, i)"
-      (click)="focusNativeButton($event)"
-    >
-      {{ item.text }}
-      @if (item.badge) {
-        <kirby-badge
-          role="text"
-          [attr.aria-label]="item.badge.description"
-          [themeColor]="item.badge.themeColor"
-        >
-          @if (item.badge.icon) {
-            <kirby-icon [name]="item.badge.icon"></kirby-icon>
-          } @else {
-            {{ item.badge.content }}
-          }
-        </kirby-badge>
-      }
-    </ion-segment-button>
+  @if (hasProjectedItems) {
+    @for (item of projectedItems; track $index; let i = $index) {
+      <ion-segment-button
+        [value]="i"
+        [attr.tabindex]="getTabIndex(i)"
+        (click)="focusNativeButton($event)"
+      >
+        <div #projectedItemOutlet></div>
+      </ion-segment-button>
+    }
+  } @else {
+    @for (item of items; track item.id; let i = $index) {
+      <ion-segment-button
+        [value]="item.id"
+        [attr.aria-label]="item.ariaLabel"
+        [attr.tabindex]="getTabIndex(i, item)"
+        (click)="focusNativeButton($event)"
+      >
+        {{ item.text }}
+        @if (item.badge) {
+          <kirby-badge
+            role="text"
+            [attr.aria-label]="item.badge.description"
+            [themeColor]="item.badge.themeColor"
+          >
+            @if (item.badge.icon) {
+              <kirby-icon [name]="item.badge.icon"></kirby-icon>
+            } @else {
+              {{ item.badge.content }}
+            }
+          </kirby-badge>
+        }
+      </ion-segment-button>
+    }
   }
 </ion-segment>
+
+<div class="hidden-items" #hiddenItems>
+  <ng-content select="li"></ng-content>
+</div>
