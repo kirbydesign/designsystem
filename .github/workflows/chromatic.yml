@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/kirby-setup
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v5.0.1
+        uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
         with: 
           main-branch-name: develop
 
@@ -36,7 +36,7 @@ jobs:
           fi
 
       - name: Publish Designsystem  to Chromatic
-        uses: chromaui/action@latest  
+        uses: chromaui/action@7aca53e7aa87489020a97f633c1e7e82c12e5973 # 1.0.0
         # If designsystem storybook dist has been built, it means project might have been affected and should be tested
         if: steps.check_storybook_folders.outputs.designsystem == 'true'
         with:
@@ -49,7 +49,7 @@ jobs:
       - name: Publish Extensions to Chromatic
       # If extensions storybook dist has been built, it means project might have been affected and should be tested
         if: steps.check_storybook_folders.outputs.extensions_angular == 'true'
-        uses: chromaui/action@latest
+        uses: chromaui/action@7aca53e7aa87489020a97f633c1e7e82c12e5973 # 1.0.0
         with:
           projectToken: ${{ secrets.EXTENSIONS_CHROMATIC_PROJECT_TOKEN }}
           workingDir: libs/extensions/angular
