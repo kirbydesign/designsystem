@@ -1,10 +1,15 @@
 @use 'sass:color';
 @use 'sass:map';
+@use 'sass:meta';
 @use '../themes/colors';
 @use 'variables';
 
 @mixin font-family() {
   --kirby-font-family: 'Roboto';
+}
+
+@mixin size-fat-finger() {
+  --kirby-size-fat-finger: #{variables.$fat-finger-size};
 }
 
 @mixin colors() {
@@ -14,7 +19,7 @@
 }
 
 @mixin text-colors() {
-  @each $name, $value in colors.$text-colors {
+  @each $name, $value in colors.$kirby-text-colors {
     --kirby-text-color-#{$name}: #{$value};
   }
 }
@@ -81,6 +86,35 @@
   }
 }
 
+@mixin breakpoints() {
+  @each $name, $value in variables.$breakpoints {
+    --kirby-breakpoint-#{$name}: #{$value};
+  }
+}
+
+@mixin transition-soft-keyboard() {
+  --kirby-transition-soft-keyboard-enter: #{variables.$soft-keyboard-transition-enter};
+  --kirby-transition-soft-keyboard-leave: #{variables.$soft-keyboard-transition-leave};
+}
+
+@mixin transition-durations() {
+  @each $name, $value in variables.$transition-durations {
+    --kirby-transition-duration-#{$name}: #{$value};
+  }
+}
+
+@mixin transition-easings() {
+  @each $name, $value in variables.$transition-easings {
+    @if meta.type-of($value) == 'map' {
+      @each $subname, $subvalue in $value {
+        --kirby-transition-easing-#{$name}-#{$subname}: #{$subvalue};
+      }
+    } @else {
+      --kirby-transition-easing-#{$name}: #{$value};
+    }
+  }
+}
+
 @mixin all() {
   /* FONT-FAMILY */
   @include font-family;
@@ -116,6 +150,17 @@
   /* SPACINGS */
   @include spacings;
 
+  /* FAT FINGER SIZE */
+  @include size-fat-finger;
+
   /* Z-INDEXES */
   @include z-layers;
+
+  /* BREAKPOINTS */
+  @include breakpoints;
+
+  /* TRANSITIONS */
+  @include transition-durations;
+  @include transition-easings;
+  @include transition-soft-keyboard;
 }

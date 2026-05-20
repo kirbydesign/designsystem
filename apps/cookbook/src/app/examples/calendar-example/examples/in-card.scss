@@ -1,8 +1,7 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use './shared';
 
 kirby-card:has(.buttons) {
-  margin-top: utils.size(xxs);
+  margin-top: var(--kirby-spacing-xxs);
 
   .buttons {
     display: flex;
@@ -11,6 +10,6 @@ kirby-card:has(.buttons) {
 
   p {
     margin: 0;
-    margin-top: utils.size(xs);
+    margin-top: var(--kirby-spacing-xs);
   }
 }

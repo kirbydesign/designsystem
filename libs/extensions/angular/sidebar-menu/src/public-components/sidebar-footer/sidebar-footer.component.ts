@@ -10,14 +10,11 @@ import { Component } from '@angular/core';
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: 100%;
     }
 
     :host {
       min-height: 80px;
-    }
-
-    footer {
-      width: 100%;
     }
   `,
 })

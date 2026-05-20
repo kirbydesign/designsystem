@@ -1,5 +1,7 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 kirby-item:not(:last-child) {
   margin-bottom: var(--kirby-spacing-xxs);
+}
+
+kirby-card + kirby-card {
+  margin-top: var(--kirby-spacing-xxs);
 }

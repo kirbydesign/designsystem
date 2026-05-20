@@ -4,7 +4,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: utils.size('s');
+  gap: var(--kirby-spacing-s);
 
   @include utils.media('>=medium') {
     flex-direction: row;

@@ -1,15 +1,12 @@
-@use 'sass:map';
-@use '@kirbydesign/core/src/scss/utils';
-
 @use './shared';
 
 :host {
   display: flex;
-  gap: utils.size('m');
+  gap: var(--kirby-spacing-m);
 }
 
 kirby-card {
-  max-width: map.get(utils.$breakpoints, 'xsmall');
+  max-width: var(--kirby-breakpoint-xsmall);
 
   &:not(.outlined) {
     // avoid content jumping when no outline:

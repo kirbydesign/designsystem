@@ -2,7 +2,7 @@
 
 :host(.full-size) {
   iframe {
-    border-radius: utils.size('xs');
+    border-radius: var(--kirby-spacing-xs);
   }
 
   .docs-demo-device {
@@ -10,8 +10,8 @@
     position: relative;
     min-height: var(--docs-demo-device-height, 500px);
     border: 1px solid #ddd;
-    border-radius: utils.size('xs');
-    margin-bottom: utils.size('xs');
+    border-radius: var(--kirby-spacing-xs);
+    margin-bottom: var(--kirby-spacing-xs);
   }
 
   .docs-demo-device.ios .docs-demo-device-ios-notch,
@@ -27,9 +27,9 @@
 .toggle-wrapper {
   display: flex;
   align-items: center;
-  gap: utils.size('xs');
+  gap: var(--kirby-spacing-xs);
   justify-content: flex-end;
-  padding-bottom: utils.size('xs');
+  padding-bottom: var(--kirby-spacing-xs);
 }
 
 /* stylelint-disable custom-property-pattern */
@@ -47,7 +47,10 @@
 
 .docs-demo-device > figure {
   border-radius: 32px;
-  box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgb(0 0 0 / 20%);
+  box-shadow:
+    0 0 0 14px #090a0d,
+    0 0 0 17px #9fa3a8,
+    0 0 34px 17px rgb(0 0 0 / 20%);
   height: 0;
   margin: 0 auto;
   max-width: 320px;
@@ -91,7 +94,9 @@
   margin: 0 3px;
   padding: 0 9px;
   text-transform: uppercase;
-  transition: 200ms background-color ease, 200ms color ease;
+  transition:
+    200ms background-color ease,
+    200ms color ease;
 }
 
 .docs-demo-mode-toggle button:focus,

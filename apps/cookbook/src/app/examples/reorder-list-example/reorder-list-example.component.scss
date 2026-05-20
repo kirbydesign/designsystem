@@ -1,11 +1,9 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 .section-header {
-  padding: 0 utils.size('s') utils.size('xxs') utils.size('xxs');
+  padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-xxs) var(--kirby-spacing-xxs);
   display: flex;
   justify-content: flex-end;
 
   span {
-    padding-left: utils.size('s');
+    padding-left: var(--kirby-spacing-s);
   }
 }

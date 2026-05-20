@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$logo-size-mobile: utils.size('xl');
-$logo-size-desktop: 2 * utils.size('l');
+$logo-size-mobile: var(--kirby-spacing-xl);
+$logo-size-desktop: calc(2 * var(--kirby-spacing-l));
 $text-delay: 500ms;
 $large-rect-delay: $text-delay + 400ms;
 $medium-rect-delay: $large-rect-delay + 300ms;
@@ -9,11 +9,11 @@ $small-rect-delay: $medium-rect-delay + 200ms;
 
 :host {
   grid-area: header;
-  z-index: utils.z('sticky-content') + 1; // above side-nav
+  z-index: calc(var(--kirby-z-index-sticky-content) + 1); // above side-nav
   position: sticky;
   top: 0;
-  background-color: utils.get-color('light');
-  border-bottom: 1px solid utils.get-color('medium');
+  background-color: var(--kirby-light);
+  border-bottom: 1px solid var(--kirby-medium);
 
   @include utils.media('>=large') {
     position: static;
@@ -58,25 +58,25 @@ header {
 
   .text {
     opacity: 0;
-    animation: enter utils.get-transition-duration('long') ease-in-out $text-delay forwards;
+    animation: enter var(--kirby-transition-duration-long) ease-in-out $text-delay forwards;
   }
 
   .large-rect {
     opacity: 0;
-    animation: enter utils.get-transition-duration('long') ease-in-out $large-rect-delay forwards;
+    animation: enter var(--kirby-transition-duration-long) ease-in-out $large-rect-delay forwards;
   }
 
   .medium-rect {
     opacity: 0;
     transform-origin: center top;
-    animation: enter-pop utils.get-transition-duration('short') ease-in-out $medium-rect-delay
+    animation: enter-pop var(--kirby-transition-duration-short) ease-in-out $medium-rect-delay
       forwards;
   }
 
   .small-rect {
     opacity: 0;
     transform-origin: center;
-    animation: enter-pop utils.get-transition-duration('short') ease-in-out $small-rect-delay
+    animation: enter-pop var(--kirby-transition-duration-short) ease-in-out $small-rect-delay
       forwards;
   }
 }

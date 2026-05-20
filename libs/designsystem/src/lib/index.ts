@@ -1,4 +1,3 @@
-export * from './components';
 export * from './directives';
 
 export * from '@kirbydesign/designsystem/accordion';
@@ -33,6 +32,7 @@ export * from '@kirbydesign/designsystem/range';
 export * from '@kirbydesign/designsystem/reorder-list';
 export * from '@kirbydesign/designsystem/router-outlet';
 export * from '@kirbydesign/designsystem/section-header';
+export * from '@kirbydesign/designsystem/segmented-control';
 export * from '@kirbydesign/designsystem/shared';
 export * from '@kirbydesign/designsystem/slide';
 export * from '@kirbydesign/designsystem/slide-button';
