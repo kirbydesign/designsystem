@@ -1,12 +1,9 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 h2:not(:first-child) {
-  margin-top: utils.size('l');
+  margin-top: var(--kirby-spacing-l);
 }
 
 cookbook-example-viewer > *:first-child {
   display: block;
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
   max-width: 550px;
 }
-

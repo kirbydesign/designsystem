@@ -1,8 +1,7 @@
 @use 'avatar-examples.shared';
-@use '@kirbydesign/core/src/scss/utils';
 
 kirby-avatar {
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 
   &[size='xs']::before {
     content: 'xs';

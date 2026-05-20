@@ -1,14 +1,12 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: flex;
   align-items: flex-end;
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
   flex-wrap: wrap;
 
   > * {
-    margin-right: utils.size('s');
-    margin-bottom: utils.size('s');
+    margin-right: var(--kirby-spacing-s);
+    margin-bottom: var(--kirby-spacing-s);
   }
 
   &.align-top {
@@ -21,7 +19,7 @@ kirby-flag {
 }
 
 kirby-flag[title] {
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 
   &::before {
     content: '';
@@ -29,7 +27,7 @@ kirby-flag[title] {
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
-    font-size: utils.font-size('xs');
+    font-size: var(--kirby-font-size-xs);
     text-align: center;
   }
 

@@ -1,7 +1,6 @@
 @use '../showcase.shared';
-@use '@kirbydesign/core/src/scss/utils';
 
 h3 {
-  margin-top: utils.size('l');
+  margin-top: var(--kirby-spacing-l);
   border-bottom: none;
 }

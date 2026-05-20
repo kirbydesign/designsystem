@@ -215,6 +215,21 @@
     text-overflow: ellipsis;
   }
 
+  @include slotted('h2[heading]', '.kirby-text-large[heading]') {
+    font-size: font-size('l');
+    line-height: line-height('l');
+  }
+
+  @include slotted('.kirby-text-medium[heading]') {
+    font-size: font-size('m');
+    line-height: line-height('m');
+  }
+
+  @include slotted('h4[heading]', 'h5[heading]', 'h6[heading]', '.kirby-text-normal[heading]') {
+    font-size: font-size('n');
+    line-height: line-height('n');
+  }
+
   @include slotted('[detail]', '[label]') {
     font-weight: font-weight('light');
     font-size: font-size('s');

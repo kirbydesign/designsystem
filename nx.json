@@ -100,5 +100,6 @@
         "cacheableOperations": ["build-storybook", "storybook"]
       }
     }
-  }
+  },
+  "analytics": false
 }

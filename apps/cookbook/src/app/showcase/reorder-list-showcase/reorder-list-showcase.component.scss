@@ -1,12 +1,10 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 .example-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-top: utils.size('xl');
-  margin-bottom: utils.size('xl');
+  margin-top: var(--kirby-spacing-xl);
+  margin-bottom: var(--kirby-spacing-xl);
 }
 
 h2 {
-  margin-top: utils.size('l');
+  margin-top: var(--kirby-spacing-l);
 }

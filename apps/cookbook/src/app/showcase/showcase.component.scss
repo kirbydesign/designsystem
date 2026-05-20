@@ -1,19 +1,19 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$icon-size: utils.size('s');
+$icon-size: var(--kirby-spacing-s);
 
 .show-case {
   margin-bottom: 2rem;
 
   h1 {
     text-transform: uppercase;
-    font-size: utils.font-size('xxl');
-    color: utils.get-color('dark');
-    font-weight: utils.font-weight('light');
+    font-size: var(--kirby-font-size-xxl);
+    color: var(--kirby-dark);
+    font-weight: var(--kirby-font-weight-light);
     position: relative;
-    padding-bottom: 5 * utils.size('xxxs');
-    border-bottom: solid 1px utils.get-color('medium');
-    margin-bottom: utils.size('xs');
+    padding-bottom: calc(5 * var(--kirby-spacing-xxxs));
+    border-bottom: solid 1px var(--kirby-medium);
+    margin-bottom: var(--kirby-spacing-xs);
   }
 }
 
@@ -22,15 +22,15 @@ $icon-size: utils.size('s');
   justify-content: space-between;
 
   a {
-    color: utils.get-text-color('semi-dark');
-    font-size: utils.font-size('s');
+    color: var(--kirby-text-color-semi-dark);
+    font-size: var(--kirby-font-size-s);
   }
 }
 
 .cta-links {
   a {
     display: block;
-    margin-bottom: utils.size('xxs');
+    margin-bottom: var(--kirby-spacing-xxs);
     @include utils.media('>=large') {
       display: inline-block;
       margin-bottom: 0;
@@ -39,14 +39,14 @@ $icon-size: utils.size('s');
 }
 
 h4 {
-  margin-top: utils.size('s');
+  margin-top: var(--kirby-spacing-s);
 }
 
 .icon {
   width: $icon-size;
   height: $icon-size;
-  margin-right: utils.size('xxs');
-  margin-left: utils.size('m');
+  margin-right: var(--kirby-spacing-xxs);
+  margin-left: var(--kirby-spacing-m);
   color: currentcolor;
   fill: currentcolor;
   vertical-align: bottom;
@@ -55,6 +55,6 @@ h4 {
 /* stylelint-disable selector-pseudo-element-no-unknown */
 ::ng-deep :not(pre) > code[class*='language-'],
 ::ng-deep pre[class*='language-'] {
-  background-color: utils.get-color('light-tint');
-  border: 1px solid utils.get-color('medium');
+  background-color: var(--kirby-light-tint);
+  border: 1px solid var(--kirby-medium);
 }
