@@ -102,8 +102,10 @@ jobs:
         uses: actions/checkout@v6.0.2
       - name: Get deployment name for default or feature branch
         if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
+        env:
+          GIT_REF: ${{ github.head_ref || github.ref }}
         run: |
-          branchname="${{ github.head_ref || github.ref }}"
+          branchname="$GIT_REF"
           echo "Github branchname: ${branchname}"
           branchname="${branchname##*/}"
           echo "Removed leading paths - branchname: ${branchname}"
@@ -136,28 +138,34 @@ jobs:
         run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_REF: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
+          PRODUCTION_ENV: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+          REPO: ${{ github.repository }}
         run: |
           payload=$(jq -n \
-            --arg ref "${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}" \
-            --arg environment "${{ env.GH_DEPLOY_ENVIRONMENT }}" \
-            --argjson production_environment ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }} \
+            --arg ref "$DEPLOY_REF" \
+            --arg environment "$GH_DEPLOY_ENVIRONMENT" \
+            --argjson production_environment $PRODUCTION_ENV \
             '{ref: $ref, environment: $environment, production_environment: $production_environment, auto_merge: false, required_contexts: []}')
-          deployment_id=$(echo "$payload" | gh api /repos/${{ github.repository }}/deployments \
+          deployment_id=$(echo "$payload" | gh api /repos/$REPO/deployments \
             --method POST \
             --input - \
             --jq '.id')
           echo "deployment_id=${deployment_id}" >> $GITHUB_OUTPUT
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to in progress
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEPLOYMENT_STATE: in_progress
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.create_deployment.outputs.deployment_id }}
+          RUN_ID: ${{ github.run_id }}
         run: |
-          gh api /repos/${{ github.repository }}/deployments/${{ steps.create_deployment.outputs.deployment_id }}/statuses \
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
             --method POST \
             -f state="$DEPLOYMENT_STATE" \
-            -f log_url="$REPO_URL/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            -f log_url="$REPO_URL/$REPO/actions/runs/$RUN_ID"
       - name: Download Kirby Cookbook dist files
         uses: actions/cache@v5.0.5
         with:
@@ -229,20 +237,27 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEPLOYMENT_STATE: success
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.create_deployment.outputs.deployment_id }}
+          RUN_ID: ${{ github.run_id }}
+          ENVIRONMENT_URL: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
         run: |
-          gh api /repos/${{ github.repository }}/deployments/${{ steps.create_deployment.outputs.deployment_id }}/statuses \
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
             --method POST \
             -f state="$DEPLOYMENT_STATE" \
-            -f log_url="$REPO_URL/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            -f environment_url="${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}"
+            -f log_url="$REPO_URL/$REPO/actions/runs/$RUN_ID" \
+            -f environment_url="$ENVIRONMENT_URL"
       - name: Set deployment status to failure
         id: failed_deployment
         if: failure()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEPLOYMENT_STATE: failure
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.create_deployment.outputs.deployment_id }}
+          RUN_ID: ${{ github.run_id }}
         run: |
-          gh api /repos/${{ github.repository }}/deployments/${{ steps.create_deployment.outputs.deployment_id }}/statuses \
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
             --method POST \
             -f state="$DEPLOYMENT_STATE" \
-            -f log_url="$REPO_URL/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            -f log_url="$REPO_URL/$REPO/actions/runs/$RUN_ID"

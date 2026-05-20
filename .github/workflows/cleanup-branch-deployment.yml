@@ -10,26 +10,34 @@ jobs:
     steps:
       - name: Get latest deployment for branch
         id: get_latest_deployment
-        run: |
-          ref="${{ startsWith(github.event.ref, 'refs/heads/') && '' || 'refs/heads/' }}${{ github.event.ref }}"
-          deployment_id=$(gh api "/repos/${{ github.repository }}/deployments?ref=${ref}" --jq '.[0].id // empty')
-          echo "id=${deployment_id}" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_REF: ${{ github.event.ref }}
+          REF_PREFIX: ${{ startsWith(github.event.ref, 'refs/heads/') && '' || 'refs/heads/' }}
+          REPO: ${{ github.repository }}
+        run: |
+          ref="${REF_PREFIX}${EVENT_REF}"
+          deployment_id=$(gh api "/repos/$REPO/deployments?ref=${ref}" --jq '.[0].id // empty')
+          echo "id=${deployment_id}" >> $GITHUB_OUTPUT
       - name: Set deployment status to inactive
         if: steps.get_latest_deployment.outputs.id != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEPLOYMENT_STATE: inactive
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.get_latest_deployment.outputs.id }}
+          RUN_ID: ${{ github.run_id }}
         run: |
-          gh api /repos/${{ github.repository }}/deployments/${{ steps.get_latest_deployment.outputs.id }}/statuses \
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
             --method POST \
             -f state="$DEPLOYMENT_STATE" \
-            -f log_url="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            -f log_url="https://github.com/$REPO/actions/runs/$RUN_ID"
       - name: Delete deployment
         if: steps.get_latest_deployment.outputs.id != ''
-        run: |
-          gh api /repos/${{ github.repository }}/deployments/${{ steps.get_latest_deployment.outputs.id }} \
-            --method DELETE
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.get_latest_deployment.outputs.id }}
+        run: |
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID \
+            --method DELETE

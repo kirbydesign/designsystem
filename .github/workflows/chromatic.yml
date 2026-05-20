@@ -28,10 +28,10 @@ jobs:
       - name: Check if storybook dist folders exist
         id: check_storybook_folders
         run: |
-          if [ -d ${{ github.workspace }}/dist/storybook/designsystem ]; then
+          if [ -d "$GITHUB_WORKSPACE/dist/storybook/designsystem" ]; then
             echo "designsystem=true" >> $GITHUB_OUTPUT
           fi
-          if [ -d ${{ github.workspace }}/dist/storybook/extensions/angular ]; then
+          if [ -d "$GITHUB_WORKSPACE/dist/storybook/extensions/angular" ]; then
             echo "extensions_angular=true" >> $GITHUB_OUTPUT
           fi
 
