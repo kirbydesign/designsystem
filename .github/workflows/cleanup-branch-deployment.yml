@@ -2,6 +2,9 @@ name: Clean up branch deployment
 on:
   delete
 
+permissions:
+  deployments: write
+
 jobs:
   delete_latest_deployment_for_branch:
     name: Delete latest deployment for branch

@@ -5,6 +5,9 @@ on:
     paths:
       - 'libs/extensions/angular/spot-illustration/src/svgs/**'
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     name: Validation

@@ -8,6 +8,9 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
 
+permissions:
+  contents: read
+
 defaults:
   run:
     shell: bash
@@ -95,6 +98,9 @@ jobs:
     name: Deploy cookbook
     needs: [build_kirby, build_kirby_cookbook]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write      # git push to gh-pages branch
+      deployments: write   # create/update GitHub deployments
     env:
       DOMAIN: 'kirby.design'
     steps:

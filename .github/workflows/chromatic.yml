@@ -5,6 +5,9 @@ on:
     branches-ignore:
       - "gh-pages"
 
+permissions:
+  contents: read
+
 jobs:
   chromatic:
     runs-on: ubuntu-latest
