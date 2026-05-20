@@ -54,6 +54,7 @@ export class SideNavComponent implements OnInit {
   private allShowcaseRoutes: SideNavLink[];
   filteredShowcaseRoutes: SideNavLink[][];
   filteredResourceRoutes: Route[];
+  designTokenRoutes: SideNavLink[];
   filter: string = '';
 
   @ViewChildren('componentLink') componentLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
@@ -69,6 +70,7 @@ export class SideNavComponent implements OnInit {
   ngOnInit() {
     this.mapShowcaseRoutes();
     this.mapResourcesRoutes();
+    this.mapDesignTokenRoutes();
 
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -81,7 +83,7 @@ export class SideNavComponent implements OnInit {
 
   private mapShowcaseRoutes() {
     const routesWithPath = showcaseRoutes[0].children.filter((r) => r.path);
-    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
+    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide && !r.data?.designToken);
     navigableRoutes.sort(this.sortByPath);
 
     this.allShowcaseRoutes = navigableRoutes.map((route) => {
@@ -100,6 +102,19 @@ export class SideNavComponent implements OnInit {
     const resourceLinks = routesWithPath.filter((r) => r.data?.['resourceLink']);
 
     this.filteredResourceRoutes = resourceLinks;
+  }
+
+  private mapDesignTokenRoutes() {
+    const routesWithPath = showcaseRoutes[0].children.filter((r) => r.path);
+    const tokenRoutes = routesWithPath.filter((r) => r.data?.designToken);
+    tokenRoutes.sort(this.sortByPath);
+
+    this.designTokenRoutes = tokenRoutes.map((route) => {
+      return {
+        path: `showcase/${route.path}`,
+        name: kebabToTitleCase(route.path),
+      };
+    });
   }
 
   private sortByPath(a: Route, b: Route): number {

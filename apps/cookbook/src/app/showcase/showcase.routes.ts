@@ -57,6 +57,9 @@ import { HeaderShowcaseComponent } from './header-showcase/header-showcase.compo
 import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 import { TabNavigationShowcaseComponent } from './page-tab-navigation-showcase/tab-navigation-showcase.component';
 import { LabelShowcaseComponent } from './label-showcase/label-showcase.component';
+import { SpacingShowcaseComponent } from './spacing-showcase/spacing-showcase.component';
+import { BordersElevationShowcaseComponent } from './borders-elevation-showcase/borders-elevation-showcase.component';
+import { BreakpointsShowcaseComponent } from './breakpoints-showcase/breakpoints-showcase.component';
 
 export const SHOWCASE_ROUTES: Routes = [
   {
@@ -109,6 +112,9 @@ export const SHOWCASE_ROUTES: Routes = [
       {
         path: 'colors',
         component: ColorsShowcaseComponent,
+        data: {
+          designToken: true,
+        },
       },
       {
         path: 'list',
@@ -171,6 +177,30 @@ export const SHOWCASE_ROUTES: Routes = [
       {
         path: 'fonts',
         component: FontsShowcaseComponent,
+        data: {
+          designToken: true,
+        },
+      },
+      {
+        path: 'spacing',
+        component: SpacingShowcaseComponent,
+        data: {
+          designToken: true,
+        },
+      },
+      {
+        path: 'borders-and-elevation',
+        component: BordersElevationShowcaseComponent,
+        data: {
+          designToken: true,
+        },
+      },
+      {
+        path: 'breakpoints',
+        component: BreakpointsShowcaseComponent,
+        data: {
+          designToken: true,
+        },
       },
       {
         path: 'spinner',
