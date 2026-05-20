@@ -15,7 +15,7 @@ const config = {
     attentionLevel="2"
     size="lg"
     expand="block"
-(click)="overlay.show(true)"
+    (click)="overlay.show(true)"
   >
     Show wrapper loading overlay
   </button>
