@@ -6,7 +6,6 @@
   gap: utils.size('s');
 
   @include utils.media('>=medium') {
-    flex-direction: row;
     gap: utils.size('s');
   }
 }
