@@ -1,0 +1,3 @@
+@use '../design-token-table';
+
+@include design-token-table.copy-token-cell;

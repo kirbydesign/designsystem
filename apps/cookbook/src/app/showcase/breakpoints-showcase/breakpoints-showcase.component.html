@@ -1,0 +1,27 @@
+<p>
+  Breakpoint tokens define responsive layout thresholds. Use with the SCSS
+  <code>media('>=[name]')</code>
+  mixin for media queries. Click any row to copy the
+  <code>var()</code>
+  usage to your clipboard.
+</p>
+<table class="kirby-table kirby-selectable-row layout-fixed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>CSS Custom Property</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (token of breakpoints; track token.name) {
+      <tr [cookbookCopyToken]="token.cssVar">
+        <td>
+          <code>{{ token.name }}</code>
+        </td>
+        <td>
+          <code>{{ token.cssVar }}</code>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
