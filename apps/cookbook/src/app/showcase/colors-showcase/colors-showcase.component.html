@@ -11,7 +11,7 @@
 </p>
 
 <h2>Brand Colors</h2>
-<table class="kirby-table kirby-selectable-row layout-fixed">
+<table class="kirby-table layout-fixed">
   <thead>
     <tr>
       <th>Name</th>
@@ -21,7 +21,7 @@
   </thead>
   <tbody>
     @for (token of brandColors; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>
@@ -47,7 +47,7 @@
   </thead>
   <tbody>
     @for (token of notificationColors; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>
@@ -63,7 +63,7 @@
 </table>
 
 <h2>System Colors</h2>
-<table class="kirby-table kirby-selectable-row layout-fixed system-colors">
+<table class="kirby-table layout-fixed system-colors">
   <thead>
     <tr>
       <th>Name</th>
@@ -73,7 +73,7 @@
   </thead>
   <tbody>
     @for (token of systemColors; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>
@@ -89,7 +89,7 @@
 </table>
 
 <h2>Text Colors</h2>
-<table class="kirby-table kirby-selectable-row layout-fixed">
+<table class="kirby-table layout-fixed">
   <thead>
     <tr>
       <th>Name</th>
@@ -99,7 +99,7 @@
   </thead>
   <tbody>
     @for (token of textColors; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar" kirby-selectable-row>
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>

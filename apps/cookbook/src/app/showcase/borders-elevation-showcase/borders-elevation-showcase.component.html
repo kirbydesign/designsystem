@@ -11,7 +11,7 @@
   <code>border-radius('n')</code>
   or as CSS custom properties.
 </p>
-<table class="kirby-table kirby-selectable-row layout-fixed">
+<table class="kirby-table layout-fixed">
   <thead>
     <tr>
       <th>Name</th>
@@ -21,7 +21,7 @@
   </thead>
   <tbody>
     @for (token of borderRadii; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>
@@ -29,7 +29,10 @@
           <code>{{ token.cssVar }}</code>
         </td>
         <td>
-          <span class="radius-sample" [style.border-radius]="'var(' + token.cssVar + ')'"></span>
+          <span
+            [class]="['radius-sample', token.name]"
+            [style.border-top-right-radius]="'var(' + token.cssVar + ')'"
+          ></span>
         </td>
       </tr>
     }
@@ -38,7 +41,7 @@
 
 <h2>Elevation</h2>
 <p>Elevation tokens provide consistent box-shadow layering for depth.</p>
-<table class="kirby-table kirby-selectable-row layout-fixed">
+<table class="kirby-table layout-fixed">
   <thead>
     <tr>
       <th>Level</th>
@@ -48,7 +51,7 @@
   </thead>
   <tbody>
     @for (token of elevations; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>

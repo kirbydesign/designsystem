@@ -12,7 +12,7 @@
 </p>
 
 <h2>Font Sizes</h2>
-<table class="kirby-table kirby-selectable-row layout-fixed">
+<table class="kirby-table layout-fixed">
   <thead>
     <tr>
       <th>Name</th>
@@ -22,7 +22,7 @@
   </thead>
   <tbody>
     @for (token of fontSizes; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>
@@ -38,7 +38,7 @@
 </table>
 
 <h2>Font Weights</h2>
-<table class="kirby-table kirby-selectable-row layout-fixed">
+<table class="kirby-table layout-fixed">
   <thead>
     <tr>
       <th>Name</th>
@@ -48,7 +48,7 @@
   </thead>
   <tbody>
     @for (token of fontWeights; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>
@@ -70,7 +70,7 @@
   Line-heights are paired with their corresponding font-size, to provide vertical rythm and improve
   readability.
 </p>
-<table class="kirby-table kirby-selectable-row layout-fixed">
+<table class="kirby-table layout-fixed">
   <thead>
     <tr>
       <th>Name</th>
@@ -80,7 +80,7 @@
   </thead>
   <tbody>
     @for (token of lineHeights; track token.name) {
-      <tr [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
         <td>
           <code>{{ token.name }}</code>
         </td>
