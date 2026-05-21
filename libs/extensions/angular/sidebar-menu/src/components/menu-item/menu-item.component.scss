@@ -100,6 +100,8 @@
   align-items: center;
   text-align: left;
   word-break: break-word;
+  hyphens: auto;
+  hyphenate-limit-chars: 10 4 4;
   font-size: utils.font-size('n');
   line-height: utils.line-height('m');
 }
