@@ -12,11 +12,11 @@ export class CopyTokenDirective {
   async onClick() {
     await navigator.clipboard.writeText(`var(${this.cssVar})`);
     const row = this.el.nativeElement.closest('tr');
-    const cell = row?.querySelectorAll('td')[1];
-    if (cell) {
-      cell.classList.add('copied');
+    const target = row ? row.querySelectorAll('td')[1] : this.el.nativeElement;
+    if (target) {
+      target.classList.add('copied');
       window.setTimeout(() => {
-        cell.classList.remove('copied');
+        target.classList.remove('copied');
       }, 1500);
     }
   }
