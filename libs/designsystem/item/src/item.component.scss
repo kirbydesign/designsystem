@@ -7,6 +7,8 @@
   display: block;
   position: relative;
 
+  --kirby-item-detail-color: #{utils.get-text-color('semi-dark')};
+
   &.sm,
   :host-context(kirby-card.menu-popover) &:not([size]) {
     ion-item {
@@ -29,6 +31,10 @@
     position: absolute;
     width: utils.size('s');
     z-index: 1;
+  }
+
+  @include utils.hover {
+    --kirby-item-detail-color: #{utils.get-text-color('black')};
   }
 }
 
