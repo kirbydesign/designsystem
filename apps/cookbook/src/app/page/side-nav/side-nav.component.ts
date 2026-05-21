@@ -25,7 +25,10 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { routes as appRoutes } from '../../app.routes';
-import { SHOWCASE_ROUTES as showcaseRoutes } from '../../showcase/showcase.routes';
+import {
+  FOUNDATION_SHOWCASE_ROUTES as foundationRoutes,
+  COMPONENT_SHOWCASE_ROUTES as showcaseRoutes,
+} from '../../showcase/showcase.routes';
 
 const KEY_DOWN = 'ArrowDown';
 
@@ -51,10 +54,10 @@ interface SideNavLink {
   ],
 })
 export class SideNavComponent implements OnInit {
-  private allShowcaseRoutes: SideNavLink[];
+  private allComponentShowcaseRoutes: SideNavLink[];
   filteredShowcaseRoutes: SideNavLink[][];
   filteredResourceRoutes: Route[];
-  designTokenRoutes: SideNavLink[];
+  foundationRoutes: SideNavLink[];
   filter: string = '';
 
   @ViewChildren('componentLink') componentLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
@@ -70,7 +73,7 @@ export class SideNavComponent implements OnInit {
   ngOnInit() {
     this.mapShowcaseRoutes();
     this.mapResourcesRoutes();
-    this.mapDesignTokenRoutes();
+    this.mapFoundationRoutes();
 
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -83,10 +86,10 @@ export class SideNavComponent implements OnInit {
 
   private mapShowcaseRoutes() {
     const routesWithPath = showcaseRoutes[0].children.filter((r) => r.path);
-    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide && !r.data?.designToken);
+    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
     navigableRoutes.sort(this.sortByPath);
 
-    this.allShowcaseRoutes = navigableRoutes.map((route) => {
+    this.allComponentShowcaseRoutes = navigableRoutes.map((route) => {
       return {
         path: `showcase/${route.path}`,
         name: kebabToTitleCase(route.path),
@@ -104,15 +107,16 @@ export class SideNavComponent implements OnInit {
     this.filteredResourceRoutes = resourceLinks;
   }
 
-  private mapDesignTokenRoutes() {
-    const routesWithPath = showcaseRoutes[0].children.filter((r) => r.path);
-    const tokenRoutes = routesWithPath.filter((r) => r.data?.designToken);
-    tokenRoutes.sort(this.sortByPath);
+  private mapFoundationRoutes() {
+    const routesWithPath = foundationRoutes[0].children.filter((r) => r.path);
+    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
+    navigableRoutes.sort(this.sortByPath);
 
-    this.designTokenRoutes = tokenRoutes.map((route) => {
+    this.foundationRoutes = navigableRoutes.map((route) => {
       return {
         path: `showcase/${route.path}`,
         name: kebabToTitleCase(route.path),
+        active: this.router.url.endsWith(route.path),
       };
     });
   }
@@ -158,7 +162,7 @@ export class SideNavComponent implements OnInit {
 
   private applyComponentFilter(stringToMatch: string): void {
     this.filter = stringToMatch;
-    let filteredLinks: SideNavLink[] = this.allShowcaseRoutes;
+    let filteredLinks: SideNavLink[] = this.allComponentShowcaseRoutes;
 
     if (stringToMatch.length > 0) {
       const caseSensitive = stringToMatch[0].toUpperCase() === stringToMatch[0];

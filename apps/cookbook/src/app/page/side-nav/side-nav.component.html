@@ -44,11 +44,11 @@
     (keydown.ArrowUp)="onLinksArrowUpDown($event, 'resources')"
     (keydown.ArrowDown)="onLinksArrowUpDown($event, 'resources')"
   >
-    <h2 class="kirby-text-normal">Design Tokens</h2>
+    <h2 class="kirby-text-normal">Foundation</h2>
     <hr />
     <nav>
       <ul>
-        @for (item of designTokenRoutes; track item.path) {
+        @for (item of foundationRoutes; track item.path) {
           <li>
             <a
               [routerLink]="item.path"
@@ -61,6 +61,17 @@
             </a>
           </li>
         }
+        <hr aria-hidden="true" />
+        <li>
+          <a
+            routerLinkActive="is-selected"
+            (click)="closeMenu()"
+            class="list-item-link"
+            #resourceLink
+          >
+            Grid
+          </a>
+        </li>
       </ul>
     </nav>
   </kirby-card>

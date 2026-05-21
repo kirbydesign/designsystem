@@ -58,10 +58,44 @@ import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 import { TabNavigationShowcaseComponent } from './page-tab-navigation-showcase/tab-navigation-showcase.component';
 import { LabelShowcaseComponent } from './label-showcase/label-showcase.component';
 import { SpacingShowcaseComponent } from './spacing-showcase/spacing-showcase.component';
-import { BordersElevationShowcaseComponent } from './borders-elevation-showcase/borders-elevation-showcase.component';
+import { BordersShowcaseComponent } from './borders-showcase/borders-showcase.component';
 import { BreakpointsShowcaseComponent } from './breakpoints-showcase/breakpoints-showcase.component';
+import { ElevationShowcaseComponent } from './elevation-showcase/elevation-showcase.component';
 
-export const SHOWCASE_ROUTES: Routes = [
+export const FOUNDATION_SHOWCASE_ROUTES: Routes = [
+  {
+    path: '',
+    component: ShowcaseComponent,
+    children: [
+      {
+        path: 'colors',
+        component: ColorsShowcaseComponent,
+      },
+      {
+        path: 'typography',
+        component: TypographyShowcaseComponent,
+      },
+      {
+        path: 'spacing',
+        component: SpacingShowcaseComponent,
+      },
+      {
+        path: 'borders',
+        component: BordersShowcaseComponent,
+      },
+      {
+        path: 'breakpoints',
+        component: BreakpointsShowcaseComponent,
+      },
+      {
+        path: 'elevation',
+        component: ElevationShowcaseComponent,
+      },
+    ],
+  },
+];
+
+export const COMPONENT_SHOWCASE_ROUTES: Routes = [
   {
     path: '',
     component: ShowcaseComponent,
@@ -110,13 +144,6 @@ export const SHOWCASE_ROUTES: Routes = [
         component: CardShowcaseComponent,
       },
       {
-        path: 'colors',
-        component: ColorsShowcaseComponent,
-        data: {
-          designToken: true,
-        },
-      },
-      {
         path: 'list',
         component: ListShowcaseComponent,
       },
@@ -152,10 +179,6 @@ export const SHOWCASE_ROUTES: Routes = [
         component: TabsShowcaseComponent,
       },
       {
-        path: 'grid',
-        component: GridShowcaseComponent,
-      },
-      {
         path: 'chart',
         component: ChartShowcaseComponent,
       },
@@ -172,34 +195,6 @@ export const SHOWCASE_ROUTES: Routes = [
         component: CookbookChartBarConfigShowcaseComponent,
         data: {
           hide: true, // hidden until we are ready to get users on it.
-        },
-      },
-      {
-        path: 'typography',
-        component: TypographyShowcaseComponent,
-        data: {
-          designToken: true,
-        },
-      },
-      {
-        path: 'spacing',
-        component: SpacingShowcaseComponent,
-        data: {
-          designToken: true,
-        },
-      },
-      {
-        path: 'borders-and-elevation',
-        component: BordersElevationShowcaseComponent,
-        data: {
-          designToken: true,
-        },
-      },
-      {
-        path: 'breakpoints',
-        component: BreakpointsShowcaseComponent,
-        data: {
-          designToken: true,
         },
       },
       {
@@ -337,4 +332,9 @@ export const SHOWCASE_ROUTES: Routes = [
       },
     ],
   },
+];
+
+export const ALL_SHOWCASE_ROUTES: Routes = [
+  ...FOUNDATION_SHOWCASE_ROUTES,
+  ...COMPONENT_SHOWCASE_ROUTES,
 ];
