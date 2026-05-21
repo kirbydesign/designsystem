@@ -8,12 +8,12 @@ interface TokenEntry {
 }
 
 @Component({
-  selector: 'cookbook-borders-elevation-showcase',
-  templateUrl: './borders-elevation-showcase.component.html',
-  styleUrls: ['./borders-elevation-showcase.component.scss'],
+  selector: 'cookbook-borders-showcase',
+  templateUrl: './borders-showcase.component.html',
+  styleUrls: ['./borders-showcase.component.scss'],
   imports: [CopyTokenDirective],
 })
-export class BordersElevationShowcaseComponent {
+export class BordersShowcaseComponent {
   borderRadii: TokenEntry[] = [
     { name: 'xxs', cssVar: '--kirby-border-radius-xxs' },
     { name: 'xs', cssVar: '--kirby-border-radius-xs' },
@@ -23,11 +23,5 @@ export class BordersElevationShowcaseComponent {
     { name: 'xl', cssVar: '--kirby-border-radius-xl' },
     { name: 'circle', cssVar: '--kirby-border-radius-circle' },
     { name: 'pill', cssVar: '--kirby-border-radius-pill' },
-  ];
-
-  elevations: TokenEntry[] = [
-    { name: '2', cssVar: '--kirby-elevation-2' },
-    { name: '4', cssVar: '--kirby-elevation-4' },
-    { name: '8', cssVar: '--kirby-elevation-8' },
   ];
 }

@@ -1,0 +1,12 @@
+@use '../design-token-table';
+@use '../showcase.shared';
+
+@include design-token-table.copy-token-cell;
+
+.elevation-sample {
+  display: block;
+  width: calc(var(--kirby-spacing-xxl) * 2);
+  height: var(--kirby-spacing-xxxl);
+  background-color: var(--kirby-white);
+  border-radius: var(--kirby-border-radius-s);
+}
