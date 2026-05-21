@@ -6,6 +6,12 @@
     width: 200px;
   }
 
+  th:last-child,
+  td:last-child {
+    width: 1px; // make cell follow content width
+    white-space: nowrap;
+  }
+
   tbody td:nth-child(2) {
     position: relative;
 

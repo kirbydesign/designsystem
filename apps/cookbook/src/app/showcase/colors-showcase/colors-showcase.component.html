@@ -11,11 +11,12 @@
 </p>
 
 <h2>Brand Colors</h2>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Swatch</th>
     </tr>
   </thead>
@@ -28,6 +29,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -37,11 +39,12 @@
 </table>
 
 <h2>Notification Colors</h2>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Swatch</th>
     </tr>
   </thead>
@@ -54,6 +57,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -63,11 +67,12 @@
 </table>
 
 <h2>System Colors</h2>
-<table class="kirby-table layout-fixed system-colors">
+<table class="kirby-table system-colors">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Swatch</th>
     </tr>
   </thead>
@@ -80,6 +85,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -89,11 +95,12 @@
 </table>
 
 <h2>Text Colors</h2>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Swatch</th>
     </tr>
   </thead>
@@ -106,6 +113,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -122,7 +130,7 @@
   <code>var()</code>
   usage.
 </p>
-<table class="kirby-table layout-fixed decoration-table">
+<table class="kirby-table decoration-table">
   <thead>
     <tr>
       <th>Name</th>

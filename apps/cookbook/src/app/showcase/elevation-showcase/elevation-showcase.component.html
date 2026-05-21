@@ -6,11 +6,12 @@
 
 <h2>Elevation</h2>
 <p>Elevation tokens provide consistent box-shadow layering for depth.</p>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Level</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Preview</th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span class="elevation-sample" [style.box-shadow]="'var(' + token.cssVar + ')'"></span>
         </td>

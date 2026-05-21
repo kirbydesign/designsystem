@@ -12,11 +12,12 @@
 </p>
 
 <h2>Font Sizes</h2>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Preview</th>
     </tr>
   </thead>
@@ -29,6 +30,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span class="font-size-sample" [style.font-size]="'var(' + token.cssVar + ')'">Aa</span>
         </td>
@@ -38,11 +40,12 @@
 </table>
 
 <h2>Font Weights</h2>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Preview</th>
     </tr>
   </thead>
@@ -55,6 +58,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span class="font-weight-sample" [style.font-weight]="'var(' + token.cssVar + ')'">
             The quick brown fox
@@ -70,11 +74,12 @@
   Line-heights are paired with their corresponding font-size, to provide vertical rythm and improve
   readability.
 </p>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Preview</th>
     </tr>
   </thead>
@@ -87,6 +92,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span
             class="line-height-sample"

@@ -10,11 +10,12 @@
   <code>border-radius('n')</code>
   or as CSS custom properties.
 </p>
-<table class="kirby-table layout-fixed">
+<table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
+      <th>Description</th>
       <th>Preview</th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
+        <td>{{ token.description }}</td>
         <td>
           <span
             [class]="['radius-sample', token.name]"

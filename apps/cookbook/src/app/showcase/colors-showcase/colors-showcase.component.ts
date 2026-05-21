@@ -5,6 +5,7 @@ import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive
 interface ColorTokenEntry {
   name: string;
   cssVar: string;
+  description: string;
 }
 
 interface DecorationColorGroup {
@@ -20,35 +21,39 @@ interface DecorationColorGroup {
 })
 export class ColorsShowcaseComponent {
   brandColors: ColorTokenEntry[] = [
-    { name: 'primary', cssVar: '--kirby-primary' },
-    { name: 'secondary', cssVar: '--kirby-secondary' },
-    { name: 'tertiary', cssVar: '--kirby-tertiary' },
+    { name: 'primary', cssVar: '--kirby-primary', description: 'Main brand color' },
+    { name: 'secondary', cssVar: '--kirby-secondary', description: 'Supporting brand color' },
+    { name: 'tertiary', cssVar: '--kirby-tertiary', description: 'Accent brand color' },
   ];
 
   notificationColors: ColorTokenEntry[] = [
-    { name: 'success', cssVar: '--kirby-success' },
-    { name: 'warning', cssVar: '--kirby-warning' },
-    { name: 'danger', cssVar: '--kirby-danger' },
+    { name: 'success', cssVar: '--kirby-success', description: 'Positive feedback' },
+    { name: 'warning', cssVar: '--kirby-warning', description: 'Caution feedback' },
+    { name: 'danger', cssVar: '--kirby-danger', description: 'Error or destructive' },
   ];
 
   systemColors: ColorTokenEntry[] = [
-    { name: 'background-color', cssVar: '--kirby-background-color' },
-    { name: 'white', cssVar: '--kirby-white' },
-    { name: 'light', cssVar: '--kirby-light' },
-    { name: 'semi-light', cssVar: '--kirby-semi-light' },
-    { name: 'medium', cssVar: '--kirby-medium' },
-    { name: 'semi-dark', cssVar: '--kirby-semi-dark' },
-    { name: 'dark', cssVar: '--kirby-dark' },
-    { name: 'black', cssVar: '--kirby-black' },
+    {
+      name: 'background-color',
+      cssVar: '--kirby-background-color',
+      description: 'Page background',
+    },
+    { name: 'white', cssVar: '--kirby-white', description: 'Surface / card background' },
+    { name: 'light', cssVar: '--kirby-light', description: 'Light neutral' },
+    { name: 'semi-light', cssVar: '--kirby-semi-light', description: 'Borders, dividers' },
+    { name: 'medium', cssVar: '--kirby-medium', description: 'Disabled / placeholder' },
+    { name: 'semi-dark', cssVar: '--kirby-semi-dark', description: 'Secondary text' },
+    { name: 'dark', cssVar: '--kirby-dark', description: 'Primary text' },
+    { name: 'black', cssVar: '--kirby-black', description: 'Highest contrast' },
   ];
 
   textColors: ColorTokenEntry[] = [
-    { name: 'white', cssVar: '--kirby-text-color-white' },
-    { name: 'semi-dark', cssVar: '--kirby-text-color-semi-dark' },
-    { name: 'black', cssVar: '--kirby-text-color-black' },
-    { name: 'danger', cssVar: '--kirby-text-color-danger' },
-    { name: 'positive', cssVar: '--kirby-text-color-positive' },
-    { name: 'negative', cssVar: '--kirby-text-color-negative' },
+    { name: 'white', cssVar: '--kirby-text-color-white', description: 'Text on dark backgrounds' },
+    { name: 'semi-dark', cssVar: '--kirby-text-color-semi-dark', description: 'Secondary text' },
+    { name: 'black', cssVar: '--kirby-text-color-black', description: 'Primary text' },
+    { name: 'danger', cssVar: '--kirby-text-color-danger', description: 'Error text' },
+    { name: 'positive', cssVar: '--kirby-text-color-positive', description: 'Positive value text' },
+    { name: 'negative', cssVar: '--kirby-text-color-negative', description: 'Negative value text' },
   ];
 
   decorationColorGroups: DecorationColorGroup[] = this.buildDecorationColorGroups();
