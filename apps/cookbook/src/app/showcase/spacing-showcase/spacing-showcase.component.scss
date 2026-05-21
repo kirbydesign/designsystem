@@ -1,4 +1,5 @@
 @use '../design-token-table';
+@use '../showcase.shared';
 
 @include design-token-table.copy-token-cell;
 
