@@ -1,25 +1,12 @@
 import { Component } from '@angular/core';
-import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CardExampleComponent } from './examples/card';
+import { ServiceExampleComponent } from './examples/service';
+import { DefaultExampleComponent } from './examples/default';
 
 @Component({
   selector: 'cookbook-loading-overlay-example',
   templateUrl: './loading-overlay-example.component.html',
   styleUrls: ['./loading-overlay-example.component.scss'],
-  imports: [LoadingOverlayComponent, ButtonComponent],
+  imports: [CardExampleComponent, DefaultExampleComponent, ServiceExampleComponent],
 })
-export class LoadingOverlayExampleComponent {
-  public isLoading = false;
-  public showBackdrop = false;
-  public hideContent = false;
-
-  public showWrapperLoadingOverlay(showBackdrop: boolean, hideContent?: boolean) {
-    this.showBackdrop = showBackdrop;
-    this.hideContent = hideContent;
-    this.isLoading = true;
-
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 5000);
-  }
-}
+export class LoadingOverlayExampleComponent {}
