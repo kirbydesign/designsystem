@@ -16,14 +16,17 @@
     <li><strong>Checked</strong></li>
     <li><strong>Disabled</strong></li>
   </ul>
-  <cookbook-example-viewer>
+  <cookbook-example-viewer [html]="toggleStateExample.template">
     <div class="example-frame">
-      <cookbook-toggle-state-example></cookbook-toggle-state-example>
+      <cookbook-toggle-state-example #toggleStateExample></cookbook-toggle-state-example>
     </div>
   </cookbook-example-viewer>
 
-  <h2>Examples</h2>
-  <p>Always add a label when using a toggle. Use a kirby-item for the label.</p>
+  <h2>In List</h2>
+  <p>
+    Most commonly, toggles appear in the end-slot of items in a list. A label should always be added
+    to describe what the control will do when checked.
+  </p>
   <cookbook-example-viewer [html]="toggleItemExample.template">
     <div class="example-frame">
       <cookbook-toggle-item-example #toggleItemExample></cookbook-toggle-item-example>

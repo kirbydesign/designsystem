@@ -3,10 +3,9 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-toggle-state-example',
-  template: `
-    <kirby-toggle slot="end"></kirby-toggle>
-    <kirby-toggle checked="true" (checkedChange)="onCheckedChange($event)" slot="end"></kirby-toggle>
-    <kirby-toggle disabled="true" slot="end"></kirby-toggle>
+  template: `<kirby-toggle slot="end"></kirby-toggle>
+<kirby-toggle checked="true" (checkedChange)="onCheckedChange($event)" slot="end"></kirby-toggle>
+<kirby-toggle disabled="true" slot="end"></kirby-toggle>
 `,
 };
 
@@ -18,8 +17,4 @@ const config = {
 })
 export class ToggleStateExampleComponent {
   template = config.template;
-
-  onCheckedChange(checked: boolean) {
-    console.log(`Toggle onCheckedChange: ${checked}`);
-  }
 }

@@ -7,19 +7,17 @@ import {
   ListSectionHeaderDirective,
 } from '@kirbydesign/designsystem/list';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
-import { BaseToggleComponent } from '../base-toggle.component';
 
 const config = {
   selector: 'cookbook-toggle-item-example',
-  template: `
- <kirby-list [items]="items" [getSectionName]="getSectionName">
-   <kirby-list-section-header
+  template: `<kirby-list [items]="items" [getSectionName]="getSectionName">
+  <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section">
   </kirby-list-section-header>
-   <kirby-item *kirbyListItemTemplate="let item">
+  <kirby-item *kirbyListItemTemplate="let item">
     <kirby-toggle slot="end">{{item.title}}</kirby-toggle>
-   </kirby-item>
+  </kirby-item>
 </kirby-list>
 `,
 };
@@ -39,14 +37,14 @@ const config = {
     ListSectionHeaderDirective,
   ],
 })
-export class ToggleItemExampleComponent extends BaseToggleComponent {
+export class ToggleItemExampleComponent {
   template: string = config.template;
 
-  onCheckedChange(checked: boolean) {
-    console.log('Checked changed:', checked);
-  }
+  items = [
+    { id: 0, title: 'Use option' },
+    { id: 1, title: 'Show option' },
+    { id: 3, title: 'Use option' },
+  ];
 
-  getSectionName(item: any): string {
-    return item.id < 4 ? 'Label for the group below' : 'Label for another the group';
-  }
+  getSectionName = () => 'Label for the group below';
 }
