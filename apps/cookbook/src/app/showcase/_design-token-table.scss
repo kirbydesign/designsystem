@@ -1,6 +1,11 @@
 @use '../shared/mini-toast';
 
 @mixin copy-token-cell {
+  th:first-child,
+  td:first-child {
+    width: 200px;
+  }
+
   tbody td:nth-child(2) {
     position: relative;
 
