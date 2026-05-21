@@ -39,7 +39,7 @@ jobs:
           fi
 
       - name: Publish Designsystem  to Chromatic
-        uses: chromaui/action@7aca53e7aa87489020a97f633c1e7e82c12e5973 # 1.0.0
+        uses: chromaui/action@7aca53e7aa87489020a97f633c1e7e82c12e5973 # 17.0.0
         # If designsystem storybook dist has been built, it means project might have been affected and should be tested
         if: steps.check_storybook_folders.outputs.designsystem == 'true'
         with:
@@ -52,7 +52,7 @@ jobs:
       - name: Publish Extensions to Chromatic
       # If extensions storybook dist has been built, it means project might have been affected and should be tested
         if: steps.check_storybook_folders.outputs.extensions_angular == 'true'
-        uses: chromaui/action@7aca53e7aa87489020a97f633c1e7e82c12e5973 # 1.0.0
+        uses: chromaui/action@7aca53e7aa87489020a97f633c1e7e82c12e5973 # 17.0.0
         with:
           projectToken: ${{ secrets.EXTENSIONS_CHROMATIC_PROJECT_TOKEN }}
           workingDir: libs/extensions/angular
