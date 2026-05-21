@@ -146,7 +146,7 @@ type Story = StoryObj<ComboboxComponent>;
 
 /**
  * When a user starts typing in the input field, options are filtered so the dropdown will display only matching items. When given a simple list of string, the default filtering matches directly against  the value of each string.
- * A selected value can be cleared by deleting the text and pressing `Enter`, `Tab`, or `Esc`.
+ * A selected value can be cleared by deleting the text.
  */
 export const Default: Story = {
   args: {
