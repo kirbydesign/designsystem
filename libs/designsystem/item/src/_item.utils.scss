@@ -54,6 +54,10 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
   @include utils.slotted('[detail]', '.kirby-item-detail') {
     color: utils.get-text-color('semi-dark');
+
+    &:hover {
+      color: #{utils.get-text-color('black')};
+    }
   }
 
   @include utils.slotted('[wrap]', '.kirby-item-wrap') {

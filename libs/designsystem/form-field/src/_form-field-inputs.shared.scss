@@ -79,6 +79,10 @@ $form-field-label-height: 24px;
   &::placeholder {
     color: var(--kirby-inputs-placeholder-color);
   }
+
+  &:hover::placeholder {
+    color: #{utils.get-text-color('black')};
+  }
 }
 
 // Safari on iOS
