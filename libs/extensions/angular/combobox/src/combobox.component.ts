@@ -133,6 +133,14 @@ export class ComboboxComponent
   public noSearchResultsText = 'No results found.';
 
   /**
+   * The text announced by screen readers when the selection is cleared.
+   */
+  @Input()
+  public selectionClearedText = 'Selection cleared.';
+
+  public _liveRegionText = '';
+
+  /**
    * The name of the property to use as the display text for each item.
    */
   @Input()
@@ -677,6 +685,12 @@ export class ComboboxComponent
 
   private clearSelection(): void {
     this.selectItem(undefined);
+    this._liveRegionText = this.selectionClearedText;
+    // Reset after a short delay so the same message can be announced again on subsequent clears
+    setTimeout(() => {
+      this._liveRegionText = '';
+      this.cdr.markForCheck();
+    }, 1000);
   }
 
   private updateSearchResults(inputValue: string): void {

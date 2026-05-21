@@ -104,6 +104,7 @@ const meta: Meta<ComboboxComponent> = {
         'disabled',
         'itemHeight',
         'noSearchResultsText',
+        'selectionClearedText',
         'searchFunction',
         'hasError',
         'hasErrorChange',
