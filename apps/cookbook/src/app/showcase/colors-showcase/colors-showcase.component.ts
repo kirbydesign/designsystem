@@ -1,39 +1,68 @@
 import { Component } from '@angular/core';
 
-import { ColorHelper, KirbyColor } from '@kirbydesign/designsystem';
-import { NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
+
+interface ColorTokenEntry {
+  name: string;
+  cssVar: string;
+}
+
+interface DecorationColorGroup {
+  hue: string;
+  tokens: { name: string; cssVar: string; step: number }[];
+}
 
 @Component({
   selector: 'cookbook-colors-showcase',
   templateUrl: './colors-showcase.component.html',
   styleUrls: ['./colors-showcase.component.scss'],
-  imports: [NgTemplateOutlet, SlicePipe],
+  imports: [CopyTokenDirective],
 })
 export class ColorsShowcaseComponent {
-  selectedColor = 'primary';
-  selectedOnColor = 'primary-contrast';
-  brandColors = ColorHelper.brandColors;
-  notificationColors = ColorHelper.notificationColors;
-  decorationColors = ColorHelper.decorationColors;
-  systemColors = ColorHelper.systemColors;
-  textColors = ColorHelper.textColors;
+  brandColors: ColorTokenEntry[] = [
+    { name: 'primary', cssVar: '--kirby-primary' },
+    { name: 'secondary', cssVar: '--kirby-secondary' },
+    { name: 'tertiary', cssVar: '--kirby-tertiary' },
+  ];
 
-  onColorClick(color: KirbyColor) {
-    this.selectedColor = color.name;
-    this.selectedOnColor = color.name + '-contrast';
-  }
+  notificationColors: ColorTokenEntry[] = [
+    { name: 'success', cssVar: '--kirby-success' },
+    { name: 'warning', cssVar: '--kirby-warning' },
+    { name: 'danger', cssVar: '--kirby-danger' },
+  ];
 
-  async onDecorationColorClick(event: UIEvent, name: string, step: number) {
-    const colorVariable = this.getDecorationColorVariable(name, step);
-    await navigator.clipboard.writeText(colorVariable);
-    const stepElement = event.target as HTMLElement;
-    stepElement.classList.add('copied');
-    window.setTimeout(() => {
-      stepElement.classList.remove('copied');
-    }, 1500);
-  }
+  systemColors: ColorTokenEntry[] = [
+    { name: 'background-color', cssVar: '--kirby-background-color' },
+    { name: 'white', cssVar: '--kirby-white' },
+    { name: 'light', cssVar: '--kirby-light' },
+    { name: 'semi-light', cssVar: '--kirby-semi-light' },
+    { name: 'medium', cssVar: '--kirby-medium' },
+    { name: 'semi-dark', cssVar: '--kirby-semi-dark' },
+    { name: 'dark', cssVar: '--kirby-dark' },
+    { name: 'black', cssVar: '--kirby-black' },
+  ];
 
-  getDecorationColorVariable(name: string, step: number) {
-    return `var(--kirby-decoration-color-${name}-${step})`;
+  textColors: ColorTokenEntry[] = [
+    { name: 'white', cssVar: '--kirby-text-color-white' },
+    { name: 'semi-dark', cssVar: '--kirby-text-color-semi-dark' },
+    { name: 'black', cssVar: '--kirby-text-color-black' },
+    { name: 'danger', cssVar: '--kirby-text-color-danger' },
+    { name: 'positive', cssVar: '--kirby-text-color-positive' },
+    { name: 'negative', cssVar: '--kirby-text-color-negative' },
+  ];
+
+  decorationColorGroups: DecorationColorGroup[] = this.buildDecorationColorGroups();
+
+  private buildDecorationColorGroups(): DecorationColorGroup[] {
+    const hues = ['blue', 'green', 'purple', 'red', 'yellow', 'orange'];
+    const steps = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+    return hues.map((hue) => ({
+      hue,
+      tokens: steps.map((step) => ({
+        name: `${hue}-${step}`,
+        cssVar: `--kirby-decoration-color-${hue}-${step}`,
+        step,
+      })),
+    }));
   }
 }
