@@ -1,0 +1,13 @@
+@use '../design-token-table';
+@use '../showcase.shared';
+
+@include design-token-table.copy-token-cell;
+
+.font-size-sample {
+  line-height: 1;
+}
+
+.line-height-sample {
+  font-size: var(--kirby-font-size-n);
+  background-color: var(--kirby-semi-light);
+}

@@ -19,7 +19,7 @@ import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
-import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
+import { TypographyShowcaseComponent } from './typography-showcase/typography-showcase.component';
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
@@ -175,8 +175,8 @@ export const SHOWCASE_ROUTES: Routes = [
         },
       },
       {
-        path: 'fonts',
-        component: FontsShowcaseComponent,
+        path: 'typography',
+        component: TypographyShowcaseComponent,
         data: {
           designToken: true,
         },
