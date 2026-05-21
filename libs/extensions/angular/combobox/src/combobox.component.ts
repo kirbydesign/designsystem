@@ -695,6 +695,14 @@ export class ComboboxComponent
 
   private updateSearchResults(inputValue: string): void {
     this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
+
+    if (inputValue && this.searchItems.length === 0) {
+      this._liveRegionText = this.noSearchResultsText;
+      setTimeout(() => {
+        this._liveRegionText = '';
+        this.cdr.markForCheck();
+      }, 1000);
+    }
   }
 
   protected onPopoverWillHide() {
