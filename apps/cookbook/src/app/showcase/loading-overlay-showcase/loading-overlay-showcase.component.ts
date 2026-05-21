@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 // @ts-expect-error TypeScript cannot provide types based on attributes yet
-import exampleHtml from '../../examples/loading-overlay-example/loading-overlay-example.component.html' with { loader: 'text' };
+import exampleHtml from '../../examples/loading-overlay-example/loading-overlay-example.component.html' with {
+  loader: 'text',
+};
 import {
   ApiDescriptionPropertiesComponent,
   ApiDescriptionProperty,
 } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
-import { LoadingOverlayExampleComponent } from '../../examples/loading-overlay-example/loading-overlay-example.component';
-import { LoadingOverlayServiceExampleComponent } from '../../examples/loading-overlay-example/service/loading-overlay-service-example.component';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { CardExampleComponent } from '~/app/examples/loading-overlay-example/examples/card';
+import { DefaultExampleComponent } from '~/app/examples/loading-overlay-example/examples/default';
+import { ServiceExampleComponent } from '~/app/examples/loading-overlay-example/examples/service';
 
 @Component({
   selector: 'cookbook-loading-overlay-showcase',
@@ -16,10 +19,11 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
   styleUrls: ['./loading-overlay-showcase.component.scss'],
   imports: [
     ExampleViewerComponent,
-    LoadingOverlayExampleComponent,
     ApiDescriptionPropertiesComponent,
-    LoadingOverlayServiceExampleComponent,
     ImportViewerComponent,
+    CardExampleComponent,
+    DefaultExampleComponent,
+    ServiceExampleComponent,
   ],
 })
 export class LoadingOverlayShowcaseComponent {
