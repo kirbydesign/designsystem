@@ -175,7 +175,7 @@ jobs:
           mkdir -p designsystem_web/branch
           if [ $IS_RELEASE == "true" ]; then
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/browser/index.html
-            find designsystem_web -maxdepth 1 -mindepth 1 ! -name 'branch' ! -name 'CNAME' ! -name '.nojekyll' ! -name '.git' ! -name 'assets' -exec rm -rf {} +
+            find designsystem_web -maxdepth 1 -mindepth 1 ! -name 'branch' ! -name 'CNAME' ! -name '.nojekyll' ! -name '.git' -exec rm -rf {} +
             cp -R dist/apps/cookbook/browser/* designsystem_web/
             cp designsystem_web/index.html designsystem_web/404.html
           else
