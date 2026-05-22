@@ -61,17 +61,22 @@
             </a>
           </li>
         }
-        <hr aria-hidden="true" />
-        <li>
-          <a
-            routerLinkActive="is-selected"
-            (click)="closeMenu()"
-            class="list-item-link"
-            #resourceLink
-          >
-            Grid
-          </a>
-        </li>
+        @if (layoutRoutes.length > 0) {
+          <hr aria-hidden="true" />
+          @for (item of layoutRoutes; track item.path) {
+            <li>
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="is-selected"
+                (click)="closeMenu()"
+                class="list-item-link"
+                #resourceLink
+              >
+                {{ item.name }}
+              </a>
+            </li>
+          }
+        }
       </ul>
     </nav>
   </kirby-card>

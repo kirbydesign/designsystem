@@ -48,9 +48,9 @@ export class ColorsShowcaseComponent {
   ];
 
   textColors: ColorTokenEntry[] = [
-    { name: 'white', cssVar: '--kirby-text-color-white', description: 'Text on dark backgrounds' },
-    { name: 'semi-dark', cssVar: '--kirby-text-color-semi-dark', description: 'Secondary text' },
     { name: 'black', cssVar: '--kirby-text-color-black', description: 'Primary text' },
+    { name: 'semi-dark', cssVar: '--kirby-text-color-semi-dark', description: 'Secondary text' },
+    { name: 'white', cssVar: '--kirby-text-color-white', description: 'Text on dark backgrounds' },
     { name: 'danger', cssVar: '--kirby-text-color-danger', description: 'Error text' },
     { name: 'positive', cssVar: '--kirby-text-color-positive', description: 'Positive value text' },
     { name: 'negative', cssVar: '--kirby-text-color-negative', description: 'Negative value text' },

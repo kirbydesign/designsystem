@@ -91,6 +91,13 @@ export const FOUNDATION_SHOWCASE_ROUTES: Routes = [
         path: 'elevation',
         component: ElevationShowcaseComponent,
       },
+      {
+        path: 'grid',
+        component: GridShowcaseComponent,
+        data: {
+          section: 'layout',
+        },
+      },
     ],
   },
 ];

@@ -26,8 +26,8 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { routes as appRoutes } from '../../app.routes';
 import {
-  FOUNDATION_SHOWCASE_ROUTES as foundationRoutes,
-  COMPONENT_SHOWCASE_ROUTES as showcaseRoutes,
+  COMPONENT_SHOWCASE_ROUTES as componentShowcaseRoutes,
+  FOUNDATION_SHOWCASE_ROUTES as foundationShowcaseRoutes,
 } from '../../showcase/showcase.routes';
 
 const KEY_DOWN = 'ArrowDown';
@@ -58,6 +58,7 @@ export class SideNavComponent implements OnInit {
   filteredShowcaseRoutes: SideNavLink[][];
   filteredResourceRoutes: Route[];
   foundationRoutes: SideNavLink[];
+  layoutRoutes: SideNavLink[];
   filter: string = '';
 
   @ViewChildren('componentLink') componentLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
@@ -85,7 +86,7 @@ export class SideNavComponent implements OnInit {
   }
 
   private mapShowcaseRoutes() {
-    const routesWithPath = showcaseRoutes[0].children.filter((r) => r.path);
+    const routesWithPath = componentShowcaseRoutes[0].children.filter((r) => r.path);
     const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
     navigableRoutes.sort(this.sortByPath);
 
@@ -108,17 +109,24 @@ export class SideNavComponent implements OnInit {
   }
 
   private mapFoundationRoutes() {
-    const routesWithPath = foundationRoutes[0].children.filter((r) => r.path);
+    const routesWithPath = foundationShowcaseRoutes[0].children.filter((r) => r.path);
     const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
     navigableRoutes.sort(this.sortByPath);
 
-    this.foundationRoutes = navigableRoutes.map((route) => {
-      return {
-        path: `showcase/${route.path}`,
-        name: kebabToTitleCase(route.path),
-        active: this.router.url.endsWith(route.path),
-      };
-    });
+    const mainRoutes = navigableRoutes.filter((r) => !r.data?.['section']);
+    const sectionRoutes = navigableRoutes.filter((r) => r.data?.['section'] === 'layout');
+
+    this.foundationRoutes = mainRoutes.map((route) => ({
+      path: `showcase/${route.path}`,
+      name: kebabToTitleCase(route.path),
+      active: this.router.url.endsWith(route.path),
+    }));
+
+    this.layoutRoutes = sectionRoutes.map((route) => ({
+      path: `showcase/${route.path}`,
+      name: kebabToTitleCase(route.path),
+      active: this.router.url.endsWith(route.path),
+    }));
   }
 
   private sortByPath(a: Route, b: Route): number {
