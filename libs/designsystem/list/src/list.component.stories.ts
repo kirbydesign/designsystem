@@ -393,3 +393,26 @@ export const ListWithSelectableItemsInCardWithContentBelowLastFocused: Story = {
   }),
   play: focusSelectableItem(2),
 };
+
+export const ListWithStandAloneItemFocused: Story = {
+  name: 'List with Stand Alone Item - Focused',
+  args: {
+    items: [
+      { title: 'First item', isStandAlone: false },
+      { title: 'Second item', isStandAlone: false },
+      { title: 'Stand alone item', isStandAlone: true },
+    ],
+    getStandAloneByProperty: 'isStandAlone',
+    showDivider: true,
+    shape: 'rounded',
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-list ${argsToTemplate(args)}>
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+      <p class="kirby-item-title">{{item.title}}</p>
+    </kirby-item>
+  </kirby-list>`,
+  }),
+  play: focusSelectableItem(2),
+};
