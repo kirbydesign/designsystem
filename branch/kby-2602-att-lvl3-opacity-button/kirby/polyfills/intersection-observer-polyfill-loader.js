@@ -1,1 +1,0 @@
-!function(){if("undefined"==typeof IntersectionObserver){var e=document.createElement("script");e.src="kirby/polyfills/intersection-observer-polyfill.min.js",document.head.appendChild(e)}}();
