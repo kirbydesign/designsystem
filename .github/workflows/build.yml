@@ -207,6 +207,7 @@ jobs:
             fi
           done
 
+          cd designsystem_web
           git add .
 
           if ! git diff-index --quiet HEAD; then
