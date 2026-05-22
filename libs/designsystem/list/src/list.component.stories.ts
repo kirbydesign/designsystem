@@ -350,8 +350,8 @@ export const ListWithSelectableItemsInCardWithFooterLastFocused: Story = {
   play: focusSelectableItem(2),
 };
 
-export const ListInCardWithContentAbove: Story = {
-  name: 'List in Card with Content Above',
+export const ListWithSelectableItemsInCardWithContentAboveFirstFocused: Story = {
+  name: 'List with Selectable Items in Card with Content Above - First Focused',
   args: {
     items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
   },
@@ -359,9 +359,6 @@ export const ListInCardWithContentAbove: Story = {
     props: args,
     template: `
     <kirby-card>
-      <kirby-card-header>
-        <h3>Account Overview 2</h3>
-      </kirby-card-header>
       <div style="padding: 16px;">
         <p>Some arbitrary content above the list.</p>
       </div>
@@ -372,10 +369,11 @@ export const ListInCardWithContentAbove: Story = {
       </kirby-list>
     </kirby-card>`,
   }),
+  play: focusSelectableItem(0),
 };
 
-export const ListInCardWithContentBelow: Story = {
-  name: 'List in Card with Content Below',
+export const ListWithSelectableItemsInCardWithContentBelowLastFocused: Story = {
+  name: 'List with Selectable Items in Card with Content Below - Last Focused',
   args: {
     items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
   },
@@ -391,9 +389,7 @@ export const ListInCardWithContentBelow: Story = {
       <div style="padding: 16px;">
         <p>Some arbitrary content below the list.</p>
       </div>
-      <kirby-card-footer>
-        <h3>Footer</h3>
-      </kirby-card-footer>
     </kirby-card>`,
   }),
+  play: focusSelectableItem(2),
 };

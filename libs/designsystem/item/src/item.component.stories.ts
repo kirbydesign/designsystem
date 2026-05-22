@@ -924,3 +924,33 @@ export const SelectableInCardWithFooterLastFocused: Story = {
   }),
   play: focusSelectableItem(2),
 };
+
+export const SelectableInCardWithContentAboveFirstFocused: Story = {
+  name: 'Selectable in Card with Content Above - First Focused',
+  render: () => ({
+    template: `<kirby-card>
+    <div style="padding: 16px;">
+      <p>Some arbitrary content above the items.</p>
+    </div>
+    <kirby-item [selectable]="true">First selectable item</kirby-item>
+    <kirby-item [selectable]="true">Second selectable item</kirby-item>
+    <kirby-item [selectable]="true">Third selectable item</kirby-item>
+</kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const SelectableInCardWithContentBelowLastFocused: Story = {
+  name: 'Selectable in Card with Content Below - Last Focused',
+  render: () => ({
+    template: `<kirby-card>
+    <kirby-item [selectable]="true">First selectable item</kirby-item>
+    <kirby-item [selectable]="true">Second selectable item</kirby-item>
+    <kirby-item [selectable]="true">Third selectable item</kirby-item>
+    <div style="padding: 16px;">
+      <p>Some arbitrary content below the items.</p>
+    </div>
+</kirby-card>`,
+  }),
+  play: focusSelectableItem(2),
+};
