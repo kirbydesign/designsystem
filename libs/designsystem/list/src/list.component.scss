@@ -11,8 +11,11 @@ $item-height: utils.size('xxxl');
 }
 
 :host(:not(kirby-list-item)) {
-  --kirby-list-border-top-radius: var(--kirby-border-radius-n);
-  --kirby-list-border-bottom-radius: var(--kirby-border-radius-n);
+  --kirby-list-border-top-radius: var(--kirby-item-border-top-radius, var(--kirby-border-radius-n));
+  --kirby-list-border-bottom-radius: var(
+    --kirby-item-border-bottom-radius,
+    var(--kirby-border-radius-n)
+  );
 }
 
 .list {

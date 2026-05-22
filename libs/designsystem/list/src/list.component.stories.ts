@@ -349,3 +349,48 @@ export const ListWithSelectableItemsInCardWithFooterLastFocused: Story = {
   ...ListWithSelectableItemsInCardWithFooterFirstFocused,
   play: focusSelectableItem(2),
 };
+
+export const ListInCardWithContentAbove: Story = {
+  name: 'List in Card with Content Above',
+  args: {
+    items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+    <kirby-card>
+      <kirby-card-header>
+        <h3>Account Overview 2</h3>
+      </kirby-card-header>
+      <div style="padding: 16px;">
+        <p>Some arbitrary content above the list.</p>
+      </div>
+      <kirby-list ${argsToTemplate(args)}>
+        <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+          <p class="kirby-item-title">{{item.title}}</p>
+        </kirby-item>
+      </kirby-list>
+    </kirby-card>`,
+  }),
+};
+
+export const ListInCardWithContentBelow: Story = {
+  name: 'List in Card with Content Below',
+  args: {
+    items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+    <kirby-card>
+      <kirby-list ${argsToTemplate(args)}>
+        <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+          <p class="kirby-item-title">{{item.title}}</p>
+        </kirby-item>
+      </kirby-list>
+      <div style="padding: 16px;">
+        <p>Some arbitrary content below the list.</p>
+      </div>
+    </kirby-card>`,
+  }),
+};
