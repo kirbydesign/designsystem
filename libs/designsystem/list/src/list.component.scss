@@ -11,9 +11,12 @@ $item-height: utils.size('xxxl');
 }
 
 :host(:not(kirby-list-item)) {
-  --kirby-list-border-top-radius: var(--kirby-item-border-top-radius, var(--kirby-border-radius-n));
+  --kirby-list-border-top-radius: var(
+    --kirby-content-border-top-radius,
+    var(--kirby-border-radius-n)
+  );
   --kirby-list-border-bottom-radius: var(
-    --kirby-item-border-bottom-radius,
+    --kirby-content-border-bottom-radius,
     var(--kirby-border-radius-n)
   );
 }
@@ -225,24 +228,24 @@ ion-item-options[side='end'] {
 
 // Set border radius variables on kirby-list-item for the item component to consume.
 kirby-list-item {
-  --kirby-item-border-top-radius: 0;
-  --kirby-item-border-bottom-radius: 0;
+  --kirby-content-border-top-radius: 0;
+  --kirby-content-border-bottom-radius: 0;
 }
 
 kirby-list-item:first-of-type {
-  --kirby-item-border-top-radius: var(--kirby-list-border-top-radius);
+  --kirby-content-border-top-radius: var(--kirby-list-border-top-radius);
 }
 
 kirby-list-item:last-of-type {
-  --kirby-item-border-bottom-radius: var(--kirby-list-border-bottom-radius);
+  --kirby-content-border-bottom-radius: var(--kirby-list-border-bottom-radius);
 }
 
 .has-header kirby-list-item:first-of-type {
-  --kirby-item-border-top-radius: 0;
+  --kirby-content-border-top-radius: 0;
 }
 
 .has-footer kirby-list-item:last-of-type {
-  --kirby-item-border-bottom-radius: 0;
+  --kirby-content-border-bottom-radius: 0;
 }
 
 :host-context(.shape-none) {

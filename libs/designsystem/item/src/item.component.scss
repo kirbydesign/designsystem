@@ -34,8 +34,9 @@
 
 ion-item {
   &::part(native) {
-    border-radius: var(--kirby-item-border-top-radius, 0) var(--kirby-item-border-top-radius, 0)
-      var(--kirby-item-border-bottom-radius, 0) var(--kirby-item-border-bottom-radius, 0);
+    border-radius: var(--kirby-content-border-top-radius, 0)
+      var(--kirby-content-border-top-radius, 0) var(--kirby-content-border-bottom-radius, 0)
+      var(--kirby-content-border-bottom-radius, 0);
 
     &:focus-visible {
       box-shadow:

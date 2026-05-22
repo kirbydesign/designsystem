@@ -253,7 +253,7 @@ export const ListWithSelectableItemsInCardFirstFocused: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<kirby-card><kirby-list ${argsToTemplate(args)}>
+    template: `<kirby-card><kirby-list shape="none" ${argsToTemplate(args)}>
     <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
       <p class="kirby-item-title">{{item.title}}</p>
     </kirby-item>
@@ -291,7 +291,7 @@ export const ListWithSelectableItemsInCardWithHeaderFirstFocused: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<kirby-card><kirby-card-header>Header</kirby-card-header><kirby-list ${argsToTemplate(args)}>
+    template: `<kirby-card><kirby-card-header>Header</kirby-card-header><kirby-list shape="none" ${argsToTemplate(args)}>
     <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
       <p class="kirby-item-title">{{item.title}}</p>
     </kirby-item>
@@ -329,7 +329,7 @@ export const ListWithSelectableItemsInCardWithFooterFirstFocused: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<kirby-card><kirby-card-footer>Footer</kirby-card-footer><kirby-list ${argsToTemplate(args)}>
+    template: `<kirby-card><kirby-card-footer>Footer</kirby-card-footer><kirby-list shape="none" ${argsToTemplate(args)}>
     <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
       <p class="kirby-item-title">{{item.title}}</p>
     </kirby-item>
@@ -365,7 +365,7 @@ export const ListInCardWithContentAbove: Story = {
       <div style="padding: 16px;">
         <p>Some arbitrary content above the list.</p>
       </div>
-      <kirby-list ${argsToTemplate(args)}>
+      <kirby-list shape="none" ${argsToTemplate(args)}>
         <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
           <p class="kirby-item-title">{{item.title}}</p>
         </kirby-item>
@@ -383,7 +383,7 @@ export const ListInCardWithContentBelow: Story = {
     props: args,
     template: `
     <kirby-card>
-      <kirby-list ${argsToTemplate(args)}>
+      <kirby-list shape="none" ${argsToTemplate(args)}>
         <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
           <p class="kirby-item-title">{{item.title}}</p>
         </kirby-item>
@@ -391,6 +391,9 @@ export const ListInCardWithContentBelow: Story = {
       <div style="padding: 16px;">
         <p>Some arbitrary content below the list.</p>
       </div>
+      <kirby-card-footer>
+        <h3>Footer</h3>
+      </kirby-card-footer>
     </kirby-card>`,
   }),
 };
