@@ -192,8 +192,8 @@ export const ListWithIcons: Story = {
   }),
 };
 
-export const ListWithSelectableItemsFirstFocused: Story = {
-  name: 'List with Selectable Items - First Focused',
+export const ListWithItemsFirstFocused: Story = {
+  name: 'List with Items - First Focused',
   args: {
     items: [
       {
@@ -218,15 +218,15 @@ export const ListWithSelectableItemsFirstFocused: Story = {
   play: focusSelectableItem(0),
 };
 
-export const ListWithSelectableItemsSecondFocused: Story = {
-  name: 'List with Selectable Items - Second Focused',
-  ...ListWithSelectableItemsFirstFocused,
+export const ListWithItemsSecondFocused: Story = {
+  name: 'List with Items - Second Focused',
+  ...ListWithItemsFirstFocused,
   play: focusSelectableItem(1),
 };
 
-export const ListWithSelectableItemsLastFocused: Story = {
-  name: 'List with Selectable Items - Last Focused',
-  ...ListWithSelectableItemsFirstFocused,
+export const ListWithItemsLastFocused: Story = {
+  name: 'List with Items - Last Focused',
+  ...ListWithItemsFirstFocused,
   play: focusSelectableItem(2),
 };
 
@@ -236,8 +236,8 @@ export const CookbookExamples: Story = {
   }),
 };
 
-export const ListWithSelectableItemsInCardFirstFocused: Story = {
-  name: 'List with Selectable Items in Card - First Focused',
+export const ListInCardFirstFocused: Story = {
+  name: 'List in Card - First Focused',
   args: {
     items: [
       {
@@ -262,20 +262,20 @@ export const ListWithSelectableItemsInCardFirstFocused: Story = {
   play: focusSelectableItem(0),
 };
 
-export const ListWithSelectableItemsInCardSecondFocused: Story = {
-  name: 'List with Selectable Items in Card - Second Focused',
-  ...ListWithSelectableItemsInCardFirstFocused,
+export const ListInCardSecondFocused: Story = {
+  name: 'List in Card - Second Focused',
+  ...ListInCardFirstFocused,
   play: focusSelectableItem(1),
 };
 
-export const ListWithSelectableItemsInCardLastFocused: Story = {
-  name: 'List with Selectable Items in Card - Last Focused',
-  ...ListWithSelectableItemsInCardFirstFocused,
+export const ListInCardLastFocused: Story = {
+  name: 'List in Card - Last Focused',
+  ...ListInCardFirstFocused,
   play: focusSelectableItem(2),
 };
 
-export const ListWithSelectableItemsInCardWithHeaderFirstFocused: Story = {
-  name: 'List with Selectable Items in Card with Header - First Focused',
+export const ListInCardWithHeaderFirstFocused: Story = {
+  name: 'List in Card with Header - First Focused',
   args: {
     items: [
       {
@@ -300,20 +300,14 @@ export const ListWithSelectableItemsInCardWithHeaderFirstFocused: Story = {
   play: focusSelectableItem(0),
 };
 
-export const ListWithSelectableItemsInCardWithHeaderSecondFocused: Story = {
-  name: 'List with Selectable Items in Card with Header - Second Focused',
-  ...ListWithSelectableItemsInCardWithHeaderFirstFocused,
-  play: focusSelectableItem(1),
-};
-
-export const ListWithSelectableItemsInCardWithHeaderLastFocused: Story = {
-  name: 'List with Selectable Items in Card with Header - Last Focused',
-  ...ListWithSelectableItemsInCardWithHeaderFirstFocused,
+export const ListInCardWithHeaderLastFocused: Story = {
+  name: 'List in Card with Header - Last Focused',
+  ...ListInCardWithHeaderFirstFocused,
   play: focusSelectableItem(2),
 };
 
-export const ListWithSelectableItemsInCardWithFooterFirstFocused: Story = {
-  name: 'List with Selectable Items in Card with Footer - First Focused',
+export const ListInCardWithFooterFirstFocused: Story = {
+  name: 'List in Card with Footer - First Focused',
   args: {
     items: [
       {
@@ -338,20 +332,14 @@ export const ListWithSelectableItemsInCardWithFooterFirstFocused: Story = {
   play: focusSelectableItem(0),
 };
 
-export const ListWithSelectableItemsInCardWithFooterSecondFocused: Story = {
-  name: 'List with Selectable Items in Card with Footer - Second Focused',
-  ...ListWithSelectableItemsInCardWithFooterFirstFocused,
-  play: focusSelectableItem(1),
-};
-
-export const ListWithSelectableItemsInCardWithFooterLastFocused: Story = {
-  name: 'List with Selectable Items in Card with Footer - Last Focused',
-  ...ListWithSelectableItemsInCardWithFooterFirstFocused,
+export const ListInCardWithFooterLastFocused: Story = {
+  name: 'List in Card with Footer - Last Focused',
+  ...ListInCardWithFooterFirstFocused,
   play: focusSelectableItem(2),
 };
 
-export const ListWithSelectableItemsInCardWithContentAboveFirstFocused: Story = {
-  name: 'List with Selectable Items in Card with Content Above - First Focused',
+export const ListInCardWithContentAboveFirstFocused: Story = {
+  name: 'List in Card with Content Above - First Focused',
   args: {
     items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
   },
@@ -372,8 +360,8 @@ export const ListWithSelectableItemsInCardWithContentAboveFirstFocused: Story = 
   play: focusSelectableItem(0),
 };
 
-export const ListWithSelectableItemsInCardWithContentBelowLastFocused: Story = {
-  name: 'List with Selectable Items in Card with Content Below - Last Focused',
+export const ListInCardWithContentBelowLastFocused: Story = {
+  name: 'List in Card with Content Below - Last Focused',
   args: {
     items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
   },
