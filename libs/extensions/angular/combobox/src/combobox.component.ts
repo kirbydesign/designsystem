@@ -669,7 +669,7 @@ export class ComboboxComponent
     const input = event.target as HTMLInputElement;
 
     if (!input.value) {
-      this.announce(this.selectionClearedAnnouncement);
+      this.clearSelection();
     }
 
     this.updateSearchResults(input.value);
@@ -681,6 +681,12 @@ export class ComboboxComponent
     if (document.activeElement !== this.textInput?.nativeElement) {
       this.textInput?.nativeElement.focus();
     }
+  }
+
+  private clearSelection(): void {
+    this.selectItem(undefined);
+    // Reset after a short delay so the same message can be announced again on subsequent clears
+    this.announce(this.selectionClearedAnnouncement);
   }
 
   private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
