@@ -51,12 +51,7 @@ jobs:
           EVENT_REF: ${{ github.event.ref }}
           REPO_HOST: github.com
         run: |
-          branchname="${EVENT_REF##*/}"
-          branchname="${branchname,,}"
-          branchname="${branchname//[^a-zA-Z0-9]/-}"
-          branchname=$(tr -s '-' <<< "$branchname")
-          branchname="${branchname%%-}"
-          releasename="kby-${branchname:0:49}"
+          releasename=$(bash .github/scripts/normalize-branch-name.sh "$EVENT_REF")
           echo "Removing gh-pages/branch/${releasename}"
 
           git clone https://x-access-token:$GH_TOKEN@$REPO_HOST/kirbydesign/designsystem.git -b gh-pages designsystem_web
