@@ -108,7 +108,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Get deployment name for default or feature branch
-        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
+        if: >-
+          github.event_name == 'pull_request' ||
+          (github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')) ||
+          (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/develop')
         env:
           GIT_REF: ${{ github.head_ref || github.ref }}
         run: |
@@ -122,7 +125,9 @@ jobs:
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
           echo "IS_RELEASE=false" >> $GITHUB_ENV
       - name: Get deployment name for release branch
-        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'"
+        if: >-
+          (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
+          (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/develop')
         run: |
           echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
@@ -179,6 +184,8 @@ jobs:
             cp -R dist/apps/cookbook/browser/* designsystem_web/
             cp designsystem_web/index.html designsystem_web/404.html
           else
+            # Remove old branch build if exists
+            rm -rf designsystem_web/branch/$RELEASENAME
             mkdir -p designsystem_web/branch/$RELEASENAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$RELEASENAME/\">,g" dist/apps/cookbook/browser/index.html
             cp -R dist/apps/cookbook/browser/* designsystem_web/branch/$RELEASENAME
@@ -187,7 +194,7 @@ jobs:
 
           # Build list of valid release names from active remote branches
           branchList=""
-          for branch in $(git -C $GITHUB_WORKSPACE branch -r); do
+          for branch in $(git -C designsystem_web branch -r); do
             name="${branch##*/}"
             name="${name,,}"
             name="${name//[^a-zA-Z0-9]/-}"
