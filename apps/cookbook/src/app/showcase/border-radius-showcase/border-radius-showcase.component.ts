@@ -10,11 +10,11 @@ interface TokenEntry {
 
 @Component({
   selector: 'cookbook-borders-showcase',
-  templateUrl: './borders-showcase.component.html',
-  styleUrls: ['./borders-showcase.component.scss'],
+  templateUrl: './border-radius-showcase.component.html',
+  styleUrls: ['./border-radius-showcase.component.scss'],
   imports: [CopyTokenDirective],
 })
-export class BordersShowcaseComponent {
+export class BorderRadiusShowcaseComponent {
   borderRadii: TokenEntry[] = [
     { name: 'xxs', cssVar: '--kirby-border-radius-xxs', description: '2px' },
     { name: 'xs', cssVar: '--kirby-border-radius-xs', description: '4px' },

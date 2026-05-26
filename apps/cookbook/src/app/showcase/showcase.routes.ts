@@ -58,7 +58,7 @@ import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 import { TabNavigationShowcaseComponent } from './page-tab-navigation-showcase/tab-navigation-showcase.component';
 import { LabelShowcaseComponent } from './label-showcase/label-showcase.component';
 import { SpacingShowcaseComponent } from './spacing-showcase/spacing-showcase.component';
-import { BordersShowcaseComponent } from './borders-showcase/borders-showcase.component';
+import { BorderRadiusShowcaseComponent } from './border-radius-showcase/border-radius-showcase.component';
 import { BreakpointsShowcaseComponent } from './breakpoints-showcase/breakpoints-showcase.component';
 import { ElevationShowcaseComponent } from './elevation-showcase/elevation-showcase.component';
 
@@ -76,27 +76,33 @@ export const FOUNDATION_SHOWCASE_ROUTES: Routes = [
         component: TypographyShowcaseComponent,
       },
       {
-        path: 'spacing',
-        component: SpacingShowcaseComponent,
-      },
-      {
-        path: 'borders',
-        component: BordersShowcaseComponent,
-      },
-      {
-        path: 'breakpoints',
-        component: BreakpointsShowcaseComponent,
+        path: 'border-radius',
+        component: BorderRadiusShowcaseComponent,
       },
       {
         path: 'elevation',
         component: ElevationShowcaseComponent,
       },
       {
+        path: 'breakpoints',
+        component: BreakpointsShowcaseComponent,
+      },
+      {
+        path: 'spacing',
+        component: SpacingShowcaseComponent,
+      },
+    ],
+  },
+];
+
+export const LAYOUT_SHOWCASE_ROUTES: Routes = [
+  {
+    path: '',
+    component: ShowcaseComponent,
+    children: [
+      {
         path: 'grid',
         component: GridShowcaseComponent,
-        data: {
-          section: 'layout',
-        },
       },
     ],
   },
@@ -343,5 +349,6 @@ export const COMPONENT_SHOWCASE_ROUTES: Routes = [
 
 export const ALL_SHOWCASE_ROUTES: Routes = [
   ...FOUNDATION_SHOWCASE_ROUTES,
+  ...LAYOUT_SHOWCASE_ROUTES,
   ...COMPONENT_SHOWCASE_ROUTES,
 ];
