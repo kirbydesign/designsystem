@@ -264,17 +264,7 @@ export class DropdownComponent
         kirbyItem.nativeElement,
         'click',
         () => {
-          const sorted = this._kirbyItemsSlotted
-            .toArray()
-            .sort((a, b) =>
-              a.nativeElement.compareDocumentPosition(b.nativeElement) &
-              Node.DOCUMENT_POSITION_FOLLOWING
-                ? -1
-                : 1
-            );
-          this.onItemSelect(
-            sorted.findIndex((item) => item.nativeElement === kirbyItem.nativeElement)
-          );
+          this.onItemSelect(this.domIndexOf(kirbyItem));
         }
       );
 
@@ -716,6 +706,17 @@ export class DropdownComponent
       this.focusedIndex = newFocusedIndex;
     }
     return false;
+  }
+
+  private domIndexOf(kirbyItem: ElementRef<HTMLElement>): number {
+    return this._kirbyItemsSlotted
+      .toArray()
+      .sort((a, b) =>
+        a.nativeElement.compareDocumentPosition(b.nativeElement) & Node.DOCUMENT_POSITION_FOLLOWING
+          ? -1
+          : 1
+      )
+      .findIndex((item) => item.nativeElement === kirbyItem.nativeElement);
   }
 
   private unlistenAllSlottedItems() {
