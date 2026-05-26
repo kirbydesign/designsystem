@@ -3,7 +3,7 @@
 @mixin copy-token-cell {
   th:first-child,
   td:first-child {
-    width: 200px;
+    width: 150px;
   }
 
   th:last-child,
@@ -14,6 +14,7 @@
 
   tbody td:nth-child(2) {
     position: relative;
+    white-space: nowrap;
 
     @include mini-toast.copied;
 
