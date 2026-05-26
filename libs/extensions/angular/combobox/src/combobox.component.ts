@@ -136,7 +136,7 @@ export class ComboboxComponent
    * The text announced by screen readers when the selection is cleared.
    */
   @Input()
-  public selectionClearedText = 'Selection cleared.';
+  public selectionClearedAnnouncement = 'Selection cleared.';
 
   public _liveRegionText = '';
 
@@ -685,7 +685,7 @@ export class ComboboxComponent
 
   private clearSelection(): void {
     this.selectItem(undefined);
-    this._liveRegionText = this.selectionClearedText;
+    this._liveRegionText = this.selectionClearedAnnouncement;
     // Reset after a short delay so the same message can be announced again on subsequent clears
     setTimeout(() => {
       this._liveRegionText = '';
