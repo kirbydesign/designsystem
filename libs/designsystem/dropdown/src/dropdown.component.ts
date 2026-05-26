@@ -258,13 +258,23 @@ export class DropdownComponent
     }
 
     // Setup a click listener for each new slotted items
-    kirbyItems.forEach((kirbyItem, index) => {
+    kirbyItems.forEach((kirbyItem) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
       const disposeClickListener: EventListenerDisposeFn = this.renderer.listen(
         kirbyItem.nativeElement,
         'click',
         () => {
-          this.onItemSelect(index);
+          const sorted = this._kirbyItemsSlotted
+            .toArray()
+            .sort((a, b) =>
+              a.nativeElement.compareDocumentPosition(b.nativeElement) &
+              Node.DOCUMENT_POSITION_FOLLOWING
+                ? -1
+                : 1
+            );
+          this.onItemSelect(
+            sorted.findIndex((item) => item.nativeElement === kirbyItem.nativeElement)
+          );
         }
       );
 
