@@ -669,7 +669,7 @@ export class ComboboxComponent
     const input = event.target as HTMLInputElement;
 
     if (!input.value) {
-      this.clearSelection();
+      this.announce(this.selectionClearedAnnouncement);
     }
 
     this.updateSearchResults(input.value);
@@ -683,25 +683,21 @@ export class ComboboxComponent
     }
   }
 
-  private clearSelection(): void {
-    this.selectItem(undefined);
-    this._liveRegionText = this.selectionClearedAnnouncement;
-    // Reset after a short delay so the same message can be announced again on subsequent clears
-    setTimeout(() => {
-      this._liveRegionText = '';
+  private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
+  private announce(message: string): void {
+    clearTimeout(this._announceTimeout);
+    this._liveRegionText = '';
+    this._announceTimeout = setTimeout(() => {
+      this._liveRegionText = message;
       this.cdr.markForCheck();
-    }, 1000);
+    }, 100);
   }
 
   private updateSearchResults(inputValue: string): void {
     this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
 
     if (inputValue && this.searchItems.length === 0) {
-      this._liveRegionText = this.noSearchResultsText;
-      setTimeout(() => {
-        this._liveRegionText = '';
-        this.cdr.markForCheck();
-      }, 1000);
+      this.announce(this.noSearchResultsText);
     }
   }
 
