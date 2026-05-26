@@ -367,6 +367,7 @@ export const Sizes: Story = {
   args: {
     items: simpleCurrencyItems,
     placeholder: 'Select currency',
+    size: InputSize.large,
   },
   render: (args) => ({
     props: {
@@ -376,13 +377,6 @@ export const Sizes: Story = {
       <div>
         <kirby-x-combobox
           ${argsToTemplate(args)}
-          [size]="'md'"
-        >
-        </kirby-x-combobox>
-        <p><br></p>
-        <kirby-x-combobox
-          ${argsToTemplate(args)}
-          [size]="'lg'"
         >
         </kirby-x-combobox>
       </div>
