@@ -133,6 +133,14 @@ export class ComboboxComponent
   public noSearchResultsText = 'No results found.';
 
   /**
+   * The text announced by screen readers when the selection is cleared.
+   */
+  @Input()
+  public selectionClearedAnnouncement = 'Selection cleared.';
+
+  public _liveRegionText = '';
+
+  /**
    * The name of the property to use as the display text for each item.
    */
   @Input()
@@ -234,7 +242,10 @@ export class ComboboxComponent
       return;
     }
 
-    this.focusedItem = this._searchItems[0];
+    // only set the focused item of the search result, if the input has value
+    if (this.textInput?.nativeElement?.value) {
+      this.focusedItem = this._searchItems[0];
+    }
   }
 
   private _items: unknown[] = [];
@@ -314,7 +325,7 @@ export class ComboboxComponent
     }
 
     this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
-    this.renderer.setAttribute(element.nativeElement, 'aria-posintset', `${index + 1}`);
+    this.renderer.setAttribute(element.nativeElement, 'aria-posinset', `${index + 1}`);
   }
 
   /**
@@ -650,13 +661,18 @@ export class ComboboxComponent
     this.selectedItem = this.findItemByInput(input);
   }
 
-  protected updateSearchResults(event: Event): void {
+  protected onInput(event: Event): void {
     if (!this.isOpen) {
       this.open();
     }
 
     const input = event.target as HTMLInputElement;
-    this.searchItems = input.value ? this.searchFunction(input.value, this.items) : this.items;
+
+    if (!input.value) {
+      this.clearSelection();
+    }
+
+    this.updateSearchResults(input.value);
 
     // Screen readers (VoiceOver/NVDA) may move real browser focus to a list-item button.
     // When the list re-renders after filtering, that button is removed from the DOM and
@@ -664,6 +680,30 @@ export class ComboboxComponent
     // and the focusout handler doesn't mistake the body-focus for a genuine blur-away.
     if (document.activeElement !== this.textInput?.nativeElement) {
       this.textInput?.nativeElement.focus();
+    }
+  }
+
+  private clearSelection(): void {
+    this.selectItem(undefined);
+    // Reset after a short delay so the same message can be announced again on subsequent clears
+    this.announce(this.selectionClearedAnnouncement);
+  }
+
+  private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
+  private announce(message: string): void {
+    clearTimeout(this._announceTimeout);
+    this._liveRegionText = '';
+    this._announceTimeout = setTimeout(() => {
+      this._liveRegionText = message;
+      this.cdr.markForCheck();
+    }, 100);
+  }
+
+  private updateSearchResults(inputValue: string): void {
+    this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
+
+    if (inputValue && this.searchItems.length === 0) {
+      this.announce(this.noSearchResultsText);
     }
   }
 
