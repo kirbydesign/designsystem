@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -166,17 +166,7 @@ export const Default: Story = {
     props: args,
     template: `
       <kirby-x-combobox
-        [items]="items"
-        [placeholder]="placeholder"
-        [disabled]="disabled"
-        [hasError]="hasError"
-        [itemHeight]="itemHeight"
-        [itemTextProperty]="itemTextProperty"
-        [itemIdProperty]="itemIdProperty"
-        [noSearchResultsText]="noSearchResultsText"
-        [size]="size"
-        [expand]="expand"
-        [popout]="popout"
+        ${argsToTemplate(args)}
       >
       </kirby-x-combobox>
     `,
@@ -197,10 +187,7 @@ export const WithTextProperty: Story = {
     props: args,
     template: `
       <kirby-x-combobox
-        [items]="items" 
-        [itemTextProperty]="itemTextProperty"
-        [itemIdProperty]="itemIdProperty"
-        [placeholder]="placeholder"
+        ${argsToTemplate(args)}
       >
       </kirby-x-combobox>
     `,
@@ -226,13 +213,7 @@ export const WithTemplate: Story = {
     },
     template: `
       <kirby-x-combobox
-        [items]="items"
-        [itemIdProperty]="itemIdProperty"
-        [itemTextProperty]="itemTextProperty"
-        [itemHeight]="itemHeight"
-        [placeholder]="placeholder"
-        [disabled]="disabled"
-        [hasError]="hasError"
+        ${argsToTemplate(args)}
       >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
@@ -275,12 +256,7 @@ export const CustomSearchFunction: Story = {
     },
     template: `
       <kirby-x-combobox
-        [items]="items"
-        [itemIdProperty]="itemIdProperty"
-        [itemTextProperty]="itemTextProperty"
-        [itemHeight]="itemHeight"
-        [placeholder]="placeholder"
-        [searchFunction]="searchFunction"
+        ${argsToTemplate(args)}
       >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
@@ -319,11 +295,7 @@ export const LargeList: Story = {
     },
     template: `
       <kirby-x-combobox
-        [items]="items"
-        [itemIdProperty]="itemIdProperty"
-        [itemTextProperty]="itemTextProperty"
-        [itemHeight]="itemHeight"
-        [placeholder]="placeholder"
+        ${argsToTemplate(args)}
       >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
@@ -359,8 +331,7 @@ export const Disabled: Story = {
     },
     template: `
       <kirby-x-combobox
-        [placeholder]="placeholder"
-        [disabled]="disabled"
+        ${argsToTemplate(args)}
       >
       </kirby-x-combobox>
     `,
@@ -382,8 +353,7 @@ export const HasError: Story = {
     },
     template: `
       <kirby-x-combobox
-        [placeholder]="placeholder"
-        [hasError]="hasError"
+        ${argsToTemplate(args)}
       >
       </kirby-x-combobox>
     `,
@@ -405,15 +375,13 @@ export const Sizes: Story = {
     template: `
       <div>
         <kirby-x-combobox
-          [placeholder]="placeholder"
-          [items]="items"
+          ${argsToTemplate(args)}
           [size]="'md'"
         >
         </kirby-x-combobox>
         <p><br></p>
         <kirby-x-combobox
-          [placeholder]="placeholder"
-          [items]="items"
+          ${argsToTemplate(args)}
           [size]="'lg'"
         >
         </kirby-x-combobox>
@@ -437,9 +405,7 @@ export const ExpandBlock: Story = {
     },
     template: `
       <kirby-x-combobox
-        [placeholder]="placeholder"
-        [items]="items"
-        [expand]="expand"
+        ${argsToTemplate(args)}
       >
       </kirby-x-combobox>
     `,
@@ -472,10 +438,7 @@ export const FormField: Story = {
           [message]="currencyControl.touched && currencyControl.invalid ? 'Please select a currency' : 'Pick your preferred currency'"
         >
           <kirby-x-combobox
-            [items]="items"
-            [placeholder]="placeholder"
-            [formControl]="currencyControl"
-            [hasError]="currencyControl.touched && currencyControl.invalid"
+            ${argsToTemplate(args)}
           >
           </kirby-x-combobox>
         </kirby-form-field>
