@@ -325,7 +325,7 @@ export class ComboboxComponent
     }
 
     this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
-    this.renderer.setAttribute(element.nativeElement, 'aria-posintset', `${index + 1}`);
+    this.renderer.setAttribute(element.nativeElement, 'aria-posinset', `${index + 1}`);
   }
 
   /**
