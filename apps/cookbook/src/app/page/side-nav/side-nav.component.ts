@@ -28,6 +28,7 @@ import { routes as appRoutes } from '../../app.routes';
 import {
   COMPONENT_SHOWCASE_ROUTES as componentShowcaseRoutes,
   FOUNDATION_SHOWCASE_ROUTES as foundationShowcaseRoutes,
+  LAYOUT_SHOWCASE_ROUTES as layoutShowcaseRoutes,
 } from '../../showcase/showcase.routes';
 
 const KEY_DOWN = 'ArrowDown';
@@ -63,6 +64,8 @@ export class SideNavComponent implements OnInit {
 
   @ViewChildren('componentLink') componentLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
   @ViewChildren('resourceLink') resourceLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
+  @ViewChildren('foundationLink') foundationLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
+  @ViewChildren('layoutLink') layoutLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
 
   @Output() menuToggle = new EventEmitter<boolean>();
   @HostBinding('class.is-open')
@@ -72,9 +75,10 @@ export class SideNavComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.mapShowcaseRoutes();
+    this.mapComponentShowcaseRoutes();
     this.mapResourcesRoutes();
     this.mapFoundationRoutes();
+    this.mapLayoutRoutes();
 
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -85,7 +89,7 @@ export class SideNavComponent implements OnInit {
       });
   }
 
-  private mapShowcaseRoutes() {
+  private mapComponentShowcaseRoutes() {
     const routesWithPath = componentShowcaseRoutes[0].children.filter((r) => r.path);
     const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
     navigableRoutes.sort(this.sortByPath);
@@ -113,16 +117,19 @@ export class SideNavComponent implements OnInit {
     const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
     navigableRoutes.sort(this.sortByPath);
 
-    const mainRoutes = navigableRoutes.filter((r) => !r.data?.['section']);
-    const sectionRoutes = navigableRoutes.filter((r) => r.data?.['section'] === 'layout');
-
-    this.foundationRoutes = mainRoutes.map((route) => ({
+    this.foundationRoutes = navigableRoutes.map((route) => ({
       path: `showcase/${route.path}`,
       name: kebabToTitleCase(route.path),
       active: this.router.url.endsWith(route.path),
     }));
+  }
 
-    this.layoutRoutes = sectionRoutes.map((route) => ({
+  private mapLayoutRoutes() {
+    const routesWithPath = layoutShowcaseRoutes[0].children.filter((r) => r.path);
+    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
+    navigableRoutes.sort(this.sortByPath);
+
+    this.layoutRoutes = navigableRoutes.map((route) => ({
       path: `showcase/${route.path}`,
       name: kebabToTitleCase(route.path),
       active: this.router.url.endsWith(route.path),
@@ -147,9 +154,22 @@ export class SideNavComponent implements OnInit {
 
   onLinksArrowUpDown(event: KeyboardEvent, sideNavGroupKey: string) {
     event.preventDefault();
-    const listElements: HTMLAnchorElement[] = (
-      sideNavGroupKey === 'resources' ? this.resourceLinks : this.componentLinks
-    ).map((link) => link.nativeElement);
+    let links: QueryList<ElementRef<HTMLAnchorElement>>;
+    switch (sideNavGroupKey) {
+      case 'foundation':
+        links = this.foundationLinks;
+        break;
+      case 'layout':
+        links = this.layoutLinks;
+        break;
+      case 'components':
+        links = this.componentLinks;
+        break;
+      default:
+        links = this.resourceLinks;
+        break;
+    }
+    const listElements: HTMLAnchorElement[] = links.map((link) => link.nativeElement);
     const currentlyFocused = listElements.findIndex((link) => link === document.activeElement);
 
     if (currentlyFocused === -1) {
