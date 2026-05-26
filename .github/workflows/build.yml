@@ -7,6 +7,7 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -25,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       #Build on PRs, PR's merge to default branch, new releases & changes not including 'libs' (which gets build as part of new release)
-      do_build: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v') || steps.filter.outputs.libs == 'false' }}
+      do_build: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' || steps.filter.outputs.libs == 'false' }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
       - name: Checkout repo
@@ -107,47 +108,32 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Get deployment name for default or feature branch
-        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
+        if: >-
+          github.event_name == 'pull_request' ||
+          (github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')) ||
+          (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/develop')
         env:
           GIT_REF: ${{ github.head_ref || github.ref }}
         run: |
-          branchname="$GIT_REF"
-          echo "Github branchname: ${branchname}"
-          branchname="${branchname##*/}"
-          echo "Removed leading paths - branchname: ${branchname}"
-          branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
-          echo "Converted to lowercase - branchname: ${branchname}"
-          branchname="${branchname//[^a-zA-Z0-9]/-}"
-          echo "Replaced illegal chars - branchname: ${branchname}"
-          branchname=$(tr -s '-' '-' <<< "$branchname")
-          echo "Removed duplicated dashes - branchname: ${branchname}"
-          branchname="${branchname%%-}"
-          echo "Removed trailing dash - final branchname: ${branchname}"
-          releasename="kby-${branchname}"
-          releasename=$(cut -c 1-53 <<< "$releasename")
-          echo "Releasename: ${releasename}"
+          releasename=$(bash .github/scripts/normalize-branch-name.sh "$GIT_REF")
+          branchname="${releasename#kby-}"
           echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
+          echo "IS_RELEASE=false" >> $GITHUB_ENV
       - name: Get deployment name for release branch
-        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
+        if: >-
+          (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
+          (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/develop')
         run: |
           echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
-      - name: Get hostname for default or feature branch
-        if: "github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/v')"
-        run: |
-          chmod +x ./scripts/dns.pl
-          hostname=$(perl ./scripts/dns.pl $DOMAIN "${RELEASENAME}")
-          echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
-      - name: Get hostname for release branch
-        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
-        run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
+          echo "IS_RELEASE=true" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEPLOY_REF: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
-          PRODUCTION_ENV: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+          PRODUCTION_ENV: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/develop' }}
           REPO: ${{ github.repository }}
         run: |
           payload=$(jq -n \
@@ -181,54 +167,44 @@ jobs:
       - name: Deploy cookbook to GitHub pages
         run: |
           set -e
-          echo "Hostname: ${HOSTNAME}"
 
-          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@$REPO_HOST/kirbydesign/designsystem.git -b gh-pages designsystem_web
+          git clone https://x-access-token:$GITHUB_TOKEN@$REPO_HOST/kirbydesign/designsystem.git -b gh-pages designsystem_web
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'
 
           mkdir -p designsystem_web/branch
-          if [ $HOSTNAME == "cookbook" ]; then
+          if [ $IS_RELEASE == "true" ]; then
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/browser/index.html
+            find designsystem_web -maxdepth 1 -mindepth 1 ! -name 'branch' ! -name 'CNAME' ! -name '.nojekyll' ! -name '.git' -exec rm -rf {} +
             cp -R dist/apps/cookbook/browser/* designsystem_web/
             cp designsystem_web/index.html designsystem_web/404.html
           else
-            mkdir -p designsystem_web/branch/$HOSTNAME
-            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/browser/index.html
-            cp -R dist/apps/cookbook/browser/* designsystem_web/branch/$HOSTNAME
-            cp designsystem_web/branch/$HOSTNAME/index.html designsystem_web/branch/$HOSTNAME/404.html
+            # Remove old branch build if exists
+            rm -rf designsystem_web/branch/$RELEASENAME
+            mkdir -p designsystem_web/branch/$RELEASENAME
+            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$RELEASENAME/\">,g" dist/apps/cookbook/browser/index.html
+            cp -R dist/apps/cookbook/browser/* designsystem_web/branch/$RELEASENAME
+            cp designsystem_web/branch/$RELEASENAME/index.html designsystem_web/branch/$RELEASENAME/404.html
           fi
 
-          cd designsystem_web/branch/
-          folders=$(ls -d */)
-
-          cd ../
-          branches=$(git branch -r)
-
-          #find deployment names for all branches
+          # Build list of valid release names from active remote branches
           branchList=""
-          for branch in $branches; do
-            name="${branch##*/}"
-            name=$(tr [:upper:] [:lower:] <<< "$name")
-            name="${name//[^a-zA-Z0-9]/-}"
-            name=$(tr -s '-' '-' <<< "$name")
-            name="${name%%-}"
-            name="kby-${name}"
-            name=$(cut -c 1-53 <<< "$name")
-            branchList="$branchList $name"
+          for branch in $(git -C designsystem_web branch -r); do
+            branchList="$branchList $(bash .github/scripts/normalize-branch-name.sh "$branch")"
           done
 
-          #delete deployments related to closed branches
-          for item in $folders
-          do
-            echo "Verify branch ${item::-1} exist"
-            if ! grep -q "${item::-1}" <<< "$branchList"; then
-              echo "Deleting branch folder ${item::-1} (branch closed)"
-              rm -Rf branch/${item::-1}
+          # Delete branch folders for closed branches
+          for folder in designsystem_web/branch/*/; do
+            foldername="${folder%/}"
+            foldername="${foldername##*/}"
+            if ! grep -q "$foldername" <<< "$branchList"; then
+              echo "Deleting branch folder $foldername (branch closed)"
+              rm -rf "designsystem_web/branch/$foldername"
             fi
           done
 
+          cd designsystem_web
           git add .
 
           if ! git diff-index --quiet HEAD; then
@@ -246,7 +222,7 @@ jobs:
           REPO: ${{ github.repository }}
           DEPLOYMENT_ID: ${{ steps.create_deployment.outputs.deployment_id }}
           RUN_ID: ${{ github.run_id }}
-          ENVIRONMENT_URL: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
+          ENVIRONMENT_URL: ${{ env.IS_RELEASE == 'true' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.RELEASENAME) }}
         run: |
           gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
             --method POST \
