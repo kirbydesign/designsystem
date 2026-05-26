@@ -709,14 +709,13 @@ export class DropdownComponent
   }
 
   private domIndexOf(kirbyItem: ElementRef<HTMLElement>): number {
-    return this._kirbyItemsSlotted
+    return this.kirbyItemsSlotted
       .toArray()
-      .sort((a, b) =>
-        a.nativeElement.compareDocumentPosition(b.nativeElement) & Node.DOCUMENT_POSITION_FOLLOWING
-          ? -1
-          : 1
-      )
-      .findIndex((item) => item.nativeElement === kirbyItem.nativeElement);
+      .filter(
+        (item) =>
+          item.nativeElement.compareDocumentPosition(kirbyItem.nativeElement) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+      ).length;
   }
 
   private unlistenAllSlottedItems() {
