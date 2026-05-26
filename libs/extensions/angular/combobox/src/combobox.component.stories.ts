@@ -165,10 +165,7 @@ export const Default: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
-      </kirby-x-combobox>
+      <kirby-x-combobox ${argsToTemplate(args)} />
     `,
   }),
 };
@@ -186,10 +183,7 @@ export const WithTextProperty: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
-      </kirby-x-combobox>
+      <kirby-x-combobox ${argsToTemplate(args)} />
     `,
   }),
 };
@@ -212,9 +206,7 @@ export const WithTemplate: Story = {
       ...args,
     },
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
+      <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           role="option"
@@ -255,9 +247,7 @@ export const CustomSearchFunction: Story = {
       },
     },
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
+      <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
@@ -294,9 +284,7 @@ export const LargeList: Story = {
       ...args,
     },
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
+      <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
@@ -330,10 +318,7 @@ export const Disabled: Story = {
       ...args,
     },
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
-      </kirby-x-combobox>
+      <kirby-x-combobox ${argsToTemplate(args)} />
     `,
   }),
 };
@@ -352,10 +337,7 @@ export const HasError: Story = {
       ...args,
     },
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
-      </kirby-x-combobox>
+      <kirby-x-combobox ${argsToTemplate(args)} />
     `,
   }),
 };
@@ -374,12 +356,7 @@ export const Sizes: Story = {
       ...args,
     },
     template: `
-      <div>
-        <kirby-x-combobox
-          ${argsToTemplate(args)}
-        >
-        </kirby-x-combobox>
-      </div>
+      <kirby-x-combobox ${argsToTemplate(args)} />
     `,
   }),
 };
@@ -398,10 +375,7 @@ export const ExpandBlock: Story = {
       ...args,
     },
     template: `
-      <kirby-x-combobox
-        ${argsToTemplate(args)}
-      >
-      </kirby-x-combobox>
+      <kirby-x-combobox ${argsToTemplate(args)} />
     `,
   }),
 };
