@@ -345,7 +345,7 @@ export const HasError: Story = {
  * The `size` property defaults to `md`, and can be set to `lg` to display a larger input field.
  * While the sizes are generally interchangeable, it is important to use them consistently for elements in the same form.
  */
-export const Sizes: Story = {
+export const LargeSize: Story = {
   args: {
     items: simpleCurrencyItems,
     placeholder: 'Select currency',
