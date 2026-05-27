@@ -71,7 +71,10 @@ export const FOUNDATION_ROUTES: Route[] = [
   { path: 'spacing', component: SpacingShowcaseComponent },
 ];
 
-export const LAYOUT_ROUTES: Route[] = [{ path: 'grid', component: GridShowcaseComponent }];
+export const LAYOUT_ROUTES: Route[] = [
+  { path: 'grid', component: GridShowcaseComponent },
+  { path: 'styling-HTML-lists', component: StylingHtmlListsShowcaseComponent },
+];
 
 export const COMPONENT_ROUTES: Route[] = [
   { path: '', redirectTo: 'button', pathMatch: 'full' },
@@ -101,7 +104,7 @@ export const COMPONENT_ROUTES: Route[] = [
     data: { hide: true },
   },
   { path: 'page', component: PageShowcaseComponent },
-  { path: 'page-tab-navigation', component: TabNavigationShowcaseComponent },
+  { path: 'tab-navigation', component: TabNavigationShowcaseComponent },
   { path: 'tabs', component: TabsShowcaseComponent },
   { path: 'chart', component: ChartShowcaseComponent },
   { path: 'chart-stock', component: StockChartShowcaseComponent },
@@ -144,7 +147,6 @@ export const COMPONENT_ROUTES: Route[] = [
   { path: 'range', component: RangeShowcaseComponent },
   { path: 'link', component: LinkShowcaseComponent },
   { path: 'section-header', component: SectionHeaderShowcaseComponent },
-  { path: 'styling-HTML-lists', component: StylingHtmlListsShowcaseComponent },
   { path: 'data-table', component: DataTableShowcaseComponent },
   { path: 'header', component: HeaderShowcaseComponent },
   { path: 'label', component: LabelShowcaseComponent },
