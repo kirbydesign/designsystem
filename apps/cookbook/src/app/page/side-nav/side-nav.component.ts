@@ -26,9 +26,9 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { routes as appRoutes } from '../../app.routes';
 import {
-  COMPONENT_SHOWCASE_ROUTES as componentShowcaseRoutes,
-  FOUNDATION_SHOWCASE_ROUTES as foundationShowcaseRoutes,
-  LAYOUT_SHOWCASE_ROUTES as layoutShowcaseRoutes,
+  COMPONENT_ROUTES as componentRoutes,
+  FOUNDATION_ROUTES as foundationRoutes,
+  LAYOUT_ROUTES as layoutRoutes,
 } from '../../showcase/showcase.routes';
 
 const KEY_DOWN = 'ArrowDown';
@@ -75,10 +75,11 @@ export class SideNavComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.mapComponentShowcaseRoutes();
+    this.foundationRoutes = this.mapRouteGroup(foundationRoutes);
+    this.layoutRoutes = this.mapRouteGroup(layoutRoutes);
+    this.allComponentShowcaseRoutes = this.mapRouteGroup(componentRoutes);
+    this.applyComponentFilter('');
     this.mapResourcesRoutes();
-    this.mapFoundationRoutes();
-    this.mapLayoutRoutes();
 
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -89,20 +90,14 @@ export class SideNavComponent implements OnInit {
       });
   }
 
-  private mapComponentShowcaseRoutes() {
-    const routesWithPath = componentShowcaseRoutes[0].children.filter((r) => r.path);
-    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
-    navigableRoutes.sort(this.sortByPath);
-
-    this.allComponentShowcaseRoutes = navigableRoutes.map((route) => {
-      return {
-        path: `showcase/${route.path}`,
-        name: kebabToTitleCase(route.path),
-        active: this.router.url.endsWith(route.path),
-      };
-    });
-
-    this.applyComponentFilter('');
+  private mapRouteGroup(routes: Route[]): SideNavLink[] {
+    const navigable = routes.filter((r) => r.path && !r.data?.hide);
+    navigable.sort(this.sortByPath);
+    return navigable.map((route) => ({
+      path: `showcase/${route.path}`,
+      name: kebabToTitleCase(route.path),
+      active: this.router.url.endsWith(route.path),
+    }));
   }
 
   private mapResourcesRoutes() {
@@ -110,30 +105,6 @@ export class SideNavComponent implements OnInit {
     const resourceLinks = routesWithPath.filter((r) => r.data?.['resourceLink']);
 
     this.filteredResourceRoutes = resourceLinks;
-  }
-
-  private mapFoundationRoutes() {
-    const routesWithPath = foundationShowcaseRoutes[0].children.filter((r) => r.path);
-    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
-    navigableRoutes.sort(this.sortByPath);
-
-    this.foundationRoutes = navigableRoutes.map((route) => ({
-      path: `showcase/${route.path}`,
-      name: kebabToTitleCase(route.path),
-      active: this.router.url.endsWith(route.path),
-    }));
-  }
-
-  private mapLayoutRoutes() {
-    const routesWithPath = layoutShowcaseRoutes[0].children.filter((r) => r.path);
-    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
-    navigableRoutes.sort(this.sortByPath);
-
-    this.layoutRoutes = navigableRoutes.map((route) => ({
-      path: `showcase/${route.path}`,
-      name: kebabToTitleCase(route.path),
-      active: this.router.url.endsWith(route.path),
-    }));
   }
 
   private sortByPath(a: Route, b: Route): number {

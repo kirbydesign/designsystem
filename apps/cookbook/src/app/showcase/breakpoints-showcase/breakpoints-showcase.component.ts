@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 
 import { AsideComponent } from '../../shared/aside/aside.component';
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
-
-interface TokenEntry {
-  name: string;
-  cssVar: string;
-  description: string;
-}
+import { TokenEntry } from '../../shared/token-entry';
 
 @Component({
   selector: 'cookbook-breakpoints-showcase',

@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Route, Routes } from '@angular/router';
 
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
@@ -62,293 +62,98 @@ import { BorderRadiusShowcaseComponent } from './border-radius-showcase/border-r
 import { BreakpointsShowcaseComponent } from './breakpoints-showcase/breakpoints-showcase.component';
 import { ElevationShowcaseComponent } from './elevation-showcase/elevation-showcase.component';
 
-export const FOUNDATION_SHOWCASE_ROUTES: Routes = [
-  {
-    path: '',
-    component: ShowcaseComponent,
-    children: [
-      {
-        path: 'colors',
-        component: ColorsShowcaseComponent,
-      },
-      {
-        path: 'typography',
-        component: TypographyShowcaseComponent,
-      },
-      {
-        path: 'border-radius',
-        component: BorderRadiusShowcaseComponent,
-      },
-      {
-        path: 'elevation',
-        component: ElevationShowcaseComponent,
-      },
-      {
-        path: 'breakpoints',
-        component: BreakpointsShowcaseComponent,
-      },
-      {
-        path: 'spacing',
-        component: SpacingShowcaseComponent,
-      },
-    ],
-  },
+export const FOUNDATION_ROUTES: Route[] = [
+  { path: 'colors', component: ColorsShowcaseComponent },
+  { path: 'typography', component: TypographyShowcaseComponent },
+  { path: 'border-radius', component: BorderRadiusShowcaseComponent },
+  { path: 'elevation', component: ElevationShowcaseComponent },
+  { path: 'breakpoints', component: BreakpointsShowcaseComponent },
+  { path: 'spacing', component: SpacingShowcaseComponent },
 ];
 
-export const LAYOUT_SHOWCASE_ROUTES: Routes = [
-  {
-    path: '',
-    component: ShowcaseComponent,
-    children: [
-      {
-        path: 'grid',
-        component: GridShowcaseComponent,
-      },
-    ],
-  },
-];
+export const LAYOUT_ROUTES: Route[] = [{ path: 'grid', component: GridShowcaseComponent }];
 
-export const COMPONENT_SHOWCASE_ROUTES: Routes = [
+export const COMPONENT_ROUTES: Route[] = [
+  { path: '', redirectTo: 'button', pathMatch: 'full' },
+  { path: 'item', component: ItemShowcaseComponent },
   {
-    path: '',
-    component: ShowcaseComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'button',
-        pathMatch: 'full',
-      },
-      {
-        path: 'item',
-        component: ItemShowcaseComponent,
-      },
-      {
-        path: 'item-sliding',
-        component: ItemSlidingShowcaseComponent,
-        data: {
-          hide: true,
-        },
-      },
-      {
-        path: 'item-group',
-        component: ItemGroupShowcaseComponent,
-        data: {
-          hide: true,
-        },
-      },
-      {
-        path: 'button',
-        component: ButtonShowcaseComponent,
-      },
-      {
-        path: 'slide-button',
-        component: SlideButtonShowcaseComponent,
-      },
-      {
-        path: 'divider',
-        component: DividerShowcaseComponent,
-      },
-      {
-        path: 'avatar',
-        component: AvatarShowcaseComponent,
-      },
-      {
-        path: 'card',
-        component: CardShowcaseComponent,
-      },
-      {
-        path: 'list',
-        component: ListShowcaseComponent,
-      },
-      {
-        path: 'list-load-on-demand',
-        component: ListLoadOnDemandShowcaseComponent,
-      },
-      {
-        path: 'list-swipe',
-        component: ListSwipeShowcaseComponent,
-      },
-      {
-        path: 'list-no-shape',
-        component: ListNoShapeShowcaseComponent,
-      },
-      {
-        path: 'list-experimental',
-        component: ListExperimentalShowcaseComponent,
-        data: {
-          hide: true,
-        },
-      },
-      {
-        path: 'page',
-        component: PageShowcaseComponent,
-      },
-      {
-        path: 'page-tab-navigation',
-        component: TabNavigationShowcaseComponent,
-      },
-      {
-        path: 'tabs',
-        component: TabsShowcaseComponent,
-      },
-      {
-        path: 'chart',
-        component: ChartShowcaseComponent,
-      },
-      { path: 'chart-stock', component: StockChartShowcaseComponent },
-      {
-        path: 'chart-stock-config',
-        component: CookbookChartStockConfigShowcaseComponent,
-        data: {
-          hide: true, // hidden until we are ready to get users on it.
-        },
-      },
-      {
-        path: 'chart-bar-config',
-        component: CookbookChartBarConfigShowcaseComponent,
-        data: {
-          hide: true, // hidden until we are ready to get users on it.
-        },
-      },
-      {
-        path: 'spinner',
-        component: SpinnerShowcaseComponent,
-      },
-      {
-        path: 'modal',
-        component: ModalShowcaseComponent,
-      },
-      {
-        path: 'loading-overlay',
-        component: LoadingOverlayShowcaseComponent,
-      },
-      {
-        path: 'action-sheet',
-        component: ActionSheetShowcaseComponent,
-      },
-      {
-        path: 'fab-sheet',
-        component: FabSheetShowcaseComponent,
-      },
-      {
-        path: 'alert',
-        component: AlertShowcaseComponent,
-      },
-      {
-        path: 'badge',
-        component: BadgeShowcaseComponent,
-      },
-      {
-        path: 'flag',
-        component: FlagShowcaseComponent,
-      },
-      {
-        path: 'icon',
-        component: IconShowcaseComponent,
-      },
-      {
-        path: 'checkbox',
-        component: CheckboxShowcaseComponent,
-      },
-      {
-        path: 'toast',
-        component: ToastShowcaseComponent,
-      },
-      {
-        path: 'toggle',
-        component: ToggleShowcaseComponent,
-      },
-      {
-        path: 'toggle-button',
-        component: ToggleButtonShowcaseComponent,
-      },
-      {
-        path: 'calendar',
-        component: CalendarShowcaseComponent,
-      },
-      {
-        path: 'segmented-control',
-        component: SegmentedControlShowcaseComponent,
-      },
-      {
-        path: 'message-state',
-        component: EmptyStateShowcaseComponent,
-      },
-      {
-        path: 'empty-state',
-        redirectTo: 'message-state',
-        pathMatch: 'full',
-      },
-      {
-        path: 'toolbar',
-        component: ToolbarShowcaseComponent,
-      },
-      {
-        path: 'form-field',
-        component: FormFieldShowcaseComponent,
-      },
-      {
-        path: 'reorder-list',
-        component: ReorderListShowcaseComponent,
-      },
-      {
-        path: 'dropdown',
-        component: DropdownShowcaseComponent,
-      },
-      {
-        path: 'progress-circle',
-        component: ProgressCircleShowcaseComponent,
-      },
-      {
-        path: 'slides',
-        component: SlidesShowcaseComponent,
-      },
-      {
-        path: 'accordion',
-        component: AccordionShowcaseComponent,
-      },
-      {
-        path: 'menu',
-        component: MenuShowcaseComponent,
-      },
-      {
-        path: 'radio',
-        component: RadioShowcaseComponent,
-      },
-      {
-        path: 'range',
-        component: RangeShowcaseComponent,
-      },
-      {
-        path: 'link',
-        component: LinkShowcaseComponent,
-      },
-      {
-        path: 'section-header',
-        component: SectionHeaderShowcaseComponent,
-      },
-      {
-        path: 'styling-HTML-lists',
-        component: StylingHtmlListsShowcaseComponent,
-      },
-      {
-        path: 'data-table',
-        component: DataTableShowcaseComponent,
-      },
-      {
-        path: 'header',
-        component: HeaderShowcaseComponent,
-      },
-      {
-        path: 'label',
-        component: LabelShowcaseComponent,
-      },
-    ],
+    path: 'item-sliding',
+    component: ItemSlidingShowcaseComponent,
+    data: { hide: true },
   },
+  {
+    path: 'item-group',
+    component: ItemGroupShowcaseComponent,
+    data: { hide: true },
+  },
+  { path: 'button', component: ButtonShowcaseComponent },
+  { path: 'slide-button', component: SlideButtonShowcaseComponent },
+  { path: 'divider', component: DividerShowcaseComponent },
+  { path: 'avatar', component: AvatarShowcaseComponent },
+  { path: 'card', component: CardShowcaseComponent },
+  { path: 'list', component: ListShowcaseComponent },
+  { path: 'list-load-on-demand', component: ListLoadOnDemandShowcaseComponent },
+  { path: 'list-swipe', component: ListSwipeShowcaseComponent },
+  { path: 'list-no-shape', component: ListNoShapeShowcaseComponent },
+  {
+    path: 'list-experimental',
+    component: ListExperimentalShowcaseComponent,
+    data: { hide: true },
+  },
+  { path: 'page', component: PageShowcaseComponent },
+  { path: 'page-tab-navigation', component: TabNavigationShowcaseComponent },
+  { path: 'tabs', component: TabsShowcaseComponent },
+  { path: 'chart', component: ChartShowcaseComponent },
+  { path: 'chart-stock', component: StockChartShowcaseComponent },
+  {
+    path: 'chart-stock-config',
+    component: CookbookChartStockConfigShowcaseComponent,
+    data: { hide: true },
+  },
+  {
+    path: 'chart-bar-config',
+    component: CookbookChartBarConfigShowcaseComponent,
+    data: { hide: true },
+  },
+  { path: 'spinner', component: SpinnerShowcaseComponent },
+  { path: 'modal', component: ModalShowcaseComponent },
+  { path: 'loading-overlay', component: LoadingOverlayShowcaseComponent },
+  { path: 'action-sheet', component: ActionSheetShowcaseComponent },
+  { path: 'fab-sheet', component: FabSheetShowcaseComponent },
+  { path: 'alert', component: AlertShowcaseComponent },
+  { path: 'badge', component: BadgeShowcaseComponent },
+  { path: 'flag', component: FlagShowcaseComponent },
+  { path: 'icon', component: IconShowcaseComponent },
+  { path: 'checkbox', component: CheckboxShowcaseComponent },
+  { path: 'toast', component: ToastShowcaseComponent },
+  { path: 'toggle', component: ToggleShowcaseComponent },
+  { path: 'toggle-button', component: ToggleButtonShowcaseComponent },
+  { path: 'calendar', component: CalendarShowcaseComponent },
+  { path: 'segmented-control', component: SegmentedControlShowcaseComponent },
+  { path: 'message-state', component: EmptyStateShowcaseComponent },
+  { path: 'empty-state', redirectTo: 'message-state', pathMatch: 'full' },
+  { path: 'toolbar', component: ToolbarShowcaseComponent },
+  { path: 'form-field', component: FormFieldShowcaseComponent },
+  { path: 'reorder-list', component: ReorderListShowcaseComponent },
+  { path: 'dropdown', component: DropdownShowcaseComponent },
+  { path: 'progress-circle', component: ProgressCircleShowcaseComponent },
+  { path: 'slides', component: SlidesShowcaseComponent },
+  { path: 'accordion', component: AccordionShowcaseComponent },
+  { path: 'menu', component: MenuShowcaseComponent },
+  { path: 'radio', component: RadioShowcaseComponent },
+  { path: 'range', component: RangeShowcaseComponent },
+  { path: 'link', component: LinkShowcaseComponent },
+  { path: 'section-header', component: SectionHeaderShowcaseComponent },
+  { path: 'styling-HTML-lists', component: StylingHtmlListsShowcaseComponent },
+  { path: 'data-table', component: DataTableShowcaseComponent },
+  { path: 'header', component: HeaderShowcaseComponent },
+  { path: 'label', component: LabelShowcaseComponent },
 ];
 
 export const ALL_SHOWCASE_ROUTES: Routes = [
-  ...FOUNDATION_SHOWCASE_ROUTES,
-  ...LAYOUT_SHOWCASE_ROUTES,
-  ...COMPONENT_SHOWCASE_ROUTES,
+  {
+    path: '',
+    component: ShowcaseComponent,
+    children: [...FOUNDATION_ROUTES, ...LAYOUT_ROUTES, ...COMPONENT_ROUTES],
+  },
 ];

@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
-import { AsideComponent } from '~/app/shared/aside/aside.component';
-
-interface TokenEntry {
-  name: string;
-  cssVar: string;
-  description: string;
-}
+import { AsideComponent } from '../../shared/aside/aside.component';
+import { TokenEntry } from '../../shared/token-entry';
 
 @Component({
   selector: 'cookbook-borders-showcase',

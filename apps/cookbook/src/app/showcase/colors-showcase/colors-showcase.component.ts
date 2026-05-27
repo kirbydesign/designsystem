@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 
 import { AsideComponent } from '../../shared/aside/aside.component';
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
-
-interface ColorTokenEntry {
-  name: string;
-  cssVar: string;
-  description: string;
-}
+import { TokenEntry } from '../../shared/token-entry';
 
 interface DecorationColorGroup {
   hue: string;
@@ -21,19 +16,19 @@ interface DecorationColorGroup {
   imports: [AsideComponent, CopyTokenDirective],
 })
 export class ColorsShowcaseComponent {
-  brandColors: ColorTokenEntry[] = [
+  brandColors: TokenEntry[] = [
     { name: 'primary', cssVar: '--kirby-primary', description: 'Main brand color' },
     { name: 'secondary', cssVar: '--kirby-secondary', description: 'Supporting brand color' },
     { name: 'tertiary', cssVar: '--kirby-tertiary', description: 'Accent brand color' },
   ];
 
-  notificationColors: ColorTokenEntry[] = [
+  notificationColors: TokenEntry[] = [
     { name: 'success', cssVar: '--kirby-success', description: 'Positive feedback' },
     { name: 'warning', cssVar: '--kirby-warning', description: 'Caution feedback' },
     { name: 'danger', cssVar: '--kirby-danger', description: 'Error or destructive' },
   ];
 
-  systemColors: ColorTokenEntry[] = [
+  systemColors: TokenEntry[] = [
     {
       name: 'background-color',
       cssVar: '--kirby-background-color',
@@ -48,7 +43,7 @@ export class ColorsShowcaseComponent {
     { name: 'black', cssVar: '--kirby-black', description: 'Highest contrast' },
   ];
 
-  textColors: ColorTokenEntry[] = [
+  textColors: TokenEntry[] = [
     { name: 'black', cssVar: '--kirby-text-color-black', description: 'Primary text' },
     { name: 'semi-dark', cssVar: '--kirby-text-color-semi-dark', description: 'Secondary text' },
     { name: 'white', cssVar: '--kirby-text-color-white', description: 'Text on dark backgrounds' },

@@ -2,17 +2,9 @@ import { Component } from '@angular/core';
 
 import { AsideComponent } from '../../shared/aside/aside.component';
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
+import { TokenEntry } from '../../shared/token-entry';
 
-interface TokenEntry {
-  name: string;
-  cssVar: string;
-  description: string;
-}
-
-interface LineHeightEntry {
-  name: string;
-  cssVar: string;
-  description: string;
+interface LineHeightEntry extends TokenEntry {
   fontSizeVar: string;
 }
 
