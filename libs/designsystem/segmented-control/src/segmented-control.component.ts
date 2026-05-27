@@ -1,4 +1,6 @@
 import {
+  AfterViewChecked,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -9,7 +11,9 @@ import {
   HostListener,
   Input,
   Output,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
@@ -39,11 +43,17 @@ export enum SegmentedControlMode {
     },
   ],
 })
-export class SegmentedControlComponent<
-  TItem extends SegmentItem = SegmentItem,
-> implements ControlValueAccessor {
+export class SegmentedControlComponent<TItem extends SegmentItem = SegmentItem>
+  implements AfterViewChecked, AfterViewInit, ControlValueAccessor
+{
   @ViewChild(IonSegment, { static: true, read: ElementRef })
   private ionSegmentElement: ElementRef<HTMLIonSegmentElement>;
+
+  @ViewChild('hiddenItems', { read: ElementRef })
+  private hiddenItemsContainer?: ElementRef<HTMLDivElement>;
+
+  @ViewChildren('projectedItemOutlet', { read: ElementRef })
+  private projectedItemOutlets?: QueryList<ElementRef<HTMLDivElement>>;
 
   /**
    * Ensure that the click actually did originate from within the segment-button.
@@ -76,8 +86,17 @@ export class SegmentedControlComponent<
 
   @Input() set items(value: TItem[]) {
     this._items = value || [];
-    this._value = this.items[this.selectedIndex];
+    if (!this.hasProjectedItems) {
+      this._value = this.items[this.selectedIndex];
+    }
     this.ensureIonSegmentSelected();
+  }
+
+  projectedItems: HTMLElement[] = [];
+  private projectedContentSynced = false;
+
+  get hasProjectedItems(): boolean {
+    return this.projectedItems.length > 0;
   }
 
   protected isDisabled = false;
@@ -94,7 +113,8 @@ export class SegmentedControlComponent<
   private ensureIonSegmentSelected() {
     const ionSegment = this.ionSegmentElement.nativeElement;
     const ionSelectEvent = ionSegment['ionSelect'];
-    if (this._value && typeof ionSelectEvent?.emit === 'function') {
+    const selectedSegmentValue = this.getSelectedSegmentValue();
+    if (selectedSegmentValue !== undefined && typeof ionSelectEvent?.emit === 'function') {
       // Ensure changes has been reflected to the DOM:
       setTimeout(() => {
         const selectedSegmentButton = ionSegment.querySelector(
@@ -102,7 +122,7 @@ export class SegmentedControlComponent<
         );
         if (selectedSegmentButton) return; // Nothing to patch
 
-        ionSelectEvent.emit({ value: this._value?.id });
+        ionSelectEvent.emit({ value: selectedSegmentValue });
       });
     }
   }
@@ -115,8 +135,11 @@ export class SegmentedControlComponent<
   @Input() set selectedIndex(index: number) {
     if (index !== this._selectedIndex) {
       this._selectedIndex = index;
-      this._value = this.items[this.selectedIndex];
+      if (!this.hasProjectedItems) {
+        this._value = this.items[this.selectedIndex];
+      }
       this.selectedIndexChange.emit(this.selectedIndex);
+      this.ensureIonSegmentSelected();
     }
   }
 
@@ -127,8 +150,13 @@ export class SegmentedControlComponent<
     return this._value;
   }
 
-  @Input() set value(value: NoInfer<TItem>) {
-    this.selectedIndex = this.items.indexOf(value);
+  @Input() set value(value: NoInfer<TItem> | number) {
+    if (this.hasProjectedItems && typeof value === 'number') {
+      this.selectedIndex = value;
+      return;
+    }
+
+    this.selectedIndex = this.items.indexOf(value as NoInfer<TItem>);
   }
 
   @HostBinding('class.sm')
@@ -147,9 +175,21 @@ export class SegmentedControlComponent<
     this._disableChangeOnSwipe = value;
   }
 
-  @Output() segmentSelect = new EventEmitter<TItem>();
+  @Output() segmentSelect = new EventEmitter<TItem | number>();
 
   onSegmentSelect(selectedId: string) {
+    if (this.hasProjectedItems) {
+      const selectedItemIndex = parseInt(selectedId, 10);
+
+      if (!isNaN(selectedItemIndex) && selectedItemIndex !== this.selectedIndex) {
+        this.selectedIndex = selectedItemIndex;
+        this.segmentSelect.emit(this.selectedIndex);
+        this.onChange(this.selectedIndex);
+        this.onTouched();
+      }
+      return;
+    }
+
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
 
     if (selectedItemIndex !== this.selectedIndex) {
@@ -166,11 +206,16 @@ export class SegmentedControlComponent<
 
   private _segmentElementHasFocus = false;
 
-  getTabIndex(item: TItem, index: number) {
+  getTabIndex(index: number, item?: TItem) {
     // When focused prevent tab stop from inner native button to outer ion-segment-button:
     if (this._segmentElementHasFocus) return -1;
+    if (this.hasProjectedItems) {
+      if (index === this.selectedIndex) return null;
+      if (this.selectedIndex < 0 && index === 0) return null;
+      return -1;
+    }
     // Allow tab stop on selected item:
-    if (item.id === this.value?.id) return null;
+    if (item?.id === this.value?.id) return null;
     // Allow tab stop on first item if no value is set:
     if (!this.value && index === 0) return null;
     // Prevent tab stop on all other items:
@@ -178,6 +223,25 @@ export class SegmentedControlComponent<
   }
 
   constructor(private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    this.projectedItems = Array.from(
+      this.hiddenItemsContainer?.nativeElement.querySelectorAll('li') || []
+    );
+
+    if (this.hasProjectedItems) {
+      this._value = undefined;
+      this.projectedContentSynced = false;
+      this.ensureIonSegmentSelected();
+      this.cdr.markForCheck();
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (this.hasProjectedItems && !this.projectedContentSynced) {
+      this.projectedContentSynced = this.syncProjectedItemContent();
+    }
+  }
 
   @HostListener('focusin')
   @HostListener('focusout')
@@ -191,7 +255,7 @@ export class SegmentedControlComponent<
 
   // Initialize default ControlValueAccessor callback functions (noop)
   // eslint-disable-next-line no-empty-function
-  private onChange: (value: NoInfer<TItem>) => void = () => {};
+  private onChange: (value: NoInfer<TItem> | number) => void = () => {};
   // eslint-disable-next-line no-empty-function
   private onTouched: () => void = () => {};
   /**
@@ -200,7 +264,15 @@ export class SegmentedControlComponent<
    *
    * @param value New value to be written to the model.
    */
-  writeValue(value: NoInfer<TItem>): void {
+  writeValue(value: NoInfer<TItem> | number): void {
+    if (this.hasProjectedItems && typeof value === 'number') {
+      if (value !== this.selectedIndex) {
+        this.selectedIndex = value;
+        this.cdr.markForCheck();
+      }
+      return;
+    }
+
     if (value !== this._value) {
       this.value = value;
       this.cdr.markForCheck();
@@ -214,7 +286,7 @@ export class SegmentedControlComponent<
    *
    * @param fn Callback to be triggered when the value changes.
    */
-  registerOnChange(fn: (value: NoInfer<TItem>) => void): void {
+  registerOnChange(fn: (value: NoInfer<TItem> | number) => void): void {
     this.onChange = fn;
   }
 
@@ -238,5 +310,31 @@ export class SegmentedControlComponent<
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
     this.cdr.markForCheck();
+  }
+
+  getSelectedSegmentValue(): string | number | undefined {
+    if (this.hasProjectedItems) {
+      return this.selectedIndex >= 0 ? this.selectedIndex : undefined;
+    }
+
+    return this.value?.id;
+  }
+
+  private syncProjectedItemContent(): boolean {
+    const projectedItemOutlets = this.projectedItemOutlets?.toArray() || [];
+    if (projectedItemOutlets.length !== this.projectedItems.length) {
+      return false;
+    }
+
+    projectedItemOutlets.forEach((outletRef, index) => {
+      const outlet = outletRef.nativeElement;
+      const projectedItem = this.projectedItems[index];
+      const childNodes = Array.from(projectedItem.childNodes);
+
+      outlet.replaceChildren();
+      childNodes.forEach((childNode) => outlet.appendChild(childNode));
+    });
+
+    return true;
   }
 }
