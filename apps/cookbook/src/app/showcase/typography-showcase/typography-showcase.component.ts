@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { AsideComponent } from '../../shared/aside/aside.component';
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
 
 interface TokenEntry {
@@ -19,7 +20,7 @@ interface LineHeightEntry {
   selector: 'cookbook-typography-showcase',
   templateUrl: './typography-showcase.component.html',
   styleUrls: ['./typography-showcase.component.scss'],
-  imports: [CopyTokenDirective],
+  imports: [AsideComponent, CopyTokenDirective],
 })
 export class TypographyShowcaseComponent {
   fontSizes: TokenEntry[] = [
@@ -29,8 +30,8 @@ export class TypographyShowcaseComponent {
     { name: 'xl', cssVar: '--kirby-font-size-xl', description: '32px' },
     { name: 'l', cssVar: '--kirby-font-size-l', description: '22px' },
     { name: 'm', cssVar: '--kirby-font-size-m', description: '18px' },
-    { name: 'n', cssVar: '--kirby-font-size-n', description: '16px — body text' },
-    { name: 's', cssVar: '--kirby-font-size-s', description: '14px — small text' },
+    { name: 'n', cssVar: '--kirby-font-size-n', description: '16px' },
+    { name: 's', cssVar: '--kirby-font-size-s', description: '14px' },
     { name: 'xs', cssVar: '--kirby-font-size-xs', description: '12px' },
     { name: 'xxs', cssVar: '--kirby-font-size-xxs', description: '10px' },
   ];
@@ -47,43 +48,43 @@ export class TypographyShowcaseComponent {
     {
       name: 'xl',
       cssVar: '--kirby-line-height-xl',
-      description: '38px — h1',
+      description: '38px',
       fontSizeVar: '--kirby-font-size-xl',
     },
     {
       name: 'l',
       cssVar: '--kirby-line-height-l',
-      description: '28px — h2',
+      description: '28px',
       fontSizeVar: '--kirby-font-size-l',
     },
     {
       name: 'm',
       cssVar: '--kirby-line-height-m',
-      description: '24px — h3',
+      description: '24px',
       fontSizeVar: '--kirby-font-size-m',
     },
     {
       name: 'n',
       cssVar: '--kirby-line-height-n',
-      description: '24px — paragraph',
+      description: '24px',
       fontSizeVar: '--kirby-font-size-n',
     },
     {
       name: 's',
       cssVar: '--kirby-line-height-s',
-      description: '20px — small text',
+      description: '20px',
       fontSizeVar: '--kirby-font-size-s',
     },
     {
       name: 'xs',
       cssVar: '--kirby-line-height-xs',
-      description: '16px — extra small',
+      description: '16px',
       fontSizeVar: '--kirby-font-size-xs',
     },
     {
       name: 'xxs',
       cssVar: '--kirby-line-height-xxs',
-      description: '11px — smallest',
+      description: '11px',
       fontSizeVar: '--kirby-font-size-xxs',
     },
   ];

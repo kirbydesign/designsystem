@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { AsideComponent } from '../../shared/aside/aside.component';
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
 
 interface ColorTokenEntry {
@@ -17,7 +18,7 @@ interface DecorationColorGroup {
   selector: 'cookbook-colors-showcase',
   templateUrl: './colors-showcase.component.html',
   styleUrls: ['./colors-showcase.component.scss'],
-  imports: [CopyTokenDirective],
+  imports: [AsideComponent, CopyTokenDirective],
 })
 export class ColorsShowcaseComponent {
   brandColors: ColorTokenEntry[] = [

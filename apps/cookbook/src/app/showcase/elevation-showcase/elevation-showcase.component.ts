@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { AsideComponent } from '../../shared/aside/aside.component';
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
 
 interface TokenEntry {
@@ -12,7 +13,7 @@ interface TokenEntry {
   selector: 'cookbook-elevation-showcase',
   templateUrl: './elevation-showcase.component.html',
   styleUrls: ['./elevation-showcase.component.scss'],
-  imports: [CopyTokenDirective],
+  imports: [AsideComponent, CopyTokenDirective],
 })
 export class ElevationShowcaseComponent {
   elevations: TokenEntry[] = [

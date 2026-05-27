@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { AsideComponent } from '../../shared/aside/aside.component';
 import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
 
 interface TokenEntry {
@@ -12,14 +13,14 @@ interface TokenEntry {
   selector: 'cookbook-breakpoints-showcase',
   templateUrl: './breakpoints-showcase.component.html',
   styleUrls: ['./breakpoints-showcase.component.scss'],
-  imports: [CopyTokenDirective],
+  imports: [AsideComponent, CopyTokenDirective],
 })
 export class BreakpointsShowcaseComponent {
   breakpoints: TokenEntry[] = [
-    { name: 'xsmall', cssVar: '--kirby-breakpoint-xsmall', description: '320px — mobile portrait' },
-    { name: 'small', cssVar: '--kirby-breakpoint-small', description: '632px — mobile landscape' },
-    { name: 'medium', cssVar: '--kirby-breakpoint-medium', description: '768px — tablet' },
-    { name: 'large', cssVar: '--kirby-breakpoint-large', description: '992px — desktop' },
-    { name: 'xlarge', cssVar: '--kirby-breakpoint-xlarge', description: '1440px — large desktop' },
+    { name: 'xsmall', cssVar: '--kirby-breakpoint-xsmall', description: '320px' },
+    { name: 'small', cssVar: '--kirby-breakpoint-small', description: '632px' },
+    { name: 'medium', cssVar: '--kirby-breakpoint-medium', description: '768px' },
+    { name: 'large', cssVar: '--kirby-breakpoint-large', description: '992px' },
+    { name: 'xlarge', cssVar: '--kirby-breakpoint-xlarge', description: '1440px' },
   ];
 }

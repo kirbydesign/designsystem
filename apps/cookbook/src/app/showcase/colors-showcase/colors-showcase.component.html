@@ -1,10 +1,16 @@
-<p>Kirby exposes all colors as CSS custom properties.</p>
+<p>Color tokens map the base palette to named properties for ease of use.</p>
 
 <p>
+  They are available via the SCSS utility function
+  <code>get-color()</code>
+  or as CSS custom properties.
+</p>
+
+<cookbook-aside>
   Click any row to copy the
   <code>var()</code>
   usage to your clipboard.
-</p>
+</cookbook-aside>
 
 <h2>Brand Colors</h2>
 <table class="kirby-table">
@@ -12,8 +18,7 @@
     <tr>
       <th>Name</th>
       <th class="custom-property-cell">CSS Custom Property</th>
-      <th>Description</th>
-      <th>Preview</th>
+      <th class="preview">Preview</th>
     </tr>
   </thead>
   <tbody>
@@ -25,7 +30,6 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
-        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -40,8 +44,7 @@
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
-      <th>Description</th>
-      <th>Preview</th>
+      <th class="preview">Preview</th>
     </tr>
   </thead>
   <tbody>
@@ -53,7 +56,6 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
-        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -68,8 +70,7 @@
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
-      <th>Description</th>
-      <th>Preview</th>
+      <th class="preview">Preview</th>
     </tr>
   </thead>
   <tbody>
@@ -81,7 +82,6 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
-        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -96,8 +96,7 @@
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
-      <th>Description</th>
-      <th>Preview</th>
+      <th class="preview">Preview</th>
     </tr>
   </thead>
   <tbody>
@@ -109,7 +108,6 @@
         <td>
           <code>{{ token.cssVar }}</code>
         </td>
-        <td>{{ token.description }}</td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
         </td>
@@ -122,16 +120,14 @@
 <p>
   Decoration colors are organized in ramps (10-90) across six hues. Each maps to
   <code>--kirby-decoration-color-[hue]-[step]</code>
-  . Click the color preview to copy its
-  <code>var()</code>
-  usage.
+  .
 </p>
 <table class="kirby-table decoration-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>CSS Custom Property</th>
-      <th>Ramp</th>
+      <th class="preview">Ramp</th>
     </tr>
   </thead>
   <tbody>
