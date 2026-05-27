@@ -3,6 +3,7 @@ on:
   delete
 
 permissions:
+  contents: write      # git push to gh-pages branch
   deployments: write
 
 jobs:
@@ -44,3 +45,25 @@ jobs:
         run: |
           gh api /repos/$REPO/deployments/$DEPLOYMENT_ID \
             --method DELETE
+      - name: Delete gh-pages branch folder
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_REF: ${{ github.event.ref }}
+          REPO_HOST: github.com
+        run: |
+          releasename=$(bash .github/scripts/normalize-branch-name.sh "$EVENT_REF")
+          echo "Removing gh-pages/branch/${releasename}"
+
+          git clone https://x-access-token:$GH_TOKEN@$REPO_HOST/kirbydesign/designsystem.git -b gh-pages designsystem_web
+          git config --global user.name 'DRB-bot'
+          git config --global user.email 'dbrr00@bankdata.dk'
+
+          if [ -d "designsystem_web/branch/${releasename}" ]; then
+            rm -rf "designsystem_web/branch/${releasename}"
+            cd designsystem_web
+            git add .
+            git commit -m "Cleanup: remove branch deployment for ${releasename}"
+            git push
+          else
+            echo "No branch folder found for ${releasename}, nothing to clean up"
+          fi
