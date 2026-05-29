@@ -9,6 +9,7 @@ const config = {
 <kirby-checkbox disabled="true" [checked]="true" text="Disabled checked"></kirby-checkbox>
 <kirby-checkbox [indeterminate]="true" text="Indeterminate"></kirby-checkbox>
 <kirby-checkbox [indeterminate]="true" text="Disabled Indeterminate" [disabled]="true"></kirby-checkbox>
+<kirby-checkbox [checked]="true" hasError="true" text="Checked with error"></kirby-checkbox>
 <kirby-checkbox hasError="true" text="Has error"></kirby-checkbox>`,
 };
 

@@ -60,6 +60,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
   &.error ion-checkbox {
     --border-color: #{utils.get-color('danger')};
+    --border-color-checked: #{utils.get-color('danger')};
   }
 
   &[disabled] {
