@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: var(--kirby-spacing-xxs);
+  border: 1px solid var(--kirby-medium);
+  border-left: 3px solid var(--kirby-primary);
+  padding: var(--kirby-spacing-xxs);
+  border-radius: var(--kirby-border-radius-xs);
+  font-size: var(--kirby-font-size-s);
+  width: fit-content;
+}
