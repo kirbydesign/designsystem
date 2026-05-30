@@ -229,7 +229,7 @@ export class ComboboxComponent
    * A function that takes a search term and the list of items, and returns a filtered list of items to display in the dropdown.
    */
   @Input()
-  public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] =
+  public searchFunction: (searchTerm: string, itemsToSearch: any[]) => any[] =
     this._defaultSearchFunction;
 
   private _searchItems: unknown[] = [];
@@ -402,7 +402,7 @@ export class ComboboxComponent
    * Emitted when an item is selected (tap on mobile, click/keypress on web)
    */
   @Output()
-  public change: EventEmitter<unknown> = new EventEmitter<unknown>();
+  public change: EventEmitter<unknown> = new EventEmitter<any>();
 
   public value: unknown = undefined;
 
