@@ -76,340 +76,16 @@ export class ComboboxComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
 {
   static readonly OPEN_DELAY_IN_MS = 100;
-  private state = OpenState.closed;
-  private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
-  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+
+  // ─── IDs ──────────────────────────────────────────────────────────────────
 
   public _listboxId: string = UniqueIdGenerator.scopedTo('kirby-x-combobox').next();
   public _comboboxId: string = UniqueIdGenerator.scopedTo('kirby-input').next();
 
-  private readonly _defaultSearchFunction = (
-    searchTerm: string,
-    itemsToSearch: unknown[]
-  ): unknown[] => {
-    if (!searchTerm) {
-      return itemsToSearch;
-    }
+  // ─── State ────────────────────────────────────────────────────────────────
 
-    const lowerSearchTerm = searchTerm.toLowerCase();
-    return itemsToSearch
-      .filter((item) => this.getItemText(item).toLowerCase().includes(lowerSearchTerm))
-      .sort((a, b) => {
-        const textA = this.getItemText(a).toLowerCase();
-        const textB = this.getItemText(b).toLowerCase();
-
-        const textAStartsWith = textA.startsWith(searchTerm);
-        const textBStartsWith = textB.startsWith(searchTerm);
-        if (textAStartsWith && textBStartsWith) {
-          return this.compareAlphabetically(textA, textB);
-        }
-
-        if (textAStartsWith) {
-          return -1;
-        }
-
-        if (textBStartsWith) {
-          return 1;
-        }
-
-        return this.compareAlphabetically(textA, textB);
-      });
-  };
-
-  private compareAlphabetically(textA: string, textB: string): number {
-    if (textA < textB) {
-      return -1;
-    }
-    if (textA > textB) {
-      return 1;
-    }
-    return 0;
-  }
-
-  /**
-   * The text to display when the search returns no results.
-   */
-  @Input()
-  public noSearchResultsText = 'No results found.';
-
-  /**
-   * The text announced by screen readers when the selection is cleared.
-   */
-  @Input()
-  public selectionClearedAnnouncement = 'Selection cleared.';
-
-  public _liveRegionText = '';
-
-  /**
-   * The name of the property to use as the display text for each item.
-   */
-  @Input()
-  public itemTextProperty: string = 'text';
-  protected getItemText(item: unknown): string {
-    if (this.isTypeString(item)) {
-      return item as string;
-    }
-
-    if (this.objectHasItemTextProperty(item)) {
-      const objectItem = item as Record<string, unknown>;
-      const textValue: unknown = objectItem[this.itemTextProperty];
-
-      if (typeof textValue === 'string') {
-        return textValue;
-      }
-    }
-    return '';
-  }
-
-  /**
-   * The height of each item in the dropdown, in pixels. This is used to calculate the height of the dropdown based on the number of items.
-   */
-  @Input()
-  public itemHeight: number = 44;
-
-  protected get dropdownMaxHeight(): number {
-    return 8 * this.itemHeight;
-  }
-
-  protected get dropdownMinHeight(): number {
-    return this.itemHeight;
-  }
-
-  protected get viewportHeight(): number {
-    const itemCount = this.searchItems?.length ?? 0;
-
-    if (itemCount === 0) {
-      return this.dropdownMinHeight;
-    }
-
-    return Math.min(
-      this.dropdownMaxHeight,
-      Math.max(this.dropdownMinHeight, itemCount * this.itemHeight)
-    );
-  }
-
-  private isTypeString(item: unknown): boolean {
-    return typeof item === 'string';
-  }
-
-  private objectHasItemTextProperty(item: unknown): boolean {
-    return item != undefined && typeof item === 'object' && this.itemTextProperty in item;
-  }
-
-  private objectHasItemIdProperty(item: unknown): boolean {
-    return item != undefined && typeof item === 'object' && this.itemIdProperty in item;
-  }
-
-  /**
-   * The name of the property to use as the unique identifier for each item.
-   */
-  @Input()
-  public itemIdProperty = 'id';
-  protected getItemId(item: unknown): string {
-    if (this.isTypeString(item)) {
-      return item as string;
-    }
-
-    if (this.objectHasItemIdProperty(item)) {
-      const objectItem = item as Record<string, unknown>;
-      const idValue: unknown = objectItem[this.itemIdProperty];
-
-      if (this.isTypeString(idValue)) {
-        return idValue as string;
-      }
-    }
-
-    console.error(
-      'Each item must have an id property for scroll to work. Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
-    );
-    return '';
-  }
-
-  /**
-   * A function that takes a search term and the list of items, and returns a filtered list of items to display in the dropdown.
-   */
-  @Input()
-  public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] =
-    this._defaultSearchFunction;
-
-  private _searchItems: unknown[] = [];
-  protected get searchItems(): unknown[] {
-    return this._searchItems;
-  }
-  private set searchItems(value: unknown[]) {
-    this._searchItems = value;
-    if (!this._searchItems) {
-      return;
-    }
-
-    // only set the focused item of the search result, if the input has value
-    if (this.textInput?.nativeElement?.value) {
-      this.focusedItem = this._searchItems[0];
-    }
-  }
-
-  private _items: unknown[] = [];
-
-  get items(): unknown[] {
-    return this._items;
-  }
-
-  /**
-   * The list of items to display in the dropdown.
-   * @param value
-   */
-  @Input()
-  public set items(value: unknown[]) {
-    this._items = value;
-    this.searchItems = this._items;
-  }
-
-  private _selectedItem: unknown = undefined;
-  get selectedItem(): unknown {
-    return this._selectedItem;
-  }
-
-  /**
-   * The currently selected item.
-   * @param value
-   */
-  @Input()
-  public set selectedItem(value: unknown) {
-    // Allow clearing by setting undefined
-    if (value !== this._selectedItem) {
-      this._selectedItem = value;
-      this.focusedItem = this._selectedItem;
-      // Keep ControlValueAccessor value in sync with the selected data item
-      this.value = this._selectedItem;
-    }
-  }
-
-  // _focusedItem keeps track of which element has focus and will be selected
-  // if it is activated (by pressing ENTER)
-  private _focusedItem: unknown = undefined;
-  public get focusedItem(): unknown {
-    return this._focusedItem;
-  }
-
-  public set focusedItem(item: unknown) {
-    // the focus might not have changed, but where in the list might
-    this.setAriaPosinsetOnElement(item);
-
-    if (this._focusedItem === item) {
-      return;
-    }
-    this._focusedItem = item;
-  }
-
-  private getIndexOfItem(item: unknown): number {
-    return this.searchItems.indexOf(item);
-  }
-
-  private getKirbyElement(item: unknown | undefined): ElementRef<HTMLElement> | undefined {
-    const kirbyItems = this.getKirbyItems();
-    if (!kirbyItems || !item) {
-      return undefined;
-    }
-
-    const itemId = this.getItemId(item);
-    return kirbyItems.find((el) => el.nativeElement.id === itemId);
-  }
-
-  private setAriaPosinsetOnElement(item: unknown) {
-    const element = this.getKirbyElement(item);
-    const index = this.getIndexOfItem(item);
-    const setsize = this.searchItems.length;
-
-    if (!element) {
-      return;
-    }
-
-    this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
-    this.renderer.setAttribute(element.nativeElement, 'aria-posinset', `${index + 1}`);
-  }
-
-  /**
-   * The placeholder text to display in the input when no item is selected and the input is empty.
-   */
-  @Input()
-  public placeholder = 'Please search...';
-
-  /**
-   * The direction in which the dropdown should open relative to the input.
-   * @param direction
-   */
-  @Input()
-  public set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
-    this._popout = direction || HorizontalDirection.right;
-  }
-
-  public get popout() {
-    return this._popout;
-  }
-
-  /**
-   * If the combobox needs to expand to full width of its parent container, then use expand.
-   */
-  @Input()
-  public expand?: 'block';
-
-  /**
-   * When `true`, the user cannot interact with the combobox.
-   */
-  @Input()
-  public disabled = false;
-
-  @HostBinding('attr.disabled')
-  public get _isDisabled(): 'disabled' | null {
-    return this.disabled ? 'disabled' : null;
-  }
-
-  /**
-   * Will emit the new value when error changes.
-   */
-  @Output()
-  hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private _hasError: boolean = false;
-
-  /**
-   * When `true`, the combobox will be styled with error styles.
-   */
-  @Input()
-  get hasError(): boolean {
-    return this._hasError;
-  }
-
-  set hasError(value: boolean) {
-    if (this._hasError !== value) {
-      this._hasError = value;
-      this.hasErrorChange.emit(this._hasError);
-    }
-  }
-
-  /**
-   * The size of the input element.
-   */
-  @Input()
-  public size: InputSize = InputSize.medium;
-
-  // Prevent Ionic blur on scroll
-  @HostBinding('attr.no-blur')
-  public get _noBlurOnScroll(): boolean {
-    return true;
-  }
-
-  /**
-   * Emitted when an item is selected (tap on mobile, click/keypress on web)
-   */
-  @Output()
-  public change: EventEmitter<unknown> = new EventEmitter<unknown>();
-
-  public value: unknown = undefined;
-
-  @HostBinding('class.expand')
-  public get _isBlockLevel() {
-    return this.expand === 'block';
-  }
+  private state = OpenState.closed;
+  private _openTimeout: ReturnType<typeof setTimeout> | undefined;
 
   @HostBinding('class.is-opening')
   public get _isOpening(): boolean {
@@ -421,10 +97,150 @@ export class ComboboxComponent
     return this.state === OpenState.open;
   }
 
+  // ─── Inputs ───────────────────────────────────────────────────────────────
+
+  /**
+   * The text to display when the search returns no results.
+   */
+  @Input() public noSearchResultsText = 'No results found';
+
+  /**
+   * The text announced by screen readers when the selection is cleared.
+   */
+  @Input() public selectionClearedAnnouncement = 'Selection cleared';
+
+  /**
+   * The name of the property to use as the display text for each item.
+   */
+  @Input() public itemTextProperty = 'text';
+
+  /**
+   * The name of the property to use as the unique identifier for each item.
+   */
+  @Input() public itemIdProperty = 'id';
+
+  /**
+   * The height of each item in the dropdown, in pixels.
+   */
+  @Input() public itemHeight = 44;
+
+  /**
+   * The placeholder text to display in the input when no item is selected and the input is empty.
+   */
+  @Input() public placeholder = 'Please search...';
+
+  /**
+   * If the combobox needs to expand to full width of its parent container, then use expand.
+   */
+  @Input() public expand?: 'block';
+
+  /**
+   * When `true`, the user cannot interact with the combobox.
+   */
+  @Input() public disabled = false;
+
+  /**
+   * The size of the input element.
+   */
+  @Input() public size: InputSize = InputSize.medium;
+
+  /**
+   * The direction in which the dropdown should open relative to the input.
+   */
+  @Input()
+  public set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
+    this._popout = direction || HorizontalDirection.right;
+  }
+  public get popout() {
+    return this._popout;
+  }
+  private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
+
+  /**
+   * A function that takes a search term and the list of items, and returns a filtered list.
+   */
+  @Input() public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] = (
+    searchTerm,
+    items
+  ) => this.defaultSearch(searchTerm, items);
+
+  /**
+   * The list of items to display in the dropdown.
+   */
+  @Input()
+  public set items(value: unknown[]) {
+    this._items = value;
+    this.searchItems = this._items;
+  }
+  public get items(): unknown[] {
+    return this._items;
+  }
+  private _items: unknown[] = [];
+
+  /**
+   * The currently selected item.
+   */
+  @Input()
+  public set selectedItem(value: unknown) {
+    if (value === this._selectedItem) return;
+    this._selectedItem = value;
+    this.focusedItem = value;
+    this.value = value;
+  }
+  public get selectedItem(): unknown {
+    return this._selectedItem;
+  }
+  private _selectedItem: unknown = undefined;
+
+  // ─── Outputs ──────────────────────────────────────────────────────────────
+
+  /**
+   * Will emit the new value when error changes.
+   */
+  @Output() hasErrorChange = new EventEmitter<boolean>();
+
+  /**
+   * When `true`, the combobox will be styled with error styles.
+   */
+  @Input()
+  public get hasError(): boolean {
+    return this._hasError;
+  }
+  public set hasError(value: boolean) {
+    if (this._hasError === value) return;
+    this._hasError = value;
+    this.hasErrorChange.emit(this._hasError);
+  }
+  private _hasError = false;
+
+  /**
+   * Emitted when an item is selected (tap on mobile, click/keypress on web).
+   */
+  @Output() public change = new EventEmitter<unknown>();
+
+  // ─── Host bindings ────────────────────────────────────────────────────────
+
+  @HostBinding('attr.disabled')
+  public get _isDisabled(): 'disabled' | null {
+    return this.disabled ? 'disabled' : null;
+  }
+
+  @HostBinding('attr.no-blur')
+  public get _noBlurOnScroll(): boolean {
+    return true;
+  }
+
+  @HostBinding('class.expand')
+  public get _isBlockLevel() {
+    return this.expand === 'block';
+  }
+
   @HostBinding('class.has-value')
   public get hasValue(): boolean {
     return this.selectedItem != null;
   }
+
+  // ─── View / content queries ───────────────────────────────────────────────
 
   @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
@@ -444,58 +260,140 @@ export class ComboboxComponent
   @ViewChild(InputComponent, { static: true, read: ElementRef })
   private textInput!: ElementRef<HTMLInputElement>;
 
-  get interactiveElement(): HTMLElement {
-    return this.textInput.nativeElement;
-  }
-
   @ViewChild(CdkVirtualScrollViewport)
   private virtualScrollViewport?: CdkVirtualScrollViewport;
-
-  private forwardAriaLabelToCombobox() {
-    forwardAttributes(
-      this.elementRef.nativeElement,
-      this._attributesToForward,
-      this.renderer,
-      this.rootElement.nativeElement
-    );
-  }
 
   @ViewChildren(ItemComponent, { read: ElementRef })
   public kirbyItemsDefault?: QueryList<ElementRef<HTMLElement>>;
 
-  _kirbyItemsSlotted?: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
   public set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
-    const hasSlottedItems = this.disposeItemClickListeners?.length > 0;
-    if (hasSlottedItems) {
+    if (this.disposeItemClickListeners.length > 0) {
       this.unlistenAllSlottedItems();
     }
 
     kirbyItems.forEach((kirbyItem) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-      const disposeClickListener: EventListenerDisposeFn = this.renderer.listen(
-        kirbyItem.nativeElement,
-        'click',
-        () => {
-          const id = kirbyItem.nativeElement.getAttribute('id');
-          const item = this.items.find((it) => this.getItemId(it) === id);
-          if (item) {
-            this.onItemSelect(item);
-          }
-        }
-      );
-
-      this.disposeItemClickListeners.push(disposeClickListener);
+      const dispose = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
+        const id = kirbyItem.nativeElement.getAttribute('id');
+        const item = this.items.find((it) => this.getItemId(it) === id);
+        if (item) this.onItemSelect(item);
+      });
+      this.disposeItemClickListeners.push(dispose);
     });
 
     this._kirbyItemsSlotted = kirbyItems;
   }
-
   public get kirbyItemsSlotted(): QueryList<ElementRef<HTMLElement>> | undefined {
     return this._kirbyItemsSlotted;
   }
+  private _kirbyItemsSlotted?: QueryList<ElementRef<HTMLElement>>;
 
   private disposeItemClickListeners: EventListenerDisposeFn[] = [];
+
+  // ─── Focused item ─────────────────────────────────────────────────────────
+
+  // Tracks which item will be selected when the user presses Enter.
+  private _focusedItem: unknown = undefined;
+
+  public get focusedItem(): unknown {
+    return this._focusedItem;
+  }
+  public set focusedItem(item: unknown) {
+    this.setAriaPosinsetOnElement(item);
+    if (this._focusedItem !== item) {
+      this._focusedItem = item;
+    }
+  }
+
+  // ─── Search items ─────────────────────────────────────────────────────────
+
+  private _searchItems: unknown[] = [];
+
+  protected get searchItems(): unknown[] {
+    return this._searchItems;
+  }
+  private set searchItems(value: unknown[]) {
+    this._searchItems = value ?? [];
+    // Focus the first search result only when the input has an active search term.
+    if (this._searchItems.length > 0 && this.textInput?.nativeElement?.value) {
+      this.focusedItem = this._searchItems[0];
+    }
+  }
+
+  // ─── Viewport sizing ──────────────────────────────────────────────────────
+
+  protected get dropdownMaxHeight(): number {
+    return 8 * this.itemHeight;
+  }
+
+  protected get dropdownMinHeight(): number {
+    return this.itemHeight;
+  }
+
+  protected get viewportHeight(): number {
+    const itemCount = this.searchItems.length;
+    if (itemCount === 0) return this.dropdownMinHeight;
+    return Math.min(
+      this.dropdownMaxHeight,
+      Math.max(this.dropdownMinHeight, itemCount * this.itemHeight)
+    );
+  }
+
+  // ─── Live region ──────────────────────────────────────────────────────────
+
+  public _liveRegionText = '';
+  private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  private announce(message: string): void {
+    clearTimeout(this._announceTimeout);
+    this._liveRegionText = '';
+    this.cdr.markForCheck();
+    this._announceTimeout = setTimeout(() => {
+      this._liveRegionText = message;
+      this.cdr.markForCheck();
+    }, 100);
+  }
+
+  // ─── ControlValueAccessor ─────────────────────────────────────────────────
+
+  public value: unknown = undefined;
+
+  private onChange: (value: unknown) => void = () => {
+    /* noop */
+  };
+  private onTouched: () => void = () => {
+    /* noop */
+  };
+
+  public writeValue(value: string): void {
+    this.selectItemByInput(value);
+    this.setInputDisplayValue(this.getItemText(this.value));
+    this.cdr.markForCheck();
+  }
+
+  public registerOnChange(fn: (value: unknown) => void): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.cdr.markForCheck();
+  }
+
+  // ─── FormFieldControl ─────────────────────────────────────────────────────
+
+  private readonly _attributesToForward = ['aria-label', 'aria-labelledby'];
+
+  public get interactiveElement(): HTMLElement {
+    return this.textInput.nativeElement;
+  }
+
+  // ─── Constructor ──────────────────────────────────────────────────────────
 
   public constructor(
     private renderer: Renderer2,
@@ -504,26 +402,13 @@ export class ComboboxComponent
     private resizeObserverService: ResizeObserverService
   ) {}
 
-  protected onToggle(event: MouseEvent) {
-    event.stopPropagation();
-    this.textInput?.nativeElement.focus();
-
-    this.toggle();
-  }
-
-  private toggle(): void {
-    if (this.disabled) {
-      return;
-    }
-    this.isOpen ? this.close() : this.open();
-  }
+  // ─── Lifecycle hooks ──────────────────────────────────────────────────────
 
   public ngAfterViewInit() {
     if (this.expand === 'block') {
       const { width: initialWidth } = this.elementRef.nativeElement.getBoundingClientRect();
       this.setPopoverCardStyle('max-width', 'initial');
       this.setPopoverCardStyle('min-width', 'initial');
-      // Ensure initial width is set even if the resize observer callback also fires initially:
       this.setPopoverCardStyle('--kirby-card-width', `${initialWidth}px`);
 
       this.resizeObserverService.observe(this.elementRef, (entry) => {
@@ -536,135 +421,62 @@ export class ComboboxComponent
     this.forwardAriaLabelToCombobox();
   }
 
-  /* Utility that makes it easier to set styles on card element */
-  private setPopoverCardStyle(style: string, value: string) {
-    this.renderer.setStyle(
-      this.cardElement?.nativeElement,
-      style,
-      value,
-      RendererStyleFlags2.DashCase
-    );
+  public ngOnDestroy(): void {
+    clearTimeout(this._openTimeout);
+    clearTimeout(this._announceTimeout);
+    this.unlistenAllSlottedItems();
+    this.resizeObserverService.unobserve(this.elementRef);
   }
 
-  public ngOnDestroy(): void {
-    this.unlistenAllSlottedItems();
-    this.unobserveResize();
-  }
+  // ─── Open / close ─────────────────────────────────────────────────────────
 
   public open(): void {
-    if (this.disabled) {
-      return;
-    }
-    if (!this.isOpen) {
-      this.state = OpenState.opening;
-      setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
+    if (this.disabled || this.isOpen) return;
 
-      this.focusedItem = this.selectedItem;
-    }
+    this.state = OpenState.opening;
+    this.focusedItem = this.selectedItem;
+    this._openTimeout = setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
   }
 
-  private showPopOver() {
-    if (this.state === OpenState.opening) {
-      this.state = OpenState.open;
-      this.popover?.show();
-      this.scrollToIndexIntoViewWhenOpeningPopup();
-      this.cdr.markForCheck();
-    }
+  private showPopOver(): void {
+    if (this.state !== OpenState.opening) return;
+
+    this.state = OpenState.open;
+    this.popover?.show();
+    this.scrollToIndexIntoViewWhenOpeningPopup();
+    this.cdr.markForCheck();
   }
 
-  public close() {
-    if (this.disabled) {
-      return;
-    }
-    if (this.isOpen) {
-      this.state = OpenState.closed;
-      this.setInputDisplayValue(this.getItemText(this.selectedItem));
-      this.searchItems = this.items;
-      this.popover?.hide();
-    }
+  public close(): void {
+    if (this.disabled || !this.isOpen) return;
+
+    clearTimeout(this._openTimeout);
+    this.state = OpenState.closed;
+    this.setInputDisplayValue(this.getItemText(this.selectedItem));
+    this.searchItems = this.items;
+    this.popover?.hide();
   }
 
-  protected onItemSelect(item: unknown) {
-    // Guard: slotted click listeners should map back to a data item, but be safe.
+  private toggle(): void {
+    this.isOpen ? this.close() : this.open();
+  }
+
+  // ─── Event handlers ───────────────────────────────────────────────────────
+
+  protected onToggle(event: MouseEvent): void {
+    event.stopPropagation();
+    this.textInput?.nativeElement.focus();
+    this.toggle();
+  }
+
+  protected onItemSelect(item: unknown): void {
     if (item instanceof HTMLElement) return;
     this.selectItem(item);
     this.close();
   }
 
-  private onChange: (value: unknown) => void = () => {
-    /* empty */
-  };
-  private onTouched: () => void = (): void => {
-    /* empty */
-  };
-
-  /**
-   * Sets the select's value. Part of the ControlValueAccessor interface
-   * required to integrate with Angular's core forms API.
-   *
-   * @param value New value to be written to the model.
-   */
-  public writeValue(value: string): void {
-    this.selectItemByInput(value);
-
-    // When written from outside, reflect selected text in the input
-    this.setInputDisplayValue(this.getItemText(this.value));
-
-    this.cdr.markForCheck();
-  }
-
-  /**
-   * Saves a callback function to be invoked when the select's value
-   * changes from user input. Part of the ControlValueAccessor interface
-   * required to integrate with Angular's core forms API.
-   *
-   * @param fn Callback to be triggered when the value changes.
-   */
-  registerOnChange(fn: (value: unknown) => void): void {
-    this.onChange = fn;
-  }
-
-  /**
-   * Saves a callback function to be invoked when the select is blurred
-   * by the user. Part of the ControlValueAccessor interface required
-   * to integrate with Angular's core forms API.
-   *
-   * @param fn Callback to be triggered when the component has been touched.
-   */
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  /**
-   * Disables the select. Part of the ControlValueAccessor interface required
-   * to integrate with Angular's core forms API.
-   *
-   * @param isDisabled Sets whether the component is disabled.
-   */
-  public setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-    this.cdr.markForCheck();
-  }
-
-  private selectItem(item: unknown): void {
-    if (item != this.selectedItem) {
-      this.selectedItem = item;
-      this.focusedItem = item;
-      this.change.emit(this.value);
-      this.onChange(this.value);
-      this.setInputDisplayValue(this.getItemText(item));
-      this.searchItems = this.items;
-    }
-  }
-
-  private selectItemByInput(input: string): void {
-    this.selectedItem = this.findItemByInput(input);
-  }
-
   protected onInput(event: Event): void {
-    if (!this.isOpen) {
-      this.open();
-    }
+    if (!this.isOpen) this.open();
 
     const input = event.target as HTMLInputElement;
 
@@ -674,51 +486,26 @@ export class ComboboxComponent
 
     this.updateSearchResults(input.value);
 
-    // Screen readers (VoiceOver/NVDA) may move real browser focus to a list-item button.
-    // When the list re-renders after filtering, that button is removed from the DOM and
-    // focus falls to `document.body`. Restore it to the input so the user can keep typing
-    // and the focusout handler doesn't mistake the body-focus for a genuine blur-away.
+    // Screen readers (VoiceOver/NVDA) may move real focus to a list-item button.
+    // When the list re-renders after filtering, that button is removed and focus falls
+    // to `document.body`. Restore it to the input so the user can keep typing.
     if (document.activeElement !== this.textInput?.nativeElement) {
       this.textInput?.nativeElement.focus();
     }
   }
 
-  private clearSelection(): void {
-    this.selectItem(undefined);
-    // Reset after a short delay so the same message can be announced again on subsequent clears
-    this.announce(this.selectionClearedAnnouncement);
-  }
-
-  private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
-  private announce(message: string): void {
-    clearTimeout(this._announceTimeout);
-    this._liveRegionText = '';
-    this._announceTimeout = setTimeout(() => {
-      this._liveRegionText = message;
-      this.cdr.markForCheck();
-    }, 100);
-  }
-
-  private updateSearchResults(inputValue: string): void {
-    this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
-
-    if (inputValue && this.searchItems.length === 0) {
-      this.announce(this.noSearchResultsText);
-    }
-  }
-
-  protected onPopoverWillHide() {
+  protected onPopoverWillHide(): void {
     this.state = OpenState.closed;
     this.rootElement.nativeElement.focus();
     this.onTouched();
   }
 
-  protected onPopoverClick() {
+  protected onPopoverClick(): void {
     this.close();
   }
 
   @HostListener('mousedown', ['$event'])
-  public onMouseDown(event: MouseEvent) {
+  public onMouseDown(event: MouseEvent): void {
     if (this.disabled) {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -726,48 +513,39 @@ export class ComboboxComponent
   }
 
   @HostListener('touchstart', ['$event'])
-  public onTouchStart(event: TouchEvent) {
+  public onTouchStart(event: TouchEvent): void {
     if (this.isOpen) {
       event.stopPropagation();
     }
   }
 
   @HostListener('focusout')
-  public onFocusOut() {
-    // Defer the check to allow the browser (and screen readers like VoiceOver/NVDA)
-    // to settle focus. `relatedTarget` is often `null` with screen readers, so we
-    // inspect `document.activeElement` after the microtask queue has flushed.
+  public onFocusOut(): void {
+    // Defer to allow browser/screen readers to settle focus.
+    // `relatedTarget` is often null with screen readers so we check `document.activeElement`.
     setTimeout(() => {
-      const activeElement = document.activeElement as HTMLElement | null;
-      const isOnTriggerButton =
-        activeElement && this.elementRef.nativeElement.contains(activeElement);
-      const isInsidePopover = activeElement && activeElement.closest('kirby-popover');
+      const active = document.activeElement as HTMLElement | null;
+      const isInsideComponent = active && this.elementRef.nativeElement.contains(active);
+      const isInsidePopover = active && active.closest('kirby-popover');
 
-      if (isOnTriggerButton || isInsidePopover) {
-        // Focus is still within the component — nothing to do.
-        return;
-      }
+      if (isInsideComponent || isInsidePopover) return;
 
-      // When a screen reader (VoiceOver/NVDA) moves real focus to a list-item button
-      // and the user then types a character, CDK virtual scroll re-renders the list and
-      // removes the focused button from the DOM. The browser then drops focus to
-      // `document.body`. Detect this case: if the popover is still showing and focus is
-      // on the body, it means focus was lost due to DOM removal — restore it to the
-      // input rather than closing the popover.
-      if (this.isOpen && activeElement === document.body) {
+      // VoiceOver/NVDA can drop focus to body when CDK re-renders the list;
+      // restore focus to the input instead of closing.
+      if (this.isOpen && active === document.body) {
         this.textInput?.nativeElement.focus();
         return;
       }
 
-      if (this.isOpen) {
-        this.close();
-      }
+      if (this.isOpen) this.close();
       this.onTouched();
     }, 0);
   }
 
+  // ─── Keyboard handlers ────────────────────────────────────────────────────
+
   @HostListener('keydown.tab')
-  public onTab() {
+  public onTab(): void {
     if (this.isOpen) {
       this.selectItem(this.focusedItem);
       this.close();
@@ -775,12 +553,12 @@ export class ComboboxComponent
   }
 
   @HostListener('keydown.escape')
-  public onEscape() {
+  public onEscape(): void {
     this.close();
   }
 
   @HostListener('keydown.enter', ['$event'])
-  public onEnterO(event: Event) {
+  public onEnter(event: Event): void {
     event.preventDefault();
     event.stopPropagation();
 
@@ -799,15 +577,13 @@ export class ComboboxComponent
   public onArrowKeys(event: Event): void {
     if (this.disabled) return;
 
-    const keyEvent = event as KeyboardEvent; // safe in this context
-    // Avoid page scroll
+    const keyEvent = event as KeyboardEvent;
     event.preventDefault();
 
     if (!this.isOpen) {
       this.open();
-      if (this.selectedItem) {
-        this.setFocusOnSelectedItem();
-      } else {
+
+      if (!this.selectedItem) {
         this.setFocusOnFirstOrLastItem(keyEvent);
       }
     } else {
@@ -835,21 +611,12 @@ export class ComboboxComponent
       case 'End':
         this.setFocusOnLastItem();
         break;
-      default:
-        break;
     }
   }
 
-  private shiftFocusIndex(numberOfItems: number) {
-    // Handle up/down navigation when open
+  private shiftFocusIndex(delta: number): void {
     const currentIndex = this.searchItems.indexOf(this.focusedItem);
-    let newIndex;
-
-    if (numberOfItems > 0) {
-      newIndex = Math.min(this.searchItems.length - 1, currentIndex + numberOfItems);
-    } else {
-      newIndex = Math.max(0, currentIndex + numberOfItems);
-    }
+    const newIndex = Math.max(0, Math.min(this.searchItems.length - 1, currentIndex + delta));
 
     if (newIndex !== currentIndex) {
       this.focusedItem = this.searchItems[newIndex];
@@ -869,20 +636,6 @@ export class ComboboxComponent
       case 'End':
         this.setFocusOnLastItem();
         break;
-      default:
-        break;
-    }
-  }
-
-  private setFocusOnSelectedItem(): void {
-    if (this.selectedItem) {
-      this.focusedItem = this.selectedItem;
-    }
-  }
-
-  private setFocusOnLastItem(): void {
-    if (this.searchItems.length > 0) {
-      this.focusedItem = this.searchItems[this.searchItems.length - 1];
     }
   }
 
@@ -892,53 +645,118 @@ export class ComboboxComponent
     }
   }
 
-  private unlistenAllSlottedItems(): void {
-    let disposeClickListener: EventListenerDisposeFn | undefined;
-    while ((disposeClickListener = this.disposeItemClickListeners.pop()) !== undefined) {
-      disposeClickListener();
+  private setFocusOnLastItem(): void {
+    if (this.searchItems.length > 0) {
+      this.focusedItem = this.searchItems[this.searchItems.length - 1];
     }
   }
 
-  private unobserveResize() {
-    this.resizeObserverService.unobserve(this.elementRef);
+  // ─── Item selection ───────────────────────────────────────────────────────
+
+  private selectItem(item: unknown): void {
+    if (item === this.selectedItem) return;
+
+    this.selectedItem = item;
+    this.change.emit(this.value);
+    this.onChange(this.value);
+    this.setInputDisplayValue(this.getItemText(item));
+    this.searchItems = this.items;
+  }
+
+  private selectItemByInput(input: string): void {
+    this.selectedItem = this.findItemByInput(input);
+  }
+
+  private clearSelection(): void {
+    this.selectItem(undefined);
+    this.announce(this.selectionClearedAnnouncement);
+  }
+
+  private updateSearchResults(inputValue: string): void {
+    this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
+
+    if (inputValue && this.searchItems.length === 0) {
+      this.announce(this.noSearchResultsText);
+    }
+  }
+
+  // ─── Item resolution ──────────────────────────────────────────────────────
+
+  protected getItemText(item: unknown): string {
+    if (typeof item === 'string') return item;
+
+    if (this.objectHasProperty(item, this.itemTextProperty)) {
+      const value = (item as Record<string, unknown>)[this.itemTextProperty];
+      if (typeof value === 'string') return value;
+    }
+
+    return '';
+  }
+
+  protected getItemId(item: unknown): string {
+    if (typeof item === 'string') return item;
+
+    if (this.objectHasProperty(item, this.itemIdProperty)) {
+      const value = (item as Record<string, unknown>)[this.itemIdProperty];
+      if (typeof value === 'string') return value;
+    }
+
+    console.error(
+      'Each item must have an id property for scroll to work. ' +
+        'Ensure that the itemIdProperty input is set correctly, and that each item has a unique id value.'
+    );
+    return '';
+  }
+
+  private objectHasProperty(item: unknown, property: string): boolean {
+    return item != null && typeof item === 'object' && property in item;
   }
 
   /**
-   * Resolve a model/data item based on current `items` by comparing displayed text.
-   * This is used to map an incoming form value or input `selectedItem` to an item
-   * from the list.
+   * Resolve a data item from `items` by comparing displayed text.
+   * Falls back to the raw input string if no match is found.
    */
   private findItemByInput(input: string): unknown {
-    if (!this.items || this.items.length === 0) {
-      return input;
-    }
-
+    if (!this.items?.length) return input;
     return this.items.find((it) => this.getItemText(it) === input) ?? input;
   }
 
-  private setInputDisplayValue(value: string): void {
-    // We intentionally update the DOM input imperatively ("hard way")
-    // to ensure the visible value is cleared/updated immediately.
-    if (this.textInput?.nativeElement) {
-      this.renderer.setProperty(this.textInput.nativeElement, 'value', value);
-    }
+  // ─── Default search ───────────────────────────────────────────────────────
+
+  private defaultSearch(searchTerm: string, itemsToSearch: unknown[]): unknown[] {
+    if (!searchTerm) return itemsToSearch;
+
+    const lower = searchTerm.toLowerCase();
+    const scored = itemsToSearch
+      .map((item) => ({ item, text: this.getItemText(item).toLowerCase() }))
+      .filter(({ text }) => text.includes(lower));
+
+    scored.sort((a, b) => {
+      const aStarts = a.text.startsWith(lower);
+      const bStarts = b.text.startsWith(lower);
+      if (aStarts !== bStarts) return aStarts ? -1 : 1;
+      return a.text.localeCompare(b.text);
+    });
+
+    return scored.map(({ item }) => item);
   }
 
-  private scrollFocusedItemIntoViewWhileNavigating(): void {
-    const kirbyItems = this.getKirbyItems();
-    if (!kirbyItems || kirbyItems.length === 0) return;
+  // ─── Scroll ───────────────────────────────────────────────────────────────
 
-    if (!this.focusedItem) {
-      return;
-    }
+  private scrollFocusedItemIntoViewWhileNavigating(): void {
+    if (!this.focusedItem) return;
 
     const id = this.getItemId(this.focusedItem);
     if (!id) return;
 
+    const kirbyItems = this.getKirbyItems();
+    if (!kirbyItems?.length) return;
+
     const match = kirbyItems.toArray().find((el) => {
       if (el.nativeElement.id === undefined) {
         console.error(
-          'Each item must have an id attribute for scroll to work. Ensure that the ´[attr.id]´ is set correctly, and that each item has a unique id value.'
+          'Each item must have an id attribute for scroll to work. ' +
+            "Ensure that the '[attr.id]' binding is set correctly."
         );
       }
       return el.nativeElement.id === id;
@@ -949,16 +767,7 @@ export class ComboboxComponent
       return;
     }
 
-    const scrollIntoView = match.nativeElement.scrollIntoView;
-    if (typeof scrollIntoView === 'function') {
-      scrollIntoView.call(match.nativeElement, { block: 'nearest' });
-    }
-  }
-
-  private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
-    return this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
-      ? this.kirbyItemsSlotted
-      : this.kirbyItemsDefault;
+    match.nativeElement.scrollIntoView?.({ block: 'nearest' });
   }
 
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
@@ -968,9 +777,69 @@ export class ComboboxComponent
     if (focusedIndex === 0) {
       this.virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
       this.virtualScrollViewport?.checkViewportSize();
-      return;
+    } else {
+      this.virtualScrollViewport?.scrollToIndex(focusedIndex);
     }
+  }
 
-    this.virtualScrollViewport?.scrollToIndex(focusedIndex);
+  // ─── Aria helpers ─────────────────────────────────────────────────────────
+
+  private setAriaPosinsetOnElement(item: unknown): void {
+    const element = this.getKirbyElement(item);
+    if (!element) return;
+
+    const index = this.searchItems.indexOf(item);
+    const setsize = this.searchItems.length;
+    this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
+    this.renderer.setAttribute(element.nativeElement, 'aria-posinset', `${index + 1}`);
+  }
+
+  private getKirbyElement(item: unknown): ElementRef<HTMLElement> | undefined {
+    const kirbyItems = this.getKirbyItems();
+    if (!kirbyItems || !item) return undefined;
+
+    const itemId = this.getItemId(item);
+    return kirbyItems.find((el) => el.nativeElement.id === itemId);
+  }
+
+  private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
+    return this.kirbyItemsSlotted?.length ? this.kirbyItemsSlotted : this.kirbyItemsDefault;
+  }
+
+  // ─── Popover card styles ──────────────────────────────────────────────────
+
+  private setPopoverCardStyle(style: string, value: string): void {
+    this.renderer.setStyle(
+      this.cardElement?.nativeElement,
+      style,
+      value,
+      RendererStyleFlags2.DashCase
+    );
+  }
+
+  private forwardAriaLabelToCombobox(): void {
+    forwardAttributes(
+      this.elementRef.nativeElement,
+      this._attributesToForward,
+      this.renderer,
+      this.rootElement.nativeElement
+    );
+  }
+
+  private setInputDisplayValue(value: string): void {
+    // Update the DOM input directly to ensure the visible value is cleared/updated immediately,
+    // bypassing Angular's change detection cycle.
+    if (this.textInput?.nativeElement) {
+      this.renderer.setProperty(this.textInput.nativeElement, 'value', value);
+    }
+  }
+
+  // ─── Cleanup ──────────────────────────────────────────────────────────────
+
+  private unlistenAllSlottedItems(): void {
+    let dispose: EventListenerDisposeFn | undefined;
+    while ((dispose = this.disposeItemClickListeners.pop()) !== undefined) {
+      dispose();
+    }
   }
 }
