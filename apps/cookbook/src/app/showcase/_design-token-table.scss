@@ -1,0 +1,24 @@
+@use '../shared/mini-toast';
+
+@mixin copy-token-cell {
+  tbody td:nth-child(2) {
+    position: relative;
+    white-space: nowrap;
+
+    @include mini-toast.copied;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+th:first-child,
+td:first-child {
+  width: 150px;
+}
+
+th.preview {
+  width: 1px; // make cell follow content width
+  white-space: nowrap;
+}

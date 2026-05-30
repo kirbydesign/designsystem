@@ -31,7 +31,7 @@ export const routes: Routes = [
       },
       {
         path: 'showcase',
-        loadChildren: () => import('./showcase/showcase.routes').then((m) => m.SHOWCASE_ROUTES),
+        loadChildren: () => import('./showcase/showcase.routes').then((m) => m.ALL_SHOWCASE_ROUTES),
       },
       {
         path: 'guides',

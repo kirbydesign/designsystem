@@ -53,6 +53,9 @@ export const illustrations = {
   'cross.circle.circle-part.shadow': {
     lg: 'cross.circle.circle-part.shadow.large.svg',
   },
+  'document.card.dot.circle': {
+    lg: 'document.card.dot.circle.large.svg',
+  },
   'exclamation-mark.circle.circle-part.shadow': {
     lg: 'exclamation-mark.circle.circle-part.shadow.large.svg',
   },
