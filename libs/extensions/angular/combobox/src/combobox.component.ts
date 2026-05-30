@@ -281,6 +281,7 @@ export class ComboboxComponent
       this.focusedItem = this._selectedItem;
       // Keep ControlValueAccessor value in sync with the selected data item
       this.value = this._selectedItem;
+      this.setInputDisplayValue(this.getItemText(this.selectedItem));
     }
   }
 
