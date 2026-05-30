@@ -158,7 +158,6 @@ export const Default: Story = {
     itemTextProperty: 'text',
     itemIdProperty: 'id',
     noSearchResultsText: 'No results found.',
-    selectedItem: 'USD',
     size: InputSize.medium,
     expand: undefined,
     popout: HorizontalDirection.right,
@@ -175,7 +174,6 @@ export const Default: Story = {
         [itemTextProperty]="itemTextProperty"
         [itemIdProperty]="itemIdProperty"
         [noSearchResultsText]="noSearchResultsText"
-        [selectedItem]="selectedItem"
         [size]="size"
         [expand]="expand"
         [popout]="popout"
