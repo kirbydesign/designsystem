@@ -402,7 +402,7 @@ export class ComboboxComponent
    * Emitted when an item is selected (tap on mobile, click/keypress on web)
    */
   @Output()
-  public change: EventEmitter<unknown> = new EventEmitter<any>();
+  public change: EventEmitter<any> = new EventEmitter<any>();
 
   public value: unknown = undefined;
 
