@@ -10,9 +10,13 @@
 
 ion-tab-button {
   &.ion-focused {
-    @include interaction-state.apply-focus-visible-background {
-      --background: #{interaction-state.get-state-color('white', 'xxxs')};
-      --background-focused-opacity: 0;
+    @media (hover: hover) and (pointer: fine) {
+      &:focus-visible {
+        transition: interaction-state.transition();
+        box-shadow: var(--kirby-focus-ring-md-inset);
+
+        --background-focused-opacity: 0;
+      }
     }
   }
 

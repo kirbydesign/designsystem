@@ -23,8 +23,12 @@ $padding: utils.size('s');
 }
 
 .header {
-  @include interaction-state.apply-focus-visible-background('xxxs') {
-    outline: 0;
+  @media (hover: hover) and (pointer: fine) {
+    &:focus-visible {
+      transition: interaction-state.transition();
+      box-shadow: var(--kirby-focus-ring-md-inset);
+      outline: 0;
+    }
   }
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active('xxs');

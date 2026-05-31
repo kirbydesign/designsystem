@@ -14,3 +14,13 @@ export const SlideButton: Story = {
     text: 'Slide button',
   },
 };
+
+export const Focused: Story = {
+  args: {
+    text: 'Slide to confirm',
+  },
+  play: async ({ canvasElement }) => {
+    const button = canvasElement.querySelector('button');
+    (button as HTMLElement)?.focus();
+  },
+};

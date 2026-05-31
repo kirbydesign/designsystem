@@ -103,6 +103,18 @@
   }
 }
 
+@mixin focus-ring() {
+  --kirby-focus-ring-color: #{colors.$focus-ring-color};
+  --kirby-focus-ring-sm-inset:
+    0 0 0 2px var(--kirby-focus-ring-color) inset,
+    0 0 0 3px var(--kirby-background-color, #fff) inset;
+  --kirby-focus-ring-md-inset:
+    0 0 0 2px var(--kirby-focus-ring-color) inset,
+    0 0 0 4px var(--kirby-background-color, #fff) inset;
+  --kirby-focus-ring-md-outer:
+    0 0 0 2px var(--kirby-background-color, #fff), 0 0 0 4px var(--kirby-focus-ring-color);
+}
+
 @mixin transition-easings() {
   @each $name, $value in variables.$transition-easings {
     @if meta.type-of($value) == 'map' {
@@ -163,4 +175,7 @@
   @include transition-durations;
   @include transition-easings;
   @include transition-soft-keyboard;
+
+  /* FOCUS RING */
+  @include focus-ring;
 }

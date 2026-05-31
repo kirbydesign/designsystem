@@ -90,7 +90,13 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 ion-radio {
-  @include interaction-state.apply-focus-part($part: 'container');
+  @media (hover: hover) and (pointer: fine) {
+    &:focus-within::part(container):focus-visible,
+    &:focus-visible:focus-within::part(container) {
+      transition: interaction-state.transition();
+      box-shadow: var(--kirby-focus-ring-sm-inset);
+    }
+  }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/

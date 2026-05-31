@@ -63,7 +63,13 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 ion-toggle {
-  @include interaction-state.apply-focus-part($part: 'track') {
+  @media (hover: hover) and (pointer: fine) {
+    &:focus-within::part(track):focus-visible,
+    &:focus-visible:focus-within::part(track) {
+      transition: interaction-state.transition();
+      box-shadow: var(--kirby-focus-ring-sm-inset);
+    }
+
     // Overflow and contain style needed to make focus ring visible as per ionic docs
     // https://ionicframework.com/docs/api/toggle#customizing-overflow
     overflow: visible;

@@ -113,7 +113,22 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   ion-checkbox {
-    @include interaction-state.apply-focus-part($part: 'container');
+    @media (hover: hover) and (pointer: fine) {
+      &:focus-within::part(container):focus-visible,
+      &:focus-visible:focus-within::part(container) {
+        transition: interaction-state.transition();
+        box-shadow: var(--kirby-focus-ring-sm-inset);
+      }
+    }
+
+    // Hide the checkbox border on focus so the inset box-shadow is fully visible
+    // (the border otherwise paints on top of the outermost pixels of the shadow)
+    @include utils.not-touch {
+      &:focus-visible,
+      &:focus-within:has(:focus-visible) {
+        --border-width: 0;
+      }
+    }
     @include interaction-state.apply-hover {
       --checkbox-background: #{interaction-state.get-state-color('white')};
     }
