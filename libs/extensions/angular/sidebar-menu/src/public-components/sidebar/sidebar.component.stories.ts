@@ -519,3 +519,13 @@ function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
     ...item,
   };
 }
+
+export const Focused: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const menuItem = canvasElement.querySelector('kirby-x-sidebar-menu-item');
+    if (menuItem) {
+      (menuItem as HTMLElement).focus();
+    }
+  },
+};

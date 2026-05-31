@@ -145,3 +145,19 @@ export const InputWithNativeDatePicker: Story = {
     `,
   }),
 };
+
+export const InputFocused: Story = {
+  render: () => ({
+    template: `
+      <kirby-form-field label="Focused input">
+        <input kirby-input placeholder="Type here..." />
+      </kirby-form-field>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const input = canvasElement.querySelector('input');
+    if (input) {
+      input.focus();
+    }
+  },
+};

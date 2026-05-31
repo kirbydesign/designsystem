@@ -1,7 +1,5 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-
-import { CardComponent } from '@kirbydesign/designsystem/card';
-
+import { CardAsButtonDirective, CardComponent } from '@kirbydesign/designsystem/card';
 import { CardExampleComponent } from '~/app/examples/card-example/card-example.component';
 
 const meta: Meta<CardComponent> = {
@@ -9,7 +7,7 @@ const meta: Meta<CardComponent> = {
   title: 'Components / Card',
   decorators: [
     moduleMetadata({
-      imports: [CardComponent, CardExampleComponent],
+      imports: [CardAsButtonDirective, CardComponent, CardExampleComponent],
     }),
   ],
 };
@@ -37,4 +35,25 @@ export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-card-example></cookbook-card-example>`,
   }),
+};
+
+export const Focused: Story = {
+  render: () => ({
+    template: `
+      <kirby-card [hasPadding]="true" (click)="noop()">
+        Clickable card with focus ring
+      </kirby-card>
+    `,
+    props: {
+      noop: () => {
+        // noop
+      },
+    },
+  }),
+  play: async ({ canvasElement }) => {
+    const card = canvasElement.querySelector('kirby-card');
+    if (card) {
+      (card as HTMLElement).focus();
+    }
+  },
 };

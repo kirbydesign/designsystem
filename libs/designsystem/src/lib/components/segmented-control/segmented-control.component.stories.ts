@@ -1,6 +1,10 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-/* eslint-disable-next-line no-restricted-imports */
-import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
+
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import {
+  SegmentedControlComponent,
+  SegmentedControlMode,
+} from '@kirbydesign/designsystem/segmented-control';
 
 import { SegmentedControlExampleComponent } from '~/app/examples/segmented-control-example/segmented-control-example.component';
 
@@ -43,4 +47,22 @@ export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-segmented-control-example></cookbook-segmented-control-example>`,
   }),
+};
+
+export const Focused: Story = {
+  args: {
+    mode: SegmentedControlMode.default,
+    items: [
+      { text: 'First item', id: 'first' },
+      { text: 'Second item', id: 'second' },
+    ],
+    selectedIndex: 0,
+    size: 'md',
+  },
+  play: async ({ canvasElement }) => {
+    const segmentButton = canvasElement.querySelector('ion-segment-button');
+    await TestHelper.whenReady(segmentButton);
+    const nativeButton = segmentButton?.shadowRoot?.querySelector('button');
+    (nativeButton as HTMLElement)?.focus();
+  },
 };

@@ -42,3 +42,16 @@ export const CookbookExamples: Story = {
     template: `<cookbook-accordion-example></cookbook-accordion-example>`,
   }),
 };
+
+export const Focused: Story = {
+  args: {
+    title: 'Focused Accordion Item',
+    isExpanded: false,
+  },
+  play: async ({ canvasElement }) => {
+    const header = canvasElement.querySelector('.header') as HTMLElement;
+    if (header) {
+      header.focus();
+    }
+  },
+};

@@ -390,3 +390,22 @@ export const ExpandBlock: Story = {
     `,
   }),
 };
+
+export const Focused: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: { ...args },
+    template: `
+      <kirby-x-combobox [placeholder]="placeholder" [items]="items"></kirby-x-combobox>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const combobox = canvasElement.querySelector('kirby-x-combobox');
+    if (combobox) {
+      (combobox as HTMLElement).focus();
+    }
+  },
+};

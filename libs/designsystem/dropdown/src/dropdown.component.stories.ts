@@ -2,7 +2,6 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
-import { DesignTokenHelper } from '@kirbydesign/core/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
@@ -208,4 +207,22 @@ export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-dropdown-example></cookbook-dropdown-example>`,
   }),
+};
+
+export const DropdownFocused: Story = {
+  args: {
+    items: items,
+    selectedIndex: 0,
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const dropdown = canvas.getByRole('combobox');
+    dropdown.focus();
+  },
 };
