@@ -1,9 +1,8 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../examples.shared';
 @use '../modal-playground.shared';
 
 kirby-card {
-  margin-top: utils.size('l');
+  margin-top: var(--kirby-spacing-l);
 
   kirby-card-header {
     em {
@@ -13,5 +12,5 @@ kirby-card {
 }
 
 cookbook-modal-example-size-selector {
-  margin-bottom: utils.size('m');
+  margin-bottom: var(--kirby-spacing-m);
 }

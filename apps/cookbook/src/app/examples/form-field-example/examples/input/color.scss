@@ -1,23 +1,21 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 .card-option-button-group {
   display: flex;
   justify-content: center;
-  gap: utils.size('xxs');
-  padding: utils.size('xxs');
+  gap: var(--kirby-spacing-xxs);
+  padding: var(--kirby-spacing-xxs);
 }
 
 button {
-  height: utils.$fat-finger-size;
-  width: utils.$fat-finger-size;
+  height: var(--kirby-size-fat-finger);
+  width: var(--kirby-size-fat-finger);
   border: none;
-  border-radius: utils.border-radius('circle');
+  border-radius: var(--kirby-border-radius-circle);
   margin: 0;
   color: #fff;
   cursor: pointer;
 
   &.white {
-    background-color: utils.get-color('white');
+    background-color: var(--kirby-white);
 
     &:hover {
       background-color: var(--kirby-white-shade);
@@ -25,7 +23,7 @@ button {
   }
 
   &.light {
-    background-color: utils.get-color('light');
+    background-color: var(--kirby-light);
     outline: #fff 2px solid;
     border: #fff 2px solid;
 
@@ -35,7 +33,7 @@ button {
   }
 
   &.dark {
-    background-color: utils.get-color('dark');
+    background-color: var(--kirby-dark);
 
     &:hover {
       background-color: var(--kirby-dark-shade);
@@ -43,7 +41,7 @@ button {
   }
 
   &.secondary {
-    background-color: utils.get-color('secondary');
+    background-color: var(--kirby-secondary);
 
     &:hover {
       background-color: var(--kirby-secondary-shade);

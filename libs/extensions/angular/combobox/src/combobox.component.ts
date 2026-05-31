@@ -27,7 +27,11 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { AffixDirective, InputSize } from '@kirbydesign/designsystem/form-field';
-import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
+import {
+  EventListenerDisposeFn,
+  FORM_FIELD_CONTROL,
+  FormFieldControl,
+} from '@kirbydesign/designsystem/types';
 import { forwardAttributes, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -49,6 +53,10 @@ import { OpenState } from './combobox.types';
       useExisting: forwardRef(() => ComboboxComponent),
       multi: true,
     },
+    {
+      provide: FORM_FIELD_CONTROL,
+      useExisting: forwardRef(() => ComboboxComponent),
+    },
   ],
   imports: [
     InputComponent,
@@ -64,7 +72,9 @@ import { OpenState } from './combobox.types';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class ComboboxComponent
+  implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
+{
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
@@ -116,9 +126,23 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return 0;
   }
 
+  /**
+   * The text to display when the search returns no results.
+   */
   @Input()
   public noSearchResultsText = 'No results found.';
 
+  /**
+   * The text announced by screen readers when the selection is cleared.
+   */
+  @Input()
+  public selectionClearedAnnouncement = 'Selection cleared.';
+
+  public _liveRegionText = '';
+
+  /**
+   * The name of the property to use as the display text for each item.
+   */
   @Input()
   public itemTextProperty: string = 'text';
   protected getItemText(item: unknown): string {
@@ -137,13 +161,14 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return '';
   }
 
-  protected readonly defaultItemHeight = 44;
-
+  /**
+   * The height of each item in the dropdown, in pixels. This is used to calculate the height of the dropdown based on the number of items.
+   */
   @Input()
-  public itemHeight: number = this.defaultItemHeight;
+  public itemHeight: number = 44;
 
   protected get dropdownMaxHeight(): number {
-    return 8 * this.defaultItemHeight;
+    return 8 * this.itemHeight;
   }
 
   protected get dropdownMinHeight(): number {
@@ -175,6 +200,9 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return item != undefined && typeof item === 'object' && this.itemIdProperty in item;
   }
 
+  /**
+   * The name of the property to use as the unique identifier for each item.
+   */
   @Input()
   public itemIdProperty = 'id';
   protected getItemId(item: unknown): string {
@@ -197,6 +225,9 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return '';
   }
 
+  /**
+   * A function that takes a search term and the list of items, and returns a filtered list of items to display in the dropdown.
+   */
   @Input()
   public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] =
     this._defaultSearchFunction;
@@ -211,7 +242,10 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
       return;
     }
 
-    this.focusedItem = this._searchItems[0];
+    // only set the focused item of the search result, if the input has value
+    if (this.textInput?.nativeElement?.value) {
+      this.focusedItem = this._searchItems[0];
+    }
   }
 
   private _items: unknown[] = [];
@@ -220,6 +254,10 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._items;
   }
 
+  /**
+   * The list of items to display in the dropdown.
+   * @param value
+   */
   @Input()
   public set items(value: unknown[]) {
     this._items = value;
@@ -231,6 +269,10 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._selectedItem;
   }
 
+  /**
+   * The currently selected item.
+   * @param value
+   */
   @Input()
   public set selectedItem(value: unknown) {
     // Allow clearing by setting undefined
@@ -283,12 +325,19 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     }
 
     this.renderer.setAttribute(element.nativeElement, 'aria-setsize', setsize.toString());
-    this.renderer.setAttribute(element.nativeElement, 'aria-posintset', `${index + 1}`);
+    this.renderer.setAttribute(element.nativeElement, 'aria-posinset', `${index + 1}`);
   }
 
+  /**
+   * The placeholder text to display in the input when no item is selected and the input is empty.
+   */
   @Input()
   public placeholder = 'Please search...';
 
+  /**
+   * The direction in which the dropdown should open relative to the input.
+   * @param direction
+   */
   @Input()
   public set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
     this._popout = direction || HorizontalDirection.right;
@@ -298,9 +347,15 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._popout;
   }
 
+  /**
+   * If the combobox needs to expand to full width of its parent container, then use expand.
+   */
   @Input()
   public expand?: 'block';
 
+  /**
+   * When `true`, the user cannot interact with the combobox.
+   */
   @Input()
   public disabled = false;
 
@@ -309,10 +364,16 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.disabled ? 'disabled' : null;
   }
 
+  /**
+   * Will emit the new value when error changes.
+   */
   @Output()
   hasErrorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   private _hasError: boolean = false;
 
+  /**
+   * When `true`, the combobox will be styled with error styles.
+   */
   @Input()
   get hasError(): boolean {
     return this._hasError;
@@ -325,6 +386,9 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  /**
+   * The size of the input element.
+   */
   @Input()
   public size: InputSize = InputSize.medium;
 
@@ -377,8 +441,12 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
   @ViewChild('rootElement', { static: true, read: ElementRef })
   public rootElement!: ElementRef<HTMLElement>;
 
-  @ViewChild(InputComponent, { read: ElementRef })
-  private textInput?: ElementRef<HTMLInputElement>;
+  @ViewChild(InputComponent, { static: true, read: ElementRef })
+  private textInput!: ElementRef<HTMLInputElement>;
+
+  get interactiveElement(): HTMLElement {
+    return this.textInput.nativeElement;
+  }
 
   @ViewChild(CdkVirtualScrollViewport)
   private virtualScrollViewport?: CdkVirtualScrollViewport;
@@ -593,13 +661,18 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     this.selectedItem = this.findItemByInput(input);
   }
 
-  protected updateSearchResults(event: Event): void {
+  protected onInput(event: Event): void {
     if (!this.isOpen) {
       this.open();
     }
 
     const input = event.target as HTMLInputElement;
-    this.searchItems = input.value ? this.searchFunction(input.value, this.items) : this.items;
+
+    if (!input.value) {
+      this.clearSelection();
+    }
+
+    this.updateSearchResults(input.value);
 
     // Screen readers (VoiceOver/NVDA) may move real browser focus to a list-item button.
     // When the list re-renders after filtering, that button is removed from the DOM and
@@ -607,6 +680,30 @@ export class ComboboxComponent implements AfterViewInit, OnDestroy, ControlValue
     // and the focusout handler doesn't mistake the body-focus for a genuine blur-away.
     if (document.activeElement !== this.textInput?.nativeElement) {
       this.textInput?.nativeElement.focus();
+    }
+  }
+
+  private clearSelection(): void {
+    this.selectItem(undefined);
+    // Reset after a short delay so the same message can be announced again on subsequent clears
+    this.announce(this.selectionClearedAnnouncement);
+  }
+
+  private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
+  private announce(message: string): void {
+    clearTimeout(this._announceTimeout);
+    this._liveRegionText = '';
+    this._announceTimeout = setTimeout(() => {
+      this._liveRegionText = message;
+      this.cdr.markForCheck();
+    }, 100);
+  }
+
+  private updateSearchResults(inputValue: string): void {
+    this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
+
+    if (inputValue && this.searchItems.length === 0) {
+      this.announce(this.noSearchResultsText);
     }
   }
 

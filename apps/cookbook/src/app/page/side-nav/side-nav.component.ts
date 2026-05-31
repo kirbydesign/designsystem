@@ -25,7 +25,11 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { routes as appRoutes } from '../../app.routes';
-import { SHOWCASE_ROUTES as showcaseRoutes } from '../../showcase/showcase.routes';
+import {
+  COMPONENT_ROUTES as componentRoutes,
+  FOUNDATION_ROUTES as foundationRoutes,
+  LAYOUT_ROUTES as layoutRoutes,
+} from '../../showcase/showcase.routes';
 
 const KEY_DOWN = 'ArrowDown';
 
@@ -51,13 +55,17 @@ interface SideNavLink {
   ],
 })
 export class SideNavComponent implements OnInit {
-  private allShowcaseRoutes: SideNavLink[];
+  private allComponentShowcaseRoutes: SideNavLink[];
   filteredShowcaseRoutes: SideNavLink[][];
   filteredResourceRoutes: Route[];
+  foundationRoutes: SideNavLink[];
+  layoutRoutes: SideNavLink[];
   filter: string = '';
 
   @ViewChildren('componentLink') componentLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
   @ViewChildren('resourceLink') resourceLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
+  @ViewChildren('foundationLink') foundationLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
+  @ViewChildren('layoutLink') layoutLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
 
   @Output() menuToggle = new EventEmitter<boolean>();
   @HostBinding('class.is-open')
@@ -67,7 +75,10 @@ export class SideNavComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.mapShowcaseRoutes();
+    this.foundationRoutes = this.mapRouteGroup(foundationRoutes);
+    this.layoutRoutes = this.mapRouteGroup(layoutRoutes);
+    this.allComponentShowcaseRoutes = this.mapRouteGroup(componentRoutes);
+    this.applyComponentFilter('');
     this.mapResourcesRoutes();
 
     this.router.events
@@ -79,20 +90,14 @@ export class SideNavComponent implements OnInit {
       });
   }
 
-  private mapShowcaseRoutes() {
-    const routesWithPath = showcaseRoutes[0].children.filter((r) => r.path);
-    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
-    navigableRoutes.sort(this.sortByPath);
-
-    this.allShowcaseRoutes = navigableRoutes.map((route) => {
-      return {
-        path: `showcase/${route.path}`,
-        name: kebabToTitleCase(route.path),
-        active: this.router.url.endsWith(route.path),
-      };
-    });
-
-    this.applyComponentFilter('');
+  private mapRouteGroup(routes: Route[]): SideNavLink[] {
+    const navigable = routes.filter((r) => r.path && !r.data?.hide);
+    navigable.sort(this.sortByPath);
+    return navigable.map((route) => ({
+      path: `showcase/${route.path}`,
+      name: kebabToTitleCase(route.path),
+      active: this.router.url.endsWith(route.path),
+    }));
   }
 
   private mapResourcesRoutes() {
@@ -120,9 +125,22 @@ export class SideNavComponent implements OnInit {
 
   onLinksArrowUpDown(event: KeyboardEvent, sideNavGroupKey: string) {
     event.preventDefault();
-    const listElements: HTMLAnchorElement[] = (
-      sideNavGroupKey === 'resources' ? this.resourceLinks : this.componentLinks
-    ).map((link) => link.nativeElement);
+    let links: QueryList<ElementRef<HTMLAnchorElement>>;
+    switch (sideNavGroupKey) {
+      case 'foundation':
+        links = this.foundationLinks;
+        break;
+      case 'layout':
+        links = this.layoutLinks;
+        break;
+      case 'components':
+        links = this.componentLinks;
+        break;
+      default:
+        links = this.resourceLinks;
+        break;
+    }
+    const listElements: HTMLAnchorElement[] = links.map((link) => link.nativeElement);
     const currentlyFocused = listElements.findIndex((link) => link === document.activeElement);
 
     if (currentlyFocused === -1) {
@@ -143,7 +161,7 @@ export class SideNavComponent implements OnInit {
 
   private applyComponentFilter(stringToMatch: string): void {
     this.filter = stringToMatch;
-    let filteredLinks: SideNavLink[] = this.allShowcaseRoutes;
+    let filteredLinks: SideNavLink[] = this.allComponentShowcaseRoutes;
 
     if (stringToMatch.length > 0) {
       const caseSensitive = stringToMatch[0].toUpperCase() === stringToMatch[0];

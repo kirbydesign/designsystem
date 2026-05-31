@@ -49,6 +49,9 @@
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
       "@kirbydesign/designsystem/router-outlet": ["libs/designsystem/router-outlet/index.ts"],
       "@kirbydesign/designsystem/section-header": ["libs/designsystem/section-header/index.ts"],
+      "@kirbydesign/designsystem/segmented-control": [
+        "libs/designsystem/segmented-control/index.ts"
+      ],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
       "@kirbydesign/designsystem/shared/floating": ["libs/designsystem/shared/floating/index.ts"],
       "@kirbydesign/designsystem/shared/portal": ["libs/designsystem/shared/portal/index.ts"],

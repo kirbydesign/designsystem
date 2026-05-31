@@ -1,7 +1,5 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   kirby-badge + kirby-badge {
-    margin-left: utils.size('s');
+    margin-left: var(--kirby-spacing-s);
   }
 }

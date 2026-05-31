@@ -1,17 +1,16 @@
-@use '@kirbydesign/core/src/scss/utils';
 @use '../shared/example-frame';
 
 h2:not(:first-child) {
-  margin-top: utils.size('l');
+  margin-top: var(--kirby-spacing-l);
 }
 
 h3 {
-  border-bottom: 1px dotted utils.get-color('medium');
+  border-bottom: 1px dotted var(--kirby-medium);
 }
 
 cookbook-example-viewer,
 cookbook-code-viewer {
-  margin-bottom: utils.size('l');
+  margin-bottom: var(--kirby-spacing-l);
 }
 
 // Style the Keyboard Input element. Borrowed from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd
@@ -27,4 +26,8 @@ kbd {
   line-height: 1;
   padding: 2px 4px;
   white-space: nowrap;
+}
+
+cookbook-aside {
+  margin-block: var(--kirby-spacing-m);
 }

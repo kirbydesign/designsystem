@@ -1,0 +1,36 @@
+<p>Breakpoint tokens define responsive layout thresholds.</p>
+
+<p>
+  They are available via the
+  <code>media('>=[name]')</code>
+  mixin for media queries, or as CSS custom properties.
+</p>
+
+<cookbook-aside>
+  Click any row to copy the
+  <code>var()</code>
+  usage to your clipboard.
+</cookbook-aside>
+
+<table class="kirby-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="custom-property-cell">CSS Custom Property</th>
+      <th>Base value</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (token of breakpoints; track token.name) {
+      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
+        <td>
+          <code>{{ token.name }}</code>
+        </td>
+        <td>
+          <code>{{ token.cssVar }}</code>
+        </td>
+        <td>{{ token.description }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

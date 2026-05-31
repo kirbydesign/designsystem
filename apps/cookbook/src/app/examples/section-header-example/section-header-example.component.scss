@@ -1,16 +1,16 @@
-@use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
 
 :host {
   display: block;
   height: 100%;
-  background: utils.get-color('background-color');
-  padding: utils.size('m');
+  background: var(--kirby-background-color);
+  padding: var(--kirby-spacing-m);
 
   h2 {
     &:not(:first-child) {
-      margin-top: utils.size('l');
+      margin-top: var(--kirby-spacing-l);
     }
 
-    border-bottom: 1px dotted utils.get-color('medium');
+    border-bottom: 1px dotted var(--kirby-medium);
   }
 }

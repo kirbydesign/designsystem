@@ -1,8 +1,6 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 img {
   max-width: 100%;
   display: block;
   margin: 0 auto;
-  margin-bottom: utils.size('xxl');
+  margin-bottom: var(--kirby-spacing-xxl);
 }
