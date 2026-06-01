@@ -1,13 +1,14 @@
-import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, signal } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({
   selector: 'cookbook-copy-token',
+  host: { '[class.copied]': 'copied()' },
   template: `
     <button kirby-button type="button" size="xs" title="Copy var() to clipboard">
-      <kirby-icon name="copy" size="xs"></kirby-icon>
+      <kirby-icon [name]="copied() ? 'checkmark-selected' : 'copy'" size="xs"></kirby-icon>
     </button>
   `,
   styleUrls: ['./copy-token-button.component.scss'],
@@ -16,19 +17,20 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 export class CopyTokenButtonComponent {
   @Input() cssVar: string;
 
-  constructor(private el: ElementRef<HTMLElement>) {}
+  copied = signal(false);
+
+  private copiedTimeout = 0;
 
   @HostListener('click', ['$event'])
-  async onClick(event: MouseEvent) {
+  onClick(event: MouseEvent) {
     event.stopPropagation();
-    await navigator.clipboard.writeText(`var(${this.cssVar})`);
-    const row = this.el.nativeElement.closest('tr');
-    const target = row ? row.querySelectorAll('td')[1] : this.el.nativeElement;
-    if (target) {
-      target.classList.add('copied');
-      window.setTimeout(() => {
-        target.classList.remove('copied');
-      }, 1500);
-    }
+    this.copy();
+  }
+
+  copy(cssVarOverride?: string) {
+    navigator.clipboard.writeText(`var(${cssVarOverride ?? this.cssVar})`);
+    this.copied.set(true);
+    clearTimeout(this.copiedTimeout);
+    this.copiedTimeout = window.setTimeout(() => this.copied.set(false), 1500);
   }
 }

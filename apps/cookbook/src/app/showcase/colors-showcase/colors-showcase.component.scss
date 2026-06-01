@@ -1,8 +1,5 @@
 @use '../design-token-table';
 @use '../showcase.shared';
-@use '../../shared/mini-toast';
-
-@include design-token-table.copy-token-cell;
 
 .color-swatch {
   display: block;
@@ -31,12 +28,17 @@ tr:hover .color-swatch {
   height: var(--kirby-spacing-l);
   border-radius: var(--kirby-border-radius-xs);
   cursor: pointer;
-  position: relative;
   transition: transform var(--kirby-transition-duration-quick);
-
-  @include mini-toast.copied;
 
   &:hover {
     transform: scale(110%);
   }
+}
+
+.decoration-table tr:has(.decoration-swatch:hover) cookbook-copy-token {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity var(--kirby-transition-duration-quick),
+    visibility 0s;
 }

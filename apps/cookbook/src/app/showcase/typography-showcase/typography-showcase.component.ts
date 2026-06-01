@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { CopyTokenButtonComponent } from '../../shared/copy-token/copy-token-button.component';
-import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
 import { TokenEntry } from '../../shared/token-entry';
 
 interface LineHeightEntry extends TokenEntry {
@@ -12,7 +11,7 @@ interface LineHeightEntry extends TokenEntry {
   selector: 'cookbook-typography-showcase',
   templateUrl: './typography-showcase.component.html',
   styleUrls: ['./typography-showcase.component.scss'],
-  imports: [CopyTokenButtonComponent, CopyTokenDirective],
+  imports: [CopyTokenButtonComponent],
 })
 export class TypographyShowcaseComponent {
   fontSizes: TokenEntry[] = [

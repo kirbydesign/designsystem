@@ -1,19 +1,6 @@
-@use '../shared/mini-toast';
-
 @mixin copy-token-cell {
   tbody td:nth-child(2) {
-    position: relative;
     white-space: nowrap;
-
-    @include mini-toast.copied;
-
-    &:hover {
-      transform: none;
-    }
-  }
-
-  tbody tr:hover cookbook-copy-token {
-    opacity: 1;
   }
 }
 
@@ -25,4 +12,17 @@ td:first-child {
 th.preview {
   width: 1px; // make cell follow content width
   white-space: nowrap;
+}
+
+cookbook-copy-token {
+  visibility: hidden;
+  opacity: 0;
+}
+
+tr.kirby-selectable-row:hover cookbook-copy-token {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity var(--kirby-transition-duration-quick),
+    visibility 0s;
 }

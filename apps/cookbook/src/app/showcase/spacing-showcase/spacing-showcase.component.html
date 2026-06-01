@@ -16,13 +16,13 @@
   </thead>
   <tbody>
     @for (token of spacings; track token.name) {
-      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
+      <tr class="kirby-selectable-row" (click)="copyBtn.copy()">
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
+          <cookbook-copy-token #copyBtn [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>{{ token.description }}</td>
         <td>

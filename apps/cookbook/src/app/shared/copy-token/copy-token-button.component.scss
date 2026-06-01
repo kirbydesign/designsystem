@@ -3,8 +3,11 @@
   align-items: center;
   margin-left: var(--kirby-spacing-xxs);
   vertical-align: middle;
-  opacity: 0;
-  transition: opacity 150ms;
+}
+
+:host(.copied) {
+  visibility: visible;
+  opacity: 1;
 }
 
 button {
@@ -17,4 +20,8 @@ button {
   cursor: pointer;
   color: var(--kirby-semi-dark);
   transition: color var(--kirby-transition-duration-quick);
+}
+
+:host(.copied) button {
+  color: var(--kirby-success);
 }

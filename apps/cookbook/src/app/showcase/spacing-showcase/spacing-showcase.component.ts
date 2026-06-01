@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
 import { CopyTokenButtonComponent } from '../../shared/copy-token/copy-token-button.component';
-import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
 import { TokenEntry } from '../../shared/token-entry';
 
 @Component({
   selector: 'cookbook-spacing-showcase',
   templateUrl: './spacing-showcase.component.html',
   styleUrls: ['./spacing-showcase.component.scss'],
-  imports: [CopyTokenButtonComponent, CopyTokenDirective],
+  imports: [CopyTokenButtonComponent],
 })
 export class SpacingShowcaseComponent {
   spacings: TokenEntry[] = [
