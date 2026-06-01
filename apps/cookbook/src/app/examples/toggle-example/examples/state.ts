@@ -3,9 +3,9 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
 const config = {
   selector: 'cookbook-toggle-state-example',
-  template: `<kirby-toggle slot="end" aria-label="Default toggle"></kirby-toggle>
-<kirby-toggle checked="true" slot="end" aria-label="Checked toggle"></kirby-toggle>
-<kirby-toggle disabled="true" slot="end" aria-label="Disabled toggle"></kirby-toggle>
+  template: `<kirby-toggle aria-label="Default toggle"></kirby-toggle>
+<kirby-toggle checked="true" aria-label="Checked toggle"></kirby-toggle>
+<kirby-toggle disabled="true" aria-label="Disabled toggle"></kirby-toggle>
 `,
 };
 
