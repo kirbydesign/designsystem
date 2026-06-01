@@ -1,17 +1,10 @@
 @use '../design-token-table';
 @use '../showcase.shared';
 
-@include design-token-table.copy-token-cell;
-
 .spacing-sample {
   display: block;
   height: var(--kirby-spacing-xxs);
   background-color: var(--kirby-primary);
   border-radius: var(--kirby-border-radius-xxs);
   min-width: var(--kirby-spacing-xxxxs);
-  transition: transform var(--kirby-transition-duration-quick);
-}
-
-tr:hover .spacing-sample {
-  transform: scale(110%);
 }

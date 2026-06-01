@@ -26,7 +26,10 @@
         </td>
         <td>{{ token.description }}</td>
         <td>
-          <span class="spacing-sample" [style.width]="'var(' + token.cssVar + ')'"></span>
+          <span
+            class="spacing-sample token-preview"
+            [style.width]="'var(' + token.cssVar + ')'"
+          ></span>
         </td>
       </tr>
     }

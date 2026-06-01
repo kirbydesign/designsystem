@@ -31,7 +31,12 @@
         </td>
         <td>{{ token.description }}</td>
         <td>
-          <span class="font-size-sample" [style.font-size]="'var(' + token.cssVar + ')'">Aa</span>
+          <span
+            class="font-size-sample token-preview"
+            [style.font-size]="'var(' + token.cssVar + ')'"
+          >
+            Aa
+          </span>
         </td>
       </tr>
     }
@@ -60,7 +65,10 @@
         </td>
         <td>{{ token.description }}</td>
         <td>
-          <span class="font-weight-sample" [style.font-weight]="'var(' + token.cssVar + ')'">
+          <span
+            class="font-weight-sample token-preview"
+            [style.font-weight]="'var(' + token.cssVar + ')'"
+          >
             The quick brown fox
           </span>
         </td>
@@ -96,7 +104,7 @@
         <td>{{ token.description }}</td>
         <td>
           <span
-            class="line-height-sample"
+            class="line-height-sample token-preview"
             [style.line-height]="'var(' + token.cssVar + ')'"
             [style.font-size]="'var(' + token.fontSizeVar + ')'"
           >

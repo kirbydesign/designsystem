@@ -1,19 +1,12 @@
 @use '../design-token-table';
 @use '../showcase.shared';
 
-@include design-token-table.copy-token-cell;
-
 .radius-sample {
   display: block;
   width: var(--kirby-spacing-xxl);
   height: var(--kirby-spacing-xxl);
   background-color: var(--kirby-primary-tint);
   border-radius: var(--kirby-border-radius-xxs);
-  transition: transform var(--kirby-transition-duration-quick);
-}
-
-tr:hover .radius-sample {
-  transform: scale(110%);
 }
 
 .radius-sample.pill {

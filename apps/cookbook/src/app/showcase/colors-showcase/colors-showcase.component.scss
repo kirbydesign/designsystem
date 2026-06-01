@@ -6,11 +6,6 @@
   width: var(--kirby-spacing-l);
   height: var(--kirby-spacing-l);
   border-radius: var(--kirby-border-radius-xs);
-  transition: transform var(--kirby-transition-duration-quick);
-}
-
-tr:hover .color-swatch {
-  transform: scale(110%);
 }
 
 .system-colors .color-swatch {
@@ -29,10 +24,6 @@ tr:hover .color-swatch {
   border-radius: var(--kirby-border-radius-xs);
   cursor: pointer;
   transition: transform var(--kirby-transition-duration-quick);
-
-  &:hover {
-    transform: scale(110%);
-  }
 }
 
 .decoration-table tr:has(.decoration-swatch:hover) cookbook-copy-token {

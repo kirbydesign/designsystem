@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import { CopyTokenButtonComponent } from '../../shared/copy-token/copy-token-button.component';
+import { CopyTokenComponent } from '../../shared/copy-token/copy-token.component';
 import { TokenEntry } from '../../shared/token-entry';
 
 @Component({
   selector: 'cookbook-borders-showcase',
   templateUrl: './border-radius-showcase.component.html',
   styleUrls: ['./border-radius-showcase.component.scss'],
-  imports: [CopyTokenButtonComponent],
+  imports: [CopyTokenComponent],
 })
 export class BorderRadiusShowcaseComponent {
   borderRadii: TokenEntry[] = [

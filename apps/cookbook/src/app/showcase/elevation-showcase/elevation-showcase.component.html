@@ -30,7 +30,10 @@
         </td>
         <td>{{ token.description }}</td>
         <td>
-          <span class="elevation-sample" [style.box-shadow]="'var(' + token.cssVar + ')'"></span>
+          <span
+            class="elevation-sample token-preview"
+            [style.box-shadow]="'var(' + token.cssVar + ')'"
+          ></span>
         </td>
       </tr>
     }

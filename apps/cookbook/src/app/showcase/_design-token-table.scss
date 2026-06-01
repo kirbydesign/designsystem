@@ -1,7 +1,5 @@
-@mixin copy-token-cell {
-  tbody td:nth-child(2) {
-    white-space: nowrap;
-  }
+tbody td:nth-child(2) {
+  white-space: nowrap;
 }
 
 th:first-child,
@@ -25,4 +23,13 @@ tr.kirby-selectable-row:hover cookbook-copy-token {
   transition:
     opacity var(--kirby-transition-duration-quick),
     visibility 0s;
+}
+
+.token-preview {
+  transition: transform var(--kirby-transition-duration-quick);
+}
+
+tr.kirby-selectable-row:hover .token-preview,
+tr .decoration-swatch:hover {
+  transform: scale(110%);
 }
