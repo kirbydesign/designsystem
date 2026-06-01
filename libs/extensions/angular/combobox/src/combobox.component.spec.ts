@@ -745,6 +745,21 @@ describe('Combobox', () => {
       spectator.component.popout = HorizontalDirection.left;
       expect(spectator.component.popout).toBe(HorizontalDirection.left);
     });
+
+    it('when deleting the input, the value is cleared', fakeAsync(() => {
+      // Arrange
+
+      // Act
+      spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+      tick(openDelayInMs);
+      spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
+      spectator.typeInElement('', inputElement);
+      tick(openDelayInMs);
+      spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
+
+      // Assert
+      expect(spectator.component.value).toBe(undefined);
+    }));
   });
 });
 

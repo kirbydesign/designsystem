@@ -1,3 +1,6 @@
+<span class="kirby-visually-hidden" aria-live="polite" aria-atomic="true">
+  {{ _liveRegionText }}
+</span>
 <div (click)="onToggle($event)" #rootElement>
   <input
     kirby-input
@@ -12,7 +15,7 @@
     [attr.aria-controls]="_listboxId"
     [attr.aria-expanded]="isOpen"
     [attr.aria-activedescendant]="isOpen && focusedItem ? getItemId(focusedItem) : null"
-    (input)="updateSearchResults($event)"
+    (input)="onInput($event)"
   />
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'" kirby-affix="suffix"></kirby-icon>
 </div>
@@ -25,7 +28,7 @@
 >
   <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
     @if (searchItems.length === 0) {
-      <kirby-item [attr.aria-live]="'polite'">
+      <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
     } @else {

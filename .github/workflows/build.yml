@@ -7,10 +7,18 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 defaults:
   run:
     shell: bash
+
+env:
+  REPO_URL: https://github.com
+  REPO_HOST: github.com
 
 jobs:
   pre_build:
@@ -18,21 +26,21 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       #Build on PRs, PR's merge to default branch, new releases & changes not including 'libs' (which gets build as part of new release)
-      do_build: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v') || steps.filter.outputs.libs == 'false' }}
+      do_build: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' || steps.filter.outputs.libs == 'false' }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Check modified files
         id: filter
-        uses: dorny/paths-filter@v2.9.2
+        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         with:
           filters: |
             libs:
               - 'libs/**'
       - name: Get Node.JS version from package.json
         id: get_node_version
-        run: echo ::set-output name=node_version::$(jq -r .engines.node ./package.json)
+        run: echo "node_version=$(jq -r .engines.node ./package.json)" >> $GITHUB_OUTPUT
 
   lint_and_unittest:
     name: Lint & unit test
@@ -43,7 +51,7 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Run linting
@@ -60,7 +68,7 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby lib
@@ -75,13 +83,13 @@ jobs:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Build Kirby Cookbook
         run: npx nx build cookbook --configuration=production
       - name: Upload Kirby Cookbook dist files
-        uses: actions/cache@v4
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             dist/
@@ -91,72 +99,67 @@ jobs:
     name: Deploy cookbook
     needs: [build_kirby, build_kirby_cookbook]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write      # git push to gh-pages branch
+      deployments: write   # create/update GitHub deployments
     env:
       DOMAIN: 'kirby.design'
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Get deployment name for default or feature branch
-        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
+        if: >-
+          github.event_name == 'pull_request' ||
+          (github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')) ||
+          (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/develop')
+        env:
+          GIT_REF: ${{ github.head_ref || github.ref }}
         run: |
-          branchname="${{ github.head_ref || github.ref }}"
-          echo "Github branchname: ${branchname}"
-          branchname="${branchname##*/}"
-          echo "Removed leading paths - branchname: ${branchname}"
-          branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
-          echo "Converted to lowercase - branchname: ${branchname}"
-          branchname="${branchname//[^a-zA-Z0-9]/-}"
-          echo "Replaced illegal chars - branchname: ${branchname}"
-          branchname=$(tr -s '-' '-' <<< "$branchname")
-          echo "Removed duplicated dashes - branchname: ${branchname}"
-          branchname="${branchname%%-}"
-          echo "Removed trailing dash - final branchname: ${branchname}"
-          releasename="kby-${branchname}"
-          releasename=$(cut -c 1-53 <<< "$releasename")
-          echo "Releasename: ${releasename}"
+          releasename=$(bash .github/scripts/normalize-branch-name.sh "$GIT_REF")
+          branchname="${releasename#kby-}"
           echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
+          echo "IS_RELEASE=false" >> $GITHUB_ENV
       - name: Get deployment name for release branch
-        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
+        if: >-
+          (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
+          (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/develop')
         run: |
           echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
-      - name: Get hostname for default or feature branch
-        if: "github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/v')"
-        run: |
-          chmod +x ./scripts/dns.pl
-          hostname=$(perl ./scripts/dns.pl $DOMAIN "${RELEASENAME}")
-          echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
-      - name: Get hostname for release branch
-        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
-        run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
+          echo "IS_RELEASE=true" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments
-          repository: ${{ github.repository }}
-          ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
-          environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
-          production_environment: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
-          auto_merge: false
-          required_contexts: '[]' # Skip commit checks
-          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_REF: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
+          PRODUCTION_ENV: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/develop' }}
+          REPO: ${{ github.repository }}
+        run: |
+          payload=$(jq -n \
+            --arg ref "$DEPLOY_REF" \
+            --arg environment "$GH_DEPLOY_ENVIRONMENT" \
+            --argjson production_environment $PRODUCTION_ENV \
+            '{ref: $ref, environment: $environment, production_environment: $production_environment, auto_merge: false, required_contexts: []}')
+          deployment_id=$(echo "$payload" | gh api /repos/$REPO/deployments \
+            --method POST \
+            --input - \
+            --jq '.id')
+          echo "deployment_id=${deployment_id}" >> $GITHUB_OUTPUT
       - name: Set deployment status to in progress
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: in_progress
-          mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOYMENT_STATE: in_progress
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.create_deployment.outputs.deployment_id }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
+            --method POST \
+            -f state="$DEPLOYMENT_STATE" \
+            -f log_url="$REPO_URL/$REPO/actions/runs/$RUN_ID"
       - name: Download Kirby Cookbook dist files
-        uses: actions/cache@v4
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             dist/
@@ -164,54 +167,28 @@ jobs:
       - name: Deploy cookbook to GitHub pages
         run: |
           set -e
-          echo "Hostname: ${HOSTNAME}"
 
-          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystem_web
+          git clone https://x-access-token:$GITHUB_TOKEN@$REPO_HOST/kirbydesign/designsystem.git -b gh-pages designsystem_web
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'
 
           mkdir -p designsystem_web/branch
-          if [ $HOSTNAME == "cookbook" ]; then
+          if [ $IS_RELEASE == "true" ]; then
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/browser/index.html
+            find designsystem_web -maxdepth 1 -mindepth 1 ! -name 'branch' ! -name 'CNAME' ! -name '.nojekyll' ! -name '.git' -exec rm -rf {} +
             cp -R dist/apps/cookbook/browser/* designsystem_web/
             cp designsystem_web/index.html designsystem_web/404.html
           else
-            mkdir -p designsystem_web/branch/$HOSTNAME
-            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/browser/index.html
-            cp -R dist/apps/cookbook/browser/* designsystem_web/branch/$HOSTNAME
-            cp designsystem_web/branch/$HOSTNAME/index.html designsystem_web/branch/$HOSTNAME/404.html
+            # Remove old branch build if exists
+            rm -rf designsystem_web/branch/$RELEASENAME
+            mkdir -p designsystem_web/branch/$RELEASENAME
+            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$RELEASENAME/\">,g" dist/apps/cookbook/browser/index.html
+            cp -R dist/apps/cookbook/browser/* designsystem_web/branch/$RELEASENAME
+            cp designsystem_web/branch/$RELEASENAME/index.html designsystem_web/branch/$RELEASENAME/404.html
           fi
 
-          cd designsystem_web/branch/
-          folders=$(ls -d */)
-
-          cd ../
-          branches=$(git branch -r)
-
-          #find deployment names for all branches
-          branchList=""
-          for branch in $branches; do
-            name="${branch##*/}"
-            name=$(tr [:upper:] [:lower:] <<< "$name")
-            name="${name//[^a-zA-Z0-9]/-}"
-            name=$(tr -s '-' '-' <<< "$name")
-            name="${name%%-}"
-            name="kby-${name}"
-            name=$(cut -c 1-53 <<< "$name")
-            branchList="$branchList $name"
-          done
-
-          #delete deployments related to closed branches
-          for item in $folders
-          do
-            echo "Verify branch ${item::-1} exist"
-            if ! grep -q "${item::-1}" <<< "$branchList"; then
-              echo "Deleting branch folder ${item::-1} (branch closed)"
-              rm -Rf branch/${item::-1}
-            fi
-          done
-
+          cd designsystem_web
           git add .
 
           if ! git diff-index --quiet HEAD; then
@@ -223,27 +200,30 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to success
         id: successful_deployment
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: success
-          mediaType: '{"previews": ["ant-man"]}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOYMENT_STATE: success
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.create_deployment.outputs.deployment_id }}
+          RUN_ID: ${{ github.run_id }}
+          ENVIRONMENT_URL: ${{ env.IS_RELEASE == 'true' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.RELEASENAME) }}
+        run: |
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
+            --method POST \
+            -f state="$DEPLOYMENT_STATE" \
+            -f log_url="$REPO_URL/$REPO/actions/runs/$RUN_ID" \
+            -f environment_url="$ENVIRONMENT_URL"
       - name: Set deployment status to failure
         id: failed_deployment
-        uses: octokit/request-action@v2.x
         if: failure()
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: failure
-          mediaType: '{"previews": ["ant-man"]}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOYMENT_STATE: failure
+          REPO: ${{ github.repository }}
+          DEPLOYMENT_ID: ${{ steps.create_deployment.outputs.deployment_id }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          gh api /repos/$REPO/deployments/$DEPLOYMENT_ID/statuses \
+            --method POST \
+            -f state="$DEPLOYMENT_STATE" \
+            -f log_url="$REPO_URL/$REPO/actions/runs/$RUN_ID"
