@@ -11,6 +11,10 @@
       transform: none;
     }
   }
+
+  tbody tr:hover cookbook-copy-token {
+    opacity: 1;
+  }
 }
 
 th:first-child,

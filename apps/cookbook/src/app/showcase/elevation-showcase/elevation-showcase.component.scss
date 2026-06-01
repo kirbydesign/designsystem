@@ -10,4 +10,9 @@
   margin-block: var(--kirby-spacing-xs);
   background-color: var(--kirby-white);
   border-radius: var(--kirby-border-radius-s);
+  transition: transform var(--kirby-transition-duration-quick);
+}
+
+tr:hover .elevation-sample {
+  transform: scale(105%);
 }

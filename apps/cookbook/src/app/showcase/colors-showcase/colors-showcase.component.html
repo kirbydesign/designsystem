@@ -6,12 +6,6 @@
   or as CSS custom properties.
 </p>
 
-<cookbook-aside>
-  Click any row to copy the
-  <code>var()</code>
-  usage to your clipboard.
-</cookbook-aside>
-
 <h2>Brand Colors</h2>
 <table class="kirby-table">
   <thead>
@@ -29,6 +23,7 @@
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
@@ -55,6 +50,7 @@
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
@@ -81,6 +77,7 @@
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
@@ -107,6 +104,7 @@
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
@@ -138,6 +136,7 @@
         </td>
         <td>
           <code>--kirby-decoration-color-{{ group.hue }}-*</code>
+          <cookbook-copy-token [cssVar]="group.tokens[0].cssVar"></cookbook-copy-token>
         </td>
         <td>
           <div class="decoration-ramp">

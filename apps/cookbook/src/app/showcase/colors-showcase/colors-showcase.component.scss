@@ -9,6 +9,11 @@
   width: var(--kirby-spacing-l);
   height: var(--kirby-spacing-l);
   border-radius: var(--kirby-border-radius-xs);
+  transition: transform var(--kirby-transition-duration-quick);
+}
+
+tr:hover .color-swatch {
+  transform: scale(110%);
 }
 
 .system-colors .color-swatch {
@@ -27,10 +32,11 @@
   border-radius: var(--kirby-border-radius-xs);
   cursor: pointer;
   position: relative;
+  transition: transform var(--kirby-transition-duration-quick);
 
   @include mini-toast.copied;
 
   &:hover {
-    transform: none;
+    transform: scale(110%);
   }
 }

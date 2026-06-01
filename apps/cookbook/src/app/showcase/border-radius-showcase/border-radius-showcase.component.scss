@@ -9,6 +9,11 @@
   height: var(--kirby-spacing-xxl);
   background-color: var(--kirby-primary-tint);
   border-radius: var(--kirby-border-radius-xxs);
+  transition: transform var(--kirby-transition-duration-quick);
+}
+
+tr:hover .radius-sample {
+  transform: scale(110%);
 }
 
 .radius-sample.pill {

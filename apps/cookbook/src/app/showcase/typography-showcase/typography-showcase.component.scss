@@ -3,6 +3,19 @@
 
 @include design-token-table.copy-token-cell;
 
+.font-size-sample,
+.font-weight-sample,
+.line-height-sample {
+  display: inline-block;
+  transition: transform var(--kirby-transition-duration-quick);
+}
+
+tr:hover .font-size-sample,
+tr:hover .font-weight-sample,
+tr:hover .line-height-sample {
+  transform: scale(110%);
+}
+
 .font-size-sample {
   line-height: 1;
 }

@@ -9,12 +9,6 @@
   or as CSS custom properties.
 </p>
 
-<cookbook-aside>
-  Click any row to copy the
-  <code>var()</code>
-  usage to your clipboard.
-</cookbook-aside>
-
 <table class="kirby-table">
   <thead>
     <tr>
@@ -32,6 +26,7 @@
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>{{ token.description }}</td>
         <td>

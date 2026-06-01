@@ -9,4 +9,9 @@
   background-color: var(--kirby-primary);
   border-radius: var(--kirby-border-radius-xxs);
   min-width: var(--kirby-spacing-xxxxs);
+  transition: transform var(--kirby-transition-duration-quick);
+}
+
+tr:hover .spacing-sample {
+  transform: scale(110%);
 }
