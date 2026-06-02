@@ -1,8 +1,5 @@
 @use '../design-token-table';
 @use '../showcase.shared';
-@use '../../shared/mini-toast';
-
-@include design-token-table.copy-token-cell;
 
 .color-swatch {
   display: block;
@@ -26,11 +23,9 @@
   height: var(--kirby-spacing-l);
   border-radius: var(--kirby-border-radius-xs);
   cursor: pointer;
-  position: relative;
+  transition: transform var(--kirby-transition-duration-quick);
+}
 
-  @include mini-toast.copied;
-
-  &:hover {
-    transform: none;
-  }
+.decoration-table tr:has(.decoration-swatch:hover) .decoration-swatch:hover {
+  transform: scale(110%);
 }
