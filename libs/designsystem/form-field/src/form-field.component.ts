@@ -132,6 +132,16 @@ export class FormFieldComponent
     }
   }
 
+  onSuffixClick() {
+    if (this.dateInput?.useNativeDatePicker) {
+      this.openDatePicker();
+    }
+  }
+
+  openDatePicker() {
+    (this.nestedInteractiveElement as HTMLInputElement).showPicker();
+  }
+
   public focus() {
     if (!this.nestedInteractiveElement) return;
 
