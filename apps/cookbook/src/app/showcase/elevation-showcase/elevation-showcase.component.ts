@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
-import { AsideComponent } from '../../shared/aside/aside.component';
-import { CopyTokenDirective } from '../../shared/copy-token/copy-token.directive';
+import { CopyTokenComponent } from '../../shared/copy-token/copy-token.component';
 import { TokenEntry } from '../../shared/token-entry';
 
 @Component({
   selector: 'cookbook-elevation-showcase',
   templateUrl: './elevation-showcase.component.html',
   styleUrls: ['./elevation-showcase.component.scss'],
-  imports: [AsideComponent, CopyTokenDirective],
+  imports: [CopyTokenComponent],
 })
 export class ElevationShowcaseComponent {
   elevations: TokenEntry[] = [
