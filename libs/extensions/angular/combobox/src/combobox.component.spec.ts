@@ -277,7 +277,7 @@ describe('Combobox', () => {
 
         // Assert
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const lastItemIndex = items20.length - 1;
+        const lastItemIndex = kirbyItems.length - 1;
         expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
       }));
 
@@ -291,7 +291,7 @@ describe('Combobox', () => {
 
         // Assert
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const secondLastItemIndex = items20.length - 2;
+        const secondLastItemIndex = kirbyItems.length - 2;
         expect(kirbyItems.item(secondLastItemIndex)).toHaveClass('focused');
       }));
 
@@ -308,7 +308,7 @@ describe('Combobox', () => {
 
         // Assert
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const selectedItemIndex = items20.length - 2;
+        const selectedItemIndex = kirbyItems.length - 2;
         expect(kirbyItems.item(selectedItemIndex)).toHaveClass('focused');
       }));
     });
