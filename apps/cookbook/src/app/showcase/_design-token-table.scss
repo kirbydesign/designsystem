@@ -13,23 +13,23 @@ th.preview {
 }
 
 cookbook-copy-token {
-  visibility: hidden;
   opacity: 0;
+  transition: opacity var(--kirby-transition-duration-quick);
+
+  &:focus-within,
+  &.copied {
+    opacity: 1;
+  }
 }
 
-tr.kirby-selectable-row:hover cookbook-copy-token {
-  visibility: visible;
+tr:hover cookbook-copy-token {
   opacity: 1;
-  transition:
-    opacity var(--kirby-transition-duration-quick),
-    visibility 0s;
 }
 
 .token-preview {
   transition: transform var(--kirby-transition-duration-quick);
 }
 
-tr.kirby-selectable-row:hover .token-preview,
-tr .decoration-swatch:hover {
+tr:hover .token-preview {
   transform: scale(110%);
 }

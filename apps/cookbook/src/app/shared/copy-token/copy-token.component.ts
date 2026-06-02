@@ -1,7 +1,9 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, effect, Input, signal } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+
+const activeCopyToken = signal<CopyTokenComponent | null>(null);
 
 @Component({
   selector: 'cookbook-copy-token',
@@ -25,12 +27,19 @@ export class CopyTokenComponent {
   @Input() cssVar: string;
 
   copied = signal(false);
-  private copiedTimeout = 0;
+
+  constructor() {
+    effect(() => {
+      if (activeCopyToken() !== this) {
+        this.copied.set(false);
+      }
+    });
+  }
 
   copy(cssVarOverride?: string) {
     navigator.clipboard.writeText(`var(${cssVarOverride ?? this.cssVar})`);
+    activeCopyToken.set(this);
     this.copied.set(true);
-    clearTimeout(this.copiedTimeout);
-    this.copiedTimeout = window.setTimeout(() => this.copied.set(false), 1500);
+    setTimeout(() => this.copied.set(false), 1500);
   }
 }

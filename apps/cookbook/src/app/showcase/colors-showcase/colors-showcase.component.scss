@@ -26,10 +26,6 @@
   transition: transform var(--kirby-transition-duration-quick);
 }
 
-.decoration-table tr:has(.decoration-swatch:hover) cookbook-copy-token {
-  visibility: visible;
-  opacity: 1;
-  transition:
-    opacity var(--kirby-transition-duration-quick),
-    visibility 0s;
+.decoration-table tr:has(.decoration-swatch:hover) .decoration-swatch:hover {
+  transform: scale(110%);
 }

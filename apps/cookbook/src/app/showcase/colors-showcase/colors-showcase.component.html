@@ -17,13 +17,13 @@
   </thead>
   <tbody>
     @for (token of brandColors; track token.name) {
-      <tr class="kirby-selectable-row" (click)="copyBtn.copy()">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token #copyBtn [cssVar]="token.cssVar"></cookbook-copy-token>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span
@@ -47,13 +47,13 @@
   </thead>
   <tbody>
     @for (token of notificationColors; track token.name) {
-      <tr class="kirby-selectable-row" (click)="copyBtn.copy()">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token #copyBtn [cssVar]="token.cssVar"></cookbook-copy-token>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span
@@ -77,13 +77,13 @@
   </thead>
   <tbody>
     @for (token of systemColors; track token.name) {
-      <tr class="kirby-selectable-row" (click)="copyBtn.copy()">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token #copyBtn [cssVar]="token.cssVar"></cookbook-copy-token>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span
@@ -107,13 +107,13 @@
   </thead>
   <tbody>
     @for (token of textColors; track token.name) {
-      <tr class="kirby-selectable-row" (click)="copyBtn.copy()">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token #copyBtn [cssVar]="token.cssVar"></cookbook-copy-token>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
           <span

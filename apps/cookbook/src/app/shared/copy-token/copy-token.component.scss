@@ -5,11 +5,6 @@
   vertical-align: middle;
 }
 
-:host(.copied) {
-  visibility: visible;
-  opacity: 1;
-}
-
 :host(.copied) button {
-  color: var(--kirby-success);
+  color: var(--kirby-success-shade);
 }
