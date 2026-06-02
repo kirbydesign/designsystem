@@ -258,13 +258,13 @@ export class DropdownComponent
     }
 
     // Setup a click listener for each new slotted items
-    kirbyItems.forEach((kirbyItem, index) => {
+    kirbyItems.forEach((kirbyItem) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
       const disposeClickListener: EventListenerDisposeFn = this.renderer.listen(
         kirbyItem.nativeElement,
         'click',
         () => {
-          this.onItemSelect(index);
+          this.onItemSelect(this.domIndexOf(kirbyItem));
         }
       );
 
@@ -706,6 +706,16 @@ export class DropdownComponent
       this.focusedIndex = newFocusedIndex;
     }
     return false;
+  }
+
+  private domIndexOf(kirbyItem: ElementRef<HTMLElement>): number {
+    return this.kirbyItemsSlotted
+      .toArray()
+      .filter(
+        (item) =>
+          item.nativeElement.compareDocumentPosition(kirbyItem.nativeElement) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+      ).length;
   }
 
   private unlistenAllSlottedItems() {
