@@ -547,6 +547,7 @@ export class ComboboxComponent
   }
 
   public ngOnDestroy(): void {
+    clearTimeout(this._scrollToOpenTimeout);
     this.unlistenAllSlottedItems();
     this.unobserveResize();
   }
@@ -557,8 +558,7 @@ export class ComboboxComponent
     }
     if (!this.isOpen) {
       this.state = OpenState.opening;
-      setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
-
+      this.showPopOver();
       this.focusedItem = this.selectedItem;
     }
   }
@@ -567,8 +567,11 @@ export class ComboboxComponent
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
-      this.scrollToIndexIntoViewWhenOpeningPopup();
       this.cdr.markForCheck();
+      clearTimeout(this._scrollToOpenTimeout);
+      this._scrollToOpenTimeout = setTimeout(() => {
+        this.scrollToIndexIntoViewWhenOpeningPopup();
+      });
     }
   }
 
@@ -690,6 +693,7 @@ export class ComboboxComponent
   }
 
   private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
+  private _scrollToOpenTimeout: ReturnType<typeof setTimeout> | undefined;
   private announce(message: string): void {
     clearTimeout(this._announceTimeout);
     this._liveRegionText = '';
@@ -971,6 +975,10 @@ export class ComboboxComponent
       return;
     }
 
+    this.virtualScrollViewport?.setRenderedRange({
+      start: focusedIndex - 10,
+      end: focusedIndex + 10,
+    });
     this.virtualScrollViewport?.scrollToIndex(focusedIndex);
   }
 }
