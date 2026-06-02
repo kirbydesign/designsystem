@@ -1,20 +1,10 @@
 @use '../showcase.shared';
 @use '@kirbydesign/core/src/scss/utils';
 
-cookbook-toggle-default-example {
-  padding: 0;
-  margin-bottom: var(--kirby-spacing-s);
-  display: flex;
-  flex-direction: column;
-  gap: var(--kirby-spacing-s);
-
-  @include utils.media('>=medium') {
-    flex-direction: row;
-    gap: var(--kirby-spacing-xl);
-  }
+cookbook-toggle-item-example {
+  width: 250px;
 }
 
-cookbook-reative-forms-example {
-  padding: 0;
-  margin-bottom: var(--kirby-spacing-s);
+cookbook-toggle-reactive-forms-example {
+  width: 250px;
 }
