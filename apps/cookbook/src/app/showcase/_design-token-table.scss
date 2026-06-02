@@ -16,8 +16,7 @@ cookbook-copy-token {
   opacity: 0;
   transition: opacity var(--kirby-transition-duration-quick);
 
-  &:focus-within,
-  &.copied {
+  &:has(:focus-visible) {
     opacity: 1;
   }
 }
