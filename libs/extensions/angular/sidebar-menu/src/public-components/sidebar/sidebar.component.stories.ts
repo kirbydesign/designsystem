@@ -11,10 +11,13 @@ import {
   SidebarComponent,
   SidebarFooterComponent,
   SidebarHeaderComponent,
+  SidebarMenuContentComponent,
   SidebarMenuItem,
 } from '@kirbydesign/extensions-angular/sidebar-menu';
+import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleton-loader';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { signal } from '@angular/core';
 
 const menuItemsExample: SidebarMenuItem[] = [
   {
@@ -264,7 +267,8 @@ const menuItemsWithExternalLinks: SidebarMenuItem[] = [
   },
 ];
 
-type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string };
+type SidebarPropsAndCustomArgs = SidebarComponent &
+  Partial<SidebarMenuContentComponent> & { mainAreaContent?: string };
 
 /**
  *
@@ -294,7 +298,14 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   component: SidebarComponent,
   decorators: [
     moduleMetadata({
-      imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
+      imports: [
+        SidebarHeaderComponent,
+        SidebarFooterComponent,
+        SidebarMenuContentComponent,
+        SkeletonLoaderComponent,
+        ButtonComponent,
+        IconComponent,
+      ],
     }),
     applicationConfig({
       providers: [provideRouter([]), provideAnimations()],
@@ -365,10 +376,11 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
     props: args,
     template: `
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
-        <kirby-x-sidebar ${argsToTemplate(args)}>
+        <kirby-x-sidebar>
           <kirby-x-sidebar-header>
             <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
           </kirby-x-sidebar-header>
+          <kirby-x-sidebar-menu-content ${argsToTemplate(args)}></kirby-x-sidebar-menu-content>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
               <button kirby-button attentionLevel="3" size="sm">
@@ -422,7 +434,7 @@ export const WithActions: Story = {
     props: args,
     template: `
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
-        <kirby-x-sidebar ${argsToTemplate(args)}>
+        <kirby-x-sidebar>
           <kirby-x-sidebar-header>
             <img slot="logo" src="assets/images/kirby-logo.svg" alt="Kirby Design System"/>
             <button kirby-button size="sm" attentionLevel="3" slot="action" style="display: flex; flex-grow: 1; justify-content: flex-start;">
@@ -433,6 +445,7 @@ export const WithActions: Story = {
               <kirby-icon name="more"></kirby-icon>
             </button>
           </kirby-x-sidebar-header>
+          <kirby-x-sidebar-menu-content ${argsToTemplate(args)}></kirby-x-sidebar-menu-content>
         </kirby-x-sidebar>
         <div style="padding: var(--kirby-spacing-s);">
           ${mainAreaContent}
@@ -519,3 +532,67 @@ function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
     ...item,
   };
 }
+
+/**
+ * Simulates the menu items loading slowly. A skeleton loader is shown
+ * inside the menu content area while the items are being fetched, and
+ * is replaced by the real menu items once they arrive.
+ */
+export const SlowLoadingMenuItems: Story = {
+  render: ({ mainAreaContent, ...args }) => {
+    const menuItems = signal<SidebarMenuItem[] | null>(null);
+    setTimeout(() => menuItems.set(menuItemsExample), 2000);
+    return {
+      props: {
+        ...args,
+        expandedItems: args.expandedItems ?? new Set<string>(),
+        checkedItems: args.checkedItems ?? new Set<string>(),
+        autoCollapse: args.autoCollapse ?? false,
+        menuItems,
+        mainAreaContent,
+      },
+      template: `
+        <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
+          <kirby-x-sidebar>
+            <kirby-x-sidebar-header>
+              <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
+            </kirby-x-sidebar-header>
+            @if (menuItems(); as loadedItems) {
+              <kirby-x-sidebar-menu-content
+                [menuItems]="loadedItems"
+                [selectedItem]="selectedItem"
+                [expandedItems]="expandedItems"
+                [checkedItems]="checkedItems"
+                [autoCollapse]="autoCollapse">
+              </kirby-x-sidebar-menu-content>
+            } @else {
+              <kirby-x-sidebar-menu-content>
+                <div style="display: flex; flex-direction: column; gap: var(--kirby-spacing-xs); padding: var(--kirby-spacing-xs);">
+                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                </div>
+              </kirby-x-sidebar-menu-content>
+            }<kirby-x-sidebar-footer>
+              <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
+                <button kirby-button attentionLevel="3" size="sm">
+                  <kirby-icon name="log-out"></kirby-icon>
+                  Log out
+                </button>
+              </div>
+            </kirby-x-sidebar-footer>
+          </kirby-x-sidebar>
+          <div style="padding: var(--kirby-spacing-s);">
+            ${mainAreaContent}
+          </div>
+        </div>`,
+    };
+  },
+  args: {
+    ...Default.args,
+    mainAreaContent:
+      '<h1>Sidebar with slow loading menu items</h1><p>The skeleton loader is shown until the menu items arrive.</p>',
+  },
+};

@@ -1,6 +1,5 @@
 import { Component, inject, Signal } from '@angular/core';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { MenuContainerComponent } from '../menu-container';
 import { HeightObserverDirective } from '../../directives/height-observer';
 import { SidebarService } from '../../services/sidebar';
 
@@ -8,7 +7,6 @@ type ViewModel = {
   showHeaderBottomBorder: Signal<boolean>;
   showFooterTopBorder: Signal<boolean>;
   setContainerHeight: (height: number) => void;
-  setMenuHeight: (height: number) => void;
   setScroll: (scroll: Event) => void;
 };
 
@@ -16,17 +14,13 @@ type ViewModel = {
   selector: 'aside[kirby-x-sidebar-menu]',
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss'],
-  imports: [HeightObserverDirective, MenuContainerComponent, CdkScrollable],
+  imports: [HeightObserverDirective, CdkScrollable],
 })
 export class SidebarMenuComponent {
   readonly #sidebarService = inject(SidebarService);
 
   #setContainerHeight(height: number): void {
     this.#sidebarService.containerHeight = height;
-  }
-
-  #setMenuHeight(height: number): void {
-    this.#sidebarService.menuHeight = height;
   }
 
   #setScrollDistance(event: Event): void {
@@ -40,7 +34,6 @@ export class SidebarMenuComponent {
     showHeaderBottomBorder: this.#sidebarService.showHeaderBottomBorder,
     showFooterTopBorder: this.#sidebarService.showFooterTopBorder,
     setContainerHeight: this.#setContainerHeight.bind(this),
-    setMenuHeight: this.#setMenuHeight.bind(this),
     setScroll: this.#setScrollDistance.bind(this),
   };
 }
