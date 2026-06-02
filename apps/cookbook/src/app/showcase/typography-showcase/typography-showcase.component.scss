@@ -1,7 +1,11 @@
 @use '../design-token-table';
 @use '../showcase.shared';
 
-@include design-token-table.copy-token-cell;
+.font-size-sample,
+.font-weight-sample,
+.line-height-sample {
+  display: inline-block;
+}
 
 .font-size-sample {
   line-height: 1;
