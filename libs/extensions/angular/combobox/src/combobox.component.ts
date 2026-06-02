@@ -168,7 +168,7 @@ export class ComboboxComponent
   public itemHeight: number = 44;
 
   protected get dropdownMaxHeight(): number {
-    return 8 * this.itemHeight;
+    return 8 * 44; // height of a standard kirby item
   }
 
   protected get dropdownMinHeight(): number {
