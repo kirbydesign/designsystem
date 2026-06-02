@@ -132,6 +132,11 @@ export class FormFieldComponent
     }
   }
 
+  openDatePicker() {
+    if (!this.dateInput?.useNativeDatePicker) return;
+    (this.nestedInteractiveElement as HTMLInputElement).showPicker();
+  }
+
   public focus() {
     if (!this.nestedInteractiveElement) return;
 
