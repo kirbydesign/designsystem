@@ -26,11 +26,7 @@
   (click)="onPopoverClick()"
   (willHide)="onPopoverWillHide()"
 >
-  <kirby-card
-    [attr.id]="_listboxId"
-    [attr.aria-labelledby]="_comboboxId"
-    [style.maxHeight.px]="viewportHeight"
-  >
+  <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
     @if (searchItems.length === 0) {
       <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
