@@ -47,7 +47,7 @@
       <ng-content select="[kirby-affix='prefix']"></ng-content>
     </div>
     <ng-content></ng-content>
-    <div class="suffix vertical-align semi-dark-text" (click)="onSuffixClick()">
+    <div class="suffix vertical-align semi-dark-text" (click)="openDatePicker()">
       <ng-content select="[kirby-affix='suffix']"></ng-content>
       @if (showDefaultCalendarIcon) {
         <kirby-icon name="calendar"></kirby-icon>

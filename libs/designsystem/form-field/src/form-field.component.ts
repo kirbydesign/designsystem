@@ -132,13 +132,8 @@ export class FormFieldComponent
     }
   }
 
-  onSuffixClick() {
-    if (this.dateInput?.useNativeDatePicker) {
-      this.openDatePicker();
-    }
-  }
-
   openDatePicker() {
+    if (!this.dateInput?.useNativeDatePicker) return;
     (this.nestedInteractiveElement as HTMLInputElement).showPicker();
   }
 
