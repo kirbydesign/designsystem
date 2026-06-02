@@ -188,22 +188,6 @@ jobs:
             cp designsystem_web/branch/$RELEASENAME/index.html designsystem_web/branch/$RELEASENAME/404.html
           fi
 
-          # Build list of valid release names from active remote branches
-          branchList=""
-          for branch in $(git -C designsystem_web branch -r); do
-            branchList="$branchList $(bash .github/scripts/normalize-branch-name.sh "$branch")"
-          done
-
-          # Delete branch folders for closed branches
-          for folder in designsystem_web/branch/*/; do
-            foldername="${folder%/}"
-            foldername="${foldername##*/}"
-            if ! grep -q "$foldername" <<< "$branchList"; then
-              echo "Deleting branch folder $foldername (branch closed)"
-              rm -rf "designsystem_web/branch/$foldername"
-            fi
-          done
-
           cd designsystem_web
           git add .
 
