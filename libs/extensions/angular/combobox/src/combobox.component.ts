@@ -920,8 +920,8 @@ export class ComboboxComponent
   private setInputDisplayValue(value: string): void {
     // We intentionally update the DOM input imperatively ("hard way")
     // to ensure the visible value is cleared/updated immediately.
-    if (this.textInput?.nativeElement) {
-      this.renderer.setProperty(this.textInput.nativeElement, 'value', value);
+    if (this.interactiveElement) {
+      this.renderer.setProperty(this.interactiveElement, 'value', value);
     }
   }
 
