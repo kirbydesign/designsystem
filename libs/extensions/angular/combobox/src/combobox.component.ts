@@ -75,7 +75,8 @@ import { OpenState } from './combobox.types';
 export class ComboboxComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
 {
-  static readonly OPEN_DELAY_IN_MS = 100;
+  private static readonly OPEN_DELAY_IN_MS = 100;
+  private static readonly HEIGHT_OF_STANDARD_ITEM = 44;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
@@ -168,7 +169,7 @@ export class ComboboxComponent
   public itemHeight: number = 44;
 
   protected get dropdownMaxHeight(): number {
-    return 8 * this.itemHeight;
+    return 8 * ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
   }
 
   protected get dropdownMinHeight(): number {
