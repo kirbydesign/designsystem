@@ -532,6 +532,13 @@ describe('Combobox', () => {
       expect(spectator.component.selectedItem).toBeUndefined();
       expect(spectator.component.value).toBeUndefined();
     });
+
+    it('display text is updated when selectedItem is set', () => {
+      const itemToBeSelected = items20[0];
+      spectator.component.selectedItem = itemToBeSelected;
+
+      expect(spectator.component.interactiveElement).toHaveValue(itemToBeSelected.text);
+    });
   });
 
   describe('ControlValueAccessor', () => {
