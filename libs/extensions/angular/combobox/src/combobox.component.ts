@@ -75,7 +75,6 @@ import { OpenState } from './combobox.types';
 export class ComboboxComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
 {
-  private static readonly OPEN_DELAY_IN_MS = 100;
   private static readonly HEIGHT_OF_STANDARD_ITEM = 44;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
@@ -549,7 +548,6 @@ export class ComboboxComponent
   }
 
   public ngOnDestroy(): void {
-    clearTimeout(this._scrollToOpenTimeout);
     this.unlistenAllSlottedItems();
     this.unobserveResize();
   }
@@ -570,10 +568,7 @@ export class ComboboxComponent
       this.state = OpenState.open;
       this.popover?.show();
       this.cdr.markForCheck();
-      clearTimeout(this._scrollToOpenTimeout);
-      this._scrollToOpenTimeout = setTimeout(() => {
-        this.scrollToIndexIntoViewWhenOpeningPopup();
-      });
+      setTimeout(() => this.scrollToIndexIntoViewWhenOpeningPopup());
     }
   }
 
@@ -695,7 +690,6 @@ export class ComboboxComponent
   }
 
   private _announceTimeout: ReturnType<typeof setTimeout> | undefined;
-  private _scrollToOpenTimeout: ReturnType<typeof setTimeout> | undefined;
   private announce(message: string): void {
     clearTimeout(this._announceTimeout);
     this._liveRegionText = '';
@@ -931,33 +925,24 @@ export class ComboboxComponent
   }
 
   private scrollFocusedItemIntoViewWhileNavigating(): void {
-    const kirbyItems = this.getKirbyItems();
-    if (!kirbyItems || kirbyItems.length === 0) return;
-
-    if (!this.focusedItem) {
+    if (!this.focusedItem || !this.virtualScrollViewport) {
       return;
     }
 
-    const id = this.getItemId(this.focusedItem);
-    if (!id) return;
+    const focusedIndex = this.searchItems.indexOf(this.focusedItem);
+    if (focusedIndex === -1) return;
 
-    const match = kirbyItems.toArray().find((el) => {
-      if (el.nativeElement.id === undefined) {
-        console.error(
-          'Each item must have an id attribute for scroll to work. Ensure that the ´[attr.id]´ is set correctly, and that each item has a unique id value.'
-        );
-      }
-      return el.nativeElement.id === id;
-    });
+    const itemTop = focusedIndex * this.itemHeight;
+    const itemBottom = itemTop + this.itemHeight;
+    const scrollOffset = this.virtualScrollViewport.measureScrollOffset();
+    const viewportSize = this.virtualScrollViewport.getViewportSize();
 
-    if (!match) {
-      this.scrollToIndexIntoViewWhenOpeningPopup();
-      return;
-    }
-
-    const scrollIntoView = match.nativeElement.scrollIntoView;
-    if (typeof scrollIntoView === 'function') {
-      scrollIntoView.call(match.nativeElement, { block: 'nearest' });
+    if (itemTop < scrollOffset) {
+      // Item is above the visible area — scroll up so item appears at the top.
+      this.virtualScrollViewport.scrollToOffset(itemTop);
+    } else if (itemBottom > scrollOffset + viewportSize) {
+      // Item is below the visible area — scroll down so item appears at the bottom.
+      this.virtualScrollViewport.scrollToOffset(itemBottom - viewportSize);
     }
   }
 
