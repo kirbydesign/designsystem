@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SidebarMenuComponent } from '../../components/sidebar-menu';
+import { SidebarContainerComponent } from '../../components/sidebar-container';
 
 @Component({
   selector: 'kirby-x-sidebar',
@@ -10,6 +10,6 @@ import { SidebarMenuComponent } from '../../components/sidebar-menu';
       <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
     </aside>
   `,
-  imports: [SidebarMenuComponent],
+  imports: [SidebarContainerComponent],
 })
 export class SidebarComponent {}

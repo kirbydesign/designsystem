@@ -12,11 +12,11 @@ type ViewModel = {
 
 @Component({
   selector: 'aside[kirby-x-sidebar-menu]',
-  templateUrl: './sidebar-menu.component.html',
-  styleUrls: ['./sidebar-menu.component.scss'],
+  templateUrl: './sidebar-container.component.html',
+  styleUrls: ['./sidebar-container.component.scss'],
   imports: [HeightObserverDirective, CdkScrollable],
 })
-export class SidebarMenuComponent {
+export class SidebarContainerComponent {
   readonly #sidebarService = inject(SidebarService);
 
   #setContainerHeight(height: number): void {

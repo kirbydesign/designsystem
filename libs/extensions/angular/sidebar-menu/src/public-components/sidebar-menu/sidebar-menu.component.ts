@@ -24,7 +24,7 @@ import { SidebarMenuItem } from '../../models';
   `,
   imports: [MenuContainerComponent, HeightObserverDirective],
 })
-export class SidebarMenuContentComponent {
+export class SidebarMenuComponent {
   readonly #sidebarService = inject(SidebarService);
   readonly #stateService = inject(MenuStateService);
 
