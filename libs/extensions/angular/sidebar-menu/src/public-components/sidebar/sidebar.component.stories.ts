@@ -380,7 +380,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
           <kirby-x-sidebar-header>
             <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
           </kirby-x-sidebar-header>
-          <kirby-x-sidebar-menu-content ${argsToTemplate(args)}></kirby-x-sidebar-menu-content>
+          <kirby-x-sidebar-menu ${argsToTemplate(args)}></kirby-x-sidebar-menu>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
               <button kirby-button attentionLevel="3" size="sm">
@@ -445,7 +445,7 @@ export const WithActions: Story = {
               <kirby-icon name="more"></kirby-icon>
             </button>
           </kirby-x-sidebar-header>
-          <kirby-x-sidebar-menu-content ${argsToTemplate(args)}></kirby-x-sidebar-menu-content>
+          <kirby-x-sidebar-menu ${argsToTemplate(args)}></kirby-x-sidebar-menu>
         </kirby-x-sidebar>
         <div style="padding: var(--kirby-spacing-s);">
           ${mainAreaContent}
@@ -558,15 +558,15 @@ export const SlowLoadingMenuItems: Story = {
               <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
             </kirby-x-sidebar-header>
             @if (menuItems(); as loadedItems) {
-              <kirby-x-sidebar-menu-content
+              <kirby-x-sidebar-menu
                 [menuItems]="loadedItems"
                 [selectedItem]="selectedItem"
                 [expandedItems]="expandedItems"
                 [checkedItems]="checkedItems"
                 [autoCollapse]="autoCollapse">
-              </kirby-x-sidebar-menu-content>
+              </kirby-x-sidebar-menu>
             } @else {
-              <kirby-x-sidebar-menu-content>
+              <kirby-x-sidebar-menu>
                 <div style="display: flex; flex-direction: column; gap: var(--kirby-spacing-xs); padding: var(--kirby-spacing-xs);">
                   <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
                   <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
@@ -574,7 +574,7 @@ export const SlowLoadingMenuItems: Story = {
                   <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
                   <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
                 </div>
-              </kirby-x-sidebar-menu-content>
+              </kirby-x-sidebar-menu>
             }<kirby-x-sidebar-footer>
               <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
                 <button kirby-button attentionLevel="3" size="sm">

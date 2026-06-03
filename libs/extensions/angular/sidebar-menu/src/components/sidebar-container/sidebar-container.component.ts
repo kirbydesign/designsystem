@@ -11,7 +11,7 @@ type ViewModel = {
 };
 
 @Component({
-  selector: 'aside[kirby-x-sidebar-menu]',
+  selector: 'aside[kirby-x-sidebar-container]',
   templateUrl: './sidebar-container.component.html',
   styleUrls: ['./sidebar-container.component.scss'],
   imports: [HeightObserverDirective, CdkScrollable],

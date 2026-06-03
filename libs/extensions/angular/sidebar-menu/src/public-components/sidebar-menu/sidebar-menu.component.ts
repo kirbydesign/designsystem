@@ -6,7 +6,7 @@ import { MenuStateService } from '../../services/menu-state';
 import { SidebarMenuItem } from '../../models';
 
 @Component({
-  selector: 'kirby-x-sidebar-menu-content',
+  selector: 'kirby-x-sidebar-menu',
   template: `
     <ng-content>
       <kirby-x-menu-container
