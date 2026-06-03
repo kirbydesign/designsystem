@@ -8,12 +8,10 @@ import { SidebarMenuItem } from '../../models';
 @Component({
   selector: 'kirby-x-sidebar-menu',
   template: `
-    <ng-content>
-      <kirby-x-menu-container
-        kirbyXHeightObserver
-        (heightChange)="setMenuHeight($event)"
-      ></kirby-x-menu-container>
-    </ng-content>
+    <kirby-x-menu-container
+      kirbyXHeightObserver
+      (heightChange)="setMenuHeight($event)"
+    ></kirby-x-menu-container>
   `,
   styles: `
     :host {

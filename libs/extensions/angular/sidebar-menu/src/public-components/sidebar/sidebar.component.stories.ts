@@ -11,7 +11,7 @@ import {
   SidebarComponent,
   SidebarFooterComponent,
   SidebarHeaderComponent,
-  SidebarMenuContentComponent,
+  SidebarMenuComponent,
   SidebarMenuItem,
 } from '@kirbydesign/extensions-angular/sidebar-menu';
 import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleton-loader';
@@ -268,7 +268,7 @@ const menuItemsWithExternalLinks: SidebarMenuItem[] = [
 ];
 
 type SidebarPropsAndCustomArgs = SidebarComponent &
-  Partial<SidebarMenuContentComponent> & { mainAreaContent?: string };
+  Partial<SidebarMenuComponent> & { mainAreaContent?: string };
 
 /**
  *
@@ -301,7 +301,7 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
       imports: [
         SidebarHeaderComponent,
         SidebarFooterComponent,
-        SidebarMenuContentComponent,
+        SidebarMenuComponent,
         SkeletonLoaderComponent,
         ButtonComponent,
         IconComponent,
@@ -566,15 +566,13 @@ export const SlowLoadingMenuItems: Story = {
                 [autoCollapse]="autoCollapse">
               </kirby-x-sidebar-menu>
             } @else {
-              <kirby-x-sidebar-menu>
-                <div style="display: flex; flex-direction: column; gap: var(--kirby-spacing-xs); padding: var(--kirby-spacing-xs);">
-                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
-                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
-                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
-                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
-                  <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
-                </div>
-              </kirby-x-sidebar-menu>
+              <div style="display: flex; flex-direction: column; gap: var(--kirby-spacing-xs); padding: var(--kirby-spacing-xs);">
+                <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+                <kirby-x-skeleton-loader theme="dark" shape="pill" style="width: 100%; height: 32px;"></kirby-x-skeleton-loader>
+              </div>
             }<kirby-x-sidebar-footer>
               <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
                 <button kirby-button attentionLevel="3" size="sm">
