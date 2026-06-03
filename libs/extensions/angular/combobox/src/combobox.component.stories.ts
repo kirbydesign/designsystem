@@ -115,7 +115,7 @@ const meta: Meta<ComboboxComponent> = {
   },
   argTypes: {
     items: { control: false },
-    selectedItem: { control: false },
+    selectedItem: { control: 'object' },
     searchFunction: { control: false },
     hasErrorChange: { control: false },
     change: { control: false },
