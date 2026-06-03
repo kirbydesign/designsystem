@@ -964,9 +964,8 @@ export class ComboboxComponent
 
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
-    if (focusedIndex < 0) return;
 
-    if (focusedIndex === 0) {
+    if (focusedIndex <= 0) {
       this.virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
       this.virtualScrollViewport?.checkViewportSize();
       return;
