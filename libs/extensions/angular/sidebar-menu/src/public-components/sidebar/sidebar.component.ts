@@ -6,8 +6,8 @@ import { SidebarContainerComponent } from '../../components/sidebar-container';
   template: `
     <aside kirby-x-sidebar-container>
       <ng-content select="kirby-x-sidebar-header" slot="header"></ng-content>
-      <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
       <ng-content slot="content"></ng-content>
+      <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
     </aside>
   `,
   imports: [SidebarContainerComponent],
