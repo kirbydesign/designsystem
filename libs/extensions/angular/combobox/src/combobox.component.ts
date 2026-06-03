@@ -568,7 +568,10 @@ export class ComboboxComponent
       this.state = OpenState.open;
       this.popover?.show();
       this.cdr.markForCheck();
-      setTimeout(() => this.scrollToIndexIntoViewWhenOpeningPopup());
+      // PopoverComponent.show() appends the element to document.body synchronously but
+      // finishes positioning in a requestAnimationFrame. One rAF is enough to let the
+      // browser compute layout so the CDK viewport has a real size before we scroll.
+      requestAnimationFrame(() => this.scrollToIndexIntoViewWhenOpeningPopup());
     }
   }
 
