@@ -41,7 +41,10 @@ const simpleCurrencyItems: string[] = [
 ];
 const currencyItems5000: CurrencyItem[] = [];
 for (let i = 0; i < 5000; i++) {
-  currencyItems5000.push({ code: `CUR${i}`, name: `Currency ${i}` });
+  currencyItems5000.push({
+    code: `CUR very long text to test and see what happens ${i}`,
+    name: `Currency ${i}`,
+  });
 }
 
 const currencyItems: CurrencyItem[] = [

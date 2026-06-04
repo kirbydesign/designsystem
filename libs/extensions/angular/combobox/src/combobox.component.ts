@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
@@ -75,7 +75,12 @@ import { OpenState } from './combobox.types';
 export class ComboboxComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
 {
-  private static readonly HEIGHT_OF_STANDARD_ITEM = 44;
+  private static readonly HEIGHT_OF_STANDARD_ITEM = parseInt(
+    DesignTokenHelper.dropdownItemHeight()
+  ); // 44px
+  private static readonly RIGHT_CARD_PADDING = 2 * parseInt(DesignTokenHelper.size('s')); // 2 × size('s') = 32px — matches SCSS $margin-horizontal-total
+  private static readonly CARD_MIN_WIDTH = 375 - 2 * parseInt(DesignTokenHelper.size('s')); // 375 − $margin-horizontal-total = 343px
+
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
@@ -291,18 +296,22 @@ export class ComboboxComponent
     elements.forEach((el) => (el.style.width = 'max-content'));
 
     // Batch read: one synchronous reflow gives us the widest natural item width
-    const maxWidth = elements.reduce((max, el) => Math.max(max, el.offsetWidth), 0);
+    const maxWidth =
+      elements.reduce((max, el) => Math.max(max, el.offsetWidth), 0) +
+      ComboboxComponent.RIGHT_CARD_PADDING;
 
     // Batch restore
     elements.forEach((el) => (el.style.width = ''));
 
     if (maxWidth > 0) {
-      const maxScreenWidth = window.innerWidth - 16;
-      this.renderer.setStyle(
-        this.cardElement.nativeElement,
-        'min-width',
-        `${Math.min(maxWidth, maxScreenWidth)}px`
-      );
+      const maxScreenWidth = window.innerWidth;
+
+      // Set width: calculate the width, but constrain it to a minimum and maximum
+      let width = ComboboxComponent.CARD_MIN_WIDTH;
+      width = Math.max(width, maxWidth);
+      width = Math.min(width, maxScreenWidth);
+
+      this.renderer.setStyle(this.cardElement.nativeElement, 'width', `${width}px`);
     }
   }
 
@@ -614,14 +623,10 @@ export class ComboboxComponent
       // PopoverComponent.show() appends the element to document.body synchronously but
       // finishes positioning in a requestAnimationFrame. One rAF is enough to let the
       // browser compute layout so the CDK viewport has a real size before we scroll.
-      requestAnimationFrame(() => this.scrollToIndexIntoViewWhenOpeningPopup());
-      this.scrollToIndexIntoViewWhenOpeningPopup();
-      // Force synchronous change detection so CDK virtual scroll renders items into
-      // the DOM while the popover is still visibility:hidden (is-opening phase).
-      // This lets applyCardMinWidthFromRenderedItems measure actual element widths
-      // before the popover's requestAnimationFrame makes it visible.
-      this.cdr.detectChanges();
-      this.applyCardMinWidthFromRenderedItems();
+      requestAnimationFrame(() => {
+        this.scrollToIndexIntoViewWhenOpeningPopup();
+        this.applyCardMinWidthFromRenderedItems();
+      });
     }
   }
 
