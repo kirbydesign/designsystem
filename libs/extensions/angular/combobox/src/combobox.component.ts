@@ -997,7 +997,6 @@ export class ComboboxComponent
 
     if (itemTop < scrollOffset) {
       // Item is above the visible area — scroll up so item appears at the top.
-      // this.virtualScrollViewport.scrollToIndex(focusedIndex);
       this._virtualScrollViewport.scrollToOffset(itemTop);
     } else if (itemBottom > scrollOffset + viewportSize) {
       // Item is below the visible area — scroll down so item appears at the bottom.
