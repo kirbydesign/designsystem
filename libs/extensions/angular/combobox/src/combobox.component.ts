@@ -265,6 +265,47 @@ export class ComboboxComponent
     this.searchItems = this._items;
   }
 
+  /**
+   * Measures the natural (unconstrained) width of each rendered kirby-item by
+   * temporarily setting its width to `max-content`, reading `offsetWidth` in a
+   * single synchronous reflow, then restoring the original style.
+   *
+   * This accounts for icons, labels, multiple fonts, and custom item templates —
+   * anything that is actually in the DOM. Skipped when expand=block, which manages
+   * its own card width.
+   */
+  private applyCardMinWidthFromRenderedItems(): void {
+    if (this.expand === 'block' || !this.cardElement?.nativeElement) return;
+    if (this.searchItems.length === 0) return;
+
+    const items = this.getKirbyItems();
+    if (!items?.length) return;
+
+    const elements = items.toArray().map((r) => r.nativeElement as HTMLElement);
+    if (elements.length === 0) return;
+
+    // Reset any previously applied inline min-width so the SCSS default acts as floor
+    this.renderer.removeStyle(this.cardElement.nativeElement, 'min-width');
+
+    // Batch write: remove width constraint so each item sizes to its natural content
+    elements.forEach((el) => (el.style.width = 'max-content'));
+
+    // Batch read: one synchronous reflow gives us the widest natural item width
+    const maxWidth = elements.reduce((max, el) => Math.max(max, el.offsetWidth), 0);
+
+    // Batch restore
+    elements.forEach((el) => (el.style.width = ''));
+
+    if (maxWidth > 0) {
+      const maxScreenWidth = window.innerWidth - 16;
+      this.renderer.setStyle(
+        this.cardElement.nativeElement,
+        'min-width',
+        `${Math.min(maxWidth, maxScreenWidth)}px`
+      );
+    }
+  }
+
   private _selectedItem: unknown = undefined;
   get selectedItem(): unknown {
     return this._selectedItem;
@@ -570,7 +611,12 @@ export class ComboboxComponent
       this.state = OpenState.open;
       this.popover?.show();
       this.scrollToIndexIntoViewWhenOpeningPopup();
-      this.cdr.markForCheck();
+      // Force synchronous change detection so CDK virtual scroll renders items into
+      // the DOM while the popover is still visibility:hidden (is-opening phase).
+      // This lets applyCardMinWidthFromRenderedItems measure actual element widths
+      // before the popover's requestAnimationFrame makes it visible.
+      this.cdr.detectChanges();
+      this.applyCardMinWidthFromRenderedItems();
     }
   }
 
