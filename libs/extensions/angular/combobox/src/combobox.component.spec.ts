@@ -727,6 +727,83 @@ describe('Combobox', () => {
       expect(spectator.component.value).toBe(undefined);
     }));
   });
+
+  // ---------------------------------------------------------------------------
+  // Card width sizing — verifies that wide item content is never clipped
+  // ---------------------------------------------------------------------------
+  describe('card width sizing', () => {
+    /** Opens the combobox and ensures CDK virtual scroll has rendered items into the DOM. */
+    function openAndRender(): void {
+      let rafCallback: FrameRequestCallback | undefined;
+      jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
+        rafCallback = cb;
+        return 0;
+      });
+
+      // Open the combobox — popover is shown, rAF is queued but not yet fired
+      spectator.component.open();
+
+      // Render items into the DOM and update @ViewChildren
+      spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
+      spectator.detectChanges();
+
+      // Now fire the rAF callback — applyCardMinWidthFromRenderedItems can measure real elements
+      rafCallback?.(0);
+    }
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('sets the card width to accommodate content wider than the default card minimum', () => {
+      // Arrange
+      const wideItemWidth = 600;
+      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockReturnValue(wideItemWidth);
+
+      // Act
+      openAndRender();
+
+      // Assert
+      const card = spectator.component.cardElement?.nativeElement as HTMLElement;
+      expect(parseInt(card.style.width, 10)).toBeGreaterThanOrEqual(wideItemWidth);
+    });
+
+    it('does not make the card wider than the viewport', () => {
+      // Arrange
+      const largerThanScreen = 999999;
+      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockReturnValue(largerThanScreen);
+
+      // Act
+      openAndRender();
+
+      // Assert
+      const card = spectator.component.cardElement?.nativeElement as HTMLElement;
+      expect(parseInt(card.style.width, 10)).toBeLessThanOrEqual(window.innerWidth);
+    });
+
+    it('uses at least the default minimum card width even for narrow items', () => {
+      // Arrange
+
+      // Act
+      openAndRender();
+
+      // Assert
+      const card = spectator.component.cardElement?.nativeElement as HTMLElement;
+      expect(parseInt(card.style.width, 10)).toBeGreaterThan(0);
+    });
+
+    it('does NOT set an inline width on the card when expand="block" is used', () => {
+      // Arrange
+      spectator.component.expand = 'block';
+
+      // Act
+      openAndRender();
+
+      // Assert
+      const card = spectator.component.cardElement?.nativeElement as HTMLElement;
+      expect(card.style.width).toBeFalsy();
+    });
+  });
 });
 
 // =============================================================================
