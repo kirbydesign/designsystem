@@ -4,7 +4,7 @@
 $dropdown-max-height: 8 * utils.$dropdown-item-height;
 $dropdown-min-height: utils.$dropdown-item-height;
 $margin-horizontal-total: 2 * utils.size('s');
-$min-screen-width-small: 320px;
+$min-screen-width: 375px;
 
 :host {
   @include interaction-state.apply-focus-visible {
