@@ -247,6 +247,8 @@ export class ComboboxComponent
       this.focusedItem = this._searchItems[0];
       this._virtualScrollViewport?.scrollToIndex(0);
     }
+
+    this.renderFirstItems();
   }
 
   private _items: unknown[] = [];
@@ -573,7 +575,7 @@ export class ComboboxComponent
       // PopoverComponent.show() appends the element to document.body synchronously but
       // finishes positioning in a requestAnimationFrame. One rAF is enough to let the
       // browser compute layout so the CDK viewport has a real size before we scroll.
-      requestAnimationFrame(() => this.scrollToIndexIntoViewWhenOpeningPopup());
+      this.scrollToIndexIntoViewWhenOpeningPopup();
     }
   }
 
@@ -962,9 +964,15 @@ export class ComboboxComponent
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
 
-    this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
-    this._virtualScrollViewport?.checkViewportSize();
+    this.renderFirstItems();
 
     this._virtualScrollViewport?.scrollToIndex(focusedIndex);
+  }
+
+  private renderFirstItems(): void {
+    requestAnimationFrame(() => {
+      this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
+      this._virtualScrollViewport?.checkViewportSize();
+    });
   }
 }

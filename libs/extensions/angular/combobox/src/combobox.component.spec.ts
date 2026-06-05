@@ -13,6 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ComboboxComponent } from './combobox.component';
 
 // Shared constants used by the form integration top-level describes
@@ -62,6 +63,12 @@ describe('Combobox', () => {
   beforeAll(() => {
     Object.defineProperty(HTMLElement.prototype, 'scrollTo', {
       value: jest.fn(),
+      writable: true,
+      configurable: true,
+    });
+
+    Object.defineProperty(CdkVirtualScrollViewport.prototype, 'measureViewportSize', {
+      value: () => 8 * 44,
       writable: true,
       configurable: true,
     });
@@ -181,6 +188,51 @@ describe('Combobox', () => {
       // Assert
       const kirbyItems = document.querySelectorAll('kirby-item');
       expect(kirbyItems.item(0)).toHaveText('Item 1');
+    }));
+
+    it('shows no-results message when filter matches nothing', fakeAsync(() => {
+      // Arrange
+
+      // Act
+      inputElement.click();
+      spectator.typeInElement('zzz_no_match', inputElement);
+      spectator.detectChanges();
+
+      // Assert
+      const noResultsItem = document.querySelector('.no-results');
+      expect(noResultsItem).not.toBeNull();
+    }));
+
+    it('restores full list when filter is cleared', fakeAsync(() => {
+      // Arrange
+
+      // Act
+      inputElement.click();
+      spectator.typeInElement('Item 5', inputElement);
+      spectator.detectChanges();
+
+      spectator.typeInElement('', inputElement);
+      spectator.detectChanges();
+
+      // Assert
+      const kirbyItems = document.querySelectorAll('kirby-item');
+      expect(kirbyItems.length).toBeGreaterThanOrEqual(8);
+    }));
+
+    it('uses a custom searchFunction when provided', fakeAsync(() => {
+      // Arrange
+      const customSearch = jest.fn().mockReturnValue([items20[0]]);
+      spectator.component.searchFunction = customSearch;
+
+      // Act
+      inputElement.click();
+      spectator.typeInElement('any', inputElement);
+      spectator.detectChanges();
+
+      // Assert
+      expect(customSearch).toHaveBeenCalledWith('any', items20);
+      const kirbyItems = document.querySelectorAll('kirby-item');
+      expect(kirbyItems.length).toBe(1);
     }));
   });
 
@@ -598,41 +650,6 @@ describe('Combobox', () => {
 
       expect(event.defaultPrevented).toBe(true);
     });
-  });
-
-  describe('filtering edge cases', () => {
-    it('shows no-results message when filter matches nothing', fakeAsync(() => {
-      inputElement.click();
-      spectator.typeInElement('zzz_no_match', inputElement);
-      spectator.detectChanges();
-
-      const noResultsItem = document.querySelector('.no-results');
-      expect(noResultsItem).not.toBeNull();
-    }));
-
-    it('restores full list when filter is cleared', fakeAsync(() => {
-      inputElement.click();
-      spectator.typeInElement('Item 5', inputElement);
-      spectator.detectChanges();
-
-      spectator.typeInElement('', inputElement);
-      spectator.detectChanges();
-      const kirbyItems = document.querySelectorAll('kirby-item');
-      expect(kirbyItems.length).toBeGreaterThan(1);
-    }));
-
-    it('uses a custom searchFunction when provided', fakeAsync(() => {
-      const customSearch = jest.fn().mockReturnValue([items20[0]]);
-      spectator.component.searchFunction = customSearch;
-
-      inputElement.click();
-      spectator.typeInElement('any', inputElement);
-      spectator.detectChanges();
-
-      expect(customSearch).toHaveBeenCalledWith('any', items20);
-      const kirbyItems = document.querySelectorAll('kirby-item');
-      expect(kirbyItems.length).toBe(1);
-    }));
   });
 
   describe('aria attributes', () => {
