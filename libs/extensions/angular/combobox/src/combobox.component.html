@@ -11,6 +11,7 @@
     [size]="size"
     [disabled]="disabled"
     [placeholder]="placeholder"
+    (change)="$event.stopPropagation()"
     [attr.id]="_comboboxId"
     [attr.aria-controls]="_listboxId"
     [attr.aria-expanded]="isOpen"
