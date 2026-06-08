@@ -119,13 +119,13 @@ kirby-card {
 
 .main-content-wrapper {
   width: 100%;
-  padding: utils.size('xxs');
+  padding: var(--kirby-spacing-xxs);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 
   @include if-wide-view {
-    gap: utils.size('s');
+    gap: var(--kirby-spacing-s);
     flex-direction: initial;
   }
 }
@@ -133,7 +133,7 @@ kirby-card {
 .main-content-image-wrapper {
   display: flex;
   overflow: hidden;
-  border-radius: utils.border-radius('s');
+  border-radius: var(--kirby-border-radius-s);
 
   @include if-wide-view {
     flex: 1;
@@ -151,31 +151,31 @@ kirby-card {
 
   min-height: var(
     --kirby-x-image-banner-min-height,
-    #{utils.line-height('l') * 3}
+    #{var(--kirby-line-height-l) * 3}
   ); // text content height should be minimum 3 lines by default
 
   box-sizing: border-box;
-  padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
+  padding: var(--kirby-spacing-xs) 0 var(--kirby-spacing-xxs) var(--kirby-spacing-xxs);
   overflow: hidden;
 
   .main-content-header {
-    padding-inline-end: utils.size('xxs');
+    padding-inline-end: var(--kirby-spacing-xxs);
 
     @include if-wide-view {
-      padding-inline-end: utils.size('xl');
+      padding-inline-end: var(--kirby-spacing-xl);
     }
   }
 
   &:has(.main-content-body-action-link) {
     .main-content-header {
-      padding-inline-end: utils.size('xl');
+      padding-inline-end: var(--kirby-spacing-xl);
     }
   }
 
   @include if-wide-view {
     flex: 1;
-    gap: utils.size('xs');
-    padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
+    gap: var(--kirby-spacing-xs);
+    padding: var(--kirby-spacing-xxs) var(--kirby-spacing-xxs) var(--kirby-spacing-xxs) 0;
   }
 }
 
@@ -229,10 +229,10 @@ kirby-card {
   line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  padding-inline-end: utils.size('xxs');
+  padding-inline-end: var(--kirby-spacing-xxs);
 
   @include if-wide-view {
-    padding-inline-end: utils.size('xxl');
+    padding-inline-end: var(--kirby-spacing-xxl);
   }
 
   @include if-narrow-view {
@@ -244,7 +244,7 @@ kirby-card {
 
 .breakout {
   position: initial;
-  border-radius: utils.size('s');
+  border-radius: var(--kirby-spacing-s);
   align-self: center;
 
   &::before {
@@ -274,11 +274,11 @@ kirby-card {
   }
 
   &:is(a) {
-    width: utils.size('m');
-    min-width: utils.size('m');
+    width: var(--kirby-spacing-m);
+    min-width: var(--kirby-spacing-m);
 
     kirby-icon {
-      font-size: utils.size('m');
+      font-size: var(--kirby-spacing-m);
     }
   }
 
@@ -304,8 +304,8 @@ kirby-card {
 
 .dismiss {
   position: absolute;
-  top: utils.size('s');
-  right: utils.size('s');
+  top: var(--kirby-spacing-s);
+  right: var(--kirby-spacing-s);
   height: fit-content;
 
   button {
@@ -321,15 +321,15 @@ kirby-card {
   text-overflow: ellipsis;
   white-space: nowrap;
   @include if-wide-view {
-    gap: utils.size('xs');
+    gap: var(--kirby-spacing-xs);
   }
 }
 
 .title {
   @include utils.slotted(h1, h2, h3, h4, h5, h6) {
     margin-bottom: 0;
-    font-size: utils.font-size('n');
-    font-weight: utils.font-weight('bold');
-    line-height: utils.line-height('n');
+    font-size: var(--kirby-font-size-n);
+    font-weight: var(--kirby-font-weight-bold);
+    line-height: var(--kirby-line-height-n);
   }
 }

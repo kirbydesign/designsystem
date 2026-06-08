@@ -12,7 +12,7 @@
 kirby-divider {
   display: flex;
   background: var(--kirby-white-overlay-20);
-  margin: utils.size('xxs') 0;
+  margin: var(--kirby-spacing-xxs) 0;
 }
 
 li {
@@ -28,8 +28,8 @@ li {
 // When dragging, style non-dragged items
 :host.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-preview, .cdk-drag-placeholder) {
   transition-property: transform;
-  transition-duration: utils.get-transition-duration('short');
-  transition-timing-function: utils.get-transition-easing('static');
+  transition-duration: var(--kirby-transition-duration-short);
+  transition-timing-function: var(--kirby-transition-easing-static);
   pointer-events: none;
 }
 
