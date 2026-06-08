@@ -1,0 +1,12 @@
+{
+  "name": "stylelint-plugin-kirby-design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stylelint plugin to migrate SCSS functions to Kirby design token CSS custom properties",
+  "type": "module",
+  "exports": "./index.mjs",
+  "main": "./index.mjs",
+  "peerDependencies": {
+    "stylelint": "^16.0.0"
+  }
+}
