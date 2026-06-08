@@ -47,11 +47,11 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   &[disabled] {
-    color: #{utils.get-text-color('semi-dark')};
+    color: var(--kirby-text-color-semi-dark);
 
     ion-toggle {
-      --color: #{utils.get-color('medium')};
-      --color-checked: #{utils.get-color('medium')};
+      --color: var(--kirby-medium);
+      --color-checked: var(--kirby-medium);
 
       opacity: 1; // Reset Ionic disabled style for label
 
@@ -110,13 +110,13 @@ ion-toggle {
     // Checked
     --track-background-checked: #{utils.get-color($background-checked)};
     --handle-background-checked: #{utils.get-color($handle-background)};
-    --handle-transition: #{utils.get-transition-duration('quick')};
-    --handle-box-shadow: #{utils.get-elevation(2)};
+    --handle-transition: var(--kirby-transition-duration-quick);
+    --handle-box-shadow: var(--kirby-elevation-2);
 
     // Ion v8 changed height on toggles to 31px. To make toggles still follow our 8,16,24,32 pixel-size pattern, we force the toggle back to 32px
 
-    $toggle-size: utils.size('l');
-    $toggle-border-size: utils.size('xxxxs');
+    $toggle-size: var(--kirby-spacing-l);
+    $toggle-border-size: var(--kirby-spacing-xxxxs);
     $toggle-handle-size: $toggle-size - ($toggle-border-size * 2);
 
     --handle-height: #{$toggle-handle-size};
@@ -129,7 +129,7 @@ ion-toggle {
   }
 
   ::part(label-text-wrapper) {
-    line-height: utils.line-height('n');
+    line-height: var(--kirby-line-height-n);
     white-space: pre-line;
   }
 
@@ -170,7 +170,7 @@ ion-toggle.in-item.legacy-toggle {
 }
 
 :host-context(kirby-item) {
-  z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+  z-index: var(--kirby-z-index-default); // Makes whole kirby-item clickable above item-inner.
 
   ion-toggle {
     margin: 0;

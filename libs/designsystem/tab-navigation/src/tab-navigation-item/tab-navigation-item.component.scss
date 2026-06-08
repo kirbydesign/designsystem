@@ -2,7 +2,7 @@
 
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
-$border-color-selected: utils.get-color('dark');
+$border-color-selected: var(--kirby-dark);
 
 @mixin button-reset {
   background: transparent;
@@ -31,20 +31,20 @@ $border-color-selected: utils.get-color('dark');
   button[role='tab'] {
     @include button-reset;
 
-    color: utils.get-color('black');
+    color: var(--kirby-black);
     box-sizing: border-box; // Ensure border is not added to button height
-    padding: utils.size('s');
-    font-size: utils.font-size('n');
-    line-height: utils.line-height('m');
-    gap: utils.size('xxxs');
+    padding: var(--kirby-spacing-s);
+    font-size: var(--kirby-font-size-n);
+    line-height: var(--kirby-line-height-m);
+    gap: var(--kirby-spacing-xxxs);
 
     &:focus,
     &:hover {
-      font-weight: utils.font-weight('bold');
+      font-weight: var(--kirby-font-weight-bold);
     }
 
     &[aria-selected='true'] {
-      font-weight: utils.font-weight('bold');
+      font-weight: var(--kirby-font-weight-bold);
 
       // Selected divider
       &::before {
@@ -73,7 +73,7 @@ span[data-text] {
   &::before {
     display: block;
     content: attr(data-text);
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
     height: 0;
     overflow: hidden;
     visibility: hidden;

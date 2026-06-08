@@ -6,22 +6,22 @@
   user-select: none;
 
   --kirby-badge-position: absolute;
-  --kirby-badge-top: -#{utils.size('xxs')};
-  --kirby-badge-right: -#{utils.size('s')};
-  --kirby-badge-z-index: #{utils.z('segment-badge')};
+  --kirby-badge-top: -var(--kirby-spacing-xxs);
+  --kirby-badge-right: -var(--kirby-spacing-s);
+  --kirby-badge-z-index: var(--kirby-z-index-segment-badge);
 
   &.sm {
     ion-segment-button {
-      min-height: utils.size('l');
-      font-size: utils.font-size('xs');
+      min-height: var(--kirby-spacing-l);
+      font-size: var(--kirby-font-size-xs);
 
-      --padding-start: #{utils.size('s')};
-      --padding-end: #{utils.size('s')};
-      --kirby-badge-right: -#{utils.size('xxs')};
+      --padding-start: var(--kirby-spacing-s);
+      --padding-end: var(--kirby-spacing-s);
+      --kirby-badge-right: -var(--kirby-spacing-xxs);
 
       @include interaction-state.apply-focus-visible {
         outline: none;
-        border-radius: utils.border-radius('pill');
+        border-radius: var(--kirby-border-radius-pill);
       }
     }
   }
@@ -46,8 +46,8 @@
       --background: none;
 
       border-radius: 0;
-      padding: #{utils.size('xxxs')};
-      gap: #{utils.size('xxs')};
+      padding: var(--kirby-spacing-xxxs);
+      gap: var(--kirby-spacing-xxs);
 
       @include utils.touch {
         scrollbar-width: none; /* Firefox */
@@ -75,8 +75,8 @@
 
     ion-segment-button {
       --background: transparent;
-      --padding-start: #{utils.size('xs')};
-      --padding-end: #{utils.size('xs')};
+      --padding-start: var(--kirby-spacing-xs);
+      --padding-end: var(--kirby-spacing-xs);
     }
   }
 
@@ -95,7 +95,7 @@
 }
 
 ion-segment {
-  border-radius: utils.border-radius('pill');
+  border-radius: var(--kirby-border-radius-pill);
   grid-auto-columns: max-content;
   box-sizing: border-box;
 }
@@ -108,7 +108,7 @@ ion-segment-button {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --border-radius: #{utils.border-radius('pill')};
+    --border-radius: var(--kirby-border-radius-pill);
     --border-style: none;
     --background: none;
     --color: var(--kirby-inputs-color);
@@ -116,17 +116,17 @@ ion-segment-button {
     --color-checked: var(--kirby-inputs-indicator-color);
     --indicator-box-shadow: none;
     --indicator-transform: none;
-    --padding-start: #{utils.size('m')};
-    --padding-end: #{utils.size('m')};
+    --padding-start: var(--kirby-spacing-m);
+    --padding-end: var(--kirby-spacing-m);
     --margin-bottom: 0;
     --margin-end: 0;
     --margin-start: 0;
     --margin-top: 0;
 
-    min-height: utils.size('xl');
+    min-height: var(--kirby-spacing-xl);
     min-width: fit-content;
-    font-weight: utils.font-weight('normal');
-    font-size: utils.font-size('s');
+    font-weight: var(--kirby-font-weight-normal);
+    font-size: var(--kirby-font-size-s);
     text-transform: none;
     margin: 0;
   }

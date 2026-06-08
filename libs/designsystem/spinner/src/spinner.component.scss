@@ -2,8 +2,8 @@
 
 .spinner {
   overflow: hidden;
-  width: utils.size('l');
-  height: utils.size('l');
+  width: var(--kirby-spacing-l);
+  height: var(--kirby-spacing-l);
   position: relative;
   margin: 0 auto;
 }
@@ -12,8 +12,8 @@
 .outer-circle {
   width: 100%;
   height: 100%;
-  border-radius: utils.border-radius('circle');
-  background-color: utils.get-color('primary');
+  border-radius: var(--kirby-border-radius-circle);
+  background-color: var(--kirby-primary);
   opacity: 0.6;
   position: absolute;
   top: 0;

@@ -18,43 +18,43 @@
 :host {
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
-  color: var(--kirby-flag-color, utils.get-color('white-contrast'));
-  border: 1px solid var(--kirby-flag-border-color, utils.get-color('medium'));
-  border-radius: utils.border-radius('xs');
-  font-size: utils.font-size('n');
-  padding: utils.size('xxxxs') utils.size('xxs');
-  font-weight: utils.font-weight('medium');
-  line-height: _calculate-line-height($targetHeight: 28px, $fontSize: utils.font-size('n'));
+  color: var(--kirby-flag-color, var(--kirby-white-contrast));
+  border: 1px solid var(--kirby-flag-border-color, var(--kirby-medium));
+  border-radius: var(--kirby-border-radius-xs);
+  font-size: var(--kirby-font-size-n);
+  padding: var(--kirby-spacing-xxxxs) var(--kirby-spacing-xxs);
+  font-weight: var(--kirby-font-weight-medium);
+  line-height: _calculate-line-height($targetHeight: 28px, $fontSize: var(--kirby-font-size-n));
 
   &.sm {
-    font-size: utils.font-size('s');
-    line-height: _calculate-line-height($targetHeight: 24px, $fontSize: utils.font-size('s'));
+    font-size: var(--kirby-font-size-s);
+    line-height: _calculate-line-height($targetHeight: 24px, $fontSize: var(--kirby-font-size-s));
   }
 
   &.xs {
-    font-size: utils.font-size('xs');
-    line-height: _calculate-line-height($targetHeight: 20px, $fontSize: utils.font-size('xs'));
-    padding-left: utils.size('xxxs');
-    padding-right: utils.size('xxxs');
+    font-size: var(--kirby-font-size-xs);
+    line-height: _calculate-line-height($targetHeight: 20px, $fontSize: var(--kirby-font-size-xs));
+    padding-left: var(--kirby-spacing-xxxs);
+    padding-right: var(--kirby-spacing-xxxs);
   }
 
   // Colors
   &.success {
-    --kirby-flag-background-color: #{utils.get-color('success-tint')};
+    --kirby-flag-background-color: var(--kirby-success-tint);
   }
 
   &.warning {
-    --kirby-flag-background-color: #{utils.get-color('warning-tint')};
+    --kirby-flag-background-color: var(--kirby-warning-tint);
   }
 
   &.danger {
-    --kirby-flag-background-color: #{utils.get-color('danger-tint')};
+    --kirby-flag-background-color: var(--kirby-danger-tint);
   }
 
   &.semi-light {
-    --kirby-flag-background-color: #{utils.get-color('semi-light')};
+    --kirby-flag-background-color: var(--kirby-semi-light);
   }
 
   --kirby-flag-border-color: var(--kirby-flag-background-color);
-  --kirby-flag-color: #{utils.get-color('black')};
+  --kirby-flag-color: var(--kirby-black);
 }

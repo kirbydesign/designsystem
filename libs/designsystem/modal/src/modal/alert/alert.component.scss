@@ -2,17 +2,17 @@
 
 article {
   overflow: hidden;
-  padding: utils.size('s');
-  padding-top: utils.size('m');
+  padding: var(--kirby-spacing-s);
+  padding-top: var(--kirby-spacing-m);
   @include utils.media('<=xsmall') {
-    padding: utils.size('xxs');
+    padding: var(--kirby-spacing-xxs);
   }
 }
 
 .buttongroup {
   display: flex;
   justify-content: center;
-  column-gap: utils.size('xxs');
+  column-gap: var(--kirby-spacing-xxs);
 
   button {
     flex: 1 1 50%;

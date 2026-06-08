@@ -22,7 +22,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
 @mixin item-typography() {
   @include utils.slotted(item-typography.$slotted-text-elements) {
-    color: utils.get-text-color('black');
+    color: var(--kirby-text-color-black);
     display: block;
     margin: 0;
     white-space: nowrap;
@@ -33,27 +33,27 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   /* Needs to come before the base typography styles to allow for p.kirby-item-title to be applied
      as the selectors have the same specificity */
   @include utils.slotted(':where(p)') {
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
+    font-size: var(--kirby-font-size-s);
+    line-height: var(--kirby-line-height-s);
   }
 
   @include utils.slotted($base-typography-selectors) {
-    font-size: utils.font-size('n');
-    line-height: utils.line-height('n');
+    font-size: var(--kirby-font-size-n);
+    line-height: var(--kirby-line-height-n);
     font-weight: normal;
   }
 
   @include utils.slotted('[subtitle]', '[detail]', '.kirby-item-subtitle', '.kirby-item-detail') {
-    font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
+    font-size: var(--kirby-font-size-xs);
+    line-height: var(--kirby-line-height-xs);
   }
 
   @include utils.slotted('[subtitle]:not(:last-child)', '.kirby-item-subtitle:not(:last-child)') {
-    margin-bottom: utils.size('xxxs');
+    margin-bottom: var(--kirby-spacing-xxxs);
   }
 
   @include utils.slotted('[detail]', '.kirby-item-detail') {
-    color: utils.get-text-color('semi-dark');
+    color: var(--kirby-text-color-semi-dark);
   }
 
   @include utils.slotted('[wrap]', '.kirby-item-wrap') {

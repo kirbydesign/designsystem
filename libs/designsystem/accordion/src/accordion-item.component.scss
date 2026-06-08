@@ -1,8 +1,8 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$divider-color: utils.get-color('medium');
-$padding: utils.size('s');
+$divider-color: var(--kirby-medium);
+$padding: var(--kirby-spacing-s);
 
 :host {
   @include interaction-state.initialize-layer;
@@ -32,8 +32,8 @@ $padding: utils.size('s');
   & {
     display: flex;
     align-items: center;
-    gap: utils.size('xxs');
-    height: utils.size('xxxl');
+    gap: var(--kirby-spacing-xxs);
+    height: var(--kirby-spacing-xxxl);
     padding-left: $padding;
     padding-right: $padding;
     user-select: none;
@@ -50,11 +50,11 @@ $padding: utils.size('s');
 .title {
   flex-grow: 2;
   display: flex;
-  font-size: utils.font-size('n');
+  font-size: var(--kirby-font-size-n);
 }
 
 .kirby-icon {
-  transition: transform utils.get-transition-duration('quick');
+  transition: transform var(--kirby-transition-duration-quick);
 }
 
 .content {
@@ -70,22 +70,22 @@ button[disabled] {
   pointer-events: none;
 
   .kirby-icon {
-    color: utils.get-color('semi-dark');
+    color: var(--kirby-semi-dark);
   }
 
   .title {
-    color: utils.get-text-color('semi-dark');
+    color: var(--kirby-text-color-semi-dark);
   }
 }
 
 button {
   // Enforce button text color to avoid inheriting native button color from browser
-  color: utils.get-text-color('black');
+  color: var(--kirby-text-color-black);
 }
 
 button[aria-expanded='true'] {
   .title {
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
   }
 
   .kirby-icon {
@@ -100,7 +100,7 @@ button[aria-expanded='true'] {
 }
 
 :host-context(kirby-card) {
-  border-color: utils.get-color('background-color');
+  border-color: var(--kirby-background-color);
 
   &:first-child {
     border-top: none;

@@ -3,7 +3,7 @@
 :host {
   display: flex;
   position: relative;
-  gap: utils.size('xxs');
+  gap: var(--kirby-spacing-xxs);
 }
 
 :host(.align-end) {

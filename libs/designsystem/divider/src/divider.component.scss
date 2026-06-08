@@ -1,10 +1,10 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 hr {
-  margin-top: utils.size('xxs');
-  margin-bottom: utils.size('xxs');
+  margin-top: var(--kirby-spacing-xxs);
+  margin-bottom: var(--kirby-spacing-xxs);
   border: 0;
-  border-top: 1px solid var(--kirby-divider-color, utils.get-color('medium'));
+  border-top: 1px solid var(--kirby-divider-color, var(--kirby-medium));
 
   &.no-margin {
     margin-top: 0;

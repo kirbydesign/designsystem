@@ -2,7 +2,7 @@
 @use './section-header.utils';
 
 :host {
-  --kirby-section-header-color: #{utils.get-text-color('black')};
+  --kirby-section-header-color: var(--kirby-text-color-black);
 
   display: block;
 

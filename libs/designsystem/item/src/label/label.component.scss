@@ -16,7 +16,7 @@
     }
 
     @include utils.slotted(':not(:first-child)') {
-      margin-left: utils.size('xs');
+      margin-left: var(--kirby-spacing-xs);
     }
   }
 }
@@ -32,7 +32,7 @@
 
 :host([slot='end']) ion-label {
   @include utils.slotted(data, '[detail]') {
-    margin-inline-start: utils.size('s');
+    margin-inline-start: var(--kirby-spacing-s);
   }
 }
 
@@ -47,6 +47,6 @@
     'p:not([detail]):not(.kirby-item-detail)',
     'data:not([detail]):not(.kirby-item-detail)'
   ) {
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
   }
 }

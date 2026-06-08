@@ -4,6 +4,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
   font-size: var(--kirby-icon-font-size, utils.icon-font-size('sm'));
   margin-left: var(--kirby-icon-margin-left, unset);
   margin-right: var(--kirby-icon-margin-right, unset);
@@ -15,18 +17,26 @@
 }
 
 :host(.xs) {
+  // TODO(@kirby): migrate utils.icon-font-size('xs') — icon-font-size() has no direct CSS custom property equivalent
+
   --kirby-icon-font-size: #{utils.icon-font-size('xs')};
 }
 
 :host(.sm) {
+  // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
+
   --kirby-icon-font-size: #{utils.icon-font-size('sm')};
 }
 
 :host(.md) {
+  // TODO(@kirby): migrate utils.icon-font-size('md') — icon-font-size() has no direct CSS custom property equivalent
+
   --kirby-icon-font-size: #{utils.icon-font-size('md')};
 }
 
 :host(.lg) {
+  // TODO(@kirby): migrate utils.icon-font-size('lg') — icon-font-size() has no direct CSS custom property equivalent
+
   --kirby-icon-font-size: #{utils.icon-font-size('lg')};
 }
 
@@ -38,11 +48,11 @@
 
 :host-context(kirby-item) {
   &[slot='start'] {
-    margin-inline-end: utils.size('xxs');
+    margin-inline-end: var(--kirby-spacing-xxs);
   }
 
   &[slot='end'] {
-    margin-inline-start: utils.size('xxs');
+    margin-inline-start: var(--kirby-spacing-xxs);
   }
 }
 

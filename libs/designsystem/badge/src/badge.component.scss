@@ -6,21 +6,21 @@
   right: var(--kirby-badge-right, auto);
   top: var(--kirby-badge-top, auto);
   z-index: var(--kirby-badge-z-index, auto);
-  font-size: utils.font-size('xxs');
+  font-size: var(--kirby-font-size-xxs);
   line-height: 1;
 
   ion-badge {
-    --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
-    --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
+    --background: var(--kirby-badge-background-color, var(--kirby-white));
+    --color: var(--kirby-badge-color, var(--kirby-white-contrast));
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: utils.border-radius('s');
+    border-radius: var(--kirby-border-radius-s);
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
 
     @include utils.slotted(kirby-icon) {
-      --kirby-icon-font-size: #{utils.font-size('n')};
+      --kirby-icon-font-size: var(--kirby-font-size-n);
 
       position: absolute;
       top: 0;
@@ -30,42 +30,42 @@
 
   // Colors
   &.success ion-badge {
-    --color: #{utils.get-color('success-contrast')};
+    --color: var(--kirby-success-contrast);
   }
 
   &.success.sm ion-badge {
-    --background: #{utils.get-color('success-shade')};
+    --background: var(--kirby-success-shade);
   }
 
   &.success.md ion-badge {
-    --background: #{utils.get-color('success-tint')};
+    --background: var(--kirby-success-tint);
   }
 
   &.warning ion-badge {
-    --color: #{utils.get-color('warning-contrast')};
+    --color: var(--kirby-warning-contrast);
   }
 
   &.warning.sm ion-badge {
-    --background: #{utils.get-color('warning-shade')};
+    --background: var(--kirby-warning-shade);
   }
 
   &.warning.md ion-badge {
-    --background: #{utils.get-color('warning')};
+    --background: var(--kirby-warning);
   }
 
   &.danger ion-badge {
-    --color: #{utils.get-text-color('white')};
+    --color: var(--kirby-text-color-white);
   }
 
   &.danger.sm ion-badge {
-    --background: #{utils.get-color('danger')};
+    --background: var(--kirby-danger);
   }
 
   &.danger.md ion-badge {
-    --background: #{utils.get-color('danger-shade')};
+    --background: var(--kirby-danger-shade);
 
     &:has(kirby-icon) {
-      --background: #{utils.get-color('danger')};
+      --background: var(--kirby-danger);
     }
   }
 }
@@ -75,8 +75,8 @@
     padding: initial;
     min-height: initial;
     min-width: initial;
-    height: utils.size('xxs');
-    width: utils.size('xxs');
+    height: var(--kirby-spacing-xxs);
+    width: var(--kirby-spacing-xxs);
   }
 }
 
@@ -87,8 +87,8 @@
     --padding-bottom: 3px;
     --padding-start: 5px;
 
-    min-width: utils.size('s');
-    min-height: utils.size('s');
+    min-width: var(--kirby-spacing-s);
+    min-height: var(--kirby-spacing-s);
   }
 }
 

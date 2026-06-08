@@ -18,16 +18,16 @@
     --min-height: #{map.get(utils.$item-heights, 'xs')};
 
     &:not(:has(kirby-checkbox, kirby-radio)) {
-      --inner-padding-top: #{utils.size('xxxs')};
-      --inner-padding-bottom: #{utils.size('xxxs')};
+      --inner-padding-top: var(--kirby-spacing-xxxs);
+      --inner-padding-bottom: var(--kirby-spacing-xxxs);
     }
   }
 
   .outside {
-    left: utils.size('xxxs');
+    left: var(--kirby-spacing-xxxs);
     margin: 0;
     position: absolute;
-    width: utils.size('s');
+    width: var(--kirby-spacing-s);
     z-index: 1;
   }
 }
@@ -36,7 +36,7 @@ ion-item {
   &::part(native):focus-visible {
     box-shadow:
       0 0 0 2px utils.$focus-ring-color inset,
-      0 0 0 4px utils.get-color('white') inset;
+      0 0 0 4px var(--kirby-white) inset;
   }
 
   @include interaction-state.apply-hover-ionic('xxxs');
@@ -49,22 +49,19 @@ ion-item {
     --padding-top: var(--item-padding-top, 0px);
     --padding-bottom: var(--item-padding-bottom, 0px);
     --min-height: #{map.get(utils.$item-heights, 'm')};
-    --padding-start: #{utils.size('s')};
-    --inner-padding-top: #{utils.size('xxs')};
-    --inner-padding-bottom: #{utils.size('xxs')};
-    --inner-padding-end: #{utils.size('s')};
-    --background: var(--kirby-item-background, #{utils.get-color('white')});
+    --padding-start: var(--kirby-spacing-s);
+    --inner-padding-top: var(--kirby-spacing-xxs);
+    --inner-padding-bottom: var(--kirby-spacing-xxs);
+    --inner-padding-end: var(--kirby-spacing-s);
+    --background: var(--kirby-item-background, var(--kirby-white));
 
     // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871
     --background-activated-opacity: 0.99;
-    --background-focused: var(
-      --kirby-item-background-focused,
-      #{utils.get-color('background-color')}
-    );
+    --background-focused: var(--kirby-item-background-focused, var(--kirby-background-color));
     --background-focused-opacity: 1;
 
-    font-size: utils.font-size('n');
+    font-size: var(--kirby-font-size-n);
   }
   /* stylelint-enable no-duplicate-selectors */
 
@@ -85,11 +82,11 @@ ion-item {
   }
 
   @include utils.slotted('time[slot="end"]') {
-    margin-inline-start: utils.size('xs');
+    margin-inline-start: var(--kirby-spacing-xs);
   }
 
   @include utils.slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
-    margin-inline-start: utils.size('s');
+    margin-inline-start: var(--kirby-spacing-s);
   }
 
   @include item.item-typography;
@@ -99,7 +96,7 @@ ion-item {
   }
 
   @include utils.slotted('input[slot="end"], kirby-form-field[slot="end"] input') {
-    margin-inline-start: utils.size('s');
+    margin-inline-start: var(--kirby-spacing-s);
     width: auto;
     text-align: end;
   }
@@ -129,8 +126,8 @@ ion-item {
 }
 
 .disclosure {
-  padding-left: #{utils.size('xxxs')};
-  color: #{utils.get-color('semi-dark')};
+  padding-left: var(--kirby-spacing-xxxs);
+  color: var(--kirby-semi-dark);
 
   /*
     display: inline-flex; is used to make sure the span.disclosure element
@@ -141,7 +138,7 @@ ion-item {
   align-items: center;
 
   & kirby-icon {
-    transition: transform utils.get-transition-duration('quick');
+    transition: transform var(--kirby-transition-duration-quick);
 
     &.rotate {
       transform: rotate(180deg);
@@ -171,30 +168,30 @@ ion-item {
 :host-context(kirby-list .selected) {
   ion-item {
     @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
-      font-weight: utils.font-weight('bold');
+      font-weight: var(--kirby-font-weight-bold);
     }
   }
 }
 
 :host(.disclosure) {
   ion-item {
-    --inner-padding-end: #{utils.size('xxs')};
+    --inner-padding-end: var(--kirby-spacing-xxs);
   }
 }
 
 :host-context(kirby-list-item:first-of-type),
 :host-context(kirby-card):first-child {
   ion-item::part(native) {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
+    border-top-left-radius: var(--kirby-border-radius-n);
+    border-top-right-radius: var(--kirby-border-radius-n);
   }
 }
 
 :host-context(kirby-list-item:last-of-type),
 :host-context(kirby-card):last-child {
   ion-item::part(native) {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
+    border-bottom-left-radius: var(--kirby-border-radius-n);
+    border-bottom-right-radius: var(--kirby-border-radius-n);
   }
 }
 

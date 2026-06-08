@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-  min-height: utils.size('l');
+  min-height: var(--kirby-spacing-l);
 }
 
 .overlay-wrapper {
@@ -16,13 +16,14 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    z-index: utils.z('loading-overlay');
+    z-index: var(--kirby-z-index-loading-overlay);
     display: flex;
     background: transparent;
     justify-content: center;
     place-items: center;
 
     &.backdrop {
+      // TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
       background-color: rgba(
         utils.get-color('background-color', $getValueOnly: true),
         utils.$loading-overlay-backdrop-opacity
@@ -30,6 +31,8 @@
     }
 
     &.hide-content {
+      // TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
+
       background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
     }
 
