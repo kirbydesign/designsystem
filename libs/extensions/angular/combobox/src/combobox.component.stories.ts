@@ -1,8 +1,7 @@
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
+import { ComboboxComponent, ComboboxModule } from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import {
   FormFieldComponent,
@@ -81,10 +80,9 @@ const meta: Meta<ComboboxComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
-        ListModule,
         ItemModule,
         InputComponent,
-        ComboboxComponent,
+        ComboboxModule,
         FormFieldComponent,
         ReactiveFormsModule,
       ],
