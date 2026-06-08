@@ -1,6 +1,8 @@
 {
   "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
+  "plugins": ["./tools/stylelint-plugin-design-tokens/index.mjs"],
   "rules": {
+    "kirby/use-design-tokens": true,
     "scss/at-mixin-pattern": [
       "^(-?_?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
       {

@@ -1,4 +1,5 @@
 import stylelint from 'stylelint';
+import postcss from 'postcss';
 
 const { createPlugin, utils: stylelintUtils } = stylelint;
 
@@ -27,6 +28,31 @@ const meta = {
  * - replace: function that receives regex match groups and returns the CSS var() string
  */
 const FUNCTION_MAPPINGS = [
+  {
+    name: 'get-color',
+    // Matches: get-color('primary'), utils.get-color('white')
+    // Skips calls with $getValueOnly: true (handled by replace fn returning match)
+    source: String.raw`(?<![\w-])(?:[\w-]+\.)?get-color\(\s*['"]([^'"]+)['"]\s*(?:,[^)]*)?\)`,
+    replace: (match, key) => {
+      if (/\$getValueOnly\s*:\s*true/.test(match)) return match;
+      return `var(--kirby-${key})`;
+    },
+  },
+  {
+    name: 'get-text-color',
+    // Matches: get-text-color('black'), utils.get-text-color('semi-dark')
+    source: String.raw`(?<![\w-])(?:[\w-]+\.)?get-text-color\(\s*['"]([^'"]+)['"]\s*(?:,[^)]*)?\)`,
+    replace: (match, key) => {
+      if (/\$getValueOnly\s*:\s*true/.test(match)) return match;
+      return `var(--kirby-text-color-${key})`;
+    },
+  },
+  {
+    name: 'get-decoration-color',
+    // Matches: get-decoration-color('blue', 50), utils.get-decoration-color('red', 30)
+    source: String.raw`(?<![\w-])(?:[\w-]+\.)?get-decoration-color\(\s*['"]([^'"]+)['"]\s*,\s*['"]?(\d+)['"]?\s*\)`,
+    replace: (_match, variant, shade) => `var(--kirby-decoration-color-${variant}-${shade})`,
+  },
   {
     name: 'size',
     // Matches: size('m'), utils.size('m'), size('-m'), utils.size('-m')
@@ -170,12 +196,28 @@ const ruleFunction = (primary) => {
         const re = new RegExp(source, 'g');
         let skipMatch;
         while ((skipMatch = re.exec(originalValue)) !== null) {
+          const todoText = `TODO(@kirby): migrate ${skipMatch[0]} — ${reason}`;
+
           stylelintUtils.report({
             message: messages.manual(skipMatch[0], reason),
             node: decl,
             result,
             ruleName,
             word: skipMatch[0],
+            fix: () => {
+              // Avoid inserting duplicate TODO comments
+              const prev = decl.prev();
+              if (prev && prev.type === 'comment' && prev.text === todoText) {
+                return;
+              }
+              const comment = new postcss.Comment({ text: todoText });
+              comment.raws.inline = true;
+              comment.raws.left = ' ';
+              comment.raws.right = '';
+              // Provide source position so downstream rules don't crash
+              comment.source = decl.source;
+              decl.parent.insertBefore(decl, comment);
+            },
           });
         }
       }
@@ -195,6 +237,9 @@ const ruleFunction = (primary) => {
           // Compute what this specific match would be replaced with
           const replacementRe = new RegExp(source);
           const replaced = match[0].replace(replacementRe, replace);
+
+          // Skip if replace() returned the original (e.g. $getValueOnly: true)
+          if (replaced === match[0]) continue;
 
           stylelintUtils.report({
             message: messages.replaced(match[0], replaced),
