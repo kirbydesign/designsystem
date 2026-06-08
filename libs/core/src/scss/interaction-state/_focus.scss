@@ -93,11 +93,11 @@
 }
 
 @mixin _focus-ring($shadow, $gap) {
-  $stroke-width: utils.size('xxxxs');
+  $stroke-width: var(--kirby-spacing-xxxxs);
 
   transition: interaction-state.transition();
   box-shadow:
     #{$shadow},
-    0 0 0 $gap #{utils.get-color('background-color')},
+    0 0 0 $gap var(--kirby-background-color),
     0 0 0 $gap + $stroke-width utils.$focus-ring-color;
 }

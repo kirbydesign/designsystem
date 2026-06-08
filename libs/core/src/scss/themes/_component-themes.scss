@@ -24,7 +24,7 @@
   --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
   --kirby-inputs-color-hover: var(--kirby-semi-dark);
   --kirby-inputs-elevation: none;
-  --kirby-divider-color: #{utils.get-color('background-color')};
+  --kirby-divider-color: var(--kirby-background-color);
 }
 
 @mixin apply-light-theme {
@@ -36,7 +36,7 @@
   --kirby-inputs-indicator-color: var(--kirby-white);
   --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
   --kirby-inputs-color-hover: var(--kirby-semi-dark);
-  --kirby-divider-color: #{utils.get-color('medium')};
+  --kirby-divider-color: var(--kirby-medium);
 
   // Only set elevation on input components for light theme
   --kirby-inputs-elevation: var(--kirby-elevation-2);
