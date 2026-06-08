@@ -91,8 +91,13 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
 ion-radio {
   @media (hover: hover) and (pointer: fine) {
+    &:focus-within {
+      --border-width: 0;
+    }
+
     &:focus-within::part(container):focus-visible,
     &:focus-visible:focus-within::part(container) {
+      border-color: transparent;
       transition: interaction-state.transition();
       box-shadow: var(--kirby-focus-ring-sm-inset);
     }
@@ -185,7 +190,7 @@ ion-radio {
       }
     }
 
-    &:not(.radio-disabled) {
+    &:not(:focus, :focus-within, .radio-disabled) {
       &::part(container) {
         border-color: var(--kirby-semi-dark);
       }
