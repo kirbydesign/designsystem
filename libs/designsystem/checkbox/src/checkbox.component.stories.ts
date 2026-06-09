@@ -57,7 +57,7 @@ export const Focused: Story = {
       <kirby-checkbox text="Unchecked"></kirby-checkbox>
       <kirby-checkbox text="Checked" [checked]="true"></kirby-checkbox>
     `,
-    styles: [':host { display: flex; gap: 16px; }'],
+    styles: [':host { display: flex; gap: 16px; padding: 8px; }'],
   }),
   play: async ({ canvasElement }) => {
     const checkbox = canvasElement.querySelector('ion-checkbox');

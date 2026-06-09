@@ -252,6 +252,7 @@ export const DropdownFocused: Story = {
     template: `
       <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
     `,
+    styles: [':host { padding: 8px; }'],
   }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

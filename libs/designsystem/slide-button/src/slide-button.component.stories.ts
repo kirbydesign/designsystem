@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { componentWrapperDecorator } from '@storybook/angular';
 
 import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 
@@ -19,6 +20,7 @@ export const Focused: Story = {
   args: {
     text: 'Slide to confirm',
   },
+  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
   play: async ({ canvasElement }) => {
     const button = canvasElement.querySelector('button');
     (button as HTMLElement)?.focus();

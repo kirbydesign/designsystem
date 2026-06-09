@@ -54,6 +54,7 @@ export const Focused: Story = {
     <kirby-tab-navigation-item label="Item 2"></kirby-tab-navigation-item>
     <kirby-tab-navigation-item label="Item 3"></kirby-tab-navigation-item>
   </kirby-tab-navigation>`,
+    styles: [':host { padding: 8px; }'],
   }),
   play: async ({ canvasElement }) => {
     const button = canvasElement.querySelector('button');

@@ -153,6 +153,7 @@ export const InputFocused: Story = {
         <input kirby-input placeholder="Type here..." />
       </kirby-form-field>
     `,
+    styles: [':host { padding: 8px; }'],
   }),
   play: async ({ canvasElement }) => {
     const input = canvasElement.querySelector('input');

@@ -73,6 +73,7 @@ export const Focused: Story = {
   render: (args) => ({
     props: args,
     template: `<kirby-range ${argsToTemplate(args)}></kirby-range>`,
+    styles: [':host { padding: 8px; }'],
   }),
   play: async ({ canvasElement }) => {
     const range = canvasElement.querySelector('ion-range');

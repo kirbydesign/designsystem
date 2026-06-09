@@ -57,7 +57,7 @@ export const Focused: Story = {
       <button kirby-button attentionLevel="2">Attention Level 2</button>
       <button kirby-button attentionLevel="3">Attention Level 3</button>
     `,
-    styles: [':host { display: flex; gap: 8px; }'],
+    styles: [':host { display: flex; gap: 8px; padding: 8px; }'],
   }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

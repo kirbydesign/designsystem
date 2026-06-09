@@ -1,4 +1,9 @@
-import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import {
+  componentWrapperDecorator,
+  type Meta,
+  moduleMetadata,
+  type StoryObj,
+} from '@storybook/angular';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import {
@@ -59,6 +64,7 @@ export const Focused: Story = {
     selectedIndex: 0,
     size: 'md',
   },
+  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
   play: async ({ canvasElement }) => {
     const segmentButton = canvasElement.querySelector('ion-segment-button');
     await TestHelper.whenReady(segmentButton);

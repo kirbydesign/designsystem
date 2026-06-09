@@ -48,6 +48,7 @@ export const Focused: Story = {
     title: 'Focused Accordion Item',
     isExpanded: false,
   },
+  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
   play: async ({ canvasElement }) => {
     const header = canvasElement.querySelector('.header') as HTMLElement;
     if (header) {

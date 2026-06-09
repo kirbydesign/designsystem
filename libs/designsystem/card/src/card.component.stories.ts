@@ -44,6 +44,7 @@ export const Focused: Story = {
         Clickable card with focus ring
       </kirby-card>
     `,
+    styles: [':host { padding: 8px; }'],
     props: {
       noop: () => {
         // noop

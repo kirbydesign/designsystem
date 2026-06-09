@@ -1,4 +1,9 @@
-import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import {
+  componentWrapperDecorator,
+  type Meta,
+  moduleMetadata,
+  type StoryObj,
+} from '@storybook/angular';
 
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -40,6 +45,7 @@ export const Focused: Story = {
     items: ['Bacon', 'Salami', 'Tenderloin'],
     selectedIndex: 0,
   },
+  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
   play: async ({ canvasElement }) => {
     const radio = canvasElement.querySelector('ion-radio');
     await TestHelper.whenReady(radio);
