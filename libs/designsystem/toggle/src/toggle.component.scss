@@ -65,7 +65,9 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 ion-toggle {
   @media (hover: hover) and (pointer: fine) {
     &:focus-visible::part(track) {
-      transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+      transition:
+        box-shadow #{interaction-state.$default-transition-duration} linear,
+        background-color #{interaction-state.$default-transition-duration} linear;
       box-shadow: var(--kirby-focus-ring-sm-inset);
     }
 
@@ -129,6 +131,8 @@ ion-toggle {
     --border-radius: #{math.div($toggle-size, 2)};
 
     &::part(track) {
+      transition: interaction-state.transition();
+      transition-property: background-color, box-shadow;
       height: $toggle-size;
     }
   }
