@@ -5,11 +5,12 @@ export const focusSelectableItem =
   async ({ canvasElement }) => {
     const ionItems = canvasElement.querySelectorAll('kirby-item ion-item');
     const ionItem = ionItems[index];
+    if (!ionItem) return;
 
     await new Promise<void>((resolve) => {
       componentOnReady(ionItem, () => resolve());
     });
 
-    const nativeEl = ionItem.shadowRoot.querySelector('[part="native"]') as HTMLElement;
-    nativeEl.focus();
+    const nativeEl = ionItem.shadowRoot?.querySelector('[part="native"]') as HTMLElement;
+    nativeEl?.focus();
   };
