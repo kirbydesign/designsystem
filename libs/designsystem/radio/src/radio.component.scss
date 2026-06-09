@@ -93,12 +93,11 @@ ion-radio {
   @media (hover: hover) and (pointer: fine) {
     &:focus-within {
       --border-width: 0;
+      --color: transparent;
     }
 
-    &:focus-within::part(container):focus-visible,
-    &:focus-visible:focus-within::part(container) {
-      border-color: transparent;
-      transition: interaction-state.transition();
+    &:focus-visible::part(container) {
+      transition: box-shadow #{interaction-state.$default-transition-duration} linear;
       box-shadow: var(--kirby-focus-ring-sm-inset);
     }
   }
@@ -130,7 +129,7 @@ ion-radio {
 
   &::part(container) {
     transition: interaction-state.transition();
-    transition-property: background-color;
+    transition-property: background-color, box-shadow;
     background-color: utils.get-color('white');
     margin: utils.size('xxxxs');
   }

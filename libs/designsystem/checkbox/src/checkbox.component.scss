@@ -123,8 +123,9 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
         --border-color-checked: transparent;
       }
 
-      &:focus-within::part(container):focus-visible,
-      &:focus-visible:focus-within::part(container) {
+      &:focus-visible::part(container) {
+        outline: none;
+        transition: box-shadow #{interaction-state.$default-transition-duration} linear;
         padding: calc(var(--kirby-checkbox-container-padding) + 1px);
         box-shadow: var(--kirby-focus-ring-sm-inset);
         border-radius: var(--border-radius);
