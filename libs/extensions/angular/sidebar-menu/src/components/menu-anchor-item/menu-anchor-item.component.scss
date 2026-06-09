@@ -37,9 +37,7 @@
 }
 
 .toggle-spacer {
-  // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
-
-  width: utils.icon-font-size('sm');
+  width: var(--kirby-spacing-m);
   display: none;
 }
 

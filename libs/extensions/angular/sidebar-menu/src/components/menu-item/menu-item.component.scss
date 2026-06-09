@@ -75,22 +75,14 @@
 
   &.lg,
   &.md {
-    // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
-
-    width: utils.icon-font-size('sm');
-
-    // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
-    height: utils.icon-font-size('sm');
+    width: var(--kirby-spacing-m);
+    height: var(--kirby-spacing-m);
   }
 
   &.sm,
   &.xs {
-    // TODO(@kirby): migrate utils.icon-font-size('xs') — icon-font-size() has no direct CSS custom property equivalent
-
-    width: utils.icon-font-size('xs');
-
-    // TODO(@kirby): migrate utils.icon-font-size('xs') — icon-font-size() has no direct CSS custom property equivalent
-    height: utils.icon-font-size('xs');
+    width: var(--kirby-spacing-s);
+    height: var(--kirby-spacing-s);
   }
 
   &.sm {
@@ -116,9 +108,7 @@
 
 .menu-item-end {
   display: inline-flex;
-
-  // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
-  min-width: utils.icon-font-size('sm');
+  min-width: var(--kirby-spacing-m);
   align-items: center;
   justify-content: center;
   gap: var(--kirby-spacing-xxs);

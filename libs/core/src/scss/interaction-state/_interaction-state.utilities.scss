@@ -1,4 +1,3 @@
-@use 'sass:color';
 @use 'sass:list';
 @use 'sass:map';
 @use '../utils';
@@ -24,20 +23,13 @@ $loudness-scale: (
 }
 
 @function get-state-color($variant, $loudness: $default-loudness-hover, $make-lighter: false) {
-  // TODO(@kirby): migrate utils.get-color($variant, $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
-  $_background: utils.get-color($variant, $getValueOnly: true);
-  $_lightness: 0% !default;
+  $_percentage: get-loudness($loudness);
 
   @if $make-lighter {
-    $_lightness: get-loudness($loudness);
+    @return color-mix(in srgb, var(--kirby-#{$variant}), white #{$_percentage});
   } @else {
-    // negative number means "make it darker"
-    $_lightness: -1 * get-loudness($loudness);
+    @return color-mix(in srgb, var(--kirby-#{$variant}), black #{$_percentage});
   }
-
-  $state-color: #{color.scale($_background, $lightness: $_lightness)};
-
-  @return $state-color;
 }
 
 /// Apply streamlined transition to interaction state changes

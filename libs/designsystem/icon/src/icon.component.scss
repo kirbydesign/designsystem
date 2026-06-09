@@ -4,9 +4,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
-  font-size: var(--kirby-icon-font-size, utils.icon-font-size('sm'));
+  font-size: var(--kirby-icon-font-size, var(--kirby-spacing-m));
   margin-left: var(--kirby-icon-margin-left, unset);
   margin-right: var(--kirby-icon-margin-right, unset);
 
@@ -17,27 +15,19 @@
 }
 
 :host(.xs) {
-  // TODO(@kirby): migrate utils.icon-font-size('xs') — icon-font-size() has no direct CSS custom property equivalent
-
-  --kirby-icon-font-size: #{utils.icon-font-size('xs')};
+  --kirby-icon-font-size: var(--kirby-spacing-s);
 }
 
 :host(.sm) {
-  // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
-
-  --kirby-icon-font-size: #{utils.icon-font-size('sm')};
+  --kirby-icon-font-size: var(--kirby-spacing-m);
 }
 
 :host(.md) {
-  // TODO(@kirby): migrate utils.icon-font-size('md') — icon-font-size() has no direct CSS custom property equivalent
-
-  --kirby-icon-font-size: #{utils.icon-font-size('md')};
+  --kirby-icon-font-size: var(--kirby-spacing-l);
 }
 
 :host(.lg) {
-  // TODO(@kirby): migrate utils.icon-font-size('lg') — icon-font-size() has no direct CSS custom property equivalent
-
-  --kirby-icon-font-size: #{utils.icon-font-size('lg')};
+  --kirby-icon-font-size: var(--kirby-spacing-xxxl);
 }
 
 @each $color-name, $color-value in utils.$main-colors {

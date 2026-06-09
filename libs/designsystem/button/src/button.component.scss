@@ -18,12 +18,12 @@ $button-margin: var(--kirby-spacing-xxxs);
 
 @mixin button-xs {
   /*
-  * Extra small button needs a smaller click area to e.g. not overlap with other 
-  * interactive elements. The maximum target size we can safely do is the button's 
+  * Extra small button needs a smaller click area to e.g. not overlap with other
+  * interactive elements. The maximum target size we can safely do is the button's
   * minimum width plus its margin on each side
   */
   $button-xs-icon-only-size: var(--kirby-spacing-m);
-  $button-xs-click-area-size: $button-xs-icon-only-size + $button-margin * 2;
+  $button-xs-click-area-size: calc(#{$button-xs-icon-only-size} + #{$button-margin} * 2);
   @include utils.accessible-target-size($width: $button-xs-click-area-size);
 
   // Wrap declarations to avoid mixing with nested rules.

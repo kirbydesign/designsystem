@@ -117,11 +117,11 @@ ion-toggle {
 
     $toggle-size: var(--kirby-spacing-l);
     $toggle-border-size: var(--kirby-spacing-xxxxs);
-    $toggle-handle-size: $toggle-size - ($toggle-border-size * 2);
+    $toggle-handle-size: calc(#{$toggle-size} - #{$toggle-border-size} * 2);
 
     --handle-height: #{$toggle-handle-size};
     --handle-width: #{$toggle-handle-size};
-    --border-radius: #{math.div($toggle-size, 2)};
+    --border-radius: calc(#{$toggle-size} / 2);
 
     &::part(track) {
       height: $toggle-size;

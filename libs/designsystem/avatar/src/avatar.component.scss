@@ -42,9 +42,7 @@ $badge-diameter: utils.$avatar-badge-size;
   color: var(--kirby-light-contrast);
 
   // default to icon size 'sm'
-  // TODO(@kirby): migrate utils.icon-font-size('sm') — icon-font-size() has no direct CSS custom property equivalent
-
-  --kirby-icon-font-size: #{utils.icon-font-size('sm')};
+  --kirby-icon-font-size: var(--kirby-spacing-m);
 
   &.stroke {
     border: 1px solid var(--kirby-semi-light);
@@ -102,9 +100,7 @@ $badge-diameter: utils.$avatar-badge-size;
     width: $diameter-medium;
     height: $diameter-medium;
 
-    // TODO(@kirby): migrate utils.icon-font-size('md') — icon-font-size() has no direct CSS custom property equivalent
-
-    --kirby-icon-font-size: #{utils.icon-font-size('md')};
+    --kirby-icon-font-size: var(--kirby-spacing-l);
 
     .avatar-text {
       font-size: var(--kirby-font-size-m);
@@ -121,9 +117,7 @@ $badge-diameter: utils.$avatar-badge-size;
     width: $diameter-large;
     height: $diameter-large;
 
-    // TODO(@kirby): migrate utils.icon-font-size('lg') — icon-font-size() has no direct CSS custom property equivalent
-
-    --kirby-icon-font-size: #{utils.icon-font-size('lg')};
+    --kirby-icon-font-size: var(--kirby-spacing-xxxl);
 
     .avatar-text {
       font-size: var(--kirby-font-size-xl);

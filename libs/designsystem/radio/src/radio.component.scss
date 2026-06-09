@@ -9,7 +9,7 @@ $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
 @function get-vertical-padding($target-height) {
-  @return ($target-height - $radio-icon-size) * 0.5;
+  @return calc((#{$target-height} - #{$radio-icon-size}) * 0.5);
 }
 
 :host {

@@ -10,7 +10,7 @@
 }
 
 .icon-outline {
-  $icon-size: var(--kirby-spacing-xxl) * 2;
+  $icon-size: calc(var(--kirby-spacing-xxl) * 2);
 
   width: $icon-size;
   height: $icon-size;

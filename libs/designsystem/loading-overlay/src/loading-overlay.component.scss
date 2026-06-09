@@ -23,17 +23,14 @@
     place-items: center;
 
     &.backdrop {
-      // TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
       background-color: rgba(
-        utils.get-color('background-color', $getValueOnly: true),
-        utils.$loading-overlay-backdrop-opacity
+        var(--kirby-background-color-rgb),
+        #{utils.$loading-overlay-backdrop-opacity}
       );
     }
 
     &.hide-content {
-      // TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
-
-      background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
+      background-color: var(--kirby-background-color);
     }
 
     .spinner {
