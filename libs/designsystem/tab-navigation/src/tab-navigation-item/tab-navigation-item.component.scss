@@ -1,3 +1,4 @@
+@use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 $tab-item-text-max-width: 100px;
@@ -41,6 +42,15 @@ $border-color-selected: utils.get-color('dark');
     &:focus,
     &:hover {
       font-weight: utils.font-weight('bold');
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:focus-visible {
+        outline: none;
+        border-radius: utils.size('xxxs');
+        transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+        box-shadow: var(--kirby-focus-ring-sm-inset);
+      }
     }
 
     &[aria-selected='true'] {
