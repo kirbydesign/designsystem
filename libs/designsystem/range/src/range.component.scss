@@ -15,8 +15,7 @@ $knob-shadow:
 
 ion-range {
   @media (hover: hover) and (pointer: fine) {
-    &:focus-within::part(knob):focus-visible,
-    &:focus-visible:focus-within::part(knob) {
+    &:focus-visible::part(knob) {
       transition: interaction-state.transition();
       box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
     }
