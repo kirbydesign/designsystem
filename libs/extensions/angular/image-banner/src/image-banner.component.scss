@@ -151,7 +151,7 @@ kirby-card {
 
   min-height: var(
     --kirby-x-image-banner-min-height,
-    #{var(--kirby-line-height-l) * 3}
+    calc(#{var(--kirby-line-height-l)} * 3)
   ); // text content height should be minimum 3 lines by default
 
   box-sizing: border-box;
