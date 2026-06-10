@@ -1,0 +1,17 @@
+@use '../design-token-table';
+@use '../showcase.shared';
+
+.font-size-sample,
+.font-weight-sample,
+.line-height-sample {
+  display: inline-block;
+}
+
+.font-size-sample {
+  line-height: 1;
+}
+
+.line-height-sample {
+  font-size: var(--kirby-font-size-n);
+  background-color: var(--kirby-semi-light);
+}

@@ -1,0 +1,37 @@
+<p>Border radius tokens define the shape of element corners.</p>
+<p>
+  They are available via the SCSS utility function
+  <code>border-radius()</code>
+  or as CSS custom properties.
+</p>
+
+<table class="kirby-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="custom-property-cell">CSS Custom Property</th>
+      <th>Base value</th>
+      <th class="preview">Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (token of borderRadii; track token.name) {
+      <tr>
+        <td>
+          <code>{{ token.name }}</code>
+        </td>
+        <td>
+          <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
+        </td>
+        <td>{{ token.description }}</td>
+        <td>
+          <span
+            [class]="['radius-sample', 'token-preview', token.name]"
+            [style.border-top-right-radius]="'var(' + token.cssVar + ')'"
+          ></span>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
