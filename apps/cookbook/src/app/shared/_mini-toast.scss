@@ -1,6 +1,5 @@
 @mixin copied {
   transition: transform var(--kirby-transition-duration-quick);
-  cursor: pointer;
 
   &:hover {
     transform: scale(120%);

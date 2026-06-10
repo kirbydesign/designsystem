@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-// @ts-expect-error TypeScript cannot provide types based on attributes yet
-import exampleHtml from '../../examples/toggle-example/toggle-example.component.html' with { loader: 'text' };
-import { ToggleDefaultExampleComponent } from '../../examples/toggle-example/examples/default';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { ToggleReactiveFormsExampleComponent } from '../../examples/toggle-example/examples/reactive-forms';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ToggleItemExampleComponent } from '~/app/examples/toggle-example/examples/item';
+import { ToggleStateExampleComponent } from '~/app/examples/toggle-example/examples/state';
 
 @Component({
   selector: 'cookbook-toggle-showcase',
@@ -16,16 +15,16 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
   styleUrls: ['./toggle-showcase.component.scss'],
   imports: [
     DividerComponent,
-    ToggleDefaultExampleComponent,
     CodeViewerComponent,
     ExampleViewerComponent,
     ToggleReactiveFormsExampleComponent,
     ApiDescriptionPropertiesComponent,
     ImportViewerComponent,
+    ToggleItemExampleComponent,
+    ToggleStateExampleComponent,
   ],
 })
 export class ToggleShowcaseComponent {
-  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'checked',

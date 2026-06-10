@@ -26,20 +26,15 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   }
 
   &[type='date'] {
-    // Hide the builtin picker icon but position it so it overlays input, to ensure clicking the
-    // input opens the date picker as expected
+    // Hide the builtin picker icon - we use our own calendar icon with showPicker()
     &::-webkit-calendar-picker-indicator {
-      opacity: 0;
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      display: none;
     }
   }
 
   /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   &[type='date']::ng-deep + .suffix {
-    pointer-events: none; // ensure clicking icon opens date picker
+    cursor: pointer;
 
     // In firefox, we can't target and hide the builtin picker icon, so we use a feature query to hide
     // kirby-icon instead and accept that the native appearance is a bit different

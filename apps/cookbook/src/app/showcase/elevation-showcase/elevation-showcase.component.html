@@ -1,0 +1,41 @@
+<p>
+  Elevation tokens provide consistent box-shadow for elements that should appear raised from the
+  background.
+</p>
+
+<p>
+  They are available via the SCSS utility function
+  <code>get-elevation()</code>
+  or as CSS custom properties.
+</p>
+
+<table class="kirby-table">
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th class="custom-property-cell">CSS Custom Property</th>
+      <th>Description</th>
+      <th class="preview">Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (token of elevations; track token.name) {
+      <tr>
+        <td>
+          <code>{{ token.name }}</code>
+        </td>
+        <td>
+          <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
+        </td>
+        <td>{{ token.description }}</td>
+        <td>
+          <span
+            class="elevation-sample token-preview"
+            [style.box-shadow]="'var(' + token.cssVar + ')'"
+          ></span>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

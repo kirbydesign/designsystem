@@ -1,218 +1,31 @@
-@use '@kirbydesign/core/src/scss/utils';
-@use '../../shared/mini-toast';
+@use '../design-token-table';
+@use '../showcase.shared';
 
-@each $color-name, $color-value in utils.get-all-colors() {
-  .color-sample.#{$color-name} {
-    background-color: var(--kirby-#{$color-name});
-    color: var(--kirby-#{$color-name}-contrast);
-  }
-  .color-sample.#{$color-name}-tint {
-    background-color: var(--kirby-#{$color-name}-tint);
-  }
-  .color-sample.#{$color-name}-shade {
-    background-color: var(--kirby-#{$color-name}-shade);
-  }
+.color-swatch {
+  display: block;
+  width: var(--kirby-spacing-l);
+  height: var(--kirby-spacing-l);
+  border-radius: var(--kirby-border-radius-xs);
 }
 
-.color-box {
-  background-color: var(--kirby-white);
-  border: 1px solid var(--kirby-medium);
+.system-colors .color-swatch {
+  border: var(--kirby-spacing-xxxxs) solid var(--kirby-medium);
 }
 
-.text-color-box {
-  @extend .color-box;
-
+.decoration-ramp {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-
-  @each $color-name, $color-value in utils.$text-colors {
-    &.#{$color-name} {
-      background-color: var(--kirby-text-color-#{$color-name}-contrast);
-      color: var(--kirby-text-color-#{$color-name});
-
-      .color-values {
-        color: inherit;
-
-        dt:first-of-type,
-        dd:first-of-type {
-          color: inherit;
-        }
-      }
-    }
-  }
+  gap: var(--kirby-spacing-xxs);
 }
 
-.color-samples {
-  position: relative;
-  height: var(--kirby-spacing-xxxl);
-  width: var(--kirby-spacing-xxxl);
-  max-width: var(--kirby-spacing-xxxl);
-  margin-right: var(--kirby-spacing-xl);
-  margin-bottom: var(--kirby-spacing-xl);
-  flex: 1 0 auto;
-
-  .color-sample {
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-    height: 100%;
-    width: 100%;
-    margin-top: auto;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-
-    &:nth-child(2) {
-      top: var(--kirby-spacing-xxs);
-      left: var(--kirby-spacing-xxs);
-      z-index: 2;
-    }
-
-    &:nth-child(3) {
-      top: var(--kirby-spacing-s);
-      left: var(--kirby-spacing-s);
-      z-index: 1;
-    }
-  }
+.decoration-swatch {
+  display: block;
+  width: var(--kirby-spacing-l);
+  height: var(--kirby-spacing-l);
+  border-radius: var(--kirby-border-radius-xs);
+  cursor: pointer;
+  transition: transform var(--kirby-transition-duration-quick);
 }
 
-.color-sample-flex {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-
-  pre {
-    min-width: 250px;
-    flex-grow: 1;
-  }
-}
-
-.color-sample-example {
-  border-radius: var(--kirby-spacing-s);
-  margin: 0.5em 0;
-  margin-right: var(--kirby-spacing-s);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-  min-height: 140px;
-  min-width: 140px;
-
-  > * {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.color-sample-on-text {
-  grid-column: 1 / span 2;
-  background-color: transparent;
-}
-
-.color-name {
-  margin-bottom: var(--kirby-spacing-xxxs);
-  width: 100%;
-}
-
-.color-values {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  color: var(--kirby-semi-dark);
-  flex: 0 0 100px;
-  margin-top: 0;
-
-  dt:first-of-type,
-  dd:first-of-type {
-    color: var(--kirby-black);
-  }
-}
-
-.color-palette {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: var(--kirby-spacing-m);
-  list-style: none;
-  padding: 0;
-  margin: 0 0 var(--kirby-spacing-xl);
-
-  li {
-    display: flex;
-    flex-wrap: wrap;
-    padding: var(--kirby-spacing-s);
-    min-height: var(--kirby-spacing-xxxl);
-    box-sizing: content-box;
-    cursor: pointer;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-    }
-  }
-}
-
-.text-color-palette {
-  @extend .color-palette;
-
-  li {
-    cursor: inherit;
-  }
-
-  li:hover {
-    transform: inherit;
-    box-shadow: inherit;
-  }
-}
-
-.color-sample-wrapper {
-  background-color: var(--kirby-white);
-  border: 1px solid var(--kirby-medium);
-  padding: var(--kirby-spacing-s);
-  overflow-x: auto;
-  margin-bottom: var(--kirby-spacing-s);
-}
-
-@each $color, $color-ramp in utils.$decoration-colors {
-  @each $shade, $color-value in $color-ramp {
-    .#{$color}-#{$shade} {
-      background-color: var(--kirby-decoration-color-#{$color}-#{$shade});
-    }
-  }
-}
-
-.color-palette-ramps {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--kirby-spacing-m);
-  margin-bottom: var(--kirby-spacing-xl);
-
-  .color-box {
-    padding: var(--kirby-spacing-s);
-    grid-column-start: 1;
-  }
-
-  dl {
-    display: grid;
-    justify-items: center;
-    gap: var(--kirby-spacing-xxs);
-
-    dd {
-      grid-row: 1;
-      text-wrap: nowrap;
-      margin-inline-start: 0;
-      font-size: var(--kirby-font-size-xs);
-    }
-
-    dt {
-      min-height: 2.5rem;
-      min-width: 2.5rem;
-      border-radius: var(--kirby-spacing-xxxs);
-      position: relative;
-
-      @include mini-toast.copied;
-    }
-  }
+.decoration-table tr:has(.decoration-swatch:hover) .decoration-swatch:hover {
+  transform: scale(110%);
 }
