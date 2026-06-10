@@ -107,12 +107,13 @@
   --kirby-focus-ring-color: #{colors.$focus-ring-color};
   --kirby-focus-ring-sm-inset:
     0 0 0 2px var(--kirby-focus-ring-color) inset,
-    0 0 0 3px var(--kirby-background-color, #fff) inset;
+    0 0 0 3px var(--kirby-background-color, var(--kirby-white)) inset;
   --kirby-focus-ring-md-inset:
     0 0 0 2px var(--kirby-focus-ring-color) inset,
-    0 0 0 4px var(--kirby-background-color, #fff) inset;
+    0 0 0 4px var(--kirby-background-color, var(--kirby-white)) inset;
   --kirby-focus-ring-md-outer:
-    0 0 0 2px var(--kirby-background-color, #fff), 0 0 0 4px var(--kirby-focus-ring-color);
+    0 0 0 2px var(--kirby-background-color, var(--kirby-white)),
+    0 0 0 4px var(--kirby-focus-ring-color);
 }
 
 @mixin transition-easings() {
