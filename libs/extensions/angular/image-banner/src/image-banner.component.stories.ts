@@ -1,4 +1,9 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import {
+  argsToTemplate,
+  componentWrapperDecorator,
+  type Meta,
+  type StoryObj,
+} from '@storybook/angular';
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
@@ -224,5 +229,19 @@ export const ImageError: Story = {
     bodyText: 'This is the body text.',
     imageError: handleImageError,
     imagePath: 'assets/images/does-not-exist.jpg',
+  },
+};
+
+export const Focused: Story = {
+  args: {
+    title: 'Focused Image Banner',
+    bodyText: 'This is the body text.',
+    imagePath: 'assets/images/leaves.jpg',
+    backgroundBlur: 'dark',
+  },
+  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
+  play: async ({ canvasElement }) => {
+    const link = canvasElement.querySelector('.breakout') as HTMLElement;
+    link?.focus();
   },
 };
