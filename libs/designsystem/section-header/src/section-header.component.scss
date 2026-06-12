@@ -14,6 +14,9 @@
     min-height: 0;
     z-index: initial;
     align-items: flex-end;
+    padding-left: utils.size(
+      's'
+    ); // Padding left is fixed here, so safe-area is not added. Handled in page instead.
 
     @include section-header.typography;
   }
