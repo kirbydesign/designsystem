@@ -4,15 +4,30 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 const TEXT_RESIZE_THRESHOLD = parseFloat(DesignTokenHelper.textResizeThreshold());
 const TEXT_RESIZE_CLASS = 'kirby-trt';
 const BASE_FONT_SIZE_PX = parseInt(DesignTokenHelper.baseFontSizePx());
+
+/**
+ * Element width combines both signals: rem scaling (desktop/iOS) and env(preferred-text-scale)
+ * (Android). On platforms where env() is unsupported, the fallback `1` makes it a no-op multiplier.
+ */
 const OBSERVER_ELEMENT_STYLES =
-  'position:absolute;width:1rem;height:1rem;top:-9999px;visibility:hidden;pointer-events:none';
+  'position:absolute;width:calc(1rem * env(preferred-text-scale, 1));height:1rem;top:-9999px;visibility:hidden;pointer-events:none';
 
 /**
  * Detects when text is resized above a certain threshold in browser/OS settings and toggles a
  * `kirby-trt` class on the root html element.
  *
- * Uses a `ResizeObserver` on a hidden rem-sized element. When the user changes text size, the element's pixel size changes,
- * triggering the observer.
+ * Uses a `ResizeObserver` on a hidden element sized with `calc(1rem * env(preferred-text-scale, 1))`.
+ * This combines two detections into one element:
+ *
+ * - **rem scaling** — on desktop browsers and iOS, changing text size modifies the root font-size,
+ *   which changes `1rem` and triggers the observer.
+ *
+ * - **`env(preferred-text-scale)`** — on platforms that support this CSS environment variable
+ *   (e.g. Android Chrome/WebView), the multiplier reflects the OS/browser text scale factor.
+ *   When the user changes font size in system settings, the env value updates and the element resizes.
+ *
+ * On platforms where `env(preferred-text-scale)` is not supported, the value falls back to `1`,
+ * making the width equivalent to `1rem`.
  *
  * @example
  * ```scss
@@ -23,8 +38,6 @@ const OBSERVER_ELEMENT_STYLES =
  * }
  * ```
  *
- * If `env(preferred-text-scale)` from the CSS Environment Variables spec matures,
- * it might replace some of this functionality.
  * @see https://drafts.csswg.org/css-env-1/#preferred-text-scale
  */
 @Injectable({ providedIn: 'root' })
@@ -41,10 +54,10 @@ export class TextResizeObserverService implements OnDestroy {
     this.textResizeObserverElement.style.cssText = OBSERVER_ELEMENT_STYLES;
     document.body.appendChild(this.textResizeObserverElement);
 
-    this.resizeObserver = new ResizeObserver(this.updateTextScaleClass);
+    this.resizeObserver = new ResizeObserver(this.onObservedResize);
     this.resizeObserver.observe(this.textResizeObserverElement);
 
-    this.updateTextScaleClass();
+    this.onObservedResize();
   }
 
   ngOnDestroy(): void {
@@ -52,9 +65,9 @@ export class TextResizeObserverService implements OnDestroy {
     this.textResizeObserverElement?.remove();
   }
 
-  private updateTextScaleClass = (): void => {
-    const remInPx = this.textResizeObserverElement?.offsetWidth ?? BASE_FONT_SIZE_PX;
-    const scale = remInPx / BASE_FONT_SIZE_PX;
+  private onObservedResize = (): void => {
+    const widthInPx = this.textResizeObserverElement?.offsetWidth ?? BASE_FONT_SIZE_PX;
+    const scale = widthInPx / BASE_FONT_SIZE_PX;
     document.documentElement.classList.toggle(TEXT_RESIZE_CLASS, scale > TEXT_RESIZE_THRESHOLD);
   };
 }
