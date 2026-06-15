@@ -187,3 +187,9 @@ ion-item {
     --inner-padding-end: #{utils.size('xxs')};
   }
 }
+
+:host-context(kirby-card-header) {
+  ion-item {
+    --background: transparent;
+  }
+}
