@@ -95,11 +95,13 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
       this.renderer.appendChild(this.elementRef.nativeElement.parentElement, this.hostElementClone);
     }
 
-    this.renderer.setStyle(
-      this.hostElementClone,
-      'width',
-      `${this.elementRef.nativeElement.clientWidth}px`
-    );
+    // Use the parent element's width to determine available space.
+    // Using the host element's own clientWidth causes a feedback loop:
+    // the element shrink-wraps to its text content, so when font scales down
+    // the element gets narrower, making the clone narrower, which causes
+    // unnecessary further downscaling.
+    const availableWidth = this.elementRef.nativeElement.parentElement.clientWidth;
+    this.renderer.setStyle(this.hostElementClone, 'width', `${availableWidth}px`);
 
     const fallbackSize = this.headingSizes[this.headingSizes.length - 1];
     const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
@@ -111,8 +113,14 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   private canFitHeading(size: HeadingSize) {
     this.setSize(this.hostElementClone, size);
-    const lines = this.hostElementClone.clientHeight / parseInt(size.lineHeight);
-    return lines <= this.config.maxLines;
+    // Use getComputedStyle to get the resolved line-height in pixels.
+    // The token line-height may be a unitless ratio (e.g. 1.1875) rather than
+    // a pixel value, so parseInt would return 1 and break the calculation.
+    const computedLineHeight = parseFloat(
+      getComputedStyle(this.hostElementClone as HTMLElement).lineHeight
+    );
+    const lines = this.hostElementClone.clientHeight / computedLineHeight;
+    return Math.round(lines) <= this.config.maxLines;
   }
 
   private generateHostElementClone(): Element {

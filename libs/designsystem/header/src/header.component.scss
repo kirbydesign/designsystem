@@ -132,6 +132,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
   max-width: calc(100% - 2 * $margin-inline);
 }
 
