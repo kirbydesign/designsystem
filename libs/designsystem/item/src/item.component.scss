@@ -33,10 +33,16 @@
 }
 
 ion-item {
-  &::part(native):focus-visible {
-    box-shadow:
-      0 0 0 2px utils.$focus-ring-color inset,
-      0 0 0 4px utils.get-color('white') inset;
+  &::part(native) {
+    border-radius: var(--kirby-content-border-top-radius, 0)
+      var(--kirby-content-border-top-radius, 0) var(--kirby-content-border-bottom-radius, 0)
+      var(--kirby-content-border-bottom-radius, 0);
+
+    &:focus-visible {
+      box-shadow:
+        0 0 0 2px utils.$focus-ring-color inset,
+        0 0 0 4px utils.get-color('white') inset;
+    }
   }
 
   @include interaction-state.apply-hover-ionic('xxxs');
@@ -179,35 +185,5 @@ ion-item {
 :host(.disclosure) {
   ion-item {
     --inner-padding-end: #{utils.size('xxs')};
-  }
-}
-
-:host-context(kirby-list-item:first-of-type),
-:host-context(kirby-card):first-child {
-  ion-item::part(native) {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
-  }
-}
-
-:host-context(kirby-list-item:last-of-type),
-:host-context(kirby-card):last-child {
-  ion-item::part(native) {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
-  }
-}
-
-:host-context(.has-header kirby-list-item:first-of-type) {
-  ion-item::part(native) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-
-:host-context(.has-footer kirby-list-item:last-of-type) {
-  ion-item::part(native) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
   }
 }
