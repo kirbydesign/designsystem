@@ -3,6 +3,11 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent, IconComponent } from '@kirbydesign/designsystem';
+import {
+  CardComponent,
+  CardFooterComponent,
+  CardHeaderComponent,
+} from '@kirbydesign/designsystem/card';
 // eslint-disable-next-line no-restricted-imports
 import { focusSelectableItem } from '../../.storybook/story-helpers';
 import { ListExampleComponent } from '~/app/examples/list-example/list-example.component';
@@ -19,6 +24,9 @@ const meta: Meta<ListComponent> = {
         ButtonComponent,
         IconComponent,
         ListExampleComponent,
+        CardComponent,
+        CardHeaderComponent,
+        CardFooterComponent,
       ],
     }),
   ],
@@ -184,8 +192,8 @@ export const ListWithIcons: Story = {
   }),
 };
 
-export const ListWithSelectableItemsFirstFocused: Story = {
-  name: 'List with Selectable Items - First Focused',
+export const ListWithItemsFirstFocused: Story = {
+  name: 'List with Items - First Focused',
   args: {
     items: [
       {
@@ -210,15 +218,15 @@ export const ListWithSelectableItemsFirstFocused: Story = {
   play: focusSelectableItem(0),
 };
 
-export const ListWithSelectableItemsSecondFocused: Story = {
-  name: 'List with Selectable Items - Second Focused',
-  ...ListWithSelectableItemsFirstFocused,
+export const ListWithItemsSecondFocused: Story = {
+  name: 'List with Items - Second Focused',
+  ...ListWithItemsFirstFocused,
   play: focusSelectableItem(1),
 };
 
-export const ListWithSelectableItemsLastFocused: Story = {
-  name: 'List with Selectable Items - Last Focused',
-  ...ListWithSelectableItemsFirstFocused,
+export const ListWithItemsLastFocused: Story = {
+  name: 'List with Items - Last Focused',
+  ...ListWithItemsFirstFocused,
   play: focusSelectableItem(2),
 };
 
@@ -226,4 +234,173 @@ export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-list-example></cookbook-list-example>`,
   }),
+};
+
+export const ListInCardFirstFocused: Story = {
+  name: 'List in Card - First Focused',
+  args: {
+    items: [
+      {
+        title: 'First selectable item',
+      },
+      {
+        title: 'Second selectable item',
+      },
+      {
+        title: 'Third selectable item',
+      },
+    ],
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-card><kirby-list shape="none" ${argsToTemplate(args)}>
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+      <p class="kirby-item-title">{{item.title}}</p>
+    </kirby-item>
+  </kirby-list></kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const ListInCardSecondFocused: Story = {
+  name: 'List in Card - Second Focused',
+  ...ListInCardFirstFocused,
+  play: focusSelectableItem(1),
+};
+
+export const ListInCardLastFocused: Story = {
+  name: 'List in Card - Last Focused',
+  ...ListInCardFirstFocused,
+  play: focusSelectableItem(2),
+};
+
+export const ListInCardWithHeaderFirstFocused: Story = {
+  name: 'List in Card with Header - First Focused',
+  args: {
+    items: [
+      {
+        title: 'First selectable item',
+      },
+      {
+        title: 'Second selectable item',
+      },
+      {
+        title: 'Third selectable item',
+      },
+    ],
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-card><kirby-card-header>Header</kirby-card-header><kirby-list shape="none" ${argsToTemplate(args)}>
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+      <p class="kirby-item-title">{{item.title}}</p>
+    </kirby-item>
+  </kirby-list></kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const ListInCardWithHeaderLastFocused: Story = {
+  name: 'List in Card with Header - Last Focused',
+  ...ListInCardWithHeaderFirstFocused,
+  play: focusSelectableItem(2),
+};
+
+export const ListInCardWithFooterFirstFocused: Story = {
+  name: 'List in Card with Footer - First Focused',
+  args: {
+    items: [
+      {
+        title: 'First selectable item',
+      },
+      {
+        title: 'Second selectable item',
+      },
+      {
+        title: 'Third selectable item',
+      },
+    ],
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-card><kirby-card-footer>Footer</kirby-card-footer><kirby-list shape="none" ${argsToTemplate(args)}>
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+      <p class="kirby-item-title">{{item.title}}</p>
+    </kirby-item>
+  </kirby-list></kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const ListInCardWithFooterLastFocused: Story = {
+  name: 'List in Card with Footer - Last Focused',
+  ...ListInCardWithFooterFirstFocused,
+  play: focusSelectableItem(2),
+};
+
+export const ListInCardWithContentAboveFirstFocused: Story = {
+  name: 'List in Card with Content Above - First Focused',
+  args: {
+    items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+    <kirby-card>
+      <div style="padding: 16px;">
+        <p>Some arbitrary content above the list.</p>
+      </div>
+      <kirby-list shape="none" ${argsToTemplate(args)}>
+        <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+          <p class="kirby-item-title">{{item.title}}</p>
+        </kirby-item>
+      </kirby-list>
+    </kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const ListInCardWithContentBelowLastFocused: Story = {
+  name: 'List in Card with Content Below - Last Focused',
+  args: {
+    items: [{ title: 'First item' }, { title: 'Second item' }, { title: 'Third item' }],
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+    <kirby-card>
+      <kirby-list shape="none" ${argsToTemplate(args)}>
+        <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+          <p class="kirby-item-title">{{item.title}}</p>
+        </kirby-item>
+      </kirby-list>
+      <div style="padding: 16px;">
+        <p>Some arbitrary content below the list.</p>
+      </div>
+    </kirby-card>`,
+  }),
+  play: focusSelectableItem(2),
+};
+
+export const ListWithStandAloneItemFocused: Story = {
+  name: 'List with Stand Alone Item - Focused',
+  args: {
+    items: [
+      { title: 'First item', isStandAlone: false },
+      { title: 'Second item', isStandAlone: false },
+      { title: 'Stand alone item', isStandAlone: true },
+    ],
+    getStandAloneByProperty: 'isStandAlone',
+    showDivider: true,
+    shape: 'rounded',
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-list ${argsToTemplate(args)}>
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
+      <p class="kirby-item-title">{{item.title}}</p>
+    </kirby-item>
+  </kirby-list>`,
+  }),
+  play: focusSelectableItem(2),
 };
