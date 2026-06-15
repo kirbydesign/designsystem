@@ -1,6 +1,11 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { HeaderComponent } from '@kirbydesign/designsystem/header';
+import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
+import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
+import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { HeaderExampleComponent } from '~/app/examples/header-example/header-example.component';
@@ -10,7 +15,15 @@ const meta: Meta<HeaderComponent> = {
   title: 'Components / Header',
   decorators: [
     moduleMetadata({
-      imports: [HeaderComponent, HeaderExampleComponent],
+      providers: [ModalNavigationService],
+      imports: [
+        RouterTestingModule,
+        HeaderComponent,
+        HeaderExampleComponent,
+        AppComponent,
+        PageComponent,
+        PageContentComponent,
+      ],
     }),
   ],
   parameters: {
@@ -41,5 +54,44 @@ export const Default: Story = {
 export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-header-example></cookbook-header-example>`,
+  }),
+};
+
+/**
+ * Acceptance tests for titleMaxLines scaling behavior.
+ * Each scenario verifies that the title font size is only scaled down
+ * when the text genuinely cannot fit within the configured max lines.
+ */
+export const TitleMaxLinesScaling: Story = {
+  parameters: {
+    chromatic: {
+      modes: {
+        mobile: {
+          viewport: 'small',
+        },
+      },
+    },
+  },
+  render: () => ({
+    template: `
+      <kirby-app>
+        <kirby-page title="titleMaxLines scaling">
+          <kirby-page-content>
+            <kirby-header title="min titel" [titleMaxLines]="1" subtitle1="titleMaxLines=1"></kirby-header>
+            <kirby-header title="min titel" [titleMaxLines]="2" subtitle1="titleMaxLines=2"></kirby-header>
+            <kirby-header title="min titel" [titleMaxLines]="3" subtitle1="titleMaxLines=3"></kirby-header>
+            <kirby-header title="min titel" subtitle1="no max lines"></kirby-header>
+
+            <kirby-header title="Mobile banking" [titleMaxLines]="1" subtitle1="titleMaxLines=1, starts with M"></kirby-header>
+            <kirby-header title="mobile banking" [titleMaxLines]="1" subtitle1="titleMaxLines=1, starts with m"></kirby-header>
+
+            <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="1" subtitle1="titleMaxLines=1, medium title"></kirby-header>
+            <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="2" subtitle1="titleMaxLines=2, medium title"></kirby-header>
+
+            <kirby-header title="Fall prices consulting quarterly municipal appeal inverse expenses market value credit quality market exposure potential appeal funds debt downturn NASDAQ Fitch 401k appeal corporate bonds municipal Nikkei market index treasury lucrative holder fiat corporation funds default interest rollover 401k exchange traded funds dividends inverse credit investment capitalization" [titleMaxLines]="2" subtitle1="titleMaxLines=2, very long title"></kirby-header>
+          </kirby-page-content>
+        </kirby-page>
+      </kirby-app>
+    `,
   }),
 };
