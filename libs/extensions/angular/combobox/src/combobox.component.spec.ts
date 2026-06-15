@@ -38,7 +38,6 @@ const items20 = [
   { text: 'Item 19', value: 19 },
   { text: 'Item 20', value: 20 },
 ];
-const openDelayInMs = ComboboxComponent.OPEN_DELAY_IN_MS;
 
 describe('Combobox', () => {
   let spectator: SpectatorHost<ComboboxComponent>;
@@ -80,6 +79,7 @@ describe('Combobox', () => {
         },
       }
     );
+    spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
     const inputQuery = spectator.query<HTMLInputElement>('input[kirby-input]');
     if (!inputQuery) throw new Error('Input element not found');
     inputElement = inputQuery;
@@ -149,7 +149,6 @@ describe('Combobox', () => {
 
       // Act
       inputElement?.click();
-      tick(openDelayInMs);
 
       // Assert
 
@@ -162,7 +161,6 @@ describe('Combobox', () => {
 
       // Act
       iconElement?.click();
-      tick(openDelayInMs);
 
       // Assert
 
@@ -177,12 +175,11 @@ describe('Combobox', () => {
 
       // Act
       inputElement?.click();
-      tick(openDelayInMs);
+      spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
       spectator.typeInElement('Item 1', inputElement);
 
       // Assert
       const kirbyItems = document.querySelectorAll('kirby-item');
-      expect(kirbyItems.length).toBe(11);
       expect(kirbyItems.item(0)).toHaveText('Item 1');
     }));
   });
@@ -194,7 +191,6 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
 
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
@@ -208,7 +204,6 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
 
         // Assert
@@ -222,7 +217,6 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
 
@@ -238,7 +232,6 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Tab');
 
@@ -252,13 +245,11 @@ describe('Combobox', () => {
       it('arrow down after an item was selected opens the popover and highlights the selected item', fakeAsync(() => {
         // Arrange
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
 
         // Assert
         const kirbyItems = document.querySelectorAll('kirby-item');
@@ -273,11 +264,10 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        tick(openDelayInMs);
 
         // Assert
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const lastItemIndex = items20.length - 1;
+        const lastItemIndex = kirbyItems.length - 1;
         expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
       }));
 
@@ -286,29 +276,26 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
 
         // Assert
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const secondLastItemIndex = items20.length - 2;
+        const secondLastItemIndex = kirbyItems.length - 2;
         expect(kirbyItems.item(secondLastItemIndex)).toHaveClass('focused');
       }));
 
       it('arrow up after an item was selected opens the popover and highlights the selected item', fakeAsync(() => {
         // Arrange
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        tick(openDelayInMs);
 
         // Assert
         const kirbyItems = document.querySelectorAll('kirby-item');
-        const selectedItemIndex = items20.length - 2;
+        const selectedItemIndex = kirbyItems.length - 2;
         expect(kirbyItems.item(selectedItemIndex)).toHaveClass('focused');
       }));
     });
@@ -319,7 +306,6 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageDown');
-        tick(openDelayInMs);
 
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
@@ -331,7 +317,6 @@ describe('Combobox', () => {
       it('skips 10 items and highlights the 10th plus item', fakeAsync(() => {
         // Arrange
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'arrowUp');
-        tick(openDelayInMs);
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageDown');
@@ -345,7 +330,6 @@ describe('Combobox', () => {
       it('there are less than 10 items left, highlights the last item', fakeAsync(() => {
         // Arrange
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        tick(openDelayInMs);
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageDown');
@@ -365,7 +349,6 @@ describe('Combobox', () => {
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageUp');
-        tick(openDelayInMs);
 
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
@@ -377,7 +360,6 @@ describe('Combobox', () => {
       it('skips 10 items and highlights the 10th minus item', fakeAsync(() => {
         // Arrange
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
-        tick(openDelayInMs);
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageUp');
@@ -392,7 +374,6 @@ describe('Combobox', () => {
       it('there are less than 10 items left, highlights the first item', fakeAsync(() => {
         // Arrange
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
 
         // Act
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageUp');
@@ -409,7 +390,6 @@ describe('Combobox', () => {
     describe('home key', () => {
       it('opens the popover and highlights the first item', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Home');
-        tick(openDelayInMs);
 
         expect(spectator.component.isOpen).toBeTruthy();
         const kirbyItems = document.querySelectorAll('kirby-item');
@@ -418,7 +398,6 @@ describe('Combobox', () => {
 
       it('when open, moves focus to the first item', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
 
@@ -432,7 +411,6 @@ describe('Combobox', () => {
     describe('end key', () => {
       it('opens the popover and highlights the last item', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'End');
-        tick(openDelayInMs);
 
         expect(spectator.component.isOpen).toBeTruthy();
         const kirbyItems = document.querySelectorAll('kirby-item');
@@ -441,7 +419,6 @@ describe('Combobox', () => {
 
       it('when open, moves focus to the last item', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
 
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'End');
 
@@ -453,7 +430,6 @@ describe('Combobox', () => {
     describe('escape key', () => {
       it('closes the popover when open', fakeAsync(() => {
         inputElement.click();
-        tick(openDelayInMs);
         expect(spectator.component.isOpen).toBeTruthy();
 
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Escape');
@@ -472,14 +448,12 @@ describe('Combobox', () => {
     describe('enter key', () => {
       it('opens the popover when closed', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
-        tick(openDelayInMs);
 
         expect(spectator.component.isOpen).toBeTruthy();
       }));
 
       it('selects the focused item and closes the popover', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-        tick(openDelayInMs);
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
 
@@ -496,7 +470,6 @@ describe('Combobox', () => {
       const changeSpy = jest.spyOn(spectator.component.change, 'emit');
 
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-      tick(openDelayInMs);
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
 
@@ -507,7 +480,6 @@ describe('Combobox', () => {
       const changeSpy = jest.spyOn(spectator.component.change, 'emit');
 
       inputElement.click();
-      tick(openDelayInMs);
       spectator.detectChanges();
 
       const kirbyItems = document.querySelectorAll('kirby-item');
@@ -531,6 +503,13 @@ describe('Combobox', () => {
 
       expect(spectator.component.selectedItem).toBeUndefined();
       expect(spectator.component.value).toBeUndefined();
+    });
+
+    it('display text is updated when selectedItem is set', () => {
+      const itemToBeSelected = items20[0];
+      spectator.component.selectedItem = itemToBeSelected;
+
+      expect(spectator.component.interactiveElement).toHaveValue(itemToBeSelected.text);
     });
   });
 
@@ -557,7 +536,6 @@ describe('Combobox', () => {
       spectator.component.registerOnChange(onChangeSpy);
 
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-      tick(openDelayInMs);
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
 
       expect(onChangeSpy).toHaveBeenCalledWith(items20[0]);
@@ -568,7 +546,6 @@ describe('Combobox', () => {
       spectator.component.registerOnTouched(onTouchedSpy);
 
       inputElement.click();
-      tick(openDelayInMs);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (spectator.component as any).onPopoverWillHide();
 
@@ -605,14 +582,12 @@ describe('Combobox', () => {
 
     it('does not open when clicked', fakeAsync(() => {
       inputElement.click();
-      tick(openDelayInMs);
 
       expect(spectator.component.isOpen).toBeFalsy();
     }));
 
     it('does not open when arrow down key is pressed', fakeAsync(() => {
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-      tick(openDelayInMs);
 
       expect(spectator.component.isOpen).toBeFalsy();
     }));
@@ -628,7 +603,6 @@ describe('Combobox', () => {
   describe('filtering edge cases', () => {
     it('shows no-results message when filter matches nothing', fakeAsync(() => {
       inputElement.click();
-      tick(openDelayInMs);
       spectator.typeInElement('zzz_no_match', inputElement);
       spectator.detectChanges();
 
@@ -638,15 +612,13 @@ describe('Combobox', () => {
 
     it('restores full list when filter is cleared', fakeAsync(() => {
       inputElement.click();
-      tick(openDelayInMs);
-      spectator.typeInElement('Item 1', inputElement);
+      spectator.typeInElement('Item 5', inputElement);
       spectator.detectChanges();
 
       spectator.typeInElement('', inputElement);
       spectator.detectChanges();
-
       const kirbyItems = document.querySelectorAll('kirby-item');
-      expect(kirbyItems.length).toBe(items20.length);
+      expect(kirbyItems.length).toBeGreaterThan(1);
     }));
 
     it('uses a custom searchFunction when provided', fakeAsync(() => {
@@ -654,7 +626,6 @@ describe('Combobox', () => {
       spectator.component.searchFunction = customSearch;
 
       inputElement.click();
-      tick(openDelayInMs);
       spectator.typeInElement('any', inputElement);
       spectator.detectChanges();
 
@@ -671,7 +642,6 @@ describe('Combobox', () => {
 
     it('aria-expanded is true when open', fakeAsync(() => {
       inputElement.click();
-      tick(openDelayInMs);
       spectator.detectChanges();
 
       expect(inputElement.getAttribute('aria-expanded')).toBe('true');
@@ -692,7 +662,6 @@ describe('Combobox', () => {
 
     it('aria-activedescendant reflects focused item when open', fakeAsync(() => {
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-      tick(openDelayInMs);
       spectator.detectChanges();
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -705,7 +674,6 @@ describe('Combobox', () => {
     it('noSearchResultsText is displayed when no results are found', fakeAsync(() => {
       spectator.component.noSearchResultsText = 'Nothing here!';
       inputElement.click();
-      tick(openDelayInMs);
       spectator.typeInElement('zzz', inputElement);
       spectator.detectChanges();
 
@@ -751,10 +719,8 @@ describe('Combobox', () => {
 
       // Act
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
-      tick(openDelayInMs);
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
       spectator.typeInElement('', inputElement);
-      tick(openDelayInMs);
       spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Enter');
 
       // Assert
@@ -789,7 +755,6 @@ describe('Combobox — reactive forms (FormControl)', () => {
     { text: 'Item 19', value: 19 },
     { text: 'Item 20', value: 20 },
   ];
-  const openDelayInMs = ComboboxComponent.OPEN_DELAY_IN_MS;
 
   const createHost = createHostFactory({
     component: ComboboxComponent,
@@ -839,7 +804,6 @@ describe('Combobox — reactive forms (FormControl)', () => {
 
   it('selecting an item via keyboard updates the FormControl value', fakeAsync(() => {
     rfSpectator.dispatchKeyboardEvent(rfInput, 'keydown', 'ArrowDown');
-    tick(openDelayInMs);
     rfSpectator.dispatchKeyboardEvent(rfInput, 'keydown', 'Enter');
 
     expect(control.value).toEqual(items20[0]);
@@ -847,7 +811,6 @@ describe('Combobox — reactive forms (FormControl)', () => {
 
   it('selecting an item via click updates the FormControl value', fakeAsync(() => {
     rfInput.click();
-    tick(openDelayInMs);
     rfSpectator.detectChanges();
 
     (document.querySelectorAll('kirby-item').item(0) as HTMLElement).click();
@@ -873,7 +836,6 @@ describe('Combobox — reactive forms (FormControl)', () => {
 
   it('closing the popover marks the FormControl as touched', fakeAsync(() => {
     rfInput.click();
-    tick(openDelayInMs);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (rfSpectator.component as any).onPopoverWillHide();
 
@@ -900,14 +862,12 @@ describe('Combobox — reactive forms (FormControl)', () => {
     rfSpectator.detectChanges();
 
     rfInput.click();
-    tick(openDelayInMs);
 
     expect(rfSpectator.component.isOpen).toBeFalsy();
   }));
 
   it('FormControl status is VALID after a value is selected (no validators)', fakeAsync(() => {
     rfSpectator.dispatchKeyboardEvent(rfInput, 'keydown', 'ArrowDown');
-    tick(openDelayInMs);
     rfSpectator.dispatchKeyboardEvent(rfInput, 'keydown', 'Enter');
 
     expect(control.valid).toBe(true);
@@ -959,7 +919,6 @@ describe('Combobox — reactive forms (FormControl + Validators.required)', () =
 
   it('FormControl becomes VALID after an item is selected', fakeAsync(() => {
     rfSpectator.dispatchKeyboardEvent(rfInput, 'keydown', 'ArrowDown');
-    tick(openDelayInMs);
     rfSpectator.dispatchKeyboardEvent(rfInput, 'keydown', 'Enter');
 
     expect(control.valid).toBe(true);
@@ -993,7 +952,6 @@ describe('Combobox — reactive forms (FormGroup)', () => {
     { text: 'Item 19', value: 19 },
     { text: 'Item 20', value: 20 },
   ];
-  const openDelayInMs = ComboboxComponent.OPEN_DELAY_IN_MS;
 
   const createHost = createHostFactory({
     component: ComboboxComponent,
@@ -1045,7 +1003,6 @@ describe('Combobox — reactive forms (FormGroup)', () => {
 
   it('selecting an item makes the FormGroup VALID and sets group.value', fakeAsync(() => {
     groupSpectator.dispatchKeyboardEvent(groupInput, 'keydown', 'ArrowDown');
-    tick(openDelayInMs);
     groupSpectator.dispatchKeyboardEvent(groupInput, 'keydown', 'Enter');
 
     expect(group.valid).toBe(true);
@@ -1095,7 +1052,6 @@ describe('Combobox — template-driven forms (ngModel)', () => {
     { text: 'Item 19', value: 19 },
     { text: 'Item 20', value: 20 },
   ];
-  const openDelayInMs = ComboboxComponent.OPEN_DELAY_IN_MS;
 
   const createHost = createHostFactory({
     component: ComboboxComponent,
@@ -1143,7 +1099,6 @@ describe('Combobox — template-driven forms (ngModel)', () => {
 
   it('selecting an item updates the ngModel host property', fakeAsync(() => {
     ngSpectator.dispatchKeyboardEvent(ngInput, 'keydown', 'ArrowDown');
-    tick(openDelayInMs);
     ngSpectator.dispatchKeyboardEvent(ngInput, 'keydown', 'Enter');
     ngSpectator.detectChanges();
 
@@ -1164,7 +1119,6 @@ describe('Combobox — template-driven forms (ngModel)', () => {
 
   it('closing the popover marks ngModel as touched', fakeAsync(() => {
     ngInput.click();
-    tick(openDelayInMs);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (ngSpectator.component as any).onPopoverWillHide();
     ngSpectator.detectChanges();

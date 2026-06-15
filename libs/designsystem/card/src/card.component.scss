@@ -93,10 +93,33 @@ $default-border-outline: 1px solid utils.get-color('medium');
 }
 
 .content-wrapper {
+  @include utils.slotted('*') {
+    --kirby-content-border-top-radius: 0;
+    --kirby-content-border-bottom-radius: 0;
+  }
+  @include utils.slotted(':first-child') {
+    --kirby-content-border-top-radius: var(--kirby-border-radius-n);
+  }
+  @include utils.slotted(':last-child') {
+    --kirby-content-border-bottom-radius: var(--kirby-border-radius-n);
+  }
+
   &.padding {
     padding-top: var(--kirby-card-padding-top, utils.size('s'));
     padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
     padding-inline: utils.size('s');
+  }
+}
+
+:host:has(kirby-card-header) .content-wrapper {
+  @include utils.slotted(':first-child') {
+    --kirby-content-border-top-radius: 0;
+  }
+}
+
+:host:has(kirby-card-footer) .content-wrapper {
+  @include utils.slotted(':last-child') {
+    --kirby-content-border-bottom-radius: 0;
   }
 }
 

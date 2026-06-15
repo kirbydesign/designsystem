@@ -4,7 +4,11 @@ import { ItemComponent, ItemSize, LabelComponent } from '@kirbydesign/designsyst
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
-import { CardComponent } from '@kirbydesign/designsystem/card';
+import {
+  CardComponent,
+  CardFooterComponent,
+  CardHeaderComponent,
+} from '@kirbydesign/designsystem/card';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 // eslint-disable-next-line no-restricted-imports
@@ -17,6 +21,8 @@ const meta: Meta<ItemComponent> = {
     moduleMetadata({
       imports: [
         CardComponent,
+        CardHeaderComponent,
+        CardFooterComponent,
         CheckboxComponent,
         InputComponent,
         ItemComponent,
@@ -883,5 +889,68 @@ export const SelectableInCardSecondFocused: Story = {
 export const SelectableInCardLastFocused: Story = {
   ...SelectableInCardFirstFocused,
   name: 'Selectable in Card - Last Focused',
+  play: focusSelectableItem(2),
+};
+
+export const SelectableInCardWithHeaderFirstFocused: Story = {
+  name: 'Selectable in Card with Header - First Focused',
+  render: () => ({
+    template: `<kirby-card>
+    <kirby-card-header [flagged]="'success'" [hasPadding]="false">
+     <kirby-item>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+     </kirby-item>
+    </kirby-card-header>
+    <kirby-item [selectable]="true">First selectable item</kirby-item>
+    <kirby-item [selectable]="true">Second selectable item</kirby-item>
+    <kirby-item [selectable]="true">Third selectable item</kirby-item>
+</kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const SelectableInCardWithFooterLastFocused: Story = {
+  name: 'Selectable in Card with Footer - Last Focused',
+  render: () => ({
+    template: `<kirby-card>
+    <kirby-item [selectable]="true">First selectable item</kirby-item>
+    <kirby-item [selectable]="true">Second selectable item</kirby-item>
+    <kirby-item [selectable]="true">Third selectable item</kirby-item>
+    <kirby-card-footer>Footer</kirby-card-footer>
+</kirby-card>`,
+  }),
+  play: focusSelectableItem(2),
+};
+
+export const SelectableInCardWithContentAboveFirstFocused: Story = {
+  name: 'Selectable in Card with Content Above - First Focused',
+  render: () => ({
+    template: `<kirby-card>
+    <div style="padding: 16px;">
+      <p>Some arbitrary content above the items.</p>
+    </div>
+    <kirby-item [selectable]="true">First selectable item</kirby-item>
+    <kirby-item [selectable]="true">Second selectable item</kirby-item>
+    <kirby-item [selectable]="true">Third selectable item</kirby-item>
+</kirby-card>`,
+  }),
+  play: focusSelectableItem(0),
+};
+
+export const SelectableInCardWithContentBelowLastFocused: Story = {
+  name: 'Selectable in Card with Content Below - Last Focused',
+  render: () => ({
+    template: `<kirby-card>
+    <kirby-item [selectable]="true">First selectable item</kirby-item>
+    <kirby-item [selectable]="true">Second selectable item</kirby-item>
+    <kirby-item [selectable]="true">Third selectable item</kirby-item>
+    <div style="padding: 16px;">
+      <p>Some arbitrary content below the items.</p>
+    </div>
+</kirby-card>`,
+  }),
   play: focusSelectableItem(2),
 };
