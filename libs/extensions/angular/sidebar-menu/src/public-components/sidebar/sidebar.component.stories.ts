@@ -568,6 +568,6 @@ export const LoadingMenuItems: Story = {
   args: {
     ...Default.args,
     mainAreaContent:
-      '<h1>Sidebar with slow loading menu items</h1><p>The skeleton loader is shown until the menu items arrive.</p>',
+      '<h1>Sidebar with loading menu items</h1><p>The sidebar menu loader is shown instead of menu items.</p>',
   },
 };
