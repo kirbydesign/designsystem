@@ -1,12 +1,7 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-import { RouterTestingModule } from '@angular/router/testing';
-
 import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
-import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
-import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
-import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { HeaderExampleComponent } from '~/app/examples/header-example/header-example.component';
@@ -16,16 +11,7 @@ const meta: Meta<HeaderComponent> = {
   title: 'Components / Header',
   decorators: [
     moduleMetadata({
-      providers: [ModalNavigationService],
-      imports: [
-        RouterTestingModule,
-        HeaderComponent,
-        HeaderExampleComponent,
-        AppComponent,
-        PageComponent,
-        PageContentComponent,
-        FlagComponent,
-      ],
+      imports: [HeaderComponent, HeaderExampleComponent, FlagComponent],
     }),
   ],
   parameters: {
