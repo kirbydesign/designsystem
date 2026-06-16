@@ -20,13 +20,11 @@ a[modal-router-link],
     text-decoration: underline;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    &:focus-visible {
-      transition: interaction-state.transition();
-      box-shadow: var(--kirby-focus-ring-md-outer);
-      outline: none;
-      border-radius: $_focus-ring-border-radius;
-    }
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-outer);
+    outline: none;
+    border-radius: $_focus-ring-border-radius;
   }
 }
 

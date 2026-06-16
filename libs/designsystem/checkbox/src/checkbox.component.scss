@@ -116,22 +116,20 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   ion-checkbox {
-    @media (hover: hover) and (pointer: fine) {
-      &:focus-within {
-        --border-width: 0;
-        --border-color: transparent;
-        --border-color-checked: transparent;
-      }
+    &:focus-within {
+      --border-width: 0;
+      --border-color: transparent;
+      --border-color-checked: transparent;
+    }
 
-      &:focus-visible::part(container) {
-        outline: none;
-        padding: calc(
-          var(--kirby-checkbox-container-padding) + 1px
-        ); // Compensate for removed 1px border to prevent checkmark from growing in ion-checkbox
+    &:focus-visible::part(container) {
+      outline: none;
+      padding: calc(
+        var(--kirby-checkbox-container-padding) + 1px
+      ); // Compensate for removed 1px border to prevent checkmark from growing in ion-checkbox
 
-        transition: box-shadow #{interaction-state.$default-transition-duration} linear;
-        box-shadow: var(--kirby-focus-ring-sm-inset);
-      }
+      transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+      box-shadow: var(--kirby-focus-ring-sm-inset);
     }
 
     @include interaction-state.apply-hover {

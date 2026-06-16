@@ -81,11 +81,9 @@ $default-border-outline: 1px solid utils.get-color('medium');
     @include interaction-state.apply-hover('xxxs');
     @include interaction-state.apply-active('xxs');
 
-    @media (hover: hover) and (pointer: fine) {
-      &:focus-visible {
-        transition: interaction-state.transition();
-        box-shadow: utils.get-elevation(2), var(--kirby-focus-ring-md-inset);
-      }
+    &:focus-visible {
+      transition: interaction-state.transition();
+      box-shadow: utils.get-elevation(2), var(--kirby-focus-ring-md-inset);
     }
 
     // Wrap declarations to avoid mixing with nested rules.

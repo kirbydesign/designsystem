@@ -22,13 +22,11 @@ ion-fab-button {
 
   // end NOTE
 
-  @media (hover: hover) and (pointer: fine) {
-    &:focus-visible {
-      transition: interaction-state.transition();
-      box-shadow: var(--kirby-focus-ring-md-inset);
-      outline: none;
-      border-radius: utils.border-radius('pill');
-    }
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
+    outline: none;
+    border-radius: utils.border-radius('pill');
   }
 
   // Wrap declarations to avoid mixing with nested rules.

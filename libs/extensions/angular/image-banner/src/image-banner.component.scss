@@ -107,11 +107,9 @@ kirby-card {
   // Apply focus styles to the card when any child element (except those inside .dismiss) is focused
   &:focus-within:has(:focus-visible) {
     &:not(:has(.dismiss :focus)) {
-      @media (hover: hover) and (pointer: fine) {
-        outline: none;
-        transition: box-shadow #{interaction-state.$default-transition-duration} linear;
-        box-shadow: utils.get-elevation(2), var(--kirby-focus-ring-md-inset);
-      }
+      outline: none;
+      transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+      box-shadow: utils.get-elevation(2), var(--kirby-focus-ring-md-inset);
 
       // No focus outline on interactive element itself, only surrounding card
       .breakout {

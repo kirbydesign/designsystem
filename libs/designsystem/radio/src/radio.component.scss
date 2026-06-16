@@ -90,16 +90,14 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 ion-radio {
-  @media (hover: hover) and (pointer: fine) {
-    &:focus-within {
-      --border-width: 0;
-      --color: transparent;
-    }
+  &:focus-within {
+    --border-width: 0;
+    --color: transparent;
+  }
 
-    &:focus-visible::part(container) {
-      transition: box-shadow #{interaction-state.$default-transition-duration} linear;
-      box-shadow: var(--kirby-focus-ring-sm-inset);
-    }
+  &:focus-visible::part(container) {
+    transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+    box-shadow: var(--kirby-focus-ring-sm-inset);
   }
 
   // Wrap declarations to avoid mixing with nested rules.

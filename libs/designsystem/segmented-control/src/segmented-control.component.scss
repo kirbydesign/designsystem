@@ -19,13 +19,11 @@
       --padding-end: #{utils.size('s')};
       --kirby-badge-right: -#{utils.size('xxs')};
 
-      @media (hover: hover) and (pointer: fine) {
-        &:focus-visible {
-          transition: interaction-state.transition();
-          box-shadow: var(--kirby-focus-ring-md-inset);
-          outline: none;
-          border-radius: utils.border-radius('pill');
-        }
+      &:focus-visible {
+        transition: interaction-state.transition();
+        box-shadow: var(--kirby-focus-ring-md-inset);
+        outline: none;
+        border-radius: utils.border-radius('pill');
       }
     }
   }
@@ -105,12 +103,10 @@ ion-segment {
 }
 
 ion-segment-button {
-  @media (hover: hover) and (pointer: fine) {
-    &:focus-within::part(native):focus-visible,
-    &:focus-visible:focus-within::part(native) {
-      transition: interaction-state.transition();
-      box-shadow: var(--kirby-focus-ring-md-inset);
-    }
+  &:focus-within::part(native):focus-visible,
+  &:focus-visible:focus-within::part(native) {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
   }
   @include utils.accessible-target-size;
 
