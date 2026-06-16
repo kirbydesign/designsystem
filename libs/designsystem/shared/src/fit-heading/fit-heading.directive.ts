@@ -29,6 +29,8 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private hostElementClone: Element;
   private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
 
+  private originalSize: HeadingSize;
+
   private headingSizes: HeadingSize[] = [
     {
       name: 'h1',
@@ -56,7 +58,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.config && this.config.maxLines) {
-      this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
       this.observeResize();
       this.isObservingHostElement = true;
     }
@@ -91,20 +92,31 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     this.isScalingHeader = true;
 
     if (!this.hostElementClone) {
+      // Capture original CSS size before any scaling
+      const computed = getComputedStyle(this.elementRef.nativeElement);
+      this.originalSize = {
+        name: 'original',
+        fontSize: computed.fontSize,
+        lineHeight: computed.lineHeight,
+      };
+
+      // Skip line-clamp for elements with line-height: normal (e.g. key-value) — conflicts with flex layout
+      if (computed.lineHeight !== 'normal') {
+        this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
+      }
+
       this.hostElementClone = this.generateHostElementClone();
       this.renderer.appendChild(this.elementRef.nativeElement.parentElement, this.hostElementClone);
     }
 
-    // Use the parent element's width to determine available space.
-    // Using the host element's own clientWidth causes a feedback loop:
-    // the element shrink-wraps to its text content, so when font scales down
-    // the element gets narrower, making the clone narrower, which causes
-    // unnecessary further downscaling.
+    // Use parent width to avoid feedback loop from shrink-wrapped element width
     const availableWidth = this.elementRef.nativeElement.parentElement.clientWidth;
     this.renderer.setStyle(this.hostElementClone, 'width', `${availableWidth}px`);
 
+    // Try original CSS size first, then scale down through heading sizes
+    const candidates = [this.originalSize, ...this.headingSizes];
     const fallbackSize = this.headingSizes[this.headingSizes.length - 1];
-    const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
+    const fittedSize = candidates.find(this.canFitHeading.bind(this)) || fallbackSize;
 
     this.setSize(this.elementRef.nativeElement, fittedSize);
     this.lineClampHelper.setLineHeight(this.elementRef.nativeElement, fittedSize.lineHeight);
@@ -113,14 +125,17 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   private canFitHeading(size: HeadingSize) {
     this.setSize(this.hostElementClone, size);
-    // Use getComputedStyle to get the resolved line-height in pixels.
-    // The token line-height may be a unitless ratio (e.g. 1.1875) rather than
-    // a pixel value, so parseInt would return 1 and break the calculation.
+    // Resolve line-height to pixels via getComputedStyle (handles unitless ratios)
     const computedLineHeight = parseFloat(
       getComputedStyle(this.hostElementClone as HTMLElement).lineHeight
     );
-    const lines = this.hostElementClone.clientHeight / computedLineHeight;
-    return Math.round(lines) <= this.config.maxLines;
+    // Skip vertical check for line-height: normal (single-line content like values)
+    const fitsVertically = isNaN(computedLineHeight)
+      ? true
+      : Math.round(this.hostElementClone.clientHeight / computedLineHeight) <= this.config.maxLines;
+    // Check horizontal overflow for non-wrapping content (e.g. numbers)
+    const fitsHorizontally = this.hostElementClone.scrollWidth <= this.hostElementClone.clientWidth;
+    return fitsVertically && fitsHorizontally;
   }
 
   private generateHostElementClone(): Element {

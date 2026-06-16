@@ -3,6 +3,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeaderComponent } from '@kirbydesign/designsystem/header';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
@@ -23,6 +24,7 @@ const meta: Meta<HeaderComponent> = {
         AppComponent,
         PageComponent,
         PageContentComponent,
+        FlagComponent,
       ],
     }),
   ],
@@ -77,18 +79,36 @@ export const TitleMaxLinesScaling: Story = {
       <kirby-app>
         <kirby-page title="titleMaxLines scaling">
           <kirby-page-content>
+
+            <!-- Title only -->
             <kirby-header title="min titel" [titleMaxLines]="1" subtitle1="titleMaxLines=1"></kirby-header>
             <kirby-header title="min titel" [titleMaxLines]="2" subtitle1="titleMaxLines=2"></kirby-header>
             <kirby-header title="min titel" [titleMaxLines]="3" subtitle1="titleMaxLines=3"></kirby-header>
             <kirby-header title="min titel" subtitle1="no max lines"></kirby-header>
 
+            <!-- Wide character regression -->
             <kirby-header title="Mobile banking" [titleMaxLines]="1" subtitle1="titleMaxLines=1, starts with M"></kirby-header>
             <kirby-header title="mobile banking" [titleMaxLines]="1" subtitle1="titleMaxLines=1, starts with m"></kirby-header>
 
+            <!-- Medium and long titles -->
             <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="1" subtitle1="titleMaxLines=1, medium title"></kirby-header>
             <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="2" subtitle1="titleMaxLines=2, medium title"></kirby-header>
-
             <kirby-header title="Fall prices consulting quarterly municipal appeal inverse expenses market value credit quality market exposure potential appeal funds debt downturn NASDAQ Fitch 401k appeal corporate bonds municipal Nikkei market index treasury lucrative holder fiat corporation funds default interest rollover 401k exchange traded funds dividends inverse credit investment capitalization" [titleMaxLines]="2" subtitle1="titleMaxLines=2, very long title"></kirby-header>
+
+            <!-- Key value: titleMaxLines scales the value -->
+            <kirby-header title="Opsparing" value="12.345,67" valueUnit="kr." [titleMaxLines]="1" subtitle1="key value, titleMaxLines=1"></kirby-header>
+            <kirby-header title="Opsparing" value="12.345,67" valueUnit="kr." subtitle1="key value, no max lines"></kirby-header>
+            <kirby-header title="Opsparing" value="1.234.567.890,12" valueUnit="kr." [titleMaxLines]="1" subtitle1="key value, long value, titleMaxLines=1"></kirby-header>
+
+            <!-- Centered -->
+            <kirby-header title="min titel" [titleMaxLines]="1" [centered]="true" subtitle1="centered, titleMaxLines=1"></kirby-header>
+            <kirby-header title="min titel" [centered]="true" subtitle1="centered, no max lines"></kirby-header>
+
+            <!-- With flag -->
+            <kirby-header title="min titel" [titleMaxLines]="1" subtitle1="with flag, titleMaxLines=1">
+              <kirby-flag themeColor="success">Aktiv</kirby-flag>
+            </kirby-header>
+
           </kirby-page-content>
         </kirby-page>
       </kirby-app>
