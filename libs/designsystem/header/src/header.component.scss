@@ -60,6 +60,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   align-items: center;
 
   .container {
+    align-self: stretch;
     align-items: center;
 
     & > span.title {
@@ -73,7 +74,6 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 
   .title-container {
     align-items: center;
-    align-self: stretch;
     text-align: center;
   }
 
