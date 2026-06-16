@@ -76,36 +76,28 @@ export const TitleMaxLinesScaling: Story = {
   },
   render: () => ({
     template: `
-      <kirby-app>
-        <kirby-page title="titleMaxLines scaling">
-          <kirby-page-content>
+      <!-- Title only -->
+      <kirby-header title="Just a header" subtitle1="no max lines"></kirby-header>
+      <kirby-header title="Just a header" [titleMaxLines]="1" subtitle1="titleMaxLines=1"></kirby-header>
 
-            <!-- Title only -->
-            <kirby-header title="Just a header" subtitle1="no max lines"></kirby-header>
-            <kirby-header title="Just a header" [titleMaxLines]="1" subtitle1="titleMaxLines=1"></kirby-header>
+      <!-- Medium and long titles -->
+      <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="1" subtitle1="titleMaxLines=1, medium title"></kirby-header>
+      <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="2" subtitle1="titleMaxLines=2, medium title"></kirby-header>
+      <kirby-header title="Fall prices consulting quarterly municipal appeal inverse expenses market value credit quality market exposure potential appeal funds debt downturn NASDAQ Fitch 401k appeal corporate bonds municipal Nikkei market index treasury lucrative holder fiat corporation funds default interest rollover 401k exchange traded funds dividends inverse credit investment capitalization" [titleMaxLines]="3" subtitle1="titleMaxLines=3, very long title"></kirby-header>
 
-            <!-- Medium and long titles -->
-            <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="1" subtitle1="titleMaxLines=1, medium title"></kirby-header>
-            <kirby-header title="A medium length title that might need scaling on smaller screens" [titleMaxLines]="2" subtitle1="titleMaxLines=2, medium title"></kirby-header>
-            <kirby-header title="Fall prices consulting quarterly municipal appeal inverse expenses market value credit quality market exposure potential appeal funds debt downturn NASDAQ Fitch 401k appeal corporate bonds municipal Nikkei market index treasury lucrative holder fiat corporation funds default interest rollover 401k exchange traded funds dividends inverse credit investment capitalization" [titleMaxLines]="3" subtitle1="titleMaxLines=3, very long title"></kirby-header>
+      <!-- Key value: titleMaxLines scales the value -->
+      <kirby-header title="Savings" value="12.345,67" valueUnit="kr." subtitle1="key value, no max lines"></kirby-header>
+      <kirby-header title="Savings" value="12.345,67" valueUnit="kr." [titleMaxLines]="1" subtitle1="key value, titleMaxLines=1"></kirby-header>
+      <kirby-header title="Savings" value="1.234.567.890,12" valueUnit="kr." [titleMaxLines]="1" subtitle1="key value, long value, titleMaxLines=1"></kirby-header>
 
-            <!-- Key value: titleMaxLines scales the value -->
-            <kirby-header title="Savings" value="12.345,67" valueUnit="kr." subtitle1="key value, no max lines"></kirby-header>
-            <kirby-header title="Savings" value="12.345,67" valueUnit="kr." [titleMaxLines]="1" subtitle1="key value, titleMaxLines=1"></kirby-header>
-            <kirby-header title="Savings" value="1.234.567.890,12" valueUnit="kr." [titleMaxLines]="1" subtitle1="key value, long value, titleMaxLines=1"></kirby-header>
+      <!-- Centered -->
+      <kirby-header title="Just a header" [titleMaxLines]="1" [centered]="true" subtitle1="centered, titleMaxLines=1"></kirby-header>
+      <kirby-header title="Just a header" [centered]="true" subtitle1="centered, no max lines"></kirby-header>
 
-            <!-- Centered -->
-            <kirby-header title="Just a header" [titleMaxLines]="1" [centered]="true" subtitle1="centered, titleMaxLines=1"></kirby-header>
-            <kirby-header title="Just a header" [centered]="true" subtitle1="centered, no max lines"></kirby-header>
-
-            <!-- With flag -->
-            <kirby-header title="Just a header" [titleMaxLines]="1" subtitle1="with flag, titleMaxLines=1">
-              <kirby-flag themeColor="success">Active</kirby-flag>
-            </kirby-header>
-
-          </kirby-page-content>
-        </kirby-page>
-      </kirby-app>
+      <!-- With flag -->
+      <kirby-header title="Just a header" [titleMaxLines]="1" subtitle1="with flag, titleMaxLines=1">
+        <kirby-flag themeColor="success">Active</kirby-flag>
+      </kirby-header>
     `,
   }),
 };
