@@ -73,6 +73,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 
   .title-container {
     align-items: center;
+    align-self: stretch;
     text-align: center;
   }
 
