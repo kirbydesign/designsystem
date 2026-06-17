@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
+import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
+import { AccordionItemComponent } from '@kirbydesign/angular/accordion-item';
 const config = {
   selector: 'cookbook-accordion-events-example',
   template: `<kirby-accordion>

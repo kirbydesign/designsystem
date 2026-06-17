@@ -9,6 +9,8 @@ $default-border-outline: 1px solid utils.get-color('medium');
   --kirby-card-main-color: #{utils.get-color('white-contrast')};
   --kirby-card-footer-background-color: #{utils.get-color('white')};
   --kirby-card-footer-color: #{utils.get-color('white-contrast')};
+  --kirby-accordion-item-border-color: #{utils.get-color('background-color')};
+  --kirby-accordion-item-border: none;
 
   @include themes.apply-white-theme;
 

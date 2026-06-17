@@ -4,7 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/designsystem",
   "prefix": "kirby",
-  "implicitDependencies": ["!cookbook"],
+  "implicitDependencies": ["!cookbook", "!angular"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
@@ -71,6 +71,7 @@
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
+      "dependsOn": ["angular:build", "core:build"],
       "options": {
         "configDir": "libs/designsystem/.storybook",
         "outputDir": "dist/storybook/designsystem",

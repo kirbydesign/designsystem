@@ -4,7 +4,8 @@ import { applicationConfig, componentWrapperDecorator, moduleMetadata } from '@s
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 
-import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
+import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
+import { AccordionItemComponent } from '@kirbydesign/angular/accordion-item';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { AccordionExampleComponent } from '~/app/examples/accordion-example/accordion-example.component';
@@ -34,6 +35,29 @@ export const Default: Story = {
     isExpanded: false,
     isDisabled: false,
     disabledTitle: '',
+  },
+};
+
+export const HeadingLevel: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-accordion [headingLevel]="headingLevel">
+        <kirby-accordion-item title="Heading 1"></kirby-accordion-item>
+        <kirby-accordion-item title="Heading 2"></kirby-accordion-item>
+        <kirby-accordion-item title="Heading 3"></kirby-accordion-item>
+      </kirby-accordion>
+    `,
+  }),
+  args: {
+    headingLevel: 2,
+  },
+  argTypes: {
+    headingLevel: {
+      control: { type: 'select' },
+      options: [1, 2, 3, 4, 5, 6],
+      description: 'Sets the heading level for all accordion items',
+    },
   },
 };
 

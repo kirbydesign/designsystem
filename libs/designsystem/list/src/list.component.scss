@@ -8,6 +8,8 @@ $item-height: utils.size('xxxl');
 
 :host {
   display: block;
+
+  --kirby-accordion-item-background: transparent;
 }
 
 :host(:not(kirby-list-item)) {

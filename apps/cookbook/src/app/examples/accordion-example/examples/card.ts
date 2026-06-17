@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
+import { AccordionDirective } from '@kirbydesign/designsystem/accordion';
+import { AccordionItemComponent } from '@kirbydesign/angular/accordion-item';
 
 const config = {
   selector: 'cookbook-accordion-card-example',
