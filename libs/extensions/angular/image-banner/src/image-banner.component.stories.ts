@@ -240,7 +240,10 @@ export const Focused: Story = {
     backgroundBlur: 'dark',
   },
   play: async ({ canvasElement }) => {
-    const link = canvasElement.querySelector('.breakout') as HTMLElement;
-    link?.focus();
+    const breakouts = canvasElement.querySelectorAll('.breakout');
+    const visibleBreakout = Array.from(breakouts).find(
+      (el) => getComputedStyle(el).display !== 'none'
+    ) as HTMLElement;
+    visibleBreakout?.focus();
   },
 };
