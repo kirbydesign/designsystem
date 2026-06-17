@@ -60,6 +60,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   align-items: center;
 
   .container {
+    align-self: stretch;
     align-items: center;
 
     & > span.title {
@@ -132,6 +133,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
   max-width: calc(100% - 2 * $margin-inline);
 }
 
