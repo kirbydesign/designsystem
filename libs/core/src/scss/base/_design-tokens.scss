@@ -108,18 +108,15 @@
 
   // Small inset ring for compact controls (checkbox, radio, toggle, tab-navigation-item)
   --kirby-focus-ring-sm-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset,
-    0 0 0 3px var(--kirby-background-color, var(--kirby-white)) inset;
+    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 3px var(--kirby-white) inset;
 
   // Medium inset ring for larger controls (button, dropdown, segmented-control, form-field, etc.)
   --kirby-focus-ring-md-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset,
-    0 0 0 4px var(--kirby-background-color, var(--kirby-white)) inset;
+    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 4px var(--kirby-white) inset;
 
   // Medium outer ring for inline elements where inset rings are not suitable (link text)
   --kirby-focus-ring-md-outer:
-    0 0 0 2px var(--kirby-background-color, var(--kirby-white)),
-    0 0 0 4px var(--kirby-focus-ring-color);
+    0 0 0 2px var(--kirby-white), 0 0 0 4px var(--kirby-focus-ring-color);
 }
 
 @mixin transition-easings() {
