@@ -22,7 +22,27 @@ $padding: utils.size('s');
   --kirby-item-background: transparent;
 }
 
+// Only the first accordion item should have top rounding, and only the last
+// should have bottom rounding. The --kirby-content-border-*-radius vars are
+// inherited from the card's .content-wrapper (or default to 0 outside a card).
+:host(:first-of-type) {
+  --kirby-accordion-border-top-radius: var(--kirby-content-border-top-radius, 0);
+}
+
+:host(:last-of-type) {
+  --kirby-accordion-border-bottom-radius: var(--kirby-content-border-bottom-radius, 0);
+}
+
+// When expanded, the content panel is below the header — revoke bottom rounding.
+:host(:last-of-type):has([aria-expanded='true']) {
+  --kirby-accordion-border-bottom-radius: 0;
+}
+
 .header {
+  border-radius: var(--kirby-accordion-border-top-radius, 0)
+    var(--kirby-accordion-border-top-radius, 0) var(--kirby-accordion-border-bottom-radius, 0)
+    var(--kirby-accordion-border-bottom-radius, 0);
+
   &:focus-visible {
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-inset);
