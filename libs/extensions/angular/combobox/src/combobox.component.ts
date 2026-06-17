@@ -1032,8 +1032,6 @@ export class ComboboxComponent
       // Item is below the visible area — scroll down so item appears at the bottom.
       this._virtualScrollViewport.scrollToOffset(itemBottom - viewportSize);
     }
-
-    // this._virtualScrollViewport.checkViewportSize();
   }
 
   private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
@@ -1045,9 +1043,7 @@ export class ComboboxComponent
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
 
-    this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
     this._virtualScrollViewport?.checkViewportSize();
-
     this._virtualScrollViewport?.scrollToIndex(focusedIndex);
   }
 }
