@@ -167,9 +167,7 @@
 // Only apply the styles on non touch devices
 // (fine pointer and hover):
 @mixin not-touch() {
-  @media (hover: hover) and (pointer: fine) {
-    @content;
-  }
+  @content;
 }
 
 // Ensure minimum click area (default 44 x 44 px)
