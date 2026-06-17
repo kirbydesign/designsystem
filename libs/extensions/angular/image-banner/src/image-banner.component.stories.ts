@@ -239,7 +239,6 @@ export const Focused: Story = {
     imagePath: 'assets/images/leaves.jpg',
     backgroundBlur: 'dark',
   },
-  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
   play: async ({ canvasElement }) => {
     const link = canvasElement.querySelector('.breakout') as HTMLElement;
     link?.focus();

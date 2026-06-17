@@ -390,12 +390,11 @@ export const Focused: Story = {
     template: `
       <kirby-x-combobox [placeholder]="placeholder" [items]="items"></kirby-x-combobox>
     `,
-    styles: [':host { padding: 8px; }'],
   }),
   play: async ({ canvasElement }) => {
-    const combobox = canvasElement.querySelector('kirby-x-combobox');
-    if (combobox) {
-      (combobox as HTMLElement).focus();
+    const input = canvasElement.querySelector('kirby-x-combobox input');
+    if (input) {
+      (input as HTMLElement).focus();
     }
   },
 };
