@@ -162,8 +162,8 @@ ion-item {
 }
 
 // Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
-:host-context(kirby-dropdown .focused) ion-item,
-:host-context(kirby-popover .focused) ion-item {
+:host(.keyboard-focused) ion-item,
+:host-context(kirby-popover .keyboard-focused) ion-item {
   &::part(native) {
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-inset);
