@@ -105,15 +105,33 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     ion-checkbox {
       --size: #{$checkbox-icon-size-xs};
       --border-radius: #{utils.size('xxxs')};
+      --kirby-checkbox-container-padding: #{utils.size('xxxxs')};
 
       &::part(container) {
-        padding: utils.size('xxxxs'); // Spacing between checkmark and container box
+        padding: var(
+          --kirby-checkbox-container-padding
+        ); // Spacing between checkmark and container box
       }
     }
   }
 
   ion-checkbox {
-    @include interaction-state.apply-focus-part($part: 'container');
+    &:focus-within {
+      --border-width: 0;
+      --border-color: transparent;
+      --border-color-checked: transparent;
+    }
+
+    &:focus-visible::part(container) {
+      outline: none;
+      padding: calc(
+        var(--kirby-checkbox-container-padding) + 1px
+      ); // Compensate for removed 1px border to prevent checkmark from growing in ion-checkbox
+
+      transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+      box-shadow: var(--kirby-focus-ring-sm-inset);
+    }
+
     @include interaction-state.apply-hover {
       --checkbox-background: #{interaction-state.get-state-color('white')};
     }
@@ -130,9 +148,12 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
     /* stylelint-disable no-duplicate-selectors */
     & {
-      --transition: #{interaction-state.$default-transition-duration};
+      --transition:
+        border-color #{interaction-state.$default-transition-duration} linear,
+        background-color #{interaction-state.$default-transition-duration} linear;
       --size: #{$checkbox-icon-size};
       --checkmark-width: #{utils.size('xxxs')};
+      --kirby-checkbox-container-padding: #{utils.size('xxxs')};
       --checkbox-background: #{utils.get-color('white')};
       --border-width: 1px;
       --border-color: #{utils.get-color('semi-dark')};
@@ -141,7 +162,9 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     /* stylelint-enable no-duplicate-selectors */
 
     &::part(container) {
-      padding: utils.size('xxxs'); // Spacing between checkmark and container box
+      padding: var(
+        --kirby-checkbox-container-padding
+      ); // Spacing between checkmark and container box
     }
 
     &::part(label) {

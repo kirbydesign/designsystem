@@ -381,6 +381,25 @@ export const ExpandBlock: Story = {
   }),
 };
 
+export const Focused: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: { ...args },
+    template: `
+      <kirby-x-combobox [placeholder]="placeholder" [items]="items"></kirby-x-combobox>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const input = canvasElement.querySelector('kirby-x-combobox input');
+    if (input) {
+      (input as HTMLElement).focus();
+    }
+  },
+};
+
 /**
  * When the `groupSettings` property is provided, items in the dropdown are grouped under headers.
  * Each entry in the array defines a group with an `id`, a `displayName`, and a `condition`

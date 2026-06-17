@@ -162,9 +162,12 @@ ion-item {
 }
 
 // Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
-:host-context(kirby-dropdown .focused) ion-item,
-:host-context(kirby-popover .focused) ion-item {
-  --background: #{interaction-state.get-state-color('white', 'xxxs')};
+:host(.keyboard-focused) ion-item,
+:host-context(kirby-popover .keyboard-focused) ion-item {
+  &::part(native) {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
+  }
 }
 
 // Prevents the item from being clicked when disabled
@@ -185,5 +188,11 @@ ion-item {
 :host(.disclosure) {
   ion-item {
     --inner-padding-end: #{utils.size('xxs')};
+  }
+}
+
+:host-context(kirby-card-header) {
+  ion-item {
+    --background: transparent;
   }
 }
