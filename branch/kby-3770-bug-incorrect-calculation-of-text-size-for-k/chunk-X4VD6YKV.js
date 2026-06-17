@@ -2057,7 +2057,7 @@ private createChart() {
   `),i(172,"div",16),e(173,`
     `),i(174,"h2"),e(175,"Scaling of title"),t(),e(176,`
     `),i(177,"p"),e(178,`
-      It's possible to enable auto-scaling of the header title. This will progressively reduce the
+      It is possible to enable auto-scaling of the header title. This will progressively reduce the
       font size and line height to fit the text within the configured number of lines.
     `),t(),e(179,`
     `),i(180,"p"),e(181,`
