@@ -995,7 +995,7 @@ export const SelectableInCardWithHeaderFirstFocused: Story = {
   name: 'Selectable in Card with Header - First Focused',
   render: () => ({
     template: `<kirby-card>
-    <kirby-card-header [flagged]="'success'" [hasPadding]="false">
+    <kirby-card-header [hasPadding]="false">
      <kirby-item>
       <kirby-label>
         <p class="kirby-item-title">Title</p>

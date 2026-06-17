@@ -25,7 +25,9 @@ $badge-offset: 0.8em;
       --padding-end: #{utils.size('s')};
       --kirby-badge-right: -#{utils.size('xxs')};
 
-      @include interaction-state.apply-focus-visible {
+      &:focus-visible {
+        transition: interaction-state.transition();
+        box-shadow: var(--kirby-focus-ring-md-inset);
         outline: none;
         border-radius: utils.border-radius('pill');
       }
@@ -107,7 +109,11 @@ ion-segment {
 }
 
 ion-segment-button {
-  @include interaction-state.apply-focus-part($part: 'native');
+  &:focus-within::part(native):focus-visible,
+  &:focus-visible:focus-within::part(native) {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
+  }
   @include utils.accessible-target-size;
 
   // Wrap declarations to avoid mixing with nested rules.

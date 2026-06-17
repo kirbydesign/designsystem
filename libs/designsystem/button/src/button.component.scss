@@ -152,7 +152,12 @@ $button-margin: utils.size('xxxs');
   flex-shrink: 0;
 
   @include utils.accessible-target-size;
-  @include interaction-state.apply-focus-visible;
+
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
+  }
+
   @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active;
