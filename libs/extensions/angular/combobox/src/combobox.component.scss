@@ -83,6 +83,7 @@ kirby-card {
 .combobox-viewport {
   display: block;
   width: 100%;
+  overflow-anchor: none;
 }
 
 .no-results {

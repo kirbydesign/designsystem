@@ -27,7 +27,7 @@
   (willHide)="onPopoverWillHide()"
 >
   <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
-    @if (searchItems.length === 0) {
+    @if (navigableItems.length === 0) {
       <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
@@ -35,20 +35,31 @@
       <cdk-virtual-scroll-viewport
         class="combobox-viewport"
         role="listbox"
+        minBufferPx="1240"
+        maxBufferPx="1620"
         [itemSize]="itemHeight"
         [style.height.px]="viewportHeight"
       >
         <ng-container *cdkVirtualFor="let item of searchItems">
-          <ng-container
-            *ngTemplateOutlet="
-              itemTemplate || defaultItemTemplate;
-              context: {
-                $implicit: item,
-                selected: item === selectedItem,
-                focused: item === focusedItem,
-              }
-            "
-          ></ng-container>
+          @if (isGroupItem(item)) {
+            <ng-container
+              *ngTemplateOutlet="
+                groupHeaderTemplate || defaultGroupHeaderTemplate;
+                context: { $implicit: item }
+              "
+            ></ng-container>
+          } @else {
+            <ng-container
+              *ngTemplateOutlet="
+                itemTemplate || defaultItemTemplate;
+                context: {
+                  $implicit: item,
+                  selected: item === selectedItem,
+                  focused: item === focusedItem,
+                }
+              "
+            ></ng-container>
+          }
         </ng-container>
       </cdk-virtual-scroll-viewport>
     }
@@ -71,3 +82,11 @@
     }
   </kirby-item>
 </ng-template>
+
+<ng-template #defaultGroupHeaderTemplate let-group>
+  <kirby-item
+    [attr.id]="group.id">
+    <p class="kirby-item-detail">{{ group.displayName }}</p>
+  </kirby-item>
+</ng-template>
+

@@ -1,5 +1,5 @@
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
+import { ComboboxComponent, GroupSettings } from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ListModule } from '@kirbydesign/designsystem/list';
@@ -106,6 +106,7 @@ const meta: Meta<ComboboxComponent> = {
         'noSearchResultsText',
         'selectionClearedAnnouncement',
         'searchFunction',
+        'groupSettings',
         'hasError',
         'hasErrorChange',
         'size',
@@ -381,7 +382,84 @@ export const ExpandBlock: Story = {
 };
 
 /**
- * This example demonstrates the combobox integrated inside a `kirby-form-field`
+ * When the `groupSettings` property is provided, items in the dropdown are grouped under headers.
+ * Each entry in the array defines a group with an `id`, a `displayName`, and a `condition`
+ * predicate. Groups are rendered in array order. Items that match no group are appended ungrouped
+ * at the end. Group headers cannot be selected.
+ *
+ * In this example the currencies are grouped into **Europe**, **America** and **Other**.
+ */
+const europeanCurrencyCodes = new Set(['EUR', 'GBP', 'CHF', 'SEK', 'NOK', 'DKK', 'PLN', 'RUB']);
+const americanCurrencyCodes = new Set(['USD', 'CAD', 'MXN', 'BRL']);
+
+const currencyGroupSettings: GroupSettings<CurrencyItem> = [
+  {
+    id: 'europe',
+    displayName: 'Europe',
+    condition: (item) => europeanCurrencyCodes.has(item.code),
+  },
+  {
+    id: 'america',
+    displayName: 'America',
+    condition: (item) => americanCurrencyCodes.has(item.code),
+  },
+  {
+    id: 'other',
+    displayName: 'Other',
+    condition: () => true, // catch-all
+  },
+];
+
+export const WithGrouping: Story = {
+  args: {
+    items: currencyItems,
+    itemTextProperty: 'name',
+    itemIdProperty: 'code',
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      groupSettings: currencyGroupSettings,
+    },
+    template: `
+      <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings" />
+    `,
+  }),
+};
+
+/**
+ * Provide a `#groupHeaderTemplate` to override the default group header rendering.
+ * The template context exposes the `GroupItem` as `$implicit`, giving access to
+ * both `id` and `displayName`.
+ */
+export const WithGroupHeaderTemplate: Story = {
+  args: {
+    items: currencyItems,
+    itemTextProperty: 'name',
+    itemIdProperty: 'code',
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      groupSettings: currencyGroupSettings,
+    },
+    template: `
+      <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings">
+        <ng-template #groupHeaderTemplate let-group>
+          <kirby-item>
+            <kirby-icon name="arrow-right" slot="start"></kirby-icon>
+            <p class="kirby-item-title" style="font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+              {{ group.displayName }}
+            </p>
+          </kirby-item>
+        </ng-template>
+      </kirby-x-combobox>
+    `,
+  }),
+};
+/*
  * with a reactive `FormControl`. It validates that:
  * - The form-field label and message render correctly around the combobox
  * - The combobox participates in Angular reactive forms (value binding, validation)
