@@ -19,12 +19,17 @@ $toolbar-shaded-background: color.mix(
 );
 $toolbar-button-size: utils.size('xl');
 $toolbar-button-spacing: utils.size('xxs');
+$toolbar-max-font-size: 18px * 1.2;
 
 ion-header,
 ion-toolbar {
-  --background: #{utils.get-color('background-color')};
+  box-sizing: border-box;
 
-  margin: 0 auto;
+  --background: #{utils.get-color('background-color')};
+}
+
+ion-title h1 {
+  font-size: min(utils.font-size('m'), $toolbar-max-font-size);
 }
 
 ion-toolbar {
@@ -269,7 +274,10 @@ ion-back-button {
  */
 ion-content {
   --padding-top: #{$ion-content-padding-top};
-  --padding-start: var(--page-content-padding-start, #{utils.size('s')});
+  --padding-start: var(
+    --page-content-padding-start,
+    calc(#{utils.size('s')} + var(--ion-safe-area-left))
+  );
   --padding-end: var(--page-content-padding-end, #{utils.size('s')});
   --background: #{utils.get-color('background-color')};
   --color: #{utils.get-color('black')};

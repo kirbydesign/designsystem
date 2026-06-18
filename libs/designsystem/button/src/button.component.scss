@@ -18,8 +18,8 @@ $button-margin: utils.size('xxxs');
 
 @mixin button-xs {
   /*
-  * Extra small button needs a smaller click area to e.g. not overlap with other 
-  * interactive elements. The maximum target size we can safely do is the button's 
+  * Extra small button needs a smaller click area to e.g. not overlap with other
+  * interactive elements. The maximum target size we can safely do is the button's
   * minimum width plus its margin on each side
   */
   $button-xs-icon-only-size: utils.size('m');
@@ -29,8 +29,13 @@ $button-margin: utils.size('xxxs');
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   & {
+    --kirby-icon-font-size: #{utils.icon-font-size('xs')};
+
     font-size: utils.font-size('xs');
-    height: $button-xs-icon-only-size;
+
+    // use fixed size unless font-size grows too large, then let button
+    // height adjust to font-size (effectively when text is resized to 150% and above)
+    height: max($button-xs-icon-only-size, utils.relative-size('s'));
     min-width: button-width('xs');
   }
 
@@ -40,9 +45,9 @@ $button-margin: utils.size('xxxs');
   }
 
   &.icon-only {
-    --kirby-icon-font-size: #{utils.size('s')};
-
-    width: $button-xs-icon-only-size;
+    // use fixed size unless font-size grows too large, then let button
+    // height adjust to font-size (effectively when text is resized to 150% and above)
+    width: max($button-xs-icon-only-size, utils.relative-size('s'));
     min-width: unset;
   }
 
@@ -58,13 +63,13 @@ $button-margin: utils.size('xxxs');
 
   &.icon-left,
   &.icon-right {
-    --kirby-icon-font-size: #{utils.size('s')};
-
     min-width: button-width('xs');
   }
 }
 
 @mixin button-sm {
+  --kirby-icon-font-size: #{utils.size('s')};
+
   font-size: utils.font-size('xs');
   height: utils.size('l');
   min-width: button-width('sm');
@@ -75,8 +80,6 @@ $button-margin: utils.size('xxxs');
   }
 
   &.icon-only {
-    --kirby-icon-font-size: #{utils.size('s')};
-
     width: utils.size('l');
     min-width: unset;
   }
@@ -91,8 +94,6 @@ $button-margin: utils.size('xxxs');
 
   &.icon-left,
   &.icon-right {
-    --kirby-icon-font-size: #{utils.size('s')};
-
     min-width: button-width('md');
   }
 }
@@ -192,7 +193,6 @@ $button-margin: utils.size('xxxs');
     min-width: button-width('md');
     padding: 0;
     margin: $button-margin;
-    line-height: utils.line-height('s');
 
     // Outline is applied on button border instead,
     // to keep the rounded shape:
