@@ -27,6 +27,11 @@ export interface GroupDefinition<T = unknown> {
    * group whose condition returns `true`.
    */
   condition: (item: T) => boolean;
+  /**
+   * Height of the group header row in pixels.
+   * Falls back to the component's `itemHeight` if not set.
+   */
+  height?: number;
 }
 
 /**

@@ -168,6 +168,20 @@ export class ComboboxComponent
   @Input()
   public itemHeight: number = 44;
 
+  private getHeightOfItem(item: unknown): number {
+    if (item instanceof GroupItem) {
+      const def = this._groupSettings?.find((g) => g.id === item.id);
+      return def?.height ?? this.itemHeight;
+    }
+    return this.itemHeight;
+  }
+
+  private getScrollOffsetForIndex(index: number): number {
+    return this.searchItems
+      .slice(0, index)
+      .reduce((offset, item) => (offset as number) + this.getHeightOfItem(item), 0) as number;
+  }
+
   protected get dropdownMaxHeight(): number {
     return 8 * ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
   }
@@ -183,10 +197,8 @@ export class ComboboxComponent
       return this.dropdownMinHeight;
     }
 
-    return Math.min(
-      this.dropdownMaxHeight,
-      Math.max(this.dropdownMinHeight, itemCount * this.itemHeight)
-    );
+    const heightOfItems = this.getScrollOffsetForIndex(itemCount);
+    return Math.min(this.dropdownMaxHeight, Math.max(this.dropdownMinHeight, heightOfItems));
   }
 
   private isTypeString(item: unknown): boolean {
@@ -759,26 +771,22 @@ export class ComboboxComponent
     const buckets = new Map<string, unknown[]>(
       this._groupSettings.map((g: GroupDefinition) => [g.id, []])
     );
-    const ungrouped: unknown[] = [];
 
     for (const item of searchResult) {
       const def = this._groupSettings.find((g: GroupDefinition) => g.condition(item));
       if (def) {
-        buckets.get(def.id)!.push(item);
-      } else {
-        ungrouped.push(item);
+        buckets.get(def.id)?.push(item);
       }
     }
 
     // Build flat interleaved list in definition order, skip empty groups
     const result: unknown[] = [];
     for (const def of this._groupSettings) {
-      const items = buckets.get(def.id)!;
+      const items = buckets.get(def.id) ?? [];
       if (items.length === 0) continue;
       result.push(new GroupItem(def.id, def.displayName));
       result.push(...items);
     }
-    result.push(...ungrouped);
     return result;
   }
 
@@ -1020,14 +1028,14 @@ export class ComboboxComponent
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
     if (focusedIndex === -1) return;
 
-    const itemTop = focusedIndex * this.itemHeight;
+    const itemTop = this.getScrollOffsetForIndex(focusedIndex);
     const itemBottom = itemTop + this.itemHeight;
     const scrollOffset = this._virtualScrollViewport.measureScrollOffset();
     const viewportSize = this._virtualScrollViewport.getViewportSize();
 
     if (itemTop < scrollOffset) {
       // Item is above the visible area — scroll up so item appears at the top.
-      this._virtualScrollViewport.scrollToIndex(focusedIndex, 'instant');
+      this._virtualScrollViewport.scrollToOffset(itemTop);
     } else if (itemBottom > scrollOffset + viewportSize) {
       // Item is below the visible area — scroll down so item appears at the bottom.
       this._virtualScrollViewport.scrollToOffset(itemBottom - viewportSize);

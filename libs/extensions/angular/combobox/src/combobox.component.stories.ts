@@ -10,6 +10,7 @@ import {
   InputSize,
 } from '@kirbydesign/designsystem/form-field';
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -87,6 +88,7 @@ const meta: Meta<ComboboxComponent> = {
         ComboboxComponent,
         FormFieldComponent,
         ReactiveFormsModule,
+        IconModule,
       ],
     }),
   ],
@@ -449,10 +451,10 @@ export const WithGroupHeaderTemplate: Story = {
       <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings">
         <ng-template #groupHeaderTemplate let-group>
           <kirby-item>
-            <kirby-icon name="arrow-right" slot="start"></kirby-icon>
-            <p class="kirby-item-title" style="font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
-              {{ group.displayName }}
-            </p>
+              <kirby-label>
+              <p class="kirby-item-detail">{{ group.displayName }}</p>
+            </kirby-label>
+            <kirby-icon name="moneybag" slot="end"/>
           </kirby-item>
         </ng-template>
       </kirby-x-combobox>
