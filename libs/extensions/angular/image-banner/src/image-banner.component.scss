@@ -107,11 +107,23 @@ kirby-card {
   // Apply focus styles to the card when any child element (except those inside .dismiss) is focused
   &:focus-within:has(:focus-visible) {
     &:not(:has(.dismiss :focus)) {
-      @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
+      outline: none;
 
       // No focus outline on interactive element itself, only surrounding card
       .breakout {
         box-shadow: none;
+      }
+
+      // Render focus ring above content using ::after overlay
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        box-shadow: var(--kirby-focus-ring-md-inset);
+        pointer-events: none;
+        z-index: 1;
+        transition: box-shadow #{interaction-state.$default-transition-duration} linear;
       }
     }
   }

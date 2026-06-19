@@ -90,7 +90,15 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 ion-radio {
-  @include interaction-state.apply-focus-part($part: 'container');
+  &:focus-within {
+    --border-width: 0;
+    --color: transparent;
+  }
+
+  &:focus-visible::part(container) {
+    transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+    box-shadow: var(--kirby-focus-ring-sm-inset);
+  }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
@@ -119,7 +127,7 @@ ion-radio {
 
   &::part(container) {
     transition: interaction-state.transition();
-    transition-property: background-color;
+    transition-property: background-color, box-shadow;
     background-color: utils.get-color('white');
     margin: utils.size('xxxxs');
   }
@@ -179,7 +187,7 @@ ion-radio {
       }
     }
 
-    &:not(.radio-disabled) {
+    &:not(:focus, :focus-within, .radio-disabled) {
       &::part(container) {
         border-color: var(--kirby-semi-dark);
       }

@@ -1,5 +1,7 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 import { CheckboxExampleComponent } from '~/app/examples/checkbox-example/checkbox-example.component';
@@ -42,4 +44,24 @@ export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-checkbox-example></cookbook-checkbox-example>`,
   }),
+};
+
+export const Focused: Story = {
+  args: {
+    checked: false,
+    text: 'Unchecked',
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-checkbox text="Unchecked"></kirby-checkbox>
+      <kirby-checkbox text="Checked" [checked]="true"></kirby-checkbox>
+    `,
+    styles: [':host { display: flex; gap: 16px; padding: 8px; }'],
+  }),
+  play: async ({ canvasElement }) => {
+    const checkbox = canvasElement.querySelector('ion-checkbox');
+    await TestHelper.whenReady(checkbox);
+    (checkbox as HTMLElement).focus();
+  },
 };
