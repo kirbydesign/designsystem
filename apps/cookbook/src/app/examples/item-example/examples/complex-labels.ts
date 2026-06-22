@@ -18,7 +18,7 @@ const config = {
         </p>
     </kirby-label>
     <p class="kirby-item-subtitle">Subtitle</p>
-    <p class="kirby-item-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
+    <p class="kirby-item-detail kirby-item-wrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
   </kirby-label>
 </kirby-item>`,
 };
