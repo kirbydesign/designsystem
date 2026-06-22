@@ -570,6 +570,9 @@ export const LoadingMenuItems: Story = {
     ...Default.args,
     mainAreaContent:
       '<h1>Sidebar with loading menu items</h1><p>The sidebar menu loader is shown instead of menu items.</p>',
+  },
+};
+
 export const Focused: Story = {
   ...Default,
   decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
