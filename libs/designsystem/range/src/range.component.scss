@@ -18,6 +18,15 @@ ion-range {
     transition: interaction-state.transition();
     box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
   }
+
+  // Dual knob: apply focus ring to the active (focused) knob
+  &.range-pressed-a::part(knob-a),
+  &:focus-visible::part(knob-a),
+  &.range-pressed-b::part(knob-b),
+  &:focus-visible::part(knob-b) {
+    transition: interaction-state.transition();
+    box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
+  }
   @include interaction-state.apply-hover {
     --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
   }
