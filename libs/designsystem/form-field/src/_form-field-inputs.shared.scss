@@ -2,8 +2,8 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 
 $form-field-input-font-family: var(--kirby-font-family);
-$form-field-input-line-height: 1.5;
-$form-field-input-padding: 1em;
+$form-field-input-line-height: utils.line-height('n');
+$form-field-input-padding: utils.size('s');
 $form-field-label-height: 24px;
 
 :host(.error) {
@@ -29,7 +29,10 @@ $form-field-label-height: 24px;
 }
 
 :host {
-  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: utils.get-elevation(2), var(--kirby-focus-ring-md-inset);
+  }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/

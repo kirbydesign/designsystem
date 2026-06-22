@@ -19,36 +19,68 @@ $sizes: (
   xxxxs: 2px,
 ) !default;
 
+// relative spacings are used sparingly when there is a need for component spacing to scale with font size
+$relative-sizes: (
+  xl: 2.5rem,
+  l: 2rem,
+  m: 1.5rem,
+  s: 1rem,
+  xs: 0.75rem,
+  xxs: 0.5rem,
+  xxxs: 0.25rem,
+) !default;
+
 /*
-  FONT SETTINGS 
+  FONT SETTINGS
 ****************************************************************************/
+$base-font-size-px: 16;
+
+// Base font sizes in rem for use in calculations
+// These are the preferred values used in $font-sizes clamps
+$font-sizes-base: (
+  xxxxl: 4.5rem,
+  xxxl: 3.5rem,
+  xxl: 2.5rem,
+  xl: 2rem,
+  l: 1.375rem,
+  m: 1.125rem,
+  n: 1rem,
+  s: 0.875rem,
+  xs: 0.75rem,
+  xxs: 0.625rem,
+) !default;
+
+// Non-linear font scaling: Display, Heading and body text use clamp()
+// to prioritize user preferences but maintain hierarchy with:
+// - minimum values that enforce a minimum font size of 10px
+// - maximum values that provide a maximum font resize of 200%
 $font-sizes: (
-  xxxxl: 72px,
-  xxxl: 56px,
-  xxl: 40px,
-  xl: 32px,
-  l: 22px,
-  m: 18px,
-  n: 16px,
-  s: 14px,
-  xs: 12px,
-  xxs: 10px,
+  xxxxl: clamp(56px, map.get($font-sizes-base, xxxxl), 72px),
+  xxxl: clamp(45px, map.get($font-sizes-base, xxxl), 56px),
+  xxl: clamp(32px, map.get($font-sizes-base, xxl), 46px),
+  xl: clamp(26px, map.get($font-sizes-base, xl), 41px),
+  l: clamp(19px, map.get($font-sizes-base, l), 38px),
+  m: clamp(14px, map.get($font-sizes-base, m), 35px),
+  n: clamp(13px, map.get($font-sizes-base, n), 32px),
+  s: clamp(12px, map.get($font-sizes-base, s), 28px),
+  xs: clamp(11px, map.get($font-sizes-base, xs), 24px),
+  xxs: clamp(10px, map.get($font-sizes-base, xxs), 20px),
 ) !default;
 $line-height: (
   // h1:
-  xl: 38px,
+  xl: 1.1875,
   // h2:
-  l: 28px,
+  l: 1.2727,
   // h3:
-  m: 24px,
-  // p - please note: p and h3 share the same line-height, added the sizes to "match" with font-size:
-  n: 24px,
+  m: 1.3334,
+  // p:
+  n: 1.5,
   // text-small:
-  s: 20px,
+  s: 1.4286,
   // text-xsmall:
-  xs: 16px,
+  xs: 1.3334,
   // text-xxsmall:
-  xxs: 11px
+  xxs: 1.1
 ) !default;
 $font-weight: (
   light: 300,
@@ -59,8 +91,21 @@ $font-weight: (
   'black': 900,
 ) !default;
 
+/*
+* Threshold based on the maximum font scale of iOS/iPad devices (without larger A11y types enabled):
+* (xxxLarge body / Large body) * (Large body / default browser size), or: (23 / 17) * (17 / 16) = 1.4375 ~ 1.45
+*
+* @see https://developer.apple.com/design/human-interface-guidelines/typography#iOS-iPadOS-Dynamic-Type-sizes
+*
+* It is used to determine when to apply alternative layout styles to items,
+* and as a text-resize maximum scale for a few components that cannot reasonably
+* scale to 200% (tab button, tab navigation)
+*/
+$text-resize-threshold: 1.45;
+
 /* Icon
 ****************************************************************************/
+
 $icon-font-sizes: (
   'xs': map.get($sizes, 's'),
   'sm': map.get($sizes, 'm'),
@@ -128,7 +173,7 @@ $elevations: (
   ),
 ) !default;
 
-/* avatar
+/* Avatar
 ****************************************************************************/
 $avatar-sizes: (
   xs: 32px,
@@ -136,7 +181,15 @@ $avatar-sizes: (
   m: 56px,
   l: 96px,
 ) !default;
-$avatar-badge-size: 16px;
+
+// icons in xs and s avatar have same size by design
+$avatar-icon-font-sizes: (
+  'lg': 56px,
+  'md': 32px,
+  'sm': 24px,
+  'xs': 24px,
+) !default;
+$avatar-badge-size: map.get($relative-sizes, 's');
 
 /* Page
 ****************************************************************************/

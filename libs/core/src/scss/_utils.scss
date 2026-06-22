@@ -9,4 +9,5 @@
 @forward 'base/design-tokens' as tokens-*;
 @forward 'base/functions';
 @forward 'base/variables' hide $breakpoints;
+@forward 'base/line-clamp';
 @forward 'themes/colors';

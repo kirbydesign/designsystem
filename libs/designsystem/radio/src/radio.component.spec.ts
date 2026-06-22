@@ -203,7 +203,10 @@ describe('RadioComponent', () => {
           await TestHelper.whenTrue(() => ionRadioElement.classList.contains('radio-disabled'));
         });
 
-        it('should have correct icon styling', () => {
+        it('should have correct icon styling', async () => {
+          // Wait for box-shadow transition to complete (transition-property includes box-shadow)
+          await TestHelper.whenTrue(() => window.getComputedStyle(radioIcon).boxShadow === 'none');
+
           expect(ionRadioElement).toHaveComputedStyle({
             opacity: '1',
           });
