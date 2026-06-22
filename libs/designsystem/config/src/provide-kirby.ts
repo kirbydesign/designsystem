@@ -1,7 +1,9 @@
 import {
   EnvironmentProviders,
+  inject,
   InjectionToken,
   makeEnvironmentProviders,
+  provideAppInitializer,
   Provider,
 } from '@angular/core';
 import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
@@ -23,7 +25,11 @@ import {
   ModalController,
   ModalHelper,
 } from '@kirbydesign/designsystem/modal';
-import { ResizeObserverFactory, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import {
+  ResizeObserverFactory,
+  ResizeObserverService,
+  TextResizeObserverService,
+} from '@kirbydesign/designsystem/shared';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 
 /**
@@ -90,7 +96,10 @@ export function withGlobalSetup(config?: KirbyConfig): EnvironmentProviders {
     ionicConfig.focusManagerPriority = ['heading'];
   }
 
-  return makeEnvironmentProviders([provideIonicAngular(ionicConfig)]);
+  return makeEnvironmentProviders([
+    provideIonicAngular(ionicConfig),
+    provideAppInitializer(() => inject(TextResizeObserverService).initialize()),
+  ]);
 }
 
 /**
@@ -108,7 +117,7 @@ export function getGlobalConfig(): KirbyConfig | undefined {
 function setGlobalConfig(config: KirbyConfig | undefined): void {
   if (getGlobalConfig()) {
     console.warn(
-      `Global Kirby configuration is already provided through withGlobalSetup() elsewhere. 
+      `Global Kirby configuration is already provided through withGlobalSetup() elsewhere.
 Overwriting the existing configuration is not recommended. Consider removing duplicate calls.`
     );
   }

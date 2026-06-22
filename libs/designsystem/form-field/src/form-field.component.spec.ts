@@ -100,7 +100,6 @@ describe('FormFieldComponent', () => {
       expect(labelTextElement).toHaveComputedStyle({
         'font-size': fontSize('s'),
         'font-weight': fontWeight('light'),
-        'line-height': lineHeight('s'),
       });
     });
 

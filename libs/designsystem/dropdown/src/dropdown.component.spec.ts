@@ -1443,5 +1443,29 @@ describe('DropdownComponent', () => {
         expect(unlistenCounter).toEqual(unlistenMockArrayLength);
       });
     });
+
+    describe('when items are prepended asynchronously', () => {
+      const prependedItems = [
+        { text: 'Prepended 1', value: 10 },
+        { text: 'Prepended 2', value: 20 },
+      ];
+
+      it('should select the correct item when clicking after items are prepended', fakeAsync(() => {
+        const newItems = [...prependedItems, ...items];
+        spectator.setHostInput('items', newItems);
+        spectator.detectChanges();
+
+        spectator.component.open();
+        tick(totalOpenDelayInMs);
+        spectator.detectChanges();
+
+        const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
+        const thirdItemElement = itemElements[2];
+        thirdItemElement.click();
+        spectator.detectChanges();
+
+        expect(spectator.component.value).toEqual(newItems[2]);
+      }));
+    });
   });
 });

@@ -1,0 +1,45 @@
+import { Component, effect, Input, signal } from '@angular/core';
+
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+
+const activeCopyToken = signal<CopyTokenComponent | null>(null);
+
+@Component({
+  selector: 'cookbook-copy-token',
+  host: { '[class.copied]': 'copied()' },
+  template: `
+    <button
+      kirby-button
+      type="button"
+      size="xs"
+      noDecoration="true"
+      title="Copy var() to clipboard"
+      (click)="copy()"
+    >
+      <kirby-icon [name]="copied() ? 'checkmark-selected' : 'copy'" size="xs"></kirby-icon>
+    </button>
+  `,
+  styleUrls: ['./copy-token.component.scss'],
+  imports: [IconComponent, ButtonComponent],
+})
+export class CopyTokenComponent {
+  @Input() cssVar: string;
+
+  copied = signal(false);
+
+  constructor() {
+    effect(() => {
+      if (activeCopyToken() !== this) {
+        this.copied.set(false);
+      }
+    });
+  }
+
+  copy(cssVarOverride?: string) {
+    navigator.clipboard.writeText(`var(${cssVarOverride ?? this.cssVar})`);
+    activeCopyToken.set(this);
+    this.copied.set(true);
+    setTimeout(() => this.copied.set(false), 1500);
+  }
+}

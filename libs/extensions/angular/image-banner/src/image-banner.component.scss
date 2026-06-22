@@ -3,8 +3,19 @@
 
 $blur-radius: 110px;
 $max-content-width: 324px;
+
+// Minimum height for the text area: 1 line of normal-sized title + 2 lines of small-sized body.
+// Computed explicitly because the two text styles have different font-sizes, so a single `lh` unit cannot represent both.
+$min-text-content-height: calc(
+  #{utils.font-size('n')} * #{utils.line-height('n')} + 2 * #{utils.font-size('s')} *
+    #{utils.line-height('s')}
+);
 $main-image-height-small: 132px;
-$main-image-height-large: 164px;
+$wide-image-banner-min-height: 180px;
+$text-box-trim-offset: 2px;
+$main-content-top-padding: utils.size('s') - $text-box-trim-offset;
+$wide-main-content-top-padding: utils.size('xs') - $text-box-trim-offset;
+$main-content-bottom-padding: utils.size('xxs') - $text-box-trim-offset;
 
 // The breakpoint where container should switch from "narrow" to "wide"
 $container-query-breakpoint: 600px;
@@ -107,11 +118,23 @@ kirby-card {
   // Apply focus styles to the card when any child element (except those inside .dismiss) is focused
   &:focus-within:has(:focus-visible) {
     &:not(:has(.dismiss :focus)) {
-      @include interaction-state.apply-focus-ring($shadow: utils.get-elevation(2));
+      outline: none;
 
       // No focus outline on interactive element itself, only surrounding card
       .breakout {
         box-shadow: none;
+      }
+
+      // Render focus ring above content using ::after overlay
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        box-shadow: var(--kirby-focus-ring-md-inset);
+        pointer-events: none;
+        z-index: 1;
+        transition: box-shadow #{interaction-state.$default-transition-duration} linear;
       }
     }
   }
@@ -119,6 +142,7 @@ kirby-card {
 
 .main-content-wrapper {
   width: 100%;
+  min-height: $wide-image-banner-min-height;
   padding: utils.size('xxs');
   box-sizing: border-box;
   display: flex;
@@ -137,26 +161,27 @@ kirby-card {
 
   @include if-wide-view {
     flex: 1;
+    position: relative;
   }
 }
 
 .main-content {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: $main-content-top-padding 0 $main-content-bottom-padding utils.size('xxs');
+  overflow: hidden;
 
   @include if-narrow-view {
     flex-direction: row;
   }
 
-  min-height: var(
-    --kirby-x-image-banner-min-height,
-    #{utils.line-height('l') * 3}
-  ); // text content height should be minimum 3 lines by default
-
-  box-sizing: border-box;
-  padding: utils.size('xs') 0 utils.size('xxs') utils.size('xxs');
-  overflow: hidden;
+  @include if-wide-view {
+    flex: 1;
+    gap: utils.size('xs');
+    padding: $wide-main-content-top-padding utils.size('xxs') utils.size('xxs') 0;
+  }
 
   .main-content-header {
     padding-inline-end: utils.size('xxs');
@@ -170,12 +195,6 @@ kirby-card {
     .main-content-header {
       padding-inline-end: utils.size('xl');
     }
-  }
-
-  @include if-wide-view {
-    flex: 1;
-    gap: utils.size('xs');
-    padding: utils.size('xxs') utils.size('xxs') utils.size('xxs') 0;
   }
 }
 
@@ -196,23 +215,19 @@ kirby-card {
   object-position: center;
 
   @include if-wide-view {
-    height: $main-image-height-large;
+    position: absolute;
+    inset: 0;
+    height: 100%;
   }
 }
 
 .main-content-body {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  height: 100%;
-
   p {
     text-wrap-mode: wrap;
     margin-bottom: 0;
   }
 
   @include if-wide-view {
-    flex-direction: column;
     max-width: $max-content-width;
   }
 
@@ -276,6 +291,7 @@ kirby-card {
   &:is(a) {
     width: utils.size('m');
     min-width: utils.size('m');
+    margin-bottom: utils.size('xxxs');
 
     kirby-icon {
       font-size: utils.size('m');
@@ -295,6 +311,7 @@ kirby-card {
 :host(.show-button-in-narrow-view) {
   .wide-view-action {
     display: inline-flex;
+    margin-bottom: utils.size('xxs');
   }
 
   .narrow-view-action {
@@ -302,15 +319,11 @@ kirby-card {
   }
 }
 
-.dismiss {
+button.dismiss {
   position: absolute;
   top: utils.size('s');
   right: utils.size('s');
-  height: fit-content;
-
-  button {
-    margin: 0;
-  }
+  margin: 0;
 }
 
 .text-content-layout {
@@ -320,8 +333,11 @@ kirby-card {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-height: var(--kirby-x-image-banner-min-height, $min-text-content-height);
+
   @include if-wide-view {
     gap: utils.size('xs');
+    min-height: initial;
   }
 }
 
@@ -331,5 +347,15 @@ kirby-card {
     font-size: utils.font-size('n');
     font-weight: utils.font-weight('bold');
     line-height: utils.line-height('n');
+  }
+}
+
+// Trim the top of the text box so increased line-height from text resize etc.
+// does not push it out of alignment with the dismiss button.
+.kirby-text-normal-bold,
+.title {
+  @supports (text-box: trim-start text alphabetic) {
+    margin-top: 0;
+    text-box: trim-start text alphabetic;
   }
 }

@@ -7,8 +7,21 @@
   component.
 </p>
 
-<cookbook-example-viewer [html]="exampleHtml">
-  <cookbook-loading-overlay-example></cookbook-loading-overlay-example>
+<cookbook-example-viewer [html]="defaultExample.template">
+  <cookbook-loading-overlay-example-default
+    #defaultExample
+  ></cookbook-loading-overlay-example-default>
+</cookbook-example-viewer>
+
+<h3>Card</h3>
+
+<p>
+  A common scenario is to show a loading overlay on top of a card, when loading the content of the
+  card.
+</p>
+
+<cookbook-example-viewer [html]="cardExample.template">
+  <cookbook-loading-overlay-example-card #cardExample></cookbook-loading-overlay-example-card>
 </cookbook-example-viewer>
 
 <h2>Service</h2>
@@ -40,7 +53,9 @@
   is required to dismiss the overlay. It takes no arguments.
 </p>
 
-<cookbook-loading-overlay-service-example></cookbook-loading-overlay-service-example>
+<cookbook-example-viewer [ts]="service.codeSnippet">
+  <cookbook-loading-overlay-example-service #service></cookbook-loading-overlay-example-service>
+</cookbook-example-viewer>
 
 <h2>Importing</h2>
 <cookbook-import-viewer
