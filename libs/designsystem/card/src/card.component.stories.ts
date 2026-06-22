@@ -1,7 +1,10 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-
-import { CardComponent } from '@kirbydesign/designsystem/card';
-
+import {
+  CardAsButtonDirective,
+  CardComponent,
+  CardHeaderComponent,
+} from '@kirbydesign/designsystem/card';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CardExampleComponent } from '~/app/examples/card-example/card-example.component';
 
 const meta: Meta<CardComponent> = {
@@ -9,7 +12,13 @@ const meta: Meta<CardComponent> = {
   title: 'Components / Card',
   decorators: [
     moduleMetadata({
-      imports: [CardComponent, CardExampleComponent],
+      imports: [
+        CardAsButtonDirective,
+        CardComponent,
+        CardHeaderComponent,
+        ItemComponent,
+        CardExampleComponent,
+      ],
     }),
   ],
 };
@@ -37,4 +46,31 @@ export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-card-example></cookbook-card-example>`,
   }),
+};
+
+export const Focused: Story = {
+  render: () => ({
+    template: `
+      <kirby-card [hasPadding]="true" (click)="noop()">
+        <kirby-card-header [hasPadding]="false">
+          <kirby-item [disclosure]="'arrow-more'">
+            <p class="kirby-text-normal-bold">Item disclosure in header</p>
+          </kirby-item>
+        </kirby-card-header>
+        Clickable card with focus ring
+      </kirby-card>
+    `,
+    styles: [':host { padding: 8px; } kirby-card { --kirby-card-padding-top: 0px; }'],
+    props: {
+      noop: () => {
+        // noop
+      },
+    },
+  }),
+  play: async ({ canvasElement }) => {
+    const card = canvasElement.querySelector('kirby-card');
+    if (card) {
+      (card as HTMLElement).focus();
+    }
+  },
 };
