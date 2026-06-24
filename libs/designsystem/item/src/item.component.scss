@@ -10,8 +10,6 @@ $outside-slot-width: utils.relative-size('s');
   display: block;
   position: relative;
 
-  --kirby-item-detail-color: #{utils.get-text-color('semi-dark')};
-
   &.sm,
   :host-context(kirby-card.menu-popover) &:not([size]) {
     ion-item {
@@ -39,8 +37,10 @@ $outside-slot-width: utils.relative-size('s');
     z-index: 1;
   }
 
-  @include utils.hover {
-    --kirby-item-detail-color: #{utils.get-text-color('black')};
+  &.interactive {
+    @include utils.hover {
+      --kirby-item-detail-color: #{utils.get-text-color('black')};
+    }
   }
 }
 

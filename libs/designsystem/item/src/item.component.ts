@@ -66,6 +66,11 @@ export class ItemComponent implements AfterViewInit {
   @Input()
   href: string;
 
+  @HostBinding('class.interactive')
+  get interactive(): boolean {
+    return !!this.disclosure || !!this.selectable || !!this.href;
+  }
+
   @Input() rotateIcon: boolean = false;
 
   @ContentChild(CheckboxComponent, { static: false, read: ElementRef })
