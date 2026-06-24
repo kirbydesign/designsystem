@@ -14,12 +14,12 @@ const config = {
       <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
       <p class="kirby-item-disclosure">
         <time>20.12.2017</time>
-          <kirby-icon name="arrow-more"></kirby-icon>
-        </p>
+        <kirby-icon name="arrow-more"></kirby-icon>
+      </p>
     </kirby-label>
-    <p class="kirby-item-subtitle">Subtitle</p>
-    <p class="kirby-item-detail kirby-item-wrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
-  </kirby-label>
+      <p class="kirby-item-subtitle">Subtitle</p>
+      <p class="kirby-item-detail kirby-item-wrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
+   </kirby-label>
 </kirby-item>`,
 };
 
