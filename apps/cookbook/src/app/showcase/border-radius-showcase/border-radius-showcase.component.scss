@@ -1,0 +1,20 @@
+@use '../design-token-table';
+@use '../showcase.shared';
+
+.radius-sample {
+  display: block;
+  width: var(--kirby-spacing-xxl);
+  height: var(--kirby-spacing-xxl);
+  background-color: var(--kirby-primary-tint);
+  border-radius: var(--kirby-border-radius-xxs);
+}
+
+.radius-sample.pill {
+  height: var(--kirby-spacing-l);
+  border-radius: var(--kirby-border-radius-pill);
+  margin-block: var(--kirby-spacing-xxs);
+}
+
+.radius-sample.circle {
+  border-radius: var(--kirby-border-radius-circle);
+}

@@ -1,0 +1,10 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--kirby-spacing-xxs);
+  vertical-align: middle;
+}
+
+:host(.copied) button {
+  color: var(--kirby-success-shade);
+}

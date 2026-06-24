@@ -1,31 +1,32 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+$badge-size-small: 0.8em;
+$badge-size-medium: 1.6em;
+$badge-padding-inline: 0.5em;
+$badge-padding-block: 0.3em;
+$badge-icon-size: 1.6em;
+$maximum-font-size: 10px * utils.$text-resize-threshold;
+
 :host {
   position: var(--kirby-badge-position, relative);
   left: var(--kirby-badge-left, auto);
   right: var(--kirby-badge-right, auto);
   top: var(--kirby-badge-top, auto);
   z-index: var(--kirby-badge-z-index, auto);
-  font-size: utils.font-size('xxs');
-  line-height: 1;
+  font-size: var(--kirby-badge-font-size, min($maximum-font-size, var(--kirby-font-size-xxs)));
+  display: inline-flex;
 
   ion-badge {
     --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
     --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: utils.border-radius('s');
+    border-radius: utils.border-radius('pill');
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
 
-    @include utils.slotted(kirby-icon) {
-      --kirby-icon-font-size: #{utils.font-size('n')};
-
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+    --kirby-icon-font-size: #{$badge-icon-size};
   }
 
   // Colors
@@ -75,20 +76,30 @@
     padding: initial;
     min-height: initial;
     min-width: initial;
-    height: utils.size('xxs');
-    width: utils.size('xxs');
+    height: $badge-size-small;
+    width: $badge-size-small;
   }
 }
 
 :host(.md) {
   ion-badge {
-    --padding-top: 3px;
-    --padding-end: 5px;
-    --padding-bottom: 3px;
-    --padding-start: 5px;
+    --padding-end: var(--kirby-badge-padding-inline, #{$badge-padding-inline});
+    --padding-start: var(--kirby-badge-padding-inline, #{$badge-padding-inline});
+    --padding-bottom: var(--kirby-badge-padding-block, #{$badge-padding-block});
+    --padding-top: var(--kirby-badge-padding-block, #{$badge-padding-block});
 
-    min-width: utils.size('s');
-    min-height: utils.size('s');
+    min-width: $badge-size-medium;
+    min-height: $badge-size-medium;
+  }
+
+  &:has(kirby-icon) {
+    ion-badge {
+      --padding-top: 0px;
+      --padding-start: 0px;
+
+      height: $badge-size-medium;
+      width: $badge-size-medium;
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
 
 import { RangeComponent } from '@kirbydesign/designsystem/range';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 const meta: Meta<RangeComponent> = {
   component: RangeComponent,
@@ -61,4 +62,22 @@ export const RangePin: Story = {
       <kirby-range ${argsToTemplate(args)}></kirby-range>
     `,
   }),
+};
+
+export const Focused: Story = {
+  args: {
+    value: 50,
+    min: 0,
+    max: 100,
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-range ${argsToTemplate(args)}></kirby-range>`,
+    styles: [':host { padding: 8px; }'],
+  }),
+  play: async ({ canvasElement }) => {
+    const range = canvasElement.querySelector('ion-range');
+    await TestHelper.whenReady(range);
+    (range as HTMLElement).focus();
+  },
 };
