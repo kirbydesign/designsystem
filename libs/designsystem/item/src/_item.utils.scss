@@ -166,6 +166,24 @@ $base-typography-selectors: (':where(.kirby-item-title)');
         white-space: initial;
         text-overflow: ellipsis;
       }
+
+      @include utils.slotted('.kirby-item-detail.kirby-item-wrap') {
+        @include utils.line-clamp(2);
+
+        text-overflow: ellipsis;
+      }
+    }
+
+    :host(.horizontal) ion-label {
+      flex-direction: column;
+      align-items: flex-start;
+
+      @include utils.slotted('.kirby-item-detail') {
+        position: absolute;
+        top: var(--padding-top, 0);
+        right: utils.size('s');
+        margin-left: 0;
+      }
     }
   }
 }
