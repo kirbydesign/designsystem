@@ -91,14 +91,12 @@ import{$b as fo,$c as Wt,$d as _i,Aa as We,Ac as _o,Ad as Le,Ae as $o,Ba as P,Bc
   <button kirby-button [disabled]="true" attentionLevel="2" slot="end">Button</button>
 </kirby-item>`},Sp=(()=>{let e=class e{constructor(){this.template=Pr.template}};e.\u0275fac=function(t){return new(t||e)},e.\u0275cmp=d({type:e,selectors:[["cookbook-item-example-disabled-controls"]],decls:13,vars:4,consts:[["slot","end",3,"disabled"],["kirby-button","","attentionLevel","2","slot","end",3,"disabled"]],template:function(t,a){t&1&&(o(0,"kirby-item")(1,"kirby-checkbox",0),l(2,"Item with Checkbox"),n()(),o(3,"kirby-item")(4,"kirby-radio",0),l(5,"Item with Radio"),n()(),o(6,"kirby-item")(7,"kirby-toggle",0),l(8,"Item with Toggle"),n()(),o(9,"kirby-item"),l(10," Item with Button "),o(11,"button",1),l(12,"Button"),n()()),t&2&&(c(),m("disabled",!0),c(3),m("disabled",!0),c(3),m("disabled",!0),c(4),m("disabled",!0))},dependencies:[h,B,ke,Te,f],styles:["kirby-item[_ngcontent-%COMP%]:not(:last-child){margin-bottom:var(--kirby-spacing-xxs)}kirby-card[_ngcontent-%COMP%] + kirby-card[_ngcontent-%COMP%]{margin-top:var(--kirby-spacing-xxs)}.kirby-item-disclosure[_ngcontent-%COMP%]{display:flex;align-items:center}"]});let i=e;return i})();var Dr={selector:"cookbook-item-example-complex-labels",template:`<kirby-item>
   <kirby-badge slot="outside" themeColor="danger" size="sm"></kirby-badge>
-  <kirby-avatar slot="start" overlay="true" imageSrc="/assets/images/woman.png">
-  </kirby-avatar>
+  <kirby-avatar slot="start" overlay="true" imageSrc="/assets/images/woman.png"></kirby-avatar>
    <kirby-label>
      <kirby-label direction="horizontal">
       <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
       <p class="kirby-item-disclosure">
-        <time>20.12.2017</time>
-        <kirby-icon name="arrow-more"></kirby-icon>
+        <time>20.12.2017</time><kirby-icon name="arrow-more"></kirby-icon>
       </p>
     </kirby-label>
       <p class="kirby-item-subtitle">Subtitle</p>
