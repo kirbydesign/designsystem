@@ -17,6 +17,7 @@ import {
   ConfigToken as IonConfigToken,
 } from '@ionic/angular/common';
 import type { IonicConfig } from '@ionic/core';
+import { GestureController } from '@kirbydesign/designsystem/gesture';
 import { LoadingOverlayService } from '@kirbydesign/designsystem/loading-overlay';
 import {
   ActionSheetHelper,
@@ -74,6 +75,7 @@ export function provideKirby(
     ResizeObserverFactory,
     ResizeObserverService,
     CanDismissHelper,
+    GestureController,
     ...patchIonicProviders(),
     features,
   ]);
