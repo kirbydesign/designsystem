@@ -15,7 +15,7 @@ const config = {
         <time>20.12.2017</time><kirby-icon name="arrow-more"></kirby-icon>
       </p>
     </kirby-label>
-      <p class="kirby-item-subtitle">Subtitle</p>
+      <p class="kirby-item-subtitle">Subtitle will wrap if necessary in two lines and truncate with ellipsis if it overflows.</p>
       <p class="kirby-item-detail kirby-item-wrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Ut non neque vitae felis ultricies imperdiet in ut orci.</p>
    </kirby-label>
 </kirby-item>`,
