@@ -196,3 +196,14 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 .custom-section {
   margin-top: utils.size('xxs');
 }
+
+:host-context(.kirby-trt) {
+  @include utils.media('<medium') {
+    .subtitle span {
+      @include utils.line-clamp(2);
+
+      white-space: initial;
+      text-overflow: ellipsis;
+    }
+  }
+}
