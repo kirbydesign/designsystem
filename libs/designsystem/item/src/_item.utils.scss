@@ -49,7 +49,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     '[detail]',
     '.kirby-item-subtitle',
     '.kirby-item-detail',
-    '.kirby-item-disclosure'
+    '.kirby-item-time-disclosure'
   ) {
     font-size: utils.font-size('xs');
     line-height: utils.line-height('xs');
@@ -59,11 +59,11 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     margin-bottom: utils.size('xxxs');
   }
 
-  @include utils.slotted('[detail]', '.kirby-item-detail', '.kirby-item-disclosure') {
+  @include utils.slotted('[detail]', '.kirby-item-detail', '.kirby-item-time-disclosure') {
     color: utils.get-text-color('semi-dark');
   }
 
-  @include utils.slotted('.kirby-item-disclosure') {
+  @include utils.slotted('.kirby-item-time-disclosure') {
     display: flex;
     align-items: center;
   }
@@ -196,7 +196,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
       flex-direction: column;
       align-items: flex-start;
 
-      @include utils.slotted('.kirby-item-disclosure') {
+      @include utils.slotted('.kirby-item-time-disclosure') {
         position: absolute;
         top: var(--padding-top, 0);
         right: utils.size('s');
