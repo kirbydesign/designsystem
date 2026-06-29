@@ -53,16 +53,6 @@ kirby-card.nested-modal-configuration {
 
 kirby-form-field {
   margin-top: var(--kirby-spacing-m);
-
-  // Prevents iOS Safari / Ionic scrollAssist from causing the form field to
-  // jump in modals when a label is present. !important is required to
-  // override Ionic's dynamic JavaScript inline styling.
-  input[kirby-input] {
-    &.cloned-input {
-      top: 0 !important;
-      transform: none !important;
-    }
-  }
 }
 
 .size-selector-heading {

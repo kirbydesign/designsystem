@@ -28,6 +28,13 @@ $form-field-label-height: 24px;
   }
 }
 
+:host-context(ion-modal) {
+  &.cloned-input {
+    top: 0 !important;
+    transform: none !important;
+  }
+}
+
 :host {
   @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
 
