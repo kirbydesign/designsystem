@@ -5,8 +5,3 @@ kirby-item:not(:last-child) {
 kirby-card + kirby-card {
   margin-top: var(--kirby-spacing-xxs);
 }
-
-.kirby-item-disclosure {
-  display: flex;
-  align-items: center;
-}

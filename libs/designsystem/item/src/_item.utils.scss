@@ -63,6 +63,11 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     color: utils.get-text-color('semi-dark');
   }
 
+  @include utils.slotted('.kirby-item-disclosure') {
+    display: flex;
+    align-items: center;
+  }
+
   @include utils.slotted('[wrap]', '.kirby-item-wrap') {
     white-space: normal;
   }
