@@ -6,12 +6,6 @@
   or as CSS custom properties.
 </p>
 
-<cookbook-aside>
-  Click any row to copy the
-  <code>var()</code>
-  usage to your clipboard.
-</cookbook-aside>
-
 <h2>Brand Colors</h2>
 <table class="kirby-table">
   <thead>
@@ -23,15 +17,19 @@
   </thead>
   <tbody>
     @for (token of brandColors; track token.name) {
-      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
-          <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
+          <span
+            class="color-swatch token-preview"
+            [style.background-color]="'var(' + token.cssVar + ')'"
+          ></span>
         </td>
       </tr>
     }
@@ -49,15 +47,19 @@
   </thead>
   <tbody>
     @for (token of notificationColors; track token.name) {
-      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
-          <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
+          <span
+            class="color-swatch token-preview"
+            [style.background-color]="'var(' + token.cssVar + ')'"
+          ></span>
         </td>
       </tr>
     }
@@ -75,15 +77,19 @@
   </thead>
   <tbody>
     @for (token of systemColors; track token.name) {
-      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
-          <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
+          <span
+            class="color-swatch token-preview"
+            [style.background-color]="'var(' + token.cssVar + ')'"
+          ></span>
         </td>
       </tr>
     }
@@ -101,15 +107,19 @@
   </thead>
   <tbody>
     @for (token of textColors; track token.name) {
-      <tr class="kirby-selectable-row" [cookbookCopyToken]="token.cssVar">
+      <tr>
         <td>
           <code>{{ token.name }}</code>
         </td>
         <td>
           <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
         </td>
         <td>
-          <span class="color-swatch" [style.background-color]="'var(' + token.cssVar + ')'"></span>
+          <span
+            class="color-swatch token-preview"
+            [style.background-color]="'var(' + token.cssVar + ')'"
+          ></span>
         </td>
       </tr>
     }
@@ -138,6 +148,7 @@
         </td>
         <td>
           <code>--kirby-decoration-color-{{ group.hue }}-*</code>
+          <cookbook-copy-token #copyBtn [cssVar]="group.tokens[0].cssVar"></cookbook-copy-token>
         </td>
         <td>
           <div class="decoration-ramp">
@@ -145,7 +156,7 @@
               <span
                 class="decoration-swatch"
                 [style.background-color]="'var(' + token.cssVar + ')'"
-                [cookbookCopyToken]="token.cssVar"
+                (click)="copyBtn.copy(token.cssVar)"
               ></span>
             }
           </div>

@@ -14,6 +14,10 @@
 
 :root,
 :host {
+  // DO NOT REMOVE: On iOS, Ionic's typography sets `font: -apple-system-body` on html,
+  // which resets font-family to the system font. This explicit declaration on :root (higher
+  // specificity than html) ensures Roboto is inherited by all components, including those
+  // in Shadow DOM (ion-tab-button, etc.) that don't set font-family themselves.
   font-family: var(--kirby-font-family);
   @include design-tokens.all;
   @include component-themes.apply-light-theme;

@@ -75,7 +75,7 @@ import { OpenState } from './combobox.types';
 export class ComboboxComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
 {
-  static readonly OPEN_DELAY_IN_MS = 100;
+  private static readonly HEIGHT_OF_STANDARD_ITEM = 44;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
@@ -168,7 +168,7 @@ export class ComboboxComponent
   public itemHeight: number = 44;
 
   protected get dropdownMaxHeight(): number {
-    return 8 * this.itemHeight;
+    return 8 * ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
   }
 
   protected get dropdownMinHeight(): number {
@@ -229,7 +229,7 @@ export class ComboboxComponent
    * A function that takes a search term and the list of items, and returns a filtered list of items to display in the dropdown.
    */
   @Input()
-  public searchFunction: (searchTerm: string, itemsToSearch: unknown[]) => unknown[] =
+  public searchFunction: (searchTerm: string, itemsToSearch: any[]) => any[] =
     this._defaultSearchFunction;
 
   private _searchItems: unknown[] = [];
@@ -245,6 +245,7 @@ export class ComboboxComponent
     // only set the focused item of the search result, if the input has value
     if (this.textInput?.nativeElement?.value) {
       this.focusedItem = this._searchItems[0];
+      this._virtualScrollViewport?.scrollToIndex(0);
     }
   }
 
@@ -281,6 +282,7 @@ export class ComboboxComponent
       this.focusedItem = this._selectedItem;
       // Keep ControlValueAccessor value in sync with the selected data item
       this.value = this._selectedItem;
+      this.setInputDisplayValue(this.getItemText(this.selectedItem));
     }
   }
 
@@ -298,6 +300,7 @@ export class ComboboxComponent
     if (this._focusedItem === item) {
       return;
     }
+
     this._focusedItem = item;
   }
 
@@ -402,7 +405,7 @@ export class ComboboxComponent
    * Emitted when an item is selected (tap on mobile, click/keypress on web)
    */
   @Output()
-  public change: EventEmitter<unknown> = new EventEmitter<unknown>();
+  public change: EventEmitter<any> = new EventEmitter<any>();
 
   public value: unknown = undefined;
 
@@ -449,7 +452,7 @@ export class ComboboxComponent
   }
 
   @ViewChild(CdkVirtualScrollViewport)
-  private virtualScrollViewport?: CdkVirtualScrollViewport;
+  public _virtualScrollViewport?: CdkVirtualScrollViewport;
 
   private forwardAriaLabelToCombobox() {
     forwardAttributes(
@@ -557,8 +560,7 @@ export class ComboboxComponent
     }
     if (!this.isOpen) {
       this.state = OpenState.opening;
-      setTimeout(() => this.showPopOver(), ComboboxComponent.OPEN_DELAY_IN_MS);
-
+      this.showPopOver();
       this.focusedItem = this.selectedItem;
     }
   }
@@ -567,8 +569,11 @@ export class ComboboxComponent
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
       this.popover?.show();
-      this.scrollToIndexIntoViewWhenOpeningPopup();
       this.cdr.markForCheck();
+      // PopoverComponent.show() appends the element to document.body synchronously but
+      // finishes positioning in a requestAnimationFrame. One rAF is enough to let the
+      // browser compute layout so the CDK viewport has a real size before we scroll.
+      requestAnimationFrame(() => this.scrollToIndexIntoViewWhenOpeningPopup());
     }
   }
 
@@ -919,40 +924,33 @@ export class ComboboxComponent
   private setInputDisplayValue(value: string): void {
     // We intentionally update the DOM input imperatively ("hard way")
     // to ensure the visible value is cleared/updated immediately.
-    if (this.textInput?.nativeElement) {
-      this.renderer.setProperty(this.textInput.nativeElement, 'value', value);
+    if (this.interactiveElement) {
+      this.renderer.setProperty(this.interactiveElement, 'value', value);
     }
   }
 
   private scrollFocusedItemIntoViewWhileNavigating(): void {
-    const kirbyItems = this.getKirbyItems();
-    if (!kirbyItems || kirbyItems.length === 0) return;
-
-    if (!this.focusedItem) {
+    if (!this.focusedItem || !this._virtualScrollViewport) {
       return;
     }
 
-    const id = this.getItemId(this.focusedItem);
-    if (!id) return;
+    const focusedIndex = this.searchItems.indexOf(this.focusedItem);
+    if (focusedIndex === -1) return;
 
-    const match = kirbyItems.toArray().find((el) => {
-      if (el.nativeElement.id === undefined) {
-        console.error(
-          'Each item must have an id attribute for scroll to work. Ensure that the ´[attr.id]´ is set correctly, and that each item has a unique id value.'
-        );
-      }
-      return el.nativeElement.id === id;
-    });
+    const itemTop = focusedIndex * this.itemHeight;
+    const itemBottom = itemTop + this.itemHeight;
+    const scrollOffset = this._virtualScrollViewport.measureScrollOffset();
+    const viewportSize = this._virtualScrollViewport.getViewportSize();
 
-    if (!match) {
-      this.scrollToIndexIntoViewWhenOpeningPopup();
-      return;
+    if (itemTop < scrollOffset) {
+      // Item is above the visible area — scroll up so item appears at the top.
+      this._virtualScrollViewport.scrollToOffset(itemTop);
+    } else if (itemBottom > scrollOffset + viewportSize) {
+      // Item is below the visible area — scroll down so item appears at the bottom.
+      this._virtualScrollViewport.scrollToOffset(itemBottom - viewportSize);
     }
 
-    const scrollIntoView = match.nativeElement.scrollIntoView;
-    if (typeof scrollIntoView === 'function') {
-      scrollIntoView.call(match.nativeElement, { block: 'nearest' });
-    }
+    this._virtualScrollViewport.checkViewportSize();
   }
 
   private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
@@ -963,14 +961,10 @@ export class ComboboxComponent
 
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
-    if (focusedIndex < 0) return;
 
-    if (focusedIndex === 0) {
-      this.virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
-      this.virtualScrollViewport?.checkViewportSize();
-      return;
-    }
+    this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
+    this._virtualScrollViewport?.checkViewportSize();
 
-    this.virtualScrollViewport?.scrollToIndex(focusedIndex);
+    this._virtualScrollViewport?.scrollToIndex(focusedIndex);
   }
 }
