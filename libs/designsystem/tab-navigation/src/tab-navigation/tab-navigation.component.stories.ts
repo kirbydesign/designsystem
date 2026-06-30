@@ -42,3 +42,22 @@ export const TabNavigation: Story = {
   </kirby-tab-navigation>`,
   }),
 };
+
+export const Focused: Story = {
+  args: {
+    selectedIndex: 0,
+  },
+  render: (args) => ({
+    props: args,
+    template: `<kirby-tab-navigation ${argsToTemplate(args)}>
+    <kirby-tab-navigation-item label="Item 1"></kirby-tab-navigation-item>
+    <kirby-tab-navigation-item label="Item 2"></kirby-tab-navigation-item>
+    <kirby-tab-navigation-item label="Item 3"></kirby-tab-navigation-item>
+  </kirby-tab-navigation>`,
+    styles: [':host { padding: 8px; }'],
+  }),
+  play: async ({ canvasElement }) => {
+    const button = canvasElement.querySelector('button');
+    (button as HTMLElement)?.focus();
+  },
+};

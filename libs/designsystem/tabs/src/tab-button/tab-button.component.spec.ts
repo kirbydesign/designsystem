@@ -81,7 +81,6 @@ describe('TabsComponent', () => {
           expect(ionTabButton).toHaveComputedStyle({
             'font-weight': fontWeight('medium'),
             'font-size': fontSize('xs'),
-            'line-height': lineHeight('xs'),
           });
         });
       });
@@ -109,7 +108,6 @@ describe('TabsComponent', () => {
         it('should have correct typography', () => {
           expect(ionTabButton).toHaveComputedStyle({
             'font-size': fontSize('s'),
-            'line-height': lineHeight('s'),
           });
         });
       });

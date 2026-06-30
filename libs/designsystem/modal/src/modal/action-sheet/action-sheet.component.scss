@@ -31,7 +31,10 @@ $max-width: 375px;
   /* stylelint-enable no-duplicate-selectors */
 
   button[kirby-button].no-decoration {
-    @include interaction-state.apply-focus-visible-background;
+    &:focus-visible {
+      transition: interaction-state.transition();
+      box-shadow: var(--kirby-focus-ring-md-inset);
+    }
   }
 }
 
@@ -51,7 +54,10 @@ kirby-card {
 }
 
 .cancel-btn {
-  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(8));
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: utils.get-elevation(8), var(--kirby-focus-ring-md-inset);
+  }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
