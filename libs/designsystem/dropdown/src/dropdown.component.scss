@@ -55,6 +55,7 @@ $min-screen-width: 375px;
     .text {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
@@ -100,5 +101,11 @@ kirby-card {
     & > button {
       box-shadow: none;
     }
+  }
+}
+
+:host-context(.kirby-trt) {
+  @include utils.media('<medium') {
+    max-width: 100%;
   }
 }
