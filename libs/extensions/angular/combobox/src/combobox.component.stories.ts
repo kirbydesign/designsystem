@@ -380,6 +380,25 @@ export const ExpandBlock: Story = {
   }),
 };
 
+export const Focused: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: { ...args },
+    template: `
+      <kirby-x-combobox [placeholder]="placeholder" [items]="items"></kirby-x-combobox>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const input = canvasElement.querySelector('kirby-x-combobox input');
+    if (input) {
+      (input as HTMLElement).focus();
+    }
+  },
+};
+
 /**
  * This example demonstrates the combobox integrated inside a `kirby-form-field`
  * with a reactive `FormControl`. It validates that:

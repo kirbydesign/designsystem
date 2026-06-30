@@ -1,6 +1,7 @@
 import {
   applicationConfig,
   argsToTemplate,
+  componentWrapperDecorator,
   Meta,
   moduleMetadata,
   StoryObj,
@@ -519,3 +520,14 @@ function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
     ...item,
   };
 }
+
+export const Focused: Story = {
+  ...Default,
+  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
+  play: async ({ canvasElement }) => {
+    const menuItem = canvasElement.querySelector('kirby-x-sidebar-menu-item');
+    if (menuItem) {
+      (menuItem as HTMLElement).focus();
+    }
+  },
+};

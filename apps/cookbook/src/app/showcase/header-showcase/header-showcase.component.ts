@@ -95,7 +95,7 @@ export class HeaderShowcaseComponent {
     {
       name: 'titleMaxLines',
       description:
-        'The allowed number of lines in the title. The text will be scaled from h1 -> h3 to fit and otherwise truncated.',
+        'The maximum number of lines allowed for the title. The font size will be progressively reduced to fit. If the text still overflows, it will be truncated with an ellipsis. Only the visual size changes — no heading levels are affected.',
       type: ['number'],
       defaultValue: '',
     },

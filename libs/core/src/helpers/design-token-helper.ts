@@ -53,12 +53,29 @@ export class DesignTokenHelper {
     return styles.sizes[key];
   }
 
+  /**
+   * Returns the pixel value for a font size at 100% zoom (16px base).
+   * Extracts the rem value from any CSS value (e.g., 'clamp(13px, 1rem, 32px)')
+   * and converts it to px. This is robust towards CSS functions like clamp, min, max.
+   */
   public static fontSize(key: keyof typeof styles.fontSizes): string {
-    return styles.fontSizes[key];
+    const value = styles.fontSizes[key];
+    const remValue = value.split(/[,\s()]/).find((part) => part.endsWith('rem'));
+
+    if (remValue) {
+      return `${parseFloat(remValue) * parseInt(styles.baseFontSizePx)}px`;
+    }
+    return value;
   }
 
   public static iconFontSize(key: keyof typeof styles.iconFontSizes): string {
-    return styles.iconFontSizes[key];
+    const value = styles.iconFontSizes[key];
+    const remValue = value.split(/[,\s()]/).find((part) => part.endsWith('rem'));
+
+    if (remValue) {
+      return `${parseFloat(remValue) * parseInt(styles.baseFontSizePx)}px`;
+    }
+    return value;
   }
 
   public static fontWeight(key: keyof typeof styles.fontWeight): string {
@@ -67,6 +84,14 @@ export class DesignTokenHelper {
 
   public static lineHeight(key: keyof typeof styles.lineHeight): string {
     return styles.lineHeight[key];
+  }
+
+  public static textResizeThreshold(): string {
+    return styles.textResizeThreshold;
+  }
+
+  public static baseFontSizePx(): string {
+    return styles.baseFontSizePx;
   }
 
   public static backgroundColor(): string {

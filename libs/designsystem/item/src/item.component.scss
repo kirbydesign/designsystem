@@ -3,6 +3,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
 
+$fixed-badge-font-size: 10px;
+$outside-slot-width: utils.relative-size('s');
+
 :host {
   display: block;
   position: relative;
@@ -24,19 +27,28 @@
   }
 
   .outside {
-    left: utils.size('xxxs');
+    --kirby-badge-font-size: #{$fixed-badge-font-size}; // do not scale badge with font-size in outside slot
+
+    display: flex;
+    width: $outside-slot-width;
     margin: 0;
     position: absolute;
-    width: utils.size('s');
+    left: utils.size('xxxs');
     z-index: 1;
   }
 }
 
 ion-item {
-  &::part(native):focus-visible {
-    box-shadow:
-      0 0 0 2px utils.$focus-ring-color inset,
-      0 0 0 4px utils.get-color('white') inset;
+  &::part(native) {
+    border-radius: var(--kirby-content-border-top-radius, 0)
+      var(--kirby-content-border-top-radius, 0) var(--kirby-content-border-bottom-radius, 0)
+      var(--kirby-content-border-bottom-radius, 0);
+
+    &:focus-visible {
+      box-shadow:
+        0 0 0 2px utils.$focus-ring-color inset,
+        0 0 0 4px utils.get-color('white') inset;
+    }
   }
 
   @include interaction-state.apply-hover-ionic('xxxs');
@@ -93,6 +105,7 @@ ion-item {
   }
 
   @include item.item-typography;
+  @include item.handle-text-resize;
 
   @include utils.slotted(':not([slot])') {
     width: 100%;
@@ -129,6 +142,8 @@ ion-item {
 }
 
 .disclosure {
+  --kirby-icon-font-size: #{utils.size('m')}; // do not scale disclosure with font-size
+
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
 
@@ -156,9 +171,12 @@ ion-item {
 }
 
 // Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
-:host-context(kirby-dropdown .focused) ion-item,
-:host-context(kirby-popover .focused) ion-item {
-  --background: #{interaction-state.get-state-color('white', 'xxxs')};
+:host(.keyboard-focused) ion-item,
+:host-context(kirby-popover .keyboard-focused) ion-item {
+  &::part(native) {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
+  }
 }
 
 // Prevents the item from being clicked when disabled
@@ -182,32 +200,8 @@ ion-item {
   }
 }
 
-:host-context(kirby-list-item:first-of-type),
-:host-context(kirby-card):first-child {
-  ion-item::part(native) {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
-  }
-}
-
-:host-context(kirby-list-item:last-of-type),
-:host-context(kirby-card):last-child {
-  ion-item::part(native) {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
-  }
-}
-
-:host-context(.has-header kirby-list-item:first-of-type) {
-  ion-item::part(native) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-
-:host-context(.has-footer kirby-list-item:last-of-type) {
-  ion-item::part(native) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+:host-context(kirby-card-header) {
+  ion-item {
+    --background: transparent;
   }
 }
