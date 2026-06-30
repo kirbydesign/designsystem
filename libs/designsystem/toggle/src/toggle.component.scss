@@ -63,12 +63,17 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 ion-toggle {
-  @include interaction-state.apply-focus-part($part: 'track') {
-    // Overflow and contain style needed to make focus ring visible as per ionic docs
-    // https://ionicframework.com/docs/api/toggle#customizing-overflow
-    overflow: visible;
-    contain: none;
+  &:focus-visible::part(track) {
+    transition:
+      box-shadow #{interaction-state.$default-transition-duration} linear,
+      background-color #{interaction-state.$default-transition-duration} linear;
+    box-shadow: var(--kirby-focus-ring-sm-inset);
   }
+
+  // Overflow and contain style needed to make focus ring visible as per ionic docs
+  // https://ionicframework.com/docs/api/toggle#customizing-overflow
+  overflow: visible;
+  contain: none;
 
   &:focus-visible {
     // Remove default browser focus visible
@@ -124,6 +129,8 @@ ion-toggle {
     --border-radius: #{math.div($toggle-size, 2)};
 
     &::part(track) {
+      transition: interaction-state.transition();
+      transition-property: background-color, box-shadow;
       height: $toggle-size;
     }
   }

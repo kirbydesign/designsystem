@@ -115,7 +115,7 @@ const meta: Meta<ComboboxComponent> = {
   },
   argTypes: {
     items: { control: false },
-    selectedItem: { control: false },
+    selectedItem: { control: 'object' },
     searchFunction: { control: false },
     hasErrorChange: { control: false },
     change: { control: false },
@@ -378,6 +378,25 @@ export const ExpandBlock: Story = {
       <kirby-x-combobox ${argsToTemplate(args)} />
     `,
   }),
+};
+
+export const Focused: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: { ...args },
+    template: `
+      <kirby-x-combobox [placeholder]="placeholder" [items]="items"></kirby-x-combobox>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const input = canvasElement.querySelector('kirby-x-combobox input');
+    if (input) {
+      (input as HTMLElement).focus();
+    }
+  },
 };
 
 /**

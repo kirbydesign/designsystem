@@ -242,6 +242,25 @@ export const CookbookExample: Story = {
   }),
 };
 
+export const DropdownFocused: Story = {
+  args: {
+    items: items,
+    selectedIndex: 0,
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>
+    `,
+    styles: [':host { padding: 8px; }'],
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const dropdown = canvas.getByRole('combobox');
+    dropdown.focus();
+  },
+};
+
 export const DropdownOpenedPopoutTopStartWithAsyncItems: Story = {
   decorators: [withPosition('top-start')],
   render: () => ({

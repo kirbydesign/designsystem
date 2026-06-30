@@ -2,6 +2,7 @@
 
 :host {
   display: flex;
+  flex-wrap: wrap;
   position: relative;
   gap: utils.size('xxs');
 }
@@ -11,6 +12,14 @@
 
   .hidden-layer {
     order: -1; // Move hidden layer to left of buttons and more menu
+  }
+}
+
+:host-context(kirby-header .actions.emphasize) {
+  @include utils.media('<medium') {
+    // On narrow screens, when in a header with emphasized actions, buttons should
+    // always justify start to be correctly placed when wrapping to the next line
+    justify-content: flex-start;
   }
 }
 
