@@ -104,7 +104,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
     // Apply text clamp if text is scaled
     ion-item {
-      @include utils.slotted('.kirby-item-title') {
+      @include utils.slotted('.kirby-item-title:not(.kirby-item-wrap)') {
         @include utils.line-clamp(2);
 
         white-space: initial;
@@ -179,7 +179,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
       flex-direction: column;
       align-items: flex-start;
 
-      @include utils.slotted('.kirby-item-title') {
+      @include utils.slotted('.kirby-item-title:not(.kirby-item-wrap)') {
         @include utils.line-clamp(2);
 
         white-space: initial;
@@ -190,12 +190,6 @@ $base-typography-selectors: (':where(.kirby-item-title)');
         @include utils.line-clamp(2);
 
         white-space: initial;
-        text-overflow: ellipsis;
-      }
-
-      @include utils.slotted('.kirby-item-detail.kirby-item-wrap') {
-        @include utils.line-clamp(2);
-
         text-overflow: ellipsis;
       }
 
