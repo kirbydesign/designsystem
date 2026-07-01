@@ -3,7 +3,6 @@ import { defaultIcons } from '@kirbydesign/designsystem';
 import { Color, ColorHelper } from '@kirbydesign/designsystem';
 import { NgClass } from '@angular/common';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 const config = {
   selector: 'cookbook-icon-default-example',
@@ -33,7 +32,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './shared.scss',
-  imports: [IconComponent, ThemeColorDirective, NgClass],
+  imports: [IconComponent, NgClass],
 })
 export class IconDefaultExampleComponent {
   static htmlSnippet: string = config.htmlSnippet;

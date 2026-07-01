@@ -4,7 +4,6 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalComponent, ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 import { PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import {
   ModalExampleSizeSelectorComponent,
@@ -86,7 +85,6 @@ didDismiss() {
     PageTitleComponent,
     ModalFooterComponent,
     EmptyStateComponent,
-    ThemeColorDirective,
     CardComponent,
     ModalExampleSizeSelectorComponent,
     CardHeaderComponent,

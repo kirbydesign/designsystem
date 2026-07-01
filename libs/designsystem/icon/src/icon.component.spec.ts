@@ -5,8 +5,6 @@ import { By } from '@angular/platform-browser';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { ThemeColorDirective } from '../../src/lib';
-
 import { IconRegistryService } from './icon-registry.service';
 import { IconComponent, IconSize } from './icon.component';
 
@@ -15,12 +13,7 @@ const { getColor, iconFontSize } = DesignTokenHelper;
 describe('IconComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        TestHelper.ionicModuleForTest,
-        IconComponent,
-        TestWrapperComponent,
-        ThemeColorDirective,
-      ],
+      imports: [TestHelper.ionicModuleForTest, IconComponent, TestWrapperComponent],
       providers: [IconRegistryService],
     });
   }));
@@ -91,7 +84,8 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
 
-      expect(el.nativeElement.className).toBe('kirby-icon');
+      expect(el.nativeElement.classList).toContain('kirby-icon');
+      expect(el.nativeElement.classList).toContain('default');
 
       const expectedColor = window.getComputedStyle(window.document.body)['color'];
 
@@ -192,7 +186,7 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
 @Component({
   selector: 'kirby-test-component',
   template: '<span>PlaceHolder HTML to be Replaced</span>',
-  imports: [IconComponent, ThemeColorDirective],
+  imports: [IconComponent],
 })
 export class TestWrapperComponent {}
 

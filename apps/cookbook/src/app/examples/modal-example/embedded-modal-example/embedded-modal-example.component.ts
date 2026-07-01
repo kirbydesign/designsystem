@@ -24,7 +24,6 @@ import {
   InputComponent,
 } from '@kirbydesign/designsystem/form-field';
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ModalExampleConfigurationComponent } from '../modal-example-configuration/modal-example-configuration.component';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import {
@@ -51,7 +50,6 @@ import {
     DateInputDirective,
     InputComponent,
     ModalFooterComponent,
-    ThemeColorDirective,
   ],
 })
 export class EmbeddedModalExampleComponent implements OnInit {
