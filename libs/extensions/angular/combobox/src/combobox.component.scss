@@ -7,7 +7,9 @@ $margin-horizontal-total: 2 * utils.size('s');
 $min-screen-width: 375px;
 
 :host {
-  @include interaction-state.apply-focus-visible {
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
     outline: none;
     border-radius: utils.border-radius('pill');
   }
@@ -31,6 +33,8 @@ $min-screen-width: 375px;
   }
 
   div {
+    position: relative;
+
     > input[kirby-input] {
       padding-right: utils.size('xl');
     }
@@ -40,8 +44,6 @@ $min-screen-width: 375px;
     }
 
     > kirby-icon {
-      display: flex;
-      align-items: center;
       position: absolute;
       top: 0;
       bottom: 0;

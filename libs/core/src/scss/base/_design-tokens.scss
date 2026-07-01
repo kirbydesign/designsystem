@@ -80,6 +80,12 @@
   }
 }
 
+@mixin relative-sizes() {
+  @each $name, $value in variables.$relative-sizes {
+    --kirby-relative-size-#{$name}: #{$value};
+  }
+}
+
 @mixin z-layers() {
   @each $name, $value in variables.$z-layers {
     --kirby-z-index-#{$name}: #{$value};
@@ -101,6 +107,22 @@
   @each $name, $value in variables.$transition-durations {
     --kirby-transition-duration-#{$name}: #{$value};
   }
+}
+
+@mixin focus-ring() {
+  --kirby-focus-ring-color: #{colors.$focus-ring-color};
+
+  // Small inset ring for compact controls (checkbox, radio, toggle, tab-navigation-item)
+  --kirby-focus-ring-sm-inset:
+    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 3px var(--kirby-white) inset;
+
+  // Medium inset ring for larger controls (button, dropdown, segmented-control, form-field, etc.)
+  --kirby-focus-ring-md-inset:
+    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 4px var(--kirby-white) inset;
+
+  // Medium outer ring for inline elements where inset rings are not suitable (link text)
+  --kirby-focus-ring-md-outer:
+    0 0 0 2px var(--kirby-white), 0 0 0 4px var(--kirby-focus-ring-color);
 }
 
 @mixin transition-easings() {
@@ -150,6 +172,9 @@
   /* SPACINGS */
   @include spacings;
 
+  /* RELATIVE SPACINGS */
+  @include relative-sizes;
+
   /* FAT FINGER SIZE */
   @include size-fat-finger;
 
@@ -163,4 +188,7 @@
   @include transition-durations;
   @include transition-easings;
   @include transition-soft-keyboard;
+
+  /* FOCUS RING */
+  @include focus-ring;
 }
