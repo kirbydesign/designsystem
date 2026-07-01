@@ -11,7 +11,7 @@ const config = {
    <kirby-label>
      <kirby-label direction="horizontal">
       <p class="kirby-item-title">Fusce id neque suscipit, finibus urna convallis, auctor arcu.</p>
-      <p class="kirby-item-time-disclosure">
+      <p class="kirby-item-disclosure">
         <time>20.12.2017</time><kirby-icon name="arrow-more"></kirby-icon>
       </p>
     </kirby-label>

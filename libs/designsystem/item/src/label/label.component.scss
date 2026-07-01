@@ -24,11 +24,6 @@
 /* stylelint-disable selector-pseudo-element-no-unknown */
 :host-context(kirby-item) ::ng-deep ion-label {
   @include item.item-typography;
-
-  .kirby-item-disclosure kirby-icon {
-    color: var(--kirby-semi-dark);
-    margin-inline-end: calc(var(--kirby-spacing-xxs) * -1);
-  }
 }
 
 :host-context(kirby-section-header) ion-label {
