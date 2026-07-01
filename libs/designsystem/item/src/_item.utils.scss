@@ -186,10 +186,16 @@ $base-typography-selectors: (':where(.kirby-item-title)');
         text-overflow: ellipsis;
       }
 
-      @include utils.slotted('[subtitle]', '.kirby-item-subtitle') {
+      @include utils.slotted('[subtitle]', '.kirby-item-subtitle:not(.kirby-item-wrap)') {
         @include utils.line-clamp(2);
 
         white-space: initial;
+        text-overflow: ellipsis;
+      }
+
+      @include utils.slotted('.kirby-item-detail:not(.kirby-item-wrap)') {
+        @include utils.line-clamp(2);
+
         text-overflow: ellipsis;
       }
 
