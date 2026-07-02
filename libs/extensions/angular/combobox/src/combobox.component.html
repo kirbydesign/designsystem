@@ -43,12 +43,14 @@
       >
         <ng-container *cdkVirtualFor="let item of searchItems">
           @if (isGroupItem(item)) {
-            <ng-container
-              *ngTemplateOutlet="
-                groupHeaderTemplate || defaultGroupHeaderTemplate;
-                context: { $implicit: item }
-              "
-            ></ng-container>
+            <div class="combobox-group-header" role="presentation">
+              <ng-container
+                *ngTemplateOutlet="
+                  groupHeaderTemplate || defaultGroupHeaderTemplate;
+                  context: { $implicit: item }
+                "
+              ></ng-container>
+            </div>
           } @else {
             <ng-container
               *ngTemplateOutlet="
@@ -85,9 +87,7 @@
 </ng-template>
 
 <ng-template #defaultGroupHeaderTemplate let-group>
-  <kirby-item
-    [attr.id]="group.id">
+  <kirby-item [attr.id]="group.id">
     <p class="kirby-item-detail">{{ group.displayName }}</p>
   </kirby-item>
 </ng-template>
-

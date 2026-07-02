@@ -207,9 +207,10 @@ export const WithTemplate: Story = {
   render: (args) => ({
     props: {
       ...args,
+      groupSettings: currencyGroupSettings,
     },
     template: `
-      <kirby-x-combobox ${argsToTemplate(args)} >
+      <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings">
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           role="option"
