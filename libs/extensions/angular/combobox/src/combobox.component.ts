@@ -171,7 +171,7 @@ export class ComboboxComponent
   private getHeightOfItem(item: unknown): number {
     if (item instanceof GroupItem) {
       const def = this._groupSettings?.find((g) => g.id === item.id);
-      return def?.height ?? this.itemHeight;
+      return def?.height ?? ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
     }
     return this.itemHeight;
   }
@@ -188,6 +188,18 @@ export class ComboboxComponent
 
   protected get dropdownMinHeight(): number {
     return this.itemHeight;
+  }
+
+  /**
+   * Average height per item for CDK virtual scroll's [itemSize].
+   * CDK calculates the spacer height as itemSize × itemCount. Using the true average ensures
+   * the spacer equals the actual content height, preventing phantom scroll space at the bottom
+   * when group headers are shorter than regular items.
+   */
+  protected get effectiveItemSize(): number {
+    const count = this.searchItems?.length ?? 0;
+    if (count === 0 || !this._groupSettings?.length) return this.itemHeight;
+    return this.getScrollOffsetForIndex(count) / count;
   }
 
   protected get viewportHeight(): number {
@@ -1032,14 +1044,27 @@ export class ComboboxComponent
     const itemBottom = itemTop + this.itemHeight;
     const scrollOffset = this._virtualScrollViewport.measureScrollOffset();
     const viewportSize = this._virtualScrollViewport.getViewportSize();
+    const stickyHeaderHeight = this.getStickyGroupHeaderHeightAbove(focusedIndex);
 
-    if (itemTop < scrollOffset) {
-      // Item is above the visible area — scroll up so item appears at the top.
-      this._virtualScrollViewport.scrollToOffset(itemTop);
+    if (itemTop - stickyHeaderHeight < scrollOffset) {
+      // Item is above the visible area (accounting for sticky group header) — scroll up
+      // so item appears just below the sticky header.
+      this._virtualScrollViewport.scrollToOffset(itemTop - stickyHeaderHeight);
     } else if (itemBottom > scrollOffset + viewportSize) {
       // Item is below the visible area — scroll down so item appears at the bottom.
       this._virtualScrollViewport.scrollToOffset(itemBottom - viewportSize);
     }
+  }
+
+  /** Returns the height of the nearest group header above the item at the given index. */
+  private getStickyGroupHeaderHeightAbove(itemIndex: number): number {
+    for (let i = itemIndex - 1; i >= 0; i--) {
+      const item = this.searchItems[i];
+      if (this.isGroupItem(item)) {
+        return this.getHeightOfItem(item);
+      }
+    }
+    return 0;
   }
 
   private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
@@ -1050,8 +1075,12 @@ export class ComboboxComponent
 
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
+    if (focusedIndex === -1) return;
+
+    const stickyHeaderHeight = this.getStickyGroupHeaderHeightAbove(focusedIndex);
+    const offset = Math.max(0, this.getScrollOffsetForIndex(focusedIndex) - stickyHeaderHeight);
 
     this._virtualScrollViewport?.checkViewportSize();
-    this._virtualScrollViewport?.scrollToIndex(focusedIndex);
+    this._virtualScrollViewport?.scrollToOffset(offset);
   }
 }

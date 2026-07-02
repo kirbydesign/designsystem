@@ -38,7 +38,7 @@
         role="listbox"
         minBufferPx="1240"
         maxBufferPx="1620"
-        [itemSize]="itemHeight"
+        [itemSize]="effectiveItemSize"
         [style.height.px]="viewportHeight"
       >
         <ng-container *cdkVirtualFor="let item of searchItems">
