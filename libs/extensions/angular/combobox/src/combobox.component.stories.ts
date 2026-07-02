@@ -285,10 +285,9 @@ export const LargeList: Story = {
   render: (args) => ({
     props: {
       ...args,
-      groupSettings: currencyGroupSettings,
     },
     template: `
-      <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings">
+      <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
           *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
@@ -428,7 +427,6 @@ const currencyGroupSettings: GroupSettings<CurrencyItem> = [
   {
     id: 'other',
     displayName: 'Other',
-    height: 44,
     condition: () => true, // catch-all
   },
 ];
