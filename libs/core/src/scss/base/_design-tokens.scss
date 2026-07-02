@@ -80,6 +80,12 @@
   }
 }
 
+@mixin relative-sizes() {
+  @each $name, $value in variables.$relative-sizes {
+    --kirby-relative-size-#{$name}: #{$value};
+  }
+}
+
 @mixin z-layers() {
   @each $name, $value in variables.$z-layers {
     --kirby-z-index-#{$name}: #{$value};
@@ -165,6 +171,9 @@
 
   /* SPACINGS */
   @include spacings;
+
+  /* RELATIVE SPACINGS */
+  @include relative-sizes;
 
   /* FAT FINGER SIZE */
   @include size-fat-finger;

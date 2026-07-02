@@ -1,12 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
-@use '../item.utils';
+@use '../item.utils' as item;
 
 :host {
   &.horizontal ion-label {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
 
     // Remove ellipsis from last child
     @include utils.slotted(':last-child') {
@@ -50,3 +50,5 @@
     font-weight: utils.font-weight('bold');
   }
 }
+
+@include item.handle-text-resize-for-label;

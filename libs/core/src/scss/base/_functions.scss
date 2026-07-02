@@ -24,6 +24,9 @@
   $value: _get-map-prop(variables.$sizes, $key);
   @return if($negative, string.unquote('-' + $value), $value);
 }
+@function relative-size($key: 'm') {
+  @return _get-map-prop(variables.$relative-sizes, $key);
+}
 
 @function z($key) {
   @return _get-map-prop(variables.$z-layers, $key);
@@ -34,6 +37,10 @@
     @warn 'Display key is deprecated';
   }
   @return _get-map-prop(variables.$font-sizes, $key);
+}
+
+@function font-size-base($key: 'n') {
+  @return _get-map-prop(variables.$font-sizes-base, $key);
 }
 
 @function line-height($key: 'm') {

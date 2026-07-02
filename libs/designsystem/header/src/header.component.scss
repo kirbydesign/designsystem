@@ -161,6 +161,10 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
     flex-direction: row;
     align-items: center;
   }
+
+  &.kirby-text-xlarge {
+    overflow-wrap: break-word;
+  }
 }
 
 .value {

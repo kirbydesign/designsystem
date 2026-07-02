@@ -873,7 +873,7 @@ export class ComboboxComponent
   }
 
   @HostListener('keydown.enter', ['$event'])
-  public onEnterO(event: Event) {
+  public onEnter(event: Event) {
     event.preventDefault();
     event.stopPropagation();
 
