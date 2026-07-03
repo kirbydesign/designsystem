@@ -142,7 +142,7 @@ ion-content {
   --background: transparent;
   --color: var(--kirby-modal-color, #{utils.get-color('black')});
   --padding-top: #{utils.size('m')};
-  --padding-bottom: #{utils.size('m')};
+  --padding-bottom: calc(#{utils.size('m')} + var(--kirby-safe-area-bottom, 0px));
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
 
@@ -155,6 +155,12 @@ ion-content {
     box-sizing: border-box;
     display: block;
   }
+}
+
+// When a footer is present it sits below the content and applies the
+// safe-area inset itself, so the content should not add it again:
+:host(.has-footer) ion-content {
+  --padding-bottom: #{utils.size('m')};
 }
 
 // Ensure padding-rules are not merged with other media query,

@@ -27,6 +27,10 @@ $max-width: 375px;
     margin: 0 auto;
     width: calc(100vw - var(--kirby-internal-margin-horizontal-total));
     max-width: calc(#{$max-width} - var(--kirby-internal-margin-horizontal-total));
+
+    // Keep the bottom-most element (cancel button or card) clear of the
+    // iOS home indicator / safe-area inset:
+    padding-bottom: var(--kirby-safe-area-bottom, 0);
   }
   /* stylelint-enable no-duplicate-selectors */
 
