@@ -406,8 +406,8 @@ export const Focused: Story = {
 /**
  * When the `groupSettings` property is provided, items in the dropdown are grouped under headers.
  * Each entry in the array defines a group with an `id`, a `displayName`, and a `condition`
- * predicate. Groups are rendered in array order. Items that match no group are appended ungrouped
- * at the end. Group headers cannot be selected.
+ * predicate. Groups are rendered in array order. Items that match no group are not shown.
+ * Group headers cannot be selected.
  *
  * In this example the currencies are grouped into **Europe**, **America** and **Other**.
  */
