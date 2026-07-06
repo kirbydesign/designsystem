@@ -44,7 +44,13 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     font-weight: normal;
   }
 
-  @include utils.slotted('[subtitle]', '[detail]', '.kirby-item-subtitle', '.kirby-item-detail') {
+  @include utils.slotted(
+    '[subtitle]',
+    '[detail]',
+    '.kirby-item-subtitle',
+    '.kirby-item-detail',
+    '.kirby-item-disclosure'
+  ) {
     font-size: utils.font-size('xs');
     line-height: utils.line-height('xs');
   }
@@ -53,8 +59,18 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     margin-bottom: utils.size('xxxs');
   }
 
-  @include utils.slotted('[detail]', '.kirby-item-detail') {
+  @include utils.slotted('[detail]', '.kirby-item-detail', '.kirby-item-disclosure') {
     color: utils.get-text-color('semi-dark');
+  }
+
+  @include utils.slotted('.kirby-item-disclosure') {
+    display: flex;
+    align-items: center;
+  }
+
+  .kirby-item-disclosure kirby-icon {
+    color: var(--kirby-semi-dark);
+    margin-inline-end: calc(var(--kirby-spacing-xxs) * -1);
   }
 
   @include utils.slotted('[wrap]', '.kirby-item-wrap') {
@@ -88,7 +104,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
     // Apply text clamp if text is scaled
     ion-item {
-      @include utils.slotted('.kirby-item-title') {
+      @include utils.slotted('.kirby-item-title:not(.kirby-item-wrap)') {
         @include utils.line-clamp(2);
 
         white-space: initial;
@@ -160,11 +176,34 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     }
 
     ion-label {
-      @include utils.slotted('.kirby-item-title') {
+      flex-direction: column;
+      align-items: flex-start;
+
+      @include utils.slotted('.kirby-item-title:not(.kirby-item-wrap)') {
         @include utils.line-clamp(2);
 
         white-space: initial;
         text-overflow: ellipsis;
+      }
+
+      @include utils.slotted('[subtitle]', '.kirby-item-subtitle:not(.kirby-item-wrap)') {
+        @include utils.line-clamp(2);
+
+        white-space: initial;
+        text-overflow: ellipsis;
+      }
+
+      @include utils.slotted('.kirby-item-detail:not(.kirby-item-wrap)') {
+        @include utils.line-clamp(2);
+
+        text-overflow: ellipsis;
+      }
+
+      @include utils.slotted('.kirby-item-disclosure') {
+        position: absolute;
+        top: var(--padding-top, 0);
+        right: utils.size('s');
+        margin-left: 0;
       }
     }
   }
