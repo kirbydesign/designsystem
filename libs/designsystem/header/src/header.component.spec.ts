@@ -76,9 +76,9 @@ describe('HeaderComponent', () => {
       });
 
       expect(subtitle1SpanElement).toHaveComputedStyle({
-        'text-overflow': 'ellipsis',
-        'white-space': 'nowrap',
-        overflow: 'hidden',
+        'text-overflow': 'clip',
+        'white-space': 'normal',
+        overflow: 'visible',
       });
     });
 
@@ -98,9 +98,9 @@ describe('HeaderComponent', () => {
       });
 
       expect(subtitle2SpanElement).toHaveComputedStyle({
-        'text-overflow': 'ellipsis',
-        'white-space': 'nowrap',
-        overflow: 'hidden',
+        'text-overflow': 'clip',
+        'white-space': 'normal',
+        overflow: 'visible',
       });
     });
 
