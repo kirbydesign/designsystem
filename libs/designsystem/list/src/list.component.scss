@@ -263,6 +263,10 @@ kirby-list-item:last-of-type {
   --kirby-list-item-border-color: #{utils.get-color('background-color')};
 }
 
+:host-context(kirby-card.outlined) {
+  --kirby-list-item-border-color: #{utils.get-color('medium')};
+}
+
 :host-context(.item-spacing) {
   .list {
     kirby-list-item {
