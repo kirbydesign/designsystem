@@ -6,10 +6,10 @@ const config = {
   template: `<kirby-progress-circle aria-label="Your investment savings" themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
   2/4
 </kirby-progress-circle> 
-<kirby-progress-circle aria-label="Your investment savings" themeColor="warning" value="50" size="md" class="kirby-text-xsmall">
+<kirby-progress-circle aria-label="Your investment savings" themeColor="warning" value="50" size="md">
   2/4
-</kirby-progress-circle> 
- <kirby-progress-circle aria-label="Your investment savings" themeColor="warning" value="50" size="lg" >
+</kirby-progress-circle>
+ <kirby-progress-circle aria-label="Your investment savings" themeColor="warning" value="50" size="lg">
   2/4
 </kirby-progress-circle>`,
 };
