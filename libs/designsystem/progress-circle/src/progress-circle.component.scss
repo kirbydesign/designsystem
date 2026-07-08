@@ -1,8 +1,17 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+$maximum-font-size: utils.size('xs') * utils.$text-resize-threshold;
+
 :host {
   display: inline-block;
   position: relative;
+}
+
+:host(.sm.kirby-text-xsmall),
+:host(.sm.kirby-text-xxsmall) {
+  .transcluded-content {
+    font-size: min(1em, $maximum-font-size);
+  }
 }
 
 .transcluded-content,
