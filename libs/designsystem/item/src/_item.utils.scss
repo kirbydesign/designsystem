@@ -79,9 +79,9 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 }
 
 // Applies styles when text is scaled on narrow viewports.
-// Only exception is items with radio, checkbox etc. (.has-interactive), that should not be adjusted.
+// Only exception is items with radio, checkbox etc., that should not be adjusted.
 @mixin when-text-resized-on-narrow-viewport() {
-  :host-context(.kirby-trt):not(.has-interactive) {
+  :host-context(.kirby-trt):not(:has(kirby-checkbox, kirby-radio, kirby-toggle)) {
     @include utils.media('<medium') {
       @content;
     }
@@ -92,7 +92,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 @mixin handle-text-resize() {
   @include when-text-resized-on-narrow-viewport {
     $start-slot-content: '[slot="start"]:not(.outside)';
-    $end-slot-content: '[slot="end"]:not(.disclosure)';
+    $end-slot-content: '[slot="end"]:not(.disclosure):not(.icon-only)';
     $end-slot-content-only: ':not(:has(#{$start-slot-content})):has(#{$end-slot-content})';
     $line-center: 0.5lh;
     $disclosure-radius: utils.size('xs');

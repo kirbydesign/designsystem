@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { ButtonComponent, RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem';
+import {
+  ButtonComponent,
+  IconComponent,
+  RadioComponent,
+  RadioGroupComponent,
+} from '@kirbydesign/designsystem';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
@@ -23,6 +28,13 @@ const config = {
 <kirby-item>
   Item with Button
   <button kirby-button attentionLevel="2" slot="end">Button</button>
+</kirby-item>
+
+<kirby-item>
+  Item with Icon Button
+  <button kirby-button aria-label="Close" slot="end">
+  <kirby-icon name="close"></kirby-icon>
+</button>
 </kirby-item>`,
 };
 
@@ -37,6 +49,7 @@ const config = {
     RadioComponent,
     ButtonComponent,
     RadioGroupComponent,
+    IconComponent,
   ],
 })
 export class ItemExampleNestedControlsComponent {
