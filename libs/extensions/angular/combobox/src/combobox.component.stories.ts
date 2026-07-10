@@ -1,4 +1,10 @@
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import {
+  applicationConfig,
+  argsToTemplate,
+  Meta,
+  moduleMetadata,
+  StoryObj,
+} from '@storybook/angular';
 import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -10,6 +16,9 @@ import {
   InputSize,
 } from '@kirbydesign/designsystem/form-field';
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
+import { ModalComponent } from '@kirbydesign/designsystem/modal';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { provideRouter } from '@angular/router';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -79,6 +88,9 @@ const meta: Meta<ComboboxComponent> = {
   component: ComboboxComponent,
   title: 'Components/Combobox',
   decorators: [
+    applicationConfig({
+      providers: [provideRouter([])],
+    }),
     moduleMetadata({
       imports: [
         ListModule,
@@ -87,6 +99,8 @@ const meta: Meta<ComboboxComponent> = {
         ComboboxComponent,
         FormFieldComponent,
         ReactiveFormsModule,
+        ModalComponent,
+        ButtonComponent,
       ],
     }),
   ],
@@ -397,6 +411,58 @@ export const Focused: Story = {
       (input as HTMLElement).focus();
     }
   },
+};
+
+/**
+ * This example demonstrates two comboboxes inside a `kirby-modal`:
+ * - A standard combobox bound directly via `[items]`
+ * - A combobox integrated with Angular Reactive Forms via `[formControl]`
+ *
+ * Click the "Open modal" button to open the modal and interact with both comboboxes.
+ */
+export const InModal: Story = {
+  args: {
+    items: simpleCurrencyItems,
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      currencyControl: new FormControl(null, Validators.required),
+    },
+    template: `
+      <button kirby-button id="open-combobox-modal">Open modal</button>
+
+      <kirby-modal trigger="open-combobox-modal" aria-label="Combobox modal">
+        <ng-template>
+          <div style="padding: 1rem; display: flex; flex-direction: column; gap: 1.5rem;">
+            <kirby-x-combobox
+              [items]="items"
+              [placeholder]="placeholder"
+            ></kirby-x-combobox>
+
+            <form>
+              <kirby-form-field
+                [label]="'Currency (FormControl)'"
+                [message]="currencyControl.touched && currencyControl.invalid ? 'Please select a currency' : 'Pick your preferred currency'"
+              >
+                <kirby-x-combobox
+                  [items]="items"
+                  [placeholder]="placeholder"
+                  [formControl]="currencyControl"
+                  [hasError]="currencyControl.touched && currencyControl.invalid"
+                ></kirby-x-combobox>
+              </kirby-form-field>
+              <p style="margin-top: 0.5rem; font-size: 14px;">
+                <strong>Form value:</strong> {{ currencyControl.value || '(none)' }}<br>
+                <strong>Valid:</strong> {{ currencyControl.valid }}
+              </p>
+            </form>
+          </div>
+        </ng-template>
+      </kirby-modal>
+    `,
+  }),
 };
 
 /**
