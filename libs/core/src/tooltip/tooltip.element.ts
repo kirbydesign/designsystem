@@ -24,9 +24,11 @@ export class KirbyTooltipElement extends KirbyElement {
     | 'right'
     | 'right-end' = 'top';
 
+  @property() for: string;
+
   render() {
     return html`
-      <kirby-popover placement=${this.placement} arrow="true">
+      <kirby-popover placement=${this.placement} arrow="true" invoker="${this.for}">
         <slot></slot>
       </kirby-popover>
     `;

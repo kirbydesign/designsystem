@@ -1,7 +1,16 @@
 <header>
-  <button kirby-button attentionLevel="3" class="menu-button" (click)="onToggleMenu()">
-    <kirby-icon [name]="menuIcon"></kirby-icon>
-  </button>
+  <kirby-tooltip arrow="true">
+    <button
+      slot="invoker"
+      kirby-button
+      attentionLevel="3"
+      class="menu-button"
+      (click)="onToggleMenu()"
+    >
+      <kirby-icon [name]="menuIcon"></kirby-icon>
+    </button>
+    My Tooltip Content
+  </kirby-tooltip>
 
   <a class="logo-anchor" routerLink="/" aria-label="Home">
     <svg

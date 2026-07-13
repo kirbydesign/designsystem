@@ -7,16 +7,17 @@ export default css`
 
   [popover] {
     position: absolute;
-    background: var(--kirby-black);
-    color: var(--kirby-white);
+    top: 0;
+    left: 0;
+    background: var(--kirby-popover-background);
+    color: var(--kirby-popover-color);
+
     :where(&) {
       inset: unset;
       padding: unset;
       margin: unset;
-      width: unset;
+      width: max-content;
       height: unset;
-      // color: unset;
-      // background: unset;
       border: unset;
       overflow: unset;
     }
@@ -26,8 +27,8 @@ export default css`
     position: absolute;
     width: 0.5rem;
     height: 0.5rem;
-    background: var(--kirby-black);
+    background: var(--kirby-popover-background);
     transform: rotate(45deg);
-    z-index: 3;
+    z-index: -1; // place arrow below popover content in stacking context
   }
 `;

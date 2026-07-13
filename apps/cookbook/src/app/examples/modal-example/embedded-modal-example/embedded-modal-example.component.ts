@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Inject,
+  OnInit,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
 
 import {
   ActionSheetConfig,
@@ -25,6 +32,7 @@ import {
 } from '@kirbydesign/designsystem/form-field';
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { KirbyPopoverElement } from '@kirbydesign/core/popover';
 import { ModalExampleConfigurationComponent } from '../modal-example-configuration/modal-example-configuration.component';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import {
@@ -33,6 +41,7 @@ import {
 } from '../modal-example-configuration/modal-example-size-selector.component';
 
 @Component({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   selector: 'cookbook-embedded-modal-example',
   templateUrl: './embedded-modal-example.component.html',
   styleUrls: ['./embedded-modal-example.component.scss'],
@@ -105,6 +114,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
     @Optional() @SkipSelf() private modal: Modal
   ) {
     Object.assign(this, componentProps);
+    KirbyPopoverElement.define();
   }
 
   ngOnInit() {

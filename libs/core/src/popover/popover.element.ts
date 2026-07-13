@@ -9,13 +9,17 @@ import styles from './popover.element.styles';
 
 export class KirbyPopoverElement extends KirbyElement {
   static override tagName = 'kirby-popover';
-
   static styles: CSSResultGroup = [baseStyles, styles];
 
-  private invoker: HTMLElement;
+  private invokerElement: HTMLElement;
 
-  @query('[popover]') private popoverEl: HTMLElement;
+  @query('.popover') private popoverEl: HTMLElement;
   @query('.arrow') private arrowEl: HTMLElement;
+
+  @property({ type: Boolean }) arrow = false;
+
+  @property()
+  invoker: HTMLElement | string;
 
   @property() placement:
     | 'top-start'
@@ -31,21 +35,32 @@ export class KirbyPopoverElement extends KirbyElement {
     | 'right'
     | 'right-end' = 'top';
 
-  @property({ type: Boolean }) arrow = false;
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (!this.invoker) return;
+    if (typeof this.invoker === 'string') {
+      this.invokerElement = document.getElementById(this.invoker);
+    } else {
+      this.invokerElement = this.invoker;
+    }
+
+    this.setupInvokerEventHandlers();
+  }
 
   private handleInvokerSlotChange(e) {
-    this.invoker = e.target.assignedElements()[0];
+    this.invokerElement = e.target.assignedElements()[0];
     this.setupInvokerEventHandlers();
   }
 
   private setupInvokerEventHandlers() {
-    if (!this.invoker) return;
+    if (!this.invokerElement) return;
     if (matchMedia('(hover: hover)').matches) {
-      this.invoker.addEventListener('pointerenter', () => this.show());
-      this.invoker.addEventListener('pointerleave', () => this.hide());
+      this.invokerElement.addEventListener('pointerenter', () => this.show());
+      this.invokerElement.addEventListener('pointerleave', () => this.hide());
     }
-    this.invoker.addEventListener('focus', () => this.show());
-    this.invoker.addEventListener('blur', () => this.hide());
+    this.invokerElement.addEventListener('focus', () => this.show());
+    this.invokerElement.addEventListener('blur', () => this.hide());
   }
 
   async show() {
@@ -62,7 +77,7 @@ export class KirbyPopoverElement extends KirbyElement {
     }
 
     const { x, y, middlewareData, placement } = await computePosition(
-      this.invoker,
+      this.invokerElement,
       this.popoverEl,
       {
         placement: this.placement,
@@ -102,7 +117,7 @@ export class KirbyPopoverElement extends KirbyElement {
   render() {
     return html`
       <slot name="invoker" @slotchange=${this.handleInvokerSlotChange}></slot>
-      <div popover="manual">
+      <div popover="manual" class="popover">
         <slot></slot>
         ${this.arrow
           ? html`

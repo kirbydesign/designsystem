@@ -62,5 +62,9 @@ export class DropdownExampleCustomItemTemplateComponent {
     { title: 'Item 3', subtitle: 'Salami andouille hamburger', value: 3 },
     { title: 'Item 4', subtitle: 'Tongue bresaola tail swine', value: 4 },
     { title: 'Item 5', subtitle: 'Drumstick pastrami sirloin ', value: 5 },
+    { title: 'Item 6', subtitle: 'Pork belly kevin boudin', value: 6 },
+    { title: 'Item 7', subtitle: 'Pancetta ham hock', value: 7 },
+    { title: 'Item 8', subtitle: 'Shankle pork loin', value: 8 },
+    { title: 'Item 9', subtitle: 'Bacon ipsum dolor', value: 9 },
   ];
 }
