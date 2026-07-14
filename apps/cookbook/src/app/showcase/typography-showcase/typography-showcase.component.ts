@@ -41,19 +41,19 @@ export class TypographyShowcaseComponent {
   ];
 
   utilityClasses: UtilityClassEntry[] = [
-    { className: '.kirby-text-display-1', semanticElement: '-' },
-    { className: '.kirby-text-display-2', semanticElement: '-' },
-    { className: '.kirby-text-display-3', semanticElement: '-' },
-    { className: '.kirby-text-xlarge', semanticElement: '<h1>' },
-    { className: '.kirby-text-large', semanticElement: '<h2>' },
-    { className: '.kirby-text-medium', semanticElement: '<h3>' },
-    { className: '.kirby-text-normal-bold', semanticElement: '<h4>' },
-    { className: '.kirby-text-normal', semanticElement: '<p>' },
-    { className: '.kirby-text-small', semanticElement: '-' },
-    { className: '.kirby-text-small-light', semanticElement: '-' },
-    { className: '.kirby-text-xsmall', semanticElement: '-' },
-    { className: '.kirby-text-xxsmall', semanticElement: '-' },
-    { className: '.kirby-text-bold', semanticElement: '-' },
+    { className: 'kirby-text-display-1', semanticElement: '-' },
+    { className: 'kirby-text-display-2', semanticElement: '-' },
+    { className: 'kirby-text-display-3', semanticElement: '-' },
+    { className: 'kirby-text-xlarge', semanticElement: '<h1>' },
+    { className: 'kirby-text-large', semanticElement: '<h2>' },
+    { className: 'kirby-text-medium', semanticElement: '<h3>' },
+    { className: 'kirby-text-normal-bold', semanticElement: '<h4>' },
+    { className: 'kirby-text-normal', semanticElement: '<p>' },
+    { className: 'kirby-text-small', semanticElement: '-' },
+    { className: 'kirby-text-small-light', semanticElement: '-' },
+    { className: 'kirby-text-xsmall', semanticElement: '-' },
+    { className: 'kirby-text-xxsmall', semanticElement: '-' },
+    { className: 'kirby-text-bold', semanticElement: '-' },
   ];
 
   lineHeights: LineHeightEntry[] = [

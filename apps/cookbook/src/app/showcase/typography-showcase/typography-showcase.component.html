@@ -26,12 +26,13 @@
       <tr>
         <td>
           <code>{{ entry.className }}</code>
+          <cookbook-copy-token [text]="entry.className"></cookbook-copy-token>
         </td>
         <td>
           <code>{{ entry.semanticElement }}</code>
         </td>
         <td>
-          <span class="sample" [class]="entry.className.substring(1)">AaBb</span>
+          <span class="sample" [class]="entry.className">AaBb</span>
         </td>
       </tr>
     }
