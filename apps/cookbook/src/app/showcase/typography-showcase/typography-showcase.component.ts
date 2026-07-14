@@ -7,6 +7,11 @@ interface LineHeightEntry extends TokenEntry {
   fontSizeVar: string;
 }
 
+interface UtilityClassEntry {
+  className: string;
+  semanticElement: string;
+}
+
 @Component({
   selector: 'cookbook-typography-showcase',
   templateUrl: './typography-showcase.component.html',
@@ -33,6 +38,17 @@ export class TypographyShowcaseComponent {
     { name: 'medium', cssVar: '--kirby-font-weight-medium', description: '500' },
     { name: 'normal', cssVar: '--kirby-font-weight-normal', description: '400' },
     { name: 'light', cssVar: '--kirby-font-weight-light', description: '300' },
+  ];
+
+  utilityClasses: UtilityClassEntry[] = [
+    {
+      className: '.kirby-text-xlarge',
+      semanticElement: '<h1>',
+    },
+    {
+      className: '.kirby-text-small',
+      semanticElement: 'None',
+    },
   ];
 
   lineHeights: LineHeightEntry[] = [
