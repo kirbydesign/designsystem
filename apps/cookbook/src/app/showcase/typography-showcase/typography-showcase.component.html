@@ -10,8 +10,8 @@
 </p>
 
 <p>
-  Many of the classes correspond directly to the styles that existing semantic tags uses, and can be
-  used to give e.g. a heading level 3 a visual appearance that matches a heading level 2 instead.
+  Some of the classes correspond directly to the global styles for semantic tags, and can be used to
+  give e.g. a heading level 3 a visual appearance that matches a heading level 2 instead.
 </p>
 <table class="kirby-table">
   <thead>
@@ -31,7 +31,7 @@
           <code>{{ entry.semanticElement }}</code>
         </td>
         <td>
-          <span class="sample" [class]="entry.className.substring(1)">The quick brown fox</span>
+          <span class="sample" [class]="entry.className.substring(1)">AaBb</span>
         </td>
       </tr>
     }
@@ -72,7 +72,7 @@
         </td>
         <td>{{ token.description }}</td>
         <td>
-          <span class="sample font-size" [style.font-size]="'var(' + token.cssVar + ')'">Aa</span>
+          <span class="sample font-size" [style.font-size]="'var(' + token.cssVar + ')'">AaBb</span>
         </td>
       </tr>
     }
@@ -143,7 +143,7 @@
         <td>{{ token.description }}</td>
         <td>
           <span class="sample font-weight" [style.font-weight]="'var(' + token.cssVar + ')'">
-            The quick brown fox
+            AaBb
           </span>
         </td>
       </tr>
