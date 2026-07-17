@@ -58,7 +58,7 @@
     "@custom-elements-manifest/analyzer": "^0.10.4",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
-    "@nx/angular": "22.6.5",
+    "@nx/angular": "23.1.0",
     "@nx/jest": "22.6.5",
     "@nx/js": "22.6.5",
     "@nx/storybook": "22.6.5",
