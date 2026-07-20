@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   padding: 2px var(--kirby-spacing-s) 0 var(--kirby-spacing-s);
+  color: var(--kirby-a-contrast);
 
   .message {
     flex: 75%;
@@ -37,6 +38,7 @@
 
 label {
   display: block;
+  color: var(--kirby-a-contrast);
 }
 
 .text {

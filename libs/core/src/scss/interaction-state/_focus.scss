@@ -24,14 +24,15 @@
       @include _focus-ring($shadow, $gap);
     }
 
-    &:focus:not(:focus-visible) {
+    &:focus:not(:focus-visible, [data-state='focus']) {
       // On browsers that do support focus-visible, we dont want anything to show on the
       // standard focus pseudo-class, so we reset it here, while still allowing to preserve
       // any shadow set on the element by the user.
       box-shadow: $shadow, $reset-focus-ring;
     }
 
-    &:focus-visible {
+    &:focus-visible,
+    &[data-state='focus'] {
       @include _focus-ring($shadow, $gap);
     }
   }
@@ -49,7 +50,8 @@
   @include utils.not-touch {
     @content;
 
-    &:focus-visible {
+    &:focus-visible,
+    &[data-state='focus'] {
       // Remove the focus ring
       box-shadow: none;
 

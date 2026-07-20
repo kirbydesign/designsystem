@@ -4,6 +4,62 @@
 // Import common styles
 @use '@kirbydesign/core/src/scss/global-styles';
 
+@font-face {
+  font-family: Jyske;
+  font-weight: 300;
+  font-style: normal;
+  src: url('fonts/Jyske-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Jyske;
+  font-weight: 300;
+  font-style: italic;
+  src: url('fonts/Jyske-LightItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Jyske;
+  font-weight: 400;
+  font-style: normal;
+  src: url('fonts/Jyske-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Jyske;
+  font-weight: 400;
+  font-style: italic;
+  src: url('fonts/Jyske-RegularItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Jyske;
+  font-weight: 700;
+  font-style: normal;
+  src: url('fonts/Jyske-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Jyske;
+  font-weight: 700;
+  font-style: italic;
+  src: url('fonts/Jyske-BoldItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Jyske;
+  font-weight: 900;
+  font-style: normal;
+  src: url('fonts/Jyske-Black.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Jyske;
+  font-weight: 900;
+  font-style: italic;
+  src: url('fonts/Jyske-BlackItalic.woff2') format('woff2');
+}
+
 body,
 html {
   margin: 0;
@@ -12,8 +68,53 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-size: var(--kirby-font-size-n);
-  color: var(--kirby-black);
+  color: var(--kirby-text-color, --kirby-black);
   height: 100vh;
+
+  /**
+   * Light theme
+   */
+  --kirby-a: var(--kirby-background-color);
+  --kirby-a-hover: #dcdad7;
+  --kirby-a-active: #cccac8;
+  --kirby-a-contrast: var(--kirby-black);
+  --kirby-a-contrast-variant: var(--kirby-black);
+  --kirby-b: var(--kirby-primary);
+  --kirby-b-hover: #003122;
+  --kirby-b-active: #002419;
+  --kirby-b-contrast: var(--kirby-primary-contrast);
+  --kirby-d: var(--kirby-white);
+  --kirby-d-hover: #dcdad7;
+  --kirby-d-active: #cccac8;
+  --kirby-d-contrast: var(--kirby-black);
+  --kirby-d-contrast-variant: var(--kirby-text-color-semi-dark);
+  --kirby-d-contrast-variant-hover: var(--kirby-black);
+  --kirby-d-contrast-variant-active: var(--kirby-black);
+  --kirby-d-stroke-variant: #8a8a89;
+
+  /**
+  * Dark theme
+  */
+  .dark {
+    --kirby-background-color: var(--kirby-dark);
+    --kirby-b: var(--kirby-secondary);
+    --kirby-b-hover: #f6ffec;
+    --kirby-b-active: #f9fff3;
+    --kirby-b-contrast: var(--kirby-secondary-contrast);
+    --kirby-a: var(--kirby-background-color);
+    --kirby-a-hover: #3c3c3c;
+    --kirby-a-active: #454545;
+    --kirby-a-contrast: var(--kirby-white);
+    --kirby-a-contrast-variant: var(--kirby-white);
+    --kirby-d: #464545;
+    --kirby-d-hover: #525252;
+    --kirby-d-active: #5b5b5b;
+    --kirby-d-contrast: var(--kirby-white);
+    --kirby-d-contrast-variant: #a6a6a6;
+    --kirby-d-contrast-variant-hover: var(--kirby-white);
+    --kirby-d-contrast-variant-active: var(--kirby-white);
+    --kirby-d-stroke-variant: var(--kirby-medium);
+  }
 }
 
 *,

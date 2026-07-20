@@ -12,6 +12,12 @@
 @use 'components/overlays';
 @use 'themes/component-themes';
 
+@use 'base/color-palette-core';
+@use 'base/color-palette-brand';
+@use 'base/theme-base';
+@use 'base/theme-raised';
+@use 'base/theme-brand';
+
 :root,
 :host {
   font-family: var(--kirby-font-family);

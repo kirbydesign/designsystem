@@ -1,0 +1,31 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+.kirby-theme-raised {
+  --kirby-theme-color-fill-base-default: var(--kirby-color-white-00);
+  --kirby-theme-color-fill-base-hover: var(--kirby-color-sand-50);
+  --kirby-theme-color-fill-base-active: var(--kirby-color-sand-100);
+  --kirby-theme-color-fill-raised-normal-hover: var(--kirby-color-sand-50);
+  --kirby-theme-color-fill-raised-normal-active: var(--kirby-color-sand-100);
+  --kirby-theme-color-fill-neutral-default: var(--kirby-color-sand-100);
+  --kirby-theme-color-content-raised-success-active: var(--kirby-color-green-500);
+  --kirby-theme-color-border-base-silent-default: var(--kirby-color-light-grey-400);
+  --kirby-theme-color-border-base-silent-hover: var(--kirby-color-light-grey-100);
+  --kirby-theme-color-border-base-silent-active: var(--kirby-color-light-grey-300);
+  --kirby-theme-color-border-neutral-default: var(--kirby-color-sand-100);
+  --kirby-theme-color-border-focus-normal: var(--kirby-color-white-00);
+  --kirby-theme-color-chart-fifth-04-default: var(--kirby-color-bordeaux-600);
+  --kirby-theme-color-chart-fifth-04-hover: var(--kirby-color-bordeaux-700);
+  --kirby-theme-color-chart-fifth-04-active: var(--kirby-color-bordeaux-800);
+  --kirby-theme-color-chart-fifth-05-default: var(--kirby-color-bordeaux-700);
+  --kirby-theme-color-chart-fifth-05-hover: var(--kirby-color-bordeaux-800);
+  --kirby-theme-color-chart-fifth-05-active: var(--kirby-color-bordeaux-900);
+  --kirby-theme-color-chart-fifth-06-default: var(--kirby-color-bordeaux-800);
+  --kirby-theme-color-chart-fifth-06-active: var(--kirby-color-bordeaux-950);
+  --kirby-theme-color-spot-fill-quiet-default: var(--kirby-color-light-grey-300);
+  --kirby-theme-color-spot-fill-warning-default: var(--kirby-color-orange-400);
+  --kirby-theme-color-spot-fill-spot-danger-default: var(--kirby-color-red-600);
+  --kirby-theme-color-toolbar-scrolled-default: var(--kirby-color-light-grey-50);
+  --kirby-theme-color-tabs-default: var(--kirby-color-white-00-94);
+}

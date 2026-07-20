@@ -144,6 +144,10 @@
       @content;
     }
   }
+
+  &[data-state='hover'] {
+    @content;
+  }
 }
 
 // Only apply the :focus selector and styles if pointer device can hover

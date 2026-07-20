@@ -1,32 +1,235 @@
-<picture>
-  <source
-    media="(max-width: 767px)"
-    srcset="assets/images/kirby-components-w375.png 1x, assets/images/kirby-components-w700.png 2x"
-  />
-  <source
-    media="(min-width: 768px)"
-    srcset="
-      assets/images/kirby-components-w800.png   800w,
-      assets/images/kirby-components-w1020.png 1020w
-    "
-    sizes="(max-width: 1024px) 1024px,
-           (min-width: 1025px) and (max-width: 1163px) 800px,
-           (min-width: 1164px) 100vw,
-           1020px"
-  />
-  <img src="assets/images/kirby-components-w1020.png" alt="Kirby UI Components" />
-</picture>
+<div class="grid kirby-theme-base">
+  <kirby-list [items]="items">
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true" disclosure="arrow-more">
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <data slot="end" themeColor="success">Value</data>
+    </kirby-item>
+  </kirby-list>
 
-<h1>This is Kirby Design System™</h1>
-<p>
-  Kirby is a friendly design system that allows you to build simple intuitive designs while having
-  fun. We have created a shared visual language established on classic principles of good design.
-</p>
-<p>
-  Kirby Design System provides flexible building blocks that make building digital services across
-  platforms faster while creating a unified user experience. By using Kirby the collaboration
-  between designers and developers is streamlined, and helps teams to quickly build beautiful
-  screens.
-</p>
-<p>We are on a constant journey of learning and Kirby is steadily evolving day by day.</p>
-<p>Thanks for your interest — have fun building!</p>
+  <kirby-list [items]="hoverItems">
+    <kirby-item
+      [attr.data-state]="item.state"
+      *kirbyListItemTemplate="let item"
+      [selectable]="true"
+      disclosure="arrow-more"
+    >
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <kirby-flag slot="end" themeColor="success">60</kirby-flag>
+    </kirby-item>
+  </kirby-list>
+
+  <kirby-list [items]="activeItems">
+    <kirby-item
+      [attr.data-state]="item.state"
+      *kirbyListItemTemplate="let item"
+      [selectable]="true"
+      disclosure="arrow-more"
+    >
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <kirby-flag slot="end" themeColor="success">60</kirby-flag>
+    </kirby-item>
+  </kirby-list>
+
+  <kirby-list [items]="focusItems">
+    <kirby-item
+      [attr.data-state]="item.state"
+      *kirbyListItemTemplate="let item"
+      [selectable]="true"
+      disclosure="arrow-more"
+    >
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <kirby-flag slot="end" themeColor="success">60</kirby-flag>
+    </kirby-item>
+  </kirby-list>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input kirby-input placeholder="Add placeholder" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input data-state="hover" kirby-input placeholder="Add placeholder" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input data-state="active" kirby-input placeholder="Add placeholder" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input kirby-input value="Add text" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input kirby-input hasError="true" value="Add text" />
+  </kirby-form-field>
+  <div></div>
+  <div></div>
+  <div></div>
+
+  <button kirby-button [noDecoration]="true" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <button kirby-button [noDecoration]="true" data-state="hover" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <button kirby-button [noDecoration]="true" data-state="active" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <button kirby-button [noDecoration]="true" data-state="focus" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+
+  <button kirby-button>Add text</button>
+  <button kirby-button data-state="hover">Add text</button>
+  <button kirby-button data-state="active">Add text</button>
+  <button kirby-button data-state="focus">Add text</button>
+
+  <button kirby-button attentionLevel="3">Add text</button>
+  <button kirby-button attentionLevel="3" data-state="hover">Add text</button>
+  <button kirby-button attentionLevel="3" data-state="active">Add text</button>
+  <button kirby-button attentionLevel="3" data-state="focus">Add text</button>
+</div>
+
+<div class="grid dark">
+  <kirby-list [items]="items">
+    <kirby-item *kirbyListItemTemplate="let item" [selectable]="true" disclosure="arrow-more">
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <data slot="end" themeColor="success">Value</data>
+    </kirby-item>
+  </kirby-list>
+
+  <kirby-list [items]="hoverItems">
+    <kirby-item
+      [attr.data-state]="item.state"
+      *kirbyListItemTemplate="let item"
+      [selectable]="true"
+      disclosure="arrow-more"
+    >
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <kirby-flag slot="end" themeColor="success">60</kirby-flag>
+    </kirby-item>
+  </kirby-list>
+
+  <kirby-list [items]="activeItems">
+    <kirby-item
+      [attr.data-state]="item.state"
+      *kirbyListItemTemplate="let item"
+      [selectable]="true"
+      disclosure="arrow-more"
+    >
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <kirby-flag slot="end" themeColor="success">60</kirby-flag>
+    </kirby-item>
+  </kirby-list>
+
+  <kirby-list [items]="focusItems">
+    <kirby-item
+      [attr.data-state]="item.state"
+      *kirbyListItemTemplate="let item"
+      [selectable]="true"
+      disclosure="arrow-more"
+    >
+      <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
+      <kirby-avatar slot="start" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-label>
+        <p class="kirby-item-title">Title</p>
+        <p class="kirby-item-detail">Detail</p>
+      </kirby-label>
+      <kirby-flag slot="end" themeColor="success">60</kirby-flag>
+    </kirby-item>
+  </kirby-list>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input kirby-input placeholder="Add placeholder" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input data-state="hover" kirby-input placeholder="Add placeholder" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input data-state="active" kirby-input placeholder="Add placeholder" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input data-state="focus" kirby-input placeholder="Add placeholder" value="Add text" />
+  </kirby-form-field>
+  <kirby-form-field label="Label" message="Message text">
+    <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
+    <input kirby-input placeholder="Add placeholder" value="Add text" hasError="true" />
+  </kirby-form-field>
+  <div></div>
+  <div></div>
+  <div></div>
+  <button kirby-button [noDecoration]="true" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <button kirby-button [noDecoration]="true" data-state="hover" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <button kirby-button [noDecoration]="true" data-state="active" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <button kirby-button [noDecoration]="true" data-state="focus" aria-label="Close">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <button kirby-button>Add text</button>
+  <button kirby-button data-state="hover">Add text</button>
+  <button kirby-button data-state="active">Add text</button>
+  <button kirby-button data-state="focus">Add text</button>
+
+  <button kirby-button attentionLevel="3">Add text</button>
+  <button kirby-button attentionLevel="3" data-state="hover">Add text</button>
+  <button kirby-button attentionLevel="3" data-state="active">Add text</button>
+  <button kirby-button attentionLevel="3" data-state="focus">Add text</button>
+</div>

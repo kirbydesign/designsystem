@@ -6,15 +6,6 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 
 :host {
   &:not(:disabled) {
-    @include interaction-state.apply-hover {
-      background-color: var(--kirby-inputs-background-color-hover);
-      cursor: text;
-    }
-
-    @include interaction-state.apply-active {
-      background-color: var(--kirby-inputs-background-color-active);
-    }
-
     // Wrap declarations to avoid mixing with nested rules.
     // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
     /* stylelint-disable no-duplicate-selectors */

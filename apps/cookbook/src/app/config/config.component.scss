@@ -1,0 +1,298 @@
+:host {
+  display: block;
+  position: fixed;
+  z-index: 10000;
+}
+
+// ── FAB ──
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10002;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--kirby-primary);
+  color: var(--kirby-primary-contrast, #fff);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgb(0 0 0 / 30%);
+  }
+
+  &.active {
+    transform: rotate(60deg);
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+// ── Backdrop ──
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgb(0 0 0 / 30%);
+}
+
+// ── Panel ──
+.panel {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  z-index: 10001;
+  width: 420px;
+  max-height: calc(100vh - 120px);
+  background: var(--kirby-background-color, #fff);
+  border-radius: var(--kirby-border-radius-l, 12px);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 20%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slide-up 200ms ease;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--kirby-spacing-s, 12px) var(--kirby-spacing-s, 12px);
+  border-bottom: 1px solid var(--kirby-semi-light, #e0e0e0);
+  flex-shrink: 0;
+
+  h2 {
+    margin: 0;
+    font-size: var(--kirby-font-size-n, 16px);
+  }
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--kirby-text-color-semi-dark, #666);
+  padding: 0 4px;
+
+  &:hover {
+    color: var(--kirby-danger, #c00);
+  }
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--kirby-spacing-s, 12px);
+
+  p {
+    margin-bottom: var(--kirby-spacing-s, 12px);
+
+    code {
+      background: var(--kirby-light);
+      padding: var(--kirby-spacing-xxxxs) var(--kirby-spacing-xxxs);
+      border-radius: var(--kirby-border-radius-xs);
+      font-size: var(--kirby-font-size-s);
+    }
+  }
+}
+
+// ── Toolbar ──
+.toolbar {
+  margin-bottom: var(--kirby-spacing-s, 12px);
+}
+
+// ── Presets ──
+.preset-group {
+  margin-bottom: var(--kirby-spacing-s, 12px);
+
+  h3 {
+    margin-bottom: var(--kirby-spacing-xs, 8px);
+    font-size: var(--kirby-font-size-s, 14px);
+  }
+}
+
+.preset-buttons {
+  display: flex;
+  gap: var(--kirby-spacing-xxs, 6px);
+  flex-wrap: wrap;
+}
+
+.preset-btn {
+  padding: var(--kirby-spacing-xxs, 6px) var(--kirby-spacing-s, 12px);
+  border: 1px solid var(--kirby-medium, #ccc);
+  border-radius: var(--kirby-border-radius-n, 8px);
+  background: var(--kirby-white, #fff);
+  color: var(--kirby-text-color, #222);
+  font-size: var(--kirby-font-size-s, 14px);
+  cursor: pointer;
+  transition:
+    background 150ms,
+    border-color 150ms;
+
+  &:hover {
+    background: var(--kirby-light, #f0f0f0);
+  }
+
+  &.active {
+    background: var(--kirby-primary);
+    color: var(--kirby-primary-contrast, #fff);
+    border-color: var(--kirby-primary);
+  }
+}
+
+.reset-all {
+  background: var(--kirby-danger);
+  color: var(--kirby-danger-contrast, #fff);
+  border: none;
+  border-radius: var(--kirby-border-radius-n);
+  padding: var(--kirby-spacing-xxs) var(--kirby-spacing-s);
+  font-size: var(--kirby-font-size-s);
+  cursor: pointer;
+}
+
+// ── Color groups ──
+.color-group,
+.font-family-group {
+  margin-bottom: var(--kirby-spacing-m, 16px);
+
+  h3 {
+    margin-bottom: var(--kirby-spacing-xs, 8px);
+    font-size: var(--kirby-font-size-s, 14px);
+  }
+}
+
+.font-preview {
+  width: 36px;
+  min-height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--kirby-text-color, #222);
+  background: var(--kirby-light, #f0f0f0);
+}
+
+.token-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--kirby-spacing-xxs, 6px);
+}
+
+.token-card {
+  display: flex;
+  align-items: stretch;
+  background: var(--kirby-white);
+  border-radius: var(--kirby-border-radius-n);
+  overflow: hidden;
+  border: 1px solid var(--kirby-semi-light);
+  transition: border-color 150ms;
+
+  &.overridden {
+    border-color: var(--kirby-primary);
+    box-shadow: 0 0 0 1px var(--kirby-primary);
+  }
+}
+
+.swatch {
+  width: 36px;
+  min-height: 36px;
+  flex-shrink: 0;
+}
+
+.token-info {
+  flex: 1;
+  padding: var(--kirby-spacing-xxxxs, 2px) var(--kirby-spacing-xxs, 6px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.var-name {
+  font-size: 11px;
+  color: var(--kirby-text-color-semi-dark);
+  word-break: break-all;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--kirby-spacing-xxxs, 4px);
+
+  input[type='color'] {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid var(--kirby-medium);
+    border-radius: var(--kirby-border-radius-xs);
+    cursor: pointer;
+    background: none;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
+
+    &::-webkit-color-swatch {
+      border: none;
+      border-radius: 2px;
+    }
+  }
+}
+
+.hex-input {
+  flex: 1;
+  min-width: 70px;
+  font-family: monospace;
+  font-size: var(--kirby-font-size-xs, 12px);
+  padding: 2px 4px;
+  border: 1px solid var(--kirby-medium);
+  border-radius: var(--kirby-border-radius-xs);
+}
+
+.reset-btn {
+  background: none;
+  border: 1px solid var(--kirby-medium);
+  border-radius: var(--kirby-border-radius-xs);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: var(--kirby-font-size-n);
+  line-height: 1;
+  color: var(--kirby-text-color-semi-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: var(--kirby-light);
+    color: var(--kirby-danger);
+  }
+}

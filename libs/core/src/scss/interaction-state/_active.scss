@@ -3,7 +3,8 @@
 
 @mixin apply-active($loudness: interaction-state.$default-loudness-active, $make-lighter: false) {
   &:active,
-  &.interaction-state-active {
+  &.interaction-state-active,
+  &[data-state='active'] {
     @include layer.apply-state($loudness, $make-lighter);
     @content;
   }
@@ -14,7 +15,8 @@
   $make-lighter: false
 ) {
   &:active,
-  &.ion-activated {
+  &.ion-activated,
+  &[data-state='active'] {
     @include layer.apply-state($loudness, $make-lighter);
 
     --background-activated: var(--state-layer-background-color);

@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:math';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
@@ -32,15 +33,27 @@
   }
 }
 
+:host[data-state='hover'] ion-item {
+  --background: var(--kirby-a-hover);
+}
+
+:host[data-state='active'] ion-item {
+  --background: var(--kirby-a-active);
+}
+
+:host:active {
+  ion-item {
+    --background-hover: var(--kirby-a-active);
+    --background-hover-opacity: 1;
+  }
+}
+
 ion-item {
   &::part(native):focus-visible {
     box-shadow:
       0 0 0 2px utils.$focus-ring-color inset,
       0 0 0 4px var(--kirby-white) inset;
   }
-
-  @include interaction-state.apply-hover-ionic('xxxs');
-  @include interaction-state.apply-active-ionic('xxs');
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
@@ -53,17 +66,19 @@ ion-item {
     --inner-padding-top: var(--kirby-spacing-xxs);
     --inner-padding-bottom: var(--kirby-spacing-xxs);
     --inner-padding-end: var(--kirby-spacing-s);
-    --background: var(--kirby-item-background, var(--kirby-white));
-
-    // WORKAROUND: Needed to fix ignored click on scrollend
-    // https://github.com/ionic-team/ionic-framework/issues/21871
-    --background-activated-opacity: 0.99;
-    --background-focused: var(--kirby-item-background-focused, var(--kirby-background-color));
-    --background-focused-opacity: 1;
+    --background: var(--kirby-item-background, var(--kirby-a));
+    --background-hover: var(--kirby-a-hover);
+    --background-hover-opacity: 1;
 
     font-size: var(--kirby-font-size-n);
   }
+
   /* stylelint-enable no-duplicate-selectors */
+
+  // Override --background-hover when activated, because Ionic's hover selector
+  // has higher specificity than the activated selector inside the shadow DOM.
+  // Without this, the activated background is never visible on desktop where
+  // :hover and .ion-activated coexist.
 
   // Prevent additional padding in iOS Safari on devices with "screen notch"
   // by removing horizontal safe area when rotated to landscape orientation.

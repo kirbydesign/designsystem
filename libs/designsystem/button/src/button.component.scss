@@ -117,14 +117,24 @@ $button-margin: var(--kirby-spacing-xxxs);
 }
 
 @mixin button-attentionlevel1 {
-  --kirby-button-background-color: var(--kirby-primary);
-  --kirby-button-color: var(--kirby-primary-contrast);
+  --kirby-button-background-color: var(--kirby-b);
+  --kirby-button-color: var(--kirby-b-contrast);
 
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
   &.destructive {
     --kirby-button-background-color: var(--kirby-danger);
     --kirby-button-color: var(--kirby-danger-contrast);
+  }
+
+  &:hover,
+  &[data-state='hover'] {
+    --kirby-button-background-color: var(--kirby-b-hover);
+  }
+
+  &:active,
+  &[data-state='active'] {
+    --kirby-button-background-color: var(--kirby-b-active);
   }
 }
 
@@ -137,11 +147,18 @@ $button-margin: var(--kirby-spacing-xxxs);
 }
 
 @mixin button-attentionlevel3 {
-  --kirby-button-background-color: var(--kirby-inputs-background-color);
-  --kirby-button-color: var(--kirby-inputs-color);
+  --kirby-button-background-color: var(--kirby-d);
+  --kirby-button-color: var(--kirby-d-contrast);
 
-  @include interaction-state.apply-hover('xs');
-  @include interaction-state.apply-active('s');
+  &:hover,
+  &[data-state='hover'] {
+    --kirby-button-background-color: var(--kirby-b-hover);
+  }
+
+  &:active,
+  &[data-state='active'] {
+    --kirby-button-background-color: var(--kirby-b-active);
+  }
 }
 
 :host {
@@ -150,11 +167,11 @@ $button-margin: var(--kirby-spacing-xxxs);
 
   flex-shrink: 0;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   @include utils.accessible-target-size;
-  @include interaction-state.apply-focus-visible;
-  @include interaction-state.initialize-layer;
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active;
   @include interaction-state.extend-content {
     display: inherit;
     width: inherit;
