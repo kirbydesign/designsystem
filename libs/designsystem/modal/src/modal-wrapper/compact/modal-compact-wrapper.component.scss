@@ -4,5 +4,5 @@
 
 :host {
   display: block;
-  padding: utils.size('m') utils.size('s');
+  padding: var(--kirby-spacing-m) var(--kirby-spacing-s);
 }

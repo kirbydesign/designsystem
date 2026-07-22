@@ -10,30 +10,31 @@
 }
 
 .icon-outline {
+  // TODO(@kirby): migrate utils.size('xxl') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
   $icon-size: utils.size('xxl') * 2;
 
   width: $icon-size;
   height: $icon-size;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: utils.size('m');
+  margin-bottom: var(--kirby-spacing-m);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: utils.size('xxxs') solid utils.get-color('medium');
-  border-radius: utils.border-radius('circle');
+  border: var(--kirby-spacing-xxxs) solid var(--kirby-medium);
+  border-radius: var(--kirby-border-radius-circle);
 }
 
 kirby-icon {
-  color: utils.get-color('medium');
+  color: var(--kirby-medium);
 }
 
 .title {
-  margin-bottom: utils.size('xxs');
+  margin-bottom: var(--kirby-spacing-xxs);
 }
 
 p.subtitle {
-  margin-bottom: utils.size('m');
+  margin-bottom: var(--kirby-spacing-m);
   white-space: pre-wrap;
 }
 

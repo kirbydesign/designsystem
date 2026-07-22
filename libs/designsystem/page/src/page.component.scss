@@ -3,48 +3,50 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$ion-content-padding-top: utils.size('xs');
+$ion-content-padding-top: var(--kirby-spacing-xs);
 
 /*
  * Page Header
  */
 
-$toolbar-transition-duration-in: utils.get-transition-duration('quick');
+$toolbar-transition-duration-in: var(--kirby-transition-duration-quick);
 $toolbar-transition-duration-out: 50ms;
 $toolbar-transition: background-color $toolbar-transition-duration-out linear;
+
+// TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
 $toolbar-shaded-background: color.mix(
   #000,
   utils.get-color('background-color', $getValueOnly: true),
   1.1%
 );
-$toolbar-button-size: utils.size('xl');
-$toolbar-button-spacing: utils.size('xxs');
+$toolbar-button-size: var(--kirby-spacing-xl);
+$toolbar-button-spacing: var(--kirby-spacing-xxs);
 $toolbar-max-font-size: 18px * 1.2;
 
 ion-header,
 ion-toolbar {
   box-sizing: border-box;
 
-  --background: #{utils.get-color('background-color')};
+  --background: var(--kirby-background-color);
 }
 
 ion-title h1 {
-  font-size: min(utils.font-size('m'), $toolbar-max-font-size);
+  font-size: min(var(--kirby-font-size-m), $toolbar-max-font-size);
 }
 
 ion-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{utils.size('s')};
-  --padding-end: #{utils.size('s')};
+  --padding-start: var(--kirby-spacing-s);
+  --padding-end: var(--kirby-spacing-s);
   --padding-top: 0;
   --padding-bottom: 0;
-  --ion-toolbar-color: #{utils.get-color('black')};
-  --min-height: #{utils.size('xxxl')};
+  --ion-toolbar-color: var(--kirby-black);
+  --min-height: var(--kirby-spacing-xxxl);
 
   @include utils.media('>=medium') {
-    --padding-start: #{utils.size('m')};
-    --padding-end: #{utils.size('m')};
-    --min-height: #{utils.size('xxxxxl')};
+    --padding-start: var(--kirby-spacing-m);
+    --padding-end: var(--kirby-spacing-m);
+    --min-height: var(--kirby-spacing-xxxxxl);
   }
 
   /*
@@ -76,7 +78,7 @@ ion-toolbar {
     }
 
     &:not(.content-pinned)::before {
-      background-color: utils.get-color('medium');
+      background-color: var(--kirby-medium);
     }
   }
 
@@ -109,8 +111,8 @@ ion-toolbar {
 
   ion-title {
     box-sizing: border-box;
-    font-size: utils.font-size('n');
-    font-weight: utils.font-weight('normal');
+    font-size: var(--kirby-font-size-n);
+    font-weight: var(--kirby-font-weight-normal);
     padding-inline: calc(
       var(--action-buttons-width, $toolbar-button-size + $toolbar-button-spacing) +
         var(--padding-start)
@@ -139,11 +141,11 @@ ion-toolbar {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: #{utils.size('xxxl')};
+      min-height: var(--kirby-spacing-xxxl);
       scale: 0;
       transition-property: opacity, transform;
       transition-duration: 150ms;
-      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transition-timing-function: var(--kirby-transition-easing-enter-exit);
       transform: translateY(10px);
 
       span.clickable {
@@ -187,8 +189,8 @@ ion-back-button {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --color: #{utils.get-color('black')};
-    --background: #{utils.get-color('white')};
+    --color: var(--kirby-black);
+    --background: var(--kirby-white);
     --icon-font-size: 24px;
 
     height: $toolbar-button-size;
@@ -209,7 +211,7 @@ ion-back-button {
 
   &::part(native) {
     opacity: 1; // required for interaction states to work
-    border-radius: utils.border-radius('pill');
+    border-radius: var(--kirby-border-radius-pill);
     overflow: hidden; // required for border radius to work
   }
 
@@ -234,9 +236,9 @@ ion-back-button {
 }
 
 .page-header {
-  margin-left: utils.size('s');
-  margin-top: utils.size('xxs');
-  margin-bottom: var(--kirby-page-title-margin-bottom, #{utils.size('xl')});
+  margin-left: var(--kirby-spacing-s);
+  margin-top: var(--kirby-spacing-xxs);
+  margin-bottom: var(--kirby-page-title-margin-bottom, var(--kirby-spacing-xl));
 
   .page-title {
     &.has-actions {
@@ -256,7 +258,7 @@ ion-back-button {
   }
 
   .page-subtitle {
-    margin-top: #{utils.size('xxs')};
+    margin-top: var(--kirby-spacing-xxs);
   }
 
   &.text-center {
@@ -276,15 +278,15 @@ ion-content {
   --padding-top: #{$ion-content-padding-top};
   --padding-start: var(
     --page-content-padding-start,
-    calc(#{utils.size('s')} + var(--ion-safe-area-left))
+    calc(var(--kirby-spacing-s) + var(--ion-safe-area-left))
   );
-  --padding-end: var(--page-content-padding-end, #{utils.size('s')});
-  --background: #{utils.get-color('background-color')};
-  --color: #{utils.get-color('black')};
+  --padding-end: var(--page-content-padding-end, var(--kirby-spacing-s));
+  --background: var(--kirby-background-color);
+  --color: var(--kirby-black);
 
   @include utils.media('>=medium') {
-    --padding-start: var(--page-content-padding-start, #{utils.size('xxl')});
-    --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
+    --padding-start: var(--page-content-padding-start, var(--kirby-spacing-xxl));
+    --padding-end: var(--page-content-padding-end, var(--kirby-spacing-xxl));
   }
 
   &.has-header {
@@ -292,14 +294,20 @@ ion-content {
   }
 
   &.max-width-lg {
+    // TODO(@kirby): migrate utils.get-page-content-max-width('lg') — get-page-content-max-width() has no direct CSS custom property equivalent
+
     --page-content-max-width: #{utils.get-page-content-max-width('lg')};
   }
 
   &.max-width-xl {
+    // TODO(@kirby): migrate utils.get-page-content-max-width('xl') — get-page-content-max-width() has no direct CSS custom property equivalent
+
     --page-content-max-width: #{utils.get-page-content-max-width('xl')};
   }
 
   &.max-width-full {
+    // TODO(@kirby): migrate utils.get-page-content-max-width('full') — get-page-content-max-width() has no direct CSS custom property equivalent
+
     --page-content-max-width: #{utils.get-page-content-max-width('full')};
   }
 
@@ -310,7 +318,7 @@ ion-content {
   .content-inner {
     max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
-    padding-bottom: utils.size('xl');
+    padding-bottom: var(--kirby-spacing-xl);
 
     // Prevents flickering on navigation back animation on ios
     transform: translateZ(0);
@@ -344,8 +352,8 @@ ion-content {
   left: 0;
   right: 0;
   padding-top: 1px;
-  margin-block-end: utils.size('m');
-  z-index: utils.z('sticky-content');
+  margin-block-end: var(--kirby-spacing-m);
+  z-index: var(--kirby-z-index-sticky-content);
 
   div {
     max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
@@ -386,7 +394,7 @@ ion-content {
 
     &::after {
       /* Divider - pinned */
-      background-color: utils.get-color('medium');
+      background-color: var(--kirby-medium);
     }
   }
 }

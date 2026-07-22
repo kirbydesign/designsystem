@@ -6,5 +6,5 @@
   contain: size layout style;
   z-index: 0;
   overflow: hidden;
-  background-color: utils.get-color('background-color');
+  background-color: var(--kirby-background-color);
 }

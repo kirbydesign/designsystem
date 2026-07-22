@@ -12,54 +12,54 @@
   line-height: normal;
 
   &.has-padding {
-    padding: var(--kirby-internal-card-header-padding, utils.size('s'));
+    padding: var(--kirby-internal-card-header-padding, var(--kirby-spacing-s));
   }
 
   // Flagged card headers
   &.success {
-    --kirby-card-header-background-color: #{utils.get-color('success-tint')};
+    --kirby-card-header-background-color: var(--kirby-success-tint);
   }
 
   &.warning {
-    --kirby-card-header-background-color: #{utils.get-color('warning-tint')};
+    --kirby-card-header-background-color: var(--kirby-warning-tint);
   }
 
   &.danger {
-    --kirby-card-header-background-color: #{utils.get-color('danger-tint')};
+    --kirby-card-header-background-color: var(--kirby-danger-tint);
   }
 
   &.info {
-    --kirby-card-header-background-color: #{utils.get-color('semi-light')};
+    --kirby-card-header-background-color: var(--kirby-semi-light);
   }
 
-  --kirby-card-header-color: #{utils.get-color('black')};
+  --kirby-card-header-color: var(--kirby-black);
 }
 
 .title {
-  margin-bottom: var(--kirby-internal-card-header-margin-bottom, utils.size('s'));
+  margin-bottom: var(--kirby-internal-card-header-margin-bottom, var(--kirby-spacing-s));
   line-height: var(--kirby-internal-card-header-line-height);
 
   &.bold {
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
   }
 }
 
 .subtitle {
-  font-size: utils.font-size('s');
+  font-size: var(--kirby-font-size-s);
   margin-bottom: 0;
 }
 
 :host:has(.subtitle) .title {
-  margin-top: utils.size(
-    'xxxs'
+  margin-top: var(
+    --kirby-spacing-xxxs
   ); // when subtitle is present, we want a bit more spacious look, therefore top margin here
 }
 
 :host(.flagged) {
-  --kirby-internal-card-header-padding: #{utils.size('xxxxs')} #{utils.size('xxs')};
+  --kirby-internal-card-header-padding: var(--kirby-spacing-xxxxs) var(--kirby-spacing-xxs);
 
   p {
-    --kirby-internal-card-header-line-height: #{utils.line-height('n')};
+    --kirby-internal-card-header-line-height: var(--kirby-line-height-n);
     --kirby-internal-card-header-margin-bottom: 0px;
   }
 }

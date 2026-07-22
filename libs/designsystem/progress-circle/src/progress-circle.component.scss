@@ -13,6 +13,8 @@ kirby-progress-circle-ring {
 }
 
 kirby-progress-circle-ring {
+  // TODO(@kirby): migrate utils.z('default') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
+
   z-index: utils.z('default') + 1;
 }
 
@@ -22,7 +24,7 @@ kirby-progress-circle-ring {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: utils.z('default');
-  border-radius: utils.border-radius('circle');
+  z-index: var(--kirby-z-index-default);
+  border-radius: var(--kirby-border-radius-circle);
   overflow: hidden;
 }

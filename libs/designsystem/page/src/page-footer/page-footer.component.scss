@@ -1,12 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$padding-horizontal: utils.size('s');
-$padding-vertical: utils.size('xxs');
+$padding-horizontal: var(--kirby-spacing-s);
+$padding-vertical: var(--kirby-spacing-xxs);
 
 :host {
   display: block;
-  background-color: utils.get-color('white');
+  background-color: var(--kirby-white);
   @include themes.apply-white-theme;
 
   .wrapper {
@@ -18,7 +18,8 @@ $padding-vertical: utils.size('xxs');
     &.padding {
       padding: $padding-vertical $padding-horizontal;
       padding-bottom: calc(
-        #{$padding-vertical} + var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom))
+        #{$padding-vertical} +
+          var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom))
       );
     }
   }

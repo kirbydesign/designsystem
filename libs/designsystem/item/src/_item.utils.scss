@@ -23,7 +23,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
 @mixin item-typography() {
   @include utils.slotted(item-typography.$slotted-text-elements) {
-    color: utils.get-text-color('black');
+    color: var(--kirby-text-color-black);
     display: block;
     margin: 0;
     white-space: nowrap;
@@ -34,13 +34,13 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   /* Needs to come before the base typography styles to allow for p.kirby-item-title to be applied
      as the selectors have the same specificity */
   @include utils.slotted(':where(p)') {
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
+    font-size: var(--kirby-font-size-s);
+    line-height: var(--kirby-line-height-s);
   }
 
   @include utils.slotted($base-typography-selectors) {
-    font-size: utils.font-size('n');
-    line-height: utils.line-height('n');
+    font-size: var(--kirby-font-size-n);
+    line-height: var(--kirby-line-height-n);
     font-weight: normal;
   }
 
@@ -51,16 +51,16 @@ $base-typography-selectors: (':where(.kirby-item-title)');
     '.kirby-item-detail',
     '.kirby-item-disclosure'
   ) {
-    font-size: utils.font-size('xs');
-    line-height: utils.line-height('xs');
+    font-size: var(--kirby-font-size-xs);
+    line-height: var(--kirby-line-height-xs);
   }
 
   @include utils.slotted('[subtitle]:not(:last-child)', '.kirby-item-subtitle:not(:last-child)') {
-    margin-bottom: utils.size('xxxs');
+    margin-bottom: var(--kirby-spacing-xxxs);
   }
 
   @include utils.slotted('[detail]', '.kirby-item-detail', '.kirby-item-disclosure') {
-    color: utils.get-text-color('semi-dark');
+    color: var(--kirby-text-color-semi-dark);
   }
 
   @include utils.slotted('.kirby-item-disclosure') {
@@ -101,14 +101,16 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
   @include when-text-resized-on-narrow-viewport {
     @include when-layout-change-needed {
       $start-slot-content: '[slot="start"]:not(.outside)';
-      $end-slot-content: '[slot="end"]:not(.disclosure):not(.icon-only)';
+      $end-slot-content: '[slot="end"]:not(.disclosure)';
       $end-slot-content-only: ':not(:has(#{$start-slot-content})):has(#{$end-slot-content})';
       $line-center: 0.5lh;
-      $disclosure-radius: utils.size('xs');
+      $disclosure-radius: var(--kirby-spacing-xs);
+
+      // TODO(@kirby): migrate utils.size('xxxs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
       $badge-radius: utils.size('xxxs') * 0.5;
-      $start-slot-content-margin: utils.size('xxxxs');
-      $outside-slot-offset: utils.size(
-        's'
+      $start-slot-content-margin: var(--kirby-spacing-xxxxs);
+      $outside-slot-offset: var(
+        --kirby-spacing-s
       ); // best guess for what might work with different start slot content (e.g. small avatar)
 
       // Apply text clamp if text is scaled
@@ -124,9 +126,11 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
       // if there is either start or end slot (or both), change layout to better fit scaled text, with row layout etc.
       ion-item:has(#{$start-slot-content}),
       ion-item:has(#{$end-slot-content}) {
-        --item-padding-top: #{utils.size('xxs')};
+        --item-padding-top: var(--kirby-spacing-xxs);
         --inner-padding-top: 0;
-        --inner-padding-end: #{utils.size('l')}; // Make space for disclosure indicator in item-end
+        --inner-padding-end: var(
+          --kirby-spacing-l
+        ); // Make space for disclosure indicator in item-end
 
         @include utils.slotted('[slot="end"]') {
           margin-inline-start: initial;
@@ -134,11 +138,18 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
 
         &::part(item-inner) {
           position: initial;
-          gap: utils.size('xs');
+          gap: var(--kirby-spacing-xs);
         }
 
-        &::part(input-wrapper) {
-          justify-content: center;
+        // center disclosure and badge vertically with start slot content
+        ion-item:has(#{$start-slot-content}) {
+          .outside {
+            top: calc(var(--item-padding-top) + $start-slot-content-margin + $outside-slot-offset);
+          }
+
+          .disclosure {
+            top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+          }
         }
 
         &::part(native) {
@@ -148,10 +159,10 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
 
         .disclosure {
           position: absolute;
-          right: utils.size('xxs');
+          right: var(--kirby-spacing-xxs);
           top: calc(var(--item-padding-top) + $line-center - $disclosure-radius);
-          font-size: utils.font-size('n');
-          line-height: utils.line-height('n');
+          font-size: var(--kirby-font-size-n);
+          line-height: var(--kirby-line-height-n);
         }
       }
 
@@ -162,7 +173,9 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
         }
 
         .disclosure {
-          top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+          top: calc(
+            var(--item-padding-top) + $start-slot-content-margin + var(--kirby-spacing-xxs)
+          );
         }
       }
 
@@ -212,7 +225,7 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
       @include utils.slotted('.kirby-item-disclosure') {
         position: absolute;
         top: var(--padding-top, 0);
-        right: utils.size('s');
+        right: var(--kirby-spacing-s);
         margin-left: 0;
       }
     }

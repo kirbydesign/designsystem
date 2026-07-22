@@ -6,5 +6,5 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding: utils.size('m');
+  padding: var(--kirby-spacing-m);
 }

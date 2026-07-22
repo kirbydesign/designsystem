@@ -1,8 +1,8 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$margin-horizontal: utils.size('l');
-$margin-horizontal-narrow: utils.size('s');
+$margin-horizontal: var(--kirby-spacing-l);
+$margin-horizontal-narrow: var(--kirby-spacing-s);
 $max-width: 375px;
 
 :host {
@@ -45,14 +45,14 @@ $max-width: 375px;
 kirby-card {
   align-self: stretch;
   pointer-events: auto;
-  box-shadow: utils.get-elevation(8);
+  box-shadow: var(--kirby-elevation-8);
 
   button[kirby-button] {
     margin: 0;
     border-radius: 0;
 
     &:not(:focus) {
-      border-top: 1px solid utils.get-color('background-color');
+      border-top: 1px solid var(--kirby-background-color);
     }
   }
 }
@@ -60,16 +60,16 @@ kirby-card {
 .cancel-btn {
   &:focus-visible {
     transition: interaction-state.transition();
-    box-shadow: utils.get-elevation(8), var(--kirby-focus-ring-md-inset);
+    box-shadow: var(--kirby-elevation-8), var(--kirby-focus-ring-md-inset);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    font-weight: utils.font-weight('bold');
-    margin-top: utils.size('s');
-    margin-bottom: utils.size('m');
+    font-weight: var(--kirby-font-weight-bold);
+    margin-top: var(--kirby-spacing-s);
+    margin-bottom: var(--kirby-spacing-m);
     pointer-events: auto;
   }
   /* stylelint-enable no-duplicate-selectors */

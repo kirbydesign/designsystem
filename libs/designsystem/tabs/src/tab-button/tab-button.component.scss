@@ -5,6 +5,7 @@
 
 // There is a limit to how large text can be on narrow viewports with text resized
 // before tab button texts start to collide horizontally, so we cap it for narrow viewports
+// TODO(@kirby): migrate utils.size('xs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
 $maximum-font-size: utils.size('xs') * utils.$text-resize-threshold;
 
 // badge size is fixed on narrow viewports to ensure it is properly sized accordion to the tab icon
@@ -42,14 +43,14 @@ ion-tab-button {
     height: 100%;
     flex: 1 1 0%;
     max-width: 168px;
-    font-weight: utils.font-weight('medium');
-    font-size: min(utils.font-size('xs'), $maximum-font-size);
+    font-weight: var(--kirby-font-weight-medium);
+    font-size: min(var(--kirby-font-size-xs), $maximum-font-size);
 
-    --color: #{utils.get-text-color('semi-dark')};
-    --color-selected: #{utils.get-color('black')};
+    --color: var(--kirby-text-color-semi-dark);
+    --color-selected: var(--kirby-black);
     --padding-start: 0;
     --padding-end: 0;
-    --kirby-icon-font-size: #{utils.size('m')};
+    --kirby-icon-font-size: var(--kirby-spacing-m);
 
     // Magic values here as we have no tokens that gives
     // badge the correct position in relation to the tab icon
@@ -72,10 +73,10 @@ ion-tab-button {
   @include utils.media('>=medium') {
     flex: none;
     flex-direction: row;
-    font-size: min(utils.font-size('s'), $maximum-font-size);
+    font-size: min(var(--kirby-font-size-s), $maximum-font-size);
 
-    --padding-start: #{utils.size('m')};
-    --padding-end: #{utils.size('m')};
+    --padding-start: var(--kirby-spacing-m);
+    --padding-end: var(--kirby-spacing-m);
 
     // Magic values here as we have no tokens that gives
     // badge the correct position in relation to the tab icon
@@ -95,24 +96,24 @@ ion-tab-button {
         // Using / for division outside of calc() is deprecated
         // and will be removed in Dart Sass 2.0.0. Use math.div() instead.
         // See: https://sass-lang.com/documentation/breaking-changes/slash-div/
-        margin-bottom: math.div(utils.size('xxxxs'), 2);
+        margin-bottom: math.div(var(--kirby-spacing-xxxxs), 2);
       }
     }
 
     @include utils.slotted(kirby-icon) {
-      --kirby-icon-margin-right: #{utils.size('xxs')};
+      --kirby-icon-margin-right: var(--kirby-spacing-xxs);
     }
   }
 
   @include utils.media('>=large') {
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
+    font-size: var(--kirby-font-size-s);
+    line-height: var(--kirby-line-height-s);
 
     --kirby-badge-font-size: initial;
 
     @include utils.not-touch {
-      --padding-start: #{utils.size('xs')};
-      --padding-end: #{utils.size('xs')};
+      --padding-start: var(--kirby-spacing-xs);
+      --padding-end: var(--kirby-spacing-xs);
     }
   }
 }

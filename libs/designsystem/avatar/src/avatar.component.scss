@@ -22,7 +22,7 @@ $badge-diameter: utils.$avatar-badge-size;
   --kirby-badge-position: absolute;
   --kirby-badge-right: #{get-badge-position($diameter-small)};
   --kirby-badge-top: #{get-badge-position($diameter-small)};
-  --kirby-badge-z-index: #{utils.z('avatar-badge')};
+  --kirby-badge-z-index: var(--kirby-z-index-avatar-badge);
 
   position: relative;
 }
@@ -31,23 +31,23 @@ $badge-diameter: utils.$avatar-badge-size;
   // default to size 'sm'
   width: $diameter-small;
   height: $diameter-small;
-  border-radius: utils.border-radius('circle');
+  border-radius: var(--kirby-border-radius-circle);
   overflow: hidden;
   position: relative;
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: utils.get-color('white');
-  color: utils.get-color('light-contrast');
+  background-color: var(--kirby-white);
+  color: var(--kirby-light-contrast);
 
   &.stroke {
-    border: 1px solid utils.get-color('semi-light');
+    border: 1px solid var(--kirby-semi-light);
   }
 
   &.overlay::before {
     content: '';
-    background-color: utils.get-color('black');
+    background-color: var(--kirby-black);
     opacity: 0.05;
     width: 100%;
     height: 100%;
@@ -73,7 +73,7 @@ $badge-diameter: utils.$avatar-badge-size;
     border-radius: 8px;
 
     .avatar-text {
-      font-size: utils.font-size('s');
+      font-size: var(--kirby-font-size-s);
     }
   }
 }
@@ -87,7 +87,7 @@ $badge-diameter: utils.$avatar-badge-size;
     height: $diameter-small;
 
     .avatar-text {
-      font-size: utils.font-size('s');
+      font-size: var(--kirby-font-size-s);
     }
   }
 }
@@ -104,7 +104,7 @@ $badge-diameter: utils.$avatar-badge-size;
     height: $diameter-medium;
 
     .avatar-text {
-      font-size: utils.font-size('m');
+      font-size: var(--kirby-font-size-m);
     }
   }
 }
@@ -121,16 +121,16 @@ $badge-diameter: utils.$avatar-badge-size;
     height: $diameter-large;
 
     .avatar-text {
-      font-size: utils.font-size('xl');
+      font-size: var(--kirby-font-size-xl);
     }
   }
 }
 
 :host-context(kirby-item)[slot='start'] {
-  margin-inline-end: utils.size('xs');
+  margin-inline-end: var(--kirby-spacing-xs);
 
   &.xs {
-    margin-inline-end: utils.size('s');
+    margin-inline-end: var(--kirby-spacing-s);
   }
 }
 

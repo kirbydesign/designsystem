@@ -39,10 +39,12 @@ $toolbar-bottom-border-width: 1px;
 
 @mixin toolbar-phablet-or-bigger() {
   @include utils.media('>=medium') {
-    --padding-start: #{utils.size('m')};
-    --padding-end: #{utils.size('m')};
+    --padding-start: var(--kirby-spacing-m);
+    --padding-end: var(--kirby-spacing-m);
+
+    // TODO(@kirby): migrate utils.size('m') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
     --padding-bottom: #{utils.size('m') - $toolbar-bottom-border-width};
-    --padding-top: #{utils.size('m')};
+    --padding-top: var(--kirby-spacing-m);
 
     padding-inline: 0;
   }
@@ -52,16 +54,18 @@ ion-header {
   box-sizing: border-box;
 
   ion-toolbar {
-    --padding-start: #{utils.size('xxs')};
-    --padding-end: #{utils.size('xxs')};
+    --padding-start: var(--kirby-spacing-xxs);
+    --padding-end: var(--kirby-spacing-xxs);
+
+    // TODO(@kirby): migrate utils.size('xxs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
     --padding-bottom: #{utils.size('xxs') - $toolbar-bottom-border-width};
-    --padding-top: #{utils.size('xxs')};
+    --padding-top: var(--kirby-spacing-xxs);
     --border-width: 0;
     --background: transparent;
-    --color: var(--kirby-modal-color, #{utils.get-color('black')});
+    --color: var(--kirby-modal-color, var(--kirby-black));
 
     border-bottom: $toolbar-bottom-border-width solid transparent;
-    transition: border-color utils.get-transition-duration('quick') linear;
+    transition: border-color var(--kirby-transition-duration-quick) linear;
 
     @include toolbar-phablet-or-bigger;
 
@@ -81,7 +85,7 @@ ion-header {
 
   &.drawer ion-header ion-toolbar {
     @include utils.media('<medium') {
-      --padding-top: #{utils.size('s')};
+      --padding-top: var(--kirby-spacing-s);
 
       // Prevent iOS safe-area padding-top on drawer flavor
       // as this is already applied on the top-level modal itself
@@ -95,12 +99,12 @@ ion-header {
 
 @include utils.media('>=medium') {
   ion-header ion-toolbar {
-    border-bottom-color: utils.get-color('medium');
+    border-bottom-color: var(--kirby-medium);
   }
 }
 
 ion-header.content-scrolled ion-toolbar {
-  border-bottom-color: utils.get-color('medium');
+  border-bottom-color: var(--kirby-medium);
 }
 
 :host-context(ion-modal.no-header-area-border) {
@@ -136,18 +140,18 @@ ion-header.content-scrolled ion-toolbar {
 ion-title {
   box-sizing: border-box;
   padding-inline: calc(48px + var(--padding-start)) calc(48px + var(--padding-end));
-  font-size: utils.font-size('n');
-  font-weight: utils.font-weight('bold');
+  font-size: var(--kirby-font-size-n);
+  font-weight: var(--kirby-font-weight-bold);
   outline: none;
 }
 
 ion-content {
   --background: transparent;
-  --color: var(--kirby-modal-color, #{utils.get-color('black')});
-  --padding-top: #{utils.size('m')};
+  --color: var(--kirby-modal-color, var(--kirby-black));
+  --padding-top: var(--kirby-spacing-m);
   --padding-bottom: calc(var(--kirby-spacing-m) + var(--kirby-modal-safe-area-bottom));
-  --padding-start: #{utils.size('s')};
-  --padding-end: #{utils.size('s')};
+  --padding-start: var(--kirby-spacing-s);
+  --padding-end: var(--kirby-spacing-s);
 
   display: flex;
   flex-direction: column;
@@ -170,24 +174,24 @@ ion-content {
 /* clean-css ignore:start */
 @include utils.media('>=medium') {
   ion-content {
-    --padding-start: #{utils.size('xxl')};
-    --padding-end: #{utils.size('xxl')};
+    --padding-start: var(--kirby-spacing-xxl);
+    --padding-end: var(--kirby-spacing-xxl);
   }
 }
 
 :host(.collapsible-title) {
   ion-content ion-toolbar:first-of-type {
     --padding-top: 0px;
-    --padding-bottom: #{utils.size('l')};
-    --padding-start: #{utils.size('xxs')};
-    --padding-end: #{utils.size('xxs')};
+    --padding-bottom: var(--kirby-spacing-l);
+    --padding-start: var(--kirby-spacing-xxs);
+    --padding-end: var(--kirby-spacing-xxs);
 
     // no border for header element when collapsible title is in the content area
     border: none;
 
     @include utils.media('>=medium') {
-      --padding-start: #{utils.size('s')};
-      --padding-end: #{utils.size('s')};
+      --padding-start: var(--kirby-spacing-s);
+      --padding-end: var(--kirby-spacing-s);
     }
   }
 }

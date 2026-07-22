@@ -4,7 +4,7 @@
   display: none;
   position: fixed;
   inset: 0;
-  z-index: utils.z('popover');
+  z-index: var(--kirby-z-index-popover);
 }
 
 :host(.is-opening) {
@@ -18,6 +18,6 @@
 
 .wrapper {
   position: fixed;
-  margin-top: utils.size('xxxs');
-  margin-bottom: utils.size('xxxs');
+  margin-top: var(--kirby-spacing-xxxs);
+  margin-bottom: var(--kirby-spacing-xxxs);
 }
