@@ -3,6 +3,8 @@
 
 $dropdown-max-height: 8 * utils.$dropdown-item-height;
 $dropdown-min-height: utils.$dropdown-item-height;
+
+// TODO(@kirby): migrate utils.size('s') — $margin-horizontal-total feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
 $margin-horizontal-total: 2 * utils.size('s');
 $min-screen-width-small: 320px;
 $min-screen-width: 375px;
@@ -12,7 +14,7 @@ $min-screen-width: 375px;
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-inset);
     outline: none;
-    border-radius: utils.border-radius('pill');
+    border-radius: var(--kirby-border-radius-pill);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -43,18 +45,18 @@ $min-screen-width: 375px;
     position: relative;
 
     > input[kirby-input] {
-      padding-right: utils.size('xl');
+      padding-right: var(--kirby-spacing-xl);
     }
 
     > input[kirby-input]:disabled ~ kirby-icon {
-      color: utils.get-color('semi-dark-shade');
+      color: var(--kirby-semi-dark-shade);
     }
 
     > kirby-icon {
       position: absolute;
       top: 0;
       bottom: 0;
-      right: utils.size('xs');
+      right: var(--kirby-spacing-xs);
     }
   }
 
@@ -74,7 +76,7 @@ kirby-card {
   flex-direction: column;
   max-height: $dropdown-max-height;
   overflow: hidden;
-  box-shadow: utils.get-elevation(4);
+  box-shadow: var(--kirby-elevation-4);
   max-width: calc(100vw - #{$margin-horizontal-total});
   min-width: $min-screen-width-small - $margin-horizontal-total;
   @include utils.media('>xsmall') {
@@ -88,5 +90,5 @@ kirby-card {
 }
 
 .no-results {
-  color: utils.get-text-color('semi-dark');
+  color: var(--kirby-text-color-semi-dark);
 }

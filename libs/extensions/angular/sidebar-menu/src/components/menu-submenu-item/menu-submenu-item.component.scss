@@ -10,12 +10,12 @@
   width: 100%;
 
   &[aria-expanded='true'] {
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
   }
 }
 
 .disclosure {
-  transition: transform utils.get-transition-duration('quick');
+  transition: transform var(--kirby-transition-duration-quick);
 
   &.rotate {
     transform: rotate(90deg);

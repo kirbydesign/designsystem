@@ -9,7 +9,7 @@
   overflow: visible;
 
   &.selected {
-    color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
+    color: var(--menuitem-selected-color, var(--kirby-primary-contrast));
   }
 
   &:not(.selected):hover a {
@@ -28,8 +28,8 @@
 .selected:hover,
 .selected:active,
 .selected:focus-visible {
-  background: var(--menuitem-selected-background-color, utils.get-color('primary'));
-  font-weight: utils.font-weight('bold');
+  background: var(--menuitem-selected-background-color, var(--kirby-primary));
+  font-weight: var(--kirby-font-weight-bold);
 }
 
 .item-badge {
@@ -37,7 +37,7 @@
 }
 
 .toggle-spacer {
-  width: utils.icon-font-size('sm');
+  width: var(--kirby-icon-font-size-sm);
   display: none;
 }
 
@@ -61,7 +61,7 @@
 .toggle-button-wrapper {
   display: inline-flex;
   position: absolute;
-  right: utils.size('xs');
+  right: var(--kirby-spacing-xs);
 }
 
 .toggle-button {
