@@ -18,14 +18,14 @@
 }
 
 @mixin shadow() {
-  box-shadow: utils.get-elevation(2);
+  box-shadow: var(--kirby-elevation-2);
 }
 
 @mixin first-item-padding() {
   /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   > ::ng-deep {
     :first-child {
-      --item-padding-top: #{utils.size('xxs')};
+      --item-padding-top: var(--kirby-spacing-xxs);
     }
   }
 }
@@ -34,7 +34,7 @@
   /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   > ::ng-deep {
     :last-child {
-      --item-padding-bottom: #{utils.size('xxs')};
+      --item-padding-bottom: var(--kirby-spacing-xxs);
     }
   }
 }

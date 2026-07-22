@@ -8,7 +8,7 @@ $header-padding: 14px;
 $row-height: 44px;
 
 // Color variables
-$default-divider-color: utils.get-color('medium');
+$default-divider-color: var(--kirby-medium);
 $border-bottom: 1px solid var(--kirby-divider-color, #{$default-divider-color});
 
 table.kirby-table {
@@ -35,8 +35,8 @@ table.kirby-table {
     }
 
     &.active {
-      color: utils.get-text-color('black');
-      font-weight: utils.font-weight('bold');
+      color: var(--kirby-text-color-black);
+      font-weight: var(--kirby-font-weight-bold);
 
       & kirby-icon.sortable-icon {
         visibility: visible;
@@ -44,14 +44,14 @@ table.kirby-table {
     }
 
     text-align: left;
-    font-weight: utils.font-weight('normal');
-    font-size: utils.font-size('xs');
-    color: utils.get-text-color('semi-dark');
-    line-height: utils.line-height('xs');
-    padding: $header-padding utils.size('s');
+    font-weight: var(--kirby-font-weight-normal);
+    font-size: var(--kirby-font-size-xs);
+    color: var(--kirby-text-color-semi-dark);
+    line-height: var(--kirby-line-height-xs);
+    padding: $header-padding var(--kirby-spacing-s);
 
     &.sortable {
-      padding: utils.size('xxs') utils.size('s');
+      padding: var(--kirby-spacing-xxs) var(--kirby-spacing-s);
     }
 
     button {
@@ -97,7 +97,7 @@ table.kirby-table {
         &::before {
           display: block;
           content: attr(data-text);
-          font-weight: utils.font-weight('bold');
+          font-weight: var(--kirby-font-weight-bold);
           height: 0;
           overflow: hidden;
           visibility: hidden;
@@ -119,10 +119,10 @@ table.kirby-table {
 
   td {
     height: $row-height;
-    padding: utils.size('xxxs') utils.size('s');
-    font-weight: utils.font-weight('normal');
-    font-size: utils.font-size('s');
-    color: utils.get-text-color('black');
+    padding: var(--kirby-spacing-xxxs) var(--kirby-spacing-s);
+    font-weight: var(--kirby-font-weight-normal);
+    font-size: var(--kirby-font-size-s);
+    color: var(--kirby-text-color-black);
     vertical-align: middle;
 
     &.text-align-left {

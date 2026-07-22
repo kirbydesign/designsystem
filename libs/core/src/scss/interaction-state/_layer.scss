@@ -7,10 +7,11 @@
 // You can change move the content layer on top by declaring e.g.:
 //    --content-layer-z-index: calc(#{layer.$state-layer-z-index} + 1);
 // in a component that uses interaction state layer.
+// TODO(@kirby): migrate utils.z('default') — $_content-layer-z-index feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
 $_content-layer-z-index: utils.z('default');
 $state-layer-z-index: $_content-layer-z-index + 1;
-$_dark: utils.get-color('black');
-$_light: utils.get-color('black-contrast');
+$_dark: var(--kirby-black);
+$_light: var(--kirby-black-contrast);
 
 /// Prepare state layer and content layer for interaction state changes.
 /// Should be initialized before applying hover.

@@ -20,8 +20,8 @@ $modal-heights: (
   m: 565px,
   l: 754px,
 );
-$modal-border-radius: utils.border-radius('xl');
-$modal-gutter: #{utils.size('xxl')};
+$modal-border-radius: var(--kirby-border-radius-xl);
+$modal-gutter: var(--kirby-spacing-xxl);
 $modal-header-height: 88px;
 $modal-expected-footer-height: 88px;
 $modal-min-content-height: 88px;
@@ -36,7 +36,9 @@ $modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-he
 }
 
 @function get-drawer-additional-padding-top() {
+  // TODO(@kirby): migrate utils.size('l') — $modal-close-button-inner-height feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
   $modal-close-button-inner-height: utils.size('l'); // Todo: Move to / get from shared var
+  // TODO(@kirby): migrate utils.size('xxxs') — $modal-close-button-vertical-margin feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
   $modal-close-button-vertical-margin: utils.size('xxxs') * 2; // Todo: Move to / get from shared var
   $modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
   $modal-header-total-height: $modal-close-button-inner-height +
@@ -59,9 +61,9 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     --border-radius: 0;
-    --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+    --background: var(--kirby-modal-background, var(--kirby-background-color));
     --height: auto;
-    --box-shadow: #{utils.get-elevation(8)};
+    --box-shadow: var(--kirby-elevation-8);
 
     box-sizing: border-box;
 
@@ -76,7 +78,7 @@ ion-modal.kirby-overlay {
       @include utils.media('<medium') {
         @include bottom-drawer;
 
-        --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
+        --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + var(--kirby-spacing-m));
 
         &.kirby-modal-full-height {
           --height: 100%;
@@ -159,21 +161,21 @@ ion-modal.kirby-overlay {
   }
 
   &.kirby-alert {
-    --background: #{utils.get-color('background-color')};
-    --border-radius: #{utils.border-radius('n')};
-    --box-shadow: #{utils.get-elevation(8)};
+    --background: var(--kirby-background-color);
+    --border-radius: var(--kirby-border-radius-n);
+    --box-shadow: var(--kirby-elevation-8);
     --max-width: #{utils.$alert-max-width};
     --height: auto;
   }
 }
 
 ion-modal {
-  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+  --background: var(--kirby-modal-background, var(--kirby-background-color));
 }
 
 ion-loading.kirby-loading-overlay {
   --backdrop-opacity: #{utils.$loading-overlay-backdrop-opacity};
-  --ion-backdrop-color: #{utils.get-color('background-color')};
+  --ion-backdrop-color: var(--kirby-background-color);
 
   .loading-wrapper {
     --background: transparent;
@@ -190,17 +192,17 @@ ion-loading.kirby-loading-overlay {
   text-align: center;
 
   // Set default colors
-  --background: #{utils.get-color('success-tint')};
-  --color: #{utils.get-color('black')};
+  --background: var(--kirby-success-tint);
+  --color: var(--kirby-black);
   --button-color: var(--color);
 
   // For readability
   &.success {
-    --background: #{utils.get-color('success-tint')};
+    --background: var(--kirby-success-tint);
   }
 
   &.warning {
-    --background: #{utils.get-color('warning')};
+    --background: var(--kirby-warning);
   }
 }
 

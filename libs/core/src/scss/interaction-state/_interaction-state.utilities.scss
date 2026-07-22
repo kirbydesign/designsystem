@@ -24,6 +24,7 @@ $loudness-scale: (
 }
 
 @function get-state-color($variant, $loudness: $default-loudness-hover, $make-lighter: false) {
+  // TODO(@kirby): migrate utils.get-color($variant, $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
   $_background: utils.get-color($variant, $getValueOnly: true);
   $_lightness: 0% !default;
 

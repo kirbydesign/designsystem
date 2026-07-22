@@ -206,13 +206,13 @@
 */
 
 @mixin section-header-typography() {
-  --padding-end: #{size('s')};
-  --padding-start: #{size('s')};
+  --padding-end: var(--kirby-spacing-s);
+  --padding-start: var(--kirby-spacing-s);
 
   @include slotted('[heading]') {
-    font-weight: font-weight('bold');
-    font-size: font-size('m');
-    line-height: line-height('m');
+    font-weight: var(--kirby-font-weight-bold);
+    font-size: var(--kirby-font-size-m);
+    line-height: var(--kirby-line-height-m);
     color: var(--kirby-section-header-color);
     margin: 0;
     white-space: nowrap;
@@ -221,26 +221,26 @@
   }
 
   @include slotted('h2[heading]', '.kirby-text-large[heading]') {
-    font-size: font-size('l');
-    line-height: line-height('l');
+    font-size: var(--kirby-font-size-l);
+    line-height: var(--kirby-line-height-l);
   }
 
   @include slotted('.kirby-text-medium[heading]') {
-    font-size: font-size('m');
-    line-height: line-height('m');
+    font-size: var(--kirby-font-size-m);
+    line-height: var(--kirby-line-height-m);
   }
 
   @include slotted('h4[heading]', 'h5[heading]', 'h6[heading]', '.kirby-text-normal[heading]') {
-    font-size: font-size('n');
-    line-height: line-height('n');
+    font-size: var(--kirby-font-size-n);
+    line-height: var(--kirby-line-height-n);
   }
 
   @include slotted('[detail]', '[label]') {
-    font-weight: font-weight('light');
-    font-size: font-size('s');
-    line-height: line-height('s');
+    font-weight: var(--kirby-font-weight-light);
+    font-size: var(--kirby-font-size-s);
+    line-height: var(--kirby-line-height-s);
     color: var(--kirby-section-header-color);
-    margin: size('xxxs') 0 size('xxs');
+    margin: var(--kirby-spacing-xxxs) 0 var(--kirby-spacing-xxs);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -270,5 +270,5 @@
   background-size: $icon-scaling-factor;
 
   // Place icon to the right of text, with icons own width + the actual spacing
-  padding-right: calc(#{$icon-scaling-factor} + #{size('xxxs')});
+  padding-right: calc(#{$icon-scaling-factor} + var(--kirby-spacing-xxxs));
 }
