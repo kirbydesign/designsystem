@@ -92,11 +92,7 @@ ion-tab-button {
         --kirby-badge-left: 0;
 
         margin-left: $wide-viewport-badge-margin;
-
-        // Using / for division outside of calc() is deprecated
-        // and will be removed in Dart Sass 2.0.0. Use math.div() instead.
-        // See: https://sass-lang.com/documentation/breaking-changes/slash-div/
-        margin-bottom: math.div(var(--kirby-spacing-xxxxs), 2);
+        margin-bottom: calc(var(--kirby-spacing-xxxxs / 2));
       }
     }
 

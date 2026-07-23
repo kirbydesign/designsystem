@@ -19,7 +19,7 @@ article {
   flex-wrap: wrap;
 
   button {
-    flex: 0 1 calc(50% - #{math.div($column-gap, 2)});
+    flex: 0 1 calc(50% - calc($column-gap / 2));
     margin-inline: 0;
 
     &:not(:only-child) {
