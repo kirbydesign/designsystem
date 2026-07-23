@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use 'sass:math';
 @use '../utils';
 
 /*
@@ -33,18 +32,6 @@ $modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-he
   --min-height: #{utils.$drawer-default-height};
 
   align-items: flex-end;
-}
-
-@function get-drawer-additional-padding-top() {
-  // TODO(@kirby): migrate utils.size('l') — $modal-close-button-inner-height feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-  $modal-close-button-inner-height: utils.size('l'); // Todo: Move to / get from shared var
-  // TODO(@kirby): migrate utils.size('xxxs') — $modal-close-button-vertical-margin feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-  $modal-close-button-vertical-margin: utils.size('xxxs') * 2; // Todo: Move to / get from shared var
-  $modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
-  $modal-header-total-height: $modal-close-button-inner-height +
-    $modal-close-button-vertical-margin + $modal-header-vertical-padding;
-  $modal-header-vertical-center: math.round($modal-header-total-height * 0.5);
-  @return $modal-header-vertical-center;
 }
 
 body.allow-background-scroll {
