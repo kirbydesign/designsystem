@@ -4,9 +4,7 @@
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-selected: var(--kirby-dark);
-
-// TODO(@kirby): migrate utils.size('s') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-$maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
+$maximum-font-size: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold});
 
 @mixin button-reset {
   background: transparent;

@@ -28,6 +28,8 @@
 
   /* get kirby color with 50% opacity */
   *::-webkit-scrollbar-thumb {
+    // no color-mix or other Safari-15-safe CSS custom property equivalent, so kept as SCSS.
+    // stylelint-disable-next-line kirby/use-design-token
     // TODO(@kirby): migrate utils.get-color('semi-dark', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
 
     background-color: color.adjust(utils.get-color('semi-dark', $getValueOnly: true), $alpha: -0.5);

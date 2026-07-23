@@ -41,9 +41,7 @@ $toolbar-bottom-border-width: 1px;
   @include utils.media('>=medium') {
     --padding-start: var(--kirby-spacing-m);
     --padding-end: var(--kirby-spacing-m);
-
-    // TODO(@kirby): migrate utils.size('m') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-    --padding-bottom: #{utils.size('m') - $toolbar-bottom-border-width};
+    --padding-bottom: calc(var(--kirby-spacing-m) - #{$toolbar-bottom-border-width});
     --padding-top: var(--kirby-spacing-m);
 
     padding-inline: 0;
@@ -56,9 +54,7 @@ ion-header {
   ion-toolbar {
     --padding-start: var(--kirby-spacing-xxs);
     --padding-end: var(--kirby-spacing-xxs);
-
-    // TODO(@kirby): migrate utils.size('xxs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-    --padding-bottom: #{utils.size('xxs') - $toolbar-bottom-border-width};
+    --padding-bottom: calc(var(--kirby-spacing-xxs) - #{$toolbar-bottom-border-width});
     --padding-top: var(--kirby-spacing-xxs);
     --border-width: 0;
     --background: transparent;

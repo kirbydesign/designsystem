@@ -13,7 +13,7 @@ $toolbar-transition-duration-in: var(--kirby-transition-duration-quick);
 $toolbar-transition-duration-out: 50ms;
 $toolbar-transition: background-color $toolbar-transition-duration-out linear;
 
-// TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
+// stylelint-disable-next-line kirby/use-design-tokens
 $toolbar-shaded-background: color.mix(
   #000,
   utils.get-color('background-color', $getValueOnly: true),
@@ -231,7 +231,7 @@ ion-back-button {
  * Page Header
  */
 .page-header-container {
-  max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
+  max-width: var(--page-content-max-width, var(--kirby-page-content-max-width-default));
   margin: 0 auto;
 }
 
@@ -294,21 +294,15 @@ ion-content {
   }
 
   &.max-width-lg {
-    // TODO(@kirby): migrate utils.get-page-content-max-width('lg') — get-page-content-max-width() has no direct CSS custom property equivalent
-
-    --page-content-max-width: #{utils.get-page-content-max-width('lg')};
+    --page-content-max-width: var(--kirby-page-content-max-width-lg);
   }
 
   &.max-width-xl {
-    // TODO(@kirby): migrate utils.get-page-content-max-width('xl') — get-page-content-max-width() has no direct CSS custom property equivalent
-
-    --page-content-max-width: #{utils.get-page-content-max-width('xl')};
+    --page-content-max-width: var(--kirby-page-content-max-width-xl);
   }
 
   &.max-width-full {
-    // TODO(@kirby): migrate utils.get-page-content-max-width('full') — get-page-content-max-width() has no direct CSS custom property equivalent
-
-    --page-content-max-width: #{utils.get-page-content-max-width('full')};
+    --page-content-max-width: var(--kirby-page-content-max-width-full);
   }
 
   &::part(scroll) {
@@ -316,7 +310,7 @@ ion-content {
   }
 
   .content-inner {
-    max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
+    max-width: var(--page-content-max-width, var(--kirby-page-content-max-width-default));
     margin: 0 auto;
     padding-bottom: var(--kirby-spacing-xl);
 
@@ -356,7 +350,7 @@ ion-content {
   z-index: var(--kirby-z-index-sticky-content);
 
   div {
-    max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
+    max-width: var(--page-content-max-width, var(--kirby-page-content-max-width-default));
     margin: 0 auto;
   }
 

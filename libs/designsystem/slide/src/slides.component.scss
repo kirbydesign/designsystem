@@ -45,9 +45,7 @@ $bullet-inactive-opacity: 0.2;
     display: none;
 
     // Adding one to default to make buttons clickable through box shadow.
-    // TODO(@kirby): migrate utils.z('default') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-
-    z-index: utils.z('default') + 1;
+    z-index: calc(var(--kirby-z-index-default) + 1);
 
     @include utils.media('>=medium') {
       display: block;

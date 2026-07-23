@@ -105,9 +105,7 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
       $end-slot-content-only: ':not(:has(#{$start-slot-content})):has(#{$end-slot-content})';
       $line-center: 0.5lh;
       $disclosure-radius: var(--kirby-spacing-xs);
-
-      // TODO(@kirby): migrate utils.size('xxxs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-      $badge-radius: utils.size('xxxs') * 0.5;
+      $badge-radius: calc(var(--kirby-spacing-xxxs) * 0.5);
       $start-slot-content-margin: var(--kirby-spacing-xxxxs);
       $outside-slot-offset: var(
         --kirby-spacing-s

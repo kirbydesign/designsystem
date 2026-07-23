@@ -24,7 +24,8 @@ $loudness-scale: (
 }
 
 @function get-state-color($variant, $loudness: $default-loudness-hover, $make-lighter: false) {
-  // TODO(@kirby): migrate utils.get-color($variant, $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
+  // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
+  // stylelint-disable-next-line kirby/use-design-tokens
   $_background: utils.get-color($variant, $getValueOnly: true);
   $_lightness: 0% !default;
 

@@ -1,4 +1,3 @@
-@use 'sass:math';
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
@@ -120,17 +119,13 @@ ion-toggle {
 
     // Ion v8 changed height on toggles to 31px. To make toggles still follow our 8,16,24,32 pixel-size pattern, we force the toggle back to 32px
 
-    // TODO(@kirby): migrate utils.size('l') — $toggle-size feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-
-    $toggle-size: utils.size('l');
-
-    // TODO(@kirby): migrate utils.size('xxxxs') — $toggle-border-size feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-    $toggle-border-size: utils.size('xxxxs');
-    $toggle-handle-size: $toggle-size - ($toggle-border-size * 2);
+    $toggle-size: var(--kirby-spacing-l);
+    $toggle-border-size: var(--kirby-spacing-xxxxs);
+    $toggle-handle-size: calc(#{$toggle-size} - (#{$toggle-border-size} * 2));
 
     --handle-height: #{$toggle-handle-size};
     --handle-width: #{$toggle-handle-size};
-    --border-radius: #{math.div($toggle-size, 2)};
+    --border-radius: calc(#{$toggle-size} / 2);
 
     &::part(track) {
       transition: interaction-state.transition();

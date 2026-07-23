@@ -1,15 +1,9 @@
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 
-// TODO(@kirby): migrate utils.size('s') — $margin-inline feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-
-$margin-inline: utils.size('s');
-
-// TODO(@kirby): migrate utils.size('xxs') — $actions-margin-inline feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-$actions-margin-inline: utils.size('xxs');
-
-// TODO(@kirby): migrate utils.size('xxl') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-$column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
+$margin-inline: var(--kirby-spacing-s);
+$actions-margin-inline: var(--kirby-spacing-xxs);
+$column-gap: calc(var(--kirby-spacing-xxl) - #{$margin-inline} - #{$actions-margin-inline});
 
 :host {
   display: flex;

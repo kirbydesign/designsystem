@@ -23,7 +23,8 @@
     place-items: center;
 
     &.backdrop {
-      // TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
+      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
+      // stylelint-disable-next-line kirby/use-design-tokens
       background-color: rgba(
         utils.get-color('background-color', $getValueOnly: true),
         utils.$loading-overlay-backdrop-opacity
@@ -31,14 +32,14 @@
     }
 
     &.hide-content {
-      // TODO(@kirby): migrate utils.get-color('background-color', $getValueOnly: true) — get-color() with $getValueOnly: true returns a raw value for SCSS color manipulation
-
+      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
+      // stylelint-disable-next-line kirby/use-design-tokens
       background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
     }
 
     .spinner {
-      width: utils.size(l);
-      height: utils.size(l);
+      width: var(--kirby-spacing-l);
+      height: var(--kirby-spacing-l);
     }
   }
 }

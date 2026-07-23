@@ -10,9 +10,7 @@ $button-width: (
   md: 88px,
   lg: 220px,
 ) !default;
-
-// TODO(@kirby): migrate utils.size('xxxs') — $button-margin feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-$button-margin: utils.size('xxxs');
+$button-margin: var(--kirby-spacing-xxxs);
 
 @function button-width($key) {
   @return map.get($button-width, $key);
@@ -24,9 +22,8 @@ $button-margin: utils.size('xxxs');
   * interactive elements. The maximum target size we can safely do is the button's
   * minimum width plus its margin on each side
   */
-  // TODO(@kirby): migrate utils.size('m') — $button-xs-icon-only-size feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-  $button-xs-icon-only-size: utils.size('m');
-  $button-xs-click-area-size: $button-xs-icon-only-size + $button-margin * 2;
+  $button-xs-icon-only-size: var(--kirby-spacing-m);
+  $button-xs-click-area-size: calc(#{$button-xs-icon-only-size} + #{$button-margin} * 2);
   @include utils.accessible-target-size($width: $button-xs-click-area-size);
 
   // Wrap declarations to avoid mixing with nested rules.

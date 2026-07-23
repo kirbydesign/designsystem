@@ -10,8 +10,7 @@
 }
 
 .icon-outline {
-  // TODO(@kirby): migrate utils.size('xxl') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-  $icon-size: utils.size('xxl') * 2;
+  $icon-size: calc(var(--kirby-spacing-xxl) * 2);
 
   width: $icon-size;
   height: $icon-size;

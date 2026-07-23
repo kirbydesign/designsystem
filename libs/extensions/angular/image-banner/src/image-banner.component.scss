@@ -13,15 +13,9 @@ $min-text-content-height: calc(
 $main-image-height-small: 132px;
 $wide-image-banner-min-height: 180px;
 $text-box-trim-offset: 2px;
-
-// TODO(@kirby): migrate utils.size('s') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-$main-content-top-padding: utils.size('s') - $text-box-trim-offset;
-
-// TODO(@kirby): migrate utils.size('xs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-$wide-main-content-top-padding: utils.size('xs') - $text-box-trim-offset;
-
-// TODO(@kirby): migrate utils.size('xxs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-$main-content-bottom-padding: utils.size('xxs') - $text-box-trim-offset;
+$main-content-top-padding: calc(var(--kirby-spacing-s) - #{$text-box-trim-offset});
+$wide-main-content-top-padding: calc(var(--kirby-spacing-xs) - #{$text-box-trim-offset});
+$main-content-bottom-padding: calc(var(--kirby-spacing-xxs) - #{$text-box-trim-offset});
 
 // The breakpoint where container should switch from "narrow" to "wide"
 $container-query-breakpoint: 600px;

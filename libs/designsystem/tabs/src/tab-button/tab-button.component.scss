@@ -1,12 +1,9 @@
-@use 'sass:math';
-
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 // There is a limit to how large text can be on narrow viewports with text resized
 // before tab button texts start to collide horizontally, so we cap it for narrow viewports
-// TODO(@kirby): migrate utils.size('xs') — used in a SCSS arithmetic expression — convert the calculation to CSS calc() using the design token(s)
-$maximum-font-size: utils.size('xs') * utils.$text-resize-threshold;
+$maximum-font-size: calc(var(--kirby-spacing-xs) * #{utils.$text-resize-threshold});
 
 // badge size is fixed on narrow viewports to ensure it is properly sized accordion to the tab icon
 $fixed-badge-size: 10px;

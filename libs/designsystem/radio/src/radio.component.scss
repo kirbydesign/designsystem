@@ -4,14 +4,13 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $radio-size: 20px; // used to overwrite ionics default relative sizing, so radio size same across font sizes
-// TODO(@kirby): migrate utils.size('m') — $radio-icon-size feeds a SCSS calculation — convert the calculation to CSS calc() using the design token(s)
-$radio-icon-size: utils.size('m');
+$radio-icon-size: var(--kirby-spacing-m);
 $radio-icon-mark-size: var(--kirby-spacing-xs);
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
 @function get-vertical-padding($target-height) {
-  @return ($target-height - $radio-icon-size) * 0.5;
+  @return calc((#{$target-height} - #{$radio-icon-size}) * 0.5);
 }
 
 :host {
