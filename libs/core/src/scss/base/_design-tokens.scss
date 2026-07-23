@@ -98,6 +98,12 @@
   }
 }
 
+@mixin page-content-max-widths() {
+  @each $name, $value in variables.$page-content-max-widths {
+    --kirby-page-content-max-width-#{$name}: #{$value};
+  }
+}
+
 @mixin breakpoints() {
   @each $name, $value in variables.$breakpoints {
     --kirby-breakpoint-#{$name}: #{$value};
@@ -189,6 +195,9 @@
 
   /* Z-INDEXES */
   @include z-layers;
+
+  /* PAGE CONTENT MAX-WIDTHS */
+  @include page-content-max-widths;
 
   /* BREAKPOINTS */
   @include breakpoints;
