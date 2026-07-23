@@ -62,6 +62,12 @@
   }
 }
 
+@mixin icon-font-sizes() {
+  @each $name, $value in variables.$icon-font-sizes {
+    --kirby-icon-font-size-#{$name}: #{$value};
+  }
+}
+
 @mixin font-weights() {
   @each $name, $value in variables.$font-weight {
     --kirby-font-weight-#{$name}: #{$value};
@@ -162,6 +168,9 @@
 
   /* FONT-SIZES */
   @include font-sizes;
+
+  /* ICON-FONT-SIZES */
+  @include icon-font-sizes;
 
   /* FONT-WEIGHT */
   @include font-weights;
