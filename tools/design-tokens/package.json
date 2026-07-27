@@ -1,0 +1,17 @@
+{
+  "name": "@repo/design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Structure-driven CLI that turns Figma variable exports into Kirby design-token CSS custom properties (ADR-001)",
+  "type": "module",
+  "bin": {
+    "design-tokens": "./bin/design-tokens.mjs"
+  },
+  "exports": "./src/cli.mjs",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "style-dictionary": "^4.4.0"
+  }
+}

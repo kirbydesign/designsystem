@@ -1,0 +1,142 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+/*
+ * border-radius
+ */
+
+:root {
+  --kirby-border-radius-circle: 999px;
+  --kirby-border-radius-pill: 999px;
+  --kirby-border-radius-xxs: var(--kirby-spacing-xxxxs);
+  --kirby-border-radius-xs: var(--kirby-spacing-xxxs);
+  --kirby-border-radius-s: var(--kirby-spacing-xxs);
+  --kirby-border-radius-n: var(--kirby-spacing-s);
+  --kirby-border-radius-l: var(--kirby-spacing-m);
+  --kirby-border-radius-xl: var(--kirby-spacing-l);
+}
+
+/*
+ * spacing
+ */
+
+:root {
+  --kirby-spacing-xxxxs: 2px;
+  --kirby-spacing-xxxs: 4px;
+  --kirby-spacing-xxs: 8px;
+  --kirby-spacing-xs: 12px;
+  --kirby-spacing-s: 16px;
+  --kirby-spacing-m: 24px;
+  --kirby-spacing-l: 32px;
+  --kirby-spacing-xl: 40px;
+  --kirby-spacing-xxl: 48px;
+  --kirby-spacing-xxxl: 56px;
+  --kirby-spacing-xxxxl: 64px;
+  --kirby-spacing-xxxxxl: 72px;
+}
+
+/*
+ * font-size
+ */
+
+:root {
+  --kirby-font-size-xxs: 10px;
+  --kirby-font-size-xs: 12px;
+  --kirby-font-size-s: 14px;
+  --kirby-font-size-n: 16px;
+  --kirby-font-size-m: 18px;
+  --kirby-font-size-l: 22px;
+  --kirby-font-size-xl: 32px;
+  --kirby-font-size-xxl: 40px;
+  --kirby-font-size-xxxl: 56px;
+  --kirby-font-size-xxxxl: 72px;
+}
+
+/*
+ * font-weight
+ */
+
+:root {
+  --kirby-font-weight-light: 300;
+  --kirby-font-weight-normal: 400;
+  --kirby-font-weight-medium: 500;
+  --kirby-font-weight-bold: 700;
+  --kirby-font-weight-black: 900;
+  --kirby-font-weight-normal-italic: italic;
+}
+
+/*
+ * line-height
+ */
+
+:root {
+  --kirby-line-height-xxs: 11px;
+  --kirby-line-height-xs: 16px;
+  --kirby-line-height-s: 20px;
+  --kirby-line-height-n: 24px;
+  --kirby-line-height-m: 24px;
+  --kirby-line-height-l: 28px;
+  --kirby-line-height-xl: 38px;
+  --kirby-line-height-xxl: 60px;
+  --kirby-line-height-xxxl: 68px;
+  --kirby-line-height-xxxxl: 86px;
+}
+
+/*
+ * loudness-scale
+ */
+
+:root {
+  --kirby-loudness-scale-xxxs: 4;
+  --kirby-loudness-scale-xxs: 8;
+  --kirby-loudness-scale-xs: 12;
+  --kirby-loudness-scale-s: 16;
+  --kirby-loudness-scale-m: 20;
+  --kirby-loudness-scale-l: 24;
+  --kirby-loudness-scale-xl: 28;
+  --kirby-loudness-scale-xxl: 32;
+  --kirby-loudness-scale-xxxl: 36;
+  --kirby-loudness-scale-xxxxl: 40;
+}
+
+/*
+ * component
+ */
+
+:root {
+  --kirby-component-kirby-card-border-radius: var(--kirby-border-radius-n);
+}
+
+/*
+ * stroke
+ */
+
+:root {
+  --kirby-stroke-xxs: 0px;
+  --kirby-stroke-xs: 1px;
+}
+
+/*
+ * transparency
+ */
+
+:root {
+  --kirby-transparency-6: 6%;
+  --kirby-transparency-12: 12%;
+  --kirby-transparency-20: 20%;
+  --kirby-transparency-40: 40%;
+  --kirby-transparency-52: 52%;
+  --kirby-transparency-64: 64%;
+  --kirby-transparency-72: 72%;
+  --kirby-transparency-80: 80%;
+}
+
+/*
+ * background-blur
+ */
+
+:root {
+  --kirby-background-blur-xl: 110px;
+  --kirby-background-blur-s: 4px;
+}

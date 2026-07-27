@@ -1,0 +1,886 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+/*
+ * color
+ */
+
+:root, .kirby-surface-base {
+  --kirby-color-border-focus: #238cec;
+  --kirby-color-fill-base: var(--kirby-system-color-light-grey-100);
+  --kirby-color-fill-base-hover: var(--kirby-system-color-light-grey-300);
+  --kirby-color-fill-base-active: var(--kirby-system-color-light-grey-500);
+  --kirby-color-fill-base-quiet: var(--kirby-system-color-light-grey-200);
+  --kirby-color-fill-raised: var(--kirby-system-color-white-00);
+  --kirby-color-fill-raised-hover: var(--kirby-system-color-light-grey-200);
+  --kirby-color-fill-raised-active: var(--kirby-system-color-light-grey-300);
+  --kirby-color-fill-brand-loud: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-fill-brand-loud-hover: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-fill-brand-loud-active: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-fill-brand: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-fill-brand-hover: var(--kirby-brand-color-dark-blue-200);
+  --kirby-color-fill-brand-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-fill-engaged: var(--kirby-system-color-green-600);
+  --kirby-color-fill-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-color-fill-engaged-active: var(--kirby-system-color-green-800);
+  --kirby-color-fill-neutral: var(--kirby-system-color-light-grey-600);
+  --kirby-color-fill-success-loud: var(--kirby-system-color-green-600);
+  --kirby-color-fill-success-loud-hover: var(--kirby-system-color-green-700);
+  --kirby-color-fill-success-loud-active: var(--kirby-system-color-green-800);
+  --kirby-color-fill-success: var(--kirby-system-color-green-400);
+  --kirby-color-fill-success-hover: var(--kirby-system-color-green-300);
+  --kirby-color-fill-success-active: var(--kirby-system-color-green-200);
+  --kirby-color-fill-success-quiet: var(--kirby-system-color-green-200);
+  --kirby-color-fill-success-quiet-hover: var(--kirby-system-color-green-300);
+  --kirby-color-fill-success-quiet-active: var(--kirby-system-color-green-400);
+  --kirby-color-fill-warning-loud: var(--kirby-system-color-orange-500);
+  --kirby-color-fill-warning-loud-hover: var(--kirby-system-color-orange-400);
+  --kirby-color-fill-warning-loud-active: var(--kirby-system-color-orange-300);
+  --kirby-color-fill-warning: var(--kirby-system-color-orange-400);
+  --kirby-color-fill-warning-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-fill-warning-active: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-warning-quiet: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-warning-quiet-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-fill-warning-quiet-active: var(--kirby-system-color-orange-400);
+  --kirby-color-fill-danger-loud: var(--kirby-system-color-red-500);
+  --kirby-color-fill-danger-loud-hover: var(--kirby-system-color-red-600);
+  --kirby-color-fill-danger-loud-active: var(--kirby-system-color-red-700);
+  --kirby-color-fill-danger: var(--kirby-system-color-red-400);
+  --kirby-color-fill-danger-hover: var(--kirby-system-color-red-300);
+  --kirby-color-fill-danger-active: var(--kirby-system-color-red-200);
+  --kirby-color-fill-danger-quiet: var(--kirby-system-color-red-200);
+  --kirby-color-fill-danger-quiet-hover: var(--kirby-system-color-red-100);
+  --kirby-color-fill-danger-quiet-active: var(--kirby-system-color-red-50);
+  --kirby-color-content-base-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-quiet: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-base-quiet-hover: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-base-quiet-active: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-raised-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-quiet: var(--kirby-system-color-dark-grey-400);
+  --kirby-color-content-raised-quiet-hover: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-raised-quiet-active: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-brand-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-brand-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-brand-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-brand: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-engaged: var(--kirby-system-color-white-00);
+  --kirby-color-content-engaged-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-engaged-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-neutral: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-success-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-success-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-success: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-positive: var(--kirby-system-color-green-600);
+  --kirby-color-content-positive-hover: var(--kirby-system-color-green-700);
+  --kirby-color-content-positive-active: var(--kirby-system-color-green-800);
+  --kirby-color-content-negative: var(--kirby-system-color-red-600);
+  --kirby-color-content-negative-hover: var(--kirby-system-color-red-700);
+  --kirby-color-content-negative-active: var(--kirby-system-color-red-800);
+  --kirby-color-border-base-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-base-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-base-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-base: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-base-hover: var(--kirby-system-color-dark-grey-300);
+  --kirby-color-border-base-active: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-border-base-quiet: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-base-quiet-hover: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-base-quiet-active: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-base-silent: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-base-silent-hover: var(--kirby-system-color-light-grey-300);
+  --kirby-color-border-base-silent-active: var(--kirby-system-color-light-grey-500);
+  --kirby-color-border-raised-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-raised-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-raised-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-raised: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-raised-hover: var(--kirby-system-color-dark-grey-300);
+  --kirby-color-border-raised-active: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-border-raised-quiet: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-raised-quiet-hover: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-raised-quiet-active: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-raised-silent: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-raised-silent-hover: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-raised-silent-active: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-raised-danger: var(--kirby-system-color-red-400);
+  --kirby-color-border-raised-danger-hover: var(--kirby-system-color-red-500);
+  --kirby-color-border-raised-danger-active: var(--kirby-system-color-red-500);
+  --kirby-color-border-brand-loud: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-border-brand-loud-hover: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-border-brand-loud-active: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-border-brand: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-border-brand-hover: var(--kirby-brand-color-dark-blue-200);
+  --kirby-color-border-brand-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-border-brand-quiet: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-brand-quiet-hover: var(--kirby-system-color-dark-grey-400);
+  --kirby-color-border-brand-quiet-active: var(--kirby-system-color-dark-grey-600);
+  --kirby-color-border-engaged: var(--kirby-system-color-green-600);
+  --kirby-color-border-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-color-border-engaged-active: var(--kirby-system-color-green-800);
+  --kirby-color-border-neutral: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-success-loud: var(--kirby-system-color-green-600);
+  --kirby-color-border-success-loud-hover: var(--kirby-system-color-green-700);
+  --kirby-color-border-success-loud-active: var(--kirby-system-color-green-800);
+  --kirby-color-border-success: var(--kirby-system-color-green-400);
+  --kirby-color-border-success-hover: var(--kirby-system-color-green-300);
+  --kirby-color-border-success-active: var(--kirby-system-color-green-200);
+  --kirby-color-border-success-quiet: var(--kirby-system-color-green-200);
+  --kirby-color-border-success-quiet-hover: var(--kirby-system-color-green-300);
+  --kirby-color-border-success-quiet-active: var(--kirby-system-color-green-400);
+  --kirby-color-border-warning-loud: var(--kirby-system-color-orange-500);
+  --kirby-color-border-warning-loud-hover: var(--kirby-system-color-orange-400);
+  --kirby-color-border-warning-loud-active: var(--kirby-system-color-orange-300);
+  --kirby-color-border-warning: var(--kirby-system-color-orange-400);
+  --kirby-color-border-warning-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-border-warning-active: var(--kirby-system-color-orange-200);
+  --kirby-color-border-warning-quiet: var(--kirby-system-color-orange-200);
+  --kirby-color-border-warning-quiet-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-border-warning-quiet-active: var(--kirby-system-color-orange-400);
+  --kirby-color-border-danger-loud: var(--kirby-system-color-red-500);
+  --kirby-color-border-danger-loud-hover: var(--kirby-system-color-red-600);
+  --kirby-color-border-danger-loud-active: var(--kirby-system-color-red-700);
+  --kirby-color-border-danger: var(--kirby-system-color-red-400);
+  --kirby-color-border-danger-hover: var(--kirby-system-color-red-300);
+  --kirby-color-border-danger-active: var(--kirby-system-color-red-200);
+  --kirby-color-border-danger-quiet: var(--kirby-system-color-red-200);
+  --kirby-color-border-danger-quiet-hover: var(--kirby-system-color-red-100);
+  --kirby-color-border-danger-quiet-active: var(--kirby-system-color-red-50);
+  --kirby-color-border-offset: var(--kirby-system-color-light-grey-25);
+}
+
+.kirby-surface-raised {
+  --kirby-color-border-focus: #238cec;
+  --kirby-color-fill-base: var(--kirby-system-color-white-00);
+  --kirby-color-fill-base-hover: var(--kirby-system-color-light-grey-100);
+  --kirby-color-fill-base-active: var(--kirby-system-color-light-grey-300);
+  --kirby-color-fill-base-quiet: var(--kirby-system-color-light-grey-50);
+  --kirby-color-fill-raised: var(--kirby-system-color-white-00);
+  --kirby-color-fill-raised-hover: var(--kirby-system-color-light-grey-100);
+  --kirby-color-fill-raised-active: var(--kirby-system-color-light-grey-300);
+  --kirby-color-fill-brand-loud: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-fill-brand-loud-hover: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-fill-brand-loud-active: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-fill-brand: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-fill-brand-hover: var(--kirby-brand-color-dark-blue-200);
+  --kirby-color-fill-brand-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-fill-engaged: var(--kirby-system-color-green-600);
+  --kirby-color-fill-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-color-fill-engaged-active: var(--kirby-system-color-green-800);
+  --kirby-color-fill-neutral: var(--kirby-system-color-light-grey-400);
+  --kirby-color-fill-success-loud: var(--kirby-system-color-green-600);
+  --kirby-color-fill-success-loud-hover: var(--kirby-system-color-green-700);
+  --kirby-color-fill-success-loud-active: var(--kirby-system-color-green-800);
+  --kirby-color-fill-success: var(--kirby-system-color-green-400);
+  --kirby-color-fill-success-hover: var(--kirby-system-color-green-500);
+  --kirby-color-fill-success-active: var(--kirby-system-color-green-600);
+  --kirby-color-fill-success-quiet: var(--kirby-system-color-green-200);
+  --kirby-color-fill-success-quiet-hover: var(--kirby-system-color-green-300);
+  --kirby-color-fill-success-quiet-active: var(--kirby-system-color-green-400);
+  --kirby-color-fill-warning-loud: var(--kirby-system-color-orange-500);
+  --kirby-color-fill-warning-loud-hover: var(--kirby-system-color-orange-600);
+  --kirby-color-fill-warning-loud-active: var(--kirby-system-color-orange-700);
+  --kirby-color-fill-warning: var(--kirby-system-color-orange-400);
+  --kirby-color-fill-warning-hover: var(--kirby-system-color-orange-500);
+  --kirby-color-fill-warning-active: var(--kirby-system-color-orange-600);
+  --kirby-color-fill-warning-quiet: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-warning-quiet-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-fill-warning-quiet-active: var(--kirby-system-color-orange-400);
+  --kirby-color-fill-danger-loud: var(--kirby-system-color-red-500);
+  --kirby-color-fill-danger-loud-hover: var(--kirby-system-color-red-600);
+  --kirby-color-fill-danger-loud-active: var(--kirby-system-color-red-600);
+  --kirby-color-fill-danger: var(--kirby-system-color-red-400);
+  --kirby-color-fill-danger-hover: var(--kirby-system-color-red-300);
+  --kirby-color-fill-danger-active: var(--kirby-system-color-red-200);
+  --kirby-color-fill-danger-quiet: var(--kirby-system-color-red-200);
+  --kirby-color-fill-danger-quiet-hover: var(--kirby-system-color-red-300);
+  --kirby-color-fill-danger-quiet-active: var(--kirby-system-color-red-400);
+  --kirby-color-content-base-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-base-quiet: var(--kirby-system-color-dark-grey-400);
+  --kirby-color-content-base-quiet-hover: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-base-quiet-active: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-raised-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-raised-quiet: var(--kirby-system-color-dark-grey-400);
+  --kirby-color-content-raised-quiet-hover: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-raised-quiet-active: var(--kirby-system-color-dark-grey-500);
+  --kirby-color-content-brand-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-brand-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-brand-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-brand: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-engaged: var(--kirby-system-color-white-00);
+  --kirby-color-content-engaged-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-engaged-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-neutral: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-success-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-success-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-success: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-positive: var(--kirby-system-color-green-600);
+  --kirby-color-content-positive-hover: var(--kirby-system-color-green-700);
+  --kirby-color-content-positive-active: var(--kirby-system-color-green-800);
+  --kirby-color-content-negative: var(--kirby-system-color-red-600);
+  --kirby-color-content-negative-hover: var(--kirby-system-color-red-700);
+  --kirby-color-content-negative-active: var(--kirby-system-color-red-800);
+  --kirby-color-border-base-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-base-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-base-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-base: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-base-hover: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-base-active: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-base-quiet: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-base-quiet-hover: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-base-quiet-active: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-base-silent: var(--kirby-system-color-light-grey-400);
+  --kirby-color-border-base-silent-hover: var(--kirby-system-color-light-grey-100);
+  --kirby-color-border-base-silent-active: var(--kirby-system-color-light-grey-300);
+  --kirby-color-border-raised-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-raised-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-raised-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-border-raised: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-raised-hover: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-raised-active: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-raised-quiet: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-raised-quiet-hover: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-raised-quiet-active: var(--kirby-system-color-light-grey-700);
+  --kirby-color-border-raised-silent: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-raised-silent-hover: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-raised-silent-active: var(--kirby-system-color-light-grey-600);
+  --kirby-color-border-raised-danger: var(--kirby-system-color-red-400);
+  --kirby-color-border-raised-danger-hover: var(--kirby-system-color-red-500);
+  --kirby-color-border-raised-danger-active: var(--kirby-system-color-red-500);
+  --kirby-color-border-brand-loud: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-border-brand-loud-hover: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-border-brand-loud-active: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-border-brand: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-border-brand-hover: var(--kirby-brand-color-dark-blue-200);
+  --kirby-color-border-brand-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-border-brand-quiet: var(--kirby-system-color-dark-grey-200);
+  --kirby-color-border-brand-quiet-hover: var(--kirby-system-color-dark-grey-400);
+  --kirby-color-border-brand-quiet-active: var(--kirby-system-color-dark-grey-600);
+  --kirby-color-border-engaged: var(--kirby-system-color-green-600);
+  --kirby-color-border-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-color-border-engaged-active: var(--kirby-system-color-green-800);
+  --kirby-color-border-neutral: var(--kirby-system-color-light-grey-400);
+  --kirby-color-border-success-loud: var(--kirby-system-color-green-600);
+  --kirby-color-border-success-loud-hover: var(--kirby-system-color-green-700);
+  --kirby-color-border-success-loud-active: var(--kirby-system-color-green-800);
+  --kirby-color-border-success: var(--kirby-system-color-green-400);
+  --kirby-color-border-success-hover: var(--kirby-system-color-green-500);
+  --kirby-color-border-success-active: var(--kirby-system-color-green-600);
+  --kirby-color-border-success-quiet: var(--kirby-system-color-green-200);
+  --kirby-color-border-success-quiet-hover: var(--kirby-system-color-green-300);
+  --kirby-color-border-success-quiet-active: var(--kirby-system-color-green-400);
+  --kirby-color-border-warning-loud: var(--kirby-system-color-orange-500);
+  --kirby-color-border-warning-loud-hover: var(--kirby-system-color-orange-600);
+  --kirby-color-border-warning-loud-active: var(--kirby-system-color-orange-700);
+  --kirby-color-border-warning: var(--kirby-system-color-orange-400);
+  --kirby-color-border-warning-hover: var(--kirby-system-color-orange-500);
+  --kirby-color-border-warning-active: var(--kirby-system-color-orange-600);
+  --kirby-color-border-warning-quiet: var(--kirby-system-color-orange-200);
+  --kirby-color-border-warning-quiet-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-border-warning-quiet-active: var(--kirby-system-color-orange-400);
+  --kirby-color-border-danger-loud: var(--kirby-system-color-red-500);
+  --kirby-color-border-danger-loud-hover: var(--kirby-system-color-red-600);
+  --kirby-color-border-danger-loud-active: var(--kirby-system-color-red-600);
+  --kirby-color-border-danger: var(--kirby-system-color-red-400);
+  --kirby-color-border-danger-hover: var(--kirby-system-color-red-500);
+  --kirby-color-border-danger-active: var(--kirby-system-color-red-600);
+  --kirby-color-border-danger-quiet: var(--kirby-system-color-red-200);
+  --kirby-color-border-danger-quiet-hover: var(--kirby-system-color-red-300);
+  --kirby-color-border-danger-quiet-active: var(--kirby-system-color-red-400);
+  --kirby-color-border-offset: var(--kirby-system-color-white-00);
+}
+
+.kirby-surface-brand {
+  --kirby-color-border-focus: #238cec;
+  --kirby-color-fill-base: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-fill-base-hover: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-fill-base-active: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-fill-base-quiet: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-fill-raised: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-fill-raised-hover: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-fill-raised-active: var(--kirby-brand-color-dark-blue-700);
+  --kirby-color-fill-brand-loud: var(--kirby-system-color-white-00);
+  --kirby-color-fill-brand-loud-hover: var(--kirby-brand-color-dark-blue-50);
+  --kirby-color-fill-brand-loud-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-fill-brand: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-fill-brand-hover: var(--kirby-brand-color-dark-blue-200);
+  --kirby-color-fill-brand-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-fill-engaged: var(--kirby-system-color-green-400);
+  --kirby-color-fill-engaged-hover: var(--kirby-system-color-green-300);
+  --kirby-color-fill-engaged-active: var(--kirby-system-color-green-200);
+  --kirby-color-fill-neutral: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-fill-success-loud: var(--kirby-system-color-green-400);
+  --kirby-color-fill-success-loud-hover: var(--kirby-system-color-green-300);
+  --kirby-color-fill-success-loud-active: var(--kirby-system-color-green-200);
+  --kirby-color-fill-success: var(--kirby-system-color-green-400);
+  --kirby-color-fill-success-hover: var(--kirby-system-color-green-300);
+  --kirby-color-fill-success-active: var(--kirby-system-color-green-200);
+  --kirby-color-fill-success-quiet: var(--kirby-system-color-green-200);
+  --kirby-color-fill-success-quiet-hover: var(--kirby-system-color-green-300);
+  --kirby-color-fill-success-quiet-active: var(--kirby-system-color-green-400);
+  --kirby-color-fill-warning-loud: var(--kirby-system-color-orange-400);
+  --kirby-color-fill-warning-loud-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-fill-warning-loud-active: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-warning: var(--kirby-system-color-orange-400);
+  --kirby-color-fill-warning-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-fill-warning-active: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-warning-quiet: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-warning-quiet-hover: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-warning-quiet-active: var(--kirby-system-color-orange-200);
+  --kirby-color-fill-danger-loud: var(--kirby-system-color-red-500);
+  --kirby-color-fill-danger-loud-hover: var(--kirby-system-color-red-600);
+  --kirby-color-fill-danger-loud-active: var(--kirby-system-color-red-700);
+  --kirby-color-fill-danger: var(--kirby-system-color-red-400);
+  --kirby-color-fill-danger-hover: var(--kirby-system-color-red-300);
+  --kirby-color-fill-danger-active: var(--kirby-system-color-red-200);
+  --kirby-color-fill-danger-quiet: var(--kirby-system-color-red-200);
+  --kirby-color-fill-danger-quiet-hover: var(--kirby-system-color-red-200);
+  --kirby-color-fill-danger-quiet-active: var(--kirby-system-color-red-200);
+  --kirby-color-content-base-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-base-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-base-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-base: var(--kirby-system-color-white-00);
+  --kirby-color-content-base-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-base-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-base-quiet: var(--kirby-brand-color-dark-blue-400);
+  --kirby-color-content-base-quiet-hover: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-content-base-quiet-active: var(--kirby-brand-color-dark-blue-200);
+  --kirby-color-content-raised-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-raised-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-raised-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-raised: var(--kirby-system-color-white-00);
+  --kirby-color-content-raised-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-raised-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-raised-quiet: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-content-raised-quiet-hover: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-content-raised-quiet-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-content-brand-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-brand-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-engaged: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-engaged-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-engaged-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-neutral: var(--kirby-system-color-white-00);
+  --kirby-color-content-success-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-success-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-loud-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-warning-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-loud: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-content-danger: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-danger-quiet-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-color-content-positive: var(--kirby-system-color-green-400);
+  --kirby-color-content-positive-hover: var(--kirby-system-color-green-400);
+  --kirby-color-content-positive-active: var(--kirby-system-color-green-400);
+  --kirby-color-content-negative: var(--kirby-system-color-red-400);
+  --kirby-color-content-negative-hover: var(--kirby-system-color-red-300);
+  --kirby-color-content-negative-active: var(--kirby-system-color-red-200);
+  --kirby-color-border-base-loud: var(--kirby-system-color-white-00);
+  --kirby-color-border-base-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-border-base-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-border-base: var(--kirby-brand-color-dark-blue-500);
+  --kirby-color-border-base-hover: var(--kirby-brand-color-dark-blue-500);
+  --kirby-color-border-base-active: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-border-base-quiet: var(--kirby-brand-color-dark-blue-700);
+  --kirby-color-border-base-quiet-hover: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-border-base-quiet-active: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-border-base-silent: var(--kirby-brand-color-dark-blue-700);
+  --kirby-color-border-base-silent-hover: var(--kirby-brand-color-dark-blue-900);
+  --kirby-color-border-base-silent-active: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-border-raised-loud: var(--kirby-system-color-white-00);
+  --kirby-color-border-raised-loud-hover: var(--kirby-system-color-white-00);
+  --kirby-color-border-raised-loud-active: var(--kirby-system-color-white-00);
+  --kirby-color-border-raised: var(--kirby-brand-color-dark-blue-500);
+  --kirby-color-border-raised-hover: var(--kirby-brand-color-dark-blue-400);
+  --kirby-color-border-raised-active: var(--kirby-brand-color-dark-blue-300);
+  --kirby-color-border-raised-quiet: var(--kirby-brand-color-dark-blue-700);
+  --kirby-color-border-raised-quiet-hover: var(--kirby-brand-color-dark-blue-600);
+  --kirby-color-border-raised-quiet-active: var(--kirby-brand-color-dark-blue-500);
+  --kirby-color-border-raised-silent: var(--kirby-brand-color-dark-blue-700);
+  --kirby-color-border-raised-silent-hover: var(--kirby-brand-color-dark-blue-600);
+  --kirby-color-border-raised-silent-active: var(--kirby-brand-color-dark-blue-500);
+  --kirby-color-border-raised-danger: var(--kirby-system-color-red-400);
+  --kirby-color-border-raised-danger-hover: var(--kirby-system-color-red-400);
+  --kirby-color-border-raised-danger-active: var(--kirby-system-color-red-400);
+  --kirby-color-border-brand-loud: var(--kirby-system-color-white-00);
+  --kirby-color-border-brand-loud-hover: var(--kirby-brand-color-dark-blue-50);
+  --kirby-color-border-brand-loud-active: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-border-brand: var(--kirby-brand-color-dark-blue-200);
+  --kirby-color-border-brand-hover: var(--kirby-brand-color-dark-blue-100);
+  --kirby-color-border-brand-active: var(--kirby-brand-color-dark-blue-50);
+  --kirby-color-border-brand-quiet: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-border-brand-quiet-hover: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-border-brand-quiet-active: var(--kirby-brand-color-dark-blue-950);
+  --kirby-color-border-engaged: var(--kirby-system-color-green-400);
+  --kirby-color-border-engaged-hover: var(--kirby-system-color-green-300);
+  --kirby-color-border-engaged-active: var(--kirby-system-color-green-200);
+  --kirby-color-border-neutral: var(--kirby-brand-color-dark-blue-800);
+  --kirby-color-border-success-loud: var(--kirby-system-color-green-400);
+  --kirby-color-border-success-loud-hover: var(--kirby-system-color-green-300);
+  --kirby-color-border-success-loud-active: var(--kirby-system-color-green-200);
+  --kirby-color-border-success: var(--kirby-system-color-green-400);
+  --kirby-color-border-success-hover: var(--kirby-system-color-green-300);
+  --kirby-color-border-success-active: var(--kirby-system-color-green-200);
+  --kirby-color-border-success-quiet: var(--kirby-system-color-green-200);
+  --kirby-color-border-success-quiet-hover: var(--kirby-system-color-green-300);
+  --kirby-color-border-success-quiet-active: var(--kirby-system-color-green-400);
+  --kirby-color-border-warning-loud: var(--kirby-system-color-orange-400);
+  --kirby-color-border-warning-loud-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-border-warning-loud-active: var(--kirby-system-color-orange-200);
+  --kirby-color-border-warning: var(--kirby-system-color-orange-400);
+  --kirby-color-border-warning-hover: var(--kirby-system-color-orange-300);
+  --kirby-color-border-warning-active: var(--kirby-system-color-orange-200);
+  --kirby-color-border-warning-quiet: var(--kirby-system-color-orange-200);
+  --kirby-color-border-warning-quiet-hover: var(--kirby-system-color-orange-200);
+  --kirby-color-border-warning-quiet-active: var(--kirby-system-color-orange-200);
+  --kirby-color-border-danger-loud: var(--kirby-system-color-red-500);
+  --kirby-color-border-danger-loud-hover: var(--kirby-system-color-red-600);
+  --kirby-color-border-danger-loud-active: var(--kirby-system-color-red-700);
+  --kirby-color-border-danger: var(--kirby-system-color-red-400);
+  --kirby-color-border-danger-hover: var(--kirby-system-color-red-300);
+  --kirby-color-border-danger-active: var(--kirby-system-color-red-200);
+  --kirby-color-border-danger-quiet: var(--kirby-system-color-red-200);
+  --kirby-color-border-danger-quiet-hover: var(--kirby-system-color-red-200);
+  --kirby-color-border-danger-quiet-active: var(--kirby-system-color-red-200);
+  --kirby-color-border-offset: var(--kirby-brand-color-dark-blue-950);
+}
+
+/*
+ * input
+ */
+
+:root, .kirby-surface-base {
+  --kirby-input-color-border-raised: var(--kirby-system-color-dark-grey-200);
+  --kirby-input-color-border-raised-hover: var(--kirby-system-color-dark-grey-300);
+}
+
+.kirby-surface-raised {
+  --kirby-input-color-border-raised: var(--kirby-system-color-dark-grey-200);
+  --kirby-input-color-border-raised-hover: var(--kirby-system-color-dark-grey-200);
+}
+
+.kirby-surface-brand {
+  --kirby-input-color-border-raised: var(--kirby-brand-color-dark-blue-500);
+  --kirby-input-color-border-raised-hover: var(--kirby-brand-color-dark-blue-400);
+}
+
+/*
+ * badge
+ */
+
+:root, .kirby-surface-base {
+  --kirby-badge-color-fill: var(--kirby-system-color-dark-grey-500);
+  --kirby-badge-color-border: var(--kirby-system-color-dark-grey-500);
+}
+
+.kirby-surface-raised {
+  --kirby-badge-color-fill: var(--kirby-system-color-dark-grey-500);
+  --kirby-badge-color-border: var(--kirby-system-color-dark-grey-500);
+}
+
+.kirby-surface-brand {
+  --kirby-badge-color-fill: var(--kirby-system-color-white-00);
+  --kirby-badge-color-border: var(--kirby-system-color-white-00);
+}
+
+/*
+ * spot
+ */
+
+:root, .kirby-surface-base {
+  --kirby-spot-color-content-base: var(--kirby-system-color-dark-grey-975);
+  --kirby-spot-color-content-brand: var(--kirby-system-color-dark-grey-975);
+  --kirby-spot-color-fill-raised: var(--kirby-system-color-light-grey-500);
+  --kirby-spot-color-fill-brand: var(--kirby-brand-color-green-400);
+  --kirby-spot-color-fill-success: var(--kirby-system-color-green-400);
+  --kirby-spot-color-fill-warning: var(--kirby-system-color-orange-400);
+  --kirby-spot-color-fill-danger: var(--kirby-system-color-red-400);
+}
+
+.kirby-surface-raised {
+  --kirby-spot-color-content-base: var(--kirby-system-color-dark-grey-975);
+  --kirby-spot-color-content-brand: var(--kirby-system-color-dark-grey-975);
+  --kirby-spot-color-fill-raised: var(--kirby-system-color-light-grey-300);
+  --kirby-spot-color-fill-brand: var(--kirby-brand-color-green-400);
+  --kirby-spot-color-fill-success: var(--kirby-system-color-green-400);
+  --kirby-spot-color-fill-warning: var(--kirby-system-color-orange-400);
+  --kirby-spot-color-fill-spot-danger: var(--kirby-system-color-red-400);
+}
+
+.kirby-surface-brand {
+  --kirby-spot-color-content-base: var(--kirby-system-color-white-00);
+  --kirby-spot-color-content-brand: var(--kirby-brand-color-dark-blue-900);
+  --kirby-spot-color-fill-raised: var(--kirby-brand-color-dark-blue-975);
+  --kirby-spot-color-fill-brand: var(--kirby-brand-color-green-400);
+  --kirby-spot-color-fill-success: var(--kirby-system-color-green-400);
+  --kirby-spot-color-fill-warning: var(--kirby-system-color-orange-400);
+  --kirby-spot-color-fill-danger: var(--kirby-system-color-red-400);
+}
+
+/*
+ * skeleton
+ */
+
+:root, .kirby-surface-base {
+  --kirby-skeleton-color-fill: rgba(28, 28, 28, 0.06);
+  --kirby-skeleton-color-fill-loud: rgba(28, 28, 28, 0.12);
+}
+
+.kirby-surface-raised {
+  --kirby-skeleton-color-fill: rgba(28, 28, 28, 0.06);
+  --kirby-skeleton-color-fill-loud: rgba(28, 28, 28, 0.12);
+}
+
+.kirby-surface-brand {
+  --kirby-skeleton-color-fill: rgba(255, 255, 255, 0.06);
+  --kirby-skeleton-color-fill-loud: rgba(255, 255, 255, 0.12);
+}
+
+/*
+ * toggle
+ */
+
+:root, .kirby-surface-base {
+  --kirby-toggle-color-fill: var(--kirby-system-color-dark-grey-200);
+  --kirby-toggle-color-fill-hover: var(--kirby-system-color-dark-grey-400);
+  --kirby-toggle-color-fill-active: var(--kirby-system-color-dark-grey-600);
+  --kirby-toggle-color-fill-engaged: var(--kirby-system-color-green-600);
+  --kirby-toggle-color-fill-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-toggle-color-fill-engaged-active: var(--kirby-system-color-green-800);
+  --kirby-toggle-color-content: var(--kirby-system-color-white-00);
+  --kirby-toggle-color-content-hover: var(--kirby-system-color-white-00);
+  --kirby-toggle-color-content-active: var(--kirby-system-color-white-00);
+  --kirby-toggle-color-border: var(--kirby-system-color-dark-grey-200);
+  --kirby-toggle-color-border-hover: var(--kirby-system-color-dark-grey-400);
+  --kirby-toggle-color-border-active: var(--kirby-system-color-dark-grey-600);
+  --kirby-toggle-color-border-engaged: var(--kirby-system-color-green-600);
+  --kirby-toggle-color-border-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-toggle-color-border-engaged-active: var(--kirby-system-color-green-800);
+}
+
+.kirby-surface-raised {
+  --kirby-toggle-color-fill: var(--kirby-system-color-dark-grey-200);
+  --kirby-toggle-color-fill-hover: var(--kirby-system-color-dark-grey-400);
+  --kirby-toggle-color-fill-active: var(--kirby-system-color-dark-grey-600);
+  --kirby-toggle-color-fill-engaged: var(--kirby-system-color-green-600);
+  --kirby-toggle-color-fill-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-toggle-color-fill-engaged-active: var(--kirby-system-color-green-800);
+  --kirby-toggle-color-content: var(--kirby-system-color-white-00);
+  --kirby-toggle-color-content-hover: var(--kirby-system-color-white-00);
+  --kirby-toggle-color-content-active: var(--kirby-system-color-white-00);
+  --kirby-toggle-color-border: var(--kirby-system-color-dark-grey-200);
+  --kirby-toggle-color-border-hover: var(--kirby-system-color-dark-grey-400);
+  --kirby-toggle-color-border-active: var(--kirby-system-color-dark-grey-600);
+  --kirby-toggle-color-border-engaged: var(--kirby-system-color-green-600);
+  --kirby-toggle-color-border-engaged-hover: var(--kirby-system-color-green-700);
+  --kirby-toggle-color-border-engaged-active: var(--kirby-system-color-green-800);
+}
+
+.kirby-surface-brand {
+  --kirby-toggle-color-fill: var(--kirby-brand-color-dark-blue-300);
+  --kirby-toggle-color-fill-hover: var(--kirby-brand-color-dark-blue-400);
+  --kirby-toggle-color-fill-active: var(--kirby-brand-color-dark-blue-500);
+  --kirby-toggle-color-fill-engaged: var(--kirby-system-color-green-400);
+  --kirby-toggle-color-fill-engaged-hover: var(--kirby-system-color-green-300);
+  --kirby-toggle-color-fill-engaged-active: var(--kirby-system-color-green-200);
+  --kirby-toggle-color-content: var(--kirby-system-color-dark-grey-975);
+  --kirby-toggle-color-content-hover: var(--kirby-system-color-dark-grey-975);
+  --kirby-toggle-color-content-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-toggle-color-border: var(--kirby-brand-color-dark-blue-300);
+  --kirby-toggle-color-border-hover: var(--kirby-brand-color-dark-blue-400);
+  --kirby-toggle-color-border-active: var(--kirby-brand-color-dark-blue-500);
+  --kirby-toggle-color-border-engaged: var(--kirby-system-color-green-400);
+  --kirby-toggle-color-border-engaged-hover: var(--kirby-system-color-green-300);
+  --kirby-toggle-color-border-engaged-active: var(--kirby-system-color-green-200);
+}
+
+/*
+ * imagebanner
+ */
+
+:root, .kirby-surface-base {
+  --kirby-imagebanner-color-light-fill: rgba(255, 255, 255, 0.52);
+  --kirby-imagebanner-color-light-fill-hover: rgba(242, 242, 242, 0.64);
+  --kirby-imagebanner-color-light-fill-active: rgba(232, 232, 232, 0.72);
+  --kirby-imagebanner-color-dark-fill: rgba(28, 28, 28, 0.64);
+  --kirby-imagebanner-color-dark-fill-hover: rgba(28, 28, 28, 0.72);
+  --kirby-imagebanner-color-dark-fill-active: rgba(28, 28, 28, 0.8);
+}
+
+/*
+ * elevation
+ */
+
+:root, .kirby-surface-base {
+  --kirby-elevation-2-x: 0px;
+  --kirby-elevation-2-y: 1px;
+  --kirby-elevation-2-blur: 24px;
+  --kirby-elevation-2-spread: 0px;
+  --kirby-elevation-2-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-4-01-x: 0px;
+  --kirby-elevation-4-01-y: 0px;
+  --kirby-elevation-4-01-blur: 5px;
+  --kirby-elevation-4-01-spread: 0px;
+  --kirby-elevation-4-01-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-4-02-x: 0px;
+  --kirby-elevation-4-02-y: 10px;
+  --kirby-elevation-4-02-blur: 15px;
+  --kirby-elevation-4-02-spread: -10px;
+  --kirby-elevation-4-02-color: rgba(28, 28, 28, 0.15);
+  --kirby-elevation-8-01-x: 0px;
+  --kirby-elevation-8-01-y: 20px;
+  --kirby-elevation-8-01-blur: 30px;
+  --kirby-elevation-8-01-spread: -15px;
+  --kirby-elevation-8-01-color: rgba(28, 28, 28, 0.3);
+  --kirby-elevation-8-02-x: 0px;
+  --kirby-elevation-8-02-y: 0px;
+  --kirby-elevation-8-02-blur: 5px;
+  --kirby-elevation-8-02-spread: 0px;
+  --kirby-elevation-8-02-color: rgba(28, 28, 28, 0.08);
+  --kirby-elevation-badge-01-x: 0px;
+  --kirby-elevation-badge-01-y: 0px;
+  --kirby-elevation-badge-01-blur: 0px;
+  --kirby-elevation-badge-01-spread: 0px;
+  --kirby-elevation-badge-01-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-badge-02-x: 0px;
+  --kirby-elevation-badge-02-y: 0px;
+  --kirby-elevation-badge-02-blur: 0px;
+  --kirby-elevation-badge-02-spread: 0px;
+  --kirby-elevation-badge-02-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-dropdown-01-x: 0px;
+  --kirby-elevation-dropdown-01-y: 10px;
+  --kirby-elevation-dropdown-01-blur: 15px;
+  --kirby-elevation-dropdown-01-spread: -10px;
+  --kirby-elevation-dropdown-01-color: rgba(28, 28, 28, 0.26);
+  --kirby-elevation-dropdown-02-x: 0px;
+  --kirby-elevation-dropdown-02-y: 0px;
+  --kirby-elevation-dropdown-02-blur: 5px;
+  --kirby-elevation-dropdown-02-spread: 0px;
+  --kirby-elevation-dropdown-02-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-input-x: 0px;
+  --kirby-elevation-input-y: 1px;
+  --kirby-elevation-input-blur: 24px;
+  --kirby-elevation-input-spread: 0px;
+  --kirby-elevation-input-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-card-x: 0px;
+  --kirby-elevation-card-y: 1px;
+  --kirby-elevation-card-blur: 24px;
+  --kirby-elevation-card-spread: 0px;
+  --kirby-elevation-card-color: rgba(28, 28, 28, 0.04);
+}
+
+.kirby-surface-raised {
+  --kirby-elevation-2-x: 0px;
+  --kirby-elevation-2-y: 1px;
+  --kirby-elevation-2-blur: 24px;
+  --kirby-elevation-2-spread: 0px;
+  --kirby-elevation-2-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-4-01-x: 0px;
+  --kirby-elevation-4-01-y: 0px;
+  --kirby-elevation-4-01-blur: 5px;
+  --kirby-elevation-4-01-spread: 0px;
+  --kirby-elevation-4-01-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-4-02-x: 0px;
+  --kirby-elevation-4-02-y: 10px;
+  --kirby-elevation-4-02-blur: 15px;
+  --kirby-elevation-4-02-spread: -10px;
+  --kirby-elevation-4-02-color: rgba(28, 28, 28, 0.15);
+  --kirby-elevation-8-01-x: 0px;
+  --kirby-elevation-8-01-y: 20px;
+  --kirby-elevation-8-01-blur: 30px;
+  --kirby-elevation-8-01-spread: -15px;
+  --kirby-elevation-8-01-color: rgba(28, 28, 28, 0.3);
+  --kirby-elevation-8-02-x: 0px;
+  --kirby-elevation-8-02-y: 0px;
+  --kirby-elevation-8-02-blur: 5px;
+  --kirby-elevation-8-02-spread: 0px;
+  --kirby-elevation-8-02-color: rgba(28, 28, 28, 0.08);
+  --kirby-elevation-badge-01-x: 0px;
+  --kirby-elevation-badge-01-y: 0px;
+  --kirby-elevation-badge-01-blur: 0px;
+  --kirby-elevation-badge-01-spread: 0px;
+  --kirby-elevation-badge-01-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-badge-02-x: 0px;
+  --kirby-elevation-badge-02-y: 0px;
+  --kirby-elevation-badge-02-blur: 0px;
+  --kirby-elevation-badge-02-spread: 0px;
+  --kirby-elevation-badge-02-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-dropdown-01-x: 0px;
+  --kirby-elevation-dropdown-01-y: 10px;
+  --kirby-elevation-dropdown-01-blur: 15px;
+  --kirby-elevation-dropdown-01-spread: -10px;
+  --kirby-elevation-dropdown-01-color: rgba(28, 28, 28, 0.26);
+  --kirby-elevation-dropdown-02-x: 0px;
+  --kirby-elevation-dropdown-02-y: 0px;
+  --kirby-elevation-dropdown-02-blur: 5px;
+  --kirby-elevation-dropdown-02-spread: 0px;
+  --kirby-elevation-dropdown-02-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-input-x: 0px;
+  --kirby-elevation-input-y: 1px;
+  --kirby-elevation-input-blur: 24px;
+  --kirby-elevation-input-spread: 0px;
+  --kirby-elevation-input-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-card-x: 0px;
+  --kirby-elevation-card-y: 1px;
+  --kirby-elevation-card-blur: 24px;
+  --kirby-elevation-card-spread: 0px;
+  --kirby-elevation-card-color: rgba(28, 28, 28, 0.04);
+}
+
+.kirby-surface-brand {
+  --kirby-elevation-2-x: 0px;
+  --kirby-elevation-2-y: 1px;
+  --kirby-elevation-2-blur: 24px;
+  --kirby-elevation-2-spread: 0px;
+  --kirby-elevation-2-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-4-01-x: 0px;
+  --kirby-elevation-4-01-y: 0px;
+  --kirby-elevation-4-01-blur: 5px;
+  --kirby-elevation-4-01-spread: 0px;
+  --kirby-elevation-4-01-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-4-02-x: 0px;
+  --kirby-elevation-4-02-y: 10px;
+  --kirby-elevation-4-02-blur: 15px;
+  --kirby-elevation-4-02-spread: -10px;
+  --kirby-elevation-4-02-color: rgba(28, 28, 28, 0.15);
+  --kirby-elevation-8-01-x: 0px;
+  --kirby-elevation-8-01-y: 20px;
+  --kirby-elevation-8-01-blur: 30px;
+  --kirby-elevation-8-01-spread: -15px;
+  --kirby-elevation-8-01-color: rgba(28, 28, 28, 0.3);
+  --kirby-elevation-8-02-x: 0px;
+  --kirby-elevation-8-02-y: 0px;
+  --kirby-elevation-8-02-blur: 5px;
+  --kirby-elevation-8-02-spread: 0px;
+  --kirby-elevation-8-02-color: rgba(28, 28, 28, 0.08);
+  --kirby-elevation-badge-01-x: 0px;
+  --kirby-elevation-badge-01-y: 0px;
+  --kirby-elevation-badge-01-blur: 0px;
+  --kirby-elevation-badge-01-spread: 0px;
+  --kirby-elevation-badge-01-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-badge-02-x: 0px;
+  --kirby-elevation-badge-02-y: 0px;
+  --kirby-elevation-badge-02-blur: 0px;
+  --kirby-elevation-badge-02-spread: 0px;
+  --kirby-elevation-badge-02-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-dropdown-01-x: 0px;
+  --kirby-elevation-dropdown-01-y: 10px;
+  --kirby-elevation-dropdown-01-blur: 15px;
+  --kirby-elevation-dropdown-01-spread: -10px;
+  --kirby-elevation-dropdown-01-color: rgba(28, 28, 28, 0.26);
+  --kirby-elevation-dropdown-02-x: 0px;
+  --kirby-elevation-dropdown-02-y: 0px;
+  --kirby-elevation-dropdown-02-blur: 5px;
+  --kirby-elevation-dropdown-02-spread: 0px;
+  --kirby-elevation-dropdown-02-color: rgba(28, 28, 28, 0);
+  --kirby-elevation-input-x: 0px;
+  --kirby-elevation-input-y: 1px;
+  --kirby-elevation-input-blur: 24px;
+  --kirby-elevation-input-spread: 0px;
+  --kirby-elevation-input-color: rgba(28, 28, 28, 0.04);
+  --kirby-elevation-card-x: 0px;
+  --kirby-elevation-card-y: 1px;
+  --kirby-elevation-card-blur: 24px;
+  --kirby-elevation-card-spread: 0px;
+  --kirby-elevation-card-color: rgba(28, 28, 28, 0.04);
+}
+
+/*
+ * font
+ */
+
+:root {
+  --kirby-font-family: Roboto;
+}

@@ -8,6 +8,9 @@
 /test-reports
 **/helpers/**/*.styles.ts
 
+# Override theme token build output (generated, not committed)
+/libs/core/src/scss/themes/overrides/
+
 # compiled core library output
 /libs/core/loader
 /libs/core/dist/
