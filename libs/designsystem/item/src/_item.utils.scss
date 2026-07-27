@@ -81,7 +81,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 // Applies styles when text is scaled on narrow viewports.
 // Only exception is items with radio, checkbox etc., that should not be adjusted.
 @mixin when-text-resized-on-narrow-viewport() {
-  :host-context(.kirby-trt):not(:has(kirby-checkbox, kirby-radio, kirby-toggle)) {
+  :host-context(.kirby-trt):not(.has-interactive) {
     @include utils.media('<medium') {
       @content;
     }

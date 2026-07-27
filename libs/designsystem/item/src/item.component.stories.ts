@@ -14,6 +14,7 @@ import { responsiveModes } from 'tools/storybook-config/shared-config';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 // eslint-disable-next-line no-restricted-imports
 import { focusSelectableItem } from '../../.storybook/story-helpers';
@@ -24,6 +25,7 @@ const meta: Meta<ItemComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
+        ButtonComponent,
         FlagComponent,
         CardComponent,
         CardHeaderComponent,
@@ -903,8 +905,26 @@ export const ItemTextResizeLayout: Story = {
     </kirby-label>
   </kirby-item>
   <br>
+  <kirby-item>
+    <kirby-label>
+      <p class="kirby-item-title">Item with Button. Text is clamped at two lines on narrow screens.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
+    </kirby-label>
+    <button kirby-button attentionLevel="2" slot="end">Button</button>
+  </kirby-item>
+  <br>
 
   <p>Items with controls should not change layout on neither mobile nor desktop.</p>
+    <kirby-item>
+    <kirby-label>
+      <p class="kirby-item-title">Item with Icon Button. Should not change layout on narrow screens.</p>
+      <p class="kirby-item-subtitle">Subtitle</p>
+    </kirby-label>
+    <button kirby-button aria-label="Close" slot="end">
+      <kirby-icon name="close"></kirby-icon>
+    </button>
+  </kirby-item>
+  <br>
   <kirby-item size="md">
     <kirby-checkbox slot="start">Slot start</kirby-checkbox>
   </kirby-item>
