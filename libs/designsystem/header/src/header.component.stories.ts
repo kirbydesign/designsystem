@@ -87,3 +87,15 @@ export const TitleMaxLinesScaling: Story = {
     `,
   }),
 };
+
+export const SubtitleWrapping: Story = {
+  render: () => ({
+    template: `
+      <kirby-header
+        title="Title"
+        subtitle1="A long subtitle that should wrap to the next line on narrow screens instead of being truncated with ellipsis."
+        subtitle2="Second subtitle also long enough to verify wrapping behavior on smaller viewports."
+      ></kirby-header>
+    `,
+  }),
+};

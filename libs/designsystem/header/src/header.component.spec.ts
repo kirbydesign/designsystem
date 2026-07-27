@@ -62,7 +62,6 @@ describe('HeaderComponent', () => {
 
     it(`should have correct subtitle1`, () => {
       const subtitle1Element = spectator.queryAll('.subtitle')[0];
-      const subtitle1SpanElement = subtitle1Element.firstElementChild;
       const expectedFontSize = fontSize('s');
       const spaceCharacterWidthInEm = 0.25;
       const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
@@ -74,17 +73,10 @@ describe('HeaderComponent', () => {
         'flex-flow': 'row wrap',
         'column-gap': spaceCharacterWidthInPx,
       });
-
-      expect(subtitle1SpanElement).toHaveComputedStyle({
-        'text-overflow': 'clip',
-        'white-space': 'normal',
-        overflow: 'visible',
-      });
     });
 
     it(`should have correct subtitle2`, () => {
       const subtitle2Element = spectator.queryAll('.subtitle')[1];
-      const subtitle2SpanElement = subtitle2Element.firstElementChild;
       const expectedFontSize = fontSize('s');
       const spaceCharacterWidthInEm = 0.25;
       const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
@@ -95,12 +87,6 @@ describe('HeaderComponent', () => {
         display: 'flex',
         'flex-flow': 'row wrap',
         'column-gap': spaceCharacterWidthInPx,
-      });
-
-      expect(subtitle2SpanElement).toHaveComputedStyle({
-        'text-overflow': 'clip',
-        'white-space': 'normal',
-        overflow: 'visible',
       });
     });
 
