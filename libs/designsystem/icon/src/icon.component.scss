@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: inline-flex;
   align-items: center;
@@ -30,10 +28,48 @@
   --kirby-icon-font-size: var(--kirby-icon-font-size-lg);
 }
 
-@each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}) {
-    color: utils.get-color($color-name);
-  }
+:host(.primary) {
+  color: var(--kirby-primary);
+}
+
+:host(.secondary) {
+  color: var(--kirby-secondary);
+}
+
+:host(.tertiary) {
+  color: var(--kirby-tertiary);
+}
+
+:host(.success) {
+  color: var(--kirby-success);
+}
+
+:host(.warning) {
+  color: var(--kirby-warning);
+}
+
+:host(.danger) {
+  color: var(--kirby-danger);
+}
+
+:host(.white-overlay) {
+  color: var(--kirby-white-overlay);
+}
+
+:host(.light) {
+  color: var(--kirby-light);
+}
+
+:host(.medium) {
+  color: var(--kirby-medium);
+}
+
+:host(.dark) {
+  color: var(--kirby-dark);
+}
+
+:host(.dark-overlay) {
+  color: var(--kirby-dark-overlay);
 }
 
 :host-context(kirby-item) {

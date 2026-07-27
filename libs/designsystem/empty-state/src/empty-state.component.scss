@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 .message-container {
   max-width: 330px;
   margin: auto;
@@ -20,12 +18,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: var(--kirby-spacing-xxxs) solid var(--kirby-medium);
+  border: var(--kirby-spacing-xxxs) solid var(--kirby-empty-state-color, var(--kirby-medium));
   border-radius: var(--kirby-border-radius-circle);
 }
 
 kirby-icon {
-  color: var(--kirby-medium);
+  color: var(--kirby-empty-state-color, var(--kirby-medium));
 }
 
 .title {
@@ -37,14 +35,47 @@ p.subtitle {
   white-space: pre-wrap;
 }
 
-@each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}) {
-    .icon-outline {
-      border-color: #{utils.get-color($color-name)};
-    }
+// Colors
+:host(.primary) {
+  --kirby-empty-state-color: var(--kirby-primary);
+}
 
-    kirby-icon {
-      color: #{utils.get-color($color-name)};
-    }
-  }
+:host(.secondary) {
+  --kirby-empty-state-color: var(--kirby-secondary);
+}
+
+:host(.tertiary) {
+  --kirby-empty-state-color: var(--kirby-tertiary);
+}
+
+:host(.success) {
+  --kirby-empty-state-color: var(--kirby-success);
+}
+
+:host(.warning) {
+  --kirby-empty-state-color: var(--kirby-warning);
+}
+
+:host(.danger) {
+  --kirby-empty-state-color: var(--kirby-danger);
+}
+
+:host(.white-overlay) {
+  --kirby-empty-state-color: var(--kirby-white-overlay);
+}
+
+:host(.light) {
+  --kirby-empty-state-color: var(--kirby-light);
+}
+
+:host(.medium) {
+  --kirby-empty-state-color: var(--kirby-medium);
+}
+
+:host(.dark) {
+  --kirby-empty-state-color: var(--kirby-dark);
+}
+
+:host(.dark-overlay) {
+  --kirby-empty-state-color: var(--kirby-dark-overlay);
 }

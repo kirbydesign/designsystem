@@ -38,8 +38,8 @@ $badge-diameter: utils.$avatar-badge-size;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--kirby-white);
-  color: var(--kirby-light-contrast);
+  background-color: var(--kirby-avatar-background-color, var(--kirby-white));
+  color: var(--kirby-avatar-color, var(--kirby-light-contrast));
 
   &.stroke {
     border: 1px solid var(--kirby-semi-light);
@@ -134,20 +134,68 @@ $badge-diameter: utils.$avatar-badge-size;
   }
 }
 
-@each $color-name,
-  $color-value
-    in map.merge(
-      utils.$main-colors,
-      (
-        'white': utils.get-color('white'),
-        'semi-light': utils.get-color('semi-light'),
-      )
-    )
-{
-  :host(.#{$color-name}) {
-    .avatar {
-      background-color: utils.get-color($color-name);
-      color: utils.get-color($color-name + '-contrast');
-    }
-  }
+// Colors
+:host(.primary) {
+  --kirby-avatar-background-color: var(--kirby-primary);
+  --kirby-avatar-color: var(--kirby-primary-contrast);
+}
+
+:host(.secondary) {
+  --kirby-avatar-background-color: var(--kirby-secondary);
+  --kirby-avatar-color: var(--kirby-secondary-contrast);
+}
+
+:host(.tertiary) {
+  --kirby-avatar-background-color: var(--kirby-tertiary);
+  --kirby-avatar-color: var(--kirby-tertiary-contrast);
+}
+
+:host(.success) {
+  --kirby-avatar-background-color: var(--kirby-success);
+  --kirby-avatar-color: var(--kirby-success-contrast);
+}
+
+:host(.warning) {
+  --kirby-avatar-background-color: var(--kirby-warning);
+  --kirby-avatar-color: var(--kirby-warning-contrast);
+}
+
+:host(.danger) {
+  --kirby-avatar-background-color: var(--kirby-danger);
+  --kirby-avatar-color: var(--kirby-danger-contrast);
+}
+
+:host(.white-overlay) {
+  --kirby-avatar-background-color: var(--kirby-white-overlay);
+  --kirby-avatar-color: var(--kirby-white-overlay-contrast);
+}
+
+:host(.light) {
+  --kirby-avatar-background-color: var(--kirby-light);
+  --kirby-avatar-color: var(--kirby-light-contrast);
+}
+
+:host(.medium) {
+  --kirby-avatar-background-color: var(--kirby-medium);
+  --kirby-avatar-color: var(--kirby-medium-contrast);
+}
+
+:host(.dark) {
+  --kirby-avatar-background-color: var(--kirby-dark);
+  --kirby-avatar-color: var(--kirby-dark-contrast);
+}
+
+:host(.dark-overlay) {
+  --kirby-avatar-background-color: var(--kirby-dark-overlay);
+  --kirby-avatar-color: var(--kirby-dark-overlay-contrast);
+}
+
+:host(.white) {
+  --kirby-avatar-background-color: var(--kirby-white);
+  --kirby-avatar-color: var(--kirby-white-contrast);
+}
+
+:host(.semi-light) {
+  --kirby-avatar-background-color: var(--kirby-semi-light);
+  --kirby-avatar-color: var(--kirby-semi-light-contrast);
 }

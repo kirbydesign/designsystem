@@ -13,6 +13,7 @@ $toolbar-transition-duration-in: var(--kirby-transition-duration-quick);
 $toolbar-transition-duration-out: 50ms;
 $toolbar-transition: background-color $toolbar-transition-duration-out linear;
 
+// no color-mix or other Safari-15-safe CSS custom property equivalent, so kept as SCSS.
 // stylelint-disable-next-line kirby/use-design-tokens
 $toolbar-shaded-background: color.mix(
   #000,

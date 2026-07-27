@@ -1,5 +1,3 @@
-@use 'sass:map';
-@use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
 $divider-color: var(--kirby-background-color);
@@ -69,23 +67,21 @@ ion-item-sliding {
     transform: translate3d(0, 0, 0);
   }
 
-  $list-colors: ('light'); // add supported list item theme colors here
-  @each $color-name, $color-value in $list-colors {
-    &.#{$color-name} {
-      @include themes.apply-light-theme;
+  // Supported list item theme colors. Add more `&.<color-name>` rules here as needed.
+  &.light {
+    @include themes.apply-light-theme;
 
-      --kirby-item-background: #{utils.get-color($color-name)};
-      --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
-      --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};
-      --kirby-item-background-hover: #{utils.get-color($color-name + '-tint')};
+    --kirby-item-background: var(--kirby-light);
+    --kirby-item-background-activated: var(--kirby-light-shade);
+    --kirby-item-background-focused: var(--kirby-light-shade);
+    --kirby-item-background-hover: var(--kirby-light-tint);
 
-      ion-item {
-        --background: #{utils.get-color($color-name)};
-        --color: #{utils.get-color($color-name + '-contrast')};
-        --background-activated: #{utils.get-color($color-name + '-shade')};
-        --background-focused: #{utils.get-color($color-name + '-shade')};
-        --background-hover: #{utils.get-color($color-name + '-tint')};
-      }
+    ion-item {
+      --background: var(--kirby-light);
+      --color: var(--kirby-light-contrast);
+      --background-activated: var(--kirby-light-shade);
+      --background-focused: var(--kirby-light-shade);
+      --background-hover: var(--kirby-light-tint);
     }
   }
 }
@@ -280,8 +276,43 @@ kirby-list-item:last-of-type {
   }
 }
 
-@each $sizeName, $size in utils.$sizes {
-  .stand-alone-bottom-margin-#{$sizeName} {
-    margin-bottom: $size;
-  }
+// Bottom-margin utilities for stand-alone items.
+.stand-alone-bottom-margin-xxxxs {
+  margin-bottom: var(--kirby-spacing-xxxxs);
+}
+
+.stand-alone-bottom-margin-xxxs {
+  margin-bottom: var(--kirby-spacing-xxxs);
+}
+
+.stand-alone-bottom-margin-xxs {
+  margin-bottom: var(--kirby-spacing-xxs);
+}
+
+.stand-alone-bottom-margin-xs {
+  margin-bottom: var(--kirby-spacing-xs);
+}
+
+.stand-alone-bottom-margin-sm {
+  margin-bottom: var(--kirby-spacing-s);
+}
+
+.stand-alone-bottom-margin-md {
+  margin-bottom: var(--kirby-spacing-m);
+}
+
+.stand-alone-bottom-margin-lg {
+  margin-bottom: var(--kirby-spacing-l);
+}
+
+.stand-alone-bottom-margin-xl {
+  margin-bottom: var(--kirby-spacing-xl);
+}
+
+.stand-alone-bottom-margin-xxl {
+  margin-bottom: var(--kirby-spacing-xxl);
+}
+
+.stand-alone-bottom-margin-xxxl {
+  margin-bottom: var(--kirby-spacing-xxxl);
 }

@@ -1,12 +1,10 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   font-style: italic;
   font-size: var(--kirby-font-size-xs);
   font-weight: var(--kirby-font-weight-normal);
   font-stretch: normal;
   line-height: var(--kirby-line-height-xs);
-  min-height: utils.relative-size('s');
+  min-height: var(--kirby-relative-spacing-s);
   letter-spacing: normal;
   color: var(--kirby-text-color-black);
 }

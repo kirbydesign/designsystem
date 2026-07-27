@@ -108,12 +108,12 @@ ion-toggle {
   /* stylelint-disable no-duplicate-selectors */
   & {
     // Not checked
-    --track-background: #{utils.get-color($background)};
-    --handle-background: #{utils.get-color($handle-background)};
+    --track-background: var(--kirby-semi-dark);
+    --handle-background: var(--kirby-white);
 
     // Checked
-    --track-background-checked: #{utils.get-color($background-checked)};
-    --handle-background-checked: #{utils.get-color($handle-background)};
+    --track-background-checked: var(--kirby-success);
+    --handle-background-checked: var(--kirby-white);
     --handle-transition: var(--kirby-transition-duration-quick);
     --handle-box-shadow: var(--kirby-elevation-2);
 
@@ -167,8 +167,8 @@ ion-toggle {
 }
 
 /*
-* For now, Kirby defaults to the legacy ion-toggle to not force users into 
-* providing a label for each toggle. The legacy toggle has additional padding  
+* For now, Kirby defaults to the legacy ion-toggle to not force users into
+* providing a label for each toggle. The legacy toggle has additional padding
 * in Ionic v7 when inside an item that needs to be reset.
 */
 ion-toggle.in-item.legacy-toggle {

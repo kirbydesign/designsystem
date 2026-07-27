@@ -35,7 +35,7 @@ $button-margin: var(--kirby-spacing-xxxs);
 
     // use fixed size unless font-size grows too large, then let button
     // height adjust to font-size (effectively when text is resized to 150% and above)
-    height: max($button-xs-icon-only-size, utils.relative-size('s'));
+    height: max($button-xs-icon-only-size, var(--kirby-relative-spacing-s));
     min-width: button-width('xs');
   }
 
@@ -47,7 +47,7 @@ $button-margin: var(--kirby-spacing-xxxs);
   &.icon-only {
     // use fixed size unless font-size grows too large, then let button
     // height adjust to font-size (effectively when text is resized to 150% and above)
-    width: max($button-xs-icon-only-size, utils.relative-size('s'));
+    width: max($button-xs-icon-only-size, var(--kirby-relative-spacing-s));
     min-width: unset;
   }
 
@@ -381,14 +381,24 @@ $button-margin: var(--kirby-spacing-xxxs);
 /* clean-css ignore:end */
 
 :host-context(kirby-toggle-button) {
-  @each $color-name, $color-value in utils.$notification-colors {
-    &.#{$color-name} {
-      --kirby-button-background-color: #{utils.get-color($color-name)};
-      --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
+  &.success {
+    --kirby-button-background-color: var(--kirby-success);
+    --kirby-button-color: var(--kirby-success-contrast);
+  }
 
-      @include interaction-state.apply-hover;
-      @include interaction-state.apply-active('s');
-    }
+  &.warning {
+    --kirby-button-background-color: var(--kirby-warning);
+    --kirby-button-color: var(--kirby-warning-contrast);
+  }
+
+  &.danger {
+    --kirby-button-background-color: var(--kirby-danger);
+    --kirby-button-color: var(--kirby-danger-contrast);
+  }
+
+  &:is(.success, .warning, .danger) {
+    @include interaction-state.apply-hover;
+    @include interaction-state.apply-active('s');
   }
 }
 

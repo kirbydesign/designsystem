@@ -131,9 +131,59 @@ $default-border-outline: 1px solid var(--kirby-medium);
   height: 100%;
 }
 
-@each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}):not(.outlined) {
-    --kirby-card-main-background-color: #{utils.get-color($color-name)};
-    --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
+:host(:not(.outlined)) {
+  &.primary {
+    --kirby-card-main-background-color: var(--kirby-primary);
+    --kirby-card-main-color: var(--kirby-primary-contrast);
+  }
+
+  &.secondary {
+    --kirby-card-main-background-color: var(--kirby-secondary);
+    --kirby-card-main-color: var(--kirby-secondary-contrast);
+  }
+
+  &.tertiary {
+    --kirby-card-main-background-color: var(--kirby-tertiary);
+    --kirby-card-main-color: var(--kirby-tertiary-contrast);
+  }
+
+  &.success {
+    --kirby-card-main-background-color: var(--kirby-success);
+    --kirby-card-main-color: var(--kirby-success-contrast);
+  }
+
+  &.warning {
+    --kirby-card-main-background-color: var(--kirby-warning);
+    --kirby-card-main-color: var(--kirby-warning-contrast);
+  }
+
+  &.danger {
+    --kirby-card-main-background-color: var(--kirby-danger);
+    --kirby-card-main-color: var(--kirby-danger-contrast);
+  }
+
+  &.white-overlay {
+    --kirby-card-main-background-color: var(--kirby-white-overlay);
+    --kirby-card-main-color: var(--kirby-white-overlay-contrast);
+  }
+
+  &.light {
+    --kirby-card-main-background-color: var(--kirby-light);
+    --kirby-card-main-color: var(--kirby-light-contrast);
+  }
+
+  &.medium {
+    --kirby-card-main-background-color: var(--kirby-medium);
+    --kirby-card-main-color: var(--kirby-medium-contrast);
+  }
+
+  &.dark {
+    --kirby-card-main-background-color: var(--kirby-dark);
+    --kirby-card-main-color: var(--kirby-dark-contrast);
+  }
+
+  &.dark-overlay {
+    --kirby-card-main-background-color: var(--kirby-dark-overlay);
+    --kirby-card-main-color: var(--kirby-dark-overlay-contrast);
   }
 }
