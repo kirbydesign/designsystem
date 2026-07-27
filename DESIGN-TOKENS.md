@@ -1,0 +1,232 @@
+# Design Tokens
+
+The vocabulary for Kirby's surface-based theming system. Components adjust their
+appearance based on the surface they are placed on. There are exactly three
+surfaces; each establishes a context; components inside read that context and
+re-skin automatically because every surface re-assigns one flat set of
+`--kirby-theme-color-*` variables, scoped by a surface selector
+(`.kirby-theme-base` / `.kirby-theme-raised` / `.kirby-theme-brand`).
+
+This document is a glossary only — it defines what the terms mean, not how the
+pipeline is implemented. For the theming decision and the generator that emits
+these variables, see
+[ADR-001](./docs/decisions/001-design-token-system.md).
+
+## Language
+
+### Surfaces and contexts
+
+**Surface**:
+An element that _contains_ other elements and _establishes_ a context — the app
+background, a card, a list. Has a fixed **kind** (`base`/`raised`/`brand`), an
+**absolute** appearance (independent of how deeply it is nested), and sets the
+context for everything inside it.
+_Avoid_: panel, container, background (when you mean a surface)
+
+**Context**:
+The ambient theming scope set by the nearest ancestor surface; always one of
+`base` / `raised` / `brand`. It supplies the values behind the color contract
+for every component inside it. There are exactly three — no ladder, no computed
+"raised-on-raised".
+_Avoid_: theme (too broad), scope, level
+
+**Mode**:
+A light/dark colour scheme (the Figma `modeName`). Reserved strictly for
+light/dark — never used to describe surfaces or contexts.
+_Avoid_: using "mode" for a surface kind
+
+### How a component looks
+
+**Prominence**:
+A component's chosen appearance _relative to its current context_:
+`base` (transparent, inherits content colour, carries hover/active/focus),
+`raised` / `brand` (solid fill + border + own content colour). A component
+picks a prominence and **re-skins per context** — a `raised` button looks
+different on a `brand` surface than on a `base` surface. Mutually exclusive with
+intent.
+_Avoid_: variant, elevation, emphasis, skin
+
+**Intent**:
+An expressive appearance for components that do _not_ share the surface styles —
+flag, badge, spinner — and for semantic/destructive states: `success`,
+`warning`, `danger`, … A destructive button and a danger flag resolve to the
+same `danger` entry. Also re-skins per context.
+_Avoid_: status, kind, type
+
+**Prominence/intent exclusivity (with a bounded overlay)**:
+A component's **fill** is driven by _either_ a prominence _or_ an intent, never
+both. **Border** and **content**, however, may carry an intent _overlay_ while
+the fill stays a prominence — this is how a `raised` input keeps its raised fill
+but shows a `danger` border (validation error) or `engaged`/`success` content.
+The overlay is deliberately bounded: it exists only for the `border` and
+`content` roles, only on the `raised` prominence, and appears in the token names
+as a combined `raised-<intent>` segment (e.g.
+`--kirby-theme-color-border-raised-danger-default`).
+_Avoid_: treating fill overlays as valid; combining prominence+intent on `base`/`brand`
+
+**Role**:
+Which part of a component a colour applies to: `fill`, `border` (border
+_colour_, not width), `content`. These are the shared semantic tokens used
+across many components.
+_Avoid_: slot, part, property
+
+**Loudness**:
+The emphasis sub-scale within a prominence or intent: `loud` / `normal` /
+`quiet` / `silent`. _Flagged for possible pruning_ once real component needs are
+audited.
+_Avoid_: weight, strength, level
+
+**State**:
+The interaction state, baked directly into the colour tokens:
+`default` / `hover` / `active` / `focus` / `disabled`. Every interactive colour
+carries `-hover` and `-active` variants. (The legacy translucent state-layer
+overlay is being retired in favour of this.)
+_Avoid_: interaction, status
+
+### The token layer
+
+**Color contract**:
+The flat, **context-neutral** set of `--kirby-theme-color-*` custom properties
+that every surface re-assigns for its subtree. A variable name encodes role +
+prominence/intent + loudness + state, but **not** the context — the context is
+carried by the surface selector (`.kirby-theme-<surface>`, with `base` also
+seeded at `:root`), so whichever surface most recently set the variables in the
+cascade wins. Values are `var()` references into the primitive layers
+(`--kirby-system-color-*` / `--kirby-brand-color-*`). Components read the
+contract variables blindly.
+_Avoid_: token set, palette (when you mean the contract)
+
+**Component tokens**:
+Component-specific tokens that live _outside_ the shared color contract —
+`spot`, `logo`, `chart`, `tabs`, `toolbar`, etc. These belong to individual
+components, not to the shared surface skins.
+_Avoid_: calling these semantic tokens
+
+## Naming grammar
+
+Surface context is **not** in the variable name — it lives in the selector.
+Every segment is always spelled out (no omission), so the grammar is uniform and
+mechanically generated by the pipeline:
+
+```
+selector    .kirby-theme-<surface>          surface ∈ base | raised | brand
+                                             (base also seeded at :root)
+
+variable    --kirby-theme-color-<role>-<prominence|intent>-<loudness>-<state>
+
+  role         ∈ fill | border | content
+  prominence   ∈ base | raised | brand
+  intent       ∈ success | warning | danger | …   (replaces prominence)
+  loudness     ∈ loud | normal | quiet | silent
+  state        ∈ default | hover | active | focus | disabled
+```
+
+`normal` loudness and `default` state are written explicitly (not omitted):
+
+```
+--kirby-theme-color-fill-raised-normal-default
+--kirby-theme-color-fill-raised-normal-hover
+--kirby-theme-color-fill-brand-loud-default
+--kirby-theme-color-content-danger-quiet-active
+--kirby-theme-color-border-base-normal-default
+```
+
+### Grammar exceptions
+
+A few entries deviate from the strict `<role>-<prominence|intent>-<loudness>-<state>`
+shape and are expected:
+
+- **Bounded overlay** — `border` and `content` may combine a prominence with an
+  intent for `raised` validation/engaged states:
+  `--kirby-theme-color-border-raised-danger-default`,
+  `--kirby-theme-color-content-raised-engaged-hover`. See _Prominence/intent
+  exclusivity_ above.
+- **`focus`** — the focus ring (`border` only) carries a loudness but **no
+  state**: `--kirby-theme-color-border-focus-loud`,
+  `--kirby-theme-color-border-focus-normal`.
+- **`neutral`** — carries a state but **no loudness**:
+  `--kirby-theme-color-border-neutral-default`.
+
+## Invariants
+
+1. **Exactly three contexts** — `base` / `raised` / `brand`. No ladder, no
+   computed deeper levels.
+2. **Surface-vs-component split** — surfaces are absolute and _establish_ a
+   context; components _re-skin_ and never establish one.
+3. **No element may both re-skin and establish a context.** Doing so would
+   create a fourth context and reintroduce a ladder.
+4. **Absolute with respect to depth, contextual with respect to the three
+   kinds** — a surface looks the same however deeply it is nested, but adapts to
+   which of the three contexts it currently sits in.
+
+## Emergent behaviour (consequences, not rules to encode)
+
+- **Same-kind adjacency shows only a border.** A `raised` surface on another
+  `raised` surface shares the same fill, so the always-present border is the
+  only separation. This falls out of absolute appearance plus an ever-present
+  border — nothing special is encoded.
+- **Consistency wiring.** A raised surface's fill equals the `raised` context's
+  background, which equals the raised-prominence fill in the parent context.
+  This mutual wiring is what lets three contexts close on themselves and keeps
+  the UI cohesive.
+
+## Modelling surfaces
+
+A surface has two jobs — **establish** its context for descendants, and **paint
+itself** — and they do not collide because a surface consumes and produces in the
+_same_ context: its own. It never reads its parent.
+
+**The plane token.** `fill-base-*` is not "a base-prominence component's fill";
+it is **the plane of whichever context you are in** — the background of the
+surface that established that context:
+
+```
+--kirby-theme-color-fill-base-default
+  base   → light-grey-100   (the app page)
+  raised → white-00         (a card)
+  brand  → dark-blue-950    (a brand panel)
+```
+
+**How to build one.** A surface element carries `.kirby-theme-<kind>` and paints
+itself from that same class's plane tokens. Because the class and the reads are
+on the same element, custom properties resolve at use-site — no wrapper, no
+ordering problem:
+
+```scss
+// One kind-agnostic rule; the ONLY per-kind difference is the class.
+%kirby-surface {
+  background: var(--kirby-theme-color-fill-base-default);
+  color: var(--kirby-theme-color-content-base-normal-default);
+  border: 1px solid var(--kirby-theme-color-border-neutral-default); // where needed
+}
+
+kirby-card {
+  @extend .kirby-theme-raised;
+  @extend %kirby-surface;
+} // white
+kirby-brand-panel {
+  @extend .kirby-theme-brand;
+  @extend %kirby-surface;
+} // dark-blue-950
+```
+
+The base surface is free: `:root` already seeds `.kirby-theme-base`, so the app
+background reads the plane (grey) with no class at all.
+
+**This is why a surface is not "re-skinning".** A component reads whatever
+context it is dropped into (`fill-raised`, `content-brand`, …). A surface's whole
+appearance is a fixed function of the one context it establishes, read from the
+plane tokens — so it only ever _establishes_, never adapts to a parent. That is
+exactly what Invariant 3 protects.
+
+**Parent-independence (a deliberate limit).** Because a surface reads only its
+own context, a `raised` card is white on a `base` page _and_ on a `brand` panel —
+surfaces change with their own kind, never with their parent. "Raised-on-brand
+looks different from raised-on-base" is precisely the fourth context / ladder the
+model forbids; achieving it would be a model change (more contexts), not a token
+tweak.
+
+## Open questions
+
+- **Loudness** — whether the `loud/normal/quiet/silent` sub-axis survives
+  long-term, or is pruned once real component needs are audited.
