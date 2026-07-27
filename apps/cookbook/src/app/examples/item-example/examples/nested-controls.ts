@@ -23,8 +23,7 @@ const config = {
 <kirby-item>
   Item with Button
   <button kirby-button attentionLevel="2" slot="end">Button</button>
-</kirby-item>
-`,
+</kirby-item>`,
 };
 
 @Component({
