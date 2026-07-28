@@ -914,7 +914,7 @@ export const ItemTextResizeLayout: Story = {
   </kirby-item>
   <br>
 
-  <p>Items with controls should not change layout on neither mobile nor desktop.</p>
+ <p>Items with toggle, checkbox, radio or icon-buttons should not change layout on neither mobile nor desktop.</p>
     <kirby-item>
     <kirby-label>
       <p class="kirby-item-title">Item with Icon Button. Should not change layout on narrow screens.</p>

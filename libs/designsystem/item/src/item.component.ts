@@ -121,10 +121,6 @@ export class ItemComponent implements AfterViewInit {
   }
 
   @HostBinding('class.has-interactive')
-  private get hasControlInteractive(): boolean {
-    return !!(this.checkbox || this.radio || this.toggle);
-  }
-
   private get containsNestedInteractives(): boolean {
     return !!(this.checkbox || this.radio || this.toggle || this.button);
   }
