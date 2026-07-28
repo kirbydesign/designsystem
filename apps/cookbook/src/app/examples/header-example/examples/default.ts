@@ -3,7 +3,7 @@ import { HeaderComponent } from '@kirbydesign/designsystem/header';
 
 const config = {
   selector: 'cookbook-header-example-default',
-  template: `<kirby-header [title]="'Title'" subtitle1="Subtitle One" subtitle2="Subtitle two">
+  template: `<kirby-header [title]="'Title'" subtitle1="Subtitle one" subtitle2="Subtitle two">
 </kirby-header>`,
 };
 
