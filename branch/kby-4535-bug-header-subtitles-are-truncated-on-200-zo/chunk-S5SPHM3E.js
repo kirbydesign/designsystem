@@ -1,4 +1,4 @@
-import{a as ie,b as Fa}from"./chunk-FG3TPFRJ.js";import{$ as en,$a as eo,$b as Zo,$c as it,A as Pi,Aa as Pn,Ab as So,Ac as va,B as Ti,Ba as Tn,Bb as Co,Bc as ya,C as Oi,Ca as On,Cb as _o,Cc as Ea,D as Di,Da as Dn,Db as Mo,Dc as wa,E as Vi,Ea as Vn,Eb as Po,Ec as Sa,F as Ii,Fa as In,Fb as To,Fc as Ca,G as Ai,Ga as An,Gb as Oo,Gc as _a,H as Li,Ha as Ln,Hb as Do,Hc as Ma,I as Fi,Ia as Fn,Ib as je,Ic as Pa,J as zi,Ja as zn,Jb as Vo,Jc as Ta,K as Hi,Ka as Hn,Kb as Io,Kc as Oa,L as Bi,La as Bn,Lb as Ao,Lc as Da,M as Ri,Ma as Rn,Mb as Lo,Mc as Va,N as Ni,Na as Ne,Nb as Fo,Nc as Ia,O as Wi,Oa as Nn,Ob as Ge,Oc as Aa,P as Ui,Pa as Wn,Pb as tt,Pc as La,Q as ji,Qa as Un,Qb as zo,Qc as za,R as Re,Ra as jn,Rb as Ho,Rc as Ha,S as Gi,Sa as Gn,Sb as Ce,Sc as Ba,T as Ki,Ta as Kn,Tb as Bo,Tc as Ra,U as Zi,Ua as Zn,Ub as Ro,Uc as Na,V as qi,Va as qn,Vb as No,Vc as Wa,W as $i,Wa as $n,Wb as Wo,Wc as Ua,X as Yi,Xa as Yn,Xb as Uo,Xc as ja,Y as Qi,Ya as Qn,Yb as jo,Yc as Ga,Z as Ji,Za as Jn,Zb as Go,Zc as Ka,_ as Xi,_a as Xn,_b as Ko,_c as Za,a as oi,aa as tn,ab as to,ac as qo,ad as qa,b as ai,ba as nn,bb as io,bc as $o,bd as $a,c as ri,ca as on,cb as We,cc as Yo,cd as Ya,d as li,da as an,db as Ue,dc as Qo,dd as Qa,e as mi,ea as rn,eb as Se,ec as Jo,ed as Ja,f as si,fa as ln,fb as no,fc as Xo,fd as Xa,g as di,ga as mn,gb as oo,gc as ea,gd as er,h as pi,ha as sn,hb as ao,hc as ta,hd as tr,i as ci,ia as dn,ib as ro,ic as ia,id as ir,j as hi,ja as pn,jb as lo,jc as na,k as xi,ka as cn,kb as mo,kc as oa,l as ui,la as hn,lb as so,lc as aa,ma as xn,mb as po,mc as ra,n as bi,na as un,nc as la,o as gi,oa as bn,ob as co,oc as ma,p as fi,pa as gn,pb as ho,pc as sa,q as ki,qa as fn,qb as xo,qc as da,r as vi,ra as kn,rb as uo,rc as pa,s as Be,sa as vn,sb as bo,sc as ca,t as yi,ta as yn,tb as go,tc as ha,u as Ei,ua as En,ub as fo,uc as xa,v as wi,va as wn,vb as ko,vc as ua,w as Si,wa as Sn,wb as vo,wc as ba,x as Ci,xa as Cn,xb as yo,xc as ga,y as _i,ya as _n,yb as Eo,yc as fa,z as Mi,za as Mn,zb as wo,zc as ka}from"./chunk-ARXVBC7D.js";import{$a as gt,Ad as xe,Ba as N,Be as ti,C as y,Ca as ce,Cb as wt,Ce as $,D as E,Da as w,De as ii,E as me,Ea as P,Ec as Le,Ed as ye,Ee as ni,F as se,Fa as Oe,Fb as St,Ga as we,Gb as Ct,Gc as Ut,Gd as Fe,Ge as C,Ha as pt,Hd as ze,Ia as ct,Ib as Qe,Ic as G,Ja as ht,Jb as Je,Jc as te,Ka as d,Kb as _t,Kd as Jt,L as qe,La as q,M as lt,Ma as xt,N as mt,Na as ge,Oa as e,Od as Xt,P as Te,Pa as S,Qa as re,Qb as Mt,Ra as j,Rb as Pt,Sa as ut,T as be,Ta as Y,Tb as Ie,U as st,Ua as Q,Va as J,Wa as ee,Wb as Tt,X as n,Xa as De,Xb as Ot,Xc as R,Yb as Dt,Yc as jt,Za as I,Zb as Vt,Zc as Gt,_a as bt,_b as It,_c as Kt,ab as fe,ba as de,bc as At,cb as ft,cc as Ae,da as u,db as Ve,dc as Lt,ec as Ft,ed as Zt,gc as zt,ha as $e,hc as Ht,ic as A,id as et,ie as ei,ka as Ye,l as rt,la as O,lb as kt,ma as D,mb as vt,na as dt,od as ve,pa as F,pc as Bt,qa as z,qb as yt,qc as ke,qd as qt,ra as a,sa as i,sb as Et,sd as $t,ta as t,tc as Rt,td as he,ua as r,va as M,vd as Yt,wa as _,wc as Nt,wd as Qt,we as ue,xa as pe,xe as He,yc as Xe,zc as Wt}from"./chunk-GGMDJWS7.js";import{a as X,b as oe}from"./chunk-ZSHLT67R.js";var cm=["*"];function hm(l,o){if(l&1){let x=N();i(0,"button",4),w("click",function(){y(x);let s=P();return E(s.expanded=!s.expanded)}),e(1),t()}if(l&2){let x=P();n(),re(" ",x.expanded?"Hide Code":"View Code"," ")}}function xm(l,o){if(l&1&&r(0,"cookbook-code-viewer",1),l&2){let x=P();a("html",x.html)}}function um(l,o){if(l&1&&r(0,"cookbook-code-viewer",2),l&2){let x=P();a("ts",x.ts)}}function bm(l,o){if(l&1&&r(0,"cookbook-code-viewer",3),l&2){let x=P();a("css",x.css)}}var v=(()=>{let o=class o{};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-example-viewer"]],inputs:{html:"html",ts:"ts",css:"css",expanded:"expanded"},ngContentSelectors:cm,decls:5,vars:4,consts:[["kirby-button","","size","sm","attentionLevel","3"],[3,"html"],[3,"ts"],[3,"css"],["kirby-button","","size","sm","attentionLevel","3",3,"click"]],template:function(s,m){s&1&&(Oe(),we(0),O(1,hm,2,1,"button",0),O(2,xm,1,1,"cookbook-code-viewer",1),O(3,um,1,1,"cookbook-code-viewer",2),O(4,bm,1,1,"cookbook-code-viewer",3)),s&2&&(n(),D(m.html||m.ts||m.css?1:-1),n(),D(m.expanded&&m.html?2:-1),n(),D(m.expanded&&m.ts?3:-1),n(),D(m.expanded&&m.css?4:-1))},dependencies:[Le,C],styles:["[_nghost-%COMP%]{display:block}button[kirby-button][_ngcontent-%COMP%]{display:block}"]});let l=o;return l})();var gm=(l,o)=>o.name;function fm(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.name)}}function km(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.description)}}function vm(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.type)}}function ym(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.default)}}function Em(l,o){if(l&1&&(M(0,"td",1)(1,"code"),e(2),_()()),l&2){let x=P().$implicit;n(2),S(x.name)}}function wm(l,o){if(l&1&&(M(0,"td",2),e(1),_()),l&2){let x=P().$implicit;n(),S(x.description)}}function Sm(l,o){if(l&1&&(M(0,"code"),e(1),_()),l&2){let x=P(2).$implicit;n(),S(x.type.join(" | "))}}function Cm(l,o){if(l&1&&(M(0,"pre")(1,"code"),e(2),_()()),l&2){let x=P(2).$implicit;n(2),S(x.type.join(" | "))}}function _m(l,o){if(l&1&&(M(0,"td"),O(1,Sm,2,1,"code"),O(2,Cm,3,1,"pre"),_()),l&2){let x=P().$implicit;n(),D(!x.preserveTypeWhitespaces&&x.type?1:-1),n(),D(x.preserveTypeWhitespaces&&x.type?2:-1)}}function Mm(l,o){if(l&1&&(M(0,"code"),e(1),_()),l&2){let x=P(2).$implicit;n(),S(x.defaultValue)}}function Pm(l,o){if(l&1&&(M(0,"td"),O(1,Mm,2,1,"code"),_()),l&2){let x=P().$implicit;n(),D(x.defaultValue?1:-1)}}function Tm(l,o){if(l&1&&(M(0,"tr"),O(1,Em,3,1,"td",1),O(2,wm,2,1,"td",2),O(3,_m,3,2,"td"),O(4,Pm,2,1,"td"),_()),l&2){let x=P();n(),D(x.columns.name?1:-1),n(),D(x.columns.description?2:-1),n(),D(x.columns.type?3:-1),n(),D(x.columns.default?4:-1)}}var f=(()=>{let o=class o{constructor(){this.columns={name:"Attribute",description:"Description",type:"Type",default:"Default"}}};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-api-description-properties"]],inputs:{properties:"properties",columns:"columns"},decls:9,vars:4,consts:[[1,"api-description"],[1,"property-name"],[1,"description"]],template:function(s,m){s&1&&(M(0,"table",0)(1,"thead"),O(2,fm,2,1,"th"),O(3,km,2,1,"th"),O(4,vm,2,1,"th"),O(5,ym,2,1,"th"),_(),M(6,"tbody"),F(7,Tm,5,4,"tr",null,gm),_()()),s&2&&(n(2),D(m.columns.name?2:-1),n(),D(m.columns.description?3:-1),n(),D(m.columns.type?4:-1),n(),D(m.columns.default?5:-1),n(2),z(m.properties))},styles:["[_nghost-%COMP%]{display:block;width:100%;overflow-x:auto}table.api-description[_ngcontent-%COMP%]{margin-bottom:var(--kirby-spacing-xl);border-spacing:0;border-collapse:collapse;width:100%}table.api-description[_ngcontent-%COMP%]   thead[_ngcontent-%COMP%]{background-color:var(--kirby-light-tint)}table.api-description[_ngcontent-%COMP%]   th[_ngcontent-%COMP%]{font-weight:var(--kirby-font-weight-normal);border:none;text-align:left;height:var(--kirby-spacing-xl);border-bottom:none}table.api-description[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], table.api-description[_ngcontent-%COMP%]   th[_ngcontent-%COMP%]{border:1px solid var(--kirby-medium);padding:.5rem 1rem}table.api-description[_ngcontent-%COMP%]   .property-name[_ngcontent-%COMP%]   code[_ngcontent-%COMP%]{white-space:nowrap}.description[_ngcontent-%COMP%]{white-space:pre-line}"]});let l=o;return l})();var nr={selector:"cookbook-item-example-disclosure-animation",template:`<kirby-card [hasPadding]="true" (click)="isExpanded = !isExpanded">
+import{a as ie,b as Fa}from"./chunk-5ZK6SC65.js";import{$ as en,$a as eo,$b as Zo,$c as it,A as Pi,Aa as Pn,Ab as So,Ac as va,B as Ti,Ba as Tn,Bb as Co,Bc as ya,C as Oi,Ca as On,Cb as _o,Cc as Ea,D as Di,Da as Dn,Db as Mo,Dc as wa,E as Vi,Ea as Vn,Eb as Po,Ec as Sa,F as Ii,Fa as In,Fb as To,Fc as Ca,G as Ai,Ga as An,Gb as Oo,Gc as _a,H as Li,Ha as Ln,Hb as Do,Hc as Ma,I as Fi,Ia as Fn,Ib as je,Ic as Pa,J as zi,Ja as zn,Jb as Vo,Jc as Ta,K as Hi,Ka as Hn,Kb as Io,Kc as Oa,L as Bi,La as Bn,Lb as Ao,Lc as Da,M as Ri,Ma as Rn,Mb as Lo,Mc as Va,N as Ni,Na as Ne,Nb as Fo,Nc as Ia,O as Wi,Oa as Nn,Ob as Ge,Oc as Aa,P as Ui,Pa as Wn,Pb as tt,Pc as La,Q as ji,Qa as Un,Qb as zo,Qc as za,R as Re,Ra as jn,Rb as Ho,Rc as Ha,S as Gi,Sa as Gn,Sb as Ce,Sc as Ba,T as Ki,Ta as Kn,Tb as Bo,Tc as Ra,U as Zi,Ua as Zn,Ub as Ro,Uc as Na,V as qi,Va as qn,Vb as No,Vc as Wa,W as $i,Wa as $n,Wb as Wo,Wc as Ua,X as Yi,Xa as Yn,Xb as Uo,Xc as ja,Y as Qi,Ya as Qn,Yb as jo,Yc as Ga,Z as Ji,Za as Jn,Zb as Go,Zc as Ka,_ as Xi,_a as Xn,_b as Ko,_c as Za,a as oi,aa as tn,ab as to,ac as qo,ad as qa,b as ai,ba as nn,bb as io,bc as $o,bd as $a,c as ri,ca as on,cb as We,cc as Yo,cd as Ya,d as li,da as an,db as Ue,dc as Qo,dd as Qa,e as mi,ea as rn,eb as Se,ec as Jo,ed as Ja,f as si,fa as ln,fb as no,fc as Xo,fd as Xa,g as di,ga as mn,gb as oo,gc as ea,gd as er,h as pi,ha as sn,hb as ao,hc as ta,hd as tr,i as ci,ia as dn,ib as ro,ic as ia,id as ir,j as hi,ja as pn,jb as lo,jc as na,k as xi,ka as cn,kb as mo,kc as oa,l as ui,la as hn,lb as so,lc as aa,ma as xn,mb as po,mc as ra,n as bi,na as un,nc as la,o as gi,oa as bn,ob as co,oc as ma,p as fi,pa as gn,pb as ho,pc as sa,q as ki,qa as fn,qb as xo,qc as da,r as vi,ra as kn,rb as uo,rc as pa,s as Be,sa as vn,sb as bo,sc as ca,t as yi,ta as yn,tb as go,tc as ha,u as Ei,ua as En,ub as fo,uc as xa,v as wi,va as wn,vb as ko,vc as ua,w as Si,wa as Sn,wb as vo,wc as ba,x as Ci,xa as Cn,xb as yo,xc as ga,y as _i,ya as _n,yb as Eo,yc as fa,z as Mi,za as Mn,zb as wo,zc as ka}from"./chunk-6UVVWJU4.js";import{$a as gt,Ad as xe,Ba as N,Be as ti,C as y,Ca as ce,Cb as wt,Ce as $,D as E,Da as w,De as ii,E as me,Ea as P,Ec as Le,Ed as ye,Ee as ni,F as se,Fa as Oe,Fb as St,Ga as we,Gb as Ct,Gc as Ut,Gd as Fe,Ge as C,Ha as pt,Hd as ze,Ia as ct,Ib as Qe,Ic as G,Ja as ht,Jb as Je,Jc as te,Ka as d,Kb as _t,Kd as Jt,L as qe,La as q,M as lt,Ma as xt,N as mt,Na as ge,Oa as e,Od as Xt,P as Te,Pa as S,Qa as re,Qb as Mt,Ra as j,Rb as Pt,Sa as ut,T as be,Ta as Y,Tb as Ie,U as st,Ua as Q,Va as J,Wa as ee,Wb as Tt,X as n,Xa as De,Xb as Ot,Xc as R,Yb as Dt,Yc as jt,Za as I,Zb as Vt,Zc as Gt,_a as bt,_b as It,_c as Kt,ab as fe,ba as de,bc as At,cb as ft,cc as Ae,da as u,db as Ve,dc as Lt,ec as Ft,ed as Zt,gc as zt,ha as $e,hc as Ht,ic as A,id as et,ie as ei,ka as Ye,l as rt,la as O,lb as kt,ma as D,mb as vt,na as dt,od as ve,pa as F,pc as Bt,qa as z,qb as yt,qc as ke,qd as qt,ra as a,sa as i,sb as Et,sd as $t,ta as t,tc as Rt,td as he,ua as r,va as M,vd as Yt,wa as _,wc as Nt,wd as Qt,we as ue,xa as pe,xe as He,yc as Xe,zc as Wt}from"./chunk-TKQBB4CB.js";import{a as X,b as oe}from"./chunk-ZSHLT67R.js";var cm=["*"];function hm(l,o){if(l&1){let x=N();i(0,"button",4),w("click",function(){y(x);let s=P();return E(s.expanded=!s.expanded)}),e(1),t()}if(l&2){let x=P();n(),re(" ",x.expanded?"Hide Code":"View Code"," ")}}function xm(l,o){if(l&1&&r(0,"cookbook-code-viewer",1),l&2){let x=P();a("html",x.html)}}function um(l,o){if(l&1&&r(0,"cookbook-code-viewer",2),l&2){let x=P();a("ts",x.ts)}}function bm(l,o){if(l&1&&r(0,"cookbook-code-viewer",3),l&2){let x=P();a("css",x.css)}}var v=(()=>{let o=class o{};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-example-viewer"]],inputs:{html:"html",ts:"ts",css:"css",expanded:"expanded"},ngContentSelectors:cm,decls:5,vars:4,consts:[["kirby-button","","size","sm","attentionLevel","3"],[3,"html"],[3,"ts"],[3,"css"],["kirby-button","","size","sm","attentionLevel","3",3,"click"]],template:function(s,m){s&1&&(Oe(),we(0),O(1,hm,2,1,"button",0),O(2,xm,1,1,"cookbook-code-viewer",1),O(3,um,1,1,"cookbook-code-viewer",2),O(4,bm,1,1,"cookbook-code-viewer",3)),s&2&&(n(),D(m.html||m.ts||m.css?1:-1),n(),D(m.expanded&&m.html?2:-1),n(),D(m.expanded&&m.ts?3:-1),n(),D(m.expanded&&m.css?4:-1))},dependencies:[Le,C],styles:["[_nghost-%COMP%]{display:block}button[kirby-button][_ngcontent-%COMP%]{display:block}"]});let l=o;return l})();var gm=(l,o)=>o.name;function fm(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.name)}}function km(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.description)}}function vm(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.type)}}function ym(l,o){if(l&1&&(M(0,"th"),e(1),_()),l&2){let x=P();n(),S(x.columns.default)}}function Em(l,o){if(l&1&&(M(0,"td",1)(1,"code"),e(2),_()()),l&2){let x=P().$implicit;n(2),S(x.name)}}function wm(l,o){if(l&1&&(M(0,"td",2),e(1),_()),l&2){let x=P().$implicit;n(),S(x.description)}}function Sm(l,o){if(l&1&&(M(0,"code"),e(1),_()),l&2){let x=P(2).$implicit;n(),S(x.type.join(" | "))}}function Cm(l,o){if(l&1&&(M(0,"pre")(1,"code"),e(2),_()()),l&2){let x=P(2).$implicit;n(2),S(x.type.join(" | "))}}function _m(l,o){if(l&1&&(M(0,"td"),O(1,Sm,2,1,"code"),O(2,Cm,3,1,"pre"),_()),l&2){let x=P().$implicit;n(),D(!x.preserveTypeWhitespaces&&x.type?1:-1),n(),D(x.preserveTypeWhitespaces&&x.type?2:-1)}}function Mm(l,o){if(l&1&&(M(0,"code"),e(1),_()),l&2){let x=P(2).$implicit;n(),S(x.defaultValue)}}function Pm(l,o){if(l&1&&(M(0,"td"),O(1,Mm,2,1,"code"),_()),l&2){let x=P().$implicit;n(),D(x.defaultValue?1:-1)}}function Tm(l,o){if(l&1&&(M(0,"tr"),O(1,Em,3,1,"td",1),O(2,wm,2,1,"td",2),O(3,_m,3,2,"td"),O(4,Pm,2,1,"td"),_()),l&2){let x=P();n(),D(x.columns.name?1:-1),n(),D(x.columns.description?2:-1),n(),D(x.columns.type?3:-1),n(),D(x.columns.default?4:-1)}}var f=(()=>{let o=class o{constructor(){this.columns={name:"Attribute",description:"Description",type:"Type",default:"Default"}}};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-api-description-properties"]],inputs:{properties:"properties",columns:"columns"},decls:9,vars:4,consts:[[1,"api-description"],[1,"property-name"],[1,"description"]],template:function(s,m){s&1&&(M(0,"table",0)(1,"thead"),O(2,fm,2,1,"th"),O(3,km,2,1,"th"),O(4,vm,2,1,"th"),O(5,ym,2,1,"th"),_(),M(6,"tbody"),F(7,Tm,5,4,"tr",null,gm),_()()),s&2&&(n(2),D(m.columns.name?2:-1),n(),D(m.columns.description?3:-1),n(),D(m.columns.type?4:-1),n(),D(m.columns.default?5:-1),n(2),z(m.properties))},styles:["[_nghost-%COMP%]{display:block;width:100%;overflow-x:auto}table.api-description[_ngcontent-%COMP%]{margin-bottom:var(--kirby-spacing-xl);border-spacing:0;border-collapse:collapse;width:100%}table.api-description[_ngcontent-%COMP%]   thead[_ngcontent-%COMP%]{background-color:var(--kirby-light-tint)}table.api-description[_ngcontent-%COMP%]   th[_ngcontent-%COMP%]{font-weight:var(--kirby-font-weight-normal);border:none;text-align:left;height:var(--kirby-spacing-xl);border-bottom:none}table.api-description[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], table.api-description[_ngcontent-%COMP%]   th[_ngcontent-%COMP%]{border:1px solid var(--kirby-medium);padding:.5rem 1rem}table.api-description[_ngcontent-%COMP%]   .property-name[_ngcontent-%COMP%]   code[_ngcontent-%COMP%]{white-space:nowrap}.description[_ngcontent-%COMP%]{white-space:pre-line}"]});let l=o;return l})();var nr={selector:"cookbook-item-example-disclosure-animation",template:`<kirby-card [hasPadding]="true" (click)="isExpanded = !isExpanded">
   <kirby-card-header [hasPadding]="false">
     <kirby-item disclosure="arrow-down" [rotateIcon]="isExpanded">
       <p class="kirby-item-title">Disclosure animation example</p>
@@ -1933,7 +1933,7 @@ private createChart() {
 }`},jl=(()=>{let o=class o{constructor(){this.template=Ul.template,this.codeSnippet=Ul.codeSnippet,this.canvasId="configBarBaseCanvas"+Math.random()*1e3,this.demoData=ie.barDemoData}ngAfterViewInit(){this.createChart()}ngOnDestroy(){this._chart.destroy()}createChart(){let p=ti.baseConfig;p=oe(X({},p),{options:X({},p.options),data:{datasets:[{data:this.demoData}],labels:this.demoData.map(()=>"")}}),this._chart=new ue(this.canvasId,p)}};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-chart-example-config-base-bar"]],decls:2,vars:2,consts:[[2,"position","relative","height","300px"],[3,"id"]],template:function(s,m){s&1&&(M(0,"div",0),pe(1,"canvas",1),_()),s&2&&(n(),ce("id",ee(m.canvasId)))},encapsulation:2});let l=o;return l})();var Gl=(()=>{let o=class o{constructor(){this.data=ie.barDemoDataString}};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-chart-stock-config-showcase"]],decls:19,vars:6,consts:[["baseBarConfigExample",""],["routerLink","../../guides/chart-config"],[3,"inlineLabel","ts","language"],[3,"hasPadding"],[3,"html","ts"]],template:function(s,m){if(s&1&&(i(0,"h2"),e(1,"Bar Chart built from configs"),t(),i(2,"p"),e(3," This page describes how to implement various types of bar charts using the Kirby standard configurations. If you would like a guide on how to get started on Kirby chart configs, go to "),i(4,"a",1),e(5,"this guide"),t(),e(6,` .
 `),t(),i(7,"h3"),e(8,"Demo data"),t(),i(9,"p"),e(10,"The data used to exemplify these charts is displayed below:"),t(),i(11,"p"),r(12,"cookbook-code-viewer",2),t(),i(13,"h3"),e(14,"Bar chart"),t(),i(15,"kirby-card",3)(16,"cookbook-example-viewer",4),r(17,"cookbook-chart-example-config-base-bar",null,0),t()()),s&2){let h=d(18);n(12),a("inlineLabel",!0)("ts",m.data)("language","ts"),n(3),a("hasPadding",!0),n(),a("html",h.template)("ts",h.codeSnippet)}},dependencies:[A,C,te,G,v,jl],encapsulation:2});let l=o;return l})();var Kl=(()=>{let o=class o{constructor(){this.actionGroupTemplate=Ya.template,this.emphasizedActionGroupTemplate=$a.template,this.customActionsTemplate=qa.template,this.interactiveTitleTemplate=it.template,this.interactiveTitleSnippet=it.codeSnippet,this.properties=[{name:"title",description:"A string that is used as the title.",type:["string"],defaultValue:""},{name:"value",description:"A string that is used as the value.",type:["string"],defaultValue:""},{name:"valueUnit",description:"A string that is used to describe the units of the value.",type:["string"],defaultValue:""},{name:"subtitle1",description:"A string that is used as the first subtitle.",type:["string"],defaultValue:""},{name:"subtitle2",description:"A string that is used as the second subtitle.",type:["string"],defaultValue:""},{name:"truncateSubtitle",description:"Option to allow truncation of the subtitle. When set to true, the subtitle will be truncated with an ellipsis instead of wrapping to the next line.",type:["boolean"],defaultValue:"false"},{name:"centered",description:"A boolean that describe whether the header should be centered.",type:["boolean"],defaultValue:"false"},{name:"titleMaxLines",description:"The maximum number of lines allowed for the title. The font size will be progressively reduced to fit. If the text still overflows, it will be truncated with an ellipsis. Only the visual size changes \u2014 no heading levels are affected.",type:["number"],defaultValue:""},{name:"emphasizeActions",description:'A boolean that describe whether to emphasize the action buttons\u2014i.e. all buttons will be shown and not automatically collapse into a "more" menu. The buttons will also be visible under the title area on small screens. Keep in mind that this setting use more screen real estate than the default option.\n\n**Please note** With this setting enabled you should ensure the action buttons can fit on the screen\u2014or collapse secondary actions into a "more" menu using the `visibleActions` property of kirby-action-group.',type:["boolean"],defaultValue:"false"}],this.directiveColumns={name:"Name",description:"Description"},this.directives=[{name:"*kirbyHeaderActions",description:"The `*kirbyHeaderActions` directive should be applied to the host or container element (e.g. `kirby-action-group` or an `ng-container`) for the page and header components to render the actions in both locations"},{name:"*kirbyHeaderCustomSection",description:"The `*kirbyHeaderCustomSection` directive can be applied to any host or container element which will then be shown just below the title (and any subtitles) at the top of the page."},{name:"*kirbyHeaderTitleActionIcon",description:"For an interactive title (i.e. handling the `titleClick` event) the `*kirbyHeaderTitleActionIcon` directive can be applied to a `kirby-icon` element which will then be shown next to the title element for affordance.\n\n**Please note: this only applies in key value scenarios."},{name:"*kirbyHeaderCustomFlag",description:"For a custom flag to be shown in the flag section the `*kirbyHeaderCustomFlag` directive can be applied to any host or container element.\n\n**Please note: You should not have both a custom flag and kirby-flag present at the same time."}],this.events=[{name:"titleClick",description:`Emitted when the title element is clicked (in either the header or the toolbar).
 
-**Please note: this only applies in key value scenarios.`,signature:"EventEmitter<PointerEvent>"}],this.actionGroupProperties=[{name:"visibleActions",description:'A number that controls how many action buttons are shown. Any additional buttons will be collapsed into a "more" menu.',type:["number"],defaultValue:""}]}scrollTo(p){return p.scrollIntoView({behavior:"smooth"}),!1}};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-header-showcase"]],decls:471,vars:29,consts:[["defaultExample",""],["truncateSubtitleExample",""],["subtitleListExample",""],["flagExample",""],["customFlagExample",""],["valueExample",""],["avatarExample",""],["progressCircleExample",""],["titleScalingExample",""],["actionGroup",""],["emphasizeActions",""],["customActions",""],["customSectionExample",""],["interactiveTitle",""],["combinedExample",""],["actionGroupAPI",""],[1,"example"],[1,"header-example-container"],[3,"html"],[1,"example-frame","no-padding"],[3,"html","css"],["href","#",3,"click"],["viewMode","full-size","src","/examples/page/header-and-action-group","showExternalLink","true",3,"showViewModeToggle"],["viewMode","device","src","/examples/page/header-and-emphasized-action-group","showExternalLink","true",3,"showViewModeToggle"],["viewMode","full-size","src","/examples/page/header-and-custom-actions","showExternalLink","true",3,"showViewModeToggle"],["viewMode","full-size","src","/examples/page/header-and-interactive-title","showExternalLink","true",3,"showViewModeToggle"],[3,"html","ts"],[3,"imports"],[3,"properties"],[3,"columns","properties"],[3,"events"]],template:function(s,m){if(s&1){let h=N();i(0,"div",16),e(1,`
+**Please note: this only applies in key value scenarios.`,signature:"EventEmitter<PointerEvent>"}],this.actionGroupProperties=[{name:"visibleActions",description:'A number that controls how many action buttons are shown. Any additional buttons will be collapsed into a "more" menu.',type:["number"],defaultValue:""}]}scrollTo(p){return p.scrollIntoView({behavior:"smooth"}),!1}};o.\u0275fac=function(s){return new(s||o)},o.\u0275cmp=u({type:o,selectors:[["cookbook-header-showcase"]],decls:474,vars:29,consts:[["defaultExample",""],["truncateSubtitleExample",""],["subtitleListExample",""],["flagExample",""],["customFlagExample",""],["valueExample",""],["avatarExample",""],["progressCircleExample",""],["titleScalingExample",""],["actionGroup",""],["emphasizeActions",""],["customActions",""],["customSectionExample",""],["interactiveTitle",""],["combinedExample",""],["actionGroupAPI",""],[1,"example"],[1,"header-example-container"],[3,"html"],[1,"example-frame","no-padding"],[3,"html","css"],["href","#",3,"click"],["viewMode","full-size","src","/examples/page/header-and-action-group","showExternalLink","true",3,"showViewModeToggle"],["viewMode","device","src","/examples/page/header-and-emphasized-action-group","showExternalLink","true",3,"showViewModeToggle"],["viewMode","full-size","src","/examples/page/header-and-custom-actions","showExternalLink","true",3,"showViewModeToggle"],["viewMode","full-size","src","/examples/page/header-and-interactive-title","showExternalLink","true",3,"showViewModeToggle"],[3,"html","ts"],[3,"imports"],[3,"properties"],[3,"columns","properties"],[3,"events"]],template:function(s,m){if(s&1){let h=N();i(0,"div",16),e(1,`
   `),i(2,"div",17),e(3,`
     `),i(4,"p"),e(5,`
       Header is a component that manages the layout of the header section of
@@ -1953,340 +1953,345 @@ private createChart() {
 
   `),i(23,"h2"),e(24,"Truncate Subtitle"),t(),e(25,`
 
-  `),i(26,"cookbook-example-viewer",18),e(27,`
-    `),i(28,"div",19),e(29,`
-      `),r(30,"cookbook-header-example-truncate-subtitle",null,1),e(32,`
-    `),t(),e(33,`
-  `),t(),e(34,`
+  `),i(26,"p"),e(27,`
+    Option to allow truncation of the subtitle. When set to true, the subtitle will be truncated
+    with an ellipsis instead of default wrapping to the next line.
+  `),t(),e(28,`
 
-  `),i(35,"div",17),e(36,`
-    `),i(37,"h2"),e(38,"Subtitle list"),t(),e(39,`
+  `),i(29,"cookbook-example-viewer",18),e(30,`
+    `),i(31,"div",19),e(32,`
+      `),r(33,"cookbook-header-example-truncate-subtitle",null,1),e(35,`
+    `),t(),e(36,`
+  `),t(),e(37,`
 
-    `),i(40,"p"),e(41,`
+  `),i(38,"div",17),e(39,`
+    `),i(40,"h2"),e(41,"Subtitle list"),t(),e(42,`
+
+    `),i(43,"p"),e(44,`
       If you have a list of subtitles\u2014e.g. full names as in the example below\u2014where each string
       shouldn't wrap in itself, but the string as a whole can wrap to a new line, you can specify
       them as a string array.
-    `),t(),e(42,`
-    `),i(43,"p"),e(44,"Try rezising the header below and watch how the subtitles wrap and truncate:"),t(),e(45,`
-    `),i(46,"cookbook-example-viewer",18),e(47,`
-      `),i(48,"div",19),e(49,`
-        `),r(50,"cookbook-header-example-subtitle-list",null,2),e(52,`
-      `),t(),e(53,`
-    `),t(),e(54,`
-  `),t(),e(55,`
+    `),t(),e(45,`
+    `),i(46,"p"),e(47,"Try rezising the header below and watch how the subtitles wrap and truncate:"),t(),e(48,`
+    `),i(49,"cookbook-example-viewer",18),e(50,`
+      `),i(51,"div",19),e(52,`
+        `),r(53,"cookbook-header-example-subtitle-list",null,2),e(55,`
+      `),t(),e(56,`
+    `),t(),e(57,`
+  `),t(),e(58,`
 
-  `),i(56,"div",17),e(57,`
-    `),i(58,"h2"),e(59,"Flag"),t(),e(60,`
-    `),i(61,"p"),e(62,`
+  `),i(59,"div",17),e(60,`
+    `),i(61,"h2"),e(62,"Flag"),t(),e(63,`
+    `),i(64,"p"),e(65,`
       A flag can be used to indicate a status. To use a flag you simply add a
-      `),i(63,"code"),e(64,"<kirby-flag>"),t(),e(65,`
+      `),i(66,"code"),e(67,"<kirby-flag>"),t(),e(68,`
       in the header which will position the flag correctly and manage spacing.
-    `),t(),e(66,`
-    `),i(67,"cookbook-example-viewer",18),e(68,`
-      `),i(69,"div",19),e(70,`
-        `),r(71,"cookbook-header-example-flag",null,3),e(73,`
-      `),t(),e(74,`
-    `),t(),e(75,`
-  `),t(),e(76,`
+    `),t(),e(69,`
+    `),i(70,"cookbook-example-viewer",18),e(71,`
+      `),i(72,"div",19),e(73,`
+        `),r(74,"cookbook-header-example-flag",null,3),e(76,`
+      `),t(),e(77,`
+    `),t(),e(78,`
+  `),t(),e(79,`
 
-  `),i(77,"div",17),e(78,`
-    `),i(79,"h2"),e(80,"Custom Flag"),t(),e(81,`
-    `),i(82,"p"),e(83,`
+  `),i(80,"div",17),e(81,`
+    `),i(82,"h2"),e(83,"Custom Flag"),t(),e(84,`
+    `),i(85,"p"),e(86,`
       Custom markup can also be added to the header as a flag. This can be achieved by applying the
       directive
-      `),i(84,"code"),e(85,"*kirbyHeaderCustomFlag"),t(),e(86,`
+      `),i(87,"code"),e(88,"*kirbyHeaderCustomFlag"),t(),e(89,`
       to your custom flag markup.
-    `),t(),e(87,`
-    `),i(88,"cookbook-example-viewer",20),e(89,`
-      `),i(90,"div",19),e(91,`
-        `),r(92,"cookbook-header-example-custom-flag",null,4),e(94,`
-      `),t(),e(95,`
-    `),t(),e(96,`
-  `),t(),e(97,`
+    `),t(),e(90,`
+    `),i(91,"cookbook-example-viewer",20),e(92,`
+      `),i(93,"div",19),e(94,`
+        `),r(95,"cookbook-header-example-custom-flag",null,4),e(97,`
+      `),t(),e(98,`
+    `),t(),e(99,`
+  `),t(),e(100,`
 
-  `),i(98,"div",17),e(99,`
-    `),i(100,"h2"),e(101,"Key value"),t(),e(102,`
-    `),i(103,"p"),e(104,`
+  `),i(101,"div",17),e(102,`
+    `),i(103,"h2"),e(104,"Key value"),t(),e(105,`
+    `),i(106,"p"),e(107,`
       In some cases a number is the primary information on a page. When that's the case you should
       use the
-      `),i(105,"code"),e(106,"value"),t(),e(107,`
+      `),i(108,"code"),e(109,"value"),t(),e(110,`
       prop
-      `),i(108,"em"),e(109,"in addition to"),t(),e(110,`
+      `),i(111,"em"),e(112,"in addition to"),t(),e(113,`
       the
-      `),i(111,"code"),e(112,"title"),t(),e(113,`
+      `),i(114,"code"),e(115,"title"),t(),e(116,`
       prop. This will highlight the value on the page and make the title secondary as shown in the
       example below:
-    `),t(),e(114,`
-    `),i(115,"cookbook-example-viewer",18),e(116,`
-      `),i(117,"div",19),e(118,`
-        `),r(119,"cookbook-header-example-value",null,5),e(121,`
-      `),t(),e(122,`
-    `),t(),e(123,`
-    `),i(124,"p"),e(125,`
-      `),i(126,"em"),e(127,`
+    `),t(),e(117,`
+    `),i(118,"cookbook-example-viewer",18),e(119,`
+      `),i(120,"div",19),e(121,`
+        `),r(122,"cookbook-header-example-value",null,5),e(124,`
+      `),t(),e(125,`
+    `),t(),e(126,`
+    `),i(127,"p"),e(128,`
+      `),i(129,"em"),e(130,`
         See also:
-        `),i(128,"a",21),w("click",function(){y(h);let c=d(382);return E(m.scrollTo(c))}),e(129,`
+        `),i(131,"a",21),w("click",function(){y(h);let c=d(385);return E(m.scrollTo(c))}),e(132,`
           Interactive Title (in key value scenarios)
-        `),t(),e(130,`
-      `),t(),e(131,`
-    `),t(),e(132,`
-  `),t(),e(133,`
+        `),t(),e(133,`
+      `),t(),e(134,`
+    `),t(),e(135,`
+  `),t(),e(136,`
 
-  `),i(134,"div",17),e(135,`
-    `),i(136,"h2"),e(137,"Avatar"),t(),e(138,`
-    `),i(139,"p"),e(140,`
+  `),i(137,"div",17),e(138,`
+    `),i(139,"h2"),e(140,"Avatar"),t(),e(141,`
+    `),i(142,"p"),e(143,`
       You can use an avatar within the header, e.g. to show a category for the content. You simply
       add a
-      `),i(141,"code"),e(142,"kirby-avatar"),t(),e(143,`
+      `),i(144,"code"),e(145,"kirby-avatar"),t(),e(146,`
       in the header which will position the avatar correctly and manage spacing.
-      `),r(144,"br"),e(145,`
-      `),i(146,"em"),e(147,`
-        `),i(148,"strong"),e(149,"Please note:"),t(),e(150,`
+      `),r(147,"br"),e(148,`
+      `),i(149,"em"),e(150,`
+        `),i(151,"strong"),e(152,"Please note:"),t(),e(153,`
         This will change the layout to centered.
-      `),t(),e(151,`
-    `),t(),e(152,`
-    `),i(153,"cookbook-example-viewer",18),e(154,`
-      `),i(155,"div",19),e(156,`
-        `),r(157,"cookbook-header-example-avatar",null,6),e(159,`
-      `),t(),e(160,`
-    `),t(),e(161,`
-  `),t(),e(162,`
-  `),i(163,"div",17),e(164,`
-    `),i(165,"h3"),e(166,"Progress Circle with Avatar"),t(),e(167,`
-    `),i(168,"p"),e(169,`
+      `),t(),e(154,`
+    `),t(),e(155,`
+    `),i(156,"cookbook-example-viewer",18),e(157,`
+      `),i(158,"div",19),e(159,`
+        `),r(160,"cookbook-header-example-avatar",null,6),e(162,`
+      `),t(),e(163,`
+    `),t(),e(164,`
+  `),t(),e(165,`
+  `),i(166,"div",17),e(167,`
+    `),i(168,"h3"),e(169,"Progress Circle with Avatar"),t(),e(170,`
+    `),i(171,"p"),e(172,`
       The avatar can also be nested within a
-      `),i(170,"code"),e(171,"kirby-progress-circle"),t(),e(172,`
+      `),i(173,"code"),e(174,"kirby-progress-circle"),t(),e(175,`
       to show progress:
-    `),t(),e(173,`
-    `),i(174,"cookbook-example-viewer",18),e(175,`
-      `),i(176,"div",19),e(177,`
-        `),r(178,"cookbook-header-example-progress-circle-with-avatar",null,7),e(180,`
-      `),t(),e(181,`
-    `),t(),e(182,`
-  `),t(),e(183,`
+    `),t(),e(176,`
+    `),i(177,"cookbook-example-viewer",18),e(178,`
+      `),i(179,"div",19),e(180,`
+        `),r(181,"cookbook-header-example-progress-circle-with-avatar",null,7),e(183,`
+      `),t(),e(184,`
+    `),t(),e(185,`
+  `),t(),e(186,`
 
-  `),i(184,"div",17),e(185,`
-    `),i(186,"h2"),e(187,"Scaling of title"),t(),e(188,`
-    `),i(189,"p"),e(190,`
+  `),i(187,"div",17),e(188,`
+    `),i(189,"h2"),e(190,"Scaling of title"),t(),e(191,`
+    `),i(192,"p"),e(193,`
       It is possible to enable auto-scaling of the header title. This will progressively reduce the
       font size and line height to fit the text within the configured number of lines.
-    `),t(),e(191,`
-    `),i(192,"p"),e(193,`
+    `),t(),e(194,`
+    `),i(195,"p"),e(196,`
       If the text still cannot fit after scaling to the smallest size, it will be truncated using an
       ellipsis (
-      `),i(194,"code"),e(195,"\u2026"),t(),e(196,`
+      `),i(197,"code"),e(198,"\u2026"),t(),e(199,`
       ).
-    `),t(),e(197,`
-    `),i(198,"p"),e(199,`
+    `),t(),e(200,`
+    `),i(201,"p"),e(202,`
       This can be configured by setting the
-      `),i(200,"code"),e(201,'titleMaxLines="NUMBER OF MAXIMUM LINES"'),t(),e(202,`
+      `),i(203,"code"),e(204,'titleMaxLines="NUMBER OF MAXIMUM LINES"'),t(),e(205,`
       attribute of
-      `),i(203,"code"),e(204,"kirby-header"),t(),e(205,`
+      `),i(206,"code"),e(207,"kirby-header"),t(),e(208,`
       .
-    `),t(),e(206,`
-    `),i(207,"cookbook-example-viewer",18),e(208,`
-      `),i(209,"div",19),e(210,`
-        `),r(211,"cookbook-header-example-title-scaling",null,8),e(213,`
-      `),t(),e(214,`
-    `),t(),e(215,`
-  `),t(),e(216,`
+    `),t(),e(209,`
+    `),i(210,"cookbook-example-viewer",18),e(211,`
+      `),i(212,"div",19),e(213,`
+        `),r(214,"cookbook-header-example-title-scaling",null,8),e(216,`
+      `),t(),e(217,`
+    `),t(),e(218,`
+  `),t(),e(219,`
 
-  `),i(217,"div",17),e(218,`
-    `),i(219,"h2"),e(220,"Actions"),t(),e(221,`
-    `),i(222,"p"),e(223,`
+  `),i(220,"div",17),e(221,`
+    `),i(222,"h2"),e(223,"Actions"),t(),e(224,`
+    `),i(225,"p"),e(226,`
       Actions can be included in the header area and will by default always be shown in the toolbar
       on small screens. The actions place themselves in the toolbar to the right. It is designed to
       optimize the screen real estate for the content area on mobile phones.
-    `),t(),e(224,`
-
-    `),i(225,"p"),e(226,`
-      On larger screen sizes the actions starts out in the header area, before moving to the toolbar
-      when the page is scrolled past the actions.
     `),t(),e(227,`
 
-    `),i(228,"p"),e(229,"Actions can be suppplied through:"),t(),e(230,`
-    `),i(231,"ul"),e(232,`
-      `),i(233,"li"),e(234,`
-        `),i(235,"a",21),w("click",function(){y(h);let c=d(265);return E(m.scrollTo(c))}),e(236,"Action Group component - common use case"),t(),e(237,`
-      `),t(),e(238,`
-      `),i(239,"li"),e(240,`
-        `),i(241,"a",21),w("click",function(){y(h);let c=d(326);return E(m.scrollTo(c))}),e(242,"Custom Actions - complex scenarios"),t(),e(243,`
-      `),t(),e(244,`
-    `),t(),e(245,`
+    `),i(228,"p"),e(229,`
+      On larger screen sizes the actions starts out in the header area, before moving to the toolbar
+      when the page is scrolled past the actions.
+    `),t(),e(230,`
 
-    `),i(246,"p"),e(247,`
-      `),i(248,"em"),e(249,`
-        `),i(250,"strong"),e(251,"Please note:"),t(),e(252,`
+    `),i(231,"p"),e(232,"Actions can be suppplied through:"),t(),e(233,`
+    `),i(234,"ul"),e(235,`
+      `),i(236,"li"),e(237,`
+        `),i(238,"a",21),w("click",function(){y(h);let c=d(268);return E(m.scrollTo(c))}),e(239,"Action Group component - common use case"),t(),e(240,`
+      `),t(),e(241,`
+      `),i(242,"li"),e(243,`
+        `),i(244,"a",21),w("click",function(){y(h);let c=d(329);return E(m.scrollTo(c))}),e(245,"Custom Actions - complex scenarios"),t(),e(246,`
+      `),t(),e(247,`
+    `),t(),e(248,`
+
+    `),i(249,"p"),e(250,`
+      `),i(251,"em"),e(252,`
+        `),i(253,"strong"),e(254,"Please note:"),t(),e(255,`
         In both cases the element containing the actions (e.g.
-        `),i(253,"code"),e(254,"kirby-action-group"),t(),e(255,`
+        `),i(256,"code"),e(257,"kirby-action-group"),t(),e(258,`
         or an
-        `),i(256,"code"),e(257,"ng-container"),t(),e(258,`
+        `),i(259,"code"),e(260,"ng-container"),t(),e(261,`
         ) needs to be decorated with the
-        `),i(259,"code"),e(260,"*kirbyHeaderActions"),t(),e(261,`
+        `),i(262,"code"),e(263,"*kirbyHeaderActions"),t(),e(264,`
         directive for the page and header components to render the actions in both locations.
-      `),t(),e(262,`
-    `),t(),e(263,`
+      `),t(),e(265,`
+    `),t(),e(266,`
 
-    `),i(264,"h3",null,9),e(266,"Action Group"),t(),e(267,`
-    `),i(268,"p"),e(269,`
+    `),i(267,"h3",null,9),e(269,"Action Group"),t(),e(270,`
+    `),i(271,"p"),e(272,`
       In most use cases actions should be suppplied using the
-      `),i(270,"code"),e(271,"kirby-action-group"),t(),e(272,`
+      `),i(273,"code"),e(274,"kirby-action-group"),t(),e(275,`
       component as shown below. This component has sensible defaults for showing the primary
       action(s) as button(s) and collapsing the rest of the actions into a "more" menu.
-    `),t(),e(273,`
+    `),t(),e(276,`
 
-    `),i(274,"p"),e(275,`
+    `),i(277,"p"),e(278,`
       Actions are supplied to the Action Group via slotted buttons. Only two actions are shown in
       the toolbar, and if more that two actions are supplied, one action and a "more" menu button
       will be shown, while the remaining actions are collapsed into the "more" menu.
-    `),t(),e(276,`
-    `),i(277,"p"),e(278,`
+    `),t(),e(279,`
+    `),i(280,"p"),e(281,`
       All button interactions are expected to happen via a click-listener of type
-      `),i(279,"code"),e(280,'(click)="someFunction()"'),t(),e(281,`
+      `),i(282,"code"),e(283,'(click)="someFunction()"'),t(),e(284,`
       so the Action Group can make sure to fire the corresponding function for collapsed actions
       inside the "more" menu.
-    `),t(),e(282,`
+    `),t(),e(285,`
 
-    `),r(283,"cookbook-iphone",22),e(284,`
+    `),r(286,"cookbook-iphone",22),e(287,`
 
-    `),r(285,"cookbook-example-viewer",18),e(286,`
-  `),t(),e(287,`
+    `),r(288,"cookbook-example-viewer",18),e(289,`
+  `),t(),e(290,`
 
-  `),i(288,"div",17),e(289,`
-    `),i(290,"h3",null,10),e(292,"Emphasize Actions"),t(),e(293,`
-    `),i(294,"p"),e(295,`
+  `),i(291,"div",17),e(292,`
+    `),i(293,"h3",null,10),e(295,"Emphasize Actions"),t(),e(296,`
+    `),i(297,"p"),e(298,`
       When actions are closely related to the content of the page you can configure the header with
-      `),i(296,"code"),e(297,'[emphasizeActions]="true"'),t(),e(298,`
+      `),i(299,"code"),e(300,'[emphasizeActions]="true"'),t(),e(301,`
       .
-    `),t(),e(299,`
-    `),i(300,"p"),e(301,`
+    `),t(),e(302,`
+    `),i(303,"p"),e(304,`
       With this setting enabled all buttons will be shown and not automatically collapse into a
       "more" menu. The buttons will also be visible under the title area on small screens. Use this
       option to further emphasize the action buttons, but keep in mind that it uses more screen real
       estate than the default option.
-    `),t(),e(302,`
-    `),i(303,"p"),e(304,`
-      `),i(305,"em"),e(306,`
-        `),i(307,"strong"),e(308,"Please note:"),t(),e(309,`
+    `),t(),e(305,`
+    `),i(306,"p"),e(307,`
+      `),i(308,"em"),e(309,`
+        `),i(310,"strong"),e(311,"Please note:"),t(),e(312,`
         With this setting enabled you should ensure the action buttons can fit on the screen\u2014or
         collapse secondary actions into a "more" menu using the
-        `),i(310,"code"),e(311,"visibleActions"),t(),e(312,`
+        `),i(313,"code"),e(314,"visibleActions"),t(),e(315,`
         property of
-        `),i(313,"code"),e(314,"kirby-action-group"),t(),e(315,`
+        `),i(316,"code"),e(317,"kirby-action-group"),t(),e(318,`
         .
-      `),t(),e(316,`
-    `),t(),e(317,`
+      `),t(),e(319,`
+    `),t(),e(320,`
 
-    `),r(318,"cookbook-iphone",23),e(319,`
+    `),r(321,"cookbook-iphone",23),e(322,`
 
-    `),r(320,"cookbook-example-viewer",18),e(321,`
-  `),t(),e(322,`
+    `),r(323,"cookbook-example-viewer",18),e(324,`
+  `),t(),e(325,`
 
-  `),i(323,"div",17),e(324,`
-    `),i(325,"h3",null,11),e(327,"Custom Actions"),t(),e(328,`
-    `),i(329,"p"),e(330,`
+  `),i(326,"div",17),e(327,`
+    `),i(328,"h3",null,11),e(330,"Custom Actions"),t(),e(331,`
+    `),i(332,"p"),e(333,`
       When more control is needed over how actions are shown the
-      `),i(331,"code"),e(332,"*kirbyHeaderActions"),t(),e(333,`
+      `),i(334,"code"),e(335,"*kirbyHeaderActions"),t(),e(336,`
       directive can be applied to the custom actions element itself - e.g. a
-      `),i(334,"code"),e(335,"kirby-menu"),t(),e(336,`
+      `),i(337,"code"),e(338,"kirby-menu"),t(),e(339,`
       when only secondary actions are needed.
-    `),t(),e(337,`
-    `),i(338,"p"),e(339,`
+    `),t(),e(340,`
+    `),i(341,"p"),e(342,`
       When several action elements needs to be combined they can be grouped in an
-      `),i(340,"code"),e(341,"ng-container"),t(),e(342,`
+      `),i(343,"code"),e(344,"ng-container"),t(),e(345,`
       which is then decorated with the
-      `),i(343,"code"),e(344,"*kirbyHeaderActions"),t(),e(345,`
+      `),i(346,"code"),e(347,"*kirbyHeaderActions"),t(),e(348,`
       directive.
-    `),t(),e(346,`
-    `),i(347,"p"),e(348,`
+    `),t(),e(349,`
+    `),i(350,"p"),e(351,`
       In the example below a primary action button that displays a menu is combined with a "more"
       menu for secondary actions.
-    `),t(),e(349,`
+    `),t(),e(352,`
 
-    `),r(350,"cookbook-iphone",24),e(351,`
+    `),r(353,"cookbook-iphone",24),e(354,`
 
-    `),r(352,"cookbook-example-viewer",18),e(353,`
-  `),t(),e(354,`
+    `),r(355,"cookbook-example-viewer",18),e(356,`
+  `),t(),e(357,`
 
-  `),i(355,"div",17),e(356,`
-    `),i(357,"h2"),e(358,"Custom Section"),t(),e(359,`
-    `),i(360,"p"),e(361,`
+  `),i(358,"div",17),e(359,`
+    `),i(360,"h2"),e(361,"Custom Section"),t(),e(362,`
+    `),i(363,"p"),e(364,`
       An optional custom section can be added to the header, e.g. to add more subtitles, trends or
       status in relation to the key value or title.
-    `),t(),e(362,`
-    `),i(363,"p"),e(364,`
+    `),t(),e(365,`
+    `),i(366,"p"),e(367,`
       Decorate your custom section with the
-      `),i(365,"code"),e(366,"*kirbyHeaderCustomSection"),t(),e(367,`
+      `),i(368,"code"),e(369,"*kirbyHeaderCustomSection"),t(),e(370,`
       directive, which will position the custom section correctly and manage spacing as shown in the
       example below:
-    `),t(),e(368,`
-    `),i(369,"cookbook-example-viewer",20),e(370,`
-      `),i(371,"div",19),e(372,`
-        `),r(373,"cookbook-header-example-custom-section",null,12),e(375,`
-      `),t(),e(376,`
-    `),t(),e(377,`
-  `),t(),e(378,`
+    `),t(),e(371,`
+    `),i(372,"cookbook-example-viewer",20),e(373,`
+      `),i(374,"div",19),e(375,`
+        `),r(376,"cookbook-header-example-custom-section",null,12),e(378,`
+      `),t(),e(379,`
+    `),t(),e(380,`
+  `),t(),e(381,`
 
-  `),i(379,"div",17),e(380,`
-    `),i(381,"h2",null,13),e(383,"Interactive Title (in key value scenarios)"),t(),e(384,`
-    `),i(385,"p"),e(386,`
+  `),i(382,"div",17),e(383,`
+    `),i(384,"h2",null,13),e(386,"Interactive Title (in key value scenarios)"),t(),e(387,`
+    `),i(388,"p"),e(389,`
       If you need the user to interact with the title (when having a
-      `),i(387,"code"),e(388,"value"),t(),e(389,`
+      `),i(390,"code"),e(391,"value"),t(),e(392,`
       prop
-      `),i(390,"em"),e(391,"in addition to"),t(),e(392,`
+      `),i(393,"em"),e(394,"in addition to"),t(),e(395,`
       the
-      `),i(393,"code"),e(394,"title"),t(),e(395,`
+      `),i(396,"code"),e(397,"title"),t(),e(398,`
       prop) you can register a handler for the header's
-      `),i(396,"code"),e(397,"titleClick"),t(),e(398,`
+      `),i(399,"code"),e(400,"titleClick"),t(),e(401,`
       event.
-    `),t(),e(399,`
-    `),i(400,"p"),e(401,`
+    `),t(),e(402,`
+    `),i(403,"p"),e(404,`
       Within your event handler you can access the DOM event object with the
-      `),i(402,"code"),e(403,"event"),t(),e(404,`
+      `),i(405,"code"),e(406,"event"),t(),e(407,`
       argument passed to the output event handler - e.g. to access the event's
-      `),i(405,"code"),e(406,"currentTarget"),t(),e(407,`
+      `),i(408,"code"),e(409,"currentTarget"),t(),e(410,`
       as shown in the example below.
-    `),t(),e(408,`
-    `),i(409,"p"),e(410,`
+    `),t(),e(411,`
+    `),i(412,"p"),e(413,`
       You should also add affordance to your interactive title (in key value scenarios) by slotting
       a
-      `),i(411,"code"),e(412,"kirby-icon"),t(),e(413,`
+      `),i(414,"code"),e(415,"kirby-icon"),t(),e(416,`
       into the header and decorate it with the
-      `),i(414,"code"),e(415,"*kirbyHeaderTitleActionIcon"),t(),e(416,`
+      `),i(417,"code"),e(418,"*kirbyHeaderTitleActionIcon"),t(),e(419,`
       directive as shown in the example below:
-    `),t(),e(417,`
-    `),r(418,"cookbook-iphone",25),e(419,`
+    `),t(),e(420,`
+    `),r(421,"cookbook-iphone",25),e(422,`
 
-    `),r(420,"cookbook-example-viewer",26),e(421,`
-  `),t(),e(422,`
+    `),r(423,"cookbook-example-viewer",26),e(424,`
+  `),t(),e(425,`
 
-  `),i(423,"div",17),e(424,`
-    `),i(425,"h2"),e(426,"Combined"),t(),e(427,`
-    `),i(428,"p"),e(429,"This example shows all the above options combined:"),t(),e(430,`
-    `),i(431,"cookbook-example-viewer",20),e(432,`
-      `),i(433,"div",19),e(434,`
-        `),r(435,"cookbook-header-example-combined",null,14),e(437,`
-      `),t(),e(438,`
-    `),t(),e(439,`
-  `),t(),e(440,`
+  `),i(426,"div",17),e(427,`
+    `),i(428,"h2"),e(429,"Combined"),t(),e(430,`
+    `),i(431,"p"),e(432,"This example shows all the above options combined:"),t(),e(433,`
+    `),i(434,"cookbook-example-viewer",20),e(435,`
+      `),i(436,"div",19),e(437,`
+        `),r(438,"cookbook-header-example-combined",null,14),e(440,`
+      `),t(),e(441,`
+    `),t(),e(442,`
+  `),t(),e(443,`
 
-  `),i(441,"h2"),e(442,"Importing"),t(),e(443,`
-  `),r(444,"cookbook-import-viewer",27),e(445,`
+  `),i(444,"h2"),e(445,"Importing"),t(),e(446,`
+  `),r(447,"cookbook-import-viewer",27),e(448,`
 
-  `),i(446,"h2"),e(447,"API"),t(),e(448,`
-  `),i(449,"h3"),e(450,"Header Properties"),t(),e(451,`
-  `),r(452,"cookbook-api-description-properties",28),e(453,`
+  `),i(449,"h2"),e(450,"API"),t(),e(451,`
+  `),i(452,"h3"),e(453,"Header Properties"),t(),e(454,`
+  `),r(455,"cookbook-api-description-properties",28),e(456,`
 
-  `),i(454,"h3"),e(455,"Header Directives:"),t(),e(456,`
-  `),r(457,"cookbook-api-description-properties",29),e(458,`
+  `),i(457,"h3"),e(458,"Header Directives:"),t(),e(459,`
+  `),r(460,"cookbook-api-description-properties",29),e(461,`
 
-  `),i(459,"h3"),e(460,"Header Events"),t(),e(461,`
-  `),r(462,"cookbook-api-description-events",30),e(463,`
+  `),i(462,"h3"),e(463,"Header Events"),t(),e(464,`
+  `),r(465,"cookbook-api-description-events",30),e(466,`
 
-  `),i(464,"h3"),e(465,"Action Group Properties"),t(),e(466,`
-  `),r(467,"cookbook-api-description-properties",28,15),e(469,`
-`),t(),e(470,`
-`)}if(s&2){let h=d(18),b=d(31),c=d(51),T=d(72),V=d(93),L=d(120),H=d(158),W=d(179),U=d(212),Z=d(374),ae=d(436);n(13),a("html",h.template),n(13),a("html",b.template),n(20),a("html",c.template),n(21),a("html",T.template),n(21),a("html",V.template)("css",V.styles),n(27),a("html",L.template),n(38),a("html",H.template),n(21),a("html",W.template),n(33),a("html",U.template),n(76),a("showViewModeToggle",!0),n(2),a("html",m.actionGroupTemplate),n(33),a("showViewModeToggle",!0),n(2),a("html",m.emphasizedActionGroupTemplate),n(30),a("showViewModeToggle",!0),n(2),a("html",m.customActionsTemplate),n(17),a("html",Z.template)("css",Z.styles),n(49),a("showViewModeToggle",!0),n(2),a("html",m.interactiveTitleTemplate)("ts",m.interactiveTitleSnippet),n(11),a("html",ae.template)("css",ae.styles),n(13),a("imports","HeaderComponent"),n(8),a("properties",m.properties),n(5),a("columns",m.directiveColumns)("properties",m.directives),n(5),a("events",m.events),n(5),a("properties",m.actionGroupProperties)}},dependencies:[v,za,Ha,Ba,Ra,Na,Wa,Ua,ja,Ga,K,Ka,Za,f,B,g],styles:[".kirby-line-clamp[_ngcontent-%COMP%]{display:-webkit-box;-webkit-line-clamp:var(--line-clamp, none);-webkit-box-orient:vertical;overflow:hidden}.example-container[_ngcontent-%COMP%]{margin:var(--kirby-spacing-l) auto;max-width:768px}.example-frame[_ngcontent-%COMP%]{position:relative;border:1px solid var(--kirby-medium);border-radius:12px;padding:var(--kirby-spacing-l)}.example-frame.no-padding[_ngcontent-%COMP%]{padding:0}@media(max-width:767px){.example-frame[_ngcontent-%COMP%]{margin-inline:calc(-1 * var(--kirby-spacing-s));padding-inline:var(--kirby-spacing-s)}}h2[_ngcontent-%COMP%]:not(:first-child){margin-top:var(--kirby-spacing-l)}h3[_ngcontent-%COMP%]{border-bottom:1px dotted var(--kirby-medium)}cookbook-example-viewer[_ngcontent-%COMP%], cookbook-code-viewer[_ngcontent-%COMP%]{margin-bottom:var(--kirby-spacing-l)}kbd[_ngcontent-%COMP%]{border-radius:3px;border:1px solid var(--kirby-semi-dark);box-shadow:0 2px 1px var(--kirby-dark-overlay-20),0 2px 1px 0 var(--kirby-white) inset;color:var(--kirby-black);font-size:.85em;font-weight:var(--kirby-font-weight-bold);line-height:1;padding:2px 4px;white-space:nowrap}.header-example-container[_ngcontent-%COMP%]{margin-bottom:var(--kirby-spacing-l)}"]});let l=o;return l})();var Xs={selector:"cookbook-menu-custom-placement-example",template:`<kirby-menu [placement]="'bottom-end'" aria-label="Menu placement">
+  `),i(467,"h3"),e(468,"Action Group Properties"),t(),e(469,`
+  `),r(470,"cookbook-api-description-properties",28,15),e(472,`
+`),t(),e(473,`
+`)}if(s&2){let h=d(18),b=d(34),c=d(54),T=d(75),V=d(96),L=d(123),H=d(161),W=d(182),U=d(215),Z=d(377),ae=d(439);n(13),a("html",h.template),n(16),a("html",b.template),n(20),a("html",c.template),n(21),a("html",T.template),n(21),a("html",V.template)("css",V.styles),n(27),a("html",L.template),n(38),a("html",H.template),n(21),a("html",W.template),n(33),a("html",U.template),n(76),a("showViewModeToggle",!0),n(2),a("html",m.actionGroupTemplate),n(33),a("showViewModeToggle",!0),n(2),a("html",m.emphasizedActionGroupTemplate),n(30),a("showViewModeToggle",!0),n(2),a("html",m.customActionsTemplate),n(17),a("html",Z.template)("css",Z.styles),n(49),a("showViewModeToggle",!0),n(2),a("html",m.interactiveTitleTemplate)("ts",m.interactiveTitleSnippet),n(11),a("html",ae.template)("css",ae.styles),n(13),a("imports","HeaderComponent"),n(8),a("properties",m.properties),n(5),a("columns",m.directiveColumns)("properties",m.directives),n(5),a("events",m.events),n(5),a("properties",m.actionGroupProperties)}},dependencies:[v,za,Ha,Ba,Ra,Na,Wa,Ua,ja,Ga,K,Ka,Za,f,B,g],styles:[".kirby-line-clamp[_ngcontent-%COMP%]{display:-webkit-box;-webkit-line-clamp:var(--line-clamp, none);-webkit-box-orient:vertical;overflow:hidden}.example-container[_ngcontent-%COMP%]{margin:var(--kirby-spacing-l) auto;max-width:768px}.example-frame[_ngcontent-%COMP%]{position:relative;border:1px solid var(--kirby-medium);border-radius:12px;padding:var(--kirby-spacing-l)}.example-frame.no-padding[_ngcontent-%COMP%]{padding:0}@media(max-width:767px){.example-frame[_ngcontent-%COMP%]{margin-inline:calc(-1 * var(--kirby-spacing-s));padding-inline:var(--kirby-spacing-s)}}h2[_ngcontent-%COMP%]:not(:first-child){margin-top:var(--kirby-spacing-l)}h3[_ngcontent-%COMP%]{border-bottom:1px dotted var(--kirby-medium)}cookbook-example-viewer[_ngcontent-%COMP%], cookbook-code-viewer[_ngcontent-%COMP%]{margin-bottom:var(--kirby-spacing-l)}kbd[_ngcontent-%COMP%]{border-radius:3px;border:1px solid var(--kirby-semi-dark);box-shadow:0 2px 1px var(--kirby-dark-overlay-20),0 2px 1px 0 var(--kirby-white) inset;color:var(--kirby-black);font-size:.85em;font-weight:var(--kirby-font-weight-bold);line-height:1;padding:2px 4px;white-space:nowrap}.header-example-container[_ngcontent-%COMP%]{margin-bottom:var(--kirby-spacing-l)}"]});let l=o;return l})();var Xs={selector:"cookbook-menu-custom-placement-example",template:`<kirby-menu [placement]="'bottom-end'" aria-label="Menu placement">
   <kirby-item>
     <p class="kirby-item-title">Stone</p>
   </kirby-item>
