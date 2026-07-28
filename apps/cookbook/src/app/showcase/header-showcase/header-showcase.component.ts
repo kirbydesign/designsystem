@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { HeaderExampleDefaultComponent } from '../../examples/header-example/examples/default';
 import { HeaderExampleSubtitleListComponent } from '../../examples/header-example/examples/subtitles';
+import { HeaderExampleTruncateSubtitleComponent } from '../../examples/header-example/examples/truncate-subtitle';
 import { HeaderExampleFlagComponent } from '../../examples/header-example/examples/flag';
 import { HeaderExampleCustomFlagComponent } from '../../examples/header-example/examples/custom-flag';
 import { HeaderExampleValueComponent } from '../../examples/header-example/examples/value';
@@ -34,6 +35,7 @@ import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-exa
     ExampleViewerComponent,
     HeaderExampleDefaultComponent,
     HeaderExampleSubtitleListComponent,
+    HeaderExampleTruncateSubtitleComponent,
     HeaderExampleFlagComponent,
     HeaderExampleCustomFlagComponent,
     HeaderExampleValueComponent,
@@ -85,6 +87,13 @@ export class HeaderShowcaseComponent {
       description: 'A string that is used as the second subtitle.',
       type: ['string'],
       defaultValue: '',
+    },
+    {
+      name: 'truncateSubtitle',
+      description:
+        'Option to allow truncation of the subtitle. When set to true, the subtitle will be truncated with an ellipsis instead of wrapping to the next line.',
+      type: ['boolean'],
+      defaultValue: 'false',
     },
     {
       name: 'centered',
