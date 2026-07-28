@@ -1,0 +1,15 @@
+{
+  "name": "stylelint-plugin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/stylelint-plugin",
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node --test",
+        "cwd": "libs/stylelint-plugin"
+      }
+    }
+  }
+}
