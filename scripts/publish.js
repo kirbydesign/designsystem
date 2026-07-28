@@ -37,6 +37,11 @@ const coreLibSrcDir = `${coreLibDir}/src`;
 
 const extensionsAngularLibDir = `${libsRootDir}/extensions/angular`;
 
+// The stylelint-plugin is plain ESM with no build step: its package directory
+// is already publishable as-is, with the package.json "files" allow-list
+// controlling what ships.
+const stylelintPluginLibDir = `${libsRootDir}/stylelint-plugin`;
+
 const dist = `dist`;
 const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
 const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
@@ -210,6 +215,7 @@ const args = process.argv.slice(2).map((value) => value.toLowerCase());
 const doPublishCore = args.length === 0 || args.includes('core');
 const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
 const doPublishExtensionsAngular = args.includes('extensions-angular');
+const doPublishStylelintPlugin = args.includes('stylelint-plugin');
 
 if (doPublishCore) {
   // Publish core
@@ -245,4 +251,14 @@ if (doPublishExtensionsAngular) {
     .then(() => removeNpmIgnoreNestedPackageJsonRule(distExtensionsAngularTarget))
     .then(() => publish(distExtensionsAngularTarget, 'kirbydesign-extensions-angular'))
     .catch((err) => console.warn('*** ERROR WHEN PUBLISHING EXTENSIONS-ANGULAR ***', err));
+}
+
+if (doPublishStylelintPlugin) {
+  // Publish stylelint-plugin. No build step: the package is plain ESM and its
+  // package.json "files" allow-list controls what ships, so we publish the
+  // workspace directory directly.
+  console.log('--- Publishing stylelint-plugin ---');
+  publish(stylelintPluginLibDir, 'kirbydesign-stylelint-plugin').catch((err) =>
+    console.warn('*** ERROR WHEN PUBLISHING STYLELINT-PLUGIN ***', err)
+  );
 }

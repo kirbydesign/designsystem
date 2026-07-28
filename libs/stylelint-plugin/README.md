@@ -39,6 +39,13 @@ Then run Stylelint, optionally with `--fix` to apply the safe autofixes:
 npx stylelint "**/*.scss" --fix
 ```
 
+## Terminology
+
+- **Rule namespace** — the `kirby/` prefix scoping every rule this plugin provides (e.g. `kirby/use-design-tokens`), keeping them distinct from Stylelint's built-in rules.
+- **Manual-migration case** — a legacy SCSS accessor usage the rule can flag but cannot safely autofix: rewriting it to a token would break Sass math (`size('m') * 2`), the argument is a SCSS variable, or no token equivalent exists (`get-shadow-size()`). These are reported and the source is left untouched.
+
+For the design-system-wide terms (_design token_, _legacy SCSS accessor_), see the repo-root [`CONTEXT.md`](https://github.com/kirbydesign/designsystem/blob/develop/CONTEXT.md).
+
 ## License
 
 [MIT](./LICENSE)
