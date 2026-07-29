@@ -29,3 +29,8 @@
 .decoration-table tr:has(.decoration-swatch:hover) .decoration-swatch:hover {
   transform: scale(110%);
 }
+
+th:first-child,
+td:first-child {
+  width: 200px;
+}

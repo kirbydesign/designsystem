@@ -9,7 +9,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th class="custom-property-cell">CSS Custom Property</th>
+      <th>CSS Custom Property</th>
       <th>Base value</th>
       <th class="preview">Preview</th>
     </tr>
@@ -27,7 +27,7 @@
         <td>{{ token.description }}</td>
         <td>
           <span
-            [class]="['radius-sample', 'token-preview', token.name]"
+            [class]="['sample', 'radius', token.name]"
             [style.border-top-right-radius]="'var(' + token.cssVar + ')'"
           ></span>
         </td>

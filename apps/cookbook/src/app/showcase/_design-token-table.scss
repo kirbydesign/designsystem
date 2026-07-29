@@ -1,17 +1,3 @@
-tbody td:nth-child(2) {
-  white-space: nowrap;
-}
-
-th:first-child,
-td:first-child {
-  width: 150px;
-}
-
-th.preview {
-  width: 1px; // make cell follow content width
-  white-space: nowrap;
-}
-
 cookbook-copy-token {
   opacity: 0;
   transition: opacity var(--kirby-transition-duration-quick);
@@ -21,14 +7,22 @@ cookbook-copy-token {
   }
 }
 
+th.preview,
+table:has(th.preview) td:last-child {
+  width: 1px;
+  white-space: nowrap;
+}
+
 tr:hover cookbook-copy-token {
   opacity: 1;
 }
 
-.token-preview {
+// inline-block is needed for the transform (scale on hover) to take effect
+.sample {
+  display: inline-block;
   transition: transform var(--kirby-transition-duration-quick);
 }
 
-tr:hover .token-preview {
+tr:hover .sample {
   transform: scale(110%);
 }
