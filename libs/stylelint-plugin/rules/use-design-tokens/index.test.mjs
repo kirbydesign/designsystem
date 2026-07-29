@@ -47,6 +47,19 @@ testRule({
       fixed: '.a { font-size: var(--kirby-font-size-n); }',
       message: messages.replaced("utils.font-size('n')", 'var(--kirby-font-size-n)'),
     },
+    // size(), icon-font-size() and font-size() in one declaration each resolve
+    // to their own token. Locks in that the FN_PREFIX lookbehind — not the
+    // order of FUNCTION_MAPPINGS — is what keeps the three disambiguated.
+    {
+      code: ".a { margin: size('m') icon-font-size('sm') font-size('n'); }",
+      fixed:
+        '.a { margin: var(--kirby-spacing-m) var(--kirby-icon-font-size-sm) var(--kirby-font-size-n); }',
+      warnings: [
+        { message: messages.replaced("size('m')", 'var(--kirby-spacing-m)') },
+        { message: messages.replaced("icon-font-size('sm')", 'var(--kirby-icon-font-size-sm)') },
+        { message: messages.replaced("font-size('n')", 'var(--kirby-font-size-n)') },
+      ],
+    },
     // Redundant #{} interpolation is stripped once the value is pure CSS.
     {
       code: ".a { --kirby-icon-font-size: #{utils.icon-font-size('xs')}; }",
@@ -80,7 +93,7 @@ testRule({
     // Nested var() inside calc() must not be mis-read as Sass math.
     {
       code: "$r: utils.size('xs');\n.a { top: calc(var(--pad) + 1px - $r); }",
-      fixed: "$r: var(--kirby-spacing-xs);\n.a { top: calc(var(--pad) + 1px - $r); }",
+      fixed: '$r: var(--kirby-spacing-xs);\n.a { top: calc(var(--pad) + 1px - $r); }',
       message: messages.replaced("utils.size('xs')", 'var(--kirby-spacing-xs)'),
     },
     // Two problems in one rule.
