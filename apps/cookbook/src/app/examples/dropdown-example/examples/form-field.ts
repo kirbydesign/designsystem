@@ -35,7 +35,9 @@ const config = {
 
 @Component({
   selector: config.selector,
-  template: config.template,
+  template: `
+    <div class="column-layout constrain-width">${config.template}</div>
+  `,
   styleUrl: './dropdown-examples.shared.scss',
   imports: [DropdownComponent, FormFieldComponent],
 })
