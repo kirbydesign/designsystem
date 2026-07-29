@@ -42,7 +42,7 @@ const config = {
   </section>
 }`,
   componentTemplate: `<kirby-page-progress
-  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+  <kirby-progress-circle themeColor="warning" value="50" size="sm">
   2/4
   </kirby-progress-circle>
 </kirby-page-progress>

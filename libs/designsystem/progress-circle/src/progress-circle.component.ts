@@ -76,8 +76,6 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostBinding('style.width.px')
-  @HostBinding('style.height.px')
   get _diameter(): number {
     return this.SIZE_CONFIG[this.size].diameter;
   }

@@ -26,8 +26,6 @@ export class ProgressCircleRingComponent implements AfterViewInit {
     this.viewInitialized = true;
   }
 
-  @HostBinding('style.width.px')
-  @HostBinding('style.height.px')
   get _diameter(): number {
     return this.radius * 2;
   }
