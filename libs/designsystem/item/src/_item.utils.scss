@@ -146,7 +146,9 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
           }
 
           .disclosure {
-            top: calc(var(--item-padding-top) + $start-slot-content-margin + utils.size('xxs'));
+            top: calc(
+              var(--item-padding-top) + $start-slot-content-margin + var(--kirby-spacing-xxs)
+            );
           }
         }
 
