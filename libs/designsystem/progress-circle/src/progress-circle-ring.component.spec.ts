@@ -83,17 +83,13 @@ describe('ProgressCircleRingComponent', () => {
       });
     });
 
-    it('computed size should equal 2*radius', () => {
+    it('SVG viewBox should match 2*radius', () => {
       const radius = 33;
-      const expectedSize = `${2 * radius}px`;
+      const diameter = 2 * radius;
       spectator.setInput({ radius });
-      // As width and height are set via hostbinding, it is necessary to run a change detection cycle.
       spectator.detectChanges();
 
-      expect(spectator.element).toHaveComputedStyle({
-        width: expectedSize,
-        height: expectedSize,
-      });
+      expect(spectator.query('svg')).toHaveAttribute('viewBox', `0 0 ${diameter} ${diameter}`);
     });
 
     it('should render progress stroke with themeColor when themeColor class is set', () => {

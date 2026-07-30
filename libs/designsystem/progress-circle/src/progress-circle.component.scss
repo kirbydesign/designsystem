@@ -1,6 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$maximum-font-size-md: utils.size('s') * utils.$text-resize-threshold;
+$maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
 
 :host {
   display: inline-block;
@@ -8,22 +8,13 @@ $maximum-font-size-md: utils.size('s') * utils.$text-resize-threshold;
 }
 
 :host(.sm) {
-  width: max(40px, 2.5em);
-  height: max(40px, 2.5em);
+  width: clamp(40px, 2.5em, 56px);
+  height: clamp(40px, 2.5em, 56px);
 }
 
-:host(.md) {
-  width: 56px;
-  height: 56px;
-}
-
-:host(.lg) {
-  width: 96px;
-  height: 96px;
-}
-
+:host(.sm) .transcluded-content,
 :host(.md) .transcluded-content {
-  font-size: min(1em, $maximum-font-size-md);
+  font-size: min(1em, $maximum-font-size);
 }
 
 .transcluded-content,
