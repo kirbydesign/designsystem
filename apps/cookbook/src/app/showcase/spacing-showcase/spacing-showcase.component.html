@@ -9,7 +9,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th class="custom-property-cell">CSS Custom Property</th>
+      <th>CSS Custom Property</th>
       <th>Base value</th>
       <th class="preview">Preview</th>
     </tr>
@@ -26,10 +26,7 @@
         </td>
         <td>{{ token.description }}</td>
         <td>
-          <span
-            class="spacing-sample token-preview"
-            [style.width]="'var(' + token.cssVar + ')'"
-          ></span>
+          <span class="sample spacing" [style.width]="'var(' + token.cssVar + ')'"></span>
         </td>
       </tr>
     }
