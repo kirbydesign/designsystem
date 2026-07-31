@@ -230,8 +230,6 @@ export class ModalWrapperComponent
     } else {
       this.renderer.removeClass(this.elementRef.nativeElement, 'has-footer');
     }
-
-    this._currentFooter = footer;
   }
 
   private get currentFooter(): HTMLElement | null {
