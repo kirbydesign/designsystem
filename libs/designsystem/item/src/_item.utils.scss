@@ -60,7 +60,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
   }
 
   @include utils.slotted('[detail]', '.kirby-item-detail', '.kirby-item-disclosure') {
-    color: utils.get-text-color('semi-dark');
+    color: var(--kirby-item-detail-color);
   }
 
   @include utils.slotted('.kirby-item-disclosure') {

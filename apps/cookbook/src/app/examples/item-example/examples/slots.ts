@@ -6,7 +6,7 @@ import { AvatarComponent, IconComponent } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-item-example-slots',
-  template: `<kirby-item>
+  template: `<kirby-item [selectable]="true">
   <kirby-badge slot="outside" themeColor="warning" size="sm"></kirby-badge>
   <kirby-avatar slot="start" themeColor="light">
     <kirby-icon name="person"></kirby-icon>

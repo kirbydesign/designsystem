@@ -52,20 +52,17 @@ ion-item {
   }
 
   @include interaction-state.apply-hover-ionic('xxxs') {
-    :host(.has-interactive) & {
-      --kirby-item-detail-color: var(--kirby-text-color-black);
-    }
+    --kirby-item-detail-color: var(--kirby-text-color-black);
   }
   @include interaction-state.apply-active-ionic('xxs') {
-    :host(.has-interactive) & {
-      --kirby-item-detail-color: var(--kirby-text-color-black);
-    }
+    --kirby-item-detail-color: var(--kirby-text-color-black);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
+    --kirby-item-detail-color: var(--kirby-text-color-semi-dark);
     --padding-top: var(--item-padding-top, 0px);
     --padding-bottom: var(--item-padding-bottom, 0px);
     --min-height: #{map.get(utils.$item-heights, 'm')};
