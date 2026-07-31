@@ -5,6 +5,21 @@
   position: relative;
 }
 
+:host(.sm) {
+  width: clamp(40px, 2.5em, 56px);
+  height: clamp(40px, 2.5em, 56px);
+}
+
+:host(.md) {
+  width: 56px; // hardcoded for poc - maybe also clamp for better text resizing support?
+  height: 56px;
+}
+
+:host(.lg) {
+  width: 96px; // hardcoded for poc - maybe also clamp for better text resizing support?
+  height: 96px;
+}
+
 .transcluded-content,
 kirby-progress-circle-ring {
   position: absolute;

@@ -13,7 +13,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleRingComponent implements AfterViewInit {
-  @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
   @Input() strokeWidth: number;
@@ -26,29 +25,28 @@ export class ProgressCircleRingComponent implements AfterViewInit {
     this.viewInitialized = true;
   }
 
-  @HostBinding('style.width.px')
-  @HostBinding('style.height.px')
-  get _diameter(): number {
-    return this.radius * 2;
+  /**
+   * Outer radius as a CSS length. The SVG fills the host, so the circle is sized relative to it
+   * (50% of the host), inset by half the stroke width so the stroke's outer edge aligns with the
+   * host edge. Because the radius is relative but the stroke width is absolute, the ring scales
+   * with the host while the stroke keeps a constant pixel width.
+   */
+  get _radius(): string {
+    return `calc(50% - ${this.strokeWidth / 2}px)`;
   }
 
-  get _centerRadius(): number {
-    return this.radius - this.strokeWidth / 2;
-  }
-
-  get _centerCircumference(): number {
-    return this._centerRadius * 2 * Math.PI;
-  }
-
+  /**
+   * Progress as a percentage (0-100). The progress circle declares `pathLength="100"`, so the
+   * stroke-dasharray is expressed directly in percent and stays correct regardless of the rendered
+   * size.
+   */
   get _progress(): number {
     const valueWithinBounds = this.value < this.upperBound || this.value > 99;
-    const _value = valueWithinBounds ? this.value : this.upperBound;
-    const progressPercentage = _value / 100;
-    return this._centerCircumference * progressPercentage;
+    return valueWithinBounds ? this.value : this.upperBound;
   }
 
   get _remainder(): number {
-    return this._centerCircumference - this._progress;
+    return 100 - this._progress;
   }
 
   get _progressStrokeWidth(): number {
