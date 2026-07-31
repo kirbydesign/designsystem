@@ -9,10 +9,18 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
     @include interaction-state.apply-hover {
       background-color: var(--kirby-inputs-background-color-hover);
       cursor: text;
+
+      &::placeholder {
+        color: var(--kirby-text-color-black);
+      }
     }
 
     @include interaction-state.apply-active {
       background-color: var(--kirby-inputs-background-color-active);
+
+      &::placeholder {
+        color: var(--kirby-text-color-black);
+      }
     }
 
     // Wrap declarations to avoid mixing with nested rules.

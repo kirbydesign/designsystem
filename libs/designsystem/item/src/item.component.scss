@@ -36,12 +36,6 @@ $outside-slot-width: utils.relative-size('s');
     left: utils.size('xxxs');
     z-index: 1;
   }
-
-  &.interactive {
-    @include utils.hover {
-      --kirby-item-detail-color: #{utils.get-text-color('black')};
-    }
-  }
 }
 
 ion-item {
@@ -57,8 +51,16 @@ ion-item {
     }
   }
 
-  @include interaction-state.apply-hover-ionic('xxxs');
-  @include interaction-state.apply-active-ionic('xxs');
+  @include interaction-state.apply-hover-ionic('xxxs') {
+    :host(.has-interactive) & {
+      --kirby-item-detail-color: var(--kirby-text-color-black);
+    }
+  }
+  @include interaction-state.apply-active-ionic('xxs') {
+    :host(.has-interactive) & {
+      --kirby-item-detail-color: var(--kirby-text-color-black);
+    }
+  }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
