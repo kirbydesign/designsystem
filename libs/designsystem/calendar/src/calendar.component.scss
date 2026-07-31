@@ -104,10 +104,10 @@ button[aria-disabled='true'] {
 }
 
 .day.selectable:not(.current-month, .selected) {
-  color: #{utils.get-text-color('semi-dark')};
+  color: var(--kirby-text-color-semi-dark);
 
   &:hover {
-    color: #{utils.get-text-color('black')};
+    color: var(--kirby-text-color-black);
   }
 }
 
