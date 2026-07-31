@@ -6,9 +6,10 @@ import {
   Params,
   Route,
   Router,
+  Event as RouterEvent,
   Routes,
 } from '@angular/router';
-import { EMPTY, firstValueFrom, Observable } from 'rxjs';
+import { defer, EMPTY, firstValueFrom, Observable, Subject } from 'rxjs';
 import { filter, map, pairwise, skipUntil, startWith, takeUntil } from 'rxjs/operators';
 
 import { ModalRouteActivation } from './modal.interfaces';
@@ -19,6 +20,14 @@ export class ModalNavigationService {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+  // Angular Router unsubscribes its internal events Subject during dispose() (e.g. on TestBed teardown).
+  // Subscribing to a closed Subject throws ObjectUnsubscribedError, so route all subscriptions through
+  // this defer-wrapped stream that falls back to EMPTY when the underlying Subject is already closed.
+  private routerEvents$: Observable<RouterEvent> = defer(() => {
+    const events = this.router.events;
+    return (events as Subject<RouterEvent>).closed ? EMPTY : events;
+  });
 
   isModalRoute(url: string): boolean {
     return url.includes('(modal:');
@@ -204,7 +213,7 @@ export class ModalNavigationService {
     return previousModalRouteParent !== currentModalRouteParent;
   }
 
-  private navigationEndListener$ = this.router.events.pipe(
+  private navigationEndListener$ = this.routerEvents$.pipe(
     filter((event): event is NavigationEnd => event instanceof NavigationEnd)
   );
 
@@ -351,13 +360,13 @@ export class ModalNavigationService {
   }
 
   handleBrowserBackButton(modal: HTMLIonModalElement) {
-    const popstateNavigationStart$ = this.router.events.pipe(
+    const popstateNavigationStart$ = this.routerEvents$.pipe(
       filter(
         (event): event is NavigationStart =>
           event instanceof NavigationStart && event.navigationTrigger === 'popstate'
       )
     );
-    const navigationEnd$ = this.router.events.pipe(
+    const navigationEnd$ = this.routerEvents$.pipe(
       filter((event) => event instanceof NavigationEnd)
     );
     navigationEnd$

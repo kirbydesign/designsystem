@@ -425,7 +425,11 @@ export const FormField: Story = {
           [message]="currencyControl.touched && currencyControl.invalid ? 'Please select a currency' : 'Pick your preferred currency'"
         >
           <kirby-x-combobox
-            ${argsToTemplate(args)}
+            ${argsToTemplate(args, { exclude: ['items', 'placeholder', 'hasError'] })}      
+            [items]="items"
+            [placeholder]="placeholder"
+            [formControl]="currencyControl"
+            [hasError]="currencyControl.touched && currencyControl.invalid"
           >
           </kirby-x-combobox>
         </kirby-form-field>
