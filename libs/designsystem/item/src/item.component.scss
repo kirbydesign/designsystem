@@ -51,11 +51,18 @@ ion-item {
     }
   }
 
-  @include interaction-state.apply-hover-ionic('xxxs') {
-    --kirby-item-detail-color: var(--kirby-text-color-black);
-  }
-  @include interaction-state.apply-active-ionic('xxs') {
-    --kirby-item-detail-color: var(--kirby-text-color-black);
+  @include interaction-state.apply-hover-ionic('xxxs');
+  @include interaction-state.apply-active-ionic('xxs');
+
+  &.ion-activatable,
+  :host(.disclosure) & {
+    @include utils.hover {
+      --kirby-item-detail-color: var(--kirby-text-color-black);
+    }
+
+    &:active {
+      --kirby-item-detail-color: var(--kirby-text-color-black);
+    }
   }
 
   // Wrap declarations to avoid mixing with nested rules.
