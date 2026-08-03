@@ -142,7 +142,7 @@ ion-content {
   --background: transparent;
   --color: var(--kirby-modal-color, #{utils.get-color('black')});
   --padding-top: #{utils.size('m')};
-  --padding-bottom: #{utils.size('m')};
+  --padding-bottom: calc(var(--kirby-spacing-m) + var(--kirby-safe-area-bottom, 0px));
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
 
@@ -157,13 +157,8 @@ ion-content {
   }
 }
 
-// On mobile, offset the bottom-most content by the safe-area inset (iOS home
-// indicator). When a footer is present it applies the inset itself, so the
-// content must not add it again:
-@include utils.media('<medium') {
-  :host(:not(:has(kirby-modal-footer))) ion-content {
-    --padding-bottom: calc(#{utils.size('m')} + var(--kirby-safe-area-bottom, 0px));
-  }
+:host(:has(kirby-modal-footer)) ion-content {
+  --padding-bottom: var(--kirby-spacing-m);
 }
 
 // Ensure padding-rules are not merged with other media query,

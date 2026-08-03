@@ -19,15 +19,11 @@ ion-footer {
   }
 }
 
-@include utils.media('<medium') {
-  :host {
-    --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
-  }
-}
-
 :host {
   box-sizing: border-box;
   display: block;
+
+  --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
 }
 
 :host(.snap-to-keyboard) {
@@ -64,8 +60,4 @@ ion-footer {
       /* clean-css ignore:end */
     }
   }
-}
-
-:host-context(.modal-wrapper.full-height) {
-  --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
 }
