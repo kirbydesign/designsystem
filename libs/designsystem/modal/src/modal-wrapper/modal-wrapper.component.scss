@@ -161,7 +161,7 @@ ion-content {
 // indicator). When a footer is present it applies the inset itself, so the
 // content must not add it again:
 @include utils.media('<medium') {
-  :host(:not(.has-footer)) ion-content {
+  :host(:not(:has(kirby-modal-footer))) ion-content {
     --padding-bottom: calc(#{utils.size('m')} + var(--kirby-safe-area-bottom, 0px));
   }
 }

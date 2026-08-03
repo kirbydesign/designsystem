@@ -64,10 +64,6 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       expect(footerAsWrapperChild).not.toBeNull();
     });
 
-    it('should add the has-footer class to the host element', () => {
-      expect(spectator.element).toHaveClass('has-footer');
-    });
-
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
 
@@ -159,20 +155,6 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       spectator.detectChanges();
       footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).toBeNull();
-    });
-
-    it('should toggle the has-footer class on the host element with the footer', async () => {
-      expect(spectator.element).not.toHaveClass('has-footer');
-
-      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
-      spectator.detectChanges();
-      await TestHelper.waitForResizeObserver();
-      expect(spectator.element).toHaveClass('has-footer');
-
-      embeddedComponent.showFooter = false;
-      spectator.detectChanges();
-      expect(spectator.element).not.toHaveClass('has-footer');
     });
 
     it('should render changes to embedded footer inside wrapper component', async () => {

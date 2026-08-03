@@ -219,7 +219,6 @@ export class ModalWrapperComponent
     }
     this._currentFooter = footer;
     if (footer !== null) {
-      this.renderer.addClass(this.elementRef.nativeElement, 'has-footer');
       this.resizeObserverService.observe(footer, (entry) => {
         const [property, pixelValue] = [
           '--footer-height',
@@ -227,8 +226,6 @@ export class ModalWrapperComponent
         ];
         this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
       });
-    } else {
-      this.renderer.removeClass(this.elementRef.nativeElement, 'has-footer');
     }
   }
 
