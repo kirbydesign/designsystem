@@ -534,10 +534,12 @@ export class ModalWrapperComponent
 
   private getKeyboardOverlap(keyboardHeight: number, element: Element) {
     if (keyboardHeight <= 0 || !element) return 0;
-    const distanceFromViewportBottomToElement = Math.floor(
-      this.windowRef.nativeWindow.innerHeight - element.getBoundingClientRect().bottom
+    const preKeyboardViewportHeight =
+      this.initialViewportHeight || this.windowRef.nativeWindow.innerHeight;
+    const elementDistanceAboveBottomOfScreen = Math.floor(
+      preKeyboardViewportHeight - element.getBoundingClientRect().bottom
     );
-    return Math.max(keyboardHeight - distanceFromViewportBottomToElement, 0);
+    return Math.max(keyboardHeight - elementDistanceAboveBottomOfScreen, 0);
   }
 
   private setCssVar(element: Element, property: string, value: string) {

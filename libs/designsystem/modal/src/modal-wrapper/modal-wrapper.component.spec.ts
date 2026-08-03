@@ -540,6 +540,40 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe(`getKeyboardOverlap`, () => {
+    const elementWithBottom = (bottom: number): Element =>
+      ({ getBoundingClientRect: () => ({ bottom }) as DOMRect }) as Element;
+
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+      spectator.component['initialViewportHeight'] = 800;
+    });
+
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should return 0 when the keyboard height is not positive', () => {
+      expect(spectator.component['getKeyboardOverlap'](0, elementWithBottom(800))).toBe(0);
+    });
+
+    it('should return the full keyboard height when the element sits at the bottom of the pre-keyboard viewport', () => {
+      // Overlay keyboard (no resize): element still at the true bottom, fully covered.
+      expect(spectator.component['getKeyboardOverlap'](300, elementWithBottom(800))).toBe(300);
+    });
+
+    it('should return the residual overlap when the element is only partially covered', () => {
+      // Element lifted 100px (bottom at 700 of 800) => 300 - 100 = 200 still covered.
+      expect(spectator.component['getKeyboardOverlap'](300, elementWithBottom(700))).toBe(200);
+    });
+
+    it('should return 0 when the element is already lifted above the keyboard by the viewport resize', () => {
+      // Android/Capacitor: webview shrank so the element bottom (500) is already a full
+      // keyboard height above the pre-keyboard bottom (800) => no additional overlap.
+      expect(spectator.component['getKeyboardOverlap'](300, elementWithBottom(500))).toBe(0);
+    });
+  });
+
   describe(`onHeaderTouchStart`, () => {
     let ionContent: HTMLIonContentElement;
     let input: HTMLInputElement;
