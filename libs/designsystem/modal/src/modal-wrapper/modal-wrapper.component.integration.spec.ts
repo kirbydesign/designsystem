@@ -115,6 +115,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder.flavor('modal').withDynamicFooter().build();
       spectator.detectComponentChanges();
+      spectator.component['initialViewportHeight'] = window.innerHeight;
     });
 
     afterEach(() => {
