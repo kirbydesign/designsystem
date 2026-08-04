@@ -5,11 +5,28 @@ $maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
 :host {
   display: inline-block;
   position: relative;
+  overflow: hidden;
 }
 
 :host(.sm) {
+  --kirby-progress-circle-stroke-width: 3px;
+
   width: clamp(40px, 2.5em, 56px);
   height: clamp(40px, 2.5em, 56px);
+}
+
+:host(.md) {
+  --kirby-progress-circle-stroke-width: 4px;
+
+  width: 56px;
+  height: 56px;
+}
+
+:host(.lg) {
+  --kirby-progress-circle-stroke-width: 6px;
+
+  width: 96px;
+  height: 96px;
 }
 
 :host(.sm) .transcluded-content,

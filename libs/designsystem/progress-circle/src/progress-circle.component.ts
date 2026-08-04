@@ -20,9 +20,9 @@ import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 })
 export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   readonly SIZE_CONFIG = {
-    sm: { diameter: 40, strokeWidth: 3, upperBound: 95 },
-    md: { diameter: 56, strokeWidth: 4, upperBound: 96 },
-    lg: { diameter: 96, strokeWidth: 6, upperBound: 97 },
+    sm: { upperBound: 95 },
+    md: { upperBound: 96 },
+    lg: { upperBound: 97 },
   };
 
   @HostBinding('attr.role') readonly role = 'progressbar';
@@ -76,31 +76,11 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostBinding('style.width.px')
-  @HostBinding('style.height.px')
-  get _hostSize(): number | null {
-    return this.size === 'sm' ? null : this.SIZE_CONFIG[this.size].diameter;
-  }
-
-  get _diameter(): number {
-    return this.SIZE_CONFIG[this.size].diameter;
-  }
-
   get _shownValue() {
-    // This is needed to make an animation [0 -> value] when element is shown to the user
     return this.hasElementBeenVisible ? this.value : 0;
   }
 
-  get _radius() {
-    return this._diameter / 2;
-  }
-
-  get _strokeWidth() {
-    return this.SIZE_CONFIG[this.size].strokeWidth;
-  }
-
   get _upperBound() {
-    // This is needed to make sure that an input value close to 100 is not shown as 100
     return this.SIZE_CONFIG[this.size].upperBound;
   }
 }

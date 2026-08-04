@@ -1,10 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
+  --kirby-progress-circle-background-stroke-color: #{utils.get-color('semi-light')};
+  --kirby-progress-circle-stroke-width: 4px;
+
   width: 100%;
   height: 100%;
 
-  // Colors
   &.success {
     --kirby-progress-circle-stroke-color: #{utils.get-color('success-shade')};
   }
@@ -32,6 +34,12 @@ svg {
   rotate: -90deg;
 }
 
+.circle,
+.progress {
+  r: calc(50% - var(--kirby-progress-circle-stroke-width) / 2);
+  stroke-width: var(--kirby-progress-circle-stroke-width);
+}
+
 .circle {
-  stroke: utils.get-color('semi-light');
+  stroke: var(--kirby-progress-circle-background-stroke-color, #{utils.get-color('semi-light')});
 }

@@ -13,10 +13,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleRingComponent implements AfterViewInit {
-  @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
-  @Input() strokeWidth: number;
   @Input() upperBound: number;
 
   @HostBinding('class.view-initialized')
@@ -26,33 +24,13 @@ export class ProgressCircleRingComponent implements AfterViewInit {
     this.viewInitialized = true;
   }
 
-  get _diameter(): number {
-    return this.radius * 2;
-  }
-
-  get _centerRadius(): number {
-    return this.radius - this.strokeWidth / 2;
-  }
-
-  get _centerCircumference(): number {
-    return this._centerRadius * 2 * Math.PI;
-  }
-
   get _progress(): number {
+    if (this.value === 0) return 0;
     const valueWithinBounds = this.value < this.upperBound || this.value > 99;
-    const _value = valueWithinBounds ? this.value : this.upperBound;
-    const progressPercentage = _value / 100;
-    return this._centerCircumference * progressPercentage;
+    return valueWithinBounds ? this.value : this.upperBound;
   }
 
   get _remainder(): number {
-    return this._centerCircumference - this._progress;
-  }
-
-  get _progressStrokeWidth(): number {
-    // Do not render stroke if progress is 0, otherwise it will show as a dot
-    if (this._progress === 0) return 0;
-
-    return this.strokeWidth;
+    return 100 - this._progress;
   }
 }
