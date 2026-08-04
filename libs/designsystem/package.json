@@ -35,7 +35,7 @@
     "chartjs-plugin-datalabels": "^2.0.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
-    "inputmask": "^5.0.9",
+    "inputmask": "^5.0.10",
     "rxjs": "^7.0.0",
     "swiper": "^9.2.0"
   },
