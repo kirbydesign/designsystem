@@ -1,7 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
-
 :host {
   display: inline-block;
   position: relative;
@@ -25,9 +23,13 @@ $maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
   --kirby-progress-circle-size: calc(var(--kirby-spacing-xxxl) + var(--kirby-spacing-xl));
 }
 
-:host(.sm) .transcluded-content,
-:host(.md) .transcluded-content {
-  font-size: min(1em, $maximum-font-size);
+:host(.sm) .transcluded-content {
+  font-size: var(--kirby-font-size-xs);
+}
+
+:host(.md) .transcluded-content,
+:host(.lg) .transcluded-content {
+  font-size: var(--kirby-font-size-s);
 }
 
 .transcluded-content,
