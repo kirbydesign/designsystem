@@ -17,7 +17,7 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "jsonc-eslint-parser": "^2.1.0",
-    "postcss": "^8.5.18",
+    "postcss": "^8.5.23",
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.5.0",
     "postcss-url": "~10.1.3"
