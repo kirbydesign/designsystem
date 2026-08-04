@@ -142,7 +142,7 @@ ion-content {
   --background: transparent;
   --color: var(--kirby-modal-color, #{utils.get-color('black')});
   --padding-top: #{utils.size('m')};
-  --padding-bottom: #{utils.size('m')};
+  --padding-bottom: calc(var(--kirby-spacing-m) + var(--kirby-safe-area-bottom, 0px));
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
 
@@ -155,6 +155,10 @@ ion-content {
     box-sizing: border-box;
     display: block;
   }
+}
+
+:host(:has(kirby-modal-footer)) ion-content {
+  --padding-bottom: var(--kirby-spacing-m);
 }
 
 // Ensure padding-rules are not merged with other media query,
