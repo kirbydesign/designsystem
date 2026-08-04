@@ -227,8 +227,6 @@ export class ModalWrapperComponent
         this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
       });
     }
-
-    this._currentFooter = footer;
   }
 
   private get currentFooter(): HTMLElement | null {
