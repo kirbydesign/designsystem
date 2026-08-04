@@ -12,7 +12,7 @@ ion-footer {
   background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
   color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
   padding: utils.size('s');
-  padding-bottom: calc(#{utils.size('xs')} + var(--kirby-safe-area-bottom));
+  padding-bottom: calc(#{utils.size('xs')} + var(--kirby-modal-safe-area-bottom));
 
   @include utils.media('>=medium') {
     padding: utils.size('m');
@@ -52,7 +52,7 @@ ion-footer {
 
       /* clean-css ignore:start */
       transform: translateY(
-        calc((var(--keyboard-offset, 0px) - var(--kirby-safe-area-bottom)) * -1)
+        calc((var(--keyboard-offset, 0px) - var(--kirby-modal-safe-area-bottom)) * -1)
       );
 
       /* clean-css ignore:end */
