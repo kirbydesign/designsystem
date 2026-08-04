@@ -131,7 +131,7 @@ export class ModalWrapperComponent
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
-  private initialViewportHeight: number;
+  private initialViewportHeight: number = 0;
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
   private ionModalDialog?: HTMLElement;
