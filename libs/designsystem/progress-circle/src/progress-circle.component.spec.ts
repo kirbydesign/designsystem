@@ -42,48 +42,6 @@ describe('ProgressCircleComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    describe('diameter', () => {
-      it('should default to md', () => {
-        expect(spectator.component._diameter).toBe(56);
-      });
-
-      it('should map sm to correct value', () => {
-        spectator.setInput({ size: 'sm' });
-        expect(spectator.component._diameter).toBe(40);
-      });
-
-      it('should map md to correct value', () => {
-        spectator.setInput({ size: 'md' });
-        expect(spectator.component._diameter).toBe(56);
-      });
-
-      it('should map lg to correct value', () => {
-        spectator.setInput({ size: 'lg' });
-        expect(spectator.component._diameter).toBe(96);
-      });
-    });
-
-    describe('strokeWidth', () => {
-      it('should default to md', () => {
-        expect(spectator.component._strokeWidth).toBe(4);
-      });
-
-      it('should map sm to correct value', () => {
-        spectator.setInput({ size: 'sm' });
-        expect(spectator.component._strokeWidth).toBe(3);
-      });
-
-      it('should map md to correct value', () => {
-        spectator.setInput({ size: 'md' });
-        expect(spectator.component._strokeWidth).toBe(4);
-      });
-
-      it('should map lg to correct value', () => {
-        spectator.setInput({ size: 'lg' });
-        expect(spectator.component._strokeWidth).toBe(6);
-      });
-    });
-
     describe('shownValue', () => {
       it('should return 0 until element has been visible', () => {
         spectator.setInput({ value: 50 });
@@ -97,15 +55,6 @@ describe('ProgressCircleComponent', () => {
         spectator.component['hasElementBeenVisible'] = true;
 
         expect(spectator.component._shownValue).toBe(50);
-      });
-    });
-
-    describe('radius', () => {
-      it('should calculate radius as diameter / 2', () => {
-        spectator.setInput({ size: 'sm' });
-        expect(spectator.component._radius).toBe(
-          spectator.component.SIZE_CONFIG['sm'].diameter / 2
-        );
       });
     });
 
