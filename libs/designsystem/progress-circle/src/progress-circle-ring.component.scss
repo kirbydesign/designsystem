@@ -2,7 +2,6 @@
 
 :host {
   --kirby-progress-circle-background-stroke-color: #{utils.get-color('semi-light')};
-  --kirby-progress-circle-stroke-width: 4px;
 
   width: 100%;
   height: 100%;
@@ -36,8 +35,8 @@ svg {
 
 .circle,
 .progress {
-  r: calc(50% - var(--kirby-progress-circle-stroke-width) / 2);
-  stroke-width: var(--kirby-progress-circle-stroke-width);
+  r: calc(50% - var(--kirby-progress-circle-stroke-width, 4px) / 2);
+  stroke-width: var(--kirby-progress-circle-stroke-width, 4px);
 }
 
 .circle {
