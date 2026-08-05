@@ -76,6 +76,9 @@ ion-header {
   --header-height: 0px;
   --footer-height: 0px;
 
+  // Ionic changes the ion-safe-area-bottom var within ion-modal, so we can't use the global kirby-safe-area-bottom var here, since that won't see the changed value.
+  --kirby-modal-safe-area-bottom: var(--ion-safe-area-bottom);
+
   &.drawer ion-header ion-toolbar {
     @include utils.media('<medium') {
       --padding-top: #{utils.size('s')};
@@ -142,7 +145,7 @@ ion-content {
   --background: transparent;
   --color: var(--kirby-modal-color, #{utils.get-color('black')});
   --padding-top: #{utils.size('m')};
-  --padding-bottom: calc(var(--kirby-spacing-m) + var(--kirby-safe-area-bottom, 0px));
+  --padding-bottom: calc(var(--kirby-spacing-m) + var(--kirby-modal-safe-area-bottom));
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
 
