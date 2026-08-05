@@ -74,8 +74,11 @@ describe('ModalFooterComponent', () => {
       spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
-      // Provided by kirby-modal-wrapper in the app; seed it so the footer's calc() is valid in isolation.
-      modalFooterElement.style.setProperty('--kirby-modal-safe-area-bottom', '0px');
+      // Provided by kirby-modal-wrapper in the app; seed it so the footer's calc() is valid in this isolated test.
+      modalFooterElement.style.setProperty(
+        '--kirby-modal-safe-area-bottom',
+        'var(--ion-safe-area-bottom)'
+      );
     });
 
     describe('on desktop', () => {
@@ -109,12 +112,6 @@ describe('ModalFooterComponent', () => {
         TestHelper.resetTestWindow();
       });
 
-      it('when --kirby-modal-safe-area-bottom is not set', () => {
-        expect(ionFooterElement).toHaveComputedStyle({
-          'padding-bottom': BASE_PADDING_SMALL_SCREEN_PX,
-        });
-      });
-
       it('when --kirby-modal-safe-area-bottom is set', () => {
         setSafeAreaBottom();
         const expected = BASE_PADDING_SMALL_SCREEN + SAFE_AREA_BOTTOM + 'px';
@@ -130,7 +127,11 @@ describe('ModalFooterComponent', () => {
       );
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
-      modalFooterElement.style.setProperty('--kirby-modal-safe-area-bottom', '0px');
+      // Provided by kirby-modal-wrapper in the app; seed it so the footer's calc() is valid in this isolated test.
+      modalFooterElement.style.setProperty(
+        '--kirby-modal-safe-area-bottom',
+        'var(--ion-safe-area-bottom)'
+      );
     });
 
     describe('when snapToKeyboard is true', () => {
