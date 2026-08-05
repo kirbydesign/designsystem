@@ -74,7 +74,8 @@ describe('ModalFooterComponent', () => {
       spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
-      // Provided by kirby-modal-wrapper in the app; seed it so the footer's calc() is valid in this isolated test.
+      // Provided by kirby-modal-wrapper in the app;
+      // seed it so the footer's calc() is valid in this isolated test.
       modalFooterElement.style.setProperty(
         '--kirby-modal-safe-area-bottom',
         'var(--ion-safe-area-bottom)'
@@ -127,7 +128,8 @@ describe('ModalFooterComponent', () => {
       );
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
-      // Provided by kirby-modal-wrapper in the app; seed it so the footer's calc() is valid in this isolated test.
+      // Provided by kirby-modal-wrapper in the app;
+      // seed it so the footer's calc() is valid in this isolated test.
       modalFooterElement.style.setProperty(
         '--kirby-modal-safe-area-bottom',
         'var(--ion-safe-area-bottom)'
