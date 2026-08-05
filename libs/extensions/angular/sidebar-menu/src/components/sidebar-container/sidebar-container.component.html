@@ -8,10 +8,7 @@
   (scroll)="vm.setScroll($event)"
   (heightChange)="vm.setContainerHeight($event)"
 >
-  <kirby-x-menu-container
-    kirbyXHeightObserver
-    (heightChange)="vm.setMenuHeight($event)"
-  ></kirby-x-menu-container>
+  <ng-content select="[slot='content']"></ng-content>
 </div>
 <div class="sidebar-footer" [class.top-border]="vm.showFooterTopBorder()">
   <ng-content select="[slot='footer']"></ng-content>

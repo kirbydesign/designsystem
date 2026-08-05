@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  padding: 0 var(--kirby-spacing-xxs, 8px);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--kirby-spacing-xxxs, 4px);
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.skeleton-loader {
+  height: var(--kirby-spacing-xl);
+  align-self: stretch;
+}
