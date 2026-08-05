@@ -77,10 +77,12 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   }
 
   get _shownValue() {
+    // This is needed to make an animation [0 -> value] when element is shown to the user
     return this.hasElementBeenVisible ? this.value : 0;
   }
 
   get _upperBound() {
+    // This is needed to make sure that an input value close to 100 is not shown as 100
     return this.SIZE_CONFIG[this.size].upperBound;
   }
 }
