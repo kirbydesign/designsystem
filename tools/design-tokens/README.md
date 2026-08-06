@@ -77,7 +77,7 @@ This writes:
   collide in one `:root`; brand does **not** override system primitives —
   brand success/warning/danger choices live in the semantic layer.
 - `semantic/color.css`, `semantic/color-chart.css` — per-surface semantic
-  tokens under `.kirby-theme-{base,raised,brand}`, each aliasing a system or
+  tokens under `.kirby-surface-{base,raised,brand}`, each aliasing a system or
   brand color primitive by membership.
 
 ## Override (external theme) build

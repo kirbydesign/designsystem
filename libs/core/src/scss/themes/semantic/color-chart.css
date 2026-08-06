@@ -2,7 +2,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-:root, .kirby-theme-base {
+:root, .kirby-surface-base {
   --kirby-theme-color-chart-positive-01: var(--kirby-system-color-green-600);
   --kirby-theme-color-chart-positive-01-hover: var(--kirby-system-color-green-700);
   --kirby-theme-color-chart-positive-01-active: var(--kirby-system-color-green-800);
@@ -149,7 +149,7 @@
   --kirby-theme-color-chart-sixth-06-active: var(--kirby-system-color-dark-grey-975);
 }
 
-.kirby-theme-raised {
+.kirby-surface-raised {
   --kirby-theme-color-chart-positive-01: var(--kirby-system-color-green-600);
   --kirby-theme-color-chart-positive-01-hover: var(--kirby-system-color-green-700);
   --kirby-theme-color-chart-positive-01-active: var(--kirby-system-color-green-800);
@@ -296,7 +296,7 @@
   --kirby-theme-color-chart-sixth-06-active: var(--kirby-system-color-dark-grey-975);
 }
 
-.kirby-theme-brand {
+.kirby-surface-brand {
   --kirby-theme-color-chart-positive-01: var(--kirby-system-color-green-100);
   --kirby-theme-color-chart-positive-01-hover: var(--kirby-system-color-green-200);
   --kirby-theme-color-chart-positive-01-active: var(--kirby-system-color-green-300);

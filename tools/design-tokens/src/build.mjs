@@ -156,8 +156,8 @@ export async function buildSemantic(colorTree, semanticTokens, { prefix, outDir 
   for (const surface of surfaces) {
     const selector =
       surface === DEFAULT_SURFACE
-        ? `:root, .${prefix}-theme-${surface}`
-        : `.${prefix}-theme-${surface}`;
+        ? `:root, .${prefix}-surface-${surface}`
+        : `.${prefix}-surface-${surface}`;
     files.push({
       destination: `${TEMP_PREFIX}${surface}.css`,
       format: 'css/variables',

@@ -149,6 +149,21 @@ describe('prepSemantic', () => {
     const result = prepSemantic(semanticData, membership);
     assert.deepEqual(Object.keys(result).sort(), ['base', 'brand', 'raised']);
   });
+
+  it('normalizes the Figma " surface" suffix to canonical surface ids', () => {
+    const semanticData = {
+      'base surface': { fill: { a: { $type: 'color', $value: colorObj('#AAA'), $extensions: {} } } },
+      'raised surface': { fill: { a: { $type: 'color', $value: colorObj('#BBB'), $extensions: {} } } },
+      'brand surface': { fill: { a: { $type: 'color', $value: colorObj('#CCC'), $extensions: {} } } },
+      // non-surface groups are ignored
+      spot: { fill: { a: { $type: 'color', $value: colorObj('#DDD'), $extensions: {} } } },
+      font: { size: { a: { $type: 'number', $value: 12 } } },
+    };
+    const result = prepSemantic(semanticData, membership);
+    assert.deepEqual(Object.keys(result).sort(), ['base', 'brand', 'raised']);
+    assert.equal(result.base.fill.a.$value.hex, '#AAA');
+    assert.equal(result.brand.fill.a.$value.hex, '#CCC');
+  });
 });
 
 describe('prepSemanticOverrideDelta', () => {
@@ -220,5 +235,19 @@ describe('prepSemanticOverrideDelta', () => {
 
     assert.equal(tokens.base.fill.a.$value, '{brand.color.green.500}');
     assert.equal(tokens.raised.fill.a.$value, '{brand.color.dark-blue.950}');
+  });
+
+  it('normalizes the " surface" suffix and matches default against override', () => {
+    const defaultSemantic = {
+      'base surface': { fill: { a: { $type: 'color', $value: colorObj('#AAA'), $extensions: alias('system/color/green/500') } } },
+    };
+    const overrideSemantic = {
+      'base surface': { fill: { a: { $type: 'color', $value: colorObj('#BBB'), $extensions: override('brand/color/green/500') } } },
+    };
+
+    const { tokens, stats } = prepSemanticOverrideDelta(overrideSemantic, defaultSemantic, membership);
+
+    assert.equal(tokens.base.fill.a.$value, '{brand.color.green.500}');
+    assert.equal(stats.included, 1);
   });
 });

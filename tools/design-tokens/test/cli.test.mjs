@@ -204,14 +204,14 @@ describe('run (integration)', () => {
     // the surface key did not clobber the same-named color scope.
     assert.match(semanticCss, /var\(--kirby-brand-color-green-500\)/);
     // …but the brand color primitives themselves must NOT leak as declarations
-    // into the .kirby-theme-brand surface block.
+    // into the .kirby-surface-brand surface block.
     assert.doesNotMatch(semanticCss, /^\s*--kirby-brand-color-green-500:/m);
     // The base surface is the default theme: it is emitted at :root as well as
     // under its class, so the base theme applies without an explicit class.
-    assert.match(semanticCss, /:root,\s*\.kirby-theme-base \{/);
+    assert.match(semanticCss, /:root,\s*\.kirby-surface-base \{/);
     // Non-default surfaces stay class-only.
-    assert.match(semanticCss, /^\.kirby-theme-brand \{/m);
-    assert.doesNotMatch(semanticCss, /:root,\s*\.kirby-theme-brand/);
+    assert.match(semanticCss, /^\.kirby-surface-brand \{/m);
+    assert.doesNotMatch(semanticCss, /:root,\s*\.kirby-surface-brand/);
   });
 
   it('emits system and brand color scopes to separate files without colliding', async () => {

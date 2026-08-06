@@ -42,10 +42,13 @@ Theming is modelled as **exactly three surface contexts** (`base`, `raised`,
   surface selector instead. Variables are
   `--kirby-theme-color-<role>-<prominence|intent>-<loudness>-<state>` (every
   segment explicit), and each surface re-assigns this one flat contract under
-  its selector (`.kirby-theme-base` — also seeded at `:root` —
-  `.kirby-theme-raised`, `.kirby-theme-brand`). Components read the variables
+  its selector (`.kirby-surface-base` — also seeded at `:root` —
+  `.kirby-surface-raised`, `.kirby-surface-brand`). Components read the variables
   blindly and inherit through the cascade. No JS, no context-awareness in
-  components.
+  components. (The Figma export may label these surfaces `"base surface"` /
+  `"raised surface"` / `"brand surface"`; the pipeline strips the ` surface`
+  suffix at ingestion and keys everything by the canonical `base`/`raised`/`brand`
+  id, so both export shapes are accepted.)
 
 **Invariants:** there are only ever three contexts; a single element must never
 both re-skin _and_ establish a context (that would reintroduce a ladder);
@@ -157,8 +160,8 @@ substructure beneath it:
 │   ├── system-color.css     ← :root { --kirby-system-color-* }   (always emitted)
 │   └── brand-color.css      ← :root { --kirby-brand-color-* }    (default brand, always emitted)
 ├── semantic/
-│   ├── color.css            ← .kirby-theme-{base,raised,brand}
-│   └── color-chart.css      ← .kirby-theme-{base,raised,brand} (chart tokens, per-surface)
+│   ├── color.css            ← .kirby-surface-{base,raised,brand}
+│   └── color-chart.css      ← .kirby-surface-{base,raised,brand} (chart tokens, per-surface)
 └── overrides/               ← gitignored by the consuming repo
     └── <name>/
         ├── primitives/…
@@ -200,11 +203,11 @@ supplies the Figma exports; it does not run in `postinstall`.
 
 #### 7. Three-tier token hierarchy
 
-| Tier      | CSS prefix(es)                                                                                                             | Selector                                                 |
-| --------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| Primitive | `--kirby-system-color-*`, `--kirby-brand-color-*`, `--kirby-spacing-*`, `--kirby-border-radius-*`, `--kirby-font-weight-*` | `:root`                                                  |
-| Semantic  | `--kirby-theme-color-*`                                                                                                    | `.kirby-theme-<surface>` (`base` also seeded at `:root`) |
-| Component | component-scoped tokens (`spot`, `logo`, `chart`, `tabs`, `toolbar`, …)                                                    | component class                                          |
+| Tier      | CSS prefix(es)                                                                                                             | Selector                                                   |
+| --------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Primitive | `--kirby-system-color-*`, `--kirby-brand-color-*`, `--kirby-spacing-*`, `--kirby-border-radius-*`, `--kirby-font-weight-*` | `:root`                                                    |
+| Semantic  | `--kirby-theme-color-*`                                                                                                    | `.kirby-surface-<surface>` (`base` also seeded at `:root`) |
+| Component | component-scoped tokens (`spot`, `logo`, `chart`, `tabs`, `toolbar`, …)                                                    | component class                                            |
 
 #### 8. Typography stays code-owned
 
@@ -221,7 +224,7 @@ behaviour.
   re-assigned under three surface selectors, rather than context baked into
   names.
 - **Surfaces paint from their own established context, not their parent.** A
-  surface element carries `.kirby-theme-<kind>` and reads its own plane tokens
+  surface element carries `.kirby-surface-<kind>` and reads its own plane tokens
   (`fill-base` / `content-base` / `border-neutral`) from that same class —
   establish and paint happen in one context, on one element, so there is no
   wrapper and no cascade-ordering problem. A consequence is that surface

@@ -23,6 +23,30 @@ import { collectLeafTokens, setNestedValue } from './tokens.mjs';
 const SURFACES = ['base', 'raised', 'brand'];
 
 /**
+ * Maps a semantic top-level key to its canonical surface id, tolerating the
+ * Figma display suffix (`"base surface"` -> `base`). Returns null for keys that
+ * aren't surfaces (`spot`, `font`, `$extensions`), so they stay excluded.
+ */
+function canonicalSurface(key) {
+  const stripped = key.replace(/ surface$/, '');
+  return SURFACES.includes(stripped) ? stripped : null;
+}
+
+/**
+ * Yields `[canonicalId, node]` for each surface present in a semantic export,
+ * normalizing the suffixed keys. Accepts both the old (`base`) and new
+ * (`base surface`) file shapes.
+ */
+function surfaceEntries(semanticData) {
+  const entries = [];
+  for (const key of Object.keys(semanticData)) {
+    const canonical = canonicalSurface(key);
+    if (canonical) entries.push([canonical, semanticData[key]]);
+  }
+  return entries;
+}
+
+/**
  * Merges color primitive files into one clean token tree, preserving each
  * leaf's full Figma path. Values remain full Figma color objects so the SD
  * `value/hex` transform can extract hex at build time.
@@ -96,10 +120,8 @@ function outputValue(node, ref) {
 export function prepSemantic(semanticData, membership) {
   const result = {};
 
-  for (const surface of SURFACES) {
-    if (!semanticData[surface]) continue;
-
-    for (const { path, node } of collectLeafTokens(semanticData[surface])) {
+  for (const [surface, surfaceNode] of surfaceEntries(semanticData)) {
+    for (const { path, node } of collectLeafTokens(surfaceNode)) {
       if (node.$type !== 'color') continue;
 
       const aliasData = node.$extensions?.['com.figma.aliasData'];
@@ -132,12 +154,14 @@ export function prepSemanticOverrideDelta(overrideSemanticData, defaultSemanticD
   const result = {};
   const stats = { total: 0, overrides: 0, included: 0 };
 
-  for (const surface of SURFACES) {
-    if (!overrideSemanticData[surface]) continue;
+  const defaultSurfaces = new Map(surfaceEntries(defaultSemanticData));
+
+  for (const [surface, overrideNode] of surfaceEntries(overrideSemanticData)) {
+    const defaultNode = defaultSurfaces.get(surface);
 
     const defaultRefMap = new Map();
-    if (defaultSemanticData[surface]) {
-      for (const { path, node } of collectLeafTokens(defaultSemanticData[surface])) {
+    if (defaultNode) {
+      for (const { path, node } of collectLeafTokens(defaultNode)) {
         if (node.$type !== 'color') continue;
         const aliasData = node.$extensions?.['com.figma.aliasData'];
         const ref = resolveAlias(aliasData, membership);
@@ -145,7 +169,7 @@ export function prepSemanticOverrideDelta(overrideSemanticData, defaultSemanticD
       }
     }
 
-    for (const { path, node } of collectLeafTokens(overrideSemanticData[surface])) {
+    for (const { path, node } of collectLeafTokens(overrideNode)) {
       if (node.$type !== 'color') continue;
       stats.total++;
 

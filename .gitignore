@@ -11,17 +11,6 @@
 # Override theme token build output (generated, not committed)
 /libs/core/src/scss/themes/overrides/
 
-# Figma variable exports (source data, not committed) — see @repo/design-tokens
-specs.json
-typography.json
-kirby-tier-1.json
-default-light-primitive.json
-default-light-semantic.json
-brand-*-light-*.json
-primitive.color.system.json
-primitive.color.brand.json
-semantic.color.brand.json
-
 # compiled core library output
 /libs/core/loader
 /libs/core/dist/

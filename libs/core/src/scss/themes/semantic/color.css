@@ -2,8 +2,8 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-:root, .kirby-theme-base {
-  --kirby-theme-color-border-focus-loud: #238cec;
+:root, .kirby-surface-base {
+  --kirby-theme-color-border-focus: #238cec;
   --kirby-theme-color-fill-base: var(--kirby-system-color-light-grey-100);
   --kirby-theme-color-fill-base-hover: var(--kirby-system-color-light-grey-300);
   --kirby-theme-color-fill-base-active: var(--kirby-system-color-light-grey-500);
@@ -185,11 +185,11 @@
   --kirby-theme-color-border-danger-quiet: var(--kirby-system-color-red-200);
   --kirby-theme-color-border-danger-quiet-hover: var(--kirby-system-color-red-100);
   --kirby-theme-color-border-danger-quiet-active: var(--kirby-system-color-red-50);
-  --kirby-theme-color-border-focus: var(--kirby-system-color-light-grey-25);
+  --kirby-theme-color-border-offset: var(--kirby-system-color-light-grey-25);
 }
 
-.kirby-theme-raised {
-  --kirby-theme-color-border-focus-loud: #238cec;
+.kirby-surface-raised {
+  --kirby-theme-color-border-focus: #238cec;
   --kirby-theme-color-fill-base: var(--kirby-system-color-white-00);
   --kirby-theme-color-fill-base-hover: var(--kirby-system-color-light-grey-100);
   --kirby-theme-color-fill-base-active: var(--kirby-system-color-light-grey-300);
@@ -371,11 +371,11 @@
   --kirby-theme-color-border-danger-quiet: var(--kirby-system-color-red-200);
   --kirby-theme-color-border-danger-quiet-hover: var(--kirby-system-color-red-300);
   --kirby-theme-color-border-danger-quiet-active: var(--kirby-system-color-red-400);
-  --kirby-theme-color-border-focus: var(--kirby-system-color-white-00);
+  --kirby-theme-color-border-offset: var(--kirby-system-color-white-00);
 }
 
-.kirby-theme-brand {
-  --kirby-theme-color-border-focus-loud: #238cec;
+.kirby-surface-brand {
+  --kirby-theme-color-border-focus: #238cec;
   --kirby-theme-color-fill-base: var(--kirby-brand-color-dark-blue-950);
   --kirby-theme-color-fill-base-hover: var(--kirby-brand-color-dark-blue-900);
   --kirby-theme-color-fill-base-active: var(--kirby-brand-color-dark-blue-800);
@@ -557,5 +557,5 @@
   --kirby-theme-color-border-danger-quiet: var(--kirby-system-color-red-200);
   --kirby-theme-color-border-danger-quiet-hover: var(--kirby-system-color-red-200);
   --kirby-theme-color-border-danger-quiet-active: var(--kirby-system-color-red-200);
-  --kirby-theme-color-border-focus: var(--kirby-brand-color-dark-blue-950);
+  --kirby-theme-color-border-offset: var(--kirby-brand-color-dark-blue-950);
 }
