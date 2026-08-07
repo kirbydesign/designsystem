@@ -74,7 +74,7 @@ $bullet-inactive-opacity: 0.2;
 
   swiper-container {
     padding-block: var(--kirby-spacing-m);
-    margin-block: -(var(--kirby-spacing-m));
+    margin-block: calc(-1 * var(--kirby-spacing-m));
   }
 
   @include utils.media('<medium') {

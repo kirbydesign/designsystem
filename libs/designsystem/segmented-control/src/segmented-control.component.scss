@@ -23,7 +23,7 @@ $badge-offset: 0.8em;
 
       --padding-start: var(--kirby-spacing-s);
       --padding-end: var(--kirby-spacing-s);
-      --kirby-badge-right: -var(--kirby-spacing-xxs);
+      --kirby-badge-right: calc(-1 * var(--kirby-spacing-xxs));
 
       &:focus-visible {
         transition: interaction-state.transition();

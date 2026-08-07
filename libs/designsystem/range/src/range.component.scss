@@ -104,5 +104,5 @@ label {
   font-size: var(--kirby-font-size-xs);
   line-height: var(--kirby-line-height-xs);
   color: var(--kirby-text-color-semi-dark);
-  margin-top: -var(--kirby-spacing-xxxs);
+  margin-top: calc(-1 * var(--kirby-spacing-xxxs));
 }
