@@ -71,7 +71,7 @@ ion-range {
     padding: var(--kirby-spacing-xxxxs) var(--kirby-spacing-xxs);
     border-radius: var(--kirby-spacing-xxxs);
     min-width: var(--kirby-spacing-m);
-    top: -var(--kirby-spacing-xs);
+    top: calc(-1 * var(--kirby-spacing-xxs));
 
     &::before {
       content: '';
