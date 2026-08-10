@@ -11,7 +11,7 @@
   color: var(--sidebar-color, utils.get-color('tertiary-contrast'));
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden; // Only the .sidebar-content should be scrollable.
 
   * {
     scrollbar-width: thin;
@@ -38,6 +38,7 @@
 
 .sidebar-content {
   flex-grow: 1;
+  min-height: 0; // Allow the content to shrink and scroll internally instead of pushing the footer out of view (iOS Safari)
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -51,10 +52,11 @@
 .sidebar-header,
 .sidebar-footer {
   z-index: 1;
+  flex-shrink: 0; // Keep header/footer at full size so they are never squeezed out by overflowing content
   display: flex;
   align-items: center;
   justify-content: center;
-  position: sticky;
+  position: relative; // Pinned by flex layout; relative keeps z-index active so the border shadow draws over content
 }
 
 .sidebar-header.bottom-border {
