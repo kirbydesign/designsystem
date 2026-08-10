@@ -58,6 +58,7 @@
     "@custom-elements-manifest/analyzer": "^0.10.4",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
+    "@ionic/angular": "8.8.9-dev.11781013468.1ed93da9",
     "@nx/angular": "22.6.5",
     "@nx/jest": "22.6.5",
     "@nx/js": "22.6.5",
@@ -95,7 +96,11 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "wait-on": "^7.2.0"
+    "wait-on": "^7.2.0",
+    "zone.js": "~0.16.0"
+  },
+  "overrides": {
+    "@ionic/core": "8.8.9-dev.11781013468.1ed93da9"
   },
   "husky": {
     "hooks": {
