@@ -112,6 +112,13 @@ describe('SlidesComponent', () => {
     expect(spectator.component.swiperContainer.nativeElement.swiper.activeIndex).toBe(4);
   });
 
+  it('should not inject swiper´s default navigation arrow icons into the buttons', () => {
+    spectator = createHost(hostTemplate, props);
+
+    expect(spectator.query('.swiper-button-prev .swiper-navigation-icon')).toBeNull();
+    expect(spectator.query('.swiper-button-next .swiper-navigation-icon')).toBeNull();
+  });
+
   it('should hide the navigation buttons, if the Slider doesn´t contain enough slides for sliding', () => {
     spectator = createHost(hostTemplate, props);
     spectator.setHostInput('slides', [0]);

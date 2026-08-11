@@ -37,7 +37,7 @@
     "date-fns-tz": "^3.2.0",
     "inputmask": "^5.0.10",
     "rxjs": "^7.0.0",
-    "swiper": "^9.2.0"
+    "swiper": "^14.0.0"
   },
   "devDependencies": {
     "@ngneat/spectator": "^22.1.0",

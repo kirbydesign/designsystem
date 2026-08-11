@@ -2,19 +2,9 @@
 
 $bullet-width: 10px;
 $bullet-height: 6px;
-$bullet-border-radius: 3px;
 $bullet-inactive-opacity: 0.2;
 
 :host {
-  --swiper-navigation-sides-offset: 0;
-  --swiper-pagination-bullet-width: #{$bullet-width};
-  --swiper-pagination-bullet-height: #{$bullet-height};
-  --swiper-pagination-bullet-border-radius: #{$bullet-border-radius};
-  --swiper-pagination-bullet-horizontal-gap: #{utils.size('xxxs')};
-  --swiper-pagination-color: #{utils.get-color('black')};
-  --swiper-pagination-bullet-inactive-color: #{utils.get-color('black')};
-  --swiper-pagination-bullet-inactive-opacity: #{$bullet-inactive-opacity};
-
   .navigation {
     display: flex;
     justify-content: space-between;
@@ -34,10 +24,28 @@ $bullet-inactive-opacity: 0.2;
     width: auto;
     margin-inline-end: utils.size('s');
 
-    // we need to use ::ng-deep as the pagination bullet spans are added to the dom by swiperjs:
+    /*
+      * Since swiperjs v10, custom properties for pagination bullets are scoped to the
+      * swiper-container element, but custom pagination is added to the light DOM by swiperjs,
+      * so we style element directly. This is also why we use ::ng-deep.
+      */
     /* stylelint-disable selector-pseudo-element-no-unknown */
-    ::ng-deep .swiper-pagination-bullet:last-of-type {
-      margin-inline-end: 0;
+    ::ng-deep .swiper-pagination-bullet {
+      display: inline-block;
+      width: $bullet-width;
+      height: $bullet-height;
+      margin-inline: var(--kirby-spacing-xxxs);
+      border-radius: var(--kirby-border-radius-pill);
+      background: var(--kirby-black);
+      opacity: $bullet-inactive-opacity;
+
+      &-active {
+        opacity: 1;
+      }
+
+      &:last-of-type {
+        margin-inline-end: 0;
+      }
     }
   }
 
@@ -72,13 +80,13 @@ $bullet-inactive-opacity: 0.2;
     display: none;
   }
 
-  swiper-container {
+  swiper-container::part(container) {
     padding-block: utils.size('m');
     margin-block: -(utils.size('m'));
   }
 
   @include utils.media('<medium') {
-    swiper-container {
+    swiper-container::part(container) {
       padding-inline: utils.size('s');
       margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
     }

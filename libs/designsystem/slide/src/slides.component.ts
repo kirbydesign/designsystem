@@ -15,8 +15,8 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { Swiper, SwiperOptions } from 'swiper';
 import { register } from 'swiper/element/bundle';
+import type { Swiper, SwiperOptions } from 'swiper/types';
 import {
   DesignTokenHelper,
   PlatformService,
@@ -125,6 +125,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
       navigation: {
         nextEl: `.${this._nextButtonId}`,
         prevEl: `.${this._prevButtonId}`,
+        addIcons: false,
       },
       on: {
         slideChange: (swiper) => {
