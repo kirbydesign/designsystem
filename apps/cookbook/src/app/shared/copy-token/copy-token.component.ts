@@ -25,6 +25,7 @@ const activeCopyToken = signal<CopyTokenComponent | null>(null);
 })
 export class CopyTokenComponent {
   @Input() cssVar: string;
+  @Input() text: string;
 
   copied = signal(false);
 
@@ -37,7 +38,8 @@ export class CopyTokenComponent {
   }
 
   copy(cssVarOverride?: string) {
-    navigator.clipboard.writeText(`var(${cssVarOverride ?? this.cssVar})`);
+    const value = this.text ?? `var(${cssVarOverride ?? this.cssVar})`;
+    navigator.clipboard.writeText(value);
     activeCopyToken.set(this);
     this.copied.set(true);
     setTimeout(() => this.copied.set(false), 1500);
