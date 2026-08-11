@@ -332,6 +332,10 @@ $button-margin: utils.size('xxxs');
   justify-content: space-between;
 }
 
+.content-layer {
+  min-width: 0;
+}
+
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
