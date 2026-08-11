@@ -540,6 +540,57 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe(`getKeyboardOverlap`, () => {
+    const elementWithDistanceFromTopOfViewport = (bottom: number): Element =>
+      ({ getBoundingClientRect: () => ({ bottom }) as DOMRect }) as Element;
+    const viewportHeight = 800;
+    const keyboardHeight = 300;
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+      spectator.component['initialViewportHeight'] = viewportHeight;
+    });
+
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should return 0 when the keyboard height is negative', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          -1,
+          elementWithDistanceFromTopOfViewport(viewportHeight)
+        )
+      ).toBe(0);
+    });
+
+    it('should return the height of the keyboard when the element sits at the bottom of the viewport', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(viewportHeight)
+        )
+      ).toBe(keyboardHeight);
+    });
+
+    it('should return the residual overlap when the element is only partially covered', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(700)
+        )
+      ).toBe(200);
+    });
+
+    it('should return 0 when the element is already lifted above the keyboard by the viewport resize', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(viewportHeight - keyboardHeight - 100)
+        )
+      ).toBe(0);
+    });
+  });
+
   describe(`onHeaderTouchStart`, () => {
     let ionContent: HTMLIonContentElement;
     let input: HTMLInputElement;
