@@ -52,7 +52,7 @@
 .sidebar-header,
 .sidebar-footer {
   z-index: 1;
-  flex-shrink: 0; // never shrink header/footer
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
