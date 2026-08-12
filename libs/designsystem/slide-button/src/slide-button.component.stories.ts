@@ -12,13 +12,13 @@ type Story = StoryObj<SlideButtonComponent>;
 
 export const SlideButton: Story = {
   args: {
-    text: 'Slide button',
+    text: 'Confirm',
   },
 };
 
 export const Focused: Story = {
   args: {
-    text: 'Slide to confirm',
+    text: 'Confirm',
   },
   decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
   play: async ({ canvasElement }) => {
