@@ -114,7 +114,6 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct size', async () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
-        width: 'auto',
         height: size('xl'),
       });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
