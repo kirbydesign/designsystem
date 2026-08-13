@@ -23,11 +23,16 @@ export class ProgressCircleRingComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.viewInitialized = true;
   }
+  private readonly UPPER_AND_LOWER_BOUND_GAP = 2.5;
 
   get _progress(): number {
-    if (this.value === 0) return 0;
-    const valueWithinBounds = this.value < this.upperBound || this.value > 99;
-    return valueWithinBounds ? this.value : this.upperBound;
+    if (this.value <= 0) return 0;
+    if (this.value >= 100) return 100;
+    return Math.min(this.value, 100 - this.UPPER_AND_LOWER_BOUND_GAP);
+  }
+
+  get _linecap(): 'butt' | 'round' {
+    return this._progress <= 0 || this._progress >= 100 ? 'butt' : 'round';
   }
 
   get _remainder(): number {
