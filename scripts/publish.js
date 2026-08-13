@@ -37,10 +37,7 @@ const coreLibSrcDir = `${coreLibDir}/src`;
 
 const extensionsAngularLibDir = `${libsRootDir}/extensions/angular`;
 
-// The stylelint-plugin is plain ESM with no build step: its package directory
-// is already publishable as-is, with the package.json "files" allow-list
-// controlling what ships.
-const stylelintPluginLibDir = `${libsRootDir}/stylelint-plugin`;
+const stylelintPluginLibDir = `./${libsRootDir}/stylelint-plugin`;
 
 const dist = `dist`;
 const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
@@ -254,9 +251,9 @@ if (doPublishExtensionsAngular) {
 }
 
 if (doPublishStylelintPlugin) {
-  // Publish stylelint-plugin. No build step: the package is plain ESM and its
-  // package.json "files" allow-list controls what ships, so we publish the
-  // workspace directory directly.
+  // Publish stylelint-plugin.
+  // No build step: the package is plain ESM and its package.json "files" allow-list
+  // controls what ships, so we publish the workspace directory directly.
   console.log('--- Publishing stylelint-plugin ---');
   publish(stylelintPluginLibDir, 'kirbydesign-stylelint-plugin').catch((err) =>
     console.warn('*** ERROR WHEN PUBLISHING STYLELINT-PLUGIN ***', err)
