@@ -103,9 +103,5 @@
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
-  },
-  "dependencies": {
-    "@kirbydesign/designsystem": "^11.10.0",
-    "@kirbydesign/extensions-angular": "^5.0.0"
   }
 }
