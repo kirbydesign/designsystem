@@ -4,7 +4,7 @@
   "sourceRoot": "libs/extensions/angular",
   "prefix": "kirby-x",
   "projectType": "library",
-  "tags": [],
+  "tags": ["test:headless-browser"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
