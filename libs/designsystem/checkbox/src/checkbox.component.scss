@@ -136,7 +136,6 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     }
 
     &:focus-visible::part(container) {
-      outline: none;
       padding: calc(
         var(--kirby-checkbox-container-padding) + 1px
       ); // Compensate for removed 1px border to prevent checkmark from growing in ion-checkbox
