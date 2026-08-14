@@ -1,5 +1,8 @@
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ComboboxComponent, ComboboxModule } from '@kirbydesign/extensions-angular/combobox';
+import {
+  ComboboxComponent,
+  ComboboxItemTemplateDirective,
+} from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ItemModule } from '@kirbydesign/designsystem/item';
@@ -82,7 +85,8 @@ const meta: Meta<ComboboxComponent> = {
       imports: [
         ItemModule,
         InputComponent,
-        ComboboxModule,
+        ComboboxComponent,
+        ComboboxItemTemplateDirective,
         FormFieldComponent,
         ReactiveFormsModule,
       ],
@@ -206,7 +210,7 @@ export const WithTemplate: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+          *kirbyComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           role="option"
           [selectable]="true"
           [selected]="selected"
@@ -247,7 +251,7 @@ export const CustomSearchFunction: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+          *kirbyComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
           [selectable]="true"
           [selected]="selected"
@@ -284,7 +288,7 @@ export const LargeList: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+          *kirbyComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
           [selectable]="true"
           [selected]="selected"

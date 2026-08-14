@@ -1,2 +1,2 @@
 export { ComboboxComponent } from './combobox.component';
-export { ComboboxModule } from './combobox.module';
+export { ComboboxItemTemplateDirective } from './combobox-item-template.directive';
