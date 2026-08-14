@@ -1,4 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CardComponent } from '@kirbydesign/designsystem/card';
@@ -79,7 +80,6 @@ describe('Combobox', () => {
         },
       }
     );
-    spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
     const inputQuery = spectator.query<HTMLInputElement>('input[kirby-input]');
     if (!inputQuery) throw new Error('Input element not found');
     inputElement = inputQuery;
@@ -141,6 +141,51 @@ describe('Combobox', () => {
       const inputId = spectator.component._comboboxId;
       expect(inputElement?.getAttribute('id')).toBe(inputId);
     });
+
+    it('should apply rounded corners to the visible popup edges', fakeAsync(() => {
+      spectator.component.open();
+      tick(16);
+      spectator.detectChanges();
+
+      const renderedItems = Array.from(
+        document.querySelectorAll<HTMLElement>('kirby-popover kirby-item')
+      );
+      expect(renderedItems.length).toBeGreaterThan(1);
+
+      expect(renderedItems[0]).toHaveComputedStyle({
+        '--kirby-content-border-top-radius': DesignTokenHelper.borderRadius('n'),
+        '--kirby-content-border-bottom-radius': '0',
+      });
+      if (renderedItems.length > 2) {
+        const middleIndex = Math.floor(renderedItems.length / 2);
+        expect(renderedItems[middleIndex]).toHaveComputedStyle({
+          '--kirby-content-border-top-radius': '0',
+          '--kirby-content-border-bottom-radius': '0',
+        });
+      }
+      expect(renderedItems[renderedItems.length - 1]).toHaveComputedStyle({
+        '--kirby-content-border-top-radius': '0',
+        '--kirby-content-border-bottom-radius': DesignTokenHelper.borderRadius('n'),
+      });
+
+      const previouslyLastRenderedItem = renderedItems[renderedItems.length - 1];
+      for (let i = 0; i < renderedItems.length + 1; i += 1) {
+        spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
+      }
+      spectator.detectChanges();
+
+      const nextRenderedItems = Array.from(
+        document.querySelectorAll<HTMLElement>('kirby-popover kirby-item')
+      );
+
+      expect(previouslyLastRenderedItem).toHaveComputedStyle({
+        '--kirby-content-border-bottom-radius': '0',
+      });
+      expect(nextRenderedItems[nextRenderedItems.length - 1]).toHaveComputedStyle({
+        '--kirby-content-border-top-radius': '0',
+        '--kirby-content-border-bottom-radius': DesignTokenHelper.borderRadius('n'),
+      });
+    }));
   });
 
   describe('clicking', () => {
@@ -175,7 +220,6 @@ describe('Combobox', () => {
 
       // Act
       inputElement?.click();
-      spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
       spectator.typeInElement('Item 1', inputElement);
 
       // Assert

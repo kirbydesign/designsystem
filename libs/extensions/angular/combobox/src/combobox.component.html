@@ -38,8 +38,15 @@
         role="listbox"
         [itemSize]="itemHeight"
         [style.height.px]="viewportHeight"
+        (scrolledIndexChange)="onViewportScrolledIndexChange($event)"
       >
-        <ng-container *cdkVirtualFor="let item of searchItems">
+        <div
+          class="combobox-item-context"
+          *cdkVirtualFor="let item of searchItems; let index = index"
+          [class.keyboard-focused]="item === focusedItem"
+          [class.virtual-scroll-first-visible]="isFirstVisibleItem(index)"
+          [class.virtual-scroll-last-visible]="isLastVisibleItem(index)"
+        >
           <ng-container
             *ngTemplateOutlet="
               itemTemplate || defaultItemTemplate;
@@ -50,7 +57,7 @@
               }
             "
           ></ng-container>
-        </ng-container>
+        </div>
       </cdk-virtual-scroll-viewport>
     }
   </kirby-card>
@@ -61,7 +68,7 @@
     role="option"
     [selectable]="true"
     [selected]="selected"
-    [class.focused]="focused"
+    [class.keyboard-focused]="focused"
     [attr.id]="getItemId(item)"
     [attr.aria-selected]="selected"
     (click)="onItemSelect(item)"

@@ -87,6 +87,22 @@ kirby-card {
   width: 100%;
 }
 
+.combobox-item-context {
+  display: block;
+  width: 100%;
+
+  --kirby-content-border-top-radius: 0;
+  --kirby-content-border-bottom-radius: 0;
+}
+
+.combobox-item-context.virtual-scroll-first-visible {
+  --kirby-content-border-top-radius: var(--kirby-border-radius-n);
+}
+
+.combobox-item-context.virtual-scroll-last-visible {
+  --kirby-content-border-bottom-radius: var(--kirby-border-radius-n);
+}
+
 .no-results {
   color: utils.get-text-color('semi-dark');
 }
