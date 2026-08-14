@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/designsystem",
-  "version": "11.8.0",
+  "version": "11.10.0",
   "description": "The Kirby Design Angular Components.",
   "author": "kirby@bankdata.dk",
   "repository": {
@@ -35,7 +35,7 @@
     "chartjs-plugin-datalabels": "^2.0.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
-    "inputmask": "^5.0.9",
+    "inputmask": "^5.0.10",
     "rxjs": "^7.0.0",
     "swiper": "^9.2.0"
   },
@@ -56,7 +56,7 @@
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.32",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.23",
     "postcss-import": "14.1.0",
     "postcss-preset-env": "7.5.0",
     "postcss-url": "10.1.3"

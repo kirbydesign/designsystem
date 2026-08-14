@@ -18,6 +18,7 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import { RouterOutletComponent } from '@kirbydesign/designsystem/router-outlet';
 import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 import { Component } from '@angular/core';
+import { TextResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 
 const firstPageTitle = 'First Page';
@@ -84,6 +85,10 @@ describe('RouterOutlet when config provided for focusManager + setHtmlDocTitle',
     ],
     providers: [
       provideKirby(withGlobalSetup({ focusManager: true, setHtmlDocTitle: true })),
+      {
+        provide: TextResizeObserverService,
+        useValue: { initialize: () => {}, ngOnDestroy: () => {} },
+      },
       provideRouter(routes),
     ],
   });

@@ -1,7 +1,7 @@
 @use '../design-token-table';
 @use '../showcase.shared';
 
-.spacing-sample {
+.sample.spacing {
   display: block;
   height: var(--kirby-spacing-xxs);
   background-color: var(--kirby-primary);

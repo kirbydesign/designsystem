@@ -10,6 +10,17 @@ $item-height: utils.size('xxxl');
   display: block;
 }
 
+:host(:not(kirby-list-item)) {
+  --kirby-list-border-top-radius: var(
+    --kirby-content-border-top-radius,
+    var(--kirby-border-radius-n)
+  );
+  --kirby-list-border-bottom-radius: var(
+    --kirby-content-border-bottom-radius,
+    var(--kirby-border-radius-n)
+  );
+}
+
 .list {
   box-shadow: $shadow;
   background: transparent;
@@ -151,7 +162,7 @@ ion-item-options[side='end'] {
 
   .list-items {
     box-shadow: $shadow;
-    border-radius: utils.border-radius('n');
+    border-radius: var(--kirby-border-radius-n);
   }
 
   .footer {
@@ -168,18 +179,22 @@ ion-item-options[side='end'] {
 :host-context(.shape-rounded) {
   .list,
   .list-items {
-    border-radius: utils.border-radius('n');
+    border-radius: var(--kirby-list-border-top-radius) var(--kirby-list-border-top-radius)
+      var(--kirby-list-border-bottom-radius) var(--kirby-list-border-bottom-radius);
   }
 
   ion-item.first,
   ion-item-sliding.first,
   ion-list-header {
-    border-top-left-radius: utils.border-radius('n');
-    border-top-right-radius: utils.border-radius('n');
     mask-image: radial-gradient(
       white,
       black
     ); // Solves issues with round borders at iOS in certain scenarios
+  }
+
+  ion-list-header {
+    border-top-left-radius: var(--kirby-list-border-top-radius);
+    border-top-right-radius: var(--kirby-list-border-top-radius);
   }
 
   ion-item-sliding > ion-item,
@@ -192,12 +207,15 @@ ion-item-options[side='end'] {
   ion-item.last,
   ion-item-sliding.last,
   .footer {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
     mask-image: radial-gradient(
       white,
       black
     ); // Solves issues with round borders at iOS in certain scenarios
+  }
+
+  .footer {
+    border-bottom-left-radius: var(--kirby-list-border-bottom-radius);
+    border-bottom-right-radius: var(--kirby-list-border-bottom-radius);
   }
 
   ion-item-sliding > ion-item,
@@ -206,6 +224,28 @@ ion-item-options[side='end'] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
+}
+
+// Set border radius variables on kirby-list-item for the item component to consume.
+kirby-list-item {
+  --kirby-content-border-top-radius: 0;
+  --kirby-content-border-bottom-radius: 0;
+}
+
+kirby-list-item:first-of-type {
+  --kirby-content-border-top-radius: var(--kirby-list-border-top-radius);
+}
+
+kirby-list-item:last-of-type {
+  --kirby-content-border-bottom-radius: var(--kirby-list-border-bottom-radius);
+}
+
+.has-header kirby-list-item:first-of-type {
+  --kirby-content-border-top-radius: 0;
+}
+
+.has-footer kirby-list-item:last-of-type {
+  --kirby-content-border-bottom-radius: 0;
 }
 
 :host-context(.shape-none) {
@@ -221,6 +261,10 @@ ion-item-options[side='end'] {
 
 :host-context(kirby-card) {
   --kirby-list-item-border-color: #{utils.get-color('background-color')};
+}
+
+:host-context(kirby-card.outlined) {
+  --kirby-list-item-border-color: #{utils.get-color('medium')};
 }
 
 :host-context(.item-spacing) {

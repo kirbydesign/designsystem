@@ -7,7 +7,9 @@ $min-screen-width-small: 320px;
 $min-screen-width: 375px;
 
 :host {
-  @include interaction-state.apply-focus-visible {
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
     outline: none;
     border-radius: utils.border-radius('pill');
   }
@@ -18,7 +20,7 @@ $min-screen-width: 375px;
   & {
     display: inline-block;
     position: relative;
-    max-width: calc(100vw - #{$margin-horizontal-total});
+    max-width: min(calc(100vw - #{$margin-horizontal-total}), 100%);
   }
   /* stylelint-enable no-duplicate-selectors */
 
@@ -53,6 +55,7 @@ $min-screen-width: 375px;
     .text {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 

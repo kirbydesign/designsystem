@@ -1,6 +1,7 @@
 import {
   applicationConfig,
   argsToTemplate,
+  componentWrapperDecorator,
   Meta,
   moduleMetadata,
   StoryObj,
@@ -11,7 +12,9 @@ import {
   SidebarComponent,
   SidebarFooterComponent,
   SidebarHeaderComponent,
+  SidebarMenuComponent,
   SidebarMenuItem,
+  SidebarMenuLoaderComponent,
 } from '@kirbydesign/extensions-angular/sidebar-menu';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -264,7 +267,8 @@ const menuItemsWithExternalLinks: SidebarMenuItem[] = [
   },
 ];
 
-type SidebarPropsAndCustomArgs = SidebarComponent & { mainAreaContent?: string };
+type SidebarPropsAndCustomArgs = SidebarComponent &
+  Partial<SidebarMenuComponent> & { mainAreaContent?: string };
 
 /**
  *
@@ -294,7 +298,14 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
   component: SidebarComponent,
   decorators: [
     moduleMetadata({
-      imports: [SidebarHeaderComponent, SidebarFooterComponent, ButtonComponent, IconComponent],
+      imports: [
+        SidebarHeaderComponent,
+        SidebarFooterComponent,
+        SidebarMenuComponent,
+        SidebarMenuLoaderComponent,
+        ButtonComponent,
+        IconComponent,
+      ],
     }),
     applicationConfig({
       providers: [provideRouter([]), provideAnimations()],
@@ -365,10 +376,11 @@ const meta: Meta<SidebarPropsAndCustomArgs> = {
     props: args,
     template: `
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
-        <kirby-x-sidebar ${argsToTemplate(args)}>
+        <kirby-x-sidebar>
           <kirby-x-sidebar-header>
             <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
           </kirby-x-sidebar-header>
+          <kirby-x-sidebar-menu ${argsToTemplate(args)}></kirby-x-sidebar-menu>
           <kirby-x-sidebar-footer>
             <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
               <button kirby-button attentionLevel="3" size="sm">
@@ -422,7 +434,7 @@ export const WithActions: Story = {
     props: args,
     template: `
       <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
-        <kirby-x-sidebar ${argsToTemplate(args)}>
+        <kirby-x-sidebar>
           <kirby-x-sidebar-header>
             <img slot="logo" src="assets/images/kirby-logo.svg" alt="Kirby Design System"/>
             <button kirby-button size="sm" attentionLevel="3" slot="action" style="display: flex; flex-grow: 1; justify-content: flex-start;">
@@ -433,6 +445,7 @@ export const WithActions: Story = {
               <kirby-icon name="more"></kirby-icon>
             </button>
           </kirby-x-sidebar-header>
+          <kirby-x-sidebar-menu ${argsToTemplate(args)}></kirby-x-sidebar-menu>
         </kirby-x-sidebar>
         <div style="padding: var(--kirby-spacing-s);">
           ${mainAreaContent}
@@ -519,3 +532,54 @@ function convertToReorderableExample(item: SidebarMenuItem): SidebarMenuItem {
     ...item,
   };
 }
+
+/**
+ * Simulates the menu items loading.
+ * A skeleton loader is shown inside the menu content area.
+ */
+export const LoadingMenuItems: Story = {
+  render: ({ mainAreaContent, ...args }) => {
+    return {
+      props: {
+        ...args,
+        mainAreaContent,
+      },
+      template: `
+        <div style="display: grid; grid-template-columns: minmax(252px, 328px) minmax(85%, auto);">
+          <kirby-x-sidebar>
+            <kirby-x-sidebar-header>
+              <a href="/" slot="logo"><img src="assets/images/kirby-logo.svg" alt="Kirby Design System"/></a>
+            </kirby-x-sidebar-header>
+            <kirby-x-sidebar-menu-loader/>
+            <kirby-x-sidebar-footer>
+              <div style="padding: var(--kirby-spacing-s); font-size: var(--kirby-font-size-xs); text-align: center;">
+                <button kirby-button attentionLevel="3" size="sm">
+                  <kirby-icon name="log-out"></kirby-icon>
+                  Log out
+                </button>
+              </div>
+            </kirby-x-sidebar-footer>
+          </kirby-x-sidebar>
+          <div style="padding: var(--kirby-spacing-s);">
+            ${mainAreaContent}
+          </div>
+        </div>`,
+    };
+  },
+  args: {
+    ...Default.args,
+    mainAreaContent:
+      '<h1>Sidebar with loading menu items</h1><p>The sidebar menu loader is shown instead of menu items.</p>',
+  },
+};
+
+export const Focused: Story = {
+  ...Default,
+  decorators: [componentWrapperDecorator((story) => `<div style="padding: 8px">${story}</div>`)],
+  play: async ({ canvasElement }) => {
+    const menuItem = canvasElement.querySelector('kirby-x-sidebar-menu-item');
+    if (menuItem) {
+      (menuItem as HTMLElement).focus();
+    }
+  },
+};

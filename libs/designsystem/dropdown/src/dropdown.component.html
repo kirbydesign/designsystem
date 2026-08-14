@@ -53,6 +53,7 @@
     [selected]="selected"
     (click)="onItemSelect(index)"
     [class.focused]="focused"
+    [class.keyboard-focused]="focused && !clicked"
     role="option"
     [attr.id]="_listboxId + '-item-' + index"
     [attr.aria-selected]="selected"

@@ -27,11 +27,18 @@ $max-width: 375px;
     margin: 0 auto;
     width: calc(100vw - var(--kirby-internal-margin-horizontal-total));
     max-width: calc(#{$max-width} - var(--kirby-internal-margin-horizontal-total));
+
+    // Keep the bottom-most element (cancel button or card) clear of the
+    // iOS home indicator / safe-area inset:
+    padding-bottom: var(--kirby-safe-area-bottom, 0);
   }
   /* stylelint-enable no-duplicate-selectors */
 
   button[kirby-button].no-decoration {
-    @include interaction-state.apply-focus-visible-background;
+    &:focus-visible {
+      transition: interaction-state.transition();
+      box-shadow: var(--kirby-focus-ring-md-inset);
+    }
   }
 }
 
@@ -51,7 +58,10 @@ kirby-card {
 }
 
 .cancel-btn {
-  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(8));
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: utils.get-elevation(8), var(--kirby-focus-ring-md-inset);
+  }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
