@@ -988,6 +988,7 @@ export class ComboboxComponent
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
 
     this._virtualScrollViewport?.checkViewportSize();
+    this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
 
     this._virtualScrollViewport?.scrollToIndex(focusedIndex);
     this.queueVisibleItemRangeSync();
