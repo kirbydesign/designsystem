@@ -35,20 +35,20 @@ describe('ProgressCircleRingComponent', () => {
   });
 
   describe('progress larger than upperBound', () => {
-    it('should clamp progress to the upperBound percentage', () => {
-      spectator.setInput({ value: 99, upperBound: 96 });
-      expect(spectator.component._progress).toBe(96);
+    it('should clamp progress to leave a gap from 100', () => {
+      spectator.setInput({ value: 99, upperBound: 97.5 });
+      expect(spectator.component._progress).toBe(97.5);
     });
 
-    it('should return the remaining percentage (100 - upperBound) as remainder', () => {
-      spectator.setInput({ value: 99, upperBound: 96 });
-      expect(spectator.component._remainder).toBe(4);
+    it('should return the remaining percentage as the gap', () => {
+      spectator.setInput({ value: 99, upperBound: 97.5 });
+      expect(spectator.component._remainder).toBe(2.5);
     });
   });
 
   describe('rendering', () => {
     beforeEach(() => {
-      spectator.setInput({ value: 50, upperBound: 96 });
+      spectator.setInput({ value: 50, upperBound: 97.5 });
     });
 
     it('should normalize the progress path length to 100', () => {

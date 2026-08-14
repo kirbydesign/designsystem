@@ -28,7 +28,7 @@ export class ProgressCircleRingComponent implements AfterViewInit {
   get _progress(): number {
     if (this.value <= 0) return 0;
     if (this.value >= 100) return 100;
-    return Math.min(this.value, this.upperBound);
+    return Math.min(this.value, 100 - this.UPPER_AND_LOWER_BOUND_GAP);
   }
 
   get _linecap(): 'butt' | 'round' {
