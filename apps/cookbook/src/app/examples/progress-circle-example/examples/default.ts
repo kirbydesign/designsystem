@@ -3,7 +3,7 @@ import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circ
 
 const config = {
   selector: 'cookbook-progress-circle-example-default',
-  template: `<kirby-progress-circle aria-label="Your investment savings" value="33"><p>md</p></kirby-progress-circle>`,
+  template: `<kirby-progress-circle aria-label="Your investment savings" value="33"></kirby-progress-circle>`,
 };
 
 @Component({

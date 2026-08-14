@@ -16,6 +16,12 @@ export class ProgressCircleRingComponent implements AfterViewInit {
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
   @Input() upperBound: number;
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+
+  @HostBinding('class')
+  get _sizeClass() {
+    return this.size;
+  }
 
   @HostBinding('class.view-initialized')
   viewInitialized;
