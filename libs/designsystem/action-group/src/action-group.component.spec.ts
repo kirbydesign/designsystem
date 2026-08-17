@@ -2,6 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { tick } from '@angular/core/testing';
@@ -126,7 +127,8 @@ describe('ActionGroupComponent', () => {
     });
 
     it('should render hidden buttons as menu items', () => {
-      expect(document.body.querySelectorAll('kirby-item')).toHaveLength(2);
+      const menuCard = document.getElementById(spectator.query(MenuComponent).menuId);
+      expect(menuCard.querySelectorAll('kirby-item')).toHaveLength(2);
       expect(spectator.component._collapsedActions).toHaveLength(2);
     });
 
@@ -136,7 +138,8 @@ describe('ActionGroupComponent', () => {
 
       spectator.setHostInput('visibleActions', 2); //By disabling the 3rd button and setting visibleActions to 2, the disabled button is now moved to the menu.
 
-      expect(document.body.querySelectorAll('kirby-item.disabled')).toHaveLength(1);
+      const menuCard = document.getElementById(spectator.query(MenuComponent).menuId);
+      expect(menuCard.querySelectorAll('kirby-item.disabled')).toHaveLength(1);
     });
 
     describe('when updating visibleActions', () => {
