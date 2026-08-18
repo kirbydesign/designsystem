@@ -1,0 +1,1 @@
+import{n as n$1}from"./chunk-DajK3G73.js";var n=()=>{if(n$1!==void 0)return n$1.Capacitor};export{n as t};

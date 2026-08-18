@@ -1,0 +1,1 @@
+var n=typeof window<`u`?window:void 0;var d=typeof document<`u`?document:void 0;export{n,d as t};
