@@ -20,7 +20,7 @@ $min-screen-width: 375px;
   & {
     display: inline-block;
     position: relative;
-    max-width: calc(100vw - #{$margin-horizontal-total});
+    max-width: min(calc(100vw - #{$margin-horizontal-total}), 100%);
   }
   /* stylelint-enable no-duplicate-selectors */
 
@@ -55,6 +55,7 @@ $min-screen-width: 375px;
     .text {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 

@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "engines": {
-    "node": "24",
+    "node": "^24.15.0",
     "npm": "11"
   },
   "workspaces": [
@@ -12,6 +12,7 @@
     "libs/angular",
     "libs/designsystem",
     "libs/extensions/angular",
+    "libs/stylelint-plugin",
     "apps/*",
     "tools/*"
   ],
@@ -20,7 +21,8 @@
     "build": "nx run-many -t build",
     "start": "nx dev designsystem",
     "start:extensions": "nx dev extensions-angular",
-    "test:headless-browser": "nx run-many -t test --output-style=stream -- --browsers=ChromeCustom",
+    "test:node": "nx run-many -t test -p tag:test:node --output-style=stream",
+    "test:headless-browser": "nx run-many -t test -p tag:test:headless-browser --output-style=stream -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "storybook": "nx storybook designsystem",
     "build-storybook": "nx build-storybook designsystem",
@@ -106,7 +108,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run sync-node-version && lint-staged",
-      "pre-push": "npm run test:headless-browser:single",
+      "pre-push": "npm run test:node && npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
   },
