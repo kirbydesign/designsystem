@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, Optional } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnDestroy,
+  Optional,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
@@ -52,6 +59,7 @@ export abstract class ModalElementsAdvertiser {
  */
 @Component({
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export abstract class ModalElementComponent implements AfterViewInit, OnDestroy {

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { StockChartComponent } from '@kirbydesign/designsystem';
 import { ChartDataLabelOptions } from '@kirbydesign/designsystem/chart';
@@ -12,6 +12,7 @@ import { MockBaseChartComponent } from './mock.base-chart.component';
   selector: 'kirby-stock-chart',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: StockChartComponent,

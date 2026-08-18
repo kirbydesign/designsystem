@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { RangeComponent } from '@kirbydesign/designsystem';
 
@@ -7,6 +14,7 @@ import { RangeComponent } from '@kirbydesign/designsystem';
   selector: 'kirby-range',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: RangeComponent,

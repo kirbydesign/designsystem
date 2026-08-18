@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -36,21 +37,13 @@ import { LoadOnDemandEvent } from './list.event';
 export type ListShape = 'square' | 'rounded' | 'none';
 
 export type StandAloneSpacing =
-  | 'xxxxs'
-  | 'xxxs'
-  | 'xxs'
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'xxl'
-  | 'xxxl';
+  'xxxxs' | 'xxxs' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     IonList,
     InfiniteScrollDirective,

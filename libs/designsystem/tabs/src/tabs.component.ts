@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, HostBinding, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { IonTabBar, IonTabs } from '@ionic/angular/standalone';
 
 import { TabsService } from './tabs.service';
@@ -7,6 +14,7 @@ import { TabsService } from './tabs.service';
   selector: 'kirby-tab-bar',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IonTabs, IonTabBar],
 })
 export class TabsComponent implements AfterViewInit, OnDestroy {

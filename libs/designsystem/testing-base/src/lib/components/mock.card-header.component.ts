@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { CardFlagLevel, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
@@ -7,6 +7,7 @@ import { CardFlagLevel, CardHeaderComponent } from '@kirbydesign/designsystem/ca
   selector: 'kirby-card-header',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: CardHeaderComponent,

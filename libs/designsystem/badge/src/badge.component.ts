@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { IonBadge } from '@ionic/angular/standalone';
 
@@ -12,6 +12,7 @@ const KIRBY_BADGE_TEXT_PROPERTY_DEPRECATION_WARNING =
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],
   imports: [IonBadge],
+  changeDetection: ChangeDetectionStrategy.Eager,
   hostDirectives: [{ directive: ThemeColorDirective, inputs: ['themeColor'] }],
 })
 export class BadgeComponent {

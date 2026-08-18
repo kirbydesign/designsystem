@@ -4,7 +4,9 @@
     "paths": {
       "@kirbydesign/designsystem": ["libs/designsystem/src/index.ts"],
       "@kirbydesign/designsystem/testing-base": ["libs/designsystem/testing-base/src/public_api.ts"]
-    }
+    },
+    "ignoreDeprecations": "6.0",
+    "rootDir": "../../../.."
   },
   "include": ["../../**/*.ts"]
 }

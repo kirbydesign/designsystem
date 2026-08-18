@@ -157,6 +157,7 @@ export class PageStickyContentDirective {}
   template: `
     <ng-content></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       :host {
@@ -180,6 +181,7 @@ export class PageProgressComponent extends ModalElementComponent {
 }
 @Component({
   selector: 'kirby-page-title',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <ng-content></ng-content>
   `,
@@ -195,6 +197,7 @@ export class PageTitleComponent extends ModalElementComponent {
 
 @Component({
   selector: 'kirby-page-content',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <ng-content></ng-content>
   `,
@@ -206,6 +209,7 @@ export class PageContentComponent {}
   template: `
     <ng-content select="button[kirby-button]"></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       :host {

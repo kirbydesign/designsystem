@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
 
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
@@ -10,6 +10,7 @@ import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shar
   selector: 'kirby-menu',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: MenuComponent,

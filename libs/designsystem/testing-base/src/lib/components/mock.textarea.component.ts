@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { TextareaComponent } from '@kirbydesign/designsystem';
 
@@ -8,6 +8,7 @@ import { TextareaComponent } from '@kirbydesign/designsystem';
   selector: 'textarea[kirby-textarea]',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: TextareaComponent,

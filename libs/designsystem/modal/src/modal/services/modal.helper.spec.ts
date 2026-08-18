@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  Optional,
+  ViewChild,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { ModalController as IonicModalController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
@@ -28,6 +35,7 @@ import { AlertHelper } from './alert.helper';
     <h2>Embedded Input</h2>
     <input #input />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class InputEmbeddedComponent implements OnInit {
@@ -48,6 +56,7 @@ class InputEmbeddedComponent implements OnInit {
       <button kirby-button>Button inside footer</button>
     </kirby-modal-footer>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class ContentOverflowsWithFooterEmbeddedComponent {
@@ -58,6 +67,7 @@ class ContentOverflowsWithFooterEmbeddedComponent {
   template: `
     <div style="height: 1px;">Content</div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class ContentWithNoOverflowEmbeddedComponent {}
@@ -69,6 +79,7 @@ class ContentWithNoOverflowEmbeddedComponent {}
     </kirby-page-progress>
     <kirby-page-title>Modal With Page Progress</kirby-page-title>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class PageProgressEmbeddedComponent {}
@@ -77,6 +88,7 @@ class PageProgressEmbeddedComponent {}
   template: `
     <kirby-page-title>Modal With Page Title</kirby-page-title>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class PageTitleEmbeddedComponent {}

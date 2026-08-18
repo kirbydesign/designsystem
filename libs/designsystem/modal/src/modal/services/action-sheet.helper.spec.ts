@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
@@ -11,6 +11,7 @@ import { ActionSheetHelper } from './action-sheet.helper';
   template: `
     <h2>Dummy Component</h2>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class EmbeddedDummyComponent {}

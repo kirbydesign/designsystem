@@ -1,4 +1,4 @@
-import { Component, Directive, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, forwardRef, Input } from '@angular/core';
 
 import {
   HeaderActionsDirective,
@@ -33,6 +33,7 @@ export class MockHeaderCustomSectionDirective {}
   selector: 'kirby-header',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: HeaderComponent,

@@ -9,7 +9,7 @@ import {
 
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import localeData from '@angular/common/locales/en-DK';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -33,7 +33,7 @@ bootstrapApplication(AppComponent, {
     provideZonelessChangeDetection(),
     importProvidersFrom(BrowserModule, FormsModule),
     provideKirby(withGlobalSetup()),
-    provideHttpClient(),
+    provideHttpClient(withXhr()),
     provideAnimations(),
     provideRouter(
       routes,

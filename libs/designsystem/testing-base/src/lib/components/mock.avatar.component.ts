@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { BrandColor, NotificationColor } from '@kirbydesign/core';
 
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
@@ -8,6 +8,7 @@ import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
   selector: 'kirby-avatar',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: AvatarComponent,
@@ -24,13 +25,7 @@ export class MockAvatarComponent {
   @Input() overlay: boolean;
   @Input() size: AvatarSize | `${AvatarSize}`;
   @Input() themeColor:
-    | NotificationColor
-    | BrandColor
-    | 'medium'
-    | 'white'
-    | 'dark'
-    | 'light'
-    | 'semi-light';
+    NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
 }
 
 // #endregion

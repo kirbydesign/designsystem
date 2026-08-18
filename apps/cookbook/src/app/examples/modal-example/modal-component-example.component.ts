@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalSize } from '@kirbydesign/designsystem';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalComponent, ModalFooterComponent } from '@kirbydesign/designsystem/modal';
@@ -79,7 +79,6 @@ didDismiss() {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./modal-component-example.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ButtonComponent,
     ModalComponent,

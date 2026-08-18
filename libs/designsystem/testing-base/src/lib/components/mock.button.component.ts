@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { NotificationColor } from '@kirbydesign/core';
 
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
@@ -9,6 +9,7 @@ import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/design
   selector: 'button[kirby-button],Button[kirby-button]',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ButtonComponent,

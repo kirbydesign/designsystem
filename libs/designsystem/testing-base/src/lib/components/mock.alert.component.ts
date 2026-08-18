@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ThemeColor } from '@kirbydesign/core';
 import { AlertComponent } from '@kirbydesign/designsystem/modal';
 import { Observable } from 'rxjs/internal/Observable';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/internal/Observable';
   selector: 'kirby-alert',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: AlertComponent,

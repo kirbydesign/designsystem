@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { PageFooterComponent } from '@kirbydesign/designsystem/page';
 
@@ -7,6 +7,7 @@ import { PageFooterComponent } from '@kirbydesign/designsystem/page';
   selector: 'kirby-page-footer',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: PageFooterComponent,

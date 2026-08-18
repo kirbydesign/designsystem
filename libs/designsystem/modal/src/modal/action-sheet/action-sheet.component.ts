@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
@@ -11,6 +11,7 @@ const KIRBY_ACTION_SHEET_DEPRECATION_WARNING =
   imports: [CardComponent, CardHeaderComponent, ButtonComponent],
   selector: 'kirby-action-sheet',
   templateUrl: './action-sheet.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./action-sheet.component.scss'],
 })
 export class ActionSheetComponent {

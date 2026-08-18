@@ -1,4 +1,10 @@
-import { Component, EventEmitter, forwardRef, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Output,
+} from '@angular/core';
 
 import { TabNavigationComponent } from '@kirbydesign/designsystem/tab-navigation';
 
@@ -7,6 +13,7 @@ import { TabNavigationComponent } from '@kirbydesign/designsystem/tab-navigation
   selector: 'kirby-tab-navigation',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: TabNavigationComponent,

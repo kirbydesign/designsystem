@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
@@ -24,6 +25,7 @@ import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
   styleUrls: ['./modal-compact-wrapper.component.scss'],
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: { '[class.ion-page]': 'false' },
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 
@@ -7,6 +7,7 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
   selector: 'kirby-empty-state',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: EmptyStateComponent,

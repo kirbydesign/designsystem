@@ -1,10 +1,11 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { IonLabel } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'kirby-label',
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IonLabel],
 })
 export class LabelComponent {

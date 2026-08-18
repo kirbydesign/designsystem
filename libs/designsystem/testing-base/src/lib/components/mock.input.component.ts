@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { InputComponent, InputSize } from '@kirbydesign/designsystem';
 
@@ -8,6 +8,7 @@ import { InputComponent, InputSize } from '@kirbydesign/designsystem';
   selector: 'input[kirby-input]',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: InputComponent,

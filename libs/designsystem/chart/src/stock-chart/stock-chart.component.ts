@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import {
   BaseChartComponent,
@@ -13,6 +13,7 @@ import { StockChartJSService } from './stock-chart-js.service';
   selector: 'kirby-stock-chart',
   providers: [{ provide: ChartJSService, useClass: StockChartJSService }, ChartConfigService],
   templateUrl: '../shared/base-chart/base-chart.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../shared/base-chart/base-chart.component.scss'],
 })
 export class StockChartComponent extends BaseChartComponent {

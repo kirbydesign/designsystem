@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'kirby-x-sidebar-footer',
   template: '<footer><ng-content></ng-content></footer>',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host,
     footer {

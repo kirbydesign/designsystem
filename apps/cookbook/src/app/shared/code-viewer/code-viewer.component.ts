@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { highlightElement } from 'prismjs';
 
 export function stringifyPretty(value: any) {
@@ -21,7 +13,6 @@ export function stringifyPretty(value: any) {
   selector: 'cookbook-code-viewer',
   templateUrl: './code-viewer.component.html',
   styleUrls: ['./code-viewer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeViewerComponent implements AfterViewInit, OnChanges {
   @Input() language: 'html' | 'css' | 'scss' | 'js' | 'ts' | 'typescript';

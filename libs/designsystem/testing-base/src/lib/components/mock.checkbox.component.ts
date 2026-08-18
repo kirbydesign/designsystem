@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { CheckboxComponent } from '@kirbydesign/designsystem';
 
@@ -7,6 +14,7 @@ import { CheckboxComponent } from '@kirbydesign/designsystem';
   selector: 'kirby-checkbox',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: CheckboxComponent,

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
@@ -7,6 +7,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
   selector: 'kirby-badge',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: BadgeComponent,

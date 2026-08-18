@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostBinding,
@@ -19,6 +20,7 @@ import { ChartJSService } from '../chart-js-service/';
 @Component({
   selector: 'kirby-base-chart',
   templateUrl: './base-chart.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./base-chart.component.scss'],
 })
 export class BaseChartComponent implements AfterViewInit, OnChanges, OnDestroy {

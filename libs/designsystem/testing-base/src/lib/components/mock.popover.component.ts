@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
@@ -7,6 +15,7 @@ import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem
   selector: 'kirby-popover',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: PopoverComponent,

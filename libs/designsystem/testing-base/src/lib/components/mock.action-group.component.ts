@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 
@@ -7,6 +7,7 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
   selector: 'kirby-action-group',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ActionGroupComponent,

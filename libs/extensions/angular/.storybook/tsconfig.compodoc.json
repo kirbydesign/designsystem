@@ -1,4 +1,7 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["../**/*.stories.ts", "../**/*.component.ts", "*.ts"]
+  "include": ["../**/*.stories.ts", "../**/*.component.ts", "*.ts"],
+  "compilerOptions": {
+    "rootDir": "../../../.."
+  }
 }

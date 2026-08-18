@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { ReorderListComponent } from '@kirbydesign/designsystem';
 import { ReorderEvent } from '@kirbydesign/designsystem';
@@ -8,6 +15,7 @@ import { ReorderEvent } from '@kirbydesign/designsystem';
   selector: 'kirby-reorder-list',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ReorderListComponent,

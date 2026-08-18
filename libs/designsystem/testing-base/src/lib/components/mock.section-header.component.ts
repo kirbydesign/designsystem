@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 
@@ -7,6 +7,7 @@ import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header
   selector: 'kirby-section-header',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: SectionHeaderComponent,

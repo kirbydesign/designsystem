@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import {
   BaseChartComponent,
@@ -15,6 +15,7 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
   selector: 'kirby-base-chart',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: BaseChartComponent,

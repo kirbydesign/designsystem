@@ -1,4 +1,11 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective, TranslationService } from '@kirbydesign/designsystem/shared';
@@ -10,6 +17,7 @@ import { ImageBannerHeightDirective } from './image-banner-height.directive';
   imports: [CardComponent, ButtonComponent, IconComponent, ThemeColorDirective],
   hostDirectives: [ImageBannerHeightDirective],
   templateUrl: './image-banner.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './image-banner.component.scss',
 })
 export class ImageBannerComponent {

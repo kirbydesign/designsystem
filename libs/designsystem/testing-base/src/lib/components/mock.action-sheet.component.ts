@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem/modal';
 
@@ -7,6 +14,7 @@ import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem
   selector: 'kirby-action-sheet',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ActionSheetComponent,

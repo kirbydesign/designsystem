@@ -1,6 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
-import { Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormControl, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
@@ -12,6 +12,7 @@ import { DecimalMaskDirective } from './decimal-mask.directive';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'numeric-input-host',
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class NumericInputHostComponent {

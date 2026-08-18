@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SidebarContainerComponent } from '../../components/sidebar-container';
 
 @Component({
@@ -10,6 +10,7 @@ import { SidebarContainerComponent } from '../../components/sidebar-container';
       <ng-content select="kirby-x-sidebar-footer" slot="footer"></ng-content>
     </aside>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [SidebarContainerComponent],
 })
 export class SidebarComponent {}

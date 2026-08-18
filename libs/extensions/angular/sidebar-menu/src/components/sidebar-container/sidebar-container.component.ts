@@ -1,4 +1,4 @@
-import { Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { HeightObserverDirective } from '../../directives/height-observer';
 import { SidebarService } from '../../services/sidebar';
@@ -14,6 +14,7 @@ type ViewModel = {
   selector: 'aside[kirby-x-sidebar-container]',
   templateUrl: './sidebar-container.component.html',
   styleUrls: ['./sidebar-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [HeightObserverDirective, CdkScrollable],
 })
 export class SidebarContainerComponent {

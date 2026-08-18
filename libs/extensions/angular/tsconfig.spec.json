@@ -3,7 +3,8 @@
   "compilerOptions": {
     "types": ["jest", "node"],
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "rootDir": "../../.."
   },
   "files": ["test-setup.ts"],
   "include": ["jest.config.ts", "**/*.test.ts", "**/*.spec.ts", "**/*.d.ts"]

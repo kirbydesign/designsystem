@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { LabelComponent } from '@kirbydesign/designsystem/item';
 
@@ -7,6 +7,7 @@ import { LabelComponent } from '@kirbydesign/designsystem/item';
   selector: 'kirby-label',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: LabelComponent,

@@ -1,11 +1,12 @@
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CardComponent } from '../card.component';
 import { CardAsButtonDirective } from './card-as-button.directive';
 
 @Component({
   selector: 'kirby-card-click-host',
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class KirbyCardClickHostComponent {

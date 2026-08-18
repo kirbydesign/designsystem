@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy } from '@angular/core';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { UnobserveFn } from '@kirbydesign/designsystem/types';
@@ -8,6 +8,7 @@ import { observeContent } from './content-mutation-observer';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'content-observer-host',
   template: '<div [innerHtml]="content"></div>',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class ContentObserverHostComponent implements OnDestroy {

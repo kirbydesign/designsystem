@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -23,6 +24,7 @@ export enum HorizontalDirection {
   template: `
     <div #wrapper class="wrapper"><ng-content></ng-content></div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./popover.component.scss'],
 })
 export class PopoverComponent implements AfterViewInit, OnDestroy {
