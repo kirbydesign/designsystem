@@ -1,7 +1,3 @@
-@use 'sass:color';
-@use '../utils';
-@use '../interaction-state';
-
 @mixin apply-dark-theme {
   --kirby-inputs-background-color: var(--kirby-white-overlay);
   --kirby-inputs-background-color-hover: var(--kirby-white-overlay-30);

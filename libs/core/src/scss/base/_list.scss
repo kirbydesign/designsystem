@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 @mixin rounded($border-radius: var(--kirby-border-radius-n)) {
   @include rounded-top($border-radius);
   @include rounded-bottom($border-radius);
@@ -40,8 +38,8 @@
 }
 
 /*
- * Utilities for styling lists and items within the list. 
- * These can be used to create list-like appearance of elements 
+ * Utilities for styling lists and items within the list.
+ * These can be used to create list-like appearance of elements
  * in use-cases where more freedom is needed than the list-component can offer.
  */
 

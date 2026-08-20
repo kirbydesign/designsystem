@@ -1,9 +1,3 @@
-@use 'sass:list';
-@use 'sass:map';
-@use 'sass:math';
-@use 'sass:meta';
-@use '@kirbydesign/core/src/scss/utils';
-
 $padding-block-xs: calc(var(--kirby-spacing-xxxs) - 1px);
 $padding-block-sm: var(--kirby-spacing-xxxs);
 $padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
