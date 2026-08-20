@@ -126,7 +126,6 @@ export class CheckboxComponent
   onChecked(checked: boolean): void {
     this.checked = checked;
     this._onChange(this.checked);
-    this._onTouched();
     this.checkedChange.emit(this.checked);
   }
 
