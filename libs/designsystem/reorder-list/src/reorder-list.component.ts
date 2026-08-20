@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -31,6 +32,7 @@ import { ReorderEvent } from './reorder-event';
   ],
   selector: 'kirby-reorder-list',
   templateUrl: './reorder-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./reorder-list.component.scss'],
 })
 export class ReorderListComponent implements OnChanges, OnDestroy {

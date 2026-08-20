@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { RadioGroupComponent } from '@kirbydesign/designsystem';
 
@@ -7,6 +14,7 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem';
   selector: 'kirby-radio-group',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: RadioGroupComponent,

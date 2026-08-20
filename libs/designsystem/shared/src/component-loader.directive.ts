@@ -1,11 +1,4 @@
-import {
-  ComponentFactoryResolver,
-  Directive,
-  Input,
-  OnInit,
-  Renderer2,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, Input, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 
 import { ComponentConfiguration } from './component-configuration';
 import { DynamicComponent } from './dynamic-component';
@@ -15,12 +8,10 @@ import { DynamicComponent } from './dynamic-component';
   standalone: true,
 })
 export class ComponentLoaderDirective implements OnInit {
-  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyLoadComponent') configuration: ComponentConfiguration;
   @Input() cssClass: string;
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef,
     private renderer: Renderer2
   ) {}
@@ -30,11 +21,8 @@ export class ComponentLoaderDirective implements OnInit {
   }
 
   loadCard() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      this.configuration.component
-    );
     this.viewContainerRef.clear();
-    const componentRef = this.viewContainerRef.createComponent(componentFactory);
+    const componentRef = this.viewContainerRef.createComponent(this.configuration.component);
     if (componentRef && componentRef.location && componentRef.location.nativeElement) {
       this.renderer.addClass(componentRef.location.nativeElement, this.cssClass);
     }

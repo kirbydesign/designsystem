@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { FabSheetComponent } from '@kirbydesign/designsystem';
 
@@ -7,6 +7,7 @@ import { FabSheetComponent } from '@kirbydesign/designsystem';
   selector: 'kirby-fab-sheet',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: FabSheetComponent,

@@ -38,5 +38,8 @@ export default {
     ],
   },
   transformIgnorePatterns: [`/node_modules/(?!${esModules}|.*\\.mjs$)`],
-  moduleNameMapper: pathsToModuleNameMapper(pathAliases, { prefix: '<rootDir>/' }),
+  moduleNameMapper: {
+    '^ionicons/components/(.*)$': '<rootDir>/../../../node_modules/ionicons/components/$1',
+    ...pathsToModuleNameMapper(pathAliases, { prefix: '<rootDir>/' }),
+  },
 };

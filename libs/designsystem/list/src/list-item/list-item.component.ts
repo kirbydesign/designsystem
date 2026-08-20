@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -24,6 +25,7 @@ export type BoundaryClass = 'first' | 'last';
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
   styleUrls: ['../list.component.scss', './list-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     IonItemSliding,
     ListItemColorDirective,

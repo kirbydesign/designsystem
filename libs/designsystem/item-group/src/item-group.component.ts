@@ -1,8 +1,9 @@
-import { Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-item-group',
   templateUrl: './item-group.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./item-group.component.scss'],
 })
 export class ItemGroupComponent {

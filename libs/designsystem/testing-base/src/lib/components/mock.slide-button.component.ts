@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 
@@ -7,6 +14,7 @@ import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
   selector: 'kirby-slide-button',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: SlideButtonComponent,

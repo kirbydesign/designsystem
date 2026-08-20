@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ProgressCircleRingComponent } from '@kirbydesign/designsystem';
 
@@ -7,6 +7,7 @@ import { ProgressCircleRingComponent } from '@kirbydesign/designsystem';
   selector: 'kirby-progress-circle-ring',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ProgressCircleRingComponent,

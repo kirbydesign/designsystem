@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/designsystem';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
@@ -12,6 +12,8 @@ const config = {
   codeSnippet: `
 progress: number = 0;
 themeColor: ThemeColor;
+
+constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
 ngOnInit(): void {
   setInterval(this.updateProgress, 2000);
@@ -27,6 +29,9 @@ private updateProgress = () => {
   } else {
     this.themeColor = 'danger';
   }
+
+  // Notify OnPush change detection that the values changed:
+  this.changeDetectorRef.markForCheck();
 };
   `,
 };
@@ -42,6 +47,8 @@ export class ProgressCircleExampleAnimatedComponent implements OnInit {
   progress: number = 0;
   themeColor: ThemeColor;
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     setInterval(this.updateProgress, 2000);
   }
@@ -56,5 +63,8 @@ export class ProgressCircleExampleAnimatedComponent implements OnInit {
     } else {
       this.themeColor = 'danger';
     }
+
+    // Notify OnPush change detection that the values changed:
+    this.changeDetectorRef.markForCheck();
   };
 }

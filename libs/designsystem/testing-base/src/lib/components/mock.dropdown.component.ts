@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
@@ -8,6 +15,7 @@ import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
   selector: 'kirby-dropdown',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: DropdownComponent,

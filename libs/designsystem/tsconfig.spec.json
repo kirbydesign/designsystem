@@ -64,9 +64,13 @@
       "@kirbydesign/designsystem/toggle": ["libs/designsystem/toggle/index.ts"],
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/toggle-button/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"]
-    }
+    },
+    "rootDir": ".."
   },
   "files": ["test.ts"],
   "include": ["**/*.spec.ts", "**/*.d.ts"],
-  "exclude": []
+  "exclude": [],
+  "angularCompilerOptions": {
+    "strictTemplates": false
+  }
 }

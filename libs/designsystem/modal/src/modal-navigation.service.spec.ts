@@ -1,4 +1,4 @@
-import { Component, NgModule, NgZone } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, NgZone } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, Routes } from '@angular/router';
 import { provideRouter } from '@angular/router';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
@@ -8,16 +8,19 @@ import { filter, first } from 'rxjs/operators';
 import { ModalNavigationService } from './modal-navigation.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class DummyHomeComponent {}
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class BackdropComponent {}
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class ModalPageComponent {}

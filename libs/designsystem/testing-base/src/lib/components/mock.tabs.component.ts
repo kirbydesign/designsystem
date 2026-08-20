@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 
 import { TabsComponent } from '@kirbydesign/designsystem';
 
@@ -7,6 +7,7 @@ import { TabsComponent } from '@kirbydesign/designsystem';
   selector: 'kirby-tab-bar',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: TabsComponent,

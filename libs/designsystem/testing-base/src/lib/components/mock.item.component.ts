@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
 
@@ -7,6 +7,7 @@ import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
   selector: 'kirby-item',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ItemComponent,

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -27,6 +27,7 @@ type ViewModel = {
     '[class.has-toggle]': '!!vm.item().toggle',
     '[class.has-badge]': '!!vm.item().badge',
   },
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MenuItemComponent,
     RouterLink,

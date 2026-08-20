@@ -1,4 +1,12 @@
-import { Component, Directive, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import {
   PageActionsComponent,
@@ -93,6 +101,7 @@ export class MockPageStickyContentDirective {}
   selector: 'kirby-page-progress',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: PageProgressComponent,
@@ -106,6 +115,7 @@ export class MockPageProgressComponent {}
   selector: 'kirby-page-title',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: PageTitleComponent,
@@ -119,6 +129,7 @@ export class MockPageTitleComponent {}
   selector: 'kirby-page-content',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: PageContentComponent,
@@ -132,6 +143,7 @@ export class MockPageContentComponent {}
   selector: 'kirby-page-actions',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: PageActionsComponent,
@@ -145,6 +157,7 @@ export class MockPageActionsComponent {}
   selector: 'kirby-page',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: PageComponent,

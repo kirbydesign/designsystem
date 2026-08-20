@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IonApp } from '@ionic/angular/standalone';
@@ -10,6 +10,7 @@ import { AppComponent } from './kirby-app.component';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ion-app',
   template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: IonApp,

@@ -4,9 +4,13 @@
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
     "moduleResolution": "bundler",
-    "module": "esnext"
+    "module": "esnext",
+    "rootDir": "../.."
   },
   "files": ["src/main.ts"],
   "include": ["**/*.ts"],
-  "exclude": ["**/*.spec.ts"]
+  "exclude": ["**/*.spec.ts"],
+  "angularCompilerOptions": {
+    "strictTemplates": false
+  }
 }

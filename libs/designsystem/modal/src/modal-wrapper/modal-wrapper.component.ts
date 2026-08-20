@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -20,7 +21,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
+import { firstValueFrom, fromEvent, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper, getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
@@ -65,6 +66,7 @@ const contentScrolledOffsetInPixels = 4;
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     { provide: Modal, useExisting: ModalWrapperComponent },
     { provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent },
@@ -386,8 +388,7 @@ export class ModalWrapperComponent
     // Runs scroll subscription outside zone to avoid excessive amount of CD cycles
     // when ionScroll emits.
     this.zone.runOutsideAngular(() => {
-      // Always subscribe as ionScroll only emits when scrollEventsEnabled is true
-      this.ionContent.ionScroll
+      fromEvent<CustomEvent<ScrollDetail>>(this.ionContentElement.nativeElement, 'ionScroll')
         .pipe(
           debounceTime(contentScrollDebounceTimeInMS),
           map((event) => event.detail),

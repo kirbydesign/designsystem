@@ -36,6 +36,8 @@ describe('RadioComponent', () => {
     await TestHelper.whenReady(ionRadioElement);
     radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
     radioCheckmark = ionRadioElement.shadowRoot.querySelector('[part=mark]');
+    radioIcon.style.setProperty('transition', 'none', 'important');
+    radioCheckmark.style.setProperty('transition', 'none', 'important');
     label = spectator.query('span');
   });
 

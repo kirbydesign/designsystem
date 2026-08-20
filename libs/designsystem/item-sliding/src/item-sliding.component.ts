@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
@@ -9,6 +9,7 @@ import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
   imports: [IconComponent, CommonModule, IonItemSliding, IonItemOptions, IonItemOption, IonLabel],
   selector: 'kirby-item-sliding',
   templateUrl: './item-sliding.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./item-sliding.component.scss'],
 })
 export class ItemSlidingComponent {

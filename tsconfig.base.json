@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "useDefineForClassFields": false,
     "skipLibCheck": true,
+    "strict": false,
     "paths": {
       "@kirbydesign/angular/badge": ["libs/angular/dist/badge"],
       "@kirbydesign/angular/spinner": ["libs/angular/dist/spinner"],
@@ -86,7 +87,8 @@
       "@repo/docs-import-map/*": ["tools/docs-import-map/*"],
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   },
   "files": []
 }

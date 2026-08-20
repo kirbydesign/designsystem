@@ -1,4 +1,12 @@
-import { Component, effect, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
 import { MenuContainerComponent } from '../../components/menu-container';
 import { HeightObserverDirective } from '../../directives/height-observer';
 import { SidebarService } from '../../services/sidebar';
@@ -20,6 +28,7 @@ import { SidebarMenuItem } from '../../models';
       width: 100%;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MenuContainerComponent, HeightObserverDirective],
 })
 export class SidebarMenuComponent {

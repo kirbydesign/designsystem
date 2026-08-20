@@ -1,4 +1,13 @@
-import { Component, computed, ElementRef, forwardRef, inject, input, Signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  Signal,
+} from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { SubmenuItem } from '../../models';
@@ -25,6 +34,7 @@ type ViewModel = {
   templateUrl: './menu-submenu-item.component.html',
   styleUrls: ['./menu-submenu-item.component.scss'],
   animations: [DropDownAnimation],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MenuItemComponent, IconComponent, forwardRef(() => MenuItemListComponent), CdkDropList],
 })
 export class MenuSubmenuItemComponent {

@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { MenuItemSize } from '../../types';
 
@@ -10,6 +10,7 @@ import { MenuItemSize } from '../../types';
   },
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IconModule],
 })
 export class MenuItemComponent {

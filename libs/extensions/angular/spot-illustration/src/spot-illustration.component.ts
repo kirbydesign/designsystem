@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { IonIcon } from '@ionic/angular/standalone';
 import {
   Illustration,
@@ -11,6 +11,7 @@ import {
   selector: 'kirby-x-spot-illustration',
   imports: [IonIcon],
   templateUrl: './spot-illustration.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './spot-illustration.component.scss',
 })
 export class SpotIllustrationComponent {

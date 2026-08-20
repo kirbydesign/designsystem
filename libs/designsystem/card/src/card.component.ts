@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostBinding,
@@ -12,6 +13,7 @@ import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit, OnDestroy {

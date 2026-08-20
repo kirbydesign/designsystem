@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ModalCompactWrapperComponent, ModalConfig } from '@kirbydesign/designsystem/modal';
 
@@ -7,6 +7,7 @@ import { ModalCompactWrapperComponent, ModalConfig } from '@kirbydesign/designsy
   selector: 'kirby-modal-compact-wrapper',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ModalCompactWrapperComponent,

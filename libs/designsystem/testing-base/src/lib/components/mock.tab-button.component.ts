@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { TabButtonComponent } from '@kirbydesign/designsystem/tabs';
 
@@ -7,6 +14,7 @@ import { TabButtonComponent } from '@kirbydesign/designsystem/tabs';
   selector: 'kirby-tab-button',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: TabButtonComponent,

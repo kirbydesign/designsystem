@@ -3,7 +3,9 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "module": "esnext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "ignoreDeprecations": "6.0",
+    "rootDir": "../../../.."
   },
   "exclude": ["../**/*.spec.ts"],
   "include": ["../**/*.stories.ts", "../**/*.mdx", "*.js", "*.ts"]

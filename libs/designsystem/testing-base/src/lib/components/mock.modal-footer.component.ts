@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 
@@ -7,6 +7,7 @@ import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
   selector: 'kirby-modal-footer',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ModalFooterComponent,

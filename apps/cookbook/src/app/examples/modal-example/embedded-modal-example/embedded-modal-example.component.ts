@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import {
   ActionSheetConfig,
@@ -102,7 +102,8 @@ export class EmbeddedModalExampleComponent implements OnInit {
     @Inject(COMPONENT_PROPS) componentProps,
     private modalController: ModalController,
     private toastController: ToastController,
-    @Optional() @SkipSelf() private modal: Modal
+    @Optional() @SkipSelf() private modal: Modal,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     Object.assign(this, componentProps);
   }
@@ -111,11 +112,17 @@ export class EmbeddedModalExampleComponent implements OnInit {
     if (this.showDummyContent) {
       if (this.delayLoadDummyContent) {
         this.isLoading = true;
-        setTimeout(() => (this.isLoading = false), 1000);
+        setTimeout(() => {
+          this.isLoading = false;
+          this.changeDetectorRef.markForCheck();
+        }, 1000);
       }
       if (this.loadAdditionalContent) {
         this.isLoadingAdditionalContent = true;
-        setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
+        setTimeout(() => {
+          this.isLoadingAdditionalContent = false;
+          this.changeDetectorRef.markForCheck();
+        }, 2000);
       }
     }
 

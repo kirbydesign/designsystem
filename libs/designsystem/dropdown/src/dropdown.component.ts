@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -50,6 +51,7 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
     },
     { provide: FORM_FIELD_CONTROL, useExisting: forwardRef(() => DropdownComponent) },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     ButtonComponent,
     NgTemplateOutlet,

@@ -17,7 +17,7 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { RouterOutletComponent } from '@kirbydesign/designsystem/router-outlet';
 import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TextResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 
@@ -35,6 +35,7 @@ const secondPageTitle = 'Second Page';
       </kirby-page-content>
     </kirby-page>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PageComponent, PageContentComponent, RouterLink],
 })
 class FirstPageComponent {}
@@ -47,6 +48,7 @@ class FirstPageComponent {}
       <kirby-page-content>Content</kirby-page-content>
     </kirby-page>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PageComponent, PageContentComponent, RouterLink],
 })
 class SecondPageComponent {}

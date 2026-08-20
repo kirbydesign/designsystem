@@ -47,7 +47,7 @@ import { Title } from '@angular/platform-browser';
 import type { ScrollDetail } from '@ionic/core';
 import { componentOnReady } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
-import { Observable, Subject } from 'rxjs';
+import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
@@ -157,6 +157,7 @@ export class PageStickyContentDirective {}
   template: `
     <ng-content></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       :host {
@@ -180,6 +181,7 @@ export class PageProgressComponent extends ModalElementComponent {
 }
 @Component({
   selector: 'kirby-page-title',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <ng-content></ng-content>
   `,
@@ -195,6 +197,7 @@ export class PageTitleComponent extends ModalElementComponent {
 
 @Component({
   selector: 'kirby-page-content',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <ng-content></ng-content>
   `,
@@ -206,6 +209,7 @@ export class PageContentComponent {}
   template: `
     <ng-content select="button[kirby-button]"></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       :host {
@@ -443,7 +447,10 @@ export class PageComponent
 
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
-      this.contentScrolled$ = this.content.ionScroll.pipe(
+      this.contentScrolled$ = fromEvent<CustomEvent<ScrollDetail>>(
+        this.ionContentElement.nativeElement,
+        'ionScroll'
+      ).pipe(
         debounceTime(contentScrollDebounceTimeInMS),
         map((event) => event.detail),
         takeUntil(this.ngOnDestroy$)

@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Renderer2 } from '@angular/core';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { forwardAttributes } from './label-helpers';
 
@@ -8,6 +8,7 @@ import { forwardAttributes } from './label-helpers';
       <div id="target"></div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [],
 })
 class TestComponent {

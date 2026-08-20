@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
+import { createComponent, EnvironmentInjector, Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular/standalone';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
@@ -10,8 +10,7 @@ export class LoadingOverlayService {
 
   constructor(
     private loadingController: LoadingController,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private injector: Injector
+    private environmentInjector: EnvironmentInjector
   ) {}
 
   public async showLoadingOverlay(
@@ -35,8 +34,10 @@ export class LoadingOverlayService {
 
       const loadingWrapper = this.ionLoading.querySelector('.loading-wrapper');
       const kirbySpinner = document.createElement('kirby-spinner');
-      const factory = this.componentFactoryResolver.resolveComponentFactory(SpinnerComponent);
-      factory.create(this.injector, [], kirbySpinner);
+      createComponent(SpinnerComponent, {
+        environmentInjector: this.environmentInjector,
+        hostElement: kirbySpinner,
+      });
       loadingWrapper.appendChild(kirbySpinner);
 
       await this.ionLoading.present();

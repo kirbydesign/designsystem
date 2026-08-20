@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -192,6 +192,7 @@ forgot to configure the custom icon through the 'IconRegistryService'?`
 @Component({
   selector: 'kirby-test-component',
   template: '<span>PlaceHolder HTML to be Replaced</span>',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IconComponent, ThemeColorDirective],
 })
 export class TestWrapperComponent {}

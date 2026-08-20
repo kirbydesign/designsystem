@@ -5,7 +5,8 @@
     "rootDir": "src",
     "skipLibCheck": true,
     "declaration": true,
-    "declarationDir": "./dist/types"
+    "declarationDir": "./dist/types",
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"],
   "exclude": ["src/**/*.spec.ts", "../../node_modules"]

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, forwardRef, Input, Output, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 
 import {
   BoundaryClass,
@@ -12,6 +20,7 @@ import {
   selector: 'kirby-list-item',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ListItemComponent,

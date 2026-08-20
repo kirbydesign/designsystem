@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from '@kirbydesign/designsystem';
 
@@ -7,6 +7,7 @@ import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from '@kirbyde
   selector: 'kirby-item-sliding',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ItemSlidingComponent,

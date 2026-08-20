@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 
@@ -7,6 +14,7 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
   selector: 'kirby-toggle',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ToggleComponent,

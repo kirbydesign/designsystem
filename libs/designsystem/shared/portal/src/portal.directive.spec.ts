@@ -1,6 +1,12 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { PortalDirective } from './portal.directive';
 
 @Component({
@@ -9,6 +15,7 @@ import { PortalDirective } from './portal.directive';
     <div #hostElement kirbyPortal [outlet]="outletElement"></div>
     <ng-template #templateRef></ng-template>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PortalDirective],
 })
 class PortalTestComponent {

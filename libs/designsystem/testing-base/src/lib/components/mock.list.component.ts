@@ -1,4 +1,12 @@
-import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  TrackByFunction,
+} from '@angular/core';
 
 import {
   ListComponent,
@@ -14,6 +22,7 @@ import {
   selector: 'kirby-list',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: ListComponent,

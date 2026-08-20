@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectator';
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
 import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
@@ -28,6 +28,7 @@ import { FloatingDirective, OutletSelector } from './floating.directive';
     <div #nameTarget name="nameTarget"></div>
     <pre #tagTarget></pre>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FloatingDirective],
 })
 class FloatingTestComponent {

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { AccordionItemComponent } from '@kirbydesign/designsystem';
 
@@ -7,6 +7,7 @@ import { AccordionItemComponent } from '@kirbydesign/designsystem';
   selector: 'kirby-accordion-item',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: AccordionItemComponent,

@@ -1,4 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { debounceTime, filter, Subscription, tap } from 'rxjs';
 
 import { TranslationService } from '@kirbydesign/designsystem/shared';
@@ -10,6 +17,7 @@ import { TextareaComponent } from './../textarea/textarea.component';
 @Component({
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormFieldMessageComponent],
 })
 export class InputCounterComponent implements AfterViewInit, OnDestroy {

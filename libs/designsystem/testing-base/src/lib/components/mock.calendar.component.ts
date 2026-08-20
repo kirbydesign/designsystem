@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 import { Locale } from 'date-fns';
 
 import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/designsystem/calendar';
@@ -8,6 +15,7 @@ import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/des
   selector: 'kirby-calendar',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: CalendarComponent,
