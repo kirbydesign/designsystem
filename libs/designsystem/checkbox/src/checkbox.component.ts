@@ -111,7 +111,6 @@ export class CheckboxComponent
       this.ionCheckboxElement,
       '.native-wrapper'
     );
-    this.cdr.detectChanges();
   }
 
   ngAfterContentInit(): void {
