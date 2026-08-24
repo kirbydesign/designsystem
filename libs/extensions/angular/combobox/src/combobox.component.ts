@@ -188,6 +188,11 @@ export class ComboboxComponent
     );
   }
 
+  protected get viewportHasScrollbar(): boolean {
+    const itemCount = this.searchItems?.length ?? 0;
+    return itemCount * this.itemHeight > this.dropdownMaxHeight;
+  }
+
   private isTypeString(item: unknown): boolean {
     return typeof item === 'string';
   }

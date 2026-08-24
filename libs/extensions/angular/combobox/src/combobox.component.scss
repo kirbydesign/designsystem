@@ -95,6 +95,11 @@ kirby-card {
   --kirby-content-border-bottom-radius: 0;
 }
 
+.combobox-viewport.has-scrollbar .combobox-item-context {
+  --kirby-content-border-top-right-radius: 0;
+  --kirby-content-border-bottom-right-radius: 0;
+}
+
 .combobox-item-context.virtual-scroll-first-visible {
   --kirby-content-border-top-radius: var(--kirby-border-radius-n);
 }

@@ -41,7 +41,8 @@ $outside-slot-width: utils.relative-size('s');
 ion-item {
   &::part(native) {
     border-radius: var(--kirby-content-border-top-radius, 0)
-      var(--kirby-content-border-top-radius, 0) var(--kirby-content-border-bottom-radius, 0)
+      var(--kirby-content-border-top-right-radius, var(--kirby-content-border-top-radius, 0))
+      var(--kirby-content-border-bottom-right-radius, var(--kirby-content-border-bottom-radius, 0))
       var(--kirby-content-border-bottom-radius, 0);
 
     &:focus-visible {

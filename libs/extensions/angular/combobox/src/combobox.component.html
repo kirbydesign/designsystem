@@ -36,6 +36,7 @@
       <cdk-virtual-scroll-viewport
         class="combobox-viewport"
         role="listbox"
+        [class.has-scrollbar]="viewportHasScrollbar"
         [itemSize]="itemHeight"
         [style.height.px]="viewportHeight"
         (scrolledIndexChange)="onViewportScrolledIndexChange($event)"
