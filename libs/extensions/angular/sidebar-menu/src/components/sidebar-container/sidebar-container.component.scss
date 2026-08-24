@@ -11,7 +11,6 @@
   color: var(--sidebar-color, utils.get-color('tertiary-contrast'));
   display: flex;
   flex-direction: column;
-  overflow: auto;
 
   * {
     scrollbar-width: thin;
@@ -38,6 +37,7 @@
 
 .sidebar-content {
   flex-grow: 1;
+  min-height: 0; // Webkit fix: allow the content container to shrink and scroll internally.
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -51,10 +51,11 @@
 .sidebar-header,
 .sidebar-footer {
   z-index: 1;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: sticky;
+  position: relative;
 }
 
 .sidebar-header.bottom-border {

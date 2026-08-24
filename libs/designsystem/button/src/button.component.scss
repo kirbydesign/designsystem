@@ -330,6 +330,10 @@ $button-margin: utils.size('xxxs');
 :host-context(kirby-dropdown) {
   // place arrow-icon in dropdown correctly
   justify-content: space-between;
+
+  .content-layer {
+    min-width: 0;
+  }
 }
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308

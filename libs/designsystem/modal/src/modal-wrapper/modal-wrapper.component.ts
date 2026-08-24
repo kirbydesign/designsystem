@@ -227,8 +227,6 @@ export class ModalWrapperComponent
         this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
       });
     }
-
-    this._currentFooter = footer;
   }
 
   private get currentFooter(): HTMLElement | null {
@@ -533,11 +531,11 @@ export class ModalWrapperComponent
   }
 
   private getKeyboardOverlap(keyboardHeight: number, element: Element) {
-    if (keyboardHeight <= 0 || !element) return 0;
-    const distanceFromViewportBottomToElement = Math.floor(
-      this.windowRef.nativeWindow.innerHeight - element.getBoundingClientRect().bottom
+    if (keyboardHeight <= 0 || !element || !this.initialViewportHeight) return 0;
+    const elementDistanceAboveBottomOfScreen = Math.floor(
+      this.initialViewportHeight - element.getBoundingClientRect().bottom
     );
-    return Math.max(keyboardHeight - distanceFromViewportBottomToElement, 0);
+    return Math.max(keyboardHeight - elementDistanceAboveBottomOfScreen, 0);
   }
 
   private setCssVar(element: Element, property: string, value: string) {
