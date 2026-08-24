@@ -170,8 +170,7 @@ export class ComboboxComponent
 
   private getHeightOfItem(item: unknown): number {
     if (item instanceof GroupItem) {
-      const def = this._groupSettings?.find((g) => g.id === item.id);
-      return def?.height ?? ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
+      return ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
     }
     return this.itemHeight;
   }
@@ -193,8 +192,7 @@ export class ComboboxComponent
   /**
    * Average height per item for CDK virtual scroll's [itemSize].
    * CDK calculates the spacer height as itemSize × itemCount. Using the true average ensures
-   * the spacer equals the actual content height, preventing phantom scroll space at the bottom
-   * when group headers are shorter than regular items.
+   * the spacer equals the actual content height, preventing phantom scroll space at the bottom.
    */
   protected get effectiveItemSize(): number {
     const count = this.searchItems?.length ?? 0;
@@ -478,20 +476,6 @@ export class ComboboxComponent
   @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
 
-  /** Optional template to override the default group header row.
-   *  Context: `{ $implicit: GroupItem }` — use `let-group` to access `group.id` and `group.displayName`.
-   *
-   *  @example
-   *  ```html
-   *  <kirby-x-combobox [groupSettings]="groups">
-   *    <ng-template #groupHeaderTemplate let-group>
-   *      <kirby-item><p class="kirby-item-detail">{{ group.displayName }}</p></kirby-item>
-   *    </ng-template>
-   *  </kirby-x-combobox>
-   *  ```
-   */
-  @ContentChild('groupHeaderTemplate', { read: TemplateRef })
-  public groupHeaderTemplate?: TemplateRef<{ $implicit: GroupItem }>;
 
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
   public slottedItems?: QueryList<ElementRef<HTMLElement>>;

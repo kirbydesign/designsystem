@@ -449,38 +449,6 @@ export const WithGrouping: Story = {
     `,
   }),
 };
-
-/**
- * Provide a `#groupHeaderTemplate` to override the default group header rendering.
- * The template context exposes the `GroupItem` as `$implicit`, giving access to
- * both `id` and `displayName`.
- */
-export const WithGroupHeaderTemplate: Story = {
-  args: {
-    items: currencyItems,
-    itemTextProperty: 'name',
-    itemIdProperty: 'code',
-    placeholder: 'Select currency',
-  },
-  render: (args) => ({
-    props: {
-      ...args,
-      groupSettings: currencyGroupSettings,
-    },
-    template: `
-      <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings">
-        <ng-template #groupHeaderTemplate let-group>
-          <kirby-item>
-              <kirby-label>
-              <p class="kirby-item-detail">{{ group.displayName }}</p>
-            </kirby-label>
-            <kirby-icon name="moneybag" slot="end"/>
-          </kirby-item>
-        </ng-template>
-      </kirby-x-combobox>
-    `,
-  }),
-};
 /*
  * with a reactive `FormControl`. It validates that:
  * - The form-field label and message render correctly around the combobox
