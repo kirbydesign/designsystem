@@ -174,9 +174,10 @@ describe('RadioComponent', () => {
           spectator.setInput('disabled', true);
           spectator.detectChanges();
           await TestHelper.whenTrue(() => ionRadioElement.classList.contains('radio-disabled'));
+          await TestHelper.whenReady(ionRadioElement);
         });
 
-        it('should have correct icon styling', () => {
+        it('should have correct icon styling', async () => {
           expect(ionRadioElement).toHaveComputedStyle({
             opacity: '1',
           });
@@ -188,7 +189,7 @@ describe('RadioComponent', () => {
           });
         });
 
-        it('should have correct checkmark styling', () => {
+        it('should have correct checkmark styling', async () => {
           expect(radioCheckmark).toHaveComputedStyle({
             'background-color': getColor('semi-dark'),
           });
