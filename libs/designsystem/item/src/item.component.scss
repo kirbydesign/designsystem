@@ -45,9 +45,7 @@ ion-item {
       var(--kirby-content-border-bottom-radius, 0);
 
     &:focus-visible {
-      box-shadow:
-        0 0 0 2px utils.$focus-ring-color inset,
-        0 0 0 4px var(--kirby-white) inset;
+      box-shadow: var(--kirby-focus-ring-md-inset);
     }
   }
 
