@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
@@ -75,7 +75,12 @@ import { OpenState } from './combobox.types';
 export class ComboboxComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
 {
-  private static readonly HEIGHT_OF_STANDARD_ITEM = 44;
+  private static readonly HEIGHT_OF_STANDARD_ITEM = parseInt(
+    DesignTokenHelper.dropdownItemHeight()
+  ); // 44px
+  private static readonly RIGHT_CARD_PADDING = 2 * parseInt(DesignTokenHelper.size('s')); // 2 × size('s') = 32px — matches SCSS $margin-horizontal-total
+  private static readonly CARD_MIN_WIDTH = 375 - 2 * parseInt(DesignTokenHelper.size('s')); // 375 − $margin-horizontal-total = 343px
+
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
@@ -263,6 +268,51 @@ export class ComboboxComponent
   public set items(value: unknown[]) {
     this._items = value;
     this.searchItems = this._items;
+  }
+
+  /**
+   * Measures the natural (unconstrained) width of each rendered kirby-item by
+   * temporarily setting its width to `max-content`, reading `offsetWidth` in a
+   * single synchronous reflow, then restoring the original style.
+   *
+   * This accounts for icons, labels, multiple fonts, and custom item templates —
+   * anything that is actually in the DOM. Skipped when expand=block, which manages
+   * its own card width.
+   */
+  private applyCardMinWidthFromRenderedItems(): void {
+    if (this.expand === 'block' || !this.cardElement?.nativeElement) return;
+    if (this.searchItems.length === 0) return;
+
+    const items = this.getKirbyItems();
+    if (!items?.length) return;
+
+    const elements = items.toArray().map((r) => r.nativeElement as HTMLElement);
+    if (elements.length === 0) return;
+
+    // Reset any previously applied inline min-width so the SCSS default acts as floor
+    this.renderer.removeStyle(this.cardElement.nativeElement, 'min-width');
+
+    // Batch write: remove width constraint so each item sizes to its natural content
+    elements.forEach((el) => (el.style.width = 'max-content'));
+
+    // Batch read: one synchronous reflow gives us the widest natural item width
+    const maxWidth =
+      elements.reduce((max, el) => Math.max(max, el.offsetWidth), 0) +
+      ComboboxComponent.RIGHT_CARD_PADDING;
+
+    // Batch restore
+    elements.forEach((el) => (el.style.width = ''));
+
+    if (maxWidth > 0) {
+      const maxScreenWidth = window.innerWidth;
+
+      // Set width: calculate the width, but constrain it to a minimum and maximum
+      let width = ComboboxComponent.CARD_MIN_WIDTH;
+      width = Math.max(width, maxWidth);
+      width = Math.min(width, maxScreenWidth);
+
+      this.renderer.setStyle(this.cardElement.nativeElement, 'width', `${width}px`);
+    }
   }
 
   private _selectedItem: unknown = undefined;
@@ -573,7 +623,10 @@ export class ComboboxComponent
       // PopoverComponent.show() appends the element to document.body synchronously but
       // finishes positioning in a requestAnimationFrame. One rAF is enough to let the
       // browser compute layout so the CDK viewport has a real size before we scroll.
-      requestAnimationFrame(() => this.scrollToIndexIntoViewWhenOpeningPopup());
+      requestAnimationFrame(() => {
+        this.scrollToIndexIntoViewWhenOpeningPopup();
+        this.applyCardMinWidthFromRenderedItems();
+      });
     }
   }
 
