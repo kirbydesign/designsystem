@@ -146,12 +146,16 @@ describe('RadioComponent', () => {
     });
 
     describe('when state is', () => {
-      describe('checked. sds', () => {
+      describe('checked', () => {
         beforeEach(() => {
           ionRadioElement.classList.add('radio-checked');
         });
 
-        it('should have correct icon styling', () => {
+        it('should have correct icon styling', async () => {
+          await TestHelper.whenTrue(
+            () => window.getComputedStyle(radioIcon).boxShadow === getElevation(4)
+          );
+
           expect(radioIcon).toHaveComputedStyle({
             'background-color': getColor('white'),
             'border-width': '1px',
