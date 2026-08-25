@@ -152,6 +152,7 @@ describe('RadioComponent', () => {
         });
 
         it('should have correct icon styling', async () => {
+          // Wait for box-shadow transition to complete (transition-property includes box-shadow)
           await TestHelper.whenTrue(
             () => window.getComputedStyle(radioIcon).boxShadow === getElevation(4)
           );
@@ -181,6 +182,7 @@ describe('RadioComponent', () => {
         });
 
         it('should have correct icon styling', async () => {
+          // Wait for background-color transition to complete (transition-property includes background-color)
           await TestHelper.whenTrue(
             () =>
               window.getComputedStyle(radioIcon).backgroundColor === getColor('semi-light').value
@@ -212,6 +214,7 @@ describe('RadioComponent', () => {
         });
 
         it('should have correct icon styling', async () => {
+          // Wait for box-shadow transition to complete (transition-property includes box-shadow)
           await TestHelper.whenTrue(() => window.getComputedStyle(radioIcon).boxShadow === 'none');
 
           expect(ionRadioElement).toHaveComputedStyle({
