@@ -138,17 +138,8 @@ $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby
           gap: var(--kirby-spacing-xs);
         }
 
-        // center disclosure and badge vertically with start slot content
-        ion-item:has(#{$start-slot-content}) {
-          .outside {
-            top: calc(var(--item-padding-top) + $start-slot-content-margin + $outside-slot-offset);
-          }
-
-          .disclosure {
-            top: calc(
-              var(--item-padding-top) + $start-slot-content-margin + var(--kirby-spacing-xxs)
-            );
-          }
+        &::part(input-wrapper) {
+          justify-content: center;
         }
 
         &::part(native) {

@@ -113,8 +113,6 @@ describe('ModalWrapperComponent', () => {
         expect(ionContentToolbarElement).not.toBeUndefined();
         await TestHelper.whenReady([ionContentElement, ionContentToolbarElement]);
 
-        await TestHelper.whenReady([ionContentElement, ionContentToolbarElement]);
-
         expect(ionContentToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',
           '--padding-top': '0px',

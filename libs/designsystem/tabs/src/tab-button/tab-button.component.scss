@@ -89,7 +89,7 @@ ion-tab-button {
         --kirby-badge-left: 0;
 
         margin-left: $wide-viewport-badge-margin;
-        margin-bottom: calc(var(--kirby-spacing-xxxxs / 2));
+        margin-bottom: calc(var(--kirby-spacing-xxxxs) / 2);
       }
     }
 
