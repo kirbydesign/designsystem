@@ -1,1 +1,0 @@
-var l=(n,o,a=["item-multiple-inputs"])=>{let t=n.closest("ion-item");if(!t||typeof MutationObserver>"u")return;let s=()=>a.map(e=>t.classList.contains(e)).join(","),r=s(),i=new MutationObserver(()=>{let e=s();e!==r&&(r=e,o())});return i.observe(t,{attributes:!0,attributeFilter:["class"]}),i};export{l as a};
