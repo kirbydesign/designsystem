@@ -47,7 +47,7 @@
     "@angular/build": "21.2.19",
     "@angular/cdk": "21.2.14",
     "@angular/cli": "21.2.19",
-    "@angular/common": "21.2.18",
+    "@angular/common": "21.2.19",
     "@angular/compiler": "21.2.18",
     "@angular/compiler-cli": "21.2.18",
     "@angular/core": "21.2.18",
