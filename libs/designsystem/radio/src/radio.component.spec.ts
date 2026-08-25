@@ -146,7 +146,7 @@ describe('RadioComponent', () => {
     });
 
     describe('when state is', () => {
-      describe('checked', () => {
+      describe('checked. sds', () => {
         beforeEach(() => {
           ionRadioElement.classList.add('radio-checked');
         });
