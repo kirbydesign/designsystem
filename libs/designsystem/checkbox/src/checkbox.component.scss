@@ -127,14 +127,15 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   ion-checkbox {
-    &:focus-within {
+    &:focus-visible {
+      outline: none;
+
       --border-width: 0;
       --border-color: transparent;
       --border-color-checked: transparent;
     }
 
     &:focus-visible::part(container) {
-      outline: none;
       padding: calc(
         var(--kirby-checkbox-container-padding) + 1px
       ); // Compensate for removed 1px border to prevent checkmark from growing in ion-checkbox
@@ -148,11 +149,6 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     }
     @include interaction-state.apply-active {
       --checkbox-background: #{interaction-state.get-state-color('white', 'xs')};
-    }
-
-    &:focus-visible {
-      // Remove default browser focus visible
-      outline: none;
     }
 
     // Wrap declarations to avoid mixing with nested rules.
