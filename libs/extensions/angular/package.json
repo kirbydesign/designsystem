@@ -1,6 +1,6 @@
 {
   "name": "@kirbydesign/extensions-angular",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": "kirby@bankdata.dk",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "jest-preset-angular": "^16.0.0",
     "jest-util": "^30.2.0",
     "jsonc-eslint-parser": "^2.1.0",
-    "postcss": "^8.5.18",
+    "postcss": "^8.5.23",
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.5.0",
     "postcss-url": "~10.1.3",

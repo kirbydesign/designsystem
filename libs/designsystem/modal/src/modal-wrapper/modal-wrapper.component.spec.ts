@@ -107,10 +107,11 @@ describe('ModalWrapperComponent', () => {
         TestHelper.resetTestWindow();
       });
 
-      it('should have correct padding between content & toolbar', () => {
+      it('should have correct padding between content & toolbar', async () => {
         const ionContentToolbarElement: HTMLIonToolbarElement =
           ionContentElement.querySelector('ion-toolbar');
         expect(ionContentToolbarElement).not.toBeUndefined();
+        await TestHelper.whenReady([ionContentElement, ionContentToolbarElement]);
 
         expect(ionContentToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',
@@ -147,11 +148,12 @@ describe('ModalWrapperComponent', () => {
       expect(rootElement.classList).toContain('drawer');
     });
 
-    it('should have correct font size when drawer flavor is used', () => {
+    it('should have correct font size when drawer flavor is used', async () => {
       spectator.component.config.flavor = 'drawer';
       spectator.detectChanges();
       const rootElement: HTMLElement = spectator.element;
       const title = rootElement.querySelector('ion-title');
+      await TestHelper.whenReady(title);
       expect(window.getComputedStyle(title).fontSize).toEqual(DesignTokenHelper.fontSize('n'));
     });
 
@@ -537,6 +539,57 @@ describe('ModalWrapperComponent', () => {
       expect(spectator.component['keyboardVisible']).toBeTrue();
       const heightWhenKeyboardOpened = spectator.element.getBoundingClientRect().height;
       expect(heightWhenKeyboardClosed).toEqual(heightWhenKeyboardOpened);
+    });
+  });
+
+  describe(`getKeyboardOverlap`, () => {
+    const elementWithDistanceFromTopOfViewport = (bottom: number): Element =>
+      ({ getBoundingClientRect: () => ({ bottom }) as DOMRect }) as Element;
+    const viewportHeight = 800;
+    const keyboardHeight = 300;
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+      spectator.component['initialViewportHeight'] = viewportHeight;
+    });
+
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should return 0 when the keyboard height is negative', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          -1,
+          elementWithDistanceFromTopOfViewport(viewportHeight)
+        )
+      ).toBe(0);
+    });
+
+    it('should return the height of the keyboard when the element sits at the bottom of the viewport', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(viewportHeight)
+        )
+      ).toBe(keyboardHeight);
+    });
+
+    it('should return the residual overlap when the element is only partially covered', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(700)
+        )
+      ).toBe(200);
+    });
+
+    it('should return 0 when the element is already lifted above the keyboard by the viewport resize', () => {
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(viewportHeight - keyboardHeight - 100)
+        )
+      ).toBe(0);
     });
   });
 
