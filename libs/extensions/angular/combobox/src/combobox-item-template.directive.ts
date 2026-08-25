@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[kirbyComboboxItemTemplate]',
+  selector: '[kirbyXComboboxItemTemplate]',
   standalone: true,
 })
 export class ComboboxItemTemplateDirective {}

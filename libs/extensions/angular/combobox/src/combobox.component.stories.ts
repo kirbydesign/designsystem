@@ -192,6 +192,10 @@ export const WithTextProperty: Story = {
 
 /**
  * This example demonstrates how to use a custom template for items shown in the dropdown.
+ * 
+ * **Important:** The `*kirbyXComboboxItemTemplate` directive must be applied to the `kirby-item` element to enable custom item templating.
+ * This directive provides the context variables (`item`, `selected`, `focused`) for the templated items.
+ * 
  * Since the combobox no longer controls the visual appearance of the items, `itemHeight` should be supplied to ensure correct dropdown height and scroll-into-view functionality.
  * Additionally, `itemIdProperty` should be set to match `[attr.id]` of the item template, as the id is used to manage selection and focus.
  */
@@ -231,6 +235,8 @@ export const WithTemplate: Story = {
 /**
  * The `searchFunction` property allows you to provide a custom function that takes the search term as input and returns an array of matching items.
  * In this example, the custom search function filters the currency items based on their `name` property.
+ * 
+ * **Note:** The `*kirbyXComboboxItemTemplate` directive is required when using custom item templates to provide context variables.
  */
 export const CustomSearchFunction: Story = {
   args: {
@@ -251,60 +257,64 @@ export const CustomSearchFunction: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
-          [size]="'sm'"
-          [selectable]="true"
-          [selected]="selected"
-          [class.focused]="focused"
-          role="option"
-          [attr.aria-selected]="selected"
-          [attr.id]="item.code"
-        >
-          <kirby-label>
-            <p class="kirby-item-title">{{ item.code }}</p>
-            <p class="kirby-item-detail">{{ item.name }}</p>
-          </kirby-label>
-        </kirby-item>
-      </kirby-x-combobox>
-    `,
-  }),
+         *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+         [size]="'sm'"
+         [selectable]="true"
+         [selected]="selected"
+         [class.focused]="focused"
+         role="option"
+         [attr.aria-selected]="selected"
+         [attr.id]="item.code"
+       >
+         <kirby-label>
+           <p class="kirby-item-title">{{ item.code }}</p>
+           <p class="kirby-item-detail">{{ item.name }}</p>
+         </kirby-label>
+       </kirby-item>
+     </kirby-x-combobox>
+   `,
+ }),
 };
 
 /**
  * The `items` property is set to an array of 5000 currency items, which simulates a scenario where there are many options to choose from.
+ * 
+ * **Note:** The `*kirbyXComboboxItemTemplate` directive is required when using custom item templates to provide context variables.
  */
 export const LargeList: Story = {
-  args: {
-    items: currencyItems5000,
-    itemTextProperty: 'code',
-    itemIdProperty: 'code',
-    itemHeight: 56,
-    placeholder: 'Select currency',
-  },
-  render: (args) => ({
-    props: {
-      ...args,
-    },
-    template: `
-      <kirby-x-combobox ${argsToTemplate(args)} >
-        <kirby-item
-          *kirbyComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
-          [size]="'sm'"
-          [selectable]="true"
-          [selected]="selected"
-          [class.focused]="focused"
-          role="option"
-          [attr.aria-selected]="selected"
-          [attr.id]="item.code"
-        >
-          <kirby-label>
-            <p class="kirby-item-title">{{ item.code }}</p>
-            <p class="kirby-item-detail">{{ item.name }}</p>
-          </kirby-label>
-        </kirby-item>
-      </kirby-x-combobox>
-    `,
-  }),
+ args: {
+   items: currencyItems5000,
+   itemTextProperty: 'code',
+   itemIdProperty: 'code',
+   itemHeight: 56,
+   placeholder: 'Select currency',
+ },
+ render: (args) => ({
+   props: {
+     ...args,
+   },
+   template: `
+     <kirby-x-combobox ${argsToTemplate(args)} >
+       <kirby-item
+         *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+         [size]="'sm'"
+         [selectable]="true"
+         [selected]="selected"
+         [class.focused]="focused"
+         role="option"
+         [attr.aria-selected]="selected"
+         [attr.id]="item.code"
+       >
+         <kirby-label>
+           <p class="kirby-item-title">{{ item.code }}</p>
+           <p class="kirby-item-detail">{{ item.name }}</p>
+         </kirby-label>
+       </kirby-item>
+     </kirby-x-combobox>
+   `,
+ }),
 };
 
 /**
