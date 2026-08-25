@@ -84,9 +84,9 @@
   }
 }
 
-@mixin relative-spacings() {
+@mixin relative-sizes() {
   @each $name, $value in variables.$relative-sizes {
-    --kirby-relative-spacing-#{$name}: #{$value};
+    --kirby-relative-size-#{$name}: #{$value};
   }
 }
 
@@ -186,7 +186,7 @@
   @include spacings;
 
   /* RELATIVE SPACINGS */
-  @include relative-spacings;
+  @include relative-sizes;
 
   /* FAT FINGER SIZE */
   @include size-fat-finger;

@@ -4,7 +4,7 @@
 @use 'item.utils';
 
 $fixed-badge-font-size: 10px;
-$outside-slot-width: var(--kirby-relative-spacing-s);
+$outside-slot-width: var(--kirby-relative-size-s);
 
 :host {
   display: block;

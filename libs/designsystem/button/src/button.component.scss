@@ -34,7 +34,7 @@ $button-margin: var(--kirby-spacing-xxxs);
 
     // use fixed size unless font-size grows too large, then let button
     // height adjust to font-size (effectively when text is resized to 150% and above)
-    height: max($button-xs-icon-only-size, var(--kirby-relative-spacing-s));
+    height: max($button-xs-icon-only-size, var(--kirby-relative-size-s));
     min-width: button-width('xs');
   }
 
@@ -46,7 +46,7 @@ $button-margin: var(--kirby-spacing-xxxs);
   &.icon-only {
     // use fixed size unless font-size grows too large, then let button
     // height adjust to font-size (effectively when text is resized to 150% and above)
-    width: max($button-xs-icon-only-size, var(--kirby-relative-spacing-s));
+    width: max($button-xs-icon-only-size, var(--kirby-relative-size-s));
     min-width: unset;
   }
 

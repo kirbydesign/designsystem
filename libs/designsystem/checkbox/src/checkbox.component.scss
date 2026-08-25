@@ -99,7 +99,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   &.xs {
     ion-checkbox::part(label) {
       line-height: var(
-        --kirby-relative-spacing-s
+        --kirby-relative-size-s
       ); // using relative spacing as we want line-height to be exactly 1 rem
 
       font-size: var(--kirby-font-size-s);
@@ -121,7 +121,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
        * We style the native wrapper to make sure it has the same height as the container
        * so the checkbox can be properly start-aligned with multiline labels
        */
-        height: var(--kirby-relative-spacing-s);
+        height: var(--kirby-relative-size-s);
       }
     }
   }
@@ -190,7 +190,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
        * We style the native wrapper to make sure it has the same height as the container
        * so the checkbox can be properly start-aligned with multiline labels
        */
-      height: var(--kirby-relative-spacing-m);
+      height: var(--kirby-relative-size-m);
     }
 
     // Overrides for kirby-checkbox inside kirby-item
