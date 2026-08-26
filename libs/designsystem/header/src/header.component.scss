@@ -1,15 +1,14 @@
-@use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 
-$margin-inline: utils.size('s');
-$actions-margin-inline: utils.size('xxs');
-$column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
+$margin-inline: var(--kirby-spacing-s);
+$actions-margin-inline: var(--kirby-spacing-xxs);
+$column-gap: calc(var(--kirby-spacing-xxl) - #{$margin-inline} - #{$actions-margin-inline});
 
 :host {
   display: flex;
   flex-direction: column;
-  margin-top: utils.size('s');
-  margin-bottom: utils.size('l');
+  margin-top: var(--kirby-spacing-s);
+  margin-bottom: var(--kirby-spacing-l);
 
   @include utils.media('<medium') {
     /*
@@ -19,12 +18,12 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
     */
     /* stylelint-disable selector-pseudo-element-no-unknown */
     &:has(> .avatar::ng-deep) {
-      margin-top: utils.size('xxs');
+      margin-top: var(--kirby-spacing-xxs);
     }
   }
 
   @include utils.media('>=medium') {
-    margin-top: utils.size('m');
+    margin-top: var(--kirby-spacing-m);
   }
 }
 
@@ -99,7 +98,7 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 }
 
 .actions {
-  margin-top: utils.size('m');
+  margin-top: var(--kirby-spacing-m);
   margin-inline: $actions-margin-inline;
 
   @include utils.media('<medium') {
@@ -138,19 +137,19 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 }
 
 .avatar {
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 }
 
 .flag {
-  margin-bottom: utils.size('xxxs');
+  margin-bottom: var(--kirby-spacing-xxxs);
 }
 
 .flag .custom-flag {
-  margin-block: utils.size('xxxs');
+  margin-block: var(--kirby-spacing-xxxs);
 }
 
 .title {
-  margin-bottom: utils.size('xxxxs');
+  margin-bottom: var(--kirby-spacing-xxxxs);
 
   &.clickable {
     cursor: pointer;
@@ -171,13 +170,13 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
   display: flex;
   align-items: baseline;
   max-width: 100%;
-  margin-bottom: utils.size('xxxs');
+  margin-bottom: var(--kirby-spacing-xxxs);
 }
 
 .value-unit {
   font-weight: initial;
-  color: utils.get-text-color('semi-dark');
-  margin-left: utils.size('xxxs');
+  color: var(--kirby-text-color-semi-dark);
+  margin-left: var(--kirby-spacing-xxxs);
   font-size: 50%;
 }
 
@@ -194,5 +193,5 @@ $column-gap: utils.size('xxl') - $margin-inline - $actions-margin-inline;
 }
 
 .custom-section {
-  margin-top: utils.size('xxs');
+  margin-top: var(--kirby-spacing-xxs);
 }

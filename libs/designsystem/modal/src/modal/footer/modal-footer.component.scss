@@ -4,18 +4,18 @@
 ion-footer {
   @include themes.apply-white-theme;
 
-  box-shadow: utils.get-elevation(8);
+  box-shadow: var(--kirby-elevation-8);
   box-sizing: inherit;
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
-  background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
-  color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
-  padding: utils.size('s');
-  padding-bottom: calc(#{utils.size('xs')} + var(--kirby-modal-safe-area-bottom));
+  background-color: var(--kirby-modal-footer-background, var(--kirby-white));
+  color: var(--kirby-modal-footer-color, var(--kirby-white-contrast));
+  padding: var(--kirby-spacing-s);
+  padding-bottom: calc(var(--kirby-spacing-xs) + var(--kirby-modal-safe-area-bottom));
 
   @include utils.media('>=medium') {
-    padding: utils.size('m');
+    padding: var(--kirby-spacing-m);
   }
 }
 
@@ -33,7 +33,7 @@ ion-footer {
 :host(.light) ion-footer {
   @include themes.apply-light-theme;
 
-  background-color: utils.get-color('background-color');
+  background-color: var(--kirby-background-color);
 }
 
 :host(.inline) ion-footer {
