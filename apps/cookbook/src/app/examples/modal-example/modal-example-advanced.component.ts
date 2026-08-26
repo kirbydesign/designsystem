@@ -149,14 +149,13 @@ ngOnInit() {
 ngOnInit() {
   this.modal?.willClose.then(() => console.log('this modal is about to close'));
 }`,
-  embeddedCodeSnippet: `import { Component, Inject } from '@angular/core';
+  embeddedCodeSnippet: `import { Component, inject } from '@angular/core';
 import { COMPONENT_PROPS } from '@kirbydesign/designsystem';
 
 @Component()
 export class EmbeddedComponent() {
-  constructor(@Inject(COMPONENT_PROPS) private componentProps) {
-    this.props = componentProps;
-  }
+  private readonly componentProps = inject<{ myType: MyType }>(COMPONENT_PROPS);
+  protected readonly myType = this.componentProps.myType;
 }`,
   closeModalCodeSnippet: `import { Component, Optional, SkipSelf } from '@angular/core';
 import { Modal } from '@kirbydesign/designsystem';
