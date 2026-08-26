@@ -11,12 +11,16 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
       cursor: text;
 
       &::placeholder {
-        color: var(--kirby-text-color-white);
+        color: var(--kirby-text-color-black);
       }
     }
 
     @include interaction-state.apply-active {
       background-color: var(--kirby-inputs-background-color-active);
+
+      &::placeholder {
+        color: var(--kirby-text-color-black);
+      }
     }
 
     // Wrap declarations to avoid mixing with nested rules.
@@ -73,6 +77,7 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   }
 }
 
+/* Light/white theme placeholder hover text color black */
 :host-context(.white),
 :host-context(.light),
 :host-context(.kirby-color-brightness-white),
@@ -81,6 +86,29 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
     @include interaction-state.apply-hover {
       &::placeholder {
         color: var(--kirby-text-color-black);
+      }
+    }
+
+    @include interaction-state.apply-active {
+      &::placeholder {
+        color: var(--kirby-text-color-black);
+      }
+    }
+  }
+}
+
+/* Dark theme placeholder over text color white */
+:host-context(.kirby-color-brightness-dark) {
+  &:not(:disabled) {
+    @include interaction-state.apply-hover {
+      &::placeholder {
+        color: var(--kirby-text-color-white);
+      }
+    }
+
+    @include interaction-state.apply-active {
+      &::placeholder {
+        color: var(--kirby-text-color-white);
       }
     }
   }
