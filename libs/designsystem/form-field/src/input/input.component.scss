@@ -11,16 +11,12 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
       cursor: text;
 
       &::placeholder {
-        color: var(--kirby-text-color-black);
+        color: var(--kirby-text-color-white);
       }
     }
 
     @include interaction-state.apply-active {
       background-color: var(--kirby-inputs-background-color-active);
-
-      &::placeholder {
-        color: var(--kirby-text-color-black);
-      }
     }
 
     // Wrap declarations to avoid mixing with nested rules.
@@ -74,6 +70,19 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
     padding-block: calc(
       #{$padding-block-size-md} - 1px
     ); // subtract border width from padding to maintain overall height
+  }
+}
+
+:host-context(.white),
+:host-context(.light),
+:host-context(.kirby-color-brightness-white),
+:host-context(.kirby-color-brightness-light) {
+  &:not(:disabled) {
+    @include interaction-state.apply-hover {
+      &::placeholder {
+        color: var(--kirby-text-color-black);
+      }
+    }
   }
 }
 
