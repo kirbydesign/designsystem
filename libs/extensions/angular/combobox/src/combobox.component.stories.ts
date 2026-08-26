@@ -1,8 +1,10 @@
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
+import {
+  ComboboxComponent,
+  ComboboxItemTemplateDirective,
+} from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import {
   FormFieldComponent,
@@ -81,10 +83,10 @@ const meta: Meta<ComboboxComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
-        ListModule,
         ItemModule,
         InputComponent,
         ComboboxComponent,
+        ComboboxItemTemplateDirective,
         FormFieldComponent,
         ReactiveFormsModule,
       ],
@@ -190,6 +192,7 @@ export const WithTextProperty: Story = {
 
 /**
  * This example demonstrates how to use a custom template for items shown in the dropdown.
+ * The `*kirbyXComboboxItemTemplate` directive must be applied to the `kirby-item` element to enable custom item templating.
  * Since the combobox no longer controls the visual appearance of the items, `itemHeight` should be supplied to ensure correct dropdown height and scroll-into-view functionality.
  * Additionally, `itemIdProperty` should be set to match `[attr.id]` of the item template, as the id is used to manage selection and focus.
  */
@@ -208,7 +211,7 @@ export const WithTemplate: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           role="option"
           [selectable]="true"
           [selected]="selected"
@@ -249,22 +252,22 @@ export const CustomSearchFunction: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
-          [size]="'sm'"
-          [selectable]="true"
-          [selected]="selected"
-          [class.focused]="focused"
-          role="option"
-          [attr.aria-selected]="selected"
-          [attr.id]="item.code"
-        >
-          <kirby-label>
-            <p class="kirby-item-title">{{ item.code }}</p>
-            <p class="kirby-item-detail">{{ item.name }}</p>
-          </kirby-label>
-        </kirby-item>
-      </kirby-x-combobox>
-    `,
+         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+         [size]="'sm'"
+         [selectable]="true"
+         [selected]="selected"
+         [class.focused]="focused"
+         role="option"
+         [attr.aria-selected]="selected"
+         [attr.id]="item.code"
+       >
+         <kirby-label>
+           <p class="kirby-item-title">{{ item.code }}</p>
+           <p class="kirby-item-detail">{{ item.name }}</p>
+         </kirby-label>
+       </kirby-item>
+     </kirby-x-combobox>
+   `,
   }),
 };
 
@@ -284,24 +287,24 @@ export const LargeList: Story = {
       ...args,
     },
     template: `
-      <kirby-x-combobox ${argsToTemplate(args)} >
-        <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
-          [size]="'sm'"
-          [selectable]="true"
-          [selected]="selected"
-          [class.focused]="focused"
-          role="option"
-          [attr.aria-selected]="selected"
-          [attr.id]="item.code"
-        >
-          <kirby-label>
-            <p class="kirby-item-title">{{ item.code }}</p>
-            <p class="kirby-item-detail">{{ item.name }}</p>
-          </kirby-label>
-        </kirby-item>
-      </kirby-x-combobox>
-    `,
+     <kirby-x-combobox ${argsToTemplate(args)} >
+       <kirby-item
+         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+         [size]="'sm'"
+         [selectable]="true"
+         [selected]="selected"
+         [class.focused]="focused"
+         role="option"
+         [attr.aria-selected]="selected"
+         [attr.id]="item.code"
+       >
+         <kirby-label>
+           <p class="kirby-item-title">{{ item.code }}</p>
+           <p class="kirby-item-detail">{{ item.name }}</p>
+         </kirby-label>
+       </kirby-item>
+     </kirby-x-combobox>
+   `,
   }),
 };
 
