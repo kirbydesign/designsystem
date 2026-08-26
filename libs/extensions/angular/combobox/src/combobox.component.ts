@@ -188,6 +188,11 @@ export class ComboboxComponent
     );
   }
 
+  protected get viewportHasScrollbar(): boolean {
+    const itemCount = this.searchItems?.length ?? 0;
+    return itemCount * this.itemHeight > this.dropdownMaxHeight;
+  }
+
   private isTypeString(item: unknown): boolean {
     return typeof item === 'string';
   }
@@ -247,6 +252,10 @@ export class ComboboxComponent
       this.focusedItem = this._searchItems[0];
       this._virtualScrollViewport?.scrollToIndex(0);
     }
+
+    if (this.isOpen) {
+      this.queueVisibleItemRangeSync();
+    }
   }
 
   private _items: unknown[] = [];
@@ -302,6 +311,22 @@ export class ComboboxComponent
     }
 
     this._focusedItem = item;
+  }
+
+  protected firstVisibleItemIndex = 0;
+  protected lastVisibleItemIndex = 0;
+  private pendingVisibleItemRangeSync: number | null = null;
+
+  protected isFirstVisibleItem(index: number): boolean {
+    return index === this.firstVisibleItemIndex;
+  }
+
+  protected isLastVisibleItem(index: number): boolean {
+    return index === this.lastVisibleItemIndex;
+  }
+
+  protected onViewportScrolledIndexChange(index: number): void {
+    this.queueVisibleItemRangeSync(index);
   }
 
   private getIndexOfItem(item: unknown): number {
@@ -550,6 +575,10 @@ export class ComboboxComponent
   }
 
   public ngOnDestroy(): void {
+    if (this.pendingVisibleItemRangeSync !== null) {
+      cancelAnimationFrame(this.pendingVisibleItemRangeSync);
+      this.pendingVisibleItemRangeSync = null;
+    }
     this.unlistenAllSlottedItems();
     this.unobserveResize();
   }
@@ -951,6 +980,7 @@ export class ComboboxComponent
     }
 
     this._virtualScrollViewport.checkViewportSize();
+    this.queueVisibleItemRangeSync();
   }
 
   private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
@@ -962,9 +992,43 @@ export class ComboboxComponent
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
 
-    this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
     this._virtualScrollViewport?.checkViewportSize();
+    this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
 
     this._virtualScrollViewport?.scrollToIndex(focusedIndex);
+    this.queueVisibleItemRangeSync();
+  }
+
+  private queueVisibleItemRangeSync(scrolledIndex?: number): void {
+    if (this.pendingVisibleItemRangeSync !== null) {
+      cancelAnimationFrame(this.pendingVisibleItemRangeSync);
+    }
+    this.pendingVisibleItemRangeSync = requestAnimationFrame(() => {
+      this.pendingVisibleItemRangeSync = null;
+      this.syncVisibleItemRange(scrolledIndex);
+    });
+  }
+
+  private syncVisibleItemRange(scrolledIndex?: number): void {
+    if (!this._virtualScrollViewport || this.searchItems.length === 0) {
+      this.firstVisibleItemIndex = 0;
+      this.lastVisibleItemIndex = 0;
+      this.cdr.markForCheck();
+      return;
+    }
+
+    const viewportSize = this._virtualScrollViewport.getViewportSize();
+    const firstVisibleIndex =
+      scrolledIndex ??
+      Math.floor(this._virtualScrollViewport.measureScrollOffset() / this.itemHeight);
+    const visibleItemCount = Math.max(1, Math.ceil(viewportSize / this.itemHeight));
+    const lastVisibleIndex = Math.min(
+      this.searchItems.length - 1,
+      firstVisibleIndex + visibleItemCount - 1
+    );
+
+    this.firstVisibleItemIndex = firstVisibleIndex;
+    this.lastVisibleItemIndex = lastVisibleIndex;
+    this.cdr.markForCheck();
   }
 }
