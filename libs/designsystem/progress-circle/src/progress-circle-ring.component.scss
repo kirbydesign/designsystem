@@ -19,24 +19,24 @@
   }
 
   &.success {
-    --kirby-progress-circle-stroke-color: #{utils.get-color('success-shade')};
+    --kirby-progress-circle-stroke-color: var(--kirby-success-shade);
   }
 
   &.warning {
-    --kirby-progress-circle-stroke-color: #{utils.get-color('warning-shade')};
+    --kirby-progress-circle-stroke-color: var(--kirby-warning-shade);
   }
 
   &.danger {
-    --kirby-progress-circle-stroke-color: #{utils.get-color('danger')};
+    --kirby-progress-circle-stroke-color: var(--kirby-danger);
   }
 
   &.view-initialized {
     .progress {
       transition-property: stroke-dasharray, stroke;
-      transition-duration: utils.get-transition-duration('extra-long');
-      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transition-duration: var(--kirby-transition-duration-extra-long);
+      transition-timing-function: var(--kirby-transition-easing-enter-exit);
       transform-origin: 50% 50%;
-      stroke: var(--kirby-progress-circle-stroke-color, #{utils.get-color('success')});
+      stroke: var(--kirby-progress-circle-stroke-color, var(--kirby-success));
     }
   }
 }

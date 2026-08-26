@@ -1,34 +1,33 @@
-@use 'sass:color';
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 $radio-size: 20px; // used to overwrite ionics default relative sizing, so radio size same across font sizes
-$radio-icon-size: utils.size('m');
-$radio-icon-mark-size: utils.size('xs');
+$radio-icon-size: var(--kirby-spacing-m);
+$radio-icon-mark-size: var(--kirby-spacing-xs);
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
 @function get-vertical-padding($target-height) {
-  @return ($target-height - $radio-icon-size) * 0.5;
+  @return calc((#{$target-height} - #{$radio-icon-size}) * 0.5);
 }
 
 :host {
   display: flex;
 
   &[disabled] {
-    color: #{utils.get-text-color('semi-dark')};
+    color: var(--kirby-text-color-semi-dark);
 
     ion-radio {
-      --color: #{utils.get-color('medium')};
-      --color-checked: #{utils.get-color('medium')};
+      --color: var(--kirby-medium);
+      --color-checked: var(--kirby-medium);
 
       &::part(container) {
-        background-color: utils.get-color('semi-light');
+        background-color: var(--kirby-semi-light);
       }
 
       &::part(mark) {
-        --color-checked: #{utils.get-color('semi-dark')};
+        --color-checked: var(--kirby-semi-dark);
       }
 
       &::part(label-text-wrapper) {
@@ -108,8 +107,8 @@ ion-radio {
     box-sizing: border-box; // Ensure padding is not added to radio width/height
 
     --border-width: 1px;
-    --color: #{utils.get-color('semi-dark')};
-    --color-checked: #{utils.get-color('success')};
+    --color: var(--kirby-semi-dark);
+    --color-checked: var(--kirby-success);
   }
   /* stylelint-enable no-duplicate-selectors */
 
@@ -129,8 +128,8 @@ ion-radio {
   &::part(container) {
     transition: interaction-state.transition();
     transition-property: background-color, box-shadow;
-    background-color: utils.get-color('white');
-    margin: utils.size('xxxxs');
+    background-color: var(--kirby-white);
+    margin: var(--kirby-spacing-xxxxs);
     width: $radio-size;
     height: $radio-size;
   }
@@ -143,7 +142,7 @@ ion-radio {
   &::part(label) {
     align-items: start;
     padding-inline: $spacing-to-edge;
-    line-height: utils.line-height('n');
+    line-height: var(--kirby-line-height-n);
   }
 
   &::part(label-text-wrapper) {
@@ -156,7 +155,7 @@ ion-radio {
      * We style the native wrapper to make sure it has the same height as the container
      * so the radio can be properly start-aligned with multiline labels
      */
-    height: utils.relative-size('m');
+    height: var(--kirby-relative-size-m);
   }
 
   // Overrides for kirby-radio inside kirby-item
@@ -172,13 +171,13 @@ ion-radio {
 
     &.radio-label-placement-start {
       &::part(label-text-wrapper) {
-        margin-inline: 0 utils.size('xxs');
+        margin-inline: 0 var(--kirby-spacing-xxs);
       }
     }
 
     &.radio-label-placement-end {
       &::part(label-text-wrapper) {
-        margin-inline: utils.size('xxs') 0;
+        margin-inline: var(--kirby-spacing-xxs) 0;
       }
     }
   }
@@ -187,14 +186,14 @@ ion-radio {
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
     ion-radio,
     ion-radio:active {
-      --color: #{utils.get-color('danger')};
+      --color: var(--kirby-danger);
     }
   }
 
   &.radio-checked {
     &:not(:focus, .radio-disabled) {
       &::part(container) {
-        box-shadow: utils.get-elevation(4);
+        box-shadow: var(--kirby-elevation-4);
       }
     }
 
@@ -207,7 +206,7 @@ ion-radio {
 }
 
 :host-context(kirby-item) {
-  z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
+  z-index: var(--kirby-z-index-default); // Makes whole kirby-item clickable above item-inner.
 
   ion-radio {
     margin: 0; // Reset Ionic in-item margins

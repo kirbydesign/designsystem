@@ -1,6 +1,4 @@
-@use '@kirbydesign/core/src/scss/utils';
-
-$divider-color: var(--kirby-list-item-border-color, #{utils.get-color('background-color')});
+$divider-color: var(--kirby-list-item-border-color, var(--kirby-background-color));
 
 :host {
   overflow: hidden;

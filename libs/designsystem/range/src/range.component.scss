@@ -1,5 +1,4 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
-@use '@kirbydesign/core/src/scss/utils';
 
 $tick-height: 6px;
 $tick-width: 6px;
@@ -29,15 +28,15 @@ ion-range {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --knob-background: #{utils.get-color('white')};
+    --knob-background: var(--kirby-white);
     --knob-box-shadow: #{$knob-shadow};
     --knob-size: 24px;
-    --pin-color: #{utils.get-text-color('black')};
-    --pin-background: #{utils.get-color('semi-light')};
-    --bar-background: #{utils.get-color('medium')};
-    --bar-background-active: #{utils.get-color('dark')};
-    --bar-border-radius: #{utils.size('xxxs')};
-    --bar-height: #{utils.size('xxxxs')};
+    --pin-color: var(--kirby-text-color-black);
+    --pin-background: var(--kirby-semi-light);
+    --bar-background: var(--kirby-medium);
+    --bar-background-active: var(--kirby-dark);
+    --bar-border-radius: var(--kirby-spacing-xxxs);
+    --bar-height: var(--kirby-spacing-xxxxs);
 
     flex: 1 1 100%;
     padding: 0;
@@ -45,13 +44,13 @@ ion-range {
   /* stylelint-enable no-duplicate-selectors */
 
   &.range-disabled {
-    --knob-background: #{utils.get-color('medium')};
+    --knob-background: var(--kirby-medium);
     --knob-box-shadow: none;
-    --bar-background: #{utils.get-color('semi-light')};
-    --bar-background-active: #{utils.get-color('medium')};
+    --bar-background: var(--kirby-semi-light);
+    --bar-background-active: var(--kirby-medium);
 
     &::part(tick) {
-      background: utils.get-color('semi-light');
+      background: var(--kirby-semi-light);
     }
   }
 
@@ -65,13 +64,13 @@ ion-range {
   }
 
   &::part(pin) {
-    font-size: utils.font-size('xs');
+    font-size: var(--kirby-font-size-xs);
     color: var(--pin-color);
     background-color: var(--pin-background);
-    padding: utils.size('xxxxs') utils.size('xxs');
-    border-radius: utils.size('xxxs');
-    min-width: utils.size('m');
-    top: -#{utils.size('xs')};
+    padding: var(--kirby-spacing-xxxxs) var(--kirby-spacing-xxs);
+    border-radius: var(--kirby-spacing-xxxs);
+    min-width: var(--kirby-spacing-m);
+    top: calc(-1 * var(--kirby-spacing-xxs));
 
     &::before {
       content: '';
@@ -87,7 +86,7 @@ ion-range {
 
   &::part(tick),
   &::part(tick-active) {
-    border-radius: utils.border-radius('circle');
+    border-radius: var(--kirby-border-radius-circle);
     width: $tick-width;
     height: $tick-height;
     margin-top: 1px; // compensate for different height of ionic tick (8px)
@@ -96,13 +95,13 @@ ion-range {
   }
 
   &::part(tick) {
-    background: utils.get-color('medium');
+    background: var(--kirby-medium);
   }
 }
 
 label {
-  font-size: utils.font-size('xs');
-  line-height: utils.line-height('xs');
-  color: utils.get-text-color('semi-dark');
-  margin-top: -#{utils.size('xxxs')};
+  font-size: var(--kirby-font-size-xs);
+  line-height: var(--kirby-line-height-xs);
+  color: var(--kirby-text-color-semi-dark);
+  margin-top: calc(-1 * var(--kirby-spacing-xxxs));
 }
