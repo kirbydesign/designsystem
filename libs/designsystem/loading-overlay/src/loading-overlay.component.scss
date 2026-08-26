@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-  min-height: utils.size('l');
+  min-height: var(--kirby-spacing-l);
 }
 
 .overlay-wrapper {
@@ -16,13 +16,15 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    z-index: utils.z('loading-overlay');
+    z-index: var(--kirby-z-index-loading-overlay);
     display: flex;
     background: transparent;
     justify-content: center;
     place-items: center;
 
     &.backdrop {
+      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
+      // stylelint-disable-next-line kirby/use-design-tokens
       background-color: rgba(
         utils.get-color('background-color', $getValueOnly: true),
         utils.$loading-overlay-backdrop-opacity
@@ -30,12 +32,14 @@
     }
 
     &.hide-content {
+      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
+      // stylelint-disable-next-line kirby/use-design-tokens
       background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
     }
 
     .spinner {
-      width: utils.size(l);
-      height: utils.size(l);
+      width: var(--kirby-spacing-l);
+      height: var(--kirby-spacing-l);
     }
   }
 }

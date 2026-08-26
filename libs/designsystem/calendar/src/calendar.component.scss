@@ -1,17 +1,14 @@
-@use '@kirbydesign/core/src/scss/interaction-state';
-@use '@kirbydesign/core/src/scss/utils';
-
 $month-navigator-width: 80px;
 
 :host {
-  font-size: utils.font-size('n');
+  font-size: var(--kirby-font-size-n);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   user-select: none;
-  margin-bottom: utils.size('xxs');
+  margin-bottom: var(--kirby-spacing-xxs);
 }
 
 th,
@@ -20,17 +17,17 @@ td {
   padding: 0;
 
   &:first-child {
-    padding-left: utils.size('xxs');
+    padding-left: var(--kirby-spacing-xxs);
   }
 
   &:last-child {
-    padding-right: utils.size('xxs');
+    padding-right: var(--kirby-spacing-xxs);
   }
 }
 
 th {
   height: 50px;
-  border-bottom: 1px solid utils.get-color('background-color');
+  border-bottom: 1px solid var(--kirby-background-color);
 }
 
 .header,
@@ -42,7 +39,7 @@ td {
 .header {
   display: flex;
   justify-content: space-between;
-  margin: utils.size('xxs');
+  margin: var(--kirby-spacing-xxs);
   margin-bottom: 0;
 }
 
@@ -55,10 +52,10 @@ td {
 
 .month-and-year {
   user-select: none;
-  font-weight: utils.font-weight('bold');
+  font-weight: var(--kirby-font-weight-bold);
 
   .month {
-    margin-right: utils.size('xxs');
+    margin-right: var(--kirby-spacing-xxs);
   }
 }
 
@@ -69,7 +66,7 @@ td {
 
   .month-and-year {
     width: $month-navigator-width;
-    margin: 0 utils.size('xxs');
+    margin: 0 var(--kirby-spacing-xxs);
     text-align: center;
   }
 
@@ -79,22 +76,22 @@ td {
 }
 
 .day {
-  $day-width: utils.size('xl');
+  $day-width: var(--kirby-spacing-xl);
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: $day-width * 0.5;
+  border-radius: calc(#{$day-width} * 0.5);
   min-width: $day-width;
   min-height: $day-width;
   width: $day-width;
   height: $day-width;
-  margin: utils.size('xxxs') 0;
-  font-size: utils.font-size('n');
+  margin: var(--kirby-spacing-xxxs) 0;
+  font-size: var(--kirby-font-size-n);
 
   &:focus {
     // In narrow viewports where buttons sit side-by-side, ensure focus ring is on top of adjacent buttons.
-    z-index: utils.z('default');
+    z-index: var(--kirby-z-index-default);
   }
 }
 
@@ -104,14 +101,14 @@ button[aria-disabled='true'] {
 }
 
 .day.selectable:not(.current-month, .selected) {
-  color: #{utils.get-text-color('semi-dark')};
+  color: var(--kirby-text-color-semi-dark);
 }
 
 .day.today {
-  border: 1px solid utils.get-color('semi-dark');
+  border: 1px solid var(--kirby-semi-dark);
 }
 
 .day.selected {
-  color: utils.get-color('black-contrast');
-  background-color: utils.get-color('black');
+  color: var(--kirby-black-contrast);
+  background-color: var(--kirby-black);
 }

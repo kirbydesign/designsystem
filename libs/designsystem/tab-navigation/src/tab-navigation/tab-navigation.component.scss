@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $bottom-border-height: 1px;
-$border-color-standard: utils.get-color('medium');
+$border-color-standard: var(--kirby-medium);
 
 :host {
   display: block;
@@ -20,7 +20,7 @@ $border-color-standard: utils.get-color('medium');
     position: absolute;
     height: $bottom-border-height;
     bottom: 0;
-    z-index: utils.z('default');
+    z-index: var(--kirby-z-index-default);
     left: 0;
     width: 100%;
   }
@@ -34,7 +34,7 @@ div[role='tablist'] {
   justify-content: left;
   flex-wrap: nowrap;
   overflow-x: scroll;
-  column-gap: utils.size('xs');
+  column-gap: var(--kirby-spacing-xs);
 
   // Ensures that the .container divider pseudo-element does not overlap the .selected divider pseudo-element.
   // There seems be a weird bug with the iOS browser where z-index of scrollable elements are not respected with momentum scrolling active - so we disable it for now.

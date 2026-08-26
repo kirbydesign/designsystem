@@ -12,6 +12,7 @@
     "libs/angular",
     "libs/designsystem",
     "libs/extensions/angular",
+    "libs/stylelint-plugin",
     "apps/*",
     "tools/*"
   ],
@@ -20,7 +21,8 @@
     "build": "nx run-many -t build",
     "start": "nx dev designsystem",
     "start:extensions": "nx dev extensions-angular",
-    "test:headless-browser": "nx run-many -t test --output-style=stream -- --browsers=ChromeCustom",
+    "test:node": "nx run-many -t test -p tag:test:node --output-style=stream",
+    "test:headless-browser": "nx run-many -t test -p tag:test:headless-browser --output-style=stream -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "storybook": "nx storybook designsystem",
     "build-storybook": "nx build-storybook designsystem",
@@ -83,7 +85,7 @@
     "is-docker": "1.1.0",
     "lint-staged": "^15.4.3",
     "ng-packagr": "21.2.5",
-    "nx": "22.7.2",
+    "nx": "22.7.7",
     "nx-stylelint": "^17.1.4",
     "post-npm-install": "^2.0.0",
     "prettier": "^3.3.3",
@@ -100,7 +102,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run sync-node-version && lint-staged",
-      "pre-push": "npm run test:headless-browser:single",
+      "pre-push": "npm run test:node && npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
   }

@@ -78,7 +78,7 @@ describe('ButtonComponent in Kirby Page', () => {
   });
 
   describe('inside Toolbar', () => {
-    let ionToolbar: HTMLElement;
+    let ionToolbar: HTMLIonToolbarElement;
     let actionButtonInHeader: HTMLButtonElement;
     let actionButtonInHeaderIconOnly: HTMLButtonElement;
 
@@ -111,9 +111,10 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render with correct size', () => {
+    it('should render with correct size', async () => {
+      await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
-        width: 'auto',
+        width: '>=88px', // A text button is content-sized (min-width 88px)
         height: size('xl'),
       });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
