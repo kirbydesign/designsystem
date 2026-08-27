@@ -17,6 +17,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonRange } from '@ionic/angular/standalone';
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 
+export type RangeValue = number | { lower: number; upper: number };
+
 @Component({
   imports: [IonRange],
   selector: 'kirby-range',
@@ -42,24 +44,25 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor, 
   @Input() ticks: boolean;
   @Input() disabled = false;
   @Input() pinFormatter: (value: number) => string | number = this.defaultPinFormatter;
+  @Input() dualKnobs = false;
   @Input()
-  set value(value: number) {
+  set value(value: RangeValue) {
     if (value !== this.currentValue) {
       this.currentValue = value;
       this.propagateChange(this.currentValue);
     }
   }
 
-  get value(): number {
+  get value(): RangeValue {
     return this.currentValue;
   }
 
-  @Output() change: EventEmitter<number> = new EventEmitter<number>();
-  @Output() move: EventEmitter<number> = new EventEmitter<number>();
+  @Output() change: EventEmitter<RangeValue> = new EventEmitter<RangeValue>();
+  @Output() move: EventEmitter<RangeValue> = new EventEmitter<RangeValue>();
 
   @ViewChild(IonRange, { static: true }) private ionRange: IonRange;
 
-  private currentValue: number;
+  private currentValue: RangeValue;
   private _attributesToForward = ['aria-label', 'aria-labelledby'];
 
   constructor(
@@ -83,12 +86,25 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor, 
       this.step = (this.max - this.min) / 9;
     }
 
+    const ticks = this.getTicks();
+    const snapToNearestTick = (val: number) =>
+      ticks.reduce((a, b) => (Math.abs(b - val) < Math.abs(a - val) ? b : a));
+
     /*
-     * Set value to the nearest tick
+     * Set value to the nearest tick (supports both single and dual knob modes)
      */
-    this.value = this.getTicks().reduce((a, b) => {
-      return Math.abs(b - this.value) < Math.abs(a - this.value) ? b : a;
-    });
+    if (this.dualKnobs) {
+      const current = (this.currentValue as { lower: number; upper: number }) ?? {
+        lower: this.min,
+        upper: this.max,
+      };
+      this.value = {
+        lower: snapToNearestTick(current.lower),
+        upper: snapToNearestTick(current.upper),
+      };
+    } else {
+      this.value = snapToNearestTick(this.currentValue as number);
+    }
   }
 
   ngAfterViewInit(): void {
