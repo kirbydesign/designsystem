@@ -44,4 +44,10 @@ export class ProgressCircleRingComponent implements AfterViewInit {
   get _remainder(): number {
     return 100 - this._progress;
   }
+
+  get _progressStrokeWidth(): string | number {
+    // Do not render stroke if progress is 0, otherwise it will show as a dot
+    if (this._progress === 0) return 0;
+    return 'var(--kirby-progress-circle-stroke-width)';
+  }
 }
