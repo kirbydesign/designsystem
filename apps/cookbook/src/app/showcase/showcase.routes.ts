@@ -2,6 +2,7 @@ import { Route, Routes } from '@angular/router';
 
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
+import { IntroComponent } from '../intro/intro.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -61,6 +62,7 @@ import { SpacingShowcaseComponent } from './spacing-showcase/spacing-showcase.co
 import { BorderRadiusShowcaseComponent } from './border-radius-showcase/border-radius-showcase.component';
 import { BreakpointsShowcaseComponent } from './breakpoints-showcase/breakpoints-showcase.component';
 import { ElevationShowcaseComponent } from './elevation-showcase/elevation-showcase.component';
+import { ThemePlaygroundComponent } from './theme-playground/theme-playground.component';
 
 export const FOUNDATION_ROUTES: Route[] = [
   { path: 'colors', component: ColorsShowcaseComponent },
@@ -69,6 +71,7 @@ export const FOUNDATION_ROUTES: Route[] = [
   { path: 'elevation', component: ElevationShowcaseComponent },
   { path: 'breakpoints', component: BreakpointsShowcaseComponent },
   { path: 'spacing', component: SpacingShowcaseComponent },
+  { path: 'theme-playground', component: ThemePlaygroundComponent },
 ];
 
 export const LAYOUT_ROUTES: Route[] = [

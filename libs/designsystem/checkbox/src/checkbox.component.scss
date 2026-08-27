@@ -11,74 +11,19 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 :host {
   display: flex;
 
-  &.attention-level1 ion-checkbox {
-    --checkmark-color: var(--kirby-black);
-    --checkbox-background-checked: var(--kirby-success);
-    --border-color-checked: var(--kirby-success);
+  &.error ion-checkbox:not(:focus-within) {
+    --border-color: var(--kirby-theme-color-border-raised-danger);
+    --border-color-checked: var(--kirby-theme-color-border-raised-danger);
 
-    @include interaction-state.apply-hover {
-      --checkbox-background-checked: #{interaction-state.get-state-color('success', 's')};
-      --border-color-checked: #{interaction-state.get-state-color('success', 's')};
-    }
-    @include interaction-state.apply-active {
-      --checkbox-background-checked: #{interaction-state.get-state-color('success', 'l')};
-      --border-color-checked: #{interaction-state.get-state-color('success', 'l')};
+    &::part(container) {
+      box-shadow: var(--kirby-theme-error-combined-inset);
     }
   }
 
-  &.attention-level2 ion-checkbox {
-    --checkmark-color: var(--kirby-white);
-    --checkbox-background-checked: var(--kirby-black);
-    --border-color-checked: var(--kirby-black);
-
-    @include interaction-state.apply-hover {
-      --checkbox-background-checked: #{interaction-state.get-state-color(
-          'black',
-          'xl',
-          $make-lighter: true
-        )};
-      --border-color-checked: #{interaction-state.get-state-color(
-          'black',
-          'xl',
-          $make-lighter: true
-        )};
-    }
-    @include interaction-state.apply-active {
-      --checkmark-color: #{interaction-state.get-state-color('white')};
-      --checkbox-background-checked: #{interaction-state.get-state-color(
-          'black',
-          'xxxl',
-          $make-lighter: true
-        )};
-      --border-color-checked: #{interaction-state.get-state-color(
-          'black',
-          'xxxl',
-          $make-lighter: true
-        )};
-    }
-  }
-
-  &.error ion-checkbox {
-    --border-color: var(--kirby-danger);
-  }
-
-  &[disabled] {
-    color: var(--kirby-text-color-semi-dark);
-
-    ion-checkbox {
-      --checkmark-color: var(--kirby-semi-dark);
-      --checkbox-background: var(--kirby-semi-light);
-      --checkbox-background-checked: var(--kirby-semi-light);
-      --border-color: var(--kirby-medium);
-      --border-color-checked: var(--kirby-medium);
-
-      &::part(label-text-wrapper) {
-        opacity: 1; // Reset Ionic disabled style
-      }
-
-      &::part(native-wrapper) {
-        opacity: 1; // Reset Ionic disabled style
-      }
+  &[disabled] ion-checkbox {
+    &::part(label-text-wrapper),
+    &::part(native-wrapper) {
+      opacity: 0.4; // TODO(@design-tokens) needs token
     }
   }
 
@@ -126,98 +71,6 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     }
   }
 
-  ion-checkbox {
-    &:focus-visible {
-      outline: none;
-
-      --border-width: 0;
-      --border-color: transparent;
-      --border-color-checked: transparent;
-    }
-
-    &:focus-visible::part(container) {
-      padding: calc(
-        var(--kirby-checkbox-container-padding) + 1px
-      ); // Compensate for removed 1px border to prevent checkmark from growing in ion-checkbox
-
-      transition: box-shadow #{interaction-state.$default-transition-duration} linear;
-      box-shadow: var(--kirby-focus-ring-sm-inset);
-    }
-
-    @include interaction-state.apply-hover {
-      --checkbox-background: #{interaction-state.get-state-color('white')};
-    }
-    @include interaction-state.apply-active {
-      --checkbox-background: #{interaction-state.get-state-color('white', 'xs')};
-    }
-
-    // Wrap declarations to avoid mixing with nested rules.
-    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-    /* stylelint-disable no-duplicate-selectors */
-    & {
-      --transition:
-        border-color #{interaction-state.$default-transition-duration} linear,
-        background-color #{interaction-state.$default-transition-duration} linear;
-      --size: #{$checkbox-icon-size};
-      --checkmark-width: var(--kirby-spacing-xxxs);
-      --kirby-checkbox-container-padding: var(--kirby-spacing-xxxs);
-      --checkbox-background: var(--kirby-white);
-      --border-width: 1px;
-      --border-color: var(--kirby-semi-dark);
-      --border-radius: #{$border-radius};
-    }
-    /* stylelint-enable no-duplicate-selectors */
-
-    &::part(container) {
-      padding: var(
-        --kirby-checkbox-container-padding
-      ); // Spacing between checkmark and container box
-    }
-
-    &::part(label) {
-      align-items: start;
-      padding-inline: $spacing-to-edge;
-      line-height: var(--kirby-line-height-n);
-    }
-
-    &::part(label-text-wrapper) {
-      margin-inline: $spacing-to-label 0;
-      white-space: pre-line;
-    }
-
-    &::part(native-wrapper) {
-      /**
-       * We style the native wrapper to make sure it has the same height as the container
-       * so the checkbox can be properly start-aligned with multiline labels
-       */
-      height: var(--kirby-relative-size-m);
-    }
-
-    // Overrides for kirby-checkbox inside kirby-item
-    &.in-item {
-      &::part(label) {
-        align-items: center;
-        padding-inline: 0;
-      }
-
-      &::part(label-text-wrapper) {
-        margin-block: 0;
-      }
-
-      &.checkbox-label-placement-start {
-        &::part(label-text-wrapper) {
-          margin-inline: 0 $spacing-to-label;
-        }
-      }
-
-      &.checkbox-label-placement-end {
-        &::part(label-text-wrapper) {
-          margin-inline: $spacing-to-label 0;
-        }
-      }
-    }
-  }
-
   &.has-hidden-label {
     &:has(ion-checkbox.in-item) {
       // reset position when checkbox is in item and has hidden label
@@ -258,6 +111,113 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     &[slot='start'] {
       margin-block: 0; // Reset Ionic Item margin applided to slot=start
       margin-inline-end: $spacing-to-label;
+    }
+  }
+}
+
+ion-checkbox {
+  :host([data-state='focus']) &::part(container),
+  &:focus-visible::part(container) {
+    outline: none;
+    transition: box-shadow #{interaction-state.$default-transition-duration} linear;
+    box-shadow: var(--kirby-focus-ring-sm-combined-inset);
+  }
+
+  &:focus-visible {
+    // Remove default browser focus visible
+    outline: none;
+  }
+
+  :host([data-state='focus']) &,
+  &:focus-within:focus-visible {
+    --border-color: var(--kirby-theme-color-border-focus);
+    --border-color-checked: var(--kirby-theme-color-border-focus);
+  }
+
+  // Wrap declarations to avoid mixing with nested rules.
+  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+  /* stylelint-disable no-duplicate-selectors */
+  & {
+    --kirby-checkbox-container-padding: var(--kirby-spacing-xxxs);
+    --transition:
+      border-color #{interaction-state.$default-transition-duration} linear,
+      background-color #{interaction-state.$default-transition-duration} linear;
+    --size: #{$checkbox-icon-size};
+    --checkmark-width: var(--kirby-spacing-xxxs);
+    --checkbox-background: var(--kirby-theme-color-fill-raised);
+    --checkbox-background-checked: var(--kirby-theme-color-fill-engaged);
+    --checkmark-color: var(--kirby-theme-color-content-engaged);
+    --border-color: var(--kirby-theme-color-border-raised);
+    --border-color-checked: var(--kirby-theme-color-border-engaged);
+    --border-width: 1px;
+    --border-radius: #{$border-radius};
+
+    @media (hover: hover) {
+      :host([data-state='hover']) &,
+      &:hover {
+        --checkbox-background: var(--kirby-theme-color-fill-raised-hover);
+        --checkbox-background-checked: var(--kirby-theme-color-fill-engaged-hover);
+        --checkmark-color: var(--kirby-theme-color-content-engaged-hover);
+        --border-color: var(--kirby-theme-color-border-raised-hover);
+        --border-color-checked: var(--kirby-theme-color-border-engaged-hover);
+      }
+    }
+
+    :host([data-state='active']) &,
+    &:active {
+      --checkbox-background: var(--kirby-theme-color-fill-raised-active);
+      --checkbox-background-checked: var(--kirby-theme-color-fill-engaged-active);
+      --checkmark-color: var(--kirby-theme-color-content-engaged-active);
+      --border-color: var(--kirby-theme-color-border-raised-active);
+      --border-color-checked: var(--kirby-theme-color-border-engaged-active);
+    }
+  }
+  /* stylelint-enable no-duplicate-selectors */
+
+  &::part(container) {
+    padding: var(--kirby-checkbox-container-padding); // Spacing between checkmark and container box
+  }
+
+  &::part(label) {
+    align-items: start;
+    padding-inline: $spacing-to-edge;
+    line-height: var(--kirby-line-height-n);
+  }
+
+  &::part(label-text-wrapper) {
+    margin-inline: $spacing-to-label 0;
+    white-space: pre-line;
+  }
+
+  &::part(native-wrapper) {
+    /**
+     * We style the native wrapper to make sure it has the same height as the container
+     * so the checkbox can be properly start-aligned with multiline labels
+     */
+    height: var(--kirby-relative-spacing-m);
+  }
+
+  // Overrides for kirby-checkbox inside kirby-item
+  &.in-item {
+    &::part(label) {
+      align-items: center;
+      padding-inline: 0;
+    }
+
+    &::part(label-text-wrapper) {
+      margin-block: 0;
+    }
+
+    &.checkbox-label-placement-start {
+      &::part(label-text-wrapper) {
+        margin-inline: 0 $spacing-to-label;
+      }
+    }
+
+    &.checkbox-label-placement-end {
+      &::part(label-text-wrapper) {
+        margin-inline: $spacing-to-label 0;
+      }
     }
   }
 }

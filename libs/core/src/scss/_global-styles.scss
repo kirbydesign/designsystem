@@ -1,6 +1,6 @@
 @use 'utils';
-@use 'base/design-tokens';
 @use 'base/ionic';
+@use 'base/design-tokens';
 @use 'base/typography';
 @use 'base/line-clamp';
 @use 'base/link';
@@ -11,6 +11,11 @@
 @use 'components/grid';
 @use 'components/overlays';
 @use 'themes/component-themes';
+
+@use 'themes/primitives/system-color';
+@use 'themes/primitives/brand-color';
+@use 'themes/semantic/color';
+@use 'themes/semantic/color-chart';
 
 :root,
 :host {
@@ -32,6 +37,15 @@
 
   // Prevent iOS tap highlight:
   -webkit-tap-highlight-color: transparent;
+}
+
+:root,
+.kirby-surface-base,
+.kirby-surface-raised,
+.kirby-surface-brand {
+  --kirby-theme-error-combined-inset:
+    0 0 0 1px var(--kirby-theme-color-border-raised-danger) inset,
+    0 0 0 2px var(--kirby-theme-color-border-offset) inset;
 }
 
 /*

@@ -17,13 +17,16 @@ $badge-offset: 0.8em;
   --kirby-badge-z-index: var(--kirby-z-index-segment-badge);
 
   &.sm {
-    ion-segment-button {
+    ion-segment {
       min-height: var(--kirby-spacing-l);
-      font-size: min(var(--kirby-font-size-xs), $maximum-font-size-sm);
+    }
 
+    ion-segment-button {
       --padding-start: var(--kirby-spacing-s);
       --padding-end: var(--kirby-spacing-s);
       --kirby-badge-right: calc(-1 * var(--kirby-spacing-xxs));
+
+      font-size: min(var(--kirby-font-size-xs), $maximum-font-size-sm);
 
       &:focus-visible {
         transition: interaction-state.transition();
@@ -34,27 +37,22 @@ $badge-offset: 0.8em;
     }
   }
 
-  &.default-mode {
-    ion-segment {
-      --background: var(--kirby-inputs-background-color);
-
-      box-shadow: var(--kirby-inputs-elevation);
-      overflow: visible; // Ensures the badge is not cut off
-      contain: none; // Ensures the badge is not cut off
-      width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
-    }
-
-    ion-segment-button {
-      --color-hover: var(--kirby-inputs-color-hover);
-    }
+  &.default-mode ion-segment {
+    box-shadow: var(--kirby-inputs-elevation);
+    overflow: visible; // Ensures the badge is not cut off
+    contain: none; // Ensures the badge is not cut off
+    width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
+    padding: var(--kirby-spacing-xxxxs);
   }
 
   &.chip-mode {
     ion-segment {
-      --background: none;
-
       border-radius: 0;
       padding: var(--kirby-spacing-xxxs);
+      min-height: calc(
+        var(--kirby-spacing-l) + 2 * var(--kirby-spacing-xxxs)
+      ); // desired chip height plus segment padding
+
       gap: var(--kirby-spacing-xxs);
 
       @include utils.touch {
@@ -66,7 +64,6 @@ $badge-offset: 0.8em;
     }
 
     ion-segment-button {
-      --background: var(--kirby-inputs-background-color);
       --indicator-transition: none;
 
       &::part(indicator) {
@@ -76,44 +73,22 @@ $badge-offset: 0.8em;
     }
   }
 
-  &.compact {
-    ion-segment {
-      --background: transparent;
-    }
-
-    ion-segment-button {
-      --background: transparent;
-      --padding-start: var(--kirby-spacing-xs);
-      --padding-end: var(--kirby-spacing-xs);
-    }
-  }
-
-  &.chip-mode,
-  &.compact {
-    ion-segment-button {
-      // Use same hover state as Button AttentionLevel3 (white):
-      @include interaction-state.apply-hover-ionic('xs');
-
-      // Use same hover state as Button AttentionLevel2 (black):
-      &.segment-button-checked {
-        @include interaction-state.apply-hover-ionic('s', $make-lighter: true);
-      }
-    }
+  &.compact ion-segment-button {
+    --padding-start: var(--kirby-spacing-xs);
+    --padding-end: var(--kirby-spacing-xs);
   }
 }
 
 ion-segment {
+  --background: none;
+
+  min-height: var(--kirby-spacing-xl);
   border-radius: var(--kirby-border-radius-pill);
   grid-auto-columns: max-content;
   box-sizing: border-box;
 }
 
 ion-segment-button {
-  &:focus-within::part(native):focus-visible,
-  &:focus-visible:focus-within::part(native) {
-    transition: interaction-state.transition();
-    box-shadow: var(--kirby-focus-ring-md-inset);
-  }
   @include utils.accessible-target-size;
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -122,10 +97,9 @@ ion-segment-button {
   & {
     --border-radius: var(--kirby-border-radius-pill);
     --border-style: none;
-    --background: none;
-    --color: var(--kirby-inputs-color);
-    --indicator-color: var(--kirby-inputs-indicator-background-color);
-    --color-checked: var(--kirby-inputs-indicator-color);
+    --indicator-color: var(--kirby-theme-color-fill-brand);
+    --color: var(--kirby-theme-color-content-raised);
+    --color-checked: var(--kirby-theme-color-content-brand);
     --indicator-box-shadow: none;
     --indicator-transform: none;
     --padding-start: var(--kirby-spacing-m);
@@ -135,7 +109,6 @@ ion-segment-button {
     --margin-start: 0;
     --margin-top: 0;
 
-    min-height: var(--kirby-spacing-xl);
     min-width: fit-content;
     font-weight: var(--kirby-font-weight-normal);
     font-size: min(var(--kirby-font-size-s), $maximum-font-size-md);
@@ -144,24 +117,124 @@ ion-segment-button {
   }
   /* stylelint-enable no-duplicate-selectors */
 
-  // NOTE: This is a custom implementation of the hover interaction state;
-  // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
-
   &::part(native) {
+    border: 1px solid transparent;
     border-radius: var(--border-radius);
     contain: none; // Ensures the badge is not cut off
     overflow: visible; // Ensures the badge is not cut off
     opacity: 1; // Ensure color, background and badge is not transparent on hover
-
-    &::after {
-      transition: interaction-state.transition();
-      border-radius: var(--border-radius); // Ensure background of ion-button hover state is rounded
-    }
   }
 
   // end NOTE
 
   &::part(indicator) {
     padding-inline: 0;
+    border-color: var(--kirby-theme-color-border-raised-quiet);
+  }
+
+  &:focus-within::part(native):focus-visible,
+  &:focus-visible:focus-within::part(native) {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-inset);
+  }
+}
+
+ion-segment-button.segment-button-checked::part(indicator-background) {
+  border: 1px solid var(--kirby-theme-color-border-raised-quiet);
+  box-sizing: border-box;
+}
+
+@media (hover: hover) {
+  ion-segment-button:hover {
+    --background: var(--kirby-theme-color-fill-raised-hover);
+    --color: var(--kirby-theme-color-content-raised-hover);
+    --indicator-color: var(--kirby-theme-color-fill-brand-hover);
+    --color-checked: var(--kirby-theme-color-content-brand-hover);
+
+    &:not(.segment-button-checked)::part(native) {
+      border-color: var(--kirby-theme-color-border-raised-quiet-hover);
+    }
+
+    &.segment-button-checked::part(indicator-background) {
+      border-color: var(--kirby-theme-color-border-raised-quiet-hover);
+    }
+  }
+}
+
+ion-segment-button:active {
+  --background: var(--kirby-theme-color-fill-raised-active);
+  --color: var(--kirby-theme-color-content-raised-active);
+  --indicator-color: var(--kirby-theme-color-fill-brand-active);
+  --color-checked: var(--kirby-theme-color-content-brand-active);
+
+  &:not(.segment-button-checked)::part(native) {
+    border-color: var(--kirby-theme-color-border-raised-quiet-active);
+  }
+
+  &.segment-button-checked::part(indicator-background) {
+    border-color: var(--kirby-theme-color-border-raised-quiet);
+  }
+}
+
+:host(.default-mode) ion-segment {
+  --background: var(--kirby-theme-color-fill-raised);
+
+  border: 1px solid var(--kirby-theme-color-border-raised-quiet);
+}
+
+:host(.chip-mode) ion-segment-button:not(.segment-button-checked) {
+  --background: var(--kirby-theme-color-fill-raised);
+
+  &::part(native) {
+    border-color: var(--kirby-theme-color-border-raised-quiet);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      --background: var(--kirby-theme-color-fill-raised-hover);
+      --color: var(--kirby-theme-color-content-raised-hover);
+
+      &::part(native) {
+        border-color: var(--kirby-theme-color-border-raised-quiet-hover);
+      }
+    }
+  }
+
+  &:active {
+    --background: var(--kirby-theme-color-fill-raised-active);
+    --color: var(--kirby-theme-color-content-raised-active);
+
+    &::part(native) {
+      border-color: var(--kirby-theme-color-border-raised-quiet-active);
+    }
+  }
+}
+
+:host(.compact) ion-segment-button:not(.segment-button-checked) {
+  --background: var(--kirby-theme-color-fill-base);
+  --color: var(--kirby-theme-color-content-base);
+
+  &::part(native) {
+    border-color: transparent;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      --background: var(--kirby-theme-color-fill-base-hover);
+      --color: var(--kirby-theme-color-content-base-hover);
+
+      &::part(native) {
+        border-color: transparent;
+      }
+    }
+  }
+
+  &:active {
+    --background: var(--kirby-theme-color-fill-base-active);
+    --color: var(--kirby-theme-color-content-base-active);
+
+    &::part(native) {
+      border-color: transparent;
+    }
   }
 }

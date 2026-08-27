@@ -2,13 +2,11 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$default-border-outline: 1px solid var(--kirby-medium);
-
 :host {
-  --kirby-card-main-background-color: var(--kirby-white);
-  --kirby-card-main-color: var(--kirby-white-contrast);
-  --kirby-card-footer-background-color: var(--kirby-white);
-  --kirby-card-footer-color: var(--kirby-white-contrast);
+  --kirby-card-main-background-color: var(--kirby-theme-color-fill-base);
+  --kirby-card-main-color: var(--kirby-theme-color-content-base);
+  --kirby-card-footer-background-color: var(--kirby-theme-color-fill-base);
+  --kirby-card-footer-color: var(--kirby-theme-color-content-base);
 
   @include themes.apply-white-theme;
 
@@ -18,17 +16,6 @@ $default-border-outline: 1px solid var(--kirby-medium);
 
   &.kirby-color-brightness-dark {
     @include themes.apply-dark-theme;
-
-    &[role='button'] {
-      @include interaction-state.apply-hover('xxs', $make-lighter: true);
-      @include interaction-state.apply-active('s', $make-lighter: true);
-    }
-  }
-
-  @include interaction-state.extend-content {
-    display: inherit;
-    flex-direction: inherit;
-    justify-content: inherit;
   }
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -36,14 +23,13 @@ $default-border-outline: 1px solid var(--kirby-medium);
   /* stylelint-disable no-duplicate-selectors */
   & {
     border-radius: var(--kirby-border-radius-n);
-    box-shadow: var(--kirby-elevation-2);
     color: var(--kirby-card-main-color);
     background-color: var(--kirby-card-main-background-color);
     background-image: var(--kirby-card-background-image);
     background-repeat: var(--kirby-card-background-repeat, no-repeat);
     background-position: var(--kirby-card-background-position, center);
     background-size: var(--kirby-card-background-size, cover);
-    border: var(--kirby-card-border, none);
+    border: var(--kirby-card-border, 1px solid var(--kirby-theme-color-border-base-quiet));
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -54,22 +40,16 @@ $default-border-outline: 1px solid var(--kirby-medium);
   }
   /* stylelint-enable no-duplicate-selectors */
 
-  &.flat {
-    box-shadow: none;
-  }
-
   &.outlined {
     background-color: transparent;
-    border: var(--kirby-card-border, $default-border-outline);
-    box-shadow: none;
 
     &:has(kirby-card-header.flagged) {
       border: none;
 
       .content-wrapper {
-        border-block-end: var(--kirby-card-border, $default-border-outline);
-        border-inline-start: var(--kirby-card-border, $default-border-outline);
-        border-inline-end: var(--kirby-card-border, $default-border-outline);
+        border-block-end: var(--kirby-card-border);
+        border-inline-start: var(--kirby-card-border);
+        border-inline-end: var(--kirby-card-border);
         border-bottom-left-radius: var(--kirby-border-radius-n);
         border-bottom-right-radius: var(--kirby-border-radius-n);
       }
@@ -77,13 +57,29 @@ $default-border-outline: 1px solid var(--kirby-medium);
   }
 
   &[role='button'] {
-    @include interaction-state.initialize-layer;
-    @include interaction-state.apply-hover('xxxs');
-    @include interaction-state.apply-active('xxs');
+    cursor: pointer;
 
     &:focus-visible {
       transition: interaction-state.transition();
-      box-shadow: var(--kirby-elevation-2), var(--kirby-focus-ring-md-inset);
+      box-shadow: var(--kirby-focus-ring-md-combined-inset);
+
+      --kirby-card-border: 1px solid var(--kirby-theme-color-border-focus);
+    }
+
+    @media (hover: hover) {
+      &[data-state='hover'],
+      &:hover {
+        --kirby-card-main-background-color: var(--kirby-theme-color-fill-base-hover);
+        --kirby-card-main-color: var(--kirby-theme-color-content-base-hover);
+        --kirby-card-border: 1px solid var(--kirby-theme-color-border-base-quiet-hover);
+      }
+    }
+
+    &[data-state='active'],
+    &:active {
+      --kirby-card-main-background-color: var(--kirby-theme-color-fill-base-active);
+      --kirby-card-main-color: var(--kirby-theme-color-content-base-active);
+      --kirby-card-border: 1px solid var(--kirby-theme-color-border-base-quiet-active);
     }
 
     // Wrap declarations to avoid mixing with nested rules.
@@ -127,19 +123,15 @@ $default-border-outline: 1px solid var(--kirby-medium);
   }
 }
 
-.content-layer {
-  height: 100%;
-}
-
 :host(:not(.outlined)) {
   &.primary {
-    --kirby-card-main-background-color: var(--kirby-primary);
-    --kirby-card-main-color: var(--kirby-primary-contrast);
+    --kirby-card-main-background-color: var(--kirby-theme-color-fill-base);
+    --kirby-card-main-color: var(--kirby-theme-color-content-base);
   }
 
   &.secondary {
-    --kirby-card-main-background-color: var(--kirby-secondary);
-    --kirby-card-main-color: var(--kirby-secondary-contrast);
+    --kirby-card-main-background-color: var(--kirby-theme-color-fill-base);
+    --kirby-card-main-color: var(--kirby-theme-color-content-base);
   }
 
   &.tertiary {
@@ -168,8 +160,8 @@ $default-border-outline: 1px solid var(--kirby-medium);
   }
 
   &.light {
-    --kirby-card-main-background-color: var(--kirby-light);
-    --kirby-card-main-color: var(--kirby-light-contrast);
+    --kirby-card-main-background-color: var(--kirby-theme-color-fill-base);
+    --kirby-card-main-color: var(--kirby-theme-color-content-base);
   }
 
   &.medium {
@@ -178,8 +170,8 @@ $default-border-outline: 1px solid var(--kirby-medium);
   }
 
   &.dark {
-    --kirby-card-main-background-color: var(--kirby-dark);
-    --kirby-card-main-color: var(--kirby-dark-contrast);
+    --kirby-card-main-background-color: var(--kirby-theme-color-fill-base);
+    --kirby-card-main-color: var(--kirby-theme-color-content-base);
   }
 
   &.dark-overlay {

@@ -4,6 +4,7 @@
   display: block;
   position: relative; // Ensures correct position of cloned child input when Ionic scrollAssist is enabled
   margin-bottom: var(--kirby-spacing-s);
+  color: var(--kirby-theme-color-content-base);
 }
 
 :host-context(kirby-item) {
@@ -67,9 +68,10 @@ label {
     right: var(--kirby-spacing-xs);
   }
 
-  .semi-dark-text {
+  .suffix,
+  .prefix {
     @include utils.slotted(span, h1, h2, h3, h4, h5, h6, p, data) {
-      color: var(--kirby-text-color-semi-dark);
+      color: var(--kirby-theme-color-content-raised-quiet);
     }
   }
 }

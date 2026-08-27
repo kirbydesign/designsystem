@@ -110,38 +110,92 @@ $button-margin: var(--kirby-spacing-xxxs);
 
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
-  --kirby-button-color: var(--kirby-black);
+  --kirby-button-color: var(--kirby-theme-color-content-base);
+  --kirby-button-border-color: transparent;
 
-  @include interaction-state.apply-hover;
-  @include interaction-state.apply-active('s');
+  @media (hover: hover) {
+    &[data-state='hover'],
+    &:hover {
+      --kirby-button-background-color: var(--kirby-theme-color-fill-base-hover);
+      --kirby-button-color: var(--kirby-theme-color-content-base-hover);
+      --kirby-button-border-color: var(--kirby-theme-color-border-base-quiet-hover);
+    }
+  }
+
+  &[data-state='active'],
+  &:active {
+    --kirby-button-background-color: var(--kirby-theme-color-fill-base-active);
+    --kirby-button-color: var(--kirby-theme-color-content-base-active);
+    --kirby-button-border-color: var(--kirby-theme-color-border-base-quiet-active);
+  }
 }
 
 @mixin button-attentionlevel1 {
-  --kirby-button-background-color: var(--kirby-primary);
-  --kirby-button-color: var(--kirby-primary-contrast);
+  --kirby-button-background-color: var(--kirby-theme-color-fill-brand-loud);
+  --kirby-button-color: var(--kirby-theme-color-content-brand-loud);
+  --kirby-button-border-color: var(--kirby-theme-color-border-brand-loud);
 
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
   &.destructive {
-    --kirby-button-background-color: var(--kirby-danger);
-    --kirby-button-color: var(--kirby-danger-contrast);
+    --kirby-button-background-color: var(--kirby-theme-color-fill-danger);
+    --kirby-button-color: var(--kirby-theme-color-content-danger);
+    --kirby-button-border-color: var(--kirby-theme-color-border-danger);
+
+    @media (hover: hover) {
+      &[data-state='hover'],
+      &:hover {
+        --kirby-button-background-color: var(--kirby-theme-color-fill-danger-hover);
+        --kirby-button-color: var(--kirby-theme-color-content-danger-hover);
+        --kirby-button-border-color: var(--kirby-theme-color-border-danger-hover);
+      }
+    }
+
+    &[data-state='active'],
+    &:active {
+      --kirby-button-background-color: var(--kirby-theme-color-fill-danger-active);
+      --kirby-button-color: var(--kirby-theme-color-content-danger-active);
+      --kirby-button-border-color: var(--kirby-theme-color-border-danger-active);
+    }
+  }
+
+  @media (hover: hover) {
+    &[data-state='hover'],
+    &:hover {
+      --kirby-button-background-color: var(--kirby-theme-color-fill-brand-loud-hover);
+      --kirby-button-color: var(--kirby-theme-color-content-brand-loud-hover);
+      --kirby-button-border-color: var(--kirby-theme-color-border-brand-loud-hover);
+    }
+  }
+
+  &[data-state='active'],
+  &:active {
+    --kirby-button-background-color: var(--kirby-theme-color-fill-brand-loud-active);
+    --kirby-button-color: var(--kirby-theme-color-content-brand-loud-active);
+    --kirby-button-border-color: var(--kirby-theme-color-border-brand-loud-active);
   }
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: var(--kirby-black);
-  --kirby-button-color: var(--kirby-black-contrast);
+  --kirby-button-background-color: var(--kirby-theme-color-fill-raised);
+  --kirby-button-color: var(--kirby-theme-color-content-raised);
+  --kirby-button-border-color: var(--kirby-theme-color-border-raised-quiet);
 
-  @include interaction-state.apply-hover('s', $make-lighter: true);
-  @include interaction-state.apply-active('m', $make-lighter: true);
-}
+  @media (hover: hover) {
+    &[data-state='hover'],
+    &:hover {
+      --kirby-button-background-color: var(--kirby-theme-color-fill-raised-hover);
+      --kirby-button-color: var(--kirby-theme-color-content-raised-hover);
+      --kirby-button-border-color: var(--kirby-theme-color-border-raised-quiet-hover);
+    }
+  }
 
-@mixin button-attentionlevel3 {
-  --kirby-button-background-color: var(--kirby-inputs-background-color);
-  --kirby-button-color: var(--kirby-inputs-color);
-
-  @include interaction-state.apply-hover('xs');
-  @include interaction-state.apply-active('s');
+  &[data-state='active'],
+  &:active {
+    --kirby-button-background-color: var(--kirby-theme-color-fill-raised-active);
+    --kirby-button-color: var(--kirby-theme-color-content-raised-active);
+    --kirby-button-border-color: var(--kirby-theme-color-border-raised-quiet-active);
+  }
 }
 
 :host {
@@ -152,23 +206,6 @@ $button-margin: var(--kirby-spacing-xxxs);
 
   @include utils.accessible-target-size;
 
-  &:focus-visible {
-    transition: interaction-state.transition();
-    box-shadow: var(--kirby-focus-ring-md-inset);
-  }
-
-  @include interaction-state.initialize-layer;
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active;
-  @include interaction-state.extend-content {
-    display: inherit;
-    width: inherit;
-    flex-direction: inherit;
-    align-items: inherit;
-    justify-content: inherit;
-    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
-  }
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
@@ -176,6 +213,7 @@ $button-margin: var(--kirby-spacing-xxxs);
     font-family: var(--kirby-font-family);
     background-color: var(--kirby-button-background-color, initial);
     color: var(--kirby-button-color, inherit);
+    border: 1px solid var(--kirby-button-border-color, initial);
     border-radius: var(--kirby-border-radius-pill);
     box-sizing: border-box; // Ensure border is not added to button height
     display: inline-flex;
@@ -190,13 +228,11 @@ $button-margin: var(--kirby-spacing-xxxs);
     font-size: var(--kirby-font-size-s);
     height: var(--kirby-spacing-xl);
     min-width: button-width('md');
-    padding: 0;
+    padding-block: 0;
+    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
     margin: $button-margin;
-
-    // Outline is applied on button border instead,
-    // to keep the rounded shape:
+    cursor: pointer;
     outline: none;
-    border: none;
   }
   /* stylelint-enable no-duplicate-selectors */
 
@@ -208,16 +244,12 @@ $button-margin: var(--kirby-spacing-xxxs);
     --kirby-icon-margin-right: var(--kirby-spacing-xxs);
     --kirby-button-padding-left: var(--kirby-spacing-xs);
     --kirby-button-padding-right: var(--kirby-spacing-s);
-
-    padding: 0;
   }
 
   &.icon-right {
     --kirby-icon-margin-left: var(--kirby-spacing-xxs);
     --kirby-button-padding-left: var(--kirby-spacing-s);
     --kirby-button-padding-right: var(--kirby-spacing-xs);
-
-    padding: 0;
   }
 
   &.icon-only {
@@ -228,11 +260,9 @@ $button-margin: var(--kirby-spacing-xxxs);
     padding: 0;
     min-width: unset;
 
-    .content-layer {
-      @include utils.slotted(':not(kirby-icon)') {
-        position: absolute;
-        scale: 0;
-      }
+    @include utils.slotted(':not(kirby-icon)') {
+      position: absolute;
+      scale: 0;
     }
   }
 
@@ -261,11 +291,16 @@ $button-margin: var(--kirby-spacing-xxxs);
   }
 
   &.attention-level3 {
-    @include button-attentionlevel3;
+    @include button-attentionlevel2; // attention level 3 is remapped to attention level 2 styles
+  }
 
-    .state-layer {
-      box-shadow: var(--kirby-inputs-elevation);
-    }
+  &[data-state='focus'],
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-combined-inset);
+    border-color: var(
+      --kirby-theme-color-border-focus
+    ); // set border color instead of --kirby-button-border-color to properly override
   }
 
   &[expand='block'] {
@@ -274,13 +309,8 @@ $button-margin: var(--kirby-spacing-xxxs);
 
   &:disabled,
   &[aria-disabled='true'] {
-    color: var(--kirby-semi-dark-shade);
-    border-color: transparent;
     pointer-events: none;
-
-    &:not(.no-decoration) {
-      background-color: var(--kirby-semi-light);
-    }
+    opacity: 0.4; // TODO(@design-tokens) needs token
   }
 
   &.floating {
@@ -298,28 +328,6 @@ $button-margin: var(--kirby-spacing-xxxs);
 
 :host(a) {
   text-decoration: none;
-}
-
-:host-context(.kirby-color-brightness-dark) {
-  &.no-decoration {
-    --kirby-button-color: var(--kirby-white);
-
-    @include interaction-state.apply-hover('xs', $make-lighter: true);
-    @include interaction-state.apply-active('m', $make-lighter: true);
-  }
-
-  &.attention-level2 {
-    --kirby-button-background-color: var(--kirby-white);
-    --kirby-button-color: var(--kirby-white-contrast);
-
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active('s');
-  }
-
-  &.attention-level3 {
-    @include interaction-state.apply-hover('xxxs', $make-lighter: true);
-    @include interaction-state.apply-active('xxs', $make-lighter: true);
-  }
 }
 
 :host-context(kirby-item)[slot='end'] {
@@ -349,7 +357,7 @@ $button-margin: var(--kirby-spacing-xxxs);
     &.attention-level1,
     &.attention-level2,
     &.attention-level3 {
-      @include button-attentionlevel3;
+      @include button-attentionlevel2;
     }
   }
 }
@@ -364,7 +372,7 @@ $button-margin: var(--kirby-spacing-xxxs);
   &.attention-level1,
   &.attention-level2,
   &.attention-level3 {
-    @include button-attentionlevel3;
+    @include button-attentionlevel2;
   }
 }
 

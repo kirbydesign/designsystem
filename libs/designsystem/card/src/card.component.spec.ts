@@ -79,6 +79,32 @@ describe('CardComponent', () => {
     });
   });
 
+  describe('with no themeColor set', () => {
+    it("should apply 'kirby-surface-raised' for the default (elevated) variant", () => {
+      spectator = createHost('<kirby-card></kirby-card>');
+      expect(spectator.element).toHaveClass('kirby-surface-raised');
+    });
+
+    it("should apply 'kirby-surface-raised' for the flat variant", () => {
+      spectator = createHost('<kirby-card variant="flat"></kirby-card>');
+      expect(spectator.element).toHaveClass('kirby-surface-raised');
+    });
+
+    it("should not apply 'kirby-surface-raised' for the outlined variant", () => {
+      spectator = createHost('<kirby-card variant="outlined"></kirby-card>');
+      expect(spectator.element).not.toHaveClass('kirby-surface-raised');
+    });
+
+    it('should establish its own raised surface when nested inside a themed card', () => {
+      spectator = createHost(
+        '<kirby-card themeColor="light"><kirby-card></kirby-card></kirby-card>'
+      );
+      const nestedCard = spectator.query('kirby-card kirby-card');
+      expect(nestedCard).toHaveClass('kirby-surface-raised');
+      expect(nestedCard).not.toHaveClass('kirby-surface-base');
+    });
+  });
+
   describe('with outlined variant attribute and flagged header', () => {
     beforeEach(() => {
       spectator = createHost(

@@ -18,12 +18,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: var(--kirby-spacing-xxxs) solid var(--kirby-empty-state-color, var(--kirby-medium));
+  border: var(--kirby-spacing-xxxs) solid
+    var(--kirby-empty-state-color, var(--kirby-theme-color-content-base-quiet));
   border-radius: var(--kirby-border-radius-circle);
 }
 
 kirby-icon {
-  color: var(--kirby-empty-state-color, var(--kirby-medium));
+  color: var(--kirby-empty-state-color, var(--kirby-theme-color-content-base-quiet));
 }
 
 .title {
@@ -35,7 +36,26 @@ p.subtitle {
   white-space: pre-wrap;
 }
 
-// Colors
+// Colors - supported
+:host(.success) {
+  --kirby-empty-state-color: var(--kirby-theme-color-fill-success-loud);
+}
+
+:host(.warning) {
+  --kirby-empty-state-color: var(--kirby-theme-color-fill-warning-loud);
+}
+
+:host(.danger) {
+  --kirby-empty-state-color: var(--kirby-theme-color-fill-danger-loud);
+}
+
+:host(.medium) {
+  --kirby-empty-state-color: var(
+    --kirby-theme-color-content-base-quiet
+  ); // TODO(@design-tokens) add neutral theme color variant and deprecate unsupported colors
+}
+
+// Colors - deprecated
 :host(.primary) {
   --kirby-empty-state-color: var(--kirby-primary);
 }
@@ -48,28 +68,12 @@ p.subtitle {
   --kirby-empty-state-color: var(--kirby-tertiary);
 }
 
-:host(.success) {
-  --kirby-empty-state-color: var(--kirby-success);
-}
-
-:host(.warning) {
-  --kirby-empty-state-color: var(--kirby-warning);
-}
-
-:host(.danger) {
-  --kirby-empty-state-color: var(--kirby-danger);
-}
-
 :host(.white-overlay) {
   --kirby-empty-state-color: var(--kirby-white-overlay);
 }
 
 :host(.light) {
   --kirby-empty-state-color: var(--kirby-light);
-}
-
-:host(.medium) {
-  --kirby-empty-state-color: var(--kirby-medium);
 }
 
 :host(.dark) {

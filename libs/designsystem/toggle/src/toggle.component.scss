@@ -62,11 +62,12 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 ion-toggle {
+  :host([data-state='focus']) &::part(track),
   &:focus-visible::part(track) {
     transition:
       box-shadow #{interaction-state.$default-transition-duration} linear,
       background-color #{interaction-state.$default-transition-duration} linear;
-    box-shadow: var(--kirby-focus-ring-sm-inset);
+    box-shadow: var(--kirby-focus-ring-md-inset);
   }
 
   // Overflow and contain style needed to make focus ring visible as per ionic docs
@@ -83,49 +84,47 @@ ion-toggle {
   $background-checked: 'success';
   $handle-background: 'white';
 
-  @include interaction-state.apply-hover {
-    // Not checked
-    --track-background: #{interaction-state.get-state-color($background, 's')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxxs')};
-
-    // Checked
-    --track-background-checked: #{interaction-state.get-state-color($background-checked, 's')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxxs')};
-  }
-
-  @include interaction-state.apply-active {
-    // Not checked
-    --track-background: #{interaction-state.get-state-color($background, 'l')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxs')};
-
-    // Checked
-    --track-background-checked: #{interaction-state.get-state-color($background-checked, 'l')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxs')};
-  }
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    // Not checked
-    --track-background: var(--kirby-semi-dark);
-    --handle-background: var(--kirby-white);
-
-    // Checked
-    --track-background-checked: var(--kirby-success);
-    --handle-background-checked: var(--kirby-white);
-    --handle-transition: var(--kirby-transition-duration-quick);
-    --handle-box-shadow: var(--kirby-elevation-2);
-
     // Ion v8 changed height on toggles to 31px. To make toggles still follow our 8,16,24,32 pixel-size pattern, we force the toggle back to 32px
 
     $toggle-size: var(--kirby-spacing-l);
     $toggle-border-size: var(--kirby-spacing-xxxxs);
     $toggle-handle-size: calc(#{$toggle-size} - (#{$toggle-border-size} * 2));
 
+    --handle-transition: var(--kirby-transition-duration-quick);
+    --handle-box-shadow: var(--kirby-elevation-2);
     --handle-height: #{$toggle-handle-size};
     --handle-width: #{$toggle-handle-size};
     --border-radius: calc(#{$toggle-size} / 2);
+    --track-background: var(--kirby-theme-color-fill-brand-quiet);
+    --handle-background: var(--kirby-theme-color-content-brand-quiet);
+    --track-background-checked: var(--kirby-theme-color-fill-engaged);
+    --handle-background-checked: var(--kirby-theme-color-content-engaged);
+
+    @media (hover: hover) {
+      :host([data-state='hover']) &,
+      &:hover {
+        --track-background: var(--kirby-theme-color-fill-brand-quiet-hover);
+        --handle-background: var(--kirby-theme-color-content-brand-quiet-hover);
+        --track-background-checked: var(--kirby-theme-color-fill-engaged-hover);
+        --handle-background-checked: var(--kirby-theme-color-content-engaged-hover);
+      }
+    }
+
+    // Temporary testing hook: force hover styles regardless of pointer.
+    // Add the `_force-hover` attribute to `<kirby-toggle>` to activate
+    // (e.g. for Storybook/Chromatic visual regression). Not part of the public API.
+
+    :host([data-state='active']) &,
+    &:active {
+      --track-background: var(--kirby-theme-color-fill-brand-quiet-active);
+      --handle-background: var(--kirby-theme-color-content-brand-quiet-active);
+      --track-background-checked: var(--kirby-theme-color-fill-engaged-active);
+      --handle-background-checked: var(--kirby-theme-color-content-engaged-active);
+    }
 
     &::part(track) {
       transition: interaction-state.transition();

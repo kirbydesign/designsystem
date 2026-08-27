@@ -1,18 +1,15 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 
-$divider-color: var(--kirby-medium);
 $padding: var(--kirby-spacing-s);
 
 :host {
-  @include interaction-state.initialize-layer;
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
     display: block;
-    border-top: 1px solid $divider-color;
-    border-bottom: 1px solid $divider-color;
+    border-top: 1px solid var(--kirby-theme-color-border-base-quiet);
+    border-bottom: 1px solid var(--kirby-theme-color-border-base-quiet);
     box-sizing: border-box;
   }
 }
@@ -37,6 +34,21 @@ $padding: var(--kirby-spacing-s);
   --kirby-accordion-border-bottom-radius: 0;
 }
 
+@media (hover: hover) {
+  :host([data-state='hover']) &,
+  :host:has(.header:hover) {
+    background-color: var(--kirby-theme-color-fill-base-hover);
+    color: var(--kirby-theme-color-content-base-hover);
+    border-color: var(--kirby-theme-color-border-base-quiet-hover);
+  }
+}
+
+:host:has(.header:active) {
+  background-color: var(--kirby-theme-color-fill-base-active);
+  color: var(--kirby-theme-color-content-base-active);
+  border-color: var(--kirby-theme-color-border-base-quiet-active);
+}
+
 .header {
   border-radius: var(--kirby-accordion-border-top-radius, 0)
     var(--kirby-accordion-border-top-radius, 0) var(--kirby-accordion-border-bottom-radius, 0)
@@ -47,8 +59,6 @@ $padding: var(--kirby-spacing-s);
     box-shadow: var(--kirby-focus-ring-md-inset);
     outline: 0;
   }
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
 
   & {
     display: flex;
@@ -63,6 +73,7 @@ $padding: var(--kirby-spacing-s);
     box-shadow: none;
     font-family: var(--kirby-font-family);
     text-align: start;
+    cursor: pointer;
   }
 }
 
@@ -87,19 +98,12 @@ $padding: var(--kirby-spacing-s);
 
 button[disabled] {
   pointer-events: none;
-
-  .kirby-icon {
-    color: var(--kirby-semi-dark);
-  }
-
-  .title {
-    color: var(--kirby-text-color-semi-dark);
-  }
+  opacity: 0.4; // TODO(@design-tokens) needs token
 }
 
 button {
   // Enforce button text color to avoid inheriting native button color from browser
-  color: var(--kirby-text-color-black);
+  color: var(--kirby-theme-color-content-base);
 }
 
 button[aria-expanded='true'] {
@@ -119,8 +123,6 @@ button[aria-expanded='true'] {
 }
 
 :host-context(kirby-card) {
-  border-color: var(--kirby-background-color);
-
   &:first-child {
     border-top: none;
   }

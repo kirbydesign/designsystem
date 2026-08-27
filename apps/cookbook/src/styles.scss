@@ -8,10 +8,10 @@ body,
 html {
   margin: 0;
   padding: 0;
-  background-color: var(--kirby-white);
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  color: var(--kirby-black);
+  background-color: var(--kirby-white);
+  color: var(--kirby-theme-color-content-base);
   height: 100vh;
 }
 

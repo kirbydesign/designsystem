@@ -9,6 +9,7 @@ $column-gap: calc(var(--kirby-spacing-xxl) - #{$margin-inline} - #{$actions-marg
   flex-direction: column;
   margin-top: var(--kirby-spacing-s);
   margin-bottom: var(--kirby-spacing-l);
+  color: var(--kirby-theme-color-content-base);
 
   @include utils.media('<medium') {
     /*
