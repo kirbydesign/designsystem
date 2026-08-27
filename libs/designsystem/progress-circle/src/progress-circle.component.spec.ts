@@ -42,6 +42,12 @@ describe('ProgressCircleComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
+    describe('default inputs', () => {
+      it('should default to size md', () => {
+        expect(spectator.component.size).toBe('md');
+      });
+    });
+
     describe('shownValue', () => {
       it('should return 0 until element has been visible', () => {
         spectator.setInput({ value: 50 });

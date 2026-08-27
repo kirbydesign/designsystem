@@ -14,7 +14,7 @@ describe('ProgressCircleRingComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost({ props: { upperBound: 96 } });
+    spectator = createHost();
   });
 
   it('should create', () => {
@@ -24,31 +24,31 @@ describe('ProgressCircleRingComponent', () => {
 
   describe('progress within upperBound', () => {
     it('should return the value as progress percentage', () => {
-      spectator.setInput({ value: 33, upperBound: 96 });
+      spectator.setInput({ value: 33 });
       expect(spectator.component._progress).toBe(33);
     });
 
     it('should return the remaining percentage (100 - progress) as remainder', () => {
-      spectator.setInput({ value: 33, upperBound: 96 });
+      spectator.setInput({ value: 33 });
       expect(spectator.component._remainder).toBe(67);
     });
   });
 
   describe('progress larger than upperBound', () => {
     it('should clamp progress to leave a gap from 100', () => {
-      spectator.setInput({ value: 99, upperBound: 97.5 });
+      spectator.setInput({ value: 99 });
       expect(spectator.component._progress).toBe(97.5);
     });
 
     it('should return the remaining percentage as the gap', () => {
-      spectator.setInput({ value: 99, upperBound: 97.5 });
+      spectator.setInput({ value: 99 });
       expect(spectator.component._remainder).toBe(2.5);
     });
   });
 
   describe('rendering', () => {
     beforeEach(() => {
-      spectator.setInput({ value: 50, upperBound: 97.5 });
+      spectator.setInput({ value: 50 });
     });
 
     it('should normalize the progress path length to 100', () => {
@@ -56,7 +56,7 @@ describe('ProgressCircleRingComponent', () => {
     });
 
     it('should render the progress stroke-dasharray as [progress, remainder] percentages', () => {
-      spectator.setInput({ value: 33, upperBound: 96 });
+      spectator.setInput({ value: 33 });
       spectator.detectChanges();
       expect(spectator.query('circle.progress')).toHaveAttribute('stroke-dasharray', '33 67');
     });
