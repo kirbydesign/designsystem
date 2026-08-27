@@ -49,9 +49,6 @@ ion-item {
     }
   }
 
-  @include interaction-state.apply-hover-ionic('xxxs');
-  @include interaction-state.apply-active-ionic('xxs');
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
@@ -63,16 +60,23 @@ ion-item {
     --inner-padding-top: var(--kirby-spacing-xxs);
     --inner-padding-bottom: var(--kirby-spacing-xxs);
     --inner-padding-end: var(--kirby-spacing-s);
-    --background: var(--kirby-item-background, var(--kirby-white));
-
-    // WORKAROUND: Needed to fix ignored click on scrollend
-    // https://github.com/ionic-team/ionic-framework/issues/21871
-    --background-activated-opacity: 0.99;
-    --background-focused: var(--kirby-item-background-focused, var(--kirby-background-color));
+    --color: var(--kirby-theme-color-content-base);
+    --color-hover: var(--kirby-theme-color-content-base-hover);
+    --background: var(--kirby-item-background, var(--kirby-theme-color-fill-base));
+    --background-hover: var(--kirby-theme-color-fill-base-hover);
+    --background-hover-opacity: 1;
+    --background-focused: var(--kirby-item-background-focused, var(--kirby-theme-color-fill-base));
     --background-focused-opacity: 1;
 
     font-size: var(--kirby-font-size-n);
+
+    &.ion-activated {
+      // workaround for active state, as ion-items own is only present on devices without hover support
+      --background-hover: var(--kirby-theme-color-fill-base-active);
+      --color-hover: var(--kirby-theme-color-content-base-active);
+    }
   }
+
   /* stylelint-enable no-duplicate-selectors */
 
   // Prevent additional padding in iOS Safari on devices with "screen notch"
@@ -140,7 +144,7 @@ ion-item {
   --kirby-icon-font-size: var(--kirby-spacing-m); // do not scale disclosure with font-size
 
   padding-left: var(--kirby-spacing-xxxs);
-  color: var(--kirby-semi-dark);
+  color: var(--kirby-theme-color-content-base-quiet);
 
   /*
     display: inline-flex; is used to make sure the span.disclosure element

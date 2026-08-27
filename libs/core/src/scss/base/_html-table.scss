@@ -6,10 +6,6 @@ $header-padding: 14px;
 // Height variables
 $row-height: 44px;
 
-// Color variables
-$default-divider-color: var(--kirby-medium);
-$border-bottom: 1px solid var(--kirby-divider-color, #{$default-divider-color});
-
 table.kirby-table {
   width: 100%;
   border-collapse: collapse;
@@ -20,12 +16,12 @@ table.kirby-table {
 
   tr {
     &:not(:last-child) {
-      border-bottom: $border-bottom;
+      border-bottom: 1px solid var(--kirby-theme-color-border-base-quiet);
     }
   }
 
   thead tr {
-    border-bottom: $border-bottom;
+    border-bottom: 1px solid var(--kirby-theme-color-border-base-quiet);
   }
 
   th {
@@ -34,7 +30,7 @@ table.kirby-table {
     }
 
     &.active {
-      color: var(--kirby-text-color-black);
+      color: var(--kirby-theme-color-content-base);
       font-weight: var(--kirby-font-weight-bold);
 
       & kirby-icon.sortable-icon {
@@ -45,7 +41,7 @@ table.kirby-table {
     text-align: left;
     font-weight: var(--kirby-font-weight-normal);
     font-size: var(--kirby-font-size-xs);
-    color: var(--kirby-text-color-semi-dark);
+    color: var(--kirby-theme-color-content-base-quiet);
     line-height: var(--kirby-line-height-xs);
     padding: $header-padding var(--kirby-spacing-s);
 
@@ -107,12 +103,18 @@ table.kirby-table {
 
   th.sortable,
   tr.kirby-selectable-row {
-    @include interaction-state.apply-hover {
-      background-color: interaction-state.get-state-color('white', 'xxxs');
+    @media (hover: hover) {
+      &[data-state='hover'],
+      &:hover {
+        background-color: var(--kirby-theme-color-fill-base-hover);
+        color: var(--kirby-theme-color-content-base-hover);
+      }
     }
 
-    @include interaction-state.apply-active {
-      background-color: interaction-state.get-state-color('white', 'xxs');
+    &[data-state='active'],
+    &:active {
+      background-color: var(--kirby-theme-color-fill-base-active);
+      color: var(--kirby-theme-color-content-base-active);
     }
   }
 
@@ -121,7 +123,7 @@ table.kirby-table {
     padding: var(--kirby-spacing-xxxs) var(--kirby-spacing-s);
     font-weight: var(--kirby-font-weight-normal);
     font-size: var(--kirby-font-size-s);
-    color: var(--kirby-text-color-black);
+    color: var(--kirby-theme-color-content-base);
     vertical-align: middle;
 
     &.text-align-left {

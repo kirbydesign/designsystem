@@ -1,36 +1,21 @@
-@use 'sass:map';
-@use 'sass:math';
-@use '@kirbydesign/core/src/scss/utils';
-
-$diameter-xsmall: map.get(utils.$avatar-sizes, 'xs');
-$diameter-small: map.get(utils.$avatar-sizes, 's');
-$diameter-medium: map.get(utils.$avatar-sizes, 'm');
-$diameter-large: map.get(utils.$avatar-sizes, 'l');
-$badge-diameter: utils.$avatar-badge-size;
-
-@function get-badge-position($avatar-diameter) {
-  $cos-to-45-degrees: 0.7071;
-  $avatar-radius: $avatar-diameter * 0.5;
-  $position-from-center: math.round($cos-to-45-degrees * $avatar-radius);
-  $position-from-edge: $avatar-radius - $position-from-center;
-  $badge-radius: $badge-diameter * 0.5;
-  $badge-position: calc($position-from-edge - $badge-radius);
-  @return $badge-position;
-}
-
 :host {
+  --kirby-avatar-badge-size: var(--kirby-avatar-size-s);
   --kirby-badge-position: absolute;
-  --kirby-badge-right: #{get-badge-position($diameter-small)};
-  --kirby-badge-top: #{get-badge-position($diameter-small)};
   --kirby-badge-z-index: var(--kirby-z-index-avatar-badge);
+  --kirby-badge-right: calc(
+    var(--kirby-avatar-badge-size) /
+      2 - round(var(--kirby-avatar-badge-size) * 0.7071 / 2, 1px) - var(--kirby-avatar-badge-size) /
+      2
+  );
+  --kirby-badge-top: var(--kirby-badge-right);
 
   position: relative;
 }
 
 .avatar {
   // default to size 'sm'
-  width: $diameter-small;
-  height: $diameter-small;
+  width: var(--kirby-avatar-size-s);
+  height: var(--kirby-avatar-size-s);
   border-radius: var(--kirby-border-radius-circle);
   overflow: hidden;
   position: relative;
@@ -38,12 +23,9 @@ $badge-diameter: utils.$avatar-badge-size;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--kirby-avatar-background-color, var(--kirby-white));
-  color: var(--kirby-avatar-color, var(--kirby-light-contrast));
-
-  &.stroke {
-    border: 1px solid var(--kirby-semi-light);
-  }
+  background-color: var(--kirby-avatar-background-color, var(--kirby-theme-color-fill-raised));
+  color: var(--kirby-avatar-color, var(--kirby-theme-color-content-raised));
+  border: 1px solid var(--kirby-theme-color-border-raised-quiet);
 
   &.overlay::before {
     content: '';
@@ -66,10 +48,10 @@ $badge-diameter: utils.$avatar-badge-size;
 
 :host(.xs) {
   .avatar {
-    --kirby-icon-font-size: #{map.get(utils.$avatar-icon-font-sizes, 'xs')};
+    --kirby-icon-font-size: var(--kirby-avatar-icon-font-size-xs);
 
-    width: $diameter-xsmall;
-    height: $diameter-xsmall;
+    width: var(--kirby-avatar-size-xs);
+    height: var(--kirby-avatar-size-xs);
     border-radius: 8px;
 
     .avatar-text {
@@ -81,10 +63,10 @@ $badge-diameter: utils.$avatar-badge-size;
 :host-context(kirby-progress-circle.sm),
 :host(.sm) {
   .avatar {
-    --kirby-icon-font-size: #{map.get(utils.$avatar-icon-font-sizes, 'sm')};
+    --kirby-icon-font-size: var(--kirby-avatar-icon-font-size-sm);
 
-    width: $diameter-small;
-    height: $diameter-small;
+    width: var(--kirby-avatar-size-s);
+    height: var(--kirby-avatar-size-s);
 
     .avatar-text {
       font-size: var(--kirby-font-size-s);
@@ -94,14 +76,13 @@ $badge-diameter: utils.$avatar-badge-size;
 
 :host-context(kirby-progress-circle.md),
 :host(.md) {
-  --kirby-badge-right: #{get-badge-position($diameter-medium)};
-  --kirby-badge-top: #{get-badge-position($diameter-medium)};
+  --kirby-avatar-badge-diameter: var(--kirby-avatar-size-m);
 
   .avatar {
-    --kirby-icon-font-size: #{map.get(utils.$avatar-icon-font-sizes, 'md')};
+    --kirby-icon-font-size: var(--kirby-avatar-icon-font-size-md);
 
-    width: $diameter-medium;
-    height: $diameter-medium;
+    width: var(--kirby-avatar-size-m);
+    height: var(--kirby-avatar-size-m);
 
     .avatar-text {
       font-size: var(--kirby-font-size-m);
@@ -111,14 +92,13 @@ $badge-diameter: utils.$avatar-badge-size;
 
 :host-context(kirby-progress-circle.lg),
 :host(.lg) {
-  --kirby-badge-right: #{get-badge-position($diameter-large)};
-  --kirby-badge-top: #{get-badge-position($diameter-large)};
+  --kirby-avatar-badge-diameter: var(--kirby-avatar-size-l);
 
   .avatar {
-    --kirby-icon-font-size: #{map.get(utils.$avatar-icon-font-sizes, 'lg')};
+    --kirby-icon-font-size: var(--kirby-avatar-icon-font-size-lg);
 
-    width: $diameter-large;
-    height: $diameter-large;
+    width: var(--kirby-avatar-size-l);
+    height: var(--kirby-avatar-size-l);
 
     .avatar-text {
       font-size: var(--kirby-font-size-xl);
@@ -134,7 +114,18 @@ $badge-diameter: utils.$avatar-badge-size;
   }
 }
 
-// Colors
+// Colors - supported
+:host(.light),
+:host(.white) {
+  --kirby-avatar-background-color: var(--kirby-theme-color-fill-raised);
+  --kirby-avatar-color: var(--kirby-theme-color-content-raised);
+
+  .avatar {
+    border: 1px solid var(--kirby-theme-color-border-raised-quiet);
+  }
+}
+
+// Colors - deprecated
 :host(.primary) {
   --kirby-avatar-background-color: var(--kirby-primary);
   --kirby-avatar-color: var(--kirby-primary-contrast);
@@ -170,11 +161,6 @@ $badge-diameter: utils.$avatar-badge-size;
   --kirby-avatar-color: var(--kirby-white-overlay-contrast);
 }
 
-:host(.light) {
-  --kirby-avatar-background-color: var(--kirby-light);
-  --kirby-avatar-color: var(--kirby-light-contrast);
-}
-
 :host(.medium) {
   --kirby-avatar-background-color: var(--kirby-medium);
   --kirby-avatar-color: var(--kirby-medium-contrast);
@@ -188,11 +174,6 @@ $badge-diameter: utils.$avatar-badge-size;
 :host(.dark-overlay) {
   --kirby-avatar-background-color: var(--kirby-dark-overlay);
   --kirby-avatar-color: var(--kirby-dark-overlay-contrast);
-}
-
-:host(.white) {
-  --kirby-avatar-background-color: var(--kirby-white);
-  --kirby-avatar-color: var(--kirby-white-contrast);
 }
 
 :host(.semi-light) {

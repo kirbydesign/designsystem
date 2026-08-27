@@ -2,7 +2,7 @@ hr {
   margin-top: var(--kirby-spacing-xxs);
   margin-bottom: var(--kirby-spacing-xxs);
   border: 0;
-  border-top: 1px solid var(--kirby-divider-color, var(--kirby-medium));
+  border-top: 1px solid var(--kirby-theme-color-border-base-silent);
 
   &.no-margin {
     margin-top: 0;

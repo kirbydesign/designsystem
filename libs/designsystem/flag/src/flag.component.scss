@@ -3,10 +3,12 @@ $padding-block-sm: var(--kirby-spacing-xxxs);
 $padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
 
 :host {
+  --kirby-flag-border-color: var(--kirby-flag-background-color);
+
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
-  color: var(--kirby-flag-color, var(--kirby-white-contrast));
-  border: 1px solid var(--kirby-flag-border-color, var(--kirby-medium));
+  color: var(--kirby-theme-color-content-neutral);
+  border: 1px solid var(--kirby-flag-border-color, var(--kirby-theme-color-border-neutral));
   border-radius: var(--kirby-border-radius-xs);
   font-size: var(--kirby-font-size-n);
   padding: $padding-block-md var(--kirby-spacing-xxs);
@@ -25,21 +27,28 @@ $padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
 
   // Colors
   &.success {
-    --kirby-flag-background-color: var(--kirby-success-tint);
+    --kirby-flag-background-color: var(--kirby-theme-color-fill-success-quiet);
+
+    color: var(--kirby-theme-color-content-success-quiet);
   }
 
   &.warning {
-    --kirby-flag-background-color: var(--kirby-warning-tint);
+    --kirby-flag-background-color: var(--kirby-theme-color-fill-warning-quiet);
+
+    color: var(--kirby-theme-color-content-warning-quiet);
   }
 
   &.danger {
-    --kirby-flag-background-color: var(--kirby-danger-tint);
+    --kirby-flag-background-color: var(--kirby-theme-color-fill-danger-quiet);
+
+    color: var(--kirby-theme-color-content-danger-quiet);
   }
 
   &.semi-light {
-    --kirby-flag-background-color: var(--kirby-semi-light);
-  }
+    --kirby-flag-background-color: var(
+      --kirby-theme-color-fill-neutral
+    ); // TODO(@design-tokens) add neutral theme color variant and deprecate unsupported colors
 
-  --kirby-flag-border-color: var(--kirby-flag-background-color);
-  --kirby-flag-color: var(--kirby-black);
+    color: var(--kirby-theme-color-content-neutral);
+  }
 }
