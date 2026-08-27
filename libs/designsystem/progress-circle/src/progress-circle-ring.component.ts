@@ -13,9 +13,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleRingComponent implements AfterViewInit {
+  private readonly UPPER_AND_LOWER_BOUND_GAP = 2.5;
+
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
-  @Input() upperBound: number;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
 
   @HostBinding('class')
@@ -29,7 +30,6 @@ export class ProgressCircleRingComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.viewInitialized = true;
   }
-  private readonly UPPER_AND_LOWER_BOUND_GAP = 2.5;
 
   get _progress(): number {
     if (this.value <= 0) return 0;
