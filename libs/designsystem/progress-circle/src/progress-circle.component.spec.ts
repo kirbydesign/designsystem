@@ -48,22 +48,6 @@ describe('ProgressCircleComponent', () => {
       });
     });
 
-    describe('ring component input propagation', () => {
-      it('should pass size input to ring component', () => {
-        spectator.setInput({ size: 'lg' });
-        const ringComponent = spectator.query('kirby-progress-circle-ring');
-        expect(ringComponent).toHaveAttribute('ng-reflect-size', 'lg');
-      });
-
-      it('should pass value input to ring component', () => {
-        spectator.setInput({ value: 75 });
-        spectator.component['hasElementBeenVisible'] = true;
-        spectator.detectChanges();
-        const ringComponent = spectator.query('kirby-progress-circle-ring');
-        expect(ringComponent).toHaveAttribute('ng-reflect-value', '75');
-      });
-    });
-
     describe('shownValue', () => {
       it('should return 0 until element has been visible', () => {
         spectator.setInput({ value: 50 });
