@@ -3,7 +3,6 @@ import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleto
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 /**
  * A skeleton loader is a visual indicator that is used to render placeholder content and mimic the full content shown when loaded.
@@ -18,7 +17,7 @@ const meta: Meta<SkeletonLoaderComponent> = {
   title: 'Components/Loaders/Skeleton Loader',
   decorators: [
     moduleMetadata({
-      imports: [ButtonComponent, CardComponent, ItemComponent, ThemeColorDirective],
+      imports: [ButtonComponent, CardComponent, ItemComponent],
     }),
   ],
   args: {

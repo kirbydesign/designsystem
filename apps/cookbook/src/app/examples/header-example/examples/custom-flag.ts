@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HeaderComponent, HeaderCustomFlagDirective } from '@kirbydesign/designsystem/header';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 const config = {
@@ -23,7 +22,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  imports: [HeaderComponent, ThemeColorDirective, BadgeComponent, HeaderCustomFlagDirective],
+  imports: [HeaderComponent, BadgeComponent, HeaderCustomFlagDirective],
 })
 export class HeaderExampleCustomFlagComponent {
   template: string = config.template;

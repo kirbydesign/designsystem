@@ -1,52 +1,56 @@
-import { CardComponent } from '@kirbydesign/designsystem/card';
-import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
-import { ThemeColorDirective } from './theme-color.directive';
+import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
+/*
+ * `ThemeColorDirective` has no selector and is only applied to components through
+ * `hostDirectives`. It is therefore verified through a host component (here `kirby-empty-state`)
+ * that composes it.
+ */
 describe('ThemeColorDirective', () => {
-  let spectator: SpectatorDirective<ThemeColorDirective>;
+  let spectator: Spectator<EmptyStateComponent>;
 
-  const createDirective = createDirectiveFactory({
-    directive: ThemeColorDirective,
-    imports: [CardComponent],
+  const createComponent = createComponentFactory({
+    component: EmptyStateComponent,
   });
 
-  describe('when initialized', () => {
-    beforeEach(() => {
-      spectator = createDirective('<kirby-card themeColor="primary"></kirby-card>');
-    });
+  function setup(themeColor: string): HTMLElement {
+    spectator = createComponent();
+    spectator.setInput('themeColor' as keyof EmptyStateComponent, themeColor);
+    spectator.detectChanges();
+    return spectator.element;
+  }
 
-    it('should define the directive instance when applied to a valid component', () => {
-      expect(spectator.directive).toBeDefined();
-    });
-
+  describe('when applied to a component via hostDirectives', () => {
     it('should add CSS Custom Property for theming background-color', () => {
+      const element = setup('primary');
+
       expect(
-        getComputedStyle(spectator.element).getPropertyValue('--kirby-inputs-background-color')
+        getComputedStyle(element).getPropertyValue('--kirby-inputs-background-color')
       ).not.toBe('');
     });
 
     it('should add CSS Custom Property for theming color', () => {
-      expect(getComputedStyle(spectator.element).getPropertyValue('--kirby-inputs-color')).not.toBe(
-        ''
-      );
+      const element = setup('primary');
+
+      expect(getComputedStyle(element).getPropertyValue('--kirby-inputs-color')).not.toBe('');
     });
   });
 
   it('should add color brightness class for white', () => {
-    spectator = createDirective('<kirby-card themeColor="white"></kirby-card>');
+    const element = setup('white');
 
-    expect(spectator.element).toHaveClass('kirby-color-brightness-white');
+    expect(element).toHaveClass('kirby-color-brightness-white');
   });
 
   it('should add color brightness class for light', () => {
-    spectator = createDirective('<kirby-card themeColor="light"></kirby-card>');
+    const element = setup('light');
 
-    expect(spectator.element).toHaveClass('kirby-color-brightness-light');
+    expect(element).toHaveClass('kirby-color-brightness-light');
   });
 
   it('should add color brightness class for dark', () => {
-    spectator = createDirective('<kirby-card themeColor="dark"></kirby-card>');
+    const element = setup('dark');
 
-    expect(spectator.element).toHaveClass('kirby-color-brightness-dark');
+    expect(element).toHaveClass('kirby-color-brightness-dark');
   });
 });

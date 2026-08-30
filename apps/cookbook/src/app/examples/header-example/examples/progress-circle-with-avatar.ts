@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
@@ -19,13 +18,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [
-    HeaderComponent,
-    ProgressCircleComponent,
-    AvatarComponent,
-    ThemeColorDirective,
-    IconComponent,
-  ],
+  imports: [HeaderComponent, ProgressCircleComponent, AvatarComponent, IconComponent],
 })
 export class HeaderExampleProgressCircleWithAvatarComponent {
   template: string = config.template;

@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
 const config = {
@@ -42,7 +41,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./dropdown-examples.shared.scss'],
-  imports: [CardComponent, ThemeColorDirective, DropdownComponent],
+  imports: [CardComponent, DropdownComponent],
 })
 export class DropdownExampleAttentionLevelComponent {
   template: string = config.template;

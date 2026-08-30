@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import {
   DateInputDirective,
   FormFieldComponent,
@@ -27,13 +26,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: 'color.scss',
-  imports: [
-    CardComponent,
-    ThemeColorDirective,
-    FormFieldComponent,
-    DateInputDirective,
-    InputComponent,
-  ],
+  imports: [CardComponent, FormFieldComponent, DateInputDirective, InputComponent],
 })
 export class FormFieldInputColorExampleComponent {
   get template(): string {
