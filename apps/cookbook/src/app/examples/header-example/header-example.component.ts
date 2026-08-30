@@ -10,6 +10,7 @@ import { HeaderExampleProgressCircleWithAvatarComponent } from './examples/progr
 import { HeaderExampleTitleScalingComponent } from './examples/title-scaling';
 import { HeaderExampleCustomSectionComponent } from './examples/custom-section';
 import { HeaderExampleCombinedComponent } from './examples/combined';
+import { HeaderExampleTruncateSubtitleComponent } from './examples/truncate-subtitle';
 
 @Component({
   selector: 'cookbook-header-example',
@@ -26,6 +27,7 @@ import { HeaderExampleCombinedComponent } from './examples/combined';
     HeaderExampleTitleScalingComponent,
     HeaderExampleCustomSectionComponent,
     HeaderExampleCombinedComponent,
+    HeaderExampleTruncateSubtitleComponent,
   ],
   providers: [ToastHelper, ToastController],
 })
