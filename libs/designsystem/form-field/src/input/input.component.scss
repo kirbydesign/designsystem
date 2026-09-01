@@ -1,29 +1,9 @@
 @use '../form-field-inputs.shared' as shared;
 @use '@kirbydesign/core/src/scss/interaction-state';
 
-$padding-block-size-md: calc(#{shared.$form-field-input-padding} * 0.5);
+$padding-block-size-md: calc(var(--kirby-spacing-s) * 0.5 - 1px);
 
 :host {
-  &:not(:disabled) {
-    @include interaction-state.apply-hover {
-      background-color: var(--kirby-inputs-background-color-hover);
-      cursor: text;
-    }
-
-    @include interaction-state.apply-active {
-      background-color: var(--kirby-inputs-background-color-active);
-    }
-
-    // Wrap declarations to avoid mixing with nested rules.
-    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-    /* stylelint-disable no-duplicate-selectors */
-    & {
-      transition: interaction-state.transition();
-      transition-property: background-color;
-    }
-    /* stylelint-enable no-duplicate-selectors */
-  }
-
   &[type='date'] {
     // Hide the builtin picker icon - we use our own calendar icon with showPicker()
     &::-webkit-calendar-picker-indicator {
@@ -60,12 +40,6 @@ $padding-block-size-md: calc(#{shared.$form-field-input-padding} * 0.5);
 :host(.md) {
   border-radius: var(--kirby-border-radius-l);
   padding-block: $padding-block-size-md;
-
-  &.error {
-    padding-block: calc(
-      #{$padding-block-size-md} - 1px
-    ); // subtract border width from padding to maintain overall height
-  }
 }
 
 /* clean-css ignore:start */
@@ -89,8 +63,8 @@ $padding-block-size-md: calc(#{shared.$form-field-input-padding} * 0.5);
 }
 
 .date-mask {
-  font-family: shared.$form-field-input-font-family;
-  line-height: shared.$form-field-input-line-height;
+  font-family: var(--kirby-font-family);
+  line-height: var(--kirby-line-height-n);
   font-size: var(--kirby-font-size-n);
   color: var(--kirby-white-contrast);
   position: absolute;

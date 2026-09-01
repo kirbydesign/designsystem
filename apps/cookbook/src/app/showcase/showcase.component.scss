@@ -8,7 +8,7 @@ $icon-size: var(--kirby-spacing-s);
   h1 {
     text-transform: uppercase;
     font-size: var(--kirby-font-size-xxl);
-    color: var(--kirby-dark);
+    color: var(--kirby-theme-color-base-content-base);
     font-weight: var(--kirby-font-weight-light);
     position: relative;
     padding-bottom: calc(5 * var(--kirby-spacing-xxxs));
@@ -22,7 +22,7 @@ $icon-size: var(--kirby-spacing-s);
   justify-content: space-between;
 
   a {
-    color: var(--kirby-text-color-semi-dark);
+    color: var(--kirby-theme-color-content-base-quiet);
     font-size: var(--kirby-font-size-s);
   }
 }

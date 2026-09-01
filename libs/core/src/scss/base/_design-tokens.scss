@@ -96,10 +96,30 @@
   }
 }
 
+@mixin loading-overlay() {
+  --kirby-loading-overlay-backdrop-opacity: #{variables.$loading-overlay-backdrop-opacity * 100%};
+}
+
 @mixin page-content-max-widths() {
   @each $name, $value in variables.$page-content-max-widths {
     --kirby-page-content-max-width-#{$name}: #{$value};
   }
+}
+
+@mixin avatar-sizes() {
+  @each $name, $value in variables.$avatar-sizes {
+    --kirby-avatar-size-#{$name}: #{$value};
+  }
+}
+
+@mixin avatar-icon-font-sizes() {
+  @each $name, $value in variables.$avatar-icon-font-sizes {
+    --kirby-avatar-icon-font-size-#{$name}: #{$value};
+  }
+}
+
+@mixin avatar-badge-size() {
+  --kirby-avatar-badge-size: #{variables.$avatar-badge-size};
 }
 
 @mixin breakpoints() {
@@ -120,19 +140,27 @@
 }
 
 @mixin focus-ring() {
-  --kirby-focus-ring-color: #{colors.$focus-ring-color};
+  --kirby-focus-ring-sm-combined-inset:
+    0 0 0 1px var(--kirby-theme-color-border-focus) inset,
+    0 0 0 2px var(--kirby-theme-color-border-offset) inset;
+  --kirby-focus-ring-md-combined-inset:
+    0 0 0 1px var(--kirby-theme-color-border-focus) inset,
+    0 0 0 3px var(--kirby-theme-color-border-offset) inset;
 
   // Small inset ring for compact controls (checkbox, radio, toggle, tab-navigation-item)
   --kirby-focus-ring-sm-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 3px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-theme-color-border-focus) inset,
+    0 0 0 3px var(--kirby-theme-color-border-offset) inset;
 
   // Medium inset ring for larger controls (button, dropdown, segmented-control, form-field, etc.)
   --kirby-focus-ring-md-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 4px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-theme-color-border-focus) inset,
+    0 0 0 4px var(--kirby-theme-color-border-offset) inset;
 
   // Medium outer ring for inline elements where inset rings are not suitable (link text)
   --kirby-focus-ring-md-outer:
-    0 0 0 2px var(--kirby-white), 0 0 0 4px var(--kirby-focus-ring-color);
+    0 0 0 2px var(--kirby-theme-color-border-offset),
+    0 0 0 4px var(--kirby-theme-color-border-focus);
 }
 
 @mixin transition-easings() {
@@ -194,8 +222,16 @@
   /* Z-INDEXES */
   @include z-layers;
 
+  /* LOADING OVERLAY */
+  @include loading-overlay;
+
   /* PAGE CONTENT MAX-WIDTHS */
   @include page-content-max-widths;
+
+  /* AVATAR SIZES */
+  @include avatar-sizes;
+  @include avatar-icon-font-sizes;
+  @include avatar-badge-size;
 
   /* BREAKPOINTS */
   @include breakpoints;
@@ -206,5 +242,13 @@
   @include transition-soft-keyboard;
 
   /* FOCUS RING */
+
+  .kirby-surface-base,
+  .kirby-surface-raised,
+  .kirby-surface-brand {
+    // TODO(@design-tokens) should probably applied as part of the surface
+    @include focus-ring;
+  }
+
   @include focus-ring;
 }

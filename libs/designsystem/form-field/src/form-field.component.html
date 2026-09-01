@@ -43,11 +43,11 @@
 
 <ng-template #slottedInputTemplate>
   <div class="affix-container">
-    <div class="prefix vertical-align semi-dark-text">
+    <div class="prefix vertical-align">
       <ng-content select="[kirby-affix='prefix']"></ng-content>
     </div>
     <ng-content></ng-content>
-    <div class="suffix vertical-align semi-dark-text" (click)="openDatePicker()">
+    <div class="suffix vertical-align" (click)="openDatePicker()">
       <ng-content select="[kirby-affix='suffix']"></ng-content>
       @if (showDefaultCalendarIcon) {
         <kirby-icon name="calendar"></kirby-icon>

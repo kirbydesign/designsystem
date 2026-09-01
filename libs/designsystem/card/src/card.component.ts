@@ -7,12 +7,13 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { ResizeObserverService, SurfaceDirective } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  hostDirectives: [{ directive: SurfaceDirective, inputs: ['variant'] }],
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;

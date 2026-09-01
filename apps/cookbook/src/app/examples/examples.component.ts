@@ -5,12 +5,13 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
 import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
+import { ThemeSurfaceControlComponent } from '../page/theme-surface-control/theme-surface-control.component';
 
 @Component({
   selector: 'cookbook-examples',
   templateUrl: './examples.component.html',
   styleUrls: ['./examples.component.scss'],
-  imports: [KirbyAppModule, RouterOutletModule],
+  imports: [KirbyAppModule, RouterOutletModule, ThemeSurfaceControlComponent],
 })
 export class ExamplesComponent {
   showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(

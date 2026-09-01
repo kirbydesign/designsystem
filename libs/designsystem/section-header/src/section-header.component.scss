@@ -1,7 +1,7 @@
 @use './section-header.utils';
 
 :host {
-  --kirby-section-header-color: var(--kirby-text-color-black);
+  --kirby-section-header-color: var(--kirby-theme-color-content-base);
 
   display: block;
 

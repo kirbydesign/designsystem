@@ -3,21 +3,21 @@ svg {
 }
 
 .circle {
-  stroke: var(--kirby-semi-light);
+  stroke: var(--kirby-theme-color-border-base-quiet);
 }
 
 :host {
   // Colors
   &.success {
-    --kirby-progress-circle-stroke-color: var(--kirby-success-shade);
+    --kirby-progress-circle-stroke-color: var(--kirby-theme-color-border-success-loud);
   }
 
   &.warning {
-    --kirby-progress-circle-stroke-color: var(--kirby-warning-shade);
+    --kirby-progress-circle-stroke-color: var(--kirby-theme-color-border-warning-loud);
   }
 
   &.danger {
-    --kirby-progress-circle-stroke-color: var(--kirby-danger);
+    --kirby-progress-circle-stroke-color: var(--kirby-theme-color-border-danger-loud);
   }
 
   &.view-initialized {
@@ -26,7 +26,10 @@ svg {
       transition-duration: var(--kirby-transition-duration-extra-long);
       transition-timing-function: var(--kirby-transition-easing-enter-exit);
       transform-origin: 50% 50%;
-      stroke: var(--kirby-progress-circle-stroke-color, var(--kirby-success));
+      stroke: var(
+        --kirby-progress-circle-stroke-color,
+        var(--kirby-theme-color-border-success-loud)
+      );
     }
   }
 }

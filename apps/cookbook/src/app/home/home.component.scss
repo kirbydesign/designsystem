@@ -11,7 +11,7 @@ $mobile-gutter: var(--kirby-spacing-s);
 $desktop-gutter: minmax(var(--kirby-spacing-m), 1fr);
 
 :host {
-  background-color: var(--kirby-background-color);
+  background-color: var(--kirby-theme-color-fill-base);
   display: grid;
   grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
   grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
