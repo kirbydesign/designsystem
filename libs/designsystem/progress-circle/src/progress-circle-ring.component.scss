@@ -1,13 +1,23 @@
-svg {
-  rotate: -90deg;
-}
-
-.circle {
-  stroke: var(--kirby-semi-light);
-}
+@use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  // Colors
+  --kirby-progress-circle-stroke-width: var(--kirby-spacing-xxs, 4px);
+
+  width: 100%;
+  height: 100%;
+
+  &.sm {
+    --kirby-progress-circle-stroke-width: 3px;
+  }
+
+  &.md {
+    --kirby-progress-circle-stroke-width: 4px;
+  }
+
+  &.lg {
+    --kirby-progress-circle-stroke-width: 5px;
+  }
+
   &.success {
     --kirby-progress-circle-stroke-color: var(--kirby-success-shade);
   }
@@ -29,4 +39,18 @@ svg {
       stroke: var(--kirby-progress-circle-stroke-color, var(--kirby-success));
     }
   }
+}
+
+svg {
+  rotate: -90deg;
+}
+
+.circle,
+.progress {
+  r: calc(50% - var(--kirby-progress-circle-stroke-width) / 2);
+  stroke-width: var(--kirby-progress-circle-stroke-width);
+}
+
+.circle {
+  stroke: var(--kirby-semi-light);
 }
