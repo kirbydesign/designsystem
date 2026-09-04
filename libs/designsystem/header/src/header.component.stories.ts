@@ -40,6 +40,12 @@ export const Default: Story = {
 };
 
 export const CookbookExamples: Story = {
+  parameters: {
+    // The embedded progress circle reveals its value via an IntersectionObserver-triggered
+    // CSS transition. Because the reveal is JS-driven, Chromatic cannot deterministically pause
+    // it and may capture the mid-animation round-linecap "dot". Delay capture until it settles.
+    chromatic: { delay: 1500 },
+  },
   render: () => ({
     template: `<cookbook-header-example></cookbook-header-example>`,
   }),
