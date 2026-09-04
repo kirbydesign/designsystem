@@ -1,6 +1,6 @@
 # Kirby Examples
 
-These are compact consumer patterns. Use the [Cookbook](https://cookbook.kirby.design/#/home/intro)
+These are compact consumer patterns. Use the [Cookbook](hhttps://cookbook.kirby.design/#/home/component-overview)
 for API details and the [GitHub examples](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples)
 for implementations. Replace `develop` in source links with the consumer application's installed
 Kirby version when a matching tag exists; otherwise verify the example against the installed package.
