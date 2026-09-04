@@ -1,6 +1,6 @@
 ---
 name: consumer
-description: 'Use when working on Angular UI that uses Kirby; kirby-* elements, @kirbydesign/designsystem imports, modals, toasts, buttons, forms, lists, colors, or icons'
+description: 'Kirby Design System reference for Angular microfrontends. Use when authoring or modifying UI components, markup, or styling with @kirbydesign/designsystem.'
 ---
 
 # Kirby Design System - Component Library
