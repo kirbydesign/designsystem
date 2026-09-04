@@ -1,6 +1,6 @@
 # Kirby Components Reference
 
-See [Cookbook](https://cookbook.kirby.design/#/home/showcase/{component-name}) for full API including key inputs.
+See [Cookbook](https://cookbook.kirby.design/#/home/showcase/{component-name}) for full API including key inputs. For complete Angular implementations, see the [Cookbook source examples](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples). For a consumer-version match, replace `develop` with the installed Kirby version tag in the source URL.
 
 Import path prefixes:
 
@@ -35,6 +35,7 @@ Import path prefixes:
 | `kirby-item-sliding`                      | `ItemSlidingComponent`       | `ds/item-sliding`      |
 | `kirby-list`                              | `ListComponent`              | `ds/list`              |
 | `kirby-loading-overlay`                   | `LoadingOverlayComponent`    | `ds/loading-overlay`   |
+| —                                         | `LoadingOverlayService`      | `ds/loading-overlay`   |
 | `kirby-modal`                             | `ModalComponent`             | `ds/modal`             |
 | `kirby-modal-footer`                      | `ModalFooterComponent`       | `ds/modal`             |
 | `kirby-alert`                             | `AlertComponent`             | `ds/modal`             |
@@ -67,6 +68,24 @@ Import path prefixes:
 
 ### Modals
 
-Prefer the declarative `kirby-modal` component (from `@kirbydesign/designsystem/modal`).
-Only reach for `ModalController` when you genuinely need imperative control — e.g. opening
-a modal from a service, or when the trigger isn't tied to a template.
+Use the declarative `kirby-modal` component for simple template-driven dialogs. Nest its content
+inside `ng-template` and include a meaningful `kirby-page-title` in the embedded content.
+
+Use `ModalController` when the dialog needs imperative control or is opened from a service. Use
+route-based modals for wizard flows and deep-linkable modal content.
+
+### Cards
+
+Use `kirby-card` for grouping related content. Choose `elevated`, `flat`, or `outlined` based on
+visual hierarchy; use the default elevated variant when the entire card is clickable, and add a
+disclosure indicator for navigation or modal actions.
+
+### Items
+
+`kirby-item` supports text, icons, avatars, and controls through its slots. When an item contains
+a button, checkbox, or other interactive control, do not also make the item `selectable`.
+
+### Loading overlays
+
+Use `kirby-loading-overlay` for content-scoped loading and `kirby-spinner` for inline loading.
+Use `LoadingOverlayService` when a full-page loading overlay is controlled programmatically.
