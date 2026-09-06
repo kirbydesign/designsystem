@@ -68,24 +68,6 @@ Import path prefixes:
 
 ### Modals
 
-Use the declarative `kirby-modal` component for simple template-driven dialogs. Nest its content
-inside `ng-template` and include a meaningful `kirby-page-title` in the embedded content.
+Always prefer the declarative `kirby-modal` component for simple template-driven dialogs. Nest its content inside `ng-template` and include a meaningful `kirby-page-title` in the embedded content.
 
-Use `ModalController` when the dialog needs imperative control or is opened from a service. Use
-route-based modals for wizard flows and deep-linkable modal content.
-
-### Cards
-
-Use `kirby-card` for grouping related content. Choose `elevated`, `flat`, or `outlined` based on
-visual hierarchy; use the default elevated variant when the entire card is clickable, and add a
-disclosure indicator for navigation or modal actions.
-
-### Items
-
-`kirby-item` supports text, icons, avatars, and controls through its slots. When an item contains
-a button, checkbox, or other interactive control, do not also make the item `selectable`.
-
-### Loading overlays
-
-Use `kirby-loading-overlay` for content-scoped loading and `kirby-spinner` for inline loading.
-Use `LoadingOverlayService` when a full-page loading overlay is controlled programmatically.
+Use `ModalController` only when the caller needs imperative control. Use route-based modals for wizard flows and deep-linkable modal content.

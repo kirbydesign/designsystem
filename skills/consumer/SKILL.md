@@ -9,9 +9,8 @@ Use this skill when helping with UI components, markup, or styling in Angular mi
 
 ## Official Documentation
 
-- Kirby Cookbook: https://cookbook.kirby.design/#/home/intro
-- Use the Cookbook for API details, accessibility guidance, and rendered behavior. Use the [Cookbook source examples](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples) for complete Angular implementations.
-- For version-matched source, use `https://github.com/kirbydesign/designsystem/tree/<kirby-version>/apps/cookbook/src/app/examples/<component>-example` and replace `<kirby-version>` with the consumer application's installed Kirby version when a matching tag exists.
+- Use the [Cookbook showcase](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/showcase) for API details, accessibility guidance, and rendered behavior. Use the [Cookbook source examples](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples) for complete Angular implementations.
+- For version-matched source, use `https://github.com/kirbydesign/designsystem/tree/v<kirby-version>/apps/cookbook/src/app/examples/<component>-example` and replace `<kirby-version>` with the consumer application's installed Kirby version when a matching tag exists.
 - Prefer the installed package (`node_modules/@kirbydesign/designsystem/<subpath>`) for the consumer application's version when it differs from the Cookbook release.
 
 ## Component Reference
@@ -24,18 +23,11 @@ See [references/components.md](references/components.md) for the full component 
 
 ## Examples
 
-When creating Kirby markup, imports, forms, lists, modals, loading states, or styling, read
-[references/examples.md](references/examples.md) for copy-ready patterns and their Cookbook source links.
+When using Kirby in markup, component code or styling read Cookbook source examples and the Cookbook showcase for guidance.
 
 ## Styling
 
 See [references/styling.md](references/styling.md) for CSS design tokens, SCSS utilities, and typography classes.
-
-## Usage Guidance
-
-For component-specific usage rules, read [references/components.md](references/components.md).
-For copy-ready markup and imports, read [references/examples.md](references/examples.md).
-For styling tokens and utilities, read [references/styling.md](references/styling.md).
 
 ## Anti-patterns
 
