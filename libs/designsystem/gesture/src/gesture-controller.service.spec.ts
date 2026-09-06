@@ -1,5 +1,5 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { GestureController as IonicGestureController } from '@ionic/angular/standalone';
+import { GestureController as IonicGestureController } from '@ionic/angular';
 
 import { GestureController } from './gesture-controller.service';
 import { Gesture, GestureConfig } from './gesture.types';

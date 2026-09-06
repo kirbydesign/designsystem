@@ -13,7 +13,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonContent, IonModal } from '@ionic/angular/standalone';
+import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';

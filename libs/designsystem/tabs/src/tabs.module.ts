@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { NgModule } from '@angular/core';
-import { IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
+import { IonTabBar, IonTabButton, IonTabs } from '@ionic/angular';
 import { TabButtonComponent } from './tab-button/tab-button.component';
 import { TabsService } from './tabs.service';
 import { TabsComponent } from './tabs.component';

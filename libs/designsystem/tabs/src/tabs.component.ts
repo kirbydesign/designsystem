@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostBinding, OnDestroy, ViewChild } from '@angular/core';
-import { IonTabBar, IonTabs } from '@ionic/angular/standalone';
+import { IonTabBar, IonTabs } from '@ionic/angular';
 
 import { TabsService } from './tabs.service';
 

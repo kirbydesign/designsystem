@@ -8,7 +8,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
+import { IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular';
 
 import { ThemeColor } from '@kirbydesign/core';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';

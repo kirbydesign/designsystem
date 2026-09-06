@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideIonicAngular } from '@ionic/angular';
 import { componentOnReady } from '@ionic/core';
 
 @NgModule({
