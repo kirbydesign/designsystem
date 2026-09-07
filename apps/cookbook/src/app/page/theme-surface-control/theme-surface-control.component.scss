@@ -1,0 +1,55 @@
+:host {
+  position: fixed;
+  inset-block-end: var(--kirby-spacing-xs);
+  inset-inline-end: var(--kirby-spacing-xs);
+  z-index: var(--kirby-z-index-modal);
+  pointer-events: none;
+}
+
+.theme-surface-control {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  padding-block: var(--kirby-spacing-xxs);
+  padding-inline: var(--kirby-spacing-s);
+  border-radius: var(--kirby-border-radius-pill);
+  background-color: var(--kirby-theme-color-fill-raised);
+  color: var(--kirby-theme-color-content-base);
+  border: 1px solid var(--kirby-theme-color-border-base-quiet);
+  cursor: pointer;
+}
+
+.theme-surface-control-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kirby-spacing-xxxs);
+  font-size: var(--kirby-font-size-s);
+  font-weight: var(--kirby-font-weight-bold);
+  white-space: nowrap;
+  color: var(--kirby-theme-color-content-base-quiet);
+  user-select: none;
+}
+
+.theme-surface-control-options {
+  display: grid;
+  grid-template-columns: 0fr;
+  transition: grid-template-columns var(--kirby-transition-duration-quick, 200ms) ease;
+}
+
+.theme-surface-control:hover .theme-surface-control-options,
+.theme-surface-control:focus-within .theme-surface-control-options {
+  grid-template-columns: 1fr;
+}
+
+.theme-surface-control-options > * {
+  min-width: 0;
+  overflow: hidden;
+  padding-inline-start: var(--kirby-spacing-s);
+  opacity: 0;
+  transition: opacity var(--kirby-transition-duration-quick, 200ms) ease;
+}
+
+.theme-surface-control:hover .theme-surface-control-options > *,
+.theme-surface-control:focus-within .theme-surface-control-options > * {
+  opacity: 1;
+}

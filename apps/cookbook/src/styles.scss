@@ -8,10 +8,10 @@ body,
 html {
   margin: 0;
   padding: 0;
-  background-color: var(--kirby-white);
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  color: var(--kirby-black);
+  background-color: var(--kirby-theme-color-fill-base);
+  color: var(--kirby-theme-color-content-base);
   height: 100vh;
 }
 
@@ -34,17 +34,6 @@ code:not([class*='language-']) {
   --kirby-modal-color: var(--kirby-black-contrast);
   --kirby-modal-footer-background: var(--kirby-dark);
   --kirby-modal-footer-color: var(--kirby-dark-contrast);
-
-  button[kirby-button] {
-    &.attention-level3 {
-      --kirby-button-border-color: var(--kirby-white);
-      --kirby-button-color: var(--kirby-white);
-    }
-
-    &.attention-level4 {
-      --kirby-button-color: var(--kirby-white);
-    }
-  }
 
   code {
     background-color: var(--kirby-dark);

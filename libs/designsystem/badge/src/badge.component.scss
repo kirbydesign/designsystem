@@ -2,8 +2,8 @@
 
 $badge-size-small: 0.8em;
 $badge-size-medium: 1.6em;
-$badge-padding-inline: 0.5em;
-$badge-padding-block: 0.3em;
+$badge-padding-inline: 0.4em;
+$badge-padding-block: 0.2em;
 $badge-icon-size: 1.6em;
 $maximum-font-size: 10px * utils.$text-resize-threshold;
 
@@ -17,9 +17,10 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
   display: inline-flex;
 
   ion-badge {
-    --background: var(--kirby-badge-background-color, var(--kirby-white));
-    --color: var(--kirby-badge-color, var(--kirby-white-contrast));
+    --background: var(--kirby-badge-background-color, var(--kirby-theme-color-fill-raised));
+    --color: var(--kirby-badge-color, var(--kirby-theme-color-content-raised));
 
+    border: 1px solid var(--kirby-theme-color-border-raised-quiet);
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: var(--kirby-border-radius-pill);
     font-size: inherit;
@@ -27,47 +28,61 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
     box-shadow: var(--kirby-badge-elevation, none);
 
     --kirby-icon-font-size: #{$badge-icon-size};
+
+    &.sm {
+      --background: var(--kirby-badge-background-color, var(--kirby-theme-color-base-quiet));
+      --color: var(--kirby-badge-color, var(--kirby-theme-color-content-base-quiet));
+
+      border: 1px solid var(--kirby-theme-color-border-base-quiet);
+    }
   }
 
   // Colors
   &.success ion-badge {
-    --color: var(--kirby-success-contrast);
+    --color: var(--kirby-theme-color-content-success);
+
+    border-color: var(--kirby-theme-color-border-success);
   }
 
   &.success.sm ion-badge {
-    --background: var(--kirby-success-shade);
+    --background: var(--kirby-theme-color-fill-success-loud);
+    --color: var(--kirby-theme-color-content-success-loud);
+
+    border-color: var(--kirby-theme-color-border-success-loud);
   }
 
   &.success.md ion-badge {
-    --background: var(--kirby-success-tint);
+    --background: var(--kirby-theme-color-fill-success);
+    --color: var(--kirby-theme-color-content-success);
+
+    border-color: var(--kirby-theme-color-border-success);
   }
 
   &.warning ion-badge {
-    --color: var(--kirby-warning-contrast);
+    --color: var(--kirby-theme-color-content-warning);
+
+    border-color: var(--kirby-theme-color-border-warning);
   }
 
   &.warning.sm ion-badge {
-    --background: var(--kirby-warning-shade);
+    --background: var(--kirby-theme-color-fill-warning-loud);
+    --color: var(--kirby-theme-color-content-warning-loud);
+
+    border-color: var(--kirby-theme-color-border-warning-loud);
   }
 
   &.warning.md ion-badge {
-    --background: var(--kirby-warning);
+    --background: var(--kirby-theme-color-fill-warning);
+    --color: var(--kirby-theme-color-content-warning);
+
+    border-color: var(--kirby-theme-color-border-warning);
   }
 
   &.danger ion-badge {
-    --color: var(--kirby-text-color-white);
-  }
+    --background: var(--kirby-theme-color-fill-danger-loud);
+    --color: var(--kirby-theme-color-content-danger-loud);
 
-  &.danger.sm ion-badge {
-    --background: var(--kirby-danger);
-  }
-
-  &.danger.md ion-badge {
-    --background: var(--kirby-danger-shade);
-
-    &:has(kirby-icon) {
-      --background: var(--kirby-danger);
-    }
+    border-color: var(--kirby-theme-color-border-danger-loud);
   }
 }
 
@@ -94,8 +109,15 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
 
   &:has(kirby-icon) {
     ion-badge {
+      // badges border can push icons off center, so we make force them center
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
       --padding-top: 0px;
+      --padding-bottom: 0px;
       --padding-start: 0px;
+      --padding-end: 0px;
 
       height: $badge-size-medium;
       width: $badge-size-medium;
@@ -107,6 +129,7 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
 :host(.default),
 :host(.white) {
   ion-badge {
-    --kirby-badge-elevation: 0 20px 30px -15px rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 12%);
+    // --kirby-badge-elevation: 0 20px 30px -15px rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 12%);
+    border-color: var(--kirby-theme-color-border-raised-quiet);
   }
 }

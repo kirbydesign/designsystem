@@ -1,0 +1,14 @@
+<div class="theme-surface-control" role="group" aria-label="Preview surface theme">
+  <span class="theme-surface-control-label">
+    <kirby-icon name="adjust" size="sm"></kirby-icon>
+    Surface
+  </span>
+  <div class="theme-surface-control-options">
+    <kirby-segmented-control
+      [items]="items"
+      [selectedIndex]="selectedIndex()"
+      size="sm"
+      (segmentSelect)="onSegmentSelect($event)"
+    ></kirby-segmented-control>
+  </div>
+</div>

@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: block;
   min-height: var(--kirby-spacing-l);
@@ -23,18 +21,15 @@
     place-items: center;
 
     &.backdrop {
-      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
-      // stylelint-disable-next-line kirby/use-design-tokens
-      background-color: rgba(
-        utils.get-color('background-color', $getValueOnly: true),
-        utils.$loading-overlay-backdrop-opacity
+      background-color: color-mix(
+        in srgb,
+        var(--kirby-theme-color-fill-base) var(--kirby-loading-overlay-backdrop-opacity),
+        transparent
       );
     }
 
     &.hide-content {
-      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
-      // stylelint-disable-next-line kirby/use-design-tokens
-      background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
+      background-color: var(--kirby-theme-color-fill-base);
     }
 
     .spinner {

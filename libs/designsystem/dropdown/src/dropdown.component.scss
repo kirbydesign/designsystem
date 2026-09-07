@@ -62,6 +62,12 @@ $min-screen-width: 375px;
   &.is-open {
     > button {
       box-shadow: var(--kirby-elevation-4);
+
+      // When open, DOM focus stays on the trigger button (aria-activedescendant
+      // combobox pattern), so it keeps `:focus-visible` and the button's focus
+      // `border-color`. Reset it to the button's resting border so the trigger
+      // doesn't look focused while the popover has the visual focus.
+      border-color: var(--kirby-button-border-color);
     }
   }
 }
@@ -83,14 +89,10 @@ kirby-card {
 
 :host-context(kirby-calendar) {
   > button {
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active('s');
-
     // Wrap declarations to avoid mixing with nested rules.
     // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
     /* stylelint-disable no-duplicate-selectors */
     & {
-      border-color: transparent;
       font-weight: var(--kirby-font-weight-bold);
       font-size: initial;
     }

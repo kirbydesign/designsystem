@@ -3,7 +3,6 @@
 $bullet-width: 10px;
 $bullet-height: 6px;
 $bullet-border-radius: 3px;
-$bullet-inactive-opacity: 0.2;
 
 :host {
   --swiper-navigation-sides-offset: 0;
@@ -11,9 +10,9 @@ $bullet-inactive-opacity: 0.2;
   --swiper-pagination-bullet-height: #{$bullet-height};
   --swiper-pagination-bullet-border-radius: #{$bullet-border-radius};
   --swiper-pagination-bullet-horizontal-gap: var(--kirby-spacing-xxxs);
-  --swiper-pagination-color: var(--kirby-black);
-  --swiper-pagination-bullet-inactive-color: var(--kirby-black);
-  --swiper-pagination-bullet-inactive-opacity: #{$bullet-inactive-opacity};
+  --swiper-pagination-color: var(--kirby-theme-color-fill-brand-loud);
+  --swiper-pagination-bullet-inactive-color: var(--kirby-theme-color-fill-neutral);
+  --swiper-pagination-bullet-inactive-opacity: 1;
 
   .navigation {
     display: flex;

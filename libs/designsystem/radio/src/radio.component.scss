@@ -15,28 +15,10 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 :host {
   display: flex;
 
-  &[disabled] {
-    color: var(--kirby-text-color-semi-dark);
-
-    ion-radio {
-      --color: var(--kirby-medium);
-      --color-checked: var(--kirby-medium);
-
-      &::part(container) {
-        background-color: var(--kirby-semi-light);
-      }
-
-      &::part(mark) {
-        --color-checked: var(--kirby-semi-dark);
-      }
-
-      &::part(label-text-wrapper) {
-        opacity: 1; // Reset Ionic disabled style
-      }
-
-      &::part(native-wrapper) {
-        opacity: 1; // Reset Ionic disabled style
-      }
+  &[disabled] ion-radio {
+    &::part(label-text-wrapper),
+    &::part(native-wrapper) {
+      opacity: 0.4; // TODO(@design-tokens) needs token
     }
   }
 
@@ -90,14 +72,43 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 }
 
 ion-radio {
-  &:focus-within {
-    --border-width: 0;
-    --color: transparent;
-  }
-
+  :host([data-state='focus']) &::part(container),
   &:focus-visible::part(container) {
     transition: box-shadow #{interaction-state.$default-transition-duration} linear;
-    box-shadow: var(--kirby-focus-ring-sm-inset);
+    box-shadow: var(--kirby-focus-ring-sm-combined-inset);
+    border-color: var(
+      --kirby-theme-color-border-focus
+    ); // TODO(@design-tokens) needs fix for error ring
+  }
+
+  @media (hover: hover) {
+    :host([data-state='hover']) &,
+    &:hover {
+      --color: var(--kirby-theme-color-border-raised-hover);
+      --color-checked: var(--kirby-theme-color-border-raised-hover);
+
+      &::part(mark) {
+        --color-checked: var(--kirby-theme-color-fill-engaged-hover);
+      }
+
+      &::part(container) {
+        background-color: var(--kirby-theme-color-fill-raised-hover);
+      }
+    }
+  }
+
+  :host([data-state='active']) &,
+  &:active {
+    --color: var(--kirby-theme-color-border-raised-active);
+    --color-checked: var(--kirby-theme-color-border-raised-active);
+
+    &::part(mark) {
+      --color-checked: var(--kirby-theme-color-fill-engaged-active);
+    }
+
+    &::part(container) {
+      background-color: var(--kirby-theme-color-fill-raised-active);
+    }
   }
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -107,34 +118,23 @@ ion-radio {
     box-sizing: border-box; // Ensure padding is not added to radio width/height
 
     --border-width: 1px;
-    --color: var(--kirby-semi-dark);
-    --color-checked: var(--kirby-success);
+    --color: var(--kirby-theme-color-border-raised);
+    --color-checked: var(--kirby-theme-color-border-raised);
   }
   /* stylelint-enable no-duplicate-selectors */
-
-  @include interaction-state.apply-hover {
-    &::part(container) {
-      background-color: interaction-state.get-state-color('white', 'xxs');
-    }
-  }
-  @include interaction-state.apply-active {
-    --color-checked: #{interaction-state.get-state-color('success')};
-
-    &::part(container) {
-      background-color: interaction-state.get-state-color('white', 'xs');
-    }
-  }
 
   &::part(container) {
     transition: interaction-state.transition();
     transition-property: background-color, box-shadow;
-    background-color: var(--kirby-white);
+    background-color: var(--kirby-theme-color-fill-raised);
     margin: var(--kirby-spacing-xxxxs);
     width: $radio-size;
     height: $radio-size;
   }
 
   &::part(mark) {
+    --color-checked: var(--kirby-theme-color-fill-engaged);
+
     width: $radio-icon-mark-size;
     height: $radio-icon-mark-size;
   }
@@ -184,22 +184,21 @@ ion-radio {
 
   :host-context(kirby-radio-group.error),
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
-    ion-radio,
-    ion-radio:active {
-      --color: var(--kirby-danger);
-    }
-  }
+    ion-radio:not(:focus-within) {
+      --color: var(--kirby-theme-color-border-raised-danger);
+      --color-checked: var(--kirby-theme-color-border-raised);
 
-  &.radio-checked {
-    &:not(:focus, .radio-disabled) {
       &::part(container) {
-        box-shadow: var(--kirby-elevation-4);
+        // TODO(@design-tokens) needs more work!!
+        box-shadow: var(--kirby-theme-error-combined-inset);
       }
-    }
 
-    &:not(:focus, :focus-within, .radio-disabled) {
-      &::part(container) {
-        border-color: var(--kirby-semi-dark);
+      &.radio-checked {
+        &:not(:focus, .radio-disabled) {
+          &::part(container) {
+            box-shadow: none;
+          }
+        }
       }
     }
   }

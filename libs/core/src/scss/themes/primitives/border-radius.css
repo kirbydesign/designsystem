@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --kirby-border-radius-circle: 999px;
+  --kirby-border-radius-pill: 999px;
+  --kirby-border-radius-xxs: var(--kirby-spacing-xxxxs);
+  --kirby-border-radius-xs: var(--kirby-spacing-xxxs);
+  --kirby-border-radius-s: var(--kirby-spacing-xxs);
+  --kirby-border-radius-n: var(--kirby-spacing-s);
+  --kirby-border-radius-l: var(--kirby-spacing-m);
+  --kirby-border-radius-xl: var(--kirby-spacing-l);
+}

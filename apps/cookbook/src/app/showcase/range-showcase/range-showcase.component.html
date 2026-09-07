@@ -1,53 +1,59 @@
-<div class="example">
-  <p>The Range slider lets users select from a range of values by moving the slider knob.</p>
+<p>The Range slider lets users select from a range of values by moving the slider knob.</p>
 
-  <h2>Simple</h2>
-  <cookbook-example-viewer [html]="defaultExample.template">
+<h2>Simple</h2>
+<cookbook-example-viewer [html]="defaultExample.template">
+  <div class="example-frame">
     <cookbook-range-default-example #defaultExample></cookbook-range-default-example>
-  </cookbook-example-viewer>
+  </div>
+</cookbook-example-viewer>
 
-  <h2>Step (ticks)</h2>
-  <p>
-    Tick marks are displayed based on the step value. If the amount of ticks exceeds
-    <code>10</code>
-    , the step property will automatically be adjusted.
-  </p>
-  <p>
-    Provided values that doesn't match any tick points, will automatically be changed to the nearest
-    tick point.
-  </p>
-  <cookbook-example-viewer [html]="stepExample.template">
+<h2>Step (ticks)</h2>
+<p>
+  Tick marks are displayed based on the step value. If the amount of ticks exceeds
+  <code>10</code>
+  , the step property will automatically be adjusted.
+</p>
+<p>
+  Provided values that doesn't match any tick points, will automatically be changed to the nearest
+  tick point.
+</p>
+<cookbook-example-viewer [html]="stepExample.template">
+  <div class="example-frame">
     <cookbook-range-step-example #stepExample></cookbook-range-step-example>
-  </cookbook-example-viewer>
+  </div>
+</cookbook-example-viewer>
 
-  <h2>Pin - the slider value is shown when the knob is pressed</h2>
-  <cookbook-example-viewer [html]="pinExample.template">
+<h2>Pin - the slider value is shown when the knob is pressed</h2>
+<cookbook-example-viewer [html]="pinExample.template">
+  <div class="example-frame">
     <cookbook-range-pin-example #pinExample></cookbook-range-pin-example>
-  </cookbook-example-viewer>
+  </div>
+</cookbook-example-viewer>
 
-  <p>
-    Additionally, the
-    <code>pinFormatter</code>
-    function can be supplied to customize the formatting of the range value shown to the user in the
-    pin. It defaults to the range slider's integer-value.
-  </p>
-  <cookbook-code-viewer [html]="pinExample.pinFormatterTemplate"></cookbook-code-viewer>
-  <cookbook-code-viewer [ts]="pinExample.pinFormatterFunction"></cookbook-code-viewer>
+<p>
+  Additionally, the
+  <code>pinFormatter</code>
+  function can be supplied to customize the formatting of the range value shown to the user in the
+  pin. It defaults to the range slider's integer-value.
+</p>
+<cookbook-code-viewer [html]="pinExample.pinFormatterTemplate"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="pinExample.pinFormatterFunction"></cookbook-code-viewer>
 
-  <h2>Disabled</h2>
-  <cookbook-example-viewer [html]="disabledFormExample.template">
+<h2>Disabled</h2>
+<cookbook-example-viewer [html]="disabledFormExample.template">
+  <div class="example-frame">
     <cookbook-range-disabled-form-example
       #disabledFormExample
     ></cookbook-range-disabled-form-example>
-  </cookbook-example-viewer>
+  </div>
+</cookbook-example-viewer>
 
-  <h2>Importing</h2>
-  <cookbook-import-viewer [imports]="'RangeComponent'"></cookbook-import-viewer>
+<h2>Importing</h2>
+<cookbook-import-viewer [imports]="'RangeComponent'"></cookbook-import-viewer>
 
-  <h2>Properties:</h2>
-  <cookbook-api-description-properties
-    [properties]="rangeProperties"
-  ></cookbook-api-description-properties>
-  <h2>Events:</h2>
-  <cookbook-api-description-events [events]="rangeEvents"></cookbook-api-description-events>
-</div>
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="rangeProperties"
+></cookbook-api-description-properties>
+<h2>Events:</h2>
+<cookbook-api-description-events [events]="rangeEvents"></cookbook-api-description-events>

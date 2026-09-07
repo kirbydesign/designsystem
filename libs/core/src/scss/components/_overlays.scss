@@ -48,7 +48,8 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     --border-radius: 0;
-    --background: var(--kirby-modal-background, var(--kirby-background-color));
+    --background: var(--kirby-modal-background, var(--kirby-theme-color-fill-base));
+    --color: var(--kirby-theme-color-content-base);
     --height: auto;
     --box-shadow: var(--kirby-elevation-8);
 
@@ -148,7 +149,7 @@ ion-modal.kirby-overlay {
   }
 
   &.kirby-alert {
-    --background: var(--kirby-background-color);
+    --background: var(--kirby-theme-color-fill-base);
     --border-radius: var(--kirby-border-radius-n);
     --box-shadow: var(--kirby-elevation-8);
     --max-width: #{utils.$alert-max-width};
@@ -157,12 +158,13 @@ ion-modal.kirby-overlay {
 }
 
 ion-modal {
-  --background: var(--kirby-modal-background, var(--kirby-background-color));
+  --background: var(--kirby-modal-background, var(--kirby-theme-color-fill-base));
+  --color: var(--kirby-theme-color-content-base);
 }
 
 ion-loading.kirby-loading-overlay {
-  --backdrop-opacity: #{utils.$loading-overlay-backdrop-opacity};
-  --ion-backdrop-color: var(--kirby-background-color);
+  --backdrop-opacity: var(--kirby-loading-overlay-backdrop-opacity);
+  --ion-backdrop-color: var(--kirby-theme-color-fill-base);
 
   .loading-wrapper {
     --background: transparent;

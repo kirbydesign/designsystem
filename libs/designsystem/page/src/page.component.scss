@@ -11,14 +11,9 @@ $ion-content-padding-top: var(--kirby-spacing-xs);
 $toolbar-transition-duration-in: var(--kirby-transition-duration-quick);
 $toolbar-transition-duration-out: 50ms;
 $toolbar-transition: background-color $toolbar-transition-duration-out linear;
-
-// no color-mix or other Safari-15-safe CSS custom property equivalent, so kept as SCSS.
-// stylelint-disable-next-line kirby/use-design-tokens
-$toolbar-shaded-background: color.mix(
-  #000,
-  utils.get-color('background-color', $getValueOnly: true),
-  1.1%
-);
+$toolbar-shaded-background: var(
+  --kirby-theme-color-fill-base-hover
+); // TODO(@design-tokens) find actual prop
 $toolbar-button-size: var(--kirby-spacing-xl);
 $toolbar-button-spacing: var(--kirby-spacing-xxs);
 $toolbar-max-font-size: 18px * 1.2;
@@ -27,7 +22,7 @@ ion-header,
 ion-toolbar {
   box-sizing: border-box;
 
-  --background: var(--kirby-background-color);
+  --background: var(--kirby-theme-color-fill-base);
 }
 
 ion-title h1 {
@@ -40,7 +35,7 @@ ion-toolbar {
   --padding-end: var(--kirby-spacing-s);
   --padding-top: 0;
   --padding-bottom: 0;
-  --ion-toolbar-color: var(--kirby-black);
+  --ion-toolbar-color: var(--kirby-theme-color-content-raised);
   --min-height: var(--kirby-spacing-xxxl);
 
   @include utils.media('>=medium') {
@@ -182,27 +177,29 @@ ion-toolbar {
 }
 
 ion-back-button {
-  @include interaction-state.apply-hover-ionic;
-  @include interaction-state.apply-active-ionic('s');
+  --color: var(--kirby-theme-color-content-raised);
+  --color-hover: var(--kirby-theme-color-content-raised-hover);
+  --color-focused: var(--kirby-theme-color-content-raised-hover);
+  --background: var(--kirby-theme-color-fill-raised);
+  --background-hover: var(--kirby-theme-color-fill-raised-hover);
+  --background-hover-opacity: 1;
+  --background-focused: var(--kirby-theme-color-fill-raised-hover);
+  --background-focused-opacity: 1;
+  --icon-font-size: 24px;
 
-  // Wrap declarations to avoid mixing with nested rules.
-  // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-  /* stylelint-disable no-duplicate-selectors */
-  & {
-    --color: var(--kirby-black);
-    --background: var(--kirby-white);
-    --icon-font-size: 24px;
+  height: $toolbar-button-size;
+  width: $toolbar-button-size;
 
-    height: $toolbar-button-size;
-    width: $toolbar-button-size;
+  // In iOS mode Ionic dims the whole button on hover (:host(:hover){opacity:.6}) and
+  // on press (:host(.ion-activated) .button-native{opacity:.4}). Force opacity to 1 so
+  // our token-based hover/active styling is shown at full strength instead.
+  opacity: 1;
 
-    // NOTE: This is a custom implementation of the hover interaction state;
-    // identical to FabSheet's ion-fab-button & SegmentedControlComponent's
-    // ion-segment-button.
-    opacity: 1; // required for interaction states to work
+  &:active,
+  &.ion-activated {
+    --background: var(--kirby-theme-color-fill-raised-active);
+    --color: var(--kirby-theme-color-content-raised-active);
   }
-
-  /* stylelint-enable no-duplicate-selectors */
 
   // Properly center back-icon
   &::part(icon) {
@@ -210,21 +207,28 @@ ion-back-button {
   }
 
   &::part(native) {
-    opacity: 1; // required for interaction states to work
+    opacity: 1; // counteract iOS ion-activated dimming on the native button
+    border: 1px solid var(--kirby-theme-color-border-raised-quiet);
     border-radius: var(--kirby-border-radius-pill);
-    overflow: hidden; // required for border radius to work
+    overflow: hidden; // required for border radius to work (iOS sets overflow: visible)
+  }
+
+  // Ionic has no border-color state variable, so drive the border manually.
+  @include utils.hover {
+    &::part(native) {
+      border-color: var(--kirby-theme-color-border-raised-quiet-hover);
+    }
+  }
+
+  &:active::part(native),
+  &.ion-activated::part(native) {
+    border-color: var(--kirby-theme-color-border-raised-quiet-active);
   }
 
   &:focus-visible::part(native) {
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-inset);
   }
-
-  &::part(native)::after {
-    transition: interaction-state.transition();
-  }
-
-  // end NOTE
 }
 
 /*
@@ -281,8 +285,8 @@ ion-content {
     calc(var(--kirby-spacing-s) + var(--ion-safe-area-left))
   );
   --padding-end: var(--page-content-padding-end, var(--kirby-spacing-s));
-  --background: var(--kirby-background-color);
-  --color: var(--kirby-black);
+  --background: var(--kirby-theme-color-fill-base);
+  --color: var(--kirby-theme-color-content-base);
 
   @include utils.media('>=medium') {
     --padding-start: var(--page-content-padding-start, var(--kirby-spacing-xxl));

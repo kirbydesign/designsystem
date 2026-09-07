@@ -1,16 +1,9 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 
-$form-field-input-font-family: var(--kirby-font-family);
-$form-field-input-line-height: var(--kirby-line-height-n);
-$form-field-input-padding: var(--kirby-spacing-s);
+$form-field-input-padding: calc(
+  var(--kirby-spacing-s) - 1px
+); // subtract border width from padding to maintain overall height
 $form-field-label-height: 24px;
-
-:host(.error) {
-  border: 1px solid var(--kirby-danger);
-  padding: calc(
-    #{$form-field-input-padding} - 1px
-  ); // subtract border width from padding to maintain overall height
-}
 
 // Ensures correct position of cloned input when Ionic scrollAssist is enabled
 :host(.cloned-input) {
@@ -38,18 +31,52 @@ $form-field-label-height: 24px;
 }
 
 :host {
-  &:focus-visible {
-    transition: interaction-state.transition();
-    box-shadow: var(--kirby-elevation-2), var(--kirby-focus-ring-md-inset);
+  &:not(:disabled) {
+    @media (hover: hover) {
+      &[data-state='hover'],
+      &:hover {
+        background-color: var(--kirby-theme-color-fill-raised-hover);
+        border-color: var(--kirby-theme-color-border-raised-hover);
+      }
+
+      &:hover::placeholder {
+        color: var(--kirby-theme-color-content-raised-quiet-hover);
+      }
+
+      &[data-state='active'],
+      &:active {
+        background-color: var(--kirby-theme-color-fill-raised);
+        border-color: var(--kirby-theme-color-border-raised-loud);
+      }
+
+      &:active::placeholder {
+        color: var(--kirby-theme-color-content-raised-quiet);
+      }
+
+      &[data-state='focus'],
+      &:focus-visible {
+        transition: interaction-state.transition();
+        box-shadow: var(--kirby-focus-ring-md-combined-inset);
+        border-color: var(--kirby-theme-color-border-focus);
+      }
+
+      // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+      /* stylelint-disable no-duplicate-selectors */
+      & {
+        transition: interaction-state.transition();
+        transition-property: background-color;
+      }
+    }
+    /* stylelint-enable no-duplicate-selectors */
   }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    background-color: var(--kirby-inputs-background-color);
-    color: var(--kirby-inputs-color);
-    border: none;
+    background-color: var(--kirby-theme-color-fill-raised);
+    color: var(--kirby-theme-color-content-raised);
+    border: 1px solid var(--kirby-theme-color-border-raised);
     box-sizing: border-box;
 
     // Do not use `display: block`.
@@ -58,18 +85,17 @@ $form-field-label-height: 24px;
     // The initial value is `display: inline-block` which seems to look fine, so
     // it's not necessary to declare the display property.
 
-    font-family: $form-field-input-font-family;
+    font-family: var(--kirby-font-family);
 
     // `font-size` should be declared in `em` units but to simplify the solution
     // to https://github.com/kirbydesign/designsystem/issues/2301 we're using `rem`.
     // Must be fixed by https://github.com/kirbydesign/designsystem/issues/2313
     font-size: 1rem;
-    line-height: $form-field-input-line-height;
+    line-height: var(--kirby-line-height-n);
     outline: none;
     margin: 0;
     appearance: none;
     border-radius: var(--kirby-border-radius-n);
-    box-shadow: var(--kirby-inputs-elevation);
     padding: $form-field-input-padding;
     width: 100%;
   }
@@ -77,20 +103,27 @@ $form-field-label-height: 24px;
 
   &.borderless {
     border-radius: 0;
-    box-shadow: none;
     padding-inline: 0;
     width: auto;
   }
 
   &:disabled {
-    background-color: var(--kirby-light-tint);
-    color: var(--kirby-text-color-semi-dark);
-    box-shadow: none;
+    opacity: 0.4; // TODO(@design-tokens) needs token
   }
 
   &::placeholder {
-    color: var(--kirby-inputs-placeholder-color);
+    color: var(--kirby-theme-color-content-raised-quiet);
   }
+}
+
+// Error styling is suppressed while the field is focused so the focus border + ring win.
+// Text inputs match `:focus-visible` on click as well as keyboard, so this also covers
+// placing the cursor inside the field. Placed after the interaction block above so its
+// danger border wins over hover/active at equal specificity — matching the strategy used
+// by kirby-checkbox and kirby-radio (`:not(:focus-within)`).
+:host(.error):not(:focus-visible) {
+  border-color: var(--kirby-theme-color-border-raised-danger);
+  box-shadow: var(--kirby-theme-error-combined-inset);
 }
 
 // Safari on iOS
@@ -98,7 +131,7 @@ $form-field-label-height: 24px;
   // ::-webkit-date-and-time-value seems to match regardless of feature query
   :host(input[type='date']::-webkit-date-and-time-value) {
     // Ensure consistent height
-    min-height: calc(#{$form-field-input-line-height} * 1em);
+    min-height: calc(var(--kirby-line-height-n) * 1em);
 
     // Left align date input text
     text-align: start;

@@ -1,7 +1,5 @@
 :host {
   display: block;
-  border-top-left-radius: var(--kirby-border-radius-n);
-  border-top-right-radius: var(--kirby-border-radius-n);
   text-align: center;
   padding: 0;
   color: var(--kirby-card-header-color);
@@ -14,22 +12,24 @@
 
   // Flagged card headers
   &.success {
-    --kirby-card-header-background-color: var(--kirby-success-tint);
+    --kirby-card-header-background-color: var(--kirby-theme-color-fill-success-quiet);
+    --kirby-card-header-color: var(--kirby-theme-color-content-success-quiet);
   }
 
   &.warning {
-    --kirby-card-header-background-color: var(--kirby-warning-tint);
+    --kirby-card-header-background-color: var(--kirby-theme-color-fill-warning-quiet);
+    --kirby-card-header-color: var(--kirby-theme-color-content-warning-quiet);
   }
 
   &.danger {
-    --kirby-card-header-background-color: var(--kirby-danger-tint);
+    --kirby-card-header-background-color: var(--kirby-theme-color-fill-danger-quiet);
+    --kirby-card-header-color: var(--kirby-theme-color-content-danger-quiet);
   }
 
   &.info {
-    --kirby-card-header-background-color: var(--kirby-semi-light);
+    --kirby-card-header-background-color: var(--kirby-theme-color-fill-neutral);
+    --kirby-card-header-color: var(--kirby-theme-color-content-neutral);
   }
-
-  --kirby-card-header-color: var(--kirby-black);
 }
 
 .title {

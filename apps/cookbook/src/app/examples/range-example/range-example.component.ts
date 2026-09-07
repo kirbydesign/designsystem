@@ -6,6 +6,7 @@ import { RangeDisabledFormExampleComponent } from './examples/disabled.component
 @Component({
   selector: 'cookbook-range-example',
   templateUrl: './range-example.component.html',
+  styleUrls: ['./range-example.component.scss'],
   imports: [
     RangeDefaultExampleComponent,
     RangeStepExampleComponent,

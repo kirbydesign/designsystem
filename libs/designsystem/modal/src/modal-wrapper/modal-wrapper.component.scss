@@ -58,7 +58,7 @@ ion-header {
     --padding-top: var(--kirby-spacing-xxs);
     --border-width: 0;
     --background: transparent;
-    --color: var(--kirby-modal-color, var(--kirby-black));
+    --color: var(--kirby-modal-color, var(--kirby-theme-color-content-base));
 
     border-bottom: $toolbar-bottom-border-width solid transparent;
     transition: border-color var(--kirby-transition-duration-quick) linear;
@@ -95,12 +95,12 @@ ion-header {
 
 @include utils.media('>=medium') {
   ion-header ion-toolbar {
-    border-bottom-color: var(--kirby-medium);
+    border-bottom-color: var(--kirby-theme-color-border-base-silent);
   }
 }
 
 ion-header.content-scrolled ion-toolbar {
-  border-bottom-color: var(--kirby-medium);
+  border-bottom-color: var(--kirby-theme-color-border-base-silent);
 }
 
 :host-context(ion-modal.no-header-area-border) {
@@ -143,7 +143,7 @@ ion-title {
 
 ion-content {
   --background: transparent;
-  --color: var(--kirby-modal-color, var(--kirby-black));
+  --color: var(--kirby-modal-color, var(--kirby-theme-color-content-base));
   --padding-top: var(--kirby-spacing-m);
   --padding-bottom: calc(var(--kirby-spacing-m) + var(--kirby-modal-safe-area-bottom));
   --padding-start: var(--kirby-spacing-s);

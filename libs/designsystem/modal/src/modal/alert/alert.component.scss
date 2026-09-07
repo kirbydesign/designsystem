@@ -9,6 +9,8 @@ article {
   @include utils.media('<=xsmall') {
     padding: var(--kirby-spacing-xxs);
   }
+
+  color: var(--kirby-theme-color-content-base);
 }
 
 .buttongroup {

@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/themes';
+@use '@kirbydesign/core/src/scss/themes/item-sliding';
 
 $divider-color: var(--kirby-background-color);
 $shadow: var(--kirby-elevation-2);
@@ -27,7 +28,8 @@ $item-height: var(--kirby-spacing-xxxl);
 }
 
 ion-list-header {
-  background-color: var(--kirby-white);
+  background-color: var(--kirby-theme-color-fill-base);
+  color: var(--kirby-theme-color-content-base);
   border-bottom: 1px solid $divider-color;
   padding: 0;
   text-transform: inherit;
@@ -39,10 +41,6 @@ ion-list-header {
 }
 
 ion-item {
-  --background: var(--kirby-white);
-  --background-activated: var(--kirby-white-shade);
-  --background-hover: var(--kirby-background-color);
-  --background-focused: var(--kirby-background-color);
   --inner-border-width: 0;
   --ion-safe-area-right: 0;
   --min-height: #{$item-height};
@@ -70,19 +68,6 @@ ion-item-sliding {
   // Supported list item theme colors. Add more `&.<color-name>` rules here as needed.
   &.light {
     @include themes.apply-light-theme;
-
-    --kirby-item-background: var(--kirby-light);
-    --kirby-item-background-activated: var(--kirby-light-shade);
-    --kirby-item-background-focused: var(--kirby-light-shade);
-    --kirby-item-background-hover: var(--kirby-light-tint);
-
-    ion-item {
-      --background: var(--kirby-light);
-      --color: var(--kirby-light-contrast);
-      --background-activated: var(--kirby-light-shade);
-      --background-focused: var(--kirby-light-shade);
-      --background-hover: var(--kirby-light-tint);
-    }
   }
 }
 

@@ -124,23 +124,17 @@ export class ButtonComponent implements AfterContentInit, OnDestroy, OnInit {
       return;
     }
 
-    const ifTextNode = (node?: ChildNode): ChildNode | undefined => {
-      return node?.nodeType === Node.TEXT_NODE ? node : undefined;
-    };
+    const asTextNode = (node: ChildNode | null): ChildNode | undefined =>
+      node?.nodeType === Node.TEXT_NODE ? node : undefined;
 
-    const textNode = ifTextNode(iconElement.previousSibling) || ifTextNode(iconElement.nextSibling);
-    if (textNode) {
-      const placement = textNode === iconElement.previousSibling ? 'before' : 'after';
-      const textWrapper = this.renderer.createElement('span');
-      const parent = textNode.parentNode;
-      this.renderer.removeChild(textNode.parentNode, textNode);
-      this.renderer.appendChild(textWrapper, textNode);
-      if (placement === 'before') {
-        this.renderer.insertBefore(parent, textWrapper, iconElement);
-      } else if (placement === 'after') {
-        this.renderer.appendChild(parent, textWrapper);
-      }
+    const textNode = asTextNode(iconElement.previousSibling) ?? asTextNode(iconElement.nextSibling);
+    if (!textNode) {
+      return;
     }
+
+    const textWrapper = this.renderer.createElement('span');
+    this.renderer.insertBefore(textNode.parentNode, textWrapper, textNode);
+    this.renderer.appendChild(textWrapper, textNode);
   }
 
   ngAfterContentInit(): void {
@@ -169,8 +163,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy, OnInit {
     }
 
     if (hasText && !this.showIconOnly) {
-      this._isIconLeft =
-        this.elementRef.nativeElement.querySelector('.content-layer').firstChild === iconElement;
+      this._isIconLeft = this.elementRef.nativeElement.firstChild === iconElement;
       this._isIconRight = !this._isIconLeft;
     }
   }

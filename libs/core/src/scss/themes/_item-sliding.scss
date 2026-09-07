@@ -4,62 +4,65 @@
   list. This reduces the amount of duplication.
 
   When the old template driven list is deprecated however - this should
-  just be used directly in item-sliding.component.scss.
+  just be used directly in item-sliding.component.scss, instead of
+  via the `themes` from core package.
  */
 
 ion-item-option {
-  &.primary {
-    background-color: var(--kirby-primary);
-    color: var(--kirby-primary-contrast);
-  }
-
-  &.secondary {
-    background-color: var(--kirby-secondary);
-    color: var(--kirby-secondary-contrast);
-  }
-
-  &.tertiary {
-    background-color: var(--kirby-tertiary);
-    color: var(--kirby-tertiary-contrast);
-  }
-
   &.success {
-    background-color: var(--kirby-success);
-    color: var(--kirby-success-contrast);
+    background-color: var(--kirby-theme-color-fill-success);
+    color: var(--kirby-theme-color-content-success);
+
+    @media (hover: hover) {
+      &[data-state='hover'],
+      &:hover {
+        background-color: var(--kirby-theme-color-fill-success-hover);
+        color: var(--kirby-theme-color-content-success-hover);
+      }
+    }
+
+    &[data-state='active'],
+    &:active {
+      background-color: var(--kirby-theme-color-fill-success-active);
+      color: var(--kirby-theme-color-content-success-active);
+    }
   }
 
   &.warning {
-    background-color: var(--kirby-warning);
-    color: var(--kirby-warning-contrast);
+    background-color: var(--kirby-theme-color-fill-warning);
+    color: var(--kirby-theme-color-content-warning);
+
+    @media (hover: hover) {
+      &[data-state='hover'],
+      &:hover {
+        background-color: var(--kirby-theme-color-fill-warning-hover);
+        color: var(--kirby-theme-color-content-warning-hover);
+      }
+    }
+
+    &[data-state='active'],
+    &:active {
+      background-color: var(--kirby-theme-color-fill-warning-active);
+      color: var(--kirby-theme-color-content-warning-active);
+    }
   }
 
   &.danger {
-    background-color: var(--kirby-danger);
-    color: var(--kirby-danger-contrast);
-  }
+    background-color: var(--kirby-theme-color-fill-danger);
+    color: var(--kirby-theme-color-content-danger);
 
-  &.white-overlay {
-    background-color: var(--kirby-white-overlay);
-    color: var(--kirby-white-overlay-contrast);
-  }
+    @media (hover: hover) {
+      &[data-state='hover'],
+      &:hover {
+        background-color: var(--kirby-theme-color-fill-danger-hover);
+        color: var(--kirby-theme-color-content-danger-hover);
+      }
+    }
 
-  &.light {
-    background-color: var(--kirby-light);
-    color: var(--kirby-light-contrast);
-  }
-
-  &.medium {
-    background-color: var(--kirby-medium);
-    color: var(--kirby-medium-contrast);
-  }
-
-  &.dark {
-    background-color: var(--kirby-dark);
-    color: var(--kirby-dark-contrast);
-  }
-
-  &.dark-overlay {
-    background-color: var(--kirby-dark-overlay);
-    color: var(--kirby-dark-overlay-contrast);
+    &[data-state='active'],
+    &:active {
+      background-color: var(--kirby-theme-color-fill-danger-active);
+      color: var(--kirby-theme-color-content-danger-active);
+    }
   }
 }

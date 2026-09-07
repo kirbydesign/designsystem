@@ -4,21 +4,11 @@ $slide-button-container-width: 256px;
 $slide-button-spacing: 2px;
 $slide-button-width: 52px;
 $slide-button-container-height: $slide-button-width + 2 * $slide-button-spacing;
-$slide-button-container-bg-color: var(--kirby-primary);
-$slider-thumb-bg-color: var(--kirby-white);
-$slide-button-text-color: var(--kirby-primary-contrast);
-$total-slider-thumb-width: $slide-button-width + $slide-button-spacing * 2;
 $slide-button-container-radius: $slide-button-width * 0.5;
+$total-slider-thumb-width: $slide-button-width + $slide-button-spacing * 2;
 $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
 
 @mixin _slider-thumb() {
-  @include interaction-state.apply-hover {
-    background-color: interaction-state.get-state-color('white');
-  }
-  @include interaction-state.apply-active {
-    background-color: interaction-state.get-state-color('white', 'xs');
-  }
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
@@ -26,7 +16,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     transition: interaction-state.transition();
     appearance: none;
     border-radius: var(--kirby-border-radius-circle);
-    background-color: $slider-thumb-bg-color;
+    background-color: var(--kirby-theme-color-fill-raised);
     background-image: url('/assets/kirby/icons/svg/arrow-more.svg');
     background-repeat: no-repeat;
     background-position: center;
@@ -55,8 +45,8 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $slide-button-text-color;
-    background-color: $slide-button-container-bg-color;
+    color: var(--kirby-theme-color-content-brand-loud);
+    background-color: var(--kirby-theme-color-fill-brand-loud);
     height: $slide-button-container-height;
     border-radius: $slide-button-container-radius;
 

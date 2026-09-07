@@ -1,6 +1,7 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 const meta: Meta<ItemSlidingComponent> = {
   component: ItemSlidingComponent,
@@ -42,4 +43,15 @@ export const ItemSliding: Story = {
       <kirby-item>Item Sliding</kirby-item>
     </kirby-item-sliding>`,
   }),
+};
+
+export const ItemSlidingOpened: Story = {
+  ...ItemSliding,
+  play: async ({ canvasElement }) => {
+    const itemSliding = canvasElement.querySelector(
+      'ion-item-sliding'
+    ) as HTMLIonItemSlidingElement;
+    await TestHelper.whenReady(itemSliding);
+    await itemSliding.open('start');
+  },
 };

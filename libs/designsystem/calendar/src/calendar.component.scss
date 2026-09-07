@@ -2,6 +2,7 @@ $month-navigator-width: 80px;
 
 :host {
   font-size: var(--kirby-font-size-n);
+  color: var(--kirby-theme-color-content-base);
 }
 
 table {
@@ -27,7 +28,7 @@ td {
 
 th {
   height: 50px;
-  border-bottom: 1px solid var(--kirby-background-color);
+  border-bottom: 1px solid var(--kirby-theme-color-border-base-quiet);
 }
 
 .header,
@@ -88,6 +89,7 @@ td {
   height: $day-width;
   margin: var(--kirby-spacing-xxxs) 0;
   font-size: var(--kirby-font-size-n);
+  padding-inline: 0;
 
   &:focus {
     // In narrow viewports where buttons sit side-by-side, ensure focus ring is on top of adjacent buttons.
@@ -95,20 +97,10 @@ td {
   }
 }
 
-button[aria-disabled='true'] {
-  // Hardcoded color because we don't want it to be part of a shared color palette
-  color: #b4b4b4;
-}
-
 .day.selectable:not(.current-month, .selected) {
-  color: var(--kirby-text-color-semi-dark);
+  color: var(--kirby-theme-color-content-base-quiet);
 }
 
-.day.today {
-  border: 1px solid var(--kirby-semi-dark);
-}
-
-.day.selected {
-  color: var(--kirby-black-contrast);
-  background-color: var(--kirby-black);
+.day.today:not(.selected, :focus-visible) {
+  border: 1px solid var(--kirby-theme-color-border-base);
 }

@@ -1,28 +1,25 @@
-<div class="content-layer">
-  <div [attr.aria-level]="headingLevel" [attr.role]="headingLevel ? 'heading' : null">
-    <button
-      type="button"
-      class="header"
-      [attr.aria-expanded]="isExpanded"
-      [attr.aria-controls]="_contentId"
-      [id]="_titleId"
-      [disabled]="isDisabled"
-      (click)="_onToggleExpanded($event)"
-    >
-      <span class="state-layer" aria-hidden="true"></span>
-      <div class="title" [class.bold]="isExpanded">{{ getTitle() }}</div>
-      <kirby-icon name="arrow-down"></kirby-icon>
-    </button>
-  </div>
-  <div
-    class="content"
-    role="region"
-    [attr.aria-labelledby]="_titleId"
-    [id]="_contentId"
-    [@isExpanded]="!!isExpanded"
+<div [attr.aria-level]="headingLevel" [attr.role]="headingLevel ? 'heading' : null">
+  <button
+    type="button"
+    class="header"
+    [attr.aria-expanded]="isExpanded"
+    [attr.aria-controls]="_contentId"
+    [id]="_titleId"
+    [disabled]="isDisabled"
+    (click)="_onToggleExpanded($event)"
   >
-    <div class="content-body" [class.padding]="hasPadding">
-      <ng-content></ng-content>
-    </div>
+    <div class="title" [class.bold]="isExpanded">{{ getTitle() }}</div>
+    <kirby-icon name="arrow-down"></kirby-icon>
+  </button>
+</div>
+<div
+  class="content"
+  role="region"
+  [attr.aria-labelledby]="_titleId"
+  [id]="_contentId"
+  [@isExpanded]="!!isExpanded"
+>
+  <div class="content-body" [class.padding]="hasPadding">
+    <ng-content></ng-content>
   </div>
 </div>
