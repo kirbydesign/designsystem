@@ -3,7 +3,7 @@ import { HeaderComponent } from '@kirbydesign/designsystem/header';
 
 const config = {
   selector: 'cookbook-header-example-subtitle-list',
-  template: `<kirby-header [title]="'Title'" [subtitle1]="['Mrs. Lady Like Tiff Tuff Escargoon Tokkori', '&', 'Mr. Chef Kawasaki Tokkori']">
+  template: `<kirby-header [title]="'Title'" [truncateSubtitle]="true" [subtitle1]="['Mrs. Lady Like Tiff Tuff Escargoon Tokkori', '&', 'Mr. Chef Kawasaki Tokkori']">
 </kirby-header>`,
 };
 

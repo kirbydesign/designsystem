@@ -77,7 +77,7 @@
 
 <ng-template #subTitleTemplate let-subtitles>
   @if (!!subtitles) {
-    <div class="subtitle kirby-text-small">
+    <div class="subtitle kirby-text-small" [class.truncate]="truncateSubtitle">
       @for (subtitle of subtitles; track subtitle) {
         <span>{{ subtitle }}</span>
       }
