@@ -236,6 +236,40 @@ describe('HeaderComponent', () => {
     });
   });
 
+  describe('with browser text resize', () => {
+    const originalRootFontSize = document.documentElement.style.fontSize;
+
+    afterEach(() => {
+      document.documentElement.style.fontSize = originalRootFontSize;
+    });
+
+    it('should not scale a long title below body text size', async () => {
+      document.documentElement.style.fontSize = '32px';
+      spectator = createHost(`
+        <div style="width: 200px">
+          <kirby-header
+            title="A long article title that cannot fit within two lines at its original size"
+            [titleMaxLines]="2"
+          >
+            <p class="body-text" *kirbyHeaderCustomSection>Body text</p>
+          </kirby-header>
+        </div>
+      `);
+
+      await TestHelper.waitForResizeObserver();
+      await TestHelper.waitForTimeout();
+
+      const titleFontSize = parseFloat(
+        getComputedStyle(spectator.query<HTMLElement>('.title')).fontSize
+      );
+      const bodyFontSize = parseFloat(
+        getComputedStyle(spectator.query<HTMLElement>('.body-text')).fontSize
+      );
+
+      expect(titleFontSize).toBeGreaterThanOrEqual(bodyFontSize);
+    });
+  });
+
   describe('with avatar', () => {
     beforeEach(() => {
       spectator = createHost(`
