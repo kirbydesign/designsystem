@@ -302,14 +302,9 @@ describe('ProgressCircleComponent', () => {
       spectator = createHost({
         props: { value: 50 },
       });
-      // Make element appear as visible so _shownValue returns actual value
-      spectator.component['hasElementBeenVisible'] = true;
-      spectator.detectComponentChanges();
       //Ensure css transitions run immediately:
-      const circle = spectator.query<SVGCircleElement>('circle.progress');
-      if (circle) {
-        circle.style.transitionDuration = '0ms';
-      }
+      spectator.query<SVGCircleElement>('circle.progress').style.transitionDuration = '0ms';
+      spectator.detectComponentChanges();
     });
 
     it('should render progress stroke with themeColor `success`, when themeColor is not set', () => {
@@ -332,6 +327,9 @@ describe('ProgressCircleComponent', () => {
       const themeColor: ThemeColor = 'warning';
       spectator.setInput('themeColor', themeColor);
       spectator.detectChanges();
+
+      const color = getColor('warning', 'shade');
+      console.log('color', color);
 
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
         stroke: getColor('warning', 'shade'),
