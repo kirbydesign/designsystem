@@ -1,0 +1,42 @@
+{
+  "name": "@kirbydesign/stylelint-plugin",
+  "version": "1.0.0",
+  "description": "Stylelint rules for consumers of the Kirby Design System.",
+  "author": "kirby@bankdata.dk",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kirbydesign/designsystem.git",
+    "directory": "libs/stylelint-plugin"
+  },
+  "homepage": "https://github.com/kirbydesign/designsystem/tree/develop/libs/stylelint-plugin#readme",
+  "bugs": "https://github.com/kirbydesign/designsystem/issues",
+  "keywords": [
+    "stylelint",
+    "stylelint-plugin",
+    "kirby",
+    "design-tokens",
+    "scss"
+  ],
+  "type": "module",
+  "exports": "./index.mjs",
+  "main": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "rules/**/index.mjs",
+    "rules/**/README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "peerDependencies": {
+    "stylelint": "^16.0.0"
+  },
+  "devDependencies": {
+    "postcss-scss": "^4.0.9",
+    "stylelint-test-rule-node": "^0.3.0"
+  }
+}

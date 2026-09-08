@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use 'sass:meta';
 
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
@@ -10,7 +9,7 @@ $button-width: (
   md: 88px,
   lg: 220px,
 ) !default;
-$button-margin: utils.size('xxxs');
+$button-margin: var(--kirby-spacing-xxxs);
 
 @function button-width($key) {
   @return map.get($button-width, $key);
@@ -22,43 +21,43 @@ $button-margin: utils.size('xxxs');
   * interactive elements. The maximum target size we can safely do is the button's
   * minimum width plus its margin on each side
   */
-  $button-xs-icon-only-size: utils.size('m');
-  $button-xs-click-area-size: $button-xs-icon-only-size + $button-margin * 2;
+  $button-xs-icon-only-size: var(--kirby-spacing-m);
+  $button-xs-click-area-size: calc(#{$button-xs-icon-only-size} + #{$button-margin} * 2);
   @include utils.accessible-target-size($width: $button-xs-click-area-size);
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   & {
-    --kirby-icon-font-size: #{utils.icon-font-size('xs')};
+    --kirby-icon-font-size: var(--kirby-icon-font-size-xs);
 
-    font-size: utils.font-size('xs');
+    font-size: var(--kirby-font-size-xs);
 
     // use fixed size unless font-size grows too large, then let button
     // height adjust to font-size (effectively when text is resized to 150% and above)
-    height: max($button-xs-icon-only-size, utils.relative-size('s'));
+    height: max($button-xs-icon-only-size, var(--kirby-relative-size-s));
     min-width: button-width('xs');
   }
 
   &:not(.icon-only) {
-    --kirby-button-padding-left: #{utils.size('xs')};
-    --kirby-button-padding-right: #{utils.size('xs')};
+    --kirby-button-padding-left: var(--kirby-spacing-xs);
+    --kirby-button-padding-right: var(--kirby-spacing-xs);
   }
 
   &.icon-only {
     // use fixed size unless font-size grows too large, then let button
     // height adjust to font-size (effectively when text is resized to 150% and above)
-    width: max($button-xs-icon-only-size, utils.relative-size('s'));
+    width: max($button-xs-icon-only-size, var(--kirby-relative-size-s));
     min-width: unset;
   }
 
   &.icon-left {
-    --kirby-button-padding-left: #{utils.size('xxs')};
-    --kirby-icon-margin-right: #{utils.size('xxxs')};
+    --kirby-button-padding-left: var(--kirby-spacing-xxs);
+    --kirby-icon-margin-right: var(--kirby-spacing-xxxs);
   }
 
   &.icon-right {
-    --kirby-button-padding-right: #{utils.size('xxs')};
-    --kirby-icon-margin-left: #{utils.size('xxxs')};
+    --kirby-button-padding-right: var(--kirby-spacing-xxs);
+    --kirby-icon-margin-left: var(--kirby-spacing-xxxs);
   }
 
   &.icon-left,
@@ -68,28 +67,28 @@ $button-margin: utils.size('xxxs');
 }
 
 @mixin button-sm {
-  --kirby-icon-font-size: #{utils.size('s')};
+  --kirby-icon-font-size: var(--kirby-spacing-s);
 
-  font-size: utils.font-size('xs');
-  height: utils.size('l');
+  font-size: var(--kirby-font-size-xs);
+  height: var(--kirby-spacing-l);
   min-width: button-width('sm');
 
   &:not(.icon-only) {
-    --kirby-button-padding-left: #{utils.size('s')};
-    --kirby-button-padding-right: #{utils.size('s')};
+    --kirby-button-padding-left: var(--kirby-spacing-s);
+    --kirby-button-padding-right: var(--kirby-spacing-s);
   }
 
   &.icon-only {
-    width: utils.size('l');
+    width: var(--kirby-spacing-l);
     min-width: unset;
   }
 
   &.icon-left {
-    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-left: var(--kirby-spacing-xs);
   }
 
   &.icon-right {
-    --kirby-button-padding-right: #{utils.size('xs')};
+    --kirby-button-padding-right: var(--kirby-spacing-xs);
   }
 
   &.icon-left,
@@ -99,39 +98,39 @@ $button-margin: utils.size('xxxs');
 }
 
 @mixin button-lg {
-  font-size: utils.font-size('n');
-  height: utils.size('xxl');
+  font-size: var(--kirby-font-size-n);
+  height: var(--kirby-spacing-xxl);
   min-width: button-width('lg');
 
   &.icon-only {
-    width: utils.size('xxl');
+    width: var(--kirby-spacing-xxl);
     min-width: unset;
   }
 }
 
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
-  --kirby-button-color: #{utils.get-color('black')};
+  --kirby-button-color: var(--kirby-black);
 
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
 }
 
 @mixin button-attentionlevel1 {
-  --kirby-button-background-color: #{utils.get-color('primary')};
-  --kirby-button-color: #{utils.get-color('primary-contrast')};
+  --kirby-button-background-color: var(--kirby-primary);
+  --kirby-button-color: var(--kirby-primary-contrast);
 
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
   &.destructive {
-    --kirby-button-background-color: #{utils.get-color('danger')};
-    --kirby-button-color: #{utils.get-color('danger-contrast')};
+    --kirby-button-background-color: var(--kirby-danger);
+    --kirby-button-color: var(--kirby-danger-contrast);
   }
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: #{utils.get-color('black')};
-  --kirby-button-color: #{utils.get-color('black-contrast')};
+  --kirby-button-background-color: var(--kirby-black);
+  --kirby-button-color: var(--kirby-black-contrast);
 
   @include interaction-state.apply-hover('s', $make-lighter: true);
   @include interaction-state.apply-active('m', $make-lighter: true);
@@ -146,8 +145,8 @@ $button-margin: utils.size('xxxs');
 }
 
 :host {
-  --kirby-button-padding-left: #{utils.size('m')};
-  --kirby-button-padding-right: #{utils.size('m')};
+  --kirby-button-padding-left: var(--kirby-spacing-m);
+  --kirby-button-padding-right: var(--kirby-spacing-m);
 
   flex-shrink: 0;
 
@@ -177,7 +176,7 @@ $button-margin: utils.size('xxxs');
     font-family: var(--kirby-font-family);
     background-color: var(--kirby-button-background-color, initial);
     color: var(--kirby-button-color, inherit);
-    border-radius: utils.border-radius('pill');
+    border-radius: var(--kirby-border-radius-pill);
     box-sizing: border-box; // Ensure border is not added to button height
     display: inline-flex;
     flex-direction: row;
@@ -188,8 +187,8 @@ $button-margin: utils.size('xxxs');
     white-space: nowrap;
 
     // we default to 'md' size.
-    font-size: utils.font-size('s');
-    height: utils.size('xl');
+    font-size: var(--kirby-font-size-s);
+    height: var(--kirby-spacing-xl);
     min-width: button-width('md');
     padding: 0;
     margin: $button-margin;
@@ -206,17 +205,17 @@ $button-margin: utils.size('xxxs');
   }
 
   &.icon-left {
-    --kirby-icon-margin-right: #{utils.size('xxs')};
-    --kirby-button-padding-left: #{utils.size('xs')};
-    --kirby-button-padding-right: #{utils.size('s')};
+    --kirby-icon-margin-right: var(--kirby-spacing-xxs);
+    --kirby-button-padding-left: var(--kirby-spacing-xs);
+    --kirby-button-padding-right: var(--kirby-spacing-s);
 
     padding: 0;
   }
 
   &.icon-right {
-    --kirby-icon-margin-left: #{utils.size('xxs')};
-    --kirby-button-padding-left: #{utils.size('s')};
-    --kirby-button-padding-right: #{utils.size('xs')};
+    --kirby-icon-margin-left: var(--kirby-spacing-xxs);
+    --kirby-button-padding-left: var(--kirby-spacing-s);
+    --kirby-button-padding-right: var(--kirby-spacing-xs);
 
     padding: 0;
   }
@@ -225,7 +224,7 @@ $button-margin: utils.size('xxxs');
     --kirby-button-padding-left: 0;
     --kirby-button-padding-right: 0;
 
-    width: utils.size('xl');
+    width: var(--kirby-spacing-xl);
     padding: 0;
     min-width: unset;
 
@@ -275,12 +274,12 @@ $button-margin: utils.size('xxxs');
 
   &:disabled,
   &[aria-disabled='true'] {
-    color: utils.get-color('semi-dark-shade');
+    color: var(--kirby-semi-dark-shade);
     border-color: transparent;
     pointer-events: none;
 
     &:not(.no-decoration) {
-      background-color: utils.get-color('semi-light');
+      background-color: var(--kirby-semi-light);
     }
   }
 
@@ -292,7 +291,7 @@ $button-margin: utils.size('xxxs');
     min-width: unset;
 
     &:not(:disabled) {
-      box-shadow: utils.get-elevation(8);
+      box-shadow: var(--kirby-elevation-8);
     }
   }
 }
@@ -303,15 +302,15 @@ $button-margin: utils.size('xxxs');
 
 :host-context(.kirby-color-brightness-dark) {
   &.no-decoration {
-    --kirby-button-color: #{utils.get-color('white')};
+    --kirby-button-color: var(--kirby-white);
 
     @include interaction-state.apply-hover('xs', $make-lighter: true);
     @include interaction-state.apply-active('m', $make-lighter: true);
   }
 
   &.attention-level2 {
-    --kirby-button-background-color: #{utils.get-color('white')};
-    --kirby-button-color: #{utils.get-color('white-contrast')};
+    --kirby-button-background-color: var(--kirby-white);
+    --kirby-button-color: var(--kirby-white-contrast);
 
     @include interaction-state.apply-hover;
     @include interaction-state.apply-active('s');
@@ -324,23 +323,27 @@ $button-margin: utils.size('xxxs');
 }
 
 :host-context(kirby-item)[slot='end'] {
-  margin-inline: utils.size('s') 0;
+  margin-inline: var(--kirby-spacing-s) 0;
 }
 
 :host-context(kirby-dropdown) {
   // place arrow-icon in dropdown correctly
   justify-content: space-between;
+
+  .content-layer {
+    min-width: 0;
+  }
 }
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
 :host-context(ion-toolbar ion-buttons.legacy-actions) {
-  font-size: utils.font-size('s');
-  height: utils.size('xl');
+  font-size: var(--kirby-font-size-s);
+  height: var(--kirby-spacing-xl);
 
   &.icon-only {
-    width: utils.size('xl');
+    width: var(--kirby-spacing-xl);
 
     &.no-decoration,
     &.attention-level1,
@@ -377,14 +380,24 @@ $button-margin: utils.size('xxxs');
 /* clean-css ignore:end */
 
 :host-context(kirby-toggle-button) {
-  @each $color-name, $color-value in utils.$notification-colors {
-    &.#{$color-name} {
-      --kirby-button-background-color: #{utils.get-color($color-name)};
-      --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
+  &.success {
+    --kirby-button-background-color: var(--kirby-success);
+    --kirby-button-color: var(--kirby-success-contrast);
+  }
 
-      @include interaction-state.apply-hover;
-      @include interaction-state.apply-active('s');
-    }
+  &.warning {
+    --kirby-button-background-color: var(--kirby-warning);
+    --kirby-button-color: var(--kirby-warning-contrast);
+  }
+
+  &.danger {
+    --kirby-button-background-color: var(--kirby-danger);
+    --kirby-button-color: var(--kirby-danger-contrast);
+  }
+
+  &:is(.success, .warning, .danger) {
+    @include interaction-state.apply-hover;
+    @include interaction-state.apply-active('s');
   }
 }
 

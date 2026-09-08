@@ -1,8 +1,6 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: block;
-  padding: utils.size('s');
+  padding: var(--kirby-spacing-s);
   padding: 0;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
@@ -14,7 +12,7 @@
   transform: translate3d(0, 0, 0);
 
   &.has-padding {
-    padding: utils.size('s');
+    padding: var(--kirby-spacing-s);
   }
 }
 

@@ -25,6 +25,7 @@
   [target]="rootElement"
   [popout]="popout"
   (click)="onPopoverClick()"
+  (mousedown)="$event.preventDefault()"
   (willHide)="onPopoverWillHide()"
 >
   <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">

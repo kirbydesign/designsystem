@@ -107,10 +107,11 @@ describe('ModalWrapperComponent', () => {
         TestHelper.resetTestWindow();
       });
 
-      it('should have correct padding between content & toolbar', () => {
+      it('should have correct padding between content & toolbar', async () => {
         const ionContentToolbarElement: HTMLIonToolbarElement =
           ionContentElement.querySelector('ion-toolbar');
         expect(ionContentToolbarElement).not.toBeUndefined();
+        await TestHelper.whenReady([ionContentElement, ionContentToolbarElement]);
 
         expect(ionContentToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',
@@ -147,11 +148,12 @@ describe('ModalWrapperComponent', () => {
       expect(rootElement.classList).toContain('drawer');
     });
 
-    it('should have correct font size when drawer flavor is used', () => {
+    it('should have correct font size when drawer flavor is used', async () => {
       spectator.component.config.flavor = 'drawer';
       spectator.detectChanges();
       const rootElement: HTMLElement = spectator.element;
       const title = rootElement.querySelector('ion-title');
+      await TestHelper.whenReady(title);
       expect(window.getComputedStyle(title).fontSize).toEqual(DesignTokenHelper.fontSize('n'));
     });
 

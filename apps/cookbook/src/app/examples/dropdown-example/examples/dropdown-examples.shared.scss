@@ -24,7 +24,5 @@ p {
 }
 
 .constrain-width {
-  kirby-dropdown {
-    max-width: fit-content;
-  }
+  align-items: flex-start;
 }
