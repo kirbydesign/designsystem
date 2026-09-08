@@ -4,15 +4,15 @@
 
 All tokens are emitted as CSS custom properties on `:root`. Use them directly in component styles.
 
-| Category      | Pattern                       | Scale                                                                                                                                                                                                                                                                                                                                   |
-| ------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Category      | Pattern                       | Scale                                                                    |
+| ------------- | ----------------------------- | ------------------------------------------------------------------------ |
 | Spacing       | `--kirby-spacing-{key}`       | `xxxxs` `xxxs` `xxs` `xs` `s` `m` `l` `xl` `xxl` `xxxl` `xxxxl` `xxxxxl` |
-| Font size     | `--kirby-font-size-{key}`     | `xxs` `xs` `s` `n` `m` `l` `xl` `xxl` `xxxl` `xxxxl` |
-| Font weight   | `--kirby-font-weight-{key}`   | `light` `normal` `medium` `bold` `black` |
-| Line height   | `--kirby-line-height-{key}`   | `xxs` `xs` `s` `n` `m` `l` `xl` |
-| Border radius | `--kirby-border-radius-{key}` | —                                                                                                                                                                                                                                                                                                                                       |
-| Elevation     | `--kirby-elevation-{key}`     | —                                                                                                                                                                                                                                                                                                                                       |
-| Z-index       | `--kirby-z-index-{key}`       | —                                                                                                                                                                                                                                                                                                                                       |
+| Font size     | `--kirby-font-size-{key}`     | `xxs` `xs` `s` `n` `m` `l` `xl` `xxl` `xxxl` `xxxxl`                     |
+| Font weight   | `--kirby-font-weight-{key}`   | `light` `normal` `medium` `bold` `black`                                 |
+| Line height   | `--kirby-line-height-{key}`   | `xxs` `xs` `s` `n` `m` `l` `xl`                                          |
+| Border radius | `--kirby-border-radius-{key}` | —                                                                        |
+| Elevation     | `--kirby-elevation-{key}`     | —                                                                        |
+| Z-index       | `--kirby-z-index-{key}`       | —                                                                        |
 
 ## SCSS Utilities
 
