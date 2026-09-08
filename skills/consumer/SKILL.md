@@ -13,17 +13,17 @@ Use this skill when helping with UI components, markup, or styling in Angular mi
 - For version-matched source, use `https://github.com/kirbydesign/designsystem/tree/v<kirby-version>/apps/cookbook/src/app/examples/<component>-example` and replace `<kirby-version>` with the consumer application's installed Kirby version when a matching tag exists.
 - Prefer the installed package (`node_modules/@kirbydesign/designsystem/<subpath>`) for the consumer application's version when it differs from the Cookbook release.
 
-## Component Reference
+## Components
 
 Prefer standalone component classes imported from per-component secondary entry points
 (`@kirbydesign/designsystem/<name>`) in new consumer code. Avoid the top-level barrel and
 `KirbyModule`; older Cookbook examples may still contain those patterns.
 
-See [references/components.md](references/components.md) for the full component reference including usage guidance.
+### Modals
 
-## Examples
+Always prefer the declarative `kirby-modal` component for simple template-driven dialogs. Nest its content inside `ng-template` and include a meaningful `kirby-page-title` in the embedded content.
 
-When using Kirby in markup, component code or styling read Cookbook source examples and the Cookbook showcase for guidance.
+Use `ModalController` only when the caller needs imperative control. Use route-based modals for wizard flows and deep-linkable modal content.
 
 ## Styling
 
