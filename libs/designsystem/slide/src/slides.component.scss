@@ -27,7 +27,7 @@ $bullet-inactive-opacity: 0.2;
     /*
       * Since swiperjs v10, custom properties for pagination bullets are scoped to the
       * swiper-container element, but custom pagination is added to the light DOM by swiperjs,
-      * so we style element directly. This is also why we use ::ng-deep.
+      * so we have to style element directly.
       */
     /* stylelint-disable selector-pseudo-element-no-unknown */
     ::ng-deep .swiper-pagination-bullet {
