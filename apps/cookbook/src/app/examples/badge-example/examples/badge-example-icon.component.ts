@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
@@ -26,7 +25,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./badge-example-shared.scss'],
-  imports: [ThemeColorDirective, BadgeComponent, IconComponent],
+  imports: [BadgeComponent, IconComponent],
 })
 export class BadgeExampleIconComponent {
   template: string = config.template;

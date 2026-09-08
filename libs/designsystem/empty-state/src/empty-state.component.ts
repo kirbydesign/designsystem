@@ -12,6 +12,7 @@ import {
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-empty-state',
@@ -19,6 +20,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
   styleUrls: ['./empty-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [IconComponent],
+  hostDirectives: [{ directive: ThemeColorDirective, inputs: ['themeColor'] }],
 })
 export class EmptyStateComponent implements AfterContentInit, OnInit {
   private _title: string;

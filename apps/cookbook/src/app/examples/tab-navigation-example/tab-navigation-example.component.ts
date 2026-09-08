@@ -8,7 +8,6 @@ import {
   TabNavigationComponent,
   TabNavigationItemComponent,
 } from '@kirbydesign/designsystem/tab-navigation';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
@@ -86,7 +85,6 @@ const config = {
   imports: [
     PageComponent,
     TabNavigationComponent,
-    ThemeColorDirective,
     BadgeComponent,
     IconComponent,
     PageStickyContentDirective,

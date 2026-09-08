@@ -8,11 +8,13 @@ import {
   Renderer2,
 } from '@angular/core';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  hostDirectives: [{ directive: ThemeColorDirective, inputs: ['themeColor'] }],
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;

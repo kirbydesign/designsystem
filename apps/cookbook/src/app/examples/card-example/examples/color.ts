@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 const config = {
   selector: 'cookbook-card-example-color',
@@ -27,7 +26,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./card-example.shared.scss'],
-  imports: [CardModule, ThemeColorDirective],
+  imports: [CardModule],
 })
 export class CardExampleColorComponent {
   template: string = config.template;

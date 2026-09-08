@@ -3,7 +3,6 @@ import { moduleMetadata } from '@storybook/angular';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { TabButtonComponent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
@@ -16,13 +15,7 @@ const meta: Meta<TabsComponent> = {
   },
   decorators: [
     moduleMetadata({
-      imports: [
-        TabsComponent,
-        TabButtonComponent,
-        IconComponent,
-        BadgeComponent,
-        ThemeColorDirective,
-      ],
+      imports: [TabsComponent, TabButtonComponent, IconComponent, BadgeComponent],
     }),
   ],
 };

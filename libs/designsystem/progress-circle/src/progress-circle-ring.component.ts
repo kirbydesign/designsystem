@@ -3,19 +3,32 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
+  inject,
   Input,
 } from '@angular/core';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-progress-circle-ring',
   templateUrl: './progress-circle-ring.component.html',
   styleUrls: ['./progress-circle-ring.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [ThemeColorDirective],
 })
 export class ProgressCircleRingComponent implements AfterViewInit {
+  private themeColorDirective = inject(ThemeColorDirective);
+
   @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
-  @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
+  private _themeColor: 'success' | 'warning' | 'danger' = 'success';
+  @Input()
+  get themeColor(): 'success' | 'warning' | 'danger' {
+    return this._themeColor;
+  }
+  set themeColor(value: 'success' | 'warning' | 'danger') {
+    this._themeColor = value;
+    this.themeColorDirective.themeColor = value;
+  }
   @Input() strokeWidth: number;
   @Input() upperBound: number;
 

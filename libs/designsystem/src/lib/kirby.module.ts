@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KIRBY_CONFIG, KirbyConfig } from '@kirbydesign/designsystem/config';
-import { ComponentLoaderDirective, ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { ComponentLoaderDirective } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
@@ -81,7 +81,6 @@ const standaloneComponents = [
   InputComponent,
   AffixDirective,
   DividerComponent,
-  ThemeColorDirective,
   SegmentedControlComponent,
   AlertComponent,
   PopoverComponent,

@@ -1,6 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 const config = {
@@ -35,7 +34,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
-  imports: [AvatarComponent, ThemeColorDirective, IconComponent],
+  imports: [AvatarComponent, IconComponent],
 })
 export class AvatarExampleColorsComponent {
   template: string = config.template;

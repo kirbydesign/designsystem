@@ -3,15 +3,16 @@ import { Directive, HostBinding, Input } from '@angular/core';
 import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 import { ThemeColor } from '@kirbydesign/core';
 
+/**
+ * Applies Kirby theme color classes (and color-brightness classes) to its host element
+ * based on the `themeColor` input.
+ *
+ * This directive is intended to be composed onto components via `hostDirectives` so that
+ * theming works automatically without consumers needing to import the directive. It has no
+ * selector on purpose and can therefore only be used as a host directive.
+ */
 @Directive({
   standalone: true,
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: `kirby-avatar[themeColor],
-             kirby-card[themeColor],
-             kirby-icon[themeColor],
-             kirby-progress-circle-ring[themeColor],
-             kirby-modal-footer[themeColor],
-             kirby-empty-state[themeColor]`,
 })
 export class ThemeColorDirective {
   private _isDefault = true;

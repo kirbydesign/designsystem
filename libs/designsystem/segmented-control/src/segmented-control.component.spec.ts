@@ -7,7 +7,6 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { first } from 'rxjs';
@@ -50,7 +49,7 @@ describe('SegmentedControlComponent', () => {
   describe('used standalone', () => {
     const createHost = createHostFactory({
       component: SegmentedControlComponent,
-      imports: [TestHelper.ionicModuleForTest, ThemeColorDirective],
+      imports: [TestHelper.ionicModuleForTest],
     });
 
     beforeEach(async () => {

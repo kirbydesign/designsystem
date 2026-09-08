@@ -12,7 +12,6 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { config as customSectionConfig } from './custom-section';
 
@@ -58,7 +57,6 @@ const config = {
     ButtonComponent,
     AvatarComponent,
     FlagComponent,
-    ThemeColorDirective,
     BadgeComponent,
     HeaderCustomSectionDirective,
     HeaderActionsDirective,

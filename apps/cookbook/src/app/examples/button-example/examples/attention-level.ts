@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/designsystem';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 
@@ -34,7 +33,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: './attention-level.scss',
-  imports: [CardComponent, ThemeColorDirective, ButtonComponent, DropdownComponent],
+  imports: [CardComponent, ButtonComponent, DropdownComponent],
 })
 export class ButtonExampleAttentionLevelComponent {
   template: string = config.template.split('<fieldset')[0];

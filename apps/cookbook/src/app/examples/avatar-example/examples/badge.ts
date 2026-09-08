@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 
 const config = {
@@ -39,7 +38,7 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./badge.scss'],
-  imports: [AvatarComponent, IconComponent, ThemeColorDirective, BadgeComponent],
+  imports: [AvatarComponent, IconComponent, BadgeComponent],
 })
 export class AvatarExampleBadgeComponent {
   template: string = config.template;
