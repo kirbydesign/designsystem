@@ -88,7 +88,7 @@ $bullet-inactive-opacity: 0.2;
   @include utils.media('<medium') {
     swiper-container::part(container) {
       padding-inline: var(--kirby-spacing-s);
-      margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+      margin-inline: calc(-1 * var(--kirby-spacing-s));
     }
 
     .navigation,
