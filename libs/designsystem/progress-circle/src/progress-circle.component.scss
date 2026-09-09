@@ -1,6 +1,33 @@
 :host {
   display: inline-block;
   position: relative;
+  overflow: hidden;
+  width: var(--kirby-progress-circle-size);
+  height: var(--kirby-progress-circle-size);
+}
+
+:host(.sm) {
+  --kirby-progress-circle-stroke-width: 3px;
+  --kirby-progress-circle-size: clamp(var(--kirby-spacing-xl), 2.5em, var(--kirby-spacing-xxxl));
+}
+
+:host(.md) {
+  --kirby-progress-circle-stroke-width: 4px;
+  --kirby-progress-circle-size: var(--kirby-spacing-xxxl);
+}
+
+:host(.lg) {
+  --kirby-progress-circle-stroke-width: 6px;
+  --kirby-progress-circle-size: calc(var(--kirby-spacing-xxxl) + var(--kirby-spacing-xl));
+}
+
+:host(.sm) .transcluded-content {
+  font-size: var(--kirby-font-size-xs);
+}
+
+:host(.md) .transcluded-content,
+:host(.lg) .transcluded-content {
+  font-size: var(--kirby-font-size-s);
 }
 
 .transcluded-content,
