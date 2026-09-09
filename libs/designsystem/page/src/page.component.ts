@@ -42,9 +42,9 @@ import {
   IonTitle,
   IonToolbar,
   NavController,
+  ScrollDetail,
 } from '@ionic/angular';
 import { Title } from '@angular/platform-browser';
-import type { ScrollDetail } from '@ionic/core';
 import { componentOnReady } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { fromEvent, Observable, Subject } from 'rxjs';
