@@ -32,6 +32,7 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   - [Migration Guides](#migration-guides)
 - [Folder Structure](#folder-structure)
 - [Scripts](#scripts)
+- [Releasing](#releasing)
 - [Contributing](#contributing)
 
 ## Installation
@@ -208,6 +209,12 @@ Use them in your terminal like: `npm run <script>` :
 
 We use [nx][nx] to run common tasks like building, linting and testing projects.
 This is done with `npx nx <target name> <project name>`, e.g. `npx nx lint designsystem` preferrably _from the root of the workspace_ to ensure config paths are resolved correctly.
+
+## Releasing
+
+Packages are published to npm from CI. See the [releasing guide](./RELEASING.md) for how
+releases are cut, and how to publish a dev version of an unreleased change so a consumer
+can try it in a real application.
 
 ## Contributing
 
