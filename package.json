@@ -74,7 +74,7 @@
     "@swc/helpers": "^0.5.11",
     "@types/node": "24.10.13",
     "@types/webpack": "^4.41.7",
-    "@vitest/mocker": "^4.0.14",
+    "@vitest/mocker": "^4.1.11",
     "chromatic": "^11.0.8",
     "copy-webpack-plugin": "^14.0.0",
     "core-js": "^2.6.11",
