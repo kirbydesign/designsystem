@@ -385,8 +385,6 @@ function resolvePackagesToPublish() {
 // Packages are published sequentially: designsystem declares a peer dependency on
 // core, so core must reach the registry first.
 async function main() {
-  // A dev publish rewrites source package.json files in place. That is safe on CI,
-  // where the checkout is discarded, but would silently dirty a developer's tree.
   if (isDevPublish && !isCI) {
     throw new Error(
       'A dev publish rewrites package.json versions in place and may only run on CI.'
@@ -409,7 +407,5 @@ async function main() {
 main().catch((error) => {
   console.error('*** PUBLISH FAILED ***');
   console.error(error);
-  // A failed publish must fail the CI job. Without this the process exits 0 and
-  // the release workflow reports success for a package that never reached npm.
   process.exitCode = 1;
 });
