@@ -43,7 +43,7 @@ const config = {
       }
 
       kirby-card:not(:first-of-type) {
-        margin-top: 12px;
+        margin-top: var(--kirby-spacing-xs);
       }
     `,
   ],

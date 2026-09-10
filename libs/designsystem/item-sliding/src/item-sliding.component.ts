@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, ViewChild } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
-import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
+import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular';
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
 @Component({
