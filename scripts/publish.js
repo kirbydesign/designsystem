@@ -306,6 +306,7 @@ async function publish(distTarget, tarballNamePrefix) {
 
 const args = process.argv.slice(2).map((value) => value.toLowerCase());
 const isDevPublish = args.includes('--dev');
+const unknownOptions = args.filter((value) => value.startsWith('--') && value !== '--dev');
 const packageArgs = args.filter((value) => !value.startsWith('--'));
 
 function publishCore() {
@@ -361,6 +362,10 @@ const publishPipelines = {
 // A release publishes whatever was asked for, defaulting to core and designsystem.
 // A dev publish takes exactly one package and expands it to its publish closure.
 function resolvePackagesToPublish() {
+  if (unknownOptions.length > 0) {
+    throw new Error(`Unknown option "${unknownOptions[0]}". Expected: --dev`);
+  }
+
   if (!isDevPublish) {
     return packageArgs.length === 0
       ? ['core', 'designsystem']
