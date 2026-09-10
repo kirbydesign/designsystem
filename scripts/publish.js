@@ -66,7 +66,7 @@ function npm(args, options) {
         resolve(code);
       } else {
         console.error(options.onFailMessage);
-        reject(code);
+        reject(new Error(`${options.onFailMessage} (npm exited with code ${code})`));
       }
     });
   });
@@ -83,7 +83,7 @@ function cleanDistribution(distTarget) {
 
 function buildPackage(project) {
   return npm(['run', 'build', '--', '-p', project], {
-    onFailMessage: 'Unable to build package (with ng-packagr)',
+    onFailMessage: `Unable to build package "${project}" (with ng-packagr)`,
   });
 }
 
@@ -194,7 +194,9 @@ function publish(distTarget, tarballNamePrefix) {
     // Publish to NPM
     console.log('Running on CI, hence publishing package');
 
-    return npm(['publish', distTarget], { onFailMessage: 'Unable to publish package' });
+    return npm(['publish', distTarget], {
+      onFailMessage: `Unable to publish package from "${distTarget}"`,
+    });
   } else {
     // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating package as a gzipped tar-ball');
@@ -214,48 +216,68 @@ const doPublishDesignsystem = args.length === 0 || args.includes('designsystem')
 const doPublishExtensionsAngular = args.includes('extensions-angular');
 const doPublishStylelintPlugin = args.includes('stylelint-plugin');
 
-if (doPublishCore) {
-  // Publish core
+function publishCore() {
   console.log('--- Publishing core ---');
-  cleanDistribution(distCoreTarget)
+  return cleanDistribution(distCoreTarget)
     .then(() => buildPackage('core'))
     .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
     .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
     .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
-    .then(() => publish(distCoreTarget, 'kirbydesign-core'))
-    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING CORE PACKAGE ***', err));
+    .then(() => publish(distCoreTarget, 'kirbydesign-core'));
 }
 
-if (doPublishDesignsystem) {
-  // Publish designsystem
+function publishDesignsystem() {
   console.log('--- Publishing designsystem ---');
-  cleanDistribution(distDesignsystemTarget)
+  return cleanDistribution(distDesignsystemTarget)
     .then(() => buildPackage('designsystem'))
     .then(() => removeNpmIgnoreNestedPackageJsonRule(distDesignsystemTarget))
     .then(() => writeCoreVersionToPackageJson(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
-    .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'))
-    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING DESIGNSYSTEM ***', err));
+    .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'));
 }
 
-if (doPublishExtensionsAngular) {
-  // Publish extensions-angular
+function publishExtensionsAngular() {
   console.log('--- Publishing extensions-angular ---');
-  cleanDistribution(distExtensionsAngularTarget)
+  return cleanDistribution(distExtensionsAngularTarget)
     .then(() => buildPackage('extensions-angular'))
     .then(() => removeNpmIgnoreNestedPackageJsonRule(distExtensionsAngularTarget))
-    .then(() => publish(distExtensionsAngularTarget, 'kirbydesign-extensions-angular'))
-    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING EXTENSIONS-ANGULAR ***', err));
+    .then(() => publish(distExtensionsAngularTarget, 'kirbydesign-extensions-angular'));
 }
 
-if (doPublishStylelintPlugin) {
+function publishStylelintPlugin() {
   // Publish stylelint-plugin.
   // No build step: the package is plain ESM and its package.json "files" allow-list
   // controls what ships, so we publish the workspace directory directly.
   console.log('--- Publishing stylelint-plugin ---');
-  publish(stylelintPluginLibDir, 'kirbydesign-stylelint-plugin').catch((err) =>
-    console.warn('*** ERROR WHEN PUBLISHING STYLELINT-PLUGIN ***', err)
-  );
+  return publish(stylelintPluginLibDir, 'kirbydesign-stylelint-plugin');
 }
+
+// Packages are published sequentially: designsystem declares a peer dependency on
+// core, so core must reach the registry first.
+async function main() {
+  if (doPublishCore) {
+    await publishCore();
+  }
+
+  if (doPublishDesignsystem) {
+    await publishDesignsystem();
+  }
+
+  if (doPublishExtensionsAngular) {
+    await publishExtensionsAngular();
+  }
+
+  if (doPublishStylelintPlugin) {
+    await publishStylelintPlugin();
+  }
+}
+
+main().catch((error) => {
+  console.error('*** PUBLISH FAILED ***');
+  console.error(error);
+  // A failed publish must fail the CI job. Without this the process exits 0 and
+  // the release workflow reports success for a package that never reached npm.
+  process.exitCode = 1;
+});
