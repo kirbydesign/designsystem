@@ -48,9 +48,6 @@ const distCoreTarget = `${dist}/${coreLibDir}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
 const distExtensionsAngularTarget = `${extensionsAngularLibDir}/${dist}`;
 
-// The source package.json of every publishable package, keyed by the name used on
-// the command line. Versions are read from these files at the point of use, never
-// cached at module load, because a dev publish rewrites them before building.
 const sourcePackageJsonPaths = {
   core: `${coreLibDir}/package.json`,
   designsystem: `${designsystemLibDir}/package.json`,
@@ -70,9 +67,6 @@ function readSourcePackageJson(packageName) {
   return fs.readJsonSync(sourcePackageJsonPaths[packageName]);
 }
 
-// The publish closure of a package: the package itself plus everything it depends
-// on, in publish order. A consumer installing a dev build needs the whole closure,
-// because the peer dependency ranges are pinned to exact dev versions.
 function resolvePublishClosure(packageName) {
   const chain = publishChains.find((candidate) => candidate.includes(packageName));
   return chain.slice(0, chain.indexOf(packageName) + 1);
@@ -117,9 +111,6 @@ function buildPackage(project) {
   });
 }
 
-// designsystem declares `"@kirbydesign/core": "*"` in source; the range that actually
-// ships is decided here. A release pins a caret range, a dev publish pins the exact
-// dev version so the closure installs as a consistent set.
 function writeCoreVersionToPackageJson(distPackageJsonPath) {
   const { version: coreVersion } = readSourcePackageJson('core');
   const range = isDevPublish ? coreVersion : `^${coreVersion}`;
@@ -134,9 +125,6 @@ function writeCoreVersionToPackageJson(distPackageJsonPath) {
   });
 }
 
-// Dev publishes only. extensions-angular ships a static `^11.8.0` range for releases,
-// which cannot resolve to a dev designsystem because prereleases never satisfy a caret
-// range. Pin it to the exact dev version instead.
 function writeDesignsystemVersionToPackageJson(distPackageJsonPath) {
   const { version: designsystemVersion } = readSourcePackageJson('designsystem');
 
@@ -236,8 +224,7 @@ function createTarballPackage(distTarget) {
 }
 
 // Official SemVer 2.0.0 grammar, from the "suggested regular expression" section of
-// https://semver.org. Used instead of the `semver` package, which is not a declared
-// dependency of this repo.
+// https://semver.org.
 const semVerPattern =
   /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
 
@@ -249,10 +236,6 @@ function shortCommitSha() {
   return result.stdout.trim();
 }
 
-// A dev version is the package's current version with the commit appended as a
-// prerelease identifier, e.g. 11.11.0-dev-abc1234. The `dev-` infix is load-bearing:
-// a bare numeric SHA such as 0123456 is a leading-zero numeric identifier and would
-// not be valid SemVer.
 function toDevVersion(version, shortSha) {
   const devVersion = `${version}-dev-${shortSha}`;
   if (!semVerPattern.test(devVersion)) {
@@ -261,11 +244,6 @@ function toDevVersion(version, shortSha) {
   return devVersion;
 }
 
-// Rewrites the version of every package in the closure, in the source package.json,
-// before anything is built. ng-packagr reads the version from source at build time and
-// stylelint-plugin is published straight from its source directory, so this is the only
-// point that reaches all four packaging styles. The edits are never committed; a dev
-// publish is refused outside CI, where the checkout is throwaway.
 function applyDevVersions(packageNames, shortSha) {
   return packageNames.map((packageName) => {
     const packageJsonPath = sourcePackageJsonPaths[packageName];
@@ -280,9 +258,6 @@ function applyDevVersions(packageNames, shortSha) {
   });
 }
 
-// Resolves as true only when the registry positively reports the version. A network
-// failure resolves as false, so we attempt the publish and let it fail loudly rather
-// than silently skipping a package that was never published.
 function isAlreadyPublished(packageSpec) {
   return new Promise((resolve) => {
     const child = cp.spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [
@@ -308,8 +283,6 @@ async function publish(distTarget, tarballNamePrefix) {
 
     const { name, version } = fs.readJsonSync(`${distTarget}/package.json`);
 
-    // Re-running a dev publish for the same commit must converge rather than abort on
-    // the first package that already exists, so a partially completed run can be retried.
     if (isDevPublish && (await isAlreadyPublished(`${name}@${version}`))) {
       console.log(`${name}@${version} is already published, skipping.`);
       return;
