@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { IonIcon } from '@ionic/angular/standalone';
+import { IonIcon } from '@ionic/angular';
 import {
   Illustration,
   illustrations,

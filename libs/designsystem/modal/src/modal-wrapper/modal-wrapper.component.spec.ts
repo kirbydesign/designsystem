@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';

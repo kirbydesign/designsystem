@@ -20,7 +20,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
+import { firstValueFrom, fromEvent, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper, getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
@@ -40,7 +40,7 @@ import {
   IonTitle,
   IonToolbar,
   ScrollDetail,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalConfig, ShowAlertCallback } from './config/modal-config';
@@ -387,7 +387,7 @@ export class ModalWrapperComponent
     // when ionScroll emits.
     this.zone.runOutsideAngular(() => {
       // Always subscribe as ionScroll only emits when scrollEventsEnabled is true
-      this.ionContent.ionScroll
+      fromEvent<CustomEvent<ScrollDetail>>(this.ionContentElement.nativeElement, 'ionScroll')
         .pipe(
           debounceTime(contentScrollDebounceTimeInMS),
           map((event) => event.detail),

@@ -16,7 +16,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { RadioComponent } from '@kirbydesign/designsystem/radio';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
-import { IonItem, IonReorder } from '@ionic/angular/standalone';
+import { IonItem, IonReorder } from '@ionic/angular';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 

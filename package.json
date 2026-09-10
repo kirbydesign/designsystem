@@ -97,7 +97,8 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "wait-on": "^7.2.0"
+    "wait-on": "^7.2.0",
+    "zone.js": "0.16.2"
   },
   "husky": {
     "hooks": {
