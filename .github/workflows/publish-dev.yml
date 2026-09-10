@@ -1,0 +1,43 @@
+name: Publish dev version to npm
+
+# Publishes a package and everything it depends on at <version>-dev-<short SHA>, under
+# the 'dev' dist-tag, so a consumer can verify an unreleased change in a real application.
+#
+# workflow_dispatch is available to anyone with write access, and a dispatched run
+# executes the workflow file as it exists on the selected ref — so an in-workflow actor
+# check would be deletable by the very person it is meant to stop. The admin gate is
+# therefore the 'npm-dev-publish' environment's required reviewers, which are repository
+# settings and cannot be edited from a branch. That environment name is also registered
+# in each package's npm trusted publisher configuration, so a run that drops the
+# 'environment' key to dodge the reviewer produces an OIDC token npm will reject.
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish. Everything it depends on is published with it.'
+        required: true
+        type: choice
+        options:
+          - core
+          - designsystem
+          - extensions-angular
+          - stylelint-plugin
+
+permissions:
+  id-token: write # Required for OIDC (https://docs.github.com/en/actions/concepts/security/openid-connect)
+  contents: read
+
+jobs:
+  publish_dev:
+    name: Publish ${{ inputs.package }} (dev)
+    runs-on: ubuntu-latest
+    # Gates the whole job rather than a later step, so nothing from the dispatched ref
+    # runs before an admin has approved.
+    environment: npm-dev-publish
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+      - name: Build and publish dev version to npm
+        run: npm run publish -- --dev ${{ inputs.package }}
