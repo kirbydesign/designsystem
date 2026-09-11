@@ -1,0 +1,117 @@
+$status-size: var(--kirby-spacing-l);
+$status-margin-end: var(--kirby-spacing-s);
+$line-width: 1px;
+
+:host {
+  display: block;
+
+  // Allows the step indicators to blend into the surrounding surface. Override if placed on a non-default background.
+  --kirby-x-vertical-stepper-background-color: var(--kirby-white);
+}
+
+.title {
+  font-weight: var(--kirby-font-weight-bold);
+  margin-bottom: 0;
+}
+
+.description {
+  margin-bottom: 0;
+  white-space: pre-wrap;
+}
+
+.status {
+  flex: 1 1 calc(#{$status-size} + #{$status-margin-end});
+  height: $status-size;
+  max-width: $status-size;
+  margin-inline-end: $status-margin-end;
+  border-radius: var(--kirby-border-radius-circle);
+  border: solid $line-width var(--kirby-medium);
+  background-color: var(--kirby-x-vertical-stepper-background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > * {
+    display: none;
+  }
+}
+
+ul > li,
+ol > li {
+  margin: 0;
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  color: var(--kirby-text-color-semi-dark);
+
+  .step {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &.has-description {
+      align-items: flex-start;
+
+      .text {
+        margin-top: -6px;
+      }
+    }
+
+    > *:not(.status) {
+      flex: 1;
+    }
+  }
+
+  .step:not(:last-child) {
+    padding-bottom: var(--kirby-spacing-m);
+
+    // Line between the steps
+    &::before {
+      content: '';
+      position: absolute;
+      border-inline-start: $line-width dashed var(--kirby-semi-dark);
+      height: 100%;
+      top: 50%;
+      inset-inline-start: calc(#{$status-size} * 0.5);
+      z-index: -1;
+    }
+
+    &.completed::before {
+      border-inline-start: $line-width solid var(--kirby-black);
+    }
+
+    &.has-description::before {
+      top: 0;
+    }
+  }
+}
+
+.step.completed,
+.step.active {
+  color: var(--kirby-text-color-black);
+}
+
+.step.completed .status {
+  background-color: var(--kirby-x-vertical-stepper-background-color);
+  border-color: var(--kirby-x-vertical-stepper-background-color);
+
+  kirby-icon {
+    display: flex;
+  }
+}
+
+.step.active .status {
+  background-color: var(--kirby-black);
+  border-color: var(--kirby-black);
+
+  &::after {
+    content: '';
+    width: calc(#{$status-size} * 0.2);
+    height: calc(#{$status-size} * 0.2);
+    background-color: var(--kirby-white);
+    border-radius: var(--kirby-border-radius-circle);
+  }
+}

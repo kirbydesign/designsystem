@@ -12,4 +12,7 @@ export interface Translation {
   characters: string;
   outOf: string;
   entered: string;
+  stepCompleted: string;
+  stepInProgress: string;
+  stepPending: string;
 }

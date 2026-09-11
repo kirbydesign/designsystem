@@ -1,0 +1,27 @@
+<ol class="steps">
+  @for (step of stepStates(); track step.title; let i = $index) {
+    <li
+      class="step"
+      [class.completed]="step.completed"
+      [class.active]="step.active"
+      [class.has-description]="step.description"
+      [attr.aria-labelledby]="'step-title-' + i"
+      [attr.aria-describedby]="'step-status-' + i"
+    >
+      <span class="kirby-visually-hidden" [id]="'step-status-' + i">
+        {{ statusLabel(step) }}
+      </span>
+      <div class="status">
+        <kirby-icon name="verify" size="sm"></kirby-icon>
+      </div>
+      <div class="text">
+        <p [id]="'step-title-' + i" class="title kirby-text-normal">
+          {{ step.title }}
+        </p>
+        @if (step.description) {
+          <p class="description kirby-text-xsmall">{{ step.description }}</p>
+        }
+      </div>
+    </li>
+  }
+</ol>

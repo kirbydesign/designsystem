@@ -14,4 +14,7 @@ export const da: Translation = {
   characters: 'Tegn',
   outOf: 'af',
   entered: 'indtastet',
+  stepCompleted: 'Gennemført',
+  stepInProgress: 'I gang',
+  stepPending: 'Afventer',
 };

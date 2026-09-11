@@ -14,4 +14,7 @@ export const de: Translation = {
   characters: 'Zeichen',
   outOf: 'von',
   entered: 'eingegeben',
+  stepCompleted: 'Abgeschlossen',
+  stepInProgress: 'In Bearbeitung',
+  stepPending: 'Ausstehend',
 };
