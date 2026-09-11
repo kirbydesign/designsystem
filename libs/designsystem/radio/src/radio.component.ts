@@ -9,7 +9,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { IonRadio } from '@ionic/angular/standalone';
+import { IonRadio } from '@ionic/angular';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 

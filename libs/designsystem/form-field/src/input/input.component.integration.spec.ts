@@ -5,7 +5,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { IonItem } from '@ionic/angular/standalone';
+import { IonItem } from '@ionic/angular';
 import { InputComponent } from './input.component';
 
 const size = DesignTokenHelper.size;
