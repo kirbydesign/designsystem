@@ -7,7 +7,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { IonItem } from '@ionic/angular/standalone';
+import { IonItem } from '@ionic/angular';
 import { ItemComponent } from './item.component';
 import { LabelComponent } from '.';
 

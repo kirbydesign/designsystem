@@ -1,0 +1,38 @@
+---
+name: consumer
+description: 'Kirby Design System reference for Angular microfrontends. Use when authoring or modifying UI components, markup, or styling with @kirbydesign/designsystem.'
+---
+
+# Kirby Design System - Component Library
+
+Use this skill when helping with UI components, markup, or styling in Angular microfrontends that use the Kirby design system (`@kirbydesign/designsystem`).
+
+## Official Documentation
+
+- Use the [Cookbook showcase](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/showcase) for API details, accessibility guidance, and rendered behavior. Use the [Cookbook source examples](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples) for complete Angular implementations.
+- For version-matched source, use `https://github.com/kirbydesign/designsystem/tree/v<kirby-version>/apps/cookbook/src/app/examples/<component>-example` and replace `<kirby-version>` with the consumer application's installed Kirby version when a matching tag exists.
+- Prefer the installed package (`node_modules/@kirbydesign/designsystem/<subpath>`) for the consumer application's version when it differs from the Cookbook release.
+
+## Components
+
+Prefer standalone component classes imported from per-component secondary entry points
+(`@kirbydesign/designsystem/<name>`) in new consumer code. Avoid the top-level barrel and
+`KirbyModule`; older Cookbook examples may still contain those patterns.
+
+### Modals
+
+Always prefer the declarative `kirby-modal` component for simple template-driven dialogs. Nest its content inside `ng-template` and include a meaningful `kirby-page-title` in the embedded content.
+
+Use `ModalController` only when the caller needs imperative control. Use route-based modals for wizard flows and deep-linkable modal content.
+
+## Styling
+
+See [references/styling.md](references/styling.md) for CSS design tokens, SCSS utilities, and typography classes.
+
+## Anti-patterns
+
+- Importing from `@kirbydesign/designsystem` top-level barrel in new consumer code → use the per-component subpath (e.g. `@kirbydesign/designsystem/button`)
+- Using `KirbyModule` in new consumer code → import individual component classes directly
+- Overriding Kirby CSS custom properties with hardcoded values → use the `--kirby-*` token that maps to the desired value
+- Creating custom icon+text rows without `kirby-item` → use `kirby-item` with a slotted `kirby-icon`
+- Guessing a component's inputs or selectors → check the Cookbook or the installed package under `node_modules/@kirbydesign/designsystem/<subpath>`

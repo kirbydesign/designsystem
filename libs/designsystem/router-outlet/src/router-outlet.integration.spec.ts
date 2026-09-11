@@ -7,7 +7,7 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { createHostFactory, SpectatorHost, SpyObject } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';

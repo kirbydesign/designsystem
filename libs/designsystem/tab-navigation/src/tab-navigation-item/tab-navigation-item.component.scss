@@ -3,8 +3,8 @@
 
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
-$border-color-selected: utils.get-color('dark');
-$maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
+$border-color-selected: var(--kirby-dark);
+$maximum-font-size: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold});
 
 @mixin button-reset {
   background: transparent;
@@ -33,27 +33,27 @@ $maximum-font-size: utils.size('s') * utils.$text-resize-threshold;
   button[role='tab'] {
     @include button-reset;
 
-    color: utils.get-color('black');
+    color: var(--kirby-black);
     box-sizing: border-box; // Ensure border is not added to button height
-    padding: utils.size('s');
-    font-size: min(utils.font-size('n'), $maximum-font-size);
-    line-height: utils.line-height('m');
-    gap: utils.size('xxxs');
+    padding: var(--kirby-spacing-s);
+    font-size: min(var(--kirby-font-size-n), $maximum-font-size);
+    line-height: var(--kirby-line-height-m);
+    gap: var(--kirby-spacing-xxxs);
 
     &:focus,
     &:hover {
-      font-weight: utils.font-weight('bold');
+      font-weight: var(--kirby-font-weight-bold);
     }
 
     &:focus-visible {
       outline: none;
-      border-radius: utils.size('xxxs');
+      border-radius: var(--kirby-spacing-xxxs);
       transition: box-shadow #{interaction-state.$default-transition-duration} linear;
       box-shadow: var(--kirby-focus-ring-sm-inset);
     }
 
     &[aria-selected='true'] {
-      font-weight: utils.font-weight('bold');
+      font-weight: var(--kirby-font-weight-bold);
 
       // Selected divider
       &::before {
@@ -82,7 +82,7 @@ span[data-text] {
   &::before {
     display: block;
     content: attr(data-text);
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
     height: 0;
     overflow: hidden;
     visibility: hidden;

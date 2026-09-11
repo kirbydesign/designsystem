@@ -13,7 +13,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
-import { IonBackdrop, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
+import { IonBackdrop, IonFab, IonFabButton, IonFabList } from '@ionic/angular';
 import { DOCUMENT } from '@angular/common';
 
 const KIRBY_FAB_SHEET_DEPRECATION_WARNING =

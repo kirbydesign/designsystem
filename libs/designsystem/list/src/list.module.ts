@@ -12,7 +12,7 @@ import {
   IonLabel,
   IonList,
   IonListHeader,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListExperimentalComponent } from './list-experimental/list-experimental.component';

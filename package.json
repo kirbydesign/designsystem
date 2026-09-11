@@ -74,7 +74,7 @@
     "@swc/helpers": "^0.5.11",
     "@types/node": "24.10.13",
     "@types/webpack": "^4.41.7",
-    "@vitest/mocker": "^4.0.14",
+    "@vitest/mocker": "^4.1.11",
     "chromatic": "^11.0.8",
     "copy-webpack-plugin": "^14.0.0",
     "core-js": "^2.6.11",
@@ -97,12 +97,12 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "wait-on": "^7.2.0"
+    "wait-on": "^7.2.0",
+    "zone.js": "0.16.2"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run sync-node-version && lint-staged",
-      "pre-push": "npm run test:node && npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
   }

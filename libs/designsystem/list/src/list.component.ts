@@ -18,7 +18,7 @@ import {
 import { ThemeColor } from '@kirbydesign/core';
 
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
-import { IonItemDivider, IonItemGroup, IonList, IonListHeader } from '@ionic/angular/standalone';
+import { IonItemDivider, IonItemGroup, IonList, IonListHeader } from '@ionic/angular';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';

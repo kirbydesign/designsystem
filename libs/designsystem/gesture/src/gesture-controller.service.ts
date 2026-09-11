@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { GestureController as IonicGestureController } from '@ionic/angular/standalone';
+import { GestureController as IonicGestureController } from '@ionic/angular';
 
 import { Gesture, GestureConfig } from './gesture.types';
 

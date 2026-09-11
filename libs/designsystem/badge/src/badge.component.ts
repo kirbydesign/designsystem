@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { IonBadge } from '@ionic/angular/standalone';
+import { IonBadge } from '@ionic/angular';
 
 export type BadgeSize = 'sm' | 'md';
 

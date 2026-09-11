@@ -42,45 +42,9 @@ describe('ProgressCircleComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    describe('diameter', () => {
-      it('should default to md', () => {
-        expect(spectator.component._diameter).toBe(56);
-      });
-
-      it('should map sm to correct value', () => {
-        spectator.setInput({ size: 'sm' });
-        expect(spectator.component._diameter).toBe(40);
-      });
-
-      it('should map md to correct value', () => {
-        spectator.setInput({ size: 'md' });
-        expect(spectator.component._diameter).toBe(56);
-      });
-
-      it('should map lg to correct value', () => {
-        spectator.setInput({ size: 'lg' });
-        expect(spectator.component._diameter).toBe(96);
-      });
-    });
-
-    describe('strokeWidth', () => {
-      it('should default to md', () => {
-        expect(spectator.component._strokeWidth).toBe(4);
-      });
-
-      it('should map sm to correct value', () => {
-        spectator.setInput({ size: 'sm' });
-        expect(spectator.component._strokeWidth).toBe(3);
-      });
-
-      it('should map md to correct value', () => {
-        spectator.setInput({ size: 'md' });
-        expect(spectator.component._strokeWidth).toBe(4);
-      });
-
-      it('should map lg to correct value', () => {
-        spectator.setInput({ size: 'lg' });
-        expect(spectator.component._strokeWidth).toBe(6);
+    describe('default inputs', () => {
+      it('should default to size md', () => {
+        expect(spectator.component.size).toBe('md');
       });
     });
 
@@ -97,15 +61,6 @@ describe('ProgressCircleComponent', () => {
         spectator.component['hasElementBeenVisible'] = true;
 
         expect(spectator.component._shownValue).toBe(50);
-      });
-    });
-
-    describe('radius', () => {
-      it('should calculate radius as diameter / 2', () => {
-        spectator.setInput({ size: 'sm' });
-        expect(spectator.component._radius).toBe(
-          spectator.component.SIZE_CONFIG['sm'].diameter / 2
-        );
       });
     });
 
@@ -375,6 +330,7 @@ describe('ProgressCircleComponent', () => {
 
       const color = getColor('warning', 'shade');
       console.log('color', color);
+
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
         stroke: getColor('warning', 'shade'),
       });

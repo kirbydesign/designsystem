@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { IonSkeletonText } from '@ionic/angular/standalone';
+import { IonSkeletonText } from '@ionic/angular';
 
 @Component({
   selector: 'kirby-x-skeleton-loader',

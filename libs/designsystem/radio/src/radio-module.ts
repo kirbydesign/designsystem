@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
+import { IonRadio, IonRadioGroup } from '@ionic/angular';
 import { RadioGroupComponent } from './radio-group/radio-group.component';
 import { RadioComponent } from './radio.component';
 

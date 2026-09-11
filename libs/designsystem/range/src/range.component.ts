@@ -14,7 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IonRange } from '@ionic/angular/standalone';
+import { IonRange } from '@ionic/angular';
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
 
 @Component({
