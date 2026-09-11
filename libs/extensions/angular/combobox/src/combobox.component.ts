@@ -40,8 +40,9 @@ import {
   CdkFixedSizeVirtualScroll,
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
+  ExtendedScrollToOptions,
 } from '@angular/cdk/scrolling';
-import { OpenState } from './combobox.types';
+import { GroupDefinition, GroupItem, GroupSettings, OpenState } from './combobox.types';
 
 @Component({
   selector: 'kirby-x-combobox',
@@ -167,12 +168,36 @@ export class ComboboxComponent
   @Input()
   public itemHeight: number = 44;
 
+  private getHeightOfItem(item: unknown): number {
+    if (item instanceof GroupItem) {
+      return ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
+    }
+    return this.itemHeight;
+  }
+
+  private getScrollOffsetForIndex(index: number): number {
+    return this.searchItems
+      .slice(0, index)
+      .reduce((offset, item) => (offset as number) + this.getHeightOfItem(item), 0) as number;
+  }
+
   protected get dropdownMaxHeight(): number {
     return 8 * ComboboxComponent.HEIGHT_OF_STANDARD_ITEM;
   }
 
   protected get dropdownMinHeight(): number {
     return this.itemHeight;
+  }
+
+  /**
+   * Average height per item for CDK virtual scroll's [itemSize].
+   * CDK calculates the spacer height as itemSize × itemCount. Using the true average ensures
+   * the spacer equals the actual content height, preventing phantom scroll space at the bottom.
+   */
+  protected get effectiveItemSize(): number {
+    const count = this.searchItems?.length ?? 0;
+    if (count === 0 || !this._groupSettings?.length) return this.itemHeight;
+    return this.getScrollOffsetForIndex(count) / count;
   }
 
   protected get viewportHeight(): number {
@@ -182,10 +207,8 @@ export class ComboboxComponent
       return this.dropdownMinHeight;
     }
 
-    return Math.min(
-      this.dropdownMaxHeight,
-      Math.max(this.dropdownMinHeight, itemCount * this.itemHeight)
-    );
+    const heightOfItems = this.getScrollOffsetForIndex(itemCount);
+    return Math.min(this.dropdownMaxHeight, Math.max(this.dropdownMinHeight, heightOfItems));
   }
 
   private isTypeString(item: unknown): boolean {
@@ -225,6 +248,24 @@ export class ComboboxComponent
     return '';
   }
 
+  private _groupSettings: GroupSettings = [];
+
+  /**
+   * Ordered list of group definitions. Each definition supplies an `id`,
+   * a `displayName`, and a `condition` predicate. Groups are rendered in
+   * array order. Items matching no group are appended ungrouped at the end
+   * without a header row.
+   */
+  @Input()
+  public set groupSettings(settings: GroupSettings) {
+    this._groupSettings = settings ?? [];
+    this.searchItems = this.groupSearchResultItems(this._items);
+  }
+
+  public get groupSettings(): GroupSettings {
+    return this._groupSettings;
+  }
+
   /**
    * A function that takes a search term and the list of items, and returns a filtered list of items to display in the dropdown.
    */
@@ -244,7 +285,8 @@ export class ComboboxComponent
 
     // only set the focused item of the search result, if the input has value
     if (this.textInput?.nativeElement?.value) {
-      this.focusedItem = this._searchItems[0];
+      // Skip group sentinels when picking the first focusable item
+      this.focusedItem = this._searchItems.find((i) => !(i instanceof GroupItem));
       this._virtualScrollViewport?.scrollToIndex(0);
     }
   }
@@ -262,7 +304,7 @@ export class ComboboxComponent
   @Input()
   public set items(value: unknown[]) {
     this._items = value;
-    this.searchItems = this._items;
+    this.searchItems = this.groupSearchResultItems(this._items);
   }
 
   private _selectedItem: unknown = undefined;
@@ -304,10 +346,6 @@ export class ComboboxComponent
     this._focusedItem = item;
   }
 
-  private getIndexOfItem(item: unknown): number {
-    return this.searchItems.indexOf(item);
-  }
-
   private getKirbyElement(item: unknown | undefined): ElementRef<HTMLElement> | undefined {
     const kirbyItems = this.getKirbyItems();
     if (!kirbyItems || !item) {
@@ -319,9 +357,15 @@ export class ComboboxComponent
   }
 
   private setAriaPosinsetOnElement(item: unknown) {
+    // Group sentinels are not interactive — skip them
+    if (item instanceof GroupItem) {
+      return;
+    }
+
     const element = this.getKirbyElement(item);
-    const index = this.getIndexOfItem(item);
-    const setsize = this.searchItems.length;
+    const navigable = this.navigableItems;
+    const index = navigable.indexOf(item);
+    const setsize = navigable.length;
 
     if (!element) {
       return;
@@ -431,6 +475,7 @@ export class ComboboxComponent
 
   @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
+
 
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
   public slottedItems?: QueryList<ElementRef<HTMLElement>>;
@@ -584,7 +629,7 @@ export class ComboboxComponent
     if (this.isOpen) {
       this.state = OpenState.closed;
       this.setInputDisplayValue(this.getItemText(this.selectedItem));
-      this.searchItems = this.items;
+      this.searchItems = this.groupSearchResultItems(this.items);
       this.popover?.hide();
     }
   }
@@ -658,7 +703,7 @@ export class ComboboxComponent
       this.change.emit(this.value);
       this.onChange(this.value);
       this.setInputDisplayValue(this.getItemText(item));
-      this.searchItems = this.items;
+      this.searchItems = this.groupSearchResultItems(this.items);
     }
   }
 
@@ -705,11 +750,50 @@ export class ComboboxComponent
   }
 
   private updateSearchResults(inputValue: string): void {
-    this.searchItems = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
+    const searchResults = inputValue ? this.searchFunction(inputValue, this.items) : this.items;
+    this.searchItems = this.groupSearchResultItems(searchResults);
 
-    if (inputValue && this.searchItems.length === 0) {
+    if (inputValue && this.navigableItems.length === 0) {
       this.announce(this.noSearchResultsText);
     }
+  }
+
+  private groupSearchResultItems(searchResult: unknown[]): unknown[] {
+    if (!this._groupSettings || this._groupSettings.length === 0) {
+      return searchResult;
+    }
+
+    // Bucket items into their first matching group; collect unmatched separately
+    const buckets = new Map<string, unknown[]>(
+      this._groupSettings.map((g: GroupDefinition) => [g.id, []])
+    );
+
+    for (const item of searchResult) {
+      const def = this._groupSettings.find((g: GroupDefinition) => g.condition(item));
+      if (def) {
+        buckets.get(def.id)?.push(item);
+      }
+    }
+
+    // Build flat interleaved list in definition order, skip empty groups
+    const result: unknown[] = [];
+    for (const def of this._groupSettings) {
+      const items = buckets.get(def.id) ?? [];
+      if (items.length === 0) continue;
+      result.push(new GroupItem(def.id, def.displayName));
+      result.push(...items);
+    }
+    return result;
+  }
+
+  /** Returns only the data items from searchItems, excluding group-header sentinels. */
+  protected get navigableItems(): unknown[] {
+    return this._searchItems.filter((i) => !(i instanceof GroupItem));
+  }
+
+  /** Type-guard used in the template to distinguish group sentinels from data items. */
+  protected isGroupItem(item: unknown): item is GroupItem {
+    return item instanceof GroupItem;
   }
 
   protected onPopoverWillHide() {
@@ -846,18 +930,18 @@ export class ComboboxComponent
   }
 
   private shiftFocusIndex(numberOfItems: number) {
-    // Handle up/down navigation when open
-    const currentIndex = this.searchItems.indexOf(this.focusedItem);
+    const navigable = this.navigableItems;
+    const currentIndex = navigable.indexOf(this.focusedItem);
     let newIndex;
 
     if (numberOfItems > 0) {
-      newIndex = Math.min(this.searchItems.length - 1, currentIndex + numberOfItems);
+      newIndex = Math.min(navigable.length - 1, currentIndex + numberOfItems);
     } else {
       newIndex = Math.max(0, currentIndex + numberOfItems);
     }
 
     if (newIndex !== currentIndex) {
-      this.focusedItem = this.searchItems[newIndex];
+      this.focusedItem = navigable[newIndex];
     }
     this.scrollFocusedItemIntoViewWhileNavigating();
   }
@@ -886,14 +970,16 @@ export class ComboboxComponent
   }
 
   private setFocusOnLastItem(): void {
-    if (this.searchItems.length > 0) {
-      this.focusedItem = this.searchItems[this.searchItems.length - 1];
+    const navigable = this.navigableItems;
+    if (navigable.length > 0) {
+      this.focusedItem = navigable[navigable.length - 1];
     }
   }
 
   private setFocusOnFirstItem(): void {
-    if (this.searchItems.length > 0) {
-      this.focusedItem = this.searchItems[0];
+    const navigable = this.navigableItems;
+    if (navigable.length > 0) {
+      this.focusedItem = navigable[0];
     }
   }
 
@@ -934,23 +1020,35 @@ export class ComboboxComponent
       return;
     }
 
+    // Use the full flat array (including sentinels) for scroll-offset calculation
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
     if (focusedIndex === -1) return;
 
-    const itemTop = focusedIndex * this.itemHeight;
+    const itemTop = this.getScrollOffsetForIndex(focusedIndex);
     const itemBottom = itemTop + this.itemHeight;
     const scrollOffset = this._virtualScrollViewport.measureScrollOffset();
     const viewportSize = this._virtualScrollViewport.getViewportSize();
+    const stickyHeaderHeight = this.getStickyGroupHeaderHeightAbove(focusedIndex);
 
-    if (itemTop < scrollOffset) {
-      // Item is above the visible area — scroll up so item appears at the top.
-      this._virtualScrollViewport.scrollToOffset(itemTop);
+    if (itemTop - stickyHeaderHeight < scrollOffset) {
+      // Item is above the visible area (accounting for sticky group header) — scroll up
+      // so item appears just below the sticky header.
+      this._virtualScrollViewport.scrollToOffset(itemTop - stickyHeaderHeight);
     } else if (itemBottom > scrollOffset + viewportSize) {
       // Item is below the visible area — scroll down so item appears at the bottom.
       this._virtualScrollViewport.scrollToOffset(itemBottom - viewportSize);
     }
+  }
 
-    this._virtualScrollViewport.checkViewportSize();
+  /** Returns the height of the nearest group header above the item at the given index. */
+  private getStickyGroupHeaderHeightAbove(itemIndex: number): number {
+    for (let i = itemIndex - 1; i >= 0; i--) {
+      const item = this.searchItems[i];
+      if (this.isGroupItem(item)) {
+        return this.getHeightOfItem(item);
+      }
+    }
+    return 0;
   }
 
   private getKirbyItems(): QueryList<ElementRef<HTMLElement>> | undefined {
@@ -961,10 +1059,12 @@ export class ComboboxComponent
 
   private scrollToIndexIntoViewWhenOpeningPopup(): void {
     const focusedIndex = this.searchItems.indexOf(this.focusedItem);
+    if (focusedIndex === -1) return;
 
-    this._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
+    const stickyHeaderHeight = this.getStickyGroupHeaderHeightAbove(focusedIndex);
+    const offset = Math.max(0, this.getScrollOffsetForIndex(focusedIndex) - stickyHeaderHeight);
+
     this._virtualScrollViewport?.checkViewportSize();
-
-    this._virtualScrollViewport?.scrollToIndex(focusedIndex);
+    this._virtualScrollViewport?.scrollToOffset(offset);
   }
 }
