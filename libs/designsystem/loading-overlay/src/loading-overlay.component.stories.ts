@@ -19,16 +19,31 @@ export const LoadingOverlay: Story = {
 export const ScrollableContent: Story = {
   render: () => ({
     template: `
-      <kirby-loading-overlay [isLoading]="true" [showBackdrop]="true" [hideContent]="false">
-        <div style="height: 800px; overflow-y: auto;">
+      <div style="display: flex; gap: 16px;">
+        <kirby-loading-overlay
+          style="flex: 1; display: block; height: 200px; overflow-y: auto;"
+          [isLoading]="true"
+          [showBackdrop]="true"
+          [hideContent]="false"
+        >
           @for (item of items; track item) {
             <p>Scrollable content line {{ item }}</p>
           }
-        </div>
-      </kirby-loading-overlay>
+        </kirby-loading-overlay>
+        <kirby-loading-overlay
+          style="flex: 1; display: block; height: 200px; overflow-y: auto;"
+          [isLoading]="false"
+          [showBackdrop]="true"
+          [hideContent]="false"
+        >
+          @for (item of items; track item) {
+            <p>Scrollable content line {{ item }}</p>
+          }
+        </kirby-loading-overlay>
+      </div>
     `,
     props: {
-      items: Array.from({ length: 50 }, (_, index) => index + 1),
+      items: Array.from({ length: 20 }, (_, index) => index + 1),
     },
   }),
 };
