@@ -390,12 +390,6 @@ function resolvePackagesToPublish() {
 // Packages are published sequentially: designsystem declares a peer dependency on
 // core, so core must reach the registry first.
 async function main() {
-  if (isDevPublish && !isCI) {
-    throw new Error(
-      'A dev publish rewrites package.json versions in place and may only run on CI.'
-    );
-  }
-
   const packagesToPublish = resolvePackagesToPublish();
 
   if (isDevPublish) {
