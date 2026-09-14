@@ -48,6 +48,7 @@ jobs:
           storybookBuildDir: ${{ github.workspace }}/dist/storybook/designsystem
           autoAcceptChanges: "develop"
           exitOnceUploaded: true
+          skip: 'dependabot/**'
 
       - name: Publish Extensions to Chromatic
       # If extensions storybook dist has been built, it means project might have been affected and should be tested
@@ -59,3 +60,4 @@ jobs:
           storybookBuildDir: ${{ github.workspace }}/dist/storybook/extensions/angular
           autoAcceptChanges: "develop"
           exitOnceUploaded: true
+          skip: 'dependabot/**'
