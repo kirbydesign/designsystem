@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 40rem;
+  padding: var(--kirby-spacing-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--kirby-spacing-m);
+}
+
+h1 {
+  margin: 0;
+}

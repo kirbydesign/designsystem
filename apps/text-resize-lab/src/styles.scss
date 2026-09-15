@@ -1,0 +1,16 @@
+@use '@kirbydesign/core/src/scss/global-styles';
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: var(--kirby-background-color);
+  color: var(--kirby-black);
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

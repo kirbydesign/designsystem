@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": ["node"],
+    "moduleResolution": "bundler",
+    "module": "esnext"
+  },
+  "files": ["src/main.ts"],
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.spec.ts"]
+}
