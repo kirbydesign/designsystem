@@ -98,8 +98,12 @@ exists is skipped, so a run that failed part way through can simply be re-run.
 ## Running the publish script locally
 
 `npm run publish -- <package>` off CI does **not** publish. It builds and writes a tarball
-to `dist/`, which you can install with `npm install <path to tarball>`. Dev publishes are
-refused entirely outside CI, because they rewrite `libs/*/package.json` in place.
+to `dist/`, which you can install with `npm install <path to tarball>`.
+
+`npm run publish -- --dev <package>` off CI does not publish either, but it **does** rewrite
+the version in the source `package.json` of every package in the closure before building,
+and leaves those files modified. Check `git status` afterwards, or run it only in a tree you
+are willing to have modified.
 
 ## Adding a new publishable package
 
