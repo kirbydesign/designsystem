@@ -6,9 +6,18 @@ updates:
       interval: weekly
     groups:
       angular:
+        applies-to: version-updates
         update-types:
           - minor
           - patch
+        patterns:
+          - '@angular*'
+          - '@typescript-eslint/*'
+          - typescript
+          - '@nx/*'
+          - nx
+      angular-security:
+        applies-to: security-updates
         patterns:
           - '@angular*'
           - '@typescript-eslint/*'
