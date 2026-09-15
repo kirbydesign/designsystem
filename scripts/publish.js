@@ -247,8 +247,6 @@ function applyDevVersions(packageNames, shortSha) {
   });
 }
 
-// A consumer must install the whole closure: each package's peer dependency range is
-// pinned to the exact dev version of the package below it.
 function reportDevPublish(publishedPackages, shortSha) {
   const installCommand = `npm install ${publishedPackages
     .map(({ name, version }) => `${name}@${version}`)
@@ -274,10 +272,6 @@ function reportDevPublish(publishedPackages, shortSha) {
     '```sh',
     installCommand,
     '```',
-    '',
-    'Dev versions are permanent, unsupported and never removed. Do not reference one from',
-    'a production dependency.',
-    '',
   ].join('\n');
 
   fs.appendFileSync(summaryPath, summary);
