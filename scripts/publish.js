@@ -19,9 +19,10 @@
 // NOTICE: This script automatically determines if running on CI, or a local developer machine.
 //
 // Passing "--dev <package>" performs a dev publish instead of a release publish: the
-// package and everything it depends on are published at <version>-dev-<short SHA> under
-// the "dev" dist-tag, with peer dependency ranges pinned to those exact versions. Dev
-// publishes rewrite source package.json files and so may only run on CI.
+// package and everything that depends on it are published at <version>-dev-<short SHA>
+// under the "dev" dist-tag, with peer dependency ranges pinned to those exact versions.
+// A dev publish rewrites the source package.json of every package it publishes, so run
+// it locally only in a tree you are willing to have modified.
 
 import cp from 'child_process';
 import fs from 'fs-extra';
