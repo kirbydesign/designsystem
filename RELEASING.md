@@ -56,20 +56,27 @@ When it finishes, the run summary lists every published version and the exact
 
 ### What gets published
 
-A dev publish publishes the chosen package **and everything it depends on**, because these
-are peer dependencies and npm enforces them:
+A dev publish publishes the chosen package **and everything that depends on it**:
 
 | Chosen               | Published                                    |
 | -------------------- | -------------------------------------------- |
-| `core`               | `core`                                       |
-| `designsystem`       | `core`, `designsystem`                       |
-| `extensions-angular` | `core`, `designsystem`, `extensions-angular` |
+| `core`               | `core`, `designsystem`, `extensions-angular` |
+| `designsystem`       | `designsystem`, `extensions-angular`         |
+| `extensions-angular` | `extensions-angular`                         |
 | `stylelint-plugin`   | `stylelint-plugin`                           |
 
-Inter-package peer dependency ranges are rewritten to the exact dev versions. This is not
-cosmetic: a prerelease never satisfies a caret range, so a dev `designsystem` still asking
-for `"@kirbydesign/core": "^0.0.92"` would make the consumer's `npm install` fail with
-`ERESOLVE`. Install the whole set the run summary lists, not just one package.
+That direction is forced by how npm resolves peer dependencies. A prerelease satisfies no
+range, so a released `designsystem` asking for `"@kirbydesign/core": "^0.0.92"` rejects
+`0.0.92-dev-abc1234` and the consumer's `npm install` fails with `ERESOLVE`. Publishing a
+dev `core` on its own would therefore be unusable — every package above it has to be
+republished with its range repointed at the dev version.
+
+The reverse causes no trouble: a dev package pins its dependencies to whatever version
+they are at. A dev `designsystem` pins `core@0.0.92`, the released version, which resolves
+normally. So nothing below the chosen package needs republishing.
+
+Install the set the run summary lists. Installing the topmost package you actually use is
+usually enough, since npm installs its pinned peers automatically.
 
 ### Versions and tags
 

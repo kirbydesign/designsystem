@@ -9,8 +9,8 @@ to a specific workflow **filename** and authenticates `npm publish` and `npm sta
 
 ## Decision
 
-A dev publish is a manually dispatched publication of a package and its dependency closure,
-at `<version>-dev-<short SHA>`, under the `dev` dist-tag.
+A dev publish is a manually dispatched publication of a package and every package that
+depends on it, at `<version>-dev-<short SHA>`, under the `dev` dist-tag.
 
 - It lives in its own workflow, `publish-dev.yml`, which calls the same `scripts/publish.js`
   as the release workflows.
@@ -39,6 +39,13 @@ two halves close each other's gap.
 and a leading-zero numeric identifier is not valid SemVer, so roughly one publish in 270
 would fail confusingly. The `dev-` infix makes the version valid for every possible SHA.
 
+**Publishing the chosen package and its dependencies** rather than its dependents — so
+`core` would publish only `core`, and `extensions-angular` would publish all three.
+Rejected, and worth recording because it is the intuitive reading of "publish closure" and
+was our first attempt. It gets the direction exactly backwards: it publishes the most for a
+leaf package that needs nothing republished, and the least for `core`, where a lone dev
+`core` is uninstallable because every released package above it rejects a prerelease.
+
 **Per-branch or per-SHA dist-tags.** Rejected: dist-tags accumulate permanently and cannot
 be removed under OIDC. `@kirbydesign/core` already carries six dead dist-tags from earlier
 ad-hoc experiments. A single reused `dev` tag adds exactly one, forever.
@@ -55,5 +62,8 @@ Dev versions accumulate permanently and there is no cleanup job — not by overs
 because OIDC cannot authenticate `unpublish`, `deprecate`, or `dist-tag rm`. Reintroducing a
 long-lived token to enable cleanup would defeat the reason for using trusted publishing.
 
-Because peer ranges within a closure are pinned to exact dev versions, a consumer must
-install the whole closure rather than a single package.
+Because peer ranges are pinned to exact versions, a dev publish of a low-level package is
+expensive: a change to `core` republishes `designsystem` and `extensions-angular` too, even
+when neither changed. That is unavoidable rather than chosen — a released dependent cannot
+accept a dev dependency, so the only way to make a dev `core` installable is to republish
+everything above it.

@@ -26,6 +26,6 @@ _Avoid_: prerelease, beta, RC — an `-rc.N` version means a release candidate, 
 different thing.
 
 **Publish closure**:
-The package being published together with everything it depends on, in publish order. A
-consumer must install the whole closure, because the peer dependency ranges within it are
-pinned to exact versions.
+The package being published together with everything that depends on it, in publish order.
+Dependents are included because a released package cannot accept a dev dependency, so each
+one must be republished with its range repointed at the dev version.
