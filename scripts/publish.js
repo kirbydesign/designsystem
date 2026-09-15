@@ -247,6 +247,36 @@ function applyDevVersions(packageNames, shortSha) {
   });
 }
 
+function reportDevPublish(publishedPackages, shortSha) {
+  const installCommand = `npm install ${publishedPackages
+    .map(({ name, version }) => `${name}@${version}`)
+    .join(' ')}`;
+
+  console.log(`--- Dev publish of ${shortSha} complete ---`);
+  console.log(installCommand);
+
+  const summaryPath = process.env.GITHUB_STEP_SUMMARY;
+  if (!summaryPath) {
+    return;
+  }
+
+  const summary = [
+    `## Dev publish of \`${shortSha}\``,
+    '',
+    '| Package | Version |',
+    '| --- | --- |',
+    ...publishedPackages.map(({ name, version }) => `| \`${name}\` | \`${version}\` |`),
+    '',
+    'Install the whole set — the peer dependency ranges are pinned to these exact versions:',
+    '',
+    '```sh',
+    installCommand,
+    '```',
+  ].join('\n');
+
+  fs.appendFileSync(summaryPath, summary);
+}
+
 function isAlreadyPublished(packageSpec) {
   return new Promise((resolve) => {
     const child = cp.spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [
@@ -377,15 +407,22 @@ function resolvePackagesToPublish() {
 async function main() {
   const packagesToPublish = resolvePackagesToPublish();
 
-  if (isDevPublish) {
-    const shortSha = shortCommitSha();
-    console.log(`--- Dev publish of [${packagesToPublish.join(', ')}] at ${shortSha} ---`);
-    applyDevVersions(packagesToPublish, shortSha);
+  if (!isDevPublish) {
+    for (const packageName of packagesToPublish) {
+      await publishPipelines[packageName]();
+    }
+    return;
   }
+
+  const shortSha = shortCommitSha();
+  console.log(`--- Dev publish of [${packagesToPublish.join(', ')}] at ${shortSha} ---`);
+  const publishedPackages = applyDevVersions(packagesToPublish, shortSha);
 
   for (const packageName of packagesToPublish) {
     await publishPipelines[packageName]();
   }
+
+  reportDevPublish(publishedPackages, shortSha);
 }
 
 main().catch((error) => {
