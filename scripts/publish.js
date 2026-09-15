@@ -67,9 +67,14 @@ function readSourcePackageJson(packageName) {
   return fs.readJsonSync(sourcePackageJsonPaths[packageName]);
 }
 
+// A dev publish must republish everything that depends on the changed package, not
+// everything it depends on. A released package can never accept a dev dependency,
+// because a prerelease satisfies no range: a released designsystem asking for
+// `@kirbydesign/core: ^0.0.92` rejects `0.0.92-dev-abc1234`. The reverse is fine — a
+// dev package pins its dependencies to whatever version they are at, released or dev.
 function resolvePublishClosure(packageName) {
   const chain = publishChains.find((candidate) => candidate.includes(packageName));
-  return chain.slice(0, chain.indexOf(packageName) + 1);
+  return chain.slice(chain.indexOf(packageName));
 }
 
 function npm(args, options) {
