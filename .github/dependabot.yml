@@ -1,0 +1,42 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      angular:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+        patterns:
+          - '@angular*'
+          - '@typescript-eslint/*'
+          - typescript
+          - '@nx/*'
+          - nx
+      angular-security:
+        applies-to: security-updates
+        patterns:
+          - '@angular*'
+          - '@typescript-eslint/*'
+          - typescript
+          - '@nx/*'
+          - nx
+    ignore:
+      - dependency-name: '@angular*'
+        update-types:
+          - version-update:semver-major
+      - dependency-name: '@typescript-eslint/*'
+        update-types:
+          - version-update:semver-major
+      - dependency-name: '@nx/*'
+        update-types:
+          - version-update:semver-major
+      - dependency-name: nx
+        update-types:
+          - version-update:semver-major
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
