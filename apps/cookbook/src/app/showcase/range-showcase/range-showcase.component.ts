@@ -5,11 +5,14 @@ import { RangeStepExampleComponent } from '../../examples/range-example/examples
 import { RangePinExampleComponent } from '../../examples/range-example/examples/pin.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { RangeDisabledFormExampleComponent } from '../../examples/range-example/examples/disabled.component';
+import { RangeDualKnobsExampleComponent } from '../../examples/range-example/examples/dual-knobs.component';
+import { RangeDualKnobsPinExampleComponent } from '../../examples/range-example/examples/dual-knobs-pin.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+
 @Component({
   selector: 'cookbook-range-showcase',
   templateUrl: './range-showcase.component.html',
@@ -21,6 +24,8 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     RangePinExampleComponent,
     CodeViewerComponent,
     RangeDisabledFormExampleComponent,
+    RangeDualKnobsExampleComponent,
+    RangeDualKnobsPinExampleComponent,
     ApiDescriptionPropertiesComponent,
     ApiDescriptionEventsComponent,
     ImportViewerComponent,
@@ -79,11 +84,18 @@ export class RangeShowcaseComponent {
       defaultValue: '0',
     },
     {
+      name: 'dualKnobs',
+      description:
+        '(Optional) If true, two knobs are rendered — one for the lower bound and one for the upper bound. The value becomes an object with `lower` and `upper` properties.',
+      type: ['boolean'],
+      defaultValue: 'false',
+    },
+    {
       name: 'value',
       description:
-        '(Optional) The value represented by the range component. Should only be used if Angular Forms (Template-driven or ReactiveForm) are not used',
+        '(Optional) The value represented by the range component. In single-knob mode this is a number; in dual-knob mode this is an object with `lower` and `upper` number properties. Should only be used if Angular Forms (Template-driven or ReactiveForm) are not used.',
       defaultValue: 'undefined',
-      type: ['number'],
+      type: ['number', '{ lower: number; upper: number }'],
     },
   ];
 
@@ -92,13 +104,13 @@ export class RangeShowcaseComponent {
       name: 'change',
       description:
         'Emitted when the user modifies the value by releasing the knob or moving the knob with the keyboard',
-      signature: '() => EventEmitter<number>',
+      signature: '() => EventEmitter<number | { lower: number; upper: number }>',
     },
     {
       name: 'move',
       description:
         'Emitted for each distinct change whenever the knob is moved by the user. Unlike the `change` event it fires continuously while the user is dragging the knob.',
-      signature: '() => EventEmitter<number>',
+      signature: '() => EventEmitter<number | { lower: number; upper: number }>',
     },
   ];
 }
