@@ -6,8 +6,28 @@ updates:
       interval: weekly
     groups:
       angular:
+        update-types:
+          - minor
+          - patch
         patterns:
-          - '@angular/*'
-          - '@angular-devkit/*'
-          - '@angular-eslint/*'
-          - '@nx/angular'
+          - '@angular*'
+          - '@typescript-eslint/*'
+          - typescript
+          - '@nx/*'
+          - nx
+    ignore:
+      - dependency-name: '@angular*'
+        update-types:
+          - version-update:semver-major
+      - dependency-name: '@typescript-eslint/*'
+        update-types:
+          - version-update:semver-major
+      - dependency-name: '@nx/*'
+        update-types:
+          - version-update:semver-major
+      - dependency-name: nx
+        update-types:
+          - version-update:semver-major
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
