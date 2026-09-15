@@ -17,12 +17,6 @@
 // 2. Produces a npm package tarball (gzipped) that can be installed using "npm install <path to tarball>"
 //
 // NOTICE: This script automatically determines if running on CI, or a local developer machine.
-//
-// Passing "--dev <package>" performs a dev publish instead of a release publish: the
-// package and everything that depends on it are published at <version>-dev-<short SHA>
-// under the "dev" dist-tag, with peer dependency ranges pinned to those exact versions.
-// A dev publish rewrites the source package.json of every package it publishes, so run
-// it locally only in a tree you are willing to have modified.
 
 import cp from 'child_process';
 import fs from 'fs-extra';
@@ -56,10 +50,6 @@ const sourcePackageJsonPaths = {
   'stylelint-plugin': `${stylelintPluginLibDir}/package.json`,
 };
 
-// Packages published together must be published in this order, and each package
-// implicitly depends on every package before it: designsystem peer-depends on core,
-// extensions-angular peer-depends on designsystem. stylelint-plugin has no
-// @kirbydesign dependencies and so forms a chain of its own.
 const publishChains = [['core', 'designsystem', 'extensions-angular'], ['stylelint-plugin']];
 
 const allPackages = publishChains.flat();
@@ -68,11 +58,6 @@ function readSourcePackageJson(packageName) {
   return fs.readJsonSync(sourcePackageJsonPaths[packageName]);
 }
 
-// A dev publish must republish everything that depends on the changed package, not
-// everything it depends on. A released package can never accept a dev dependency,
-// because a prerelease satisfies no range: a released designsystem asking for
-// `@kirbydesign/core: ^0.0.92` rejects `0.0.92-dev-abc1234`. The reverse is fine — a
-// dev package pins its dependencies to whatever version they are at, released or dev.
 function resolvePublishClosure(packageName) {
   const chain = publishChains.find((candidate) => candidate.includes(packageName));
   return chain.slice(chain.indexOf(packageName));
@@ -229,8 +214,6 @@ function createTarballPackage(distTarget) {
   });
 }
 
-// Official SemVer 2.0.0 grammar, from the "suggested regular expression" section of
-// https://semver.org.
 const semVerPattern =
   /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
 
@@ -365,8 +348,6 @@ const publishPipelines = {
   'stylelint-plugin': publishStylelintPlugin,
 };
 
-// A release publishes whatever was asked for, defaulting to core and designsystem.
-// A dev publish takes exactly one package and expands it to its publish closure.
 function resolvePackagesToPublish() {
   if (unknownOptions.length > 0) {
     throw new Error(`Unknown option "${unknownOptions[0]}". Expected: --dev`);
@@ -393,8 +374,6 @@ function resolvePackagesToPublish() {
   return resolvePublishClosure(packageName);
 }
 
-// Packages are published sequentially: designsystem declares a peer dependency on
-// core, so core must reach the registry first.
 async function main() {
   const packagesToPublish = resolvePackagesToPublish();
 
