@@ -1,0 +1,59 @@
+{
+  "name": "text-resize-lab",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/text-resize-lab/src",
+  "prefix": "lab",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:application",
+      "options": {
+        "outputPath": {
+          "base": "apps/text-resize-lab/www"
+        },
+        "index": "apps/text-resize-lab/src/index.html",
+        "tsConfig": "apps/text-resize-lab/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*.svg",
+            "input": "libs/designsystem/icon/src/icons/svg",
+            "output": "./assets/kirby/icons/svg"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "node_modules/ionicons/dist/ionicons/svg",
+            "output": "./svg"
+          }
+        ],
+        "styles": ["apps/text-resize-lab/src/styles.scss"],
+        "browser": "apps/text-resize-lab/src/main.ts"
+      },
+      "configurations": {
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "namedChunks": true
+        },
+        "production": {
+          "outputHashing": "all"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "buildTarget": "text-resize-lab:build:development",
+        "prebundle": {
+          "exclude": ["@kirbydesign/core"]
+        }
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "text-resize-lab:build:production"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# Angular build output (Capacitor webDir)
+/www
+
+# Capacitor generated native tooling copies
+/ios/App/App/public
+/android/app/src/main/assets/public
