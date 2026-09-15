@@ -2,13 +2,13 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$default-border-outline: 1px solid utils.get-color('medium');
+$default-border-outline: 1px solid var(--kirby-medium);
 
 :host {
-  --kirby-card-main-background-color: #{utils.get-color('white')};
-  --kirby-card-main-color: #{utils.get-color('white-contrast')};
-  --kirby-card-footer-background-color: #{utils.get-color('white')};
-  --kirby-card-footer-color: #{utils.get-color('white-contrast')};
+  --kirby-card-main-background-color: var(--kirby-white);
+  --kirby-card-main-color: var(--kirby-white-contrast);
+  --kirby-card-footer-background-color: var(--kirby-white);
+  --kirby-card-footer-color: var(--kirby-white-contrast);
 
   @include themes.apply-white-theme;
 
@@ -35,8 +35,8 @@ $default-border-outline: 1px solid utils.get-color('medium');
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    border-radius: utils.border-radius('n');
-    box-shadow: utils.get-elevation(2);
+    border-radius: var(--kirby-border-radius-n);
+    box-shadow: var(--kirby-elevation-2);
     color: var(--kirby-card-main-color);
     background-color: var(--kirby-card-main-background-color);
     background-image: var(--kirby-card-background-image);
@@ -49,7 +49,7 @@ $default-border-outline: 1px solid utils.get-color('medium');
     justify-content: space-between;
     overflow: hidden;
     position: relative;
-    z-index: utils.z('default');
+    z-index: var(--kirby-z-index-default);
     width: var(--kirby-card-width, auto);
   }
   /* stylelint-enable no-duplicate-selectors */
@@ -70,8 +70,8 @@ $default-border-outline: 1px solid utils.get-color('medium');
         border-block-end: var(--kirby-card-border, $default-border-outline);
         border-inline-start: var(--kirby-card-border, $default-border-outline);
         border-inline-end: var(--kirby-card-border, $default-border-outline);
-        border-bottom-left-radius: utils.border-radius('n');
-        border-bottom-right-radius: utils.border-radius('n');
+        border-bottom-left-radius: var(--kirby-border-radius-n);
+        border-bottom-right-radius: var(--kirby-border-radius-n);
       }
     }
   }
@@ -83,7 +83,7 @@ $default-border-outline: 1px solid utils.get-color('medium');
 
     &:focus-visible {
       transition: interaction-state.transition();
-      box-shadow: utils.get-elevation(2), var(--kirby-focus-ring-md-inset);
+      box-shadow: var(--kirby-elevation-2), var(--kirby-focus-ring-md-inset);
     }
 
     // Wrap declarations to avoid mixing with nested rules.
@@ -109,9 +109,9 @@ $default-border-outline: 1px solid utils.get-color('medium');
   }
 
   &.padding {
-    padding-top: var(--kirby-card-padding-top, utils.size('s'));
-    padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
-    padding-inline: utils.size('s');
+    padding-top: var(--kirby-card-padding-top, var(--kirby-spacing-s));
+    padding-bottom: var(--kirby-card-padding-bottom, var(--kirby-spacing-s));
+    padding-inline: var(--kirby-spacing-s);
   }
 }
 
@@ -131,9 +131,59 @@ $default-border-outline: 1px solid utils.get-color('medium');
   height: 100%;
 }
 
-@each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}):not(.outlined) {
-    --kirby-card-main-background-color: #{utils.get-color($color-name)};
-    --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
+:host(:not(.outlined)) {
+  &.primary {
+    --kirby-card-main-background-color: var(--kirby-primary);
+    --kirby-card-main-color: var(--kirby-primary-contrast);
+  }
+
+  &.secondary {
+    --kirby-card-main-background-color: var(--kirby-secondary);
+    --kirby-card-main-color: var(--kirby-secondary-contrast);
+  }
+
+  &.tertiary {
+    --kirby-card-main-background-color: var(--kirby-tertiary);
+    --kirby-card-main-color: var(--kirby-tertiary-contrast);
+  }
+
+  &.success {
+    --kirby-card-main-background-color: var(--kirby-success);
+    --kirby-card-main-color: var(--kirby-success-contrast);
+  }
+
+  &.warning {
+    --kirby-card-main-background-color: var(--kirby-warning);
+    --kirby-card-main-color: var(--kirby-warning-contrast);
+  }
+
+  &.danger {
+    --kirby-card-main-background-color: var(--kirby-danger);
+    --kirby-card-main-color: var(--kirby-danger-contrast);
+  }
+
+  &.white-overlay {
+    --kirby-card-main-background-color: var(--kirby-white-overlay);
+    --kirby-card-main-color: var(--kirby-white-overlay-contrast);
+  }
+
+  &.light {
+    --kirby-card-main-background-color: var(--kirby-light);
+    --kirby-card-main-color: var(--kirby-light-contrast);
+  }
+
+  &.medium {
+    --kirby-card-main-background-color: var(--kirby-medium);
+    --kirby-card-main-color: var(--kirby-medium-contrast);
+  }
+
+  &.dark {
+    --kirby-card-main-background-color: var(--kirby-dark);
+    --kirby-card-main-color: var(--kirby-dark-contrast);
+  }
+
+  &.dark-overlay {
+    --kirby-card-main-background-color: var(--kirby-dark-overlay);
+    --kirby-card-main-color: var(--kirby-dark-overlay-contrast);
   }
 }

@@ -1,11 +1,7 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { LineClampHelper } from '@kirbydesign/designsystem/helpers';
 import { ResizeObserverService } from '../resize-observer/resize-observer.service';
-
-const fontSize = DesignTokenHelper.fontSize;
-const lineHeight = DesignTokenHelper.lineHeight;
 
 interface HeadingSize {
   name: string;
@@ -34,18 +30,18 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private headingSizes: HeadingSize[] = [
     {
       name: 'h1',
-      fontSize: fontSize('xl'),
-      lineHeight: lineHeight('xl'),
+      fontSize: 'var(--kirby-font-size-xl)',
+      lineHeight: 'var(--kirby-line-height-xl)',
     },
     {
       name: 'h2',
-      fontSize: fontSize('l'),
-      lineHeight: lineHeight('l'),
+      fontSize: 'var(--kirby-font-size-l)',
+      lineHeight: 'var(--kirby-line-height-l)',
     },
     {
       name: 'h3',
-      fontSize: fontSize('m'),
-      lineHeight: lineHeight('m'),
+      fontSize: 'var(--kirby-font-size-m)',
+      lineHeight: 'var(--kirby-line-height-m)',
     },
   ];
 

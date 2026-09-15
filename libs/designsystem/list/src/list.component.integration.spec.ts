@@ -184,6 +184,39 @@ describe('ListComponent', () => {
     });
   });
 
+  describe('with shape="none" inside outlined card', () => {
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+        <kirby-card variant="outlined">
+          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" shape="none">
+            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
+          </kirby-list>
+        </kirby-card>
+        `
+      );
+      ionList = spectator.queryHost('ion-list');
+      await TestHelper.whenReady(ionList);
+      itemsInList = spectator.queryAll('ion-list ion-item');
+    });
+
+    it('should apply "medium" border color to all but last item when inside outlined card and list has shape "none"', () => {
+      const ionItemSlidingList = spectator.queryAll('ion-item-sliding:not(.last)'); // last item doesn't have border
+      expect(ionItemSlidingList.length).toBeGreaterThan(0);
+      ionItemSlidingList.forEach((item) => {
+        expect(item).toHaveComputedStyle({
+          'border-bottom-color': getColor('medium'),
+        });
+      });
+
+      const lastIonItemSlidingList = spectator.queryAll('ion-item-sliding.last');
+      expect(lastIonItemSlidingList.length).toBe(1);
+      expect(lastIonItemSlidingList[0]).toHaveComputedStyle({
+        'border-bottom-width': '0px',
+      });
+    });
+  });
+
   describe('with kirby-item inside kirby-card', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(

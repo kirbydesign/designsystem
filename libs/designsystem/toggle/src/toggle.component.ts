@@ -14,7 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IonToggle } from '@ionic/angular/standalone';
+import { IonToggle } from '@ionic/angular';
 import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 

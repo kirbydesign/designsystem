@@ -20,7 +20,7 @@ import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { FORM_FIELD_CONTROL, FormFieldControl } from '@kirbydesign/designsystem/types';
 
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
-import { IonRadioGroup } from '@ionic/angular/standalone';
+import { IonRadioGroup } from '@ionic/angular';
 import { NgTemplateOutlet } from '@angular/common';
 import { RadioComponent } from '../radio.component';
 

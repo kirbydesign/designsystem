@@ -2,7 +2,7 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
-import { IonTabs } from '@ionic/angular/standalone';
+import { IonTabs } from '@ionic/angular';
 import { provideRouter } from '@angular/router';
 import { TabsComponent } from './tabs.component';
 

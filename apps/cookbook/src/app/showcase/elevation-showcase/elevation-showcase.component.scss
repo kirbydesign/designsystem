@@ -1,7 +1,7 @@
 @use '../design-token-table';
 @use '../showcase.shared';
 
-.elevation-sample {
+.sample.elevation {
   display: block;
   width: calc(var(--kirby-spacing-xxl) * 2);
   height: var(--kirby-spacing-xxxl);

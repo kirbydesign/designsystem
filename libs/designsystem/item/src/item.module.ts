@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { IonItem, IonLabel, IonReorder } from '@ionic/angular/standalone';
+import { IonItem, IonLabel, IonReorder } from '@ionic/angular';
 import { ItemComponent } from './item.component';
 import { LabelComponent } from './label/label.component';
 

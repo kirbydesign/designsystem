@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$fab-sheet-margin: utils.size('s');
+$fab-sheet-margin: var(--kirby-spacing-s);
 
 :host {
   --kirby-action-sheet-margin-horizontal: #{$fab-sheet-margin};
@@ -26,14 +26,14 @@ ion-fab-button {
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-inset);
     outline: none;
-    border-radius: utils.border-radius('pill');
+    border-radius: var(--kirby-border-radius-pill);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --box-shadow: #{utils.get-elevation(4)};
+    --box-shadow: var(--kirby-elevation-4);
 
     width: 64px;
     height: 64px;
@@ -42,7 +42,7 @@ ion-fab-button {
   /* stylelint-enable no-duplicate-selectors */
 
   &[disabled] {
-    --background: #{utils.get-color('semi-light')};
+    --background: var(--kirby-semi-light);
     --box-shadow: none;
 
     opacity: 1;

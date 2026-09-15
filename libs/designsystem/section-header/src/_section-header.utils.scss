@@ -7,28 +7,28 @@
 */
 
 @mixin typography() {
-  --padding-end: #{utils.size('s')};
-  --padding-start: #{utils.size('s')};
+  --padding-end: var(--kirby-spacing-s);
+  --padding-start: var(--kirby-spacing-s);
 
   @include utils.slotted('[heading]') {
-    font-weight: utils.font-weight('bold');
-    font-size: utils.font-size('m');
-    line-height: utils.line-height('m');
+    font-weight: var(--kirby-font-weight-bold);
+    font-size: var(--kirby-font-size-m);
+    line-height: var(--kirby-line-height-m);
     color: var(--kirby-section-header-color);
-    margin: 0 0 utils.size('xxs');
+    margin: 0 0 var(--kirby-spacing-xxs);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   @include utils.slotted('h2[heading]', '.kirby-text-large[heading]') {
-    font-size: utils.font-size('l');
-    line-height: utils.line-height('l');
+    font-size: var(--kirby-font-size-l);
+    line-height: var(--kirby-line-height-l);
   }
 
   @include utils.slotted('.kirby-text-medium[heading]') {
-    font-size: utils.font-size('m');
-    line-height: utils.line-height('m');
+    font-size: var(--kirby-font-size-m);
+    line-height: var(--kirby-line-height-m);
   }
 
   @include utils.slotted(
@@ -37,16 +37,16 @@
     'h6[heading]',
     '.kirby-text-normal[heading]'
   ) {
-    font-size: utils.font-size('n');
-    line-height: utils.line-height('n');
+    font-size: var(--kirby-font-size-n);
+    line-height: var(--kirby-line-height-n);
   }
 
   @include utils.slotted('[detail]', '[label]') {
-    font-weight: utils.font-weight('light');
-    font-size: utils.font-size('s');
-    line-height: utils.line-height('s');
+    font-weight: var(--kirby-font-weight-light);
+    font-size: var(--kirby-font-size-s);
+    line-height: var(--kirby-line-height-s);
     color: var(--kirby-section-header-color);
-    margin: utils.size('xxxs') 0 utils.size('xxs');
+    margin: var(--kirby-spacing-xxxs) 0 var(--kirby-spacing-xxs);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

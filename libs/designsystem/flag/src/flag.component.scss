@@ -1,51 +1,45 @@
-@use 'sass:list';
-@use 'sass:map';
-@use 'sass:math';
-@use 'sass:meta';
-@use '@kirbydesign/core/src/scss/utils';
-
-$padding-block-xs: utils.size('xxxs') - 1px;
-$padding-block-sm: utils.size('xxxs');
-$padding-block-md: utils.size('xxxs') + 1px;
+$padding-block-xs: calc(var(--kirby-spacing-xxxs) - 1px);
+$padding-block-sm: var(--kirby-spacing-xxxs);
+$padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
 
 :host {
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
-  color: var(--kirby-flag-color, utils.get-color('white-contrast'));
-  border: 1px solid var(--kirby-flag-border-color, utils.get-color('medium'));
-  border-radius: utils.border-radius('xs');
-  font-size: utils.font-size('n');
-  padding: $padding-block-md utils.size('xxs');
-  font-weight: utils.font-weight('medium');
+  color: var(--kirby-flag-color, var(--kirby-white-contrast));
+  border: 1px solid var(--kirby-flag-border-color, var(--kirby-medium));
+  border-radius: var(--kirby-border-radius-xs);
+  font-size: var(--kirby-font-size-n);
+  padding: $padding-block-md var(--kirby-spacing-xxs);
+  font-weight: var(--kirby-font-weight-medium);
   line-height: 1;
 
   &.sm {
-    font-size: utils.font-size('s');
+    font-size: var(--kirby-font-size-s);
     padding-block: $padding-block-sm;
   }
 
   &.xs {
-    font-size: utils.font-size('xs');
-    padding: $padding-block-xs utils.size('xxxs');
+    font-size: var(--kirby-font-size-xs);
+    padding: $padding-block-xs var(--kirby-spacing-xxxs);
   }
 
   // Colors
   &.success {
-    --kirby-flag-background-color: #{utils.get-color('success-tint')};
+    --kirby-flag-background-color: var(--kirby-success-tint);
   }
 
   &.warning {
-    --kirby-flag-background-color: #{utils.get-color('warning-tint')};
+    --kirby-flag-background-color: var(--kirby-warning-tint);
   }
 
   &.danger {
-    --kirby-flag-background-color: #{utils.get-color('danger-tint')};
+    --kirby-flag-background-color: var(--kirby-danger-tint);
   }
 
   &.semi-light {
-    --kirby-flag-background-color: #{utils.get-color('semi-light')};
+    --kirby-flag-background-color: var(--kirby-semi-light);
   }
 
   --kirby-flag-border-color: var(--kirby-flag-background-color);
-  --kirby-flag-color: #{utils.get-color('black')};
+  --kirby-flag-color: var(--kirby-black);
 }

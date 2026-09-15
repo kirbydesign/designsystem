@@ -6,17 +6,18 @@ import {
   provideAppInitializer,
   Provider,
 } from '@angular/core';
-import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular/standalone';
+import { AnimationController, isPlatform, provideIonicAngular } from '@ionic/angular';
 import { provideComponentInputBinding } from '@ionic/angular/common';
 import {
   ModalController as IonModalController,
   PopoverController as IonPopoverController,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import {
   AngularDelegate as IonAngularDelegate,
   ConfigToken as IonConfigToken,
 } from '@ionic/angular/common';
 import type { IonicConfig } from '@ionic/core';
+import { GestureController } from '@kirbydesign/designsystem/gesture';
 import { LoadingOverlayService } from '@kirbydesign/designsystem/loading-overlay';
 import {
   ActionSheetHelper,
@@ -74,6 +75,7 @@ export function provideKirby(
     ResizeObserverFactory,
     ResizeObserverService,
     CanDismissHelper,
+    GestureController,
     ...patchIonicProviders(),
     features,
   ]);

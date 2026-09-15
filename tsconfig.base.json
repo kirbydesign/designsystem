@@ -39,6 +39,7 @@
       "@kirbydesign/designsystem/fab-sheet": ["libs/designsystem/dist/fab-sheet"],
       "@kirbydesign/designsystem/flag": ["libs/designsystem/dist/flag"],
       "@kirbydesign/designsystem/form-field": ["libs/designsystem/dist/form-field"],
+      "@kirbydesign/designsystem/gesture": ["libs/designsystem/dist/gesture"],
       "@kirbydesign/designsystem/header": ["libs/designsystem/dist/header"],
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/dist/helpers"],
       "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/dist/helpers/scss"],

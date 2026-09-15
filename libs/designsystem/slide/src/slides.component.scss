@@ -2,25 +2,15 @@
 
 $bullet-width: 10px;
 $bullet-height: 6px;
-$bullet-border-radius: 3px;
 $bullet-inactive-opacity: 0.2;
 
 :host {
-  --swiper-navigation-sides-offset: 0;
-  --swiper-pagination-bullet-width: #{$bullet-width};
-  --swiper-pagination-bullet-height: #{$bullet-height};
-  --swiper-pagination-bullet-border-radius: #{$bullet-border-radius};
-  --swiper-pagination-bullet-horizontal-gap: #{utils.size('xxxs')};
-  --swiper-pagination-color: #{utils.get-color('black')};
-  --swiper-pagination-bullet-inactive-color: #{utils.get-color('black')};
-  --swiper-pagination-bullet-inactive-opacity: #{$bullet-inactive-opacity};
-
   .navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: 0 utils.size('s');
-    margin-inline: utils.size('s');
+    margin-block: 0 var(--kirby-spacing-s);
+    margin-inline: var(--kirby-spacing-s);
 
     &-inner {
       display: flex;
@@ -32,12 +22,30 @@ $bullet-inactive-opacity: 0.2;
     display: flex;
     align-items: center;
     width: auto;
-    margin-inline-end: utils.size('s');
+    margin-inline-end: var(--kirby-spacing-s);
 
-    // we need to use ::ng-deep as the pagination bullet spans are added to the dom by swiperjs:
+    /*
+      * Since swiperjs v10, custom properties for pagination bullets are scoped to the
+      * swiper-container element, but custom pagination is added to the light DOM by swiperjs,
+      * so we have to style element directly.
+      */
     /* stylelint-disable selector-pseudo-element-no-unknown */
-    ::ng-deep .swiper-pagination-bullet:last-of-type {
-      margin-inline-end: 0;
+    ::ng-deep .swiper-pagination-bullet {
+      display: inline-block;
+      width: $bullet-width;
+      height: $bullet-height;
+      margin-inline: var(--kirby-spacing-xxxs);
+      border-radius: var(--kirby-border-radius-pill);
+      background: var(--kirby-black);
+      opacity: $bullet-inactive-opacity;
+
+      &-active {
+        opacity: 1;
+      }
+
+      &:last-of-type {
+        margin-inline-end: 0;
+      }
     }
   }
 
@@ -45,7 +53,7 @@ $bullet-inactive-opacity: 0.2;
     display: none;
 
     // Adding one to default to make buttons clickable through box shadow.
-    z-index: utils.z('default') + 1;
+    z-index: calc(var(--kirby-z-index-default) + 1);
 
     @include utils.media('>=medium') {
       display: block;
@@ -62,7 +70,7 @@ $bullet-inactive-opacity: 0.2;
     }
 
     @include utils.slotted('button[kirby-button]') {
-      margin-inline: utils.size('xxs') 0;
+      margin-inline: var(--kirby-spacing-xxs) 0;
     }
   }
 
@@ -72,15 +80,19 @@ $bullet-inactive-opacity: 0.2;
     display: none;
   }
 
-  swiper-container {
-    padding-block: utils.size('m');
-    margin-block: -(utils.size('m'));
+  swiper-container::part(container) {
+    box-sizing: border-box;
+    padding-block: var(--kirby-spacing-m);
+    margin-block: calc(-1 * var(--kirby-spacing-m));
   }
 
   @include utils.media('<medium') {
     swiper-container {
-      padding-inline: utils.size('s');
       margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+
+      &::part(container) {
+        padding-inline: var(--kirby-spacing-s);
+      }
     }
 
     .navigation,
@@ -101,9 +113,9 @@ $bullet-inactive-opacity: 0.2;
   .title {
     @include utils.slotted(h1, h2, h3, h4, h5, h6) {
       margin: 0;
-      font-size: utils.font-size('m');
-      font-weight: utils.font-weight('bold');
-      line-height: utils.line-height('m');
+      font-size: var(--kirby-font-size-m);
+      font-weight: var(--kirby-font-weight-bold);
+      line-height: var(--kirby-line-height-m);
     }
   }
 }

@@ -4,7 +4,7 @@ import { AlertConfig, ModalController, SlideButtonComponent } from '@kirbydesign
 const config = {
   selector: 'cookbook-simple-slide-button-example',
   template: `<kirby-slide-button
-  [text]="'Slide to confirm'"
+  [text]="'Confirm'"
   aria-label="Confirm"
   (slideDone)="showAlert()"
 ></kirby-slide-button>`,

@@ -17,11 +17,11 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
   display: inline-flex;
 
   ion-badge {
-    --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
-    --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
+    --background: var(--kirby-badge-background-color, var(--kirby-white));
+    --color: var(--kirby-badge-color, var(--kirby-white-contrast));
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: utils.border-radius('pill');
+    border-radius: var(--kirby-border-radius-pill);
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
@@ -31,42 +31,42 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
 
   // Colors
   &.success ion-badge {
-    --color: #{utils.get-color('success-contrast')};
+    --color: var(--kirby-success-contrast);
   }
 
   &.success.sm ion-badge {
-    --background: #{utils.get-color('success-shade')};
+    --background: var(--kirby-success-shade);
   }
 
   &.success.md ion-badge {
-    --background: #{utils.get-color('success-tint')};
+    --background: var(--kirby-success-tint);
   }
 
   &.warning ion-badge {
-    --color: #{utils.get-color('warning-contrast')};
+    --color: var(--kirby-warning-contrast);
   }
 
   &.warning.sm ion-badge {
-    --background: #{utils.get-color('warning-shade')};
+    --background: var(--kirby-warning-shade);
   }
 
   &.warning.md ion-badge {
-    --background: #{utils.get-color('warning')};
+    --background: var(--kirby-warning);
   }
 
   &.danger ion-badge {
-    --color: #{utils.get-text-color('white')};
+    --color: var(--kirby-text-color-white);
   }
 
   &.danger.sm ion-badge {
-    --background: #{utils.get-color('danger')};
+    --background: var(--kirby-danger);
   }
 
   &.danger.md ion-badge {
-    --background: #{utils.get-color('danger-shade')};
+    --background: var(--kirby-danger-shade);
 
     &:has(kirby-icon) {
-      --background: #{utils.get-color('danger')};
+      --background: var(--kirby-danger);
     }
   }
 }

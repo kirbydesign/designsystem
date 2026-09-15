@@ -1,7 +1,7 @@
 import { Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { IonTabButton } from '@ionic/angular/standalone';
+import { IonTabButton } from '@ionic/angular';
 import { selectedTabClickEvent } from './tab-button.events';
 
 @Component({

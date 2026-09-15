@@ -6,7 +6,7 @@ import {
   Input,
   Optional,
 } from '@angular/core';
-import { IonFooter } from '@ionic/angular/standalone';
+import { IonFooter } from '@ionic/angular';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,

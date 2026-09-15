@@ -13,7 +13,7 @@ describe('SlideButtonComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-slide-button [text]="'slide to confirm'" aria-label="fake-label" aria-labelledby="fake-dom-label"></kirby-slide-button>`
+      `<kirby-slide-button [text]="'Confirm'" aria-label="fake-label" aria-labelledby="fake-dom-label"></kirby-slide-button>`
     );
     component = spectator.component;
   });

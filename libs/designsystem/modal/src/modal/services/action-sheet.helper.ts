@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular/standalone';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
 

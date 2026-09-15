@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { ModalController as IonicModalController } from '@ionic/angular/standalone';
+import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';

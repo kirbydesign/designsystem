@@ -15,7 +15,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
+import { IonSegment, IonSegmentButton } from '@ionic/angular';
 
 import { SegmentItem } from './segment-item';
 

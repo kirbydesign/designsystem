@@ -1,10 +1,9 @@
-@use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
   position: relative; // Ensures correct position of cloned child input when Ionic scrollAssist is enabled
-  margin-bottom: utils.size('s');
+  margin-bottom: var(--kirby-spacing-s);
 }
 
 :host-context(kirby-item) {
@@ -14,7 +13,7 @@
 .texts {
   display: flex;
   justify-content: space-between;
-  padding: 2px utils.size('s') 0 utils.size('s');
+  padding: 2px var(--kirby-spacing-s) 0 var(--kirby-spacing-s);
 
   .message {
     flex: 75%;
@@ -41,11 +40,11 @@ label {
 
 .text {
   display: block;
-  font-size: utils.font-size('s');
-  font-weight: utils.font-weight('light');
-  line-height: utils.line-height('s');
-  margin-bottom: utils.size('xxxs');
-  padding: 0 utils.size('s');
+  font-size: var(--kirby-font-size-s);
+  font-weight: var(--kirby-font-weight-light);
+  line-height: var(--kirby-line-height-s);
+  margin-bottom: var(--kirby-spacing-xxxs);
+  padding: 0 var(--kirby-spacing-s);
 }
 
 .affix-container {
@@ -60,17 +59,17 @@ label {
   }
 
   .prefix {
-    left: utils.size('xs');
-    z-index: utils.z('default');
+    left: var(--kirby-spacing-xs);
+    z-index: var(--kirby-z-index-default);
   }
 
   .suffix {
-    right: utils.size('xs');
+    right: var(--kirby-spacing-xs);
   }
 
   .semi-dark-text {
     @include utils.slotted(span, h1, h2, h3, h4, h5, h6, p, data) {
-      color: utils.get-text-color('semi-dark');
+      color: var(--kirby-text-color-semi-dark);
     }
   }
 }

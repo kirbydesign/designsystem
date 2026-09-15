@@ -1,31 +1,29 @@
-@use '@kirbydesign/core/src/scss/utils';
-
-@mixin rounded($border-radius: utils.border-radius('n')) {
+@mixin rounded($border-radius: var(--kirby-border-radius-n)) {
   @include rounded-top($border-radius);
   @include rounded-bottom($border-radius);
 }
 
-@mixin rounded-top($border-radius: utils.border-radius('n')) {
+@mixin rounded-top($border-radius: var(--kirby-border-radius-n)) {
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   overflow: hidden;
 }
 
-@mixin rounded-bottom($border-radius: utils.border-radius('n')) {
+@mixin rounded-bottom($border-radius: var(--kirby-border-radius-n)) {
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
   overflow: hidden;
 }
 
 @mixin shadow() {
-  box-shadow: utils.get-elevation(2);
+  box-shadow: var(--kirby-elevation-2);
 }
 
 @mixin first-item-padding() {
   /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   > ::ng-deep {
     :first-child {
-      --item-padding-top: #{utils.size('xxs')};
+      --item-padding-top: var(--kirby-spacing-xxs);
     }
   }
 }
@@ -34,14 +32,14 @@
   /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   > ::ng-deep {
     :last-child {
-      --item-padding-bottom: #{utils.size('xxs')};
+      --item-padding-bottom: var(--kirby-spacing-xxs);
     }
   }
 }
 
 /*
- * Utilities for styling lists and items within the list. 
- * These can be used to create list-like appearance of elements 
+ * Utilities for styling lists and items within the list.
+ * These can be used to create list-like appearance of elements
  * in use-cases where more freedom is needed than the list-component can offer.
  */
 

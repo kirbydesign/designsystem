@@ -3,6 +3,8 @@ import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
+import { FOUNDATION_ROUTES } from './showcase.routes';
+
 @Component({
   selector: 'cookbook-showcase',
   templateUrl: './showcase.component.html',
@@ -17,6 +19,7 @@ export class ShowcaseComponent implements OnDestroy {
   private routerEventsSubscription: Subscription;
   private gitUrl =
     'https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples/';
+  private foundationPaths = new Set(FOUNDATION_ROUTES.map((r) => r.path));
   showCallToActionLinks = true;
 
   constructor(
@@ -47,7 +50,7 @@ export class ShowcaseComponent implements OnDestroy {
     this.exampleComponentPopOutUrl = ['/', 'examples', exampleComponentUrlSegment];
     this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
     this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);
-    this.showCallToActionLinks = this.exampleComponentName !== 'colors';
+    this.showCallToActionLinks = !this.foundationPaths.has(exampleComponentUrlSegment);
     this.propertiesTable =
       this.elementRef.nativeElement.getElementsByClassName('api-description')[0];
   }

@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 $dark-theme-gradient: linear-gradient(
   to right,
   rgb(255 255 255 / 16%) 0%,
@@ -59,4 +57,5 @@ ion-skeleton-text {
   margin: 0;
   animation-duration: 1.5s;
   background-clip: border-box;
+  border-radius: inherit;
 }

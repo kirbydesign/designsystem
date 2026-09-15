@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { IonLabel } from '@ionic/angular/standalone';
+import { IonLabel } from '@ionic/angular';
 
 @Component({
   selector: 'kirby-label',

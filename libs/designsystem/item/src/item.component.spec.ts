@@ -3,7 +3,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { IonItem } from '@ionic/angular/standalone';
+import { IonItem } from '@ionic/angular';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent, ItemSize } from './item.component';

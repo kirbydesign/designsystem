@@ -17,7 +17,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 
-import { IonBackdrop, IonReorderGroup } from '@ionic/angular/standalone';
+import { IonBackdrop, IonReorderGroup } from '@ionic/angular';
 import { ReorderEvent } from './reorder-event';
 
 @Component({

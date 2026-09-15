@@ -7,6 +7,7 @@ import {
   ItemSwipeAction,
   ItemSwipeActionType,
 } from '@kirbydesign/designsystem/item-sliding';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 const { getColor } = DesignTokenHelper;
 
@@ -89,8 +90,10 @@ describe('ItemSlidingComponent', () => {
       expect(ionItemOptionElements.length).toEqual(swipeActions.length);
     });
 
-    it('should render ion-item-option elements in same order as swipeActions are given', () => {
+    it('should render ion-item-option elements in same order as swipeActions are given', async () => {
       // QuerySelectorAll returns elements in document order
+      await TestHelper.whenReady(ionItemOptionElements);
+
       ionItemOptionElements.forEach((ionItemOptionElement, index) => {
         const optionLabel = ionItemOptionElement.querySelector('ion-label');
         expect(optionLabel).toHaveExactTrimmedText(swipeActions[index].title);
@@ -168,7 +171,9 @@ describe('ItemSlidingComponent', () => {
         expect(kirbyIconElement.slot).toEqual('top');
       });
 
-      it('should render the title', () => {
+      it('should render the title', async () => {
+        await TestHelper.whenReady(ionItemOptionElements);
+
         const optionLabel = ionItemOptionElements[0].querySelector('ion-label');
         expect(optionLabel).toHaveExactTrimmedText(swipeActions[0].title);
       });

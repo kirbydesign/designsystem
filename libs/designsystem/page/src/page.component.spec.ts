@@ -9,7 +9,7 @@ import {
   IonRefresher,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -1003,7 +1003,12 @@ describe('PageComponent', () => {
           await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
         });
 
-        it('should render toolbar divider', () => {
+        it('should render toolbar divider', async () => {
+          await TestHelper.whenTrue(
+            () =>
+              ionToolbar.classList.contains('content-scrolled') &&
+              !ionToolbar.classList.contains('content-pinned')
+          );
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),

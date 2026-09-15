@@ -6,13 +6,60 @@
   When the old template driven list is deprecated however - this should 
   just be used directly in item-sliding.component.scss.
  */
-@use '@kirbydesign/core/src/scss/utils';
 
 ion-item-option {
-  @each $color-name, $color-value in utils.$main-colors {
-    &.#{$color-name} {
-      background-color: #{utils.get-color($color-name)};
-      color: #{utils.get-color($color-name + '-contrast')};
-    }
+  &.primary {
+    background-color: var(--kirby-primary);
+    color: var(--kirby-primary-contrast);
+  }
+
+  &.secondary {
+    background-color: var(--kirby-secondary);
+    color: var(--kirby-secondary-contrast);
+  }
+
+  &.tertiary {
+    background-color: var(--kirby-tertiary);
+    color: var(--kirby-tertiary-contrast);
+  }
+
+  &.success {
+    background-color: var(--kirby-success);
+    color: var(--kirby-success-contrast);
+  }
+
+  &.warning {
+    background-color: var(--kirby-warning);
+    color: var(--kirby-warning-contrast);
+  }
+
+  &.danger {
+    background-color: var(--kirby-danger);
+    color: var(--kirby-danger-contrast);
+  }
+
+  &.white-overlay {
+    background-color: var(--kirby-white-overlay);
+    color: var(--kirby-white-overlay-contrast);
+  }
+
+  &.light {
+    background-color: var(--kirby-light);
+    color: var(--kirby-light-contrast);
+  }
+
+  &.medium {
+    background-color: var(--kirby-medium);
+    color: var(--kirby-medium-contrast);
+  }
+
+  &.dark {
+    background-color: var(--kirby-dark);
+    color: var(--kirby-dark-contrast);
+  }
+
+  &.dark-overlay {
+    background-color: var(--kirby-dark-overlay);
+    color: var(--kirby-dark-overlay-contrast);
   }
 }

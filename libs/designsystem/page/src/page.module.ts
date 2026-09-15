@@ -13,7 +13,7 @@ import {
   IonRefresher,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { PageFooterComponent } from './page-footer/page-footer.component';
 import {
   PageActionsComponent,

@@ -2,7 +2,7 @@ import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
 import { Directive, ElementRef, Inject, Input, LOCALE_ID, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
-import Inputmask from 'inputmask/dist/inputmask.es6.js';
+import Inputmask from 'inputmask';
 
 interface InputMask {
   unmaskedvalue: () => string;

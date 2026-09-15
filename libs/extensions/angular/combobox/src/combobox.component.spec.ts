@@ -71,7 +71,7 @@ describe('Combobox', () => {
     spectator = createHost(
       `
             <kirby-x-combobox [items]="items" [itemIdProperty]="itemIdProperty"></kirby-x-combobox>
-            <button></button>`,
+            `,
       {
         hostProps: {
           items: items20,
@@ -487,6 +487,18 @@ describe('Combobox', () => {
 
       expect(changeSpy).toHaveBeenCalledWith(items20[0]);
     }));
+
+    it('does not let the native input change event bubble out of the host element', () => {
+      // Arrange
+      const nativeChangeSpy = jest.fn();
+      spectator.hostElement.addEventListener('change', nativeChangeSpy);
+
+      // Act
+      inputElement.dispatchEvent(new Event('change', { bubbles: true }));
+
+      // Assert
+      expect(nativeChangeSpy).not.toHaveBeenCalled();
+    });
 
     it('sets selectedItem input and reflects it in the input value', () => {
       spectator.component.selectedItem = items20[4];

@@ -1,20 +1,62 @@
-<p>Typography tokens can be used for consistent, accessible text styles.</p>
 <p>
-  They available directly as CSS custom properties or via the SCSS utility functions
+  Typography utility classes and individual tokens can be used for consistent, accessible text
+  styles.
+</p>
+
+<h2>Utility Classes</h2>
+<p>
+  These CSS classes combine font-size, font-weight, and line-height tokens into ready-to-use text
+  styles, that can be applied to any element.
+</p>
+
+<p>
+  Some of the classes correspond directly to the global styles for semantic tags, and can be used to
+  give e.g. a heading level 3 a visual appearance that matches a heading level 2 instead.
+</p>
+<table class="kirby-table">
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Visually identical to</th>
+      <th class="preview">Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (entry of utilityClasses; track entry.className) {
+      <tr>
+        <td>
+          <code>{{ entry.className }}</code>
+          <cookbook-copy-token [text]="entry.className"></cookbook-copy-token>
+        </td>
+        <td>
+          <code>{{ entry.semanticElement }}</code>
+        </td>
+        <td>
+          <span class="sample" [class]="entry.className">AaBb</span>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<h2>Tokens</h2>
+<p>
+  When fine-grained control is needed, typography tokens are also available directly as CSS custom
+  properties or via the SCSS utility functions
   <code>font-size()</code>
   ,
-  <code>font-weight()</code>
-  , and
   <code>line-height()</code>
+  , and
+  <code>font-weight()</code>
   .
 </p>
 
-<h2>Font Sizes</h2>
+<h3>Font Sizes</h3>
 <table class="kirby-table">
   <thead>
     <tr>
       <th>Name</th>
-      <th class="custom-property-cell">CSS Custom Property</th>
+      <th>CSS Custom Property</th>
       <th>Base value</th>
       <th class="preview">Preview</th>
     </tr>
@@ -31,53 +73,14 @@
         </td>
         <td>{{ token.description }}</td>
         <td>
-          <span
-            class="font-size-sample token-preview"
-            [style.font-size]="'var(' + token.cssVar + ')'"
-          >
-            Aa
-          </span>
+          <span class="sample font-size" [style.font-size]="'var(' + token.cssVar + ')'">AaBb</span>
         </td>
       </tr>
     }
   </tbody>
 </table>
 
-<h2>Font Weights</h2>
-<table class="kirby-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>CSS Custom Property</th>
-      <th>Base value</th>
-      <th>Preview</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (token of fontWeights; track token.name) {
-      <tr>
-        <td>
-          <code>{{ token.name }}</code>
-        </td>
-        <td>
-          <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
-        </td>
-        <td>{{ token.description }}</td>
-        <td>
-          <span
-            class="font-weight-sample token-preview"
-            [style.font-weight]="'var(' + token.cssVar + ')'"
-          >
-            The quick brown fox
-          </span>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
-
-<h2>Line Heights</h2>
+<h3>Line Heights</h3>
 <p>
   Line-heights are paired with their corresponding font-size, to provide vertical rhythm and improve
   readability.
@@ -88,7 +91,7 @@
       <th>Name</th>
       <th>CSS Custom Property</th>
       <th>Base value</th>
-      <th>Preview</th>
+      <th class="preview">Preview</th>
     </tr>
   </thead>
   <tbody>
@@ -104,13 +107,44 @@
         <td>{{ token.description }}</td>
         <td>
           <span
-            class="line-height-sample token-preview"
+            class="sample line-height"
             [style.line-height]="'var(' + token.cssVar + ')'"
             [style.font-size]="'var(' + token.fontSizeVar + ')'"
           >
             Line 1
             <br />
             Line 2
+          </span>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<h3>Font Weights</h3>
+<table class="kirby-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>CSS Custom Property</th>
+      <th>Base value</th>
+      <th class="preview">Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (token of fontWeights; track token.name) {
+      <tr>
+        <td>
+          <code>{{ token.name }}</code>
+        </td>
+        <td>
+          <code>{{ token.cssVar }}</code>
+          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
+        </td>
+        <td>{{ token.description }}</td>
+        <td>
+          <span class="sample font-weight" [style.font-weight]="'var(' + token.cssVar + ')'">
+            AaBb
           </span>
         </td>
       </tr>

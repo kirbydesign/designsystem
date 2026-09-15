@@ -7,7 +7,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
+import { IonRadio, IonRadioGroup } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { Observable, of } from 'rxjs';
 

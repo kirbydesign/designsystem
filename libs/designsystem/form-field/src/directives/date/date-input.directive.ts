@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
-import Inputmask from 'inputmask/dist/inputmask.es6.js';
+import Inputmask from 'inputmask';
 
 interface InputMask {
   setValue: (val: string) => void;
@@ -139,12 +139,15 @@ export class DateInputDirective implements AfterViewInit, OnChanges {
     return localeDateFormat
       .toLowerCase()
       .replace(/d+/, 'dd')
-      .replace(/m+/, 'mm')
+      .replace(/m+/, 'MM')
       .replace(/y+/, 'yyyy');
   }
 
+  // The visual placeholder keeps the lowercase `mm` month token (e.g. mm/dd/yyyy),
+  // independent of the uppercase `MM` used by the parse format above.
   private getPlaceholder(inputFormat: string): string {
-    return this.locale === 'da' ? inputFormat.split('y').join('å') : inputFormat;
+    const placeholder = inputFormat.toLowerCase();
+    return this.locale === 'da' ? placeholder.split('y').join('å') : placeholder;
   }
 
   private appendMaskingElement(): void {

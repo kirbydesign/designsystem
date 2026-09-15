@@ -23,9 +23,6 @@ import fs from 'fs-extra';
 import path from 'path';
 import isCI from 'is-ci';
 import { forwardScssFiles } from './forward-scss-files.js';
-import { createRequire } from 'module';
-
-const require = createRequire(import.meta.url);
 
 const packageAlias = '@kirbydesign';
 
@@ -37,6 +34,8 @@ const coreLibSrcDir = `${coreLibDir}/src`;
 
 const extensionsAngularLibDir = `${libsRootDir}/extensions/angular`;
 
+const stylelintPluginLibDir = `./${libsRootDir}/stylelint-plugin`;
+
 const dist = `dist`;
 const distDesignsystemTarget = `${designsystemLibDir}/${dist}`;
 const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
@@ -44,7 +43,25 @@ const distCoreTarget = `${dist}/${coreLibDir}`;
 const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
 const distExtensionsAngularTarget = `${extensionsAngularLibDir}/${dist}`;
 
-const { version: coreVersion } = require('../libs/core/package.json');
+const sourcePackageJsonPaths = {
+  core: `${coreLibDir}/package.json`,
+  designsystem: `${designsystemLibDir}/package.json`,
+  'extensions-angular': `${extensionsAngularLibDir}/package.json`,
+  'stylelint-plugin': `${stylelintPluginLibDir}/package.json`,
+};
+
+const publishChains = [['core', 'designsystem', 'extensions-angular'], ['stylelint-plugin']];
+
+const allPackages = publishChains.flat();
+
+function readSourcePackageJson(packageName) {
+  return fs.readJsonSync(sourcePackageJsonPaths[packageName]);
+}
+
+function resolvePublishClosure(packageName) {
+  const chain = publishChains.find((candidate) => candidate.includes(packageName));
+  return chain.slice(chain.indexOf(packageName));
+}
 
 function npm(args, options) {
   return new Promise((resolve, reject) => {
@@ -64,7 +81,7 @@ function npm(args, options) {
         resolve(code);
       } else {
         console.error(options.onFailMessage);
-        reject(code);
+        reject(new Error(`${options.onFailMessage} (npm exited with code ${code})`));
       }
     });
   });
@@ -81,18 +98,33 @@ function cleanDistribution(distTarget) {
 
 function buildPackage(project) {
   return npm(['run', 'build', '--', '-p', project], {
-    onFailMessage: 'Unable to build package (with ng-packagr)',
+    onFailMessage: `Unable to build package "${project}" (with ng-packagr)`,
   });
 }
 
 function writeCoreVersionToPackageJson(distPackageJsonPath) {
+  const { version: coreVersion } = readSourcePackageJson('core');
+  const range = isDevPublish ? coreVersion : `^${coreVersion}`;
+
   return fs.readJson(distPackageJsonPath, 'utf-8').then((packageJson) => {
-    packageJson.peerDependencies['@kirbydesign/core'] = '^' + coreVersion;
+    packageJson.peerDependencies['@kirbydesign/core'] = range;
 
     // (over-)write destination package.json file
     const json = JSON.stringify(packageJson, null, 2);
-    console.log(`Writing new package.json (to: ${distDesignsystemPackageJsonPath}):\n\n${json}`);
-    return fs.writeJson(distDesignsystemPackageJsonPath, packageJson, { spaces: 2 });
+    console.log(`Writing new package.json (to: ${distPackageJsonPath}):\n\n${json}`);
+    return fs.writeJson(distPackageJsonPath, packageJson, { spaces: 2 });
+  });
+}
+
+function writeDesignsystemVersionToPackageJson(distPackageJsonPath) {
+  const { version: designsystemVersion } = readSourcePackageJson('designsystem');
+
+  return fs.readJson(distPackageJsonPath, 'utf-8').then((packageJson) => {
+    packageJson.peerDependencies['@kirbydesign/designsystem'] = designsystemVersion;
+
+    const json = JSON.stringify(packageJson, null, 2);
+    console.log(`Writing new package.json (to: ${distPackageJsonPath}):\n\n${json}`);
+    return fs.writeJson(distPackageJsonPath, packageJson, { spaces: 2 });
   });
 }
 
@@ -182,7 +214,83 @@ function createTarballPackage(distTarget) {
   });
 }
 
-function publish(distTarget, tarballNamePrefix) {
+const semVerPattern =
+  /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+
+function shortCommitSha() {
+  const result = cp.spawnSync('git', ['rev-parse', '--short=7', 'HEAD'], { encoding: 'utf-8' });
+  if (result.status !== 0) {
+    throw new Error(`Unable to determine the current commit SHA: ${result.stderr}`);
+  }
+  return result.stdout.trim();
+}
+
+function toDevVersion(version, shortSha) {
+  const devVersion = `${version}-dev-${shortSha}`;
+  if (!semVerPattern.test(devVersion)) {
+    throw new Error(`Computed dev version "${devVersion}" is not a valid SemVer version`);
+  }
+  return devVersion;
+}
+
+function applyDevVersions(packageNames, shortSha) {
+  return packageNames.map((packageName) => {
+    const packageJsonPath = sourcePackageJsonPaths[packageName];
+    const packageJson = fs.readJsonSync(packageJsonPath);
+    const devVersion = toDevVersion(packageJson.version, shortSha);
+
+    packageJson.version = devVersion;
+    fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
+    console.log(`Stamped ${packageJson.name} as ${devVersion} (in ${packageJsonPath})`);
+
+    return { name: packageJson.name, version: devVersion };
+  });
+}
+
+function reportDevPublish(publishedPackages, shortSha) {
+  const installCommand = `npm install ${publishedPackages
+    .map(({ name, version }) => `${name}@${version}`)
+    .join(' ')}`;
+
+  console.log(`--- Dev publish of ${shortSha} complete ---`);
+  console.log(installCommand);
+
+  const summaryPath = process.env.GITHUB_STEP_SUMMARY;
+  if (!summaryPath) {
+    return;
+  }
+
+  const summary = [
+    `## Dev publish of \`${shortSha}\``,
+    '',
+    '| Package | Version |',
+    '| --- | --- |',
+    ...publishedPackages.map(({ name, version }) => `| \`${name}\` | \`${version}\` |`),
+    '',
+    'Install the whole set — the peer dependency ranges are pinned to these exact versions:',
+    '',
+    '```sh',
+    installCommand,
+    '```',
+  ].join('\n');
+
+  fs.appendFileSync(summaryPath, summary);
+}
+
+function isAlreadyPublished(packageSpec) {
+  return new Promise((resolve) => {
+    const child = cp.spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [
+      'view',
+      packageSpec,
+      'version',
+    ]);
+    child.stdout.on('data', () => {});
+    child.stderr.on('data', () => {});
+    child.on('close', (code) => resolve(code === 0));
+  });
+}
+
+async function publish(distTarget, tarballNamePrefix) {
   const findCoreTarball = (files) =>
     files.find(
       (candidate) => candidate.startsWith(tarballNamePrefix) && candidate.endsWith('.tgz')
@@ -192,7 +300,16 @@ function publish(distTarget, tarballNamePrefix) {
     // Publish to NPM
     console.log('Running on CI, hence publishing package');
 
-    return npm(['publish', distTarget], { onFailMessage: 'Unable to publish package' });
+    const { name, version } = fs.readJsonSync(`${distTarget}/package.json`);
+
+    if (isDevPublish && (await isAlreadyPublished(`${name}@${version}`))) {
+      console.log(`${name}@${version} is already published, skipping.`);
+      return;
+    }
+
+    return npm(['publish', distTarget, '--tag', isDevPublish ? 'dev' : 'latest'], {
+      onFailMessage: `Unable to publish package from "${distTarget}"`,
+    });
   } else {
     // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating package as a gzipped tar-ball');
@@ -207,42 +324,109 @@ function publish(distTarget, tarballNamePrefix) {
 // Actual execution of script!
 
 const args = process.argv.slice(2).map((value) => value.toLowerCase());
-const doPublishCore = args.length === 0 || args.includes('core');
-const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
-const doPublishExtensionsAngular = args.includes('extensions-angular');
+const isDevPublish = args.includes('--dev');
+const unknownOptions = args.filter((value) => value.startsWith('--') && value !== '--dev');
+const packageArgs = args.filter((value) => !value.startsWith('--'));
 
-if (doPublishCore) {
-  // Publish core
+function publishCore() {
   console.log('--- Publishing core ---');
-  cleanDistribution(distCoreTarget)
+  return cleanDistribution(distCoreTarget)
     .then(() => buildPackage('core'))
     .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
     .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
     .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
-    .then(() => publish(distCoreTarget, 'kirbydesign-core'))
-    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING CORE PACKAGE ***', err));
+    .then(() => publish(distCoreTarget, 'kirbydesign-core'));
 }
 
-if (doPublishDesignsystem) {
-  // Publish designsystem
+function publishDesignsystem() {
   console.log('--- Publishing designsystem ---');
-  cleanDistribution(distDesignsystemTarget)
+  return cleanDistribution(distDesignsystemTarget)
     .then(() => buildPackage('designsystem'))
     .then(() => removeNpmIgnoreNestedPackageJsonRule(distDesignsystemTarget))
     .then(() => writeCoreVersionToPackageJson(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
-    .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'))
-    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING DESIGNSYSTEM ***', err));
+    .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'));
 }
 
-if (doPublishExtensionsAngular) {
-  // Publish extensions-angular
+function publishExtensionsAngular() {
   console.log('--- Publishing extensions-angular ---');
-  cleanDistribution(distExtensionsAngularTarget)
+  return cleanDistribution(distExtensionsAngularTarget)
     .then(() => buildPackage('extensions-angular'))
     .then(() => removeNpmIgnoreNestedPackageJsonRule(distExtensionsAngularTarget))
-    .then(() => publish(distExtensionsAngularTarget, 'kirbydesign-extensions-angular'))
-    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING EXTENSIONS-ANGULAR ***', err));
+    .then(() =>
+      isDevPublish
+        ? writeDesignsystemVersionToPackageJson(`${distExtensionsAngularTarget}/package.json`)
+        : undefined
+    )
+    .then(() => publish(distExtensionsAngularTarget, 'kirbydesign-extensions-angular'));
 }
+
+function publishStylelintPlugin() {
+  // Publish stylelint-plugin.
+  // No build step: the package is plain ESM and its package.json "files" allow-list
+  // controls what ships, so we publish the workspace directory directly.
+  console.log('--- Publishing stylelint-plugin ---');
+  return publish(stylelintPluginLibDir, 'kirbydesign-stylelint-plugin');
+}
+
+const publishPipelines = {
+  core: publishCore,
+  designsystem: publishDesignsystem,
+  'extensions-angular': publishExtensionsAngular,
+  'stylelint-plugin': publishStylelintPlugin,
+};
+
+function resolvePackagesToPublish() {
+  if (unknownOptions.length > 0) {
+    throw new Error(`Unknown option "${unknownOptions[0]}". Expected: --dev`);
+  }
+
+  if (!isDevPublish) {
+    return packageArgs.length === 0
+      ? ['core', 'designsystem']
+      : allPackages.filter((packageName) => packageArgs.includes(packageName));
+  }
+
+  if (packageArgs.length !== 1) {
+    throw new Error(
+      `A dev publish takes exactly one package, one of: ${allPackages.join(', ')}. ` +
+        `Received: ${packageArgs.length === 0 ? '(none)' : packageArgs.join(', ')}`
+    );
+  }
+
+  const [packageName] = packageArgs;
+  if (!allPackages.includes(packageName)) {
+    throw new Error(`Unknown package "${packageName}". Expected one of: ${allPackages.join(', ')}`);
+  }
+
+  return resolvePublishClosure(packageName);
+}
+
+async function main() {
+  const packagesToPublish = resolvePackagesToPublish();
+
+  if (!isDevPublish) {
+    for (const packageName of packagesToPublish) {
+      await publishPipelines[packageName]();
+    }
+    return;
+  }
+
+  const shortSha = shortCommitSha();
+  console.log(`--- Dev publish of [${packagesToPublish.join(', ')}] at ${shortSha} ---`);
+  const publishedPackages = applyDevVersions(packagesToPublish, shortSha);
+
+  for (const packageName of packagesToPublish) {
+    await publishPipelines[packageName]();
+  }
+
+  reportDevPublish(publishedPackages, shortSha);
+}
+
+main().catch((error) => {
+  console.error('*** PUBLISH FAILED ***');
+  console.error(error);
+  process.exitCode = 1;
+});

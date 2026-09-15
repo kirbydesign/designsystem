@@ -1,0 +1,31 @@
+name: Publish dev version to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish. Everything that depends on it is published with it.'
+        required: true
+        type: choice
+        options:
+          - core
+          - designsystem
+          - extensions-angular
+          - stylelint-plugin
+
+permissions:
+  id-token: write # Required for OIDC (https://docs.github.com/en/actions/concepts/security/openid-connect)
+  contents: read
+
+jobs:
+  publish_dev:
+    name: Publish ${{ inputs.package }} (dev)
+    runs-on: ubuntu-latest
+    environment: npm-dev-publish
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+      - name: Build and publish dev version to npm
+        run: npm run publish -- --dev ${{ inputs.package }}
