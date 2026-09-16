@@ -589,6 +589,36 @@ describe('ModalWrapperComponent', () => {
         )
       ).toBe(0);
     });
+
+    it('should compute the overlap from the fallback viewport height when initialViewportHeight is not set', () => {
+      spectator.component['initialViewportHeight'] = undefined;
+      spyOn(spectator.component as any, 'getViewportHeight').and.returnValue(viewportHeight);
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(viewportHeight)
+        )
+      ).toBe(keyboardHeight);
+    });
+
+    it('should fall back to the window inner height when initialViewportHeight is not set', () => {
+      spectator.component['initialViewportHeight'] = undefined;
+      expect(spectator.component['getViewportHeight']()).toBe(
+        spectator.component['windowRef'].nativeWindow.innerHeight
+      );
+    });
+
+    it('should fall back to the window inner height when initialViewportHeight is 0', () => {
+      spectator.component['initialViewportHeight'] = 0;
+      expect(spectator.component['getViewportHeight']()).toBe(
+        spectator.component['windowRef'].nativeWindow.innerHeight
+      );
+    });
+
+    it('should use initialViewportHeight for the viewport height when it is set', () => {
+      spectator.component['initialViewportHeight'] = viewportHeight;
+      expect(spectator.component['getViewportHeight']()).toBe(viewportHeight);
+    });
   });
 
   describe(`onHeaderTouchStart`, () => {

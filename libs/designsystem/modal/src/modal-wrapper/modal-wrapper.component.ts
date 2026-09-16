@@ -530,10 +530,16 @@ export class ModalWrapperComponent
     this.setKeyboardOverlap(keyboardHeight);
   }
 
+  // Fall back to the live viewport height: initialViewportHeight (from a body ResizeObserver) is 0 in Ionic apps.
+  private getViewportHeight(): number {
+    return this.initialViewportHeight || this.windowRef.nativeWindow.innerHeight;
+  }
+
   private getKeyboardOverlap(keyboardHeight: number, element: Element) {
-    if (keyboardHeight <= 0 || !element || !this.initialViewportHeight) return 0;
+    const viewportHeight = this.getViewportHeight();
+    if (keyboardHeight <= 0 || !element || !viewportHeight) return 0;
     const elementDistanceAboveBottomOfScreen = Math.floor(
-      this.initialViewportHeight - element.getBoundingClientRect().bottom
+      viewportHeight - element.getBoundingClientRect().bottom
     );
     return Math.max(keyboardHeight - elementDistanceAboveBottomOfScreen, 0);
   }
