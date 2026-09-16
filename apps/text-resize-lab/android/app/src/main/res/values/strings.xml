@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Text Resize Lab</string>
-    <string name="title_activity_main">Text Resize Lab</string>
-    <string name="package_name">design.kirby.textresizelab</string>
-    <string name="custom_url_scheme">design.kirby.textresizelab</string>
-</resources>
