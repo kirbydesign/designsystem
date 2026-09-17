@@ -308,6 +308,78 @@ describe('NumberInputDirective', () => {
     });
   });
 
+  describe('when pasting', () => {
+    const pasteIntoElement = (element: HTMLInputElement, text: string) => {
+      element.focus();
+      element.setSelectionRange(0, element.value.length);
+      const dataTransfer = new DataTransfer();
+      dataTransfer.setData('text/plain', text);
+      element.dispatchEvent(
+        new ClipboardEvent('paste', {
+          clipboardData: dataTransfer,
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    };
+
+    describe('with padPrecisionDigits', () => {
+      it('should pad a pasted integer to the precision (DA locale)', () => {
+        locale = 'da';
+        spectator = createDirective(
+          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
+        );
+        pasteIntoElement(spectator.element as HTMLInputElement, '10');
+        expect(spectator.element).toHaveValue('10,00');
+      });
+
+      it('should pad a pasted integer to the precision (en-GB locale)', () => {
+        locale = 'en-GB';
+        spectator = createDirective(
+          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
+        );
+        pasteIntoElement(spectator.element as HTMLInputElement, '10');
+        expect(spectator.element).toHaveValue('10.00');
+      });
+
+      it('should keep the radix point for a pasted decimal (DA locale)', () => {
+        locale = 'da';
+        spectator = createDirective(
+          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
+        );
+        pasteIntoElement(spectator.element as HTMLInputElement, '5,5');
+        expect(spectator.element).toHaveValue('5,50');
+      });
+
+      it('should apply the group separator to a large pasted integer (DA locale)', () => {
+        locale = 'da';
+        spectator = createDirective(
+          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
+        );
+        pasteIntoElement(spectator.element as HTMLInputElement, '1000');
+        expect(spectator.element).toHaveValue('1.000,00');
+      });
+
+      it('should format a pasted decimal with grouping (DA locale)', () => {
+        locale = 'da';
+        spectator = createDirective(
+          `<input kirby-input kirby-decimal-mask type="number" [padPrecisionDigits]="true" />`
+        );
+        pasteIntoElement(spectator.element as HTMLInputElement, '1234,56');
+        expect(spectator.element).toHaveValue('1.234,56');
+      });
+    });
+
+    describe('without padPrecisionDigits', () => {
+      it('should keep the radix point for a pasted decimal (DA locale)', () => {
+        locale = 'da';
+        spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
+        pasteIntoElement(spectator.element as HTMLInputElement, '1234,56');
+        expect(spectator.element).toHaveValue('1.234,56');
+      });
+    });
+  });
+
   describe('reactive form', () => {
     it('should format initial value correctly for DA locale', () => {
       locale = 'da';
