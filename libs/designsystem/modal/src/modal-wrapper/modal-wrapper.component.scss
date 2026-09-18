@@ -4,6 +4,9 @@
 
 $toolbar-bottom-border-width: 1px;
 
+// Cap title font resize at 120%
+$title-max-font-size: 16px * 1.2;
+
 @mixin contain-content() {
   padding-top: 0;
   position: relative;
@@ -136,7 +139,7 @@ ion-header.content-scrolled ion-toolbar {
 ion-title {
   box-sizing: border-box;
   padding-inline: calc(48px + var(--padding-start)) calc(48px + var(--padding-end));
-  font-size: var(--kirby-font-size-n);
+  font-size: min(var(--kirby-font-size-n), $title-max-font-size);
   font-weight: var(--kirby-font-weight-bold);
   outline: none;
 }
