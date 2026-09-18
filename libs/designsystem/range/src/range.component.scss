@@ -17,10 +17,42 @@ ion-range {
     transition: interaction-state.transition();
     box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
   }
-  @include interaction-state.apply-hover {
+
+  // Dual knob: apply focus ring to the active (focused) knob
+  &.range-pressed-a::part(knob-a),
+  &:focus-visible::part(knob-a),
+  &.range-pressed-b::part(knob-b),
+  &:focus-visible::part(knob-b) {
+    transition: interaction-state.transition();
+    box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
+  }
+
+  // Single knob: hover/active only affects the one knob that exists
+  &::part(knob):hover {
     --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
   }
-  @include interaction-state.apply-active {
+
+  &::part(knob):active {
+    --knob-background: #{interaction-state.get-state-color('white', 's')};
+  }
+
+  // Dual knob: scope hover/active to the specific knob being interacted with,
+  // so the other (idle) knob doesn't light up as well.
+  &::part(knob-a):hover {
+    --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
+  }
+
+  &::part(knob-b):hover {
+    --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
+  }
+
+  &.range-pressed-a::part(knob-a),
+  &::part(knob-a):active {
+    --knob-background: #{interaction-state.get-state-color('white', 's')};
+  }
+
+  &.range-pressed-b::part(knob-b),
+  &::part(knob-b):active {
     --knob-background: #{interaction-state.get-state-color('white', 's')};
   }
 
