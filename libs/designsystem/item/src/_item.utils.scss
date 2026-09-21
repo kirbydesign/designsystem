@@ -69,6 +69,7 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 
   .kirby-item-disclosure kirby-icon {
     color: var(--kirby-semi-dark);
+    margin-inline-end: calc(var(--kirby-spacing-xxxs) * -1);
   }
 
   @include utils.slotted('[wrap]', '.kirby-item-wrap') {
