@@ -557,20 +557,44 @@ export class ModalWrapperComponent
   }
 
   private setKeyboardOverlap(keyboardHeight: number) {
-    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
-    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
-    let snapFooterToKeyboard = false;
-    const embeddedFooterElement = this.currentFooter;
-    if (embeddedFooterElement) {
-      this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
-      snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
-    }
+    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', this.keyboardVisible);
+    this.liftFooterAboveKeyboard(keyboardHeight);
+    this.reserveContentScrollRoom(keyboardHeight);
+  }
 
+  private liftFooterAboveKeyboard(keyboardHeight: number) {
+    const footer = this.currentFooter;
+    if (!footer) return;
+    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
+    this.setCssVar(footer, '--keyboard-offset', `${keyboardOverlap}px`);
+  }
+
+  // Reserve scroll room via --padding-bottom, minus Ionic's own --keyboard-offset so the two never
+  // stack: Ionic adds --keyboard-offset back in its content padding formula, keeping the reserved
+  // room constant no matter how much Ionic offsets the focused field.
+  private reserveContentScrollRoom(keyboardHeight: number) {
     const contentElement = this.ionContentElement.nativeElement;
+    if (!this.keyboardVisible) {
+      this.removeContentScrollRoom(contentElement);
+      return;
+    }
+    const snapFooterToKeyboard =
+      this.currentFooter?.classList.contains('snap-to-keyboard') ?? false;
     const contentKeyboardOffset = snapFooterToKeyboard
-      ? keyboardOverlap
+      ? this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement)
       : this.getKeyboardOverlap(keyboardHeight, contentElement);
-    this.setCssVar(contentElement, '--keyboard-offset', `${contentKeyboardOffset}px`);
+    this.setCssVar(
+      contentElement,
+      '--padding-bottom',
+      `calc(var(--kirby-spacing-m) + ${contentKeyboardOffset}px - var(--keyboard-offset, 0px))`
+    );
+  }
+
+  // Keyboard hidden: give back the reserved scroll room so content returns to its resting padding.
+  private removeContentScrollRoom(contentElement: Element) {
+    this.zone.run(() =>
+      this.renderer.removeStyle(contentElement, '--padding-bottom', RendererStyleFlags2.DashCase)
+    );
   }
 
   onHeaderTouchStart(event: TouchEvent) {

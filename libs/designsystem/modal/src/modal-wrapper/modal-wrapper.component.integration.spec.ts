@@ -109,6 +109,26 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         });
       });
     });
+
+    describe(`should reserve scroll room via '--padding-bottom' on ion-content`, () => {
+      const keyboardHeight = 400;
+
+      it("should set --padding-bottom that subtracts Ionic's --keyboard-offset when the keyboard shows", () => {
+        const ionContentElement = spectator.query<HTMLElement>('ion-content');
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const paddingBottom = ionContentElement.style.getPropertyValue('--padding-bottom');
+        // Subtracting Ionic's own --keyboard-offset keeps the reserved room from stacking with it.
+        expect(paddingBottom).toContain('calc(');
+        expect(paddingBottom).toContain('var(--keyboard-offset');
+      });
+
+      it('should remove --padding-bottom when the keyboard hides', () => {
+        const ionContentElement = spectator.query<HTMLElement>('ion-content');
+        spectator.component._onKeyboardShow(keyboardHeight);
+        spectator.component._onKeyboardHide();
+        expect(ionContentElement.style.getPropertyValue('--padding-bottom')).toBe('');
+      });
+    });
   });
 
   describe('when footer is dynamic and embedded in component', () => {
