@@ -1,14 +1,5 @@
 import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-import {
-  Directive,
-  ElementRef,
-  HostListener,
-  Inject,
-  Input,
-  LOCALE_ID,
-  OnInit,
-  Optional,
-} from '@angular/core';
+import { Directive, ElementRef, Inject, Input, LOCALE_ID, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { extendValueAccessors } from '@kirbydesign/designsystem/helpers';
 import Inputmask from 'inputmask';
@@ -79,6 +70,8 @@ export class DecimalMaskDirective implements OnInit {
   }
 
   private initMask(): void {
+    const element: HTMLInputElement = this.elementRef.nativeElement;
+
     new Inputmask('decimal', {
       groupSeparator: this._groupSeperatorDisabled ? '' : this.groupSeparator,
       radixPoint: this.radixPoint,
@@ -99,40 +92,23 @@ export class DecimalMaskDirective implements OnInit {
       onBeforeWrite: () => {
         if (!this.inputmask) return;
       },
-    }).mask(this.elementRef.nativeElement);
+      onBeforePaste: (
+        value: string,
+        options: { onBeforeMask: (value: string, options: object) => string }
+      ) => {
+        const replacesValue =
+          element.selectionStart === 0 && element.selectionEnd === element.value.length;
+
+        if (!this.padPrecisionDigits || !replacesValue) {
+          return options.onBeforeMask(value, options);
+        }
+
+        element.value = value;
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+        return false;
+      },
+    }).mask(element);
     this.inputmask = this.elementRef.nativeElement.inputmask;
-  }
-
-  // Inputmask formats a pasted value incorrectly in two cases: it drops the radix
-  // point from decimals (e.g. "5,5" becomes "55,00") and, when precision padding is
-  // enforced, it merges the integer digits (e.g. "10" becomes "1.000,00"). For those
-  // cases we build the resulting value and re-run the mask, which
-  // formats it correctly.
-  @HostListener('paste', ['$event'])
-  protected onPaste(event: ClipboardEvent): void {
-    if (!this.inputmask) return;
-    const clipboard = event.clipboardData?.getData('text');
-    if (clipboard == null) return;
-
-    const element: HTMLInputElement = this.elementRef.nativeElement;
-    const start = element.selectionStart ?? element.value.length;
-    const end = element.selectionEnd ?? element.value.length;
-    const combined = element.value.slice(0, start) + clipboard + element.value.slice(end);
-
-    const inputmaskFormatsCorrectly =
-      !this.padPrecisionDigits && !combined.includes(this.radixPoint);
-    if (inputmaskFormatsCorrectly) {
-      return;
-    }
-
-    // Prevent both the native paste and Inputmask's own paste handler from running.
-    event.preventDefault();
-    event.stopImmediatePropagation();
-
-    element.value = combined;
-    this.inputmask.mask(element);
-    element.setSelectionRange(element.value.length, element.value.length);
-    element.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   private getMax(maxlengthValue: number): number {
