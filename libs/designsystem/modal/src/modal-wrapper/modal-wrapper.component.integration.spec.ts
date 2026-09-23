@@ -110,18 +110,25 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       });
     });
 
-    describe(`should reserve scroll room via '--padding-bottom' on ion-content`, () => {
-      it('should set --padding-bottom when the keyboard shows', () => {
+    describe(`should reserve scroll room via '--kirby-keyboard-content-overlap' on the wrapper`, () => {
+      const keyboardHeight = 400;
+      const contentOverlapProperty = '--kirby-keyboard-content-overlap';
+
+      it("to the keyboard's overlap with the content when the keyboard shows", () => {
         const ionContentElement = spectator.query<HTMLElement>('ion-content');
-        spectator.component._onKeyboardShow(400);
-        expect(ionContentElement.style.getPropertyValue('--padding-bottom')).not.toBe('');
+        ionContentElement.style.position = 'fixed';
+        ionContentElement.style.bottom = `${keyboardHeight - 200}px`;
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const contentOverlap = 200;
+        expect(spectator.element.style.getPropertyValue(contentOverlapProperty)).toBe(
+          `${contentOverlap}px`
+        );
       });
 
-      it('should remove --padding-bottom when the keyboard hides', () => {
-        const ionContentElement = spectator.query<HTMLElement>('ion-content');
-        spectator.component._onKeyboardShow(400);
+      it('to 0px when the keyboard hides', () => {
+        spectator.component._onKeyboardShow(keyboardHeight);
         spectator.component._onKeyboardHide();
-        expect(ionContentElement.style.getPropertyValue('--padding-bottom')).toBe('');
+        expect(spectator.element.style.getPropertyValue(contentOverlapProperty)).toBe('0px');
       });
     });
   });
