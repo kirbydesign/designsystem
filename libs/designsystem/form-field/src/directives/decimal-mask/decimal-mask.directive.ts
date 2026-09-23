@@ -7,7 +7,6 @@ import Inputmask from 'inputmask';
 interface InputMask {
   unmaskedvalue: () => string;
   setValue: (val: string) => void;
-  mask: (el: HTMLElement) => void;
 }
 
 @Directive({
@@ -70,7 +69,7 @@ export class DecimalMaskDirective implements OnInit {
   }
 
   private initMask(): void {
-    const element: HTMLInputElement = this.elementRef.nativeElement;
+    const element: HTMLInputElement & { inputmask?: InputMask } = this.elementRef.nativeElement;
 
     new Inputmask('decimal', {
       groupSeparator: this._groupSeperatorDisabled ? '' : this.groupSeparator,
@@ -108,7 +107,7 @@ export class DecimalMaskDirective implements OnInit {
         return false;
       },
     }).mask(element);
-    this.inputmask = this.elementRef.nativeElement.inputmask;
+    this.inputmask = element.inputmask!;
   }
 
   private getMax(maxlengthValue: number): number {
