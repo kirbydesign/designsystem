@@ -569,29 +569,19 @@ export class ModalWrapperComponent
     this.setCssVar(footer, '--keyboard-offset', `${keyboardOverlap}px`);
   }
 
-  // Subtract Ionic's --keyboard-offset so our reserved space doesn't stack with it.
   private reserveContentScrollRoom(keyboardHeight: number) {
-    const contentElement = this.ionContentElement.nativeElement;
-    if (!this.keyboardVisible) {
-      this.removeContentScrollRoom(contentElement);
-      return;
-    }
     const snapFooterToKeyboard =
       this.currentFooter?.classList.contains('snap-to-keyboard') ?? false;
-    const contentKeyboardOffset = snapFooterToKeyboard
-      ? this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement)
-      : this.getKeyboardOverlap(keyboardHeight, contentElement);
-    this.setCssVar(
-      contentElement,
-      '--padding-bottom',
-      `calc(var(--kirby-spacing-m) + ${contentKeyboardOffset}px - var(--keyboard-offset, 0px))`
-    );
-  }
 
-  // Keyboard hidden: give back the reserved scroll room so content returns to its resting padding.
-  private removeContentScrollRoom(contentElement: Element) {
-    this.zone.run(() =>
-      this.renderer.removeStyle(contentElement, '--padding-bottom', RendererStyleFlags2.DashCase)
+    const contentKeyboardOverlap = snapFooterToKeyboard
+      ? this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement)
+      : this.getKeyboardOverlap(keyboardHeight, this.ionContentElement.nativeElement);
+
+    // Set the measured keyboard content overlap.
+    this.setCssVar(
+      this.elementRef.nativeElement,
+      '--kirby-keyboard-content-overlap',
+      `${contentKeyboardOverlap}px`
     );
   }
 
