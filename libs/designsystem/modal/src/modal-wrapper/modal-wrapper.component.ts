@@ -569,9 +569,7 @@ export class ModalWrapperComponent
     this.setCssVar(footer, '--keyboard-offset', `${keyboardOverlap}px`);
   }
 
-  // Reserve scroll room via --padding-bottom, minus Ionic's own --keyboard-offset so the two never
-  // stack: Ionic adds --keyboard-offset back in its content padding formula, keeping the reserved
-  // room constant no matter how much Ionic offsets the focused field.
+  // Subtract Ionic's --keyboard-offset so our reserved space doesn't stack with it.
   private reserveContentScrollRoom(keyboardHeight: number) {
     const contentElement = this.ionContentElement.nativeElement;
     if (!this.keyboardVisible) {
