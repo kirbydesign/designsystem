@@ -5,7 +5,7 @@ const config = {
   selector: 'cookbook-dropdown-example-scroll',
   template: `<kirby-dropdown
   aria-label="Choose your favorite fruit"
-  placeholder="Dropdown with scroll (> 8 items)"
+  placeholder="Dropdown with scroll"
   [items]="[
     'Apple',
     'Banana',

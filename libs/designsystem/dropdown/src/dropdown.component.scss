@@ -71,7 +71,7 @@ kirby-popover {
 }
 
 kirby-card {
-  max-height: $dropdown-max-height;
+  max-height: min(#{$dropdown-max-height}, var(--available-max-height, #{$dropdown-max-height}));
   overflow-y: auto;
   box-shadow: var(--kirby-elevation-4);
   max-width: calc(100vw - #{$margin-horizontal-total});

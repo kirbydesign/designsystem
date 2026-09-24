@@ -8,6 +8,7 @@ import {
   OnDestroy,
   Output,
   Renderer2,
+  RendererStyleFlags2,
   ViewChild,
 } from '@angular/core';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
@@ -225,6 +226,16 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
 
     this.renderer.removeStyle(wrapperElement, direction);
     this.renderer.setStyle(wrapperElement, oppositeDirection, `${pxValue}px`);
+
+    // Constrain content to the space available in the chosen direction so it can't grow outside the viewport.
+    const availableHeight =
+      (isAvailableSpaceBelow ? availableSpaceDown : availableSpaceUp) - this.POPOVER_BODY_PADDING;
+    this.renderer.setStyle(
+      wrapperElement,
+      '--available-max-height',
+      `${availableHeight}px`,
+      RendererStyleFlags2.DashCase
+    );
 
     if (direction === 'top') {
       // Ensure target is elevated above shadows in popover, i.e. content wrapped in Card:
