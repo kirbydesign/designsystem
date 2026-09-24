@@ -79,7 +79,6 @@ describe('Combobox', () => {
         },
       }
     );
-    spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
     const inputQuery = spectator.query<HTMLInputElement>('input[kirby-input]');
     if (!inputQuery) throw new Error('Input element not found');
     inputElement = inputQuery;
@@ -141,6 +140,43 @@ describe('Combobox', () => {
       const inputId = spectator.component._comboboxId;
       expect(inputElement?.getAttribute('id')).toBe(inputId);
     });
+
+    it('should apply edge marker classes to the first and last visible items', fakeAsync(() => {
+      spectator.component.open();
+      tick(16);
+      spectator.detectChanges();
+
+      const wrappers = Array.from(
+        document.querySelectorAll<HTMLElement>('kirby-popover .combobox-item-context')
+      );
+      expect(wrappers.length).toBeGreaterThan(1);
+
+      const firstIndex = 0;
+      const lastIndex = wrappers.length - 1;
+
+      spectator.component['firstVisibleItemIndex'] = firstIndex;
+      spectator.component['lastVisibleItemIndex'] = lastIndex;
+      spectator.component['cdr'].markForCheck();
+      spectator.detectChanges();
+
+      expect(wrappers[firstIndex]).toHaveClass('virtual-scroll-first-visible');
+      if (wrappers.length > 2) {
+        const middleIndex = Math.floor(wrappers.length / 2);
+        expect(wrappers[middleIndex]).not.toHaveClass('virtual-scroll-first-visible');
+        expect(wrappers[middleIndex]).not.toHaveClass('virtual-scroll-last-visible');
+      }
+      expect(wrappers[lastIndex]).toHaveClass('virtual-scroll-last-visible');
+
+      const newFirstIndex = Math.min(2, lastIndex);
+      spectator.component['firstVisibleItemIndex'] = newFirstIndex;
+      spectator.component['lastVisibleItemIndex'] = lastIndex;
+      spectator.component['cdr'].markForCheck();
+      spectator.detectChanges();
+
+      expect(wrappers[firstIndex]).not.toHaveClass('virtual-scroll-first-visible');
+      expect(wrappers[newFirstIndex]).toHaveClass('virtual-scroll-first-visible');
+      expect(wrappers[lastIndex]).toHaveClass('virtual-scroll-last-visible');
+    }));
   });
 
   describe('clicking', () => {
@@ -175,7 +211,6 @@ describe('Combobox', () => {
 
       // Act
       inputElement?.click();
-      spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
       spectator.typeInElement('Item 1', inputElement);
 
       // Assert
@@ -194,9 +229,7 @@ describe('Combobox', () => {
 
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const firstItemIndex = 0;
-        expect(kirbyItems.item(firstItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[0]);
       }));
 
       it('arrow down twice highlights the second item', fakeAsync(() => {
@@ -207,9 +240,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const secondItemIndex = 1;
-        expect(kirbyItems.item(secondItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[1]);
       }));
 
       it('arrow down twice and press enter key selects the highlighted item and closes the popover', fakeAsync(() => {
@@ -252,9 +283,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowDown');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const selectedItemIndex = 1;
-        expect(kirbyItems.item(selectedItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[1]);
       }));
     });
 
@@ -266,9 +295,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const lastItemIndex = kirbyItems.length - 1;
-        expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 1]);
       }));
 
       it('arrow up twice highlights the second last item', fakeAsync(() => {
@@ -279,9 +306,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const secondLastItemIndex = kirbyItems.length - 2;
-        expect(kirbyItems.item(secondLastItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 2]);
       }));
 
       it('arrow up after an item was selected opens the popover and highlights the selected item', fakeAsync(() => {
@@ -294,9 +319,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'ArrowUp');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const selectedItemIndex = kirbyItems.length - 2;
-        expect(kirbyItems.item(selectedItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 2]);
       }));
     });
 
@@ -309,9 +332,7 @@ describe('Combobox', () => {
 
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const firstItemIndex = 0;
-        expect(kirbyItems.item(firstItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[0]);
       }));
 
       it('skips 10 items and highlights the 10th plus item', fakeAsync(() => {
@@ -322,9 +343,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageDown');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const tenthPlusItemIndex = 9;
-        expect(kirbyItems.item(tenthPlusItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 1 - 10]);
       }));
 
       it('there are less than 10 items left, highlights the last item', fakeAsync(() => {
@@ -337,9 +356,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageDown');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const lastItemIndex = kirbyItems.length - 1;
-        expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 1]);
       }));
     });
 
@@ -352,9 +369,7 @@ describe('Combobox', () => {
 
         // Assert
         expect(spectator.component.isOpen).toBeTruthy();
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const lastItemIndex = items20.length - 1;
-        expect(kirbyItems.item(lastItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 1]);
       }));
 
       it('skips 10 items and highlights the 10th minus item', fakeAsync(() => {
@@ -365,10 +380,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageUp');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const tenthMinusItemIndex = kirbyItems.length - 1 - 10;
-
-        expect(kirbyItems.item(tenthMinusItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 1 - 10]);
       }));
 
       it('there are less than 10 items left, highlights the first item', fakeAsync(() => {
@@ -381,9 +393,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'PageUp');
 
         // Assert
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        const firstItemIndex = 0;
-        expect(kirbyItems.item(firstItemIndex)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[0]);
       }));
     });
 
@@ -392,8 +402,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Home');
 
         expect(spectator.component.isOpen).toBeTruthy();
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        expect(kirbyItems.item(0)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[0]);
       }));
 
       it('when open, moves focus to the first item', fakeAsync(() => {
@@ -403,8 +412,7 @@ describe('Combobox', () => {
 
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'Home');
 
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        expect(kirbyItems.item(0)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[0]);
       }));
     });
 
@@ -413,8 +421,7 @@ describe('Combobox', () => {
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'End');
 
         expect(spectator.component.isOpen).toBeTruthy();
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        expect(kirbyItems.item(items20.length - 1)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 1]);
       }));
 
       it('when open, moves focus to the last item', fakeAsync(() => {
@@ -422,8 +429,7 @@ describe('Combobox', () => {
 
         spectator.dispatchKeyboardEvent(inputElement, 'keydown', 'End');
 
-        const kirbyItems = document.querySelectorAll('kirby-item');
-        expect(kirbyItems.item(items20.length - 1)).toHaveClass('focused');
+        expect(spectator.component.focusedItem).toBe(items20[items20.length - 1]);
       }));
     });
 
