@@ -167,6 +167,13 @@ ion-content {
   --padding-bottom: var(--kirby-spacing-m);
 }
 
+// Add spacing for the keyboard overlap, minus Ionic's --keyboard-offset so the two spacings don't stack.
+:host(.keyboard-visible) ion-content {
+  --padding-bottom: calc(
+    var(--kirby-spacing-m) + var(--kirby-keyboard-content-overlap, 0px) - var(--keyboard-offset, 0px)
+  );
+}
+
 // Ensure padding-rules are not merged with other media query,
 // as this rule has to come AFTER the default mobile-first rule in order to override:
 
