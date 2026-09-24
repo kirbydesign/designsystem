@@ -85,6 +85,14 @@ kirby-card {
 .combobox-viewport {
   display: block;
   width: 100%;
+  overflow-anchor: none;
+}
+
+.combobox-group-header {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  background-color: var(--kirby-card-main-background-color);
 }
 
 .no-results {

@@ -29,7 +29,7 @@
   (willHide)="onPopoverWillHide()"
 >
   <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
-    @if (searchItems.length === 0) {
+    @if (navigableItems.length === 0) {
       <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
@@ -37,20 +37,33 @@
       <cdk-virtual-scroll-viewport
         class="combobox-viewport"
         role="listbox"
-        [itemSize]="itemHeight"
+        minBufferPx="1240"
+        maxBufferPx="1620"
+        [itemSize]="effectiveItemSize"
         [style.height.px]="viewportHeight"
       >
         <ng-container *cdkVirtualFor="let item of searchItems">
-          <ng-container
-            *ngTemplateOutlet="
-              itemTemplate || defaultItemTemplate;
-              context: {
-                $implicit: item,
-                selected: item === selectedItem,
-                focused: item === focusedItem,
-              }
-            "
-          ></ng-container>
+          @if (isGroupItem(item)) {
+            <div class="combobox-group-header" role="presentation">
+              <ng-container
+                *ngTemplateOutlet="
+                  defaultGroupHeaderTemplate;
+                  context: { $implicit: item }
+                "
+              ></ng-container>
+            </div>
+          } @else {
+            <ng-container
+              *ngTemplateOutlet="
+                itemTemplate || defaultItemTemplate;
+                context: {
+                  $implicit: item,
+                  selected: item === selectedItem,
+                  focused: item === focusedItem,
+                }
+              "
+            ></ng-container>
+          }
         </ng-container>
       </cdk-virtual-scroll-viewport>
     }
@@ -62,7 +75,7 @@
     role="option"
     [selectable]="true"
     [selected]="selected"
-    [class.focused]="focused"
+    [class.keyboard-focused]="focused"
     [attr.id]="getItemId(item)"
     [attr.aria-selected]="selected"
     (click)="onItemSelect(item)"
@@ -71,5 +84,11 @@
     @if (selected) {
       <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
     }
+  </kirby-item>
+</ng-template>
+
+<ng-template #defaultGroupHeaderTemplate let-group>
+  <kirby-item [attr.id]="group.id">
+    <p class="kirby-item-detail">{{ group.displayName }}</p>
   </kirby-item>
 </ng-template>
