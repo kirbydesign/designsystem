@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -65,6 +66,7 @@ const contentScrolledOffsetInPixels = 4;
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default,
   providers: [
     { provide: Modal, useExisting: ModalWrapperComponent },
     { provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent },
@@ -196,7 +198,6 @@ export class ModalWrapperComponent
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
-
     this.modalWrapperInjector = Injector.create({
       providers: [{ provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent }],
       parent: this.injector,

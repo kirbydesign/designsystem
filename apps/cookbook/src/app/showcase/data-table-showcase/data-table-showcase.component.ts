@@ -5,8 +5,8 @@ import { DataTableCardExampleComponent } from '../../examples/data-table-example
 import { DataTableSortableExampleComponent } from '../../examples/data-table-example/examples/sortable';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { dataTableApi } from './data-table-api';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-data-table-showcase',

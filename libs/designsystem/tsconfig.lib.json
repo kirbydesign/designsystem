@@ -3,7 +3,10 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "declaration": true,
-    "types": []
+    "types": ["jasmine", "node"],
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
