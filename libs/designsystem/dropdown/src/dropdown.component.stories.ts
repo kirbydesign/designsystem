@@ -279,11 +279,24 @@ export const DropdownOpenedPopoutBottomStartWithAsyncItems: Story = {
 // On small screens the opened list must stay within the
 // viewport and scroll internally instead of growing outside it.
 export const DropdownOpenedWithScrollableList: Story = {
+  parameters: {
+    layout: 'fullscreen',
+    chromatic: {
+      modes: {
+        'small-height': { viewport: { width: 375, height: 480 } },
+      },
+    },
+  },
   args: {
     items: Array.from({ length: 30 }, (_, i) => `Item ${i + 1}`),
     selectedIndex: 0,
   },
-  decorators: [withPosition('top-start')],
+  decorators: [
+    componentWrapperDecorator(
+      (story) =>
+        `<div style="position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;">${story}</div>`
+    ),
+  ],
   render: (args) => ({
     props: args,
     template: `<kirby-dropdown aria-label="Choose your favorite item" ${argsToTemplate(args)}></kirby-dropdown>`,
