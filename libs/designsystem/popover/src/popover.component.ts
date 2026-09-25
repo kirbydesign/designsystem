@@ -8,10 +8,13 @@ import {
   OnDestroy,
   Output,
   Renderer2,
+  RendererStyleFlags2,
   ViewChild,
 } from '@angular/core';
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+
+import { calculateVerticalPosition } from './popover.helper';
 
 export enum HorizontalDirection {
   right = 'right',
@@ -207,26 +210,29 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     targetDimensions: DOMRect,
     wrapperDimensions: DOMRect
   ) {
-    const viewPortHeight = viewPort.innerHeight;
-    const contentHeight = wrapperDimensions.height;
-    const availableSpaceDown = viewPortHeight - targetDimensions.bottom;
-    const availableSpaceUp = targetDimensions.top;
-    const contentCanFitBelowTarget =
-      availableSpaceDown >= contentHeight + this.POPOVER_BODY_PADDING;
+    const { opensUpwards, offset, availableMaxHeight } = calculateVerticalPosition({
+      viewportHeight: viewPort.innerHeight,
+      targetTop: targetDimensions.top,
+      targetBottom: targetDimensions.bottom,
+      contentHeight: wrapperDimensions.height,
+      bodyPadding: this.POPOVER_BODY_PADDING,
+    });
 
-    const isAvailableSpaceBelow =
-      contentCanFitBelowTarget || availableSpaceDown >= availableSpaceUp;
-    const [direction, oppositeDirection] = isAvailableSpaceBelow
-      ? ['bottom', 'top']
-      : ['top', 'bottom'];
+    const anchoredEdge = opensUpwards ? 'bottom' : 'top';
+    const oppositeEdge = opensUpwards ? 'top' : 'bottom';
 
-    const pxValue =
-      direction === 'bottom' ? targetDimensions.bottom : viewPortHeight - targetDimensions.top;
+    this.renderer.removeStyle(wrapperElement, oppositeEdge);
+    this.renderer.setStyle(wrapperElement, anchoredEdge, `${offset}px`);
 
-    this.renderer.removeStyle(wrapperElement, direction);
-    this.renderer.setStyle(wrapperElement, oppositeDirection, `${pxValue}px`);
+    // Constrain content to the space available in the chosen direction so it can't grow outside the viewport.
+    this.renderer.setStyle(
+      wrapperElement,
+      '--kirby-popover-available-max-height',
+      `${availableMaxHeight}px`,
+      RendererStyleFlags2.DashCase
+    );
 
-    if (direction === 'top') {
+    if (opensUpwards) {
       // Ensure target is elevated above shadows in popover, i.e. content wrapped in Card:
       this.renderer.setStyle(this.targetElement, 'z-index', `${this.zIndex + 1}`);
       this.renderer.setStyle(this.targetElement, 'pointer-events', 'none');
