@@ -7,7 +7,7 @@ import { ChartExampleConfigBaseStockComponent } from '../../../examples/charts-e
 import { ChartExampleConfigDatalabelsStockComponent } from '../../../examples/charts-example/examples/config/stock-config/chart-example-config-datalabels-stock.component';
 import { ChartExampleConfigTooltipStockComponent } from '../../../examples/charts-example/examples/config/stock-config/chart-example-config-tooltip-stock.component';
 import { ChartExampleConfigStockComponent } from '../../../examples/charts-example/examples/config/stock-config/chart-example-config-stock.component';
-import { ChartConfigExample } from '#cookbook/app/examples/charts-example/examples/config/chart-config-example';
+import { ChartConfigExample } from '~/app/examples/charts-example/examples/config/chart-config-example';
 
 @Component({
   selector: 'cookbook-chart-stock-config-showcase',

@@ -3,7 +3,14 @@
   "compilerOptions": {
     "types": ["jasmine"],
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "~/app/*": ["src/app/*"],
+      "~/environments/*": ["src/environments/*"],
+      "@repo/docs-import-map/*": ["../../tools/docs-import-map/*"]
+    }
   },
   "include": [],
   "files": [],

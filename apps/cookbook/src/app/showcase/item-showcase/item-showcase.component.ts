@@ -14,11 +14,11 @@ import { ItemExampleDisabledControlsComponent } from '../../examples/item-exampl
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ItemExampleComplexLabelsComponent } from '#cookbook/app/examples/item-example/examples/complex-labels';
-import { ItemExampleDisclosureAnimationComponent } from '#cookbook/app/examples/item-example/examples/disclosure-animation';
-import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
-import { ItemExampleWithInputComponent } from '#cookbook/app/examples/item-example/examples/with-input';
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ItemExampleComplexLabelsComponent } from '~/app/examples/item-example/examples/complex-labels';
+import { ItemExampleDisclosureAnimationComponent } from '~/app/examples/item-example/examples/disclosure-animation';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ItemExampleWithInputComponent } from '~/app/examples/item-example/examples/with-input';
 
 @Component({
   selector: 'cookbook-item-showcase',
