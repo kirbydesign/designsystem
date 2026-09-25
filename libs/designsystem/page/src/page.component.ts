@@ -165,6 +165,7 @@ export class PageStickyContentDirective {}
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption

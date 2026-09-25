@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Person, tableExampleData } from '../example-data';
-import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
+import { stringifyPretty } from '#cookbook/app/shared/code-viewer/code-viewer.component';
 
 const config = {
   selector: 'cookbook-data-table-default-example',

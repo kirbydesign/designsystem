@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
+import { stringifyPretty } from '#cookbook/app/shared/code-viewer/code-viewer.component';
 
 const items = [
   { title: 'Bacon', value: 1 },
