@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { DesignTokenHelper } from '@kirbydesign/designsystem';
 import { KeyValuePipe } from '@angular/common';
 // @ts-expect-error TypeScript cannot provide types based on attributes yet
-import exampleHtml from '../../examples/grid-example/grid-example.component.html' with { loader: 'text' };
+import exampleHtml from '../../examples/grid-example/grid-example.component.html' with {
+  loader: 'text',
+};
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { GridExampleComponent } from '../../examples/grid-example/grid-example.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 const { breakpoints } = DesignTokenHelper;
 

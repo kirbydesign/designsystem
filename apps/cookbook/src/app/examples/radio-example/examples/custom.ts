@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
-import { stringifyPretty } from '#cookbook/app/shared/code-viewer/code-viewer.component';
+import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = [
   { label: 'Bacon', description: 'Meat’s own spice', rating: 100 },

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as designsystemImportMap from '../../../../../../tools/docs-import-map/dist/designsystem';
+import * as designsystemImportMap from '@repo/docs-import-map/dist/designsystem';
 import { CodeViewerComponent } from '../code-viewer/code-viewer.component';
 
 @Component({
