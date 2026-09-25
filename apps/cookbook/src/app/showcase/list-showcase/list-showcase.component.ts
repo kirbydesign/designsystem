@@ -4,16 +4,16 @@ import exampleHtml from '../../examples/list-example/list-example.component.html
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ListItemsExampleComponent } from '~/app/examples/list-example/examples/items';
+import { ListItemsExampleComponent } from '#cookbook/app/examples/list-example/examples/items';
 import { ListItemsNoDividersExampleComponent } from '../../examples/list-example/examples/items-no-dividers';
-import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list-example/examples/header-and-footer';
-import { ListWithSectionsExampleComponent } from '~/app/examples/list-example/examples/sections';
-import { ListWithSectionsAndStandAloneExampleComponent } from '~/app/examples/list-example/examples/sections-with-standalone';
-import { ListSelectableItemsExampleComponent } from '~/app/examples/list-example/examples/selectable-items';
-import { ListWithStandAloneExampleComponent } from '~/app/examples/list-example/examples/stand-alone';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
-import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
+import { ListWithHeaderAndFooterExampleComponent } from '#cookbook/app/examples/list-example/examples/header-and-footer';
+import { ListWithSectionsExampleComponent } from '#cookbook/app/examples/list-example/examples/sections';
+import { ListWithSectionsAndStandAloneExampleComponent } from '#cookbook/app/examples/list-example/examples/sections-with-standalone';
+import { ListSelectableItemsExampleComponent } from '#cookbook/app/examples/list-example/examples/selectable-items';
+import { ListWithStandAloneExampleComponent } from '#cookbook/app/examples/list-example/examples/stand-alone';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
+import { ExampleViewerComponent } from '#cookbook/app/shared/example-viewer/example-viewer.component';
 
 @Component({
   selector: 'cookbook-list-showcase',

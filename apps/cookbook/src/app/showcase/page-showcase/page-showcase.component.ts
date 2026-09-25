@@ -6,22 +6,22 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
-import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
-import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
-import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
-import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
-import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
-import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
-import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
-import { PageContentWidthExampleComponent } from '~/app/examples/page-example/content-width/page-content-width-example.component';
-import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
-import { TabNavigationExampleComponent } from '~/app/examples/tab-navigation-example/tab-navigation-example.component';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { PageAdvancedExampleComponent } from '#cookbook/app/examples/page-example/advanced/page-advanced-example.component';
+import { PageCustomTitleExampleComponent } from '#cookbook/app/examples/page-example/advanced/page-custom-title-example.component';
+import { PageAlignmentAndToolbarTitleExampleComponent } from '#cookbook/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
+import { PageFitHeadingExampleComponent } from '#cookbook/app/examples/page-example/fit-heading/fit-heading-example.component';
+import { PageFixedFooterTabExampleComponent } from '#cookbook/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
+import { PageFixedTitleAndActionsExampleComponent } from '#cookbook/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
+import { PagePullToRefreshExampleComponent } from '#cookbook/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
+import { PageContentWidthExampleComponent } from '#cookbook/app/examples/page-example/content-width/page-content-width-example.component';
+import { PageSimpleExampleComponent } from '#cookbook/app/examples/page-example/simple/page-simple-example.component';
+import { TabNavigationExampleComponent } from '#cookbook/app/examples/tab-navigation-example/tab-navigation-example.component';
+import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+} from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-page-showcase',

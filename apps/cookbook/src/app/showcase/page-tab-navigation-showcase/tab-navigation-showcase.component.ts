@@ -4,9 +4,9 @@ import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { TabNavigationExampleComponent } from '~/app/examples/tab-navigation-example/tab-navigation-example.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { TabNavigationExampleComponent } from '#cookbook/app/examples/tab-navigation-example/tab-navigation-example.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-tab-navigation-showcase',

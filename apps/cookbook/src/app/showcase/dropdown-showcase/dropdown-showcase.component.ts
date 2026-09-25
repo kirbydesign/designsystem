@@ -13,13 +13,13 @@ import { DropdownExampleNgFormsComponent } from '../../examples/dropdown-example
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionMethodsComponent } from '../../shared/api-description/api-description-methods/api-description-methods.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { DropdownExampleStatesComponent } from '~/app/examples/dropdown-example/examples/states';
-import { DropdownExampleFormFieldComponent } from '~/app/examples/dropdown-example/examples/form-field';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
-import { DropdownExampleSizesComponent } from '~/app/examples/dropdown-example/examples/sizes';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
+import { DropdownExampleStatesComponent } from '#cookbook/app/examples/dropdown-example/examples/states';
+import { DropdownExampleFormFieldComponent } from '#cookbook/app/examples/dropdown-example/examples/form-field';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
+import { DropdownExampleSizesComponent } from '#cookbook/app/examples/dropdown-example/examples/sizes';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',

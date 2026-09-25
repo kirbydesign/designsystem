@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "description": "The documentation for Kirby Design System components.",
+  "imports": {
+    "#cookbook/app/*": "./src/app/*.ts",
+    "#cookbook/environments/*": "./src/environments/*.ts"
+  },
   "dependencies": {
     "prismjs": "1.30.0"
   },

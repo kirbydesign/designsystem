@@ -4,10 +4,10 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { ToggleReactiveFormsExampleComponent } from '../../examples/toggle-example/examples/reactive-forms';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
-import { ToggleItemExampleComponent } from '~/app/examples/toggle-example/examples/item';
-import { ToggleStateExampleComponent } from '~/app/examples/toggle-example/examples/state';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
+import { ToggleItemExampleComponent } from '#cookbook/app/examples/toggle-example/examples/item';
+import { ToggleStateExampleComponent } from '#cookbook/app/examples/toggle-example/examples/state';
 
 @Component({
   selector: 'cookbook-toggle-showcase',

@@ -10,8 +10,8 @@ import { SegmentedControlExampleColorComponent } from '../../examples/segmented-
 import { SegmentedControlReactiveFormsExampleComponent } from '../../examples/segmented-control-example/reactive-forms/reactive-forms';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-segmented-control-showcase',

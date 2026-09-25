@@ -7,11 +7,11 @@ import { IconSizesExampleComponent as IconSizesExampleComponent_1 } from '../../
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { IconCustomExampleComponent as IconCustomExampleComponent_1 } from '../../examples/icon-example/examples/custom';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { IconSizesExampleComponent } from '~/app/examples/icon-example/examples/sizes';
-import { IconDefaultExampleComponent } from '~/app/examples/icon-example/examples/default';
-import { IconCustomExampleComponent } from '~/app/examples/icon-example/examples/custom';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { IconSizesExampleComponent } from '#cookbook/app/examples/icon-example/examples/sizes';
+import { IconDefaultExampleComponent } from '#cookbook/app/examples/icon-example/examples/default';
+import { IconCustomExampleComponent } from '#cookbook/app/examples/icon-example/examples/custom';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-icon-showcase',

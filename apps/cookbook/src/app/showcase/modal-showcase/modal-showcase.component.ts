@@ -7,18 +7,18 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
 import { ModalExampleAlertWithGuardStepperComponent } from '../../examples/modal-example/alert-example/modal-example-alert-with-guard-stepper.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
-import { ModalExampleAdvancedComponent } from '~/app/examples/modal-example/modal-example-advanced.component';
-import { ModalExampleOutletComponent } from '~/app/examples/modal-example/modal-example-outlet.component';
-import { ModalExampleSimpleComponent } from '~/app/examples/modal-example/modal-example-simple.component';
-import { ModalExampleAlertComponent } from '~/app/examples/modal-example/modal-example-alert.component';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ModalExampleAdvancedComponent } from '#cookbook/app/examples/modal-example/modal-example-advanced.component';
+import { ModalExampleOutletComponent } from '#cookbook/app/examples/modal-example/modal-example-outlet.component';
+import { ModalExampleSimpleComponent } from '#cookbook/app/examples/modal-example/modal-example-simple.component';
+import { ModalExampleAlertComponent } from '#cookbook/app/examples/modal-example/modal-example-alert.component';
+import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
-import { ModalComponentExampleComponent } from '~/app/examples/modal-example/modal-component-example.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+} from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ModalEmbeddedAlertExampleComponent } from '#cookbook/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
+import { ModalComponentExampleComponent } from '#cookbook/app/examples/modal-example/modal-component-example.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-modal-showcase',
