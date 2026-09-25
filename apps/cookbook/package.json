@@ -3,6 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "description": "The documentation for Kirby Design System components.",
+  "imports": {
+    "#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component": "./src/app/shared/api-description/api-description-properties/api-description-properties.component.ts",
+    "#cookbook/app/shared/api-description/api-description-events/api-description-events.component": "./src/app/shared/api-description/api-description-events/api-description-events.component.ts",
+    "#cookbook/app/*": "./src/app/*.ts",
+    "#cookbook/environments/*": "./src/environments/*.ts"
+  },
   "dependencies": {
     "prismjs": "1.30.0"
   },
