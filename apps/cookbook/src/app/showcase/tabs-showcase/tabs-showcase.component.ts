@@ -4,7 +4,7 @@ import exampleHtml from '../../examples/tabs-example/tabs-example.component.html
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({

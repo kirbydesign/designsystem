@@ -8,7 +8,7 @@ import { ProgressCircleExampleContentPercentComponent } from '../../examples/pro
 import { ProgressCircleExampleAnimatedComponent } from '../../examples/progress-circle-example/examples/animated';
 import { ProgressCircleExampleCardComponent } from '../../examples/progress-circle-example/examples/card';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({

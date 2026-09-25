@@ -9,7 +9,7 @@ import { ToggleButtonReactiveFormsExampleComponent } from '../../examples/toggle
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({

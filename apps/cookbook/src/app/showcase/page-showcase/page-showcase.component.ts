@@ -16,11 +16,11 @@ import { PagePullToRefreshExampleComponent } from '#cookbook/app/examples/page-e
 import { PageContentWidthExampleComponent } from '#cookbook/app/examples/page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from '#cookbook/app/examples/page-example/simple/page-simple-example.component';
 import { TabNavigationExampleComponent } from '#cookbook/app/examples/tab-navigation-example/tab-navigation-example.component';
-import { ApiDescriptionEvent } from '#cookbook/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+} from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({

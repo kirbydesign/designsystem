@@ -17,8 +17,8 @@ import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionEvent } from '#cookbook/app/shared/api-description/api-description-events/api-description-events.component';
+} from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 import { HeaderWithInteractiveTitleExampleComponent } from '#cookbook/app/examples/header-example/examples/interactive-title';
 import { HeaderWithCustomActionsExampleComponent } from '#cookbook/app/examples/header-example/examples/custom-actions';

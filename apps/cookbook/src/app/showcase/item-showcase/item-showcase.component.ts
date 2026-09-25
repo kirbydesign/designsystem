@@ -14,7 +14,7 @@ import { ItemExampleDisabledControlsComponent } from '../../examples/item-exampl
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+} from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ItemExampleComplexLabelsComponent } from '#cookbook/app/examples/item-example/examples/complex-labels';
 import { ItemExampleDisclosureAnimationComponent } from '#cookbook/app/examples/item-example/examples/disclosure-animation';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';

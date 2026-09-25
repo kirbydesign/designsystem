@@ -6,7 +6,7 @@ import {
   ApiDescriptionMethodsComponent,
 } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 import { ExampleViewerComponent } from '#cookbook/app/shared/example-viewer/example-viewer.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ToastExampleDefaultComponent } from '#cookbook/app/examples/toast-example/examples/default';
 import { ToastExampleDurationComponent } from '#cookbook/app/examples/toast-example/examples/duration';
 import { ToastExampleDismissComponent } from '#cookbook/app/examples/toast-example/examples/dismiss';

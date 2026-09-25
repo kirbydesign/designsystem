@@ -3,7 +3,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { FlagExampleColorsComponent } from '../../examples/flag-example/examples/colors';
 import { FlagExampleSizesComponent } from '../../examples/flag-example/examples/sizes';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({

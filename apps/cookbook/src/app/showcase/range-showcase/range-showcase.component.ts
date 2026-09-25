@@ -7,8 +7,8 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
 import { RangeDisabledFormExampleComponent } from '../../examples/range-example/examples/disabled.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionMethod } from '#cookbook/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 @Component({
   selector: 'cookbook-range-showcase',

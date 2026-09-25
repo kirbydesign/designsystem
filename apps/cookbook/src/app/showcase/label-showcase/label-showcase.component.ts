@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { FormFieldInputLabelExampleComponent } from '#cookbook/app/examples/form-field-example/examples/input/label';
 import { LabelExampleDirectionComponent } from '#cookbook/app/examples/label-example/examples/direction';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';

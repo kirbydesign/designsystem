@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 // @ts-expect-error TypeScript cannot provide types based on attributes yet
 import exampleHtml from '../../examples/slide-button-example/slide-button-example.component.html' with { loader: 'text' };
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ExampleViewerComponent } from '#cookbook/app/shared/example-viewer/example-viewer.component';
 import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 import { SimpleSlideButtonExampleComponent } from '#cookbook/app/examples/slide-button-example/examples/simple';
