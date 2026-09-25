@@ -3,5 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Tool for converting sass design tokens to ts."
+  "description": "Tool for converting sass design tokens to ts.",
+  "exports": {
+    "./plugin": "./sass-to-ts.plugin.ts"
+  }
 }

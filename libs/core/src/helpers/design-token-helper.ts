@@ -98,13 +98,13 @@ export class DesignTokenHelper {
     return ColorHelper.getBackgroundColor();
   }
 
-  public static borderRadius(key: keyof typeof styles.borderRadii = undefined): string {
+  public static borderRadius(key?: keyof typeof styles.borderRadii): string {
     if (key === undefined) {
       console.warn(
         "Calling the borderRadius function without a parameter is deprecated. Please use `borderRadius('n')` instead."
       );
     }
-    return styles.borderRadii[key];
+    return styles.borderRadii[key ?? 'n'];
   }
 
   /**

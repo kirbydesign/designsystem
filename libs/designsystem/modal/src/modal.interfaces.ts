@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, Optional } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  Optional,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';

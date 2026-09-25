@@ -12,8 +12,8 @@ import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
   styleUrls: ['./item-sliding.component.scss'],
 })
 export class ItemSlidingComponent {
-  @ViewChild(IonItemSliding, { static: true }) itemSliding: IonItemSliding;
-  @Input() swipeActions: ItemSwipeAction[];
+  @ViewChild(IonItemSliding, { static: true }) itemSliding!: IonItemSliding;
+  @Input() swipeActions: ItemSwipeAction[] = [];
 
   _side: 'start' | 'end' = 'start';
   @Input() set side(value: ItemSlidingSide) {

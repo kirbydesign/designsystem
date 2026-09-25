@@ -19,15 +19,15 @@
   },
   "homepage": "https://cookbook.kirby.design",
   "peerDependencies": {
-    "@angular/animations": "^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
-    "@angular/cdk": "^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
-    "@angular/common": "^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
-    "@angular/core": "^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
-    "@angular/forms": "^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
-    "@angular/router": "^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
+    "@angular/animations": "^20.0.0 || ^21.0.0 || ^22.0.0",
+    "@angular/cdk": "^20.0.0 || ^21.0.0 || ^22.0.0",
+    "@angular/common": "^20.0.0 || ^21.0.0 || ^22.0.0",
+    "@angular/core": "^20.0.0 || ^21.0.0 || ^22.0.0",
+    "@angular/forms": "^20.0.0 || ^21.0.0 || ^22.0.0",
+    "@angular/router": "^20.0.0 || ^21.0.0 || ^22.0.0",
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "^5.2.6",
-    "@ionic/angular": "9.0.2",
+    "@ionic/angular": "9.0.5",
     "@kirbydesign/core": "*",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
@@ -40,6 +40,10 @@
     "swiper": "^14.2.0"
   },
   "devDependencies": {
+    "@floating-ui/dom": "1.8.0",
+    "@fontsource/roboto": "^5.2.6",
+    "@ionic/angular": "9.0.2",
+    "@ionic/core": "9.0.5",
     "@ngneat/spectator": "^22.1.0",
     "@types/jasmine": "4.0.3",
     "@types/jest": "^29.5.5",
@@ -56,13 +60,38 @@
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.32",
+    "chartjs-adapter-date-fns": "2.0.0",
+    "chart.js": "3.9.1",
+    "chartjs-plugin-annotation": "1.4.0",
+    "chartjs-plugin-datalabels": "2.2.0",
     "postcss": "^8.5.23",
     "postcss-import": "14.1.0",
     "postcss-preset-env": "7.5.0",
-    "postcss-url": "10.1.4"
+    "postcss-url": "10.1.4",
+    "swiper": "14.2.0"
   },
   "exports": {
     "./scss/global-styles": "./scss/_global-styles.scss",
-    "./scss/utils": "./scss/_utils.scss"
+    "./scss/utils": "./scss/_utils.scss",
+    ".": {
+      "types": "./dist/types/kirbydesign-designsystem.d.ts",
+      "default": "./dist/fesm2022/kirbydesign-designsystem.mjs"
+    },
+    "./*": {
+      "types": "./dist/types/kirbydesign-designsystem-*.d.ts",
+      "default": "./dist/fesm2022/kirbydesign-designsystem-*.mjs"
+    },
+    "./helpers/scss": {
+      "types": "./dist/types/kirbydesign-designsystem-helpers-scss.d.ts",
+      "default": "./dist/fesm2022/kirbydesign-designsystem-helpers-scss.mjs"
+    },
+    "./shared/floating": {
+      "types": "./dist/types/kirbydesign-designsystem-shared-floating.d.ts",
+      "default": "./dist/fesm2022/kirbydesign-designsystem-shared-floating.mjs"
+    },
+    "./shared/portal": {
+      "types": "./dist/types/kirbydesign-designsystem-shared-portal.d.ts",
+      "default": "./dist/fesm2022/kirbydesign-designsystem-shared-portal.mjs"
+    }
   }
 }
