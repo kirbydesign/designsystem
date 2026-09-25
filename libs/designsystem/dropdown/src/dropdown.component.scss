@@ -67,7 +67,7 @@ $min-screen-width: 375px;
 }
 
 kirby-popover {
-  --max-height: #{$dropdown-max-height};
+  --available-max-height: #{$dropdown-max-height};
 }
 
 kirby-card {
