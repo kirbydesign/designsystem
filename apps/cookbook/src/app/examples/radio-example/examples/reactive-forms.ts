@@ -11,7 +11,7 @@ import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ExampleConfigurationWrapperComponent } from '../../example-configuration-wrapper/example-configuration-wrapper.component';
 import { ReactiveFormStateComponent } from '../../reactive-form-state/reactive-form-state.component';
-import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
+import { stringifyPretty } from '#cookbook/app/shared/code-viewer/code-viewer.component';
 
 const items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
 

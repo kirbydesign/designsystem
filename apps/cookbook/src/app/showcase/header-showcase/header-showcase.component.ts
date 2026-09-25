@@ -17,13 +17,13 @@ import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
-import { HeaderWithInteractiveTitleExampleComponent } from '~/app/examples/header-example/examples/interactive-title';
-import { HeaderWithCustomActionsExampleComponent } from '~/app/examples/header-example/examples/custom-actions';
-import { HeaderWithEmphasizedActionGroupExampleComponent } from '~/app/examples/header-example/examples/emphasize-actions';
-import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-example/examples/action-group';
+} from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '#cookbook/app/shared/api-description/api-description-events/api-description-events.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
+import { HeaderWithInteractiveTitleExampleComponent } from '#cookbook/app/examples/header-example/examples/interactive-title';
+import { HeaderWithCustomActionsExampleComponent } from '#cookbook/app/examples/header-example/examples/custom-actions';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from '#cookbook/app/examples/header-example/examples/emphasize-actions';
+import { HeaderWithActionGroupExampleComponent } from '#cookbook/app/examples/header-example/examples/action-group';
 
 @Component({
   selector: 'cookbook-header-showcase',

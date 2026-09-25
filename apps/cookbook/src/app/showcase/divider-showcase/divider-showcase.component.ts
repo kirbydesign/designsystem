@@ -7,7 +7,7 @@ import exampleHtml from '../../examples/divider-example/divider-example.componen
 };
 import { DividerExampleComponent } from '../../examples/divider-example/divider-example.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-divider-showcase',
