@@ -13,9 +13,9 @@ import { CheckboxReactiveFormsExampleComponent } from '../../examples/checkbox-e
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { CheckboxIndeterminateListExampleComponent } from '../../examples/checkbox-example/examples/list-indeterminate';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionEvent } from '#cookbook/app/shared/api-description/api-description-events/api-description-events.component';
-import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-checkbox-showcase',

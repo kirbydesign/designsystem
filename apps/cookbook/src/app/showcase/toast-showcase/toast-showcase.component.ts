@@ -5,13 +5,13 @@ import {
   ApiDescriptionMethod,
   ApiDescriptionMethodsComponent,
 } from '../../shared/api-description/api-description-methods/api-description-methods.component';
-import { ExampleViewerComponent } from '#cookbook/app/shared/example-viewer/example-viewer.component';
-import { ApiDescriptionProperty } from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ToastExampleDefaultComponent } from '#cookbook/app/examples/toast-example/examples/default';
-import { ToastExampleDurationComponent } from '#cookbook/app/examples/toast-example/examples/duration';
-import { ToastExampleDismissComponent } from '#cookbook/app/examples/toast-example/examples/dismiss';
-import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
-import { IphoneComponent } from '#cookbook/app/iphone/iphone.component';
+import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ToastExampleDefaultComponent } from '~/app/examples/toast-example/examples/default';
+import { ToastExampleDurationComponent } from '~/app/examples/toast-example/examples/duration';
+import { ToastExampleDismissComponent } from '~/app/examples/toast-example/examples/dismiss';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { IphoneComponent } from '~/app/iphone/iphone.component';
 
 @Component({
   selector: 'cookbook-toast-showcase',

@@ -20,11 +20,11 @@ import {
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
-import { SlidesCustomHeadingExampleComponent } from '#cookbook/app/examples/slides-example/examples/custom-heading';
-import { SlidesHeightExampleComponent } from '#cookbook/app/examples/slides-example/examples/height';
-import { SlidesSimpleExampleComponent } from '#cookbook/app/examples/slides-example/examples/simple';
-import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
-import { SlidesAdvancedExampleComponent } from '#cookbook/app/examples/slides-example/examples/advanced';
+import { SlidesCustomHeadingExampleComponent } from '~/app/examples/slides-example/examples/custom-heading';
+import { SlidesHeightExampleComponent } from '~/app/examples/slides-example/examples/height';
+import { SlidesSimpleExampleComponent } from '~/app/examples/slides-example/examples/simple';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { SlidesAdvancedExampleComponent } from '~/app/examples/slides-example/examples/advanced';
 @Component({
   selector: 'cookbook-slides-showcase',
   templateUrl: './slides-showcase.component.html',

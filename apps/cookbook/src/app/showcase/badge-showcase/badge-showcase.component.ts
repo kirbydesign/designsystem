@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { CardModule } from '@kirbydesign/designsystem/card';
 // @ts-expect-error TypeScript cannot provide types based on attributes yet
-import exampleHtml from '../../examples/badge-example/badge-example.component.html' with { loader: 'text' };
+import exampleHtml from '../../examples/badge-example/badge-example.component.html' with {
+  loader: 'text',
+};
 import { BadgeExampleNumberComponent } from '../../examples/badge-example/examples/badge-example-number.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { BadgeExampleTextComponent } from '../../examples/badge-example/examples/badge-example-text.component';
@@ -12,8 +14,8 @@ import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
   selector: 'cookbook-badge-showcase',

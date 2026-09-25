@@ -8,10 +8,10 @@ import {
   ApiDescriptionProperty,
 } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
-import { ImportViewerComponent } from '#cookbook/app/shared/import-code-viewer/import-code-viewer.component';
-import { CardExampleComponent } from '#cookbook/app/examples/loading-overlay-example/examples/card';
-import { DefaultExampleComponent } from '#cookbook/app/examples/loading-overlay-example/examples/default';
-import { ServiceExampleComponent } from '#cookbook/app/examples/loading-overlay-example/examples/service';
+import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
+import { CardExampleComponent } from '~/app/examples/loading-overlay-example/examples/card';
+import { DefaultExampleComponent } from '~/app/examples/loading-overlay-example/examples/default';
+import { ServiceExampleComponent } from '~/app/examples/loading-overlay-example/examples/service';
 
 @Component({
   selector: 'cookbook-loading-overlay-showcase',

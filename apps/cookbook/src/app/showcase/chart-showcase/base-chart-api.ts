@@ -1,7 +1,7 @@
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
-} from '#cookbook/app/shared/api-description/api-description-properties/api-description-properties.component';
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 /* 
   This part of the API is stored in this file as it is shared between 
