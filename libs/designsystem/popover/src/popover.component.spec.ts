@@ -8,54 +8,77 @@ describe('PopoverComponent', () => {
     component: PopoverComponent,
   });
 
-  // Mirrors the private POPOVER_BODY_PADDING in PopoverComponent
-  const padding = 12;
+  const POPOVER_BODY_PADDING = 12;
 
   beforeEach(() => {
     spectator = createComponent();
   });
 
-  const getMaxHeight = (): string =>
+  const getAvailableMaxHeight = (): string =>
     spectator.component.wrapperElement.nativeElement.style.getPropertyValue(
       '--kirby-popover-available-max-height'
     );
 
-  const positionVertically = (
-    viewPort: Partial<Window>,
-    targetDimensions: Partial<DOMRect>,
-    wrapperDimensions: Partial<DOMRect>
-  ): void =>
+  const positionVerticallyWith = (dimensions: {
+    viewportHeight: number;
+    targetTop: number;
+    targetBottom: number;
+    contentHeight: number;
+  }): void =>
     spectator.component['positionVertically'](
-      viewPort as Window,
+      { innerHeight: dimensions.viewportHeight } as Window,
       spectator.component.wrapperElement.nativeElement,
-      targetDimensions as DOMRect,
-      wrapperDimensions as DOMRect
+      { top: dimensions.targetTop, bottom: dimensions.targetBottom } as DOMRect,
+      { height: dimensions.contentHeight } as DOMRect
     );
 
   describe('available height calculation', () => {
-    it('should constrain --kirby-popover-available-max-height to the space below the target when opening downwards', () => {
-      // availableSpaceDown = innerHeight - target.bottom = 800 - 100 = 700
-      positionVertically({ innerHeight: 800 }, { top: 80, bottom: 100 }, { height: 200 });
+    it('should constrain the available max-height to the space below the target when opening downwards', () => {
+      const viewportHeight = 800;
+      const targetBottom = 100;
+      const spaceBelowTarget = viewportHeight - targetBottom;
 
-      expect(getMaxHeight()).toBe(`${700 - padding}px`);
+      positionVerticallyWith({
+        viewportHeight,
+        targetTop: 80,
+        targetBottom,
+        contentHeight: 200,
+      });
+
+      expect(getAvailableMaxHeight()).toBe(`${spaceBelowTarget - POPOVER_BODY_PADDING}px`);
     });
 
-    it('should constrain --kirby-popover-available-max-height to the space above the target when opening upwards', () => {
-      // Target sits low in the viewport with little room below, so it opens upwards.
-      // targetElement is accessed when opening upwards, so provide one.
+    it('should constrain the available max-height to the space above the target when opening upwards', () => {
+      const viewportHeight = 800;
+      const targetTop = 700;
+      const targetNearViewportBottom = 780;
+      const contentTooTallToFitBelow = 400;
+      const spaceAboveTarget = targetTop;
       spectator.component.target = document.createElement('button');
 
-      // availableSpaceUp = target.top = 700
-      positionVertically({ innerHeight: 800 }, { top: 700, bottom: 780 }, { height: 400 });
+      positionVerticallyWith({
+        viewportHeight,
+        targetTop,
+        targetBottom: targetNearViewportBottom,
+        contentHeight: contentTooTallToFitBelow,
+      });
 
-      expect(getMaxHeight()).toBe(`${700 - padding}px`);
+      expect(getAvailableMaxHeight()).toBe(`${spaceAboveTarget - POPOVER_BODY_PADDING}px`);
     });
 
     it('should subtract the body padding from the available space', () => {
-      // availableSpaceDown = 500 - 100 = 400
-      positionVertically({ innerHeight: 500 }, { top: 80, bottom: 100 }, { height: 50 });
+      const viewportHeight = 500;
+      const targetBottom = 100;
+      const spaceBelowTarget = viewportHeight - targetBottom;
 
-      expect(getMaxHeight()).toBe(`${400 - padding}px`);
+      positionVerticallyWith({
+        viewportHeight,
+        targetTop: 80,
+        targetBottom,
+        contentHeight: 50,
+      });
+
+      expect(getAvailableMaxHeight()).toBe(`${spaceBelowTarget - POPOVER_BODY_PADDING}px`);
     });
   });
 });
