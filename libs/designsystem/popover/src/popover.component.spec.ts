@@ -17,7 +17,7 @@ describe('PopoverComponent', () => {
 
   const getMaxHeight = (): string =>
     spectator.component.wrapperElement.nativeElement.style.getPropertyValue(
-      '--available-max-height'
+      '--kirby-popover-available-max-height'
     );
 
   const positionVertically = (
@@ -33,14 +33,14 @@ describe('PopoverComponent', () => {
     );
 
   describe('available height calculation', () => {
-    it('should constrain --available-max-height to the space below the target when opening downwards', () => {
+    it('should constrain --kirby-popover-available-max-height to the space below the target when opening downwards', () => {
       // availableSpaceDown = innerHeight - target.bottom = 800 - 100 = 700
       positionVertically({ innerHeight: 800 }, { top: 80, bottom: 100 }, { height: 200 });
 
       expect(getMaxHeight()).toBe(`${700 - padding}px`);
     });
 
-    it('should constrain --available-max-height to the space above the target when opening upwards', () => {
+    it('should constrain --kirby-popover-available-max-height to the space above the target when opening upwards', () => {
       // Target sits low in the viewport with little room below, so it opens upwards.
       // targetElement is accessed when opening upwards, so provide one.
       spectator.component.target = document.createElement('button');

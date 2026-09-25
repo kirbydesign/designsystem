@@ -66,12 +66,11 @@ $min-screen-width: 375px;
   }
 }
 
-kirby-popover {
-  --available-max-height: #{$dropdown-max-height};
-}
-
 kirby-card {
-  max-height: min(#{$dropdown-max-height}, var(--available-max-height, #{$dropdown-max-height}));
+  max-height: min(
+    #{$dropdown-max-height},
+    var(--kirby-popover-available-max-height, #{$dropdown-max-height})
+  );
   overflow-y: auto;
   box-shadow: var(--kirby-elevation-4);
   max-width: calc(100vw - #{$margin-horizontal-total});

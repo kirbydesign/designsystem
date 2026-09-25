@@ -232,7 +232,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
       (isAvailableSpaceBelow ? availableSpaceDown : availableSpaceUp) - this.POPOVER_BODY_PADDING;
     this.renderer.setStyle(
       wrapperElement,
-      '--available-max-height',
+      '--kirby-popover-available-max-height',
       `${availableHeight}px`,
       RendererStyleFlags2.DashCase
     );
