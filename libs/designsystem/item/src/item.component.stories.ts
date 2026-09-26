@@ -10,7 +10,7 @@ import {
   CardHeaderComponent,
 } from '@kirbydesign/designsystem/card';
 import { InputComponent } from '@kirbydesign/designsystem/form-field';
-import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { responsiveModes } from '@repo/storybook-config/shared-config';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';

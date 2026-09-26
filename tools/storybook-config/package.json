@@ -1,0 +1,10 @@
+{
+  "name": "@repo/storybook-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Storybook configuration used across Storybook projects.",
+  "exports": {
+    "./shared-config": "./shared-config.ts"
+  }
+}
