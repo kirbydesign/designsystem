@@ -1,11 +1,5 @@
 import { CdkPortalOutlet, DomPortal, Portal } from '@angular/cdk/portal';
-import {
-  ComponentFactoryResolver,
-  Directive,
-  ElementRef,
-  Input,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, ElementRef, Input, ViewContainerRef } from '@angular/core';
 
 /**
  * @summary PortalDirective is a utility that lets you portal the host element into another DOM element.
@@ -52,10 +46,9 @@ export class PortalDirective extends CdkPortalOutlet {
 
   public constructor(
     private elementRef: ElementRef,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef
   ) {
-    super(componentFactoryResolver, viewContainerRef);
+    super();
   }
 
   /**

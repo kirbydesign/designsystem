@@ -3,7 +3,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 
-import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { responsiveModes } from '@repo/storybook-config/shared-config';
 import { HeaderExampleComponent } from '~/app/examples/header-example/header-example.component';
 
 const meta: Meta<HeaderComponent> = {

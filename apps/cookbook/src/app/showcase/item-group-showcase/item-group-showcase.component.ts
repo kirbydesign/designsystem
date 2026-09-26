@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 
 // @ts-expect-error TypeScript cannot provide types based on attributes yet
-import exampleHtml from '../../examples/item-group-example/item-group-example.component.html' with { loader: 'text' };
+import exampleHtml from '../../examples/item-group-example/item-group-example.component.html' with {
+  loader: 'text',
+};
 import { ItemGroupSimpleExampleComponent } from '../../examples/item-group-example/examples/simple';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { ItemGroupWithSectionHeaderExampleComponent } from '../../examples/item-group-example/examples/with-header';

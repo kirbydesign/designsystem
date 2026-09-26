@@ -20,79 +20,79 @@ export class ThemeColorDirective {
     return this._isDefault;
   }
 
-  private _isPrimary: boolean;
+  private _isPrimary = false;
   @HostBinding('class.primary')
   get isPrimary() {
     return this._isPrimary;
   }
 
-  private _isSecondary: boolean;
+  private _isSecondary = false;
   @HostBinding('class.secondary')
   get isSecondary() {
     return this._isSecondary;
   }
 
-  private _isTertiary: boolean;
+  private _isTertiary = false;
   @HostBinding('class.tertiary')
   get isTertiary() {
     return this._isTertiary;
   }
 
-  private _isSuccess: boolean;
+  private _isSuccess = false;
   @HostBinding('class.success')
   get isSuccess() {
     return this._isSuccess;
   }
 
-  private _isWarning: boolean;
+  private _isWarning = false;
   @HostBinding('class.warning')
   get isWarning() {
     return this._isWarning;
   }
 
-  private _isDanger: boolean;
+  private _isDanger = false;
   @HostBinding('class.danger')
   get isDanger() {
     return this._isDanger;
   }
 
-  private _isLight: boolean;
+  private _isLight = false;
   @HostBinding('class.light')
   get isLight() {
     return this._isLight;
   }
 
-  private _isMedium: boolean;
+  private _isMedium = false;
   @HostBinding('class.medium')
   get isMedium() {
     return this._isMedium;
   }
 
-  private _isDark: boolean;
+  private _isDark = false;
   @HostBinding('class.dark')
   get isDark() {
     return this._isDark;
   }
 
-  private _isWhite: boolean;
+  private _isWhite = false;
   @HostBinding('class.white')
   get isWhite() {
     return this._isWhite;
   }
 
-  private _isBrightnessWhite: boolean;
+  private _isBrightnessWhite = false;
   @HostBinding('class.kirby-color-brightness-white')
   get isBrightnessWhite() {
     return this._isBrightnessWhite;
   }
 
-  private _isBrightnessLight: boolean;
+  private _isBrightnessLight = false;
   @HostBinding('class.kirby-color-brightness-light')
   get isBrightnessLight() {
     return this._isBrightnessLight;
   }
 
-  private _isBrightnessDark: boolean;
+  private _isBrightnessDark = false;
   @HostBinding('class.kirby-color-brightness-dark')
   get isBrightnessDark() {
     return this._isBrightnessDark;

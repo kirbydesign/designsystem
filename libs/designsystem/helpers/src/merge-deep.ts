@@ -10,8 +10,12 @@
  *  mergeArrays determines if it should merge or override arrays
  * @returns object - New object with merged key/values
  */
-export function mergeDeep(originalObject, overrideObject, config = { mergeArrays: false }) {
-  const isObject = (obj) => obj && typeof obj === 'object';
+export function mergeDeep(
+  originalObject: Record<string, any>,
+  overrideObject: Record<string, any>,
+  config: { mergeArrays: boolean } = { mergeArrays: false }
+): Record<string, any> {
+  const isObject = (obj: any) => obj && typeof obj === 'object';
 
   return [originalObject, overrideObject].reduce((mergedObject, obj) => {
     Object.keys(obj).forEach((key) => {

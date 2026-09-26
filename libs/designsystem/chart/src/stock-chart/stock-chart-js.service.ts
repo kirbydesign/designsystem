@@ -43,7 +43,7 @@ export class StockChartJSService extends ChartJSService {
     const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
       previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
     );
-    return largestDataset.data.map((point: ScatterDataPoint) =>
+    return (largestDataset.data as ScatterDataPoint[]).map((point: ScatterDataPoint) =>
       toDate(point.x).toLocaleDateString(this.locale, {
         month: 'short',
         day: 'numeric',

@@ -7,7 +7,7 @@ import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
-import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { responsiveModes } from '@repo/storybook-config/shared-config';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,
