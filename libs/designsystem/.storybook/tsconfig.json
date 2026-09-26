@@ -8,7 +8,8 @@
     "baseUrl": ".",
     "paths": {
       "~/app/*": ["../../../apps/cookbook/src/app/*"],
-      "~/environments/*": ["../../../apps/cookbook/src/environments/*"]
+      "~/environments/*": ["../../../apps/cookbook/src/environments/*"],
+      "tools/storybook-config/*": ["../../../tools/storybook-config/*"]
     },
     "strict": false,
     "strictNullChecks": false,
