@@ -26,7 +26,8 @@ runs:
     - name: Clean Install NPM Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       # Alternative way to clean install due to this bug https://github.com/npm/cli/issues/4828
-      run: npm ci
+      # --legacy-peer-deps: @nx/angular's peer range for @angular-devkit/* doesn't cover Angular 22 yet
+      run: npm ci --legacy-peer-deps
       shell: bash
     - name: Run Postinstall Script
       if: steps.cache.outputs.cache-hit == 'true'

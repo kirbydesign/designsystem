@@ -9,10 +9,10 @@ export class IonicElementPartHelper {
     // Ensure custom element has been defined and rendered
     await customElements.whenDefined(ionicElementRef.nativeElement.localName);
     const customElement = await new Promise<HTMLElement>((resolve) => {
-      componentOnReady(ionicElementRef.nativeElement, (element) => resolve(element));
+      componentOnReady(ionicElementRef.nativeElement, (element: HTMLElement) => resolve(element));
     });
 
-    const partElement: HTMLElement = customElement.shadowRoot.querySelector(selector);
+    const partElement = customElement.shadowRoot?.querySelector<HTMLElement>(selector);
     if (!partElement) return;
 
     this.renderer.setAttribute(partElement, 'part', partName);

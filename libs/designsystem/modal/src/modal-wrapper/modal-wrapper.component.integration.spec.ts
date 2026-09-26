@@ -10,14 +10,12 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import {
-  AlertHelper,
-  CanDismissHelper,
-  ModalComponent,
-  ModalFooterComponent,
-  ModalNavigationService,
-  ModalWrapperComponent,
-} from '@kirbydesign/designsystem/modal';
+import { AlertHelper } from '../modal/services/alert.helper';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
+import { ModalComponent } from '../modal/modal-component/modal.component';
+import { ModalFooterComponent } from '../modal/footer/modal-footer.component';
+import { ModalNavigationService } from '../modal-navigation.service';
+import { ModalWrapperComponent } from './modal-wrapper.component';
 
 import {
   DynamicFooterEmbeddedComponent,

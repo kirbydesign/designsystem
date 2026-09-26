@@ -3,7 +3,18 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "module": "esnext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "~/app/*": ["../../../apps/cookbook/src/app/*"],
+      "~/environments/*": ["../../../apps/cookbook/src/environments/*"],
+      "tools/storybook-config/*": ["../../../tools/storybook-config/*"]
+    },
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false
   },
   "exclude": ["../**/*.spec.ts", "../testing*/**"],
   "include": ["../**/*.stories.ts", "../**/*.mdx", "*.js", "*.ts"]

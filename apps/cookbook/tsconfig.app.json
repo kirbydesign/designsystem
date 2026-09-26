@@ -4,7 +4,15 @@
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
     "moduleResolution": "bundler",
-    "module": "esnext"
+    "module": "esnext",
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": false,
+    "strictInjectionParameters": false
   },
   "files": ["src/main.ts"],
   "include": ["**/*.ts"],

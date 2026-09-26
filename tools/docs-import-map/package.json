@@ -3,5 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Tool for generating information about component and type exports and their respective package entry points."
+  "description": "Tool for generating information about component and type exports and their respective package entry points.",
+  "exports": {
+    "./plugin": "./docs-import-map.plugin.ts"
+  }
 }

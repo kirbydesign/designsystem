@@ -38,10 +38,11 @@
           }
         ],
         "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
+        "allowedCommonJsDependencies": ["prismjs"],
         "browser": "apps/cookbook/src/main.ts",
         "plugins": [
           {
-            "path": "tools/sass-to-ts/sass-to-ts.plugin.ts",
+            "path": "@repo/sass-to-ts/plugin",
             "options": {
               "watchGlob": [
                 "libs/core/src/helpers/*.scss",
@@ -55,7 +56,7 @@
             }
           },
           {
-            "path": "tools/docs-import-map/docs-import-map.plugin.ts",
+            "path": "@repo/docs-import-map/plugin",
             "options": {
               "distPath": "libs/designsystem/dist",
               "outputPath": "tools/docs-import-map/dist/designsystem.ts"

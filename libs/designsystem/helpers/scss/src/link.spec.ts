@@ -39,11 +39,10 @@ describe('Anchor tag', () => {
     it(`should have a link icon`, () => {
       const baseURI = window.document.baseURI;
       element.className = 'kirby-external-icon';
-      const karmaWebpack = '_karma_webpack_/';
       const defaultDensityPixel = '1dppx';
 
       expect(element).toHaveComputedStyle({
-        'background-image': `image-set(url("${baseURI}${karmaWebpack}assets/kirby/icons/svg/link.svg") ${defaultDensityPixel})`,
+        'background-image': `image-set(url("${baseURI}assets/kirby/icons/svg/link.svg") ${defaultDensityPixel})`,
       });
     });
   });
