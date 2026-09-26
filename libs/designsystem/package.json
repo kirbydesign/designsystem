@@ -42,7 +42,7 @@
   "devDependencies": {
     "@floating-ui/dom": "1.8.0",
     "@fontsource/roboto": "^5.2.6",
-    "@ionic/angular": "9.0.2",
+    "@ionic/angular": "9.0.5",
     "@ionic/core": "9.0.5",
     "@ngneat/spectator": "^22.1.0",
     "@types/jasmine": "4.0.3",

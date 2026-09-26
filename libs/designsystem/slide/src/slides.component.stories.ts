@@ -2,7 +2,7 @@ import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@story
 
 import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
-import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { responsiveModes } from '@repo/storybook-config/shared-config';
 
 import { SlidesExampleComponent } from '~/app/examples/slides-example/slides-example.component';
 

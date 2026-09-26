@@ -7,7 +7,7 @@ import { importProvidersFrom } from '@angular/core';
 import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { responsiveModes } from '@repo/storybook-config/shared-config';
 import { AccordionExampleComponent } from '~/app/examples/accordion-example/accordion-example.component';
 
 const meta: Meta<AccordionItemComponent> = {
