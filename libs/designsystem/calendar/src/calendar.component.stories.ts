@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/angular';
 
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
-import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { responsiveModes } from '@repo/storybook-config/shared-config';
 
 const meta: Meta<CalendarComponent> = {
   component: CalendarComponent,

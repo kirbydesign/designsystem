@@ -6,7 +6,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { TabButtonComponent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 
-import { responsiveModes } from 'tools/storybook-config/shared-config';
+import { responsiveModes } from '@repo/storybook-config/shared-config';
 
 const meta: Meta<TabsComponent> = {
   component: TabsComponent,

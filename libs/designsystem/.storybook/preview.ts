@@ -1,7 +1,7 @@
 import { inject, provideAppInitializer } from '@angular/core';
 import { applicationConfig, Preview } from '@storybook/angular';
 
-import { defaultParameters } from 'tools/storybook-config/shared-config';
+import { defaultParameters } from '@repo/storybook-config/shared-config';
 import { IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 /** Zone JS is required by Angular itself. */

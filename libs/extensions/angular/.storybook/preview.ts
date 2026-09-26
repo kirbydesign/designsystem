@@ -6,7 +6,7 @@ import 'zone.js';
 import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config';
 import { provideKirbyExtensionsLocalizationToken } from '@kirbydesign/extensions-angular/localization';
 
-import { defaultParameters } from 'tools/storybook-config/shared-config';
+import { defaultParameters } from '@repo/storybook-config/shared-config';
 
 import docJson from '../docs/documentation.json';
 
