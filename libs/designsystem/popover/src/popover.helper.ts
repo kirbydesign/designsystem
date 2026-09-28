@@ -8,12 +8,11 @@ export interface VerticalPositionInput {
 
 export interface VerticalPosition {
   opensUpwards: boolean;
-  offset: number;
-  /** Max height for the content in the chosen direction without leaving the viewport. */
-  availableMaxHeight: number;
+  offsetFromEdge: number;
+  availableMaxHeightInDirection: number;
 }
 
-export function calculateVerticalPosition({
+export function calculateVerticalPopoverPosition({
   viewportHeight,
   targetTop,
   targetBottom,
@@ -30,7 +29,7 @@ export function calculateVerticalPosition({
 
   return {
     opensUpwards,
-    offset,
-    availableMaxHeight: availableSpace - bodyPadding,
+    offsetFromEdge: offset,
+    availableMaxHeightInDirection: availableSpace - bodyPadding,
   };
 }

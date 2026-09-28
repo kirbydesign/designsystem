@@ -14,7 +14,7 @@ import {
 import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { calculateVerticalPosition } from './popover.helper';
+import { calculateVerticalPopoverPosition } from './popover.helper';
 
 export enum HorizontalDirection {
   right = 'right',
@@ -210,25 +210,26 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     targetDimensions: DOMRect,
     wrapperDimensions: DOMRect
   ) {
-    const { opensUpwards, offset, availableMaxHeight } = calculateVerticalPosition({
-      viewportHeight: viewPort.innerHeight,
-      targetTop: targetDimensions.top,
-      targetBottom: targetDimensions.bottom,
-      contentHeight: wrapperDimensions.height,
-      bodyPadding: this.POPOVER_BODY_PADDING,
-    });
+    const { opensUpwards, offsetFromEdge, availableMaxHeightInDirection } =
+      calculateVerticalPopoverPosition({
+        viewportHeight: viewPort.innerHeight,
+        targetTop: targetDimensions.top,
+        targetBottom: targetDimensions.bottom,
+        contentHeight: wrapperDimensions.height,
+        bodyPadding: this.POPOVER_BODY_PADDING,
+      });
 
     const anchoredEdge = opensUpwards ? 'bottom' : 'top';
     const oppositeEdge = opensUpwards ? 'top' : 'bottom';
 
     this.renderer.removeStyle(wrapperElement, oppositeEdge);
-    this.renderer.setStyle(wrapperElement, anchoredEdge, `${offset}px`);
+    this.renderer.setStyle(wrapperElement, anchoredEdge, `${offsetFromEdge}px`);
 
     // Constrain content to the space available in the chosen direction so it can't grow outside the viewport.
     this.renderer.setStyle(
       wrapperElement,
       '--kirby-popover-available-max-height',
-      `${availableMaxHeight}px`,
+      `${availableMaxHeightInDirection}px`,
       RendererStyleFlags2.DashCase
     );
 
