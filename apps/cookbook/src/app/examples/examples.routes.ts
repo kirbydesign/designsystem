@@ -70,6 +70,7 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { DataGridExampleComponent } from './data-grid-example/data-grid-example.component';
 import { HeaderExampleComponent } from './header-example/header-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
@@ -545,6 +546,10 @@ export const EXAMPLE_ROUTES: ModalEnabledRoutes = [
   {
     path: 'data-table',
     component: DataTableExampleComponent,
+  },
+  {
+    path: 'data-grid',
+    component: DataGridExampleComponent,
   },
   {
     path: 'menu',

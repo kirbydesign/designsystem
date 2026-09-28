@@ -1,3 +1,10 @@
 <div class="example">
-  <kirby-data-grid></kirby-data-grid>
+  <cookbook-example-viewer
+    [html]="dataGridDefaultExample.template"
+    [ts]="dataGridDefaultExample.dataSnippet"
+  >
+    <cookbook-data-grid-default-example
+      #dataGridDefaultExample
+    ></cookbook-data-grid-default-example>
+  </cookbook-example-viewer>
 </div>
