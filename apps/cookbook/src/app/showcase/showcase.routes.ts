@@ -53,6 +53,7 @@ import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.co
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
+import { DataGridShowcaseComponent } from './data-grid-showcase/data-grid-showcase.component';
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 import { TabNavigationShowcaseComponent } from './page-tab-navigation-showcase/tab-navigation-showcase.component';
@@ -147,6 +148,7 @@ export const COMPONENT_ROUTES: Route[] = [
   { path: 'range', component: RangeShowcaseComponent },
   { path: 'link', component: LinkShowcaseComponent },
   { path: 'section-header', component: SectionHeaderShowcaseComponent },
+  { path: 'data-grid', component: DataGridShowcaseComponent },
   { path: 'data-table', component: DataTableShowcaseComponent },
   { path: 'header', component: HeaderShowcaseComponent },
   { path: 'label', component: LabelShowcaseComponent },

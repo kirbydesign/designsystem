@@ -32,6 +32,7 @@
       "@kirbydesign/designsystem/chart": ["libs/designsystem/dist/chart"],
       "@kirbydesign/designsystem/checkbox": ["libs/designsystem/dist/checkbox"],
       "@kirbydesign/designsystem/config": ["libs/designsystem/dist/config"],
+      "@kirbydesign/designsystem/data-grid": ["libs/designsystem/dist/data-grid"],
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/dist/data-table"],
       "@kirbydesign/designsystem/divider": ["libs/designsystem/dist/divider"],
       "@kirbydesign/designsystem/dropdown": ["libs/designsystem/dist/dropdown"],

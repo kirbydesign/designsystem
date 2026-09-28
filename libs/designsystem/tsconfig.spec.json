@@ -22,6 +22,7 @@
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
       "@kirbydesign/designsystem/checkbox": ["libs/designsystem/checkbox/index.ts"],
       "@kirbydesign/designsystem/config": ["libs/designsystem/config/index.ts"],
+      "@kirbydesign/designsystem/data-grid": ["libs/designsystem/data-grid/index.ts"],
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
       "@kirbydesign/designsystem/divider": ["libs/designsystem/divider/index.ts"],
       "@kirbydesign/designsystem/dropdown": ["libs/designsystem/dropdown/index.ts"],
