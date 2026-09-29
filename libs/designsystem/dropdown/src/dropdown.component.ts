@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -59,7 +58,6 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
     ItemComponent,
     IconComponent,
   ],
-  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DropdownComponent
   implements AfterViewInit, OnDestroy, ControlValueAccessor, FormFieldControl
