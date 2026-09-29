@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, HostBinding, OnDestroy, ViewChild } from '@angular/core';
 import { IonTabBar, IonTabs } from '@ionic/angular';
 
 import { TabsService } from './tabs.service';
@@ -15,7 +8,6 @@ import { TabsService } from './tabs.service';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
   imports: [IonTabs, IonTabBar],
-  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class TabsComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.tab-bar-bottom-hidden')
