@@ -3,15 +3,18 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["jasmine", "node"],
+    // First target: tsc (relative to this file). Second: @ngtools/webpack Karma (relative to cwd, no baseUrl).
     "paths": {
-      "@kirbydesign/core": ["../core/src/index.ts"],
+      "@kirbydesign/core": ["../core/src/index.ts", "./libs/core/src/index.ts"],
       "@kirbydesign/extensions-angular/image-banner": [
-        "../extensions/angular/image-banner/index.ts"
+        "../extensions/angular/image-banner/index.ts",
+        "./libs/extensions/angular/image-banner/index.ts"
       ],
       "@kirbydesign/extensions-angular/skeleton-loader": [
-        "../extensions/angular/skeleton-loader/index.ts"
+        "../extensions/angular/skeleton-loader/index.ts",
+        "./libs/extensions/angular/skeleton-loader/index.ts"
       ],
-      "@kirbydesign/designsystem/*": ["./*"]
+      "@kirbydesign/designsystem/*": ["./*/index.ts", "./libs/designsystem/*/index.ts"]
     }
   },
   "files": ["test.ts"],
