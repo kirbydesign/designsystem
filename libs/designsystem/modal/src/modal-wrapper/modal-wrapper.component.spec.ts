@@ -15,8 +15,7 @@ import {
   PageProgressComponent,
   PageTitleComponent,
 } from '@kirbydesign/designsystem/page';
-import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
-import { ModalWrapperComponent } from './modal-wrapper.component';
+import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 import {
   DummyContentEmbeddedComponent,
   DynamicFooterEmbeddedComponent,
