@@ -89,6 +89,7 @@
       ],
       "@kirbydesign/extensions-angular/combobox": ["./libs/extensions/angular/dist/combobox"],
       "@repo/docs-import-map/*": ["./tools/docs-import-map/*"],
+      "tools/storybook-config/*": ["./tools/storybook-config/*"],
       "~/app/*": ["./apps/cookbook/src/app/*"],
       "~/environments/*": ["./apps/cookbook/src/environments/*"]
     }
