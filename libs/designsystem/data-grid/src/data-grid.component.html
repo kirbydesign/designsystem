@@ -1,1 +1,81 @@
-<p>hello world</p>
+<kirby-card>
+  <table class="kirby-table">
+    <thead>
+      @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+        <tr>
+          @for (header of headerGroup.headers; track header.id) {
+            @if (header.column.getCanSort()) {
+              <th
+                class="sortable"
+                [attr.colspan]="header.colSpan"
+                [class.active]="!!header.column.getIsSorted()"
+                [attr.aria-sort]="
+                  header.column.getIsSorted() === 'asc'
+                    ? 'ascending'
+                    : header.column.getIsSorted() === 'desc'
+                      ? 'descending'
+                      : 'none'
+                "
+              >
+                @if (!header.isPlaceholder) {
+                  <button
+                    class="data-grid-sort-button"
+                    type="button"
+                    (click)="header.column.getToggleSortingHandler()?.($event)"
+                  >
+                    <span class="data-grid-sort-label">
+                      <ng-container
+                        *flexRender="
+                          header.column.columnDef.header;
+                          props: header.getContext();
+                          let headerText
+                        "
+                      >
+                        {{ headerText }}
+                      </ng-container>
+                    </span>
+                    <kirby-icon
+                      class="data-grid-sort-icon"
+                      [name]="
+                        header.column.getIsSorted() === 'desc' ? 'arrow-down-fill' : 'arrow-up-fill'
+                      "
+                    ></kirby-icon>
+                  </button>
+                }
+              </th>
+            } @else {
+              <th [attr.colspan]="header.colSpan">
+                @if (!header.isPlaceholder) {
+                  <ng-container
+                    *flexRender="
+                      header.column.columnDef.header;
+                      props: header.getContext();
+                      let headerText
+                    "
+                  >
+                    {{ headerText }}
+                  </ng-container>
+                }
+              </th>
+            }
+          }
+        </tr>
+      }
+    </thead>
+    <tbody>
+      @for (row of table.getRowModel().rows; track row.id) {
+        <tr>
+          @for (cell of row.getVisibleCells(); track cell.id) {
+            <td>
+              <ng-container
+                *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cellValue"
+              >
+                {{ cellValue }}
+              </ng-container>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</kirby-card>
