@@ -35,9 +35,9 @@ export class IconComponent implements OnChanges {
 
   @HostBinding('class')
   @Input()
-  size: IconSize | `${IconSize}`;
+  size!: IconSize | `${IconSize}`;
 
-  @Input() name: string;
+  @Input() name!: string;
 
   get icon(): Icon {
     return this._icon;
