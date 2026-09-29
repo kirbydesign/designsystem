@@ -150,7 +150,7 @@ export class ColorHelper {
 
   private static getColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
-    const found = (styles.kirbyColors as KirbyColorGroup)[camelCaseKey];
+    const found = ColorHelper.getColorGroupValue(styles.kirbyColors, camelCaseKey);
     const runTimeColor = window
       .getComputedStyle(document.documentElement)
       .getPropertyValue(`--kirby-${name}`);
@@ -159,7 +159,7 @@ export class ColorHelper {
 
   private static getDecorationColor(name: string, step: number): string {
     const camelCaseKey = kebabToCamelCase(name);
-    const found = (styles.decorationColors as KirbyColorRamp)[camelCaseKey][step];
+    const found = ColorHelper.getColorRampValue(styles.decorationColors, camelCaseKey, step);
     const runTimeColor = window
       .getComputedStyle(document.documentElement)
       .getPropertyValue(`--kirby-decoration-color-${name}-${step}`);
@@ -168,11 +168,19 @@ export class ColorHelper {
 
   private static getTextColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
-    const found = (styles.kirbyTextColors as KirbyColorGroup)[camelCaseKey];
+    const found = ColorHelper.getColorGroupValue(styles.kirbyTextColors, camelCaseKey);
     const runTimeColor = window
       .getComputedStyle(document.documentElement)
       .getPropertyValue(`--kirby-text-color-${name}`);
     return runTimeColor || found || '';
+  }
+
+  private static getColorGroupValue(colors: KirbyColorGroup, key: string): string {
+    return colors[key] ?? '';
+  }
+
+  private static getColorRampValue(colors: KirbyColorRamp, key: string, step: number): string {
+    return colors[key]?.[step] ?? '';
   }
 
   private static opacityThreshold(opacity: number): number {
