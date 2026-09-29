@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@kirbydesign/designsystem": ["libs/designsystem/src/index.ts"],
-      "@kirbydesign/designsystem/testing-base": ["libs/designsystem/testing-base/src/public_api.ts"]
+      "@kirbydesign/designsystem": ["../../../src/index.ts"],
+      "@kirbydesign/designsystem/testing-base": ["../../src/public_api.ts"]
     }
   },
   "include": ["../../**/*.ts"]
