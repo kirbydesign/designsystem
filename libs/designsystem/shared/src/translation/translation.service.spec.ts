@@ -33,24 +33,27 @@ describe('TranslationService', () => {
   it('should return all translations correctly for da key', () => {
     spectator = createService({ providers: [{ provide: LOCALE_ID, useValue: 'da' }] });
 
-    Object.keys(da).forEach((key: keyof Translation) => {
-      expect(spectator.service.get(key)).toBe(da[key]);
+    Object.keys(da).forEach((key) => {
+      const translationKey = key as keyof Translation;
+      expect(spectator.service.get(translationKey)).toBe(da[translationKey]);
     });
   });
 
   it('should return all translations correctly for en key', () => {
     spectator = createService({ providers: [{ provide: LOCALE_ID, useValue: 'en' }] });
 
-    Object.keys(en).forEach((key: keyof Translation) => {
-      expect(spectator.service.get(key)).toBe(en[key]);
+    Object.keys(en).forEach((key) => {
+      const translationKey = key as keyof Translation;
+      expect(spectator.service.get(translationKey)).toBe(en[translationKey]);
     });
   });
 
   it('should return all translations correctly for de key', () => {
     spectator = createService({ providers: [{ provide: LOCALE_ID, useValue: 'de' }] });
 
-    Object.keys(de).forEach((key: keyof Translation) => {
-      expect(spectator.service.get(key)).toBe(de[key]);
+    Object.keys(de).forEach((key) => {
+      const translationKey = key as keyof Translation;
+      expect(spectator.service.get(translationKey)).toBe(de[translationKey]);
     });
   });
 });

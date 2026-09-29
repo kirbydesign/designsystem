@@ -200,8 +200,8 @@ describe('DropdownComponent', () => {
 
         const options = spectator.queryAll('[role="option"]');
         expect(options.length).toBe(items.length);
-        options.forEach((option: HTMLElement, i: number) => {
-          expect(option.getAttribute('id')).toBe(`${listboxId}-item-${i}`);
+        options.forEach((option, i) => {
+          expect((option as HTMLElement).getAttribute('id')).toBe(`${listboxId}-item-${i}`);
         });
       });
     });

@@ -107,7 +107,7 @@ export class ColorHelper {
     return 'rgba(0, 0, 0, 0)';
   }
 
-  public static colorStringToRgbString(color: string) {
+  public static colorStringToRgbString(color: string): string {
     if (color.indexOf('rgb') === 0) {
       return color;
     }
@@ -121,6 +121,7 @@ export class ColorHelper {
       return `rgba(${color})`;
     }
     const ctx = document.createElement('canvas').getContext('2d');
+    if (!ctx) return color;
     ctx.fillStyle = color;
     const renderedColor = ctx.fillStyle.toString();
     return ColorHelper.colorStringToRgbString(renderedColor);
@@ -149,29 +150,29 @@ export class ColorHelper {
 
   private static getColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
-    const found = styles.kirbyColors[camelCaseKey];
+    const found = (styles.kirbyColors as KirbyColorGroup)[camelCaseKey];
     const runTimeColor = window
       .getComputedStyle(document.documentElement)
       .getPropertyValue(`--kirby-${name}`);
-    return runTimeColor || found || null;
+    return runTimeColor || found || '';
   }
 
   private static getDecorationColor(name: string, step: number): string {
     const camelCaseKey = kebabToCamelCase(name);
-    const found = styles.decorationColors[camelCaseKey][step];
+    const found = (styles.decorationColors as KirbyColorRamp)[camelCaseKey][step];
     const runTimeColor = window
       .getComputedStyle(document.documentElement)
       .getPropertyValue(`--kirby-decoration-color-${name}-${step}`);
-    return runTimeColor || found || null;
+    return runTimeColor || found || '';
   }
 
   private static getTextColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
-    const found = styles.kirbyTextColors[camelCaseKey];
+    const found = (styles.kirbyTextColors as KirbyColorGroup)[camelCaseKey];
     const runTimeColor = window
       .getComputedStyle(document.documentElement)
       .getPropertyValue(`--kirby-text-color-${name}`);
-    return runTimeColor || found || null;
+    return runTimeColor || found || '';
   }
 
   private static opacityThreshold(opacity: number): number {

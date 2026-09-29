@@ -121,15 +121,15 @@ ${providers},
   }
 
   private getTypesInFile(fileContent: any): any[] {
-    const typesInFile = [];
+    const typesInFile: string[] = [];
     const exportRegEx = /^export \{ *(.*) *\} from '\.\//;
     const exportRegExGlobal = new RegExp(exportRegEx, 'gm');
     // "|| []" prevents having to check for undefined:
-    (fileContent.match(exportRegExGlobal) || []).forEach((matchedLine) => {
+    (fileContent.match(exportRegExGlobal) || []).forEach((matchedLine: string) => {
       // "slice(1)" skips the full match:
-      (matchedLine.match(exportRegEx) || []).slice(1).forEach((exported) => {
+      (matchedLine.match(exportRegEx) || []).slice(1).forEach((exported: string) => {
         // Split multiple entries, trim away whitespace and add:
-        typesInFile.push(...exported.split(',').map((entry) => entry.trim()));
+        typesInFile.push(...exported.split(',').map((entry: string) => entry.trim()));
       });
     });
     return typesInFile;
@@ -159,10 +159,10 @@ ${providers},
     const dirents = await readdir(folderpath, { withFileTypes: true });
     const files = await Promise.all(
       dirents
-        .filter((dirent) => {
+        .filter((dirent: import('fs').Dirent) => {
           return dirent.isDirectory() || dirent.name.endsWith('index.ts');
         })
-        .map((dirent) => {
+        .map((dirent: import('fs').Dirent) => {
           const res = resolve(folderpath, dirent.name);
           return dirent.isDirectory() ? this.getBarrelFiles(res) : res;
         })
@@ -273,8 +273,8 @@ ${providers},
       // Nothing to generate:
       return;
     }
-    const rendered = [];
-    const classNames = [];
+    const rendered: string[] = [];
+    const classNames: string[] = [];
     components.forEach((metaData) => {
       const mockClassName = 'Mock' + metaData.className;
       classNames.push(mockClassName);
@@ -387,12 +387,13 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   }
 
   private renderProperties(properties: any[]) {
-    let renderedProps = properties.map((prop) => {
+    const renderedProps = properties.map((prop) => {
       switch (prop.direction) {
-        case 'Input':
+        case 'Input': {
           const typeDeclaration = prop.type ? `: ${prop.type}` : '';
           const bindingProperty = prop.bindingProperty || '';
           return `@Input(${bindingProperty}) ${prop.name}${typeDeclaration};`;
+        }
         case 'Output':
           return `@Output() ${prop.name} = ${prop.initializer};`;
       }
@@ -402,7 +403,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   }
 
   private renderMethods(methods: any[]) {
-    let renderedMethods = methods.map((method) => {
+    const renderedMethods = methods.map((method) => {
       return `${method.name}() {};`;
     });
     const separator = `${newLine}  `;
@@ -451,7 +452,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     }
     if (aliasesMap.get(componentMetaData.className)) {
       // overwrite classname with alias if the classname set by visitClassDecoration is in the map
-      componentMetaData.className = aliasesMap.get(componentMetaData.className);
+      componentMetaData.className = aliasesMap.get(componentMetaData.className)!;
     }
     ts.forEachChild(node, (node) => this.visitTree(node, componentMetaData, aliasesMap));
   }
@@ -460,7 +461,8 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     classDeclaration: ts.ClassDeclaration,
     componentMetaData: ComponentMetaData
   ) {
-    const className = classDeclaration.name.getText();
+    const className = classDeclaration.name?.getText();
+    if (!className) return;
     componentMetaData.className = className;
 
     if (classDeclaration && ts.canHaveDecorators(classDeclaration)) {
@@ -477,7 +479,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
               const decoratorArg = decorator.expression.arguments[0];
               if (decoratorArg && ts.isObjectLiteralExpression(decoratorArg)) {
                 const selectorProp = decoratorArg.properties.find(
-                  (prop) => prop.name.getText() === 'selector'
+                  (prop) => prop.name?.getText() === 'selector'
                 );
                 if (selectorProp && ts.isPropertyAssignment(selectorProp)) {
                   const selector = selectorProp.initializer.getText();
@@ -513,7 +515,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
 
     const name = propertyDeclaration.name.getText();
     const type = this.getPropertyType(name, propertyDeclaration, componentMetaData);
-    let initializer: string;
+    let initializer: string | undefined;
     if (ts.isPropertyDeclaration(propertyDeclaration)) {
       initializer = propertyDeclaration.initializer?.getText();
     }
@@ -552,8 +554,11 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
 
   private getInputOutputDecorator(
     propertyDeclaration: ts.SetAccessorDeclaration | ts.PropertyDeclaration
-  ): { type: 'Input' | 'Output'; bindingProperty: string } {
-    const inputOutputDecorator = { type: undefined, bindingProperty: undefined };
+  ): { type: 'Input' | 'Output' | undefined; bindingProperty: string | undefined } {
+    const inputOutputDecorator: {
+      type: 'Input' | 'Output' | undefined;
+      bindingProperty: string | undefined;
+    } = { type: undefined, bindingProperty: undefined };
     if (propertyDeclaration && ts.canHaveDecorators(propertyDeclaration)) {
       ts.getDecorators(propertyDeclaration)?.forEach((decorator) => {
         if (ts.isCallExpression(decorator.expression)) {
@@ -570,7 +575,10 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
         }
       });
     }
-    return inputOutputDecorator;
+    if (!inputOutputDecorator.type || !inputOutputDecorator.bindingProperty) {
+      return { type: undefined, bindingProperty: undefined };
+    }
+    return inputOutputDecorator as { type: 'Input' | 'Output'; bindingProperty: string };
   }
 
   private getPropertyType(
@@ -592,6 +600,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
         componentMetaData
       );
     }
+    return '';
   }
 
   private getPropertyTypeFromPropertyDeclaration(
@@ -599,23 +608,27 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     propertyDeclaration: ts.PropertyDeclaration,
     componentMetaData: ComponentMetaData
   ): string {
-    let inferredType;
+    let inferredType = '';
     if (!propertyDeclaration.type && propertyDeclaration.initializer) {
       switch (propertyDeclaration.initializer.kind) {
         case ts.SyntaxKind.FalseKeyword:
-        case ts.SyntaxKind.TrueKeyword:
+        case ts.SyntaxKind.TrueKeyword: {
           inferredType = 'boolean';
           break;
-        case ts.SyntaxKind.NumericLiteral:
+        }
+        case ts.SyntaxKind.NumericLiteral: {
           inferredType = 'number';
           break;
-        case ts.SyntaxKind.StringLiteral:
+        }
+        case ts.SyntaxKind.StringLiteral: {
           inferredType = 'string';
           break;
-        case ts.SyntaxKind.ArrayLiteralExpression:
+        }
+        case ts.SyntaxKind.ArrayLiteralExpression: {
           inferredType = '[]';
           break;
-        default:
+        }
+        default: {
           const propInitializer = propertyDeclaration.initializer.getText();
           if (propInitializer.startsWith('new EventEmitter')) {
             inferredType = 'EventEmitter';
@@ -634,6 +647,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
             ts.SyntaxKind[propertyDeclaration.initializer.kind],
             `(${propertyDeclaration.initializer.kind})`
           );
+        }
       }
     }
     return propertyDeclaration.type ? propertyDeclaration.type.getText() : inferredType;
@@ -644,7 +658,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     propertyDeclaration: ts.SetAccessorDeclaration,
     componentMetaData: ComponentMetaData
   ): string {
-    let type: string;
+    let type = '';
     if (propertyDeclaration.parameters) {
       const param = propertyDeclaration.parameters[0];
       if (param && param.type) {
