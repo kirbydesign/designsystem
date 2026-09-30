@@ -32,6 +32,19 @@ describe('RangeComponent', () => {
       spectator.setHostInput('pin', true);
       expect(spectator.component.pinFormatter).toBeDefined();
     });
+
+    it('should apply the hover state to the knob when it is hovered', async () => {
+      const ionRange = spectator.query('ion-range');
+      await TestHelper.whenReady(ionRange);
+      const handle = ionRange.shadowRoot.querySelector('.range-knob-handle-a');
+      const knob = handle.querySelector('.range-knob');
+      const idleKnobBackground = TestHelper.getCssProperty(knob, '--knob-background');
+
+      handle.dispatchEvent(new MouseEvent('mouseenter'));
+      await TestHelper.whenTrue(() => knob.getAttribute('part').includes('hover'));
+
+      expect(TestHelper.getCssProperty(knob, '--knob-background')).not.toEqual(idleKnobBackground);
+    });
   });
 
   describe('with attributes', () => {
@@ -199,6 +212,19 @@ describe('RangeComponent', () => {
       spectator.component.writeValue({ lower: 5, upper: 95 });
 
       expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
+
+    it('should only apply the hover state to the hovered knob', async () => {
+      const handleA = ionRange.shadowRoot.querySelector('.range-knob-handle-a');
+      const knobA = handleA.querySelector('.range-knob');
+      const knobB = ionRange.shadowRoot.querySelector('.range-knob-handle-b .range-knob');
+      const idleKnobBackground = TestHelper.getCssProperty(knobA, '--knob-background');
+
+      handleA.dispatchEvent(new MouseEvent('mouseenter'));
+      await TestHelper.whenTrue(() => knobA.getAttribute('part').includes('hover'));
+
+      expect(TestHelper.getCssProperty(knobA, '--knob-background')).not.toEqual(idleKnobBackground);
+      expect(TestHelper.getCssProperty(knobB, '--knob-background')).toEqual(idleKnobBackground);
     });
   });
 });
