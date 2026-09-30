@@ -308,6 +308,106 @@ describe('NumberInputDirective', () => {
     });
   });
 
+  describe('when pasting', () => {
+    const pasteIntoElement = (element: HTMLInputElement, text: string) => {
+      element.focus();
+      element.setSelectionRange(0, element.value.length);
+      const dataTransfer = new DataTransfer();
+      dataTransfer.setData('text/plain', text);
+      element.dispatchEvent(
+        new ClipboardEvent('paste', {
+          clipboardData: dataTransfer,
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    };
+
+    const cases: {
+      description: string;
+      locale: 'da' | 'en-GB';
+      padPrecisionDigits: boolean;
+      pasted: string;
+      displayValue: string;
+      controlValue: string;
+    }[] = [
+      {
+        description: 'pad a pasted integer to the precision (DA locale)',
+        locale: 'da',
+        padPrecisionDigits: true,
+        pasted: '10',
+        displayValue: '10,00',
+        controlValue: '10.00',
+      },
+      {
+        description: 'pad a pasted integer to the precision (en-GB locale)',
+        locale: 'en-GB',
+        padPrecisionDigits: true,
+        pasted: '10',
+        displayValue: '10.00',
+        controlValue: '10.00',
+      },
+      {
+        description: 'keep the radix point for a pasted decimal (DA locale)',
+        locale: 'da',
+        padPrecisionDigits: true,
+        pasted: '5,5',
+        displayValue: '5,50',
+        controlValue: '5.50',
+      },
+      {
+        description: 'apply the group separator to a large pasted integer (DA locale)',
+        locale: 'da',
+        padPrecisionDigits: true,
+        pasted: '1000',
+        displayValue: '1.000,00',
+        controlValue: '1000.00',
+      },
+      {
+        description: 'format a pasted decimal with grouping (DA locale)',
+        locale: 'da',
+        padPrecisionDigits: true,
+        pasted: '1234,56',
+        displayValue: '1.234,56',
+        controlValue: '1234.56',
+      },
+      {
+        description: 'keep the radix point for a pasted decimal without padding (DA locale)',
+        locale: 'da',
+        padPrecisionDigits: false,
+        pasted: '1234,56',
+        displayValue: '1.234,56',
+        controlValue: '1234.56',
+      },
+    ];
+
+    cases.forEach(
+      ({
+        description,
+        locale: testLocale,
+        padPrecisionDigits,
+        pasted,
+        displayValue,
+        controlValue,
+      }) => {
+        it(`should ${description}`, () => {
+          locale = testLocale;
+          spectator = createDirective(
+            `<input kirby-input kirby-decimal-mask type="number" [formControl]="numericInput"${
+              padPrecisionDigits ? ' [padPrecisionDigits]="true"' : ''
+            } />`
+          );
+          const numericInput = spectator.hostComponent['numericInput'];
+
+          pasteIntoElement(spectator.element as HTMLInputElement, pasted);
+
+          expect(spectator.element).toHaveValue(displayValue);
+          expect(numericInput.value).toEqual(controlValue);
+        });
+      }
+    );
+  });
+
   describe('reactive form', () => {
     it('should format initial value correctly for DA locale', () => {
       locale = 'da';

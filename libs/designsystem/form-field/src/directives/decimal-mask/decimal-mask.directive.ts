@@ -69,6 +69,8 @@ export class DecimalMaskDirective implements OnInit {
   }
 
   private initMask(): void {
+    const element: HTMLInputElement & { inputmask?: InputMask } = this.elementRef.nativeElement;
+
     new Inputmask('decimal', {
       groupSeparator: this._groupSeperatorDisabled ? '' : this.groupSeparator,
       radixPoint: this.radixPoint,
@@ -89,8 +91,23 @@ export class DecimalMaskDirective implements OnInit {
       onBeforeWrite: () => {
         if (!this.inputmask) return;
       },
-    }).mask(this.elementRef.nativeElement);
-    this.inputmask = this.elementRef.nativeElement.inputmask;
+      onBeforePaste: (
+        value: string,
+        options: { onBeforeMask: (value: string, options: object) => string }
+      ) => {
+        const replacesValue =
+          element.selectionStart === 0 && element.selectionEnd === element.value.length;
+
+        if (!this.padPrecisionDigits || !replacesValue) {
+          return options.onBeforeMask(value, options);
+        }
+
+        element.value = value;
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+        return false;
+      },
+    }).mask(element);
+    this.inputmask = element.inputmask!;
   }
 
   private getMax(maxlengthValue: number): number {
