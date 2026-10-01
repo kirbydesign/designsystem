@@ -2,6 +2,10 @@
  * Do not edit directly, this file was auto-generated.
  */
 
+/*
+ * system colors
+ */
+
 :root {
   --kirby-system-color-light-grey-25: #ffffff;
   --kirby-system-color-light-grey-50: #fafafa;
@@ -110,6 +114,13 @@
   --kirby-system-color-blue-950: #0a3642;
   --kirby-system-color-blue-975: #07242c;
   --kirby-system-color-focus-500: #238cec;
+}
+
+/*
+ * brand colors
+ */
+
+:root {
   --kirby-brand-color-green-25: #fcfef6;
   --kirby-brand-color-green-50: #f9fdec;
   --kirby-brand-color-green-100: #ecfac7;
