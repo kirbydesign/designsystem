@@ -1,10 +1,10 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import StyleDictionary from 'style-dictionary';
 import { getReferences } from 'style-dictionary/utils';
-import { prepare, splitSelectorList } from './resolve.mjs';
-import { tokenKey } from './tokens.mjs';
-import { dimensionTransform, percentageTransform } from './dimension.mjs';
+import { routeTokens, splitSelectorList } from './routing.mjs';
+import { readJson, tokenKey } from './tokens.mjs';
+import { dimensionTransform, percentageTransform } from './units.mjs';
 
 const FILE_HEADER = '/**\n * Do not edit directly, this file was auto-generated.\n */\n';
 const STYLE_DICTIONARY_FILE_HEADER = /\/\*\*[\s\S]*?\*\/\s*\n/;
@@ -14,11 +14,11 @@ const EMPTY_RULE_BLOCK = /[^{}\n]+\{\s*\}/g;
 const ROOT_SELECTOR = ':root';
 
 /**
- * @param {Map} routes from `prepare`
- * @param {Array} emissions from `prepare`
+ * @param {Map} routes from `routeTokens`
+ * @param {Array} emissions from `routeTokens`
  * @returns {Promise<{ written: string[], warnings: string[] }>}
  */
-export async function build(
+export async function writeCss(
   routes,
   emissions,
   outDir,
@@ -41,16 +41,9 @@ export async function build(
   return writeCssFiles(blocksByOutput, outDir, { reportMissingSiblingVariables: !baseline });
 }
 
-export function readJson(label, filePath) {
-  if (!existsSync(filePath)) {
-    throw new Error(`${label} file not found: ${filePath}`);
-  }
-  return JSON.parse(readFileSync(filePath, 'utf-8'));
-}
-
 async function formatBaseline(baselineFile, config, units) {
   if (!config) throw new Error('Config is required when comparing against a baseline');
-  const { routes, emissions } = prepare(readJson('baseline tokens', baselineFile), config);
+  const { routes, emissions } = routeTokens(readJson('baseline tokens', baselineFile), config);
   const blocks = await formatEmissionBlocks({
     tokensFile: baselineFile,
     includeFile: null,

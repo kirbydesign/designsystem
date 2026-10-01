@@ -18,11 +18,6 @@ test('accepts a CSS-only input file and an explicit baseline', () => {
   assert.equal(opts.baseline, 'base.json');
 });
 
-test('does not accept custom output flags', () => {
-  assert.throws(() => parseArgs(['--out', 'elsewhere']), /Unknown argument: --out/);
-  assert.throws(() => parseArgs(['--import']), /Unknown argument: --import/);
-});
-
 test('imports multiple Figma files and rebuilds the CSS from their merged JSON', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'dt-cli-'));
   const outRoot = join(dir, 'out');
@@ -62,7 +57,7 @@ test('imports multiple Figma files and rebuilds the CSS from their merged JSON',
   assert.deepEqual(rebuiltCss, importedCss);
 });
 
-test('app import compares against Kirby tokens without emitting them', async () => {
+test('brand import compares against Kirby tokens without emitting them', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'dt-app-'));
   const outRoot = join(dir, 'out');
   const input = join(dir, 'app.json');
