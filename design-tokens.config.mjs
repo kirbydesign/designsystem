@@ -27,7 +27,9 @@ export default {
         section: ([, category]) => category.toLowerCase(),
       })),
     ],
-    'primitives-color.css': [{ include: ['*/color/**'] }],
+    'primitives-color.css': [
+      { include: ['*/color/**'], section: ([group]) => `${group.toLowerCase()} colors` },
+    ],
     'primitives.css': [{ include: ['**'], section: ([group]) => group.toLowerCase() }],
   },
 
