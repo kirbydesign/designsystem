@@ -30,9 +30,9 @@ Flags:
 Pass Figma exports as positional paths. Output is written to this package's dist/ directory.
 
 Example:
-  design-tokens specs.json primitive.color.system.json primitive.color.brand.json semantic.color.brand.json
+  design-tokens primitives.json system-color-primitives.json brand-color-primitives.json brand-semantics.json
   design-tokens --baseline libs/core/src/scss/themes/tokens.json \\
-    <name>.brand.json <name>.semantic.json`;
+    <name>-color-primitives.json <name>-semantics.json`;
 
 export function parseArgs(userArgs) {
   const options = { inputs: [], cssOnly: null, baseline: null, help: false };
