@@ -184,6 +184,13 @@ describe('validateConfig — unreachable rules', () => {
     );
   });
 
+  test('rejects a later rule with the same pattern as an earlier one', () => {
+    assert.throws(
+      () => validateConfig(withRules(rule('first', 'font/**'), rule('second', 'font/**'))),
+      /Rule "second" is unreachable — "first" \("font\/\*\*"\)/
+    );
+  });
+
   test('an ignore rule can be a catch-all too', () => {
     assert.throws(
       () =>

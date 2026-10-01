@@ -10,40 +10,6 @@ import { routeTokens } from '../src/routing.mjs';
 import { writeCss } from '../src/dtcg-to-css.mjs';
 import { config } from './fixtures.mjs';
 
-test('inlines surface aliases that map to the same CSS variable', async () => {
-  const source = {
-    'base surface': {
-      color: { fill: { main: { $type: 'color', $value: '{raised surface.color.fill.main}' } } },
-    },
-    'raised surface': { color: { fill: { main: { $type: 'color', $value: '#eee' } } } },
-  };
-  const out = mkdtempSync(join(tmpdir(), 'dt-cross-surface-'));
-  const file = join(out, 'tokens.json');
-  writeFileSync(file, JSON.stringify(source));
-  const { routes, emissions } = routeTokens(source, config);
-  await writeCss(routes, emissions, out, file);
-  const css = readFileSync(join(out, 's.css'), 'utf8');
-  assert.match(css, /:root, \.kirby-surface-base \{\s*--kirby-color-fill-main: #eeeeee;/);
-  assert.doesNotMatch(css, /--kirby-color-fill-main: var\(--kirby-color-fill-main\)/);
-});
-
-test('inlines aliases to variables unavailable under the current surface', async () => {
-  const source = {
-    'base surface': {
-      color: { fill: { main: { $type: 'color', $value: '{raised surface.color.fill.other}' } } },
-    },
-    'raised surface': { color: { fill: { other: { $type: 'color', $value: '#eee' } } } },
-  };
-  const out = mkdtempSync(join(tmpdir(), 'dt-cross-selector-'));
-  const file = join(out, 'tokens.json');
-  writeFileSync(file, JSON.stringify(source));
-  const { routes, emissions } = routeTokens(source, config);
-  await writeCss(routes, emissions, out, file);
-  const css = readFileSync(join(out, 's.css'), 'utf8');
-  assert.match(css, /--kirby-color-fill-main: #eeeeee;/);
-  assert.doesNotMatch(css, /--kirby-color-fill-main: var\(--kirby-color-fill-other\)/);
-});
-
 test('renders percentages selected by path when Figma reports ALL_SCOPES', async () => {
   const percentConfig = validateConfig({
     prefix: 'kirby',

@@ -2,16 +2,14 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import StyleDictionary from 'style-dictionary';
 import { getReferences } from 'style-dictionary/utils';
-import { routeTokens, splitSelectorList } from './routing.mjs';
+import { isVisibleFrom, routeTokens } from './routing.mjs';
 import { readJson, tokenKey } from './tokens.mjs';
 import { dimensionTransform, percentageTransform } from './units.mjs';
 
 const FILE_HEADER = '/**\n * Do not edit directly, this file was auto-generated.\n */\n';
 const STYLE_DICTIONARY_FILE_HEADER = /\/\*\*[\s\S]*?\*\/\s*\n/;
-const VARIABLE_NAME = /^\s*(--[\w-]+)\s*:/;
 const DECLARATION = /^\s*(--[\w-]+):\s*(.*);\s*$/;
 const EMPTY_RULE_BLOCK = /[^{}\n]+\{\s*\}/g;
-const ROOT_SELECTOR = ':root';
 
 /**
  * @param {Map} routes from `routeTokens`
@@ -164,15 +162,8 @@ function referencesRenderableAsVariables(routes) {
 }
 
 function canReferenceAsVariable(target, current) {
-  if (!target?.name) return false;
-  const isAnotherVariable = target.name !== current?.name;
-  const isVisibleFromCurrent =
-    includesRootSelector(target.selector) || target.selector === current?.selector;
-  return isAnotherVariable && isVisibleFromCurrent;
-}
-
-function includesRootSelector(selectorList) {
-  return splitSelectorList(selectorList ?? '').includes(ROOT_SELECTOR);
+  if (!target?.name || !current) return false;
+  return target.name !== current.name && isVisibleFrom(target, current);
 }
 
 function withoutFileHeader(css) {
@@ -201,19 +192,12 @@ function declarationValues(block) {
   );
 }
 
-function declaredVariableNames(block) {
-  return block
-    .split('\n')
-    .map((line) => line.match(VARIABLE_NAME)?.[1])
-    .filter(Boolean);
-}
-
 function missingSiblingVariableWarnings(output, blocks) {
   if (blocks.length < 2) return [];
 
   const declared = blocks.map(({ emission, block }) => ({
     selector: emission.selector,
-    names: new Set(declaredVariableNames(block)),
+    names: new Set(declarationValues(block).keys()),
   }));
   const allNames = new Set(declared.flatMap(({ names }) => [...names]));
   const location = sectionLocation(output, blocks[0].emission.section);

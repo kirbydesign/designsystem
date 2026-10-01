@@ -1,6 +1,6 @@
-import { resolve, join } from 'node:path';
+import { basename, extname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { loadConfig } from './config.mjs';
 import { writeCss } from './dtcg-to-css.mjs';
 import { figmaToDtcg } from './figma-to-dtcg.mjs';
@@ -76,7 +76,9 @@ function assertAnInputMode(cssOnly, inputs) {
 
 /**
  * `outRoot` is for programmatic callers only; the CLI always stages in this package's dist/.
- * @returns {Promise<{ outRoot, written, warnings }>}
+ * `outRoot` is a staging directory: CSS and tokens.json files left there by earlier runs are
+ * removed unless this run produced them or reads them as input.
+ * @returns {Promise<{ outRoot, written, removed, warnings }>}
  */
 export async function run(options) {
   const inputs = options.inputs ?? [];
@@ -89,7 +91,11 @@ export async function run(options) {
   const baseline = baselineFile ? readJson('baseline tokens', baselineFile) : {};
   const outRoot = options.outRoot ? resolve(options.outRoot) : OUTPUT_ROOT;
   const context = { config, baselineFile, baseline, outRoot };
-  return cssOnly ? regenerateCss(cssOnly, context) : importFigmaExports(inputs, context);
+  const result = cssOnly
+    ? await regenerateCss(cssOnly, context)
+    : await importFigmaExports(inputs, context);
+  const inputFiles = [...(cssOnly ? [cssOnly] : inputs), baselineFile].filter(Boolean);
+  return { ...result, removed: removeStaleOutputs(outRoot, result.written, inputFiles) };
 }
 
 async function importFigmaExports(inputs, context) {
@@ -133,6 +139,26 @@ function writeGeneratedTokens(tokens, outRoot) {
   return tokensFile;
 }
 
+/** @returns {string[]} removed files, relative to `outRoot` */
+function removeStaleOutputs(outRoot, written, inputFiles) {
+  if (!existsSync(outRoot)) return [];
+  const keep = new Set(
+    [...written.map((file) => resolve(outRoot, file)), ...inputFiles.map((file) => resolve(file))]
+      .filter(existsSync)
+      .map((file) => realpathSync(file))
+  );
+  const stale = readdirSync(outRoot, { recursive: true, withFileTypes: true })
+    .filter((entry) => entry.isFile() && isGeneratedFileName(entry.name))
+    .map((entry) => join(entry.parentPath, entry.name))
+    .filter((file) => !keep.has(realpathSync(file)));
+  for (const file of stale) rmSync(file);
+  return stale.map((file) => relative(outRoot, file));
+}
+
+function isGeneratedFileName(name) {
+  return extname(name) === '.css' || basename(name) === GENERATED_TOKENS_FILE;
+}
+
 /** @returns {Promise<number>} process exit code */
 export async function main(userArgs) {
   let options;
@@ -158,8 +184,9 @@ export async function main(userArgs) {
   }
 }
 
-function reportResult({ outRoot, written, warnings }) {
+function reportResult({ outRoot, written, removed, warnings }) {
   for (const warning of warnings) console.warn(`Warning: ${warning}`);
   for (const file of written) console.log(`  ${file} -> ${resolve(outRoot, file)}`);
+  for (const file of removed) console.log(`  removed stale ${resolve(outRoot, file)}`);
   if (written.length === 0) console.log('No output produced (no emitting inputs).');
 }

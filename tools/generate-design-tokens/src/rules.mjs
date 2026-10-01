@@ -89,6 +89,7 @@ export function captureNames(compiled) {
 }
 
 export function matchesEveryPathOf(earlier, later) {
+  if (earlier.source === later.source) return true;
   return isCatchAll(earlier) && isWithin(pathLengthRange(later), pathLengthRange(earlier));
 }
 

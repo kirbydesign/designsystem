@@ -88,6 +88,56 @@ test('source overrides included baseline paths', () => {
   assert.equal(emissions.length, 1);
 });
 
+test('rejects aliases between surfaces, because var() would resolve on the wrong surface', () => {
+  const cases = [
+    {
+      name: 'raised aliasing base (base is also declared at :root)',
+      source: {
+        'base surface': { color: { fill: { main: token('#fff') } } },
+        'raised surface': { color: { fill: { accent: token('{base surface.color.fill.main}') } } },
+      },
+      baseline: {},
+      message:
+        /"raised surface\/color\/fill\/accent" \(\.kirby-surface-raised\) aliases "base surface\/color\/fill\/main" \(:root, \.kirby-surface-base\)/,
+    },
+    {
+      name: 'base aliasing raised',
+      source: {
+        'base surface': { color: { fill: { main: token('{raised surface.color.fill.main}') } } },
+        'raised surface': { color: { fill: { main: token('#eee') } } },
+      },
+      baseline: {},
+      message: /"base surface\/color\/fill\/main" .* aliases "raised surface\/color\/fill\/main"/,
+    },
+    {
+      name: 'brand token aliasing a baseline surface token',
+      source: {
+        'raised surface': { color: { fill: { accent: token('{base surface.color.fill.main}') } } },
+      },
+      baseline: { 'base surface': { color: { fill: { main: token('#fff') } } } },
+      message: /aliases "base surface\/color\/fill\/main"/,
+    },
+  ];
+  for (const { name, source, baseline, message } of cases) {
+    assert.throws(() => routeTokens(source, config, baseline), message, name);
+  }
+});
+
+test('allows aliases to :root tokens and to tokens on the same surface', () => {
+  const source = {
+    spacing: { s: token('#000') },
+    'raised surface': {
+      color: {
+        fill: {
+          main: token('{spacing.s}'),
+          accent: token('{raised surface.color.fill.main}'),
+        },
+      },
+    },
+  };
+  assert.doesNotThrow(() => routeTokens(source, config));
+});
+
 test('fails when a CSS rule does not match a token', () => {
   assert.throws(
     () => routeTokens({ orphan: token('#fff') }, config),
