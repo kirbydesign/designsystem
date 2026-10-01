@@ -162,7 +162,7 @@ test('assigns units by path for ALL_SCOPES and normalizes color alpha', () => {
   assert.equal(tokens['base surface'].elevation.color.$value.alpha, 0.94);
 });
 
-test('warns when retaining the literal value for an Figma alias target that does not exist', () => {
+test('warns when retaining the literal value for a Figma alias target that does not exist', () => {
   const warnings = [];
   const tokens = figmaToDtcg(
     [

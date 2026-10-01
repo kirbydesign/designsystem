@@ -15,6 +15,14 @@ export function tokenKey(path) {
   return path.join('/');
 }
 
+const DTCG_REFERENCE = /\{([^{}]+)\}/g;
+
+/** Token keys referenced by a DTCG `$value`, e.g. `'{spacing.s}'` → `['spacing/s']`. */
+export function referencedTokenKeys(value) {
+  if (typeof value !== 'string') return [];
+  return [...value.matchAll(DTCG_REFERENCE)].map(([, reference]) => reference.replaceAll('.', '/'));
+}
+
 /** @returns {Array<{ path: string[], node: object }>} */
 export function collectLeafTokens(tree, path = []) {
   if (isTokenNode(tree)) return [{ path, node: tree }];

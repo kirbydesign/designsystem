@@ -1,9 +1,19 @@
-import { collectLeafTokens, tokenKey } from './tokens.mjs';
+import { collectLeafTokens, referencedTokenKeys, tokenKey } from './tokens.mjs';
 import { resolveRule } from './rules.mjs';
 
 const KEY_SEPARATOR = '\u0000';
+const ROOT_SELECTOR = ':root';
 
-export function splitSelectorList(selectorList) {
+/**
+ * Whether `var(--target)` declared under `current`'s selector resolves to the target's value.
+ * Only true for a `:root`-only target or a target under the same selector: any other selector
+ * (e.g. a surface) may be re-declared by the surface the element is on.
+ */
+export function isVisibleFrom(target, current) {
+  return target.selector === ROOT_SELECTOR || target.selector === current.selector;
+}
+
+function splitSelectorList(selectorList) {
   return selectorList
     .split(',')
     .map((selector) => selector.trim())
@@ -12,7 +22,8 @@ export function splitSelectorList(selectorList) {
 
 /** Route source and included tokens without copying the Style Dictionary tree. */
 export function routeTokens(source, config, baseline = {}) {
-  const sourcePaths = collectLeafTokens(source).map(({ path }) => path);
+  const sourceLeaves = collectLeafTokens(source);
+  const sourcePaths = sourceLeaves.map(({ path }) => path);
   const sourceKeys = new Set(sourcePaths.map(tokenKey));
   const baselineOnlyPaths = collectLeafTokens(baseline)
     .map(({ path }) => path)
@@ -39,7 +50,26 @@ export function routeTokens(source, config, baseline = {}) {
     routes.set(key, { name: match.variable, selector: match.selector, emission: emission.key });
   }
 
+  assertAliasesVisible(sourceLeaves, routes);
   return { routes, emissions: [...emissionsByKey.values()] };
+}
+
+function assertAliasesVisible(sourceLeaves, routes) {
+  for (const { path, node } of sourceLeaves) {
+    const key = tokenKey(path);
+    const current = routes.get(key);
+    if (!current.name) continue;
+    for (const targetKey of referencedTokenKeys(node.$value)) {
+      const target = routes.get(targetKey);
+      if (target?.name && !isVisibleFrom(target, current)) {
+        throw new Error(
+          `"${key}" (${current.selector}) aliases "${targetKey}" (${target.selector}). ` +
+            `Tokens may only alias tokens under their own selector or under ${ROOT_SELECTOR} alone, ` +
+            `so surfaces must not alias each other. Alias a primitive instead.`
+        );
+      }
+    }
+  }
 }
 
 function resolveRuleOrThrow(config, path) {

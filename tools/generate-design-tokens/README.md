@@ -48,7 +48,7 @@ To regenerate the CSS from the staged DTCG document, use the same baseline:
 
 ```sh
 npx design-tokens --baseline libs/core/src/scss/themes/tokens.json \
-  --css-only dist/tokens.json
+  --css-only tools/generate-design-tokens/dist/tokens.json
 ```
 
 Then, promote the staged files into the consuming app, not this repository. Load
