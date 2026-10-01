@@ -557,20 +557,32 @@ export class ModalWrapperComponent
   }
 
   private setKeyboardOverlap(keyboardHeight: number) {
-    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
-    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
-    let snapFooterToKeyboard = false;
-    const embeddedFooterElement = this.currentFooter;
-    if (embeddedFooterElement) {
-      this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
-      snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
-    }
+    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', this.keyboardVisible);
+    this.liftFooterAboveKeyboard(keyboardHeight);
+    this.reserveContentScrollRoom(keyboardHeight);
+  }
 
-    const contentElement = this.ionContentElement.nativeElement;
-    const contentKeyboardOffset = snapFooterToKeyboard
-      ? keyboardOverlap
-      : this.getKeyboardOverlap(keyboardHeight, contentElement);
-    this.setCssVar(contentElement, '--keyboard-offset', `${contentKeyboardOffset}px`);
+  private liftFooterAboveKeyboard(keyboardHeight: number) {
+    const footer = this.currentFooter;
+    if (!footer) return;
+    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
+    this.setCssVar(footer, '--keyboard-offset', `${keyboardOverlap}px`);
+  }
+
+  private reserveContentScrollRoom(keyboardHeight: number) {
+    const snapFooterToKeyboard =
+      this.currentFooter?.classList.contains('snap-to-keyboard') ?? false;
+
+    const contentKeyboardOverlap = snapFooterToKeyboard
+      ? this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement)
+      : this.getKeyboardOverlap(keyboardHeight, this.ionContentElement.nativeElement);
+
+    // Set the measured keyboard content overlap.
+    this.setCssVar(
+      this.elementRef.nativeElement,
+      '--kirby-keyboard-content-overlap',
+      `${contentKeyboardOverlap}px`
+    );
   }
 
   onHeaderTouchStart(event: TouchEvent) {
