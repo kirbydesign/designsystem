@@ -18,7 +18,7 @@ export default {
     { id: 'ignore-font-size', match: 'font-size/**', ignore: true },
     { id: 'ignore-line-height', match: 'line-height/**', ignore: true },
     { id: 'ignore-font-weight', match: 'font/weight/**', ignore: true },
-    { id: 'ignore-chart', match: '* surface/color/chart/**', ignore: true },
+    { id: 'ignore-chart', match: '* surface/chart/color/**', ignore: true },
     {
       id: 'surface-base',
       match: 'base surface/{category}/**',
