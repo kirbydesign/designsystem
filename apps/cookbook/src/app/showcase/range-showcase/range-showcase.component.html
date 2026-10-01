@@ -41,6 +41,31 @@
     ></cookbook-range-disabled-form-example>
   </cookbook-example-viewer>
 
+  <h2>Dual Knobs</h2>
+  <p>
+    Setting
+    <code>dualKnobs="true"</code>
+    renders two knobs — one for the lower bound and one for the upper bound. The bound value type
+    changes to
+    <code>&#123; lower: number; upper: number &#125;</code>
+    .
+  </p>
+  <cookbook-example-viewer [html]="dualKnobsExample.template">
+    <cookbook-range-dual-knobs-example #dualKnobsExample></cookbook-range-dual-knobs-example>
+  </cookbook-example-viewer>
+
+  <h2>Dual Knobs with Pin</h2>
+  <p>
+    Dual knobs can be combined with
+    <code>pin="true"</code>
+    to show the value for each knob while dragging.
+  </p>
+  <cookbook-example-viewer [html]="dualKnobsPinExample.template">
+    <cookbook-range-dual-knobs-pin-example
+      #dualKnobsPinExample
+    ></cookbook-range-dual-knobs-pin-example>
+  </cookbook-example-viewer>
+
   <h2>Importing</h2>
   <cookbook-import-viewer [imports]="'RangeComponent'"></cookbook-import-viewer>
 
