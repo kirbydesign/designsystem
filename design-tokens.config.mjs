@@ -8,7 +8,7 @@ const PREFIX = 'kirby';
 const SURFACES = ['base', 'raised', 'brand'];
 
 export default {
-  ignore: ['font-size/**', 'line-height/**', 'font/weight/**', '* surface/color/chart/**'],
+  ignore: ['font-size/**', 'line-height/**', 'font/weight/**', '* surface/chart/color/**'],
 
   variableName: ([group, ...rest]) =>
     group.endsWith(' surface') ? [PREFIX, ...rest] : [PREFIX, group, ...rest],
