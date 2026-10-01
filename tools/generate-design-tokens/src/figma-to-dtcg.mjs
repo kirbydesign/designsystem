@@ -1,11 +1,11 @@
 import { collectLeafTokens, setNestedValue, tokenKey } from './tokens.mjs';
-import { FIGMA_SCOPES_EXTENSION, isPercent, unitAppliesTo } from './dimension.mjs';
+import { FIGMA_SCOPES_EXTENSION, isPercent, unitAppliesTo } from './units.mjs';
 
 const FIGMA_ALIAS_EXTENSION = 'com.figma.aliasData';
 const DTCG_REFERENCE_PATTERN = /^\{([^{}]+)\}$/;
 
 /** Merge Figma exports without changing their paths; adapt their values to DTCG. */
-export function normalize(inputs, config, baseline = {}, warnings = []) {
+export function figmaToDtcg(inputs, config, baseline = {}, warnings = []) {
   const entries = inputs.flatMap((data) => collectLeafTokens(data));
   const importedKeys = collectValidatedTokenKeys(entries);
   const baselineTokensByKey = mapTokensByKey(collectLeafTokens(baseline));

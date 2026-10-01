@@ -2,9 +2,10 @@ import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { loadConfig } from './config.mjs';
-import { build, readJson } from './build.mjs';
-import { normalize } from './artifact.mjs';
-import { prepare } from './resolve.mjs';
+import { writeCss } from './dtcg-to-css.mjs';
+import { figmaToDtcg } from './figma-to-dtcg.mjs';
+import { routeTokens } from './routing.mjs';
+import { readJson } from './tokens.mjs';
 
 const DEFAULT_CONFIG = fileURLToPath(new URL('../../../design-tokens.config.mjs', import.meta.url));
 const OUTPUT_ROOT = resolve(fileURLToPath(new URL('../dist/', import.meta.url)));
@@ -93,13 +94,13 @@ export async function run(options) {
 
 async function importFigmaExports(inputs, context) {
   const importWarnings = [];
-  const tokens = normalize(
+  const tokens = figmaToDtcg(
     inputs.map(readFigmaExport),
     context.config,
     context.baseline,
     importWarnings
   );
-  const { routes, emissions } = prepare(tokens, context.config, context.baseline);
+  const { routes, emissions } = routeTokens(tokens, context.config, context.baseline);
   const tokensFile = writeGeneratedTokens(tokens, context.outRoot);
   const built = await buildCss(routes, emissions, tokensFile, context);
   return {
@@ -112,13 +113,13 @@ async function importFigmaExports(inputs, context) {
 async function regenerateCss(tokensPath, context) {
   const tokensFile = resolve(tokensPath);
   const tokens = readJson('design tokens', tokensFile);
-  const { routes, emissions } = prepare(tokens, context.config, context.baseline);
+  const { routes, emissions } = routeTokens(tokens, context.config, context.baseline);
   const built = await buildCss(routes, emissions, tokensFile, context);
   return { outRoot: context.outRoot, written: built.written, warnings: built.warnings };
 }
 
 function buildCss(routes, emissions, tokensFile, { config, baselineFile, outRoot }) {
-  return build(routes, emissions, outRoot, tokensFile, baselineFile, config.units, config);
+  return writeCss(routes, emissions, outRoot, tokensFile, baselineFile, config.units, config);
 }
 
 function readFigmaExport(path) {

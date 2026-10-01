@@ -1,21 +1,32 @@
 # @repo/generate-design-tokens
 
+The Design Token Pipeline can be used to generate a full design token set from one or more Figma Extended Collections. It produces a DTCG-compliant token document and, from that, generates the full set of CSS Custom Properties based on a configuration file, as described in [Configuration](#configuration).
+
+The generated files are _staged_ in this library's `dist/` directory. From there, they can be moved manually either to Kirby's core package, when generating the built-in theme, or to the brand or app being updated.
+
 ## Usage
+
+The pipeline accepts any number of Figma collections as input.
+The examples below assume that the following three primitive collections and one semantic mapping file exist:
+
+- General primitives (`primitives.json`)
+- System color primitives (`system-color-primitives.json`)
+- Brand color primitives (`brand-color-primitives.json`)
+- Brand semantics (`brand-semantics.json`)
 
 ## Built-In Theme
 
-Pass any number of Figma exports. For the built-in theme:
+To generate or update Kirby's built-in theme, pass the whole set of Figma collections:
 
 ```sh
-npx design-tokens specs.json primitive.color.system.json primitive.color.brand.json semantic.color.brand.json
+npx design-tokens primitives.json system-color-primitives.json brand-color-primitives.json brand-semantics.json
 ```
 
-Review the staged files, then promote `tokens.json` and the CSS into
+Output files are written to `tools/generate-design-tokens/dist`. Review the staged files, then promote `tokens.json` and the CSS into
 `libs/core/src/scss/themes/`. Do not run the tool directly against that
-directory. The three CSS files are `primitives.css`, `primitives-color.css`,
-and `surfaces.css`.
+directory.
 
-To generate the committed CSS from a fresh DTCG document:
+To generate only the CSS from a fresh DTCG document:
 
 ```sh
 npx design-tokens \
@@ -25,101 +36,72 @@ npx design-tokens \
 ## Brand Theme
 
 Brands can use `--baseline` to build on top of the built-in theme. The baseline
-provides reference tokens, and generated CSS contains only declarations that
+provides reference tokens, and the generated CSS contains only declarations that
 differ from it:
 
 ```sh
 npx design-tokens --baseline libs/core/src/scss/themes/tokens.json \
-  <name>.brand.json <name>.semantic.json
+  <name>-color-primitives.json <name>-semantics.json
 ```
 
-The generated CSS can be regenerated from the staged DTCG document using the
-same baseline:
+To regenerate the CSS from the staged DTCG document, use the same baseline:
 
 ```sh
 npx design-tokens --baseline libs/core/src/scss/themes/tokens.json \
   --css-only dist/tokens.json
 ```
 
-Promote staged files into the consuming app, not this repository. Load Kirby's
-CSS before the app's CSS. Unchanged declarations then come from Kirby, and app
-declarations override them. More generally, a baseline lets a brand theme use
-existing values and generate only its own differences.
-
-## Pipeline
-
-The pipeline has three steps:
-
-1. **Import:** positional Figma export paths are merged at their original paths
-   and written to one DTCG `tokens.json`. Duplicate paths and
-   token/group conflicts fail. Figma aliases become DTCG references when their
-   targets are present in the import or baseline. Missing alias targets keep
-   Figma's literal value and produce a warning.
-2. **Generate CSS:** ordered rules in the config assign CSS names, selectors,
-   output files, and sections. Tokens matching no rule fail; `ignore` rules
-   deliberately omit tokens from CSS. Style Dictionary converts DTCG values
-   and resolves references.
-3. **Review and promote:** JSON and CSS are staged in this package's ignored
-   `dist/` directory. Review the staged changes, then promote built-in files to
-   Kirby or app files to the consuming app.
-
-With `--css-only`, the tool skips import and generates CSS from an existing DTCG
-document. It still stages output in this package's `dist/` directory.
+Then, promote the staged files into the consuming app, not this repository. Load
+Kirby's CSS before the app's CSS so that unchanged declarations come from Kirby
+and the app's declarations override them.
 
 ## DTCG Document
 
-All supplied exports merge into one JSON tree at their original Figma paths,
-including `base surface`, `raised surface`, and `brand surface`. The document
-contains all exported tokens, even those excluded from CSS. The importer
-converts Figma aliases into DTCG `$value` references, scoped numbers into
-dimensions where appropriate, and rounds Figma's float32 color alpha. For
-percentage-valued number tokens, it retains the Figma scope in DTCG
-`$extensions` so CSS generation can apply `%` at any path. Other Figma metadata
-is omitted. The importer rejects duplicate token paths and token/group
-conflicts. Percentages stay DTCG numbers and gain `%` in CSS only. CSS
-selectors, file routes, and generator annotations are not stored in the JSON.
+All supplied Figma exports are merged into a [DTCG JSON](https://www.designtokens.org/tr/drafts/format/) tree, with each variable at its original Figma path. The document
+contains all exported tokens, even those excluded from CSS.
 
-By default, positional Figma JSON files are merged without tier labels, written
-to `tokens.json`, and used to generate CSS. `--css-only` generates CSS from an
+The importer converts Figma aliases into DTCG `$value` references and writes the output
+to a `tokens.json` file that can be used to generate CSS. `--css-only` generates CSS from an
 existing DTCG document without writing a new token file. These input modes are
 mutually exclusive. A baseline is loaded only when `--baseline` is provided.
 
 ## Configuration
 
-[`design-tokens.config.mjs`](../../design-tokens.config.mjs) defines the prefix,
-Figma-scope unit mapping, and one ordered CSS rule list:
+[`design-tokens.config.mjs`](../../design-tokens.config.mjs) sets a `prefix`,
+optional `units`, and an ordered list of `rules`. For each token, the first
+matching rule wins, so put specific rules before general ones. Every token must
+be matched by a rule; otherwise, the pipeline fails.
 
-- The first matching rule chooses `variable`, `selector` (default `:root`),
-  `output`, optional `section`, and `outputReferences` (default `true`).
-- An `ignore` rule omits a token from CSS but leaves it in `tokens.json`.
-  A token matching no rule fails CSS generation.
+| Rule field         | Description                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| `id`               | Unique name for the rule.                                                                  |
+| `match`            | Path pattern.                                                                              |
+| `ignore`           | If `true`, the token is left out of CSS. Don't set any fields other than `id` and `match`. |
+| `variable`         | Required. CSS variable name, without `--`.                                                 |
+| `output`           | Required. CSS file to write.                                                               |
+| `selector`         | Selector list. Default: `:root`.                                                           |
+| `section`          | Optional heading comment for the generated CSS.                                            |
+| `outputReferences` | When `false`, writes resolved values instead of `var()`. Default: `true`.                  |
 
-Patterns are `/`-separated segments: literal text, `*` for one segment,
-`{name}` to capture part of one segment, and a final `**` for one or more
-segments captured as `{rest}`. Templates can use `{prefix}`, `{path}` (the
-entire path, dash-joined), `{rest}`, and their rule's captures. Substitutions
-are slugged. The config validates placeholders, duplicate rule IDs, and
-unreachable catch-all rules when loaded.
+Patterns match Figma path segments separated by `/`:
 
-Numeric units are assigned during import using Figma `com.figma.scopes` or
-source-path patterns. Style Dictionary loads DTCG, resolves aliases, converts
-colors, and generates CSS variables. Kirby-specific naming, selector routing,
-dimension units, and section grouping are handled by the generator.
+- Literal text matches exactly.
+- `*` matches one segment.
+- `{name}` captures all or part of a segment, as in `{surface} surface`.
+- A final `**` matches one or more segments and captures them as `{rest}`.
 
-## Diagnostics And Tests
+Templates can use `{prefix}`, `{path}` (the full path), `{rest}`, and any
+captures from the rule's pattern. Inserted values are lowercased and joined
+with dashes.
 
-Duplicate CSS names under the same selector fail. The same name under different
-surface selectors is intentional. In the built-in theme, a section missing
-names on one surface produces a warning (the current Figma export has a known
-`spot-danger` asymmetry). A component found on only one surface is not compared.
-When a baseline is supplied, CSS is compared to it after generation, by
-selector, variable name, and value; unchanged declarations are omitted. Inspect
-warnings and staged output before promotion.
+Each key in `units` is a unit, such as `px` or `%`. A unit applies to numeric
+tokens that match its Figma `scopes` or its `paths` patterns.
+
+## Tests
 
 ```sh
 npm run test:node
 ```
 
-Fixtures cover aliases, units, collision handling, and CSS
-generation edge cases. Review changes to the staged JSON and CSS when importing
-new exports.
+Fixtures cover aliases, units, collision cases, and CSS
+generation edge cases.

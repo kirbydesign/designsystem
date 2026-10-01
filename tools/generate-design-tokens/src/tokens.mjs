@@ -1,3 +1,12 @@
+import { existsSync, readFileSync } from 'node:fs';
+
+export function readJson(label, filePath) {
+  if (!existsSync(filePath)) {
+    throw new Error(`${label} file not found: ${filePath}`);
+  }
+  return JSON.parse(readFileSync(filePath, 'utf-8'));
+}
+
 export function isTokenNode(candidate) {
   return isObject(candidate) && '$type' in candidate && '$value' in candidate;
 }

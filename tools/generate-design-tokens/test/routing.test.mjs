@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { validateConfig } from '../src/config.mjs';
-import { prepare } from '../src/resolve.mjs';
+import { routeTokens } from '../src/routing.mjs';
 
 const config = validateConfig({
   prefix: 'kirby',
@@ -31,7 +31,7 @@ const token = ($value) => ({ $type: 'color', $value });
 
 test('routes Figma-path tokens without copying or changing them', () => {
   const source = { 'base surface': { color: { fill: { main: token('#fff') } } } };
-  const { routes, emissions } = prepare(source, config);
+  const { routes, emissions } = routeTokens(source, config);
   assert.equal(routes.get('base surface/color/fill/main').name, 'kirby-color-fill-main');
   assert.equal(routes.get('base surface/color/fill/main').emission, emissions[0].key);
   assert.equal(source['base surface'].color.fill.main.$value, '#fff');
@@ -40,7 +40,7 @@ test('routes Figma-path tokens without copying or changing them', () => {
 });
 
 test('allows the same variable on different surface selectors', () => {
-  const { emissions } = prepare(
+  const { emissions } = routeTokens(
     {
       'base surface': { color: { fill: { main: token('#fff') } } },
       'raised surface': { color: { fill: { main: token('#eee') } } },
@@ -65,7 +65,7 @@ test('rejects duplicate names on the same selector, including a selector list', 
     ],
   });
   assert.throws(
-    () => prepare({ first: { a: token('#fff') }, second: { b: token('#eee') } }, overlapping),
+    () => routeTokens({ first: { a: token('#fff') }, second: { b: token('#eee') } }, overlapping),
     /duplicate variable name --kirby-same under ":root"/
   );
 });
@@ -75,7 +75,7 @@ test('baseline has names for aliases but no emissions', () => {
   const source = {
     'base surface': { color: { fill: { main: token('{system.color.green.500}') } } },
   };
-  const { routes, emissions } = prepare(source, config, baseline);
+  const { routes, emissions } = routeTokens(source, config, baseline);
   assert.equal(routes.get('system/color/green/500').name, 'kirby-system-color-green-500');
   assert.equal(routes.get('system/color/green/500').emission, null);
   assert.equal(emissions.length, 1);
@@ -83,11 +83,14 @@ test('baseline has names for aliases but no emissions', () => {
 
 test('source overrides included baseline paths', () => {
   const baseline = { spacing: { s: token('#fff') } };
-  const { routes, emissions } = prepare({ spacing: { s: token('#eee') } }, config, baseline);
+  const { routes, emissions } = routeTokens({ spacing: { s: token('#eee') } }, config, baseline);
   assert.equal(routes.get('spacing/s').emission, emissions[0].key);
   assert.equal(emissions.length, 1);
 });
 
 test('fails when a CSS rule does not match a token', () => {
-  assert.throws(() => prepare({ orphan: token('#fff') }, config), /No rule matched leaf "orphan"/);
+  assert.throws(
+    () => routeTokens({ orphan: token('#fff') }, config),
+    /No rule matched leaf "orphan"/
+  );
 });

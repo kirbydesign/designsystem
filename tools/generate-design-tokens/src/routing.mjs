@@ -11,7 +11,7 @@ export function splitSelectorList(selectorList) {
 }
 
 /** Route source and included tokens without copying the Style Dictionary tree. */
-export function prepare(source, config, baseline = {}) {
+export function routeTokens(source, config, baseline = {}) {
   const sourcePaths = collectLeafTokens(source).map(({ path }) => path);
   const sourceKeys = new Set(sourcePaths.map(tokenKey));
   const baselineOnlyPaths = collectLeafTokens(baseline)
