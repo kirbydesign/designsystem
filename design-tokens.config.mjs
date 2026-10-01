@@ -44,9 +44,10 @@ export default {
     },
     {
       id: 'primitive-color',
-      match: '*/color/**',
+      match: '{category}/color/**',
       variable: '{prefix}-{path}',
       output: 'primitives-color.css',
+      section: '{category} colors',
     },
     {
       id: 'primitive',
