@@ -6,8 +6,7 @@
  * color
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-color-border-focus: #238cec;
   --kirby-color-fill-base: var(--kirby-system-color-light-grey-100);
   --kirby-color-fill-base-hover: var(--kirby-system-color-light-grey-300);
@@ -542,8 +541,7 @@
  * badge
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-badge-color-fill: var(--kirby-system-color-dark-grey-500);
   --kirby-badge-color-border: var(--kirby-system-color-dark-grey-500);
 }
@@ -562,8 +560,7 @@
  * image-banner
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-image-banner-color-light-fill: rgba(255, 255, 255, 0.52);
   --kirby-image-banner-color-light-fill-hover: rgba(242, 242, 242, 0.64);
   --kirby-image-banner-color-light-fill-active: rgba(232, 232, 232, 0.72);
@@ -576,8 +573,7 @@
  * input
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-input-color-border-raised: var(--kirby-system-color-dark-grey-200);
   --kirby-input-color-border-raised-hover: var(--kirby-system-color-dark-grey-300);
 }
@@ -596,8 +592,7 @@
  * spot
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-spot-color-content-base: var(--kirby-system-color-dark-grey-975);
   --kirby-spot-color-fill-raised: var(--kirby-system-color-light-grey-500);
   --kirby-spot-color-fill-brand: var(--kirby-brand-color-green-400);
@@ -628,8 +623,7 @@
  * skeleton
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-skeleton-color-fill: rgba(28, 28, 28, 0.06);
   --kirby-skeleton-color-fill-loud: rgba(28, 28, 28, 0.12);
 }
@@ -648,8 +642,7 @@
  * toggle
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-toggle-color-fill: var(--kirby-system-color-dark-grey-200);
   --kirby-toggle-color-fill-hover: var(--kirby-system-color-dark-grey-400);
   --kirby-toggle-color-fill-active: var(--kirby-system-color-dark-grey-600);
@@ -707,8 +700,7 @@
  * tooltip
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-tooltip-color-fill: var(--kirby-system-color-dark-grey-975);
   --kirby-tooltip-color-content: var(--kirby-system-color-white-00);
 }
@@ -727,8 +719,7 @@
  * elevation
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-elevation-2-x: 0px;
   --kirby-elevation-2-y: 0px;
   --kirby-elevation-2-blur: 0px;
