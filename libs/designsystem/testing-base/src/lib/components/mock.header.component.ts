@@ -1,9 +1,11 @@
-import { Component, Directive, forwardRef, Input } from '@angular/core';
+import { Component, Directive, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import {
   HeaderActionsDirective,
   HeaderComponent,
+  HeaderCustomFlagDirective,
   HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
 } from '@kirbydesign/designsystem/header';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
@@ -29,6 +31,28 @@ export class MockHeaderActionsDirective {}
 })
 export class MockHeaderCustomSectionDirective {}
 
+@Directive({
+  selector: '[kirbyHeaderTitleActionIcon]',
+  providers: [
+    {
+      provide: HeaderTitleActionIconDirective,
+      useExisting: forwardRef(() => MockHeaderTitleActionIconDirective),
+    },
+  ],
+})
+export class MockHeaderTitleActionIconDirective {}
+
+@Directive({
+  selector: '[kirbyHeaderCustomFlag]',
+  providers: [
+    {
+      provide: HeaderCustomFlagDirective,
+      useExisting: forwardRef(() => MockHeaderCustomFlagDirective),
+    },
+  ],
+})
+export class MockHeaderCustomFlagDirective {}
+
 @Component({
   selector: 'kirby-header',
   template: '<ng-content></ng-content>',
@@ -44,11 +68,13 @@ export class MockHeaderComponent {
   @Input() centered?: boolean;
   @Input() titleMaxLines: number;
   @Input() emphasizeActions: boolean;
-  @Input() title: string;
-  @Input() value: string;
-  @Input() valueUnit: string;
-  @Input() subtitle1: string;
-  @Input() subtitle2: string;
+  @Input() title?: string | null;
+  @Input() value?: string | null;
+  @Input() valueUnit?: string | null;
+  @Input() subtitle1?: string | string[] | null;
+  @Input() subtitle2?: string | string[] | null;
+  @Input() hasInteractiveTitle?: boolean;
+  @Output() titleClick = new EventEmitter<PointerEvent>();
 }
 
 // #endregion

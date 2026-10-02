@@ -1,6 +1,10 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from '@kirbydesign/designsystem';
+import {
+  ItemSlidingComponent,
+  ItemSlidingSide,
+  ItemSwipeAction,
+} from '@kirbydesign/designsystem/item-sliding';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

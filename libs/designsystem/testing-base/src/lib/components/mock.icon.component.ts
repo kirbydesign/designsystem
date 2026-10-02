@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { IconComponent, IconSize } from '@kirbydesign/designsystem';
+import { IconComponent, IconSize } from '@kirbydesign/designsystem/icon';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

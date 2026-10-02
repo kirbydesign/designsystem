@@ -19,11 +19,10 @@ export class MockPopoverComponent {
   @Input() target: HTMLElement | ElementRef<HTMLElement>;
   @Output() willHide = new EventEmitter<void>();
 
-  hide() {
+  show() {
     // NOOP
   }
-
-  show() {
+  hide() {
     // NOOP
   }
 }

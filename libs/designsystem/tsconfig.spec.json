@@ -12,6 +12,13 @@
         "libs/extensions/angular/skeleton-loader/index.ts"
       ],
       "@kirbydesign/designsystem/*": ["libs/designsystem/*"],
+      "@kirbydesign/designsystem": ["libs/designsystem/src/public-api.ts"],
+      "@kirbydesign/designsystem/testing-base": [
+        "libs/designsystem/testing-base/src/public_api.ts"
+      ],
+      "@kirbydesign/designsystem/testing-jasmine": [
+        "libs/designsystem/testing-jasmine/src/public_api.ts"
+      ],
       "@kirbydesign/designsystem/accordion": ["libs/designsystem/accordion/index.ts"],
       "@kirbydesign/designsystem/action-group": ["libs/designsystem/action-group/index.ts"],
       "@kirbydesign/designsystem/avatar": ["libs/designsystem/avatar/index.ts"],

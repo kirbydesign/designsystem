@@ -6,7 +6,7 @@ import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/design
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'button[kirby-button],Button[kirby-button]',
+  selector: 'button[kirby-button],Button[kirby-button],a[kirby-button]',
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

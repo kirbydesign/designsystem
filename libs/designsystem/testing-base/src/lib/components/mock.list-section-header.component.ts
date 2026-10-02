@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { ListSectionHeaderComponent } from '@kirbydesign/designsystem';
+import { ListSectionHeaderComponent } from '@kirbydesign/designsystem/list';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
