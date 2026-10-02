@@ -24,7 +24,7 @@ export default {
       match: 'base surface/{category}/**',
       variable: '{prefix}-{category}-{rest}',
       selector: ':root, .{prefix}-surface-base',
-      output: 'surfaces.css',
+      output: 'color-semantics.css',
       section: '{category}',
     },
     {
@@ -32,21 +32,21 @@ export default {
       match: '{surface} surface/{category}/**',
       variable: '{prefix}-{category}-{rest}',
       selector: '.{prefix}-surface-{surface}',
-      output: 'surfaces.css',
+      output: 'color-semantics.css',
       section: '{category}',
     },
     {
       id: 'font',
       match: 'font/**',
       variable: '{prefix}-font-{rest}',
-      output: 'surfaces.css',
+      output: 'color-semantics.css',
       section: 'font',
     },
     {
       id: 'primitive-color',
       match: '{category}/color/**',
       variable: '{prefix}-{path}',
-      output: 'primitives-color.css',
+      output: 'color-primitives.css',
       section: '{category} colors',
     },
     {
