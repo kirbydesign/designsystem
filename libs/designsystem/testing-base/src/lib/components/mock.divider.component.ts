@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { DividerComponent } from '@kirbydesign/designsystem';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

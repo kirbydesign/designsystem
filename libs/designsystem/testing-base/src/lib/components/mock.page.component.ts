@@ -17,6 +17,7 @@ import {
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+type MaxWidth = 'default' | 'lg' | 'xl' | 'full';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Directive({
@@ -160,12 +161,14 @@ export class MockPageComponent {
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
-  @Input() maxWidth: 'default' | 'lg' | 'xl' | 'full';
+  @Input() hasInteractiveTitle: boolean;
+  @Input() maxWidth: MaxWidth;
   @Input() tabBarBottomHidden: boolean;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
+  @Output() toolbarTitleClick = new EventEmitter<PointerEvent>();
 }
 
 // #endregion

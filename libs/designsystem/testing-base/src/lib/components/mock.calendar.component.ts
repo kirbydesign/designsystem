@@ -1,7 +1,10 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { Locale } from 'date-fns';
 
-import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/designsystem/calendar';
+import {
+  CalendarComponent,
+  CalendarYearNavigatorConfig,
+  Locale,
+} from '@kirbydesign/designsystem/calendar';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -30,7 +33,7 @@ export class MockCalendarComponent {
   @Input() customLocales: { [key: string]: Locale };
   @Input() usePopover: boolean;
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
-  @Input() selectedDate: Date;
+  @Input() selectedDate: Date | null;
   @Input() disabledDates: Date[];
   @Input() enabledDates: Date[];
   @Input() todayDate: Date;

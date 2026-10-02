@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { LoadingOverlayComponent } from '@kirbydesign/designsystem';
+import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

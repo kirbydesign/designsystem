@@ -1,6 +1,6 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { AccordionItemComponent } from '@kirbydesign/designsystem';
+import { AccordionItemComponent } from '@kirbydesign/designsystem/accordion';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -19,6 +19,9 @@ export class MockAccordionItemComponent {
   @Input() isExpanded: boolean;
   @Input() isDisabled: boolean;
   @Input() disabledTitle: string;
+  @Input() hasPadding: boolean;
+  @Input() headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
+  @Output() toggle = new EventEmitter<boolean>();
 }
 
 // #endregion

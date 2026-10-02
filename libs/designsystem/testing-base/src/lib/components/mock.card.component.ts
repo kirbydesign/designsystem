@@ -20,7 +20,7 @@ export class MockCardComponent {
   @Input() backgroundImageUrl: string;
   @Input() hasPadding: boolean;
   @Input() sizes: { [size: string]: number };
-  @Input() flat: boolean;
+  @Input() variant: 'elevated' | 'flat' | 'outlined';
 }
 
 // #endregion

@@ -21,6 +21,8 @@ export class MockItemComponent {
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
   @Input() size: ItemSize | `${ItemSize}`;
+  @Input() href: string;
+  @Input() rotateIcon: boolean;
 }
 
 // #endregion

@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 
-import { AppComponent } from '@kirbydesign/designsystem';
+import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
