@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { FormFieldMessageComponent } from '@kirbydesign/designsystem';
+import { FormFieldMessageComponent } from '@kirbydesign/designsystem/form-field';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

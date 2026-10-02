@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { RouterOutletComponent } from '@kirbydesign/designsystem';
+import { RouterOutletComponent } from '@kirbydesign/designsystem/router-outlet';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

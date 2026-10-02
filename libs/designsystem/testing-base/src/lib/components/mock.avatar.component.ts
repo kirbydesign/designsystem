@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { BrandColor, NotificationColor } from '@kirbydesign/core';
 
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
@@ -17,8 +17,8 @@ import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 })
 export class MockAvatarComponent {
   @Input() imageSrc: string;
+  @Input() imageLoading: 'eager' | 'lazy' | undefined;
   @Input() altText: string;
-  @Input() shadow: boolean;
   @Input() stroke: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
@@ -31,6 +31,7 @@ export class MockAvatarComponent {
     | 'dark'
     | 'light'
     | 'semi-light';
+  @Output() imageError = new EventEmitter();
 }
 
 // #endregion

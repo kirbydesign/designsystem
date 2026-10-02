@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { ProgressCircleRingComponent } from '@kirbydesign/designsystem';
+import { ProgressCircleRingComponent } from '@kirbydesign/designsystem/progress-circle';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -15,11 +15,9 @@ import { ProgressCircleRingComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockProgressCircleRingComponent {
-  @Input() radius: number;
   @Input() value: number;
   @Input() themeColor: 'success' | 'warning' | 'danger';
-  @Input() strokeWidth: number;
-  @Input() upperBound: number;
+  @Input() size: 'sm' | 'md' | 'lg';
 }
 
 // #endregion

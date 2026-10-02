@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 
-import { ListExperimentalComponent } from '@kirbydesign/designsystem';
+import { ListExperimentalComponent } from '@kirbydesign/designsystem/list';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

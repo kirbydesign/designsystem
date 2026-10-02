@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import { TabNavigationComponent } from '@kirbydesign/designsystem/tab-navigation';
 
@@ -15,6 +15,7 @@ import { TabNavigationComponent } from '@kirbydesign/designsystem/tab-navigation
   ],
 })
 export class MockTabNavigationComponent {
+  @Input() selectedIndex: number;
   @Output() selectedIndexChange = new EventEmitter<number>();
 }
 

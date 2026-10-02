@@ -16,6 +16,7 @@ import { TabNavigationItemComponent } from '@kirbydesign/designsystem/tab-naviga
 })
 export class MockTabNavigationItemComponent {
   @Input() label: string;
+  @Input() truncate: boolean;
 }
 
 // #endregion
