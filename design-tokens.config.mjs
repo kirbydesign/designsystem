@@ -18,7 +18,7 @@ export default {
    * matches it, in the order written here, so put specific blocks before catch-alls.
    */
   outputs: {
-    'surfaces.css': [
+    'color-semantics.css': [
       { include: ['font/**'], section: 'font' },
       ...SURFACES.map((surface) => ({
         include: [`${surface} surface/**`],
@@ -27,7 +27,7 @@ export default {
         section: ([, category]) => category.toLowerCase(),
       })),
     ],
-    'primitives-color.css': [
+    'color-primitives.css': [
       { include: ['*/color/**'], section: ([group]) => `${group.toLowerCase()} colors` },
     ],
     'primitives.css': [{ include: ['**'], section: ([group]) => group.toLowerCase() }],
