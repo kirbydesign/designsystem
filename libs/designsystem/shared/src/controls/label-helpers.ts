@@ -1,6 +1,6 @@
 import { Renderer2 } from '@angular/core';
 
-export function findItemLabel(element: HTMLElement): HTMLElement {
+export function findItemLabel(element: HTMLElement): HTMLElement | null {
   const itemEl = element.closest('kirby-item');
   if (itemEl) {
     return itemEl.querySelector('kirby-label');
@@ -13,8 +13,9 @@ export function setAccessibleLabel(element: HTMLElement): string {
   const label = findItemLabel(element);
   if (label) {
     label.setAttribute('aria-hidden', 'true');
-    return label.textContent;
+    return label.textContent ?? '';
   }
+  return '';
 }
 
 export function inheritAriaLabelText(element: HTMLElement): string {
@@ -22,8 +23,9 @@ export function inheritAriaLabelText(element: HTMLElement): string {
   if (element.hasAttribute(attribute)) {
     const value = element.getAttribute(attribute);
     element.removeAttribute(attribute);
-    return value;
+    return value ?? '';
   }
+  return '';
 }
 
 /**
@@ -55,7 +57,7 @@ export function forwardAttributes(
       inheritedAttributes[attribute] = value;
 
       if (targetElement) {
-        renderer.setAttribute(targetElement, attribute, value);
+        renderer.setAttribute(targetElement, attribute, value ?? '');
       }
 
       renderer.removeAttribute(sourceElement, attribute);
