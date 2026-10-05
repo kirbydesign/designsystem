@@ -8,7 +8,20 @@ const PREFIX = 'kirby';
 const SURFACES = ['base', 'raised', 'brand'];
 
 export default {
-  ignore: ['font-size/**', 'line-height/**', 'font/weight/**', '* surface/chart/color/**'],
+  /* Ignore Figma variables that still needs work (in Figma or code) to be usable */
+  ignore: [
+    'font-size/**',
+    'font/weight/**',
+    'line-height/**',
+    '* surface/chart/color/**',
+    'loudness-scale/**',
+    'component/**',
+    'stroke/**',
+    'transparency/**',
+    'background-blur/**',
+    '* surface/elevation/**',
+    '* surface/tooltip/**',
+  ],
 
   variableName: ([group, ...rest]) =>
     group.endsWith(' surface') ? [PREFIX, ...rest] : [PREFIX, group, ...rest],
@@ -18,8 +31,7 @@ export default {
    * matches it, in the order written here, so put specific blocks before catch-alls.
    */
   outputs: {
-    'color-semantics.css': [
-      { include: ['font/**'], section: 'font' },
+    'default-brand.css': [
       ...SURFACES.map((surface) => ({
         include: [`${surface} surface/**`],
         selector:

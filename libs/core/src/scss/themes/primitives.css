@@ -50,59 +50,11 @@
 }
 
 /*
- * loudness-scale
+ * font
  */
 
 :root {
-  --kirby-loudness-scale-xxxs: 4;
-  --kirby-loudness-scale-xxs: 8;
-  --kirby-loudness-scale-xs: 12;
-  --kirby-loudness-scale-s: 16;
-  --kirby-loudness-scale-m: 20;
-  --kirby-loudness-scale-l: 24;
-  --kirby-loudness-scale-xl: 28;
-  --kirby-loudness-scale-xxl: 32;
-  --kirby-loudness-scale-xxxl: 36;
-  --kirby-loudness-scale-xxxxl: 40;
-}
-
-/*
- * component
- */
-
-:root {
-  --kirby-component-kirby-card-border-radius: var(--kirby-border-radius-n);
-}
-
-/*
- * stroke
- */
-
-:root {
-  --kirby-stroke-xxs: 0px;
-  --kirby-stroke-xs: 1px;
-}
-
-/*
- * transparency
- */
-
-:root {
-  --kirby-transparency-6: 6%;
-  --kirby-transparency-12: 12%;
-  --kirby-transparency-20: 20%;
-  --kirby-transparency-40: 40%;
-  --kirby-transparency-52: 52%;
-  --kirby-transparency-64: 64%;
-  --kirby-transparency-72: 72%;
-  --kirby-transparency-80: 80%;
-}
-
-/*
- * background-blur
- */
-
-:root {
-  --kirby-background-blur-xl: 110px;
-  --kirby-background-blur-s: 4px;
+  --kirby-font-letter-spacing: 0;
+  --kirby-font-family-fallback: sans-serif;
+  --kirby-font-family: Roboto;
 }
