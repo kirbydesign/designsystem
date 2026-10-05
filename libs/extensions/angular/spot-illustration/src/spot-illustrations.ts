@@ -107,6 +107,21 @@ export const illustrations = {
   'device.arrow-download.dot.circle': {
     xl: 'device.arrow-download.dot.circle.xlarge.svg',
   },
+  'template.plus.dot.circle': {
+    xl: 'template.plus.dot.circle.xlarge.svg',
+  },
+  'moneybag.money-notes.dot.bars': {
+    md: 'moneybag.money-notes.dot.bars.medium.svg',
+  },
+  'house.plant.door.bars': {
+    md: 'house.plant.door.bars.medium.svg',
+  },
+  'letters.arrow.triangle.circle': {
+    lg: 'letters.arrow.triangle.circle.large.svg',
+  },
+  'graph.coins.dot.bars': {
+    md: 'graph.coins.dot.bars.medium.svg',
+  },
 } as const satisfies Record<string, Illustration>;
 
 export type SpotIllustrationName = keyof typeof illustrations | null;
