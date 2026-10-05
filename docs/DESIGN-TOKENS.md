@@ -84,11 +84,11 @@ variable  --kirby-<component*>-<property>-<intention>-<attention*>-<state>
 ```
 
 Component groups follow the same grammar with the component name in front:
-`--kirby-spot-color-fill-base`, `--kirby-toggle-color-border-engaged-hover`.
+`--kirby-input-color-fill-border-raised`.
 
 #### Component
 
-Component name for the specific token. If a token starts with a component name, use it only for that particular component. Eg. spot-base-content-brand is only relevant for the Spot Illustration component.
+Component name for the specific token. If a token starts with a component name, use it only for that particular component. Eg. `--kirby-input-color-fill-border-raised` is only relevant for the Input component.
 
 #### Property
 
