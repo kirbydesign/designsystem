@@ -1,4 +1,5 @@
 import { matchesAny } from './rules.mjs';
+import { namedPath } from './tokens.mjs';
 
 export const FIGMA_SCOPES_EXTENSION = 'com.figma.scopes';
 const PERCENT = '%';
@@ -9,7 +10,8 @@ export function isPercent(unit) {
 
 export function unitAppliesTo(unit, figmaScopes, path) {
   return (
-    (figmaScopes ?? []).some((scope) => unit.scopes.has(scope)) || matchesAny(unit.paths, path)
+    (figmaScopes ?? []).some((scope) => unit.scopes.has(scope)) ||
+    matchesAny(unit.paths, namedPath(path))
   );
 }
 

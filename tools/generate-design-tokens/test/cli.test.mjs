@@ -128,6 +128,46 @@ test('brand import compares against Kirby tokens without emitting them', async (
   assert.equal(readFileSync(join(outRoot, 'surfaces.css'), 'utf8'), css);
 });
 
+test('emits a group $root token at the group path and resolves Figma aliases to it', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'dt-root-'));
+  const outRoot = join(dir, 'out');
+  const config = join(dir, 'config.mjs');
+  const input = join(dir, 'semantics.json');
+  writeFileSync(
+    config,
+    `export default {
+      prefix: 'kirby',
+      rules: [{ id: 'all', match: '{category}/**', variable: '{prefix}-{path}', output: 'font.css' }]
+    }`
+  );
+  writeFileSync(
+    input,
+    JSON.stringify({
+      font: {
+        family: {
+          fallback: { $type: 'string', $value: 'sans-serif' },
+          $root: { $type: 'string', $value: 'Roboto' },
+        },
+      },
+      heading: {
+        family: {
+          $type: 'string',
+          $value: 'Roboto',
+          $extensions: { 'com.figma.aliasData': { targetVariableName: 'font/family' } },
+        },
+      },
+    })
+  );
+
+  const result = await run({ config, inputs: [input], outRoot });
+
+  assert.deepEqual(result.warnings, []);
+  const css = readFileSync(join(outRoot, 'font.css'), 'utf8');
+  assert.match(css, /--kirby-font-family: Roboto;/);
+  assert.match(css, /--kirby-font-family-fallback: sans-serif;/);
+  assert.match(css, /--kirby-heading-family: var\(--kirby-font-family\);/);
+});
+
 test('returns warnings for Figma aliases whose targets are not exported', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'dt-alias-warning-'));
   const config = join(dir, 'config.mjs');

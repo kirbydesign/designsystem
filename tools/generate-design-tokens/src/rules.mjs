@@ -1,3 +1,5 @@
+import { namedPath } from './tokens.mjs';
+
 const TAIL_WILDCARD = '**';
 const TAIL_CAPTURE_NAME = 'rest';
 const PLACEHOLDER = /\{([a-z0-9_]+)\}|\*/gi;
@@ -133,11 +135,12 @@ function interpolateOptional(template, values, fallback) {
  *       section: string|null, outputReferences: boolean }}
  */
 export function resolveRule(rules, path, prefix) {
+  const matchedPath = namedPath(path);
   for (const rule of rules) {
-    const captures = matchPattern(rule.compiled, path);
+    const captures = matchPattern(rule.compiled, matchedPath);
     if (!captures) continue;
     if (rule.ignore) return { rule, ignored: true };
-    return interpolateRule(rule, { ...captures, prefix, path: slugPath(path) });
+    return interpolateRule(rule, { ...captures, prefix, path: slugPath(matchedPath) });
   }
   return null;
 }

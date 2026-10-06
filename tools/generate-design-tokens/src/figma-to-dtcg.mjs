@@ -1,4 +1,4 @@
-import { collectLeafTokens, setNestedValue, tokenKey } from './tokens.mjs';
+import { collectLeafTokens, rootTokenKey, setNestedValue, tokenKey } from './tokens.mjs';
 import { FIGMA_SCOPES_EXTENSION, isPercent, unitAppliesTo } from './units.mjs';
 
 const FIGMA_ALIAS_EXTENSION = 'com.figma.aliasData';
@@ -63,7 +63,8 @@ function assertNoTokenIsAlsoAGroup(tokenKeys, groupKeys) {
 function aliasAsReferenceOrLiteral(path, node, isKnownToken, warnings) {
   const aliasTarget = node.$extensions?.[FIGMA_ALIAS_EXTENSION]?.targetVariableName;
   if (!aliasTarget) return node.$value;
-  if (isKnownToken(aliasTarget)) return keyToReference(aliasTarget);
+  const targetKey = [aliasTarget, rootTokenKey(aliasTarget)].find(isKnownToken);
+  if (targetKey) return keyToReference(targetKey);
 
   warnings.push(
     `${tokenKey(path)}: Figma alias target "${aliasTarget}" is not present in the import or baseline; retaining its literal value.`

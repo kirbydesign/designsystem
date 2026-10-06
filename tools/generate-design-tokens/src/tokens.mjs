@@ -15,6 +15,16 @@ export function tokenKey(path) {
   return path.join('/');
 }
 
+const ROOT_TOKEN = '$root';
+
+export function namedPath(path) {
+  return path.at(-1) === ROOT_TOKEN ? path.slice(0, -1) : path;
+}
+
+export function rootTokenKey(key) {
+  return `${key}/${ROOT_TOKEN}`;
+}
+
 const DTCG_REFERENCE = /\{([^{}]+)\}/g;
 
 /** Token keys referenced by a DTCG `$value`, e.g. `'{spacing.s}'` → `['spacing/s']`. */
@@ -28,7 +38,7 @@ export function collectLeafTokens(tree, path = []) {
   if (isTokenNode(tree)) return [{ path, node: tree }];
   if (!isObject(tree)) return [];
   return Object.entries(tree)
-    .filter(([key]) => !isDtcgProperty(key))
+    .filter(([key]) => key === ROOT_TOKEN || !isDtcgProperty(key))
     .flatMap(([key, child]) => collectLeafTokens(child, [...path, key]));
 }
 

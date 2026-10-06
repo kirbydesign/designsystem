@@ -10,6 +10,7 @@ const FILE_HEADER = '/**\n * Do not edit directly, this file was auto-generated.
 const STYLE_DICTIONARY_FILE_HEADER = /\/\*\*[\s\S]*?\*\/\s*\n/;
 const DECLARATION = /^\s*(--[\w-]+):\s*(.*);\s*$/;
 const EMPTY_RULE_BLOCK = /[^{}\n]+\{\s*\}/g;
+const ROOT_TOKEN_REFERENCE = /\{([^{}]+\.\$root)\}/g;
 
 /**
  * @param {Map} routes from `routeTokens`
@@ -128,7 +129,16 @@ async function formatEmissionBlocks({
     },
   });
   const formatted = await styleDictionary.formatPlatform('css');
-  return emissions.map((_, index) => withoutFileHeader(formatted[index].output));
+  return emissions.map((_, index) =>
+    withRootAsVariable(withoutFileHeader(formatted[index].output), routes)
+  );
+}
+
+function withRootAsVariable(css, routes) {
+  return css.replace(ROOT_TOKEN_REFERENCE, (reference, path) => {
+    const name = routes.get(path.replaceAll('.', '/'))?.name;
+    return name ? `var(--${name})` : reference;
+  });
 }
 
 function variableNameTransform(routes) {
