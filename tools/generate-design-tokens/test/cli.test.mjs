@@ -92,8 +92,20 @@ test('removes staged files from earlier runs that this run did not produce', asy
 test('brand import compares against Kirby tokens without emitting them', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'dt-app-'));
   const outRoot = join(dir, 'out');
+  const config = join(dir, 'config.mjs');
   const input = join(dir, 'app.json');
   const baseline = join(dir, 'baseline.json');
+  writeFileSync(
+    config,
+    `export default {
+      variableName: ([group, ...rest]) =>
+        group.endsWith(' surface') ? ['kirby', ...rest] : ['kirby', group, ...rest],
+      outputs: {
+        'surfaces.css': [{ include: ['base surface/**'] }],
+        'primitives.css': [{ include: ['**'] }],
+      },
+    }`
+  );
   writeFileSync(
     baseline,
     JSON.stringify({ system: { color: { green: { 500: { $type: 'color', $value: '#00ff00' } } } } })
@@ -116,7 +128,7 @@ test('brand import compares against Kirby tokens without emitting them', async (
       },
     })
   );
-  await run({ baseline, inputs: [input], outRoot });
+  await run({ config, baseline, inputs: [input], outRoot });
   const tokens = JSON.parse(readFileSync(join(outRoot, 'tokens.json'), 'utf8'));
   assert.equal(tokens['base surface'].color.fill.base.$value, '{system.color.green.500}');
   assert.equal(tokens.system, undefined);
@@ -125,7 +137,7 @@ test('brand import compares against Kirby tokens without emitting them', async (
   assert.doesNotMatch(css, /--kirby-system-color-green-500:/);
   rmSync(join(outRoot, 'surfaces.css'));
 
-  await run({ baseline, cssOnly: join(outRoot, 'tokens.json'), outRoot });
+  await run({ config, baseline, cssOnly: join(outRoot, 'tokens.json'), outRoot });
   assert.equal(readFileSync(join(outRoot, 'surfaces.css'), 'utf8'), css);
 });
 
