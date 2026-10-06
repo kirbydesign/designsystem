@@ -132,9 +132,6 @@
 }
 
 @mixin all() {
-  /* FONT-FAMILY */
-  @include font-family;
-
   /* COLORS */
   @include colors;
 
