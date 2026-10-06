@@ -577,7 +577,6 @@ export class ModalWrapperComponent
       ? this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement)
       : this.getKeyboardOverlap(keyboardHeight, this.ionContentElement.nativeElement);
 
-    // Set the measured keyboard content overlap.
     this.setCssVar(
       this.elementRef.nativeElement,
       '--kirby-keyboard-content-overlap',
