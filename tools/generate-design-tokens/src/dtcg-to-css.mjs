@@ -3,70 +3,58 @@ import { resolve, dirname } from 'node:path';
 import StyleDictionary from 'style-dictionary';
 import { getReferences } from 'style-dictionary/utils';
 import { isVisibleFrom, routeTokens } from './routing.mjs';
-import { readJson, tokenKey } from './tokens.mjs';
+import { tokenKey } from './tokens.mjs';
 import { dimensionTransform, percentageTransform } from './units.mjs';
 
 const FILE_HEADER = '/**\n * Do not edit directly, this file was auto-generated.\n */\n';
-const STYLE_DICTIONARY_FILE_HEADER = /\/\*\*[\s\S]*?\*\/\s*\n/;
 const DECLARATION = /^\s*(--[\w-]+):\s*(.*);\s*$/;
 const EMPTY_RULE_BLOCK = /[^{}\n]+\{\s*\}/g;
 const ROOT_TOKEN_REFERENCE = /\{([^{}]+\.\$root)\}/g;
 
 /**
- * @param {Map} routes from `routeTokens`
- * @param {Array} emissions from `routeTokens`
+ * @param {object} options
+ * @param {Map} options.routes from `routeTokens`
+ * @param {Array} options.emissions from `routeTokens`
+ * @param {string} options.outDir
+ * @param {string} options.sourceFile DTCG document that `routes` were computed from
+ * @param {object} options.config validated by `validateConfig`
+ * @param {{ file: string, tokens: object }|null} [options.baseline] DTCG document to build on;
+ *   only declarations that differ from it are written
  * @returns {Promise<{ written: string[], warnings: string[] }>}
  */
-export async function writeCss(
-  routes,
-  emissions,
-  outDir,
-  sourceFile,
-  baselineFile = null,
-  units = [],
-  config = null
-) {
-  if (emissions.length === 0 && !baselineFile) return { written: [], warnings: [] };
+export async function writeCss({ routes, emissions, outDir, sourceFile, config, baseline = null }) {
+  if (emissions.length === 0 && !baseline) return { written: [], warnings: [] };
 
-  const baseline = baselineFile ? await formatBaseline(baselineFile, config, units) : null;
-  const sourceBlocks = await formatSourceBlocks({
-    sourceFile,
-    baselineFile,
-    routes,
-    emissions,
-    units,
-  });
-  const blocksByOutput = groupBlocksByOutput(emissions, sourceBlocks, baseline);
+  const formattedBaseline = baseline ? await formatBaseline(baseline, config) : null;
+  const sourceBlocks =
+    emissions.length > 0
+      ? await formatEmissionBlocks({
+          tokensFile: sourceFile,
+          includeFile: baseline?.file ?? null,
+          routes,
+          emissions,
+          units: config.units,
+          onlySourceTokens: true,
+        })
+      : [];
+  const blocksByOutput = groupBlocksByOutput(emissions, sourceBlocks, formattedBaseline);
   return writeCssFiles(blocksByOutput, outDir, { reportMissingSiblingVariables: !baseline });
 }
 
-async function formatBaseline(baselineFile, config, units) {
-  if (!config) throw new Error('Config is required when comparing against a baseline');
-  const { routes, emissions } = routeTokens(readJson('baseline tokens', baselineFile), config);
+async function formatBaseline(baseline, config) {
+  const { routes, emissions } = routeTokens(baseline.tokens, config);
   const blocks = await formatEmissionBlocks({
-    tokensFile: baselineFile,
+    tokensFile: baseline.file,
     includeFile: null,
     routes,
     emissions,
-    units,
+    units: config.units,
     onlySourceTokens: false,
   });
   return {
     emissions,
     blocksByEmissionKey: new Map(emissions.map((emission, index) => [emission.key, blocks[index]])),
   };
-}
-
-async function formatSourceBlocks({ sourceFile, baselineFile, routes, emissions, units }) {
-  if (emissions.length === 0) return [];
-  return formatEmissionBlocks({
-    tokensFile: sourceFile,
-    includeFile: baselineFile,
-    routes,
-    emissions,
-    units,
-    onlySourceTokens: true,
-  });
 }
 
 function groupBlocksByOutput(emissions, sourceBlocks, baseline) {
@@ -129,9 +117,7 @@ async function formatEmissionBlocks({
     },
   });
   const formatted = await styleDictionary.formatPlatform('css');
-  return emissions.map((_, index) =>
-    withRootAsVariable(withoutFileHeader(formatted[index].output), routes)
-  );
+  return emissions.map((_, index) => withRootAsVariable(formatted[index].output.trim(), routes));
 }
 
 function withRootAsVariable(css, routes) {
@@ -156,6 +142,7 @@ function cssFileFor(emission, routes, onlySourceTokens) {
       (!onlySourceTokens || token.isSource) &&
       routes.get(tokenKey(token.path))?.emission === emission.key,
     options: {
+      showFileHeader: false,
       selector: emission.selector,
       outputReferences: emission.outputReferences && referencesRenderableAsVariables(routes),
     },
@@ -174,10 +161,6 @@ function referencesRenderableAsVariables(routes) {
 function canReferenceAsVariable(target, current) {
   if (!target?.name || !current) return false;
   return target.name !== current.name && isVisibleFrom(target, current);
-}
-
-function withoutFileHeader(css) {
-  return css.replace(STYLE_DICTIONARY_FILE_HEADER, '').trim();
 }
 
 function withoutDeclarationsSameAsBaseline(block, baselineBlock) {

@@ -88,44 +88,41 @@ export async function run(options) {
 
   const config = await loadConfig(options.config ? resolve(options.config) : DEFAULT_CONFIG);
   const baselineFile = options.baseline ? resolve(options.baseline) : null;
-  const baseline = baselineFile ? readJson('baseline tokens', baselineFile) : {};
+  const baseline = baselineFile
+    ? { file: baselineFile, tokens: readJson('baseline tokens', baselineFile) }
+    : null;
   const outRoot = options.outRoot ? resolve(options.outRoot) : OUTPUT_ROOT;
-  const context = { config, baselineFile, baseline, outRoot };
+  const context = { config, baseline, outDir: outRoot };
   const result = cssOnly
     ? await regenerateCss(cssOnly, context)
     : await importFigmaExports(inputs, context);
   const inputFiles = [...(cssOnly ? [cssOnly] : inputs), baselineFile].filter(Boolean);
-  return { ...result, removed: removeStaleOutputs(outRoot, result.written, inputFiles) };
+  return { outRoot, ...result, removed: removeStaleOutputs(outRoot, result.written, inputFiles) };
 }
 
+/** `context` carries the `writeCss` options shared by both input modes. */
 async function importFigmaExports(inputs, context) {
   const importWarnings = [];
   const tokens = figmaToDtcg(
     inputs.map(readFigmaExport),
     context.config,
-    context.baseline,
+    context.baseline?.tokens,
     importWarnings
   );
-  const { routes, emissions } = routeTokens(tokens, context.config, context.baseline);
-  const tokensFile = writeGeneratedTokens(tokens, context.outRoot);
-  const built = await buildCss(routes, emissions, tokensFile, context);
+  const { routes, emissions } = routeTokens(tokens, context.config, context.baseline?.tokens);
+  const sourceFile = writeGeneratedTokens(tokens, context.outDir);
+  const built = await writeCss({ ...context, routes, emissions, sourceFile });
   return {
-    outRoot: context.outRoot,
     written: [...built.written, GENERATED_TOKENS_FILE],
     warnings: [...importWarnings, ...built.warnings],
   };
 }
 
 async function regenerateCss(tokensPath, context) {
-  const tokensFile = resolve(tokensPath);
-  const tokens = readJson('design tokens', tokensFile);
-  const { routes, emissions } = routeTokens(tokens, context.config, context.baseline);
-  const built = await buildCss(routes, emissions, tokensFile, context);
-  return { outRoot: context.outRoot, written: built.written, warnings: built.warnings };
-}
-
-function buildCss(routes, emissions, tokensFile, { config, baselineFile, outRoot }) {
-  return writeCss(routes, emissions, outRoot, tokensFile, baselineFile, config.units, config);
+  const sourceFile = resolve(tokensPath);
+  const tokens = readJson('design tokens', sourceFile);
+  const { routes, emissions } = routeTokens(tokens, context.config, context.baseline?.tokens);
+  return writeCss({ ...context, routes, emissions, sourceFile });
 }
 
 function readFigmaExport(path) {

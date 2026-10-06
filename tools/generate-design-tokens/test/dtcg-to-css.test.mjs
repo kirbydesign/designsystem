@@ -36,7 +36,7 @@ test('renders percentages selected by path when Figma reports ALL_SCOPES', async
   const file = join(out, 'tokens.json');
   writeFileSync(file, JSON.stringify(source));
   const { routes, emissions } = routeTokens(source, percentConfig);
-  await writeCss(routes, emissions, out, file, null, percentConfig.units);
+  await writeCss({ routes, emissions, outDir: out, sourceFile: file, config: percentConfig });
   assert.match(readFileSync(join(out, 'opacity.css'), 'utf8'), /--kirby-opacity-menu: 20%;/);
 });
 
@@ -56,7 +56,7 @@ test('filters excluded tokens only at render time', async () => {
   const file = join(out, 'tokens.json');
   writeFileSync(file, JSON.stringify(source));
   const { routes, emissions } = routeTokens(source, config);
-  await writeCss(routes, emissions, out, file);
+  await writeCss({ routes, emissions, outDir: out, sourceFile: file, config });
   assert.ok(source['font-size'].small);
   assert.doesNotMatch(readFileSync(join(out, 'p.css'), 'utf8'), /font-size/);
   assert.match(readFileSync(join(out, 'p.css'), 'utf8'), /--kirby-spacing-s: 16px/);
@@ -75,7 +75,7 @@ test('inlines references to ignored tokens but keeps references to emitted token
   const file = join(out, 'tokens.json');
   writeFileSync(file, JSON.stringify(source));
   const { routes, emissions } = routeTokens(source, config);
-  await writeCss(routes, emissions, out, file);
+  await writeCss({ routes, emissions, outDir: out, sourceFile: file, config });
   const css = readFileSync(join(out, 'p.css'), 'utf8');
   assert.match(css, /--kirby-border-radius-fallback: 14;/);
   assert.match(css, /--kirby-border-radius-normal: var\(--kirby-spacing-s\);/);
@@ -94,7 +94,14 @@ test('app tokens reference included baseline variables without emitting them', a
   writeFileSync(baselineFile, JSON.stringify(baseline));
   writeFileSync(sourceFile, JSON.stringify(source));
   const { routes, emissions } = routeTokens(source, config, baseline);
-  await writeCss(routes, emissions, out, sourceFile, baselineFile, config.units, config);
+  await writeCss({
+    routes,
+    emissions,
+    outDir: out,
+    sourceFile,
+    config,
+    baseline: { file: baselineFile, tokens: baseline },
+  });
   const css = readFileSync(join(out, 's.css'), 'utf8');
   assert.match(css, /--kirby-color-fill-main: var\(--kirby-system-color-green-500\)/);
   assert.doesNotMatch(css, /--kirby-system-color-green-500:/);
@@ -127,7 +134,14 @@ test('emits only app CSS declarations that differ from the baseline', async () =
   writeFileSync(baselineFile, JSON.stringify(baseline));
   writeFileSync(sourceFile, JSON.stringify(source));
   const { routes, emissions } = routeTokens(source, config, baseline);
-  await writeCss(routes, emissions, out, sourceFile, baselineFile, config.units, config);
+  await writeCss({
+    routes,
+    emissions,
+    outDir: out,
+    sourceFile,
+    config,
+    baseline: { file: baselineFile, tokens: baseline },
+  });
 
   const css = readFileSync(join(out, 's.css'), 'utf8');
   assert.match(css, /--kirby-color-fill-brand: #0000ff;/);
@@ -147,7 +161,14 @@ test('clears staged CSS when an app has no differences for an output', async () 
   writeFileSync(sourceFile, JSON.stringify(tokens));
   writeFileSync(join(out, 's.css'), 'stale declarations');
   const { routes, emissions } = routeTokens(tokens, config, tokens);
-  await writeCss(routes, emissions, out, sourceFile, baselineFile, config.units, config);
+  await writeCss({
+    routes,
+    emissions,
+    outDir: out,
+    sourceFile,
+    config,
+    baseline: { file: baselineFile, tokens: tokens },
+  });
 
   const css = readFileSync(join(out, 's.css'), 'utf8');
   assert.match(css, /auto-generated/);
@@ -171,7 +192,7 @@ test('warns about missing sibling tokens without comparing unrelated sections', 
   const file = join(out, 'tokens.json');
   writeFileSync(file, JSON.stringify(source));
   const { routes, emissions } = routeTokens(source, config);
-  const { warnings } = await writeCss(routes, emissions, out, file);
+  const { warnings } = await writeCss({ routes, emissions, outDir: out, sourceFile: file, config });
   assert.equal(warnings.length, 1);
   assert.match(warnings[0], /s\.css \[color\].*\.kirby-surface-raised.*--kirby-color-fill-extra/);
 });
