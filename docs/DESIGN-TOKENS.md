@@ -48,7 +48,7 @@ light/dark — never used to describe surfaces or contexts.
 
 ## Token naming
 
-The primitive tokens follow a simple naming pattern with an optional property followed by a type and an identifier.
+The primitive tokens follow a simple naming pattern with an optional property followed by a category and a step.
 
 Examples include spacing-s, elevation-2 or color-green-100 (the color is the optional property here).
 
@@ -84,7 +84,7 @@ variable  --kirby-<component*>-<property>-<intention>-<attention*>-<state>
 ```
 
 Component groups follow the same grammar with the component name in front:
-`--kirby-input-color-fill-border-raised`.
+`--kirby-input-color-fill-raised`.
 
 #### Component
 
