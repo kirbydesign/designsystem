@@ -7,6 +7,7 @@ import {
 } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -65,10 +66,11 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       expect(footerAsWrapperChild).not.toBeNull();
     });
 
-    describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
+    describe('when the keyboard is shown', () => {
       const keyboardHeight = 400;
+      const contentOverlapProperty = '--kirby-keyboard-content-overlap';
 
-      it('to a value', () => {
+      it("should set the embedded footer's '--keyboard-offset'", () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
           ':scope > kirby-modal-footer'
         );
@@ -76,7 +78,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
       });
 
-      it('to 0 when no keyboard overlap', () => {
+      it('should set the offset to 0 when the footer does not overlap the keyboard', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
@@ -87,7 +89,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         });
       });
 
-      it('to value of overlap when keyboard overlaps partially', () => {
+      it('should set the offset to the overlap when the footer partially overlaps the keyboard', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
@@ -98,7 +100,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         });
       });
 
-      it('to keyboard height when keyboard overlaps completely', () => {
+      it('should set the offset to the keyboard height when the footer is fully overlapped', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
@@ -108,13 +110,8 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
           '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
-    });
 
-    describe(`should reserve scroll room via '--kirby-keyboard-content-overlap' on the wrapper`, () => {
-      const keyboardHeight = 400;
-      const contentOverlapProperty = '--kirby-keyboard-content-overlap';
-
-      it("to the keyboard's overlap with the content when the keyboard shows", () => {
+      it("should reserve scroll room equal to the keyboard's overlap with the content", () => {
         const ionContentElement = spectator.query<HTMLElement>('ion-content');
         ionContentElement.style.position = 'fixed';
         ionContentElement.style.bottom = `${keyboardHeight - 200}px`;
@@ -125,7 +122,45 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         );
       });
 
-      it('to 0px when the keyboard hides', () => {
+      it('should reserve scroll room based on the wrapper when the footer snaps to the keyboard', () => {
+        const footer = spectator.query(ModalFooterComponent);
+        footer.snapToKeyboard = true;
+        spectator.detectChanges();
+
+        const ionContentElement = spectator.query<HTMLElement>('ion-content');
+        ionContentElement.style.position = 'fixed';
+        ionContentElement.style.bottom = `${keyboardHeight + 100}px`;
+        spectator.element.style.position = 'fixed';
+        spectator.element.style.bottom = `${keyboardHeight - 200}px`;
+
+        spectator.component._onKeyboardShow(keyboardHeight);
+
+        expect(spectator.element.style.getPropertyValue(contentOverlapProperty)).toBe('200px');
+      });
+
+      it("should preserve scroll room when Ionic sets '--keyboard-offset'", async () => {
+        const ionContentElement = spectator.query<HTMLElement>('ion-content');
+        await TestHelper.whenReady(ionContentElement);
+        ionContentElement.style.position = 'fixed';
+        ionContentElement.style.bottom = `${keyboardHeight - 200}px`;
+        ionContentElement.style.setProperty('--keyboard-offset', '300px');
+
+        spectator.component._onKeyboardShow(keyboardHeight);
+
+        const innerScrollElement =
+          ionContentElement.shadowRoot?.querySelector<HTMLElement>('.inner-scroll');
+        const expectedPaddingBottom = `${Number.parseFloat(DesignTokenHelper.size('m')) + 200}px`;
+
+        expect(innerScrollElement).not.toBeNull();
+        expect(getComputedStyle(innerScrollElement).paddingBottom).toBe(expectedPaddingBottom);
+      });
+    });
+
+    describe('when the keyboard is hidden', () => {
+      const keyboardHeight = 400;
+      const contentOverlapProperty = '--kirby-keyboard-content-overlap';
+
+      it('should reset the reserved scroll room to 0px', () => {
         spectator.component._onKeyboardShow(keyboardHeight);
         spectator.component._onKeyboardHide();
         expect(spectator.element.style.getPropertyValue(contentOverlapProperty)).toBe('0px');
@@ -201,7 +236,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       expect(footerAsWrapperChild).toHaveClass('enabled');
     });
 
-    describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
+    describe('when the keyboard is shown', () => {
       const keyboardHeight = 400;
 
       beforeEach(async () => {
@@ -212,7 +247,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         TestHelper.scrollMainWindowToTop();
       });
 
-      it('to a value', () => {
+      it("should set the embedded footer's '--keyboard-offset'", () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
           ':scope > kirby-modal-footer'
         );
@@ -220,7 +255,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
       });
 
-      it('to 0 when no keyboard overlap', () => {
+      it('should set the offset to 0 when the footer does not overlap the keyboard', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
@@ -231,7 +266,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         });
       });
 
-      it('to value of overlap when keyboard overlaps partially', () => {
+      it('should set the offset to the overlap when the footer partially overlaps the keyboard', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
@@ -242,7 +277,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
         });
       });
 
-      it('to keyboard height when keyboard overlaps completely', () => {
+      it('should set the offset to the keyboard height when the footer is fully overlapped', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
