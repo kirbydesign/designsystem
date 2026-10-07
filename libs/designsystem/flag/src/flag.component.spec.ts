@@ -131,7 +131,7 @@ describe('FlagComponent', () => {
 
         const expectedBgColor = getColor(themeColor, variation);
         expect(element).toHaveComputedStyle({
-          'background-color': expectedBgColor.value,
+          'background-color': expectedBgColor,
           color: getColor(themeColor, 'contrast'),
         });
       });

@@ -72,7 +72,9 @@ function getExpectedStringValueAndAlias(
   } else {
     // Check if css property is a css variable:
     // Css variable values are hex when getting computed style, all other property values are rgb:
-    expectedStringValue = cssProperty.startsWith('--') ? expectedValue.hex : expectedValue.value;
+    expectedStringValue = cssProperty.startsWith('--')
+      ? expectedValue.hex
+      : normalizeWhitespace(expectedValue.value);
     expectedValueAlias = expectedValue.fullname;
   }
 
@@ -80,6 +82,12 @@ function getExpectedStringValueAndAlias(
     expectedStringValue,
     expectedValueAlias,
   };
+}
+
+function normalizeWhitespace(value: string): string {
+  // Angular's Karma builder uses esbuild, which wraps RGB custom properties across lines;
+  // computed colors are single-line, so normalize the token before comparing.
+  return value.replace(/\s+/g, ' ');
 }
 
 function compareCssProperty(
