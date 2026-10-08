@@ -3,6 +3,11 @@
 import { Type } from '@angular/core';
 
 import {
+  KeyHandlerDirective,
+  KirbyModule,
+  ModalRouterLinkDirective,
+} from '@kirbydesign/designsystem';
+import {
   AccordionDirective,
   AccordionItemComponent,
   AccordionModule,
@@ -135,6 +140,9 @@ import { ToggleButtonComponent, ToggleButtonModule } from '@kirbydesign/designsy
  * i.e. what can be removed from the imports of a standalone component under test.
  */
 export const KIRBY_IMPORTS: Type<unknown>[] = [
+  KeyHandlerDirective,
+  KirbyModule,
+  ModalRouterLinkDirective,
   AccordionDirective,
   AccordionItemComponent,
   AccordionModule,

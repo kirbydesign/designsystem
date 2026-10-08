@@ -146,7 +146,7 @@ export class GenerateMocks {
 
   /**
    * Generates mocks for all components, directives and providers exported from the
-   * secondary entry points of the library.
+   * entry points of the library.
    */
   async renderMocks(libRoot: string, outputPaths: OutputPaths) {
     const outputPath = path.normalize(outputPaths.base);
@@ -154,7 +154,7 @@ export class GenerateMocks {
       readFileSync(path.join(libRoot, 'package.json'), 'utf8')
     ).name;
     const entryPoints = this.findEntryPoints(libRoot, packageName);
-    this.createProgram(libRoot, packageName, entryPoints);
+    this.createProgram(entryPoints);
     this.exportMap = this.getPublicExports(entryPoints);
 
     const mockFiles: MockFile[] = [];
@@ -192,6 +192,14 @@ export class GenerateMocks {
 
   private findEntryPoints(libRoot: string, packageName: string): EntryPoint[] {
     const entryPoints: EntryPoint[] = [];
+    const primaryEntryFile = this.getEntryFile(libRoot);
+    if (primaryEntryFile) {
+      entryPoints.push({
+        importPath: packageName,
+        entryFile: primaryEntryFile,
+        srcDir: path.dirname(primaryEntryFile),
+      });
+    }
     const visit = (dir: string) => {
       for (const dirent of readdirSync(dir, { withFileTypes: true })) {
         if (!dirent.isDirectory() || isIgnoredFolder(dirent.name)) continue;
@@ -226,17 +234,11 @@ export class GenerateMocks {
    * Creates a program spanning all entry points, with the library's own module specifiers
    * mapped to source, so types can be traced back to the entry point that declares them.
    */
-  private createProgram(libRoot: string, packageName: string, entryPoints: EntryPoint[]) {
+  private createProgram(entryPoints: EntryPoint[]) {
     const paths: ts.MapLike<string[]> = {};
     entryPoints.forEach((entryPoint) => {
       paths[entryPoint.importPath] = [resolve(entryPoint.entryFile)];
     });
-    // Sources may still import from the primary entry point (if it exists);
-    // resolve it too, so those types can be mapped to their secondary entry point:
-    const primaryEntryFile = this.getEntryFile(libRoot);
-    if (primaryEntryFile) {
-      paths[packageName] = [resolve(primaryEntryFile)];
-    }
     this.program = ts.createProgram(
       entryPoints.map((entryPoint) => resolve(entryPoint.entryFile)),
       {

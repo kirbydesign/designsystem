@@ -1,8 +1,5 @@
 import { Component, Type } from '@angular/core';
 import { MetadataOverride, TestBed } from '@angular/core/testing';
-// KirbyModule is the only import from the primary entry point;
-// remove it from here (and below) together with the primary entry point.
-import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { KIRBY_IMPORTS } from './kirby-imports';
 import { KirbyTestingBaseModule } from './kirby-testing-base.module';
@@ -27,7 +24,7 @@ import { KirbyTestingBaseModule } from './kirby-testing-base.module';
  * });
  */
 export const kirbyTestingOverride: MetadataOverride<Component> = {
-  remove: { imports: [KirbyModule, ...KIRBY_IMPORTS] },
+  remove: { imports: KIRBY_IMPORTS },
   add: { imports: [KirbyTestingBaseModule] },
 };
 
