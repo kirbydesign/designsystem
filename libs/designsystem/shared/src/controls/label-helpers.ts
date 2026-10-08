@@ -11,21 +11,23 @@ export function findItemLabel(element: HTMLElement): HTMLElement | null {
 
 export function setAccessibleLabel(element: HTMLElement): string {
   const label = findItemLabel(element);
-  if (label) {
-    label.setAttribute('aria-hidden', 'true');
-    return label.textContent ?? '';
+  if (!label) {
+    return '';
   }
-  return '';
+
+  label.setAttribute('aria-hidden', 'true');
+  return label.textContent ?? '';
 }
 
 export function inheritAriaLabelText(element: HTMLElement): string {
   const attribute = 'aria-label';
-  if (element.hasAttribute(attribute)) {
-    const value = element.getAttribute(attribute);
-    element.removeAttribute(attribute);
-    return value ?? '';
+  if (!element.hasAttribute(attribute)) {
+    return '';
   }
-  return '';
+
+  const value = element.getAttribute(attribute);
+  element.removeAttribute(attribute);
+  return value ?? '';
 }
 
 /**
