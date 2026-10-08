@@ -15,8 +15,8 @@ import { IconComponent, IconSize } from '@kirbydesign/designsystem/icon';
   ],
 })
 export class MockIconComponent {
-  @Input() size: IconSize | `${IconSize}`;
-  @Input() name: string;
+  @Input() size?: IconSize | `${IconSize}`;
+  @Input() name?: string;
 }
 
 // #endregion
