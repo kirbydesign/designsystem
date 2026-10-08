@@ -18,11 +18,23 @@
       }
     },
     "test": {
-      "executor": "@angular-devkit/build-angular:karma",
+      "executor": "@angular/build:karma",
       "options": {
         "main": "libs/designsystem/test.ts",
         "tsConfig": "libs/designsystem/tsconfig.spec.json",
         "karmaConfig": "libs/designsystem/karma.conf.cjs",
+        "assets": [
+          {
+            "glob": "*.svg",
+            "input": "libs/designsystem/icon/src/icons/svg",
+            "output": "assets/kirby/icons/svg"
+          },
+          {
+            "glob": "*.png",
+            "input": "libs/designsystem/testing/images",
+            "output": "assets/images"
+          }
+        ],
         "styles": ["libs/designsystem/testing/src/styles.scss"]
       },
       "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]
