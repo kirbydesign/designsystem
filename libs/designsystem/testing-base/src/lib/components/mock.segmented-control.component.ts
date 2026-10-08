@@ -18,15 +18,15 @@ import {
     },
   ],
 })
-export class MockSegmentedControlComponent {
+export class MockSegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
   @Input() mode: SegmentedControlMode | `${SegmentedControlMode}`;
-  @Input() items: SegmentItem[];
+  @Input() items: TItem[];
   @Input() selectedIndex: number;
   @Output() selectedIndexChange = new EventEmitter<number>();
-  @Input() value: SegmentItem;
+  @Input() value: NoInfer<TItem>;
   @Input() size: 'sm' | 'md';
   @Input() disableChangeOnSwipe: boolean;
-  @Output() segmentSelect = new EventEmitter();
+  @Output() segmentSelect = new EventEmitter<TItem>();
 }
 
 // #endregion

@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { ProgressCircleComponent } from '@kirbydesign/designsystem';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

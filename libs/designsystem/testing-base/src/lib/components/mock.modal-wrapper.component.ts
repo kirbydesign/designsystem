@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, TemplateRef } from '@angular/core';
 
 import { ModalConfig, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 
@@ -15,7 +15,9 @@ import { ModalConfig, ModalWrapperComponent } from '@kirbydesign/designsystem/mo
   ],
 })
 export class MockModalWrapperComponent {
+  @Input() scrollDisabled: boolean;
   @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
 
   addModalElement() {
     // NOOP

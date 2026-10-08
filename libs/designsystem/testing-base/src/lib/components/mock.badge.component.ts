@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { BadgeComponent, BadgeSize } from '@kirbydesign/designsystem/badge';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -16,7 +16,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 })
 export class MockBadgeComponent {
   @Input() text: string;
-  @Input() size: boolean;
+  @Input() size: BadgeSize;
 }
 
 // #endregion

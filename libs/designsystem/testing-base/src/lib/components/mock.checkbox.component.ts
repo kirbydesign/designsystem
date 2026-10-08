@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { CheckboxComponent } from '@kirbydesign/designsystem';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -16,9 +16,10 @@ import { CheckboxComponent } from '@kirbydesign/designsystem';
 })
 export class MockCheckboxComponent {
   @Input() checked: boolean;
+  @Input() indeterminate: boolean;
   @Input() attentionLevel: '1' | '2';
   @Input() text: string;
-  @Input() size?: 'xs' | 'sm' | 'md';
+  @Input() size: 'xs' | 'sm' | 'md';
   @Input() hasError: boolean;
   @Input() disabled: boolean;
   @Output() checkedChange = new EventEmitter<boolean>();

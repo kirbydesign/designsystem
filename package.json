@@ -34,6 +34,7 @@
     "transpile:generate-mocks": "tsc -b tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
+    "generate-mocks:staged": "node ./scripts/generate-mocks-staged.js",
     "generate-angular-proxies": "npx tsx tools/generate-proxies/generate-angular-proxies.ts",
     "generate-design-tokens": "sass libs/core/src/scss/themes/design-tokens.scss libs/core/src/scss/themes/design-tokens.css --no-source-map",
     "generate-docs-import-map": "nx build designsystem && node ./scripts/generate-docs-import-map.js",
@@ -102,7 +103,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run sync-node-version && lint-staged",
+      "pre-commit": "npm run sync-node-version && npm run generate-mocks:staged && lint-staged",
       "post-merge": "post-npm-install"
     }
   }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
+import { ThemeColor } from '@kirbydesign/core';
 
 import {
   ListComponent,
@@ -6,8 +7,7 @@ import {
   ListSwipeAction,
   LoadOnDemandEvent,
   StandAloneSpacing,
-  ThemeColor,
-} from '@kirbydesign/designsystem';
+} from '@kirbydesign/designsystem/list';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

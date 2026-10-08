@@ -4,7 +4,7 @@ import {
   InputComponent,
   InputCounterComponent,
   TextareaComponent,
-} from '@kirbydesign/designsystem';
+} from '@kirbydesign/designsystem/form-field';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

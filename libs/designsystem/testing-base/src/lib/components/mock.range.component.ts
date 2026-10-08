@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { RangeComponent } from '@kirbydesign/designsystem';
+import { RangeComponent } from '@kirbydesign/designsystem/range';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -24,8 +24,10 @@ export class MockRangeComponent {
   @Input() step: number;
   @Input() ticks: boolean;
   @Input() disabled: boolean;
+  @Input() pinFormatter: (value: number) => string | number;
   @Input() value: number;
   @Output() change = new EventEmitter<number>();
+  @Output() move = new EventEmitter<number>();
 
   setDisabledState() {
     // NOOP
