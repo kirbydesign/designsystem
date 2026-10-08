@@ -11,6 +11,9 @@
       "@kirbydesign/extensions-angular/skeleton-loader": [
         "../extensions/angular/skeleton-loader/index.ts"
       ],
+      "@kirbydesign/designsystem": ["./src/public-api.ts"],
+      "@kirbydesign/designsystem/testing-base": ["./testing-base/src/public_api.ts"],
+      "@kirbydesign/designsystem/testing-jasmine": ["./testing-jasmine/src/public_api.ts"],
       "@kirbydesign/designsystem/*": ["./*/index.ts"]
     }
   },
