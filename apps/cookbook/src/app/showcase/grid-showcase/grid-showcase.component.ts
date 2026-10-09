@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { DesignTokenHelper } from '@kirbydesign/designsystem';
 import { KeyValuePipe } from '@angular/common';
-// @ts-expect-error TypeScript cannot provide types based on attributes yet
 import exampleHtml from '../../examples/grid-example/grid-example.component.html' with {
   loader: 'text',
 };

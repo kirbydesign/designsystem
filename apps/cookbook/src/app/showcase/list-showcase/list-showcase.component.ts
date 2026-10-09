@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionPropertiesComponent } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionEventsComponent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ListItemsNoDividersExampleComponent } from '~/app/examples/list-example/examples/items-no-dividers';
+import { ApiDescriptionEventsComponent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionPropertiesComponent } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ListItemsExampleComponent } from '~/app/examples/list-example/examples/items';
 import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list-example/examples/header-and-footer';
 import { ListWithSectionsExampleComponent } from '~/app/examples/list-example/examples/sections';
