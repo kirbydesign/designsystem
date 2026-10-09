@@ -67,35 +67,34 @@ mutually exclusive. A baseline is loaded only when `--baseline` is provided.
 
 ## Configuration
 
-[`design-tokens.config.mjs`](../../design-tokens.config.mjs) sets a `prefix`,
-optional `units`, and an ordered list of `rules`. For each token, the first
-matching rule wins, so put specific rules before general ones. Every token must
-be matched by a rule; otherwise, the pipeline fails.
+[`design-tokens.config.mjs`](../../design-tokens.config.mjs) holds Kirby's
+theming model, so the generator itself stays generic.
 
-| Rule field         | Description                                                                                |
-| ------------------ | ------------------------------------------------------------------------------------------ |
-| `id`               | Unique name for the rule.                                                                  |
-| `match`            | Path pattern.                                                                              |
-| `ignore`           | If `true`, the token is left out of CSS. Don't set any fields other than `id` and `match`. |
-| `variable`         | Required. CSS variable name, without `--`.                                                 |
-| `output`           | Required. CSS file to write.                                                               |
-| `selector`         | Selector list. Default: `:root`.                                                           |
-| `section`          | Optional heading comment for the generated CSS.                                            |
-| `outputReferences` | When `false`, writes resolved values instead of `var()`. Default: `true`.                  |
+The config accepts the following fields:
 
-Patterns match Figma path segments separated by `/`:
+| Field          | Description                                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------------------- |
+| `ignore`       | Globs for tokens left out of CSS. They are still written to `tokens.json`.                               |
+| `variableName` | Required. `(path) => parts`, e.g. `['kirby', 'color', 'fill']`. Parts are lowercased and joined.         |
+| `outputs`      | Required. `{ 'file.css': [block, …] }`. See below.                                                       |
+| `units`        | `{ px: { scopes, include }, … }`. A numeric token gets the first unit whose Figma scopes or globs apply. |
 
-- Literal text matches exactly.
-- `*` matches one segment.
-- `{name}` captures all or part of a segment, as in `{surface} surface`.
-- A final `**` matches one or more segments and captures them as `{rest}`.
+Globs follow Node's
+[`path.matchesGlob`](https://nodejs.org/api/path.html#pathmatchesglobpath-pattern):
+`*` matches one segment or part of one (as in `* surface`), and `**` matches
+any number of segments.
 
-Templates can use `{prefix}`, `{path}` (the full path), `{rest}`, and any
-captures from the rule's pattern. Inserted values are lowercased and joined
-with dashes.
+Each token goes to the **first** block that includes it, in the order the
+blocks are written, so put specific blocks before catch-alls such as
+`include: ['**']`. Every token must be ignored or included by a block;
+otherwise the pipeline fails.
 
-Each key in `units` is a unit, such as `px` or `%`. A unit applies to numeric
-tokens that match its Figma `scopes` or its `paths` patterns.
+| Block field        | Description                                                               |
+| ------------------ | ------------------------------------------------------------------------- |
+| `include`          | Required. Globs for the tokens in this block.                             |
+| `selector`         | Selector list, used as written. Default: `:root`.                         |
+| `section`          | Heading comment: a string, or `(path) => string`.                         |
+| `outputReferences` | When `false`, writes resolved values instead of `var()`. Default: `true`. |
 
 ## Tests
 

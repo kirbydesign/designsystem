@@ -1,9 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { validateConfig } from '../src/config.mjs';
 import { figmaToDtcg } from '../src/figma-to-dtcg.mjs';
-import { config } from './fixtures.mjs';
+import { config, flatConfig } from './fixtures.mjs';
 
 test('merges arbitrary exports at original paths and preserves aliases across files', () => {
   const inputs = [
@@ -126,13 +125,7 @@ test('retains Figma opacity scope for number tokens at new paths', () => {
         },
       },
     ],
-    validateConfig({
-      prefix: 'kirby',
-      units: { '%': { scopes: ['OPACITY'] } },
-      rules: [
-        { id: 'number', match: 'opacity/**', variable: '{prefix}-{path}', output: 'opacity.css' },
-      ],
-    })
+    flatConfig('opacity.css', { '%': { scopes: ['OPACITY'] } })
   );
   assert.deepEqual(tokens.opacity.menu.$extensions, { 'com.figma.scopes': ['OPACITY'] });
 });

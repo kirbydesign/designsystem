@@ -1,14 +1,6 @@
 import { existsSync } from 'node:fs';
+import { posix } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import {
-  BUILT_IN_TEMPLATE_VARIABLES,
-  captureNames,
-  compilePattern,
-  matchesEveryPathOf,
-  templateVariableNames,
-} from './rules.mjs';
-
-const TEMPLATE_FIELDS = ['variable', 'selector', 'output', 'section'];
 
 export async function loadConfig(filePath) {
   if (!existsSync(filePath)) {
@@ -21,109 +13,97 @@ export async function loadConfig(filePath) {
   return validateConfig(module.default);
 }
 
-/** Compiles patterns, flattens units and applies defaults; throws on the first invalid entry. */
+/**
+ * Checks the config and compiles it into the two lookups the pipeline uses:
+ * - `route(path)`: `{ ignore: true }`, a route for the first block that includes the path,
+ *   or `undefined` when nothing does.
+ * - `unit(path, figmaScopes)`: the first unit that applies, or `undefined`.
+ * Throws on the first invalid entry.
+ */
 export function validateConfig(raw) {
-  if (!raw?.prefix) throw new Error('Config requires a "prefix"');
-  if (!Array.isArray(raw.rules) || raw.rules.length === 0) {
-    throw new Error('Config requires a non-empty "rules" array');
+  if (typeof raw?.variableName !== 'function') {
+    throw new Error('Config requires a "variableName(path)" function');
   }
-  assertUniqueRuleIds(raw.rules);
-  const rules = raw.rules.map(validateRule);
-  assertEveryRuleReachable(rules);
-
+  const ignore = validateGlobs(raw.ignore ?? [], 'ignore');
+  const blocks = validateOutputs(raw.outputs);
+  const units = validateUnits(raw.units);
   return {
-    prefix: raw.prefix,
-    units: validateUnits(raw.units),
-    rules,
+    route: (path) => routeFor(path, { ignore, blocks, variableName: raw.variableName }),
+    unit: (path, figmaScopes) => units.find((unit) => unit.appliesTo(path, figmaScopes))?.suffix,
   };
 }
 
-function assertUniqueRuleIds(rules) {
-  const seenIds = new Set();
-  for (const rule of rules) {
-    if (seenIds.has(rule?.id)) throw new Error(`Duplicate rule id "${rule.id}"`);
-    seenIds.add(rule?.id);
+function routeFor(path, { ignore, blocks, variableName }) {
+  const key = path.join('/');
+  if (matchesAny(ignore, key)) return { ignore: true };
+  const block = blocks.find(({ include }) => matchesAny(include, key));
+  if (!block) return undefined;
+
+  const variable = variableName(path);
+  if (!Array.isArray(variable) || variable.length === 0) {
+    throw new Error(`variableName() for "${key}" must return a non-empty array of name parts`);
   }
+  return {
+    variable,
+    output: block.output,
+    selector: block.selector,
+    section: typeof block.section === 'function' ? block.section(path) : block.section,
+    outputReferences: block.outputReferences,
+  };
 }
 
-function validateRule(rule) {
-  if (!rule?.id) throw new Error('Every rule requires an "id"');
-  const location = `Rule ${rule.id}`;
-  if (!rule.match) throw new Error(`${location} requires "match"`);
+function matchesAny(globs, key) {
+  return globs.some((glob) => posix.matchesGlob(key, glob));
+}
 
-  const compiled = compilePatternAt(rule.match, location);
-  if (rule.ignore) {
-    assertIgnoreRuleHasNoTemplates(rule, location);
-  } else {
-    assertRequiredTemplates(rule, location);
-    assertKnownTemplateVariables(rule, compiled, location);
+/** `{ 'a.css': [block, …], … }` → `[{ output: 'a.css', ...block }, …]` in declaration order. */
+function validateOutputs(outputs) {
+  const entries = Object.entries(outputs ?? {});
+  if (entries.length === 0) {
+    throw new Error('Config requires "outputs": { "<file>.css": [blocks] }');
   }
-  return { ...rule, compiled };
-}
-
-function assertIgnoreRuleHasNoTemplates(rule, location) {
-  const field = TEMPLATE_FIELDS.find((templateField) => rule[templateField] != null);
-  if (field) throw new Error(`${location} is an ignore rule and must not declare "${field}"`);
-}
-
-function assertRequiredTemplates(rule, location) {
-  if (!rule.variable) throw new Error(`${location} requires "variable"`);
-  if (!rule.output) throw new Error(`${location} requires "output"`);
-}
-
-function assertKnownTemplateVariables(rule, compiled, location) {
-  const available = new Set([...BUILT_IN_TEMPLATE_VARIABLES, ...captureNames(compiled)]);
-  for (const field of TEMPLATE_FIELDS.filter((templateField) => rule[templateField] != null)) {
-    const unknown = templateVariableNames(rule[field]).find((name) => !available.has(name));
-    if (unknown) {
-      throw new Error(
-        `${location}: "${field}" uses unknown template variable "${unknown}". ` +
-          `Available: ${[...available].sort().join(', ')}`
-      );
+  return entries.flatMap(([output, blocks]) => {
+    if (!Array.isArray(blocks) || blocks.length === 0) {
+      throw new Error(`outputs["${output}"] must be a non-empty array of blocks`);
     }
-  }
+    return blocks.map((block, index) =>
+      validateBlock(block, output, `outputs["${output}"][${index}]`)
+    );
+  });
 }
 
-function assertEveryRuleReachable(rules) {
-  for (const [index, earlier] of rules.entries()) {
-    const unreachable = rules
-      .slice(index + 1)
-      .find((later) => matchesEveryPathOf(earlier.compiled, later.compiled));
-    if (unreachable) {
-      throw new Error(
-        `Rule "${unreachable.id}" is unreachable — "${earlier.id}" ` +
-          `("${earlier.match}") matches every path it could match. ` +
-          `Move the catch-all rule last in the set.`
-      );
-    }
+function validateBlock(block, output, location) {
+  const include = validateGlobs(block?.include, `${location}.include`);
+  if (include.length === 0) throw new Error(`${location} requires a non-empty "include"`);
+  if (block.selector != null && typeof block.selector !== 'string') {
+    throw new Error(`${location}.selector must be a string`);
   }
+  if (block.section != null && !['string', 'function'].includes(typeof block.section)) {
+    throw new Error(`${location}.section must be a string or a function of the path`);
+  }
+  return { ...block, output, include };
 }
 
-/** `{ px: { scopes: [...], paths: [...] } }` → `[{ suffix, scopes: Set, paths: [compiled] }]` */
+/** `{ px: { scopes, include }, … }` → `[{ suffix, appliesTo }]` in declaration order. */
 function validateUnits(units) {
-  return Object.entries(units ?? {}).map(([suffix, unitConfig]) =>
-    validateUnit(suffix, unitConfig)
-  );
+  return Object.entries(units ?? {}).map(([suffix, unit]) => {
+    const location = `units["${suffix}"]`;
+    const scopes = unit?.scopes ?? [];
+    const include = validateGlobs(unit?.include ?? [], `${location}.include`);
+    if (scopes.length === 0 && include.length === 0) {
+      throw new Error(`${location} must declare "scopes" or "include"`);
+    }
+    return {
+      suffix,
+      appliesTo: (path, figmaScopes) =>
+        figmaScopes.some((scope) => scopes.includes(scope)) || matchesAny(include, path.join('/')),
+    };
+  });
 }
 
-function validateUnit(suffix, unitConfig) {
-  const location = `units.${suffix}`;
-  const scopes = unitConfig?.scopes ?? [];
-  const paths = unitConfig?.paths ?? [];
-  if (scopes.length === 0 && paths.length === 0) {
-    throw new Error(`${location} must declare "scopes" or "paths"`);
+function validateGlobs(globs, location) {
+  if (!Array.isArray(globs) || !globs.every((glob) => typeof glob === 'string' && glob)) {
+    throw new Error(`${location} must be an array of path globs, e.g. ['spacing/**']`);
   }
-  return {
-    suffix,
-    scopes: new Set(scopes),
-    paths: paths.map((pattern) => compilePatternAt(pattern, location)),
-  };
-}
-
-function compilePatternAt(pattern, location) {
-  try {
-    return compilePattern(pattern);
-  } catch (error) {
-    throw new Error(`${location}: ${error.message}`);
-  }
+  return globs;
 }

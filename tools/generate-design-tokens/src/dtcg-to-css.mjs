@@ -33,7 +33,7 @@ export async function writeCss({ routes, emissions, outDir, sourceFile, config, 
           includeFile: baseline?.file ?? null,
           routes,
           emissions,
-          units: config.units,
+          config,
           onlySourceTokens: true,
         })
       : [];
@@ -48,7 +48,7 @@ async function formatBaseline(baseline, config) {
     includeFile: null,
     routes,
     emissions,
-    units: config.units,
+    config,
     onlySourceTokens: false,
   });
   return {
@@ -93,10 +93,10 @@ async function formatEmissionBlocks({
   includeFile,
   routes,
   emissions,
-  units,
+  config,
   onlySourceTokens,
 }) {
-  const percentage = percentageTransform(units);
+  const percentage = percentageTransform(config);
   const variableName = variableNameTransform(routes);
   const styleDictionary = new StyleDictionary({
     source: [tokensFile],

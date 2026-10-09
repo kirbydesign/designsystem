@@ -3,29 +3,7 @@ import assert from 'node:assert/strict';
 
 import { validateConfig } from '../src/config.mjs';
 import { routeTokens } from '../src/routing.mjs';
-
-const config = validateConfig({
-  prefix: 'kirby',
-  rules: [
-    {
-      id: 'base',
-      match: 'base surface/{category}/**',
-      variable: '{prefix}-{category}-{rest}',
-      selector: ':root, .{prefix}-surface-base',
-      output: 'surfaces.css',
-      section: '{category}',
-    },
-    {
-      id: 'surface',
-      match: '{surface} surface/{category}/**',
-      variable: '{prefix}-{category}-{rest}',
-      selector: '.{prefix}-surface-{surface}',
-      output: 'surfaces.css',
-      section: '{category}',
-    },
-    { id: 'primitive', match: '{category}/**', variable: '{prefix}-{path}', output: 'p.css' },
-  ],
-});
+import { config } from './fixtures.mjs';
 
 const token = ($value) => ({ $type: 'color', $value });
 
@@ -52,17 +30,11 @@ test('allows the same variable on different surface selectors', () => {
 
 test('rejects duplicate names on the same selector, including a selector list', () => {
   const overlapping = validateConfig({
-    prefix: 'kirby',
-    rules: [
-      {
-        id: 'a',
-        match: 'first/*',
-        variable: '{prefix}-same',
-        selector: ':root, .base',
-        output: 'a.css',
-      },
-      { id: 'b', match: 'second/*', variable: '{prefix}-same', output: 'b.css' },
-    ],
+    variableName: () => ['kirby', 'same'],
+    outputs: {
+      'a.css': [{ include: ['first/**'], selector: ':root, .base' }],
+      'b.css': [{ include: ['second/**'] }],
+    },
   });
   assert.throws(
     () => routeTokens({ first: { a: token('#fff') }, second: { b: token('#eee') } }, overlapping),
@@ -138,9 +110,29 @@ test('allows aliases to :root tokens and to tokens on the same surface', () => {
   assert.doesNotThrow(() => routeTokens(source, config));
 });
 
-test('fails when a CSS rule does not match a token', () => {
+test('fails when no output block includes a token', () => {
+  const partial = validateConfig({
+    variableName: (path) => path,
+    outputs: { 'a.css': [{ include: ['spacing/**'] }] },
+  });
   assert.throws(
-    () => routeTokens({ orphan: token('#fff') }, config),
-    /No rule matched leaf "orphan"/
+    () => routeTokens({ orphan: token('#fff') }, partial),
+    /No output includes "orphan"/
   );
+});
+
+test('rejects a variableName() that does not return name parts', () => {
+  const broken = validateConfig({
+    variableName: (path) => path.join('-'),
+    outputs: { 'a.css': [{ include: ['**'] }] },
+  });
+  assert.throws(
+    () => routeTokens({ x: token('#fff') }, broken),
+    /variableName\(\) for "x" must return a non-empty array/
+  );
+});
+
+test('slugs variable parts and joins them with dashes', () => {
+  const { routes } = routeTokens({ 'Loudness Scale': { '01 Quiet': token('#fff') } }, config);
+  assert.equal(routes.get('Loudness Scale/01 Quiet').name, 'kirby-loudness-scale-01-quiet');
 });

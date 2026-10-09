@@ -1,5 +1,5 @@
 import { collectLeafTokens, rootTokenKey, setNestedValue, tokenKey } from './tokens.mjs';
-import { FIGMA_SCOPES_EXTENSION, isPercent, unitAppliesTo } from './units.mjs';
+import { FIGMA_SCOPES_EXTENSION, PERCENT, unitFor } from './units.mjs';
 
 const FIGMA_ALIAS_EXTENSION = 'com.figma.aliasData';
 const DTCG_REFERENCE_PATTERN = /^\{([^{}]+)\}$/;
@@ -14,7 +14,7 @@ export function figmaToDtcg(inputs, config, baseline = {}, warnings = []) {
   const tokens = {};
   for (const { path, node } of entries) {
     const value = aliasAsReferenceOrLiteral(path, node, isKnownToken, warnings);
-    setNestedValue(tokens, path, toDtcgToken(path, node, value, config.units));
+    setNestedValue(tokens, path, toDtcgToken(path, node, value, config));
   }
 
   retypeAliasesDimensions(tokens, baselineTokensByKey);
@@ -72,26 +72,26 @@ function aliasAsReferenceOrLiteral(path, node, isKnownToken, warnings) {
   return node.$value;
 }
 
-function toDtcgToken(path, node, value, units) {
-  if (typeof value === 'number') return toTokenWithConfiguredUnit(path, node, value, units);
+function toDtcgToken(path, node, value, config) {
+  if (typeof value === 'number') return toTokenWithConfiguredUnit(path, node, value, config);
   if (isColorWithAlpha(node.$type, value)) {
     return { $type: node.$type, $value: { ...value, alpha: roundToHundredths(value.alpha) } };
   }
   return { $type: node.$type, $value: value };
 }
 
-function toTokenWithConfiguredUnit(path, node, number, units) {
+function toTokenWithConfiguredUnit(path, node, number, config) {
   const figmaScopes = node.$extensions?.[FIGMA_SCOPES_EXTENSION] ?? [];
-  const unit = units.find((candidate) => unitAppliesTo(candidate, figmaScopes, path));
+  const unit = unitFor(config, path, figmaScopes);
   if (!unit) return { $type: node.$type, $value: number };
-  if (isPercent(unit)) {
+  if (unit === PERCENT) {
     return {
       $type: node.$type,
       $value: number,
       $extensions: { [FIGMA_SCOPES_EXTENSION]: figmaScopes },
     };
   }
-  return { $type: 'dimension', $value: { value: number, unit: unit.suffix } };
+  return { $type: 'dimension', $value: { value: number, unit } };
 }
 
 function isColorWithAlpha(type, value) {

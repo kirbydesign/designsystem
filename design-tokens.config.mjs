@@ -4,56 +4,38 @@
  * See tools/generate-design-tokens/README.md for the config reference.
  */
 
+const PREFIX = 'kirby';
+const SURFACES = ['base', 'raised', 'brand'];
+
 export default {
-  prefix: 'kirby',
+  ignore: ['font-size/**', 'line-height/**', 'font/weight/**', '* surface/color/chart/**'],
+
+  variableName: ([group, ...rest]) =>
+    group.endsWith(' surface') ? [PREFIX, ...rest] : [PREFIX, group, ...rest],
+
+  /**
+   * Output files and their blocks. Each token goes to the FIRST block whose `include`
+   * matches it, in the order written here, so put specific blocks before catch-alls.
+   */
+  outputs: {
+    'surfaces.css': [
+      { include: ['font/**'], section: 'font' },
+      ...SURFACES.map((surface) => ({
+        include: [`${surface} surface/**`],
+        selector:
+          surface === 'base' ? `:root, .${PREFIX}-surface-base` : `.${PREFIX}-surface-${surface}`,
+        section: ([, category]) => category.toLowerCase(),
+      })),
+    ],
+    'primitives-color.css': [{ include: ['*/color/**'] }],
+    'primitives.css': [{ include: ['**'], section: ([group]) => group.toLowerCase() }],
+  },
+
   units: {
     px: {
       scopes: ['WIDTH_HEIGHT', 'GAP', 'CORNER_RADIUS', 'FONT_SIZE', 'LINE_HEIGHT', 'STROKE_FLOAT'],
-      paths: ['* surface/elevation/**', 'background-blur/**'],
+      include: ['* surface/elevation/**', 'background-blur/**'],
     },
     '%': { scopes: ['OPACITY', 'COLOR_OPACITY'] },
   },
-
-  rules: [
-    { id: 'ignore-font-size', match: 'font-size/**', ignore: true },
-    { id: 'ignore-line-height', match: 'line-height/**', ignore: true },
-    { id: 'ignore-font-weight', match: 'font/weight/**', ignore: true },
-    { id: 'ignore-chart', match: '* surface/color/chart/**', ignore: true },
-    {
-      id: 'surface-base',
-      match: 'base surface/{category}/**',
-      variable: '{prefix}-{category}-{rest}',
-      selector: ':root, .{prefix}-surface-base',
-      output: 'surfaces.css',
-      section: '{category}',
-    },
-    {
-      id: 'surface',
-      match: '{surface} surface/{category}/**',
-      variable: '{prefix}-{category}-{rest}',
-      selector: '.{prefix}-surface-{surface}',
-      output: 'surfaces.css',
-      section: '{category}',
-    },
-    {
-      id: 'font',
-      match: 'font/**',
-      variable: '{prefix}-font-{rest}',
-      output: 'surfaces.css',
-      section: 'font',
-    },
-    {
-      id: 'primitive-color',
-      match: '*/color/**',
-      variable: '{prefix}-{path}',
-      output: 'primitives-color.css',
-    },
-    {
-      id: 'primitive',
-      match: '{category}/**',
-      variable: '{prefix}-{path}',
-      output: 'primitives.css',
-      section: '{category}',
-    },
-  ],
 };

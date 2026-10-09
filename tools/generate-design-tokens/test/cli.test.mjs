@@ -27,12 +27,13 @@ test('imports multiple Figma files and rebuilds the CSS from their merged JSON',
   writeFileSync(
     config,
     `export default {
-    prefix: 'kirby', units: { px: { scopes: ['GAP'] } },
-    rules: [
-      { id: 'spacing', match: 'spacing/**', variable: '{prefix}-{path}', output: 'spacing.css' },
-      { id: 'radius', match: 'border-radius/**', variable: '{prefix}-{path}', output: 'radius.css' },
-    ]
-  }`
+      variableName: (path) => ['kirby', ...path],
+      outputs: {
+        'spacing.css': [{ include: ['spacing/**'] }],
+        'radius.css': [{ include: ['border-radius/**'] }],
+      },
+      units: { px: { scopes: ['GAP'] } },
+    }`
   );
   writeFileSync(
     first,
@@ -66,8 +67,8 @@ test('removes staged files from earlier runs that this run did not produce', asy
   writeFileSync(
     config,
     `export default {
-      prefix: 'kirby',
-      rules: [{ id: 'spacing', match: 'spacing/**', variable: '{prefix}-{path}', output: 'spacing.css' }]
+      variableName: (path) => ['kirby', ...path],
+      outputs: { 'spacing.css': [{ include: ['**'] }] },
     }`
   );
   writeFileSync(
@@ -136,8 +137,8 @@ test('emits a group $root token at the group path and resolves Figma aliases to 
   writeFileSync(
     config,
     `export default {
-      prefix: 'kirby',
-      rules: [{ id: 'all', match: '{category}/**', variable: '{prefix}-{path}', output: 'font.css' }]
+      variableName: (path) => ['kirby', ...path],
+      outputs: { 'font.css': [{ include: ['**'] }] },
     }`
   );
   writeFileSync(
@@ -175,8 +176,8 @@ test('returns warnings for Figma aliases whose targets are not exported', async 
   writeFileSync(
     config,
     `export default {
-      prefix: 'kirby', units: {},
-      rules: [{ id: 'colors', match: 'color/**', variable: '{prefix}-{path}', output: 'spacing.css' }]
+      variableName: (path) => ['kirby', ...path],
+      outputs: { 'colors.css': [{ include: ['**'] }] },
     }`
   );
   writeFileSync(

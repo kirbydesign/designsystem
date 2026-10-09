@@ -1,32 +1,33 @@
 import { validateConfig } from '../src/config.mjs';
 
+/** A small Kirby-shaped config: ignored font sizes, two surfaces, and primitives. */
 export const config = validateConfig({
-  prefix: 'kirby',
-  units: { px: { scopes: ['GAP'], paths: ['* surface/elevation/**'] } },
-  rules: [
-    { id: 'skip', match: 'font-size/**', ignore: true },
-    {
-      id: 'base',
-      match: 'base surface/{category}/**',
-      variable: '{prefix}-{category}-{rest}',
-      selector: ':root, .{prefix}-surface-base',
-      output: 's.css',
-      section: '{category}',
-    },
-    {
-      id: 'surface',
-      match: '{surface} surface/{category}/**',
-      variable: '{prefix}-{category}-{rest}',
-      selector: '.{prefix}-surface-{surface}',
-      output: 's.css',
-      section: '{category}',
-    },
-    {
-      id: 'primitive',
-      match: '{category}/**',
-      variable: '{prefix}-{path}',
-      output: 'p.css',
-      section: '{category}',
-    },
-  ],
+  ignore: ['font-size/**'],
+  variableName: ([group, ...rest]) =>
+    group.endsWith(' surface') ? ['kirby', ...rest] : ['kirby', group, ...rest],
+  outputs: {
+    's.css': [
+      {
+        include: ['base surface/**'],
+        selector: ':root, .kirby-surface-base',
+        section: ([, category]) => category,
+      },
+      {
+        include: ['raised surface/**'],
+        selector: '.kirby-surface-raised',
+        section: ([, category]) => category,
+      },
+    ],
+    'p.css': [{ include: ['**'], section: ([group]) => group }],
+  },
+  units: { px: { scopes: ['GAP'], include: ['* surface/elevation/**'] } },
 });
+
+/** A config that sends every token to one file under `:root`. */
+export function flatConfig(output, units) {
+  return validateConfig({
+    variableName: (path) => ['kirby', ...path],
+    outputs: { [output]: [{ include: ['**'] }] },
+    units,
+  });
+}

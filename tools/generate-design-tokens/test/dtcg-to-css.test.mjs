@@ -8,16 +8,10 @@ import { validateConfig } from '../src/config.mjs';
 import { figmaToDtcg } from '../src/figma-to-dtcg.mjs';
 import { routeTokens } from '../src/routing.mjs';
 import { writeCss } from '../src/dtcg-to-css.mjs';
-import { config } from './fixtures.mjs';
+import { config, flatConfig } from './fixtures.mjs';
 
 test('renders percentages selected by path when Figma reports ALL_SCOPES', async () => {
-  const percentConfig = validateConfig({
-    prefix: 'kirby',
-    units: { '%': { paths: ['opacity/**'] } },
-    rules: [
-      { id: 'opacity', match: 'opacity/**', variable: '{prefix}-{path}', output: 'opacity.css' },
-    ],
-  });
+  const percentConfig = flatConfig('opacity.css', { '%': { include: ['opacity/**'] } });
   const source = figmaToDtcg(
     [
       {
@@ -79,6 +73,30 @@ test('inlines references to ignored tokens but keeps references to emitted token
   const css = readFileSync(join(out, 'p.css'), 'utf8');
   assert.match(css, /--kirby-border-radius-fallback: 14;/);
   assert.match(css, /--kirby-border-radius-normal: var\(--kirby-spacing-s\);/);
+});
+
+test('resolves references only for routes with outputReferences: false', async () => {
+  const resolvedConfig = validateConfig({
+    variableName: (path) => ['kirby', ...path],
+    outputs: {
+      'p.css': [{ include: ['gap/resolved'], outputReferences: false }, { include: ['**'] }],
+    },
+  });
+  const source = {
+    spacing: { s: { $type: 'dimension', $value: { value: 16, unit: 'px' } } },
+    gap: {
+      referenced: { $type: 'dimension', $value: '{spacing.s}' },
+      resolved: { $type: 'dimension', $value: '{spacing.s}' },
+    },
+  };
+  const out = mkdtempSync(join(tmpdir(), 'dt-output-references-'));
+  const file = join(out, 'tokens.json');
+  writeFileSync(file, JSON.stringify(source));
+  const { routes, emissions } = routeTokens(source, resolvedConfig);
+  await writeCss({ routes, emissions, outDir: out, sourceFile: file, config: resolvedConfig });
+  const css = readFileSync(join(out, 'p.css'), 'utf8');
+  assert.match(css, /--kirby-gap-referenced: var\(--kirby-spacing-s\);/);
+  assert.match(css, /--kirby-gap-resolved: 16px;/);
 });
 
 test('app tokens reference included baseline variables without emitting them', async () => {

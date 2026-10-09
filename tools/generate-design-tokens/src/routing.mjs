@@ -1,8 +1,15 @@
-import { collectLeafTokens, referencedTokenKeys, tokenKey } from './tokens.mjs';
-import { resolveRule } from './rules.mjs';
+import { collectLeafTokens, namedPath, referencedTokenKeys, tokenKey } from './tokens.mjs';
 
 const KEY_SEPARATOR = '\u0000';
 const ROOT_SELECTOR = ':root';
+
+export function slug(value) {
+  return String(value)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 /**
  * Whether `var(--target)` declared under `current`'s selector resolves to the target's value.
@@ -31,7 +38,7 @@ export function routeTokens(source, config, baseline = {}) {
 
   const routes = new Map();
   for (const path of baselineOnlyPaths) {
-    const match = resolveRuleOrThrow(config, path);
+    const match = resolveRoute(config, path);
     routes.set(tokenKey(path), match.ignored ? ignoredRoute() : unemittedRoute(match));
   }
 
@@ -39,7 +46,7 @@ export function routeTokens(source, config, baseline = {}) {
   const variableOwners = new Map();
   for (const path of sourcePaths) {
     const key = tokenKey(path);
-    const match = resolveRuleOrThrow(config, path);
+    const match = resolveRoute(config, path);
     if (match.ignored) {
       routes.set(key, ignoredRoute());
       continue;
@@ -72,14 +79,29 @@ function assertAliasesVisible(sourceLeaves, routes) {
   }
 }
 
-function resolveRuleOrThrow(config, path) {
-  const match = resolveRule(config.rules, path, config.prefix);
-  if (match) return match;
-  throw new Error(
-    `No rule matched leaf "${tokenKey(path)}". ` +
-      `Rules tried: ${config.rules.map((rule) => rule.id).join(', ')}. ` +
-      `Add a rule, or an { ignore: true } rule to drop it deliberately.`
-  );
+/**
+ * Looks up the token's Figma path in the config (a group's `$root` token gets the group path).
+ * @returns {{ ignored: true }
+ *   | { ignored: false, variable: string, selector: string, output: string,
+ *       section: string|null, outputReferences: boolean }}
+ */
+function resolveRoute(config, path) {
+  const route = config.route(namedPath(path));
+  if (route == null) {
+    throw new Error(
+      `No output includes "${tokenKey(path)}". ` +
+        `Add it to an output block's "include", or to "ignore" to drop it deliberately.`
+    );
+  }
+  if (route.ignore) return { ignored: true };
+  return {
+    ignored: false,
+    variable: route.variable.map(slug).join('-'),
+    selector: route.selector ?? ROOT_SELECTOR,
+    output: route.output,
+    section: route.section ?? null,
+    outputReferences: route.outputReferences ?? true,
+  };
 }
 
 function ignoredRoute() {
@@ -97,15 +119,15 @@ function claimVariableNamePerSelector(variableOwners, { variable, selector }, ke
     if (owner && owner !== key) {
       throw new Error(
         `Two leaves resolve to the duplicate variable name --${variable} under "${singleSelector}": ` +
-          `"${owner}" and "${key}". Adjust the rules so their names differ, ` +
-          `or exclude one with an { ignore: true } rule.`
+          `"${owner}" and "${key}". Adjust variableName() or the output blocks so their names ` +
+          `differ, or add one of them to "ignore".`
       );
     }
     variableOwners.set(slot, key);
   }
 }
 
-function emissionFor({ rule, output, selector, section, outputReferences }) {
-  const key = [output, rule.id, selector, section ?? ''].join(KEY_SEPARATOR);
+function emissionFor({ output, selector, section, outputReferences }) {
+  const key = [output, selector, section ?? '', outputReferences].join(KEY_SEPARATOR);
   return { key, output, selector, section, outputReferences };
 }
