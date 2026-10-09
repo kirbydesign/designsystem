@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "types": ["jasmine"],
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "esModuleInterop": true
   },
   "include": [],
   "files": [],
