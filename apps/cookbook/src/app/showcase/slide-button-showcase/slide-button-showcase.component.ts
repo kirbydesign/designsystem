@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// @ts-expect-error TypeScript cannot provide types based on attributes yet
 import exampleHtml from '../../examples/slide-button-example/slide-button-example.component.html' with {
   loader: 'text',
 };
