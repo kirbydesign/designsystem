@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
   createComponentFactory,
@@ -26,6 +27,14 @@ import {
   StaticPageProgressEmbeddedComponent,
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
+
+function detectEmbeddedChanges(spectator: Spectator<ModalWrapperComponent>, component: object) {
+  spectator.debugElement
+    .query((node) => node.componentInstance === component)
+    .injector.get(ChangeDetectorRef)
+    .markForCheck();
+  spectator.detectChanges();
+}
 
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
