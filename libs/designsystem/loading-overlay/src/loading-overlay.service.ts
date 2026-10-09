@@ -1,4 +1,10 @@
-import { ApplicationRef, createComponent, EnvironmentInjector, Injectable } from '@angular/core';
+import {
+  ApplicationRef,
+  ComponentRef,
+  createComponent,
+  EnvironmentInjector,
+  Injectable,
+} from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
@@ -7,6 +13,7 @@ import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 })
 export class LoadingOverlayService {
   private ionLoading: HTMLIonLoadingElement | null = null;
+  private spinnerRef: ComponentRef<SpinnerComponent> | null = null;
 
   constructor(
     private loadingController: LoadingController,
@@ -39,6 +46,7 @@ export class LoadingOverlayService {
         environmentInjector: this.environmentInjector,
         hostElement: kirbySpinner,
       });
+      this.spinnerRef = componentRef;
       this.applicationRef.attachView(componentRef.hostView);
       loadingWrapper.appendChild(kirbySpinner);
 
@@ -48,8 +56,20 @@ export class LoadingOverlayService {
 
   public async hideLoadingOverlay(): Promise<void> {
     if (this.ionLoading) {
-      await this.ionLoading.dismiss();
-      this.ionLoading = null;
+      try {
+        await this.ionLoading.dismiss();
+      } finally {
+        this.destroySpinner();
+        this.ionLoading = null;
+      }
+    }
+  }
+
+  private destroySpinner(): void {
+    if (this.spinnerRef) {
+      this.applicationRef.detachView(this.spinnerRef.hostView);
+      this.spinnerRef.destroy();
+      this.spinnerRef = null;
     }
   }
 }
