@@ -28,9 +28,9 @@ The following considerations apply:
 
 2. **Preserve Figmas token paths.** The DTCG document follows the structure from Figma, and prefixes etc. are added afterwards when generating CSS. This preserves references and makes the DTCG document more comparable to Figma.
 
-3. **Rules in config.** An ordered list of rules determines each token's CSS name, selector and output file; the first matching rule applies. This keeps Kirby's theming model out of the generator and lets config change as Figma's structure changes.
+3. **Config mirrors the CSS output.** The config lists the output files and the selector blocks in each, with Figma path globs choosing each block's tokens. A separate function gives each token its CSS name. A token goes to the first block that includes it, in the order written. This keeps Kirby's theming model out of the generator and lets config change as Figma's structure changes.
 
-4. **Handle every token.** A token matching no rule fails the build; an `ignore` rule deliberately excludes it from CSS. A semantic token (figma alias) whose target variable is not present produces a warning, since it may be intentional but needs review.
+4. **Handle every token.** A token that no block includes fails the build; listing it under `ignore` deliberately excludes it from CSS. A semantic token (figma alias) whose target variable is not present produces a warning, since it may be intentional but needs review.
 
 5. **Check duplicate CSS names per selector.** The same token may be defined under multiple selectors (e.g. the surface concept), so a global duplicate check would flag duplicates that are intended.
 
