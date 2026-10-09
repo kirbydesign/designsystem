@@ -1,4 +1,9 @@
 @use 'utils';
+
+@use 'themes/primitives';
+@use 'themes/color-primitives';
+@use 'themes/default-brand';
+
 @use 'base/design-tokens';
 @use 'base/ionic';
 @use 'base/typography';
@@ -14,14 +19,13 @@
 
 :root,
 :host {
-  // DO NOT REMOVE: On iOS, Ionic's typography sets `font: -apple-system-body` on html,
-  // which resets font-family to the system font. This explicit declaration on :root (higher
-  // specificity than html) ensures Roboto is inherited by all components, including those
-  // in Shadow DOM (ion-tab-button, etc.) that don't set font-family themselves.
-  font-family: var(--kirby-font-family);
+  // "Old" tokens are still outputted here for backwards compatability,
   @include design-tokens.all;
   @include component-themes.apply-light-theme;
 
+  --kirby-border-radius-circle: 50%;
+  --kirby-font-family-brand: 'Roboto'; // Temp until defined in Figma
+  --kirby-font-family: var(--kirby-font-family-brand), var(--kirby-font-family-fallback);
   --kirby-page-max-width: 1366px;
   --kirby-statusbar-padding: var(--ion-statusbar-padding);
   --kirby-safe-area-top: var(--ion-safe-area-top);
@@ -32,6 +36,12 @@
 
   // Prevent iOS tap highlight:
   -webkit-tap-highlight-color: transparent;
+
+  // DO NOT REMOVE: On iOS, Ionic's typography sets `font: -apple-system-body` on html,
+  // which resets font-family to the system font. This explicit declaration on :root (higher
+  // specificity than html) ensures Roboto is inherited by all components, including those
+  // in Shadow DOM (ion-tab-button, etc.) that don't set font-family themselves.
+  font-family: var(--kirby-font-family);
 }
 
 /*
