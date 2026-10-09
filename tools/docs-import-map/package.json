@@ -5,6 +5,6 @@
   "type": "module",
   "description": "Tool for generating information about component and type exports and their respective package entry points.",
   "exports": {
-    "./plugin": "./docs-import-map.plugin.ts"
+    "./plugin": "./dist/docs-import-map.plugin.js"
   }
 }

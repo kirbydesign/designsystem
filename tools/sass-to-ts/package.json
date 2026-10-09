@@ -5,6 +5,6 @@
   "type": "module",
   "description": "Tool for converting sass design tokens to ts.",
   "exports": {
-    "./plugin": "./sass-to-ts.plugin.ts"
+    "./plugin": "./dist/sass-to-ts.plugin.js"
   }
 }
