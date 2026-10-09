@@ -4,13 +4,6 @@
     "skipLibCheck": true,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
-    "paths": {
-      "~/app/*": ["../../../apps/cookbook/src/app/*"],
-      "~/environments/*": ["../../../apps/cookbook/src/environments/*"],
-      "tools/storybook-config/*": ["../../../tools/storybook-config/*"]
-    },
     "strict": false,
     "strictNullChecks": false,
     "strictPropertyInitialization": false,
