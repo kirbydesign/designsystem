@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { Spectator, SpectatorFactory } from '@ngneat/spectator';
 
 import { ModalConfig } from './config/modal-config';
@@ -110,8 +110,8 @@ export class StaticFooterEmbeddedComponent {}
   template: `
     <div>DynamicFooterEmbeddedComponent - Some test content</div>
 
-    @if (showFooter) {
-      <kirby-modal-footer [class.enabled]="isEnabled">
+    @if (showFooter()) {
+      <kirby-modal-footer [class.enabled]="isEnabled()">
         <button kirby-button>Test</button>
       </kirby-modal-footer>
     }
@@ -119,8 +119,8 @@ export class StaticFooterEmbeddedComponent {}
   standalone: false,
 })
 export class DynamicFooterEmbeddedComponent {
-  showFooter = false;
-  isEnabled = false;
+  showFooter = signal(false);
+  isEnabled = signal(false);
 }
 
 @Component({
@@ -147,14 +147,14 @@ export class StaticPageProgressEmbeddedComponent {}
 
 @Component({
   template: `
-    @if (showPageProgress) {
+    @if (showPageProgress()) {
       <kirby-page-progress></kirby-page-progress>
     }
   `,
   standalone: false,
 })
 export class DynamicPageProgressEmbeddedComponent {
-  showPageProgress = false;
+  showPageProgress = signal(false);
 }
 
 @Component({
