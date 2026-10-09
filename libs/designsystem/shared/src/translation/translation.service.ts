@@ -16,7 +16,7 @@ export class TranslationService {
     this.setActiveTranslation(localeId);
   }
 
-  private setActiveTranslation(localeId: string): string {
+  private setActiveTranslation(localeId: string): void {
     const baseLocaleId = localeId.split('-')[0];
     const translation = this.translations[baseLocaleId];
 

@@ -1,10 +1,11 @@
+/// <reference types="jasmine" />
+
 import { ColorHelper, ThemeColorDefinition } from '@kirbydesign/core';
-import jasmine from 'jasmine-core';
 import { TestHelper } from './test-helper';
 
-import CustomMatcherFactories = jasmine.CustomMatcherFactories;
-import CustomMatcherResult = jasmine.CustomMatcherResult;
-import MatchersUtil = jasmine.MatchersUtil;
+type CustomMatcherFactories = jasmine.CustomMatcherFactories;
+type CustomMatcherResult = jasmine.CustomMatcherResult;
+type MatchersUtil = jasmine.MatchersUtil;
 
 export const ElementCssCustomMatchers: CustomMatcherFactories = {
   toHaveComputedStyle: (util: MatchersUtil) => cssPropertyMatcher(util),
@@ -18,7 +19,7 @@ function cssPropertyMatcher(util: MatchersUtil) {
       pseudoElt?: string
     ) => {
       let allPassed = Object.keys(expectedStyles).length !== 0;
-      const messages = [];
+      const messages: string[] = [];
       Object.keys(expectedStyles).forEach((cssProperty) => {
         const expectedValue = expectedStyles[cssProperty];
         const { expectedStringValue, expectedValueAlias } = getExpectedStringValueAndAlias(
@@ -51,8 +52,8 @@ function getExpectedStringValueAndAlias(
   cssProperty: string,
   expectedValue: string | ThemeColorDefinition
 ) {
-  let expectedStringValue: string;
-  let expectedValueAlias: string;
+  let expectedStringValue = '';
+  let expectedValueAlias: string | undefined;
 
   if (typeof expectedValue === 'string') {
     expectedStringValue = expectedValue;
@@ -72,10 +73,11 @@ function getExpectedStringValueAndAlias(
   } else {
     // Check if css property is a css variable:
     // Css variable values are hex when getting computed style, all other property values are rgb:
+    // Normalize esbuild-wrapped RGB values - they are on multiple lines with extra whitespace
     expectedStringValue = cssProperty.startsWith('--')
-      ? expectedValue.hex
-      : normalizeWhitespace(expectedValue.value);
-    expectedValueAlias = expectedValue.fullname;
+      ? (expectedValue.hex ?? '')
+      : normalizeWhitespace(expectedValue.value ?? '');
+    expectedValueAlias = expectedValue.fullname ?? '';
   }
 
   return {
@@ -85,8 +87,6 @@ function getExpectedStringValueAndAlias(
 }
 
 function normalizeWhitespace(value: string): string {
-  // Angular's Karma builder uses esbuild, which wraps RGB custom properties across lines;
-  // computed colors are single-line, so normalize the token before comparing.
   return value.replace(/\s+/g, ' ');
 }
 
@@ -112,7 +112,7 @@ function compareCssProperty(
       );
   const result = {
     pass: pass,
-    message: message,
+    message: message ?? undefined,
   };
   return result;
 }
