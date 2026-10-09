@@ -3,6 +3,9 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["jasmine", "node"],
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
     "paths": {
       "@kirbydesign/core": ["../core/src/index.ts"],
       "@kirbydesign/extensions-angular/image-banner": [

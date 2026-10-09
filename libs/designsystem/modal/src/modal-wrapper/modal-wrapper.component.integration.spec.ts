@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
   createComponentFactory,
@@ -25,6 +26,14 @@ import {
   StaticPageProgressEmbeddedComponent,
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
+
+function detectEmbeddedChanges(spectator: Spectator<ModalWrapperComponent>, component: object) {
+  spectator.debugElement
+    .query((node) => node.componentInstance === component)
+    .injector.get(ChangeDetectorRef)
+    .markForCheck();
+  spectator.detectChanges();
+}
 
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
@@ -127,7 +136,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
 
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
       embeddedComponent.showFooter = true;
-      spectator.detectChanges();
+      detectEmbeddedChanges(spectator, embeddedComponent);
       await TestHelper.waitForResizeObserver();
 
       const ionContentElement = spectator.query('ion-content');
@@ -145,14 +154,14 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
 
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
       embeddedComponent.showFooter = true;
-      spectator.detectChanges();
+      detectEmbeddedChanges(spectator, embeddedComponent);
       await TestHelper.waitForResizeObserver();
 
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
       expect(footerAsWrapperChild).not.toBeNull();
 
       embeddedComponent.showFooter = false;
-      spectator.detectChanges();
+      detectEmbeddedChanges(spectator, embeddedComponent);
       footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).toBeNull();
     });
@@ -162,7 +171,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       expect(footer).not.toHaveClass('enabled');
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
       embeddedComponent.showFooter = true;
-      spectator.detectChanges();
+      detectEmbeddedChanges(spectator, embeddedComponent);
       await TestHelper.waitForResizeObserver();
 
       const ionContentElement = spectator.query('ion-content');
@@ -173,7 +182,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       expect(footerAsWrapperChild).not.toBeNull();
 
       embeddedComponent.isEnabled = true;
-      spectator.detectChanges();
+      detectEmbeddedChanges(spectator, embeddedComponent);
       expect(footerAsWrapperChild).toHaveClass('enabled');
     });
 
@@ -183,7 +192,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       beforeEach(async () => {
         const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
         embeddedComponent.showFooter = true;
-        spectator.detectChanges();
+        detectEmbeddedChanges(spectator, embeddedComponent);
         await TestHelper.waitForResizeObserver();
         TestHelper.scrollMainWindowToTop();
       });
@@ -344,7 +353,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
 
         const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
         embeddedComponent.showPageProgress = true;
-        spectator.detectChanges();
+        detectEmbeddedChanges(spectator, embeddedComponent);
         await TestHelper.waitForResizeObserver();
 
         const ionContentElement = spectator.query('ion-content');
@@ -363,7 +372,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
 
         const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
         embeddedComponent.showPageProgress = true;
-        spectator.detectChanges();
+        detectEmbeddedChanges(spectator, embeddedComponent);
         await TestHelper.waitForResizeObserver();
 
         const ionToolbarElement = spectator.query('ion-toolbar');
@@ -371,7 +380,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
 
         embeddedComponent.showPageProgress = false;
-        spectator.detectChanges();
+        detectEmbeddedChanges(spectator, embeddedComponent);
 
         pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
         expect(pageProgressAsIonToolbarChild).toBeNull();

@@ -24,11 +24,10 @@ export class TranslationService {
       console.warn(
         `[Kirby] Internal component translations were not found for locale "${this.localeId}", falling back to ${this.get('$code')}`
       );
-      return this.activeTranslation.$code;
+      return;
     }
 
     this.activeTranslation = translation;
-    return this.activeTranslation.$code;
   }
 
   get(key: keyof Translation): string {
