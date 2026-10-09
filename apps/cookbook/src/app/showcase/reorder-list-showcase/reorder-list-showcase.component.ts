@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-// @ts-expect-error TypeScript cannot provide types based on attributes yet
 import exampleHtml from '../../examples/reorder-list-example/reorder-list-example.component.html' with {
   loader: 'text',
 };

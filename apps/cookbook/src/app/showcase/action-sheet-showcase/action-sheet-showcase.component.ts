@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FlagComponent } from '@kirbydesign/designsystem';
-// @ts-expect-error TypeScript cannot provide types based on attributes yet
 import exampleHtml from '../../examples/action-sheet-example/action-sheet-example.component.html' with {
   loader: 'text',
 };
