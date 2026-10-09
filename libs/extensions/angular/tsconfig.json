@@ -10,9 +10,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "moduleResolution": "bundler",
-    "ignoreDeprecations": "6.0",
-    "baseUrl": "../../.."
+    "moduleResolution": "bundler"
   },
   "references": [
     {
