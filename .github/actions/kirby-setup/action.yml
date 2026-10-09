@@ -25,8 +25,7 @@ runs:
       shell: bash
     - name: Clean Install NPM Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
-      # Alternative way to clean install due to this bug https://github.com/npm/cli/issues/4828
-      # --legacy-peer-deps: @nx/angular's peer range for @angular-devkit/* doesn't cover Angular 22 yet
+      # --legacy-peer-deps: @nx/angular's peer range excludes Angular 22 build packages required by Storybook and this workspace
       run: npm ci --legacy-peer-deps
       shell: bash
     - name: Run Postinstall Script

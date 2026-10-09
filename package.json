@@ -42,8 +42,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "22.1.7",
-    "@angular-devkit/core": "22.1.7",
-    "@angular-devkit/schematics": "22.1.7",
     "@angular/animations": "22.1.5",
     "@angular/build": "22.1.7",
     "@angular/cdk": "22.1.5",
