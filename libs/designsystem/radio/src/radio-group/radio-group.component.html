@@ -1,23 +1,22 @@
-@if (_hasItems) {
-  <ion-radio-group
-    [value]="value"
-    (ionChange)="_onChange($event.detail.value)"
-    [attr.aria-invalid]="hasError"
-  >
-    @if (!items || !items.length) {
-      <ng-content></ng-content>
-    } @else {
-      @for (item of items; track _getTextFromItem(item)) {
-        <ng-container
-          *ngTemplateOutlet="
-            _customItemTemplate || defaultItemTemplate;
-            context: { $implicit: item, selected: $index === selectedIndex, index: $index }
-          "
-        ></ng-container>
-      }
+<ion-radio-group
+  [value]="value"
+  (ionChange)="_onChange($event.detail.value)"
+  [attr.aria-invalid]="hasError"
+  [style.display]="_hasItems ? null : 'none'"
+>
+  @if (!items || !items.length) {
+    <ng-content></ng-content>
+  } @else {
+    @for (item of items; track _getTextFromItem(item)) {
+      <ng-container
+        *ngTemplateOutlet="
+          _customItemTemplate || defaultItemTemplate;
+          context: { $implicit: item, selected: $index === selectedIndex, index: $index }
+        "
+      ></ng-container>
     }
-  </ion-radio-group>
-}
+  }
+</ion-radio-group>
 
 <ng-template #defaultItemTemplate let-item>
   <kirby-radio
