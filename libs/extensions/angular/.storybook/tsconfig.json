@@ -1,9 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "module": "esnext",
-    "moduleResolution": "bundler"
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["../**/*.spec.ts"],
   "include": ["../**/*.stories.ts", "../**/*.mdx", "*.js", "*.ts"]

@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import type { Plugin, PluginBuild } from 'esbuild';
-import { SassToTypescriptEngine } from './sass-to-ts.engine';
+import { SassToTypescriptEngine } from './sass-to-ts.engine.js';
 
 export interface SassToTsPluginOptions {
   watchGlob: string[];

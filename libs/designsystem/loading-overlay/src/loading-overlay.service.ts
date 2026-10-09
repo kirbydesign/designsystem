@@ -1,4 +1,10 @@
-import { ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
+import {
+  ApplicationRef,
+  ComponentRef,
+  createComponent,
+  EnvironmentInjector,
+  Injectable,
+} from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
@@ -6,12 +12,13 @@ import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
   providedIn: 'root',
 })
 export class LoadingOverlayService {
-  private ionLoading: HTMLIonLoadingElement = null;
+  private ionLoading: HTMLIonLoadingElement | null = null;
+  private spinnerRef: ComponentRef<SpinnerComponent> | null = null;
 
   constructor(
     private loadingController: LoadingController,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private injector: Injector
+    private applicationRef: ApplicationRef,
+    private environmentInjector: EnvironmentInjector
   ) {}
 
   public async showLoadingOverlay(
@@ -35,8 +42,12 @@ export class LoadingOverlayService {
 
       const loadingWrapper = this.ionLoading.querySelector('.loading-wrapper');
       const kirbySpinner = document.createElement('kirby-spinner');
-      const factory = this.componentFactoryResolver.resolveComponentFactory(SpinnerComponent);
-      factory.create(this.injector, [], kirbySpinner);
+      const componentRef = createComponent(SpinnerComponent, {
+        environmentInjector: this.environmentInjector,
+        hostElement: kirbySpinner,
+      });
+      this.spinnerRef = componentRef;
+      this.applicationRef.attachView(componentRef.hostView);
       loadingWrapper.appendChild(kirbySpinner);
 
       await this.ionLoading.present();
@@ -45,8 +56,20 @@ export class LoadingOverlayService {
 
   public async hideLoadingOverlay(): Promise<void> {
     if (this.ionLoading) {
-      await this.ionLoading.dismiss();
-      this.ionLoading = null;
+      try {
+        await this.ionLoading.dismiss();
+      } finally {
+        this.destroySpinner();
+        this.ionLoading = null;
+      }
+    }
+  }
+
+  private destroySpinner(): void {
+    if (this.spinnerRef) {
+      this.applicationRef.detachView(this.spinnerRef.hostView);
+      this.spinnerRef.destroy();
+      this.spinnerRef = null;
     }
   }
 }
