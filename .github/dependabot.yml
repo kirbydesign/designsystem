@@ -3,7 +3,8 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: monthly
+      interval: weekly
+    open-pull-requests-limit: 99
     groups:
       angular:
         applies-to: version-updates
