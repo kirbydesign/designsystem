@@ -83,7 +83,7 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   /**
    * Callback that defines how to track changes for items in the iterable.
    */
-  @Input() trackBy: TrackByFunction<any>;
+  @Input() trackBy?: TrackByFunction<any>;
 
   /**
    * Property name to decide which items should be stand alone
