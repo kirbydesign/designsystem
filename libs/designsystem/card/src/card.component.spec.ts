@@ -1,19 +1,41 @@
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import {
+  createDirectiveFactory,
+  createHostFactory,
+  SpectatorDirective,
+  SpectatorHost,
+} from '@ngneat/spectator';
 
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
+import { CardAsButtonDirective } from './card-as-button/card-as-button.directive';
 
-const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
+
+/** Resolves a color token as seen from inside `element`, i.e. against the surface it establishes. */
+const resolveSurfaceColor = (element: HTMLElement, token: string): string => {
+  const probe = document.createElement('span');
+  probe.style.color = `var(${token})`;
+  element.appendChild(probe);
+  const color = getComputedStyle(probe).color;
+  probe.remove();
+  return color;
+};
+
 describe('CardComponent', () => {
   let spectator: SpectatorHost<CardComponent>;
   let cardElement: HTMLElement;
 
   const createHost = createHostFactory({
     component: CardComponent,
-    imports: [TestHelper.ionicModuleForTest, CardHeaderComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      CardHeaderComponent,
+      CardAsButtonDirective,
+      ThemeColorDirective,
+    ],
   });
 
   describe('by default', () => {
@@ -72,10 +94,36 @@ describe('CardComponent', () => {
       expect(cardElement).toHaveComputedStyle({
         'box-shadow': 'none',
         'background-color': 'transparent',
-        'border-color': getColor('medium'),
+        'border-color': resolveSurfaceColor(cardElement, '--kirby-color-border-base-quiet'),
         'border-style': 'solid',
         'border-width': '1px',
       });
+    });
+  });
+
+  describe('with no themeColor set', () => {
+    it("should apply 'kirby-surface-raised' for the default (elevated) variant", () => {
+      spectator = createHost('<kirby-card></kirby-card>');
+      expect(spectator.element).toHaveClass('kirby-surface-raised');
+    });
+
+    it("should apply 'kirby-surface-raised' for the flat variant", () => {
+      spectator = createHost('<kirby-card variant="flat"></kirby-card>');
+      expect(spectator.element).toHaveClass('kirby-surface-raised');
+    });
+
+    it("should not apply 'kirby-surface-raised' for the outlined variant", () => {
+      spectator = createHost('<kirby-card variant="outlined"></kirby-card>');
+      expect(spectator.element).not.toHaveClass('kirby-surface-raised');
+    });
+
+    it('should establish its own raised surface when nested inside a themed card', () => {
+      spectator = createHost(
+        '<kirby-card themeColor="light"><kirby-card></kirby-card></kirby-card>'
+      );
+      const nestedCard = spectator.query('kirby-card kirby-card');
+      expect(nestedCard).toHaveClass('kirby-surface-raised');
+      expect(nestedCard).not.toHaveClass('kirby-surface-base');
     });
   });
 
@@ -89,17 +137,18 @@ describe('CardComponent', () => {
 
     it('should have default styles', () => {
       const contentWrapperElement = spectator.queryHost('.content-wrapper');
+      const borderColor = resolveSurfaceColor(cardElement, '--kirby-color-border-base-quiet');
 
       expect(contentWrapperElement).toHaveComputedStyle({
-        'border-block-end-color': getColor('medium'),
+        'border-block-end-color': borderColor,
         'border-block-end-style': 'solid',
         'border-block-end-width': '1px',
 
-        'border-inline-start-color': getColor('medium'),
+        'border-inline-start-color': borderColor,
         'border-inline-start-style': 'solid',
         'border-inline-start-width': '1px',
 
-        'border-inline-end-color': getColor('medium'),
+        'border-inline-end-color': borderColor,
         'border-inline-end-style': 'solid',
         'border-inline-end-width': '1px',
 
@@ -112,5 +161,49 @@ describe('CardComponent', () => {
         'background-color': 'transparent',
       });
     });
+  });
+});
+
+describe('CardThemeColorDirective', () => {
+  let spectator: SpectatorDirective<ThemeColorDirective>;
+
+  const createDirective = createDirectiveFactory({
+    directive: ThemeColorDirective,
+    imports: [CardComponent],
+  });
+
+  const renderCard = (themeColor: string, variant = 'elevated'): HTMLElement => {
+    spectator = createDirective(
+      `<kirby-card themeColor="${themeColor}" variant="${variant}"></kirby-card>`
+    );
+    return spectator.element as HTMLElement;
+  };
+
+  it('should apply "kirby-surface-raised" for the default (no value) theme color, like no theme color', () => {
+    const cardElement = renderCard('');
+    expect(cardElement).toHaveClass('kirby-surface-raised');
+    expect(cardElement).not.toHaveClass('kirby-surface-base');
+  });
+
+  it('should not apply a surface for the default (no value) theme color on the outlined variant', () => {
+    const cardElement = renderCard('', 'outlined');
+    expect(cardElement).not.toHaveClass('kirby-surface-raised');
+    expect(cardElement).not.toHaveClass('kirby-surface-base');
+  });
+
+  it('should apply "kirby-surface-base" for the "light" theme color', () => {
+    expect(renderCard('light')).toHaveClass('kirby-surface-base');
+  });
+
+  ['primary', 'secondary', 'tertiary', 'dark'].forEach((themeColor) => {
+    it(`should apply "kirby-surface-brand" for the "${themeColor}" theme color`, () => {
+      const cardElement = renderCard(themeColor);
+      expect(cardElement).toHaveClass('kirby-surface-brand');
+      expect(cardElement).not.toHaveClass('kirby-surface-base');
+    });
+  });
+
+  it('should apply "kirby-surface-raised" for the "white" theme color', () => {
+    expect(renderCard('white')).toHaveClass('kirby-surface-raised');
   });
 });
