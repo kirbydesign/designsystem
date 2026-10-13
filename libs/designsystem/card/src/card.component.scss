@@ -70,7 +70,6 @@
     outline: none;
 
     @media (hover: hover) {
-      &[data-state='hover'],
       &:hover {
         --kirby-card-main-background-color: var(--kirby-color-fill-base-hover);
         --kirby-card-main-color: var(--kirby-color-content-base-hover);
@@ -78,7 +77,6 @@
       }
     }
 
-    &[data-state='active'],
     &:active,
     &.interaction-state-active {
       --kirby-card-main-background-color: var(--kirby-color-fill-base-active);
@@ -137,7 +135,6 @@
 
   &[role='button'] {
     @media (hover: hover) {
-      &[data-state='hover'],
       &:hover {
         --kirby-card-main-background-color: var(--kirby-color-fill-success-hover);
         --kirby-card-main-color: var(--kirby-color-content-success-hover);
@@ -145,7 +142,6 @@
       }
     }
 
-    &[data-state='active'],
     &:active,
     &.interaction-state-active {
       --kirby-card-main-background-color: var(--kirby-color-fill-success-active);
@@ -162,7 +158,6 @@
 
   &[role='button'] {
     @media (hover: hover) {
-      &[data-state='hover'],
       &:hover {
         --kirby-card-main-background-color: var(--kirby-color-fill-warning-hover);
         --kirby-card-main-color: var(--kirby-color-content-warning-hover);
@@ -170,7 +165,6 @@
       }
     }
 
-    &[data-state='active'],
     &:active,
     &.interaction-state-active {
       --kirby-card-main-background-color: var(--kirby-color-fill-warning-active);
@@ -187,7 +181,6 @@
 
   &[role='button'] {
     @media (hover: hover) {
-      &[data-state='hover'],
       &:hover {
         --kirby-card-main-background-color: var(--kirby-color-fill-danger-hover);
         --kirby-card-main-color: var(--kirby-color-content-danger-hover);
@@ -195,7 +188,6 @@
       }
     }
 
-    &[data-state='active'],
     &:active,
     &.interaction-state-active {
       --kirby-card-main-background-color: var(--kirby-color-fill-danger-active);
