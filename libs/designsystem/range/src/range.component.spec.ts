@@ -32,6 +32,19 @@ describe('RangeComponent', () => {
       spectator.setHostInput('pin', true);
       expect(spectator.component.pinFormatter).toBeDefined();
     });
+
+    it('should apply the hover state to the knob when it is hovered', async () => {
+      const ionRange = spectator.query('ion-range');
+      await TestHelper.whenReady(ionRange);
+      const handle = ionRange.shadowRoot.querySelector('.range-knob-handle-a');
+      const knob = handle.querySelector('.range-knob');
+      const idleKnobBackground = TestHelper.getCssProperty(knob, '--knob-background');
+
+      handle.dispatchEvent(new MouseEvent('mouseenter'));
+      await TestHelper.whenTrue(() => knob.getAttribute('part').includes('hover'));
+
+      expect(TestHelper.getCssProperty(knob, '--knob-background')).not.toEqual(idleKnobBackground);
+    });
   });
 
   describe('with attributes', () => {
@@ -135,6 +148,83 @@ describe('RangeComponent', () => {
 
         expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
       });
+    });
+  });
+
+  describe('dual knobs', () => {
+    let spectator: SpectatorHost<RangeComponent, OnPushHostComponent>;
+    let formControl: FormControl;
+    let ionRange: HTMLIonRangeElement;
+
+    const createHost = createHostFactory({
+      component: RangeComponent,
+      host: OnPushHostComponent,
+      imports: [TestHelper.ionicModuleForTest, ReactiveFormsModule],
+    });
+
+    beforeEach(async () => {
+      formControl = new FormControl({ lower: 20, upper: 80 });
+      spectator = createHost(
+        '<kirby-range [formControl]="formControl" [min]="0" [max]="100" [dualKnobs]="true"></kirby-range>',
+        { hostProps: { formControl } }
+      );
+      ionRange = spectator.query('ion-range');
+      await TestHelper.whenReady(ionRange);
+    });
+
+    it('should create with dualKnobs enabled', () => {
+      expect(spectator.component.dualKnobs).toBeTrue();
+    });
+
+    it('should accept an object value with lower and upper', () => {
+      expect(spectator.component.value).toEqual({ lower: 20, upper: 80 });
+    });
+
+    it('should update value when form control value changes', () => {
+      formControl.setValue({ lower: 10, upper: 90 });
+      spectator.detectChanges();
+
+      expect(spectator.component.value).toEqual({ lower: 10, upper: 90 });
+    });
+
+    it('should emit change event with lower/upper object on value change', () => {
+      const changeSpy = jasmine.createSpy('change');
+      spectator.component.change.subscribe(changeSpy);
+
+      spectator.component._onRangeValueChange({ detail: { value: { lower: 30, upper: 70 } } });
+
+      expect(changeSpy).toHaveBeenCalledWith({ lower: 30, upper: 70 });
+    });
+
+    it('should emit move event with lower/upper object on knob move', () => {
+      const moveSpy = jasmine.createSpy('move');
+      spectator.component.move.subscribe(moveSpy);
+
+      spectator.component._onRangeKnobMove({ detail: { value: { lower: 15, upper: 85 } } });
+
+      expect(moveSpy).toHaveBeenCalledWith({ lower: 15, upper: 85 });
+    });
+
+    it('should mark component for check when dual-knob value is written', () => {
+      const cdr = spectator.component['cdr'];
+      spyOn(cdr, 'markForCheck');
+
+      spectator.component.writeValue({ lower: 5, upper: 95 });
+
+      expect(cdr.markForCheck).toHaveBeenCalledTimes(1);
+    });
+
+    it('should only apply the hover state to the hovered knob', async () => {
+      const handleA = ionRange.shadowRoot.querySelector('.range-knob-handle-a');
+      const knobA = handleA.querySelector('.range-knob');
+      const knobB = ionRange.shadowRoot.querySelector('.range-knob-handle-b .range-knob');
+      const idleKnobBackground = TestHelper.getCssProperty(knobA, '--knob-background');
+
+      handleA.dispatchEvent(new MouseEvent('mouseenter'));
+      await TestHelper.whenTrue(() => knobA.getAttribute('part').includes('hover'));
+
+      expect(TestHelper.getCssProperty(knobA, '--knob-background')).not.toEqual(idleKnobBackground);
+      expect(TestHelper.getCssProperty(knobB, '--knob-background')).toEqual(idleKnobBackground);
     });
   });
 });
