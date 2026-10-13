@@ -37,7 +37,7 @@
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.8.3",
     "postcss-url": "~10.1.4",
-    "ts-jest": "^29.1.0"
+    "ts-jest": "^29.4.14"
   },
   "sideEffects": false
 }
