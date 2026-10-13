@@ -111,19 +111,22 @@ const themeColors: ThemeColor[] = [
   'white',
 ];
 
-const cardColors: CardColor[] = [
+const cardRows: CardColor[] = [
   { label: 'default' },
   ...themeColors.map((themeColor) => ({ label: themeColor, themeColor })),
+  { label: 'outlined', variant: 'outlined' },
 ];
 
-const themeColorGridStyles = [
-  `
+const gridStyles = (columns: number, columnWidth: string) => `
   .grid {
     display: grid;
-    grid-template-columns: repeat(4, 280px);
+    grid-template-columns: repeat(${columns}, ${columnWidth});
     gap: var(--kirby-spacing-s);
     padding: var(--kirby-spacing-s);
   }
+`;
+
+const contentRowStyles = `
   .row {
     display: flex;
     flex-wrap: wrap;
@@ -131,8 +134,7 @@ const themeColorGridStyles = [
     gap: var(--kirby-spacing-xs);
     margin-block: var(--kirby-spacing-xs);
   }
-  `,
-];
+`;
 
 const cardContent = `
   <kirby-card-header [title]="color.label" subtitle="Card header subtitle"></kirby-card-header>
@@ -183,9 +185,60 @@ const renderThemeColorGrid =
         }
       </div>
     `,
-    styles: themeColorGridStyles,
+    styles: [gridStyles(4, '280px'), contentRowStyles],
   });
 
 export const ThemeColors: Story = {
-  render: renderThemeColorGrid([...cardColors, { label: 'outlined', variant: 'outlined' }]),
+  render: renderThemeColorGrid(cardRows),
+};
+
+const interactionStates = ['default', 'hover', 'active', 'focus-visible'] as const;
+type InteractionState = (typeof interactionStates)[number];
+
+const cardSelectorsFor = (state: InteractionState) =>
+  cardRows.map((color) => `#card-${color.label}-${state}`);
+
+/**
+ * Each row is a theme color, each column a single interaction state.
+ * States are forced via storybook-addon-pseudo-states, targeting cards by id.
+ */
+export const InteractionStates: Story = {
+  parameters: {
+    pseudo: {
+      hover: cardSelectorsFor('hover'),
+      active: cardSelectorsFor('active'),
+      focusVisible: cardSelectorsFor('focus-visible'),
+    },
+  },
+  render: () => ({
+    props: {
+      rows: cardRows,
+      states: interactionStates,
+      noop: () => {
+        // noop
+      },
+    },
+    template: `
+      <div class="grid">
+        @for (state of states; track state) {
+          <p class="kirby-text-small-light">{{ state }}</p>
+        }
+        @for (color of rows; track color.label) {
+          @for (state of states; track state) {
+            <kirby-card
+              [attr.id]="'card-' + color.label + '-' + state"
+              [variant]="color.variant ?? 'elevated'"
+              [themeColor]="color.themeColor"
+              [hasPadding]="true"
+              (click)="noop()"
+            >
+              <p class="kirby-text-normal-bold">{{ color.label }}</p>
+              <p class="kirby-text-small">{{ state }}</p>
+            </kirby-card>
+          }
+        }
+      </div>
+    `,
+    styles: [gridStyles(interactionStates.length, '160px')],
+  }),
 };
