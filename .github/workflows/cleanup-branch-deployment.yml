@@ -9,7 +9,11 @@ permissions:
 jobs:
   delete_latest_deployment_for_branch:
     name: Delete latest deployment for branch
-    if: github.event.ref_type == 'branch'
+    # Merge queue branches (gh-readonly-queue/*) are never deployed, so there is nothing to clean up
+    if: >-
+      github.event.ref_type == 'branch' &&
+      !startsWith(github.event.ref, 'gh-readonly-queue/') &&
+      !startsWith(github.event.ref, 'refs/heads/gh-readonly-queue/')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
