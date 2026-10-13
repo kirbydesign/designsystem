@@ -60,7 +60,7 @@
     "@chromatic-com/storybook": "^5.4.0",
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@eslint/eslintrc": "^3.3.7",
-    "@eslint/js": "^9.18.0",
+    "@eslint/js": "^9.39.5",
     "@nx/angular": "22.7.12",
     "@nx/jest": "22.7.12",
     "@nx/js": "22.7.12",
