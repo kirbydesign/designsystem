@@ -19,7 +19,7 @@
     "jsonc-eslint-parser": "^2.1.0",
     "postcss": "^8.5.29",
     "postcss-import": "~14.1.0",
-    "postcss-preset-env": "~7.5.0",
+    "postcss-preset-env": "~7.8.3",
     "postcss-url": "~10.1.4"
   },
   "sideEffects": false
