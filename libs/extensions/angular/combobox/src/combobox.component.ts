@@ -24,7 +24,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { AffixDirective, InputSize } from '@kirbydesign/designsystem/form-field';
 import {
@@ -41,12 +40,14 @@ import {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
+import { ComboboxItemTemplateDirective } from './combobox-item-template.directive';
 import { OpenState } from './combobox.types';
 
 @Component({
   selector: 'kirby-x-combobox',
   templateUrl: './combobox.component.html',
   styleUrls: ['./combobox.component.scss'],
+  standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -429,10 +430,10 @@ export class ComboboxComponent
     return this.selectedItem != null;
   }
 
-  @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
+  @ContentChild(ComboboxItemTemplateDirective, { read: TemplateRef })
   public itemTemplate?: TemplateRef<unknown>;
 
-  @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
+  @ContentChildren(ComboboxItemTemplateDirective, { read: ElementRef })
   public slottedItems?: QueryList<ElementRef<HTMLElement>>;
 
   @ViewChild(CardComponent, { read: ElementRef })
