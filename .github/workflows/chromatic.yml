@@ -4,6 +4,8 @@ on:
   push:
     branches-ignore:
       - "gh-pages"
+      # Temporary merge queue branches - already tested on the PR branch
+      - "gh-readonly-queue/**"
 
 permissions:
   contents: read
