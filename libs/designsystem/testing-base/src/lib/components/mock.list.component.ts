@@ -25,7 +25,7 @@ export class MockListComponent {
   @Input() items: any[];
   @Input() getItemColor: (item: any) => ThemeColor;
   @Input() getSectionName: (item: any) => string;
-  @Input() trackBy: TrackByFunction<any>;
+  @Input() trackBy?: TrackByFunction<any>;
   @Input() getStandAloneByProperty: string;
   @Input() standAloneSpacing: StandAloneSpacing;
   @Input() noMoreItemsText: string;
