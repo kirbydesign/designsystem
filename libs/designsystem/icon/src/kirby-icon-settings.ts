@@ -51,6 +51,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'menu-outline', svg: 'menu-outline.svg' },
     { name: 'menu', svg: 'menu.svg' },
     { name: 'menu-no-decoration', svg: 'menu-no-decoration.svg' },
+    { name: 'megaphone', svg: 'megaphone.svg' },
     { name: 'message-read', svg: 'message-read.svg' },
     { name: 'misc', svg: 'misc.svg' },
     { name: 'more', svg: 'more.svg' },
