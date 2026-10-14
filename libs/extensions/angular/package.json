@@ -39,15 +39,5 @@
     "postcss-url": "~10.1.4",
     "ts-jest": "^29.4.14"
   },
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "types": "./dist/types/kirbydesign-extensions-angular.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-extensions-angular.mjs"
-    },
-    "./*": {
-      "types": "./dist/types/kirbydesign-extensions-angular-*.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-extensions-angular-*.mjs"
-    }
-  }
+  "sideEffects": false
 }

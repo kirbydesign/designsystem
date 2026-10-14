@@ -72,26 +72,6 @@
   },
   "exports": {
     "./scss/global-styles": "./scss/_global-styles.scss",
-    "./scss/utils": "./scss/_utils.scss",
-    ".": {
-      "types": "./dist/types/kirbydesign-designsystem.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-designsystem.mjs"
-    },
-    "./*": {
-      "types": "./dist/types/kirbydesign-designsystem-*.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-designsystem-*.mjs"
-    },
-    "./helpers/scss": {
-      "types": "./dist/types/kirbydesign-designsystem-helpers-scss.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-designsystem-helpers-scss.mjs"
-    },
-    "./shared/floating": {
-      "types": "./dist/types/kirbydesign-designsystem-shared-floating.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-designsystem-shared-floating.mjs"
-    },
-    "./shared/portal": {
-      "types": "./dist/types/kirbydesign-designsystem-shared-portal.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-designsystem-shared-portal.mjs"
-    }
+    "./scss/utils": "./scss/_utils.scss"
   }
 }

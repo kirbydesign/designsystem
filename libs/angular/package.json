@@ -22,15 +22,5 @@
     "postcss-preset-env": "~7.8.3",
     "postcss-url": "~10.1.4"
   },
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "types": "./dist/types/kirbydesign-angular.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-angular.mjs"
-    },
-    "./*": {
-      "types": "./dist/types/kirbydesign-angular-*.d.ts",
-      "default": "./dist/fesm2022/kirbydesign-angular-*.mjs"
-    }
-  }
+  "sideEffects": false
 }
