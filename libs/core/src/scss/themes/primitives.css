@@ -1,0 +1,60 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+/*
+ * border-radius
+ */
+
+:root {
+  --kirby-border-radius-circle: 999px;
+  --kirby-border-radius-pill: 999px;
+  --kirby-border-radius-xxs: var(--kirby-spacing-xxxxs);
+  --kirby-border-radius-xs: var(--kirby-spacing-xxxs);
+  --kirby-border-radius-s: var(--kirby-spacing-xxs);
+  --kirby-border-radius-n: var(--kirby-spacing-s);
+  --kirby-border-radius-l: var(--kirby-spacing-m);
+  --kirby-border-radius-xl: var(--kirby-spacing-l);
+}
+
+/*
+ * spacing
+ */
+
+:root {
+  --kirby-spacing-xxxxs: 2px;
+  --kirby-spacing-xxxs: 4px;
+  --kirby-spacing-xxs: 8px;
+  --kirby-spacing-xs: 12px;
+  --kirby-spacing-s: 16px;
+  --kirby-spacing-m: 24px;
+  --kirby-spacing-l: 32px;
+  --kirby-spacing-xl: 40px;
+  --kirby-spacing-xxl: 48px;
+  --kirby-spacing-xxxl: 56px;
+  --kirby-spacing-xxxxl: 64px;
+  --kirby-spacing-xxxxxl: 72px;
+}
+
+/*
+ * font-weight
+ */
+
+:root {
+  --kirby-font-weight-light: 300;
+  --kirby-font-weight-normal: 400;
+  --kirby-font-weight-medium: 500;
+  --kirby-font-weight-bold: 700;
+  --kirby-font-weight-black: 900;
+  --kirby-font-weight-normal-italic: italic;
+}
+
+/*
+ * font
+ */
+
+:root {
+  --kirby-font-letter-spacing: 0;
+  --kirby-font-family-fallback: sans-serif;
+  --kirby-font-family: Roboto;
+}

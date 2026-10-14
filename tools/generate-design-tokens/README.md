@@ -33,6 +33,11 @@ npx design-tokens \
   --css-only libs/core/src/scss/themes/tokens.json
 ```
 
+CI runs this command on every pull request and fails if the result differs
+from the committed CSS, so the committed JSON, generator, and config always
+reproduce it byte-for-byte. Regenerate and commit the CSS whenever one of
+them changes.
+
 ## Brand Theme
 
 Brands can use `--baseline` to build on top of the built-in theme. The baseline
