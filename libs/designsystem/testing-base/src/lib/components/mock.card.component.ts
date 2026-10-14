@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { CardComponent } from '@kirbydesign/designsystem/card';
+import { CardComponent, CardVariant } from '@kirbydesign/designsystem/card';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -20,7 +20,7 @@ export class MockCardComponent {
   @Input() backgroundImageUrl: string;
   @Input() hasPadding: boolean;
   @Input() sizes: { [size: string]: number };
-  @Input() variant: 'elevated' | 'flat' | 'outlined';
+  @Input() variant: CardVariant;
 }
 
 // #endregion
