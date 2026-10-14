@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import {
   BaseChartComponent,
@@ -14,6 +14,7 @@ import { StockChartJSService } from './stock-chart-js.service';
   providers: [{ provide: ChartJSService, useClass: StockChartJSService }, ChartConfigService],
   templateUrl: '../shared/base-chart/base-chart.component.html',
   styleUrls: ['../shared/base-chart/base-chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class StockChartComponent extends BaseChartComponent {
   @Input() dataLabelOptions?: ChartDataLabelOptions;

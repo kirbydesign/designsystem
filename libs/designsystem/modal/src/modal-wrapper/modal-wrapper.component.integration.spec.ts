@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
   createComponentFactory,
@@ -11,14 +12,12 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import {
-  AlertHelper,
-  CanDismissHelper,
-  ModalComponent,
-  ModalFooterComponent,
-  ModalNavigationService,
-  ModalWrapperComponent,
-} from '@kirbydesign/designsystem/modal';
+import { AlertHelper } from '../modal/services/alert.helper';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
+import { ModalComponent } from '../modal/modal-component/modal.component';
+import { ModalFooterComponent } from '../modal/footer/modal-footer.component';
+import { ModalNavigationService } from '../modal-navigation.service';
+import { ModalWrapperComponent } from './modal-wrapper.component';
 
 import {
   DynamicFooterEmbeddedComponent,
@@ -28,6 +27,14 @@ import {
   StaticPageProgressEmbeddedComponent,
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
+
+function detectEmbeddedChanges(spectator: Spectator<ModalWrapperComponent>, component: object) {
+  spectator.debugElement
+    .query((node) => node.componentInstance === component)
+    .injector.get(ChangeDetectorRef)
+    .markForCheck();
+  spectator.detectChanges();
+}
 
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
@@ -185,7 +192,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       expect(footer).toBeNull();
 
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
+      embeddedComponent.showFooter.set(true);
       spectator.detectChanges();
       await TestHelper.waitForResizeObserver();
 
@@ -203,14 +210,14 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       expect(footer).toBeNull();
 
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
+      embeddedComponent.showFooter.set(true);
       spectator.detectChanges();
       await TestHelper.waitForResizeObserver();
 
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
       expect(footerAsWrapperChild).not.toBeNull();
 
-      embeddedComponent.showFooter = false;
+      embeddedComponent.showFooter.set(false);
       spectator.detectChanges();
       footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).toBeNull();
@@ -220,7 +227,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       const footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).not.toHaveClass('enabled');
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
+      embeddedComponent.showFooter.set(true);
       spectator.detectChanges();
       await TestHelper.waitForResizeObserver();
 
@@ -231,7 +238,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
       expect(footerAsWrapperChild).not.toBeNull();
 
-      embeddedComponent.isEnabled = true;
+      embeddedComponent.isEnabled.set(true);
       spectator.detectChanges();
       expect(footerAsWrapperChild).toHaveClass('enabled');
     });
@@ -241,7 +248,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
 
       beforeEach(async () => {
         const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-        embeddedComponent.showFooter = true;
+        embeddedComponent.showFooter.set(true);
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
         TestHelper.scrollMainWindowToTop();
@@ -402,7 +409,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
         expect(pageProgressContent).toBeNull();
 
         const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
-        embeddedComponent.showPageProgress = true;
+        embeddedComponent.showPageProgress.set(true);
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
 
@@ -421,7 +428,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
         expect(pageProgress).toBeNull();
 
         const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
-        embeddedComponent.showPageProgress = true;
+        embeddedComponent.showPageProgress.set(true);
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
 
@@ -429,7 +436,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
         let pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
 
-        embeddedComponent.showPageProgress = false;
+        embeddedComponent.showPageProgress.set(false);
         spectator.detectChanges();
 
         pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');

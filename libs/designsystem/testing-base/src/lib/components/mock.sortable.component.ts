@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 
@@ -6,6 +6,7 @@ import { TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'th[sortable]',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

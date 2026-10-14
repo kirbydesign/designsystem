@@ -1,4 +1,11 @@
-import { afterNextRender, Component, ElementRef, inject, Signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  Signal,
+} from '@angular/core';
 
 import { scrollIntoViewIfNecessary } from '../../functions/scroll-into-view-if-necessary';
 import { SidebarMenuItem } from '../../models';
@@ -18,6 +25,7 @@ type ViewModel = {
   `,
   styles: 'nav { padding: 0 var(--kirby-spacing-xxs); }',
   imports: [MenuItemListComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class MenuContainerComponent {
   readonly #element = inject(ElementRef).nativeElement;
