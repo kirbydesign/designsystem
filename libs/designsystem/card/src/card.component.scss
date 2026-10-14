@@ -24,7 +24,6 @@
   /* stylelint-disable no-duplicate-selectors */
   & {
     border-radius: var(--kirby-border-radius-n);
-    box-shadow: var(--kirby-elevation-2);
     color: var(--kirby-card-main-color);
     background-color: var(--kirby-card-main-background-color);
     background-image: var(--kirby-card-background-image);
@@ -59,10 +58,6 @@
         border-bottom-right-radius: var(--kirby-border-radius-n);
       }
     }
-  }
-
-  &.flat {
-    --kirby-card-border: transparent;
   }
 
   &[role='button'] {
