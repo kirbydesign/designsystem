@@ -36,16 +36,8 @@ import { LoadOnDemandEvent } from './list.event';
 export type ListShape = 'square' | 'rounded' | 'none';
 
 export type StandAloneSpacing =
-  | 'xxxxs'
-  | 'xxxs'
-  | 'xxs'
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'xxl'
-  | 'xxxl';
+  'xxxxs' | 'xxxs' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -127,6 +119,14 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   @HostBinding('class.shape-none')
   public get isShapeNone(): boolean {
     return this.shape === 'none';
+  }
+
+  /**
+   * The list establishes a raised surface by default, until list usage is migrated
+   * to shape="none", and combined with card for base/raised/brand appearance
+   */
+  get _isRaisedSurface(): boolean {
+    return !this.isShapeNone;
   }
 
   @HostBinding('class.item-spacing')
