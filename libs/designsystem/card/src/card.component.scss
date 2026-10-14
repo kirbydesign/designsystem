@@ -6,6 +6,7 @@
   --kirby-card-main-background-color: var(--kirby-color-fill-base);
   --kirby-card-main-color: var(--kirby-color-content-base);
   --kirby-card-main-border-color: var(--kirby-color-border-base-quiet);
+  --kirby-card-border-width: 1px;
   --kirby-card-footer-background-color: var(--kirby-color-fill-base);
   --kirby-card-footer-color: var(--kirby-color-content-base);
 
@@ -30,7 +31,10 @@
     background-repeat: var(--kirby-card-background-repeat, no-repeat);
     background-position: var(--kirby-card-background-position, center);
     background-size: var(--kirby-card-background-size, cover);
-    border: var(--kirby-card-border, 1px solid var(--kirby-card-main-border-color));
+    border: var(
+      --kirby-card-border,
+      var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
+    );
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -49,12 +53,18 @@
       border: none;
 
       .content-wrapper {
-        border-block-end: var(--kirby-card-border, 1px solid var(--kirby-card-main-border-color));
+        border-block-end: var(
+          --kirby-card-border,
+          var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
+        );
         border-inline-start: var(
           --kirby-card-border,
-          1px solid var(--kirby-card-main-border-color)
+          var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
         );
-        border-inline-end: var(--kirby-card-border, 1px solid var(--kirby-card-main-border-color));
+        border-inline-end: var(
+          --kirby-card-border,
+          var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
+        );
         border-bottom-left-radius: var(--kirby-border-radius-n);
         border-bottom-right-radius: var(--kirby-border-radius-n);
       }
@@ -84,7 +94,7 @@
       transition: interaction-state.transition();
       box-shadow: var(--kirby-focus-ring-md-combined-inset);
 
-      --kirby-card-border: 1px solid var(--kirby-color-border-focus);
+      --kirby-card-border: var(--kirby-card-border-width) solid var(--kirby-color-border-focus);
     }
   }
 }
@@ -95,10 +105,14 @@
     --kirby-content-border-bottom-radius: 0;
   }
   @include utils.slotted(':first-child') {
-    --kirby-content-border-top-radius: var(--kirby-border-radius-n);
+    --kirby-content-border-top-radius: calc(
+      var(--kirby-border-radius-n) - var(--kirby-card-border-width)
+    );
   }
   @include utils.slotted(':last-child') {
-    --kirby-content-border-bottom-radius: var(--kirby-border-radius-n);
+    --kirby-content-border-bottom-radius: calc(
+      var(--kirby-border-radius-n) - var(--kirby-card-border-width)
+    );
   }
 
   &.padding {
