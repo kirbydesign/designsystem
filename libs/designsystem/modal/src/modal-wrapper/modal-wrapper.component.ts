@@ -66,7 +66,7 @@ const contentScrolledOffsetInPixels = 4;
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     { provide: Modal, useExisting: ModalWrapperComponent },
     { provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent },

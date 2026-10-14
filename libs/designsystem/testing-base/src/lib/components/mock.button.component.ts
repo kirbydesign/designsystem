@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { NotificationColor } from '@kirbydesign/core';
 
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
@@ -7,6 +7,7 @@ import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/design
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button],a[kirby-button]',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

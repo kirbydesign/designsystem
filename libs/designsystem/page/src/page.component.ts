@@ -165,7 +165,7 @@ export class PageStickyContentDirective {}
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
@@ -184,6 +184,7 @@ export class PageProgressComponent extends ModalElementComponent {
   template: `
     <ng-content></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class PageTitleComponent extends ModalElementComponent {
   constructor(
@@ -199,6 +200,7 @@ export class PageTitleComponent extends ModalElementComponent {
   template: `
     <ng-content></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class PageContentComponent {}
 
@@ -215,6 +217,7 @@ export class PageContentComponent {}
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class PageActionsComponent {}
 

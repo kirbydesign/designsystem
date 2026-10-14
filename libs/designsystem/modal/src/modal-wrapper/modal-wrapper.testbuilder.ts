@@ -1,4 +1,4 @@
-import { Component, Inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, signal } from '@angular/core';
 import { Spectator, SpectatorFactory } from '@ngneat/spectator';
 
 import { ModalConfig } from './config/modal-config';
@@ -103,6 +103,7 @@ export class ModalWrapperTestBuilder {
     </kirby-modal-footer>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class StaticFooterEmbeddedComponent {}
 
@@ -117,6 +118,7 @@ export class StaticFooterEmbeddedComponent {}
     }
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class DynamicFooterEmbeddedComponent {
   showFooter = signal(false);
@@ -134,6 +136,7 @@ export class DynamicFooterEmbeddedComponent {
     <button>Test Button</button>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class InputEmbeddedComponent {}
 
@@ -142,6 +145,7 @@ export class InputEmbeddedComponent {}
     <kirby-page-progress></kirby-page-progress>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class StaticPageProgressEmbeddedComponent {}
 
@@ -152,6 +156,7 @@ export class StaticPageProgressEmbeddedComponent {}
     }
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class DynamicPageProgressEmbeddedComponent {
   showPageProgress = signal(false);
@@ -162,6 +167,7 @@ export class DynamicPageProgressEmbeddedComponent {
     <kirby-page-title>{{ _title }}</kirby-page-title>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class TitleEmbeddedComponent {
   _title: string;
@@ -214,5 +220,6 @@ export class TitleEmbeddedComponent {
     </p>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class DummyContentEmbeddedComponent {}

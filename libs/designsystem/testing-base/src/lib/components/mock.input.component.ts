@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { InputComponent, InputSize } from '@kirbydesign/designsystem/form-field';
 
@@ -6,6 +13,7 @@ import { InputComponent, InputSize } from '@kirbydesign/designsystem/form-field'
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'input[kirby-input]',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

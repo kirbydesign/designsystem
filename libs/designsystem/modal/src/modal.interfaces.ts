@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnDestroy,
@@ -59,6 +60,7 @@ export abstract class ModalElementsAdvertiser {
 @Component({
   template: '',
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export abstract class ModalElementComponent implements AfterViewInit, OnDestroy {
   private get isContainedInModal() {

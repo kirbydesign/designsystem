@@ -18,7 +18,7 @@ import { TextareaComponent } from './../textarea/textarea.component';
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
   imports: [FormFieldMessageComponent],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class InputCounterComponent implements AfterViewInit, OnDestroy {
   @Input() listenTo: InputComponent | TextareaComponent;

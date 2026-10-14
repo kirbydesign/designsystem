@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { IonSkeletonText } from '@ionic/angular';
@@ -9,6 +9,7 @@ import { IonSkeletonText } from '@ionic/angular';
   imports: [CardComponent, IconComponent, IonSkeletonText],
   templateUrl: './skeleton-loader.component.html',
   styleUrl: './skeleton-loader.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SkeletonLoaderComponent {
   /**

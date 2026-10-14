@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
 
 import { AttentionLevel, ButtonSize } from '@kirbydesign/designsystem/button';
@@ -8,6 +8,7 @@ import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shar
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-menu',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

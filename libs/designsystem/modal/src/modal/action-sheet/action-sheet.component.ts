@@ -12,7 +12,7 @@ const KIRBY_ACTION_SHEET_DEPRECATION_WARNING =
   selector: 'kirby-action-sheet',
   templateUrl: './action-sheet.component.html',
   styleUrls: ['./action-sheet.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ActionSheetComponent {
   @Input() cancelButtonText = 'Cancel';

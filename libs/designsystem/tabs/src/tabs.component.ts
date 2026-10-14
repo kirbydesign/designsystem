@@ -15,7 +15,7 @@ import { TabsService } from './tabs.service';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
   imports: [IonTabs, IonTabBar],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class TabsComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.tab-bar-bottom-hidden')

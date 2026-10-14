@@ -1,4 +1,12 @@
-import { Component, Directive, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import {
   HeaderActionsDirective,
@@ -55,6 +63,7 @@ export class MockHeaderCustomFlagDirective {}
 
 @Component({
   selector: 'kirby-header',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
