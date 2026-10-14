@@ -48,7 +48,7 @@ export const Default: Story = {
     subtitle: '',
     backgroundImageUrl: '',
     hasPadding: false,
-    variant: 'elevated',
+    variant: 'raised',
   },
   render: (args) => ({
     props: args,
@@ -176,7 +176,7 @@ const renderThemeColorGrid =
       <div class="grid">
         @for (color of colors; track color.label) {
           <kirby-card
-            [variant]="color.variant ?? 'elevated'"
+            [variant]="color.variant ?? 'raised'"
             [hasPadding]="true"
             [themeColor]="color.themeColor"
           >
@@ -198,10 +198,6 @@ type InteractionState = (typeof interactionStates)[number];
 const cardSelectorsFor = (state: InteractionState) =>
   cardRows.map((color) => `#card-${color.label}-${state}`);
 
-/**
- * Each row is a theme color, each column a single interaction state.
- * States are forced via storybook-addon-pseudo-states, targeting cards by id.
- */
 export const InteractionStates: Story = {
   parameters: {
     pseudo: {
@@ -227,7 +223,7 @@ export const InteractionStates: Story = {
           @for (state of states; track state) {
             <kirby-card
               [attr.id]="'card-' + color.label + '-' + state"
-              [variant]="color.variant ?? 'elevated'"
+              [variant]="color.variant ?? 'raised'"
               [themeColor]="color.themeColor"
               [hasPadding]="true"
               (click)="noop()"

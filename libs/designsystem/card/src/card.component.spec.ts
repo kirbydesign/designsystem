@@ -102,19 +102,26 @@ describe('CardComponent', () => {
   });
 
   describe('with no themeColor set', () => {
-    it("should apply 'kirby-surface-raised' for the default (elevated) variant", () => {
+    [
+      { variant: 'elevated', surface: 'raised' },
+      { variant: 'flat', surface: 'raised' },
+      { variant: 'outlined', surface: 'base' },
+      { variant: 'base', surface: 'base' },
+      { variant: 'raised', surface: 'raised' },
+      { variant: 'brand', surface: 'brand' },
+    ].forEach(({ variant, surface }) => {
+      it(`should make the '${variant}' variant a '${surface}' surface`, () => {
+        spectator = createHost(`<kirby-card variant="${variant}"></kirby-card>`);
+        const surfaceClasses = Array.from(spectator.element.classList).filter((c) =>
+          c.startsWith('kirby-surface-')
+        );
+        expect(surfaceClasses).toEqual([`kirby-surface-${surface}`]);
+      });
+    });
+
+    it("should make the default variant a 'raised' surface", () => {
       spectator = createHost('<kirby-card></kirby-card>');
       expect(spectator.element).toHaveClass('kirby-surface-raised');
-    });
-
-    it("should apply 'kirby-surface-raised' for the flat variant", () => {
-      spectator = createHost('<kirby-card variant="flat"></kirby-card>');
-      expect(spectator.element).toHaveClass('kirby-surface-raised');
-    });
-
-    it("should not apply 'kirby-surface-raised' for the outlined variant", () => {
-      spectator = createHost('<kirby-card variant="outlined"></kirby-card>');
-      expect(spectator.element).not.toHaveClass('kirby-surface-raised');
     });
 
     it('should establish its own raised surface when nested inside a themed card', () => {
@@ -185,10 +192,10 @@ describe('CardThemeColorDirective', () => {
     expect(cardElement).not.toHaveClass('kirby-surface-base');
   });
 
-  it('should not apply a surface for the default (no value) theme color on the outlined variant', () => {
+  it('should apply "kirby-surface-base" for the default (no value) theme color on the outlined variant, like no theme color', () => {
     const cardElement = renderCard('', 'outlined');
+    expect(cardElement).toHaveClass('kirby-surface-base');
     expect(cardElement).not.toHaveClass('kirby-surface-raised');
-    expect(cardElement).not.toHaveClass('kirby-surface-base');
   });
 
   it('should apply "kirby-surface-base" for the "light" theme color', () => {

@@ -3,21 +3,35 @@ import {
   Component,
   ElementRef,
   HostBinding,
+  inject,
   Input,
   OnDestroy,
   OnInit,
   Renderer2,
 } from '@angular/core';
-import { ResizeObserverService, SurfaceDirective } from '@kirbydesign/designsystem/shared';
+import { ResizeObserverService, Surface, SurfaceDirective } from '@kirbydesign/designsystem/shared';
+
+export type CardVariant = 'elevated' | 'flat' | 'outlined' | Surface;
+
+const variantSurfaces: Record<CardVariant, Surface> = {
+  elevated: 'raised',
+  flat: 'raised',
+  outlined: 'base',
+  base: 'base',
+  raised: 'raised',
+  brand: 'brand',
+};
 
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  hostDirectives: [{ directive: SurfaceDirective, inputs: ['variant'] }],
+  hostDirectives: [SurfaceDirective],
 })
 export class CardComponent implements OnInit, OnDestroy {
+  private surfaceDirective = inject(SurfaceDirective, { self: true });
+
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -48,15 +62,30 @@ export class CardComponent implements OnInit, OnDestroy {
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
 
+  private _variant: CardVariant = 'raised';
+
+  /**
+   * `base`, `raised` (default) and `brand` set the surface directly.
+   * `elevated` and `flat` are raised surfaces, `outlined` is a base surface.
+   * A `themeColor` takes precedence over the surface of the variant.
+   */
   @HostBinding('class')
   @Input()
-  variant: 'elevated' | 'flat' | 'outlined' = 'elevated';
+  get variant(): CardVariant {
+    return this._variant;
+  }
+  set variant(value: CardVariant) {
+    this._variant = value ?? 'raised';
+    this.surfaceDirective.surface = variantSurfaces[this._variant];
+  }
 
   constructor(
     private elementRef: ElementRef,
     private resizeObserverService: ResizeObserverService,
     private renderer: Renderer2
-  ) {}
+  ) {
+    this.surfaceDirective.surface = variantSurfaces[this._variant];
+  }
 
   ngOnInit() {
     this.resizeObserverService.observe(this.elementRef, (entry) => this.handleResize(entry));

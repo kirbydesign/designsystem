@@ -2,44 +2,48 @@ import { Directive, HostBinding, inject, Input } from '@angular/core';
 
 import { ThemeColorDirective } from './theme-color.directive';
 
+export type Surface = 'base' | 'raised' | 'brand';
+
 /**
- * Applies the surface classes (`kirby-surface-base` | `kirby-surface-brand` |
- * `kirby-surface-raised`) that re-scope Kirby's semantic color tokens for a themed surface.
+ * Applies the surface class (`kirby-surface-base` | `kirby-surface-raised` | `kirby-surface-brand`)
  *
- * This ensures full backwards compatability, but should likely
- * be re-mapped as a component input and replace ThemeColor for surface components.
+ * For backwards compatibility, a theme color set on the same element takes precedence
+ * over the surface input:
+ * - `light` maps to `base`
+ * - `white` maps to `raised`
+ * - `primary`, `secondary`, `tertiary` and `dark` map to `brand`
  */
 @Directive({
+  selector: '[kirbySurface]',
   standalone: true,
 })
 export class SurfaceDirective {
   private themeColor = inject(ThemeColorDirective, { optional: true, self: true });
 
-  @Input() variant: 'elevated' | 'flat' | 'outlined' = 'elevated';
+  @Input('kirbySurface') surface: Surface | null = null;
 
-  private get hasThemeColor(): boolean {
-    return !!this.themeColor && !this.themeColor.isDefault;
+  get resolvedSurface(): Surface | null {
+    const theme = this.themeColor;
+    if (!theme || theme.isDefault) return this.surface;
+
+    if (theme.isLight) return 'base';
+    if (theme.isWhite) return 'raised';
+    if (theme.isPrimary || theme.isSecondary || theme.isTertiary || theme.isDark) return 'brand';
+    return null;
   }
 
   @HostBinding('class.kirby-surface-base')
   get isBaseSurface(): boolean {
-    return this.hasThemeColor && this.themeColor.isLight;
-  }
-
-  @HostBinding('class.kirby-surface-brand')
-  get isBrandSurface(): boolean {
-    const theme = this.themeColor;
-    return (
-      this.hasThemeColor &&
-      (theme.isPrimary || theme.isSecondary || theme.isTertiary || theme.isDark)
-    );
+    return this.resolvedSurface === 'base';
   }
 
   @HostBinding('class.kirby-surface-raised')
   get isRaisedSurface(): boolean {
-    if (this.hasThemeColor) {
-      return this.themeColor.isWhite;
-    }
-    return this.variant !== 'outlined';
+    return this.resolvedSurface === 'raised';
+  }
+
+  @HostBinding('class.kirby-surface-brand')
+  get isBrandSurface(): boolean {
+    return this.resolvedSurface === 'brand';
   }
 }
