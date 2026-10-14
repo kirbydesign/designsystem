@@ -157,63 +157,48 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('with shape="none" inside card', () => {
-    beforeEach(async () => {
-      spectator = createHost<ListComponent>(
+  describe('surface', () => {
+    const createList = async (attributes = '') => {
+      spectator = createHost(
         `
-        <kirby-card>
-          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" shape="none">
-            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
-          </kirby-list>
-        </kirby-card>
-        `
+        <kirby-list [items]="[{ name: 'Item1', section: 'A' }, { name: 'Item2', section: 'B' }]" ${attributes}>
+          <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
+        </kirby-list>`,
+        { hostProps: { getSectionName: (item: { section: string }) => item.section } }
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
-      itemsInList = spectator.queryAll('ion-list ion-item');
-    });
+    };
 
-    it('should apply "background" border color to all but last item when inside card and list has shape "none"', () => {
-      const ionItemSlidingList = spectator.queryAll('ion-item-sliding:not(.last)'); // last item doesn't have border
-      expect(ionItemSlidingList.length).toBeGreaterThan(0);
-      ionItemSlidingList.forEach((item) => {
-        expect(item).toHaveComputedStyle({
-          'border-bottom-color': getColor('background-color'),
+    const surfaceClassesOf = (element: Element) =>
+      Array.from(element.classList).filter((c) => c.startsWith('kirby-surface-'));
+
+    [
+      { attributes: '', surface: 'raised' },
+      { attributes: 'shape="square"', surface: 'raised' },
+      { attributes: 'shape="none"', surface: null },
+    ].forEach(({ attributes, surface }) => {
+      const expected = surface ? [`kirby-surface-${surface}`] : [];
+      const description = surface ? `a '${surface}' surface` : 'no surface';
+
+      describe(`with '${attributes || 'defaults'}'`, () => {
+        it(`should make the list ${description}`, async () => {
+          await createList(attributes);
+          expect(surfaceClassesOf(ionList)).toEqual(expected);
+        });
+
+        it(`should make each section ${description}`, async () => {
+          await createList(`${attributes} [getSectionName]="getSectionName"`);
+          const sections = spectator.queryAll('.list-items');
+          expect(sections.length).toBe(2);
+          sections.forEach((section) => expect(surfaceClassesOf(section)).toEqual(expected));
         });
       });
     });
-  });
 
-  describe('with shape="none" inside outlined card', () => {
-    beforeEach(async () => {
-      spectator = createHost<ListComponent>(
-        `
-        <kirby-card variant="outlined">
-          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" shape="none">
-            <kirby-item *kirbyListItemTemplate="let item"><p>{{ item.name }}</p></kirby-item>
-          </kirby-list>
-        </kirby-card>
-        `
-      );
-      ionList = spectator.queryHost('ion-list');
-      await TestHelper.whenReady(ionList);
-      itemsInList = spectator.queryAll('ion-list ion-item');
-    });
-
-    it('should apply "medium" border color to all but last item when inside outlined card and list has shape "none"', () => {
-      const ionItemSlidingList = spectator.queryAll('ion-item-sliding:not(.last)'); // last item doesn't have border
-      expect(ionItemSlidingList.length).toBeGreaterThan(0);
-      ionItemSlidingList.forEach((item) => {
-        expect(item).toHaveComputedStyle({
-          'border-bottom-color': getColor('medium'),
-        });
-      });
-
-      const lastIonItemSlidingList = spectator.queryAll('ion-item-sliding.last');
-      expect(lastIonItemSlidingList.length).toBe(1);
-      expect(lastIonItemSlidingList[0]).toHaveComputedStyle({
-        'border-bottom-width': '0px',
-      });
+    it('should not make a sectioned list itself a surface, as section headers sit outside the sections', async () => {
+      await createList('[getSectionName]="getSectionName"');
+      expect(surfaceClassesOf(ionList)).toEqual([]);
     });
   });
 
