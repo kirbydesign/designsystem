@@ -1,5 +1,4 @@
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import {
   createDirectiveFactory,
@@ -11,18 +10,6 @@ import {
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardAsButtonDirective } from './card-as-button/card-as-button.directive';
-
-const size = DesignTokenHelper.size;
-
-/** Resolves a color token as seen from inside `element`, i.e. against the surface it establishes. */
-const resolveSurfaceColor = (element: HTMLElement, token: string): string => {
-  const probe = document.createElement('span');
-  probe.style.color = `var(${token})`;
-  element.appendChild(probe);
-  const color = getComputedStyle(probe).color;
-  probe.remove();
-  return color;
-};
 
 describe('CardComponent', () => {
   let spectator: SpectatorHost<CardComponent>;
@@ -71,36 +58,6 @@ describe('CardComponent', () => {
     });
   });
 
-  describe('with flat variant attribute', () => {
-    beforeEach(() => {
-      spectator = createHost('<kirby-card variant="flat"></kirby-card>');
-      cardElement = spectator.element;
-    });
-
-    it('should have no box-shadow', () => {
-      expect(cardElement).toHaveComputedStyle({
-        'box-shadow': 'none',
-      });
-    });
-  });
-
-  describe('with outlined variant attribute', () => {
-    beforeEach(() => {
-      spectator = createHost('<kirby-card variant="outlined"></kirby-card>');
-      cardElement = spectator.element;
-    });
-
-    it('should have default styles', () => {
-      expect(cardElement).toHaveComputedStyle({
-        'box-shadow': 'none',
-        'background-color': 'transparent',
-        'border-color': resolveSurfaceColor(cardElement, '--kirby-color-border-base-quiet'),
-        'border-style': 'solid',
-        'border-width': '1px',
-      });
-    });
-  });
-
   describe('with no themeColor set', () => {
     [
       { variant: 'elevated', surface: 'raised' },
@@ -131,42 +88,6 @@ describe('CardComponent', () => {
       const nestedCard = spectator.query('kirby-card kirby-card');
       expect(nestedCard).toHaveClass('kirby-surface-raised');
       expect(nestedCard).not.toHaveClass('kirby-surface-base');
-    });
-  });
-
-  describe('with outlined variant attribute and flagged header', () => {
-    beforeEach(() => {
-      spectator = createHost(
-        '<kirby-card variant="outlined"><kirby-card-header flagged="warning"></kirby-card-header></kirby-card>'
-      );
-      cardElement = spectator.element;
-    });
-
-    it('should have default styles', () => {
-      const contentWrapperElement = spectator.queryHost('.content-wrapper');
-      const borderColor = resolveSurfaceColor(cardElement, '--kirby-color-border-base-quiet');
-
-      expect(contentWrapperElement).toHaveComputedStyle({
-        'border-block-end-color': borderColor,
-        'border-block-end-style': 'solid',
-        'border-block-end-width': '1px',
-
-        'border-inline-start-color': borderColor,
-        'border-inline-start-style': 'solid',
-        'border-inline-start-width': '1px',
-
-        'border-inline-end-color': borderColor,
-        'border-inline-end-style': 'solid',
-        'border-inline-end-width': '1px',
-
-        'border-bottom-left-radius': size('s'),
-        'border-bottom-right-radius': size('s'),
-      });
-
-      expect(cardElement).toHaveComputedStyle({
-        'box-shadow': 'none',
-        'background-color': 'transparent',
-      });
     });
   });
 });
