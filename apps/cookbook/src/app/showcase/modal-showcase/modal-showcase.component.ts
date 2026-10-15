@@ -196,5 +196,10 @@ const config: ModalConfig = {
       name: '--kirby-modal-background',
       description: 'Background of the modal.',
     },
+    {
+      name: '--kirby-modal-footer-justify-content',
+      description:
+        'Horizontal alignment of the content in the modal footer. Accepts any valid justify-content value. Defaults to center.',
+    },
   ];
 }
