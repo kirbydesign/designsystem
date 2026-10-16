@@ -1108,12 +1108,15 @@ const itemInteractionStates = [
   'disabled',
 ] as const;
 
+const itemPseudoStates = pseudoStatesFor(
+  itemRows.map((row) => row.id),
+  'ion-item'
+);
+
 export const InteractionStates: Story = {
   parameters: {
-    pseudo: pseudoStatesFor(
-      itemRows.map((row) => row.id),
-      'ion-item'
-    ),
+    // Pressing an item with a pointer also hovers it
+    pseudo: { ...itemPseudoStates, hover: [...itemPseudoStates.hover, ...itemPseudoStates.active] },
   },
   play: activateIonicElements('[id$="-active"] ion-item'),
   render: () => ({
