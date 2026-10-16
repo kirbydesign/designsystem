@@ -182,6 +182,10 @@ ion-item {
 :host(.disabled),
 :host([disabled]) {
   pointer-events: none;
+
+  ion-item {
+    opacity: var(--kirby-opacity-40);
+  }
 }
 
 :host(.selected),
