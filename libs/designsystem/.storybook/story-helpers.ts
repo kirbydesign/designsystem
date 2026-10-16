@@ -64,3 +64,23 @@ export const gridStyles = (columns: number, columnWidth: string) => `
     padding: var(--kirby-spacing-s);
   }
 `;
+
+/**
+ * Renders `content` inside a card for each surface. `surface` is available in the content template.
+ * Requires `CardComponent` to be imported by the story.
+ */
+export const renderOnSurfaces =
+  (content: string, columnWidth = '320px', props: Record<string, unknown> = {}) =>
+  () => ({
+    props: { ...props, surfaces },
+    template: `
+      <div class="grid">
+        @for (surface of surfaces; track surface) {
+          <kirby-card [variant]="surface" [hasPadding]="true">
+            ${content}
+          </kirby-card>
+        }
+      </div>
+    `,
+    styles: [gridStyles(surfaces.length, columnWidth)],
+  });
