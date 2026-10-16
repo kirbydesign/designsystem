@@ -1,5 +1,9 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+// eslint-disable-next-line no-restricted-imports
+import { renderOnSurfaces } from '../../.storybook/story-helpers';
 import { EmptyStateExampleComponent } from '~/app/examples/empty-state-example/empty-state-example.component';
 
 const meta: Meta<EmptyStateComponent> = {
@@ -7,7 +11,12 @@ const meta: Meta<EmptyStateComponent> = {
   title: 'Components / Empty State',
   decorators: [
     moduleMetadata({
-      imports: [EmptyStateComponent, EmptyStateExampleComponent],
+      imports: [
+        EmptyStateComponent,
+        EmptyStateExampleComponent,
+        CardComponent,
+        ThemeColorDirective,
+      ],
     }),
   ],
 };
@@ -26,4 +35,21 @@ export const CookbookExample: Story = {
   render: () => ({
     template: `<cookbook-empty-state-example></cookbook-empty-state-example>`,
   }),
+};
+
+export const ThemeColors: Story = {
+  render: renderOnSurfaces(
+    `
+    @for (themeColor of themeColors; track themeColor) {
+      <kirby-empty-state
+        iconName="kirby"
+        [themeColor]="themeColor"
+        [title]="(themeColor ?? 'default') + ', ' + surface"
+        subtitle="Subtitle"
+      ></kirby-empty-state>
+    }
+  `,
+    '320px',
+    { themeColors: [undefined, 'success', 'warning', 'danger', 'medium'] }
+  ),
 };
