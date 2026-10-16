@@ -1,3 +1,4 @@
+@use 'functions';
 @use '../interaction-state';
 
 $_focus-ring-gap: 3px;
@@ -14,9 +15,17 @@ a[modal-router-link],
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    color: inherit;
+    color: var(--kirby-color-content-base-loud);
     cursor: pointer;
     text-decoration: underline;
+  }
+
+  @include functions.hover {
+    color: var(--kirby-color-content-base-loud-hover);
+  }
+
+  &:active {
+    color: var(--kirby-color-content-base-loud-active);
   }
 
   &:focus-visible {
@@ -29,7 +38,7 @@ a[modal-router-link],
 
 a,
 .kirby-button-link {
-  @include interaction-state.apply-hover {
+  @include functions.hover {
     text-decoration-color: transparent;
   }
 
