@@ -8,6 +8,13 @@ import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/p
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+// eslint-disable-next-line no-restricted-imports
+import {
+  activateIonicElements,
+  gridStyles,
+  interactionStates,
+  pseudoStatesFor,
+} from '../../.storybook/story-helpers';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,
@@ -80,5 +87,35 @@ export const PageWithSlides: Story = {
       </kirby-page-content>
     </kirby-page>
     </kirby-app>`,
+  }),
+};
+
+const pageContainerStyles = `
+  .page-container {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+  }
+`;
+
+export const BackButtonInteractionStates: Story = {
+  parameters: {
+    pseudo: pseudoStatesFor(['page'], 'ion-back-button'),
+  },
+  play: activateIonicElements('#page-active ion-back-button'),
+  render: () => ({
+    props: { states: interactionStates },
+    template: `
+      <div class="grid">
+        @for (state of states; track state) {
+          <div class="page-container" [attr.id]="'page-' + state">
+            <kirby-page [title]="state" defaultBackHref="/">
+              <kirby-page-content></kirby-page-content>
+            </kirby-page>
+          </div>
+        }
+      </div>
+    `,
+    styles: [gridStyles(interactionStates.length, '240px'), pageContainerStyles],
   }),
 };
