@@ -13,6 +13,8 @@ import { FormFieldModule, InputComponent } from '@kirbydesign/designsystem/form-
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers';
+// eslint-disable-next-line no-restricted-imports
+import { gridStyles, interactionStates, pseudoStatesFor } from '../../.storybook/story-helpers';
 import { CardExampleComponent } from '~/app/examples/card-example/card-example.component';
 
 const meta: Meta<CardComponent> = {
@@ -117,15 +119,6 @@ const cardRows: CardColor[] = [
   { label: 'outlined', variant: 'outlined' },
 ];
 
-const gridStyles = (columns: number, columnWidth: string) => `
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(${columns}, ${columnWidth});
-    gap: var(--kirby-spacing-s);
-    padding: var(--kirby-spacing-s);
-  }
-`;
-
 const contentRowStyles = `
   .row {
     display: flex;
@@ -192,19 +185,9 @@ export const ThemeColors: Story = {
   render: renderThemeColorGrid(cardRows),
 };
 
-const interactionStates = ['default', 'hover', 'active', 'focus-visible'] as const;
-type InteractionState = (typeof interactionStates)[number];
-
-const cardSelectorsFor = (state: InteractionState) =>
-  cardRows.map((color) => `#card-${color.label}-${state}`);
-
 export const InteractionStates: Story = {
   parameters: {
-    pseudo: {
-      hover: cardSelectorsFor('hover'),
-      active: cardSelectorsFor('active'),
-      focusVisible: cardSelectorsFor('focus-visible'),
-    },
+    pseudo: pseudoStatesFor(cardRows.map((color) => `card-${color.label}`)),
   },
   render: () => ({
     props: {
