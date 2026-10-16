@@ -17,7 +17,15 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 // eslint-disable-next-line no-restricted-imports
-import { focusSelectableItem } from '../../.storybook/story-helpers';
+import {
+  activateIonicElements,
+  focusSelectableItem,
+  gridStyles,
+  interactionStates,
+  pseudoStatesFor,
+  Surface,
+  surfaces,
+} from '../../.storybook/story-helpers';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {
@@ -1072,4 +1080,72 @@ export const SelectableInCardWithContentBelowLastFocused: Story = {
 </kirby-card>`,
   }),
   play: focusSelectableItem(2),
+};
+
+type ItemRow = {
+  id: string;
+  label: string;
+  surface: Surface;
+  selected?: boolean;
+  disclosure?: ItemComponent['disclosure'];
+};
+
+const itemVariants: Omit<ItemRow, 'id' | 'surface'>[] = [
+  { label: 'selectable' },
+  { label: 'disclosure', disclosure: 'arrow-more' },
+  { label: 'selected', selected: true },
+];
+
+const itemRows: ItemRow[] = surfaces.flatMap((surface) =>
+  itemVariants.map((variant) => ({ ...variant, surface, id: `item-${surface}-${variant.label}` }))
+);
+
+// Focus ring is drawn on ion-item's shadow part, which pseudo-states can't force.
+// See the "Selectable - Focused" stories for focus coverage.
+// Disabled items can't be interacted with, so disabled is shown as a state of its own
+const itemInteractionStates = [
+  ...interactionStates.filter((state) => state !== 'focus-visible'),
+  'disabled',
+] as const;
+
+const itemPseudoStates = pseudoStatesFor(
+  itemRows.map((row) => row.id),
+  'ion-item'
+);
+
+export const InteractionStates: Story = {
+  parameters: {
+    // Pressing an item with a pointer also hovers it
+    pseudo: { ...itemPseudoStates, hover: [...itemPseudoStates.hover, ...itemPseudoStates.active] },
+  },
+  play: activateIonicElements('[id$="-active"] ion-item'),
+  render: () => ({
+    props: { rows: itemRows, states: itemInteractionStates },
+    template: `
+      <div class="grid">
+        @for (state of states; track state) {
+          <p class="kirby-text-small-light">{{ state }}</p>
+        }
+        @for (row of rows; track row.id) {
+          @for (state of states; track state) {
+            <kirby-card [variant]="row.surface">
+              <kirby-item
+                [attr.id]="row.id + '-' + state"
+                [selectable]="true"
+                [selected]="row.selected"
+                [disabled]="state === 'disabled'"
+                [disclosure]="row.disclosure"
+              >
+                <kirby-label>
+                  <p class="kirby-item-title">{{ row.label }}</p>
+                  <p class="kirby-item-detail">{{ row.surface }}, {{ state }}</p>
+                </kirby-label>
+              </kirby-item>
+            </kirby-card>
+          }
+        }
+      </div>
+    `,
+    styles: [gridStyles(itemInteractionStates.length, '220px')],
+  }),
 };
