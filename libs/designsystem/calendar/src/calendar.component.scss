@@ -2,6 +2,7 @@ $month-navigator-width: 80px;
 
 :host {
   font-size: var(--kirby-font-size-n);
+  color: var(--kirby-color-content-base);
 }
 
 table {
@@ -27,7 +28,7 @@ td {
 
 th {
   height: 50px;
-  border-bottom: 1px solid var(--kirby-background-color);
+  border-bottom: 1px solid var(--kirby-color-border-base-quiet);
 }
 
 .header,
@@ -101,11 +102,11 @@ button[aria-disabled='true'] {
 }
 
 .day.selectable:not(.current-month, .selected) {
-  color: var(--kirby-text-color-semi-dark);
+  color: var(--kirby-color-content-base-quiet);
 }
 
 .day.today {
-  border: 1px solid var(--kirby-semi-dark);
+  border: 1px solid var(--kirby-color-border-base);
 }
 
 .day.selected {
