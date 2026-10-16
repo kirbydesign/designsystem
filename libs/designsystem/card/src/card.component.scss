@@ -75,12 +75,10 @@
     cursor: pointer;
     outline: none;
 
-    @media (hover: hover) {
-      &:hover {
-        --kirby-card-main-background-color: var(--kirby-color-fill-base-hover);
-        --kirby-card-main-color: var(--kirby-color-content-base-hover);
-        --kirby-card-main-border-color: var(--kirby-color-border-base-quiet-hover);
-      }
+    @include utils.hover {
+      --kirby-card-main-background-color: var(--kirby-color-fill-base-hover);
+      --kirby-card-main-color: var(--kirby-color-content-base-hover);
+      --kirby-card-main-border-color: var(--kirby-color-border-base-quiet-hover);
     }
 
     &:active,
@@ -144,12 +142,10 @@
   --kirby-card-main-border-color: var(--kirby-color-border-success);
 
   &[role='button'] {
-    @media (hover: hover) {
-      &:hover {
-        --kirby-card-main-background-color: var(--kirby-color-fill-success-hover);
-        --kirby-card-main-color: var(--kirby-color-content-success-hover);
-        --kirby-card-main-border-color: var(--kirby-color-border-success-hover);
-      }
+    @include utils.hover {
+      --kirby-card-main-background-color: var(--kirby-color-fill-success-hover);
+      --kirby-card-main-color: var(--kirby-color-content-success-hover);
+      --kirby-card-main-border-color: var(--kirby-color-border-success-hover);
     }
 
     &:active,
@@ -167,12 +163,10 @@
   --kirby-card-main-border-color: var(--kirby-color-border-warning);
 
   &[role='button'] {
-    @media (hover: hover) {
-      &:hover {
-        --kirby-card-main-background-color: var(--kirby-color-fill-warning-hover);
-        --kirby-card-main-color: var(--kirby-color-content-warning-hover);
-        --kirby-card-main-border-color: var(--kirby-color-border-warning-hover);
-      }
+    @include utils.hover {
+      --kirby-card-main-background-color: var(--kirby-color-fill-warning-hover);
+      --kirby-card-main-color: var(--kirby-color-content-warning-hover);
+      --kirby-card-main-border-color: var(--kirby-color-border-warning-hover);
     }
 
     &:active,
@@ -190,12 +184,10 @@
   --kirby-card-main-border-color: var(--kirby-color-border-danger);
 
   &[role='button'] {
-    @media (hover: hover) {
-      &:hover {
-        --kirby-card-main-background-color: var(--kirby-color-fill-danger-hover);
-        --kirby-card-main-color: var(--kirby-color-content-danger-hover);
-        --kirby-card-main-border-color: var(--kirby-color-border-danger-hover);
-      }
+    @include utils.hover {
+      --kirby-card-main-background-color: var(--kirby-color-fill-danger-hover);
+      --kirby-card-main-color: var(--kirby-color-content-danger-hover);
+      --kirby-card-main-border-color: var(--kirby-color-border-danger-hover);
     }
 
     &:active,
