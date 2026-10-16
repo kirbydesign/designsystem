@@ -2,12 +2,24 @@ import {
   Component,
   ElementRef,
   HostBinding,
+  inject,
   Input,
   OnDestroy,
   OnInit,
   Renderer2,
 } from '@angular/core';
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { ResizeObserverService, ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+
+export type CardVariant = 'elevated' | 'flat' | 'outlined' | 'base' | 'raised' | 'brand';
+
+const variantSurfaces: Record<CardVariant, string> = {
+  elevated: 'raised',
+  flat: 'raised',
+  outlined: 'base',
+  base: 'base',
+  raised: 'raised',
+  brand: 'brand',
+};
 
 @Component({
   selector: 'kirby-card',
@@ -15,6 +27,8 @@ import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit, OnDestroy {
+  private themeColor = inject(ThemeColorDirective, { optional: true, self: true });
+
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -45,9 +59,30 @@ export class CardComponent implements OnInit, OnDestroy {
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
 
+  /**
+   * `base`, `raised` (default) and `brand` set the surface directly.
+   * `elevated` and `flat` are raised surfaces, `outlined` is a base surface.
+   * A `themeColor` takes precedence over the surface of the variant.
+   */
+  @Input({ transform: (value: CardVariant | null | undefined) => value ?? 'raised' })
+  variant: CardVariant = 'raised';
+
   @HostBinding('class')
-  @Input()
-  variant: 'elevated' | 'flat' | 'outlined' = 'elevated';
+  get hostClasses(): string {
+    const surface = this.surface;
+    return surface ? `${this.variant} kirby-surface-${surface}` : this.variant;
+  }
+
+  // For backwards compatibility, a theme color takes precedence over the variant
+  private get surface(): string | null {
+    const theme = this.themeColor;
+    if (!theme || theme.isDefault) return variantSurfaces[this.variant];
+
+    if (theme.isLight) return 'base';
+    if (theme.isWhite) return 'raised';
+    if (theme.isPrimary || theme.isSecondary || theme.isTertiary || theme.isDark) return 'brand';
+    return null;
+  }
 
   constructor(
     private elementRef: ElementRef,

@@ -44,6 +44,15 @@
   font-family: var(--kirby-font-family);
 }
 
+:root,
+.kirby-surface-base,
+.kirby-surface-raised,
+.kirby-surface-brand {
+  --kirby-focus-ring-md-combined-inset:
+    0 0 0 1px var(--kirby-color-border-focus) inset,
+    0 0 0 3px var(--kirby-color-border-offset) inset;
+}
+
 /*
   * Class to add link-icon to the right of e.g. anchor tag.
   */

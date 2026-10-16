@@ -24,13 +24,7 @@ export class MockAvatarComponent {
   @Input() overlay: boolean;
   @Input() size: AvatarSize | `${AvatarSize}`;
   @Input() themeColor:
-    | NotificationColor
-    | BrandColor
-    | 'medium'
-    | 'white'
-    | 'dark'
-    | 'light'
-    | 'semi-light';
+    NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
   @Output() imageError = new EventEmitter();
 }
 
