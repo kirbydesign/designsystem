@@ -97,11 +97,7 @@ $padding: var(--kirby-spacing-s);
 
 button[disabled] {
   pointer-events: none;
-
-  .kirby-icon,
-  .title {
-    color: var(--kirby-color-content-base-quiet);
-  }
+  opacity: 0.4; // TODO(@design-tokens) needs token
 }
 
 button {
