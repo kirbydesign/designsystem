@@ -36,19 +36,7 @@ p.subtitle {
   white-space: pre-wrap;
 }
 
-// Colors
-:host(.primary) {
-  --kirby-empty-state-color: var(--kirby-primary);
-}
-
-:host(.secondary) {
-  --kirby-empty-state-color: var(--kirby-secondary);
-}
-
-:host(.tertiary) {
-  --kirby-empty-state-color: var(--kirby-tertiary);
-}
-
+// Colors - supported
 :host(.success) {
   --kirby-empty-state-color: var(--kirby-color-fill-success-loud);
 }
@@ -61,16 +49,30 @@ p.subtitle {
   --kirby-empty-state-color: var(--kirby-color-fill-danger-loud);
 }
 
+// TODO(@design-tokens) add neutral theme color variant and deprecate unsupported colors
+:host(.medium) {
+  --kirby-empty-state-color: var(--kirby-color-content-base-quiet);
+}
+
+// Colors - deprecated
+:host(.primary) {
+  --kirby-empty-state-color: var(--kirby-primary);
+}
+
+:host(.secondary) {
+  --kirby-empty-state-color: var(--kirby-secondary);
+}
+
+:host(.tertiary) {
+  --kirby-empty-state-color: var(--kirby-tertiary);
+}
+
 :host(.white-overlay) {
   --kirby-empty-state-color: var(--kirby-white-overlay);
 }
 
 :host(.light) {
   --kirby-empty-state-color: var(--kirby-light);
-}
-
-:host(.medium) {
-  --kirby-empty-state-color: var(--kirby-color-content-base-quiet);
 }
 
 :host(.dark) {
