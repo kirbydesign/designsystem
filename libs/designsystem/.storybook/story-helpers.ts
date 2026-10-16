@@ -42,11 +42,12 @@ export const activateIonicElements =
 
 /**
  * Builds `storybook-addon-pseudo-states` parameters for elements with id `${id}-${state}`.
- * Pass `target` to apply the state to a descendant of that element instead.
+ * Pass `targets` to apply the state to descendants of that element instead.
  */
-export const pseudoStatesFor = (ids: string[], target?: string) => {
+export const pseudoStatesFor = (ids: string[], targets?: string | string[]) => {
+  const descendants = targets === undefined ? [''] : [targets].flat().map((t) => ` ${t}`);
   const selectorsFor = (state: InteractionState) =>
-    ids.map((id) => `#${id}-${state}${target ? ` ${target}` : ''}`);
+    ids.flatMap((id) => descendants.map((descendant) => `#${id}-${state}${descendant}`));
 
   return {
     hover: selectorsFor('hover'),
