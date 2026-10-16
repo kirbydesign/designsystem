@@ -4,7 +4,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
-import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
+import {
+  PageComponent,
+  PageContentComponent,
+  PageFooterComponent,
+} from '@kirbydesign/designsystem/page';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
@@ -27,6 +32,8 @@ const meta: Meta<PageComponent> = {
         AppComponent,
         PageComponent,
         PageContentComponent,
+        PageFooterComponent,
+        ButtonComponent,
         SlidesComponent,
         SlideDirective,
         CardComponent,
@@ -117,5 +124,20 @@ export const BackButtonInteractionStates: Story = {
       </div>
     `,
     styles: [gridStyles(interactionStates.length, '240px'), pageContainerStyles],
+  }),
+};
+
+export const PageWithFooter: Story = {
+  render: () => ({
+    template: `<kirby-app>
+    <kirby-page title="Page with Footer" defaultBackHref="/">
+      <kirby-page-content>
+        <p>Page Content</p>
+      </kirby-page-content>
+      <kirby-page-footer>
+        <button kirby-button>Action</button>
+      </kirby-page-footer>
+    </kirby-page>
+    </kirby-app>`,
   }),
 };
