@@ -182,6 +182,10 @@ ion-item {
 :host(.disabled),
 :host([disabled]) {
   pointer-events: none;
+
+  ion-item {
+    opacity: 0.4; // TODO(@design-tokens) needs token
+  }
 }
 
 :host(.selected),
