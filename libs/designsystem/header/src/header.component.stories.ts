@@ -2,8 +2,11 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+// eslint-disable-next-line no-restricted-imports
+import { renderOnSurfaces } from '../../.storybook/story-helpers';
 import { HeaderExampleComponent } from '~/app/examples/header-example/header-example.component';
 
 const meta: Meta<HeaderComponent> = {
@@ -11,7 +14,7 @@ const meta: Meta<HeaderComponent> = {
   title: 'Components / Header',
   decorators: [
     moduleMetadata({
-      imports: [HeaderComponent, HeaderExampleComponent, FlagComponent],
+      imports: [HeaderComponent, HeaderExampleComponent, FlagComponent, CardComponent],
     }),
   ],
   parameters: {
@@ -86,4 +89,16 @@ export const TitleMaxLinesScaling: Story = {
       </kirby-header>
     `,
   }),
+};
+
+export const Surfaces: Story = {
+  parameters: {
+    chromatic: { modes: { desktop: { viewport: 'large' } } },
+  },
+  render: renderOnSurfaces(
+    `
+    <kirby-header [title]="surface" subtitle1="Subtitle 1" subtitle2="Subtitle 2"></kirby-header>
+    <kirby-header title="Savings" value="12.345,67" valueUnit="kr." subtitle1="Key value"></kirby-header>
+  `
+  ),
 };
