@@ -89,7 +89,7 @@
     "nx": "22.7.12",
     "nx-stylelint": "^17.1.4",
     "post-npm-install": "^2.0.0",
-    "prettier": "^3.9.9",
+    "prettier": "^3.9.10",
     "sass": "^1.105.1",
     "storybook": "10.6.1",
     "stylelint": "^16.3.1",
