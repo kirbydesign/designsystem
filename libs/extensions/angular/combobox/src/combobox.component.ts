@@ -47,7 +47,6 @@ import { OpenState } from './combobox.types';
   selector: 'kirby-x-combobox',
   templateUrl: './combobox.component.html',
   styleUrls: ['./combobox.component.scss'],
-  standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
