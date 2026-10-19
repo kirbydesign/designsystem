@@ -1,16 +1,11 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $form-field-input-font-family: var(--kirby-font-family);
 $form-field-input-line-height: var(--kirby-line-height-n);
 $form-field-input-padding: var(--kirby-spacing-s);
+$form-field-input-border-width: 1px;
 $form-field-label-height: 24px;
-
-:host(.error) {
-  border: 1px solid var(--kirby-danger);
-  padding: calc(
-    #{$form-field-input-padding} - 1px
-  ); // subtract border width from padding to maintain overall height
-}
 
 // Ensures correct position of cloned input when Ionic scrollAssist is enabled
 :host(.cloned-input) {
@@ -38,18 +33,53 @@ $form-field-label-height: 24px;
 }
 
 :host {
-  &:focus-visible {
-    transition: interaction-state.transition();
-    box-shadow: var(--kirby-elevation-2), var(--kirby-focus-ring-md-inset);
+  &.error {
+    border-color: var(--kirby-color-border-raised-danger);
+  }
+
+  // Order matters: the error border wins over the hover and active borders,
+  // and the focus border wins over all of them
+  &:not(:disabled) {
+    @include utils.hover {
+      background-color: var(--kirby-color-fill-raised-hover);
+      border-color: var(--kirby-input-color-border-raised-hover);
+      cursor: text;
+
+      &::placeholder {
+        color: var(--kirby-color-content-raised-quiet-hover);
+      }
+    }
+
+    &:active {
+      border-color: var(--kirby-color-border-raised-loud);
+    }
+
+    &.error {
+      border-color: var(--kirby-color-border-raised-danger);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--kirby-focus-ring-md-combined-inset);
+      border-color: var(--kirby-color-border-focus);
+    }
+
+    // Wrap declarations to avoid mixing with nested rules.
+    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+    /* stylelint-disable no-duplicate-selectors */
+    & {
+      transition: interaction-state.transition();
+      transition-property: background-color, border-color, box-shadow;
+    }
+    /* stylelint-enable no-duplicate-selectors */
   }
 
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    background-color: var(--kirby-inputs-background-color);
-    color: var(--kirby-inputs-color);
-    border: none;
+    background-color: var(--kirby-color-fill-raised);
+    color: var(--kirby-color-content-raised);
+    border: $form-field-input-border-width solid var(--kirby-input-color-border-raised);
     box-sizing: border-box;
 
     // Do not use `display: block`.
@@ -69,15 +99,16 @@ $form-field-label-height: 24px;
     margin: 0;
     appearance: none;
     border-radius: var(--kirby-border-radius-n);
-    box-shadow: var(--kirby-inputs-elevation);
-    padding: $form-field-input-padding;
+    padding: calc(
+      #{$form-field-input-padding} - #{$form-field-input-border-width}
+    ); // subtract border width from padding to maintain overall height
+
     width: 100%;
   }
   /* stylelint-enable no-duplicate-selectors */
 
   &.borderless {
     border-radius: 0;
-    box-shadow: none;
     padding-inline: 0;
     width: auto;
   }
@@ -89,7 +120,7 @@ $form-field-label-height: 24px;
   }
 
   &::placeholder {
-    color: var(--kirby-inputs-placeholder-color);
+    color: var(--kirby-color-content-raised-quiet);
   }
 }
 

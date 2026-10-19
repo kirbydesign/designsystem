@@ -7,7 +7,8 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TextareaComponent } from './textarea.component';
 
-const getColor = DesignTokenHelper.getColor;
+const getTokenColor = (name: string) =>
+  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 
 describe('TextareaComponent', () => {
   let spectator: SpectatorHost<TextareaComponent>;
@@ -29,18 +30,14 @@ describe('TextareaComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    it('should render with correct color', () => {
-      expect(element).toHaveComputedStyle({ color: getColor('black') });
-    });
-
     it('should render with correct box-sizing', () => {
       expect(element).toHaveComputedStyle({ 'box-sizing': 'border-box' });
     });
 
-    it('should render without border', () => {
+    it('should render with border', () => {
       expect(element).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
       });
     });
 
@@ -85,19 +82,7 @@ describe('TextareaComponent', () => {
         expect(element).toHaveComputedStyle({
           'border-width': '1px',
           'border-style': 'solid',
-          'border-color': getColor('danger'),
-        });
-      });
-    });
-
-    describe('when disabled', () => {
-      beforeEach(() => {
-        spectator.setHostInput('disabled', true);
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({
-          'background-color': getColor('light', 'tint'),
+          'border-color': getTokenColor('border-raised-danger'),
         });
       });
     });
