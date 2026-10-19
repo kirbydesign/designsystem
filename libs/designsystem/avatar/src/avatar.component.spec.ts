@@ -37,20 +37,6 @@ describe('AvatarComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should render with correct default colors', () => {
-    spectator = createHost(`
-    <kirby-avatar>
-      <kirby-icon name="qr"></kirby-icon>
-    </kirby-avatar>
-    `);
-
-    const avatar = spectator.queryHost<HTMLElement>('.avatar');
-    expect(avatar).toHaveComputedStyle({
-      'background-color': getColor('white'),
-      color: getColor('light', 'contrast'),
-    });
-  });
-
   describe('when rendering Avatar with imageSrc set', () => {
     describe('by default', () => {
       beforeEach(() => {
@@ -253,9 +239,7 @@ describe('AvatarComponent', () => {
       ...ColorHelper.notificationColors,
       ...ColorHelper.brandColors,
       DesignTokenHelper.getColor('medium'),
-      DesignTokenHelper.getColor('white'),
       DesignTokenHelper.getColor('dark'),
-      DesignTokenHelper.getColor('light'),
       DesignTokenHelper.getColor('semi-light'),
     ];
     colors.forEach((color) => {

@@ -38,17 +38,17 @@ $badge-diameter: utils.$avatar-badge-size;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--kirby-avatar-background-color, var(--kirby-white));
-  color: var(--kirby-avatar-color, var(--kirby-light-contrast));
+  background-color: var(--kirby-avatar-background-color, var(--kirby-color-fill-raised));
+  color: var(--kirby-avatar-color, var(--kirby-color-content-raised));
 
   &.stroke {
-    border: 1px solid var(--kirby-semi-light);
+    border: 1px solid var(--kirby-color-border-raised-quiet);
   }
 
   &.overlay::before {
     content: '';
     background-color: var(--kirby-black);
-    opacity: 0.05;
+    opacity: var(--kirby-opacity-5);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -171,8 +171,8 @@ $badge-diameter: utils.$avatar-badge-size;
 }
 
 :host(.light) {
-  --kirby-avatar-background-color: var(--kirby-light);
-  --kirby-avatar-color: var(--kirby-light-contrast);
+  --kirby-avatar-background-color: var(--kirby-color-fill-raised);
+  --kirby-avatar-color: var(--kirby-color-content-raised);
 }
 
 :host(.medium) {
@@ -191,8 +191,8 @@ $badge-diameter: utils.$avatar-badge-size;
 }
 
 :host(.white) {
-  --kirby-avatar-background-color: var(--kirby-white);
-  --kirby-avatar-color: var(--kirby-white-contrast);
+  --kirby-avatar-background-color: var(--kirby-color-fill-raised);
+  --kirby-avatar-color: var(--kirby-color-content-raised);
 }
 
 :host(.semi-light) {
