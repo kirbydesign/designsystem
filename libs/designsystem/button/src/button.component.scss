@@ -281,13 +281,8 @@ $button-margin: var(--kirby-spacing-xxxs);
 
   &:disabled,
   &[aria-disabled='true'] {
-    color: var(--kirby-semi-dark-shade);
-    border-color: transparent;
     pointer-events: none;
-
-    &:not(.no-decoration) {
-      background-color: var(--kirby-semi-light);
-    }
+    opacity: var(--kirby-opacity-40);
   }
 
   &.floating {
