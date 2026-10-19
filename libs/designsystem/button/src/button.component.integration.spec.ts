@@ -22,7 +22,8 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from './button.component';
 
-const getColor = DesignTokenHelper.getColor;
+const getTokenColor = (name: string) =>
+  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 
@@ -98,16 +99,18 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with the correct background-color', async () => {
       await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': getColor('primary') });
+      expect(actionButtonInHeader).toHaveComputedStyle({
+        'background-color': getTokenColor('fill-brand-loud'),
+      });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
-        'background-color': getColor('white'),
+        'background-color': getTokenColor('fill-raised'),
       });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
-        color: getColor('black'),
+        color: getTokenColor('content-brand-loud'),
       });
     });
 
@@ -142,14 +145,14 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': getColor('white'),
+        'background-color': getTokenColor('fill-raised'),
       });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        color: getColor('white', 'contrast'),
+        color: getTokenColor('content-raised'),
       });
     });
   });
@@ -170,14 +173,14 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
-        'background-color': getColor('primary'),
+        'background-color': getTokenColor('fill-brand-loud'),
       });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
-        color: getColor('primary', 'contrast'),
+        color: getTokenColor('content-brand-loud'),
       });
     });
   });
@@ -395,7 +398,6 @@ describe('ButtonComponent configured with text and icon', () => {
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
   let kirbyIcon: Element;
-  let content: Element;
   const createHost = createHostFactory({
     component: ButtonComponent,
     imports: [TestHelper.ionicModuleForTest, IconComponent],
@@ -425,13 +427,11 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      content = element.querySelector('span.content-layer');
       kirbyIcon = element.querySelector('kirby-icon');
     });
 
     it('should render with correct padding', () => {
-      expect(element).toHaveComputedStyle({ padding: '0px' });
-      expect(content).toHaveComputedStyle({
+      expect(element).toHaveComputedStyle({
         'padding-left': size('xs'),
         'padding-right': size('s'),
       });
@@ -455,13 +455,11 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      content = element.querySelector('span.content-layer');
       kirbyIcon = element.querySelector('kirby-icon');
     });
 
     it('should render with correct padding', () => {
-      expect(element).toHaveComputedStyle({ padding: '0px' });
-      expect(content).toHaveComputedStyle({
+      expect(element).toHaveComputedStyle({
         'padding-left': size('s'),
         'padding-right': size('xs'),
       });
