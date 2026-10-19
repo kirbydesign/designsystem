@@ -47,7 +47,10 @@ export class TabNavigationComponent implements AfterViewInit {
     if (index !== this._selectedIndex && index !== -1) {
       this._selectedIndex = index;
 
-      this.focusIndex = index;
+      if (!this.containsFocus()) {
+        this.focusIndex = index;
+      }
+
       this.selectTab(this.selectedIndex);
       this.scrollToTab(this.selectedIndex);
       this.selectedIndexChange.emit(this.selectedIndex);
@@ -63,7 +66,7 @@ export class TabNavigationComponent implements AfterViewInit {
     if (index !== this._focusIndex) {
       this._focusIndex = index;
 
-      this.updateTabStop();
+      this.updateRovingTabindex();
     }
   }
   private _focusIndex = -1;
@@ -93,10 +96,7 @@ export class TabNavigationComponent implements AfterViewInit {
 
   @HostListener('click', ['$event'])
   onItemSelect(event: MouseEvent) {
-    if (event.target !== this.tabBarElement) {
-      const targetTabNavItem = (event.target as HTMLElement).closest('button');
-      this.selectedIndex = this.tabButtonElements.indexOf(targetTabNavItem);
-    }
+    this.selectedIndex = this.indexOfTabNavButton(event.target);
   }
 
   @HostListener('keydown.home', ['$event'])
@@ -104,18 +104,23 @@ export class TabNavigationComponent implements AfterViewInit {
   @HostListener('keydown.arrowright', ['$event'])
   @HostListener('keydown.arrowleft', ['$event'])
   onKeydown(event: KeyboardEvent) {
-    const currentIndex = this.indexOfTabNavButton(event.target);
-    if (currentIndex === -1) return;
-
     event.preventDefault();
     this.focusIndex = this.keyboardHandlerService.handle(
       event,
-      currentIndex,
+      this.focusIndex,
       this.tabElements.length - 1,
       true
     );
     this.scrollToTab(this.focusIndex);
     this.focusTab(this.focusIndex);
+  }
+
+  @HostListener('focusin', ['$event'])
+  onFocusIn(event: FocusEvent) {
+    const focusedIndex = this.indexOfTabNavButton(event.target);
+    if (focusedIndex !== -1) {
+      this.focusIndex = focusedIndex;
+    }
   }
 
   @HostListener('focusout', ['$event'])
@@ -134,7 +139,7 @@ export class TabNavigationComponent implements AfterViewInit {
     });
   }
 
-  private updateTabStop(): void {
+  private updateRovingTabindex(): void {
     const tabStopIndex = this.isValidTabIndex(this.focusIndex) ? this.focusIndex : 0;
 
     this.tabButtonElements.forEach((tabButtonElement, index) => {
@@ -148,17 +153,20 @@ export class TabNavigationComponent implements AfterViewInit {
     }
   }
 
-  private indexOfTabNavButton(target: EventTarget | null): number {
-    const tabButtonElement: HTMLElement = (target as HTMLElement | null)?.closest?.('[role="tab"]');
-    return this.tabButtonElements.indexOf(tabButtonElement);
+  private indexOfTabNavButton(target: EventTarget): number {
+    return this.tabButtonElements.indexOf((target as Element).closest<HTMLElement>('[role="tab"]'));
   }
 
   private isValidTabIndex(tabIndex: number): boolean {
     return 0 <= tabIndex && tabIndex < this.tabButtonElements.length;
   }
 
+  private containsFocus(): boolean {
+    return this.elementRef.nativeElement.contains(document.activeElement);
+  }
+
   private scrollToTab(tabIndex: number): void {
-    if (0 <= tabIndex && tabIndex < this.tabElements.length) {
+    if (this.isValidTabIndex(tabIndex)) {
       const selectedTabElement = this.tabElements[tabIndex];
       const selectedTabElementWidth = selectedTabElement.getBoundingClientRect().width;
       const selectedTabElementOffsetLeft = selectedTabElement.offsetLeft;
@@ -186,7 +194,7 @@ export class TabNavigationComponent implements AfterViewInit {
     );
 
     this.selectTab(this.selectedIndex);
-    this.updateTabStop();
+    this.updateRovingTabindex();
 
     setTimeout(() => {
       this.scrollToTab(this.focusIndex);
