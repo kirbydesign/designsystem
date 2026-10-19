@@ -1,4 +1,12 @@
-import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  TrackByFunction,
+} from '@angular/core';
 import { ThemeColor } from '@kirbydesign/core';
 
 import {
@@ -12,6 +20,7 @@ import {
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-list',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

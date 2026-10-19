@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ToggleButtonComponent } from '@kirbydesign/designsystem/toggle-button';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -35,6 +35,7 @@ type ViewModel = {
     IconComponent,
     BadgeComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class MenuAnchorItemComponent {
   readonly item = input.required<ActionItem | RouterLinkItem | ExternalLinkItem>();

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { BaseChartComponent, ChartJSService, ChartType } from '../shared';
 
@@ -7,6 +7,7 @@ import { BaseChartComponent, ChartJSService, ChartType } from '../shared';
   templateUrl: '../shared/base-chart/base-chart.component.html',
   styleUrls: ['../shared/base-chart/base-chart.component.scss'],
   providers: [ChartJSService],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ChartComponent extends BaseChartComponent {
   @Input() type: Exclude<ChartType, 'stock'> = 'column';

@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join, resolve } from 'path';
+import ts from 'typescript';
 
 interface EntryPoint {
   packageName: string;
@@ -87,45 +88,53 @@ export class DocsImportMapEngine {
     }
   }
 
-  /**
-   * Parse a .d.ts file to extract exported symbols
-   * Looks for export statements at the end of the file
-   */
+  /** Extract public names from both named exports and exported declarations in built .d.ts files. */
   private parseTypeDefinitionFile(filePath: string): string[] {
     try {
       const content = readFileSync(filePath, 'utf-8');
       const exports: string[] = [];
+      const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
 
-      // Match: export { Name1, Name2, Name3 };
-      const namedExportRegex = /^export\s*{\s*([^}]+)\s*};?\s*$/gm;
-      let match: RegExpExecArray | null;
+      for (const statement of sourceFile.statements) {
+        if (
+          ts.isExportDeclaration(statement) &&
+          statement.exportClause &&
+          ts.isNamedExports(statement.exportClause)
+        ) {
+          exports.push(...statement.exportClause.elements.map((element) => element.name.text));
+          continue;
+        }
 
-      while ((match = namedExportRegex.exec(content)) !== null) {
-        const names = match[1]
-          .split(',')
-          .map((name) => {
-            // Handle 'Name as Alias' or 'type Name' - we want the original name
-            const trimmed = name.trim();
-            // Remove 'type ' prefix if present
-            const withoutType = trimmed.replace(/^type\s+/, '');
-            // Handle 'as' aliases
-            const parts = withoutType.split(/\s+as\s+/);
-            return parts[0].trim();
-          })
-          .filter((name) => name && !name.startsWith('*'));
+        if (!ts.canHaveModifiers(statement)) {
+          continue;
+        }
 
-        exports.push(...names);
-      }
+        const isExported = ts
+          .getModifiers(statement)
+          ?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword);
+        if (!isExported) {
+          continue;
+        }
 
-      // Also match: export type { TypeName };
-      const typeExportRegex = /^export\s+type\s*{\s*([^}]+)\s*};?\s*$/gm;
-      while ((match = typeExportRegex.exec(content)) !== null) {
-        const names = match[1]
-          .split(',')
-          .map((name) => name.trim())
-          .filter((name) => name && !name.startsWith('*'));
+        if (ts.isVariableStatement(statement)) {
+          exports.push(
+            ...statement.declarationList.declarations.flatMap((declaration) =>
+              ts.isIdentifier(declaration.name) ? [declaration.name.text] : []
+            )
+          );
+          continue;
+        }
 
-        exports.push(...names);
+        if (
+          (ts.isClassDeclaration(statement) ||
+            ts.isInterfaceDeclaration(statement) ||
+            ts.isTypeAliasDeclaration(statement) ||
+            ts.isEnumDeclaration(statement) ||
+            ts.isFunctionDeclaration(statement)) &&
+          statement.name
+        ) {
+          exports.push(statement.name.text);
+        }
       }
 
       return exports;

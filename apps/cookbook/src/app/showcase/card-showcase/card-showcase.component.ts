@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
-// @ts-expect-error TypeScript cannot provide types based on attributes yet
 import exampleHtml from '../../examples/card-example/card-example.component.html' with {
   loader: 'text',
 };

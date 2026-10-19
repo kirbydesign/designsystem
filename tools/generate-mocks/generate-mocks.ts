@@ -715,6 +715,9 @@ ${endRegion}
       ? `${esLintDisableSelector}${newLine}  selector: ${componentMetaData.selector},`
       : '';
     const isComponent = componentMetaData.decorator === 'Component';
+    const changeDetection = isComponent
+      ? `${newLine}  changeDetection: ChangeDetectionStrategy.Eager,`
+      : '';
     const template = isComponent ? `${newLine}  template: '<ng-content></ng-content>',` : '';
     // Unique host attribute makes Angular generate a component ID distinct from the real component:
     const host = isComponent ? `${newLine}  host: { mock: 'mock' },` : '';
@@ -728,7 +731,7 @@ providers: [
 `;
     const extendsClause = baseMockClassName ? ` extends ${baseMockClassName}` : '';
 
-    const config = `{${selector}${template}${host}${providers}}`;
+    const config = `{${selector}${changeDetection}${template}${host}${providers}}`;
     const content = `@${componentMetaData.decorator}(${config})
 export class ${mockClassName}${typeParameters}${extendsClause} {${propertiesString}${methodsString}}
 `;
@@ -743,6 +746,7 @@ export class ${mockClassName}${typeParameters}${extendsClause} {${propertiesStri
     const angularCoreImports = [
       ...(hasDecoratedType('Component') || hasDecoratedType('Directive') ? ['forwardRef'] : []),
       ...(hasDecoratedType('Component') ? ['Component'] : []),
+      ...(hasDecoratedType('Component') ? ['ChangeDetectionStrategy'] : []),
       ...(hasDecoratedType('Directive') ? ['Directive'] : []),
       ...(hasDirection('Input') ? ['Input'] : []),
       ...(hasDirection('Output') ? ['Output', 'EventEmitter'] : []),
@@ -886,9 +890,7 @@ export class ${mockClassName}${typeParameters}${extendsClause} {${propertiesStri
 
   private visitPropertyDeclaration(
     propertyDeclaration:
-      | ts.SetAccessorDeclaration
-      | ts.GetAccessorDeclaration
-      | ts.PropertyDeclaration,
+      ts.SetAccessorDeclaration | ts.GetAccessorDeclaration | ts.PropertyDeclaration,
     componentMetaData: ComponentMetaData
   ) {
     const inputOutputDecorator = this.getInputOutputDecorator(propertyDeclaration);
@@ -994,9 +996,7 @@ export class ${mockClassName}${typeParameters}${extendsClause} {${propertiesStri
 
   private getInputOutputDecorator(
     propertyDeclaration:
-      | ts.SetAccessorDeclaration
-      | ts.GetAccessorDeclaration
-      | ts.PropertyDeclaration
+      ts.SetAccessorDeclaration | ts.GetAccessorDeclaration | ts.PropertyDeclaration
   ): { type: 'Input' | 'Output' | undefined; bindingProperty: string | undefined } {
     const inputOutputDecorator: {
       type: 'Input' | 'Output' | undefined;
@@ -1019,9 +1019,7 @@ export class ${mockClassName}${typeParameters}${extendsClause} {${propertiesStri
 
   private getPropertyTypeNode(
     propertyDeclaration:
-      | ts.PropertyDeclaration
-      | ts.SetAccessorDeclaration
-      | ts.GetAccessorDeclaration
+      ts.PropertyDeclaration | ts.SetAccessorDeclaration | ts.GetAccessorDeclaration
   ): ts.TypeNode | undefined {
     if (ts.isSetAccessorDeclaration(propertyDeclaration)) {
       return propertyDeclaration.parameters[0]?.type;
@@ -1032,9 +1030,7 @@ export class ${mockClassName}${typeParameters}${extendsClause} {${propertiesStri
   private getPropertyType(
     propertyName: string,
     propertyDeclaration:
-      | ts.PropertyDeclaration
-      | ts.SetAccessorDeclaration
-      | ts.GetAccessorDeclaration,
+      ts.PropertyDeclaration | ts.SetAccessorDeclaration | ts.GetAccessorDeclaration,
     componentMetaData: ComponentMetaData
   ): string {
     if (ts.isPropertyDeclaration(propertyDeclaration)) {

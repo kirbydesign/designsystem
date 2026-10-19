@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -33,6 +34,7 @@ export type BoundaryClass = 'first' | 'last';
     IconComponent,
     IonLabel,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
   _isSwipingEnabled = false;
