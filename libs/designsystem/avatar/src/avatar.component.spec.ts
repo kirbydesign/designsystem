@@ -37,6 +37,16 @@ describe('AvatarComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  it('should warn that stroke is deprecated when stroke is set', () => {
+    const warnSpy = spyOn(console, 'warn');
+
+    spectator = createHost(`<kirby-avatar [stroke]="true"></kirby-avatar>`);
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      jasmine.stringContaining(`The 'stroke' input is deprecated`)
+    );
+  });
+
   describe('when rendering Avatar with imageSrc set', () => {
     describe('by default', () => {
       beforeEach(() => {

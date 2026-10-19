@@ -14,13 +14,6 @@ const config = {
   altText="Example" 
   overlay="true" 
   size="lg"
-></kirby-avatar>
-
-<kirby-avatar 
-  imageSrc="/assets/images/woman.png" 
-  altText="Example" 
-  stroke="true" 
-  size="lg"
 ></kirby-avatar>`,
 };
 
