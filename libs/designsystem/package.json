@@ -40,10 +40,6 @@
     "swiper": "^14.2.0"
   },
   "devDependencies": {
-    "@floating-ui/dom": "1.8.0",
-    "@fontsource/roboto": "^5.2.6",
-    "@ionic/angular": "9.0.5",
-    "@ionic/core": "9.0.5",
     "@ngneat/spectator": "^22.1.0",
     "@types/jasmine": "4.6.6",
     "@types/jest": "^30.0.0",
@@ -60,15 +56,10 @@
     "karma-jasmine-html-reporter": "2.3.0",
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.37",
-    "chartjs-adapter-date-fns": "2.0.0",
-    "chart.js": "3.9.1",
-    "chartjs-plugin-annotation": "1.4.0",
-    "chartjs-plugin-datalabels": "2.2.0",
-    "postcss": "^8.5.29",
+    "postcss": "^8.5.30",
     "postcss-import": "14.1.0",
     "postcss-preset-env": "7.8.3",
-    "postcss-url": "10.1.4",
-    "swiper": "14.2.0"
+    "postcss-url": "10.1.4"
   },
   "exports": {
     "./scss/global-styles": "./scss/_global-styles.scss",
