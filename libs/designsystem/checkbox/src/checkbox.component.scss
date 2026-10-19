@@ -16,23 +16,10 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 :host {
   display: flex;
 
-  &[disabled] {
-    color: var(--kirby-text-color-semi-dark);
-
-    ion-checkbox {
-      --checkmark-color: var(--kirby-semi-dark);
-      --checkbox-background: var(--kirby-semi-light);
-      --checkbox-background-checked: var(--kirby-semi-light);
-      --border-color: var(--kirby-medium);
-      --border-color-checked: var(--kirby-medium);
-
-      &::part(label-text-wrapper) {
-        opacity: 1; // Reset Ionic disabled style
-      }
-
-      &::part(native-wrapper) {
-        opacity: 1; // Reset Ionic disabled style
-      }
+  &[disabled] ion-checkbox {
+    &::part(label-text-wrapper),
+    &::part(native-wrapper) {
+      opacity: var(--kirby-opacity-40);
     }
   }
 
