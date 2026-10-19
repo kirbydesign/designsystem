@@ -28,14 +28,6 @@ import {
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
-function detectEmbeddedChanges(spectator: Spectator<ModalWrapperComponent>, component: object) {
-  spectator.debugElement
-    .query((node) => node.componentInstance === component)
-    .injector.get(ChangeDetectorRef)
-    .markForCheck();
-  spectator.detectChanges();
-}
-
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
