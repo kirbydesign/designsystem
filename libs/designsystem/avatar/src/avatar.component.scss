@@ -31,7 +31,9 @@ $badge-diameter: utils.$avatar-badge-size;
   // default to size 'sm'
   width: $diameter-small;
   height: $diameter-small;
+  border: 1px solid var(--kirby-color-border-raised-quiet);
   border-radius: var(--kirby-border-radius-circle);
+  box-sizing: border-box; // Ensure border is not added to the size
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -40,10 +42,6 @@ $badge-diameter: utils.$avatar-badge-size;
   align-items: center;
   background-color: var(--kirby-avatar-background-color, var(--kirby-color-fill-raised));
   color: var(--kirby-avatar-color, var(--kirby-color-content-raised));
-
-  &.stroke {
-    border: 1px solid var(--kirby-color-border-raised-quiet);
-  }
 
   &.overlay::before {
     content: '';
