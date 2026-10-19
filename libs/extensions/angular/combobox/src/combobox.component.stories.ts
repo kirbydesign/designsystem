@@ -1,8 +1,5 @@
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import {
-  ComboboxComponent,
-  ComboboxItemTemplateDirective,
-} from '@kirbydesign/extensions-angular/combobox';
+import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ItemModule } from '@kirbydesign/designsystem/item';
@@ -86,7 +83,6 @@ const meta: Meta<ComboboxComponent> = {
         ItemModule,
         InputComponent,
         ComboboxComponent,
-        ComboboxItemTemplateDirective,
         FormFieldComponent,
         ReactiveFormsModule,
       ],
