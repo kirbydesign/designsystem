@@ -8,59 +8,13 @@ $checkbox-icon-size: map.get(utils.$checkbox-sizes, 'sm', 'icon-size');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
+@mixin focus-border-colors {
+  --border-color: var(--kirby-color-border-focus);
+  --border-color-checked: var(--kirby-color-border-focus);
+}
+
 :host {
   display: flex;
-
-  &.attention-level1 ion-checkbox {
-    --checkmark-color: var(--kirby-black);
-    --checkbox-background-checked: var(--kirby-success);
-    --border-color-checked: var(--kirby-success);
-
-    @include interaction-state.apply-hover {
-      --checkbox-background-checked: #{interaction-state.get-state-color('success', 's')};
-      --border-color-checked: #{interaction-state.get-state-color('success', 's')};
-    }
-    @include interaction-state.apply-active {
-      --checkbox-background-checked: #{interaction-state.get-state-color('success', 'l')};
-      --border-color-checked: #{interaction-state.get-state-color('success', 'l')};
-    }
-  }
-
-  &.attention-level2 ion-checkbox {
-    --checkmark-color: var(--kirby-white);
-    --checkbox-background-checked: var(--kirby-black);
-    --border-color-checked: var(--kirby-black);
-
-    @include interaction-state.apply-hover {
-      --checkbox-background-checked: #{interaction-state.get-state-color(
-          'black',
-          'xl',
-          $make-lighter: true
-        )};
-      --border-color-checked: #{interaction-state.get-state-color(
-          'black',
-          'xl',
-          $make-lighter: true
-        )};
-    }
-    @include interaction-state.apply-active {
-      --checkmark-color: #{interaction-state.get-state-color('white')};
-      --checkbox-background-checked: #{interaction-state.get-state-color(
-          'black',
-          'xxxl',
-          $make-lighter: true
-        )};
-      --border-color-checked: #{interaction-state.get-state-color(
-          'black',
-          'xxxl',
-          $make-lighter: true
-        )};
-    }
-  }
-
-  &.error ion-checkbox {
-    --border-color: var(--kirby-danger);
-  }
 
   &[disabled] {
     color: var(--kirby-text-color-semi-dark);
@@ -127,28 +81,31 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
   }
 
   ion-checkbox {
+    @include utils.hover {
+      --checkbox-background: var(--kirby-color-fill-raised-hover);
+      --checkbox-background-checked: var(--kirby-color-fill-engaged-hover);
+      --checkmark-color: var(--kirby-color-content-engaged-hover);
+      --border-color: var(--kirby-color-border-raised-hover);
+      --border-color-checked: var(--kirby-color-border-engaged-hover);
+    }
+
+    &:active {
+      --checkbox-background: var(--kirby-color-fill-raised-active);
+      --checkbox-background-checked: var(--kirby-color-fill-engaged-active);
+      --checkmark-color: var(--kirby-color-content-engaged-active);
+      --border-color: var(--kirby-color-border-raised-active);
+      --border-color-checked: var(--kirby-color-border-engaged-active);
+    }
+
     &:focus-visible {
       outline: none;
 
-      --border-width: 0;
-      --border-color: transparent;
-      --border-color-checked: transparent;
+      @include focus-border-colors;
     }
 
     &:focus-visible::part(container) {
-      padding: calc(
-        var(--kirby-checkbox-container-padding) + 1px
-      ); // Compensate for removed 1px border to prevent checkmark from growing in ion-checkbox
-
       transition: box-shadow #{interaction-state.$default-transition-duration} linear;
-      box-shadow: var(--kirby-focus-ring-sm-inset);
-    }
-
-    @include interaction-state.apply-hover {
-      --checkbox-background: #{interaction-state.get-state-color('white')};
-    }
-    @include interaction-state.apply-active {
-      --checkbox-background: #{interaction-state.get-state-color('white', 'xs')};
+      box-shadow: var(--kirby-focus-ring-sm-combined-inset);
     }
 
     // Wrap declarations to avoid mixing with nested rules.
@@ -161,9 +118,12 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       --size: #{$checkbox-icon-size};
       --checkmark-width: var(--kirby-spacing-xxxs);
       --kirby-checkbox-container-padding: var(--kirby-spacing-xxxs);
-      --checkbox-background: var(--kirby-white);
+      --checkbox-background: var(--kirby-color-fill-raised);
+      --checkbox-background-checked: var(--kirby-color-fill-engaged);
+      --checkmark-color: var(--kirby-color-content-engaged);
       --border-width: 1px;
-      --border-color: var(--kirby-semi-dark);
+      --border-color: var(--kirby-color-border-raised);
+      --border-color-checked: var(--kirby-color-border-engaged);
       --border-radius: #{$border-radius};
     }
     /* stylelint-enable no-duplicate-selectors */
@@ -245,6 +205,16 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       position: absolute;
       inset: 0;
       opacity: 0;
+    }
+  }
+
+  // Placed after the interaction states, so the error border wins over hover and active
+  &.error ion-checkbox {
+    --border-color: var(--kirby-color-border-raised-danger);
+    --border-color-checked: var(--kirby-color-border-raised-danger);
+
+    &:focus-visible {
+      @include focus-border-colors;
     }
   }
 
