@@ -4,6 +4,58 @@ This document provides information about breaking changes and their migrations f
 
 Kirby Extensions is versioned and released independently from `@kirbydesign/designsystem`. For migrations of the core design system see the [Kirby Design System migration guide](https://github.com/kirbydesign/designsystem/blob/develop/MIGRATION.md).
 
+## Version 6.0.0
+
+- [Components](#components-v6)
+  - [Combobox](#combobox-v6)
+
+<h3 id="components-v6">Components</h3>
+
+<h4 id="combobox-v6">Combobox</h4>
+
+The custom item template directive for comboboxes is now explicitly namespaced as `*kirbyXComboboxItemTemplate` instead of the generic `*kirbyListItemTemplate`. This is a breaking change for applications that render custom item templates inside `<kirby-x-combobox>`.
+
+The old selector was too generic and could collide with list item templates from unrelated components. The new directive is a standalone Angular directive and must be imported directly where it is used.
+
+Before:
+
+```html
+<kirby-x-combobox [items]="items">
+  <kirby-item *kirbyListItemTemplate="let item; let selected = selected; let focused = focused">
+    <kirby-label>
+      <p>{{ item.name }}</p>
+    </kirby-label>
+  </kirby-item>
+</kirby-x-combobox>
+```
+
+After:
+
+```ts
+import {
+  ComboboxComponent,
+  ComboboxItemTemplateDirective,
+} from '@kirbydesign/extensions-angular/combobox';
+
+@Component({
+  standalone: true,
+  imports: [ComboboxComponent, ComboboxItemTemplateDirective],
+})
+export class MyComponent {}
+```
+
+```html
+<kirby-x-combobox [items]="items">
+  <kirby-item
+    *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused"
+  >
+    <kirby-label>
+      <p>{{ item.name }}</p>
+    </kirby-label>
+  </kirby-item>
+</kirby-x-combobox>
+```
+
 ## Version 5.0.0
 
 - [Components](#components-v5)
