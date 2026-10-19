@@ -2,7 +2,6 @@
 
 $bullet-width: 10px;
 $bullet-height: 6px;
-$bullet-inactive-opacity: 0.2;
 
 :host {
   .navigation {
@@ -36,11 +35,10 @@ $bullet-inactive-opacity: 0.2;
       height: $bullet-height;
       margin-inline: var(--kirby-spacing-xxxs);
       border-radius: var(--kirby-border-radius-pill);
-      background: var(--kirby-black);
-      opacity: $bullet-inactive-opacity;
+      background: var(--kirby-color-fill-neutral);
 
       &-active {
-        opacity: 1;
+        background: var(--kirby-color-fill-brand-loud);
       }
 
       &:last-of-type {
