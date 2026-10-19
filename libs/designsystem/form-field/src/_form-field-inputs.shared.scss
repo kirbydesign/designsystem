@@ -114,9 +114,7 @@ $form-field-label-height: 24px;
   }
 
   &:disabled {
-    background-color: var(--kirby-light-tint);
-    color: var(--kirby-text-color-semi-dark);
-    box-shadow: none;
+    opacity: 0.4; // TODO(@design-tokens) needs token
   }
 
   &::placeholder {
