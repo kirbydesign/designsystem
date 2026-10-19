@@ -209,10 +209,6 @@ export class RadioGroupComponent
     return typeof item === 'string' ? undefined : item[this.itemDisabledProperty];
   }
 
-  get _hasItems(): boolean {
-    return this.items.length > 0 || this.hasItemsFromContentProjection;
-  }
-
   _onChange(value: string | any) {
     if (value === this._value) return;
     this.setSelectedItem(value);
