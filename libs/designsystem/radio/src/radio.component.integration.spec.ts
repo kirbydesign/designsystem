@@ -6,7 +6,9 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { RadioGroupComponent } from './radio-group/radio-group.component';
 import { RadioComponent } from './radio.component';
 
-const { getColor, size } = DesignTokenHelper;
+const { size } = DesignTokenHelper;
+const getTokenColor = (name: string) =>
+  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 
 describe('RadioComponent in Item', () => {
   let spectator: SpectatorHost<RadioComponent>;
@@ -85,7 +87,7 @@ describe('RadioComponent in RadioGroup', () => {
     it('should have correct border style', () => {
       expect(radioIcon).toHaveComputedStyle({
         'border-width': '1px',
-        'border-color': getColor('danger'),
+        'border-color': getTokenColor('border-raised-danger'),
       });
     });
   });
