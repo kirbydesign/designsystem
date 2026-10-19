@@ -26,7 +26,6 @@ export const Default: Story = {
     text: 'A',
     imageSrc: '',
     altText: '',
-    stroke: false,
     overlay: false,
     size: AvatarSize.SM,
   },
@@ -81,7 +80,7 @@ export const ColorVariants: Story = {
       <div class="color-grid">
         @for (color of officialColors; track color) {
           <div class="color-item">
-            <kirby-avatar [themeColor]="color" [stroke]="true" text="A" size="md"></kirby-avatar>
+            <kirby-avatar [themeColor]="color" text="A" size="md"></kirby-avatar>
             <span class="kirby-text-xsmall">{{ color }}</span>
           </div>
         }
@@ -127,8 +126,7 @@ export const Surfaces: Story = {
     <p class="kirby-text-normal">{{ surface }}</p>
     <div style="display: flex; flex-wrap: wrap; gap: var(--kirby-spacing-s); align-items: center">
       <kirby-avatar text="A" size="md"></kirby-avatar>
-      <kirby-avatar text="A" size="md" [stroke]="true"></kirby-avatar>
-      <kirby-avatar text="A" size="md" themeColor="white" [stroke]="true"></kirby-avatar>
+      <kirby-avatar text="A" size="md" themeColor="white"></kirby-avatar>
       <kirby-avatar text="A" size="md" themeColor="light"></kirby-avatar>
       <kirby-avatar size="md" themeColor="light">
         <kirby-icon name="person"></kirby-icon>
