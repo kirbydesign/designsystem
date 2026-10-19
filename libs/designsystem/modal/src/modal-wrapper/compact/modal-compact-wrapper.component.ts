@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
@@ -25,6 +26,7 @@ import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
   imports: [CommonModule],
   host: { '[class.ion-page]': 'false' },
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
   @Input() config: ModalConfig;

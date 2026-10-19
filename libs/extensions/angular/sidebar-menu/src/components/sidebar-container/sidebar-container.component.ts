@@ -1,4 +1,4 @@
-import { Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { HeightObserverDirective } from '../../directives/height-observer';
 import { SidebarService } from '../../services/sidebar';
@@ -15,6 +15,7 @@ type ViewModel = {
   templateUrl: './sidebar-container.component.html',
   styleUrls: ['./sidebar-container.component.scss'],
   imports: [HeightObserverDirective, CdkScrollable],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SidebarContainerComponent {
   readonly #sidebarService = inject(SidebarService);

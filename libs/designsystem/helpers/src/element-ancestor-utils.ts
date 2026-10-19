@@ -12,10 +12,11 @@
 */
 
 export const elementHasAncestor = (
-  element: HTMLElement,
+  element: HTMLElement | null,
   ancestorNodeName: string,
   stopNodeName?: string
-) => {
+): boolean => {
+  if (!element) return false;
   switch (element?.nodeName) {
     case undefined:
     case stopNodeName?.toUpperCase():
@@ -33,8 +34,7 @@ export const elementHasAncestor = (
  */
 export function getIonModalDialogAncestor(currentElement: HTMLElement): HTMLElement | undefined {
   const ionModalElement = currentElement.closest('ion-modal');
-  const modalElementDialog = ionModalElement?.shadowRoot?.querySelector(
-    '[role="dialog"]'
-  ) as HTMLElement;
-  return modalElementDialog;
+  const modalElementDialog =
+    ionModalElement?.shadowRoot?.querySelector<HTMLElement>('[role="dialog"]');
+  return modalElementDialog ?? undefined;
 }

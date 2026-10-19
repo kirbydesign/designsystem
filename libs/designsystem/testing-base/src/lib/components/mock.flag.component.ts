@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
-import { FlagComponent } from '@kirbydesign/designsystem';
+import { FlagComponent, FlagThemeColor } from '@kirbydesign/designsystem/flag';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-flag',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -16,7 +17,7 @@ import { FlagComponent } from '@kirbydesign/designsystem';
 })
 export class MockFlagComponent {
   @Input() size: 'xs' | 'sm' | 'md';
-  @Input() themeColor: 'success' | 'warning' | 'danger' | 'semi-light' | 'transparent';
+  @Input() themeColor: FlagThemeColor;
 }
 
 // #endregion

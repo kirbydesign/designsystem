@@ -3,7 +3,7 @@
 @use 'variables';
 
 @mixin font-family() {
-  --kirby-font-family: 'Roboto';
+  --kirby-font-family: 'Roboto', sans-serif;
 }
 
 @mixin size-fat-finger() {

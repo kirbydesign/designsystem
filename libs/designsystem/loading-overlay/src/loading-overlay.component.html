@@ -1,4 +1,4 @@
-<div class="overlay-wrapper">
+<div class="overlay-wrapper" [class.loading]="isLoading">
   @if (isLoading) {
     <div
       [ngClass]="{

@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -65,6 +66,7 @@ const contentScrolledOffsetInPixels = 4;
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     { provide: Modal, useExisting: ModalWrapperComponent },
     { provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent },
@@ -196,7 +198,6 @@ export class ModalWrapperComponent
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
-
     this.modalWrapperInjector = Injector.create({
       providers: [{ provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent }],
       parent: this.injector,
@@ -530,10 +531,16 @@ export class ModalWrapperComponent
     this.setKeyboardOverlap(keyboardHeight);
   }
 
+  // Fall back to the live viewport height: initialViewportHeight (from a body ResizeObserver) is 0 in Ionic apps.
+  private getViewportHeight(): number {
+    return this.initialViewportHeight || this.windowRef.nativeWindow.innerHeight;
+  }
+
   private getKeyboardOverlap(keyboardHeight: number, element: Element) {
-    if (keyboardHeight <= 0 || !element || !this.initialViewportHeight) return 0;
+    const viewportHeight = this.getViewportHeight();
+    if (keyboardHeight <= 0 || !element || !viewportHeight) return 0;
     const elementDistanceAboveBottomOfScreen = Math.floor(
-      this.initialViewportHeight - element.getBoundingClientRect().bottom
+      viewportHeight - element.getBoundingClientRect().bottom
     );
     return Math.max(keyboardHeight - elementDistanceAboveBottomOfScreen, 0);
   }
@@ -551,20 +558,31 @@ export class ModalWrapperComponent
   }
 
   private setKeyboardOverlap(keyboardHeight: number) {
-    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
-    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
-    let snapFooterToKeyboard = false;
-    const embeddedFooterElement = this.currentFooter;
-    if (embeddedFooterElement) {
-      this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
-      snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
-    }
+    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', this.keyboardVisible);
+    this.liftFooterAboveKeyboard(keyboardHeight);
+    this.reserveContentScrollRoom(keyboardHeight);
+  }
 
-    const contentElement = this.ionContentElement.nativeElement;
-    const contentKeyboardOffset = snapFooterToKeyboard
-      ? keyboardOverlap
-      : this.getKeyboardOverlap(keyboardHeight, contentElement);
-    this.setCssVar(contentElement, '--keyboard-offset', `${contentKeyboardOffset}px`);
+  private liftFooterAboveKeyboard(keyboardHeight: number) {
+    const footer = this.currentFooter;
+    if (!footer) return;
+    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
+    this.setCssVar(footer, '--keyboard-offset', `${keyboardOverlap}px`);
+  }
+
+  private reserveContentScrollRoom(keyboardHeight: number) {
+    const snapFooterToKeyboard =
+      this.currentFooter?.classList.contains('snap-to-keyboard') ?? false;
+
+    const contentKeyboardOverlap = snapFooterToKeyboard
+      ? this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement)
+      : this.getKeyboardOverlap(keyboardHeight, this.ionContentElement.nativeElement);
+
+    this.setCssVar(
+      this.elementRef.nativeElement,
+      '--kirby-keyboard-content-overlap',
+      `${contentKeyboardOverlap}px`
+    );
   }
 
   onHeaderTouchStart(event: TouchEvent) {

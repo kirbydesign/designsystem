@@ -42,7 +42,7 @@ In broad strokes the process is:
 3. Implement a solution
 4. Get the solution reviewed and approved
 
-Once a pull request has been approved it will be automatically merged. 
+Once a pull request has been approved it will be added to the [merge queue](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue) and automatically merged when the required checks pass. 
 
 Actionable checklists for these steps can be found [here](#checklist-i-have-a-component-request). The following highlight some of the steps in the checklists, to explain what they are and why they exist. Our experience is that pull requests with a troublesome and drawn out review process have not followed one or more of these steps. 
 
@@ -112,7 +112,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Create a pull request. If you created a draft PR during implementation you can just mark that as "ready for review".
     - Request that the pull request is code-reviewed.
     - Request that the pull request is [UX reviewed](#ux-review).
-    - When the pull request has been approved it will be merged to `develop` by Team Kirby.
+    - When the pull request has been approved it will be added to the merge queue by Team Kirby and merged to `develop` when the required checks pass.
 5. **Celebrate! 🎉**
 
 ## Checklist: I have an enhancement 

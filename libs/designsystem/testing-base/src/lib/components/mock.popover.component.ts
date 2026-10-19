@@ -1,10 +1,19 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-popover',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -19,11 +28,10 @@ export class MockPopoverComponent {
   @Input() target: HTMLElement | ElementRef<HTMLElement>;
   @Output() willHide = new EventEmitter<void>();
 
-  hide() {
+  show() {
     // NOOP
   }
-
-  show() {
+  hide() {
     // NOOP
   }
 }

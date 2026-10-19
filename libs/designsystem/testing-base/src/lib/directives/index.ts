@@ -18,6 +18,6 @@ export { MockPortalDirective } from './mock.portal.directive';
 export { MockComponentLoaderDirective } from './mock.component-loader.directive';
 export { MockFitHeadingDirective } from './mock.fit-heading.directive';
 export { MockThemeColorDirective } from './mock.theme-color.directive';
-export { MockSlideDirective } from './mock.slide.directive';
+export { MockSlideDirective, MockSlideStretchHeightDirective } from './mock.slide.directive';
 export { MockKeyHandlerDirective } from './mock.key-handler.directive';
 export { MockModalRouterLinkDirective } from './mock.modal-router-link.directive';

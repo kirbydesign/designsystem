@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import {
   SegmentedControlComponent,
@@ -9,6 +16,7 @@ import {
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-segmented-control',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -18,15 +26,15 @@ import {
     },
   ],
 })
-export class MockSegmentedControlComponent {
+export class MockSegmentedControlComponent<TItem extends SegmentItem = SegmentItem> {
   @Input() mode: SegmentedControlMode | `${SegmentedControlMode}`;
-  @Input() items: SegmentItem[];
+  @Input() items: TItem[];
   @Input() selectedIndex: number;
   @Output() selectedIndexChange = new EventEmitter<number>();
-  @Input() value: SegmentItem;
+  @Input() value: NoInfer<TItem>;
   @Input() size: 'sm' | 'md';
   @Input() disableChangeOnSwipe: boolean;
-  @Output() segmentSelect = new EventEmitter();
+  @Output() segmentSelect = new EventEmitter<TItem>();
 }
 
 // #endregion

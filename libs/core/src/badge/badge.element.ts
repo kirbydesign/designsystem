@@ -22,7 +22,7 @@ export class KirbyBadgeElement extends KirbyElement {
   @property({ reflect: true })
   size: BadgeSize = 'md';
 
-  private _text: string;
+  private _text = '';
   get text(): string {
     return this._text;
   }
