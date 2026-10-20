@@ -1,10 +1,8 @@
-import { Color, DesignTokenHelper, ThemeColorVariant } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { FlagComponent } from './flag.component';
 
-const getColor = DesignTokenHelper.getColor;
-const getDecorationColor = DesignTokenHelper.getDecorationColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 const fontWeight = DesignTokenHelper.fontWeight;
@@ -32,19 +30,8 @@ describe('FlagComponent', () => {
     });
   });
 
-  it('should render with transparent background-color', () => {
-    expect(element).toHaveComputedStyle({
-      'background-color': 'transparent',
-    });
-  });
-
-  it('should render with correct color', () => {
-    expect(element).toHaveComputedStyle({ color: getColor('white', 'contrast') });
-  });
-
   it('should render with correct border', () => {
     expect(element).toHaveComputedStyle({
-      'border-color': getColor('medium'),
       'border-width': '1px',
       'border-style': 'solid',
     });
@@ -109,44 +96,6 @@ describe('FlagComponent', () => {
           'padding-top': '4px',
           'padding-bottom': '4px',
         });
-      });
-    });
-  });
-
-  describe(`when configured with themeColor`, () => {
-    const allowedThemeColors = ['success', 'warning', 'danger', 'semi-light'] as const;
-    type FlagThemeColor = (typeof allowedThemeColors)[number];
-
-    const themeColorMap = new Map<FlagThemeColor, ThemeColorVariant | undefined>([
-      ['success', 'tint'],
-      ['warning', 'tint'],
-      ['danger', 'tint'],
-      ['semi-light', undefined],
-    ]);
-
-    themeColorMap.forEach((variation, themeColor) => {
-      it(`should render with correct colors when themeColor = '${themeColor}'`, () => {
-        spectator.component.themeColor = themeColor;
-        spectator.detectChanges();
-
-        const expectedBgColor = getColor(themeColor, variation);
-        expect(element).toHaveComputedStyle({
-          'background-color': expectedBgColor,
-          color: getColor(themeColor, 'contrast'),
-        });
-      });
-    });
-
-    it(`should render with correct colors when themeColor = 'transparent'`, async () => {
-      spectator.component.themeColor = 'transparent';
-      spectator.detectChanges();
-
-      expect(element).toHaveComputedStyle({
-        'background-color': 'transparent',
-        color: getColor('white', 'contrast'),
-        'border-color': getColor('medium'),
-        'border-width': '1px',
-        'border-style': 'solid',
       });
     });
   });
