@@ -6,9 +6,9 @@
 
 ion-tabs {
   ion-tab-bar {
-    --background: rgba(var(--kirby-white-rgb), 0.94);
-    --border: 1px solid var(--kirby-light);
-    --color: var(--kirby-black);
+    --background: var(--kirby-color-fill-raised);
+    --border: 1px solid var(--kirby-color-border-raised-quiet);
+    --color: var(--kirby-color-content-raised);
 
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
