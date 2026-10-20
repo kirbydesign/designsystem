@@ -190,8 +190,16 @@ ion-radio {
       --color: var(--kirby-color-border-raised-danger);
       --color-checked: var(--kirby-color-border-raised-danger);
 
+      &::part(container) {
+        box-shadow: var(--kirby-error-ring-combined-inset);
+      }
+
       &:focus-visible {
         @include focus-border-colors;
+      }
+
+      &:focus-visible::part(container) {
+        box-shadow: var(--kirby-focus-ring-sm-combined-inset);
       }
     }
   }
