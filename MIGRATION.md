@@ -2,6 +2,16 @@
 
 This document provides information about breaking changes and their migrations for major versions of Kirby Design System.
 
+## Version 12.0.0
+
+- [Platform Support](#platform-support-v12)
+
+Version 12 introduces a single breaking change, as support for non-LTS Angular versions is removed.
+
+<h3 id="platform-support-v12">Platform Support</h3>
+
+Kirby removes support for Angular 18, 19 and 20, and now expects Angular 21 or later to be installed as a peer dependency.
+
 ## Version 11.0.0
 
 - [Global Setup](#global-setup-v11)
