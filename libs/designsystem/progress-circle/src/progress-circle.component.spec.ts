@@ -7,7 +7,6 @@ import {
 } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { DesignTokenHelper, ThemeColor } from '@kirbydesign/core';
 
 import { ProgressCircleComponent } from './progress-circle.component';
 
@@ -291,7 +290,6 @@ describe('ProgressCircleComponent', () => {
   });
 
   describe('with themeColor', () => {
-    const getColor = DesignTokenHelper.getColor;
     let spectator: Spectator<ProgressCircleComponent>;
 
     const createHost = createComponentFactory({
@@ -302,47 +300,20 @@ describe('ProgressCircleComponent', () => {
       spectator = createHost({
         props: { value: 50 },
       });
-      //Ensure css transitions run immediately:
-      spectator.query<SVGCircleElement>('circle.progress').style.transitionDuration = '0ms';
-      spectator.detectComponentChanges();
     });
 
-    it('should render progress stroke with themeColor `success`, when themeColor is not set', () => {
-      expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor('success', 'shade'),
-      });
+    it('should pass themeColor `success` to the ring, when themeColor is not set', () => {
+      expect(spectator.query('kirby-progress-circle-ring')).toHaveClass('success');
     });
 
-    it('should render progress stroke with themeColor when themeColor is set to `success`', () => {
-      const themeColor: ThemeColor = 'success';
-      spectator.setInput('themeColor', themeColor);
-      spectator.detectChanges();
+    const themeColors: ProgressCircleComponent['themeColor'][] = ['success', 'warning', 'danger'];
 
-      expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor('success', 'shade'),
-      });
-    });
+    themeColors.forEach((themeColor) => {
+      it(`should pass themeColor \`${themeColor}\` to the ring`, () => {
+        spectator.setInput('themeColor', themeColor);
+        spectator.detectChanges();
 
-    it('should render progress stroke with themeColor when themeColor is set to `warning`', () => {
-      const themeColor: ThemeColor = 'warning';
-      spectator.setInput('themeColor', themeColor);
-      spectator.detectChanges();
-
-      const color = getColor('warning', 'shade');
-      console.log('color', color);
-
-      expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor('warning', 'shade'),
-      });
-    });
-
-    it('should render progress stroke with themeColor when themeColor is set to `danger`', () => {
-      const themeColor: ThemeColor = 'danger';
-      spectator.setInput('themeColor', themeColor);
-      spectator.detectChanges();
-
-      expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor(themeColor),
+        expect(spectator.query('kirby-progress-circle-ring')).toHaveClass(themeColor);
       });
     });
   });
