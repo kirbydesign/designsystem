@@ -25,16 +25,11 @@ const meta: Meta<SkeletonLoaderComponent> = {
     }),
   ],
   args: {
-    theme: 'light',
     shape: 'rectangle',
   },
   argTypes: {
-    theme: {
-      control: {
-        type: 'select',
-        options: ['light', 'dark'],
-      },
-    },
+    // Deprecated, and no longer has any effect
+    theme: { table: { disable: true } },
   },
 };
 export default meta;
@@ -68,13 +63,12 @@ export const Shape: Story = {
     </div>`,
   }),
   argTypes: {
-    theme: { control: { disable: true } },
     shape: { control: { disable: true } },
   },
 };
 
 /**
- * A skeleton loader on a dark background. In this case theme selection happens automatically based on `themeColor` on kirby-card.
+ * A skeleton loader on a dark background. The dark card is a brand surface, which the skeleton loader follows automatically.
  */
 export const DarkCard: Story = {
   render: (args) => ({
@@ -101,7 +95,6 @@ export const DarkCard: Story = {
     </kirby-card>`,
   }),
   argTypes: {
-    theme: { control: { disable: true } },
     shape: { control: { disable: true } },
   },
 };
@@ -134,7 +127,6 @@ export const LightCard: Story = {
     </kirby-card>`,
   }),
   argTypes: {
-    theme: { control: { disable: true } },
     shape: { control: { disable: true } },
   },
 };
@@ -154,7 +146,6 @@ export const Surfaces: Story = {
     '360px'
   ),
   argTypes: {
-    theme: { control: { disable: true } },
     shape: { control: { disable: true } },
   },
 };
