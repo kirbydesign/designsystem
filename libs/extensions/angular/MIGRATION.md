@@ -19,6 +19,16 @@ Previously, the combobox reused the design system's `kirbyListItemTemplate` dire
 
 Before:
 
+```ts
+import { ComboboxModule } from '@kirbydesign/extensions-angular/combobox';
+
+@Component({
+  standalone: true,
+  imports: [ComboboxModule],
+})
+export class MyComponent {}
+```
+
 ```html
 <kirby-x-combobox [items]="items">
   <kirby-item *kirbyListItemTemplate="let item; let selected = selected; let focused = focused">
