@@ -18,39 +18,36 @@
   display: block;
 }
 
-:host-context(.kirby-color-brightness-dark) {
-  --kirby-x-spot-illustration-background-color: var(--kirby-white-overlay);
-  --kirby-x-spot-illustration-outline-color: var(--kirby-white);
-  --kirby-x-spot-illustration-highlight-color: var(--kirby-primary);
-}
-
-:host-context(.kirby-color-brightness-white) {
-  --kirby-x-spot-illustration-background-color: var(--kirby-dark-overlay);
-  --kirby-x-spot-illustration-outline-color: var(--kirby-black);
-  --kirby-x-spot-illustration-highlight-color: var(--kirby-primary);
-}
-
 ion-icon::part(background) {
-  fill: var(--kirby-x-spot-illustration-background-color, var(--kirby-dark-overlay));
+  fill: var(
+    --kirby-x-spot-illustration-background-color,
+    var(--kirby-spot-illustration-color-fill-raised)
+  );
 }
 
 ion-icon::part(outline) {
-  fill: var(--kirby-x-spot-illustration-outline-color, var(--kirby-black));
+  fill: var(
+    --kirby-x-spot-illustration-outline-color,
+    var(--kirby-spot-illustration-color-content-base)
+  );
 }
 
 ion-icon::part(highlight) {
-  fill: var(--kirby-x-spot-illustration-highlight-color, var(--kirby-primary));
+  fill: var(
+    --kirby-x-spot-illustration-highlight-color,
+    var(--kirby-spot-illustration-color-fill-brand)
+  );
 }
 
 /* The following 3 shouldn't be overridden */
 ion-icon::part(danger) {
-  fill: var(--kirby-danger);
+  fill: var(--kirby-spot-illustration-color-fill-danger);
 }
 
 ion-icon::part(warning) {
-  fill: var(--kirby-warning);
+  fill: var(--kirby-spot-illustration-color-fill-warning);
 }
 
 ion-icon::part(success) {
-  fill: var(--kirby-success);
+  fill: var(--kirby-spot-illustration-color-fill-success);
 }
