@@ -5,6 +5,9 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
+// eslint-disable-next-line no-restricted-imports
+import { renderOnSurfaces } from '../../../../designsystem/.storybook/story-helpers';
+
 /**
  * A skeleton loader is a visual indicator that is used to render placeholder content and mimic the full content shown when loaded.
  *
@@ -130,6 +133,26 @@ export const LightCard: Story = {
       </kirby-item>
     </kirby-card>`,
   }),
+  argTypes: {
+    theme: { control: { disable: true } },
+    shape: { control: { disable: true } },
+  },
+};
+
+export const Surfaces: Story = {
+  // Visual regression story, so it's left out of the docs page
+  tags: ['!autodocs', 'dev'],
+  render: renderOnSurfaces(
+    `
+    <p class="kirby-text-normal-bold">{{ surface }}</p>
+    <div class="row">
+      <kirby-x-skeleton-loader style="width: 100px;" shape="rectangle"></kirby-x-skeleton-loader>
+      <kirby-x-skeleton-loader style="width: 100px; height: var(--kirby-spacing-l);" shape="pill"></kirby-x-skeleton-loader>
+      <kirby-x-skeleton-loader style="height: var(--kirby-spacing-xxxl); width: var(--kirby-spacing-xxxl);" shape="circle"></kirby-x-skeleton-loader>
+    </div>
+  `,
+    '360px'
+  ),
   argTypes: {
     theme: { control: { disable: true } },
     shape: { control: { disable: true } },
