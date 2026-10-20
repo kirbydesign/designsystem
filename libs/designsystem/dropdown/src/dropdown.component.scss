@@ -43,6 +43,15 @@ $min-screen-width: 375px;
     > button {
       --kirby-button-border-color: var(--kirby-color-border-raised-danger);
     }
+
+    // The open dropdown keeps its elevation instead of the error ring
+    &:not(.is-open) > button {
+      box-shadow: var(--kirby-error-ring-combined-inset);
+
+      &:focus-visible {
+        box-shadow: var(--kirby-focus-ring-md-combined-inset);
+      }
+    }
   }
 
   > button {
