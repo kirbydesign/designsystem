@@ -3,7 +3,7 @@
 
 $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
-$border-color-selected: var(--kirby-dark);
+$border-color-selected: var(--kirby-color-border-base-loud);
 $maximum-font-size: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold});
 
 @mixin button-reset {
@@ -33,7 +33,7 @@ $maximum-font-size: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold
   button[role='tab'] {
     @include button-reset;
 
-    color: var(--kirby-black);
+    color: var(--kirby-color-content-base);
     box-sizing: border-box; // Ensure border is not added to button height
     padding: var(--kirby-spacing-s);
     font-size: min(var(--kirby-font-size-n), $maximum-font-size);
