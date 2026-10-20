@@ -59,12 +59,36 @@ export const gridStyles = (columns: number, columnWidth: string) => `
   }
 `;
 
+const rowStyles = `
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--kirby-spacing-s);
+    margin-block-end: var(--kirby-spacing-s);
+  }
+`;
+
 /**
- * Renders `content` inside a card for each surface. `surface` is available in the content template.
+ * Builds the ids `${prefix}-${surface}-${variantId}` used by stories rendered with `renderOnSurfaces`.
+ * Pass them to `pseudoStatesFor`, which appends `-${state}`.
+ */
+export const idsOnSurfaces = (prefix: string, variantIds: readonly string[]) =>
+  surfaces.flatMap((surface) => variantIds.map((id) => `${prefix}-${surface}-${id}`));
+
+/**
+ * Renders `content` inside a card for each surface. `surface` is available in the content template,
+ * and elements can be laid out side by side with `class="row"`.
+ * Pass `stacked` to place the cards below each other instead of side by side.
  * Requires `CardComponent` to be imported by the story.
  */
 export const renderOnSurfaces =
-  (content: string, columnWidth = '320px', props: Record<string, unknown> = {}) =>
+  (
+    content: string,
+    columnWidth = '320px',
+    props: Record<string, unknown> = {},
+    { stacked = false }: { stacked?: boolean } = {}
+  ) =>
   () => ({
     props: { ...props, surfaces },
     template: `
@@ -76,5 +100,5 @@ export const renderOnSurfaces =
         }
       </div>
     `,
-    styles: [gridStyles(surfaces.length, columnWidth)],
+    styles: [gridStyles(stacked ? 1 : surfaces.length, columnWidth), rowStyles],
   });
