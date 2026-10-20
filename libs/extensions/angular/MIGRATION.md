@@ -15,7 +15,7 @@ Kirby Extensions is versioned and released independently from `@kirbydesign/desi
 
 The custom item template directive for comboboxes is now explicitly namespaced as `*kirbyXComboboxItemTemplate` instead of the generic `*kirbyListItemTemplate`. This is a breaking change for applications that render custom item templates inside `<kirby-x-combobox>`.
 
-The old selector was too generic and could collide with list item templates from unrelated components. The new directive is a standalone Angular directive and must be imported directly where it is used.
+Previously, the combobox reused the design system's `kirbyListItemTemplate` directive from the list component, creating an unnecessary dependency on the design system list. The combobox now has its own `kirbyXComboboxItemTemplate` directive.
 
 Before:
 
