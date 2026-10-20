@@ -1,4 +1,3 @@
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
@@ -8,8 +7,6 @@ import {
   ItemSwipeActionType,
 } from '@kirbydesign/designsystem/item-sliding';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-
-const { getColor } = DesignTokenHelper;
 
 describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
@@ -116,13 +113,9 @@ describe('ItemSlidingComponent', () => {
       });
     });
 
-    const swipeActionTypesScenarios: { [key in ItemSwipeActionType]: string } = {
-      warning: getColor('warning').hex,
-      success: getColor('success').hex,
-      danger: getColor('danger').hex,
-    };
+    const swipeActionTypes: ItemSwipeActionType[] = ['success', 'warning', 'danger'];
 
-    Object.entries(swipeActionTypesScenarios).forEach(([type, color]) => {
+    swipeActionTypes.forEach((type) => {
       describe(`when a swipeAction has type ${type}`, () => {
         let swipeActionWithType: HTMLIonItemOptionElement;
         beforeEach(() => {
@@ -131,8 +124,8 @@ describe('ItemSlidingComponent', () => {
           expect(swipeActionWithType).not.toBeUndefined();
         });
 
-        it('should render with correct background color', () => {
-          expect(swipeActionWithType).toHaveComputedStyle({ 'background-color': color });
+        it('should render with the type as css class', () => {
+          expect(swipeActionWithType).toHaveClass(type);
         });
       });
     });
