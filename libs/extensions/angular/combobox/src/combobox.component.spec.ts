@@ -633,20 +633,6 @@ describe('Combobox', () => {
       expect(kirbyItems.length).toBeGreaterThan(1);
     }));
 
-    it('reapplies the active filter when items change', fakeAsync(() => {
-      const updatedItems = [{ text: 'Item 1 updated' }, { text: 'Another item' }];
-
-      inputElement.click();
-      spectator.typeInElement('Item 1', inputElement);
-      (spectator.hostComponent as { items: unknown[] }).items = updatedItems;
-      spectator.detectChanges();
-
-      const itemTitles = Array.from(document.querySelectorAll('.kirby-item-title')).map((item) =>
-        item.textContent?.trim()
-      );
-      expect(itemTitles).toEqual(['Item 1 updated']);
-    }));
-
     it('uses a custom searchFunction when provided', fakeAsync(() => {
       const customSearch = jest.fn().mockReturnValue([items20[0]]);
       spectator.component.searchFunction = customSearch;

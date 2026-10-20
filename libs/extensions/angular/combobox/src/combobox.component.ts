@@ -262,7 +262,7 @@ export class ComboboxComponent
   @Input()
   public set items(value: unknown[]) {
     this._items = value;
-    this.updateSearchResults(this.textInput?.nativeElement?.value ?? '');
+    this.searchItems = this._items;
   }
 
   private _selectedItem: unknown = undefined;
