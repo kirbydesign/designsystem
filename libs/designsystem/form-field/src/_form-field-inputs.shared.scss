@@ -35,6 +35,7 @@ $form-field-label-height: 24px;
 :host {
   &.error {
     border-color: var(--kirby-color-border-raised-danger);
+    box-shadow: var(--kirby-error-ring-combined-inset);
   }
 
   // Order matters: the error border wins over the hover and active borders,
@@ -56,6 +57,7 @@ $form-field-label-height: 24px;
 
     &.error {
       border-color: var(--kirby-color-border-raised-danger);
+      box-shadow: var(--kirby-error-ring-combined-inset);
     }
 
     &:focus-visible {
