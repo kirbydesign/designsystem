@@ -47,6 +47,7 @@
 .kirby-surface-raised,
 .kirby-surface-brand {
   @include design-tokens.focus-ring;
+  @include design-tokens.error-ring;
 }
 
 /*
