@@ -349,6 +349,7 @@ export class PageComponent
   private isObservingTitle = false;
   private isObservingActions = false;
   private isDocTitleSet = false;
+  private observedToolbarButtons = new Set<HTMLIonButtonsElement>();
 
   private unobserveTitleMutation: UnobserveFn;
 
@@ -487,6 +488,11 @@ export class PageComponent
 
     this.interceptBackButtonClicksSetup();
     this.initializeStickyIntersectionObserver();
+    this.observeToolbarButtons();
+    this.ionToolbarButtonsElement.changes.pipe(takeUntil(this.ngOnDestroy$)).subscribe(() => {
+      this.observeToolbarButtons();
+      this.setActionButtonsWidth();
+    });
     this.setActionButtonsWidth();
   }
 
@@ -507,6 +513,8 @@ export class PageComponent
     this.stickyActionsIntersectionObserver?.disconnect();
     this.stickyContentIntersectionObserver?.disconnect();
     this.unobserveTitleMutation?.();
+    this.observedToolbarButtons.forEach((buttons) => this.resizeObserverService.unobserve(buttons));
+    this.observedToolbarButtons.clear();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -859,6 +867,26 @@ export class PageComponent
           RendererStyleFlags2.DashCase
         );
       });
+    });
+  }
+
+  private observeToolbarButtons() {
+    const currentButtons = new Set(
+      this.ionToolbarButtonsElement.map((buttons) => buttons.nativeElement)
+    );
+
+    this.observedToolbarButtons.forEach((buttons) => {
+      if (!currentButtons.has(buttons)) {
+        this.resizeObserverService.unobserve(buttons);
+        this.observedToolbarButtons.delete(buttons);
+      }
+    });
+
+    currentButtons.forEach((buttons) => {
+      if (!this.observedToolbarButtons.has(buttons)) {
+        this.observedToolbarButtons.add(buttons);
+        this.resizeObserverService.observe(buttons, () => this.setActionButtonsWidth());
+      }
     });
   }
 
