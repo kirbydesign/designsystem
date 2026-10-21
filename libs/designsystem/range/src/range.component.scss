@@ -13,15 +13,27 @@ $knob-shadow:
 }
 
 ion-range {
-  &:focus-visible::part(knob) {
+  // Ionic adds `hover`, `pressed`, `activated` and `focused` to the shadow part list of
+  // the knob that is currently being interacted with. Matching on those in addition to
+  // `knob` scopes the interaction states to a single knob, so a range with dual knobs
+  // doesn't highlight both knobs at once.
+  &:focus-visible::part(knob focused) {
     transition: interaction-state.transition();
     box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
   }
-  @include interaction-state.apply-hover {
-    --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
-  }
-  @include interaction-state.apply-active {
-    --knob-background: #{interaction-state.get-state-color('white', 's')};
+
+  &:not(.range-disabled) {
+    // Applies `cursor: pointer` and the shared interaction-state transition to the host.
+    @include interaction-state.apply-hover;
+
+    &::part(knob hover) {
+      --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
+    }
+
+    &::part(knob pressed),
+    &::part(knob activated) {
+      --knob-background: #{interaction-state.get-state-color('white', 's')};
+    }
   }
 
   // Wrap declarations to avoid mixing with nested rules.
