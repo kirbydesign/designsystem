@@ -13,18 +13,16 @@ Kirby Extensions is versioned and released independently from `@kirbydesign/desi
 
 <h4 id="combobox-v6">Combobox</h4>
 
-The custom item template directive for comboboxes is now explicitly namespaced as `*kirbyXComboboxItemTemplate` instead of the generic `*kirbyListItemTemplate`. This is a breaking change for applications that render custom item templates inside `<kirby-x-combobox>`.
-
 Previously, the combobox reused the design system's `kirbyListItemTemplate` directive from the list component, creating an unnecessary dependency on the design system list. The combobox now has its own `kirbyXComboboxItemTemplate` directive.
 
 Before:
 
 ```ts
 import { ComboboxModule } from '@kirbydesign/extensions-angular/combobox';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 
 @Component({
-  standalone: true,
-  imports: [ComboboxModule],
+  imports: [ComboboxModule, ListItemTemplateDirective],
 })
 export class MyComponent {}
 ```
@@ -48,7 +46,6 @@ import {
 } from '@kirbydesign/extensions-angular/combobox';
 
 @Component({
-  standalone: true,
   imports: [ComboboxComponent, ComboboxItemTemplateDirective],
 })
 export class MyComponent {}
