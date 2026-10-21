@@ -5,19 +5,12 @@
   position: relative;
   overflow: visible;
 
-  &.selected {
-    color: var(--menuitem-selected-color, var(--kirby-primary-contrast));
-  }
-
   &:not(.selected):hover a {
-    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+    background: var(--menuitem-hover-background-color, var(--kirby-color-fill-base-hover));
   }
 
   &:not(.selected):active a {
-    background: var(
-      --menuitem-active-background-color,
-      var(--kirby-inputs-background-color-active)
-    );
+    background: var(--menuitem-active-background-color, var(--kirby-color-fill-base-active));
   }
 }
 
@@ -25,7 +18,8 @@
 .selected:hover,
 .selected:active,
 .selected:focus-visible {
-  background: var(--menuitem-selected-background-color, var(--kirby-primary));
+  background: var(--menuitem-selected-background-color, var(--kirby-color-fill-brand-loud));
+  color: var(--menuitem-selected-color, var(--kirby-color-content-brand-loud));
   font-weight: var(--kirby-font-weight-bold);
 }
 
