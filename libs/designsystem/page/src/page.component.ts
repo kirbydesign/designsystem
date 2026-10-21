@@ -513,10 +513,7 @@ export class PageComponent
     this.stickyActionsIntersectionObserver?.disconnect();
     this.stickyContentIntersectionObserver?.disconnect();
     this.unobserveTitleMutation?.();
-    this.observedToolbarButtons.forEach((ionButtonsElement) =>
-      this.resizeObserverService.unobserve(ionButtonsElement)
-    );
-    this.observedToolbarButtons.clear();
+    this.unobserveToolbarButtons();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -873,25 +870,19 @@ export class PageComponent
   }
 
   private observeToolbarButtons() {
-    const currentIonButtonsElements = new Set(
-      this.ionToolbarButtonsElement.map(
-        (ionButtonsElementRef) => ionButtonsElementRef.nativeElement
-      )
+    this.unobserveToolbarButtons();
+
+    this.ionToolbarButtonsElement.forEach(({ nativeElement: ionButtonsElement }) => {
+      this.observedToolbarButtons.add(ionButtonsElement);
+      this.resizeObserverService.observe(ionButtonsElement, () => this.setActionButtonsWidth());
+    });
+  }
+
+  private unobserveToolbarButtons() {
+    this.observedToolbarButtons.forEach((ionButtonsElement) =>
+      this.resizeObserverService.unobserve(ionButtonsElement)
     );
-
-    this.observedToolbarButtons.forEach((ionButtonsElement) => {
-      if (!currentIonButtonsElements.has(ionButtonsElement)) {
-        this.resizeObserverService.unobserve(ionButtonsElement);
-        this.observedToolbarButtons.delete(ionButtonsElement);
-      }
-    });
-
-    currentIonButtonsElements.forEach((ionButtonsElement) => {
-      if (!this.observedToolbarButtons.has(ionButtonsElement)) {
-        this.observedToolbarButtons.add(ionButtonsElement);
-        this.resizeObserverService.observe(ionButtonsElement, () => this.setActionButtonsWidth());
-      }
-    });
+    this.observedToolbarButtons.clear();
   }
 
   private initializeContent() {
