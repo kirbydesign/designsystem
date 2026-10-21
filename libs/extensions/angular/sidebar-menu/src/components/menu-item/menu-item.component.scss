@@ -23,14 +23,11 @@
   }
 
   &:hover {
-    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+    background: var(--menuitem-hover-background-color, var(--kirby-color-fill-base-hover));
   }
 
   &:active {
-    background: var(
-      --menuitem-active-background-color,
-      var(--kirby-inputs-background-color-active)
-    );
+    background: var(--menuitem-active-background-color, var(--kirby-color-fill-base-active));
   }
 
   &:focus-visible {
@@ -51,10 +48,7 @@
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    background: var(
-      --menuitem-active-background-color,
-      var(--kirby-inputs-background-color-active)
-    );
+    background: var(--menuitem-active-background-color, var(--kirby-color-fill-base-active));
   }
 
   &.selected::before {
@@ -62,7 +56,7 @@
   }
 
   &:not(.selected) {
-    background: var(--sidebar-background-color, var(--kirby-tertiary));
+    background: var(--sidebar-background-color, var(--kirby-color-fill-base));
   }
 }
 
