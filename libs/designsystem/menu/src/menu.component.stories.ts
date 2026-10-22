@@ -81,5 +81,24 @@ export const MenuOpenedWithScrollableList: Story = {
     const menuButton = within(canvasElement).getByRole('button', { name: 'More' });
     await userEvent.click(menuButton);
     await waitFor(() => expect(menuButton).toHaveAttribute('aria-expanded', 'true'));
+
+    const menu = await within(canvasElement.ownerDocument.body).findByRole('menu');
+    await waitFor(() =>
+      expect(menu.style.getPropertyValue('--kirby-floating-available-height')).not.toBe('')
+    );
+
+    const viewport = canvasElement.ownerDocument.defaultView;
+    const viewportGap = parseFloat(
+      viewport
+        .getComputedStyle(viewport.document.documentElement)
+        .getPropertyValue('--kirby-spacing-s')
+    );
+    const menuBounds = menu.getBoundingClientRect();
+    const triggerBounds = menuButton.getBoundingClientRect();
+
+    expect(menuBounds.bottom).toBeLessThanOrEqual(triggerBounds.top);
+    expect(menuBounds.top).toBeGreaterThanOrEqual(viewportGap);
+    expect(menuBounds.bottom).toBeLessThanOrEqual(viewport.innerHeight - viewportGap);
+    expect(menu.scrollHeight).toBeGreaterThan(menu.clientHeight);
   },
 };
