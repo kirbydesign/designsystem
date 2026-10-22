@@ -84,14 +84,22 @@ const conditionalHeaderActionsStory = ({
 
   return {
     parameters: {
+      viewport: {
+        options: {
+          compact: {
+            name: 'Compact mobile',
+            styles: { width: '375px', height: '480px' },
+          },
+        },
+      },
       chromatic: {
         modes: {
-          mobile: responsiveModes.mobile,
+          mobile: { viewport: { width: 375, height: 480 } },
         },
       },
     },
     globals: {
-      viewport: { value: 'small', isRotated: false },
+      viewport: { value: 'compact', isRotated: false },
     },
     render: () => {
       showActions = signal(false);
@@ -106,7 +114,7 @@ const conditionalHeaderActionsStory = ({
         ${headerActions}
       </kirby-header>
       <kirby-page-content>
-        <div style="height: 1200px">Scroll to show the toolbar title</div>
+        <div style="height: 100vh">Scroll to show the toolbar title</div>
       </kirby-page-content>
     </kirby-page>
     </kirby-app>`,
