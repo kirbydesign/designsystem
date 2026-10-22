@@ -24,7 +24,6 @@
   @include component-themes.apply-light-theme;
 
   --kirby-border-radius-circle: 50%;
-  --kirby-font-family-brand: 'Roboto'; // Temp until defined in Figma
   --kirby-font-family: var(--kirby-font-family-brand), var(--kirby-font-family-fallback);
   --kirby-page-max-width: 1366px;
   --kirby-statusbar-padding: var(--ion-statusbar-padding);
