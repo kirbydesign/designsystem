@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -27,6 +28,7 @@ export enum HorizontalDirection {
     <div #wrapper class="wrapper"><ng-content></ng-content></div>
   `,
   styleUrls: ['./popover.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class PopoverComponent implements AfterViewInit, OnDestroy {
   // removeEventListener same instance of event handler & options
@@ -129,7 +131,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     this.disposeTouchMoveListener?.();
   }
 
-  show() {
+  public show() {
     this.renderer.addClass(this.elementRef.nativeElement, 'is-opening');
     this.renderer.appendChild(this.document.body, this.elementRef.nativeElement);
 
@@ -145,7 +147,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  hide() {
+  public hide() {
     if (!this.isShowing) return;
 
     if (this.openingFrameId !== null) {

@@ -142,8 +142,7 @@ describe('ModalNavigationService', () => {
           children: [
             {
               path: 'modal-lazy',
-              loadChildren: () =>
-                import('./modal-navigation.service.spec').then((m) => m.LazyLoadedModule),
+              loadChildren: () => Promise.resolve(LazyLoadedModule),
             },
             {
               path: 'other-root-modal-path',

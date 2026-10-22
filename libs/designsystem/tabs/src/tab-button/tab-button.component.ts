@@ -1,4 +1,12 @@
-import { Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+} from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { IonTabButton } from '@ionic/angular';
@@ -9,6 +17,7 @@ import { selectedTabClickEvent } from './tab-button.events';
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss'],
   imports: [IonTabButton],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class TabButtonComponent {
   @Input() tab: string;

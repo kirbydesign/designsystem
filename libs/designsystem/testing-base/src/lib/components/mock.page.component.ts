@@ -1,4 +1,12 @@
-import { Component, Directive, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import {
   PageActionsComponent,
@@ -17,6 +25,7 @@ import {
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+type MaxWidth = 'default' | 'lg' | 'xl' | 'full';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Directive({
@@ -91,6 +100,7 @@ export class MockPageStickyContentDirective {}
 
 @Component({
   selector: 'kirby-page-progress',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -104,6 +114,7 @@ export class MockPageProgressComponent {}
 
 @Component({
   selector: 'kirby-page-title',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -117,6 +128,7 @@ export class MockPageTitleComponent {}
 
 @Component({
   selector: 'kirby-page-content',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -130,6 +142,7 @@ export class MockPageContentComponent {}
 
 @Component({
   selector: 'kirby-page-actions',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -143,6 +156,7 @@ export class MockPageActionsComponent {}
 
 @Component({
   selector: 'kirby-page',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -160,12 +174,14 @@ export class MockPageComponent {
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
-  @Input() maxWidth: 'default' | 'lg' | 'xl' | 'full';
+  @Input() hasInteractiveTitle: boolean;
+  @Input() maxWidth: MaxWidth;
   @Input() tabBarBottomHidden: boolean;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
+  @Output() toolbarTitleClick = new EventEmitter<PointerEvent>();
 }
 
 // #endregion

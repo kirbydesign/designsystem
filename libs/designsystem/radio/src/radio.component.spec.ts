@@ -183,9 +183,12 @@ describe('RadioComponent', () => {
 
         it('should have correct icon styling', async () => {
           // Wait for background-color transition to complete (transition-property includes background-color)
+          // Angular's Karma builder uses esbuild, which wraps RGB custom properties across lines;
+          // computed background colors are single-line, so normalize the token before comparing.
           await TestHelper.whenTrue(
             () =>
-              window.getComputedStyle(radioIcon).backgroundColor === getColor('semi-light').value
+              window.getComputedStyle(radioIcon).backgroundColor ===
+              getColor('semi-light').value?.replace(/\s+/g, ' ')
           );
           expect(ionRadioElement).toHaveComputedStyle({
             opacity: '1',

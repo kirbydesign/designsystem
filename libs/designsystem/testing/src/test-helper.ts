@@ -69,7 +69,8 @@ export class TestHelper {
   ): Promise<void> {
     if (pollFunc() === true) return Promise.resolve();
     return new Promise<void>((resolve, reject) => {
-      let timeoutId, intervalId;
+      let timeoutId: ReturnType<typeof setTimeout>;
+      let intervalId: ReturnType<typeof setInterval>;
       const pollState = () => {
         const result = pollFunc();
         if (result === true) {
@@ -115,8 +116,8 @@ export class TestHelper {
           query.push(`(max-height: ${size.height})`);
         }
         console.log(`Set test window size to: ${JSON.stringify(size)}`);
-        (window.frameElement as HTMLIFrameElement).style.width = size.width;
-        (window.frameElement as HTMLIFrameElement).style.height = size.height;
+        (window.frameElement as HTMLIFrameElement).style.width = size.width ?? '';
+        (window.frameElement as HTMLIFrameElement).style.height = size.height ?? '';
         const mediaQuery = window.matchMedia(query.join(' and '));
         if (mediaQuery.matches) {
           resolve();
@@ -141,8 +142,8 @@ export class TestHelper {
       return;
     }
     console.log('Resetting test window width');
-    (window.frameElement as HTMLIFrameElement).style.width = null;
-    (window.frameElement as HTMLIFrameElement).style.height = null;
+    (window.frameElement as HTMLIFrameElement).style.width = '';
+    (window.frameElement as HTMLIFrameElement).style.height = '';
   }
 
   public static scrollMainWindowToTop() {

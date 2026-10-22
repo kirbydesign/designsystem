@@ -130,6 +130,43 @@ describe('AppComponent', () => {
 For unit test performance reasons it's highly recommended to utilize these modules, since they provide a template-less implementation of the Kirby Components, but still translude content through `<ng-content></ng-content>` and provide `@Input` -decorated properties and `@Output` -decorated `EventEmitter` s, without
 having to reflow the DOM, execute component logic etc.
 
+#### Standalone components
+
+Standalone components compile their templates against their own `imports`, so importing `KirbyTestingModule` in the test is not enough: the real Kirby components would still be rendered. Replace the Kirby imports of the standalone component under test with mocks using `overrideKirbyImports`:
+
+```ts
+import {
+  KirbyTestingModule,
+  overrideKirbyImports,
+} from '@kirbydesign/designsystem/testing-jasmine';
+
+import { AccountOverviewComponent } from './account-overview.component';
+
+describe('AccountOverviewComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [KirbyTestingModule, AccountOverviewComponent],
+    });
+    overrideKirbyImports(AccountOverviewComponent);
+  });
+
+  ...
+
+});
+```
+
+`overrideKirbyImports` swaps imported Kirby components, directives and modules (including `KirbyModule`) for their mocks. `KirbyTestingModule` is still needed for mocks of Kirby services such as `ModalController` and `ToastController`. `overrideKirbyImports` must be called before `TestBed.createComponent()`, and only affects the components passed to it. Child standalone components that import Kirby must be passed as well, e.g. if `AccountOverviewComponent` renders an `<app-account-list>` and an `<app-transaction-list>`:
+
+```ts
+overrideKirbyImports(AccountOverviewComponent, AccountListComponent, TransactionListComponent);
+```
+
+If you need the override object itself, for instance for `TestBed.overrideComponent` or Spectator's `overrideComponents` option, use `kirbyTestingOverride`:
+
+```ts
+TestBed.overrideComponent(AccountOverviewComponent, kirbyTestingOverride);
+```
+
 ### Icons
 
 Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json` :

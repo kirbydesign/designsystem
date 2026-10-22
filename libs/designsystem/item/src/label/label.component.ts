@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { IonLabel } from '@ionic/angular';
 
 @Component({
@@ -6,6 +6,7 @@ import { IonLabel } from '@ionic/angular';
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss'],
   imports: [IonLabel],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class LabelComponent {
   @Input()

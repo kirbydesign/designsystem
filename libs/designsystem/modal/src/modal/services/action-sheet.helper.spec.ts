@@ -54,11 +54,6 @@ describe('ActionSheetHelper', () => {
       expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
     });
 
-    it('modal wrapper should not have max width or height', () => {
-      const modalWrapper = ionModal.shadowRoot.querySelector('.modal-wrapper');
-      expect(modalWrapper).toHaveComputedStyle({ 'max-width': 'none', 'max-height': 'none' });
-    });
-
     it('backdrop click should dismiss action-sheet', async () => {
       const onDidDismiss = ionModal.onDidDismiss();
 

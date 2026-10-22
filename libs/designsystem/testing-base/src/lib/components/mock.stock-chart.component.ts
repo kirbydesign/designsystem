@@ -1,15 +1,16 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
-import { StockChartComponent } from '@kirbydesign/designsystem';
-import { ChartDataLabelOptions } from '@kirbydesign/designsystem/chart';
+import { ChartDataLabelOptions, StockChartComponent } from '@kirbydesign/designsystem/chart';
+
+import { MockBaseChartComponent } from './mock.base-chart.component';
 
 // IMPORTANT: MockStockChartComponent class needs to extend MockBaseChartComponent
 // see https://github.com/kirbydesign/designsystem/issues/3029
-import { MockBaseChartComponent } from './mock.base-chart.component';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-stock-chart',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

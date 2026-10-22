@@ -53,7 +53,7 @@ export class SassToTypescriptEngine {
     const kebabToCamelCase = (kebabString: string) =>
       kebabString.replace(/-./g, (x) => x[1].toUpperCase());
 
-    const reviverFn = function (key: string, value: string) {
+    const reviverFn = function (this: Record<string, unknown>, key: string, value: string) {
       const nestedKeys = key.split('.').map(kebabToCamelCase);
       const rootKey = nestedKeys[0];
       // Return root value +  root entries as-is:
@@ -62,7 +62,7 @@ export class SassToTypescriptEngine {
       // 'this' in context of the reviver function is the object
       // containing the property while parsing the JSON string:
       // eslint-disable-next-line @typescript-eslint/no-this-alias
-      const jsonObject: object = this;
+      const jsonObject = this;
       // Unflatten dot-separated property tree (e.g. 'transition-easings.modal.enter'):
       parseFlattenedKeyToObject(nestedKeys, value, jsonObject);
     };
@@ -70,15 +70,22 @@ export class SassToTypescriptEngine {
     return JSON.parse(jsonRoot, reviverFn);
   }
 
-  private parseFlattenedKeyToObject(nestedKeys: string[], value: string, jsonObject: object) {
-    nestedKeys.reduce((nestedMap, nestedKey, index) => {
+  private parseFlattenedKeyToObject(
+    nestedKeys: string[],
+    value: string,
+    jsonObject: Record<string, unknown>
+  ) {
+    let nestedMap = jsonObject;
+    nestedKeys.forEach((nestedKey, index) => {
       let nestedObject = nestedMap[nestedKey];
       if (!nestedObject) {
         const isLeafProperty = index === nestedKeys.length - 1;
         nestedObject = nestedMap[nestedKey] = isLeafProperty ? value : {};
       }
-      return nestedObject;
-    }, jsonObject);
+      if (typeof nestedObject === 'object' && nestedObject !== null) {
+        nestedMap = nestedObject as Record<string, unknown>;
+      }
+    });
   }
 
   private renderStyleObject(styleObject: object): string {
@@ -98,7 +105,7 @@ export class SassToTypescriptEngine {
 
   private async formatWithPrettier(code: string) {
     const filePath = await prettier.resolveConfigFile();
-    const options = await prettier.resolveConfig(filePath);
+    const options = filePath ? await prettier.resolveConfig(filePath) : null;
     return prettier.format(code, { ...options, parser: 'babel' });
   }
 }

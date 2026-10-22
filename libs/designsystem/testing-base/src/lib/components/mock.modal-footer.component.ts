@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-modal-footer',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -17,6 +18,7 @@ import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 export class MockModalFooterComponent {
   @Input() snapToKeyboard: boolean;
   @Input() type: 'inline' | 'fixed';
+  @Input() themeColor: 'white' | 'light';
 }
 
 // #endregion

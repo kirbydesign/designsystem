@@ -18,7 +18,10 @@ import { MockPortalDirective } from './directives/mock.portal.directive';
 import { MockComponentLoaderDirective } from './directives/mock.component-loader.directive';
 import { MockFitHeadingDirective } from './directives/mock.fit-heading.directive';
 import { MockThemeColorDirective } from './directives/mock.theme-color.directive';
-import { MockSlideDirective } from './directives/mock.slide.directive';
+import {
+  MockSlideDirective,
+  MockSlideStretchHeightDirective,
+} from './directives/mock.slide.directive';
 import { MockKeyHandlerDirective } from './directives/mock.key-handler.directive';
 import { MockModalRouterLinkDirective } from './directives/mock.modal-router-link.directive';
 
@@ -40,6 +43,7 @@ export const MOCK_DIRECTIVES = [
   MockFitHeadingDirective,
   MockThemeColorDirective,
   MockSlideDirective,
+  MockSlideStretchHeightDirective,
   MockKeyHandlerDirective,
   MockModalRouterLinkDirective,
 ];

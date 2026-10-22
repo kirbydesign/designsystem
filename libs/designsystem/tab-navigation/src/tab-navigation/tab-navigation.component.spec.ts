@@ -10,7 +10,7 @@ import { TabNavigationComponent } from './tab-navigation.component';
 describe('TabNavigationComponent', () => {
   let component: TabNavigationComponent;
   let spectator: SpectatorHost<TabNavigationComponent>;
-  let tabButtons: Element[];
+  let tabButtons: HTMLElement[];
 
   const createHost = createHostFactory({
     component: TabNavigationComponent,
@@ -50,7 +50,7 @@ describe('TabNavigationComponent', () => {
     component = spectator.component;
     tick(component.DEBOUNCE_TIME_MS);
 
-    tabButtons = spectator.queryAll('kirby-tab-navigation-item button');
+    tabButtons = spectator.queryAll<HTMLElement>('kirby-tab-navigation-item button');
   }));
 
   it('should create', () => {
@@ -158,5 +158,126 @@ describe('TabNavigationComponent', () => {
 
     expect(tabBar).toHaveAttribute('aria-label', 'A sample Tab Navigation');
     expect(tabBar).toHaveAttribute('aria-labelledby', 'tab-nav-label');
+  });
+
+  describe('focus management', () => {
+    let outsideElement: HTMLButtonElement;
+
+    beforeEach(() => {
+      outsideElement = document.createElement('button');
+      document.body.appendChild(outsideElement);
+    });
+
+    afterEach(() => {
+      outsideElement.focus();
+      outsideElement.remove();
+    });
+
+    it('should not move focus to the selected tab on init', () => {
+      tabButtons.forEach((tabButton) => expect(tabButton).not.toBeFocused());
+    });
+
+    it('should not move focus when selectedIndex is set programmatically', fakeAsync(() => {
+      outsideElement.focus();
+
+      spectator.setHostInput({ selectedIndex: 2 });
+      tick();
+
+      expect(outsideElement).toBeFocused();
+      expect(tabButtons[2]).toHaveAttribute('tabindex', '0');
+    }));
+
+    it('should move focus to the next tab on pressing arrow-right', () => {
+      tabButtons[0].focus();
+
+      spectator.dispatchKeyboardEvent(tabButtons[0], 'keydown', 'ArrowRight');
+
+      expect(tabButtons[1]).toBeFocused();
+    });
+
+    it('should move focus to the last tab on pressing end', () => {
+      tabButtons[0].focus();
+
+      spectator.dispatchKeyboardEvent(tabButtons[0], 'keydown', 'End');
+
+      expect(tabButtons[2]).toBeFocused();
+    });
+
+    it('should move focus to the first tab on pressing home', () => {
+      tabButtons[2].focus();
+
+      spectator.dispatchKeyboardEvent(tabButtons[2], 'keydown', 'Home');
+
+      expect(tabButtons[0]).toBeFocused();
+    });
+
+    it('should not change selection when moving focus with arrow keys', () => {
+      tabButtons[0].focus();
+
+      spectator.dispatchKeyboardEvent(tabButtons[0], 'keydown', 'ArrowRight');
+
+      expect(component.selectedIndex).toBe(0);
+      expect(tabButtons[0]).toHaveAttribute('aria-selected', 'true');
+    });
+
+    it('should make the selected tab the tab stop again when focus leaves the tablist', () => {
+      tabButtons[0].focus();
+      spectator.dispatchKeyboardEvent(tabButtons[0], 'keydown', 'ArrowRight');
+
+      outsideElement.focus();
+
+      tabButtons.forEach((tabButton, index) =>
+        expect(tabButton).toHaveAttribute('tabindex', index === 0 ? '0' : '-1')
+      );
+    });
+
+    it('should keep the focused tab as tab stop when clicking the already selected tab', () => {
+      tabButtons[0].focus();
+      spectator.dispatchKeyboardEvent(tabButtons[0], 'keydown', 'ArrowRight');
+
+      tabButtons[0].focus();
+      spectator.click(tabButtons[0]);
+
+      tabButtons.forEach((tabButton, index) =>
+        expect(tabButton).toHaveAttribute('tabindex', index === 0 ? '0' : '-1')
+      );
+    });
+
+    it('should keep the focused tab as tab stop when selectedIndex is set programmatically', fakeAsync(() => {
+      tabButtons[0].focus();
+
+      spectator.setHostInput({ selectedIndex: 2 });
+      tick();
+
+      tabButtons.forEach((tabButton, index) =>
+        expect(tabButton).toHaveAttribute('tabindex', index === 0 ? '0' : '-1')
+      );
+    }));
+  });
+});
+
+describe('TabNavigationComponent without a selected tab', () => {
+  let spectator: SpectatorHost<TabNavigationComponent>;
+
+  const createHost = createHostFactory({
+    component: TabNavigationComponent,
+    imports: [TestHelper.ionicModuleForTest, TabNavigationItemComponent],
+  });
+
+  beforeEach(fakeAsync(() => {
+    spectator = createHost(`
+      <kirby-tab-navigation>
+        <kirby-tab-navigation-item label="Tab1"></kirby-tab-navigation-item>
+        <kirby-tab-navigation-item label="Tab2"></kirby-tab-navigation-item>
+      </kirby-tab-navigation>
+    `);
+    tick(spectator.component.DEBOUNCE_TIME_MS);
+  }));
+
+  it('should make the first tab reachable with the tab key', () => {
+    const tabButtons = spectator.queryAll('kirby-tab-navigation-item button');
+
+    expect(tabButtons[0]).toHaveAttribute('tabindex', '0');
+    expect(tabButtons[1]).toHaveAttribute('tabindex', '-1');
   });
 });
