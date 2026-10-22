@@ -19,6 +19,7 @@ import {
   offset,
   Placement,
   shift,
+  size,
   Strategy,
 } from '@floating-ui/dom';
 import { DesignTokenHelper } from '@kirbydesign/core';
@@ -329,7 +330,19 @@ export class FloatingDirective implements OnInit, OnDestroy {
     middleware.push(flip());
 
     if (this.shift) {
-      middleware.push(shift({ padding: parseInt(DesignTokenHelper.size('s')) }));
+      const padding = parseInt(DesignTokenHelper.size('s'));
+      middleware.push(shift({ padding }));
+      middleware.push(
+        size({
+          padding,
+          apply({ availableHeight, elements }) {
+            elements.floating.style.setProperty(
+              '--kirby-floating-available-height',
+              `${availableHeight}px`
+            );
+          },
+        })
+      );
     }
 
     if (this.autoPlacement) {
