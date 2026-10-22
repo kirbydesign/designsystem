@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   Renderer2,
+  RendererStyleFlags2,
 } from '@angular/core';
 import {
   autoPlacement,
@@ -326,24 +327,28 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private getMiddlewareConfig(): Array<Middleware | null | undefined | false> {
     const middleware: Array<Middleware | null | undefined | false> = [];
+    const padding = parseInt(DesignTokenHelper.size('s'));
+
     middleware.push(offset(this.offset));
-    middleware.push(flip());
+    middleware.push(flip({ padding }));
 
     if (this.shift) {
-      const padding = parseInt(DesignTokenHelper.size('s'));
       middleware.push(shift({ padding }));
-      middleware.push(
-        size({
-          padding,
-          apply({ availableHeight, elements }) {
-            elements.floating.style.setProperty(
-              '--kirby-floating-available-height',
-              `${availableHeight}px`
-            );
-          },
-        })
-      );
     }
+
+    middleware.push(
+      size({
+        padding,
+        apply: ({ availableHeight, elements }) => {
+          this.renderer.setStyle(
+            elements.floating,
+            '--kirby-floating-available-height',
+            `${Math.max(0, availableHeight)}px`,
+            RendererStyleFlags2.DashCase
+          );
+        },
+      })
+    );
 
     if (this.autoPlacement) {
       middleware.push(autoPlacement());

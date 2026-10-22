@@ -9,7 +9,6 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { ButtonSize } from '@kirbydesign/designsystem/button';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
-import { responsiveModes } from 'tools/storybook-config/shared-config';
 
 const meta: Meta<MenuComponent> = {
   component: MenuComponent,
@@ -58,8 +57,7 @@ export const MenuOpenedWithScrollableList: Story = {
     layout: 'fullscreen',
     chromatic: {
       modes: {
-        ...responsiveModes,
-        'small-height': { viewport: { width: 375, height: 480 } },
+        'small-height': { viewport: { width: 375, height: 320 } },
       },
     },
   },
