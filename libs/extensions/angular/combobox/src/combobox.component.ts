@@ -289,6 +289,7 @@ export class ComboboxComponent
       this.focusedItem = this._searchItems.find((i) => !(i instanceof GroupItem));
       this._virtualScrollViewport?.scrollToIndex(0);
     }
+    this.updateStickyGroupHeader();
   }
 
   private _items: unknown[] = [];
@@ -497,6 +498,49 @@ export class ComboboxComponent
 
   @ViewChild(CdkVirtualScrollViewport)
   public _virtualScrollViewport?: CdkVirtualScrollViewport;
+
+  protected stickyGroup?: GroupItem;
+  protected stickyGroupOffset = 0;
+
+  protected onViewportScroll(): void {
+    this.updateStickyGroupHeader();
+  }
+
+  private updateStickyGroupHeader(): void {
+    const viewport = this._virtualScrollViewport;
+    const scrollOffset = viewport?.measureScrollOffset() ?? 0;
+    let currentGroup: GroupItem | undefined;
+    let nextGroupOffset: number | undefined;
+    let itemOffset = 0;
+
+    for (const item of this.searchItems) {
+      if (this.isGroupItem(item)) {
+        if (itemOffset <= scrollOffset) {
+          currentGroup = item;
+        } else if (currentGroup) {
+          nextGroupOffset = itemOffset;
+          break;
+        }
+      }
+      itemOffset += this.getHeightOfItem(item);
+    }
+
+    const nextOffset =
+      nextGroupOffset === undefined
+        ? 0
+        : Math.min(
+            0,
+            nextGroupOffset - scrollOffset - ComboboxComponent.HEIGHT_OF_STANDARD_ITEM
+          );
+
+    if (this.stickyGroup === currentGroup && this.stickyGroupOffset === nextOffset) {
+      return;
+    }
+
+    this.stickyGroup = currentGroup;
+    this.stickyGroupOffset = nextOffset;
+    this.cdr.markForCheck();
+  }
 
   private forwardAriaLabelToCombobox() {
     forwardAttributes(

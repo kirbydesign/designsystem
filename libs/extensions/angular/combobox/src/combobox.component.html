@@ -34,38 +34,61 @@
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
     } @else {
-      <cdk-virtual-scroll-viewport
-        class="combobox-viewport"
-        role="listbox"
-        minBufferPx="1240"
-        maxBufferPx="1620"
-        [itemSize]="effectiveItemSize"
-        [style.height.px]="viewportHeight"
-      >
-        <ng-container *cdkVirtualFor="let item of searchItems">
-          @if (isGroupItem(item)) {
-            <div class="combobox-group-header" role="presentation">
-              <ng-container
-                *ngTemplateOutlet="
-                  defaultGroupHeaderTemplate;
-                  context: { $implicit: item }
-                "
-              ></ng-container>
-            </div>
-          } @else {
+      <div class="combobox-viewport-container">
+        @if (stickyGroup) {
+          <div
+            class="combobox-sticky-group-header"
+            [attr.id]="stickyGroup.id"
+            role="presentation"
+            [style.transform]="'translateY(' + stickyGroupOffset + 'px)'"
+          >
             <ng-container
               *ngTemplateOutlet="
-                itemTemplate || defaultItemTemplate;
-                context: {
-                  $implicit: item,
-                  selected: item === selectedItem,
-                  focused: item === focusedItem,
-                }
+                defaultGroupHeaderTemplate;
+                context: { $implicit: stickyGroup }
               "
             ></ng-container>
-          }
-        </ng-container>
-      </cdk-virtual-scroll-viewport>
+          </div>
+        }
+        <cdk-virtual-scroll-viewport
+          class="combobox-viewport"
+          role="listbox"
+          minBufferPx="1240"
+          maxBufferPx="1620"
+          [itemSize]="effectiveItemSize"
+          [style.height.px]="viewportHeight"
+          (scroll)="onViewportScroll()"
+        >
+          <ng-container *cdkVirtualFor="let item of searchItems">
+            @if (isGroupItem(item)) {
+              <div
+                class="combobox-group-header-placeholder"
+                [class.is-active]="item === stickyGroup"
+                role="presentation"
+                aria-hidden="true"
+              >
+                <ng-container
+                  *ngTemplateOutlet="
+                    defaultGroupHeaderTemplate;
+                    context: { $implicit: item }
+                  "
+                ></ng-container>
+              </div>
+            } @else {
+              <ng-container
+                *ngTemplateOutlet="
+                  itemTemplate || defaultItemTemplate;
+                  context: {
+                    $implicit: item,
+                    selected: item === selectedItem,
+                    focused: item === focusedItem,
+                  }
+                "
+              ></ng-container>
+            }
+          </ng-container>
+        </cdk-virtual-scroll-viewport>
+      </div>
     }
   </kirby-card>
 </kirby-popover>
@@ -88,7 +111,7 @@
 </ng-template>
 
 <ng-template #defaultGroupHeaderTemplate let-group>
-  <kirby-item [attr.id]="group.id">
+  <kirby-item>
     <p class="kirby-item-detail">{{ group.displayName }}</p>
   </kirby-item>
 </ng-template>

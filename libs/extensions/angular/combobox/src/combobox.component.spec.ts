@@ -647,6 +647,44 @@ describe('Combobox', () => {
     }));
   });
 
+  describe('group headers', () => {
+    it('pushes the active header out as the next group reaches it', () => {
+      spectator.component.groupSettings = [
+        {
+          id: 'first',
+          displayName: 'First group',
+          condition: (item: { group: string }) => item.group === 'first',
+        },
+        {
+          id: 'second',
+          displayName: 'Second group',
+          condition: (item: { group: string }) => item.group === 'second',
+        },
+      ];
+      spectator.component.items = [
+        { text: 'First item 1', group: 'first' },
+        { text: 'First item 2', group: 'first' },
+        { text: 'Second item 1', group: 'second' },
+        { text: 'Second item 2', group: 'second' },
+      ];
+      inputElement.click();
+      spectator.detectChanges();
+
+      const viewport = spectator.component._virtualScrollViewport;
+      if (!viewport) throw new Error('Virtual scroll viewport not found');
+      jest.spyOn(viewport, 'measureScrollOffset').mockReturnValue(100);
+      viewport.elementRef.nativeElement.dispatchEvent(new Event('scroll'));
+      spectator.detectChanges();
+
+      const stickyHeader = document.querySelector<HTMLElement>('.combobox-sticky-group-header');
+      expect(stickyHeader?.textContent).toContain('First group');
+      expect(stickyHeader?.style.transform).toBe('translateY(-12px)');
+      const groupPlaceholders = document.querySelectorAll('.combobox-group-header-placeholder');
+      expect(groupPlaceholders[0]).toHaveClass('is-active');
+      expect(groupPlaceholders[1]).not.toHaveClass('is-active');
+    });
+  });
+
   describe('aria attributes', () => {
     it('aria-expanded is false when closed', () => {
       expect(inputElement.getAttribute('aria-expanded')).toBe('false');
