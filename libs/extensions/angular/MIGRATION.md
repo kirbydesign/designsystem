@@ -6,8 +6,15 @@ Kirby Extensions is versioned and released independently from `@kirbydesign/desi
 
 ## Version 6.0.0
 
+Version 6 introduces two breaking changes. One for the platform as support for non-LTS Angular versions is removed, and one for the combobox component as *kirbyListItemTemplate has been swapped out with combobox own template directive,
+
+- [Platform Support](#platform-support-v6)
 - [Components](#components-v6)
   - [Combobox](#combobox-v6)
+
+<h3 id="platform-support-v6">Platform Support</h3>
+
+Extensions Angular removes support for Angular 18, 19 and 20, and now expects Angular 21 or later to be installed as a peer dependency.
 
 <h3 id="components-v6">Components</h3>
 
