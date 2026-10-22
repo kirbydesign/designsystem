@@ -16,7 +16,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
-import { IonCheckbox } from '@ionic/angular/standalone';
+import { IonCheckbox } from '@ionic/angular';
 import { inheritAriaLabelText, setAccessibleLabel } from '@kirbydesign/designsystem/shared';
 
 @Component({

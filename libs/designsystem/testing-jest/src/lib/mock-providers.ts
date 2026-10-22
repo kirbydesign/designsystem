@@ -1,16 +1,13 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
-import {
-  ChartConfigService,
-  ChartJSService,
-  IconRegistryService,
-  LoadingOverlayService,
-  ModalController,
-  TabsService,
-} from '@kirbydesign/designsystem';
-
-import { ToastController } from '@kirbydesign/designsystem/toast';
 import { EMPTY } from 'rxjs';
+
+import { ChartConfigService, ChartJSService } from '@kirbydesign/designsystem/chart';
+import { IconRegistryService } from '@kirbydesign/designsystem/icon';
+import { LoadingOverlayService } from '@kirbydesign/designsystem/loading-overlay';
+import { ModalController } from '@kirbydesign/designsystem/modal';
+import { TabsService } from '@kirbydesign/designsystem/tabs';
+import { ToastController } from '@kirbydesign/designsystem/toast';
 
 export function chartConfigServiceFactory() {
   return {
@@ -59,6 +56,7 @@ export function modalControllerFactory() {
     showAlert: jest.fn(),
     hideTopmost: jest.fn(),
     hideAll: jest.fn(),
+    getTopMost: jest.fn(),
   };
 }
 

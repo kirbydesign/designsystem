@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-item',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -21,6 +22,8 @@ export class MockItemComponent {
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
   @Input() size: ItemSize | `${ItemSize}`;
+  @Input() href: string;
+  @Input() rotateIcon: boolean;
 }
 
 // #endregion

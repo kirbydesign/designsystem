@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleton-loader';
 
 @Component({
@@ -6,5 +6,6 @@ import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleto
   templateUrl: './sidebar-menu-loader.component.html',
   styleUrl: './sidebar-menu-loader.component.scss',
   imports: [SkeletonLoaderComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SidebarMenuLoaderComponent {}

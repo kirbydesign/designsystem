@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
-import { FormFieldComponent } from '@kirbydesign/designsystem';
+import { FormFieldComponent } from '@kirbydesign/designsystem/form-field';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-form-field',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -15,8 +16,8 @@ import { FormFieldComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockFormFieldComponent {
-  @Input() label: string;
-  @Input() message: string;
+  @Input() label: string | undefined;
+  @Input() message: string | null | undefined;
 
   focus() {
     // NOOP

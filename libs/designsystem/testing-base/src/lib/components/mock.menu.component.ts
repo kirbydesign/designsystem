@@ -1,13 +1,14 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
 
-import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { AttentionLevel, ButtonSize } from '@kirbydesign/designsystem/button';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-menu',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -23,12 +24,13 @@ export class MockMenuComponent {
   @Input() placement: Placement;
   @Input() attentionLevel: AttentionLevel;
   @Input() triggers: Array<TriggerEvent>;
-  @Input() DOMPortalOutlet: HTMLElement | undefined;
+  @Input() DOMPortalOutlet: HTMLElement;
   @Input() portalOutletConfig: PortalOutletConfig | undefined;
   @Input() autoPlacement: boolean;
   @Input() closeOnSelect: boolean;
   @Input() closeOnEscapeKey: boolean;
   @Input() closeOnBackdrop: boolean;
+  @Input() shift: boolean;
   @Input() minWidth: number;
 }
 

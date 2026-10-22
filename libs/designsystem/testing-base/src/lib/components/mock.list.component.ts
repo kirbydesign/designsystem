@@ -1,4 +1,13 @@
-import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  TrackByFunction,
+} from '@angular/core';
+import { ThemeColor } from '@kirbydesign/core';
 
 import {
   ListComponent,
@@ -6,12 +15,12 @@ import {
   ListSwipeAction,
   LoadOnDemandEvent,
   StandAloneSpacing,
-  ThemeColor,
-} from '@kirbydesign/designsystem';
+} from '@kirbydesign/designsystem/list';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-list',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -25,7 +34,7 @@ export class MockListComponent {
   @Input() items: any[];
   @Input() getItemColor: (item: any) => ThemeColor;
   @Input() getSectionName: (item: any) => string;
-  @Input() trackBy: TrackByFunction<any>;
+  @Input() trackBy?: TrackByFunction<any>;
   @Input() getStandAloneByProperty: string;
   @Input() standAloneSpacing: StandAloneSpacing;
   @Input() noMoreItemsText: string;

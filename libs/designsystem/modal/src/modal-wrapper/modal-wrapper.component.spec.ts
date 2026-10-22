@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
@@ -15,7 +15,8 @@ import {
   PageProgressComponent,
   PageTitleComponent,
 } from '@kirbydesign/designsystem/page';
-import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
+import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DummyContentEmbeddedComponent,
   DynamicFooterEmbeddedComponent,
@@ -590,6 +591,36 @@ describe('ModalWrapperComponent', () => {
           elementWithDistanceFromTopOfViewport(viewportHeight - keyboardHeight - 100)
         )
       ).toBe(0);
+    });
+
+    it('should compute the overlap from the fallback viewport height when initialViewportHeight is not set', () => {
+      spectator.component['initialViewportHeight'] = undefined;
+      spyOn(spectator.component as any, 'getViewportHeight').and.returnValue(viewportHeight);
+      expect(
+        spectator.component['getKeyboardOverlap'](
+          keyboardHeight,
+          elementWithDistanceFromTopOfViewport(viewportHeight)
+        )
+      ).toBe(keyboardHeight);
+    });
+
+    it('should fall back to the window inner height when initialViewportHeight is not set', () => {
+      spectator.component['initialViewportHeight'] = undefined;
+      expect(spectator.component['getViewportHeight']()).toBe(
+        spectator.component['windowRef'].nativeWindow.innerHeight
+      );
+    });
+
+    it('should fall back to the window inner height when initialViewportHeight is 0', () => {
+      spectator.component['initialViewportHeight'] = 0;
+      expect(spectator.component['getViewportHeight']()).toBe(
+        spectator.component['windowRef'].nativeWindow.innerHeight
+      );
+    });
+
+    it('should use initialViewportHeight for the viewport height when it is set', () => {
+      spectator.component['initialViewportHeight'] = viewportHeight;
+      expect(spectator.component['getViewportHeight']()).toBe(viewportHeight);
     });
   });
 

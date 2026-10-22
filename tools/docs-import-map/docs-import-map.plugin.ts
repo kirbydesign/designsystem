@@ -1,5 +1,5 @@
 import type { Plugin, PluginBuild } from 'esbuild';
-import { DocsImportMapEngine } from './docs-import-map.engine';
+import { DocsImportMapEngine } from './docs-import-map.engine.js';
 
 export interface DocsImportMapPluginOptions {
   distPath: string;

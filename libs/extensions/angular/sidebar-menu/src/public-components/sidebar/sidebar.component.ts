@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SidebarContainerComponent } from '../../components/sidebar-container';
 
 @Component({
@@ -11,5 +11,6 @@ import { SidebarContainerComponent } from '../../components/sidebar-container';
     </aside>
   `,
   imports: [SidebarContainerComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SidebarComponent {}

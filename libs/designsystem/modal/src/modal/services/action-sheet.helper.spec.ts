@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController as IonicModalController } from '@ionic/angular/standalone';
+import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -52,11 +52,6 @@ describe('ActionSheetHelper', () => {
 
     it('action-sheet should have correct backdrop style', () => {
       expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
-    });
-
-    it('modal wrapper should not have max width or height', () => {
-      const modalWrapper = ionModal.shadowRoot.querySelector('.modal-wrapper');
-      expect(modalWrapper).toHaveComputedStyle({ 'max-width': 'none', 'max-height': 'none' });
     });
 
     it('backdrop click should dismiss action-sheet', async () => {

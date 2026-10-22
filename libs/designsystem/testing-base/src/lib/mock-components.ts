@@ -3,8 +3,8 @@
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockActionGroupComponent } from './components/mock.action-group.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
-import { MockButtonComponent } from './components/mock.button.component';
 import { MockBadgeComponent } from './components/mock.badge.component';
+import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
@@ -13,6 +13,7 @@ import { MockChartComponent } from './components/mock.chart.component';
 import { MockBaseChartComponent } from './components/mock.base-chart.component';
 import { MockStockChartComponent } from './components/mock.stock-chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
+import { MockTableSortableComponent } from './components/mock.sortable.component';
 import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
@@ -26,7 +27,9 @@ import { MockTextareaComponent } from './components/mock.textarea.component';
 import {
   MockHeaderActionsDirective,
   MockHeaderComponent,
+  MockHeaderCustomFlagDirective,
   MockHeaderCustomSectionDirective,
+  MockHeaderTitleActionIconDirective,
 } from './components/mock.header.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockItemComponent } from './components/mock.item.component';
@@ -44,6 +47,7 @@ import { MockMenuComponent } from './components/mock.menu.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import { MockAlertComponent } from './components/mock.alert.component';
 import { MockModalFooterComponent } from './components/mock.modal-footer.component';
+import { MockModalComponent } from './components/mock.modal.component';
 import { MockModalCompactWrapperComponent } from './components/mock.modal-compact-wrapper.component';
 import { MockModalWrapperComponent } from './components/mock.modal-wrapper.component';
 import { MockPageFooterComponent } from './components/mock.page-footer.component';
@@ -69,10 +73,10 @@ import { MockRangeComponent } from './components/mock.range.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSectionHeaderComponent } from './components/mock.section-header.component';
+import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
 import { MockSlidesComponent } from './components/mock.slides.component';
 import { MockSlideButtonComponent } from './components/mock.slide-button.component';
 import { MockSpinnerComponent } from './components/mock.spinner.component';
-import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
 import { MockTabNavigationComponent } from './components/mock.tab-navigation.component';
 import { MockTabNavigationItemComponent } from './components/mock.tab-navigation-item.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
@@ -84,6 +88,7 @@ export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
   MockActionGroupComponent,
   MockAvatarComponent,
+  MockBadgeComponent,
   MockButtonComponent,
   MockCalendarComponent,
   MockCardFooterComponent,
@@ -93,6 +98,7 @@ export const MOCK_COMPONENTS = [
   MockBaseChartComponent,
   MockStockChartComponent,
   MockCheckboxComponent,
+  MockTableSortableComponent,
   MockDividerComponent,
   MockDropdownComponent,
   MockEmptyStateComponent,
@@ -105,6 +111,8 @@ export const MOCK_COMPONENTS = [
   MockTextareaComponent,
   MockHeaderActionsDirective,
   MockHeaderCustomSectionDirective,
+  MockHeaderTitleActionIconDirective,
+  MockHeaderCustomFlagDirective,
   MockHeaderComponent,
   MockIconComponent,
   MockItemComponent,
@@ -122,6 +130,7 @@ export const MOCK_COMPONENTS = [
   MockActionSheetComponent,
   MockAlertComponent,
   MockModalFooterComponent,
+  MockModalComponent,
   MockModalCompactWrapperComponent,
   MockModalWrapperComponent,
   MockPageFooterComponent,
@@ -145,11 +154,10 @@ export const MOCK_COMPONENTS = [
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSectionHeaderComponent,
+  MockSegmentedControlComponent,
   MockSlidesComponent,
   MockSlideButtonComponent,
   MockSpinnerComponent,
-  MockSegmentedControlComponent,
-  MockBadgeComponent,
   MockTabNavigationComponent,
   MockTabNavigationItemComponent,
   MockTabButtonComponent,

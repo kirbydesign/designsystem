@@ -1,8 +1,11 @@
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ComboboxComponent, GroupSettings } from '@kirbydesign/extensions-angular/combobox';
+import {
+  ComboboxComponent,
+  ComboboxItemTemplateDirective,
+  GroupSettings,
+} from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { ListModule } from '@kirbydesign/designsystem/list';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import {
   FormFieldComponent,
@@ -82,10 +85,10 @@ const meta: Meta<ComboboxComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
-        ListModule,
         ItemModule,
         InputComponent,
         ComboboxComponent,
+        ComboboxItemTemplateDirective,
         FormFieldComponent,
         ReactiveFormsModule,
         IconModule,
@@ -193,6 +196,7 @@ export const WithTextProperty: Story = {
 
 /**
  * This example demonstrates how to use a custom template for items shown in the dropdown.
+ * The `*kirbyXComboboxItemTemplate` directive must be applied to the `kirby-item` element to enable custom item templating.
  * Since the combobox no longer controls the visual appearance of the items, `itemHeight` should be supplied to ensure correct dropdown height and scroll-into-view functionality.
  * Additionally, `itemIdProperty` should be set to match `[attr.id]` of the item template, as the id is used to manage selection and focus.
  */
@@ -212,7 +216,7 @@ export const WithTemplate: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings">
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           role="option"
           [selectable]="true"
           [selected]="selected"
@@ -253,7 +257,7 @@ export const CustomSearchFunction: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
           [selectable]="true"
           [selected]="selected"
@@ -290,7 +294,7 @@ export const LargeList: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-          *kirbyListItemTemplate="let item; let selected = selected; let focused = focused;"
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           [size]="'sm'"
           [selectable]="true"
           [selected]="selected"

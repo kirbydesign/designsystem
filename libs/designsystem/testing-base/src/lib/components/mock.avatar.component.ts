@@ -1,4 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 import { BrandColor, NotificationColor } from '@kirbydesign/core';
 
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
@@ -6,6 +13,7 @@ import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-avatar',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -17,20 +25,15 @@ import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 })
 export class MockAvatarComponent {
   @Input() imageSrc: string;
+  @Input() imageLoading: 'eager' | 'lazy' | undefined;
   @Input() altText: string;
-  @Input() shadow: boolean;
   @Input() stroke: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
   @Input() size: AvatarSize | `${AvatarSize}`;
   @Input() themeColor:
-    | NotificationColor
-    | BrandColor
-    | 'medium'
-    | 'white'
-    | 'dark'
-    | 'light'
-    | 'semi-light';
+    NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
+  @Output() imageError = new EventEmitter();
 }
 
 // #endregion

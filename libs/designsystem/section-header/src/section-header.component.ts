@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IonItemDivider } from '@ionic/angular/standalone';
+import { IonItemDivider } from '@ionic/angular';
 
 @Component({
   imports: [IonItemDivider],

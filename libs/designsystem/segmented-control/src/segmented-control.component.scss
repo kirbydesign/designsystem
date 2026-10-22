@@ -3,8 +3,8 @@
 
 // There is a limit to how large text can be on narrow viewports with text resized
 // before segment-button texts start to collide horizontally, so we cap it for narrow viewports
-$maximum-font-size-sm: utils.size('xs') * utils.$text-resize-threshold;
-$maximum-font-size-md: utils.size('s') * utils.$text-resize-threshold;
+$maximum-font-size-sm: calc(var(--kirby-spacing-xs) * #{utils.$text-resize-threshold});
+$maximum-font-size-md: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold});
 $badge-offset: 0.8em;
 
 :host {
@@ -14,22 +14,22 @@ $badge-offset: 0.8em;
   --kirby-badge-position: absolute;
   --kirby-badge-top: #{-1 * $badge-offset};
   --kirby-badge-right: #{-2 * $badge-offset};
-  --kirby-badge-z-index: #{utils.z('segment-badge')};
+  --kirby-badge-z-index: var(--kirby-z-index-segment-badge);
 
   &.sm {
     ion-segment-button {
-      min-height: utils.size('l');
-      font-size: min(utils.font-size('xs'), $maximum-font-size-sm);
+      min-height: var(--kirby-spacing-l);
+      font-size: min(var(--kirby-font-size-xs), $maximum-font-size-sm);
 
-      --padding-start: #{utils.size('s')};
-      --padding-end: #{utils.size('s')};
-      --kirby-badge-right: -#{utils.size('xxs')};
+      --padding-start: var(--kirby-spacing-s);
+      --padding-end: var(--kirby-spacing-s);
+      --kirby-badge-right: calc(-1 * var(--kirby-spacing-xxs));
 
       &:focus-visible {
         transition: interaction-state.transition();
         box-shadow: var(--kirby-focus-ring-md-inset);
         outline: none;
-        border-radius: utils.border-radius('pill');
+        border-radius: var(--kirby-border-radius-pill);
       }
     }
   }
@@ -54,8 +54,8 @@ $badge-offset: 0.8em;
       --background: none;
 
       border-radius: 0;
-      padding: #{utils.size('xxxs')};
-      gap: #{utils.size('xxs')};
+      padding: var(--kirby-spacing-xxxs);
+      gap: var(--kirby-spacing-xxs);
 
       @include utils.touch {
         scrollbar-width: none; /* Firefox */
@@ -83,8 +83,8 @@ $badge-offset: 0.8em;
 
     ion-segment-button {
       --background: transparent;
-      --padding-start: #{utils.size('xs')};
-      --padding-end: #{utils.size('xs')};
+      --padding-start: var(--kirby-spacing-xs);
+      --padding-end: var(--kirby-spacing-xs);
     }
   }
 
@@ -103,7 +103,7 @@ $badge-offset: 0.8em;
 }
 
 ion-segment {
-  border-radius: utils.border-radius('pill');
+  border-radius: var(--kirby-border-radius-pill);
   grid-auto-columns: max-content;
   box-sizing: border-box;
 }
@@ -120,7 +120,7 @@ ion-segment-button {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --border-radius: #{utils.border-radius('pill')};
+    --border-radius: var(--kirby-border-radius-pill);
     --border-style: none;
     --background: none;
     --color: var(--kirby-inputs-color);
@@ -128,17 +128,17 @@ ion-segment-button {
     --color-checked: var(--kirby-inputs-indicator-color);
     --indicator-box-shadow: none;
     --indicator-transform: none;
-    --padding-start: #{utils.size('m')};
-    --padding-end: #{utils.size('m')};
+    --padding-start: var(--kirby-spacing-m);
+    --padding-end: var(--kirby-spacing-m);
     --margin-bottom: 0;
     --margin-end: 0;
     --margin-start: 0;
     --margin-top: 0;
 
-    min-height: utils.size('xl');
+    min-height: var(--kirby-spacing-xl);
     min-width: fit-content;
-    font-weight: utils.font-weight('normal');
-    font-size: min(utils.font-size('s'), $maximum-font-size-md);
+    font-weight: var(--kirby-font-weight-normal);
+    font-size: min(var(--kirby-font-size-s), $maximum-font-size-md);
     text-transform: none;
     margin: 0;
   }

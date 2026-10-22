@@ -1,7 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { IonApp } from '@ionic/angular/standalone';
+import { IonApp } from '@ionic/angular';
 import { ModalController } from '@kirbydesign/designsystem/modal';
 
 import { AppComponent } from './kirby-app.component';

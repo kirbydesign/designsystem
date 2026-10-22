@@ -1,11 +1,7 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { LineClampHelper } from '@kirbydesign/designsystem/helpers';
 import { ResizeObserverService } from '../resize-observer/resize-observer.service';
-
-const fontSize = DesignTokenHelper.fontSize;
-const lineHeight = DesignTokenHelper.lineHeight;
 
 interface HeadingSize {
   name: string;
@@ -25,27 +21,27 @@ export interface FitHeadingConfig {
 export class FitHeadingDirective implements OnInit, OnDestroy {
   @Input('kirbyFitHeading') config?: FitHeadingConfig;
 
-  private isObservingHostElement: boolean;
-  private hostElementClone: Element;
-  private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
+  private isObservingHostElement = false;
+  private hostElementClone?: Element;
+  private isScalingHeader = false; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
 
-  private originalSize: HeadingSize;
+  private originalSize?: HeadingSize;
 
   private headingSizes: HeadingSize[] = [
     {
       name: 'h1',
-      fontSize: fontSize('xl'),
-      lineHeight: lineHeight('xl'),
+      fontSize: 'var(--kirby-font-size-xl)',
+      lineHeight: 'var(--kirby-line-height-xl)',
     },
     {
       name: 'h2',
-      fontSize: fontSize('l'),
-      lineHeight: lineHeight('l'),
+      fontSize: 'var(--kirby-font-size-l)',
+      lineHeight: 'var(--kirby-line-height-l)',
     },
     {
       name: 'h3',
-      fontSize: fontSize('m'),
-      lineHeight: lineHeight('m'),
+      fontSize: 'var(--kirby-font-size-m)',
+      lineHeight: 'var(--kirby-line-height-m)',
     },
   ];
 
@@ -87,7 +83,8 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private scaleHeader(): void {
-    if (this.isScalingHeader) return;
+    const maxLines = this.config?.maxLines;
+    if (!maxLines || this.isScalingHeader) return;
 
     this.isScalingHeader = true;
 
@@ -102,7 +99,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
       // Skip line-clamp for elements with line-height: normal (e.g. key-value) — conflicts with flex layout
       if (computed.lineHeight !== 'normal') {
-        this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
+        this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, maxLines);
       }
 
       this.hostElementClone = this.generateHostElementClone();
@@ -114,7 +111,9 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     this.renderer.setStyle(this.hostElementClone, 'width', `${availableWidth}px`);
 
     // Try original CSS size first, then scale down through heading sizes
-    const candidates = [this.originalSize, ...this.headingSizes];
+    const candidates = this.originalSize
+      ? [this.originalSize, ...this.headingSizes]
+      : this.headingSizes;
     const fallbackSize = this.headingSizes[this.headingSizes.length - 1];
     const fittedSize = candidates.find(this.canFitHeading.bind(this)) || fallbackSize;
 
@@ -124,17 +123,19 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private canFitHeading(size: HeadingSize) {
-    this.setSize(this.hostElementClone, size);
+    const hostElementClone = this.hostElementClone;
+    if (!hostElementClone || !this.config) return false;
+    this.setSize(hostElementClone, size);
     // Resolve line-height to pixels via getComputedStyle (handles unitless ratios)
     const computedLineHeight = parseFloat(
-      getComputedStyle(this.hostElementClone as HTMLElement).lineHeight
+      getComputedStyle(hostElementClone as HTMLElement).lineHeight
     );
     // Skip vertical check for line-height: normal (single-line content like values)
     const fitsVertically = isNaN(computedLineHeight)
       ? true
-      : Math.round(this.hostElementClone.clientHeight / computedLineHeight) <= this.config.maxLines;
+      : Math.round(hostElementClone.clientHeight / computedLineHeight) <= this.config.maxLines;
     // Check horizontal overflow for non-wrapping content (e.g. numbers)
-    const fitsHorizontally = this.hostElementClone.scrollWidth <= this.hostElementClone.clientWidth;
+    const fitsHorizontally = hostElementClone.scrollWidth <= hostElementClone.clientWidth;
     return fitsVertically && fitsHorizontally;
   }
 

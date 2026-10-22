@@ -1,7 +1,7 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { IonSkeletonText } from '@ionic/angular/standalone';
+import { IonSkeletonText } from '@ionic/angular';
 
 @Component({
   selector: 'kirby-x-skeleton-loader',
@@ -9,6 +9,7 @@ import { IonSkeletonText } from '@ionic/angular/standalone';
   imports: [CardComponent, IconComponent, IonSkeletonText],
   templateUrl: './skeleton-loader.component.html',
   styleUrl: './skeleton-loader.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SkeletonLoaderComponent {
   /**

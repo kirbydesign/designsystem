@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 .message-container {
   max-width: 330px;
   margin: auto;
@@ -10,41 +8,74 @@
 }
 
 .icon-outline {
-  $icon-size: utils.size('xxl') * 2;
+  $icon-size: calc(var(--kirby-spacing-xxl) * 2);
 
   width: $icon-size;
   height: $icon-size;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: utils.size('m');
+  margin-bottom: var(--kirby-spacing-m);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: utils.size('xxxs') solid utils.get-color('medium');
-  border-radius: utils.border-radius('circle');
+  border: var(--kirby-spacing-xxxs) solid var(--kirby-empty-state-color, var(--kirby-medium));
+  border-radius: var(--kirby-border-radius-circle);
 }
 
 kirby-icon {
-  color: utils.get-color('medium');
+  color: var(--kirby-empty-state-color, var(--kirby-medium));
 }
 
 .title {
-  margin-bottom: utils.size('xxs');
+  margin-bottom: var(--kirby-spacing-xxs);
 }
 
 p.subtitle {
-  margin-bottom: utils.size('m');
+  margin-bottom: var(--kirby-spacing-m);
   white-space: pre-wrap;
 }
 
-@each $color-name, $color-value in utils.$main-colors {
-  :host(.#{$color-name}) {
-    .icon-outline {
-      border-color: #{utils.get-color($color-name)};
-    }
+// Colors
+:host(.primary) {
+  --kirby-empty-state-color: var(--kirby-primary);
+}
 
-    kirby-icon {
-      color: #{utils.get-color($color-name)};
-    }
-  }
+:host(.secondary) {
+  --kirby-empty-state-color: var(--kirby-secondary);
+}
+
+:host(.tertiary) {
+  --kirby-empty-state-color: var(--kirby-tertiary);
+}
+
+:host(.success) {
+  --kirby-empty-state-color: var(--kirby-success);
+}
+
+:host(.warning) {
+  --kirby-empty-state-color: var(--kirby-warning);
+}
+
+:host(.danger) {
+  --kirby-empty-state-color: var(--kirby-danger);
+}
+
+:host(.white-overlay) {
+  --kirby-empty-state-color: var(--kirby-white-overlay);
+}
+
+:host(.light) {
+  --kirby-empty-state-color: var(--kirby-light);
+}
+
+:host(.medium) {
+  --kirby-empty-state-color: var(--kirby-medium);
+}
+
+:host(.dark) {
+  --kirby-empty-state-color: var(--kirby-dark);
+}
+
+:host(.dark-overlay) {
+  --kirby-empty-state-color: var(--kirby-dark-overlay);
 }

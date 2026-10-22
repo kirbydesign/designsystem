@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-card',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -20,7 +21,7 @@ export class MockCardComponent {
   @Input() backgroundImageUrl: string;
   @Input() hasPadding: boolean;
   @Input() sizes: { [size: string]: number };
-  @Input() flat: boolean;
+  @Input() variant: 'elevated' | 'flat' | 'outlined';
 }
 
 // #endregion

@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
-    "@types/prismjs": "1.9.0"
+    "@types/prismjs": "1.26.6"
   }
 }

@@ -28,18 +28,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styles: [
-    `
-      :host {
-        display: flex !important;
-        align-items: center;
-      }
-
-      kirby-progress-circle {
-        margin-right: 20px;
-      }
-    `,
-  ],
+  styleUrls: ['./progress-circle-examples.shared.scss'],
   imports: [ProgressCircleComponent, AvatarComponent, ThemeColorDirective, IconComponent],
 })
 export class ProgressCircleExampleContentAvatarComponent {

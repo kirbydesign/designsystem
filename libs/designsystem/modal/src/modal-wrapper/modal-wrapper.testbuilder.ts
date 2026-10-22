@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, signal } from '@angular/core';
 import { Spectator, SpectatorFactory } from '@ngneat/spectator';
 
 import { ModalConfig } from './config/modal-config';
@@ -103,6 +103,7 @@ export class ModalWrapperTestBuilder {
     </kirby-modal-footer>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class StaticFooterEmbeddedComponent {}
 
@@ -110,17 +111,18 @@ export class StaticFooterEmbeddedComponent {}
   template: `
     <div>DynamicFooterEmbeddedComponent - Some test content</div>
 
-    @if (showFooter) {
-      <kirby-modal-footer [class.enabled]="isEnabled">
+    @if (showFooter()) {
+      <kirby-modal-footer [class.enabled]="isEnabled()">
         <button kirby-button>Test</button>
       </kirby-modal-footer>
     }
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class DynamicFooterEmbeddedComponent {
-  showFooter = false;
-  isEnabled = false;
+  showFooter = signal(false);
+  isEnabled = signal(false);
 }
 
 @Component({
@@ -134,6 +136,7 @@ export class DynamicFooterEmbeddedComponent {
     <button>Test Button</button>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class InputEmbeddedComponent {}
 
@@ -142,19 +145,21 @@ export class InputEmbeddedComponent {}
     <kirby-page-progress></kirby-page-progress>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class StaticPageProgressEmbeddedComponent {}
 
 @Component({
   template: `
-    @if (showPageProgress) {
+    @if (showPageProgress()) {
       <kirby-page-progress></kirby-page-progress>
     }
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class DynamicPageProgressEmbeddedComponent {
-  showPageProgress = false;
+  showPageProgress = signal(false);
 }
 
 @Component({
@@ -162,6 +167,7 @@ export class DynamicPageProgressEmbeddedComponent {
     <kirby-page-title>{{ _title }}</kirby-page-title>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class TitleEmbeddedComponent {
   _title: string;
@@ -214,5 +220,6 @@ export class TitleEmbeddedComponent {
     </p>
   `,
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class DummyContentEmbeddedComponent {}

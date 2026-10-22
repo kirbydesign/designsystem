@@ -1,8 +1,7 @@
 @use '../form-field-inputs.shared' as shared;
 @use '@kirbydesign/core/src/scss/interaction-state';
-@use '@kirbydesign/core/src/scss/utils';
 
-$padding-block-size-md: shared.$form-field-input-padding * 0.5;
+$padding-block-size-md: calc(#{shared.$form-field-input-padding} * 0.5);
 
 :host {
   &:not(:disabled) {
@@ -59,7 +58,7 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 }
 
 :host(.md) {
-  border-radius: utils.border-radius('l');
+  border-radius: var(--kirby-border-radius-l);
   padding-block: $padding-block-size-md;
 
   &.error {
@@ -72,7 +71,7 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 /* clean-css ignore:start */
 :host-context(kirby-item kirby-form-field[slot='end']) {
   &[type='number'] {
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
   }
 }
 

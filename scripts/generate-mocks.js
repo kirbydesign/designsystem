@@ -19,15 +19,14 @@ function hasFlag(flag) {
   return pos !== -1 && (terminatorIndex !== -1 ? pos < terminatorIndex : true);
 }
 
-const inputPaths = {
-  angular: './libs/designsystem/src/lib/',
-  core: './libs/core/src/',
-};
+const libRoot = './libs/designsystem/';
+const coreSrc = './libs/core/src/';
 
-function hasChanges(inputPaths) {
+function hasChanges() {
   return new Promise((resolve, reject) => {
     exec(
-      `git diff --name-only '${inputPaths.angular}' '${inputPaths.core}'`,
+      // Exclude generated output (testing entry points) from the change detection:
+      `git diff --name-only -- '${libRoot}' '${coreSrc}' ':(exclude)${libRoot}testing*'`,
       (e, stdout, stderr) => {
         if (e) return reject(e);
         if (stderr) return reject(stderr);
@@ -43,12 +42,11 @@ function generateMocks() {
     jasmine: './libs/designsystem/testing-jasmine/src/lib/',
     jest: './libs/designsystem/testing-jest/src/lib/',
   };
-  const subFolder = '/components/';
   // core input path is not needed to generate angular mocks
-  new GenerateMocks().renderMocks(inputPaths.angular, outputPaths, subFolder);
+  new GenerateMocks().renderMocks(libRoot, outputPaths);
 }
 
-hasChanges(inputPaths).then((hasChanged) => {
+hasChanges().then((hasChanged) => {
   if (!hasChanged && !hasFlag('force')) return;
   generateMocks();
 });

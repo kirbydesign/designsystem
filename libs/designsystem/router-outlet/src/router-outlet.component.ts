@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IonRouterOutlet, isPlatform } from '@ionic/angular/standalone';
+import { IonRouterOutlet, isPlatform } from '@ionic/angular';
 
 @Component({
   selector: 'kirby-router-outlet',

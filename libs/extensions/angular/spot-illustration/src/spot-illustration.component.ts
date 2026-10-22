@@ -1,5 +1,5 @@
-import { Component, computed, input } from '@angular/core';
-import { IonIcon } from '@ionic/angular/standalone';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { IonIcon } from '@ionic/angular';
 import {
   Illustration,
   illustrations,
@@ -12,6 +12,7 @@ import {
   imports: [IonIcon],
   templateUrl: './spot-illustration.component.html',
   styleUrl: './spot-illustration.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SpotIllustrationComponent {
   /**

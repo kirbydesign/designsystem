@@ -9,7 +9,7 @@ import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular/standalone';
+import { IonItem } from '@ionic/angular';
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { FormFieldComponent } from './form-field.component';

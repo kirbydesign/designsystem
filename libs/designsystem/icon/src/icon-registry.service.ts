@@ -22,7 +22,7 @@ export class IconRegistryService {
     this.addDefaultIcons();
   }
 
-  addIcon(iconName: string, svgPath: string): void {
+  public addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
       this.iconRegistry.set(iconName, svgPath);
     } else {
@@ -30,13 +30,13 @@ export class IconRegistryService {
     }
   }
 
-  addIcons(icons: Icon[]): void {
+  public addIcons(icons: Icon[]): void {
     if (!icons) {
       console.error('Icons not defined');
       return;
     }
     icons.forEach((icon) => {
-      this.addIcon(icon.name, icon.svg);
+      if (icon.name && icon.svg) this.addIcon(icon.name, icon.svg);
     });
   }
 
@@ -49,10 +49,12 @@ export class IconRegistryService {
   }
 
   getIcons(): Icon[] {
-    return Array.from(this.iconRegistry.keys()).map((key) => this.getIcon(key));
+    return Array.from(this.iconRegistry.keys())
+      .map((key) => this.getIcon(key))
+      .filter((icon): icon is Icon => !!icon);
   }
 
-  getIcon(name: string): Icon {
+  getIcon(name: string): Icon | undefined {
     const svg = this.iconRegistry.get(name);
     return svg ? { name, svg } : undefined;
   }

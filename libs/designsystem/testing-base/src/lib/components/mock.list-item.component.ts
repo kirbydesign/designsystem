@@ -1,15 +1,20 @@
-import { Component, EventEmitter, forwardRef, Input, Output, TemplateRef } from '@angular/core';
-
 import {
-  BoundaryClass,
-  ListItemComponent,
-  ListSwipeAction,
-  ThemeColor,
-} from '@kirbydesign/designsystem';
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  TemplateRef,
+} from '@angular/core';
+import { ThemeColor } from '@kirbydesign/core';
+
+import { BoundaryClass, ListItemComponent, ListSwipeAction } from '@kirbydesign/designsystem/list';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-list-item',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [

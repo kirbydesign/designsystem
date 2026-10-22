@@ -1,11 +1,22 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { Locale } from 'date-fns';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
-import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/designsystem/calendar';
+import {
+  CalendarComponent,
+  CalendarYearNavigatorConfig,
+  Locale,
+} from '@kirbydesign/designsystem/calendar';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-calendar',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -30,7 +41,7 @@ export class MockCalendarComponent {
   @Input() customLocales: { [key: string]: Locale };
   @Input() usePopover: boolean;
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
-  @Input() selectedDate: Date;
+  @Input() selectedDate: Date | null;
   @Input() disabledDates: Date[];
   @Input() enabledDates: Date[];
   @Input() todayDate: Date;

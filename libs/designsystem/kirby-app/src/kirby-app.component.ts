@@ -5,7 +5,7 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { IonApp } from '@ionic/angular/standalone';
+import { IonApp } from '@ionic/angular';
 import { componentOnReady } from '@ionic/core';
 
 @Component({

@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, TemplateRef } from '@angular/core';
 
 import { ModalCompactWrapperComponent, ModalConfig } from '@kirbydesign/designsystem/modal';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-modal-compact-wrapper',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -16,6 +17,7 @@ import { ModalCompactWrapperComponent, ModalConfig } from '@kirbydesign/designsy
 })
 export class MockModalCompactWrapperComponent {
   @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
 }
 
 // #endregion

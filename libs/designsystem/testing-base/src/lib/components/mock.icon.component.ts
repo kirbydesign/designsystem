@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 
-import { IconComponent, IconSize } from '@kirbydesign/designsystem';
+import { IconComponent, IconSize } from '@kirbydesign/designsystem/icon';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-icon',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -15,8 +16,8 @@ import { IconComponent, IconSize } from '@kirbydesign/designsystem';
   ],
 })
 export class MockIconComponent {
-  @Input() size: IconSize | `${IconSize}`;
-  @Input() name: string;
+  @Input() size?: IconSize | `${IconSize}`;
+  @Input() name?: string;
 }
 
 // #endregion

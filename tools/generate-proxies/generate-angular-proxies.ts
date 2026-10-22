@@ -183,7 +183,7 @@ async function formatWithEslint(unformattedSource: string, componentName: string
   const eslint = new ESLint({
     fix: true,
     cache: true,
-    overrideConfigFile: path.resolve('tools/eslint-config/angular.json'),
+    overrideConfigFile: path.resolve('tools/eslint-config/angular.mjs'),
   });
   const lintingResults = await eslint.lintText(unformattedSource, { filePath: 'component.ts' });
 

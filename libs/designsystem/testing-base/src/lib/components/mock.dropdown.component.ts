@@ -1,4 +1,11 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
@@ -6,6 +13,7 @@ import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-dropdown',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -25,6 +33,7 @@ export class MockDropdownComponent {
   @Input() attentionLevel: '1' | '2' | '3';
   @Input() expand?: 'block';
   @Input() disabled: boolean;
+  @Output() hasErrorChange = new EventEmitter<boolean>();
   @Input() hasError: boolean;
   @Input() size: 'sm' | 'md';
   @Input() tabindex: number;

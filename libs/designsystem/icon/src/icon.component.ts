@@ -9,7 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import { IonIcon } from '@ionic/angular/standalone';
+import { IonIcon } from '@ionic/angular';
 import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
 
@@ -35,9 +35,9 @@ export class IconComponent implements OnChanges {
 
   @HostBinding('class')
   @Input()
-  size: IconSize | `${IconSize}`;
+  size?: IconSize | `${IconSize}`;
 
-  @Input() name: string;
+  @Input() name?: string;
 
   get icon(): Icon {
     return this._icon;

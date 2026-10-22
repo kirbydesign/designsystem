@@ -4,6 +4,7 @@ import json from '../../../tsconfig.base.json' with { type: 'json' };
 const esModules = [
   '@stencil/core',
   '@ionic/core',
+  '@ionic/angular',
   'ionicons',
   '@angular/common/locales',
   'inputmask',
@@ -38,5 +39,8 @@ export default {
     ],
   },
   transformIgnorePatterns: [`/node_modules/(?!${esModules}|.*\\.mjs$)`],
-  moduleNameMapper: pathsToModuleNameMapper(pathAliases, { prefix: '<rootDir>/' }),
+  moduleNameMapper: {
+    ...pathsToModuleNameMapper(pathAliases, { prefix: '<rootDir>/' }),
+    '^ionicons/(.*)$': '<rootDir>/../../../node_modules/ionicons/$1',
+  },
 };

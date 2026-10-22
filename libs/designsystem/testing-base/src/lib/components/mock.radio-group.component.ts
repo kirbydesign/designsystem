@@ -1,10 +1,18 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
-import { RadioGroupComponent } from '@kirbydesign/designsystem';
+import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-radio-group',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -17,6 +25,7 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem';
 export class MockRadioGroupComponent {
   @Input() disabled: boolean;
   @Input() hasError: boolean;
+  @Output() hasErrorChange = new EventEmitter<boolean>();
   @Input() items: string[] | any[];
   @Input() itemTextProperty: string;
   @Input() itemDisabledProperty: string;

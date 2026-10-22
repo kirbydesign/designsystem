@@ -1,11 +1,19 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 
-import { InputComponent, InputSize } from '@kirbydesign/designsystem';
+import { InputComponent, InputSize } from '@kirbydesign/designsystem/form-field';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'input[kirby-input]',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<ng-content></ng-content>',
   host: { mock: 'mock' },
   providers: [
@@ -25,6 +33,7 @@ export class MockInputComponent {
   @Input() value: string;
   @Input() maxlength: number;
   @Input() inputmode: string;
+  @Output() hasErrorChange = new EventEmitter<boolean>();
 }
 
 // #endregion

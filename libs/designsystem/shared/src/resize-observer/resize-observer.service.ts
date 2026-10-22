@@ -29,7 +29,6 @@ export class ResizeObserverService implements OnDestroy {
     if (this.observer) {
       this.observer.disconnect();
     }
-    this.observedElements = null;
   }
 
   unobserve(elementOrRef: Element | ElementRef<Element>) {

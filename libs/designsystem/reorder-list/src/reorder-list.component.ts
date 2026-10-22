@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -17,7 +18,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 
-import { IonBackdrop, IonReorderGroup } from '@ionic/angular/standalone';
+import { IonBackdrop, IonReorderGroup } from '@ionic/angular';
 import { ReorderEvent } from './reorder-event';
 
 @Component({
@@ -32,6 +33,7 @@ import { ReorderEvent } from './reorder-event';
   selector: 'kirby-reorder-list',
   templateUrl: './reorder-list.component.html',
   styleUrls: ['./reorder-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ReorderListComponent implements OnChanges, OnDestroy {
   @Input() items: any[];

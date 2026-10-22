@@ -1,5 +1,5 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { ToastController as IonicToastController } from '@ionic/angular/standalone';
+import { ToastController as IonicToastController } from '@ionic/angular';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { Overlay } from '@kirbydesign/designsystem/modal';

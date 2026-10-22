@@ -9,6 +9,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  styleUrls: ['./progress-circle-examples.shared.scss'],
   imports: [ProgressCircleComponent],
 })
 export class ProgressCircleExampleDefaultComponent {

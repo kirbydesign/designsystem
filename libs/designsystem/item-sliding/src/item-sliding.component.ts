@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
-import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
+import { IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular';
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
 @Component({
@@ -10,10 +10,11 @@ import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
   selector: 'kirby-item-sliding',
   templateUrl: './item-sliding.component.html',
   styleUrls: ['./item-sliding.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ItemSlidingComponent {
-  @ViewChild(IonItemSliding, { static: true }) itemSliding: IonItemSliding;
-  @Input() swipeActions: ItemSwipeAction[];
+  @ViewChild(IonItemSliding, { static: true }) itemSliding!: IonItemSliding;
+  @Input() swipeActions: ItemSwipeAction[] = [];
 
   _side: 'start' | 'end' = 'start';
   @Input() set side(value: ItemSlidingSide) {

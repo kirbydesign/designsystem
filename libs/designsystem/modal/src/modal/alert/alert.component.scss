@@ -1,14 +1,13 @@
-@use 'sass:math';
 @use '@kirbydesign/core/src/scss/utils';
 
-$column-gap: utils.size('xxs');
+$column-gap: var(--kirby-spacing-xxs);
 
 article {
   overflow: hidden;
-  padding: utils.size('s');
-  padding-top: utils.size('m');
+  padding: var(--kirby-spacing-s);
+  padding-top: var(--kirby-spacing-m);
   @include utils.media('<=xsmall') {
-    padding: utils.size('xxs');
+    padding: var(--kirby-spacing-xxs);
   }
 }
 
@@ -19,7 +18,7 @@ article {
   flex-wrap: wrap;
 
   button {
-    flex: 0 1 calc(50% - #{math.div($column-gap, 2)});
+    flex: 0 1 calc(50% - calc($column-gap / 2));
     margin-inline: 0;
 
     &:not(:only-child) {

@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivateFn, RouterStateSnapshot } from '@angular/router';
 
-import { ModalController as IonicModalController } from '@ionic/angular/standalone';
+import { ModalController as IonicModalController } from '@ionic/angular';
 import { ModalNavigationService } from '../../modal-navigation.service';
 import { ModalController } from './modal.controller';
 

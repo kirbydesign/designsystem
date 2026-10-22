@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -8,7 +9,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular/standalone';
+import { IonItemOptions, IonItemSliding, IonLabel } from '@ionic/angular';
 
 import { ThemeColor } from '@kirbydesign/core';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
@@ -33,6 +34,7 @@ export type BoundaryClass = 'first' | 'last';
     IconComponent,
     IonLabel,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
   _isSwipingEnabled = false;

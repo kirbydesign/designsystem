@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -18,7 +19,7 @@ import {
 import { ThemeColor } from '@kirbydesign/core';
 
 import { forwardAttributes } from '@kirbydesign/designsystem/shared';
-import { IonItemDivider, IonItemGroup, IonList, IonListHeader } from '@ionic/angular/standalone';
+import { IonItemDivider, IonItemGroup, IonList, IonListHeader } from '@ionic/angular';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
@@ -36,16 +37,7 @@ import { LoadOnDemandEvent } from './list.event';
 export type ListShape = 'square' | 'rounded' | 'none';
 
 export type StandAloneSpacing =
-  | 'xxxxs'
-  | 'xxxs'
-  | 'xxs'
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'xxl'
-  | 'xxxl';
+  'xxxxs' | 'xxxs' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -62,6 +54,7 @@ export type StandAloneSpacing =
     IonItemDivider,
     ListItemComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('list', { static: true }) list: any;
@@ -83,7 +76,7 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   /**
    * Callback that defines how to track changes for items in the iterable.
    */
-  @Input() trackBy: TrackByFunction<any>;
+  @Input() trackBy?: TrackByFunction<any>;
 
   /**
    * Property name to decide which items should be stand alone
