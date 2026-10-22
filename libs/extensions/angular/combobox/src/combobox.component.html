@@ -29,30 +29,66 @@
   (willHide)="onPopoverWillHide()"
 >
   <kirby-card [attr.id]="_listboxId" [attr.aria-labelledby]="_comboboxId">
-    @if (searchItems.length === 0) {
+    @if (navigableItems.length === 0) {
       <kirby-item>
         <p class="kirby-item-title no-results">{{ noSearchResultsText }}</p>
       </kirby-item>
     } @else {
-      <cdk-virtual-scroll-viewport
-        class="combobox-viewport"
-        role="listbox"
-        [itemSize]="itemHeight"
-        [style.height.px]="viewportHeight"
-      >
-        <ng-container *cdkVirtualFor="let item of searchItems">
-          <ng-container
-            *ngTemplateOutlet="
-              itemTemplate || defaultItemTemplate;
-              context: {
-                $implicit: item,
-                selected: item === selectedItem,
-                focused: item === focusedItem,
-              }
-            "
-          ></ng-container>
-        </ng-container>
-      </cdk-virtual-scroll-viewport>
+      <div class="combobox-viewport-container">
+        @if (stickyGroup) {
+          <div
+            class="combobox-sticky-group-header"
+            [attr.id]="stickyGroup.id"
+            role="presentation"
+            [style.transform]="'translateY(' + stickyGroupOffset + 'px)'"
+          >
+            <ng-container
+              *ngTemplateOutlet="
+                defaultGroupHeaderTemplate;
+                context: { $implicit: stickyGroup }
+              "
+            ></ng-container>
+          </div>
+        }
+        <cdk-virtual-scroll-viewport
+          class="combobox-viewport"
+          role="listbox"
+          minBufferPx="1240"
+          maxBufferPx="1620"
+          [itemSize]="effectiveItemSize"
+          [style.height.px]="viewportHeight"
+          (scroll)="onViewportScroll()"
+        >
+          <ng-container *cdkVirtualFor="let item of searchItems">
+            @if (isGroupItem(item)) {
+              <div
+                class="combobox-group-header-placeholder"
+                [class.is-active]="item === stickyGroup"
+                role="presentation"
+                aria-hidden="true"
+              >
+                <ng-container
+                  *ngTemplateOutlet="
+                    defaultGroupHeaderTemplate;
+                    context: { $implicit: item }
+                  "
+                ></ng-container>
+              </div>
+            } @else {
+              <ng-container
+                *ngTemplateOutlet="
+                  itemTemplate || defaultItemTemplate;
+                  context: {
+                    $implicit: item,
+                    selected: item === selectedItem,
+                    focused: item === focusedItem,
+                  }
+                "
+              ></ng-container>
+            }
+          </ng-container>
+        </cdk-virtual-scroll-viewport>
+      </div>
     }
   </kirby-card>
 </kirby-popover>
@@ -62,7 +98,7 @@
     role="option"
     [selectable]="true"
     [selected]="selected"
-    [class.focused]="focused"
+    [class.keyboard-focused]="focused"
     [attr.id]="getItemId(item)"
     [attr.aria-selected]="selected"
     (click)="onItemSelect(item)"
@@ -71,5 +107,11 @@
     @if (selected) {
       <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
     }
+  </kirby-item>
+</ng-template>
+
+<ng-template #defaultGroupHeaderTemplate let-group>
+  <kirby-item>
+    <p class="kirby-item-detail">{{ group.displayName }}</p>
   </kirby-item>
 </ng-template>

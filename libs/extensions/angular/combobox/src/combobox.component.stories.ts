@@ -1,5 +1,9 @@
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ComboboxComponent } from '@kirbydesign/extensions-angular/combobox';
+import {
+  ComboboxComponent,
+  ComboboxItemTemplateDirective,
+  GroupSettings,
+} from '@kirbydesign/extensions-angular/combobox';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ItemModule } from '@kirbydesign/designsystem/item';
@@ -9,6 +13,7 @@ import {
   InputSize,
 } from '@kirbydesign/designsystem/form-field';
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -83,8 +88,10 @@ const meta: Meta<ComboboxComponent> = {
         ItemModule,
         InputComponent,
         ComboboxComponent,
+        ComboboxItemTemplateDirective,
         FormFieldComponent,
         ReactiveFormsModule,
+        IconModule,
       ],
     }),
   ],
@@ -104,6 +111,7 @@ const meta: Meta<ComboboxComponent> = {
         'noSearchResultsText',
         'selectionClearedAnnouncement',
         'searchFunction',
+        'groupSettings',
         'hasError',
         'hasErrorChange',
         'size',
@@ -203,15 +211,16 @@ export const WithTemplate: Story = {
   render: (args) => ({
     props: {
       ...args,
+      groupSettings: currencyGroupSettings,
     },
     template: `
-      <kirby-x-combobox ${argsToTemplate(args)} >
+      <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings">
         <kirby-item
           *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
           role="option"
           [selectable]="true"
           [selected]="selected"
-          [class.focused]="focused"
+          [class.keyboard-focused]="focused"
           [attr.aria-selected]="selected"
           [attr.id]="item.code"
         >
@@ -248,22 +257,22 @@ export const CustomSearchFunction: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
-         [size]="'sm'"
-         [selectable]="true"
-         [selected]="selected"
-         [class.focused]="focused"
-         role="option"
-         [attr.aria-selected]="selected"
-         [attr.id]="item.code"
-       >
-         <kirby-label>
-           <p class="kirby-item-title">{{ item.code }}</p>
-           <p class="kirby-item-detail">{{ item.name }}</p>
-         </kirby-label>
-       </kirby-item>
-     </kirby-x-combobox>
-   `,
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+          [size]="'sm'"
+          [selectable]="true"
+          [selected]="selected"
+          [class.keyboard-focused]="focused"
+          role="option"
+          [attr.aria-selected]="selected"
+          [attr.id]="item.code"
+        >
+          <kirby-label>
+            <p class="kirby-item-title">{{ item.code }}</p>
+            <p class="kirby-item-detail">{{ item.name }}</p>
+          </kirby-label>
+        </kirby-item>
+      </kirby-x-combobox>
+    `,
   }),
 };
 
@@ -283,24 +292,24 @@ export const LargeList: Story = {
       ...args,
     },
     template: `
-     <kirby-x-combobox ${argsToTemplate(args)} >
-       <kirby-item
-         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
-         [size]="'sm'"
-         [selectable]="true"
-         [selected]="selected"
-         [class.focused]="focused"
-         role="option"
-         [attr.aria-selected]="selected"
-         [attr.id]="item.code"
-       >
-         <kirby-label>
-           <p class="kirby-item-title">{{ item.code }}</p>
-           <p class="kirby-item-detail">{{ item.name }}</p>
-         </kirby-label>
-       </kirby-item>
-     </kirby-x-combobox>
-   `,
+      <kirby-x-combobox ${argsToTemplate(args)} >
+        <kirby-item
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+          [size]="'sm'"
+          [selectable]="true"
+          [selected]="selected"
+          [class.keyboard-focused]="focused"
+          role="option"
+          [attr.aria-selected]="selected"
+          [attr.id]="item.code"
+        >
+          <kirby-label>
+            <p class="kirby-item-title">{{ item.code }}</p>
+            <p class="kirby-item-detail">{{ item.name }}</p>
+          </kirby-label>
+        </kirby-item>
+      </kirby-x-combobox>
+    `,
   }),
 };
 
@@ -399,7 +408,52 @@ export const Focused: Story = {
 };
 
 /**
- * This example demonstrates the combobox integrated inside a `kirby-form-field`
+ * When the `groupSettings` property is provided, items in the dropdown are grouped under headers.
+ * Each entry in the array defines a group with an `id`, a `displayName`, and a `condition`
+ * predicate. Groups are rendered in array order. Items that match no group are not shown.
+ * Group headers cannot be selected.
+ *
+ * In this example the currencies are grouped into **Europe**, **America** and **Other**.
+ */
+const europeanCurrencyCodes = new Set(['EUR', 'GBP', 'CHF', 'SEK', 'NOK', 'DKK', 'PLN', 'RUB']);
+const americanCurrencyCodes = new Set(['USD', 'CAD', 'MXN', 'BRL']);
+
+const currencyGroupSettings: GroupSettings<CurrencyItem> = [
+  {
+    id: 'europe',
+    displayName: 'Europe',
+    condition: (item) => europeanCurrencyCodes.has(item.code),
+  },
+  {
+    id: 'america',
+    displayName: 'America',
+    condition: (item) => americanCurrencyCodes.has(item.code),
+  },
+  {
+    id: 'other',
+    displayName: 'Other',
+    condition: () => true, // catch-all
+  },
+];
+
+export const WithGrouping: Story = {
+  args: {
+    items: currencyItems,
+    itemTextProperty: 'name',
+    itemIdProperty: 'code',
+    placeholder: 'Select currency',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      groupSettings: currencyGroupSettings,
+    },
+    template: `
+      <kirby-x-combobox ${argsToTemplate(args)} [groupSettings]="groupSettings" />
+    `,
+  }),
+};
+/*
  * with a reactive `FormControl`. It validates that:
  * - The form-field label and message render correctly around the combobox
  * - The combobox participates in Angular reactive forms (value binding, validation)
