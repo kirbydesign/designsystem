@@ -47,10 +47,11 @@ $min-screen-width: 375px;
     }
 
     > input[kirby-input]:disabled ~ kirby-icon {
-      color: var(--kirby-semi-dark-shade);
+      opacity: 0.4; // TODO(@design-tokens) needs token
     }
 
     > kirby-icon {
+      color: var(--kirby-color-content-raised);
       position: absolute;
       top: 0;
       bottom: 0;
@@ -96,5 +97,5 @@ kirby-card {
 }
 
 .no-results {
-  color: var(--kirby-text-color-semi-dark);
+  color: var(--kirby-color-content-base-quiet);
 }
