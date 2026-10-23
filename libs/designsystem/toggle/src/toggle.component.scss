@@ -45,19 +45,8 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     }
   }
 
-  &[disabled] {
-    color: var(--kirby-text-color-semi-dark);
-
-    ion-toggle {
-      --color: var(--kirby-medium);
-      --color-checked: var(--kirby-medium);
-
-      opacity: 1; // Reset Ionic disabled style for label
-
-      &::part(track) {
-        opacity: 0.3; // Re-establish opacity for track
-      }
-    }
+  &[disabled] ion-toggle {
+    opacity: 0.4; // TODO(@design-tokens) needs token
   }
 }
 
@@ -79,28 +68,25 @@ ion-toggle {
     outline: none;
   }
 
-  $background: 'semi-dark';
-  $background-checked: 'success';
-  $handle-background: 'white';
-
-  @include interaction-state.apply-hover {
+  @include utils.hover {
     // Not checked
-    --track-background: #{interaction-state.get-state-color($background, 's')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxxs')};
+    --track-background: var(--kirby-toggle-color-fill-hover);
+    --handle-background: var(--kirby-toggle-color-content-hover);
 
     // Checked
-    --track-background-checked: #{interaction-state.get-state-color($background-checked, 's')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxxs')};
+    --track-background-checked: var(--kirby-toggle-color-fill-engaged-hover);
+    --handle-background-checked: var(--kirby-toggle-color-content-hover);
   }
 
-  @include interaction-state.apply-active {
+  &:active,
+  &.interaction-state-active {
     // Not checked
-    --track-background: #{interaction-state.get-state-color($background, 'l')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxs')};
+    --track-background: var(--kirby-toggle-color-fill-active);
+    --handle-background: var(--kirby-toggle-color-content-active);
 
     // Checked
-    --track-background-checked: #{interaction-state.get-state-color($background-checked, 'l')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxs')};
+    --track-background-checked: var(--kirby-toggle-color-fill-engaged-active);
+    --handle-background-checked: var(--kirby-toggle-color-content-active);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -108,12 +94,12 @@ ion-toggle {
   /* stylelint-disable no-duplicate-selectors */
   & {
     // Not checked
-    --track-background: var(--kirby-semi-dark);
-    --handle-background: var(--kirby-white);
+    --track-background: var(--kirby-toggle-color-fill);
+    --handle-background: var(--kirby-toggle-color-content);
 
     // Checked
-    --track-background-checked: var(--kirby-success);
-    --handle-background-checked: var(--kirby-white);
+    --track-background-checked: var(--kirby-toggle-color-fill-engaged);
+    --handle-background-checked: var(--kirby-toggle-color-content);
     --handle-transition: var(--kirby-transition-duration-quick);
     --handle-box-shadow: var(--kirby-elevation-2);
 
