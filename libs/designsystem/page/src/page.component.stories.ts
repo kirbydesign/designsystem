@@ -1,8 +1,14 @@
+import { signal, type WritableSignal } from '@angular/core';
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, waitFor } from 'storybook/test';
 
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
+import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
@@ -24,6 +30,11 @@ const meta: Meta<PageComponent> = {
         SlideDirective,
         CardComponent,
         CardHeaderComponent,
+        HeaderComponent,
+        HeaderActionsDirective,
+        ActionGroupComponent,
+        ButtonComponent,
+        IconComponent,
       ],
     }),
   ],
@@ -37,6 +48,81 @@ const meta: Meta<PageComponent> = {
 };
 export default meta;
 type Story = StoryObj<PageComponent>;
+
+const scrollToToolbarTitle =
+  (showActions: () => void): Story['play'] =>
+  async ({ canvasElement }) => {
+    const toolbar = canvasElement.querySelector('ion-toolbar');
+
+    await waitFor(() =>
+      expect(toolbar.style.getPropertyValue('--action-buttons-width')).not.toBe('')
+    );
+
+    showActions();
+
+    await waitFor(() =>
+      expect(toolbar.querySelector('ion-buttons[slot="primary"] button')).toBeInTheDocument()
+    );
+
+    await canvasElement.querySelector('ion-content').scrollToBottom(0);
+
+    await waitFor(() =>
+      expect(toolbar.querySelector('ion-title')).toHaveClass('slide-and-fade-in')
+    );
+  };
+
+const conditionalHeaderActionsStory = ({
+  title,
+  headerActions,
+  pageAttributes = '',
+}: {
+  title: string;
+  headerActions: string;
+  pageAttributes?: string;
+}): Story => {
+  let showActions: WritableSignal<boolean>;
+
+  return {
+    parameters: {
+      viewport: {
+        options: {
+          compact: {
+            name: 'Compact mobile',
+            styles: { width: '375px', height: '480px' },
+          },
+        },
+      },
+      chromatic: {
+        modes: {
+          mobile: { viewport: { width: 375, height: 480 } },
+        },
+      },
+    },
+    globals: {
+      viewport: { value: 'compact', isRotated: false },
+    },
+    render: () => {
+      showActions = signal(false);
+      return {
+        props: {
+          title,
+          showActions,
+        },
+        template: `<kirby-app>
+    <kirby-page ${pageAttributes}>
+      <kirby-header [title]="title">
+        ${headerActions}
+      </kirby-header>
+      <kirby-page-content>
+        <div style="height: 100vh">Scroll to show the toolbar title</div>
+      </kirby-page-content>
+    </kirby-page>
+    </kirby-app>`,
+      };
+    },
+    play: scrollToToolbarTitle(() => showActions.set(true)),
+  };
+};
 
 export const Page: Story = {
   args: {
@@ -58,6 +144,32 @@ export const Page: Story = {
     </kirby-app>`,
   }),
 };
+
+export const PageWithConditionallyRenderedHeaderActions = conditionalHeaderActionsStory({
+  title: 'A long page title that should remain centered in the toolbar',
+  headerActions: `
+    <kirby-action-group *kirbyHeaderActions>
+      @if (showActions()) {
+        <button kirby-button attentionLevel="3">Action</button>
+      }
+    </kirby-action-group>`,
+});
+
+export const PageWithConditionallyRenderedHeaderIconActions = conditionalHeaderActionsStory({
+  title: 'A long transaction title that should remain centered in the toolbar',
+  pageAttributes: 'defaultBackHref="/"',
+  headerActions: `
+    <ng-container *kirbyHeaderActions>
+      @if (showActions()) {
+        <button kirby-button attentionLevel="3" aria-label="Confirm">
+          <kirby-icon name="verify"></kirby-icon>
+        </button>
+        <button kirby-button attentionLevel="3" aria-label="Download">
+          <kirby-icon name="download"></kirby-icon>
+        </button>
+      }
+    </ng-container>`,
+});
 
 export const PageWithSlides: Story = {
   render: () => ({
