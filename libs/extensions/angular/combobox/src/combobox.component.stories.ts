@@ -211,7 +211,7 @@ export const WithTemplate: Story = {
           role="option"
           [selectable]="true"
           [selected]="selected"
-          [class.focused]="focused"
+          [class.keyboard-focused]="focused"
           [attr.aria-selected]="selected"
           [attr.id]="item.code"
         >
@@ -248,22 +248,22 @@ export const CustomSearchFunction: Story = {
     template: `
       <kirby-x-combobox ${argsToTemplate(args)} >
         <kirby-item
-         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
-         [size]="'sm'"
-         [selectable]="true"
-         [selected]="selected"
-         [class.focused]="focused"
-         role="option"
-         [attr.aria-selected]="selected"
-         [attr.id]="item.code"
-       >
-         <kirby-label>
-           <p class="kirby-item-title">{{ item.code }}</p>
-           <p class="kirby-item-detail">{{ item.name }}</p>
-         </kirby-label>
-       </kirby-item>
-     </kirby-x-combobox>
-   `,
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+          [size]="'sm'"
+          [selectable]="true"
+          [selected]="selected"
+          [class.keyboard-focused]="focused"
+          role="option"
+          [attr.aria-selected]="selected"
+          [attr.id]="item.code"
+        >
+          <kirby-label>
+            <p class="kirby-item-title">{{ item.code }}</p>
+            <p class="kirby-item-detail">{{ item.name }}</p>
+          </kirby-label>
+        </kirby-item>
+      </kirby-x-combobox>
+    `,
   }),
 };
 
@@ -283,24 +283,24 @@ export const LargeList: Story = {
       ...args,
     },
     template: `
-     <kirby-x-combobox ${argsToTemplate(args)} >
-       <kirby-item
-         *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
-         [size]="'sm'"
-         [selectable]="true"
-         [selected]="selected"
-         [class.focused]="focused"
-         role="option"
-         [attr.aria-selected]="selected"
-         [attr.id]="item.code"
-       >
-         <kirby-label>
-           <p class="kirby-item-title">{{ item.code }}</p>
-           <p class="kirby-item-detail">{{ item.name }}</p>
-         </kirby-label>
-       </kirby-item>
-     </kirby-x-combobox>
-   `,
+      <kirby-x-combobox ${argsToTemplate(args)} >
+        <kirby-item
+          *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused;"
+          [size]="'sm'"
+          [selectable]="true"
+          [selected]="selected"
+          [class.keyboard-focused]="focused"
+          role="option"
+          [attr.aria-selected]="selected"
+          [attr.id]="item.code"
+        >
+          <kirby-label>
+            <p class="kirby-item-title">{{ item.code }}</p>
+            <p class="kirby-item-detail">{{ item.name }}</p>
+          </kirby-label>
+        </kirby-item>
+      </kirby-x-combobox>
+    `,
   }),
 };
 
