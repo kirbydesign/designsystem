@@ -17,6 +17,7 @@ kirby-card {
     #{$dropdown-max-height},
     var(--kirby-floating-available-height, #{$dropdown-max-height})
   );
+  min-height: utils.$dropdown-item-height;
   overflow-y: auto;
   box-shadow: var(--kirby-elevation-4);
   min-width: $min-screen-width;
