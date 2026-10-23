@@ -83,8 +83,16 @@ kirby-card {
 }
 
 .combobox-viewport {
-  display: block;
-  width: 100%;
+  @include utils.slotted('.cdk-virtual-scroll-content-wrapper > *') {
+    --kirby-content-border-top-radius: 0;
+    --kirby-content-border-bottom-radius: 0;
+  }
+  @include utils.slotted('.cdk-virtual-scroll-content-wrapper > :first-child') {
+    --kirby-content-border-top-radius: var(--kirby-border-radius-n);
+  }
+  @include utils.slotted('.cdk-virtual-scroll-content-wrapper > :last-child') {
+    --kirby-content-border-bottom-radius: var(--kirby-border-radius-n);
+  }
 }
 
 .no-results {
