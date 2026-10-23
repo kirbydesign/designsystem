@@ -74,6 +74,10 @@
   }
 }
 
+@mixin loading-overlay() {
+  --kirby-loading-overlay-backdrop-opacity: #{variables.$loading-overlay-backdrop-opacity * 100%};
+}
+
 @mixin page-content-max-widths() {
   @each $name, $value in variables.$page-content-max-widths {
     --kirby-page-content-max-width-#{$name}: #{$value};
@@ -97,20 +101,26 @@
   }
 }
 
+// Declared on :root and on every surface, so the offset (inner) color resolves to the surface it is used on
 @mixin focus-ring() {
-  --kirby-focus-ring-color: #{colors.$focus-ring-color};
-
   // Small inset ring for compact controls (checkbox, radio, toggle, tab-navigation-item)
   --kirby-focus-ring-sm-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 3px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-color-border-focus) inset,
+    0 0 0 3px var(--kirby-color-border-offset) inset;
 
   // Medium inset ring for larger controls (button, dropdown, segmented-control, form-field, etc.)
   --kirby-focus-ring-md-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 4px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-color-border-focus) inset,
+    0 0 0 4px var(--kirby-color-border-offset) inset;
+
+  // Medium inset ring for controls that also turn their own border into the focus color (card)
+  --kirby-focus-ring-md-combined-inset:
+    0 0 0 1px var(--kirby-color-border-focus) inset,
+    0 0 0 3px var(--kirby-color-border-offset) inset;
 
   // Medium outer ring for inline elements where inset rings are not suitable (link text)
   --kirby-focus-ring-md-outer:
-    0 0 0 2px var(--kirby-white), 0 0 0 4px var(--kirby-focus-ring-color);
+    0 0 0 2px var(--kirby-color-border-offset), 0 0 0 4px var(--kirby-color-border-focus);
 }
 
 @mixin transition-easings() {
@@ -159,6 +169,9 @@
 
   /* Z-INDEXES */
   @include z-layers;
+
+  /* LOADING OVERLAY */
+  @include loading-overlay;
 
   /* PAGE CONTENT MAX-WIDTHS */
   @include page-content-max-widths;

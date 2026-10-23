@@ -2,6 +2,9 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { LabelComponent } from '@kirbydesign/designsystem/item';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+// eslint-disable-next-line no-restricted-imports
+import { renderOnSurfaces } from '../../.storybook/story-helpers';
 import { SectionHeaderExampleComponent } from '~/app/examples/section-header-example/section-header-example.component';
 
 const meta: Meta<SectionHeaderComponent> = {
@@ -9,7 +12,7 @@ const meta: Meta<SectionHeaderComponent> = {
   title: 'Components / Section Header',
   decorators: [
     moduleMetadata({
-      imports: [LabelComponent, SectionHeaderExampleComponent],
+      imports: [LabelComponent, SectionHeaderExampleComponent, CardComponent],
     }),
   ],
 };
@@ -150,4 +153,19 @@ export const SectionHeaderHeadingTypographyWithLabel: Story = {
       </kirby-section-header>
     `,
   }),
+};
+
+export const Surfaces: Story = {
+  render: renderOnSurfaces(`
+    <kirby-section-header>
+      <h2 heading>{{ surface }}</h2>
+      <p detail slot="end">With detail</p>
+    </kirby-section-header>
+    <kirby-section-header>
+      <kirby-label>
+        <h3 heading>Section header</h3>
+        <p label>With a label</p>
+      </kirby-label>
+    </kirby-section-header>
+  `),
 };
