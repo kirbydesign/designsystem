@@ -180,18 +180,17 @@ ion-loading.kirby-loading-overlay {
   user-select: none;
   text-align: center;
 
-  // Set default colors
-  --background: var(--kirby-success-tint);
-  --color: var(--kirby-black);
+  --background: var(--kirby-color-fill-success-quiet);
+  --color: var(--kirby-color-content-success-quiet);
+  --border-color: var(--kirby-color-border-success-quiet);
+  --border-style: solid;
+  --border-width: 1px;
   --button-color: var(--color);
 
-  // For readability
-  &.success {
-    --background: var(--kirby-success-tint);
-  }
-
   &.warning {
-    --background: var(--kirby-warning);
+    --background: var(--kirby-color-fill-warning-quiet);
+    --color: var(--kirby-color-content-warning-quiet);
+    --border-color: var(--kirby-color-border-warning-quiet);
   }
 }
 

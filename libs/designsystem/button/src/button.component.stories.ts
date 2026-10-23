@@ -79,11 +79,14 @@ const buttonVariants: {
   label: string;
   attentionLevel?: AttentionLevel;
   noDecoration?: boolean;
+  destructive?: boolean;
 }[] = [
   { id: 'level-1', label: 'Attention level 1', attentionLevel: '1' },
   { id: 'level-2', label: 'Attention level 2', attentionLevel: '2' },
   { id: 'level-3', label: 'Attention level 3', attentionLevel: '3' },
   { id: 'no-decoration', label: 'No decoration', noDecoration: true },
+  // Only applied by kirby-alert
+  { id: 'destructive', label: 'Destructive', attentionLevel: '1', destructive: true },
 ];
 
 // Disabled buttons can't be interacted with, so disabled is shown as a state of its own
@@ -110,6 +113,7 @@ export const InteractionStates: Story = {
             [attr.id]="'button-' + surface + '-' + variant.id + '-' + state"
             [attentionLevel]="variant.attentionLevel"
             [noDecoration]="variant.noDecoration"
+            [class.destructive]="variant.destructive"
             [disabled]="state === 'disabled'"
           >
             {{ state }}
