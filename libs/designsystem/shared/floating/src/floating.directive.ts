@@ -277,6 +277,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownDocumentClickEventHandling();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
     this.isShown = false;
+    this.renderer.removeStyle(
+      this.elementRef.nativeElement,
+      '--kirby-floating-available-height',
+      RendererStyleFlags2.DashCase
+    );
     this.displayChanged.emit(this.isShown);
   }
 
@@ -340,6 +345,8 @@ export class FloatingDirective implements OnInit, OnDestroy {
       size({
         padding,
         apply: ({ availableHeight, elements }) => {
+          if (!this.isShown) return;
+
           this.renderer.setStyle(
             elements.floating,
             '--kirby-floating-available-height',

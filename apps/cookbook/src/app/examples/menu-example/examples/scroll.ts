@@ -15,7 +15,7 @@ const config = {
   <kirby-item (click)="actionClicked('Earth')">
     <p class="kirby-item-title">Earth</p>
   </kirby-item>
-    <kirby-item (click)="actionClicked('Mars')">
+  <kirby-item (click)="actionClicked('Mars')">
     <p class="kirby-item-title">Mars</p>
   </kirby-item>  
   <kirby-item (click)="actionClicked('Jupiter')">

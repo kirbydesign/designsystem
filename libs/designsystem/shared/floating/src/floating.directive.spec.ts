@@ -533,6 +533,16 @@ describe('FloatingDirective', () => {
         expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ display: 'none' });
       });
 
+      it('should clear available height when hidden', () => {
+        const hostElement = component.hostElementRef.nativeElement;
+        hostElement.style.setProperty('--kirby-floating-available-height', '120px');
+        directive['isShown'] = true;
+
+        directive.hide();
+
+        expect(hostElement.style.getPropertyValue('--kirby-floating-available-height')).toBe('');
+      });
+
       it('should emit displayChanged when shown', () => {
         directive['isShown'] = true;
         spyOn(directive.displayChanged, 'emit');
