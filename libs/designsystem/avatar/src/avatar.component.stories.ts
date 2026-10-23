@@ -1,14 +1,19 @@
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
+// eslint-disable-next-line no-restricted-imports
+import { renderOnSurfaces } from '../../.storybook/story-helpers';
 import { AvatarExampleComponent } from '~/app/examples/avatar-example/avatar-example.component';
 
 const meta: Meta<AvatarComponent> = {
   component: AvatarComponent,
   decorators: [
     moduleMetadata({
-      imports: [AvatarExampleComponent],
+      imports: [AvatarExampleComponent, BadgeComponent, CardComponent, IconComponent],
     }),
   ],
   title: 'Components / Avatar',
@@ -21,7 +26,6 @@ export const Default: Story = {
     text: 'A',
     imageSrc: '',
     altText: '',
-    stroke: false,
     overlay: false,
     size: AvatarSize.SM,
   },
@@ -76,7 +80,7 @@ export const ColorVariants: Story = {
       <div class="color-grid">
         @for (color of officialColors; track color) {
           <div class="color-item">
-            <kirby-avatar [themeColor]="color" [stroke]="true" text="A" size="md"></kirby-avatar>
+            <kirby-avatar [themeColor]="color" text="A" size="md"></kirby-avatar>
             <span class="kirby-text-xsmall">{{ color }}</span>
           </div>
         }
@@ -115,4 +119,21 @@ export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-avatar-example></cookbook-avatar-example>`,
   }),
+};
+
+export const Surfaces: Story = {
+  render: renderOnSurfaces(`
+    <p class="kirby-text-normal">{{ surface }}</p>
+    <div style="display: flex; flex-wrap: wrap; gap: var(--kirby-spacing-s); align-items: center">
+      <kirby-avatar text="A" size="md"></kirby-avatar>
+      <kirby-avatar text="A" size="md" themeColor="white"></kirby-avatar>
+      <kirby-avatar text="A" size="md" themeColor="light"></kirby-avatar>
+      <kirby-avatar size="md" themeColor="light">
+        <kirby-icon name="person"></kirby-icon>
+      </kirby-avatar>
+      <kirby-avatar text="A" size="md">
+        <kirby-badge><kirby-icon name="attach"></kirby-icon></kirby-badge>
+      </kirby-avatar>
+    </div>
+  `),
 };

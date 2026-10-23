@@ -110,15 +110,38 @@ $button-margin: var(--kirby-spacing-xxxs);
 
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
-  --kirby-button-color: var(--kirby-black);
+  --kirby-button-color: var(--kirby-color-content-base);
+  --kirby-button-border-color: transparent;
 
-  @include interaction-state.apply-hover;
-  @include interaction-state.apply-active('s');
+  @include utils.hover {
+    --kirby-button-background-color: var(--kirby-color-fill-base-hover);
+    --kirby-button-color: var(--kirby-color-content-base-hover);
+    --kirby-button-border-color: var(--kirby-color-border-base-quiet-hover);
+  }
+
+  &:active {
+    --kirby-button-background-color: var(--kirby-color-fill-base-active);
+    --kirby-button-color: var(--kirby-color-content-base-active);
+    --kirby-button-border-color: var(--kirby-color-border-base-quiet-active);
+  }
 }
 
 @mixin button-attentionlevel1 {
-  --kirby-button-background-color: var(--kirby-primary);
-  --kirby-button-color: var(--kirby-primary-contrast);
+  --kirby-button-background-color: var(--kirby-color-fill-brand-loud);
+  --kirby-button-color: var(--kirby-color-content-brand-loud);
+  --kirby-button-border-color: var(--kirby-color-border-brand-loud);
+
+  @include utils.hover {
+    --kirby-button-background-color: var(--kirby-color-fill-brand-loud-hover);
+    --kirby-button-color: var(--kirby-color-content-brand-loud-hover);
+    --kirby-button-border-color: var(--kirby-color-border-brand-loud-hover);
+  }
+
+  &:active {
+    --kirby-button-background-color: var(--kirby-color-fill-brand-loud-active);
+    --kirby-button-color: var(--kirby-color-content-brand-loud-active);
+    --kirby-button-border-color: var(--kirby-color-border-brand-loud-active);
+  }
 
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
@@ -129,19 +152,21 @@ $button-margin: var(--kirby-spacing-xxxs);
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: var(--kirby-black);
-  --kirby-button-color: var(--kirby-black-contrast);
+  --kirby-button-background-color: var(--kirby-color-fill-raised);
+  --kirby-button-color: var(--kirby-color-content-raised);
+  --kirby-button-border-color: var(--kirby-color-border-raised-quiet);
 
-  @include interaction-state.apply-hover('s', $make-lighter: true);
-  @include interaction-state.apply-active('m', $make-lighter: true);
-}
+  @include utils.hover {
+    --kirby-button-background-color: var(--kirby-color-fill-raised-hover);
+    --kirby-button-color: var(--kirby-color-content-raised-hover);
+    --kirby-button-border-color: var(--kirby-color-border-raised-quiet-hover);
+  }
 
-@mixin button-attentionlevel3 {
-  --kirby-button-background-color: var(--kirby-inputs-background-color);
-  --kirby-button-color: var(--kirby-inputs-color);
-
-  @include interaction-state.apply-hover('xs');
-  @include interaction-state.apply-active('s');
+  &:active {
+    --kirby-button-background-color: var(--kirby-color-fill-raised-active);
+    --kirby-button-color: var(--kirby-color-content-raised-active);
+    --kirby-button-border-color: var(--kirby-color-border-raised-quiet-active);
+  }
 }
 
 :host {
@@ -152,23 +177,6 @@ $button-margin: var(--kirby-spacing-xxxs);
 
   @include utils.accessible-target-size;
 
-  &:focus-visible {
-    transition: interaction-state.transition();
-    box-shadow: var(--kirby-focus-ring-md-inset);
-  }
-
-  @include interaction-state.initialize-layer;
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active;
-  @include interaction-state.extend-content {
-    display: inherit;
-    width: inherit;
-    flex-direction: inherit;
-    align-items: inherit;
-    justify-content: inherit;
-    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
-  }
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
@@ -176,6 +184,7 @@ $button-margin: var(--kirby-spacing-xxxs);
     font-family: var(--kirby-font-family);
     background-color: var(--kirby-button-background-color, initial);
     color: var(--kirby-button-color, inherit);
+    border: 1px solid var(--kirby-button-border-color, transparent);
     border-radius: var(--kirby-border-radius-pill);
     box-sizing: border-box; // Ensure border is not added to button height
     display: inline-flex;
@@ -190,13 +199,14 @@ $button-margin: var(--kirby-spacing-xxxs);
     font-size: var(--kirby-font-size-s);
     height: var(--kirby-spacing-xl);
     min-width: button-width('md');
-    padding: 0;
+    padding-block: 0;
+    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
     margin: $button-margin;
+    cursor: pointer;
 
-    // Outline is applied on button border instead,
+    // Focus ring is applied as box-shadow instead,
     // to keep the rounded shape:
     outline: none;
-    border: none;
   }
   /* stylelint-enable no-duplicate-selectors */
 
@@ -208,16 +218,12 @@ $button-margin: var(--kirby-spacing-xxxs);
     --kirby-icon-margin-right: var(--kirby-spacing-xxs);
     --kirby-button-padding-left: var(--kirby-spacing-xs);
     --kirby-button-padding-right: var(--kirby-spacing-s);
-
-    padding: 0;
   }
 
   &.icon-right {
     --kirby-icon-margin-left: var(--kirby-spacing-xxs);
     --kirby-button-padding-left: var(--kirby-spacing-s);
     --kirby-button-padding-right: var(--kirby-spacing-xs);
-
-    padding: 0;
   }
 
   &.icon-only {
@@ -228,11 +234,9 @@ $button-margin: var(--kirby-spacing-xxxs);
     padding: 0;
     min-width: unset;
 
-    .content-layer {
-      @include utils.slotted(':not(kirby-icon)') {
-        position: absolute;
-        scale: 0;
-      }
+    @include utils.slotted(':not(kirby-icon)') {
+      position: absolute;
+      scale: 0;
     }
   }
 
@@ -260,12 +264,15 @@ $button-margin: var(--kirby-spacing-xxxs);
     @include button-attentionlevel2;
   }
 
+  // Attention levels 2 and 3 are identical by design, and level 3 is to be removed in the future
   &.attention-level3 {
-    @include button-attentionlevel3;
+    @include button-attentionlevel2;
+  }
 
-    .state-layer {
-      box-shadow: var(--kirby-inputs-elevation);
-    }
+  &:focus-visible {
+    transition: interaction-state.transition();
+    box-shadow: var(--kirby-focus-ring-md-combined-inset);
+    border-color: var(--kirby-color-border-focus);
   }
 
   &[expand='block'] {
@@ -274,13 +281,8 @@ $button-margin: var(--kirby-spacing-xxxs);
 
   &:disabled,
   &[aria-disabled='true'] {
-    color: var(--kirby-semi-dark-shade);
-    border-color: transparent;
     pointer-events: none;
-
-    &:not(.no-decoration) {
-      background-color: var(--kirby-semi-light);
-    }
+    opacity: 0.4; // TODO(@design-tokens) needs token
   }
 
   &.floating {
@@ -300,28 +302,6 @@ $button-margin: var(--kirby-spacing-xxxs);
   text-decoration: none;
 }
 
-:host-context(.kirby-color-brightness-dark) {
-  &.no-decoration {
-    --kirby-button-color: var(--kirby-white);
-
-    @include interaction-state.apply-hover('xs', $make-lighter: true);
-    @include interaction-state.apply-active('m', $make-lighter: true);
-  }
-
-  &.attention-level2 {
-    --kirby-button-background-color: var(--kirby-white);
-    --kirby-button-color: var(--kirby-white-contrast);
-
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active('s');
-  }
-
-  &.attention-level3 {
-    @include interaction-state.apply-hover('xxxs', $make-lighter: true);
-    @include interaction-state.apply-active('xxs', $make-lighter: true);
-  }
-}
-
 :host-context(kirby-item)[slot='end'] {
   margin-inline: var(--kirby-spacing-s) 0;
 }
@@ -329,10 +309,6 @@ $button-margin: var(--kirby-spacing-xxxs);
 :host-context(kirby-dropdown) {
   // place arrow-icon in dropdown correctly
   justify-content: space-between;
-
-  .content-layer {
-    min-width: 0;
-  }
 }
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
@@ -349,7 +325,7 @@ $button-margin: var(--kirby-spacing-xxxs);
     &.attention-level1,
     &.attention-level2,
     &.attention-level3 {
-      @include button-attentionlevel3;
+      @include button-attentionlevel2;
     }
   }
 }
@@ -364,7 +340,7 @@ $button-margin: var(--kirby-spacing-xxxs);
   &.attention-level1,
   &.attention-level2,
   &.attention-level3 {
-    @include button-attentionlevel3;
+    @include button-attentionlevel2;
   }
 }
 

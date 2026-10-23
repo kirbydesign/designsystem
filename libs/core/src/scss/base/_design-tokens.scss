@@ -123,6 +123,14 @@
     0 0 0 2px var(--kirby-color-border-offset), 0 0 0 4px var(--kirby-color-border-focus);
 }
 
+// Declared on :root and on every surface, so the offset (inner) color resolves to the surface it is used on
+@mixin error-ring() {
+  // Inset ring for controls that also turn their own border into the danger color
+  --kirby-error-ring-combined-inset:
+    0 0 0 1px var(--kirby-color-border-raised-danger) inset,
+    0 0 0 2px var(--kirby-color-border-offset) inset;
+}
+
 @mixin transition-easings() {
   @each $name, $value in variables.$transition-easings {
     @if meta.type-of($value) == 'map' {
@@ -186,4 +194,7 @@
 
   /* FOCUS RING */
   @include focus-ring;
+
+  /* ERROR RING */
+  @include error-ring;
 }
