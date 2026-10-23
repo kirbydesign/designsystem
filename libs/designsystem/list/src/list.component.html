@@ -7,6 +7,7 @@
   [class.has-header]="headerTemplate"
   [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
+  [class.kirby-surface-raised]="_isRaisedSurface && !_isSectionsEnabled && !_isStandAloneEnabled"
 >
   @if (headerTemplate) {
     <ion-list-header>
@@ -51,14 +52,22 @@
       }
       @if (_isSectionsEnabled && _isStandAloneEnabled) {
         @for (list of section.lists; track list) {
-          <div class="list-items" [ngClass]="standAloneClass()">
+          <div
+            class="list-items"
+            [ngClass]="standAloneClass()"
+            [class.kirby-surface-raised]="_isRaisedSurface"
+          >
             <ng-container
               *ngTemplateOutlet="itemsTemplate; context: { $implicit: list }"
             ></ng-container>
           </div>
         }
       } @else {
-        <div class="list-items" [ngClass]="standAloneClass()">
+        <div
+          class="list-items"
+          [ngClass]="standAloneClass()"
+          [class.kirby-surface-raised]="_isRaisedSurface"
+        >
           <ng-container
             *ngTemplateOutlet="itemsTemplate; context: { $implicit: section.items }"
           ></ng-container>

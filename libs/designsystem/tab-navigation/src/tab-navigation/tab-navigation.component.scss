@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $bottom-border-height: 1px;
-$border-color-standard: var(--kirby-medium);
+$border-color-standard: var(--kirby-color-border-base-quiet);
 
 :host {
   display: block;

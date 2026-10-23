@@ -5,19 +5,27 @@ import {
   type StoryObj,
 } from '@storybook/angular';
 
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import {
   SegmentedControlComponent,
   SegmentedControlMode,
 } from '@kirbydesign/designsystem/segmented-control';
 
+// eslint-disable-next-line no-restricted-imports
+import {
+  idsOnSurfaces,
+  interactionStates,
+  pseudoStatesFor,
+  renderOnSurfaces,
+} from '../../.storybook/story-helpers';
 import { SegmentedControlExampleComponent } from '~/app/examples/segmented-control-example/segmented-control-example.component';
 
 const meta: Meta<SegmentedControlComponent> = {
   component: SegmentedControlComponent,
   decorators: [
     moduleMetadata({
-      imports: [SegmentedControlExampleComponent],
+      imports: [SegmentedControlExampleComponent, CardComponent],
     }),
   ],
   title: 'Components / Segmented Control',
@@ -71,4 +79,51 @@ export const Focused: Story = {
     const nativeButton = segmentButton?.shadowRoot?.querySelector('button');
     (nativeButton as HTMLElement)?.focus();
   },
+};
+
+const segmentedControlModes = Object.values(SegmentedControlMode);
+
+// The focus ring is drawn on the segment button's shadow part, which pseudo-states can't force.
+// See the "Focused" story for focus coverage.
+const segmentedControlStates = interactionStates.filter((state) => state !== 'focus-visible');
+
+// The selected segment is labelled with the state
+const segmentedControlItems = Object.fromEntries(
+  segmentedControlStates.map((state) => [
+    state,
+    [
+      { text: state, id: 'selected' },
+      { text: 'Unselected', id: 'unselected' },
+    ],
+  ])
+);
+
+export const InteractionStates: Story = {
+  parameters: {
+    pseudo: pseudoStatesFor(
+      idsOnSurfaces('segmented-control', segmentedControlModes),
+      'ion-segment-button'
+    ),
+  },
+  render: renderOnSurfaces(
+    `
+    <p class="kirby-text-normal-bold">{{ surface }}</p>
+    @for (mode of modes; track mode) {
+      <p class="kirby-text-small-light">{{ mode }}</p>
+      <div class="row">
+        @for (state of states; track state) {
+          <kirby-segmented-control
+            [attr.id]="'segmented-control-' + surface + '-' + mode + '-' + state"
+            [mode]="mode"
+            [items]="items[state]"
+            [selectedIndex]="0"
+          ></kirby-segmented-control>
+        }
+      </div>
+    }
+  `,
+    'max-content',
+    { modes: segmentedControlModes, states: segmentedControlStates, items: segmentedControlItems },
+    { stacked: true }
+  ),
 };

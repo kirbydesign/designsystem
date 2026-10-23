@@ -18,7 +18,9 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 
-const { size, fontWeight, getColor } = DesignTokenHelper;
+const { size, fontWeight } = DesignTokenHelper;
+const getTokenColor = (name: string) =>
+  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
@@ -44,7 +46,6 @@ describe('PageComponent', () => {
   const firstOtherUrl = 'firstOther';
   const secondOtherUrl = 'secondOther';
   const firstOtherUrlWithQueryParams = 'firstOther?query=params';
-  const shadedBackgroundColor = '#f3f3f3';
   let spectator: SpectatorHost<PageComponent>;
   let ionToolbar: HTMLIonToolbarElement;
   let ionTitle: HTMLIonTitleElement;
@@ -221,7 +222,7 @@ describe('PageComponent', () => {
             it('should not render shaded toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': getColor('background-color'),
+                'background-color': getTokenColor('fill-base'),
               });
             });
           });
@@ -241,7 +242,7 @@ describe('PageComponent', () => {
             it('should render toolbar divider', () => {
               expect(ionToolbar).toHaveComputedStyle(
                 {
-                  'background-color': getColor('medium'),
+                  'background-color': getTokenColor('border-base-silent'),
                   content: '""',
                   height: '1px',
                   width: `${ionToolbar.offsetWidth}px`,
@@ -258,7 +259,7 @@ describe('PageComponent', () => {
             it('should render shaded toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': shadedBackgroundColor,
+                'background-color': getTokenColor('fill-base-hover'),
               });
             });
           });
@@ -346,7 +347,7 @@ describe('PageComponent', () => {
             it('should not render shaded toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': getColor('background-color'),
+                'background-color': getTokenColor('fill-base'),
               });
             });
           });
@@ -366,7 +367,7 @@ describe('PageComponent', () => {
             it('should render toolbar divider', () => {
               expect(ionToolbar).toHaveComputedStyle(
                 {
-                  'background-color': getColor('medium'),
+                  'background-color': getTokenColor('border-base-silent'),
                 },
                 ':before'
               );
@@ -380,7 +381,7 @@ describe('PageComponent', () => {
             it('should render shaded toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': shadedBackgroundColor,
+                'background-color': getTokenColor('fill-base-hover'),
               });
             });
           });
@@ -949,7 +950,7 @@ describe('PageComponent', () => {
       it('should render sticky content with correct background color', () => {
         expect(stickyContentContainer).toHaveComputedStyle(
           {
-            'background-color': getColor('background-color'),
+            'background-color': getTokenColor('fill-base'),
           },
           ':before'
         );
@@ -987,7 +988,7 @@ describe('PageComponent', () => {
         it('should not render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': getColor('background-color'),
+            'background-color': getTokenColor('fill-base'),
           });
         });
       });
@@ -1011,7 +1012,7 @@ describe('PageComponent', () => {
           );
           expect(ionToolbar).toHaveComputedStyle(
             {
-              'background-color': getColor('medium'),
+              'background-color': getTokenColor('border-base-silent'),
             },
             ':before'
           );
@@ -1020,7 +1021,7 @@ describe('PageComponent', () => {
         it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+            'background-color': getTokenColor('fill-base-hover'),
           });
         });
       });
@@ -1038,7 +1039,7 @@ describe('PageComponent', () => {
         it('should render sticky content with correct background color', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': shadedBackgroundColor,
+              'background-color': getTokenColor('fill-base-hover'),
               height: `${stickyContentContainer.offsetHeight}px`,
               width: `${ionScrollElement.clientWidth}px`,
             },
@@ -1049,7 +1050,7 @@ describe('PageComponent', () => {
         it('should render sticky content divider', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': getColor('medium'),
+              'background-color': getTokenColor('border-base-silent'),
               content: '""',
               height: '1px',
               width: `${ionScrollElement.clientWidth}px`,
@@ -1070,7 +1071,7 @@ describe('PageComponent', () => {
         it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+            'background-color': getTokenColor('fill-base-hover'),
           });
         });
       });
@@ -1098,7 +1099,7 @@ describe('PageComponent', () => {
         it('should not render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': getColor('background-color'),
+            'background-color': getTokenColor('fill-base'),
           });
         });
       });
@@ -1118,7 +1119,7 @@ describe('PageComponent', () => {
         xit('should render toolbar divider', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
-              'background-color': getColor('medium'),
+              'background-color': getTokenColor('border-base-silent'),
               content: '""',
               height: '1px',
               width: `${ionToolbar.offsetWidth}px`,
@@ -1130,7 +1131,7 @@ describe('PageComponent', () => {
         it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+            'background-color': getTokenColor('fill-base-hover'),
           });
         });
       });
@@ -1148,7 +1149,7 @@ describe('PageComponent', () => {
         it('should render sticky content with correct background color', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': shadedBackgroundColor,
+              'background-color': getTokenColor('fill-base-hover'),
               height: `${stickyContentContainer.offsetHeight}px`,
               width: `${ionScrollElement.clientWidth}px`,
             },
@@ -1159,7 +1160,7 @@ describe('PageComponent', () => {
         it('should render sticky content divider', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': getColor('medium'),
+              'background-color': getTokenColor('border-base-silent'),
               content: '""',
               height: '1px',
               width: `${ionScrollElement.clientWidth}px`,
@@ -1180,7 +1181,7 @@ describe('PageComponent', () => {
         it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+            'background-color': getTokenColor('fill-base-hover'),
           });
         });
       });

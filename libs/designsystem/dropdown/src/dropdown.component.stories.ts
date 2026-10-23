@@ -10,7 +10,15 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+// eslint-disable-next-line no-restricted-imports
+import {
+  idsOnSurfaces,
+  interactionStates,
+  pseudoStatesFor,
+  renderOnSurfaces,
+} from '../../.storybook/story-helpers';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
@@ -76,6 +84,7 @@ const meta: Meta<DropdownComponent> = {
         ButtonComponent,
         DropdownExampleComponent,
         AsyncItemsWrapperComponent,
+        CardComponent,
       ],
     }),
   ],
@@ -274,4 +283,59 @@ export const DropdownOpenedPopoutBottomStartWithAsyncItems: Story = {
     template: `<kirby-dropdown-async-items-wrapper></kirby-dropdown-async-items-wrapper>`,
   }),
   play: openDropdown,
+};
+
+const dropdownVariants: {
+  id: string;
+  label: string;
+  attentionLevel?: '1' | '2' | '3';
+  hasError?: boolean;
+}[] = [
+  { id: 'level-1', label: 'Attention level 1', attentionLevel: '1' },
+  { id: 'level-2', label: 'Attention level 2', attentionLevel: '2' },
+  { id: 'level-3', label: 'Attention level 3', attentionLevel: '3' },
+  // Error is a variant rather than a state, so it's shown in every interaction state.
+  // This guards the rule order that keeps the error border over hover and active,
+  // and the focus ring over the error.
+  { id: 'error', label: 'Error', hasError: true },
+];
+
+// Disabled dropdowns can't be interacted with, so disabled is shown as a state of its own
+const dropdownStates = [...interactionStates, 'disabled'] as const;
+
+export const InteractionStates: Story = {
+  parameters: {
+    // The trigger button inside the dropdown is what receives hover, active and focus
+    pseudo: pseudoStatesFor(
+      idsOnSurfaces(
+        'dropdown',
+        dropdownVariants.map((variant) => variant.id)
+      ),
+      '> button'
+    ),
+  },
+  render: renderOnSurfaces(
+    `
+    <p class="kirby-text-normal-bold">{{ surface }}</p>
+    @for (variant of variants; track variant.id) {
+      <p class="kirby-text-small-light">{{ variant.label }}</p>
+      <div class="row">
+        @for (state of states; track state) {
+          <kirby-dropdown
+            [attr.id]="'dropdown-' + surface + '-' + variant.id + '-' + state"
+            [attr.aria-label]="variant.label + ' ' + state"
+            [items]="[state]"
+            [placeholder]="state"
+            [attentionLevel]="variant.attentionLevel ?? '3'"
+            [hasError]="!!variant.hasError"
+            [disabled]="state === 'disabled'"
+          ></kirby-dropdown>
+        }
+      </div>
+    }
+  `,
+    'max-content',
+    { variants: dropdownVariants, states: dropdownStates },
+    { stacked: true }
+  ),
 };

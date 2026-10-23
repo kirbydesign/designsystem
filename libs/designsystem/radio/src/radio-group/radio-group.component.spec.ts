@@ -11,8 +11,6 @@ import { IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { Observable, of } from 'rxjs';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
@@ -20,7 +18,8 @@ import { RadioComponent } from '../radio.component';
 
 import { RadioGroupComponent } from './radio-group.component';
 
-const { getColor } = DesignTokenHelper;
+const getTokenColor = (name: string) =>
+  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -863,11 +862,11 @@ describe('RadioGroupComponent', () => {
   describe('when used in a form', () => {
     const radioBorderDefault = {
       'border-width': '1px',
-      'border-color': getColor('semi-dark'),
+      'border-color': getTokenColor('border-raised'),
     };
     const radioBorderErrorState = {
       'border-width': '1px',
-      'border-color': getColor('danger'),
+      'border-color': getTokenColor('border-raised-danger'),
     };
 
     let ionRadioGroup: IonRadioGroup;

@@ -2,10 +2,6 @@
 @use '../themes/colors';
 @use 'variables';
 
-@mixin font-family() {
-  --kirby-font-family: 'Roboto';
-}
-
 @mixin size-fat-finger() {
   --kirby-size-fat-finger: #{variables.$fat-finger-size};
 }
@@ -42,12 +38,6 @@
   }
 }
 
-@mixin border-radii() {
-  @each $name, $value in variables.$border-radii {
-    --kirby-border-radius-#{$name}: #{$value};
-  }
-}
-
 @mixin elevations() {
   @each $name, $value in variables.$elevations {
     --kirby-elevation-#{$name}: #{$value};
@@ -66,21 +56,9 @@
   }
 }
 
-@mixin font-weights() {
-  @each $name, $value in variables.$font-weight {
-    --kirby-font-weight-#{$name}: #{$value};
-  }
-}
-
 @mixin line-heights() {
   @each $name, $value in variables.$line-height {
     --kirby-line-height-#{$name}: #{$value};
-  }
-}
-
-@mixin spacings() {
-  @each $name, $value in variables.$sizes {
-    --kirby-spacing-#{$name}: #{$value};
   }
 }
 
@@ -94,6 +72,10 @@
   @each $name, $value in variables.$z-layers {
     --kirby-z-index-#{$name}: #{$value};
   }
+}
+
+@mixin loading-overlay() {
+  --kirby-loading-overlay-backdrop-opacity: #{variables.$loading-overlay-backdrop-opacity * 100%};
 }
 
 @mixin page-content-max-widths() {
@@ -119,20 +101,39 @@
   }
 }
 
+// Declared on :root and on every surface, so the offset (inner) color resolves to the surface it is used on
 @mixin focus-ring() {
-  --kirby-focus-ring-color: #{colors.$focus-ring-color};
-
   // Small inset ring for compact controls (checkbox, radio, toggle, tab-navigation-item)
   --kirby-focus-ring-sm-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 3px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-color-border-focus) inset,
+    0 0 0 3px var(--kirby-color-border-offset) inset;
+
+  // Small inset ring for compact controls that also turn their own border into the focus color
+  --kirby-focus-ring-sm-combined-inset:
+    0 0 0 1px var(--kirby-color-border-focus) inset,
+    0 0 0 2px var(--kirby-color-border-offset) inset;
 
   // Medium inset ring for larger controls (button, dropdown, segmented-control, form-field, etc.)
   --kirby-focus-ring-md-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 4px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-color-border-focus) inset,
+    0 0 0 4px var(--kirby-color-border-offset) inset;
+
+  // Medium inset ring for controls that also turn their own border into the focus color (card)
+  --kirby-focus-ring-md-combined-inset:
+    0 0 0 1px var(--kirby-color-border-focus) inset,
+    0 0 0 3px var(--kirby-color-border-offset) inset;
 
   // Medium outer ring for inline elements where inset rings are not suitable (link text)
   --kirby-focus-ring-md-outer:
-    0 0 0 2px var(--kirby-white), 0 0 0 4px var(--kirby-focus-ring-color);
+    0 0 0 2px var(--kirby-color-border-offset), 0 0 0 4px var(--kirby-color-border-focus);
+}
+
+// Declared on :root and on every surface, so the offset (inner) color resolves to the surface it is used on
+@mixin error-ring() {
+  // Inset ring for controls that also turn their own border into the danger color
+  --kirby-error-ring-combined-inset:
+    0 0 0 1px var(--kirby-color-border-raised-danger) inset,
+    0 0 0 2px var(--kirby-color-border-offset) inset;
 }
 
 @mixin transition-easings() {
@@ -148,9 +149,6 @@
 }
 
 @mixin all() {
-  /* FONT-FAMILY */
-  @include font-family;
-
   /* COLORS */
   @include colors;
 
@@ -164,9 +162,6 @@
   @include white-overlay-colors;
   @include dark-overlay-colors;
 
-  /* BORDER RADIUS */
-  @include border-radii;
-
   /* ELEVATIONS */
   @include elevations;
 
@@ -176,14 +171,8 @@
   /* ICON-FONT-SIZES */
   @include icon-font-sizes;
 
-  /* FONT-WEIGHT */
-  @include font-weights;
-
   /* LINE-HEIGHT */
   @include line-heights;
-
-  /* SPACINGS */
-  @include spacings;
 
   /* RELATIVE SPACINGS */
   @include relative-sizes;
@@ -193,6 +182,9 @@
 
   /* Z-INDEXES */
   @include z-layers;
+
+  /* LOADING OVERLAY */
+  @include loading-overlay;
 
   /* PAGE CONTENT MAX-WIDTHS */
   @include page-content-max-widths;
@@ -207,4 +199,7 @@
 
   /* FOCUS RING */
   @include focus-ring;
+
+  /* ERROR RING */
+  @include error-ring;
 }

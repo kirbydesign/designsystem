@@ -3,10 +3,13 @@ $padding-block-sm: var(--kirby-spacing-xxxs);
 $padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
 
 :host {
+  --kirby-flag-color: var(--kirby-color-content-neutral);
+  --kirby-flag-border-color: var(--kirby-color-border-neutral);
+
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
-  color: var(--kirby-flag-color, var(--kirby-white-contrast));
-  border: 1px solid var(--kirby-flag-border-color, var(--kirby-medium));
+  color: var(--kirby-flag-color);
+  border: 1px solid var(--kirby-flag-border-color);
   border-radius: var(--kirby-border-radius-xs);
   font-size: var(--kirby-font-size-n);
   padding: $padding-block-md var(--kirby-spacing-xxs);
@@ -25,21 +28,24 @@ $padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
 
   // Colors
   &.success {
-    --kirby-flag-background-color: var(--kirby-success-tint);
+    --kirby-flag-background-color: var(--kirby-color-fill-success-quiet);
+    --kirby-flag-color: var(--kirby-color-content-success-quiet);
+    --kirby-flag-border-color: var(--kirby-color-border-success-quiet);
   }
 
   &.warning {
-    --kirby-flag-background-color: var(--kirby-warning-tint);
+    --kirby-flag-background-color: var(--kirby-color-fill-warning-quiet);
+    --kirby-flag-color: var(--kirby-color-content-warning-quiet);
+    --kirby-flag-border-color: var(--kirby-color-border-warning-quiet);
   }
 
   &.danger {
-    --kirby-flag-background-color: var(--kirby-danger-tint);
+    --kirby-flag-background-color: var(--kirby-color-fill-danger-quiet);
+    --kirby-flag-color: var(--kirby-color-content-danger-quiet);
+    --kirby-flag-border-color: var(--kirby-color-border-danger-quiet);
   }
 
   &.semi-light {
-    --kirby-flag-background-color: var(--kirby-semi-light);
+    --kirby-flag-background-color: var(--kirby-color-fill-neutral);
   }
-
-  --kirby-flag-border-color: var(--kirby-flag-background-color);
-  --kirby-flag-color: var(--kirby-black);
 }

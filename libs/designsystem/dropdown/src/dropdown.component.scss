@@ -38,10 +38,17 @@ $min-screen-width: 375px;
     }
   }
 
+  // The open dropdown has the visual focus in the popover, so it drops the error border and ring
   &.error,
   &.ng-touched.ng-invalid {
-    > button {
-      outline-color: var(--kirby-danger);
+    &:not(.is-open) > button {
+      --kirby-button-border-color: var(--kirby-color-border-raised-danger);
+
+      box-shadow: var(--kirby-error-ring-combined-inset);
+
+      &:focus-visible {
+        box-shadow: var(--kirby-focus-ring-md-combined-inset);
+      }
     }
   }
 
@@ -50,7 +57,6 @@ $min-screen-width: 375px;
     margin: 0;
     width: 100%;
     min-width: 0;
-    outline: 1px solid transparent;
 
     .text {
       overflow: hidden;
@@ -62,6 +68,10 @@ $min-screen-width: 375px;
   &.is-open {
     > button {
       box-shadow: var(--kirby-elevation-4);
+
+      // When open, focus stays on the trigger button (aria-activedescendant combobox pattern),
+      // so reset the focus border while the popover has the visual focus.
+      border-color: var(--kirby-button-border-color);
     }
   }
 }
@@ -83,18 +93,8 @@ kirby-card {
 
 :host-context(kirby-calendar) {
   > button {
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active('s');
-
-    // Wrap declarations to avoid mixing with nested rules.
-    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-    /* stylelint-disable no-duplicate-selectors */
-    & {
-      border-color: transparent;
-      font-weight: var(--kirby-font-weight-bold);
-      font-size: initial;
-    }
-    /* stylelint-enable no-duplicate-selectors */
+    font-weight: var(--kirby-font-weight-bold);
+    font-size: initial;
   }
 
   &.is-open {
