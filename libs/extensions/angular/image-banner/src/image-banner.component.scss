@@ -42,12 +42,8 @@ $container-query-breakpoint: 600px;
   }
 
   .dismiss {
-    // on mobile we always want the button to be white as it sits on top of the image
     @include if-narrow-view {
-      --kirby-inputs-background-color: var(--kirby-white);
-      --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
-      --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
-      --kirby-inputs-color: var(--kirby-black);
+      // we always want the button to be white as it sits on top of the image
     }
   }
 
@@ -326,6 +322,16 @@ button.dismiss {
   top: var(--kirby-spacing-s);
   right: var(--kirby-spacing-s);
   margin: 0;
+
+  @include utils.hover {
+    --kirby-button-background-color: rgba(0 0 0 / var(--kirby-opacity-20));
+    --kirby-button-border-color: rgba(0 0 0 / var(--kirby-opacity-20));
+  }
+
+  &:active {
+    --kirby-button-background-color: rgba(0 0 0 / var(--kirby-opacity-40));
+    --kirby-button-border-color: rgba(0 0 0 / var(--kirby-opacity-40));
+  }
 }
 
 .text-content-layout {
