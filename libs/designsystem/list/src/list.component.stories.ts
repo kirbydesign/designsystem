@@ -1,12 +1,22 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { NgTemplateOutlet } from '@angular/common';
 
-import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { ListComponent, ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
+import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
+import {
+  ListComponent,
+  ListFooterDirective,
+  ListHeaderComponent,
+  ListHeaderDirective,
+  ListItemTemplateDirective,
+  ListSectionHeaderDirective,
+  ListShape,
+} from '@kirbydesign/designsystem/list';
 import { ButtonComponent, IconComponent } from '@kirbydesign/designsystem';
 import {
   CardComponent,
   CardFooterComponent,
   CardHeaderComponent,
+  CardVariant,
 } from '@kirbydesign/designsystem/card';
 // eslint-disable-next-line no-restricted-imports
 import { focusSelectableItem } from '../../.storybook/story-helpers';
@@ -19,14 +29,20 @@ const meta: Meta<ListComponent> = {
     moduleMetadata({
       imports: [
         ItemComponent,
+        LabelComponent,
         ListComponent,
         ListItemTemplateDirective,
+        ListHeaderComponent,
+        ListHeaderDirective,
+        ListFooterDirective,
+        ListSectionHeaderDirective,
         ButtonComponent,
         IconComponent,
         ListExampleComponent,
         CardComponent,
         CardHeaderComponent,
         CardFooterComponent,
+        NgTemplateOutlet,
       ],
     }),
   ],
@@ -403,4 +419,96 @@ export const ListWithStandAloneItemFocused: Story = {
   </kirby-list>`,
   }),
   play: focusSelectableItem(2),
+};
+
+type ListLayout = {
+  label: string;
+  shape: ListShape;
+  hasSections?: boolean;
+  hasStandAlone?: boolean;
+};
+
+const listLayouts: ListLayout[] = [
+  { label: 'rounded', shape: 'rounded' },
+  { label: 'square', shape: 'square' },
+  { label: 'sections', shape: 'rounded', hasSections: true },
+  { label: 'stand-alone', shape: 'rounded', hasStandAlone: true },
+];
+
+const noneInCard: ListLayout = { label: 'shape none', shape: 'none', hasSections: true };
+
+const cardVariants: CardVariant[] = ['base', 'raised', 'brand'];
+
+const surfaceItems = [
+  { title: 'First item', amount: '1.234,56', section: 'Section A' },
+  { title: 'Second item', amount: '78,90', section: 'Section A' },
+  { title: 'Stand-alone item', amount: '12,34', section: 'Section B', isStandAlone: true },
+  { title: 'Last item', amount: '567,89', section: 'Section B' },
+];
+
+export const ListOnSurfaces: Story = {
+  render: () => ({
+    props: {
+      layouts: listLayouts,
+      noneInCard,
+      cardVariants,
+      items: surfaceItems,
+      getSectionName: (item: (typeof surfaceItems)[number]) => item.section,
+    },
+    template: `
+      <ng-template #list let-layout="layout">
+        <kirby-list
+          [items]="items"
+          [shape]="layout.shape"
+          [getSectionName]="layout.hasSections ? getSectionName : undefined"
+          [getStandAloneByProperty]="layout.hasStandAlone ? 'isStandAlone' : undefined"
+        >
+          <kirby-list-header *kirbyListHeader><p>List header</p></kirby-list-header>
+          <p *kirbyListSectionHeader="let section" class="kirby-text-small">{{ section }}</p>
+          <kirby-item *kirbyListItemTemplate="let item">
+            <kirby-label><p class="kirby-item-title">{{ item.title }}</p></kirby-label>
+            <data slot="end">{{ item.amount }}</data>
+          </kirby-item>
+          <div class="footer" *kirbyListFooter><p>List footer</p></div>
+        </kirby-list>
+      </ng-template>
+
+      <div class="grid">
+        <span class="row-start"></span>
+        @for (layout of layouts; track layout.label) {
+          <p class="kirby-text-small-light">{{ layout.label }}</p>
+        }
+        <p class="row-start kirby-text-small-light">raised</p>
+        @for (layout of layouts; track layout.label) {
+          <ng-container *ngTemplateOutlet="list; context: { layout }"></ng-container>
+        }
+
+        <span class="row-start"></span>
+        @for (cardVariant of cardVariants; track cardVariant) {
+          <p class="kirby-text-small-light">{{ cardVariant }} card</p>
+        }
+        <p class="row-start kirby-text-small-light">{{ noneInCard.label }}</p>
+        @for (cardVariant of cardVariants; track cardVariant) {
+          <kirby-card [variant]="cardVariant">
+            <ng-container *ngTemplateOutlet="list; context: { layout: noneInCard }"></ng-container>
+          </kirby-card>
+        }
+      </div>
+    `,
+    styles: [
+      `
+        .grid {
+          display: grid;
+          grid-template-columns: 1fr repeat(${listLayouts.length}, 260px);
+          gap: var(--kirby-spacing-s);
+          padding: var(--kirby-spacing-s);
+          align-items: start;
+        }
+
+        .row-start { grid-column: 1; }
+        p { margin: 0; }
+        .footer p { margin-inline-start: var(--kirby-spacing-s);}
+      `,
+    ],
+  }),
 };
