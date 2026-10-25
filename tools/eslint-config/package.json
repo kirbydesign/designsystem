@@ -6,7 +6,7 @@
   "devDependencies": {
     "@nx/eslint": "23.3.0",
     "@nx/eslint-plugin": "23.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.70.0",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
     "@typescript-eslint/parser": "^8.21.0",
     "angular-eslint": "^22.6.0",
     "eslint": "^9.18.0",
