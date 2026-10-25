@@ -91,7 +91,7 @@
     "post-npm-install": "^2.0.0",
     "prettier": "^3.9.10",
     "sass": "^1.105.1",
-    "storybook": "10.6.2",
+    "storybook": "10.6.3",
     "stylelint": "^16.3.1",
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^13.1.0",
