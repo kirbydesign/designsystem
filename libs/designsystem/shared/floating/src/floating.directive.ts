@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   Renderer2,
+  RendererStyleFlags2,
 } from '@angular/core';
 import {
   autoPlacement,
@@ -19,6 +20,7 @@ import {
   offset,
   Placement,
   shift,
+  size,
   Strategy,
 } from '@floating-ui/dom';
 import { DesignTokenHelper } from '@kirbydesign/core';
@@ -275,6 +277,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownDocumentClickEventHandling();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
     this.isShown = false;
+    this.renderer.removeStyle(
+      this.elementRef.nativeElement,
+      '--kirby-floating-available-height',
+      RendererStyleFlags2.DashCase
+    );
     this.displayChanged.emit(this.isShown);
   }
 
@@ -325,12 +332,30 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private getMiddlewareConfig(): Array<Middleware | null | undefined | false> {
     const middleware: Array<Middleware | null | undefined | false> = [];
+    const padding = parseInt(DesignTokenHelper.size('s'));
+
     middleware.push(offset(this.offset));
-    middleware.push(flip());
+    middleware.push(flip({ padding }));
 
     if (this.shift) {
-      middleware.push(shift({ padding: parseInt(DesignTokenHelper.size('s')) }));
+      middleware.push(shift({ padding }));
     }
+
+    middleware.push(
+      size({
+        padding,
+        apply: ({ availableHeight, elements }) => {
+          if (!this.isShown) return;
+
+          this.renderer.setStyle(
+            elements.floating,
+            '--kirby-floating-available-height',
+            `${Math.max(0, availableHeight)}px`,
+            RendererStyleFlags2.DashCase
+          );
+        },
+      })
+    );
 
     if (this.autoPlacement) {
       middleware.push(autoPlacement());
