@@ -25,3 +25,26 @@ export function percentageTransform(config) {
     transform: (token) => `${token.$value}${PERCENT}`,
   };
 }
+
+/** DTCG shadow tokens, single or layered, as a CSS `box-shadow` value. */
+export const shadowTransform = {
+  name: 'value/shadow',
+  type: 'value',
+  filter: (token) => token.$type === 'shadow',
+  transform: (token) => [token.$value].flat().map(shadowLayerToCss).join(', '),
+};
+
+function shadowLayerToCss({ offsetX, offsetY, blur, spread, color }) {
+  return [offsetX, offsetY, blur, spread].map(lengthToCss).concat(colorToCss(color)).join(' ');
+}
+
+function lengthToCss(length) {
+  if (typeof length !== 'object') return `${length}`;
+  return length.value === 0 ? '0' : `${length.value}${length.unit}`;
+}
+
+function colorToCss(color) {
+  if (typeof color !== 'object') return color;
+  const [red, green, blue] = color.components.map((component) => Math.round(component * 255));
+  return `rgba(${red}, ${green}, ${blue}, ${color.alpha ?? 1})`;
+}

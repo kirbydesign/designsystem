@@ -1,8 +1,21 @@
-import { collectLeafTokens, rootTokenKey, setNestedValue, tokenKey } from './tokens.mjs';
+import {
+  collectLeafTokens,
+  isTokenNode,
+  rootTokenKey,
+  setNestedValue,
+  tokenKey,
+} from './tokens.mjs';
 import { FIGMA_SCOPES_EXTENSION, PERCENT, unitFor } from './units.mjs';
 
 const FIGMA_ALIAS_EXTENSION = 'com.figma.aliasData';
 const DTCG_REFERENCE_PATTERN = /^\{([^{}]+)\}$/;
+const FIGMA_SHADOW_PARTS = {
+  x: 'offsetX',
+  y: 'offsetY',
+  blur: 'blur',
+  spread: 'spread',
+  color: 'color',
+};
 
 /** Merge Figma exports without changing their paths; adapt their values to DTCG. */
 export function figmaToDtcg(inputs, config, baseline = {}, warnings = []) {
@@ -18,6 +31,7 @@ export function figmaToDtcg(inputs, config, baseline = {}, warnings = []) {
   }
 
   retypeAliasesDimensions(tokens, baselineTokensByKey);
+  combineShadowParts(tokens, config);
   return tokens;
 }
 
@@ -135,4 +149,52 @@ function aliasChainEndsInDimension(node, tokensByKey) {
     current = tokensByKey.get(referenceToKey(current.$value));
   }
   return false;
+}
+
+/**
+ * Figma has no shadow variables, so each shadow is exported as a group of parts (`x`, `y`,
+ * `blur`, `spread`, `color`), or a group of such groups for a layered shadow. Replaces the
+ * groups that the config marks as shadows with a single DTCG shadow token.
+ */
+function combineShadowParts(group, config, path = []) {
+  for (const [key, child] of Object.entries(group)) {
+    if (key.startsWith('$') || !isGroup(child)) continue;
+    const childPath = [...path, key];
+    if (config.isShadow(childPath)) {
+      group[key] = { $type: 'shadow', $value: shadowFrom(child, childPath) };
+    } else {
+      combineShadowParts(child, config, childPath);
+    }
+  }
+}
+
+function shadowFrom(group, path) {
+  const layer = shadowLayerFrom(group);
+  if (layer) return layer;
+  const layers = childGroupsOf(group).map(shadowLayerFrom);
+  if (layers.length > 0 && layers.every(Boolean)) return layers;
+  throw new Error(
+    `${tokenKey(path)}: a shadow must be a group of ${Object.keys(FIGMA_SHADOW_PARTS).join(', ')}, ` +
+      'or a group of such groups'
+  );
+}
+
+function shadowLayerFrom(group) {
+  if (!isGroup(group)) return undefined;
+  const parts = Object.keys(group).filter((key) => !key.startsWith('$'));
+  const isLayer =
+    parts.length === Object.keys(FIGMA_SHADOW_PARTS).length &&
+    parts.every((part) => part in FIGMA_SHADOW_PARTS && isTokenNode(group[part]));
+  if (!isLayer) return undefined;
+  return Object.fromEntries(parts.map((part) => [FIGMA_SHADOW_PARTS[part], group[part].$value]));
+}
+
+function childGroupsOf(group) {
+  return Object.entries(group)
+    .filter(([key]) => !key.startsWith('$'))
+    .map(([, child]) => child);
+}
+
+function isGroup(candidate) {
+  return candidate !== null && typeof candidate === 'object' && !isTokenNode(candidate);
 }
