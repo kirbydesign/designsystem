@@ -4,7 +4,7 @@ import StyleDictionary from 'style-dictionary';
 import { getReferences } from 'style-dictionary/utils';
 import { isVisibleFrom, routeTokens } from './routing.mjs';
 import { tokenKey } from './tokens.mjs';
-import { dimensionTransform, percentageTransform } from './units.mjs';
+import { dimensionTransform, percentageTransform, shadowTransform } from './units.mjs';
 
 const FILE_HEADER = '/**\n * Do not edit directly, this file was auto-generated.\n */\n';
 const DECLARATION = /^\s*(--[\w-]+):\s*(.*);\s*$/;
@@ -105,13 +105,20 @@ async function formatEmissionBlocks({
     hooks: {
       transforms: {
         [dimensionTransform.name]: dimensionTransform,
+        [shadowTransform.name]: shadowTransform,
         [percentage.name]: percentage,
         [variableName.name]: variableName,
       },
     },
     platforms: {
       css: {
-        transforms: ['color/css', dimensionTransform.name, percentage.name, variableName.name],
+        transforms: [
+          'color/css',
+          dimensionTransform.name,
+          shadowTransform.name,
+          percentage.name,
+          variableName.name,
+        ],
         files: emissions.map((emission) => cssFileFor(emission, routes, onlySourceTokens)),
       },
     },
