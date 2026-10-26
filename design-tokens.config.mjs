@@ -18,7 +18,6 @@ export default {
     'card/**',
     'stroke/**',
     'background-blur/**',
-    '* surface/elevation/**',
     '* surface/tooltip/**',
   ],
 
@@ -43,6 +42,9 @@ export default {
     ],
     'primitives.css': [{ include: ['**'], section: ([group]) => group.toLowerCase() }],
   },
+
+  /* Figma exports each shadow as a group of x, y, blur, spread and color */
+  shadows: ['* surface/elevation/*'],
 
   units: {
     px: {

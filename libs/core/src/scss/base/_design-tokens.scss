@@ -38,12 +38,6 @@
   }
 }
 
-@mixin elevations() {
-  @each $name, $value in variables.$elevations {
-    --kirby-elevation-#{$name}: #{$value};
-  }
-}
-
 @mixin font-sizes() {
   @each $name, $value in variables.$font-sizes {
     --kirby-font-size-#{$name}: #{$value};
@@ -138,9 +132,6 @@
   /* OVERLAY-COLORS */
   @include white-overlay-colors;
   @include dark-overlay-colors;
-
-  /* ELEVATIONS */
-  @include elevations;
 
   /* FONT-SIZES */
   @include font-sizes;
