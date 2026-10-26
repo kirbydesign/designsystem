@@ -58,6 +58,53 @@ test('retains aliases to surface tokens at their Figma paths', () => {
   );
 });
 
+test('resolves aliases within the same collection relative to the nearest group', () => {
+  const surface = () => ({
+    color: { border: { base: { $type: 'color', $value: '#000' } } },
+    range: {
+      color: {
+        fill: {
+          $type: 'color',
+          $value: '#000',
+          $extensions: { 'com.figma.aliasData': { targetVariableName: 'color/border/base' } },
+        },
+      },
+    },
+  });
+  const tokens = figmaToDtcg([{ 'base surface': surface(), 'raised surface': surface() }], config);
+  assert.equal(tokens['base surface'].range.color.fill.$value, '{base surface.color.border.base}');
+  assert.equal(
+    tokens['raised surface'].range.color.fill.$value,
+    '{raised surface.color.border.base}'
+  );
+});
+
+test('does not resolve an alias to the token itself', () => {
+  const warnings = [];
+  const tokens = figmaToDtcg(
+    [
+      {
+        'base surface': {
+          color: {
+            border: {
+              focus: {
+                $type: 'color',
+                $value: '#238cec',
+                $extensions: { 'com.figma.aliasData': { targetVariableName: 'focus' } },
+              },
+            },
+          },
+        },
+      },
+    ],
+    config,
+    {},
+    warnings
+  );
+  assert.equal(tokens['base surface'].color.border.focus.$value, '#238cec');
+  assert.equal(warnings.length, 1);
+});
+
 test('resolves a reference to a baseline-only primitive', () => {
   const baseline = { spacing: { s: { $type: 'dimension', $value: { value: 16, unit: 'px' } } } };
   const tokens = figmaToDtcg(
