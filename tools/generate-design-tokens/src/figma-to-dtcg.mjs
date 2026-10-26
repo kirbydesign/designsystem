@@ -63,13 +63,27 @@ function assertNoTokenIsAlsoAGroup(tokenKeys, groupKeys) {
 function aliasAsReferenceOrLiteral(path, node, isKnownToken, warnings) {
   const aliasTarget = node.$extensions?.[FIGMA_ALIAS_EXTENSION]?.targetVariableName;
   if (!aliasTarget) return node.$value;
-  const targetKey = [aliasTarget, rootTokenKey(aliasTarget)].find(isKnownToken);
+  const targetKey = aliasTargetCandidates(path, aliasTarget)
+    .filter((key) => key !== tokenKey(path))
+    .find(isKnownToken);
   if (targetKey) return keyToReference(targetKey);
 
   warnings.push(
     `${tokenKey(path)}: Figma alias target "${aliasTarget}" is not present in the import or baseline; retaining its literal value.`
   );
   return node.$value;
+}
+
+/**
+ * Figma names alias targets in the same collection without the mode group they're exported
+ * under (e.g. `color/border/base` from `base surface/range/color/fill`), so after the exact
+ * path, look the target up relative to the token's groups, nearest first.
+ */
+function aliasTargetCandidates(path, aliasTarget) {
+  const groupKeys = ancestorKeysOf(path).reverse();
+  return [aliasTarget, ...groupKeys.map((groupKey) => `${groupKey}/${aliasTarget}`)].flatMap(
+    (key) => [key, rootTokenKey(key)]
+  );
 }
 
 function toDtcgToken(path, node, value, config) {
