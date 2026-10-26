@@ -50,6 +50,28 @@
 }
 
 /*
+ * image-banner
+ */
+
+:root {
+  --kirby-image-banner-opacity-52: 52%;
+  --kirby-image-banner-opacity-64: 64%;
+  --kirby-image-banner-opacity-72: 72%;
+}
+
+/*
+ * opacity
+ */
+
+:root {
+  --kirby-opacity-5: 5%;
+  --kirby-opacity-10: 10%;
+  --kirby-opacity-20: 20%;
+  --kirby-opacity-40: 40%;
+  --kirby-opacity-80: 80%;
+}
+
+/*
  * font
  */
 
