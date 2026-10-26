@@ -75,7 +75,6 @@ export class CardComponent implements OnInit, OnDestroy {
     return surface ? `${this.variant} kirby-surface-${surface}` : this.variant;
   }
 
-  // For backwards compatibility, a theme color takes precedence over the variant
   private get surface(): string | null {
     const theme = this.themeColor;
     if (!theme || theme.isDefault) return variantSurfaces[this.variant];
