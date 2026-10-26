@@ -11,16 +11,16 @@
 <p>The card comes in three variants:</p>
 <ul>
   <li>
-    <strong>Base</strong>
-    - Visually aligned with the background. The least prominent level in the visual hierarchy.
+    <strong>Elevated (default)</strong>
+    - The card is appears elevated from the background.
   </li>
   <li>
-    <strong>Raised</strong>
-    - Visually raised from the background. The second most prominent level.
+    <strong>Flat (deprecated)</strong>
+    - Previously had no shadow, to appear lower in the visual hierarchy. Now resembles raised.
   </li>
   <li>
-    <strong>Brand</strong>
-    - Visually highlighted via a branded color. The most prominent level.
+    <strong>Outlined</strong>
+    - Has a border and no background. Appear lowest in the visual hierarchy.
   </li>
 </ul>
 
@@ -32,11 +32,11 @@
 <ul>
   <li>
     <strong>Layout and grouping</strong>
-    - In this case, use one of the three variants - base, raised or brand.
+    - In this case, use Elevated or Outlined.
   </li>
   <li>
     <strong>Navigation</strong>
-    - Use the raised (default) variant whenever the entire card is clickable. Consider adding a
+    - Use the Elevated (default) variant whenever the entire card is clickable. Consider adding a
     disclosure indicator to the card.
   </li>
 </ul>
@@ -78,6 +78,12 @@
 
 <cookbook-example-viewer [html]="flagExample.codeSnippet">
   <cookbook-card-example-flag #flagExample></cookbook-card-example-flag>
+</cookbook-example-viewer>
+
+<h2>Colors</h2>
+<p>Cards can have a colored background to stand out even more.</p>
+<cookbook-example-viewer [html]="themeColorExample.template">
+  <cookbook-card-example-color #themeColorExample></cookbook-card-example-color>
 </cookbook-example-viewer>
 
 <h2>Background image</h2>
