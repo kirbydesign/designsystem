@@ -5,17 +5,17 @@ const config = {
   selector: 'cookbook-card-example-variant',
   template: `
   <div class="variant-card-container">
-     <kirby-card hasPadding="true" variant="base">
-      <strong>Base</strong>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </kirby-card>
     <kirby-card hasPadding="true">
-      <strong>Raised</strong>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <strong>Elevated (default)</strong>
+      <p>The card is elevated from the background.</p>
     </kirby-card>
-    <kirby-card [hasPadding]="true" variant="brand">
-      <strong>Brand</strong>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <kirby-card hasPadding="true" variant="flat">
+      <strong>Flat</strong>
+      <p>Deprecated, and now visually mapped to raised.</p>
+    </kirby-card>
+    <kirby-card [hasPadding]="true" variant="outlined">
+      <strong>Outlined card</strong>
+      <p>Has a border and no background. Appear lowest in the visual hierarchy.</p>
     </kirby-card>
   </div>
   `,

@@ -7,6 +7,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { CardExampleVariantComponent } from '../../examples/card-example/examples/variant';
 import { CardExampleDisclosureComponent } from '../../examples/card-example/examples/disclosure';
 import { CardExampleFlagComponent } from '../../examples/card-example/examples/flag';
+import { CardExampleColorComponent } from '../../examples/card-example/examples/color';
 import { CardExampleBackgroundImageComponent } from '../../examples/card-example/examples/background-image';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import {
@@ -24,6 +25,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     CardExampleVariantComponent,
     CardExampleDisclosureComponent,
     CardExampleFlagComponent,
+    CardExampleColorComponent,
     CardExampleBackgroundImageComponent,
     DividerComponent,
     ApiDescriptionPropertiesComponent,
@@ -54,16 +56,9 @@ export class CardShowcaseComponent {
     {
       name: 'variant',
       description:
-        'Sets the variant of a card. The raised variant replaces elevated and flat, while base replaces outlined. The brand variant should be used in place of tertiary or dark themeColor property.',
-      defaultValue: 'raised',
-      type: [
-        'base',
-        'raised',
-        'brand',
-        'elevated (deprecated)',
-        'flat (deprecated)',
-        'outlined (deprecated)',
-      ],
+        'Sets the variant of a card. The recommended is "elevated" which is also the default',
+      defaultValue: 'elevated',
+      type: ['elevated', 'flat (deprecated, maps to raised)', 'outlined'],
     },
     {
       name: 'hasPadding',
@@ -72,11 +67,10 @@ export class CardShowcaseComponent {
       type: ['boolean'],
     },
     {
-      name: 'themeColor (deprecated)',
-      description:
-        ' Sets which color the card should use from the theme palette. This property is deprecated. Use variant="brand" instead, for a branded appearance.',
+      name: 'themeColor',
+      description: 'Sets which color the card should use from the theme palette.',
       defaultValue: '',
-      type: ['tertiary', 'dark'],
+      type: ['tertiary (deprecated, maps to dark)', 'dark'],
     },
   ];
 
