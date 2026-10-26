@@ -11,7 +11,7 @@ const config = {
     </kirby-card>
     <kirby-card hasPadding="true" variant="flat">
       <strong>Flat</strong>
-      <p>Deprecated, and now visually mapped to raised.</p>
+      <p>Deprecated, and now visually mapped to elevated.</p>
     </kirby-card>
     <kirby-card [hasPadding]="true" variant="outlined">
       <strong>Outlined card</strong>
