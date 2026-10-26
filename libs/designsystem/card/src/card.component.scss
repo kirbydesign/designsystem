@@ -7,6 +7,7 @@
   --kirby-card-main-color: var(--kirby-color-content-base);
   --kirby-card-main-border-color: var(--kirby-color-border-base-quiet);
   --kirby-card-border-width: 1px;
+  --kirby-card-elevation: var(--kirby-elevation-card);
   --kirby-card-footer-background-color: var(--kirby-color-fill-base);
   --kirby-card-footer-color: var(--kirby-color-content-base);
 
@@ -25,6 +26,7 @@
   /* stylelint-disable no-duplicate-selectors */
   & {
     border-radius: var(--kirby-border-radius-n);
+    box-shadow: var(--kirby-card-elevation);
     color: var(--kirby-card-main-color);
     background-color: var(--kirby-card-main-background-color);
     background-image: var(--kirby-card-background-image);
@@ -45,6 +47,11 @@
     width: var(--kirby-card-width, auto);
   }
   /* stylelint-enable no-duplicate-selectors */
+
+  &.flat,
+  &.outlined {
+    --kirby-card-elevation: 0 0 transparent;
+  }
 
   &.outlined {
     --kirby-card-main-background-color: transparent;
@@ -90,7 +97,7 @@
 
     &:focus-visible {
       transition: interaction-state.transition();
-      box-shadow: var(--kirby-focus-ring-md-combined-inset);
+      box-shadow: var(--kirby-card-elevation), var(--kirby-focus-ring-md-combined-inset);
 
       --kirby-card-border: var(--kirby-card-border-width) solid var(--kirby-color-border-focus);
     }
