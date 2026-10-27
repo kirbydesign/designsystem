@@ -60,6 +60,15 @@
 }
 
 /*
+ * stroke
+ */
+
+:root {
+  --kirby-stroke-xxs: 0px;
+  --kirby-stroke-xs: 1px;
+}
+
+/*
  * opacity
  */
 
