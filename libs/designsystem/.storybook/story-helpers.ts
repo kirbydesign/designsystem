@@ -23,18 +23,6 @@ export const surfaces = ['base', 'raised', 'brand'] as const;
 export type Surface = (typeof surfaces)[number];
 
 /**
- * Ionic only renders its active state when `.ion-activated` is set on the host,
- * which `storybook-addon-pseudo-states` can't force.
- */
-export const activateIonicElements =
-  (selector: string) =>
-  async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-    const elements = Array.from(canvasElement.querySelectorAll<HTMLElement>(selector));
-    await TestHelper.whenReady(elements);
-    elements.forEach((el) => el.classList.add('ion-activated'));
-  };
-
-/**
  * Builds `storybook-addon-pseudo-states` parameters for elements with id `${id}-${state}`.
  * Pass `targets` to apply the state to descendants of that element instead.
  */

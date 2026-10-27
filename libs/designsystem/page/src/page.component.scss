@@ -198,6 +198,13 @@ ion-back-button {
   &.ion-activated {
     --background: var(--kirby-color-fill-raised-active);
     --color: var(--kirby-color-content-raised-active);
+
+    // Ionic's hover and focused styles draw a layer over --background and override --color,
+    // so they are set to the active state as well while the button is pressed.
+    --background-hover: var(--kirby-color-fill-raised-active);
+    --color-hover: var(--kirby-color-content-raised-active);
+    --background-focused: var(--kirby-color-fill-raised-active);
+    --color-focused: var(--kirby-color-content-raised-active);
   }
 
   // Properly center back-icon

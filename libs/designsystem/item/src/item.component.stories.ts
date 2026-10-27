@@ -18,7 +18,6 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 // eslint-disable-next-line no-restricted-imports
 import {
-  activateIonicElements,
   focusSelectableItem,
   gridStyles,
   interactionStates,
@@ -1118,7 +1117,6 @@ export const InteractionStates: Story = {
     // Pressing an item with a pointer also hovers it
     pseudo: { ...itemPseudoStates, hover: [...itemPseudoStates.hover, ...itemPseudoStates.active] },
   },
-  play: activateIonicElements('[id$="-active"] ion-item'),
   render: () => ({
     props: { rows: itemRows, states: itemInteractionStates },
     template: `
