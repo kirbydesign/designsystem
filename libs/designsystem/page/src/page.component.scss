@@ -9,10 +9,7 @@ $ion-content-padding-top: var(--kirby-spacing-xs);
 
 $toolbar-transition-duration-in: var(--kirby-transition-duration-quick);
 $toolbar-transition-duration-out: 50ms;
-$toolbar-transition: background-color $toolbar-transition-duration-out linear;
-
-// TODO(@design-tokens) find actual prop
-$toolbar-shaded-background: var(--kirby-color-fill-base-hover);
+$toolbar-transition: border-color $toolbar-transition-duration-out linear;
 $toolbar-button-size: var(--kirby-spacing-xl);
 $toolbar-button-spacing: var(--kirby-spacing-xxs);
 $toolbar-max-font-size: 18px * 1.2;
@@ -29,7 +26,8 @@ ion-title h1 {
 }
 
 ion-toolbar {
-  --border-width: 0 !important;
+  --border-width: 0 0 1px !important;
+  --border-color: transparent;
   --padding-start: var(--kirby-spacing-s);
   --padding-end: var(--kirby-spacing-s);
   --padding-top: 0;
@@ -43,43 +41,21 @@ ion-toolbar {
     --min-height: var(--kirby-spacing-xxxxxl);
   }
 
-  /*
-  * Toolbar Divider & Shaded background
-  */
-
-  // Divider:
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-  }
-
-  &::before,
   &::part(background) {
     transition: $toolbar-transition;
   }
 
-  // Only show toolbar divider + shaded bg when content is scrolled:
-  &.content-scrolled {
-    --background: #{$toolbar-shaded-background};
+  // Only show toolbar divider when content is scrolled, and no sticky content is pinned below the toolbar:
+  &.content-scrolled:not(.content-pinned) {
+    --border-color: var(--kirby-color-border-base-silent);
 
-    &::before,
     &::part(background) {
       transition-duration: $toolbar-transition-duration-in;
     }
-
-    &:not(.content-pinned)::before {
-      background-color: var(--kirby-color-border-base-silent);
-    }
   }
 
-  &.content-pinned {
-    &::before {
-      transition: none;
-    }
+  &.content-pinned::part(background) {
+    transition: none;
   }
 
   ion-buttons {
@@ -364,41 +340,21 @@ ion-content {
     margin: 0 auto;
   }
 
-  &::before,
-  &::after {
-    /* Background + Divider */
+  &::before {
     content: '';
     position: absolute;
 
-    // Adjust for padding of ion-content to stretch divider to full width:
-    left: calc(-1 * var(--padding-start));
-    right: calc(-1 * var(--padding-end));
-    bottom: 0;
-  }
-
-  &::before {
-    /* Background */
-    top: 0;
+    // Adjust for padding of ion-content to stretch background and border to full width:
+    inset: 0 calc(-1 * var(--padding-end)) 0 calc(-1 * var(--padding-start));
 
     // Same bg color as ion-content to prevent see-through
     // when scrolling the page behind the sticky content:
     background-color: var(--background);
+    border-bottom: 1px solid transparent;
+    box-sizing: border-box;
   }
 
-  &::after {
-    /* Divider */
-    height: 1px;
-  }
-
-  &.content-pinned {
-    &::before {
-      /* Background - pinned */
-      background-color: $toolbar-shaded-background;
-    }
-
-    &::after {
-      /* Divider - pinned */
-      background-color: var(--kirby-color-border-base-silent);
-    }
+  &.content-pinned::before {
+    border-bottom-color: var(--kirby-color-border-base-silent);
   }
 }
