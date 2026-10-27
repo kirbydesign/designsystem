@@ -5,7 +5,7 @@ $badge-size-medium: 1.6em;
 $badge-padding-inline: 0.5em;
 $badge-padding-block: 0.3em;
 $badge-icon-size: 1.6em;
-$badge-border-width: var(--kirby-badge-border-width, 1px);
+$badge-border-width: var(--kirby-badge-border-width, var(--kirby-stroke-xs));
 $maximum-font-size: 10px * utils.$text-resize-threshold;
 
 :host {
@@ -20,8 +20,8 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
   ion-badge {
     --background: var(--kirby-badge-background-color, var(--kirby-color-fill-raised));
     --color: var(--kirby-badge-color, var(--kirby-color-content-raised));
-    border: $badge-border-width solid var(--kirby-color-border-raised-quiet);
 
+    border: $badge-border-width solid var(--kirby-color-border-raised-quiet);
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: var(--kirby-border-radius-pill);
     font-size: inherit;
@@ -34,6 +34,7 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
   &.sm ion-badge {
     --background: var(--kirby-badge-background-color, var(--kirby-color-fill-base-quiet));
     --color: var(--kirby-badge-color, var(--kirby-color-content-base-quiet));
+
     border-color: var(--kirby-color-border-base-quiet);
   }
 
@@ -41,30 +42,35 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
   &.success.sm ion-badge {
     --background: var(--kirby-color-fill-success-loud);
     --color: var(--kirby-color-content-success-loud);
+
     border-color: var(--kirby-color-border-success-loud);
   }
 
   &.success.md ion-badge {
     --background: var(--kirby-color-fill-success);
     --color: var(--kirby-color-content-success);
+
     border-color: var(--kirby-color-border-success);
   }
 
   &.warning.sm ion-badge {
     --background: var(--kirby-color-fill-warning-loud);
     --color: var(--kirby-color-content-warning-loud);
+
     border-color: var(--kirby-color-border-warning-loud);
   }
 
   &.warning.md ion-badge {
     --background: var(--kirby-color-fill-warning);
     --color: var(--kirby-color-content-warning);
+
     border-color: var(--kirby-color-border-warning);
   }
 
   &.danger ion-badge {
     --background: var(--kirby-color-fill-danger-loud);
     --color: var(--kirby-color-content-danger-loud);
+
     border-color: var(--kirby-color-border-danger-loud);
   }
 }
