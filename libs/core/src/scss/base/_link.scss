@@ -20,11 +20,15 @@ a[modal-router-link],
     text-decoration: underline;
   }
 
-  @include functions.hover {
-    color: var(--kirby-color-content-base-loud-hover);
+  // :where() keeps the states at the same specificity as the default link color,
+  // so components rendered as links (e.g. a[kirby-button]) keep their own color.
+  @media (hover: hover) {
+    &:where(:hover) {
+      color: var(--kirby-color-content-base-loud-hover);
+    }
   }
 
-  &:active {
+  &:where(:active) {
     color: var(--kirby-color-content-base-loud-active);
   }
 
