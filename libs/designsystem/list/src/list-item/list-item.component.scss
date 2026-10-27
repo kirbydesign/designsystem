@@ -6,7 +6,7 @@ $divider-color: var(--kirby-list-item-border-color, var(--kirby-color-border-bas
 
 :host-context(.has-divider) {
   ion-item-sliding {
-    border-bottom: 1px solid $divider-color;
+    border-bottom: var(--kirby-stroke-xs) solid $divider-color;
   }
 }
 
