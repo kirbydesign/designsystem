@@ -55,3 +55,35 @@ describe('EmptyStateComponent', () => {
     );
   });
 });
+
+describe('EmptyStateComponent themeColor', () => {
+  const supportedColors = ['success', 'warning', 'danger', 'medium'];
+  const deprecatedColors = ['primary', 'secondary', 'tertiary', 'light', 'dark', 'white'];
+
+  const createHost = createHostFactory({
+    component: EmptyStateComponent,
+    imports: [TestHelper.ionicModuleForTest],
+  });
+
+  beforeEach(() => {
+    spyOn(console, 'warn');
+  });
+
+  supportedColors.forEach((themeColor) => {
+    it(`should not warn when set to '${themeColor}'`, () => {
+      createHost(`<kirby-empty-state themeColor="${themeColor}"></kirby-empty-state>`);
+
+      expect(console.warn).not.toHaveBeenCalled();
+    });
+  });
+
+  deprecatedColors.forEach((themeColor) => {
+    it(`should warn that '${themeColor}' is deprecated`, () => {
+      createHost(`<kirby-empty-state themeColor="${themeColor}"></kirby-empty-state>`);
+
+      expect(console.warn).toHaveBeenCalledWith(
+        jasmine.stringContaining(`themeColor '${themeColor}' is deprecated`)
+      );
+    });
+  });
+});

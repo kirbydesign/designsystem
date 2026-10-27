@@ -49,7 +49,6 @@ p.subtitle {
   --kirby-empty-state-color: var(--kirby-color-fill-danger-loud);
 }
 
-// TODO(@design-tokens) add neutral theme color variant and deprecate unsupported colors
 :host(.medium) {
   --kirby-empty-state-color: var(--kirby-color-content-base-quiet);
 }

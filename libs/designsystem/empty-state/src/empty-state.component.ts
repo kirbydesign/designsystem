@@ -12,6 +12,9 @@ import {
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { getIonModalDialogAncestor } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ThemeColor } from '@kirbydesign/core';
+
+const supportedThemeColors: ThemeColor[] = ['success', 'warning', 'danger', 'medium'];
 
 @Component({
   selector: 'kirby-empty-state',
@@ -40,6 +43,19 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
   _insideModal: boolean = false;
 
   @Input() subtitle: string;
+
+  /**
+   * Sets which color the empty state should use from the theme palette.
+   * Supported values are 'success', 'warning', 'danger' and 'medium'.
+   * Deprecated values: 'primary', 'secondary', 'tertiary', 'light', 'dark' and 'white'
+   */
+  @Input() set themeColor(value: ThemeColor) {
+    if (value && !supportedThemeColors.includes(value)) {
+      console.warn(
+        `[Kirby Empty State] themeColor '${value}' is deprecated and will be removed in a future major version. Use 'success', 'warning', 'danger' or 'medium' instead.`
+      );
+    }
+  }
 
   @ContentChildren(ButtonComponent)
   private slottedButtons: QueryList<ButtonComponent>;
