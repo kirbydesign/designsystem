@@ -1,12 +1,11 @@
-$divider-color: var(--kirby-list-item-border-color, var(--kirby-color-border-base-silent));
-
 :host {
   overflow: hidden;
 }
 
 :host-context(.has-divider) {
   ion-item-sliding {
-    border-bottom: var(--kirby-stroke-xs) solid $divider-color;
+    border-bottom: var(--kirby-stroke-xs) solid
+      var(--kirby-list-item-border-color, var(--kirby-color-border-base-silent));
   }
 }
 
