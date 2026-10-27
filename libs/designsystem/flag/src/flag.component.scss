@@ -9,7 +9,7 @@ $padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
   color: var(--kirby-flag-color);
-  border: 1px solid var(--kirby-flag-border-color);
+  border: var(--kirby-stroke-xs) solid var(--kirby-flag-border-color);
   border-radius: var(--kirby-border-radius-xs);
   font-size: var(--kirby-font-size-n);
   padding: $padding-block-md var(--kirby-spacing-xxs);
