@@ -15,7 +15,7 @@ ion-backdrop {
     transform: scale(1.05, 1.05);
 
     & div:first-child {
-      border-top: 1px solid var(--kirby-color-border-base-silent);
+      border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
     }
   }
 
@@ -84,6 +84,6 @@ kirby-card {
   }
 
   & div:first-child {
-    border-top: 1px solid var(--kirby-color-border-base-silent);
+    border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
   }
 }

@@ -7,7 +7,7 @@
 ion-tabs {
   ion-tab-bar {
     --background: var(--kirby-color-fill-raised);
-    --border: 1px solid var(--kirby-color-border-raised-quiet);
+    --border: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
     --color: var(--kirby-color-content-raised);
 
     display: flex;
