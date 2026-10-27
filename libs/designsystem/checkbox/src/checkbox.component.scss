@@ -108,7 +108,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       --checkbox-background: var(--kirby-color-fill-raised);
       --checkbox-background-checked: var(--kirby-color-fill-engaged);
       --checkmark-color: var(--kirby-color-content-engaged);
-      --border-width: 1px;
+      --border-width: var(--kirby-stroke-xs);
       --border-color: var(--kirby-color-border-raised);
       --border-color-checked: var(--kirby-color-border-engaged);
       --border-radius: #{$border-radius};
