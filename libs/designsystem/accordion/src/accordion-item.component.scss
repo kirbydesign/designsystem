@@ -8,8 +8,8 @@ $padding: var(--kirby-spacing-s);
   /* stylelint-disable no-duplicate-selectors */
   & {
     display: block;
-    border-top: 1px solid var(--kirby-color-border-base-quiet);
-    border-bottom: 1px solid var(--kirby-color-border-base-quiet);
+    border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
+    border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
     box-sizing: border-box;
   }
 }

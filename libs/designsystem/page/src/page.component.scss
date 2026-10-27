@@ -26,7 +26,7 @@ ion-title h1 {
 }
 
 ion-toolbar {
-  --border-width: 0 0 1px !important;
+  --border-width: 0 0 var(--kirby-stroke-xs) !important;
   --border-color: transparent;
   --padding-start: var(--kirby-spacing-s);
   --padding-end: var(--kirby-spacing-s);
@@ -190,7 +190,7 @@ ion-back-button {
 
   &::part(native) {
     opacity: 1; // counteract iOS ion-activated dimming on the native button
-    border: 1px solid var(--kirby-color-border-raised-quiet);
+    border: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
     border-radius: var(--kirby-border-radius-pill);
     overflow: hidden; // required for border radius to work (iOS sets overflow: visible)
   }
@@ -350,7 +350,7 @@ ion-content {
     // Same bg color as ion-content to prevent see-through
     // when scrolling the page behind the sticky content:
     background-color: var(--background);
-    border-bottom: 1px solid transparent;
+    border-bottom: var(--kirby-stroke-xs) solid transparent;
     box-sizing: border-box;
   }
 

@@ -28,7 +28,7 @@ td {
 
 th {
   height: 50px;
-  border-bottom: 1px solid var(--kirby-color-border-base-quiet);
+  border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
 }
 
 .header,
@@ -102,5 +102,5 @@ td {
 }
 
 .day.today:not(.selected, :focus-visible) {
-  border: 1px solid var(--kirby-color-border-base);
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base);
 }
