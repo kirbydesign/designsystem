@@ -163,7 +163,7 @@ ion-modal {
 }
 
 ion-loading.kirby-loading-overlay {
-  --backdrop-opacity: var(--kirby-loading-overlay-backdrop-opacity);
+  --backdrop-opacity: var(--kirby-opacity-80);
   --ion-backdrop-color: var(--kirby-color-fill-base);
 
   .loading-wrapper {
