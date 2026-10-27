@@ -28,13 +28,13 @@ $item-height: var(--kirby-spacing-xxxl);
 .kirby-surface-raised {
   background-color: var(--kirby-color-fill-base);
   color: var(--kirby-color-content-base);
-  border: 1px solid var(--kirby-color-border-base-quiet);
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
 }
 
 ion-list-header {
   background-color: var(--kirby-color-fill-base);
   color: var(--kirby-color-content-base);
-  border-bottom: 1px solid var(--kirby-color-border-base-silent);
+  border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
   padding: 0;
   text-transform: inherit;
   letter-spacing: inherit;
@@ -94,7 +94,7 @@ ion-item-divider {
 
   background-color: var(--kirby-color-fill-base);
   color: var(--kirby-color-content-base);
-  border-top: 1px solid var(--kirby-color-border-base-silent);
+  border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
   display: flex;
   align-items: center;
   justify-content: space-between;
