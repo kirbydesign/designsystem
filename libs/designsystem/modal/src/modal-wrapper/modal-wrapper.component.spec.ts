@@ -855,8 +855,13 @@ describe('ModalWrapperComponent', () => {
         'ion-header.content-scrolled ion-toolbar'
       ) as HTMLElement;
       ionToolbarInScrolled.style.transition = 'none';
+      const borderBaseSilent = getComputedStyle(ionToolbarInScrolled)
+        .getPropertyValue('--kirby-color-border-base-silent')
+        .trim();
 
-      expect(getComputedStyle(ionToolbarInScrolled).borderBottomColor).not.toBe('rgba(0, 0, 0, 0)');
+      expect(ionToolbarInScrolled).toHaveComputedStyle({
+        'border-bottom-color': borderBaseSilent,
+      });
     });
   });
 });
