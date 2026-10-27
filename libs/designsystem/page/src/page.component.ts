@@ -349,6 +349,7 @@ export class PageComponent
   private isObservingTitle = false;
   private isObservingActions = false;
   private isDocTitleSet = false;
+  private observedToolbarButtons = new Set<HTMLIonButtonsElement>();
 
   private unobserveTitleMutation: UnobserveFn;
 
@@ -487,6 +488,11 @@ export class PageComponent
 
     this.interceptBackButtonClicksSetup();
     this.initializeStickyIntersectionObserver();
+    this.observeToolbarButtons();
+    this.ionToolbarButtonsElement.changes.pipe(takeUntil(this.ngOnDestroy$)).subscribe(() => {
+      this.observeToolbarButtons();
+      this.setActionButtonsWidth();
+    });
     this.setActionButtonsWidth();
   }
 
@@ -507,6 +513,7 @@ export class PageComponent
     this.stickyActionsIntersectionObserver?.disconnect();
     this.stickyContentIntersectionObserver?.disconnect();
     this.unobserveTitleMutation?.();
+    this.unobserveToolbarButtons();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -860,6 +867,22 @@ export class PageComponent
         );
       });
     });
+  }
+
+  private observeToolbarButtons() {
+    this.unobserveToolbarButtons();
+
+    this.ionToolbarButtonsElement.forEach(({ nativeElement: ionButtonsElement }) => {
+      this.observedToolbarButtons.add(ionButtonsElement);
+      this.resizeObserverService.observe(ionButtonsElement, () => this.setActionButtonsWidth());
+    });
+  }
+
+  private unobserveToolbarButtons() {
+    this.observedToolbarButtons.forEach((ionButtonsElement) =>
+      this.resizeObserverService.unobserve(ionButtonsElement)
+    );
+    this.observedToolbarButtons.clear();
   }
 
   private initializeContent() {
