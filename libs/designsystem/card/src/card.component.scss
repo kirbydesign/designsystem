@@ -6,7 +6,7 @@
   --kirby-card-main-background-color: var(--kirby-color-fill-base);
   --kirby-card-main-color: var(--kirby-color-content-base);
   --kirby-card-main-border-color: var(--kirby-color-border-base-quiet);
-  --kirby-card-border-width: 1px;
+  --kirby-card-border-width: var(--kirby-stroke-xs);
   --kirby-card-elevation: var(--kirby-elevation-card);
   --kirby-card-footer-background-color: var(--kirby-color-fill-base);
   --kirby-card-footer-color: var(--kirby-color-content-base);
