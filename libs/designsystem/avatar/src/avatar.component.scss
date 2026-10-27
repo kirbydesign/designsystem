@@ -31,7 +31,7 @@ $badge-diameter: utils.$avatar-badge-size;
   // default to size 'sm'
   width: $diameter-small;
   height: $diameter-small;
-  border: 1px solid var(--kirby-color-border-raised-quiet);
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
   border-radius: var(--kirby-border-radius-circle);
   box-sizing: border-box; // Ensure border is not added to the size
   overflow: hidden;

@@ -184,7 +184,7 @@ $button-margin: var(--kirby-spacing-xxxs);
     font-family: var(--kirby-font-family);
     background-color: var(--kirby-button-background-color, initial);
     color: var(--kirby-button-color, inherit);
-    border: 1px solid var(--kirby-button-border-color, transparent);
+    border: var(--kirby-stroke-xs) solid var(--kirby-button-border-color, transparent);
     border-radius: var(--kirby-border-radius-pill);
     box-sizing: border-box; // Ensure border is not added to button height
     display: inline-flex;
