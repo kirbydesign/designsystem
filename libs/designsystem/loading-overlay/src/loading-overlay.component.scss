@@ -26,7 +26,7 @@
     &.backdrop {
       background-color: color-mix(
         in srgb,
-        var(--kirby-color-fill-base) var(--kirby-loading-overlay-backdrop-opacity),
+        var(--kirby-color-fill-base) var(--kirby-opacity-80),
         transparent
       );
 
@@ -39,7 +39,7 @@
           inset: 0;
           z-index: -1;
           background-color: var(--kirby-color-fill-base);
-          opacity: var(--kirby-loading-overlay-backdrop-opacity);
+          opacity: var(--kirby-opacity-80);
         }
       }
     }
