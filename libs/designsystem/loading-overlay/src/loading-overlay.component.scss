@@ -29,6 +29,19 @@
         var(--kirby-color-fill-base) var(--kirby-loading-overlay-backdrop-opacity),
         transparent
       );
+
+      // color-mix() requires iOS 16.2+. On older browsers the declaration above is
+      // invalid, so draw the backdrop as a layer behind the spinner instead.
+      @supports not (background-color: color-mix(in srgb, red 50%, transparent)) {
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background-color: var(--kirby-color-fill-base);
+          opacity: var(--kirby-loading-overlay-backdrop-opacity);
+        }
+      }
     }
 
     &.hide-content {
