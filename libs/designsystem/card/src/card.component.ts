@@ -62,12 +62,12 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * `base`, `raised` (default) and `brand` set the surface directly.
-   * `elevated` and `flat` are raised surfaces, `outlined` is a base surface.
+   * `base`, `raised` and `brand` set the surface directly.
+   * `elevated` (default) and `flat` are raised surfaces, `outlined` is a base surface.
    * A `themeColor` takes precedence over the surface of the variant.
    */
-  @Input({ transform: (value: CardVariant | null | undefined) => value ?? 'raised' })
-  variant: CardVariant = 'raised';
+  @Input({ transform: (value: CardVariant | null | undefined) => value ?? 'elevated' })
+  variant: CardVariant = 'elevated';
 
   @HostBinding('class')
   get hostClasses(): string {
@@ -77,10 +77,12 @@ export class CardComponent implements OnInit, OnDestroy {
 
   private get surface(): string | null {
     const theme = this.themeColor;
-    if (!theme || theme.isDefault) return variantSurfaces[this.variant];
+    if (!theme || theme.isDefault || this.variant === 'outlined') {
+      return variantSurfaces[this.variant];
+    }
 
     if (theme.isLight) return 'base';
-    if (theme.isWhite) return 'raised';
+    if (theme.isWhite || theme.isSuccess || theme.isWarning || theme.isDanger) return 'raised';
     if (theme.isPrimary || theme.isSecondary || theme.isTertiary || theme.isDark) return 'brand';
     return null;
   }

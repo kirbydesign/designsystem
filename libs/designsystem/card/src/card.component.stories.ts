@@ -4,6 +4,7 @@ import {
   CardComponent,
   CardFooterComponent,
   CardHeaderComponent,
+  CardVariant,
 } from '@kirbydesign/designsystem/card';
 import { ItemComponent, LabelComponent } from '@kirbydesign/designsystem/item';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
@@ -48,7 +49,7 @@ export const Default: Story = {
     subtitle: '',
     backgroundImageUrl: '',
     hasPadding: false,
-    variant: 'raised',
+    variant: 'elevated',
   },
   render: (args) => ({
     props: args,
@@ -168,7 +169,7 @@ const cardContent = `
   </kirby-card-footer>
 `;
 
-const renderThemeColorGrid =
+const renderCardGrid =
   (colors: CardColor[], content: string = cardContent) =>
   () => ({
     props: { colors },
@@ -176,7 +177,7 @@ const renderThemeColorGrid =
       <div class="grid">
         @for (color of colors; track color.label) {
           <kirby-card
-            [variant]="color.variant ?? 'raised'"
+            [variant]="color.variant ?? 'elevated'"
             [hasPadding]="true"
             [themeColor]="color.themeColor"
           >
@@ -189,7 +190,13 @@ const renderThemeColorGrid =
   });
 
 export const ThemeColors: Story = {
-  render: renderThemeColorGrid(cardRows),
+  render: renderCardGrid(cardRows),
+};
+
+const surfaceVariants: CardVariant[] = ['base', 'raised', 'brand'];
+
+export const Variants: Story = {
+  render: renderCardGrid(surfaceVariants.map((variant) => ({ label: variant, variant }))),
 };
 
 const interactionStates = ['default', 'hover', 'active', 'focus-visible'] as const;
@@ -223,7 +230,7 @@ export const InteractionStates: Story = {
           @for (state of states; track state) {
             <kirby-card
               [attr.id]="'card-' + color.label + '-' + state"
-              [variant]="color.variant ?? 'raised'"
+              [variant]="color.variant ?? 'elevated'"
               [themeColor]="color.themeColor"
               [hasPadding]="true"
               (click)="noop()"
