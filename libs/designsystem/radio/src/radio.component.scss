@@ -83,7 +83,7 @@ ion-radio {
   & {
     box-sizing: border-box; // Ensure padding is not added to radio width/height
 
-    --border-width: 1px;
+    --border-width: var(--kirby-stroke-xs);
     --color: var(--kirby-color-border-raised);
     --color-checked: var(--kirby-color-border-raised);
   }
