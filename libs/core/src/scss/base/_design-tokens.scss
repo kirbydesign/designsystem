@@ -93,6 +93,9 @@
 
 // Declared on :root and on every surface, so the offset (inner) color resolves to the surface it is used on
 @mixin focus-ring() {
+  // Kept for backwards compatibility, use --kirby-color-border-focus instead
+  --kirby-focus-ring-color: var(--kirby-color-border-focus);
+
   // Small inset ring for compact controls (checkbox, radio, toggle, tab-navigation-item)
   --kirby-focus-ring-sm-inset:
     0 0 0 2px var(--kirby-color-border-focus) inset,
