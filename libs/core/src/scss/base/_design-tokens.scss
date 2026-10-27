@@ -108,7 +108,7 @@
 
   // Medium inset ring for controls that also turn their own border into the focus color (card)
   --kirby-focus-ring-md-combined-inset:
-    0 0 0 1px var(--kirby-color-border-focus) inset,
+    0 0 0 var(--kirby-stroke-xs) var(--kirby-color-border-focus) inset,
     0 0 0 3px var(--kirby-color-border-offset) inset;
 
   // Medium outer ring for inline elements where inset rings are not suitable (link text)
