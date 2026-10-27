@@ -24,12 +24,7 @@ import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 // eslint-disable-next-line no-restricted-imports
-import {
-  activateIonicElements,
-  gridStyles,
-  interactionStates,
-  pseudoStatesFor,
-} from '../../.storybook/story-helpers';
+import { gridStyles, interactionStates, pseudoStatesFor } from '../../.storybook/story-helpers';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,
@@ -254,11 +249,16 @@ const pageContainerStyles = `
   }
 `;
 
+const backButtonPseudoStates = pseudoStatesFor(['page'], 'ion-back-button');
+
 export const BackButtonInteractionStates: Story = {
   parameters: {
-    pseudo: pseudoStatesFor(['page'], 'ion-back-button'),
+    // Pressing a button with a pointer also hovers it
+    pseudo: {
+      ...backButtonPseudoStates,
+      hover: [...backButtonPseudoStates.hover, ...backButtonPseudoStates.active],
+    },
   },
-  play: activateIonicElements('#page-active ion-back-button'),
   render: () => ({
     props: { states: interactionStates },
     template: `
