@@ -4,7 +4,7 @@
 $form-field-input-font-family: var(--kirby-font-family);
 $form-field-input-line-height: var(--kirby-line-height-n);
 $form-field-input-padding: var(--kirby-spacing-s);
-$form-field-input-border-width: 1px;
+$form-field-input-border-width: var(--kirby-stroke-xs);
 $form-field-label-height: 24px;
 
 // Ensures correct position of cloned input when Ionic scrollAssist is enabled
