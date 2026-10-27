@@ -120,7 +120,7 @@
 @mixin error-ring() {
   // Inset ring for controls that also turn their own border into the danger color
   --kirby-error-ring-combined-inset:
-    0 0 0 1px var(--kirby-color-border-raised-danger) inset,
+    0 0 0 var(--kirby-stroke-xs) var(--kirby-color-border-raised-danger) inset,
     0 0 0 2px var(--kirby-color-border-offset) inset;
 }
 
