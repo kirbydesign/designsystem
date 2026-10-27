@@ -16,7 +16,6 @@ export default {
     '* surface/chart/color/**',
     'loudness-scale/**',
     'card/**',
-    'stroke/**',
     'background-blur/**',
     '* surface/tooltip/**',
   ],
