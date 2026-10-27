@@ -16,12 +16,12 @@ table.kirby-table {
 
   tr {
     &:not(:last-child) {
-      border-bottom: 1px solid var(--kirby-color-border-base-quiet);
+      border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
     }
   }
 
   thead tr {
-    border-bottom: 1px solid var(--kirby-color-border-base-quiet);
+    border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
   }
 
   th {
