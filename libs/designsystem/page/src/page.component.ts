@@ -48,7 +48,7 @@ import { Title } from '@angular/platform-browser';
 import { componentOnReady } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { fromEvent, Observable, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 import { KirbyConfig } from '@kirbydesign/designsystem/config';
@@ -488,12 +488,7 @@ export class PageComponent
 
     this.interceptBackButtonClicksSetup();
     this.initializeStickyIntersectionObserver();
-    this.observeToolbarButtons();
-    this.ionToolbarButtonsElement.changes.pipe(takeUntil(this.ngOnDestroy$)).subscribe(() => {
-      this.observeToolbarButtons();
-      this.setActionButtonsWidth();
-    });
-    this.setActionButtonsWidth();
+    this.subscribeToToolbarButtonsChanges();
   }
 
   ngAfterContentChecked(): void {
@@ -876,6 +871,15 @@ export class PageComponent
       this.observedToolbarButtons.add(ionButtonsElement);
       this.resizeObserverService.observe(ionButtonsElement, () => this.setActionButtonsWidth());
     });
+  }
+
+  private subscribeToToolbarButtonsChanges() {
+    this.ionToolbarButtonsElement.changes
+      .pipe(startWith(this.ionToolbarButtonsElement), takeUntil(this.ngOnDestroy$))
+      .subscribe(() => {
+        this.observeToolbarButtons();
+        this.setActionButtonsWidth();
+      });
   }
 
   private unobserveToolbarButtons() {
