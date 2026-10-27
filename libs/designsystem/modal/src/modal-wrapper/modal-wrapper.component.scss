@@ -2,7 +2,7 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
-$toolbar-bottom-border-width: 1px;
+$toolbar-bottom-border-width: var(--kirby-stroke-xs);
 
 // Cap title font resize at 120%
 $title-max-font-size: 16px * 1.2;
