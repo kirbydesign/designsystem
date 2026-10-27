@@ -67,7 +67,7 @@
     "@nx/storybook": "23.3.0",
     "@nx/web": "23.3.0",
     "@nx/workspace": "23.3.0",
-    "@storybook/addon-a11y": "10.6.2",
+    "@storybook/addon-a11y": "10.6.3",
     "@storybook/addon-docs": "10.6.3",
     "@storybook/angular": "10.6.3",
     "@swc-node/register": "^1.12.1",
