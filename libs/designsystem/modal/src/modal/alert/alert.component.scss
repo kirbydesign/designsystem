@@ -6,11 +6,11 @@ article {
   overflow: hidden;
   padding: var(--kirby-spacing-s);
   padding-top: var(--kirby-spacing-m);
+  color: var(--kirby-color-content-base);
+
   @include utils.media('<=xsmall') {
     padding: var(--kirby-spacing-xxs);
   }
-
-  color: var(--kirby-color-content-base);
 }
 
 .buttongroup {
