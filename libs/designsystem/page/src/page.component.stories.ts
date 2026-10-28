@@ -2,7 +2,7 @@ import { signal, type WritableSignal } from '@angular/core';
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import { expect, fn, waitFor } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -231,3 +231,44 @@ const interactiveToolbarTitleStory = (showActions: boolean): Story => ({
 
 export const InteractiveToolbarTitleWithoutActions = interactiveToolbarTitleStory(false);
 export const InteractiveToolbarTitleWithTwoActions = interactiveToolbarTitleStory(true);
+
+export const ToggleHeaderActions: Story = {
+  render: () => ({
+    props: {
+      showActions: true,
+    },
+    template: `<kirby-app>
+      <kirby-page>
+        <kirby-header title="Header actions" [emphasizeActions]="true">
+          @if (showActions) {
+            <button kirby-button *kirbyHeaderActions>Action</button>
+          }
+        </kirby-header>
+        <kirby-page-content>
+          <button kirby-button (click)="showActions = !showActions">
+            {{ showActions ? 'Hide actions' : 'Show actions' }}
+          </button>
+        </kirby-page-content>
+      </kirby-page>
+    </kirby-app>`,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toolbar = canvasElement.querySelector('ion-toolbar');
+    const header = canvasElement.querySelector<HTMLElement>('kirby-header');
+
+    await waitFor(() =>
+      expect(within(header).getByRole('button', { name: 'Action' })).toBeVisible()
+    );
+    await userEvent.click(canvas.getByRole('button', { name: 'Hide actions' }));
+    await waitFor(() => {
+      expect(within(header).queryByRole('button', { name: 'Action' })).toBeNull();
+      expect(within(toolbar).queryByText('Action')).toBeNull();
+    });
+    await userEvent.click(canvas.getByRole('button', { name: 'Show actions' }));
+    await waitFor(() => {
+      expect(within(header).getByRole('button', { name: 'Action' })).toBeVisible();
+      expect(within(toolbar).getByText('Action')).not.toBeVisible();
+    });
+  },
+};
