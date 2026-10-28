@@ -4,6 +4,7 @@ import { MenuAdvancedExampleComponent } from './examples/advanced';
 import { MenuCustomButtonExampleComponent } from './examples/customButton';
 import { MenuPortalExampleComponent } from './examples/portal';
 import { MenuPortalConfigExampleComponent } from './examples/portalConfig';
+import { MenuScrollExampleComponent } from './examples/scroll';
 
 @Component({
   selector: 'cookbook-action-list-example',
@@ -14,6 +15,7 @@ import { MenuPortalConfigExampleComponent } from './examples/portalConfig';
     MenuCustomButtonExampleComponent,
     MenuPortalExampleComponent,
     MenuPortalConfigExampleComponent,
+    MenuScrollExampleComponent,
   ],
 })
 export class MenuExampleComponent {}

@@ -1,13 +1,17 @@
 import { signal, type WritableSignal } from '@angular/core';
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { expect, waitFor } from 'storybook/test';
 
 import { RouterTestingModule } from '@angular/router/testing';
+import { expect, fn, waitFor } from 'storybook/test';
 
-import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
+import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
+import {
+  HeaderActionsDirective,
+  HeaderComponent,
+  HeaderTitleActionIconDirective,
+} from '@kirbydesign/designsystem/header';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
@@ -30,10 +34,11 @@ const meta: Meta<PageComponent> = {
         SlideDirective,
         CardComponent,
         CardHeaderComponent,
-        HeaderComponent,
-        HeaderActionsDirective,
         ActionGroupComponent,
         ButtonComponent,
+        HeaderComponent,
+        HeaderActionsDirective,
+        HeaderTitleActionIconDirective,
         IconComponent,
       ],
     }),
@@ -176,3 +181,53 @@ export const PageWithSlides: Story = {
     </kirby-app>`,
   }),
 };
+
+const interactiveToolbarTitleStory = (showActions: boolean): Story => ({
+  render: () => ({
+    props: {
+      showActions,
+      title: 'My secret savings account for a one-way ticket to Mars',
+      onTitleClick: fn(),
+    },
+    template: `<kirby-app>
+      <kirby-page defaultBackHref="/">
+        <kirby-header
+          [title]="title"
+          value="2.100.854,91"
+          valueUnit="kr."
+          (titleClick)="onTitleClick($event)"
+        >
+          <kirby-icon name="arrow-down" *kirbyHeaderTitleActionIcon></kirby-icon>
+          <ng-container *kirbyHeaderActions>
+            @if (showActions) {
+              <button kirby-button aria-label="Search">
+                <kirby-icon name="search"></kirby-icon>
+              </button>
+              <button kirby-button attentionLevel="3" aria-label="More">
+                <kirby-icon name="more"></kirby-icon>
+              </button>
+            }
+          </ng-container>
+        </kirby-header>
+        <kirby-page-content>
+          <div style="min-height: 200vh">Page content</div>
+        </kirby-page-content>
+      </kirby-page>
+    </kirby-app>`,
+  }),
+  play: async ({ canvasElement }) => {
+    const content = canvasElement.querySelector('ion-content');
+    await expect(content).not.toBeNull();
+    await waitFor(async () => {
+      const scrollElement = await content.getScrollElement();
+      await expect(scrollElement.scrollHeight).toBeGreaterThan(scrollElement.clientHeight);
+    });
+    await content.scrollToPoint(0, 400, 0);
+    await waitFor(() =>
+      expect(canvasElement.querySelector('ion-title.slide-and-fade-in')).not.toBeNull()
+    );
+  },
+});
+
+export const InteractiveToolbarTitleWithoutActions = interactiveToolbarTitleStory(false);
+export const InteractiveToolbarTitleWithTwoActions = interactiveToolbarTitleStory(true);

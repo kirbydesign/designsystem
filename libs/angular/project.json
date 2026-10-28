@@ -30,8 +30,8 @@
         "commands": [
           "rm -rf libs/core/dist libs/designsystem/dist libs/angular/dist",
           "nx build core --watch",
-          "wait-on libs/core/dist/index.js && nx build designsystem --watch",
-          "wait-on libs/designsystem/dist/package.json && nx build angular --watch"
+          "wait-on libs/core/dist/index.js && nx build designsystem --watch --exclude-task-dependencies",
+          "wait-on libs/designsystem/dist/package.json && nx build angular --watch --exclude-task-dependencies"
         ],
         "parallel": true
       }

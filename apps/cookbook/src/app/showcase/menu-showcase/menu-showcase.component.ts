@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { MenuScrollExampleComponent } from '../../examples/menu-example/examples/scroll';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { MenuSelectableExampleComponent } from '../../examples/menu-example/examples/selectable';
 import { MenuAdvancedExampleComponent } from '../../examples/menu-example/examples/advanced';
@@ -29,6 +30,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     MenuAdvancedExampleComponent,
     MenuCustomPlacementExampleComponent,
     MenuCustomButtonExampleComponent,
+    MenuScrollExampleComponent,
     PortalInListWrapperComponent,
     MenuPortalExampleComponent,
     CodeViewerComponent,

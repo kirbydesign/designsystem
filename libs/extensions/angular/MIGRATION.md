@@ -4,6 +4,72 @@ This document provides information about breaking changes and their migrations f
 
 Kirby Extensions is versioned and released independently from `@kirbydesign/designsystem`. For migrations of the core design system see the [Kirby Design System migration guide](https://github.com/kirbydesign/designsystem/blob/develop/MIGRATION.md).
 
+## Version 6.0.0
+
+Version 6 introduces two breaking changes. One for the platform as support for non-LTS Angular versions is removed, and one for the combobox component as *kirbyListItemTemplate has been swapped out with combobox own template directive,
+
+- [Platform Support](#platform-support-v6)
+- [Components](#components-v6)
+  - [Combobox](#combobox-v6)
+
+<h3 id="platform-support-v6">Platform Support</h3>
+
+Extensions Angular removes support for Angular 18, 19 and 20, and now expects Angular 21 or later to be installed as a peer dependency.
+
+<h3 id="components-v6">Components</h3>
+
+<h4 id="combobox-v6">Combobox</h4>
+
+Previously, the combobox reused the design system's `kirbyListItemTemplate` directive from the list component, creating an unnecessary dependency on the design system list. The combobox now has its own `kirbyXComboboxItemTemplate` directive.
+
+Before:
+
+```ts
+import { ComboboxModule } from '@kirbydesign/extensions-angular/combobox';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
+
+@Component({
+  imports: [ComboboxModule, ListItemTemplateDirective],
+})
+export class MyComponent {}
+```
+
+```html
+<kirby-x-combobox [items]="items">
+  <kirby-item *kirbyListItemTemplate="let item; let selected = selected; let focused = focused">
+    <kirby-label>
+      <p>{{ item.name }}</p>
+    </kirby-label>
+  </kirby-item>
+</kirby-x-combobox>
+```
+
+After:
+
+```ts
+import {
+  ComboboxComponent,
+  ComboboxItemTemplateDirective,
+} from '@kirbydesign/extensions-angular/combobox';
+
+@Component({
+  imports: [ComboboxComponent, ComboboxItemTemplateDirective],
+})
+export class MyComponent {}
+```
+
+```html
+<kirby-x-combobox [items]="items">
+  <kirby-item
+    *kirbyXComboboxItemTemplate="let item; let selected = selected; let focused = focused"
+  >
+    <kirby-label>
+      <p>{{ item.name }}</p>
+    </kirby-label>
+  </kirby-item>
+</kirby-x-combobox>
+```
+
 ## Version 5.0.0
 
 - [Components](#components-v5)
