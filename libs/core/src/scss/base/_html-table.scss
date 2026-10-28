@@ -9,6 +9,7 @@ $row-height: 44px;
 table.kirby-table {
   width: 100%;
   border-collapse: collapse;
+  color: var(--kirby-color-content-base);
 
   &.layout-fixed {
     table-layout: fixed;
@@ -119,7 +120,6 @@ table.kirby-table {
     padding: var(--kirby-spacing-xxxs) var(--kirby-spacing-s);
     font-weight: var(--kirby-font-weight-normal);
     font-size: var(--kirby-font-size-s);
-    color: var(--kirby-color-content-base);
     vertical-align: middle;
 
     &.text-align-left {

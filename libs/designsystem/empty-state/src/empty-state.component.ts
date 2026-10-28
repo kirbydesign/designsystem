@@ -47,7 +47,7 @@ export class EmptyStateComponent implements AfterContentInit, OnInit {
   /**
    * Sets which color the empty state should use from the theme palette.
    * Supported values are 'success', 'warning', 'danger' and 'medium'.
-   * Deprecated values: 'primary', 'secondary', 'tertiary', 'light', 'dark' and 'white'
+   * Deprecated values: 'primary', 'secondary', 'tertiary', 'light' and 'dark'
    */
   @Input() set themeColor(value: ThemeColor) {
     if (value && !supportedThemeColors.includes(value)) {

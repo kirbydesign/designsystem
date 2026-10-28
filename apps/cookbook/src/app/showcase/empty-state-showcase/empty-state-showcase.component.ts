@@ -60,7 +60,6 @@ export class EmptyStateShowcaseComponent {
         'tertiary (deprecated)',
         'light (deprecated)',
         'dark (deprecated)',
-        'white (deprecated)',
       ],
     },
   ];
