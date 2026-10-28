@@ -130,7 +130,7 @@ ion-toolbar {
     }
 
     .toolbar-title,
-    .toolbar-title > span.has-icon > span {
+    .toolbar-title > span.has-icon > h1 {
       text-overflow: ellipsis;
       white-space: nowrap;
       pointer-events: auto;
