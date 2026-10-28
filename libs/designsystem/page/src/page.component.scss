@@ -130,7 +130,7 @@ ion-toolbar {
     }
 
     .toolbar-title,
-    .toolbar-title > span.has-icon > span {
+    .toolbar-title > span.has-icon > h1 {
       text-overflow: ellipsis;
       white-space: nowrap;
       pointer-events: auto;
@@ -158,12 +158,6 @@ ion-toolbar {
         align-items: center;
         justify-content: center;
         max-width: 100%;
-
-        &.clickable > h1 {
-          min-width: 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
       }
 
       @include utils.slotted('*') {
