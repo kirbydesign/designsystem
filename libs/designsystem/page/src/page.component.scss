@@ -158,6 +158,12 @@ ion-toolbar {
         align-items: center;
         justify-content: center;
         max-width: 100%;
+
+        &.clickable > h1 {
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       @include utils.slotted('*') {
