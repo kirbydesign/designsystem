@@ -83,24 +83,6 @@ const conditionalHeaderActionsStory = ({
   let showActions: WritableSignal<boolean>;
 
   return {
-    parameters: {
-      viewport: {
-        options: {
-          compact: {
-            name: 'Compact mobile',
-            styles: { width: '375px', height: '480px' },
-          },
-        },
-      },
-      chromatic: {
-        modes: {
-          mobile: { viewport: { width: 375, height: 480 } },
-        },
-      },
-    },
-    globals: {
-      viewport: { value: 'compact', isRotated: false },
-    },
     render: () => {
       showActions = signal(false);
       return {
