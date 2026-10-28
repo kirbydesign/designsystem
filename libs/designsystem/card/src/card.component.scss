@@ -7,6 +7,7 @@
   --kirby-card-main-color: var(--kirby-color-content-base);
   --kirby-card-main-border-color: var(--kirby-color-border-base-quiet);
   --kirby-card-border-width: var(--kirby-stroke-xs);
+  --kirby-card-border: var(--kirby-card-border-width) solid var(--kirby-card-main-border-color);
   --kirby-card-elevation: var(--kirby-elevation-card);
   --kirby-card-footer-background-color: var(--kirby-color-fill-base);
   --kirby-card-footer-color: var(--kirby-color-content-base);
@@ -33,10 +34,7 @@
     background-repeat: var(--kirby-card-background-repeat, no-repeat);
     background-position: var(--kirby-card-background-position, center);
     background-size: var(--kirby-card-background-size, cover);
-    border: var(
-      --kirby-card-border,
-      var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
-    );
+    border: var(--kirby-card-border);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -60,18 +58,8 @@
       border: none;
 
       .content-wrapper {
-        border-block-end: var(
-          --kirby-card-border,
-          var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
-        );
-        border-inline-start: var(
-          --kirby-card-border,
-          var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
-        );
-        border-inline-end: var(
-          --kirby-card-border,
-          var(--kirby-card-border-width) solid var(--kirby-card-main-border-color)
-        );
+        border-inline: var(--kirby-card-border);
+        border-block-end: var(--kirby-card-border);
         border-bottom-left-radius: var(--kirby-border-radius-n);
         border-bottom-right-radius: var(--kirby-border-radius-n);
       }
