@@ -38,8 +38,8 @@ $form-field-label-height: 24px;
     box-shadow: var(--kirby-error-ring-combined-inset);
   }
 
-  // Order matters: the error border wins over the hover and active borders,
-  // and the focus border wins over all of them
+  // Order matters: the borderless border wins over the hover and active borders,
+  // the error border wins over those, and the focus border wins over all of them
   &:not(:disabled) {
     @include utils.hover {
       background-color: var(--kirby-color-fill-raised-hover);
@@ -53,6 +53,10 @@ $form-field-label-height: 24px;
 
     &:active {
       border-color: var(--kirby-color-border-raised-loud);
+    }
+
+    &.borderless {
+      border-color: transparent;
     }
 
     &.error {
@@ -110,6 +114,7 @@ $form-field-label-height: 24px;
   /* stylelint-enable no-duplicate-selectors */
 
   &.borderless {
+    border-color: transparent; // keep the border width, so the padding stays the same
     border-radius: 0;
     padding-inline: 0;
     width: auto;

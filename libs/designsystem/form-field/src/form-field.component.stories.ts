@@ -178,6 +178,7 @@ const formFieldVariants: {
   value?: string;
   hasError?: boolean;
   affix?: boolean;
+  borderless?: boolean;
 }[] = [
   { id: 'placeholder', label: 'Placeholder', element: 'input' },
   { id: 'value', label: 'Value', element: 'input', value: 'Value' },
@@ -186,6 +187,7 @@ const formFieldVariants: {
   // This guards the rule order that keeps the error border over hover and active,
   // and the focus ring over the error.
   { id: 'error', label: 'Error', element: 'input', value: 'Value', hasError: true },
+  { id: 'borderless', label: 'Borderless', element: 'input', value: 'Value', borderless: true },
   { id: 'textarea', label: 'Textarea', element: 'textarea', value: 'Value' },
 ];
 
@@ -226,6 +228,7 @@ export const InteractionStates: Story = {
                 placeholder="Placeholder"
                 [value]="variant.value ?? ''"
                 [hasError]="variant.hasError"
+                [borderless]="variant.borderless"
                 [disabled]="state === 'disabled'"
               />
             }

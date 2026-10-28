@@ -322,9 +322,6 @@ const dropdownVariants: {
   { id: 'level-1', label: 'Attention level 1', attentionLevel: '1' },
   { id: 'level-2', label: 'Attention level 2', attentionLevel: '2' },
   { id: 'level-3', label: 'Attention level 3', attentionLevel: '3' },
-  // Error is a variant rather than a state, so it's shown in every interaction state.
-  // This guards the rule order that keeps the error border over hover and active,
-  // and the focus ring over the error.
   { id: 'error', label: 'Error', hasError: true },
 ];
 
@@ -333,7 +330,6 @@ const dropdownStates = [...interactionStates, 'disabled'] as const;
 
 export const InteractionStates: Story = {
   parameters: {
-    // The trigger button inside the dropdown is what receives hover, active and focus
     pseudo: pseudoStatesFor(
       idsOnSurfaces(
         'dropdown',

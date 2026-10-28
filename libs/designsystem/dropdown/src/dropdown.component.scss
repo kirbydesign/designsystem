@@ -38,7 +38,6 @@ $min-screen-width: 375px;
     }
   }
 
-  // The open dropdown has the visual focus in the popover, so it drops the error border and ring
   &.error,
   &.ng-touched.ng-invalid {
     &:not(.is-open) > button {
@@ -68,9 +67,6 @@ $min-screen-width: 375px;
   &.is-open {
     > button {
       box-shadow: var(--kirby-elevation-4);
-
-      // When open, focus stays on the trigger button (aria-activedescendant combobox pattern),
-      // so reset the focus border while the popover has the visual focus.
       border-color: var(--kirby-button-border-color);
     }
   }
