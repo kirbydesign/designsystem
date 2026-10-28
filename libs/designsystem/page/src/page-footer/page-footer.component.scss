@@ -5,7 +5,7 @@ $padding-vertical: var(--kirby-spacing-xxs);
 
 :host {
   display: block;
-  background-color: var(--kirby-color-fill-raised);
+  background-color: var(--kirby-color-fill-base);
   @include themes.apply-white-theme;
 
   .wrapper {

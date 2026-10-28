@@ -164,11 +164,7 @@ ion-back-button {
 
   height: $toolbar-button-size;
   width: $toolbar-button-size;
-
-  // In iOS mode Ionic dims the whole button on hover (:host(:hover){opacity:.6}) and
-  // on press (:host(.ion-activated) .button-native{opacity:.4}). Force opacity to 1 so
-  // our token-based hover/active styling is shown at full strength instead.
-  opacity: 1;
+  opacity: 1; // counteract ionic dimming the native button
 
   &:active,
   &.ion-activated {
@@ -189,13 +185,12 @@ ion-back-button {
   }
 
   &::part(native) {
-    opacity: 1; // counteract iOS ion-activated dimming on the native button
+    opacity: 1; // counteract ionic dimming the native button
     border: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
     border-radius: var(--kirby-border-radius-pill);
     overflow: hidden; // required for border radius to work (iOS sets overflow: visible)
   }
 
-  // Ionic has no border-color state variable, so drive the border manually.
   @include utils.hover {
     &::part(native) {
       border-color: var(--kirby-color-border-raised-quiet-hover);
