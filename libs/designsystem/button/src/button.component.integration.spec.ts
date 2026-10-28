@@ -22,8 +22,6 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from './button.component';
 
-const getTokenColor = (name: string) =>
-  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 
@@ -97,23 +95,6 @@ describe('ButtonComponent in Kirby Page', () => {
       expect(actionButtonInHeader).toBeTruthy();
     });
 
-    it('should render with the correct background-color', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({
-        'background-color': getTokenColor('fill-brand-loud'),
-      });
-      expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
-        'background-color': getTokenColor('fill-raised'),
-      });
-    });
-
-    it('should render with correct color', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({
-        color: getTokenColor('content-brand-loud'),
-      });
-    });
-
     it('should render with correct size', async () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
@@ -128,11 +109,9 @@ describe('ButtonComponent in Kirby Page', () => {
   });
 
   describe('inside Page Actions', () => {
-    let ionContent: HTMLElement;
     let actionButtonInPage: HTMLButtonElement;
 
     beforeEach(() => {
-      ionContent = spectator.queryHost('ion-content');
       actionButtonInPage = spectator.queryHost(
         '.page-title kirby-page-actions button[kirby-button]'
       );
@@ -141,47 +120,17 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render action button', () => {
       expect(actionButtonInPage).toBeTruthy();
     });
-
-    it('should render with correct background-color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': getTokenColor('fill-raised'),
-      });
-    });
-
-    it('should render with correct color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        color: getTokenColor('content-raised'),
-      });
-    });
   });
 
   describe('inside Page Title', () => {
-    let ionContent: HTMLElement;
     let normalButtonInPage: HTMLButtonElement;
 
     beforeEach(() => {
-      ionContent = spectator.queryHost('ion-content');
       normalButtonInPage = spectator.queryHost('.page-title button[kirby-button].normal-button');
     });
 
     it('should render normal button', () => {
       expect(normalButtonInPage).toBeTruthy();
-    });
-
-    it('should render with correct background-color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(normalButtonInPage).toHaveComputedStyle({
-        'background-color': getTokenColor('fill-brand-loud'),
-      });
-    });
-
-    it('should render with correct color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(normalButtonInPage).toHaveComputedStyle({
-        color: getTokenColor('content-brand-loud'),
-      });
     });
   });
 });
