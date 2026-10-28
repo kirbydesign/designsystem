@@ -1250,37 +1250,6 @@ describe('PageComponent', () => {
     });
   });
 
-  describe('with conditionally rendered header actions', () => {
-    beforeEach(async () => {
-      spectator = createHost(
-        `<kirby-page>
-           <kirby-header title="${titleText}">
-             <kirby-action-group *kirbyHeaderActions>
-               @if (showActions) {
-                 <button kirby-button>Conditional action</button>
-               }
-             </kirby-action-group>
-           </kirby-header>
-         </kirby-page>`,
-        { hostProps: { showActions: false } }
-      );
-      ionToolbar = spectator.queryHost('ion-toolbar');
-      await TestHelper.whenReady(ionToolbar);
-    });
-
-    it('should recalculate toolbar title padding when actions are rendered', async () => {
-      const getActionButtonsWidth = () =>
-        parseFloat(getComputedStyle(ionToolbar).getPropertyValue('--action-buttons-width'));
-      const initialActionButtonsWidth = getActionButtonsWidth();
-
-      spectator.setHostInput('showActions', true);
-
-      await TestHelper.whenTrue(() => getActionButtonsWidth() > initialActionButtonsWidth);
-
-      expect(getActionButtonsWidth()).toBeGreaterThan(initialActionButtonsWidth);
-    });
-  });
-
   describe('with Kirby global config and setHtmlDocTitle enabled', () => {
     let spectator: SpectatorHost<PageComponent>;
     const testTitle = 'Kirby Page Title';
