@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $padding: var(--kirby-spacing-s);
 
@@ -34,12 +35,10 @@ $padding: var(--kirby-spacing-s);
   --kirby-accordion-border-bottom-radius: 0;
 }
 
-@media (hover: hover) {
-  :host:has(.header:hover) {
-    background-color: var(--kirby-color-fill-base-hover);
-    color: var(--kirby-color-content-base-hover);
-    border-color: var(--kirby-color-border-base-quiet-hover);
-  }
+@include utils.hover(':host:has(.header:hover)') {
+  background-color: var(--kirby-color-fill-base-hover);
+  color: var(--kirby-color-content-base-hover);
+  border-color: var(--kirby-color-border-base-quiet-hover);
 }
 
 :host:has(.header:active) {

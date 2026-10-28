@@ -22,10 +22,8 @@ a[modal-router-link],
 
   // :where() keeps the states at the same specificity as the default link color,
   // so components rendered as links (e.g. a[kirby-button]) keep their own color.
-  @media (hover: hover) {
-    &:where(:hover) {
-      color: var(--kirby-color-content-base-loud-hover);
-    }
+  @include functions.hover('&:where(:hover)') {
+    color: var(--kirby-color-content-base-loud-hover);
   }
 
   &:where(:active) {
