@@ -5,9 +5,7 @@
 :host {
   --kirby-card-main-background-color: var(--kirby-color-fill-base);
   --kirby-card-main-color: var(--kirby-color-content-base);
-  --kirby-card-main-border-color: var(--kirby-color-border-base-quiet);
-  --kirby-card-border-width: var(--kirby-stroke-xs);
-  --kirby-card-border: var(--kirby-card-border-width) solid var(--kirby-card-main-border-color);
+  --kirby-card-border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
   --kirby-card-elevation: var(--kirby-elevation-card);
   --kirby-card-footer-background-color: var(--kirby-color-fill-base);
   --kirby-card-footer-color: var(--kirby-color-content-base);
@@ -87,7 +85,7 @@
       transition: interaction-state.transition();
       box-shadow: var(--kirby-card-elevation), var(--kirby-focus-ring-md-combined-inset);
 
-      --kirby-card-border: var(--kirby-card-border-width) solid var(--kirby-color-border-focus);
+      --kirby-card-border: var(--kirby-stroke-xs) solid var(--kirby-color-border-focus);
     }
   }
 }
@@ -98,13 +96,11 @@
     --kirby-content-border-bottom-radius: 0;
   }
   @include utils.slotted(':first-child') {
-    --kirby-content-border-top-radius: calc(
-      var(--kirby-border-radius-n) - var(--kirby-card-border-width)
-    );
+    --kirby-content-border-top-radius: calc(var(--kirby-border-radius-n) - var(--kirby-stroke-xs));
   }
   @include utils.slotted(':last-child') {
     --kirby-content-border-bottom-radius: calc(
-      var(--kirby-border-radius-n) - var(--kirby-card-border-width)
+      var(--kirby-border-radius-n) - var(--kirby-stroke-xs)
     );
   }
 
