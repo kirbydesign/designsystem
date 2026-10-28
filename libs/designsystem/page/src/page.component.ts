@@ -48,7 +48,7 @@ import { Title } from '@angular/platform-browser';
 import { componentOnReady } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { fromEvent, Observable, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 import { KirbyConfig } from '@kirbydesign/designsystem/config';
@@ -349,6 +349,7 @@ export class PageComponent
   private isObservingTitle = false;
   private isObservingActions = false;
   private isDocTitleSet = false;
+  private observedToolbarButtons = new Set<HTMLIonButtonsElement>();
 
   private unobserveTitleMutation: UnobserveFn;
 
@@ -487,7 +488,7 @@ export class PageComponent
 
     this.interceptBackButtonClicksSetup();
     this.initializeStickyIntersectionObserver();
-    this.setActionButtonsWidth();
+    this.subscribeToToolbarButtonsChanges();
   }
 
   ngAfterContentChecked(): void {
@@ -507,6 +508,7 @@ export class PageComponent
     this.stickyActionsIntersectionObserver?.disconnect();
     this.stickyContentIntersectionObserver?.disconnect();
     this.unobserveTitleMutation?.();
+    this.unobserveToolbarButtons();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -860,6 +862,31 @@ export class PageComponent
         );
       });
     });
+  }
+
+  private observeToolbarButtons() {
+    this.unobserveToolbarButtons();
+
+    this.ionToolbarButtonsElement.forEach(({ nativeElement: ionButtonsElement }) => {
+      this.observedToolbarButtons.add(ionButtonsElement);
+      this.resizeObserverService.observe(ionButtonsElement, () => this.setActionButtonsWidth());
+    });
+  }
+
+  private subscribeToToolbarButtonsChanges() {
+    this.ionToolbarButtonsElement.changes
+      .pipe(startWith(this.ionToolbarButtonsElement), takeUntil(this.ngOnDestroy$))
+      .subscribe(() => {
+        this.observeToolbarButtons();
+        this.setActionButtonsWidth();
+      });
+  }
+
+  private unobserveToolbarButtons() {
+    this.observedToolbarButtons.forEach((ionButtonsElement) =>
+      this.resizeObserverService.unobserve(ionButtonsElement)
+    );
+    this.observedToolbarButtons.clear();
   }
 
   private initializeContent() {
