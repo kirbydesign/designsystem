@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.order-reconciliation-details-toggle {
+  min-height: 36px;
+  padding: var(--kirby-spacing-xxs) var(--kirby-spacing-xs);
+  border: 1px solid currentcolor;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.order-reconciliation-table {
+  width: 100%;
+  min-width: 0;
+}
+
+.order-reconciliation-table caption {
+  padding: var(--kirby-spacing-xs) 0;
+  text-align: start;
+}
+
+.order-reconciliation-empty {
+  padding: var(--kirby-spacing-md);
+  text-align: center;
+}
+
+.order-reconciliation-row-active {
+  box-shadow: inset 3px 0 #007f87;
+}
+
+.order-reconciliation-details-toggle:focus-visible {
+  outline: 2px solid #007f87;
+  outline-offset: 2px;
+}

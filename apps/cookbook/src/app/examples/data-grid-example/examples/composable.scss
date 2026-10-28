@@ -1,0 +1,13 @@
+/* stylelint-disable selector-pseudo-element-no-unknown */
+:host ::ng-deep table.kirby-table {
+  th[data-column-id='selection'],
+  td[data-column-id='selection'] {
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    padding: var(--kirby-spacing-xxxs);
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+/* stylelint-enable selector-pseudo-element-no-unknown */

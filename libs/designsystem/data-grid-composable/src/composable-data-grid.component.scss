@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+
+.composable-data-grid-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0fr);
+  align-items: start;
+  gap: var(--kirby-spacing-md);
+  transition: grid-template-columns 280ms ease;
+}
+
+.composable-data-grid-layout-panel-open {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.composable-data-grid-table-slot,
+.composable-data-grid-side-panel-slot {
+  min-width: 0;
+}
+
+.composable-data-grid-table-slot {
+  overflow-x: auto;
+}
+
+.composable-data-grid-side-panel-slot {
+  display: none;
+  overflow: hidden;
+}
+
+.composable-data-grid-layout-panel-open .composable-data-grid-side-panel-slot {
+  display: block;
+  animation: composable-data-grid-panel-in 280ms ease both;
+}
+
+@keyframes composable-data-grid-panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--kirby-spacing-m));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (width <= 960px) {
+  .composable-data-grid-layout,
+  .composable-data-grid-layout.composable-data-grid-layout-panel-open {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .composable-data-grid-layout-panel-open .composable-data-grid-side-panel-slot {
+    animation-name: composable-data-grid-panel-in-mobile;
+  }
+
+  @keyframes composable-data-grid-panel-in-mobile {
+    from {
+      opacity: 0;
+      transform: translateY(var(--kirby-spacing-m));
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .composable-data-grid-layout {
+    transition-duration: 0.01ms;
+  }
+
+  .composable-data-grid-layout-panel-open .composable-data-grid-side-panel-slot {
+    animation-duration: 0.01ms;
+  }
+}

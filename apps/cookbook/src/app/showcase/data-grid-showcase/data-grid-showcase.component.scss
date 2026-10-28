@@ -1,1 +1,13 @@
 @use '../showcase.shared';
+
+:host .kirby-table {
+  th:has(cookbook-data-grid-selection-checkbox-header),
+  td:has(cookbook-data-grid-selection-checkbox-cell) {
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    padding: var(--kirby-spacing-xxxs);
+    text-align: center;
+    white-space: nowrap;
+  }
+}

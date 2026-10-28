@@ -8,3 +8,49 @@
     ></cookbook-data-grid-default-example>
   </cookbook-example-viewer>
 </div>
+
+<div class="example">
+  <h2>Composable Data Grid POC</h2>
+  <cookbook-example-viewer
+    [html]="dataGridComposableExample.template"
+    [ts]="dataGridComposableExample.dataSnippet"
+  >
+    <cookbook-data-grid-composable-example
+      #dataGridComposableExample
+    ></cookbook-data-grid-composable-example>
+  </cookbook-example-viewer>
+</div>
+
+<div class="example">
+  <h2>Composable Order Reconciliation</h2>
+  <cookbook-example-viewer
+    [html]="orderReconciliationExample.template"
+    [ts]="orderReconciliationExample.dataSnippet"
+  >
+    <cookbook-order-reconciliation-example
+      #orderReconciliationExample
+    ></cookbook-order-reconciliation-example>
+  </cookbook-example-viewer>
+</div>
+
+<div class="example">
+  <cookbook-example-viewer
+    [html]="dataGridCustomContentExample.template"
+    [ts]="dataGridCustomContentExample.dataSnippet"
+  >
+    <cookbook-data-grid-custom-content-example
+      #dataGridCustomContentExample
+    ></cookbook-data-grid-custom-content-example>
+  </cookbook-example-viewer>
+</div>
+
+<div class="example">
+  <cookbook-example-viewer
+    [html]="dataGridSelectionExample.template"
+    [ts]="dataGridSelectionExample.dataSnippet"
+  >
+    <cookbook-data-grid-selection-example
+      #dataGridSelectionExample
+    ></cookbook-data-grid-selection-example>
+  </cookbook-example-viewer>
+</div>

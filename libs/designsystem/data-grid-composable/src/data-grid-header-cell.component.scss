@@ -1,0 +1,27 @@
+:host {
+  &.sortable {
+    cursor: pointer;
+  }
+}
+
+.data-grid-composable-sort-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: inherit;
+}
+
+.data-grid-composable-sort-icon {
+  visibility: hidden;
+}
+
+:host(.active) .data-grid-composable-sort-icon {
+  visibility: visible;
+}

@@ -1,0 +1,37 @@
+@if (!headerContext().header.isPlaceholder) {
+  @if (isSortable) {
+    <button
+      class="data-grid-composable-sort-button"
+      type="button"
+      (click)="headerContext().header.column.getToggleSortingHandler()?.($event)"
+    >
+      <ng-container
+        *flexRender="
+          headerContext().header.column.columnDef.header;
+          props: headerContext();
+          let headerText
+        "
+      >
+        {{ headerText }}
+      </ng-container>
+      <kirby-icon
+        class="data-grid-composable-sort-icon"
+        [name]="
+          headerContext().header.column.getIsSorted() === 'desc'
+            ? 'arrow-down-fill'
+            : 'arrow-up-fill'
+        "
+      ></kirby-icon>
+    </button>
+  } @else {
+    <ng-container
+      *flexRender="
+        headerContext().header.column.columnDef.header;
+        props: headerContext();
+        let headerText
+      "
+    >
+      {{ headerText }}
+    </ng-container>
+  }
+}
