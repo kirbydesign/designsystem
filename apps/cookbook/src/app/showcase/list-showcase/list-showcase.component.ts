@@ -40,8 +40,9 @@ export class ListShowcaseComponent {
       type: ['any[]'],
     },
     {
-      name: 'getItemColor',
-      description: 'Callback that returns the theme color for an item.',
+      name: 'getItemColor (deprecated)',
+      description:
+        'Callback that returns the theme color for an item. Deprecated - coloring list items differently is no longer supported.',
       defaultValue: 'undefined',
       type: ['(item: any) => ThemeColor'],
     },

@@ -7,7 +7,7 @@
   [class.has-header]="headerTemplate"
   [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
-  [class.kirby-surface-raised]="_isRaisedSurface && !_isSectionsEnabled && !_isStandAloneEnabled"
+  [class.kirby-surface-raised]="_isListRaisedSurface"
 >
   @if (headerTemplate) {
     <ion-list-header>
