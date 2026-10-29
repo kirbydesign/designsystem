@@ -65,20 +65,31 @@
   }
 
   &[role='button'] {
+    --kirby-card-state-layer-opacity: var(--kirby-opacity-0);
+
     cursor: pointer;
     outline: none;
 
+    // Draw overlay for hover/active on top of slotted content
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: interaction-state.$state-layer-z-index;
+      background-color: var(--kirby-card-main-color);
+      opacity: var(--kirby-card-state-layer-opacity);
+      transition: interaction-state.transition(opacity);
+    }
+
     @include utils.hover {
-      --kirby-card-main-background-color: var(--kirby-color-fill-base-hover);
-      --kirby-card-main-color: var(--kirby-color-content-base-hover);
-      --kirby-card-main-border-color: var(--kirby-color-border-base-quiet-hover);
+      --kirby-card-state-layer-opacity: var(--kirby-opacity-5);
     }
 
     &:active,
     &.interaction-state-active {
-      --kirby-card-main-background-color: var(--kirby-color-fill-base-active);
-      --kirby-card-main-color: var(--kirby-color-content-base-active);
-      --kirby-card-main-border-color: var(--kirby-color-border-base-quiet-active);
+      --kirby-card-state-layer-opacity: var(--kirby-opacity-10);
     }
 
     &:focus-visible {
@@ -131,61 +142,16 @@
   --kirby-card-main-background-color: var(--kirby-color-fill-success);
   --kirby-card-main-color: var(--kirby-color-content-success);
   --kirby-card-main-border-color: var(--kirby-color-border-success);
-
-  &[role='button'] {
-    @include utils.hover {
-      --kirby-card-main-background-color: var(--kirby-color-fill-success-hover);
-      --kirby-card-main-color: var(--kirby-color-content-success-hover);
-      --kirby-card-main-border-color: var(--kirby-color-border-success-hover);
-    }
-
-    &:active,
-    &.interaction-state-active {
-      --kirby-card-main-background-color: var(--kirby-color-fill-success-active);
-      --kirby-card-main-color: var(--kirby-color-content-success-active);
-      --kirby-card-main-border-color: var(--kirby-color-border-success-active);
-    }
-  }
 }
 
 :host(.warning:not(.outlined)) {
   --kirby-card-main-background-color: var(--kirby-color-fill-warning);
   --kirby-card-main-color: var(--kirby-color-content-warning);
   --kirby-card-main-border-color: var(--kirby-color-border-warning);
-
-  &[role='button'] {
-    @include utils.hover {
-      --kirby-card-main-background-color: var(--kirby-color-fill-warning-hover);
-      --kirby-card-main-color: var(--kirby-color-content-warning-hover);
-      --kirby-card-main-border-color: var(--kirby-color-border-warning-hover);
-    }
-
-    &:active,
-    &.interaction-state-active {
-      --kirby-card-main-background-color: var(--kirby-color-fill-warning-active);
-      --kirby-card-main-color: var(--kirby-color-content-warning-active);
-      --kirby-card-main-border-color: var(--kirby-color-border-warning-active);
-    }
-  }
 }
 
 :host(.danger:not(.outlined)) {
   --kirby-card-main-background-color: var(--kirby-color-fill-danger);
   --kirby-card-main-color: var(--kirby-color-content-danger);
   --kirby-card-main-border-color: var(--kirby-color-border-danger);
-
-  &[role='button'] {
-    @include utils.hover {
-      --kirby-card-main-background-color: var(--kirby-color-fill-danger-hover);
-      --kirby-card-main-color: var(--kirby-color-content-danger-hover);
-      --kirby-card-main-border-color: var(--kirby-color-border-danger-hover);
-    }
-
-    &:active,
-    &.interaction-state-active {
-      --kirby-card-main-background-color: var(--kirby-color-fill-danger-active);
-      --kirby-card-main-color: var(--kirby-color-content-danger-active);
-      --kirby-card-main-border-color: var(--kirby-color-border-danger-active);
-    }
-  }
 }
