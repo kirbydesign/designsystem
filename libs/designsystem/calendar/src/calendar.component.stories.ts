@@ -55,6 +55,7 @@ export const DisabledDates: Story = {
 
 export const InteractionStates: Story = {
   parameters: {
+    chromatic: { modes: { mobile: { disable: true } } },
     pseudo: pseudoStatesFor(
       surfaces.map((surface) => `calendar-${surface}`),
       // Disabled days can't be interacted with

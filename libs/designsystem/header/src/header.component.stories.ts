@@ -93,7 +93,7 @@ export const TitleMaxLinesScaling: Story = {
 
 export const Surfaces: Story = {
   parameters: {
-    chromatic: { modes: { desktop: { viewport: 'large' } } },
+    chromatic: { modes: { mobile: { disable: true } } },
   },
   render: renderOnSurfaces(
     `

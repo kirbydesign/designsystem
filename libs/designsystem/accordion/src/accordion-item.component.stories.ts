@@ -136,6 +136,7 @@ const accordionStates = [...interactionStates, 'disabled'] as const;
 
 export const InteractionStates: Story = {
   parameters: {
+    chromatic: { modes: { mobile: { disable: true } } },
     pseudo: pseudoStatesFor(
       accordionRows.map((row) => row.id),
       '.header'

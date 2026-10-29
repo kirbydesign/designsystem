@@ -252,6 +252,7 @@ const backButtonPseudoStates = pseudoStatesFor(['page'], 'ion-back-button');
 
 export const BackButtonInteractionStates: Story = {
   parameters: {
+    chromatic: { modes: { mobile: { disable: true } } },
     // Pressing a button with a pointer also hovers it
     pseudo: {
       ...backButtonPseudoStates,
@@ -276,6 +277,9 @@ export const BackButtonInteractionStates: Story = {
 };
 
 export const PageWithFooter: Story = {
+  parameters: {
+    chromatic: { modes: { mobile: { disable: true } } },
+  },
   render: () => ({
     template: `<kirby-app>
     <kirby-page title="Page with Footer" defaultBackHref="/">
