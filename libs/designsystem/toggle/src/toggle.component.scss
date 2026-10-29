@@ -78,7 +78,8 @@ ion-toggle {
     --handle-background-checked: var(--kirby-toggle-color-content-hover);
   }
 
-  &:active {
+  &:active,
+  &.interaction-state-active {
     // Not checked
     --track-background: var(--kirby-toggle-color-fill-active);
     --handle-background: var(--kirby-toggle-color-content-active);
