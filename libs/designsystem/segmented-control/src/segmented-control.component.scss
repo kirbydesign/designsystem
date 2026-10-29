@@ -38,12 +38,19 @@ $badge-offset: 0.8em;
     ion-segment {
       --background: var(--kirby-color-fill-raised);
 
-      // Outline instead of border, so the border doesn't add to the height
-      outline: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
-      outline-offset: calc(-1 * var(--kirby-stroke-xs));
+      border: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
       overflow: visible; // Ensures the badge is not cut off
       contain: none; // Ensures the badge is not cut off
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
+    }
+
+    // Compensate for border, so it doesn't add to the height
+    ion-segment-button {
+      min-height: calc(var(--kirby-spacing-xl) - 2 * var(--kirby-stroke-xs));
+    }
+
+    &.sm ion-segment-button {
+      min-height: calc(var(--kirby-spacing-l) - 2 * var(--kirby-stroke-xs));
     }
   }
 
