@@ -45,16 +45,6 @@ describe('CheckboxComponent', () => {
       expect(spectator.element).toHaveClass('attention-level2');
     });
 
-    it('should not warn that attentionLevel is deprecated', () => {
-      const warnSpy = spyOn(console, 'warn');
-
-      spectator = createComponent({ props: { text: 'test' } });
-
-      expect(warnSpy).not.toHaveBeenCalledWith(
-        jasmine.stringContaining(`The 'attentionLevel' input is deprecated`)
-      );
-    });
-
     it('should have correct icon styling', () => {
       expect(ionCheckbox).toHaveComputedStyle({
         '--size': checkboxIconSize,
@@ -97,16 +87,6 @@ describe('CheckboxComponent', () => {
   });
 
   describe('when configured', () => {
-    it('should warn that attentionLevel is deprecated when attentionLevel is set', () => {
-      const warnSpy = spyOn(console, 'warn');
-
-      spectator.setInput('attentionLevel', '1');
-
-      expect(warnSpy).toHaveBeenCalledWith(
-        jasmine.stringContaining(`The 'attentionLevel' input is deprecated`)
-      );
-    });
-
     it('should set the [checked] input on ion-checkbox', () => {
       spectator.setInput('checked', true);
       expect(ionCheckbox.checked).toBe(true);
