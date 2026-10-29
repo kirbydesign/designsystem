@@ -43,12 +43,12 @@ export default {
   },
 
   /* Figma exports each shadow as a group of x, y, blur, spread and color */
-  shadows: ['* surface/elevation/*'],
+  shadows: ['* surface/elevation/*', '* surface/card/elevation'],
 
   units: {
     px: {
       scopes: ['WIDTH_HEIGHT', 'GAP', 'CORNER_RADIUS', 'FONT_SIZE', 'LINE_HEIGHT', 'STROKE_FLOAT'],
-      include: ['* surface/elevation/**', 'background-blur/**'],
+      include: ['* surface/elevation/**', '* surface/card/elevation/**', 'background-blur/**'],
     },
     '%': { scopes: ['OPACITY', 'COLOR_OPACITY'] },
   },

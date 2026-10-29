@@ -73,10 +73,12 @@
  */
 
 :root {
+  --kirby-opacity-0: 0%;
   --kirby-opacity-5: 5%;
   --kirby-opacity-10: 10%;
   --kirby-opacity-20: 20%;
   --kirby-opacity-40: 40%;
+  --kirby-opacity-60: 60%;
   --kirby-opacity-80: 80%;
 }
 
