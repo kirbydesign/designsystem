@@ -190,10 +190,3 @@
     }
   }
 }
-
-// Neutral tokens have no hover/active variants, and are not supported
-:host(.medium:not(.outlined)) {
-  --kirby-card-main-background-color: var(--kirby-color-fill-neutral);
-  --kirby-card-main-color: var(--kirby-color-content-neutral);
-  --kirby-card-main-border-color: var(--kirby-color-border-neutral);
-}

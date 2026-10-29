@@ -81,7 +81,7 @@ export class CardComponent implements OnInit, OnDestroy {
       return variantSurfaces[this.variant];
     }
 
-    if (theme.isLight) return 'base';
+    if (theme.isLight || theme.isMedium) return 'base';
     if (theme.isWhite || theme.isSuccess || theme.isWarning || theme.isDanger) return 'raised';
     if (theme.isPrimary || theme.isSecondary || theme.isTertiary || theme.isDark) return 'brand';
     return null;
