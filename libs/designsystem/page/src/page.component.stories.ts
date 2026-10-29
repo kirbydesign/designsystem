@@ -241,34 +241,36 @@ export const ToggleHeaderActions: Story = {
       <kirby-page>
         <kirby-header title="Header actions" [emphasizeActions]="true">
           @if (showActions) {
-            <button kirby-button *kirbyHeaderActions>Action</button>
+            <button kirby-button *kirbyHeaderActions>Header action</button>
           }
         </kirby-header>
         <kirby-page-content>
           <button kirby-button (click)="showActions = !showActions">
-            {{ showActions ? 'Hide actions' : 'Show actions' }}
+            {{ showActions ? 'Remove header actions' : 'Restore header actions' }}
           </button>
         </kirby-page-content>
       </kirby-page>
     </kirby-app>`,
   }),
   play: async ({ canvasElement }) => {
+    const headerActionName = 'Header action';
+    const removeActionsName = 'Remove header actions';
     const canvas = within(canvasElement);
     const toolbar = canvasElement.querySelector('ion-toolbar');
     const header = canvasElement.querySelector<HTMLElement>('kirby-header');
 
     await waitFor(() =>
-      expect(within(header).getByRole('button', { name: 'Action' })).toBeVisible()
+      expect(within(header).getByRole('button', { name: headerActionName })).toBeVisible()
     );
-    await userEvent.click(canvas.getByRole('button', { name: 'Hide actions' }));
+    await userEvent.click(canvas.getByRole('button', { name: removeActionsName }));
     await waitFor(() => {
-      expect(within(header).queryByRole('button', { name: 'Action' })).toBeNull();
-      expect(within(toolbar).queryByText('Action')).toBeNull();
+      expect(within(header).queryByRole('button', { name: headerActionName })).toBeNull();
+      expect(within(toolbar).queryByText(headerActionName)).toBeNull();
     });
-    await userEvent.click(canvas.getByRole('button', { name: 'Show actions' }));
+    await userEvent.click(canvas.getByRole('button', { name: 'Restore header actions' }));
     await waitFor(() => {
-      expect(within(header).getByRole('button', { name: 'Action' })).toBeVisible();
-      expect(within(toolbar).getByText('Action')).not.toBeVisible();
+      expect(within(header).getByRole('button', { name: headerActionName })).toBeVisible();
+      expect(within(toolbar).getByText(headerActionName)).not.toBeVisible();
     });
   },
 };
