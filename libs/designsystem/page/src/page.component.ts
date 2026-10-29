@@ -345,7 +345,7 @@ export class PageComponent
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
 
   private titleIntersectionObserver?: IntersectionObserver;
-  private stickyActionsIntersectionObserver?: IntersectionObserver;
+  private headerActionsIntersectionObserver?: IntersectionObserver;
   private stickyContentIntersectionObserver?: IntersectionObserver;
   private isObservingTitle = false;
   private observedActionsElement?: HTMLDivElement;
@@ -393,7 +393,7 @@ export class PageComponent
     public translations: TranslationService,
     private htmlDocTitle: Title
   ) {
-    afterEveryRender(() => this.observeActions());
+    afterEveryRender(() => this.observeHeaderActions());
   }
 
   private contentReadyPromise: Promise<void>;
@@ -508,10 +508,10 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.titleIntersectionObserver?.disconnect();
-    this.unobserveActions();
+    this.unobserveHeaderActions();
     this.stickyContentIntersectionObserver?.disconnect();
     this.unobserveTitleMutation?.();
-    this.unobserveToolbarButtons();
+    this.unobserveToolbarButtonSizes();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -555,7 +555,7 @@ export class PageComponent
     this.patchIonLastFocused();
 
     this.observeTitle();
-    this.observeActions();
+    this.observeHeaderActions();
     this.setHTMLDocumentTitle(this.header?.title || this.title || this.toolbarTitle);
     this.observeTitleDOMChanges();
   }
@@ -567,7 +567,7 @@ export class PageComponent
     this.leave.emit();
 
     this.unobserveTitle();
-    this.unobserveActions();
+    this.unobserveHeaderActions();
     this.unobserveTitleMutation?.();
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
@@ -777,53 +777,52 @@ export class PageComponent
     });
   }
 
-  private observeActions() {
+  private observeHeaderActions() {
+    if (!this.isActive) return;
+
     const actionsElement = this.header?.actionsElement?.nativeElement;
     if (!actionsElement) {
-      this.unobserveActions();
+      this.unobserveHeaderActions();
       return;
     }
 
-    if (this.observedActionsElement === actionsElement) {
-      // Already observing
-      return;
-    }
+    const isObservingActionsElement = this.observedActionsElement === actionsElement;
+    if (isObservingActionsElement) return;
 
-    this.unobserveActions();
+    this.unobserveHeaderActions();
     this.observedActionsElement = actionsElement;
 
-    if (!this.stickyActionsIntersectionObserver) {
-      this.stickyActionsIntersectionObserver = new IntersectionObserver(
-        (entries) => {
-          const lastEntry = entries
-            .filter((entry) => entry.target === this.observedActionsElement)
-            .pop();
-          if (lastEntry) {
-            const showToolbarActions = !lastEntry.isIntersecting;
-            // Only flip the flag and run Change Detection when changed:
-            if (showToolbarActions !== this.toolbarActionsVisible) {
-              this.toolbarActionsVisible = showToolbarActions;
-              this.changeDetectorRef.detectChanges();
-            }
-          }
-        },
-        { root: this.ionContentElement.nativeElement }
-      );
-    }
+    this.headerActionsIntersectionObserver ??= this.createHeaderActionsIntersectionObserver();
 
-    // Run outside Angular to prevent unnecessary triggering change detection
-    // and - under certain conditions - an infinite loop when called within ngAfterContentChecked:
     this.zone.runOutsideAngular(() => {
       this.whenContentReady().then(() => {
         if (this.observedActionsElement === actionsElement) {
-          this.stickyActionsIntersectionObserver.observe(actionsElement);
+          this.headerActionsIntersectionObserver.observe(actionsElement);
         }
       });
     });
   }
 
-  private unobserveActions() {
-    this.stickyActionsIntersectionObserver?.disconnect();
+  private createHeaderActionsIntersectionObserver(): IntersectionObserver {
+    return new IntersectionObserver(
+      (entries) => {
+        const entry = entries.filter((entry) => entry.target === this.observedActionsElement).pop();
+        if (!entry) return;
+
+        const toolbarVisibilityUnchanged = this.toolbarActionsVisible === !entry.isIntersecting;
+        if (toolbarVisibilityUnchanged) return;
+
+        this.toolbarActionsVisible = !entry.isIntersecting;
+        this.changeDetectorRef.detectChanges();
+      },
+      { root: this.ionContentElement.nativeElement }
+    );
+  }
+
+  private unobserveHeaderActions() {
+    if (!this.observedActionsElement) return;
+
+    this.headerActionsIntersectionObserver?.disconnect();
     this.observedActionsElement = undefined;
   }
 
@@ -860,8 +859,8 @@ export class PageComponent
     });
   }
 
-  private observeToolbarButtons() {
-    this.unobserveToolbarButtons();
+  private observeToolbarButtonSizes() {
+    this.unobserveToolbarButtonSizes();
 
     this.ionToolbarButtonsElement.forEach(({ nativeElement: ionButtonsElement }) => {
       this.observedToolbarButtons.add(ionButtonsElement);
@@ -873,12 +872,12 @@ export class PageComponent
     this.ionToolbarButtonsElement.changes
       .pipe(startWith(this.ionToolbarButtonsElement), takeUntil(this.ngOnDestroy$))
       .subscribe(() => {
-        this.observeToolbarButtons();
+        this.observeToolbarButtonSizes();
         this.setActionButtonsWidth();
       });
   }
 
-  private unobserveToolbarButtons() {
+  private unobserveToolbarButtonSizes() {
     this.observedToolbarButtons.forEach((ionButtonsElement) =>
       this.resizeObserverService.unobserve(ionButtonsElement)
     );
