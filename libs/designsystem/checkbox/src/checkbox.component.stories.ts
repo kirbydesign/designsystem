@@ -89,9 +89,6 @@ const checkboxVariants: {
     checked: true,
     attentionLevel: '1',
   },
-  // Error is a variant rather than a state, so it's shown in every interaction state.
-  // This guards the rule order that keeps the error border over hover and active,
-  // and the focus ring over the error.
   { id: 'error', label: 'Error', hasError: true },
 ];
 

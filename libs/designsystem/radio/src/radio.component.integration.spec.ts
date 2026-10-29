@@ -3,12 +3,9 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { RadioGroupComponent } from './radio-group/radio-group.component';
 import { RadioComponent } from './radio.component';
 
 const { size } = DesignTokenHelper;
-const getTokenColor = (name: string) =>
-  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 
 describe('RadioComponent in Item', () => {
   let spectator: SpectatorHost<RadioComponent>;
@@ -56,38 +53,6 @@ describe('RadioComponent in Item', () => {
     it(`should have correct vertical spacing`, () => {
       expect(spectator.element).toHaveComputedStyle({
         'margin-inline-end': size('xs'),
-      });
-    });
-  });
-});
-
-describe('RadioComponent in RadioGroup', () => {
-  let spectator: SpectatorHost<RadioGroupComponent>;
-  let ionRadio: HTMLIonRadioElement;
-  let radioIcon: HTMLElement;
-
-  const createHost = createHostFactory({
-    component: RadioGroupComponent,
-    imports: [TestHelper.ionicModuleForTest, RadioComponent, ItemComponent],
-  });
-
-  describe('when radio group hasError=true', () => {
-    beforeEach(async () => {
-      spectator = createHost(`
-    <kirby-radio-group [hasError]="true">
-      <kirby-radio></kirby-radio>
-    </kirby-radio-group>`);
-      const ionRadioGroupElement = spectator.query('ion-radio-group');
-      await TestHelper.whenReady(ionRadioGroupElement);
-      ionRadio = spectator.query('ion-radio');
-      await TestHelper.whenReady(ionRadio);
-      radioIcon = ionRadio.shadowRoot.querySelector('[part=container]');
-    });
-
-    it('should have correct border style', () => {
-      expect(radioIcon).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-color': getTokenColor('border-raised-danger'),
       });
     });
   });

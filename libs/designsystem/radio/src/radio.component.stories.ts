@@ -25,9 +25,6 @@ type Story = StoryObj<RadioComponent>;
 const radioVariants: { id: string; label: string; selected?: boolean; hasError?: boolean }[] = [
   { id: 'unselected', label: 'Unselected' },
   { id: 'selected', label: 'Selected', selected: true },
-  // Error is a variant rather than a state, so it's shown in every interaction state.
-  // This guards the rule order that keeps the error border over hover and active,
-  // and the focus ring over the error.
   { id: 'error', label: 'Error', hasError: true },
 ];
 

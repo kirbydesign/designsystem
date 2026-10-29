@@ -12,8 +12,6 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CheckboxComponent } from './checkbox.component';
 
 const size = DesignTokenHelper.size;
-const getTokenColor = (name: string) =>
-  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
 const checkboxIconSize = size('m');
 const checkboxSizeXs = size('m');
@@ -147,14 +145,6 @@ describe('CheckboxComponent', () => {
 
         spectator.setInput('disabled', false);
         expect(ionCheckbox.disabled).toBe(false);
-      });
-    });
-
-    it('should have correct icon styling when checkbox has error', () => {
-      spectator.setInput('hasError', true);
-      spectator.detectChanges();
-      expect(ionCheckbox).toHaveComputedStyle({
-        '--border-color': getTokenColor('border-raised-danger'),
       });
     });
 

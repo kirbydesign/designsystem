@@ -8,11 +8,6 @@ $radio-icon-mark-size: var(--kirby-spacing-xs);
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
-@mixin focus-border-colors {
-  --color: var(--kirby-color-border-focus);
-  --color-checked: var(--kirby-color-border-focus);
-}
-
 @function get-vertical-padding($target-height) {
   @return calc((#{$target-height} - #{$radio-icon-size}) * 0.5);
 }
@@ -116,7 +111,8 @@ ion-radio {
   }
 
   &:focus-visible {
-    @include focus-border-colors;
+    --color: var(--kirby-color-border-focus);
+    --color-checked: var(--kirby-color-border-focus);
   }
 
   &:focus-visible::part(container) {
@@ -133,7 +129,6 @@ ion-radio {
     height: $radio-size;
   }
 
-  // The mark uses --color-checked as its background, so it's set separately from the border
   &::part(mark) {
     --color-checked: var(--kirby-color-fill-engaged);
 
@@ -195,7 +190,8 @@ ion-radio {
       }
 
       &:focus-visible {
-        @include focus-border-colors;
+        --color: var(--kirby-color-border-focus);
+        --color-checked: var(--kirby-color-border-focus);
       }
 
       &:focus-visible::part(container) {
