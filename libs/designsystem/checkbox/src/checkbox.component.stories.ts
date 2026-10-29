@@ -30,17 +30,12 @@ export const Checkbox: Story = {
   args: {
     checked: false,
     indeterminate: false,
-    attentionLevel: '2',
     text: 'Label',
     size: 'md',
     hasError: false,
     disabled: false,
   },
   argTypes: {
-    attentionLevel: {
-      options: ['1', '2'],
-      control: { type: 'radio' },
-    },
     size: {
       options: ['xs', 'sm', 'md'],
       control: { type: 'radio' },
@@ -78,17 +73,10 @@ const checkboxVariants: {
   id: string;
   label: string;
   checked?: boolean;
-  attentionLevel?: '1' | '2';
   hasError?: boolean;
 }[] = [
   { id: 'unchecked', label: 'Unchecked' },
   { id: 'checked', label: 'Checked', checked: true },
-  {
-    id: 'checked-level-1',
-    label: 'Checked, attention level 1',
-    checked: true,
-    attentionLevel: '1',
-  },
   { id: 'error', label: 'Error', hasError: true },
 ];
 
@@ -116,7 +104,6 @@ export const InteractionStates: Story = {
             [attr.id]="'checkbox-' + surface + '-' + variant.id + '-' + state"
             [text]="state"
             [checked]="variant.checked"
-            [attentionLevel]="variant.attentionLevel ?? '2'"
             [hasError]="variant.hasError"
             [disabled]="state === 'disabled'"
           ></kirby-checkbox>

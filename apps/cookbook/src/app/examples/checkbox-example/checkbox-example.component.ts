@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
-import { CheckboxConfirmExampleComponent } from './examples/confirm';
 import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxListExampleComponent } from './examples/list';
 import { CheckboxStatesExampleComponent } from './examples/states';
@@ -14,7 +13,6 @@ import { CheckboxIndeterminateListExampleComponent } from './examples/list-indet
   templateUrl: './checkbox-example.component.html',
   styleUrls: ['../_examples.shared.scss'],
   imports: [
-    CheckboxConfirmExampleComponent,
     CheckboxDefaultExampleComponent,
     CheckboxListExampleComponent,
     CheckboxIndeterminateListExampleComponent,

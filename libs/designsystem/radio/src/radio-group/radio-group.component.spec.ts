@@ -18,9 +18,6 @@ import { RadioComponent } from '../radio.component';
 
 import { RadioGroupComponent } from './radio-group.component';
 
-const getTokenColor = (name: string) =>
-  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
-
 @Component({
   template: '<ng-content></ng-content>',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -860,14 +857,9 @@ describe('RadioGroupComponent', () => {
   });
 
   describe('when used in a form', () => {
-    const radioBorderDefault = {
-      'border-width': '1px',
-      'border-color': getTokenColor('border-raised'),
-    };
-    const radioBorderErrorState = {
-      'border-width': '1px',
-      'border-color': getTokenColor('border-raised-danger'),
-    };
+    function isInErrorState(radioGroup: HTMLElement): boolean {
+      return radioGroup.matches('.error, .ng-touched.ng-invalid');
+    }
 
     let ionRadioGroup: IonRadioGroup;
     let ionRadioElements: HTMLIonRadioElement[];
@@ -1035,19 +1027,13 @@ describe('RadioGroupComponent', () => {
             });
 
             it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
+              expect(isInErrorState(spectator.element)).toBeFalse();
             });
           });
 
           describe('and component has not been touched', () => {
             it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
+              expect(isInErrorState(spectator.element)).toBeFalse();
             });
           });
         });
@@ -1064,19 +1050,13 @@ describe('RadioGroupComponent', () => {
              * Temporaly removed, see #2736
              */
             xit('should be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderErrorState);
-              });
+              expect(isInErrorState(spectator.element)).toBeTrue();
             });
           });
 
           describe('and component has not been touched', () => {
             it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
+              expect(isInErrorState(spectator.element)).toBeFalse();
             });
           });
         });
@@ -1292,19 +1272,13 @@ describe('RadioGroupComponent', () => {
             });
 
             it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
+              expect(isInErrorState(spectator.element)).toBeFalse();
             });
           });
 
           describe('and the component has not been touched', () => {
             it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
+              expect(isInErrorState(spectator.element)).toBeFalse();
             });
           });
         });
@@ -1321,10 +1295,7 @@ describe('RadioGroupComponent', () => {
              * Temporaly removed, see #2736
              */
             xit('should be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderErrorState);
-              });
+              expect(isInErrorState(spectator.element)).toBeTrue();
             });
           });
 
@@ -1335,10 +1306,7 @@ describe('RadioGroupComponent', () => {
             });
 
             it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
+              expect(isInErrorState(spectator.element)).toBeFalse();
             });
           });
         });
