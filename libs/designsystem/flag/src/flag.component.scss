@@ -1,51 +1,51 @@
-@use 'sass:list';
-@use 'sass:map';
-@use 'sass:math';
-@use 'sass:meta';
-@use '@kirbydesign/core/src/scss/utils';
-
-$padding-block-xs: utils.size('xxxs') - 1px;
-$padding-block-sm: utils.size('xxxs');
-$padding-block-md: utils.size('xxxs') + 1px;
+$padding-block-xs: calc(var(--kirby-spacing-xxxs) - 1px);
+$padding-block-sm: var(--kirby-spacing-xxxs);
+$padding-block-md: calc(var(--kirby-spacing-xxxs) + 1px);
 
 :host {
+  --kirby-flag-color: var(--kirby-color-content-neutral);
+  --kirby-flag-border-color: var(--kirby-color-border-neutral);
+
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
-  color: var(--kirby-flag-color, utils.get-color('white-contrast'));
-  border: 1px solid var(--kirby-flag-border-color, utils.get-color('medium'));
-  border-radius: utils.border-radius('xs');
-  font-size: utils.font-size('n');
-  padding: $padding-block-md utils.size('xxs');
-  font-weight: utils.font-weight('medium');
+  color: var(--kirby-flag-color);
+  border: var(--kirby-stroke-xs) solid var(--kirby-flag-border-color);
+  border-radius: var(--kirby-border-radius-xs);
+  font-size: var(--kirby-font-size-n);
+  padding: $padding-block-md var(--kirby-spacing-xxs);
+  font-weight: var(--kirby-font-weight-medium);
   line-height: 1;
 
   &.sm {
-    font-size: utils.font-size('s');
+    font-size: var(--kirby-font-size-s);
     padding-block: $padding-block-sm;
   }
 
   &.xs {
-    font-size: utils.font-size('xs');
-    padding: $padding-block-xs utils.size('xxxs');
+    font-size: var(--kirby-font-size-xs);
+    padding: $padding-block-xs var(--kirby-spacing-xxxs);
   }
 
   // Colors
   &.success {
-    --kirby-flag-background-color: #{utils.get-color('success-tint')};
+    --kirby-flag-background-color: var(--kirby-color-fill-success-quiet);
+    --kirby-flag-color: var(--kirby-color-content-success-quiet);
+    --kirby-flag-border-color: var(--kirby-color-border-success-quiet);
   }
 
   &.warning {
-    --kirby-flag-background-color: #{utils.get-color('warning-tint')};
+    --kirby-flag-background-color: var(--kirby-color-fill-warning-quiet);
+    --kirby-flag-color: var(--kirby-color-content-warning-quiet);
+    --kirby-flag-border-color: var(--kirby-color-border-warning-quiet);
   }
 
   &.danger {
-    --kirby-flag-background-color: #{utils.get-color('danger-tint')};
+    --kirby-flag-background-color: var(--kirby-color-fill-danger-quiet);
+    --kirby-flag-color: var(--kirby-color-content-danger-quiet);
+    --kirby-flag-border-color: var(--kirby-color-border-danger-quiet);
   }
 
   &.semi-light {
-    --kirby-flag-background-color: #{utils.get-color('semi-light')};
+    --kirby-flag-background-color: var(--kirby-color-fill-neutral);
   }
-
-  --kirby-flag-border-color: var(--kirby-flag-background-color);
-  --kirby-flag-color: #{utils.get-color('black')};
 }

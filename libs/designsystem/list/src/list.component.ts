@@ -73,6 +73,10 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input()
   items: any[] = [];
 
+  /**
+   * @deprecated Coloring list items differently is no longer supported, and the list no longer applies any styling based on the returned theme color.
+   * This input will be removed in a future major version.
+   */
   @Input() getItemColor: (item: any) => ThemeColor;
 
   /**
@@ -127,6 +131,18 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   @HostBinding('class.shape-none')
   public get isShapeNone(): boolean {
     return this.shape === 'none';
+  }
+
+  /**
+   * The list establishes a raised surface by default, until list usage is migrated
+   * to shape="none", and combined with card for base/raised/brand appearance
+   */
+  get _isRaisedSurface(): boolean {
+    return !this.isShapeNone;
+  }
+
+  get _isListRaisedSurface(): boolean {
+    return this._isRaisedSurface && !this._isSectionsEnabled && !this._isStandAloneEnabled;
   }
 
   @HostBinding('class.item-spacing')

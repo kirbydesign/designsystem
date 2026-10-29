@@ -8,8 +8,6 @@ import { KirbySwiperOptions, SlidesComponent } from './slides.component';
 import { SlideDirective } from './slide.directive';
 import { SlideStretchHeightDirective } from './slide-stretch-height.directive';
 
-const { getColor } = DesignTokenHelper;
-
 describe('SlidesComponent', () => {
   let spectator: SpectatorHost<SlidesComponent>;
 
@@ -151,14 +149,6 @@ describe('SlidesComponent', () => {
       paginationDots.forEach((paginationDot) => {
         expect(paginationDot).toHaveComputedStyle({
           width: '10px',
-        });
-      });
-    });
-
-    it('should have pagination dots with a custom background color', () => {
-      paginationDots.forEach((paginationDot) => {
-        expect(paginationDot).toHaveComputedStyle({
-          'background-color': getColor('black'),
         });
       });
     });

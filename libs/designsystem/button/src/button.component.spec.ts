@@ -6,7 +6,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ButtonComponent, ButtonSize } from './button.component';
 
-const { getColor, size, fontSize, fatFingerSize } = DesignTokenHelper;
+const { size, fontSize, fatFingerSize } = DesignTokenHelper;
 
 describe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
@@ -25,16 +25,6 @@ describe('ButtonComponent', () => {
 
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
-    });
-
-    it('should render with correct background-color', () => {
-      expect(element).toHaveComputedStyle({
-        'background-color': getColor('primary'),
-      });
-    });
-
-    it('should render with correct color', () => {
-      expect(element).toHaveComputedStyle({ color: getColor('primary', 'contrast') });
     });
 
     it('should render without outline', () => {
@@ -68,39 +58,9 @@ describe('ButtonComponent', () => {
       expect(parseInt(touchArea.width)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
     });
 
-    describe('when disabled', () => {
-      beforeEach(() => {
-        element.disabled = true;
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({
-          'background-color': getColor('semi-light'),
-        });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('semi-dark', 'shade'),
-        });
-      });
-    });
-
     describe('when aria-disabled=true', () => {
       beforeEach(() => {
         element.ariaDisabled = 'true';
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({
-          'background-color': getColor('semi-light'),
-        });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('semi-dark', 'shade'),
-        });
       });
 
       it('should prevent activation on Enter', () => {
@@ -145,61 +105,6 @@ describe('ButtonComponent', () => {
         element.ariaDisabled = 'true';
         spectator.click(element);
         expect(eventReceived).toBe(1);
-      });
-    });
-
-    describe('when configured with attentionlevel 1', () => {
-      beforeEach(() => {
-        spectator.component.attentionLevel = '1';
-        spectator.detectChanges();
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({
-          'background-color': getColor('primary'),
-        });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('primary', 'contrast'),
-        });
-      });
-    });
-
-    describe('when configured with attentionlevel 2', () => {
-      beforeEach(() => {
-        spectator.component.attentionLevel = '2';
-        spectator.detectChanges();
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({
-          'background-color': getColor('black'),
-        });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('black', 'contrast'),
-        });
-      });
-    });
-
-    describe('when configured with attentionlevel 3', () => {
-      beforeEach(() => {
-        spectator.component.attentionLevel = '3';
-        spectator.detectChanges();
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('black'),
-        });
       });
     });
   });
@@ -394,8 +299,7 @@ describe('ButtonComponent', () => {
           element = spectator.element as HTMLButtonElement;
         });
         it('should render with correct padding-inline', () => {
-          expect(element.getElementsByClassName('content-layer').length).toBe(1);
-          expect(element.getElementsByClassName('content-layer')[0]).toHaveComputedStyle({
+          expect(element).toHaveComputedStyle({
             'padding-inline': scenario.expected.paddingInline,
           });
         });
@@ -431,8 +335,7 @@ describe('ButtonComponent', () => {
         });
 
         it('should render with correct padding-inline', () => {
-          expect(element.getElementsByClassName('content-layer').length).toBe(1);
-          expect(element.getElementsByClassName('content-layer')[0]).toHaveComputedStyle({
+          expect(element).toHaveComputedStyle({
             'padding-inline': scenario.expected.paddingInline,
           });
         });
@@ -448,8 +351,6 @@ describe('ButtonComponent', () => {
   });
 
   describe(`when configured with showIconOnly=true`, () => {
-    let contentLayer: HTMLElement;
-
     describe(`and plain text to the left of icon`, () => {
       const text = 'Hidden Text Left';
 
@@ -461,22 +362,21 @@ describe('ButtonComponent', () => {
           </button>`
         );
         element = spectator.element as HTMLButtonElement;
-        contentLayer = element.querySelector('.content-layer');
       });
 
       it('should wrap plain text in an element', () => {
-        const firstChild = contentLayer.firstChild;
+        const firstChild = element.firstChild;
         expect(firstChild.nodeType).not.toBe(Node.TEXT_NODE);
         expect(firstChild.nodeType).toBe(Node.ELEMENT_NODE);
         expect((firstChild as HTMLElement).tagName).toBe('SPAN');
         expect(firstChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
         expect(firstChild.textContent.trim()).toBe(text);
-        expect(contentLayer.lastChild).toBe(contentLayer.querySelector('kirby-icon'));
+        expect(element.lastChild).toBe(element.querySelector('kirby-icon'));
       });
 
       it('should visually hide the plain text', () => {
-        expect(contentLayer.firstChild).toHaveComputedStyle({ scale: '0' });
-        const hiddenTextRect = (contentLayer.firstChild as HTMLElement).getBoundingClientRect();
+        expect(element.firstChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (element.firstChild as HTMLElement).getBoundingClientRect();
         expect(hiddenTextRect.height).toEqual(0);
         expect(hiddenTextRect.width).toEqual(0);
       });
@@ -498,22 +398,21 @@ describe('ButtonComponent', () => {
           </button>`
         );
         element = spectator.element as HTMLButtonElement;
-        contentLayer = element.querySelector('.content-layer');
       });
 
       it('should wrap plain text in an element', () => {
-        const lastChild = contentLayer.lastChild;
+        const lastChild = element.lastChild;
         expect(lastChild.nodeType).not.toBe(Node.TEXT_NODE);
         expect(lastChild.nodeType).toBe(Node.ELEMENT_NODE);
         expect((lastChild as HTMLElement).tagName).toBe('SPAN');
         expect(lastChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
         expect(lastChild.textContent.trim()).toBe(text);
-        expect(contentLayer.firstChild).toBe(contentLayer.querySelector('kirby-icon'));
+        expect(element.firstChild).toBe(element.querySelector('kirby-icon'));
       });
 
       it('should visually hide the plain text', () => {
-        expect(contentLayer.lastChild).toHaveComputedStyle({ scale: '0' });
-        const hiddenTextRect = (contentLayer.lastChild as HTMLElement).getBoundingClientRect();
+        expect(element.lastChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (element.lastChild as HTMLElement).getBoundingClientRect();
         expect(hiddenTextRect.height).toEqual(0);
         expect(hiddenTextRect.width).toEqual(0);
       });
@@ -533,18 +432,17 @@ describe('ButtonComponent', () => {
           </button>`
         );
         element = spectator.element as HTMLButtonElement;
-        contentLayer = element.querySelector('.content-layer');
       });
 
       it('should NOT wrap the text in an element', () => {
-        const firstChild = contentLayer.firstChild;
+        const firstChild = element.firstChild;
         expect((firstChild as HTMLElement).tagName).toBe('P');
         expect(firstChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
       });
 
       it('should visually hide the text element', () => {
-        expect(contentLayer.firstChild).toHaveComputedStyle({ scale: '0' });
-        const hiddenTextRect = (contentLayer.firstChild as HTMLElement).getBoundingClientRect();
+        expect(element.firstChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (element.firstChild as HTMLElement).getBoundingClientRect();
         expect(hiddenTextRect.height).toEqual(0);
         expect(hiddenTextRect.width).toEqual(0);
       });
@@ -564,18 +462,17 @@ describe('ButtonComponent', () => {
       </button>`
         );
         element = spectator.element as HTMLButtonElement;
-        contentLayer = element.querySelector('.content-layer');
       });
 
       it('should NOT wrap the text in an element', () => {
-        const lastChild = contentLayer.lastChild;
+        const lastChild = element.lastChild;
         expect((lastChild as HTMLElement).tagName).toBe('P');
         expect(lastChild.firstChild.nodeType).toBe(Node.TEXT_NODE);
       });
 
       it('should visually hide the text element', () => {
-        expect(contentLayer.lastChild).toHaveComputedStyle({ scale: '0' });
-        const hiddenTextRect = (contentLayer.lastChild as HTMLElement).getBoundingClientRect();
+        expect(element.lastChild).toHaveComputedStyle({ scale: '0' });
+        const hiddenTextRect = (element.lastChild as HTMLElement).getBoundingClientRect();
         expect(hiddenTextRect.height).toEqual(0);
         expect(hiddenTextRect.width).toEqual(0);
       });
@@ -595,8 +492,7 @@ describe('ButtonComponent', () => {
             </button>`
           );
           element = spectator.element as HTMLButtonElement;
-          contentLayer = element.querySelector('.content-layer');
-          expect(contentLayer.firstChild.nodeType).toBe(Node.TEXT_NODE);
+          expect(element.firstChild.nodeType).toBe(Node.TEXT_NODE);
         });
       });
 
@@ -608,8 +504,7 @@ describe('ButtonComponent', () => {
             </button>`
           );
           element = spectator.element as HTMLButtonElement;
-          contentLayer = element.querySelector('.content-layer');
-          expect(contentLayer.firstChild).toBeVisible();
+          expect(element.firstChild).toBeVisible();
         });
       });
     });

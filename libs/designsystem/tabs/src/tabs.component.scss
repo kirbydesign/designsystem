@@ -6,9 +6,9 @@
 
 ion-tabs {
   ion-tab-bar {
-    --background: rgba(#{utils.get-color('white-rgb')}, 0.94);
-    --border: 1px solid #{utils.get-color('light')};
-    --color: #{utils.get-color('black')};
+    --background: var(--kirby-color-fill-raised);
+    --border: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
+    --color: var(--kirby-color-content-raised);
 
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
@@ -30,7 +30,7 @@ ion-tabs {
     --kirby-tab-bar-height: 70px;
 
     ion-tab-bar {
-      column-gap: utils.size('m');
+      column-gap: var(--kirby-spacing-m);
     }
   }
 

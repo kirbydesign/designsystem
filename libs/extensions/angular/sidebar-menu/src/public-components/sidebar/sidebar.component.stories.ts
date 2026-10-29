@@ -19,6 +19,12 @@ import {
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+// eslint-disable-next-line no-restricted-imports
+import {
+  interactionStates,
+  pseudoStatesFor,
+} from '../../../../../../designsystem/.storybook/story-helpers';
+
 const menuItemsExample: SidebarMenuItem[] = [
   {
     type: 'router-link',
@@ -581,5 +587,30 @@ export const Focused: Story = {
     if (menuItem) {
       (menuItem as HTMLElement).focus();
     }
+  },
+};
+
+const menuItemStates = [...interactionStates, 'selected'] as const;
+
+/**
+ * The menu items in each interaction state, for visual regression testing.
+ */
+export const InteractionStates: Story = {
+  // Visual regression story, so it's left out of the docs page
+  tags: ['!autodocs', 'dev'],
+  parameters: {
+    // Menu items render their id with an "item" prefix
+    pseudo: pseudoStatesFor(['itemmenu-item']),
+  },
+  args: {
+    menuItems: menuItemStates.map((state) => ({
+      type: 'router-link',
+      id: `menu-item-${state}`,
+      title: state,
+      icon: 'home',
+      route: `/${state}`,
+    })),
+    selectedItem: 'menu-item-selected',
+    mainAreaContent: '',
   },
 };

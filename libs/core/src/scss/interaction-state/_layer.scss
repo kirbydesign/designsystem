@@ -1,16 +1,15 @@
 @use 'sass:math';
 @use 'sass:meta';
 @use 'interaction-state.utilities';
-@use '../utils';
 
 // Put state layer above content layer as default.
 // You can change move the content layer on top by declaring e.g.:
-//    --content-layer-z-index: calc(#{layer.$state-layer-z-index} + 1);
+//    --content-layer-z-index: calc(var(--kirby-z-index-default) + 1);
 // in a component that uses interaction state layer.
-$_content-layer-z-index: utils.z('default');
-$state-layer-z-index: $_content-layer-z-index + 1;
-$_dark: utils.get-color('black');
-$_light: utils.get-color('black-contrast');
+$_content-layer-z-index: var(--kirby-z-index-default);
+$state-layer-z-index: calc(var(--kirby-z-index-default) + 1);
+$_dark: var(--kirby-black);
+$_light: var(--kirby-black-contrast);
 
 /// Prepare state layer and content layer for interaction state changes.
 /// Should be initialized before applying hover.

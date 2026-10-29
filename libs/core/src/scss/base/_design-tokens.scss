@@ -1,12 +1,6 @@
-@use 'sass:color';
-@use 'sass:map';
 @use 'sass:meta';
 @use '../themes/colors';
 @use 'variables';
-
-@mixin font-family() {
-  --kirby-font-family: 'Roboto';
-}
 
 @mixin size-fat-finger() {
   --kirby-size-fat-finger: #{variables.$fat-finger-size};
@@ -44,39 +38,21 @@
   }
 }
 
-@mixin border-radii() {
-  @each $name, $value in variables.$border-radii {
-    --kirby-border-radius-#{$name}: #{$value};
-  }
-}
-
-@mixin elevations() {
-  @each $name, $value in variables.$elevations {
-    --kirby-elevation-#{$name}: #{$value};
-  }
-}
-
 @mixin font-sizes() {
   @each $name, $value in variables.$font-sizes {
     --kirby-font-size-#{$name}: #{$value};
   }
 }
 
-@mixin font-weights() {
-  @each $name, $value in variables.$font-weight {
-    --kirby-font-weight-#{$name}: #{$value};
+@mixin icon-font-sizes() {
+  @each $name, $value in variables.$icon-font-sizes {
+    --kirby-icon-font-size-#{$name}: #{$value};
   }
 }
 
 @mixin line-heights() {
   @each $name, $value in variables.$line-height {
     --kirby-line-height-#{$name}: #{$value};
-  }
-}
-
-@mixin spacings() {
-  @each $name, $value in variables.$sizes {
-    --kirby-spacing-#{$name}: #{$value};
   }
 }
 
@@ -89,6 +65,12 @@
 @mixin z-layers() {
   @each $name, $value in variables.$z-layers {
     --kirby-z-index-#{$name}: #{$value};
+  }
+}
+
+@mixin page-content-max-widths() {
+  @each $name, $value in variables.$page-content-max-widths {
+    --kirby-page-content-max-width-#{$name}: #{$value};
   }
 }
 
@@ -110,19 +92,39 @@
 }
 
 @mixin focus-ring() {
-  --kirby-focus-ring-color: #{colors.$focus-ring-color};
+  // Kept for backwards compatibility, use --kirby-color-border-focus instead
+  --kirby-focus-ring-color: var(--kirby-color-border-focus);
 
   // Small inset ring for compact controls (checkbox, radio, toggle, tab-navigation-item)
   --kirby-focus-ring-sm-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 3px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-color-border-focus) inset,
+    0 0 0 3px var(--kirby-color-border-offset) inset;
+
+  // Small inset ring for compact controls that also turn their own border into the focus color
+  --kirby-focus-ring-sm-combined-inset:
+    0 0 0 var(--kirby-stroke-xs) var(--kirby-color-border-focus) inset,
+    0 0 0 2px var(--kirby-color-border-offset) inset;
 
   // Medium inset ring for larger controls (button, dropdown, segmented-control, form-field, etc.)
   --kirby-focus-ring-md-inset:
-    0 0 0 2px var(--kirby-focus-ring-color) inset, 0 0 0 4px var(--kirby-white) inset;
+    0 0 0 2px var(--kirby-color-border-focus) inset,
+    0 0 0 4px var(--kirby-color-border-offset) inset;
+
+  // Medium inset ring for controls that also turn their own border into the focus color (card)
+  --kirby-focus-ring-md-combined-inset:
+    0 0 0 var(--kirby-stroke-xs) var(--kirby-color-border-focus) inset,
+    0 0 0 3px var(--kirby-color-border-offset) inset;
 
   // Medium outer ring for inline elements where inset rings are not suitable (link text)
   --kirby-focus-ring-md-outer:
-    0 0 0 2px var(--kirby-white), 0 0 0 4px var(--kirby-focus-ring-color);
+    0 0 0 2px var(--kirby-color-border-offset), 0 0 0 4px var(--kirby-color-border-focus);
+}
+
+@mixin error-ring() {
+  // Inset ring for controls that also turn their own border into the danger color
+  --kirby-error-ring-combined-inset:
+    0 0 0 var(--kirby-stroke-xs) var(--kirby-color-border-raised-danger) inset,
+    0 0 0 2px var(--kirby-color-border-offset) inset;
 }
 
 @mixin transition-easings() {
@@ -138,9 +140,6 @@
 }
 
 @mixin all() {
-  /* FONT-FAMILY */
-  @include font-family;
-
   /* COLORS */
   @include colors;
 
@@ -154,23 +153,14 @@
   @include white-overlay-colors;
   @include dark-overlay-colors;
 
-  /* BORDER RADIUS */
-  @include border-radii;
-
-  /* ELEVATIONS */
-  @include elevations;
-
   /* FONT-SIZES */
   @include font-sizes;
 
-  /* FONT-WEIGHT */
-  @include font-weights;
+  /* ICON-FONT-SIZES */
+  @include icon-font-sizes;
 
   /* LINE-HEIGHT */
   @include line-heights;
-
-  /* SPACINGS */
-  @include spacings;
 
   /* RELATIVE SPACINGS */
   @include relative-sizes;
@@ -180,6 +170,9 @@
 
   /* Z-INDEXES */
   @include z-layers;
+
+  /* PAGE CONTENT MAX-WIDTHS */
+  @include page-content-max-widths;
 
   /* BREAKPOINTS */
   @include breakpoints;
@@ -191,4 +184,7 @@
 
   /* FOCUS RING */
   @include focus-ring;
+
+  /* ERROR RING */
+  @include error-ring;
 }

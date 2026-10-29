@@ -32,6 +32,20 @@ describe('RangeComponent', () => {
       spectator.setHostInput('pin', true);
       expect(spectator.component.pinFormatter).toBeDefined();
     });
+
+    it('should have a knob touch target of at least the fat finger size', async () => {
+      const ionRange = spectator.query('ion-range');
+      await TestHelper.whenReady(ionRange);
+      const knobHandle = ionRange.shadowRoot.querySelector<HTMLElement>('.range-knob-handle');
+      const fatFingerSize = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue('--kirby-size-fat-finger')
+      );
+
+      const { width, height } = knobHandle.getBoundingClientRect();
+
+      expect(width).toBeGreaterThanOrEqual(fatFingerSize);
+      expect(height).toBeGreaterThanOrEqual(fatFingerSize);
+    });
   });
 
   describe('with attributes', () => {

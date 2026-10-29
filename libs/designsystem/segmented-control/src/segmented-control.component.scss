@@ -3,8 +3,8 @@
 
 // There is a limit to how large text can be on narrow viewports with text resized
 // before segment-button texts start to collide horizontally, so we cap it for narrow viewports
-$maximum-font-size-sm: utils.size('xs') * utils.$text-resize-threshold;
-$maximum-font-size-md: utils.size('s') * utils.$text-resize-threshold;
+$maximum-font-size-sm: calc(var(--kirby-spacing-xs) * #{utils.$text-resize-threshold});
+$maximum-font-size-md: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold});
 $badge-offset: 0.8em;
 
 :host {
@@ -14,38 +14,43 @@ $badge-offset: 0.8em;
   --kirby-badge-position: absolute;
   --kirby-badge-top: #{-1 * $badge-offset};
   --kirby-badge-right: #{-2 * $badge-offset};
-  --kirby-badge-z-index: #{utils.z('segment-badge')};
+  --kirby-badge-z-index: var(--kirby-z-index-segment-badge);
 
   &.sm {
     ion-segment-button {
-      min-height: utils.size('l');
-      font-size: min(utils.font-size('xs'), $maximum-font-size-sm);
+      min-height: var(--kirby-spacing-l);
+      font-size: min(var(--kirby-font-size-xs), $maximum-font-size-sm);
 
-      --padding-start: #{utils.size('s')};
-      --padding-end: #{utils.size('s')};
-      --kirby-badge-right: -#{utils.size('xxs')};
+      --padding-start: var(--kirby-spacing-s);
+      --padding-end: var(--kirby-spacing-s);
+      --kirby-badge-right: calc(-1 * var(--kirby-spacing-xxs));
 
       &:focus-visible {
         transition: interaction-state.transition();
         box-shadow: var(--kirby-focus-ring-md-inset);
         outline: none;
-        border-radius: utils.border-radius('pill');
+        border-radius: var(--kirby-border-radius-pill);
       }
     }
   }
 
   &.default-mode {
     ion-segment {
-      --background: var(--kirby-inputs-background-color);
+      --background: var(--kirby-color-fill-raised);
 
-      box-shadow: var(--kirby-inputs-elevation);
+      border: var(--kirby-stroke-xs) solid var(--kirby-color-border-raised-quiet);
       overflow: visible; // Ensures the badge is not cut off
       contain: none; // Ensures the badge is not cut off
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
     }
 
+    // Compensate for border, so it doesn't add to the height
     ion-segment-button {
-      --color-hover: var(--kirby-inputs-color-hover);
+      min-height: calc(var(--kirby-spacing-xl) - 2 * var(--kirby-stroke-xs));
+    }
+
+    &.sm ion-segment-button {
+      min-height: calc(var(--kirby-spacing-l) - 2 * var(--kirby-stroke-xs));
     }
   }
 
@@ -54,8 +59,8 @@ $badge-offset: 0.8em;
       --background: none;
 
       border-radius: 0;
-      padding: #{utils.size('xxxs')};
-      gap: #{utils.size('xxs')};
+      padding: var(--kirby-spacing-xxxs);
+      gap: var(--kirby-spacing-xxs);
 
       @include utils.touch {
         scrollbar-width: none; /* Firefox */
@@ -66,12 +71,35 @@ $badge-offset: 0.8em;
     }
 
     ion-segment-button {
-      --background: var(--kirby-inputs-background-color);
       --indicator-transition: none;
 
       &::part(indicator) {
         // Remove padding as the selected segment will otherwise have additional space to its neighbors
         padding-inline: 0;
+      }
+
+      &:not(.segment-button-checked) {
+        --background: var(--kirby-color-fill-raised);
+
+        &::part(native) {
+          border-color: var(--kirby-color-border-raised-quiet);
+        }
+
+        @include utils.hover {
+          --background: var(--kirby-color-fill-raised-hover);
+
+          &::part(native) {
+            border-color: var(--kirby-color-border-raised-quiet-hover);
+          }
+        }
+
+        &:active {
+          --background: var(--kirby-color-fill-raised-active);
+
+          &::part(native) {
+            border-color: var(--kirby-color-border-raised-quiet-active);
+          }
+        }
       }
     }
   }
@@ -82,28 +110,37 @@ $badge-offset: 0.8em;
     }
 
     ion-segment-button {
-      --background: transparent;
-      --padding-start: #{utils.size('xs')};
-      --padding-end: #{utils.size('xs')};
-    }
-  }
+      --padding-start: var(--kirby-spacing-xs);
+      --padding-end: var(--kirby-spacing-xs);
 
-  &.chip-mode,
-  &.compact {
-    ion-segment-button {
-      // Use same hover state as Button AttentionLevel3 (white):
-      @include interaction-state.apply-hover-ionic('xs');
+      &:not(.segment-button-checked) {
+        --background: var(--kirby-color-fill-base);
+        --color: var(--kirby-color-content-base);
 
-      // Use same hover state as Button AttentionLevel2 (black):
-      &.segment-button-checked {
-        @include interaction-state.apply-hover-ionic('s', $make-lighter: true);
+        &,
+        &:hover,
+        &:active {
+          &::part(native) {
+            border-color: transparent;
+          }
+        }
+
+        @include utils.hover {
+          --background: var(--kirby-color-fill-base-hover);
+          --color: var(--kirby-color-content-base-hover);
+        }
+
+        &:active {
+          --background: var(--kirby-color-fill-base-active);
+          --color: var(--kirby-color-content-base-active);
+        }
       }
     }
   }
 }
 
 ion-segment {
-  border-radius: utils.border-radius('pill');
+  border-radius: var(--kirby-border-radius-pill);
   grid-auto-columns: max-content;
   box-sizing: border-box;
 }
@@ -120,46 +157,55 @@ ion-segment-button {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --border-radius: #{utils.border-radius('pill')};
+    --border-radius: var(--kirby-border-radius-pill);
     --border-style: none;
-    --background: none;
-    --color: var(--kirby-inputs-color);
-    --indicator-color: var(--kirby-inputs-indicator-background-color);
-    --color-checked: var(--kirby-inputs-indicator-color);
+    --background: transparent;
+    --background-hover-opacity: 0; // Hover is styled through --background instead
+    --color: var(--kirby-color-content-raised);
+    --color-hover: var(--color);
+    --indicator-color: var(--kirby-color-fill-brand);
+    --color-checked: var(--kirby-color-content-brand);
     --indicator-box-shadow: none;
     --indicator-transform: none;
-    --padding-start: #{utils.size('m')};
-    --padding-end: #{utils.size('m')};
+    --padding-start: var(--kirby-spacing-m);
+    --padding-end: var(--kirby-spacing-m);
     --margin-bottom: 0;
     --margin-end: 0;
     --margin-start: 0;
     --margin-top: 0;
 
-    min-height: utils.size('xl');
+    min-height: var(--kirby-spacing-xl);
     min-width: fit-content;
-    font-weight: utils.font-weight('normal');
-    font-size: min(utils.font-size('s'), $maximum-font-size-md);
+    font-weight: var(--kirby-font-weight-normal);
+    font-size: min(var(--kirby-font-size-s), $maximum-font-size-md);
     text-transform: none;
     margin: 0;
   }
   /* stylelint-enable no-duplicate-selectors */
 
-  // NOTE: This is a custom implementation of the hover interaction state;
-  // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
+  @include utils.hover {
+    --background: var(--kirby-color-fill-raised-hover);
+    --color: var(--kirby-color-content-raised-hover);
+    --indicator-color: var(--kirby-color-fill-brand-hover);
+    --color-checked: var(--kirby-color-content-brand-hover);
+  }
+
+  &:active {
+    --background: var(--kirby-color-fill-raised-active);
+    --color: var(--kirby-color-content-raised-active);
+    --indicator-color: var(--kirby-color-fill-brand-active);
+    --color-checked: var(--kirby-color-content-brand-active);
+  }
 
   &::part(native) {
+    transition: interaction-state.transition();
+    box-sizing: border-box; // Ensure border is not added to the size
+    border: var(--kirby-stroke-xs) solid transparent;
     border-radius: var(--border-radius);
     contain: none; // Ensures the badge is not cut off
     overflow: visible; // Ensures the badge is not cut off
     opacity: 1; // Ensure color, background and badge is not transparent on hover
-
-    &::after {
-      transition: interaction-state.transition();
-      border-radius: var(--border-radius); // Ensure background of ion-button hover state is rounded
-    }
   }
-
-  // end NOTE
 
   &::part(indicator) {
     padding-inline: 0;

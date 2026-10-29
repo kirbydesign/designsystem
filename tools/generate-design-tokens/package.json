@@ -1,0 +1,22 @@
+{
+  "name": "@repo/generate-design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CLI that turns Figma variable exports into CSS custom properties",
+  "type": "module",
+  "bin": {
+    "design-tokens": "./bin/design-tokens.mjs"
+  },
+  "exports": "./src/cli.mjs",
+  "scripts": {
+    "test": "node --test 'test/**/*.test.mjs'"
+  },
+  "dependencies": {
+    "style-dictionary": "5.5.5"
+  },
+  "nx": {
+    "tags": [
+      "test:node"
+    ]
+  }
+}

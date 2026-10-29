@@ -15,14 +15,14 @@ ion-backdrop {
     transform: scale(1.05, 1.05);
 
     & div:first-child {
-      border-top: 1px solid var(--kirby-background-color);
+      border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
     }
   }
 
   @include utils.slotted('kirby-item') {
     box-shadow: 0 0 10px rgb(0 0 0 / 40%);
     transform: scale(1.05, 1.05);
-    border-radius: utils.border-radius('n');
+    border-radius: var(--kirby-border-radius-n);
     overflow: hidden;
   }
 }
@@ -42,8 +42,8 @@ ion-backdrop {
   }
 
   @include utils.slotted('div:last-child kirby-item') {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
+    border-bottom-left-radius: var(--kirby-border-radius-n);
+    border-bottom-right-radius: var(--kirby-border-radius-n);
     overflow: hidden;
   }
 
@@ -51,7 +51,7 @@ ion-backdrop {
     @include utils.slotted('kirby-item') {
       box-shadow: 0 0 10px rgb(0 0 0 / 40%);
       transform: scale(1.05, 1.05);
-      border-radius: utils.border-radius('n');
+      border-radius: var(--kirby-border-radius-n);
       overflow: hidden;
     }
   }
@@ -70,8 +70,8 @@ kirby-card {
   z-index: auto;
 
   @include utils.slotted('div:last-child ion-reorder-group div:last-child kirby-item') {
-    border-bottom-left-radius: utils.border-radius('n');
-    border-bottom-right-radius: utils.border-radius('n');
+    border-bottom-left-radius: var(--kirby-border-radius-n);
+    border-bottom-right-radius: var(--kirby-border-radius-n);
     overflow: hidden;
   }
 
@@ -79,16 +79,11 @@ kirby-card {
     z-index: 1; // for showing rounded corners on ios devices
   }
 
-  @include utils.slotted('.content-layer > div:first-child kirby-item') {
-    border-radius: utils.border-radius('n');
-    overflow: hidden;
-  }
-
   @include utils.slotted('div .reorder-list-active kirby-item') {
     z-index: 103;
   }
 
   & div:first-child {
-    border-top: 1px solid var(--kirby-background-color);
+    border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
   }
 }

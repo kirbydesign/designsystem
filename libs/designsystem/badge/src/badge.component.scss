@@ -5,6 +5,7 @@ $badge-size-medium: 1.6em;
 $badge-padding-inline: 0.5em;
 $badge-padding-block: 0.3em;
 $badge-icon-size: 1.6em;
+$badge-border-width: var(--kirby-badge-border-width, var(--kirby-stroke-xs));
 $maximum-font-size: 10px * utils.$text-resize-threshold;
 
 :host {
@@ -17,11 +18,12 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
   display: inline-flex;
 
   ion-badge {
-    --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
-    --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
+    --background: var(--kirby-badge-background-color, var(--kirby-color-fill-raised));
+    --color: var(--kirby-badge-color, var(--kirby-color-content-raised));
 
+    border: $badge-border-width solid var(--kirby-color-border-raised-quiet);
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: utils.border-radius('pill');
+    border-radius: var(--kirby-border-radius-pill);
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
@@ -29,45 +31,47 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
     --kirby-icon-font-size: #{$badge-icon-size};
   }
 
-  // Colors
-  &.success ion-badge {
-    --color: #{utils.get-color('success-contrast')};
+  &.sm ion-badge {
+    --background: var(--kirby-badge-background-color, var(--kirby-color-fill-base-quiet));
+    --color: var(--kirby-badge-color, var(--kirby-color-content-base-quiet));
+
+    border-color: var(--kirby-color-border-base-quiet);
   }
 
+  // Colors
   &.success.sm ion-badge {
-    --background: #{utils.get-color('success-shade')};
+    --background: var(--kirby-color-fill-success-loud);
+    --color: var(--kirby-color-content-success-loud);
+
+    border-color: var(--kirby-color-border-success-loud);
   }
 
   &.success.md ion-badge {
-    --background: #{utils.get-color('success-tint')};
-  }
+    --background: var(--kirby-color-fill-success);
+    --color: var(--kirby-color-content-success);
 
-  &.warning ion-badge {
-    --color: #{utils.get-color('warning-contrast')};
+    border-color: var(--kirby-color-border-success);
   }
 
   &.warning.sm ion-badge {
-    --background: #{utils.get-color('warning-shade')};
+    --background: var(--kirby-color-fill-warning-loud);
+    --color: var(--kirby-color-content-warning-loud);
+
+    border-color: var(--kirby-color-border-warning-loud);
   }
 
   &.warning.md ion-badge {
-    --background: #{utils.get-color('warning')};
+    --background: var(--kirby-color-fill-warning);
+    --color: var(--kirby-color-content-warning);
+
+    border-color: var(--kirby-color-border-warning);
   }
 
   &.danger ion-badge {
-    --color: #{utils.get-text-color('white')};
-  }
+    --background: var(--kirby-color-fill-danger-loud);
+    --color: var(--kirby-color-content-danger-loud);
 
-  &.danger.sm ion-badge {
-    --background: #{utils.get-color('danger')};
-  }
-
-  &.danger.md ion-badge {
-    --background: #{utils.get-color('danger-shade')};
-
-    &:has(kirby-icon) {
-      --background: #{utils.get-color('danger')};
-    }
+    border-color: var(--kirby-color-border-danger-loud);
   }
 }
 
@@ -83,10 +87,19 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
 
 :host(.md) {
   ion-badge {
-    --padding-end: var(--kirby-badge-padding-inline, #{$badge-padding-inline});
-    --padding-start: var(--kirby-badge-padding-inline, #{$badge-padding-inline});
-    --padding-bottom: var(--kirby-badge-padding-block, #{$badge-padding-block});
-    --padding-top: var(--kirby-badge-padding-block, #{$badge-padding-block});
+    // Subtract the border width from the padding, so the border doesn't add to the size
+    --padding-end: calc(
+      var(--kirby-badge-padding-inline, #{$badge-padding-inline}) - #{$badge-border-width}
+    );
+    --padding-start: calc(
+      var(--kirby-badge-padding-inline, #{$badge-padding-inline}) - #{$badge-border-width}
+    );
+    --padding-bottom: calc(
+      var(--kirby-badge-padding-block, #{$badge-padding-block}) - #{$badge-border-width}
+    );
+    --padding-top: calc(
+      var(--kirby-badge-padding-block, #{$badge-padding-block}) - #{$badge-border-width}
+    );
 
     min-width: $badge-size-medium;
     min-height: $badge-size-medium;
@@ -99,14 +112,11 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
 
       height: $badge-size-medium;
       width: $badge-size-medium;
-    }
-  }
-}
 
-// Apply custom elevation to badge when white (explicitly set or default white)
-:host(.default),
-:host(.white) {
-  ion-badge {
-    --kirby-badge-elevation: 0 20px 30px -15px rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 12%);
+      // Pull the icon out over the border, so it stays centered in the badge
+      @include utils.slotted('kirby-icon') {
+        margin: calc(-1 * #{$badge-border-width});
+      }
+    }
   }
 }

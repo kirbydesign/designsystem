@@ -16,6 +16,7 @@ import { PageComponent } from '../page.component';
   templateUrl: './page-footer.component.html',
   styleUrls: ['./page-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'kirby-surface-raised' },
 })
 export class PageFooterComponent implements OnDestroy {
   @Input()

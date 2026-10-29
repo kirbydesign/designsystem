@@ -58,6 +58,14 @@ jobs:
         run: npx nx run-many -t lint && npx stylelint '**/*.scss'
       - name: Run node tests
         run: npx nx run-many -t test -p tag:test:node --output-style=stream
+      - name: Check committed design token CSS
+        run: |
+          node tools/generate-design-tokens/bin/design-tokens.mjs --css-only libs/core/src/scss/themes/tokens.json
+          status=0
+          for generated in tools/generate-design-tokens/dist/*.css; do
+            diff -u "libs/core/src/scss/themes/$(basename "$generated")" "$generated" || status=1
+          done
+          exit $status
       - name: Run headless-browser tests
         run: npx nx run-many -t test -p tag:test:headless-browser --output-style=stream -- --browsers=ChromeCustom --progress false --watch false --code-coverage
 

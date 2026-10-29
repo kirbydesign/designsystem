@@ -1,19 +1,16 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
-$divider-color: utils.get-color('medium');
-$padding: utils.size('s');
+$padding: var(--kirby-spacing-s);
 
 :host {
-  @include interaction-state.initialize-layer;
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
     display: block;
-    border-top: 1px solid $divider-color;
-    border-bottom: 1px solid $divider-color;
+    border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
+    border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
     box-sizing: border-box;
   }
 }
@@ -38,6 +35,18 @@ $padding: utils.size('s');
   --kirby-accordion-border-bottom-radius: 0;
 }
 
+@include utils.hover(':host:has(.header:hover)') {
+  background-color: var(--kirby-color-fill-base-hover);
+  color: var(--kirby-color-content-base-hover);
+  border-color: var(--kirby-color-border-base-quiet-hover);
+}
+
+:host:has(.header:active) {
+  background-color: var(--kirby-color-fill-base-active);
+  color: var(--kirby-color-content-base-active);
+  border-color: var(--kirby-color-border-base-quiet-active);
+}
+
 .header {
   border-radius: var(--kirby-accordion-border-top-radius, 0)
     var(--kirby-accordion-border-top-radius, 0) var(--kirby-accordion-border-bottom-radius, 0)
@@ -48,13 +57,11 @@ $padding: utils.size('s');
     box-shadow: var(--kirby-focus-ring-md-inset);
     outline: 0;
   }
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
 
   & {
     display: flex;
     align-items: center;
-    gap: utils.size('xxs');
+    gap: var(--kirby-spacing-xxs);
     padding: $padding;
     user-select: none;
     width: 100%;
@@ -64,17 +71,18 @@ $padding: utils.size('s');
     box-shadow: none;
     font-family: var(--kirby-font-family);
     text-align: start;
+    cursor: pointer;
   }
 }
 
 .title {
   flex-grow: 2;
   display: flex;
-  font-size: utils.font-size('n');
+  font-size: var(--kirby-font-size-n);
 }
 
 .kirby-icon {
-  transition: transform utils.get-transition-duration('quick');
+  transition: transform var(--kirby-transition-duration-quick);
 }
 
 .content {
@@ -88,24 +96,17 @@ $padding: utils.size('s');
 
 button[disabled] {
   pointer-events: none;
-
-  .kirby-icon {
-    color: utils.get-color('semi-dark');
-  }
-
-  .title {
-    color: utils.get-text-color('semi-dark');
-  }
+  opacity: var(--kirby-opacity-40);
 }
 
 button {
   // Enforce button text color to avoid inheriting native button color from browser
-  color: utils.get-text-color('black');
+  color: var(--kirby-color-content-base);
 }
 
 button[aria-expanded='true'] {
   .title {
-    font-weight: utils.font-weight('bold');
+    font-weight: var(--kirby-font-weight-bold);
   }
 
   .kirby-icon {
@@ -120,8 +121,6 @@ button[aria-expanded='true'] {
 }
 
 :host-context(kirby-card) {
-  border-color: utils.get-color('background-color');
-
   &:first-child {
     border-top: none;
   }

@@ -4,10 +4,9 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
-const { getColor, size } = DesignTokenHelper;
+const { size } = DesignTokenHelper;
 
 const KEYBOARD_HEIGHT = 216; // sample value, depends upon device
 const BASE_PADDING_PX = size('m');
@@ -34,7 +33,7 @@ describe('ModalFooterComponent', () => {
   const createHost = createHostFactory({
     component: ModalFooterComponent,
     host: TestHostComponent,
-    imports: [TestHelper.ionicModuleForTest, ButtonComponent],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   it('should create', () => {
@@ -167,66 +166,11 @@ describe('ModalFooterComponent', () => {
     });
   });
 
-  describe('ModalFooterComponent background color', () => {
-    it('should be background-color when themeColor is light', () => {
-      spectator = createHost(`<kirby-modal-footer themeColor="light"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('background-color'),
-      });
-    });
-
-    it('should be white when themeColor is white', () => {
-      spectator = createHost(`<kirby-modal-footer themeColor="white"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-
-    it('should be white when themeColor not set', () => {
-      spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-
-    it('should be white when color set by themeColor is not supported', () => {
-      spectator = createHost(`<kirby-modal-footer themeColor="primary"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-  });
-
   describe('when inline type is set', () => {
-    it('should have a transparent background color', () => {
-      spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': 'transparent',
-      });
-    });
-
-    it('should have a transparent background even when themeColor is specified', () => {
-      spectator = createHost(
-        `<kirby-modal-footer type="inline" themeColor="primary"></kirby-modal-footer>`
-      );
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': 'transparent',
-      });
-    });
-
     it('should not show a box shadow', () => {
       spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'box-shadow': 'none',
-      });
-    });
-
-    it('should apply theming to buttons within the modal footer', () => {
-      spectator = createHost(
-        `<kirby-modal-footer type="inline"><button kirby-button attentionLevel="3">Click Me</button></kirby-modal-footer>`
-      );
-      expect(spectator.query('button')).toHaveComputedStyle({
-        'background-color': getColor('white'),
       });
     });
   });

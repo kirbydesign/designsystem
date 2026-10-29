@@ -10,6 +10,13 @@ import {
 
 import { CardComponent, IconComponent } from '@kirbydesign/designsystem';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+// eslint-disable-next-line no-restricted-imports
+import {
+  idsOnSurfaces,
+  interactionStates,
+  pseudoStatesFor,
+  renderOnSurfaces,
+} from '../../.storybook/story-helpers';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {
@@ -23,6 +30,7 @@ const meta: Meta<FormFieldComponent> = {
         TextareaComponent,
         FormFieldExampleComponent,
         IconComponent,
+        CardComponent,
       ],
     }),
   ],
@@ -161,4 +169,76 @@ export const InputFocused: Story = {
       input.focus();
     }
   },
+};
+
+const formFieldVariants: {
+  id: string;
+  label: string;
+  element: 'input' | 'textarea';
+  value?: string;
+  hasError?: boolean;
+  affix?: boolean;
+  borderless?: boolean;
+}[] = [
+  { id: 'placeholder', label: 'Placeholder', element: 'input' },
+  { id: 'value', label: 'Value', element: 'input', value: 'Value' },
+  { id: 'affix', label: 'Affix', element: 'input', value: '1.000', affix: true },
+  // Error is a variant rather than a state, so it's shown in every interaction state.
+  // This guards the rule order that keeps the error border over hover and active,
+  // and the focus ring over the error.
+  { id: 'error', label: 'Error', element: 'input', value: 'Value', hasError: true },
+  { id: 'borderless', label: 'Borderless', element: 'input', value: 'Value', borderless: true },
+  { id: 'textarea', label: 'Textarea', element: 'textarea', value: 'Value' },
+];
+
+// Disabled inputs can't be interacted with, so disabled is shown as a state of its own
+const formFieldStates = [...interactionStates, 'disabled'] as const;
+
+export const InteractionStates: Story = {
+  parameters: {
+    pseudo: pseudoStatesFor(
+      idsOnSurfaces(
+        'form-field',
+        formFieldVariants.map((variant) => variant.id)
+      )
+    ),
+  },
+  render: renderOnSurfaces(
+    `
+    <p class="kirby-text-normal-bold">{{ surface }}</p>
+    @for (variant of variants; track variant.id) {
+      <p class="kirby-text-small-light">{{ variant.label }}</p>
+      <div class="row">
+        @for (state of states; track state) {
+          <kirby-form-field [label]="state" style="width: 180px">
+            @if (variant.affix) {
+              <span kirby-affix="suffix">kr.</span>
+            }
+            @if (variant.element === 'textarea') {
+              <textarea
+                kirby-textarea
+                [attr.id]="'form-field-' + surface + '-' + variant.id + '-' + state"
+                [value]="variant.value"
+                [disabled]="state === 'disabled'"
+              ></textarea>
+            } @else {
+              <input
+                kirby-input
+                [attr.id]="'form-field-' + surface + '-' + variant.id + '-' + state"
+                placeholder="Placeholder"
+                [value]="variant.value ?? ''"
+                [hasError]="variant.hasError"
+                [borderless]="variant.borderless"
+                [disabled]="state === 'disabled'"
+              />
+            }
+          </kirby-form-field>
+        }
+      </div>
+    }
+  `,
+    'max-content',
+    { variants: formFieldVariants, states: formFieldStates },
+    { stacked: true }
+  ),
 };

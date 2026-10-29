@@ -1,6 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-@use '@kirbydesign/core/src/scss/interaction-state';
-
 :host {
   display: flex;
   flex-direction: row;
@@ -8,19 +5,12 @@
   position: relative;
   overflow: visible;
 
-  &.selected {
-    color: var(--menuitem-selected-color, utils.get-color('primary-contrast'));
-  }
-
   &:not(.selected):hover a {
-    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+    background: var(--menuitem-hover-background-color, var(--kirby-color-fill-base-hover));
   }
 
   &:not(.selected):active a {
-    background: var(
-      --menuitem-active-background-color,
-      var(--kirby-inputs-background-color-active)
-    );
+    background: var(--menuitem-active-background-color, var(--kirby-color-fill-base-active));
   }
 }
 
@@ -28,8 +18,9 @@
 .selected:hover,
 .selected:active,
 .selected:focus-visible {
-  background: var(--menuitem-selected-background-color, utils.get-color('primary'));
-  font-weight: utils.font-weight('bold');
+  background: var(--menuitem-selected-background-color, var(--kirby-color-fill-brand-loud));
+  color: var(--menuitem-selected-color, var(--kirby-color-content-brand-loud));
+  font-weight: var(--kirby-font-weight-bold);
 }
 
 .item-badge {
@@ -37,7 +28,7 @@
 }
 
 .toggle-spacer {
-  width: utils.icon-font-size('sm');
+  width: var(--kirby-icon-font-size-sm);
   display: none;
 }
 
@@ -61,7 +52,7 @@
 .toggle-button-wrapper {
   display: inline-flex;
   position: absolute;
-  right: utils.size('xs');
+  right: var(--kirby-spacing-xs);
 }
 
 .toggle-button {

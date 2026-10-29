@@ -1,11 +1,6 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
-@use '@kirbydesign/core/src/scss/utils';
 
-$tick-height: 6px;
-$tick-width: 6px;
-$knob-shadow:
-  0 5px 10px 0 rgb(28 28 28 / 30%),
-  0 0 5px 0 rgb(28 28 28 / 8%);
+$tick-size: var(--kirby-spacing-xxs);
 
 :host {
   display: flex;
@@ -14,30 +9,20 @@ $knob-shadow:
 }
 
 ion-range {
-  &:focus-visible::part(knob) {
-    transition: interaction-state.transition();
-    box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
-  }
-  @include interaction-state.apply-hover {
-    --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
-  }
-  @include interaction-state.apply-active {
-    --knob-background: #{interaction-state.get-state-color('white', 's')};
-  }
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --knob-background: #{utils.get-color('white')};
-    --knob-box-shadow: #{$knob-shadow};
-    --knob-size: 24px;
-    --pin-color: #{utils.get-text-color('black')};
-    --pin-background: #{utils.get-color('semi-light')};
-    --bar-background: #{utils.get-color('medium')};
-    --bar-background-active: #{utils.get-color('dark')};
-    --bar-border-radius: #{utils.size('xxxs')};
-    --bar-height: #{utils.size('xxxxs')};
+    --knob-background: var(--kirby-color-fill-brand-loud);
+    --knob-box-shadow: 0 0 0 2px var(--kirby-color-fill-base);
+    --knob-size: var(--kirby-spacing-s);
+    --knob-handle-size: var(--kirby-size-fat-finger);
+    --pin-color: var(--kirby-color-content-brand-loud);
+    --pin-background: var(--kirby-color-fill-brand-loud);
+    --bar-background: var(--kirby-color-border-base-quiet);
+    --bar-background-active: var(--kirby-color-fill-brand-loud);
+    --bar-border-radius: var(--kirby-spacing-xxxs);
+    --bar-height: var(--kirby-spacing-xxxxs);
 
     flex: 1 1 100%;
     padding: 0;
@@ -45,33 +30,45 @@ ion-range {
   /* stylelint-enable no-duplicate-selectors */
 
   &.range-disabled {
-    --knob-background: #{utils.get-color('medium')};
-    --knob-box-shadow: none;
-    --bar-background: #{utils.get-color('semi-light')};
-    --bar-background-active: #{utils.get-color('medium')};
-
-    &::part(tick) {
-      background: utils.get-color('semi-light');
-    }
+    opacity: var(--kirby-opacity-40);
   }
 
   &.range-has-pin {
-    padding: 0 $tick-width * 0.5;
+    padding: 0 calc(#{$tick-size} / 2);
   }
 
   &::part(knob) {
     transition: interaction-state.transition();
-    transition-property: background;
+    transition-property: background, transform;
+  }
+
+  &::part(knob hover) {
+    --knob-background: var(--kirby-color-fill-brand-loud-hover);
+  }
+
+  &::part(knob activated),
+  &::part(knob pressed) {
+    --knob-background: var(--kirby-color-fill-brand-loud-active);
+  }
+
+  &::part(knob hover),
+  &::part(knob activated),
+  &::part(knob pressed) {
+    transform: scale(1.25);
+  }
+
+  &::part(knob focused) {
+    box-shadow: var(--kirby-focus-ring-md-outer);
   }
 
   &::part(pin) {
-    font-size: utils.font-size('xs');
+    font-size: var(--kirby-font-size-xs);
     color: var(--pin-color);
     background-color: var(--pin-background);
-    padding: utils.size('xxxxs') utils.size('xxs');
-    border-radius: utils.size('xxxs');
-    min-width: utils.size('m');
-    top: -#{utils.size('xs')};
+    padding: var(--kirby-spacing-xxxxs) var(--kirby-spacing-xxs);
+    border-radius: var(--kirby-spacing-xxxs);
+    min-width: var(--kirby-spacing-m);
+    top: calc(-1 * var(--kirby-spacing-xxs));
 
     &::before {
       content: '';
@@ -87,22 +84,21 @@ ion-range {
 
   &::part(tick),
   &::part(tick-active) {
-    border-radius: utils.border-radius('circle');
-    width: $tick-width;
-    height: $tick-height;
-    margin-top: 1px; // compensate for different height of ionic tick (8px)
+    border-radius: var(--kirby-border-radius-circle);
+    width: $tick-size;
+    height: $tick-size;
+    margin-inline-start: calc(#{$tick-size} / -2);
     z-index: 1;
-    margin-inline-start: -$tick-width * 0.5;
   }
 
   &::part(tick) {
-    background: utils.get-color('medium');
+    background: var(--kirby-color-border-base-quiet);
   }
 }
 
 label {
-  font-size: utils.font-size('xs');
-  line-height: utils.line-height('xs');
-  color: utils.get-text-color('semi-dark');
-  margin-top: -#{utils.size('xxxs')};
+  font-size: var(--kirby-font-size-xs);
+  line-height: var(--kirby-line-height-xs);
+  color: var(--kirby-color-content-base-quiet);
+  margin-top: calc(-1 * var(--kirby-spacing-xxxs));
 }

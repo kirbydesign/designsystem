@@ -1,5 +1,4 @@
-@use '../interaction-state';
-@use '../utils';
+@use 'functions';
 
 // Padding variables
 $header-padding: 14px;
@@ -7,13 +6,10 @@ $header-padding: 14px;
 // Height variables
 $row-height: 44px;
 
-// Color variables
-$default-divider-color: utils.get-color('medium');
-$border-bottom: 1px solid var(--kirby-divider-color, #{$default-divider-color});
-
 table.kirby-table {
   width: 100%;
   border-collapse: collapse;
+  color: var(--kirby-color-content-base);
 
   &.layout-fixed {
     table-layout: fixed;
@@ -21,12 +17,12 @@ table.kirby-table {
 
   tr {
     &:not(:last-child) {
-      border-bottom: $border-bottom;
+      border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
     }
   }
 
   thead tr {
-    border-bottom: $border-bottom;
+    border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
   }
 
   th {
@@ -35,8 +31,8 @@ table.kirby-table {
     }
 
     &.active {
-      color: utils.get-text-color('black');
-      font-weight: utils.font-weight('bold');
+      color: var(--kirby-color-content-base);
+      font-weight: var(--kirby-font-weight-bold);
 
       & kirby-icon.sortable-icon {
         visibility: visible;
@@ -44,14 +40,14 @@ table.kirby-table {
     }
 
     text-align: left;
-    font-weight: utils.font-weight('normal');
-    font-size: utils.font-size('xs');
-    color: utils.get-text-color('semi-dark');
-    line-height: utils.line-height('xs');
-    padding: $header-padding utils.size('s');
+    font-weight: var(--kirby-font-weight-normal);
+    font-size: var(--kirby-font-size-xs);
+    color: var(--kirby-color-content-base-quiet);
+    line-height: var(--kirby-line-height-xs);
+    padding: $header-padding var(--kirby-spacing-s);
 
     &.sortable {
-      padding: utils.size('xxs') utils.size('s');
+      padding: var(--kirby-spacing-xxs) var(--kirby-spacing-s);
     }
 
     button {
@@ -97,7 +93,7 @@ table.kirby-table {
         &::before {
           display: block;
           content: attr(data-text);
-          font-weight: utils.font-weight('bold');
+          font-weight: var(--kirby-font-weight-bold);
           height: 0;
           overflow: hidden;
           visibility: hidden;
@@ -108,21 +104,22 @@ table.kirby-table {
 
   th.sortable,
   tr.kirby-selectable-row {
-    @include interaction-state.apply-hover {
-      background-color: interaction-state.get-state-color('white', 'xxxs');
+    @include functions.hover {
+      background-color: var(--kirby-color-fill-base-hover);
+      color: var(--kirby-color-content-base-hover);
     }
 
-    @include interaction-state.apply-active {
-      background-color: interaction-state.get-state-color('white', 'xxs');
+    &:active {
+      background-color: var(--kirby-color-fill-base-active);
+      color: var(--kirby-color-content-base-active);
     }
   }
 
   td {
     height: $row-height;
-    padding: utils.size('xxxs') utils.size('s');
-    font-weight: utils.font-weight('normal');
-    font-size: utils.font-size('s');
-    color: utils.get-text-color('black');
+    padding: var(--kirby-spacing-xxxs) var(--kirby-spacing-s);
+    font-weight: var(--kirby-font-weight-normal);
+    font-size: var(--kirby-font-size-s);
     vertical-align: middle;
 
     &.text-align-left {

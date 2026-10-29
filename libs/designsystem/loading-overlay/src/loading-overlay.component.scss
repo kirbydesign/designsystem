@@ -1,8 +1,6 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: block;
-  min-height: utils.size('l');
+  min-height: var(--kirby-spacing-l);
 }
 
 .overlay-wrapper {
@@ -19,26 +17,40 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    z-index: utils.z('loading-overlay');
+    z-index: var(--kirby-z-index-loading-overlay);
     display: flex;
     background: transparent;
     justify-content: center;
     place-items: center;
 
     &.backdrop {
-      background-color: rgba(
-        utils.get-color('background-color', $getValueOnly: true),
-        utils.$loading-overlay-backdrop-opacity
+      background-color: color-mix(
+        in srgb,
+        var(--kirby-color-fill-base) var(--kirby-opacity-80),
+        transparent
       );
+
+      // color-mix() requires iOS 16.2+. On older browsers the declaration above is
+      // invalid, so draw the backdrop as a layer behind the spinner instead.
+      @supports not (background-color: color-mix(in srgb, red 50%, transparent)) {
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background-color: var(--kirby-color-fill-base);
+          opacity: var(--kirby-opacity-80);
+        }
+      }
     }
 
     &.hide-content {
-      background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
+      background-color: var(--kirby-color-fill-base);
     }
 
     .spinner {
-      width: utils.size(l);
-      height: utils.size(l);
+      width: var(--kirby-spacing-l);
+      height: var(--kirby-spacing-l);
     }
   }
 }

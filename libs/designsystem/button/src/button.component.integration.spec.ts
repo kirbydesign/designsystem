@@ -22,7 +22,6 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from './button.component';
 
-const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 
@@ -96,24 +95,10 @@ describe('ButtonComponent in Kirby Page', () => {
       expect(actionButtonInHeader).toBeTruthy();
     });
 
-    it('should render with the correct background-color', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': getColor('primary') });
-      expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-
-    it('should render with correct color', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({
-        color: getColor('black'),
-      });
-    });
-
     it('should render with correct size', async () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
+        width: '>=88px', // A text button is content-sized (min-width 88px)
         height: size('xl'),
       });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
@@ -124,11 +109,9 @@ describe('ButtonComponent in Kirby Page', () => {
   });
 
   describe('inside Page Actions', () => {
-    let ionContent: HTMLElement;
     let actionButtonInPage: HTMLButtonElement;
 
     beforeEach(() => {
-      ionContent = spectator.queryHost('ion-content');
       actionButtonInPage = spectator.queryHost(
         '.page-title kirby-page-actions button[kirby-button]'
       );
@@ -137,47 +120,17 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render action button', () => {
       expect(actionButtonInPage).toBeTruthy();
     });
-
-    it('should render with correct background-color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-
-    it('should render with correct color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        color: getColor('white', 'contrast'),
-      });
-    });
   });
 
   describe('inside Page Title', () => {
-    let ionContent: HTMLElement;
     let normalButtonInPage: HTMLButtonElement;
 
     beforeEach(() => {
-      ionContent = spectator.queryHost('ion-content');
       normalButtonInPage = spectator.queryHost('.page-title button[kirby-button].normal-button');
     });
 
     it('should render normal button', () => {
       expect(normalButtonInPage).toBeTruthy();
-    });
-
-    it('should render with correct background-color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(normalButtonInPage).toHaveComputedStyle({
-        'background-color': getColor('primary'),
-      });
-    });
-
-    it('should render with correct color', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(normalButtonInPage).toHaveComputedStyle({
-        color: getColor('primary', 'contrast'),
-      });
     });
   });
 });
@@ -394,7 +347,6 @@ describe('ButtonComponent configured with text and icon', () => {
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
   let kirbyIcon: Element;
-  let content: Element;
   const createHost = createHostFactory({
     component: ButtonComponent,
     imports: [TestHelper.ionicModuleForTest, IconComponent],
@@ -424,13 +376,11 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      content = element.querySelector('span.content-layer');
       kirbyIcon = element.querySelector('kirby-icon');
     });
 
     it('should render with correct padding', () => {
-      expect(element).toHaveComputedStyle({ padding: '0px' });
-      expect(content).toHaveComputedStyle({
+      expect(element).toHaveComputedStyle({
         'padding-left': size('xs'),
         'padding-right': size('s'),
       });
@@ -454,13 +404,11 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      content = element.querySelector('span.content-layer');
       kirbyIcon = element.querySelector('kirby-icon');
     });
 
     it('should render with correct padding', () => {
-      expect(element).toHaveComputedStyle({ padding: '0px' });
-      expect(content).toHaveComputedStyle({
+      expect(element).toHaveComputedStyle({
         'padding-left': size('s'),
         'padding-right': size('xs'),
       });

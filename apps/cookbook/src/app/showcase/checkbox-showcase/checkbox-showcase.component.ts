@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
-import { CheckboxConfirmExampleComponent } from '../../examples/checkbox-example/examples/confirm';
 import { CheckboxDefaultExampleComponent } from '../../examples/checkbox-example/examples/default';
 import { CheckboxListExampleComponent } from '../../examples/checkbox-example/examples/list';
 import { CheckboxStatesExampleComponent } from '../../examples/checkbox-example/examples/states';
@@ -24,7 +23,6 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
   imports: [
     ExampleViewerComponent,
     ImportViewerComponent,
-    CheckboxConfirmExampleComponent,
     CheckboxDefaultExampleComponent,
     RouterLink,
     CheckboxListExampleComponent,
@@ -42,10 +40,9 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
 export class CheckboxShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
-      name: 'attentionLevel',
-      description: `Specifies a look.
-Use attentionLevel 1 for confirm scenarios.
-Use the default attentionLevel 2 for checkbox lists.`,
+      name: 'attentionLevel (deprecated)',
+      description:
+        'Deprecated - has no effect. Attention levels 1 and 2 look the same. This input will be removed in a future major version.',
       defaultValue: '2',
       type: ['1', '2'],
     },
