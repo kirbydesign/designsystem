@@ -19,7 +19,6 @@ import {
   PageContentComponent,
   PageFooterComponent,
 } from '@kirbydesign/designsystem/page';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
