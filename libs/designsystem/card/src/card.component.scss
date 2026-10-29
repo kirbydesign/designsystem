@@ -51,6 +51,7 @@
 
   &.outlined {
     --kirby-card-main-background-color: transparent;
+    --kirby-card-border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
 
     &:has(kirby-card-header.flagged) {
       border: none;
