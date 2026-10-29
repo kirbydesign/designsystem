@@ -2,7 +2,7 @@ import { signal, type WritableSignal } from '@angular/core';
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import { expect, fn, waitFor } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -231,3 +231,46 @@ const interactiveToolbarTitleStory = (showActions: boolean): Story => ({
 
 export const InteractiveToolbarTitleWithoutActions = interactiveToolbarTitleStory(false);
 export const InteractiveToolbarTitleWithTwoActions = interactiveToolbarTitleStory(true);
+
+export const ToggleHeaderActions: Story = {
+  render: () => ({
+    props: {
+      showActions: true,
+    },
+    template: `<kirby-app>
+      <kirby-page>
+        <kirby-header title="Header actions" [emphasizeActions]="true">
+          @if (showActions) {
+            <button kirby-button *kirbyHeaderActions>Header action</button>
+          }
+        </kirby-header>
+        <kirby-page-content>
+          <button kirby-button (click)="showActions = !showActions">
+            {{ showActions ? 'Remove header actions' : 'Restore header actions' }}
+          </button>
+        </kirby-page-content>
+      </kirby-page>
+    </kirby-app>`,
+  }),
+  play: async ({ canvasElement }) => {
+    const headerActionName = 'Header action';
+    const removeActionsName = 'Remove header actions';
+    const canvas = within(canvasElement);
+    const toolbar = canvasElement.querySelector('ion-toolbar');
+    const header = canvasElement.querySelector<HTMLElement>('kirby-header');
+
+    await waitFor(() =>
+      expect(within(header).getByRole('button', { name: headerActionName })).toBeVisible()
+    );
+    await userEvent.click(canvas.getByRole('button', { name: removeActionsName }));
+    await waitFor(() => {
+      expect(within(header).queryByRole('button', { name: headerActionName })).toBeNull();
+      expect(within(toolbar).queryByText(headerActionName)).toBeNull();
+    });
+    await userEvent.click(canvas.getByRole('button', { name: 'Restore header actions' }));
+    await waitFor(() => {
+      expect(within(header).getByRole('button', { name: headerActionName })).toBeVisible();
+      expect(within(toolbar).getByText(headerActionName)).not.toBeVisible();
+    });
+  },
+};

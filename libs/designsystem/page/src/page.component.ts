@@ -1,5 +1,6 @@
 import {
   AfterContentChecked,
+  afterEveryRender,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -344,10 +345,10 @@ export class PageComponent
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
 
   private titleIntersectionObserver?: IntersectionObserver;
-  private stickyActionsIntersectionObserver?: IntersectionObserver;
+  private headerActionsIntersectionObserver?: IntersectionObserver;
   private stickyContentIntersectionObserver?: IntersectionObserver;
   private isObservingTitle = false;
-  private isObservingActions = false;
+  private observedActionsElement?: HTMLDivElement;
   private isDocTitleSet = false;
   private observedToolbarButtons = new Set<HTMLIonButtonsElement>();
 
@@ -391,7 +392,9 @@ export class PageComponent
     private ionicElementPartHelper: IonicElementPartHelper,
     public translations: TranslationService,
     private htmlDocTitle: Title
-  ) {}
+  ) {
+    afterEveryRender(() => this.observeHeaderActions());
+  }
 
   private contentReadyPromise: Promise<void>;
   private whenContentReady() {
@@ -505,10 +508,10 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.titleIntersectionObserver?.disconnect();
-    this.stickyActionsIntersectionObserver?.disconnect();
+    this.unobserveHeaderActions();
     this.stickyContentIntersectionObserver?.disconnect();
     this.unobserveTitleMutation?.();
-    this.unobserveToolbarButtons();
+    this.unobserveToolbarButtonSizes();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -552,7 +555,7 @@ export class PageComponent
     this.patchIonLastFocused();
 
     this.observeTitle();
-    this.observeActions();
+    this.observeHeaderActions();
     this.setHTMLDocumentTitle(this.header?.title || this.title || this.toolbarTitle);
     this.observeTitleDOMChanges();
   }
@@ -564,7 +567,7 @@ export class PageComponent
     this.leave.emit();
 
     this.unobserveTitle();
-    this.unobserveActions();
+    this.unobserveHeaderActions();
     this.unobserveTitleMutation?.();
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
@@ -756,17 +759,13 @@ export class PageComponent
   }
 
   private initializeActions() {
-    if (this.headerActionsTemplate === undefined && !!this.header) {
+    if (this.header) {
       this.headerActionsTemplate = this.header.actionsTemplate;
     }
-    if (this.hasHeader && this.isObservingActions && !this.header?.actionsElement) {
-      // If we're already observing the header's actions element, but it's no longer present,
-      // it means it has been removed from DOM (e.g. in virtual scrolling scenarios).
-      // Flip observing flag:
-      this.isObservingActions = false;
-    }
 
-    this.observeActions();
+    if (this.header && !this.headerActionsTemplate) {
+      this.toolbarActionsVisible = false;
+    }
 
     this.customActions.forEach((pageAction) => {
       if (pageAction.isFixed) {
@@ -779,56 +778,53 @@ export class PageComponent
     });
   }
 
-  private observeActions() {
-    if (!this.header?.actionsElement) {
-      // Nothing to observe
+  private observeHeaderActions() {
+    if (!this.isActive) return;
+
+    const actionsElement = this.header?.actionsElement?.nativeElement;
+    if (!actionsElement) {
+      this.unobserveHeaderActions();
       return;
     }
 
-    if (this.isObservingActions) {
-      // Already observing
-      return;
-    }
+    const isObservingActionsElement = this.observedActionsElement === actionsElement;
+    if (isObservingActionsElement) return;
 
-    // We are not actually observing actions until after the `whenContentReady` promise has resolved,
-    // but since we've already checked that there's an actions element present in the guard above,
-    // we'll - eagerly - set this flag now to prevent unnecessary re-runs of the rest of this method:
-    this.isObservingActions = true;
+    this.unobserveHeaderActions();
+    this.observedActionsElement = actionsElement;
 
-    if (!this.stickyActionsIntersectionObserver) {
-      this.stickyActionsIntersectionObserver = new IntersectionObserver(
-        (entries) => {
-          // In rare scenarios we get more than 1 entry - use the last one:
-          const lastEntry = entries[entries.length - 1];
-          if (lastEntry) {
-            const showToolbarActions = !lastEntry.isIntersecting;
-            // Only flip the flag and run Change Detection when changed:
-            if (showToolbarActions !== this.toolbarActionsVisible) {
-              this.toolbarActionsVisible = showToolbarActions;
-              this.changeDetectorRef.detectChanges();
-            }
-          }
-        },
-        { root: this.ionContentElement.nativeElement }
-      );
-    }
+    this.headerActionsIntersectionObserver ??= this.createHeaderActionsIntersectionObserver();
 
-    // Run outside Angular to prevent unnecessary triggering change detection
-    // and - under certain conditions - an infinite loop when called within ngAfterContentChecked:
     this.zone.runOutsideAngular(() => {
       this.whenContentReady().then(() => {
-        if (this.header?.actionsElement?.nativeElement) {
-          this.stickyActionsIntersectionObserver.observe(this.header.actionsElement.nativeElement);
+        if (this.observedActionsElement === actionsElement) {
+          this.headerActionsIntersectionObserver.observe(actionsElement);
         }
       });
     });
   }
 
-  private unobserveActions() {
-    if (this.header?.actionsElement) {
-      this.stickyActionsIntersectionObserver?.unobserve(this.header.actionsElement.nativeElement);
-    }
-    this.isObservingActions = false;
+  private createHeaderActionsIntersectionObserver(): IntersectionObserver {
+    return new IntersectionObserver(
+      (entries) => {
+        const entry = entries.filter((entry) => entry.target === this.observedActionsElement).pop();
+        if (!entry) return;
+
+        const toolbarVisibilityUnchanged = this.toolbarActionsVisible === !entry.isIntersecting;
+        if (toolbarVisibilityUnchanged) return;
+
+        this.toolbarActionsVisible = !entry.isIntersecting;
+        this.changeDetectorRef.detectChanges();
+      },
+      { root: this.ionContentElement.nativeElement }
+    );
+  }
+
+  private unobserveHeaderActions() {
+    if (!this.observedActionsElement) return;
+
+    this.headerActionsIntersectionObserver?.disconnect();
+    this.observedActionsElement = undefined;
   }
 
   private setActionButtonsWidth() {
@@ -864,8 +860,8 @@ export class PageComponent
     });
   }
 
-  private observeToolbarButtons() {
-    this.unobserveToolbarButtons();
+  private observeToolbarButtonSizes() {
+    this.unobserveToolbarButtonSizes();
 
     this.ionToolbarButtonsElement.forEach(({ nativeElement: ionButtonsElement }) => {
       this.observedToolbarButtons.add(ionButtonsElement);
@@ -877,12 +873,12 @@ export class PageComponent
     this.ionToolbarButtonsElement.changes
       .pipe(startWith(this.ionToolbarButtonsElement), takeUntil(this.ngOnDestroy$))
       .subscribe(() => {
-        this.observeToolbarButtons();
+        this.observeToolbarButtonSizes();
         this.setActionButtonsWidth();
       });
   }
 
-  private unobserveToolbarButtons() {
+  private unobserveToolbarButtonSizes() {
     this.observedToolbarButtons.forEach((ionButtonsElement) =>
       this.resizeObserverService.unobserve(ionButtonsElement)
     );
