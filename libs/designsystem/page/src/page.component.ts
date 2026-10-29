@@ -761,9 +761,10 @@ export class PageComponent
   private initializeActions() {
     if (this.header) {
       this.headerActionsTemplate = this.header.actionsTemplate;
-      if (!this.headerActionsTemplate) {
-        this.toolbarActionsVisible = false;
-      }
+    }
+
+    if (this.header && !this.headerActionsTemplate) {
+      this.toolbarActionsVisible = false;
     }
 
     this.customActions.forEach((pageAction) => {
