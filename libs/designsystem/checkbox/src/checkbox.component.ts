@@ -45,7 +45,7 @@ export class CheckboxComponent
 
   private _attentionLevel: '1' | '2' = '2';
   /**
-   * @deprecated Attention levels 1 and 2 now look the same, so this input no longer has any effect.
+   * @deprecated Since v12.0.0, attention levels 1 and 2 now look the same, so this input no longer has any effect.
    * This input will be removed in a future major version.
    */
   @Input() set attentionLevel(value: '1' | '2') {
