@@ -114,6 +114,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct size', async () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
+        width: '>=88px', // A text button is content-sized (min-width 88px)
         height: size('xl'),
       });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({

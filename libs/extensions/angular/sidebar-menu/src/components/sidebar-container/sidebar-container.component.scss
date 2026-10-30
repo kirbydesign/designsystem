@@ -7,14 +7,14 @@
 
   height: 100%; // Fallback for browsers that do not support dynamic viewport units
   height: 100dvh;
-  background-color: var(--sidebar-background-color, utils.get-color('tertiary'));
-  color: var(--sidebar-color, utils.get-color('tertiary-contrast'));
+  background-color: var(--sidebar-background-color, var(--kirby-tertiary));
+  color: var(--sidebar-color, var(--kirby-tertiary-contrast));
   display: flex;
   flex-direction: column;
 
   * {
     scrollbar-width: thin;
-    scrollbar-color: utils.get-color('semi-dark') utils.get-color('tertiary');
+    scrollbar-color: var(--kirby-semi-dark) var(--kirby-tertiary);
   }
 
   /* Works on Chrome, Edge, and Safari */
@@ -28,6 +28,9 @@
 
   /* get kirby color with 50% opacity */
   *::-webkit-scrollbar-thumb {
+    // no color-mix or other Safari-15-safe CSS custom property equivalent, so kept as SCSS.
+
+    // stylelint-disable-next-line kirby/use-design-tokens
     background-color: color.adjust(utils.get-color('semi-dark', $getValueOnly: true), $alpha: -0.5);
     border-radius: 20px;
     border: 4px solid transparent;

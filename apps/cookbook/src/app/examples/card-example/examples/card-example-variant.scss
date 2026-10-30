@@ -1,6 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use './card-example.shared';
 
+/* stylelint-disable-next-line kirby/use-design-tokens */
 $card-gap: utils.size(
   's'
 ); // use scss variable instead of custom property here for container query compatability

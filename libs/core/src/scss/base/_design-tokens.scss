@@ -1,5 +1,3 @@
-@use 'sass:color';
-@use 'sass:map';
 @use 'sass:meta';
 @use '../themes/colors';
 @use 'variables';
@@ -62,6 +60,12 @@
   }
 }
 
+@mixin icon-font-sizes() {
+  @each $name, $value in variables.$icon-font-sizes {
+    --kirby-icon-font-size-#{$name}: #{$value};
+  }
+}
+
 @mixin font-weights() {
   @each $name, $value in variables.$font-weight {
     --kirby-font-weight-#{$name}: #{$value};
@@ -89,6 +93,12 @@
 @mixin z-layers() {
   @each $name, $value in variables.$z-layers {
     --kirby-z-index-#{$name}: #{$value};
+  }
+}
+
+@mixin page-content-max-widths() {
+  @each $name, $value in variables.$page-content-max-widths {
+    --kirby-page-content-max-width-#{$name}: #{$value};
   }
 }
 
@@ -163,6 +173,9 @@
   /* FONT-SIZES */
   @include font-sizes;
 
+  /* ICON-FONT-SIZES */
+  @include icon-font-sizes;
+
   /* FONT-WEIGHT */
   @include font-weights;
 
@@ -180,6 +193,9 @@
 
   /* Z-INDEXES */
   @include z-layers;
+
+  /* PAGE CONTENT MAX-WIDTHS */
+  @include page-content-max-widths;
 
   /* BREAKPOINTS */
   @include breakpoints;

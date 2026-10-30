@@ -1,10 +1,8 @@
-@use 'sass:map';
-@use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$divider-color: utils.get-color('background-color');
-$shadow: utils.get-elevation(2);
-$item-height: utils.size('xxxl');
+$divider-color: var(--kirby-background-color);
+$shadow: var(--kirby-elevation-2);
+$item-height: var(--kirby-spacing-xxxl);
 
 :host {
   display: block;
@@ -29,7 +27,7 @@ $item-height: utils.size('xxxl');
 }
 
 ion-list-header {
-  background-color: utils.get-color('white');
+  background-color: var(--kirby-white);
   border-bottom: 1px solid $divider-color;
   padding: 0;
   text-transform: inherit;
@@ -41,20 +39,20 @@ ion-list-header {
 }
 
 ion-item {
-  --background: #{utils.get-color('white')};
-  --background-activated: #{utils.get-color('white-shade')};
-  --background-hover: #{utils.get-color('background-color')};
-  --background-focused: #{utils.get-color('background-color')};
+  --background: var(--kirby-white);
+  --background-activated: var(--kirby-white-shade);
+  --background-hover: var(--kirby-background-color);
+  --background-focused: var(--kirby-background-color);
   --inner-border-width: 0;
   --ion-safe-area-right: 0;
   --min-height: #{$item-height};
-  --padding-bottom: #{utils.size('xxs')};
-  --padding-end: #{utils.size('s')};
-  --padding-start: #{utils.size('s')};
-  --padding-top: #{utils.size('xxs')};
+  --padding-bottom: var(--kirby-spacing-xxs);
+  --padding-end: var(--kirby-spacing-s);
+  --padding-start: var(--kirby-spacing-s);
+  --padding-top: var(--kirby-spacing-xxs);
 
   display: flex;
-  font-size: utils.font-size('s');
+  font-size: var(--kirby-font-size-s);
   min-height: $item-height;
   overflow: visible;
   width: 100%;
@@ -69,29 +67,27 @@ ion-item-sliding {
     transform: translate3d(0, 0, 0);
   }
 
-  $list-colors: ('light'); // add supported list item theme colors here
-  @each $color-name, $color-value in $list-colors {
-    &.#{$color-name} {
-      @include themes.apply-light-theme;
+  // Supported list item theme colors. Add more `&.<color-name>` rules here as needed.
+  &.light {
+    @include themes.apply-light-theme;
 
-      --kirby-item-background: #{utils.get-color($color-name)};
-      --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
-      --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};
-      --kirby-item-background-hover: #{utils.get-color($color-name + '-tint')};
+    --kirby-item-background: var(--kirby-light);
+    --kirby-item-background-activated: var(--kirby-light-shade);
+    --kirby-item-background-focused: var(--kirby-light-shade);
+    --kirby-item-background-hover: var(--kirby-light-tint);
 
-      ion-item {
-        --background: #{utils.get-color($color-name)};
-        --color: #{utils.get-color($color-name + '-contrast')};
-        --background-activated: #{utils.get-color($color-name + '-shade')};
-        --background-focused: #{utils.get-color($color-name + '-shade')};
-        --background-hover: #{utils.get-color($color-name + '-tint')};
-      }
+    ion-item {
+      --background: var(--kirby-light);
+      --color: var(--kirby-light-contrast);
+      --background-activated: var(--kirby-light-shade);
+      --background-focused: var(--kirby-light-shade);
+      --background-hover: var(--kirby-light-tint);
     }
   }
 }
 
 ion-item-group {
-  margin-bottom: utils.size('m');
+  margin-bottom: var(--kirby-spacing-m);
 
   &:last-of-type {
     margin-bottom: 0;
@@ -105,14 +101,14 @@ ion-item-divider {
   background-color: transparent;
   border-color: transparent;
   min-height: 0;
-  padding: 0 utils.size('s') utils.size('xxs') utils.size('s');
+  padding: 0 var(--kirby-spacing-s) var(--kirby-spacing-xxs) var(--kirby-spacing-s);
   font-weight: inherit;
 }
 
 .footer {
   @include themes.apply-white-theme;
 
-  background-color: utils.get-color('white');
+  background-color: var(--kirby-white);
   border-top: 1px solid $divider-color;
   display: flex;
   align-items: center;
@@ -123,13 +119,13 @@ ion-item-divider {
 .no-more-items,
 .loading {
   width: 100%;
-  padding: utils.size('m') 0;
+  padding: var(--kirby-spacing-m) 0;
   text-align: center;
 }
 
 .swipe-action {
   display: flex;
-  color: #{utils.get-color('black')};
+  color: var(--kirby-black);
   background-color: transparent;
 
   ion-item-option {
@@ -255,22 +251,22 @@ kirby-list-item:last-of-type {
     border-radius: unset;
 
     --kirby-item-background: transparent;
-    --kirby-list-item-border-color: #{utils.get-color('medium')};
+    --kirby-list-item-border-color: var(--kirby-medium);
   }
 }
 
 :host-context(kirby-card) {
-  --kirby-list-item-border-color: #{utils.get-color('background-color')};
+  --kirby-list-item-border-color: var(--kirby-background-color);
 }
 
 :host-context(kirby-card.outlined) {
-  --kirby-list-item-border-color: #{utils.get-color('medium')};
+  --kirby-list-item-border-color: var(--kirby-medium);
 }
 
 :host-context(.item-spacing) {
   .list {
     kirby-list-item {
-      margin-bottom: utils.size('s');
+      margin-bottom: var(--kirby-spacing-s);
 
       & > ion-item,
       &:last-child {
@@ -280,8 +276,43 @@ kirby-list-item:last-of-type {
   }
 }
 
-@each $sizeName, $size in utils.$sizes {
-  .stand-alone-bottom-margin-#{$sizeName} {
-    margin-bottom: $size;
-  }
+// Bottom-margin utilities for stand-alone items.
+.stand-alone-bottom-margin-xxxxs {
+  margin-bottom: var(--kirby-spacing-xxxxs);
+}
+
+.stand-alone-bottom-margin-xxxs {
+  margin-bottom: var(--kirby-spacing-xxxs);
+}
+
+.stand-alone-bottom-margin-xxs {
+  margin-bottom: var(--kirby-spacing-xxs);
+}
+
+.stand-alone-bottom-margin-xs {
+  margin-bottom: var(--kirby-spacing-xs);
+}
+
+.stand-alone-bottom-margin-sm {
+  margin-bottom: var(--kirby-spacing-s);
+}
+
+.stand-alone-bottom-margin-md {
+  margin-bottom: var(--kirby-spacing-m);
+}
+
+.stand-alone-bottom-margin-lg {
+  margin-bottom: var(--kirby-spacing-l);
+}
+
+.stand-alone-bottom-margin-xl {
+  margin-bottom: var(--kirby-spacing-xl);
+}
+
+.stand-alone-bottom-margin-xxl {
+  margin-bottom: var(--kirby-spacing-xxl);
+}
+
+.stand-alone-bottom-margin-xxxl {
+  margin-bottom: var(--kirby-spacing-xxxl);
 }

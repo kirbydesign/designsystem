@@ -1,13 +1,12 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
-@use '@kirbydesign/core/src/scss/utils';
 
 $slide-button-container-width: 256px;
 $slide-button-spacing: 2px;
 $slide-button-width: 52px;
 $slide-button-container-height: $slide-button-width + 2 * $slide-button-spacing;
-$slide-button-container-bg-color: utils.get-color('primary');
-$slider-thumb-bg-color: utils.get-color('white');
-$slide-button-text-color: utils.get-color('primary-contrast');
+$slide-button-container-bg-color: var(--kirby-primary);
+$slider-thumb-bg-color: var(--kirby-white);
+$slide-button-text-color: var(--kirby-primary-contrast);
 $total-slider-thumb-width: $slide-button-width + $slide-button-spacing * 2;
 $slide-button-container-radius: $slide-button-width * 0.5;
 $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
@@ -26,12 +25,12 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
   & {
     transition: interaction-state.transition();
     appearance: none;
-    border-radius: utils.border-radius('circle');
+    border-radius: var(--kirby-border-radius-circle);
     background-color: $slider-thumb-bg-color;
     background-image: url('/assets/kirby/icons/svg/arrow-more.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: utils.size('m');
+    background-size: var(--kirby-spacing-m);
     width: $slide-button-width;
     height: $slide-button-width;
     border: none;
@@ -63,7 +62,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
 
     &:has(:focus-visible) {
       transition: interaction-state.transition();
-      box-shadow: utils.get-elevation(2), var(--kirby-focus-ring-md-inset);
+      box-shadow: var(--kirby-elevation-2), var(--kirby-focus-ring-md-inset);
     }
   }
 
@@ -76,7 +75,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
 
   .slide-button-text {
     position: absolute;
-    font-size: utils.font-size('n');
+    font-size: var(--kirby-font-size-n);
     margin: 0;
     line-height: 1;
     z-index: 1;

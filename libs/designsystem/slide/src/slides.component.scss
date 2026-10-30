@@ -9,8 +9,8 @@ $bullet-inactive-opacity: 0.2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: 0 utils.size('s');
-    margin-inline: utils.size('s');
+    margin-block: 0 var(--kirby-spacing-s);
+    margin-inline: var(--kirby-spacing-s);
 
     &-inner {
       display: flex;
@@ -22,16 +22,16 @@ $bullet-inactive-opacity: 0.2;
     display: flex;
     align-items: center;
     width: auto;
-    margin-inline-end: utils.size('s');
+    margin-inline-end: var(--kirby-spacing-s);
 
     /* stylelint-disable selector-pseudo-element-no-unknown */
     ::ng-deep .swiper-pagination-bullet {
       display: inline-block;
       width: $bullet-width;
       height: $bullet-height;
-      margin-inline: utils.size('xxxs');
-      border-radius: utils.border-radius('pill');
-      background: utils.get-color('black');
+      margin-inline: var(--kirby-spacing-xxxs);
+      border-radius: var(--kirby-border-radius-pill);
+      background: var(--kirby-black);
       opacity: $bullet-inactive-opacity;
 
       &-active {
@@ -48,7 +48,7 @@ $bullet-inactive-opacity: 0.2;
     display: none;
 
     // Adding one to default to make buttons clickable through box shadow.
-    z-index: utils.z('default') + 1;
+    z-index: calc(var(--kirby-z-index-default) + 1);
 
     @include utils.media('>=medium') {
       display: block;
@@ -65,7 +65,7 @@ $bullet-inactive-opacity: 0.2;
     }
 
     @include utils.slotted('button[kirby-button]') {
-      margin-inline: utils.size('xxs') 0;
+      margin-inline: var(--kirby-spacing-xxs) 0;
     }
   }
 
@@ -77,8 +77,8 @@ $bullet-inactive-opacity: 0.2;
 
   swiper-container::part(container) {
     box-sizing: border-box;
-    padding-block: utils.size('m');
-    margin-block: -(utils.size('m'));
+    padding-block: var(--kirby-spacing-m);
+    margin-block: calc(-1 * var(--kirby-spacing-m));
   }
 
   @include utils.media('<medium') {
@@ -86,7 +86,7 @@ $bullet-inactive-opacity: 0.2;
       margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
 
       &::part(container) {
-        padding-inline: utils.size('s');
+        padding-inline: var(--kirby-spacing-s);
       }
     }
 
@@ -108,9 +108,9 @@ $bullet-inactive-opacity: 0.2;
   .title {
     @include utils.slotted(h1, h2, h3, h4, h5, h6) {
       margin: 0;
-      font-size: utils.font-size('m');
-      font-weight: utils.font-weight('bold');
-      line-height: utils.line-height('m');
+      font-size: var(--kirby-font-size-m);
+      font-weight: var(--kirby-font-weight-bold);
+      line-height: var(--kirby-line-height-m);
     }
   }
 }
