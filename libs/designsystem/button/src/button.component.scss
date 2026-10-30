@@ -146,8 +146,21 @@ $button-margin: var(--kirby-spacing-xxxs);
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
   &.destructive {
-    --kirby-button-background-color: var(--kirby-danger);
-    --kirby-button-color: var(--kirby-danger-contrast);
+    --kirby-button-background-color: var(--kirby-color-fill-danger);
+    --kirby-button-color: var(--kirby-color-content-danger);
+    --kirby-button-border-color: var(--kirby-color-border-danger);
+
+    @include utils.hover {
+      --kirby-button-background-color: var(--kirby-color-fill-danger-hover);
+      --kirby-button-color: var(--kirby-color-content-danger-hover);
+      --kirby-button-border-color: var(--kirby-color-border-danger-hover);
+    }
+
+    &:active {
+      --kirby-button-background-color: var(--kirby-color-fill-danger-active);
+      --kirby-button-color: var(--kirby-color-content-danger-active);
+      --kirby-button-border-color: var(--kirby-color-border-danger-active);
+    }
   }
 }
 
@@ -357,23 +370,57 @@ $button-margin: var(--kirby-spacing-xxxs);
 
 :host-context(kirby-toggle-button) {
   &.success {
-    --kirby-button-background-color: var(--kirby-success);
-    --kirby-button-color: var(--kirby-success-contrast);
+    --kirby-button-background-color: var(--kirby-color-fill-success-loud);
+    --kirby-button-color: var(--kirby-color-content-success-loud);
+    --kirby-button-border-color: var(--kirby-color-border-success-loud);
+
+    @include utils.hover {
+      --kirby-button-background-color: var(--kirby-color-fill-success-loud-hover);
+      --kirby-button-color: var(--kirby-color-content-success-loud-hover);
+      --kirby-button-border-color: var(--kirby-color-border-success-loud-hover);
+    }
+
+    &:active {
+      --kirby-button-background-color: var(--kirby-color-fill-success-loud-active);
+      --kirby-button-color: var(--kirby-color-content-success-loud-active);
+      --kirby-button-border-color: var(--kirby-color-border-success-loud-active);
+    }
   }
 
   &.warning {
-    --kirby-button-background-color: var(--kirby-warning);
-    --kirby-button-color: var(--kirby-warning-contrast);
+    --kirby-button-background-color: var(--kirby-color-fill-warning-loud);
+    --kirby-button-color: var(--kirby-color-content-warning-loud);
+    --kirby-button-border-color: var(--kirby-color-border-warning-loud);
+
+    @include utils.hover {
+      --kirby-button-background-color: var(--kirby-color-fill-warning-loud-hover);
+      --kirby-button-color: var(--kirby-color-content-warning-loud-hover);
+      --kirby-button-border-color: var(--kirby-color-border-warning-loud-hover);
+    }
+
+    &:active {
+      --kirby-button-background-color: var(--kirby-color-fill-warning-loud-active);
+      --kirby-button-color: var(--kirby-color-content-warning-loud-active);
+      --kirby-button-border-color: var(--kirby-color-border-warning-loud-active);
+    }
   }
 
   &.danger {
-    --kirby-button-background-color: var(--kirby-danger);
-    --kirby-button-color: var(--kirby-danger-contrast);
-  }
+    --kirby-button-background-color: var(--kirby-color-fill-danger-loud);
+    --kirby-button-color: var(--kirby-color-content-danger-loud);
+    --kirby-button-border-color: var(--kirby-color-border-danger-loud);
 
-  &:is(.success, .warning, .danger) {
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active('s');
+    @include utils.hover {
+      --kirby-button-background-color: var(--kirby-color-fill-danger-loud-hover);
+      --kirby-button-color: var(--kirby-color-content-danger-loud-hover);
+      --kirby-button-border-color: var(--kirby-color-border-danger-loud-hover);
+    }
+
+    &:active {
+      --kirby-button-background-color: var(--kirby-color-fill-danger-loud-active);
+      --kirby-button-color: var(--kirby-color-content-danger-loud-active);
+      --kirby-button-border-color: var(--kirby-color-border-danger-loud-active);
+    }
   }
 }
 
