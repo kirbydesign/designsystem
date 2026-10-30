@@ -31,9 +31,9 @@ $item-height: var(--kirby-spacing-xxxl);
   border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
 }
 
-// Blend the list border into the card to avoid a double border.
+// Blend the list border into the list background to avoid a double border inside cards.
 :host-context(kirby-card) .kirby-surface-raised {
-  border-color: var(--kirby-card-main-background-color);
+  border-color: var(--kirby-color-fill-base);
 }
 
 ion-list-header {
