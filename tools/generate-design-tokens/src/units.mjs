@@ -26,7 +26,6 @@ export function percentageTransform(config) {
   };
 }
 
-/** DTCG shadow tokens, single or layered, as a CSS `box-shadow` value. */
 export const shadowTransform = {
   name: 'value/shadow',
   type: 'value',

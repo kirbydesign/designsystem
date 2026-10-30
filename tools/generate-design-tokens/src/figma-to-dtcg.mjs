@@ -88,11 +88,6 @@ function aliasAsReferenceOrLiteral(path, node, isKnownToken, warnings) {
   return node.$value;
 }
 
-/**
- * Figma names alias targets in the same collection without the mode group they're exported
- * under (e.g. `color/border/base` from `base surface/range/color/fill`), so after the exact
- * path, look the target up relative to the token's groups, nearest first.
- */
 function aliasTargetCandidates(path, aliasTarget) {
   const groupKeys = ancestorKeysOf(path).reverse();
   return [aliasTarget, ...groupKeys.map((groupKey) => `${groupKey}/${aliasTarget}`)].flatMap(

@@ -8,7 +8,6 @@ const PREFIX = 'kirby';
 const SURFACES = ['base', 'raised', 'brand'];
 
 export default {
-  /* Ignore Figma variables that still needs work (in Figma or code) to be usable */
   ignore: [
     'font-size/**',
     'font/weight/**',
@@ -42,7 +41,6 @@ export default {
     'primitives.css': [{ include: ['**'], section: ([group]) => group.toLowerCase() }],
   },
 
-  /* Figma exports each shadow as a group of x, y, blur, spread and color */
   shadows: ['* surface/elevation/*', '* surface/card/elevation'],
 
   units: {
