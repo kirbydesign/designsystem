@@ -18,6 +18,7 @@ export async function loadConfig(filePath) {
  * - `route(path)`: `{ ignore: true }`, a route for the first block that includes the path,
  *   or `undefined` when nothing does.
  * - `unit(path, figmaScopes)`: the first unit that applies, or `undefined`.
+ * - `isShadow(path)`: whether the Figma group at `path` is a shadow.
  * Throws on the first invalid entry.
  */
 export function validateConfig(raw) {
@@ -27,9 +28,11 @@ export function validateConfig(raw) {
   const ignore = validateGlobs(raw.ignore ?? [], 'ignore');
   const blocks = validateOutputs(raw.outputs);
   const units = validateUnits(raw.units);
+  const shadows = validateGlobs(raw.shadows ?? [], 'shadows');
   return {
     route: (path) => routeFor(path, { ignore, blocks, variableName: raw.variableName }),
     unit: (path, figmaScopes) => units.find((unit) => unit.appliesTo(path, figmaScopes))?.suffix,
+    isShadow: (path) => matchesAny(shadows, path.join('/')),
   };
 }
 

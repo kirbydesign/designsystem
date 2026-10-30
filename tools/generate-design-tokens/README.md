@@ -33,6 +33,11 @@ npx design-tokens \
   --css-only libs/core/src/scss/themes/tokens.json
 ```
 
+CI runs this command on every pull request and fails if the result differs
+from the committed CSS, so the committed JSON, generator, and config always
+reproduce it byte-for-byte. Regenerate and commit the CSS whenever one of
+them changes.
+
 ## Brand Theme
 
 Brands can use `--baseline` to build on top of the built-in theme. The baseline
@@ -72,12 +77,13 @@ theming model, so the generator itself stays generic.
 
 The config accepts the following fields:
 
-| Field          | Description                                                                                              |
-| -------------- | -------------------------------------------------------------------------------------------------------- |
-| `ignore`       | Globs for tokens left out of CSS. They are still written to `tokens.json`.                               |
-| `variableName` | Required. `(path) => parts`, e.g. `['kirby', 'color', 'fill']`. Parts are lowercased and joined.         |
-| `outputs`      | Required. `{ 'file.css': [block, …] }`. See below.                                                       |
-| `units`        | `{ px: { scopes, include }, … }`. A numeric token gets the first unit whose Figma scopes or globs apply. |
+| Field          | Description                                                                                                    |
+| -------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ignore`       | Globs for tokens left out of CSS. They are still written to `tokens.json`.                                     |
+| `variableName` | Required. `(path) => parts`, e.g. `['kirby', 'color', 'fill']`. Parts are lowercased and joined.               |
+| `outputs`      | Required. `{ 'file.css': [block, …] }`. See below.                                                             |
+| `units`        | `{ px: { scopes, include }, … }`. A numeric token gets the first unit whose Figma scopes or globs apply.       |
+| `shadows`      | Globs for Figma groups that are shadows. Each becomes one DTCG shadow token, rendered as a `box-shadow` value. |
 
 Globs follow Node's
 [`path.matchesGlob`](https://nodejs.org/api/path.html#pathmatchesglobpath-pattern):
@@ -88,6 +94,10 @@ Each token goes to the **first** block that includes it, in the order the
 blocks are written, so put specific blocks before catch-alls such as
 `include: ['**']`. Every token must be ignored or included by a block;
 otherwise the pipeline fails.
+
+Figma has no shadow variables, so a shadow is exported as a group of `x`, `y`, `blur`,
+`spread` and `color`, or as a group of such groups for a layered shadow. Groups matched by
+`shadows` are combined into one token, e.g. `--kirby-elevation-4: 0 0 5px 0 rgba(…), 0 10px 15px -10px rgba(…)`.
 
 | Block field        | Description                                                               |
 | ------------------ | ------------------------------------------------------------------------- |

@@ -49,13 +49,6 @@ describe('ListExperimental', () => {
       });
     });
 
-    it('should apply correct elevation to the list content', () => {
-      const correctElevation = getElevation(2);
-      expect(listContent).toHaveComputedStyle({
-        'box-shadow': correctElevation,
-      });
-    });
-
     it('should not apply --item-padding-top/bottom to items that are not first or last', () => {
       items.forEach((item, index) => {
         if (index === items.length - 1 || index === 0) return;

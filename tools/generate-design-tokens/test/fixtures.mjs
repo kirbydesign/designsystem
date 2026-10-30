@@ -21,6 +21,7 @@ export const config = validateConfig({
     'p.css': [{ include: ['**'], section: ([group]) => group }],
   },
   units: { px: { scopes: ['GAP'], include: ['* surface/elevation/**'] } },
+  shadows: ['* surface/elevation/*'],
 });
 
 /** A config that sends every token to one file under `:root`. */

@@ -214,3 +214,44 @@ test('warns about missing sibling tokens without comparing unrelated sections', 
   assert.equal(warnings.length, 1);
   assert.match(warnings[0], /s\.css \[color\].*\.kirby-surface-raised.*--kirby-color-fill-extra/);
 });
+
+test('renders shadow tokens as box-shadow values', async () => {
+  const shadowConfig = validateConfig({
+    variableName: (path) => ['kirby', ...path],
+    outputs: { 'shadow.css': [{ include: ['**'] }] },
+    units: { px: { include: ['elevation/**'] } },
+    shadows: ['elevation/*'],
+  });
+  const layer = (y, blur, spread, alpha) => ({
+    x: { $type: 'number', $value: 0 },
+    y: { $type: 'number', $value: y },
+    blur: { $type: 'number', $value: blur },
+    spread: { $type: 'number', $value: spread },
+    color: {
+      $type: 'color',
+      $value: { colorSpace: 'srgb', components: [28 / 255, 28 / 255, 28 / 255], alpha },
+    },
+  });
+  const source = figmaToDtcg(
+    [
+      {
+        elevation: {
+          card: layer(1, 24, 0, 0.04),
+          4: { '01': layer(0, 5, 0, 0.04), '02': layer(10, 15, -10, 0.15) },
+        },
+      },
+    ],
+    shadowConfig
+  );
+  const out = mkdtempSync(join(tmpdir(), 'dt-shadow-'));
+  const file = join(out, 'tokens.json');
+  writeFileSync(file, JSON.stringify(source));
+  const { routes, emissions } = routeTokens(source, shadowConfig);
+  await writeCss({ routes, emissions, outDir: out, sourceFile: file, config: shadowConfig });
+  const css = readFileSync(join(out, 'shadow.css'), 'utf8');
+  assert.match(css, /--kirby-elevation-card: 0 1px 24px 0 rgba\(28, 28, 28, 0\.04\);/);
+  assert.match(
+    css,
+    /--kirby-elevation-4: 0 0 5px 0 rgba\(28, 28, 28, 0\.04\), 0 10px 15px -10px rgba\(28, 28, 28, 0\.15\);/
+  );
+});
