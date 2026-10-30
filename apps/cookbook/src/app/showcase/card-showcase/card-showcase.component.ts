@@ -59,7 +59,7 @@ export class CardShowcaseComponent {
       description:
         'Sets the variant of a card. The recommended is "elevated" which is also the default',
       defaultValue: 'elevated',
-      type: ['elevated', 'flat', 'outlined'],
+      type: ['elevated', 'flat (deprecated, maps to elevated)', 'outlined'],
     },
     {
       name: 'hasPadding',
@@ -71,7 +71,7 @@ export class CardShowcaseComponent {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: '',
-      type: ['tertiary', 'dark'],
+      type: ['tertiary', 'dark (deprecated, maps to tertiary)'],
     },
   ];
 

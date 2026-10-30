@@ -9,6 +9,7 @@ const config: StorybookConfig = {
   addons: [
     getAbsolutePath('@storybook/addon-docs'),
     getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('storybook-addon-pseudo-states'),
     {
       name: getAbsolutePath('@chromatic-com/storybook'),
       options: {

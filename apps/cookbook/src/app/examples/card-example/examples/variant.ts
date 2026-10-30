@@ -7,11 +7,11 @@ const config = {
   <div class="variant-card-container">
     <kirby-card hasPadding="true">
       <strong>Elevated (default)</strong>
-      <p>The card is slightly elevated from the background with a drop shadow.</p>
+      <p>The card is elevated from the background.</p>
     </kirby-card>
     <kirby-card hasPadding="true" variant="flat">
       <strong>Flat</strong>
-      <p>Has no shadow and appears lower in the visual hierarchy.</p>
+      <p>Deprecated, and now visually mapped to elevated.</p>
     </kirby-card>
     <kirby-card [hasPadding]="true" variant="outlined">
       <strong>Outlined card</strong>

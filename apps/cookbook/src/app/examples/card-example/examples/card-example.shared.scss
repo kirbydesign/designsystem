@@ -34,7 +34,6 @@ $_card-header-notification-colors-map: (
   'warning': 'orange',
   'danger': 'red',
 );
-$_card-colors: 'tertiary', 'dark';
 
 button {
   height: var(--kirby-size-fat-finger);
@@ -60,16 +59,6 @@ button {
 
     &:hover {
       background-color: var(--kirby-semi-light-shade);
-    }
-  }
-
-  @each $color in $_card-colors {
-    &.#{$color} {
-      background-color: var(--kirby-#{$color});
-
-      &:hover {
-        background-color: var(--kirby-#{$color}-shade);
-      }
     }
   }
 

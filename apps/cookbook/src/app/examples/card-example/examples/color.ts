@@ -4,23 +4,11 @@ import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 const config = {
   selector: 'cookbook-card-example-color',
-  codeSnippet: `<kirby-card hasPadding="true" [themeColor]="color">
+  template: `<kirby-card hasPadding="true" [themeColor]="'tertiary'">
   <strong>A themed card</strong>
-  <p>This cards color is defined by the <code>themeColor</code> input property.</p>
-  <p>Recommended values for themeColor are: <br> <code>'tertiary' | 'dark'</code></p>
-  <p>Use the buttons below to see the different options 👇</p>
+  <p>This cards color is defined by the themeColor input property.</p>
+  <p>The only recommended value for themeColor is tertiary.</p>
 </kirby-card>`,
-  template: `<kirby-card hasPadding="true" [themeColor]="color">
-    <strong>A themed card</strong>
-    <p>This cards color is defined by the <code>themeColor</code> input property.</p>
-    <p>Recommended values for themeColor are: <br> <code>'tertiary' | 'dark'</code></p>
-    <p>Use the buttons below to see the different options 👇</p>
-</kirby-card>
-
-<div class="card-option-button-group">
-    <button (click)="setThemeColor('tertiary')" class="tertiary"></button>
-    <button (click)="setThemeColor('dark')" class="dark"></button>
-</div>`,
 };
 
 @Component({
@@ -31,11 +19,4 @@ const config = {
 })
 export class CardExampleColorComponent {
   template: string = config.template;
-  codeSnippet: string = config.codeSnippet;
-
-  color: string = 'tertiary';
-
-  setThemeColor(color: string) {
-    this.color = color;
-  }
 }
