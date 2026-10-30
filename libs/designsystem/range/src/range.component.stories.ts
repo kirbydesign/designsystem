@@ -1,11 +1,25 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { RangeComponent } from '@kirbydesign/designsystem/range';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+
+// eslint-disable-next-line no-restricted-imports
+import {
+  idsOnSurfaces,
+  interactionStates,
+  pseudoStatesFor,
+  renderOnSurfaces,
+} from '../../.storybook/story-helpers';
 
 const meta: Meta<RangeComponent> = {
   component: RangeComponent,
   title: 'Components / Range',
+  decorators: [
+    moduleMetadata({
+      imports: [CardComponent],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<RangeComponent>;
@@ -64,20 +78,78 @@ export const RangePin: Story = {
   }),
 };
 
-export const Focused: Story = {
-  args: {
-    value: 50,
-    min: 0,
-    max: 100,
+const rangeVariants: {
+  id: string;
+  label: string;
+  ticks?: boolean;
+  minLabel?: string;
+  maxLabel?: string;
+}[] = [
+  { id: 'default', label: 'Default', minLabel: 'Min', maxLabel: 'Max' },
+  { id: 'ticks', label: 'Ticks', ticks: true },
+];
+
+// Disabled ranges can't be interacted with, so disabled is shown as a state of its own
+const rangeStates = [...interactionStates, 'disabled'] as const;
+
+// Ionic exposes the knob's interaction states as parts, which storybook-addon-pseudo-states
+// can't force, so the parts are added to the knobs instead
+const addKnobPart = (canvasElement: HTMLElement, state: string, part: string) => {
+  const ionRanges = canvasElement.querySelectorAll(`kirby-range[id$="-${state}"] ion-range`);
+
+  ionRanges.forEach((ionRange) => {
+    const knob = ionRange.shadowRoot.querySelector('[part~="knob"]');
+    knob.part.add(part);
+  });
+};
+
+const forceKnobStates = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+  const ionRanges = Array.from(canvasElement.querySelectorAll('ion-range'));
+  await TestHelper.whenReady(ionRanges);
+
+  addKnobPart(canvasElement, 'hover', 'hover');
+  addKnobPart(canvasElement, 'active', 'activated');
+  addKnobPart(canvasElement, 'focus-visible', 'focused');
+};
+
+export const InteractionStates: Story = {
+  parameters: {
+    pseudo: pseudoStatesFor(
+      idsOnSurfaces(
+        'range',
+        rangeVariants.map((variant) => variant.id)
+      ),
+      'ion-range'
+    ),
   },
-  render: (args) => ({
-    props: args,
-    template: `<kirby-range ${argsToTemplate(args)}></kirby-range>`,
-    styles: [':host { padding: 8px; }'],
-  }),
-  play: async ({ canvasElement }) => {
-    const range = canvasElement.querySelector('ion-range');
-    await TestHelper.whenReady(range);
-    (range as HTMLElement).focus();
-  },
+  render: renderOnSurfaces(
+    `
+    <p class="kirby-text-normal-bold">{{ surface }}</p>
+    @for (variant of variants; track variant.id) {
+      <p class="kirby-text-small-light">{{ variant.label }}</p>
+      <div class="row">
+        @for (state of states; track state) {
+          <div style="width: 160px">
+            <p class="kirby-text-xsmall">{{ state }}</p>
+            <kirby-range
+              [attr.id]="'range-' + surface + '-' + variant.id + '-' + state"
+              [value]="50"
+              [min]="0"
+              [max]="100"
+              [step]="variant.ticks ? 25 : 1"
+              [ticks]="!!variant.ticks"
+              [minLabel]="variant.minLabel ?? ''"
+              [maxLabel]="variant.maxLabel ?? ''"
+              [disabled]="state === 'disabled'"
+            ></kirby-range>
+          </div>
+        }
+      </div>
+    }
+  `,
+    'max-content',
+    { variants: rangeVariants, states: rangeStates },
+    { stacked: true }
+  ),
+  play: forceKnobStates,
 };

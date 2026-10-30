@@ -18,7 +18,7 @@ import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { AffixDirective } from './directives/affix/affix.directive';
 
-const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
+const { size, fontSize, fontWeight, lineHeight } = DesignTokenHelper;
 
 describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
@@ -66,16 +66,6 @@ describe('FormFieldComponent', () => {
       spectator = createHost(`<kirby-form-field></kirby-form-field>`);
       const labelElement = spectator.queryHost('label');
       expect(labelElement).toBeNull();
-    });
-  });
-
-  describe('when disabled', () => {
-    it('should not have elevation', () => {
-      spectator = createHost(`<kirby-form-field>
-        <input kirby-input disabled value="Disabled input" />
-      </kirby-form-field>`);
-      const inputElement = spectator.queryHost('input[kirby-input]');
-      expect(inputElement).toHaveComputedStyle({ 'box-shadow': 'none' });
     });
   });
 

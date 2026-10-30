@@ -1,10 +1,6 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 
-$tick-height: 6px;
-$tick-width: 6px;
-$knob-shadow:
-  0 5px 10px 0 rgb(28 28 28 / 30%),
-  0 0 5px 0 rgb(28 28 28 / 8%);
+$tick-size: var(--kirby-spacing-xxs);
 
 :host {
   display: flex;
@@ -13,28 +9,18 @@ $knob-shadow:
 }
 
 ion-range {
-  &:focus-visible::part(knob) {
-    transition: interaction-state.transition();
-    box-shadow: $knob-shadow, var(--kirby-focus-ring-md-inset);
-  }
-  @include interaction-state.apply-hover {
-    --knob-background: #{interaction-state.get-state-color('white', 'xxs')};
-  }
-  @include interaction-state.apply-active {
-    --knob-background: #{interaction-state.get-state-color('white', 's')};
-  }
-
   // Wrap declarations to avoid mixing with nested rules.
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --knob-background: var(--kirby-white);
-    --knob-box-shadow: #{$knob-shadow};
-    --knob-size: 24px;
-    --pin-color: var(--kirby-text-color-black);
-    --pin-background: var(--kirby-semi-light);
-    --bar-background: var(--kirby-medium);
-    --bar-background-active: var(--kirby-dark);
+    --knob-background: var(--kirby-range-color-fill-engaged);
+    --knob-box-shadow: 0 0 0 2px var(--kirby-color-fill-base);
+    --knob-size: var(--kirby-spacing-s);
+    --knob-handle-size: var(--kirby-size-fat-finger);
+    --pin-color: var(--kirby-color-content-raised);
+    --pin-background: var(--kirby-color-fill-raised);
+    --bar-background: var(--kirby-range-color-fill);
+    --bar-background-active: var(--kirby-range-color-fill-engaged);
     --bar-border-radius: var(--kirby-spacing-xxxs);
     --bar-height: var(--kirby-spacing-xxxxs);
 
@@ -44,23 +30,35 @@ ion-range {
   /* stylelint-enable no-duplicate-selectors */
 
   &.range-disabled {
-    --knob-background: var(--kirby-medium);
-    --knob-box-shadow: none;
-    --bar-background: var(--kirby-semi-light);
-    --bar-background-active: var(--kirby-medium);
-
-    &::part(tick) {
-      background: var(--kirby-semi-light);
-    }
+    opacity: var(--kirby-opacity-40);
   }
 
   &.range-has-pin {
-    padding: 0 $tick-width * 0.5;
+    padding: 0 calc(#{$tick-size} / 2);
   }
 
   &::part(knob) {
     transition: interaction-state.transition();
-    transition-property: background;
+    transition-property: background, transform;
+  }
+
+  &::part(knob hover) {
+    --knob-background: var(--kirby-range-color-fill-engaged-hover);
+  }
+
+  &::part(knob activated),
+  &::part(knob pressed) {
+    --knob-background: var(--kirby-range-color-fill-engaged-active);
+  }
+
+  &::part(knob hover),
+  &::part(knob activated),
+  &::part(knob pressed) {
+    transform: scale(1.25);
+  }
+
+  &::part(knob focused) {
+    box-shadow: var(--kirby-focus-ring-md-outer);
   }
 
   &::part(pin) {
@@ -87,21 +85,20 @@ ion-range {
   &::part(tick),
   &::part(tick-active) {
     border-radius: var(--kirby-border-radius-circle);
-    width: $tick-width;
-    height: $tick-height;
-    margin-top: 1px; // compensate for different height of ionic tick (8px)
+    width: $tick-size;
+    height: $tick-size;
+    margin-inline-start: calc(#{$tick-size} / -2);
     z-index: 1;
-    margin-inline-start: -$tick-width * 0.5;
   }
 
   &::part(tick) {
-    background: var(--kirby-medium);
+    background: var(--kirby-range-color-fill);
   }
 }
 
 label {
   font-size: var(--kirby-font-size-xs);
   line-height: var(--kirby-line-height-xs);
-  color: var(--kirby-text-color-semi-dark);
+  color: var(--kirby-color-content-base-quiet);
   margin-top: calc(-1 * var(--kirby-spacing-xxxs));
 }

@@ -1,29 +1,8 @@
 @use '../form-field-inputs.shared' as shared;
-@use '@kirbydesign/core/src/scss/interaction-state';
 
 $padding-block-size-md: calc(#{shared.$form-field-input-padding} * 0.5);
 
 :host {
-  &:not(:disabled) {
-    @include interaction-state.apply-hover {
-      background-color: var(--kirby-inputs-background-color-hover);
-      cursor: text;
-    }
-
-    @include interaction-state.apply-active {
-      background-color: var(--kirby-inputs-background-color-active);
-    }
-
-    // Wrap declarations to avoid mixing with nested rules.
-    // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-    /* stylelint-disable no-duplicate-selectors */
-    & {
-      transition: interaction-state.transition();
-      transition-property: background-color;
-    }
-    /* stylelint-enable no-duplicate-selectors */
-  }
-
   &[type='date'] {
     // Hide the builtin picker icon - we use our own calendar icon with showPicker()
     &::-webkit-calendar-picker-indicator {
@@ -59,13 +38,9 @@ $padding-block-size-md: calc(#{shared.$form-field-input-padding} * 0.5);
 
 :host(.md) {
   border-radius: var(--kirby-border-radius-l);
-  padding-block: $padding-block-size-md;
-
-  &.error {
-    padding-block: calc(
-      #{$padding-block-size-md} - 1px
-    ); // subtract border width from padding to maintain overall height
-  }
+  padding-block: calc(
+    #{$padding-block-size-md} - #{shared.$form-field-input-border-width}
+  ); // subtract border width from padding to maintain overall height
 }
 
 /* clean-css ignore:start */
@@ -85,14 +60,14 @@ $padding-block-size-md: calc(#{shared.$form-field-input-padding} * 0.5);
 }
 
 :host-context(.date-mask-wrapper) {
-  color: var(--kirby-text-color-semi-dark);
+  color: var(--kirby-color-content-raised-quiet);
 }
 
 .date-mask {
   font-family: shared.$form-field-input-font-family;
   line-height: shared.$form-field-input-line-height;
   font-size: var(--kirby-font-size-n);
-  color: var(--kirby-white-contrast);
+  color: var(--kirby-color-content-raised);
   position: absolute;
   top: 0;
   left: 0;

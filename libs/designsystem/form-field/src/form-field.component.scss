@@ -69,7 +69,7 @@ label {
 
   .semi-dark-text {
     @include utils.slotted(span, h1, h2, h3, h4, h5, h6, p, data) {
-      color: var(--kirby-text-color-semi-dark);
+      color: var(--kirby-color-content-raised-quiet);
     }
   }
 }

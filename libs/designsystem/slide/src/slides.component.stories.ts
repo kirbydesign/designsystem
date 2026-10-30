@@ -4,6 +4,8 @@ import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/ca
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
+// eslint-disable-next-line no-restricted-imports
+import { renderOnSurfaces } from '../../.storybook/story-helpers';
 import { SlidesExampleComponent } from '~/app/examples/slides-example/slides-example.component';
 
 const meta: Meta<SlidesComponent> = {
@@ -50,4 +52,16 @@ export const CookbookExamples: Story = {
   render: () => ({
     template: `<cookbook-slides-example></cookbook-slides-example>`,
   }),
+};
+
+export const Surfaces: Story = {
+  render: renderOnSurfaces(
+    `
+    <kirby-slides [title]="surface" [showNavigation]="true" [slides]="slides">
+      <p *kirbySlide="let slide" class="kirby-text-normal">{{ slide }}</p>
+    </kirby-slides>
+  `,
+    '320px',
+    { slides: [...Array(9).keys()].map((number) => `Slide ${number + 1}`) }
+  ),
 };

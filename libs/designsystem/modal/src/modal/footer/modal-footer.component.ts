@@ -33,7 +33,12 @@ export class ModalFooterComponent extends ModalElementComponent {
 
   @HostBinding('class')
   get _cssClass() {
-    return [this.themeColor, this.type].filter((cssClass) => !!cssClass);
+    return [this.themeColor, this.type, this.surface].filter((cssClass) => !!cssClass);
+  }
+
+  private get surface(): string | null {
+    if (this.type === 'inline') return null;
+    return this.themeColor === 'light' ? 'kirby-surface-base' : 'kirby-surface-raised';
   }
 
   constructor(

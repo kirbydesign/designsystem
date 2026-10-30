@@ -5,7 +5,9 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { InputComponent } from './input.component';
 
-const { getColor, size } = DesignTokenHelper;
+const { size } = DesignTokenHelper;
+const getTokenColor = (name: string) =>
+  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
 
 describe('InputComponent', () => {
   let spectator: SpectatorHost<InputComponent>;
@@ -24,10 +26,6 @@ describe('InputComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should render with correct color', () => {
-    expect(element).toHaveComputedStyle({ color: getColor('black') });
-  });
-
   it('should render with default height', () => {
     expect(element).toHaveComputedStyle({ height: size('xxxl') });
   });
@@ -42,10 +40,10 @@ describe('InputComponent', () => {
     expect(element).toHaveComputedStyle({ 'box-sizing': 'border-box' });
   });
 
-  it('should render without border', () => {
+  it('should render with border', () => {
     expect(element).toHaveComputedStyle({
-      'border-width': '0px',
-      'border-style': 'none',
+      'border-width': '1px',
+      'border-style': 'solid',
     });
   });
 
@@ -121,24 +119,12 @@ describe('InputComponent', () => {
       expect(element).toHaveComputedStyle({
         'border-width': '1px',
         'border-style': 'solid',
-        'border-color': getColor('danger'),
+        'border-color': getTokenColor('border-raised-danger'),
       });
     });
 
     it('should render with correct height', () => {
       expect(element).toHaveComputedStyle({ height: size('xxxl') });
-    });
-  });
-
-  describe('when disabled', () => {
-    beforeEach(() => {
-      element.disabled = true;
-    });
-
-    it('should render with correct background-color', () => {
-      expect(element).toHaveComputedStyle({
-        'background-color': getColor('light', 'tint'),
-      });
     });
   });
 

@@ -169,8 +169,7 @@ export class ButtonComponent implements AfterContentInit, OnDestroy, OnInit {
     }
 
     if (hasText && !this.showIconOnly) {
-      this._isIconLeft =
-        this.elementRef.nativeElement.querySelector('.content-layer').firstChild === iconElement;
+      this._isIconLeft = this.elementRef.nativeElement.firstChild === iconElement;
       this._isIconRight = !this._isIconLeft;
     }
   }

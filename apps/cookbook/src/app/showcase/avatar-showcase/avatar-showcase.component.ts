@@ -76,8 +76,8 @@ export class AvatarShowcaseComponent {
       type: ['true', 'false'],
     },
     {
-      name: 'stroke',
-      description: 'Adds an outline to the avatar.',
+      name: 'stroke (deprecated)',
+      description: 'Deprecated - has no effect. The avatar always has an outline.',
       defaultValue: 'false',
       type: ['true', 'false'],
     },

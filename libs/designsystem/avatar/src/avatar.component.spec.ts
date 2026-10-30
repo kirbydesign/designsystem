@@ -37,18 +37,14 @@ describe('AvatarComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should render with correct default colors', () => {
-    spectator = createHost(`
-    <kirby-avatar>
-      <kirby-icon name="qr"></kirby-icon>
-    </kirby-avatar>
-    `);
+  it('should warn that stroke is deprecated when stroke is set', () => {
+    const warnSpy = spyOn(console, 'warn');
 
-    const avatar = spectator.queryHost<HTMLElement>('.avatar');
-    expect(avatar).toHaveComputedStyle({
-      'background-color': getColor('white'),
-      color: getColor('light', 'contrast'),
-    });
+    spectator = createHost(`<kirby-avatar [stroke]="true"></kirby-avatar>`);
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      jasmine.stringContaining(`The 'stroke' input is deprecated`)
+    );
   });
 
   describe('when rendering Avatar with imageSrc set', () => {
@@ -253,9 +249,7 @@ describe('AvatarComponent', () => {
       ...ColorHelper.notificationColors,
       ...ColorHelper.brandColors,
       DesignTokenHelper.getColor('medium'),
-      DesignTokenHelper.getColor('white'),
       DesignTokenHelper.getColor('dark'),
-      DesignTokenHelper.getColor('light'),
       DesignTokenHelper.getColor('semi-light'),
     ];
     colors.forEach((color) => {

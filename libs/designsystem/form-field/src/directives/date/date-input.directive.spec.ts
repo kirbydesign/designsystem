@@ -138,13 +138,15 @@ describe('DateInputDirective', () => {
         expect(datemaskLineHeight).toEqual(inputLineHeight);
       });
 
-      it('should have same padding as input padding', () => {
+      it('should align its text with the input text', () => {
         const datemask = spectator.element.parentNode.querySelector('.date-mask');
 
-        const inputPadding = TestHelper.getCssProperty(spectator.element, 'padding');
-        const datemaskPadding = TestHelper.getCssProperty(datemask, 'padding');
+        const inputTextOffset =
+          parseFloat(TestHelper.getCssProperty(spectator.element, 'padding-top')) +
+          parseFloat(TestHelper.getCssProperty(spectator.element, 'border-top-width'));
+        const datemaskTextOffset = parseFloat(TestHelper.getCssProperty(datemask, 'padding-top'));
 
-        expect(datemaskPadding).toEqual(inputPadding);
+        expect(datemaskTextOffset).toEqual(inputTextOffset);
       });
     });
   });

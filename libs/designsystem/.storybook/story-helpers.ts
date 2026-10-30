@@ -67,10 +67,16 @@ export const idsOnSurfaces = (prefix: string, variantIds: readonly string[]) =>
 /**
  * Renders `content` inside a card for each surface. `surface` is available in the content template,
  * and elements can be laid out side by side with `class="row"`.
+ * Pass `stacked` to place the cards below each other instead of side by side.
  * Requires `CardComponent` to be imported by the story.
  */
 export const renderOnSurfaces =
-  (content: string, columnWidth = '320px', props: Record<string, unknown> = {}) =>
+  (
+    content: string,
+    columnWidth = '320px',
+    props: Record<string, unknown> = {},
+    { stacked = false }: { stacked?: boolean } = {}
+  ) =>
   () => ({
     props: { ...props, surfaces },
     template: `
@@ -82,5 +88,5 @@ export const renderOnSurfaces =
         }
       </div>
     `,
-    styles: [gridStyles(surfaces.length, columnWidth), rowStyles],
+    styles: [gridStyles(stacked ? 1 : surfaces.length, columnWidth), rowStyles],
   });

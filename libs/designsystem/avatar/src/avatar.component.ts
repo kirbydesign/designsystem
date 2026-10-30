@@ -28,7 +28,16 @@ export class AvatarComponent {
   @Input() imageSrc: string;
   @Input() imageLoading: 'eager' | 'lazy' | undefined;
   @Input() altText: string;
-  @Input() stroke: boolean;
+  /**
+   * @deprecated The avatar now always has an outline, so this input no longer has any effect.
+   * This input will be removed in a future major version.
+   */
+  @Input() set stroke(_value: boolean) {
+    console.warn(
+      `[Kirby Avatar] The 'stroke' input is deprecated and no longer has any effect.
+        The avatar now always has an outline. This input will be removed in a future major version.`
+    );
+  }
   @Input() text: string;
   @Input() overlay: boolean;
   @Input() size: AvatarSize | `${AvatarSize}` = AvatarSize.SM;
