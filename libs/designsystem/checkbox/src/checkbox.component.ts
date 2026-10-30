@@ -42,7 +42,22 @@ export class CheckboxComponent
 
   @Input() checked: boolean = false;
   @Input() indeterminate: boolean = false;
-  @Input() attentionLevel: '1' | '2' = '2';
+
+  private _attentionLevel: '1' | '2' = '2';
+  /**
+   * @deprecated Since v12.0.0, attention levels 1 and 2 now look the same, so this input no longer has any effect.
+   * This input will be removed in a future major version.
+   */
+  @Input() set attentionLevel(value: '1' | '2') {
+    console.warn(
+      `[Kirby Checkbox] The 'attentionLevel' input is deprecated and no longer has any effect.
+        Attention levels 1 and 2 now look the same. This input will be removed in a future major version.`
+    );
+    this._attentionLevel = value;
+  }
+  get attentionLevel(): '1' | '2' {
+    return this._attentionLevel;
+  }
 
   @Input()
   text: string;

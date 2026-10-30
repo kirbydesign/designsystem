@@ -4,22 +4,24 @@
   checkboxes in a list, therefore checking an additional box does not affect any other selections.
 </p>
 
-<h2>Types</h2>
-<p>There are two types of Checkboxes:</p>
-<ol>
-  <li>Attention Level 1: Use as a binary choice for a standalone check box</li>
-  <li>Attention Level 2: Use in a list of check boxes, where multiple choices can be selected</li>
-</ol>
+<h2>Usage</h2>
 
-<h3>Attention Level 1</h3>
-<cookbook-example-viewer [html]="checkboxConfirmExample.template">
-  <cookbook-checkbox-confirm-example #checkboxConfirmExample></cookbook-checkbox-confirm-example>
-</cookbook-example-viewer>
-
-<h3>Attention Level 2</h3>
+<h3>Default</h3>
 <cookbook-example-viewer [html]="checkboxDefaultExample.template">
   <cookbook-checkbox-default-example #checkboxDefaultExample></cookbook-checkbox-default-example>
 </cookbook-example-viewer>
+
+<p class="comment">
+  <em>
+    <strong>Please note:</strong>
+    The
+  </em>
+  <code>attentionLevel</code>
+  <em>
+    input is deprecated and no longer has any effect, as attention levels 1 and 2 now look the same.
+    It will be removed in a future major version.
+  </em>
+</p>
 
 <h2>States</h2>
 <cookbook-example-viewer [html]="checkboxStatesExample.template">
