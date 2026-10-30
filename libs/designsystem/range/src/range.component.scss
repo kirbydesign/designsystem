@@ -13,14 +13,14 @@ ion-range {
   // See: https://sass-lang.com/documentation/breaking-changes/mixed-decls/
   /* stylelint-disable no-duplicate-selectors */
   & {
-    --knob-background: var(--kirby-color-fill-brand-loud);
+    --knob-background: var(--kirby-range-color-fill-engaged);
     --knob-box-shadow: 0 0 0 2px var(--kirby-color-fill-base);
     --knob-size: var(--kirby-spacing-s);
     --knob-handle-size: var(--kirby-size-fat-finger);
-    --pin-color: var(--kirby-color-content-brand-loud);
-    --pin-background: var(--kirby-color-fill-brand-loud);
-    --bar-background: var(--kirby-color-border-base-quiet);
-    --bar-background-active: var(--kirby-color-fill-brand-loud);
+    --pin-color: var(--kirby-color-content-raised);
+    --pin-background: var(--kirby-color-fill-raised);
+    --bar-background: var(--kirby-range-color-fill);
+    --bar-background-active: var(--kirby-range-color-fill-engaged);
     --bar-border-radius: var(--kirby-spacing-xxxs);
     --bar-height: var(--kirby-spacing-xxxxs);
 
@@ -43,12 +43,12 @@ ion-range {
   }
 
   &::part(knob hover) {
-    --knob-background: var(--kirby-color-fill-brand-loud-hover);
+    --knob-background: var(--kirby-range-color-fill-engaged-hover);
   }
 
   &::part(knob activated),
   &::part(knob pressed) {
-    --knob-background: var(--kirby-color-fill-brand-loud-active);
+    --knob-background: var(--kirby-range-color-fill-engaged-active);
   }
 
   &::part(knob hover),
@@ -92,7 +92,7 @@ ion-range {
   }
 
   &::part(tick) {
-    background: var(--kirby-color-border-base-quiet);
+    background: var(--kirby-range-color-fill);
   }
 }
 
