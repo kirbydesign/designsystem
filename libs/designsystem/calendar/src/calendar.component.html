@@ -74,7 +74,7 @@
               [class.past]="day.isPast"
               [attr.aria-label]="day.ariaLabel"
               [attr.aria-disabled]="day.isSelectable ? null : true"
-              [noDecoration]="true"
+              [noDecoration]="!day.isSelected"
               [disabled]="day.isFocusable ? null : true"
               [tabIndex]="day.isFocussed ? 0 : -1"
             >

@@ -18,7 +18,8 @@ class EmbeddedDummyComponent {}
 describe('ActionSheetHelper', () => {
   let spectator: SpectatorService<ActionSheetHelper>;
   let actionSheetHelper: ActionSheetHelper;
-  const backdropOpacity = '0.4';
+  const backdropOpacity = () =>
+    getComputedStyle(document.documentElement).getPropertyValue('--kirby-opacity-40').trim();
 
   const createService = createServiceFactory({
     service: ActionSheetHelper,
@@ -51,7 +52,7 @@ describe('ActionSheetHelper', () => {
     });
 
     it('action-sheet should have correct backdrop style', () => {
-      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
+      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity() });
     });
 
     it('backdrop click should dismiss action-sheet', async () => {
@@ -76,7 +77,7 @@ describe('ActionSheetHelper', () => {
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
       backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
-      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
+      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity() });
       await ionModalElement.dismiss();
     });
   });

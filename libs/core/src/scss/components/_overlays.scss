@@ -39,7 +39,7 @@ body.allow-background-scroll {
 }
 
 ion-modal::part(backdrop) {
-  --backdrop-opacity: 0.4;
+  --backdrop-opacity: var(--kirby-opacity-40);
 }
 
 ion-modal.kirby-overlay {
@@ -48,7 +48,11 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     --border-radius: 0;
-    --background: var(--kirby-modal-background, var(--kirby-background-color));
+    --border-width: var(--kirby-stroke-xs);
+    --border-style: solid;
+    --border-color: var(--kirby-color-border-base-quiet);
+    --background: var(--kirby-modal-background, var(--kirby-color-fill-base));
+    --color: var(--kirby-color-content-base);
     --height: auto;
     --box-shadow: var(--kirby-elevation-8);
 
@@ -96,6 +100,7 @@ ion-modal.kirby-overlay {
     @include utils.media('<medium') {
       &:not(.kirby-drawer, .kirby-modal-compact) {
         --height: 100%;
+        --border-width: 0; // no border for full-screen modal on narrow screens
       }
     }
 
@@ -148,8 +153,11 @@ ion-modal.kirby-overlay {
   }
 
   &.kirby-alert {
-    --background: var(--kirby-background-color);
+    --background: var(--kirby-color-fill-base);
     --border-radius: var(--kirby-border-radius-n);
+    --border-width: var(--kirby-stroke-xs);
+    --border-style: solid;
+    --border-color: var(--kirby-color-border-base-quiet);
     --box-shadow: var(--kirby-elevation-8);
     --max-width: #{utils.$alert-max-width};
     --height: auto;
@@ -157,12 +165,13 @@ ion-modal.kirby-overlay {
 }
 
 ion-modal {
-  --background: var(--kirby-modal-background, var(--kirby-background-color));
+  --background: var(--kirby-modal-background, var(--kirby-color-fill-base));
+  --color: var(--kirby-color-content-base);
 }
 
 ion-loading.kirby-loading-overlay {
-  --backdrop-opacity: #{utils.$loading-overlay-backdrop-opacity};
-  --ion-backdrop-color: var(--kirby-background-color);
+  --backdrop-opacity: var(--kirby-opacity-80);
+  --ion-backdrop-color: var(--kirby-color-fill-base);
 
   .loading-wrapper {
     --background: transparent;

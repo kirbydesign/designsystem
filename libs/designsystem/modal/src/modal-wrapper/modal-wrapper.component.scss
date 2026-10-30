@@ -2,7 +2,7 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
-$toolbar-bottom-border-width: 1px;
+$toolbar-bottom-border-width: var(--kirby-stroke-xs);
 
 // Cap title font resize at 120%
 $title-max-font-size: 16px * 1.2;
@@ -29,12 +29,12 @@ $title-max-font-size: 16px * 1.2;
 
   &.drawer {
     ion-content::part(scroll) {
-      transition: padding-bottom utils.$soft-keyboard-transition-leave;
+      transition: padding-bottom var(--kirby-transition-soft-keyboard-leave);
     }
 
     &.keyboard-visible {
       ion-content::part(scroll) {
-        transition: padding-bottom utils.$soft-keyboard-transition-enter;
+        transition: padding-bottom var(--kirby-transition-soft-keyboard-enter);
       }
     }
   }
@@ -61,7 +61,7 @@ ion-header {
     --padding-top: var(--kirby-spacing-xxs);
     --border-width: 0;
     --background: transparent;
-    --color: var(--kirby-modal-color, var(--kirby-black));
+    --color: var(--kirby-modal-color, var(--kirby-color-content-base));
 
     border-bottom: $toolbar-bottom-border-width solid transparent;
     transition: border-color var(--kirby-transition-duration-quick) linear;
@@ -98,12 +98,12 @@ ion-header {
 
 @include utils.media('>=medium') {
   ion-header ion-toolbar {
-    border-bottom-color: var(--kirby-medium);
+    border-bottom-color: var(--kirby-color-border-base-silent);
   }
 }
 
 ion-header.content-scrolled ion-toolbar {
-  border-bottom-color: var(--kirby-medium);
+  border-bottom-color: var(--kirby-color-border-base-silent);
 }
 
 :host-context(ion-modal.no-header-area-border) {
@@ -146,7 +146,7 @@ ion-title {
 
 ion-content {
   --background: transparent;
-  --color: var(--kirby-modal-color, var(--kirby-black));
+  --color: var(--kirby-modal-color, var(--kirby-color-content-base));
   --padding-top: var(--kirby-spacing-m);
   --padding-bottom: calc(var(--kirby-spacing-m) + var(--kirby-modal-safe-area-bottom));
   --padding-start: var(--kirby-spacing-s);
@@ -170,7 +170,8 @@ ion-content {
 // Add spacing for the keyboard overlap, minus Ionic's --keyboard-offset so the two spacings don't stack.
 :host(.keyboard-visible) ion-content {
   --padding-bottom: calc(
-    var(--kirby-spacing-m) + var(--kirby-keyboard-content-overlap, 0px) - var(--keyboard-offset, 0px)
+    var(--kirby-spacing-m) +
+      var(--kirby-keyboard-content-overlap, 0px) - var(--keyboard-offset, 0px)
   );
 }
 

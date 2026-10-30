@@ -28,8 +28,6 @@ import {
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
-const { getColor } = DesignTokenHelper;
-
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
@@ -857,9 +855,12 @@ describe('ModalWrapperComponent', () => {
         'ion-header.content-scrolled ion-toolbar'
       ) as HTMLElement;
       ionToolbarInScrolled.style.transition = 'none';
+      const borderBaseSilent = getComputedStyle(ionToolbarInScrolled)
+        .getPropertyValue('--kirby-color-border-base-silent')
+        .trim();
 
       expect(ionToolbarInScrolled).toHaveComputedStyle({
-        'border-bottom-color': getColor('medium'),
+        'border-bottom-color': borderBaseSilent,
       });
     });
   });
