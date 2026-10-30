@@ -8,6 +8,14 @@ import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designs
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+// eslint-disable-next-line no-restricted-imports
+import {
+  gridStyles,
+  interactionStates,
+  pseudoStatesFor,
+  Surface,
+  surfaces,
+} from '../../.storybook/story-helpers';
 import { AccordionExampleComponent } from '~/app/examples/accordion-example/accordion-example.component';
 
 const meta: Meta<AccordionItemComponent> = {
@@ -101,4 +109,64 @@ export const FocusedLastExpandedInCard: Story = {
   args: {
     isExpanded: true,
   },
+};
+
+type AccordionRow = {
+  id: string;
+  label: string;
+  surface: Surface;
+  isExpanded?: boolean;
+};
+
+const accordionVariants: Omit<AccordionRow, 'id' | 'surface'>[] = [
+  { label: 'collapsed' },
+  { label: 'expanded', isExpanded: true },
+];
+
+const accordionRows: AccordionRow[] = surfaces.flatMap((surface) =>
+  accordionVariants.map((variant) => ({
+    ...variant,
+    surface,
+    id: `accordion-${surface}-${variant.label}`,
+  }))
+);
+
+// Disabled items can't be interacted with, so disabled is shown as a state of its own
+const accordionStates = [...interactionStates, 'disabled'] as const;
+
+export const InteractionStates: Story = {
+  parameters: {
+    chromatic: { modes: { mobile: { disable: true } } },
+    pseudo: pseudoStatesFor(
+      accordionRows.map((row) => row.id),
+      '.header'
+    ),
+  },
+  render: () => ({
+    props: { rows: accordionRows, states: accordionStates },
+    template: `
+      <div class="grid">
+        @for (state of states; track state) {
+          <p class="kirby-text-small-light">{{ state }}</p>
+        }
+        @for (row of rows; track row.id) {
+          @for (state of states; track state) {
+            <kirby-card [variant]="row.surface">
+              <kirby-accordion>
+                <kirby-accordion-item
+                  [attr.id]="row.id + '-' + state"
+                  [title]="row.label + ', ' + row.surface + ', ' + state"
+                  [isExpanded]="row.isExpanded"
+                  [isDisabled]="state === 'disabled'"
+                >
+                  Content
+                </kirby-accordion-item>
+              </kirby-accordion>
+            </kirby-card>
+          }
+        }
+      </div>
+    `,
+    styles: [gridStyles(accordionStates.length, '220px')],
+  }),
 };

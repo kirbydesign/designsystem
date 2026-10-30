@@ -3,11 +3,18 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/card';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
-import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/page';
+import {
+  PageComponent,
+  PageContentComponent,
+  PageFooterComponent,
+} from '@kirbydesign/designsystem/page';
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
+// eslint-disable-next-line no-restricted-imports
+import { gridStyles, interactionStates, pseudoStatesFor } from '../../.storybook/story-helpers';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,
@@ -20,6 +27,8 @@ const meta: Meta<PageComponent> = {
         AppComponent,
         PageComponent,
         PageContentComponent,
+        PageFooterComponent,
+        ButtonComponent,
         SlidesComponent,
         SlideDirective,
         CardComponent,
@@ -78,6 +87,60 @@ export const PageWithSlides: Story = {
           </kirby-card>
         </kirby-slides>
       </kirby-page-content>
+    </kirby-page>
+    </kirby-app>`,
+  }),
+};
+
+const pageContainerStyles = `
+  .page-container {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+  }
+`;
+
+const backButtonPseudoStates = pseudoStatesFor(['page'], 'ion-back-button');
+
+export const BackButtonInteractionStates: Story = {
+  parameters: {
+    chromatic: { modes: { mobile: { disable: true } } },
+    // Pressing a button with a pointer also hovers it
+    pseudo: {
+      ...backButtonPseudoStates,
+      hover: [...backButtonPseudoStates.hover, ...backButtonPseudoStates.active],
+    },
+  },
+  render: () => ({
+    props: { states: interactionStates },
+    template: `
+      <div class="grid">
+        @for (state of states; track state) {
+          <div class="page-container" [attr.id]="'page-' + state">
+            <kirby-page [title]="state" defaultBackHref="/">
+              <kirby-page-content></kirby-page-content>
+            </kirby-page>
+          </div>
+        }
+      </div>
+    `,
+    styles: [gridStyles(interactionStates.length, '240px'), pageContainerStyles],
+  }),
+};
+
+export const PageWithFooter: Story = {
+  parameters: {
+    chromatic: { modes: { mobile: { disable: true } } },
+  },
+  render: () => ({
+    template: `<kirby-app>
+    <kirby-page title="Page with Footer" defaultBackHref="/">
+      <kirby-page-content>
+        <p>Page Content</p>
+      </kirby-page-content>
+      <kirby-page-footer>
+        <button kirby-button>Action</button>
+      </kirby-page-footer>
     </kirby-page>
     </kirby-app>`,
   }),

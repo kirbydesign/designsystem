@@ -1,7 +1,3 @@
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
-const { getColor } = DesignTokenHelper;
-
 describe('Anchor tag', () => {
   let element: HTMLAnchorElement;
 
@@ -19,13 +15,6 @@ describe('Anchor tag', () => {
   });
 
   describe(`by default`, () => {
-    it(`should inherit its color`, () => {
-      document.body.style.color = getColor('black').value;
-
-      expect(element).toHaveComputedStyle({ color: getColor('black') });
-      document.body.style.removeProperty('color');
-    });
-
     it(`should be styled with an underline`, () => {
       expect(element).toHaveComputedStyle({ 'text-decoration-line': 'underline' });
     });

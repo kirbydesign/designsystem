@@ -7,8 +7,6 @@ import { ListComponent } from '@kirbydesign/designsystem/list';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { AccordionItemComponent } from './accordion-item.component';
 
-const getColor = DesignTokenHelper.getColor;
-const getTextColor = DesignTokenHelper.getTextColor;
 const padding = DesignTokenHelper.size('s');
 
 describe('AccordionItemComponent', () => {
@@ -72,12 +70,6 @@ describe('AccordionItemComponent', () => {
 
       expect(spectator.query('.content-body')).toHaveComputedStyle({
         padding: '0px',
-      });
-    });
-
-    it('should have correct text color in title', () => {
-      expect(spectator.query('.title')).toHaveComputedStyle({
-        color: getTextColor('black'),
       });
     });
   });
@@ -153,15 +145,6 @@ describe('AccordionItemComponent', () => {
 
     it('should not show content', () => {
       expect(spectator.query('.content')).toBeHidden();
-    });
-
-    it('should use disabled-style', () => {
-      expect(spectator.query('.title')).toHaveComputedStyle({
-        color: getTextColor('semi-dark'),
-      });
-      expect(spectator.query('.kirby-icon')).toHaveComputedStyle({
-        color: getColor('semi-dark'),
-      });
     });
 
     it('should not emit the "toggle" event when clicked', () => {

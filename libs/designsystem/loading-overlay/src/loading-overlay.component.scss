@@ -1,5 +1,3 @@
-@use '@kirbydesign/core/src/scss/utils';
-
 :host {
   display: block;
   min-height: var(--kirby-spacing-l);
@@ -26,18 +24,28 @@
     place-items: center;
 
     &.backdrop {
-      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
-      // stylelint-disable-next-line kirby/use-design-tokens
-      background-color: rgba(
-        utils.get-color('background-color', $getValueOnly: true),
-        utils.$loading-overlay-backdrop-opacity
+      background-color: color-mix(
+        in srgb,
+        var(--kirby-color-fill-base) var(--kirby-opacity-80),
+        transparent
       );
+
+      // color-mix() requires iOS 16.2+. On older browsers the declaration above is
+      // invalid, so draw the backdrop as a layer behind the spinner instead.
+      @supports not (background-color: color-mix(in srgb, red 50%, transparent)) {
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background-color: var(--kirby-color-fill-base);
+          opacity: var(--kirby-opacity-80);
+        }
+      }
     }
 
     &.hide-content {
-      // no Safari-15-safe CSS custom property equivalent, so kept as SCSS.
-      // stylelint-disable-next-line kirby/use-design-tokens
-      background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
+      background-color: var(--kirby-color-fill-base);
     }
 
     .spinner {

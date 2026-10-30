@@ -47,18 +47,19 @@ export class EmptyStateShowcaseComponent {
     },
     {
       name: 'themeColor',
-      description: 'Sets which color the empty state should use from the theme palette.',
+      description:
+        'Sets which color the empty state should use from the theme palette. Values marked as deprecated will be removed in a future major version.',
       defaultValue: 'null',
       type: [
-        'primary',
-        'secondary',
-        'tertiary',
         'success',
         'warning',
         'danger',
-        'light',
         'medium',
-        'dark',
+        'primary (deprecated)',
+        'secondary (deprecated)',
+        'tertiary (deprecated)',
+        'light (deprecated)',
+        'dark (deprecated)',
       ],
     },
   ];

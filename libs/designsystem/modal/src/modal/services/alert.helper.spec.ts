@@ -22,7 +22,8 @@ class EmbeddedDummyComponent {}
 describe('AlertHelper', () => {
   let spectator: SpectatorService<AlertHelper>;
   let alertHelper: AlertHelper;
-  const backdropOpacity = '0.4';
+  const backdropOpacity = () =>
+    getComputedStyle(document.documentElement).getPropertyValue('--kirby-opacity-40').trim();
 
   const createService = createServiceFactory({
     service: AlertHelper,
@@ -63,7 +64,7 @@ describe('AlertHelper', () => {
 
     // Flaky test
     xit('alert should have correct backdrop style', () => {
-      expect(ionModal).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
+      expect(ionModal).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity() });
     });
 
     it('modal wrapper should have correct max width', () => {
@@ -87,7 +88,7 @@ describe('AlertHelper', () => {
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
       backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
-      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
+      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity() });
       await ionModalElement.dismiss();
     });
 

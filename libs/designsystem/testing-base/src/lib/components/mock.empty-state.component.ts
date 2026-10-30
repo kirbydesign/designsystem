@@ -1,4 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
+import { ThemeColor } from '@kirbydesign/core';
 
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 
@@ -18,6 +19,7 @@ export class MockEmptyStateComponent {
   @Input() iconName: string;
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() themeColor: ThemeColor;
 }
 
 // #endregion

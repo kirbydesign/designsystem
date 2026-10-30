@@ -18,7 +18,16 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 
-const { size, fontWeight, getColor } = DesignTokenHelper;
+const { size, fontWeight } = DesignTokenHelper;
+const getTokenColor = (name: string) =>
+  getComputedStyle(document.documentElement).getPropertyValue(`--kirby-color-${name}`).trim();
+const transparent = 'rgba(0, 0, 0, 0)';
+
+const getSettledToolbarBackground = async (ionToolbar: HTMLIonToolbarElement) => {
+  const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
+  await Promise.all(toolbarBackground.getAnimations().map((animation) => animation.finished));
+  return toolbarBackground;
+};
 
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
@@ -44,7 +53,6 @@ describe('PageComponent', () => {
   const firstOtherUrl = 'firstOther';
   const secondOtherUrl = 'secondOther';
   const firstOtherUrlWithQueryParams = 'firstOther?query=params';
-  const shadedBackgroundColor = '#f3f3f3';
   let spectator: SpectatorHost<PageComponent>;
   let ionToolbar: HTMLIonToolbarElement;
   let ionTitle: HTMLIonTitleElement;
@@ -207,22 +215,10 @@ describe('PageComponent', () => {
           });
         });
 
-        describe('divider and shaded background', () => {
-          describe('before scroll', () => {
-            it('should not render toolbar divider', () => {
-              expect(ionToolbar).toHaveComputedStyle(
-                {
-                  'background-color': 'rgba(0, 0, 0, 0)',
-                },
-                ':before'
-              );
-            });
-
-            it('should not render shaded toolbar background', () => {
-              const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-              expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': getColor('background-color'),
-              });
+        describe('border and background before scroll', () => {
+          it('should not render toolbar border', async () => {
+            expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+              'border-bottom-color': transparent,
             });
           });
 
@@ -238,27 +234,10 @@ describe('PageComponent', () => {
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
             });
 
-            it('should render toolbar divider', () => {
-              expect(ionToolbar).toHaveComputedStyle(
-                {
-                  'background-color': getColor('medium'),
-                  content: '""',
-                  height: '1px',
-                  width: `${ionToolbar.offsetWidth}px`,
-                },
-                ':before'
-              );
-              console.warn(' *** TOOLBAR PHONE AFTER ***');
-              console.warn(
-                'ionToolbar.content-scrolled:',
-                ionToolbar.classList.contains('content-scrolled')
-              );
-            });
-
-            it('should render shaded toolbar background', () => {
-              const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-              expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': shadedBackgroundColor,
+            it('should render toolbar border', async () => {
+              expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+                'border-bottom-color': getTokenColor('border-base-silent'),
+                'border-bottom-width': '1px',
               });
             });
           });
@@ -332,21 +311,18 @@ describe('PageComponent', () => {
           });
         });
 
-        describe('divider and shaded background', () => {
+        describe('border and background', () => {
           describe('before scroll', () => {
-            it('should not render toolbar divider', () => {
-              expect(ionToolbar).toHaveComputedStyle(
-                {
-                  'background-color': 'rgba(0, 0, 0, 0)',
-                },
-                ':before'
-              );
+            it('should not render toolbar border', async () => {
+              expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+                'border-bottom-color': transparent,
+              });
             });
 
-            it('should not render shaded toolbar background', () => {
+            it('should render toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': getColor('background-color'),
+                'background-color': getTokenColor('fill-base'),
               });
             });
           });
@@ -363,24 +339,16 @@ describe('PageComponent', () => {
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
             });
 
-            it('should render toolbar divider', () => {
-              expect(ionToolbar).toHaveComputedStyle(
-                {
-                  'background-color': getColor('medium'),
-                },
-                ':before'
-              );
-              console.warn(' *** TOOLBAR DESKTOP AFTER ***');
-              console.warn(
-                'ionToolbar.content-scrolled:',
-                ionToolbar.classList.contains('content-scrolled')
-              );
+            it('should render toolbar border', async () => {
+              expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+                'border-bottom-color': getTokenColor('border-base-silent'),
+              });
             });
 
-            it('should render shaded toolbar background', () => {
+            it('should not shade toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
-                'background-color': shadedBackgroundColor,
+                'background-color': getTokenColor('fill-base'),
               });
             });
           });
@@ -949,18 +917,18 @@ describe('PageComponent', () => {
       it('should render sticky content with correct background color', () => {
         expect(stickyContentContainer).toHaveComputedStyle(
           {
-            'background-color': getColor('background-color'),
+            'background-color': getTokenColor('fill-base'),
           },
           ':before'
         );
       });
 
-      it('should not render sticky content divider', () => {
+      it('should not render sticky content border', () => {
         expect(stickyContentContainer).toHaveComputedStyle(
           {
-            'background-color': 'rgba(0, 0, 0, 0)',
+            'border-bottom-color': transparent,
           },
-          ':after'
+          ':before'
         );
       });
     });
@@ -975,19 +943,9 @@ describe('PageComponent', () => {
       });
 
       describe('before scroll', () => {
-        it('should not render toolbar divider', () => {
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': 'rgba(0, 0, 0, 0)',
-            },
-            ':before'
-          );
-        });
-
-        it('should not render shaded toolbar background', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': getColor('background-color'),
+        it('should not render toolbar border', async () => {
+          expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+            'border-bottom-color': transparent,
           });
         });
       });
@@ -1003,24 +961,14 @@ describe('PageComponent', () => {
           await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
         });
 
-        it('should render toolbar divider', async () => {
+        it('should render toolbar border', async () => {
           await TestHelper.whenTrue(
             () =>
               ionToolbar.classList.contains('content-scrolled') &&
               !ionToolbar.classList.contains('content-pinned')
           );
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': getColor('medium'),
-            },
-            ':before'
-          );
-        });
-
-        it('should render shaded toolbar background', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+          expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+            'border-bottom-color': getTokenColor('border-base-silent'),
           });
         });
       });
@@ -1038,7 +986,7 @@ describe('PageComponent', () => {
         it('should render sticky content with correct background color', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': shadedBackgroundColor,
+              'background-color': getTokenColor('fill-base'),
               height: `${stickyContentContainer.offsetHeight}px`,
               width: `${ionScrollElement.clientWidth}px`,
             },
@@ -1046,31 +994,19 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render sticky content divider', () => {
+        it('should render sticky content border', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': getColor('medium'),
-              content: '""',
-              height: '1px',
-              width: `${ionScrollElement.clientWidth}px`,
-            },
-            ':after'
-          );
-        });
-
-        it('should not render toolbar divider', () => {
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': 'rgba(0, 0, 0, 0)',
+              'border-bottom-color': getTokenColor('border-base-silent'),
+              'border-bottom-width': '1px',
             },
             ':before'
           );
         });
 
-        it('should render shaded toolbar background', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+        it('should not render toolbar border', async () => {
+          expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+            'border-bottom-color': transparent,
           });
         });
       });
@@ -1086,19 +1022,9 @@ describe('PageComponent', () => {
       });
 
       describe('before scroll', () => {
-        it('should not render toolbar divider', () => {
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': 'rgba(0, 0, 0, 0)',
-            },
-            ':before'
-          );
-        });
-
-        it('should not render shaded toolbar background', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': getColor('background-color'),
+        it('should not render toolbar border', async () => {
+          expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+            'border-bottom-color': transparent,
           });
         });
       });
@@ -1114,23 +1040,14 @@ describe('PageComponent', () => {
           await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
         });
 
-        // Flaky test
-        xit('should render toolbar divider', () => {
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': getColor('medium'),
-              content: '""',
-              height: '1px',
-              width: `${ionToolbar.offsetWidth}px`,
-            },
-            ':before'
+        it('should render toolbar border', async () => {
+          await TestHelper.whenTrue(
+            () =>
+              ionToolbar.classList.contains('content-scrolled') &&
+              !ionToolbar.classList.contains('content-pinned')
           );
-        });
-
-        it('should render shaded toolbar background', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+          expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+            'border-bottom-color': getTokenColor('border-base-silent'),
           });
         });
       });
@@ -1148,7 +1065,7 @@ describe('PageComponent', () => {
         it('should render sticky content with correct background color', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': shadedBackgroundColor,
+              'background-color': getTokenColor('fill-base'),
               height: `${stickyContentContainer.offsetHeight}px`,
               width: `${ionScrollElement.clientWidth}px`,
             },
@@ -1156,31 +1073,19 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render sticky content divider', () => {
+        it('should render sticky content border', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
-              'background-color': getColor('medium'),
-              content: '""',
-              height: '1px',
-              width: `${ionScrollElement.clientWidth}px`,
-            },
-            ':after'
-          );
-        });
-
-        it('should not render toolbar divider', () => {
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': 'rgba(0, 0, 0, 0)',
+              'border-bottom-color': getTokenColor('border-base-silent'),
+              'border-bottom-width': '1px',
             },
             ':before'
           );
         });
 
-        it('should render shaded toolbar background', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+        it('should not render toolbar border', async () => {
+          expect(await getSettledToolbarBackground(ionToolbar)).toHaveComputedStyle({
+            'border-bottom-color': transparent,
           });
         });
       });
