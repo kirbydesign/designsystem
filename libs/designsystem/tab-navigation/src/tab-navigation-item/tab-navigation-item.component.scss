@@ -2,7 +2,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $tab-item-text-max-width: 100px;
-$bottom-border-height: 1px;
 $border-color-selected: var(--kirby-color-border-base-loud);
 $maximum-font-size: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold});
 
@@ -28,7 +27,7 @@ $maximum-font-size: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold
 
 :host {
   position: relative;
-  padding-bottom: $bottom-border-height * 2;
+  padding-bottom: calc(var(--kirby-stroke-xs) * 2);
 
   button[role='tab'] {
     @include button-reset;
@@ -62,7 +61,7 @@ $maximum-font-size: calc(var(--kirby-spacing-s) * #{utils.$text-resize-threshold
         background-color: $border-color-selected;
         position: absolute;
         border-radius: 1px;
-        height: $bottom-border-height * 2;
+        height: calc(var(--kirby-stroke-xs) * 2);
         bottom: 0;
         z-index: 2;
       }
