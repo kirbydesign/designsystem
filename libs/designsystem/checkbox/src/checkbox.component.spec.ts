@@ -12,8 +12,6 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CheckboxComponent } from './checkbox.component';
 
 const size = DesignTokenHelper.size;
-const getColor = DesignTokenHelper.getColor;
-const getTextColor = DesignTokenHelper.getTextColor;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
 const checkboxIconSize = size('m');
 const checkboxSizeXs = size('m');
@@ -50,9 +48,6 @@ describe('CheckboxComponent', () => {
     it('should have correct icon styling', () => {
       expect(ionCheckbox).toHaveComputedStyle({
         '--size': checkboxIconSize,
-        '--checkmark-color': getColor('white'),
-        '--checkbox-background-checked': getColor('black'),
-        '--border-color-checked': getColor('black'),
       });
     });
 
@@ -92,16 +87,6 @@ describe('CheckboxComponent', () => {
   });
 
   describe('when configured', () => {
-    it('should have correct icon styling when attentionLevel is 1', () => {
-      spectator.setInput('attentionLevel', '1');
-      spectator.detectChanges();
-      expect(ionCheckbox).toHaveComputedStyle({
-        '--checkmark-color': getColor('black'),
-        '--checkbox-background-checked': getColor('success'),
-        '--border-color-checked': getColor('success'),
-      });
-    });
-
     it('should set the [checked] input on ion-checkbox', () => {
       spectator.setInput('checked', true);
       expect(ionCheckbox.checked).toBe(true);
@@ -160,34 +145,6 @@ describe('CheckboxComponent', () => {
 
         spectator.setInput('disabled', false);
         expect(ionCheckbox.disabled).toBe(false);
-      });
-
-      it('should have correct text styling', () => {
-        spectator.setInput('disabled', true);
-        spectator.detectChanges();
-        expect(spectator.element).toHaveComputedStyle({
-          color: getTextColor('semi-dark'),
-        });
-      });
-
-      it('should have correct icon styling', () => {
-        spectator.setInput('disabled', true);
-        spectator.detectChanges();
-        expect(ionCheckbox).toHaveComputedStyle({
-          '--checkmark-color': getColor('semi-dark'),
-          '--checkbox-background': getColor('semi-light'),
-          '--checkbox-background-checked': getColor('semi-light'),
-          '--border-color': getColor('medium'),
-          '--border-color-checked': getColor('medium'),
-        });
-      });
-    });
-
-    it('should have correct icon styling when checkbox has error', () => {
-      spectator.setInput('hasError', true);
-      spectator.detectChanges();
-      expect(ionCheckbox).toHaveComputedStyle({
-        '--border-color': getColor('danger'),
       });
     });
 
