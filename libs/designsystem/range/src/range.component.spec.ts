@@ -2,6 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ColorHelper } from '@kirbydesign/core';
 import { RangeComponent } from './range.component';
 
 @Component({
@@ -36,7 +37,7 @@ describe('RangeComponent', () => {
     it('should have a knob touch target of at least the fat finger size', async () => {
       const ionRange = spectator.query('ion-range');
       await TestHelper.whenReady(ionRange);
-      const knobHandle = ionRange.shadowRoot.querySelector<HTMLElement>('[part~="knob-handle"]');
+      const knobHandle = ionRange.shadowRoot.querySelector<HTMLElement>('[role="slider"]');
       const fatFingerSize = parseFloat(
         getComputedStyle(document.documentElement).getPropertyValue('--kirby-size-fat-finger')
       );
@@ -45,6 +46,23 @@ describe('RangeComponent', () => {
 
       expect(width).toBeGreaterThanOrEqual(fatFingerSize);
       expect(height).toBeGreaterThanOrEqual(fatFingerSize);
+    });
+
+    it('should show a focus ring when the slider receives focus', async () => {
+      const ionRange = spectator.query('ion-range');
+      await TestHelper.whenReady(ionRange);
+      const slider = ionRange.shadowRoot.querySelector<HTMLElement>('[role="slider"]');
+      const knob = ionRange.shadowRoot.querySelector<HTMLElement>('[part="knob"]');
+
+      slider.focus();
+      await Promise.all(knob.getAnimations().map((animation) => animation.finished));
+
+      const focusColor = getComputedStyle(ionRange)
+        .getPropertyValue('--kirby-color-border-focus')
+        .trim();
+      expect(getComputedStyle(knob).boxShadow).toContain(
+        ColorHelper.colorStringToRgbString(focusColor)
+      );
     });
   });
 

@@ -1,7 +1,6 @@
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { RangeComponent } from '@kirbydesign/designsystem/range';
-import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
 // eslint-disable-next-line no-restricted-imports
@@ -92,26 +91,6 @@ const rangeVariants: {
 // Disabled ranges can't be interacted with, so disabled is shown as a state of its own
 const rangeStates = [...interactionStates, 'disabled'] as const;
 
-// Ionic exposes the knob's interaction states as parts, which storybook-addon-pseudo-states
-// can't force, so the parts are added to the knobs instead
-const addKnobPart = (canvasElement: HTMLElement, state: string, part: string) => {
-  const ionRanges = canvasElement.querySelectorAll(`kirby-range[id$="-${state}"] ion-range`);
-
-  ionRanges.forEach((ionRange) => {
-    const knob = ionRange.shadowRoot.querySelector('[part~="knob"]');
-    knob.part.add(part);
-  });
-};
-
-const forceKnobStates = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-  const ionRanges = Array.from(canvasElement.querySelectorAll('ion-range'));
-  await TestHelper.whenReady(ionRanges);
-
-  addKnobPart(canvasElement, 'hover', 'hover');
-  addKnobPart(canvasElement, 'active', 'activated');
-  addKnobPart(canvasElement, 'focus-visible', 'focused');
-};
-
 export const InteractionStates: Story = {
   parameters: {
     pseudo: pseudoStatesFor(
@@ -151,5 +130,4 @@ export const InteractionStates: Story = {
     { variants: rangeVariants, states: rangeStates },
     { stacked: true }
   ),
-  play: forceKnobStates,
 };

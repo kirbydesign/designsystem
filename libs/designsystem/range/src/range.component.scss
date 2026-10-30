@@ -1,4 +1,5 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $tick-size: var(--kirby-spacing-xxs);
 
@@ -42,22 +43,26 @@ ion-range {
     transition-property: background, transform;
   }
 
-  &::part(knob hover) {
+  // Ionic 8 exposes the knob part, but not its interaction-state parts.
+  @include utils.hover {
     --knob-background: var(--kirby-range-color-fill-engaged-hover);
+
+    &::part(knob) {
+      transform: scale(1.25);
+    }
   }
 
-  &::part(knob activated),
-  &::part(knob pressed) {
+  &:active,
+  &.range-pressed {
     --knob-background: var(--kirby-range-color-fill-engaged-active);
+
+    &::part(knob) {
+      transform: scale(1.25);
+    }
   }
 
-  &::part(knob hover),
-  &::part(knob activated),
-  &::part(knob pressed) {
-    transform: scale(1.25);
-  }
-
-  &::part(knob focused) {
+  &:focus-visible::part(knob),
+  &:focus-within::part(knob) {
     box-shadow: var(--kirby-focus-ring-md-outer);
   }
 
