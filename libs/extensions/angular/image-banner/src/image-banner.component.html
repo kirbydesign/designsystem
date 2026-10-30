@@ -1,4 +1,4 @@
-<kirby-card [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur">
+<kirby-card [variant]="backgroundBlur === 'dark' ? 'brand' : 'raised'">
   <div class="blur-image-wrapper">
     <img class="blur-image" [src]="imagePath" alt="" />
   </div>
@@ -38,7 +38,7 @@
         <a
           kirby-button
           class="breakout wide-view-action"
-          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [attentionLevel]="'2'"
           [href]="externalLink"
           target="_blank"
           size="sm"
@@ -50,7 +50,7 @@
         <a
           kirby-button
           class="breakout narrow-view-action"
-          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [attentionLevel]="'2'"
           [href]="externalLink"
           [noDecoration]="true"
           [showIconOnly]="true"
@@ -70,7 +70,7 @@
           class="breakout wide-view-action"
           size="sm"
           (click)="bannerClicked($event)"
-          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [attentionLevel]="'2'"
         >
           {{ actionButtonText }}
         </button>
@@ -80,7 +80,7 @@
           class="breakout narrow-view-action"
           size="sm"
           (click)="bannerClicked($event)"
-          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+          [attentionLevel]="'2'"
           [noDecoration]="true"
           [showIconOnly]="true"
         >
@@ -97,7 +97,7 @@
       kirby-button
       size="xs"
       (click)="dismissClicked($event)"
-      [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
+      [noDecoration]="true"
       [showIconOnly]="true"
       [attr.aria-label]="translations.get('close') + ' ' + title"
       class="dismiss"
