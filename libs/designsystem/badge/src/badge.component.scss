@@ -32,10 +32,10 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
   }
 
   &.sm ion-badge {
-    --background: var(--kirby-badge-background-color, var(--kirby-color-fill-base-quiet));
+    --background: var(--kirby-badge-background-color, var(--kirby-badge-color-fill));
     --color: var(--kirby-badge-color, var(--kirby-color-content-base-quiet));
 
-    border-color: var(--kirby-color-border-base-quiet);
+    border-color: var(--kirby-badge-color-border);
   }
 
   // Colors
@@ -67,11 +67,18 @@ $maximum-font-size: 10px * utils.$text-resize-threshold;
     border-color: var(--kirby-color-border-warning);
   }
 
-  &.danger ion-badge {
+  &.danger.sm ion-badge {
     --background: var(--kirby-color-fill-danger-loud);
     --color: var(--kirby-color-content-danger-loud);
 
     border-color: var(--kirby-color-border-danger-loud);
+  }
+
+  &.danger.md ion-badge {
+    --background: var(--kirby-color-fill-danger);
+    --color: var(--kirby-color-content-danger);
+
+    border-color: var(--kirby-color-border-danger);
   }
 }
 
