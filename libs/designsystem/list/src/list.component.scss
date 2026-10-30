@@ -1,7 +1,6 @@
 @use '@kirbydesign/core/src/scss/themes';
 
-$divider-color: var(--kirby-background-color);
-$shadow: var(--kirby-elevation-2);
+$shadow: var(--kirby-elevation-card);
 $item-height: var(--kirby-spacing-xxxl);
 
 :host {
@@ -26,9 +25,21 @@ $item-height: var(--kirby-spacing-xxxl);
   padding: 0;
 }
 
+.kirby-surface-raised {
+  background-color: var(--kirby-color-fill-base);
+  color: var(--kirby-color-content-base);
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
+}
+
+// Blend the list border into the list background to avoid a double border inside cards.
+:host-context(kirby-card) .kirby-surface-raised {
+  border-color: var(--kirby-color-fill-base);
+}
+
 ion-list-header {
-  background-color: var(--kirby-white);
-  border-bottom: 1px solid $divider-color;
+  background-color: var(--kirby-color-fill-base);
+  color: var(--kirby-color-content-base);
+  border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
   padding: 0;
   text-transform: inherit;
   letter-spacing: inherit;
@@ -39,10 +50,6 @@ ion-list-header {
 }
 
 ion-item {
-  --background: var(--kirby-white);
-  --background-activated: var(--kirby-white-shade);
-  --background-hover: var(--kirby-background-color);
-  --background-focused: var(--kirby-background-color);
   --inner-border-width: 0;
   --ion-safe-area-right: 0;
   --min-height: #{$item-height};
@@ -65,24 +72,6 @@ ion-item-sliding {
     // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
-  }
-
-  // Supported list item theme colors. Add more `&.<color-name>` rules here as needed.
-  &.light {
-    @include themes.apply-light-theme;
-
-    --kirby-item-background: var(--kirby-light);
-    --kirby-item-background-activated: var(--kirby-light-shade);
-    --kirby-item-background-focused: var(--kirby-light-shade);
-    --kirby-item-background-hover: var(--kirby-light-tint);
-
-    ion-item {
-      --background: var(--kirby-light);
-      --color: var(--kirby-light-contrast);
-      --background-activated: var(--kirby-light-shade);
-      --background-focused: var(--kirby-light-shade);
-      --background-hover: var(--kirby-light-tint);
-    }
   }
 }
 
@@ -108,8 +97,9 @@ ion-item-divider {
 .footer {
   @include themes.apply-white-theme;
 
-  background-color: var(--kirby-white);
-  border-top: 1px solid $divider-color;
+  background-color: var(--kirby-color-fill-base);
+  color: var(--kirby-color-content-base);
+  border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -236,31 +226,24 @@ kirby-list-item:last-of-type {
   --kirby-content-border-bottom-radius: var(--kirby-list-border-bottom-radius);
 }
 
-.has-header kirby-list-item:first-of-type {
-  --kirby-content-border-top-radius: 0;
-}
+:host(:not(.has-sections, .has-stand-alone)) {
+  .has-header kirby-list-item:first-of-type {
+    --kirby-content-border-top-radius: 0;
+  }
 
-.has-footer kirby-list-item:last-of-type {
-  --kirby-content-border-bottom-radius: 0;
+  .has-footer kirby-list-item:last-of-type {
+    --kirby-content-border-bottom-radius: 0;
+  }
 }
 
 :host-context(.shape-none) {
   .list,
   .list-items {
+    --kirby-item-background: transparent;
+
     box-shadow: none;
     border-radius: unset;
-
-    --kirby-item-background: transparent;
-    --kirby-list-item-border-color: var(--kirby-medium);
   }
-}
-
-:host-context(kirby-card) {
-  --kirby-list-item-border-color: var(--kirby-background-color);
-}
-
-:host-context(kirby-card.outlined) {
-  --kirby-list-item-border-color: var(--kirby-medium);
 }
 
 :host-context(.item-spacing) {

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 // @ts-expect-error TypeScript cannot provide types based on attributes yet
-import exampleHtml from '../../examples/list-example/list-example.component.html' with { loader: 'text' };
+import exampleHtml from '../../examples/list-example/list-example.component.html' with {
+  loader: 'text',
+};
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
-import { ListItemsExampleComponent } from '~/app/examples/list-example/examples/items';
 import { ListItemsNoDividersExampleComponent } from '../../examples/list-example/examples/items-no-dividers';
+import { ListItemsExampleComponent } from '~/app/examples/list-example/examples/items';
 import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list-example/examples/header-and-footer';
 import { ListWithSectionsExampleComponent } from '~/app/examples/list-example/examples/sections';
 import { ListWithSectionsAndStandAloneExampleComponent } from '~/app/examples/list-example/examples/sections-with-standalone';
@@ -34,6 +36,13 @@ import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-view
 })
 export class ListShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
+    {
+      name: 'getItemColor (deprecated)',
+      description:
+        'Callback that returns the theme color for an item. Deprecated - coloring list items differently is no longer supported.',
+      defaultValue: 'undefined',
+      type: ['(item: any) => ThemeColor'],
+    },
     {
       name: 'showDivider',
       description: 'Determines if dividers (bottom-border on list items) should be shown or not',
