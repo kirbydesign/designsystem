@@ -58,6 +58,53 @@ test('retains aliases to surface tokens at their Figma paths', () => {
   );
 });
 
+test('resolves aliases within the same collection relative to the nearest group', () => {
+  const surface = () => ({
+    color: { border: { base: { $type: 'color', $value: '#000' } } },
+    range: {
+      color: {
+        fill: {
+          $type: 'color',
+          $value: '#000',
+          $extensions: { 'com.figma.aliasData': { targetVariableName: 'color/border/base' } },
+        },
+      },
+    },
+  });
+  const tokens = figmaToDtcg([{ 'base surface': surface(), 'raised surface': surface() }], config);
+  assert.equal(tokens['base surface'].range.color.fill.$value, '{base surface.color.border.base}');
+  assert.equal(
+    tokens['raised surface'].range.color.fill.$value,
+    '{raised surface.color.border.base}'
+  );
+});
+
+test('does not resolve an alias to the token itself', () => {
+  const warnings = [];
+  const tokens = figmaToDtcg(
+    [
+      {
+        'base surface': {
+          color: {
+            border: {
+              focus: {
+                $type: 'color',
+                $value: '#238cec',
+                $extensions: { 'com.figma.aliasData': { targetVariableName: 'focus' } },
+              },
+            },
+          },
+        },
+      },
+    ],
+    config,
+    {},
+    warnings
+  );
+  assert.equal(tokens['base surface'].color.border.focus.$value, '#238cec');
+  assert.equal(warnings.length, 1);
+});
+
 test('resolves a reference to a baseline-only primitive', () => {
   const baseline = { spacing: { s: { $type: 'dimension', $value: { value: 16, unit: 'px' } } } };
   const tokens = figmaToDtcg(
@@ -177,4 +224,70 @@ test('warns when retaining the literal value for a Figma alias target that does 
   assert.deepEqual(warnings, [
     'color/missing: Figma alias target "not/exported" is not present in the import or baseline; retaining its literal value.',
   ]);
+});
+
+const shadowPart = (type, value) => ({
+  $type: type,
+  $value: value,
+  $extensions: { 'com.figma.scopes': ['ALL_SCOPES'] },
+});
+
+const figmaShadow = ({ y, blur, spread = 0, alpha }) => ({
+  x: shadowPart('number', 0),
+  y: shadowPart('number', y),
+  blur: shadowPart('number', blur),
+  spread: shadowPart('number', spread),
+  color: shadowPart('color', { colorSpace: 'srgb', components: [0.11, 0.11, 0.11], alpha }),
+});
+
+test('combines Figma shadow parts into a DTCG shadow token', () => {
+  const tokens = figmaToDtcg(
+    [{ 'base surface': { elevation: { card: figmaShadow({ y: 1, blur: 24, alpha: 0.04 }) } } }],
+    config
+  );
+  assert.deepEqual(tokens['base surface'].elevation.card, {
+    $type: 'shadow',
+    $value: {
+      offsetX: { value: 0, unit: 'px' },
+      offsetY: { value: 1, unit: 'px' },
+      blur: { value: 24, unit: 'px' },
+      spread: { value: 0, unit: 'px' },
+      color: { colorSpace: 'srgb', components: [0.11, 0.11, 0.11], alpha: 0.04 },
+    },
+  });
+});
+
+test('combines groups of Figma shadow layers into one layered shadow token', () => {
+  const tokens = figmaToDtcg(
+    [
+      {
+        'base surface': {
+          elevation: {
+            4: {
+              '01': figmaShadow({ y: 0, blur: 5, alpha: 0.04 }),
+              '02': figmaShadow({ y: 10, blur: 15, spread: -10, alpha: 0.15 }),
+            },
+          },
+        },
+      },
+    ],
+    config
+  );
+  const elevation = tokens['base surface'].elevation[4];
+  assert.equal(elevation.$type, 'shadow');
+  assert.deepEqual(
+    elevation.$value.map((layer) => layer.offsetY.value),
+    [0, 10]
+  );
+});
+
+test('fails when a group marked as a shadow is not made of shadow parts', () => {
+  assert.throws(
+    () =>
+      figmaToDtcg(
+        [{ 'base surface': { elevation: { card: { x: shadowPart('number', 0) } } } }],
+        config
+      ),
+    /base surface\/elevation\/card: a shadow must be a group of x, y, blur, spread, color/
+  );
 });

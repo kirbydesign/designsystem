@@ -8,7 +8,16 @@ const PREFIX = 'kirby';
 const SURFACES = ['base', 'raised', 'brand'];
 
 export default {
-  ignore: ['font-size/**', 'line-height/**', 'font/weight/**', '* surface/color/chart/**'],
+  ignore: [
+    'font-size/**',
+    'font/weight/**',
+    'line-height/**',
+    '* surface/chart/color/**',
+    'loudness-scale/**',
+    'card/**',
+    'background-blur/**',
+    '* surface/tooltip/**',
+  ],
 
   variableName: ([group, ...rest]) =>
     group.endsWith(' surface') ? [PREFIX, ...rest] : [PREFIX, group, ...rest],
@@ -18,8 +27,7 @@ export default {
    * matches it, in the order written here, so put specific blocks before catch-alls.
    */
   outputs: {
-    'surfaces.css': [
-      { include: ['font/**'], section: 'font' },
+    'default-brand.css': [
       ...SURFACES.map((surface) => ({
         include: [`${surface} surface/**`],
         selector:
@@ -27,14 +35,18 @@ export default {
         section: ([, category]) => category.toLowerCase(),
       })),
     ],
-    'primitives-color.css': [{ include: ['*/color/**'] }],
+    'color-primitives.css': [
+      { include: ['*/color/**'], section: ([group]) => `${group.toLowerCase()} colors` },
+    ],
     'primitives.css': [{ include: ['**'], section: ([group]) => group.toLowerCase() }],
   },
+
+  shadows: ['* surface/elevation/*', '* surface/card/elevation'],
 
   units: {
     px: {
       scopes: ['WIDTH_HEIGHT', 'GAP', 'CORNER_RADIUS', 'FONT_SIZE', 'LINE_HEIGHT', 'STROKE_FLOAT'],
-      include: ['* surface/elevation/**', 'background-blur/**'],
+      include: ['* surface/elevation/**', '* surface/card/elevation/**', 'background-blur/**'],
     },
     '%': { scopes: ['OPACITY', 'COLOR_OPACITY'] },
   },
