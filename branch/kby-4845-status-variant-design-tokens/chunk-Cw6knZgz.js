@@ -1,1 +1,0 @@
-import"./chunk-DI4jL9Xr.js";import"./chunk-DXOKtGwL.js";import{n as E,r as Y}from"./main-VTDNX5KI.js";export{Y as iosTransitionAnimation};
