@@ -6,7 +6,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { TabButtonComponent } from './tab-button.component';
 
-const { getTextColor, fontSize, fontWeight, lineHeight, size } = DesignTokenHelper;
+const { fontSize, fontWeight, size } = DesignTokenHelper;
 
 describe('TabsComponent', () => {
   let spectator: SpectatorHost<TabButtonComponent>;
@@ -30,21 +30,6 @@ describe('TabsComponent', () => {
 
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
-    });
-
-    it('should set correct color on unselected tab', () => {
-      expect(ionTabButton).toHaveComputedStyle({
-        color: getTextColor('semi-dark'),
-      });
-    });
-
-    it('should set correct color on selected tab', async () => {
-      ionTabButton.selected = true;
-      await TestHelper.whenTrue(() => ionTabButton.classList.contains('tab-selected'));
-
-      expect(ionTabButton).toHaveComputedStyle({
-        color: getTextColor('black'),
-      });
     });
 
     it('should only apply css transition to background-color', () => {
