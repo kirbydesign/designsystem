@@ -24,12 +24,14 @@ ion-tab-button {
     }
   }
 
-  @include interaction-state.apply-hover {
-    --background: #{interaction-state.get-state-color('white', 'xxxs')};
+  @include utils.hover {
+    --background: var(--kirby-color-fill-raised-hover);
+    --color: var(--kirby-color-content-raised-quiet-hover);
   }
 
-  @include interaction-state.apply-active {
-    --background: #{interaction-state.get-state-color('white', 'xxs')};
+  &:active {
+    --background: var(--kirby-color-fill-raised-active);
+    --color: var(--kirby-color-content-raised-quiet-active);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
@@ -43,8 +45,8 @@ ion-tab-button {
     font-weight: var(--kirby-font-weight-medium);
     font-size: min(var(--kirby-font-size-xs), $maximum-font-size);
 
-    --color: var(--kirby-text-color-semi-dark);
-    --color-selected: var(--kirby-black);
+    --color: var(--kirby-color-content-raised-quiet);
+    --color-selected: var(--kirby-color-content-raised);
     --padding-start: 0;
     --padding-end: 0;
     --kirby-icon-font-size: var(--kirby-spacing-m);
