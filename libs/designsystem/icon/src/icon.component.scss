@@ -41,15 +41,15 @@
 }
 
 :host(.success) {
-  color: var(--kirby-success);
+  color: var(--kirby-color-fill-success-loud);
 }
 
 :host(.warning) {
-  color: var(--kirby-warning);
+  color: var(--kirby-color-fill-warning-loud);
 }
 
 :host(.danger) {
-  color: var(--kirby-danger);
+  color: var(--kirby-color-fill-danger-loud);
 }
 
 :host(.white-overlay) {
@@ -61,7 +61,7 @@
 }
 
 :host(.medium) {
-  color: var(--kirby-medium);
+  color: var(--kirby-color-fill-neutral);
 }
 
 :host(.dark) {

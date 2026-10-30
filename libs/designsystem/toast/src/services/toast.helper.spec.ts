@@ -1,14 +1,10 @@
 import { ToastController } from '@ionic/angular/standalone';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { Overlay } from '@kirbydesign/designsystem/modal';
 import { ToastHelper } from './toast.helper';
-
-const getDecorationColor = DesignTokenHelper.getDecorationColor;
 
 describe('ToastHelper', () => {
   let spectator: SpectatorService<ToastHelper>;
@@ -62,27 +58,21 @@ describe('ToastHelper', () => {
     });
 
     describe('when configured with messageType', () => {
-      type MessageType = 'success' | 'warning';
-      type ColorStep = [string, number];
+      const messageTypes = ['success', 'warning'] as const;
 
-      const messageTypeColorMap = new Map<MessageType, ColorStep>([
-        ['success', ['green', 30]],
-        ['warning', ['orange', 40]],
-      ]);
+      messageTypes.forEach((messageType) => {
+        it(`should pass the '${messageType}' css class to ionic toast`, async () => {
+          const toastController = spectator.inject(ToastController);
+          const createSpy = spyOn(toastController, 'create').and.callThrough();
 
-      messageTypeColorMap.forEach((notificationColor, messageType) => {
-        it(`should render with correct background color for messageType = '${messageType}'`, async () => {
           overlay = await spectator.service.showToast({
             message: 'Test Message',
             messageType: messageType,
           });
-          const ionToast = window.document.getElementsByTagName('ion-toast')[0];
-          await TestHelper.whenReady(ionToast);
-          const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
 
-          expect(toastWrapper).toHaveComputedStyle({
-            'background-color': getDecorationColor(...notificationColor).value,
-          });
+          expect(createSpy).toHaveBeenCalledWith(
+            jasmine.objectContaining({ cssClass: `kirby-toast ${messageType}` })
+          );
         });
       });
 

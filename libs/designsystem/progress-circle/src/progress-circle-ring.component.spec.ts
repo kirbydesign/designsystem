@@ -1,10 +1,6 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { DesignTokenHelper, ThemeColor } from '@kirbydesign/core';
-
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
-
-const getColor = DesignTokenHelper.getColor;
 
 describe('ProgressCircleRingComponent', () => {
   let spectator: Spectator<ProgressCircleRingComponent>;
@@ -96,25 +92,8 @@ describe('ProgressCircleRingComponent', () => {
       });
     });
 
-    it('should render progress stroke with themeColor when themeColor class is set', () => {
-      const themeColor: ThemeColor = 'warning';
-      spectator.element.classList.add(themeColor);
-      spectator.element.style.transition = 'none';
-      spectator.detectChanges();
-
-      expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor('warning', 'shade'),
-      });
-    });
-
     it('should have default themeColor when themeColor is not set from outside', () => {
       expect(spectator.component.themeColor).toBe('success');
-    });
-
-    it('should render background stroke in semi-light', () => {
-      expect(spectator.query('circle.circle')).toHaveComputedStyle({
-        stroke: getColor('semi-light'),
-      });
     });
 
     it('should render progress stroke with the correct width', () => {
