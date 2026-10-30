@@ -437,6 +437,8 @@ const listLayouts: ListLayout[] = [
 
 const noneInCard: ListLayout = { label: 'shape none', shape: 'none', hasSections: true };
 
+const roundedInCard: ListLayout = { label: 'rounded', shape: 'rounded' };
+
 const cardVariants: CardVariant[] = ['base', 'raised', 'brand'];
 
 const surfaceItems = [
@@ -451,6 +453,7 @@ export const ListOnSurfaces: Story = {
     props: {
       layouts: listLayouts,
       noneInCard,
+      roundedInCard,
       cardVariants,
       items: surfaceItems,
       getSectionName: (item: (typeof surfaceItems)[number]) => item.section,
@@ -491,6 +494,12 @@ export const ListOnSurfaces: Story = {
         @for (cardVariant of cardVariants; track cardVariant) {
           <kirby-card [variant]="cardVariant">
             <ng-container *ngTemplateOutlet="list; context: { layout: noneInCard }"></ng-container>
+          </kirby-card>
+        }
+        <p class="row-start kirby-text-small-light">{{ roundedInCard.label }}</p>
+        @for (cardVariant of cardVariants; track cardVariant) {
+          <kirby-card [variant]="cardVariant">
+            <ng-container *ngTemplateOutlet="list; context: { layout: roundedInCard }"></ng-container>
           </kirby-card>
         }
       </div>
