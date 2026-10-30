@@ -26,10 +26,12 @@ ion-tab-button {
 
   @include utils.hover {
     --background: var(--kirby-color-fill-raised-hover);
+    --color: var(--kirby-color-content-raised-quiet-hover);
   }
 
   &:active {
     --background: var(--kirby-color-fill-raised-active);
+    --color: var(--kirby-color-content-raised-quiet-active);
   }
 
   // Wrap declarations to avoid mixing with nested rules.
