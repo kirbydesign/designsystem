@@ -4,9 +4,9 @@
   "private": true,
   "description": "Shared eslint configs.",
   "devDependencies": {
-    "@nx/eslint": "23.3.0",
-    "@nx/eslint-plugin": "23.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@nx/eslint": "23.3.1",
+    "@nx/eslint-plugin": "23.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.21.0",
     "angular-eslint": "^22.6.0",
     "eslint": "^9.18.0",
