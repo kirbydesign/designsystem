@@ -1,6 +1,5 @@
 import {
   AfterContentChecked,
-  afterEveryRender,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -392,9 +391,7 @@ export class PageComponent
     private ionicElementPartHelper: IonicElementPartHelper,
     public translations: TranslationService,
     private htmlDocTitle: Title
-  ) {
-    afterEveryRender(() => this.observeHeaderActions());
-  }
+  ) {}
 
   private contentReadyPromise: Promise<void>;
   private whenContentReady() {
@@ -492,6 +489,7 @@ export class PageComponent
     this.interceptBackButtonClicksSetup();
     this.initializeStickyIntersectionObserver();
     this.subscribeToToolbarButtonsChanges();
+    this.subscribeToHeaderActionsChanges();
   }
 
   ngAfterContentChecked(): void {
@@ -776,6 +774,14 @@ export class PageComponent
         this.pageActionsTemplate = pageAction.template;
       }
     });
+  }
+
+  private subscribeToHeaderActionsChanges(): void {
+    if (!this.header) return;
+
+    this.header.actionsChanged$
+      .pipe(takeUntil(this.ngOnDestroy$))
+      .subscribe(() => this.observeHeaderActions());
   }
 
   private observeHeaderActions() {

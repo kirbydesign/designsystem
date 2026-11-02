@@ -73,7 +73,9 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
 
   @ContentChild(HeaderActionsDirective, { read: TemplateRef<HeaderActionsDirective> })
   set actionsTemplate(template: TemplateRef<HeaderActionsDirective> | undefined) {
+    if (this._actionsTemplate === template) return;
     this._actionsTemplate = template;
+    this.actionsChanged$.next();
     this.changeDetectorRef.markForCheck();
   }
 
@@ -82,6 +84,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
   }
 
   private _actionsTemplate?: TemplateRef<HeaderActionsDirective>;
+  actionsChanged$ = new Subject<void>();
 
   @ContentChild(HeaderCustomSectionDirective, { read: TemplateRef<HeaderCustomSectionDirective> })
   customSectionTemplate?: TemplateRef<HeaderCustomSectionDirective>;
