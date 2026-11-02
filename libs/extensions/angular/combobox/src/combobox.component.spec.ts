@@ -182,6 +182,20 @@ describe('Combobox', () => {
       const kirbyItems = document.querySelectorAll('kirby-item');
       expect(kirbyItems.item(0)).toHaveText('Item 1');
     }));
+
+    it('keeps the active search filter applied when the items input is reassigned a new reference', fakeAsync(() => {
+      // Arrange
+      inputElement?.click();
+      spectator.component._virtualScrollViewport?.setRenderedRange({ start: 0, end: 20 });
+      spectator.typeInElement('Item 12', inputElement);
+
+      // Act
+      spectator.setHostInput('items', [...items20]);
+      spectator.detectChanges();
+
+      // Assert
+      expect((spectator.component as any).searchItems).toEqual([items20[11]]);
+    }));
   });
 
   describe('keyboard navigation', () => {
