@@ -64,11 +64,9 @@
     }
   }
 
-  &[role='button'] {
+  &[role='button'],
+  &:has(.kirby-breakout) {
     --kirby-card-state-layer-opacity: var(--kirby-opacity-0);
-
-    cursor: pointer;
-    outline: none;
 
     // Draw overlay for hover/active on top of slotted content
     &::after {
@@ -82,15 +80,21 @@
       opacity: var(--kirby-card-state-layer-opacity);
       transition: interaction-state.transition(opacity);
     }
+  }
 
-    @include utils.hover {
-      --kirby-card-state-layer-opacity: var(--kirby-opacity-5);
-    }
+  @include utils.hover('&[role="button"]:hover, &:has(.kirby-breakout:hover)') {
+    --kirby-card-state-layer-opacity: var(--kirby-opacity-5);
+  }
 
-    &:active,
-    &.interaction-state-active {
-      --kirby-card-state-layer-opacity: var(--kirby-opacity-10);
-    }
+  &[role='button']:active,
+  &[role='button'].interaction-state-active,
+  &:has(.kirby-breakout:active) {
+    --kirby-card-state-layer-opacity: var(--kirby-opacity-10);
+  }
+
+  &[role='button'] {
+    cursor: pointer;
+    outline: none;
 
     &:focus-visible {
       transition: interaction-state.transition();
