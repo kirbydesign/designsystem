@@ -2,7 +2,7 @@ import { signal, type WritableSignal } from '@angular/core';
 import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import { expect, fn, waitFor } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -239,6 +239,76 @@ const interactiveToolbarTitleStory = (showActions: boolean): Story => ({
 
 export const InteractiveToolbarTitleWithoutActions = interactiveToolbarTitleStory(false);
 export const InteractiveToolbarTitleWithTwoActions = interactiveToolbarTitleStory(true);
+
+export const ToggleHeaderActions: Story = {
+  render: () => ({
+    props: {
+      showActions: true,
+    },
+    template: `<kirby-app>
+      <kirby-page>
+        <kirby-header title="Header actions" [emphasizeActions]="true">
+          @if (showActions) {
+            <button kirby-button *kirbyHeaderActions>Header action</button>
+          }
+        </kirby-header>
+        <kirby-page-content>
+          <button kirby-button (click)="showActions = !showActions">
+            {{ showActions ? 'Remove header actions' : 'Restore header actions' }}
+          </button>
+          <div style="height: 200vh">Scroll to show the toolbar actions</div>
+        </kirby-page-content>
+      </kirby-page>
+    </kirby-app>`,
+  }),
+  play: async ({ canvasElement, step }) => {
+    const headerActionName = 'Header action';
+    const removeActionsName = 'Remove header actions';
+    const canvas = within(canvasElement);
+    const toolbar = canvasElement.querySelector('ion-toolbar');
+    const header = canvasElement.querySelector<HTMLElement>('kirby-header');
+    const content = canvasElement.querySelector('ion-content');
+
+    await waitFor(() =>
+      expect(within(header).getByRole('button', { name: headerActionName })).toBeVisible()
+    );
+    for (let cycle = 0; cycle < 2; cycle++) {
+      await step(`Toggle cycle ${cycle + 1}`, async () => {
+        await step('Remove header actions', async () => {
+          await userEvent.click(canvas.getByRole('button', { name: removeActionsName }));
+          await waitFor(() => {
+            expect(within(header).queryByRole('button', { name: headerActionName })).toBeNull();
+            expect(within(toolbar).queryByText(headerActionName)).toBeNull();
+          });
+        });
+        await step('Restore header actions', async () => {
+          await userEvent.click(canvas.getByRole('button', { name: 'Restore header actions' }));
+          await waitFor(() => {
+            expect(within(header).getByRole('button', { name: headerActionName })).toBeVisible();
+            expect(within(toolbar).getByText(headerActionName)).not.toBeVisible();
+          });
+        });
+
+        await step('Show toolbar actions when scrolling down', async () => {
+          await content.scrollToBottom(0);
+          await waitFor(() =>
+            expect(toolbar.querySelector('ion-buttons[slot="primary"]')).toHaveClass('fade-in')
+          );
+          await waitFor(() => expect(within(toolbar).getByText(headerActionName)).toBeVisible());
+        });
+        await step('Hide toolbar actions when scrolling back up', async () => {
+          await content.scrollToTop(0);
+          await waitFor(() =>
+            expect(toolbar.querySelector('ion-buttons[slot="primary"]')).not.toHaveClass('fade-in')
+          );
+          await waitFor(() =>
+            expect(within(toolbar).getByText(headerActionName)).not.toBeVisible()
+          );
+        });
+      });
+    }
+  },
+};
 
 const pageContainerStyles = `
   .page-container {

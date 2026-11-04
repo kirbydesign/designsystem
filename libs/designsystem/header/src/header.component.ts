@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   Directive,
@@ -71,7 +72,19 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
   actionsElement?: ElementRef<HTMLDivElement>;
 
   @ContentChild(HeaderActionsDirective, { read: TemplateRef<HeaderActionsDirective> })
-  actionsTemplate?: TemplateRef<HeaderActionsDirective>;
+  set actionsTemplate(template: TemplateRef<HeaderActionsDirective> | undefined) {
+    if (this._actionsTemplate === template) return;
+    this._actionsTemplate = template;
+    this.actionsChanged$.next();
+    this.changeDetectorRef.markForCheck();
+  }
+
+  get actionsTemplate(): TemplateRef<HeaderActionsDirective> | undefined {
+    return this._actionsTemplate;
+  }
+
+  private _actionsTemplate?: TemplateRef<HeaderActionsDirective>;
+  actionsChanged$ = new Subject<void>();
 
   @ContentChild(HeaderCustomSectionDirective, { read: TemplateRef<HeaderCustomSectionDirective> })
   customSectionTemplate?: TemplateRef<HeaderCustomSectionDirective>;
@@ -111,7 +124,10 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
 
   private actionGroupConfig: ActionGroupConfig;
 
-  constructor(private injector: Injector) {}
+  constructor(
+    private injector: Injector,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.actionGroupConfig = {
