@@ -17,6 +17,7 @@ export default {
     'card/**',
     'background-blur/**',
     '* surface/tooltip/**',
+    'sidebar logo',
   ],
 
   variableName: ([group, ...rest]) =>
