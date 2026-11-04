@@ -7,6 +7,13 @@ import {
 import { ImageBannerComponent } from '@kirbydesign/extensions-angular/image-banner';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
+// eslint-disable-next-line no-restricted-imports
+import {
+  gridStyles,
+  interactionStates,
+  pseudoStatesFor,
+} from '../../../../designsystem/.storybook/story-helpers';
+
 /**
  * The image banner is a dynamic UI component designed to grab attention and convey key messages.
  * It can combine a delightful visual background and text to highlight promotional content or other important information.
@@ -240,10 +247,68 @@ export const Focused: Story = {
     backgroundBlur: 'dark',
   },
   play: async ({ canvasElement }) => {
-    const breakouts = canvasElement.querySelectorAll('.breakout');
+    const breakouts = canvasElement.querySelectorAll('.kirby-breakout');
     const visibleBreakout = Array.from(breakouts).find(
       (el) => getComputedStyle(el).display !== 'none'
     ) as HTMLElement;
     visibleBreakout?.focus();
   },
+};
+
+const backgroundBlurs: ImageBannerComponent['backgroundBlur'][] = ['dark', 'light', 'none'];
+
+const views = [
+  { id: 'wide', width: '640px' },
+  { id: 'narrow', width: '360px' },
+];
+
+// Only target the action of the current view, as the other one is hidden and can't be interacted with.
+const pseudoStatesPerView = views.map((view) =>
+  pseudoStatesFor(
+    backgroundBlurs.map((blur) => `image-banner-${blur}-${view.id}`),
+    `.${view.id}-view-action`
+  )
+);
+
+export const InteractionStates: Story = {
+  // Visual regression story, so it's left out of the docs page
+  tags: ['!autodocs', 'dev'],
+  parameters: {
+    pseudo: {
+      hover: pseudoStatesPerView.flatMap((states) => states.hover),
+      active: pseudoStatesPerView.flatMap((states) => states.active),
+      focusVisible: pseudoStatesPerView.flatMap((states) => states.focusVisible),
+    },
+  },
+  render: () => ({
+    props: {
+      backgroundBlurs,
+      views,
+      states: interactionStates,
+      noop: () => {
+        // noop
+      },
+    },
+    template: `
+      <div class="grid">
+        @for (blur of backgroundBlurs; track blur) {
+          @for (state of states; track state) {
+            @for (view of views; track view.id) {
+              <kirby-x-image-banner
+                [attr.id]="'image-banner-' + blur + '-' + view.id + '-' + state"
+                [style.width]="view.width"
+                [title]="blur + ' background blur'"
+                [bodyText]="state"
+                [backgroundBlur]="blur"
+                imagePath="assets/images/leaves.jpg"
+                externalLink="http://www.kirby.design"
+                (dismissClick)="noop()"
+              ></kirby-x-image-banner>
+            }
+          }
+        }
+      </div>
+    `,
+    styles: [gridStyles(views.length, 'max-content'), '.grid { align-items: start; }'],
+  }),
 };
