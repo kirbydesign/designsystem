@@ -757,7 +757,7 @@ export class PageComponent
   }
 
   private initializeActions() {
-    if (this.header && this.headerActionsTemplate === undefined) {
+    if (this.header) {
       this.headerActionsTemplate = this.header.actionsTemplate;
     }
 
