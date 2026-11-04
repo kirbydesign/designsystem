@@ -1,4 +1,4 @@
-<kirby-card [variant]="backgroundBlur === 'dark' ? 'brand' : 'raised'">
+<kirby-card>
   <div class="blur-image-wrapper">
     <img class="blur-image" [src]="imagePath" alt="" />
   </div>
@@ -37,7 +37,7 @@
             we want different behavior on varying screen widths -->
         <a
           kirby-button
-          class="breakout wide-view-action"
+          class="kirby-breakout wide-view-action kirby-surface-raised"
           [attentionLevel]="'2'"
           [href]="externalLink"
           target="_blank"
@@ -49,8 +49,7 @@
 
         <a
           kirby-button
-          class="breakout narrow-view-action"
-          [attentionLevel]="'2'"
+          class="kirby-breakout narrow-view-action"
           [href]="externalLink"
           [noDecoration]="true"
           [showIconOnly]="true"
@@ -67,7 +66,7 @@
             we want different behavior on varying screen widths -->
         <button
           kirby-button
-          class="breakout wide-view-action"
+          class="kirby-breakout wide-view-action kirby-surface-raised"
           size="sm"
           (click)="bannerClicked($event)"
           [attentionLevel]="'2'"
@@ -77,7 +76,7 @@
 
         <button
           kirby-button
-          class="breakout narrow-view-action"
+          class="kirby-breakout narrow-view-action kirby-surface-raised"
           size="sm"
           (click)="bannerClicked($event)"
           [attentionLevel]="'2'"
@@ -97,10 +96,10 @@
       kirby-button
       size="xs"
       (click)="dismissClicked($event)"
-      [noDecoration]="true"
+      [attentionLevel]="'2'"
       [showIconOnly]="true"
       [attr.aria-label]="translations.get('close') + ' ' + title"
-      class="dismiss"
+      class="dismiss kirby-surface-raised"
     >
       <kirby-icon name="close"></kirby-icon>
     </button>

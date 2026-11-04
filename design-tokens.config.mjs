@@ -48,6 +48,9 @@ export default {
       scopes: ['WIDTH_HEIGHT', 'GAP', 'CORNER_RADIUS', 'FONT_SIZE', 'LINE_HEIGHT', 'STROKE_FLOAT'],
       include: ['* surface/elevation/**', '* surface/card/elevation/**', 'background-blur/**'],
     },
-    '%': { scopes: ['OPACITY', 'COLOR_OPACITY'] },
+    '%': {
+      scopes: ['OPACITY', 'COLOR_OPACITY'],
+      include: ['* surface/**/opacity/*'],
+    },
   },
 };
