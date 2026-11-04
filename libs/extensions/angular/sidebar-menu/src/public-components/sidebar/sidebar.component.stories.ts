@@ -592,6 +592,9 @@ export const Focused: Story = {
 
 const menuItemStates = [...interactionStates, 'selected'] as const;
 
+// Menu items render their id with an "item" prefix
+const menuItemPseudoStates = pseudoStatesFor(['itemmenu-item']);
+
 /**
  * The menu items in each interaction state, for visual regression testing.
  */
@@ -599,8 +602,13 @@ export const InteractionStates: Story = {
   // Visual regression story, so it's left out of the docs page
   tags: ['!autodocs', 'dev'],
   parameters: {
-    // Menu items render their id with an "item" prefix
-    pseudo: pseudoStatesFor(['itemmenu-item']),
+    pseudo: {
+      ...menuItemPseudoStates,
+      // The hover and active styles are set on the list item around the menu item,
+      // so those states are applied to it as well
+      hover: [...menuItemPseudoStates.hover, 'li:has(> #itemmenu-item-hover)'],
+      active: [...menuItemPseudoStates.active, 'li:has(> #itemmenu-item-active)'],
+    },
   },
   args: {
     menuItems: menuItemStates.map((state) => ({
