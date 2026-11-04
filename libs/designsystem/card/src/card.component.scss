@@ -64,12 +64,8 @@
     }
   }
 
-  &[role='button'] {
-    --kirby-card-state-layer-opacity: var(--kirby-opacity-0);
-
-    cursor: pointer;
-    outline: none;
-
+  &[role='button'],
+  &:has(.kirby-breakout) {
     // Draw overlay for hover/active on top of slotted content
     &::after {
       content: '';
@@ -78,19 +74,28 @@
       border-radius: inherit;
       pointer-events: none;
       z-index: interaction-state.$state-layer-z-index;
-      background-color: var(--kirby-card-main-color);
-      opacity: var(--kirby-card-state-layer-opacity);
-      transition: interaction-state.transition(opacity);
     }
+  }
 
-    @include utils.hover {
-      --kirby-card-state-layer-opacity: var(--kirby-opacity-5);
+  @include utils.hover('&[role="button"]:hover, &:has(.kirby-breakout:hover)') {
+    &::after {
+      background-color: var(--kirby-card-color-fill-hover);
+      opacity: var(--kirby-card-opacity-hover);
     }
+  }
 
-    &:active,
-    &.interaction-state-active {
-      --kirby-card-state-layer-opacity: var(--kirby-opacity-10);
+  &[role='button']:active,
+  &[role='button'].interaction-state-active,
+  &:has(.kirby-breakout:active) {
+    &::after {
+      background-color: var(--kirby-card-color-fill-active);
+      opacity: var(--kirby-card-opacity-active);
     }
+  }
+
+  &[role='button'] {
+    cursor: pointer;
+    outline: none;
 
     &:focus-visible {
       transition: interaction-state.transition();
