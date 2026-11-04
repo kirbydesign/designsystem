@@ -1,4 +1,4 @@
-<kirby-card>
+<kirby-card [themeColor]="backgroundBlur === 'none' ? 'white' : backgroundBlur">
   <div class="blur-image-wrapper">
     <img class="blur-image" [src]="imagePath" alt="" />
   </div>
@@ -37,8 +37,8 @@
             we want different behavior on varying screen widths -->
         <a
           kirby-button
-          class="kirby-breakout wide-view-action kirby-surface-raised"
-          [attentionLevel]="'2'"
+          class="breakout wide-view-action"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           [href]="externalLink"
           target="_blank"
           size="sm"
@@ -49,7 +49,8 @@
 
         <a
           kirby-button
-          class="kirby-breakout narrow-view-action"
+          class="breakout narrow-view-action"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           [href]="externalLink"
           [noDecoration]="true"
           [showIconOnly]="true"
@@ -66,20 +67,20 @@
             we want different behavior on varying screen widths -->
         <button
           kirby-button
-          class="kirby-breakout wide-view-action kirby-surface-raised"
+          class="breakout wide-view-action"
           size="sm"
           (click)="bannerClicked($event)"
-          [attentionLevel]="'2'"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
         >
           {{ actionButtonText }}
         </button>
 
         <button
           kirby-button
-          class="kirby-breakout narrow-view-action kirby-surface-raised"
+          class="breakout narrow-view-action"
           size="sm"
           (click)="bannerClicked($event)"
-          [attentionLevel]="'2'"
+          [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
           [noDecoration]="true"
           [showIconOnly]="true"
         >
@@ -96,10 +97,10 @@
       kirby-button
       size="xs"
       (click)="dismissClicked($event)"
-      [attentionLevel]="'2'"
+      [attentionLevel]="backgroundBlur === 'none' ? '3' : '2'"
       [showIconOnly]="true"
       [attr.aria-label]="translations.get('close') + ' ' + title"
-      class="dismiss kirby-surface-raised"
+      class="dismiss"
     >
       <kirby-icon name="close"></kirby-icon>
     </button>
