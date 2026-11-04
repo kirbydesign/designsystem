@@ -3,6 +3,24 @@
  */
 
 /*
+ * sidebar logo
+ */
+
+:root {
+  --kirby-sidebar-logo: Bankdata;
+}
+
+/*
+ * font
+ */
+
+:root {
+  --kirby-font-letter-spacing: 0;
+  --kirby-font-family-brand: Roboto;
+  --kirby-font-family-fallback: sans-serif;
+}
+
+/*
  * border-radius
  */
 
@@ -80,14 +98,4 @@
   --kirby-opacity-40: 40%;
   --kirby-opacity-60: 60%;
   --kirby-opacity-80: 80%;
-}
-
-/*
- * font
- */
-
-:root {
-  --kirby-font-letter-spacing: 0;
-  --kirby-font-family-brand: Roboto;
-  --kirby-font-family-fallback: sans-serif;
 }
