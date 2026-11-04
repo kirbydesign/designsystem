@@ -1,1 +1,0 @@
-import{h as f}from"./chunk-C1pq1Y5k.js";var n=()=>{if(f!==void 0)return f.Capacitor};export{n as t};
