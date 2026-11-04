@@ -5,22 +5,32 @@
   position: relative;
   overflow: visible;
 
+  // Borders follow the --sidebar-* and --menuitem-* overrides, so they blend in with custom colors
   &:not(.selected) a {
-    background: var(--kirby-color-fill-base);
-    color: var(--kirby-color-content-base);
-    border-color: var(--kirby-sidebar-color-border-base, transparent);
+    background: var(--sidebar-background-color, var(--kirby-color-fill-base));
+    color: var(--sidebar-color, var(--kirby-color-content-base));
+    border-color: var(
+      --sidebar-background-color,
+      var(--kirby-sidebar-color-border-base, transparent)
+    );
   }
 
   &:not(.selected):hover a {
     background: var(--menuitem-hover-background-color, var(--kirby-color-fill-base-hover));
-    color: var(--kirby-color-content-base-hover);
-    border-color: var(--kirby-sidebar-color-border-base-hover, transparent);
+    color: var(--sidebar-color, var(--kirby-color-content-base-hover));
+    border-color: var(
+      --menuitem-hover-background-color,
+      var(--kirby-sidebar-color-border-base-hover, transparent)
+    );
   }
 
   &:not(.selected):active a {
     background: var(--menuitem-active-background-color, var(--kirby-color-fill-base-active));
-    color: var(--kirby-color-content-base-active);
-    border-color: var(--kirby-sidebar-color-border-base-active, transparent);
+    color: var(--sidebar-color, var(--kirby-color-content-base-active));
+    border-color: var(
+      --menuitem-active-background-color,
+      var(--kirby-sidebar-color-border-base-active, transparent)
+    );
   }
 }
 
@@ -30,7 +40,10 @@
 .selected:focus-visible {
   background: var(--menuitem-selected-background-color, var(--kirby-sidebar-color-fill-engaged));
   color: var(--menuitem-selected-color, var(--kirby-sidebar-color-content-engaged));
-  border-color: var(--kirby-sidebar-color-border-engaged);
+  border-color: var(
+    --menuitem-selected-background-color,
+    var(--kirby-sidebar-color-border-engaged)
+  );
   font-weight: var(--kirby-font-weight-bold);
 }
 

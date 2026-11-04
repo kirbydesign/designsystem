@@ -614,3 +614,25 @@ export const InteractionStates: Story = {
     mainAreaContent: '',
   },
 };
+
+/**
+ * The menu items in each interaction state with the `--sidebar-*` and `--menuitem-*` overrides set,
+ * for visual regression testing.
+ */
+export const CustomColors: Story = {
+  ...InteractionStates,
+  decorators: [
+    componentWrapperDecorator(
+      (story) => `
+        <div style="
+          --sidebar-background-color: var(--kirby-brand-color-light-blue-50);
+          --sidebar-color: var(--kirby-system-color-dark-grey-975);
+          --menuitem-hover-background-color: var(--kirby-brand-color-light-blue-100);
+          --menuitem-active-background-color: var(--kirby-brand-color-light-blue-200);
+          --menuitem-selected-background-color: var(--kirby-brand-color-green-400);
+          --menuitem-selected-color: var(--kirby-system-color-dark-grey-975);
+        ">${story}</div>
+      `
+    ),
+  ],
+};
