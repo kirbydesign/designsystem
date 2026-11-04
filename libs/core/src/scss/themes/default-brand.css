@@ -6,8 +6,7 @@
  * color
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-color-border-focus: #238cec;
   --kirby-color-fill-base: var(--kirby-system-color-light-grey-100);
   --kirby-color-fill-base-hover: var(--kirby-system-color-light-grey-300);
@@ -542,8 +541,7 @@
  * badge
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-badge-color-fill: var(--kirby-system-color-dark-grey-500);
   --kirby-badge-color-border: var(--kirby-system-color-dark-grey-500);
 }
@@ -562,8 +560,7 @@
  * image-banner
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-image-banner-dismiss-color-fill-light: rgba(255, 255, 255, 0);
   --kirby-image-banner-dismiss-color-fill-light-hover: rgba(242, 242, 242, 0.4);
   --kirby-image-banner-dismiss-color-fill-light-active: rgba(235, 235, 235, 0.6);
@@ -606,8 +603,7 @@
  * input
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-input-color-border-raised: var(--kirby-system-color-dark-grey-200);
   --kirby-input-color-border-raised-hover: var(--kirby-system-color-dark-grey-300);
 }
@@ -626,8 +622,7 @@
  * spot-illustration
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-spot-illustration-color-content-base: var(--kirby-system-color-dark-grey-975);
   --kirby-spot-illustration-color-fill-raised: var(--kirby-system-color-light-grey-500);
   --kirby-spot-illustration-color-fill-brand: var(--kirby-brand-color-green-400);
@@ -658,8 +653,7 @@
  * skeleton
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-skeleton-color-fill: rgba(28, 28, 28, 0.05);
   --kirby-skeleton-color-fill-loud: rgba(28, 28, 28, 0.1);
 }
@@ -678,8 +672,7 @@
  * sidebar
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-sidebar-color-fill-engaged: var(--kirby-brand-color-dark-blue-950);
   --kirby-sidebar-color-content-engaged: var(--kirby-system-color-white-00);
   --kirby-sidebar-color-border-engaged: var(--kirby-brand-color-dark-blue-950);
@@ -710,8 +703,7 @@
  * toggle
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-toggle-color-fill: var(--kirby-system-color-dark-grey-200);
   --kirby-toggle-color-fill-hover: var(--kirby-system-color-dark-grey-400);
   --kirby-toggle-color-fill-active: var(--kirby-system-color-dark-grey-600);
@@ -769,8 +761,7 @@
  * card
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-card-elevation: 0 0 0 0 rgba(28, 28, 28, 0);
   --kirby-card-opacity-hover: 4%;
   --kirby-card-opacity-active: 8%;
@@ -798,8 +789,7 @@
  * elevation
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-elevation-2: 0 0 0 0 rgba(28, 28, 28, 0);
   --kirby-elevation-4: 0 0 5px 0 rgba(28, 28, 28, 0.04), 0 10px 15px -10px rgba(28, 28, 28, 0.15);
   --kirby-elevation-8: 0 20px 30px -15px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
@@ -821,8 +811,7 @@
  * range
  */
 
-:root,
-.kirby-surface-base {
+:root, .kirby-surface-base {
   --kirby-range-color-fill: var(--kirby-system-color-dark-grey-200);
   --kirby-range-color-fill-hover: var(--kirby-system-color-dark-grey-300);
   --kirby-range-color-fill-active: var(--kirby-system-color-dark-grey-500);
