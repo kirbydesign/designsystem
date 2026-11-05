@@ -13,10 +13,15 @@ import { IonSkeletonText } from '@ionic/angular';
 })
 export class SkeletonLoaderComponent {
   /**
-   * The theme for the skeleton loader to use for gradient color. Theme is automatically set when used inside a themed kirby-card.
+   * @deprecated The skeleton loader now follows the surface it's placed on, so this input no longer has any effect.
+   * This input will be removed in a future major version.
    */
-  @Input()
-  theme: 'light' | 'dark' = 'light';
+  @Input() set theme(_value: 'light' | 'dark') {
+    console.warn(
+      `[Kirby Skeleton Loader] The 'theme' input is deprecated and no longer has any effect.
+        The skeleton loader now follows the surface it's placed on. This input will be removed in a future major version.`
+    );
+  }
 
   /**
    * The shape of the skeleton loader.
@@ -26,6 +31,6 @@ export class SkeletonLoaderComponent {
 
   @HostBinding('class')
   get _cssClass() {
-    return [this.theme, this.shape].filter((cssClass) => !!cssClass);
+    return [this.shape].filter((cssClass) => !!cssClass);
   }
 }

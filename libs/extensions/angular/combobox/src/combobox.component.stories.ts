@@ -9,6 +9,15 @@ import {
   InputSize,
 } from '@kirbydesign/designsystem/form-field';
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+
+// eslint-disable-next-line no-restricted-imports
+import {
+  idsOnSurfaces,
+  interactionStates,
+  pseudoStatesFor,
+  renderOnSurfaces,
+} from '../../../../designsystem/.storybook/story-helpers';
 
 type CurrencyItem = { code: string; name: string };
 
@@ -85,6 +94,7 @@ const meta: Meta<ComboboxComponent> = {
         ComboboxComponent,
         FormFieldComponent,
         ReactiveFormsModule,
+        CardComponent,
       ],
     }),
   ],
@@ -424,7 +434,7 @@ export const FormField: Story = {
           [message]="currencyControl.touched && currencyControl.invalid ? 'Please select a currency' : 'Pick your preferred currency'"
         >
           <kirby-x-combobox
-            ${argsToTemplate(args, { exclude: ['items', 'placeholder', 'hasError'] })}      
+            ${argsToTemplate(args, { exclude: ['items', 'placeholder', 'hasError'] })}
             [items]="items"
             [placeholder]="placeholder"
             [formControl]="currencyControl"
@@ -441,4 +451,52 @@ export const FormField: Story = {
       </form>
     `,
   }),
+};
+
+const comboboxVariants: { id: string; label: string; hasError?: boolean }[] = [
+  { id: 'default', label: 'Default' },
+  // Error is a variant rather than a state, so it's shown in every interaction state.
+  // This guards the rule order that keeps the error border over hover and active,
+  // and the focus ring over the error.
+  { id: 'error', label: 'Error', hasError: true },
+];
+
+// Disabled comboboxes can't be interacted with, so disabled is shown as a state of its own
+const comboboxStates = [...interactionStates, 'disabled'] as const;
+
+export const InteractionStates: Story = {
+  // Visual regression story, so it's left out of the docs page
+  tags: ['!autodocs', 'dev'],
+  parameters: {
+    pseudo: pseudoStatesFor(
+      idsOnSurfaces(
+        'combobox',
+        comboboxVariants.map((variant) => variant.id)
+      ),
+      'input'
+    ),
+  },
+  render: renderOnSurfaces(
+    `
+    <p class="kirby-text-normal-bold">{{ surface }}</p>
+    @for (variant of variants; track variant.id) {
+      <p class="kirby-text-small-light">{{ variant.label }}</p>
+      <div class="row">
+        @for (state of states; track state) {
+          <kirby-x-combobox
+            [attr.id]="'combobox-' + surface + '-' + variant.id + '-' + state"
+            [items]="items"
+            [placeholder]="state"
+            [hasError]="!!variant.hasError"
+            [disabled]="state === 'disabled'"
+            style="width: 180px"
+          ></kirby-x-combobox>
+        }
+      </div>
+    }
+  `,
+    'max-content',
+    { variants: comboboxVariants, states: comboboxStates, items: simpleCurrencyItems },
+    { stacked: true }
+  ),
 };

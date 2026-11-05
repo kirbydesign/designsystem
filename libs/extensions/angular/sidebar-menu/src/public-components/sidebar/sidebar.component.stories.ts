@@ -19,6 +19,12 @@ import {
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+// eslint-disable-next-line no-restricted-imports
+import {
+  interactionStates,
+  pseudoStatesFor,
+} from '../../../../../../designsystem/.storybook/story-helpers';
+
 const menuItemsExample: SidebarMenuItem[] = [
   {
     type: 'router-link',
@@ -582,4 +588,59 @@ export const Focused: Story = {
       (menuItem as HTMLElement).focus();
     }
   },
+};
+
+const menuItemStates = [...interactionStates, 'selected'] as const;
+
+// Menu items render their id with an "item" prefix
+const menuItemPseudoStates = pseudoStatesFor(['itemmenu-item']);
+
+/**
+ * The menu items in each interaction state, for visual regression testing.
+ */
+export const InteractionStates: Story = {
+  // Visual regression story, so it's left out of the docs page
+  tags: ['!autodocs', 'dev'],
+  parameters: {
+    pseudo: {
+      ...menuItemPseudoStates,
+      // The hover and active styles are set on the list item around the menu item,
+      // so those states are applied to it as well
+      hover: [...menuItemPseudoStates.hover, 'li:has(> #itemmenu-item-hover)'],
+      active: [...menuItemPseudoStates.active, 'li:has(> #itemmenu-item-active)'],
+    },
+  },
+  args: {
+    menuItems: menuItemStates.map((state) => ({
+      type: 'router-link',
+      id: `menu-item-${state}`,
+      title: state,
+      icon: 'home',
+      route: `/${state}`,
+    })),
+    selectedItem: 'menu-item-selected',
+    mainAreaContent: '',
+  },
+};
+
+/**
+ * The menu items in each interaction state with the `--sidebar-*` and `--menuitem-*` overrides set,
+ * for visual regression testing.
+ */
+export const CustomColors: Story = {
+  ...InteractionStates,
+  decorators: [
+    componentWrapperDecorator(
+      (story) => `
+        <div style="
+          --sidebar-background-color: var(--kirby-brand-color-light-blue-50);
+          --sidebar-color: var(--kirby-system-color-dark-grey-975);
+          --menuitem-hover-background-color: var(--kirby-brand-color-light-blue-100);
+          --menuitem-active-background-color: var(--kirby-brand-color-light-blue-200);
+          --menuitem-selected-background-color: var(--kirby-brand-color-green-400);
+          --menuitem-selected-color: var(--kirby-system-color-dark-grey-975);
+        ">${story}</div>
+      `
+    ),
+  ],
 };
