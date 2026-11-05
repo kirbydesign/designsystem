@@ -11,6 +11,9 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
+// eslint-disable-next-line no-restricted-imports
+import { renderOnSurfaces } from '../../../../designsystem/.storybook/story-helpers';
+
 /**
  * Spot Illustrations are visual elements that help convey complex ideas in a simple way.
  * They contribute to clear communication and makes the experience more present and welcoming.
@@ -367,4 +370,32 @@ export const ExtendingLibrary: Story = {
     actions: { disable: true },
   },
   tags: ['!dev'],
+};
+
+// Includes the illustrations with success, warning and danger parts
+const surfaceIllustrations = [
+  { name: 'invest-page.money.dot.circle', size: SpotIllustrationSize.MD },
+  { name: 'checkmark.circle.circle-part.shadow', size: SpotIllustrationSize.LG },
+  { name: 'exclamation-mark.circle.circle-part.shadow', size: SpotIllustrationSize.LG },
+  { name: 'cross.circle.circle-part.shadow', size: SpotIllustrationSize.LG },
+];
+
+export const Surfaces: Story = {
+  // Visual regression story, so it's left out of the docs page
+  tags: ['!autodocs', 'dev'],
+  render: renderOnSurfaces(
+    `
+    <p class="kirby-text-normal-bold">{{ surface }}</p>
+    <div class="row">
+      @for (illustration of illustrations; track illustration.name) {
+        <kirby-x-spot-illustration
+          [name]="illustration.name"
+          [size]="illustration.size"
+        ></kirby-x-spot-illustration>
+      }
+    </div>
+  `,
+    'max-content',
+    { illustrations: surfaceIllustrations }
+  ),
 };

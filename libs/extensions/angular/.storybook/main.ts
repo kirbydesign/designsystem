@@ -12,6 +12,7 @@ const config: StorybookConfig = {
       options: { transcludeMarkdown: true },
     },
     getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('storybook-addon-pseudo-states'),
     {
       name: getAbsolutePath('@chromatic-com/storybook'),
       options: {

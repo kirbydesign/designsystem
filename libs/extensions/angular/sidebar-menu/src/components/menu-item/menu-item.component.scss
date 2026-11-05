@@ -11,7 +11,8 @@
   border-radius: var(--kirby-border-radius-s);
   padding: var(--kirby-spacing-xxxs) var(--kirby-spacing-xs);
   gap: var(--kirby-spacing-xxs);
-  border: none;
+  border: var(--kirby-stroke-xs) solid
+    var(--sidebar-background-color, var(--kirby-sidebar-color-border-base, transparent));
   background: inherit;
   font: inherit;
   color: inherit;
@@ -23,19 +24,27 @@
   }
 
   &:hover {
-    background: var(--menuitem-hover-background-color, var(--kirby-inputs-background-color-hover));
+    background: var(--menuitem-hover-background-color, var(--kirby-color-fill-base-hover));
+    color: var(--sidebar-color, var(--kirby-color-content-base-hover));
+    border-color: var(
+      --menuitem-hover-background-color,
+      var(--kirby-sidebar-color-border-base-hover, transparent)
+    );
   }
 
   &:active {
-    background: var(
+    background: var(--menuitem-active-background-color, var(--kirby-color-fill-base-active));
+    color: var(--sidebar-color, var(--kirby-color-content-base-active));
+    border-color: var(
       --menuitem-active-background-color,
-      var(--kirby-inputs-background-color-active)
+      var(--kirby-sidebar-color-border-base-active, transparent)
     );
   }
 
   &:focus-visible {
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-inset);
+    border-radius: var(--kirby-border-radius-s);
     outline: none;
   }
 }
@@ -49,12 +58,10 @@
     content: '';
     position: absolute;
     inset: 0;
+    z-index: -1;
     border-radius: inherit;
     pointer-events: none;
-    background: var(
-      --menuitem-active-background-color,
-      var(--kirby-inputs-background-color-active)
-    );
+    background: var(--menuitem-active-background-color, var(--kirby-color-fill-base-active));
   }
 
   &.selected::before {
@@ -62,7 +69,7 @@
   }
 
   &:not(.selected) {
-    background: var(--sidebar-background-color, var(--kirby-tertiary));
+    background: var(--sidebar-background-color, var(--kirby-color-fill-base));
   }
 }
 
