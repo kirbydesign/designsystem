@@ -3,8 +3,7 @@ import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<SlideButtonComponent> = {
   component: SlideButtonComponent,

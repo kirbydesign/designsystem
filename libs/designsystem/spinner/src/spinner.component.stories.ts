@@ -2,8 +2,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<SpinnerComponent> = {
   component: SpinnerComponent,

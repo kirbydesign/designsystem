@@ -8,14 +8,13 @@ import { AccordionDirective, AccordionItemComponent } from '@kirbydesign/designs
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
-// eslint-disable-next-line no-restricted-imports
 import {
   gridStyles,
   interactionStates,
   pseudoStatesFor,
   Surface,
   surfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 import { AccordionExampleComponent } from '~/app/examples/accordion-example/accordion-example.component';
 
 const meta: Meta<AccordionItemComponent> = {

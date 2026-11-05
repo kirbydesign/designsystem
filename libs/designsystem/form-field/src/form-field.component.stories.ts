@@ -10,13 +10,12 @@ import {
 
 import { CardComponent, IconComponent } from '@kirbydesign/designsystem';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 import { FormFieldExampleComponent } from '~/app/examples/form-field-example/form-field-example.component';
 
 const meta: Meta<FormFieldComponent> = {

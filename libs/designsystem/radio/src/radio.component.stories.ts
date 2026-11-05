@@ -2,13 +2,12 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<RadioComponent> = {
   component: RadioComponent,

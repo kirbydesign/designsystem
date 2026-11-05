@@ -3,13 +3,12 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
-// eslint-disable-next-line no-restricted-imports
 import {
   gridStyles,
   interactionStates,
   pseudoStatesFor,
   surfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<CalendarComponent> = {
   component: CalendarComponent,
