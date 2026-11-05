@@ -11,13 +11,12 @@ import {
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../../../designsystem/.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 
 type CurrencyItem = { code: string; name: string };
 

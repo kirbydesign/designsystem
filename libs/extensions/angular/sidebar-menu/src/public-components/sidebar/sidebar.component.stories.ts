@@ -19,11 +19,7 @@ import {
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
-// eslint-disable-next-line no-restricted-imports
-import {
-  interactionStates,
-  pseudoStatesFor,
-} from '../../../../../../designsystem/.storybook/story-helpers';
+import { interactionStates, pseudoStatesFor } from 'tools/storybook-config/story-helpers';
 
 const menuItemsExample: SidebarMenuItem[] = [
   {

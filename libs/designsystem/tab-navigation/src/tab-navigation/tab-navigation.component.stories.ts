@@ -8,12 +8,11 @@ import {
   TabNavigationItemComponent,
 } from '@kirbydesign/designsystem/tab-navigation';
 
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<TabNavigationComponent> = {
   component: TabNavigationComponent,

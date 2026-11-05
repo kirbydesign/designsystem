@@ -2,8 +2,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { expect, waitFor, within } from 'storybook/test';
 import { LoadingOverlayComponent } from '@kirbydesign/designsystem/loading-overlay';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<LoadingOverlayComponent> = {
   component: LoadingOverlayComponent,

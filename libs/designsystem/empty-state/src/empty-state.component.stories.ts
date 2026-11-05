@@ -2,8 +2,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 import { EmptyStateExampleComponent } from '~/app/examples/empty-state-example/empty-state-example.component';
 
 const meta: Meta<EmptyStateComponent> = {

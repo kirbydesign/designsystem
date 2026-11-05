@@ -5,13 +5,12 @@ import { within } from 'storybook/test';
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 import { ButtonExampleComponent } from '~/app/examples/button-example/button-example.component';
 
 const meta: Meta<ButtonComponent> = {
