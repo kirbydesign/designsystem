@@ -54,7 +54,9 @@
  */
 
 :root {
+  --kirby-image-banner-opacity-46: 46%;
   --kirby-image-banner-opacity-52: 52%;
+  --kirby-image-banner-opacity-61: 61%;
   --kirby-image-banner-opacity-64: 64%;
   --kirby-image-banner-opacity-72: 72%;
 }

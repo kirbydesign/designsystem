@@ -190,7 +190,7 @@
   --kirby-color-fill-base-active: var(--kirby-system-color-light-grey-300);
   --kirby-color-fill-base-quiet: var(--kirby-system-color-light-grey-50);
   --kirby-color-fill-raised: var(--kirby-system-color-white-00);
-  --kirby-color-fill-raised-hover: var(--kirby-system-color-light-grey-100);
+  --kirby-color-fill-raised-hover: var(--kirby-system-color-light-grey-200);
   --kirby-color-fill-raised-active: var(--kirby-system-color-light-grey-300);
   --kirby-color-fill-brand-loud: var(--kirby-brand-color-dark-blue-950);
   --kirby-color-fill-brand-loud-hover: var(--kirby-brand-color-dark-blue-900);
@@ -579,12 +579,12 @@
   --kirby-image-banner-dismiss-color-content-dark: var(--kirby-system-color-white-00);
   --kirby-image-banner-dismiss-color-content-dark-hover: var(--kirby-system-color-white-00);
   --kirby-image-banner-dismiss-color-content-dark-active: var(--kirby-system-color-white-00);
-  --kirby-image-banner-color-opacity-light: var(--kirby-image-banner-opacity-52);
-  --kirby-image-banner-color-opacity-light-hover: var(--kirby-image-banner-opacity-64);
-  --kirby-image-banner-color-opacity-light-active: var(--kirby-image-banner-opacity-72);
-  --kirby-image-banner-color-opacity-dark: var(--kirby-image-banner-opacity-64);
-  --kirby-image-banner-color-opacity-dark-hover: var(--kirby-image-banner-opacity-72);
-  --kirby-image-banner-color-opacity-dark-active: var(--kirby-opacity-80);
+  --kirby-image-banner-color-opacity-light: var(--kirby-image-banner-opacity-46);
+  --kirby-image-banner-color-opacity-light-hover: var(--kirby-opacity-20);
+  --kirby-image-banner-color-opacity-light-active: var(--kirby-opacity-40);
+  --kirby-image-banner-color-opacity-dark: var(--kirby-image-banner-opacity-61);
+  --kirby-image-banner-color-opacity-dark-hover: var(--kirby-opacity-20);
+  --kirby-image-banner-color-opacity-dark-active: var(--kirby-opacity-40);
   --kirby-image-banner-color-fill-light: var(--kirby-system-color-white-00);
   --kirby-image-banner-color-fill-light-hover: var(--kirby-system-color-white-00);
   --kirby-image-banner-color-fill-light-active: var(--kirby-system-color-white-00);
@@ -763,16 +763,16 @@
 
 :root, .kirby-surface-base {
   --kirby-card-elevation: 0 0 0 0 rgba(28, 28, 28, 0);
-  --kirby-card-opacity-hover: 4%;
-  --kirby-card-opacity-active: 8%;
   --kirby-card-color-fill-hover: var(--kirby-system-color-dark-grey-975);
   --kirby-card-color-fill-active: var(--kirby-system-color-dark-grey-975);
+  --kirby-card-opacity-hover: var(--kirby-opacity-5);
+  --kirby-card-opacity-active: var(--kirby-opacity-10);
 }
 
 .kirby-surface-raised {
-  --kirby-card-opacity-hover: 4%;
-  --kirby-card-opacity-active: 8%;
   --kirby-card-elevation: 0 0 0 0 rgba(28, 28, 28, 0);
+  --kirby-card-opacity-hover: var(--kirby-opacity-5);
+  --kirby-card-opacity-active: var(--kirby-opacity-10);
   --kirby-card-color-fill-hover: var(--kirby-system-color-dark-grey-975);
   --kirby-card-color-fill-active: var(--kirby-system-color-dark-grey-975);
 }
@@ -781,8 +781,8 @@
   --kirby-card-elevation: 0 0 0 0 rgba(28, 28, 28, 0);
   --kirby-card-color-fill-hover: var(--kirby-system-color-white-00);
   --kirby-card-color-fill-active: var(--kirby-system-color-white-00);
-  --kirby-card-opacity-hover: var(--kirby-opacity-10);
-  --kirby-card-opacity-active: var(--kirby-opacity-20);
+  --kirby-card-opacity-hover: var(--kirby-opacity-5);
+  --kirby-card-opacity-active: var(--kirby-opacity-10);
 }
 
 /*
