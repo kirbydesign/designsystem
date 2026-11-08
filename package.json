@@ -72,7 +72,7 @@
     "@storybook/angular": "10.6.5",
     "@swc-node/register": "^1.12.1",
     "@swc/core": "^1.16.20",
-    "@swc/helpers": "^0.5.11",
+    "@swc/helpers": "^0.5.24",
     "@types/node": "24.19.2",
     "@types/webpack": "^4.41.7",
     "@vitest/mocker": "^4.1.12",
