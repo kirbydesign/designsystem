@@ -26,7 +26,9 @@ Copy this checklist and track progress:
 
 ### 1. Check prerequisites
 
-`node_modules/@kirbydesign/core/src/scss/themes/default-brand.css` must exist. If it does not, the installed Kirby version has no semantic tokens: stop and tell the user to upgrade first. Read that file whenever you need to confirm a token exists.
+Find the token file of the installed Kirby version, `@kirbydesign/core/scss/themes/default-brand.css`. `@kirbydesign/core` is installed with `@kirbydesign/designsystem`, but is not always hoisted to the top of `node_modules`. Look in `node_modules/@kirbydesign/core/` first, then in `node_modules/.pnpm/@kirbydesign+core@*/node_modules/@kirbydesign/core/` (pnpm).
+
+The package directory you find is `<kirby-core>` in the references. If the file is not found, the installed Kirby version has no semantic tokens: stop and tell the user to upgrade first. Read that file whenever you need to confirm a token exists.
 
 ### 2. Find candidates
 

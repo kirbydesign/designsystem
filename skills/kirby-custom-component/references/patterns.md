@@ -51,7 +51,7 @@ Each state sets explicit `-hover`/`-active` tokens. When converting: the legacy 
 
 ```scss
 // Before
-@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/scss/interaction-state';
 .tile {
   @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover('xxxs');
@@ -135,7 +135,7 @@ When converting, replace any leftover `opacity: 0.4` (with or without a `TODO(@d
 
 ## Opacity
 
-Use the `--kirby-opacity-*` scale instead of literal opacity values: `0`, `5`, `10`, `20`, `40`, `60`, `80` (percentages). Check the installed version for the full scale: `node_modules/@kirbydesign/core/src/scss/themes/primitives.css`. If no step fits, ask the user rather than picking a literal value.
+Use the `--kirby-opacity-*` scale instead of literal opacity values: `0`, `5`, `10`, `20`, `40`, `60`, `80` (percentages). Check the installed version for the full scale: `<kirby-core>/scss/themes/primitives.css` (see SKILL.md step 1). If no step fits, ask the user rather than picking a literal value.
 
 ## Elevation, borders and color math
 

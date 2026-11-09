@@ -18,7 +18,7 @@ Old palette tokens describe a **color** (`--kirby-white`). New tokens describe a
 - `base` = the surface itself. `raised` = a control lifted above the surface (input, checkbox box, avatar, tab bar). `brand` = brand-colored emphasis. `engaged` = checked/selected form state.
 - Every value is redefined inside `.kirby-surface-base|raised|brand`, so `fill-base` always means "the color of the surface I sit on". Never hardcode which surface you are on.
 - Pair properties: if you set `fill-X`, use `content-X` for its text and `border-X` for its border, with the same emphasis and state.
-- Full list: `node_modules/@kirbydesign/core/src/scss/themes/default-brand.css`. Use only the `--kirby-color-*` tokens from it.
+- Full list: `<kirby-core>/scss/themes/default-brand.css` (see SKILL.md step 1). Use only the `--kirby-color-*` tokens from it.
 
 ### Color primitives are out of scope
 
