@@ -138,7 +138,7 @@ export class RadioGroupComponent
   private _onTouched = () => {};
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
-  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+  private _attributesToForward = ['aria-label', 'aria-labelledby', 'aria-describedby'];
 
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
