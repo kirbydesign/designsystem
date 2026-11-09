@@ -11,7 +11,7 @@
  * Overrides of component variables (e.g. --kirby-card-main-color) are allowed: custom colors are not reported,
  * legacy values are reported in the `override` category, with a suggestion when a no-brainer replacement exists.
  */
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, extname, join, relative } from 'node:path';
 
 const STYLE_EXTENSIONS = new Set(['.scss', '.sass', '.css', '.less']);
@@ -221,44 +221,82 @@ const HARDCODED_RULE = {
   id: 'hardcoded-color',
   category: 'hardcoded',
   files: 'style',
-  pattern: /#[0-9a-fA-F]{3,8}\b|\brgba?\([^)]*\)|\bhsla?\([^)]*\)/g,
+  // Functional notations wrapping a token, e.g. rgba(var(--kirby-primary-rgb), 0.5), are reported as tokens
+  pattern:
+    /#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![\w-])|\b(?:rgba?|hsla?)\((?![^)]*var\()[^)]*\)/g,
+  // ID selectors such as `#face {` look like hex colors
+  ignore: (line, match) =>
+    match[0].startsWith('#') &&
+    !propertyAt(line, match.index) &&
+    /^[^;]*\{/.test(line.slice(match.index)),
   key: hexKey,
   hint: 'Hardcoded color does not adapt to surfaces. Replace with a --kirby-color-* token, or confirm it is intentional (e.g. brand artwork).',
 };
 
-const LOOKALIKE_WORDS =
-  /^(?:[\w-]*-)?(card|panel|tile|badge|chip|pill|tag|avatar|btn|button|toggle|switch|checkbox|radio|spinner|loader|skeleton|divider|separator|accordion|tabs?|toast|snackbar|alert|modal|dialog|flag|empty-state|list-item|dropdown|select|segmented|progress|slider|stepper|banner|sidebar|menu)(?:[-_][\w-]*)?$/;
+const LOOKALIKE_WORD =
+  '(?:card|panel|tile|badge|chip|pill|tag|avatar|btn|button|toggle|switch|checkbox|radio|spinner|loader|skeleton|divider|separator|accordion|tabs?|toast|snackbar|alert|modal|dialog|flag|empty-state|list-item|dropdown|select|segmented|progress|slider|stepper|banner|sidebar|menu)';
+// Only the first (block) or last (type) part of a class name, e.g. `card-title` or `user-card`, not `variant-card-container`
+const LOOKALIKE_CLASS_NAME = new RegExp(
+  `^${LOOKALIKE_WORD}(?:[-_][\\w-]*)?$|^[\\w-]*[-_]${LOOKALIKE_WORD}$`
+);
 
-function lookalikeClassNames(line, kind) {
-  let classNames = [];
-  if (kind === 'template') {
-    for (const [, value] of line.matchAll(/\bclass=["']([^"']*)["']/g))
-      classNames.push(...value.split(/\s+/));
-    for (const [, name] of line.matchAll(/\[class\.([\w-]+)\]/g)) classNames.push(name);
-  } else if (kind === 'style' && /\{|,\s*$/.test(line)) {
-    const selector = line.split('{')[0];
-    for (const [, name] of selector.matchAll(/\.([\w-]+)/g)) classNames.push(name);
-  }
-  return classNames.filter(
-    (name) => name && !name.startsWith('kirby-') && LOOKALIKE_WORDS.test(name)
+const isLookalikeClassName = (name) =>
+  Boolean(name) && !name.startsWith('kirby-') && LOOKALIKE_CLASS_NAME.test(name);
+
+// Class names in a style selector, skipping those compounded with a Kirby element, e.g. `kirby-card.promo`
+function lookalikeSelectorClassNames(line) {
+  if (!/\{|,\s*$/.test(line)) return [];
+  const selector = line.split('{')[0];
+  return selector
+    .split(/[\s>+~,]+/)
+    .filter((compound) => !/^kirby-|\[kirby-/.test(compound))
+    .flatMap((compound) => [...compound.matchAll(/\.([\w-]+)/g)].map(([, name]) => name))
+    .filter(isLookalikeClassName);
+}
+
+const NATIVE_CONTROL_RULE = {
+  id: 'lookalike-native-control',
+  category: 'lookalike',
+  hint: 'Native control styled by hand? Check kirby-button / kirby-checkbox / kirby-radio / kirby-range / kirby-dropdown / kirby-progress-circle / kirby-divider before building or converting a custom one (see references/kirby-lookalikes.md).',
+};
+
+const CLASS_NAME_RULE = {
+  id: 'lookalike-class-name',
+  category: 'lookalike',
+  hint: 'Class name suggests a hand-rolled version of a Kirby component. Climb the component ladder and ask the user before converting it (see references/kirby-lookalikes.md).',
+};
+
+// Start tags often span several lines, so templates are scanned tag by tag instead of line by line
+function scanTemplateTags(content, report, kirbyClasses) {
+  const withoutComments = content.replace(/<!--[\s\S]*?-->/g, (comment) =>
+    comment.replace(/[^\n]/g, ' ')
   );
+  const startTag = /<([a-zA-Z][\w-]*)((?:"[^"]*"|'[^']*'|[^'">])*)>/g;
+  for (const { 0: tag, 1: name, 2: attributes, index } of withoutComments.matchAll(startTag)) {
+    const attributeNames = attributes.replace(/"[^"]*"|'[^']*'/g, '');
+    const isKirby = name.startsWith('kirby-') || /(?:^|\s)kirby-[\w-]+/.test(attributeNames);
+
+    const isNativeControl =
+      /^(?:button|select|progress|hr)$/i.test(name) ||
+      (/^input$/i.test(name) && /\btype=["'](?:checkbox|radio|range)["']/.test(attributes));
+    if (isNativeControl && !isKirby) report(index, NATIVE_CONTROL_RULE, `<${name}`);
+
+    const classNames = /\bclass=["']([^"']*)["']|\[class\.([\w-]+)\]/g;
+    for (const { 1: value, 2: binding, index: offset } of tag.matchAll(classNames)) {
+      for (const className of value?.split(/\s+/) ?? [binding]) {
+        if (isKirby) kirbyClasses.add(className);
+        else if (isLookalikeClassName(className))
+          report(index + offset, CLASS_NAME_RULE, className);
+      }
+    }
+  }
 }
 
 const LOOKALIKE_RULES = [
   {
-    id: 'lookalike-native-control',
-    category: 'lookalike',
-    files: 'template',
-    pattern:
-      /<button(?![^>]*\bkirby-(?:button|fab|segment|tab)\b)[\s>]|<input\b[^>]*type=["'](?:checkbox|radio|range)["']|<select\b|<progress\b|<hr\b/g,
-    hint: 'Native control styled by hand? Check kirby-button / kirby-checkbox / kirby-radio / kirby-range / kirby-dropdown / kirby-progress-circle / kirby-divider before building or converting a custom one (see references/kirby-lookalikes.md).',
-  },
-  {
-    id: 'lookalike-class-name',
-    category: 'lookalike',
-    files: 'style-and-template',
-    extract: lookalikeClassNames,
-    hint: 'Class name suggests a hand-rolled version of a Kirby component. Climb the component ladder and ask the user before converting it (see references/kirby-lookalikes.md).',
+    ...CLASS_NAME_RULE,
+    files: 'style',
+    extract: lookalikeSelectorClassNames,
   },
   {
     id: 'lookalike-item-background-transparent',
@@ -276,9 +314,26 @@ const LOOKALIKE_RULES = [
   },
 ];
 
+const USAGE =
+  'Usage: node find-lookalikes.mjs [paths...] [--json] [--skip-hardcoded] [--all-findings]';
+const FLAGS = new Set(['--json', '--skip-hardcoded', '--all-findings', '--help']);
+
+function exitWithError(message) {
+  console.error(`${message}\n${USAGE}`);
+  process.exit(1);
+}
+
 function parseArgs(argv) {
   const flags = new Set(argv.filter((arg) => arg.startsWith('--')));
   const paths = argv.filter((arg) => !arg.startsWith('--'));
+  if (flags.has('--help')) {
+    console.log(USAGE);
+    process.exit(0);
+  }
+  const unknownFlags = [...flags].filter((flag) => !FLAGS.has(flag));
+  if (unknownFlags.length) exitWithError(`Unknown option: ${unknownFlags.join(', ')}`);
+  const missingPaths = paths.filter((path) => !existsSync(path));
+  if (missingPaths.length) exitWithError(`Path not found: ${missingPaths.join(', ')}`);
   return {
     json: flags.has('--json'),
     hardcoded: !flags.has('--skip-hardcoded'),
@@ -350,28 +405,39 @@ const HINTS = {
     'Assigns a legacy theme variable that migrated Kirby components no longer read, so it has no effect on them. Dark/white theme intent → kirby-surface-* class; brand re-theming → brand token pipeline; otherwise ask the user. Keep it only if custom code still reads it.',
 };
 
-function scanFile(path, rules) {
+function scanFile(path, rules, kirbyClasses) {
   const kind = fileKind(path);
   if (!kind) return [];
   const applicable = rules.filter((rule) => appliesTo(rule, kind));
-  if (!applicable.length) return [];
 
   const findings = [];
   const state = { inBlockComment: false };
-  const lines = readFileSync(path, 'utf8').split(/\r?\n/);
+  const content = readFileSync(path, 'utf8');
+  const lines = content.split(/\r?\n/);
+  const reportAt = (lineIndex, rule, match, extra = {}) =>
+    findings.push({
+      file: path,
+      line: lineIndex + 1,
+      rule: rule.id,
+      category: rule.category,
+      match: match.trim(),
+      source: lines[lineIndex].trim(),
+      hint: rule.hint,
+      ...extra,
+    });
+
+  if (kind === 'template') {
+    const lineOf = (index) => content.slice(0, index).split('\n').length - 1;
+    scanTemplateTags(
+      content,
+      (index, rule, match) => reportAt(lineOf(index), rule, match),
+      kirbyClasses
+    );
+  }
+
   lines.forEach((rawLine, index) => {
     const line = stripComments(rawLine, kind, state);
-    const report = (rule, match, extra = {}) =>
-      findings.push({
-        file: path,
-        line: index + 1,
-        rule: rule.id,
-        category: rule.category,
-        match: match.trim(),
-        source: rawLine.trim(),
-        hint: rule.hint,
-        ...extra,
-      });
+    const report = (rule, match, extra) => reportAt(index, rule, match, extra);
 
     // Assigning a legacy variable, e.g. `--kirby-inputs-color: red;`
     const assigned = kind === 'style' ? line.match(/^\s*(--kirby-[\w-]+)\s*:/)?.[1] : null;
@@ -391,6 +457,7 @@ function scanFile(path, rules) {
       for (const match of line.matchAll(rule.pattern)) {
         // The whole declaration is reported as one dead override
         if (assignsLegacyVariable) break;
+        if (rule.ignore?.(line, match)) continue;
 
         const property = propertyAt(line, match.index);
         const suggested = rule.key
@@ -434,6 +501,24 @@ function groupBy(items, key) {
     groups.get(value).push(item);
   }
   return groups;
+}
+
+// A class that styles a Kirby component, e.g. <button kirby-button class="menu-button">, is not a lookalike,
+// unless it is also used on a custom element in the same directory
+function dropKirbyComponentClasses(findings, kirbyClassesByDirectory) {
+  const isClassNameFinding = (finding) => finding.rule === CLASS_NAME_RULE.id;
+  const customTemplateClasses = new Set(
+    findings
+      .filter((finding) => isClassNameFinding(finding) && fileKind(finding.file) === 'template')
+      .map((finding) => `${dirname(finding.file)}\0${finding.match}`)
+  );
+  return findings.filter(
+    (finding) =>
+      !isClassNameFinding(finding) ||
+      fileKind(finding.file) !== 'style' ||
+      !kirbyClassesByDirectory.get(dirname(finding.file))?.has(finding.match) ||
+      customTemplateClasses.has(`${dirname(finding.file)}\0${finding.match}`)
+  );
 }
 
 // Styling only matters where there is a lookalike to convert, so keep it in directories with lookalikes
@@ -493,9 +578,15 @@ function printReport(findings, root, hidden) {
 
 const options = parseArgs(process.argv.slice(2));
 const rules = [...LOOKALIKE_RULES, ...RULES, ...(options.hardcoded ? [HARDCODED_RULE] : [])];
-const allFindings = options.paths.flatMap((path) =>
-  [...walk(path)].flatMap((file) => scanFile(file, rules))
+const kirbyClassesByDirectory = new Map();
+const scannedFindings = options.paths.flatMap((path) =>
+  [...walk(path)].flatMap((file) => {
+    const directory = dirname(file);
+    if (!kirbyClassesByDirectory.has(directory)) kirbyClassesByDirectory.set(directory, new Set());
+    return scanFile(file, rules, kirbyClassesByDirectory.get(directory));
+  })
 );
+const allFindings = dropKirbyComponentClasses(scannedFindings, kirbyClassesByDirectory);
 const findings = scopeFindings(allFindings, options.allFindings);
 
 if (options.json) {
