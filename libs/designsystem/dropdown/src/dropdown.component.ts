@@ -67,7 +67,7 @@ export class DropdownComponent
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private _popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
-  private _attributesToForward = ['aria-label', 'aria-labelledby'];
+  private _attributesToForward = ['aria-label', 'aria-labelledby', 'aria-describedby'];
 
   _listboxId = UniqueIdGenerator.scopedTo('kirby-dropdown').next();
   _comboboxId = UniqueIdGenerator.scopedTo('kirby-button').next();

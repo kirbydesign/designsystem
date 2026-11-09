@@ -63,7 +63,7 @@ describe('DropdownComponent', () => {
 
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-dropdown [selectedIndex]="selectedIndex" [items]="items" aria-labelledby="labelId" [size]="size"></kirby-dropdown>`,
+        `<kirby-dropdown [selectedIndex]="selectedIndex" [items]="items" aria-labelledby="labelId" aria-describedby="descriptionId" [size]="size"></kirby-dropdown>`,
         {
           hostProps: {
             items: items,
@@ -164,6 +164,10 @@ describe('DropdownComponent', () => {
 
       it('should add aria-labelledby on button', () => {
         expect(buttonElement.getAttribute('aria-labelledby')).toBe('labelId');
+      });
+
+      it('should add aria-describedby on button', () => {
+        expect(buttonElement.getAttribute('aria-describedby')).toBe('descriptionId');
       });
 
       it('should set aria-activedescendant when focusedIndex is set', fakeAsync(() => {
