@@ -60,6 +60,31 @@ Then, promote the staged files into the consuming app, not this repository. Load
 Kirby's CSS before the app's CSS so that unchanged declarations come from Kirby
 and the app's declarations override them.
 
+### SCSS Mixin
+
+Add `--scss-mixin <name>` to write all outputs as one SCSS mixin in
+`_<name>.scss` instead of separate CSS files. This lets the consuming app decide
+where the theme applies:
+
+```sh
+npx design-tokens --baseline libs/core/src/scss/themes/tokens.json \
+  --scss-mixin theme \
+  --css-only tools/generate-design-tokens/dist/tokens.json
+```
+
+```scss
+@use 'theme';
+
+:root.new-awesome-brand {
+  @include theme.theme;
+}
+```
+
+Selectors are rewritten relative to the including selector. Blocks under `:root`
+alone become bare declarations at the top of the mixin, a leading `:root`
+becomes `&` (e.g. `:root, .kirby-surface-base` becomes `&, .kirby-surface-base`),
+and other selectors are nested as written.
+
 ## DTCG Document
 
 All supplied Figma exports are merged into a [DTCG JSON](https://www.designtokens.org/tr/drafts/format/) tree, with each variable at its original Figma path. The document
@@ -94,6 +119,9 @@ Each token goes to the **first** block that includes it, in the order the
 blocks are written, so put specific blocks before catch-alls such as
 `include: ['**']`. Every token must be ignored or included by a block;
 otherwise the pipeline fails.
+
+Some Figma variables hold numbers as strings, such as letter-spacing. When a unit in `units`
+applies to such a token, it is imported as a number, e.g. `--kirby-font-letter-spacing: -2%`.
 
 Figma has no shadow variables, so a shadow is exported as a group of `x`, `y`, `blur`,
 `spread` and `color`, or as a group of such groups for a layered shadow. Groups matched by

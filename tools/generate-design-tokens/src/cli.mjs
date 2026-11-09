@@ -10,14 +10,17 @@ import { readJson } from './tokens.mjs';
 const DEFAULT_CONFIG = fileURLToPath(new URL('../../../design-tokens.config.mjs', import.meta.url));
 const OUTPUT_ROOT = resolve(fileURLToPath(new URL('../dist/', import.meta.url)));
 const GENERATED_TOKENS_FILE = 'tokens.json';
+const GENERATED_EXTENSIONS = new Set(['.css', '.scss']);
 const HELP_FLAGS = new Set(['-h', '--help']);
 const OPTION_BY_VALUE_FLAG = new Map([
   ['--css-only', 'cssOnly'],
   ['--baseline', 'baseline'],
+  ['--scss-mixin', 'scssMixin'],
 ]);
+const SASS_IDENTIFIER = /^[a-zA-Z_][\w-]*$/;
 
-export const HELP = `Usage: design-tokens [--baseline <tokens.json>] <figma.json...>
-       design-tokens --css-only <tokens.json> [--baseline <tokens.json>]
+export const HELP = `Usage: design-tokens [--baseline <tokens.json>] [--scss-mixin <name>] <figma.json...>
+       design-tokens --css-only <tokens.json> [--baseline <tokens.json>] [--scss-mixin <name>]
 
 By default, merges Figma exports into one DTCG document at their original paths
 and generates CSS. Outputs are staged for manual promotion.
@@ -25,6 +28,8 @@ and generates CSS. Outputs are staged for manual promotion.
 Flags:
   --css-only <file>        Generate CSS from an existing DTCG document only.
   --baseline <file>        Build on a token set without emitting its tokens.
+  --scss-mixin <name>      Write all outputs as one SCSS mixin in _<name>.scss,
+                           with :root rewritten to the including selector.
   -h, --help               Show this help.
 
 Pass Figma exports as positional paths. Output is written to this package's dist/ directory.
@@ -74,6 +79,12 @@ function assertAnInputMode(cssOnly, inputs) {
   }
 }
 
+function assertSassIdentifier(scssMixin) {
+  if (scssMixin !== null && !SASS_IDENTIFIER.test(scssMixin)) {
+    throw new Error(`--scss-mixin must be a valid Sass identifier, got "${scssMixin}"`);
+  }
+}
+
 /**
  * `outRoot` is for programmatic callers only; the CLI always stages in this package's dist/.
  * `outRoot` is a staging directory: CSS and tokens.json files left there by earlier runs are
@@ -85,6 +96,8 @@ export async function run(options) {
   const cssOnly = options.cssOnly ?? null;
   assertNotBothInputModes(cssOnly, inputs);
   assertAnInputMode(cssOnly, inputs);
+  const scssMixin = options.scssMixin ?? null;
+  assertSassIdentifier(scssMixin);
 
   const config = await loadConfig(options.config ? resolve(options.config) : DEFAULT_CONFIG);
   const baselineFile = options.baseline ? resolve(options.baseline) : null;
@@ -92,7 +105,7 @@ export async function run(options) {
     ? { file: baselineFile, tokens: readJson('baseline tokens', baselineFile) }
     : null;
   const outRoot = options.outRoot ? resolve(options.outRoot) : OUTPUT_ROOT;
-  const context = { config, baseline, outDir: outRoot };
+  const context = { config, baseline, scssMixin, outDir: outRoot };
   const result = cssOnly
     ? await regenerateCss(cssOnly, context)
     : await importFigmaExports(inputs, context);
@@ -153,7 +166,7 @@ function removeStaleOutputs(outRoot, written, inputFiles) {
 }
 
 function isGeneratedFileName(name) {
-  return extname(name) === '.css' || basename(name) === GENERATED_TOKENS_FILE;
+  return GENERATED_EXTENSIONS.has(extname(name)) || basename(name) === GENERATED_TOKENS_FILE;
 }
 
 /** @returns {Promise<number>} process exit code */

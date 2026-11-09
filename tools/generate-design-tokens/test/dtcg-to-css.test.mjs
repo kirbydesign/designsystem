@@ -34,6 +34,30 @@ test('renders percentages selected by path when Figma reports ALL_SCOPES', async
   assert.match(readFileSync(join(out, 'opacity.css'), 'utf8'), /--kirby-opacity-menu: 20%;/);
 });
 
+test('renders numeric Figma strings with their configured unit', async () => {
+  const percentConfig = flatConfig('font.css', { '%': { include: ['font/letter-spacing'] } });
+  const source = figmaToDtcg(
+    [
+      {
+        font: {
+          'letter-spacing': {
+            $type: 'string',
+            $value: '-2',
+            $extensions: { 'com.figma.scopes': ['ALL_SCOPES'] },
+          },
+        },
+      },
+    ],
+    percentConfig
+  );
+  const out = mkdtempSync(join(tmpdir(), 'dt-percent-string-'));
+  const file = join(out, 'tokens.json');
+  writeFileSync(file, JSON.stringify(source));
+  const { routes, emissions } = routeTokens(source, percentConfig);
+  await writeCss({ routes, emissions, outDir: out, sourceFile: file, config: percentConfig });
+  assert.match(readFileSync(join(out, 'font.css'), 'utf8'), /--kirby-font-letter-spacing: -2%;/);
+});
+
 test('filters excluded tokens only at render time', async () => {
   const source = figmaToDtcg(
     [
@@ -213,6 +237,56 @@ test('warns about missing sibling tokens without comparing unrelated sections', 
   const { warnings } = await writeCss({ routes, emissions, outDir: out, sourceFile: file, config });
   assert.equal(warnings.length, 1);
   assert.match(warnings[0], /s\.css \[color\].*\.kirby-surface-raised.*--kirby-color-fill-extra/);
+});
+
+test('renders all outputs as one SCSS mixin relative to the including selector', async () => {
+  const source = {
+    'base surface': { color: { fill: { main: { $type: 'color', $value: '{brand.green}' } } } },
+    'raised surface': { color: { fill: { main: { $type: 'color', $value: '#ddd' } } } },
+    brand: { green: { $type: 'color', $value: '#0f0' } },
+  };
+  const out = mkdtempSync(join(tmpdir(), 'dt-scss-mixin-'));
+  const file = join(out, 'tokens.json');
+  writeFileSync(file, JSON.stringify(source));
+  const { routes, emissions } = routeTokens(source, config);
+  const { written } = await writeCss({
+    routes,
+    emissions,
+    outDir: out,
+    sourceFile: file,
+    config,
+    scssMixin: 'theme',
+  });
+
+  assert.deepEqual(written, ['_theme.scss']);
+  assert.equal(
+    readFileSync(join(out, '_theme.scss'), 'utf8'),
+    `/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+@mixin theme {
+  /*
+   * brand
+   */
+
+  --kirby-brand-green: #00ff00;
+
+  /*
+   * color
+   */
+
+  &,
+  .kirby-surface-base {
+    --kirby-color-fill-main: var(--kirby-brand-green);
+  }
+
+  .kirby-surface-raised {
+    --kirby-color-fill-main: #dddddd;
+  }
+}
+`
+  );
 });
 
 test('renders shadow tokens as box-shadow values', async () => {
