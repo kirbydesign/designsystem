@@ -26,16 +26,45 @@ These are **not** valid ways to make a Kirby component fit: `::ng-deep`, targeti
 
 A class or component name from the table below, a native control with custom styling, custom hover/active/focus/disabled styles, or hand-made status colors. Common patterns include, but are not limited to:
 
-| Custom pattern                                          | Kirby candidate                                                        | Package                          |
-| ------------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------- |
-| box with border/shadow, `.card`, `.panel`, `.tile`      | `kirby-card` (`variant`: `base`, `raised`, `brand`)                    | designsystem                     |
-| styled `<button>`, `<a class="btn">`, icon-only button  | `button[kirby-button]` (`attentionLevel`, `size`, `noDecoration`)      | designsystem                     |
-| `<select>`, custom dropdown/listbox                     | `kirby-dropdown`, `kirby-x-combobox` (searchable)                      | designsystem, extensions-angular |
-| text input/textarea with custom label/border/error      | `kirby-form-field` + `input[kirby-input]` / `textarea[kirby-textarea]` | designsystem                     |
-| pill/tab group switching views, chips                   | `kirby-segmented-control` (`mode="chip"`)                              | designsystem                     |
-| items with separators/sections                          | `kirby-list`, `kirby-item`                                             | designsystem                     |
-| `<hr>`, `.divider`, `.separator`, `border-bottom` lines | `kirby-divider`                                                        | designsystem                     |
-| illustration with status colors                         | `kirby-x-spot-illustration`                                            | extensions-angular               |
+| Custom pattern                                          | Kirby candidate                                                          | Package                          |
+| ------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------- |
+| box with border/shadow, `.card`, `.panel`, `.tile`      | `kirby-card` (`variant`: `base`, `raised`, `brand`)                      | designsystem                     |
+| styled `<button>`, `<a class="btn">`, icon-only button  | `button[kirby-button]` (`attentionLevel`, `size`, `noDecoration`)        | designsystem                     |
+| `<select>`, custom dropdown/listbox                     | `kirby-dropdown`, `kirby-x-combobox` (searchable)                        | designsystem, extensions-angular |
+| text input/textarea with custom label/border/error      | `kirby-form-field` + `input[kirby-input]` / `textarea[kirby-textarea]`   | designsystem                     |
+| pill/tab group switching views, chips                   | `kirby-segmented-control` (`mode="chip"`)                                | designsystem                     |
+| items with separators/sections                          | `kirby-list`, `kirby-item`                                               | designsystem                     |
+| group of `kirby-item`s outside a card or list           | `kirby-list`, or the items wrapped in `kirby-card` – see [Items](#items) | designsystem                     |
+| `<hr>`, `.divider`, `.separator`, `border-bottom` lines | `kirby-divider`                                                          | designsystem                     |
+| illustration with status colors                         | `kirby-x-spot-illustration`                                              | extensions-angular               |
+
+## Items
+
+`kirby-item` no longer has a white background of its own. It uses `--kirby-color-fill-base` – the color of the surface it sits on – so it blends in and looks transparent. The raised look now comes from the container (`kirby-card`, `kirby-list`). This is a visual breaking change with two consequences:
+
+1. **`--kirby-item-background: transparent` overrides are very likely redundant.** Remove them. Keep one only if the item sits on something that isn't a surface (an image, a custom-colored area), and check visually.
+2. **Groups of items with a list-like look outside `kirby-card` or `kirby-list` now render flat** on the page – e.g. stacked items, a settings block, or items given a white background through `--kirby-item-background`. Climb the ladder:
+   - **Configure/compose (preferred):** use `kirby-list`, or wrap the items in a `kirby-card`.
+   - **Custom (last resort, ask first):** give the container the raised look yourself, the way `kirby-list` does. The items pick it up automatically:
+
+```html
+<div class="settings kirby-surface-raised">
+  <kirby-item>…</kirby-item>
+  <kirby-item>…</kirby-item>
+</div>
+```
+
+```scss
+.settings {
+  background-color: var(--kirby-color-fill-base);
+  color: var(--kirby-color-content-base);
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
+  border-radius: var(--kirby-border-radius-n);
+  overflow: hidden;
+}
+```
+
+Delete any `--kirby-item-background` override that faked the raised look on the items themselves.
 
 ## What to tell the user
 

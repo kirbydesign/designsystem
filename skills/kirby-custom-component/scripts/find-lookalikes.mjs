@@ -122,10 +122,10 @@ const hexKey = (match) => {
 const RULES = [
   {
     id: 'primitive-color',
-    category: 'primitive',
+    category: 'color-primitive',
     files: 'all',
     pattern: /--kirby-(?:brand|system)-color-[\w-]+/g,
-    hint: 'Primitive color token: not part of Kirby semantic versioning and may break in any release. Use the --kirby-color-{fill|content|border}-* token for its role (see references/token-mapping.md), or ask the user.',
+    hint: 'Color primitive: not part of Kirby semantic versioning and may break in any release. Use the --kirby-color-{fill|content|border}-* token for its role (see references/token-mapping.md), or ask the user. Other primitives (opacity, spacing …) are fine.',
   },
   {
     id: 'legacy-color',
@@ -259,6 +259,20 @@ const LOOKALIKE_RULES = [
     files: 'style-and-template',
     extract: lookalikeClassNames,
     hint: 'Class name suggests a hand-rolled version of a Kirby component. Climb the component ladder and ask the user before converting it (see references/kirby-lookalikes.md).',
+  },
+  {
+    id: 'lookalike-item-background-transparent',
+    category: 'lookalike',
+    files: 'style',
+    pattern: /--kirby-item-background\s*:\s*transparent\b/g,
+    hint: 'kirby-item now uses the fill of the surface it sits on, so it already looks transparent. Very likely redundant – remove it unless the item sits on a non-surface background (see references/kirby-lookalikes.md#items).',
+  },
+  {
+    id: 'lookalike-item-background',
+    category: 'lookalike',
+    files: 'style',
+    pattern: /--kirby-item-background\s*:\s*(?![\s]|transparent\b)[^;]+/g,
+    hint: 'Item background override, usually faking a raised list group. Prefer kirby-list or wrapping the items in kirby-card; as a last resort give the container the raised look (see references/kirby-lookalikes.md#items).',
   },
 ];
 
@@ -442,7 +456,15 @@ function printReport(findings, root, hidden) {
     return;
   }
   const byCategory = groupBy(findings, (finding) => finding.category);
-  const order = ['lookalike', 'override', 'primitive', 'token', 'scss', 'typescript', 'hardcoded'];
+  const order = [
+    'lookalike',
+    'override',
+    'color-primitive',
+    'token',
+    'scss',
+    'typescript',
+    'hardcoded',
+  ];
   for (const category of order) {
     const group = byCategory.get(category);
     if (!group) continue;

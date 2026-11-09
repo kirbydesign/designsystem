@@ -20,23 +20,25 @@ Old palette tokens describe a **color** (`--kirby-white`). New tokens describe a
 - Pair properties: if you set `fill-X`, use `content-X` for its text and `border-X` for its border, with the same emphasis and state.
 - Full list: `node_modules/@kirbydesign/core/src/scss/themes/default-brand.css`. Use only the `--kirby-color-*` tokens from it.
 
-### Primitives are out of scope
+### Color primitives are out of scope
 
-`--kirby-brand-color-*` and `--kirby-system-color-*` are the raw palette the semantic tokens are built from. They are not part of Kirby's semantic versioning, so they may be renamed, removed or change value in any release, and they don't adapt to surfaces. Never use them in custom components – not as values, not in component variable overrides, and don't assign them. Replace existing uses with the `--kirby-color-*` token for the role they play; if none fits, ask the user.
+`--kirby-brand-color-*` and `--kirby-system-color-*` are the raw color palette the semantic tokens are built from. They are not part of Kirby's semantic versioning, so they may be renamed, removed or change value in any release, and they don't adapt to surfaces. Never use them in custom components – not as values, not in component variable overrides, and don't assign them. Replace existing uses with the `--kirby-color-*` token for the role they play; if none fits, ask the user.
+
+Only color primitives are out of scope. All other tokens – opacity (`--kirby-opacity-*`, see [patterns.md](patterns.md#opacity)), spacing, font, radius, elevation, z-index and so on – are fine to use.
 
 ## Backgrounds (fill)
 
-| Legacy                                                                        | New                                                        | When                                                                 |
-| ----------------------------------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------- |
-| `--kirby-background-color`                                                    | `fill-base`                                                | page/modal/section background                                        |
-| `--kirby-white`                                                               | `fill-base`                                                | container that _is_ the surface (card body, list row)                |
-| `--kirby-white`, `--kirby-light`, `--kirby-inputs-background-color`           | `fill-raised`                                              | control placed on a surface (input, chip, badge, avatar, footer bar) |
-| `--kirby-primary`                                                             | `fill-brand-loud`                                          | primary action, selected nav item, progress/track highlight          |
-| `--kirby-secondary`, `--kirby-tertiary`, `--kirby-dark` as an area background | `fill-base` inside `class="kirby-surface-brand"`           | dark brand areas (sidebar, hero) – establish a brand surface instead |
-| `--kirby-semi-light`, `--kirby-medium` as background                          | `fill-neutral`                                             | neutral tag/flag/info block                                          |
-| `--kirby-black` (selected/checked)                                            | `fill-engaged`                                             | checked checkbox/radio/toggle-like selection                         |
-| `--kirby-white-overlay-*`, `--kirby-dark-overlay-*`, `get-state-color(...)`   | `fill-{role}-hover` / `fill-{role}-active`                 | hover/pressed backgrounds                                            |
-| `color.mix()`/`rgba()` of a legacy color                                      | `color-mix(in srgb, var(--kirby-color-…) N%, transparent)` | translucent variants                                                 |
+| Legacy                                                                        | New                                                                            | When                                                                 |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `--kirby-background-color`                                                    | `fill-base`                                                                    | page/modal/section background                                        |
+| `--kirby-white`                                                               | `fill-base`                                                                    | container that _is_ the surface (card body, list row)                |
+| `--kirby-white`, `--kirby-light`, `--kirby-inputs-background-color`           | `fill-raised`                                                                  | control placed on a surface (input, chip, badge, avatar, footer bar) |
+| `--kirby-primary`                                                             | `fill-brand-loud`                                                              | primary action, selected nav item, progress/track highlight          |
+| `--kirby-secondary`, `--kirby-tertiary`, `--kirby-dark` as an area background | `fill-base` inside `class="kirby-surface-brand"`                               | dark brand areas (sidebar, hero) – establish a brand surface instead |
+| `--kirby-semi-light`, `--kirby-medium` as background                          | `fill-neutral`                                                                 | neutral tag/flag/info block                                          |
+| `--kirby-black` (selected/checked)                                            | `fill-engaged`                                                                 | checked checkbox/radio/toggle-like selection                         |
+| `--kirby-white-overlay-*`, `--kirby-dark-overlay-*`, `get-state-color(...)`   | `fill-{role}-hover` / `fill-{role}-active`                                     | hover/pressed backgrounds                                            |
+| `color.mix()`/`rgba()` of a legacy color                                      | `color-mix(in srgb, var(--kirby-color-…) var(--kirby-opacity-N), transparent)` | translucent variants                                                 |
 
 ## Text and icons (content)
 
@@ -138,6 +140,7 @@ Only the _value_ is migrated:
 - legacy value with a no-brainer (table above) → replace the value
 - legacy value without one (e.g. `--kirby-card-main-color: var(--kirby-white-contrast)`) → ask the user which token to use, or leave it with a `TODO(design-tokens)`
 - override that now equals Kirby's default → ask whether to remove it
+- `--kirby-item-background` → see [kirby-lookalikes.md](kirby-lookalikes.md#items): `transparent` is very likely redundant, other values usually fake a raised group
 
 Before keeping an override, check that the component still reads the variable: search for it in `node_modules/@kirbydesign/designsystem/fesm2022/kirbydesign-designsystem-<component>.mjs` (styles are inlined there). If it is not found, the override is dead – tell the user.
 
@@ -152,3 +155,5 @@ Before keeping an override, check that the component still reads the variable: s
 ## Unchanged
 
 Spacing, font size/weight, line height, border radius, elevation, z-index, transition and page-width tokens (`--kirby-spacing-*`, `--kirby-font-*`, `--kirby-border-radius-*`, `--kirby-elevation-*`, `--kirby-z-index-*` …) keep their names. Leave them alone when converting, and use them in new components.
+
+Opacity uses the `--kirby-opacity-*` scale (e.g. `--kirby-opacity-40` for disabled). Replace literal opacity values with it when converting – see [patterns.md](patterns.md#opacity).

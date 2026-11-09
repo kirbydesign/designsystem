@@ -9,7 +9,7 @@ Custom UI that looks like a Kirby component duplicates styling, states and acces
 
 **Core rule: a custom lookalike is the last resort.** Climb the component ladder first, and never build or re-tokenize a lookalike without the user's explicit go-ahead.
 
-**Only semantic color tokens.** Custom components use `--kirby-color-*` tokens only. The primitives behind them (`--kirby-brand-color-*`, `--kirby-system-color-*`) are out of scope: they are not part of Kirby's semantic versioning and may be renamed or removed in any release. If no semantic token fits, ask the user – don't fall back to a primitive.
+**Only semantic color tokens.** Custom components use `--kirby-color-*` tokens for color. The color primitives behind them (`--kirby-brand-color-*`, `--kirby-system-color-*`) are out of scope: they are not part of Kirby's semantic versioning and may be renamed or removed in any release. If no semantic token fits, ask the user – don't fall back to a color primitive. All other tokens (opacity, spacing, font, radius …) are fine to use.
 
 ## Workflow
 
@@ -37,7 +37,7 @@ Copy this checklist and track progress:
   node <skill-dir>/scripts/find-lookalikes.mjs <src-dir>
   ```
 
-  It lists `lookalike` findings (possible Kirby components), plus styling in the same directories that needs converting: `override`, `primitive`, `token`, `scss`, `typescript`, `hardcoded`. `⇒ var(--kirby-color-…)` marks a no-brainer replacement. Use `--all-findings` to get styling findings outside lookalike directories (e.g. when the user names a component the heuristics miss) and `--json` for machine-readable output. Also read templates and styles yourself – the scanner only matches names and native controls.
+  It lists `lookalike` findings (possible Kirby components), plus styling in the same directories that needs converting: `override`, `color-primitive`, `token`, `scss`, `typescript`, `hardcoded`. `⇒ var(--kirby-color-…)` marks a no-brainer replacement. Use `--all-findings` to get styling findings outside lookalike directories (e.g. when the user names a component the heuristics miss) and `--json` for machine-readable output. Also read templates and styles yourself – the scanner only matches names and native controls. Look especially for groups of `kirby-item` outside `kirby-card`/`kirby-list`: items no longer have a background of their own (see [kirby-lookalikes.md](references/kirby-lookalikes.md#items)).
 
   Work through one component at a time. With more than a handful, ask the user which ones to start with.
 
@@ -65,8 +65,8 @@ On steps 1–4: swap the markup, delete the custom styles Kirby now covers and, 
 Only for approved custom components:
 
 1. **Decide the surface.** A container (panel, card, sidebar) gets a `kirby-surface-*` class and uses `-base` tokens. A control on a surface uses `-raised`/`-brand-loud` tokens. See [references/patterns.md](references/patterns.md#surfaces).
-2. **Pick colors by role**, not by name, using the token anatomy in [references/token-mapping.md](references/token-mapping.md) – `--kirby-color-*` only. Pair fill, content and border with the same role and emphasis. When converting, map each legacy color and each primitive by the role it plays and apply no-brainers (`⇒`) directly.
-3. **Style every state** the Kirby equivalent has: `utils.hover` + `&:active` with `-hover`/`-active` tokens, focus and error rings, disabled → `opacity: 0.4`. See [patterns.md](references/patterns.md#hover-and-active).
+2. **Pick colors by role**, not by name, using the token anatomy in [references/token-mapping.md](references/token-mapping.md) – `--kirby-color-*` only. Pair fill, content and border with the same role and emphasis. When converting, map each legacy color and each color primitive by the role it plays and apply no-brainers (`⇒`) directly.
+3. **Style every state** the Kirby equivalent has: `utils.hover` + `&:active` with `-hover`/`-active` tokens, focus and error rings, disabled → `opacity: var(--kirby-opacity-40)`. See [patterns.md](references/patterns.md#hover-and-active).
 4. **Match Kirby's look** with Kirby's spacing, radius and typography tokens/classes (see the `consumer` skill). When converting, leave those tokens alone. Use elevation for floating elements only; resting elements get a quiet border.
 5. **Converting only:** replace `interaction-state.*`, Sass color math (→ `color-mix()`), dark-context hacks (→ surface classes) and reads of `--kirby-inputs-*`/`--kirby-divider-color`. Keep overrides of Kirby component variables and migrate only their legacy values. See [token-mapping.md](references/token-mapping.md#input-theme-variables).
 
@@ -74,20 +74,20 @@ When the mapping is ambiguous (decoration colors, brand colors used as accents, 
 
 ### 5. Verify
 
-- Re-run the scanner on the changed paths with `--all-findings`: no `primitive`/`token`/`scss` findings, no `override` findings with `⇒` (except agreed TODOs), and only approved custom components among the `lookalike` findings.
+- Re-run the scanner on the changed paths with `--all-findings`: no `color-primitive`/`token`/`scss` findings, no `override` findings with `⇒` (except agreed TODOs), and only approved custom components among the `lookalike` findings.
 - Build the app or run its style lint to catch broken SCSS.
 - If the project has Storybook or a dev server, check custom components on all three surfaces (`kirby-surface-base`, `-raised`, `-brand` wrappers) in every state: hover, active, focus, error and disabled.
 
 ### 6. Report
 
-Per candidate: the outcome (used/configured/composed Kirby component – which one; customized via variables; custom component with tokens – and why; skipped), open questions/TODOs, and visual changes to review (borders instead of shadows, opacity for disabled, new link colors). For each custom component, suggest raising the missing capability as a feature request with Kirby, so the lookalike can be replaced later.
+Per candidate: the outcome (used/configured/composed Kirby component – which one; customized via variables; custom component with tokens – and why; skipped), open questions/TODOs, and visual changes to review (borders instead of shadows, opacity for disabled, new link colors, items without their own background). For each custom component, suggest raising the missing capability as a feature request with Kirby, so the lookalike can be replaced later.
 
 ## Anti-patterns
 
 - Building a custom component because a Kirby component "almost" fits, without checking its inputs, slots and component variables.
 - Styling Kirby components' internals (`::ng-deep`, internal class names, Ionic parts) to make them fit, instead of inputs or public component variables.
 - Search-and-replace of one legacy token with one new token: the same legacy token maps to different tokens by context.
-- Using primitive tokens (`--kirby-brand-color-*`, `--kirby-system-color-*`) – reading them, assigning them, or hardcoding their values – instead of a semantic `--kirby-color-*` token. They are outside semantic versioning and may break without notice.
+- Using color primitives (`--kirby-brand-color-*`, `--kirby-system-color-*`) – reading them, assigning them, or hardcoding their values – instead of a semantic `--kirby-color-*` token. They are outside semantic versioning and may break without notice.
 - Mixing legacy and new color tokens in one component.
 - Prefixing custom selectors or classes with `kirby-` – they look like Kirby's own and are hidden from the scanner.
 - Trusting the `kirby/use-design-tokens` stylelint autofix – it rewrites `get-color()` to _legacy_ tokens.

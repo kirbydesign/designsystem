@@ -121,22 +121,26 @@ Order rules **default → hover → active → error → focus-visible**, so the
 
 ## Disabled state
 
-Disabled colors are replaced by opacity. Keep the enabled tokens:
+Disabled colors are replaced by opacity. Keep the enabled tokens and fade the whole element, like Kirby's own components do:
 
 ```scss
 &:disabled,
 &[aria-disabled='true'] {
   pointer-events: none;
-  opacity: 0.4; // TODO(@design-tokens) needs token
+  opacity: var(--kirby-opacity-40);
 }
 ```
 
-There is no disabled token or opacity variable yet – keep the `TODO` so it is easy to find later.
+When converting, replace any leftover `opacity: 0.4` (with or without a `TODO(@design-tokens)` comment) and legacy disabled colors with this pattern.
+
+## Opacity
+
+Use the `--kirby-opacity-*` scale instead of literal opacity values: `0`, `5`, `10`, `20`, `40`, `60`, `80` (percentages). Check the installed version for the full scale: `node_modules/@kirbydesign/core/src/scss/themes/primitives.css`. If no step fits, ask the user rather than picking a literal value.
 
 ## Elevation, borders and color math
 
 - Resting elements get a 1px quiet border instead of `--kirby-elevation-*`. Keep elevation for floating things (popovers, modals, FABs). Compensate size with `box-sizing: border-box`, `calc(padding - 1px)` or `outline` with `outline-offset: -1px`.
-- Tokens are runtime values, so Sass color math on them can't work. Replace `rgba(get-color(…))`, `color.mix()` and `color.adjust()` with `color-mix(in srgb, var(--kirby-color-…) 50%, transparent)`.
+- Tokens are runtime values, so Sass color math on them can't work. Replace `rgba(get-color(…))`, `color.mix()` and `color.adjust()` with `color-mix(in srgb, var(--kirby-color-…) var(--kirby-opacity-40), transparent)`.
 - Overlays (modals, popovers) render at the app root, on the base surface.
 
 ## Legacy and new tokens side by side
