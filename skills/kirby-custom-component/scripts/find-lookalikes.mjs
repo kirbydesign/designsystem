@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * Lists usages of the legacy Kirby design tokens and custom UI that may duplicate a Kirby component.
+ * Lists custom UI that may duplicate a Kirby component (lookalikes), and the legacy Kirby design tokens
+ * used next to it.
  *
  * Usage:
- *   node find-legacy-tokens.mjs [paths...] [--json] [--skip-hardcoded] [--skip-lookalikes] [--all-lookalikes]
+ *   node find-lookalikes.mjs [paths...] [--json] [--skip-hardcoded] [--all-findings]
  *
  * Paths default to the current working directory. No dependencies.
- * Lookalikes are only reported in directories that also contain styling findings, unless --all-lookalikes is set.
+ * Styling findings are only reported in directories that also contain lookalikes, unless --all-findings is set.
  * Overrides of component variables (e.g. --kirby-card-main-color) are allowed: custom colors are not reported,
  * legacy values are reported in the `override` category, with a suggestion when a no-brainer replacement exists.
  */
@@ -120,6 +121,13 @@ const hexKey = (match) => {
 
 const RULES = [
   {
+    id: 'primitive-color',
+    category: 'primitive',
+    files: 'all',
+    pattern: /--kirby-(?:brand|system)-color-[\w-]+/g,
+    hint: 'Primitive color token: not part of Kirby semantic versioning and may break in any release. Use the --kirby-color-{fill|content|border}-* token for its role (see references/token-mapping.md), or ask the user.',
+  },
+  {
     id: 'legacy-color',
     category: 'token',
     key: tokenKey,
@@ -219,7 +227,7 @@ const HARDCODED_RULE = {
 };
 
 const LOOKALIKE_WORDS =
-  /^(?:[\w-]*-)?(card|badge|chip|pill|tag|avatar|btn|button|toggle|switch|checkbox|radio|spinner|loader|skeleton|divider|separator|accordion|tabs?|toast|snackbar|alert|modal|dialog|flag|empty-state|list-item|dropdown|select|segmented|progress|slider|stepper|banner|sidebar|menu)(?:[-_][\w-]*)?$/;
+  /^(?:[\w-]*-)?(card|panel|tile|badge|chip|pill|tag|avatar|btn|button|toggle|switch|checkbox|radio|spinner|loader|skeleton|divider|separator|accordion|tabs?|toast|snackbar|alert|modal|dialog|flag|empty-state|list-item|dropdown|select|segmented|progress|slider|stepper|banner|sidebar|menu)(?:[-_][\w-]*)?$/;
 
 function lookalikeClassNames(line, kind) {
   let classNames = [];
@@ -243,14 +251,14 @@ const LOOKALIKE_RULES = [
     files: 'template',
     pattern:
       /<button(?![^>]*\bkirby-(?:button|fab|segment|tab)\b)[\s>]|<input\b[^>]*type=["'](?:checkbox|radio|range)["']|<select\b|<progress\b|<hr\b/g,
-    hint: 'Native control styled by hand? Check kirby-button / kirby-checkbox / kirby-radio / kirby-range / kirby-dropdown / kirby-progress-circle / kirby-divider before migrating.',
+    hint: 'Native control styled by hand? Check kirby-button / kirby-checkbox / kirby-radio / kirby-range / kirby-dropdown / kirby-progress-circle / kirby-divider before building or converting a custom one (see references/kirby-lookalikes.md).',
   },
   {
     id: 'lookalike-class-name',
     category: 'lookalike',
     files: 'style-and-template',
     extract: lookalikeClassNames,
-    hint: 'Class name suggests a hand-rolled version of a Kirby component. Ask the user before migrating it (see references/kirby-lookalikes.md).',
+    hint: 'Class name suggests a hand-rolled version of a Kirby component. Climb the component ladder and ask the user before converting it (see references/kirby-lookalikes.md).',
   },
 ];
 
@@ -260,8 +268,7 @@ function parseArgs(argv) {
   return {
     json: flags.has('--json'),
     hardcoded: !flags.has('--skip-hardcoded'),
-    lookalikes: !flags.has('--skip-lookalikes'),
-    allLookalikes: flags.has('--all-lookalikes'),
+    allFindings: flags.has('--all-findings'),
     paths: paths.length ? paths : ['.'],
   };
 }
@@ -415,27 +422,27 @@ function groupBy(items, key) {
   return groups;
 }
 
-// Lookalikes only matter where there is styling to migrate, so keep those in directories with other findings
-function scopeLookalikes(findings, allLookalikes) {
-  if (allLookalikes) return findings;
-  const directoriesWithStyling = new Set(
+// Styling only matters where there is a lookalike to convert, so keep it in directories with lookalikes
+function scopeFindings(findings, allFindings) {
+  if (allFindings) return findings;
+  const directoriesWithLookalikes = new Set(
     findings
-      .filter((finding) => finding.category !== 'lookalike')
+      .filter((finding) => finding.category === 'lookalike')
       .map((finding) => dirname(finding.file))
   );
-  return findings.filter(
-    (finding) =>
-      finding.category !== 'lookalike' || directoriesWithStyling.has(dirname(finding.file))
-  );
+  return findings.filter((finding) => directoriesWithLookalikes.has(dirname(finding.file)));
 }
 
-function printReport(findings, root) {
+function printReport(findings, root, hidden) {
+  const hiddenNote = hidden
+    ? `\n${hidden} styling findings outside lookalike directories are hidden. Use --all-findings to list them.`
+    : '';
   if (!findings.length) {
-    console.log('No legacy Kirby tokens found.');
+    console.log(`No Kirby lookalikes found.${hiddenNote}`);
     return;
   }
   const byCategory = groupBy(findings, (finding) => finding.category);
-  const order = ['lookalike', 'override', 'token', 'scss', 'typescript', 'hardcoded'];
+  const order = ['lookalike', 'override', 'primitive', 'token', 'scss', 'typescript', 'hardcoded'];
   for (const category of order) {
     const group = byCategory.get(category);
     if (!group) continue;
@@ -459,21 +466,18 @@ function printReport(findings, root) {
         `  ${category}: ${group.length} in ${new Set(group.map((f) => f.file)).size} files`
       );
   }
+  if (hiddenNote) console.log(hiddenNote);
 }
 
 const options = parseArgs(process.argv.slice(2));
-const rules = [
-  ...RULES,
-  ...(options.hardcoded ? [HARDCODED_RULE] : []),
-  ...(options.lookalikes ? LOOKALIKE_RULES : []),
-];
-const findings = scopeLookalikes(
-  options.paths.flatMap((path) => [...walk(path)].flatMap((file) => scanFile(file, rules))),
-  options.allLookalikes
+const rules = [...LOOKALIKE_RULES, ...RULES, ...(options.hardcoded ? [HARDCODED_RULE] : [])];
+const allFindings = options.paths.flatMap((path) =>
+  [...walk(path)].flatMap((file) => scanFile(file, rules))
 );
+const findings = scopeFindings(allFindings, options.allFindings);
 
 if (options.json) {
   console.log(JSON.stringify(findings, null, 2));
 } else {
-  printReport(findings, process.cwd());
+  printReport(findings, process.cwd(), allFindings.length - findings.length);
 }

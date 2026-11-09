@@ -1,4 +1,6 @@
-# Legacy → new token mapping
+# Color tokens and legacy mapping
+
+Pick tokens from the anatomy below when building a new component. When converting, use the legacy tables after it.
 
 Old palette tokens describe a **color** (`--kirby-white`). New tokens describe a **role on a surface** (`--kirby-color-fill-raised`). The same old token can map to different new tokens, so first decide the role, then pick the token.
 
@@ -16,7 +18,11 @@ Old palette tokens describe a **color** (`--kirby-white`). New tokens describe a
 - `base` = the surface itself. `raised` = a control lifted above the surface (input, checkbox box, avatar, tab bar). `brand` = brand-colored emphasis. `engaged` = checked/selected form state.
 - Every value is redefined inside `.kirby-surface-base|raised|brand`, so `fill-base` always means "the color of the surface I sit on". Never hardcode which surface you are on.
 - Pair properties: if you set `fill-X`, use `content-X` for its text and `border-X` for its border, with the same emphasis and state.
-- Full list: `node_modules/@kirbydesign/core/src/scss/themes/default-brand.css`.
+- Full list: `node_modules/@kirbydesign/core/src/scss/themes/default-brand.css`. Use only the `--kirby-color-*` tokens from it.
+
+### Primitives are out of scope
+
+`--kirby-brand-color-*` and `--kirby-system-color-*` are the raw palette the semantic tokens are built from. They are not part of Kirby's semantic versioning, so they may be renamed, removed or change value in any release, and they don't adapt to surfaces. Never use them in custom components – not as values, not in component variable overrides, and don't assign them. Replace existing uses with the `--kirby-color-*` token for the role they play; if none fits, ask the user.
 
 ## Backgrounds (fill)
 
@@ -145,4 +151,4 @@ Before keeping an override, check that the component still reads the variable: s
 
 ## Unchanged
 
-Spacing, font size/weight, line height, border radius, elevation, z-index, transition and page-width tokens (`--kirby-spacing-*`, `--kirby-font-*`, `--kirby-border-radius-*`, `--kirby-elevation-*`, `--kirby-z-index-*` …) keep their names. Leave them alone.
+Spacing, font size/weight, line height, border radius, elevation, z-index, transition and page-width tokens (`--kirby-spacing-*`, `--kirby-font-*`, `--kirby-border-radius-*`, `--kirby-elevation-*`, `--kirby-z-index-*` …) keep their names. Leave them alone when converting, and use them in new components.

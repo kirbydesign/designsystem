@@ -1,4 +1,6 @@
-# Migration patterns
+# Token patterns for custom components
+
+How to style an approved custom component with the semantic tokens – when building it new or converting it from legacy tokens.
 
 Consumer import path for mixins: `@use '@kirbydesign/designsystem/scss/utils';`
 
@@ -30,7 +32,7 @@ For an Angular component that is itself a surface: `@HostBinding('class.kirby-su
 
 **Leaf controls do not set a surface class.** They use `-raised` tokens (input, chip, avatar) or `-brand-loud` (primary emphasis) and resolve against whatever surface they sit on.
 
-Replace legacy dark-context handling (`themes.apply-dark-theme`, `:host-context(.kirby-color-brightness-dark)`, `$make-lighter`) with a `kirby-surface-brand` class on the container.
+Replace legacy dark-context handling (`themes.apply-dark-theme`, `:host-context(.kirby-color-brightness-dark)`, `$make-lighter`) with a `kirby-surface-brand` class on the container. In new components, never branch on the surface – the tokens already adapt.
 
 **Resolve tokens where they are used.** A custom property such as `--my-bg: var(--kirby-color-fill-base)` resolves on the element that declares it. Declare it on the element (or `:host`) inside the surface, not on a page-level ancestor.
 
@@ -45,7 +47,7 @@ If a custom component has a `themeColor`/`color` input:
 
 ## Hover and active
 
-The `interaction-state` layer mixins drew a translucent overlay. Now each state sets explicit `-hover`/`-active` tokens.
+Each state sets explicit `-hover`/`-active` tokens. When converting: the legacy `interaction-state` layer mixins drew a translucent overlay instead.
 
 ```scss
 // Before
@@ -137,6 +139,6 @@ There is no disabled token or opacity variable yet – keep the `TODO` so it is 
 - Tokens are runtime values, so Sass color math on them can't work. Replace `rgba(get-color(…))`, `color.mix()` and `color.adjust()` with `color-mix(in srgb, var(--kirby-color-…) 50%, transparent)`.
 - Overlays (modals, popovers) render at the app root, on the base surface.
 
-## Backwards compatibility
+## Legacy and new tokens side by side
 
-Legacy tokens are still emitted, so the app keeps working while components are migrated one at a time. Don't mix legacy and new color tokens inside one component – migrate it fully. Kirby's stylelint rule `kirby/use-design-tokens` autofixes `get-color()` to _legacy_ tokens; don't rely on its autofix for this migration.
+Legacy tokens are still emitted, so the app keeps working while lookalikes are converted one at a time. Don't mix legacy and new color tokens inside one component – convert it fully, and use only new tokens in new components. Kirby's stylelint rule `kirby/use-design-tokens` autofixes `get-color()` to _legacy_ tokens; don't rely on its autofix.
