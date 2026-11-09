@@ -53,14 +53,15 @@ For each candidate, go through the ladder in [references/kirby-lookalikes.md](re
 4. **Customize** a Kirby component through its public component variables (`--kirby-card-*`, `--kirby-button-*` …).
 5. **Custom lookalike** with tokens – only if steps 1–4 can't do it.
 
-Verify every candidate component and input in the installed package or the Cookbook – don't guess. Then ask the user with the question tool, recommending the lowest step that fits:
+Verify every candidate component and input in the installed package or the Cookbook – don't guess. Then ask the user, recommending the lowest step that fits:
 
 - **Use/configure `<kirby-…>`** – which inputs cover the needed behavior, and what (if anything) is not covered.
 - **Compose from Kirby components** – which ones, and what the wrapper does.
+- **Customize `<kirby-…>` via component variables** – which `--kirby-<component>-*` variables, and their values.
 - **Build/keep a custom component with tokens** – what Kirby is missing that makes this necessary.
 - **Skip for now** (converting only) – leave the file unchanged and list it in the report.
 
-On steps 1–4: swap the markup, delete the custom styles Kirby now covers and, once unused, the custom component. Only continue to step 4 of the workflow on an explicit "custom" answer, and record the reason the user accepted.
+If the user picks a Kirby component (ladder steps 1–3), swap the markup, delete the custom styles Kirby now covers and, once unused, the custom component. If they pick customizing (ladder step 4), set the component variables on the Kirby component and delete the custom styles they replace. Only continue to workflow step 4 (Build or convert with tokens) on an explicit "custom" answer, and record the reason the user accepted.
 
 ### 4. Build or convert with tokens
 

@@ -55,15 +55,15 @@ Only color primitives are out of scope. All other tokens – opacity (`--kirby-o
 
 ## Borders and dividers
 
-| Legacy                                                                                   | New                                                 | When                                                    |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------- |
-| `--kirby-divider-color`, `--kirby-medium` / `--kirby-background-color` used as separator | `border-base-silent`                                | divider lines, toolbar separators, list row separators  |
-| `--kirby-medium` as outline/track/table line                                             | `border-base-quiet`                                 | outlined containers, table rows, slider/progress tracks |
-| `--kirby-semi-dark` as control border                                                    | `border-raised` (+ `-hover`, `-active`)             | checkbox/radio/input borders                            |
-| `--kirby-semi-light` as control outline                                                  | `border-raised-quiet`                               | avatar/chip outline                                     |
-| `--kirby-dark` as selected underline                                                     | `border-base-loud`                                  | tab indicator                                           |
-| `--kirby-inputs-elevation` (shadow as border)                                            | 1px border `border-raised-quiet` or `border-raised` | elevations on controls were replaced by borders         |
-| `--kirby-danger` for an error border                                                     | `border-raised-danger` + error ring                 | see [patterns.md](patterns.md#error-state)              |
+| Legacy                                                                                   | New                                                                 | When                                                    |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------- |
+| `--kirby-divider-color`, `--kirby-medium` / `--kirby-background-color` used as separator | `border-base-silent`                                                | divider lines, toolbar separators, list row separators  |
+| `--kirby-medium` as outline/track/table line                                             | `border-base-quiet`                                                 | outlined containers, table rows, slider/progress tracks |
+| `--kirby-semi-dark` as control border                                                    | `border-raised` (+ `-hover`, `-active`)                             | checkbox/radio/input borders                            |
+| `--kirby-semi-light` as control outline                                                  | `border-raised-quiet`                                               | avatar/chip outline                                     |
+| `--kirby-dark` as selected underline                                                     | `border-base-loud`                                                  | tab indicator                                           |
+| `--kirby-inputs-elevation` (shadow as border)                                            | `--kirby-stroke-xs` border `border-raised-quiet` or `border-raised` | elevations on controls were replaced by borders         |
+| `--kirby-danger` for an error border                                                     | `border-raised-danger` + error ring                                 | see [patterns.md](patterns.md#error-state)              |
 
 ## Status colors
 
@@ -88,22 +88,22 @@ Choose the emphasis from **where the color is used**, not from the old suffix:
 
 ## Input theme variables
 
-The old theming system (`--kirby-inputs-*`, `--kirby-divider-color`) is still emitted, but no Kirby component reads it any more. Migrate every use.
+The old theming system (`--kirby-inputs-*`, `--kirby-divider-color`) is still emitted, but Kirby's Angular components no longer read it. Migrate every use.
 
 **Reading** them (`var(--kirby-inputs-…)`) – replace:
 
-| Legacy                                      | New                                                               |
-| ------------------------------------------- | ----------------------------------------------------------------- |
-| `--kirby-inputs-background-color`           | `fill-raised`                                                     |
-| `--kirby-inputs-background-color-hover`     | `fill-raised-hover`                                               |
-| `--kirby-inputs-background-color-active`    | `fill-raised-active`                                              |
-| `--kirby-inputs-color`                      | `content-raised`                                                  |
-| `--kirby-inputs-placeholder-color`          | `content-raised-quiet`                                            |
-| `--kirby-inputs-indicator-background-color` | `fill-brand`                                                      |
-| `--kirby-inputs-indicator-color`            | `content-brand`                                                   |
-| `--kirby-inputs-color-hover`                | ask – Kirby dropped it (the hover keeps the text color)           |
-| `--kirby-inputs-elevation`                  | 1px border `border-raised` / `border-raised-quiet`, no shadow     |
-| `--kirby-divider-color`                     | `border-base-silent` (dividers) or `border-base-quiet` (outlines) |
+| Legacy                                      | New                                                                           |
+| ------------------------------------------- | ----------------------------------------------------------------------------- |
+| `--kirby-inputs-background-color`           | `fill-raised`                                                                 |
+| `--kirby-inputs-background-color-hover`     | `fill-raised-hover`                                                           |
+| `--kirby-inputs-background-color-active`    | `fill-raised-active`                                                          |
+| `--kirby-inputs-color`                      | `content-raised`                                                              |
+| `--kirby-inputs-placeholder-color`          | `content-raised-quiet`                                                        |
+| `--kirby-inputs-indicator-background-color` | `fill-brand`                                                                  |
+| `--kirby-inputs-indicator-color`            | `content-brand`                                                               |
+| `--kirby-inputs-color-hover`                | ask – Kirby dropped it (the hover keeps the text color)                       |
+| `--kirby-inputs-elevation`                  | `--kirby-stroke-xs` border `border-raised` / `border-raised-quiet`, no shadow |
+| `--kirby-divider-color`                     | `border-base-silent` (dividers) or `border-base-quiet` (outlines)             |
 
 When the custom element is used on a non-default surface (e.g. a sidebar menu on brand), the `-base` variants may fit better than `-raised` – Kirby's sidebar uses `fill-base-hover`/`-active` for menu item states.
 

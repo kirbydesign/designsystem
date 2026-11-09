@@ -24,7 +24,7 @@ A surface is a global class: `kirby-surface-base`, `kirby-surface-raised` or `ki
 .promo {
   background-color: var(--kirby-color-fill-base);
   color: var(--kirby-color-content-base);
-  border: 1px solid var(--kirby-color-border-base-quiet);
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
 }
 ```
 
@@ -68,7 +68,7 @@ Each state sets explicit `-hover`/`-active` tokens. When converting: the legacy 
   --tile-border: var(--kirby-color-border-raised-quiet);
   background-color: var(--tile-fill);
   color: var(--tile-content);
-  border: 1px solid var(--tile-border);
+  border: var(--kirby-stroke-xs) solid var(--tile-border);
 
   @include utils.hover {
     --tile-fill: var(--kirby-color-fill-raised-hover);
@@ -106,7 +106,7 @@ Each state sets explicit `-hover`/`-active` tokens. When converting: the legacy 
 }
 ```
 
-Don't combine the ring with an elevation shadow. `--kirby-focus-ring-color` no longer exists – this is a breaking change, not a deprecation.
+Don't combine the ring with an elevation shadow. `--kirby-focus-ring-color` is deprecated: it is only kept for backwards compatibility (as an alias of `--kirby-color-border-focus`) and may be removed. Replace it with a ring variable above.
 
 ## Error state
 
@@ -139,7 +139,7 @@ Use the `--kirby-opacity-*` scale instead of literal opacity values: `0`, `5`, `
 
 ## Elevation, borders and color math
 
-- Resting elements get a 1px quiet border instead of `--kirby-elevation-*`. Keep elevation for floating things (popovers, modals, FABs). Compensate size with `box-sizing: border-box`, `calc(padding - 1px)` or `outline` with `outline-offset: -1px`.
+- Resting elements get a quiet `var(--kirby-stroke-xs)` border instead of `--kirby-elevation-*`. Keep elevation for floating things (popovers, modals, FABs). Compensate size with `box-sizing: border-box`, `calc(padding - var(--kirby-stroke-xs))` or `outline` with `outline-offset: calc(-1 * var(--kirby-stroke-xs))`.
 - Tokens are runtime values, so Sass color math on them can't work. Replace `rgba(get-color(…))`, `color.mix()` and `color.adjust()` with `color-mix(in srgb, var(--kirby-color-…) var(--kirby-opacity-40), transparent)`.
 - Overlays (modals, popovers) render at the app root, on the base surface.
 
