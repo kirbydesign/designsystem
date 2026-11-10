@@ -132,12 +132,13 @@ These replacements hold in every context, so apply them without asking. The scan
 
 ## Component variable overrides
 
-Kirby components expose variables such as `--kirby-card-main-background-color`, `--kirby-button-color` or `--kirby-flag-border-color`. Overriding them is a supported customization – **keep the override**, including custom colors (`--kirby-card-main-background-color: #ff00aa` is fine and not reported).
+Kirby components expose variables such as `--kirby-card-main-background-color`, `--kirby-button-color` or `--kirby-flag-border-color`. Overriding them is a supported customization – **keep the override**, but set it to a semantic token, not a hardcoded color (`--kirby-card-main-background-color: var(--kirby-color-fill-brand)`, not `#ff00aa`).
 
 Only the _value_ is migrated:
 
 - legacy value with a no-brainer (table above) → replace the value
 - legacy value without one (e.g. `--kirby-card-main-color: var(--kirby-white-contrast)`) → ask the user which token to use, or leave it as is and list it as an open question in the report
+- hardcoded color → the `--kirby-color-*` token for its role; if none fits, ask the user, or leave it as is and list it as an open question in the report
 - override that now equals Kirby's default → ask whether to remove it
 - `--kirby-item-background` → see [kirby-lookalikes.md](kirby-lookalikes.md#items): `transparent` is very likely redundant, other values usually fake a raised group
 

@@ -126,6 +126,14 @@ describe('component variable overrides', () => {
     assert.equal(finding.suggestion, 'var(--kirby-color-fill-brand-loud)');
   });
 
+  it('reports a hardcoded color on a component variable as an override', () => {
+    const findings = scan({
+      'src/a.scss': '.a { --kirby-card-main-background-color: #ff00aa; }',
+    });
+
+    assert.equal(findingFor(findings, '#ff00aa')?.category, 'override');
+  });
+
   it('does not report a semantic token on a component variable', () => {
     const findings = scan({
       'src/a.scss': '.a { --kirby-card-main-background-color: var(--kirby-color-fill-base); }',

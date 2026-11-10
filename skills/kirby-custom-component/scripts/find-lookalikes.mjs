@@ -8,8 +8,8 @@
  *
  * Paths default to the current working directory. No dependencies.
  * Styling findings are only reported in directories that also contain lookalikes, unless --all-findings is set.
- * Overrides of component variables (e.g. --kirby-card-main-color) are allowed: custom colors are not reported,
- * legacy values are reported in the `override` category, with a suggestion when a no-brainer replacement exists.
+ * Overrides of component variables (e.g. --kirby-card-main-color) are allowed: legacy and hardcoded values on them
+ * are reported in the `override` category, with a suggestion when a no-brainer replacement exists.
  * Component variables are verified against the installed Kirby packages (@kirbydesign/core, designsystem,
  * extensions-angular): other --kirby-* variables are reported in the `unknown-variable` category.
  */
@@ -457,9 +457,11 @@ function stripComments(line, kind, state) {
 
 const HINTS = {
   componentOverride:
-    'Component variable override: allowed, keep it. A no-brainer replacement exists for the legacy value – apply the suggestion.',
+    'Component variable override: allowed, keep it. A no-brainer replacement exists for the value – apply the suggestion.',
   componentOverrideLegacy:
     'Component variable override: allowed, keep it. The legacy value has no context-free replacement – ask the user which new token to use, or leave it as is and list it as an open question in the report.',
+  componentOverrideHardcoded:
+    'Component variable override: allowed, keep it, but set it to a semantic --kirby-color-* token for its role instead of a hardcoded color. If no token fits, ask the user, or leave it as is and list it as an open question in the report.',
   deadOverride:
     'Assigns a legacy theme variable that migrated Kirby components no longer read, so it has no effect on them. Dark/white theme intent → kirby-surface-* class; brand re-theming → brand token pipeline; otherwise ask the user. Keep it only if custom code still reads it.',
 };
@@ -524,20 +526,15 @@ function scanFile(path, rules, kirbyClasses, knownVariables) {
           : null;
         const isComponentOverride = property && isComponentVariable(property, knownVariables);
 
-        if (isComponentOverride && rule.category === 'hardcoded') {
-          // Custom colors on component variables are allowed, unless they are an old Kirby value with a 1:1 replacement
-          if (suggested)
-            report(rule, match[0], {
-              category: 'override',
-              hint: HINTS.componentOverride,
-              suggestion: suggested,
-            });
-          continue;
-        }
-        if (isComponentOverride && rule.category === 'token') {
+        if (isComponentOverride && (rule.category === 'hardcoded' || rule.category === 'token')) {
+          const hint = suggested
+            ? HINTS.componentOverride
+            : rule.category === 'hardcoded'
+              ? HINTS.componentOverrideHardcoded
+              : HINTS.componentOverrideLegacy;
           report(rule, match[0], {
             category: 'override',
-            hint: suggested ? HINTS.componentOverride : HINTS.componentOverrideLegacy,
+            hint,
             ...(suggested && { suggestion: suggested }),
           });
           continue;
