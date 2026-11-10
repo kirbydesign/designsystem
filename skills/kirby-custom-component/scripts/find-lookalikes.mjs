@@ -60,42 +60,42 @@ const GLOBAL_VARIABLE =
 
 /*
  * Replacements that hold regardless of context ("no-brainers"), keyed by the role of the CSS property
- * the value is assigned to. Anything not listed here depends on context and needs a decision.
+ * the value is assigned to. A property only gets a token of its own role (fill, content or border).
+ * Anything not listed here depends on context and needs a decision.
  */
 const NO_BRAINERS = {
-  any: {
-    'text-color-black': 'content-base',
-    'text-color-positive': 'content-positive',
-    'text-color-negative': 'content-negative',
-    'primary-contrast': 'content-brand-loud',
-    'focus-ring-color': 'border-focus',
-    'inputs-background-color': 'fill-raised',
-    'inputs-background-color-hover': 'fill-raised-hover',
-    'inputs-background-color-active': 'fill-raised-active',
-    'inputs-color': 'content-raised',
-    'inputs-placeholder-color': 'content-raised-quiet',
-    'inputs-indicator-background-color': 'fill-brand',
-    'inputs-indicator-color': 'content-brand',
-    '#238cec': 'border-focus',
-  },
   fill: {
     'background-color': 'fill-base',
     primary: 'fill-brand-loud',
     'success-tint': 'fill-success-quiet',
     'warning-tint': 'fill-warning-quiet',
     'danger-tint': 'fill-danger-quiet',
+    'inputs-background-color': 'fill-raised',
+    'inputs-background-color-hover': 'fill-raised-hover',
+    'inputs-background-color-active': 'fill-raised-active',
+    'inputs-indicator-background-color': 'fill-brand',
     '#f6f6f6': 'fill-base',
     '#00e89a': 'fill-brand-loud',
   },
   content: {
+    'text-color-black': 'content-base',
+    'text-color-positive': 'content-positive',
+    'text-color-negative': 'content-negative',
+    'primary-contrast': 'content-brand-loud',
+    'inputs-color': 'content-raised',
+    'inputs-placeholder-color': 'content-raised-quiet',
+    'inputs-indicator-color': 'content-brand',
     '#1c1c1c': 'content-base',
   },
-  border: {},
+  border: {
+    'focus-ring-color': 'border-focus',
+    '#238cec': 'border-focus',
+  },
 };
 
 function propertyRole(property) {
   if (!property) return null;
-  if (/border|outline|divider|separator|stroke/.test(property)) return 'border';
+  if (/border|outline|divider|separator|stroke|box-shadow/.test(property)) return 'border';
   if (/background|(?:^|-)bg(?:-|$)|(?:^|-)fill(?:-|$)|indicator-color/.test(property))
     return 'fill';
   if (/(?:^|-)color(?:-|$)/.test(property)) return 'content';
@@ -103,9 +103,8 @@ function propertyRole(property) {
 }
 
 function suggestion(property, key) {
-  if (!key) return null;
   const role = propertyRole(property);
-  const token = NO_BRAINERS.any[key] ?? (role && NO_BRAINERS[role][key]);
+  const token = key && role && NO_BRAINERS[role][key];
   return token ? `var(--kirby-color-${token})` : null;
 }
 

@@ -115,21 +115,20 @@ When the custom element is used on a non-default surface (e.g. a sidebar menu on
 
 ## No-brainers
 
-These replacements hold in every context, so apply them without asking. The scanner shows them as `⇒ var(--kirby-color-…)`.
+These replacements hold in every context, so apply them without asking. The scanner shows them as `⇒ var(--kirby-color-…)`. Each one only applies to a property of the token's own kind – a content token never goes on a background or border.
 
-| Legacy value                                                           | Assigned to           | New                              |
-| ---------------------------------------------------------------------- | --------------------- | -------------------------------- |
-| `--kirby-text-color-black`, `get-text-color('black')`                  | anything              | `content-base`                   |
-| `--kirby-text-color-positive` / `-negative`                            | anything              | `content-positive` / `-negative` |
-| `--kirby-primary-contrast`                                             | anything              | `content-brand-loud`             |
-| `--kirby-focus-ring-color`, `#238cec`                                  | anything              | `border-focus`                   |
-| `--kirby-inputs-*` (the mapped rows above)                             | anything              | see table above                  |
-| `--kirby-background-color`, `get-color('background-color')`, `#f6f6f6` | a background property | `fill-base`                      |
-| `--kirby-primary`, `get-color('primary')`, `#00e89a`                   | a background property | `fill-brand-loud`                |
-| `--kirby-{success,warning,danger}-tint`                                | a background property | `fill-{status}-quiet`            |
-| `#1c1c1c`                                                              | a text color property | `content-base`                   |
+| Legacy value                                                           | Assigned to            | New                              |
+| ---------------------------------------------------------------------- | ---------------------- | -------------------------------- |
+| `--kirby-text-color-black`, `get-text-color('black')`, `#1c1c1c`       | a text color property  | `content-base`                   |
+| `--kirby-text-color-positive` / `-negative`                            | a text color property  | `content-positive` / `-negative` |
+| `--kirby-primary-contrast`                                             | a text color property  | `content-brand-loud`             |
+| `--kirby-focus-ring-color`, `#238cec`                                  | a border property      | `border-focus`                   |
+| `--kirby-inputs-*` (the mapped rows above)                             | a property of its kind | see table above                  |
+| `--kirby-background-color`, `get-color('background-color')`, `#f6f6f6` | a background property  | `fill-base`                      |
+| `--kirby-primary`, `get-color('primary')`, `#00e89a`                   | a background property  | `fill-brand-loud`                |
+| `--kirby-{success,warning,danger}-tint`                                | a background property  | `fill-{status}-quiet`            |
 
-"Background property" means `background*`, `fill` or a variable whose name contains `background`/`bg`/`fill`. Everything else in this file depends on context.
+"Background property" means `background*`, `fill` or a variable whose name contains `background`/`bg`/`fill`. "Border property" means `border*`, `outline*`, `box-shadow` or a variable whose name contains `border`/`outline`/`divider`/`stroke`. "Text color property" means any other property or variable whose name contains `color`. Everything else in this file depends on context.
 
 ## Component variable overrides
 
