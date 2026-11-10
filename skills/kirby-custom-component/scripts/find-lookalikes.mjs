@@ -336,6 +336,18 @@ const unknownVariableRule = (knownVariables) => ({
   hint: 'Not a Kirby token and not used by any installed Kirby component. A custom variable must not use the reserved kirby- prefix: rename it (e.g. --promo-card-fill). If it is a component variable Kirby has removed, the override has no effect – tell the user.',
 });
 
+const unknownColorTokenRule = (knownVariables) => ({
+  id: 'unknown-color-token',
+  category: 'unknown-variable',
+  files: 'all',
+  pattern: /--kirby-color-[\w-]+/g,
+  ignore: (_line, [name]) => knownVariables.has(name),
+  hint: 'Not a semantic color token of the installed Kirby version, so it resolves to nothing. Pick an existing token from <kirby-core>/scss/themes/default-brand.css (see references/token-mapping.md).',
+});
+
+const hasColorTokens = (knownVariables) =>
+  [...(knownVariables ?? [])].some((name) => name.startsWith('--kirby-color-'));
+
 const KIRBY_PACKAGES = ['core', 'designsystem', 'extensions-angular'];
 const PACKAGE_EXTENSIONS = new Set(['.mjs', '.js', '.css', '.scss', '.ts']);
 
@@ -641,6 +653,7 @@ const rules = [
   ...LOOKALIKE_RULES,
   ...RULES,
   ...(knownVariables ? [unknownVariableRule(knownVariables)] : []),
+  ...(hasColorTokens(knownVariables) ? [unknownColorTokenRule(knownVariables)] : []),
   ...(options.hardcoded ? [HARDCODED_RULE] : []),
 ];
 const kirbyClassesByDirectory = new Map();

@@ -150,8 +150,28 @@ describe('unknown variables', () => {
     assert.equal(findingFor(findings, '--kirby-promo-fill')?.category, 'unknown-variable');
   });
 
+  it('reports a semantic color token that the installed Kirby version does not define', () => {
+    const findings = scan({ 'src/a.scss': '.a { color: var(--kirby-color-fill-primary); }' });
+
+    assert.equal(findingFor(findings, '--kirby-color-fill-primary')?.category, 'unknown-variable');
+  });
+
   it('does not report a semantic color token that the installed Kirby version defines', () => {
     const findings = scan({ 'src/a.scss': '.a { color: var(--kirby-color-content-base); }' });
+
+    assert.deepEqual(findings, []);
+  });
+
+  it('does not check semantic color tokens when the installed Kirby version has none', () => {
+    const findings = scan(
+      { 'src/a.scss': '.a { color: var(--kirby-color-fill-primary); }' },
+      {
+        installed: {
+          'node_modules/@kirbydesign/core/scss/themes/design-tokens.css':
+            ':root { --kirby-primary: #00e89a; }',
+        },
+      }
+    );
 
     assert.deepEqual(findings, []);
   });
