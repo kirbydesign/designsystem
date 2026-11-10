@@ -24,19 +24,38 @@ These are **not** valid ways to make a Kirby component fit: `::ng-deep`, targeti
 
 ## Signs of a lookalike
 
-A class or component name from the table below, a native control with custom styling, custom hover/active/focus/disabled styles, or hand-made status colors. Common patterns include, but are not limited to:
+A class or component name from the table below, a native control with custom styling, custom hover/active/focus/disabled styles, or hand-made status colors. The table covers every name the scanner flags; it is a starting point, not a complete list:
 
-| Custom pattern                                          | Kirby candidate                                                          | Package                          |
-| ------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------- |
-| box with border/shadow, `.card`, `.panel`, `.tile`      | `kirby-card` (`variant`: `base`, `raised`, `brand`)                      | designsystem                     |
-| styled `<button>`, `<a class="btn">`, icon-only button  | `button[kirby-button]` (`attentionLevel`, `size`, `noDecoration`)        | designsystem                     |
-| `<select>`, custom dropdown/listbox                     | `kirby-dropdown`, `kirby-x-combobox` (searchable)                        | designsystem, extensions-angular |
-| text input/textarea with custom label/border/error      | `kirby-form-field` + `input[kirby-input]` / `textarea[kirby-textarea]`   | designsystem                     |
-| pill/tab group switching views, chips                   | `kirby-segmented-control` (`mode="chip"`)                                | designsystem                     |
-| items with separators/sections                          | `kirby-list`, `kirby-item`                                               | designsystem                     |
-| group of `kirby-item`s outside a card or list           | `kirby-list`, or the items wrapped in `kirby-card` – see [Items](#items) | designsystem                     |
-| `<hr>`, `.divider`, `.separator`, `border-bottom` lines | `kirby-divider`                                                          | designsystem                     |
-| illustration with status colors                         | `kirby-x-spot-illustration`                                              | extensions-angular               |
+| Custom pattern                                          | Kirby candidate                                                             | Package                          |
+| ------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------- |
+| box with border/shadow, `.card`, `.panel`, `.tile`      | `kirby-card` (`variant`: `base`, `raised`, `brand`)                         | designsystem                     |
+| styled `<button>`, `<a class="btn">`, icon-only button  | `button[kirby-button]` (`attentionLevel`, `size`, `noDecoration`)           | designsystem                     |
+| `<select>`, custom dropdown/listbox                     | `kirby-dropdown`, `kirby-x-combobox` (searchable)                           | designsystem, extensions-angular |
+| text input/textarea with custom label/border/error      | `kirby-form-field` + `input[kirby-input]` / `textarea[kirby-textarea]`      | designsystem                     |
+| `.checkbox`, `.radio`, `<input type="checkbox/radio">`  | `kirby-checkbox`, `kirby-radio-group` + `kirby-radio`                       | designsystem                     |
+| `.toggle`, `.switch`                                    | `kirby-toggle` (on/off), `kirby-toggle-button` (pressed button)             | designsystem                     |
+| `.slider`, `<input type="range">`                       | `kirby-range`                                                               | designsystem                     |
+| pill/tab group switching views, `.chip`, `.segmented`   | `kirby-segmented-control` (`mode="chip"`)                                   | designsystem                     |
+| `.tabs` navigating between pages or sections            | `kirby-tab-navigation` (in page), `kirby-tab-bar` (app-level tabs)          | designsystem                     |
+| `.badge`, `.tag`, `.pill` (count or short label)        | `kirby-badge`                                                               | designsystem                     |
+| `.flag` (status label)                                  | `kirby-flag`                                                                | designsystem                     |
+| `.avatar`                                               | `kirby-avatar`                                                              | designsystem                     |
+| `.accordion`, expandable section                        | `kirby-accordion-item`                                                      | designsystem                     |
+| items with separators/sections, `.list-item`            | `kirby-list`, `kirby-item`                                                  | designsystem                     |
+| group of `kirby-item`s outside a card or list           | `kirby-list`, or the items wrapped in `kirby-card` – see [Items](#items)    | designsystem                     |
+| `<hr>`, `.divider`, `.separator`, `border-bottom` lines | `kirby-divider`                                                             | designsystem                     |
+| `.spinner`, `.loader`                                   | `kirby-spinner`, `kirby-loading-overlay` (blocks content while loading)     | designsystem                     |
+| `.skeleton`                                             | `kirby-x-skeleton-loader`                                                   | extensions-angular               |
+| `.progress`, `<progress>`                               | `kirby-progress-circle`, `kirby-page-progress` (steps of a flow)            | designsystem                     |
+| `.modal`, `.dialog`                                     | `kirby-modal`, `ModalController`                                            | designsystem                     |
+| `.alert`, confirm dialog                                | `ModalController.showAlert()`                                               | designsystem                     |
+| `.toast`, `.snackbar`                                   | `ToastController`                                                           | designsystem                     |
+| `.menu` (actions in a popup)                            | `kirby-menu`                                                                | designsystem                     |
+| `.sidebar`, side navigation menu                        | `kirby-x-sidebar` + `kirby-x-sidebar-menu`                                  | extensions-angular               |
+| `.banner` with image                                    | `kirby-x-image-banner`                                                      | extensions-angular               |
+| `.empty-state`                                          | `kirby-empty-state`                                                         | designsystem                     |
+| illustration with status colors                         | `kirby-x-spot-illustration`                                                 | extensions-angular               |
+| `.stepper`                                              | no direct equivalent – check `kirby-page-progress`, otherwise ladder step 5 | –                                |
 
 ## Items
 
