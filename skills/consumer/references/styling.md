@@ -18,7 +18,7 @@ All tokens are emitted as CSS custom properties on `:root`. Use them directly in
 
 Use the semantic color tokens `--kirby-color-{fill|content|border}-{role}[-{emphasis}][-{state}]` and put a `kirby-surface-base|raised|brand` class on containers that change the background – the tokens adapt to the surface they sit on. Don't use legacy colors (`--kirby-primary`, `--kirby-white`, `get-color()` …) or color primitives (`--kirby-brand-color-*`, `--kirby-system-color-*`) in new code.
 
-For token anatomy, legacy mappings and state patterns, and for custom UI that resembles a Kirby component, use the `kirby-custom-component` skill.
+For token anatomy, legacy mappings and state patterns, for migrating legacy colors, and for custom UI that resembles a Kirby component, use the `kirby-custom-component` skill.
 
 ## SCSS Utilities
 

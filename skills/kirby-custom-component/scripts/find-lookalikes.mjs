@@ -599,7 +599,7 @@ function scopeFindings(findings, allFindings) {
 
 function printReport(findings, root, hidden) {
   const hiddenNote = hidden
-    ? `\n${hidden} styling findings outside lookalike directories are hidden. Use --all-findings to list them.`
+    ? `\n${hidden} styling findings outside lookalike directories are hidden. Use --all-findings to list them, e.g. to migrate all legacy colors.`
     : '';
   if (!findings.length) {
     console.log(`No Kirby lookalikes found.${hiddenNote}`);
