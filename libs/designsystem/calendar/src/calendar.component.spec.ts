@@ -547,6 +547,61 @@ describe('CalendarComponent', () => {
       const day = spectator.query('.day.current-month');
       expect(day.getAttribute('aria-label')).toBe('1. Mai');
     });
+
+    describe('when locale includes a region', () => {
+      it('should use Danish for locale "da-DK"', () => {
+        spectator = createHostWithLocale('da-DK');
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
+
+        const headerTexts = trimmedTexts('th :not(.kirby-visually-hidden)');
+        expect(headerTexts).toEqual(['M', 'T', 'O', 'T', 'F', 'L', 'S']);
+        expect(spectator.component.activeMonthName).toBe('Maj');
+        const day = spectator.query('.day.current-month');
+        expect(day.getAttribute('aria-label')).toBe('1. maj');
+      });
+
+      it('should use German for locale "de-DE"', () => {
+        spectator = createHostWithLocale('de-DE');
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
+
+        expect(spectator.component.activeMonthName).toBe('Mai');
+        const day = spectator.query('.day.current-month');
+        expect(day.getAttribute('aria-label')).toBe('1. Mai');
+      });
+
+      it('should use US English for locale "en-US"', () => {
+        spectator = createHostWithLocale('en-US');
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
+
+        const headerTexts = trimmedTexts('th :not(.kirby-visually-hidden)');
+        expect(headerTexts).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
+        const day = spectator.query('.day.current-month');
+        expect(day.getAttribute('aria-label')).toBe('May 1');
+      });
+
+      it('should use British English for locale "en-GB"', () => {
+        spectator = createHostWithLocale('en-GB');
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
+
+        const headerTexts = trimmedTexts('th :not(.kirby-visually-hidden)');
+        expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
+        const day = spectator.query('.day.current-month');
+        expect(day.getAttribute('aria-label')).toBe('1 May');
+      });
+
+      it('should fall back to British English for an unsupported English region like "en-AU"', () => {
+        spectator = createHostWithLocale('en-AU');
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-05-01'));
+
+        const day = spectator.query('.day.current-month');
+        expect(day.getAttribute('aria-label')).toBe('1 May');
+      });
+    });
   });
 
   describe('active month', () => {

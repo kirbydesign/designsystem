@@ -244,9 +244,14 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (locale === 'en') {
       locale = 'enGB'; // if english locale is provided without region, we default to GB
     }
-    locale = locale.replace('-', '');
     const availableLocales = { ...this.includedLocales, ...this.locales, ...this.customLocales };
-    return availableLocales[locale] || this.includedLocales.enGB; // Default to enGB if injected locale doesnt exist
+    const localeWithoutSeparator = locale.replace(/[-_]/g, ''); // e.g. 'en-US' -> 'enUS'
+    const language = locale.split(/[-_]/)[0]; // e.g. 'da-DK' -> 'da'
+    return (
+      availableLocales[localeWithoutSeparator] ||
+      availableLocales[language] ||
+      this.includedLocales.enGB // Default to enGB if neither the injected locale nor its language exists
+    );
   }
 
   private formatDateLabel(): string {
