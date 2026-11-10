@@ -763,7 +763,7 @@ describe('RadioGroupComponent', () => {
 
     beforeEach(async () => {
       spectator = createHost(
-        `<kirby-radio-group aria-label="aria-test" aria-describedby="description-test" [items]="['Bacon', 'Salami', 'Tenderloin']">
+        `<kirby-radio-group aria-label="aria-test" aria-describedby="description-test" aria-required="true" [items]="['Bacon', 'Salami', 'Tenderloin']">
         </kirby-radio-group>`,
         {}
       );
@@ -779,6 +779,11 @@ describe('RadioGroupComponent', () => {
     it('should set aria-describedby attribute on ion-radio-group', () => {
       expect(ionRadioGroupElement.getAttribute('aria-describedby')).toEqual('description-test');
       expect(spectator.element.getAttribute('aria-describedby')).toBeNull();
+    });
+
+    it('should set aria-required attribute on ion-radio-group', () => {
+      expect(ionRadioGroupElement.getAttribute('aria-required')).toEqual('true');
+      expect(spectator.element.getAttribute('aria-required')).toBeNull();
     });
   });
 
