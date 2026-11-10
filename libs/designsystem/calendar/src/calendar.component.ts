@@ -241,16 +241,13 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   private mapLocale(locale: string): Locale {
-    if (locale === 'en') {
-      locale = 'enGB'; // if english locale is provided without region, we default to GB
-    }
     const availableLocales = { ...this.includedLocales, ...this.locales, ...this.customLocales };
     const localeWithoutSeparator = locale.replace(/[-_]/g, ''); // e.g. 'en-US' -> 'enUS'
     const language = locale.split(/[-_]/)[0]; // e.g. 'da-DK' -> 'da'
     return (
       availableLocales[localeWithoutSeparator] ||
       availableLocales[language] ||
-      this.includedLocales.enGB // Default to enGB if neither the injected locale nor its language exists
+      this.includedLocales.enGB // Default to enGB, also for 'en' without region or unsupported regions like 'en-AU'
     );
   }
 
