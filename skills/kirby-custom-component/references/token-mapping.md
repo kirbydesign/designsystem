@@ -138,15 +138,15 @@ Kirby components expose variables such as `--kirby-card-main-background-color`, 
 Only the _value_ is migrated:
 
 - legacy value with a no-brainer (table above) → replace the value
-- legacy value without one (e.g. `--kirby-card-main-color: var(--kirby-white-contrast)`) → ask the user which token to use, or leave it with a `TODO(design-tokens)`
+- legacy value without one (e.g. `--kirby-card-main-color: var(--kirby-white-contrast)`) → ask the user which token to use, or leave it as is and list it as an open question in the report
 - override that now equals Kirby's default → ask whether to remove it
 - `--kirby-item-background` → see [kirby-lookalikes.md](kirby-lookalikes.md#items): `transparent` is very likely redundant, other values usually fake a raised group
 
-Before keeping an override, check that the component still reads the variable: search for it in `node_modules/@kirbydesign/designsystem/fesm2022/kirbydesign-designsystem-<component>.mjs` (styles are inlined there). If it is not found, the override is dead – tell the user.
+Before keeping an override, check that the component still reads the variable: search for it in `node_modules/@kirbydesign/designsystem/fesm2022/kirbydesign-designsystem-<component>.mjs` (styles are inlined there). If it is not found, the override is dead – tell the user. The scanner already reports variables that no installed Kirby package uses as `unknown-variable`; a custom variable with the `kirby-` prefix is not an override – rename it.
 
 ## No direct replacement – ask the user
 
-- `--kirby-decoration-color-*` (illustrative palette): ask which role it plays, or keep it as is with a `TODO`.
+- `--kirby-decoration-color-*` (illustrative palette): ask which role it plays, or keep it as is and list it as an open question in the report.
 - `--kirby-{secondary,tertiary}` used as accent color (not as an area background).
 - Status colors used decoratively (e.g. `--kirby-success` as a chart line).
 - `--kirby-text-color-danger` (red text): `content-negative` fits values; for form errors prefer Kirby's form-field error state.

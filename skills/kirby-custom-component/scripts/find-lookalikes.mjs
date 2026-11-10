@@ -10,9 +10,11 @@
  * Styling findings are only reported in directories that also contain lookalikes, unless --all-findings is set.
  * Overrides of component variables (e.g. --kirby-card-main-color) are allowed: custom colors are not reported,
  * legacy values are reported in the `override` category, with a suggestion when a no-brainer replacement exists.
+ * Component variables are verified against the installed Kirby packages (@kirbydesign/core, designsystem,
+ * extensions-angular): other --kirby-* variables are reported in the `unknown-variable` category.
  */
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { dirname, extname, join, relative } from 'node:path';
+import { existsSync, readdirSync, readFileSync, realpathSync, statSync } from 'node:fs';
+import { dirname, extname, join, relative, resolve } from 'node:path';
 
 const STYLE_EXTENSIONS = new Set(['.scss', '.sass', '.css', '.less']);
 const TEMPLATE_EXTENSIONS = new Set(['.html']);
@@ -52,9 +54,9 @@ const LEGACY_VARIABLE = new RegExp(
   `^--kirby-(?:(?:${LEGACY_COLOR_NAMES})${LEGACY_COLOR_SUFFIXES}|text-color-[\\w-]+|(?:white|dark)-overlay(?:-\\d+)?|decoration-color-[\\w-]+|inputs-[\\w-]+|divider-color|focus-ring-color)$`
 );
 
-// Global token families. Any other --kirby-* variable is a component variable (e.g. --kirby-card-main-color)
+// Global token families. Other --kirby-* variables found in the installed Kirby packages are component variables (e.g. --kirby-card-main-color)
 const GLOBAL_VARIABLE =
-  /^--kirby-(?:color-|system-color-|brand-color-|spacing-|font-|line-height-|border-radius-|elevation-|z-index-|transition-|icon-font-size|relative-size-|size-|page-|focus-ring-|error-ring-|safe-area-|statusbar-|loading-overlay-)/;
+  /^--kirby-(?:color-|system-color-|brand-color-|spacing-|font-|line-height-|border-radius-|elevation-|z-index-|transition-|icon-font-size|relative-size-|size-|page-|focus-ring-|error-ring-|safe-area-|statusbar-|loading-overlay-|opacity-|stroke-|breakpoint-)/;
 
 /*
  * Replacements that hold regardless of context ("no-brainers"), keyed by the role of the CSS property
@@ -240,8 +242,13 @@ const LOOKALIKE_CLASS_NAME = new RegExp(
   `^${LOOKALIKE_WORD}(?:[-_][\\w-]*)?$|^[\\w-]*[-_]${LOOKALIKE_WORD}$`
 );
 
+const LAYOUT_WRAPPER_CLASS_NAME = /[-_](?:container|wrapper|section|content)$/;
+
 const isLookalikeClassName = (name) =>
-  Boolean(name) && !name.startsWith('kirby-') && LOOKALIKE_CLASS_NAME.test(name);
+  Boolean(name) &&
+  !name.startsWith('kirby-') &&
+  LOOKALIKE_CLASS_NAME.test(name) &&
+  !LAYOUT_WRAPPER_CLASS_NAME.test(name);
 
 // Class names in a style selector, skipping those compounded with a Kirby element, e.g. `kirby-card.promo`
 function lookalikeSelectorClassNames(line) {
@@ -314,6 +321,59 @@ const LOOKALIKE_RULES = [
   },
 ];
 
+const isComponentVariable = (name, knownVariables) =>
+  name.startsWith('--kirby-') &&
+  !GLOBAL_VARIABLE.test(name) &&
+  !LEGACY_VARIABLE.test(name) &&
+  (knownVariables?.has(name) ?? true);
+
+const unknownVariableRule = (knownVariables) => ({
+  id: 'unknown-kirby-variable',
+  category: 'unknown-variable',
+  files: 'all',
+  pattern: /--kirby-[\w-]+/g,
+  ignore: (_line, [name]) =>
+    GLOBAL_VARIABLE.test(name) || LEGACY_VARIABLE.test(name) || knownVariables.has(name),
+  hint: 'Not a Kirby token and not used by any installed Kirby component. A custom variable must not use the reserved kirby- prefix: rename it (e.g. --promo-card-fill). If it is a component variable Kirby has removed, the override has no effect – tell the user.',
+});
+
+const KIRBY_PACKAGES = ['core', 'designsystem', 'extensions-angular'];
+const PACKAGE_EXTENSIONS = new Set(['.mjs', '.js', '.css', '.scss', '.ts']);
+
+function kirbyPackagesIn(nodeModules) {
+  const pnpm = join(nodeModules, '.pnpm');
+  const pnpmEntries = existsSync(pnpm) ? readdirSync(pnpm) : [];
+  return KIRBY_PACKAGES.flatMap((name) => [
+    join(nodeModules, '@kirbydesign', name),
+    ...pnpmEntries
+      .filter((entry) => entry.startsWith(`@kirbydesign+${name}@`))
+      .map((entry) => join(pnpm, entry, 'node_modules', '@kirbydesign', name)),
+  ]).filter((directory) => existsSync(directory));
+}
+
+function findKirbyPackages(paths) {
+  const packages = new Set();
+  for (const start of [process.cwd(), ...paths]) {
+    for (let directory = resolve(start); ; directory = dirname(directory)) {
+      const found = kirbyPackagesIn(join(directory, 'node_modules'));
+      found.forEach((path) => packages.add(realpathSync(path)));
+      if (found.length || dirname(directory) === directory) break;
+    }
+  }
+  return [...packages];
+}
+
+function readKirbyVariables(packages) {
+  if (!packages.length) return null;
+  const variables = new Set();
+  for (const file of packages.flatMap((path) => [...walk(path, new Set(['node_modules']))])) {
+    if (!PACKAGE_EXTENSIONS.has(extname(file))) continue;
+    for (const [name] of readFileSync(file, 'utf8').matchAll(/--kirby-[\w-]+/g))
+      variables.add(name);
+  }
+  return variables;
+}
+
 const USAGE =
   'Usage: node find-lookalikes.mjs [paths...] [--json] [--skip-hardcoded] [--all-findings]';
 const FLAGS = new Set(['--json', '--skip-hardcoded', '--all-findings', '--help']);
@@ -351,7 +411,7 @@ function fileKind(path) {
   return null;
 }
 
-function* walk(path) {
+function* walk(path, ignoredDirectories = IGNORED_DIRECTORIES) {
   const stats = statSync(path);
   if (stats.isFile()) {
     yield path;
@@ -359,8 +419,8 @@ function* walk(path) {
   }
   for (const entry of readdirSync(path, { withFileTypes: true })) {
     if (entry.isDirectory()) {
-      if (!IGNORED_DIRECTORIES.has(entry.name) && !entry.name.startsWith('.')) {
-        yield* walk(join(path, entry.name));
+      if (!ignoredDirectories.has(entry.name) && !entry.name.startsWith('.')) {
+        yield* walk(join(path, entry.name), ignoredDirectories);
       }
     } else if (entry.isFile()) {
       yield join(path, entry.name);
@@ -400,12 +460,12 @@ const HINTS = {
   componentOverride:
     'Component variable override: allowed, keep it. A no-brainer replacement exists for the legacy value – apply the suggestion.',
   componentOverrideLegacy:
-    'Component variable override: allowed, keep it. The legacy value has no context-free replacement – ask the user which new token to use, or leave it with a TODO.',
+    'Component variable override: allowed, keep it. The legacy value has no context-free replacement – ask the user which new token to use, or leave it as is and list it as an open question in the report.',
   deadOverride:
     'Assigns a legacy theme variable that migrated Kirby components no longer read, so it has no effect on them. Dark/white theme intent → kirby-surface-* class; brand re-theming → brand token pipeline; otherwise ask the user. Keep it only if custom code still reads it.',
 };
 
-function scanFile(path, rules, kirbyClasses) {
+function scanFile(path, rules, kirbyClasses, knownVariables) {
   const kind = fileKind(path);
   if (!kind) return [];
   const applicable = rules.filter((rule) => appliesTo(rule, kind));
@@ -463,10 +523,7 @@ function scanFile(path, rules, kirbyClasses) {
         const suggested = rule.key
           ? suggestion(property, rule.key(match[0], match.slice(1)))
           : null;
-        const isComponentOverride =
-          property?.startsWith('--kirby-') &&
-          !GLOBAL_VARIABLE.test(property) &&
-          !LEGACY_VARIABLE.test(property);
+        const isComponentOverride = property && isComponentVariable(property, knownVariables);
 
         if (isComponentOverride && rule.category === 'hardcoded') {
           // Custom colors on component variables are allowed, unless they are an old Kirby value with a 1:1 replacement
@@ -544,6 +601,7 @@ function printReport(findings, root, hidden) {
   const order = [
     'lookalike',
     'override',
+    'unknown-variable',
     'color-primitive',
     'token',
     'scss',
@@ -577,13 +635,24 @@ function printReport(findings, root, hidden) {
 }
 
 const options = parseArgs(process.argv.slice(2));
-const rules = [...LOOKALIKE_RULES, ...RULES, ...(options.hardcoded ? [HARDCODED_RULE] : [])];
+const knownVariables = readKirbyVariables(findKirbyPackages(options.paths));
+if (!knownVariables) {
+  console.error(
+    'Warning: no @kirbydesign packages found in node_modules, so --kirby-* variables are not checked against Kirby component variables.'
+  );
+}
+const rules = [
+  ...LOOKALIKE_RULES,
+  ...RULES,
+  ...(knownVariables ? [unknownVariableRule(knownVariables)] : []),
+  ...(options.hardcoded ? [HARDCODED_RULE] : []),
+];
 const kirbyClassesByDirectory = new Map();
 const scannedFindings = options.paths.flatMap((path) =>
   [...walk(path)].flatMap((file) => {
     const directory = dirname(file);
     if (!kirbyClassesByDirectory.has(directory)) kirbyClassesByDirectory.set(directory, new Set());
-    return scanFile(file, rules, kirbyClassesByDirectory.get(directory));
+    return scanFile(file, rules, kirbyClassesByDirectory.get(directory), knownVariables);
   })
 );
 const allFindings = dropKirbyComponentClasses(scannedFindings, kirbyClassesByDirectory);

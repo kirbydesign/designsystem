@@ -49,8 +49,9 @@ If a custom component has a `themeColor`/`color` input:
 
 Each state sets explicit `-hover`/`-active` tokens. When converting: the legacy `interaction-state` layer mixins drew a translucent overlay instead.
 
+Before:
+
 ```scss
-// Before
 @use '@kirbydesign/core/scss/interaction-state';
 .tile {
   @include interaction-state.initialize-layer;
@@ -59,8 +60,9 @@ Each state sets explicit `-hover`/`-active` tokens. When converting: the legacy 
 }
 ```
 
+After:
+
 ```scss
-// After
 @use '@kirbydesign/designsystem/scss/utils';
 .tile {
   --tile-fill: var(--kirby-color-fill-raised);
@@ -131,7 +133,7 @@ Disabled colors are replaced by opacity. Keep the enabled tokens and fade the wh
 }
 ```
 
-When converting, replace any leftover `opacity: 0.4` (with or without a `TODO(@design-tokens)` comment) and legacy disabled colors with this pattern.
+When converting, replace any leftover `opacity: 0.4` and legacy disabled colors with this pattern, and remove any `TODO(@design-tokens)` comment next to them.
 
 ## Opacity
 
