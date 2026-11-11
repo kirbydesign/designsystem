@@ -97,6 +97,7 @@
       size="xs"
       (click)="dismissClicked($event)"
       [attentionLevel]="'2'"
+      [noDecoration]="backgroundBlur === 'none'"
       [showIconOnly]="true"
       [attr.aria-label]="translations.get('close') + ' ' + title"
       class="dismiss kirby-surface-raised"
