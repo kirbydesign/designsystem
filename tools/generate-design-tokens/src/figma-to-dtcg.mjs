@@ -97,6 +97,9 @@ function aliasTargetCandidates(path, aliasTarget) {
 
 function toDtcgToken(path, node, value, config) {
   if (typeof value === 'number') return toTokenWithConfiguredUnit(path, node, value, config);
+  if (isNumericString(value) && unitFor(config, path, figmaScopesOf(node))) {
+    return toTokenWithConfiguredUnit(path, { ...node, $type: 'number' }, Number(value), config);
+  }
   if (isColorWithAlpha(node.$type, value)) {
     return { $type: node.$type, $value: { ...value, alpha: roundToHundredths(value.alpha) } };
   }
@@ -104,7 +107,7 @@ function toDtcgToken(path, node, value, config) {
 }
 
 function toTokenWithConfiguredUnit(path, node, number, config) {
-  const figmaScopes = node.$extensions?.[FIGMA_SCOPES_EXTENSION] ?? [];
+  const figmaScopes = figmaScopesOf(node);
   const unit = unitFor(config, path, figmaScopes);
   if (!unit) return { $type: node.$type, $value: number };
   if (unit === PERCENT) {
@@ -115,6 +118,15 @@ function toTokenWithConfiguredUnit(path, node, number, config) {
     };
   }
   return { $type: 'dimension', $value: { value: number, unit } };
+}
+
+function figmaScopesOf(node) {
+  return node.$extensions?.[FIGMA_SCOPES_EXTENSION] ?? [];
+}
+
+/** Figma has no unit-bearing variables, so numbers such as letter-spacing may arrive as strings. */
+function isNumericString(value) {
+  return typeof value === 'string' && value.trim() !== '' && Number.isFinite(Number(value));
 }
 
 function isColorWithAlpha(type, value) {

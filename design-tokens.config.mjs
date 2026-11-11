@@ -51,7 +51,7 @@ export default {
     },
     '%': {
       scopes: ['OPACITY', 'COLOR_OPACITY'],
-      include: ['* surface/**/opacity/*'],
+      include: ['* surface/**/opacity/*', 'font/letter-spacing'],
     },
   },
 };

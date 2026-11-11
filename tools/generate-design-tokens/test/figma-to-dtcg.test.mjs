@@ -177,6 +177,33 @@ test('retains Figma opacity scope for number tokens at new paths', () => {
   assert.deepEqual(tokens.opacity.menu.$extensions, { 'com.figma.scopes': ['OPACITY'] });
 });
 
+test('converts numeric Figma strings to numbers only when a unit applies', () => {
+  const figmaString = (value) => ({
+    $type: 'string',
+    $value: value,
+    $extensions: { 'com.figma.scopes': ['ALL_SCOPES'] },
+  });
+  const tokens = figmaToDtcg(
+    [
+      {
+        font: {
+          'letter-spacing': figmaString('-2'),
+          'line-height': figmaString('1.5'),
+          'percent-family': figmaString('Roboto'),
+        },
+      },
+    ],
+    flatConfig('font.css', { '%': { include: ['font/letter-spacing', 'font/percent-family'] } })
+  );
+  assert.deepEqual(tokens.font['letter-spacing'], {
+    $type: 'number',
+    $value: -2,
+    $extensions: { 'com.figma.scopes': ['ALL_SCOPES'] },
+  });
+  assert.deepEqual(tokens.font['line-height'], { $type: 'string', $value: '1.5' });
+  assert.deepEqual(tokens.font['percent-family'], { $type: 'string', $value: 'Roboto' });
+});
+
 test('assigns units by path for ALL_SCOPES and normalizes color alpha', () => {
   const tokens = figmaToDtcg(
     [
