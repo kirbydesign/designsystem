@@ -18,8 +18,7 @@ import {
   CardHeaderComponent,
   CardVariant,
 } from '@kirbydesign/designsystem/card';
-// eslint-disable-next-line no-restricted-imports
-import { focusSelectableItem } from '../../.storybook/story-helpers';
+import { focusSelectableItem } from 'tools/storybook-config/story-helpers';
 import { ListExampleComponent } from '~/app/examples/list-example/list-example.component';
 
 const meta: Meta<ListComponent> = {

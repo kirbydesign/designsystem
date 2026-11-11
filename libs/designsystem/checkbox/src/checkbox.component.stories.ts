@@ -5,13 +5,12 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 import { CheckboxExampleComponent } from '~/app/examples/checkbox-example/checkbox-example.component';
 
 const meta: Meta<CheckboxComponent> = {

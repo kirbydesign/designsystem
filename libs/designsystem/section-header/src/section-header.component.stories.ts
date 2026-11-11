@@ -3,8 +3,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { LabelComponent } from '@kirbydesign/designsystem/item';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 import { SectionHeaderExampleComponent } from '~/app/examples/section-header-example/section-header-example.component';
 
 const meta: Meta<SectionHeaderComponent> = {

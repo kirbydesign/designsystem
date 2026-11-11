@@ -3,8 +3,7 @@ import { type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<ProgressCircleComponent> = {
   component: ProgressCircleComponent,

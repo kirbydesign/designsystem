@@ -5,8 +5,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../../../designsystem/.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 
 /**
  * A skeleton loader is a visual indicator that is used to render placeholder content and mimic the full content shown when loaded.

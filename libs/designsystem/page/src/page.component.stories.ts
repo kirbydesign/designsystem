@@ -22,8 +22,11 @@ import {
 import { AppComponent } from '@kirbydesign/designsystem/kirby-app';
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
-// eslint-disable-next-line no-restricted-imports
-import { gridStyles, interactionStates, pseudoStatesFor } from '../../.storybook/story-helpers';
+import {
+  gridStyles,
+  interactionStates,
+  pseudoStatesFor,
+} from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<PageComponent> = {
   component: PageComponent,

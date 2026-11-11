@@ -5,8 +5,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 import { AvatarExampleComponent } from '~/app/examples/avatar-example/avatar-example.component';
 
 const meta: Meta<AvatarComponent> = {

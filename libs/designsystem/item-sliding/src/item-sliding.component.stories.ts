@@ -4,8 +4,11 @@ import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-// eslint-disable-next-line no-restricted-imports
-import { idsOnSurfaces, pseudoStatesFor, renderOnSurfaces } from '../../.storybook/story-helpers';
+import {
+  idsOnSurfaces,
+  pseudoStatesFor,
+  renderOnSurfaces,
+} from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<ItemSlidingComponent> = {
   component: ItemSlidingComponent,

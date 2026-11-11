@@ -4,8 +4,7 @@ import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<ModalFooterComponent> = {
   component: ModalFooterComponent,

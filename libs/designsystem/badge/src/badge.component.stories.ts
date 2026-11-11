@@ -6,8 +6,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 import { BadgeExampleComponent } from '~/app/examples/badge-example/badge-example.component';
 
 type BadgeProps = BadgeComponent & {
