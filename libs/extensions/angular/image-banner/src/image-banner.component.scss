@@ -182,12 +182,6 @@ kirby-card {
       padding-inline-end: var(--kirby-spacing-xl);
     }
   }
-
-  &:has(.main-content-body-action-link) {
-    .main-content-header {
-      padding-inline-end: var(--kirby-spacing-xl);
-    }
-  }
 }
 
 .main-content-header {
@@ -221,12 +215,6 @@ kirby-card {
 
   @include if-wide-view {
     max-width: $max-content-width;
-  }
-
-  .main-content-body-action-link {
-    @include if-wide-view {
-      display: none;
-    }
   }
 }
 
@@ -297,7 +285,7 @@ kirby-card {
     min-width: 1px;
     width: 1px;
     height: 1px;
-    opacity: 0;
+    opacity: var(--kirby-opacity-0);
   }
 }
 
@@ -364,6 +352,27 @@ button.dismiss {
 
 :host(.dark) button.dismiss {
   @include dismiss-button-colors(dark);
+}
+
+// In narrow view the dismiss button sits on top of the image, so it keeps a raised background.
+:host(.none) button.dismiss {
+  @include if-narrow-view {
+    --kirby-button-background-color: var(--kirby-color-fill-raised);
+    --kirby-button-color: var(--kirby-color-content-raised);
+    --kirby-button-border-color: var(--kirby-color-border-raised-quiet);
+
+    @include utils.hover {
+      --kirby-button-background-color: var(--kirby-color-fill-raised-hover);
+      --kirby-button-color: var(--kirby-color-content-raised-hover);
+      --kirby-button-border-color: var(--kirby-color-border-raised-quiet-hover);
+    }
+
+    &:active {
+      --kirby-button-background-color: var(--kirby-color-fill-raised-active);
+      --kirby-button-color: var(--kirby-color-content-raised-active);
+      --kirby-button-border-color: var(--kirby-color-border-raised-quiet-active);
+    }
+  }
 }
 
 .text-content-layout {
