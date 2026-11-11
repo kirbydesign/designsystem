@@ -1,0 +1,16 @@
+{
+  "name": "skills",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "skills",
+  "projectType": "library",
+  "tags": ["test:node"],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node --test",
+        "cwd": "skills"
+      }
+    }
+  }
+}
