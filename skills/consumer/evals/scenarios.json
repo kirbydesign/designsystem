@@ -1,0 +1,175 @@
+[
+  {
+    "prompt": "Add a simple help dialog opened by a button.",
+    "reference": "references/modals.md",
+    "expected": [
+      "Choose declarative kirby-modal with ng-template and a meaningful kirby-page-title.",
+      "Import ModalComponent, PageTitleComponent and ButtonComponent from secondary entry points.",
+      "Use a unique trigger ID and verify focus restoration."
+    ]
+  },
+  {
+    "prompt": "The state-controlled modal opens once but will not reopen after Escape.",
+    "reference": "references/modals.md",
+    "expected": [
+      "Reset the bound isOpen state on didDismiss.",
+      "Verify open, Escape dismissal and reopening."
+    ]
+  },
+  {
+    "prompt": "Build a wizard that users can deep-link into and protect unsaved changes.",
+    "reference": "references/modals.md",
+    "expected": [
+      "Choose route-based modals with the modal secondary outlet.",
+      "Clarify the dismissal policy before configuring canDismiss.",
+      "Verify direct navigation, browser back, dismissal and title focus."
+    ]
+  },
+  {
+    "prompt": "Let users choose several delivery channels.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Choose independent checkboxes, not a single-select dropdown or radio group.",
+      "Provide accessible labels and follow the application's forms convention."
+    ]
+  },
+  {
+    "prompt": "Add a compact frequency selector to a reactive form.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Choose a dropdown rather than an action menu.",
+      "Verify whether the selected value is an item object.",
+      "Include ReactiveFormsModule and the relevant standalone Kirby imports."
+    ]
+  },
+  {
+    "prompt": "Add Danish amounts with two decimals and a native date picker.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Verify locale setup and use decimal-mask precision without maxlength.",
+      "Explain the native date picker's experimental status and confirm adoption.",
+      "Use yyyy-MM-dd for native date values and clarify timezone conversion requirements."
+    ]
+  },
+  {
+    "prompt": "Use an action sheet to offer Edit and Export in new UI.",
+    "reference": "references/actions.md",
+    "expected": [
+      "Explain the action-sheet deprecation and recommend a menu.",
+      "Give its trigger an accessible name and wire real actions."
+    ]
+  },
+  {
+    "prompt": "Display a payment failure only as a success toast so it is unobtrusive.",
+    "reference": "references/feedback.md",
+    "expected": [
+      "Surface the conflict rather than describing failure as success.",
+      "Use persistent actionable feedback for essential failure information.",
+      "Do not invent an unsupported toast messageType."
+    ]
+  },
+  {
+    "prompt": "Switch between Overview and History sections without leaving the page.",
+    "reference": "references/pages-and-navigation.md",
+    "expected": [
+      "Choose page tab navigation rather than top-level routed tabs or a segmented filter.",
+      "Connect tab IDs and panel ARIA relationships and expose only the active panel."
+    ]
+  },
+  {
+    "prompt": "A page using kirby-router-outlet keeps polling after navigating away.",
+    "reference": "references/pages-and-navigation.md",
+    "expected": [
+      "Recognize stacked pages may remain alive.",
+      "Use enter/leave to pause and resume page-scoped work, not only ngOnDestroy."
+    ]
+  },
+  {
+    "prompt": "The app's older Kirby version does not contain the semantic tokens in the recipe.",
+    "reference": "references/styling.md",
+    "expected": [
+      "Report the version mismatch and ask for the supported styling or upgrade policy.",
+      "Preserve existing legacy styling rather than silently upgrading or inventing tokens."
+    ]
+  },
+  {
+    "prompt": "Build a calendar with disabled weekends; the repository is not checked out.",
+    "reference": "references/documentation-index.md",
+    "expected": [
+      "Use the bundled index to locate calendar guidance and examples.",
+      "Verify date constraint inputs against the installed version.",
+      "Prefer a card around the calendar and check contrast and keyboard behavior."
+    ]
+  },
+  {
+    "prompt": "Use the chart configuration helper for a custom stock chart.",
+    "reference": "references/charts.md",
+    "expected": [
+      "Confirm adoption of the experimental helper and verify Chart.js compatibility.",
+      "Register plugins before creation, destroy the chart on teardown, and supply accessible data."
+    ]
+  },
+  {
+    "prompt": "Use a new Cookbook input on an older app; dependencies and network are unavailable.",
+    "reference": "SKILL.md",
+    "expected": [
+      "State that compatibility cannot be verified.",
+      "Ask for the resolved version or relevant declarations/docs before introducing the API.",
+      "Do not silently substitute latest APIs or upgrade dependencies."
+    ]
+  },
+  {
+    "prompt": "A hosted microfrontend has missing modal providers. Copy the Cookbook bootstrap to fix it.",
+    "reference": "references/setup.md",
+    "expected": [
+      "Inspect and preserve the existing platform bootstrap and application configuration.",
+      "Verify local provideKirby configuration without repeating the host's withGlobalSetup.",
+      "Keep existing translation, modal and formatting providers."
+    ]
+  },
+  {
+    "prompt": "Add a field to an existing controller-opened modal with a shared form wrapper.",
+    "reference": "references/consumer-context.md",
+    "expected": [
+      "Extend the existing modal and form integration rather than replacing it with a declarative dialog.",
+      "Preserve injected data, result handling, validators and dismissal guards.",
+      "Use the application's translation keys for the new label and errors."
+    ]
+  },
+  {
+    "prompt": "The package range permits a newer Kirby input, but the host shares Kirby at runtime.",
+    "reference": "references/consumer-context.md",
+    "expected": [
+      "Check platform sharing rules and runtime compatibility rather than trusting the range alone.",
+      "Use a supported API or ask if compatibility cannot be established.",
+      "Do not independently upgrade shared dependencies to complete a UI change."
+    ]
+  },
+  {
+    "prompt": "Add a localized amount field while keeping the existing submitted value format.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Reuse the existing form, parser, validator and amount-formatting contract.",
+      "Keep localized display separate from the submitted domain value.",
+      "Do not hardcode currency, precision or timezone assumptions."
+    ]
+  },
+  {
+    "prompt": "Add a link from this feature to another microfrontend and verify it locally.",
+    "reference": "references/consumer-context.md",
+    "expected": [
+      "Distinguish local feature routes from cross-application navigation.",
+      "Use the platform's documented navigation integration and existing host/mock scripts.",
+      "Verify navigation in the host rather than claiming success from an isolated unit test."
+    ]
+  },
+  {
+    "prompt": "The translated app already configures runtime language changes. Add a Kirby field using the Danish setup example.",
+    "reference": "references/localization.md",
+    "expected": [
+      "Preserve existing translation and locale providers instead of replacing them with a fixed locale.",
+      "Translate the new label, validation text and accessible name through the application's existing mechanism.",
+      "Verify affected behavior after runtime language changes."
+    ]
+  }
+]
