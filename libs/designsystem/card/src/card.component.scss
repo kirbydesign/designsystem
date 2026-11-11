@@ -74,12 +74,15 @@
       border-radius: inherit;
       pointer-events: none;
       z-index: interaction-state.$state-layer-z-index;
+      background-color: var(--kirby-card-color-fill-hover);
+      opacity: var(--kirby-opacity-0);
+      transition:
+        interaction-state.transition(opacity), interaction-state.transition(background-color);
     }
   }
 
   @include utils.hover('&[role="button"]:hover, &:has(.kirby-breakout:hover)') {
     &::after {
-      background-color: var(--kirby-card-color-fill-hover);
       opacity: var(--kirby-card-opacity-hover);
     }
   }
