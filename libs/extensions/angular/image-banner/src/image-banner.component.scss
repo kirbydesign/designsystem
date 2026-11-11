@@ -301,6 +301,11 @@ kirby-card {
   }
 }
 
+:host .narrow-view-action:is(a) {
+  --kirby-button-background-color: transparent;
+  --kirby-button-border-color: transparent;
+}
+
 :host(.light) .narrow-view-action:is(a) {
   --kirby-button-color: var(--kirby-image-banner-color-content-light);
 }
