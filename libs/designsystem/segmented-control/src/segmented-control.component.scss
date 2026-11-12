@@ -157,6 +157,7 @@ ion-segment-button {
     --margin-top: 0;
 
     min-width: fit-content;
+    min-height: 0; // Override Ionic's iOS min-height, so the height is controlled by ion-segment
     font-weight: var(--kirby-font-weight-normal);
     font-size: min(var(--kirby-font-size-s), $maximum-font-size-md);
     text-transform: none;
