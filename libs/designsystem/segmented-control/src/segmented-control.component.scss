@@ -15,11 +15,10 @@ $badge-offset: 0.8em;
   --kirby-badge-top: #{-1 * $badge-offset};
   --kirby-badge-right: #{-2 * $badge-offset};
   --kirby-badge-z-index: var(--kirby-z-index-segment-badge);
+  --segment-height: var(--kirby-spacing-xl);
 
   &.sm {
-    ion-segment {
-      min-height: var(--kirby-spacing-l);
-    }
+    --segment-height: var(--kirby-spacing-l);
 
     ion-segment-button {
       --padding-start: var(--kirby-spacing-s);
@@ -44,10 +43,9 @@ $badge-offset: 0.8em;
     ion-segment {
       border-radius: 0;
       padding: var(--kirby-spacing-xxxs);
-      min-height: calc(
-        var(--kirby-spacing-l) + 2 * var(--kirby-spacing-xxxs)
-      ); // desired chip height plus segment padding
 
+      // Chip height plus segment padding
+      min-height: calc(var(--segment-height) + 2 * var(--kirby-spacing-xxxs));
       gap: var(--kirby-spacing-xxs);
 
       @include utils.touch {
@@ -128,7 +126,7 @@ $badge-offset: 0.8em;
 ion-segment {
   --background: none;
 
-  min-height: var(--kirby-spacing-xl);
+  min-height: var(--segment-height);
   border-radius: var(--kirby-border-radius-pill);
   grid-auto-columns: max-content;
   box-sizing: border-box;
