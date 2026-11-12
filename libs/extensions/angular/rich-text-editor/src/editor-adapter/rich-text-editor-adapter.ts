@@ -1,3 +1,16 @@
+import type {
+  RichTextEditorBlockLevel as BlockLevel,
+  RichTextEditorAction as EditorAction,
+  RichTextEditorState as EditorState,
+} from '../rich-text-editor.types';
+
+export type {
+  RichTextEditorAction as EditorAction,
+  RichTextEditorBlockLevel as BlockLevel,
+  RichTextEditorFormattingAction as FormattingAction,
+  RichTextEditorState as EditorState,
+} from '../rich-text-editor.types';
+
 export const formattingActions = [
   'bold',
   'italic',
@@ -5,23 +18,12 @@ export const formattingActions = [
   'bulletList',
   'orderedList',
 ] as const;
-export type FormattingAction = (typeof formattingActions)[number];
-export type EditorAction = FormattingAction | 'undo' | 'redo';
-export type BlockLevel = 0 | 1 | 2 | 3;
-
-export interface EditorState {
-  empty: boolean;
-  active: FormattingAction[];
-  block: BlockLevel;
-  canUndo: boolean;
-  canRedo: boolean;
-}
-
 export interface EditorSettings {
   placeholder: string;
   readonly: boolean;
   label: string;
   describedBy: string;
+  scrollClearance: number;
 }
 
 export interface EditorOptions extends EditorSettings {
@@ -40,6 +42,7 @@ export interface RichTextEditorAdapter {
   setBlock(level: BlockLevel): void;
   focus(): void;
   blur(): void;
+  scrollIntoView(): void;
   destroy(): void;
 }
 
@@ -53,5 +56,12 @@ export function editorAttributes(settings: EditorSettings): Record<string, strin
     'aria-describedby': settings.describedBy,
     'aria-placeholder': settings.placeholder,
     'aria-readonly': String(settings.readonly),
+  };
+}
+
+export function editorScrollOptions(bottom: number) {
+  return {
+    scrollThreshold: { top: 0, right: 0, bottom, left: 0 },
+    scrollMargin: { top: 5, right: 5, bottom: Math.max(5, bottom), left: 5 },
   };
 }

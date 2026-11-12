@@ -5,6 +5,7 @@ import {
   EditorAction,
   editorAttributes,
   EditorOptions,
+  editorScrollOptions,
   EditorSettings,
   formattingActions,
   RichTextEditorAdapter,
@@ -49,6 +50,7 @@ export class TiptapAdapter implements RichTextEditorAdapter {
       ],
       editorProps: {
         attributes: editorAttributes(options),
+        ...editorScrollOptions(options.scrollClearance),
         handleDOMEvents: { keydown: (_view, event) => event.key === 'Tab' },
       },
       onUpdate: () => options.onChange(this.editor.getHTML()),
@@ -71,7 +73,11 @@ export class TiptapAdapter implements RichTextEditorAdapter {
 
   configure(settings: EditorSettings): void {
     this.editor.setOptions({
-      editorProps: { attributes: editorAttributes(settings) },
+      editorProps: {
+        ...this.editor.options.editorProps,
+        attributes: editorAttributes(settings),
+        ...editorScrollOptions(settings.scrollClearance),
+      },
     });
     this.editor.setEditable(!settings.readonly, false);
     this.publishState();
@@ -95,6 +101,10 @@ export class TiptapAdapter implements RichTextEditorAdapter {
 
   blur(): void {
     this.editor.commands.blur();
+  }
+
+  scrollIntoView(): void {
+    this.editor.commands.scrollIntoView();
   }
 
   destroy(): void {
