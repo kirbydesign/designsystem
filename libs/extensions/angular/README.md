@@ -35,6 +35,10 @@ export class MyComponent {}
 export class MyModule {}
 ```
 
+## Rich text editor spike
+
+The [rich text editor spike](./rich-text-editor/README.md) compares Tiptap and direct ProseMirror behind one engine-independent Angular API and shared UI. Run the Extensions Storybook and open **Spikes / Rich Text Editor / Comparison**.
+
 ## Migration Guides
 
 For details on migrating between major versions of `@kirbydesign/extensions-angular` see the [Extensions Migration Guides](https://github.com/kirbydesign/designsystem/blob/develop/libs/extensions/angular/MIGRATION.md).
