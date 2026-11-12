@@ -43,9 +43,10 @@ $badge-offset: 0.8em;
     ion-segment {
       border-radius: 0;
       padding: var(--kirby-spacing-xxxs);
+      min-height: calc(
+        var(--segment-height) + 2 * var(--kirby-spacing-xxxs)
+      ); // desired chip height plus segment padding
 
-      // Chip height plus segment padding
-      min-height: calc(var(--segment-height) + 2 * var(--kirby-spacing-xxxs));
       gap: var(--kirby-spacing-xxs);
 
       @include utils.touch {
