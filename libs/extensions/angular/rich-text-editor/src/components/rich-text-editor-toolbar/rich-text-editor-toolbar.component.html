@@ -1,0 +1,103 @@
+@for (button of toolbar; track button.action) {
+  <button
+    kirby-button
+    type="button"
+    [noDecoration]="true"
+    attentionLevel="3"
+    size="sm"
+    [attr.aria-label]="labels()[button.action]"
+    [attr.title]="labels()[button.action]"
+    [attr.aria-keyshortcuts]="button.shortcut"
+    [attr.aria-pressed]="!!state()?.active?.includes(button.action)"
+    [disabled]="disabled()"
+    (pointerdown)="$event.preventDefault()"
+    (click)="editor().execute(button.action)"
+  >
+    <span
+      [class.format-bold]="button.action === 'bold'"
+      [class.format-italic]="button.action === 'italic'"
+      [class.format-underline]="button.action === 'underline'"
+    >
+      @if (button.text) {
+        {{ labels()[button.text] }}
+      } @else {
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          aria-hidden="true"
+        >
+          <path d="M10 6h11M10 12h11M10 18h11" />
+          @if (button.action === 'bulletList') {
+            <circle cx="4" cy="6" r="1" />
+            <circle cx="4" cy="12" r="1" />
+            <circle cx="4" cy="18" r="1" />
+          } @else {
+            <text x="1" y="9" stroke="none" fill="currentColor" font-size="10">1</text>
+            <text x="1" y="20" stroke="none" fill="currentColor" font-size="10">2</text>
+          }
+        </svg>
+      }
+    </span>
+  </button>
+}
+<span class="kirby-visually-hidden" [id]="styleLabelId">{{ labels().textStyle }}</span>
+<kirby-dropdown
+  #styleDropdown
+  [attr.aria-labelledby]="styleLabelId"
+  size="sm"
+  attentionLevel="3"
+  [items]="blockStyles"
+  [placeholder]="labels().normal"
+  [selectedIndex]="blockIndex()"
+  [disabled]="disabled()"
+  (change)="setBlock($event)"
+>
+  <ng-template
+    kirbyListItemTemplate
+    let-item
+    let-selected="selected"
+    let-focused="focused"
+    let-index="index"
+  >
+    <button
+      class="kirby-rich-text-style-option"
+      type="button"
+      role="option"
+      tabindex="-1"
+      [attr.id]="styleDropdown._listboxId + '-item-' + index"
+      [attr.aria-selected]="selected"
+      [class.keyboard-focused]="focused"
+      (click)="styleDropdown.onItemSelect(index)"
+    >
+      {{ item.text }}
+    </button>
+  </ng-template>
+</kirby-dropdown>
+@for (button of history; track button.action) {
+  <button
+    kirby-button
+    type="button"
+    [noDecoration]="true"
+    attentionLevel="3"
+    size="sm"
+    [attr.aria-label]="labels()[button.action]"
+    [attr.title]="labels()[button.action]"
+    [attr.aria-keyshortcuts]="button.shortcut"
+    [disabled]="disabled() || !(button.action === 'undo' ? state()?.canUndo : state()?.canRedo)"
+    (pointerdown)="$event.preventDefault()"
+    (click)="editor().execute(button.action)"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      [class.redo-icon]="button.action === 'redo'"
+      aria-hidden="true"
+    >
+      <path d="M9 5 4 10l5 5M4 10h10a6 6 0 0 1 0 12" />
+    </svg>
+  </button>
+}

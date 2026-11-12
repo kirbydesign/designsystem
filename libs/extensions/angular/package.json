@@ -20,6 +20,16 @@
     "rxjs": "^7.0.0"
   },
   "dependencies": {
+    "@tiptap/core": "^3.33.1",
+    "@tiptap/starter-kit": "^3.33.1",
+    "prosemirror-commands": "^1.7.1",
+    "prosemirror-history": "^1.4.1",
+    "prosemirror-keymap": "^1.2.3",
+    "prosemirror-model": "^1.25.0",
+    "prosemirror-schema-basic": "^1.2.4",
+    "prosemirror-schema-list": "^1.5.1",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.42.9",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
