@@ -1,5 +1,4 @@
 @use '@kirbydesign/core/src/scss/utils';
-@use '@kirbydesign/core/src/scss/interaction-state';
 
 $blur-radius: 110px;
 $max-content-width: 324px;
@@ -36,24 +35,8 @@ $container-query-breakpoint: 600px;
   display: block;
 }
 
-:host(.none) {
-  .blur-image {
-    display: none;
-  }
-
-  .dismiss {
-    // on mobile we always want the button to be white as it sits on top of the image
-    @include if-narrow-view {
-      --kirby-inputs-background-color: var(--kirby-white);
-      --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
-      --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
-      --kirby-inputs-color: var(--kirby-black);
-    }
-  }
-
-  .main-content-body-action-link {
-    color: var(--kirby-semi-dark);
-  }
+:host(.none) .blur-image {
+  display: none;
 }
 
 :host(.dark) .blur-image {
@@ -72,7 +55,8 @@ $container-query-breakpoint: 600px;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(0 0 0 / 32%);
+    background-color: var(--kirby-image-banner-color-fill-dark);
+    opacity: var(--kirby-image-banner-color-opacity-dark);
     z-index: 1;
   }
 }
@@ -85,7 +69,8 @@ $container-query-breakpoint: 600px;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(255 255 255 / 45%);
+    background-color: var(--kirby-image-banner-color-fill-light);
+    opacity: var(--kirby-image-banner-color-opacity-light);
     z-index: 1;
   }
 }
@@ -115,31 +100,36 @@ kirby-card {
   container-type: inline-size;
   height: 100%;
 
-  // Apply focus styles to the card when any child element (except those inside .dismiss) is focused
-  &:focus-within:has(:focus-visible) {
-    &:not(:has(.dismiss:focus-within)) {
-      --kirby-card-border: var(--kirby-card-border-width) solid var(--kirby-color-border-focus);
+  // The hidden narrow view button can't show its own focus ring, so the card shows it instead.
+  &:has(.narrow-view-action:is(button):focus-visible) {
+    --kirby-card-border: var(--kirby-stroke-xs) solid var(--kirby-color-border-focus);
 
-      outline: none;
-
-      // No focus outline on interactive element itself, only surrounding card
-      .breakout {
-        box-shadow: none;
-      }
-
-      // Render focus ring above content using ::after overlay
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: calc(var(--kirby-border-radius-n) - var(--kirby-card-border-width));
-        box-shadow: var(--kirby-focus-ring-md-combined-inset);
-        pointer-events: none;
-        z-index: 1;
-        transition: box-shadow #{interaction-state.$default-transition-duration} linear;
-      }
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: calc(var(--kirby-border-radius-n) - var(--kirby-stroke-xs));
+      box-shadow: var(--kirby-focus-ring-md-combined-inset);
+      pointer-events: none;
+      z-index: 1;
     }
   }
+}
+
+:host(.light) kirby-card {
+  --kirby-card-main-color: var(--kirby-image-banner-color-content-light);
+  --kirby-card-color-fill-hover: var(--kirby-image-banner-color-fill-light-hover);
+  --kirby-card-opacity-hover: var(--kirby-image-banner-color-opacity-light-hover);
+  --kirby-card-color-fill-active: var(--kirby-image-banner-color-fill-light-active);
+  --kirby-card-opacity-active: var(--kirby-image-banner-color-opacity-light-active);
+}
+
+:host(.dark) kirby-card {
+  --kirby-card-main-color: var(--kirby-image-banner-color-content-dark);
+  --kirby-card-color-fill-hover: var(--kirby-image-banner-color-fill-dark-hover);
+  --kirby-card-opacity-hover: var(--kirby-image-banner-color-opacity-dark-hover);
+  --kirby-card-color-fill-active: var(--kirby-image-banner-color-fill-dark-active);
+  --kirby-card-opacity-active: var(--kirby-image-banner-color-opacity-dark-active);
 }
 
 .main-content-wrapper {
@@ -192,12 +182,6 @@ kirby-card {
       padding-inline-end: var(--kirby-spacing-xl);
     }
   }
-
-  &:has(.main-content-body-action-link) {
-    .main-content-header {
-      padding-inline-end: var(--kirby-spacing-xl);
-    }
-  }
 }
 
 .main-content-header {
@@ -232,12 +216,6 @@ kirby-card {
   @include if-wide-view {
     max-width: $max-content-width;
   }
-
-  .main-content-body-action-link {
-    @include if-wide-view {
-      display: none;
-    }
-  }
 }
 
 .main-content-body-text {
@@ -259,7 +237,7 @@ kirby-card {
   }
 }
 
-.breakout {
+.kirby-breakout {
   position: initial;
   border-radius: var(--kirby-spacing-s);
   align-self: center;
@@ -307,7 +285,21 @@ kirby-card {
     min-width: 1px;
     width: 1px;
     height: 1px;
+    opacity: var(--kirby-opacity-0);
   }
+}
+
+:host .narrow-view-action:is(a) {
+  --kirby-button-background-color: transparent;
+  --kirby-button-border-color: transparent;
+}
+
+:host(.light) .narrow-view-action:is(a) {
+  --kirby-button-color: var(--kirby-image-banner-color-content-light);
+}
+
+:host(.dark) .narrow-view-action:is(a) {
+  --kirby-button-color: var(--kirby-image-banner-color-content-dark);
 }
 
 :host(.show-button-in-narrow-view) {
@@ -326,6 +318,61 @@ button.dismiss {
   top: var(--kirby-spacing-s);
   right: var(--kirby-spacing-s);
   margin: 0;
+}
+
+@mixin dismiss-button-colors($variant) {
+  @include if-wide-view {
+    --kirby-button-background-color: var(--kirby-image-banner-dismiss-color-fill-#{$variant});
+    --kirby-button-color: var(--kirby-image-banner-dismiss-color-content-#{$variant});
+    --kirby-button-border-color: var(--kirby-image-banner-dismiss-color-border-#{$variant});
+
+    @include utils.hover {
+      --kirby-button-background-color: var(
+        --kirby-image-banner-dismiss-color-fill-#{$variant}-hover
+      );
+      --kirby-button-color: var(--kirby-image-banner-dismiss-color-content-#{$variant}-hover);
+      --kirby-button-border-color: var(--kirby-image-banner-dismiss-color-border-#{$variant}-hover);
+    }
+
+    &:active {
+      --kirby-button-background-color: var(
+        --kirby-image-banner-dismiss-color-fill-#{$variant}-active
+      );
+      --kirby-button-color: var(--kirby-image-banner-dismiss-color-content-#{$variant}-active);
+      --kirby-button-border-color: var(
+        --kirby-image-banner-dismiss-color-border-#{$variant}-active
+      );
+    }
+  }
+}
+
+:host(.light) button.dismiss {
+  @include dismiss-button-colors(light);
+}
+
+:host(.dark) button.dismiss {
+  @include dismiss-button-colors(dark);
+}
+
+// In narrow view the dismiss button sits on top of the image, so it keeps a raised background.
+:host(.none) button.dismiss {
+  @include if-narrow-view {
+    --kirby-button-background-color: var(--kirby-color-fill-raised);
+    --kirby-button-color: var(--kirby-color-content-raised);
+    --kirby-button-border-color: var(--kirby-color-border-raised-quiet);
+
+    @include utils.hover {
+      --kirby-button-background-color: var(--kirby-color-fill-raised-hover);
+      --kirby-button-color: var(--kirby-color-content-raised-hover);
+      --kirby-button-border-color: var(--kirby-color-border-raised-quiet-hover);
+    }
+
+    &:active {
+      --kirby-button-background-color: var(--kirby-color-fill-raised-active);
+      --kirby-button-color: var(--kirby-color-content-raised-active);
+      --kirby-button-border-color: var(--kirby-color-border-raised-quiet-active);
+    }
+  }
 }
 
 .text-content-layout {
