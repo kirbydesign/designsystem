@@ -107,22 +107,26 @@ $badge-offset: 0.8em;
       --background: var(--kirby-color-fill-base);
       --color: var(--kirby-color-content-base);
 
-      &,
-      &:hover,
-      &:active {
-        &::part(native) {
-          border-color: transparent;
-        }
+      &::part(native) {
+        border-color: transparent;
       }
 
       @include utils.hover {
         --background: var(--kirby-color-fill-base-hover);
         --color: var(--kirby-color-content-base-hover);
+
+        &::part(native) {
+          border-color: var(--kirby-color-border-base-quiet-hover);
+        }
       }
 
       &:active {
         --background: var(--kirby-color-fill-base-active);
         --color: var(--kirby-color-content-base-active);
+
+        &::part(native) {
+          border-color: var(--kirby-color-border-base-quiet-active);
+        }
       }
     }
   }
