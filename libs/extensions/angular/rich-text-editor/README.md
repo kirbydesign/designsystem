@@ -1,6 +1,6 @@
 # Rich text editor spike
 
-One standalone Angular presentation component, two internal adapters, and an engine-independent HTML API. This is a technical spike, not a production editor.
+Composable standalone Angular editor and toolbar components, two internal adapters, and an engine-independent HTML API. This is a technical spike, not a production editor.
 
 ## Run the demo
 
@@ -35,6 +35,30 @@ import { RichTextEditorComponent } from '@kirbydesign/extensions-angular/rich-te
 ```
 
 The `kirby-x-` selector follows existing extension conventions. `editorCreated` exposes only `{ editor: { focus(), blur() } }`; content is handled through `value` and `valueChange`. Neither engine types nor engine selection are exported from the public entry point.
+
+### Composing the editor and toolbar
+
+The editor includes its toolbar by default. Import `RichTextEditorToolbarComponent` from the same entry point to place the toolbar separately:
+
+```html
+<kirby-x-rich-text-editor
+  #editor
+  [(value)]="html"
+  [showToolbar]="false"
+  [texts]="editorTexts"
+  aria-label="Case notes"
+/>
+
+<kirby-x-rich-text-editor-toolbar [editor]="editor" />
+```
+
+The required `editor` input takes the Angular component reference, not the limited `editorCreated` event facade. Bind one toolbar to each editor and disable its built-in toolbar when composing separately. The toolbar can be placed elsewhere in the consumer's layout; on narrow screens it still docks above the keyboard when its editor or controls are focused.
+
+Labels, selected formatting, history availability and read-only state follow the connected editor automatically, including runtime updates. Changing `showToolbar` or moving between built-in and separate toolbars does not recreate the editor or clear its content, selection or history. Omitting both toolbars leaves keyboard formatting and supported pasted content available.
+
+The editor exposes read-only `state`, `focused` and `labels` signals plus engine-independent `execute(action)` and `setBlock(level)` methods for connecting controls. Action, block-level and state types are exported without exposing Tiptap or ProseMirror. Toolbar buttons and their order remain fixed in this spike.
+
+The **Separate Toolbar** story demonstrates the toolbar below the editor. **Toggle separate toolbar** switches between the composed and built-in layouts at runtime in either engine.
 
 ### Customizing text
 
@@ -71,7 +95,13 @@ Tiptap's pattern-based paste rules are disabled in this spike; they are not need
 
 ## Architecture and complexity
 
-The component owns the shared Kirby buttons, Kirby text-style dropdown, responsive layout, Angular lifecycle, inputs and outputs. The adapter factory defaults to Tiptap; the Storybook wrapper overrides it internally. This one spike story deliberately imports source code so engine configuration stays out of the public API; its lint exception is scoped to that file.
+The public editor component owns the consumer API, shared state and composition. The internal writing-area component owns engine mounting and teardown, content updates, placeholder, document styles, accessible editor attributes and focus events. The public toolbar component owns the shared Kirby controls and responsive keyboard positioning, binding to the editor's engine-independent state and actions.
+
+The [public-components folder](./src/public-components/) contains the complete editor. Its dependent toolbar and writing area live in [components](./src/components/), with [engine adapters](./src/editor-adapter/) kept separately. Shared public types remain in one file. The toolbar remains exported for composing it with an editor and requires that editor reference; it is not an independent editing surface. The writing area is not exported from the package entry point. This prepares the composition without committing to public template hooks.
+
+Caret scrolling uses ProseMirror's native `scrollThreshold`/`scrollMargin` options in both adapters. The toolbar supplies its measured mobile height plus 16px clearance and observes size changes so the margin follows layout changes, including scrollbars. Typing and keyboard selection use native editor scrolling; focus and visual-viewport changes explicitly request Tiptap's `scrollIntoView()` or the equivalent ProseMirror transaction. There is no custom caret-range measurement or `window.scrollBy` implementation.
+
+The adapter factory defaults to Tiptap; the Storybook wrapper overrides it internally. This one spike story deliberately imports source code so engine configuration stays out of the public API; its lint exception is scoped to that file.
 
 | Concern             | Tiptap                                                    | Direct ProseMirror                                                     |
 | ------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -84,7 +114,7 @@ The component owns the shared Kirby buttons, Kirby text-style dropdown, responsi
 | Angular integration | Same shared component                                     | Same shared component                                                  |
 | Mobile              | Same shared viewport-aware toolbar                        | Same shared viewport-aware toolbar                                     |
 
-The adapters do not implement editing, history, list splitting or document transformations from scratch. ProseMirror needs more integration code because it provides primitives rather than a ready-made editor facade. The actual adapter files are **115 lines for Tiptap and 262 for ProseMirror**, including lifecycle, HTML handling and state mapping, but excluding the shared component and contract.
+The adapters do not implement editing, history, list splitting or document transformations from scratch. ProseMirror needs more integration code because it provides primitives rather than a ready-made editor facade. The actual adapter files are **125 lines for Tiptap and 281 for ProseMirror**, including lifecycle, HTML handling, native scrolling and state mapping, but excluding the shared components and contract.
 
 Formatting buttons preserve the selection on pointer activation. Text-style selection restores editor focus after Kirby's dropdown closes. Programmatic content updates do not emit `valueChange` or become undo entries. Engine replacement preserves content, but not the old engine's history or selection.
 
@@ -101,6 +131,10 @@ The implementation targets WCAG 2.2 AA as an engineering baseline relevant to EU
 - Bold/italic/underline: Ctrl/Cmd+B/I/U. Lists: Ctrl/Cmd+Shift+8/7. Paragraph/Heading 1–3: Ctrl/Cmd+Alt+0/1/2/3. Undo/redo: Ctrl/Cmd+Z and Ctrl/Cmd+Shift+Z.
 
 Browser checks exercised Space/Enter activation, keyboard text-style selection, focus restoration, Tab escape from lists, and runtime label updates in both adapters. The existing axe-core checker reported no WCAG A/AA violations in the editor and open text-style popup at the inspected states. No automated test files were added.
+
+Both built-in and separate toolbars were checked at a 500px viewport in both engines: controls remained at least 44px high, open text-style options were at least 56px high, and the caret stayed at least 16px above the docked toolbar. The same accessibility scan reported no selected WCAG A/AA violations in all four combinations. Runtime placement changes preserved the editor DOM instance, content and undo history; separate toolbars followed translated labels and read-only updates.
+
+After extracting the writing area, these checks were repeated with native scrolling. Additional checks covered nested scroll containers, viewport resizing, placeholder visibility, programmatic updates without `valueChange` emission, and one `editorCreated` event per editor instance.
 
 This is **not an EU compliance certification**. Real VoiceOver/NVDA testing, an EN 301 549 assessment, zoom/reflow and forced-colors checks, and physical iOS/Android keyboard testing remain necessary before production use. Responsive screenshots do not prove virtual-keyboard behavior.
 

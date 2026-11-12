@@ -1,3 +1,17 @@
+export type RichTextEditorFormattingAction =
+  'bold' | 'italic' | 'underline' | 'bulletList' | 'orderedList';
+
+export type RichTextEditorAction = RichTextEditorFormattingAction | 'undo' | 'redo';
+export type RichTextEditorBlockLevel = 0 | 1 | 2 | 3;
+
+export interface RichTextEditorState {
+  empty: boolean;
+  active: readonly RichTextEditorFormattingAction[];
+  block: RichTextEditorBlockLevel;
+  canUndo: boolean;
+  canRedo: boolean;
+}
+
 export interface RichTextEditorRef {
   focus(): void;
   blur(): void;

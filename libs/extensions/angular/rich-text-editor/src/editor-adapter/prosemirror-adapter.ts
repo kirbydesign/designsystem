@@ -10,13 +10,21 @@ import {
 } from 'prosemirror-model';
 import { schema as basicSchema } from 'prosemirror-schema-basic';
 import { addListNodes, liftListItem, splitListItem, wrapInList } from 'prosemirror-schema-list';
-import { AllSelection, Command, EditorState, TextSelection } from 'prosemirror-state';
+import {
+  AllSelection,
+  Command,
+  EditorState,
+  Plugin,
+  TextSelection,
+  Transaction,
+} from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import {
   BlockLevel,
   EditorAction,
   editorAttributes,
   EditorOptions,
+  editorScrollOptions,
   EditorSettings,
   FormattingAction,
   formattingActions,
@@ -61,58 +69,13 @@ export class ProseMirrorAdapter implements RichTextEditorAdapter {
 
   mount(element: HTMLElement, options: EditorOptions): void {
     this.options = options;
-    const item = this.schema.nodes['list_item'];
-    const blockShortcut = (level: BlockLevel) => () => {
-      this.setBlock(level);
-      return true;
-    };
-    const hardBreak: Command = (state, dispatch) => {
-      dispatch?.(
-        state.tr.replaceSelectionWith(this.schema.nodes['hard_break'].create()).scrollIntoView()
-      );
-      return true;
-    };
     this.view = new EditorView(element, {
       state: EditorState.create({
         schema: this.schema,
         doc: this.parse(options.value),
-        plugins: [
-          history(),
-          keymap({
-            'Mod-b': this.commands.bold,
-            'Mod-i': this.commands.italic,
-            'Mod-u': this.commands.underline,
-            'Mod-Alt-0': blockShortcut(0),
-            'Mod-Alt-1': blockShortcut(1),
-            'Mod-Alt-2': blockShortcut(2),
-            'Mod-Alt-3': blockShortcut(3),
-            'Mod-Shift-8': this.commands.bulletList,
-            'Mod-Shift-7': this.commands.orderedList,
-            'Mod-z': undo,
-            'Mod-Shift-z': redo,
-            'Mod-y': redo,
-            Enter: splitListItem(item),
-            'Shift-Enter': hardBreak,
-            'Mod-Enter': hardBreak,
-          }),
-          keymap(baseKeymap),
-        ],
+        plugins: this.createPlugins(),
       }),
-      dispatchTransaction: (transaction) => {
-        if (transaction.selection instanceof AllSelection) {
-          transaction.setSelection(
-            TextSelection.between(
-              transaction.doc.resolve(0),
-              transaction.doc.resolve(transaction.doc.content.size)
-            )
-          );
-        }
-        this.view.updateState(this.view.state.apply(transaction));
-        if (transaction.docChanged && transaction.getMeta('externalValue') !== true) {
-          options.onChange(this.getValue());
-        }
-        this.publishState();
-      },
+      dispatchTransaction: (transaction) => this.handleTransaction(transaction),
       handleDOMEvents: {
         focus: () => {
           options.onFocus();
@@ -141,6 +104,7 @@ export class ProseMirrorAdapter implements RichTextEditorAdapter {
     this.view.setProps({
       editable: () => !settings.readonly,
       attributes: editorAttributes(settings),
+      ...editorScrollOptions(settings.scrollClearance),
     });
     this.publishState();
   }
@@ -175,8 +139,63 @@ export class ProseMirrorAdapter implements RichTextEditorAdapter {
     this.view.dom.blur();
   }
 
+  scrollIntoView(): void {
+    this.view.dispatch(this.view.state.tr.scrollIntoView());
+  }
+
   destroy(): void {
     this.view.destroy();
+  }
+
+  private createPlugins(): Plugin[] {
+    const item = this.schema.nodes['list_item'];
+    const blockShortcut = (level: BlockLevel) => () => {
+      this.setBlock(level);
+      return true;
+    };
+    const hardBreak: Command = (state, dispatch) => {
+      dispatch?.(
+        state.tr.replaceSelectionWith(this.schema.nodes['hard_break'].create()).scrollIntoView()
+      );
+      return true;
+    };
+    return [
+      history(),
+      keymap({
+        'Mod-b': this.commands.bold,
+        'Mod-i': this.commands.italic,
+        'Mod-u': this.commands.underline,
+        'Mod-Alt-0': blockShortcut(0),
+        'Mod-Alt-1': blockShortcut(1),
+        'Mod-Alt-2': blockShortcut(2),
+        'Mod-Alt-3': blockShortcut(3),
+        'Mod-Shift-8': this.commands.bulletList,
+        'Mod-Shift-7': this.commands.orderedList,
+        'Mod-z': undo,
+        'Mod-Shift-z': redo,
+        'Mod-y': redo,
+        Enter: splitListItem(item),
+        'Shift-Enter': hardBreak,
+        'Mod-Enter': hardBreak,
+      }),
+      keymap(baseKeymap),
+    ];
+  }
+
+  private handleTransaction(transaction: Transaction): void {
+    if (transaction.selection instanceof AllSelection) {
+      transaction.setSelection(
+        TextSelection.between(
+          transaction.doc.resolve(0),
+          transaction.doc.resolve(transaction.doc.content.size)
+        )
+      );
+    }
+    this.view.updateState(this.view.state.apply(transaction));
+    if (transaction.docChanged && transaction.getMeta('externalValue') !== true) {
+      this.options.onChange(this.getValue());
+    }
+    this.publishState();
   }
 
   private parse(value: string): DocumentNode {
