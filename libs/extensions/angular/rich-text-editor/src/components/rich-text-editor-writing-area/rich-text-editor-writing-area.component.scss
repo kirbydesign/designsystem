@@ -1,0 +1,59 @@
+kirby-x-rich-text-editor-writing-area {
+  display: block;
+  position: relative;
+
+  .kirby-rich-text-placeholder {
+    position: absolute;
+    inset: var(--kirby-spacing-l);
+    pointer-events: none;
+    color: var(--kirby-color-content-base-quiet);
+  }
+
+  .kirby-rich-text-document {
+    min-height: 23rem;
+    padding: var(--kirby-spacing-l);
+    outline: none;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: var(--kirby-line-height-n);
+    border-radius: var(--kirby-border-radius-xl);
+
+    &:focus-visible {
+      outline: 2px solid var(--kirby-color-border-focus);
+      outline-offset: -2px;
+    }
+
+    p {
+      margin: 0 0 var(--kirby-spacing-s);
+    }
+
+    li > p {
+      margin: 0;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    ol {
+      list-style: decimal;
+    }
+
+    ul,
+    ol {
+      padding-inline-start: var(--kirby-spacing-l);
+    }
+  }
+
+  &.with-toolbar .kirby-rich-text-document {
+    border-radius: 0 0 var(--kirby-border-radius-xl) var(--kirby-border-radius-xl);
+  }
+
+  @media (width <= 632px) {
+    .kirby-rich-text-document {
+      min-height: 65dvh;
+      scroll-margin-bottom: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+}

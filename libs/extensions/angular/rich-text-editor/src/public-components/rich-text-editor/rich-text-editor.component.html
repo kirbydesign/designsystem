@@ -1,0 +1,18 @@
+<div class="kirby-rich-text-shell">
+  @if (showToolbar) {
+    <kirby-x-rich-text-editor-toolbar [editor]="this" />
+  }
+  <kirby-x-rich-text-editor-writing-area
+    [value]="value"
+    [placeholder]="placeholder"
+    [readonly]="readonly"
+    [ariaLabel]="ariaLabel"
+    [ariaDescribedby]="ariaDescribedby"
+    [hasToolbar]="showToolbar"
+    (valueChange)="valueChange.emit($event)"
+    (stateChange)="editorState.set($event)"
+    (editorFocus)="onFocus()"
+    (editorBlur)="onBlur()"
+    (editorCreated)="editorCreated.emit($event)"
+  />
+</div>
