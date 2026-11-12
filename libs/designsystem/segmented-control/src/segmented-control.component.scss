@@ -27,13 +27,6 @@ $badge-offset: 0.8em;
       --kirby-badge-right: calc(-1 * var(--kirby-spacing-xxs));
 
       font-size: min(var(--kirby-font-size-xs), $maximum-font-size-sm);
-
-      &:focus-visible {
-        transition: interaction-state.transition();
-        box-shadow: var(--kirby-focus-ring-md-inset);
-        outline: none;
-        border-radius: var(--kirby-border-radius-pill);
-      }
     }
   }
 
@@ -222,8 +215,7 @@ ion-segment-button {
     padding-inline: 0;
   }
 
-  &:focus-within::part(native):focus-visible,
-  &:focus-visible:focus-within::part(native) {
+  &::part(native):focus-visible {
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-inset);
   }
