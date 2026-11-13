@@ -194,4 +194,50 @@ describe('DropdownComponent integration', () => {
       expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
     });
   });
+
+  describe('options', () => {
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      imports: [
+        TestHelper.ionicModuleForTest,
+        ItemComponent,
+        ButtonComponent,
+        IconComponent,
+        PopoverComponent,
+        CardComponent,
+      ],
+    });
+
+    async function expectNoNestedInteractives() {
+      const options = spectator.queryAll<HTMLElement>('[role="option"]');
+      expect(options.length).toBeGreaterThan(0);
+      for (const option of options) {
+        const ionItem = option.querySelector('ion-item');
+        await TestHelper.whenReady(ionItem);
+        const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+        expect(nativePart.tagName).not.toEqual('BUTTON');
+      }
+    }
+
+    it('should not render nested interactive elements in the default options', async () => {
+      spectator = createHost(`<kirby-dropdown [items]="items"></kirby-dropdown>`, {
+        hostProps: { items },
+      });
+
+      await expectNoNestedInteractives();
+    });
+
+    it('should not render nested interactive elements in slotted options', async () => {
+      spectator = createHost(
+        `<kirby-dropdown [items]="items">
+          @for (item of items; track item.value) {
+            <kirby-item [selectable]="true"><p class="kirby-item-title">{{ item.text }}</p></kirby-item>
+          }
+        </kirby-dropdown>`,
+        { hostProps: { items } }
+      );
+
+      await expectNoNestedInteractives();
+    });
+  });
 });

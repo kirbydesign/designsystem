@@ -2,6 +2,7 @@
   lines="none"
   [disabled]="disabled"
   [button]="_renderButton"
+  [class.selectable-option]="selectable && _isOption"
   [href]="_renderLink"
   [detail]="false"
   (mousedown)="onMouseDown($event)"
