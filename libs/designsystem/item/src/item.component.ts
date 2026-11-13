@@ -109,9 +109,14 @@ export class ItemComponent implements AfterViewInit {
 
   get _renderButton(): boolean {
     // We shouldn't render item as a button if the item contains
-    // nested interactive, i.e. checkbox, radio or toggle:
+    // nested interactive, i.e. checkbox, radio or toggle,
+    // or if it is an option, as its listbox handles selection and focus:
 
-    return this.selectable && !this.containsNestedInteractives;
+    return this.selectable && !this.containsNestedInteractives && !this._isOption;
+  }
+
+  get _isOption(): boolean {
+    return this.elementRef.nativeElement.getAttribute('role') === 'option';
   }
 
   get _renderLink(): string {
