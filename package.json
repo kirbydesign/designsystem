@@ -89,7 +89,7 @@
     "ng-packagr": "22.2.5",
     "nx-stylelint": "^17.1.4",
     "post-npm-install": "^2.0.0",
-    "prettier": "^3.9.10",
+    "prettier": "^3.10.1",
     "sass": "^1.107.0",
     "storybook": "10.6.5",
     "storybook-addon-pseudo-states": "10.6.5",
