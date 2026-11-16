@@ -167,6 +167,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'bold', svg: 'bold.svg' },
     { name: 'italic', svg: 'italic.svg' },
     { name: 'underline', svg: 'underline.svg' },
+    { name: 'vipps', svg: 'vipps.svg' },
   ]),
 };
 
