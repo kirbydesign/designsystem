@@ -1,6 +1,6 @@
 ---
-agent: agent
-description: Read a GitHub issue and produce a ready-to-merge PR that adds SVG icons to Kirby.
+name: add-icons
+description: Add SVG icons from a GitHub issue to Kirby and create a pull request. Use when asked to add icons.
 ---
 
 Add icons from GitHub issue number provided by the user:
