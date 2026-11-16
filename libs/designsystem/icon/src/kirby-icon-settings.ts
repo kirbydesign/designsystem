@@ -162,6 +162,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'pregnancy', svg: 'pregnancy.svg' },
     { name: 'send', svg: 'send.svg' },
     { name: 'subscription', svg: 'subscription.svg' },
+    { name: 'vipps', svg: 'vipps.svg' },
   ]),
 };
 
