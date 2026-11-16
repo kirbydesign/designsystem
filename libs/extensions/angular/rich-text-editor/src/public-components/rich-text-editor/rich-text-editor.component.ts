@@ -3,89 +3,72 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnDestroy,
+  OnInit,
   Output,
   signal,
-  SimpleChanges,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { RichTextEditorToolbarComponent } from '../../components/rich-text-editor-toolbar/rich-text-editor-toolbar.component';
-import { RichTextEditorWritingAreaComponent } from '../../components/rich-text-editor-writing-area/rich-text-editor-writing-area.component';
+import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
+import { WritingAreaComponent } from '../../components/writing-area/writing-area.component';
+import { defaultLabels, defaultToolbarItems } from '../../rich-text-editor.defaults';
 import {
   RichTextEditorAction,
   RichTextEditorBlockLevel,
-  RichTextEditorCreatedEvent,
+  RichTextEditorConfig,
+  RichTextEditorLabels,
   RichTextEditorState,
-  RichTextEditorTexts,
+  RichTextEditorToolbarItem,
 } from '../../rich-text-editor.types';
-
-const defaultTexts: Readonly<RichTextEditorTexts> = {
-  bold: 'Bold',
-  italic: 'Italic',
-  underline: 'Underline',
-  bulletList: 'Unordered list',
-  orderedList: 'Ordered list',
-  undo: 'Undo',
-  redo: 'Redo',
-  boldText: 'B',
-  italicText: 'I',
-  underlineText: 'U',
-  heading1: 'Heading 1',
-  heading2: 'Heading 2',
-  heading3: 'Heading 3',
-  normal: 'Normal',
-  toolbar: 'Text formatting',
-  textStyle: 'Text style',
-};
 
 @Component({
   selector: 'kirby-x-rich-text-editor',
-  imports: [RichTextEditorToolbarComponent, RichTextEditorWritingAreaComponent],
+  imports: [ToolbarComponent, WritingAreaComponent],
   templateUrl: './rich-text-editor.component.html',
   styleUrl: './rich-text-editor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'kirby-surface-raised',
-    '[class.editor-without-toolbar]': '!showToolbar',
-    '[attr.aria-label]': 'null',
+    '[class.editor-without-toolbar]': '!toolbarItems.length',
     '[attr.aria-describedby]': 'null',
   },
 })
-export class RichTextEditorComponent implements OnChanges, OnDestroy {
+export class RichTextEditorComponent implements OnInit, OnDestroy {
   @Input() value = '';
-  @Input() placeholder = 'Write something...';
-  @Input() showToolbar = true;
+  @Input() config: RichTextEditorConfig = {};
+  @Input() labels: Partial<RichTextEditorLabels> = {};
+  @Input() get toolbarItems(): readonly RichTextEditorToolbarItem[] {
+    return this.toolbarItemState();
+  }
+  set toolbarItems(items: readonly RichTextEditorToolbarItem[]) {
+    this.updateToolbarItems(items);
+  }
   @Input() get readonly(): boolean {
     return this.readonlyState();
   }
   set readonly(value: boolean) {
     this.readonlyState.set(value);
   }
-  @Input() texts: Partial<RichTextEditorTexts> = {};
-  @Input('aria-label') ariaLabel = 'Rich text editor';
   @Input('aria-describedby') ariaDescribedby = '';
   @Output() valueChange = new EventEmitter<string>();
   @Output() editorFocus = new EventEmitter<void>();
   @Output() editorBlur = new EventEmitter<void>();
-  @Output() editorCreated = new EventEmitter<RichTextEditorCreatedEvent>();
-  @ViewChild(RichTextEditorWritingAreaComponent, { static: true })
-  private writingArea!: RichTextEditorWritingAreaComponent;
+  @ViewChild(WritingAreaComponent, { static: true })
+  private writingArea!: WritingAreaComponent;
 
   private readonly readonlyState = signal(false);
   protected readonly editorState = signal<Readonly<RichTextEditorState> | undefined>(undefined);
   private readonly editorFocused = signal(false);
-  private readonly textLabels = signal<Readonly<RichTextEditorTexts>>(defaultTexts);
+  private readonly toolbarItemState = signal(defaultToolbarItems);
+  private readonly labelState = signal<Readonly<RichTextEditorLabels>>(defaultLabels);
   readonly state = this.editorState.asReadonly();
   readonly focused = this.editorFocused.asReadonly();
-  readonly labels = this.textLabels.asReadonly();
+  readonly resolvedLabels = this.labelState.asReadonly();
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['texts']) {
-      this.textLabels.set({ ...defaultTexts, ...this.texts });
-    }
+  ngOnInit(): void {
+    this.initializeLabels();
   }
 
   ngOnDestroy(): void {
@@ -97,16 +80,16 @@ export class RichTextEditorComponent implements OnChanges, OnDestroy {
     this.writingArea?.execute(action);
   }
 
+  focus(): void {
+    this.writingArea?.focus();
+  }
+
+  blur(): void {
+    this.writingArea?.blur();
+  }
+
   setBlock(level: RichTextEditorBlockLevel): void {
     this.writingArea?.setBlock(level);
-  }
-
-  setScrollClearance(bottom: number): void {
-    this.writingArea.setScrollClearance(bottom);
-  }
-
-  scrollIntoView(): void {
-    this.writingArea.scrollIntoView();
   }
 
   containsSelection(selection: Selection): boolean {
@@ -121,5 +104,19 @@ export class RichTextEditorComponent implements OnChanges, OnDestroy {
   protected onBlur(): void {
     this.editorFocused.set(false);
     this.editorBlur.emit();
+  }
+
+  private initializeLabels(): void {
+    this.labelState.set({ ...defaultLabels, ...this.labels });
+  }
+
+  private updateToolbarItems(items: readonly RichTextEditorToolbarItem[]): void {
+    if (!Array.isArray(items) || items.some((item) => !defaultToolbarItems.includes(item))) {
+      throw new TypeError('Toolbar items must contain only supported rich text editor controls');
+    }
+    if (new Set(items).size !== items.length) {
+      throw new Error('Rich text editor toolbar items must be unique');
+    }
+    this.toolbarItemState.set([...items]);
   }
 }

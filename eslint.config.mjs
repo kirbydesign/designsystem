@@ -16,7 +16,4 @@ const compat = new FlatCompat({
 
 export default [{
   ignores: ['**/dist/'],
-}, ...compat.extends('@repo/eslint-config/base.json'), ...storybook.configs["flat/recommended"], {
-  files: ['libs/extensions/angular/rich-text-editor/src/public-components/rich-text-editor/rich-text-editor.component.stories.ts'],
-  rules: { 'no-restricted-imports': 'off' },
-}];
+}, ...compat.extends('@repo/eslint-config/base.json'), ...storybook.configs["flat/recommended"]];

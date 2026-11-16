@@ -35,9 +35,9 @@ export class MyComponent {}
 export class MyModule {}
 ```
 
-## Rich text editor spike
+## Rich text editor
 
-The [rich text editor spike](./rich-text-editor/README.md) compares Tiptap and direct ProseMirror behind one engine-independent Angular API and shared UI. Run the Extensions Storybook and open **Spikes / Rich Text Editor / Comparison**.
+The [rich text editor](./rich-text-editor/README.md) provides a Tiptap-based editor with Kirby controls, configurable labels and HTML input/output. Run the Extensions Storybook and open **Components / Rich Text Editor / Docs** for the API and examples.
 
 ## Migration Guides
 

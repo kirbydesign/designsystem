@@ -1,18 +1,7 @@
 {
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "dist/",
-  "allowedNonPeerDependencies": [
-    "@tiptap/core",
-    "@tiptap/starter-kit",
-    "prosemirror-commands",
-    "prosemirror-history",
-    "prosemirror-keymap",
-    "prosemirror-model",
-    "prosemirror-schema-basic",
-    "prosemirror-schema-list",
-    "prosemirror-state",
-    "prosemirror-view"
-  ],
+  "allowedNonPeerDependencies": ["@tiptap/core", "@tiptap/starter-kit"],
   "lib": {
     "entryFile": "index.ts"
   },

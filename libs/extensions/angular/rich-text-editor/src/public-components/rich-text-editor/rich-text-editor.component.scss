@@ -6,16 +6,4 @@ kirby-x-rich-text-editor {
     border-radius: var(--kirby-border-radius-xl);
     background: var(--kirby-color-fill-base);
   }
-
-  @media (width <= 632px) {
-    .kirby-rich-text-shell:has(
-      kirby-x-rich-text-editor-toolbar:not(.editor-readonly):is(
-          .editor-focused,
-          :focus-within,
-          :has(kirby-dropdown.is-open)
-        )
-    ) {
-      padding-bottom: 4.5rem;
-    }
-  }
 }
