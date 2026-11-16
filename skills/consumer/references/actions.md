@@ -21,19 +21,10 @@ Button attention level `1` is the primary call to action; `2` and `3` reduce emp
 
 Import `ButtonComponent` from `@kirbydesign/designsystem/button` and `IconComponent` from
 `@kirbydesign/designsystem/icon`. `showIconOnly` visually hides the text while preserving the name.
-The `xs` button is below the Cookbook's cited 44px enhanced target-size recommendation; avoid
+The `xs` button is below the 44px enhanced target-size recommendation; avoid
 selecting it purely to make a layout fit.
 
-Sources:
-[button](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/button-showcase/button-showcase.component.html),
-[link](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/link-showcase/link-showcase.component.html).
-
 ## Action menu with a named trigger
-
-Adapted from the
-[custom trigger](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/examples/menu-example/examples/customButton.ts)
-and [selectable items](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/examples/menu-example/examples/selectable.ts)
-examples. The parent handles the emitted action.
 
 ```ts
 import { Component, output } from '@angular/core';
@@ -66,8 +57,3 @@ export class RecordActionsComponent {
 Custom triggers do not receive the default button's configuration. For embedded controls that
 should keep the menu open, set `[closeOnSelect]="false"`. If stacking/clipping occurs, use the
 documented portal configuration rather than arbitrary z-index overrides.
-
-Verify trigger naming, keyboard opening/selection, dismissal, and execution of the selected action.
-
-Source:
-[menu guidance](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/menu-showcase/menu-showcase.component.html).

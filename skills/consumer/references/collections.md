@@ -34,17 +34,11 @@ export class RecordListComponent {
 }
 ```
 
-Adapted from
-[selectable items](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/examples/list-example/examples/selectable-items.ts).
-`itemSelect` supplies the action callback; `[selectable]="true"` supplies item interaction styling.
+`itemSelect` emits the selected item; `[selectable]="true"` supplies item interaction styling.
 Give a list an accessible name when its purpose is not otherwise apparent.
 
 Use the documented variants for sections, standalone rows, swiping and reordering.
 Hidden/experimental list variants are not automatic defaults.
-
-Sources:
-[list](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/list-showcase/list-showcase.component.html),
-[item slots](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/item-showcase/item-showcase.component.html).
 
 ## Load-on-demand versus virtual scrolling
 
@@ -57,20 +51,12 @@ implementation paths; load the matching pair and adapt it to the consuming page.
 
 ## Cards
 
-Cards group a subject. The Cookbook deprecates the `flat` variant; use the documented
+Cards group a subject. The `flat` variant is deprecated; use the
 default or outlined variant for grouping, and the default for an entirely clickable card.
 Provide an interaction affordance and verify keyboard behavior, not just a click handler.
-
-Source:
-[card](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/card-showcase/card-showcase.component.html).
 
 ## Tables
 
 Data tables need native table semantics and headers. `kirby-selectable-row` and sorting indicators
 are styling/hooks, not complete keyboard interaction or sorting implementations. Import the
-documented `TableSortableComponent` for sortable headers and implement the actual sort.
-
-Verify row selection payloads and keyboard behavior for the actual collection.
-
-Source:
-[data table](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/data-table-showcase/data-table-showcase.component.html).
+`TableSortableComponent` for sortable headers and implement the actual sort.

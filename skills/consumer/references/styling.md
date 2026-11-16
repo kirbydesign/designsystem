@@ -8,10 +8,6 @@
 4. If custom UI is still necessary, explain the missing capability and obtain agreement before
    recreating a Kirby lookalike.
 
-Use the optional `kirby-custom-component` skill for detailed lookalike and legacy-color migration
-work when installed. This consumer skill does not require that companion: without it, verify the
-relevant public variables/tokens in the installed package and ask when no documented option fits.
-
 ## Tokens
 
 Use the application's configured Kirby global styles and theme. Check actual token names in the
@@ -38,14 +34,13 @@ combination exists.
 
 ### Version-sensitive colors
 
-Preserve the consumer skill's semantic-color policy for new UI: use
+For new UI, use
 `--kirby-color-{fill|content|border}-{role}[-{emphasis}][-{state}]` with the appropriate
 `kirby-surface-base`, `kirby-surface-raised` or `kirby-surface-brand` container. Verify the exact
 token and surface class in the installed version, including `@kirbydesign/core` theme files.
 Pair fill/content/border by their semantic role rather than picking visually similar primitives.
 
-The Cookbook color page documents legacy palette tokens and `get-color()`. Treat
-that as legacy documentation, not permission to migrate new UI back to palette primitives.
+Legacy palette tokens and `get-color()` are for maintaining existing styles, not new UI.
 If the installed version lacks semantic tokens, report the mismatch and ask for the supported
 styling/upgrade policy; leave existing legacy styling unchanged unless migration is requested.
 Keep application brand-theme definitions separate from consumer component overrides.
@@ -70,9 +65,6 @@ For CSS-grid page regions, read the selected guide's HTML and SCSS together. The
 [documentation index](./documentation-index.md#guides) lists the grid-layout guides and their
 implementations. Load only the matching pair and verify the actual narrow and wide layouts.
 
-Source:
-[grid](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/grid-showcase/grid-showcase.component.html).
-
 ### SCSS media queries
 
 ```scss
@@ -88,7 +80,7 @@ Source:
 }
 ```
 
-Documented breakpoints: `xsmall` 320px, `small` 632px, `medium` 768px, `large` 992px,
+Breakpoints: `xsmall` 320px, `small` 632px, `medium` 768px, `large` 992px,
 `xlarge` 1440px. Use SCSS media utilities for media queries; CSS custom properties cannot
 be substituted directly into media-query conditions.
 
@@ -105,11 +97,3 @@ Global Kirby styles provide:
 ```html
 <h3 class="kirby-text-large">Record details</h3>
 ```
-
-Verify responsive wrapping, zoom, contrast on the actual surface, and available tokens.
-
-Sources:
-[spacing](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/showcase/spacing-showcase),
-[typography](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/showcase/typography-showcase),
-[breakpoints](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/showcase/breakpoints-showcase),
-[legacy colors](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/showcase/colors-showcase).

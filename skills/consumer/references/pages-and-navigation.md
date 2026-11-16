@@ -2,17 +2,13 @@
 
 ## Choose the structure
 
-| Requirement                                | Choose                                             | Constraint                                                                         |
-| ------------------------------------------ | -------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Page layout                                | One `kirby-page` and `kirby-page-content` per page | Use `kirby-header` for new header layouts when the installed version supports it.  |
-| Top-level tab navigation with child routes | `kirby-tabs` / `kirby-tab-button`                  | Each `tab` points to a child route; routed content is supplied by the tabs outlet. |
-| Related content sections on one page       | `kirby-tab-navigation`                             | At least two tabs; connect tabs and panels with ARIA.                              |
-| Toggle related choices within content      | `kirby-segmented-control`                          | A choice/filter, not a replacement for routed navigation.                          |
-
-Sources:
-[page](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/page-showcase/page-showcase.component.html),
-[tabs](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/tabs-showcase/tabs-showcase.component.html),
-[segmented control](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/segmented-control-showcase/segmented-control-showcase.component.html).
+| Requirement                                | Choose                                                    | Constraint                                                                         |
+| ------------------------------------------ | --------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Page layout                                | One `kirby-page` and `kirby-page-content` per page        | Use `kirby-header` for new header layouts when the installed version supports it.  |
+| Top-level tab navigation with child routes | `kirby-tabs` / `kirby-tab-button`                         | Each `tab` points to a child route; routed content is supplied by the tabs outlet. |
+| Related content sections on one page       | `kirby-tab-navigation`                                    | At least two tabs; connect tabs and panels with ARIA.                              |
+| Toggle related choices within content      | `kirby-segmented-control`                                 | A choice/filter, not a replacement for routed navigation.                          |
+| Nested vertical navigation                 | Extension `kirby-x-sidebar-menu` inside `kirby-x-sidebar` | Use typed menu items and the public sidebar composition.                           |
 
 ## Page and header
 
@@ -37,17 +33,12 @@ import { PageComponent, PageContentComponent } from '@kirbydesign/designsystem/p
 export class RecordsPageComponent {}
 ```
 
-Adapted from the
-[header example](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/examples/header-example/examples/default.ts)
-and [page guidance](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/page-showcase/page-showcase.component.html).
-Older page examples use legacy title/subtitle/actions APIs; follow the header guidance rather than
-copying those APIs into new code.
+For new page headers, use `kirby-header` for title, subtitles and actions instead of the legacy
+page title/subtitle/actions inputs and directives.
 
 With `kirby-router-outlet`, pages are stacked and a hidden page may not be destroyed. Pause/resume
-page-scoped subscriptions and background work using the page's `leave`/`enter` lifecycle, following
-the app's existing pattern. `ngOnDestroy` alone is not sufficient for leaving a stacked page.
-For hosted microfrontends, also follow the platform's visibility lifecycle when leaving the entire
-microfrontend; page events alone may not cover that boundary.
+page-scoped background work using `leave`/`enter`. `ngOnDestroy` alone is not sufficient
+for leaving a stacked page.
 
 ## Accessible page sections
 
@@ -85,9 +76,48 @@ Use unique IDs if repeated. Only the active panel should be visible to assistive
 inactive panels or hide with `display: none`. For sticky tabs, use `*kirbyPageStickyContent` and import
 `PageStickyContentDirective` from `@kirbydesign/designsystem/page`.
 
-Sources:
-[tab navigation guidance](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/page-tab-navigation-showcase/tab-navigation-showcase.component.html),
-[page example](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/examples/tab-navigation-example/tab-navigation-example.component.ts).
+## Sidebar menu
 
-Verify narrow and wide layouts, tab keyboard behavior, active-panel exposure, and subscription
-cleanup when navigating away.
+Import the public components and `SidebarMenuItem` type from
+`@kirbydesign/extensions-angular/sidebar-menu`.
+
+```ts
+import { Component } from '@angular/core';
+import {
+  SidebarComponent,
+  SidebarMenuComponent,
+  SidebarMenuItem,
+} from '@kirbydesign/extensions-angular/sidebar-menu';
+
+@Component({
+  selector: 'app-section-menu',
+  standalone: true,
+  imports: [SidebarComponent, SidebarMenuComponent],
+  template: `
+    <nav aria-label="Sections">
+      <kirby-x-sidebar>
+        <kirby-x-sidebar-menu
+          [menuItems]="menuItems"
+          [(selectedItem)]="selectedItem"
+        ></kirby-x-sidebar-menu>
+      </kirby-x-sidebar>
+    </nav>
+  `,
+})
+export class SectionMenuComponent {
+  selectedItem = 'overview';
+  readonly menuItems: SidebarMenuItem[] = [
+    { type: 'router-link', id: 'overview', title: 'Overview', route: '/overview' },
+    { type: 'router-link', id: 'history', title: 'History', route: '/history' },
+  ];
+}
+```
+
+- `SidebarMenuItem` covers `SubmenuItem`, `ActionItem`, `RouterLinkItem`, `ExternalLinkItem` and
+  `Divider`. Use these typed contracts rather than treating every item as a route.
+- `selectedItem` is a string ID; `expandedItems` and `checkedItems` are `Set<string>`.
+  Each has a matching `...Change` output for two-way binding. `expandChange` emits
+  `{ id, isExpanded }`; `checkChange` emits `{ id, isChecked }`.
+- Optional `SidebarHeaderComponent` and `SidebarFooterComponent` belong inside `kirby-x-sidebar`.
+  Header content requires `slot="logo"` or `slot="action"`; un-slotted text is not rendered.
+  `SidebarMenuLoaderComponent` supplies the menu-specific loading placeholder.

@@ -119,33 +119,6 @@
     ]
   },
   {
-    "prompt": "A hosted microfrontend has missing modal providers. Copy the Cookbook bootstrap to fix it.",
-    "reference": "references/setup.md",
-    "expected": [
-      "Inspect and preserve the existing platform bootstrap and application configuration.",
-      "Verify local provideKirby configuration without repeating the host's withGlobalSetup.",
-      "Keep existing translation, modal and formatting providers."
-    ]
-  },
-  {
-    "prompt": "Add a field to an existing controller-opened modal with a shared form wrapper.",
-    "reference": "references/consumer-context.md",
-    "expected": [
-      "Extend the existing modal and form integration rather than replacing it with a declarative dialog.",
-      "Preserve injected data, result handling, validators and dismissal guards.",
-      "Use the application's translation keys for the new label and errors."
-    ]
-  },
-  {
-    "prompt": "The package range permits a newer Kirby input, but the host shares Kirby at runtime.",
-    "reference": "references/consumer-context.md",
-    "expected": [
-      "Check platform sharing rules and runtime compatibility rather than trusting the range alone.",
-      "Use a supported API or ask if compatibility cannot be established.",
-      "Do not independently upgrade shared dependencies to complete a UI change."
-    ]
-  },
-  {
     "prompt": "Add a localized amount field while keeping the existing submitted value format.",
     "reference": "references/forms.md",
     "expected": [
@@ -155,21 +128,121 @@
     ]
   },
   {
-    "prompt": "Add a link from this feature to another microfrontend and verify it locally.",
-    "reference": "references/consumer-context.md",
+    "prompt": "Choose a simple help dialog. The bundled modal rule covers it, but external documentation is unavailable.",
+    "reference": "SKILL.md",
     "expected": [
-      "Distinguish local feature routes from cross-application navigation.",
-      "Use the platform's documented navigation integration and existing host/mock scripts.",
-      "Verify navigation in the host rather than claiming success from an isolated unit test."
+      "Apply the bundled declarative modal rule without requiring Cookbook access.",
+      "Verify required APIs against the installed package.",
+      "Do not treat source-link availability as a prerequisite for covered usage decisions."
     ]
   },
   {
-    "prompt": "The translated app already configures runtime language changes. Add a Kirby field using the Danish setup example.",
-    "reference": "references/localization.md",
+    "prompt": "Create a compact informational modal with a visible heading.",
+    "reference": "references/modals.md",
     "expected": [
-      "Preserve existing translation and locale providers instead of replacing them with a fixed locale.",
-      "Translate the new label, validation text and accessible name through the application's existing mechanism.",
-      "Verify affected behavior after runtime language changes."
+      "Set an explicit aria-label matching the visible heading.",
+      "Use the component attribute or ModalConfig.htmlAttributes for the selected mechanism.",
+      "Verify the rendered dialog's accessible name instead of assuming a child supplies it."
+    ]
+  },
+  {
+    "prompt": "An external example uses deprecated flat cards, but this skill recommends default or outlined cards.",
+    "reference": "SKILL.md",
+    "expected": [
+      "Follow the skill's card usage rule rather than overriding it with the external example.",
+      "Keep installed-API compatibility and application requirements as separate checks.",
+      "Report and clarify a genuine behavior mismatch rather than silently changing the rule."
+    ]
+  },
+  {
+    "prompt": "Implement a Kirby confirmation dialog in an already-configured application.",
+    "reference": "SKILL.md",
+    "expected": [
+      "Focus on the Kirby feature APIs and component imports.",
+      "Do not add application bootstrap, global providers or infrastructure configuration.",
+      "Use the modal recipe and verify confirmation versus cancellation behavior."
+    ]
+  },
+  {
+    "prompt": "Use kirby-x-combobox in a feature that only has the core Kirby package installed.",
+    "reference": "SKILL.md",
+    "expected": [
+      "Identify combobox as an optional @kirbydesign/extensions-angular export, not a core component.",
+      "Report the missing package prerequisite rather than inventing a core import or installing infrastructure.",
+      "Check extension and peer compatibility before introducing the feature."
+    ]
+  },
+  {
+    "prompt": "Build a searchable single selector using objects whose keys are code and title.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Choose the extension combobox rather than treating the core dropdown as searchable.",
+      "Configure itemIdProperty and itemTextProperty and use unique string IDs.",
+      "Keep the selected item as the form value/change payload, not an array or DOM event.",
+      "Provide an accessible name and preserve the existing forms convention."
+    ]
+  },
+  {
+    "prompt": "Show a dark skeleton while a summary loads, using the skeleton theme input.",
+    "reference": "references/feedback.md",
+    "expected": [
+      "Identify theme as deprecated and ineffective; use the surrounding Kirby surface.",
+      "Use supported shapes and CSS sizing.",
+      "Tie placeholder visibility to actual loading state and provide surrounding accessible status text."
+    ]
+  },
+  {
+    "prompt": "Build a sidebar with expanded IDs supplied as an array and plain text inside its header.",
+    "reference": "references/pages-and-navigation.md",
+    "expected": [
+      "Use the public sidebar/menu composition and typed SidebarMenuItem contracts.",
+      "Use Set<string> for expandedItems and checkedItems and string IDs for selectedItem.",
+      "Place header content in logo or action slots instead of relying on un-slotted text."
+    ]
+  },
+  {
+    "prompt": "Add an image banner that opens an external resource, can be dismissed and may fail to load its image.",
+    "reference": "references/illustrations.md",
+    "expected": [
+      "Use externalLink for external navigation rather than assuming bannerClick also handles that branch.",
+      "Subscribe to dismissClick to expose dismissal and keep it separate from activation.",
+      "Handle imageError explicitly."
+    ]
+  },
+  {
+    "prompt": "Show a decorative spot illustration in every size using an arbitrary image name.",
+    "reference": "references/illustrations.md",
+    "expected": [
+      "Use published illustration names and verify the chosen size has an asset.",
+      "Recognize a missing size renders no illustration.",
+      "Hide decorative illustrations from accessibility exposure and keep meaning in accompanying text."
+    ]
+  },
+  {
+    "prompt": "Format a number with formatNumber: { digitsInfo: '1.2-2' } and pass a plain number to the amount pipe.",
+    "reference": "references/extension-formatting.md",
+    "expected": [
+      "Pass a digitsInfo string to formatNumber, not a configuration object.",
+      "Pass an Amount object with amount and currencyCode to the amount pipe.",
+      "Use existing locale/extension settings and preserve the raw sign and currency unless requirements explicitly change presentation."
+    ]
+  },
+  {
+    "prompt": "Use timeOrDate to show time for today when the browser timezone differs from the configured display timezone.",
+    "reference": "references/extension-formatting.md",
+    "expected": [
+      "Distinguish browser-local today classification from configured-timezone formatting.",
+      "Verify day-boundary behavior rather than assuming both use the configured timezone.",
+      "Use explicit date/time display when the conditional output would misrepresent the requirement."
+    ]
+  },
+  {
+    "prompt": "Format account and phone numbers, then submit their displayed strings back to the API.",
+    "reference": "references/extension-formatting.md",
+    "expected": [
+      "Use AccountNumber and PhoneNumber payload shapes and preserve their original values.",
+      "Treat registration padding, account zero removal and phone chunking as display behavior.",
+      "Validate digit-only phone input independently rather than treating formatting as validation."
     ]
   }
 ]

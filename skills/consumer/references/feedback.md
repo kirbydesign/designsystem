@@ -7,14 +7,15 @@
 | Subtle, noncritical result notification | `ToastController`                                    | A toast disappears; essential instructions belong in persistent content.                                      |
 | Blocking confirmation                   | `ModalController.showAlert`                          | Use a meaningful title and explicit action labels; follow the [modal recipe](./modals.md#confirmation-alert). |
 | Local loading                           | `kirby-loading-overlay` around the affected content  | Scope it to the content being loaded.                                                                         |
-| Full-page loading                       | `LoadingOverlayService`                              | Every `showLoadingOverlay` requires `hideLoadingOverlay`.                                                     |
+| Full-page loading                       | `LoadingOverlayService`                              | Global overlay for full-page loading.                                                                         |
 | Small inline busy indicator             | `kirby-spinner`                                      | Supply surrounding text/context for what is loading.                                                          |
+| Placeholder matching unloaded content   | Extension `kirby-x-skeleton-loader`                  | Mimics content shape; does not track loading or block interaction.                                            |
 | No content                              | `kirby-empty-state`                                  | Explain the state and any available next action.                                                              |
 | Status label/count/visual progress      | `kirby-flag`, `kirby-badge`, `kirby-progress-circle` | Preserve a textual meaning; color alone is insufficient.                                                      |
 
-## Success toast after a successful operation
+## Success toast
 
-Use this in a component/service, after the operation has actually succeeded:
+Show a success toast only after the operation succeeds:
 
 ```ts
 import { inject } from '@angular/core';
@@ -32,18 +33,49 @@ async showSavedFeedback(): Promise<void> {
 }
 ```
 
-The documented types are `success` and `warning`; verify additional types before using them.
+Toast message types are `success` and `warning`.
 Keep text short. Default duration is 4000ms. `durationInMs: 0` requires explicit dismissal through
 the overlay returned by `showToast()`; the user has no close control.
 
-Source:
-[toast](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/toast-showcase/toast-showcase.component.html).
-
 ## Loading and cleanup
 
-For loading services, dismiss in the app's normal success/error/cleanup path, such as a `finally`
-block or RxJS `finalize`, while preserving the app's error notification behavior. For a wrapper,
-bind `isLoading` to real request state and reset it on both success and failure.
+Pair every `LoadingOverlayService.showLoadingOverlay()` call with `hideLoadingOverlay()`,
+including failure paths. For `kirby-loading-overlay`, keep `isLoading` synchronized with the
+actual loading state.
 
-Source:
-[loading overlay](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/loading-overlay-showcase/loading-overlay-showcase.component.html).
+## Skeleton placeholders
+
+Import `SkeletonLoaderComponent` from `@kirbydesign/extensions-angular/skeleton-loader`.
+Choose `rectangle`, `circle` or `pill`; size with CSS width/height. The loader follows its surface.
+Its deprecated `theme` input has no effect; use the surrounding Kirby surface instead.
+
+```ts
+import { Component, input } from '@angular/core';
+import { SkeletonLoaderComponent } from '@kirbydesign/extensions-angular/skeleton-loader';
+
+@Component({
+  selector: 'app-summary-placeholder',
+  standalone: true,
+  imports: [SkeletonLoaderComponent],
+  template: `
+    <div [attr.aria-busy]="isLoading()">
+      @if (isLoading()) {
+        <p role="status">Loading summary</p>
+        <kirby-x-skeleton-loader
+          shape="pill"
+          style="width: 10rem"
+          aria-hidden="true"
+        ></kirby-x-skeleton-loader>
+      } @else {
+        <ng-content></ng-content>
+      }
+    </div>
+  `,
+})
+export class SummaryPlaceholderComponent {
+  readonly isLoading = input.required<boolean>();
+}
+```
+
+The parent supplies actual loading state. Keep placeholder shapes decorative and expose loading
+meaning through surrounding text; the skeleton does not supply an accessible status message.

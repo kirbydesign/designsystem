@@ -16,10 +16,9 @@ task recipe's specific accessibility constraints and check the composed result.
   reduced-motion and seizure-related needs, not only screen readers.
 - Run existing automated accessibility checks, then manually review relevant screen-reader,
   focus/order and interaction behavior. Automation alone cannot verify the application context.
-- Ask for required corporate accessibility targets when they affect acceptance. Report tested
+- Ask for the application's accessibility targets when they affect acceptance. Report tested
   behavior rather than claiming WCAG compliance from component choice alone.
 
-Source:
-[accessibility guidelines](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/accessibility/accessibility-guidelines.html).
-For a specific acceptance criterion, consult the linked WCAG/WAI guidance rather than inventing
-requirements not established by the app.
+For an acceptance criterion not covered here, use the
+[documentation index](./documentation-index.md#other-documentation) to locate WCAG/WAI guidance
+rather than inventing requirements not established by the app.

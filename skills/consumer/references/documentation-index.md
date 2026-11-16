@@ -1,8 +1,8 @@
 # Documentation index
 
-Use this index for subjects/variants not covered by the bundled recipes. Fetch only the relevant
-source, not the whole Cookbook. This inventory covers the Cookbook's showcase directories
-and guides, including hidden/legacy subjects for maintenance rather than endorsement.
+Use this fallback for uncovered behavior or compatibility questions. Fetch only the matching
+source; covered rules and examples need no external lookup.
+Hidden/legacy entries support existing code, not recommendations for new UI.
 
 ## Resolve a source
 
@@ -10,8 +10,13 @@ The source root is
 `https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/`.
 Append the exact directory below. For raw files, use
 `https://raw.githubusercontent.com/kirbydesign/designsystem/develop/apps/cookbook/src/app/`
-and the directory's actual filename. Apply the main skill's version-matching policy before using
-these APIs in another version.
+and the directory's actual filename.
+
+For version-matched lookup, use a repository tag known to match the installed package. For core
+Kirby, substitute `v<resolved-kirby-version>` for `develop` only if that tag exists. Core and Angular
+extensions have separate package versions; an extension version is not a core release tag.
+The [live documentation](https://cookbook.kirby.design) and `develop` are discovery aids,
+not proof that an older installed package supports an API.
 
 In the table, a showcase key means `showcase/<key>/`; an example key means `examples/<key>/`.
 Read showcase `.html` for decisions/accessibility, `.ts` for API tables, and example `.ts` plus
@@ -93,8 +98,8 @@ All paths below are relative to the source root:
 | Multiple grid containers | `guides/grid-layout/grid-layout-multiple-containers/` | `grid-layout-example/grid-layout-multiple-containers-example/` |
 | Extended grid layout     | `guides/grid-layout/grid-layout-extended/`            | `grid-layout-example/grid-layout-extended-example/`            |
 
-Use the main skill's version-resolution rules when constructing source URLs. Read only the
-selected guide and implementation; directory paths identify source material, not component APIs.
+Read only the selected guide and implementation; directory paths identify source material,
+not component APIs.
 
 ## Other documentation
 
@@ -104,7 +109,7 @@ Paths are relative to the same source root:
 | -------------------------------------- | ------------------------------------------------------------------------------------ |
 | Product introduction                   | `intro/intro.component.html`                                                         |
 | Accessibility                          | `accessibility/accessibility-guidelines.html`                                        |
-| Locale setup and internal translations | `localization/localization.component.html`, `localization/localization.component.ts` |
+| Locale-dependent formatting and labels | `localization/localization.component.html`, `localization/localization.component.ts` |
 | Guide overview                         | `guides/guides.component.html`                                                       |
 | Extensions scope                       | `extensions/extensions-landing-page.component.html`                                  |
 
@@ -112,3 +117,25 @@ Kirby Extensions are community-maintained additions, not automatically part of
 `@kirbydesign/designsystem`. Their documentation is at
 [extensions.kirby.design](https://extensions.kirby.design). Check whether the app installs the
 relevant extension package and its compatible version before proposing one.
+
+## Angular extension sources
+
+Optional `@kirbydesign/extensions-angular` entry points and source directories, relative to
+`https://github.com/kirbydesign/designsystem/tree/develop/libs/extensions/angular/`:
+
+| Feature           | Entry point suffix  | Source directory                   |
+| ----------------- | ------------------- | ---------------------------------- |
+| Combobox          | `combobox`          | `combobox/src/`                    |
+| Image banner      | `image-banner`      | `image-banner/src/`                |
+| Sidebar menu      | `sidebar-menu`      | `sidebar-menu/src/`                |
+| Skeleton loader   | `skeleton-loader`   | `skeleton-loader/src/`             |
+| Spot illustration | `spot-illustration` | `spot-illustration/src/`           |
+| Amount            | `localization`      | `localization/src/amount/`         |
+| Number            | `localization`      | `localization/src/number/`         |
+| Date/time         | `localization`      | `localization/src/date-time/`      |
+| Account number    | `localization`      | `localization/src/account-number/` |
+| Phone number      | `localization`      | `localization/src/phone-number/`   |
+
+Each entry point's `src/index.ts` defines public exports. Look in the matching source directory
+for implementation and `*.stories.ts` usage examples; sidebar stories are under
+`sidebar-menu/src/public-components/sidebar/`.

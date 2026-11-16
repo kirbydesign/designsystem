@@ -1,13 +1,9 @@
 # Modals
 
-## Existing flow first
-
-For an existing feature, preserve its shared modal service/wrapper, controller or routed mechanism
-unless migration is requested. Check injected data, result handling, nested overlays and guards
-before applying a simpler example. The table below chooses a mechanism for a new flow, not a
-requirement to rewrite existing controller-based dialogs.
-
 ## Choose the mechanism
+
+Keep an existing Kirby modal's mechanism and data, result and dismissal contracts unless migration
+is requested. Use the table for new flows.
 
 | Requirement                                                            | Mechanism                                                 |
 | ---------------------------------------------------------------------- | --------------------------------------------------------- |
@@ -18,7 +14,7 @@ requirement to rewrite existing controller-based dialogs.
 | Short confirmation/alert                                               | `ModalController.showAlert` with `AlertConfig`            |
 
 Modals deliberately interrupt the current task. Use ordinary page content or nonblocking feedback
-when that interruption is unnecessary.
+when that interruption is unnecessary.ä
 
 ## Declarative example
 
@@ -50,9 +46,6 @@ export class ReferenceHelpComponent {}
 
 Keep trigger IDs unique in the rendered document. If this component is repeated, derive/provide a
 unique ID or use state control instead.
-
-Adapted from the
-[modal component example](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/examples/modal-example/modal-component-example.component.ts).
 
 For state-driven dialogs, the template binding and dismissal handler must stay synchronized:
 
@@ -107,23 +100,11 @@ export class DiscardConfirmationComponent {
 }
 ```
 
-Adapted from
-[alert guidance](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/alert-showcase/alert-showcase.component.html).
-
-## Controller-based content
-
-For controller component content, verify `ModalConfig`, data passing, result callbacks and
-`Modal` APIs against the installed package before implementation.
-
 ## Routes, dismissal and focus
 
-- Route-based modals use route `data.modalConfig` and an outlet named `modal`. Consult the
-  [outlet example](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/examples/modal-example/modal-example-outlet.component.ts)
-  and [route examples](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples/modal-example/modal-route-example)
-  for the app's router structure. Verify direct navigation, browser back and modal dismissal.
-  In a hosted microfrontend, also follow the platform's routing contracts and preserve existing
-  route composition/guards; the Cookbook's standalone route setup is not a host integration recipe.
-- For unsaved changes, clarify the intended dismissal policy, then use the documented `canDismiss`
+- Route-based modals use route `data.modalConfig` and an outlet named `modal`.
+  Verify direct navigation, browser back and modal dismissal.
+- For unsaved changes, clarify the intended dismissal policy, then use `canDismiss`
   configuration. Verify close button, Escape, backdrop and route changes rather than guarding only
   a footer button.
 - When a step replaces the modal title, the embedded component can inject `Modal` and call
@@ -137,10 +118,7 @@ For controller component content, verify `ModalConfig`, data passing, result cal
 content-height sheet on small screens and behaves like a modal on larger screens. `compact`
 has no toolbar, close button or content scrolling; use it for informational content, not a long form.
 
-Sizes are `small | medium | large` on larger screens; compact ignores size. Compact dialogs generally
-need an explicit `aria-label` matching their visible heading because no title is inferred. The
-Cookbook mentions an exception for message-state content; verify that component/version rather than
-assuming every compact dialog labels itself.
-
-Source for decisions, focus, guards and flavors:
-[modal showcase](https://github.com/kirbydesign/designsystem/blob/develop/apps/cookbook/src/app/showcase/modal-showcase/modal-showcase.component.html).
+Sizes are `small | medium | large` on larger screens; compact ignores size.
+Give compact modals an explicit `aria-label` matching the visible heading. Set it directly on
+`kirby-modal`, or through `ModalConfig.htmlAttributes` for controller-based content. Verify the
+rendered dialog's accessible name rather than relying on a child component to label it.
