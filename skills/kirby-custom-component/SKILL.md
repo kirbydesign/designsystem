@@ -28,7 +28,17 @@ Copy this checklist and track progress:
 
 Find the token file of the installed Kirby version, `@kirbydesign/core/scss/themes/default-brand.css`. `@kirbydesign/core` is installed with `@kirbydesign/designsystem`, but is not always hoisted to the top of `node_modules`. Look in `node_modules/@kirbydesign/core/` first, then in `node_modules/.pnpm/@kirbydesign+core@*/node_modules/@kirbydesign/core/` (pnpm).
 
-The package directory you find is `<kirby-core>` in the references. If the file is not found, the installed Kirby version has no semantic tokens: stop and tell the user to upgrade first. Read that file whenever you need to confirm a token exists.
+The package directory you find is `<kirby-core>` in the references. Read that file whenever you need to confirm a token exists. If the file is not found, the installed Kirby version has no semantic tokens:
+
+- **Mozaic micro frontend** (`package.json` depends on `@mz-js/angular`): the host provides Kirby's styles and tokens at runtime, and the micro frontend doesn't control the Kirby version. Assume the semantic tokens and current component variables exist and continue – don't ask the user to upgrade. Use the latest published packages instead of the installed ones: `https://unpkg.com/@kirbydesign/core/` is `<kirby-core>`, and `https://unpkg.com/@kirbydesign/designsystem/` replaces `node_modules/@kirbydesign/designsystem/`. The scanner only knows the installed packages, so check its `unknown-variable` findings against the latest packages before acting on them.
+- **Otherwise:** stop and tell the user to upgrade first.
+
+In a Mozaic micro frontend, `@kirbydesign/extensions-angular` (the `kirby-x-*` components) must match the Mozaic version – the `@mz-js/angular` version in `package.json`:
+
+- **Mozaic v47 or v48:** latest v5 (`^5`). Look up its components in `https://unpkg.com/@kirbydesign/extensions-angular@5/`.
+- **Mozaic v49 or later:** latest. Look up its components in `https://unpkg.com/@kirbydesign/extensions-angular/`.
+
+If the micro frontend has or needs `@kirbydesign/extensions-angular` in another version, set the matching version in `package.json`, install it, and mention the change in the report.
 
 ### 2. Find candidates
 
