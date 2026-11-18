@@ -14,6 +14,7 @@ import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.componen
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
+import { DataGridShowcaseComponent } from './data-grid-showcase/data-grid-showcase.component';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
@@ -148,6 +149,7 @@ export const COMPONENT_ROUTES: Route[] = [
   { path: 'link', component: LinkShowcaseComponent },
   { path: 'section-header', component: SectionHeaderShowcaseComponent },
   { path: 'data-table', component: DataTableShowcaseComponent },
+  { path: 'data-grid', component: DataGridShowcaseComponent },
   { path: 'header', component: HeaderShowcaseComponent },
   { path: 'label', component: LabelShowcaseComponent },
 ];

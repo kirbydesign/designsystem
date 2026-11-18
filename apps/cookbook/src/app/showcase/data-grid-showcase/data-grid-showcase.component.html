@@ -1,0 +1,19 @@
+<div class="example">
+  <p>
+    The data grid displays complex, related data in rows and columns. It is under development and
+    not ready for use.
+  </p>
+
+  <h2>Default data grid</h2>
+  <cookbook-example-viewer
+    [html]="dataGridDefaultExample.template"
+    [ts]="dataGridDefaultExample.dataSnippet"
+  >
+    <cookbook-data-grid-default-example
+      #dataGridDefaultExample
+    ></cookbook-data-grid-default-example>
+  </cookbook-example-viewer>
+</div>
+
+<h2>Importing</h2>
+<cookbook-import-viewer [imports]="'DataGridComponent'"></cookbook-import-viewer>
