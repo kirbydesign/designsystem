@@ -1,0 +1,13 @@
+@if (canSort) {
+  <button type="button" (click)="onSort($event)">
+    <span #label><ng-container *ngTemplateOutlet="content" /></span>
+    <kirby-icon
+      class="sortable-icon"
+      [name]="sortDirection === 'desc' ? 'arrow-down-fill' : 'arrow-up-fill'"
+    ></kirby-icon>
+  </button>
+} @else {
+  <ng-container *ngTemplateOutlet="content" />
+}
+
+<ng-template #content><ng-content /></ng-template>

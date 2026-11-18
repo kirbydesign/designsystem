@@ -4,7 +4,7 @@ import { ColumnDef, FlexRender, injectTable, tableFeatures } from '@tanstack/ang
 import {
   DataGridCellDirective,
   DataGridComponent,
-  DataGridHeaderCellDirective,
+  DataGridHeaderCellComponent,
   DataGridHeaderRowDirective,
   DataGridRowDirective,
   DataGridTableDirective,
@@ -57,7 +57,7 @@ const config = {
     DataGridComponent,
     DataGridTableDirective,
     DataGridHeaderRowDirective,
-    DataGridHeaderCellDirective,
+    DataGridHeaderCellComponent,
     DataGridRowDirective,
     DataGridCellDirective,
     FlexRender,

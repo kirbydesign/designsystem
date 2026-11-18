@@ -13,6 +13,27 @@
       #dataGridDefaultExample
     ></cookbook-data-grid-default-example>
   </cookbook-example-viewer>
+
+  <h2>Sorting</h2>
+  <p>
+    Register
+    <code>rowSortingFeature</code>
+    and every header becomes sortable. Turn it off for a column with
+    <code>enableSorting: false</code>
+    . The example sorts on the server: the table only holds the sorting state, the backend returns
+    the rows in order, and
+    <code>manualSorting: true</code>
+    renders them as received. The other options give Kirby's sorting behavior: start ascending, then
+    toggle between ascending and descending, and sorting another column replaces the current one.
+  </p>
+  <cookbook-example-viewer
+    [html]="dataGridSortingExample.template"
+    [ts]="dataGridSortingExample.dataSnippet"
+  >
+    <cookbook-data-grid-sorting-example
+      #dataGridSortingExample
+    ></cookbook-data-grid-sorting-example>
+  </cookbook-example-viewer>
 </div>
 
 <h2>Importing</h2>

@@ -13,6 +13,7 @@ import { MockChartComponent } from './components/mock.chart.component';
 import { MockBaseChartComponent } from './components/mock.base-chart.component';
 import { MockStockChartComponent } from './components/mock.stock-chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
+import { MockDataGridHeaderCellComponent } from './components/mock.data-grid-header-cell.component';
 import { MockDataGridComponent } from './components/mock.data-grid.component';
 import { MockTableSortableComponent } from './components/mock.sortable.component';
 import { MockDividerComponent } from './components/mock.divider.component';
@@ -99,6 +100,7 @@ export const MOCK_COMPONENTS = [
   MockBaseChartComponent,
   MockStockChartComponent,
   MockCheckboxComponent,
+  MockDataGridHeaderCellComponent,
   MockDataGridComponent,
   MockTableSortableComponent,
   MockDividerComponent,
