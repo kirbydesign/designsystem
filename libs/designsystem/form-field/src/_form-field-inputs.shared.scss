@@ -95,6 +95,7 @@ $form-field-label-height: 24px;
     // it's not necessary to declare the display property.
 
     font-family: $form-field-input-font-family;
+    letter-spacing: inherit;
 
     // `font-size` should be declared in `em` units but to simplify the solution
     // to https://github.com/kirbydesign/designsystem/issues/2301 we're using `rem`.
