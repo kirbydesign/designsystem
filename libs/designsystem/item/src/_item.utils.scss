@@ -89,12 +89,10 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 // Components whose items should keep their layout when text is resized on narrow viewports.
 $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby-button].icon-only';
 
-// Host class that opts items with control elements into the layout change.
-$opt-in-layout-change: 'add-layout-change';
-
+// Items with control elements can opt into the layout change with the `kirby-item-layout-wrap-opt-in` host class.
 @mixin when-layout-change-needed() {
   &:not(:has(#{$no-layout-change-components})),
-  &.#{$opt-in-layout-change} {
+  &.kirby-item-layout-wrap-opt-in {
     @content;
   }
 }

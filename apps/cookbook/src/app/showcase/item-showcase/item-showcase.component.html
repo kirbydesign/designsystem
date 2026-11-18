@@ -268,6 +268,35 @@
   </div>
 </cookbook-example-viewer>
 
+<h2>Text resize</h2>
+<p>
+  When the user scales text above the font resize threshold (145%), items with start or end slot
+  content change to a column-based layout and item titles are clamped at two lines. This only
+  applies to
+  <em>narrow screens</em>
+  — on wider screens, items keep their layout even when text is scaled.
+</p>
+<p>
+  Items containing a toggle, checkbox, radio or icon button keep their layout by default. Complex
+  items with controls can opt in to the layout change by adding the
+  <code>kirby-item-layout-wrap-opt-in</code>
+  class to the
+  <code>kirby-item</code>
+  .
+</p>
+<p>
+  The example below simulates scaled text, so the layout change is visible when the cookbook is
+  viewed on a narrow screen.
+</p>
+
+<cookbook-example-viewer [html]="textResizeLayoutExample.template">
+  <div class="example-frame kirby-trt">
+    <cookbook-item-example-text-resize-layout
+      #textResizeLayoutExample
+    ></cookbook-item-example-text-resize-layout>
+  </div>
+</cookbook-example-viewer>
+
 <h2>Importing</h2>
 <cookbook-import-viewer [imports]="'ItemComponent'"></cookbook-import-viewer>
 

@@ -959,8 +959,8 @@ export const ItemTextResizeLayout: Story = {
   </kirby-item>
   <br>
 
-  <p>Complex items with controls can opt in to the layout change by adding the '.add-layout-change' class.</p>
-  <kirby-item size="md" class="add-layout-change">
+  <p>Complex items with controls can opt in to the layout change by adding the '.kirby-item-layout-wrap-opt-in' class.</p>
+  <kirby-item size="md" class="kirby-item-layout-wrap-opt-in">
     <kirby-checkbox slot="start"></kirby-checkbox>
     <kirby-label>
       <p class="kirby-item-title">Complex item with checkbox and flag. Opts in to layout change on narrow screens.</p>
