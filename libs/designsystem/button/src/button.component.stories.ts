@@ -74,6 +74,22 @@ export const Focused: Story = {
   },
 };
 
+export const FocusedLink: Story = {
+  render: () => ({
+    template: `
+      <a kirby-button href="#" attentionLevel="1">Attention Level 1</a>
+      <a kirby-button href="#" attentionLevel="2">Attention Level 2</a>
+      <a kirby-button href="#" attentionLevel="3">Attention Level 3</a>
+    `,
+    styles: [':host { display: flex; gap: 8px; padding: 8px; }'],
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const links = canvas.getAllByRole('link');
+    links[0].focus();
+  },
+};
+
 const buttonVariants: {
   id: string;
   label: string;
