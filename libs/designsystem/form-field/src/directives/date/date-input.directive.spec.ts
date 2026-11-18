@@ -129,6 +129,19 @@ describe('DateInputDirective', () => {
         expect(datemaskFontSize).toEqual(inputFontSize);
       });
 
+      it('should have the same letter-spacing as input when set by an ancestor', () => {
+        const hostElement = spectator.element.parentElement;
+        const datemask = hostElement.querySelector('.date-mask');
+
+        hostElement.parentElement.style.letterSpacing = '2px';
+
+        const inputLetterSpacing = TestHelper.getCssProperty(spectator.element, 'letter-spacing');
+        const datemaskLetterSpacing = TestHelper.getCssProperty(datemask, 'letter-spacing');
+
+        expect(inputLetterSpacing).toEqual('2px');
+        expect(datemaskLetterSpacing).toEqual(inputLetterSpacing);
+      });
+
       it('should have the same line-height as input', () => {
         const datemask = spectator.element.parentNode.querySelector('.date-mask');
 
