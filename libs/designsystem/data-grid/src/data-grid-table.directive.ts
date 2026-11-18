@@ -16,15 +16,13 @@ export class DataGridTableDirective {
     return this.dataGrid.label;
   }
 
-  // Core APIs only for now; switch to rowCount and visible columns when those features are added.
   @HostBinding('attr.aria-rowcount')
   get rowCount(): number {
-    const table = this.dataGrid.table;
-    return table.getHeaderGroups().length + table.getCoreRowModel().rows.length;
+    return this.dataGrid.totalRowCount;
   }
 
   @HostBinding('attr.aria-colcount')
   get colCount(): number {
-    return this.dataGrid.table.getAllLeafColumns().length;
+    return this.dataGrid.columnCount;
   }
 }

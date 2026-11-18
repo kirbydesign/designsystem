@@ -1,7 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { ColumnDef, FlexRender, injectTable, tableFeatures } from '@tanstack/angular-table';
 
-import { DataGridComponent, DataGridTableDirective } from '@kirbydesign/designsystem/data-grid';
+import {
+  DataGridCellDirective,
+  DataGridComponent,
+  DataGridHeaderCellDirective,
+  DataGridHeaderRowDirective,
+  DataGridRowDirective,
+  DataGridTableDirective,
+} from '@kirbydesign/designsystem/data-grid';
 
 type Payment = { id: string; recipient: string; status: string; amount: string };
 
@@ -19,9 +26,9 @@ const config = {
   <table class="kirby-table" kirbyDataGridTable>
     <thead>
       @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
-        <tr>
+        <tr [kirbyDataGridHeaderRow]="headerGroup">
           @for (header of headerGroup.headers; track header.id) {
-            <th>
+            <th [kirbyDataGridHeaderCell]="header">
               <ng-container *flexRenderHeader="header; let value">{{ value }}</ng-container>
             </th>
           }
@@ -30,9 +37,9 @@ const config = {
     </thead>
     <tbody>
       @for (row of table.getRowModel().rows; track row.id) {
-        <tr>
+        <tr [kirbyDataGridRow]="row">
           @for (cell of row.getAllCells(); track cell.id) {
-            <td>
+            <td [kirbyDataGridCell]="cell">
               <ng-container *flexRenderCell="cell; let value">{{ value }}</ng-container>
             </td>
           }
@@ -46,7 +53,15 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [DataGridComponent, DataGridTableDirective, FlexRender],
+  imports: [
+    DataGridComponent,
+    DataGridTableDirective,
+    DataGridHeaderRowDirective,
+    DataGridHeaderCellDirective,
+    DataGridRowDirective,
+    DataGridCellDirective,
+    FlexRender,
+  ],
 })
 export class DataGridDefaultExampleComponent {
   template: string = config.template;
