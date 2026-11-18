@@ -111,6 +111,19 @@ describe('list helper', () => {
 
       expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
+
+    it('should mark the list for check, when the load more events complete callback is called', () => {
+      const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
+      component._changeDetectorRef = changeDetectorRef;
+      component.isLoadOnDemandEnabled = true;
+      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
+        event.complete();
+      });
+
+      listHelper.onLoadOnDemand(component);
+
+      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+    });
   });
 
   describe('function: groupSections', () => {

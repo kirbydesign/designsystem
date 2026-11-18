@@ -21,6 +21,12 @@ export class ListHelper {
         complete: (disableLoadOnDemand: boolean) => {
           component.isLoadOnDemandEnabled = !disableLoadOnDemand;
           component._isLoading = false;
+          // complete() is typically called asynchronously, so we need to notify change detection (e.g. when zoneless)
+          component._changeDetectorRef?.markForCheck();
+          if (component.isLoadOnDemandEnabled) {
+            // Load more if the list still doesn't fill the view after new items were added
+            component.scrollDirective?.checkScrollPosition?.();
+          }
         },
       });
     }

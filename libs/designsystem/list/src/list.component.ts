@@ -1,11 +1,13 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
   HostBinding,
+  inject,
   Input,
   OnChanges,
   OnInit,
@@ -193,6 +195,8 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   _isLoading: boolean;
   _groupedItems: any[];
   _selectedItem: any;
+
+  _changeDetectorRef = inject(ChangeDetectorRef);
 
   constructor(
     private listHelper: ListHelper,
