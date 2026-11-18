@@ -13,7 +13,6 @@ export class DataGridComponent<TFeatures extends TableFeatures, TData extends Ro
   @Input({ required: true })
   table: Table<TFeatures, TData>;
 
-  @HostBinding('attr.aria-label')
   @Input({ required: true })
   label: string;
 

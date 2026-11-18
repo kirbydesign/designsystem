@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { ColumnDef, FlexRender, injectTable, tableFeatures } from '@tanstack/angular-table';
 
-import { DataGridComponent } from '@kirbydesign/designsystem/data-grid';
+import { DataGridComponent, DataGridTableDirective } from '@kirbydesign/designsystem/data-grid';
 
 type Payment = { id: string; recipient: string; status: string; amount: string };
 
@@ -16,7 +16,7 @@ const columns: ColumnDef<typeof features, Payment>[] = [
 const config = {
   selector: 'cookbook-data-grid-default-example',
   template: `<kirby-data-grid [table]="table" label="Payments">
-  <table class="kirby-table">
+  <table class="kirby-table" kirbyDataGridTable>
     <thead>
       @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
         <tr>
@@ -46,7 +46,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  imports: [DataGridComponent, FlexRender],
+  imports: [DataGridComponent, DataGridTableDirective, FlexRender],
 })
 export class DataGridDefaultExampleComponent {
   template: string = config.template;
