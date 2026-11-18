@@ -128,6 +128,16 @@ describe('SlidesComponent', () => {
     expect(spectator.query('.swiper-button-next')).toBeHidden();
   });
 
+  it('should hide the pagination, if the Slider doesn´t contain enough slides for sliding', () => {
+    spectator = createHost(hostTemplate, props);
+    spectator.setHostInput('slides', [0]);
+
+    // It is necessary to update the Slides container, because it does not updated automatically when the "slides" input changes
+    spectator.component.swiperContainer.nativeElement.swiper.update();
+
+    expect(spectator.query('.pagination')).toBeHidden();
+  });
+
   describe('pagination', () => {
     let paginationDots;
 
