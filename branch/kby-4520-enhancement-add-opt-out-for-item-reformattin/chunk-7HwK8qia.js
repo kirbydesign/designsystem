@@ -1,0 +1,1 @@
+import{n as u}from"./chunk-DtGe9zeJ.js";import{i as I}from"./main-IKOZZDSK.js";export{I as createGesture};
