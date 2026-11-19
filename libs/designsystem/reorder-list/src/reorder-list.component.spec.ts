@@ -84,6 +84,40 @@ describe('ReorderListComponent', () => {
     });
   });
 
+  describe('while reordering items', () => {
+    beforeEach(() => {
+      spectator.setInput({
+        items: [
+          { title: '1', subItems: [{ title: '1a' }, { title: '1b' }] },
+          { title: '2', subItems: [{ title: '2a' }, { title: '2b' }] },
+        ],
+        subItemsName: 'subItems',
+      });
+    });
+
+    it('should not shift the sub items of other cards when reordering cards', () => {
+      const outerReorderGroup = spectator.element.querySelector(':scope > ion-reorder-group');
+      const [, secondCard] = spectator.queryAll('kirby-card');
+      const lastSubItem = secondCard.querySelector('ion-reorder-group').lastElementChild;
+      const topBefore = lastSubItem.getBoundingClientRect().top;
+
+      outerReorderGroup.classList.add('reorder-list-active');
+
+      expect(lastSubItem.getBoundingClientRect().top).toBe(topBefore);
+    });
+
+    it('should not shift the sub items when reordering inside a group', () => {
+      const [firstCard] = spectator.queryAll('kirby-card');
+      const subReorderGroup = firstCard.querySelector('ion-reorder-group');
+      const lastSubItem = subReorderGroup.lastElementChild;
+      const topBefore = lastSubItem.getBoundingClientRect().top;
+
+      subReorderGroup.classList.add('reorder-list-active');
+
+      expect(lastSubItem.getBoundingClientRect().top).toBe(topBefore);
+    });
+  });
+
   describe('subItems', () => {
     it('should render a kirby-item for each item in subitems array', () => {
       expect(spectator.queryAll('kirby-card ion-reorder-group kirby-item').length).toBe(
