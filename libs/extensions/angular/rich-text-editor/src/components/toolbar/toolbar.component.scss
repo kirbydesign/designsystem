@@ -2,11 +2,10 @@ kirby-x-rich-text-editor-toolbar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--kirby-spacing-xxxxs);
-  padding: var(--kirby-spacing-xxs) var(--kirby-spacing-m);
+  gap: var(--kirby-spacing-xxs);
+  padding: var(--kirby-spacing-xxs);
+  padding-inline-start: var(--kirby-spacing-s);
   border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
-  border-radius: var(--kirby-border-radius-xl) var(--kirby-border-radius-xl) 0 0;
-  background: var(--kirby-color-fill-base);
   color: var(--kirby-color-content-base);
 
   &.editor-empty-toolbar {
@@ -14,6 +13,7 @@ kirby-x-rich-text-editor-toolbar {
   }
 
   > button[kirby-button].icon-only {
+    margin: 0;
     min-width: var(--kirby-size-fat-finger);
     min-height: var(--kirby-size-fat-finger);
     padding: var(--kirby-spacing-xxs);
@@ -24,42 +24,11 @@ kirby-x-rich-text-editor-toolbar {
     border-color: transparent;
     min-height: var(--kirby-size-fat-finger);
     font-weight: var(--kirby-font-weight-normal);
-    box-shadow: none;
   }
 
-  button[aria-pressed='true'] {
-    background: var(--kirby-color-fill-base-active);
-    color: var(--kirby-color-content-base-active);
-    border-color: currentcolor;
-  }
-
-  button[kirby-button]:focus-visible {
-    outline: var(--kirby-stroke-xs) solid transparent;
-    border-color: var(--kirby-color-border-focus);
-    box-shadow: var(--kirby-focus-ring-md-combined-inset);
-  }
-}
-
-.kirby-rich-text-style-option {
-  display: block;
-  width: 100%;
-  min-height: var(--kirby-spacing-xxxl);
-  padding: var(--kirby-spacing-s) var(--kirby-spacing-m);
-  border: 0;
-  background: var(--kirby-color-fill-base);
-  color: var(--kirby-color-content-base);
-  font: inherit;
-  text-align: start;
-  cursor: pointer;
-
-  &:hover,
-  &.keyboard-focused {
-    background: var(--kirby-color-fill-base-hover);
-    color: var(--kirby-color-content-base-hover);
-  }
-
-  &:focus-visible {
-    outline: var(--kirby-stroke-xs) solid transparent;
-    box-shadow: var(--kirby-focus-ring-md-inset);
+  > button[kirby-button].no-decoration[aria-pressed='true'] {
+    --kirby-button-background-color: var(--kirby-color-fill-base-active);
+    --kirby-button-color: var(--kirby-color-content-base-active);
+    --kirby-button-border-color: currentcolor;
   }
 }

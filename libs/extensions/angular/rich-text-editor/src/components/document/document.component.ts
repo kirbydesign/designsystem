@@ -34,13 +34,13 @@ const commands = {
 } as const;
 
 @Component({
-  selector: 'kirby-x-rich-text-editor-writing-area',
-  templateUrl: './writing-area.component.html',
-  styleUrl: './writing-area.component.scss',
+  selector: 'kirby-x-rich-text-editor-document',
+  templateUrl: './document.component.html',
+  styleUrl: './document.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class WritingAreaComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class DocumentComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() value = '';
   @Input() config: RichTextEditorConfig = {};
   @Input() placeholder = '';

@@ -1,18 +1,20 @@
+import { AfterViewInit, Component, provideZonelessChangeDetection, viewChild } from '@angular/core';
 import {
   applicationConfig,
   argsToTemplate,
-  Meta,
+  type Meta,
   moduleMetadata,
-  StoryObj,
+  type StoryObj,
 } from '@storybook/angular';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { Extension, textInputRule, textPasteRule } from '@tiptap/core';
 import {
   RichTextEditorComponent,
   RichTextEditorConfig,
   RichTextEditorLabels,
-  RichTextEditorToolbarItem,
+  richTextToolbar,
 } from '@kirbydesign/extensions-angular/rich-text-editor';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
@@ -22,27 +24,40 @@ const initialValue =
 const danishLabels: RichTextEditorLabels = {
   editor: 'Sagsnoter',
   placeholder: 'Skriv en note...',
-  bold: 'Fed',
-  italic: 'Kursiv',
-  underline: 'Understreget',
-  bulletList: 'Punktopstilling',
-  orderedList: 'Nummereret liste',
+  toolbar: 'Tekstformatering',
+};
+
+const danishTextStyleLabels = {
+  label: 'Teksttype',
+  normal: 'Normal tekst',
   heading1: 'Overskrift 1',
   heading2: 'Overskrift 2',
   heading3: 'Overskrift 3',
-  normal: 'Normal tekst',
-  toolbar: 'Tekstformatering',
-  textStyle: 'Teksttype',
 };
 
-const fullToolbarItems: RichTextEditorToolbarItem[] = [
-  'bold',
-  'italic',
-  'underline',
-  'bulletList',
-  'orderedList',
-  'textStyle',
+const danishToolbarItems = [
+  richTextToolbar.bold('Fed'),
+  richTextToolbar.textStyle(danishTextStyleLabels),
 ];
+
+const englishToolbar = {
+  bold: richTextToolbar.bold('Bold'),
+  italic: richTextToolbar.italic('Italic'),
+  underline: richTextToolbar.underline('Underline'),
+  bulletList: richTextToolbar.bulletList('Unordered list'),
+  orderedList: richTextToolbar.orderedList('Ordered list'),
+  textStyle: richTextToolbar.textStyle({
+    label: 'Text style',
+    normal: 'Normal',
+    heading1: 'Heading 1',
+    heading2: 'Heading 2',
+    heading3: 'Heading 3',
+  }),
+};
+
+const fullToolbarConfig: RichTextEditorConfig = {
+  toolbarItems: Object.values(englishToolbar),
+};
 
 const emojiShortcuts = Extension.create({
   name: 'emojiShortcuts',
@@ -55,22 +70,26 @@ const emojiShortcuts = Extension.create({
 });
 
 const inputRulesConfig: RichTextEditorConfig = {
+  ...fullToolbarConfig,
   extensions: [emojiShortcuts],
   enableInputRules: ['emojiShortcuts'],
 };
 
 const pasteRulesConfig: RichTextEditorConfig = {
+  ...fullToolbarConfig,
   extensions: [emojiShortcuts],
   enablePasteRules: [emojiShortcuts],
 };
 
 @Component({
   selector: 'kirby-x-rich-text-editor-focus-example',
-  imports: [RichTextEditorComponent],
+  imports: [CardComponent, RichTextEditorComponent],
   template: `
-    <kirby-x-rich-text-editor
-      [labels]="{ editor: 'New message', placeholder: 'Write a message...' }"
-    />
+    <kirby-card>
+      <kirby-x-rich-text-editor
+        [labels]="{ editor: 'New message', placeholder: 'Write a message...' }"
+      />
+    </kirby-card>
   `,
 })
 class FocusOnEntryExampleComponent implements AfterViewInit {
@@ -94,7 +113,7 @@ const meta: Meta<EditorStoryArgs> = {
   component: RichTextEditorComponent,
   decorators: [
     moduleMetadata({
-      imports: [ButtonComponent, FocusOnEntryExampleComponent],
+      imports: [ButtonComponent, CardComponent, FocusOnEntryExampleComponent],
     }),
   ],
   parameters: {
@@ -103,7 +122,6 @@ const meta: Meta<EditorStoryArgs> = {
       include: [
         'value',
         'config',
-        'toolbarItems',
         'labels',
         'readonly',
         'aria-describedby',
@@ -119,56 +137,9 @@ const meta: Meta<EditorStoryArgs> = {
     docs: {
       description: {
         component: `
-A Tiptap-based rich text editor with Kirby controls and an HTML value.
-Supports paragraphs, Heading 1–3, bold, italic, underline, unordered/ordered lists, line breaks and undo/redo.
-
-Import \`RichTextEditorComponent\` from \`@kirbydesign/extensions-angular/rich-text-editor\`
-and bind content with \`[(value)]="html"\`. Markdown conversion is the consumer's responsibility.
-Programmatic value updates do not emit \`valueChange\` or create undo entries.
-
-### Configuration and toolbar
-\`config\` adds Tiptap extensions and selectively enables input/paste rules. It is read once
-when the editor is created; replacing it afterward throws an error. Keep it in a stable property.
-Rules are disabled by default; enable all with true or select extensions by name/instance.
-\`toolbarItems\` selects and orders existing controls; an empty array hides the controls.
-\`labels\` partially overrides all wording, including the placeholder and textbox name, and is
-read once during initialization. Recreate the editor to apply different labels.
-\`toolbarItems\` supports runtime updates without resetting the editor. Hiding controls does not
-remove formats from the schema or disable their keyboard shortcuts.
-
-### Sizing
-Set CSS custom properties on the editor host: \`--kirby-x-rich-text-editor-min-height\`
-and \`--kirby-x-rich-text-editor-max-height\`. They size the writing area including padding,
-not the toolbar. Content grows to the maximum, then scrolls while the toolbar stays visible.
-Set both to the same value for a fixed height, and keep the maximum at least as large as the minimum.
-Custom values apply on desktop and mobile and can change through CSS without recreating the editor.
-Without overrides the existing responsive minimum remains, with no maximum.
-
-### Keyboard and accessibility
-Provide a meaningful \`labels.editor\` and optionally \`aria-describedby\` referencing visible help.
-Tab/Shift+Tab navigate without trapping focus in lists; native buttons support Enter/Space.
-Use Ctrl/Cmd+B, I or U for formatting, Ctrl/Cmd+Shift+8/7 for lists,
-Ctrl/Cmd+Alt+0–3 for paragraph/headings, and Ctrl/Cmd+Z/Shift+Z for undo/redo.
-The toolbar stays in normal document flow at every screen size; controls wrap when necessary.
-Formatting controls use Kirby icons; undo/redo are available through keyboard shortcuts or
-\`execute(action)\`, not toolbar buttons.
-Screen-reader and physical mobile-keyboard assessment are still required before production use;
-this is not an accessibility compliance certification.
-
-### Pasted HTML
-By default Tiptap's schema preserves supported formatting such as \`<b>\`/\`<strong>\` but excludes
-unsupported nodes such as iframes. Additional extensions may change the schema. This is not
-a general-purpose security sanitizer for HTML stored or
-rendered elsewhere. Keep Tiptap and its transitive ProseMirror dependencies updated.
-
-### Programmatic controls
-Call \`editor.focus()\` or \`editor.blur()\` through a template reference or \`ViewChild\`.
-To focus on page entry, call \`focus()\` from the parent's \`ngAfterViewInit\`, once the child
-editor is initialized. For a cached page, call it from the page-enter lifecycle instead.
-See the standalone Focus On Entry story; automatic focus is opt-in and mobile browsers may
-require a user gesture to open the software keyboard.
-No created event or raw Tiptap instance is required. \`execute(action)\` supports bold, italic,
-underline, bulletList, orderedList, undo and redo; \`setBlock(level)\` accepts 0 (paragraph) or 1–3.
+An HTML rich text editor with consumer-selected controls and labels.
+Supports headings, text formatting and ordered/unordered lists.
+Place inside a kirby-card for background, rounded corners and elevation.
 `,
       },
     },
@@ -176,31 +147,24 @@ underline, bulletList, orderedList, undo and redo; \`setBlock(level)\` accepts 0
   argTypes: {
     value: {
       control: 'text',
-      description: 'HTML content. Supports two-way binding through valueChange.',
+      description: 'HTML value with two-way binding. Schema filtering is not HTML sanitization.',
       table: { category: 'Inputs', defaultValue: { summary: "''" } },
     },
     config: {
       control: false,
       description:
-        'Initialization-only RichTextEditorConfig: additional Tiptap extensions and native enableInputRules/enablePasteRules options. Rules default to false. Replacing config after initialization throws; do not mutate it.',
+        'Labelled toolbarItems, Tiptap extensions and input/paste rules. Initialization-only; no controls or rules by default.',
       table: { category: 'Inputs', defaultValue: { summary: '{}' } },
-    },
-    toolbarItems: {
-      control: 'object',
-      description:
-        'Ordered, unique controls: bold, italic, underline, bulletList, orderedList, textStyle. Defaults to all six. Empty hides controls; does not restrict document formats. Runtime updates preserve the editor.',
-      table: { category: 'Inputs', defaultValue: { summary: 'All supported controls' } },
     },
     readonly: {
       control: 'boolean',
-      description:
-        'Prevents editing and disables formatting controls while retaining focusability.',
+      description: 'Disables editing and controls while retaining focusability.',
       table: { category: 'Inputs', defaultValue: { summary: 'false' } },
     },
     labels: {
       control: false,
       description:
-        'Initialization-only Partial<RichTextEditorLabels>: editor name, placeholder, labels, tooltips, headings and accessible toolbar names. Omitted keys keep English defaults. Recreate the editor to apply different labels.',
+        'Editor name, placeholder and toolbar group label. Initialization-only; English defaults.',
       table: { category: 'Inputs', defaultValue: { summary: '{}' } },
     },
     'aria-describedby': {
@@ -253,17 +217,19 @@ underline, bulletList, orderedList, undo and redo; \`setBlock(level)\` accepts 0
   args: {
     value: initialValue,
     labels: { editor: 'Case notes', placeholder: 'Write a note...' },
-    toolbarItems: fullToolbarItems,
+    config: fullToolbarConfig,
     readonly: false,
     'aria-describedby': '',
   },
   render: (args) => ({
     props: args,
     template: `
-      <kirby-x-rich-text-editor
-        ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
-        [(value)]="value"
-      />
+      <kirby-card>
+        <kirby-x-rich-text-editor
+          ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
+          [(value)]="value"
+        />
+      </kirby-card>
     `,
   }),
 };
@@ -274,8 +240,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Edit HTML using the built-in toolbar. The value control accepts programmatic HTML updates.',
+        story: 'Bind HTML with [(value)] and select controls in config.toolbarItems.',
       },
     },
   },
@@ -292,15 +257,119 @@ export const Empty: Story = {
   },
 };
 
+export const WithoutToolbar: Story = {
+  args: { config: {} },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Omit config.toolbarItems for no controls. Content and keyboard formatting remain available.',
+      },
+    },
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-card>
+        <kirby-x-rich-text-editor
+          ${argsToTemplate(args, { exclude: ['config', 'valueChange'] })}
+        />
+      </kirby-card>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
+    await expect(canvas.queryByRole('group', { name: 'Text formatting' })).toBeNull();
+    await expect(textbox.querySelector('strong')).toHaveTextContent('bold');
+    await expect(textbox.querySelector('ul')).not.toBeNull();
+  },
+};
+
 export const ReadOnly: Story = {
   args: { readonly: true },
   parameters: {
     docs: {
       description: {
-        story:
-          'Read-only content remains focusable and selectable; formatting controls are disabled.',
+        story: 'Read-only content remains focusable and selectable.',
       },
     },
+  },
+};
+
+export const WithoutBackground: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use without a card for a transparent editor on the surrounding surface.',
+      },
+    },
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <kirby-x-rich-text-editor
+        ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
+        [(value)]="value"
+      />
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
+    const toolbar = canvas.getByRole('group', { name: 'Text formatting' });
+    const editor = textbox.closest('kirby-x-rich-text-editor');
+    if (!editor) throw new Error('Editor is missing');
+    for (const element of [editor, toolbar, textbox]) {
+      await expect(getComputedStyle(element).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    }
+    await userEvent.clear(textbox);
+    await userEvent.type(textbox, 'A note');
+    await userEvent.click(canvas.getByRole('button', { name: 'Bold' }));
+    await userEvent.keyboard(' bold');
+    await waitFor(() => expect(textbox.querySelector('strong')).toHaveTextContent('bold'));
+  },
+};
+
+export const Surfaces: Story = {
+  args: { value: '' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The card variant sets the surface for the editor and its controls.',
+      },
+    },
+  },
+  render: (args) => ({
+    props: { ...args, surfaces: ['base', 'raised', 'brand'] },
+    template: `
+      <section aria-label="Surface examples" style="--kirby-x-rich-text-editor-min-height: 6rem">
+        @for (surface of surfaces; track surface) {
+          <h3>{{ surface }} surface</h3>
+          <kirby-card [variant]="surface">
+            <kirby-x-rich-text-editor
+              ${argsToTemplate(args, { exclude: ['labels', 'valueChange'] })}
+              [labels]="{ editor: surface + ' surface', placeholder: labels.placeholder }"
+            />
+          </kirby-card>
+        }
+      </section>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await canvas.findByRole('textbox', { name: 'base surface' });
+    const fills: string[] = [];
+    for (const card of canvasElement.querySelectorAll<HTMLElement>('kirby-card')) {
+      const toolbar = within(card).getByRole('group', { name: 'Text formatting' });
+      const textbox = within(card).getByRole('textbox');
+      await expect(getComputedStyle(toolbar).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+      await expect(getComputedStyle(textbox).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+      await expect(getComputedStyle(toolbar).color).toBe(getComputedStyle(card).color);
+      await expect(getComputedStyle(textbox).color).toBe(getComputedStyle(card).color);
+      fills.push(getComputedStyle(card).backgroundColor);
+    }
+    await expect(new Set(fills).size).toBe(3);
   },
 };
 
@@ -310,7 +379,7 @@ export const CustomHeight: Story = {
     docs: {
       description: {
         story:
-          'CSS custom properties give the writing area an 8rem minimum and 16rem maximum, including padding. Add content to reach the maximum and scroll; the toolbar remains visible. Set both properties to the same value for a fixed height. Overrides also apply on small screens.',
+          'Set minimum and maximum writing-area heights with CSS custom properties. Equal values give a fixed height.',
       },
     },
   },
@@ -321,11 +390,13 @@ export const CustomHeight: Story = {
     },
     template: `
       <button kirby-button size="sm" (click)="value = longValue">Load long note</button>
-      <kirby-x-rich-text-editor
-        style="--kirby-x-rich-text-editor-min-height: 8rem; --kirby-x-rich-text-editor-max-height: 16rem; margin-block-start: var(--kirby-spacing-s)"
-        ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
-        [(value)]="value"
-      />
+      <kirby-card style="margin-block-start: var(--kirby-spacing-s)">
+        <kirby-x-rich-text-editor
+          style="--kirby-x-rich-text-editor-min-height: 8rem; --kirby-x-rich-text-editor-max-height: 16rem"
+          ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
+          [(value)]="value"
+        />
+      </kirby-card>
     `,
   }),
   play: async ({ canvasElement }) => {
@@ -356,12 +427,56 @@ export const CustomHeight: Story = {
 };
 
 export const CustomLabels: Story = {
-  args: { labels: danishLabels },
+  args: { labels: danishLabels, config: { toolbarItems: danishToolbarItems } },
   parameters: {
     docs: {
       description: {
         story:
-          'Provide labels when creating the editor, including the textbox name, placeholder, headings, tooltips and accessible toolbar names.',
+          'Supply labels only for selected controls. Resolve translated strings before creating the editor.',
+      },
+      source: {
+        language: 'typescript',
+        code: `import { Component } from '@angular/core';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import {
+  RichTextEditorComponent,
+  RichTextEditorConfig,
+  richTextToolbar,
+} from '@kirbydesign/extensions-angular/rich-text-editor';
+
+@Component({
+  selector: 'app-note-editor',
+  imports: [CardComponent, RichTextEditorComponent],
+  template: \`
+    <kirby-card>
+      <kirby-x-rich-text-editor
+        [(value)]="value"
+        [config]="config"
+        [labels]="labels"
+      />
+    </kirby-card>
+  \`,
+})
+export class NoteEditorComponent {
+  value = '';
+  readonly labels = {
+    editor: 'Sagsnoter',
+    placeholder: 'Skriv en note...',
+    toolbar: 'Tekstformatering',
+  };
+  readonly config: RichTextEditorConfig = {
+    toolbarItems: [
+      richTextToolbar.bold('Fed'),
+      richTextToolbar.textStyle({
+        label: 'Teksttype',
+        normal: 'Normal tekst',
+        heading1: 'Overskrift 1',
+        heading2: 'Overskrift 2',
+        heading3: 'Overskrift 3',
+      }),
+    ],
+  };
+}`,
       },
     },
   },
@@ -370,53 +485,56 @@ export const CustomLabels: Story = {
     const textbox = await canvas.findByRole('textbox', { name: danishLabels.editor });
     await expect(textbox).toHaveAttribute('aria-placeholder', danishLabels.placeholder);
     await expect(canvas.getByRole('group', { name: danishLabels.toolbar })).toBeVisible();
-    await expect(canvas.getByRole('button', { name: danishLabels.bold })).toBeVisible();
-    const dropdown = canvas.getByRole('combobox', { name: danishLabels.textStyle });
+    await expect(canvas.getByRole('button', { name: 'Fed' })).toBeVisible();
+    await expect(canvas.queryByRole('button', { name: 'Italic' })).toBeNull();
+    const dropdown = canvas.getByRole('combobox', { name: danishTextStyleLabels.label });
     await userEvent.click(dropdown);
-    const popup = within(canvasElement.ownerDocument.body);
-    const heading = await popup.findByRole('option', { name: danishLabels.heading1 });
-    await expect(popup.getByRole('option', { name: danishLabels.heading2 })).toBeVisible();
-    await expect(popup.getByRole('option', { name: danishLabels.heading3 })).toBeVisible();
-    await expect(popup.getByRole('option', { name: danishLabels.normal })).toBeVisible();
+    const popup = within(await within(canvasElement.ownerDocument.body).findByRole('listbox'));
+    const heading = await popup.findByText(danishTextStyleLabels.heading1);
+    await expect(popup.getByText(danishTextStyleLabels.heading2)).toBeVisible();
+    await expect(popup.getByText(danishTextStyleLabels.heading3)).toBeVisible();
+    await expect(popup.getByText(danishTextStyleLabels.normal)).toBeVisible();
     await userEvent.click(heading);
     await waitFor(() => {
-      expect(dropdown).toHaveTextContent(danishLabels.heading1);
+      expect(dropdown).toHaveTextContent(danishTextStyleLabels.heading1);
       expect(textbox.querySelector('h1')).not.toBeNull();
     });
   },
 };
 
 export const CustomToolbar: Story = {
-  args: { toolbarItems: ['textStyle', 'bold', 'orderedList'] },
+  args: {
+    config: {
+      toolbarItems: [englishToolbar.textStyle, englishToolbar.bold, englishToolbar.orderedList],
+    },
+  },
   parameters: {
     docs: {
       description: {
-        story:
-          'Choose and order controls, then change controls at runtime without resetting the editor. Removing controls does not disable keyboard formatting or supported pasted content.',
+        story: 'Choose controls and their order in config.toolbarItems before initialization.',
       },
     },
   },
-  render: (args) => ({
-    props: { ...args, fullToolbarItems },
-    template: `
-      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-block-end: 16px">
-        <button kirby-button size="sm" (click)="toolbarItems = ['italic', 'bold']">Compact toolbar</button>
-        <button kirby-button size="sm" (click)="toolbarItems = []">Hide controls</button>
-        <button kirby-button size="sm" (click)="toolbarItems = fullToolbarItems">Full toolbar</button>
-      </div>
-      <kirby-x-rich-text-editor
-        ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
-        [(value)]="value"
-      />
-      <pre style="white-space: pre-wrap; overflow-wrap: anywhere">{{ value }}</pre>
-    `,
-  }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
-    const content = textbox.innerHTML;
     const toolbar = canvas.getByRole('group', { name: 'Text formatting' });
     await expect(getComputedStyle(toolbar).display).toBe('flex');
+    await expect(getComputedStyle(toolbar).gap).toBe('8px');
+    await expect(getComputedStyle(toolbar).paddingInlineStart).toBe('16px');
+    await expect(getComputedStyle(toolbar).paddingInlineEnd).toBe('8px');
+    await expect(getComputedStyle(toolbar).paddingTop).toBe('8px');
+    await expect(getComputedStyle(toolbar).paddingBottom).toBe('8px');
+    const controlBounds = Array.from(toolbar.children, (control) =>
+      control.getBoundingClientRect()
+    );
+    await expect(controlBounds[0].left - toolbar.getBoundingClientRect().left).toBe(16);
+    await expect(controlBounds[0].top - toolbar.getBoundingClientRect().top).toBe(8);
+    for (let index = 1; index < controlBounds.length; index++) {
+      if (controlBounds[index].top === controlBounds[index - 1].top) {
+        await expect(controlBounds[index].left - controlBounds[index - 1].right).toBe(8);
+      }
+    }
     await userEvent.click(textbox);
     await expect(getComputedStyle(toolbar).position).toBe('static');
     const items = () =>
@@ -424,14 +542,9 @@ export const CustomToolbar: Story = {
         item.getAttribute('data-toolbar-item')
       );
     await expect(items()).toEqual(['textStyle', 'bold', 'orderedList']);
-    await userEvent.click(canvas.getByRole('button', { name: 'Compact toolbar' }));
-    await waitFor(() => expect(items()).toEqual(['italic', 'bold']));
-    await userEvent.click(canvas.getByRole('button', { name: 'Hide controls' }));
-    await waitFor(() => expect(items()).toEqual([]));
-    await userEvent.click(canvas.getByRole('button', { name: 'Full toolbar' }));
-    await waitFor(() => expect(items()).toEqual(fullToolbarItems));
-    await expect(canvas.getByRole('textbox', { name: 'Case notes' })).toBe(textbox);
-    await expect(textbox.innerHTML).toBe(content);
+    await expect(canvas.queryByRole('button', { name: 'Italic' })).toBeNull();
+    await userEvent.click(canvas.getByRole('button', { name: 'Ordered list' }));
+    await waitFor(() => expect(textbox.querySelector('ol')).not.toBeNull());
   },
 };
 
@@ -440,8 +553,7 @@ export const CustomInputRules: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Type :) to insert an emoji through a consumer-provided Tiptap extension. Only this extension’s input rules are enabled; its paste rules and StarterKit input rules remain disabled. No Markdown conversion is added.',
+        story: 'Enable a Tiptap input rule to replace :) with an emoji while typing.',
       },
     },
   },
@@ -451,11 +563,13 @@ export const CustomInputRules: Story = {
       editorConfig: inputRulesConfig,
     },
     template: `
-      <kirby-x-rich-text-editor
-        ${argsToTemplate(args, { exclude: ['value', 'valueChange', 'config'] })}
-        [config]="editorConfig"
-        [(value)]="value"
-      />
+      <kirby-card>
+        <kirby-x-rich-text-editor
+          ${argsToTemplate(args, { exclude: ['value', 'valueChange', 'config'] })}
+          [config]="editorConfig"
+          [(value)]="value"
+        />
+      </kirby-card>
       <pre style="white-space: pre-wrap; overflow-wrap: anywhere">{{ value }}</pre>
     `,
   }),
@@ -474,8 +588,7 @@ export const CustomPasteRules: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Paste :) to insert an emoji. This selects paste rules by extension instance while leaving input rules disabled, so typing :) does not replace it.',
+        story: 'Enable a Tiptap paste rule to replace :) with an emoji when pasting.',
       },
     },
   },
@@ -485,11 +598,13 @@ export const CustomPasteRules: Story = {
       editorConfig: pasteRulesConfig,
     },
     template: `
-      <kirby-x-rich-text-editor
-        ${argsToTemplate(args, { exclude: ['value', 'valueChange', 'config'] })}
-        [config]="editorConfig"
-        [(value)]="value"
-      />
+      <kirby-card>
+        <kirby-x-rich-text-editor
+          ${argsToTemplate(args, { exclude: ['value', 'valueChange', 'config'] })}
+          [config]="editorConfig"
+          [(value)]="value"
+        />
+      </kirby-card>
       <pre style="white-space: pre-wrap; overflow-wrap: anywhere">{{ value }}</pre>
     `,
   }),
@@ -509,8 +624,7 @@ export const FocusOnEntry: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story:
-          'A consumer component calls the public focus() method from ngAfterViewInit. This example is excluded from autodocs so it does not steal focus while reading documentation. Mobile browsers may require a user gesture to open their software keyboard.',
+        story: "Opt into autofocus by calling focus() from the parent's ngAfterViewInit.",
       },
     },
   },
@@ -533,12 +647,12 @@ export const ProgrammaticControls: Story = {
     docs: {
       description: {
         story:
-          'Use a template reference (or ViewChild in TypeScript) to call focus/blur directly. Content remains bound through value; no editorCreated event is necessary. This story explicitly uses zoneless change detection.',
+          'Call public methods through a template reference. This example uses zoneless change detection.',
       },
     },
   },
   render: (args) => ({
-    props: { ...args, fullToolbarItems },
+    props: args,
     template: `
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-block-end: 16px">
         <button kirby-button size="sm" (click)="editor.focus()">Focus editor</button>
@@ -546,14 +660,14 @@ export const ProgrammaticControls: Story = {
         <button kirby-button size="sm" (click)="value = '<p>Loaded <strong>HTML</strong> content.</p>'">Load HTML</button>
         <button kirby-button size="sm" (click)="value = ''">Clear</button>
         <button kirby-button size="sm" (click)="readonly = !readonly">Toggle read-only</button>
-        <button kirby-button size="sm" (click)="toolbarItems = toolbarItems.length ? [] : fullToolbarItems">Toggle controls</button>
       </div>
-      <kirby-x-rich-text-editor
-        #editor
-        ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
-        [(value)]="value"
-      />
-      <p>Editor focused: {{ editor.focused() }}</p>
+      <kirby-card>
+        <kirby-x-rich-text-editor
+          #editor
+          ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
+          [(value)]="value"
+        />
+      </kirby-card>
       <h3>HTML output</h3>
       <pre style="white-space: pre-wrap; overflow-wrap: anywhere">{{ value }}</pre>
     `,
@@ -566,7 +680,6 @@ export const ProgrammaticControls: Story = {
     await expect(await canvas.findByText('Write a note...')).toBeVisible();
     await userEvent.click(canvas.getByRole('button', { name: 'Focus editor' }));
     await waitFor(() => expect(textbox).toHaveFocus());
-    await expect(await canvas.findByText('Editor focused: true')).toBeVisible();
     await userEvent.type(textbox, 'A note');
     const html = canvasElement.querySelector('pre');
     await waitFor(() => expect(html).toHaveTextContent('<p>A note</p>'));
@@ -580,8 +693,6 @@ export const ProgrammaticControls: Story = {
     await userEvent.keyboard(' bold');
     await waitFor(() => expect(html).toHaveTextContent('<p>A note<strong> bold</strong></p>'));
     await userEvent.click(canvas.getByRole('button', { name: 'Blur editor' }));
-    await waitFor(() => expect(canvas.getByText('Editor focused: false')).toBeVisible());
-    await expect(textbox).not.toHaveFocus();
+    await waitFor(() => expect(textbox).not.toHaveFocus());
   },
 };
-import { AfterViewInit, Component, provideZonelessChangeDetection, viewChild } from '@angular/core';

@@ -1,6 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-kirby-x-rich-text-editor-writing-area {
+kirby-x-rich-text-editor-document {
   display: block;
   position: relative;
 
@@ -24,7 +24,6 @@ kirby-x-rich-text-editor-writing-area {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     line-height: var(--kirby-line-height-n);
-    border-radius: var(--kirby-border-radius-xl);
 
     &:focus-visible {
       outline: var(--kirby-stroke-xs) solid transparent;
@@ -51,10 +50,6 @@ kirby-x-rich-text-editor-writing-area {
     ol {
       padding-inline-start: var(--kirby-spacing-l);
     }
-  }
-
-  &.with-toolbar .kirby-rich-text-document {
-    border-radius: 0 0 var(--kirby-border-radius-xl) var(--kirby-border-radius-xl);
   }
 
   @include utils.media('<=small') {

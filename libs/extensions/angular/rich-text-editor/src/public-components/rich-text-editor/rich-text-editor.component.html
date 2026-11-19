@@ -1,17 +1,13 @@
-<div class="kirby-rich-text-shell">
-  <kirby-x-rich-text-editor-toolbar [editor]="this" />
-  <kirby-x-rich-text-editor-writing-area
-    class="kirby-rich-text-writing-area"
-    [class.with-toolbar]="toolbarItems.length > 0"
-    [value]="value"
-    [config]="config"
-    [placeholder]="resolvedLabels().placeholder"
-    [readonly]="readonly"
-    [ariaLabel]="resolvedLabels().editor"
-    [ariaDescribedby]="ariaDescribedby"
-    (valueChange)="valueChange.emit($event)"
-    (stateChange)="editorState.set($event)"
-    (editorFocus)="onFocus()"
-    (editorBlur)="onBlur()"
-  />
-</div>
+<kirby-x-rich-text-editor-toolbar [editor]="this" />
+<kirby-x-rich-text-editor-document
+  [value]="value"
+  [config]="config"
+  [placeholder]="resolvedLabels().placeholder"
+  [readonly]="readonly"
+  [ariaLabel]="resolvedLabels().editor"
+  [ariaDescribedby]="ariaDescribedby"
+  (valueChange)="valueChange.emit($event)"
+  (stateChange)="editorState.set($event)"
+  (editorFocus)="editorFocus.emit()"
+  (editorBlur)="editorBlur.emit()"
+/>
