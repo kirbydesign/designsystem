@@ -1,23 +1,17 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-ion-backdrop {
-  opacity: 0.3;
-  z-index: 101;
-  position: fixed;
-}
-
 .reorder-selected {
   box-shadow: none;
   opacity: 1;
   z-index: 104;
 
   kirby-card {
-    transform: scale(1.05, 1.05);
+    transform: scale(1.05);
   }
 
   @include utils.slotted('kirby-item') {
-    box-shadow: 0 0 10px rgb(0 0 0 / 40%);
-    transform: scale(1.05, 1.05);
+    outline: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
+    transform: scale(1.05);
     border-radius: var(--kirby-border-radius-n);
     overflow: hidden;
   }
@@ -41,8 +35,8 @@ ion-backdrop {
 
   .reorder-selected {
     @include utils.slotted('kirby-item') {
-      box-shadow: 0 0 10px rgb(0 0 0 / 40%);
-      transform: scale(1.05, 1.05);
+      outline: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
+      transform: scale(1.05);
       border-radius: var(--kirby-border-radius-n);
       overflow: hidden;
     }
