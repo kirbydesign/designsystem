@@ -173,6 +173,32 @@ ion-item {
   --min-height: #{utils.$dropdown-item-height};
 }
 
+// Selectable options don't render a native button (see _renderButton),
+// so apply the interaction states Ionic only gives clickable items:
+ion-item.selectable-option {
+  cursor: pointer;
+
+  @media (any-hover: hover) {
+    &:hover::part(native) {
+      color: var(--color-hover);
+    }
+
+    &:hover::part(native)::after {
+      background: var(--background-hover);
+      opacity: var(--background-hover-opacity);
+    }
+  }
+
+  &:active::part(native) {
+    color: var(--color-activated);
+  }
+
+  &:active::part(native)::after {
+    background: var(--background-activated);
+    opacity: var(--background-activated-opacity);
+  }
+}
+
 // Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
 :host(.keyboard-focused) ion-item,
 :host-context(kirby-popover .keyboard-focused) ion-item {
