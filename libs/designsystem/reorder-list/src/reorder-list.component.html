@@ -12,7 +12,7 @@
           "
         ></ng-container>
         @if (reorderItem[subItemsName]) {
-          <div #reorderGroupContainer>
+          <div class="sub-items" #reorderGroupContainer>
             <ion-reorder-group
               (ionItemReorder)="doSubReorder($event, reorderItem)"
               disabled="false"

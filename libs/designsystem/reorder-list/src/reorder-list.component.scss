@@ -13,10 +13,6 @@ ion-backdrop {
 
   kirby-card {
     transform: scale(1.05, 1.05);
-
-    & div:first-child {
-      border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
-    }
   }
 
   @include utils.slotted('kirby-item') {
@@ -35,10 +31,6 @@ ion-backdrop {
 
   & > .reorder-selected {
     z-index: 104;
-  }
-
-  & div:first-child {
-    border-top: none;
   }
 
   @include utils.slotted('div:last-child kirby-item') {
@@ -82,8 +74,8 @@ kirby-card {
   @include utils.slotted('div .reorder-list-active kirby-item') {
     z-index: 103;
   }
+}
 
-  & div:first-child {
-    border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
-  }
+.sub-items {
+  border-top: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
 }
