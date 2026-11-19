@@ -13,6 +13,7 @@ import {
   OnInit,
   Output,
   Renderer2,
+  SimpleChanges,
   TemplateRef,
   TrackByFunction,
   ViewChild,
@@ -212,7 +213,17 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes?: SimpleChanges): void {
+    if (
+      changes?.items &&
+      !changes.items.firstChange &&
+      this.isLoadOnDemandEnabled &&
+      !this._isLoading
+    ) {
+      // Load more if the list still doesn't fill the view, e.g. when items are loaded asynchronously
+      this.scrollDirective?.checkScrollPosition();
+    }
+
     this._isSectionsEnabled = !!this.getSectionName;
     this._isStandAloneEnabled = !!this.getStandAloneByProperty;
 
