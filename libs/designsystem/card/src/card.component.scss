@@ -71,7 +71,6 @@
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: inherit;
       pointer-events: none;
       z-index: interaction-state.$state-layer-z-index;
       background-color: var(--kirby-card-color-fill-hover);
