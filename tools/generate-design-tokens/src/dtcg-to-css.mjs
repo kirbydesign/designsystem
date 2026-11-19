@@ -2,7 +2,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import StyleDictionary from 'style-dictionary';
 import { getReferences } from 'style-dictionary/utils';
-import { isVisibleFrom, routeTokens } from './routing.mjs';
+import { isVisibleFrom, ROOT_SELECTOR, routeTokens, splitSelectorList } from './routing.mjs';
 import { tokenKey } from './tokens.mjs';
 import { dimensionTransform, percentageTransform, shadowTransform } from './units.mjs';
 
@@ -20,9 +20,18 @@ const ROOT_TOKEN_REFERENCE = /\{([^{}]+\.\$root)\}/g;
  * @param {object} options.config validated by `validateConfig`
  * @param {{ file: string, tokens: object }|null} [options.baseline] DTCG document to build on;
  *   only declarations that differ from it are written
+ * @param {string|null} [options.scssMixin] writes all outputs as one SCSS mixin with this name
  * @returns {Promise<{ written: string[], warnings: string[] }>}
  */
-export async function writeCss({ routes, emissions, outDir, sourceFile, config, baseline = null }) {
+export async function writeCss({
+  routes,
+  emissions,
+  outDir,
+  sourceFile,
+  config,
+  baseline = null,
+  scssMixin = null,
+}) {
   if (emissions.length === 0 && !baseline) return { written: [], warnings: [] };
 
   const formattedBaseline = baseline ? await formatBaseline(baseline, config) : null;
@@ -38,7 +47,10 @@ export async function writeCss({ routes, emissions, outDir, sourceFile, config, 
         })
       : [];
   const blocksByOutput = groupBlocksByOutput(emissions, sourceBlocks, formattedBaseline);
-  return writeCssFiles(blocksByOutput, outDir, { reportMissingSiblingVariables: !baseline });
+  return writeCssFiles(blocksByOutput, outDir, {
+    reportMissingSiblingVariables: !baseline,
+    scssMixin,
+  });
 }
 
 async function formatBaseline(baseline, config) {
@@ -72,20 +84,25 @@ function groupBlocksByOutput(emissions, sourceBlocks, baseline) {
   return blocksByOutput;
 }
 
-function writeCssFiles(blocksByOutput, outDir, { reportMissingSiblingVariables }) {
-  const written = [];
-  const warnings = [];
-  for (const [output, blocks] of blocksByOutput) {
-    const sections = Map.groupBy(blocks, ({ emission }) => emission.section ?? '');
-    writeFileCreatingDirectories(resolve(outDir, output), renderCssFile(sections));
-    written.push(output);
-    if (reportMissingSiblingVariables) {
-      for (const sectionBlocks of sections.values()) {
-        warnings.push(...missingSiblingVariableWarnings(output, sectionBlocks));
-      }
-    }
+function writeCssFiles(blocksByOutput, outDir, { reportMissingSiblingVariables, scssMixin }) {
+  const sectionsByOutput = new Map(
+    [...blocksByOutput].map(([output, blocks]) => [
+      output,
+      Map.groupBy(blocks, ({ emission }) => emission.section ?? ''),
+    ])
+  );
+  const warnings = reportMissingSiblingVariables
+    ? [...sectionsByOutput].flatMap(([output, sections]) =>
+        [...sections.values()].flatMap((blocks) => missingSiblingVariableWarnings(output, blocks))
+      )
+    : [];
+  const files = scssMixin
+    ? new Map([[`_${scssMixin}.scss`, renderScssMixin(scssMixin, sectionsByOutput)]])
+    : new Map([...sectionsByOutput].map(([output, sections]) => [output, renderCssFile(sections)]));
+  for (const [file, contents] of files) {
+    writeFileCreatingDirectories(resolve(outDir, file), contents);
   }
-  return { written, warnings };
+  return { written: [...files.keys()], warnings };
 }
 
 async function formatEmissionBlocks({
@@ -225,6 +242,48 @@ function renderCssFile(sections) {
     parts.push(...blocks.map(({ block }) => block));
   }
   return `${FILE_HEADER}\n${parts.join('\n\n')}\n`;
+}
+
+function renderScssMixin(name, sectionsByOutput) {
+  const sections = [...sectionsByOutput.values()].flatMap((outputSections) => [...outputSections]);
+  const sectionsWhere = (predicate) =>
+    sections.map(([section, blocks]) => [section, blocks.filter(predicate)]);
+  const parts = [...sectionsWhere(isRootOnly), ...sectionsWhere((block) => !isRootOnly(block))]
+    .filter(([, blocks]) => blocks.length > 0)
+    .flatMap(([section, blocks]) => [
+      ...(section ? [sectionBanner(section)] : []),
+      ...blocks.map(renderMixinBlock),
+    ]);
+  return `${FILE_HEADER}\n@mixin ${name} {\n${indent(parts.join('\n\n'))}\n}\n`;
+}
+
+function isRootOnly({ emission }) {
+  return emission.selector === ROOT_SELECTOR;
+}
+
+function renderMixinBlock({ emission, block }) {
+  const [, ...body] = block.split('\n').slice(0, -1);
+  if (isRootOnly({ emission })) return body.map((line) => line.replace(/^ {2}/, '')).join('\n');
+  return [`${relativeToMixinHost(emission.selector)} {`, ...body, '}'].join('\n');
+}
+
+function relativeToMixinHost(selectorList) {
+  return splitSelectorList(selectorList)
+    .map((selector) => {
+      if (selector.startsWith(ROOT_SELECTOR)) return `&${selector.slice(ROOT_SELECTOR.length)}`;
+      if (selector.includes(ROOT_SELECTOR)) {
+        throw new Error(`Cannot nest "${selector}" in an SCSS mixin: ${ROOT_SELECTOR} must lead`);
+      }
+      return selector;
+    })
+    .join(',\n');
+}
+
+function indent(text) {
+  return text
+    .split('\n')
+    .map((line) => (line ? `  ${line}` : line))
+    .join('\n');
 }
 
 function sectionBanner(section) {

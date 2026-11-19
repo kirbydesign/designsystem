@@ -1,7 +1,7 @@
 import { collectLeafTokens, namedPath, referencedTokenKeys, tokenKey } from './tokens.mjs';
 
 const KEY_SEPARATOR = '\u0000';
-const ROOT_SELECTOR = ':root';
+export const ROOT_SELECTOR = ':root';
 
 export function slug(value) {
   return String(value)
@@ -20,7 +20,7 @@ export function isVisibleFrom(target, current) {
   return target.selector === ROOT_SELECTOR || target.selector === current.selector;
 }
 
-function splitSelectorList(selectorList) {
+export function splitSelectorList(selectorList) {
   return selectorList
     .split(',')
     .map((selector) => selector.trim())
