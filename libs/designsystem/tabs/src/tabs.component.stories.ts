@@ -9,8 +9,7 @@ import { TabButtonComponent, TabsComponent } from '@kirbydesign/designsystem/tab
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { responsiveModes } from 'tools/storybook-config/shared-config';
-// eslint-disable-next-line no-restricted-imports
-import { pseudoStatesFor } from '../../.storybook/story-helpers';
+import { pseudoStatesFor } from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<TabsComponent> = {
   component: TabsComponent,

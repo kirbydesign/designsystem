@@ -11,8 +11,7 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { argsToTemplate, type Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../../../designsystem/.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 
 /**
  * Spot Illustrations are visual elements that help convey complex ideas in a simple way.
