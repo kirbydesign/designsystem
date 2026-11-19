@@ -1,5 +1,37 @@
 [
   {
+    "prompt": "Implement a Kirby reactive form with a required Reference field and a Continue submit button. Emit the entered reference only on valid submission.",
+    "reference": "references/forms.md",
+    "expected": [
+      "The generated component passes the fixture's build/type-check and strict template checks.",
+      "Submitting an empty form displays an error programmatically associated with the named Reference control and emits nothing.",
+      "Submitting R-001 emits exactly R-001 once; correcting the field removes its invalid state.",
+      "Use Kirby form-field, input and button APIs without recreating their styling."
+    ]
+  },
+  {
+    "prompt": "Extend an existing Kirby reactive form with a delivery-method choice and an Address field required only for postal delivery. Preserve the address when hidden but omit it from digital-delivery submissions.",
+    "reference": "references/forms.md",
+    "expected": [
+      "The generated feature passes the fixture's build/type-check without changing bootstrap or migrating the existing form.",
+      "Postal delivery with an empty address blocks submission and exposes an associated validation message.",
+      "Switching to digital hides the address and allows an otherwise valid submission without an address property.",
+      "Switching back to postal restores the entered address and its required validation.",
+      "All controls have accessible names and use supported Kirby APIs."
+    ]
+  },
+  {
+    "prompt": "Implement a selectable Kirby list showing record titles and references. Long titles must remain readable at 320px and 1024px viewport widths. Use Kirby spacing tokens and emit the selected record.",
+    "reference": "references/collections.md",
+    "expected": [
+      "The generated feature passes the fixture's build/type-check and strict template checks.",
+      "Use Kirby list/item APIs and the required list template directive rather than custom row components.",
+      "At both specified widths, long titles remain readable and document scrollWidth does not exceed clientWidth.",
+      "Pointer and keyboard activation emit the matching record object once.",
+      "Custom spacing uses available Kirby tokens; any additional CSS addresses a requirement not met by public component APIs."
+    ]
+  },
+  {
     "prompt": "Add a simple help dialog opened by a button.",
     "reference": "references/modals.md",
     "expected": [

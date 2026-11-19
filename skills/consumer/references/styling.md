@@ -3,16 +3,17 @@
 ## Choose the styling layer
 
 1. Use the Kirby component's documented inputs, slots and variants.
-2. Compose Kirby components with a thin layout wrapper.
+2. Compose Kirby components; add layout wrappers only when needed.
 3. Use documented public component CSS variables for customization.
 4. If custom UI is still necessary, explain the missing capability and obtain agreement before
    recreating a Kirby lookalike.
 
 ## Tokens
 
-Use the application's configured Kirby global styles and theme. Check actual token names in the
-installed package before adding a token; the patterns below are naming aids, not proof every
-combination exists.
+Use Kirby tokens for design values and Kirby utilities for supported layout/responsive patterns.
+Prefer public styling APIs over duplicating Kirby styles or overriding component internals.
+Use custom values where no suitable token exists; avoid aliases that merely duplicate Kirby tokens.
+The patterns below are naming aids, not proof every combination exists.
 
 | Category      | Pattern                       | Common keys                                        |
 | ------------- | ----------------------------- | -------------------------------------------------- |

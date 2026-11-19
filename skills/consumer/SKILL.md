@@ -10,16 +10,18 @@ description: 'Build Angular UI with @kirbydesign/designsystem and optional @kirb
 1. **Establish requirements.** Identify the installed Kirby, Angular and relevant extension versions
    and intended interaction.
    Finish when both are known; ask if a missing fact affects the choice.
-2. **Choose components.** Load only the matching references below. Prefer configuring or composing
-   Kirby components over recreating them. Account for every interaction with a covered component
-   or an identified gap.
-3. **Verify APIs.** Check every introduced export, selector, binding and token against installed
-   declarations/styles. For gaps or compatibility mismatches, use the documentation index.
+2. **Choose components.** Load only the matching references below. Select Kirby components and
+   composition for the required interaction, semantics, keyboard and focus behavior.
+   Adapt the recipes to the task; identify gaps rather than forcing an unsuitable example.
+3. **Verify APIs.** Check introduced selectors, secondary-entry-point imports, input/output names
+   and types, required directives/dependencies, public CSS classes and tokens against installed
+   declarations/source/styles. For gaps or compatibility mismatches, use the documentation index.
 4. **Implement.** In new standalone code, import individual classes
    from `@kirbydesign/designsystem/<subpath>` or `@kirbydesign/extensions-angular/<subpath>`,
    including required template directives and Angular
-   forms/router imports. Adapt examples to real data and labels. Retain existing forms conventions,
-   module-based code and Angular syntax unless migration is requested.
+   forms/router imports. Preserve Kirby's built-in accessibility behavior; supply meaningful names,
+   associated validation messages, correct disabled/loading states and sufficient contrast.
+   Retain existing forms conventions, module-based code and Angular syntax unless migration is requested.
 5. **Validate.** Run existing focused build/type-check and tests. Check affected keyboard interaction,
    accessible names, focus, validation/error states, responsive layout and locale behavior.
    Report component choices, compatibility deviations, checks run and unresolved limitations.

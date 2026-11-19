@@ -14,6 +14,23 @@ not in usage recipes. Sources support maintenance and uncovered APIs, not a seco
 Resolve source changes into an explicit rule update and its evaluation cases; keep installed-API
 compatibility checks separate from intended-usage decisions.
 
+## Evaluating generated code
+
+Run generation tasks in a consumer fixture with known package versions and existing checks.
+Evaluate the implementation, not just its explanation or reference selection.
+For each applicable check below and each scenario's expected outcome, record **passed**, **failed**
+or **not run**, with command output, test results or observed behavior as evidence:
+
+- Existing build/type-check, including strict Angular template checking where supported.
+- Component selection and API/type accuracy against the installed packages.
+- Relevant keyboard, focus, accessible-name, validation and responsive behavior.
+- Kirby token/public styling API usage and any unnecessary custom CSS or wrapper components.
+
+Compilation alone does not establish accessibility or visual correctness. For missing dependencies
+or evidence, evaluate the reported limitation rather than rewarding speculative code.
+Compare old and revised skill runs using the same tasks, package versions, agent configuration and
+checks; repeat runs before attributing differences to the wording.
+
 ## Recipe provenance
 
 The index identifies component showcase/example directories and extension entry points.
