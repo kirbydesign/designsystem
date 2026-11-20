@@ -5,19 +5,11 @@ import { ReorderListComponent } from './reorder-list.component';
 
 describe('ReorderListComponent', () => {
   let spectator: Spectator<ReorderListComponent>;
-  let component: ReorderListComponent;
   const items = [
     { title: '1', subItems: [{ title: '1a' }, { title: '1b' }, { title: '1c' }] },
     { title: '2' },
     { title: '3' },
   ];
-
-  function runNgOnChanges() {
-    // Forces ngOnChanges to run (since that won't happen, when inputs are changed programmatically)
-    component.ngOnChanges();
-    // Detect changes, since ngOnChanges altered state of component
-    spectator.detectChanges();
-  }
 
   const createHost = createComponentFactory({
     component: ReorderListComponent,
@@ -33,7 +25,6 @@ describe('ReorderListComponent', () => {
         },
       },
     });
-    component = spectator.component;
   });
 
   it('should create', () => {
@@ -49,7 +40,6 @@ describe('ReorderListComponent', () => {
       spectator.setInput({
         items: null,
       });
-      runNgOnChanges();
 
       expect(spectator.component.items).toBe(null);
     });
@@ -130,7 +120,6 @@ describe('ReorderListComponent', () => {
         items: items,
         subItemsName: 'invalidName',
       });
-      runNgOnChanges();
 
       expect(spectator.queryAll('kirby-card ion-reorder-group kirby-item').length).toBe(0);
     });
@@ -141,7 +130,6 @@ describe('ReorderListComponent', () => {
         items: items,
         subItemsName: 'subItems',
       });
-      runNgOnChanges();
 
       expect(spectator.queryAll('kirby-card ion-reorder-group kirby-item').length).toBe(0);
     });
