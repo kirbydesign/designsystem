@@ -30,6 +30,11 @@ export const illustrations = {
   'box.none.plus-dot.bars': {
     lg: 'box.none.plus-dot.bars.large.svg',
   },
+  'cake.confetti.glaze.bubble': {
+    md: 'cake.confetti.glaze.bubble.medium.svg',
+    lg: 'cake.confetti.glaze.bubble.large.svg',
+    xl: 'cake.confetti.glaze.bubble.xlarge.svg',
+  },
   'calculator.money.coin.rectangle': {
     md: 'calculator.money.coin.rectangle.medium.svg',
   },
