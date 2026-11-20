@@ -19,6 +19,7 @@ import { provideKirby, withGlobalSetup } from '@kirbydesign/designsystem/config'
 import { environment } from './environments/environment';
 
 import { AppComponent } from './app/app.component';
+import { BrandService } from './app/shared/brand/brand.service';
 
 import { routes } from './app/app.routes';
 
@@ -44,6 +45,7 @@ bootstrapApplication(AppComponent, {
     ),
     { provide: LOCALE_ID, useValue: 'en-DK' },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    provideAppInitializer(() => inject(BrandService).init()),
     provideAppInitializer(() => {
       const iconRegistry = inject(IconRegistryService);
       iconRegistry.addIcons([

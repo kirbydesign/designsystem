@@ -1,0 +1,29 @@
+$font-weights: (
+  'Light': 300,
+  'Regular': 400,
+  'Bold': 700,
+  'Black': 900,
+);
+
+@each $name, $weight in $font-weights {
+  @font-face {
+    font-family: Jyske;
+    src: url('./fonts/Jyske-#{$name}.woff2') format('woff2');
+    font-weight: $weight;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: Jyske;
+    src: url('./fonts/Jyske-#{$name}Italic.woff2') format('woff2');
+    font-weight: $weight;
+    font-style: italic;
+    font-display: swap;
+  }
+}
+
+@mixin theme {
+  --kirby-font-family-brand: 'Jyske';
+  --kirby-letter-spacing: -2%;
+}

@@ -9,6 +9,7 @@ libs/designsystem/header/src/header.component.html
 /libs/core/src/scss/themes/color-primitives.css
 /libs/core/src/scss/themes/default-brand.css
 /libs/core/src/scss/themes/primitives.css
+/apps/cookbook/src/scss/brands/*/_theme.scss
 /node_modules/
 
 /.nx/cache

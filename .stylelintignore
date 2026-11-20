@@ -7,3 +7,4 @@ libs/core/scss/**
 /libs/core/src/components.d.ts
 /libs/**/readme.md
 /node_modules/
+/apps/cookbook/src/scss/brands/*/_theme.scss

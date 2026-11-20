@@ -1,0 +1,41 @@
+// Brand themes, copied verbatim from the private repo
+// (apps/private/src/scss/bank/<bank>/_bank-colors-full.scss and _bank-fonts.scss).
+// Each theme is applied when <html> has a matching data-kirby-brand attribute,
+// see BrandService. Keep the ids in sync with apps/cookbook/src/app/shared/brand/brands.ts.
+@use 'brands/djurslandsbank/theme' as djurslandsbank;
+@use 'brands/jyskebank/theme' as jyskebank;
+@use 'brands/jyskebank/fonts' as jyskebank-fonts;
+@use 'brands/kreditbanken/theme' as kreditbanken;
+@use 'brands/landbobanken/theme' as landbobanken;
+@use 'brands/skjernbank/theme' as skjernbank;
+@use 'brands/spks/theme' as spks;
+@use 'brands/sydbank/theme' as sydbank;
+
+[data-kirby-brand='djurslandsbank'] {
+  @include djurslandsbank.theme;
+}
+
+[data-kirby-brand='jyskebank'] {
+  @include jyskebank.theme;
+  @include jyskebank-fonts.theme;
+}
+
+[data-kirby-brand='kreditbanken'] {
+  @include kreditbanken.theme;
+}
+
+[data-kirby-brand='landbobanken'] {
+  @include landbobanken.theme;
+}
+
+[data-kirby-brand='skjernbank'] {
+  @include skjernbank.theme;
+}
+
+[data-kirby-brand='spks'] {
+  @include spks.theme;
+}
+
+[data-kirby-brand='sydbank'] {
+  @include sydbank.theme;
+}

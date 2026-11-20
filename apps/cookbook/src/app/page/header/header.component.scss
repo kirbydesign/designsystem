@@ -81,6 +81,15 @@ header {
   }
 }
 
+.brand-selector {
+  grid-column: 3;
+  justify-self: end;
+
+  @include utils.media('>=large') {
+    margin-inline-end: var(--kirby-spacing-m);
+  }
+}
+
 @keyframes enter {
   0% {
     opacity: 0;
