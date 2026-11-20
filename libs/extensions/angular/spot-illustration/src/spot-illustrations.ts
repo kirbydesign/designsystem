@@ -27,6 +27,12 @@ export const illustrations = {
   'box.curve.box.half-circle': {
     md: 'box.curve.box.half-circle.medium.svg',
   },
+  'box.fly.square.cloud': {
+    sm: 'box.fly.square.cloud.small.svg',
+    md: 'box.fly.square.cloud.medium.svg',
+    lg: 'box.fly.square.cloud.large.svg',
+    xl: 'box.fly.square.cloud.xlarge.svg',
+  },
   'box.none.plus-dot.bars': {
     lg: 'box.none.plus-dot.bars.large.svg',
   },
