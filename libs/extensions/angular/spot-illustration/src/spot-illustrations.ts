@@ -59,6 +59,9 @@ export const illustrations = {
   'document.card.dot.circle': {
     lg: 'document.card.dot.circle.large.svg',
   },
+  'document.magnifying-glass.pie.square': {
+    sm: 'document.magnifying-glass.pie.square.small.svg',
+  },
   'exclamation-mark.circle.circle-part.shadow': {
     lg: 'exclamation-mark.circle.circle-part.shadow.large.svg',
   },
