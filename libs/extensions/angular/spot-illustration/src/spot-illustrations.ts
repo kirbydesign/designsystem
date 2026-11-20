@@ -56,6 +56,9 @@ export const illustrations = {
   'device.arrow-download.dot.circle': {
     xl: 'device.arrow-download.dot.circle.xlarge.svg',
   },
+  'document.arrows.coin.circle': {
+    md: 'document.arrows.coin.circle.medium.svg',
+  },
   'document.card.dot.circle': {
     lg: 'document.card.dot.circle.large.svg',
   },
