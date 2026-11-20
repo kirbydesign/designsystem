@@ -35,6 +35,10 @@ export class MyComponent {}
 export class MyModule {}
 ```
 
+## Rich text editor
+
+The [rich text editor](./rich-text-editor/README.md) provides a Tiptap-based editor with Kirby controls, configurable labels and HTML input/output. Run the Extensions Storybook and open **Components / Rich Text Editor / Docs** for the API and examples.
+
 ## Migration Guides
 
 For details on migrating between major versions of `@kirbydesign/extensions-angular` see the [Extensions Migration Guides](https://github.com/kirbydesign/designsystem/blob/develop/libs/extensions/angular/MIGRATION.md).

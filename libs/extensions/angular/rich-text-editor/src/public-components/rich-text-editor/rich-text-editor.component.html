@@ -1,0 +1,13 @@
+<kirby-x-rich-text-editor-toolbar [editor]="this" />
+<kirby-x-rich-text-editor-document
+  [value]="value"
+  [config]="config"
+  [placeholder]="resolvedLabels().placeholder"
+  [readonly]="readonly"
+  [ariaLabel]="resolvedLabels().editor"
+  [ariaDescribedby]="ariaDescribedby"
+  (valueChange)="valueChange.emit($event)"
+  (stateChange)="editorState.set($event)"
+  (editorFocus)="editorFocus.emit()"
+  (editorBlur)="editorBlur.emit()"
+/>

@@ -1,0 +1,32 @@
+@for (control of controls(); track control) {
+  @if (control.kind === 'dropdown') {
+    <kirby-dropdown
+      [attr.data-toolbar-item]="control.id"
+      [attr.aria-label]="control.label"
+      size="sm"
+      attentionLevel="3"
+      [items]="control.options"
+      [placeholder]="control.placeholder"
+      [selectedIndex]="blockIndex()"
+      [disabled]="disabled()"
+      (change)="setBlock($event)"
+    />
+  } @else {
+    <button
+      kirby-button
+      type="button"
+      [noDecoration]="true"
+      size="md"
+      [attr.data-toolbar-item]="control.id"
+      [attr.aria-label]="control.label"
+      [attr.title]="control.label"
+      [attr.aria-keyshortcuts]="control.shortcut"
+      [attr.aria-pressed]="isActive(control.id)"
+      [disabled]="disabled()"
+      (pointerdown)="preserveEditorSelection($event)"
+      (click)="execute(control.id)"
+    >
+      <kirby-icon [name]="control.icon" />
+    </button>
+  }
+}
