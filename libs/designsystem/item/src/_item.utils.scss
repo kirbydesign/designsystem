@@ -90,7 +90,8 @@ $base-typography-selectors: (':where(.kirby-item-title)');
 $no-layout-change-components: 'kirby-checkbox, kirby-radio, kirby-toggle, [kirby-button].icon-only';
 
 @mixin when-layout-change-needed() {
-  &:not(:has(#{$no-layout-change-components})) {
+  &:not(:has(#{$no-layout-change-components})),
+  &.kirby-item-layout-wrap-opt-in {
     @content;
   }
 }

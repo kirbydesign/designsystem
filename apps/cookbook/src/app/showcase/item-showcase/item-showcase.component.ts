@@ -19,6 +19,7 @@ import { ItemExampleComplexLabelsComponent } from '~/app/examples/item-example/e
 import { ItemExampleDisclosureAnimationComponent } from '~/app/examples/item-example/examples/disclosure-animation';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 import { ItemExampleWithInputComponent } from '~/app/examples/item-example/examples/with-input';
+import { ItemExampleTextResizeLayoutComponent } from '~/app/examples/item-example/examples/text-resize-layout';
 
 @Component({
   selector: 'cookbook-item-showcase',
@@ -37,6 +38,7 @@ import { ItemExampleWithInputComponent } from '~/app/examples/item-example/examp
     ItemExampleDisabledControlsComponent,
     ItemExampleComplexLabelsComponent,
     ItemExampleDisclosureAnimationComponent,
+    ItemExampleTextResizeLayoutComponent,
     ApiDescriptionPropertiesComponent,
     ImportViewerComponent,
   ],
