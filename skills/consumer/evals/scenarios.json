@@ -1,0 +1,280 @@
+[
+  {
+    "prompt": "Implement a Kirby reactive form with a required Reference field and a Continue submit button. Emit the entered reference only on valid submission.",
+    "reference": "references/forms.md",
+    "expected": [
+      "The generated component passes the fixture's build/type-check and strict template checks.",
+      "Submitting an empty form displays an error programmatically associated with the named Reference control and emits nothing.",
+      "Submitting R-001 emits exactly R-001 once; correcting the field removes its invalid state.",
+      "Use Kirby form-field, input and button APIs without recreating their styling."
+    ]
+  },
+  {
+    "prompt": "Extend an existing Kirby reactive form with a delivery-method choice and an Address field required only for postal delivery. Preserve the address when hidden but omit it from digital-delivery submissions.",
+    "reference": "references/forms.md",
+    "expected": [
+      "The generated feature passes the fixture's build/type-check without changing bootstrap or migrating the existing form.",
+      "Postal delivery with an empty address blocks submission and exposes an associated validation message.",
+      "Switching to digital hides the address and allows an otherwise valid submission without an address property.",
+      "Switching back to postal restores the entered address and its required validation.",
+      "All controls have accessible names and use supported Kirby APIs."
+    ]
+  },
+  {
+    "prompt": "Implement a selectable Kirby list showing record titles and references. Long titles must remain readable at 320px and 1024px viewport widths. Use Kirby spacing tokens and emit the selected record.",
+    "reference": "references/collections.md",
+    "expected": [
+      "The generated feature passes the fixture's build/type-check and strict template checks.",
+      "Use Kirby list/item APIs and the required list template directive rather than custom row components.",
+      "At both specified widths, long titles remain readable and document scrollWidth does not exceed clientWidth.",
+      "Pointer and keyboard activation emit the matching record object once.",
+      "Custom spacing uses available Kirby tokens; any additional CSS addresses a requirement not met by public component APIs."
+    ]
+  },
+  {
+    "prompt": "Add a simple help dialog opened by a button.",
+    "reference": "references/modals.md",
+    "expected": [
+      "Choose declarative kirby-modal with ng-template and a meaningful kirby-page-title.",
+      "Import ModalComponent, PageTitleComponent and ButtonComponent from secondary entry points.",
+      "Use a unique trigger ID and verify focus restoration."
+    ]
+  },
+  {
+    "prompt": "The state-controlled modal opens once but will not reopen after Escape.",
+    "reference": "references/modals.md",
+    "expected": [
+      "Reset the bound isOpen state on didDismiss.",
+      "Verify open, Escape dismissal and reopening."
+    ]
+  },
+  {
+    "prompt": "Build a wizard that users can deep-link into and protect unsaved changes.",
+    "reference": "references/modals.md",
+    "expected": [
+      "Choose route-based modals with the modal secondary outlet.",
+      "Clarify the dismissal policy before configuring canDismiss.",
+      "Verify direct navigation, browser back, dismissal and title focus."
+    ]
+  },
+  {
+    "prompt": "Let users choose several delivery channels.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Choose independent checkboxes, not a single-select dropdown or radio group.",
+      "Provide accessible labels and follow the application's forms convention."
+    ]
+  },
+  {
+    "prompt": "Add a compact frequency selector to a reactive form.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Choose a dropdown rather than an action menu.",
+      "Verify whether the selected value is an item object.",
+      "Include ReactiveFormsModule and the relevant standalone Kirby imports."
+    ]
+  },
+  {
+    "prompt": "Add Danish amounts with two decimals and a native date picker.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Verify locale setup and use decimal-mask precision without maxlength.",
+      "Explain the native date picker's experimental status and confirm adoption.",
+      "Use yyyy-MM-dd for native date values and clarify timezone conversion requirements."
+    ]
+  },
+  {
+    "prompt": "Use an action sheet to offer Edit and Export in new UI.",
+    "reference": "references/actions.md",
+    "expected": [
+      "Explain the action-sheet deprecation and recommend a menu.",
+      "Give its trigger an accessible name and wire real actions."
+    ]
+  },
+  {
+    "prompt": "Display a payment failure only as a success toast so it is unobtrusive.",
+    "reference": "references/feedback.md",
+    "expected": [
+      "Surface the conflict rather than describing failure as success.",
+      "Use persistent actionable feedback for essential failure information.",
+      "Do not invent an unsupported toast messageType."
+    ]
+  },
+  {
+    "prompt": "Switch between Overview and History sections without leaving the page.",
+    "reference": "references/pages-and-navigation.md",
+    "expected": [
+      "Choose page tab navigation rather than top-level routed tabs or a segmented filter.",
+      "Connect tab IDs and panel ARIA relationships and expose only the active panel."
+    ]
+  },
+  {
+    "prompt": "A page using kirby-router-outlet keeps polling after navigating away.",
+    "reference": "references/pages-and-navigation.md",
+    "expected": [
+      "Recognize stacked pages may remain alive.",
+      "Use enter/leave to pause and resume page-scoped work, not only ngOnDestroy."
+    ]
+  },
+  {
+    "prompt": "The app's older Kirby version does not contain the semantic tokens in the recipe.",
+    "reference": "references/styling.md",
+    "expected": [
+      "Report the version mismatch and ask for the supported styling or upgrade policy.",
+      "Preserve existing legacy styling rather than silently upgrading or inventing tokens."
+    ]
+  },
+  {
+    "prompt": "Build a calendar with disabled weekends; the repository is not checked out.",
+    "reference": "references/documentation-index.md",
+    "expected": [
+      "Use the bundled index to locate calendar guidance and examples.",
+      "Verify date constraint inputs against the installed version.",
+      "Prefer a card around the calendar and check contrast and keyboard behavior."
+    ]
+  },
+  {
+    "prompt": "Use the chart configuration helper for a custom stock chart.",
+    "reference": "references/charts.md",
+    "expected": [
+      "Confirm adoption of the experimental helper and verify Chart.js compatibility.",
+      "Register plugins before creation, destroy the chart on teardown, and supply accessible data."
+    ]
+  },
+  {
+    "prompt": "Use a new Cookbook input on an older app; dependencies and network are unavailable.",
+    "reference": "SKILL.md",
+    "expected": [
+      "State that compatibility cannot be verified.",
+      "Ask for the resolved version or relevant declarations/docs before introducing the API.",
+      "Do not silently substitute latest APIs or upgrade dependencies."
+    ]
+  },
+  {
+    "prompt": "Add a localized amount field while keeping the existing submitted value format.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Reuse the existing form, parser, validator and amount-formatting contract.",
+      "Keep localized display separate from the submitted domain value.",
+      "Do not hardcode currency, precision or timezone assumptions."
+    ]
+  },
+  {
+    "prompt": "Choose a simple help dialog. The bundled modal rule covers it, but external documentation is unavailable.",
+    "reference": "SKILL.md",
+    "expected": [
+      "Apply the bundled declarative modal rule without requiring Cookbook access.",
+      "Verify required APIs against the installed package.",
+      "Do not treat source-link availability as a prerequisite for covered usage decisions."
+    ]
+  },
+  {
+    "prompt": "Create a compact informational modal with a visible heading.",
+    "reference": "references/modals.md",
+    "expected": [
+      "Set an explicit aria-label matching the visible heading.",
+      "Use the component attribute or ModalConfig.htmlAttributes for the selected mechanism.",
+      "Verify the rendered dialog's accessible name instead of assuming a child supplies it."
+    ]
+  },
+  {
+    "prompt": "An external example uses deprecated flat cards, but this skill recommends default or outlined cards.",
+    "reference": "SKILL.md",
+    "expected": [
+      "Follow the skill's card usage rule rather than overriding it with the external example.",
+      "Keep installed-API compatibility and application requirements as separate checks.",
+      "Report and clarify a genuine behavior mismatch rather than silently changing the rule."
+    ]
+  },
+  {
+    "prompt": "Implement a Kirby confirmation dialog in an already-configured application.",
+    "reference": "SKILL.md",
+    "expected": [
+      "Focus on the Kirby feature APIs and component imports.",
+      "Do not add application bootstrap, global providers or infrastructure configuration.",
+      "Use the modal recipe and verify confirmation versus cancellation behavior."
+    ]
+  },
+  {
+    "prompt": "Use kirby-x-combobox in a feature that only has the core Kirby package installed.",
+    "reference": "SKILL.md",
+    "expected": [
+      "Identify combobox as an optional @kirbydesign/extensions-angular export, not a core component.",
+      "Report the missing package prerequisite rather than inventing a core import or installing infrastructure.",
+      "Check extension and peer compatibility before introducing the feature."
+    ]
+  },
+  {
+    "prompt": "Build a searchable single selector using objects whose keys are code and title.",
+    "reference": "references/forms.md",
+    "expected": [
+      "Choose the extension combobox rather than treating the core dropdown as searchable.",
+      "Configure itemIdProperty and itemTextProperty and use unique string IDs.",
+      "Keep the selected item as the form value/change payload, not an array or DOM event.",
+      "Provide an accessible name and preserve the existing forms convention."
+    ]
+  },
+  {
+    "prompt": "Show a dark skeleton while a summary loads, using the skeleton theme input.",
+    "reference": "references/feedback.md",
+    "expected": [
+      "Identify theme as deprecated and ineffective; use the surrounding Kirby surface.",
+      "Use supported shapes and CSS sizing.",
+      "Tie placeholder visibility to actual loading state and provide surrounding accessible status text."
+    ]
+  },
+  {
+    "prompt": "Build a sidebar with expanded IDs supplied as an array and plain text inside its header.",
+    "reference": "references/pages-and-navigation.md",
+    "expected": [
+      "Use the public sidebar/menu composition and typed SidebarMenuItem contracts.",
+      "Use Set<string> for expandedItems and checkedItems and string IDs for selectedItem.",
+      "Place header content in logo or action slots instead of relying on un-slotted text."
+    ]
+  },
+  {
+    "prompt": "Add an image banner that opens an external resource, can be dismissed and may fail to load its image.",
+    "reference": "references/illustrations.md",
+    "expected": [
+      "Use externalLink for external navigation rather than assuming bannerClick also handles that branch.",
+      "Subscribe to dismissClick to expose dismissal and keep it separate from activation.",
+      "Handle imageError explicitly."
+    ]
+  },
+  {
+    "prompt": "Show a decorative spot illustration in every size using an arbitrary image name.",
+    "reference": "references/illustrations.md",
+    "expected": [
+      "Use published illustration names and verify the chosen size has an asset.",
+      "Recognize a missing size renders no illustration.",
+      "Hide decorative illustrations from accessibility exposure and keep meaning in accompanying text."
+    ]
+  },
+  {
+    "prompt": "Format a number with formatNumber: { digitsInfo: '1.2-2' } and pass a plain number to the amount pipe.",
+    "reference": "references/extension-formatting.md",
+    "expected": [
+      "Pass a digitsInfo string to formatNumber, not a configuration object.",
+      "Pass an Amount object with amount and currencyCode to the amount pipe.",
+      "Use existing locale/extension settings and preserve the raw sign and currency unless requirements explicitly change presentation."
+    ]
+  },
+  {
+    "prompt": "Use timeOrDate to show time for today when the browser timezone differs from the configured display timezone.",
+    "reference": "references/extension-formatting.md",
+    "expected": [
+      "Distinguish browser-local today classification from configured-timezone formatting.",
+      "Verify day-boundary behavior rather than assuming both use the configured timezone.",
+      "Use explicit date/time display when the conditional output would misrepresent the requirement."
+    ]
+  },
+  {
+    "prompt": "Format account and phone numbers, then submit their displayed strings back to the API.",
+    "reference": "references/extension-formatting.md",
+    "expected": [
+      "Use AccountNumber and PhoneNumber payload shapes and preserve their original values.",
+      "Treat registration padding, account zero removal and phone chunking as display behavior.",
+      "Validate digit-only phone input independently rather than treating formatting as validation."
+    ]
+  }
+]

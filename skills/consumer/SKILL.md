@@ -1,38 +1,64 @@
 ---
 name: consumer
-description: 'Kirby Design System reference for Angular microfrontends. Use when authoring or modifying UI components, markup, or styling with @kirbydesign/designsystem.'
+description: 'Build Angular UI with @kirbydesign/designsystem and optional @kirbydesign/extensions-angular. Use when choosing Kirby components or implementing forms, modals, navigation, lists, feedback, charts, illustrations, accessibility, formatting, or styling.'
 ---
 
-# Kirby Design System - Component Library
+# Kirby consumer
 
-Use this skill when helping with UI components, markup, or styling in Angular microfrontends that use the Kirby design system (`@kirbydesign/designsystem`).
+## Workflow
 
-## Official Documentation
+1. **Establish requirements.** Identify the installed Kirby, Angular and relevant extension versions
+   and intended interaction.
+   Finish when both are known; ask if a missing fact affects the choice.
+2. **Choose components.** Load only the matching references below. Select Kirby components and
+   composition for the required interaction, semantics, keyboard and focus behavior.
+   Adapt the recipes to the task; identify gaps rather than forcing an unsuitable example.
+3. **Verify APIs.** Check introduced selectors, secondary-entry-point imports, input/output names
+   and types, required directives/dependencies, public CSS classes and tokens against installed
+   declarations/source/styles. For gaps or compatibility mismatches, use the documentation index.
+4. **Implement.** In new standalone code, import individual classes
+   from `@kirbydesign/designsystem/<subpath>` or `@kirbydesign/extensions-angular/<subpath>`,
+   including required template directives and Angular
+   forms/router imports. Preserve Kirby's built-in accessibility behavior; supply meaningful names,
+   associated validation messages, correct disabled/loading states and sufficient contrast.
+   Retain existing forms conventions, module-based code and Angular syntax unless migration is requested.
+5. **Validate.** Run existing focused build/type-check and tests. Check affected keyboard interaction,
+   accessible names, focus, validation/error states, responsive layout and locale behavior.
+   Report component choices, compatibility deviations, checks run and unresolved limitations.
 
-- Use the [Cookbook showcase](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/showcase) for API details, accessibility guidance, and rendered behavior. Use the [Cookbook source examples](https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples) for complete Angular implementations.
-- For version-matched source, use `https://github.com/kirbydesign/designsystem/tree/v<kirby-version>/apps/cookbook/src/app/examples/<component>-example` and replace `<kirby-version>` with the consumer application's installed Kirby version when a matching tag exists.
-- Prefer the installed package (`node_modules/@kirbydesign/designsystem/<subpath>`) for the consumer application's version when it differs from the Cookbook release.
+## Load by task
 
-## Components
+| Task                                                                                | Reference                                                    |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Text, amount or date input; single/multiple choice; searchable combobox; validation | [Forms](./references/forms.md)                               |
+| Buttons versus links; action menus                                                  | [Actions](./references/actions.md)                           |
+| Toasts, loading, skeleton placeholders, empty states or status feedback             | [Feedback](./references/feedback.md)                         |
+| Dialog, drawer, confirmation, dismissal guard or routed wizard                      | [Modals](./references/modals.md)                             |
+| Page/header, tabs, sidebar menu, segmented choices or navigation lifecycle          | [Pages and navigation](./references/pages-and-navigation.md) |
+| Items, lists, cards, tables, load-on-demand or virtual scrolling                    | [Collections](./references/collections.md)                   |
+| CSS/SCSS, colors, spacing, typography, responsive grids or custom UI                | [Styling](./references/styling.md)                           |
+| Cross-cutting accessibility review                                                  | [Accessibility](./references/accessibility.md)               |
+| Charts or chart configuration                                                       | [Charts](./references/charts.md)                             |
+| Image banners or spot illustrations                                                 | [Illustrations](./references/illustrations.md)               |
+| Extension amount, number, date/time, account or phone formatting                    | [Extension formatting](./references/extension-formatting.md) |
+| Component/variant not covered by a recipe; guide sources and implementations        | [Documentation index](./references/documentation-index.md)   |
 
-Prefer standalone component classes imported from per-component secondary entry points
-(`@kirbydesign/designsystem/<name>`) in new consumer code. Avoid the top-level barrel and
-`KirbyModule`; older Cookbook examples may still contain those patterns.
+Load additional references only for branches the task actually reaches. Read the accessibility
+reference for cross-cutting reviews; task-specific accessibility requirements live beside each recipe.
 
-### Modals
+## Authority and uncertainty
 
-Always prefer the declarative `kirby-modal` component for simple template-driven dialogs. Nest its content inside `ng-template` and include a meaningful `kirby-page-title` in the embedded content.
-
-Use `ModalController` only when the caller needs imperative control. Use route-based modals for wizard flows and deep-linkable modal content.
-
-## Styling
-
-See [references/styling.md](references/styling.md) for CSS design tokens, SCSS utilities, and typography classes.
-
-## Anti-patterns
-
-- Importing from `@kirbydesign/designsystem` top-level barrel in new consumer code → use the per-component subpath (e.g. `@kirbydesign/designsystem/button`)
-- Using `KirbyModule` in new consumer code → import individual component classes directly
-- Overriding Kirby CSS custom properties with hardcoded values → use the `--kirby-*` token that maps to the desired value
-- Creating custom icon+text rows without `kirby-item` → use `kirby-item` with a slotted `kirby-icon`
-- Guessing a component's inputs or selectors → check the Cookbook or the installed package under `node_modules/@kirbydesign/designsystem/<subpath>`
+- **Usage:** this skill is the source of truth for covered Kirby component choices and usage rules.
+  Apply them directly; external examples do not override them.
+- **Project requirements** govern business behavior, application policy and integration.
+  Surface conflicts with this skill's UX/accessibility rules rather than silently inventing or
+  overriding requirements.
+- **Compatibility:** use the resolved package version, not a manifest range. Inspect the relevant
+  secondary entry point and styles, including `@kirbydesign/core` for tokens.
+  Angular extensions are a separate optional package; verify their installed version and peer
+  compatibility rather than assuming core Kirby includes them.
+- **Sources:** use the [documentation index](./references/documentation-index.md) only for maintenance,
+  uncovered behavior or compatibility mismatches; covered rules require no external lookup.
+- **Uncertainty:** report missing evidence or skill/installed-behavior conflicts and ask before
+  introducing an unverified API or changing a usage rule. Ask when requirements affect component/flow
+  selection or experimental adoption. Do not silently substitute newer APIs or upgrade packages.
