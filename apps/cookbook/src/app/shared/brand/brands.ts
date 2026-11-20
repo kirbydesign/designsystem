@@ -11,8 +11,8 @@ export const BRANDS: Brand[] = [
   { id: 'djurslandsbank', text: 'Djurslands Bank' },
   { id: 'jyskebank', text: 'Jyske Bank' },
   { id: 'kreditbanken', text: 'Kreditbanken' },
-  { id: 'landbobanken', text: 'Landbobanken' },
+  { id: 'landbobanken', text: 'Ringkjøbing Landbobank' },
   { id: 'skjernbank', text: 'Skjern Bank' },
-  { id: 'spks', text: 'Sparekassen Kronjylland' },
-  { id: 'sydbank', text: 'Sydbank' },
+  { id: 'spks', text: 'SJF Bank' },
+  { id: 'sydbank', text: 'AL Sydbank' },
 ];
