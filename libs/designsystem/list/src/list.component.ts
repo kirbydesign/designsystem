@@ -220,7 +220,7 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
       this.isLoadOnDemandEnabled &&
       !this._isLoading
     ) {
-      // Load more if the list still doesn't fill the view, e.g. when items are loaded asynchronously
+      // load more if the list still doesn't fill the view, e.g. when items are loaded async
       this.scrollDirective?.checkScrollPosition();
     }
 

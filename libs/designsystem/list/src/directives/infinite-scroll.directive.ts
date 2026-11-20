@@ -80,15 +80,11 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
       )
       .subscribe(() => {
         this.heightAtLastEmit = this.elementRef.nativeElement.getBoundingClientRect().height;
-        // we make sure to emit the event inside angular. As we want to show the spinner and need change detection for that.
+        // emit inside angular, as change detection is needed to show the spinner
         this.zone.run(() => this.scrollEnd.emit());
       });
 
-    /**
-     * Listen to native scroll events on the scroll element of the ion-content around the list (if any).
-     * We don't rely on 'ionScroll' as it only emits when 'scrollEvents' is enabled on ion-content,
-     * which is not always the case (e.g. inside modals).
-     */
+    // Native scroll event, as 'ionScroll' requires 'scrollEvents' on ion-content (not set in e.g. modals)
     setTimeout(async () => {
       const ionContent = this.elementRef.nativeElement.closest?.('ion-content');
       if (!ionContent) return;
@@ -100,22 +96,20 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
       if (this.isDestroyed || !this.scrollContainer) return;
 
-      // we run the scroll event outside angular, as it would trigger change detection on each scroll
+      // run outside angular to avoid change detection on each scroll
       this.zone.runOutsideAngular(() => {
         fromEvent(this.scrollContainer, 'scroll')
           .pipe(takeUntil(this.ngUnsubscribe$))
           .subscribe(() => this.onScroll());
       });
 
-      // Check initial position, in case the content is not scrollable
+      // initial check, in case the content is not scrollable
       this.onScroll();
     });
   }
 
   /**
-   * Re-evaluate the scroll position, e.g. after new items have been loaded.
-   * Only emits {@link scrollEnd} if the element height has changed since last emit,
-   * to avoid endless loading when no new items are added.
+   * Re-check the scroll position after render. Skipped if the height is unchanged since last emit, to avoid endless loading.
    */
   checkScrollPosition(): void {
     setTimeout(() => {
