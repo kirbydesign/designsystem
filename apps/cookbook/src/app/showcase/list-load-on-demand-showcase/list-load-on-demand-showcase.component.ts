@@ -5,6 +5,7 @@ import { IphoneComponent } from '../../iphone/iphone.component';
 import { ApiDescriptionPropertiesComponent } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEventsComponent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
+import { ListLoadOnDemandModalExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-modal-example.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 
@@ -22,6 +23,7 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
 })
 export class ListLoadOnDemandShowcaseComponent {
   exampleHtml: string = ListLoadOnDemandExampleTemplate;
+  modalExampleHtml: string = ListLoadOnDemandModalExampleTemplate;
 
   properties: ApiDescriptionProperty[] = [
     {

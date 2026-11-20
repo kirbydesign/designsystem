@@ -116,6 +116,71 @@ describe('InfiniteScrollDirective', () => {
       expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
     }));
 
+    describe('when placed inside ion-content (e.g. in a modal)', () => {
+      let scrollElement: HTMLElement;
+
+      const createInIonContent = (listBottom: number, containerBottom: number) => {
+        scrollElement = window.document.createElement('div');
+        spyOn(scrollElement, 'getBoundingClientRect').and.returnValue({
+          bottom: containerBottom,
+        } as DOMRect);
+        const ionContent = { getScrollElement: () => Promise.resolve(scrollElement) };
+        const directive = createDirective(0, false);
+        nativeElement.getBoundingClientRect.and.returnValue({ height: 800, bottom: listBottom });
+        nativeElement.closest.and.returnValue(ionContent);
+        directive.ngAfterViewInit();
+        return directive;
+      };
+
+      it('should emit event initially when the content is not scrollable', fakeAsync(() => {
+        const directive = createInIonContent(500, 600);
+        tick();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
+      }));
+
+      it('should emit event on native scroll of the scroll element', fakeAsync(() => {
+        const directive = createInIonContent(2000, 600);
+        tick();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+        expect(directive.scrollEnd.emit).not.toHaveBeenCalled();
+
+        nativeElement.getBoundingClientRect.and.returnValue({ height: 800, bottom: 700 });
+        scrollElement.dispatchEvent(new Event('scroll'));
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
+      }));
+    });
+
+    describe('checkScrollPosition', () => {
+      it('should emit event if element height changed and end is still visible', fakeAsync(() => {
+        const directive = createDirective(0.8);
+        directive.onScroll();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        nativeElement.getBoundingClientRect.and.returnValue({ height: 900, bottom: 100 });
+        directive.checkScrollPosition();
+        tick();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(2);
+      }));
+
+      it('should not emit event if element height is unchanged since last emit', fakeAsync(() => {
+        const directive = createDirective(0.8);
+        directive.onScroll();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        directive.checkScrollPosition();
+        tick();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
+      }));
+    });
+
     it('should not emit event after ngDestroy', fakeAsync(() => {
       const directive = createDirective(0.8);
       directive.ngOnDestroy();

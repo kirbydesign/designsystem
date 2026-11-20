@@ -35,6 +35,18 @@
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <cookbook-iphone src="/examples/list-load-on-demand" showExternalLink="true"></cookbook-iphone>
 </div>
+<h2>In a modal</h2>
+<p>
+  Load on demand also works when the list is placed inside a modal. If the initial items do not fill
+  the view, more items are loaded until the content becomes scrollable.
+</p>
+<div class="example-wrapper">
+  <cookbook-code-viewer [html]="modalExampleHtml"></cookbook-code-viewer>
+  <cookbook-iphone
+    src="/examples/list-load-on-demand-modal"
+    showExternalLink="true"
+  ></cookbook-iphone>
+</div>
 <h2>Accessibility</h2>
 <p>
   It is possible to provide an accessible name for your list using the

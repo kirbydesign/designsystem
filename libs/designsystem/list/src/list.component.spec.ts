@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
@@ -211,6 +211,56 @@ describe('ListComponent', () => {
 
         expect(component.isLoadOnDemandEnabled).toBeFalse();
       });
+    });
+  });
+
+  describe('function: ngOnChanges', () => {
+    let checkScrollPositionSpy: jasmine.Spy;
+    const itemsChange = (firstChange = false) => ({
+      items: new SimpleChange([], transactions, firstChange),
+    });
+
+    beforeEach(() => {
+      component.scrollDirective = jasmine.createSpyObj('InfiniteScrollDirective', [
+        'checkScrollPosition',
+      ]);
+      checkScrollPositionSpy = component.scrollDirective.checkScrollPosition as jasmine.Spy;
+      component.isLoadOnDemandEnabled = true;
+      component._isLoading = false;
+    });
+
+    it('should check the scroll position when items change', () => {
+      component.ngOnChanges(itemsChange());
+
+      expect(checkScrollPositionSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not check the scroll position on the first change of items', () => {
+      component.ngOnChanges(itemsChange(true));
+
+      expect(checkScrollPositionSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not check the scroll position when load on demand is disabled', () => {
+      component.isLoadOnDemandEnabled = false;
+
+      component.ngOnChanges(itemsChange());
+
+      expect(checkScrollPositionSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not check the scroll position while loading', () => {
+      component._isLoading = true;
+
+      component.ngOnChanges(itemsChange());
+
+      expect(checkScrollPositionSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not check the scroll position when other inputs change', () => {
+      component.ngOnChanges({ showDivider: new SimpleChange(false, true, false) });
+
+      expect(checkScrollPositionSpy).not.toHaveBeenCalled();
     });
   });
 
