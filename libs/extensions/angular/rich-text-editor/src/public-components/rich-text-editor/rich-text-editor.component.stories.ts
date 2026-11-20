@@ -140,6 +140,38 @@ const meta: Meta<EditorStoryArgs> = {
 An HTML rich text editor with consumer-selected controls and labels.
 Supports headings, text formatting and ordered/unordered lists.
 Place inside a kirby-card for background, rounded corners and elevation.
+
+## Configuration
+
+All properties are optional. Config is initialization-only; omit toolbarItems for no controls.
+Supply labels for the selected controls.
+
+\`\`\`ts
+import {
+  type RichTextEditorConfig,
+  richTextToolbar,
+} from '@kirbydesign/extensions-angular/rich-text-editor';
+
+readonly config: RichTextEditorConfig = {
+  toolbarItems: [
+    richTextToolbar.bold('Bold'),
+    richTextToolbar.italic('Italic'),
+    richTextToolbar.underline('Underline'),
+    richTextToolbar.bulletList('Unordered list'),
+    richTextToolbar.orderedList('Ordered list'),
+    richTextToolbar.textStyle({
+      label: 'Text style',
+      normal: 'Normal',
+      heading1: 'Heading 1',
+      heading2: 'Heading 2',
+      heading3: 'Heading 3',
+    }),
+  ],
+  extensions: [],
+  enableInputRules: false,
+  enablePasteRules: false,
+};
+\`\`\`
 `,
       },
     },
@@ -240,7 +272,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Bind HTML with [(value)] and select controls in config.toolbarItems.',
+        story: 'Bind HTML with [(value)] and pass the configuration through [config].',
       },
     },
   },
@@ -433,50 +465,6 @@ export const CustomLabels: Story = {
       description: {
         story:
           'Supply labels only for selected controls. Resolve translated strings before creating the editor.',
-      },
-      source: {
-        language: 'typescript',
-        code: `import { Component } from '@angular/core';
-import { CardComponent } from '@kirbydesign/designsystem/card';
-import {
-  RichTextEditorComponent,
-  RichTextEditorConfig,
-  richTextToolbar,
-} from '@kirbydesign/extensions-angular/rich-text-editor';
-
-@Component({
-  selector: 'app-note-editor',
-  imports: [CardComponent, RichTextEditorComponent],
-  template: \`
-    <kirby-card>
-      <kirby-x-rich-text-editor
-        [(value)]="value"
-        [config]="config"
-        [labels]="labels"
-      />
-    </kirby-card>
-  \`,
-})
-export class NoteEditorComponent {
-  value = '';
-  readonly labels = {
-    editor: 'Sagsnoter',
-    placeholder: 'Skriv en note...',
-    toolbar: 'Tekstformatering',
-  };
-  readonly config: RichTextEditorConfig = {
-    toolbarItems: [
-      richTextToolbar.bold('Fed'),
-      richTextToolbar.textStyle({
-        label: 'Teksttype',
-        normal: 'Normal tekst',
-        heading1: 'Overskrift 1',
-        heading2: 'Overskrift 2',
-        heading3: 'Overskrift 3',
-      }),
-    ],
-  };
-}`,
       },
     },
   },
