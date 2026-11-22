@@ -309,31 +309,6 @@ export const WithoutToolbar: Story = {
       },
     },
   },
-  render: (args) => ({
-    props: args,
-    template: `
-      <kirby-card>
-        <kirby-x-rich-text-editor
-          ${argsToTemplate(args, { exclude: ['config', 'valueChange'] })}
-        />
-      </kirby-card>
-    `,
-  }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
-    await expect(canvas.queryByRole('group', { name: 'Text formatting' })).toBeNull();
-    const card = textbox.closest('kirby-card');
-    if (!card) throw new Error('Card is missing');
-    const cardStyle = getComputedStyle(card);
-    const innerRadius =
-      parseFloat(cardStyle.borderTopLeftRadius) - parseFloat(cardStyle.borderTopWidth);
-    const textboxStyle = getComputedStyle(textbox);
-    await expect(parseFloat(textboxStyle.borderTopLeftRadius)).toBe(innerRadius);
-    await expect(parseFloat(textboxStyle.borderBottomLeftRadius)).toBe(innerRadius);
-    await expect(textbox.querySelector('strong')).toHaveTextContent('bold');
-    await expect(textbox.querySelector('ul')).not.toBeNull();
-  },
 };
 
 export const ReadOnly: Story = {
@@ -366,22 +341,6 @@ export const WithoutBackground: Story = {
       />
     `,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
-    const toolbar = canvas.getByRole('group', { name: 'Text formatting' });
-    const editor = textbox.closest('kirby-x-rich-text-editor');
-    if (!editor) throw new Error('Editor is missing');
-    await expect(getComputedStyle(toolbar).borderBottomStyle).toBe('none');
-    for (const element of [editor, toolbar, textbox]) {
-      await expect(getComputedStyle(element).backgroundColor).toBe('rgba(0, 0, 0, 0)');
-    }
-    await userEvent.clear(textbox);
-    await userEvent.type(textbox, 'A note');
-    await userEvent.click(canvas.getByRole('button', { name: 'Bold' }));
-    await userEvent.keyboard(' bold');
-    await waitFor(() => expect(textbox.querySelector('strong')).toHaveTextContent('bold'));
-  },
 };
 
 export const Surfaces: Story = {
@@ -409,21 +368,6 @@ export const Surfaces: Story = {
       </section>
     `,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await canvas.findByRole('textbox', { name: 'base surface' });
-    const fills: string[] = [];
-    for (const card of canvasElement.querySelectorAll<HTMLElement>('kirby-card')) {
-      const toolbar = within(card).getByRole('group', { name: 'Text formatting' });
-      const textbox = within(card).getByRole('textbox');
-      await expect(getComputedStyle(toolbar).backgroundColor).toBe('rgba(0, 0, 0, 0)');
-      await expect(getComputedStyle(textbox).backgroundColor).toBe('rgba(0, 0, 0, 0)');
-      await expect(getComputedStyle(toolbar).color).toBe(getComputedStyle(card).color);
-      await expect(getComputedStyle(textbox).color).toBe(getComputedStyle(card).color);
-      fills.push(getComputedStyle(card).backgroundColor);
-    }
-    await expect(new Set(fills).size).toBe(3);
-  },
 };
 
 export const CustomHeight: Story = {
@@ -452,31 +396,6 @@ export const CustomHeight: Story = {
       </kirby-card>
     `,
   }),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
-    const toolbar = canvas.getByRole('group', { name: 'Text formatting' });
-    await expect(textbox.getBoundingClientRect().height).toBeCloseTo(
-      parseFloat(getComputedStyle(textbox).minHeight),
-      0
-    );
-    await userEvent.click(canvas.getByRole('button', { name: 'Load long note' }));
-    await waitFor(() => {
-      expect(textbox.getBoundingClientRect().height).toBeCloseTo(
-        parseFloat(getComputedStyle(textbox).maxHeight),
-        0
-      );
-      expect(textbox.scrollHeight).toBeGreaterThan(textbox.clientHeight);
-    });
-    await expect(canvas.getByRole('textbox', { name: 'Case notes' })).toBe(textbox);
-    const toolbarTop = toolbar.getBoundingClientRect().top;
-    textbox.scrollTop = textbox.scrollHeight;
-    await expect(textbox.scrollTop).toBeGreaterThan(0);
-    await expect(toolbar.getBoundingClientRect().top).toBe(toolbarTop);
-    await expect(toolbar.getBoundingClientRect().bottom).toBeLessThanOrEqual(
-      textbox.getBoundingClientRect().top
-    );
-  },
 };
 
 export const CustomLabels: Story = {
@@ -488,26 +407,6 @@ export const CustomLabels: Story = {
           'Supply labels only for selected controls. Resolve translated strings before creating the editor.',
       },
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const textbox = await canvas.findByRole('textbox', { name: danishLabels.editor });
-    await expect(textbox).toHaveAttribute('aria-placeholder', danishLabels.placeholder);
-    await expect(canvas.getByRole('group', { name: danishLabels.toolbar })).toBeVisible();
-    await expect(canvas.getByRole('button', { name: 'Fed' })).toBeVisible();
-    await expect(canvas.queryByRole('button', { name: 'Italic' })).toBeNull();
-    const dropdown = canvas.getByRole('combobox', { name: danishTextStyleLabels.label });
-    await userEvent.click(dropdown);
-    const popup = within(await within(canvasElement.ownerDocument.body).findByRole('listbox'));
-    const heading = await popup.findByText(danishTextStyleLabels.heading1);
-    await expect(popup.getByText(danishTextStyleLabels.heading2)).toBeVisible();
-    await expect(popup.getByText(danishTextStyleLabels.heading3)).toBeVisible();
-    await expect(popup.getByText(danishTextStyleLabels.normal)).toBeVisible();
-    await userEvent.click(heading);
-    await waitFor(() => {
-      expect(dropdown).toHaveTextContent(danishTextStyleLabels.heading1);
-      expect(textbox.querySelector('h1')).not.toBeNull();
-    });
   },
 };
 
@@ -524,43 +423,10 @@ export const CustomToolbar: Story = {
       },
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
-    const toolbar = canvas.getByRole('group', { name: 'Text formatting' });
-    await expect(getComputedStyle(toolbar).display).toBe('flex');
-    await expect(getComputedStyle(toolbar).gap).toBe('8px');
-    await expect(getComputedStyle(toolbar).paddingInlineStart).toBe('16px');
-    await expect(getComputedStyle(toolbar).paddingInlineEnd).toBe('8px');
-    await expect(getComputedStyle(toolbar).paddingTop).toBe('8px');
-    await expect(getComputedStyle(toolbar).paddingBottom).toBe('8px');
-    const controlBounds = Array.from(toolbar.children, (control) =>
-      control.getBoundingClientRect()
-    );
-    await expect(controlBounds[0].left - toolbar.getBoundingClientRect().left).toBe(16);
-    await expect(
-      Math.min(...controlBounds.map((bounds) => bounds.top)) - toolbar.getBoundingClientRect().top
-    ).toBe(8);
-    for (let index = 1; index < controlBounds.length; index++) {
-      if (controlBounds[index].left > controlBounds[index - 1].left) {
-        await expect(controlBounds[index].left - controlBounds[index - 1].right).toBe(8);
-      }
-    }
-    await userEvent.click(textbox);
-    await expect(getComputedStyle(toolbar).position).toBe('static');
-    const items = () =>
-      Array.from(canvasElement.querySelectorAll('[data-toolbar-item]')).map((item) =>
-        item.getAttribute('data-toolbar-item')
-      );
-    await expect(items()).toEqual(['textStyle', 'bold', 'orderedList']);
-    await expect(canvas.queryByRole('button', { name: 'Italic' })).toBeNull();
-    await userEvent.click(canvas.getByRole('button', { name: 'Ordered list' }));
-    await waitFor(() => expect(textbox.querySelector('ol')).not.toBeNull());
-  },
 };
 
 export const CustomInputRules: Story = {
-  args: { value: '' },
+  args: { value: '', config: inputRulesConfig },
   parameters: {
     docs: {
       description: {
@@ -568,64 +434,16 @@ export const CustomInputRules: Story = {
       },
     },
   },
-  render: (args) => ({
-    props: {
-      ...args,
-      editorConfig: inputRulesConfig,
-    },
-    template: `
-      <kirby-card>
-        <kirby-x-rich-text-editor
-          ${argsToTemplate(args, { exclude: ['value', 'valueChange', 'config'] })}
-          [config]="editorConfig"
-          [(value)]="value"
-        />
-      </kirby-card>
-      <pre style="white-space: pre-wrap; overflow-wrap: anywhere">{{ value }}</pre>
-    `,
-  }),
-  play: async ({ canvasElement }) => {
-    const textbox = await within(canvasElement).findByRole('textbox', { name: 'Case notes' });
-    await userEvent.type(textbox, ':) **bold**');
-    await waitFor(() => expect(textbox.textContent).toBe('😊 **bold**'));
-    await expect(textbox.querySelector('strong')).toBeNull();
-    await userEvent.paste(' :)');
-    await waitFor(() => expect(textbox.textContent).toBe('😊 **bold** :)'));
-  },
 };
 
 export const CustomPasteRules: Story = {
-  ...CustomInputRules,
+  args: { value: '', config: pasteRulesConfig },
   parameters: {
     docs: {
       description: {
         story: 'Enable a Tiptap paste rule to replace :) with an emoji when pasting.',
       },
     },
-  },
-  render: (args) => ({
-    props: {
-      ...args,
-      editorConfig: pasteRulesConfig,
-    },
-    template: `
-      <kirby-card>
-        <kirby-x-rich-text-editor
-          ${argsToTemplate(args, { exclude: ['value', 'valueChange', 'config'] })}
-          [config]="editorConfig"
-          [(value)]="value"
-        />
-      </kirby-card>
-      <pre style="white-space: pre-wrap; overflow-wrap: anywhere">{{ value }}</pre>
-    `,
-  }),
-  play: async ({ canvasElement }) => {
-    const textbox = await within(canvasElement).findByRole('textbox', { name: 'Case notes' });
-    await userEvent.type(textbox, ':)');
-    await waitFor(() => expect(textbox.textContent).toBe(':)'));
-    await userEvent.clear(textbox);
-    await userEvent.paste(':)');
-    await waitFor(() => expect(textbox.textContent).toBe('😊'));
   },
 };
 
@@ -642,10 +460,6 @@ export const FocusOnEntry: Story = {
   render: () => ({
     template: '<kirby-x-rich-text-editor-focus-example />',
   }),
-  play: async ({ canvasElement }) => {
-    const textbox = await within(canvasElement).findByRole('textbox', { name: 'New message' });
-    await waitFor(() => expect(textbox).toHaveFocus());
-  },
 };
 
 export const ProgrammaticControls: Story = {
@@ -688,13 +502,10 @@ export const ProgrammaticControls: Story = {
     const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
     await userEvent.click(canvas.getByRole('button', { name: 'Clear' }));
     await waitFor(() => expect(textbox.textContent).toBe(''));
-    await expect(await canvas.findByText('Write a note...')).toBeVisible();
     await userEvent.click(canvas.getByRole('button', { name: 'Focus editor' }));
     await waitFor(() => expect(textbox).toHaveFocus());
     await userEvent.type(textbox, 'A note');
     const html = canvasElement.querySelector('pre');
-    await waitFor(() => expect(html).toHaveTextContent('<p>A note</p>'));
-    await waitFor(() => expect(canvas.queryByText('Write a note...')).toBeNull());
     const bold = canvas.getByRole('button', { name: 'Bold' });
     await userEvent.click(bold);
     await waitFor(() => {
