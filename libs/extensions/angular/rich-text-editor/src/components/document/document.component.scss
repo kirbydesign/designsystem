@@ -4,6 +4,10 @@ kirby-x-rich-text-editor-document {
   display: block;
   position: relative;
 
+  &.with-toolbar {
+    --kirby-content-border-top-radius: 0;
+  }
+
   .kirby-rich-text-placeholder {
     position: absolute;
     inset: var(--kirby-spacing-l);
@@ -24,6 +28,9 @@ kirby-x-rich-text-editor-document {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     line-height: var(--kirby-line-height-n);
+    border-radius: var(--kirby-content-border-top-radius, 0)
+      var(--kirby-content-border-top-radius, 0) var(--kirby-content-border-bottom-radius, 0)
+      var(--kirby-content-border-bottom-radius, 0);
 
     &:focus-visible {
       outline: var(--kirby-stroke-xs) solid transparent;

@@ -313,6 +313,14 @@ export const WithoutToolbar: Story = {
     const canvas = within(canvasElement);
     const textbox = await canvas.findByRole('textbox', { name: 'Case notes' });
     await expect(canvas.queryByRole('group', { name: 'Text formatting' })).toBeNull();
+    const card = textbox.closest('kirby-card');
+    if (!card) throw new Error('Card is missing');
+    const cardStyle = getComputedStyle(card);
+    const innerRadius =
+      parseFloat(cardStyle.borderTopLeftRadius) - parseFloat(cardStyle.borderTopWidth);
+    const textboxStyle = getComputedStyle(textbox);
+    await expect(parseFloat(textboxStyle.borderTopLeftRadius)).toBe(innerRadius);
+    await expect(parseFloat(textboxStyle.borderBottomLeftRadius)).toBe(innerRadius);
     await expect(textbox.querySelector('strong')).toHaveTextContent('bold');
     await expect(textbox.querySelector('ul')).not.toBeNull();
   },

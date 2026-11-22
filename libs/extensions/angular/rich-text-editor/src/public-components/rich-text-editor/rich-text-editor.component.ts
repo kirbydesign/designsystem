@@ -85,6 +85,10 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
     return this.document.containsSelection(selection);
   }
 
+  protected hasToolbar(): boolean {
+    return (this.config.toolbarItems?.length ?? 0) > 0;
+  }
+
   private initializeLabels(): void {
     this.labelState.set({ ...defaultLabels, ...this.labels });
   }
