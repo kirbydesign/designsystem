@@ -89,7 +89,7 @@
  */
 
 :root {
-  --kirby-font-letter-spacing: 0;
+  --kirby-font-letter-spacing: 0%;
   --kirby-font-family-brand: Roboto;
   --kirby-font-family-fallback: sans-serif;
 }
