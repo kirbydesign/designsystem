@@ -172,6 +172,16 @@ readonly config: RichTextEditorConfig = {
   enablePasteRules: false,
 };
 \`\`\`
+
+## CSS custom properties
+
+Set these on the editor host or in your stylesheet.
+
+| Property | Purpose |
+| --- | --- |
+| \`--kirby-x-rich-text-editor-min-height\` | Minimum document height, including padding; excludes toolbar. |
+| \`--kirby-x-rich-text-editor-max-height\` | Maximum document height, including padding; text scrolls internally. |
+| \`--kirby-x-rich-text-editor-toolbar-border\` | Toolbar divider; set to \`none\` to hide it. |
 `,
       },
     },
@@ -341,7 +351,8 @@ export const WithoutBackground: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Use without a card for a transparent editor on the surrounding surface.',
+        story:
+          'Use without a card for a transparent editor. Set --kirby-x-rich-text-editor-toolbar-border to none to hide the divider.',
       },
     },
   },
@@ -349,6 +360,7 @@ export const WithoutBackground: Story = {
     props: args,
     template: `
       <kirby-x-rich-text-editor
+        style="--kirby-x-rich-text-editor-toolbar-border: none"
         ${argsToTemplate(args, { exclude: ['value', 'valueChange'] })}
         [(value)]="value"
       />
@@ -360,6 +372,7 @@ export const WithoutBackground: Story = {
     const toolbar = canvas.getByRole('group', { name: 'Text formatting' });
     const editor = textbox.closest('kirby-x-rich-text-editor');
     if (!editor) throw new Error('Editor is missing');
+    await expect(getComputedStyle(toolbar).borderBottomStyle).toBe('none');
     for (const element of [editor, toolbar, textbox]) {
       await expect(getComputedStyle(element).backgroundColor).toBe('rgba(0, 0, 0, 0)');
     }
@@ -525,9 +538,11 @@ export const CustomToolbar: Story = {
       control.getBoundingClientRect()
     );
     await expect(controlBounds[0].left - toolbar.getBoundingClientRect().left).toBe(16);
-    await expect(controlBounds[0].top - toolbar.getBoundingClientRect().top).toBe(8);
+    await expect(
+      Math.min(...controlBounds.map((bounds) => bounds.top)) - toolbar.getBoundingClientRect().top
+    ).toBe(8);
     for (let index = 1; index < controlBounds.length; index++) {
-      if (controlBounds[index].top === controlBounds[index - 1].top) {
+      if (controlBounds[index].left > controlBounds[index - 1].left) {
         await expect(controlBounds[index].left - controlBounds[index - 1].right).toBe(8);
       }
     }

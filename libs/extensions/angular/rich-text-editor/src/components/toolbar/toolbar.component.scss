@@ -5,8 +5,10 @@ kirby-x-rich-text-editor-toolbar {
   gap: var(--kirby-spacing-xxs);
   padding: var(--kirby-spacing-xxs);
   padding-inline-start: var(--kirby-spacing-s);
-  border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
-  color: var(--kirby-color-content-base);
+  border-bottom: var(
+    --kirby-x-rich-text-editor-toolbar-border,
+    var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent)
+  );
 
   &.editor-empty-toolbar {
     display: none;
@@ -14,16 +16,7 @@ kirby-x-rich-text-editor-toolbar {
 
   > button[kirby-button].icon-only {
     margin: 0;
-    min-width: var(--kirby-size-fat-finger);
-    min-height: var(--kirby-size-fat-finger);
-    padding: var(--kirby-spacing-xxs);
     border-radius: var(--kirby-border-radius-s);
-  }
-
-  kirby-dropdown > button[kirby-button] {
-    border-color: transparent;
-    min-height: var(--kirby-size-fat-finger);
-    font-weight: var(--kirby-font-weight-normal);
   }
 
   > button[kirby-button].no-decoration[aria-pressed='true'] {
