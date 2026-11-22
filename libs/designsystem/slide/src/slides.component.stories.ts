@@ -4,8 +4,7 @@ import { CardComponent, CardHeaderComponent } from '@kirbydesign/designsystem/ca
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
 import { responsiveModes } from 'tools/storybook-config/shared-config';
 
-// eslint-disable-next-line no-restricted-imports
-import { renderOnSurfaces } from '../../.storybook/story-helpers';
+import { renderOnSurfaces } from 'tools/storybook-config/story-helpers';
 import { SlidesExampleComponent } from '~/app/examples/slides-example/slides-example.component';
 
 const meta: Meta<SlidesComponent> = {

@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "rootDir": "../../..",
     "strict": false,
     "strictNullChecks": false,
     "strictPropertyInitialization": false,

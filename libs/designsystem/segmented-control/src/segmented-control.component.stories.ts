@@ -12,13 +12,12 @@ import {
   SegmentedControlMode,
 } from '@kirbydesign/designsystem/segmented-control';
 
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 import { SegmentedControlExampleComponent } from '~/app/examples/segmented-control-example/segmented-control-example.component';
 
 const meta: Meta<SegmentedControlComponent> = {

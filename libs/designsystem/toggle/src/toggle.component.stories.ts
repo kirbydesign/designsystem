@@ -3,13 +3,12 @@ import { moduleMetadata } from '@storybook/angular';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<ToggleComponent> = {
   component: ToggleComponent,

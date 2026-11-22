@@ -14,8 +14,11 @@ import { FormFieldModule, InputComponent } from '@kirbydesign/designsystem/form-
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers';
-// eslint-disable-next-line no-restricted-imports
-import { gridStyles, interactionStates, pseudoStatesFor } from '../../.storybook/story-helpers';
+import {
+  gridStyles,
+  interactionStates,
+  pseudoStatesFor,
+} from 'tools/storybook-config/story-helpers';
 import { CardExampleComponent } from '~/app/examples/card-example/card-example.component';
 
 const meta: Meta<CardComponent> = {

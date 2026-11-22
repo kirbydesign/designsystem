@@ -16,7 +16,6 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
-// eslint-disable-next-line no-restricted-imports
 import {
   focusSelectableItem,
   gridStyles,
@@ -24,7 +23,7 @@ import {
   pseudoStatesFor,
   Surface,
   surfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 const meta: Meta<ItemComponent> = {

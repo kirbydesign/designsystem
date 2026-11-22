@@ -4,13 +4,12 @@ import { RangeComponent } from '@kirbydesign/designsystem/range';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
-// eslint-disable-next-line no-restricted-imports
 import {
   idsOnSurfaces,
   interactionStates,
   pseudoStatesFor,
   renderOnSurfaces,
-} from '../../.storybook/story-helpers';
+} from 'tools/storybook-config/story-helpers';
 
 const meta: Meta<RangeComponent> = {
   component: RangeComponent,
