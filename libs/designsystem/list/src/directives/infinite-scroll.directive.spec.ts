@@ -116,6 +116,14 @@ describe('InfiniteScrollDirective', () => {
       expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
     }));
 
+    it('should emit event initially when not inside ion-content and the window is not scrollable', fakeAsync(() => {
+      const directive = createDirective(0.8);
+      tick();
+      tick(INFINITE_SCROLL_DEBOUNCE);
+
+      expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
+    }));
+
     describe('when placed inside ion-content (e.g. in a modal)', () => {
       let scrollElement: HTMLElement;
 

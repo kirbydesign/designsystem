@@ -84,23 +84,23 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         this.zone.run(() => this.scrollEnd.emit());
       });
 
-    // Native scroll event, as 'ionScroll' requires 'scrollEvents' on ion-content (not set in e.g. modals)
     setTimeout(async () => {
       const ionContent = this.elementRef.nativeElement.closest('ion-content');
-      if (!ionContent) return;
+      if (ionContent) {
+        this.scrollContainer = await ionContent.getScrollElement();
+        if (this.isDestroyed) return;
 
-      this.scrollContainer = await ionContent.getScrollElement();
+        // Native scroll event, as 'ionScroll' requires 'scrollEvents' on ion-content (not set in e.g. modals)
+        // run outside angular to avoid change detection on each scroll
+        this.zone.runOutsideAngular(() => {
+          fromEvent(this.scrollContainer, 'scroll')
+            .pipe(takeUntil(this.ngUnsubscribe$))
+            .subscribe(() => this.onScroll());
+        });
+      }
 
-      if (this.isDestroyed || !this.scrollContainer) return;
-
-      // run outside angular to avoid change detection on each scroll
-      this.zone.runOutsideAngular(() => {
-        fromEvent(this.scrollContainer, 'scroll')
-          .pipe(takeUntil(this.ngUnsubscribe$))
-          .subscribe(() => this.onScroll());
-      });
-
-      // initial check, in case the content is not scrollable
+      if (this.isDestroyed) return;
+      // initial check, in case the content (ion-content or window) is not scrollable
       this.onScroll();
     });
   }
