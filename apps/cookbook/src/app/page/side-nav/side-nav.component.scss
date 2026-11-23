@@ -4,38 +4,36 @@
 $link-padding-block: var(--kirby-spacing-xxxs);
 $link-padding-inline: var(--kirby-spacing-s);
 $link-border-radius: 3px;
-$menu-padding-mobile: var(--kirby-spacing-m);
 $divider-inset: var(--kirby-spacing-xxxxs);
 $divider-spacing: var(--kirby-spacing-xxs);
-$logo-size-mobile: var(--kirby-spacing-xl);
 
 :host {
-  display: none;
   z-index: var(--kirby-z-index-sticky-content);
-  padding: $menu-padding-mobile;
-  position: absolute;
-  top: var(--kirby-spacing-xxxxl);
-  bottom: 0;
-  overflow: auto;
+  padding: var(--kirby-spacing-m);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: var(--kirby-color-fill-base);
+  border-inline-end: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
 
-  &.is-open {
-    display: block;
-    background-color: var(--kirby-color-fill-base);
-    box-shadow: var(--kirby-elevation-8);
+  @include utils.media('<large') {
+    display: none;
+    position: fixed;
+    top: var(--header-height);
+    bottom: 0;
+    left: 0;
+
+    &.is-open {
+      display: block;
+      box-shadow: var(--kirby-elevation-8);
+    }
   }
 
   @include utils.media('>=large') {
-    position: static;
-    grid-area: sidebar;
-    box-shadow: none;
     display: block;
-    padding: 0;
-    min-height: unset;
-
-    &.is-open {
-      background-color: transparent;
-      box-shadow: none;
-    }
+    position: sticky;
+    top: var(--header-height);
+    align-self: start;
+    height: calc(100vh - var(--header-height));
   }
 }
 
