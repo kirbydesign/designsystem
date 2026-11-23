@@ -72,9 +72,10 @@ $bullet-height: 6px;
     }
   }
 
-  // Hides the navigation buttons if the Slider
+  // Hides the navigation buttons and pagination if the Slider
   // doesn't contain enough slides for swiping.
-  .swiper-button-lock {
+  .swiper-button-lock,
+  .swiper-pagination-lock {
     display: none;
   }
 

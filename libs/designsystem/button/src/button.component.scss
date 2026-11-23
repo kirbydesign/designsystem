@@ -286,6 +286,9 @@ $button-margin: var(--kirby-spacing-xxxs);
     transition: interaction-state.transition();
     box-shadow: var(--kirby-focus-ring-md-combined-inset);
     border-color: var(--kirby-color-border-focus);
+
+    // Re-declared to win over the global link focus styles when rendered as a[kirby-button]:
+    border-radius: var(--kirby-border-radius-pill);
   }
 
   &[expand='block'] {

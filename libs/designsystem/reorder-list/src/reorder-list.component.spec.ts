@@ -5,19 +5,11 @@ import { ReorderListComponent } from './reorder-list.component';
 
 describe('ReorderListComponent', () => {
   let spectator: Spectator<ReorderListComponent>;
-  let component: ReorderListComponent;
   const items = [
     { title: '1', subItems: [{ title: '1a' }, { title: '1b' }, { title: '1c' }] },
     { title: '2' },
     { title: '3' },
   ];
-
-  function runNgOnChanges() {
-    // Forces ngOnChanges to run (since that won't happen, when inputs are changed programmatically)
-    component.ngOnChanges();
-    // Detect changes, since ngOnChanges altered state of component
-    spectator.detectChanges();
-  }
 
   const createHost = createComponentFactory({
     component: ReorderListComponent,
@@ -33,7 +25,6 @@ describe('ReorderListComponent', () => {
         },
       },
     });
-    component = spectator.component;
   });
 
   it('should create', () => {
@@ -49,7 +40,6 @@ describe('ReorderListComponent', () => {
       spectator.setInput({
         items: null,
       });
-      runNgOnChanges();
 
       expect(spectator.component.items).toBe(null);
     });
@@ -84,6 +74,40 @@ describe('ReorderListComponent', () => {
     });
   });
 
+  describe('while reordering items', () => {
+    beforeEach(() => {
+      spectator.setInput({
+        items: [
+          { title: '1', subItems: [{ title: '1a' }, { title: '1b' }] },
+          { title: '2', subItems: [{ title: '2a' }, { title: '2b' }] },
+        ],
+        subItemsName: 'subItems',
+      });
+    });
+
+    it('should not shift the sub items of other cards when reordering cards', () => {
+      const outerReorderGroup = spectator.element.querySelector(':scope > ion-reorder-group');
+      const [, secondCard] = spectator.queryAll('kirby-card');
+      const lastSubItem = secondCard.querySelector('ion-reorder-group').lastElementChild;
+      const topBefore = lastSubItem.getBoundingClientRect().top;
+
+      outerReorderGroup.classList.add('reorder-list-active');
+
+      expect(lastSubItem.getBoundingClientRect().top).toBe(topBefore);
+    });
+
+    it('should not shift the sub items when reordering inside a group', () => {
+      const [firstCard] = spectator.queryAll('kirby-card');
+      const subReorderGroup = firstCard.querySelector('ion-reorder-group');
+      const lastSubItem = subReorderGroup.lastElementChild;
+      const topBefore = lastSubItem.getBoundingClientRect().top;
+
+      subReorderGroup.classList.add('reorder-list-active');
+
+      expect(lastSubItem.getBoundingClientRect().top).toBe(topBefore);
+    });
+  });
+
   describe('subItems', () => {
     it('should render a kirby-item for each item in subitems array', () => {
       expect(spectator.queryAll('kirby-card ion-reorder-group kirby-item').length).toBe(
@@ -96,7 +120,6 @@ describe('ReorderListComponent', () => {
         items: items,
         subItemsName: 'invalidName',
       });
-      runNgOnChanges();
 
       expect(spectator.queryAll('kirby-card ion-reorder-group kirby-item').length).toBe(0);
     });
@@ -107,7 +130,6 @@ describe('ReorderListComponent', () => {
         items: items,
         subItemsName: 'subItems',
       });
-      runNgOnChanges();
 
       expect(spectator.queryAll('kirby-card ion-reorder-group kirby-item').length).toBe(0);
     });

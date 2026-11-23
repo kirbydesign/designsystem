@@ -1,6 +1,3 @@
-@if (reorderActive) {
-  <ion-backdrop [tappable]="false" [visible]="true" [stopPropagation]="false"></ion-backdrop>
-}
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   @for (reorderItem of items; track reorderItem) {
     <div>
@@ -12,7 +9,7 @@
           "
         ></ng-container>
         @if (reorderItem[subItemsName]) {
-          <div #reorderGroupContainer>
+          <div class="sub-items">
             <ion-reorder-group
               (ionItemReorder)="doSubReorder($event, reorderItem)"
               disabled="false"
