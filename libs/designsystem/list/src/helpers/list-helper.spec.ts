@@ -124,6 +124,36 @@ describe('list helper', () => {
 
       expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
     });
+
+    it('should check the scroll position again, when the load more events complete callback is called', () => {
+      const scrollDirective = jasmine.createSpyObj('InfiniteScrollDirective', [
+        'checkScrollPosition',
+      ]);
+      component.scrollDirective = scrollDirective;
+      component.isLoadOnDemandEnabled = true;
+      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
+        event.complete();
+      });
+
+      listHelper.onLoadOnDemand(component);
+
+      expect(scrollDirective.checkScrollPosition).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not check the scroll position again, when the load more events complete callback is called with true', () => {
+      const scrollDirective = jasmine.createSpyObj('InfiniteScrollDirective', [
+        'checkScrollPosition',
+      ]);
+      component.scrollDirective = scrollDirective;
+      component.isLoadOnDemandEnabled = true;
+      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
+        event.complete(true);
+      });
+
+      listHelper.onLoadOnDemand(component);
+
+      expect(scrollDirective.checkScrollPosition).not.toHaveBeenCalled();
+    });
   });
 
   describe('function: groupSections', () => {
