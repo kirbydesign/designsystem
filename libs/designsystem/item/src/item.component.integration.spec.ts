@@ -92,5 +92,26 @@ describe('ItemComponent integration', () => {
         expect(nativePart.tagName).not.toEqual('BUTTON');
       });
     });
+
+    describe('and role="option"', () => {
+      beforeEach(async () => {
+        spectator = createHost(`<kirby-item selectable="true" role="option">
+          <p class="kirby-item-title">Option</p>
+        </kirby-item>
+        `);
+        ionItem = spectator.queryHost('ion-item');
+        await TestHelper.whenReady(ionItem);
+      });
+
+      it('should not render native button', () => {
+        const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+        expect(nativePart.tagName).not.toEqual('BUTTON');
+      });
+
+      it('should still have pointer cursor', () => {
+        const nativePart = ionItem.shadowRoot.querySelector('[part="native"]');
+        expect(nativePart).toHaveComputedStyle({ cursor: 'pointer' });
+      });
+    });
   });
 });
