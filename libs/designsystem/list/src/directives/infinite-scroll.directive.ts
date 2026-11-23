@@ -107,6 +107,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
   /**
    * Re-check the scroll position after render. Skipped if the height is unchanged since last emit, to avoid endless loading.
+   * Delayed by {@link INFINITE_SCROLL_DEBOUNCE} to give new items time to render before measuring.
    */
   checkScrollPosition(): void {
     setTimeout(() => {
@@ -115,7 +116,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
       if (scroll.elementHeight !== this.heightAtLastEmit) {
         this.scroll$.next(scroll);
       }
-    });
+    }, INFINITE_SCROLL_DEBOUNCE);
   }
 
   /**

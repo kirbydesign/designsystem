@@ -170,7 +170,21 @@ describe('InfiniteScrollDirective', () => {
 
         nativeElement.getBoundingClientRect.and.returnValue({ height: 900, bottom: 100 });
         directive.checkScrollPosition();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(2);
+      }));
+
+      it('should emit event if element height changes after the next macrotask (slow render)', fakeAsync(() => {
+        const directive = createDirective(0.8);
+        directive.onScroll();
+        tick(INFINITE_SCROLL_DEBOUNCE);
+
+        directive.checkScrollPosition();
         tick();
+        nativeElement.getBoundingClientRect.and.returnValue({ height: 900, bottom: 100 });
+        tick(INFINITE_SCROLL_DEBOUNCE);
         tick(INFINITE_SCROLL_DEBOUNCE);
 
         expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(2);
@@ -182,7 +196,7 @@ describe('InfiniteScrollDirective', () => {
         tick(INFINITE_SCROLL_DEBOUNCE);
 
         directive.checkScrollPosition();
-        tick();
+        tick(INFINITE_SCROLL_DEBOUNCE);
         tick(INFINITE_SCROLL_DEBOUNCE);
 
         expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
