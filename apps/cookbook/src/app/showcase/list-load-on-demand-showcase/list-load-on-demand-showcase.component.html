@@ -1,15 +1,26 @@
 <div class="example">
   <p>
     The kirby list will emit a
-    <code>loadMore</code>
+    <code>loadOnDemand</code>
     event, when the user has scrolled 80% of the list. It is the responsibility of the consumer to
     add more items to the bound
     <code>items</code>
     .
   </p>
   <p>
+    If the list does not fill the view, e.g. on a page or in a modal that cannot scroll, the event
+    is also emitted without scrolling, until the content becomes scrollable. This is checked
+    initially, after
+    <code>complete()</code>
+    is called and when
+    <code>items</code>
+    changes. Assign a new array to
+    <code>items</code>
+    (instead of mutating it) for the change to be detected.
+  </p>
+  <p>
     The event emitted is of type
-    <code>KirbyLoadMoreEvent</code>
+    <code>LoadOnDemandEvent</code>
     which exposes a
     <code>complete()</code>
     callback function.
@@ -21,9 +32,9 @@
   </p>
   <p>
     If
-    <code>complete(disableLoadMore?: boolean)</code>
+    <code>complete(disableLoadOnDemand?: boolean)</code>
     is called with the
-    <code>disableLoadMore</code>
+    <code>disableLoadOnDemand</code>
     argument set to
     <code>true</code>
     , no further events will be emitted. If
@@ -34,18 +45,6 @@
 <div class="example-wrapper">
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <cookbook-iphone src="/examples/list-load-on-demand" showExternalLink="true"></cookbook-iphone>
-</div>
-<h2>In a modal</h2>
-<p>
-  Load on demand also works when the list is placed inside a modal. If the initial items do not fill
-  the view, more items are loaded until the content becomes scrollable.
-</p>
-<div class="example-wrapper">
-  <cookbook-code-viewer [html]="modalExampleHtml"></cookbook-code-viewer>
-  <cookbook-iphone
-    src="/examples/list-load-on-demand-modal"
-    showExternalLink="true"
-  ></cookbook-iphone>
 </div>
 <h2>Accessibility</h2>
 <p>

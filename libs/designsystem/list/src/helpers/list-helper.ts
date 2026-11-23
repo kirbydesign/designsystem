@@ -25,7 +25,7 @@ export class ListHelper {
           component._changeDetectorRef?.markForCheck();
           if (component.isLoadOnDemandEnabled) {
             // load more if the list still doesn't fill the view
-            component.scrollDirective?.checkScrollPosition?.();
+            component.scrollDirective?.checkScrollPosition();
           }
         },
       });
