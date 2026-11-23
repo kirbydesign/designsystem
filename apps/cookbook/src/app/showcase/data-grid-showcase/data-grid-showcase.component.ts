@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 import { DataGridDefaultExampleComponent } from '../../examples/data-grid-example/examples/default';
 import { DataGridSortingExampleComponent } from '../../examples/data-grid-example/examples/sorting';
+import { DataGridSelectionExampleComponent } from '../../examples/data-grid-example/examples/selection';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
@@ -13,6 +14,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     ImportViewerComponent,
     DataGridDefaultExampleComponent,
     DataGridSortingExampleComponent,
+    DataGridSelectionExampleComponent,
   ],
 })
 export class DataGridShowcaseComponent {}

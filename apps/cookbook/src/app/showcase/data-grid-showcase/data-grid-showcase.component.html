@@ -34,6 +34,30 @@
       #dataGridSortingExample
     ></cookbook-data-grid-sorting-example>
   </cookbook-example-viewer>
+
+  <h2>Selection</h2>
+  <p>
+    Register
+    <code>rowSelectionFeature</code>
+    and add
+    <code>kirbyDataGridSelectionColumn</code>
+    to the columns. It adds a select-all checkbox in the header and one checkbox per row.
+    <code>rowLabel</code>
+    is required: it names each checkbox for screen readers, for example "Select Acme A/S". Selection
+    is keyed by
+    <code>getRowId</code>
+    , so it survives sorting and reloads. Which rows can be selected is a table option, for example
+    <code>enableRowSelection</code>
+    . Only the checkbox selects a row; clicking the row itself does not.
+  </p>
+  <cookbook-example-viewer
+    [html]="dataGridSelectionExample.template"
+    [ts]="dataGridSelectionExample.dataSnippet"
+  >
+    <cookbook-data-grid-selection-example
+      #dataGridSelectionExample
+    ></cookbook-data-grid-selection-example>
+  </cookbook-example-viewer>
 </div>
 
 <h2>Importing</h2>

@@ -4,3 +4,4 @@ export * from './data-grid-header-row.directive';
 export * from './data-grid-header-cell.component';
 export * from './data-grid-row.directive';
 export * from './data-grid-cell.directive';
+export * from './data-grid-selection-column';

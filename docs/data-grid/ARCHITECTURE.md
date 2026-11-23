@@ -215,6 +215,27 @@ patterns and must look and behave the same in every team:
 | Filter control      | `column.setFilterValue()`, faceted values                   | The UI form (value list or conditions) is open.                                     |
 | Selection summary   | `rowSelection` against the visible rows                     | "12 selected, 4 not shown": counts hidden selected rows.                            |
 
+**How a part reaches the grid depends on where its control lives:**
+
+- **A control on an existing column is rendered automatically by its building
+  block.** The header cell renders the sort button when the column can sort
+  (`rowSortingFeature` registered, `enableSorting` not `false`). The consumer
+  writes no extra markup.
+- **A control that needs its own column comes as a column helper**, a function
+  that returns a TanStack `ColumnDef`, for example
+  `kirbyDataGridSelectionColumn({ rowLabel })`. The column exists in TanStack's
+  column model, so indices, visibility, ordering and pinning include it, and the
+  consumer decides whether and where to add it. Expand and tree toggles follow
+  the same pattern.
+
+Column helpers only render controls. What a control acts on (which rows can be
+selected or expanded) is decided by TanStack's table options, and row-level ARIA
+(`aria-selected`, later `aria-expanded` and `aria-level`) is set by the row
+building block, whichever cell the control is in. The components a helper
+renders read their row from TanStack's render context and stay internal, so
+they can be exported later for combined cells (for example a tree cell with a
+checkbox, a toggle and the value) without a rewrite.
+
 ### The Options
 
 The same header and row, in each notation:

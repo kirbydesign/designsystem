@@ -2,6 +2,7 @@ import { Component, linkedSignal, resource, signal } from '@angular/core';
 import {
   ColumnDef,
   FlexRender,
+  functionalUpdate,
   injectTable,
   rowSortingFeature,
   SortingState,
@@ -114,8 +115,7 @@ export class DataGridSortingExampleComponent {
     enableSortingRemoval: false,
     sortDescFirst: false,
     state: { sorting: this.sorting() },
-    onSortingChange: (updater) =>
-      typeof updater === 'function' ? this.sorting.update(updater) : this.sorting.set(updater),
+    onSortingChange: (updater) => this.sorting.set(functionalUpdate(updater, this.sorting())),
   }));
 
   dataSnippet = `const features = tableFeatures({ rowSortingFeature });
@@ -150,7 +150,6 @@ readonly table = injectTable(() => ({
   enableSortingRemoval: false, // toggle between ascending and descending, never back to unsorted
   sortDescFirst: false,        // always start ascending
   state: { sorting: this.sorting() },
-  onSortingChange: (updater) =>
-    typeof updater === 'function' ? this.sorting.update(updater) : this.sorting.set(updater),
+  onSortingChange: (updater) => this.sorting.set(functionalUpdate(updater, this.sorting())),
 }));`;
 }

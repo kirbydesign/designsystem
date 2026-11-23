@@ -1,0 +1,30 @@
+// Styles for consumer-written markup inside kirby-data-grid (rows and cells), which the
+// component's encapsulated styles can't reach. Builds on table.kirby-table in html-table.
+
+kirby-data-grid {
+  // Temporary until the design for selected rows is ready.
+  tr.selected {
+    background-color: var(--kirby-color-fill-base-active);
+  }
+
+  // A square around the selection checkbox: as wide as a row is high. 44px mirrors
+  // .kirby-table's row height until the size custom properties exist. Qualified with `table`
+  // and a class to win over the `table.kirby-table td` padding.
+  table :is(th, td):has(> .kirby-data-grid-selection-checkbox) {
+    width: var(--kirby-data-grid-row-height, 44px);
+    padding-inline: 0;
+  }
+
+  // The checkbox's own side padding, and the spacing before its (empty) visible label, would
+  // push the box off-centre. The class is repeated to outrank kirby-checkbox's encapsulated
+  // `::part()` rules.
+  .kirby-data-grid-selection-checkbox.kirby-data-grid-selection-checkbox ion-checkbox {
+    &::part(label) {
+      padding-inline: 0;
+    }
+
+    &::part(label-text-wrapper) {
+      margin-inline: 0;
+    }
+  }
+}

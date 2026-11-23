@@ -14,4 +14,6 @@ export const en: Translation = {
   characters: 'Characters',
   outOf: 'out of',
   entered: 'entered',
+  selectRow: 'Select {label}',
+  selectAllRows: 'Select all rows',
 };
