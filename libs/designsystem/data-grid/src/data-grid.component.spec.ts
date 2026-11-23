@@ -146,6 +146,10 @@ describe('DataGridComponent', () => {
   });
 
   describe('table', () => {
+    it('should not set aria-multiselectable without rowSelectionFeature', () => {
+      expect(spectator.query('table')).not.toHaveAttribute('aria-multiselectable');
+    });
+
     it('should have role grid', () => {
       expect(spectator.query('table')).toHaveAttribute('role', 'grid');
     });

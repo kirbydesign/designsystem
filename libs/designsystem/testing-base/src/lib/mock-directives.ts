@@ -24,6 +24,12 @@ import {
 } from './directives/mock.slide.directive';
 import { MockKeyHandlerDirective } from './directives/mock.key-handler.directive';
 import { MockModalRouterLinkDirective } from './directives/mock.modal-router-link.directive';
+import {
+  MockDataGridCellDirective,
+  MockDataGridHeaderRowDirective,
+  MockDataGridRowDirective,
+  MockDataGridTableDirective,
+} from './directives/mock.data-grid.directive';
 
 export const MOCK_DIRECTIVES = [
   MockAccordionDirective,
@@ -46,4 +52,8 @@ export const MOCK_DIRECTIVES = [
   MockSlideStretchHeightDirective,
   MockKeyHandlerDirective,
   MockModalRouterLinkDirective,
+  MockDataGridTableDirective,
+  MockDataGridHeaderRowDirective,
+  MockDataGridRowDirective,
+  MockDataGridCellDirective,
 ];

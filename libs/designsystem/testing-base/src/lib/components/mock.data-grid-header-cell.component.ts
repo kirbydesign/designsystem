@@ -22,7 +22,7 @@ export class MockDataGridHeaderCellComponent<
   TData extends RowData,
   TValue,
 > {
-  @Input() header: Header<TFeatures, TData, TValue>;
+  @Input('kirbyDataGridHeaderCell') header: Header<TFeatures, TData, TValue>;
 }
 
 // #endregion

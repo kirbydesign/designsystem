@@ -21,3 +21,9 @@ export { MockThemeColorDirective } from './mock.theme-color.directive';
 export { MockSlideDirective, MockSlideStretchHeightDirective } from './mock.slide.directive';
 export { MockKeyHandlerDirective } from './mock.key-handler.directive';
 export { MockModalRouterLinkDirective } from './mock.modal-router-link.directive';
+export {
+  MockDataGridCellDirective,
+  MockDataGridHeaderRowDirective,
+  MockDataGridRowDirective,
+  MockDataGridTableDirective,
+} from './mock.data-grid.directive';

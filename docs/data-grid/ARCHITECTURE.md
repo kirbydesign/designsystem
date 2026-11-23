@@ -2,11 +2,10 @@
 
 **Status:** Starting point for the POC. Not yet recorded as an ADR.
 
-Names such as `kirby-data-grid`, `kirby-data-grid-layout`, `kirbyDataGridFeatures`
-and the slot names are working names. Code samples use TanStack Table v9
-(`@tanstack/angular-table` / `@tanstack/table-core` `^9.3.1`). Where a sample shows
-a building block, its notation is **illustrative only**, because the form of the
-building blocks is not yet decided (see [section 5](#5-building-blocks)).
+Names such as `kirby-data-grid-layout` and the slot names are working names. Code
+samples use TanStack Table v9 (`@tanstack/angular-table` / `@tanstack/table-core`
+`^9.3.1`). The building blocks in [section 5](#5-building-blocks), sorting and
+row selection are implemented in `@kirbydesign/designsystem/data-grid`.
 
 This document is self-contained: it summarizes the earlier research and
 spikes, so it can be read without them.
@@ -105,44 +104,33 @@ teams without waiting for Kirby. TanStack's major versions have historically
 been years apart (v8 in 2022, v9 in 2026), so exposing its types is an
 acceptable coupling.
 
-### Kirby's Feature Preset
+### Features Are Registered by the Consumer
 
 TanStack v9 only includes the features registered in `features`, and removes
-unregistered ones from the bundle. Kirby exports a preset that covers what its
-building blocks need:
+unregistered ones from the bundle. **Decision:** Kirby does not ship a feature
+preset for now. Each team registers the features it uses, for example
+`tableFeatures({ rowSortingFeature, rowSelectionFeature })`. A preset would
+bundle client-side row models (`sortedRowModel`, `filteredRowModel`, …) that a
+server-side table never uses.
 
-```ts
-// Kirby
-export const kirbyDataGridFeatures = tableFeatures({
-  rowSortingFeature,
-  columnFilteringFeature,
-  columnFacetingFeature,
-  rowSelectionFeature,
-  columnVisibilityFeature,
-  // Client-side row models. Manual (server) modes bypass them.
-  sortedRowModel: createSortedRowModel(),
-  filteredRowModel: createFilteredRowModel(),
-  facetedRowModel: createFacetedRowModel(),
-  facetedUniqueValues: createFacetedUniqueValues(),
-  sortFns: { text: sortFn_text, alphanumeric: sortFn_alphanumeric, datetime: sortFn_datetime },
-  filterFns: { includesString: filterFn_includesString, arrIncludesSome: filterFn_arrIncludesSome },
-});
-export type KirbyDataGridFeatures = typeof kirbyDataGridFeatures;
-```
-
-- **Consumers extend by spreading** the preset into their own `tableFeatures({
-...kirbyDataGridFeatures, rowPaginationFeature, … })`.
-- **Building blocks state the feature they need in their types**, for example a
-  sort header requires `rowSortingFeature`, so a missing feature fails at compile
-  time rather than at runtime.
-- Pagination, expanding and pinning are added to the preset when they enter scope
-  ([section 10](#10-scope)).
+- **Building blocks detect features at runtime.** A feature adds its methods to
+  columns, rows and the table only when it is registered, so the building blocks
+  use internal type guards (for example `hasSorting(column)`) and stay inert for
+  features the table doesn't have.
+- **Column helpers require their feature at compile time.** Using
+  `kirbyDataGridSelectionColumn` in a table without `rowSelectionFeature` fails
+  to compile, because adding the column is an explicit opt-in.
+- **Kirby defaults** (the sort cycle, `getRowId`, the state wiring) may later come
+  through TanStack's `createTableHook`; that is decided together with the
+  guidelines.
 
 ### Consumer Sketch
 
 ```ts
-const columns: ColumnDef<KirbyDataGridFeatures, Payment, any>[] = [
-  { id: 'select', enableSorting: false, enableHiding: false },
+const features = tableFeatures({ rowSortingFeature, rowSelectionFeature, columnFilteringFeature });
+
+const columns: ColumnDef<typeof features, Payment>[] = [
+  kirbyDataGridSelectionColumn({ rowLabel: (payment: Payment) => payment.recipient }),
   { accessorKey: 'recipient', header: 'Recipient' },
   { accessorKey: 'amount', header: 'Amount' },
   { accessorKey: 'status', header: 'Status', meta: { filter: 'values' } },
@@ -161,7 +149,7 @@ export class PaymentsComponent {
   }));
 
   readonly table = injectTable(() => ({
-    features: kirbyDataGridFeatures,
+    features,
     columns,
     data: this.page.value()?.items ?? [],
     rowCount: this.page.value()?.total,
@@ -187,9 +175,19 @@ export class PaymentsComponent {
 semantic by default, keep the browser's table layout (column widths align
 across rows without extra work), and continue the existing `.kirby-table` styles.
 
-**Not decided:** whether the building blocks are CSS classes, attribute
-directives or components. The options are compared below, with no
-recommendation.
+**Decided:** the forms are mixed per block, as the options below allowed.
+
+| Block                        | Form                                                              | Why                                                                                        |
+| ---------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Table, header row, row, cell | Attribute directives, for example `<tr [kirbyDataGridRow]="row">` | They only decorate: ARIA, classes and positions through host bindings.                     |
+| Header cell                  | Component on `th[kirbyDataGridHeaderCell]`                        | It renders the sort button when the column can sort.                                       |
+| Selection checkboxes         | Internal components, rendered by a column helper                  | They need their own column (see [How a part reaches the grid](#decided-parts-ready-made)). |
+
+Each block takes its TanStack object through its selector (`[kirbyDataGridRow]="row"`),
+and injects the container for table-wide values such as positions and counts.
+Styles that must reach the consumer's markup (the selected row, the selection
+cell) live in `@kirbydesign/core`'s global styles next to `.kirby-table`. The
+options as they were compared:
 
 ### What Every Building Block Must Do, Whatever Its Form
 
@@ -206,14 +204,14 @@ recommendation.
 Kirby ships these as finished building blocks, because they are decided design
 patterns and must look and behave the same in every team:
 
-| Part                | Engine API                                                  | Notes                                                                               |
-| ------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Sort header         | `column.getToggleSortingHandler()`, `getIsSorted()`         | A button in the `<th>`; sets `aria-sort`.                                           |
-| Select-all checkbox | `getIsAllPageRowsSelected()`, `toggleAllPageRowsSelected()` | Whether it selects the page or all rows is open ([section 13](#13-open-questions)). |
-| Row checkbox        | `row.getIsSelected()`, `row.toggleSelected()`               | Gets an accessible name from a consumer-supplied row label.                         |
-| Column chooser      | `column.getCanHide()`, `toggleVisibility()`                 | For the layout header; lists columns by their `header` string.                      |
-| Filter control      | `column.setFilterValue()`, faceted values                   | The UI form (value list or conditions) is open.                                     |
-| Selection summary   | `rowSelection` against the visible rows                     | "12 selected, 4 not shown": counts hidden selected rows.                            |
+| Part                | Engine API                                          | Notes                                                                    |
+| ------------------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
+| Sort header         | `column.getToggleSortingHandler()`, `getIsSorted()` | A button in the `<th>`; sets `aria-sort`.                                |
+| Select-all checkbox | `getIsAllRowsSelected()`, `toggleAllRowsSelected()` | Selects all loaded rows that can be selected; revisited with pagination. |
+| Row checkbox        | `row.getIsSelected()`, `row.toggleSelected()`       | Gets an accessible name from a consumer-supplied row label.              |
+| Column chooser      | `column.getCanHide()`, `toggleVisibility()`         | For the layout header; lists columns by their `header` string.           |
+| Filter control      | `column.setFilterValue()`, faceted values           | The UI form (value list or conditions) is open.                          |
+| Selection summary   | `rowSelection` against the visible rows             | "12 selected, 4 not shown": counts hidden selected rows.                 |
 
 **How a part reaches the grid depends on where its control lives:**
 
@@ -291,11 +289,11 @@ Notes for the decision:
 
 ### Inputs
 
-| Input   | Type                                           | Notes                                                                     |
-| ------- | ---------------------------------------------- | ------------------------------------------------------------------------- |
-| `table` | TanStack `Table<KirbyDataGridFeatures, TData>` | Required. Provided to content and to the layout through DI.               |
-| `label` | `string`                                       | Required. The grid's accessible name (`aria-label`).                      |
-| `size`  | `'xs' \| 'sm' \| 'md' \| 'lg'`                 | A signal input that can change at runtime. Default proposed: `md` (open). |
+| Input   | Type                               | Notes                                                                   |
+| ------- | ---------------------------------- | ----------------------------------------------------------------------- |
+| `table` | TanStack `Table<TFeatures, TData>` | Required. Provided to content and to the layout through DI.             |
+| `label` | `string`                           | Required. The grid's accessible name (`aria-label`).                    |
+| `size`  | `'xs' \| 'sm' \| 'md' \| 'lg'`     | An input that can change at runtime. Default: `md` (token values open). |
 
 The container has **no feature flags**: sorting, filtering and selection come
 from the table options and column definitions, so adding a feature never changes
@@ -455,7 +453,7 @@ The architecture must not block any of these. For each, the change it needs:
 
 | Feature                                 | Change                                                                                                            |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Pagination UI                           | Add `rowPaginationFeature` to the preset, and a paginator part for the footer.                                    |
+| Pagination UI                           | The consumer registers `rowPaginationFeature`; a paginator part for the footer.                                   |
 | Global search                           | Add `globalFilteringFeature`, and a search part for the header.                                                   |
 | Row actions ("⋯" menu) and bulk actions | Parts that take actions as data.                                                                                  |
 | Tree / expanding rows                   | Add `rowExpandingFeature`; an expand toggle and `aria-level`/`aria-expanded` in the row block; `role="treegrid"`. |
@@ -473,8 +471,12 @@ These become contracts, and changing them is a breaking change:
 - `kirby-data-grid`: `table`, `label`, `size`.
 - `kirby-data-grid-layout`: the `header`, `footer` and `panel` slots, and
   `panelOpen`.
-- `kirbyDataGridFeatures` and `KirbyDataGridFeatures`.
-- The building blocks and their inputs; the decided parts and their inputs.
+- The building blocks and their inputs: `kirbyDataGridTable`,
+  `kirbyDataGridHeaderRow`, `kirbyDataGridHeaderCell`, `kirbyDataGridRow` and
+  `kirbyDataGridCell`.
+- The column helpers and their options: `kirbyDataGridSelectionColumn({ rowLabel })`.
+- The CSS classes they set: `selected` on rows, `sortable` and `active` on header
+  cells.
 - The size custom properties, if consumers may read them in their own cell
   content.
 - The test harness.
@@ -495,13 +497,13 @@ These become contracts, and changing them is a breaking change:
 
 ## 13. Open Questions
 
-1. **Building block form:** CSS classes, directives or components, possibly mixed
-   per block ([section 5](#5-building-blocks)).
+1. ~~**Building block form**~~ Decided: mixed per block ([section 5](#5-building-blocks)).
 2. **Default size,** and the token values per size, agreed with design.
 3. **Does the layout's header and footer follow the grid's size?**
 4. **Nested component sizes:** checkbox and flag sizes above `md`.
-5. **Select-all scope:** the current page, all loaded rows, or all rows on the
-   server? In server mode, "all" needs backend support.
+5. **Select-all scope:** decided for now as all loaded rows. Revisit when the
+   choice between pagination, load on demand and virtual scrolling is made; "all
+   rows on the server" needs backend support.
 6. **Selection under `manualPagination`:** confirm that selected IDs persist as
    expected when pages are fetched.
 7. **Filter UI:** value filters versus condition filters, and where the distinct

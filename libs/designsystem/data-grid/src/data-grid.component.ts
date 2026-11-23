@@ -20,8 +20,8 @@ export class DataGridComponent<TFeatures extends TableFeatures, TData extends Ro
   @Input()
   size: KirbyDataGridSize = 'md';
 
-  // Core APIs only for now; switch to the server's rowCount, a page offset and visible columns
-  // when pagination and column visibility are added.
+  // The displayed rows for now; switch to the server's rowCount, a page offset and visible
+  // columns when pagination and column visibility are added.
 
   /** Number of header rows; more than one when columns are grouped. */
   get headerRowCount(): number {
@@ -30,7 +30,7 @@ export class DataGridComponent<TFeatures extends TableFeatures, TData extends Ro
 
   /** All rows in the grid, header rows included. */
   get totalRowCount(): number {
-    return this.headerRowCount + this.table.getCoreRowModel().rows.length;
+    return this.headerRowCount + this.table.getRowModel().rows.length;
   }
 
   /** All leaf columns, i.e. the columns that hold cells. */

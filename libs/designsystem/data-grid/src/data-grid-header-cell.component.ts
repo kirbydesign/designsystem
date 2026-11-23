@@ -47,16 +47,18 @@ export class DataGridHeaderCellComponent<
     return this.header.colSpan > 1 ? this.header.colSpan : null;
   }
 
+  // A placeholder header sits above an ungrouped column in a grouped header row. It shares the
+  // column with the real header below, which owns the sorting.
   @HostBinding('class.sortable')
   get canSort(): boolean {
     const column = this.header.column;
-    if (!hasSorting(column)) return false;
+    if (this.header.isPlaceholder || !hasSorting(column)) return false;
     return column.getCanSort();
   }
 
   get sortDirection(): SortDirection | false {
     const column = this.header.column;
-    if (!hasSorting(column)) return false;
+    if (this.header.isPlaceholder || !hasSorting(column)) return false;
     return column.getIsSorted();
   }
 

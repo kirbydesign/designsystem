@@ -83,6 +83,32 @@ class SortingHostComponent {
   }));
 }
 
+const groupedColumns: ColumnDef<typeof sortingFeatures, Payment>[] = [
+  { accessorKey: 'recipient', header: 'Recipient' },
+  {
+    id: 'payment',
+    header: 'Payment',
+    columns: [
+      { accessorKey: 'status', header: 'Status' },
+      { accessorKey: 'amount', header: 'Amount' },
+    ],
+  },
+];
+
+@Component({ template, imports })
+class GroupedSortingHostComponent {
+  readonly sorting = signal<SortingState>([{ id: 'recipient', desc: false }]);
+
+  readonly table = injectTable(() => ({
+    features: sortingFeatures,
+    columns: groupedColumns,
+    data: payments,
+    getRowId: (payment) => payment.id,
+    manualSorting: true,
+    state: { sorting: this.sorting() },
+  }));
+}
+
 @Component({ template, imports })
 class NoSortingHostComponent {
   readonly table = injectTable(() => ({
@@ -224,6 +250,32 @@ describe('DataGridHeaderCellComponent', () => {
       it('should show the descending icon', () => {
         expect(icon('recipient').name).toBe('arrow-down-fill');
       });
+    });
+  });
+
+  describe('with grouped columns and rowSortingFeature', () => {
+    let spectator: Spectator<GroupedSortingHostComponent>;
+
+    const createHost = createComponentFactory(GroupedSortingHostComponent);
+
+    beforeEach(() => {
+      spectator = createHost();
+    });
+
+    it('should render one sort button per sortable column, not in placeholder headers', () => {
+      const recipientHeaders = spectator.queryAll('th[data-column-id="recipient"]');
+
+      expect(recipientHeaders.length).toBe(2);
+      expect(recipientHeaders[0].querySelector('button')).toBeNull();
+      expect(recipientHeaders[1].querySelector('button')).not.toBeNull();
+    });
+
+    it('should set aria-sort only on the real header of the sorted column', () => {
+      expect(spectator.queryAll('th[aria-sort]').length).toBe(1);
+      expect(spectator.queryAll('th[data-column-id="recipient"]')[1]).toHaveAttribute(
+        'aria-sort',
+        'ascending'
+      );
     });
   });
 });

@@ -42,7 +42,7 @@ export interface KirbyDataGridSelectionColumnOptions<TData extends RowData> {
       size="xs"
       [attr.aria-label]="label"
       [checked]="table.getIsAllRowsSelected()"
-      [indeterminate]="table.getIsSomeRowsSelected()"
+      [indeterminate]="table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()"
       [disabled]="table.getRowModel().rows.length === 0"
       (checkedChange)="table.toggleAllRowsSelected($event)"
     ></kirby-checkbox>
@@ -82,7 +82,8 @@ class DataGridRowCheckboxComponent {
   @Input({ required: true }) label: string;
 
   get accessibleName(): string {
-    return this.translations.get('selectRow').replace('{label}', this.label);
+    // A replacer function, so `$&` and similar patterns in the label are kept as text.
+    return this.translations.get('selectRow').replace('{label}', () => this.label);
   }
 }
 
