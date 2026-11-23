@@ -73,7 +73,7 @@ $button-z-index: calc(var(--kirby-z-index-default) + 2);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
 
-        --kirby-border-color: initial;
+        --config-border-color: initial;
       }
 
       &:hover,
@@ -103,11 +103,11 @@ $button-z-index: calc(var(--kirby-z-index-default) + 2);
 }
 
 fieldset {
-  border: 1px solid var(--kirby-border-color, var(--kirby-medium));
+  border: 1px solid var(--config-border-color, var(--kirby-color-border-base-quiet));
   padding: var(--kirby-spacing-xs);
 
   legend {
-    color: var(--kirby-text-color-semi-dark);
+    color: var(--kirby-color-content-base-quiet);
     text-align: var(--text-align, initial);
     font-size: var(--kirby-font-size-s);
   }

@@ -7,7 +7,8 @@
 
 .sample.line-height {
   font-size: var(--kirby-font-size-n);
-  background-color: var(--kirby-medium);
+  background-color: var(--kirby-color-fill-neutral);
+  color: var(--kirby-color-content-neutral);
 }
 
 h3 {

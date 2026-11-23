@@ -1,3 +1,5 @@
+@use '@kirbydesign/core/src/scss/utils';
+
 .card-option-button-group {
   display: flex;
   justify-content: center;
@@ -8,47 +10,17 @@
 button {
   height: var(--kirby-size-fat-finger);
   width: var(--kirby-size-fat-finger);
-  border: none;
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
   border-radius: var(--kirby-border-radius-circle);
   margin: 0;
-  color: #fff;
+  background-color: var(--kirby-color-fill-base);
   cursor: pointer;
 
-  &.white {
-    background-color: var(--kirby-white);
-
-    &:hover {
-      background-color: var(--kirby-white-shade);
-    }
-  }
-
-  &.light {
-    background-color: var(--kirby-light);
-    outline: #fff 2px solid;
-    border: #fff 2px solid;
-
-    &:hover {
-      background-color: var(--kirby-light-shade);
-    }
-  }
-
-  &.dark {
-    background-color: var(--kirby-dark);
-
-    &:hover {
-      background-color: var(--kirby-dark-shade);
-    }
-  }
-
-  &.secondary {
-    background-color: var(--kirby-secondary);
-
-    &:hover {
-      background-color: var(--kirby-secondary-shade);
-    }
+  &:hover {
+    transform: scale(1.05);
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: scale(1);
   }
 }

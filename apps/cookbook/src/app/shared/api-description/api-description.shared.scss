@@ -12,7 +12,7 @@ table.api-description {
   width: 100%;
 
   thead {
-    background-color: var(--kirby-light-tint);
+    background-color: var(--kirby-color-fill-base-quiet);
   }
 
   th {
@@ -25,7 +25,7 @@ table.api-description {
 
   td,
   th {
-    border: 1px solid var(--kirby-medium);
+    border: 1px solid var(--kirby-color-border-base-quiet);
     padding: 0.5rem 1rem;
   }
 

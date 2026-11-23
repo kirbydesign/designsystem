@@ -252,7 +252,7 @@ export class ModalExampleAdvancedComponent {
       collapseTitle: this.collapseTitle,
       component: EmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
-      cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
+      cssClass: this.customCssClass ? ['my-custom-modal-class', 'kirby-surface-brand'] : [],
       componentProps: {
         title,
         subtitle: 'Hello from the first embedded example component!',

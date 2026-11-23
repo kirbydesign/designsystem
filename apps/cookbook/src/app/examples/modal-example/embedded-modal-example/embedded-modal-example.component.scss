@@ -28,7 +28,7 @@ kirby-card.nested-modal-configuration {
 
   details {
     margin-top: var(--kirby-spacing-m);
-    border: 1px solid var(--kirby-medium);
+    border: 1px solid var(--kirby-color-border-base-quiet);
     border-radius: var(--kirby-spacing-xxxs);
     padding: var(--kirby-spacing-xxs) var(--kirby-spacing-xxs) 0;
 
@@ -44,7 +44,7 @@ kirby-card.nested-modal-configuration {
       border-bottom-right-radius: var(--kirby-spacing-s);
 
       summary {
-        border-bottom: 1px dashed var(--kirby-medium);
+        border-bottom: 1px dashed var(--kirby-color-border-base-quiet);
         margin-bottom: var(--kirby-spacing-xs);
       }
     }

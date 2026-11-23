@@ -13,10 +13,15 @@ const config = {
   styles: [
     `
       :host {
-        border: 1px dashed var(--kirby-medium);
+        border: 1px dashed var(--kirby-color-border-base-quiet);
         margin: 12px;
         /* white triangle at lower right corner to emphasize drag handle */
-        background: linear-gradient(135deg, transparent 0, transparent 95%, #fff 96%);
+        background: linear-gradient(
+          135deg,
+          transparent 0,
+          transparent 95%,
+          var(--kirby-color-fill-raised) 96%
+        );
         display: block;
         overflow: hidden;
         width: 620px;

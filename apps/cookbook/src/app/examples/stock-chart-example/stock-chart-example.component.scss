@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  background: var(--kirby-background-color);
+  background: var(--kirby-color-fill-base);
   padding: var(--kirby-spacing-s);
 
   @include utils.media('>=medium') {

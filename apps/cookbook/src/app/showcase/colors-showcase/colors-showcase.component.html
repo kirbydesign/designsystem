@@ -1,130 +1,87 @@
-<p>Color tokens map the base palette to named properties for ease of use.</p>
-
 <p>
-  They are available via the SCSS utility function
-  <code>get-color()</code>
-  or as CSS custom properties.
+  Color tokens describe the
+  <em>role</em>
+  a color plays, not the color itself. They are named
+  <code>--kirby-color-[property]-[role]-[emphasis]-[state]</code>
+  , where property is
+  <code>fill</code>
+  ,
+  <code>content</code>
+  or
+  <code>border</code>
+  .
 </p>
 
-<h2>Brand Colors</h2>
-<table class="kirby-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>CSS Custom Property</th>
-      <th class="preview">Preview</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (token of brandColors; track token.name) {
-      <tr>
-        <td>
-          <code>{{ token.name }}</code>
-        </td>
-        <td>
-          <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
-        </td>
-        <td>
-          <span
-            class="sample color-swatch"
-            [style.background-color]="'var(' + token.cssVar + ')'"
-          ></span>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+<p>
+  Every token is redefined on each surface:
+  <code>kirby-surface-base</code>
+  ,
+  <code>kirby-surface-raised</code>
+  and
+  <code>kirby-surface-brand</code>
+  . A component using
+  <code>--kirby-color-fill-base</code>
+  always gets the color of the surface it sits on. The previews below show each token on all three
+  surfaces.
+</p>
 
-<h2>Notification Colors</h2>
-<table class="kirby-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>CSS Custom Property</th>
-      <th class="preview">Preview</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (token of notificationColors; track token.name) {
-      <tr>
-        <td>
-          <code>{{ token.name }}</code>
-        </td>
-        <td>
-          <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
-        </td>
-        <td>
-          <span
-            class="sample color-swatch"
-            [style.background-color]="'var(' + token.cssVar + ')'"
-          ></span>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+<p>
+  Most roles also have
+  <code>-hover</code>
+  and
+  <code>-active</code>
+  variants for interaction states, e.g.
+  <code>--kirby-color-fill-raised-hover</code>
+  .
+</p>
 
-<h2>System Colors</h2>
-<table class="kirby-table system-colors">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>CSS Custom Property</th>
-      <th class="preview">Preview</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (token of systemColors; track token.name) {
+@for (group of colorGroups; track group.name) {
+  <h2>{{ group.name }}</h2>
+  <p>{{ group.description }}</p>
+  <table class="kirby-table">
+    <thead>
       <tr>
-        <td>
-          <code>{{ token.name }}</code>
-        </td>
-        <td>
-          <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
-        </td>
-        <td>
-          <span
-            class="sample color-swatch"
-            [style.background-color]="'var(' + token.cssVar + ')'"
-          ></span>
-        </td>
+        <th>CSS Custom Property</th>
+        @for (surface of surfaces; track surface) {
+          <th class="surface-preview">{{ surface }}</th>
+        }
       </tr>
-    }
-  </tbody>
-</table>
-
-<h2>Text Colors</h2>
-<table class="kirby-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>CSS Custom Property</th>
-      <th class="preview">Preview</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (token of textColors; track token.name) {
-      <tr>
-        <td>
-          <code>{{ token.name }}</code>
-        </td>
-        <td>
-          <code>{{ token.cssVar }}</code>
-          <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
-        </td>
-        <td>
-          <span
-            class="sample color-swatch"
-            [style.background-color]="'var(' + token.cssVar + ')'"
-          ></span>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      @for (token of group.tokens; track token.cssVar) {
+        <tr>
+          <td>
+            <code>{{ token.cssVar }}</code>
+            <cookbook-copy-token [cssVar]="token.cssVar"></cookbook-copy-token>
+          </td>
+          @for (surface of surfaces; track surface) {
+            <td class="surface-preview kirby-surface-{{ surface }}">
+              @switch (group.property) {
+                @case ('fill') {
+                  <span
+                    class="sample color-swatch"
+                    [style.background-color]="'var(' + token.cssVar + ')'"
+                  ></span>
+                }
+                @case ('content') {
+                  <span class="sample content-sample" [style.color]="'var(' + token.cssVar + ')'">
+                    Aa
+                  </span>
+                }
+                @case ('border') {
+                  <span
+                    class="sample color-swatch border-sample"
+                    [style.border-color]="'var(' + token.cssVar + ')'"
+                  ></span>
+                }
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+}
 
 <h2>Decoration Colors</h2>
 <p>

@@ -5,7 +5,7 @@ h2:not(:first-child) {
 }
 
 h3 {
-  border-bottom: 1px dotted var(--kirby-medium);
+  border-bottom: 1px dotted var(--kirby-color-border-base-quiet);
 }
 
 cookbook-example-viewer,
@@ -16,11 +16,10 @@ cookbook-code-viewer {
 // Style the Keyboard Input element. Borrowed from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd
 kbd {
   border-radius: 3px;
-  border: 1px solid var(--kirby-semi-dark);
-  box-shadow:
-    0 2px 1px var(--kirby-dark-overlay-20),
-    0 2px 1px 0 var(--kirby-white) inset;
-  color: var(--kirby-black);
+  border: 1px solid var(--kirby-color-border-raised);
+  border-bottom-width: 2px;
+  background-color: var(--kirby-color-fill-raised);
+  color: var(--kirby-color-content-raised);
   font-size: 0.85em;
   font-weight: var(--kirby-font-weight-bold);
   line-height: 1;

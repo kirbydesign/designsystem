@@ -1,3 +1,5 @@
+@use '@kirbydesign/core/src/scss/utils';
+
 :host {
   display: grid;
   place-content: center;
@@ -18,22 +20,9 @@ kirby-flag {
   padding: var(--kirby-spacing-xxs);
 }
 
-.kirby-color-brightness-dark {
-  code {
-    background-color: var(--kirby-dark);
-    color: var(--kirby-dark-contrast);
-  }
-}
-
 p:last-child {
   margin-bottom: 0;
 }
-
-$_card-header-notification-colors-map: (
-  'success': 'green',
-  'warning': 'orange',
-  'danger': 'red',
-);
 
 button {
   height: var(--kirby-size-fat-finger);
@@ -41,28 +30,33 @@ button {
   border: none;
   border-radius: var(--kirby-border-radius-circle);
   margin: 0;
-  color: var(--kirby-black);
   cursor: pointer;
 
-  @each $name, $variant in $_card-header-notification-colors-map {
-    &.#{$name} {
-      background-color: var(--kirby-decoration-color-#{$variant}-30);
+  &.success {
+    background-color: var(--kirby-color-fill-success);
+    color: var(--kirby-color-content-success);
+  }
 
-      &:hover {
-        background-color: var(--kirby-decoration-color-#{$variant}-50);
-      }
-    }
+  &.warning {
+    background-color: var(--kirby-color-fill-warning);
+    color: var(--kirby-color-content-warning);
+  }
+
+  &.danger {
+    background-color: var(--kirby-color-fill-danger);
+    color: var(--kirby-color-content-danger);
   }
 
   &.info {
-    background-color: var(--kirby-semi-light);
+    background-color: var(--kirby-color-fill-neutral);
+    color: var(--kirby-color-content-neutral);
+  }
 
-    &:hover {
-      background-color: var(--kirby-semi-light-shade);
-    }
+  &:hover {
+    transform: scale(1.05);
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: scale(1);
   }
 }

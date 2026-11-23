@@ -27,7 +27,7 @@ p {
   display: block;
   max-width: 112px;
   font-size: 12px;
-  color: rgb(0 0 0 / 60%);
+  color: var(--kirby-color-content-base-quiet);
   white-space: nowrap;
 }
 

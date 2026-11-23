@@ -41,13 +41,15 @@ selected = this.items[1];`,
 .rating {
   font-size: 14px;
   padding: 2px 8px;
-  background-color: var(--kirby-semi-light);
+  background-color: var(--kirby-color-fill-neutral);
+  color: var(--kirby-color-content-neutral);
   border-radius: 4px;
   transition: background-color 200ms;
 }
 
 .is-selected .rating {
-  background-color: var(--kirby-success);
+  background-color: var(--kirby-color-fill-success);
+  color: var(--kirby-color-content-success);
 }`,
   ],
 };

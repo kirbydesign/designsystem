@@ -1,6 +1,17 @@
 @use '../design-token-table';
 @use '../showcase.shared';
 
+.surface-preview {
+  width: 1px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+td.surface-preview {
+  background-color: var(--kirby-color-fill-base);
+  padding-inline: var(--kirby-spacing-m);
+}
+
 .color-swatch {
   display: block;
   width: var(--kirby-spacing-l);
@@ -8,8 +19,14 @@
   border-radius: var(--kirby-border-radius-xs);
 }
 
-.system-colors .color-swatch {
-  border: var(--kirby-spacing-xxxxs) solid var(--kirby-medium);
+.border-sample {
+  border-width: calc(2 * var(--kirby-stroke-xs));
+  border-style: solid;
+}
+
+.content-sample {
+  font-size: var(--kirby-font-size-l);
+  font-weight: var(--kirby-font-weight-bold);
 }
 
 .decoration-ramp {
@@ -28,9 +45,4 @@
 
 .decoration-table tr:has(.decoration-swatch:hover) .decoration-swatch:hover {
   transform: scale(110%);
-}
-
-th:first-child,
-td:first-child {
-  width: 200px;
 }
