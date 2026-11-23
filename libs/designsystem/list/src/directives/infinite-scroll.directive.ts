@@ -86,13 +86,10 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     // Native scroll event, as 'ionScroll' requires 'scrollEvents' on ion-content (not set in e.g. modals)
     setTimeout(async () => {
-      const ionContent = this.elementRef.nativeElement.closest?.('ion-content');
+      const ionContent = this.elementRef.nativeElement.closest('ion-content');
       if (!ionContent) return;
 
-      this.scrollContainer =
-        typeof ionContent.getScrollElement === 'function'
-          ? await ionContent.getScrollElement()
-          : ionContent;
+      this.scrollContainer = await ionContent.getScrollElement();
 
       if (this.isDestroyed || !this.scrollContainer) return;
 
