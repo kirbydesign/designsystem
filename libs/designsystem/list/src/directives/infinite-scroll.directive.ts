@@ -91,7 +91,6 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         if (this.isDestroyed) return;
 
         // Native scroll event, as 'ionScroll' requires 'scrollEvents' on ion-content (not set in e.g. modals)
-        // run outside angular to avoid change detection on each scroll
         this.zone.runOutsideAngular(() => {
           fromEvent(this.scrollContainer, 'scroll')
             .pipe(takeUntil(this.ngUnsubscribe$))
@@ -100,14 +99,12 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
       }
 
       if (this.isDestroyed) return;
-      // initial check, in case the content (ion-content or window) is not scrollable
       this.onScroll();
     });
   }
 
   /**
    * Re-check the scroll position after render. Skipped if the height is unchanged since last emit, to avoid endless loading.
-   * Delayed by {@link INFINITE_SCROLL_DEBOUNCE} to give new items time to render before measuring.
    */
   checkScrollPosition(): void {
     setTimeout(() => {
