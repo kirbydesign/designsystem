@@ -27,8 +27,11 @@ popped-out example pages alike.
   every same-origin document (iPhone iframes, popped-out examples) follows along
   live. Each iframe boots the cookbook app, so it also picks up the stored brand
   on load.
-- `BrandSelectorComponent` (a `kirby-dropdown`) lives in the empty right column
-  of `cookbook-header`.
+- `BrandSelectorComponent` (a `kirby-menu`) lives in the right column of
+  `cookbook-header`. Its trigger button shows the active brand's logo, and each
+  menu item shows the brand's logo and name. Bank logos live in
+  `apps/cookbook/src/assets/brands/<id>.svg` and are registered as Kirby icons
+  (`brand-<id>`); the default uses the built-in `kirby` icon.
 
 ## Commands
 
@@ -50,7 +53,8 @@ islands without reload, and the choice survives a reload.
 
 ## Success criteria
 
-- Selector lists 8 entries; default is "Kirby".
+- Selector menu lists 8 entries with logos; default is "Kirby". The trigger
+  button shows the active brand's logo.
 - Selecting a brand sets `data-kirby-brand` on `<html>` of the cookbook and all
   iPhone iframes, without reload.
 - Selection persists across reloads; "Kirby" removes the attribute.

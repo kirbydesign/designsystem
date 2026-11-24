@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Injectable, signal } from '@angular/core';
+import { IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { Brand, BRANDS, DEFAULT_BRAND } from './brands';
 
 const STORAGE_KEY = 'kirby-cookbook-brand';
@@ -13,12 +14,18 @@ const ATTRIBUTE = 'data-kirby-brand';
 @Injectable({ providedIn: 'root' })
 export class BrandService {
   private document = inject(DOCUMENT);
+  private iconRegistry = inject(IconRegistryService);
   private _brand = signal<Brand>(DEFAULT_BRAND);
 
   readonly brands = BRANDS;
   readonly brand = this._brand.asReadonly();
 
   init() {
+    this.iconRegistry.addIcons(
+      this.brands
+        .filter((brand) => brand.logo)
+        .map((brand) => ({ name: brand.icon, svg: brand.logo }))
+    );
     this.apply(this.findBrand(this.readStoredId()));
     this.document.defaultView?.addEventListener('storage', (event) => {
       if (event.key === STORAGE_KEY) {
