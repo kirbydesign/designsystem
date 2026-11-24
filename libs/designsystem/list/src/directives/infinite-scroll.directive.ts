@@ -51,7 +51,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
   private scrollContainer: HTMLElement;
 
-  private heightAtLastEmit: number;
+  private elementHeightAtLastScrollEnd: number;
 
   private isDestroyed = false;
 
@@ -79,7 +79,8 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         })
       )
       .subscribe(() => {
-        this.heightAtLastEmit = this.elementRef.nativeElement.getBoundingClientRect().height;
+        this.elementHeightAtLastScrollEnd =
+          this.elementRef.nativeElement.getBoundingClientRect().height;
         // emit inside angular, as change detection is needed to show the spinner
         this.zone.run(() => this.scrollEnd.emit());
       });
@@ -103,14 +104,11 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
     });
   }
 
-  /**
-   * Re-check the scroll position after render. Skipped if the height is unchanged since last emit, to avoid endless loading.
-   */
   checkScrollPosition(): void {
     setTimeout(() => {
       if (this.isDestroyed || this.disabled) return;
       const scroll = this.getScroll();
-      if (scroll.elementHeight !== this.heightAtLastEmit) {
+      if (this.hasElementHeightChangedSinceLastScrollEnd(scroll)) {
         this.scroll$.next(scroll);
       }
     }, INFINITE_SCROLL_DEBOUNCE);
@@ -133,6 +131,10 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
     this.isDestroyed = true;
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
+  }
+
+  private hasElementHeightChangedSinceLastScrollEnd(scroll: Scroll): boolean {
+    return scroll.elementHeight !== this.elementHeightAtLastScrollEnd;
   }
 
   private getScroll(): Scroll {
