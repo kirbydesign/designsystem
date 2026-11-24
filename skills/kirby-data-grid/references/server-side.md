@@ -16,6 +16,7 @@ import {
   SortingState,
   tableFeatures,
 } from '@tanstack/angular-table';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import {
   DataGridCellDirective,
   DataGridComponent,
@@ -41,6 +42,7 @@ const columns: ColumnDef<typeof features, Payment>[] = [
   selector: 'app-payments',
   templateUrl: './payments.component.html', // the markup from SKILL.md
   imports: [
+    CardComponent,
     DataGridComponent,
     DataGridTableDirective,
     DataGridHeaderRowDirective,

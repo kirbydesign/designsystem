@@ -5,6 +5,7 @@ import {
   Component,
   ElementRef,
   HostBinding,
+  HostListener,
   inject,
   Input,
   ViewChild,
@@ -33,6 +34,7 @@ export class DataGridHeaderCellComponent<
   header: Header<TFeatures, TData, TValue>;
 
   @ViewChild('label') label?: ElementRef<HTMLElement>;
+  @ViewChild('sortButton') sortButton?: ElementRef<HTMLButtonElement>;
 
   // A grouped header starts at its leftmost leaf column.
   @HostBinding('attr.aria-colindex')
@@ -73,11 +75,18 @@ export class DataGridHeaderCellComponent<
     return this.sortDirection === 'asc' ? 'ascending' : 'descending';
   }
 
-  onSort(event: MouseEvent): void {
+  // The whole cell sorts, as its hover and active styles suggest. The button keeps sorting
+  // keyboard accessible: its click bubbles up to here. Clicks on other controls in the cell,
+  // such as a future column menu, are left alone.
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent): void {
     const column = this.header.column;
-    if (hasSorting(column)) {
-      column.getToggleSortingHandler()?.(event);
-    }
+    if (!this.canSort || !hasSorting(column)) return;
+    const control = (event.target as Element).closest(
+      'button, a, input, select, textarea, [role="button"]'
+    );
+    if (control && control !== this.sortButton?.nativeElement) return;
+    column.getToggleSortingHandler()?.(event);
   }
 
   // Bold text on the active header must not shift the layout; the global table styles

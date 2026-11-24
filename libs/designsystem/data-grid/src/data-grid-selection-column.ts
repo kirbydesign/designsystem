@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject, Input } from '@angular/core';
 import {
   CellContext,
   ColumnDef,
@@ -26,6 +26,23 @@ type SelectionColumnFeatures = {
 
 type SelectionFeatures = TableFeatures & { rowSelectionFeature: typeof rowSelectionFeature };
 
+// The host covers the whole selection cell, so a click anywhere in the cell can toggle the
+// checkbox. kirby-checkbox's invisible label is positioned over the box and still catches
+// clicks; in this narrow cell its text wraps, so it is clipped to the cell.
+const hostStyles = `
+  :host {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+`;
+
+// A click on the checkbox itself is handled by kirby-checkbox.
+const isOnCheckbox = (event: MouseEvent) => !!(event.target as Element).closest('kirby-checkbox');
+
 export interface KirbyDataGridSelectionColumnOptions<TData extends RowData> {
   /** Names the row in its checkbox's accessible name, for example "Select Acme A/S". */
   rowLabel: (row: TData) => string;
@@ -34,9 +51,7 @@ export interface KirbyDataGridSelectionColumnOptions<TData extends RowData> {
 @Component({
   selector: 'kirby-data-grid-select-all-checkbox',
   host: { class: 'kirby-data-grid-selection-checkbox' },
-  // kirby-checkbox's invisible label is positioned over the box and still catches clicks. In
-  // the narrow selection cell its text wraps, so it is clipped to stop it covering the next row.
-  styles: ':host { display: flex; justify-content: center; overflow: hidden; }',
+  styles: hostStyles,
   template: `
     <kirby-checkbox
       size="xs"
@@ -54,14 +69,18 @@ class DataGridSelectAllCheckboxComponent {
   private readonly context = injectFlexRenderContext<HeaderContext<SelectionFeatures, RowData>>();
   readonly table = this.context.table;
   readonly label = inject(TranslationService).get('selectAllRows');
+
+  @HostListener('click', ['$event'])
+  onCellClick(event: MouseEvent): void {
+    if (isOnCheckbox(event) || this.table.getRowModel().rows.length === 0) return;
+    this.table.toggleAllRowsSelected(!this.table.getIsAllRowsSelected());
+  }
 }
 
 @Component({
   selector: 'kirby-data-grid-row-checkbox',
   host: { class: 'kirby-data-grid-selection-checkbox' },
-  // kirby-checkbox's invisible label is positioned over the box and still catches clicks. In
-  // the narrow selection cell its text wraps, so it is clipped to stop it covering the next row.
-  styles: ':host { display: flex; justify-content: center; overflow: hidden; }',
+  styles: hostStyles,
   template: `
     <kirby-checkbox
       size="xs"
@@ -80,6 +99,12 @@ class DataGridRowCheckboxComponent {
   readonly row = this.context.row;
 
   @Input({ required: true }) label: string;
+
+  @HostListener('click', ['$event'])
+  onCellClick(event: MouseEvent): void {
+    if (isOnCheckbox(event) || !this.row.getCanSelect()) return;
+    this.row.toggleSelected(!this.row.getIsSelected());
+  }
 
   get accessibleName(): string {
     // A replacer function, so `$&` and similar patterns in the label are kept as text.

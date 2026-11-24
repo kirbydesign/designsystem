@@ -9,6 +9,7 @@ import {
   tableFeatures,
 } from '@tanstack/angular-table';
 
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import {
   DataGridCellDirective,
   DataGridComponent,
@@ -48,38 +49,41 @@ async function fetchPayments(sorting: SortingState): Promise<Payment[]> {
 
 const config = {
   selector: 'cookbook-data-grid-sorting-example',
-  template: `<kirby-data-grid [table]="table" label="Payments">
-  <table class="kirby-table" kirbyDataGridTable>
-    <thead>
-      @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
-        <tr [kirbyDataGridHeaderRow]="headerGroup">
-          @for (header of headerGroup.headers; track header.id) {
-            <th [kirbyDataGridHeaderCell]="header">
-              <ng-container *flexRenderHeader="header; let value">{{ value }}</ng-container>
-            </th>
-          }
-        </tr>
-      }
-    </thead>
-    <tbody>
-      @for (row of table.getRowModel().rows; track row.id) {
-        <tr [kirbyDataGridRow]="row">
-          @for (cell of row.getAllCells(); track cell.id) {
-            <td [kirbyDataGridCell]="cell">
-              <ng-container *flexRenderCell="cell; let value">{{ value }}</ng-container>
-            </td>
-          }
-        </tr>
-      }
-    </tbody>
-  </table>
-</kirby-data-grid>`,
+  template: `<kirby-card>
+  <kirby-data-grid [table]="table" label="Payments">
+    <table class="kirby-table" kirbyDataGridTable>
+      <thead>
+        @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+          <tr [kirbyDataGridHeaderRow]="headerGroup">
+            @for (header of headerGroup.headers; track header.id) {
+              <th [kirbyDataGridHeaderCell]="header">
+                <ng-container *flexRenderHeader="header; let value">{{ value }}</ng-container>
+              </th>
+            }
+          </tr>
+        }
+      </thead>
+      <tbody>
+        @for (row of table.getRowModel().rows; track row.id) {
+          <tr [kirbyDataGridRow]="row">
+            @for (cell of row.getAllCells(); track cell.id) {
+              <td [kirbyDataGridCell]="cell">
+                <ng-container *flexRenderCell="cell; let value">{{ value }}</ng-container>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </kirby-data-grid>
+</kirby-card>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
   imports: [
+    CardComponent,
     DataGridComponent,
     DataGridTableDirective,
     DataGridHeaderRowDirective,

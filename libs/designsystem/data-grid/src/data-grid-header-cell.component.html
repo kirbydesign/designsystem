@@ -1,5 +1,5 @@
 @if (canSort) {
-  <button type="button" (click)="onSort($event)">
+  <button #sortButton type="button">
     <span #label><ng-container *ngTemplateOutlet="content" /></span>
     <kirby-icon
       class="sortable-icon"

@@ -196,6 +196,29 @@ describe('DataGridHeaderCellComponent', () => {
       });
     });
 
+    describe('when clicking outside the sort button', () => {
+      it('should sort when the cell itself is clicked, for example in its padding', () => {
+        spectator.click(header('amount'));
+
+        expect(spectator.component.sorting()).toEqual([{ id: 'amount', desc: false }]);
+      });
+
+      it('should not sort when another control in the cell is clicked', () => {
+        const otherControl = document.createElement('button');
+        header('amount').appendChild(otherControl);
+
+        spectator.click(otherControl);
+
+        expect(spectator.component.sorting()).toEqual([]);
+      });
+
+      it('should not sort when a column that cannot sort is clicked', () => {
+        spectator.click(header('status'));
+
+        expect(spectator.component.sorting()).toEqual([]);
+      });
+    });
+
     describe('when a sortable header is clicked', () => {
       beforeEach(() => {
         clickSort('amount');

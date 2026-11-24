@@ -75,38 +75,42 @@ readonly table = injectTable(() => ({
 
 ### 3. Markup
 
+Place the grid on a `kirby-card` by default, as the design does. The card needs no padding or other settings. Leave the card out only where a card doesn't fit, for example inside a modal.
+
 Every element gets its building block. They set `role="grid"`, `aria-rowcount`/`aria-colcount`, `aria-rowindex`/`aria-colindex`, `aria-sort` and `aria-selected`; leaving one out breaks accessibility without any error.
 
 ```html
-<kirby-data-grid [table]="table" label="Payments">
-  <table class="kirby-table" kirbyDataGridTable>
-    <thead>
-      @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
-      <tr [kirbyDataGridHeaderRow]="headerGroup">
-        @for (header of headerGroup.headers; track header.id) {
-        <th [kirbyDataGridHeaderCell]="header">
-          <ng-container *flexRenderHeader="header; let value">{{ value }}</ng-container>
-        </th>
+<kirby-card>
+  <kirby-data-grid [table]="table" label="Payments">
+    <table class="kirby-table" kirbyDataGridTable>
+      <thead>
+        @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+        <tr [kirbyDataGridHeaderRow]="headerGroup">
+          @for (header of headerGroup.headers; track header.id) {
+          <th [kirbyDataGridHeaderCell]="header">
+            <ng-container *flexRenderHeader="header; let value">{{ value }}</ng-container>
+          </th>
+          }
+        </tr>
         }
-      </tr>
-      }
-    </thead>
-    <tbody>
-      @for (row of table.getRowModel().rows; track row.id) {
-      <tr [kirbyDataGridRow]="row">
-        @for (cell of row.getAllCells(); track cell.id) {
-        <td [kirbyDataGridCell]="cell">
-          <ng-container *flexRenderCell="cell; let value">{{ value }}</ng-container>
-        </td>
+      </thead>
+      <tbody>
+        @for (row of table.getRowModel().rows; track row.id) {
+        <tr [kirbyDataGridRow]="row">
+          @for (cell of row.getAllCells(); track cell.id) {
+          <td [kirbyDataGridCell]="cell">
+            <ng-container *flexRenderCell="cell; let value">{{ value }}</ng-container>
+          </td>
+          }
+        </tr>
         }
-      </tr>
-      }
-    </tbody>
-  </table>
-</kirby-data-grid>
+      </tbody>
+    </table>
+  </kirby-data-grid>
+</kirby-card>
 ```
 
-Import `DataGridComponent`, `DataGridTableDirective`, `DataGridHeaderRowDirective`, `DataGridHeaderCellComponent`, `DataGridRowDirective` and `DataGridCellDirective` from `@kirbydesign/designsystem/data-grid`, and `FlexRender` from `@tanstack/angular-table`. `label` is required: it is the grid's accessible name.
+Import `CardComponent` from `@kirbydesign/designsystem/card`, and `DataGridComponent`, `DataGridTableDirective`, `DataGridHeaderRowDirective`, `DataGridHeaderCellComponent`, `DataGridRowDirective` and `DataGridCellDirective` from `@kirbydesign/designsystem/data-grid`, and `FlexRender` from `@tanstack/angular-table`. `label` is required: it is the grid's accessible name.
 
 ### 4. Features
 
@@ -137,6 +141,7 @@ Filtering, pagination, keyboard navigation inside the grid (the focus model), th
 ## Anti-patterns
 
 - Leaving out a building block on a `tr`, `th` or `td` → every element gets its directive
+- Wrapping the grid in a custom container to look like a card → use `kirby-card`
 - Writing `role`, `aria-sort`, `aria-selected` or the indices by hand → the building blocks set them
 - Building your own sort button or selection checkbox → register the feature, or use `kirbyDataGridSelectionColumn`
 - Selecting a row by clicking it → only the checkbox selects; a row click is free for opening details

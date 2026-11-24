@@ -180,6 +180,44 @@ describe('kirbyDataGridSelectionColumn', () => {
     });
   });
 
+  describe('when the selection cell is clicked outside the checkbox', () => {
+    const cellOf = (selector: string) =>
+      spectator.query(`${selector} .kirby-data-grid-selection-checkbox`);
+    const clickCell = (selector: string) => {
+      spectator.click(cellOf(selector));
+      spectator.detectChanges();
+    };
+
+    it('should toggle the row', () => {
+      clickCell('tr[data-row-id="a"]');
+      expect(spectator.component.rowSelection()).toEqual({ a: true });
+
+      clickCell('tr[data-row-id="a"]');
+      expect(spectator.component.rowSelection()).toEqual({});
+    });
+
+    it('should not select a row that cannot be selected', () => {
+      clickCell('tr[data-row-id="b"]');
+
+      expect(spectator.component.rowSelection()).toEqual({});
+    });
+
+    it('should toggle all rows from the header cell', () => {
+      clickCell('thead');
+      expect(spectator.component.rowSelection()).toEqual({ a: true, c: true });
+
+      clickCell('thead');
+      expect(spectator.component.rowSelection()).toEqual({});
+    });
+
+    it('should leave clicks on the checkbox itself to the checkbox', () => {
+      spectator.click(spectator.query('tr[data-row-id="a"] kirby-checkbox'));
+      spectator.detectChanges();
+
+      expect(spectator.component.rowSelection()).toEqual({});
+    });
+  });
+
   describe('when the select-all checkbox is checked', () => {
     beforeEach(() => {
       select(headerCheckbox(), true);

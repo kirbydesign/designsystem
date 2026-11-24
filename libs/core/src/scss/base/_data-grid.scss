@@ -9,8 +9,10 @@ kirby-data-grid {
 
   // A square around the selection checkbox: as wide as a row is high. 44px mirrors
   // .kirby-table's row height until the size custom properties exist. Qualified with `table`
-  // and a class to win over the `table.kirby-table td` padding.
+  // and a class to win over the `table.kirby-table td` padding. Positioned, so the checkbox
+  // wrapper can cover the whole cell and make all of it clickable.
   table :is(th, td):has(> .kirby-data-grid-selection-checkbox) {
+    position: relative;
     width: var(--kirby-data-grid-row-height, 44px);
     padding-inline: 0;
   }
