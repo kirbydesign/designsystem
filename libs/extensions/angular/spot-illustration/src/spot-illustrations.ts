@@ -27,8 +27,19 @@ export const illustrations = {
   'box.curve.box.half-circle': {
     md: 'box.curve.box.half-circle.medium.svg',
   },
+  'box.fly.square.cloud': {
+    sm: 'box.fly.square.cloud.small.svg',
+    md: 'box.fly.square.cloud.medium.svg',
+    lg: 'box.fly.square.cloud.large.svg',
+    xl: 'box.fly.square.cloud.xlarge.svg',
+  },
   'box.none.plus-dot.bars': {
     lg: 'box.none.plus-dot.bars.large.svg',
+  },
+  'cake.confetti.glaze.bubble': {
+    md: 'cake.confetti.glaze.bubble.medium.svg',
+    lg: 'cake.confetti.glaze.bubble.large.svg',
+    xl: 'cake.confetti.glaze.bubble.xlarge.svg',
   },
   'calculator.money.coin.rectangle': {
     md: 'calculator.money.coin.rectangle.medium.svg',
@@ -56,8 +67,14 @@ export const illustrations = {
   'device.arrow-download.dot.circle': {
     xl: 'device.arrow-download.dot.circle.xlarge.svg',
   },
+  'document.arrows.coin.circle': {
+    md: 'document.arrows.coin.circle.medium.svg',
+  },
   'document.card.dot.circle': {
     lg: 'document.card.dot.circle.large.svg',
+  },
+  'document.magnifying-glass.pie.square': {
+    sm: 'document.magnifying-glass.pie.square.small.svg',
   },
   'exclamation-mark.circle.circle-part.shadow': {
     lg: 'exclamation-mark.circle.circle-part.shadow.large.svg',
