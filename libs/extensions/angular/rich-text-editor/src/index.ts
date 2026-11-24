@@ -4,6 +4,7 @@ export type {
   RichTextEditorAction,
   RichTextEditorBlockLevel,
   RichTextEditorConfig,
+  RichTextEditorFormatting,
   RichTextEditorFormattingAction,
   RichTextEditorLabels,
   RichTextEditorState,

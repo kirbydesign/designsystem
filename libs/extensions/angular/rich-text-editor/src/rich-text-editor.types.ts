@@ -3,6 +3,7 @@ export type RichTextEditorFormattingAction =
 
 export type RichTextEditorAction = RichTextEditorFormattingAction | 'undo' | 'redo';
 export type RichTextEditorBlockLevel = 0 | 1 | 2 | 3;
+export type RichTextEditorFormatting = 'markdown' | 'smileys';
 export interface RichTextEditorTextStyleLabels {
   readonly label: string;
   readonly normal: string;
@@ -20,9 +21,8 @@ export type RichTextEditorToolbarItem =
 
 export interface RichTextEditorConfig {
   readonly toolbarItems?: readonly RichTextEditorToolbarItem[];
-  readonly extensions?: Extensions;
-  readonly enableInputRules?: EditorOptions['enableInputRules'];
-  readonly enablePasteRules?: EditorOptions['enablePasteRules'];
+  readonly inputFormatting?: readonly RichTextEditorFormatting[];
+  readonly pasteFormatting?: readonly RichTextEditorFormatting[];
 }
 
 export interface RichTextEditorState {
@@ -38,4 +38,3 @@ export interface RichTextEditorLabels {
   placeholder: string;
   toolbar: string;
 }
-import type { EditorOptions, Extensions } from '@tiptap/core';

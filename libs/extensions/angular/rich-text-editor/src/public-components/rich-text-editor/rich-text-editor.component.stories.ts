@@ -9,7 +9,6 @@ import {
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { Extension, textInputRule, textPasteRule } from '@tiptap/core';
 import {
   RichTextEditorComponent,
   RichTextEditorConfig,
@@ -59,26 +58,14 @@ const fullToolbarConfig: RichTextEditorConfig = {
   toolbarItems: Object.values(englishToolbar),
 };
 
-const emojiShortcuts = Extension.create({
-  name: 'emojiShortcuts',
-  addInputRules() {
-    return [textInputRule({ find: /:\)$/, replace: '😊' })];
-  },
-  addPasteRules() {
-    return [textPasteRule({ find: /:\)/g, replace: '😊' })];
-  },
-});
-
 const inputRulesConfig: RichTextEditorConfig = {
   ...fullToolbarConfig,
-  extensions: [emojiShortcuts],
-  enableInputRules: ['emojiShortcuts'],
+  inputFormatting: ['markdown', 'smileys'],
 };
 
 const pasteRulesConfig: RichTextEditorConfig = {
   ...fullToolbarConfig,
-  extensions: [emojiShortcuts],
-  enablePasteRules: [emojiShortcuts],
+  pasteFormatting: ['markdown', 'smileys'],
 };
 
 @Component({
@@ -167,11 +154,21 @@ readonly config: RichTextEditorConfig = {
       heading3: 'Heading 3',
     }),
   ],
-  extensions: [],
-  enableInputRules: false,
-  enablePasteRules: false,
+  inputFormatting: ['markdown', 'smileys'],
+  pasteFormatting: ['markdown', 'smileys'],
 };
 \`\`\`
+
+inputFormatting and pasteFormatting independently opt into automatic transformations.
+Omit either property or use [] to disable its rules; toolbar controls and keyboard shortcuts still work.
+
+| Formatting | While typing | When pasting |
+| --- | --- | --- |
+| \`markdown\` | Bold/italic markers, headings (\`# \`), bullet lists (\`- \`) and ordered lists (\`1. \`). | Bold/italic markers such as \`**bold**\` and \`*italic*\`; not full Markdown parsing. |
+| \`smileys\` | Kirby-defined emoticon shortcuts become emoji. | The same shortcuts become emoji. |
+
+Supported smileys: :-) :), :-( :(, :-D :D, ;-) ;), :-P :P, :-O :O, <3, :-/ and >:|.
+Paste rules do not control preservation of formatting from copied HTML.
 
 ## CSS custom properties
 
@@ -195,7 +192,7 @@ Set these on the editor host or in your stylesheet.
     config: {
       control: false,
       description:
-        'Labelled toolbarItems, Tiptap extensions and input/paste rules. Initialization-only; no controls or rules by default.',
+        'Labelled toolbarItems and opt-in inputFormatting/pasteFormatting arrays. Initialization-only; no controls or rules by default.',
       table: { category: 'Inputs', defaultValue: { summary: '{}' } },
     },
     readonly: {
@@ -430,9 +427,16 @@ export const CustomInputRules: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Enable a Tiptap input rule to replace :) with an emoji while typing.',
+        story:
+          'inputFormatting enables Markdown shortcuts and smileys while typing; paste rules remain disabled.',
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const editor = within(canvasElement).getByRole('textbox');
+    await userEvent.type(editor, '**bold** :)');
+    await expect(editor.querySelector('strong')).toHaveTextContent('bold');
+    await expect(editor).toHaveTextContent('😊');
   },
 };
 
@@ -441,9 +445,19 @@ export const CustomPasteRules: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Enable a Tiptap paste rule to replace :) with an emoji when pasting.',
+        story:
+          'pasteFormatting converts bold/italic markers and smileys when pasting; input rules remain disabled.',
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const editor = within(canvasElement).getByRole('textbox');
+    await userEvent.click(editor);
+    const clipboardData = new DataTransfer();
+    clipboardData.setData('text/plain', '**bold** :)');
+    editor.dispatchEvent(new ClipboardEvent('paste', { clipboardData, bubbles: true }));
+    await waitFor(() => expect(editor.querySelector('strong')).toHaveTextContent('bold'));
+    await expect(editor).toHaveTextContent('😊');
   },
 };
 

@@ -16,6 +16,7 @@ import {
 import { Editor, EditorOptions } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import { formattingActions } from '../../rich-text-editor.defaults';
+import { formattingRules, smileyFormatting } from '../../rich-text-editor.formatting';
 import {
   RichTextEditorAction,
   RichTextEditorBlockLevel,
@@ -113,8 +114,8 @@ export class DocumentComponent implements AfterViewInit, OnChanges, OnDestroy {
       element: this.editorHost.nativeElement,
       content: this.value,
       editable: !this.readonly,
-      enableInputRules: this.config.enableInputRules ?? false,
-      enablePasteRules: this.config.enablePasteRules ?? false,
+      enableInputRules: formattingRules(this.config.inputFormatting),
+      enablePasteRules: formattingRules(this.config.pasteFormatting),
       extensions: [
         StarterKit.configure({
           blockquote: false,
@@ -129,7 +130,7 @@ export class DocumentComponent implements AfterViewInit, OnChanges, OnDestroy {
           trailingNode: false,
           listKeymap: false,
         }),
-        ...(this.config.extensions ?? []),
+        smileyFormatting,
       ],
       editorProps: this.editorProps,
       onUpdate: ({ editor }) => this.valueChange.emit(editor.getHTML()),
