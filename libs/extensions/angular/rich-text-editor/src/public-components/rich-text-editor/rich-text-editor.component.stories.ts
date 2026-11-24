@@ -165,12 +165,13 @@ Omit either property or use [] to disable its rules; toolbar controls and keyboa
 | Formatting | While typing | When pasting |
 | --- | --- | --- |
 | \`markdown\` | Bold/italic markers, headings (\`# \`), bullet lists (\`- \`) and ordered lists (\`1. \`). | Bold/italic markers such as \`**bold**\` and \`*italic*\`; not full Markdown parsing. |
-| \`smileys\` | Kirby-defined emoticon shortcuts become emoji. | The same shortcuts become emoji. |
+| \`smileys\` | Converts \`:-)\` \`:)\`, \`:-(\` \`:(\`, \`:-D\` \`:D\`, \`;-)\` \`;)\`, \`:-P\` \`:P\`, \`:-O\` \`:O\`, \`<3\`, \`:-/\` and \`>:\\|\` into emoji. | The same shortcuts become emoji. |
 
-Supported smileys: :-) :), :-( :(, :-D :D, ;-) ;), :-P :P, :-O :O, <3, :-/ and >:|.
 Paste rules do not control preservation of formatting from copied HTML.
 
 ## CSS custom properties
+
+The document resizes to its content within the configured height limits, scrolling at the maximum.
 
 Set these on the editor host or in your stylesheet.
 

@@ -10,7 +10,7 @@ kirby-x-rich-text-editor-document {
 
   .kirby-rich-text-placeholder {
     position: absolute;
-    inset: var(--kirby-spacing-l);
+    inset: var(--kirby-spacing-s);
     pointer-events: none;
     color: var(--kirby-color-content-base-quiet);
   }
@@ -19,11 +19,11 @@ kirby-x-rich-text-editor-document {
     box-sizing: border-box;
     min-height: var(
       --kirby-x-rich-text-editor-min-height,
-      calc(23rem + 2 * var(--kirby-spacing-l))
+      calc(23rem + 2 * var(--kirby-spacing-s))
     );
     max-height: var(--kirby-x-rich-text-editor-max-height, none);
     overflow-y: auto;
-    padding: var(--kirby-spacing-l);
+    padding: var(--kirby-spacing-s);
     outline: none;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
@@ -63,7 +63,7 @@ kirby-x-rich-text-editor-document {
     .kirby-rich-text-document {
       min-height: var(
         --kirby-x-rich-text-editor-min-height,
-        calc(65dvh + 2 * var(--kirby-spacing-l))
+        calc(65dvh + 2 * var(--kirby-spacing-s))
       );
     }
   }
