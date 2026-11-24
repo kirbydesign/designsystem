@@ -1,21 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$sidebar-width: calc(5 * var(--kirby-spacing-xxl) + 2 * var(--kirby-spacing-m));
-$content-max-width: 1020px;
-
 :host {
-  --header-height: calc(var(--kirby-spacing-xxxxl) + var(--kirby-stroke-xs));
+  --header-height: var(--kirby-spacing-xxxxl);
 
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-block-size: 100dvh;
   background-color: var(--kirby-color-fill-base);
-
-  @include utils.media('>=large') {
-    --header-height: calc(
-      var(--kirby-spacing-xxxxl) + var(--kirby-spacing-xxs) + var(--kirby-stroke-xs)
-    );
-  }
 }
 
 .layout {
@@ -23,17 +14,10 @@ $content-max-width: 1020px;
   flex: 1;
 }
 
-cookbook-side-nav {
-  @include utils.media('>=large') {
-    flex: none;
-    width: $sidebar-width;
-  }
-}
-
 .main {
   flex: 1;
-  min-width: 0;
-  max-width: calc(#{$content-max-width} + 2 * var(--kirby-spacing-m));
+  min-inline-size: 0;
+  max-inline-size: var(--kirby-page-content-max-width-lg);
   margin-inline: auto;
   padding: var(--kirby-spacing-xl) var(--kirby-spacing-m);
 }

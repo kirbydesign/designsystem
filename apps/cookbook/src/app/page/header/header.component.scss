@@ -8,20 +8,19 @@ $medium-rect-delay: $large-rect-delay + 300ms;
 $small-rect-delay: $medium-rect-delay + 200ms;
 
 :host {
-  height: var(--header-height);
+  block-size: var(--header-height);
   z-index: calc(var(--kirby-z-index-sticky-content) + 1); // above side-nav
   position: sticky;
-  top: 0;
+  inset-block-start: 0;
   background-color: var(--kirby-color-fill-base);
-  border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
+  border-block-end: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
 }
 
 header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  block-size: 100%;
   padding-inline: var(--kirby-spacing-xxs);
 
   @include utils.media('>=large') {

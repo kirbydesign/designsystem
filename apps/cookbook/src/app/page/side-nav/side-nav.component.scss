@@ -3,24 +3,22 @@
 
 $link-padding-block: var(--kirby-spacing-xxxs);
 $link-padding-inline: var(--kirby-spacing-s);
-$link-border-radius: 3px;
-$divider-inset: var(--kirby-spacing-xxxxs);
-$divider-spacing: var(--kirby-spacing-xxs);
+$link-border-radius: var(--kirby-border-radius-xs);
 
 :host {
   z-index: var(--kirby-z-index-sticky-content);
   padding: var(--kirby-spacing-m);
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   background-color: var(--kirby-color-fill-base);
   border-inline-end: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
 
   @include utils.media('<large') {
     display: none;
     position: fixed;
-    top: var(--header-height);
-    bottom: 0;
-    left: 0;
+    inset-block: var(--header-height) 0;
+    inset-inline-start: 0;
 
     &.is-open {
       display: block;
@@ -31,9 +29,9 @@ $divider-spacing: var(--kirby-spacing-xxs);
   @include utils.media('>=large') {
     display: block;
     position: sticky;
-    top: var(--header-height);
+    inset-block-start: var(--header-height);
     align-self: start;
-    height: calc(100vh - var(--header-height));
+    block-size: calc(100dvh - var(--header-height));
   }
 }
 
@@ -61,7 +59,7 @@ a {
   display: block;
   padding: $link-padding-block $link-padding-inline;
   border-radius: $link-border-radius;
-  line-height: 1.5rem;
+  line-height: var(--kirby-line-height-n);
 
   &:hover,
   &:focus {
@@ -113,11 +111,4 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-hr {
-  border: solid 1px var(--kirby-color-border-base-silent);
-  border-bottom: none;
-  margin-block: $divider-spacing;
-  margin-inline: $divider-inset;
 }
