@@ -1,3 +1,5 @@
+@use '@kirbydesign/core/src/scss/utils';
+
 kirby-x-rich-text-editor-toolbar {
   display: flex;
   align-items: center;
@@ -23,5 +25,14 @@ kirby-x-rich-text-editor-toolbar {
     --kirby-button-background-color: var(--kirby-color-fill-base-active);
     --kirby-button-color: var(--kirby-color-content-base-active);
     --kirby-button-border-color: currentcolor;
+  }
+
+  @include utils.media('<=small') {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    > * {
+      flex-shrink: 0;
+    }
   }
 }

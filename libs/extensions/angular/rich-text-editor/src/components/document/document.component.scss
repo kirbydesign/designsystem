@@ -3,6 +3,7 @@
 kirby-x-rich-text-editor-document {
   display: block;
   position: relative;
+  line-height: var(--kirby-line-height-n);
 
   &.with-toolbar {
     --kirby-content-border-top-radius: 0;
@@ -27,7 +28,6 @@ kirby-x-rich-text-editor-document {
     outline: none;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
-    line-height: var(--kirby-line-height-n);
     border-radius: var(--kirby-content-border-top-radius, 0)
       var(--kirby-content-border-top-radius, 0) var(--kirby-content-border-bottom-radius, 0)
       var(--kirby-content-border-bottom-radius, 0);
@@ -55,7 +55,7 @@ kirby-x-rich-text-editor-document {
 
     ul,
     ol {
-      padding-inline-start: var(--kirby-spacing-l);
+      padding-inline-start: var(--kirby-spacing-s);
     }
   }
 

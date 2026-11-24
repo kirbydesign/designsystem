@@ -127,6 +127,7 @@ const meta: Meta<EditorStoryArgs> = {
 An HTML rich text editor with consumer-selected controls and labels.
 Supports headings, text formatting and ordered/unordered lists.
 Place inside a kirby-card for background, rounded corners and elevation.
+On mobile, the toolbar stays on one row and scrolls horizontally when needed.
 
 ## Configuration
 
