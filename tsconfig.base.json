@@ -31,6 +31,7 @@
       "@kirbydesign/designsystem/checkbox": ["./libs/designsystem/dist/checkbox"],
       "@kirbydesign/designsystem/config": ["./libs/designsystem/dist/config"],
       "@kirbydesign/designsystem/data-table": ["./libs/designsystem/dist/data-table"],
+      "@kirbydesign/designsystem/data-grid": ["./libs/designsystem/dist/data-grid"],
       "@kirbydesign/designsystem/divider": ["./libs/designsystem/dist/divider"],
       "@kirbydesign/designsystem/dropdown": ["./libs/designsystem/dist/dropdown"],
       "@kirbydesign/designsystem/empty-state": ["./libs/designsystem/dist/empty-state"],

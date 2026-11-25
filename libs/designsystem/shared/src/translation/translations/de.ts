@@ -14,4 +14,6 @@ export const de: Translation = {
   characters: 'Zeichen',
   outOf: 'von',
   entered: 'eingegeben',
+  selectRow: '{label} auswählen',
+  selectAllRows: 'Alle Zeilen auswählen',
 };

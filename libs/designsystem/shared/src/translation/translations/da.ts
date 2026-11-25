@@ -14,4 +14,6 @@ export const da: Translation = {
   characters: 'Tegn',
   outOf: 'af',
   entered: 'indtastet',
+  selectRow: 'Vælg {label}',
+  selectAllRows: 'Vælg alle rækker',
 };

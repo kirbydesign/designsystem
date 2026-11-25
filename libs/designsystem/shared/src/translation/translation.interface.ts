@@ -12,4 +12,6 @@ export interface Translation {
   characters: string;
   outOf: string;
   entered: string;
+  selectRow: string;
+  selectAllRows: string;
 }

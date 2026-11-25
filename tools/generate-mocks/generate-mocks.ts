@@ -1012,6 +1012,16 @@ export class ${mockClassName}${typeParameters}${extendsClause} {${propertiesStri
         if (bindingPropertyArg && ts.isStringLiteral(bindingPropertyArg)) {
           inputOutputDecorator.bindingProperty = bindingPropertyArg.getText();
         }
+        // The object form, e.g. @Input({ required: true, alias: 'kirbyFoo' }):
+        if (bindingPropertyArg && ts.isObjectLiteralExpression(bindingPropertyArg)) {
+          const alias = bindingPropertyArg.properties.find(
+            (property): property is ts.PropertyAssignment =>
+              ts.isPropertyAssignment(property) && property.name.getText() === 'alias'
+          );
+          if (alias && ts.isStringLiteral(alias.initializer)) {
+            inputOutputDecorator.bindingProperty = alias.initializer.getText();
+          }
+        }
       }
     });
     return inputOutputDecorator;

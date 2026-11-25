@@ -31,6 +31,14 @@ import {
   StockChartComponent,
 } from '@kirbydesign/designsystem/chart';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import {
+  DataGridCellDirective,
+  DataGridComponent,
+  DataGridHeaderCellComponent,
+  DataGridHeaderRowDirective,
+  DataGridRowDirective,
+  DataGridTableDirective,
+} from '@kirbydesign/designsystem/data-grid';
 import { DataTableModule, TableSortableComponent } from '@kirbydesign/designsystem/data-table';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
@@ -161,6 +169,12 @@ export const KIRBY_IMPORTS: Type<unknown>[] = [
   ChartsModule,
   StockChartComponent,
   CheckboxComponent,
+  DataGridCellDirective,
+  DataGridComponent,
+  DataGridHeaderCellComponent,
+  DataGridHeaderRowDirective,
+  DataGridRowDirective,
+  DataGridTableDirective,
   DataTableModule,
   TableSortableComponent,
   DividerComponent,
