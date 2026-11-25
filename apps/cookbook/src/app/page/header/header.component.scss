@@ -12,8 +12,8 @@ $small-rect-delay: $medium-rect-delay + 200ms;
   z-index: calc(var(--kirby-z-index-sticky-content) + 1); // above side-nav
   position: sticky;
   top: 0;
-  background-color: var(--kirby-light);
-  border-bottom: 1px solid var(--kirby-medium);
+  background-color: var(--kirby-color-fill-base);
+  border-bottom: 1px solid var(--kirby-color-border-base-silent);
 
   @include utils.media('>=large') {
     position: static;

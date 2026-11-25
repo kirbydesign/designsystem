@@ -20,7 +20,7 @@ $logo-size-mobile: var(--kirby-spacing-xl);
 
   &.is-open {
     display: block;
-    background-color: var(--kirby-light);
+    background-color: var(--kirby-color-fill-base);
     box-shadow: var(--kirby-elevation-8);
   }
 
@@ -67,14 +67,14 @@ a {
 
   &:hover,
   &:focus {
-    color: var(--kirby-text-color-semi-dark);
+    color: var(--kirby-color-content-base-quiet);
     z-index: var(--kirby-z-index-default);
   }
 
   &.is-selected {
-    color: var(--kirby-text-color-black);
+    color: var(--kirby-color-content-base);
     font-weight: bold;
-    background-color: var(--kirby-semi-light);
+    background-color: var(--kirby-color-fill-base-active);
   }
 
   &.is-hidden {
@@ -118,7 +118,7 @@ h2 {
 }
 
 hr {
-  border: solid 1px var(--kirby-light);
+  border: solid 1px var(--kirby-color-border-base-silent);
   border-bottom: none;
   margin-block: $divider-spacing;
   margin-inline: $divider-inset;

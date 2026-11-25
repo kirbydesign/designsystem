@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CardComponent } from '@kirbydesign/designsystem/card';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { CardComponent, CardVariant } from '@kirbydesign/designsystem/card';
 import {
   DateInputDirective,
   FormFieldComponent,
@@ -9,16 +8,15 @@ import {
 
 const config = {
   selector: 'cookbook-form-field-input-color-example',
-  template: `<kirby-card hasPadding="true" [themeColor]="color">
+  template: `<kirby-card hasPadding="true" [variant]="variant">
     <kirby-form-field>
     <input kirby-input placeholder="Default input with placeholder text inside card" />
   </kirby-form-field>
 </kirby-card>
 <div class="card-option-button-group">
-    <button (click)="setThemeColor('white')" class="white"></button>
-    <button (click)="setThemeColor('light')" class="light"></button>
-    <button (click)="setThemeColor('secondary')" class="secondary"></button>
-    <button (click)="setThemeColor('dark')" class="dark"></button>
+    <button (click)="setVariant('base')" class="kirby-surface-base" aria-label="Base"></button>
+    <button (click)="setVariant('raised')" class="kirby-surface-raised" aria-label="Raised"></button>
+    <button (click)="setVariant('brand')" class="kirby-surface-brand" aria-label="Brand"></button>
 </div>
 `,
 };
@@ -27,21 +25,15 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrl: 'color.scss',
-  imports: [
-    CardComponent,
-    ThemeColorDirective,
-    FormFieldComponent,
-    DateInputDirective,
-    InputComponent,
-  ],
+  imports: [CardComponent, FormFieldComponent, DateInputDirective, InputComponent],
 })
 export class FormFieldInputColorExampleComponent {
   get template(): string {
     return config.template.split('<div class="card-option-button-group">')[0]; // Remove config part of the template
   }
-  color: string = 'white';
+  variant: CardVariant = 'raised';
 
-  setThemeColor(color: string) {
-    this.color = color;
+  setVariant(variant: CardVariant) {
+    this.variant = variant;
   }
 }

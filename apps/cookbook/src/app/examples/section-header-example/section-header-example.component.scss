@@ -3,7 +3,7 @@
 :host {
   display: block;
   height: 100%;
-  background: var(--kirby-background-color);
+  background: var(--kirby-color-fill-base);
   padding: var(--kirby-spacing-m);
 
   h2 {
@@ -11,6 +11,6 @@
       margin-top: var(--kirby-spacing-l);
     }
 
-    border-bottom: 1px dotted var(--kirby-medium);
+    border-bottom: 1px dotted var(--kirby-color-border-base-quiet);
   }
 }

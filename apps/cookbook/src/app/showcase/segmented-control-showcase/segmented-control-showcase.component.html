@@ -107,12 +107,18 @@
   ></cookbook-segmented-control-example-with-badge>
 </cookbook-example-viewer>
 
-<h3>Colors</h3>
-<p>Segmented Control has support for theme colors when used within a Card.</p>
+<h3>Surfaces</h3>
+<p>Segmented Control adapts to the surface it is placed on.</p>
 <p>
-  Simply set the Card's
-  <code>themeColor</code>
-  property and Segmented Control will render in a light or dark variant accordingly.
+  Set the Card's
+  <code>variant</code>
+  to
+  <code>base</code>
+  ,
+  <code>raised</code>
+  or
+  <code>brand</code>
+  and Segmented Control will follow the colors of that surface.
 </p>
 <cookbook-example-viewer [html]="colorExample.template">
   <cookbook-segmented-control-example-color

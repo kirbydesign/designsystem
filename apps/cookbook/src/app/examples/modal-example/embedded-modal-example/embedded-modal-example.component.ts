@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
+import { Component, Inject, OnInit, Optional, signal, SkipSelf } from '@angular/core';
 
 import {
   ActionSheetConfig,
@@ -87,8 +87,8 @@ export class EmbeddedModalExampleComponent implements OnInit {
   showNestedDummyContent: boolean = false;
   displayNestedFooterAsInline: boolean = false;
 
-  isLoading = false;
-  isLoadingAdditionalContent = false;
+  isLoading = signal(false);
+  isLoadingAdditionalContent = signal(false);
 
   showModalSizeSelector: boolean;
   selectedModalSize: ModalSize;
@@ -110,12 +110,12 @@ export class EmbeddedModalExampleComponent implements OnInit {
   ngOnInit() {
     if (this.showDummyContent) {
       if (this.delayLoadDummyContent) {
-        this.isLoading = true;
-        setTimeout(() => (this.isLoading = false), 1000);
+        this.isLoading.set(true);
+        setTimeout(() => this.isLoading.set(false), 1000);
       }
       if (this.loadAdditionalContent) {
-        this.isLoadingAdditionalContent = true;
-        setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
+        this.isLoadingAdditionalContent.set(true);
+        setTimeout(() => this.isLoadingAdditionalContent.set(false), 2000);
       }
     }
 

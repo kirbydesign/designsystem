@@ -3,7 +3,7 @@
 :host {
   display: block;
   min-height: 100%;
-  background: var(--kirby-background-color);
+  background: var(--kirby-color-fill-base);
   padding: var(--kirby-spacing-s);
 
   @include utils.media('>=medium') {
@@ -12,7 +12,7 @@
 
   h3 {
     font-size: var(--kirby-font-size-xs);
-    color: var(--kirby-semi-dark);
+    color: var(--kirby-color-content-base-quiet);
     text-transform: uppercase;
     margin-top: var(--kirby-spacing-xs);
     margin-bottom: var(--kirby-spacing-xxxs);

@@ -1,3 +1,4 @@
+@use '@kirbydesign/core/src/scss/utils';
 @use '../segmented-control-examples.shared';
 
 kirby-segmented-control {
@@ -14,47 +15,24 @@ kirby-segmented-control {
 button {
   height: var(--kirby-size-fat-finger);
   width: var(--kirby-size-fat-finger);
-  border: none;
+  border: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
   border-radius: var(--kirby-border-radius-circle);
   margin: 0;
-  color: #fff;
+  background-color: var(--kirby-color-fill-base);
   cursor: pointer;
 
-  &.white {
-    background-color: var(--kirby-white);
-
-    &:hover {
-      background-color: var(--kirby-white-shade);
-    }
-  }
-
-  &.light {
-    background-color: var(--kirby-light);
-    outline: #fff 2px solid;
-    border: #fff 2px solid;
-
-    &:hover {
-      background-color: var(--kirby-light-shade);
-    }
-  }
-
-  &.secondary {
-    background-color: var(--kirby-secondary);
-
-    &:hover {
-      background-color: var(--kirby-secondary-shade);
-    }
-  }
-
-  &.dark {
-    background-color: var(--kirby-dark);
-
-    &:hover {
-      background-color: var(--kirby-dark-shade);
-    }
+  @include utils.hover {
+    background-color: var(--kirby-color-fill-base-hover);
   }
 
   &:active {
+    background-color: var(--kirby-color-fill-base-active);
     transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--kirby-color-border-focus);
+    box-shadow: var(--kirby-focus-ring-md-combined-inset);
   }
 }

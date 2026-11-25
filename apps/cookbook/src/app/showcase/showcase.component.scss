@@ -8,11 +8,11 @@ $icon-size: var(--kirby-spacing-s);
   h1 {
     text-transform: uppercase;
     font-size: var(--kirby-font-size-xxl);
-    color: var(--kirby-dark);
+    color: var(--kirby-color-content-base);
     font-weight: var(--kirby-font-weight-light);
     position: relative;
     padding-bottom: calc(5 * var(--kirby-spacing-xxxs));
-    border-bottom: solid 1px var(--kirby-medium);
+    border-bottom: solid 1px var(--kirby-color-border-base-quiet);
     margin-bottom: var(--kirby-spacing-xs);
   }
 }
@@ -22,7 +22,7 @@ $icon-size: var(--kirby-spacing-s);
   justify-content: space-between;
 
   a {
-    color: var(--kirby-text-color-semi-dark);
+    color: var(--kirby-color-content-base-quiet);
     font-size: var(--kirby-font-size-s);
   }
 }
@@ -55,6 +55,6 @@ h4 {
 /* stylelint-disable selector-pseudo-element-no-unknown */
 ::ng-deep :not(pre) > code[class*='language-'],
 ::ng-deep pre[class*='language-'] {
-  background-color: var(--kirby-light-tint);
-  border: 1px solid var(--kirby-medium);
+  background-color: var(--kirby-color-fill-base-quiet);
+  border: 1px solid var(--kirby-color-border-base-quiet);
 }

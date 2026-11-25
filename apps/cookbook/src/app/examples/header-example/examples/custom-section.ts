@@ -16,7 +16,7 @@ export const config = {
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: var(--kirby-text-color-semi-dark);
+  color: var(--kirby-color-content-base-quiet);
 }`,
   ],
 };

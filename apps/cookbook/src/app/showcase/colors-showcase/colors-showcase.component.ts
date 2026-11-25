@@ -1,11 +1,43 @@
 import { Component } from '@angular/core';
 
 import { CopyTokenComponent } from '../../shared/copy-token/copy-token.component';
-import { TokenEntry } from '../../shared/token-entry';
+
+type ColorProperty = 'fill' | 'content' | 'border';
+
+interface ColorTokenGroup {
+  name: string;
+  description: string;
+  property: ColorProperty;
+  tokens: { name: string; cssVar: string }[];
+}
 
 interface DecorationColorGroup {
   hue: string;
   tokens: { name: string; cssVar: string; step: number }[];
+}
+
+const STATUS_ROLES = ['success', 'warning', 'danger'];
+const STATUS_EMPHASES = ['-loud', '', '-quiet'];
+
+function statusTokens() {
+  return STATUS_ROLES.flatMap((role) => STATUS_EMPHASES.map((emphasis) => `${role}${emphasis}`));
+}
+
+function group(
+  property: ColorProperty,
+  name: string,
+  description: string,
+  tokenNames: string[]
+): ColorTokenGroup {
+  return {
+    name,
+    description,
+    property,
+    tokens: tokenNames.map((tokenName) => ({
+      name: tokenName,
+      cssVar: `--kirby-color-${property}-${tokenName}`,
+    })),
+  };
 }
 
 @Component({
@@ -15,40 +47,53 @@ interface DecorationColorGroup {
   imports: [CopyTokenComponent],
 })
 export class ColorsShowcaseComponent {
-  brandColors: TokenEntry[] = [
-    { name: 'primary', cssVar: '--kirby-primary', description: 'Main brand color' },
-    { name: 'secondary', cssVar: '--kirby-secondary', description: 'Supporting brand color' },
-    { name: 'tertiary', cssVar: '--kirby-tertiary', description: 'Accent brand color' },
-  ];
+  surfaces = ['base', 'raised', 'brand'];
 
-  notificationColors: TokenEntry[] = [
-    { name: 'success', cssVar: '--kirby-success', description: 'Positive feedback' },
-    { name: 'warning', cssVar: '--kirby-warning', description: 'Caution feedback' },
-    { name: 'danger', cssVar: '--kirby-danger', description: 'Error or destructive' },
-  ];
-
-  systemColors: TokenEntry[] = [
-    {
-      name: 'background-color',
-      cssVar: '--kirby-background-color',
-      description: 'Page background',
-    },
-    { name: 'white', cssVar: '--kirby-white', description: 'Surface / card background' },
-    { name: 'light', cssVar: '--kirby-light', description: 'Light neutral' },
-    { name: 'semi-light', cssVar: '--kirby-semi-light', description: 'Borders, dividers' },
-    { name: 'medium', cssVar: '--kirby-medium', description: 'Disabled / placeholder' },
-    { name: 'semi-dark', cssVar: '--kirby-semi-dark', description: 'Secondary text' },
-    { name: 'dark', cssVar: '--kirby-dark', description: 'Primary text' },
-    { name: 'black', cssVar: '--kirby-black', description: 'Highest contrast' },
-  ];
-
-  textColors: TokenEntry[] = [
-    { name: 'black', cssVar: '--kirby-text-color-black', description: 'Primary text' },
-    { name: 'semi-dark', cssVar: '--kirby-text-color-semi-dark', description: 'Secondary text' },
-    { name: 'white', cssVar: '--kirby-text-color-white', description: 'Text on dark backgrounds' },
-    { name: 'danger', cssVar: '--kirby-text-color-danger', description: 'Error text' },
-    { name: 'positive', cssVar: '--kirby-text-color-positive', description: 'Positive value text' },
-    { name: 'negative', cssVar: '--kirby-text-color-negative', description: 'Negative value text' },
+  colorGroups: ColorTokenGroup[] = [
+    group('fill', 'Fill', 'Backgrounds of surfaces, controls and status indicators.', [
+      'base',
+      'base-quiet',
+      'raised',
+      'brand-loud',
+      'brand',
+      'engaged',
+      'neutral',
+      ...statusTokens(),
+    ]),
+    group('content', 'Content', 'Text and icons. Pair with the fill of the same role.', [
+      'base-loud',
+      'base',
+      'base-quiet',
+      'raised-loud',
+      'raised',
+      'raised-quiet',
+      'brand-loud',
+      'brand',
+      'engaged',
+      'neutral',
+      'positive',
+      'negative',
+      ...statusTokens(),
+    ]),
+    group('border', 'Border', 'Outlines, dividers and focus indication.', [
+      'base-loud',
+      'base',
+      'base-quiet',
+      'base-silent',
+      'raised-loud',
+      'raised',
+      'raised-quiet',
+      'raised-silent',
+      'raised-danger',
+      'brand-loud',
+      'brand',
+      'brand-quiet',
+      'engaged',
+      'neutral',
+      'focus',
+      'offset',
+      ...statusTokens(),
+    ]),
   ];
 
   decorationColorGroups: DecorationColorGroup[] = this.buildDecorationColorGroups();

@@ -4,7 +4,7 @@
 
 .form-state {
   margin-top: var(--kirby-spacing-xs);
-  border-top: 1px solid var(--kirby-medium);
+  border-top: 1px solid var(--kirby-color-border-base-silent);
   padding: var(--kirby-spacing-xxs);
 
   h4 {
@@ -19,15 +19,15 @@
   }
 
   span {
-    background-color: var(--kirby-danger);
-    color: var(--kirby-white);
+    background-color: var(--kirby-color-fill-danger-loud);
+    color: var(--kirby-color-content-danger-loud);
     margin-right: var(--kirby-spacing-xxxs);
     padding: 0 var(--kirby-spacing-xxxxs);
     border-radius: var(--kirby-spacing-xxxs);
   }
 
   span.state-true {
-    background-color: var(--kirby-success);
-    color: var(--kirby-success-contrast);
+    background-color: var(--kirby-color-fill-success-loud);
+    color: var(--kirby-color-content-success-loud);
   }
 }
