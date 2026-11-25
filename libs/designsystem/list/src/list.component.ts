@@ -1,16 +1,19 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
   HostBinding,
+  inject,
   Input,
   OnChanges,
   OnInit,
   Output,
   Renderer2,
+  SimpleChanges,
   TemplateRef,
   TrackByFunction,
   ViewChild,
@@ -194,6 +197,8 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
   _groupedItems: any[];
   _selectedItem: any;
 
+  _changeDetectorRef = inject(ChangeDetectorRef);
+
   constructor(
     private listHelper: ListHelper,
     private element: ElementRef<HTMLElement>,
@@ -208,7 +213,16 @@ export class ListComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes?: SimpleChanges): void {
+    if (
+      changes?.items &&
+      !changes.items.firstChange &&
+      this.isLoadOnDemandEnabled &&
+      !this._isLoading
+    ) {
+      this.scrollDirective?.checkScrollPosition();
+    }
+
     this._isSectionsEnabled = !!this.getSectionName;
     this._isStandAloneEnabled = !!this.getStandAloneByProperty;
 

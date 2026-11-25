@@ -1,7 +1,7 @@
 <div class="example">
   <p>
     The kirby list will emit a
-    <code>loadMore</code>
+    <code>loadOnDemand</code>
     event, when the user has scrolled 80% of the list. It is the responsibility of the consumer to
     add more items to the bound
     <code>items</code>
@@ -9,7 +9,7 @@
   </p>
   <p>
     The event emitted is of type
-    <code>KirbyLoadMoreEvent</code>
+    <code>LoadOnDemandEvent</code>
     which exposes a
     <code>complete()</code>
     callback function.
@@ -21,9 +21,9 @@
   </p>
   <p>
     If
-    <code>complete(disableLoadMore?: boolean)</code>
+    <code>complete(disableLoadOnDemand?: boolean)</code>
     is called with the
-    <code>disableLoadMore</code>
+    <code>disableLoadOnDemand</code>
     argument set to
     <code>true</code>
     , no further events will be emitted. If

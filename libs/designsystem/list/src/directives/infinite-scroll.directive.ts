@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, takeUntil } from 'rxjs/operators';
 
 import { Scroll } from './scroll.model';
 
@@ -49,6 +49,12 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private offset = 0.8;
 
+  private scrollContainer: HTMLElement;
+
+  private elementHeightAtLastScrollEnd: number;
+
+  private isDestroyed = false;
+
   constructor(
     private elementRef: ElementRef,
     private windowRef: WindowRef,
@@ -73,38 +79,48 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         })
       )
       .subscribe(() => {
-        this.scrollEnd.emit();
+        this.elementHeightAtLastScrollEnd =
+          this.elementRef.nativeElement.getBoundingClientRect().height;
+        // emit inside angular, as change detection is needed to show the spinner
+        this.zone.run(() => this.scrollEnd.emit());
       });
 
-    /**
-     * Subscribe to the ionScroll event on the ion-content around the list (if any)
-     * and emit {@link scrollEnd} event when element scroll position has surpassed the offset.
-     */
-    setTimeout(() => {
-      const ionContent: HTMLElement = this.elementRef.nativeElement.closest('ion-content');
+    setTimeout(async () => {
+      const ionContent: HTMLIonContentElement =
+        this.elementRef.nativeElement.closest('ion-content');
       if (ionContent) {
-        // we run the 'ionScroll' event outside angular, as it would trigger change detection on each scroll
+        this.scrollContainer = await ionContent.getScrollElement();
+        if (this.isDestroyed) return;
+
+        // Native scroll event, as 'ionScroll' requires 'scrollEvents' on ion-content (not set in e.g. modals)
         this.zone.runOutsideAngular(() => {
-          fromEvent<any>(ionContent, 'ionScroll')
-            .pipe(
-              takeUntil(this.ngUnsubscribe$),
-              debounceTime(INFINITE_SCROLL_DEBOUNCE),
-              filter(() => !this.disabled),
-              map(() => this.getScroll()),
-              filter((scroll) => {
-                return (
-                  scroll.elementHeight * (1 - this.offset) >=
-                  scroll.distanceToViewBottom - scroll.viewHeight
-                );
-              })
-            )
-            .subscribe(() => {
-              // we make sure to emit the event inside angular again. As we want to show the spinner and need change detection for that.
-              this.zone.run(() => this.scrollEnd.emit());
-            });
+          fromEvent(this.scrollContainer, 'scroll')
+            .pipe(takeUntil(this.ngUnsubscribe$))
+            .subscribe(() => this.onScroll());
         });
       }
+
+      if (this.isDestroyed) return;
+      this.onScroll();
     });
+  }
+
+  /**
+   * Re-evaluates the scroll position without a scroll event, e.g. after new items
+   * have been loaded or the list items have changed.
+   * Emits {@link scrollEnd} if the scroll position has surpassed the offset (or the
+   * element does not fill the view), unless the directive is disabled or the element
+   * height is unchanged since the last {@link scrollEnd}.
+   * The check is delayed by {@link INFINITE_SCROLL_DEBOUNCE} ms to allow the DOM to render.
+   */
+  checkScrollPosition(): void {
+    setTimeout(() => {
+      if (this.isDestroyed || this.disabled) return;
+      const scroll = this.getScroll();
+      if (this.hasElementHeightChangedSinceLastScrollEnd(scroll)) {
+        this.scroll$.next(scroll);
+      }
+    }, INFINITE_SCROLL_DEBOUNCE);
   }
 
   /**
@@ -121,8 +137,13 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    * trigger {@link ngUnsubscribe} complete on component destroy lifecycle hook
    */
   ngOnDestroy(): void {
+    this.isDestroyed = true;
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
+  }
+
+  private hasElementHeightChangedSinceLastScrollEnd(scroll: Scroll): boolean {
+    return scroll.elementHeight !== this.elementHeightAtLastScrollEnd;
   }
 
   private getScroll(): Scroll {
@@ -131,7 +152,9 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     const distanceToViewBottom = boundindClientRect.bottom;
     const elementHeight = boundindClientRect.height;
-    const viewHeight = this.windowRef.nativeWindow.innerHeight;
+    const viewHeight = this.scrollContainer
+      ? this.scrollContainer.getBoundingClientRect().bottom
+      : this.windowRef.nativeWindow.innerHeight;
 
     return { distanceToViewBottom, elementHeight, viewHeight };
   }

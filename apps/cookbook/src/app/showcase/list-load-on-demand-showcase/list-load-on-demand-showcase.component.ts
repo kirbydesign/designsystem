@@ -42,7 +42,7 @@ export class ListLoadOnDemandShowcaseComponent {
     {
       name: 'loadOnDemand',
       description: `Emitted when the user has scrolled 80% of the list.`,
-      signature: `KirbyListLoadMoreEvent { complete: (disableLoadMore?: boolean) => void; }`,
+      signature: `LoadOnDemandEvent { complete: (disableLoadOnDemand?: boolean) => void; }`,
     },
   ];
 }
