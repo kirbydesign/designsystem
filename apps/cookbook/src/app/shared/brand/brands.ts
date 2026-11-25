@@ -1,5 +1,5 @@
 export interface Brand {
-  /** Value of the data-kirby-brand attribute. Must match a selector in scss/_brands.scss. */
+  /** Value of the kirby-brand attribute. Must match a selector in scss/_brands.scss. */
   id: string;
   text: string;
   /** Name of the kirby-icon representing the brand. */

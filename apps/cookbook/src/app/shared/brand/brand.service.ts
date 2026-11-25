@@ -4,7 +4,7 @@ import { IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { Brand, BRANDS, DEFAULT_BRAND } from './brands';
 
 const STORAGE_KEY = 'kirby-cookbook-brand';
-const ATTRIBUTE = 'data-kirby-brand';
+const ATTRIBUTE = 'kirby-brand';
 
 /**
  * Owns the active brand theme. The choice is stored in localStorage, so every

@@ -1,26 +1,65 @@
-$font-weights: (
-  'Light': 300,
-  'Regular': 400,
-  'Bold': 700,
-  'Black': 900,
-);
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
 
-@each $name, $weight in $font-weights {
-  @font-face {
-    font-family: Jyske;
-    src: url('./fonts/Jyske-#{$name}.woff2') format('woff2');
-    font-weight: $weight;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: Jyske;
-    src: url('./fonts/Jyske-#{$name}Italic.woff2') format('woff2');
-    font-weight: $weight;
-    font-style: italic;
-    font-display: swap;
-  }
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-RegularItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @mixin theme {
