@@ -76,15 +76,16 @@ async function fetchPayments(
 
 const config = {
   selector: 'cookbook-data-grid-filtering-example',
-  template: `<kirby-segmented-control
-  mode="chip"
-  size="sm"
-  [items]="statusItems"
-  [selectedIndex]="0"
-  (segmentSelect)="onStatusSelect($event)"
-></kirby-segmented-control>
-
-<p>{{ selectedCount() }} selected, {{ hiddenSelectedCount() }} not shown</p>
+  template: `<div class="toolbar">
+  <kirby-segmented-control
+    mode="chip"
+    size="sm"
+    [items]="statusItems"
+    [selectedIndex]="0"
+    (segmentSelect)="onStatusSelect($event)"
+  ></kirby-segmented-control>
+  <p>{{ selectedCount() }} selected, {{ hiddenSelectedCount() }} not shown</p>
+</div>
 
 <kirby-card>
   <kirby-data-grid [table]="table" label="Payments">
@@ -120,8 +121,16 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: `
-    kirby-segmented-control {
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--kirby-spacing-s);
       margin-block-end: var(--kirby-spacing-s);
+    }
+
+    .toolbar p {
+      margin: 0;
     }
   `,
   imports: [
