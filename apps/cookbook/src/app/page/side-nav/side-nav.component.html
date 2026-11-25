@@ -5,7 +5,7 @@
     (keydown.ArrowDown)="onLinksArrowUpDown($event, 'resources')"
   >
     <h2 class="kirby-text-normal">Resources</h2>
-    <hr />
+    <kirby-divider [hasMargin]="true"></kirby-divider>
     <nav>
       <ul>
         @for (item of filteredResourceRoutes; track item.path) {
@@ -45,7 +45,7 @@
     (keydown.ArrowDown)="onLinksArrowUpDown($event, 'foundation')"
   >
     <h2 class="kirby-text-normal">Foundation</h2>
-    <hr />
+    <kirby-divider [hasMargin]="true"></kirby-divider>
     <nav>
       <ul>
         @for (item of foundationRoutes; track item.path) {
@@ -71,7 +71,7 @@
     (keydown.ArrowDown)="onLinksArrowUpDown($event, 'layout')"
   >
     <h2 class="kirby-text-normal">Layout</h2>
-    <hr />
+    <kirby-divider [hasMargin]="true"></kirby-divider>
     <nav>
       <ul>
         @for (item of layoutRoutes; track item.path) {
@@ -100,7 +100,7 @@
       <h2 class="kirby-text-normal">Components</h2>
       <a routerLink="component-overview">All</a>
     </div>
-    <hr />
+    <kirby-divider [hasMargin]="true"></kirby-divider>
     <div class="filter">
       <kirby-form-field>
         <input
@@ -124,8 +124,8 @@
         </button>
       }
     </div>
-    <ul>
-      @for (item of filteredShowcaseRoutes; track $index; let isLast = $last) {
+    @for (item of filteredShowcaseRoutes; track $index; let isLast = $last) {
+      <ul>
         @for (link of item; track link.path) {
           <li>
             <a
@@ -139,10 +139,10 @@
             </a>
           </li>
         }
-        @if (!isLast) {
-          <hr aria-hidden="true" />
-        }
+      </ul>
+      @if (!isLast) {
+        <kirby-divider [hasMargin]="true"></kirby-divider>
       }
-    </ul>
+    }
   </kirby-card>
 </section>

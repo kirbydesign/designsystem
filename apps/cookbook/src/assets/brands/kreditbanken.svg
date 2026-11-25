@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72"
+  height="72" viewBox="0 0 72 72">
+  <defs>
+    <rect id="kreditbanken-a" width="72" height="72" x="0" y="0" rx="36" />
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <mask id="kreditbanken-b" fill="#fff">
+      <use xlink:href="#kreditbanken-a" />
+    </mask>
+    <g mask="url(#kreditbanken-b)">
+      <g transform="translate(-18 -18)">
+        <rect width="108" height="108" fill="#00AB67" />
+        <g fill="#FFF" fill-rule="nonzero" transform="translate(29 40)">
+          <polygon points="23.647 27.048 0 13.524 23.647 0" />
+          <polygon points="47.293 27.048 23.647 13.524 47.293 0" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,41 +1,23 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-/* stylelint-disable declaration-block-no-redundant-longhand-properties */
-
-$header-height-mobile: auto;
-$header-height-desktop: calc(2 * var(--kirby-spacing-xxl));
-$footer-height: calc(3 * var(--kirby-spacing-xxl));
-$sidebar-width: calc(5 * var(--kirby-spacing-xxl));
-$content-max-width: 1020px;
-$mobile-gutter: var(--kirby-spacing-s);
-$desktop-gutter: minmax(var(--kirby-spacing-m), 1fr);
-
 :host {
-  background-color: var(--kirby-color-fill-base);
-  display: grid;
-  grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
-  grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
-  grid-template-areas:
-    'header header header'
-    '. main .'
-    'footer footer footer';
-  gap: var(--kirby-spacing-xxs);
-  min-height: 100vh;
+  --header-height: var(--kirby-spacing-xxxxl);
 
-  @include utils.media('>=large') {
-    grid-template-columns:
-      $desktop-gutter $sidebar-width minmax(0, $content-max-width)
-      $desktop-gutter;
-    grid-template-rows: $header-height-desktop minmax(0, 1fr) $footer-height;
-    grid-template-areas:
-      '. header header .'
-      '. sidebar main .'
-      'footer footer footer footer';
-    column-gap: var(--kirby-spacing-xl);
-    row-gap: var(--kirby-spacing-m);
-  }
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+  background-color: var(--kirby-color-fill-base);
+}
+
+.layout {
+  display: flex;
+  flex: 1;
 }
 
 .main {
-  grid-area: main;
+  flex: 1;
+  min-inline-size: 0;
+  max-inline-size: var(--kirby-page-content-max-width-lg);
+  margin-inline: auto;
+  padding: var(--kirby-spacing-xl) var(--kirby-spacing-m);
 }

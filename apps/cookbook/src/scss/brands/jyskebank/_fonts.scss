@@ -1,0 +1,68 @@
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-RegularItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Jyske;
+  src: url('./fonts/Jyske-BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@mixin theme {
+  --kirby-font-family-brand: 'Jyske';
+  --kirby-letter-spacing: -2%;
+}

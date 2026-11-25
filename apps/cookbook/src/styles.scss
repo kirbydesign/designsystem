@@ -4,6 +4,9 @@
 // Import common styles
 @use '@kirbydesign/core/src/scss/global-styles';
 
+// Must come after global-styles so brand tokens override Kirby's defaults
+@use 'scss/brands';
+
 body,
 html {
   margin: 0;

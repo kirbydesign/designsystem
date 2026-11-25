@@ -12,7 +12,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrl: './sizes.scss',
+  styleUrl: './_responsive-grid-layout.scss',
   imports: [ButtonComponent],
 })
 export class ButtonExampleSizesComponent {

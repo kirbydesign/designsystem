@@ -1,37 +1,30 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $logo-size-mobile: var(--kirby-spacing-xl);
-$logo-size-desktop: calc(2 * var(--kirby-spacing-l));
+$logo-size-desktop: var(--kirby-spacing-xxl);
 $text-delay: 500ms;
 $large-rect-delay: $text-delay + 400ms;
 $medium-rect-delay: $large-rect-delay + 300ms;
 $small-rect-delay: $medium-rect-delay + 200ms;
 
 :host {
-  grid-area: header;
+  block-size: var(--header-height);
   z-index: calc(var(--kirby-z-index-sticky-content) + 1); // above side-nav
   position: sticky;
-  top: 0;
+  inset-block-start: 0;
   background-color: var(--kirby-color-fill-base);
-  border-bottom: 1px solid var(--kirby-color-border-base-silent);
-
-  @include utils.media('>=large') {
-    position: static;
-    background-color: transparent;
-    border-bottom: none;
-  }
+  border-block-end: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
 }
 
 header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  width: 100%;
-  padding: var(--kirby-spacing-xxs);
+  block-size: 100%;
+  padding-inline: var(--kirby-spacing-xxs);
 
   @include utils.media('>=large') {
-    padding-block: var(--kirby-spacing-m) 0;
-    align-items: start;
+    padding-inline: var(--kirby-spacing-xs);
 
     .menu-button {
       display: none;
@@ -78,6 +71,15 @@ header {
     transform-origin: center;
     animation: enter-pop var(--kirby-transition-duration-short) ease-in-out $small-rect-delay
       forwards;
+  }
+}
+
+.brand-selector {
+  grid-column: 3;
+  justify-self: end;
+
+  @include utils.media('>=large') {
+    margin-inline-end: var(--kirby-spacing-m);
   }
 }
 

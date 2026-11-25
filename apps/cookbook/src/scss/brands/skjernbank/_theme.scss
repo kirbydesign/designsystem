@@ -1,0 +1,266 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+@mixin theme {
+  /*
+   * brand colors
+   */
+
+  --kirby-brand-color-red-25: #f9f2f3;
+  --kirby-brand-color-red-50: #f4e5e6;
+  --kirby-brand-color-red-100: #e9ccce;
+  --kirby-brand-color-red-200: #deb2b5;
+  --kirby-brand-color-red-300: #c88083;
+  --kirby-brand-color-red-400: #b24d52;
+  --kirby-brand-color-red-500: #9c1a21;
+  --kirby-brand-color-red-600: #910008;
+  --kirby-brand-color-red-700: #820007;
+  --kirby-brand-color-red-800: #740006;
+  --kirby-brand-color-red-900: #570005;
+  --kirby-brand-color-red-950: #3a0003;
+  --kirby-brand-color-red-975: #2c0002;
+  --kirby-brand-color-bright-red-25: #fef4f5;
+  --kirby-brand-color-bright-red-50: #fde9ea;
+  --kirby-brand-color-bright-red-100: #fbd3d5;
+  --kirby-brand-color-bright-red-200: #f7a6ab;
+  --kirby-brand-color-bright-red-300: #f37a82;
+  --kirby-brand-color-bright-red-400: #ef4d58;
+  --kirby-brand-color-bright-red-500: #ed1c24;
+  --kirby-brand-color-bright-red-600: #d31e29;
+  --kirby-brand-color-bright-red-700: #a41720;
+  --kirby-brand-color-bright-red-800: #8d141c;
+  --kirby-brand-color-bright-red-900: #761117;
+  --kirby-brand-color-bright-red-950: #470a0e;
+  --kirby-brand-color-bright-red-975: #180305;
+
+  /*
+   * color
+   */
+
+  &,
+  .kirby-surface-base {
+    --kirby-color-fill-brand-loud: var(--kirby-brand-color-red-600);
+    --kirby-color-fill-brand-loud-hover: var(--kirby-brand-color-red-700);
+    --kirby-color-fill-brand-loud-active: var(--kirby-brand-color-red-800);
+    --kirby-color-fill-brand: var(--kirby-system-color-light-grey-300);
+    --kirby-color-fill-brand-hover: var(--kirby-system-color-light-grey-200);
+    --kirby-color-fill-brand-active: var(--kirby-system-color-light-grey-100);
+    --kirby-color-border-brand-loud: var(--kirby-brand-color-red-600);
+    --kirby-color-border-brand-loud-hover: var(--kirby-brand-color-red-700);
+    --kirby-color-border-brand-loud-active: var(--kirby-brand-color-red-800);
+    --kirby-color-border-brand: var(--kirby-system-color-light-grey-300);
+    --kirby-color-border-brand-hover: var(--kirby-system-color-light-grey-200);
+    --kirby-color-border-brand-active: var(--kirby-system-color-light-grey-100);
+  }
+
+  .kirby-surface-raised {
+    --kirby-color-fill-brand-loud: var(--kirby-brand-color-red-600);
+    --kirby-color-fill-brand-loud-hover: var(--kirby-brand-color-red-700);
+    --kirby-color-fill-brand-loud-active: var(--kirby-brand-color-red-800);
+    --kirby-color-fill-brand: var(--kirby-system-color-light-grey-300);
+    --kirby-color-fill-brand-hover: var(--kirby-system-color-light-grey-200);
+    --kirby-color-fill-brand-active: var(--kirby-system-color-light-grey-100);
+    --kirby-color-border-brand-loud: var(--kirby-brand-color-red-600);
+    --kirby-color-border-brand-loud-hover: var(--kirby-brand-color-red-700);
+    --kirby-color-border-brand-loud-active: var(--kirby-brand-color-red-800);
+    --kirby-color-border-brand: var(--kirby-system-color-light-grey-400);
+    --kirby-color-border-brand-hover: var(--kirby-system-color-light-grey-300);
+    --kirby-color-border-brand-active: var(--kirby-system-color-light-grey-200);
+  }
+
+  .kirby-surface-brand {
+    --kirby-color-fill-base: var(--kirby-system-color-dark-grey-800);
+    --kirby-color-fill-base-hover: var(--kirby-system-color-dark-grey-950);
+    --kirby-color-fill-base-active: var(--kirby-system-color-dark-grey-975);
+    --kirby-color-fill-base-quiet: var(--kirby-system-color-dark-grey-900);
+    --kirby-color-fill-raised: var(--kirby-system-color-dark-grey-975);
+    --kirby-color-fill-raised-hover: var(--kirby-system-color-dark-grey-950);
+    --kirby-color-fill-raised-active: var(--kirby-system-color-dark-grey-900);
+    --kirby-color-fill-brand-loud: var(--kirby-brand-color-red-600);
+    --kirby-color-fill-brand-loud-hover: var(--kirby-brand-color-red-700);
+    --kirby-color-fill-brand-loud-active: var(--kirby-brand-color-red-800);
+    --kirby-color-fill-brand: var(--kirby-system-color-light-grey-800);
+    --kirby-color-fill-brand-hover: var(--kirby-system-color-dark-grey-25);
+    --kirby-color-fill-brand-active: var(--kirby-system-color-dark-grey-100);
+    --kirby-color-fill-neutral: var(--kirby-system-color-dark-grey-975);
+    --kirby-color-content-base-quiet: var(--kirby-system-color-dark-grey-50);
+    --kirby-color-content-base-quiet-hover: var(
+      --kirby-system-color-dark-grey-100
+    );
+    --kirby-color-content-base-quiet-active: var(
+      --kirby-system-color-dark-grey-200
+    );
+    --kirby-color-content-raised-quiet: var(--kirby-system-color-dark-grey-300);
+    --kirby-color-content-raised-quiet-hover: var(
+      --kirby-system-color-dark-grey-100
+    );
+    --kirby-color-content-raised-quiet-active: var(
+      --kirby-system-color-dark-grey-100
+    );
+    --kirby-color-content-brand-loud: var(--kirby-system-color-white-00);
+    --kirby-color-content-brand-loud-hover: var(--kirby-system-color-white-00);
+    --kirby-color-content-brand-loud-active: var(--kirby-system-color-white-00);
+    --kirby-color-content-negative: var(--kirby-system-color-red-200);
+    --kirby-color-border-base: var(--kirby-system-color-dark-grey-300);
+    --kirby-color-border-base-hover: var(--kirby-system-color-dark-grey-300);
+    --kirby-color-border-base-active: var(--kirby-system-color-dark-grey-300);
+    --kirby-color-border-base-quiet: var(--kirby-system-color-dark-grey-500);
+    --kirby-color-border-base-quiet-hover: var(
+      --kirby-system-color-dark-grey-500
+    );
+    --kirby-color-border-base-quiet-active: var(
+      --kirby-system-color-dark-grey-500
+    );
+    --kirby-color-border-base-silent: var(--kirby-system-color-dark-grey-600);
+    --kirby-color-border-base-silent-hover: var(
+      --kirby-system-color-dark-grey-600
+    );
+    --kirby-color-border-base-silent-active: var(
+      --kirby-system-color-dark-grey-600
+    );
+    --kirby-color-border-raised: var(--kirby-system-color-dark-grey-300);
+    --kirby-color-border-raised-hover: var(--kirby-system-color-dark-grey-300);
+    --kirby-color-border-raised-active: var(--kirby-system-color-dark-grey-300);
+    --kirby-color-border-raised-quiet: var(--kirby-system-color-dark-grey-600);
+    --kirby-color-border-raised-quiet-hover: var(
+      --kirby-system-color-dark-grey-600
+    );
+    --kirby-color-border-raised-quiet-active: var(
+      --kirby-system-color-dark-grey-600
+    );
+    --kirby-color-border-raised-silent: var(--kirby-system-color-dark-grey-600);
+    --kirby-color-border-raised-silent-hover: var(
+      --kirby-system-color-dark-grey-600
+    );
+    --kirby-color-border-raised-silent-active: var(
+      --kirby-system-color-dark-grey-600
+    );
+    --kirby-color-border-brand-loud: var(--kirby-brand-color-red-600);
+    --kirby-color-border-brand-loud-hover: var(--kirby-brand-color-red-700);
+    --kirby-color-border-brand-loud-active: var(--kirby-brand-color-red-800);
+    --kirby-color-border-brand: var(--kirby-system-color-light-grey-200);
+    --kirby-color-border-brand-hover: var(--kirby-system-color-light-grey-500);
+    --kirby-color-border-brand-active: var(--kirby-system-color-light-grey-975);
+    --kirby-color-border-brand-quiet: var(--kirby-system-color-light-grey-300);
+    --kirby-color-border-brand-quiet-hover: var(
+      --kirby-system-color-light-grey-400
+    );
+    --kirby-color-border-brand-quiet-active: var(
+      --kirby-system-color-light-grey-500
+    );
+    --kirby-color-border-offset: var(--kirby-system-color-light-grey-900);
+  }
+
+  /*
+   * spot-illustration
+   */
+
+  &,
+  .kirby-surface-base {
+    --kirby-spot-illustration-color-fill-brand: var(
+      --kirby-brand-color-bright-red-500
+    );
+  }
+
+  .kirby-surface-raised {
+    --kirby-spot-illustration-color-fill-brand: var(
+      --kirby-brand-color-bright-red-500
+    );
+  }
+
+  .kirby-surface-brand {
+    --kirby-spot-illustration-color-fill-raised: var(
+      --kirby-system-color-dark-grey-600
+    );
+    --kirby-spot-illustration-color-fill-brand: var(
+      --kirby-brand-color-bright-red-600
+    );
+  }
+
+  /*
+   * sidebar
+   */
+
+  &,
+  .kirby-surface-base {
+    --kirby-sidebar-color-fill-engaged: var(--kirby-brand-color-red-600);
+    --kirby-sidebar-color-border-engaged: var(--kirby-brand-color-red-600);
+  }
+
+  .kirby-surface-raised {
+    --kirby-sidebar-color-fill-engaged: var(--kirby-brand-color-red-600);
+    --kirby-sidebar-color-border-engaged: var(--kirby-brand-color-red-600);
+  }
+
+  .kirby-surface-brand {
+    --kirby-sidebar-color-fill-engaged: var(--kirby-brand-color-red-600);
+    --kirby-sidebar-color-content-engaged: var(--kirby-system-color-white-00);
+    --kirby-sidebar-color-border-engaged: var(--kirby-brand-color-red-600);
+    --kirby-sidebar-color-border-base: var(--kirby-system-color-dark-grey-800);
+    --kirby-sidebar-color-border-base-hover: var(
+      --kirby-system-color-dark-grey-950
+    );
+    --kirby-sidebar-color-border-base-active: var(
+      --kirby-system-color-dark-grey-975
+    );
+  }
+
+  /*
+   * range
+   */
+
+  &,
+  .kirby-surface-base {
+    --kirby-range-color-fill-engaged: var(--kirby-system-color-dark-grey-800);
+    --kirby-range-color-fill-engaged-hover: var(
+      --kirby-system-color-dark-grey-900
+    );
+    --kirby-range-color-fill-engaged-active: var(
+      --kirby-system-color-dark-grey-950
+    );
+  }
+
+  .kirby-surface-raised {
+    --kirby-range-color-fill-engaged: var(--kirby-system-color-dark-grey-800);
+    --kirby-range-color-fill-engaged-hover: var(
+      --kirby-system-color-dark-grey-900
+    );
+    --kirby-range-color-fill-engaged-active: var(
+      --kirby-system-color-dark-grey-950
+    );
+  }
+
+  .kirby-surface-brand {
+    --kirby-range-color-fill: var(--kirby-system-color-dark-grey-300);
+    --kirby-range-color-fill-hover: var(--kirby-system-color-dark-grey-100);
+    --kirby-range-color-fill-active: var(--kirby-system-color-dark-grey-25);
+    --kirby-range-color-fill-engaged-hover: var(
+      --kirby-system-color-light-grey-200
+    );
+    --kirby-range-color-fill-engaged-active: var(
+      --kirby-system-color-light-grey-400
+    );
+  }
+
+  /*
+   * toggle
+   */
+
+  .kirby-surface-brand {
+    --kirby-toggle-color-fill: var(--kirby-system-color-light-grey-900);
+    --kirby-toggle-color-fill-hover: var(--kirby-system-color-dark-grey-25);
+    --kirby-toggle-color-fill-active: var(--kirby-system-color-dark-grey-300);
+  }
+
+  /*
+   * card
+   */
+
+  .kirby-surface-brand {
+    --kirby-card-color-fill-hover: var(--kirby-system-color-dark-grey-975);
+    --kirby-card-color-fill-active: var(--kirby-system-color-dark-grey-975);
+    --kirby-card-opacity-hover: var(--kirby-opacity-10);
+    --kirby-card-opacity-active: var(--kirby-opacity-20);
+  }
+}

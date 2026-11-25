@@ -15,6 +15,7 @@ import { filter } from 'rxjs/operators';
 import { kebabToTitleCase } from '@kirbydesign/designsystem';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 
 import {
   DateInputDirective,
@@ -52,6 +53,7 @@ interface SideNavLink {
     ButtonComponent,
     IconModule,
     RouterLinkActive,
+    DividerComponent,
   ],
 })
 export class SideNavComponent implements OnInit {
