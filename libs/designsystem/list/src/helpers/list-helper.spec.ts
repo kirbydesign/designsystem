@@ -24,6 +24,7 @@ describe('list helper', () => {
     beforeEach(() => {
       component = {
         loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
+        _changeDetectorRef: jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']),
       } as ListComponent;
       loadMoreEmitSpy = spyOn(component.loadOnDemand, 'emit').and.callThrough();
       component.loadOnDemand.subscribe(() => {});
@@ -113,8 +114,6 @@ describe('list helper', () => {
     });
 
     it('should mark the list for check, when the load more events complete callback is called', () => {
-      const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
-      component._changeDetectorRef = changeDetectorRef;
       component.isLoadOnDemandEnabled = true;
       loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
         event.complete();
@@ -122,7 +121,7 @@ describe('list helper', () => {
 
       listHelper.onLoadOnDemand(component);
 
-      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+      expect(component._changeDetectorRef.markForCheck).toHaveBeenCalled();
     });
 
     it('should check the scroll position again, when the load more events complete callback is called', () => {

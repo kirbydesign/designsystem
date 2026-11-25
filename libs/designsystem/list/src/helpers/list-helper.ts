@@ -21,7 +21,7 @@ export class ListHelper {
         complete: (disableLoadOnDemand: boolean) => {
           component.isLoadOnDemandEnabled = !disableLoadOnDemand;
           component._isLoading = false;
-          component._changeDetectorRef?.markForCheck();
+          component._changeDetectorRef.markForCheck();
           if (component.isLoadOnDemandEnabled) {
             component.scrollDirective?.checkScrollPosition();
           }

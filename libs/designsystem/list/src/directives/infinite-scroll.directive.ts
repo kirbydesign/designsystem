@@ -86,7 +86,8 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
       });
 
     setTimeout(async () => {
-      const ionContent = this.elementRef.nativeElement.closest('ion-content');
+      const ionContent: HTMLIonContentElement =
+        this.elementRef.nativeElement.closest('ion-content');
       if (ionContent) {
         this.scrollContainer = await ionContent.getScrollElement();
         if (this.isDestroyed) return;
@@ -104,6 +105,14 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Re-evaluates the scroll position without a scroll event, e.g. after new items
+   * have been loaded or the list items have changed.
+   * Emits {@link scrollEnd} if the scroll position has surpassed the offset (or the
+   * element does not fill the view), unless the directive is disabled or the element
+   * height is unchanged since the last {@link scrollEnd}.
+   * The check is delayed by {@link INFINITE_SCROLL_DEBOUNCE} ms to allow the DOM to render.
+   */
   checkScrollPosition(): void {
     setTimeout(() => {
       if (this.isDestroyed || this.disabled) return;

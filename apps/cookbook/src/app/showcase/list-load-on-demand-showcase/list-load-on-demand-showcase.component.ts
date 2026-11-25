@@ -41,7 +41,7 @@ export class ListLoadOnDemandShowcaseComponent {
   events: ApiDescriptionEvent[] = [
     {
       name: 'loadOnDemand',
-      description: `Emitted when the user has scrolled 80% of the list, or when the list does not fill the view.`,
+      description: `Emitted when the user has scrolled 80% of the list.`,
       signature: `LoadOnDemandEvent { complete: (disableLoadOnDemand?: boolean) => void; }`,
     },
   ];
