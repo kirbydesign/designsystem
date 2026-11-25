@@ -1,6 +1,6 @@
 # Server-side data
 
-The backend sorts (and later filters and pages). TanStack only holds the state, and `manualSorting: true` makes it render the rows in the order they arrive. It never calls the backend itself.
+The backend sorts and filters (and later pages). TanStack only holds the state, and `manualSorting: true` makes it render the rows in the order they arrive. It never calls the backend itself.
 
 ```ts
 import { Component, linkedSignal, signal } from '@angular/core';
@@ -94,4 +94,5 @@ Notes:
 
 - **Selection survives sorting and reloads**, because it is keyed by `getRowId`. Selected rows that are no longer loaded stay in `rowSelection`; remove IDs yourself when items are deleted.
 - **Map the sorting state to whatever the API expects.** `toSortParams` is an example; the column `id` (here the `accessorKey`) is what TanStack puts in `SortingState`.
+- **Filtering works the same way:** register `columnFilteringFeature`, add a `columnFilters` signal to `state` and `onColumnFiltersChange`, set `manualFiltering: true`, and add the filters to the request params next to the sorting.
 - **Don't register `sortedRowModel`** for server-side data. It would sort the loaded rows a second time on the client.

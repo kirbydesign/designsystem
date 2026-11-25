@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataGridDefaultExampleComponent } from './examples/default';
 import { DataGridSortingExampleComponent } from './examples/sorting';
 import { DataGridSelectionExampleComponent } from './examples/selection';
+import { DataGridFilteringExampleComponent } from './examples/filtering';
 
 @Component({
   selector: 'cookbook-data-grid-example',
@@ -11,6 +12,7 @@ import { DataGridSelectionExampleComponent } from './examples/selection';
     DataGridDefaultExampleComponent,
     DataGridSortingExampleComponent,
     DataGridSelectionExampleComponent,
+    DataGridFilteringExampleComponent,
   ],
 })
 export class DataGridExampleComponent {}

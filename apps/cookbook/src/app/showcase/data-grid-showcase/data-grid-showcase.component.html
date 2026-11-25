@@ -64,6 +64,35 @@
       #dataGridSelectionExample
     ></cookbook-data-grid-selection-example>
   </cookbook-example-viewer>
+
+  <h2>Filtering</h2>
+  <p>
+    Register
+    <code>columnFilteringFeature</code>
+    and keep the
+    <code>columnFilters</code>
+    state in a signal. With
+    <code>manualFiltering: true</code>
+    the backend filters: send the filter state with the request and the grid renders the rows it
+    gets back. Set a filter through the column, for example
+    <code>table.getColumn('status')?.setFilterValue(value)</code>
+    , and remove it with
+    <code>undefined</code>
+    . The example filters from a segmented control above the grid.
+  </p>
+  <p>
+    Selection is keyed by row ID, so rows that a filter hides stay selected. The example shows how
+    many selected rows are not shown. The "Cancelled" filter has no matching payments; an empty
+    state for the grid is not available yet.
+  </p>
+  <cookbook-example-viewer
+    [html]="dataGridFilteringExample.template"
+    [ts]="dataGridFilteringExample.dataSnippet"
+  >
+    <cookbook-data-grid-filtering-example
+      #dataGridFilteringExample
+    ></cookbook-data-grid-filtering-example>
+  </cookbook-example-viewer>
 </div>
 
 <h2>Importing</h2>

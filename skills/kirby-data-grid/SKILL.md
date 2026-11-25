@@ -1,6 +1,6 @@
 ---
 name: kirby-data-grid
-description: 'Builds data grids with kirby-data-grid from @kirbydesign/designsystem/data-grid, on top of TanStack Table v9: markup with the Kirby building blocks, server-side sorting and row selection. Use when creating or changing a table or data grid that uses kirby-data-grid, kirbyDataGridRow, kirbyDataGridSelectionColumn or @tanstack/angular-table in an app built on Kirby.'
+description: 'Builds data grids with kirby-data-grid from @kirbydesign/designsystem/data-grid, on top of TanStack Table v9: markup with the Kirby building blocks, server-side sorting and filtering, and row selection. Use when creating or changing a table or data grid that uses kirby-data-grid, kirbyDataGridRow, kirbyDataGridSelectionColumn or @tanstack/angular-table in an app built on Kirby.'
 ---
 
 # Kirby data grid
@@ -126,13 +126,22 @@ sortDescFirst: false,
 
 **Server-side sorting.** Set `manualSorting: true`, so TanStack renders rows in the order the backend returns them, and put the sorting state in the request. See [references/server-side.md](references/server-side.md).
 
+**Server-side filtering.** Register `columnFilteringFeature` (not `filteredRowModel`), keep `columnFilters` in a signal wired like the other state, set `manualFiltering: true`, and send the filter state with the request. Set filters through the column API, not by writing the signal, so the state has the shape later Kirby filter controls use:
+
+```ts
+this.table.getColumn('status')?.setFilterValue('Approved'); // filter
+this.table.getColumn('status')?.setFilterValue(undefined); // remove the filter
+```
+
+The filter control itself (for example a `kirby-segmented-control` or a `kirby-dropdown` above the grid) is the app's for now. Rows a filter hides stay selected, because selection is keyed by row ID; count them as selected IDs that are not in the loaded rows if the UI should say so ("2 selected, 1 not shown").
+
 ### 5. Verify
 
 In the browser's accessibility tree, the table should show as `grid` with its label, rows as `row`, headers as `columnheader` and cells as `gridcell`. Every `tr`, `th` and `td` should have `aria-rowindex` or `aria-colindex`.
 
 ## Not available yet
 
-Filtering, pagination, keyboard navigation inside the grid (the focus model), the `size` density styles, the layout with header, footer and side panel, and a loading state are planned but not built. Don't build workarounds that imitate them; ask the Kirby team, so the feature is built once in Kirby.
+Filter controls inside the grid (a column menu), an empty state when a filter matches nothing, pagination, keyboard navigation inside the grid (the focus model), the `size` density styles, the layout with header, footer and side panel, and a loading state are planned but not built. Don't build workarounds that imitate them; ask the Kirby team, so the feature is built once in Kirby.
 
 ## Testing
 

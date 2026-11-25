@@ -3,6 +3,7 @@ import { ExampleViewerComponent } from '../../shared/example-viewer/example-view
 import { DataGridDefaultExampleComponent } from '../../examples/data-grid-example/examples/default';
 import { DataGridSortingExampleComponent } from '../../examples/data-grid-example/examples/sorting';
 import { DataGridSelectionExampleComponent } from '../../examples/data-grid-example/examples/selection';
+import { DataGridFilteringExampleComponent } from '../../examples/data-grid-example/examples/filtering';
 import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-code-viewer.component';
 
 @Component({
@@ -15,6 +16,7 @@ import { ImportViewerComponent } from '~/app/shared/import-code-viewer/import-co
     DataGridDefaultExampleComponent,
     DataGridSortingExampleComponent,
     DataGridSelectionExampleComponent,
+    DataGridFilteringExampleComponent,
   ],
 })
 export class DataGridShowcaseComponent {}
