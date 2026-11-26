@@ -15,6 +15,10 @@ table.kirby-table {
     table-layout: fixed;
   }
 
+  &.kirby-table-striped > tbody > :where(tr:nth-child(odd)) {
+    background-color: var(--kirby-color-fill-base-quiet);
+  }
+
   tr {
     &:not(:last-child) {
       border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-quiet);
