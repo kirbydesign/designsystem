@@ -7,7 +7,7 @@ import { Person, tableExampleData } from '../example-data';
 const config = {
   selector: 'cookbook-data-table-card-example',
   template: `<kirby-card>
-  <table class="kirby-table">
+  <table class="kirby-table kirby-table-striped">
     <thead>
       <tr>
         <th>Name</th>
