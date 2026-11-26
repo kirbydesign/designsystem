@@ -37,9 +37,8 @@ $item-height: var(--kirby-spacing-xxxl);
 }
 
 ion-list-header {
-  background-color: var(--kirby-color-fill-base);
   color: var(--kirby-color-content-base);
-  border-bottom: var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent);
+  border-bottom: var(--kirby-stroke-xs) solid transparent;
   padding: 0;
   text-transform: inherit;
   letter-spacing: inherit;
@@ -47,6 +46,10 @@ ion-list-header {
   font-size: inherit;
   min-height: 0;
   overflow: inherit;
+}
+
+.has-items > ion-list-header {
+  border-color: var(--kirby-color-border-base-silent);
 }
 
 ion-item {
