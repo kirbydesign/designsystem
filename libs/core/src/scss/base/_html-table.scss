@@ -16,7 +16,7 @@ table.kirby-table {
   }
 
   &.kirby-table-striped > tbody > :where(tr:nth-child(odd)) {
-    background-color: color-mix(in srgb, var(--kirby-background-color), white);
+    background-color: var(--kirby-color-fill-base-quiet);
   }
 
   tr {
