@@ -180,7 +180,7 @@ export class ModalWrapperComponent
     public translations: TranslationService
   ) {
     this.setViewportHeight();
-    this.observeViewportResize();
+    this.initialViewportHeight = this.windowRef.nativeWindow.innerHeight;
     this.modalElementsMoverDelegate = new ModalElementsMoverDelegate(renderer, elementRef);
   }
 
@@ -531,16 +531,10 @@ export class ModalWrapperComponent
     this.setKeyboardOverlap(keyboardHeight);
   }
 
-  // Fall back to the live viewport height: initialViewportHeight (from a body ResizeObserver) is 0 in Ionic apps.
-  private getViewportHeight(): number {
-    return this.initialViewportHeight || this.windowRef.nativeWindow.innerHeight;
-  }
-
   private getKeyboardOverlap(keyboardHeight: number, element: Element) {
-    const viewportHeight = this.getViewportHeight();
-    if (keyboardHeight <= 0 || !element || !viewportHeight) return 0;
+    if (keyboardHeight <= 0 || !element) return 0;
     const elementDistanceAboveBottomOfScreen = Math.floor(
-      viewportHeight - element.getBoundingClientRect().bottom
+      this.initialViewportHeight - element.getBoundingClientRect().bottom
     );
     return Math.max(keyboardHeight - elementDistanceAboveBottomOfScreen, 0);
   }
@@ -604,6 +598,7 @@ export class ModalWrapperComponent
   @HostListener('window:resize')
   _onWindowResize() {
     this.setViewportHeight();
+    this.onViewportResize();
   }
 
   private setViewportHeight() {
@@ -611,19 +606,8 @@ export class ModalWrapperComponent
     this.setCssVar(this.elementRef.nativeElement, '--vh', `${vh}px`);
   }
 
-  private observeViewportResize() {
-    this.resizeObserverService.observe(this.windowRef.nativeWindow.document.body, (entry) =>
-      this.onViewportResize(entry)
-    );
-  }
-
-  private onViewportResize(entry: ResizeObserverEntry) {
-    if (!this.initialViewportHeight) {
-      // Initial observe callback, register initial height:
-      this.initialViewportHeight = entry.contentRect.height;
-      return;
-    }
-    this.viewportResized = entry.contentRect.height !== this.initialViewportHeight;
+  private onViewportResize() {
+    this.viewportResized = this.windowRef.nativeWindow.innerHeight !== this.initialViewportHeight;
     if (!this.viewportResized) {
       // We are back to initial view port height, check for pending close func:
       if (this.delayedCloseTimeoutId) {
@@ -678,7 +662,6 @@ export class ModalWrapperComponent
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
     if (this.resizeObserverService) {
-      this.resizeObserverService.unobserve(this.windowRef.nativeWindow.document.body);
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
       this.resizeObserverService.unobserve(this.currentFooter);
     }
