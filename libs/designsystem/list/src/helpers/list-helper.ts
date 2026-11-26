@@ -48,6 +48,10 @@ export class ListHelper {
   }
 
   public groupStandAloneItems<T>(items: T[], standAloneProperty: string): { items: T[] }[] {
+    if (!items.length) {
+      return [];
+    }
+
     const list = items.reduce(
       (accumulator, item) => {
         const lastList = accumulator[accumulator.length - 1];

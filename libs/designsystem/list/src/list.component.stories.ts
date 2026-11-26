@@ -456,9 +456,9 @@ export const ListOnSurfaces: Story = {
       getSectionName: (item: (typeof surfaceItems)[number]) => item.section,
     },
     template: `
-      <ng-template #list let-layout="layout">
+      <ng-template #list let-layout="layout" let-listItems="items">
         <kirby-list
-          [items]="items"
+          [items]="listItems ?? items"
           [shape]="layout.shape"
           [getSectionName]="layout.hasSections ? getSectionName : undefined"
           [getStandAloneByProperty]="layout.hasStandAlone ? 'isStandAlone' : undefined"
@@ -482,6 +482,10 @@ export const ListOnSurfaces: Story = {
         @for (layout of layouts; track layout.label) {
           <ng-container *ngTemplateOutlet="list; context: { layout }"></ng-container>
         }
+        <p class="row-start kirby-text-small-light">raised, empty</p>
+        @for (layout of layouts; track layout.label) {
+          <ng-container *ngTemplateOutlet="list; context: { layout, items: [] }"></ng-container>
+        }
 
         <span class="row-start"></span>
         @for (cardVariant of cardVariants; track cardVariant) {
@@ -499,7 +503,7 @@ export const ListOnSurfaces: Story = {
       `
         .grid {
           display: grid;
-          grid-template-columns: 1fr repeat(${listLayouts.length}, 260px);
+          grid-template-columns: max-content repeat(${listLayouts.length}, 260px);
           gap: var(--kirby-spacing-s);
           padding: var(--kirby-spacing-s);
           align-items: start;
