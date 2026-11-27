@@ -20,6 +20,8 @@
     "rxjs": "^7.0.0"
   },
   "dependencies": {
+    "@tiptap/core": "^3.33.1",
+    "@tiptap/starter-kit": "^3.33.1",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

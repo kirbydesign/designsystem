@@ -1,0 +1,70 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+kirby-x-rich-text-editor-document {
+  display: block;
+  position: relative;
+  line-height: var(--kirby-line-height-n);
+
+  &.with-toolbar {
+    --kirby-content-border-top-radius: 0;
+  }
+
+  .kirby-rich-text-placeholder {
+    position: absolute;
+    inset: var(--kirby-spacing-s);
+    pointer-events: none;
+    color: var(--kirby-color-content-base-quiet);
+  }
+
+  .kirby-rich-text-document {
+    box-sizing: border-box;
+    min-height: var(
+      --kirby-x-rich-text-editor-min-height,
+      calc(23rem + 2 * var(--kirby-spacing-s))
+    );
+    max-height: var(--kirby-x-rich-text-editor-max-height, none);
+    overflow-y: auto;
+    padding: var(--kirby-spacing-s);
+    outline: none;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    border-radius: var(--kirby-content-border-top-radius, 0)
+      var(--kirby-content-border-top-radius, 0) var(--kirby-content-border-bottom-radius, 0)
+      var(--kirby-content-border-bottom-radius, 0);
+
+    &:focus-visible {
+      outline: var(--kirby-stroke-xs) solid transparent;
+      box-shadow: var(--kirby-focus-ring-md-inset);
+    }
+
+    p {
+      margin: 0 0 var(--kirby-spacing-s);
+    }
+
+    li > p {
+      margin: 0;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    ol {
+      list-style: decimal;
+    }
+
+    ul,
+    ol {
+      padding-inline-start: var(--kirby-spacing-s);
+    }
+  }
+
+  @include utils.media('<=small') {
+    .kirby-rich-text-document {
+      min-height: var(
+        --kirby-x-rich-text-editor-min-height,
+        calc(65dvh + 2 * var(--kirby-spacing-s))
+      );
+    }
+  }
+}

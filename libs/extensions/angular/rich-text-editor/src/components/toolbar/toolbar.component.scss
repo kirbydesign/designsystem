@@ -1,0 +1,38 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+kirby-x-rich-text-editor-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--kirby-spacing-xxs);
+  padding: var(--kirby-spacing-xxs);
+  padding-inline-start: var(--kirby-spacing-s);
+  border-bottom: var(
+    --kirby-x-rich-text-editor-toolbar-border,
+    var(--kirby-stroke-xs) solid var(--kirby-color-border-base-silent)
+  );
+
+  &.editor-empty-toolbar {
+    display: none;
+  }
+
+  > button[kirby-button].icon-only {
+    margin: 0;
+    border-radius: var(--kirby-border-radius-s);
+  }
+
+  > button[kirby-button].no-decoration[aria-pressed='true'] {
+    --kirby-button-background-color: var(--kirby-color-fill-base-active);
+    --kirby-button-color: var(--kirby-color-content-base-active);
+    --kirby-button-border-color: currentcolor;
+  }
+
+  @include utils.media('<=small') {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    > * {
+      flex-shrink: 0;
+    }
+  }
+}
